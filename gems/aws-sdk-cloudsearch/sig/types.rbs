@@ -1,0 +1,571 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CloudSearch
+  module Types
+
+    class AccessPoliciesStatus
+      attr_accessor options: ::String
+      attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
+    class AnalysisOptions
+      attr_accessor synonyms: ::String
+      attr_accessor stopwords: ::String
+      attr_accessor stemming_dictionary: ::String
+      attr_accessor japanese_tokenization_dictionary: ::String
+      attr_accessor algorithmic_stemming: ("none" | "minimal" | "light" | "full")
+      SENSITIVE: []
+    end
+
+    class AnalysisScheme
+      attr_accessor analysis_scheme_name: ::String
+      attr_accessor analysis_scheme_language: ("ar" | "bg" | "ca" | "cs" | "da" | "de" | "el" | "en" | "es" | "eu" | "fa" | "fi" | "fr" | "ga" | "gl" | "he" | "hi" | "hu" | "hy" | "id" | "it" | "ja" | "ko" | "lv" | "mul" | "nl" | "no" | "pt" | "ro" | "ru" | "sv" | "th" | "tr" | "zh-Hans" | "zh-Hant")
+      attr_accessor analysis_options: Types::AnalysisOptions
+      SENSITIVE: []
+    end
+
+    class AnalysisSchemeStatus
+      attr_accessor options: Types::AnalysisScheme
+      attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
+    class AvailabilityOptionsStatus
+      attr_accessor options: bool
+      attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
+    class BaseException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BuildSuggestersRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class BuildSuggestersResponse
+      attr_accessor field_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateDomainRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDomainResponse
+      attr_accessor domain_status: Types::DomainStatus
+      SENSITIVE: []
+    end
+
+    class DateArrayOptions
+      attr_accessor default_value: ::String
+      attr_accessor source_fields: ::String
+      attr_accessor facet_enabled: bool
+      attr_accessor search_enabled: bool
+      attr_accessor return_enabled: bool
+      SENSITIVE: []
+    end
+
+    class DateOptions
+      attr_accessor default_value: ::String
+      attr_accessor source_field: ::String
+      attr_accessor facet_enabled: bool
+      attr_accessor search_enabled: bool
+      attr_accessor return_enabled: bool
+      attr_accessor sort_enabled: bool
+      SENSITIVE: []
+    end
+
+    class DefineAnalysisSchemeRequest
+      attr_accessor domain_name: ::String
+      attr_accessor analysis_scheme: Types::AnalysisScheme
+      SENSITIVE: []
+    end
+
+    class DefineAnalysisSchemeResponse
+      attr_accessor analysis_scheme: Types::AnalysisSchemeStatus
+      SENSITIVE: []
+    end
+
+    class DefineExpressionRequest
+      attr_accessor domain_name: ::String
+      attr_accessor expression: Types::Expression
+      SENSITIVE: []
+    end
+
+    class DefineExpressionResponse
+      attr_accessor expression: Types::ExpressionStatus
+      SENSITIVE: []
+    end
+
+    class DefineIndexFieldRequest
+      attr_accessor domain_name: ::String
+      attr_accessor index_field: Types::IndexField
+      SENSITIVE: []
+    end
+
+    class DefineIndexFieldResponse
+      attr_accessor index_field: Types::IndexFieldStatus
+      SENSITIVE: []
+    end
+
+    class DefineSuggesterRequest
+      attr_accessor domain_name: ::String
+      attr_accessor suggester: Types::Suggester
+      SENSITIVE: []
+    end
+
+    class DefineSuggesterResponse
+      attr_accessor suggester: Types::SuggesterStatus
+      SENSITIVE: []
+    end
+
+    class DeleteAnalysisSchemeRequest
+      attr_accessor domain_name: ::String
+      attr_accessor analysis_scheme_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAnalysisSchemeResponse
+      attr_accessor analysis_scheme: Types::AnalysisSchemeStatus
+      SENSITIVE: []
+    end
+
+    class DeleteDomainRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDomainResponse
+      attr_accessor domain_status: Types::DomainStatus
+      SENSITIVE: []
+    end
+
+    class DeleteExpressionRequest
+      attr_accessor domain_name: ::String
+      attr_accessor expression_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteExpressionResponse
+      attr_accessor expression: Types::ExpressionStatus
+      SENSITIVE: []
+    end
+
+    class DeleteIndexFieldRequest
+      attr_accessor domain_name: ::String
+      attr_accessor index_field_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIndexFieldResponse
+      attr_accessor index_field: Types::IndexFieldStatus
+      SENSITIVE: []
+    end
+
+    class DeleteSuggesterRequest
+      attr_accessor domain_name: ::String
+      attr_accessor suggester_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSuggesterResponse
+      attr_accessor suggester: Types::SuggesterStatus
+      SENSITIVE: []
+    end
+
+    class DescribeAnalysisSchemesRequest
+      attr_accessor domain_name: ::String
+      attr_accessor analysis_scheme_names: ::Array[::String]
+      attr_accessor deployed: bool
+      SENSITIVE: []
+    end
+
+    class DescribeAnalysisSchemesResponse
+      attr_accessor analysis_schemes: ::Array[Types::AnalysisSchemeStatus]
+      SENSITIVE: []
+    end
+
+    class DescribeAvailabilityOptionsRequest
+      attr_accessor domain_name: ::String
+      attr_accessor deployed: bool
+      SENSITIVE: []
+    end
+
+    class DescribeAvailabilityOptionsResponse
+      attr_accessor availability_options: Types::AvailabilityOptionsStatus
+      SENSITIVE: []
+    end
+
+    class DescribeDomainEndpointOptionsRequest
+      attr_accessor domain_name: ::String
+      attr_accessor deployed: bool
+      SENSITIVE: []
+    end
+
+    class DescribeDomainEndpointOptionsResponse
+      attr_accessor domain_endpoint_options: Types::DomainEndpointOptionsStatus
+      SENSITIVE: []
+    end
+
+    class DescribeDomainsRequest
+      attr_accessor domain_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeDomainsResponse
+      attr_accessor domain_status_list: ::Array[Types::DomainStatus]
+      SENSITIVE: []
+    end
+
+    class DescribeExpressionsRequest
+      attr_accessor domain_name: ::String
+      attr_accessor expression_names: ::Array[::String]
+      attr_accessor deployed: bool
+      SENSITIVE: []
+    end
+
+    class DescribeExpressionsResponse
+      attr_accessor expressions: ::Array[Types::ExpressionStatus]
+      SENSITIVE: []
+    end
+
+    class DescribeIndexFieldsRequest
+      attr_accessor domain_name: ::String
+      attr_accessor field_names: ::Array[::String]
+      attr_accessor deployed: bool
+      SENSITIVE: []
+    end
+
+    class DescribeIndexFieldsResponse
+      attr_accessor index_fields: ::Array[Types::IndexFieldStatus]
+      SENSITIVE: []
+    end
+
+    class DescribeScalingParametersRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeScalingParametersResponse
+      attr_accessor scaling_parameters: Types::ScalingParametersStatus
+      SENSITIVE: []
+    end
+
+    class DescribeServiceAccessPoliciesRequest
+      attr_accessor domain_name: ::String
+      attr_accessor deployed: bool
+      SENSITIVE: []
+    end
+
+    class DescribeServiceAccessPoliciesResponse
+      attr_accessor access_policies: Types::AccessPoliciesStatus
+      SENSITIVE: []
+    end
+
+    class DescribeSuggestersRequest
+      attr_accessor domain_name: ::String
+      attr_accessor suggester_names: ::Array[::String]
+      attr_accessor deployed: bool
+      SENSITIVE: []
+    end
+
+    class DescribeSuggestersResponse
+      attr_accessor suggesters: ::Array[Types::SuggesterStatus]
+      SENSITIVE: []
+    end
+
+    class DisabledOperationException < Aws::EmptyStructure
+    end
+
+    class DocumentSuggesterOptions
+      attr_accessor source_field: ::String
+      attr_accessor fuzzy_matching: ("none" | "low" | "high")
+      attr_accessor sort_expression: ::String
+      SENSITIVE: []
+    end
+
+    class DomainEndpointOptions
+      attr_accessor enforce_https: bool
+      attr_accessor tls_security_policy: ("Policy-Min-TLS-1-0-2019-07" | "Policy-Min-TLS-1-2-2019-07")
+      SENSITIVE: []
+    end
+
+    class DomainEndpointOptionsStatus
+      attr_accessor options: Types::DomainEndpointOptions
+      attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
+    class DomainStatus
+      attr_accessor domain_id: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor arn: ::String
+      attr_accessor created: bool
+      attr_accessor deleted: bool
+      attr_accessor doc_service: Types::ServiceEndpoint
+      attr_accessor search_service: Types::ServiceEndpoint
+      attr_accessor requires_index_documents: bool
+      attr_accessor processing: bool
+      attr_accessor search_instance_type: ::String
+      attr_accessor search_partition_count: ::Integer
+      attr_accessor search_instance_count: ::Integer
+      attr_accessor limits: Types::Limits
+      SENSITIVE: []
+    end
+
+    class DoubleArrayOptions
+      attr_accessor default_value: ::Float
+      attr_accessor source_fields: ::String
+      attr_accessor facet_enabled: bool
+      attr_accessor search_enabled: bool
+      attr_accessor return_enabled: bool
+      SENSITIVE: []
+    end
+
+    class DoubleOptions
+      attr_accessor default_value: ::Float
+      attr_accessor source_field: ::String
+      attr_accessor facet_enabled: bool
+      attr_accessor search_enabled: bool
+      attr_accessor return_enabled: bool
+      attr_accessor sort_enabled: bool
+      SENSITIVE: []
+    end
+
+    class Expression
+      attr_accessor expression_name: ::String
+      attr_accessor expression_value: ::String
+      SENSITIVE: []
+    end
+
+    class ExpressionStatus
+      attr_accessor options: Types::Expression
+      attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
+    class IndexDocumentsRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class IndexDocumentsResponse
+      attr_accessor field_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class IndexField
+      attr_accessor index_field_name: ::String
+      attr_accessor index_field_type: ("int" | "double" | "literal" | "text" | "date" | "latlon" | "int-array" | "double-array" | "literal-array" | "text-array" | "date-array")
+      attr_accessor int_options: Types::IntOptions
+      attr_accessor double_options: Types::DoubleOptions
+      attr_accessor literal_options: Types::LiteralOptions
+      attr_accessor text_options: Types::TextOptions
+      attr_accessor date_options: Types::DateOptions
+      attr_accessor lat_lon_options: Types::LatLonOptions
+      attr_accessor int_array_options: Types::IntArrayOptions
+      attr_accessor double_array_options: Types::DoubleArrayOptions
+      attr_accessor literal_array_options: Types::LiteralArrayOptions
+      attr_accessor text_array_options: Types::TextArrayOptions
+      attr_accessor date_array_options: Types::DateArrayOptions
+      SENSITIVE: []
+    end
+
+    class IndexFieldStatus
+      attr_accessor options: Types::IndexField
+      attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
+    class IntArrayOptions
+      attr_accessor default_value: ::Integer
+      attr_accessor source_fields: ::String
+      attr_accessor facet_enabled: bool
+      attr_accessor search_enabled: bool
+      attr_accessor return_enabled: bool
+      SENSITIVE: []
+    end
+
+    class IntOptions
+      attr_accessor default_value: ::Integer
+      attr_accessor source_field: ::String
+      attr_accessor facet_enabled: bool
+      attr_accessor search_enabled: bool
+      attr_accessor return_enabled: bool
+      attr_accessor sort_enabled: bool
+      SENSITIVE: []
+    end
+
+    class InternalException < Aws::EmptyStructure
+    end
+
+    class InvalidTypeException < Aws::EmptyStructure
+    end
+
+    class LatLonOptions
+      attr_accessor default_value: ::String
+      attr_accessor source_field: ::String
+      attr_accessor facet_enabled: bool
+      attr_accessor search_enabled: bool
+      attr_accessor return_enabled: bool
+      attr_accessor sort_enabled: bool
+      SENSITIVE: []
+    end
+
+    class LimitExceededException < Aws::EmptyStructure
+    end
+
+    class Limits
+      attr_accessor maximum_replication_count: ::Integer
+      attr_accessor maximum_partition_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDomainNamesResponse
+      attr_accessor domain_names: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class LiteralArrayOptions
+      attr_accessor default_value: ::String
+      attr_accessor source_fields: ::String
+      attr_accessor facet_enabled: bool
+      attr_accessor search_enabled: bool
+      attr_accessor return_enabled: bool
+      SENSITIVE: []
+    end
+
+    class LiteralOptions
+      attr_accessor default_value: ::String
+      attr_accessor source_field: ::String
+      attr_accessor facet_enabled: bool
+      attr_accessor search_enabled: bool
+      attr_accessor return_enabled: bool
+      attr_accessor sort_enabled: bool
+      SENSITIVE: []
+    end
+
+    class OptionStatus
+      attr_accessor creation_date: ::Time
+      attr_accessor update_date: ::Time
+      attr_accessor update_version: ::Integer
+      attr_accessor state: ("RequiresIndexDocuments" | "Processing" | "Active" | "FailedToValidate")
+      attr_accessor pending_deletion: bool
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyExistsException < Aws::EmptyStructure
+    end
+
+    class ResourceNotFoundException < Aws::EmptyStructure
+    end
+
+    class ScalingParameters
+      attr_accessor desired_instance_type: ("search.m1.small" | "search.m1.large" | "search.m2.xlarge" | "search.m2.2xlarge" | "search.m3.medium" | "search.m3.large" | "search.m3.xlarge" | "search.m3.2xlarge" | "search.small" | "search.medium" | "search.large" | "search.xlarge" | "search.2xlarge" | "search.previousgeneration.small" | "search.previousgeneration.large" | "search.previousgeneration.xlarge" | "search.previousgeneration.2xlarge")
+      attr_accessor desired_replication_count: ::Integer
+      attr_accessor desired_partition_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ScalingParametersStatus
+      attr_accessor options: Types::ScalingParameters
+      attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
+    class ServiceEndpoint
+      attr_accessor endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class Suggester
+      attr_accessor suggester_name: ::String
+      attr_accessor document_suggester_options: Types::DocumentSuggesterOptions
+      SENSITIVE: []
+    end
+
+    class SuggesterStatus
+      attr_accessor options: Types::Suggester
+      attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
+    class TextArrayOptions
+      attr_accessor default_value: ::String
+      attr_accessor source_fields: ::String
+      attr_accessor return_enabled: bool
+      attr_accessor highlight_enabled: bool
+      attr_accessor analysis_scheme: ::String
+      SENSITIVE: []
+    end
+
+    class TextOptions
+      attr_accessor default_value: ::String
+      attr_accessor source_field: ::String
+      attr_accessor return_enabled: bool
+      attr_accessor sort_enabled: bool
+      attr_accessor highlight_enabled: bool
+      attr_accessor analysis_scheme: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAvailabilityOptionsRequest
+      attr_accessor domain_name: ::String
+      attr_accessor multi_az: bool
+      SENSITIVE: []
+    end
+
+    class UpdateAvailabilityOptionsResponse
+      attr_accessor availability_options: Types::AvailabilityOptionsStatus
+      SENSITIVE: []
+    end
+
+    class UpdateDomainEndpointOptionsRequest
+      attr_accessor domain_name: ::String
+      attr_accessor domain_endpoint_options: Types::DomainEndpointOptions
+      SENSITIVE: []
+    end
+
+    class UpdateDomainEndpointOptionsResponse
+      attr_accessor domain_endpoint_options: Types::DomainEndpointOptionsStatus
+      SENSITIVE: []
+    end
+
+    class UpdateScalingParametersRequest
+      attr_accessor domain_name: ::String
+      attr_accessor scaling_parameters: Types::ScalingParameters
+      SENSITIVE: []
+    end
+
+    class UpdateScalingParametersResponse
+      attr_accessor scaling_parameters: Types::ScalingParametersStatus
+      SENSITIVE: []
+    end
+
+    class UpdateServiceAccessPoliciesRequest
+      attr_accessor domain_name: ::String
+      attr_accessor access_policies: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateServiceAccessPoliciesResponse
+      attr_accessor access_policies: Types::AccessPoliciesStatus
+      SENSITIVE: []
+    end
+
+    class ValidationException < Aws::EmptyStructure
+    end
+  end
+end

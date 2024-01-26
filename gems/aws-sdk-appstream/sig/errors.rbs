@@ -1,0 +1,58 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AppStream
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class EntitlementAlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class EntitlementNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class IncompatibleImageException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidAccountStatusException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidParameterCombinationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidRoleException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class OperationNotPermittedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class RequestLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceAlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceInUseException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotAvailableException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

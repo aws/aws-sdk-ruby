@@ -1,0 +1,431 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CodeStarconnections
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarconnections/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConnectionOutput]
+        def connection_arn: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarconnections/Client.html#create_connection-instance_method
+      def create_connection: (
+                               ?provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged"),
+                               connection_name: ::String,
+                               ?tags: Array[
+                                 {
+                                   key: ::String,
+                                   value: ::String
+                                 },
+                               ],
+                               ?host_arn: ::String
+                             ) -> _CreateConnectionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectionResponseSuccess
+
+      interface _CreateHostResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateHostOutput]
+        def host_arn: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarconnections/Client.html#create_host-instance_method
+      def create_host: (
+                         name: ::String,
+                         provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged"),
+                         provider_endpoint: ::String,
+                         ?vpc_configuration: {
+                           vpc_id: ::String,
+                           subnet_ids: Array[::String],
+                           security_group_ids: Array[::String],
+                           tls_certificate: ::String?
+                         },
+                         ?tags: Array[
+                           {
+                             key: ::String,
+                             value: ::String
+                           },
+                         ]
+                       ) -> _CreateHostResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHostResponseSuccess
+
+      interface _CreateRepositoryLinkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRepositoryLinkOutput]
+        def repository_link_info: () -> Types::RepositoryLinkInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarconnections/Client.html#create_repository_link-instance_method
+      def create_repository_link: (
+                                    connection_arn: ::String,
+                                    owner_id: ::String,
+                                    repository_name: ::String,
+                                    ?encryption_key_arn: ::String,
+                                    ?tags: Array[
+                                      {
+                                        key: ::String,
+                                        value: ::String
+                                      },
+                                    ]
+                                  ) -> _CreateRepositoryLinkResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRepositoryLinkResponseSuccess
+
+      interface _CreateSyncConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSyncConfigurationOutput]
+        def sync_configuration: () -> Types::SyncConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarconnections/Client.html#create_sync_configuration-instance_method
+      def create_sync_configuration: (
+                                       branch: ::String,
+                                       config_file: ::String,
+                                       repository_link_id: ::String,
+                                       resource_name: ::String,
+                                       role_arn: ::String,
+                                       sync_type: ("CFN_STACK_SYNC")
+                                     ) -> _CreateSyncConfigurationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSyncConfigurationResponseSuccess
+
+      interface _DeleteConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConnectionOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarconnections/Client.html#delete_connection-instance_method
+      def delete_connection: (
+                               connection_arn: ::String
+                             ) -> _DeleteConnectionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConnectionResponseSuccess
+
+      interface _DeleteHostResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteHostOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarconnections/Client.html#delete_host-instance_method
+      def delete_host: (
+                         host_arn: ::String
+                       ) -> _DeleteHostResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteHostResponseSuccess
+
+      interface _DeleteRepositoryLinkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRepositoryLinkOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarconnections/Client.html#delete_repository_link-instance_method
+      def delete_repository_link: (
+                                    repository_link_id: ::String
+                                  ) -> _DeleteRepositoryLinkResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRepositoryLinkResponseSuccess
+
+      interface _DeleteSyncConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSyncConfigurationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarconnections/Client.html#delete_sync_configuration-instance_method
+      def delete_sync_configuration: (
+                                       sync_type: ("CFN_STACK_SYNC"),
+                                       resource_name: ::String
+                                     ) -> _DeleteSyncConfigurationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSyncConfigurationResponseSuccess
+
+      interface _GetConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectionOutput]
+        def connection: () -> Types::Connection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarconnections/Client.html#get_connection-instance_method
+      def get_connection: (
+                            connection_arn: ::String
+                          ) -> _GetConnectionResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConnectionResponseSuccess
+
+      interface _GetHostResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetHostOutput]
+        def name: () -> ::String
+        def status: () -> ::String
+        def provider_type: () -> ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged")
+        def provider_endpoint: () -> ::String
+        def vpc_configuration: () -> Types::VpcConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarconnections/Client.html#get_host-instance_method
+      def get_host: (
+                      host_arn: ::String
+                    ) -> _GetHostResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetHostResponseSuccess
+
+      interface _GetRepositoryLinkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRepositoryLinkOutput]
+        def repository_link_info: () -> Types::RepositoryLinkInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarconnections/Client.html#get_repository_link-instance_method
+      def get_repository_link: (
+                                 repository_link_id: ::String
+                               ) -> _GetRepositoryLinkResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRepositoryLinkResponseSuccess
+
+      interface _GetRepositorySyncStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRepositorySyncStatusOutput]
+        def latest_sync: () -> Types::RepositorySyncAttempt
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarconnections/Client.html#get_repository_sync_status-instance_method
+      def get_repository_sync_status: (
+                                        branch: ::String,
+                                        repository_link_id: ::String,
+                                        sync_type: ("CFN_STACK_SYNC")
+                                      ) -> _GetRepositorySyncStatusResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRepositorySyncStatusResponseSuccess
+
+      interface _GetResourceSyncStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourceSyncStatusOutput]
+        def desired_state: () -> Types::Revision
+        def latest_successful_sync: () -> Types::ResourceSyncAttempt
+        def latest_sync: () -> Types::ResourceSyncAttempt
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarconnections/Client.html#get_resource_sync_status-instance_method
+      def get_resource_sync_status: (
+                                      resource_name: ::String,
+                                      sync_type: ("CFN_STACK_SYNC")
+                                    ) -> _GetResourceSyncStatusResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourceSyncStatusResponseSuccess
+
+      interface _GetSyncBlockerSummaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSyncBlockerSummaryOutput]
+        def sync_blocker_summary: () -> Types::SyncBlockerSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarconnections/Client.html#get_sync_blocker_summary-instance_method
+      def get_sync_blocker_summary: (
+                                      sync_type: ("CFN_STACK_SYNC"),
+                                      resource_name: ::String
+                                    ) -> _GetSyncBlockerSummaryResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSyncBlockerSummaryResponseSuccess
+
+      interface _GetSyncConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSyncConfigurationOutput]
+        def sync_configuration: () -> Types::SyncConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarconnections/Client.html#get_sync_configuration-instance_method
+      def get_sync_configuration: (
+                                    sync_type: ("CFN_STACK_SYNC"),
+                                    resource_name: ::String
+                                  ) -> _GetSyncConfigurationResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSyncConfigurationResponseSuccess
+
+      interface _ListConnectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConnectionsOutput]
+        def connections: () -> ::Array[Types::Connection]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarconnections/Client.html#list_connections-instance_method
+      def list_connections: (
+                              ?provider_type_filter: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged"),
+                              ?host_arn_filter: ::String,
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _ListConnectionsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConnectionsResponseSuccess
+
+      interface _ListHostsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListHostsOutput]
+        def hosts: () -> ::Array[Types::Host]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarconnections/Client.html#list_hosts-instance_method
+      def list_hosts: (
+                        ?max_results: ::Integer,
+                        ?next_token: ::String
+                      ) -> _ListHostsResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHostsResponseSuccess
+
+      interface _ListRepositoryLinksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRepositoryLinksOutput]
+        def repository_links: () -> ::Array[Types::RepositoryLinkInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarconnections/Client.html#list_repository_links-instance_method
+      def list_repository_links: (
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListRepositoryLinksResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRepositoryLinksResponseSuccess
+
+      interface _ListRepositorySyncDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRepositorySyncDefinitionsOutput]
+        def repository_sync_definitions: () -> ::Array[Types::RepositorySyncDefinition]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarconnections/Client.html#list_repository_sync_definitions-instance_method
+      def list_repository_sync_definitions: (
+                                              repository_link_id: ::String,
+                                              sync_type: ("CFN_STACK_SYNC")
+                                            ) -> _ListRepositorySyncDefinitionsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRepositorySyncDefinitionsResponseSuccess
+
+      interface _ListSyncConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSyncConfigurationsOutput]
+        def sync_configurations: () -> ::Array[Types::SyncConfiguration]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarconnections/Client.html#list_sync_configurations-instance_method
+      def list_sync_configurations: (
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String,
+                                      repository_link_id: ::String,
+                                      sync_type: ("CFN_STACK_SYNC")
+                                    ) -> _ListSyncConfigurationsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSyncConfigurationsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarconnections/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarconnections/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarconnections/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateHostResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateHostOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarconnections/Client.html#update_host-instance_method
+      def update_host: (
+                         host_arn: ::String,
+                         ?provider_endpoint: ::String,
+                         ?vpc_configuration: {
+                           vpc_id: ::String,
+                           subnet_ids: Array[::String],
+                           security_group_ids: Array[::String],
+                           tls_certificate: ::String?
+                         }
+                       ) -> _UpdateHostResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateHostResponseSuccess
+
+      interface _UpdateRepositoryLinkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRepositoryLinkOutput]
+        def repository_link_info: () -> Types::RepositoryLinkInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarconnections/Client.html#update_repository_link-instance_method
+      def update_repository_link: (
+                                    ?connection_arn: ::String,
+                                    ?encryption_key_arn: ::String,
+                                    repository_link_id: ::String
+                                  ) -> _UpdateRepositoryLinkResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRepositoryLinkResponseSuccess
+
+      interface _UpdateSyncBlockerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSyncBlockerOutput]
+        def resource_name: () -> ::String
+        def parent_resource_name: () -> ::String
+        def sync_blocker: () -> Types::SyncBlocker
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarconnections/Client.html#update_sync_blocker-instance_method
+      def update_sync_blocker: (
+                                 id: ::String,
+                                 sync_type: ("CFN_STACK_SYNC"),
+                                 resource_name: ::String,
+                                 resolved_reason: ::String
+                               ) -> _UpdateSyncBlockerResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSyncBlockerResponseSuccess
+
+      interface _UpdateSyncConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSyncConfigurationOutput]
+        def sync_configuration: () -> Types::SyncConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarconnections/Client.html#update_sync_configuration-instance_method
+      def update_sync_configuration: (
+                                       ?branch: ::String,
+                                       ?config_file: ::String,
+                                       ?repository_link_id: ::String,
+                                       resource_name: ::String,
+                                       ?role_arn: ::String,
+                                       sync_type: ("CFN_STACK_SYNC")
+                                     ) -> _UpdateSyncConfigurationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSyncConfigurationResponseSuccess
+    end
+  end
+end
+

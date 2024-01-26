@@ -1,0 +1,523 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::NeptuneGraph
+  module Types
+
+    class CancelImportTaskInput
+      attr_accessor task_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class CancelImportTaskOutput
+      attr_accessor graph_id: ::String
+      attr_accessor task_id: ::String
+      attr_accessor source: ::String
+      attr_accessor format: ("CSV" | "OPEN_CYPHER")
+      attr_accessor role_arn: ::String
+      attr_accessor status: ("INITIALIZING" | "EXPORTING" | "ANALYZING_DATA" | "IMPORTING" | "REPROVISIONING" | "ROLLING_BACK" | "SUCCEEDED" | "FAILED" | "CANCELLING" | "CANCELLED")
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor reason: ("CONCURRENT_MODIFICATION")
+      SENSITIVE: []
+    end
+
+    class CreateGraphInput
+      attr_accessor graph_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor public_connectivity: bool
+      attr_accessor kms_key_identifier: ::String
+      attr_accessor vector_search_configuration: Types::VectorSearchConfiguration
+      attr_accessor replica_count: ::Integer
+      attr_accessor deletion_protection: bool
+      attr_accessor provisioned_memory: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateGraphOutput
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor provisioned_memory: ::Integer
+      attr_accessor endpoint: ::String
+      attr_accessor public_connectivity: bool
+      attr_accessor vector_search_configuration: Types::VectorSearchConfiguration
+      attr_accessor replica_count: ::Integer
+      attr_accessor kms_key_identifier: ::String
+      attr_accessor source_snapshot_id: ::String
+      attr_accessor deletion_protection: bool
+      attr_accessor build_number: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGraphSnapshotInput
+      attr_accessor graph_identifier: ::String
+      attr_accessor snapshot_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateGraphSnapshotOutput
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor source_graph_id: ::String
+      attr_accessor snapshot_create_time: ::Time
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "FAILED")
+      attr_accessor kms_key_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGraphUsingImportTaskInput
+      attr_accessor graph_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor public_connectivity: bool
+      attr_accessor kms_key_identifier: ::String
+      attr_accessor vector_search_configuration: Types::VectorSearchConfiguration
+      attr_accessor replica_count: ::Integer
+      attr_accessor deletion_protection: bool
+      attr_accessor import_options: Types::ImportOptions
+      attr_accessor max_provisioned_memory: ::Integer
+      attr_accessor min_provisioned_memory: ::Integer
+      attr_accessor fail_on_error: bool
+      attr_accessor source: ::String
+      attr_accessor format: ("CSV" | "OPEN_CYPHER")
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGraphUsingImportTaskOutput
+      attr_accessor graph_id: ::String
+      attr_accessor task_id: ::String
+      attr_accessor source: ::String
+      attr_accessor format: ("CSV" | "OPEN_CYPHER")
+      attr_accessor role_arn: ::String
+      attr_accessor status: ("INITIALIZING" | "EXPORTING" | "ANALYZING_DATA" | "IMPORTING" | "REPROVISIONING" | "ROLLING_BACK" | "SUCCEEDED" | "FAILED" | "CANCELLING" | "CANCELLED")
+      attr_accessor import_options: Types::ImportOptions
+      SENSITIVE: []
+    end
+
+    class CreatePrivateGraphEndpointInput
+      attr_accessor graph_identifier: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreatePrivateGraphEndpointOutput
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "FAILED")
+      attr_accessor vpc_endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGraphInput
+      attr_accessor graph_identifier: ::String
+      attr_accessor skip_snapshot: bool
+      SENSITIVE: []
+    end
+
+    class DeleteGraphOutput
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor provisioned_memory: ::Integer
+      attr_accessor endpoint: ::String
+      attr_accessor public_connectivity: bool
+      attr_accessor vector_search_configuration: Types::VectorSearchConfiguration
+      attr_accessor replica_count: ::Integer
+      attr_accessor kms_key_identifier: ::String
+      attr_accessor source_snapshot_id: ::String
+      attr_accessor deletion_protection: bool
+      attr_accessor build_number: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGraphSnapshotInput
+      attr_accessor snapshot_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGraphSnapshotOutput
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor source_graph_id: ::String
+      attr_accessor snapshot_create_time: ::Time
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "FAILED")
+      attr_accessor kms_key_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePrivateGraphEndpointInput
+      attr_accessor graph_identifier: ::String
+      attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePrivateGraphEndpointOutput
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "FAILED")
+      attr_accessor vpc_endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetGraphInput
+      attr_accessor graph_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetGraphOutput
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor provisioned_memory: ::Integer
+      attr_accessor endpoint: ::String
+      attr_accessor public_connectivity: bool
+      attr_accessor vector_search_configuration: Types::VectorSearchConfiguration
+      attr_accessor replica_count: ::Integer
+      attr_accessor kms_key_identifier: ::String
+      attr_accessor source_snapshot_id: ::String
+      attr_accessor deletion_protection: bool
+      attr_accessor build_number: ::String
+      SENSITIVE: []
+    end
+
+    class GetGraphSnapshotInput
+      attr_accessor snapshot_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetGraphSnapshotOutput
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor source_graph_id: ::String
+      attr_accessor snapshot_create_time: ::Time
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "FAILED")
+      attr_accessor kms_key_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetImportTaskInput
+      attr_accessor task_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetImportTaskOutput
+      attr_accessor graph_id: ::String
+      attr_accessor task_id: ::String
+      attr_accessor source: ::String
+      attr_accessor format: ("CSV" | "OPEN_CYPHER")
+      attr_accessor role_arn: ::String
+      attr_accessor status: ("INITIALIZING" | "EXPORTING" | "ANALYZING_DATA" | "IMPORTING" | "REPROVISIONING" | "ROLLING_BACK" | "SUCCEEDED" | "FAILED" | "CANCELLING" | "CANCELLED")
+      attr_accessor import_options: Types::ImportOptions
+      attr_accessor import_task_details: Types::ImportTaskDetails
+      attr_accessor attempt_number: ::Integer
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class GetPrivateGraphEndpointInput
+      attr_accessor graph_identifier: ::String
+      attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPrivateGraphEndpointOutput
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "FAILED")
+      attr_accessor vpc_endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class GraphSnapshotSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor source_graph_id: ::String
+      attr_accessor snapshot_create_time: ::Time
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "FAILED")
+      attr_accessor kms_key_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GraphSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED")
+      attr_accessor provisioned_memory: ::Integer
+      attr_accessor public_connectivity: bool
+      attr_accessor endpoint: ::String
+      attr_accessor replica_count: ::Integer
+      attr_accessor kms_key_identifier: ::String
+      attr_accessor deletion_protection: bool
+      SENSITIVE: []
+    end
+
+    class ImportOptions
+      attr_accessor neptune: Types::NeptuneImportOptions
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Neptune < ImportOptions
+      end
+      class Unknown < ImportOptions
+      end
+    end
+
+    class ImportTaskDetails
+      attr_accessor status: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor time_elapsed_seconds: ::Integer
+      attr_accessor progress_percentage: ::Integer
+      attr_accessor error_count: ::Integer
+      attr_accessor error_details: ::String
+      attr_accessor statement_count: ::Integer
+      attr_accessor dictionary_entry_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ImportTaskSummary
+      attr_accessor graph_id: ::String
+      attr_accessor task_id: ::String
+      attr_accessor source: ::String
+      attr_accessor format: ("CSV" | "OPEN_CYPHER")
+      attr_accessor role_arn: ::String
+      attr_accessor status: ("INITIALIZING" | "EXPORTING" | "ANALYZING_DATA" | "IMPORTING" | "REPROVISIONING" | "ROLLING_BACK" | "SUCCEEDED" | "FAILED" | "CANCELLING" | "CANCELLED")
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListGraphSnapshotsInput
+      attr_accessor graph_identifier: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListGraphSnapshotsOutput
+      attr_accessor graph_snapshots: ::Array[Types::GraphSnapshotSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGraphsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListGraphsOutput
+      attr_accessor graphs: ::Array[Types::GraphSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImportTasksInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListImportTasksOutput
+      attr_accessor tasks: ::Array[Types::ImportTaskSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPrivateGraphEndpointsInput
+      attr_accessor graph_identifier: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPrivateGraphEndpointsOutput
+      attr_accessor private_graph_endpoints: ::Array[Types::PrivateGraphEndpointSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class NeptuneImportOptions
+      attr_accessor s3_export_path: ::String
+      attr_accessor s3_export_kms_key_id: ::String
+      attr_accessor preserve_default_vertex_labels: bool
+      attr_accessor preserve_edge_ids: bool
+      SENSITIVE: []
+    end
+
+    class PrivateGraphEndpointSummary
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "FAILED")
+      attr_accessor vpc_endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResetGraphInput
+      attr_accessor graph_identifier: ::String
+      attr_accessor skip_snapshot: bool
+      SENSITIVE: []
+    end
+
+    class ResetGraphOutput
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor provisioned_memory: ::Integer
+      attr_accessor endpoint: ::String
+      attr_accessor public_connectivity: bool
+      attr_accessor vector_search_configuration: Types::VectorSearchConfiguration
+      attr_accessor replica_count: ::Integer
+      attr_accessor kms_key_identifier: ::String
+      attr_accessor source_snapshot_id: ::String
+      attr_accessor deletion_protection: bool
+      attr_accessor build_number: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreGraphFromSnapshotInput
+      attr_accessor snapshot_identifier: ::String
+      attr_accessor graph_name: ::String
+      attr_accessor provisioned_memory: ::Integer
+      attr_accessor deletion_protection: bool
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor replica_count: ::Integer
+      attr_accessor public_connectivity: bool
+      SENSITIVE: []
+    end
+
+    class RestoreGraphFromSnapshotOutput
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor provisioned_memory: ::Integer
+      attr_accessor endpoint: ::String
+      attr_accessor public_connectivity: bool
+      attr_accessor vector_search_configuration: Types::VectorSearchConfiguration
+      attr_accessor replica_count: ::Integer
+      attr_accessor kms_key_identifier: ::String
+      attr_accessor source_snapshot_id: ::String
+      attr_accessor deletion_protection: bool
+      attr_accessor build_number: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UpdateGraphInput
+      attr_accessor graph_identifier: ::String
+      attr_accessor public_connectivity: bool
+      attr_accessor provisioned_memory: ::Integer
+      attr_accessor deletion_protection: bool
+      SENSITIVE: []
+    end
+
+    class UpdateGraphOutput
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor provisioned_memory: ::Integer
+      attr_accessor endpoint: ::String
+      attr_accessor public_connectivity: bool
+      attr_accessor vector_search_configuration: Types::VectorSearchConfiguration
+      attr_accessor replica_count: ::Integer
+      attr_accessor kms_key_identifier: ::String
+      attr_accessor source_snapshot_id: ::String
+      attr_accessor deletion_protection: bool
+      attr_accessor build_number: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("CONSTRAINT_VIOLATION" | "ILLEGAL_ARGUMENT" | "MALFORMED_QUERY" | "QUERY_CANCELLED" | "QUERY_TOO_LARGE" | "UNSUPPORTED_OPERATION" | "BAD_REQUEST")
+      SENSITIVE: []
+    end
+
+    class VectorSearchConfiguration
+      attr_accessor dimension: ::Integer
+      SENSITIVE: []
+    end
+  end
+end

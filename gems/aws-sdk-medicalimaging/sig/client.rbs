@@ -1,0 +1,356 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MedicalImaging
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MedicalImaging/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CopyImageSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CopyImageSetResponse]
+        def datastore_id: () -> ::String
+        def source_image_set_properties: () -> Types::CopySourceImageSetProperties
+        def destination_image_set_properties: () -> Types::CopyDestinationImageSetProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MedicalImaging/Client.html#copy_image_set-instance_method
+      def copy_image_set: (
+                            datastore_id: ::String,
+                            source_image_set_id: ::String,
+                            copy_image_set_information: {
+                              source_image_set: {
+                                latest_version_id: ::String
+                              },
+                              destination_image_set: {
+                                image_set_id: ::String,
+                                latest_version_id: ::String
+                              }?
+                            }
+                          ) -> _CopyImageSetResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopyImageSetResponseSuccess
+
+      interface _CreateDatastoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDatastoreResponse]
+        def datastore_id: () -> ::String
+        def datastore_status: () -> ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MedicalImaging/Client.html#create_datastore-instance_method
+      def create_datastore: (
+                              ?datastore_name: ::String,
+                              client_token: ::String,
+                              ?tags: Hash[::String, ::String],
+                              ?kms_key_arn: ::String
+                            ) -> _CreateDatastoreResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatastoreResponseSuccess
+
+      interface _DeleteDatastoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDatastoreResponse]
+        def datastore_id: () -> ::String
+        def datastore_status: () -> ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MedicalImaging/Client.html#delete_datastore-instance_method
+      def delete_datastore: (
+                              datastore_id: ::String
+                            ) -> _DeleteDatastoreResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDatastoreResponseSuccess
+
+      interface _DeleteImageSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteImageSetResponse]
+        def datastore_id: () -> ::String
+        def image_set_id: () -> ::String
+        def image_set_state: () -> ("ACTIVE" | "LOCKED" | "DELETED")
+        def image_set_workflow_status: () -> ("CREATED" | "COPIED" | "COPYING" | "COPYING_WITH_READ_ONLY_ACCESS" | "COPY_FAILED" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MedicalImaging/Client.html#delete_image_set-instance_method
+      def delete_image_set: (
+                              datastore_id: ::String,
+                              image_set_id: ::String
+                            ) -> _DeleteImageSetResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteImageSetResponseSuccess
+
+      interface _GetDICOMImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDICOMImportJobResponse]
+        def job_properties: () -> Types::DICOMImportJobProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MedicalImaging/Client.html#get_dicom_import_job-instance_method
+      def get_dicom_import_job: (
+                                  datastore_id: ::String,
+                                  job_id: ::String
+                                ) -> _GetDICOMImportJobResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDICOMImportJobResponseSuccess
+
+      interface _GetDatastoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDatastoreResponse]
+        def datastore_properties: () -> Types::DatastoreProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MedicalImaging/Client.html#get_datastore-instance_method
+      def get_datastore: (
+                           datastore_id: ::String
+                         ) -> _GetDatastoreResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDatastoreResponseSuccess
+
+      interface _GetImageFrameResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetImageFrameResponse]
+        def image_frame_blob: () -> ::IO
+        def content_type: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MedicalImaging/Client.html#get_image_frame-instance_method
+      def get_image_frame: (
+                             datastore_id: ::String,
+                             image_set_id: ::String,
+                             image_frame_information: {
+                               image_frame_id: ::String
+                             }
+                           ) ?{ (*untyped) -> void } -> _GetImageFrameResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _GetImageFrameResponseSuccess
+
+      interface _GetImageSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetImageSetResponse]
+        def datastore_id: () -> ::String
+        def image_set_id: () -> ::String
+        def version_id: () -> ::String
+        def image_set_state: () -> ("ACTIVE" | "LOCKED" | "DELETED")
+        def image_set_workflow_status: () -> ("CREATED" | "COPIED" | "COPYING" | "COPYING_WITH_READ_ONLY_ACCESS" | "COPY_FAILED" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED")
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def deleted_at: () -> ::Time
+        def message: () -> ::String
+        def image_set_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MedicalImaging/Client.html#get_image_set-instance_method
+      def get_image_set: (
+                           datastore_id: ::String,
+                           image_set_id: ::String,
+                           ?version_id: ::String
+                         ) -> _GetImageSetResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetImageSetResponseSuccess
+
+      interface _GetImageSetMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetImageSetMetadataResponse]
+        def image_set_metadata_blob: () -> ::IO
+        def content_type: () -> ::String
+        def content_encoding: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MedicalImaging/Client.html#get_image_set_metadata-instance_method
+      def get_image_set_metadata: (
+                                    datastore_id: ::String,
+                                    image_set_id: ::String,
+                                    ?version_id: ::String
+                                  ) ?{ (*untyped) -> void } -> _GetImageSetMetadataResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _GetImageSetMetadataResponseSuccess
+
+      interface _ListDICOMImportJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDICOMImportJobsResponse]
+        def job_summaries: () -> ::Array[Types::DICOMImportJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MedicalImaging/Client.html#list_dicom_import_jobs-instance_method
+      def list_dicom_import_jobs: (
+                                    datastore_id: ::String,
+                                    ?job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED"),
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListDICOMImportJobsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDICOMImportJobsResponseSuccess
+
+      interface _ListDatastoresResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatastoresResponse]
+        def datastore_summaries: () -> ::Array[Types::DatastoreSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MedicalImaging/Client.html#list_datastores-instance_method
+      def list_datastores: (
+                             ?datastore_status: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "DELETED"),
+                             ?next_token: ::String,
+                             ?max_results: ::Integer
+                           ) -> _ListDatastoresResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatastoresResponseSuccess
+
+      interface _ListImageSetVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListImageSetVersionsResponse]
+        def image_set_properties_list: () -> ::Array[Types::ImageSetProperties]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MedicalImaging/Client.html#list_image_set_versions-instance_method
+      def list_image_set_versions: (
+                                     datastore_id: ::String,
+                                     image_set_id: ::String,
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _ListImageSetVersionsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListImageSetVersionsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MedicalImaging/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _SearchImageSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchImageSetsResponse]
+        def image_sets_metadata_summaries: () -> ::Array[Types::ImageSetsMetadataSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MedicalImaging/Client.html#search_image_sets-instance_method
+      def search_image_sets: (
+                               datastore_id: ::String,
+                               ?search_criteria: {
+                                 filters: Array[
+                                   {
+                                     values: Array[
+                                       {
+                                         dicom_patient_id: ::String?,
+                                         dicom_accession_number: ::String?,
+                                         dicom_study_id: ::String?,
+                                         dicom_study_instance_uid: ::String?,
+                                         created_at: ::Time?,
+                                         dicom_study_date_and_time: {
+                                           dicom_study_date: ::String,
+                                           dicom_study_time: ::String?
+                                         }?
+                                       },
+                                     ],
+                                     operator: ("EQUAL" | "BETWEEN")
+                                   },
+                                 ]?
+                               },
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _SearchImageSetsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchImageSetsResponseSuccess
+
+      interface _StartDICOMImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDICOMImportJobResponse]
+        def datastore_id: () -> ::String
+        def job_id: () -> ::String
+        def job_status: () -> ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+        def submitted_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MedicalImaging/Client.html#start_dicom_import_job-instance_method
+      def start_dicom_import_job: (
+                                    ?job_name: ::String,
+                                    data_access_role_arn: ::String,
+                                    client_token: ::String,
+                                    datastore_id: ::String,
+                                    input_s3_uri: ::String,
+                                    output_s3_uri: ::String
+                                  ) -> _StartDICOMImportJobResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDICOMImportJobResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MedicalImaging/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MedicalImaging/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateImageSetMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateImageSetMetadataResponse]
+        def datastore_id: () -> ::String
+        def image_set_id: () -> ::String
+        def latest_version_id: () -> ::String
+        def image_set_state: () -> ("ACTIVE" | "LOCKED" | "DELETED")
+        def image_set_workflow_status: () -> ("CREATED" | "COPIED" | "COPYING" | "COPYING_WITH_READ_ONLY_ACCESS" | "COPY_FAILED" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED")
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MedicalImaging/Client.html#update_image_set_metadata-instance_method
+      def update_image_set_metadata: (
+                                       datastore_id: ::String,
+                                       image_set_id: ::String,
+                                       latest_version_id: ::String,
+                                       update_image_set_metadata_updates: {
+                                         dicom_updates: {
+                                           removable_attributes: ::String?,
+                                           updatable_attributes: ::String?
+                                         }?
+                                       }
+                                     ) -> _UpdateImageSetMetadataResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateImageSetMetadataResponseSuccess
+    end
+  end
+end
+

@@ -1,0 +1,1410 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::AutoScaling
+  module Types
+
+    class AcceleratorCountRequest
+      attr_accessor min: ::Integer
+      attr_accessor max: ::Integer
+      SENSITIVE: []
+    end
+
+    class AcceleratorTotalMemoryMiBRequest
+      attr_accessor min: ::Integer
+      attr_accessor max: ::Integer
+      SENSITIVE: []
+    end
+
+    class ActiveInstanceRefreshNotFoundFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ActivitiesType
+      attr_accessor activities: ::Array[Types::Activity]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class Activity
+      attr_accessor activity_id: ::String
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor description: ::String
+      attr_accessor cause: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor status_code: ("PendingSpotBidPlacement" | "WaitingForSpotInstanceRequestId" | "WaitingForSpotInstanceId" | "WaitingForInstanceId" | "PreInService" | "InProgress" | "WaitingForELBConnectionDraining" | "MidLifecycleAction" | "WaitingForInstanceWarmup" | "Successful" | "Failed" | "Cancelled" | "WaitingForConnectionDraining")
+      attr_accessor status_message: ::String
+      attr_accessor progress: ::Integer
+      attr_accessor details: ::String
+      attr_accessor auto_scaling_group_state: ::String
+      attr_accessor auto_scaling_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ActivityType
+      attr_accessor activity: Types::Activity
+      SENSITIVE: []
+    end
+
+    class AdjustmentType
+      attr_accessor adjustment_type: ::String
+      SENSITIVE: []
+    end
+
+    class Alarm
+      attr_accessor alarm_name: ::String
+      attr_accessor alarm_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AlarmSpecification
+      attr_accessor alarms: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AlreadyExistsFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AttachInstancesQuery
+      attr_accessor instance_ids: ::Array[::String]
+      attr_accessor auto_scaling_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class AttachLoadBalancerTargetGroupsResultType < Aws::EmptyStructure
+    end
+
+    class AttachLoadBalancerTargetGroupsType
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor target_group_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AttachLoadBalancersResultType < Aws::EmptyStructure
+    end
+
+    class AttachLoadBalancersType
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor load_balancer_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AttachTrafficSourcesResultType < Aws::EmptyStructure
+    end
+
+    class AttachTrafficSourcesType
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor traffic_sources: ::Array[Types::TrafficSourceIdentifier]
+      SENSITIVE: []
+    end
+
+    class AutoScalingGroup
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor auto_scaling_group_arn: ::String
+      attr_accessor launch_configuration_name: ::String
+      attr_accessor launch_template: Types::LaunchTemplateSpecification
+      attr_accessor mixed_instances_policy: Types::MixedInstancesPolicy
+      attr_accessor min_size: ::Integer
+      attr_accessor max_size: ::Integer
+      attr_accessor desired_capacity: ::Integer
+      attr_accessor predicted_capacity: ::Integer
+      attr_accessor default_cooldown: ::Integer
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor load_balancer_names: ::Array[::String]
+      attr_accessor target_group_arns: ::Array[::String]
+      attr_accessor health_check_type: ::String
+      attr_accessor health_check_grace_period: ::Integer
+      attr_accessor instances: ::Array[Types::Instance]
+      attr_accessor created_time: ::Time
+      attr_accessor suspended_processes: ::Array[Types::SuspendedProcess]
+      attr_accessor placement_group: ::String
+      attr_accessor vpc_zone_identifier: ::String
+      attr_accessor enabled_metrics: ::Array[Types::EnabledMetric]
+      attr_accessor status: ::String
+      attr_accessor tags: ::Array[Types::TagDescription]
+      attr_accessor termination_policies: ::Array[::String]
+      attr_accessor new_instances_protected_from_scale_in: bool
+      attr_accessor service_linked_role_arn: ::String
+      attr_accessor max_instance_lifetime: ::Integer
+      attr_accessor capacity_rebalance: bool
+      attr_accessor warm_pool_configuration: Types::WarmPoolConfiguration
+      attr_accessor warm_pool_size: ::Integer
+      attr_accessor context: ::String
+      attr_accessor desired_capacity_type: ::String
+      attr_accessor default_instance_warmup: ::Integer
+      attr_accessor traffic_sources: ::Array[Types::TrafficSourceIdentifier]
+      attr_accessor instance_maintenance_policy: Types::InstanceMaintenancePolicy
+      SENSITIVE: []
+    end
+
+    class AutoScalingGroupNamesType
+      attr_accessor auto_scaling_group_names: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class AutoScalingGroupsType
+      attr_accessor auto_scaling_groups: ::Array[Types::AutoScalingGroup]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class AutoScalingInstanceDetails
+      attr_accessor instance_id: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor lifecycle_state: ::String
+      attr_accessor health_status: ::String
+      attr_accessor launch_configuration_name: ::String
+      attr_accessor launch_template: Types::LaunchTemplateSpecification
+      attr_accessor protected_from_scale_in: bool
+      attr_accessor weighted_capacity: ::String
+      SENSITIVE: []
+    end
+
+    class AutoScalingInstancesType
+      attr_accessor auto_scaling_instances: ::Array[Types::AutoScalingInstanceDetails]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class BaselineEbsBandwidthMbpsRequest
+      attr_accessor min: ::Integer
+      attr_accessor max: ::Integer
+      SENSITIVE: []
+    end
+
+    class BatchDeleteScheduledActionAnswer
+      attr_accessor failed_scheduled_actions: ::Array[Types::FailedScheduledUpdateGroupActionRequest]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteScheduledActionType
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor scheduled_action_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchPutScheduledUpdateGroupActionAnswer
+      attr_accessor failed_scheduled_update_group_actions: ::Array[Types::FailedScheduledUpdateGroupActionRequest]
+      SENSITIVE: []
+    end
+
+    class BatchPutScheduledUpdateGroupActionType
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor scheduled_update_group_actions: ::Array[Types::ScheduledUpdateGroupActionRequest]
+      SENSITIVE: []
+    end
+
+    class BlockDeviceMapping
+      attr_accessor virtual_name: ::String
+      attr_accessor device_name: ::String
+      attr_accessor ebs: Types::Ebs
+      attr_accessor no_device: bool
+      SENSITIVE: []
+    end
+
+    class CancelInstanceRefreshAnswer
+      attr_accessor instance_refresh_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelInstanceRefreshType
+      attr_accessor auto_scaling_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class CapacityForecast
+      attr_accessor timestamps: ::Array[::Time]
+      attr_accessor values: ::Array[::Float]
+      SENSITIVE: []
+    end
+
+    class CompleteLifecycleActionAnswer < Aws::EmptyStructure
+    end
+
+    class CompleteLifecycleActionType
+      attr_accessor lifecycle_hook_name: ::String
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor lifecycle_action_token: ::String
+      attr_accessor lifecycle_action_result: ::String
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAutoScalingGroupType
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor launch_configuration_name: ::String
+      attr_accessor launch_template: Types::LaunchTemplateSpecification
+      attr_accessor mixed_instances_policy: Types::MixedInstancesPolicy
+      attr_accessor instance_id: ::String
+      attr_accessor min_size: ::Integer
+      attr_accessor max_size: ::Integer
+      attr_accessor desired_capacity: ::Integer
+      attr_accessor default_cooldown: ::Integer
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor load_balancer_names: ::Array[::String]
+      attr_accessor target_group_arns: ::Array[::String]
+      attr_accessor health_check_type: ::String
+      attr_accessor health_check_grace_period: ::Integer
+      attr_accessor placement_group: ::String
+      attr_accessor vpc_zone_identifier: ::String
+      attr_accessor termination_policies: ::Array[::String]
+      attr_accessor new_instances_protected_from_scale_in: bool
+      attr_accessor capacity_rebalance: bool
+      attr_accessor lifecycle_hook_specification_list: ::Array[Types::LifecycleHookSpecification]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor service_linked_role_arn: ::String
+      attr_accessor max_instance_lifetime: ::Integer
+      attr_accessor context: ::String
+      attr_accessor desired_capacity_type: ::String
+      attr_accessor default_instance_warmup: ::Integer
+      attr_accessor traffic_sources: ::Array[Types::TrafficSourceIdentifier]
+      attr_accessor instance_maintenance_policy: Types::InstanceMaintenancePolicy
+      SENSITIVE: []
+    end
+
+    class CreateLaunchConfigurationType
+      attr_accessor launch_configuration_name: ::String
+      attr_accessor image_id: ::String
+      attr_accessor key_name: ::String
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor classic_link_vpc_id: ::String
+      attr_accessor classic_link_vpc_security_groups: ::Array[::String]
+      attr_accessor user_data: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor kernel_id: ::String
+      attr_accessor ramdisk_id: ::String
+      attr_accessor block_device_mappings: ::Array[Types::BlockDeviceMapping]
+      attr_accessor instance_monitoring: Types::InstanceMonitoring
+      attr_accessor spot_price: ::String
+      attr_accessor iam_instance_profile: ::String
+      attr_accessor ebs_optimized: bool
+      attr_accessor associate_public_ip_address: bool
+      attr_accessor placement_tenancy: ::String
+      attr_accessor metadata_options: Types::InstanceMetadataOptions
+      SENSITIVE: []
+    end
+
+    class CreateOrUpdateTagsType
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CustomizedMetricSpecification
+      attr_accessor metric_name: ::String
+      attr_accessor namespace: ::String
+      attr_accessor dimensions: ::Array[Types::MetricDimension]
+      attr_accessor statistic: ("Average" | "Minimum" | "Maximum" | "SampleCount" | "Sum")
+      attr_accessor unit: ::String
+      attr_accessor metrics: ::Array[Types::TargetTrackingMetricDataQuery]
+      SENSITIVE: []
+    end
+
+    class DeleteAutoScalingGroupType
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor force_delete: bool
+      SENSITIVE: []
+    end
+
+    class DeleteLifecycleHookAnswer < Aws::EmptyStructure
+    end
+
+    class DeleteLifecycleHookType
+      attr_accessor lifecycle_hook_name: ::String
+      attr_accessor auto_scaling_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteNotificationConfigurationType
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor topic_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePolicyType
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor policy_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteScheduledActionType
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor scheduled_action_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTagsType
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class DeleteWarmPoolAnswer < Aws::EmptyStructure
+    end
+
+    class DeleteWarmPoolType
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor force_delete: bool
+      SENSITIVE: []
+    end
+
+    class DescribeAccountLimitsAnswer
+      attr_accessor max_number_of_auto_scaling_groups: ::Integer
+      attr_accessor max_number_of_launch_configurations: ::Integer
+      attr_accessor number_of_auto_scaling_groups: ::Integer
+      attr_accessor number_of_launch_configurations: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeAdjustmentTypesAnswer
+      attr_accessor adjustment_types: ::Array[Types::AdjustmentType]
+      SENSITIVE: []
+    end
+
+    class DescribeAutoScalingInstancesType
+      attr_accessor instance_ids: ::Array[::String]
+      attr_accessor max_records: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAutoScalingNotificationTypesAnswer
+      attr_accessor auto_scaling_notification_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeInstanceRefreshesAnswer
+      attr_accessor instance_refreshes: ::Array[Types::InstanceRefresh]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInstanceRefreshesType
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor instance_refresh_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeLifecycleHookTypesAnswer
+      attr_accessor lifecycle_hook_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeLifecycleHooksAnswer
+      attr_accessor lifecycle_hooks: ::Array[Types::LifecycleHook]
+      SENSITIVE: []
+    end
+
+    class DescribeLifecycleHooksType
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor lifecycle_hook_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeLoadBalancerTargetGroupsRequest
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeLoadBalancerTargetGroupsResponse
+      attr_accessor load_balancer_target_groups: ::Array[Types::LoadBalancerTargetGroupState]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLoadBalancersRequest
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeLoadBalancersResponse
+      attr_accessor load_balancers: ::Array[Types::LoadBalancerState]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMetricCollectionTypesAnswer
+      attr_accessor metrics: ::Array[Types::MetricCollectionType]
+      attr_accessor granularities: ::Array[Types::MetricGranularityType]
+      SENSITIVE: []
+    end
+
+    class DescribeNotificationConfigurationsAnswer
+      attr_accessor notification_configurations: ::Array[Types::NotificationConfiguration]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeNotificationConfigurationsType
+      attr_accessor auto_scaling_group_names: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribePoliciesType
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor policy_names: ::Array[::String]
+      attr_accessor policy_types: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeScalingActivitiesType
+      attr_accessor activity_ids: ::Array[::String]
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor include_deleted_groups: bool
+      attr_accessor max_records: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeScheduledActionsType
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor scheduled_action_names: ::Array[::String]
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor next_token: ::String
+      attr_accessor max_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeTagsType
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor next_token: ::String
+      attr_accessor max_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeTerminationPolicyTypesAnswer
+      attr_accessor termination_policy_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeTrafficSourcesRequest
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor traffic_source_type: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeTrafficSourcesResponse
+      attr_accessor traffic_sources: ::Array[Types::TrafficSourceState]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWarmPoolAnswer
+      attr_accessor warm_pool_configuration: Types::WarmPoolConfiguration
+      attr_accessor instances: ::Array[Types::Instance]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWarmPoolType
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DesiredConfiguration
+      attr_accessor launch_template: Types::LaunchTemplateSpecification
+      attr_accessor mixed_instances_policy: Types::MixedInstancesPolicy
+      SENSITIVE: []
+    end
+
+    class DetachInstancesAnswer
+      attr_accessor activities: ::Array[Types::Activity]
+      SENSITIVE: []
+    end
+
+    class DetachInstancesQuery
+      attr_accessor instance_ids: ::Array[::String]
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor should_decrement_desired_capacity: bool
+      SENSITIVE: []
+    end
+
+    class DetachLoadBalancerTargetGroupsResultType < Aws::EmptyStructure
+    end
+
+    class DetachLoadBalancerTargetGroupsType
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor target_group_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DetachLoadBalancersResultType < Aws::EmptyStructure
+    end
+
+    class DetachLoadBalancersType
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor load_balancer_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DetachTrafficSourcesResultType < Aws::EmptyStructure
+    end
+
+    class DetachTrafficSourcesType
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor traffic_sources: ::Array[Types::TrafficSourceIdentifier]
+      SENSITIVE: []
+    end
+
+    class DisableMetricsCollectionQuery
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor metrics: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Ebs
+      attr_accessor snapshot_id: ::String
+      attr_accessor volume_size: ::Integer
+      attr_accessor volume_type: ::String
+      attr_accessor delete_on_termination: bool
+      attr_accessor iops: ::Integer
+      attr_accessor encrypted: bool
+      attr_accessor throughput: ::Integer
+      SENSITIVE: []
+    end
+
+    class EnableMetricsCollectionQuery
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor metrics: ::Array[::String]
+      attr_accessor granularity: ::String
+      SENSITIVE: []
+    end
+
+    class EnabledMetric
+      attr_accessor metric: ::String
+      attr_accessor granularity: ::String
+      SENSITIVE: []
+    end
+
+    class EnterStandbyAnswer
+      attr_accessor activities: ::Array[Types::Activity]
+      SENSITIVE: []
+    end
+
+    class EnterStandbyQuery
+      attr_accessor instance_ids: ::Array[::String]
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor should_decrement_desired_capacity: bool
+      SENSITIVE: []
+    end
+
+    class ExecutePolicyType
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor honor_cooldown: bool
+      attr_accessor metric_value: ::Float
+      attr_accessor breach_threshold: ::Float
+      SENSITIVE: []
+    end
+
+    class ExitStandbyAnswer
+      attr_accessor activities: ::Array[Types::Activity]
+      SENSITIVE: []
+    end
+
+    class ExitStandbyQuery
+      attr_accessor instance_ids: ::Array[::String]
+      attr_accessor auto_scaling_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class FailedScheduledUpdateGroupActionRequest
+      attr_accessor scheduled_action_name: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetPredictiveScalingForecastAnswer
+      attr_accessor load_forecast: ::Array[Types::LoadForecast]
+      attr_accessor capacity_forecast: Types::CapacityForecast
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetPredictiveScalingForecastType
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class Instance
+      attr_accessor instance_id: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor lifecycle_state: ("Pending" | "Pending:Wait" | "Pending:Proceed" | "Quarantined" | "InService" | "Terminating" | "Terminating:Wait" | "Terminating:Proceed" | "Terminated" | "Detaching" | "Detached" | "EnteringStandby" | "Standby" | "Warmed:Pending" | "Warmed:Pending:Wait" | "Warmed:Pending:Proceed" | "Warmed:Terminating" | "Warmed:Terminating:Wait" | "Warmed:Terminating:Proceed" | "Warmed:Terminated" | "Warmed:Stopped" | "Warmed:Running" | "Warmed:Hibernated")
+      attr_accessor health_status: ::String
+      attr_accessor launch_configuration_name: ::String
+      attr_accessor launch_template: Types::LaunchTemplateSpecification
+      attr_accessor protected_from_scale_in: bool
+      attr_accessor weighted_capacity: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceMaintenancePolicy
+      attr_accessor min_healthy_percentage: ::Integer
+      attr_accessor max_healthy_percentage: ::Integer
+      SENSITIVE: []
+    end
+
+    class InstanceMetadataOptions
+      attr_accessor http_tokens: ("optional" | "required")
+      attr_accessor http_put_response_hop_limit: ::Integer
+      attr_accessor http_endpoint: ("disabled" | "enabled")
+      SENSITIVE: []
+    end
+
+    class InstanceMonitoring
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class InstanceRefresh
+      attr_accessor instance_refresh_id: ::String
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor status: ("Pending" | "InProgress" | "Successful" | "Failed" | "Cancelling" | "Cancelled" | "RollbackInProgress" | "RollbackFailed" | "RollbackSuccessful")
+      attr_accessor status_reason: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor percentage_complete: ::Integer
+      attr_accessor instances_to_update: ::Integer
+      attr_accessor progress_details: Types::InstanceRefreshProgressDetails
+      attr_accessor preferences: Types::RefreshPreferences
+      attr_accessor desired_configuration: Types::DesiredConfiguration
+      attr_accessor rollback_details: Types::RollbackDetails
+      SENSITIVE: []
+    end
+
+    class InstanceRefreshInProgressFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceRefreshLivePoolProgress
+      attr_accessor percentage_complete: ::Integer
+      attr_accessor instances_to_update: ::Integer
+      SENSITIVE: []
+    end
+
+    class InstanceRefreshProgressDetails
+      attr_accessor live_pool_progress: Types::InstanceRefreshLivePoolProgress
+      attr_accessor warm_pool_progress: Types::InstanceRefreshWarmPoolProgress
+      SENSITIVE: []
+    end
+
+    class InstanceRefreshWarmPoolProgress
+      attr_accessor percentage_complete: ::Integer
+      attr_accessor instances_to_update: ::Integer
+      SENSITIVE: []
+    end
+
+    class InstanceRequirements
+      attr_accessor v_cpu_count: Types::VCpuCountRequest
+      attr_accessor memory_mi_b: Types::MemoryMiBRequest
+      attr_accessor cpu_manufacturers: ::Array[("intel" | "amd" | "amazon-web-services")]
+      attr_accessor memory_gi_b_per_v_cpu: Types::MemoryGiBPerVCpuRequest
+      attr_accessor excluded_instance_types: ::Array[::String]
+      attr_accessor instance_generations: ::Array[("current" | "previous")]
+      attr_accessor spot_max_price_percentage_over_lowest_price: ::Integer
+      attr_accessor on_demand_max_price_percentage_over_lowest_price: ::Integer
+      attr_accessor bare_metal: ("included" | "excluded" | "required")
+      attr_accessor burstable_performance: ("included" | "excluded" | "required")
+      attr_accessor require_hibernate_support: bool
+      attr_accessor network_interface_count: Types::NetworkInterfaceCountRequest
+      attr_accessor local_storage: ("included" | "excluded" | "required")
+      attr_accessor local_storage_types: ::Array[("hdd" | "ssd")]
+      attr_accessor total_local_storage_gb: Types::TotalLocalStorageGBRequest
+      attr_accessor baseline_ebs_bandwidth_mbps: Types::BaselineEbsBandwidthMbpsRequest
+      attr_accessor accelerator_types: ::Array[("gpu" | "fpga" | "inference")]
+      attr_accessor accelerator_count: Types::AcceleratorCountRequest
+      attr_accessor accelerator_manufacturers: ::Array[("nvidia" | "amd" | "amazon-web-services" | "xilinx")]
+      attr_accessor accelerator_names: ::Array[("a100" | "v100" | "k80" | "t4" | "m60" | "radeon-pro-v520" | "vu9p")]
+      attr_accessor accelerator_total_memory_mi_b: Types::AcceleratorTotalMemoryMiBRequest
+      attr_accessor network_bandwidth_gbps: Types::NetworkBandwidthGbpsRequest
+      attr_accessor allowed_instance_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class InstanceReusePolicy
+      attr_accessor reuse_on_scale_in: bool
+      SENSITIVE: []
+    end
+
+    class InstancesDistribution
+      attr_accessor on_demand_allocation_strategy: ::String
+      attr_accessor on_demand_base_capacity: ::Integer
+      attr_accessor on_demand_percentage_above_base_capacity: ::Integer
+      attr_accessor spot_allocation_strategy: ::String
+      attr_accessor spot_instance_pools: ::Integer
+      attr_accessor spot_max_price: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidNextToken
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IrreversibleInstanceRefreshFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LaunchConfiguration
+      attr_accessor launch_configuration_name: ::String
+      attr_accessor launch_configuration_arn: ::String
+      attr_accessor image_id: ::String
+      attr_accessor key_name: ::String
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor classic_link_vpc_id: ::String
+      attr_accessor classic_link_vpc_security_groups: ::Array[::String]
+      attr_accessor user_data: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor kernel_id: ::String
+      attr_accessor ramdisk_id: ::String
+      attr_accessor block_device_mappings: ::Array[Types::BlockDeviceMapping]
+      attr_accessor instance_monitoring: Types::InstanceMonitoring
+      attr_accessor spot_price: ::String
+      attr_accessor iam_instance_profile: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor ebs_optimized: bool
+      attr_accessor associate_public_ip_address: bool
+      attr_accessor placement_tenancy: ::String
+      attr_accessor metadata_options: Types::InstanceMetadataOptions
+      SENSITIVE: []
+    end
+
+    class LaunchConfigurationNameType
+      attr_accessor launch_configuration_name: ::String
+      SENSITIVE: []
+    end
+
+    class LaunchConfigurationNamesType
+      attr_accessor launch_configuration_names: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class LaunchConfigurationsType
+      attr_accessor launch_configurations: ::Array[Types::LaunchConfiguration]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LaunchTemplate
+      attr_accessor launch_template_specification: Types::LaunchTemplateSpecification
+      attr_accessor overrides: ::Array[Types::LaunchTemplateOverrides]
+      SENSITIVE: []
+    end
+
+    class LaunchTemplateOverrides
+      attr_accessor instance_type: ::String
+      attr_accessor weighted_capacity: ::String
+      attr_accessor launch_template_specification: Types::LaunchTemplateSpecification
+      attr_accessor instance_requirements: Types::InstanceRequirements
+      SENSITIVE: []
+    end
+
+    class LaunchTemplateSpecification
+      attr_accessor launch_template_id: ::String
+      attr_accessor launch_template_name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class LifecycleHook
+      attr_accessor lifecycle_hook_name: ::String
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor lifecycle_transition: ::String
+      attr_accessor notification_target_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor notification_metadata: ::String
+      attr_accessor heartbeat_timeout: ::Integer
+      attr_accessor global_timeout: ::Integer
+      attr_accessor default_result: ::String
+      SENSITIVE: []
+    end
+
+    class LifecycleHookSpecification
+      attr_accessor lifecycle_hook_name: ::String
+      attr_accessor lifecycle_transition: ::String
+      attr_accessor notification_metadata: ::String
+      attr_accessor heartbeat_timeout: ::Integer
+      attr_accessor default_result: ::String
+      attr_accessor notification_target_arn: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LoadBalancerState
+      attr_accessor load_balancer_name: ::String
+      attr_accessor state: ::String
+      SENSITIVE: []
+    end
+
+    class LoadBalancerTargetGroupState
+      attr_accessor load_balancer_target_group_arn: ::String
+      attr_accessor state: ::String
+      SENSITIVE: []
+    end
+
+    class LoadForecast
+      attr_accessor timestamps: ::Array[::Time]
+      attr_accessor values: ::Array[::Float]
+      attr_accessor metric_specification: Types::PredictiveScalingMetricSpecification
+      SENSITIVE: []
+    end
+
+    class MemoryGiBPerVCpuRequest
+      attr_accessor min: ::Float
+      attr_accessor max: ::Float
+      SENSITIVE: []
+    end
+
+    class MemoryMiBRequest
+      attr_accessor min: ::Integer
+      attr_accessor max: ::Integer
+      SENSITIVE: []
+    end
+
+    class Metric
+      attr_accessor namespace: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor dimensions: ::Array[Types::MetricDimension]
+      SENSITIVE: []
+    end
+
+    class MetricCollectionType
+      attr_accessor metric: ::String
+      SENSITIVE: []
+    end
+
+    class MetricDataQuery
+      attr_accessor id: ::String
+      attr_accessor expression: ::String
+      attr_accessor metric_stat: Types::MetricStat
+      attr_accessor label: ::String
+      attr_accessor return_data: bool
+      SENSITIVE: []
+    end
+
+    class MetricDimension
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class MetricGranularityType
+      attr_accessor granularity: ::String
+      SENSITIVE: []
+    end
+
+    class MetricStat
+      attr_accessor metric: Types::Metric
+      attr_accessor stat: ::String
+      attr_accessor unit: ::String
+      SENSITIVE: []
+    end
+
+    class MixedInstancesPolicy
+      attr_accessor launch_template: Types::LaunchTemplate
+      attr_accessor instances_distribution: Types::InstancesDistribution
+      SENSITIVE: []
+    end
+
+    class NetworkBandwidthGbpsRequest
+      attr_accessor min: ::Float
+      attr_accessor max: ::Float
+      SENSITIVE: []
+    end
+
+    class NetworkInterfaceCountRequest
+      attr_accessor min: ::Integer
+      attr_accessor max: ::Integer
+      SENSITIVE: []
+    end
+
+    class NotificationConfiguration
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor topic_arn: ::String
+      attr_accessor notification_type: ::String
+      SENSITIVE: []
+    end
+
+    class PoliciesType
+      attr_accessor scaling_policies: ::Array[Types::ScalingPolicy]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyARNType
+      attr_accessor policy_arn: ::String
+      attr_accessor alarms: ::Array[Types::Alarm]
+      SENSITIVE: []
+    end
+
+    class PredefinedMetricSpecification
+      attr_accessor predefined_metric_type: ("ASGAverageCPUUtilization" | "ASGAverageNetworkIn" | "ASGAverageNetworkOut" | "ALBRequestCountPerTarget")
+      attr_accessor resource_label: ::String
+      SENSITIVE: []
+    end
+
+    class PredictiveScalingConfiguration
+      attr_accessor metric_specifications: ::Array[Types::PredictiveScalingMetricSpecification]
+      attr_accessor mode: ("ForecastAndScale" | "ForecastOnly")
+      attr_accessor scheduling_buffer_time: ::Integer
+      attr_accessor max_capacity_breach_behavior: ("HonorMaxCapacity" | "IncreaseMaxCapacity")
+      attr_accessor max_capacity_buffer: ::Integer
+      SENSITIVE: []
+    end
+
+    class PredictiveScalingCustomizedCapacityMetric
+      attr_accessor metric_data_queries: ::Array[Types::MetricDataQuery]
+      SENSITIVE: []
+    end
+
+    class PredictiveScalingCustomizedLoadMetric
+      attr_accessor metric_data_queries: ::Array[Types::MetricDataQuery]
+      SENSITIVE: []
+    end
+
+    class PredictiveScalingCustomizedScalingMetric
+      attr_accessor metric_data_queries: ::Array[Types::MetricDataQuery]
+      SENSITIVE: []
+    end
+
+    class PredictiveScalingMetricSpecification
+      attr_accessor target_value: ::Float
+      attr_accessor predefined_metric_pair_specification: Types::PredictiveScalingPredefinedMetricPair
+      attr_accessor predefined_scaling_metric_specification: Types::PredictiveScalingPredefinedScalingMetric
+      attr_accessor predefined_load_metric_specification: Types::PredictiveScalingPredefinedLoadMetric
+      attr_accessor customized_scaling_metric_specification: Types::PredictiveScalingCustomizedScalingMetric
+      attr_accessor customized_load_metric_specification: Types::PredictiveScalingCustomizedLoadMetric
+      attr_accessor customized_capacity_metric_specification: Types::PredictiveScalingCustomizedCapacityMetric
+      SENSITIVE: []
+    end
+
+    class PredictiveScalingPredefinedLoadMetric
+      attr_accessor predefined_metric_type: ("ASGTotalCPUUtilization" | "ASGTotalNetworkIn" | "ASGTotalNetworkOut" | "ALBTargetGroupRequestCount")
+      attr_accessor resource_label: ::String
+      SENSITIVE: []
+    end
+
+    class PredictiveScalingPredefinedMetricPair
+      attr_accessor predefined_metric_type: ("ASGCPUUtilization" | "ASGNetworkIn" | "ASGNetworkOut" | "ALBRequestCount")
+      attr_accessor resource_label: ::String
+      SENSITIVE: []
+    end
+
+    class PredictiveScalingPredefinedScalingMetric
+      attr_accessor predefined_metric_type: ("ASGAverageCPUUtilization" | "ASGAverageNetworkIn" | "ASGAverageNetworkOut" | "ALBRequestCountPerTarget")
+      attr_accessor resource_label: ::String
+      SENSITIVE: []
+    end
+
+    class ProcessType
+      attr_accessor process_name: ::String
+      SENSITIVE: []
+    end
+
+    class ProcessesType
+      attr_accessor processes: ::Array[Types::ProcessType]
+      SENSITIVE: []
+    end
+
+    class PutLifecycleHookAnswer < Aws::EmptyStructure
+    end
+
+    class PutLifecycleHookType
+      attr_accessor lifecycle_hook_name: ::String
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor lifecycle_transition: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor notification_target_arn: ::String
+      attr_accessor notification_metadata: ::String
+      attr_accessor heartbeat_timeout: ::Integer
+      attr_accessor default_result: ::String
+      SENSITIVE: []
+    end
+
+    class PutNotificationConfigurationType
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor topic_arn: ::String
+      attr_accessor notification_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PutScalingPolicyType
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor policy_type: ::String
+      attr_accessor adjustment_type: ::String
+      attr_accessor min_adjustment_step: ::Integer
+      attr_accessor min_adjustment_magnitude: ::Integer
+      attr_accessor scaling_adjustment: ::Integer
+      attr_accessor cooldown: ::Integer
+      attr_accessor metric_aggregation_type: ::String
+      attr_accessor step_adjustments: ::Array[Types::StepAdjustment]
+      attr_accessor estimated_instance_warmup: ::Integer
+      attr_accessor target_tracking_configuration: Types::TargetTrackingConfiguration
+      attr_accessor enabled: bool
+      attr_accessor predictive_scaling_configuration: Types::PredictiveScalingConfiguration
+      SENSITIVE: []
+    end
+
+    class PutScheduledUpdateGroupActionType
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor scheduled_action_name: ::String
+      attr_accessor time: ::Time
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor recurrence: ::String
+      attr_accessor min_size: ::Integer
+      attr_accessor max_size: ::Integer
+      attr_accessor desired_capacity: ::Integer
+      attr_accessor time_zone: ::String
+      SENSITIVE: []
+    end
+
+    class PutWarmPoolAnswer < Aws::EmptyStructure
+    end
+
+    class PutWarmPoolType
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor max_group_prepared_capacity: ::Integer
+      attr_accessor min_size: ::Integer
+      attr_accessor pool_state: ("Stopped" | "Running" | "Hibernated")
+      attr_accessor instance_reuse_policy: Types::InstanceReusePolicy
+      SENSITIVE: []
+    end
+
+    class RecordLifecycleActionHeartbeatAnswer < Aws::EmptyStructure
+    end
+
+    class RecordLifecycleActionHeartbeatType
+      attr_accessor lifecycle_hook_name: ::String
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor lifecycle_action_token: ::String
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class RefreshPreferences
+      attr_accessor min_healthy_percentage: ::Integer
+      attr_accessor instance_warmup: ::Integer
+      attr_accessor checkpoint_percentages: ::Array[::Integer]
+      attr_accessor checkpoint_delay: ::Integer
+      attr_accessor skip_matching: bool
+      attr_accessor auto_rollback: bool
+      attr_accessor scale_in_protected_instances: ("Refresh" | "Ignore" | "Wait")
+      attr_accessor standby_instances: ("Terminate" | "Ignore" | "Wait")
+      attr_accessor alarm_specification: Types::AlarmSpecification
+      attr_accessor max_healthy_percentage: ::Integer
+      SENSITIVE: []
+    end
+
+    class ResourceContentionFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceInUseFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RollbackDetails
+      attr_accessor rollback_reason: ::String
+      attr_accessor rollback_start_time: ::Time
+      attr_accessor percentage_complete_on_rollback: ::Integer
+      attr_accessor instances_to_update_on_rollback: ::Integer
+      attr_accessor progress_details_on_rollback: Types::InstanceRefreshProgressDetails
+      SENSITIVE: []
+    end
+
+    class RollbackInstanceRefreshAnswer
+      attr_accessor instance_refresh_id: ::String
+      SENSITIVE: []
+    end
+
+    class RollbackInstanceRefreshType
+      attr_accessor auto_scaling_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class ScalingActivityInProgressFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ScalingPolicy
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor policy_arn: ::String
+      attr_accessor policy_type: ::String
+      attr_accessor adjustment_type: ::String
+      attr_accessor min_adjustment_step: ::Integer
+      attr_accessor min_adjustment_magnitude: ::Integer
+      attr_accessor scaling_adjustment: ::Integer
+      attr_accessor cooldown: ::Integer
+      attr_accessor step_adjustments: ::Array[Types::StepAdjustment]
+      attr_accessor metric_aggregation_type: ::String
+      attr_accessor estimated_instance_warmup: ::Integer
+      attr_accessor alarms: ::Array[Types::Alarm]
+      attr_accessor target_tracking_configuration: Types::TargetTrackingConfiguration
+      attr_accessor enabled: bool
+      attr_accessor predictive_scaling_configuration: Types::PredictiveScalingConfiguration
+      SENSITIVE: []
+    end
+
+    class ScalingProcessQuery
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor scaling_processes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ScheduledActionsType
+      attr_accessor scheduled_update_group_actions: ::Array[Types::ScheduledUpdateGroupAction]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ScheduledUpdateGroupAction
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor scheduled_action_name: ::String
+      attr_accessor scheduled_action_arn: ::String
+      attr_accessor time: ::Time
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor recurrence: ::String
+      attr_accessor min_size: ::Integer
+      attr_accessor max_size: ::Integer
+      attr_accessor desired_capacity: ::Integer
+      attr_accessor time_zone: ::String
+      SENSITIVE: []
+    end
+
+    class ScheduledUpdateGroupActionRequest
+      attr_accessor scheduled_action_name: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor recurrence: ::String
+      attr_accessor min_size: ::Integer
+      attr_accessor max_size: ::Integer
+      attr_accessor desired_capacity: ::Integer
+      attr_accessor time_zone: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceLinkedRoleFailure
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SetDesiredCapacityType
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor desired_capacity: ::Integer
+      attr_accessor honor_cooldown: bool
+      SENSITIVE: []
+    end
+
+    class SetInstanceHealthQuery
+      attr_accessor instance_id: ::String
+      attr_accessor health_status: ::String
+      attr_accessor should_respect_grace_period: bool
+      SENSITIVE: []
+    end
+
+    class SetInstanceProtectionAnswer < Aws::EmptyStructure
+    end
+
+    class SetInstanceProtectionQuery
+      attr_accessor instance_ids: ::Array[::String]
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor protected_from_scale_in: bool
+      SENSITIVE: []
+    end
+
+    class StartInstanceRefreshAnswer
+      attr_accessor instance_refresh_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartInstanceRefreshType
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor strategy: ("Rolling")
+      attr_accessor desired_configuration: Types::DesiredConfiguration
+      attr_accessor preferences: Types::RefreshPreferences
+      SENSITIVE: []
+    end
+
+    class StepAdjustment
+      attr_accessor metric_interval_lower_bound: ::Float
+      attr_accessor metric_interval_upper_bound: ::Float
+      attr_accessor scaling_adjustment: ::Integer
+      SENSITIVE: []
+    end
+
+    class SuspendedProcess
+      attr_accessor process_name: ::String
+      attr_accessor suspension_reason: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      attr_accessor propagate_at_launch: bool
+      SENSITIVE: []
+    end
+
+    class TagDescription
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      attr_accessor propagate_at_launch: bool
+      SENSITIVE: []
+    end
+
+    class TagsType
+      attr_accessor tags: ::Array[Types::TagDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class TargetTrackingConfiguration
+      attr_accessor predefined_metric_specification: Types::PredefinedMetricSpecification
+      attr_accessor customized_metric_specification: Types::CustomizedMetricSpecification
+      attr_accessor target_value: ::Float
+      attr_accessor disable_scale_in: bool
+      SENSITIVE: []
+    end
+
+    class TargetTrackingMetricDataQuery
+      attr_accessor id: ::String
+      attr_accessor expression: ::String
+      attr_accessor metric_stat: Types::TargetTrackingMetricStat
+      attr_accessor label: ::String
+      attr_accessor return_data: bool
+      SENSITIVE: []
+    end
+
+    class TargetTrackingMetricStat
+      attr_accessor metric: Types::Metric
+      attr_accessor stat: ::String
+      attr_accessor unit: ::String
+      SENSITIVE: []
+    end
+
+    class TerminateInstanceInAutoScalingGroupType
+      attr_accessor instance_id: ::String
+      attr_accessor should_decrement_desired_capacity: bool
+      SENSITIVE: []
+    end
+
+    class TotalLocalStorageGBRequest
+      attr_accessor min: ::Float
+      attr_accessor max: ::Float
+      SENSITIVE: []
+    end
+
+    class TrafficSourceIdentifier
+      attr_accessor identifier: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class TrafficSourceState
+      attr_accessor traffic_source: ::String
+      attr_accessor state: ::String
+      attr_accessor identifier: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAutoScalingGroupType
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor launch_configuration_name: ::String
+      attr_accessor launch_template: Types::LaunchTemplateSpecification
+      attr_accessor mixed_instances_policy: Types::MixedInstancesPolicy
+      attr_accessor min_size: ::Integer
+      attr_accessor max_size: ::Integer
+      attr_accessor desired_capacity: ::Integer
+      attr_accessor default_cooldown: ::Integer
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor health_check_type: ::String
+      attr_accessor health_check_grace_period: ::Integer
+      attr_accessor placement_group: ::String
+      attr_accessor vpc_zone_identifier: ::String
+      attr_accessor termination_policies: ::Array[::String]
+      attr_accessor new_instances_protected_from_scale_in: bool
+      attr_accessor service_linked_role_arn: ::String
+      attr_accessor max_instance_lifetime: ::Integer
+      attr_accessor capacity_rebalance: bool
+      attr_accessor context: ::String
+      attr_accessor desired_capacity_type: ::String
+      attr_accessor default_instance_warmup: ::Integer
+      attr_accessor instance_maintenance_policy: Types::InstanceMaintenancePolicy
+      SENSITIVE: []
+    end
+
+    class VCpuCountRequest
+      attr_accessor min: ::Integer
+      attr_accessor max: ::Integer
+      SENSITIVE: []
+    end
+
+    class WarmPoolConfiguration
+      attr_accessor max_group_prepared_capacity: ::Integer
+      attr_accessor min_size: ::Integer
+      attr_accessor pool_state: ("Stopped" | "Running" | "Hibernated")
+      attr_accessor status: ("PendingDelete")
+      attr_accessor instance_reuse_policy: Types::InstanceReusePolicy
+      SENSITIVE: []
+    end
+  end
+end

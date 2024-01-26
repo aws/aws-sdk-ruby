@@ -1,0 +1,1244 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::DataSync
+  module Types
+
+    class AddStorageSystemRequest
+      attr_accessor server_configuration: Types::DiscoveryServerConfiguration
+      attr_accessor system_type: ("NetAppONTAP")
+      attr_accessor agent_arns: ::Array[::String]
+      attr_accessor cloud_watch_log_group_arn: ::String
+      attr_accessor tags: ::Array[Types::TagListEntry]
+      attr_accessor name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor credentials: Types::Credentials
+      SENSITIVE: []
+    end
+
+    class AddStorageSystemResponse
+      attr_accessor storage_system_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AgentListEntry
+      attr_accessor agent_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("ONLINE" | "OFFLINE")
+      attr_accessor platform: Types::Platform
+      SENSITIVE: []
+    end
+
+    class AzureBlobSasConfiguration
+      attr_accessor token: ::String
+      SENSITIVE: [:token]
+    end
+
+    class CancelTaskExecutionRequest
+      attr_accessor task_execution_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CancelTaskExecutionResponse < Aws::EmptyStructure
+    end
+
+    class Capacity
+      attr_accessor used: ::Integer
+      attr_accessor provisioned: ::Integer
+      attr_accessor logical_used: ::Integer
+      attr_accessor cluster_cloud_storage_used: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateAgentRequest
+      attr_accessor activation_key: ::String
+      attr_accessor agent_name: ::String
+      attr_accessor tags: ::Array[Types::TagListEntry]
+      attr_accessor vpc_endpoint_id: ::String
+      attr_accessor subnet_arns: ::Array[::String]
+      attr_accessor security_group_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateAgentResponse
+      attr_accessor agent_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLocationAzureBlobRequest
+      attr_accessor container_url: ::String
+      attr_accessor authentication_type: ("SAS")
+      attr_accessor sas_configuration: Types::AzureBlobSasConfiguration
+      attr_accessor blob_type: ("BLOCK")
+      attr_accessor access_tier: ("HOT" | "COOL" | "ARCHIVE")
+      attr_accessor subdirectory: ::String
+      attr_accessor agent_arns: ::Array[::String]
+      attr_accessor tags: ::Array[Types::TagListEntry]
+      SENSITIVE: []
+    end
+
+    class CreateLocationAzureBlobResponse
+      attr_accessor location_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLocationEfsRequest
+      attr_accessor subdirectory: ::String
+      attr_accessor efs_filesystem_arn: ::String
+      attr_accessor ec2_config: Types::Ec2Config
+      attr_accessor tags: ::Array[Types::TagListEntry]
+      attr_accessor access_point_arn: ::String
+      attr_accessor file_system_access_role_arn: ::String
+      attr_accessor in_transit_encryption: ("NONE" | "TLS1_2")
+      SENSITIVE: []
+    end
+
+    class CreateLocationEfsResponse
+      attr_accessor location_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLocationFsxLustreRequest
+      attr_accessor fsx_filesystem_arn: ::String
+      attr_accessor security_group_arns: ::Array[::String]
+      attr_accessor subdirectory: ::String
+      attr_accessor tags: ::Array[Types::TagListEntry]
+      SENSITIVE: []
+    end
+
+    class CreateLocationFsxLustreResponse
+      attr_accessor location_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLocationFsxOntapRequest
+      attr_accessor protocol: Types::FsxProtocol
+      attr_accessor security_group_arns: ::Array[::String]
+      attr_accessor storage_virtual_machine_arn: ::String
+      attr_accessor subdirectory: ::String
+      attr_accessor tags: ::Array[Types::TagListEntry]
+      SENSITIVE: []
+    end
+
+    class CreateLocationFsxOntapResponse
+      attr_accessor location_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLocationFsxOpenZfsRequest
+      attr_accessor fsx_filesystem_arn: ::String
+      attr_accessor protocol: Types::FsxProtocol
+      attr_accessor security_group_arns: ::Array[::String]
+      attr_accessor subdirectory: ::String
+      attr_accessor tags: ::Array[Types::TagListEntry]
+      SENSITIVE: []
+    end
+
+    class CreateLocationFsxOpenZfsResponse
+      attr_accessor location_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLocationFsxWindowsRequest
+      attr_accessor subdirectory: ::String
+      attr_accessor fsx_filesystem_arn: ::String
+      attr_accessor security_group_arns: ::Array[::String]
+      attr_accessor tags: ::Array[Types::TagListEntry]
+      attr_accessor user: ::String
+      attr_accessor domain: ::String
+      attr_accessor password: ::String
+      SENSITIVE: [:password]
+    end
+
+    class CreateLocationFsxWindowsResponse
+      attr_accessor location_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLocationHdfsRequest
+      attr_accessor subdirectory: ::String
+      attr_accessor name_nodes: ::Array[Types::HdfsNameNode]
+      attr_accessor block_size: ::Integer
+      attr_accessor replication_factor: ::Integer
+      attr_accessor kms_key_provider_uri: ::String
+      attr_accessor qop_configuration: Types::QopConfiguration
+      attr_accessor authentication_type: ("SIMPLE" | "KERBEROS")
+      attr_accessor simple_user: ::String
+      attr_accessor kerberos_principal: ::String
+      attr_accessor kerberos_keytab: ::String
+      attr_accessor kerberos_krb_5_conf: ::String
+      attr_accessor agent_arns: ::Array[::String]
+      attr_accessor tags: ::Array[Types::TagListEntry]
+      SENSITIVE: []
+    end
+
+    class CreateLocationHdfsResponse
+      attr_accessor location_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLocationNfsRequest
+      attr_accessor subdirectory: ::String
+      attr_accessor server_hostname: ::String
+      attr_accessor on_prem_config: Types::OnPremConfig
+      attr_accessor mount_options: Types::NfsMountOptions
+      attr_accessor tags: ::Array[Types::TagListEntry]
+      SENSITIVE: []
+    end
+
+    class CreateLocationNfsResponse
+      attr_accessor location_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLocationObjectStorageRequest
+      attr_accessor server_hostname: ::String
+      attr_accessor server_port: ::Integer
+      attr_accessor server_protocol: ("HTTPS" | "HTTP")
+      attr_accessor subdirectory: ::String
+      attr_accessor bucket_name: ::String
+      attr_accessor access_key: ::String
+      attr_accessor secret_key: ::String
+      attr_accessor agent_arns: ::Array[::String]
+      attr_accessor tags: ::Array[Types::TagListEntry]
+      attr_accessor server_certificate: ::String
+      SENSITIVE: [:secret_key]
+    end
+
+    class CreateLocationObjectStorageResponse
+      attr_accessor location_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLocationS3Request
+      attr_accessor subdirectory: ::String
+      attr_accessor s3_bucket_arn: ::String
+      attr_accessor s3_storage_class: ("STANDARD" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_INSTANT_RETRIEVAL")
+      attr_accessor s3_config: Types::S3Config
+      attr_accessor agent_arns: ::Array[::String]
+      attr_accessor tags: ::Array[Types::TagListEntry]
+      SENSITIVE: []
+    end
+
+    class CreateLocationS3Response
+      attr_accessor location_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLocationSmbRequest
+      attr_accessor subdirectory: ::String
+      attr_accessor server_hostname: ::String
+      attr_accessor user: ::String
+      attr_accessor domain: ::String
+      attr_accessor password: ::String
+      attr_accessor agent_arns: ::Array[::String]
+      attr_accessor mount_options: Types::SmbMountOptions
+      attr_accessor tags: ::Array[Types::TagListEntry]
+      SENSITIVE: [:password]
+    end
+
+    class CreateLocationSmbResponse
+      attr_accessor location_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTaskRequest
+      attr_accessor source_location_arn: ::String
+      attr_accessor destination_location_arn: ::String
+      attr_accessor cloud_watch_log_group_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor options: Types::Options
+      attr_accessor excludes: ::Array[Types::FilterRule]
+      attr_accessor schedule: Types::TaskSchedule
+      attr_accessor tags: ::Array[Types::TagListEntry]
+      attr_accessor includes: ::Array[Types::FilterRule]
+      attr_accessor task_report_config: Types::TaskReportConfig
+      SENSITIVE: []
+    end
+
+    class CreateTaskResponse
+      attr_accessor task_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Credentials
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      SENSITIVE: [:username, :password]
+    end
+
+    class DeleteAgentRequest
+      attr_accessor agent_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAgentResponse < Aws::EmptyStructure
+    end
+
+    class DeleteLocationRequest
+      attr_accessor location_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLocationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteTaskRequest
+      attr_accessor task_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTaskResponse < Aws::EmptyStructure
+    end
+
+    class DescribeAgentRequest
+      attr_accessor agent_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAgentResponse
+      attr_accessor agent_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("ONLINE" | "OFFLINE")
+      attr_accessor last_connection_time: ::Time
+      attr_accessor creation_time: ::Time
+      attr_accessor endpoint_type: ("PUBLIC" | "PRIVATE_LINK" | "FIPS")
+      attr_accessor private_link_config: Types::PrivateLinkConfig
+      attr_accessor platform: Types::Platform
+      SENSITIVE: []
+    end
+
+    class DescribeDiscoveryJobRequest
+      attr_accessor discovery_job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDiscoveryJobResponse
+      attr_accessor storage_system_arn: ::String
+      attr_accessor discovery_job_arn: ::String
+      attr_accessor collection_duration_minutes: ::Integer
+      attr_accessor status: ("RUNNING" | "WARNING" | "TERMINATED" | "FAILED" | "STOPPED" | "COMPLETED" | "COMPLETED_WITH_ISSUES")
+      attr_accessor job_start_time: ::Time
+      attr_accessor job_end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeLocationAzureBlobRequest
+      attr_accessor location_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLocationAzureBlobResponse
+      attr_accessor location_arn: ::String
+      attr_accessor location_uri: ::String
+      attr_accessor authentication_type: ("SAS")
+      attr_accessor blob_type: ("BLOCK")
+      attr_accessor access_tier: ("HOT" | "COOL" | "ARCHIVE")
+      attr_accessor agent_arns: ::Array[::String]
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeLocationEfsRequest
+      attr_accessor location_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLocationEfsResponse
+      attr_accessor location_arn: ::String
+      attr_accessor location_uri: ::String
+      attr_accessor ec2_config: Types::Ec2Config
+      attr_accessor creation_time: ::Time
+      attr_accessor access_point_arn: ::String
+      attr_accessor file_system_access_role_arn: ::String
+      attr_accessor in_transit_encryption: ("NONE" | "TLS1_2")
+      SENSITIVE: []
+    end
+
+    class DescribeLocationFsxLustreRequest
+      attr_accessor location_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLocationFsxLustreResponse
+      attr_accessor location_arn: ::String
+      attr_accessor location_uri: ::String
+      attr_accessor security_group_arns: ::Array[::String]
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeLocationFsxOntapRequest
+      attr_accessor location_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLocationFsxOntapResponse
+      attr_accessor creation_time: ::Time
+      attr_accessor location_arn: ::String
+      attr_accessor location_uri: ::String
+      attr_accessor protocol: Types::FsxProtocol
+      attr_accessor security_group_arns: ::Array[::String]
+      attr_accessor storage_virtual_machine_arn: ::String
+      attr_accessor fsx_filesystem_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLocationFsxOpenZfsRequest
+      attr_accessor location_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLocationFsxOpenZfsResponse
+      attr_accessor location_arn: ::String
+      attr_accessor location_uri: ::String
+      attr_accessor security_group_arns: ::Array[::String]
+      attr_accessor protocol: Types::FsxProtocol
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeLocationFsxWindowsRequest
+      attr_accessor location_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLocationFsxWindowsResponse
+      attr_accessor location_arn: ::String
+      attr_accessor location_uri: ::String
+      attr_accessor security_group_arns: ::Array[::String]
+      attr_accessor creation_time: ::Time
+      attr_accessor user: ::String
+      attr_accessor domain: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLocationHdfsRequest
+      attr_accessor location_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLocationHdfsResponse
+      attr_accessor location_arn: ::String
+      attr_accessor location_uri: ::String
+      attr_accessor name_nodes: ::Array[Types::HdfsNameNode]
+      attr_accessor block_size: ::Integer
+      attr_accessor replication_factor: ::Integer
+      attr_accessor kms_key_provider_uri: ::String
+      attr_accessor qop_configuration: Types::QopConfiguration
+      attr_accessor authentication_type: ("SIMPLE" | "KERBEROS")
+      attr_accessor simple_user: ::String
+      attr_accessor kerberos_principal: ::String
+      attr_accessor agent_arns: ::Array[::String]
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeLocationNfsRequest
+      attr_accessor location_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLocationNfsResponse
+      attr_accessor location_arn: ::String
+      attr_accessor location_uri: ::String
+      attr_accessor on_prem_config: Types::OnPremConfig
+      attr_accessor mount_options: Types::NfsMountOptions
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeLocationObjectStorageRequest
+      attr_accessor location_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLocationObjectStorageResponse
+      attr_accessor location_arn: ::String
+      attr_accessor location_uri: ::String
+      attr_accessor access_key: ::String
+      attr_accessor server_port: ::Integer
+      attr_accessor server_protocol: ("HTTPS" | "HTTP")
+      attr_accessor agent_arns: ::Array[::String]
+      attr_accessor creation_time: ::Time
+      attr_accessor server_certificate: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLocationS3Request
+      attr_accessor location_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLocationS3Response
+      attr_accessor location_arn: ::String
+      attr_accessor location_uri: ::String
+      attr_accessor s3_storage_class: ("STANDARD" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_INSTANT_RETRIEVAL")
+      attr_accessor s3_config: Types::S3Config
+      attr_accessor agent_arns: ::Array[::String]
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeLocationSmbRequest
+      attr_accessor location_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLocationSmbResponse
+      attr_accessor location_arn: ::String
+      attr_accessor location_uri: ::String
+      attr_accessor agent_arns: ::Array[::String]
+      attr_accessor user: ::String
+      attr_accessor domain: ::String
+      attr_accessor mount_options: Types::SmbMountOptions
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeStorageSystemRequest
+      attr_accessor storage_system_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStorageSystemResourceMetricsRequest
+      attr_accessor discovery_job_arn: ::String
+      attr_accessor resource_type: ("SVM" | "VOLUME" | "CLUSTER")
+      attr_accessor resource_id: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStorageSystemResourceMetricsResponse
+      attr_accessor metrics: ::Array[Types::ResourceMetrics]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStorageSystemResourcesRequest
+      attr_accessor discovery_job_arn: ::String
+      attr_accessor resource_type: ("SVM" | "VOLUME" | "CLUSTER")
+      attr_accessor resource_ids: ::Array[::String]
+      attr_accessor filter: ::Hash[("SVM"), ::Array[::String]]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStorageSystemResourcesResponse
+      attr_accessor resource_details: Types::ResourceDetails
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStorageSystemResponse
+      attr_accessor storage_system_arn: ::String
+      attr_accessor server_configuration: Types::DiscoveryServerConfiguration
+      attr_accessor system_type: ("NetAppONTAP")
+      attr_accessor agent_arns: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor error_message: ::String
+      attr_accessor connectivity_status: ("PASS" | "FAIL" | "UNKNOWN")
+      attr_accessor cloud_watch_log_group_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor secrets_manager_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTaskExecutionRequest
+      attr_accessor task_execution_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTaskExecutionResponse
+      attr_accessor task_execution_arn: ::String
+      attr_accessor status: ("QUEUED" | "LAUNCHING" | "PREPARING" | "TRANSFERRING" | "VERIFYING" | "SUCCESS" | "ERROR")
+      attr_accessor options: Types::Options
+      attr_accessor excludes: ::Array[Types::FilterRule]
+      attr_accessor includes: ::Array[Types::FilterRule]
+      attr_accessor start_time: ::Time
+      attr_accessor estimated_files_to_transfer: ::Integer
+      attr_accessor estimated_bytes_to_transfer: ::Integer
+      attr_accessor files_transferred: ::Integer
+      attr_accessor bytes_written: ::Integer
+      attr_accessor bytes_transferred: ::Integer
+      attr_accessor result: Types::TaskExecutionResultDetail
+      attr_accessor bytes_compressed: ::Integer
+      attr_accessor task_report_config: Types::TaskReportConfig
+      attr_accessor files_deleted: ::Integer
+      attr_accessor files_skipped: ::Integer
+      attr_accessor files_verified: ::Integer
+      attr_accessor report_result: Types::ReportResult
+      attr_accessor estimated_files_to_delete: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeTaskRequest
+      attr_accessor task_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTaskResponse
+      attr_accessor task_arn: ::String
+      attr_accessor status: ("AVAILABLE" | "CREATING" | "QUEUED" | "RUNNING" | "UNAVAILABLE")
+      attr_accessor name: ::String
+      attr_accessor current_task_execution_arn: ::String
+      attr_accessor source_location_arn: ::String
+      attr_accessor destination_location_arn: ::String
+      attr_accessor cloud_watch_log_group_arn: ::String
+      attr_accessor source_network_interface_arns: ::Array[::String]
+      attr_accessor destination_network_interface_arns: ::Array[::String]
+      attr_accessor options: Types::Options
+      attr_accessor excludes: ::Array[Types::FilterRule]
+      attr_accessor schedule: Types::TaskSchedule
+      attr_accessor error_code: ::String
+      attr_accessor error_detail: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor includes: ::Array[Types::FilterRule]
+      attr_accessor task_report_config: Types::TaskReportConfig
+      SENSITIVE: []
+    end
+
+    class DiscoveryJobListEntry
+      attr_accessor discovery_job_arn: ::String
+      attr_accessor status: ("RUNNING" | "WARNING" | "TERMINATED" | "FAILED" | "STOPPED" | "COMPLETED" | "COMPLETED_WITH_ISSUES")
+      SENSITIVE: []
+    end
+
+    class DiscoveryServerConfiguration
+      attr_accessor server_hostname: ::String
+      attr_accessor server_port: ::Integer
+      SENSITIVE: []
+    end
+
+    class Ec2Config
+      attr_accessor subnet_arn: ::String
+      attr_accessor security_group_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class FilterRule
+      attr_accessor filter_type: ("SIMPLE_PATTERN")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class FsxProtocol
+      attr_accessor nfs: Types::FsxProtocolNfs
+      attr_accessor smb: Types::FsxProtocolSmb
+      SENSITIVE: []
+    end
+
+    class FsxProtocolNfs
+      attr_accessor mount_options: Types::NfsMountOptions
+      SENSITIVE: []
+    end
+
+    class FsxProtocolSmb
+      attr_accessor domain: ::String
+      attr_accessor mount_options: Types::SmbMountOptions
+      attr_accessor password: ::String
+      attr_accessor user: ::String
+      SENSITIVE: [:password]
+    end
+
+    class GenerateRecommendationsRequest
+      attr_accessor discovery_job_arn: ::String
+      attr_accessor resource_ids: ::Array[::String]
+      attr_accessor resource_type: ("SVM" | "VOLUME" | "CLUSTER")
+      SENSITIVE: []
+    end
+
+    class GenerateRecommendationsResponse < Aws::EmptyStructure
+    end
+
+    class HdfsNameNode
+      attr_accessor hostname: ::String
+      attr_accessor port: ::Integer
+      SENSITIVE: []
+    end
+
+    class IOPS
+      attr_accessor read: ::Float
+      attr_accessor write: ::Float
+      attr_accessor other: ::Float
+      attr_accessor total: ::Float
+      SENSITIVE: []
+    end
+
+    class InternalException
+      attr_accessor message: ::String
+      attr_accessor error_code: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      attr_accessor error_code: ::String
+      attr_accessor datasync_error_code: ::String
+      SENSITIVE: []
+    end
+
+    class Latency
+      attr_accessor read: ::Float
+      attr_accessor write: ::Float
+      attr_accessor other: ::Float
+      SENSITIVE: []
+    end
+
+    class ListAgentsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentsResponse
+      attr_accessor agents: ::Array[Types::AgentListEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDiscoveryJobsRequest
+      attr_accessor storage_system_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDiscoveryJobsResponse
+      attr_accessor discovery_jobs: ::Array[Types::DiscoveryJobListEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLocationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::LocationFilter]
+      SENSITIVE: []
+    end
+
+    class ListLocationsResponse
+      attr_accessor locations: ::Array[Types::LocationListEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStorageSystemsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStorageSystemsResponse
+      attr_accessor storage_systems: ::Array[Types::StorageSystemListEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::TagListEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTaskExecutionsRequest
+      attr_accessor task_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTaskExecutionsResponse
+      attr_accessor task_executions: ::Array[Types::TaskExecutionListEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTasksRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::TaskFilter]
+      SENSITIVE: []
+    end
+
+    class ListTasksResponse
+      attr_accessor tasks: ::Array[Types::TaskListEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LocationFilter
+      attr_accessor name: ("LocationUri" | "LocationType" | "CreationTime")
+      attr_accessor values: ::Array[::String]
+      attr_accessor operator: ("Equals" | "NotEquals" | "In" | "LessThanOrEqual" | "LessThan" | "GreaterThanOrEqual" | "GreaterThan" | "Contains" | "NotContains" | "BeginsWith")
+      SENSITIVE: []
+    end
+
+    class LocationListEntry
+      attr_accessor location_arn: ::String
+      attr_accessor location_uri: ::String
+      SENSITIVE: []
+    end
+
+    class MaxP95Performance
+      attr_accessor iops_read: ::Float
+      attr_accessor iops_write: ::Float
+      attr_accessor iops_other: ::Float
+      attr_accessor iops_total: ::Float
+      attr_accessor throughput_read: ::Float
+      attr_accessor throughput_write: ::Float
+      attr_accessor throughput_other: ::Float
+      attr_accessor throughput_total: ::Float
+      attr_accessor latency_read: ::Float
+      attr_accessor latency_write: ::Float
+      attr_accessor latency_other: ::Float
+      SENSITIVE: []
+    end
+
+    class NetAppONTAPCluster
+      attr_accessor cifs_share_count: ::Integer
+      attr_accessor nfs_exported_volumes: ::Integer
+      attr_accessor resource_id: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor max_p95_performance: Types::MaxP95Performance
+      attr_accessor cluster_block_storage_size: ::Integer
+      attr_accessor cluster_block_storage_used: ::Integer
+      attr_accessor cluster_block_storage_logical_used: ::Integer
+      attr_accessor recommendations: ::Array[Types::Recommendation]
+      attr_accessor recommendation_status: ("NONE" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor lun_count: ::Integer
+      attr_accessor cluster_cloud_storage_used: ::Integer
+      SENSITIVE: []
+    end
+
+    class NetAppONTAPSVM
+      attr_accessor cluster_uuid: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor svm_name: ::String
+      attr_accessor cifs_share_count: ::Integer
+      attr_accessor enabled_protocols: ::Array[::String]
+      attr_accessor total_capacity_used: ::Integer
+      attr_accessor total_capacity_provisioned: ::Integer
+      attr_accessor total_logical_capacity_used: ::Integer
+      attr_accessor max_p95_performance: Types::MaxP95Performance
+      attr_accessor recommendations: ::Array[Types::Recommendation]
+      attr_accessor nfs_exported_volumes: ::Integer
+      attr_accessor recommendation_status: ("NONE" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor total_snapshot_capacity_used: ::Integer
+      attr_accessor lun_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class NetAppONTAPVolume
+      attr_accessor volume_name: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor cifs_share_count: ::Integer
+      attr_accessor security_style: ::String
+      attr_accessor svm_uuid: ::String
+      attr_accessor svm_name: ::String
+      attr_accessor capacity_used: ::Integer
+      attr_accessor capacity_provisioned: ::Integer
+      attr_accessor logical_capacity_used: ::Integer
+      attr_accessor nfs_exported: bool
+      attr_accessor snapshot_capacity_used: ::Integer
+      attr_accessor max_p95_performance: Types::MaxP95Performance
+      attr_accessor recommendations: ::Array[Types::Recommendation]
+      attr_accessor recommendation_status: ("NONE" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor lun_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class NfsMountOptions
+      attr_accessor version: ("AUTOMATIC" | "NFS3" | "NFS4_0" | "NFS4_1")
+      SENSITIVE: []
+    end
+
+    class OnPremConfig
+      attr_accessor agent_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Options
+      attr_accessor verify_mode: ("POINT_IN_TIME_CONSISTENT" | "ONLY_FILES_TRANSFERRED" | "NONE")
+      attr_accessor overwrite_mode: ("ALWAYS" | "NEVER")
+      attr_accessor atime: ("NONE" | "BEST_EFFORT")
+      attr_accessor mtime: ("NONE" | "PRESERVE")
+      attr_accessor uid: ("NONE" | "INT_VALUE" | "NAME" | "BOTH")
+      attr_accessor gid: ("NONE" | "INT_VALUE" | "NAME" | "BOTH")
+      attr_accessor preserve_deleted_files: ("PRESERVE" | "REMOVE")
+      attr_accessor preserve_devices: ("NONE" | "PRESERVE")
+      attr_accessor posix_permissions: ("NONE" | "PRESERVE")
+      attr_accessor bytes_per_second: ::Integer
+      attr_accessor task_queueing: ("ENABLED" | "DISABLED")
+      attr_accessor log_level: ("OFF" | "BASIC" | "TRANSFER")
+      attr_accessor transfer_mode: ("CHANGED" | "ALL")
+      attr_accessor security_descriptor_copy_flags: ("NONE" | "OWNER_DACL" | "OWNER_DACL_SACL")
+      attr_accessor object_tags: ("PRESERVE" | "NONE")
+      SENSITIVE: []
+    end
+
+    class P95Metrics
+      attr_accessor iops: Types::IOPS
+      attr_accessor throughput: Types::Throughput
+      attr_accessor latency: Types::Latency
+      SENSITIVE: []
+    end
+
+    class Platform
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class PrivateLinkConfig
+      attr_accessor vpc_endpoint_id: ::String
+      attr_accessor private_link_endpoint: ::String
+      attr_accessor subnet_arns: ::Array[::String]
+      attr_accessor security_group_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class QopConfiguration
+      attr_accessor rpc_protection: ("DISABLED" | "AUTHENTICATION" | "INTEGRITY" | "PRIVACY")
+      attr_accessor data_transfer_protection: ("DISABLED" | "AUTHENTICATION" | "INTEGRITY" | "PRIVACY")
+      SENSITIVE: []
+    end
+
+    class Recommendation
+      attr_accessor storage_type: ::String
+      attr_accessor storage_configuration: ::Hash[::String, ::String]
+      attr_accessor estimated_monthly_storage_cost: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveStorageSystemRequest
+      attr_accessor storage_system_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveStorageSystemResponse < Aws::EmptyStructure
+    end
+
+    class ReportDestination
+      attr_accessor s3: Types::ReportDestinationS3
+      SENSITIVE: []
+    end
+
+    class ReportDestinationS3
+      attr_accessor subdirectory: ::String
+      attr_accessor s3_bucket_arn: ::String
+      attr_accessor bucket_access_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ReportOverride
+      attr_accessor report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")
+      SENSITIVE: []
+    end
+
+    class ReportOverrides
+      attr_accessor transferred: Types::ReportOverride
+      attr_accessor verified: Types::ReportOverride
+      attr_accessor deleted: Types::ReportOverride
+      attr_accessor skipped: Types::ReportOverride
+      SENSITIVE: []
+    end
+
+    class ReportResult
+      attr_accessor status: ("PENDING" | "SUCCESS" | "ERROR")
+      attr_accessor error_code: ::String
+      attr_accessor error_detail: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceDetails
+      attr_accessor net_app_ontapsv_ms: ::Array[Types::NetAppONTAPSVM]
+      attr_accessor net_app_ontap_volumes: ::Array[Types::NetAppONTAPVolume]
+      attr_accessor net_app_ontap_clusters: ::Array[Types::NetAppONTAPCluster]
+      SENSITIVE: []
+    end
+
+    class ResourceMetrics
+      attr_accessor timestamp: ::Time
+      attr_accessor p95_metrics: Types::P95Metrics
+      attr_accessor capacity: Types::Capacity
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("SVM" | "VOLUME" | "CLUSTER")
+      SENSITIVE: []
+    end
+
+    class S3Config
+      attr_accessor bucket_access_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SmbMountOptions
+      attr_accessor version: ("AUTOMATIC" | "SMB2" | "SMB3" | "SMB1" | "SMB2_0")
+      SENSITIVE: []
+    end
+
+    class StartDiscoveryJobRequest
+      attr_accessor storage_system_arn: ::String
+      attr_accessor collection_duration_minutes: ::Integer
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::TagListEntry]
+      SENSITIVE: []
+    end
+
+    class StartDiscoveryJobResponse
+      attr_accessor discovery_job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartTaskExecutionRequest
+      attr_accessor task_arn: ::String
+      attr_accessor override_options: Types::Options
+      attr_accessor includes: ::Array[Types::FilterRule]
+      attr_accessor excludes: ::Array[Types::FilterRule]
+      attr_accessor tags: ::Array[Types::TagListEntry]
+      attr_accessor task_report_config: Types::TaskReportConfig
+      SENSITIVE: []
+    end
+
+    class StartTaskExecutionResponse
+      attr_accessor task_execution_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopDiscoveryJobRequest
+      attr_accessor discovery_job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopDiscoveryJobResponse < Aws::EmptyStructure
+    end
+
+    class StorageSystemListEntry
+      attr_accessor storage_system_arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class TagListEntry
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::TagListEntry]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TaskExecutionListEntry
+      attr_accessor task_execution_arn: ::String
+      attr_accessor status: ("QUEUED" | "LAUNCHING" | "PREPARING" | "TRANSFERRING" | "VERIFYING" | "SUCCESS" | "ERROR")
+      SENSITIVE: []
+    end
+
+    class TaskExecutionResultDetail
+      attr_accessor prepare_duration: ::Integer
+      attr_accessor prepare_status: ("PENDING" | "SUCCESS" | "ERROR")
+      attr_accessor total_duration: ::Integer
+      attr_accessor transfer_duration: ::Integer
+      attr_accessor transfer_status: ("PENDING" | "SUCCESS" | "ERROR")
+      attr_accessor verify_duration: ::Integer
+      attr_accessor verify_status: ("PENDING" | "SUCCESS" | "ERROR")
+      attr_accessor error_code: ::String
+      attr_accessor error_detail: ::String
+      SENSITIVE: []
+    end
+
+    class TaskFilter
+      attr_accessor name: ("LocationId" | "CreationTime")
+      attr_accessor values: ::Array[::String]
+      attr_accessor operator: ("Equals" | "NotEquals" | "In" | "LessThanOrEqual" | "LessThan" | "GreaterThanOrEqual" | "GreaterThan" | "Contains" | "NotContains" | "BeginsWith")
+      SENSITIVE: []
+    end
+
+    class TaskListEntry
+      attr_accessor task_arn: ::String
+      attr_accessor status: ("AVAILABLE" | "CREATING" | "QUEUED" | "RUNNING" | "UNAVAILABLE")
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class TaskReportConfig
+      attr_accessor destination: Types::ReportDestination
+      attr_accessor output_type: ("SUMMARY_ONLY" | "STANDARD")
+      attr_accessor report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")
+      attr_accessor object_version_ids: ("INCLUDE" | "NONE")
+      attr_accessor overrides: Types::ReportOverrides
+      SENSITIVE: []
+    end
+
+    class TaskSchedule
+      attr_accessor schedule_expression: ::String
+      SENSITIVE: []
+    end
+
+    class Throughput
+      attr_accessor read: ::Float
+      attr_accessor write: ::Float
+      attr_accessor other: ::Float
+      attr_accessor total: ::Float
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAgentRequest
+      attr_accessor agent_arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAgentResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDiscoveryJobRequest
+      attr_accessor discovery_job_arn: ::String
+      attr_accessor collection_duration_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateDiscoveryJobResponse < Aws::EmptyStructure
+    end
+
+    class UpdateLocationAzureBlobRequest
+      attr_accessor location_arn: ::String
+      attr_accessor subdirectory: ::String
+      attr_accessor authentication_type: ("SAS")
+      attr_accessor sas_configuration: Types::AzureBlobSasConfiguration
+      attr_accessor blob_type: ("BLOCK")
+      attr_accessor access_tier: ("HOT" | "COOL" | "ARCHIVE")
+      attr_accessor agent_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateLocationAzureBlobResponse < Aws::EmptyStructure
+    end
+
+    class UpdateLocationHdfsRequest
+      attr_accessor location_arn: ::String
+      attr_accessor subdirectory: ::String
+      attr_accessor name_nodes: ::Array[Types::HdfsNameNode]
+      attr_accessor block_size: ::Integer
+      attr_accessor replication_factor: ::Integer
+      attr_accessor kms_key_provider_uri: ::String
+      attr_accessor qop_configuration: Types::QopConfiguration
+      attr_accessor authentication_type: ("SIMPLE" | "KERBEROS")
+      attr_accessor simple_user: ::String
+      attr_accessor kerberos_principal: ::String
+      attr_accessor kerberos_keytab: ::String
+      attr_accessor kerberos_krb_5_conf: ::String
+      attr_accessor agent_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateLocationHdfsResponse < Aws::EmptyStructure
+    end
+
+    class UpdateLocationNfsRequest
+      attr_accessor location_arn: ::String
+      attr_accessor subdirectory: ::String
+      attr_accessor on_prem_config: Types::OnPremConfig
+      attr_accessor mount_options: Types::NfsMountOptions
+      SENSITIVE: []
+    end
+
+    class UpdateLocationNfsResponse < Aws::EmptyStructure
+    end
+
+    class UpdateLocationObjectStorageRequest
+      attr_accessor location_arn: ::String
+      attr_accessor server_port: ::Integer
+      attr_accessor server_protocol: ("HTTPS" | "HTTP")
+      attr_accessor subdirectory: ::String
+      attr_accessor access_key: ::String
+      attr_accessor secret_key: ::String
+      attr_accessor agent_arns: ::Array[::String]
+      attr_accessor server_certificate: ::String
+      SENSITIVE: [:secret_key]
+    end
+
+    class UpdateLocationObjectStorageResponse < Aws::EmptyStructure
+    end
+
+    class UpdateLocationSmbRequest
+      attr_accessor location_arn: ::String
+      attr_accessor subdirectory: ::String
+      attr_accessor user: ::String
+      attr_accessor domain: ::String
+      attr_accessor password: ::String
+      attr_accessor agent_arns: ::Array[::String]
+      attr_accessor mount_options: Types::SmbMountOptions
+      SENSITIVE: [:password]
+    end
+
+    class UpdateLocationSmbResponse < Aws::EmptyStructure
+    end
+
+    class UpdateStorageSystemRequest
+      attr_accessor storage_system_arn: ::String
+      attr_accessor server_configuration: Types::DiscoveryServerConfiguration
+      attr_accessor agent_arns: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor cloud_watch_log_group_arn: ::String
+      attr_accessor credentials: Types::Credentials
+      SENSITIVE: []
+    end
+
+    class UpdateStorageSystemResponse < Aws::EmptyStructure
+    end
+
+    class UpdateTaskExecutionRequest
+      attr_accessor task_execution_arn: ::String
+      attr_accessor options: Types::Options
+      SENSITIVE: []
+    end
+
+    class UpdateTaskExecutionResponse < Aws::EmptyStructure
+    end
+
+    class UpdateTaskRequest
+      attr_accessor task_arn: ::String
+      attr_accessor options: Types::Options
+      attr_accessor excludes: ::Array[Types::FilterRule]
+      attr_accessor schedule: Types::TaskSchedule
+      attr_accessor name: ::String
+      attr_accessor cloud_watch_log_group_arn: ::String
+      attr_accessor includes: ::Array[Types::FilterRule]
+      attr_accessor task_report_config: Types::TaskReportConfig
+      SENSITIVE: []
+    end
+
+    class UpdateTaskResponse < Aws::EmptyStructure
+    end
+  end
+end

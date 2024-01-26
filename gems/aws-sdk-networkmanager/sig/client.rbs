@@ -1,0 +1,1281 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module NetworkManager
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AcceptAttachmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptAttachmentResponse]
+        def attachment: () -> Types::Attachment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#accept_attachment-instance_method
+      def accept_attachment: (
+                               attachment_id: ::String
+                             ) -> _AcceptAttachmentResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptAttachmentResponseSuccess
+
+      interface _AssociateConnectPeerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateConnectPeerResponse]
+        def connect_peer_association: () -> Types::ConnectPeerAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#associate_connect_peer-instance_method
+      def associate_connect_peer: (
+                                    global_network_id: ::String,
+                                    connect_peer_id: ::String,
+                                    device_id: ::String,
+                                    ?link_id: ::String
+                                  ) -> _AssociateConnectPeerResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateConnectPeerResponseSuccess
+
+      interface _AssociateCustomerGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateCustomerGatewayResponse]
+        def customer_gateway_association: () -> Types::CustomerGatewayAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#associate_customer_gateway-instance_method
+      def associate_customer_gateway: (
+                                        customer_gateway_arn: ::String,
+                                        global_network_id: ::String,
+                                        device_id: ::String,
+                                        ?link_id: ::String
+                                      ) -> _AssociateCustomerGatewayResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateCustomerGatewayResponseSuccess
+
+      interface _AssociateLinkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateLinkResponse]
+        def link_association: () -> Types::LinkAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#associate_link-instance_method
+      def associate_link: (
+                            global_network_id: ::String,
+                            device_id: ::String,
+                            link_id: ::String
+                          ) -> _AssociateLinkResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateLinkResponseSuccess
+
+      interface _AssociateTransitGatewayConnectPeerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateTransitGatewayConnectPeerResponse]
+        def transit_gateway_connect_peer_association: () -> Types::TransitGatewayConnectPeerAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#associate_transit_gateway_connect_peer-instance_method
+      def associate_transit_gateway_connect_peer: (
+                                                    global_network_id: ::String,
+                                                    transit_gateway_connect_peer_arn: ::String,
+                                                    device_id: ::String,
+                                                    ?link_id: ::String
+                                                  ) -> _AssociateTransitGatewayConnectPeerResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateTransitGatewayConnectPeerResponseSuccess
+
+      interface _CreateConnectAttachmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConnectAttachmentResponse]
+        def connect_attachment: () -> Types::ConnectAttachment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#create_connect_attachment-instance_method
+      def create_connect_attachment: (
+                                       core_network_id: ::String,
+                                       edge_location: ::String,
+                                       transport_attachment_id: ::String,
+                                       options: {
+                                         protocol: ("GRE" | "NO_ENCAP")?
+                                       },
+                                       ?tags: Array[
+                                         {
+                                           key: ::String?,
+                                           value: ::String?
+                                         },
+                                       ],
+                                       ?client_token: ::String
+                                     ) -> _CreateConnectAttachmentResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectAttachmentResponseSuccess
+
+      interface _CreateConnectPeerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConnectPeerResponse]
+        def connect_peer: () -> Types::ConnectPeer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#create_connect_peer-instance_method
+      def create_connect_peer: (
+                                 connect_attachment_id: ::String,
+                                 ?core_network_address: ::String,
+                                 peer_address: ::String,
+                                 ?bgp_options: {
+                                   peer_asn: ::Integer?
+                                 },
+                                 ?inside_cidr_blocks: Array[::String],
+                                 ?tags: Array[
+                                   {
+                                     key: ::String?,
+                                     value: ::String?
+                                   },
+                                 ],
+                                 ?client_token: ::String,
+                                 ?subnet_arn: ::String
+                               ) -> _CreateConnectPeerResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectPeerResponseSuccess
+
+      interface _CreateConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConnectionResponse]
+        def connection: () -> Types::Connection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#create_connection-instance_method
+      def create_connection: (
+                               global_network_id: ::String,
+                               device_id: ::String,
+                               connected_device_id: ::String,
+                               ?link_id: ::String,
+                               ?connected_link_id: ::String,
+                               ?description: ::String,
+                               ?tags: Array[
+                                 {
+                                   key: ::String?,
+                                   value: ::String?
+                                 },
+                               ]
+                             ) -> _CreateConnectionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectionResponseSuccess
+
+      interface _CreateCoreNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCoreNetworkResponse]
+        def core_network: () -> Types::CoreNetwork
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#create_core_network-instance_method
+      def create_core_network: (
+                                 global_network_id: ::String,
+                                 ?description: ::String,
+                                 ?tags: Array[
+                                   {
+                                     key: ::String?,
+                                     value: ::String?
+                                   },
+                                 ],
+                                 ?policy_document: ::String,
+                                 ?client_token: ::String
+                               ) -> _CreateCoreNetworkResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCoreNetworkResponseSuccess
+
+      interface _CreateDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDeviceResponse]
+        def device: () -> Types::Device
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#create_device-instance_method
+      def create_device: (
+                           global_network_id: ::String,
+                           ?aws_location: {
+                             zone: ::String?,
+                             subnet_arn: ::String?
+                           },
+                           ?description: ::String,
+                           ?type: ::String,
+                           ?vendor: ::String,
+                           ?model: ::String,
+                           ?serial_number: ::String,
+                           ?location: {
+                             address: ::String?,
+                             latitude: ::String?,
+                             longitude: ::String?
+                           },
+                           ?site_id: ::String,
+                           ?tags: Array[
+                             {
+                               key: ::String?,
+                               value: ::String?
+                             },
+                           ]
+                         ) -> _CreateDeviceResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDeviceResponseSuccess
+
+      interface _CreateGlobalNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGlobalNetworkResponse]
+        def global_network: () -> Types::GlobalNetwork
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#create_global_network-instance_method
+      def create_global_network: (
+                                   ?description: ::String,
+                                   ?tags: Array[
+                                     {
+                                       key: ::String?,
+                                       value: ::String?
+                                     },
+                                   ]
+                                 ) -> _CreateGlobalNetworkResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGlobalNetworkResponseSuccess
+
+      interface _CreateLinkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLinkResponse]
+        def link: () -> Types::Link
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#create_link-instance_method
+      def create_link: (
+                         global_network_id: ::String,
+                         ?description: ::String,
+                         ?type: ::String,
+                         bandwidth: {
+                           upload_speed: ::Integer?,
+                           download_speed: ::Integer?
+                         },
+                         ?provider: ::String,
+                         site_id: ::String,
+                         ?tags: Array[
+                           {
+                             key: ::String?,
+                             value: ::String?
+                           },
+                         ]
+                       ) -> _CreateLinkResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLinkResponseSuccess
+
+      interface _CreateSiteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSiteResponse]
+        def site: () -> Types::Site
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#create_site-instance_method
+      def create_site: (
+                         global_network_id: ::String,
+                         ?description: ::String,
+                         ?location: {
+                           address: ::String?,
+                           latitude: ::String?,
+                           longitude: ::String?
+                         },
+                         ?tags: Array[
+                           {
+                             key: ::String?,
+                             value: ::String?
+                           },
+                         ]
+                       ) -> _CreateSiteResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSiteResponseSuccess
+
+      interface _CreateSiteToSiteVpnAttachmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSiteToSiteVpnAttachmentResponse]
+        def site_to_site_vpn_attachment: () -> Types::SiteToSiteVpnAttachment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#create_site_to_site_vpn_attachment-instance_method
+      def create_site_to_site_vpn_attachment: (
+                                                core_network_id: ::String,
+                                                vpn_connection_arn: ::String,
+                                                ?tags: Array[
+                                                  {
+                                                    key: ::String?,
+                                                    value: ::String?
+                                                  },
+                                                ],
+                                                ?client_token: ::String
+                                              ) -> _CreateSiteToSiteVpnAttachmentResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSiteToSiteVpnAttachmentResponseSuccess
+
+      interface _CreateTransitGatewayPeeringResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTransitGatewayPeeringResponse]
+        def transit_gateway_peering: () -> Types::TransitGatewayPeering
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#create_transit_gateway_peering-instance_method
+      def create_transit_gateway_peering: (
+                                            core_network_id: ::String,
+                                            transit_gateway_arn: ::String,
+                                            ?tags: Array[
+                                              {
+                                                key: ::String?,
+                                                value: ::String?
+                                              },
+                                            ],
+                                            ?client_token: ::String
+                                          ) -> _CreateTransitGatewayPeeringResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTransitGatewayPeeringResponseSuccess
+
+      interface _CreateTransitGatewayRouteTableAttachmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTransitGatewayRouteTableAttachmentResponse]
+        def transit_gateway_route_table_attachment: () -> Types::TransitGatewayRouteTableAttachment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#create_transit_gateway_route_table_attachment-instance_method
+      def create_transit_gateway_route_table_attachment: (
+                                                           peering_id: ::String,
+                                                           transit_gateway_route_table_arn: ::String,
+                                                           ?tags: Array[
+                                                             {
+                                                               key: ::String?,
+                                                               value: ::String?
+                                                             },
+                                                           ],
+                                                           ?client_token: ::String
+                                                         ) -> _CreateTransitGatewayRouteTableAttachmentResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTransitGatewayRouteTableAttachmentResponseSuccess
+
+      interface _CreateVpcAttachmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVpcAttachmentResponse]
+        def vpc_attachment: () -> Types::VpcAttachment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#create_vpc_attachment-instance_method
+      def create_vpc_attachment: (
+                                   core_network_id: ::String,
+                                   vpc_arn: ::String,
+                                   subnet_arns: Array[::String],
+                                   ?options: {
+                                     ipv_6_support: bool?,
+                                     appliance_mode_support: bool?
+                                   },
+                                   ?tags: Array[
+                                     {
+                                       key: ::String?,
+                                       value: ::String?
+                                     },
+                                   ],
+                                   ?client_token: ::String
+                                 ) -> _CreateVpcAttachmentResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVpcAttachmentResponseSuccess
+
+      interface _DeleteAttachmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAttachmentResponse]
+        def attachment: () -> Types::Attachment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#delete_attachment-instance_method
+      def delete_attachment: (
+                               attachment_id: ::String
+                             ) -> _DeleteAttachmentResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAttachmentResponseSuccess
+
+      interface _DeleteConnectPeerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConnectPeerResponse]
+        def connect_peer: () -> Types::ConnectPeer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#delete_connect_peer-instance_method
+      def delete_connect_peer: (
+                                 connect_peer_id: ::String
+                               ) -> _DeleteConnectPeerResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConnectPeerResponseSuccess
+
+      interface _DeleteConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConnectionResponse]
+        def connection: () -> Types::Connection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#delete_connection-instance_method
+      def delete_connection: (
+                               global_network_id: ::String,
+                               connection_id: ::String
+                             ) -> _DeleteConnectionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConnectionResponseSuccess
+
+      interface _DeleteCoreNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCoreNetworkResponse]
+        def core_network: () -> Types::CoreNetwork
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#delete_core_network-instance_method
+      def delete_core_network: (
+                                 core_network_id: ::String
+                               ) -> _DeleteCoreNetworkResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCoreNetworkResponseSuccess
+
+      interface _DeleteCoreNetworkPolicyVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCoreNetworkPolicyVersionResponse]
+        def core_network_policy: () -> Types::CoreNetworkPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#delete_core_network_policy_version-instance_method
+      def delete_core_network_policy_version: (
+                                                core_network_id: ::String,
+                                                policy_version_id: ::Integer
+                                              ) -> _DeleteCoreNetworkPolicyVersionResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCoreNetworkPolicyVersionResponseSuccess
+
+      interface _DeleteDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDeviceResponse]
+        def device: () -> Types::Device
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#delete_device-instance_method
+      def delete_device: (
+                           global_network_id: ::String,
+                           device_id: ::String
+                         ) -> _DeleteDeviceResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDeviceResponseSuccess
+
+      interface _DeleteGlobalNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGlobalNetworkResponse]
+        def global_network: () -> Types::GlobalNetwork
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#delete_global_network-instance_method
+      def delete_global_network: (
+                                   global_network_id: ::String
+                                 ) -> _DeleteGlobalNetworkResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGlobalNetworkResponseSuccess
+
+      interface _DeleteLinkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLinkResponse]
+        def link: () -> Types::Link
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#delete_link-instance_method
+      def delete_link: (
+                         global_network_id: ::String,
+                         link_id: ::String
+                       ) -> _DeleteLinkResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLinkResponseSuccess
+
+      interface _DeletePeeringResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePeeringResponse]
+        def peering: () -> Types::Peering
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#delete_peering-instance_method
+      def delete_peering: (
+                            peering_id: ::String
+                          ) -> _DeletePeeringResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePeeringResponseSuccess
+
+      interface _DeleteResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourcePolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#delete_resource_policy-instance_method
+      def delete_resource_policy: (
+                                    resource_arn: ::String
+                                  ) -> _DeleteResourcePolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourcePolicyResponseSuccess
+
+      interface _DeleteSiteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSiteResponse]
+        def site: () -> Types::Site
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#delete_site-instance_method
+      def delete_site: (
+                         global_network_id: ::String,
+                         site_id: ::String
+                       ) -> _DeleteSiteResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSiteResponseSuccess
+
+      interface _DeregisterTransitGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterTransitGatewayResponse]
+        def transit_gateway_registration: () -> Types::TransitGatewayRegistration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#deregister_transit_gateway-instance_method
+      def deregister_transit_gateway: (
+                                        global_network_id: ::String,
+                                        transit_gateway_arn: ::String
+                                      ) -> _DeregisterTransitGatewayResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterTransitGatewayResponseSuccess
+
+      interface _DescribeGlobalNetworksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGlobalNetworksResponse]
+        def global_networks: () -> ::Array[Types::GlobalNetwork]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#describe_global_networks-instance_method
+      def describe_global_networks: (
+                                      ?global_network_ids: Array[::String],
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _DescribeGlobalNetworksResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeGlobalNetworksResponseSuccess
+
+      interface _DisassociateConnectPeerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateConnectPeerResponse]
+        def connect_peer_association: () -> Types::ConnectPeerAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#disassociate_connect_peer-instance_method
+      def disassociate_connect_peer: (
+                                       global_network_id: ::String,
+                                       connect_peer_id: ::String
+                                     ) -> _DisassociateConnectPeerResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateConnectPeerResponseSuccess
+
+      interface _DisassociateCustomerGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateCustomerGatewayResponse]
+        def customer_gateway_association: () -> Types::CustomerGatewayAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#disassociate_customer_gateway-instance_method
+      def disassociate_customer_gateway: (
+                                           global_network_id: ::String,
+                                           customer_gateway_arn: ::String
+                                         ) -> _DisassociateCustomerGatewayResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateCustomerGatewayResponseSuccess
+
+      interface _DisassociateLinkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateLinkResponse]
+        def link_association: () -> Types::LinkAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#disassociate_link-instance_method
+      def disassociate_link: (
+                               global_network_id: ::String,
+                               device_id: ::String,
+                               link_id: ::String
+                             ) -> _DisassociateLinkResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateLinkResponseSuccess
+
+      interface _DisassociateTransitGatewayConnectPeerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateTransitGatewayConnectPeerResponse]
+        def transit_gateway_connect_peer_association: () -> Types::TransitGatewayConnectPeerAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#disassociate_transit_gateway_connect_peer-instance_method
+      def disassociate_transit_gateway_connect_peer: (
+                                                       global_network_id: ::String,
+                                                       transit_gateway_connect_peer_arn: ::String
+                                                     ) -> _DisassociateTransitGatewayConnectPeerResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateTransitGatewayConnectPeerResponseSuccess
+
+      interface _ExecuteCoreNetworkChangeSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExecuteCoreNetworkChangeSetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#execute_core_network_change_set-instance_method
+      def execute_core_network_change_set: (
+                                             core_network_id: ::String,
+                                             policy_version_id: ::Integer
+                                           ) -> _ExecuteCoreNetworkChangeSetResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExecuteCoreNetworkChangeSetResponseSuccess
+
+      interface _GetConnectAttachmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectAttachmentResponse]
+        def connect_attachment: () -> Types::ConnectAttachment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_connect_attachment-instance_method
+      def get_connect_attachment: (
+                                    attachment_id: ::String
+                                  ) -> _GetConnectAttachmentResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConnectAttachmentResponseSuccess
+
+      interface _GetConnectPeerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectPeerResponse]
+        def connect_peer: () -> Types::ConnectPeer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_connect_peer-instance_method
+      def get_connect_peer: (
+                              connect_peer_id: ::String
+                            ) -> _GetConnectPeerResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConnectPeerResponseSuccess
+
+      interface _GetConnectPeerAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectPeerAssociationsResponse]
+        def connect_peer_associations: () -> ::Array[Types::ConnectPeerAssociation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_connect_peer_associations-instance_method
+      def get_connect_peer_associations: (
+                                           global_network_id: ::String,
+                                           ?connect_peer_ids: Array[::String],
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String
+                                         ) -> _GetConnectPeerAssociationsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConnectPeerAssociationsResponseSuccess
+
+      interface _GetConnectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectionsResponse]
+        def connections: () -> ::Array[Types::Connection]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_connections-instance_method
+      def get_connections: (
+                             global_network_id: ::String,
+                             ?connection_ids: Array[::String],
+                             ?device_id: ::String,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _GetConnectionsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConnectionsResponseSuccess
+
+      interface _GetCoreNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCoreNetworkResponse]
+        def core_network: () -> Types::CoreNetwork
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_core_network-instance_method
+      def get_core_network: (
+                              core_network_id: ::String
+                            ) -> _GetCoreNetworkResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCoreNetworkResponseSuccess
+
+      interface _GetCoreNetworkChangeEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCoreNetworkChangeEventsResponse]
+        def core_network_change_events: () -> ::Array[Types::CoreNetworkChangeEvent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_core_network_change_events-instance_method
+      def get_core_network_change_events: (
+                                            core_network_id: ::String,
+                                            policy_version_id: ::Integer,
+                                            ?max_results: ::Integer,
+                                            ?next_token: ::String
+                                          ) -> _GetCoreNetworkChangeEventsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCoreNetworkChangeEventsResponseSuccess
+
+      interface _GetCoreNetworkChangeSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCoreNetworkChangeSetResponse]
+        def core_network_changes: () -> ::Array[Types::CoreNetworkChange]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_core_network_change_set-instance_method
+      def get_core_network_change_set: (
+                                         core_network_id: ::String,
+                                         policy_version_id: ::Integer,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _GetCoreNetworkChangeSetResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCoreNetworkChangeSetResponseSuccess
+
+      interface _GetCoreNetworkPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCoreNetworkPolicyResponse]
+        def core_network_policy: () -> Types::CoreNetworkPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_core_network_policy-instance_method
+      def get_core_network_policy: (
+                                     core_network_id: ::String,
+                                     ?policy_version_id: ::Integer,
+                                     ?alias: ("LIVE" | "LATEST")
+                                   ) -> _GetCoreNetworkPolicyResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCoreNetworkPolicyResponseSuccess
+
+      interface _GetCustomerGatewayAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCustomerGatewayAssociationsResponse]
+        def customer_gateway_associations: () -> ::Array[Types::CustomerGatewayAssociation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_customer_gateway_associations-instance_method
+      def get_customer_gateway_associations: (
+                                               global_network_id: ::String,
+                                               ?customer_gateway_arns: Array[::String],
+                                               ?max_results: ::Integer,
+                                               ?next_token: ::String
+                                             ) -> _GetCustomerGatewayAssociationsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCustomerGatewayAssociationsResponseSuccess
+
+      interface _GetDevicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDevicesResponse]
+        def devices: () -> ::Array[Types::Device]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_devices-instance_method
+      def get_devices: (
+                         global_network_id: ::String,
+                         ?device_ids: Array[::String],
+                         ?site_id: ::String,
+                         ?max_results: ::Integer,
+                         ?next_token: ::String
+                       ) -> _GetDevicesResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDevicesResponseSuccess
+
+      interface _GetLinkAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLinkAssociationsResponse]
+        def link_associations: () -> ::Array[Types::LinkAssociation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_link_associations-instance_method
+      def get_link_associations: (
+                                   global_network_id: ::String,
+                                   ?device_id: ::String,
+                                   ?link_id: ::String,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _GetLinkAssociationsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLinkAssociationsResponseSuccess
+
+      interface _GetLinksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLinksResponse]
+        def links: () -> ::Array[Types::Link]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_links-instance_method
+      def get_links: (
+                       global_network_id: ::String,
+                       ?link_ids: Array[::String],
+                       ?site_id: ::String,
+                       ?type: ::String,
+                       ?provider: ::String,
+                       ?max_results: ::Integer,
+                       ?next_token: ::String
+                     ) -> _GetLinksResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLinksResponseSuccess
+
+      interface _GetNetworkResourceCountsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNetworkResourceCountsResponse]
+        def network_resource_counts: () -> ::Array[Types::NetworkResourceCount]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_network_resource_counts-instance_method
+      def get_network_resource_counts: (
+                                         global_network_id: ::String,
+                                         ?resource_type: ::String,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _GetNetworkResourceCountsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNetworkResourceCountsResponseSuccess
+
+      interface _GetNetworkResourceRelationshipsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNetworkResourceRelationshipsResponse]
+        def relationships: () -> ::Array[Types::Relationship]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_network_resource_relationships-instance_method
+      def get_network_resource_relationships: (
+                                                global_network_id: ::String,
+                                                ?core_network_id: ::String,
+                                                ?registered_gateway_arn: ::String,
+                                                ?aws_region: ::String,
+                                                ?account_id: ::String,
+                                                ?resource_type: ::String,
+                                                ?resource_arn: ::String,
+                                                ?max_results: ::Integer,
+                                                ?next_token: ::String
+                                              ) -> _GetNetworkResourceRelationshipsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNetworkResourceRelationshipsResponseSuccess
+
+      interface _GetNetworkResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNetworkResourcesResponse]
+        def network_resources: () -> ::Array[Types::NetworkResource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_network_resources-instance_method
+      def get_network_resources: (
+                                   global_network_id: ::String,
+                                   ?core_network_id: ::String,
+                                   ?registered_gateway_arn: ::String,
+                                   ?aws_region: ::String,
+                                   ?account_id: ::String,
+                                   ?resource_type: ::String,
+                                   ?resource_arn: ::String,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _GetNetworkResourcesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNetworkResourcesResponseSuccess
+
+      interface _GetNetworkRoutesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNetworkRoutesResponse]
+        def route_table_arn: () -> ::String
+        def core_network_segment_edge: () -> Types::CoreNetworkSegmentEdgeIdentifier
+        def route_table_type: () -> ("TRANSIT_GATEWAY_ROUTE_TABLE" | "CORE_NETWORK_SEGMENT")
+        def route_table_timestamp: () -> ::Time
+        def network_routes: () -> ::Array[Types::NetworkRoute]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_network_routes-instance_method
+      def get_network_routes: (
+                                global_network_id: ::String,
+                                route_table_identifier: {
+                                  transit_gateway_route_table_arn: ::String?,
+                                  core_network_segment_edge: {
+                                    core_network_id: ::String?,
+                                    segment_name: ::String?,
+                                    edge_location: ::String?
+                                  }?
+                                },
+                                ?exact_cidr_matches: Array[::String],
+                                ?longest_prefix_matches: Array[::String],
+                                ?subnet_of_matches: Array[::String],
+                                ?supernet_of_matches: Array[::String],
+                                ?prefix_list_ids: Array[::String],
+                                ?states: Array[("ACTIVE" | "BLACKHOLE")],
+                                ?types: Array[("PROPAGATED" | "STATIC")],
+                                ?destination_filters: Hash[::String, Array[::String]]
+                              ) -> _GetNetworkRoutesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNetworkRoutesResponseSuccess
+
+      interface _GetNetworkTelemetryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNetworkTelemetryResponse]
+        def network_telemetry: () -> ::Array[Types::NetworkTelemetry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_network_telemetry-instance_method
+      def get_network_telemetry: (
+                                   global_network_id: ::String,
+                                   ?core_network_id: ::String,
+                                   ?registered_gateway_arn: ::String,
+                                   ?aws_region: ::String,
+                                   ?account_id: ::String,
+                                   ?resource_type: ::String,
+                                   ?resource_arn: ::String,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _GetNetworkTelemetryResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNetworkTelemetryResponseSuccess
+
+      interface _GetResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcePolicyResponse]
+        def policy_document: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_resource_policy-instance_method
+      def get_resource_policy: (
+                                 resource_arn: ::String
+                               ) -> _GetResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePolicyResponseSuccess
+
+      interface _GetRouteAnalysisResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRouteAnalysisResponse]
+        def route_analysis: () -> Types::RouteAnalysis
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_route_analysis-instance_method
+      def get_route_analysis: (
+                                global_network_id: ::String,
+                                route_analysis_id: ::String
+                              ) -> _GetRouteAnalysisResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRouteAnalysisResponseSuccess
+
+      interface _GetSiteToSiteVpnAttachmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSiteToSiteVpnAttachmentResponse]
+        def site_to_site_vpn_attachment: () -> Types::SiteToSiteVpnAttachment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_site_to_site_vpn_attachment-instance_method
+      def get_site_to_site_vpn_attachment: (
+                                             attachment_id: ::String
+                                           ) -> _GetSiteToSiteVpnAttachmentResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSiteToSiteVpnAttachmentResponseSuccess
+
+      interface _GetSitesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSitesResponse]
+        def sites: () -> ::Array[Types::Site]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_sites-instance_method
+      def get_sites: (
+                       global_network_id: ::String,
+                       ?site_ids: Array[::String],
+                       ?max_results: ::Integer,
+                       ?next_token: ::String
+                     ) -> _GetSitesResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSitesResponseSuccess
+
+      interface _GetTransitGatewayConnectPeerAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTransitGatewayConnectPeerAssociationsResponse]
+        def transit_gateway_connect_peer_associations: () -> ::Array[Types::TransitGatewayConnectPeerAssociation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_transit_gateway_connect_peer_associations-instance_method
+      def get_transit_gateway_connect_peer_associations: (
+                                                           global_network_id: ::String,
+                                                           ?transit_gateway_connect_peer_arns: Array[::String],
+                                                           ?max_results: ::Integer,
+                                                           ?next_token: ::String
+                                                         ) -> _GetTransitGatewayConnectPeerAssociationsResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTransitGatewayConnectPeerAssociationsResponseSuccess
+
+      interface _GetTransitGatewayPeeringResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTransitGatewayPeeringResponse]
+        def transit_gateway_peering: () -> Types::TransitGatewayPeering
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_transit_gateway_peering-instance_method
+      def get_transit_gateway_peering: (
+                                         peering_id: ::String
+                                       ) -> _GetTransitGatewayPeeringResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTransitGatewayPeeringResponseSuccess
+
+      interface _GetTransitGatewayRegistrationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTransitGatewayRegistrationsResponse]
+        def transit_gateway_registrations: () -> ::Array[Types::TransitGatewayRegistration]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_transit_gateway_registrations-instance_method
+      def get_transit_gateway_registrations: (
+                                               global_network_id: ::String,
+                                               ?transit_gateway_arns: Array[::String],
+                                               ?max_results: ::Integer,
+                                               ?next_token: ::String
+                                             ) -> _GetTransitGatewayRegistrationsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTransitGatewayRegistrationsResponseSuccess
+
+      interface _GetTransitGatewayRouteTableAttachmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTransitGatewayRouteTableAttachmentResponse]
+        def transit_gateway_route_table_attachment: () -> Types::TransitGatewayRouteTableAttachment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_transit_gateway_route_table_attachment-instance_method
+      def get_transit_gateway_route_table_attachment: (
+                                                        attachment_id: ::String
+                                                      ) -> _GetTransitGatewayRouteTableAttachmentResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTransitGatewayRouteTableAttachmentResponseSuccess
+
+      interface _GetVpcAttachmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVpcAttachmentResponse]
+        def vpc_attachment: () -> Types::VpcAttachment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_vpc_attachment-instance_method
+      def get_vpc_attachment: (
+                                attachment_id: ::String
+                              ) -> _GetVpcAttachmentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVpcAttachmentResponseSuccess
+
+      interface _ListAttachmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAttachmentsResponse]
+        def attachments: () -> ::Array[Types::Attachment]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#list_attachments-instance_method
+      def list_attachments: (
+                              ?core_network_id: ::String,
+                              ?attachment_type: ("CONNECT" | "SITE_TO_SITE_VPN" | "VPC" | "TRANSIT_GATEWAY_ROUTE_TABLE"),
+                              ?edge_location: ::String,
+                              ?state: ("REJECTED" | "PENDING_ATTACHMENT_ACCEPTANCE" | "CREATING" | "FAILED" | "AVAILABLE" | "UPDATING" | "PENDING_NETWORK_UPDATE" | "PENDING_TAG_ACCEPTANCE" | "DELETING"),
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _ListAttachmentsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAttachmentsResponseSuccess
+
+      interface _ListConnectPeersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConnectPeersResponse]
+        def connect_peers: () -> ::Array[Types::ConnectPeerSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#list_connect_peers-instance_method
+      def list_connect_peers: (
+                                ?core_network_id: ::String,
+                                ?connect_attachment_id: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListConnectPeersResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConnectPeersResponseSuccess
+
+      interface _ListCoreNetworkPolicyVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCoreNetworkPolicyVersionsResponse]
+        def core_network_policy_versions: () -> ::Array[Types::CoreNetworkPolicyVersion]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#list_core_network_policy_versions-instance_method
+      def list_core_network_policy_versions: (
+                                               core_network_id: ::String,
+                                               ?max_results: ::Integer,
+                                               ?next_token: ::String
+                                             ) -> _ListCoreNetworkPolicyVersionsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCoreNetworkPolicyVersionsResponseSuccess
+
+      interface _ListCoreNetworksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCoreNetworksResponse]
+        def core_networks: () -> ::Array[Types::CoreNetworkSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#list_core_networks-instance_method
+      def list_core_networks: (
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListCoreNetworksResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCoreNetworksResponseSuccess
+
+      interface _ListOrganizationServiceAccessStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOrganizationServiceAccessStatusResponse]
+        def organization_status: () -> Types::OrganizationStatus
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#list_organization_service_access_status-instance_method
+      def list_organization_service_access_status: (
+                                                     ?max_results: ::Integer,
+                                                     ?next_token: ::String
+                                                   ) -> _ListOrganizationServiceAccessStatusResponseSuccess
+                                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOrganizationServiceAccessStatusResponseSuccess
+
+      interface _ListPeeringsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPeeringsResponse]
+        def peerings: () -> ::Array[Types::Peering]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#list_peerings-instance_method
+      def list_peerings: (
+                           ?core_network_id: ::String,
+                           ?peering_type: ("TRANSIT_GATEWAY"),
+                           ?edge_location: ::String,
+                           ?state: ("CREATING" | "FAILED" | "AVAILABLE" | "DELETING"),
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListPeeringsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPeeringsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tag_list: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutCoreNetworkPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutCoreNetworkPolicyResponse]
+        def core_network_policy: () -> Types::CoreNetworkPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#put_core_network_policy-instance_method
+      def put_core_network_policy: (
+                                     core_network_id: ::String,
+                                     policy_document: ::String,
+                                     ?description: ::String,
+                                     ?latest_version_id: ::Integer,
+                                     ?client_token: ::String
+                                   ) -> _PutCoreNetworkPolicyResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutCoreNetworkPolicyResponseSuccess
+
+      interface _PutResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#put_resource_policy-instance_method
+      def put_resource_policy: (
+                                 policy_document: ::String,
+                                 resource_arn: ::String
+                               ) -> _PutResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
+
+      interface _RegisterTransitGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterTransitGatewayResponse]
+        def transit_gateway_registration: () -> Types::TransitGatewayRegistration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#register_transit_gateway-instance_method
+      def register_transit_gateway: (
+                                      global_network_id: ::String,
+                                      transit_gateway_arn: ::String
+                                    ) -> _RegisterTransitGatewayResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterTransitGatewayResponseSuccess
+
+      interface _RejectAttachmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RejectAttachmentResponse]
+        def attachment: () -> Types::Attachment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#reject_attachment-instance_method
+      def reject_attachment: (
+                               attachment_id: ::String
+                             ) -> _RejectAttachmentResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectAttachmentResponseSuccess
+
+      interface _RestoreCoreNetworkPolicyVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestoreCoreNetworkPolicyVersionResponse]
+        def core_network_policy: () -> Types::CoreNetworkPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#restore_core_network_policy_version-instance_method
+      def restore_core_network_policy_version: (
+                                                 core_network_id: ::String,
+                                                 policy_version_id: ::Integer
+                                               ) -> _RestoreCoreNetworkPolicyVersionResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreCoreNetworkPolicyVersionResponseSuccess
+
+      interface _StartOrganizationServiceAccessUpdateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartOrganizationServiceAccessUpdateResponse]
+        def organization_status: () -> Types::OrganizationStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#start_organization_service_access_update-instance_method
+      def start_organization_service_access_update: (
+                                                      action: ::String
+                                                    ) -> _StartOrganizationServiceAccessUpdateResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartOrganizationServiceAccessUpdateResponseSuccess
+
+      interface _StartRouteAnalysisResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartRouteAnalysisResponse]
+        def route_analysis: () -> Types::RouteAnalysis
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#start_route_analysis-instance_method
+      def start_route_analysis: (
+                                  global_network_id: ::String,
+                                  source: {
+                                    transit_gateway_attachment_arn: ::String?,
+                                    ip_address: ::String?
+                                  },
+                                  destination: {
+                                    transit_gateway_attachment_arn: ::String?,
+                                    ip_address: ::String?
+                                  },
+                                  ?include_return_path: bool,
+                                  ?use_middleboxes: bool
+                                ) -> _StartRouteAnalysisResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartRouteAnalysisResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String?,
+                              value: ::String?
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConnectionResponse]
+        def connection: () -> Types::Connection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#update_connection-instance_method
+      def update_connection: (
+                               global_network_id: ::String,
+                               connection_id: ::String,
+                               ?link_id: ::String,
+                               ?connected_link_id: ::String,
+                               ?description: ::String
+                             ) -> _UpdateConnectionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectionResponseSuccess
+
+      interface _UpdateCoreNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCoreNetworkResponse]
+        def core_network: () -> Types::CoreNetwork
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#update_core_network-instance_method
+      def update_core_network: (
+                                 core_network_id: ::String,
+                                 ?description: ::String
+                               ) -> _UpdateCoreNetworkResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCoreNetworkResponseSuccess
+
+      interface _UpdateDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDeviceResponse]
+        def device: () -> Types::Device
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#update_device-instance_method
+      def update_device: (
+                           global_network_id: ::String,
+                           device_id: ::String,
+                           ?aws_location: {
+                             zone: ::String?,
+                             subnet_arn: ::String?
+                           },
+                           ?description: ::String,
+                           ?type: ::String,
+                           ?vendor: ::String,
+                           ?model: ::String,
+                           ?serial_number: ::String,
+                           ?location: {
+                             address: ::String?,
+                             latitude: ::String?,
+                             longitude: ::String?
+                           },
+                           ?site_id: ::String
+                         ) -> _UpdateDeviceResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDeviceResponseSuccess
+
+      interface _UpdateGlobalNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGlobalNetworkResponse]
+        def global_network: () -> Types::GlobalNetwork
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#update_global_network-instance_method
+      def update_global_network: (
+                                   global_network_id: ::String,
+                                   ?description: ::String
+                                 ) -> _UpdateGlobalNetworkResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGlobalNetworkResponseSuccess
+
+      interface _UpdateLinkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLinkResponse]
+        def link: () -> Types::Link
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#update_link-instance_method
+      def update_link: (
+                         global_network_id: ::String,
+                         link_id: ::String,
+                         ?description: ::String,
+                         ?type: ::String,
+                         ?bandwidth: {
+                           upload_speed: ::Integer?,
+                           download_speed: ::Integer?
+                         },
+                         ?provider: ::String
+                       ) -> _UpdateLinkResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLinkResponseSuccess
+
+      interface _UpdateNetworkResourceMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNetworkResourceMetadataResponse]
+        def resource_arn: () -> ::String
+        def metadata: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#update_network_resource_metadata-instance_method
+      def update_network_resource_metadata: (
+                                              global_network_id: ::String,
+                                              resource_arn: ::String,
+                                              metadata: Hash[::String, ::String]
+                                            ) -> _UpdateNetworkResourceMetadataResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNetworkResourceMetadataResponseSuccess
+
+      interface _UpdateSiteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSiteResponse]
+        def site: () -> Types::Site
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#update_site-instance_method
+      def update_site: (
+                         global_network_id: ::String,
+                         site_id: ::String,
+                         ?description: ::String,
+                         ?location: {
+                           address: ::String?,
+                           latitude: ::String?,
+                           longitude: ::String?
+                         }
+                       ) -> _UpdateSiteResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSiteResponseSuccess
+
+      interface _UpdateVpcAttachmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateVpcAttachmentResponse]
+        def vpc_attachment: () -> Types::VpcAttachment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#update_vpc_attachment-instance_method
+      def update_vpc_attachment: (
+                                   attachment_id: ::String,
+                                   ?add_subnet_arns: Array[::String],
+                                   ?remove_subnet_arns: Array[::String],
+                                   ?options: {
+                                     ipv_6_support: bool?,
+                                     appliance_mode_support: bool?
+                                   }
+                                 ) -> _UpdateVpcAttachmentResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVpcAttachmentResponseSuccess
+    end
+  end
+end
+

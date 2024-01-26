@@ -1,0 +1,49 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DocDB
+    module Waiters
+
+      class DBInstanceAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?db_instance_identifier: ::String,
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?max_records: ::Integer,
+                    ?marker: ::String
+                  ) -> Client::_DescribeDBInstancesResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeDBInstancesResponseSuccess
+      end
+
+      class DBInstanceDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?db_instance_identifier: ::String,
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?max_records: ::Integer,
+                    ?marker: ::String
+                  ) -> Client::_DescribeDBInstancesResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeDBInstancesResponseSuccess
+      end
+    end
+  end
+end

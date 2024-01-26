@@ -1,0 +1,640 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::VoiceID
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateFraudsterRequest
+      attr_accessor domain_id: ::String
+      attr_accessor fraudster_id: ::String
+      attr_accessor watchlist_id: ::String
+      SENSITIVE: [:fraudster_id]
+    end
+
+    class AssociateFraudsterResponse
+      attr_accessor fraudster: Types::Fraudster
+      SENSITIVE: []
+    end
+
+    class AuthenticationConfiguration
+      attr_accessor acceptance_threshold: ::Integer
+      SENSITIVE: []
+    end
+
+    class AuthenticationResult
+      attr_accessor audio_aggregation_ended_at: ::Time
+      attr_accessor audio_aggregation_started_at: ::Time
+      attr_accessor authentication_result_id: ::String
+      attr_accessor configuration: Types::AuthenticationConfiguration
+      attr_accessor customer_speaker_id: ::String
+      attr_accessor decision: ("ACCEPT" | "REJECT" | "NOT_ENOUGH_SPEECH" | "SPEAKER_NOT_ENROLLED" | "SPEAKER_OPTED_OUT" | "SPEAKER_ID_NOT_PROVIDED" | "SPEAKER_EXPIRED")
+      attr_accessor generated_speaker_id: ::String
+      attr_accessor score: ::Integer
+      SENSITIVE: [:customer_speaker_id]
+    end
+
+    class ConflictException
+      attr_accessor conflict_type: ("ANOTHER_ACTIVE_STREAM" | "DOMAIN_NOT_ACTIVE" | "CANNOT_CHANGE_SPEAKER_AFTER_ENROLLMENT" | "ENROLLMENT_ALREADY_EXISTS" | "SPEAKER_NOT_SET" | "SPEAKER_OPTED_OUT" | "CONCURRENT_CHANGES" | "DOMAIN_LOCKED_FROM_ENCRYPTION_UPDATES" | "CANNOT_DELETE_NON_EMPTY_WATCHLIST" | "FRAUDSTER_MUST_BELONG_TO_AT_LEAST_ONE_WATCHLIST")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDomainRequest
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:description, :name]
+    end
+
+    class CreateDomainResponse
+      attr_accessor domain: Types::Domain
+      SENSITIVE: []
+    end
+
+    class CreateWatchlistRequest
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: [:description, :name]
+    end
+
+    class CreateWatchlistResponse
+      attr_accessor watchlist: Types::Watchlist
+      SENSITIVE: []
+    end
+
+    class DeleteDomainRequest
+      attr_accessor domain_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFraudsterRequest
+      attr_accessor domain_id: ::String
+      attr_accessor fraudster_id: ::String
+      SENSITIVE: [:fraudster_id]
+    end
+
+    class DeleteSpeakerRequest
+      attr_accessor domain_id: ::String
+      attr_accessor speaker_id: ::String
+      SENSITIVE: [:speaker_id]
+    end
+
+    class DeleteWatchlistRequest
+      attr_accessor domain_id: ::String
+      attr_accessor watchlist_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDomainRequest
+      attr_accessor domain_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDomainResponse
+      attr_accessor domain: Types::Domain
+      SENSITIVE: []
+    end
+
+    class DescribeFraudsterRegistrationJobRequest
+      attr_accessor domain_id: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFraudsterRegistrationJobResponse
+      attr_accessor job: Types::FraudsterRegistrationJob
+      SENSITIVE: []
+    end
+
+    class DescribeFraudsterRequest
+      attr_accessor domain_id: ::String
+      attr_accessor fraudster_id: ::String
+      SENSITIVE: [:fraudster_id]
+    end
+
+    class DescribeFraudsterResponse
+      attr_accessor fraudster: Types::Fraudster
+      SENSITIVE: []
+    end
+
+    class DescribeSpeakerEnrollmentJobRequest
+      attr_accessor domain_id: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSpeakerEnrollmentJobResponse
+      attr_accessor job: Types::SpeakerEnrollmentJob
+      SENSITIVE: []
+    end
+
+    class DescribeSpeakerRequest
+      attr_accessor domain_id: ::String
+      attr_accessor speaker_id: ::String
+      SENSITIVE: [:speaker_id]
+    end
+
+    class DescribeSpeakerResponse
+      attr_accessor speaker: Types::Speaker
+      SENSITIVE: []
+    end
+
+    class DescribeWatchlistRequest
+      attr_accessor domain_id: ::String
+      attr_accessor watchlist_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWatchlistResponse
+      attr_accessor watchlist: Types::Watchlist
+      SENSITIVE: []
+    end
+
+    class DisassociateFraudsterRequest
+      attr_accessor domain_id: ::String
+      attr_accessor fraudster_id: ::String
+      attr_accessor watchlist_id: ::String
+      SENSITIVE: [:fraudster_id]
+    end
+
+    class DisassociateFraudsterResponse
+      attr_accessor fraudster: Types::Fraudster
+      SENSITIVE: []
+    end
+
+    class Domain
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor domain_status: ("ACTIVE" | "PENDING" | "SUSPENDED")
+      attr_accessor name: ::String
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
+      attr_accessor server_side_encryption_update_details: Types::ServerSideEncryptionUpdateDetails
+      attr_accessor updated_at: ::Time
+      attr_accessor watchlist_details: Types::WatchlistDetails
+      SENSITIVE: [:description, :name]
+    end
+
+    class DomainSummary
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor domain_status: ("ACTIVE" | "PENDING" | "SUSPENDED")
+      attr_accessor name: ::String
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
+      attr_accessor server_side_encryption_update_details: Types::ServerSideEncryptionUpdateDetails
+      attr_accessor updated_at: ::Time
+      attr_accessor watchlist_details: Types::WatchlistDetails
+      SENSITIVE: [:description, :name]
+    end
+
+    class EnrollmentConfig
+      attr_accessor existing_enrollment_action: ("SKIP" | "OVERWRITE")
+      attr_accessor fraud_detection_config: Types::EnrollmentJobFraudDetectionConfig
+      SENSITIVE: []
+    end
+
+    class EnrollmentJobFraudDetectionConfig
+      attr_accessor fraud_detection_action: ("IGNORE" | "FAIL")
+      attr_accessor risk_threshold: ::Integer
+      attr_accessor watchlist_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class EvaluateSessionRequest
+      attr_accessor domain_id: ::String
+      attr_accessor session_name_or_id: ::String
+      SENSITIVE: []
+    end
+
+    class EvaluateSessionResponse
+      attr_accessor authentication_result: Types::AuthenticationResult
+      attr_accessor domain_id: ::String
+      attr_accessor fraud_detection_result: Types::FraudDetectionResult
+      attr_accessor session_id: ::String
+      attr_accessor session_name: ::String
+      attr_accessor streaming_status: ("PENDING_CONFIGURATION" | "ONGOING" | "ENDED")
+      SENSITIVE: []
+    end
+
+    class FailureDetails
+      attr_accessor message: ::String
+      attr_accessor status_code: ::Integer
+      SENSITIVE: []
+    end
+
+    class FraudDetectionConfiguration
+      attr_accessor risk_threshold: ::Integer
+      attr_accessor watchlist_id: ::String
+      SENSITIVE: []
+    end
+
+    class FraudDetectionResult
+      attr_accessor audio_aggregation_ended_at: ::Time
+      attr_accessor audio_aggregation_started_at: ::Time
+      attr_accessor configuration: Types::FraudDetectionConfiguration
+      attr_accessor decision: ("HIGH_RISK" | "LOW_RISK" | "NOT_ENOUGH_SPEECH")
+      attr_accessor fraud_detection_result_id: ::String
+      attr_accessor reasons: ::Array[("KNOWN_FRAUDSTER" | "VOICE_SPOOFING")]
+      attr_accessor risk_details: Types::FraudRiskDetails
+      SENSITIVE: []
+    end
+
+    class FraudRiskDetails
+      attr_accessor known_fraudster_risk: Types::KnownFraudsterRisk
+      attr_accessor voice_spoofing_risk: Types::VoiceSpoofingRisk
+      SENSITIVE: []
+    end
+
+    class Fraudster
+      attr_accessor created_at: ::Time
+      attr_accessor domain_id: ::String
+      attr_accessor generated_fraudster_id: ::String
+      attr_accessor watchlist_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class FraudsterRegistrationJob
+      attr_accessor created_at: ::Time
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor ended_at: ::Time
+      attr_accessor failure_details: Types::FailureDetails
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor job_id: ::String
+      attr_accessor job_name: ::String
+      attr_accessor job_progress: Types::JobProgress
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "FAILED")
+      attr_accessor output_data_config: Types::OutputDataConfig
+      attr_accessor registration_config: Types::RegistrationConfig
+      SENSITIVE: [:job_name]
+    end
+
+    class FraudsterRegistrationJobSummary
+      attr_accessor created_at: ::Time
+      attr_accessor domain_id: ::String
+      attr_accessor ended_at: ::Time
+      attr_accessor failure_details: Types::FailureDetails
+      attr_accessor job_id: ::String
+      attr_accessor job_name: ::String
+      attr_accessor job_progress: Types::JobProgress
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "FAILED")
+      SENSITIVE: [:job_name]
+    end
+
+    class FraudsterSummary
+      attr_accessor created_at: ::Time
+      attr_accessor domain_id: ::String
+      attr_accessor generated_fraudster_id: ::String
+      attr_accessor watchlist_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class InputDataConfig
+      attr_accessor s3_uri: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JobProgress
+      attr_accessor percent_complete: ::Integer
+      SENSITIVE: []
+    end
+
+    class KnownFraudsterRisk
+      attr_accessor generated_fraudster_id: ::String
+      attr_accessor risk_score: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDomainsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDomainsResponse
+      attr_accessor domain_summaries: ::Array[Types::DomainSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFraudsterRegistrationJobsRequest
+      attr_accessor domain_id: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "FAILED")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFraudsterRegistrationJobsResponse
+      attr_accessor job_summaries: ::Array[Types::FraudsterRegistrationJobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFraudstersRequest
+      attr_accessor domain_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor watchlist_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListFraudstersResponse
+      attr_accessor fraudster_summaries: ::Array[Types::FraudsterSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSpeakerEnrollmentJobsRequest
+      attr_accessor domain_id: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "FAILED")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSpeakerEnrollmentJobsResponse
+      attr_accessor job_summaries: ::Array[Types::SpeakerEnrollmentJobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSpeakersRequest
+      attr_accessor domain_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSpeakersResponse
+      attr_accessor next_token: ::String
+      attr_accessor speaker_summaries: ::Array[Types::SpeakerSummary]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListWatchlistsRequest
+      attr_accessor domain_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWatchlistsResponse
+      attr_accessor next_token: ::String
+      attr_accessor watchlist_summaries: ::Array[Types::WatchlistSummary]
+      SENSITIVE: []
+    end
+
+    class OptOutSpeakerRequest
+      attr_accessor domain_id: ::String
+      attr_accessor speaker_id: ::String
+      SENSITIVE: [:speaker_id]
+    end
+
+    class OptOutSpeakerResponse
+      attr_accessor speaker: Types::Speaker
+      SENSITIVE: []
+    end
+
+    class OutputDataConfig
+      attr_accessor kms_key_id: ::String
+      attr_accessor s3_uri: ::String
+      SENSITIVE: []
+    end
+
+    class RegistrationConfig
+      attr_accessor duplicate_registration_action: ("SKIP" | "REGISTER_AS_NEW")
+      attr_accessor fraudster_similarity_threshold: ::Integer
+      attr_accessor watchlist_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_type: ("BATCH_JOB" | "COMPLIANCE_CONSENT" | "DOMAIN" | "FRAUDSTER" | "SESSION" | "SPEAKER" | "WATCHLIST")
+      SENSITIVE: []
+    end
+
+    class ServerSideEncryptionConfiguration
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class ServerSideEncryptionUpdateDetails
+      attr_accessor message: ::String
+      attr_accessor old_kms_key_id: ::String
+      attr_accessor update_status: ("IN_PROGRESS" | "COMPLETED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Speaker
+      attr_accessor created_at: ::Time
+      attr_accessor customer_speaker_id: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor generated_speaker_id: ::String
+      attr_accessor last_accessed_at: ::Time
+      attr_accessor status: ("ENROLLED" | "EXPIRED" | "OPTED_OUT" | "PENDING")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:customer_speaker_id]
+    end
+
+    class SpeakerEnrollmentJob
+      attr_accessor created_at: ::Time
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor ended_at: ::Time
+      attr_accessor enrollment_config: Types::EnrollmentConfig
+      attr_accessor failure_details: Types::FailureDetails
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor job_id: ::String
+      attr_accessor job_name: ::String
+      attr_accessor job_progress: Types::JobProgress
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "FAILED")
+      attr_accessor output_data_config: Types::OutputDataConfig
+      SENSITIVE: [:job_name]
+    end
+
+    class SpeakerEnrollmentJobSummary
+      attr_accessor created_at: ::Time
+      attr_accessor domain_id: ::String
+      attr_accessor ended_at: ::Time
+      attr_accessor failure_details: Types::FailureDetails
+      attr_accessor job_id: ::String
+      attr_accessor job_name: ::String
+      attr_accessor job_progress: Types::JobProgress
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "FAILED")
+      SENSITIVE: [:job_name]
+    end
+
+    class SpeakerSummary
+      attr_accessor created_at: ::Time
+      attr_accessor customer_speaker_id: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor generated_speaker_id: ::String
+      attr_accessor last_accessed_at: ::Time
+      attr_accessor status: ("ENROLLED" | "EXPIRED" | "OPTED_OUT" | "PENDING")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:customer_speaker_id]
+    end
+
+    class StartFraudsterRegistrationJobRequest
+      attr_accessor client_token: ::String
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor job_name: ::String
+      attr_accessor output_data_config: Types::OutputDataConfig
+      attr_accessor registration_config: Types::RegistrationConfig
+      SENSITIVE: [:job_name]
+    end
+
+    class StartFraudsterRegistrationJobResponse
+      attr_accessor job: Types::FraudsterRegistrationJob
+      SENSITIVE: []
+    end
+
+    class StartSpeakerEnrollmentJobRequest
+      attr_accessor client_token: ::String
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor enrollment_config: Types::EnrollmentConfig
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor job_name: ::String
+      attr_accessor output_data_config: Types::OutputDataConfig
+      SENSITIVE: [:job_name]
+    end
+
+    class StartSpeakerEnrollmentJobResponse
+      attr_accessor job: Types::SpeakerEnrollmentJob
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: [:key, :value]
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDomainRequest
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor name: ::String
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
+      SENSITIVE: [:description, :name]
+    end
+
+    class UpdateDomainResponse
+      attr_accessor domain: Types::Domain
+      SENSITIVE: []
+    end
+
+    class UpdateWatchlistRequest
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor name: ::String
+      attr_accessor watchlist_id: ::String
+      SENSITIVE: [:description, :name]
+    end
+
+    class UpdateWatchlistResponse
+      attr_accessor watchlist: Types::Watchlist
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VoiceSpoofingRisk
+      attr_accessor risk_score: ::Integer
+      SENSITIVE: []
+    end
+
+    class Watchlist
+      attr_accessor created_at: ::Time
+      attr_accessor default_watchlist: bool
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor name: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor watchlist_id: ::String
+      SENSITIVE: [:description, :name]
+    end
+
+    class WatchlistDetails
+      attr_accessor default_watchlist_id: ::String
+      SENSITIVE: []
+    end
+
+    class WatchlistSummary
+      attr_accessor created_at: ::Time
+      attr_accessor default_watchlist: bool
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor name: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor watchlist_id: ::String
+      SENSITIVE: [:description, :name]
+    end
+  end
+end

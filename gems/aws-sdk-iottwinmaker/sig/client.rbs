@@ -1,0 +1,1283 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IoTTwinMaker
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchPutPropertyValuesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchPutPropertyValuesResponse]
+        def error_entries: () -> ::Array[Types::BatchPutPropertyErrorEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#batch_put_property_values-instance_method
+      def batch_put_property_values: (
+                                       workspace_id: ::String,
+                                       entries: Array[
+                                         {
+                                           entity_property_reference: {
+                                             component_name: ::String?,
+                                             component_path: ::String?,
+                                             external_id_property: Hash[::String, ::String]?,
+                                             entity_id: ::String?,
+                                             property_name: ::String
+                                           },
+                                           property_values: Array[
+                                             {
+                                               timestamp: ::Time?,
+                                               value: {
+                                                 boolean_value: bool?,
+                                                 double_value: ::Float?,
+                                                 integer_value: ::Integer?,
+                                                 long_value: ::Integer?,
+                                                 string_value: ::String?,
+                                                 list_value: Array[
+                                                   untyped,
+                                                 ]?,
+                                                 map_value: Hash[::String, untyped]?,
+                                                 relationship_value: {
+                                                   target_entity_id: ::String?,
+                                                   target_component_name: ::String?
+                                                 }?,
+                                                 expression: ::String?
+                                               },
+                                               time: ::String?
+                                             },
+                                           ]?
+                                         },
+                                       ]
+                                     ) -> _BatchPutPropertyValuesResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchPutPropertyValuesResponseSuccess
+
+      interface _CancelMetadataTransferJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelMetadataTransferJobResponse]
+        def metadata_transfer_job_id: () -> ::String
+        def arn: () -> ::String
+        def update_date_time: () -> ::Time
+        def status: () -> Types::MetadataTransferJobStatus
+        def progress: () -> Types::MetadataTransferJobProgress
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#cancel_metadata_transfer_job-instance_method
+      def cancel_metadata_transfer_job: (
+                                          metadata_transfer_job_id: ::String
+                                        ) -> _CancelMetadataTransferJobResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelMetadataTransferJobResponseSuccess
+
+      interface _CreateComponentTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateComponentTypeResponse]
+        def arn: () -> ::String
+        def creation_date_time: () -> ::Time
+        def state: () -> ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "ERROR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#create_component_type-instance_method
+      def create_component_type: (
+                                   workspace_id: ::String,
+                                   ?is_singleton: bool,
+                                   component_type_id: ::String,
+                                   ?description: ::String,
+                                   ?property_definitions: Hash[::String, {
+                                       data_type: {
+                                         type: ("RELATIONSHIP" | "STRING" | "LONG" | "BOOLEAN" | "INTEGER" | "DOUBLE" | "LIST" | "MAP"),
+                                         nested_type: untyped?,
+                                         allowed_values: Array[
+                                           {
+                                             boolean_value: bool?,
+                                             double_value: ::Float?,
+                                             integer_value: ::Integer?,
+                                             long_value: ::Integer?,
+                                             string_value: ::String?,
+                                             list_value: untyped?,
+                                             map_value: Hash[::String, untyped]?,
+                                             relationship_value: {
+                                               target_entity_id: ::String?,
+                                               target_component_name: ::String?
+                                             }?,
+                                             expression: ::String?
+                                           },
+                                         ]?,
+                                         unit_of_measure: ::String?,
+                                         relationship: {
+                                           target_component_type_id: ::String?,
+                                           relationship_type: ::String?
+                                         }?
+                                       }?,
+                                       is_required_in_entity: bool?,
+                                       is_external_id: bool?,
+                                       is_stored_externally: bool?,
+                                       is_time_series: bool?,
+                                       default_value: {
+                                         boolean_value: bool?,
+                                         double_value: ::Float?,
+                                         integer_value: ::Integer?,
+                                         long_value: ::Integer?,
+                                         string_value: ::String?,
+                                         list_value: Array[
+                                           untyped,
+                                         ]?,
+                                         map_value: Hash[::String, untyped]?,
+                                         relationship_value: {
+                                           target_entity_id: ::String?,
+                                           target_component_name: ::String?
+                                         }?,
+                                         expression: ::String?
+                                       }?,
+                                       configuration: Hash[::String, ::String]?,
+                                       display_name: ::String?
+                                     }],
+                                   ?extends_from: Array[::String],
+                                   ?functions: Hash[::String, {
+                                       required_properties: Array[::String]?,
+                                       scope: ("ENTITY" | "WORKSPACE")?,
+                                       implemented_by: {
+                                         lambda: {
+                                           arn: ::String
+                                         }?,
+                                         is_native: bool?
+                                       }?
+                                     }],
+                                   ?tags: Hash[::String, ::String],
+                                   ?property_groups: Hash[::String, {
+                                       group_type: ("TABULAR")?,
+                                       property_names: Array[::String]?
+                                     }],
+                                   ?component_type_name: ::String,
+                                   ?composite_component_types: Hash[::String, {
+                                       component_type_id: ::String?
+                                     }]
+                                 ) -> _CreateComponentTypeResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateComponentTypeResponseSuccess
+
+      interface _CreateEntityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEntityResponse]
+        def entity_id: () -> ::String
+        def arn: () -> ::String
+        def creation_date_time: () -> ::Time
+        def state: () -> ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "ERROR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#create_entity-instance_method
+      def create_entity: (
+                           workspace_id: ::String,
+                           ?entity_id: ::String,
+                           entity_name: ::String,
+                           ?description: ::String,
+                           ?components: Hash[::String, {
+                               description: ::String?,
+                               component_type_id: ::String?,
+                               properties: Hash[::String, {
+                                   definition: {
+                                     data_type: {
+                                       type: ("RELATIONSHIP" | "STRING" | "LONG" | "BOOLEAN" | "INTEGER" | "DOUBLE" | "LIST" | "MAP"),
+                                       nested_type: untyped?,
+                                       allowed_values: Array[
+                                         {
+                                           boolean_value: bool?,
+                                           double_value: ::Float?,
+                                           integer_value: ::Integer?,
+                                           long_value: ::Integer?,
+                                           string_value: ::String?,
+                                           list_value: untyped?,
+                                           map_value: Hash[::String, untyped]?,
+                                           relationship_value: {
+                                             target_entity_id: ::String?,
+                                             target_component_name: ::String?
+                                           }?,
+                                           expression: ::String?
+                                         },
+                                       ]?,
+                                       unit_of_measure: ::String?,
+                                       relationship: {
+                                         target_component_type_id: ::String?,
+                                         relationship_type: ::String?
+                                       }?
+                                     }?,
+                                     is_required_in_entity: bool?,
+                                     is_external_id: bool?,
+                                     is_stored_externally: bool?,
+                                     is_time_series: bool?,
+                                     default_value: {
+                                       boolean_value: bool?,
+                                       double_value: ::Float?,
+                                       integer_value: ::Integer?,
+                                       long_value: ::Integer?,
+                                       string_value: ::String?,
+                                       list_value: Array[
+                                         untyped,
+                                       ]?,
+                                       map_value: Hash[::String, untyped]?,
+                                       relationship_value: {
+                                         target_entity_id: ::String?,
+                                         target_component_name: ::String?
+                                       }?,
+                                       expression: ::String?
+                                     }?,
+                                     configuration: Hash[::String, ::String]?,
+                                     display_name: ::String?
+                                   }?,
+                                   value: {
+                                     boolean_value: bool?,
+                                     double_value: ::Float?,
+                                     integer_value: ::Integer?,
+                                     long_value: ::Integer?,
+                                     string_value: ::String?,
+                                     list_value: Array[
+                                       untyped,
+                                     ]?,
+                                     map_value: Hash[::String, untyped]?,
+                                     relationship_value: {
+                                       target_entity_id: ::String?,
+                                       target_component_name: ::String?
+                                     }?,
+                                     expression: ::String?
+                                   }?,
+                                   update_type: ("UPDATE" | "DELETE" | "CREATE")?
+                                 }]?,
+                               property_groups: Hash[::String, {
+                                   group_type: ("TABULAR")?,
+                                   property_names: Array[::String]?,
+                                   update_type: ("UPDATE" | "DELETE" | "CREATE")?
+                                 }]?
+                             }],
+                           ?composite_components: Hash[::String, {
+                               description: ::String?,
+                               properties: Hash[::String, {
+                                   definition: {
+                                     data_type: {
+                                       type: ("RELATIONSHIP" | "STRING" | "LONG" | "BOOLEAN" | "INTEGER" | "DOUBLE" | "LIST" | "MAP"),
+                                       nested_type: untyped?,
+                                       allowed_values: Array[
+                                         {
+                                           boolean_value: bool?,
+                                           double_value: ::Float?,
+                                           integer_value: ::Integer?,
+                                           long_value: ::Integer?,
+                                           string_value: ::String?,
+                                           list_value: untyped?,
+                                           map_value: Hash[::String, untyped]?,
+                                           relationship_value: {
+                                             target_entity_id: ::String?,
+                                             target_component_name: ::String?
+                                           }?,
+                                           expression: ::String?
+                                         },
+                                       ]?,
+                                       unit_of_measure: ::String?,
+                                       relationship: {
+                                         target_component_type_id: ::String?,
+                                         relationship_type: ::String?
+                                       }?
+                                     }?,
+                                     is_required_in_entity: bool?,
+                                     is_external_id: bool?,
+                                     is_stored_externally: bool?,
+                                     is_time_series: bool?,
+                                     default_value: {
+                                       boolean_value: bool?,
+                                       double_value: ::Float?,
+                                       integer_value: ::Integer?,
+                                       long_value: ::Integer?,
+                                       string_value: ::String?,
+                                       list_value: Array[
+                                         untyped,
+                                       ]?,
+                                       map_value: Hash[::String, untyped]?,
+                                       relationship_value: {
+                                         target_entity_id: ::String?,
+                                         target_component_name: ::String?
+                                       }?,
+                                       expression: ::String?
+                                     }?,
+                                     configuration: Hash[::String, ::String]?,
+                                     display_name: ::String?
+                                   }?,
+                                   value: {
+                                     boolean_value: bool?,
+                                     double_value: ::Float?,
+                                     integer_value: ::Integer?,
+                                     long_value: ::Integer?,
+                                     string_value: ::String?,
+                                     list_value: Array[
+                                       untyped,
+                                     ]?,
+                                     map_value: Hash[::String, untyped]?,
+                                     relationship_value: {
+                                       target_entity_id: ::String?,
+                                       target_component_name: ::String?
+                                     }?,
+                                     expression: ::String?
+                                   }?,
+                                   update_type: ("UPDATE" | "DELETE" | "CREATE")?
+                                 }]?,
+                               property_groups: Hash[::String, {
+                                   group_type: ("TABULAR")?,
+                                   property_names: Array[::String]?,
+                                   update_type: ("UPDATE" | "DELETE" | "CREATE")?
+                                 }]?
+                             }],
+                           ?parent_entity_id: ::String,
+                           ?tags: Hash[::String, ::String]
+                         ) -> _CreateEntityResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEntityResponseSuccess
+
+      interface _CreateMetadataTransferJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMetadataTransferJobResponse]
+        def metadata_transfer_job_id: () -> ::String
+        def arn: () -> ::String
+        def creation_date_time: () -> ::Time
+        def status: () -> Types::MetadataTransferJobStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#create_metadata_transfer_job-instance_method
+      def create_metadata_transfer_job: (
+                                          ?metadata_transfer_job_id: ::String,
+                                          ?description: ::String,
+                                          sources: Array[
+                                            {
+                                              type: ("s3" | "iotsitewise" | "iottwinmaker"),
+                                              s3_configuration: {
+                                                location: ::String
+                                              }?,
+                                              iot_site_wise_configuration: {
+                                                filters: Array[
+                                                  {
+                                                    filter_by_asset_model: {
+                                                      asset_model_id: ::String?,
+                                                      asset_model_external_id: ::String?,
+                                                      include_offspring: bool?,
+                                                      include_assets: bool?
+                                                    }?,
+                                                    filter_by_asset: {
+                                                      asset_id: ::String?,
+                                                      asset_external_id: ::String?,
+                                                      include_offspring: bool?,
+                                                      include_asset_model: bool?
+                                                    }?
+                                                  },
+                                                ]?
+                                              }?,
+                                              iot_twin_maker_configuration: {
+                                                workspace: ::String,
+                                                filters: Array[
+                                                  {
+                                                    filter_by_component_type: {
+                                                      component_type_id: ::String
+                                                    }?,
+                                                    filter_by_entity: {
+                                                      entity_id: ::String
+                                                    }?
+                                                  },
+                                                ]?
+                                              }?
+                                            },
+                                          ],
+                                          destination: {
+                                            type: ("s3" | "iotsitewise" | "iottwinmaker"),
+                                            s3_configuration: {
+                                              location: ::String
+                                            }?,
+                                            iot_twin_maker_configuration: {
+                                              workspace: ::String
+                                            }?
+                                          }
+                                        ) -> _CreateMetadataTransferJobResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMetadataTransferJobResponseSuccess
+
+      interface _CreateSceneResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSceneResponse]
+        def arn: () -> ::String
+        def creation_date_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#create_scene-instance_method
+      def create_scene: (
+                          workspace_id: ::String,
+                          scene_id: ::String,
+                          content_location: ::String,
+                          ?description: ::String,
+                          ?capabilities: Array[::String],
+                          ?tags: Hash[::String, ::String],
+                          ?scene_metadata: Hash[::String, ::String]
+                        ) -> _CreateSceneResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSceneResponseSuccess
+
+      interface _CreateSyncJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSyncJobResponse]
+        def arn: () -> ::String
+        def creation_date_time: () -> ::Time
+        def state: () -> ("CREATING" | "INITIALIZING" | "ACTIVE" | "DELETING" | "ERROR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#create_sync_job-instance_method
+      def create_sync_job: (
+                             workspace_id: ::String,
+                             sync_source: ::String,
+                             sync_role: ::String,
+                             ?tags: Hash[::String, ::String]
+                           ) -> _CreateSyncJobResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSyncJobResponseSuccess
+
+      interface _CreateWorkspaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkspaceResponse]
+        def arn: () -> ::String
+        def creation_date_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#create_workspace-instance_method
+      def create_workspace: (
+                              workspace_id: ::String,
+                              ?description: ::String,
+                              ?s3_location: ::String,
+                              ?role: ::String,
+                              ?tags: Hash[::String, ::String]
+                            ) -> _CreateWorkspaceResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkspaceResponseSuccess
+
+      interface _DeleteComponentTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteComponentTypeResponse]
+        def state: () -> ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "ERROR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#delete_component_type-instance_method
+      def delete_component_type: (
+                                   workspace_id: ::String,
+                                   component_type_id: ::String
+                                 ) -> _DeleteComponentTypeResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteComponentTypeResponseSuccess
+
+      interface _DeleteEntityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEntityResponse]
+        def state: () -> ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "ERROR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#delete_entity-instance_method
+      def delete_entity: (
+                           workspace_id: ::String,
+                           entity_id: ::String,
+                           ?is_recursive: bool
+                         ) -> _DeleteEntityResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEntityResponseSuccess
+
+      interface _DeleteSceneResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSceneResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#delete_scene-instance_method
+      def delete_scene: (
+                          workspace_id: ::String,
+                          scene_id: ::String
+                        ) -> _DeleteSceneResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSceneResponseSuccess
+
+      interface _DeleteSyncJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSyncJobResponse]
+        def state: () -> ("CREATING" | "INITIALIZING" | "ACTIVE" | "DELETING" | "ERROR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#delete_sync_job-instance_method
+      def delete_sync_job: (
+                             workspace_id: ::String,
+                             sync_source: ::String
+                           ) -> _DeleteSyncJobResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSyncJobResponseSuccess
+
+      interface _DeleteWorkspaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkspaceResponse]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#delete_workspace-instance_method
+      def delete_workspace: (
+                              workspace_id: ::String
+                            ) -> _DeleteWorkspaceResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkspaceResponseSuccess
+
+      interface _ExecuteQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExecuteQueryResponse]
+        def column_descriptions: () -> ::Array[Types::ColumnDescription]
+        def rows: () -> ::Array[Types::Row]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#execute_query-instance_method
+      def execute_query: (
+                           workspace_id: ::String,
+                           query_statement: ::String,
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ExecuteQueryResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExecuteQueryResponseSuccess
+
+      interface _GetComponentTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetComponentTypeResponse]
+        def workspace_id: () -> ::String
+        def is_singleton: () -> bool
+        def component_type_id: () -> ::String
+        def description: () -> ::String
+        def property_definitions: () -> ::Hash[::String, Types::PropertyDefinitionResponse]
+        def extends_from: () -> ::Array[::String]
+        def functions: () -> ::Hash[::String, Types::FunctionResponse]
+        def creation_date_time: () -> ::Time
+        def update_date_time: () -> ::Time
+        def arn: () -> ::String
+        def is_abstract: () -> bool
+        def is_schema_initialized: () -> bool
+        def status: () -> Types::Status
+        def property_groups: () -> ::Hash[::String, Types::PropertyGroupResponse]
+        def sync_source: () -> ::String
+        def component_type_name: () -> ::String
+        def composite_component_types: () -> ::Hash[::String, Types::CompositeComponentTypeResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#get_component_type-instance_method
+      def get_component_type: (
+                                workspace_id: ::String,
+                                component_type_id: ::String
+                              ) -> _GetComponentTypeResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetComponentTypeResponseSuccess
+
+      interface _GetEntityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEntityResponse]
+        def entity_id: () -> ::String
+        def entity_name: () -> ::String
+        def arn: () -> ::String
+        def status: () -> Types::Status
+        def workspace_id: () -> ::String
+        def description: () -> ::String
+        def components: () -> ::Hash[::String, Types::ComponentResponse]
+        def parent_entity_id: () -> ::String
+        def has_child_entities: () -> bool
+        def creation_date_time: () -> ::Time
+        def update_date_time: () -> ::Time
+        def sync_source: () -> ::String
+        def are_all_components_returned: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#get_entity-instance_method
+      def get_entity: (
+                        workspace_id: ::String,
+                        entity_id: ::String
+                      ) -> _GetEntityResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEntityResponseSuccess
+
+      interface _GetMetadataTransferJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMetadataTransferJobResponse]
+        def metadata_transfer_job_id: () -> ::String
+        def arn: () -> ::String
+        def description: () -> ::String
+        def sources: () -> ::Array[Types::SourceConfiguration]
+        def destination: () -> Types::DestinationConfiguration
+        def metadata_transfer_job_role: () -> ::String
+        def report_url: () -> ::String
+        def creation_date_time: () -> ::Time
+        def update_date_time: () -> ::Time
+        def status: () -> Types::MetadataTransferJobStatus
+        def progress: () -> Types::MetadataTransferJobProgress
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#get_metadata_transfer_job-instance_method
+      def get_metadata_transfer_job: (
+                                       metadata_transfer_job_id: ::String
+                                     ) -> _GetMetadataTransferJobResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMetadataTransferJobResponseSuccess
+
+      interface _GetPricingPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPricingPlanResponse]
+        def current_pricing_plan: () -> Types::PricingPlan
+        def pending_pricing_plan: () -> Types::PricingPlan
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#get_pricing_plan-instance_method
+      def get_pricing_plan: (
+                            ) -> _GetPricingPlanResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPricingPlanResponseSuccess
+
+      interface _GetPropertyValueResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPropertyValueResponse]
+        def property_values: () -> ::Hash[::String, Types::PropertyLatestValue]
+        def next_token: () -> ::String
+        def tabular_property_values: () -> ::Array[::Array[::Hash[::String, Types::DataValue]]]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#get_property_value-instance_method
+      def get_property_value: (
+                                ?component_name: ::String,
+                                ?component_path: ::String,
+                                ?component_type_id: ::String,
+                                ?entity_id: ::String,
+                                selected_properties: Array[::String],
+                                workspace_id: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String,
+                                ?property_group_name: ::String,
+                                ?tabular_conditions: {
+                                  order_by: Array[
+                                    {
+                                      order: ("ASCENDING" | "DESCENDING")?,
+                                      property_name: ::String
+                                    },
+                                  ]?,
+                                  property_filters: Array[
+                                    {
+                                      property_name: ::String?,
+                                      operator: ::String?,
+                                      value: {
+                                        boolean_value: bool?,
+                                        double_value: ::Float?,
+                                        integer_value: ::Integer?,
+                                        long_value: ::Integer?,
+                                        string_value: ::String?,
+                                        list_value: Array[
+                                          untyped,
+                                        ]?,
+                                        map_value: Hash[::String, untyped]?,
+                                        relationship_value: {
+                                          target_entity_id: ::String?,
+                                          target_component_name: ::String?
+                                        }?,
+                                        expression: ::String?
+                                      }?
+                                    },
+                                  ]?
+                                }
+                              ) -> _GetPropertyValueResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPropertyValueResponseSuccess
+
+      interface _GetPropertyValueHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPropertyValueHistoryResponse]
+        def property_values: () -> ::Array[Types::PropertyValueHistory]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#get_property_value_history-instance_method
+      def get_property_value_history: (
+                                        workspace_id: ::String,
+                                        ?entity_id: ::String,
+                                        ?component_name: ::String,
+                                        ?component_path: ::String,
+                                        ?component_type_id: ::String,
+                                        selected_properties: Array[::String],
+                                        ?property_filters: Array[
+                                          {
+                                            property_name: ::String?,
+                                            operator: ::String?,
+                                            value: {
+                                              boolean_value: bool?,
+                                              double_value: ::Float?,
+                                              integer_value: ::Integer?,
+                                              long_value: ::Integer?,
+                                              string_value: ::String?,
+                                              list_value: Array[
+                                                untyped,
+                                              ]?,
+                                              map_value: Hash[::String, untyped]?,
+                                              relationship_value: {
+                                                target_entity_id: ::String?,
+                                                target_component_name: ::String?
+                                              }?,
+                                              expression: ::String?
+                                            }?
+                                          },
+                                        ],
+                                        ?start_date_time: ::Time,
+                                        ?end_date_time: ::Time,
+                                        ?interpolation: {
+                                          interpolation_type: ("LINEAR")?,
+                                          interval_in_seconds: ::Integer?
+                                        },
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer,
+                                        ?order_by_time: ("ASCENDING" | "DESCENDING"),
+                                        ?start_time: ::String,
+                                        ?end_time: ::String
+                                      ) -> _GetPropertyValueHistoryResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPropertyValueHistoryResponseSuccess
+
+      interface _GetSceneResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSceneResponse]
+        def workspace_id: () -> ::String
+        def scene_id: () -> ::String
+        def content_location: () -> ::String
+        def arn: () -> ::String
+        def creation_date_time: () -> ::Time
+        def update_date_time: () -> ::Time
+        def description: () -> ::String
+        def capabilities: () -> ::Array[::String]
+        def scene_metadata: () -> ::Hash[::String, ::String]
+        def generated_scene_metadata: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#get_scene-instance_method
+      def get_scene: (
+                       workspace_id: ::String,
+                       scene_id: ::String
+                     ) -> _GetSceneResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSceneResponseSuccess
+
+      interface _GetSyncJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSyncJobResponse]
+        def arn: () -> ::String
+        def workspace_id: () -> ::String
+        def sync_source: () -> ::String
+        def sync_role: () -> ::String
+        def status: () -> Types::SyncJobStatus
+        def creation_date_time: () -> ::Time
+        def update_date_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#get_sync_job-instance_method
+      def get_sync_job: (
+                          sync_source: ::String,
+                          ?workspace_id: ::String
+                        ) -> _GetSyncJobResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSyncJobResponseSuccess
+
+      interface _GetWorkspaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkspaceResponse]
+        def workspace_id: () -> ::String
+        def arn: () -> ::String
+        def description: () -> ::String
+        def linked_services: () -> ::Array[::String]
+        def s3_location: () -> ::String
+        def role: () -> ::String
+        def creation_date_time: () -> ::Time
+        def update_date_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#get_workspace-instance_method
+      def get_workspace: (
+                           workspace_id: ::String
+                         ) -> _GetWorkspaceResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkspaceResponseSuccess
+
+      interface _ListComponentTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListComponentTypesResponse]
+        def workspace_id: () -> ::String
+        def component_type_summaries: () -> ::Array[Types::ComponentTypeSummary]
+        def next_token: () -> ::String
+        def max_results: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#list_component_types-instance_method
+      def list_component_types: (
+                                  workspace_id: ::String,
+                                  ?filters: Array[
+                                    {
+                                      extends_from: ::String?,
+                                      namespace: ::String?,
+                                      is_abstract: bool?
+                                    },
+                                  ],
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListComponentTypesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListComponentTypesResponseSuccess
+
+      interface _ListComponentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListComponentsResponse]
+        def component_summaries: () -> ::Array[Types::ComponentSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#list_components-instance_method
+      def list_components: (
+                             workspace_id: ::String,
+                             entity_id: ::String,
+                             ?component_path: ::String,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListComponentsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListComponentsResponseSuccess
+
+      interface _ListEntitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEntitiesResponse]
+        def entity_summaries: () -> ::Array[Types::EntitySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#list_entities-instance_method
+      def list_entities: (
+                           workspace_id: ::String,
+                           ?filters: Array[
+                             {
+                               parent_entity_id: ::String?,
+                               component_type_id: ::String?,
+                               external_id: ::String?
+                             },
+                           ],
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListEntitiesResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEntitiesResponseSuccess
+
+      interface _ListMetadataTransferJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMetadataTransferJobsResponse]
+        def metadata_transfer_job_summaries: () -> ::Array[Types::MetadataTransferJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#list_metadata_transfer_jobs-instance_method
+      def list_metadata_transfer_jobs: (
+                                         source_type: ("s3" | "iotsitewise" | "iottwinmaker"),
+                                         destination_type: ("s3" | "iotsitewise" | "iottwinmaker"),
+                                         ?filters: Array[
+                                           {
+                                             workspace_id: ::String?,
+                                             state: ("VALIDATING" | "PENDING" | "RUNNING" | "CANCELLING" | "ERROR" | "COMPLETED" | "CANCELLED")?
+                                           },
+                                         ],
+                                         ?next_token: ::String,
+                                         ?max_results: ::Integer
+                                       ) -> _ListMetadataTransferJobsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMetadataTransferJobsResponseSuccess
+
+      interface _ListPropertiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPropertiesResponse]
+        def property_summaries: () -> ::Array[Types::PropertySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#list_properties-instance_method
+      def list_properties: (
+                             workspace_id: ::String,
+                             ?component_name: ::String,
+                             ?component_path: ::String,
+                             entity_id: ::String,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListPropertiesResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPropertiesResponseSuccess
+
+      interface _ListScenesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListScenesResponse]
+        def scene_summaries: () -> ::Array[Types::SceneSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#list_scenes-instance_method
+      def list_scenes: (
+                         workspace_id: ::String,
+                         ?max_results: ::Integer,
+                         ?next_token: ::String
+                       ) -> _ListScenesResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListScenesResponseSuccess
+
+      interface _ListSyncJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSyncJobsResponse]
+        def sync_job_summaries: () -> ::Array[Types::SyncJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#list_sync_jobs-instance_method
+      def list_sync_jobs: (
+                            workspace_id: ::String,
+                            ?max_results: ::Integer,
+                            ?next_token: ::String
+                          ) -> _ListSyncJobsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSyncJobsResponseSuccess
+
+      interface _ListSyncResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSyncResourcesResponse]
+        def sync_resources: () -> ::Array[Types::SyncResourceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#list_sync_resources-instance_method
+      def list_sync_resources: (
+                                 workspace_id: ::String,
+                                 sync_source: ::String,
+                                 ?filters: Array[
+                                   {
+                                     state: ("INITIALIZING" | "PROCESSING" | "DELETED" | "IN_SYNC" | "ERROR")?,
+                                     resource_type: ("ENTITY" | "COMPONENT_TYPE")?,
+                                     resource_id: ::String?,
+                                     external_id: ::String?
+                                   },
+                                 ],
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListSyncResourcesResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSyncResourcesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListWorkspacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkspacesResponse]
+        def workspace_summaries: () -> ::Array[Types::WorkspaceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#list_workspaces-instance_method
+      def list_workspaces: (
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListWorkspacesResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkspacesResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateComponentTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateComponentTypeResponse]
+        def workspace_id: () -> ::String
+        def arn: () -> ::String
+        def component_type_id: () -> ::String
+        def state: () -> ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "ERROR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#update_component_type-instance_method
+      def update_component_type: (
+                                   workspace_id: ::String,
+                                   ?is_singleton: bool,
+                                   component_type_id: ::String,
+                                   ?description: ::String,
+                                   ?property_definitions: Hash[::String, {
+                                       data_type: {
+                                         type: ("RELATIONSHIP" | "STRING" | "LONG" | "BOOLEAN" | "INTEGER" | "DOUBLE" | "LIST" | "MAP"),
+                                         nested_type: untyped?,
+                                         allowed_values: Array[
+                                           {
+                                             boolean_value: bool?,
+                                             double_value: ::Float?,
+                                             integer_value: ::Integer?,
+                                             long_value: ::Integer?,
+                                             string_value: ::String?,
+                                             list_value: untyped?,
+                                             map_value: Hash[::String, untyped]?,
+                                             relationship_value: {
+                                               target_entity_id: ::String?,
+                                               target_component_name: ::String?
+                                             }?,
+                                             expression: ::String?
+                                           },
+                                         ]?,
+                                         unit_of_measure: ::String?,
+                                         relationship: {
+                                           target_component_type_id: ::String?,
+                                           relationship_type: ::String?
+                                         }?
+                                       }?,
+                                       is_required_in_entity: bool?,
+                                       is_external_id: bool?,
+                                       is_stored_externally: bool?,
+                                       is_time_series: bool?,
+                                       default_value: {
+                                         boolean_value: bool?,
+                                         double_value: ::Float?,
+                                         integer_value: ::Integer?,
+                                         long_value: ::Integer?,
+                                         string_value: ::String?,
+                                         list_value: Array[
+                                           untyped,
+                                         ]?,
+                                         map_value: Hash[::String, untyped]?,
+                                         relationship_value: {
+                                           target_entity_id: ::String?,
+                                           target_component_name: ::String?
+                                         }?,
+                                         expression: ::String?
+                                       }?,
+                                       configuration: Hash[::String, ::String]?,
+                                       display_name: ::String?
+                                     }],
+                                   ?extends_from: Array[::String],
+                                   ?functions: Hash[::String, {
+                                       required_properties: Array[::String]?,
+                                       scope: ("ENTITY" | "WORKSPACE")?,
+                                       implemented_by: {
+                                         lambda: {
+                                           arn: ::String
+                                         }?,
+                                         is_native: bool?
+                                       }?
+                                     }],
+                                   ?property_groups: Hash[::String, {
+                                       group_type: ("TABULAR")?,
+                                       property_names: Array[::String]?
+                                     }],
+                                   ?component_type_name: ::String,
+                                   ?composite_component_types: Hash[::String, {
+                                       component_type_id: ::String?
+                                     }]
+                                 ) -> _UpdateComponentTypeResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateComponentTypeResponseSuccess
+
+      interface _UpdateEntityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEntityResponse]
+        def update_date_time: () -> ::Time
+        def state: () -> ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "ERROR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#update_entity-instance_method
+      def update_entity: (
+                           workspace_id: ::String,
+                           entity_id: ::String,
+                           ?entity_name: ::String,
+                           ?description: ::String,
+                           ?component_updates: Hash[::String, {
+                               update_type: ("CREATE" | "UPDATE" | "DELETE")?,
+                               description: ::String?,
+                               component_type_id: ::String?,
+                               property_updates: Hash[::String, {
+                                   definition: {
+                                     data_type: {
+                                       type: ("RELATIONSHIP" | "STRING" | "LONG" | "BOOLEAN" | "INTEGER" | "DOUBLE" | "LIST" | "MAP"),
+                                       nested_type: untyped?,
+                                       allowed_values: Array[
+                                         {
+                                           boolean_value: bool?,
+                                           double_value: ::Float?,
+                                           integer_value: ::Integer?,
+                                           long_value: ::Integer?,
+                                           string_value: ::String?,
+                                           list_value: untyped?,
+                                           map_value: Hash[::String, untyped]?,
+                                           relationship_value: {
+                                             target_entity_id: ::String?,
+                                             target_component_name: ::String?
+                                           }?,
+                                           expression: ::String?
+                                         },
+                                       ]?,
+                                       unit_of_measure: ::String?,
+                                       relationship: {
+                                         target_component_type_id: ::String?,
+                                         relationship_type: ::String?
+                                       }?
+                                     }?,
+                                     is_required_in_entity: bool?,
+                                     is_external_id: bool?,
+                                     is_stored_externally: bool?,
+                                     is_time_series: bool?,
+                                     default_value: {
+                                       boolean_value: bool?,
+                                       double_value: ::Float?,
+                                       integer_value: ::Integer?,
+                                       long_value: ::Integer?,
+                                       string_value: ::String?,
+                                       list_value: Array[
+                                         untyped,
+                                       ]?,
+                                       map_value: Hash[::String, untyped]?,
+                                       relationship_value: {
+                                         target_entity_id: ::String?,
+                                         target_component_name: ::String?
+                                       }?,
+                                       expression: ::String?
+                                     }?,
+                                     configuration: Hash[::String, ::String]?,
+                                     display_name: ::String?
+                                   }?,
+                                   value: {
+                                     boolean_value: bool?,
+                                     double_value: ::Float?,
+                                     integer_value: ::Integer?,
+                                     long_value: ::Integer?,
+                                     string_value: ::String?,
+                                     list_value: Array[
+                                       untyped,
+                                     ]?,
+                                     map_value: Hash[::String, untyped]?,
+                                     relationship_value: {
+                                       target_entity_id: ::String?,
+                                       target_component_name: ::String?
+                                     }?,
+                                     expression: ::String?
+                                   }?,
+                                   update_type: ("UPDATE" | "DELETE" | "CREATE")?
+                                 }]?,
+                               property_group_updates: Hash[::String, {
+                                   group_type: ("TABULAR")?,
+                                   property_names: Array[::String]?,
+                                   update_type: ("UPDATE" | "DELETE" | "CREATE")?
+                                 }]?
+                             }],
+                           ?composite_component_updates: Hash[::String, {
+                               update_type: ("CREATE" | "UPDATE" | "DELETE")?,
+                               description: ::String?,
+                               property_updates: Hash[::String, {
+                                   definition: {
+                                     data_type: {
+                                       type: ("RELATIONSHIP" | "STRING" | "LONG" | "BOOLEAN" | "INTEGER" | "DOUBLE" | "LIST" | "MAP"),
+                                       nested_type: untyped?,
+                                       allowed_values: Array[
+                                         {
+                                           boolean_value: bool?,
+                                           double_value: ::Float?,
+                                           integer_value: ::Integer?,
+                                           long_value: ::Integer?,
+                                           string_value: ::String?,
+                                           list_value: untyped?,
+                                           map_value: Hash[::String, untyped]?,
+                                           relationship_value: {
+                                             target_entity_id: ::String?,
+                                             target_component_name: ::String?
+                                           }?,
+                                           expression: ::String?
+                                         },
+                                       ]?,
+                                       unit_of_measure: ::String?,
+                                       relationship: {
+                                         target_component_type_id: ::String?,
+                                         relationship_type: ::String?
+                                       }?
+                                     }?,
+                                     is_required_in_entity: bool?,
+                                     is_external_id: bool?,
+                                     is_stored_externally: bool?,
+                                     is_time_series: bool?,
+                                     default_value: {
+                                       boolean_value: bool?,
+                                       double_value: ::Float?,
+                                       integer_value: ::Integer?,
+                                       long_value: ::Integer?,
+                                       string_value: ::String?,
+                                       list_value: Array[
+                                         untyped,
+                                       ]?,
+                                       map_value: Hash[::String, untyped]?,
+                                       relationship_value: {
+                                         target_entity_id: ::String?,
+                                         target_component_name: ::String?
+                                       }?,
+                                       expression: ::String?
+                                     }?,
+                                     configuration: Hash[::String, ::String]?,
+                                     display_name: ::String?
+                                   }?,
+                                   value: {
+                                     boolean_value: bool?,
+                                     double_value: ::Float?,
+                                     integer_value: ::Integer?,
+                                     long_value: ::Integer?,
+                                     string_value: ::String?,
+                                     list_value: Array[
+                                       untyped,
+                                     ]?,
+                                     map_value: Hash[::String, untyped]?,
+                                     relationship_value: {
+                                       target_entity_id: ::String?,
+                                       target_component_name: ::String?
+                                     }?,
+                                     expression: ::String?
+                                   }?,
+                                   update_type: ("UPDATE" | "DELETE" | "CREATE")?
+                                 }]?,
+                               property_group_updates: Hash[::String, {
+                                   group_type: ("TABULAR")?,
+                                   property_names: Array[::String]?,
+                                   update_type: ("UPDATE" | "DELETE" | "CREATE")?
+                                 }]?
+                             }],
+                           ?parent_entity_update: {
+                             update_type: ("UPDATE" | "DELETE"),
+                             parent_entity_id: ::String?
+                           }
+                         ) -> _UpdateEntityResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEntityResponseSuccess
+
+      interface _UpdatePricingPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePricingPlanResponse]
+        def current_pricing_plan: () -> Types::PricingPlan
+        def pending_pricing_plan: () -> Types::PricingPlan
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#update_pricing_plan-instance_method
+      def update_pricing_plan: (
+                                 pricing_mode: ("BASIC" | "STANDARD" | "TIERED_BUNDLE"),
+                                 ?bundle_names: Array[::String]
+                               ) -> _UpdatePricingPlanResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePricingPlanResponseSuccess
+
+      interface _UpdateSceneResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSceneResponse]
+        def update_date_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#update_scene-instance_method
+      def update_scene: (
+                          workspace_id: ::String,
+                          scene_id: ::String,
+                          ?content_location: ::String,
+                          ?description: ::String,
+                          ?capabilities: Array[::String],
+                          ?scene_metadata: Hash[::String, ::String]
+                        ) -> _UpdateSceneResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSceneResponseSuccess
+
+      interface _UpdateWorkspaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWorkspaceResponse]
+        def update_date_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTTwinMaker/Client.html#update_workspace-instance_method
+      def update_workspace: (
+                              workspace_id: ::String,
+                              ?description: ::String,
+                              ?role: ::String,
+                              ?s3_location: ::String
+                            ) -> _UpdateWorkspaceResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkspaceResponseSuccess
+    end
+  end
+end
+

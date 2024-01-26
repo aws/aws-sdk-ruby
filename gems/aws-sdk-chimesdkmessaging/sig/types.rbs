@@ -1,0 +1,970 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ChimeSDKMessaging
+  module Types
+
+    class AppInstanceUserMembershipSummary
+      attr_accessor type: ("DEFAULT" | "HIDDEN")
+      attr_accessor read_marker_timestamp: ::Time
+      attr_accessor sub_channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateChannelFlowRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor channel_flow_arn: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchChannelMemberships
+      attr_accessor invited_by: Types::Identity
+      attr_accessor type: ("DEFAULT" | "HIDDEN")
+      attr_accessor members: ::Array[Types::Identity]
+      attr_accessor channel_arn: ::String
+      attr_accessor sub_channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchCreateChannelMembershipError
+      attr_accessor member_arn: ::String
+      attr_accessor error_code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchCreateChannelMembershipRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor type: ("DEFAULT" | "HIDDEN")
+      attr_accessor member_arns: ::Array[::String]
+      attr_accessor chime_bearer: ::String
+      attr_accessor sub_channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchCreateChannelMembershipResponse
+      attr_accessor batch_channel_memberships: Types::BatchChannelMemberships
+      attr_accessor errors: ::Array[Types::BatchCreateChannelMembershipError]
+      SENSITIVE: []
+    end
+
+    class Channel
+      attr_accessor name: ::String
+      attr_accessor channel_arn: ::String
+      attr_accessor mode: ("UNRESTRICTED" | "RESTRICTED")
+      attr_accessor privacy: ("PUBLIC" | "PRIVATE")
+      attr_accessor metadata: ::String
+      attr_accessor created_by: Types::Identity
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_message_timestamp: ::Time
+      attr_accessor last_updated_timestamp: ::Time
+      attr_accessor channel_flow_arn: ::String
+      attr_accessor elastic_channel_configuration: Types::ElasticChannelConfiguration
+      attr_accessor expiration_settings: Types::ExpirationSettings
+      SENSITIVE: [:name, :metadata]
+    end
+
+    class ChannelAssociatedWithFlowSummary
+      attr_accessor name: ::String
+      attr_accessor channel_arn: ::String
+      attr_accessor mode: ("UNRESTRICTED" | "RESTRICTED")
+      attr_accessor privacy: ("PUBLIC" | "PRIVATE")
+      attr_accessor metadata: ::String
+      SENSITIVE: [:name, :metadata]
+    end
+
+    class ChannelBan
+      attr_accessor member: Types::Identity
+      attr_accessor channel_arn: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor created_by: Types::Identity
+      SENSITIVE: []
+    end
+
+    class ChannelBanSummary
+      attr_accessor member: Types::Identity
+      SENSITIVE: []
+    end
+
+    class ChannelFlow
+      attr_accessor channel_flow_arn: ::String
+      attr_accessor processors: ::Array[Types::Processor]
+      attr_accessor name: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_updated_timestamp: ::Time
+      SENSITIVE: [:name]
+    end
+
+    class ChannelFlowCallbackRequest
+      attr_accessor callback_id: ::String
+      attr_accessor channel_arn: ::String
+      attr_accessor delete_resource: bool
+      attr_accessor channel_message: Types::ChannelMessageCallback
+      SENSITIVE: []
+    end
+
+    class ChannelFlowCallbackResponse
+      attr_accessor channel_arn: ::String
+      attr_accessor callback_id: ::String
+      SENSITIVE: []
+    end
+
+    class ChannelFlowSummary
+      attr_accessor channel_flow_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor processors: ::Array[Types::Processor]
+      SENSITIVE: [:name]
+    end
+
+    class ChannelMembership
+      attr_accessor invited_by: Types::Identity
+      attr_accessor type: ("DEFAULT" | "HIDDEN")
+      attr_accessor member: Types::Identity
+      attr_accessor channel_arn: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_updated_timestamp: ::Time
+      attr_accessor sub_channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class ChannelMembershipForAppInstanceUserSummary
+      attr_accessor channel_summary: Types::ChannelSummary
+      attr_accessor app_instance_user_membership_summary: Types::AppInstanceUserMembershipSummary
+      SENSITIVE: []
+    end
+
+    class ChannelMembershipPreferences
+      attr_accessor push_notifications: Types::PushNotificationPreferences
+      SENSITIVE: []
+    end
+
+    class ChannelMembershipSummary
+      attr_accessor member: Types::Identity
+      SENSITIVE: []
+    end
+
+    class ChannelMessage
+      attr_accessor channel_arn: ::String
+      attr_accessor message_id: ::String
+      attr_accessor content: ::String
+      attr_accessor metadata: ::String
+      attr_accessor type: ("STANDARD" | "CONTROL")
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_edited_timestamp: ::Time
+      attr_accessor last_updated_timestamp: ::Time
+      attr_accessor sender: Types::Identity
+      attr_accessor redacted: bool
+      attr_accessor persistence: ("PERSISTENT" | "NON_PERSISTENT")
+      attr_accessor status: Types::ChannelMessageStatusStructure
+      attr_accessor message_attributes: ::Hash[::String, Types::MessageAttributeValue]
+      attr_accessor sub_channel_id: ::String
+      attr_accessor content_type: ::String
+      attr_accessor target: ::Array[Types::Target]
+      SENSITIVE: [:content, :metadata, :content_type]
+    end
+
+    class ChannelMessageCallback
+      attr_accessor message_id: ::String
+      attr_accessor content: ::String
+      attr_accessor metadata: ::String
+      attr_accessor push_notification: Types::PushNotificationConfiguration
+      attr_accessor message_attributes: ::Hash[::String, Types::MessageAttributeValue]
+      attr_accessor sub_channel_id: ::String
+      attr_accessor content_type: ::String
+      SENSITIVE: [:content, :metadata, :content_type]
+    end
+
+    class ChannelMessageStatusStructure
+      attr_accessor value: ("SENT" | "PENDING" | "FAILED" | "DENIED")
+      attr_accessor detail: ::String
+      SENSITIVE: []
+    end
+
+    class ChannelMessageSummary
+      attr_accessor message_id: ::String
+      attr_accessor content: ::String
+      attr_accessor metadata: ::String
+      attr_accessor type: ("STANDARD" | "CONTROL")
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_updated_timestamp: ::Time
+      attr_accessor last_edited_timestamp: ::Time
+      attr_accessor sender: Types::Identity
+      attr_accessor redacted: bool
+      attr_accessor status: Types::ChannelMessageStatusStructure
+      attr_accessor message_attributes: ::Hash[::String, Types::MessageAttributeValue]
+      attr_accessor content_type: ::String
+      attr_accessor target: ::Array[Types::Target]
+      SENSITIVE: [:content, :metadata, :content_type]
+    end
+
+    class ChannelModeratedByAppInstanceUserSummary
+      attr_accessor channel_summary: Types::ChannelSummary
+      SENSITIVE: []
+    end
+
+    class ChannelModerator
+      attr_accessor moderator: Types::Identity
+      attr_accessor channel_arn: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor created_by: Types::Identity
+      SENSITIVE: []
+    end
+
+    class ChannelModeratorSummary
+      attr_accessor moderator: Types::Identity
+      SENSITIVE: []
+    end
+
+    class ChannelSummary
+      attr_accessor name: ::String
+      attr_accessor channel_arn: ::String
+      attr_accessor mode: ("UNRESTRICTED" | "RESTRICTED")
+      attr_accessor privacy: ("PUBLIC" | "PRIVATE")
+      attr_accessor metadata: ::String
+      attr_accessor last_message_timestamp: ::Time
+      SENSITIVE: [:name, :metadata]
+    end
+
+    class ConflictException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateChannelBanRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor member_arn: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class CreateChannelBanResponse
+      attr_accessor channel_arn: ::String
+      attr_accessor member: Types::Identity
+      SENSITIVE: []
+    end
+
+    class CreateChannelFlowRequest
+      attr_accessor app_instance_arn: ::String
+      attr_accessor processors: ::Array[Types::Processor]
+      attr_accessor name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_request_token: ::String
+      SENSITIVE: [:name, :client_request_token]
+    end
+
+    class CreateChannelFlowResponse
+      attr_accessor channel_flow_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateChannelMembershipRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor member_arn: ::String
+      attr_accessor type: ("DEFAULT" | "HIDDEN")
+      attr_accessor chime_bearer: ::String
+      attr_accessor sub_channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateChannelMembershipResponse
+      attr_accessor channel_arn: ::String
+      attr_accessor member: Types::Identity
+      attr_accessor sub_channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateChannelModeratorRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor channel_moderator_arn: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class CreateChannelModeratorResponse
+      attr_accessor channel_arn: ::String
+      attr_accessor channel_moderator: Types::Identity
+      SENSITIVE: []
+    end
+
+    class CreateChannelRequest
+      attr_accessor app_instance_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor mode: ("UNRESTRICTED" | "RESTRICTED")
+      attr_accessor privacy: ("PUBLIC" | "PRIVATE")
+      attr_accessor metadata: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor chime_bearer: ::String
+      attr_accessor channel_id: ::String
+      attr_accessor member_arns: ::Array[::String]
+      attr_accessor moderator_arns: ::Array[::String]
+      attr_accessor elastic_channel_configuration: Types::ElasticChannelConfiguration
+      attr_accessor expiration_settings: Types::ExpirationSettings
+      SENSITIVE: [:name, :metadata, :client_request_token, :channel_id]
+    end
+
+    class CreateChannelResponse
+      attr_accessor channel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteChannelBanRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor member_arn: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteChannelFlowRequest
+      attr_accessor channel_flow_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteChannelMembershipRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor member_arn: ::String
+      attr_accessor chime_bearer: ::String
+      attr_accessor sub_channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteChannelMessageRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor message_id: ::String
+      attr_accessor chime_bearer: ::String
+      attr_accessor sub_channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteChannelModeratorRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor channel_moderator_arn: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteChannelRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMessagingStreamingConfigurationsRequest
+      attr_accessor app_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeChannelBanRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor member_arn: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeChannelBanResponse
+      attr_accessor channel_ban: Types::ChannelBan
+      SENSITIVE: []
+    end
+
+    class DescribeChannelFlowRequest
+      attr_accessor channel_flow_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeChannelFlowResponse
+      attr_accessor channel_flow: Types::ChannelFlow
+      SENSITIVE: []
+    end
+
+    class DescribeChannelMembershipForAppInstanceUserRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor app_instance_user_arn: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeChannelMembershipForAppInstanceUserResponse
+      attr_accessor channel_membership: Types::ChannelMembershipForAppInstanceUserSummary
+      SENSITIVE: []
+    end
+
+    class DescribeChannelMembershipRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor member_arn: ::String
+      attr_accessor chime_bearer: ::String
+      attr_accessor sub_channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeChannelMembershipResponse
+      attr_accessor channel_membership: Types::ChannelMembership
+      SENSITIVE: []
+    end
+
+    class DescribeChannelModeratedByAppInstanceUserRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor app_instance_user_arn: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeChannelModeratedByAppInstanceUserResponse
+      attr_accessor channel: Types::ChannelModeratedByAppInstanceUserSummary
+      SENSITIVE: []
+    end
+
+    class DescribeChannelModeratorRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor channel_moderator_arn: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeChannelModeratorResponse
+      attr_accessor channel_moderator: Types::ChannelModerator
+      SENSITIVE: []
+    end
+
+    class DescribeChannelRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeChannelResponse
+      attr_accessor channel: Types::Channel
+      SENSITIVE: []
+    end
+
+    class DisassociateChannelFlowRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor channel_flow_arn: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class ElasticChannelConfiguration
+      attr_accessor maximum_sub_channels: ::Integer
+      attr_accessor target_memberships_per_sub_channel: ::Integer
+      attr_accessor minimum_membership_percentage: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExpirationSettings
+      attr_accessor expiration_days: ::Integer
+      attr_accessor expiration_criterion: ("CREATED_TIMESTAMP" | "LAST_MESSAGE_TIMESTAMP")
+      SENSITIVE: []
+    end
+
+    class ForbiddenException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetChannelMembershipPreferencesRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor member_arn: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class GetChannelMembershipPreferencesResponse
+      attr_accessor channel_arn: ::String
+      attr_accessor member: Types::Identity
+      attr_accessor preferences: Types::ChannelMembershipPreferences
+      SENSITIVE: []
+    end
+
+    class GetChannelMessageRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor message_id: ::String
+      attr_accessor chime_bearer: ::String
+      attr_accessor sub_channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetChannelMessageResponse
+      attr_accessor channel_message: Types::ChannelMessage
+      SENSITIVE: []
+    end
+
+    class GetChannelMessageStatusRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor message_id: ::String
+      attr_accessor chime_bearer: ::String
+      attr_accessor sub_channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetChannelMessageStatusResponse
+      attr_accessor status: Types::ChannelMessageStatusStructure
+      SENSITIVE: []
+    end
+
+    class GetMessagingSessionEndpointRequest < Aws::EmptyStructure
+    end
+
+    class GetMessagingSessionEndpointResponse
+      attr_accessor endpoint: Types::MessagingSessionEndpoint
+      SENSITIVE: []
+    end
+
+    class GetMessagingStreamingConfigurationsRequest
+      attr_accessor app_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetMessagingStreamingConfigurationsResponse
+      attr_accessor streaming_configurations: ::Array[Types::StreamingConfiguration]
+      SENSITIVE: []
+    end
+
+    class Identity
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: [:name]
+    end
+
+    class LambdaConfiguration
+      attr_accessor resource_arn: ::String
+      attr_accessor invocation_type: ("ASYNC")
+      SENSITIVE: []
+    end
+
+    class ListChannelBansRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelBansResponse
+      attr_accessor channel_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor channel_bans: ::Array[Types::ChannelBanSummary]
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelFlowsRequest
+      attr_accessor app_instance_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelFlowsResponse
+      attr_accessor channel_flows: ::Array[Types::ChannelFlowSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelMembershipsForAppInstanceUserRequest
+      attr_accessor app_instance_user_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelMembershipsForAppInstanceUserResponse
+      attr_accessor channel_memberships: ::Array[Types::ChannelMembershipForAppInstanceUserSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelMembershipsRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor type: ("DEFAULT" | "HIDDEN")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor chime_bearer: ::String
+      attr_accessor sub_channel_id: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelMembershipsResponse
+      attr_accessor channel_arn: ::String
+      attr_accessor channel_memberships: ::Array[Types::ChannelMembershipSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelMessagesRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor not_before: ::Time
+      attr_accessor not_after: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor chime_bearer: ::String
+      attr_accessor sub_channel_id: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelMessagesResponse
+      attr_accessor channel_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor channel_messages: ::Array[Types::ChannelMessageSummary]
+      attr_accessor sub_channel_id: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelModeratorsRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelModeratorsResponse
+      attr_accessor channel_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor channel_moderators: ::Array[Types::ChannelModeratorSummary]
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelsAssociatedWithChannelFlowRequest
+      attr_accessor channel_flow_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelsAssociatedWithChannelFlowResponse
+      attr_accessor channels: ::Array[Types::ChannelAssociatedWithFlowSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelsModeratedByAppInstanceUserRequest
+      attr_accessor app_instance_user_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelsModeratedByAppInstanceUserResponse
+      attr_accessor channels: ::Array[Types::ChannelModeratedByAppInstanceUserSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelsRequest
+      attr_accessor app_instance_arn: ::String
+      attr_accessor privacy: ("PUBLIC" | "PRIVATE")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelsResponse
+      attr_accessor channels: ::Array[Types::ChannelSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListSubChannelsRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor chime_bearer: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListSubChannelsResponse
+      attr_accessor channel_arn: ::String
+      attr_accessor sub_channels: ::Array[Types::SubChannelSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class MessageAttributeValue
+      attr_accessor string_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class MessagingSessionEndpoint
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Processor
+      attr_accessor name: ::String
+      attr_accessor configuration: Types::ProcessorConfiguration
+      attr_accessor execution_order: ::Integer
+      attr_accessor fallback_action: ("CONTINUE" | "ABORT")
+      SENSITIVE: [:name]
+    end
+
+    class ProcessorConfiguration
+      attr_accessor lambda: Types::LambdaConfiguration
+      SENSITIVE: []
+    end
+
+    class PushNotificationConfiguration
+      attr_accessor title: ::String
+      attr_accessor body: ::String
+      attr_accessor type: ("DEFAULT" | "VOIP")
+      SENSITIVE: [:title, :body]
+    end
+
+    class PushNotificationPreferences
+      attr_accessor allow_notifications: ("ALL" | "NONE" | "FILTERED")
+      attr_accessor filter_rule: ::String
+      SENSITIVE: [:filter_rule]
+    end
+
+    class PutChannelExpirationSettingsRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor chime_bearer: ::String
+      attr_accessor expiration_settings: Types::ExpirationSettings
+      SENSITIVE: []
+    end
+
+    class PutChannelExpirationSettingsResponse
+      attr_accessor channel_arn: ::String
+      attr_accessor expiration_settings: Types::ExpirationSettings
+      SENSITIVE: []
+    end
+
+    class PutChannelMembershipPreferencesRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor member_arn: ::String
+      attr_accessor chime_bearer: ::String
+      attr_accessor preferences: Types::ChannelMembershipPreferences
+      SENSITIVE: []
+    end
+
+    class PutChannelMembershipPreferencesResponse
+      attr_accessor channel_arn: ::String
+      attr_accessor member: Types::Identity
+      attr_accessor preferences: Types::ChannelMembershipPreferences
+      SENSITIVE: []
+    end
+
+    class PutMessagingStreamingConfigurationsRequest
+      attr_accessor app_instance_arn: ::String
+      attr_accessor streaming_configurations: ::Array[Types::StreamingConfiguration]
+      SENSITIVE: []
+    end
+
+    class PutMessagingStreamingConfigurationsResponse
+      attr_accessor streaming_configurations: ::Array[Types::StreamingConfiguration]
+      SENSITIVE: []
+    end
+
+    class RedactChannelMessageRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor message_id: ::String
+      attr_accessor chime_bearer: ::String
+      attr_accessor sub_channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class RedactChannelMessageResponse
+      attr_accessor channel_arn: ::String
+      attr_accessor message_id: ::String
+      attr_accessor sub_channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceLimitExceededException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SearchChannelsRequest
+      attr_accessor chime_bearer: ::String
+      attr_accessor fields: ::Array[Types::SearchField]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class SearchChannelsResponse
+      attr_accessor channels: ::Array[Types::ChannelSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class SearchField
+      attr_accessor key: ("MEMBERS")
+      attr_accessor values: ::Array[::String]
+      attr_accessor operator: ("EQUALS" | "INCLUDES")
+      SENSITIVE: []
+    end
+
+    class SendChannelMessageRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor content: ::String
+      attr_accessor type: ("STANDARD" | "CONTROL")
+      attr_accessor persistence: ("PERSISTENT" | "NON_PERSISTENT")
+      attr_accessor metadata: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor chime_bearer: ::String
+      attr_accessor push_notification: Types::PushNotificationConfiguration
+      attr_accessor message_attributes: ::Hash[::String, Types::MessageAttributeValue]
+      attr_accessor sub_channel_id: ::String
+      attr_accessor content_type: ::String
+      attr_accessor target: ::Array[Types::Target]
+      SENSITIVE: [:content, :metadata, :client_request_token, :content_type]
+    end
+
+    class SendChannelMessageResponse
+      attr_accessor channel_arn: ::String
+      attr_accessor message_id: ::String
+      attr_accessor status: Types::ChannelMessageStatusStructure
+      attr_accessor sub_channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceFailureException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StreamingConfiguration
+      attr_accessor data_type: ("Channel" | "ChannelMessage")
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SubChannelSummary
+      attr_accessor sub_channel_id: ::String
+      attr_accessor membership_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: [:key, :value]
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class Target
+      attr_accessor member_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottledClientException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnauthorizedClientException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateChannelFlowRequest
+      attr_accessor channel_flow_arn: ::String
+      attr_accessor processors: ::Array[Types::Processor]
+      attr_accessor name: ::String
+      SENSITIVE: [:name]
+    end
+
+    class UpdateChannelFlowResponse
+      attr_accessor channel_flow_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateChannelMessageRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor message_id: ::String
+      attr_accessor content: ::String
+      attr_accessor metadata: ::String
+      attr_accessor chime_bearer: ::String
+      attr_accessor sub_channel_id: ::String
+      attr_accessor content_type: ::String
+      SENSITIVE: [:content, :metadata, :content_type]
+    end
+
+    class UpdateChannelMessageResponse
+      attr_accessor channel_arn: ::String
+      attr_accessor message_id: ::String
+      attr_accessor status: Types::ChannelMessageStatusStructure
+      attr_accessor sub_channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateChannelReadMarkerRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateChannelReadMarkerResponse
+      attr_accessor channel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateChannelRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor mode: ("UNRESTRICTED" | "RESTRICTED")
+      attr_accessor metadata: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: [:name, :metadata]
+    end
+
+    class UpdateChannelResponse
+      attr_accessor channel_arn: ::String
+      SENSITIVE: []
+    end
+  end
+end

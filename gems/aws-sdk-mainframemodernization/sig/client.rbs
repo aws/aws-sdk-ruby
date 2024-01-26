@@ -1,0 +1,641 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MainframeModernization
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CancelBatchJobExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelBatchJobExecutionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#cancel_batch_job_execution-instance_method
+      def cancel_batch_job_execution: (
+                                        application_id: ::String,
+                                        execution_id: ::String
+                                      ) -> _CancelBatchJobExecutionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelBatchJobExecutionResponseSuccess
+
+      interface _CreateApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateApplicationResponse]
+        def application_arn: () -> ::String
+        def application_id: () -> ::String
+        def application_version: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#create_application-instance_method
+      def create_application: (
+                                ?client_token: ::String,
+                                definition: {
+                                  content: ::String?,
+                                  s3_location: ::String?
+                                },
+                                ?description: ::String,
+                                engine_type: ("microfocus" | "bluage"),
+                                ?kms_key_id: ::String,
+                                name: ::String,
+                                ?role_arn: ::String,
+                                ?tags: Hash[::String, ::String]
+                              ) -> _CreateApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
+
+      interface _CreateDataSetImportTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataSetImportTaskResponse]
+        def task_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#create_data_set_import_task-instance_method
+      def create_data_set_import_task: (
+                                         application_id: ::String,
+                                         ?client_token: ::String,
+                                         import_config: {
+                                           data_sets: Array[
+                                             {
+                                               data_set: {
+                                                 dataset_name: ::String,
+                                                 dataset_org: {
+                                                   gdg: {
+                                                     limit: ::Integer?,
+                                                     roll_disposition: ::String?
+                                                   }?,
+                                                   po: {
+                                                     encoding: ::String?,
+                                                     format: ::String,
+                                                     member_file_extensions: Array[::String]
+                                                   }?,
+                                                   ps: {
+                                                     encoding: ::String?,
+                                                     format: ::String
+                                                   }?,
+                                                   vsam: {
+                                                     alternate_keys: Array[
+                                                       {
+                                                         allow_duplicates: bool?,
+                                                         length: ::Integer,
+                                                         name: ::String?,
+                                                         offset: ::Integer
+                                                       },
+                                                     ]?,
+                                                     compressed: bool?,
+                                                     encoding: ::String?,
+                                                     format: ::String,
+                                                     primary_key: {
+                                                       length: ::Integer,
+                                                       name: ::String?,
+                                                       offset: ::Integer
+                                                     }?
+                                                   }?
+                                                 },
+                                                 record_length: {
+                                                   max: ::Integer,
+                                                   min: ::Integer
+                                                 },
+                                                 relative_path: ::String?,
+                                                 storage_type: ::String?
+                                               },
+                                               external_location: {
+                                                 s3_location: ::String?
+                                               }
+                                             },
+                                           ]?,
+                                           s3_location: ::String?
+                                         }
+                                       ) -> _CreateDataSetImportTaskResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataSetImportTaskResponseSuccess
+
+      interface _CreateDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDeploymentResponse]
+        def deployment_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#create_deployment-instance_method
+      def create_deployment: (
+                               application_id: ::String,
+                               application_version: ::Integer,
+                               ?client_token: ::String,
+                               environment_id: ::String
+                             ) -> _CreateDeploymentResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDeploymentResponseSuccess
+
+      interface _CreateEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEnvironmentResponse]
+        def environment_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#create_environment-instance_method
+      def create_environment: (
+                                ?client_token: ::String,
+                                ?description: ::String,
+                                engine_type: ("microfocus" | "bluage"),
+                                ?engine_version: ::String,
+                                ?high_availability_config: {
+                                  desired_capacity: ::Integer
+                                },
+                                instance_type: ::String,
+                                ?kms_key_id: ::String,
+                                name: ::String,
+                                ?preferred_maintenance_window: ::String,
+                                ?publicly_accessible: bool,
+                                ?security_group_ids: Array[::String],
+                                ?storage_configurations: Array[
+                                  {
+                                    efs: {
+                                      file_system_id: ::String,
+                                      mount_point: ::String
+                                    }?,
+                                    fsx: {
+                                      file_system_id: ::String,
+                                      mount_point: ::String
+                                    }?
+                                  },
+                                ],
+                                ?subnet_ids: Array[::String],
+                                ?tags: Hash[::String, ::String]
+                              ) -> _CreateEnvironmentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentResponseSuccess
+
+      interface _DeleteApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteApplicationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#delete_application-instance_method
+      def delete_application: (
+                                application_id: ::String
+                              ) -> _DeleteApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteApplicationResponseSuccess
+
+      interface _DeleteApplicationFromEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteApplicationFromEnvironmentResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#delete_application_from_environment-instance_method
+      def delete_application_from_environment: (
+                                                 application_id: ::String,
+                                                 environment_id: ::String
+                                               ) -> _DeleteApplicationFromEnvironmentResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteApplicationFromEnvironmentResponseSuccess
+
+      interface _DeleteEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEnvironmentResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#delete_environment-instance_method
+      def delete_environment: (
+                                environment_id: ::String
+                              ) -> _DeleteEnvironmentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEnvironmentResponseSuccess
+
+      interface _GetApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetApplicationResponse]
+        def application_arn: () -> ::String
+        def application_id: () -> ::String
+        def creation_time: () -> ::Time
+        def deployed_version: () -> Types::DeployedVersionSummary
+        def description: () -> ::String
+        def engine_type: () -> ("microfocus" | "bluage")
+        def environment_id: () -> ::String
+        def kms_key_id: () -> ::String
+        def last_start_time: () -> ::Time
+        def latest_version: () -> Types::ApplicationVersionSummary
+        def listener_arns: () -> ::Array[::String]
+        def listener_ports: () -> ::Array[::Integer]
+        def load_balancer_dns_name: () -> ::String
+        def log_groups: () -> ::Array[Types::LogGroupSummary]
+        def name: () -> ::String
+        def role_arn: () -> ::String
+        def status: () -> ("Creating" | "Created" | "Available" | "Ready" | "Starting" | "Running" | "Stopping" | "Stopped" | "Failed" | "Deleting" | "Deleting From Environment")
+        def status_reason: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def target_group_arns: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#get_application-instance_method
+      def get_application: (
+                             application_id: ::String
+                           ) -> _GetApplicationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApplicationResponseSuccess
+
+      interface _GetApplicationVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetApplicationVersionResponse]
+        def application_version: () -> ::Integer
+        def creation_time: () -> ::Time
+        def definition_content: () -> ::String
+        def description: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("Creating" | "Available" | "Failed")
+        def status_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#get_application_version-instance_method
+      def get_application_version: (
+                                     application_id: ::String,
+                                     application_version: ::Integer
+                                   ) -> _GetApplicationVersionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApplicationVersionResponseSuccess
+
+      interface _GetBatchJobExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBatchJobExecutionResponse]
+        def application_id: () -> ::String
+        def batch_job_identifier: () -> Types::BatchJobIdentifier
+        def end_time: () -> ::Time
+        def execution_id: () -> ::String
+        def job_id: () -> ::String
+        def job_name: () -> ::String
+        def job_type: () -> ("VSE" | "JES2" | "JES3")
+        def job_user: () -> ::String
+        def return_code: () -> ::String
+        def start_time: () -> ::Time
+        def status: () -> ("Submitting" | "Holding" | "Dispatching" | "Running" | "Cancelling" | "Cancelled" | "Succeeded" | "Failed" | "Succeeded With Warning")
+        def status_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#get_batch_job_execution-instance_method
+      def get_batch_job_execution: (
+                                     application_id: ::String,
+                                     execution_id: ::String
+                                   ) -> _GetBatchJobExecutionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBatchJobExecutionResponseSuccess
+
+      interface _GetDataSetDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataSetDetailsResponse]
+        def blocksize: () -> ::Integer
+        def creation_time: () -> ::Time
+        def data_set_name: () -> ::String
+        def data_set_org: () -> Types::DatasetDetailOrgAttributes
+        def file_size: () -> ::Integer
+        def last_referenced_time: () -> ::Time
+        def last_updated_time: () -> ::Time
+        def location: () -> ::String
+        def record_length: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#get_data_set_details-instance_method
+      def get_data_set_details: (
+                                  application_id: ::String,
+                                  data_set_name: ::String
+                                ) -> _GetDataSetDetailsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataSetDetailsResponseSuccess
+
+      interface _GetDataSetImportTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataSetImportTaskResponse]
+        def status: () -> ("Creating" | "Running" | "Completed" | "Failed")
+        def summary: () -> Types::DataSetImportSummary
+        def task_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#get_data_set_import_task-instance_method
+      def get_data_set_import_task: (
+                                      application_id: ::String,
+                                      task_id: ::String
+                                    ) -> _GetDataSetImportTaskResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataSetImportTaskResponseSuccess
+
+      interface _GetDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeploymentResponse]
+        def application_id: () -> ::String
+        def application_version: () -> ::Integer
+        def creation_time: () -> ::Time
+        def deployment_id: () -> ::String
+        def environment_id: () -> ::String
+        def status: () -> ("Deploying" | "Succeeded" | "Failed" | "Updating Deployment")
+        def status_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#get_deployment-instance_method
+      def get_deployment: (
+                            application_id: ::String,
+                            deployment_id: ::String
+                          ) -> _GetDeploymentResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeploymentResponseSuccess
+
+      interface _GetEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEnvironmentResponse]
+        def actual_capacity: () -> ::Integer
+        def creation_time: () -> ::Time
+        def description: () -> ::String
+        def engine_type: () -> ("microfocus" | "bluage")
+        def engine_version: () -> ::String
+        def environment_arn: () -> ::String
+        def environment_id: () -> ::String
+        def high_availability_config: () -> Types::HighAvailabilityConfig
+        def instance_type: () -> ::String
+        def kms_key_id: () -> ::String
+        def load_balancer_arn: () -> ::String
+        def name: () -> ::String
+        def pending_maintenance: () -> Types::PendingMaintenance
+        def preferred_maintenance_window: () -> ::String
+        def publicly_accessible: () -> bool
+        def security_group_ids: () -> ::Array[::String]
+        def status: () -> ("Creating" | "Available" | "Updating" | "Deleting" | "Failed")
+        def status_reason: () -> ::String
+        def storage_configurations: () -> ::Array[Types::StorageConfiguration]
+        def subnet_ids: () -> ::Array[::String]
+        def tags: () -> ::Hash[::String, ::String]
+        def vpc_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#get_environment-instance_method
+      def get_environment: (
+                             environment_id: ::String
+                           ) -> _GetEnvironmentResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnvironmentResponseSuccess
+
+      interface _GetSignedBluinsightsUrlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSignedBluinsightsUrlResponse]
+        def signed_bi_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#get_signed_bluinsights_url-instance_method
+      def get_signed_bluinsights_url: () -> _GetSignedBluinsightsUrlResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSignedBluinsightsUrlResponseSuccess
+
+      interface _ListApplicationVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationVersionsResponse]
+        def application_versions: () -> ::Array[Types::ApplicationVersionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#list_application_versions-instance_method
+      def list_application_versions: (
+                                       application_id: ::String,
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListApplicationVersionsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationVersionsResponseSuccess
+
+      interface _ListApplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationsResponse]
+        def applications: () -> ::Array[Types::ApplicationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#list_applications-instance_method
+      def list_applications: (
+                               ?environment_id: ::String,
+                               ?max_results: ::Integer,
+                               ?names: Array[::String],
+                               ?next_token: ::String
+                             ) -> _ListApplicationsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationsResponseSuccess
+
+      interface _ListBatchJobDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBatchJobDefinitionsResponse]
+        def batch_job_definitions: () -> ::Array[Types::BatchJobDefinition]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#list_batch_job_definitions-instance_method
+      def list_batch_job_definitions: (
+                                        application_id: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String,
+                                        ?prefix: ::String
+                                      ) -> _ListBatchJobDefinitionsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBatchJobDefinitionsResponseSuccess
+
+      interface _ListBatchJobExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBatchJobExecutionsResponse]
+        def batch_job_executions: () -> ::Array[Types::BatchJobExecutionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#list_batch_job_executions-instance_method
+      def list_batch_job_executions: (
+                                       application_id: ::String,
+                                       ?execution_ids: Array[::String],
+                                       ?job_name: ::String,
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String,
+                                       ?started_after: ::Time,
+                                       ?started_before: ::Time,
+                                       ?status: ("Submitting" | "Holding" | "Dispatching" | "Running" | "Cancelling" | "Cancelled" | "Succeeded" | "Failed" | "Succeeded With Warning")
+                                     ) -> _ListBatchJobExecutionsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBatchJobExecutionsResponseSuccess
+
+      interface _ListDataSetImportHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataSetImportHistoryResponse]
+        def data_set_import_tasks: () -> ::Array[Types::DataSetImportTask]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#list_data_set_import_history-instance_method
+      def list_data_set_import_history: (
+                                          application_id: ::String,
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _ListDataSetImportHistoryResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataSetImportHistoryResponseSuccess
+
+      interface _ListDataSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataSetsResponse]
+        def data_sets: () -> ::Array[Types::DataSetSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#list_data_sets-instance_method
+      def list_data_sets: (
+                            application_id: ::String,
+                            ?max_results: ::Integer,
+                            ?name_filter: ::String,
+                            ?next_token: ::String,
+                            ?prefix: ::String
+                          ) -> _ListDataSetsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataSetsResponseSuccess
+
+      interface _ListDeploymentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDeploymentsResponse]
+        def deployments: () -> ::Array[Types::DeploymentSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#list_deployments-instance_method
+      def list_deployments: (
+                              application_id: ::String,
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _ListDeploymentsResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeploymentsResponseSuccess
+
+      interface _ListEngineVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEngineVersionsResponse]
+        def engine_versions: () -> ::Array[Types::EngineVersionsSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#list_engine_versions-instance_method
+      def list_engine_versions: (
+                                  ?engine_type: ("microfocus" | "bluage"),
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListEngineVersionsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEngineVersionsResponseSuccess
+
+      interface _ListEnvironmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEnvironmentsResponse]
+        def environments: () -> ::Array[Types::EnvironmentSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#list_environments-instance_method
+      def list_environments: (
+                               ?engine_type: ("microfocus" | "bluage"),
+                               ?max_results: ::Integer,
+                               ?names: Array[::String],
+                               ?next_token: ::String
+                             ) -> _ListEnvironmentsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnvironmentsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _StartApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartApplicationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#start_application-instance_method
+      def start_application: (
+                               application_id: ::String
+                             ) -> _StartApplicationResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartApplicationResponseSuccess
+
+      interface _StartBatchJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartBatchJobResponse]
+        def execution_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#start_batch_job-instance_method
+      def start_batch_job: (
+                             application_id: ::String,
+                             batch_job_identifier: {
+                               file_batch_job_identifier: {
+                                 file_name: ::String,
+                                 folder_path: ::String?
+                               }?,
+                               s3_batch_job_identifier: {
+                                 bucket: ::String,
+                                 identifier: {
+                                   file_name: ::String?,
+                                   script_name: ::String?
+                                 },
+                                 key_prefix: ::String?
+                               }?,
+                               script_batch_job_identifier: {
+                                 script_name: ::String
+                               }?
+                             },
+                             ?job_params: Hash[::String, ::String]
+                           ) -> _StartBatchJobResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartBatchJobResponseSuccess
+
+      interface _StopApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopApplicationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#stop_application-instance_method
+      def stop_application: (
+                              application_id: ::String,
+                              ?force_stop: bool
+                            ) -> _StopApplicationResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopApplicationResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateApplicationResponse]
+        def application_version: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#update_application-instance_method
+      def update_application: (
+                                application_id: ::String,
+                                current_application_version: ::Integer,
+                                ?definition: {
+                                  content: ::String?,
+                                  s3_location: ::String?
+                                },
+                                ?description: ::String
+                              ) -> _UpdateApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationResponseSuccess
+
+      interface _UpdateEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEnvironmentResponse]
+        def environment_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#update_environment-instance_method
+      def update_environment: (
+                                ?apply_during_maintenance_window: bool,
+                                ?desired_capacity: ::Integer,
+                                ?engine_version: ::String,
+                                environment_id: ::String,
+                                ?force_update: bool,
+                                ?instance_type: ::String,
+                                ?preferred_maintenance_window: ::String
+                              ) -> _UpdateEnvironmentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentResponseSuccess
+    end
+  end
+end
+

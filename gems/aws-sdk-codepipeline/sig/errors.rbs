@@ -1,0 +1,99 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CodePipeline
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class ActionNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class ActionTypeAlreadyExistsException < ::Aws::Errors::ServiceError
+      end
+      class ActionTypeNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class ApprovalAlreadyCompletedException < ::Aws::Errors::ServiceError
+      end
+      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DuplicatedStopRequestException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidActionDeclarationException < ::Aws::Errors::ServiceError
+      end
+      class InvalidApprovalTokenException < ::Aws::Errors::ServiceError
+      end
+      class InvalidArnException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidBlockerDeclarationException < ::Aws::Errors::ServiceError
+      end
+      class InvalidClientTokenException < ::Aws::Errors::ServiceError
+      end
+      class InvalidJobException < ::Aws::Errors::ServiceError
+      end
+      class InvalidJobStateException < ::Aws::Errors::ServiceError
+      end
+      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+      end
+      class InvalidNonceException < ::Aws::Errors::ServiceError
+      end
+      class InvalidStageDeclarationException < ::Aws::Errors::ServiceError
+      end
+      class InvalidStructureException < ::Aws::Errors::ServiceError
+      end
+      class InvalidTagsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidWebhookAuthenticationParametersException < ::Aws::Errors::ServiceError
+      end
+      class InvalidWebhookFilterPatternException < ::Aws::Errors::ServiceError
+      end
+      class JobNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+      end
+      class NotLatestPipelineExecutionException < ::Aws::Errors::ServiceError
+      end
+      class OutputVariablesSizeExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PipelineExecutionNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class PipelineExecutionNotStoppableException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PipelineNameInUseException < ::Aws::Errors::ServiceError
+      end
+      class PipelineNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class PipelineVersionNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class RequestFailedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class StageNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class StageNotRetryableException < ::Aws::Errors::ServiceError
+      end
+      class TooManyTagsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ValidationException < ::Aws::Errors::ServiceError
+      end
+      class WebhookNotFoundException < ::Aws::Errors::ServiceError
+      end
+    end
+  end
+end

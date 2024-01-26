@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+3.191.0 (2024-01-26)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
 * Feature - Add RBS signature files to support static type checking.
 
 3.190.3 (2024-01-16)

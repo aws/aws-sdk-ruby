@@ -1,0 +1,424 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IVS
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchGetChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetChannelResponse]
+        def channels: () -> ::Array[Types::Channel]
+        def errors: () -> ::Array[Types::BatchError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#batch_get_channel-instance_method
+      def batch_get_channel: (
+                               arns: Array[::String]
+                             ) -> _BatchGetChannelResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetChannelResponseSuccess
+
+      interface _BatchGetStreamKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetStreamKeyResponse]
+        def errors: () -> ::Array[Types::BatchError]
+        def stream_keys: () -> ::Array[Types::StreamKey]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#batch_get_stream_key-instance_method
+      def batch_get_stream_key: (
+                                  arns: Array[::String]
+                                ) -> _BatchGetStreamKeyResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetStreamKeyResponseSuccess
+
+      interface _BatchStartViewerSessionRevocationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchStartViewerSessionRevocationResponse]
+        def errors: () -> ::Array[Types::BatchStartViewerSessionRevocationError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#batch_start_viewer_session_revocation-instance_method
+      def batch_start_viewer_session_revocation: (
+                                                   viewer_sessions: Array[
+                                                     {
+                                                       channel_arn: ::String,
+                                                       viewer_id: ::String,
+                                                       viewer_session_versions_less_than_or_equal_to: ::Integer?
+                                                     },
+                                                   ]
+                                                 ) -> _BatchStartViewerSessionRevocationResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchStartViewerSessionRevocationResponseSuccess
+
+      interface _CreateChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateChannelResponse]
+        def channel: () -> Types::Channel
+        def stream_key: () -> Types::StreamKey
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#create_channel-instance_method
+      def create_channel: (
+                            ?authorized: bool,
+                            ?insecure_ingest: bool,
+                            ?latency_mode: ("NORMAL" | "LOW"),
+                            ?name: ::String,
+                            ?preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY"),
+                            ?recording_configuration_arn: ::String,
+                            ?tags: Hash[::String, ::String],
+                            ?type: ("BASIC" | "STANDARD" | "ADVANCED_SD" | "ADVANCED_HD")
+                          ) -> _CreateChannelResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelResponseSuccess
+
+      interface _CreateRecordingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRecordingConfigurationResponse]
+        def recording_configuration: () -> Types::RecordingConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#create_recording_configuration-instance_method
+      def create_recording_configuration: (
+                                            destination_configuration: {
+                                              s3: {
+                                                bucket_name: ::String
+                                              }?
+                                            },
+                                            ?name: ::String,
+                                            ?recording_reconnect_window_seconds: ::Integer,
+                                            ?rendition_configuration: {
+                                              rendition_selection: ("ALL" | "NONE" | "CUSTOM")?,
+                                              renditions: Array[("FULL_HD" | "HD" | "SD" | "LOWEST_RESOLUTION")]?
+                                            },
+                                            ?tags: Hash[::String, ::String],
+                                            ?thumbnail_configuration: {
+                                              recording_mode: ("DISABLED" | "INTERVAL")?,
+                                              resolution: ("FULL_HD" | "HD" | "SD" | "LOWEST_RESOLUTION")?,
+                                              storage: Array[("SEQUENTIAL" | "LATEST")]?,
+                                              target_interval_seconds: ::Integer?
+                                            }
+                                          ) -> _CreateRecordingConfigurationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRecordingConfigurationResponseSuccess
+
+      interface _CreateStreamKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStreamKeyResponse]
+        def stream_key: () -> Types::StreamKey
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#create_stream_key-instance_method
+      def create_stream_key: (
+                               channel_arn: ::String,
+                               ?tags: Hash[::String, ::String]
+                             ) -> _CreateStreamKeyResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStreamKeyResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#delete_channel-instance_method
+      def delete_channel: (
+                            arn: ::String
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeletePlaybackKeyPairResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePlaybackKeyPairResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#delete_playback_key_pair-instance_method
+      def delete_playback_key_pair: (
+                                      arn: ::String
+                                    ) -> _DeletePlaybackKeyPairResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePlaybackKeyPairResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#delete_recording_configuration-instance_method
+      def delete_recording_configuration: (
+                                            arn: ::String
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#delete_stream_key-instance_method
+      def delete_stream_key: (
+                               arn: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetChannelResponse]
+        def channel: () -> Types::Channel
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#get_channel-instance_method
+      def get_channel: (
+                         arn: ::String
+                       ) -> _GetChannelResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetChannelResponseSuccess
+
+      interface _GetPlaybackKeyPairResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPlaybackKeyPairResponse]
+        def key_pair: () -> Types::PlaybackKeyPair
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#get_playback_key_pair-instance_method
+      def get_playback_key_pair: (
+                                   arn: ::String
+                                 ) -> _GetPlaybackKeyPairResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPlaybackKeyPairResponseSuccess
+
+      interface _GetRecordingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRecordingConfigurationResponse]
+        def recording_configuration: () -> Types::RecordingConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#get_recording_configuration-instance_method
+      def get_recording_configuration: (
+                                         arn: ::String
+                                       ) -> _GetRecordingConfigurationResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRecordingConfigurationResponseSuccess
+
+      interface _GetStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStreamResponse]
+        def stream: () -> Types::Stream
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#get_stream-instance_method
+      def get_stream: (
+                        channel_arn: ::String
+                      ) -> _GetStreamResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStreamResponseSuccess
+
+      interface _GetStreamKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStreamKeyResponse]
+        def stream_key: () -> Types::StreamKey
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#get_stream_key-instance_method
+      def get_stream_key: (
+                            arn: ::String
+                          ) -> _GetStreamKeyResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStreamKeyResponseSuccess
+
+      interface _GetStreamSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStreamSessionResponse]
+        def stream_session: () -> Types::StreamSession
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#get_stream_session-instance_method
+      def get_stream_session: (
+                                channel_arn: ::String,
+                                ?stream_id: ::String
+                              ) -> _GetStreamSessionResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStreamSessionResponseSuccess
+
+      interface _ImportPlaybackKeyPairResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportPlaybackKeyPairResponse]
+        def key_pair: () -> Types::PlaybackKeyPair
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#import_playback_key_pair-instance_method
+      def import_playback_key_pair: (
+                                      ?name: ::String,
+                                      public_key_material: ::String,
+                                      ?tags: Hash[::String, ::String]
+                                    ) -> _ImportPlaybackKeyPairResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportPlaybackKeyPairResponseSuccess
+
+      interface _ListChannelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelsResponse]
+        def channels: () -> ::Array[Types::ChannelSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#list_channels-instance_method
+      def list_channels: (
+                           ?filter_by_name: ::String,
+                           ?filter_by_recording_configuration_arn: ::String,
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListChannelsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelsResponseSuccess
+
+      interface _ListPlaybackKeyPairsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPlaybackKeyPairsResponse]
+        def key_pairs: () -> ::Array[Types::PlaybackKeyPairSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#list_playback_key_pairs-instance_method
+      def list_playback_key_pairs: (
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListPlaybackKeyPairsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPlaybackKeyPairsResponseSuccess
+
+      interface _ListRecordingConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecordingConfigurationsResponse]
+        def next_token: () -> ::String
+        def recording_configurations: () -> ::Array[Types::RecordingConfigurationSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#list_recording_configurations-instance_method
+      def list_recording_configurations: (
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String
+                                         ) -> _ListRecordingConfigurationsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecordingConfigurationsResponseSuccess
+
+      interface _ListStreamKeysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStreamKeysResponse]
+        def next_token: () -> ::String
+        def stream_keys: () -> ::Array[Types::StreamKeySummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#list_stream_keys-instance_method
+      def list_stream_keys: (
+                              channel_arn: ::String,
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _ListStreamKeysResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStreamKeysResponseSuccess
+
+      interface _ListStreamSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStreamSessionsResponse]
+        def next_token: () -> ::String
+        def stream_sessions: () -> ::Array[Types::StreamSessionSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#list_stream_sessions-instance_method
+      def list_stream_sessions: (
+                                  channel_arn: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListStreamSessionsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStreamSessionsResponseSuccess
+
+      interface _ListStreamsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStreamsResponse]
+        def next_token: () -> ::String
+        def streams: () -> ::Array[Types::StreamSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#list_streams-instance_method
+      def list_streams: (
+                          ?filter_by: {
+                            health: ("HEALTHY" | "STARVING" | "UNKNOWN")?
+                          },
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListStreamsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStreamsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#put_metadata-instance_method
+      def put_metadata: (
+                          channel_arn: ::String,
+                          metadata: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _StartViewerSessionRevocationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartViewerSessionRevocationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#start_viewer_session_revocation-instance_method
+      def start_viewer_session_revocation: (
+                                             channel_arn: ::String,
+                                             viewer_id: ::String,
+                                             ?viewer_session_versions_less_than_or_equal_to: ::Integer
+                                           ) -> _StartViewerSessionRevocationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartViewerSessionRevocationResponseSuccess
+
+      interface _StopStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopStreamResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#stop_stream-instance_method
+      def stop_stream: (
+                         channel_arn: ::String
+                       ) -> _StopStreamResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopStreamResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateChannelResponse]
+        def channel: () -> Types::Channel
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#update_channel-instance_method
+      def update_channel: (
+                            arn: ::String,
+                            ?authorized: bool,
+                            ?insecure_ingest: bool,
+                            ?latency_mode: ("NORMAL" | "LOW"),
+                            ?name: ::String,
+                            ?preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY"),
+                            ?recording_configuration_arn: ::String,
+                            ?type: ("BASIC" | "STANDARD" | "ADVANCED_SD" | "ADVANCED_HD")
+                          ) -> _UpdateChannelResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelResponseSuccess
+    end
+  end
+end
+

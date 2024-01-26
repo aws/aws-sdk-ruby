@@ -1,0 +1,79 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Polly
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class EngineNotSupportedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidLexiconException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidS3BucketException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidS3KeyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidSampleRateException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidSnsTopicArnException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidSsmlException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidTaskIdException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LanguageNotSupportedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LexiconNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LexiconSizeExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MarksNotSupportedForFormatException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MaxLexemeLengthExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MaxLexiconsNumberExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ServiceFailureException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class SsmlMarksNotSupportedForTextTypeException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class SynthesisTaskNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TextLengthExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnsupportedPlsAlphabetException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnsupportedPlsLanguageException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

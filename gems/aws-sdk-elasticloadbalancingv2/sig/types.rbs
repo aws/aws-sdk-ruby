@@ -1,0 +1,1043 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ElasticLoadBalancingV2
+  module Types
+
+    class ALPNPolicyNotSupportedException < Aws::EmptyStructure
+    end
+
+    class Action
+      attr_accessor type: ("forward" | "authenticate-oidc" | "authenticate-cognito" | "redirect" | "fixed-response")
+      attr_accessor target_group_arn: ::String
+      attr_accessor authenticate_oidc_config: Types::AuthenticateOidcActionConfig
+      attr_accessor authenticate_cognito_config: Types::AuthenticateCognitoActionConfig
+      attr_accessor order: ::Integer
+      attr_accessor redirect_config: Types::RedirectActionConfig
+      attr_accessor fixed_response_config: Types::FixedResponseActionConfig
+      attr_accessor forward_config: Types::ForwardActionConfig
+      SENSITIVE: []
+    end
+
+    class AddListenerCertificatesInput
+      attr_accessor listener_arn: ::String
+      attr_accessor certificates: ::Array[Types::Certificate]
+      SENSITIVE: []
+    end
+
+    class AddListenerCertificatesOutput
+      attr_accessor certificates: ::Array[Types::Certificate]
+      SENSITIVE: []
+    end
+
+    class AddTagsInput
+      attr_accessor resource_arns: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class AddTagsOutput < Aws::EmptyStructure
+    end
+
+    class AddTrustStoreRevocationsInput
+      attr_accessor trust_store_arn: ::String
+      attr_accessor revocation_contents: ::Array[Types::RevocationContent]
+      SENSITIVE: []
+    end
+
+    class AddTrustStoreRevocationsOutput
+      attr_accessor trust_store_revocations: ::Array[Types::TrustStoreRevocation]
+      SENSITIVE: []
+    end
+
+    class AllocationIdNotFoundException < Aws::EmptyStructure
+    end
+
+    class AnomalyDetection
+      attr_accessor result: ("anomalous" | "normal")
+      attr_accessor mitigation_in_effect: ("yes" | "no")
+      SENSITIVE: []
+    end
+
+    class AuthenticateCognitoActionConfig
+      attr_accessor user_pool_arn: ::String
+      attr_accessor user_pool_client_id: ::String
+      attr_accessor user_pool_domain: ::String
+      attr_accessor session_cookie_name: ::String
+      attr_accessor scope: ::String
+      attr_accessor session_timeout: ::Integer
+      attr_accessor authentication_request_extra_params: ::Hash[::String, ::String]
+      attr_accessor on_unauthenticated_request: ("deny" | "allow" | "authenticate")
+      SENSITIVE: []
+    end
+
+    class AuthenticateOidcActionConfig
+      attr_accessor issuer: ::String
+      attr_accessor authorization_endpoint: ::String
+      attr_accessor token_endpoint: ::String
+      attr_accessor user_info_endpoint: ::String
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      attr_accessor session_cookie_name: ::String
+      attr_accessor scope: ::String
+      attr_accessor session_timeout: ::Integer
+      attr_accessor authentication_request_extra_params: ::Hash[::String, ::String]
+      attr_accessor on_unauthenticated_request: ("deny" | "allow" | "authenticate")
+      attr_accessor use_existing_client_secret: bool
+      SENSITIVE: []
+    end
+
+    class AvailabilityZone
+      attr_accessor zone_name: ::String
+      attr_accessor subnet_id: ::String
+      attr_accessor outpost_id: ::String
+      attr_accessor load_balancer_addresses: ::Array[Types::LoadBalancerAddress]
+      SENSITIVE: []
+    end
+
+    class AvailabilityZoneNotSupportedException < Aws::EmptyStructure
+    end
+
+    class CaCertificatesBundleNotFoundException < Aws::EmptyStructure
+    end
+
+    class Certificate
+      attr_accessor certificate_arn: ::String
+      attr_accessor is_default: bool
+      SENSITIVE: []
+    end
+
+    class CertificateNotFoundException < Aws::EmptyStructure
+    end
+
+    class Cipher
+      attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateListenerInput
+      attr_accessor load_balancer_arn: ::String
+      attr_accessor protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE")
+      attr_accessor port: ::Integer
+      attr_accessor ssl_policy: ::String
+      attr_accessor certificates: ::Array[Types::Certificate]
+      attr_accessor default_actions: ::Array[Types::Action]
+      attr_accessor alpn_policy: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor mutual_authentication: Types::MutualAuthenticationAttributes
+      SENSITIVE: []
+    end
+
+    class CreateListenerOutput
+      attr_accessor listeners: ::Array[Types::Listener]
+      SENSITIVE: []
+    end
+
+    class CreateLoadBalancerInput
+      attr_accessor name: ::String
+      attr_accessor subnets: ::Array[::String]
+      attr_accessor subnet_mappings: ::Array[Types::SubnetMapping]
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor scheme: ("internet-facing" | "internal")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor type: ("application" | "network" | "gateway")
+      attr_accessor ip_address_type: ("ipv4" | "dualstack")
+      attr_accessor customer_owned_ipv_4_pool: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLoadBalancerOutput
+      attr_accessor load_balancers: ::Array[Types::LoadBalancer]
+      SENSITIVE: []
+    end
+
+    class CreateRuleInput
+      attr_accessor listener_arn: ::String
+      attr_accessor conditions: ::Array[Types::RuleCondition]
+      attr_accessor priority: ::Integer
+      attr_accessor actions: ::Array[Types::Action]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateRuleOutput
+      attr_accessor rules: ::Array[Types::Rule]
+      SENSITIVE: []
+    end
+
+    class CreateTargetGroupInput
+      attr_accessor name: ::String
+      attr_accessor protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE")
+      attr_accessor protocol_version: ::String
+      attr_accessor port: ::Integer
+      attr_accessor vpc_id: ::String
+      attr_accessor health_check_protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE")
+      attr_accessor health_check_port: ::String
+      attr_accessor health_check_enabled: bool
+      attr_accessor health_check_path: ::String
+      attr_accessor health_check_interval_seconds: ::Integer
+      attr_accessor health_check_timeout_seconds: ::Integer
+      attr_accessor healthy_threshold_count: ::Integer
+      attr_accessor unhealthy_threshold_count: ::Integer
+      attr_accessor matcher: Types::Matcher
+      attr_accessor target_type: ("instance" | "ip" | "lambda" | "alb")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor ip_address_type: ("ipv4" | "ipv6")
+      SENSITIVE: []
+    end
+
+    class CreateTargetGroupOutput
+      attr_accessor target_groups: ::Array[Types::TargetGroup]
+      SENSITIVE: []
+    end
+
+    class CreateTrustStoreInput
+      attr_accessor name: ::String
+      attr_accessor ca_certificates_bundle_s3_bucket: ::String
+      attr_accessor ca_certificates_bundle_s3_key: ::String
+      attr_accessor ca_certificates_bundle_s3_object_version: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateTrustStoreOutput
+      attr_accessor trust_stores: ::Array[Types::TrustStore]
+      SENSITIVE: []
+    end
+
+    class DeleteListenerInput
+      attr_accessor listener_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteListenerOutput < Aws::EmptyStructure
+    end
+
+    class DeleteLoadBalancerInput
+      attr_accessor load_balancer_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLoadBalancerOutput < Aws::EmptyStructure
+    end
+
+    class DeleteRuleInput
+      attr_accessor rule_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRuleOutput < Aws::EmptyStructure
+    end
+
+    class DeleteTargetGroupInput
+      attr_accessor target_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTargetGroupOutput < Aws::EmptyStructure
+    end
+
+    class DeleteTrustStoreInput
+      attr_accessor trust_store_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTrustStoreOutput < Aws::EmptyStructure
+    end
+
+    class DeregisterTargetsInput
+      attr_accessor target_group_arn: ::String
+      attr_accessor targets: ::Array[Types::TargetDescription]
+      SENSITIVE: []
+    end
+
+    class DeregisterTargetsOutput < Aws::EmptyStructure
+    end
+
+    class DescribeAccountLimitsInput
+      attr_accessor marker: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeAccountLimitsOutput
+      attr_accessor limits: ::Array[Types::Limit]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeListenerCertificatesInput
+      attr_accessor listener_arn: ::String
+      attr_accessor marker: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeListenerCertificatesOutput
+      attr_accessor certificates: ::Array[Types::Certificate]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeListenersInput
+      attr_accessor load_balancer_arn: ::String
+      attr_accessor listener_arns: ::Array[::String]
+      attr_accessor marker: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeListenersOutput
+      attr_accessor listeners: ::Array[Types::Listener]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLoadBalancerAttributesInput
+      attr_accessor load_balancer_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLoadBalancerAttributesOutput
+      attr_accessor attributes: ::Array[Types::LoadBalancerAttribute]
+      SENSITIVE: []
+    end
+
+    class DescribeLoadBalancersInput
+      attr_accessor load_balancer_arns: ::Array[::String]
+      attr_accessor names: ::Array[::String]
+      attr_accessor marker: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeLoadBalancersOutput
+      attr_accessor load_balancers: ::Array[Types::LoadBalancer]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRulesInput
+      attr_accessor listener_arn: ::String
+      attr_accessor rule_arns: ::Array[::String]
+      attr_accessor marker: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeRulesOutput
+      attr_accessor rules: ::Array[Types::Rule]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSSLPoliciesInput
+      attr_accessor names: ::Array[::String]
+      attr_accessor marker: ::String
+      attr_accessor page_size: ::Integer
+      attr_accessor load_balancer_type: ("application" | "network" | "gateway")
+      SENSITIVE: []
+    end
+
+    class DescribeSSLPoliciesOutput
+      attr_accessor ssl_policies: ::Array[Types::SslPolicy]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTagsInput
+      attr_accessor resource_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeTagsOutput
+      attr_accessor tag_descriptions: ::Array[Types::TagDescription]
+      SENSITIVE: []
+    end
+
+    class DescribeTargetGroupAttributesInput
+      attr_accessor target_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTargetGroupAttributesOutput
+      attr_accessor attributes: ::Array[Types::TargetGroupAttribute]
+      SENSITIVE: []
+    end
+
+    class DescribeTargetGroupsInput
+      attr_accessor load_balancer_arn: ::String
+      attr_accessor target_group_arns: ::Array[::String]
+      attr_accessor names: ::Array[::String]
+      attr_accessor marker: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeTargetGroupsOutput
+      attr_accessor target_groups: ::Array[Types::TargetGroup]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTargetHealthInput
+      attr_accessor target_group_arn: ::String
+      attr_accessor targets: ::Array[Types::TargetDescription]
+      attr_accessor include: ::Array[("AnomalyDetection" | "All")]
+      SENSITIVE: []
+    end
+
+    class DescribeTargetHealthOutput
+      attr_accessor target_health_descriptions: ::Array[Types::TargetHealthDescription]
+      SENSITIVE: []
+    end
+
+    class DescribeTrustStoreAssociationsInput
+      attr_accessor trust_store_arn: ::String
+      attr_accessor marker: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeTrustStoreAssociationsOutput
+      attr_accessor trust_store_associations: ::Array[Types::TrustStoreAssociation]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTrustStoreRevocation
+      attr_accessor trust_store_arn: ::String
+      attr_accessor revocation_id: ::Integer
+      attr_accessor revocation_type: ("CRL")
+      attr_accessor number_of_revoked_entries: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeTrustStoreRevocationsInput
+      attr_accessor trust_store_arn: ::String
+      attr_accessor revocation_ids: ::Array[::Integer]
+      attr_accessor marker: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeTrustStoreRevocationsOutput
+      attr_accessor trust_store_revocations: ::Array[Types::DescribeTrustStoreRevocation]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTrustStoresInput
+      attr_accessor trust_store_arns: ::Array[::String]
+      attr_accessor names: ::Array[::String]
+      attr_accessor marker: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeTrustStoresOutput
+      attr_accessor trust_stores: ::Array[Types::TrustStore]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class DuplicateListenerException < Aws::EmptyStructure
+    end
+
+    class DuplicateLoadBalancerNameException < Aws::EmptyStructure
+    end
+
+    class DuplicateTagKeysException < Aws::EmptyStructure
+    end
+
+    class DuplicateTargetGroupNameException < Aws::EmptyStructure
+    end
+
+    class DuplicateTrustStoreNameException < Aws::EmptyStructure
+    end
+
+    class FixedResponseActionConfig
+      attr_accessor message_body: ::String
+      attr_accessor status_code: ::String
+      attr_accessor content_type: ::String
+      SENSITIVE: []
+    end
+
+    class ForwardActionConfig
+      attr_accessor target_groups: ::Array[Types::TargetGroupTuple]
+      attr_accessor target_group_stickiness_config: Types::TargetGroupStickinessConfig
+      SENSITIVE: []
+    end
+
+    class GetTrustStoreCaCertificatesBundleInput
+      attr_accessor trust_store_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetTrustStoreCaCertificatesBundleOutput
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
+    class GetTrustStoreRevocationContentInput
+      attr_accessor trust_store_arn: ::String
+      attr_accessor revocation_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetTrustStoreRevocationContentOutput
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
+    class HealthUnavailableException < Aws::EmptyStructure
+    end
+
+    class HostHeaderConditionConfig
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class HttpHeaderConditionConfig
+      attr_accessor http_header_name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class HttpRequestMethodConditionConfig
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class IncompatibleProtocolsException < Aws::EmptyStructure
+    end
+
+    class InvalidCaCertificatesBundleException < Aws::EmptyStructure
+    end
+
+    class InvalidConfigurationRequestException < Aws::EmptyStructure
+    end
+
+    class InvalidLoadBalancerActionException < Aws::EmptyStructure
+    end
+
+    class InvalidRevocationContentException < Aws::EmptyStructure
+    end
+
+    class InvalidSchemeException < Aws::EmptyStructure
+    end
+
+    class InvalidSecurityGroupException < Aws::EmptyStructure
+    end
+
+    class InvalidSubnetException < Aws::EmptyStructure
+    end
+
+    class InvalidTargetException < Aws::EmptyStructure
+    end
+
+    class Limit
+      attr_accessor name: ::String
+      attr_accessor max: ::String
+      SENSITIVE: []
+    end
+
+    class Listener
+      attr_accessor listener_arn: ::String
+      attr_accessor load_balancer_arn: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE")
+      attr_accessor certificates: ::Array[Types::Certificate]
+      attr_accessor ssl_policy: ::String
+      attr_accessor default_actions: ::Array[Types::Action]
+      attr_accessor alpn_policy: ::Array[::String]
+      attr_accessor mutual_authentication: Types::MutualAuthenticationAttributes
+      SENSITIVE: []
+    end
+
+    class ListenerNotFoundException < Aws::EmptyStructure
+    end
+
+    class LoadBalancer
+      attr_accessor load_balancer_arn: ::String
+      attr_accessor dns_name: ::String
+      attr_accessor canonical_hosted_zone_id: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor load_balancer_name: ::String
+      attr_accessor scheme: ("internet-facing" | "internal")
+      attr_accessor vpc_id: ::String
+      attr_accessor state: Types::LoadBalancerState
+      attr_accessor type: ("application" | "network" | "gateway")
+      attr_accessor availability_zones: ::Array[Types::AvailabilityZone]
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor ip_address_type: ("ipv4" | "dualstack")
+      attr_accessor customer_owned_ipv_4_pool: ::String
+      attr_accessor enforce_security_group_inbound_rules_on_private_link_traffic: ::String
+      SENSITIVE: []
+    end
+
+    class LoadBalancerAddress
+      attr_accessor ip_address: ::String
+      attr_accessor allocation_id: ::String
+      attr_accessor private_i_pv_4_address: ::String
+      attr_accessor i_pv_6_address: ::String
+      SENSITIVE: []
+    end
+
+    class LoadBalancerAttribute
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class LoadBalancerNotFoundException < Aws::EmptyStructure
+    end
+
+    class LoadBalancerState
+      attr_accessor code: ("active" | "provisioning" | "active_impaired" | "failed")
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class Matcher
+      attr_accessor http_code: ::String
+      attr_accessor grpc_code: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyListenerInput
+      attr_accessor listener_arn: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE")
+      attr_accessor ssl_policy: ::String
+      attr_accessor certificates: ::Array[Types::Certificate]
+      attr_accessor default_actions: ::Array[Types::Action]
+      attr_accessor alpn_policy: ::Array[::String]
+      attr_accessor mutual_authentication: Types::MutualAuthenticationAttributes
+      SENSITIVE: []
+    end
+
+    class ModifyListenerOutput
+      attr_accessor listeners: ::Array[Types::Listener]
+      SENSITIVE: []
+    end
+
+    class ModifyLoadBalancerAttributesInput
+      attr_accessor load_balancer_arn: ::String
+      attr_accessor attributes: ::Array[Types::LoadBalancerAttribute]
+      SENSITIVE: []
+    end
+
+    class ModifyLoadBalancerAttributesOutput
+      attr_accessor attributes: ::Array[Types::LoadBalancerAttribute]
+      SENSITIVE: []
+    end
+
+    class ModifyRuleInput
+      attr_accessor rule_arn: ::String
+      attr_accessor conditions: ::Array[Types::RuleCondition]
+      attr_accessor actions: ::Array[Types::Action]
+      SENSITIVE: []
+    end
+
+    class ModifyRuleOutput
+      attr_accessor rules: ::Array[Types::Rule]
+      SENSITIVE: []
+    end
+
+    class ModifyTargetGroupAttributesInput
+      attr_accessor target_group_arn: ::String
+      attr_accessor attributes: ::Array[Types::TargetGroupAttribute]
+      SENSITIVE: []
+    end
+
+    class ModifyTargetGroupAttributesOutput
+      attr_accessor attributes: ::Array[Types::TargetGroupAttribute]
+      SENSITIVE: []
+    end
+
+    class ModifyTargetGroupInput
+      attr_accessor target_group_arn: ::String
+      attr_accessor health_check_protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE")
+      attr_accessor health_check_port: ::String
+      attr_accessor health_check_path: ::String
+      attr_accessor health_check_enabled: bool
+      attr_accessor health_check_interval_seconds: ::Integer
+      attr_accessor health_check_timeout_seconds: ::Integer
+      attr_accessor healthy_threshold_count: ::Integer
+      attr_accessor unhealthy_threshold_count: ::Integer
+      attr_accessor matcher: Types::Matcher
+      SENSITIVE: []
+    end
+
+    class ModifyTargetGroupOutput
+      attr_accessor target_groups: ::Array[Types::TargetGroup]
+      SENSITIVE: []
+    end
+
+    class ModifyTrustStoreInput
+      attr_accessor trust_store_arn: ::String
+      attr_accessor ca_certificates_bundle_s3_bucket: ::String
+      attr_accessor ca_certificates_bundle_s3_key: ::String
+      attr_accessor ca_certificates_bundle_s3_object_version: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyTrustStoreOutput
+      attr_accessor trust_stores: ::Array[Types::TrustStore]
+      SENSITIVE: []
+    end
+
+    class MutualAuthenticationAttributes
+      attr_accessor mode: ::String
+      attr_accessor trust_store_arn: ::String
+      attr_accessor ignore_client_certificate_expiry: bool
+      SENSITIVE: []
+    end
+
+    class OperationNotPermittedException < Aws::EmptyStructure
+    end
+
+    class PathPatternConditionConfig
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PriorityInUseException < Aws::EmptyStructure
+    end
+
+    class QueryStringConditionConfig
+      attr_accessor values: ::Array[Types::QueryStringKeyValuePair]
+      SENSITIVE: []
+    end
+
+    class QueryStringKeyValuePair
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class RedirectActionConfig
+      attr_accessor protocol: ::String
+      attr_accessor port: ::String
+      attr_accessor host: ::String
+      attr_accessor path: ::String
+      attr_accessor query: ::String
+      attr_accessor status_code: ("HTTP_301" | "HTTP_302")
+      SENSITIVE: []
+    end
+
+    class RegisterTargetsInput
+      attr_accessor target_group_arn: ::String
+      attr_accessor targets: ::Array[Types::TargetDescription]
+      SENSITIVE: []
+    end
+
+    class RegisterTargetsOutput < Aws::EmptyStructure
+    end
+
+    class RemoveListenerCertificatesInput
+      attr_accessor listener_arn: ::String
+      attr_accessor certificates: ::Array[Types::Certificate]
+      SENSITIVE: []
+    end
+
+    class RemoveListenerCertificatesOutput < Aws::EmptyStructure
+    end
+
+    class RemoveTagsInput
+      attr_accessor resource_arns: ::Array[::String]
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RemoveTagsOutput < Aws::EmptyStructure
+    end
+
+    class RemoveTrustStoreRevocationsInput
+      attr_accessor trust_store_arn: ::String
+      attr_accessor revocation_ids: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class RemoveTrustStoreRevocationsOutput < Aws::EmptyStructure
+    end
+
+    class ResourceInUseException < Aws::EmptyStructure
+    end
+
+    class RevocationContent
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_key: ::String
+      attr_accessor s3_object_version: ::String
+      attr_accessor revocation_type: ("CRL")
+      SENSITIVE: []
+    end
+
+    class RevocationContentNotFoundException < Aws::EmptyStructure
+    end
+
+    class RevocationIdNotFoundException < Aws::EmptyStructure
+    end
+
+    class Rule
+      attr_accessor rule_arn: ::String
+      attr_accessor priority: ::String
+      attr_accessor conditions: ::Array[Types::RuleCondition]
+      attr_accessor actions: ::Array[Types::Action]
+      attr_accessor is_default: bool
+      SENSITIVE: []
+    end
+
+    class RuleCondition
+      attr_accessor field: ::String
+      attr_accessor values: ::Array[::String]
+      attr_accessor host_header_config: Types::HostHeaderConditionConfig
+      attr_accessor path_pattern_config: Types::PathPatternConditionConfig
+      attr_accessor http_header_config: Types::HttpHeaderConditionConfig
+      attr_accessor query_string_config: Types::QueryStringConditionConfig
+      attr_accessor http_request_method_config: Types::HttpRequestMethodConditionConfig
+      attr_accessor source_ip_config: Types::SourceIpConditionConfig
+      SENSITIVE: []
+    end
+
+    class RuleNotFoundException < Aws::EmptyStructure
+    end
+
+    class RulePriorityPair
+      attr_accessor rule_arn: ::String
+      attr_accessor priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class SSLPolicyNotFoundException < Aws::EmptyStructure
+    end
+
+    class SetIpAddressTypeInput
+      attr_accessor load_balancer_arn: ::String
+      attr_accessor ip_address_type: ("ipv4" | "dualstack")
+      SENSITIVE: []
+    end
+
+    class SetIpAddressTypeOutput
+      attr_accessor ip_address_type: ("ipv4" | "dualstack")
+      SENSITIVE: []
+    end
+
+    class SetRulePrioritiesInput
+      attr_accessor rule_priorities: ::Array[Types::RulePriorityPair]
+      SENSITIVE: []
+    end
+
+    class SetRulePrioritiesOutput
+      attr_accessor rules: ::Array[Types::Rule]
+      SENSITIVE: []
+    end
+
+    class SetSecurityGroupsInput
+      attr_accessor load_balancer_arn: ::String
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor enforce_security_group_inbound_rules_on_private_link_traffic: ("on" | "off")
+      SENSITIVE: []
+    end
+
+    class SetSecurityGroupsOutput
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor enforce_security_group_inbound_rules_on_private_link_traffic: ("on" | "off")
+      SENSITIVE: []
+    end
+
+    class SetSubnetsInput
+      attr_accessor load_balancer_arn: ::String
+      attr_accessor subnets: ::Array[::String]
+      attr_accessor subnet_mappings: ::Array[Types::SubnetMapping]
+      attr_accessor ip_address_type: ("ipv4" | "dualstack")
+      SENSITIVE: []
+    end
+
+    class SetSubnetsOutput
+      attr_accessor availability_zones: ::Array[Types::AvailabilityZone]
+      attr_accessor ip_address_type: ("ipv4" | "dualstack")
+      SENSITIVE: []
+    end
+
+    class SourceIpConditionConfig
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SslPolicy
+      attr_accessor ssl_protocols: ::Array[::String]
+      attr_accessor ciphers: ::Array[Types::Cipher]
+      attr_accessor name: ::String
+      attr_accessor supported_load_balancer_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SubnetMapping
+      attr_accessor subnet_id: ::String
+      attr_accessor allocation_id: ::String
+      attr_accessor private_i_pv_4_address: ::String
+      attr_accessor i_pv_6_address: ::String
+      SENSITIVE: []
+    end
+
+    class SubnetNotFoundException < Aws::EmptyStructure
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagDescription
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TargetDescription
+      attr_accessor id: ::String
+      attr_accessor port: ::Integer
+      attr_accessor availability_zone: ::String
+      SENSITIVE: []
+    end
+
+    class TargetGroup
+      attr_accessor target_group_arn: ::String
+      attr_accessor target_group_name: ::String
+      attr_accessor protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE")
+      attr_accessor port: ::Integer
+      attr_accessor vpc_id: ::String
+      attr_accessor health_check_protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE")
+      attr_accessor health_check_port: ::String
+      attr_accessor health_check_enabled: bool
+      attr_accessor health_check_interval_seconds: ::Integer
+      attr_accessor health_check_timeout_seconds: ::Integer
+      attr_accessor healthy_threshold_count: ::Integer
+      attr_accessor unhealthy_threshold_count: ::Integer
+      attr_accessor health_check_path: ::String
+      attr_accessor matcher: Types::Matcher
+      attr_accessor load_balancer_arns: ::Array[::String]
+      attr_accessor target_type: ("instance" | "ip" | "lambda" | "alb")
+      attr_accessor protocol_version: ::String
+      attr_accessor ip_address_type: ("ipv4" | "ipv6")
+      SENSITIVE: []
+    end
+
+    class TargetGroupAssociationLimitException < Aws::EmptyStructure
+    end
+
+    class TargetGroupAttribute
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TargetGroupNotFoundException < Aws::EmptyStructure
+    end
+
+    class TargetGroupStickinessConfig
+      attr_accessor enabled: bool
+      attr_accessor duration_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class TargetGroupTuple
+      attr_accessor target_group_arn: ::String
+      attr_accessor weight: ::Integer
+      SENSITIVE: []
+    end
+
+    class TargetHealth
+      attr_accessor state: ("initial" | "healthy" | "unhealthy" | "unused" | "draining" | "unavailable")
+      attr_accessor reason: ("Elb.RegistrationInProgress" | "Elb.InitialHealthChecking" | "Target.ResponseCodeMismatch" | "Target.Timeout" | "Target.FailedHealthChecks" | "Target.NotRegistered" | "Target.NotInUse" | "Target.DeregistrationInProgress" | "Target.InvalidState" | "Target.IpUnusable" | "Target.HealthCheckDisabled" | "Elb.InternalError")
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class TargetHealthDescription
+      attr_accessor target: Types::TargetDescription
+      attr_accessor health_check_port: ::String
+      attr_accessor target_health: Types::TargetHealth
+      attr_accessor anomaly_detection: Types::AnomalyDetection
+      SENSITIVE: []
+    end
+
+    class TooManyActionsException < Aws::EmptyStructure
+    end
+
+    class TooManyCertificatesException < Aws::EmptyStructure
+    end
+
+    class TooManyListenersException < Aws::EmptyStructure
+    end
+
+    class TooManyLoadBalancersException < Aws::EmptyStructure
+    end
+
+    class TooManyRegistrationsForTargetIdException < Aws::EmptyStructure
+    end
+
+    class TooManyRulesException < Aws::EmptyStructure
+    end
+
+    class TooManyTagsException < Aws::EmptyStructure
+    end
+
+    class TooManyTargetGroupsException < Aws::EmptyStructure
+    end
+
+    class TooManyTargetsException < Aws::EmptyStructure
+    end
+
+    class TooManyTrustStoreRevocationEntriesException < Aws::EmptyStructure
+    end
+
+    class TooManyTrustStoresException < Aws::EmptyStructure
+    end
+
+    class TooManyUniqueTargetGroupsPerLoadBalancerException < Aws::EmptyStructure
+    end
+
+    class TrustStore
+      attr_accessor name: ::String
+      attr_accessor trust_store_arn: ::String
+      attr_accessor status: ("ACTIVE" | "CREATING")
+      attr_accessor number_of_ca_certificates: ::Integer
+      attr_accessor total_revoked_entries: ::Integer
+      SENSITIVE: []
+    end
+
+    class TrustStoreAssociation
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class TrustStoreInUseException < Aws::EmptyStructure
+    end
+
+    class TrustStoreNotFoundException < Aws::EmptyStructure
+    end
+
+    class TrustStoreNotReadyException < Aws::EmptyStructure
+    end
+
+    class TrustStoreRevocation
+      attr_accessor trust_store_arn: ::String
+      attr_accessor revocation_id: ::Integer
+      attr_accessor revocation_type: ("CRL")
+      attr_accessor number_of_revoked_entries: ::Integer
+      SENSITIVE: []
+    end
+
+    class UnsupportedProtocolException < Aws::EmptyStructure
+    end
+  end
+end

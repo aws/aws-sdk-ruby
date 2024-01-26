@@ -1,0 +1,1129 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module WorkSpaces
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateConnectionAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateConnectionAliasResult]
+        def connection_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#associate_connection_alias-instance_method
+      def associate_connection_alias: (
+                                        alias_id: ::String,
+                                        resource_id: ::String
+                                      ) -> _AssociateConnectionAliasResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateConnectionAliasResponseSuccess
+
+      interface _AssociateIpGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateIpGroupsResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#associate_ip_groups-instance_method
+      def associate_ip_groups: (
+                                 directory_id: ::String,
+                                 group_ids: Array[::String]
+                               ) -> _AssociateIpGroupsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateIpGroupsResponseSuccess
+
+      interface _AssociateWorkspaceApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateWorkspaceApplicationResult]
+        def association: () -> Types::WorkspaceResourceAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#associate_workspace_application-instance_method
+      def associate_workspace_application: (
+                                             workspace_id: ::String,
+                                             application_id: ::String
+                                           ) -> _AssociateWorkspaceApplicationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateWorkspaceApplicationResponseSuccess
+
+      interface _AuthorizeIpRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AuthorizeIpRulesResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#authorize_ip_rules-instance_method
+      def authorize_ip_rules: (
+                                group_id: ::String,
+                                user_rules: Array[
+                                  {
+                                    ip_rule: ::String?,
+                                    rule_desc: ::String?
+                                  },
+                                ]
+                              ) -> _AuthorizeIpRulesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AuthorizeIpRulesResponseSuccess
+
+      interface _CopyWorkspaceImageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CopyWorkspaceImageResult]
+        def image_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#copy_workspace_image-instance_method
+      def copy_workspace_image: (
+                                  name: ::String,
+                                  ?description: ::String,
+                                  source_image_id: ::String,
+                                  source_region: ::String,
+                                  ?tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String?
+                                    },
+                                  ]
+                                ) -> _CopyWorkspaceImageResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopyWorkspaceImageResponseSuccess
+
+      interface _CreateConnectClientAddInResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConnectClientAddInResult]
+        def add_in_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#create_connect_client_add_in-instance_method
+      def create_connect_client_add_in: (
+                                          resource_id: ::String,
+                                          name: ::String,
+                                          url: ::String
+                                        ) -> _CreateConnectClientAddInResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectClientAddInResponseSuccess
+
+      interface _CreateConnectionAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConnectionAliasResult]
+        def alias_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#create_connection_alias-instance_method
+      def create_connection_alias: (
+                                     connection_string: ::String,
+                                     ?tags: Array[
+                                       {
+                                         key: ::String,
+                                         value: ::String?
+                                       },
+                                     ]
+                                   ) -> _CreateConnectionAliasResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectionAliasResponseSuccess
+
+      interface _CreateIpGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateIpGroupResult]
+        def group_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#create_ip_group-instance_method
+      def create_ip_group: (
+                             group_name: ::String,
+                             ?group_desc: ::String,
+                             ?user_rules: Array[
+                               {
+                                 ip_rule: ::String?,
+                                 rule_desc: ::String?
+                               },
+                             ],
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String?
+                               },
+                             ]
+                           ) -> _CreateIpGroupResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIpGroupResponseSuccess
+
+      interface _CreateStandbyWorkspacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStandbyWorkspacesResult]
+        def failed_standby_requests: () -> ::Array[Types::FailedCreateStandbyWorkspacesRequest]
+        def pending_standby_requests: () -> ::Array[Types::PendingCreateStandbyWorkspacesRequest]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#create_standby_workspaces-instance_method
+      def create_standby_workspaces: (
+                                       primary_region: ::String,
+                                       standby_workspaces: Array[
+                                         {
+                                           primary_workspace_id: ::String,
+                                           volume_encryption_key: ::String?,
+                                           directory_id: ::String,
+                                           tags: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String?
+                                             },
+                                           ]?,
+                                           data_replication: ("NO_REPLICATION" | "PRIMARY_AS_SOURCE")?
+                                         },
+                                       ]
+                                     ) -> _CreateStandbyWorkspacesResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStandbyWorkspacesResponseSuccess
+
+      interface _CreateTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTagsResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#create_tags-instance_method
+      def create_tags: (
+                         resource_id: ::String,
+                         tags: Array[
+                           {
+                             key: ::String,
+                             value: ::String?
+                           },
+                         ]
+                       ) -> _CreateTagsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTagsResponseSuccess
+
+      interface _CreateUpdatedWorkspaceImageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateUpdatedWorkspaceImageResult]
+        def image_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#create_updated_workspace_image-instance_method
+      def create_updated_workspace_image: (
+                                            name: ::String,
+                                            description: ::String,
+                                            source_image_id: ::String,
+                                            ?tags: Array[
+                                              {
+                                                key: ::String,
+                                                value: ::String?
+                                              },
+                                            ]
+                                          ) -> _CreateUpdatedWorkspaceImageResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUpdatedWorkspaceImageResponseSuccess
+
+      interface _CreateWorkspaceBundleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkspaceBundleResult]
+        def workspace_bundle: () -> Types::WorkspaceBundle
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#create_workspace_bundle-instance_method
+      def create_workspace_bundle: (
+                                     bundle_name: ::String,
+                                     bundle_description: ::String,
+                                     image_id: ::String,
+                                     compute_type: {
+                                       name: ("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN")?
+                                     },
+                                     user_storage: {
+                                       capacity: ::String?
+                                     },
+                                     ?root_storage: {
+                                       capacity: ::String?
+                                     },
+                                     ?tags: Array[
+                                       {
+                                         key: ::String,
+                                         value: ::String?
+                                       },
+                                     ]
+                                   ) -> _CreateWorkspaceBundleResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkspaceBundleResponseSuccess
+
+      interface _CreateWorkspaceImageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkspaceImageResult]
+        def image_id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def operating_system: () -> Types::OperatingSystem
+        def state: () -> ("AVAILABLE" | "PENDING" | "ERROR")
+        def required_tenancy: () -> ("DEFAULT" | "DEDICATED")
+        def created: () -> ::Time
+        def owner_account_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#create_workspace_image-instance_method
+      def create_workspace_image: (
+                                    name: ::String,
+                                    description: ::String,
+                                    workspace_id: ::String,
+                                    ?tags: Array[
+                                      {
+                                        key: ::String,
+                                        value: ::String?
+                                      },
+                                    ]
+                                  ) -> _CreateWorkspaceImageResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkspaceImageResponseSuccess
+
+      interface _CreateWorkspacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkspacesResult]
+        def failed_requests: () -> ::Array[Types::FailedCreateWorkspaceRequest]
+        def pending_requests: () -> ::Array[Types::Workspace]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#create_workspaces-instance_method
+      def create_workspaces: (
+                               workspaces: Array[
+                                 {
+                                   directory_id: ::String,
+                                   user_name: ::String,
+                                   bundle_id: ::String,
+                                   volume_encryption_key: ::String?,
+                                   user_volume_encryption_enabled: bool?,
+                                   root_volume_encryption_enabled: bool?,
+                                   workspace_properties: {
+                                     running_mode: ("AUTO_STOP" | "ALWAYS_ON" | "MANUAL")?,
+                                     running_mode_auto_stop_timeout_in_minutes: ::Integer?,
+                                     root_volume_size_gib: ::Integer?,
+                                     user_volume_size_gib: ::Integer?,
+                                     compute_type_name: ("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN")?,
+                                     protocols: Array[("PCOIP" | "WSP")]?,
+                                     operating_system_name: ("AMAZON_LINUX_2" | "UBUNTU_18_04" | "UBUNTU_20_04" | "UBUNTU_22_04" | "UNKNOWN" | "WINDOWS_10" | "WINDOWS_11" | "WINDOWS_7" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022")?
+                                   }?,
+                                   tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String?
+                                     },
+                                   ]?
+                                 },
+                               ]
+                             ) -> _CreateWorkspacesResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkspacesResponseSuccess
+
+      interface _DeleteClientBrandingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteClientBrandingResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#delete_client_branding-instance_method
+      def delete_client_branding: (
+                                    resource_id: ::String,
+                                    platforms: Array[("DeviceTypeWindows" | "DeviceTypeOsx" | "DeviceTypeAndroid" | "DeviceTypeIos" | "DeviceTypeLinux" | "DeviceTypeWeb")]
+                                  ) -> _DeleteClientBrandingResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteClientBrandingResponseSuccess
+
+      interface _DeleteConnectClientAddInResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConnectClientAddInResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#delete_connect_client_add_in-instance_method
+      def delete_connect_client_add_in: (
+                                          add_in_id: ::String,
+                                          resource_id: ::String
+                                        ) -> _DeleteConnectClientAddInResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConnectClientAddInResponseSuccess
+
+      interface _DeleteConnectionAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConnectionAliasResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#delete_connection_alias-instance_method
+      def delete_connection_alias: (
+                                     alias_id: ::String
+                                   ) -> _DeleteConnectionAliasResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConnectionAliasResponseSuccess
+
+      interface _DeleteIpGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIpGroupResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#delete_ip_group-instance_method
+      def delete_ip_group: (
+                             group_id: ::String
+                           ) -> _DeleteIpGroupResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIpGroupResponseSuccess
+
+      interface _DeleteTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTagsResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#delete_tags-instance_method
+      def delete_tags: (
+                         resource_id: ::String,
+                         tag_keys: Array[::String]
+                       ) -> _DeleteTagsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTagsResponseSuccess
+
+      interface _DeleteWorkspaceBundleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkspaceBundleResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#delete_workspace_bundle-instance_method
+      def delete_workspace_bundle: (
+                                     ?bundle_id: ::String
+                                   ) -> _DeleteWorkspaceBundleResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkspaceBundleResponseSuccess
+
+      interface _DeleteWorkspaceImageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkspaceImageResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#delete_workspace_image-instance_method
+      def delete_workspace_image: (
+                                    image_id: ::String
+                                  ) -> _DeleteWorkspaceImageResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkspaceImageResponseSuccess
+
+      interface _DeployWorkspaceApplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeployWorkspaceApplicationsResult]
+        def deployment: () -> Types::WorkSpaceApplicationDeployment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#deploy_workspace_applications-instance_method
+      def deploy_workspace_applications: (
+                                           workspace_id: ::String,
+                                           ?force: bool
+                                         ) -> _DeployWorkspaceApplicationsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeployWorkspaceApplicationsResponseSuccess
+
+      interface _DeregisterWorkspaceDirectoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterWorkspaceDirectoryResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#deregister_workspace_directory-instance_method
+      def deregister_workspace_directory: (
+                                            directory_id: ::String
+                                          ) -> _DeregisterWorkspaceDirectoryResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterWorkspaceDirectoryResponseSuccess
+
+      interface _DescribeAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAccountResult]
+        def dedicated_tenancy_support: () -> ("ENABLED" | "DISABLED")
+        def dedicated_tenancy_management_cidr_range: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_account-instance_method
+      def describe_account: (
+                            ) -> _DescribeAccountResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccountResponseSuccess
+
+      interface _DescribeAccountModificationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAccountModificationsResult]
+        def account_modifications: () -> ::Array[Types::AccountModification]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_account_modifications-instance_method
+      def describe_account_modifications: (
+                                            ?next_token: ::String
+                                          ) -> _DescribeAccountModificationsResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccountModificationsResponseSuccess
+
+      interface _DescribeApplicationAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeApplicationAssociationsResult]
+        def associations: () -> ::Array[Types::ApplicationResourceAssociation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_application_associations-instance_method
+      def describe_application_associations: (
+                                               ?max_results: ::Integer,
+                                               ?next_token: ::String,
+                                               application_id: ::String,
+                                               associated_resource_types: Array[("WORKSPACE" | "BUNDLE" | "IMAGE")]
+                                             ) -> _DescribeApplicationAssociationsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeApplicationAssociationsResponseSuccess
+
+      interface _DescribeApplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeApplicationsResult]
+        def applications: () -> ::Array[Types::WorkSpaceApplication]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_applications-instance_method
+      def describe_applications: (
+                                   ?application_ids: Array[::String],
+                                   ?compute_type_names: Array[("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN")],
+                                   ?license_type: ("LICENSED" | "UNLICENSED"),
+                                   ?operating_system_names: Array[("AMAZON_LINUX_2" | "UBUNTU_18_04" | "UBUNTU_20_04" | "UBUNTU_22_04" | "UNKNOWN" | "WINDOWS_10" | "WINDOWS_11" | "WINDOWS_7" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022")],
+                                   ?owner: ::String,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _DescribeApplicationsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeApplicationsResponseSuccess
+
+      interface _DescribeBundleAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBundleAssociationsResult]
+        def associations: () -> ::Array[Types::BundleResourceAssociation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_bundle_associations-instance_method
+      def describe_bundle_associations: (
+                                          bundle_id: ::String,
+                                          associated_resource_types: Array[("APPLICATION")]
+                                        ) -> _DescribeBundleAssociationsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBundleAssociationsResponseSuccess
+
+      interface _DescribeClientBrandingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClientBrandingResult]
+        def device_type_windows: () -> Types::DefaultClientBrandingAttributes
+        def device_type_osx: () -> Types::DefaultClientBrandingAttributes
+        def device_type_android: () -> Types::DefaultClientBrandingAttributes
+        def device_type_ios: () -> Types::IosClientBrandingAttributes
+        def device_type_linux: () -> Types::DefaultClientBrandingAttributes
+        def device_type_web: () -> Types::DefaultClientBrandingAttributes
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_client_branding-instance_method
+      def describe_client_branding: (
+                                      resource_id: ::String
+                                    ) -> _DescribeClientBrandingResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClientBrandingResponseSuccess
+
+      interface _DescribeClientPropertiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClientPropertiesResult]
+        def client_properties_list: () -> ::Array[Types::ClientPropertiesResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_client_properties-instance_method
+      def describe_client_properties: (
+                                        resource_ids: Array[::String]
+                                      ) -> _DescribeClientPropertiesResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClientPropertiesResponseSuccess
+
+      interface _DescribeConnectClientAddInsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeConnectClientAddInsResult]
+        def add_ins: () -> ::Array[Types::ConnectClientAddIn]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_connect_client_add_ins-instance_method
+      def describe_connect_client_add_ins: (
+                                             resource_id: ::String,
+                                             ?next_token: ::String,
+                                             ?max_results: ::Integer
+                                           ) -> _DescribeConnectClientAddInsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConnectClientAddInsResponseSuccess
+
+      interface _DescribeConnectionAliasPermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeConnectionAliasPermissionsResult]
+        def alias_id: () -> ::String
+        def connection_alias_permissions: () -> ::Array[Types::ConnectionAliasPermission]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_connection_alias_permissions-instance_method
+      def describe_connection_alias_permissions: (
+                                                   alias_id: ::String,
+                                                   ?next_token: ::String,
+                                                   ?max_results: ::Integer
+                                                 ) -> _DescribeConnectionAliasPermissionsResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConnectionAliasPermissionsResponseSuccess
+
+      interface _DescribeConnectionAliasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeConnectionAliasesResult]
+        def connection_aliases: () -> ::Array[Types::ConnectionAlias]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_connection_aliases-instance_method
+      def describe_connection_aliases: (
+                                         ?alias_ids: Array[::String],
+                                         ?resource_id: ::String,
+                                         ?limit: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _DescribeConnectionAliasesResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConnectionAliasesResponseSuccess
+
+      interface _DescribeImageAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeImageAssociationsResult]
+        def associations: () -> ::Array[Types::ImageResourceAssociation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_image_associations-instance_method
+      def describe_image_associations: (
+                                         image_id: ::String,
+                                         associated_resource_types: Array[("APPLICATION")]
+                                       ) -> _DescribeImageAssociationsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeImageAssociationsResponseSuccess
+
+      interface _DescribeIpGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeIpGroupsResult]
+        def result: () -> ::Array[Types::WorkspacesIpGroup]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_ip_groups-instance_method
+      def describe_ip_groups: (
+                                ?group_ids: Array[::String],
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _DescribeIpGroupsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeIpGroupsResponseSuccess
+
+      interface _DescribeTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTagsResult]
+        def tag_list: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_tags-instance_method
+      def describe_tags: (
+                           resource_id: ::String
+                         ) -> _DescribeTagsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTagsResponseSuccess
+
+      interface _DescribeWorkspaceAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeWorkspaceAssociationsResult]
+        def associations: () -> ::Array[Types::WorkspaceResourceAssociation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_workspace_associations-instance_method
+      def describe_workspace_associations: (
+                                             workspace_id: ::String,
+                                             associated_resource_types: Array[("APPLICATION")]
+                                           ) -> _DescribeWorkspaceAssociationsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWorkspaceAssociationsResponseSuccess
+
+      interface _DescribeWorkspaceBundlesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeWorkspaceBundlesResult]
+        def bundles: () -> ::Array[Types::WorkspaceBundle]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_workspace_bundles-instance_method
+      def describe_workspace_bundles: (
+                                        ?bundle_ids: Array[::String],
+                                        ?owner: ::String,
+                                        ?next_token: ::String
+                                      ) -> _DescribeWorkspaceBundlesResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWorkspaceBundlesResponseSuccess
+
+      interface _DescribeWorkspaceDirectoriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeWorkspaceDirectoriesResult]
+        def directories: () -> ::Array[Types::WorkspaceDirectory]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_workspace_directories-instance_method
+      def describe_workspace_directories: (
+                                            ?directory_ids: Array[::String],
+                                            ?limit: ::Integer,
+                                            ?next_token: ::String
+                                          ) -> _DescribeWorkspaceDirectoriesResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWorkspaceDirectoriesResponseSuccess
+
+      interface _DescribeWorkspaceImagePermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeWorkspaceImagePermissionsResult]
+        def image_id: () -> ::String
+        def image_permissions: () -> ::Array[Types::ImagePermission]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_workspace_image_permissions-instance_method
+      def describe_workspace_image_permissions: (
+                                                  image_id: ::String,
+                                                  ?next_token: ::String,
+                                                  ?max_results: ::Integer
+                                                ) -> _DescribeWorkspaceImagePermissionsResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWorkspaceImagePermissionsResponseSuccess
+
+      interface _DescribeWorkspaceImagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeWorkspaceImagesResult]
+        def images: () -> ::Array[Types::WorkspaceImage]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_workspace_images-instance_method
+      def describe_workspace_images: (
+                                       ?image_ids: Array[::String],
+                                       ?image_type: ("OWNED" | "SHARED"),
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _DescribeWorkspaceImagesResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWorkspaceImagesResponseSuccess
+
+      interface _DescribeWorkspaceSnapshotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeWorkspaceSnapshotsResult]
+        def rebuild_snapshots: () -> ::Array[Types::Snapshot]
+        def restore_snapshots: () -> ::Array[Types::Snapshot]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_workspace_snapshots-instance_method
+      def describe_workspace_snapshots: (
+                                          workspace_id: ::String
+                                        ) -> _DescribeWorkspaceSnapshotsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWorkspaceSnapshotsResponseSuccess
+
+      interface _DescribeWorkspacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeWorkspacesResult]
+        def workspaces: () -> ::Array[Types::Workspace]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_workspaces-instance_method
+      def describe_workspaces: (
+                                 ?workspace_ids: Array[::String],
+                                 ?directory_id: ::String,
+                                 ?user_name: ::String,
+                                 ?bundle_id: ::String,
+                                 ?limit: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _DescribeWorkspacesResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWorkspacesResponseSuccess
+
+      interface _DescribeWorkspacesConnectionStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeWorkspacesConnectionStatusResult]
+        def workspaces_connection_status: () -> ::Array[Types::WorkspaceConnectionStatus]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_workspaces_connection_status-instance_method
+      def describe_workspaces_connection_status: (
+                                                   ?workspace_ids: Array[::String],
+                                                   ?next_token: ::String
+                                                 ) -> _DescribeWorkspacesConnectionStatusResponseSuccess
+                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWorkspacesConnectionStatusResponseSuccess
+
+      interface _DisassociateConnectionAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateConnectionAliasResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#disassociate_connection_alias-instance_method
+      def disassociate_connection_alias: (
+                                           alias_id: ::String
+                                         ) -> _DisassociateConnectionAliasResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateConnectionAliasResponseSuccess
+
+      interface _DisassociateIpGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateIpGroupsResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#disassociate_ip_groups-instance_method
+      def disassociate_ip_groups: (
+                                    directory_id: ::String,
+                                    group_ids: Array[::String]
+                                  ) -> _DisassociateIpGroupsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateIpGroupsResponseSuccess
+
+      interface _DisassociateWorkspaceApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateWorkspaceApplicationResult]
+        def association: () -> Types::WorkspaceResourceAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#disassociate_workspace_application-instance_method
+      def disassociate_workspace_application: (
+                                                workspace_id: ::String,
+                                                application_id: ::String
+                                              ) -> _DisassociateWorkspaceApplicationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateWorkspaceApplicationResponseSuccess
+
+      interface _ImportClientBrandingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportClientBrandingResult]
+        def device_type_windows: () -> Types::DefaultClientBrandingAttributes
+        def device_type_osx: () -> Types::DefaultClientBrandingAttributes
+        def device_type_android: () -> Types::DefaultClientBrandingAttributes
+        def device_type_ios: () -> Types::IosClientBrandingAttributes
+        def device_type_linux: () -> Types::DefaultClientBrandingAttributes
+        def device_type_web: () -> Types::DefaultClientBrandingAttributes
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#import_client_branding-instance_method
+      def import_client_branding: (
+                                    resource_id: ::String,
+                                    ?device_type_windows: {
+                                      logo: ::String?,
+                                      support_email: ::String?,
+                                      support_link: ::String?,
+                                      forgot_password_link: ::String?,
+                                      login_message: Hash[::String, ::String]?
+                                    },
+                                    ?device_type_osx: {
+                                      logo: ::String?,
+                                      support_email: ::String?,
+                                      support_link: ::String?,
+                                      forgot_password_link: ::String?,
+                                      login_message: Hash[::String, ::String]?
+                                    },
+                                    ?device_type_android: {
+                                      logo: ::String?,
+                                      support_email: ::String?,
+                                      support_link: ::String?,
+                                      forgot_password_link: ::String?,
+                                      login_message: Hash[::String, ::String]?
+                                    },
+                                    ?device_type_ios: {
+                                      logo: ::String?,
+                                      logo_2x: ::String?,
+                                      logo_3x: ::String?,
+                                      support_email: ::String?,
+                                      support_link: ::String?,
+                                      forgot_password_link: ::String?,
+                                      login_message: Hash[::String, ::String]?
+                                    },
+                                    ?device_type_linux: {
+                                      logo: ::String?,
+                                      support_email: ::String?,
+                                      support_link: ::String?,
+                                      forgot_password_link: ::String?,
+                                      login_message: Hash[::String, ::String]?
+                                    },
+                                    ?device_type_web: {
+                                      logo: ::String?,
+                                      support_email: ::String?,
+                                      support_link: ::String?,
+                                      forgot_password_link: ::String?,
+                                      login_message: Hash[::String, ::String]?
+                                    }
+                                  ) -> _ImportClientBrandingResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportClientBrandingResponseSuccess
+
+      interface _ImportWorkspaceImageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportWorkspaceImageResult]
+        def image_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#import_workspace_image-instance_method
+      def import_workspace_image: (
+                                    ec2_image_id: ::String,
+                                    ingestion_process: ("BYOL_REGULAR" | "BYOL_GRAPHICS" | "BYOL_GRAPHICSPRO" | "BYOL_GRAPHICS_G4DN" | "BYOL_REGULAR_WSP" | "BYOL_REGULAR_BYOP" | "BYOL_GRAPHICS_G4DN_BYOP"),
+                                    image_name: ::String,
+                                    image_description: ::String,
+                                    ?tags: Array[
+                                      {
+                                        key: ::String,
+                                        value: ::String?
+                                      },
+                                    ],
+                                    ?applications: Array[("Microsoft_Office_2016" | "Microsoft_Office_2019")]
+                                  ) -> _ImportWorkspaceImageResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportWorkspaceImageResponseSuccess
+
+      interface _ListAvailableManagementCidrRangesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAvailableManagementCidrRangesResult]
+        def management_cidr_ranges: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#list_available_management_cidr_ranges-instance_method
+      def list_available_management_cidr_ranges: (
+                                                   management_cidr_range_constraint: ::String,
+                                                   ?max_results: ::Integer,
+                                                   ?next_token: ::String
+                                                 ) -> _ListAvailableManagementCidrRangesResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAvailableManagementCidrRangesResponseSuccess
+
+      interface _MigrateWorkspaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::MigrateWorkspaceResult]
+        def source_workspace_id: () -> ::String
+        def target_workspace_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#migrate_workspace-instance_method
+      def migrate_workspace: (
+                               source_workspace_id: ::String,
+                               bundle_id: ::String
+                             ) -> _MigrateWorkspaceResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _MigrateWorkspaceResponseSuccess
+
+      interface _ModifyAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyAccountResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#modify_account-instance_method
+      def modify_account: (
+                            ?dedicated_tenancy_support: ("ENABLED"),
+                            ?dedicated_tenancy_management_cidr_range: ::String
+                          ) -> _ModifyAccountResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyAccountResponseSuccess
+
+      interface _ModifyCertificateBasedAuthPropertiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyCertificateBasedAuthPropertiesResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#modify_certificate_based_auth_properties-instance_method
+      def modify_certificate_based_auth_properties: (
+                                                      resource_id: ::String,
+                                                      ?certificate_based_auth_properties: {
+                                                        status: ("DISABLED" | "ENABLED")?,
+                                                        certificate_authority_arn: ::String?
+                                                      },
+                                                      ?properties_to_delete: Array[("CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARN")]
+                                                    ) -> _ModifyCertificateBasedAuthPropertiesResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyCertificateBasedAuthPropertiesResponseSuccess
+
+      interface _ModifyClientPropertiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyClientPropertiesResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#modify_client_properties-instance_method
+      def modify_client_properties: (
+                                      resource_id: ::String,
+                                      client_properties: {
+                                        reconnect_enabled: ("ENABLED" | "DISABLED")?,
+                                        log_upload_enabled: ("ENABLED" | "DISABLED")?
+                                      }
+                                    ) -> _ModifyClientPropertiesResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyClientPropertiesResponseSuccess
+
+      interface _ModifySamlPropertiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifySamlPropertiesResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#modify_saml_properties-instance_method
+      def modify_saml_properties: (
+                                    resource_id: ::String,
+                                    ?saml_properties: {
+                                      status: ("DISABLED" | "ENABLED" | "ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK")?,
+                                      user_access_url: ::String?,
+                                      relay_state_parameter_name: ::String?
+                                    },
+                                    ?properties_to_delete: Array[("SAML_PROPERTIES_USER_ACCESS_URL" | "SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME")]
+                                  ) -> _ModifySamlPropertiesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifySamlPropertiesResponseSuccess
+
+      interface _ModifySelfservicePermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifySelfservicePermissionsResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#modify_selfservice_permissions-instance_method
+      def modify_selfservice_permissions: (
+                                            resource_id: ::String,
+                                            selfservice_permissions: {
+                                              restart_workspace: ("ENABLED" | "DISABLED")?,
+                                              increase_volume_size: ("ENABLED" | "DISABLED")?,
+                                              change_compute_type: ("ENABLED" | "DISABLED")?,
+                                              switch_running_mode: ("ENABLED" | "DISABLED")?,
+                                              rebuild_workspace: ("ENABLED" | "DISABLED")?
+                                            }
+                                          ) -> _ModifySelfservicePermissionsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifySelfservicePermissionsResponseSuccess
+
+      interface _ModifyWorkspaceAccessPropertiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyWorkspaceAccessPropertiesResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#modify_workspace_access_properties-instance_method
+      def modify_workspace_access_properties: (
+                                                resource_id: ::String,
+                                                workspace_access_properties: {
+                                                  device_type_windows: ("ALLOW" | "DENY")?,
+                                                  device_type_osx: ("ALLOW" | "DENY")?,
+                                                  device_type_web: ("ALLOW" | "DENY")?,
+                                                  device_type_ios: ("ALLOW" | "DENY")?,
+                                                  device_type_android: ("ALLOW" | "DENY")?,
+                                                  device_type_chrome_os: ("ALLOW" | "DENY")?,
+                                                  device_type_zero_client: ("ALLOW" | "DENY")?,
+                                                  device_type_linux: ("ALLOW" | "DENY")?
+                                                }
+                                              ) -> _ModifyWorkspaceAccessPropertiesResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyWorkspaceAccessPropertiesResponseSuccess
+
+      interface _ModifyWorkspaceCreationPropertiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyWorkspaceCreationPropertiesResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#modify_workspace_creation_properties-instance_method
+      def modify_workspace_creation_properties: (
+                                                  resource_id: ::String,
+                                                  workspace_creation_properties: {
+                                                    enable_work_docs: bool?,
+                                                    enable_internet_access: bool?,
+                                                    default_ou: ::String?,
+                                                    custom_security_group_id: ::String?,
+                                                    user_enabled_as_local_administrator: bool?,
+                                                    enable_maintenance_mode: bool?
+                                                  }
+                                                ) -> _ModifyWorkspaceCreationPropertiesResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyWorkspaceCreationPropertiesResponseSuccess
+
+      interface _ModifyWorkspacePropertiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyWorkspacePropertiesResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#modify_workspace_properties-instance_method
+      def modify_workspace_properties: (
+                                         workspace_id: ::String,
+                                         ?workspace_properties: {
+                                           running_mode: ("AUTO_STOP" | "ALWAYS_ON" | "MANUAL")?,
+                                           running_mode_auto_stop_timeout_in_minutes: ::Integer?,
+                                           root_volume_size_gib: ::Integer?,
+                                           user_volume_size_gib: ::Integer?,
+                                           compute_type_name: ("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN")?,
+                                           protocols: Array[("PCOIP" | "WSP")]?,
+                                           operating_system_name: ("AMAZON_LINUX_2" | "UBUNTU_18_04" | "UBUNTU_20_04" | "UBUNTU_22_04" | "UNKNOWN" | "WINDOWS_10" | "WINDOWS_11" | "WINDOWS_7" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022")?
+                                         },
+                                         ?data_replication: ("NO_REPLICATION" | "PRIMARY_AS_SOURCE")
+                                       ) -> _ModifyWorkspacePropertiesResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyWorkspacePropertiesResponseSuccess
+
+      interface _ModifyWorkspaceStateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyWorkspaceStateResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#modify_workspace_state-instance_method
+      def modify_workspace_state: (
+                                    workspace_id: ::String,
+                                    workspace_state: ("AVAILABLE" | "ADMIN_MAINTENANCE")
+                                  ) -> _ModifyWorkspaceStateResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyWorkspaceStateResponseSuccess
+
+      interface _RebootWorkspacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RebootWorkspacesResult]
+        def failed_requests: () -> ::Array[Types::FailedWorkspaceChangeRequest]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#reboot_workspaces-instance_method
+      def reboot_workspaces: (
+                               reboot_workspace_requests: Array[
+                                 {
+                                   workspace_id: ::String
+                                 },
+                               ]
+                             ) -> _RebootWorkspacesResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RebootWorkspacesResponseSuccess
+
+      interface _RebuildWorkspacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RebuildWorkspacesResult]
+        def failed_requests: () -> ::Array[Types::FailedWorkspaceChangeRequest]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#rebuild_workspaces-instance_method
+      def rebuild_workspaces: (
+                                rebuild_workspace_requests: Array[
+                                  {
+                                    workspace_id: ::String
+                                  },
+                                ]
+                              ) -> _RebuildWorkspacesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RebuildWorkspacesResponseSuccess
+
+      interface _RegisterWorkspaceDirectoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterWorkspaceDirectoryResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#register_workspace_directory-instance_method
+      def register_workspace_directory: (
+                                          directory_id: ::String,
+                                          ?subnet_ids: Array[::String],
+                                          enable_work_docs: bool,
+                                          ?enable_self_service: bool,
+                                          ?tenancy: ("DEDICATED" | "SHARED"),
+                                          ?tags: Array[
+                                            {
+                                              key: ::String,
+                                              value: ::String?
+                                            },
+                                          ]
+                                        ) -> _RegisterWorkspaceDirectoryResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterWorkspaceDirectoryResponseSuccess
+
+      interface _RestoreWorkspaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestoreWorkspaceResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#restore_workspace-instance_method
+      def restore_workspace: (
+                               workspace_id: ::String
+                             ) -> _RestoreWorkspaceResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreWorkspaceResponseSuccess
+
+      interface _RevokeIpRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RevokeIpRulesResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#revoke_ip_rules-instance_method
+      def revoke_ip_rules: (
+                             group_id: ::String,
+                             user_rules: Array[::String]
+                           ) -> _RevokeIpRulesResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RevokeIpRulesResponseSuccess
+
+      interface _StartWorkspacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartWorkspacesResult]
+        def failed_requests: () -> ::Array[Types::FailedWorkspaceChangeRequest]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#start_workspaces-instance_method
+      def start_workspaces: (
+                              start_workspace_requests: Array[
+                                {
+                                  workspace_id: ::String?
+                                },
+                              ]
+                            ) -> _StartWorkspacesResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartWorkspacesResponseSuccess
+
+      interface _StopWorkspacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopWorkspacesResult]
+        def failed_requests: () -> ::Array[Types::FailedWorkspaceChangeRequest]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#stop_workspaces-instance_method
+      def stop_workspaces: (
+                             stop_workspace_requests: Array[
+                               {
+                                 workspace_id: ::String?
+                               },
+                             ]
+                           ) -> _StopWorkspacesResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopWorkspacesResponseSuccess
+
+      interface _TerminateWorkspacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TerminateWorkspacesResult]
+        def failed_requests: () -> ::Array[Types::FailedWorkspaceChangeRequest]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#terminate_workspaces-instance_method
+      def terminate_workspaces: (
+                                  terminate_workspace_requests: Array[
+                                    {
+                                      workspace_id: ::String
+                                    },
+                                  ]
+                                ) -> _TerminateWorkspacesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TerminateWorkspacesResponseSuccess
+
+      interface _UpdateConnectClientAddInResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConnectClientAddInResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#update_connect_client_add_in-instance_method
+      def update_connect_client_add_in: (
+                                          add_in_id: ::String,
+                                          resource_id: ::String,
+                                          ?name: ::String,
+                                          ?url: ::String
+                                        ) -> _UpdateConnectClientAddInResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectClientAddInResponseSuccess
+
+      interface _UpdateConnectionAliasPermissionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConnectionAliasPermissionResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#update_connection_alias_permission-instance_method
+      def update_connection_alias_permission: (
+                                                alias_id: ::String,
+                                                connection_alias_permission: {
+                                                  shared_account_id: ::String,
+                                                  allow_association: bool
+                                                }
+                                              ) -> _UpdateConnectionAliasPermissionResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectionAliasPermissionResponseSuccess
+
+      interface _UpdateRulesOfIpGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRulesOfIpGroupResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#update_rules_of_ip_group-instance_method
+      def update_rules_of_ip_group: (
+                                      group_id: ::String,
+                                      user_rules: Array[
+                                        {
+                                          ip_rule: ::String?,
+                                          rule_desc: ::String?
+                                        },
+                                      ]
+                                    ) -> _UpdateRulesOfIpGroupResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRulesOfIpGroupResponseSuccess
+
+      interface _UpdateWorkspaceBundleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWorkspaceBundleResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#update_workspace_bundle-instance_method
+      def update_workspace_bundle: (
+                                     ?bundle_id: ::String,
+                                     ?image_id: ::String
+                                   ) -> _UpdateWorkspaceBundleResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkspaceBundleResponseSuccess
+
+      interface _UpdateWorkspaceImagePermissionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWorkspaceImagePermissionResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#update_workspace_image_permission-instance_method
+      def update_workspace_image_permission: (
+                                               image_id: ::String,
+                                               allow_copy_image: bool,
+                                               shared_account_id: ::String
+                                             ) -> _UpdateWorkspaceImagePermissionResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkspaceImagePermissionResponseSuccess
+    end
+  end
+end
+

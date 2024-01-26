@@ -1,0 +1,359 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ResourceGroups
+  module Types
+
+    class AccountSettings
+      attr_accessor group_lifecycle_events_desired_status: ("ACTIVE" | "INACTIVE")
+      attr_accessor group_lifecycle_events_status: ("ACTIVE" | "INACTIVE" | "IN_PROGRESS" | "ERROR")
+      attr_accessor group_lifecycle_events_status_message: ::String
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGroupInput
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor resource_query: Types::ResourceQuery
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor configuration: ::Array[Types::GroupConfigurationItem]
+      SENSITIVE: []
+    end
+
+    class CreateGroupOutput
+      attr_accessor group: Types::Group
+      attr_accessor resource_query: Types::ResourceQuery
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor group_configuration: Types::GroupConfiguration
+      SENSITIVE: []
+    end
+
+    class DeleteGroupInput
+      attr_accessor group_name: ::String
+      attr_accessor group: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGroupOutput
+      attr_accessor group: Types::Group
+      SENSITIVE: []
+    end
+
+    class FailedResource
+      attr_accessor resource_arn: ::String
+      attr_accessor error_message: ::String
+      attr_accessor error_code: ::String
+      SENSITIVE: []
+    end
+
+    class ForbiddenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccountSettingsOutput
+      attr_accessor account_settings: Types::AccountSettings
+      SENSITIVE: []
+    end
+
+    class GetGroupConfigurationInput
+      attr_accessor group: ::String
+      SENSITIVE: []
+    end
+
+    class GetGroupConfigurationOutput
+      attr_accessor group_configuration: Types::GroupConfiguration
+      SENSITIVE: []
+    end
+
+    class GetGroupInput
+      attr_accessor group_name: ::String
+      attr_accessor group: ::String
+      SENSITIVE: []
+    end
+
+    class GetGroupOutput
+      attr_accessor group: Types::Group
+      SENSITIVE: []
+    end
+
+    class GetGroupQueryInput
+      attr_accessor group_name: ::String
+      attr_accessor group: ::String
+      SENSITIVE: []
+    end
+
+    class GetGroupQueryOutput
+      attr_accessor group_query: Types::GroupQuery
+      SENSITIVE: []
+    end
+
+    class GetTagsInput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetTagsOutput
+      attr_accessor arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Group
+      attr_accessor group_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class GroupConfiguration
+      attr_accessor configuration: ::Array[Types::GroupConfigurationItem]
+      attr_accessor proposed_configuration: ::Array[Types::GroupConfigurationItem]
+      attr_accessor status: ("UPDATING" | "UPDATE_COMPLETE" | "UPDATE_FAILED")
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class GroupConfigurationItem
+      attr_accessor type: ::String
+      attr_accessor parameters: ::Array[Types::GroupConfigurationParameter]
+      SENSITIVE: []
+    end
+
+    class GroupConfigurationParameter
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GroupFilter
+      attr_accessor name: ("resource-type" | "configuration-type")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GroupIdentifier
+      attr_accessor group_name: ::String
+      attr_accessor group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GroupQuery
+      attr_accessor group_name: ::String
+      attr_accessor resource_query: Types::ResourceQuery
+      SENSITIVE: []
+    end
+
+    class GroupResourcesInput
+      attr_accessor group: ::String
+      attr_accessor resource_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GroupResourcesOutput
+      attr_accessor succeeded: ::Array[::String]
+      attr_accessor failed: ::Array[Types::FailedResource]
+      attr_accessor pending: ::Array[Types::PendingResource]
+      SENSITIVE: []
+    end
+
+    class InternalServerErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroupResourcesInput
+      attr_accessor group_name: ::String
+      attr_accessor group: ::String
+      attr_accessor filters: ::Array[Types::ResourceFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroupResourcesItem
+      attr_accessor identifier: Types::ResourceIdentifier
+      attr_accessor status: Types::ResourceStatus
+      SENSITIVE: []
+    end
+
+    class ListGroupResourcesOutput
+      attr_accessor resources: ::Array[Types::ListGroupResourcesItem]
+      attr_accessor resource_identifiers: ::Array[Types::ResourceIdentifier]
+      attr_accessor next_token: ::String
+      attr_accessor query_errors: ::Array[Types::QueryError]
+      SENSITIVE: []
+    end
+
+    class ListGroupsInput
+      attr_accessor filters: ::Array[Types::GroupFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroupsOutput
+      attr_accessor group_identifiers: ::Array[Types::GroupIdentifier]
+      attr_accessor groups: ::Array[Types::Group]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MethodNotAllowedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PendingResource
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutGroupConfigurationInput
+      attr_accessor group: ::String
+      attr_accessor configuration: ::Array[Types::GroupConfigurationItem]
+      SENSITIVE: []
+    end
+
+    class PutGroupConfigurationOutput < Aws::EmptyStructure
+    end
+
+    class QueryError
+      attr_accessor error_code: ("CLOUDFORMATION_STACK_INACTIVE" | "CLOUDFORMATION_STACK_NOT_EXISTING" | "CLOUDFORMATION_STACK_UNASSUMABLE_ROLE")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceFilter
+      attr_accessor name: ("resource-type")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResourceIdentifier
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceQuery
+      attr_accessor type: ("TAG_FILTERS_1_0" | "CLOUDFORMATION_STACK_1_0")
+      attr_accessor query: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceStatus
+      attr_accessor name: ("PENDING")
+      SENSITIVE: []
+    end
+
+    class SearchResourcesInput
+      attr_accessor resource_query: Types::ResourceQuery
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchResourcesOutput
+      attr_accessor resource_identifiers: ::Array[Types::ResourceIdentifier]
+      attr_accessor next_token: ::String
+      attr_accessor query_errors: ::Array[Types::QueryError]
+      SENSITIVE: []
+    end
+
+    class TagInput
+      attr_accessor arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagOutput
+      attr_accessor arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnauthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UngroupResourcesInput
+      attr_accessor group: ::String
+      attr_accessor resource_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UngroupResourcesOutput
+      attr_accessor succeeded: ::Array[::String]
+      attr_accessor failed: ::Array[Types::FailedResource]
+      attr_accessor pending: ::Array[Types::PendingResource]
+      SENSITIVE: []
+    end
+
+    class UntagInput
+      attr_accessor arn: ::String
+      attr_accessor keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagOutput
+      attr_accessor arn: ::String
+      attr_accessor keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateAccountSettingsInput
+      attr_accessor group_lifecycle_events_desired_status: ("ACTIVE" | "INACTIVE")
+      SENSITIVE: []
+    end
+
+    class UpdateAccountSettingsOutput
+      attr_accessor account_settings: Types::AccountSettings
+      SENSITIVE: []
+    end
+
+    class UpdateGroupInput
+      attr_accessor group_name: ::String
+      attr_accessor group: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateGroupOutput
+      attr_accessor group: Types::Group
+      SENSITIVE: []
+    end
+
+    class UpdateGroupQueryInput
+      attr_accessor group_name: ::String
+      attr_accessor group: ::String
+      attr_accessor resource_query: Types::ResourceQuery
+      SENSITIVE: []
+    end
+
+    class UpdateGroupQueryOutput
+      attr_accessor group_query: Types::GroupQuery
+      SENSITIVE: []
+    end
+  end
+end

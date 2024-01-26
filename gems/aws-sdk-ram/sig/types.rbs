@@ -1,0 +1,758 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::RAM
+  module Types
+
+    class AcceptResourceShareInvitationRequest
+      attr_accessor resource_share_invitation_arn: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class AcceptResourceShareInvitationResponse
+      attr_accessor resource_share_invitation: Types::ResourceShareInvitation
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateResourceSharePermissionRequest
+      attr_accessor resource_share_arn: ::String
+      attr_accessor permission_arn: ::String
+      attr_accessor replace: bool
+      attr_accessor client_token: ::String
+      attr_accessor permission_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class AssociateResourceSharePermissionResponse
+      attr_accessor return_value: bool
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateResourceShareRequest
+      attr_accessor resource_share_arn: ::String
+      attr_accessor resource_arns: ::Array[::String]
+      attr_accessor principals: ::Array[::String]
+      attr_accessor client_token: ::String
+      attr_accessor sources: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AssociateResourceShareResponse
+      attr_accessor resource_share_associations: ::Array[Types::ResourceShareAssociation]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class AssociatedPermission
+      attr_accessor arn: ::String
+      attr_accessor permission_version: ::String
+      attr_accessor default_version: bool
+      attr_accessor resource_type: ::String
+      attr_accessor status: ::String
+      attr_accessor feature_set: ("CREATED_FROM_POLICY" | "PROMOTING_TO_STANDARD" | "STANDARD")
+      attr_accessor last_updated_time: ::Time
+      attr_accessor resource_share_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePermissionRequest
+      attr_accessor name: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor policy_template: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreatePermissionResponse
+      attr_accessor permission: Types::ResourceSharePermissionSummary
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePermissionVersionRequest
+      attr_accessor permission_arn: ::String
+      attr_accessor policy_template: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePermissionVersionResponse
+      attr_accessor permission: Types::ResourceSharePermissionDetail
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateResourceShareRequest
+      attr_accessor name: ::String
+      attr_accessor resource_arns: ::Array[::String]
+      attr_accessor principals: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor allow_external_principals: bool
+      attr_accessor client_token: ::String
+      attr_accessor permission_arns: ::Array[::String]
+      attr_accessor sources: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateResourceShareResponse
+      attr_accessor resource_share: Types::ResourceShare
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePermissionRequest
+      attr_accessor permission_arn: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePermissionResponse
+      attr_accessor return_value: bool
+      attr_accessor client_token: ::String
+      attr_accessor permission_status: ("ATTACHABLE" | "UNATTACHABLE" | "DELETING" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class DeletePermissionVersionRequest
+      attr_accessor permission_arn: ::String
+      attr_accessor permission_version: ::Integer
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePermissionVersionResponse
+      attr_accessor return_value: bool
+      attr_accessor client_token: ::String
+      attr_accessor permission_status: ("ATTACHABLE" | "UNATTACHABLE" | "DELETING" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class DeleteResourceShareRequest
+      attr_accessor resource_share_arn: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourceShareResponse
+      attr_accessor return_value: bool
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateResourceSharePermissionRequest
+      attr_accessor resource_share_arn: ::String
+      attr_accessor permission_arn: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateResourceSharePermissionResponse
+      attr_accessor return_value: bool
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateResourceShareRequest
+      attr_accessor resource_share_arn: ::String
+      attr_accessor resource_arns: ::Array[::String]
+      attr_accessor principals: ::Array[::String]
+      attr_accessor client_token: ::String
+      attr_accessor sources: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DisassociateResourceShareResponse
+      attr_accessor resource_share_associations: ::Array[Types::ResourceShareAssociation]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class EnableSharingWithAwsOrganizationRequest < Aws::EmptyStructure
+    end
+
+    class EnableSharingWithAwsOrganizationResponse
+      attr_accessor return_value: bool
+      SENSITIVE: []
+    end
+
+    class GetPermissionRequest
+      attr_accessor permission_arn: ::String
+      attr_accessor permission_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetPermissionResponse
+      attr_accessor permission: Types::ResourceSharePermissionDetail
+      SENSITIVE: []
+    end
+
+    class GetResourcePoliciesRequest
+      attr_accessor resource_arns: ::Array[::String]
+      attr_accessor principal: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetResourcePoliciesResponse
+      attr_accessor policies: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourceShareAssociationsRequest
+      attr_accessor association_type: ("PRINCIPAL" | "RESOURCE")
+      attr_accessor resource_share_arns: ::Array[::String]
+      attr_accessor resource_arn: ::String
+      attr_accessor principal: ::String
+      attr_accessor association_status: ("ASSOCIATING" | "ASSOCIATED" | "FAILED" | "DISASSOCIATING" | "DISASSOCIATED")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetResourceShareAssociationsResponse
+      attr_accessor resource_share_associations: ::Array[Types::ResourceShareAssociation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourceShareInvitationsRequest
+      attr_accessor resource_share_invitation_arns: ::Array[::String]
+      attr_accessor resource_share_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetResourceShareInvitationsResponse
+      attr_accessor resource_share_invitations: ::Array[Types::ResourceShareInvitation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourceSharesRequest
+      attr_accessor resource_share_arns: ::Array[::String]
+      attr_accessor resource_share_status: ("PENDING" | "ACTIVE" | "FAILED" | "DELETING" | "DELETED")
+      attr_accessor resource_owner: ("SELF" | "OTHER-ACCOUNTS")
+      attr_accessor name: ::String
+      attr_accessor tag_filters: ::Array[Types::TagFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor permission_arn: ::String
+      attr_accessor permission_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetResourceSharesResponse
+      attr_accessor resource_shares: ::Array[Types::ResourceShare]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class IdempotentParameterMismatchException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidClientTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidMaxResultsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidNextTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidPolicyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidResourceTypeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidStateTransitionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListPendingInvitationResourcesRequest
+      attr_accessor resource_share_invitation_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor resource_region_scope: ("ALL" | "REGIONAL" | "GLOBAL")
+      SENSITIVE: []
+    end
+
+    class ListPendingInvitationResourcesResponse
+      attr_accessor resources: ::Array[Types::Resource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPermissionAssociationsRequest
+      attr_accessor permission_arn: ::String
+      attr_accessor permission_version: ::Integer
+      attr_accessor association_status: ("ASSOCIATING" | "ASSOCIATED" | "FAILED" | "DISASSOCIATING" | "DISASSOCIATED")
+      attr_accessor resource_type: ::String
+      attr_accessor feature_set: ("CREATED_FROM_POLICY" | "PROMOTING_TO_STANDARD" | "STANDARD")
+      attr_accessor default_version: bool
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPermissionAssociationsResponse
+      attr_accessor permissions: ::Array[Types::AssociatedPermission]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPermissionVersionsRequest
+      attr_accessor permission_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPermissionVersionsResponse
+      attr_accessor permissions: ::Array[Types::ResourceSharePermissionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPermissionsRequest
+      attr_accessor resource_type: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor permission_type: ("ALL" | "AWS_MANAGED" | "CUSTOMER_MANAGED")
+      SENSITIVE: []
+    end
+
+    class ListPermissionsResponse
+      attr_accessor permissions: ::Array[Types::ResourceSharePermissionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPrincipalsRequest
+      attr_accessor resource_owner: ("SELF" | "OTHER-ACCOUNTS")
+      attr_accessor resource_arn: ::String
+      attr_accessor principals: ::Array[::String]
+      attr_accessor resource_type: ::String
+      attr_accessor resource_share_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPrincipalsResponse
+      attr_accessor principals: ::Array[Types::Principal]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListReplacePermissionAssociationsWorkRequest
+      attr_accessor work_ids: ::Array[::String]
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListReplacePermissionAssociationsWorkResponse
+      attr_accessor replace_permission_associations_works: ::Array[Types::ReplacePermissionAssociationsWork]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceSharePermissionsRequest
+      attr_accessor resource_share_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListResourceSharePermissionsResponse
+      attr_accessor permissions: ::Array[Types::ResourceSharePermissionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceTypesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor resource_region_scope: ("ALL" | "REGIONAL" | "GLOBAL")
+      SENSITIVE: []
+    end
+
+    class ListResourceTypesResponse
+      attr_accessor resource_types: ::Array[Types::ServiceNameAndResourceType]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourcesRequest
+      attr_accessor resource_owner: ("SELF" | "OTHER-ACCOUNTS")
+      attr_accessor principal: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor resource_arns: ::Array[::String]
+      attr_accessor resource_share_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor resource_region_scope: ("ALL" | "REGIONAL" | "GLOBAL")
+      SENSITIVE: []
+    end
+
+    class ListResourcesResponse
+      attr_accessor resources: ::Array[Types::Resource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MalformedArnException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MalformedPolicyTemplateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MissingRequiredParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OperationNotPermittedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PermissionAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PermissionLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PermissionVersionsLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Principal
+      attr_accessor id: ::String
+      attr_accessor resource_share_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor external: bool
+      SENSITIVE: []
+    end
+
+    class PromotePermissionCreatedFromPolicyRequest
+      attr_accessor permission_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class PromotePermissionCreatedFromPolicyResponse
+      attr_accessor permission: Types::ResourceSharePermissionSummary
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class PromoteResourceShareCreatedFromPolicyRequest
+      attr_accessor resource_share_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PromoteResourceShareCreatedFromPolicyResponse
+      attr_accessor return_value: bool
+      SENSITIVE: []
+    end
+
+    class RejectResourceShareInvitationRequest
+      attr_accessor resource_share_invitation_arn: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class RejectResourceShareInvitationResponse
+      attr_accessor resource_share_invitation: Types::ResourceShareInvitation
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class ReplacePermissionAssociationsRequest
+      attr_accessor from_permission_arn: ::String
+      attr_accessor from_permission_version: ::Integer
+      attr_accessor to_permission_arn: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class ReplacePermissionAssociationsResponse
+      attr_accessor replace_permission_associations_work: Types::ReplacePermissionAssociationsWork
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class ReplacePermissionAssociationsWork
+      attr_accessor id: ::String
+      attr_accessor from_permission_arn: ::String
+      attr_accessor from_permission_version: ::String
+      attr_accessor to_permission_arn: ::String
+      attr_accessor to_permission_version: ::String
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class Resource
+      attr_accessor arn: ::String
+      attr_accessor type: ::String
+      attr_accessor resource_share_arn: ::String
+      attr_accessor resource_group_arn: ::String
+      attr_accessor status: ("AVAILABLE" | "ZONAL_RESOURCE_INACCESSIBLE" | "LIMIT_EXCEEDED" | "UNAVAILABLE" | "PENDING")
+      attr_accessor status_message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor resource_region_scope: ("REGIONAL" | "GLOBAL")
+      SENSITIVE: []
+    end
+
+    class ResourceArnNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceShare
+      attr_accessor resource_share_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor owning_account_id: ::String
+      attr_accessor allow_external_principals: bool
+      attr_accessor status: ("PENDING" | "ACTIVE" | "FAILED" | "DELETING" | "DELETED")
+      attr_accessor status_message: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor feature_set: ("CREATED_FROM_POLICY" | "PROMOTING_TO_STANDARD" | "STANDARD")
+      SENSITIVE: []
+    end
+
+    class ResourceShareAssociation
+      attr_accessor resource_share_arn: ::String
+      attr_accessor resource_share_name: ::String
+      attr_accessor associated_entity: ::String
+      attr_accessor association_type: ("PRINCIPAL" | "RESOURCE")
+      attr_accessor status: ("ASSOCIATING" | "ASSOCIATED" | "FAILED" | "DISASSOCIATING" | "DISASSOCIATED")
+      attr_accessor status_message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor external: bool
+      SENSITIVE: []
+    end
+
+    class ResourceShareInvitation
+      attr_accessor resource_share_invitation_arn: ::String
+      attr_accessor resource_share_name: ::String
+      attr_accessor resource_share_arn: ::String
+      attr_accessor sender_account_id: ::String
+      attr_accessor receiver_account_id: ::String
+      attr_accessor invitation_timestamp: ::Time
+      attr_accessor status: ("PENDING" | "ACCEPTED" | "REJECTED" | "EXPIRED")
+      attr_accessor resource_share_associations: ::Array[Types::ResourceShareAssociation]
+      attr_accessor receiver_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceShareInvitationAlreadyAcceptedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceShareInvitationAlreadyRejectedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceShareInvitationArnNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceShareInvitationExpiredException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceShareLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceSharePermissionDetail
+      attr_accessor arn: ::String
+      attr_accessor version: ::String
+      attr_accessor default_version: bool
+      attr_accessor name: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor permission: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor is_resource_type_default: bool
+      attr_accessor permission_type: ("CUSTOMER_MANAGED" | "AWS_MANAGED")
+      attr_accessor feature_set: ("CREATED_FROM_POLICY" | "PROMOTING_TO_STANDARD" | "STANDARD")
+      attr_accessor status: ("ATTACHABLE" | "UNATTACHABLE" | "DELETING" | "DELETED")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ResourceSharePermissionSummary
+      attr_accessor arn: ::String
+      attr_accessor version: ::String
+      attr_accessor default_version: bool
+      attr_accessor name: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor status: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor is_resource_type_default: bool
+      attr_accessor permission_type: ("CUSTOMER_MANAGED" | "AWS_MANAGED")
+      attr_accessor feature_set: ("CREATED_FROM_POLICY" | "PROMOTING_TO_STANDARD" | "STANDARD")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ServerInternalException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceNameAndResourceType
+      attr_accessor resource_type: ::String
+      attr_accessor service_name: ::String
+      attr_accessor resource_region_scope: ("REGIONAL" | "GLOBAL")
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SetDefaultPermissionVersionRequest
+      attr_accessor permission_arn: ::String
+      attr_accessor permission_version: ::Integer
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class SetDefaultPermissionVersionResponse
+      attr_accessor return_value: bool
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagFilter
+      attr_accessor tag_key: ::String
+      attr_accessor tag_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TagLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagPolicyViolationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_share_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnknownResourceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnmatchedPolicyPermissionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_share_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateResourceShareRequest
+      attr_accessor resource_share_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor allow_external_principals: bool
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateResourceShareResponse
+      attr_accessor resource_share: Types::ResourceShare
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+  end
+end

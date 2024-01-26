@@ -1,0 +1,1929 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Omics
+  module Types
+
+    class AbortMultipartReadSetUploadRequest
+      attr_accessor sequence_store_id: ::String
+      attr_accessor upload_id: ::String
+      SENSITIVE: []
+    end
+
+    class AbortMultipartReadSetUploadResponse < Aws::EmptyStructure
+    end
+
+    class AcceptShareRequest
+      attr_accessor share_id: ::String
+      SENSITIVE: []
+    end
+
+    class AcceptShareResponse
+      attr_accessor status: ("PENDING" | "ACTIVATING" | "ACTIVE" | "DELETING" | "DELETED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ActivateReadSetFilter
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLING" | "CANCELLED" | "FAILED" | "COMPLETED" | "COMPLETED_WITH_FAILURES")
+      attr_accessor created_after: ::Time
+      attr_accessor created_before: ::Time
+      SENSITIVE: []
+    end
+
+    class ActivateReadSetJobItem
+      attr_accessor id: ::String
+      attr_accessor sequence_store_id: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLING" | "CANCELLED" | "FAILED" | "COMPLETED" | "COMPLETED_WITH_FAILURES")
+      attr_accessor creation_time: ::Time
+      attr_accessor completion_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ActivateReadSetSourceItem
+      attr_accessor read_set_id: ::String
+      attr_accessor status: ("NOT_STARTED" | "IN_PROGRESS" | "FINISHED" | "FAILED")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class AnnotationImportItemDetail
+      attr_accessor source: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLED" | "COMPLETED" | "FAILED" | "COMPLETED_WITH_FAILURES")
+      SENSITIVE: []
+    end
+
+    class AnnotationImportItemSource
+      attr_accessor source: ::String
+      SENSITIVE: []
+    end
+
+    class AnnotationImportJobItem
+      attr_accessor id: ::String
+      attr_accessor destination_name: ::String
+      attr_accessor version_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLED" | "COMPLETED" | "FAILED" | "COMPLETED_WITH_FAILURES")
+      attr_accessor creation_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor completion_time: ::Time
+      attr_accessor run_left_normalization: bool
+      attr_accessor annotation_fields: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class AnnotationStoreItem
+      attr_accessor id: ::String
+      attr_accessor reference: Types::ReferenceItem
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+      attr_accessor store_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor store_format: ("GFF" | "TSV" | "VCF")
+      attr_accessor description: ::String
+      attr_accessor sse_config: Types::SseConfig
+      attr_accessor creation_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor status_message: ::String
+      attr_accessor store_size_bytes: ::Integer
+      SENSITIVE: []
+    end
+
+    class AnnotationStoreVersionItem
+      attr_accessor store_id: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+      attr_accessor version_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor version_name: ::String
+      attr_accessor description: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor status_message: ::String
+      attr_accessor version_size_bytes: ::Integer
+      SENSITIVE: []
+    end
+
+    class BatchDeleteReadSetRequest
+      attr_accessor ids: ::Array[::String]
+      attr_accessor sequence_store_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDeleteReadSetResponse
+      attr_accessor errors: ::Array[Types::ReadSetBatchError]
+      SENSITIVE: []
+    end
+
+    class CancelAnnotationImportRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelAnnotationImportResponse < Aws::EmptyStructure
+    end
+
+    class CancelRunRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelVariantImportRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelVariantImportResponse < Aws::EmptyStructure
+    end
+
+    class CompleteMultipartReadSetUploadRequest
+      attr_accessor sequence_store_id: ::String
+      attr_accessor upload_id: ::String
+      attr_accessor parts: ::Array[Types::CompleteReadSetUploadPartListItem]
+      SENSITIVE: []
+    end
+
+    class CompleteMultipartReadSetUploadResponse
+      attr_accessor read_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class CompleteReadSetUploadPartListItem
+      attr_accessor part_number: ::Integer
+      attr_accessor part_source: ("SOURCE1" | "SOURCE2")
+      attr_accessor checksum: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAnnotationStoreRequest
+      attr_accessor reference: Types::ReferenceItem
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor version_name: ::String
+      attr_accessor sse_config: Types::SseConfig
+      attr_accessor store_format: ("GFF" | "TSV" | "VCF")
+      attr_accessor store_options: Types::StoreOptions
+      SENSITIVE: []
+    end
+
+    class CreateAnnotationStoreResponse
+      attr_accessor id: ::String
+      attr_accessor reference: Types::ReferenceItem
+      attr_accessor store_format: ("GFF" | "TSV" | "VCF")
+      attr_accessor store_options: Types::StoreOptions
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+      attr_accessor name: ::String
+      attr_accessor version_name: ::String
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateAnnotationStoreVersionRequest
+      attr_accessor name: ::String
+      attr_accessor version_name: ::String
+      attr_accessor description: ::String
+      attr_accessor version_options: Types::VersionOptions
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateAnnotationStoreVersionResponse
+      attr_accessor id: ::String
+      attr_accessor version_name: ::String
+      attr_accessor store_id: ::String
+      attr_accessor version_options: Types::VersionOptions
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateMultipartReadSetUploadRequest
+      attr_accessor sequence_store_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor source_file_type: ("FASTQ" | "BAM" | "CRAM" | "UBAM")
+      attr_accessor subject_id: ::String
+      attr_accessor sample_id: ::String
+      attr_accessor generated_from: ::String
+      attr_accessor reference_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateMultipartReadSetUploadResponse
+      attr_accessor sequence_store_id: ::String
+      attr_accessor upload_id: ::String
+      attr_accessor source_file_type: ("FASTQ" | "BAM" | "CRAM" | "UBAM")
+      attr_accessor subject_id: ::String
+      attr_accessor sample_id: ::String
+      attr_accessor generated_from: ::String
+      attr_accessor reference_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateReferenceStoreRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor sse_config: Types::SseConfig
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateReferenceStoreResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor sse_config: Types::SseConfig
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateRunGroupRequest
+      attr_accessor name: ::String
+      attr_accessor max_cpus: ::Integer
+      attr_accessor max_runs: ::Integer
+      attr_accessor max_duration: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor request_id: ::String
+      attr_accessor max_gpus: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateRunGroupResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateSequenceStoreRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor sse_config: Types::SseConfig
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      attr_accessor fallback_location: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSequenceStoreResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor sse_config: Types::SseConfig
+      attr_accessor creation_time: ::Time
+      attr_accessor fallback_location: ::String
+      SENSITIVE: []
+    end
+
+    class CreateShareRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor principal_subscriber: ::String
+      attr_accessor share_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateShareResponse
+      attr_accessor share_id: ::String
+      attr_accessor status: ("PENDING" | "ACTIVATING" | "ACTIVE" | "DELETING" | "DELETED" | "FAILED")
+      attr_accessor share_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateVariantStoreRequest
+      attr_accessor reference: Types::ReferenceItem
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor sse_config: Types::SseConfig
+      SENSITIVE: []
+    end
+
+    class CreateVariantStoreResponse
+      attr_accessor id: ::String
+      attr_accessor reference: Types::ReferenceItem
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+      attr_accessor name: ::String
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateWorkflowRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor engine: ("WDL" | "NEXTFLOW" | "CWL")
+      attr_accessor definition_zip: ::String
+      attr_accessor definition_uri: ::String
+      attr_accessor main: ::String
+      attr_accessor parameter_template: ::Hash[::String, Types::WorkflowParameter]
+      attr_accessor storage_capacity: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor request_id: ::String
+      attr_accessor accelerators: ("GPU")
+      SENSITIVE: []
+    end
+
+    class CreateWorkflowResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETED" | "FAILED" | "INACTIVE")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DeleteAnnotationStoreRequest
+      attr_accessor name: ::String
+      attr_accessor force: bool
+      SENSITIVE: []
+    end
+
+    class DeleteAnnotationStoreResponse
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class DeleteAnnotationStoreVersionsRequest
+      attr_accessor name: ::String
+      attr_accessor versions: ::Array[::String]
+      attr_accessor force: bool
+      SENSITIVE: []
+    end
+
+    class DeleteAnnotationStoreVersionsResponse
+      attr_accessor errors: ::Array[Types::VersionDeleteError]
+      SENSITIVE: []
+    end
+
+    class DeleteReferenceRequest
+      attr_accessor id: ::String
+      attr_accessor reference_store_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteReferenceResponse < Aws::EmptyStructure
+    end
+
+    class DeleteReferenceStoreRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteReferenceStoreResponse < Aws::EmptyStructure
+    end
+
+    class DeleteRunGroupRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRunRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSequenceStoreRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSequenceStoreResponse < Aws::EmptyStructure
+    end
+
+    class DeleteShareRequest
+      attr_accessor share_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteShareResponse
+      attr_accessor status: ("PENDING" | "ACTIVATING" | "ACTIVE" | "DELETING" | "DELETED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class DeleteVariantStoreRequest
+      attr_accessor name: ::String
+      attr_accessor force: bool
+      SENSITIVE: []
+    end
+
+    class DeleteVariantStoreResponse
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class DeleteWorkflowRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class ETag
+      attr_accessor algorithm: ("FASTQ_MD5up" | "BAM_MD5up" | "CRAM_MD5up")
+      attr_accessor source1: ::String
+      attr_accessor source2: ::String
+      SENSITIVE: []
+    end
+
+    class ExportReadSet
+      attr_accessor read_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class ExportReadSetDetail
+      attr_accessor id: ::String
+      attr_accessor status: ("NOT_STARTED" | "IN_PROGRESS" | "FINISHED" | "FAILED")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class ExportReadSetFilter
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLING" | "CANCELLED" | "FAILED" | "COMPLETED" | "COMPLETED_WITH_FAILURES")
+      attr_accessor created_after: ::Time
+      attr_accessor created_before: ::Time
+      SENSITIVE: []
+    end
+
+    class ExportReadSetJobDetail
+      attr_accessor id: ::String
+      attr_accessor sequence_store_id: ::String
+      attr_accessor destination: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLING" | "CANCELLED" | "FAILED" | "COMPLETED" | "COMPLETED_WITH_FAILURES")
+      attr_accessor creation_time: ::Time
+      attr_accessor completion_time: ::Time
+      SENSITIVE: []
+    end
+
+    class FileInformation
+      attr_accessor total_parts: ::Integer
+      attr_accessor part_size: ::Integer
+      attr_accessor content_length: ::Integer
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor resource_arns: ::Array[::String]
+      attr_accessor status: ::Array[("PENDING" | "ACTIVATING" | "ACTIVE" | "DELETING" | "DELETED" | "FAILED")]
+      SENSITIVE: []
+    end
+
+    class FormatOptions
+      attr_accessor tsv_options: Types::TsvOptions
+      attr_accessor vcf_options: Types::VcfOptions
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class TsvOptions < FormatOptions
+      end
+      class VcfOptions < FormatOptions
+      end
+      class Unknown < FormatOptions
+      end
+    end
+
+    class GetAnnotationImportRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAnnotationImportResponse
+      attr_accessor id: ::String
+      attr_accessor destination_name: ::String
+      attr_accessor version_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLED" | "COMPLETED" | "FAILED" | "COMPLETED_WITH_FAILURES")
+      attr_accessor status_message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor completion_time: ::Time
+      attr_accessor items: ::Array[Types::AnnotationImportItemDetail]
+      attr_accessor run_left_normalization: bool
+      attr_accessor format_options: Types::FormatOptions
+      attr_accessor annotation_fields: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetAnnotationStoreRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetAnnotationStoreResponse
+      attr_accessor id: ::String
+      attr_accessor reference: Types::ReferenceItem
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+      attr_accessor store_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor sse_config: Types::SseConfig
+      attr_accessor creation_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor store_options: Types::StoreOptions
+      attr_accessor store_format: ("GFF" | "TSV" | "VCF")
+      attr_accessor status_message: ::String
+      attr_accessor store_size_bytes: ::Integer
+      attr_accessor num_versions: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetAnnotationStoreVersionRequest
+      attr_accessor name: ::String
+      attr_accessor version_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetAnnotationStoreVersionResponse
+      attr_accessor store_id: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+      attr_accessor version_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor version_name: ::String
+      attr_accessor description: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor version_options: Types::VersionOptions
+      attr_accessor status_message: ::String
+      attr_accessor version_size_bytes: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetReadSetActivationJobRequest
+      attr_accessor id: ::String
+      attr_accessor sequence_store_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetReadSetActivationJobResponse
+      attr_accessor id: ::String
+      attr_accessor sequence_store_id: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLING" | "CANCELLED" | "FAILED" | "COMPLETED" | "COMPLETED_WITH_FAILURES")
+      attr_accessor status_message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor completion_time: ::Time
+      attr_accessor sources: ::Array[Types::ActivateReadSetSourceItem]
+      SENSITIVE: []
+    end
+
+    class GetReadSetExportJobRequest
+      attr_accessor sequence_store_id: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetReadSetExportJobResponse
+      attr_accessor id: ::String
+      attr_accessor sequence_store_id: ::String
+      attr_accessor destination: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLING" | "CANCELLED" | "FAILED" | "COMPLETED" | "COMPLETED_WITH_FAILURES")
+      attr_accessor status_message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor completion_time: ::Time
+      attr_accessor read_sets: ::Array[Types::ExportReadSetDetail]
+      SENSITIVE: []
+    end
+
+    class GetReadSetImportJobRequest
+      attr_accessor id: ::String
+      attr_accessor sequence_store_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetReadSetImportJobResponse
+      attr_accessor id: ::String
+      attr_accessor sequence_store_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLING" | "CANCELLED" | "FAILED" | "COMPLETED" | "COMPLETED_WITH_FAILURES")
+      attr_accessor status_message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor completion_time: ::Time
+      attr_accessor sources: ::Array[Types::ImportReadSetSourceItem]
+      SENSITIVE: []
+    end
+
+    class GetReadSetMetadataRequest
+      attr_accessor id: ::String
+      attr_accessor sequence_store_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetReadSetMetadataResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor sequence_store_id: ::String
+      attr_accessor subject_id: ::String
+      attr_accessor sample_id: ::String
+      attr_accessor status: ("ARCHIVED" | "ACTIVATING" | "ACTIVE" | "DELETING" | "DELETED" | "PROCESSING_UPLOAD" | "UPLOAD_FAILED")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor file_type: ("FASTQ" | "BAM" | "CRAM" | "UBAM")
+      attr_accessor creation_time: ::Time
+      attr_accessor sequence_information: Types::SequenceInformation
+      attr_accessor reference_arn: ::String
+      attr_accessor files: Types::ReadSetFiles
+      attr_accessor status_message: ::String
+      attr_accessor creation_type: ("IMPORT" | "UPLOAD")
+      attr_accessor etag: Types::ETag
+      SENSITIVE: []
+    end
+
+    class GetReadSetRequest
+      attr_accessor id: ::String
+      attr_accessor sequence_store_id: ::String
+      attr_accessor file: ("SOURCE1" | "SOURCE2" | "INDEX")
+      attr_accessor part_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetReadSetResponse
+      attr_accessor payload: ::IO
+      SENSITIVE: []
+    end
+
+    class GetReferenceImportJobRequest
+      attr_accessor id: ::String
+      attr_accessor reference_store_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetReferenceImportJobResponse
+      attr_accessor id: ::String
+      attr_accessor reference_store_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLING" | "CANCELLED" | "FAILED" | "COMPLETED" | "COMPLETED_WITH_FAILURES")
+      attr_accessor status_message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor completion_time: ::Time
+      attr_accessor sources: ::Array[Types::ImportReferenceSourceItem]
+      SENSITIVE: []
+    end
+
+    class GetReferenceMetadataRequest
+      attr_accessor id: ::String
+      attr_accessor reference_store_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetReferenceMetadataResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor reference_store_id: ::String
+      attr_accessor md5: ::String
+      attr_accessor status: ("ACTIVE" | "DELETING" | "DELETED")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor files: Types::ReferenceFiles
+      SENSITIVE: []
+    end
+
+    class GetReferenceRequest
+      attr_accessor id: ::String
+      attr_accessor reference_store_id: ::String
+      attr_accessor range: ::String
+      attr_accessor part_number: ::Integer
+      attr_accessor file: ("SOURCE" | "INDEX")
+      SENSITIVE: []
+    end
+
+    class GetReferenceResponse
+      attr_accessor payload: ::IO
+      SENSITIVE: []
+    end
+
+    class GetReferenceStoreRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetReferenceStoreResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor sse_config: Types::SseConfig
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetRunGroupRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRunGroupResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor max_cpus: ::Integer
+      attr_accessor max_runs: ::Integer
+      attr_accessor max_duration: ::Integer
+      attr_accessor creation_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor max_gpus: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetRunRequest
+      attr_accessor id: ::String
+      attr_accessor export: ::Array[("DEFINITION")]
+      SENSITIVE: []
+    end
+
+    class GetRunResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("PENDING" | "STARTING" | "RUNNING" | "STOPPING" | "COMPLETED" | "DELETED" | "CANCELLED" | "FAILED")
+      attr_accessor workflow_id: ::String
+      attr_accessor workflow_type: ("PRIVATE" | "READY2RUN")
+      attr_accessor run_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor run_group_id: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor definition: ::String
+      attr_accessor digest: ::String
+      attr_accessor parameters: untyped
+      attr_accessor storage_capacity: ::Integer
+      attr_accessor output_uri: ::String
+      attr_accessor log_level: ("OFF" | "FATAL" | "ERROR" | "ALL")
+      attr_accessor resource_digests: ::Hash[::String, ::String]
+      attr_accessor started_by: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor start_time: ::Time
+      attr_accessor stop_time: ::Time
+      attr_accessor status_message: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor accelerators: ("GPU")
+      attr_accessor retention_mode: ("RETAIN" | "REMOVE")
+      attr_accessor failure_reason: ::String
+      attr_accessor log_location: Types::RunLogLocation
+      attr_accessor uuid: ::String
+      attr_accessor run_output_uri: ::String
+      SENSITIVE: []
+    end
+
+    class GetRunTaskRequest
+      attr_accessor id: ::String
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRunTaskResponse
+      attr_accessor task_id: ::String
+      attr_accessor status: ("PENDING" | "STARTING" | "RUNNING" | "STOPPING" | "COMPLETED" | "CANCELLED" | "FAILED")
+      attr_accessor name: ::String
+      attr_accessor cpus: ::Integer
+      attr_accessor memory: ::Integer
+      attr_accessor creation_time: ::Time
+      attr_accessor start_time: ::Time
+      attr_accessor stop_time: ::Time
+      attr_accessor status_message: ::String
+      attr_accessor log_stream: ::String
+      attr_accessor gpus: ::Integer
+      attr_accessor instance_type: ::String
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class GetSequenceStoreRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSequenceStoreResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor sse_config: Types::SseConfig
+      attr_accessor creation_time: ::Time
+      attr_accessor fallback_location: ::String
+      SENSITIVE: []
+    end
+
+    class GetShareRequest
+      attr_accessor share_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetShareResponse
+      attr_accessor share: Types::ShareDetails
+      SENSITIVE: []
+    end
+
+    class GetVariantImportRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetVariantImportResponse
+      attr_accessor id: ::String
+      attr_accessor destination_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLED" | "COMPLETED" | "FAILED" | "COMPLETED_WITH_FAILURES")
+      attr_accessor status_message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor completion_time: ::Time
+      attr_accessor items: ::Array[Types::VariantImportItemDetail]
+      attr_accessor run_left_normalization: bool
+      attr_accessor annotation_fields: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetVariantStoreRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetVariantStoreResponse
+      attr_accessor id: ::String
+      attr_accessor reference: Types::ReferenceItem
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+      attr_accessor store_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor sse_config: Types::SseConfig
+      attr_accessor creation_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor status_message: ::String
+      attr_accessor store_size_bytes: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetWorkflowRequest
+      attr_accessor id: ::String
+      attr_accessor type: ("PRIVATE" | "READY2RUN")
+      attr_accessor export: ::Array[("DEFINITION")]
+      SENSITIVE: []
+    end
+
+    class GetWorkflowResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETED" | "FAILED" | "INACTIVE")
+      attr_accessor type: ("PRIVATE" | "READY2RUN")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor engine: ("WDL" | "NEXTFLOW" | "CWL")
+      attr_accessor definition: ::String
+      attr_accessor main: ::String
+      attr_accessor digest: ::String
+      attr_accessor parameter_template: ::Hash[::String, Types::WorkflowParameter]
+      attr_accessor storage_capacity: ::Integer
+      attr_accessor creation_time: ::Time
+      attr_accessor status_message: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor accelerators: ("GPU")
+      SENSITIVE: []
+    end
+
+    class ImportReadSetFilter
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLING" | "CANCELLED" | "FAILED" | "COMPLETED" | "COMPLETED_WITH_FAILURES")
+      attr_accessor created_after: ::Time
+      attr_accessor created_before: ::Time
+      SENSITIVE: []
+    end
+
+    class ImportReadSetJobItem
+      attr_accessor id: ::String
+      attr_accessor sequence_store_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLING" | "CANCELLED" | "FAILED" | "COMPLETED" | "COMPLETED_WITH_FAILURES")
+      attr_accessor creation_time: ::Time
+      attr_accessor completion_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ImportReadSetSourceItem
+      attr_accessor source_files: Types::SourceFiles
+      attr_accessor source_file_type: ("FASTQ" | "BAM" | "CRAM" | "UBAM")
+      attr_accessor status: ("NOT_STARTED" | "IN_PROGRESS" | "FINISHED" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor subject_id: ::String
+      attr_accessor sample_id: ::String
+      attr_accessor generated_from: ::String
+      attr_accessor reference_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ImportReferenceFilter
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLING" | "CANCELLED" | "FAILED" | "COMPLETED" | "COMPLETED_WITH_FAILURES")
+      attr_accessor created_after: ::Time
+      attr_accessor created_before: ::Time
+      SENSITIVE: []
+    end
+
+    class ImportReferenceJobItem
+      attr_accessor id: ::String
+      attr_accessor reference_store_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLING" | "CANCELLED" | "FAILED" | "COMPLETED" | "COMPLETED_WITH_FAILURES")
+      attr_accessor creation_time: ::Time
+      attr_accessor completion_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ImportReferenceSourceItem
+      attr_accessor source_file: ::String
+      attr_accessor status: ("NOT_STARTED" | "IN_PROGRESS" | "FINISHED" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAnnotationImportJobsFilter
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLED" | "COMPLETED" | "FAILED" | "COMPLETED_WITH_FAILURES")
+      attr_accessor store_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListAnnotationImportJobsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor filter: Types::ListAnnotationImportJobsFilter
+      SENSITIVE: []
+    end
+
+    class ListAnnotationImportJobsResponse
+      attr_accessor annotation_import_jobs: ::Array[Types::AnnotationImportJobItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAnnotationStoreVersionsFilter
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class ListAnnotationStoreVersionsRequest
+      attr_accessor name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filter: Types::ListAnnotationStoreVersionsFilter
+      SENSITIVE: []
+    end
+
+    class ListAnnotationStoreVersionsResponse
+      attr_accessor annotation_store_versions: ::Array[Types::AnnotationStoreVersionItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAnnotationStoresFilter
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class ListAnnotationStoresRequest
+      attr_accessor ids: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filter: Types::ListAnnotationStoresFilter
+      SENSITIVE: []
+    end
+
+    class ListAnnotationStoresResponse
+      attr_accessor annotation_stores: ::Array[Types::AnnotationStoreItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMultipartReadSetUploadsRequest
+      attr_accessor sequence_store_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMultipartReadSetUploadsResponse
+      attr_accessor next_token: ::String
+      attr_accessor uploads: ::Array[Types::MultipartReadSetUploadListItem]
+      SENSITIVE: []
+    end
+
+    class ListReadSetActivationJobsRequest
+      attr_accessor sequence_store_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filter: Types::ActivateReadSetFilter
+      SENSITIVE: []
+    end
+
+    class ListReadSetActivationJobsResponse
+      attr_accessor next_token: ::String
+      attr_accessor activation_jobs: ::Array[Types::ActivateReadSetJobItem]
+      SENSITIVE: []
+    end
+
+    class ListReadSetExportJobsRequest
+      attr_accessor sequence_store_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filter: Types::ExportReadSetFilter
+      SENSITIVE: []
+    end
+
+    class ListReadSetExportJobsResponse
+      attr_accessor next_token: ::String
+      attr_accessor export_jobs: ::Array[Types::ExportReadSetJobDetail]
+      SENSITIVE: []
+    end
+
+    class ListReadSetImportJobsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sequence_store_id: ::String
+      attr_accessor filter: Types::ImportReadSetFilter
+      SENSITIVE: []
+    end
+
+    class ListReadSetImportJobsResponse
+      attr_accessor next_token: ::String
+      attr_accessor import_jobs: ::Array[Types::ImportReadSetJobItem]
+      SENSITIVE: []
+    end
+
+    class ListReadSetUploadPartsRequest
+      attr_accessor sequence_store_id: ::String
+      attr_accessor upload_id: ::String
+      attr_accessor part_source: ("SOURCE1" | "SOURCE2")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filter: Types::ReadSetUploadPartListFilter
+      SENSITIVE: []
+    end
+
+    class ListReadSetUploadPartsResponse
+      attr_accessor next_token: ::String
+      attr_accessor parts: ::Array[Types::ReadSetUploadPartListItem]
+      SENSITIVE: []
+    end
+
+    class ListReadSetsRequest
+      attr_accessor sequence_store_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filter: Types::ReadSetFilter
+      SENSITIVE: []
+    end
+
+    class ListReadSetsResponse
+      attr_accessor next_token: ::String
+      attr_accessor read_sets: ::Array[Types::ReadSetListItem]
+      SENSITIVE: []
+    end
+
+    class ListReferenceImportJobsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor reference_store_id: ::String
+      attr_accessor filter: Types::ImportReferenceFilter
+      SENSITIVE: []
+    end
+
+    class ListReferenceImportJobsResponse
+      attr_accessor next_token: ::String
+      attr_accessor import_jobs: ::Array[Types::ImportReferenceJobItem]
+      SENSITIVE: []
+    end
+
+    class ListReferenceStoresRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filter: Types::ReferenceStoreFilter
+      SENSITIVE: []
+    end
+
+    class ListReferenceStoresResponse
+      attr_accessor next_token: ::String
+      attr_accessor reference_stores: ::Array[Types::ReferenceStoreDetail]
+      SENSITIVE: []
+    end
+
+    class ListReferencesRequest
+      attr_accessor reference_store_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filter: Types::ReferenceFilter
+      SENSITIVE: []
+    end
+
+    class ListReferencesResponse
+      attr_accessor next_token: ::String
+      attr_accessor references: ::Array[Types::ReferenceListItem]
+      SENSITIVE: []
+    end
+
+    class ListRunGroupsRequest
+      attr_accessor name: ::String
+      attr_accessor starting_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRunGroupsResponse
+      attr_accessor items: ::Array[Types::RunGroupListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRunTasksRequest
+      attr_accessor id: ::String
+      attr_accessor status: ("PENDING" | "STARTING" | "RUNNING" | "STOPPING" | "COMPLETED" | "CANCELLED" | "FAILED")
+      attr_accessor starting_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRunTasksResponse
+      attr_accessor items: ::Array[Types::TaskListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRunsRequest
+      attr_accessor name: ::String
+      attr_accessor run_group_id: ::String
+      attr_accessor starting_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor status: ("PENDING" | "STARTING" | "RUNNING" | "STOPPING" | "COMPLETED" | "DELETED" | "CANCELLED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class ListRunsResponse
+      attr_accessor items: ::Array[Types::RunListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSequenceStoresRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filter: Types::SequenceStoreFilter
+      SENSITIVE: []
+    end
+
+    class ListSequenceStoresResponse
+      attr_accessor next_token: ::String
+      attr_accessor sequence_stores: ::Array[Types::SequenceStoreDetail]
+      SENSITIVE: []
+    end
+
+    class ListSharesRequest
+      attr_accessor resource_owner: ("SELF" | "OTHER")
+      attr_accessor filter: Types::Filter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSharesResponse
+      attr_accessor shares: ::Array[Types::ShareDetails]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListVariantImportJobsFilter
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLED" | "COMPLETED" | "FAILED" | "COMPLETED_WITH_FAILURES")
+      attr_accessor store_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListVariantImportJobsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor filter: Types::ListVariantImportJobsFilter
+      SENSITIVE: []
+    end
+
+    class ListVariantImportJobsResponse
+      attr_accessor variant_import_jobs: ::Array[Types::VariantImportJobItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVariantStoresFilter
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class ListVariantStoresRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor filter: Types::ListVariantStoresFilter
+      SENSITIVE: []
+    end
+
+    class ListVariantStoresResponse
+      attr_accessor variant_stores: ::Array[Types::VariantStoreItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkflowsRequest
+      attr_accessor type: ("PRIVATE" | "READY2RUN")
+      attr_accessor name: ::String
+      attr_accessor starting_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListWorkflowsResponse
+      attr_accessor items: ::Array[Types::WorkflowListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MultipartReadSetUploadListItem
+      attr_accessor sequence_store_id: ::String
+      attr_accessor upload_id: ::String
+      attr_accessor source_file_type: ("FASTQ" | "BAM" | "CRAM" | "UBAM")
+      attr_accessor subject_id: ::String
+      attr_accessor sample_id: ::String
+      attr_accessor generated_from: ::String
+      attr_accessor reference_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class NotSupportedOperationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RangeNotSatisfiableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ReadOptions
+      attr_accessor sep: ::String
+      attr_accessor encoding: ::String
+      attr_accessor quote: ::String
+      attr_accessor quote_all: bool
+      attr_accessor escape: ::String
+      attr_accessor escape_quotes: bool
+      attr_accessor comment: ::String
+      attr_accessor header: bool
+      attr_accessor line_sep: ::String
+      SENSITIVE: []
+    end
+
+    class ReadSetBatchError
+      attr_accessor id: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ReadSetFiles
+      attr_accessor source1: Types::FileInformation
+      attr_accessor source2: Types::FileInformation
+      attr_accessor index: Types::FileInformation
+      SENSITIVE: []
+    end
+
+    class ReadSetFilter
+      attr_accessor name: ::String
+      attr_accessor status: ("ARCHIVED" | "ACTIVATING" | "ACTIVE" | "DELETING" | "DELETED" | "PROCESSING_UPLOAD" | "UPLOAD_FAILED")
+      attr_accessor reference_arn: ::String
+      attr_accessor created_after: ::Time
+      attr_accessor created_before: ::Time
+      attr_accessor sample_id: ::String
+      attr_accessor subject_id: ::String
+      attr_accessor generated_from: ::String
+      attr_accessor creation_type: ("IMPORT" | "UPLOAD")
+      SENSITIVE: []
+    end
+
+    class ReadSetListItem
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor sequence_store_id: ::String
+      attr_accessor subject_id: ::String
+      attr_accessor sample_id: ::String
+      attr_accessor status: ("ARCHIVED" | "ACTIVATING" | "ACTIVE" | "DELETING" | "DELETED" | "PROCESSING_UPLOAD" | "UPLOAD_FAILED")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor reference_arn: ::String
+      attr_accessor file_type: ("FASTQ" | "BAM" | "CRAM" | "UBAM")
+      attr_accessor sequence_information: Types::SequenceInformation
+      attr_accessor creation_time: ::Time
+      attr_accessor status_message: ::String
+      attr_accessor creation_type: ("IMPORT" | "UPLOAD")
+      attr_accessor etag: Types::ETag
+      SENSITIVE: []
+    end
+
+    class ReadSetUploadPartListFilter
+      attr_accessor created_after: ::Time
+      attr_accessor created_before: ::Time
+      SENSITIVE: []
+    end
+
+    class ReadSetUploadPartListItem
+      attr_accessor part_number: ::Integer
+      attr_accessor part_size: ::Integer
+      attr_accessor part_source: ("SOURCE1" | "SOURCE2")
+      attr_accessor checksum: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ReferenceFiles
+      attr_accessor source: Types::FileInformation
+      attr_accessor index: Types::FileInformation
+      SENSITIVE: []
+    end
+
+    class ReferenceFilter
+      attr_accessor name: ::String
+      attr_accessor md5: ::String
+      attr_accessor created_after: ::Time
+      attr_accessor created_before: ::Time
+      SENSITIVE: []
+    end
+
+    class ReferenceItem
+      attr_accessor reference_arn: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ReferenceArn < ReferenceItem
+      end
+      class Unknown < ReferenceItem
+      end
+    end
+
+    class ReferenceListItem
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor reference_store_id: ::String
+      attr_accessor md5: ::String
+      attr_accessor status: ("ACTIVE" | "DELETING" | "DELETED")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ReferenceStoreDetail
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor sse_config: Types::SseConfig
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ReferenceStoreFilter
+      attr_accessor name: ::String
+      attr_accessor created_after: ::Time
+      attr_accessor created_before: ::Time
+      SENSITIVE: []
+    end
+
+    class RequestTimeoutException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RunGroupListItem
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor max_cpus: ::Integer
+      attr_accessor max_runs: ::Integer
+      attr_accessor max_duration: ::Integer
+      attr_accessor creation_time: ::Time
+      attr_accessor max_gpus: ::Integer
+      SENSITIVE: []
+    end
+
+    class RunListItem
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("PENDING" | "STARTING" | "RUNNING" | "STOPPING" | "COMPLETED" | "DELETED" | "CANCELLED" | "FAILED")
+      attr_accessor workflow_id: ::String
+      attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor storage_capacity: ::Integer
+      attr_accessor creation_time: ::Time
+      attr_accessor start_time: ::Time
+      attr_accessor stop_time: ::Time
+      SENSITIVE: []
+    end
+
+    class RunLogLocation
+      attr_accessor engine_log_stream: ::String
+      attr_accessor run_log_stream: ::String
+      SENSITIVE: []
+    end
+
+    class SequenceInformation
+      attr_accessor total_read_count: ::Integer
+      attr_accessor total_base_count: ::Integer
+      attr_accessor generated_from: ::String
+      attr_accessor alignment: ::String
+      SENSITIVE: []
+    end
+
+    class SequenceStoreDetail
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor sse_config: Types::SseConfig
+      attr_accessor creation_time: ::Time
+      attr_accessor fallback_location: ::String
+      SENSITIVE: []
+    end
+
+    class SequenceStoreFilter
+      attr_accessor name: ::String
+      attr_accessor created_after: ::Time
+      attr_accessor created_before: ::Time
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ShareDetails
+      attr_accessor share_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor principal_subscriber: ::String
+      attr_accessor owner_id: ::String
+      attr_accessor status: ("PENDING" | "ACTIVATING" | "ACTIVE" | "DELETING" | "DELETED" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor share_name: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class SourceFiles
+      attr_accessor source1: ::String
+      attr_accessor source2: ::String
+      SENSITIVE: []
+    end
+
+    class SseConfig
+      attr_accessor type: ("KMS")
+      attr_accessor key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartAnnotationImportRequest
+      attr_accessor destination_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor items: ::Array[Types::AnnotationImportItemSource]
+      attr_accessor version_name: ::String
+      attr_accessor format_options: Types::FormatOptions
+      attr_accessor run_left_normalization: bool
+      attr_accessor annotation_fields: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartAnnotationImportResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartReadSetActivationJobRequest
+      attr_accessor sequence_store_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor sources: ::Array[Types::StartReadSetActivationJobSourceItem]
+      SENSITIVE: []
+    end
+
+    class StartReadSetActivationJobResponse
+      attr_accessor id: ::String
+      attr_accessor sequence_store_id: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLING" | "CANCELLED" | "FAILED" | "COMPLETED" | "COMPLETED_WITH_FAILURES")
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class StartReadSetActivationJobSourceItem
+      attr_accessor read_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartReadSetExportJobRequest
+      attr_accessor sequence_store_id: ::String
+      attr_accessor destination: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor sources: ::Array[Types::ExportReadSet]
+      SENSITIVE: []
+    end
+
+    class StartReadSetExportJobResponse
+      attr_accessor id: ::String
+      attr_accessor sequence_store_id: ::String
+      attr_accessor destination: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLING" | "CANCELLED" | "FAILED" | "COMPLETED" | "COMPLETED_WITH_FAILURES")
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class StartReadSetImportJobRequest
+      attr_accessor sequence_store_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor sources: ::Array[Types::StartReadSetImportJobSourceItem]
+      SENSITIVE: []
+    end
+
+    class StartReadSetImportJobResponse
+      attr_accessor id: ::String
+      attr_accessor sequence_store_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLING" | "CANCELLED" | "FAILED" | "COMPLETED" | "COMPLETED_WITH_FAILURES")
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class StartReadSetImportJobSourceItem
+      attr_accessor source_files: Types::SourceFiles
+      attr_accessor source_file_type: ("FASTQ" | "BAM" | "CRAM" | "UBAM")
+      attr_accessor subject_id: ::String
+      attr_accessor sample_id: ::String
+      attr_accessor generated_from: ::String
+      attr_accessor reference_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartReferenceImportJobRequest
+      attr_accessor reference_store_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor sources: ::Array[Types::StartReferenceImportJobSourceItem]
+      SENSITIVE: []
+    end
+
+    class StartReferenceImportJobResponse
+      attr_accessor id: ::String
+      attr_accessor reference_store_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLING" | "CANCELLED" | "FAILED" | "COMPLETED" | "COMPLETED_WITH_FAILURES")
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class StartReferenceImportJobSourceItem
+      attr_accessor source_file: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartRunRequest
+      attr_accessor workflow_id: ::String
+      attr_accessor workflow_type: ("PRIVATE" | "READY2RUN")
+      attr_accessor run_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor run_group_id: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor parameters: untyped
+      attr_accessor storage_capacity: ::Integer
+      attr_accessor output_uri: ::String
+      attr_accessor log_level: ("OFF" | "FATAL" | "ERROR" | "ALL")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor request_id: ::String
+      attr_accessor retention_mode: ("RETAIN" | "REMOVE")
+      SENSITIVE: []
+    end
+
+    class StartRunResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("PENDING" | "STARTING" | "RUNNING" | "STOPPING" | "COMPLETED" | "DELETED" | "CANCELLED" | "FAILED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor uuid: ::String
+      attr_accessor run_output_uri: ::String
+      SENSITIVE: []
+    end
+
+    class StartVariantImportRequest
+      attr_accessor destination_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor items: ::Array[Types::VariantImportItemSource]
+      attr_accessor run_left_normalization: bool
+      attr_accessor annotation_fields: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartVariantImportResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StoreOptions
+      attr_accessor tsv_store_options: Types::TsvStoreOptions
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class TsvStoreOptions < StoreOptions
+      end
+      class Unknown < StoreOptions
+      end
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TaskListItem
+      attr_accessor task_id: ::String
+      attr_accessor status: ("PENDING" | "STARTING" | "RUNNING" | "STOPPING" | "COMPLETED" | "CANCELLED" | "FAILED")
+      attr_accessor name: ::String
+      attr_accessor cpus: ::Integer
+      attr_accessor memory: ::Integer
+      attr_accessor creation_time: ::Time
+      attr_accessor start_time: ::Time
+      attr_accessor stop_time: ::Time
+      attr_accessor gpus: ::Integer
+      attr_accessor instance_type: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TsvOptions
+      attr_accessor read_options: Types::ReadOptions
+      SENSITIVE: []
+    end
+
+    class TsvStoreOptions
+      attr_accessor annotation_type: ("GENERIC" | "CHR_POS" | "CHR_POS_REF_ALT" | "CHR_START_END_ONE_BASE" | "CHR_START_END_REF_ALT_ONE_BASE" | "CHR_START_END_ZERO_BASE" | "CHR_START_END_REF_ALT_ZERO_BASE")
+      attr_accessor format_to_header: ::Hash[("CHR" | "START" | "END" | "REF" | "ALT" | "POS"), ::String]
+      attr_accessor schema: ::Array[::Hash[::String, ("LONG" | "INT" | "STRING" | "FLOAT" | "DOUBLE" | "BOOLEAN")]]
+      SENSITIVE: []
+    end
+
+    class TsvVersionOptions
+      attr_accessor annotation_type: ("GENERIC" | "CHR_POS" | "CHR_POS_REF_ALT" | "CHR_START_END_ONE_BASE" | "CHR_START_END_REF_ALT_ONE_BASE" | "CHR_START_END_ZERO_BASE" | "CHR_START_END_REF_ALT_ZERO_BASE")
+      attr_accessor format_to_header: ::Hash[("CHR" | "START" | "END" | "REF" | "ALT" | "POS"), ::String]
+      attr_accessor schema: ::Array[::Hash[::String, ("LONG" | "INT" | "STRING" | "FLOAT" | "DOUBLE" | "BOOLEAN")]]
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAnnotationStoreRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAnnotationStoreResponse
+      attr_accessor id: ::String
+      attr_accessor reference: Types::ReferenceItem
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor store_options: Types::StoreOptions
+      attr_accessor store_format: ("GFF" | "TSV" | "VCF")
+      SENSITIVE: []
+    end
+
+    class UpdateAnnotationStoreVersionRequest
+      attr_accessor name: ::String
+      attr_accessor version_name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAnnotationStoreVersionResponse
+      attr_accessor store_id: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+      attr_accessor name: ::String
+      attr_accessor version_name: ::String
+      attr_accessor description: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateRunGroupRequest
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor max_cpus: ::Integer
+      attr_accessor max_runs: ::Integer
+      attr_accessor max_duration: ::Integer
+      attr_accessor max_gpus: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateVariantStoreRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateVariantStoreResponse
+      attr_accessor id: ::String
+      attr_accessor reference: Types::ReferenceItem
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateWorkflowRequest
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UploadReadSetPartRequest
+      attr_accessor sequence_store_id: ::String
+      attr_accessor upload_id: ::String
+      attr_accessor part_source: ("SOURCE1" | "SOURCE2")
+      attr_accessor part_number: ::Integer
+      attr_accessor payload: ::IO
+      SENSITIVE: []
+    end
+
+    class UploadReadSetPartResponse
+      attr_accessor checksum: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VariantImportItemDetail
+      attr_accessor source: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLED" | "COMPLETED" | "FAILED" | "COMPLETED_WITH_FAILURES")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class VariantImportItemSource
+      attr_accessor source: ::String
+      SENSITIVE: []
+    end
+
+    class VariantImportJobItem
+      attr_accessor id: ::String
+      attr_accessor destination_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLED" | "COMPLETED" | "FAILED" | "COMPLETED_WITH_FAILURES")
+      attr_accessor creation_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor completion_time: ::Time
+      attr_accessor run_left_normalization: bool
+      attr_accessor annotation_fields: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class VariantStoreItem
+      attr_accessor id: ::String
+      attr_accessor reference: Types::ReferenceItem
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+      attr_accessor store_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor sse_config: Types::SseConfig
+      attr_accessor creation_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor status_message: ::String
+      attr_accessor store_size_bytes: ::Integer
+      SENSITIVE: []
+    end
+
+    class VcfOptions
+      attr_accessor ignore_qual_field: bool
+      attr_accessor ignore_filter_field: bool
+      SENSITIVE: []
+    end
+
+    class VersionDeleteError
+      attr_accessor version_name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VersionOptions
+      attr_accessor tsv_version_options: Types::TsvVersionOptions
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class TsvVersionOptions < VersionOptions
+      end
+      class Unknown < VersionOptions
+      end
+    end
+
+    class WorkflowListItem
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETED" | "FAILED" | "INACTIVE")
+      attr_accessor type: ("PRIVATE" | "READY2RUN")
+      attr_accessor digest: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor metadata: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class WorkflowParameter
+      attr_accessor description: ::String
+      attr_accessor optional: bool
+      SENSITIVE: []
+    end
+  end
+end

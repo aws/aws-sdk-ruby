@@ -1,0 +1,290 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CloudHSMV2
+  module Types
+
+    class Backup
+      attr_accessor backup_id: ::String
+      attr_accessor backup_state: ("CREATE_IN_PROGRESS" | "READY" | "DELETED" | "PENDING_DELETION")
+      attr_accessor cluster_id: ::String
+      attr_accessor create_timestamp: ::Time
+      attr_accessor copy_timestamp: ::Time
+      attr_accessor never_expires: bool
+      attr_accessor source_region: ::String
+      attr_accessor source_backup: ::String
+      attr_accessor source_cluster: ::String
+      attr_accessor delete_timestamp: ::Time
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class BackupRetentionPolicy
+      attr_accessor type: ("DAYS")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class Certificates
+      attr_accessor cluster_csr: ::String
+      attr_accessor hsm_certificate: ::String
+      attr_accessor aws_hardware_certificate: ::String
+      attr_accessor manufacturer_hardware_certificate: ::String
+      attr_accessor cluster_certificate: ::String
+      SENSITIVE: []
+    end
+
+    class CloudHsmAccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CloudHsmInternalFailureException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CloudHsmInvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CloudHsmResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CloudHsmServiceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CloudHsmTagException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Cluster
+      attr_accessor backup_policy: ("DEFAULT")
+      attr_accessor backup_retention_policy: Types::BackupRetentionPolicy
+      attr_accessor cluster_id: ::String
+      attr_accessor create_timestamp: ::Time
+      attr_accessor hsms: ::Array[Types::Hsm]
+      attr_accessor hsm_type: ::String
+      attr_accessor pre_co_password: ::String
+      attr_accessor security_group: ::String
+      attr_accessor source_backup_id: ::String
+      attr_accessor state: ("CREATE_IN_PROGRESS" | "UNINITIALIZED" | "INITIALIZE_IN_PROGRESS" | "INITIALIZED" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "DELETED" | "DEGRADED")
+      attr_accessor state_message: ::String
+      attr_accessor subnet_mapping: ::Hash[::String, ::String]
+      attr_accessor vpc_id: ::String
+      attr_accessor certificates: Types::Certificates
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CopyBackupToRegionRequest
+      attr_accessor destination_region: ::String
+      attr_accessor backup_id: ::String
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CopyBackupToRegionResponse
+      attr_accessor destination_backup: Types::DestinationBackup
+      SENSITIVE: []
+    end
+
+    class CreateClusterRequest
+      attr_accessor backup_retention_policy: Types::BackupRetentionPolicy
+      attr_accessor hsm_type: ::String
+      attr_accessor source_backup_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateClusterResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class CreateHsmRequest
+      attr_accessor cluster_id: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor ip_address: ::String
+      SENSITIVE: []
+    end
+
+    class CreateHsmResponse
+      attr_accessor hsm: Types::Hsm
+      SENSITIVE: []
+    end
+
+    class DeleteBackupRequest
+      attr_accessor backup_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBackupResponse
+      attr_accessor backup: Types::Backup
+      SENSITIVE: []
+    end
+
+    class DeleteClusterRequest
+      attr_accessor cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteClusterResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class DeleteHsmRequest
+      attr_accessor cluster_id: ::String
+      attr_accessor hsm_id: ::String
+      attr_accessor eni_id: ::String
+      attr_accessor eni_ip: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteHsmResponse
+      attr_accessor hsm_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBackupsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Hash[::String, ::Array[::String]]
+      attr_accessor sort_ascending: bool
+      SENSITIVE: []
+    end
+
+    class DescribeBackupsResponse
+      attr_accessor backups: ::Array[Types::Backup]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeClustersRequest
+      attr_accessor filters: ::Hash[::String, ::Array[::String]]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeClustersResponse
+      attr_accessor clusters: ::Array[Types::Cluster]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DestinationBackup
+      attr_accessor create_timestamp: ::Time
+      attr_accessor source_region: ::String
+      attr_accessor source_backup: ::String
+      attr_accessor source_cluster: ::String
+      SENSITIVE: []
+    end
+
+    class Hsm
+      attr_accessor availability_zone: ::String
+      attr_accessor cluster_id: ::String
+      attr_accessor subnet_id: ::String
+      attr_accessor eni_id: ::String
+      attr_accessor eni_ip: ::String
+      attr_accessor hsm_id: ::String
+      attr_accessor state: ("CREATE_IN_PROGRESS" | "ACTIVE" | "DEGRADED" | "DELETE_IN_PROGRESS" | "DELETED")
+      attr_accessor state_message: ::String
+      SENSITIVE: []
+    end
+
+    class InitializeClusterRequest
+      attr_accessor cluster_id: ::String
+      attr_accessor signed_cert: ::String
+      attr_accessor trust_anchor: ::String
+      SENSITIVE: []
+    end
+
+    class InitializeClusterResponse
+      attr_accessor state: ("CREATE_IN_PROGRESS" | "UNINITIALIZED" | "INITIALIZE_IN_PROGRESS" | "INITIALIZED" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "DELETED" | "DEGRADED")
+      attr_accessor state_message: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsRequest
+      attr_accessor resource_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTagsResponse
+      attr_accessor tag_list: ::Array[Types::Tag]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyBackupAttributesRequest
+      attr_accessor backup_id: ::String
+      attr_accessor never_expires: bool
+      SENSITIVE: []
+    end
+
+    class ModifyBackupAttributesResponse
+      attr_accessor backup: Types::Backup
+      SENSITIVE: []
+    end
+
+    class ModifyClusterRequest
+      attr_accessor backup_retention_policy: Types::BackupRetentionPolicy
+      attr_accessor cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyClusterResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class RestoreBackupRequest
+      attr_accessor backup_id: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreBackupResponse
+      attr_accessor backup: Types::Backup
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_id: ::String
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_id: ::String
+      attr_accessor tag_key_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+  end
+end

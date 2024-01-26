@@ -1,0 +1,94 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Connect
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AccessDeniedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ContactFlowNotPublishedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ContactNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DestinationNotAllowedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DuplicateResourceException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class IdempotencyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InternalServiceException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidContactFlowException < ::Aws::Errors::ServiceError
+        def problems: () -> ::String
+      end
+      class InvalidContactFlowModuleException < ::Aws::Errors::ServiceError
+        def problems: () -> ::String
+      end
+      class InvalidParameterException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidRequestException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MaximumResultReturnedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class OutboundContactNotPermittedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class OutputTypeNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PropertyValidationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def property_list: () -> ::String
+      end
+      class ResourceConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceInUseException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def resource_type: () -> ::String
+        def resource_id: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotReadyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ThrottlingException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyRequestsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UserNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

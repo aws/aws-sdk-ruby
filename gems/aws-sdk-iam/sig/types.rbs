@@ -1,0 +1,2131 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::IAM
+  module Types
+
+    class AccessDetail
+      attr_accessor service_name: ::String
+      attr_accessor service_namespace: ::String
+      attr_accessor region: ::String
+      attr_accessor entity_path: ::String
+      attr_accessor last_authenticated_time: ::Time
+      attr_accessor total_authenticated_entities: ::Integer
+      SENSITIVE: []
+    end
+
+    class AccessKey
+      attr_accessor user_name: ::String
+      attr_accessor access_key_id: ::String
+      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor secret_access_key: ::String
+      attr_accessor create_date: ::Time
+      SENSITIVE: [:secret_access_key]
+    end
+
+    class AccessKeyLastUsed
+      attr_accessor last_used_date: ::Time
+      attr_accessor service_name: ::String
+      attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
+    class AccessKeyMetadata
+      attr_accessor user_name: ::String
+      attr_accessor access_key_id: ::String
+      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor create_date: ::Time
+      SENSITIVE: []
+    end
+
+    class AddClientIDToOpenIDConnectProviderRequest
+      attr_accessor open_id_connect_provider_arn: ::String
+      attr_accessor client_id: ::String
+      SENSITIVE: []
+    end
+
+    class AddRoleToInstanceProfileRequest
+      attr_accessor instance_profile_name: ::String
+      attr_accessor role_name: ::String
+      SENSITIVE: []
+    end
+
+    class AddUserToGroupRequest
+      attr_accessor group_name: ::String
+      attr_accessor user_name: ::String
+      SENSITIVE: []
+    end
+
+    class AttachGroupPolicyRequest
+      attr_accessor group_name: ::String
+      attr_accessor policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AttachRolePolicyRequest
+      attr_accessor role_name: ::String
+      attr_accessor policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AttachUserPolicyRequest
+      attr_accessor user_name: ::String
+      attr_accessor policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AttachedPermissionsBoundary
+      attr_accessor permissions_boundary_type: ("PermissionsBoundaryPolicy")
+      attr_accessor permissions_boundary_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AttachedPolicy
+      attr_accessor policy_name: ::String
+      attr_accessor policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ChangePasswordRequest
+      attr_accessor old_password: ::String
+      attr_accessor new_password: ::String
+      SENSITIVE: [:old_password, :new_password]
+    end
+
+    class ConcurrentModificationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ContextEntry
+      attr_accessor context_key_name: ::String
+      attr_accessor context_key_values: ::Array[::String]
+      attr_accessor context_key_type: ("string" | "stringList" | "numeric" | "numericList" | "boolean" | "booleanList" | "ip" | "ipList" | "binary" | "binaryList" | "date" | "dateList")
+      SENSITIVE: []
+    end
+
+    class CreateAccessKeyRequest
+      attr_accessor user_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAccessKeyResponse
+      attr_accessor access_key: Types::AccessKey
+      SENSITIVE: []
+    end
+
+    class CreateAccountAliasRequest
+      attr_accessor account_alias: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGroupRequest
+      attr_accessor path: ::String
+      attr_accessor group_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGroupResponse
+      attr_accessor group: Types::Group
+      SENSITIVE: []
+    end
+
+    class CreateInstanceProfileRequest
+      attr_accessor instance_profile_name: ::String
+      attr_accessor path: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateInstanceProfileResponse
+      attr_accessor instance_profile: Types::InstanceProfile
+      SENSITIVE: []
+    end
+
+    class CreateLoginProfileRequest
+      attr_accessor user_name: ::String
+      attr_accessor password: ::String
+      attr_accessor password_reset_required: bool
+      SENSITIVE: [:password]
+    end
+
+    class CreateLoginProfileResponse
+      attr_accessor login_profile: Types::LoginProfile
+      SENSITIVE: []
+    end
+
+    class CreateOpenIDConnectProviderRequest
+      attr_accessor url: ::String
+      attr_accessor client_id_list: ::Array[::String]
+      attr_accessor thumbprint_list: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateOpenIDConnectProviderResponse
+      attr_accessor open_id_connect_provider_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreatePolicyRequest
+      attr_accessor policy_name: ::String
+      attr_accessor path: ::String
+      attr_accessor policy_document: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreatePolicyResponse
+      attr_accessor policy: Types::Policy
+      SENSITIVE: []
+    end
+
+    class CreatePolicyVersionRequest
+      attr_accessor policy_arn: ::String
+      attr_accessor policy_document: ::String
+      attr_accessor set_as_default: bool
+      SENSITIVE: []
+    end
+
+    class CreatePolicyVersionResponse
+      attr_accessor policy_version: Types::PolicyVersion
+      SENSITIVE: []
+    end
+
+    class CreateRoleRequest
+      attr_accessor path: ::String
+      attr_accessor role_name: ::String
+      attr_accessor assume_role_policy_document: ::String
+      attr_accessor description: ::String
+      attr_accessor max_session_duration: ::Integer
+      attr_accessor permissions_boundary: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateRoleResponse
+      attr_accessor role: Types::Role
+      SENSITIVE: []
+    end
+
+    class CreateSAMLProviderRequest
+      attr_accessor saml_metadata_document: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateSAMLProviderResponse
+      attr_accessor saml_provider_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateServiceLinkedRoleRequest
+      attr_accessor aws_service_name: ::String
+      attr_accessor description: ::String
+      attr_accessor custom_suffix: ::String
+      SENSITIVE: []
+    end
+
+    class CreateServiceLinkedRoleResponse
+      attr_accessor role: Types::Role
+      SENSITIVE: []
+    end
+
+    class CreateServiceSpecificCredentialRequest
+      attr_accessor user_name: ::String
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateServiceSpecificCredentialResponse
+      attr_accessor service_specific_credential: Types::ServiceSpecificCredential
+      SENSITIVE: []
+    end
+
+    class CreateUserRequest
+      attr_accessor path: ::String
+      attr_accessor user_name: ::String
+      attr_accessor permissions_boundary: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateUserResponse
+      attr_accessor user: Types::User
+      SENSITIVE: []
+    end
+
+    class CreateVirtualMFADeviceRequest
+      attr_accessor path: ::String
+      attr_accessor virtual_mfa_device_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateVirtualMFADeviceResponse
+      attr_accessor virtual_mfa_device: Types::VirtualMFADevice
+      SENSITIVE: []
+    end
+
+    class CredentialReportExpiredException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CredentialReportNotPresentException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CredentialReportNotReadyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeactivateMFADeviceRequest
+      attr_accessor user_name: ::String
+      attr_accessor serial_number: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccessKeyRequest
+      attr_accessor user_name: ::String
+      attr_accessor access_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccountAliasRequest
+      attr_accessor account_alias: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGroupPolicyRequest
+      attr_accessor group_name: ::String
+      attr_accessor policy_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGroupRequest
+      attr_accessor group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInstanceProfileRequest
+      attr_accessor instance_profile_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLoginProfileRequest
+      attr_accessor user_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteOpenIDConnectProviderRequest
+      attr_accessor open_id_connect_provider_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePolicyRequest
+      attr_accessor policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePolicyVersionRequest
+      attr_accessor policy_arn: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRolePermissionsBoundaryRequest
+      attr_accessor role_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRolePolicyRequest
+      attr_accessor role_name: ::String
+      attr_accessor policy_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRoleRequest
+      attr_accessor role_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSAMLProviderRequest
+      attr_accessor saml_provider_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSSHPublicKeyRequest
+      attr_accessor user_name: ::String
+      attr_accessor ssh_public_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteServerCertificateRequest
+      attr_accessor server_certificate_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteServiceLinkedRoleRequest
+      attr_accessor role_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteServiceLinkedRoleResponse
+      attr_accessor deletion_task_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteServiceSpecificCredentialRequest
+      attr_accessor user_name: ::String
+      attr_accessor service_specific_credential_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSigningCertificateRequest
+      attr_accessor user_name: ::String
+      attr_accessor certificate_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUserPermissionsBoundaryRequest
+      attr_accessor user_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUserPolicyRequest
+      attr_accessor user_name: ::String
+      attr_accessor policy_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUserRequest
+      attr_accessor user_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVirtualMFADeviceRequest
+      attr_accessor serial_number: ::String
+      SENSITIVE: []
+    end
+
+    class DeletionTaskFailureReasonType
+      attr_accessor reason: ::String
+      attr_accessor role_usage_list: ::Array[Types::RoleUsageType]
+      SENSITIVE: []
+    end
+
+    class DetachGroupPolicyRequest
+      attr_accessor group_name: ::String
+      attr_accessor policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DetachRolePolicyRequest
+      attr_accessor role_name: ::String
+      attr_accessor policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DetachUserPolicyRequest
+      attr_accessor user_name: ::String
+      attr_accessor policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DuplicateCertificateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DuplicateSSHPublicKeyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EnableMFADeviceRequest
+      attr_accessor user_name: ::String
+      attr_accessor serial_number: ::String
+      attr_accessor authentication_code_1: ::String
+      attr_accessor authentication_code_2: ::String
+      SENSITIVE: []
+    end
+
+    class EntityAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EntityDetails
+      attr_accessor entity_info: Types::EntityInfo
+      attr_accessor last_authenticated: ::Time
+      SENSITIVE: []
+    end
+
+    class EntityInfo
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("USER" | "ROLE" | "GROUP")
+      attr_accessor id: ::String
+      attr_accessor path: ::String
+      SENSITIVE: []
+    end
+
+    class EntityTemporarilyUnmodifiableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ErrorDetails
+      attr_accessor message: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class EvaluationResult
+      attr_accessor eval_action_name: ::String
+      attr_accessor eval_resource_name: ::String
+      attr_accessor eval_decision: ("allowed" | "explicitDeny" | "implicitDeny")
+      attr_accessor matched_statements: ::Array[Types::Statement]
+      attr_accessor missing_context_values: ::Array[::String]
+      attr_accessor organizations_decision_detail: Types::OrganizationsDecisionDetail
+      attr_accessor permissions_boundary_decision_detail: Types::PermissionsBoundaryDecisionDetail
+      attr_accessor eval_decision_details: ::Hash[::String, ("allowed" | "explicitDeny" | "implicitDeny")]
+      attr_accessor resource_specific_results: ::Array[Types::ResourceSpecificResult]
+      SENSITIVE: []
+    end
+
+    class GenerateCredentialReportResponse
+      attr_accessor state: ("STARTED" | "INPROGRESS" | "COMPLETE")
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class GenerateOrganizationsAccessReportRequest
+      attr_accessor entity_path: ::String
+      attr_accessor organizations_policy_id: ::String
+      SENSITIVE: []
+    end
+
+    class GenerateOrganizationsAccessReportResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GenerateServiceLastAccessedDetailsRequest
+      attr_accessor arn: ::String
+      attr_accessor granularity: ("SERVICE_LEVEL" | "ACTION_LEVEL")
+      SENSITIVE: []
+    end
+
+    class GenerateServiceLastAccessedDetailsResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessKeyLastUsedRequest
+      attr_accessor access_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessKeyLastUsedResponse
+      attr_accessor user_name: ::String
+      attr_accessor access_key_last_used: Types::AccessKeyLastUsed
+      SENSITIVE: []
+    end
+
+    class GetAccountAuthorizationDetailsRequest
+      attr_accessor filter: ::Array[("User" | "Role" | "Group" | "LocalManagedPolicy" | "AWSManagedPolicy")]
+      attr_accessor max_items: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccountAuthorizationDetailsResponse
+      attr_accessor user_detail_list: ::Array[Types::UserDetail]
+      attr_accessor group_detail_list: ::Array[Types::GroupDetail]
+      attr_accessor role_detail_list: ::Array[Types::RoleDetail]
+      attr_accessor policies: ::Array[Types::ManagedPolicyDetail]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccountPasswordPolicyResponse
+      attr_accessor password_policy: Types::PasswordPolicy
+      SENSITIVE: []
+    end
+
+    class GetAccountSummaryResponse
+      attr_accessor summary_map: ::Hash[("Users" | "UsersQuota" | "Groups" | "GroupsQuota" | "ServerCertificates" | "ServerCertificatesQuota" | "UserPolicySizeQuota" | "GroupPolicySizeQuota" | "GroupsPerUserQuota" | "SigningCertificatesPerUserQuota" | "AccessKeysPerUserQuota" | "MFADevices" | "MFADevicesInUse" | "AccountMFAEnabled" | "AccountAccessKeysPresent" | "AccountSigningCertificatesPresent" | "AttachedPoliciesPerGroupQuota" | "AttachedPoliciesPerRoleQuota" | "AttachedPoliciesPerUserQuota" | "Policies" | "PoliciesQuota" | "PolicySizeQuota" | "PolicyVersionsInUse" | "PolicyVersionsInUseQuota" | "VersionsPerPolicyQuota" | "GlobalEndpointTokenVersion"), ::Integer]
+      SENSITIVE: []
+    end
+
+    class GetContextKeysForCustomPolicyRequest
+      attr_accessor policy_input_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetContextKeysForPolicyResponse
+      attr_accessor context_key_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetContextKeysForPrincipalPolicyRequest
+      attr_accessor policy_source_arn: ::String
+      attr_accessor policy_input_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetCredentialReportResponse
+      attr_accessor content: ::String
+      attr_accessor report_format: ("text/csv")
+      attr_accessor generated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetGroupPolicyRequest
+      attr_accessor group_name: ::String
+      attr_accessor policy_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetGroupPolicyResponse
+      attr_accessor group_name: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor policy_document: ::String
+      SENSITIVE: []
+    end
+
+    class GetGroupRequest
+      attr_accessor group_name: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetGroupResponse
+      attr_accessor group: Types::Group
+      attr_accessor users: ::Array[Types::User]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class GetInstanceProfileRequest
+      attr_accessor instance_profile_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetInstanceProfileResponse
+      attr_accessor instance_profile: Types::InstanceProfile
+      SENSITIVE: []
+    end
+
+    class GetLoginProfileRequest
+      attr_accessor user_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetLoginProfileResponse
+      attr_accessor login_profile: Types::LoginProfile
+      SENSITIVE: []
+    end
+
+    class GetMFADeviceRequest
+      attr_accessor serial_number: ::String
+      attr_accessor user_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetMFADeviceResponse
+      attr_accessor user_name: ::String
+      attr_accessor serial_number: ::String
+      attr_accessor enable_date: ::Time
+      attr_accessor certifications: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetOpenIDConnectProviderRequest
+      attr_accessor open_id_connect_provider_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetOpenIDConnectProviderResponse
+      attr_accessor url: ::String
+      attr_accessor client_id_list: ::Array[::String]
+      attr_accessor thumbprint_list: ::Array[::String]
+      attr_accessor create_date: ::Time
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class GetOrganizationsAccessReportRequest
+      attr_accessor job_id: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor sort_key: ("SERVICE_NAMESPACE_ASCENDING" | "SERVICE_NAMESPACE_DESCENDING" | "LAST_AUTHENTICATED_TIME_ASCENDING" | "LAST_AUTHENTICATED_TIME_DESCENDING")
+      SENSITIVE: []
+    end
+
+    class GetOrganizationsAccessReportResponse
+      attr_accessor job_status: ("IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor job_creation_date: ::Time
+      attr_accessor job_completion_date: ::Time
+      attr_accessor number_of_services_accessible: ::Integer
+      attr_accessor number_of_services_not_accessed: ::Integer
+      attr_accessor access_details: ::Array[Types::AccessDetail]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      attr_accessor error_details: Types::ErrorDetails
+      SENSITIVE: []
+    end
+
+    class GetPolicyRequest
+      attr_accessor policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetPolicyResponse
+      attr_accessor policy: Types::Policy
+      SENSITIVE: []
+    end
+
+    class GetPolicyVersionRequest
+      attr_accessor policy_arn: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPolicyVersionResponse
+      attr_accessor policy_version: Types::PolicyVersion
+      SENSITIVE: []
+    end
+
+    class GetRolePolicyRequest
+      attr_accessor role_name: ::String
+      attr_accessor policy_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetRolePolicyResponse
+      attr_accessor role_name: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor policy_document: ::String
+      SENSITIVE: []
+    end
+
+    class GetRoleRequest
+      attr_accessor role_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetRoleResponse
+      attr_accessor role: Types::Role
+      SENSITIVE: []
+    end
+
+    class GetSAMLProviderRequest
+      attr_accessor saml_provider_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetSAMLProviderResponse
+      attr_accessor saml_metadata_document: ::String
+      attr_accessor create_date: ::Time
+      attr_accessor valid_until: ::Time
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class GetSSHPublicKeyRequest
+      attr_accessor user_name: ::String
+      attr_accessor ssh_public_key_id: ::String
+      attr_accessor encoding: ("SSH" | "PEM")
+      SENSITIVE: []
+    end
+
+    class GetSSHPublicKeyResponse
+      attr_accessor ssh_public_key: Types::SSHPublicKey
+      SENSITIVE: []
+    end
+
+    class GetServerCertificateRequest
+      attr_accessor server_certificate_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetServerCertificateResponse
+      attr_accessor server_certificate: Types::ServerCertificate
+      SENSITIVE: []
+    end
+
+    class GetServiceLastAccessedDetailsRequest
+      attr_accessor job_id: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceLastAccessedDetailsResponse
+      attr_accessor job_status: ("IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor job_type: ("SERVICE_LEVEL" | "ACTION_LEVEL")
+      attr_accessor job_creation_date: ::Time
+      attr_accessor services_last_accessed: ::Array[Types::ServiceLastAccessed]
+      attr_accessor job_completion_date: ::Time
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      attr_accessor error: Types::ErrorDetails
+      SENSITIVE: []
+    end
+
+    class GetServiceLastAccessedDetailsWithEntitiesRequest
+      attr_accessor job_id: ::String
+      attr_accessor service_namespace: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceLastAccessedDetailsWithEntitiesResponse
+      attr_accessor job_status: ("IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor job_creation_date: ::Time
+      attr_accessor job_completion_date: ::Time
+      attr_accessor entity_details_list: ::Array[Types::EntityDetails]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      attr_accessor error: Types::ErrorDetails
+      SENSITIVE: []
+    end
+
+    class GetServiceLinkedRoleDeletionStatusRequest
+      attr_accessor deletion_task_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceLinkedRoleDeletionStatusResponse
+      attr_accessor status: ("SUCCEEDED" | "IN_PROGRESS" | "FAILED" | "NOT_STARTED")
+      attr_accessor reason: Types::DeletionTaskFailureReasonType
+      SENSITIVE: []
+    end
+
+    class GetUserPolicyRequest
+      attr_accessor user_name: ::String
+      attr_accessor policy_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetUserPolicyResponse
+      attr_accessor user_name: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor policy_document: ::String
+      SENSITIVE: []
+    end
+
+    class GetUserRequest
+      attr_accessor user_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetUserResponse
+      attr_accessor user: Types::User
+      SENSITIVE: []
+    end
+
+    class Group
+      attr_accessor path: ::String
+      attr_accessor group_name: ::String
+      attr_accessor group_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor create_date: ::Time
+      SENSITIVE: []
+    end
+
+    class GroupDetail
+      attr_accessor path: ::String
+      attr_accessor group_name: ::String
+      attr_accessor group_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor create_date: ::Time
+      attr_accessor group_policy_list: ::Array[Types::PolicyDetail]
+      attr_accessor attached_managed_policies: ::Array[Types::AttachedPolicy]
+      SENSITIVE: []
+    end
+
+    class InstanceProfile
+      attr_accessor path: ::String
+      attr_accessor instance_profile_name: ::String
+      attr_accessor instance_profile_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor create_date: ::Time
+      attr_accessor roles: ::Array[Types::Role]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class InvalidAuthenticationCodeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidCertificateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidInputException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidPublicKeyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidUserTypeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KeyPairMismatchException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccessKeysRequest
+      attr_accessor user_name: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAccessKeysResponse
+      attr_accessor access_key_metadata: ::Array[Types::AccessKeyMetadata]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccountAliasesRequest
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAccountAliasesResponse
+      attr_accessor account_aliases: ::Array[::String]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListAttachedGroupPoliciesRequest
+      attr_accessor group_name: ::String
+      attr_accessor path_prefix: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAttachedGroupPoliciesResponse
+      attr_accessor attached_policies: ::Array[Types::AttachedPolicy]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListAttachedRolePoliciesRequest
+      attr_accessor role_name: ::String
+      attr_accessor path_prefix: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAttachedRolePoliciesResponse
+      attr_accessor attached_policies: ::Array[Types::AttachedPolicy]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListAttachedUserPoliciesRequest
+      attr_accessor user_name: ::String
+      attr_accessor path_prefix: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAttachedUserPoliciesResponse
+      attr_accessor attached_policies: ::Array[Types::AttachedPolicy]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListEntitiesForPolicyRequest
+      attr_accessor policy_arn: ::String
+      attr_accessor entity_filter: ("User" | "Role" | "Group" | "LocalManagedPolicy" | "AWSManagedPolicy")
+      attr_accessor path_prefix: ::String
+      attr_accessor policy_usage_filter: ("PermissionsPolicy" | "PermissionsBoundary")
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEntitiesForPolicyResponse
+      attr_accessor policy_groups: ::Array[Types::PolicyGroup]
+      attr_accessor policy_users: ::Array[Types::PolicyUser]
+      attr_accessor policy_roles: ::Array[Types::PolicyRole]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroupPoliciesRequest
+      attr_accessor group_name: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListGroupPoliciesResponse
+      attr_accessor policy_names: ::Array[::String]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroupsForUserRequest
+      attr_accessor user_name: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListGroupsForUserResponse
+      attr_accessor groups: ::Array[Types::Group]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroupsRequest
+      attr_accessor path_prefix: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListGroupsResponse
+      attr_accessor groups: ::Array[Types::Group]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListInstanceProfileTagsRequest
+      attr_accessor instance_profile_name: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListInstanceProfileTagsResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListInstanceProfilesForRoleRequest
+      attr_accessor role_name: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListInstanceProfilesForRoleResponse
+      attr_accessor instance_profiles: ::Array[Types::InstanceProfile]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListInstanceProfilesRequest
+      attr_accessor path_prefix: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListInstanceProfilesResponse
+      attr_accessor instance_profiles: ::Array[Types::InstanceProfile]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListMFADeviceTagsRequest
+      attr_accessor serial_number: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMFADeviceTagsResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListMFADevicesRequest
+      attr_accessor user_name: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMFADevicesResponse
+      attr_accessor mfa_devices: ::Array[Types::MFADevice]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListOpenIDConnectProviderTagsRequest
+      attr_accessor open_id_connect_provider_arn: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListOpenIDConnectProviderTagsResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListOpenIDConnectProvidersRequest < Aws::EmptyStructure
+    end
+
+    class ListOpenIDConnectProvidersResponse
+      attr_accessor open_id_connect_provider_list: ::Array[Types::OpenIDConnectProviderListEntry]
+      SENSITIVE: []
+    end
+
+    class ListPoliciesGrantingServiceAccessEntry
+      attr_accessor service_namespace: ::String
+      attr_accessor policies: ::Array[Types::PolicyGrantingServiceAccess]
+      SENSITIVE: []
+    end
+
+    class ListPoliciesGrantingServiceAccessRequest
+      attr_accessor marker: ::String
+      attr_accessor arn: ::String
+      attr_accessor service_namespaces: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListPoliciesGrantingServiceAccessResponse
+      attr_accessor policies_granting_service_access: ::Array[Types::ListPoliciesGrantingServiceAccessEntry]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListPoliciesRequest
+      attr_accessor scope: ("All" | "AWS" | "Local")
+      attr_accessor only_attached: bool
+      attr_accessor path_prefix: ::String
+      attr_accessor policy_usage_filter: ("PermissionsPolicy" | "PermissionsBoundary")
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPoliciesResponse
+      attr_accessor policies: ::Array[Types::Policy]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListPolicyTagsRequest
+      attr_accessor policy_arn: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPolicyTagsResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListPolicyVersionsRequest
+      attr_accessor policy_arn: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPolicyVersionsResponse
+      attr_accessor versions: ::Array[Types::PolicyVersion]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListRolePoliciesRequest
+      attr_accessor role_name: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRolePoliciesResponse
+      attr_accessor policy_names: ::Array[::String]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListRoleTagsRequest
+      attr_accessor role_name: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRoleTagsResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListRolesRequest
+      attr_accessor path_prefix: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRolesResponse
+      attr_accessor roles: ::Array[Types::Role]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListSAMLProviderTagsRequest
+      attr_accessor saml_provider_arn: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSAMLProviderTagsResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListSAMLProvidersRequest < Aws::EmptyStructure
+    end
+
+    class ListSAMLProvidersResponse
+      attr_accessor saml_provider_list: ::Array[Types::SAMLProviderListEntry]
+      SENSITIVE: []
+    end
+
+    class ListSSHPublicKeysRequest
+      attr_accessor user_name: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSSHPublicKeysResponse
+      attr_accessor ssh_public_keys: ::Array[Types::SSHPublicKeyMetadata]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListServerCertificateTagsRequest
+      attr_accessor server_certificate_name: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListServerCertificateTagsResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListServerCertificatesRequest
+      attr_accessor path_prefix: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListServerCertificatesResponse
+      attr_accessor server_certificate_metadata_list: ::Array[Types::ServerCertificateMetadata]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceSpecificCredentialsRequest
+      attr_accessor user_name: ::String
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceSpecificCredentialsResponse
+      attr_accessor service_specific_credentials: ::Array[Types::ServiceSpecificCredentialMetadata]
+      SENSITIVE: []
+    end
+
+    class ListSigningCertificatesRequest
+      attr_accessor user_name: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSigningCertificatesResponse
+      attr_accessor certificates: ::Array[Types::SigningCertificate]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListUserPoliciesRequest
+      attr_accessor user_name: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListUserPoliciesResponse
+      attr_accessor policy_names: ::Array[::String]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListUserTagsRequest
+      attr_accessor user_name: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListUserTagsResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListUsersRequest
+      attr_accessor path_prefix: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListUsersResponse
+      attr_accessor users: ::Array[Types::User]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListVirtualMFADevicesRequest
+      attr_accessor assignment_status: ("Assigned" | "Unassigned" | "Any")
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListVirtualMFADevicesResponse
+      attr_accessor virtual_mfa_devices: ::Array[Types::VirtualMFADevice]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class LoginProfile
+      attr_accessor user_name: ::String
+      attr_accessor create_date: ::Time
+      attr_accessor password_reset_required: bool
+      SENSITIVE: []
+    end
+
+    class MFADevice
+      attr_accessor user_name: ::String
+      attr_accessor serial_number: ::String
+      attr_accessor enable_date: ::Time
+      SENSITIVE: []
+    end
+
+    class MalformedCertificateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MalformedPolicyDocumentException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ManagedPolicyDetail
+      attr_accessor policy_name: ::String
+      attr_accessor policy_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor path: ::String
+      attr_accessor default_version_id: ::String
+      attr_accessor attachment_count: ::Integer
+      attr_accessor permissions_boundary_usage_count: ::Integer
+      attr_accessor is_attachable: bool
+      attr_accessor description: ::String
+      attr_accessor create_date: ::Time
+      attr_accessor update_date: ::Time
+      attr_accessor policy_version_list: ::Array[Types::PolicyVersion]
+      SENSITIVE: []
+    end
+
+    class NoSuchEntityException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OpenIDConnectProviderListEntry
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class OrganizationsDecisionDetail
+      attr_accessor allowed_by_organizations: bool
+      SENSITIVE: []
+    end
+
+    class PasswordPolicy
+      attr_accessor minimum_password_length: ::Integer
+      attr_accessor require_symbols: bool
+      attr_accessor require_numbers: bool
+      attr_accessor require_uppercase_characters: bool
+      attr_accessor require_lowercase_characters: bool
+      attr_accessor allow_users_to_change_password: bool
+      attr_accessor expire_passwords: bool
+      attr_accessor max_password_age: ::Integer
+      attr_accessor password_reuse_prevention: ::Integer
+      attr_accessor hard_expiry: bool
+      SENSITIVE: []
+    end
+
+    class PasswordPolicyViolationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PermissionsBoundaryDecisionDetail
+      attr_accessor allowed_by_permissions_boundary: bool
+      SENSITIVE: []
+    end
+
+    class Policy
+      attr_accessor policy_name: ::String
+      attr_accessor policy_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor path: ::String
+      attr_accessor default_version_id: ::String
+      attr_accessor attachment_count: ::Integer
+      attr_accessor permissions_boundary_usage_count: ::Integer
+      attr_accessor is_attachable: bool
+      attr_accessor description: ::String
+      attr_accessor create_date: ::Time
+      attr_accessor update_date: ::Time
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PolicyDetail
+      attr_accessor policy_name: ::String
+      attr_accessor policy_document: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyEvaluationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyGrantingServiceAccess
+      attr_accessor policy_name: ::String
+      attr_accessor policy_type: ("INLINE" | "MANAGED")
+      attr_accessor policy_arn: ::String
+      attr_accessor entity_type: ("USER" | "ROLE" | "GROUP")
+      attr_accessor entity_name: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyGroup
+      attr_accessor group_name: ::String
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyNotAttachableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyRole
+      attr_accessor role_name: ::String
+      attr_accessor role_id: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyUser
+      attr_accessor user_name: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyVersion
+      attr_accessor document: ::String
+      attr_accessor version_id: ::String
+      attr_accessor is_default_version: bool
+      attr_accessor create_date: ::Time
+      SENSITIVE: []
+    end
+
+    class Position
+      attr_accessor line: ::Integer
+      attr_accessor column: ::Integer
+      SENSITIVE: []
+    end
+
+    class PutGroupPolicyRequest
+      attr_accessor group_name: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor policy_document: ::String
+      SENSITIVE: []
+    end
+
+    class PutRolePermissionsBoundaryRequest
+      attr_accessor role_name: ::String
+      attr_accessor permissions_boundary: ::String
+      SENSITIVE: []
+    end
+
+    class PutRolePolicyRequest
+      attr_accessor role_name: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor policy_document: ::String
+      SENSITIVE: []
+    end
+
+    class PutUserPermissionsBoundaryRequest
+      attr_accessor user_name: ::String
+      attr_accessor permissions_boundary: ::String
+      SENSITIVE: []
+    end
+
+    class PutUserPolicyRequest
+      attr_accessor user_name: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor policy_document: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveClientIDFromOpenIDConnectProviderRequest
+      attr_accessor open_id_connect_provider_arn: ::String
+      attr_accessor client_id: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveRoleFromInstanceProfileRequest
+      attr_accessor instance_profile_name: ::String
+      attr_accessor role_name: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveUserFromGroupRequest
+      attr_accessor group_name: ::String
+      attr_accessor user_name: ::String
+      SENSITIVE: []
+    end
+
+    class ReportGenerationLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResetServiceSpecificCredentialRequest
+      attr_accessor user_name: ::String
+      attr_accessor service_specific_credential_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResetServiceSpecificCredentialResponse
+      attr_accessor service_specific_credential: Types::ServiceSpecificCredential
+      SENSITIVE: []
+    end
+
+    class ResourceSpecificResult
+      attr_accessor eval_resource_name: ::String
+      attr_accessor eval_resource_decision: ("allowed" | "explicitDeny" | "implicitDeny")
+      attr_accessor matched_statements: ::Array[Types::Statement]
+      attr_accessor missing_context_values: ::Array[::String]
+      attr_accessor eval_decision_details: ::Hash[::String, ("allowed" | "explicitDeny" | "implicitDeny")]
+      attr_accessor permissions_boundary_decision_detail: Types::PermissionsBoundaryDecisionDetail
+      SENSITIVE: []
+    end
+
+    class ResyncMFADeviceRequest
+      attr_accessor user_name: ::String
+      attr_accessor serial_number: ::String
+      attr_accessor authentication_code_1: ::String
+      attr_accessor authentication_code_2: ::String
+      SENSITIVE: []
+    end
+
+    class Role
+      attr_accessor path: ::String
+      attr_accessor role_name: ::String
+      attr_accessor role_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor create_date: ::Time
+      attr_accessor assume_role_policy_document: ::String
+      attr_accessor description: ::String
+      attr_accessor max_session_duration: ::Integer
+      attr_accessor permissions_boundary: Types::AttachedPermissionsBoundary
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor role_last_used: Types::RoleLastUsed
+      SENSITIVE: []
+    end
+
+    class RoleDetail
+      attr_accessor path: ::String
+      attr_accessor role_name: ::String
+      attr_accessor role_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor create_date: ::Time
+      attr_accessor assume_role_policy_document: ::String
+      attr_accessor instance_profile_list: ::Array[Types::InstanceProfile]
+      attr_accessor role_policy_list: ::Array[Types::PolicyDetail]
+      attr_accessor attached_managed_policies: ::Array[Types::AttachedPolicy]
+      attr_accessor permissions_boundary: Types::AttachedPermissionsBoundary
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor role_last_used: Types::RoleLastUsed
+      SENSITIVE: []
+    end
+
+    class RoleLastUsed
+      attr_accessor last_used_date: ::Time
+      attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
+    class RoleUsageType
+      attr_accessor region: ::String
+      attr_accessor resources: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SAMLProviderListEntry
+      attr_accessor arn: ::String
+      attr_accessor valid_until: ::Time
+      attr_accessor create_date: ::Time
+      SENSITIVE: []
+    end
+
+    class SSHPublicKey
+      attr_accessor user_name: ::String
+      attr_accessor ssh_public_key_id: ::String
+      attr_accessor fingerprint: ::String
+      attr_accessor ssh_public_key_body: ::String
+      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor upload_date: ::Time
+      SENSITIVE: []
+    end
+
+    class SSHPublicKeyMetadata
+      attr_accessor user_name: ::String
+      attr_accessor ssh_public_key_id: ::String
+      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor upload_date: ::Time
+      SENSITIVE: []
+    end
+
+    class ServerCertificate
+      attr_accessor server_certificate_metadata: Types::ServerCertificateMetadata
+      attr_accessor certificate_body: ::String
+      attr_accessor certificate_chain: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ServerCertificateMetadata
+      attr_accessor path: ::String
+      attr_accessor server_certificate_name: ::String
+      attr_accessor server_certificate_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor upload_date: ::Time
+      attr_accessor expiration: ::Time
+      SENSITIVE: []
+    end
+
+    class ServiceFailureException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceLastAccessed
+      attr_accessor service_name: ::String
+      attr_accessor last_authenticated: ::Time
+      attr_accessor service_namespace: ::String
+      attr_accessor last_authenticated_entity: ::String
+      attr_accessor last_authenticated_region: ::String
+      attr_accessor total_authenticated_entities: ::Integer
+      attr_accessor tracked_actions_last_accessed: ::Array[Types::TrackedActionLastAccessed]
+      SENSITIVE: []
+    end
+
+    class ServiceNotSupportedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceSpecificCredential
+      attr_accessor create_date: ::Time
+      attr_accessor service_name: ::String
+      attr_accessor service_user_name: ::String
+      attr_accessor service_password: ::String
+      attr_accessor service_specific_credential_id: ::String
+      attr_accessor user_name: ::String
+      attr_accessor status: ("Active" | "Inactive")
+      SENSITIVE: [:service_password]
+    end
+
+    class ServiceSpecificCredentialMetadata
+      attr_accessor user_name: ::String
+      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor service_user_name: ::String
+      attr_accessor create_date: ::Time
+      attr_accessor service_specific_credential_id: ::String
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class SetDefaultPolicyVersionRequest
+      attr_accessor policy_arn: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class SetSecurityTokenServicePreferencesRequest
+      attr_accessor global_endpoint_token_version: ("v1Token" | "v2Token")
+      SENSITIVE: []
+    end
+
+    class SigningCertificate
+      attr_accessor user_name: ::String
+      attr_accessor certificate_id: ::String
+      attr_accessor certificate_body: ::String
+      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor upload_date: ::Time
+      SENSITIVE: []
+    end
+
+    class SimulateCustomPolicyRequest
+      attr_accessor policy_input_list: ::Array[::String]
+      attr_accessor permissions_boundary_policy_input_list: ::Array[::String]
+      attr_accessor action_names: ::Array[::String]
+      attr_accessor resource_arns: ::Array[::String]
+      attr_accessor resource_policy: ::String
+      attr_accessor resource_owner: ::String
+      attr_accessor caller_arn: ::String
+      attr_accessor context_entries: ::Array[Types::ContextEntry]
+      attr_accessor resource_handling_option: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class SimulatePolicyResponse
+      attr_accessor evaluation_results: ::Array[Types::EvaluationResult]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class SimulatePrincipalPolicyRequest
+      attr_accessor policy_source_arn: ::String
+      attr_accessor policy_input_list: ::Array[::String]
+      attr_accessor permissions_boundary_policy_input_list: ::Array[::String]
+      attr_accessor action_names: ::Array[::String]
+      attr_accessor resource_arns: ::Array[::String]
+      attr_accessor resource_policy: ::String
+      attr_accessor resource_owner: ::String
+      attr_accessor caller_arn: ::String
+      attr_accessor context_entries: ::Array[Types::ContextEntry]
+      attr_accessor resource_handling_option: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class Statement
+      attr_accessor source_policy_id: ::String
+      attr_accessor source_policy_type: ("user" | "group" | "role" | "aws-managed" | "user-managed" | "resource" | "none")
+      attr_accessor start_position: Types::Position
+      attr_accessor end_position: Types::Position
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagInstanceProfileRequest
+      attr_accessor instance_profile_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagMFADeviceRequest
+      attr_accessor serial_number: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagOpenIDConnectProviderRequest
+      attr_accessor open_id_connect_provider_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagPolicyRequest
+      attr_accessor policy_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagRoleRequest
+      attr_accessor role_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagSAMLProviderRequest
+      attr_accessor saml_provider_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagServerCertificateRequest
+      attr_accessor server_certificate_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagUserRequest
+      attr_accessor user_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TrackedActionLastAccessed
+      attr_accessor action_name: ::String
+      attr_accessor last_accessed_entity: ::String
+      attr_accessor last_accessed_time: ::Time
+      attr_accessor last_accessed_region: ::String
+      SENSITIVE: []
+    end
+
+    class UnmodifiableEntityException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnrecognizedPublicKeyEncodingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagInstanceProfileRequest
+      attr_accessor instance_profile_name: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagMFADeviceRequest
+      attr_accessor serial_number: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagOpenIDConnectProviderRequest
+      attr_accessor open_id_connect_provider_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagPolicyRequest
+      attr_accessor policy_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagRoleRequest
+      attr_accessor role_name: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagSAMLProviderRequest
+      attr_accessor saml_provider_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagServerCertificateRequest
+      attr_accessor server_certificate_name: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagUserRequest
+      attr_accessor user_name: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateAccessKeyRequest
+      attr_accessor user_name: ::String
+      attr_accessor access_key_id: ::String
+      attr_accessor status: ("Active" | "Inactive")
+      SENSITIVE: []
+    end
+
+    class UpdateAccountPasswordPolicyRequest
+      attr_accessor minimum_password_length: ::Integer
+      attr_accessor require_symbols: bool
+      attr_accessor require_numbers: bool
+      attr_accessor require_uppercase_characters: bool
+      attr_accessor require_lowercase_characters: bool
+      attr_accessor allow_users_to_change_password: bool
+      attr_accessor max_password_age: ::Integer
+      attr_accessor password_reuse_prevention: ::Integer
+      attr_accessor hard_expiry: bool
+      SENSITIVE: []
+    end
+
+    class UpdateAssumeRolePolicyRequest
+      attr_accessor role_name: ::String
+      attr_accessor policy_document: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateGroupRequest
+      attr_accessor group_name: ::String
+      attr_accessor new_path: ::String
+      attr_accessor new_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateLoginProfileRequest
+      attr_accessor user_name: ::String
+      attr_accessor password: ::String
+      attr_accessor password_reset_required: bool
+      SENSITIVE: [:password]
+    end
+
+    class UpdateOpenIDConnectProviderThumbprintRequest
+      attr_accessor open_id_connect_provider_arn: ::String
+      attr_accessor thumbprint_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateRoleDescriptionRequest
+      attr_accessor role_name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRoleDescriptionResponse
+      attr_accessor role: Types::Role
+      SENSITIVE: []
+    end
+
+    class UpdateRoleRequest
+      attr_accessor role_name: ::String
+      attr_accessor description: ::String
+      attr_accessor max_session_duration: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateRoleResponse < Aws::EmptyStructure
+    end
+
+    class UpdateSAMLProviderRequest
+      attr_accessor saml_metadata_document: ::String
+      attr_accessor saml_provider_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSAMLProviderResponse
+      attr_accessor saml_provider_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSSHPublicKeyRequest
+      attr_accessor user_name: ::String
+      attr_accessor ssh_public_key_id: ::String
+      attr_accessor status: ("Active" | "Inactive")
+      SENSITIVE: []
+    end
+
+    class UpdateServerCertificateRequest
+      attr_accessor server_certificate_name: ::String
+      attr_accessor new_path: ::String
+      attr_accessor new_server_certificate_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateServiceSpecificCredentialRequest
+      attr_accessor user_name: ::String
+      attr_accessor service_specific_credential_id: ::String
+      attr_accessor status: ("Active" | "Inactive")
+      SENSITIVE: []
+    end
+
+    class UpdateSigningCertificateRequest
+      attr_accessor user_name: ::String
+      attr_accessor certificate_id: ::String
+      attr_accessor status: ("Active" | "Inactive")
+      SENSITIVE: []
+    end
+
+    class UpdateUserRequest
+      attr_accessor user_name: ::String
+      attr_accessor new_path: ::String
+      attr_accessor new_user_name: ::String
+      SENSITIVE: []
+    end
+
+    class UploadSSHPublicKeyRequest
+      attr_accessor user_name: ::String
+      attr_accessor ssh_public_key_body: ::String
+      SENSITIVE: []
+    end
+
+    class UploadSSHPublicKeyResponse
+      attr_accessor ssh_public_key: Types::SSHPublicKey
+      SENSITIVE: []
+    end
+
+    class UploadServerCertificateRequest
+      attr_accessor path: ::String
+      attr_accessor server_certificate_name: ::String
+      attr_accessor certificate_body: ::String
+      attr_accessor private_key: ::String
+      attr_accessor certificate_chain: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:private_key]
+    end
+
+    class UploadServerCertificateResponse
+      attr_accessor server_certificate_metadata: Types::ServerCertificateMetadata
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class UploadSigningCertificateRequest
+      attr_accessor user_name: ::String
+      attr_accessor certificate_body: ::String
+      SENSITIVE: []
+    end
+
+    class UploadSigningCertificateResponse
+      attr_accessor certificate: Types::SigningCertificate
+      SENSITIVE: []
+    end
+
+    class User
+      attr_accessor path: ::String
+      attr_accessor user_name: ::String
+      attr_accessor user_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor create_date: ::Time
+      attr_accessor password_last_used: ::Time
+      attr_accessor permissions_boundary: Types::AttachedPermissionsBoundary
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class UserDetail
+      attr_accessor path: ::String
+      attr_accessor user_name: ::String
+      attr_accessor user_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor create_date: ::Time
+      attr_accessor user_policy_list: ::Array[Types::PolicyDetail]
+      attr_accessor group_list: ::Array[::String]
+      attr_accessor attached_managed_policies: ::Array[Types::AttachedPolicy]
+      attr_accessor permissions_boundary: Types::AttachedPermissionsBoundary
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class VirtualMFADevice
+      attr_accessor serial_number: ::String
+      attr_accessor base_32_string_seed: ::String
+      attr_accessor qr_code_png: ::String
+      attr_accessor user: Types::User
+      attr_accessor enable_date: ::Time
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:base_32_string_seed, :qr_code_png]
+    end
+  end
+end

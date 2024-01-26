@@ -1,0 +1,1141 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SES
+  module Types
+
+    class AccountSendingPausedException < Aws::EmptyStructure
+    end
+
+    class AddHeaderAction
+      attr_accessor header_name: ::String
+      attr_accessor header_value: ::String
+      SENSITIVE: []
+    end
+
+    class AlreadyExistsException
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class Body
+      attr_accessor text: Types::Content
+      attr_accessor html: Types::Content
+      SENSITIVE: []
+    end
+
+    class BounceAction
+      attr_accessor topic_arn: ::String
+      attr_accessor smtp_reply_code: ::String
+      attr_accessor status_code: ::String
+      attr_accessor message: ::String
+      attr_accessor sender: ::String
+      SENSITIVE: []
+    end
+
+    class BouncedRecipientInfo
+      attr_accessor recipient: ::String
+      attr_accessor recipient_arn: ::String
+      attr_accessor bounce_type: ("DoesNotExist" | "MessageTooLarge" | "ExceededQuota" | "ContentRejected" | "Undefined" | "TemporaryFailure")
+      attr_accessor recipient_dsn_fields: Types::RecipientDsnFields
+      SENSITIVE: []
+    end
+
+    class BulkEmailDestination
+      attr_accessor destination: Types::Destination
+      attr_accessor replacement_tags: ::Array[Types::MessageTag]
+      attr_accessor replacement_template_data: ::String
+      SENSITIVE: []
+    end
+
+    class BulkEmailDestinationStatus
+      attr_accessor status: ("Success" | "MessageRejected" | "MailFromDomainNotVerified" | "ConfigurationSetDoesNotExist" | "TemplateDoesNotExist" | "AccountSuspended" | "AccountThrottled" | "AccountDailyQuotaExceeded" | "InvalidSendingPoolName" | "AccountSendingPaused" | "ConfigurationSetSendingPaused" | "InvalidParameterValue" | "TransientFailure" | "Failed")
+      attr_accessor error: ::String
+      attr_accessor message_id: ::String
+      SENSITIVE: []
+    end
+
+    class CannotDeleteException
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CloneReceiptRuleSetRequest
+      attr_accessor rule_set_name: ::String
+      attr_accessor original_rule_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class CloneReceiptRuleSetResponse < Aws::EmptyStructure
+    end
+
+    class CloudWatchDestination
+      attr_accessor dimension_configurations: ::Array[Types::CloudWatchDimensionConfiguration]
+      SENSITIVE: []
+    end
+
+    class CloudWatchDimensionConfiguration
+      attr_accessor dimension_name: ::String
+      attr_accessor dimension_value_source: ("messageTag" | "emailHeader" | "linkTag")
+      attr_accessor default_dimension_value: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigurationSet
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigurationSetAlreadyExistsException
+      attr_accessor configuration_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigurationSetDoesNotExistException
+      attr_accessor configuration_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigurationSetSendingPausedException
+      attr_accessor configuration_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class Content
+      attr_accessor data: ::String
+      attr_accessor charset: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConfigurationSetEventDestinationRequest
+      attr_accessor configuration_set_name: ::String
+      attr_accessor event_destination: Types::EventDestination
+      SENSITIVE: []
+    end
+
+    class CreateConfigurationSetEventDestinationResponse < Aws::EmptyStructure
+    end
+
+    class CreateConfigurationSetRequest
+      attr_accessor configuration_set: Types::ConfigurationSet
+      SENSITIVE: []
+    end
+
+    class CreateConfigurationSetResponse < Aws::EmptyStructure
+    end
+
+    class CreateConfigurationSetTrackingOptionsRequest
+      attr_accessor configuration_set_name: ::String
+      attr_accessor tracking_options: Types::TrackingOptions
+      SENSITIVE: []
+    end
+
+    class CreateConfigurationSetTrackingOptionsResponse < Aws::EmptyStructure
+    end
+
+    class CreateCustomVerificationEmailTemplateRequest
+      attr_accessor template_name: ::String
+      attr_accessor from_email_address: ::String
+      attr_accessor template_subject: ::String
+      attr_accessor template_content: ::String
+      attr_accessor success_redirection_url: ::String
+      attr_accessor failure_redirection_url: ::String
+      SENSITIVE: []
+    end
+
+    class CreateReceiptFilterRequest
+      attr_accessor filter: Types::ReceiptFilter
+      SENSITIVE: []
+    end
+
+    class CreateReceiptFilterResponse < Aws::EmptyStructure
+    end
+
+    class CreateReceiptRuleRequest
+      attr_accessor rule_set_name: ::String
+      attr_accessor after: ::String
+      attr_accessor rule: Types::ReceiptRule
+      SENSITIVE: []
+    end
+
+    class CreateReceiptRuleResponse < Aws::EmptyStructure
+    end
+
+    class CreateReceiptRuleSetRequest
+      attr_accessor rule_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateReceiptRuleSetResponse < Aws::EmptyStructure
+    end
+
+    class CreateTemplateRequest
+      attr_accessor template: Types::Template
+      SENSITIVE: []
+    end
+
+    class CreateTemplateResponse < Aws::EmptyStructure
+    end
+
+    class CustomVerificationEmailInvalidContentException < Aws::EmptyStructure
+    end
+
+    class CustomVerificationEmailTemplate
+      attr_accessor template_name: ::String
+      attr_accessor from_email_address: ::String
+      attr_accessor template_subject: ::String
+      attr_accessor success_redirection_url: ::String
+      attr_accessor failure_redirection_url: ::String
+      SENSITIVE: []
+    end
+
+    class CustomVerificationEmailTemplateAlreadyExistsException
+      attr_accessor custom_verification_email_template_name: ::String
+      SENSITIVE: []
+    end
+
+    class CustomVerificationEmailTemplateDoesNotExistException
+      attr_accessor custom_verification_email_template_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConfigurationSetEventDestinationRequest
+      attr_accessor configuration_set_name: ::String
+      attr_accessor event_destination_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConfigurationSetEventDestinationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteConfigurationSetRequest
+      attr_accessor configuration_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConfigurationSetResponse < Aws::EmptyStructure
+    end
+
+    class DeleteConfigurationSetTrackingOptionsRequest
+      attr_accessor configuration_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConfigurationSetTrackingOptionsResponse < Aws::EmptyStructure
+    end
+
+    class DeleteCustomVerificationEmailTemplateRequest
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIdentityPolicyRequest
+      attr_accessor identity: ::String
+      attr_accessor policy_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIdentityPolicyResponse < Aws::EmptyStructure
+    end
+
+    class DeleteIdentityRequest
+      attr_accessor identity: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIdentityResponse < Aws::EmptyStructure
+    end
+
+    class DeleteReceiptFilterRequest
+      attr_accessor filter_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteReceiptFilterResponse < Aws::EmptyStructure
+    end
+
+    class DeleteReceiptRuleRequest
+      attr_accessor rule_set_name: ::String
+      attr_accessor rule_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteReceiptRuleResponse < Aws::EmptyStructure
+    end
+
+    class DeleteReceiptRuleSetRequest
+      attr_accessor rule_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteReceiptRuleSetResponse < Aws::EmptyStructure
+    end
+
+    class DeleteTemplateRequest
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTemplateResponse < Aws::EmptyStructure
+    end
+
+    class DeleteVerifiedEmailAddressRequest
+      attr_accessor email_address: ::String
+      SENSITIVE: []
+    end
+
+    class DeliveryOptions
+      attr_accessor tls_policy: ("Require" | "Optional")
+      SENSITIVE: []
+    end
+
+    class DescribeActiveReceiptRuleSetRequest < Aws::EmptyStructure
+    end
+
+    class DescribeActiveReceiptRuleSetResponse
+      attr_accessor metadata: Types::ReceiptRuleSetMetadata
+      attr_accessor rules: ::Array[Types::ReceiptRule]
+      SENSITIVE: []
+    end
+
+    class DescribeConfigurationSetRequest
+      attr_accessor configuration_set_name: ::String
+      attr_accessor configuration_set_attribute_names: ::Array[("eventDestinations" | "trackingOptions" | "deliveryOptions" | "reputationOptions")]
+      SENSITIVE: []
+    end
+
+    class DescribeConfigurationSetResponse
+      attr_accessor configuration_set: Types::ConfigurationSet
+      attr_accessor event_destinations: ::Array[Types::EventDestination]
+      attr_accessor tracking_options: Types::TrackingOptions
+      attr_accessor delivery_options: Types::DeliveryOptions
+      attr_accessor reputation_options: Types::ReputationOptions
+      SENSITIVE: []
+    end
+
+    class DescribeReceiptRuleRequest
+      attr_accessor rule_set_name: ::String
+      attr_accessor rule_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReceiptRuleResponse
+      attr_accessor rule: Types::ReceiptRule
+      SENSITIVE: []
+    end
+
+    class DescribeReceiptRuleSetRequest
+      attr_accessor rule_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReceiptRuleSetResponse
+      attr_accessor metadata: Types::ReceiptRuleSetMetadata
+      attr_accessor rules: ::Array[Types::ReceiptRule]
+      SENSITIVE: []
+    end
+
+    class Destination
+      attr_accessor to_addresses: ::Array[::String]
+      attr_accessor cc_addresses: ::Array[::String]
+      attr_accessor bcc_addresses: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class EventDestination
+      attr_accessor name: ::String
+      attr_accessor enabled: bool
+      attr_accessor matching_event_types: ::Array[("send" | "reject" | "bounce" | "complaint" | "delivery" | "open" | "click" | "renderingFailure")]
+      attr_accessor kinesis_firehose_destination: Types::KinesisFirehoseDestination
+      attr_accessor cloud_watch_destination: Types::CloudWatchDestination
+      attr_accessor sns_destination: Types::SNSDestination
+      SENSITIVE: []
+    end
+
+    class EventDestinationAlreadyExistsException
+      attr_accessor configuration_set_name: ::String
+      attr_accessor event_destination_name: ::String
+      SENSITIVE: []
+    end
+
+    class EventDestinationDoesNotExistException
+      attr_accessor configuration_set_name: ::String
+      attr_accessor event_destination_name: ::String
+      SENSITIVE: []
+    end
+
+    class ExtensionField
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class FromEmailAddressNotVerifiedException
+      attr_accessor from_email_address: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccountSendingEnabledResponse
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class GetCustomVerificationEmailTemplateRequest
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetCustomVerificationEmailTemplateResponse
+      attr_accessor template_name: ::String
+      attr_accessor from_email_address: ::String
+      attr_accessor template_subject: ::String
+      attr_accessor template_content: ::String
+      attr_accessor success_redirection_url: ::String
+      attr_accessor failure_redirection_url: ::String
+      SENSITIVE: []
+    end
+
+    class GetIdentityDkimAttributesRequest
+      attr_accessor identities: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetIdentityDkimAttributesResponse
+      attr_accessor dkim_attributes: ::Hash[::String, Types::IdentityDkimAttributes]
+      SENSITIVE: []
+    end
+
+    class GetIdentityMailFromDomainAttributesRequest
+      attr_accessor identities: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetIdentityMailFromDomainAttributesResponse
+      attr_accessor mail_from_domain_attributes: ::Hash[::String, Types::IdentityMailFromDomainAttributes]
+      SENSITIVE: []
+    end
+
+    class GetIdentityNotificationAttributesRequest
+      attr_accessor identities: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetIdentityNotificationAttributesResponse
+      attr_accessor notification_attributes: ::Hash[::String, Types::IdentityNotificationAttributes]
+      SENSITIVE: []
+    end
+
+    class GetIdentityPoliciesRequest
+      attr_accessor identity: ::String
+      attr_accessor policy_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetIdentityPoliciesResponse
+      attr_accessor policies: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetIdentityVerificationAttributesRequest
+      attr_accessor identities: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetIdentityVerificationAttributesResponse
+      attr_accessor verification_attributes: ::Hash[::String, Types::IdentityVerificationAttributes]
+      SENSITIVE: []
+    end
+
+    class GetSendQuotaResponse
+      attr_accessor max_24_hour_send: ::Float
+      attr_accessor max_send_rate: ::Float
+      attr_accessor sent_last_24_hours: ::Float
+      SENSITIVE: []
+    end
+
+    class GetSendStatisticsResponse
+      attr_accessor send_data_points: ::Array[Types::SendDataPoint]
+      SENSITIVE: []
+    end
+
+    class GetTemplateRequest
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetTemplateResponse
+      attr_accessor template: Types::Template
+      SENSITIVE: []
+    end
+
+    class IdentityDkimAttributes
+      attr_accessor dkim_enabled: bool
+      attr_accessor dkim_verification_status: ("Pending" | "Success" | "Failed" | "TemporaryFailure" | "NotStarted")
+      attr_accessor dkim_tokens: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class IdentityMailFromDomainAttributes
+      attr_accessor mail_from_domain: ::String
+      attr_accessor mail_from_domain_status: ("Pending" | "Success" | "Failed" | "TemporaryFailure")
+      attr_accessor behavior_on_mx_failure: ("UseDefaultValue" | "RejectMessage")
+      SENSITIVE: []
+    end
+
+    class IdentityNotificationAttributes
+      attr_accessor bounce_topic: ::String
+      attr_accessor complaint_topic: ::String
+      attr_accessor delivery_topic: ::String
+      attr_accessor forwarding_enabled: bool
+      attr_accessor headers_in_bounce_notifications_enabled: bool
+      attr_accessor headers_in_complaint_notifications_enabled: bool
+      attr_accessor headers_in_delivery_notifications_enabled: bool
+      SENSITIVE: []
+    end
+
+    class IdentityVerificationAttributes
+      attr_accessor verification_status: ("Pending" | "Success" | "Failed" | "TemporaryFailure" | "NotStarted")
+      attr_accessor verification_token: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidCloudWatchDestinationException
+      attr_accessor configuration_set_name: ::String
+      attr_accessor event_destination_name: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidConfigurationSetException < Aws::EmptyStructure
+    end
+
+    class InvalidDeliveryOptionsException < Aws::EmptyStructure
+    end
+
+    class InvalidFirehoseDestinationException
+      attr_accessor configuration_set_name: ::String
+      attr_accessor event_destination_name: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidLambdaFunctionException
+      attr_accessor function_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidPolicyException < Aws::EmptyStructure
+    end
+
+    class InvalidRenderingParameterException
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidS3ConfigurationException
+      attr_accessor bucket: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidSNSDestinationException
+      attr_accessor configuration_set_name: ::String
+      attr_accessor event_destination_name: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidSnsTopicException
+      attr_accessor topic: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidTemplateException
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidTrackingOptionsException < Aws::EmptyStructure
+    end
+
+    class KinesisFirehoseDestination
+      attr_accessor iam_role_arn: ::String
+      attr_accessor delivery_stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaAction
+      attr_accessor topic_arn: ::String
+      attr_accessor function_arn: ::String
+      attr_accessor invocation_type: ("Event" | "RequestResponse")
+      SENSITIVE: []
+    end
+
+    class LimitExceededException < Aws::EmptyStructure
+    end
+
+    class ListConfigurationSetsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListConfigurationSetsResponse
+      attr_accessor configuration_sets: ::Array[Types::ConfigurationSet]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomVerificationEmailTemplatesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCustomVerificationEmailTemplatesResponse
+      attr_accessor custom_verification_email_templates: ::Array[Types::CustomVerificationEmailTemplate]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIdentitiesRequest
+      attr_accessor identity_type: ("EmailAddress" | "Domain")
+      attr_accessor next_token: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListIdentitiesResponse
+      attr_accessor identities: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIdentityPoliciesRequest
+      attr_accessor identity: ::String
+      SENSITIVE: []
+    end
+
+    class ListIdentityPoliciesResponse
+      attr_accessor policy_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListReceiptFiltersRequest < Aws::EmptyStructure
+    end
+
+    class ListReceiptFiltersResponse
+      attr_accessor filters: ::Array[Types::ReceiptFilter]
+      SENSITIVE: []
+    end
+
+    class ListReceiptRuleSetsRequest
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListReceiptRuleSetsResponse
+      attr_accessor rule_sets: ::Array[Types::ReceiptRuleSetMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTemplatesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTemplatesResponse
+      attr_accessor templates_metadata: ::Array[Types::TemplateMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVerifiedEmailAddressesResponse
+      attr_accessor verified_email_addresses: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class MailFromDomainNotVerifiedException < Aws::EmptyStructure
+    end
+
+    class Message
+      attr_accessor subject: Types::Content
+      attr_accessor body: Types::Body
+      SENSITIVE: []
+    end
+
+    class MessageDsn
+      attr_accessor reporting_mta: ::String
+      attr_accessor arrival_date: ::Time
+      attr_accessor extension_fields: ::Array[Types::ExtensionField]
+      SENSITIVE: []
+    end
+
+    class MessageRejected < Aws::EmptyStructure
+    end
+
+    class MessageTag
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class MissingRenderingAttributeException
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class ProductionAccessNotGrantedException < Aws::EmptyStructure
+    end
+
+    class PutConfigurationSetDeliveryOptionsRequest
+      attr_accessor configuration_set_name: ::String
+      attr_accessor delivery_options: Types::DeliveryOptions
+      SENSITIVE: []
+    end
+
+    class PutConfigurationSetDeliveryOptionsResponse < Aws::EmptyStructure
+    end
+
+    class PutIdentityPolicyRequest
+      attr_accessor identity: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutIdentityPolicyResponse < Aws::EmptyStructure
+    end
+
+    class RawMessage
+      attr_accessor data: ::String
+      SENSITIVE: []
+    end
+
+    class ReceiptAction
+      attr_accessor s3_action: Types::S3Action
+      attr_accessor bounce_action: Types::BounceAction
+      attr_accessor workmail_action: Types::WorkmailAction
+      attr_accessor lambda_action: Types::LambdaAction
+      attr_accessor stop_action: Types::StopAction
+      attr_accessor add_header_action: Types::AddHeaderAction
+      attr_accessor sns_action: Types::SNSAction
+      SENSITIVE: []
+    end
+
+    class ReceiptFilter
+      attr_accessor name: ::String
+      attr_accessor ip_filter: Types::ReceiptIpFilter
+      SENSITIVE: []
+    end
+
+    class ReceiptIpFilter
+      attr_accessor policy: ("Block" | "Allow")
+      attr_accessor cidr: ::String
+      SENSITIVE: []
+    end
+
+    class ReceiptRule
+      attr_accessor name: ::String
+      attr_accessor enabled: bool
+      attr_accessor tls_policy: ("Require" | "Optional")
+      attr_accessor recipients: ::Array[::String]
+      attr_accessor actions: ::Array[Types::ReceiptAction]
+      attr_accessor scan_enabled: bool
+      SENSITIVE: []
+    end
+
+    class ReceiptRuleSetMetadata
+      attr_accessor name: ::String
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class RecipientDsnFields
+      attr_accessor final_recipient: ::String
+      attr_accessor action: ("failed" | "delayed" | "delivered" | "relayed" | "expanded")
+      attr_accessor remote_mta: ::String
+      attr_accessor status: ::String
+      attr_accessor diagnostic_code: ::String
+      attr_accessor last_attempt_date: ::Time
+      attr_accessor extension_fields: ::Array[Types::ExtensionField]
+      SENSITIVE: []
+    end
+
+    class ReorderReceiptRuleSetRequest
+      attr_accessor rule_set_name: ::String
+      attr_accessor rule_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ReorderReceiptRuleSetResponse < Aws::EmptyStructure
+    end
+
+    class ReputationOptions
+      attr_accessor sending_enabled: bool
+      attr_accessor reputation_metrics_enabled: bool
+      attr_accessor last_fresh_start: ::Time
+      SENSITIVE: []
+    end
+
+    class RuleDoesNotExistException
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class RuleSetDoesNotExistException
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class S3Action
+      attr_accessor topic_arn: ::String
+      attr_accessor bucket_name: ::String
+      attr_accessor object_key_prefix: ::String
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SNSAction
+      attr_accessor topic_arn: ::String
+      attr_accessor encoding: ("UTF-8" | "Base64")
+      SENSITIVE: []
+    end
+
+    class SNSDestination
+      attr_accessor topic_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SendBounceRequest
+      attr_accessor original_message_id: ::String
+      attr_accessor bounce_sender: ::String
+      attr_accessor explanation: ::String
+      attr_accessor message_dsn: Types::MessageDsn
+      attr_accessor bounced_recipient_info_list: ::Array[Types::BouncedRecipientInfo]
+      attr_accessor bounce_sender_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SendBounceResponse
+      attr_accessor message_id: ::String
+      SENSITIVE: []
+    end
+
+    class SendBulkTemplatedEmailRequest
+      attr_accessor source: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor reply_to_addresses: ::Array[::String]
+      attr_accessor return_path: ::String
+      attr_accessor return_path_arn: ::String
+      attr_accessor configuration_set_name: ::String
+      attr_accessor default_tags: ::Array[Types::MessageTag]
+      attr_accessor template: ::String
+      attr_accessor template_arn: ::String
+      attr_accessor default_template_data: ::String
+      attr_accessor destinations: ::Array[Types::BulkEmailDestination]
+      SENSITIVE: []
+    end
+
+    class SendBulkTemplatedEmailResponse
+      attr_accessor status: ::Array[Types::BulkEmailDestinationStatus]
+      SENSITIVE: []
+    end
+
+    class SendCustomVerificationEmailRequest
+      attr_accessor email_address: ::String
+      attr_accessor template_name: ::String
+      attr_accessor configuration_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class SendCustomVerificationEmailResponse
+      attr_accessor message_id: ::String
+      SENSITIVE: []
+    end
+
+    class SendDataPoint
+      attr_accessor timestamp: ::Time
+      attr_accessor delivery_attempts: ::Integer
+      attr_accessor bounces: ::Integer
+      attr_accessor complaints: ::Integer
+      attr_accessor rejects: ::Integer
+      SENSITIVE: []
+    end
+
+    class SendEmailRequest
+      attr_accessor source: ::String
+      attr_accessor destination: Types::Destination
+      attr_accessor message: Types::Message
+      attr_accessor reply_to_addresses: ::Array[::String]
+      attr_accessor return_path: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor return_path_arn: ::String
+      attr_accessor tags: ::Array[Types::MessageTag]
+      attr_accessor configuration_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class SendEmailResponse
+      attr_accessor message_id: ::String
+      SENSITIVE: []
+    end
+
+    class SendRawEmailRequest
+      attr_accessor source: ::String
+      attr_accessor destinations: ::Array[::String]
+      attr_accessor raw_message: Types::RawMessage
+      attr_accessor from_arn: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor return_path_arn: ::String
+      attr_accessor tags: ::Array[Types::MessageTag]
+      attr_accessor configuration_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class SendRawEmailResponse
+      attr_accessor message_id: ::String
+      SENSITIVE: []
+    end
+
+    class SendTemplatedEmailRequest
+      attr_accessor source: ::String
+      attr_accessor destination: Types::Destination
+      attr_accessor reply_to_addresses: ::Array[::String]
+      attr_accessor return_path: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor return_path_arn: ::String
+      attr_accessor tags: ::Array[Types::MessageTag]
+      attr_accessor configuration_set_name: ::String
+      attr_accessor template: ::String
+      attr_accessor template_arn: ::String
+      attr_accessor template_data: ::String
+      SENSITIVE: []
+    end
+
+    class SendTemplatedEmailResponse
+      attr_accessor message_id: ::String
+      SENSITIVE: []
+    end
+
+    class SetActiveReceiptRuleSetRequest
+      attr_accessor rule_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class SetActiveReceiptRuleSetResponse < Aws::EmptyStructure
+    end
+
+    class SetIdentityDkimEnabledRequest
+      attr_accessor identity: ::String
+      attr_accessor dkim_enabled: bool
+      SENSITIVE: []
+    end
+
+    class SetIdentityDkimEnabledResponse < Aws::EmptyStructure
+    end
+
+    class SetIdentityFeedbackForwardingEnabledRequest
+      attr_accessor identity: ::String
+      attr_accessor forwarding_enabled: bool
+      SENSITIVE: []
+    end
+
+    class SetIdentityFeedbackForwardingEnabledResponse < Aws::EmptyStructure
+    end
+
+    class SetIdentityHeadersInNotificationsEnabledRequest
+      attr_accessor identity: ::String
+      attr_accessor notification_type: ("Bounce" | "Complaint" | "Delivery")
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class SetIdentityHeadersInNotificationsEnabledResponse < Aws::EmptyStructure
+    end
+
+    class SetIdentityMailFromDomainRequest
+      attr_accessor identity: ::String
+      attr_accessor mail_from_domain: ::String
+      attr_accessor behavior_on_mx_failure: ("UseDefaultValue" | "RejectMessage")
+      SENSITIVE: []
+    end
+
+    class SetIdentityMailFromDomainResponse < Aws::EmptyStructure
+    end
+
+    class SetIdentityNotificationTopicRequest
+      attr_accessor identity: ::String
+      attr_accessor notification_type: ("Bounce" | "Complaint" | "Delivery")
+      attr_accessor sns_topic: ::String
+      SENSITIVE: []
+    end
+
+    class SetIdentityNotificationTopicResponse < Aws::EmptyStructure
+    end
+
+    class SetReceiptRulePositionRequest
+      attr_accessor rule_set_name: ::String
+      attr_accessor rule_name: ::String
+      attr_accessor after: ::String
+      SENSITIVE: []
+    end
+
+    class SetReceiptRulePositionResponse < Aws::EmptyStructure
+    end
+
+    class StopAction
+      attr_accessor scope: ("RuleSet")
+      attr_accessor topic_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Template
+      attr_accessor template_name: ::String
+      attr_accessor subject_part: ::String
+      attr_accessor text_part: ::String
+      attr_accessor html_part: ::String
+      SENSITIVE: []
+    end
+
+    class TemplateDoesNotExistException
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class TemplateMetadata
+      attr_accessor name: ::String
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class TestRenderTemplateRequest
+      attr_accessor template_name: ::String
+      attr_accessor template_data: ::String
+      SENSITIVE: []
+    end
+
+    class TestRenderTemplateResponse
+      attr_accessor rendered_template: ::String
+      SENSITIVE: []
+    end
+
+    class TrackingOptions
+      attr_accessor custom_redirect_domain: ::String
+      SENSITIVE: []
+    end
+
+    class TrackingOptionsAlreadyExistsException
+      attr_accessor configuration_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class TrackingOptionsDoesNotExistException
+      attr_accessor configuration_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAccountSendingEnabledRequest
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class UpdateConfigurationSetEventDestinationRequest
+      attr_accessor configuration_set_name: ::String
+      attr_accessor event_destination: Types::EventDestination
+      SENSITIVE: []
+    end
+
+    class UpdateConfigurationSetEventDestinationResponse < Aws::EmptyStructure
+    end
+
+    class UpdateConfigurationSetReputationMetricsEnabledRequest
+      attr_accessor configuration_set_name: ::String
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class UpdateConfigurationSetSendingEnabledRequest
+      attr_accessor configuration_set_name: ::String
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class UpdateConfigurationSetTrackingOptionsRequest
+      attr_accessor configuration_set_name: ::String
+      attr_accessor tracking_options: Types::TrackingOptions
+      SENSITIVE: []
+    end
+
+    class UpdateConfigurationSetTrackingOptionsResponse < Aws::EmptyStructure
+    end
+
+    class UpdateCustomVerificationEmailTemplateRequest
+      attr_accessor template_name: ::String
+      attr_accessor from_email_address: ::String
+      attr_accessor template_subject: ::String
+      attr_accessor template_content: ::String
+      attr_accessor success_redirection_url: ::String
+      attr_accessor failure_redirection_url: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateReceiptRuleRequest
+      attr_accessor rule_set_name: ::String
+      attr_accessor rule: Types::ReceiptRule
+      SENSITIVE: []
+    end
+
+    class UpdateReceiptRuleResponse < Aws::EmptyStructure
+    end
+
+    class UpdateTemplateRequest
+      attr_accessor template: Types::Template
+      SENSITIVE: []
+    end
+
+    class UpdateTemplateResponse < Aws::EmptyStructure
+    end
+
+    class VerifyDomainDkimRequest
+      attr_accessor domain: ::String
+      SENSITIVE: []
+    end
+
+    class VerifyDomainDkimResponse
+      attr_accessor dkim_tokens: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class VerifyDomainIdentityRequest
+      attr_accessor domain: ::String
+      SENSITIVE: []
+    end
+
+    class VerifyDomainIdentityResponse
+      attr_accessor verification_token: ::String
+      SENSITIVE: []
+    end
+
+    class VerifyEmailAddressRequest
+      attr_accessor email_address: ::String
+      SENSITIVE: []
+    end
+
+    class VerifyEmailIdentityRequest
+      attr_accessor email_address: ::String
+      SENSITIVE: []
+    end
+
+    class VerifyEmailIdentityResponse < Aws::EmptyStructure
+    end
+
+    class WorkmailAction
+      attr_accessor topic_arn: ::String
+      attr_accessor organization_arn: ::String
+      SENSITIVE: []
+    end
+  end
+end

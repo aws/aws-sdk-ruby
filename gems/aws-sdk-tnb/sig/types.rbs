@@ -1,0 +1,692 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Tnb
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CancelSolNetworkOperationInput
+      attr_accessor ns_lcm_op_occ_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSolFunctionPackageInput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class CreateSolFunctionPackageOutput
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor onboarding_state: ("CREATED" | "ONBOARDED" | "ERROR")
+      attr_accessor operational_state: ("ENABLED" | "DISABLED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor usage_state: ("IN_USE" | "NOT_IN_USE")
+      SENSITIVE: [:tags]
+    end
+
+    class CreateSolNetworkInstanceInput
+      attr_accessor ns_description: ::String
+      attr_accessor ns_name: ::String
+      attr_accessor nsd_info_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class CreateSolNetworkInstanceOutput
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor ns_instance_name: ::String
+      attr_accessor nsd_info_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class CreateSolNetworkPackageInput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class CreateSolNetworkPackageOutput
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor nsd_onboarding_state: ("CREATED" | "ONBOARDED" | "ERROR")
+      attr_accessor nsd_operational_state: ("ENABLED" | "DISABLED")
+      attr_accessor nsd_usage_state: ("IN_USE" | "NOT_IN_USE")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class DeleteSolFunctionPackageInput
+      attr_accessor vnf_pkg_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSolNetworkInstanceInput
+      attr_accessor ns_instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSolNetworkPackageInput
+      attr_accessor nsd_info_id: ::String
+      SENSITIVE: []
+    end
+
+    class ErrorInfo
+      attr_accessor cause: ::String
+      attr_accessor details: ::String
+      SENSITIVE: []
+    end
+
+    class FunctionArtifactMeta
+      attr_accessor overrides: ::Array[Types::ToscaOverride]
+      SENSITIVE: []
+    end
+
+    class GetSolFunctionInstanceInput
+      attr_accessor vnf_instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSolFunctionInstanceMetadata
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified: ::Time
+      SENSITIVE: []
+    end
+
+    class GetSolFunctionInstanceOutput
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor instantiated_vnf_info: Types::GetSolVnfInfo
+      attr_accessor instantiation_state: ("INSTANTIATED" | "NOT_INSTANTIATED")
+      attr_accessor metadata: Types::GetSolFunctionInstanceMetadata
+      attr_accessor ns_instance_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vnf_pkg_id: ::String
+      attr_accessor vnf_product_name: ::String
+      attr_accessor vnf_provider: ::String
+      attr_accessor vnfd_id: ::String
+      attr_accessor vnfd_version: ::String
+      SENSITIVE: [:tags]
+    end
+
+    class GetSolFunctionPackageContentInput
+      attr_accessor accept: ("application/zip")
+      attr_accessor vnf_pkg_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSolFunctionPackageContentOutput
+      attr_accessor content_type: ("application/zip")
+      attr_accessor package_content: ::String
+      SENSITIVE: []
+    end
+
+    class GetSolFunctionPackageDescriptorInput
+      attr_accessor accept: ("text/plain")
+      attr_accessor vnf_pkg_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSolFunctionPackageDescriptorOutput
+      attr_accessor content_type: ("text/plain")
+      attr_accessor vnfd: ::String
+      SENSITIVE: []
+    end
+
+    class GetSolFunctionPackageInput
+      attr_accessor vnf_pkg_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSolFunctionPackageMetadata
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified: ::Time
+      attr_accessor vnfd: Types::FunctionArtifactMeta
+      SENSITIVE: []
+    end
+
+    class GetSolFunctionPackageOutput
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor metadata: Types::GetSolFunctionPackageMetadata
+      attr_accessor onboarding_state: ("CREATED" | "ONBOARDED" | "ERROR")
+      attr_accessor operational_state: ("ENABLED" | "DISABLED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor usage_state: ("IN_USE" | "NOT_IN_USE")
+      attr_accessor vnf_product_name: ::String
+      attr_accessor vnf_provider: ::String
+      attr_accessor vnfd_id: ::String
+      attr_accessor vnfd_version: ::String
+      SENSITIVE: [:tags]
+    end
+
+    class GetSolInstantiatedVnfInfo
+      attr_accessor vnf_state: ("STARTED" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class GetSolNetworkInstanceInput
+      attr_accessor ns_instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSolNetworkInstanceMetadata
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified: ::Time
+      SENSITIVE: []
+    end
+
+    class GetSolNetworkInstanceOutput
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor lcm_op_info: Types::LcmOperationInfo
+      attr_accessor metadata: Types::GetSolNetworkInstanceMetadata
+      attr_accessor ns_instance_description: ::String
+      attr_accessor ns_instance_name: ::String
+      attr_accessor ns_state: ("INSTANTIATED" | "NOT_INSTANTIATED" | "IMPAIRED" | "STOPPED" | "DELETED" | "INSTANTIATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "TERMINATE_IN_PROGRESS")
+      attr_accessor nsd_id: ::String
+      attr_accessor nsd_info_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class GetSolNetworkOperationInput
+      attr_accessor ns_lcm_op_occ_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSolNetworkOperationMetadata
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified: ::Time
+      SENSITIVE: []
+    end
+
+    class GetSolNetworkOperationOutput
+      attr_accessor arn: ::String
+      attr_accessor error: Types::ProblemDetails
+      attr_accessor id: ::String
+      attr_accessor lcm_operation_type: ("INSTANTIATE" | "UPDATE" | "TERMINATE")
+      attr_accessor metadata: Types::GetSolNetworkOperationMetadata
+      attr_accessor ns_instance_id: ::String
+      attr_accessor operation_state: ("PROCESSING" | "COMPLETED" | "FAILED" | "CANCELLING" | "CANCELLED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor tasks: ::Array[Types::GetSolNetworkOperationTaskDetails]
+      SENSITIVE: [:tags]
+    end
+
+    class GetSolNetworkOperationTaskDetails
+      attr_accessor task_context: ::Hash[::String, ::String]
+      attr_accessor task_end_time: ::Time
+      attr_accessor task_error_details: Types::ErrorInfo
+      attr_accessor task_name: ::String
+      attr_accessor task_start_time: ::Time
+      attr_accessor task_status: ("SCHEDULED" | "STARTED" | "IN_PROGRESS" | "COMPLETED" | "ERROR" | "SKIPPED" | "CANCELLED")
+      SENSITIVE: []
+    end
+
+    class GetSolNetworkPackageContentInput
+      attr_accessor accept: ("application/zip")
+      attr_accessor nsd_info_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSolNetworkPackageContentOutput
+      attr_accessor content_type: ("application/zip")
+      attr_accessor nsd_content: ::String
+      SENSITIVE: []
+    end
+
+    class GetSolNetworkPackageDescriptorInput
+      attr_accessor nsd_info_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSolNetworkPackageDescriptorOutput
+      attr_accessor content_type: ("text/plain")
+      attr_accessor nsd: ::String
+      SENSITIVE: []
+    end
+
+    class GetSolNetworkPackageInput
+      attr_accessor nsd_info_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSolNetworkPackageMetadata
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified: ::Time
+      attr_accessor nsd: Types::NetworkArtifactMeta
+      SENSITIVE: []
+    end
+
+    class GetSolNetworkPackageOutput
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor metadata: Types::GetSolNetworkPackageMetadata
+      attr_accessor nsd_id: ::String
+      attr_accessor nsd_name: ::String
+      attr_accessor nsd_onboarding_state: ("CREATED" | "ONBOARDED" | "ERROR")
+      attr_accessor nsd_operational_state: ("ENABLED" | "DISABLED")
+      attr_accessor nsd_usage_state: ("IN_USE" | "NOT_IN_USE")
+      attr_accessor nsd_version: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vnf_pkg_ids: ::Array[::String]
+      SENSITIVE: [:tags]
+    end
+
+    class GetSolVnfInfo
+      attr_accessor vnf_state: ("STARTED" | "STOPPED")
+      attr_accessor vnfc_resource_info: ::Array[Types::GetSolVnfcResourceInfo]
+      SENSITIVE: []
+    end
+
+    class GetSolVnfcResourceInfo
+      attr_accessor metadata: Types::GetSolVnfcResourceInfoMetadata
+      SENSITIVE: []
+    end
+
+    class GetSolVnfcResourceInfoMetadata
+      attr_accessor cluster: ::String
+      attr_accessor helm_chart: ::String
+      attr_accessor node_group: ::String
+      SENSITIVE: []
+    end
+
+    class InstantiateSolNetworkInstanceInput
+      attr_accessor additional_params_for_ns: untyped
+      attr_accessor dry_run: bool
+      attr_accessor ns_instance_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class InstantiateSolNetworkInstanceOutput
+      attr_accessor ns_lcm_op_occ_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LcmOperationInfo
+      attr_accessor ns_lcm_op_occ_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListSolFunctionInstanceInfo
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor instantiated_vnf_info: Types::GetSolInstantiatedVnfInfo
+      attr_accessor instantiation_state: ("INSTANTIATED" | "NOT_INSTANTIATED")
+      attr_accessor metadata: Types::ListSolFunctionInstanceMetadata
+      attr_accessor ns_instance_id: ::String
+      attr_accessor vnf_pkg_id: ::String
+      attr_accessor vnf_pkg_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListSolFunctionInstanceMetadata
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified: ::Time
+      SENSITIVE: []
+    end
+
+    class ListSolFunctionInstancesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSolFunctionInstancesOutput
+      attr_accessor function_instances: ::Array[Types::ListSolFunctionInstanceInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSolFunctionPackageInfo
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor metadata: Types::ListSolFunctionPackageMetadata
+      attr_accessor onboarding_state: ("CREATED" | "ONBOARDED" | "ERROR")
+      attr_accessor operational_state: ("ENABLED" | "DISABLED")
+      attr_accessor usage_state: ("IN_USE" | "NOT_IN_USE")
+      attr_accessor vnf_product_name: ::String
+      attr_accessor vnf_provider: ::String
+      attr_accessor vnfd_id: ::String
+      attr_accessor vnfd_version: ::String
+      SENSITIVE: []
+    end
+
+    class ListSolFunctionPackageMetadata
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified: ::Time
+      SENSITIVE: []
+    end
+
+    class ListSolFunctionPackagesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSolFunctionPackagesOutput
+      attr_accessor function_packages: ::Array[Types::ListSolFunctionPackageInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSolNetworkInstanceInfo
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor metadata: Types::ListSolNetworkInstanceMetadata
+      attr_accessor ns_instance_description: ::String
+      attr_accessor ns_instance_name: ::String
+      attr_accessor ns_state: ("INSTANTIATED" | "NOT_INSTANTIATED" | "IMPAIRED" | "STOPPED" | "DELETED" | "INSTANTIATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "TERMINATE_IN_PROGRESS")
+      attr_accessor nsd_id: ::String
+      attr_accessor nsd_info_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListSolNetworkInstanceMetadata
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified: ::Time
+      SENSITIVE: []
+    end
+
+    class ListSolNetworkInstancesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSolNetworkInstancesOutput
+      attr_accessor network_instances: ::Array[Types::ListSolNetworkInstanceInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSolNetworkOperationsInfo
+      attr_accessor arn: ::String
+      attr_accessor error: Types::ProblemDetails
+      attr_accessor id: ::String
+      attr_accessor lcm_operation_type: ("INSTANTIATE" | "UPDATE" | "TERMINATE")
+      attr_accessor metadata: Types::ListSolNetworkOperationsMetadata
+      attr_accessor ns_instance_id: ::String
+      attr_accessor operation_state: ("PROCESSING" | "COMPLETED" | "FAILED" | "CANCELLING" | "CANCELLED")
+      SENSITIVE: []
+    end
+
+    class ListSolNetworkOperationsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSolNetworkOperationsMetadata
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified: ::Time
+      SENSITIVE: []
+    end
+
+    class ListSolNetworkOperationsOutput
+      attr_accessor network_operations: ::Array[Types::ListSolNetworkOperationsInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSolNetworkPackageInfo
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor metadata: Types::ListSolNetworkPackageMetadata
+      attr_accessor nsd_designer: ::String
+      attr_accessor nsd_id: ::String
+      attr_accessor nsd_invariant_id: ::String
+      attr_accessor nsd_name: ::String
+      attr_accessor nsd_onboarding_state: ("CREATED" | "ONBOARDED" | "ERROR")
+      attr_accessor nsd_operational_state: ("ENABLED" | "DISABLED")
+      attr_accessor nsd_usage_state: ("IN_USE" | "NOT_IN_USE")
+      attr_accessor nsd_version: ::String
+      attr_accessor vnf_pkg_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListSolNetworkPackageMetadata
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified: ::Time
+      SENSITIVE: []
+    end
+
+    class ListSolNetworkPackagesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSolNetworkPackagesOutput
+      attr_accessor network_packages: ::Array[Types::ListSolNetworkPackageInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class NetworkArtifactMeta
+      attr_accessor overrides: ::Array[Types::ToscaOverride]
+      SENSITIVE: []
+    end
+
+    class ProblemDetails
+      attr_accessor detail: ::String
+      attr_accessor title: ::String
+      SENSITIVE: []
+    end
+
+    class PutSolFunctionPackageContentInput
+      attr_accessor content_type: ("application/zip")
+      attr_accessor file: ::String
+      attr_accessor vnf_pkg_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutSolFunctionPackageContentMetadata
+      attr_accessor vnfd: Types::FunctionArtifactMeta
+      SENSITIVE: []
+    end
+
+    class PutSolFunctionPackageContentOutput
+      attr_accessor id: ::String
+      attr_accessor metadata: Types::PutSolFunctionPackageContentMetadata
+      attr_accessor vnf_product_name: ::String
+      attr_accessor vnf_provider: ::String
+      attr_accessor vnfd_id: ::String
+      attr_accessor vnfd_version: ::String
+      SENSITIVE: []
+    end
+
+    class PutSolNetworkPackageContentInput
+      attr_accessor content_type: ("application/zip")
+      attr_accessor file: ::String
+      attr_accessor nsd_info_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutSolNetworkPackageContentMetadata
+      attr_accessor nsd: Types::NetworkArtifactMeta
+      SENSITIVE: []
+    end
+
+    class PutSolNetworkPackageContentOutput
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor metadata: Types::PutSolNetworkPackageContentMetadata
+      attr_accessor nsd_id: ::String
+      attr_accessor nsd_name: ::String
+      attr_accessor nsd_version: ::String
+      attr_accessor vnf_pkg_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class TerminateSolNetworkInstanceInput
+      attr_accessor ns_instance_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class TerminateSolNetworkInstanceOutput
+      attr_accessor ns_lcm_op_occ_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ToscaOverride
+      attr_accessor default_value: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UpdateSolFunctionPackageInput
+      attr_accessor operational_state: ("ENABLED" | "DISABLED")
+      attr_accessor vnf_pkg_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSolFunctionPackageOutput
+      attr_accessor operational_state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateSolNetworkInstanceInput
+      attr_accessor modify_vnf_info_data: Types::UpdateSolNetworkModify
+      attr_accessor ns_instance_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor update_type: ("MODIFY_VNF_INFORMATION")
+      SENSITIVE: [:tags]
+    end
+
+    class UpdateSolNetworkInstanceOutput
+      attr_accessor ns_lcm_op_occ_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class UpdateSolNetworkModify
+      attr_accessor vnf_configurable_properties: untyped
+      attr_accessor vnf_instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSolNetworkPackageInput
+      attr_accessor nsd_info_id: ::String
+      attr_accessor nsd_operational_state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateSolNetworkPackageOutput
+      attr_accessor nsd_operational_state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class ValidateSolFunctionPackageContentInput
+      attr_accessor content_type: ("application/zip")
+      attr_accessor file: ::String
+      attr_accessor vnf_pkg_id: ::String
+      SENSITIVE: []
+    end
+
+    class ValidateSolFunctionPackageContentMetadata
+      attr_accessor vnfd: Types::FunctionArtifactMeta
+      SENSITIVE: []
+    end
+
+    class ValidateSolFunctionPackageContentOutput
+      attr_accessor id: ::String
+      attr_accessor metadata: Types::ValidateSolFunctionPackageContentMetadata
+      attr_accessor vnf_product_name: ::String
+      attr_accessor vnf_provider: ::String
+      attr_accessor vnfd_id: ::String
+      attr_accessor vnfd_version: ::String
+      SENSITIVE: []
+    end
+
+    class ValidateSolNetworkPackageContentInput
+      attr_accessor content_type: ("application/zip")
+      attr_accessor file: ::String
+      attr_accessor nsd_info_id: ::String
+      SENSITIVE: []
+    end
+
+    class ValidateSolNetworkPackageContentMetadata
+      attr_accessor nsd: Types::NetworkArtifactMeta
+      SENSITIVE: []
+    end
+
+    class ValidateSolNetworkPackageContentOutput
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor metadata: Types::ValidateSolNetworkPackageContentMetadata
+      attr_accessor nsd_id: ::String
+      attr_accessor nsd_name: ::String
+      attr_accessor nsd_version: ::String
+      attr_accessor vnf_pkg_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

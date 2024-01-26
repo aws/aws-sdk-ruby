@@ -1,0 +1,341 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudHSM
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudHSM/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AddTagsToResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddTagsToResourceResponse]
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudHSM/Client.html#add_tags_to_resource-instance_method
+      def add_tags_to_resource: (
+                                  resource_arn: ::String,
+                                  tag_list: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String
+                                    },
+                                  ]
+                                ) -> _AddTagsToResourceResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddTagsToResourceResponseSuccess
+
+      interface _CreateHapgResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateHapgResponse]
+        def hapg_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudHSM/Client.html#create_hapg-instance_method
+      def create_hapg: (
+                         label: ::String
+                       ) -> _CreateHapgResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHapgResponseSuccess
+
+      interface _CreateHsmResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateHsmResponse]
+        def hsm_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudHSM/Client.html#create_hsm-instance_method
+      def create_hsm: (
+                        subnet_id: ::String,
+                        ssh_key: ::String,
+                        ?eni_ip: ::String,
+                        iam_role_arn: ::String,
+                        ?external_id: ::String,
+                        subscription_type: ("PRODUCTION"),
+                        ?client_token: ::String,
+                        ?syslog_ip: ::String
+                      ) -> _CreateHsmResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHsmResponseSuccess
+
+      interface _CreateLunaClientResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLunaClientResponse]
+        def client_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudHSM/Client.html#create_luna_client-instance_method
+      def create_luna_client: (
+                                ?label: ::String,
+                                certificate: ::String
+                              ) -> _CreateLunaClientResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLunaClientResponseSuccess
+
+      interface _DeleteHapgResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteHapgResponse]
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudHSM/Client.html#delete_hapg-instance_method
+      def delete_hapg: (
+                         hapg_arn: ::String
+                       ) -> _DeleteHapgResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteHapgResponseSuccess
+
+      interface _DeleteHsmResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteHsmResponse]
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudHSM/Client.html#delete_hsm-instance_method
+      def delete_hsm: (
+                        hsm_arn: ::String
+                      ) -> _DeleteHsmResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteHsmResponseSuccess
+
+      interface _DeleteLunaClientResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLunaClientResponse]
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudHSM/Client.html#delete_luna_client-instance_method
+      def delete_luna_client: (
+                                client_arn: ::String
+                              ) -> _DeleteLunaClientResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLunaClientResponseSuccess
+
+      interface _DescribeHapgResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeHapgResponse]
+        def hapg_arn: () -> ::String
+        def hapg_serial: () -> ::String
+        def hsms_last_action_failed: () -> ::Array[::String]
+        def hsms_pending_deletion: () -> ::Array[::String]
+        def hsms_pending_registration: () -> ::Array[::String]
+        def label: () -> ::String
+        def last_modified_timestamp: () -> ::String
+        def partition_serial_list: () -> ::Array[::String]
+        def state: () -> ("READY" | "UPDATING" | "DEGRADED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudHSM/Client.html#describe_hapg-instance_method
+      def describe_hapg: (
+                           hapg_arn: ::String
+                         ) -> _DescribeHapgResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeHapgResponseSuccess
+
+      interface _DescribeHsmResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeHsmResponse]
+        def hsm_arn: () -> ::String
+        def status: () -> ("PENDING" | "RUNNING" | "UPDATING" | "SUSPENDED" | "TERMINATING" | "TERMINATED" | "DEGRADED")
+        def status_details: () -> ::String
+        def availability_zone: () -> ::String
+        def eni_id: () -> ::String
+        def eni_ip: () -> ::String
+        def subscription_type: () -> ("PRODUCTION")
+        def subscription_start_date: () -> ::String
+        def subscription_end_date: () -> ::String
+        def vpc_id: () -> ::String
+        def subnet_id: () -> ::String
+        def iam_role_arn: () -> ::String
+        def serial_number: () -> ::String
+        def vendor_name: () -> ::String
+        def hsm_type: () -> ::String
+        def software_version: () -> ::String
+        def ssh_public_key: () -> ::String
+        def ssh_key_last_updated: () -> ::String
+        def server_cert_uri: () -> ::String
+        def server_cert_last_updated: () -> ::String
+        def partitions: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudHSM/Client.html#describe_hsm-instance_method
+      def describe_hsm: (
+                          ?hsm_arn: ::String,
+                          ?hsm_serial_number: ::String
+                        ) -> _DescribeHsmResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeHsmResponseSuccess
+
+      interface _DescribeLunaClientResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLunaClientResponse]
+        def client_arn: () -> ::String
+        def certificate: () -> ::String
+        def certificate_fingerprint: () -> ::String
+        def last_modified_timestamp: () -> ::String
+        def label: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudHSM/Client.html#describe_luna_client-instance_method
+      def describe_luna_client: (
+                                  ?client_arn: ::String,
+                                  ?certificate_fingerprint: ::String
+                                ) -> _DescribeLunaClientResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLunaClientResponseSuccess
+
+      interface _GetConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConfigResponse]
+        def config_type: () -> ::String
+        def config_file: () -> ::String
+        def config_cred: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudHSM/Client.html#get_config-instance_method
+      def get_config: (
+                        client_arn: ::String,
+                        client_version: ("5.1" | "5.3"),
+                        hapg_list: Array[::String]
+                      ) -> _GetConfigResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConfigResponseSuccess
+
+      interface _ListAvailableZonesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAvailableZonesResponse]
+        def az_list: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudHSM/Client.html#list_available_zones-instance_method
+      def list_available_zones: (
+                                ) -> _ListAvailableZonesResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAvailableZonesResponseSuccess
+
+      interface _ListHapgsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListHapgsResponse]
+        def hapg_list: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudHSM/Client.html#list_hapgs-instance_method
+      def list_hapgs: (
+                        ?next_token: ::String
+                      ) -> _ListHapgsResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHapgsResponseSuccess
+
+      interface _ListHsmsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListHsmsResponse]
+        def hsm_list: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudHSM/Client.html#list_hsms-instance_method
+      def list_hsms: (
+                       ?next_token: ::String
+                     ) -> _ListHsmsResponseSuccess
+                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHsmsResponseSuccess
+
+      interface _ListLunaClientsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLunaClientsResponse]
+        def client_list: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudHSM/Client.html#list_luna_clients-instance_method
+      def list_luna_clients: (
+                               ?next_token: ::String
+                             ) -> _ListLunaClientsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLunaClientsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tag_list: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudHSM/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ModifyHapgResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyHapgResponse]
+        def hapg_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudHSM/Client.html#modify_hapg-instance_method
+      def modify_hapg: (
+                         hapg_arn: ::String,
+                         ?label: ::String,
+                         ?partition_serial_list: Array[::String]
+                       ) -> _ModifyHapgResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyHapgResponseSuccess
+
+      interface _ModifyHsmResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyHsmResponse]
+        def hsm_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudHSM/Client.html#modify_hsm-instance_method
+      def modify_hsm: (
+                        hsm_arn: ::String,
+                        ?subnet_id: ::String,
+                        ?eni_ip: ::String,
+                        ?iam_role_arn: ::String,
+                        ?external_id: ::String,
+                        ?syslog_ip: ::String
+                      ) -> _ModifyHsmResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyHsmResponseSuccess
+
+      interface _ModifyLunaClientResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyLunaClientResponse]
+        def client_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudHSM/Client.html#modify_luna_client-instance_method
+      def modify_luna_client: (
+                                client_arn: ::String,
+                                certificate: ::String
+                              ) -> _ModifyLunaClientResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyLunaClientResponseSuccess
+
+      interface _RemoveTagsFromResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveTagsFromResourceResponse]
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudHSM/Client.html#remove_tags_from_resource-instance_method
+      def remove_tags_from_resource: (
+                                       resource_arn: ::String,
+                                       tag_key_list: Array[::String]
+                                     ) -> _RemoveTagsFromResourceResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveTagsFromResourceResponseSuccess
+    end
+  end
+end
+

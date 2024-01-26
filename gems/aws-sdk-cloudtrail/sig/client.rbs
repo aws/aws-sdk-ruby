@@ -1,0 +1,924 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudTrail
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AddTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddTagsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#add_tags-instance_method
+      def add_tags: (
+                      resource_id: ::String,
+                      tags_list: Array[
+                        {
+                          key: ::String,
+                          value: ::String?
+                        },
+                      ]
+                    ) -> _AddTagsResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddTagsResponseSuccess
+
+      interface _CancelQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelQueryResponse]
+        def query_id: () -> ::String
+        def query_status: () -> ("QUEUED" | "RUNNING" | "FINISHED" | "FAILED" | "CANCELLED" | "TIMED_OUT")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#cancel_query-instance_method
+      def cancel_query: (
+                          ?event_data_store: ::String,
+                          query_id: ::String
+                        ) -> _CancelQueryResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelQueryResponseSuccess
+
+      interface _CreateChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateChannelResponse]
+        def channel_arn: () -> ::String
+        def name: () -> ::String
+        def source: () -> ::String
+        def destinations: () -> ::Array[Types::Destination]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#create_channel-instance_method
+      def create_channel: (
+                            name: ::String,
+                            source: ::String,
+                            destinations: Array[
+                              {
+                                type: ("EVENT_DATA_STORE" | "AWS_SERVICE"),
+                                location: ::String
+                              },
+                            ],
+                            ?tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String?
+                              },
+                            ]
+                          ) -> _CreateChannelResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelResponseSuccess
+
+      interface _CreateEventDataStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEventDataStoreResponse]
+        def event_data_store_arn: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("CREATED" | "ENABLED" | "PENDING_DELETION" | "STARTING_INGESTION" | "STOPPING_INGESTION" | "STOPPED_INGESTION")
+        def advanced_event_selectors: () -> ::Array[Types::AdvancedEventSelector]
+        def multi_region_enabled: () -> bool
+        def organization_enabled: () -> bool
+        def retention_period: () -> ::Integer
+        def termination_protection_enabled: () -> bool
+        def tags_list: () -> ::Array[Types::Tag]
+        def created_timestamp: () -> ::Time
+        def updated_timestamp: () -> ::Time
+        def kms_key_id: () -> ::String
+        def billing_mode: () -> ("EXTENDABLE_RETENTION_PRICING" | "FIXED_RETENTION_PRICING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#create_event_data_store-instance_method
+      def create_event_data_store: (
+                                     name: ::String,
+                                     ?advanced_event_selectors: Array[
+                                       {
+                                         name: ::String?,
+                                         field_selectors: Array[
+                                           {
+                                             field: ::String,
+                                             equals: Array[::String]?,
+                                             starts_with: Array[::String]?,
+                                             ends_with: Array[::String]?,
+                                             not_equals: Array[::String]?,
+                                             not_starts_with: Array[::String]?,
+                                             not_ends_with: Array[::String]?
+                                           },
+                                         ]
+                                       },
+                                     ],
+                                     ?multi_region_enabled: bool,
+                                     ?organization_enabled: bool,
+                                     ?retention_period: ::Integer,
+                                     ?termination_protection_enabled: bool,
+                                     ?tags_list: Array[
+                                       {
+                                         key: ::String,
+                                         value: ::String?
+                                       },
+                                     ],
+                                     ?kms_key_id: ::String,
+                                     ?start_ingestion: bool,
+                                     ?billing_mode: ("EXTENDABLE_RETENTION_PRICING" | "FIXED_RETENTION_PRICING")
+                                   ) -> _CreateEventDataStoreResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventDataStoreResponseSuccess
+
+      interface _CreateTrailResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTrailResponse]
+        def name: () -> ::String
+        def s3_bucket_name: () -> ::String
+        def s3_key_prefix: () -> ::String
+        def sns_topic_name: () -> ::String
+        def sns_topic_arn: () -> ::String
+        def include_global_service_events: () -> bool
+        def is_multi_region_trail: () -> bool
+        def trail_arn: () -> ::String
+        def log_file_validation_enabled: () -> bool
+        def cloud_watch_logs_log_group_arn: () -> ::String
+        def cloud_watch_logs_role_arn: () -> ::String
+        def kms_key_id: () -> ::String
+        def is_organization_trail: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#create_trail-instance_method
+      def create_trail: (
+                          name: ::String,
+                          s3_bucket_name: ::String,
+                          ?s3_key_prefix: ::String,
+                          ?sns_topic_name: ::String,
+                          ?include_global_service_events: bool,
+                          ?is_multi_region_trail: bool,
+                          ?enable_log_file_validation: bool,
+                          ?cloud_watch_logs_log_group_arn: ::String,
+                          ?cloud_watch_logs_role_arn: ::String,
+                          ?kms_key_id: ::String,
+                          ?is_organization_trail: bool,
+                          ?tags_list: Array[
+                            {
+                              key: ::String,
+                              value: ::String?
+                            },
+                          ]
+                        ) -> _CreateTrailResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTrailResponseSuccess
+
+      interface _DeleteChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteChannelResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#delete_channel-instance_method
+      def delete_channel: (
+                            channel: ::String
+                          ) -> _DeleteChannelResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteChannelResponseSuccess
+
+      interface _DeleteEventDataStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEventDataStoreResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#delete_event_data_store-instance_method
+      def delete_event_data_store: (
+                                     event_data_store: ::String
+                                   ) -> _DeleteEventDataStoreResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEventDataStoreResponseSuccess
+
+      interface _DeleteResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourcePolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#delete_resource_policy-instance_method
+      def delete_resource_policy: (
+                                    resource_arn: ::String
+                                  ) -> _DeleteResourcePolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourcePolicyResponseSuccess
+
+      interface _DeleteTrailResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTrailResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#delete_trail-instance_method
+      def delete_trail: (
+                          name: ::String
+                        ) -> _DeleteTrailResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTrailResponseSuccess
+
+      interface _DeregisterOrganizationDelegatedAdminResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterOrganizationDelegatedAdminResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#deregister_organization_delegated_admin-instance_method
+      def deregister_organization_delegated_admin: (
+                                                     delegated_admin_account_id: ::String
+                                                   ) -> _DeregisterOrganizationDelegatedAdminResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterOrganizationDelegatedAdminResponseSuccess
+
+      interface _DescribeQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeQueryResponse]
+        def query_id: () -> ::String
+        def query_string: () -> ::String
+        def query_status: () -> ("QUEUED" | "RUNNING" | "FINISHED" | "FAILED" | "CANCELLED" | "TIMED_OUT")
+        def query_statistics: () -> Types::QueryStatisticsForDescribeQuery
+        def error_message: () -> ::String
+        def delivery_s3_uri: () -> ::String
+        def delivery_status: () -> ("SUCCESS" | "FAILED" | "FAILED_SIGNING_FILE" | "PENDING" | "RESOURCE_NOT_FOUND" | "ACCESS_DENIED" | "ACCESS_DENIED_SIGNING_FILE" | "CANCELLED" | "UNKNOWN")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#describe_query-instance_method
+      def describe_query: (
+                            ?event_data_store: ::String,
+                            ?query_id: ::String,
+                            ?query_alias: ::String
+                          ) -> _DescribeQueryResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeQueryResponseSuccess
+
+      interface _DescribeTrailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTrailsResponse]
+        def trail_list: () -> ::Array[Types::Trail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#describe_trails-instance_method
+      def describe_trails: (
+                             ?trail_name_list: Array[::String],
+                             ?include_shadow_trails: bool
+                           ) -> _DescribeTrailsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTrailsResponseSuccess
+
+      interface _DisableFederationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableFederationResponse]
+        def event_data_store_arn: () -> ::String
+        def federation_status: () -> ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#disable_federation-instance_method
+      def disable_federation: (
+                                event_data_store: ::String
+                              ) -> _DisableFederationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableFederationResponseSuccess
+
+      interface _EnableFederationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableFederationResponse]
+        def event_data_store_arn: () -> ::String
+        def federation_status: () -> ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED")
+        def federation_role_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#enable_federation-instance_method
+      def enable_federation: (
+                               event_data_store: ::String,
+                               federation_role_arn: ::String
+                             ) -> _EnableFederationResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableFederationResponseSuccess
+
+      interface _GetChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetChannelResponse]
+        def channel_arn: () -> ::String
+        def name: () -> ::String
+        def source: () -> ::String
+        def source_config: () -> Types::SourceConfig
+        def destinations: () -> ::Array[Types::Destination]
+        def ingestion_status: () -> Types::IngestionStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#get_channel-instance_method
+      def get_channel: (
+                         channel: ::String
+                       ) -> _GetChannelResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetChannelResponseSuccess
+
+      interface _GetEventDataStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEventDataStoreResponse]
+        def event_data_store_arn: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("CREATED" | "ENABLED" | "PENDING_DELETION" | "STARTING_INGESTION" | "STOPPING_INGESTION" | "STOPPED_INGESTION")
+        def advanced_event_selectors: () -> ::Array[Types::AdvancedEventSelector]
+        def multi_region_enabled: () -> bool
+        def organization_enabled: () -> bool
+        def retention_period: () -> ::Integer
+        def termination_protection_enabled: () -> bool
+        def created_timestamp: () -> ::Time
+        def updated_timestamp: () -> ::Time
+        def kms_key_id: () -> ::String
+        def billing_mode: () -> ("EXTENDABLE_RETENTION_PRICING" | "FIXED_RETENTION_PRICING")
+        def federation_status: () -> ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED")
+        def federation_role_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#get_event_data_store-instance_method
+      def get_event_data_store: (
+                                  event_data_store: ::String
+                                ) -> _GetEventDataStoreResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEventDataStoreResponseSuccess
+
+      interface _GetEventSelectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEventSelectorsResponse]
+        def trail_arn: () -> ::String
+        def event_selectors: () -> ::Array[Types::EventSelector]
+        def advanced_event_selectors: () -> ::Array[Types::AdvancedEventSelector]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#get_event_selectors-instance_method
+      def get_event_selectors: (
+                                 trail_name: ::String
+                               ) -> _GetEventSelectorsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEventSelectorsResponseSuccess
+
+      interface _GetImportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetImportResponse]
+        def import_id: () -> ::String
+        def destinations: () -> ::Array[::String]
+        def import_source: () -> Types::ImportSource
+        def start_event_time: () -> ::Time
+        def end_event_time: () -> ::Time
+        def import_status: () -> ("INITIALIZING" | "IN_PROGRESS" | "FAILED" | "STOPPED" | "COMPLETED")
+        def created_timestamp: () -> ::Time
+        def updated_timestamp: () -> ::Time
+        def import_statistics: () -> Types::ImportStatistics
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#get_import-instance_method
+      def get_import: (
+                        import_id: ::String
+                      ) -> _GetImportResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetImportResponseSuccess
+
+      interface _GetInsightSelectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInsightSelectorsResponse]
+        def trail_arn: () -> ::String
+        def insight_selectors: () -> ::Array[Types::InsightSelector]
+        def event_data_store_arn: () -> ::String
+        def insights_destination: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#get_insight_selectors-instance_method
+      def get_insight_selectors: (
+                                   ?trail_name: ::String,
+                                   ?event_data_store: ::String
+                                 ) -> _GetInsightSelectorsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInsightSelectorsResponseSuccess
+
+      interface _GetQueryResultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetQueryResultsResponse]
+        def query_status: () -> ("QUEUED" | "RUNNING" | "FINISHED" | "FAILED" | "CANCELLED" | "TIMED_OUT")
+        def query_statistics: () -> Types::QueryStatistics
+        def query_result_rows: () -> ::Array[::Array[::Hash[::String, ::String]]]
+        def next_token: () -> ::String
+        def error_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#get_query_results-instance_method
+      def get_query_results: (
+                               ?event_data_store: ::String,
+                               query_id: ::String,
+                               ?next_token: ::String,
+                               ?max_query_results: ::Integer
+                             ) -> _GetQueryResultsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQueryResultsResponseSuccess
+
+      interface _GetResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcePolicyResponse]
+        def resource_arn: () -> ::String
+        def resource_policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#get_resource_policy-instance_method
+      def get_resource_policy: (
+                                 resource_arn: ::String
+                               ) -> _GetResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePolicyResponseSuccess
+
+      interface _GetTrailResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTrailResponse]
+        def trail: () -> Types::Trail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#get_trail-instance_method
+      def get_trail: (
+                       name: ::String
+                     ) -> _GetTrailResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTrailResponseSuccess
+
+      interface _GetTrailStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTrailStatusResponse]
+        def is_logging: () -> bool
+        def latest_delivery_error: () -> ::String
+        def latest_notification_error: () -> ::String
+        def latest_delivery_time: () -> ::Time
+        def latest_notification_time: () -> ::Time
+        def start_logging_time: () -> ::Time
+        def stop_logging_time: () -> ::Time
+        def latest_cloud_watch_logs_delivery_error: () -> ::String
+        def latest_cloud_watch_logs_delivery_time: () -> ::Time
+        def latest_digest_delivery_time: () -> ::Time
+        def latest_digest_delivery_error: () -> ::String
+        def latest_delivery_attempt_time: () -> ::String
+        def latest_notification_attempt_time: () -> ::String
+        def latest_notification_attempt_succeeded: () -> ::String
+        def latest_delivery_attempt_succeeded: () -> ::String
+        def time_logging_started: () -> ::String
+        def time_logging_stopped: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#get_trail_status-instance_method
+      def get_trail_status: (
+                              name: ::String
+                            ) -> _GetTrailStatusResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTrailStatusResponseSuccess
+
+      interface _ListChannelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelsResponse]
+        def channels: () -> ::Array[Types::Channel]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#list_channels-instance_method
+      def list_channels: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListChannelsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelsResponseSuccess
+
+      interface _ListEventDataStoresResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEventDataStoresResponse]
+        def event_data_stores: () -> ::Array[Types::EventDataStore]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#list_event_data_stores-instance_method
+      def list_event_data_stores: (
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListEventDataStoresResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEventDataStoresResponseSuccess
+
+      interface _ListImportFailuresResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListImportFailuresResponse]
+        def failures: () -> ::Array[Types::ImportFailureListItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#list_import_failures-instance_method
+      def list_import_failures: (
+                                  import_id: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListImportFailuresResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListImportFailuresResponseSuccess
+
+      interface _ListImportsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListImportsResponse]
+        def imports: () -> ::Array[Types::ImportsListItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#list_imports-instance_method
+      def list_imports: (
+                          ?max_results: ::Integer,
+                          ?destination: ::String,
+                          ?import_status: ("INITIALIZING" | "IN_PROGRESS" | "FAILED" | "STOPPED" | "COMPLETED"),
+                          ?next_token: ::String
+                        ) -> _ListImportsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListImportsResponseSuccess
+
+      interface _ListInsightsMetricDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInsightsMetricDataResponse]
+        def event_source: () -> ::String
+        def event_name: () -> ::String
+        def insight_type: () -> ("ApiCallRateInsight" | "ApiErrorRateInsight")
+        def error_code: () -> ::String
+        def timestamps: () -> ::Array[::Time]
+        def values: () -> ::Array[::Float]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#list_insights_metric_data-instance_method
+      def list_insights_metric_data: (
+                                       event_source: ::String,
+                                       event_name: ::String,
+                                       insight_type: ("ApiCallRateInsight" | "ApiErrorRateInsight"),
+                                       ?error_code: ::String,
+                                       ?start_time: ::Time,
+                                       ?end_time: ::Time,
+                                       ?period: ::Integer,
+                                       ?data_type: ("FillWithZeros" | "NonZeroData"),
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListInsightsMetricDataResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInsightsMetricDataResponseSuccess
+
+      interface _ListPublicKeysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPublicKeysResponse]
+        def public_key_list: () -> ::Array[Types::PublicKey]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#list_public_keys-instance_method
+      def list_public_keys: (
+                              ?start_time: ::Time,
+                              ?end_time: ::Time,
+                              ?next_token: ::String
+                            ) -> _ListPublicKeysResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPublicKeysResponseSuccess
+
+      interface _ListQueriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListQueriesResponse]
+        def queries: () -> ::Array[Types::Query]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#list_queries-instance_method
+      def list_queries: (
+                          event_data_store: ::String,
+                          ?next_token: ::String,
+                          ?max_results: ::Integer,
+                          ?start_time: ::Time,
+                          ?end_time: ::Time,
+                          ?query_status: ("QUEUED" | "RUNNING" | "FINISHED" | "FAILED" | "CANCELLED" | "TIMED_OUT")
+                        ) -> _ListQueriesResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListQueriesResponseSuccess
+
+      interface _ListTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsResponse]
+        def resource_tag_list: () -> ::Array[Types::ResourceTag]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#list_tags-instance_method
+      def list_tags: (
+                       resource_id_list: Array[::String],
+                       ?next_token: ::String
+                     ) -> _ListTagsResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsResponseSuccess
+
+      interface _ListTrailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTrailsResponse]
+        def trails: () -> ::Array[Types::TrailInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#list_trails-instance_method
+      def list_trails: (
+                         ?next_token: ::String
+                       ) -> _ListTrailsResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTrailsResponseSuccess
+
+      interface _LookupEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::LookupEventsResponse]
+        def events: () -> ::Array[Types::Event]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#lookup_events-instance_method
+      def lookup_events: (
+                           ?lookup_attributes: Array[
+                             {
+                               attribute_key: ("EventId" | "EventName" | "ReadOnly" | "Username" | "ResourceType" | "ResourceName" | "EventSource" | "AccessKeyId"),
+                               attribute_value: ::String
+                             },
+                           ],
+                           ?start_time: ::Time,
+                           ?end_time: ::Time,
+                           ?event_category: ("insight"),
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _LookupEventsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _LookupEventsResponseSuccess
+
+      interface _PutEventSelectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutEventSelectorsResponse]
+        def trail_arn: () -> ::String
+        def event_selectors: () -> ::Array[Types::EventSelector]
+        def advanced_event_selectors: () -> ::Array[Types::AdvancedEventSelector]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#put_event_selectors-instance_method
+      def put_event_selectors: (
+                                 trail_name: ::String,
+                                 ?event_selectors: Array[
+                                   {
+                                     read_write_type: ("ReadOnly" | "WriteOnly" | "All")?,
+                                     include_management_events: bool?,
+                                     data_resources: Array[
+                                       {
+                                         type: ::String?,
+                                         values: Array[::String]?
+                                       },
+                                     ]?,
+                                     exclude_management_event_sources: Array[::String]?
+                                   },
+                                 ],
+                                 ?advanced_event_selectors: Array[
+                                   {
+                                     name: ::String?,
+                                     field_selectors: Array[
+                                       {
+                                         field: ::String,
+                                         equals: Array[::String]?,
+                                         starts_with: Array[::String]?,
+                                         ends_with: Array[::String]?,
+                                         not_equals: Array[::String]?,
+                                         not_starts_with: Array[::String]?,
+                                         not_ends_with: Array[::String]?
+                                       },
+                                     ]
+                                   },
+                                 ]
+                               ) -> _PutEventSelectorsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEventSelectorsResponseSuccess
+
+      interface _PutInsightSelectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutInsightSelectorsResponse]
+        def trail_arn: () -> ::String
+        def insight_selectors: () -> ::Array[Types::InsightSelector]
+        def event_data_store_arn: () -> ::String
+        def insights_destination: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#put_insight_selectors-instance_method
+      def put_insight_selectors: (
+                                   ?trail_name: ::String,
+                                   insight_selectors: Array[
+                                     {
+                                       insight_type: ("ApiCallRateInsight" | "ApiErrorRateInsight")?
+                                     },
+                                   ],
+                                   ?event_data_store: ::String,
+                                   ?insights_destination: ::String
+                                 ) -> _PutInsightSelectorsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutInsightSelectorsResponseSuccess
+
+      interface _PutResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyResponse]
+        def resource_arn: () -> ::String
+        def resource_policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#put_resource_policy-instance_method
+      def put_resource_policy: (
+                                 resource_arn: ::String,
+                                 resource_policy: ::String
+                               ) -> _PutResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
+
+      interface _RegisterOrganizationDelegatedAdminResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterOrganizationDelegatedAdminResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#register_organization_delegated_admin-instance_method
+      def register_organization_delegated_admin: (
+                                                   member_account_id: ::String
+                                                 ) -> _RegisterOrganizationDelegatedAdminResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterOrganizationDelegatedAdminResponseSuccess
+
+      interface _RemoveTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveTagsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#remove_tags-instance_method
+      def remove_tags: (
+                         resource_id: ::String,
+                         tags_list: Array[
+                           {
+                             key: ::String,
+                             value: ::String?
+                           },
+                         ]
+                       ) -> _RemoveTagsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveTagsResponseSuccess
+
+      interface _RestoreEventDataStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestoreEventDataStoreResponse]
+        def event_data_store_arn: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("CREATED" | "ENABLED" | "PENDING_DELETION" | "STARTING_INGESTION" | "STOPPING_INGESTION" | "STOPPED_INGESTION")
+        def advanced_event_selectors: () -> ::Array[Types::AdvancedEventSelector]
+        def multi_region_enabled: () -> bool
+        def organization_enabled: () -> bool
+        def retention_period: () -> ::Integer
+        def termination_protection_enabled: () -> bool
+        def created_timestamp: () -> ::Time
+        def updated_timestamp: () -> ::Time
+        def kms_key_id: () -> ::String
+        def billing_mode: () -> ("EXTENDABLE_RETENTION_PRICING" | "FIXED_RETENTION_PRICING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#restore_event_data_store-instance_method
+      def restore_event_data_store: (
+                                      event_data_store: ::String
+                                    ) -> _RestoreEventDataStoreResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreEventDataStoreResponseSuccess
+
+      interface _StartEventDataStoreIngestionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartEventDataStoreIngestionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#start_event_data_store_ingestion-instance_method
+      def start_event_data_store_ingestion: (
+                                              event_data_store: ::String
+                                            ) -> _StartEventDataStoreIngestionResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartEventDataStoreIngestionResponseSuccess
+
+      interface _StartImportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartImportResponse]
+        def import_id: () -> ::String
+        def destinations: () -> ::Array[::String]
+        def import_source: () -> Types::ImportSource
+        def start_event_time: () -> ::Time
+        def end_event_time: () -> ::Time
+        def import_status: () -> ("INITIALIZING" | "IN_PROGRESS" | "FAILED" | "STOPPED" | "COMPLETED")
+        def created_timestamp: () -> ::Time
+        def updated_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#start_import-instance_method
+      def start_import: (
+                          ?destinations: Array[::String],
+                          ?import_source: {
+                            s3: {
+                              s3_location_uri: ::String,
+                              s3_bucket_region: ::String,
+                              s3_bucket_access_role_arn: ::String
+                            }
+                          },
+                          ?start_event_time: ::Time,
+                          ?end_event_time: ::Time,
+                          ?import_id: ::String
+                        ) -> _StartImportResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartImportResponseSuccess
+
+      interface _StartLoggingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartLoggingResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#start_logging-instance_method
+      def start_logging: (
+                           name: ::String
+                         ) -> _StartLoggingResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartLoggingResponseSuccess
+
+      interface _StartQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartQueryResponse]
+        def query_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#start_query-instance_method
+      def start_query: (
+                         ?query_statement: ::String,
+                         ?delivery_s3_uri: ::String,
+                         ?query_alias: ::String,
+                         ?query_parameters: Array[::String]
+                       ) -> _StartQueryResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartQueryResponseSuccess
+
+      interface _StopEventDataStoreIngestionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopEventDataStoreIngestionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#stop_event_data_store_ingestion-instance_method
+      def stop_event_data_store_ingestion: (
+                                             event_data_store: ::String
+                                           ) -> _StopEventDataStoreIngestionResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopEventDataStoreIngestionResponseSuccess
+
+      interface _StopImportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopImportResponse]
+        def import_id: () -> ::String
+        def import_source: () -> Types::ImportSource
+        def destinations: () -> ::Array[::String]
+        def import_status: () -> ("INITIALIZING" | "IN_PROGRESS" | "FAILED" | "STOPPED" | "COMPLETED")
+        def created_timestamp: () -> ::Time
+        def updated_timestamp: () -> ::Time
+        def start_event_time: () -> ::Time
+        def end_event_time: () -> ::Time
+        def import_statistics: () -> Types::ImportStatistics
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#stop_import-instance_method
+      def stop_import: (
+                         import_id: ::String
+                       ) -> _StopImportResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopImportResponseSuccess
+
+      interface _StopLoggingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopLoggingResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#stop_logging-instance_method
+      def stop_logging: (
+                          name: ::String
+                        ) -> _StopLoggingResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopLoggingResponseSuccess
+
+      interface _UpdateChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateChannelResponse]
+        def channel_arn: () -> ::String
+        def name: () -> ::String
+        def source: () -> ::String
+        def destinations: () -> ::Array[Types::Destination]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#update_channel-instance_method
+      def update_channel: (
+                            channel: ::String,
+                            ?destinations: Array[
+                              {
+                                type: ("EVENT_DATA_STORE" | "AWS_SERVICE"),
+                                location: ::String
+                              },
+                            ],
+                            ?name: ::String
+                          ) -> _UpdateChannelResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelResponseSuccess
+
+      interface _UpdateEventDataStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEventDataStoreResponse]
+        def event_data_store_arn: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("CREATED" | "ENABLED" | "PENDING_DELETION" | "STARTING_INGESTION" | "STOPPING_INGESTION" | "STOPPED_INGESTION")
+        def advanced_event_selectors: () -> ::Array[Types::AdvancedEventSelector]
+        def multi_region_enabled: () -> bool
+        def organization_enabled: () -> bool
+        def retention_period: () -> ::Integer
+        def termination_protection_enabled: () -> bool
+        def created_timestamp: () -> ::Time
+        def updated_timestamp: () -> ::Time
+        def kms_key_id: () -> ::String
+        def billing_mode: () -> ("EXTENDABLE_RETENTION_PRICING" | "FIXED_RETENTION_PRICING")
+        def federation_status: () -> ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED")
+        def federation_role_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#update_event_data_store-instance_method
+      def update_event_data_store: (
+                                     event_data_store: ::String,
+                                     ?name: ::String,
+                                     ?advanced_event_selectors: Array[
+                                       {
+                                         name: ::String?,
+                                         field_selectors: Array[
+                                           {
+                                             field: ::String,
+                                             equals: Array[::String]?,
+                                             starts_with: Array[::String]?,
+                                             ends_with: Array[::String]?,
+                                             not_equals: Array[::String]?,
+                                             not_starts_with: Array[::String]?,
+                                             not_ends_with: Array[::String]?
+                                           },
+                                         ]
+                                       },
+                                     ],
+                                     ?multi_region_enabled: bool,
+                                     ?organization_enabled: bool,
+                                     ?retention_period: ::Integer,
+                                     ?termination_protection_enabled: bool,
+                                     ?kms_key_id: ::String,
+                                     ?billing_mode: ("EXTENDABLE_RETENTION_PRICING" | "FIXED_RETENTION_PRICING")
+                                   ) -> _UpdateEventDataStoreResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEventDataStoreResponseSuccess
+
+      interface _UpdateTrailResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTrailResponse]
+        def name: () -> ::String
+        def s3_bucket_name: () -> ::String
+        def s3_key_prefix: () -> ::String
+        def sns_topic_name: () -> ::String
+        def sns_topic_arn: () -> ::String
+        def include_global_service_events: () -> bool
+        def is_multi_region_trail: () -> bool
+        def trail_arn: () -> ::String
+        def log_file_validation_enabled: () -> bool
+        def cloud_watch_logs_log_group_arn: () -> ::String
+        def cloud_watch_logs_role_arn: () -> ::String
+        def kms_key_id: () -> ::String
+        def is_organization_trail: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#update_trail-instance_method
+      def update_trail: (
+                          name: ::String,
+                          ?s3_bucket_name: ::String,
+                          ?s3_key_prefix: ::String,
+                          ?sns_topic_name: ::String,
+                          ?include_global_service_events: bool,
+                          ?is_multi_region_trail: bool,
+                          ?enable_log_file_validation: bool,
+                          ?cloud_watch_logs_log_group_arn: ::String,
+                          ?cloud_watch_logs_role_arn: ::String,
+                          ?kms_key_id: ::String,
+                          ?is_organization_trail: bool
+                        ) -> _UpdateTrailResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTrailResponseSuccess
+    end
+  end
+end
+

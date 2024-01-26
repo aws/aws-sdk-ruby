@@ -1,0 +1,413 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::LexRuntimeV2
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ActiveContext
+      attr_accessor name: ::String
+      attr_accessor time_to_live: Types::ActiveContextTimeToLive
+      attr_accessor context_attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ActiveContextTimeToLive
+      attr_accessor time_to_live_in_seconds: ::Integer
+      attr_accessor turns_to_live: ::Integer
+      SENSITIVE: []
+    end
+
+    class AudioInputEvent
+      attr_accessor audio_chunk: ::String
+      attr_accessor content_type: ::String
+      attr_accessor event_id: ::String
+      attr_accessor client_timestamp_millis: ::Integer
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class AudioResponseEvent
+      attr_accessor audio_chunk: ::String
+      attr_accessor content_type: ::String
+      attr_accessor event_id: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class BadGatewayException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class Button
+      attr_accessor text: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ConfidenceScore
+      attr_accessor score: ::Float
+      SENSITIVE: []
+    end
+
+    class ConfigurationEvent
+      attr_accessor request_attributes: ::Hash[::String, ::String]
+      attr_accessor response_content_type: ::String
+      attr_accessor session_state: Types::SessionState
+      attr_accessor welcome_messages: ::Array[Types::Message]
+      attr_accessor disable_playback: bool
+      attr_accessor event_id: ::String
+      attr_accessor client_timestamp_millis: ::Integer
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class DTMFInputEvent
+      attr_accessor input_character: ::String
+      attr_accessor event_id: ::String
+      attr_accessor client_timestamp_millis: ::Integer
+      attr_accessor event_type: untyped
+      SENSITIVE: [:input_character]
+    end
+
+    class DeleteSessionRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_alias_id: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSessionResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_alias_id: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class DependencyFailedException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class DialogAction
+      attr_accessor type: ("Close" | "ConfirmIntent" | "Delegate" | "ElicitIntent" | "ElicitSlot" | "None")
+      attr_accessor slot_to_elicit: ::String
+      attr_accessor slot_elicitation_style: ("Default" | "SpellByLetter" | "SpellByWord")
+      attr_accessor sub_slot_to_elicit: Types::ElicitSubSlot
+      SENSITIVE: []
+    end
+
+    class DisconnectionEvent
+      attr_accessor event_id: ::String
+      attr_accessor client_timestamp_millis: ::Integer
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ElicitSubSlot
+      attr_accessor name: ::String
+      attr_accessor sub_slot_to_elicit: Types::ElicitSubSlot
+      SENSITIVE: []
+    end
+
+    class GetSessionRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_alias_id: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSessionResponse
+      attr_accessor session_id: ::String
+      attr_accessor messages: ::Array[Types::Message]
+      attr_accessor interpretations: ::Array[Types::Interpretation]
+      attr_accessor session_state: Types::SessionState
+      SENSITIVE: []
+    end
+
+    class HeartbeatEvent
+      attr_accessor event_id: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ImageResponseCard
+      attr_accessor title: ::String
+      attr_accessor subtitle: ::String
+      attr_accessor image_url: ::String
+      attr_accessor buttons: ::Array[Types::Button]
+      SENSITIVE: []
+    end
+
+    class Intent
+      attr_accessor name: ::String
+      attr_accessor slots: ::Hash[::String, Types::Slot]
+      attr_accessor state: ("Failed" | "Fulfilled" | "InProgress" | "ReadyForFulfillment" | "Waiting" | "FulfillmentInProgress")
+      attr_accessor confirmation_state: ("Confirmed" | "Denied" | "None")
+      SENSITIVE: []
+    end
+
+    class IntentResultEvent
+      attr_accessor input_mode: ("Text" | "Speech" | "DTMF")
+      attr_accessor interpretations: ::Array[Types::Interpretation]
+      attr_accessor session_state: Types::SessionState
+      attr_accessor request_attributes: ::Hash[::String, ::String]
+      attr_accessor session_id: ::String
+      attr_accessor event_id: ::String
+      attr_accessor recognized_bot_member: Types::RecognizedBotMember
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class Interpretation
+      attr_accessor nlu_confidence: Types::ConfidenceScore
+      attr_accessor sentiment_response: Types::SentimentResponse
+      attr_accessor intent: Types::Intent
+      attr_accessor interpretation_source: ("Bedrock" | "Lex")
+      SENSITIVE: []
+    end
+
+    class Message
+      attr_accessor content: ::String
+      attr_accessor content_type: ("CustomPayload" | "ImageResponseCard" | "PlainText" | "SSML")
+      attr_accessor image_response_card: Types::ImageResponseCard
+      SENSITIVE: [:content]
+    end
+
+    class PlaybackCompletionEvent
+      attr_accessor event_id: ::String
+      attr_accessor client_timestamp_millis: ::Integer
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class PlaybackInterruptionEvent
+      attr_accessor event_reason: ("DTMF_START_DETECTED" | "TEXT_DETECTED" | "VOICE_START_DETECTED")
+      attr_accessor caused_by_event_id: ::String
+      attr_accessor event_id: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class PutSessionRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_alias_id: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor messages: ::Array[Types::Message]
+      attr_accessor session_state: Types::SessionState
+      attr_accessor request_attributes: ::Hash[::String, ::String]
+      attr_accessor response_content_type: ::String
+      SENSITIVE: []
+    end
+
+    class PutSessionResponse
+      attr_accessor content_type: ::String
+      attr_accessor messages: ::String
+      attr_accessor session_state: ::String
+      attr_accessor request_attributes: ::String
+      attr_accessor session_id: ::String
+      attr_accessor audio_stream: ::IO
+      SENSITIVE: []
+    end
+
+    class RecognizeTextRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_alias_id: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor text: ::String
+      attr_accessor session_state: Types::SessionState
+      attr_accessor request_attributes: ::Hash[::String, ::String]
+      SENSITIVE: [:text]
+    end
+
+    class RecognizeTextResponse
+      attr_accessor messages: ::Array[Types::Message]
+      attr_accessor session_state: Types::SessionState
+      attr_accessor interpretations: ::Array[Types::Interpretation]
+      attr_accessor request_attributes: ::Hash[::String, ::String]
+      attr_accessor session_id: ::String
+      attr_accessor recognized_bot_member: Types::RecognizedBotMember
+      SENSITIVE: []
+    end
+
+    class RecognizeUtteranceRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_alias_id: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor session_state: ::String
+      attr_accessor request_attributes: ::String
+      attr_accessor request_content_type: ::String
+      attr_accessor response_content_type: ::String
+      attr_accessor input_stream: ::IO
+      SENSITIVE: [:session_state, :request_attributes]
+    end
+
+    class RecognizeUtteranceResponse
+      attr_accessor input_mode: ::String
+      attr_accessor content_type: ::String
+      attr_accessor messages: ::String
+      attr_accessor interpretations: ::String
+      attr_accessor session_state: ::String
+      attr_accessor request_attributes: ::String
+      attr_accessor session_id: ::String
+      attr_accessor input_transcript: ::String
+      attr_accessor audio_stream: ::IO
+      attr_accessor recognized_bot_member: ::String
+      SENSITIVE: []
+    end
+
+    class RecognizedBotMember
+      attr_accessor bot_id: ::String
+      attr_accessor bot_name: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class RuntimeHintDetails
+      attr_accessor runtime_hint_values: ::Array[Types::RuntimeHintValue]
+      attr_accessor sub_slot_hints: ::Hash[::String, Types::RuntimeHintDetails]
+      SENSITIVE: []
+    end
+
+    class RuntimeHintValue
+      attr_accessor phrase: ::String
+      SENSITIVE: []
+    end
+
+    class RuntimeHints
+      attr_accessor slot_hints: ::Hash[::String, ::Hash[::String, Types::RuntimeHintDetails]]
+      SENSITIVE: []
+    end
+
+    class SentimentResponse
+      attr_accessor sentiment: ("MIXED" | "NEGATIVE" | "NEUTRAL" | "POSITIVE")
+      attr_accessor sentiment_score: Types::SentimentScore
+      SENSITIVE: []
+    end
+
+    class SentimentScore
+      attr_accessor positive: ::Float
+      attr_accessor negative: ::Float
+      attr_accessor neutral: ::Float
+      attr_accessor mixed: ::Float
+      SENSITIVE: []
+    end
+
+    class SessionState
+      attr_accessor dialog_action: Types::DialogAction
+      attr_accessor intent: Types::Intent
+      attr_accessor active_contexts: ::Array[Types::ActiveContext]
+      attr_accessor session_attributes: ::Hash[::String, ::String]
+      attr_accessor originating_request_id: ::String
+      attr_accessor runtime_hints: Types::RuntimeHints
+      SENSITIVE: []
+    end
+
+    class Slot
+      attr_accessor value: Types::Value
+      attr_accessor shape: ("Scalar" | "List" | "Composite")
+      attr_accessor values: ::Array[Types::Slot]
+      attr_accessor sub_slots: ::Hash[::String, Types::Slot]
+      SENSITIVE: []
+    end
+
+    class StartConversationRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_alias_id: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor conversation_mode: ("AUDIO" | "TEXT")
+      attr_accessor request_event_stream: Types::StartConversationRequestEventStream
+      SENSITIVE: []
+    end
+
+    class StartConversationResponse
+      attr_accessor response_event_stream: Types::StartConversationResponseEventStream
+      SENSITIVE: []
+    end
+
+    class TextInputEvent
+      attr_accessor text: ::String
+      attr_accessor event_id: ::String
+      attr_accessor client_timestamp_millis: ::Integer
+      attr_accessor event_type: untyped
+      SENSITIVE: [:text]
+    end
+
+    class TextResponseEvent
+      attr_accessor messages: ::Array[Types::Message]
+      attr_accessor event_id: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class TranscriptEvent
+      attr_accessor transcript: ::String
+      attr_accessor event_id: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class Value
+      attr_accessor original_value: ::String
+      attr_accessor interpreted_value: ::String
+      attr_accessor resolved_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StartConversationRequestEventStream < Enumerator[untyped, untyped]
+      def event_types: () -> [:configuration_event, :audio_input_event, :dtmf_input_event, :text_input_event, :playback_completion_event, :disconnection_event]
+    end
+
+    class StartConversationResponseEventStream < Enumerator[untyped, untyped]
+      def event_types: () -> [:playback_interruption_event, :transcript_event, :intent_result_event, :text_response_event, :audio_response_event, :heartbeat_event, :access_denied_exception, :resource_not_found_exception, :validation_exception, :throttling_exception, :internal_server_exception, :conflict_exception, :dependency_failed_exception, :bad_gateway_exception]
+    end
+  end
+end

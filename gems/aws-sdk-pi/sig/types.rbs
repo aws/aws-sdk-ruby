@@ -1,0 +1,356 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::PI
+  module Types
+
+    class AnalysisReport
+      attr_accessor analysis_report_id: ::String
+      attr_accessor identifier: ::String
+      attr_accessor service_type: ("RDS" | "DOCDB")
+      attr_accessor create_time: ::Time
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED")
+      attr_accessor insights: ::Array[Types::Insight]
+      SENSITIVE: []
+    end
+
+    class AnalysisReportSummary
+      attr_accessor analysis_report_id: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreatePerformanceAnalysisReportRequest
+      attr_accessor service_type: ("RDS" | "DOCDB")
+      attr_accessor identifier: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreatePerformanceAnalysisReportResponse
+      attr_accessor analysis_report_id: ::String
+      SENSITIVE: []
+    end
+
+    class Data
+      attr_accessor performance_insights_metric: Types::PerformanceInsightsMetric
+      SENSITIVE: []
+    end
+
+    class DataPoint
+      attr_accessor timestamp: ::Time
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class DeletePerformanceAnalysisReportRequest
+      attr_accessor service_type: ("RDS" | "DOCDB")
+      attr_accessor identifier: ::String
+      attr_accessor analysis_report_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePerformanceAnalysisReportResponse < Aws::EmptyStructure
+    end
+
+    class DescribeDimensionKeysRequest
+      attr_accessor service_type: ("RDS" | "DOCDB")
+      attr_accessor identifier: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor metric: ::String
+      attr_accessor period_in_seconds: ::Integer
+      attr_accessor group_by: Types::DimensionGroup
+      attr_accessor additional_metrics: ::Array[::String]
+      attr_accessor partition_by: Types::DimensionGroup
+      attr_accessor filter: ::Hash[::String, ::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDimensionKeysResponse
+      attr_accessor aligned_start_time: ::Time
+      attr_accessor aligned_end_time: ::Time
+      attr_accessor partition_keys: ::Array[Types::ResponsePartitionKey]
+      attr_accessor keys: ::Array[Types::DimensionKeyDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DimensionDetail
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DimensionGroup
+      attr_accessor group: ::String
+      attr_accessor dimensions: ::Array[::String]
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DimensionGroupDetail
+      attr_accessor group: ::String
+      attr_accessor dimensions: ::Array[Types::DimensionDetail]
+      SENSITIVE: []
+    end
+
+    class DimensionKeyDescription
+      attr_accessor dimensions: ::Hash[::String, ::String]
+      attr_accessor total: ::Float
+      attr_accessor additional_metrics: ::Hash[::String, ::Float]
+      attr_accessor partitions: ::Array[::Float]
+      SENSITIVE: []
+    end
+
+    class DimensionKeyDetail
+      attr_accessor value: ::String
+      attr_accessor dimension: ::String
+      attr_accessor status: ("AVAILABLE" | "PROCESSING" | "UNAVAILABLE")
+      SENSITIVE: []
+    end
+
+    class FeatureMetadata
+      attr_accessor status: ("ENABLED" | "DISABLED" | "UNSUPPORTED" | "ENABLED_PENDING_REBOOT" | "DISABLED_PENDING_REBOOT" | "UNKNOWN")
+      SENSITIVE: []
+    end
+
+    class GetDimensionKeyDetailsRequest
+      attr_accessor service_type: ("RDS" | "DOCDB")
+      attr_accessor identifier: ::String
+      attr_accessor group: ::String
+      attr_accessor group_identifier: ::String
+      attr_accessor requested_dimensions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetDimensionKeyDetailsResponse
+      attr_accessor dimensions: ::Array[Types::DimensionKeyDetail]
+      SENSITIVE: []
+    end
+
+    class GetPerformanceAnalysisReportRequest
+      attr_accessor service_type: ("RDS" | "DOCDB")
+      attr_accessor identifier: ::String
+      attr_accessor analysis_report_id: ::String
+      attr_accessor text_format: ("PLAIN_TEXT" | "MARKDOWN")
+      attr_accessor accept_language: ("EN_US")
+      SENSITIVE: []
+    end
+
+    class GetPerformanceAnalysisReportResponse
+      attr_accessor analysis_report: Types::AnalysisReport
+      SENSITIVE: []
+    end
+
+    class GetResourceMetadataRequest
+      attr_accessor service_type: ("RDS" | "DOCDB")
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourceMetadataResponse
+      attr_accessor identifier: ::String
+      attr_accessor features: ::Hash[::String, Types::FeatureMetadata]
+      SENSITIVE: []
+    end
+
+    class GetResourceMetricsRequest
+      attr_accessor service_type: ("RDS" | "DOCDB")
+      attr_accessor identifier: ::String
+      attr_accessor metric_queries: ::Array[Types::MetricQuery]
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor period_in_seconds: ::Integer
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor period_alignment: ("END_TIME" | "START_TIME")
+      SENSITIVE: []
+    end
+
+    class GetResourceMetricsResponse
+      attr_accessor aligned_start_time: ::Time
+      attr_accessor aligned_end_time: ::Time
+      attr_accessor identifier: ::String
+      attr_accessor metric_list: ::Array[Types::MetricKeyDataPoints]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class Insight
+      attr_accessor insight_id: ::String
+      attr_accessor insight_type: ::String
+      attr_accessor context: ("CAUSAL" | "CONTEXTUAL")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor severity: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor supporting_insights: ::Array[Types::Insight]
+      attr_accessor description: ::String
+      attr_accessor recommendations: ::Array[Types::Recommendation]
+      attr_accessor insight_data: ::Array[Types::Data]
+      attr_accessor baseline_data: ::Array[Types::Data]
+      SENSITIVE: [:description]
+    end
+
+    class InternalServiceError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidArgumentException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAvailableResourceDimensionsRequest
+      attr_accessor service_type: ("RDS" | "DOCDB")
+      attr_accessor identifier: ::String
+      attr_accessor metrics: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAvailableResourceDimensionsResponse
+      attr_accessor metric_dimensions: ::Array[Types::MetricDimensionGroups]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAvailableResourceMetricsRequest
+      attr_accessor service_type: ("RDS" | "DOCDB")
+      attr_accessor identifier: ::String
+      attr_accessor metric_types: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAvailableResourceMetricsResponse
+      attr_accessor metrics: ::Array[Types::ResponseResourceMetric]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPerformanceAnalysisReportsRequest
+      attr_accessor service_type: ("RDS" | "DOCDB")
+      attr_accessor identifier: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor list_tags: bool
+      SENSITIVE: []
+    end
+
+    class ListPerformanceAnalysisReportsResponse
+      attr_accessor analysis_reports: ::Array[Types::AnalysisReportSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor service_type: ("RDS" | "DOCDB")
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class MetricDimensionGroups
+      attr_accessor metric: ::String
+      attr_accessor groups: ::Array[Types::DimensionGroupDetail]
+      SENSITIVE: []
+    end
+
+    class MetricKeyDataPoints
+      attr_accessor key: Types::ResponseResourceMetricKey
+      attr_accessor data_points: ::Array[Types::DataPoint]
+      SENSITIVE: []
+    end
+
+    class MetricQuery
+      attr_accessor metric: ::String
+      attr_accessor group_by: Types::DimensionGroup
+      attr_accessor filter: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class NotAuthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PerformanceInsightsMetric
+      attr_accessor metric: ::String
+      attr_accessor display_name: ::String
+      attr_accessor dimensions: ::Hash[::String, ::String]
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class Recommendation
+      attr_accessor recommendation_id: ::String
+      attr_accessor recommendation_description: ::String
+      SENSITIVE: [:recommendation_description]
+    end
+
+    class ResponsePartitionKey
+      attr_accessor dimensions: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ResponseResourceMetric
+      attr_accessor metric: ::String
+      attr_accessor description: ::String
+      attr_accessor unit: ::String
+      SENSITIVE: []
+    end
+
+    class ResponseResourceMetricKey
+      attr_accessor metric: ::String
+      attr_accessor dimensions: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor service_type: ("RDS" | "DOCDB")
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UntagResourceRequest
+      attr_accessor service_type: ("RDS" | "DOCDB")
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+  end
+end

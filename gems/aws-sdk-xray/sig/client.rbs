@@ -1,0 +1,525 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module XRay
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchGetTracesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetTracesResult]
+        def traces: () -> ::Array[Types::Trace]
+        def unprocessed_trace_ids: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#batch_get_traces-instance_method
+      def batch_get_traces: (
+                              trace_ids: Array[::String],
+                              ?next_token: ::String
+                            ) -> _BatchGetTracesResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetTracesResponseSuccess
+
+      interface _CreateGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGroupResult]
+        def group: () -> Types::Group
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#create_group-instance_method
+      def create_group: (
+                          group_name: ::String,
+                          ?filter_expression: ::String,
+                          ?insights_configuration: {
+                            insights_enabled: bool?,
+                            notifications_enabled: bool?
+                          },
+                          ?tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _CreateGroupResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGroupResponseSuccess
+
+      interface _CreateSamplingRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSamplingRuleResult]
+        def sampling_rule_record: () -> Types::SamplingRuleRecord
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#create_sampling_rule-instance_method
+      def create_sampling_rule: (
+                                  sampling_rule: {
+                                    rule_name: ::String?,
+                                    rule_arn: ::String?,
+                                    resource_arn: ::String,
+                                    priority: ::Integer,
+                                    fixed_rate: ::Float,
+                                    reservoir_size: ::Integer,
+                                    service_name: ::String,
+                                    service_type: ::String,
+                                    host: ::String,
+                                    http_method: ::String,
+                                    url_path: ::String,
+                                    version: ::Integer,
+                                    attributes: Hash[::String, ::String]?
+                                  },
+                                  ?tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String
+                                    },
+                                  ]
+                                ) -> _CreateSamplingRuleResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSamplingRuleResponseSuccess
+
+      interface _DeleteGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGroupResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#delete_group-instance_method
+      def delete_group: (
+                          ?group_name: ::String,
+                          ?group_arn: ::String
+                        ) -> _DeleteGroupResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGroupResponseSuccess
+
+      interface _DeleteResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourcePolicyResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#delete_resource_policy-instance_method
+      def delete_resource_policy: (
+                                    policy_name: ::String,
+                                    ?policy_revision_id: ::String
+                                  ) -> _DeleteResourcePolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourcePolicyResponseSuccess
+
+      interface _DeleteSamplingRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSamplingRuleResult]
+        def sampling_rule_record: () -> Types::SamplingRuleRecord
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#delete_sampling_rule-instance_method
+      def delete_sampling_rule: (
+                                  ?rule_name: ::String,
+                                  ?rule_arn: ::String
+                                ) -> _DeleteSamplingRuleResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSamplingRuleResponseSuccess
+
+      interface _GetEncryptionConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEncryptionConfigResult]
+        def encryption_config: () -> Types::EncryptionConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#get_encryption_config-instance_method
+      def get_encryption_config: (
+                                 ) -> _GetEncryptionConfigResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEncryptionConfigResponseSuccess
+
+      interface _GetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGroupResult]
+        def group: () -> Types::Group
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#get_group-instance_method
+      def get_group: (
+                       ?group_name: ::String,
+                       ?group_arn: ::String
+                     ) -> _GetGroupResponseSuccess
+                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGroupResponseSuccess
+
+      interface _GetGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGroupsResult]
+        def groups: () -> ::Array[Types::GroupSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#get_groups-instance_method
+      def get_groups: (
+                        ?next_token: ::String
+                      ) -> _GetGroupsResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGroupsResponseSuccess
+
+      interface _GetInsightResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInsightResult]
+        def insight: () -> Types::Insight
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#get_insight-instance_method
+      def get_insight: (
+                         insight_id: ::String
+                       ) -> _GetInsightResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInsightResponseSuccess
+
+      interface _GetInsightEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInsightEventsResult]
+        def insight_events: () -> ::Array[Types::InsightEvent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#get_insight_events-instance_method
+      def get_insight_events: (
+                                insight_id: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _GetInsightEventsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInsightEventsResponseSuccess
+
+      interface _GetInsightImpactGraphResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInsightImpactGraphResult]
+        def insight_id: () -> ::String
+        def start_time: () -> ::Time
+        def end_time: () -> ::Time
+        def service_graph_start_time: () -> ::Time
+        def service_graph_end_time: () -> ::Time
+        def services: () -> ::Array[Types::InsightImpactGraphService]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#get_insight_impact_graph-instance_method
+      def get_insight_impact_graph: (
+                                      insight_id: ::String,
+                                      start_time: ::Time,
+                                      end_time: ::Time,
+                                      ?next_token: ::String
+                                    ) -> _GetInsightImpactGraphResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInsightImpactGraphResponseSuccess
+
+      interface _GetInsightSummariesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInsightSummariesResult]
+        def insight_summaries: () -> ::Array[Types::InsightSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#get_insight_summaries-instance_method
+      def get_insight_summaries: (
+                                   ?states: Array[("ACTIVE" | "CLOSED")],
+                                   ?group_arn: ::String,
+                                   ?group_name: ::String,
+                                   start_time: ::Time,
+                                   end_time: ::Time,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _GetInsightSummariesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInsightSummariesResponseSuccess
+
+      interface _GetSamplingRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSamplingRulesResult]
+        def sampling_rule_records: () -> ::Array[Types::SamplingRuleRecord]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#get_sampling_rules-instance_method
+      def get_sampling_rules: (
+                                ?next_token: ::String
+                              ) -> _GetSamplingRulesResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSamplingRulesResponseSuccess
+
+      interface _GetSamplingStatisticSummariesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSamplingStatisticSummariesResult]
+        def sampling_statistic_summaries: () -> ::Array[Types::SamplingStatisticSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#get_sampling_statistic_summaries-instance_method
+      def get_sampling_statistic_summaries: (
+                                              ?next_token: ::String
+                                            ) -> _GetSamplingStatisticSummariesResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSamplingStatisticSummariesResponseSuccess
+
+      interface _GetSamplingTargetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSamplingTargetsResult]
+        def sampling_target_documents: () -> ::Array[Types::SamplingTargetDocument]
+        def last_rule_modification: () -> ::Time
+        def unprocessed_statistics: () -> ::Array[Types::UnprocessedStatistics]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#get_sampling_targets-instance_method
+      def get_sampling_targets: (
+                                  sampling_statistics_documents: Array[
+                                    {
+                                      rule_name: ::String,
+                                      client_id: ::String,
+                                      timestamp: ::Time,
+                                      request_count: ::Integer,
+                                      sampled_count: ::Integer,
+                                      borrow_count: ::Integer?
+                                    },
+                                  ]
+                                ) -> _GetSamplingTargetsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSamplingTargetsResponseSuccess
+
+      interface _GetServiceGraphResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceGraphResult]
+        def start_time: () -> ::Time
+        def end_time: () -> ::Time
+        def services: () -> ::Array[Types::Service]
+        def contains_old_group_versions: () -> bool
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#get_service_graph-instance_method
+      def get_service_graph: (
+                               start_time: ::Time,
+                               end_time: ::Time,
+                               ?group_name: ::String,
+                               ?group_arn: ::String,
+                               ?next_token: ::String
+                             ) -> _GetServiceGraphResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceGraphResponseSuccess
+
+      interface _GetTimeSeriesServiceStatisticsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTimeSeriesServiceStatisticsResult]
+        def time_series_service_statistics: () -> ::Array[Types::TimeSeriesServiceStatistics]
+        def contains_old_group_versions: () -> bool
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#get_time_series_service_statistics-instance_method
+      def get_time_series_service_statistics: (
+                                                start_time: ::Time,
+                                                end_time: ::Time,
+                                                ?group_name: ::String,
+                                                ?group_arn: ::String,
+                                                ?entity_selector_expression: ::String,
+                                                ?period: ::Integer,
+                                                ?forecast_statistics: bool,
+                                                ?next_token: ::String
+                                              ) -> _GetTimeSeriesServiceStatisticsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTimeSeriesServiceStatisticsResponseSuccess
+
+      interface _GetTraceGraphResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTraceGraphResult]
+        def services: () -> ::Array[Types::Service]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#get_trace_graph-instance_method
+      def get_trace_graph: (
+                             trace_ids: Array[::String],
+                             ?next_token: ::String
+                           ) -> _GetTraceGraphResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTraceGraphResponseSuccess
+
+      interface _GetTraceSummariesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTraceSummariesResult]
+        def trace_summaries: () -> ::Array[Types::TraceSummary]
+        def approximate_time: () -> ::Time
+        def traces_processed_count: () -> ::Integer
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#get_trace_summaries-instance_method
+      def get_trace_summaries: (
+                                 start_time: ::Time,
+                                 end_time: ::Time,
+                                 ?time_range_type: ("TraceId" | "Event" | "Service"),
+                                 ?sampling: bool,
+                                 ?sampling_strategy: {
+                                   name: ("PartialScan" | "FixedRate")?,
+                                   value: ::Float?
+                                 },
+                                 ?filter_expression: ::String,
+                                 ?next_token: ::String
+                               ) -> _GetTraceSummariesResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTraceSummariesResponseSuccess
+
+      interface _ListResourcePoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourcePoliciesResult]
+        def resource_policies: () -> ::Array[Types::ResourcePolicy]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#list_resource_policies-instance_method
+      def list_resource_policies: (
+                                    ?next_token: ::String
+                                  ) -> _ListResourcePoliciesResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourcePoliciesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String,
+                                    ?next_token: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutEncryptionConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutEncryptionConfigResult]
+        def encryption_config: () -> Types::EncryptionConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#put_encryption_config-instance_method
+      def put_encryption_config: (
+                                   ?key_id: ::String,
+                                   type: ("NONE" | "KMS")
+                                 ) -> _PutEncryptionConfigResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEncryptionConfigResponseSuccess
+
+      interface _PutResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyResult]
+        def resource_policy: () -> Types::ResourcePolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#put_resource_policy-instance_method
+      def put_resource_policy: (
+                                 policy_name: ::String,
+                                 policy_document: ::String,
+                                 ?policy_revision_id: ::String,
+                                 ?bypass_policy_lockout_check: bool
+                               ) -> _PutResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
+
+      interface _PutTelemetryRecordsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutTelemetryRecordsResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#put_telemetry_records-instance_method
+      def put_telemetry_records: (
+                                   telemetry_records: Array[
+                                     {
+                                       timestamp: ::Time,
+                                       segments_received_count: ::Integer?,
+                                       segments_sent_count: ::Integer?,
+                                       segments_spillover_count: ::Integer?,
+                                       segments_rejected_count: ::Integer?,
+                                       backend_connection_errors: {
+                                         timeout_count: ::Integer?,
+                                         connection_refused_count: ::Integer?,
+                                         http_code_4_xx_count: ::Integer?,
+                                         http_code_5_xx_count: ::Integer?,
+                                         unknown_host_count: ::Integer?,
+                                         other_count: ::Integer?
+                                       }?
+                                     },
+                                   ],
+                                   ?ec2_instance_id: ::String,
+                                   ?hostname: ::String,
+                                   ?resource_arn: ::String
+                                 ) -> _PutTelemetryRecordsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutTelemetryRecordsResponseSuccess
+
+      interface _PutTraceSegmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutTraceSegmentsResult]
+        def unprocessed_trace_segments: () -> ::Array[Types::UnprocessedTraceSegment]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#put_trace_segments-instance_method
+      def put_trace_segments: (
+                                trace_segment_documents: Array[::String]
+                              ) -> _PutTraceSegmentsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutTraceSegmentsResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGroupResult]
+        def group: () -> Types::Group
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#update_group-instance_method
+      def update_group: (
+                          ?group_name: ::String,
+                          ?group_arn: ::String,
+                          ?filter_expression: ::String,
+                          ?insights_configuration: {
+                            insights_enabled: bool?,
+                            notifications_enabled: bool?
+                          }
+                        ) -> _UpdateGroupResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGroupResponseSuccess
+
+      interface _UpdateSamplingRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSamplingRuleResult]
+        def sampling_rule_record: () -> Types::SamplingRuleRecord
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#update_sampling_rule-instance_method
+      def update_sampling_rule: (
+                                  sampling_rule_update: {
+                                    rule_name: ::String?,
+                                    rule_arn: ::String?,
+                                    resource_arn: ::String?,
+                                    priority: ::Integer?,
+                                    fixed_rate: ::Float?,
+                                    reservoir_size: ::Integer?,
+                                    host: ::String?,
+                                    service_name: ::String?,
+                                    service_type: ::String?,
+                                    http_method: ::String?,
+                                    url_path: ::String?,
+                                    attributes: Hash[::String, ::String]?
+                                  }
+                                ) -> _UpdateSamplingRuleResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSamplingRuleResponseSuccess
+    end
+  end
+end
+

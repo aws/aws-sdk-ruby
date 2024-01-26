@@ -1,0 +1,291 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SimSpaceWeaver
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SimSpaceWeaver/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSnapshotOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SimSpaceWeaver/Client.html#create_snapshot-instance_method
+      def create_snapshot: (
+                             destination: {
+                               bucket_name: ::String,
+                               object_key_prefix: ::String?
+                             },
+                             simulation: ::String
+                           ) -> _CreateSnapshotResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSnapshotResponseSuccess
+
+      interface _DeleteAppResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAppOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SimSpaceWeaver/Client.html#delete_app-instance_method
+      def delete_app: (
+                        app: ::String,
+                        domain: ::String,
+                        simulation: ::String
+                      ) -> _DeleteAppResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAppResponseSuccess
+
+      interface _DeleteSimulationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSimulationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SimSpaceWeaver/Client.html#delete_simulation-instance_method
+      def delete_simulation: (
+                               simulation: ::String
+                             ) -> _DeleteSimulationResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSimulationResponseSuccess
+
+      interface _DescribeAppResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAppOutput]
+        def description: () -> ::String
+        def domain: () -> ::String
+        def endpoint_info: () -> Types::SimulationAppEndpointInfo
+        def launch_overrides: () -> Types::LaunchOverrides
+        def name: () -> ::String
+        def simulation: () -> ::String
+        def status: () -> ("STARTING" | "STARTED" | "STOPPING" | "STOPPED" | "ERROR" | "UNKNOWN")
+        def target_status: () -> ("UNKNOWN" | "STARTED" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SimSpaceWeaver/Client.html#describe_app-instance_method
+      def describe_app: (
+                          app: ::String,
+                          domain: ::String,
+                          simulation: ::String
+                        ) -> _DescribeAppResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAppResponseSuccess
+
+      interface _DescribeSimulationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSimulationOutput]
+        def arn: () -> ::String
+        def creation_time: () -> ::Time
+        def description: () -> ::String
+        def execution_id: () -> ::String
+        def live_simulation_state: () -> Types::LiveSimulationState
+        def logging_configuration: () -> Types::LoggingConfiguration
+        def maximum_duration: () -> ::String
+        def name: () -> ::String
+        def role_arn: () -> ::String
+        def schema_error: () -> ::String
+        def schema_s3_location: () -> Types::S3Location
+        def snapshot_s3_location: () -> Types::S3Location
+        def start_error: () -> ::String
+        def status: () -> ("UNKNOWN" | "STARTING" | "STARTED" | "STOPPING" | "STOPPED" | "FAILED" | "DELETING" | "DELETED" | "SNAPSHOT_IN_PROGRESS")
+        def target_status: () -> ("UNKNOWN" | "STARTED" | "STOPPED" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SimSpaceWeaver/Client.html#describe_simulation-instance_method
+      def describe_simulation: (
+                                 simulation: ::String
+                               ) -> _DescribeSimulationResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSimulationResponseSuccess
+
+      interface _ListAppsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAppsOutput]
+        def apps: () -> ::Array[Types::SimulationAppMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SimSpaceWeaver/Client.html#list_apps-instance_method
+      def list_apps: (
+                       ?domain: ::String,
+                       ?max_results: ::Integer,
+                       ?next_token: ::String,
+                       simulation: ::String
+                     ) -> _ListAppsResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAppsResponseSuccess
+
+      interface _ListSimulationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSimulationsOutput]
+        def next_token: () -> ::String
+        def simulations: () -> ::Array[Types::SimulationMetadata]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SimSpaceWeaver/Client.html#list_simulations-instance_method
+      def list_simulations: (
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _ListSimulationsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSimulationsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SimSpaceWeaver/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _StartAppResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartAppOutput]
+        def domain: () -> ::String
+        def name: () -> ::String
+        def simulation: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SimSpaceWeaver/Client.html#start_app-instance_method
+      def start_app: (
+                       ?client_token: ::String,
+                       ?description: ::String,
+                       domain: ::String,
+                       ?launch_overrides: {
+                         launch_commands: Array[::String]?
+                       },
+                       name: ::String,
+                       simulation: ::String
+                     ) -> _StartAppResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAppResponseSuccess
+
+      interface _StartClockResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartClockOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SimSpaceWeaver/Client.html#start_clock-instance_method
+      def start_clock: (
+                         simulation: ::String
+                       ) -> _StartClockResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartClockResponseSuccess
+
+      interface _StartSimulationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartSimulationOutput]
+        def arn: () -> ::String
+        def creation_time: () -> ::Time
+        def execution_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SimSpaceWeaver/Client.html#start_simulation-instance_method
+      def start_simulation: (
+                              ?client_token: ::String,
+                              ?description: ::String,
+                              ?maximum_duration: ::String,
+                              name: ::String,
+                              role_arn: ::String,
+                              ?schema_s3_location: {
+                                bucket_name: ::String,
+                                object_key: ::String
+                              },
+                              ?snapshot_s3_location: {
+                                bucket_name: ::String,
+                                object_key: ::String
+                              },
+                              ?tags: Hash[::String, ::String]
+                            ) -> _StartSimulationResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartSimulationResponseSuccess
+
+      interface _StopAppResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopAppOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SimSpaceWeaver/Client.html#stop_app-instance_method
+      def stop_app: (
+                      app: ::String,
+                      domain: ::String,
+                      simulation: ::String
+                    ) -> _StopAppResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopAppResponseSuccess
+
+      interface _StopClockResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopClockOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SimSpaceWeaver/Client.html#stop_clock-instance_method
+      def stop_clock: (
+                        simulation: ::String
+                      ) -> _StopClockResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopClockResponseSuccess
+
+      interface _StopSimulationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopSimulationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SimSpaceWeaver/Client.html#stop_simulation-instance_method
+      def stop_simulation: (
+                             simulation: ::String
+                           ) -> _StopSimulationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopSimulationResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SimSpaceWeaver/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SimSpaceWeaver/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+    end
+  end
+end
+

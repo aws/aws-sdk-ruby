@@ -1,0 +1,269 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CodeStarNotifications
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarNotifications/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateNotificationRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateNotificationRuleResult]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarNotifications/Client.html#create_notification_rule-instance_method
+      def create_notification_rule: (
+                                      name: ::String,
+                                      event_type_ids: Array[::String],
+                                      resource: ::String,
+                                      targets: Array[
+                                        {
+                                          target_type: ::String?,
+                                          target_address: ::String?
+                                        },
+                                      ],
+                                      detail_type: ("BASIC" | "FULL"),
+                                      ?client_request_token: ::String,
+                                      ?tags: Hash[::String, ::String],
+                                      ?status: ("ENABLED" | "DISABLED")
+                                    ) -> _CreateNotificationRuleResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNotificationRuleResponseSuccess
+
+      interface _DeleteNotificationRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteNotificationRuleResult]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarNotifications/Client.html#delete_notification_rule-instance_method
+      def delete_notification_rule: (
+                                      arn: ::String
+                                    ) -> _DeleteNotificationRuleResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteNotificationRuleResponseSuccess
+
+      interface _DeleteTargetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTargetResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarNotifications/Client.html#delete_target-instance_method
+      def delete_target: (
+                           target_address: ::String,
+                           ?force_unsubscribe_all: bool
+                         ) -> _DeleteTargetResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTargetResponseSuccess
+
+      interface _DescribeNotificationRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeNotificationRuleResult]
+        def arn: () -> ::String
+        def name: () -> ::String
+        def event_types: () -> ::Array[Types::EventTypeSummary]
+        def resource: () -> ::String
+        def targets: () -> ::Array[Types::TargetSummary]
+        def detail_type: () -> ("BASIC" | "FULL")
+        def created_by: () -> ::String
+        def status: () -> ("ENABLED" | "DISABLED")
+        def created_timestamp: () -> ::Time
+        def last_modified_timestamp: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarNotifications/Client.html#describe_notification_rule-instance_method
+      def describe_notification_rule: (
+                                        arn: ::String
+                                      ) -> _DescribeNotificationRuleResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeNotificationRuleResponseSuccess
+
+      interface _ListEventTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEventTypesResult]
+        def event_types: () -> ::Array[Types::EventTypeSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarNotifications/Client.html#list_event_types-instance_method
+      def list_event_types: (
+                              ?filters: Array[
+                                {
+                                  name: ("RESOURCE_TYPE" | "SERVICE_NAME"),
+                                  value: ::String
+                                },
+                              ],
+                              ?next_token: ::String,
+                              ?max_results: ::Integer
+                            ) -> _ListEventTypesResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEventTypesResponseSuccess
+
+      interface _ListNotificationRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNotificationRulesResult]
+        def next_token: () -> ::String
+        def notification_rules: () -> ::Array[Types::NotificationRuleSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarNotifications/Client.html#list_notification_rules-instance_method
+      def list_notification_rules: (
+                                     ?filters: Array[
+                                       {
+                                         name: ("EVENT_TYPE_ID" | "CREATED_BY" | "RESOURCE" | "TARGET_ADDRESS"),
+                                         value: ::String
+                                       },
+                                     ],
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _ListNotificationRulesResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNotificationRulesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResult]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarNotifications/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTargetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTargetsResult]
+        def targets: () -> ::Array[Types::TargetSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarNotifications/Client.html#list_targets-instance_method
+      def list_targets: (
+                          ?filters: Array[
+                            {
+                              name: ("TARGET_TYPE" | "TARGET_ADDRESS" | "TARGET_STATUS"),
+                              value: ::String
+                            },
+                          ],
+                          ?next_token: ::String,
+                          ?max_results: ::Integer
+                        ) -> _ListTargetsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTargetsResponseSuccess
+
+      interface _SubscribeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SubscribeResult]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarNotifications/Client.html#subscribe-instance_method
+      def subscribe: (
+                       arn: ::String,
+                       target: {
+                         target_type: ::String?,
+                         target_address: ::String?
+                       },
+                       ?client_request_token: ::String
+                     ) -> _SubscribeResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SubscribeResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResult]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarNotifications/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UnsubscribeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UnsubscribeResult]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarNotifications/Client.html#unsubscribe-instance_method
+      def unsubscribe: (
+                         arn: ::String,
+                         target_address: ::String
+                       ) -> _UnsubscribeResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UnsubscribeResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarNotifications/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateNotificationRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNotificationRuleResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStarNotifications/Client.html#update_notification_rule-instance_method
+      def update_notification_rule: (
+                                      arn: ::String,
+                                      ?name: ::String,
+                                      ?status: ("ENABLED" | "DISABLED"),
+                                      ?event_type_ids: Array[::String],
+                                      ?targets: Array[
+                                        {
+                                          target_type: ::String?,
+                                          target_address: ::String?
+                                        },
+                                      ],
+                                      ?detail_type: ("BASIC" | "FULL")
+                                    ) -> _UpdateNotificationRuleResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNotificationRuleResponseSuccess
+    end
+  end
+end
+

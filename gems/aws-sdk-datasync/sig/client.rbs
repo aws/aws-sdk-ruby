@@ -1,0 +1,1305 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DataSync
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AddStorageSystemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddStorageSystemResponse]
+        def storage_system_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#add_storage_system-instance_method
+      def add_storage_system: (
+                                server_configuration: {
+                                  server_hostname: ::String,
+                                  server_port: ::Integer?
+                                },
+                                system_type: ("NetAppONTAP"),
+                                agent_arns: Array[::String],
+                                ?cloud_watch_log_group_arn: ::String,
+                                ?tags: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String?
+                                  },
+                                ],
+                                ?name: ::String,
+                                client_token: ::String,
+                                credentials: {
+                                  username: ::String,
+                                  password: ::String
+                                }
+                              ) -> _AddStorageSystemResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddStorageSystemResponseSuccess
+
+      interface _CancelTaskExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelTaskExecutionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#cancel_task_execution-instance_method
+      def cancel_task_execution: (
+                                   task_execution_arn: ::String
+                                 ) -> _CancelTaskExecutionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelTaskExecutionResponseSuccess
+
+      interface _CreateAgentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAgentResponse]
+        def agent_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#create_agent-instance_method
+      def create_agent: (
+                          activation_key: ::String,
+                          ?agent_name: ::String,
+                          ?tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String?
+                            },
+                          ],
+                          ?vpc_endpoint_id: ::String,
+                          ?subnet_arns: Array[::String],
+                          ?security_group_arns: Array[::String]
+                        ) -> _CreateAgentResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAgentResponseSuccess
+
+      interface _CreateLocationAzureBlobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLocationAzureBlobResponse]
+        def location_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#create_location_azure_blob-instance_method
+      def create_location_azure_blob: (
+                                        container_url: ::String,
+                                        authentication_type: ("SAS"),
+                                        ?sas_configuration: {
+                                          token: ::String
+                                        },
+                                        ?blob_type: ("BLOCK"),
+                                        ?access_tier: ("HOT" | "COOL" | "ARCHIVE"),
+                                        ?subdirectory: ::String,
+                                        agent_arns: Array[::String],
+                                        ?tags: Array[
+                                          {
+                                            key: ::String,
+                                            value: ::String?
+                                          },
+                                        ]
+                                      ) -> _CreateLocationAzureBlobResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLocationAzureBlobResponseSuccess
+
+      interface _CreateLocationEfsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLocationEfsResponse]
+        def location_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#create_location_efs-instance_method
+      def create_location_efs: (
+                                 ?subdirectory: ::String,
+                                 efs_filesystem_arn: ::String,
+                                 ec2_config: {
+                                   subnet_arn: ::String,
+                                   security_group_arns: Array[::String]
+                                 },
+                                 ?tags: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String?
+                                   },
+                                 ],
+                                 ?access_point_arn: ::String,
+                                 ?file_system_access_role_arn: ::String,
+                                 ?in_transit_encryption: ("NONE" | "TLS1_2")
+                               ) -> _CreateLocationEfsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLocationEfsResponseSuccess
+
+      interface _CreateLocationFsxLustreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLocationFsxLustreResponse]
+        def location_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#create_location_fsx_lustre-instance_method
+      def create_location_fsx_lustre: (
+                                        fsx_filesystem_arn: ::String,
+                                        security_group_arns: Array[::String],
+                                        ?subdirectory: ::String,
+                                        ?tags: Array[
+                                          {
+                                            key: ::String,
+                                            value: ::String?
+                                          },
+                                        ]
+                                      ) -> _CreateLocationFsxLustreResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLocationFsxLustreResponseSuccess
+
+      interface _CreateLocationFsxOntapResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLocationFsxOntapResponse]
+        def location_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#create_location_fsx_ontap-instance_method
+      def create_location_fsx_ontap: (
+                                       protocol: {
+                                         nfs: {
+                                           mount_options: {
+                                             version: ("AUTOMATIC" | "NFS3" | "NFS4_0" | "NFS4_1")?
+                                           }?
+                                         }?,
+                                         smb: {
+                                           domain: ::String?,
+                                           mount_options: {
+                                             version: ("AUTOMATIC" | "SMB2" | "SMB3" | "SMB1" | "SMB2_0")?
+                                           }?,
+                                           password: ::String,
+                                           user: ::String
+                                         }?
+                                       },
+                                       security_group_arns: Array[::String],
+                                       storage_virtual_machine_arn: ::String,
+                                       ?subdirectory: ::String,
+                                       ?tags: Array[
+                                         {
+                                           key: ::String,
+                                           value: ::String?
+                                         },
+                                       ]
+                                     ) -> _CreateLocationFsxOntapResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLocationFsxOntapResponseSuccess
+
+      interface _CreateLocationFsxOpenZfsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLocationFsxOpenZfsResponse]
+        def location_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#create_location_fsx_open_zfs-instance_method
+      def create_location_fsx_open_zfs: (
+                                          fsx_filesystem_arn: ::String,
+                                          protocol: {
+                                            nfs: {
+                                              mount_options: {
+                                                version: ("AUTOMATIC" | "NFS3" | "NFS4_0" | "NFS4_1")?
+                                              }?
+                                            }?,
+                                            smb: {
+                                              domain: ::String?,
+                                              mount_options: {
+                                                version: ("AUTOMATIC" | "SMB2" | "SMB3" | "SMB1" | "SMB2_0")?
+                                              }?,
+                                              password: ::String,
+                                              user: ::String
+                                            }?
+                                          },
+                                          security_group_arns: Array[::String],
+                                          ?subdirectory: ::String,
+                                          ?tags: Array[
+                                            {
+                                              key: ::String,
+                                              value: ::String?
+                                            },
+                                          ]
+                                        ) -> _CreateLocationFsxOpenZfsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLocationFsxOpenZfsResponseSuccess
+
+      interface _CreateLocationFsxWindowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLocationFsxWindowsResponse]
+        def location_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#create_location_fsx_windows-instance_method
+      def create_location_fsx_windows: (
+                                         ?subdirectory: ::String,
+                                         fsx_filesystem_arn: ::String,
+                                         security_group_arns: Array[::String],
+                                         ?tags: Array[
+                                           {
+                                             key: ::String,
+                                             value: ::String?
+                                           },
+                                         ],
+                                         user: ::String,
+                                         ?domain: ::String,
+                                         password: ::String
+                                       ) -> _CreateLocationFsxWindowsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLocationFsxWindowsResponseSuccess
+
+      interface _CreateLocationHdfsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLocationHdfsResponse]
+        def location_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#create_location_hdfs-instance_method
+      def create_location_hdfs: (
+                                  ?subdirectory: ::String,
+                                  name_nodes: Array[
+                                    {
+                                      hostname: ::String,
+                                      port: ::Integer
+                                    },
+                                  ],
+                                  ?block_size: ::Integer,
+                                  ?replication_factor: ::Integer,
+                                  ?kms_key_provider_uri: ::String,
+                                  ?qop_configuration: {
+                                    rpc_protection: ("DISABLED" | "AUTHENTICATION" | "INTEGRITY" | "PRIVACY")?,
+                                    data_transfer_protection: ("DISABLED" | "AUTHENTICATION" | "INTEGRITY" | "PRIVACY")?
+                                  },
+                                  authentication_type: ("SIMPLE" | "KERBEROS"),
+                                  ?simple_user: ::String,
+                                  ?kerberos_principal: ::String,
+                                  ?kerberos_keytab: ::String,
+                                  ?kerberos_krb_5_conf: ::String,
+                                  agent_arns: Array[::String],
+                                  ?tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String?
+                                    },
+                                  ]
+                                ) -> _CreateLocationHdfsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLocationHdfsResponseSuccess
+
+      interface _CreateLocationNfsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLocationNfsResponse]
+        def location_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#create_location_nfs-instance_method
+      def create_location_nfs: (
+                                 subdirectory: ::String,
+                                 server_hostname: ::String,
+                                 on_prem_config: {
+                                   agent_arns: Array[::String]
+                                 },
+                                 ?mount_options: {
+                                   version: ("AUTOMATIC" | "NFS3" | "NFS4_0" | "NFS4_1")?
+                                 },
+                                 ?tags: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String?
+                                   },
+                                 ]
+                               ) -> _CreateLocationNfsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLocationNfsResponseSuccess
+
+      interface _CreateLocationObjectStorageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLocationObjectStorageResponse]
+        def location_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#create_location_object_storage-instance_method
+      def create_location_object_storage: (
+                                            server_hostname: ::String,
+                                            ?server_port: ::Integer,
+                                            ?server_protocol: ("HTTPS" | "HTTP"),
+                                            ?subdirectory: ::String,
+                                            bucket_name: ::String,
+                                            ?access_key: ::String,
+                                            ?secret_key: ::String,
+                                            agent_arns: Array[::String],
+                                            ?tags: Array[
+                                              {
+                                                key: ::String,
+                                                value: ::String?
+                                              },
+                                            ],
+                                            ?server_certificate: ::String
+                                          ) -> _CreateLocationObjectStorageResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLocationObjectStorageResponseSuccess
+
+      interface _CreateLocationS3ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLocationS3Response]
+        def location_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#create_location_s3-instance_method
+      def create_location_s3: (
+                                ?subdirectory: ::String,
+                                s3_bucket_arn: ::String,
+                                ?s3_storage_class: ("STANDARD" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_INSTANT_RETRIEVAL"),
+                                s3_config: {
+                                  bucket_access_role_arn: ::String
+                                },
+                                ?agent_arns: Array[::String],
+                                ?tags: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String?
+                                  },
+                                ]
+                              ) -> _CreateLocationS3ResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLocationS3ResponseSuccess
+
+      interface _CreateLocationSmbResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLocationSmbResponse]
+        def location_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#create_location_smb-instance_method
+      def create_location_smb: (
+                                 subdirectory: ::String,
+                                 server_hostname: ::String,
+                                 user: ::String,
+                                 ?domain: ::String,
+                                 password: ::String,
+                                 agent_arns: Array[::String],
+                                 ?mount_options: {
+                                   version: ("AUTOMATIC" | "SMB2" | "SMB3" | "SMB1" | "SMB2_0")?
+                                 },
+                                 ?tags: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String?
+                                   },
+                                 ]
+                               ) -> _CreateLocationSmbResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLocationSmbResponseSuccess
+
+      interface _CreateTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTaskResponse]
+        def task_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#create_task-instance_method
+      def create_task: (
+                         source_location_arn: ::String,
+                         destination_location_arn: ::String,
+                         ?cloud_watch_log_group_arn: ::String,
+                         ?name: ::String,
+                         ?options: {
+                           verify_mode: ("POINT_IN_TIME_CONSISTENT" | "ONLY_FILES_TRANSFERRED" | "NONE")?,
+                           overwrite_mode: ("ALWAYS" | "NEVER")?,
+                           atime: ("NONE" | "BEST_EFFORT")?,
+                           mtime: ("NONE" | "PRESERVE")?,
+                           uid: ("NONE" | "INT_VALUE" | "NAME" | "BOTH")?,
+                           gid: ("NONE" | "INT_VALUE" | "NAME" | "BOTH")?,
+                           preserve_deleted_files: ("PRESERVE" | "REMOVE")?,
+                           preserve_devices: ("NONE" | "PRESERVE")?,
+                           posix_permissions: ("NONE" | "PRESERVE")?,
+                           bytes_per_second: ::Integer?,
+                           task_queueing: ("ENABLED" | "DISABLED")?,
+                           log_level: ("OFF" | "BASIC" | "TRANSFER")?,
+                           transfer_mode: ("CHANGED" | "ALL")?,
+                           security_descriptor_copy_flags: ("NONE" | "OWNER_DACL" | "OWNER_DACL_SACL")?,
+                           object_tags: ("PRESERVE" | "NONE")?
+                         },
+                         ?excludes: Array[
+                           {
+                             filter_type: ("SIMPLE_PATTERN")?,
+                             value: ::String?
+                           },
+                         ],
+                         ?schedule: {
+                           schedule_expression: ::String
+                         },
+                         ?tags: Array[
+                           {
+                             key: ::String,
+                             value: ::String?
+                           },
+                         ],
+                         ?includes: Array[
+                           {
+                             filter_type: ("SIMPLE_PATTERN")?,
+                             value: ::String?
+                           },
+                         ],
+                         ?task_report_config: {
+                           destination: {
+                             s3: {
+                               subdirectory: ::String?,
+                               s3_bucket_arn: ::String,
+                               bucket_access_role_arn: ::String
+                             }?
+                           }?,
+                           output_type: ("SUMMARY_ONLY" | "STANDARD")?,
+                           report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?,
+                           object_version_ids: ("INCLUDE" | "NONE")?,
+                           overrides: {
+                             transferred: {
+                               report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
+                             }?,
+                             verified: {
+                               report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
+                             }?,
+                             deleted: {
+                               report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
+                             }?,
+                             skipped: {
+                               report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
+                             }?
+                           }?
+                         }
+                       ) -> _CreateTaskResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTaskResponseSuccess
+
+      interface _DeleteAgentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAgentResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#delete_agent-instance_method
+      def delete_agent: (
+                          agent_arn: ::String
+                        ) -> _DeleteAgentResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAgentResponseSuccess
+
+      interface _DeleteLocationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLocationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#delete_location-instance_method
+      def delete_location: (
+                             location_arn: ::String
+                           ) -> _DeleteLocationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLocationResponseSuccess
+
+      interface _DeleteTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTaskResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#delete_task-instance_method
+      def delete_task: (
+                         task_arn: ::String
+                       ) -> _DeleteTaskResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTaskResponseSuccess
+
+      interface _DescribeAgentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAgentResponse]
+        def agent_arn: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("ONLINE" | "OFFLINE")
+        def last_connection_time: () -> ::Time
+        def creation_time: () -> ::Time
+        def endpoint_type: () -> ("PUBLIC" | "PRIVATE_LINK" | "FIPS")
+        def private_link_config: () -> Types::PrivateLinkConfig
+        def platform: () -> Types::Platform
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_agent-instance_method
+      def describe_agent: (
+                            agent_arn: ::String
+                          ) -> _DescribeAgentResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAgentResponseSuccess
+
+      interface _DescribeDiscoveryJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDiscoveryJobResponse]
+        def storage_system_arn: () -> ::String
+        def discovery_job_arn: () -> ::String
+        def collection_duration_minutes: () -> ::Integer
+        def status: () -> ("RUNNING" | "WARNING" | "TERMINATED" | "FAILED" | "STOPPED" | "COMPLETED" | "COMPLETED_WITH_ISSUES")
+        def job_start_time: () -> ::Time
+        def job_end_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_discovery_job-instance_method
+      def describe_discovery_job: (
+                                    discovery_job_arn: ::String
+                                  ) -> _DescribeDiscoveryJobResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDiscoveryJobResponseSuccess
+
+      interface _DescribeLocationAzureBlobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLocationAzureBlobResponse]
+        def location_arn: () -> ::String
+        def location_uri: () -> ::String
+        def authentication_type: () -> ("SAS")
+        def blob_type: () -> ("BLOCK")
+        def access_tier: () -> ("HOT" | "COOL" | "ARCHIVE")
+        def agent_arns: () -> ::Array[::String]
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_location_azure_blob-instance_method
+      def describe_location_azure_blob: (
+                                          location_arn: ::String
+                                        ) -> _DescribeLocationAzureBlobResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLocationAzureBlobResponseSuccess
+
+      interface _DescribeLocationEfsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLocationEfsResponse]
+        def location_arn: () -> ::String
+        def location_uri: () -> ::String
+        def ec2_config: () -> Types::Ec2Config
+        def creation_time: () -> ::Time
+        def access_point_arn: () -> ::String
+        def file_system_access_role_arn: () -> ::String
+        def in_transit_encryption: () -> ("NONE" | "TLS1_2")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_location_efs-instance_method
+      def describe_location_efs: (
+                                   location_arn: ::String
+                                 ) -> _DescribeLocationEfsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLocationEfsResponseSuccess
+
+      interface _DescribeLocationFsxLustreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLocationFsxLustreResponse]
+        def location_arn: () -> ::String
+        def location_uri: () -> ::String
+        def security_group_arns: () -> ::Array[::String]
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_location_fsx_lustre-instance_method
+      def describe_location_fsx_lustre: (
+                                          location_arn: ::String
+                                        ) -> _DescribeLocationFsxLustreResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLocationFsxLustreResponseSuccess
+
+      interface _DescribeLocationFsxOntapResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLocationFsxOntapResponse]
+        def creation_time: () -> ::Time
+        def location_arn: () -> ::String
+        def location_uri: () -> ::String
+        def protocol: () -> Types::FsxProtocol
+        def security_group_arns: () -> ::Array[::String]
+        def storage_virtual_machine_arn: () -> ::String
+        def fsx_filesystem_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_location_fsx_ontap-instance_method
+      def describe_location_fsx_ontap: (
+                                         location_arn: ::String
+                                       ) -> _DescribeLocationFsxOntapResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLocationFsxOntapResponseSuccess
+
+      interface _DescribeLocationFsxOpenZfsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLocationFsxOpenZfsResponse]
+        def location_arn: () -> ::String
+        def location_uri: () -> ::String
+        def security_group_arns: () -> ::Array[::String]
+        def protocol: () -> Types::FsxProtocol
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_location_fsx_open_zfs-instance_method
+      def describe_location_fsx_open_zfs: (
+                                            location_arn: ::String
+                                          ) -> _DescribeLocationFsxOpenZfsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLocationFsxOpenZfsResponseSuccess
+
+      interface _DescribeLocationFsxWindowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLocationFsxWindowsResponse]
+        def location_arn: () -> ::String
+        def location_uri: () -> ::String
+        def security_group_arns: () -> ::Array[::String]
+        def creation_time: () -> ::Time
+        def user: () -> ::String
+        def domain: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_location_fsx_windows-instance_method
+      def describe_location_fsx_windows: (
+                                           location_arn: ::String
+                                         ) -> _DescribeLocationFsxWindowsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLocationFsxWindowsResponseSuccess
+
+      interface _DescribeLocationHdfsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLocationHdfsResponse]
+        def location_arn: () -> ::String
+        def location_uri: () -> ::String
+        def name_nodes: () -> ::Array[Types::HdfsNameNode]
+        def block_size: () -> ::Integer
+        def replication_factor: () -> ::Integer
+        def kms_key_provider_uri: () -> ::String
+        def qop_configuration: () -> Types::QopConfiguration
+        def authentication_type: () -> ("SIMPLE" | "KERBEROS")
+        def simple_user: () -> ::String
+        def kerberos_principal: () -> ::String
+        def agent_arns: () -> ::Array[::String]
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_location_hdfs-instance_method
+      def describe_location_hdfs: (
+                                    location_arn: ::String
+                                  ) -> _DescribeLocationHdfsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLocationHdfsResponseSuccess
+
+      interface _DescribeLocationNfsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLocationNfsResponse]
+        def location_arn: () -> ::String
+        def location_uri: () -> ::String
+        def on_prem_config: () -> Types::OnPremConfig
+        def mount_options: () -> Types::NfsMountOptions
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_location_nfs-instance_method
+      def describe_location_nfs: (
+                                   location_arn: ::String
+                                 ) -> _DescribeLocationNfsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLocationNfsResponseSuccess
+
+      interface _DescribeLocationObjectStorageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLocationObjectStorageResponse]
+        def location_arn: () -> ::String
+        def location_uri: () -> ::String
+        def access_key: () -> ::String
+        def server_port: () -> ::Integer
+        def server_protocol: () -> ("HTTPS" | "HTTP")
+        def agent_arns: () -> ::Array[::String]
+        def creation_time: () -> ::Time
+        def server_certificate: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_location_object_storage-instance_method
+      def describe_location_object_storage: (
+                                              location_arn: ::String
+                                            ) -> _DescribeLocationObjectStorageResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLocationObjectStorageResponseSuccess
+
+      interface _DescribeLocationS3ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLocationS3Response]
+        def location_arn: () -> ::String
+        def location_uri: () -> ::String
+        def s3_storage_class: () -> ("STANDARD" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_INSTANT_RETRIEVAL")
+        def s3_config: () -> Types::S3Config
+        def agent_arns: () -> ::Array[::String]
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_location_s3-instance_method
+      def describe_location_s3: (
+                                  location_arn: ::String
+                                ) -> _DescribeLocationS3ResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLocationS3ResponseSuccess
+
+      interface _DescribeLocationSmbResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLocationSmbResponse]
+        def location_arn: () -> ::String
+        def location_uri: () -> ::String
+        def agent_arns: () -> ::Array[::String]
+        def user: () -> ::String
+        def domain: () -> ::String
+        def mount_options: () -> Types::SmbMountOptions
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_location_smb-instance_method
+      def describe_location_smb: (
+                                   location_arn: ::String
+                                 ) -> _DescribeLocationSmbResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLocationSmbResponseSuccess
+
+      interface _DescribeStorageSystemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStorageSystemResponse]
+        def storage_system_arn: () -> ::String
+        def server_configuration: () -> Types::DiscoveryServerConfiguration
+        def system_type: () -> ("NetAppONTAP")
+        def agent_arns: () -> ::Array[::String]
+        def name: () -> ::String
+        def error_message: () -> ::String
+        def connectivity_status: () -> ("PASS" | "FAIL" | "UNKNOWN")
+        def cloud_watch_log_group_arn: () -> ::String
+        def creation_time: () -> ::Time
+        def secrets_manager_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_storage_system-instance_method
+      def describe_storage_system: (
+                                     storage_system_arn: ::String
+                                   ) -> _DescribeStorageSystemResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStorageSystemResponseSuccess
+
+      interface _DescribeStorageSystemResourceMetricsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStorageSystemResourceMetricsResponse]
+        def metrics: () -> ::Array[Types::ResourceMetrics]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_storage_system_resource_metrics-instance_method
+      def describe_storage_system_resource_metrics: (
+                                                      discovery_job_arn: ::String,
+                                                      resource_type: ("SVM" | "VOLUME" | "CLUSTER"),
+                                                      resource_id: ::String,
+                                                      ?start_time: ::Time,
+                                                      ?end_time: ::Time,
+                                                      ?max_results: ::Integer,
+                                                      ?next_token: ::String
+                                                    ) -> _DescribeStorageSystemResourceMetricsResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStorageSystemResourceMetricsResponseSuccess
+
+      interface _DescribeStorageSystemResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStorageSystemResourcesResponse]
+        def resource_details: () -> Types::ResourceDetails
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_storage_system_resources-instance_method
+      def describe_storage_system_resources: (
+                                               discovery_job_arn: ::String,
+                                               resource_type: ("SVM" | "VOLUME" | "CLUSTER"),
+                                               ?resource_ids: Array[::String],
+                                               ?filter: Hash[("SVM"), Array[::String]],
+                                               ?max_results: ::Integer,
+                                               ?next_token: ::String
+                                             ) -> _DescribeStorageSystemResourcesResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStorageSystemResourcesResponseSuccess
+
+      interface _DescribeTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTaskResponse]
+        def task_arn: () -> ::String
+        def status: () -> ("AVAILABLE" | "CREATING" | "QUEUED" | "RUNNING" | "UNAVAILABLE")
+        def name: () -> ::String
+        def current_task_execution_arn: () -> ::String
+        def source_location_arn: () -> ::String
+        def destination_location_arn: () -> ::String
+        def cloud_watch_log_group_arn: () -> ::String
+        def source_network_interface_arns: () -> ::Array[::String]
+        def destination_network_interface_arns: () -> ::Array[::String]
+        def options: () -> Types::Options
+        def excludes: () -> ::Array[Types::FilterRule]
+        def schedule: () -> Types::TaskSchedule
+        def error_code: () -> ::String
+        def error_detail: () -> ::String
+        def creation_time: () -> ::Time
+        def includes: () -> ::Array[Types::FilterRule]
+        def task_report_config: () -> Types::TaskReportConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_task-instance_method
+      def describe_task: (
+                           task_arn: ::String
+                         ) -> _DescribeTaskResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTaskResponseSuccess
+
+      interface _DescribeTaskExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTaskExecutionResponse]
+        def task_execution_arn: () -> ::String
+        def status: () -> ("QUEUED" | "LAUNCHING" | "PREPARING" | "TRANSFERRING" | "VERIFYING" | "SUCCESS" | "ERROR")
+        def options: () -> Types::Options
+        def excludes: () -> ::Array[Types::FilterRule]
+        def includes: () -> ::Array[Types::FilterRule]
+        def start_time: () -> ::Time
+        def estimated_files_to_transfer: () -> ::Integer
+        def estimated_bytes_to_transfer: () -> ::Integer
+        def files_transferred: () -> ::Integer
+        def bytes_written: () -> ::Integer
+        def bytes_transferred: () -> ::Integer
+        def result: () -> Types::TaskExecutionResultDetail
+        def bytes_compressed: () -> ::Integer
+        def task_report_config: () -> Types::TaskReportConfig
+        def files_deleted: () -> ::Integer
+        def files_skipped: () -> ::Integer
+        def files_verified: () -> ::Integer
+        def report_result: () -> Types::ReportResult
+        def estimated_files_to_delete: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_task_execution-instance_method
+      def describe_task_execution: (
+                                     task_execution_arn: ::String
+                                   ) -> _DescribeTaskExecutionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTaskExecutionResponseSuccess
+
+      interface _GenerateRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GenerateRecommendationsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#generate_recommendations-instance_method
+      def generate_recommendations: (
+                                      discovery_job_arn: ::String,
+                                      resource_ids: Array[::String],
+                                      resource_type: ("SVM" | "VOLUME" | "CLUSTER")
+                                    ) -> _GenerateRecommendationsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GenerateRecommendationsResponseSuccess
+
+      interface _ListAgentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAgentsResponse]
+        def agents: () -> ::Array[Types::AgentListEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#list_agents-instance_method
+      def list_agents: (
+                         ?max_results: ::Integer,
+                         ?next_token: ::String
+                       ) -> _ListAgentsResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAgentsResponseSuccess
+
+      interface _ListDiscoveryJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDiscoveryJobsResponse]
+        def discovery_jobs: () -> ::Array[Types::DiscoveryJobListEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#list_discovery_jobs-instance_method
+      def list_discovery_jobs: (
+                                 ?storage_system_arn: ::String,
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListDiscoveryJobsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDiscoveryJobsResponseSuccess
+
+      interface _ListLocationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLocationsResponse]
+        def locations: () -> ::Array[Types::LocationListEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#list_locations-instance_method
+      def list_locations: (
+                            ?max_results: ::Integer,
+                            ?next_token: ::String,
+                            ?filters: Array[
+                              {
+                                name: ("LocationUri" | "LocationType" | "CreationTime"),
+                                values: Array[::String],
+                                operator: ("Equals" | "NotEquals" | "In" | "LessThanOrEqual" | "LessThan" | "GreaterThanOrEqual" | "GreaterThan" | "Contains" | "NotContains" | "BeginsWith")
+                              },
+                            ]
+                          ) -> _ListLocationsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLocationsResponseSuccess
+
+      interface _ListStorageSystemsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStorageSystemsResponse]
+        def storage_systems: () -> ::Array[Types::StorageSystemListEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#list_storage_systems-instance_method
+      def list_storage_systems: (
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListStorageSystemsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStorageSystemsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::TagListEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTaskExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTaskExecutionsResponse]
+        def task_executions: () -> ::Array[Types::TaskExecutionListEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#list_task_executions-instance_method
+      def list_task_executions: (
+                                  ?task_arn: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListTaskExecutionsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTaskExecutionsResponseSuccess
+
+      interface _ListTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTasksResponse]
+        def tasks: () -> ::Array[Types::TaskListEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#list_tasks-instance_method
+      def list_tasks: (
+                        ?max_results: ::Integer,
+                        ?next_token: ::String,
+                        ?filters: Array[
+                          {
+                            name: ("LocationId" | "CreationTime"),
+                            values: Array[::String],
+                            operator: ("Equals" | "NotEquals" | "In" | "LessThanOrEqual" | "LessThan" | "GreaterThanOrEqual" | "GreaterThan" | "Contains" | "NotContains" | "BeginsWith")
+                          },
+                        ]
+                      ) -> _ListTasksResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTasksResponseSuccess
+
+      interface _RemoveStorageSystemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveStorageSystemResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#remove_storage_system-instance_method
+      def remove_storage_system: (
+                                   storage_system_arn: ::String
+                                 ) -> _RemoveStorageSystemResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveStorageSystemResponseSuccess
+
+      interface _StartDiscoveryJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDiscoveryJobResponse]
+        def discovery_job_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#start_discovery_job-instance_method
+      def start_discovery_job: (
+                                 storage_system_arn: ::String,
+                                 collection_duration_minutes: ::Integer,
+                                 client_token: ::String,
+                                 ?tags: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String?
+                                   },
+                                 ]
+                               ) -> _StartDiscoveryJobResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDiscoveryJobResponseSuccess
+
+      interface _StartTaskExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartTaskExecutionResponse]
+        def task_execution_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#start_task_execution-instance_method
+      def start_task_execution: (
+                                  task_arn: ::String,
+                                  ?override_options: {
+                                    verify_mode: ("POINT_IN_TIME_CONSISTENT" | "ONLY_FILES_TRANSFERRED" | "NONE")?,
+                                    overwrite_mode: ("ALWAYS" | "NEVER")?,
+                                    atime: ("NONE" | "BEST_EFFORT")?,
+                                    mtime: ("NONE" | "PRESERVE")?,
+                                    uid: ("NONE" | "INT_VALUE" | "NAME" | "BOTH")?,
+                                    gid: ("NONE" | "INT_VALUE" | "NAME" | "BOTH")?,
+                                    preserve_deleted_files: ("PRESERVE" | "REMOVE")?,
+                                    preserve_devices: ("NONE" | "PRESERVE")?,
+                                    posix_permissions: ("NONE" | "PRESERVE")?,
+                                    bytes_per_second: ::Integer?,
+                                    task_queueing: ("ENABLED" | "DISABLED")?,
+                                    log_level: ("OFF" | "BASIC" | "TRANSFER")?,
+                                    transfer_mode: ("CHANGED" | "ALL")?,
+                                    security_descriptor_copy_flags: ("NONE" | "OWNER_DACL" | "OWNER_DACL_SACL")?,
+                                    object_tags: ("PRESERVE" | "NONE")?
+                                  },
+                                  ?includes: Array[
+                                    {
+                                      filter_type: ("SIMPLE_PATTERN")?,
+                                      value: ::String?
+                                    },
+                                  ],
+                                  ?excludes: Array[
+                                    {
+                                      filter_type: ("SIMPLE_PATTERN")?,
+                                      value: ::String?
+                                    },
+                                  ],
+                                  ?tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String?
+                                    },
+                                  ],
+                                  ?task_report_config: {
+                                    destination: {
+                                      s3: {
+                                        subdirectory: ::String?,
+                                        s3_bucket_arn: ::String,
+                                        bucket_access_role_arn: ::String
+                                      }?
+                                    }?,
+                                    output_type: ("SUMMARY_ONLY" | "STANDARD")?,
+                                    report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?,
+                                    object_version_ids: ("INCLUDE" | "NONE")?,
+                                    overrides: {
+                                      transferred: {
+                                        report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
+                                      }?,
+                                      verified: {
+                                        report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
+                                      }?,
+                                      deleted: {
+                                        report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
+                                      }?,
+                                      skipped: {
+                                        report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
+                                      }?
+                                    }?
+                                  }
+                                ) -> _StartTaskExecutionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTaskExecutionResponseSuccess
+
+      interface _StopDiscoveryJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopDiscoveryJobResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#stop_discovery_job-instance_method
+      def stop_discovery_job: (
+                                discovery_job_arn: ::String
+                              ) -> _StopDiscoveryJobResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopDiscoveryJobResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String?
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAgentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAgentResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#update_agent-instance_method
+      def update_agent: (
+                          agent_arn: ::String,
+                          ?name: ::String
+                        ) -> _UpdateAgentResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentResponseSuccess
+
+      interface _UpdateDiscoveryJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDiscoveryJobResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#update_discovery_job-instance_method
+      def update_discovery_job: (
+                                  discovery_job_arn: ::String,
+                                  collection_duration_minutes: ::Integer
+                                ) -> _UpdateDiscoveryJobResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDiscoveryJobResponseSuccess
+
+      interface _UpdateLocationAzureBlobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLocationAzureBlobResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#update_location_azure_blob-instance_method
+      def update_location_azure_blob: (
+                                        location_arn: ::String,
+                                        ?subdirectory: ::String,
+                                        ?authentication_type: ("SAS"),
+                                        ?sas_configuration: {
+                                          token: ::String
+                                        },
+                                        ?blob_type: ("BLOCK"),
+                                        ?access_tier: ("HOT" | "COOL" | "ARCHIVE"),
+                                        ?agent_arns: Array[::String]
+                                      ) -> _UpdateLocationAzureBlobResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLocationAzureBlobResponseSuccess
+
+      interface _UpdateLocationHdfsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLocationHdfsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#update_location_hdfs-instance_method
+      def update_location_hdfs: (
+                                  location_arn: ::String,
+                                  ?subdirectory: ::String,
+                                  ?name_nodes: Array[
+                                    {
+                                      hostname: ::String,
+                                      port: ::Integer
+                                    },
+                                  ],
+                                  ?block_size: ::Integer,
+                                  ?replication_factor: ::Integer,
+                                  ?kms_key_provider_uri: ::String,
+                                  ?qop_configuration: {
+                                    rpc_protection: ("DISABLED" | "AUTHENTICATION" | "INTEGRITY" | "PRIVACY")?,
+                                    data_transfer_protection: ("DISABLED" | "AUTHENTICATION" | "INTEGRITY" | "PRIVACY")?
+                                  },
+                                  ?authentication_type: ("SIMPLE" | "KERBEROS"),
+                                  ?simple_user: ::String,
+                                  ?kerberos_principal: ::String,
+                                  ?kerberos_keytab: ::String,
+                                  ?kerberos_krb_5_conf: ::String,
+                                  ?agent_arns: Array[::String]
+                                ) -> _UpdateLocationHdfsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLocationHdfsResponseSuccess
+
+      interface _UpdateLocationNfsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLocationNfsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#update_location_nfs-instance_method
+      def update_location_nfs: (
+                                 location_arn: ::String,
+                                 ?subdirectory: ::String,
+                                 ?on_prem_config: {
+                                   agent_arns: Array[::String]
+                                 },
+                                 ?mount_options: {
+                                   version: ("AUTOMATIC" | "NFS3" | "NFS4_0" | "NFS4_1")?
+                                 }
+                               ) -> _UpdateLocationNfsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLocationNfsResponseSuccess
+
+      interface _UpdateLocationObjectStorageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLocationObjectStorageResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#update_location_object_storage-instance_method
+      def update_location_object_storage: (
+                                            location_arn: ::String,
+                                            ?server_port: ::Integer,
+                                            ?server_protocol: ("HTTPS" | "HTTP"),
+                                            ?subdirectory: ::String,
+                                            ?access_key: ::String,
+                                            ?secret_key: ::String,
+                                            ?agent_arns: Array[::String],
+                                            ?server_certificate: ::String
+                                          ) -> _UpdateLocationObjectStorageResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLocationObjectStorageResponseSuccess
+
+      interface _UpdateLocationSmbResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLocationSmbResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#update_location_smb-instance_method
+      def update_location_smb: (
+                                 location_arn: ::String,
+                                 ?subdirectory: ::String,
+                                 ?user: ::String,
+                                 ?domain: ::String,
+                                 ?password: ::String,
+                                 ?agent_arns: Array[::String],
+                                 ?mount_options: {
+                                   version: ("AUTOMATIC" | "SMB2" | "SMB3" | "SMB1" | "SMB2_0")?
+                                 }
+                               ) -> _UpdateLocationSmbResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLocationSmbResponseSuccess
+
+      interface _UpdateStorageSystemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateStorageSystemResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#update_storage_system-instance_method
+      def update_storage_system: (
+                                   storage_system_arn: ::String,
+                                   ?server_configuration: {
+                                     server_hostname: ::String,
+                                     server_port: ::Integer?
+                                   },
+                                   ?agent_arns: Array[::String],
+                                   ?name: ::String,
+                                   ?cloud_watch_log_group_arn: ::String,
+                                   ?credentials: {
+                                     username: ::String,
+                                     password: ::String
+                                   }
+                                 ) -> _UpdateStorageSystemResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStorageSystemResponseSuccess
+
+      interface _UpdateTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTaskResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#update_task-instance_method
+      def update_task: (
+                         task_arn: ::String,
+                         ?options: {
+                           verify_mode: ("POINT_IN_TIME_CONSISTENT" | "ONLY_FILES_TRANSFERRED" | "NONE")?,
+                           overwrite_mode: ("ALWAYS" | "NEVER")?,
+                           atime: ("NONE" | "BEST_EFFORT")?,
+                           mtime: ("NONE" | "PRESERVE")?,
+                           uid: ("NONE" | "INT_VALUE" | "NAME" | "BOTH")?,
+                           gid: ("NONE" | "INT_VALUE" | "NAME" | "BOTH")?,
+                           preserve_deleted_files: ("PRESERVE" | "REMOVE")?,
+                           preserve_devices: ("NONE" | "PRESERVE")?,
+                           posix_permissions: ("NONE" | "PRESERVE")?,
+                           bytes_per_second: ::Integer?,
+                           task_queueing: ("ENABLED" | "DISABLED")?,
+                           log_level: ("OFF" | "BASIC" | "TRANSFER")?,
+                           transfer_mode: ("CHANGED" | "ALL")?,
+                           security_descriptor_copy_flags: ("NONE" | "OWNER_DACL" | "OWNER_DACL_SACL")?,
+                           object_tags: ("PRESERVE" | "NONE")?
+                         },
+                         ?excludes: Array[
+                           {
+                             filter_type: ("SIMPLE_PATTERN")?,
+                             value: ::String?
+                           },
+                         ],
+                         ?schedule: {
+                           schedule_expression: ::String
+                         },
+                         ?name: ::String,
+                         ?cloud_watch_log_group_arn: ::String,
+                         ?includes: Array[
+                           {
+                             filter_type: ("SIMPLE_PATTERN")?,
+                             value: ::String?
+                           },
+                         ],
+                         ?task_report_config: {
+                           destination: {
+                             s3: {
+                               subdirectory: ::String?,
+                               s3_bucket_arn: ::String,
+                               bucket_access_role_arn: ::String
+                             }?
+                           }?,
+                           output_type: ("SUMMARY_ONLY" | "STANDARD")?,
+                           report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?,
+                           object_version_ids: ("INCLUDE" | "NONE")?,
+                           overrides: {
+                             transferred: {
+                               report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
+                             }?,
+                             verified: {
+                               report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
+                             }?,
+                             deleted: {
+                               report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
+                             }?,
+                             skipped: {
+                               report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
+                             }?
+                           }?
+                         }
+                       ) -> _UpdateTaskResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTaskResponseSuccess
+
+      interface _UpdateTaskExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTaskExecutionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#update_task_execution-instance_method
+      def update_task_execution: (
+                                   task_execution_arn: ::String,
+                                   options: {
+                                     verify_mode: ("POINT_IN_TIME_CONSISTENT" | "ONLY_FILES_TRANSFERRED" | "NONE")?,
+                                     overwrite_mode: ("ALWAYS" | "NEVER")?,
+                                     atime: ("NONE" | "BEST_EFFORT")?,
+                                     mtime: ("NONE" | "PRESERVE")?,
+                                     uid: ("NONE" | "INT_VALUE" | "NAME" | "BOTH")?,
+                                     gid: ("NONE" | "INT_VALUE" | "NAME" | "BOTH")?,
+                                     preserve_deleted_files: ("PRESERVE" | "REMOVE")?,
+                                     preserve_devices: ("NONE" | "PRESERVE")?,
+                                     posix_permissions: ("NONE" | "PRESERVE")?,
+                                     bytes_per_second: ::Integer?,
+                                     task_queueing: ("ENABLED" | "DISABLED")?,
+                                     log_level: ("OFF" | "BASIC" | "TRANSFER")?,
+                                     transfer_mode: ("CHANGED" | "ALL")?,
+                                     security_descriptor_copy_flags: ("NONE" | "OWNER_DACL" | "OWNER_DACL_SACL")?,
+                                     object_tags: ("PRESERVE" | "NONE")?
+                                   }
+                                 ) -> _UpdateTaskExecutionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTaskExecutionResponseSuccess
+    end
+  end
+end
+

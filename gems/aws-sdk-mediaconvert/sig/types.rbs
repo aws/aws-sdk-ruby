@@ -1,0 +1,2285 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MediaConvert
+  module Types
+
+    class AacSettings
+      attr_accessor audio_description_broadcaster_mix: ("BROADCASTER_MIXED_AD" | "NORMAL")
+      attr_accessor bitrate: ::Integer
+      attr_accessor codec_profile: ("LC" | "HEV1" | "HEV2")
+      attr_accessor coding_mode: ("AD_RECEIVER_MIX" | "CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_5_1")
+      attr_accessor rate_control_mode: ("CBR" | "VBR")
+      attr_accessor raw_format: ("LATM_LOAS" | "NONE")
+      attr_accessor sample_rate: ::Integer
+      attr_accessor specification: ("MPEG2" | "MPEG4")
+      attr_accessor vbr_quality: ("LOW" | "MEDIUM_LOW" | "MEDIUM_HIGH" | "HIGH")
+      SENSITIVE: []
+    end
+
+    class Ac3Settings
+      attr_accessor bitrate: ::Integer
+      attr_accessor bitstream_mode: ("COMPLETE_MAIN" | "COMMENTARY" | "DIALOGUE" | "EMERGENCY" | "HEARING_IMPAIRED" | "MUSIC_AND_EFFECTS" | "VISUALLY_IMPAIRED" | "VOICE_OVER")
+      attr_accessor coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_3_2_LFE")
+      attr_accessor dialnorm: ::Integer
+      attr_accessor dynamic_range_compression_line: ("FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH" | "NONE")
+      attr_accessor dynamic_range_compression_profile: ("FILM_STANDARD" | "NONE")
+      attr_accessor dynamic_range_compression_rf: ("FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH" | "NONE")
+      attr_accessor lfe_filter: ("ENABLED" | "DISABLED")
+      attr_accessor metadata_control: ("FOLLOW_INPUT" | "USE_CONFIGURED")
+      attr_accessor sample_rate: ::Integer
+      SENSITIVE: []
+    end
+
+    class AccelerationSettings
+      attr_accessor mode: ("DISABLED" | "ENABLED" | "PREFERRED")
+      SENSITIVE: []
+    end
+
+    class AdvancedInputFilterSettings
+      attr_accessor add_texture: ("ENABLED" | "DISABLED")
+      attr_accessor sharpening: ("OFF" | "LOW" | "HIGH")
+      SENSITIVE: []
+    end
+
+    class AiffSettings
+      attr_accessor bit_depth: ::Integer
+      attr_accessor channels: ::Integer
+      attr_accessor sample_rate: ::Integer
+      SENSITIVE: []
+    end
+
+    class AllowedRenditionSize
+      attr_accessor height: ::Integer
+      attr_accessor required: ("ENABLED" | "DISABLED")
+      attr_accessor width: ::Integer
+      SENSITIVE: []
+    end
+
+    class AncillarySourceSettings
+      attr_accessor convert_608_to_708: ("UPCONVERT" | "DISABLED")
+      attr_accessor source_ancillary_channel_number: ::Integer
+      attr_accessor terminate_captions: ("END_OF_INPUT" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class AssociateCertificateRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateCertificateResponse < Aws::EmptyStructure
+    end
+
+    class AudioChannelTaggingSettings
+      attr_accessor channel_tag: ("L" | "R" | "C" | "LFE" | "LS" | "RS" | "LC" | "RC" | "CS" | "LSD" | "RSD" | "TCS" | "VHL" | "VHC" | "VHR" | "TBL" | "TBC" | "TBR" | "RSL" | "RSR" | "LW" | "RW" | "LFE2" | "LT" | "RT" | "HI" | "NAR" | "M")
+      attr_accessor channel_tags: ::Array[("L" | "R" | "C" | "LFE" | "LS" | "RS" | "LC" | "RC" | "CS" | "LSD" | "RSD" | "TCS" | "VHL" | "VHC" | "VHR" | "TBL" | "TBC" | "TBR" | "RSL" | "RSR" | "LW" | "RW" | "LFE2" | "LT" | "RT" | "HI" | "NAR" | "M")]
+      SENSITIVE: []
+    end
+
+    class AudioCodecSettings
+      attr_accessor aac_settings: Types::AacSettings
+      attr_accessor ac_3_settings: Types::Ac3Settings
+      attr_accessor aiff_settings: Types::AiffSettings
+      attr_accessor codec: ("AAC" | "MP2" | "MP3" | "WAV" | "AIFF" | "AC3" | "EAC3" | "EAC3_ATMOS" | "VORBIS" | "OPUS" | "PASSTHROUGH" | "FLAC")
+      attr_accessor eac_3_atmos_settings: Types::Eac3AtmosSettings
+      attr_accessor eac_3_settings: Types::Eac3Settings
+      attr_accessor flac_settings: Types::FlacSettings
+      attr_accessor mp_2_settings: Types::Mp2Settings
+      attr_accessor mp_3_settings: Types::Mp3Settings
+      attr_accessor opus_settings: Types::OpusSettings
+      attr_accessor vorbis_settings: Types::VorbisSettings
+      attr_accessor wav_settings: Types::WavSettings
+      SENSITIVE: []
+    end
+
+    class AudioDescription
+      attr_accessor audio_channel_tagging_settings: Types::AudioChannelTaggingSettings
+      attr_accessor audio_normalization_settings: Types::AudioNormalizationSettings
+      attr_accessor audio_source_name: ::String
+      attr_accessor audio_type: ::Integer
+      attr_accessor audio_type_control: ("FOLLOW_INPUT" | "USE_CONFIGURED")
+      attr_accessor codec_settings: Types::AudioCodecSettings
+      attr_accessor custom_language_code: ::String
+      attr_accessor language_code: ("ENG" | "SPA" | "FRA" | "DEU" | "GER" | "ZHO" | "ARA" | "HIN" | "JPN" | "RUS" | "POR" | "ITA" | "URD" | "VIE" | "KOR" | "PAN" | "ABK" | "AAR" | "AFR" | "AKA" | "SQI" | "AMH" | "ARG" | "HYE" | "ASM" | "AVA" | "AVE" | "AYM" | "AZE" | "BAM" | "BAK" | "EUS" | "BEL" | "BEN" | "BIH" | "BIS" | "BOS" | "BRE" | "BUL" | "MYA" | "CAT" | "KHM" | "CHA" | "CHE" | "NYA" | "CHU" | "CHV" | "COR" | "COS" | "CRE" | "HRV" | "CES" | "DAN" | "DIV" | "NLD" | "DZO" | "ENM" | "EPO" | "EST" | "EWE" | "FAO" | "FIJ" | "FIN" | "FRM" | "FUL" | "GLA" | "GLG" | "LUG" | "KAT" | "ELL" | "GRN" | "GUJ" | "HAT" | "HAU" | "HEB" | "HER" | "HMO" | "HUN" | "ISL" | "IDO" | "IBO" | "IND" | "INA" | "ILE" | "IKU" | "IPK" | "GLE" | "JAV" | "KAL" | "KAN" | "KAU" | "KAS" | "KAZ" | "KIK" | "KIN" | "KIR" | "KOM" | "KON" | "KUA" | "KUR" | "LAO" | "LAT" | "LAV" | "LIM" | "LIN" | "LIT" | "LUB" | "LTZ" | "MKD" | "MLG" | "MSA" | "MAL" | "MLT" | "GLV" | "MRI" | "MAR" | "MAH" | "MON" | "NAU" | "NAV" | "NDE" | "NBL" | "NDO" | "NEP" | "SME" | "NOR" | "NOB" | "NNO" | "OCI" | "OJI" | "ORI" | "ORM" | "OSS" | "PLI" | "FAS" | "POL" | "PUS" | "QUE" | "QAA" | "RON" | "ROH" | "RUN" | "SMO" | "SAG" | "SAN" | "SRD" | "SRB" | "SNA" | "III" | "SND" | "SIN" | "SLK" | "SLV" | "SOM" | "SOT" | "SUN" | "SWA" | "SSW" | "SWE" | "TGL" | "TAH" | "TGK" | "TAM" | "TAT" | "TEL" | "THA" | "BOD" | "TIR" | "TON" | "TSO" | "TSN" | "TUR" | "TUK" | "TWI" | "UIG" | "UKR" | "UZB" | "VEN" | "VOL" | "WLN" | "CYM" | "FRY" | "WOL" | "XHO" | "YID" | "YOR" | "ZHA" | "ZUL" | "ORJ" | "QPC" | "TNG" | "SRP")
+      attr_accessor language_code_control: ("FOLLOW_INPUT" | "USE_CONFIGURED")
+      attr_accessor remix_settings: Types::RemixSettings
+      attr_accessor stream_name: ::String
+      SENSITIVE: []
+    end
+
+    class AudioNormalizationSettings
+      attr_accessor algorithm: ("ITU_BS_1770_1" | "ITU_BS_1770_2" | "ITU_BS_1770_3" | "ITU_BS_1770_4")
+      attr_accessor algorithm_control: ("CORRECT_AUDIO" | "MEASURE_ONLY")
+      attr_accessor correction_gate_level: ::Integer
+      attr_accessor loudness_logging: ("LOG" | "DONT_LOG")
+      attr_accessor peak_calculation: ("TRUE_PEAK" | "NONE")
+      attr_accessor target_lkfs: ::Float
+      attr_accessor true_peak_limiter_threshold: ::Float
+      SENSITIVE: []
+    end
+
+    class AudioSelector
+      attr_accessor audio_duration_correction: ("DISABLED" | "AUTO" | "TRACK" | "FRAME")
+      attr_accessor custom_language_code: ::String
+      attr_accessor default_selection: ("DEFAULT" | "NOT_DEFAULT")
+      attr_accessor external_audio_file_input: ::String
+      attr_accessor hls_rendition_group_settings: Types::HlsRenditionGroupSettings
+      attr_accessor language_code: ("ENG" | "SPA" | "FRA" | "DEU" | "GER" | "ZHO" | "ARA" | "HIN" | "JPN" | "RUS" | "POR" | "ITA" | "URD" | "VIE" | "KOR" | "PAN" | "ABK" | "AAR" | "AFR" | "AKA" | "SQI" | "AMH" | "ARG" | "HYE" | "ASM" | "AVA" | "AVE" | "AYM" | "AZE" | "BAM" | "BAK" | "EUS" | "BEL" | "BEN" | "BIH" | "BIS" | "BOS" | "BRE" | "BUL" | "MYA" | "CAT" | "KHM" | "CHA" | "CHE" | "NYA" | "CHU" | "CHV" | "COR" | "COS" | "CRE" | "HRV" | "CES" | "DAN" | "DIV" | "NLD" | "DZO" | "ENM" | "EPO" | "EST" | "EWE" | "FAO" | "FIJ" | "FIN" | "FRM" | "FUL" | "GLA" | "GLG" | "LUG" | "KAT" | "ELL" | "GRN" | "GUJ" | "HAT" | "HAU" | "HEB" | "HER" | "HMO" | "HUN" | "ISL" | "IDO" | "IBO" | "IND" | "INA" | "ILE" | "IKU" | "IPK" | "GLE" | "JAV" | "KAL" | "KAN" | "KAU" | "KAS" | "KAZ" | "KIK" | "KIN" | "KIR" | "KOM" | "KON" | "KUA" | "KUR" | "LAO" | "LAT" | "LAV" | "LIM" | "LIN" | "LIT" | "LUB" | "LTZ" | "MKD" | "MLG" | "MSA" | "MAL" | "MLT" | "GLV" | "MRI" | "MAR" | "MAH" | "MON" | "NAU" | "NAV" | "NDE" | "NBL" | "NDO" | "NEP" | "SME" | "NOR" | "NOB" | "NNO" | "OCI" | "OJI" | "ORI" | "ORM" | "OSS" | "PLI" | "FAS" | "POL" | "PUS" | "QUE" | "QAA" | "RON" | "ROH" | "RUN" | "SMO" | "SAG" | "SAN" | "SRD" | "SRB" | "SNA" | "III" | "SND" | "SIN" | "SLK" | "SLV" | "SOM" | "SOT" | "SUN" | "SWA" | "SSW" | "SWE" | "TGL" | "TAH" | "TGK" | "TAM" | "TAT" | "TEL" | "THA" | "BOD" | "TIR" | "TON" | "TSO" | "TSN" | "TUR" | "TUK" | "TWI" | "UIG" | "UKR" | "UZB" | "VEN" | "VOL" | "WLN" | "CYM" | "FRY" | "WOL" | "XHO" | "YID" | "YOR" | "ZHA" | "ZUL" | "ORJ" | "QPC" | "TNG" | "SRP")
+      attr_accessor offset: ::Integer
+      attr_accessor pids: ::Array[::Integer]
+      attr_accessor program_selection: ::Integer
+      attr_accessor remix_settings: Types::RemixSettings
+      attr_accessor selector_type: ("PID" | "TRACK" | "LANGUAGE_CODE" | "HLS_RENDITION_GROUP")
+      attr_accessor tracks: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class AudioSelectorGroup
+      attr_accessor audio_selector_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AutomatedAbrRule
+      attr_accessor allowed_renditions: ::Array[Types::AllowedRenditionSize]
+      attr_accessor force_include_renditions: ::Array[Types::ForceIncludeRenditionSize]
+      attr_accessor min_bottom_rendition_size: Types::MinBottomRenditionSize
+      attr_accessor min_top_rendition_size: Types::MinTopRenditionSize
+      attr_accessor type: ("MIN_TOP_RENDITION_SIZE" | "MIN_BOTTOM_RENDITION_SIZE" | "FORCE_INCLUDE_RENDITIONS" | "ALLOWED_RENDITIONS")
+      SENSITIVE: []
+    end
+
+    class AutomatedAbrSettings
+      attr_accessor max_abr_bitrate: ::Integer
+      attr_accessor max_renditions: ::Integer
+      attr_accessor min_abr_bitrate: ::Integer
+      attr_accessor rules: ::Array[Types::AutomatedAbrRule]
+      SENSITIVE: []
+    end
+
+    class AutomatedEncodingSettings
+      attr_accessor abr_settings: Types::AutomatedAbrSettings
+      SENSITIVE: []
+    end
+
+    class Av1QvbrSettings
+      attr_accessor qvbr_quality_level: ::Integer
+      attr_accessor qvbr_quality_level_fine_tune: ::Float
+      SENSITIVE: []
+    end
+
+    class Av1Settings
+      attr_accessor adaptive_quantization: ("OFF" | "LOW" | "MEDIUM" | "HIGH" | "HIGHER" | "MAX")
+      attr_accessor bit_depth: ("BIT_8" | "BIT_10")
+      attr_accessor film_grain_synthesis: ("DISABLED" | "ENABLED")
+      attr_accessor framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
+      attr_accessor framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER")
+      attr_accessor framerate_denominator: ::Integer
+      attr_accessor framerate_numerator: ::Integer
+      attr_accessor gop_size: ::Float
+      attr_accessor max_bitrate: ::Integer
+      attr_accessor number_b_frames_between_reference_frames: ::Integer
+      attr_accessor qvbr_settings: Types::Av1QvbrSettings
+      attr_accessor rate_control_mode: ("QVBR")
+      attr_accessor slices: ::Integer
+      attr_accessor spatial_adaptive_quantization: ("DISABLED" | "ENABLED")
+      SENSITIVE: []
+    end
+
+    class AvailBlanking
+      attr_accessor avail_blanking_image: ::String
+      SENSITIVE: []
+    end
+
+    class AvcIntraSettings
+      attr_accessor avc_intra_class: ("CLASS_50" | "CLASS_100" | "CLASS_200" | "CLASS_4K_2K")
+      attr_accessor avc_intra_uhd_settings: Types::AvcIntraUhdSettings
+      attr_accessor framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
+      attr_accessor framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER")
+      attr_accessor framerate_denominator: ::Integer
+      attr_accessor framerate_numerator: ::Integer
+      attr_accessor interlace_mode: ("PROGRESSIVE" | "TOP_FIELD" | "BOTTOM_FIELD" | "FOLLOW_TOP_FIELD" | "FOLLOW_BOTTOM_FIELD")
+      attr_accessor scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")
+      attr_accessor slow_pal: ("DISABLED" | "ENABLED")
+      attr_accessor telecine: ("NONE" | "HARD")
+      SENSITIVE: []
+    end
+
+    class AvcIntraUhdSettings
+      attr_accessor quality_tuning_level: ("SINGLE_PASS" | "MULTI_PASS")
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BandwidthReductionFilter
+      attr_accessor sharpening: ("LOW" | "MEDIUM" | "HIGH" | "OFF")
+      attr_accessor strength: ("LOW" | "MEDIUM" | "HIGH" | "AUTO" | "OFF")
+      SENSITIVE: []
+    end
+
+    class BurninDestinationSettings
+      attr_accessor alignment: ("CENTERED" | "LEFT" | "AUTO")
+      attr_accessor apply_font_color: ("WHITE_TEXT_ONLY" | "ALL_TEXT")
+      attr_accessor background_color: ("NONE" | "BLACK" | "WHITE" | "AUTO")
+      attr_accessor background_opacity: ::Integer
+      attr_accessor fallback_font: ("BEST_MATCH" | "MONOSPACED_SANSSERIF" | "MONOSPACED_SERIF" | "PROPORTIONAL_SANSSERIF" | "PROPORTIONAL_SERIF")
+      attr_accessor font_color: ("WHITE" | "BLACK" | "YELLOW" | "RED" | "GREEN" | "BLUE" | "HEX" | "AUTO")
+      attr_accessor font_opacity: ::Integer
+      attr_accessor font_resolution: ::Integer
+      attr_accessor font_script: ("AUTOMATIC" | "HANS" | "HANT")
+      attr_accessor font_size: ::Integer
+      attr_accessor hex_font_color: ::String
+      attr_accessor outline_color: ("BLACK" | "WHITE" | "YELLOW" | "RED" | "GREEN" | "BLUE" | "AUTO")
+      attr_accessor outline_size: ::Integer
+      attr_accessor shadow_color: ("NONE" | "BLACK" | "WHITE" | "AUTO")
+      attr_accessor shadow_opacity: ::Integer
+      attr_accessor shadow_x_offset: ::Integer
+      attr_accessor shadow_y_offset: ::Integer
+      attr_accessor style_passthrough: ("ENABLED" | "DISABLED")
+      attr_accessor teletext_spacing: ("FIXED_GRID" | "PROPORTIONAL" | "AUTO")
+      attr_accessor x_position: ::Integer
+      attr_accessor y_position: ::Integer
+      SENSITIVE: []
+    end
+
+    class CancelJobRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelJobResponse < Aws::EmptyStructure
+    end
+
+    class CaptionDescription
+      attr_accessor caption_selector_name: ::String
+      attr_accessor custom_language_code: ::String
+      attr_accessor destination_settings: Types::CaptionDestinationSettings
+      attr_accessor language_code: ("ENG" | "SPA" | "FRA" | "DEU" | "GER" | "ZHO" | "ARA" | "HIN" | "JPN" | "RUS" | "POR" | "ITA" | "URD" | "VIE" | "KOR" | "PAN" | "ABK" | "AAR" | "AFR" | "AKA" | "SQI" | "AMH" | "ARG" | "HYE" | "ASM" | "AVA" | "AVE" | "AYM" | "AZE" | "BAM" | "BAK" | "EUS" | "BEL" | "BEN" | "BIH" | "BIS" | "BOS" | "BRE" | "BUL" | "MYA" | "CAT" | "KHM" | "CHA" | "CHE" | "NYA" | "CHU" | "CHV" | "COR" | "COS" | "CRE" | "HRV" | "CES" | "DAN" | "DIV" | "NLD" | "DZO" | "ENM" | "EPO" | "EST" | "EWE" | "FAO" | "FIJ" | "FIN" | "FRM" | "FUL" | "GLA" | "GLG" | "LUG" | "KAT" | "ELL" | "GRN" | "GUJ" | "HAT" | "HAU" | "HEB" | "HER" | "HMO" | "HUN" | "ISL" | "IDO" | "IBO" | "IND" | "INA" | "ILE" | "IKU" | "IPK" | "GLE" | "JAV" | "KAL" | "KAN" | "KAU" | "KAS" | "KAZ" | "KIK" | "KIN" | "KIR" | "KOM" | "KON" | "KUA" | "KUR" | "LAO" | "LAT" | "LAV" | "LIM" | "LIN" | "LIT" | "LUB" | "LTZ" | "MKD" | "MLG" | "MSA" | "MAL" | "MLT" | "GLV" | "MRI" | "MAR" | "MAH" | "MON" | "NAU" | "NAV" | "NDE" | "NBL" | "NDO" | "NEP" | "SME" | "NOR" | "NOB" | "NNO" | "OCI" | "OJI" | "ORI" | "ORM" | "OSS" | "PLI" | "FAS" | "POL" | "PUS" | "QUE" | "QAA" | "RON" | "ROH" | "RUN" | "SMO" | "SAG" | "SAN" | "SRD" | "SRB" | "SNA" | "III" | "SND" | "SIN" | "SLK" | "SLV" | "SOM" | "SOT" | "SUN" | "SWA" | "SSW" | "SWE" | "TGL" | "TAH" | "TGK" | "TAM" | "TAT" | "TEL" | "THA" | "BOD" | "TIR" | "TON" | "TSO" | "TSN" | "TUR" | "TUK" | "TWI" | "UIG" | "UKR" | "UZB" | "VEN" | "VOL" | "WLN" | "CYM" | "FRY" | "WOL" | "XHO" | "YID" | "YOR" | "ZHA" | "ZUL" | "ORJ" | "QPC" | "TNG" | "SRP")
+      attr_accessor language_description: ::String
+      SENSITIVE: []
+    end
+
+    class CaptionDescriptionPreset
+      attr_accessor custom_language_code: ::String
+      attr_accessor destination_settings: Types::CaptionDestinationSettings
+      attr_accessor language_code: ("ENG" | "SPA" | "FRA" | "DEU" | "GER" | "ZHO" | "ARA" | "HIN" | "JPN" | "RUS" | "POR" | "ITA" | "URD" | "VIE" | "KOR" | "PAN" | "ABK" | "AAR" | "AFR" | "AKA" | "SQI" | "AMH" | "ARG" | "HYE" | "ASM" | "AVA" | "AVE" | "AYM" | "AZE" | "BAM" | "BAK" | "EUS" | "BEL" | "BEN" | "BIH" | "BIS" | "BOS" | "BRE" | "BUL" | "MYA" | "CAT" | "KHM" | "CHA" | "CHE" | "NYA" | "CHU" | "CHV" | "COR" | "COS" | "CRE" | "HRV" | "CES" | "DAN" | "DIV" | "NLD" | "DZO" | "ENM" | "EPO" | "EST" | "EWE" | "FAO" | "FIJ" | "FIN" | "FRM" | "FUL" | "GLA" | "GLG" | "LUG" | "KAT" | "ELL" | "GRN" | "GUJ" | "HAT" | "HAU" | "HEB" | "HER" | "HMO" | "HUN" | "ISL" | "IDO" | "IBO" | "IND" | "INA" | "ILE" | "IKU" | "IPK" | "GLE" | "JAV" | "KAL" | "KAN" | "KAU" | "KAS" | "KAZ" | "KIK" | "KIN" | "KIR" | "KOM" | "KON" | "KUA" | "KUR" | "LAO" | "LAT" | "LAV" | "LIM" | "LIN" | "LIT" | "LUB" | "LTZ" | "MKD" | "MLG" | "MSA" | "MAL" | "MLT" | "GLV" | "MRI" | "MAR" | "MAH" | "MON" | "NAU" | "NAV" | "NDE" | "NBL" | "NDO" | "NEP" | "SME" | "NOR" | "NOB" | "NNO" | "OCI" | "OJI" | "ORI" | "ORM" | "OSS" | "PLI" | "FAS" | "POL" | "PUS" | "QUE" | "QAA" | "RON" | "ROH" | "RUN" | "SMO" | "SAG" | "SAN" | "SRD" | "SRB" | "SNA" | "III" | "SND" | "SIN" | "SLK" | "SLV" | "SOM" | "SOT" | "SUN" | "SWA" | "SSW" | "SWE" | "TGL" | "TAH" | "TGK" | "TAM" | "TAT" | "TEL" | "THA" | "BOD" | "TIR" | "TON" | "TSO" | "TSN" | "TUR" | "TUK" | "TWI" | "UIG" | "UKR" | "UZB" | "VEN" | "VOL" | "WLN" | "CYM" | "FRY" | "WOL" | "XHO" | "YID" | "YOR" | "ZHA" | "ZUL" | "ORJ" | "QPC" | "TNG" | "SRP")
+      attr_accessor language_description: ::String
+      SENSITIVE: []
+    end
+
+    class CaptionDestinationSettings
+      attr_accessor burnin_destination_settings: Types::BurninDestinationSettings
+      attr_accessor destination_type: ("BURN_IN" | "DVB_SUB" | "EMBEDDED" | "EMBEDDED_PLUS_SCTE20" | "IMSC" | "SCTE20_PLUS_EMBEDDED" | "SCC" | "SRT" | "SMI" | "TELETEXT" | "TTML" | "WEBVTT")
+      attr_accessor dvb_sub_destination_settings: Types::DvbSubDestinationSettings
+      attr_accessor embedded_destination_settings: Types::EmbeddedDestinationSettings
+      attr_accessor imsc_destination_settings: Types::ImscDestinationSettings
+      attr_accessor scc_destination_settings: Types::SccDestinationSettings
+      attr_accessor srt_destination_settings: Types::SrtDestinationSettings
+      attr_accessor teletext_destination_settings: Types::TeletextDestinationSettings
+      attr_accessor ttml_destination_settings: Types::TtmlDestinationSettings
+      attr_accessor webvtt_destination_settings: Types::WebvttDestinationSettings
+      SENSITIVE: []
+    end
+
+    class CaptionSelector
+      attr_accessor custom_language_code: ::String
+      attr_accessor language_code: ("ENG" | "SPA" | "FRA" | "DEU" | "GER" | "ZHO" | "ARA" | "HIN" | "JPN" | "RUS" | "POR" | "ITA" | "URD" | "VIE" | "KOR" | "PAN" | "ABK" | "AAR" | "AFR" | "AKA" | "SQI" | "AMH" | "ARG" | "HYE" | "ASM" | "AVA" | "AVE" | "AYM" | "AZE" | "BAM" | "BAK" | "EUS" | "BEL" | "BEN" | "BIH" | "BIS" | "BOS" | "BRE" | "BUL" | "MYA" | "CAT" | "KHM" | "CHA" | "CHE" | "NYA" | "CHU" | "CHV" | "COR" | "COS" | "CRE" | "HRV" | "CES" | "DAN" | "DIV" | "NLD" | "DZO" | "ENM" | "EPO" | "EST" | "EWE" | "FAO" | "FIJ" | "FIN" | "FRM" | "FUL" | "GLA" | "GLG" | "LUG" | "KAT" | "ELL" | "GRN" | "GUJ" | "HAT" | "HAU" | "HEB" | "HER" | "HMO" | "HUN" | "ISL" | "IDO" | "IBO" | "IND" | "INA" | "ILE" | "IKU" | "IPK" | "GLE" | "JAV" | "KAL" | "KAN" | "KAU" | "KAS" | "KAZ" | "KIK" | "KIN" | "KIR" | "KOM" | "KON" | "KUA" | "KUR" | "LAO" | "LAT" | "LAV" | "LIM" | "LIN" | "LIT" | "LUB" | "LTZ" | "MKD" | "MLG" | "MSA" | "MAL" | "MLT" | "GLV" | "MRI" | "MAR" | "MAH" | "MON" | "NAU" | "NAV" | "NDE" | "NBL" | "NDO" | "NEP" | "SME" | "NOR" | "NOB" | "NNO" | "OCI" | "OJI" | "ORI" | "ORM" | "OSS" | "PLI" | "FAS" | "POL" | "PUS" | "QUE" | "QAA" | "RON" | "ROH" | "RUN" | "SMO" | "SAG" | "SAN" | "SRD" | "SRB" | "SNA" | "III" | "SND" | "SIN" | "SLK" | "SLV" | "SOM" | "SOT" | "SUN" | "SWA" | "SSW" | "SWE" | "TGL" | "TAH" | "TGK" | "TAM" | "TAT" | "TEL" | "THA" | "BOD" | "TIR" | "TON" | "TSO" | "TSN" | "TUR" | "TUK" | "TWI" | "UIG" | "UKR" | "UZB" | "VEN" | "VOL" | "WLN" | "CYM" | "FRY" | "WOL" | "XHO" | "YID" | "YOR" | "ZHA" | "ZUL" | "ORJ" | "QPC" | "TNG" | "SRP")
+      attr_accessor source_settings: Types::CaptionSourceSettings
+      SENSITIVE: []
+    end
+
+    class CaptionSourceFramerate
+      attr_accessor framerate_denominator: ::Integer
+      attr_accessor framerate_numerator: ::Integer
+      SENSITIVE: []
+    end
+
+    class CaptionSourceSettings
+      attr_accessor ancillary_source_settings: Types::AncillarySourceSettings
+      attr_accessor dvb_sub_source_settings: Types::DvbSubSourceSettings
+      attr_accessor embedded_source_settings: Types::EmbeddedSourceSettings
+      attr_accessor file_source_settings: Types::FileSourceSettings
+      attr_accessor source_type: ("ANCILLARY" | "DVB_SUB" | "EMBEDDED" | "SCTE20" | "SCC" | "TTML" | "STL" | "SRT" | "SMI" | "SMPTE_TT" | "TELETEXT" | "NULL_SOURCE" | "IMSC" | "WEBVTT")
+      attr_accessor teletext_source_settings: Types::TeletextSourceSettings
+      attr_accessor track_source_settings: Types::TrackSourceSettings
+      attr_accessor webvtt_hls_source_settings: Types::WebvttHlsSourceSettings
+      SENSITIVE: []
+    end
+
+    class ChannelMapping
+      attr_accessor output_channels: ::Array[Types::OutputChannelMapping]
+      SENSITIVE: []
+    end
+
+    class ClipLimits
+      attr_accessor maximum_rgb_tolerance: ::Integer
+      attr_accessor maximum_yuv: ::Integer
+      attr_accessor minimum_rgb_tolerance: ::Integer
+      attr_accessor minimum_yuv: ::Integer
+      SENSITIVE: []
+    end
+
+    class CmafAdditionalManifest
+      attr_accessor manifest_name_modifier: ::String
+      attr_accessor selected_outputs: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CmafEncryptionSettings
+      attr_accessor constant_initialization_vector: ::String
+      attr_accessor encryption_method: ("SAMPLE_AES" | "AES_CTR")
+      attr_accessor initialization_vector_in_manifest: ("INCLUDE" | "EXCLUDE")
+      attr_accessor speke_key_provider: Types::SpekeKeyProviderCmaf
+      attr_accessor static_key_provider: Types::StaticKeyProvider
+      attr_accessor type: ("SPEKE" | "STATIC_KEY")
+      SENSITIVE: []
+    end
+
+    class CmafGroupSettings
+      attr_accessor additional_manifests: ::Array[Types::CmafAdditionalManifest]
+      attr_accessor base_url: ::String
+      attr_accessor client_cache: ("DISABLED" | "ENABLED")
+      attr_accessor codec_specification: ("RFC_6381" | "RFC_4281")
+      attr_accessor dash_manifest_style: ("BASIC" | "COMPACT" | "DISTINCT")
+      attr_accessor destination: ::String
+      attr_accessor destination_settings: Types::DestinationSettings
+      attr_accessor encryption: Types::CmafEncryptionSettings
+      attr_accessor fragment_length: ::Integer
+      attr_accessor image_based_trick_play: ("NONE" | "THUMBNAIL" | "THUMBNAIL_AND_FULLFRAME" | "ADVANCED")
+      attr_accessor image_based_trick_play_settings: Types::CmafImageBasedTrickPlaySettings
+      attr_accessor manifest_compression: ("GZIP" | "NONE")
+      attr_accessor manifest_duration_format: ("FLOATING_POINT" | "INTEGER")
+      attr_accessor min_buffer_time: ::Integer
+      attr_accessor min_final_segment_length: ::Float
+      attr_accessor mpd_manifest_bandwidth_type: ("AVERAGE" | "MAX")
+      attr_accessor mpd_profile: ("MAIN_PROFILE" | "ON_DEMAND_PROFILE")
+      attr_accessor pts_offset_handling_for_b_frames: ("ZERO_BASED" | "MATCH_INITIAL_PTS")
+      attr_accessor segment_control: ("SINGLE_FILE" | "SEGMENTED_FILES")
+      attr_accessor segment_length: ::Integer
+      attr_accessor segment_length_control: ("EXACT" | "GOP_MULTIPLE")
+      attr_accessor stream_inf_resolution: ("INCLUDE" | "EXCLUDE")
+      attr_accessor target_duration_compatibility_mode: ("LEGACY" | "SPEC_COMPLIANT")
+      attr_accessor video_composition_offsets: ("SIGNED" | "UNSIGNED")
+      attr_accessor write_dash_manifest: ("DISABLED" | "ENABLED")
+      attr_accessor write_hls_manifest: ("DISABLED" | "ENABLED")
+      attr_accessor write_segment_timeline_in_representation: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class CmafImageBasedTrickPlaySettings
+      attr_accessor interval_cadence: ("FOLLOW_IFRAME" | "FOLLOW_CUSTOM")
+      attr_accessor thumbnail_height: ::Integer
+      attr_accessor thumbnail_interval: ::Float
+      attr_accessor thumbnail_width: ::Integer
+      attr_accessor tile_height: ::Integer
+      attr_accessor tile_width: ::Integer
+      SENSITIVE: []
+    end
+
+    class CmfcSettings
+      attr_accessor audio_duration: ("DEFAULT_CODEC_DURATION" | "MATCH_VIDEO_DURATION")
+      attr_accessor audio_group_id: ::String
+      attr_accessor audio_rendition_sets: ::String
+      attr_accessor audio_track_type: ("ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" | "ALTERNATE_AUDIO_AUTO_SELECT" | "ALTERNATE_AUDIO_NOT_AUTO_SELECT" | "AUDIO_ONLY_VARIANT_STREAM")
+      attr_accessor descriptive_video_service_flag: ("DONT_FLAG" | "FLAG")
+      attr_accessor i_frame_only_manifest: ("INCLUDE" | "EXCLUDE")
+      attr_accessor klv_metadata: ("PASSTHROUGH" | "NONE")
+      attr_accessor manifest_metadata_signaling: ("ENABLED" | "DISABLED")
+      attr_accessor scte_35_esam: ("INSERT" | "NONE")
+      attr_accessor scte_35_source: ("PASSTHROUGH" | "NONE")
+      attr_accessor timed_metadata: ("PASSTHROUGH" | "NONE")
+      attr_accessor timed_metadata_box_version: ("VERSION_0" | "VERSION_1")
+      attr_accessor timed_metadata_scheme_id_uri: ::String
+      attr_accessor timed_metadata_value: ::String
+      SENSITIVE: []
+    end
+
+    class ColorConversion3DLUTSetting
+      attr_accessor file_input: ::String
+      attr_accessor input_color_space: ("FOLLOW" | "REC_601" | "REC_709" | "HDR10" | "HLG_2020" | "P3DCI" | "P3D65_SDR" | "P3D65_HDR")
+      attr_accessor input_mastering_luminance: ::Integer
+      attr_accessor output_color_space: ("FOLLOW" | "REC_601" | "REC_709" | "HDR10" | "HLG_2020" | "P3DCI" | "P3D65_SDR" | "P3D65_HDR")
+      attr_accessor output_mastering_luminance: ::Integer
+      SENSITIVE: []
+    end
+
+    class ColorCorrector
+      attr_accessor brightness: ::Integer
+      attr_accessor clip_limits: Types::ClipLimits
+      attr_accessor color_space_conversion: ("NONE" | "FORCE_601" | "FORCE_709" | "FORCE_HDR10" | "FORCE_HLG_2020" | "FORCE_P3DCI" | "FORCE_P3D65_SDR" | "FORCE_P3D65_HDR")
+      attr_accessor contrast: ::Integer
+      attr_accessor hdr_10_metadata: Types::Hdr10Metadata
+      attr_accessor hdr_to_sdr_tone_mapper: ("PRESERVE_DETAILS" | "VIBRANT")
+      attr_accessor hue: ::Integer
+      attr_accessor max_luminance: ::Integer
+      attr_accessor sample_range_conversion: ("LIMITED_RANGE_SQUEEZE" | "NONE" | "LIMITED_RANGE_CLIP")
+      attr_accessor saturation: ::Integer
+      attr_accessor sdr_reference_white_level: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ContainerSettings
+      attr_accessor cmfc_settings: Types::CmfcSettings
+      attr_accessor container: ("F4V" | "ISMV" | "M2TS" | "M3U8" | "CMFC" | "MOV" | "MP4" | "MPD" | "MXF" | "WEBM" | "RAW" | "Y4M")
+      attr_accessor f4v_settings: Types::F4vSettings
+      attr_accessor m2ts_settings: Types::M2tsSettings
+      attr_accessor m3u_8_settings: Types::M3u8Settings
+      attr_accessor mov_settings: Types::MovSettings
+      attr_accessor mp_4_settings: Types::Mp4Settings
+      attr_accessor mpd_settings: Types::MpdSettings
+      attr_accessor mxf_settings: Types::MxfSettings
+      SENSITIVE: []
+    end
+
+    class CreateJobRequest
+      attr_accessor acceleration_settings: Types::AccelerationSettings
+      attr_accessor billing_tags_source: ("QUEUE" | "PRESET" | "JOB_TEMPLATE" | "JOB")
+      attr_accessor client_request_token: ::String
+      attr_accessor hop_destinations: ::Array[Types::HopDestination]
+      attr_accessor job_template: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor queue: ::String
+      attr_accessor role: ::String
+      attr_accessor settings: Types::JobSettings
+      attr_accessor simulate_reserved_queue: ("DISABLED" | "ENABLED")
+      attr_accessor status_update_interval: ("SECONDS_10" | "SECONDS_12" | "SECONDS_15" | "SECONDS_20" | "SECONDS_30" | "SECONDS_60" | "SECONDS_120" | "SECONDS_180" | "SECONDS_240" | "SECONDS_300" | "SECONDS_360" | "SECONDS_420" | "SECONDS_480" | "SECONDS_540" | "SECONDS_600")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor user_metadata: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateJobResponse
+      attr_accessor job: Types::Job
+      SENSITIVE: []
+    end
+
+    class CreateJobTemplateRequest
+      attr_accessor acceleration_settings: Types::AccelerationSettings
+      attr_accessor category: ::String
+      attr_accessor description: ::String
+      attr_accessor hop_destinations: ::Array[Types::HopDestination]
+      attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor queue: ::String
+      attr_accessor settings: Types::JobTemplateSettings
+      attr_accessor status_update_interval: ("SECONDS_10" | "SECONDS_12" | "SECONDS_15" | "SECONDS_20" | "SECONDS_30" | "SECONDS_60" | "SECONDS_120" | "SECONDS_180" | "SECONDS_240" | "SECONDS_300" | "SECONDS_360" | "SECONDS_420" | "SECONDS_480" | "SECONDS_540" | "SECONDS_600")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateJobTemplateResponse
+      attr_accessor job_template: Types::JobTemplate
+      SENSITIVE: []
+    end
+
+    class CreatePresetRequest
+      attr_accessor category: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor settings: Types::PresetSettings
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePresetResponse
+      attr_accessor preset: Types::Preset
+      SENSITIVE: []
+    end
+
+    class CreateQueueRequest
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor pricing_plan: ("ON_DEMAND" | "RESERVED")
+      attr_accessor reservation_plan_settings: Types::ReservationPlanSettings
+      attr_accessor status: ("ACTIVE" | "PAUSED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateQueueResponse
+      attr_accessor queue: Types::Queue
+      SENSITIVE: []
+    end
+
+    class DashAdditionalManifest
+      attr_accessor manifest_name_modifier: ::String
+      attr_accessor selected_outputs: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DashIsoEncryptionSettings
+      attr_accessor playback_device_compatibility: ("CENC_V1" | "UNENCRYPTED_SEI")
+      attr_accessor speke_key_provider: Types::SpekeKeyProvider
+      SENSITIVE: []
+    end
+
+    class DashIsoGroupSettings
+      attr_accessor additional_manifests: ::Array[Types::DashAdditionalManifest]
+      attr_accessor audio_channel_config_scheme_id_uri: ("MPEG_CHANNEL_CONFIGURATION" | "DOLBY_CHANNEL_CONFIGURATION")
+      attr_accessor base_url: ::String
+      attr_accessor dash_manifest_style: ("BASIC" | "COMPACT" | "DISTINCT")
+      attr_accessor destination: ::String
+      attr_accessor destination_settings: Types::DestinationSettings
+      attr_accessor encryption: Types::DashIsoEncryptionSettings
+      attr_accessor fragment_length: ::Integer
+      attr_accessor hbbtv_compliance: ("HBBTV_1_5" | "NONE")
+      attr_accessor image_based_trick_play: ("NONE" | "THUMBNAIL" | "THUMBNAIL_AND_FULLFRAME" | "ADVANCED")
+      attr_accessor image_based_trick_play_settings: Types::DashIsoImageBasedTrickPlaySettings
+      attr_accessor min_buffer_time: ::Integer
+      attr_accessor min_final_segment_length: ::Float
+      attr_accessor mpd_manifest_bandwidth_type: ("AVERAGE" | "MAX")
+      attr_accessor mpd_profile: ("MAIN_PROFILE" | "ON_DEMAND_PROFILE")
+      attr_accessor pts_offset_handling_for_b_frames: ("ZERO_BASED" | "MATCH_INITIAL_PTS")
+      attr_accessor segment_control: ("SINGLE_FILE" | "SEGMENTED_FILES")
+      attr_accessor segment_length: ::Integer
+      attr_accessor segment_length_control: ("EXACT" | "GOP_MULTIPLE")
+      attr_accessor video_composition_offsets: ("SIGNED" | "UNSIGNED")
+      attr_accessor write_segment_timeline_in_representation: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class DashIsoImageBasedTrickPlaySettings
+      attr_accessor interval_cadence: ("FOLLOW_IFRAME" | "FOLLOW_CUSTOM")
+      attr_accessor thumbnail_height: ::Integer
+      attr_accessor thumbnail_interval: ::Float
+      attr_accessor thumbnail_width: ::Integer
+      attr_accessor tile_height: ::Integer
+      attr_accessor tile_width: ::Integer
+      SENSITIVE: []
+    end
+
+    class Deinterlacer
+      attr_accessor algorithm: ("INTERPOLATE" | "INTERPOLATE_TICKER" | "BLEND" | "BLEND_TICKER" | "LINEAR_INTERPOLATION")
+      attr_accessor control: ("FORCE_ALL_FRAMES" | "NORMAL")
+      attr_accessor mode: ("DEINTERLACE" | "INVERSE_TELECINE" | "ADAPTIVE")
+      SENSITIVE: []
+    end
+
+    class DeleteJobTemplateRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteJobTemplateResponse < Aws::EmptyStructure
+    end
+
+    class DeletePolicyRequest < Aws::EmptyStructure
+    end
+
+    class DeletePolicyResponse < Aws::EmptyStructure
+    end
+
+    class DeletePresetRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePresetResponse < Aws::EmptyStructure
+    end
+
+    class DeleteQueueRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteQueueResponse < Aws::EmptyStructure
+    end
+
+    class DescribeEndpointsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor mode: ("DEFAULT" | "GET_ONLY")
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEndpointsResponse
+      attr_accessor endpoints: ::Array[Types::Endpoint]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DestinationSettings
+      attr_accessor s3_settings: Types::S3DestinationSettings
+      SENSITIVE: []
+    end
+
+    class DisassociateCertificateRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateCertificateResponse < Aws::EmptyStructure
+    end
+
+    class DolbyVision
+      attr_accessor l6_metadata: Types::DolbyVisionLevel6Metadata
+      attr_accessor l6_mode: ("PASSTHROUGH" | "RECALCULATE" | "SPECIFY")
+      attr_accessor mapping: ("HDR10_NOMAP" | "HDR10_1000")
+      attr_accessor profile: ("PROFILE_5" | "PROFILE_8_1")
+      SENSITIVE: []
+    end
+
+    class DolbyVisionLevel6Metadata
+      attr_accessor max_cll: ::Integer
+      attr_accessor max_fall: ::Integer
+      SENSITIVE: []
+    end
+
+    class DvbNitSettings
+      attr_accessor network_id: ::Integer
+      attr_accessor network_name: ::String
+      attr_accessor nit_interval: ::Integer
+      SENSITIVE: []
+    end
+
+    class DvbSdtSettings
+      attr_accessor output_sdt: ("SDT_FOLLOW" | "SDT_FOLLOW_IF_PRESENT" | "SDT_MANUAL" | "SDT_NONE")
+      attr_accessor sdt_interval: ::Integer
+      attr_accessor service_name: ::String
+      attr_accessor service_provider_name: ::String
+      SENSITIVE: []
+    end
+
+    class DvbSubDestinationSettings
+      attr_accessor alignment: ("CENTERED" | "LEFT" | "AUTO")
+      attr_accessor apply_font_color: ("WHITE_TEXT_ONLY" | "ALL_TEXT")
+      attr_accessor background_color: ("NONE" | "BLACK" | "WHITE" | "AUTO")
+      attr_accessor background_opacity: ::Integer
+      attr_accessor dds_handling: ("NONE" | "SPECIFIED" | "NO_DISPLAY_WINDOW")
+      attr_accessor dds_x_coordinate: ::Integer
+      attr_accessor dds_y_coordinate: ::Integer
+      attr_accessor fallback_font: ("BEST_MATCH" | "MONOSPACED_SANSSERIF" | "MONOSPACED_SERIF" | "PROPORTIONAL_SANSSERIF" | "PROPORTIONAL_SERIF")
+      attr_accessor font_color: ("WHITE" | "BLACK" | "YELLOW" | "RED" | "GREEN" | "BLUE" | "HEX" | "AUTO")
+      attr_accessor font_opacity: ::Integer
+      attr_accessor font_resolution: ::Integer
+      attr_accessor font_script: ("AUTOMATIC" | "HANS" | "HANT")
+      attr_accessor font_size: ::Integer
+      attr_accessor height: ::Integer
+      attr_accessor hex_font_color: ::String
+      attr_accessor outline_color: ("BLACK" | "WHITE" | "YELLOW" | "RED" | "GREEN" | "BLUE" | "AUTO")
+      attr_accessor outline_size: ::Integer
+      attr_accessor shadow_color: ("NONE" | "BLACK" | "WHITE" | "AUTO")
+      attr_accessor shadow_opacity: ::Integer
+      attr_accessor shadow_x_offset: ::Integer
+      attr_accessor shadow_y_offset: ::Integer
+      attr_accessor style_passthrough: ("ENABLED" | "DISABLED")
+      attr_accessor subtitling_type: ("HEARING_IMPAIRED" | "STANDARD")
+      attr_accessor teletext_spacing: ("FIXED_GRID" | "PROPORTIONAL" | "AUTO")
+      attr_accessor width: ::Integer
+      attr_accessor x_position: ::Integer
+      attr_accessor y_position: ::Integer
+      SENSITIVE: []
+    end
+
+    class DvbSubSourceSettings
+      attr_accessor pid: ::Integer
+      SENSITIVE: []
+    end
+
+    class DvbTdtSettings
+      attr_accessor tdt_interval: ::Integer
+      SENSITIVE: []
+    end
+
+    class Eac3AtmosSettings
+      attr_accessor bitrate: ::Integer
+      attr_accessor bitstream_mode: ("COMPLETE_MAIN")
+      attr_accessor coding_mode: ("CODING_MODE_AUTO" | "CODING_MODE_5_1_4" | "CODING_MODE_7_1_4" | "CODING_MODE_9_1_6")
+      attr_accessor dialogue_intelligence: ("ENABLED" | "DISABLED")
+      attr_accessor downmix_control: ("SPECIFIED" | "INITIALIZE_FROM_SOURCE")
+      attr_accessor dynamic_range_compression_line: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")
+      attr_accessor dynamic_range_compression_rf: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")
+      attr_accessor dynamic_range_control: ("SPECIFIED" | "INITIALIZE_FROM_SOURCE")
+      attr_accessor lo_ro_center_mix_level: ::Float
+      attr_accessor lo_ro_surround_mix_level: ::Float
+      attr_accessor lt_rt_center_mix_level: ::Float
+      attr_accessor lt_rt_surround_mix_level: ::Float
+      attr_accessor metering_mode: ("LEQ_A" | "ITU_BS_1770_1" | "ITU_BS_1770_2" | "ITU_BS_1770_3" | "ITU_BS_1770_4")
+      attr_accessor sample_rate: ::Integer
+      attr_accessor speech_threshold: ::Integer
+      attr_accessor stereo_downmix: ("NOT_INDICATED" | "STEREO" | "SURROUND" | "DPL2")
+      attr_accessor surround_ex_mode: ("NOT_INDICATED" | "ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class Eac3Settings
+      attr_accessor attenuation_control: ("ATTENUATE_3_DB" | "NONE")
+      attr_accessor bitrate: ::Integer
+      attr_accessor bitstream_mode: ("COMPLETE_MAIN" | "COMMENTARY" | "EMERGENCY" | "HEARING_IMPAIRED" | "VISUALLY_IMPAIRED")
+      attr_accessor coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_2_0" | "CODING_MODE_3_2")
+      attr_accessor dc_filter: ("ENABLED" | "DISABLED")
+      attr_accessor dialnorm: ::Integer
+      attr_accessor dynamic_range_compression_line: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")
+      attr_accessor dynamic_range_compression_rf: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")
+      attr_accessor lfe_control: ("LFE" | "NO_LFE")
+      attr_accessor lfe_filter: ("ENABLED" | "DISABLED")
+      attr_accessor lo_ro_center_mix_level: ::Float
+      attr_accessor lo_ro_surround_mix_level: ::Float
+      attr_accessor lt_rt_center_mix_level: ::Float
+      attr_accessor lt_rt_surround_mix_level: ::Float
+      attr_accessor metadata_control: ("FOLLOW_INPUT" | "USE_CONFIGURED")
+      attr_accessor passthrough_control: ("WHEN_POSSIBLE" | "NO_PASSTHROUGH")
+      attr_accessor phase_control: ("SHIFT_90_DEGREES" | "NO_SHIFT")
+      attr_accessor sample_rate: ::Integer
+      attr_accessor stereo_downmix: ("NOT_INDICATED" | "LO_RO" | "LT_RT" | "DPL2")
+      attr_accessor surround_ex_mode: ("NOT_INDICATED" | "ENABLED" | "DISABLED")
+      attr_accessor surround_mode: ("NOT_INDICATED" | "ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class EmbeddedDestinationSettings
+      attr_accessor destination_608_channel_number: ::Integer
+      attr_accessor destination_708_service_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class EmbeddedSourceSettings
+      attr_accessor convert_608_to_708: ("UPCONVERT" | "DISABLED")
+      attr_accessor source_608_channel_number: ::Integer
+      attr_accessor source_608_track_number: ::Integer
+      attr_accessor terminate_captions: ("END_OF_INPUT" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class Endpoint
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class EsamManifestConfirmConditionNotification
+      attr_accessor mcc_xml: ::String
+      SENSITIVE: []
+    end
+
+    class EsamSettings
+      attr_accessor manifest_confirm_condition_notification: Types::EsamManifestConfirmConditionNotification
+      attr_accessor response_signal_preroll: ::Integer
+      attr_accessor signal_processing_notification: Types::EsamSignalProcessingNotification
+      SENSITIVE: []
+    end
+
+    class EsamSignalProcessingNotification
+      attr_accessor scc_xml: ::String
+      SENSITIVE: []
+    end
+
+    class ExceptionBody
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ExtendedDataServices
+      attr_accessor copy_protection_action: ("PASSTHROUGH" | "STRIP")
+      attr_accessor vchip_action: ("PASSTHROUGH" | "STRIP")
+      SENSITIVE: []
+    end
+
+    class F4vSettings
+      attr_accessor moov_placement: ("PROGRESSIVE_DOWNLOAD" | "NORMAL")
+      SENSITIVE: []
+    end
+
+    class FileGroupSettings
+      attr_accessor destination: ::String
+      attr_accessor destination_settings: Types::DestinationSettings
+      SENSITIVE: []
+    end
+
+    class FileSourceSettings
+      attr_accessor convert_608_to_708: ("UPCONVERT" | "DISABLED")
+      attr_accessor convert_paint_to_pop: ("ENABLED" | "DISABLED")
+      attr_accessor framerate: Types::CaptionSourceFramerate
+      attr_accessor source_file: ::String
+      attr_accessor time_delta: ::Integer
+      attr_accessor time_delta_units: ("SECONDS" | "MILLISECONDS")
+      SENSITIVE: []
+    end
+
+    class FlacSettings
+      attr_accessor bit_depth: ::Integer
+      attr_accessor channels: ::Integer
+      attr_accessor sample_rate: ::Integer
+      SENSITIVE: []
+    end
+
+    class ForbiddenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ForceIncludeRenditionSize
+      attr_accessor height: ::Integer
+      attr_accessor width: ::Integer
+      SENSITIVE: []
+    end
+
+    class FrameCaptureSettings
+      attr_accessor framerate_denominator: ::Integer
+      attr_accessor framerate_numerator: ::Integer
+      attr_accessor max_captures: ::Integer
+      attr_accessor quality: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetJobRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetJobResponse
+      attr_accessor job: Types::Job
+      SENSITIVE: []
+    end
+
+    class GetJobTemplateRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetJobTemplateResponse
+      attr_accessor job_template: Types::JobTemplate
+      SENSITIVE: []
+    end
+
+    class GetPolicyRequest < Aws::EmptyStructure
+    end
+
+    class GetPolicyResponse
+      attr_accessor policy: Types::Policy
+      SENSITIVE: []
+    end
+
+    class GetPresetRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetPresetResponse
+      attr_accessor preset: Types::Preset
+      SENSITIVE: []
+    end
+
+    class GetQueueRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetQueueResponse
+      attr_accessor queue: Types::Queue
+      SENSITIVE: []
+    end
+
+    class H264QvbrSettings
+      attr_accessor max_average_bitrate: ::Integer
+      attr_accessor qvbr_quality_level: ::Integer
+      attr_accessor qvbr_quality_level_fine_tune: ::Float
+      SENSITIVE: []
+    end
+
+    class H264Settings
+      attr_accessor adaptive_quantization: ("OFF" | "AUTO" | "LOW" | "MEDIUM" | "HIGH" | "HIGHER" | "MAX")
+      attr_accessor bandwidth_reduction_filter: Types::BandwidthReductionFilter
+      attr_accessor bitrate: ::Integer
+      attr_accessor codec_level: ("AUTO" | "LEVEL_1" | "LEVEL_1_1" | "LEVEL_1_2" | "LEVEL_1_3" | "LEVEL_2" | "LEVEL_2_1" | "LEVEL_2_2" | "LEVEL_3" | "LEVEL_3_1" | "LEVEL_3_2" | "LEVEL_4" | "LEVEL_4_1" | "LEVEL_4_2" | "LEVEL_5" | "LEVEL_5_1" | "LEVEL_5_2")
+      attr_accessor codec_profile: ("BASELINE" | "HIGH" | "HIGH_10BIT" | "HIGH_422" | "HIGH_422_10BIT" | "MAIN")
+      attr_accessor dynamic_sub_gop: ("ADAPTIVE" | "STATIC")
+      attr_accessor end_of_stream_markers: ("INCLUDE" | "SUPPRESS")
+      attr_accessor entropy_encoding: ("CABAC" | "CAVLC")
+      attr_accessor field_encoding: ("PAFF" | "FORCE_FIELD" | "MBAFF")
+      attr_accessor flicker_adaptive_quantization: ("DISABLED" | "ENABLED")
+      attr_accessor framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
+      attr_accessor framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER")
+      attr_accessor framerate_denominator: ::Integer
+      attr_accessor framerate_numerator: ::Integer
+      attr_accessor gop_b_reference: ("DISABLED" | "ENABLED")
+      attr_accessor gop_closed_cadence: ::Integer
+      attr_accessor gop_size: ::Float
+      attr_accessor gop_size_units: ("FRAMES" | "SECONDS" | "AUTO")
+      attr_accessor hrd_buffer_final_fill_percentage: ::Integer
+      attr_accessor hrd_buffer_initial_fill_percentage: ::Integer
+      attr_accessor hrd_buffer_size: ::Integer
+      attr_accessor interlace_mode: ("PROGRESSIVE" | "TOP_FIELD" | "BOTTOM_FIELD" | "FOLLOW_TOP_FIELD" | "FOLLOW_BOTTOM_FIELD")
+      attr_accessor max_bitrate: ::Integer
+      attr_accessor min_i_interval: ::Integer
+      attr_accessor number_b_frames_between_reference_frames: ::Integer
+      attr_accessor number_reference_frames: ::Integer
+      attr_accessor par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
+      attr_accessor par_denominator: ::Integer
+      attr_accessor par_numerator: ::Integer
+      attr_accessor quality_tuning_level: ("SINGLE_PASS" | "SINGLE_PASS_HQ" | "MULTI_PASS_HQ")
+      attr_accessor qvbr_settings: Types::H264QvbrSettings
+      attr_accessor rate_control_mode: ("VBR" | "CBR" | "QVBR")
+      attr_accessor repeat_pps: ("DISABLED" | "ENABLED")
+      attr_accessor scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")
+      attr_accessor scene_change_detect: ("DISABLED" | "ENABLED" | "TRANSITION_DETECTION")
+      attr_accessor slices: ::Integer
+      attr_accessor slow_pal: ("DISABLED" | "ENABLED")
+      attr_accessor softness: ::Integer
+      attr_accessor spatial_adaptive_quantization: ("DISABLED" | "ENABLED")
+      attr_accessor syntax: ("DEFAULT" | "RP2027")
+      attr_accessor telecine: ("NONE" | "SOFT" | "HARD")
+      attr_accessor temporal_adaptive_quantization: ("DISABLED" | "ENABLED")
+      attr_accessor unregistered_sei_timecode: ("DISABLED" | "ENABLED")
+      SENSITIVE: []
+    end
+
+    class H265QvbrSettings
+      attr_accessor max_average_bitrate: ::Integer
+      attr_accessor qvbr_quality_level: ::Integer
+      attr_accessor qvbr_quality_level_fine_tune: ::Float
+      SENSITIVE: []
+    end
+
+    class H265Settings
+      attr_accessor adaptive_quantization: ("OFF" | "LOW" | "MEDIUM" | "HIGH" | "HIGHER" | "MAX" | "AUTO")
+      attr_accessor alternate_transfer_function_sei: ("DISABLED" | "ENABLED")
+      attr_accessor bandwidth_reduction_filter: Types::BandwidthReductionFilter
+      attr_accessor bitrate: ::Integer
+      attr_accessor codec_level: ("AUTO" | "LEVEL_1" | "LEVEL_2" | "LEVEL_2_1" | "LEVEL_3" | "LEVEL_3_1" | "LEVEL_4" | "LEVEL_4_1" | "LEVEL_5" | "LEVEL_5_1" | "LEVEL_5_2" | "LEVEL_6" | "LEVEL_6_1" | "LEVEL_6_2")
+      attr_accessor codec_profile: ("MAIN_MAIN" | "MAIN_HIGH" | "MAIN10_MAIN" | "MAIN10_HIGH" | "MAIN_422_8BIT_MAIN" | "MAIN_422_8BIT_HIGH" | "MAIN_422_10BIT_MAIN" | "MAIN_422_10BIT_HIGH")
+      attr_accessor dynamic_sub_gop: ("ADAPTIVE" | "STATIC")
+      attr_accessor end_of_stream_markers: ("INCLUDE" | "SUPPRESS")
+      attr_accessor flicker_adaptive_quantization: ("DISABLED" | "ENABLED")
+      attr_accessor framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
+      attr_accessor framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER")
+      attr_accessor framerate_denominator: ::Integer
+      attr_accessor framerate_numerator: ::Integer
+      attr_accessor gop_b_reference: ("DISABLED" | "ENABLED")
+      attr_accessor gop_closed_cadence: ::Integer
+      attr_accessor gop_size: ::Float
+      attr_accessor gop_size_units: ("FRAMES" | "SECONDS" | "AUTO")
+      attr_accessor hrd_buffer_final_fill_percentage: ::Integer
+      attr_accessor hrd_buffer_initial_fill_percentage: ::Integer
+      attr_accessor hrd_buffer_size: ::Integer
+      attr_accessor interlace_mode: ("PROGRESSIVE" | "TOP_FIELD" | "BOTTOM_FIELD" | "FOLLOW_TOP_FIELD" | "FOLLOW_BOTTOM_FIELD")
+      attr_accessor max_bitrate: ::Integer
+      attr_accessor min_i_interval: ::Integer
+      attr_accessor number_b_frames_between_reference_frames: ::Integer
+      attr_accessor number_reference_frames: ::Integer
+      attr_accessor par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
+      attr_accessor par_denominator: ::Integer
+      attr_accessor par_numerator: ::Integer
+      attr_accessor quality_tuning_level: ("SINGLE_PASS" | "SINGLE_PASS_HQ" | "MULTI_PASS_HQ")
+      attr_accessor qvbr_settings: Types::H265QvbrSettings
+      attr_accessor rate_control_mode: ("VBR" | "CBR" | "QVBR")
+      attr_accessor sample_adaptive_offset_filter_mode: ("DEFAULT" | "ADAPTIVE" | "OFF")
+      attr_accessor scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")
+      attr_accessor scene_change_detect: ("DISABLED" | "ENABLED" | "TRANSITION_DETECTION")
+      attr_accessor slices: ::Integer
+      attr_accessor slow_pal: ("DISABLED" | "ENABLED")
+      attr_accessor spatial_adaptive_quantization: ("DISABLED" | "ENABLED")
+      attr_accessor telecine: ("NONE" | "SOFT" | "HARD")
+      attr_accessor temporal_adaptive_quantization: ("DISABLED" | "ENABLED")
+      attr_accessor temporal_ids: ("DISABLED" | "ENABLED")
+      attr_accessor tiles: ("DISABLED" | "ENABLED")
+      attr_accessor unregistered_sei_timecode: ("DISABLED" | "ENABLED")
+      attr_accessor write_mp_4_packaging_type: ("HVC1" | "HEV1")
+      SENSITIVE: []
+    end
+
+    class Hdr10Metadata
+      attr_accessor blue_primary_x: ::Integer
+      attr_accessor blue_primary_y: ::Integer
+      attr_accessor green_primary_x: ::Integer
+      attr_accessor green_primary_y: ::Integer
+      attr_accessor max_content_light_level: ::Integer
+      attr_accessor max_frame_average_light_level: ::Integer
+      attr_accessor max_luminance: ::Integer
+      attr_accessor min_luminance: ::Integer
+      attr_accessor red_primary_x: ::Integer
+      attr_accessor red_primary_y: ::Integer
+      attr_accessor white_point_x: ::Integer
+      attr_accessor white_point_y: ::Integer
+      SENSITIVE: []
+    end
+
+    class Hdr10Plus
+      attr_accessor mastering_monitor_nits: ::Integer
+      attr_accessor target_monitor_nits: ::Integer
+      SENSITIVE: []
+    end
+
+    class HlsAdditionalManifest
+      attr_accessor manifest_name_modifier: ::String
+      attr_accessor selected_outputs: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class HlsCaptionLanguageMapping
+      attr_accessor caption_channel: ::Integer
+      attr_accessor custom_language_code: ::String
+      attr_accessor language_code: ("ENG" | "SPA" | "FRA" | "DEU" | "GER" | "ZHO" | "ARA" | "HIN" | "JPN" | "RUS" | "POR" | "ITA" | "URD" | "VIE" | "KOR" | "PAN" | "ABK" | "AAR" | "AFR" | "AKA" | "SQI" | "AMH" | "ARG" | "HYE" | "ASM" | "AVA" | "AVE" | "AYM" | "AZE" | "BAM" | "BAK" | "EUS" | "BEL" | "BEN" | "BIH" | "BIS" | "BOS" | "BRE" | "BUL" | "MYA" | "CAT" | "KHM" | "CHA" | "CHE" | "NYA" | "CHU" | "CHV" | "COR" | "COS" | "CRE" | "HRV" | "CES" | "DAN" | "DIV" | "NLD" | "DZO" | "ENM" | "EPO" | "EST" | "EWE" | "FAO" | "FIJ" | "FIN" | "FRM" | "FUL" | "GLA" | "GLG" | "LUG" | "KAT" | "ELL" | "GRN" | "GUJ" | "HAT" | "HAU" | "HEB" | "HER" | "HMO" | "HUN" | "ISL" | "IDO" | "IBO" | "IND" | "INA" | "ILE" | "IKU" | "IPK" | "GLE" | "JAV" | "KAL" | "KAN" | "KAU" | "KAS" | "KAZ" | "KIK" | "KIN" | "KIR" | "KOM" | "KON" | "KUA" | "KUR" | "LAO" | "LAT" | "LAV" | "LIM" | "LIN" | "LIT" | "LUB" | "LTZ" | "MKD" | "MLG" | "MSA" | "MAL" | "MLT" | "GLV" | "MRI" | "MAR" | "MAH" | "MON" | "NAU" | "NAV" | "NDE" | "NBL" | "NDO" | "NEP" | "SME" | "NOR" | "NOB" | "NNO" | "OCI" | "OJI" | "ORI" | "ORM" | "OSS" | "PLI" | "FAS" | "POL" | "PUS" | "QUE" | "QAA" | "RON" | "ROH" | "RUN" | "SMO" | "SAG" | "SAN" | "SRD" | "SRB" | "SNA" | "III" | "SND" | "SIN" | "SLK" | "SLV" | "SOM" | "SOT" | "SUN" | "SWA" | "SSW" | "SWE" | "TGL" | "TAH" | "TGK" | "TAM" | "TAT" | "TEL" | "THA" | "BOD" | "TIR" | "TON" | "TSO" | "TSN" | "TUR" | "TUK" | "TWI" | "UIG" | "UKR" | "UZB" | "VEN" | "VOL" | "WLN" | "CYM" | "FRY" | "WOL" | "XHO" | "YID" | "YOR" | "ZHA" | "ZUL" | "ORJ" | "QPC" | "TNG" | "SRP")
+      attr_accessor language_description: ::String
+      SENSITIVE: []
+    end
+
+    class HlsEncryptionSettings
+      attr_accessor constant_initialization_vector: ::String
+      attr_accessor encryption_method: ("AES128" | "SAMPLE_AES")
+      attr_accessor initialization_vector_in_manifest: ("INCLUDE" | "EXCLUDE")
+      attr_accessor offline_encrypted: ("ENABLED" | "DISABLED")
+      attr_accessor speke_key_provider: Types::SpekeKeyProvider
+      attr_accessor static_key_provider: Types::StaticKeyProvider
+      attr_accessor type: ("SPEKE" | "STATIC_KEY")
+      SENSITIVE: []
+    end
+
+    class HlsGroupSettings
+      attr_accessor ad_markers: ::Array[("ELEMENTAL" | "ELEMENTAL_SCTE35")]
+      attr_accessor additional_manifests: ::Array[Types::HlsAdditionalManifest]
+      attr_accessor audio_only_header: ("INCLUDE" | "EXCLUDE")
+      attr_accessor base_url: ::String
+      attr_accessor caption_language_mappings: ::Array[Types::HlsCaptionLanguageMapping]
+      attr_accessor caption_language_setting: ("INSERT" | "OMIT" | "NONE")
+      attr_accessor caption_segment_length_control: ("LARGE_SEGMENTS" | "MATCH_VIDEO")
+      attr_accessor client_cache: ("DISABLED" | "ENABLED")
+      attr_accessor codec_specification: ("RFC_6381" | "RFC_4281")
+      attr_accessor destination: ::String
+      attr_accessor destination_settings: Types::DestinationSettings
+      attr_accessor directory_structure: ("SINGLE_DIRECTORY" | "SUBDIRECTORY_PER_STREAM")
+      attr_accessor encryption: Types::HlsEncryptionSettings
+      attr_accessor image_based_trick_play: ("NONE" | "THUMBNAIL" | "THUMBNAIL_AND_FULLFRAME" | "ADVANCED")
+      attr_accessor image_based_trick_play_settings: Types::HlsImageBasedTrickPlaySettings
+      attr_accessor manifest_compression: ("GZIP" | "NONE")
+      attr_accessor manifest_duration_format: ("FLOATING_POINT" | "INTEGER")
+      attr_accessor min_final_segment_length: ::Float
+      attr_accessor min_segment_length: ::Integer
+      attr_accessor output_selection: ("MANIFESTS_AND_SEGMENTS" | "SEGMENTS_ONLY")
+      attr_accessor program_date_time: ("INCLUDE" | "EXCLUDE")
+      attr_accessor program_date_time_period: ::Integer
+      attr_accessor progressive_write_hls_manifest: ("ENABLED" | "DISABLED")
+      attr_accessor segment_control: ("SINGLE_FILE" | "SEGMENTED_FILES")
+      attr_accessor segment_length: ::Integer
+      attr_accessor segment_length_control: ("EXACT" | "GOP_MULTIPLE")
+      attr_accessor segments_per_subdirectory: ::Integer
+      attr_accessor stream_inf_resolution: ("INCLUDE" | "EXCLUDE")
+      attr_accessor target_duration_compatibility_mode: ("LEGACY" | "SPEC_COMPLIANT")
+      attr_accessor timed_metadata_id_3_frame: ("NONE" | "PRIV" | "TDRL")
+      attr_accessor timed_metadata_id_3_period: ::Integer
+      attr_accessor timestamp_delta_milliseconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class HlsImageBasedTrickPlaySettings
+      attr_accessor interval_cadence: ("FOLLOW_IFRAME" | "FOLLOW_CUSTOM")
+      attr_accessor thumbnail_height: ::Integer
+      attr_accessor thumbnail_interval: ::Float
+      attr_accessor thumbnail_width: ::Integer
+      attr_accessor tile_height: ::Integer
+      attr_accessor tile_width: ::Integer
+      SENSITIVE: []
+    end
+
+    class HlsRenditionGroupSettings
+      attr_accessor rendition_group_id: ::String
+      attr_accessor rendition_language_code: ("ENG" | "SPA" | "FRA" | "DEU" | "GER" | "ZHO" | "ARA" | "HIN" | "JPN" | "RUS" | "POR" | "ITA" | "URD" | "VIE" | "KOR" | "PAN" | "ABK" | "AAR" | "AFR" | "AKA" | "SQI" | "AMH" | "ARG" | "HYE" | "ASM" | "AVA" | "AVE" | "AYM" | "AZE" | "BAM" | "BAK" | "EUS" | "BEL" | "BEN" | "BIH" | "BIS" | "BOS" | "BRE" | "BUL" | "MYA" | "CAT" | "KHM" | "CHA" | "CHE" | "NYA" | "CHU" | "CHV" | "COR" | "COS" | "CRE" | "HRV" | "CES" | "DAN" | "DIV" | "NLD" | "DZO" | "ENM" | "EPO" | "EST" | "EWE" | "FAO" | "FIJ" | "FIN" | "FRM" | "FUL" | "GLA" | "GLG" | "LUG" | "KAT" | "ELL" | "GRN" | "GUJ" | "HAT" | "HAU" | "HEB" | "HER" | "HMO" | "HUN" | "ISL" | "IDO" | "IBO" | "IND" | "INA" | "ILE" | "IKU" | "IPK" | "GLE" | "JAV" | "KAL" | "KAN" | "KAU" | "KAS" | "KAZ" | "KIK" | "KIN" | "KIR" | "KOM" | "KON" | "KUA" | "KUR" | "LAO" | "LAT" | "LAV" | "LIM" | "LIN" | "LIT" | "LUB" | "LTZ" | "MKD" | "MLG" | "MSA" | "MAL" | "MLT" | "GLV" | "MRI" | "MAR" | "MAH" | "MON" | "NAU" | "NAV" | "NDE" | "NBL" | "NDO" | "NEP" | "SME" | "NOR" | "NOB" | "NNO" | "OCI" | "OJI" | "ORI" | "ORM" | "OSS" | "PLI" | "FAS" | "POL" | "PUS" | "QUE" | "QAA" | "RON" | "ROH" | "RUN" | "SMO" | "SAG" | "SAN" | "SRD" | "SRB" | "SNA" | "III" | "SND" | "SIN" | "SLK" | "SLV" | "SOM" | "SOT" | "SUN" | "SWA" | "SSW" | "SWE" | "TGL" | "TAH" | "TGK" | "TAM" | "TAT" | "TEL" | "THA" | "BOD" | "TIR" | "TON" | "TSO" | "TSN" | "TUR" | "TUK" | "TWI" | "UIG" | "UKR" | "UZB" | "VEN" | "VOL" | "WLN" | "CYM" | "FRY" | "WOL" | "XHO" | "YID" | "YOR" | "ZHA" | "ZUL" | "ORJ" | "QPC" | "TNG" | "SRP")
+      attr_accessor rendition_name: ::String
+      SENSITIVE: []
+    end
+
+    class HlsSettings
+      attr_accessor audio_group_id: ::String
+      attr_accessor audio_only_container: ("AUTOMATIC" | "M2TS")
+      attr_accessor audio_rendition_sets: ::String
+      attr_accessor audio_track_type: ("ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" | "ALTERNATE_AUDIO_AUTO_SELECT" | "ALTERNATE_AUDIO_NOT_AUTO_SELECT" | "AUDIO_ONLY_VARIANT_STREAM")
+      attr_accessor descriptive_video_service_flag: ("DONT_FLAG" | "FLAG")
+      attr_accessor i_frame_only_manifest: ("INCLUDE" | "EXCLUDE")
+      attr_accessor segment_modifier: ::String
+      SENSITIVE: []
+    end
+
+    class HopDestination
+      attr_accessor priority: ::Integer
+      attr_accessor queue: ::String
+      attr_accessor wait_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class Id3Insertion
+      attr_accessor id_3: ::String
+      attr_accessor timecode: ::String
+      SENSITIVE: []
+    end
+
+    class ImageInserter
+      attr_accessor insertable_images: ::Array[Types::InsertableImage]
+      attr_accessor sdr_reference_white_level: ::Integer
+      SENSITIVE: []
+    end
+
+    class ImscDestinationSettings
+      attr_accessor accessibility: ("DISABLED" | "ENABLED")
+      attr_accessor style_passthrough: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class Input
+      attr_accessor advanced_input_filter: ("ENABLED" | "DISABLED")
+      attr_accessor advanced_input_filter_settings: Types::AdvancedInputFilterSettings
+      attr_accessor audio_selector_groups: ::Hash[::String, Types::AudioSelectorGroup]
+      attr_accessor audio_selectors: ::Hash[::String, Types::AudioSelector]
+      attr_accessor caption_selectors: ::Hash[::String, Types::CaptionSelector]
+      attr_accessor crop: Types::Rectangle
+      attr_accessor deblock_filter: ("ENABLED" | "DISABLED")
+      attr_accessor decryption_settings: Types::InputDecryptionSettings
+      attr_accessor denoise_filter: ("ENABLED" | "DISABLED")
+      attr_accessor dolby_vision_metadata_xml: ::String
+      attr_accessor file_input: ::String
+      attr_accessor filter_enable: ("AUTO" | "DISABLE" | "FORCE")
+      attr_accessor filter_strength: ::Integer
+      attr_accessor image_inserter: Types::ImageInserter
+      attr_accessor input_clippings: ::Array[Types::InputClipping]
+      attr_accessor input_scan_type: ("AUTO" | "PSF")
+      attr_accessor position: Types::Rectangle
+      attr_accessor program_number: ::Integer
+      attr_accessor psi_control: ("IGNORE_PSI" | "USE_PSI")
+      attr_accessor supplemental_imps: ::Array[::String]
+      attr_accessor timecode_source: ("EMBEDDED" | "ZEROBASED" | "SPECIFIEDSTART")
+      attr_accessor timecode_start: ::String
+      attr_accessor video_generator: Types::InputVideoGenerator
+      attr_accessor video_overlays: ::Array[Types::VideoOverlay]
+      attr_accessor video_selector: Types::VideoSelector
+      SENSITIVE: []
+    end
+
+    class InputClipping
+      attr_accessor end_timecode: ::String
+      attr_accessor start_timecode: ::String
+      SENSITIVE: []
+    end
+
+    class InputDecryptionSettings
+      attr_accessor decryption_mode: ("AES_CTR" | "AES_CBC" | "AES_GCM")
+      attr_accessor encrypted_decryption_key: ::String
+      attr_accessor initialization_vector: ::String
+      attr_accessor kms_key_region: ::String
+      SENSITIVE: []
+    end
+
+    class InputTemplate
+      attr_accessor advanced_input_filter: ("ENABLED" | "DISABLED")
+      attr_accessor advanced_input_filter_settings: Types::AdvancedInputFilterSettings
+      attr_accessor audio_selector_groups: ::Hash[::String, Types::AudioSelectorGroup]
+      attr_accessor audio_selectors: ::Hash[::String, Types::AudioSelector]
+      attr_accessor caption_selectors: ::Hash[::String, Types::CaptionSelector]
+      attr_accessor crop: Types::Rectangle
+      attr_accessor deblock_filter: ("ENABLED" | "DISABLED")
+      attr_accessor denoise_filter: ("ENABLED" | "DISABLED")
+      attr_accessor dolby_vision_metadata_xml: ::String
+      attr_accessor filter_enable: ("AUTO" | "DISABLE" | "FORCE")
+      attr_accessor filter_strength: ::Integer
+      attr_accessor image_inserter: Types::ImageInserter
+      attr_accessor input_clippings: ::Array[Types::InputClipping]
+      attr_accessor input_scan_type: ("AUTO" | "PSF")
+      attr_accessor position: Types::Rectangle
+      attr_accessor program_number: ::Integer
+      attr_accessor psi_control: ("IGNORE_PSI" | "USE_PSI")
+      attr_accessor timecode_source: ("EMBEDDED" | "ZEROBASED" | "SPECIFIEDSTART")
+      attr_accessor timecode_start: ::String
+      attr_accessor video_overlays: ::Array[Types::VideoOverlay]
+      attr_accessor video_selector: Types::VideoSelector
+      SENSITIVE: []
+    end
+
+    class InputVideoGenerator
+      attr_accessor duration: ::Integer
+      SENSITIVE: []
+    end
+
+    class InsertableImage
+      attr_accessor duration: ::Integer
+      attr_accessor fade_in: ::Integer
+      attr_accessor fade_out: ::Integer
+      attr_accessor height: ::Integer
+      attr_accessor image_inserter_input: ::String
+      attr_accessor image_x: ::Integer
+      attr_accessor image_y: ::Integer
+      attr_accessor layer: ::Integer
+      attr_accessor opacity: ::Integer
+      attr_accessor start_time: ::String
+      attr_accessor width: ::Integer
+      SENSITIVE: []
+    end
+
+    class InternalServerErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Job
+      attr_accessor acceleration_settings: Types::AccelerationSettings
+      attr_accessor acceleration_status: ("NOT_APPLICABLE" | "IN_PROGRESS" | "ACCELERATED" | "NOT_ACCELERATED")
+      attr_accessor arn: ::String
+      attr_accessor billing_tags_source: ("QUEUE" | "PRESET" | "JOB_TEMPLATE" | "JOB")
+      attr_accessor client_request_token: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor current_phase: ("PROBING" | "TRANSCODING" | "UPLOADING")
+      attr_accessor error_code: ::Integer
+      attr_accessor error_message: ::String
+      attr_accessor hop_destinations: ::Array[Types::HopDestination]
+      attr_accessor id: ::String
+      attr_accessor job_percent_complete: ::Integer
+      attr_accessor job_template: ::String
+      attr_accessor messages: Types::JobMessages
+      attr_accessor output_group_details: ::Array[Types::OutputGroupDetail]
+      attr_accessor priority: ::Integer
+      attr_accessor queue: ::String
+      attr_accessor queue_transitions: ::Array[Types::QueueTransition]
+      attr_accessor retry_count: ::Integer
+      attr_accessor role: ::String
+      attr_accessor settings: Types::JobSettings
+      attr_accessor simulate_reserved_queue: ("DISABLED" | "ENABLED")
+      attr_accessor status: ("SUBMITTED" | "PROGRESSING" | "COMPLETE" | "CANCELED" | "ERROR")
+      attr_accessor status_update_interval: ("SECONDS_10" | "SECONDS_12" | "SECONDS_15" | "SECONDS_20" | "SECONDS_30" | "SECONDS_60" | "SECONDS_120" | "SECONDS_180" | "SECONDS_240" | "SECONDS_300" | "SECONDS_360" | "SECONDS_420" | "SECONDS_480" | "SECONDS_540" | "SECONDS_600")
+      attr_accessor timing: Types::Timing
+      attr_accessor user_metadata: ::Hash[::String, ::String]
+      attr_accessor warnings: ::Array[Types::WarningGroup]
+      SENSITIVE: []
+    end
+
+    class JobMessages
+      attr_accessor info: ::Array[::String]
+      attr_accessor warning: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class JobSettings
+      attr_accessor ad_avail_offset: ::Integer
+      attr_accessor avail_blanking: Types::AvailBlanking
+      attr_accessor color_conversion_3_dlut_settings: ::Array[Types::ColorConversion3DLUTSetting]
+      attr_accessor esam: Types::EsamSettings
+      attr_accessor extended_data_services: Types::ExtendedDataServices
+      attr_accessor follow_source: ::Integer
+      attr_accessor inputs: ::Array[Types::Input]
+      attr_accessor kantar_watermark: Types::KantarWatermarkSettings
+      attr_accessor motion_image_inserter: Types::MotionImageInserter
+      attr_accessor nielsen_configuration: Types::NielsenConfiguration
+      attr_accessor nielsen_non_linear_watermark: Types::NielsenNonLinearWatermarkSettings
+      attr_accessor output_groups: ::Array[Types::OutputGroup]
+      attr_accessor timecode_config: Types::TimecodeConfig
+      attr_accessor timed_metadata_insertion: Types::TimedMetadataInsertion
+      SENSITIVE: []
+    end
+
+    class JobTemplate
+      attr_accessor acceleration_settings: Types::AccelerationSettings
+      attr_accessor arn: ::String
+      attr_accessor category: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor hop_destinations: ::Array[Types::HopDestination]
+      attr_accessor last_updated: ::Time
+      attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor queue: ::String
+      attr_accessor settings: Types::JobTemplateSettings
+      attr_accessor status_update_interval: ("SECONDS_10" | "SECONDS_12" | "SECONDS_15" | "SECONDS_20" | "SECONDS_30" | "SECONDS_60" | "SECONDS_120" | "SECONDS_180" | "SECONDS_240" | "SECONDS_300" | "SECONDS_360" | "SECONDS_420" | "SECONDS_480" | "SECONDS_540" | "SECONDS_600")
+      attr_accessor type: ("SYSTEM" | "CUSTOM")
+      SENSITIVE: []
+    end
+
+    class JobTemplateSettings
+      attr_accessor ad_avail_offset: ::Integer
+      attr_accessor avail_blanking: Types::AvailBlanking
+      attr_accessor color_conversion_3_dlut_settings: ::Array[Types::ColorConversion3DLUTSetting]
+      attr_accessor esam: Types::EsamSettings
+      attr_accessor extended_data_services: Types::ExtendedDataServices
+      attr_accessor follow_source: ::Integer
+      attr_accessor inputs: ::Array[Types::InputTemplate]
+      attr_accessor kantar_watermark: Types::KantarWatermarkSettings
+      attr_accessor motion_image_inserter: Types::MotionImageInserter
+      attr_accessor nielsen_configuration: Types::NielsenConfiguration
+      attr_accessor nielsen_non_linear_watermark: Types::NielsenNonLinearWatermarkSettings
+      attr_accessor output_groups: ::Array[Types::OutputGroup]
+      attr_accessor timecode_config: Types::TimecodeConfig
+      attr_accessor timed_metadata_insertion: Types::TimedMetadataInsertion
+      SENSITIVE: []
+    end
+
+    class KantarWatermarkSettings
+      attr_accessor channel_name: ::String
+      attr_accessor content_reference: ::String
+      attr_accessor credentials_secret_name: ::String
+      attr_accessor file_offset: ::Float
+      attr_accessor kantar_license_id: ::Integer
+      attr_accessor kantar_server_url: ::String
+      attr_accessor log_destination: ::String
+      attr_accessor metadata_3: ::String
+      attr_accessor metadata_4: ::String
+      attr_accessor metadata_5: ::String
+      attr_accessor metadata_6: ::String
+      attr_accessor metadata_7: ::String
+      attr_accessor metadata_8: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobTemplatesRequest
+      attr_accessor category: ::String
+      attr_accessor list_by: ("NAME" | "CREATION_DATE" | "SYSTEM")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class ListJobTemplatesResponse
+      attr_accessor job_templates: ::Array[Types::JobTemplate]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor order: ("ASCENDING" | "DESCENDING")
+      attr_accessor queue: ::String
+      attr_accessor status: ("SUBMITTED" | "PROGRESSING" | "COMPLETE" | "CANCELED" | "ERROR")
+      SENSITIVE: []
+    end
+
+    class ListJobsResponse
+      attr_accessor jobs: ::Array[Types::Job]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPresetsRequest
+      attr_accessor category: ::String
+      attr_accessor list_by: ("NAME" | "CREATION_DATE" | "SYSTEM")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class ListPresetsResponse
+      attr_accessor next_token: ::String
+      attr_accessor presets: ::Array[Types::Preset]
+      SENSITIVE: []
+    end
+
+    class ListQueuesRequest
+      attr_accessor list_by: ("NAME" | "CREATION_DATE")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class ListQueuesResponse
+      attr_accessor next_token: ::String
+      attr_accessor queues: ::Array[Types::Queue]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor resource_tags: Types::ResourceTags
+      SENSITIVE: []
+    end
+
+    class M2tsScte35Esam
+      attr_accessor scte_35_esam_pid: ::Integer
+      SENSITIVE: []
+    end
+
+    class M2tsSettings
+      attr_accessor audio_buffer_model: ("DVB" | "ATSC")
+      attr_accessor audio_duration: ("DEFAULT_CODEC_DURATION" | "MATCH_VIDEO_DURATION")
+      attr_accessor audio_frames_per_pes: ::Integer
+      attr_accessor audio_pids: ::Array[::Integer]
+      attr_accessor bitrate: ::Integer
+      attr_accessor buffer_model: ("MULTIPLEX" | "NONE")
+      attr_accessor data_pts_control: ("AUTO" | "ALIGN_TO_VIDEO")
+      attr_accessor dvb_nit_settings: Types::DvbNitSettings
+      attr_accessor dvb_sdt_settings: Types::DvbSdtSettings
+      attr_accessor dvb_sub_pids: ::Array[::Integer]
+      attr_accessor dvb_tdt_settings: Types::DvbTdtSettings
+      attr_accessor dvb_teletext_pid: ::Integer
+      attr_accessor ebp_audio_interval: ("VIDEO_AND_FIXED_INTERVALS" | "VIDEO_INTERVAL")
+      attr_accessor ebp_placement: ("VIDEO_AND_AUDIO_PIDS" | "VIDEO_PID")
+      attr_accessor es_rate_in_pes: ("INCLUDE" | "EXCLUDE")
+      attr_accessor force_ts_video_ebp_order: ("FORCE" | "DEFAULT")
+      attr_accessor fragment_time: ::Float
+      attr_accessor klv_metadata: ("PASSTHROUGH" | "NONE")
+      attr_accessor max_pcr_interval: ::Integer
+      attr_accessor min_ebp_interval: ::Integer
+      attr_accessor nielsen_id_3: ("INSERT" | "NONE")
+      attr_accessor null_packet_bitrate: ::Float
+      attr_accessor pat_interval: ::Integer
+      attr_accessor pcr_control: ("PCR_EVERY_PES_PACKET" | "CONFIGURED_PCR_PERIOD")
+      attr_accessor pcr_pid: ::Integer
+      attr_accessor pmt_interval: ::Integer
+      attr_accessor pmt_pid: ::Integer
+      attr_accessor private_metadata_pid: ::Integer
+      attr_accessor program_number: ::Integer
+      attr_accessor pts_offset: ::Integer
+      attr_accessor pts_offset_mode: ("AUTO" | "SECONDS")
+      attr_accessor rate_mode: ("VBR" | "CBR")
+      attr_accessor scte_35_esam: Types::M2tsScte35Esam
+      attr_accessor scte_35_pid: ::Integer
+      attr_accessor scte_35_source: ("PASSTHROUGH" | "NONE")
+      attr_accessor segmentation_markers: ("NONE" | "RAI_SEGSTART" | "RAI_ADAPT" | "PSI_SEGSTART" | "EBP" | "EBP_LEGACY")
+      attr_accessor segmentation_style: ("MAINTAIN_CADENCE" | "RESET_CADENCE")
+      attr_accessor segmentation_time: ::Float
+      attr_accessor timed_metadata_pid: ::Integer
+      attr_accessor transport_stream_id: ::Integer
+      attr_accessor video_pid: ::Integer
+      SENSITIVE: []
+    end
+
+    class M3u8Settings
+      attr_accessor audio_duration: ("DEFAULT_CODEC_DURATION" | "MATCH_VIDEO_DURATION")
+      attr_accessor audio_frames_per_pes: ::Integer
+      attr_accessor audio_pids: ::Array[::Integer]
+      attr_accessor data_pts_control: ("AUTO" | "ALIGN_TO_VIDEO")
+      attr_accessor max_pcr_interval: ::Integer
+      attr_accessor nielsen_id_3: ("INSERT" | "NONE")
+      attr_accessor pat_interval: ::Integer
+      attr_accessor pcr_control: ("PCR_EVERY_PES_PACKET" | "CONFIGURED_PCR_PERIOD")
+      attr_accessor pcr_pid: ::Integer
+      attr_accessor pmt_interval: ::Integer
+      attr_accessor pmt_pid: ::Integer
+      attr_accessor private_metadata_pid: ::Integer
+      attr_accessor program_number: ::Integer
+      attr_accessor pts_offset: ::Integer
+      attr_accessor pts_offset_mode: ("AUTO" | "SECONDS")
+      attr_accessor scte_35_pid: ::Integer
+      attr_accessor scte_35_source: ("PASSTHROUGH" | "NONE")
+      attr_accessor timed_metadata: ("PASSTHROUGH" | "NONE")
+      attr_accessor timed_metadata_pid: ::Integer
+      attr_accessor transport_stream_id: ::Integer
+      attr_accessor video_pid: ::Integer
+      SENSITIVE: []
+    end
+
+    class MinBottomRenditionSize
+      attr_accessor height: ::Integer
+      attr_accessor width: ::Integer
+      SENSITIVE: []
+    end
+
+    class MinTopRenditionSize
+      attr_accessor height: ::Integer
+      attr_accessor width: ::Integer
+      SENSITIVE: []
+    end
+
+    class MotionImageInserter
+      attr_accessor framerate: Types::MotionImageInsertionFramerate
+      attr_accessor input: ::String
+      attr_accessor insertion_mode: ("MOV" | "PNG")
+      attr_accessor offset: Types::MotionImageInsertionOffset
+      attr_accessor playback: ("ONCE" | "REPEAT")
+      attr_accessor start_time: ::String
+      SENSITIVE: []
+    end
+
+    class MotionImageInsertionFramerate
+      attr_accessor framerate_denominator: ::Integer
+      attr_accessor framerate_numerator: ::Integer
+      SENSITIVE: []
+    end
+
+    class MotionImageInsertionOffset
+      attr_accessor image_x: ::Integer
+      attr_accessor image_y: ::Integer
+      SENSITIVE: []
+    end
+
+    class MovSettings
+      attr_accessor clap_atom: ("INCLUDE" | "EXCLUDE")
+      attr_accessor cslg_atom: ("INCLUDE" | "EXCLUDE")
+      attr_accessor mpeg_2_four_cc_control: ("XDCAM" | "MPEG")
+      attr_accessor padding_control: ("OMNEON" | "NONE")
+      attr_accessor reference: ("SELF_CONTAINED" | "EXTERNAL")
+      SENSITIVE: []
+    end
+
+    class Mp2Settings
+      attr_accessor bitrate: ::Integer
+      attr_accessor channels: ::Integer
+      attr_accessor sample_rate: ::Integer
+      SENSITIVE: []
+    end
+
+    class Mp3Settings
+      attr_accessor bitrate: ::Integer
+      attr_accessor channels: ::Integer
+      attr_accessor rate_control_mode: ("CBR" | "VBR")
+      attr_accessor sample_rate: ::Integer
+      attr_accessor vbr_quality: ::Integer
+      SENSITIVE: []
+    end
+
+    class Mp4Settings
+      attr_accessor audio_duration: ("DEFAULT_CODEC_DURATION" | "MATCH_VIDEO_DURATION")
+      attr_accessor cslg_atom: ("INCLUDE" | "EXCLUDE")
+      attr_accessor ctts_version: ::Integer
+      attr_accessor free_space_box: ("INCLUDE" | "EXCLUDE")
+      attr_accessor moov_placement: ("PROGRESSIVE_DOWNLOAD" | "NORMAL")
+      attr_accessor mp_4_major_brand: ::String
+      SENSITIVE: []
+    end
+
+    class MpdSettings
+      attr_accessor accessibility_caption_hints: ("INCLUDE" | "EXCLUDE")
+      attr_accessor audio_duration: ("DEFAULT_CODEC_DURATION" | "MATCH_VIDEO_DURATION")
+      attr_accessor caption_container_type: ("RAW" | "FRAGMENTED_MP4")
+      attr_accessor klv_metadata: ("NONE" | "PASSTHROUGH")
+      attr_accessor manifest_metadata_signaling: ("ENABLED" | "DISABLED")
+      attr_accessor scte_35_esam: ("INSERT" | "NONE")
+      attr_accessor scte_35_source: ("PASSTHROUGH" | "NONE")
+      attr_accessor timed_metadata: ("PASSTHROUGH" | "NONE")
+      attr_accessor timed_metadata_box_version: ("VERSION_0" | "VERSION_1")
+      attr_accessor timed_metadata_scheme_id_uri: ::String
+      attr_accessor timed_metadata_value: ::String
+      SENSITIVE: []
+    end
+
+    class Mpeg2Settings
+      attr_accessor adaptive_quantization: ("OFF" | "LOW" | "MEDIUM" | "HIGH")
+      attr_accessor bitrate: ::Integer
+      attr_accessor codec_level: ("AUTO" | "LOW" | "MAIN" | "HIGH1440" | "HIGH")
+      attr_accessor codec_profile: ("MAIN" | "PROFILE_422")
+      attr_accessor dynamic_sub_gop: ("ADAPTIVE" | "STATIC")
+      attr_accessor framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
+      attr_accessor framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER")
+      attr_accessor framerate_denominator: ::Integer
+      attr_accessor framerate_numerator: ::Integer
+      attr_accessor gop_closed_cadence: ::Integer
+      attr_accessor gop_size: ::Float
+      attr_accessor gop_size_units: ("FRAMES" | "SECONDS")
+      attr_accessor hrd_buffer_final_fill_percentage: ::Integer
+      attr_accessor hrd_buffer_initial_fill_percentage: ::Integer
+      attr_accessor hrd_buffer_size: ::Integer
+      attr_accessor interlace_mode: ("PROGRESSIVE" | "TOP_FIELD" | "BOTTOM_FIELD" | "FOLLOW_TOP_FIELD" | "FOLLOW_BOTTOM_FIELD")
+      attr_accessor intra_dc_precision: ("AUTO" | "INTRA_DC_PRECISION_8" | "INTRA_DC_PRECISION_9" | "INTRA_DC_PRECISION_10" | "INTRA_DC_PRECISION_11")
+      attr_accessor max_bitrate: ::Integer
+      attr_accessor min_i_interval: ::Integer
+      attr_accessor number_b_frames_between_reference_frames: ::Integer
+      attr_accessor par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
+      attr_accessor par_denominator: ::Integer
+      attr_accessor par_numerator: ::Integer
+      attr_accessor quality_tuning_level: ("SINGLE_PASS" | "MULTI_PASS")
+      attr_accessor rate_control_mode: ("VBR" | "CBR")
+      attr_accessor scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")
+      attr_accessor scene_change_detect: ("DISABLED" | "ENABLED")
+      attr_accessor slow_pal: ("DISABLED" | "ENABLED")
+      attr_accessor softness: ::Integer
+      attr_accessor spatial_adaptive_quantization: ("DISABLED" | "ENABLED")
+      attr_accessor syntax: ("DEFAULT" | "D_10")
+      attr_accessor telecine: ("NONE" | "SOFT" | "HARD")
+      attr_accessor temporal_adaptive_quantization: ("DISABLED" | "ENABLED")
+      SENSITIVE: []
+    end
+
+    class MsSmoothAdditionalManifest
+      attr_accessor manifest_name_modifier: ::String
+      attr_accessor selected_outputs: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class MsSmoothEncryptionSettings
+      attr_accessor speke_key_provider: Types::SpekeKeyProvider
+      SENSITIVE: []
+    end
+
+    class MsSmoothGroupSettings
+      attr_accessor additional_manifests: ::Array[Types::MsSmoothAdditionalManifest]
+      attr_accessor audio_deduplication: ("COMBINE_DUPLICATE_STREAMS" | "NONE")
+      attr_accessor destination: ::String
+      attr_accessor destination_settings: Types::DestinationSettings
+      attr_accessor encryption: Types::MsSmoothEncryptionSettings
+      attr_accessor fragment_length: ::Integer
+      attr_accessor fragment_length_control: ("EXACT" | "GOP_MULTIPLE")
+      attr_accessor manifest_encoding: ("UTF8" | "UTF16")
+      SENSITIVE: []
+    end
+
+    class MxfSettings
+      attr_accessor afd_signaling: ("NO_COPY" | "COPY_FROM_VIDEO")
+      attr_accessor profile: ("D_10" | "XDCAM" | "OP1A" | "XAVC" | "XDCAM_RDD9")
+      attr_accessor xavc_profile_settings: Types::MxfXavcProfileSettings
+      SENSITIVE: []
+    end
+
+    class MxfXavcProfileSettings
+      attr_accessor duration_mode: ("ALLOW_ANY_DURATION" | "DROP_FRAMES_FOR_COMPLIANCE")
+      attr_accessor max_anc_data_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class NexGuardFileMarkerSettings
+      attr_accessor license: ::String
+      attr_accessor payload: ::Integer
+      attr_accessor preset: ::String
+      attr_accessor strength: ("LIGHTEST" | "LIGHTER" | "DEFAULT" | "STRONGER" | "STRONGEST")
+      SENSITIVE: []
+    end
+
+    class NielsenConfiguration
+      attr_accessor breakout_code: ::Integer
+      attr_accessor distributor_id: ::String
+      SENSITIVE: []
+    end
+
+    class NielsenNonLinearWatermarkSettings
+      attr_accessor active_watermark_process: ("NAES2_AND_NW" | "CBET" | "NAES2_AND_NW_AND_CBET")
+      attr_accessor adi_filename: ::String
+      attr_accessor asset_id: ::String
+      attr_accessor asset_name: ::String
+      attr_accessor cbet_source_id: ::String
+      attr_accessor episode_id: ::String
+      attr_accessor metadata_destination: ::String
+      attr_accessor source_id: ::Integer
+      attr_accessor source_watermark_status: ("CLEAN" | "WATERMARKED")
+      attr_accessor tic_server_url: ::String
+      attr_accessor unique_tic_per_audio_track: ("RESERVE_UNIQUE_TICS_PER_TRACK" | "SAME_TICS_PER_TRACK")
+      SENSITIVE: []
+    end
+
+    class NoiseReducer
+      attr_accessor filter: ("BILATERAL" | "MEAN" | "GAUSSIAN" | "LANCZOS" | "SHARPEN" | "CONSERVE" | "SPATIAL" | "TEMPORAL")
+      attr_accessor filter_settings: Types::NoiseReducerFilterSettings
+      attr_accessor spatial_filter_settings: Types::NoiseReducerSpatialFilterSettings
+      attr_accessor temporal_filter_settings: Types::NoiseReducerTemporalFilterSettings
+      SENSITIVE: []
+    end
+
+    class NoiseReducerFilterSettings
+      attr_accessor strength: ::Integer
+      SENSITIVE: []
+    end
+
+    class NoiseReducerSpatialFilterSettings
+      attr_accessor post_filter_sharpen_strength: ::Integer
+      attr_accessor speed: ::Integer
+      attr_accessor strength: ::Integer
+      SENSITIVE: []
+    end
+
+    class NoiseReducerTemporalFilterSettings
+      attr_accessor aggressive_mode: ::Integer
+      attr_accessor post_temporal_sharpening: ("DISABLED" | "ENABLED" | "AUTO")
+      attr_accessor post_temporal_sharpening_strength: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor speed: ::Integer
+      attr_accessor strength: ::Integer
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OpusSettings
+      attr_accessor bitrate: ::Integer
+      attr_accessor channels: ::Integer
+      attr_accessor sample_rate: ::Integer
+      SENSITIVE: []
+    end
+
+    class Output
+      attr_accessor audio_descriptions: ::Array[Types::AudioDescription]
+      attr_accessor caption_descriptions: ::Array[Types::CaptionDescription]
+      attr_accessor container_settings: Types::ContainerSettings
+      attr_accessor extension: ::String
+      attr_accessor name_modifier: ::String
+      attr_accessor output_settings: Types::OutputSettings
+      attr_accessor preset: ::String
+      attr_accessor video_description: Types::VideoDescription
+      SENSITIVE: []
+    end
+
+    class OutputChannelMapping
+      attr_accessor input_channels: ::Array[::Integer]
+      attr_accessor input_channels_fine_tune: ::Array[::Float]
+      SENSITIVE: []
+    end
+
+    class OutputDetail
+      attr_accessor duration_in_ms: ::Integer
+      attr_accessor video_details: Types::VideoDetail
+      SENSITIVE: []
+    end
+
+    class OutputGroup
+      attr_accessor automated_encoding_settings: Types::AutomatedEncodingSettings
+      attr_accessor custom_name: ::String
+      attr_accessor name: ::String
+      attr_accessor output_group_settings: Types::OutputGroupSettings
+      attr_accessor outputs: ::Array[Types::Output]
+      SENSITIVE: []
+    end
+
+    class OutputGroupDetail
+      attr_accessor output_details: ::Array[Types::OutputDetail]
+      SENSITIVE: []
+    end
+
+    class OutputGroupSettings
+      attr_accessor cmaf_group_settings: Types::CmafGroupSettings
+      attr_accessor dash_iso_group_settings: Types::DashIsoGroupSettings
+      attr_accessor file_group_settings: Types::FileGroupSettings
+      attr_accessor hls_group_settings: Types::HlsGroupSettings
+      attr_accessor ms_smooth_group_settings: Types::MsSmoothGroupSettings
+      attr_accessor type: ("HLS_GROUP_SETTINGS" | "DASH_ISO_GROUP_SETTINGS" | "FILE_GROUP_SETTINGS" | "MS_SMOOTH_GROUP_SETTINGS" | "CMAF_GROUP_SETTINGS")
+      SENSITIVE: []
+    end
+
+    class OutputSettings
+      attr_accessor hls_settings: Types::HlsSettings
+      SENSITIVE: []
+    end
+
+    class PartnerWatermarking
+      attr_accessor nexguard_file_marker_settings: Types::NexGuardFileMarkerSettings
+      SENSITIVE: []
+    end
+
+    class Policy
+      attr_accessor http_inputs: ("ALLOWED" | "DISALLOWED")
+      attr_accessor https_inputs: ("ALLOWED" | "DISALLOWED")
+      attr_accessor s3_inputs: ("ALLOWED" | "DISALLOWED")
+      SENSITIVE: []
+    end
+
+    class Preset
+      attr_accessor arn: ::String
+      attr_accessor category: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor last_updated: ::Time
+      attr_accessor name: ::String
+      attr_accessor settings: Types::PresetSettings
+      attr_accessor type: ("SYSTEM" | "CUSTOM")
+      SENSITIVE: []
+    end
+
+    class PresetSettings
+      attr_accessor audio_descriptions: ::Array[Types::AudioDescription]
+      attr_accessor caption_descriptions: ::Array[Types::CaptionDescriptionPreset]
+      attr_accessor container_settings: Types::ContainerSettings
+      attr_accessor video_description: Types::VideoDescription
+      SENSITIVE: []
+    end
+
+    class ProresSettings
+      attr_accessor chroma_sampling: ("PRESERVE_444_SAMPLING" | "SUBSAMPLE_TO_422")
+      attr_accessor codec_profile: ("APPLE_PRORES_422" | "APPLE_PRORES_422_HQ" | "APPLE_PRORES_422_LT" | "APPLE_PRORES_422_PROXY" | "APPLE_PRORES_4444" | "APPLE_PRORES_4444_XQ")
+      attr_accessor framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
+      attr_accessor framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER")
+      attr_accessor framerate_denominator: ::Integer
+      attr_accessor framerate_numerator: ::Integer
+      attr_accessor interlace_mode: ("PROGRESSIVE" | "TOP_FIELD" | "BOTTOM_FIELD" | "FOLLOW_TOP_FIELD" | "FOLLOW_BOTTOM_FIELD")
+      attr_accessor par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
+      attr_accessor par_denominator: ::Integer
+      attr_accessor par_numerator: ::Integer
+      attr_accessor scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")
+      attr_accessor slow_pal: ("DISABLED" | "ENABLED")
+      attr_accessor telecine: ("NONE" | "HARD")
+      SENSITIVE: []
+    end
+
+    class PutPolicyRequest
+      attr_accessor policy: Types::Policy
+      SENSITIVE: []
+    end
+
+    class PutPolicyResponse
+      attr_accessor policy: Types::Policy
+      SENSITIVE: []
+    end
+
+    class Queue
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor last_updated: ::Time
+      attr_accessor name: ::String
+      attr_accessor pricing_plan: ("ON_DEMAND" | "RESERVED")
+      attr_accessor progressing_jobs_count: ::Integer
+      attr_accessor reservation_plan: Types::ReservationPlan
+      attr_accessor status: ("ACTIVE" | "PAUSED")
+      attr_accessor submitted_jobs_count: ::Integer
+      attr_accessor type: ("SYSTEM" | "CUSTOM")
+      SENSITIVE: []
+    end
+
+    class QueueTransition
+      attr_accessor destination_queue: ::String
+      attr_accessor source_queue: ::String
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class Rectangle
+      attr_accessor height: ::Integer
+      attr_accessor width: ::Integer
+      attr_accessor x: ::Integer
+      attr_accessor y: ::Integer
+      SENSITIVE: []
+    end
+
+    class RemixSettings
+      attr_accessor channel_mapping: Types::ChannelMapping
+      attr_accessor channels_in: ::Integer
+      attr_accessor channels_out: ::Integer
+      SENSITIVE: []
+    end
+
+    class ReservationPlan
+      attr_accessor commitment: ("ONE_YEAR")
+      attr_accessor expires_at: ::Time
+      attr_accessor purchased_at: ::Time
+      attr_accessor renewal_type: ("AUTO_RENEW" | "EXPIRE")
+      attr_accessor reserved_slots: ::Integer
+      attr_accessor status: ("ACTIVE" | "EXPIRED")
+      SENSITIVE: []
+    end
+
+    class ReservationPlanSettings
+      attr_accessor commitment: ("ONE_YEAR")
+      attr_accessor renewal_type: ("AUTO_RENEW" | "EXPIRE")
+      attr_accessor reserved_slots: ::Integer
+      SENSITIVE: []
+    end
+
+    class ResourceTags
+      attr_accessor arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class S3DestinationAccessControl
+      attr_accessor canned_acl: ("PUBLIC_READ" | "AUTHENTICATED_READ" | "BUCKET_OWNER_READ" | "BUCKET_OWNER_FULL_CONTROL")
+      SENSITIVE: []
+    end
+
+    class S3DestinationSettings
+      attr_accessor access_control: Types::S3DestinationAccessControl
+      attr_accessor encryption: Types::S3EncryptionSettings
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE")
+      SENSITIVE: []
+    end
+
+    class S3EncryptionSettings
+      attr_accessor encryption_type: ("SERVER_SIDE_ENCRYPTION_S3" | "SERVER_SIDE_ENCRYPTION_KMS")
+      attr_accessor kms_encryption_context: ::String
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SccDestinationSettings
+      attr_accessor framerate: ("FRAMERATE_23_97" | "FRAMERATE_24" | "FRAMERATE_25" | "FRAMERATE_29_97_DROPFRAME" | "FRAMERATE_29_97_NON_DROPFRAME")
+      SENSITIVE: []
+    end
+
+    class SpekeKeyProvider
+      attr_accessor certificate_arn: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor system_ids: ::Array[::String]
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class SpekeKeyProviderCmaf
+      attr_accessor certificate_arn: ::String
+      attr_accessor dash_signaled_system_ids: ::Array[::String]
+      attr_accessor hls_signaled_system_ids: ::Array[::String]
+      attr_accessor resource_id: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class SrtDestinationSettings
+      attr_accessor style_passthrough: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class StaticKeyProvider
+      attr_accessor key_format: ::String
+      attr_accessor key_format_versions: ::String
+      attr_accessor static_key_value: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TeletextDestinationSettings
+      attr_accessor page_number: ::String
+      attr_accessor page_types: ::Array[("PAGE_TYPE_INITIAL" | "PAGE_TYPE_SUBTITLE" | "PAGE_TYPE_ADDL_INFO" | "PAGE_TYPE_PROGRAM_SCHEDULE" | "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE")]
+      SENSITIVE: []
+    end
+
+    class TeletextSourceSettings
+      attr_accessor page_number: ::String
+      SENSITIVE: []
+    end
+
+    class TimecodeBurnin
+      attr_accessor font_size: ::Integer
+      attr_accessor position: ("TOP_CENTER" | "TOP_LEFT" | "TOP_RIGHT" | "MIDDLE_LEFT" | "MIDDLE_CENTER" | "MIDDLE_RIGHT" | "BOTTOM_LEFT" | "BOTTOM_CENTER" | "BOTTOM_RIGHT")
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class TimecodeConfig
+      attr_accessor anchor: ::String
+      attr_accessor source: ("EMBEDDED" | "ZEROBASED" | "SPECIFIEDSTART")
+      attr_accessor start: ::String
+      attr_accessor timestamp_offset: ::String
+      SENSITIVE: []
+    end
+
+    class TimedMetadataInsertion
+      attr_accessor id_3_insertions: ::Array[Types::Id3Insertion]
+      SENSITIVE: []
+    end
+
+    class Timing
+      attr_accessor finish_time: ::Time
+      attr_accessor start_time: ::Time
+      attr_accessor submit_time: ::Time
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TrackSourceSettings
+      attr_accessor track_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class TtmlDestinationSettings
+      attr_accessor style_passthrough: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UncompressedSettings
+      attr_accessor fourcc: ("I420" | "I422" | "I444")
+      attr_accessor framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
+      attr_accessor framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER")
+      attr_accessor framerate_denominator: ::Integer
+      attr_accessor framerate_numerator: ::Integer
+      attr_accessor interlace_mode: ("INTERLACED" | "PROGRESSIVE")
+      attr_accessor scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")
+      attr_accessor slow_pal: ("DISABLED" | "ENABLED")
+      attr_accessor telecine: ("NONE" | "HARD")
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateJobTemplateRequest
+      attr_accessor acceleration_settings: Types::AccelerationSettings
+      attr_accessor category: ::String
+      attr_accessor description: ::String
+      attr_accessor hop_destinations: ::Array[Types::HopDestination]
+      attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor queue: ::String
+      attr_accessor settings: Types::JobTemplateSettings
+      attr_accessor status_update_interval: ("SECONDS_10" | "SECONDS_12" | "SECONDS_15" | "SECONDS_20" | "SECONDS_30" | "SECONDS_60" | "SECONDS_120" | "SECONDS_180" | "SECONDS_240" | "SECONDS_300" | "SECONDS_360" | "SECONDS_420" | "SECONDS_480" | "SECONDS_540" | "SECONDS_600")
+      SENSITIVE: []
+    end
+
+    class UpdateJobTemplateResponse
+      attr_accessor job_template: Types::JobTemplate
+      SENSITIVE: []
+    end
+
+    class UpdatePresetRequest
+      attr_accessor category: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor settings: Types::PresetSettings
+      SENSITIVE: []
+    end
+
+    class UpdatePresetResponse
+      attr_accessor preset: Types::Preset
+      SENSITIVE: []
+    end
+
+    class UpdateQueueRequest
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor reservation_plan_settings: Types::ReservationPlanSettings
+      attr_accessor status: ("ACTIVE" | "PAUSED")
+      SENSITIVE: []
+    end
+
+    class UpdateQueueResponse
+      attr_accessor queue: Types::Queue
+      SENSITIVE: []
+    end
+
+    class Vc3Settings
+      attr_accessor framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
+      attr_accessor framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER")
+      attr_accessor framerate_denominator: ::Integer
+      attr_accessor framerate_numerator: ::Integer
+      attr_accessor interlace_mode: ("INTERLACED" | "PROGRESSIVE")
+      attr_accessor scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")
+      attr_accessor slow_pal: ("DISABLED" | "ENABLED")
+      attr_accessor telecine: ("NONE" | "HARD")
+      attr_accessor vc_3_class: ("CLASS_145_8BIT" | "CLASS_220_8BIT" | "CLASS_220_10BIT")
+      SENSITIVE: []
+    end
+
+    class VideoCodecSettings
+      attr_accessor av_1_settings: Types::Av1Settings
+      attr_accessor avc_intra_settings: Types::AvcIntraSettings
+      attr_accessor codec: ("AV1" | "AVC_INTRA" | "FRAME_CAPTURE" | "H_264" | "H_265" | "MPEG2" | "PASSTHROUGH" | "PRORES" | "UNCOMPRESSED" | "VC3" | "VP8" | "VP9" | "XAVC")
+      attr_accessor frame_capture_settings: Types::FrameCaptureSettings
+      attr_accessor h264_settings: Types::H264Settings
+      attr_accessor h265_settings: Types::H265Settings
+      attr_accessor mpeg_2_settings: Types::Mpeg2Settings
+      attr_accessor prores_settings: Types::ProresSettings
+      attr_accessor uncompressed_settings: Types::UncompressedSettings
+      attr_accessor vc_3_settings: Types::Vc3Settings
+      attr_accessor vp_8_settings: Types::Vp8Settings
+      attr_accessor vp_9_settings: Types::Vp9Settings
+      attr_accessor xavc_settings: Types::XavcSettings
+      SENSITIVE: []
+    end
+
+    class VideoDescription
+      attr_accessor afd_signaling: ("NONE" | "AUTO" | "FIXED")
+      attr_accessor anti_alias: ("DISABLED" | "ENABLED")
+      attr_accessor codec_settings: Types::VideoCodecSettings
+      attr_accessor color_metadata: ("IGNORE" | "INSERT")
+      attr_accessor crop: Types::Rectangle
+      attr_accessor drop_frame_timecode: ("DISABLED" | "ENABLED")
+      attr_accessor fixed_afd: ::Integer
+      attr_accessor height: ::Integer
+      attr_accessor position: Types::Rectangle
+      attr_accessor respond_to_afd: ("NONE" | "RESPOND" | "PASSTHROUGH")
+      attr_accessor scaling_behavior: ("DEFAULT" | "STRETCH_TO_OUTPUT" | "FIT" | "FIT_NO_UPSCALE" | "FILL")
+      attr_accessor sharpness: ::Integer
+      attr_accessor timecode_insertion: ("DISABLED" | "PIC_TIMING_SEI")
+      attr_accessor video_preprocessors: Types::VideoPreprocessor
+      attr_accessor width: ::Integer
+      SENSITIVE: []
+    end
+
+    class VideoDetail
+      attr_accessor height_in_px: ::Integer
+      attr_accessor width_in_px: ::Integer
+      SENSITIVE: []
+    end
+
+    class VideoOverlay
+      attr_accessor end_timecode: ::String
+      attr_accessor input: Types::VideoOverlayInput
+      attr_accessor start_timecode: ::String
+      SENSITIVE: []
+    end
+
+    class VideoOverlayInput
+      attr_accessor file_input: ::String
+      attr_accessor input_clippings: ::Array[Types::VideoOverlayInputClipping]
+      attr_accessor timecode_source: ("EMBEDDED" | "ZEROBASED" | "SPECIFIEDSTART")
+      attr_accessor timecode_start: ::String
+      SENSITIVE: []
+    end
+
+    class VideoOverlayInputClipping
+      attr_accessor end_timecode: ::String
+      attr_accessor start_timecode: ::String
+      SENSITIVE: []
+    end
+
+    class VideoPreprocessor
+      attr_accessor color_corrector: Types::ColorCorrector
+      attr_accessor deinterlacer: Types::Deinterlacer
+      attr_accessor dolby_vision: Types::DolbyVision
+      attr_accessor hdr_10_plus: Types::Hdr10Plus
+      attr_accessor image_inserter: Types::ImageInserter
+      attr_accessor noise_reducer: Types::NoiseReducer
+      attr_accessor partner_watermarking: Types::PartnerWatermarking
+      attr_accessor timecode_burnin: Types::TimecodeBurnin
+      SENSITIVE: []
+    end
+
+    class VideoSelector
+      attr_accessor alpha_behavior: ("DISCARD" | "REMAP_TO_LUMA")
+      attr_accessor color_space: ("FOLLOW" | "REC_601" | "REC_709" | "HDR10" | "HLG_2020" | "P3DCI" | "P3D65_SDR" | "P3D65_HDR")
+      attr_accessor color_space_usage: ("FORCE" | "FALLBACK")
+      attr_accessor embedded_timecode_override: ("NONE" | "USE_MDPM")
+      attr_accessor hdr_10_metadata: Types::Hdr10Metadata
+      attr_accessor max_luminance: ::Integer
+      attr_accessor pad_video: ("DISABLED" | "BLACK")
+      attr_accessor pid: ::Integer
+      attr_accessor program_number: ::Integer
+      attr_accessor rotate: ("DEGREE_0" | "DEGREES_90" | "DEGREES_180" | "DEGREES_270" | "AUTO")
+      attr_accessor sample_range: ("FOLLOW" | "FULL_RANGE" | "LIMITED_RANGE")
+      SENSITIVE: []
+    end
+
+    class VorbisSettings
+      attr_accessor channels: ::Integer
+      attr_accessor sample_rate: ::Integer
+      attr_accessor vbr_quality: ::Integer
+      SENSITIVE: []
+    end
+
+    class Vp8Settings
+      attr_accessor bitrate: ::Integer
+      attr_accessor framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
+      attr_accessor framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER")
+      attr_accessor framerate_denominator: ::Integer
+      attr_accessor framerate_numerator: ::Integer
+      attr_accessor gop_size: ::Float
+      attr_accessor hrd_buffer_size: ::Integer
+      attr_accessor max_bitrate: ::Integer
+      attr_accessor par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
+      attr_accessor par_denominator: ::Integer
+      attr_accessor par_numerator: ::Integer
+      attr_accessor quality_tuning_level: ("MULTI_PASS" | "MULTI_PASS_HQ")
+      attr_accessor rate_control_mode: ("VBR")
+      SENSITIVE: []
+    end
+
+    class Vp9Settings
+      attr_accessor bitrate: ::Integer
+      attr_accessor framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
+      attr_accessor framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER")
+      attr_accessor framerate_denominator: ::Integer
+      attr_accessor framerate_numerator: ::Integer
+      attr_accessor gop_size: ::Float
+      attr_accessor hrd_buffer_size: ::Integer
+      attr_accessor max_bitrate: ::Integer
+      attr_accessor par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
+      attr_accessor par_denominator: ::Integer
+      attr_accessor par_numerator: ::Integer
+      attr_accessor quality_tuning_level: ("MULTI_PASS" | "MULTI_PASS_HQ")
+      attr_accessor rate_control_mode: ("VBR")
+      SENSITIVE: []
+    end
+
+    class WarningGroup
+      attr_accessor code: ::Integer
+      attr_accessor count: ::Integer
+      SENSITIVE: []
+    end
+
+    class WavSettings
+      attr_accessor bit_depth: ::Integer
+      attr_accessor channels: ::Integer
+      attr_accessor format: ("RIFF" | "RF64")
+      attr_accessor sample_rate: ::Integer
+      SENSITIVE: []
+    end
+
+    class WebvttDestinationSettings
+      attr_accessor accessibility: ("DISABLED" | "ENABLED")
+      attr_accessor style_passthrough: ("ENABLED" | "DISABLED" | "STRICT")
+      SENSITIVE: []
+    end
+
+    class WebvttHlsSourceSettings
+      attr_accessor rendition_group_id: ::String
+      attr_accessor rendition_language_code: ("ENG" | "SPA" | "FRA" | "DEU" | "GER" | "ZHO" | "ARA" | "HIN" | "JPN" | "RUS" | "POR" | "ITA" | "URD" | "VIE" | "KOR" | "PAN" | "ABK" | "AAR" | "AFR" | "AKA" | "SQI" | "AMH" | "ARG" | "HYE" | "ASM" | "AVA" | "AVE" | "AYM" | "AZE" | "BAM" | "BAK" | "EUS" | "BEL" | "BEN" | "BIH" | "BIS" | "BOS" | "BRE" | "BUL" | "MYA" | "CAT" | "KHM" | "CHA" | "CHE" | "NYA" | "CHU" | "CHV" | "COR" | "COS" | "CRE" | "HRV" | "CES" | "DAN" | "DIV" | "NLD" | "DZO" | "ENM" | "EPO" | "EST" | "EWE" | "FAO" | "FIJ" | "FIN" | "FRM" | "FUL" | "GLA" | "GLG" | "LUG" | "KAT" | "ELL" | "GRN" | "GUJ" | "HAT" | "HAU" | "HEB" | "HER" | "HMO" | "HUN" | "ISL" | "IDO" | "IBO" | "IND" | "INA" | "ILE" | "IKU" | "IPK" | "GLE" | "JAV" | "KAL" | "KAN" | "KAU" | "KAS" | "KAZ" | "KIK" | "KIN" | "KIR" | "KOM" | "KON" | "KUA" | "KUR" | "LAO" | "LAT" | "LAV" | "LIM" | "LIN" | "LIT" | "LUB" | "LTZ" | "MKD" | "MLG" | "MSA" | "MAL" | "MLT" | "GLV" | "MRI" | "MAR" | "MAH" | "MON" | "NAU" | "NAV" | "NDE" | "NBL" | "NDO" | "NEP" | "SME" | "NOR" | "NOB" | "NNO" | "OCI" | "OJI" | "ORI" | "ORM" | "OSS" | "PLI" | "FAS" | "POL" | "PUS" | "QUE" | "QAA" | "RON" | "ROH" | "RUN" | "SMO" | "SAG" | "SAN" | "SRD" | "SRB" | "SNA" | "III" | "SND" | "SIN" | "SLK" | "SLV" | "SOM" | "SOT" | "SUN" | "SWA" | "SSW" | "SWE" | "TGL" | "TAH" | "TGK" | "TAM" | "TAT" | "TEL" | "THA" | "BOD" | "TIR" | "TON" | "TSO" | "TSN" | "TUR" | "TUK" | "TWI" | "UIG" | "UKR" | "UZB" | "VEN" | "VOL" | "WLN" | "CYM" | "FRY" | "WOL" | "XHO" | "YID" | "YOR" | "ZHA" | "ZUL" | "ORJ" | "QPC" | "TNG" | "SRP")
+      attr_accessor rendition_name: ::String
+      SENSITIVE: []
+    end
+
+    class Xavc4kIntraCbgProfileSettings
+      attr_accessor xavc_class: ("CLASS_100" | "CLASS_300" | "CLASS_480")
+      SENSITIVE: []
+    end
+
+    class Xavc4kIntraVbrProfileSettings
+      attr_accessor xavc_class: ("CLASS_100" | "CLASS_300" | "CLASS_480")
+      SENSITIVE: []
+    end
+
+    class Xavc4kProfileSettings
+      attr_accessor bitrate_class: ("BITRATE_CLASS_100" | "BITRATE_CLASS_140" | "BITRATE_CLASS_200")
+      attr_accessor codec_profile: ("HIGH" | "HIGH_422")
+      attr_accessor flicker_adaptive_quantization: ("DISABLED" | "ENABLED")
+      attr_accessor gop_b_reference: ("DISABLED" | "ENABLED")
+      attr_accessor gop_closed_cadence: ::Integer
+      attr_accessor hrd_buffer_size: ::Integer
+      attr_accessor quality_tuning_level: ("SINGLE_PASS" | "SINGLE_PASS_HQ" | "MULTI_PASS_HQ")
+      attr_accessor slices: ::Integer
+      SENSITIVE: []
+    end
+
+    class XavcHdIntraCbgProfileSettings
+      attr_accessor xavc_class: ("CLASS_50" | "CLASS_100" | "CLASS_200")
+      SENSITIVE: []
+    end
+
+    class XavcHdProfileSettings
+      attr_accessor bitrate_class: ("BITRATE_CLASS_25" | "BITRATE_CLASS_35" | "BITRATE_CLASS_50")
+      attr_accessor flicker_adaptive_quantization: ("DISABLED" | "ENABLED")
+      attr_accessor gop_b_reference: ("DISABLED" | "ENABLED")
+      attr_accessor gop_closed_cadence: ::Integer
+      attr_accessor hrd_buffer_size: ::Integer
+      attr_accessor interlace_mode: ("PROGRESSIVE" | "TOP_FIELD" | "BOTTOM_FIELD" | "FOLLOW_TOP_FIELD" | "FOLLOW_BOTTOM_FIELD")
+      attr_accessor quality_tuning_level: ("SINGLE_PASS" | "SINGLE_PASS_HQ" | "MULTI_PASS_HQ")
+      attr_accessor slices: ::Integer
+      attr_accessor telecine: ("NONE" | "HARD")
+      SENSITIVE: []
+    end
+
+    class XavcSettings
+      attr_accessor adaptive_quantization: ("OFF" | "AUTO" | "LOW" | "MEDIUM" | "HIGH" | "HIGHER" | "MAX")
+      attr_accessor entropy_encoding: ("AUTO" | "CABAC" | "CAVLC")
+      attr_accessor framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
+      attr_accessor framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER")
+      attr_accessor framerate_denominator: ::Integer
+      attr_accessor framerate_numerator: ::Integer
+      attr_accessor profile: ("XAVC_HD_INTRA_CBG" | "XAVC_4K_INTRA_CBG" | "XAVC_4K_INTRA_VBR" | "XAVC_HD" | "XAVC_4K")
+      attr_accessor slow_pal: ("DISABLED" | "ENABLED")
+      attr_accessor softness: ::Integer
+      attr_accessor spatial_adaptive_quantization: ("DISABLED" | "ENABLED")
+      attr_accessor temporal_adaptive_quantization: ("DISABLED" | "ENABLED")
+      attr_accessor xavc_4k_intra_cbg_profile_settings: Types::Xavc4kIntraCbgProfileSettings
+      attr_accessor xavc_4k_intra_vbr_profile_settings: Types::Xavc4kIntraVbrProfileSettings
+      attr_accessor xavc_4k_profile_settings: Types::Xavc4kProfileSettings
+      attr_accessor xavc_hd_intra_cbg_profile_settings: Types::XavcHdIntraCbgProfileSettings
+      attr_accessor xavc_hd_profile_settings: Types::XavcHdProfileSettings
+      SENSITIVE: []
+    end
+  end
+end

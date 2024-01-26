@@ -1,0 +1,52 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module NetworkFirewall
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class InsufficientCapacityException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InternalServerError < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidOperationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidRequestException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidResourcePolicyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidTokenException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LogDestinationPermissionException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceOwnerCheckException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ThrottlingException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnsupportedOperationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

@@ -1,0 +1,396 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module BackupGateway
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateGatewayToServerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateGatewayToServerOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#associate_gateway_to_server-instance_method
+      def associate_gateway_to_server: (
+                                         gateway_arn: ::String,
+                                         server_arn: ::String
+                                       ) -> _AssociateGatewayToServerResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateGatewayToServerResponseSuccess
+
+      interface _CreateGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGatewayOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#create_gateway-instance_method
+      def create_gateway: (
+                            activation_key: ::String,
+                            gateway_display_name: ::String,
+                            gateway_type: ("BACKUP_VM"),
+                            ?tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ]
+                          ) -> _CreateGatewayResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGatewayResponseSuccess
+
+      interface _DeleteGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGatewayOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#delete_gateway-instance_method
+      def delete_gateway: (
+                            gateway_arn: ::String
+                          ) -> _DeleteGatewayResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGatewayResponseSuccess
+
+      interface _DeleteHypervisorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteHypervisorOutput]
+        def hypervisor_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#delete_hypervisor-instance_method
+      def delete_hypervisor: (
+                               hypervisor_arn: ::String
+                             ) -> _DeleteHypervisorResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteHypervisorResponseSuccess
+
+      interface _DisassociateGatewayFromServerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateGatewayFromServerOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#disassociate_gateway_from_server-instance_method
+      def disassociate_gateway_from_server: (
+                                              gateway_arn: ::String
+                                            ) -> _DisassociateGatewayFromServerResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateGatewayFromServerResponseSuccess
+
+      interface _GetBandwidthRateLimitScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBandwidthRateLimitScheduleOutput]
+        def bandwidth_rate_limit_intervals: () -> ::Array[Types::BandwidthRateLimitInterval]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#get_bandwidth_rate_limit_schedule-instance_method
+      def get_bandwidth_rate_limit_schedule: (
+                                               gateway_arn: ::String
+                                             ) -> _GetBandwidthRateLimitScheduleResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBandwidthRateLimitScheduleResponseSuccess
+
+      interface _GetGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGatewayOutput]
+        def gateway: () -> Types::GatewayDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#get_gateway-instance_method
+      def get_gateway: (
+                         gateway_arn: ::String
+                       ) -> _GetGatewayResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGatewayResponseSuccess
+
+      interface _GetHypervisorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetHypervisorOutput]
+        def hypervisor: () -> Types::HypervisorDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#get_hypervisor-instance_method
+      def get_hypervisor: (
+                            hypervisor_arn: ::String
+                          ) -> _GetHypervisorResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetHypervisorResponseSuccess
+
+      interface _GetHypervisorPropertyMappingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetHypervisorPropertyMappingsOutput]
+        def hypervisor_arn: () -> ::String
+        def iam_role_arn: () -> ::String
+        def vmware_to_aws_tag_mappings: () -> ::Array[Types::VmwareToAwsTagMapping]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#get_hypervisor_property_mappings-instance_method
+      def get_hypervisor_property_mappings: (
+                                              hypervisor_arn: ::String
+                                            ) -> _GetHypervisorPropertyMappingsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetHypervisorPropertyMappingsResponseSuccess
+
+      interface _GetVirtualMachineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVirtualMachineOutput]
+        def virtual_machine: () -> Types::VirtualMachineDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#get_virtual_machine-instance_method
+      def get_virtual_machine: (
+                                 resource_arn: ::String
+                               ) -> _GetVirtualMachineResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVirtualMachineResponseSuccess
+
+      interface _ImportHypervisorConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportHypervisorConfigurationOutput]
+        def hypervisor_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#import_hypervisor_configuration-instance_method
+      def import_hypervisor_configuration: (
+                                             host: ::String,
+                                             ?kms_key_arn: ::String,
+                                             name: ::String,
+                                             ?password: ::String,
+                                             ?tags: Array[
+                                               {
+                                                 key: ::String,
+                                                 value: ::String
+                                               },
+                                             ],
+                                             ?username: ::String
+                                           ) -> _ImportHypervisorConfigurationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportHypervisorConfigurationResponseSuccess
+
+      interface _ListGatewaysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGatewaysOutput]
+        def gateways: () -> ::Array[Types::Gateway]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#list_gateways-instance_method
+      def list_gateways: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListGatewaysResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGatewaysResponseSuccess
+
+      interface _ListHypervisorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListHypervisorsOutput]
+        def hypervisors: () -> ::Array[Types::Hypervisor]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#list_hypervisors-instance_method
+      def list_hypervisors: (
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _ListHypervisorsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHypervisorsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def resource_arn: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListVirtualMachinesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVirtualMachinesOutput]
+        def next_token: () -> ::String
+        def virtual_machines: () -> ::Array[Types::VirtualMachine]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#list_virtual_machines-instance_method
+      def list_virtual_machines: (
+                                   ?hypervisor_arn: ::String,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListVirtualMachinesResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVirtualMachinesResponseSuccess
+
+      interface _PutBandwidthRateLimitScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutBandwidthRateLimitScheduleOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#put_bandwidth_rate_limit_schedule-instance_method
+      def put_bandwidth_rate_limit_schedule: (
+                                               bandwidth_rate_limit_intervals: Array[
+                                                 {
+                                                   average_upload_rate_limit_in_bits_per_sec: ::Integer?,
+                                                   days_of_week: Array[::Integer],
+                                                   end_hour_of_day: ::Integer,
+                                                   end_minute_of_hour: ::Integer,
+                                                   start_hour_of_day: ::Integer,
+                                                   start_minute_of_hour: ::Integer
+                                                 },
+                                               ],
+                                               gateway_arn: ::String
+                                             ) -> _PutBandwidthRateLimitScheduleResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutBandwidthRateLimitScheduleResponseSuccess
+
+      interface _PutHypervisorPropertyMappingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutHypervisorPropertyMappingsOutput]
+        def hypervisor_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#put_hypervisor_property_mappings-instance_method
+      def put_hypervisor_property_mappings: (
+                                              hypervisor_arn: ::String,
+                                              iam_role_arn: ::String,
+                                              vmware_to_aws_tag_mappings: Array[
+                                                {
+                                                  aws_tag_key: ::String,
+                                                  aws_tag_value: ::String,
+                                                  vmware_category: ::String,
+                                                  vmware_tag_name: ::String
+                                                },
+                                              ]
+                                            ) -> _PutHypervisorPropertyMappingsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutHypervisorPropertyMappingsResponseSuccess
+
+      interface _PutMaintenanceStartTimeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutMaintenanceStartTimeOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#put_maintenance_start_time-instance_method
+      def put_maintenance_start_time: (
+                                        ?day_of_month: ::Integer,
+                                        ?day_of_week: ::Integer,
+                                        gateway_arn: ::String,
+                                        hour_of_day: ::Integer,
+                                        minute_of_hour: ::Integer
+                                      ) -> _PutMaintenanceStartTimeResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutMaintenanceStartTimeResponseSuccess
+
+      interface _StartVirtualMachinesMetadataSyncResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartVirtualMachinesMetadataSyncOutput]
+        def hypervisor_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#start_virtual_machines_metadata_sync-instance_method
+      def start_virtual_machines_metadata_sync: (
+                                                  hypervisor_arn: ::String
+                                                ) -> _StartVirtualMachinesMetadataSyncResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartVirtualMachinesMetadataSyncResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
+        def resource_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _TestHypervisorConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TestHypervisorConfigurationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#test_hypervisor_configuration-instance_method
+      def test_hypervisor_configuration: (
+                                           gateway_arn: ::String,
+                                           host: ::String,
+                                           ?password: ::String,
+                                           ?username: ::String
+                                         ) -> _TestHypervisorConfigurationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestHypervisorConfigurationResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceOutput]
+        def resource_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateGatewayInformationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGatewayInformationOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#update_gateway_information-instance_method
+      def update_gateway_information: (
+                                        gateway_arn: ::String,
+                                        ?gateway_display_name: ::String
+                                      ) -> _UpdateGatewayInformationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGatewayInformationResponseSuccess
+
+      interface _UpdateGatewaySoftwareNowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGatewaySoftwareNowOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#update_gateway_software_now-instance_method
+      def update_gateway_software_now: (
+                                         gateway_arn: ::String
+                                       ) -> _UpdateGatewaySoftwareNowResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGatewaySoftwareNowResponseSuccess
+
+      interface _UpdateHypervisorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateHypervisorOutput]
+        def hypervisor_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#update_hypervisor-instance_method
+      def update_hypervisor: (
+                               ?host: ::String,
+                               hypervisor_arn: ::String,
+                               ?log_group_arn: ::String,
+                               ?name: ::String,
+                               ?password: ::String,
+                               ?username: ::String
+                             ) -> _UpdateHypervisorResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateHypervisorResponseSuccess
+    end
+  end
+end
+

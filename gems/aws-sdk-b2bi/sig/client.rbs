@@ -1,0 +1,576 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module B2bi
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateCapabilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCapabilityResponse]
+        def capability_id: () -> ::String
+        def capability_arn: () -> ::String
+        def name: () -> ::String
+        def type: () -> ("edi")
+        def configuration: () -> Types::CapabilityConfiguration
+        def instructions_documents: () -> ::Array[Types::S3Location]
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#create_capability-instance_method
+      def create_capability: (
+                               name: ::String,
+                               type: ("edi"),
+                               configuration: {
+                                 edi: {
+                                   type: {
+                                     x12_details: {
+                                       transaction_set: ("X12_110" | "X12_180" | "X12_204" | "X12_210" | "X12_214" | "X12_215" | "X12_310" | "X12_315" | "X12_322" | "X12_404" | "X12_410" | "X12_820" | "X12_824" | "X12_830" | "X12_846" | "X12_850" | "X12_852" | "X12_855" | "X12_856" | "X12_860" | "X12_861" | "X12_864" | "X12_940" | "X12_990" | "X12_997")?,
+                                       version: ("VERSION_4010" | "VERSION_4030" | "VERSION_5010")?
+                                     }?
+                                   },
+                                   input_location: {
+                                     bucket_name: ::String?,
+                                     key: ::String?
+                                   },
+                                   output_location: {
+                                     bucket_name: ::String?,
+                                     key: ::String?
+                                   },
+                                   transformer_id: ::String
+                                 }?
+                               },
+                               ?instructions_documents: Array[
+                                 {
+                                   bucket_name: ::String?,
+                                   key: ::String?
+                                 },
+                               ],
+                               ?client_token: ::String,
+                               ?tags: Array[
+                                 {
+                                   key: ::String,
+                                   value: ::String
+                                 },
+                               ]
+                             ) -> _CreateCapabilityResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCapabilityResponseSuccess
+
+      interface _CreatePartnershipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePartnershipResponse]
+        def profile_id: () -> ::String
+        def partnership_id: () -> ::String
+        def partnership_arn: () -> ::String
+        def name: () -> ::String
+        def email: () -> ::String
+        def phone: () -> ::String
+        def capabilities: () -> ::Array[::String]
+        def trading_partner_id: () -> ::String
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#create_partnership-instance_method
+      def create_partnership: (
+                                profile_id: ::String,
+                                name: ::String,
+                                email: ::String,
+                                ?phone: ::String,
+                                ?capabilities: Array[::String],
+                                ?client_token: ::String,
+                                ?tags: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String
+                                  },
+                                ]
+                              ) -> _CreatePartnershipResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePartnershipResponseSuccess
+
+      interface _CreateProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProfileResponse]
+        def profile_id: () -> ::String
+        def profile_arn: () -> ::String
+        def name: () -> ::String
+        def business_name: () -> ::String
+        def phone: () -> ::String
+        def email: () -> ::String
+        def logging: () -> ("ENABLED" | "DISABLED")
+        def log_group_name: () -> ::String
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#create_profile-instance_method
+      def create_profile: (
+                            name: ::String,
+                            ?email: ::String,
+                            phone: ::String,
+                            business_name: ::String,
+                            logging: ("ENABLED" | "DISABLED"),
+                            ?client_token: ::String,
+                            ?tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ]
+                          ) -> _CreateProfileResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProfileResponseSuccess
+
+      interface _CreateTransformerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTransformerResponse]
+        def transformer_id: () -> ::String
+        def transformer_arn: () -> ::String
+        def name: () -> ::String
+        def file_format: () -> ("XML" | "JSON")
+        def mapping_template: () -> ::String
+        def status: () -> ("active" | "inactive")
+        def edi_type: () -> Types::EdiType
+        def sample_document: () -> ::String
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#create_transformer-instance_method
+      def create_transformer: (
+                                name: ::String,
+                                file_format: ("XML" | "JSON"),
+                                mapping_template: ::String,
+                                edi_type: {
+                                  x12_details: {
+                                    transaction_set: ("X12_110" | "X12_180" | "X12_204" | "X12_210" | "X12_214" | "X12_215" | "X12_310" | "X12_315" | "X12_322" | "X12_404" | "X12_410" | "X12_820" | "X12_824" | "X12_830" | "X12_846" | "X12_850" | "X12_852" | "X12_855" | "X12_856" | "X12_860" | "X12_861" | "X12_864" | "X12_940" | "X12_990" | "X12_997")?,
+                                    version: ("VERSION_4010" | "VERSION_4030" | "VERSION_5010")?
+                                  }?
+                                },
+                                ?sample_document: ::String,
+                                ?client_token: ::String,
+                                ?tags: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String
+                                  },
+                                ]
+                              ) -> _CreateTransformerResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTransformerResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#delete_capability-instance_method
+      def delete_capability: (
+                               capability_id: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#delete_partnership-instance_method
+      def delete_partnership: (
+                                partnership_id: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#delete_profile-instance_method
+      def delete_profile: (
+                            profile_id: ::String
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#delete_transformer-instance_method
+      def delete_transformer: (
+                                transformer_id: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetCapabilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCapabilityResponse]
+        def capability_id: () -> ::String
+        def capability_arn: () -> ::String
+        def name: () -> ::String
+        def type: () -> ("edi")
+        def configuration: () -> Types::CapabilityConfiguration
+        def instructions_documents: () -> ::Array[Types::S3Location]
+        def created_at: () -> ::Time
+        def modified_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#get_capability-instance_method
+      def get_capability: (
+                            capability_id: ::String
+                          ) -> _GetCapabilityResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCapabilityResponseSuccess
+
+      interface _GetPartnershipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPartnershipResponse]
+        def profile_id: () -> ::String
+        def partnership_id: () -> ::String
+        def partnership_arn: () -> ::String
+        def name: () -> ::String
+        def email: () -> ::String
+        def phone: () -> ::String
+        def capabilities: () -> ::Array[::String]
+        def trading_partner_id: () -> ::String
+        def created_at: () -> ::Time
+        def modified_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#get_partnership-instance_method
+      def get_partnership: (
+                             partnership_id: ::String
+                           ) -> _GetPartnershipResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPartnershipResponseSuccess
+
+      interface _GetProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProfileResponse]
+        def profile_id: () -> ::String
+        def profile_arn: () -> ::String
+        def name: () -> ::String
+        def email: () -> ::String
+        def phone: () -> ::String
+        def business_name: () -> ::String
+        def logging: () -> ("ENABLED" | "DISABLED")
+        def log_group_name: () -> ::String
+        def created_at: () -> ::Time
+        def modified_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#get_profile-instance_method
+      def get_profile: (
+                         profile_id: ::String
+                       ) -> _GetProfileResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProfileResponseSuccess
+
+      interface _GetTransformerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTransformerResponse]
+        def transformer_id: () -> ::String
+        def transformer_arn: () -> ::String
+        def name: () -> ::String
+        def file_format: () -> ("XML" | "JSON")
+        def mapping_template: () -> ::String
+        def status: () -> ("active" | "inactive")
+        def edi_type: () -> Types::EdiType
+        def sample_document: () -> ::String
+        def created_at: () -> ::Time
+        def modified_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#get_transformer-instance_method
+      def get_transformer: (
+                             transformer_id: ::String
+                           ) -> _GetTransformerResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTransformerResponseSuccess
+
+      interface _GetTransformerJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTransformerJobResponse]
+        def status: () -> ("running" | "succeeded" | "failed")
+        def output_files: () -> ::Array[Types::S3Location]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#get_transformer_job-instance_method
+      def get_transformer_job: (
+                                 transformer_job_id: ::String,
+                                 transformer_id: ::String
+                               ) -> _GetTransformerJobResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTransformerJobResponseSuccess
+
+      interface _ListCapabilitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCapabilitiesResponse]
+        def capabilities: () -> ::Array[Types::CapabilitySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#list_capabilities-instance_method
+      def list_capabilities: (
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
+                             ) -> _ListCapabilitiesResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCapabilitiesResponseSuccess
+
+      interface _ListPartnershipsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPartnershipsResponse]
+        def partnerships: () -> ::Array[Types::PartnershipSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#list_partnerships-instance_method
+      def list_partnerships: (
+                               ?profile_id: ::String,
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
+                             ) -> _ListPartnershipsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPartnershipsResponseSuccess
+
+      interface _ListProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProfilesResponse]
+        def profiles: () -> ::Array[Types::ProfileSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#list_profiles-instance_method
+      def list_profiles: (
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListProfilesResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProfilesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTransformersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTransformersResponse]
+        def transformers: () -> ::Array[Types::TransformerSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#list_transformers-instance_method
+      def list_transformers: (
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
+                             ) -> _ListTransformersResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTransformersResponseSuccess
+
+      interface _StartTransformerJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartTransformerJobResponse]
+        def transformer_job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#start_transformer_job-instance_method
+      def start_transformer_job: (
+                                   input_file: {
+                                     bucket_name: ::String?,
+                                     key: ::String?
+                                   },
+                                   output_location: {
+                                     bucket_name: ::String?,
+                                     key: ::String?
+                                   },
+                                   transformer_id: ::String,
+                                   ?client_token: ::String
+                                 ) -> _StartTransformerJobResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTransformerJobResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _TestMappingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TestMappingResponse]
+        def mapped_file_content: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#test_mapping-instance_method
+      def test_mapping: (
+                          input_file_content: ::String,
+                          mapping_template: ::String,
+                          file_format: ("XML" | "JSON")
+                        ) -> _TestMappingResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestMappingResponseSuccess
+
+      interface _TestParsingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TestParsingResponse]
+        def parsed_file_content: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#test_parsing-instance_method
+      def test_parsing: (
+                          input_file: {
+                            bucket_name: ::String?,
+                            key: ::String?
+                          },
+                          file_format: ("XML" | "JSON"),
+                          edi_type: {
+                            x12_details: {
+                              transaction_set: ("X12_110" | "X12_180" | "X12_204" | "X12_210" | "X12_214" | "X12_215" | "X12_310" | "X12_315" | "X12_322" | "X12_404" | "X12_410" | "X12_820" | "X12_824" | "X12_830" | "X12_846" | "X12_850" | "X12_852" | "X12_855" | "X12_856" | "X12_860" | "X12_861" | "X12_864" | "X12_940" | "X12_990" | "X12_997")?,
+                              version: ("VERSION_4010" | "VERSION_4030" | "VERSION_5010")?
+                            }?
+                          }
+                        ) -> _TestParsingResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestParsingResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateCapabilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCapabilityResponse]
+        def capability_id: () -> ::String
+        def capability_arn: () -> ::String
+        def name: () -> ::String
+        def type: () -> ("edi")
+        def configuration: () -> Types::CapabilityConfiguration
+        def instructions_documents: () -> ::Array[Types::S3Location]
+        def created_at: () -> ::Time
+        def modified_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#update_capability-instance_method
+      def update_capability: (
+                               capability_id: ::String,
+                               ?name: ::String,
+                               ?configuration: {
+                                 edi: {
+                                   type: {
+                                     x12_details: {
+                                       transaction_set: ("X12_110" | "X12_180" | "X12_204" | "X12_210" | "X12_214" | "X12_215" | "X12_310" | "X12_315" | "X12_322" | "X12_404" | "X12_410" | "X12_820" | "X12_824" | "X12_830" | "X12_846" | "X12_850" | "X12_852" | "X12_855" | "X12_856" | "X12_860" | "X12_861" | "X12_864" | "X12_940" | "X12_990" | "X12_997")?,
+                                       version: ("VERSION_4010" | "VERSION_4030" | "VERSION_5010")?
+                                     }?
+                                   },
+                                   input_location: {
+                                     bucket_name: ::String?,
+                                     key: ::String?
+                                   },
+                                   output_location: {
+                                     bucket_name: ::String?,
+                                     key: ::String?
+                                   },
+                                   transformer_id: ::String
+                                 }?
+                               },
+                               ?instructions_documents: Array[
+                                 {
+                                   bucket_name: ::String?,
+                                   key: ::String?
+                                 },
+                               ]
+                             ) -> _UpdateCapabilityResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCapabilityResponseSuccess
+
+      interface _UpdatePartnershipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePartnershipResponse]
+        def profile_id: () -> ::String
+        def partnership_id: () -> ::String
+        def partnership_arn: () -> ::String
+        def name: () -> ::String
+        def email: () -> ::String
+        def phone: () -> ::String
+        def capabilities: () -> ::Array[::String]
+        def trading_partner_id: () -> ::String
+        def created_at: () -> ::Time
+        def modified_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#update_partnership-instance_method
+      def update_partnership: (
+                                partnership_id: ::String,
+                                ?name: ::String,
+                                ?capabilities: Array[::String]
+                              ) -> _UpdatePartnershipResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePartnershipResponseSuccess
+
+      interface _UpdateProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProfileResponse]
+        def profile_id: () -> ::String
+        def profile_arn: () -> ::String
+        def name: () -> ::String
+        def email: () -> ::String
+        def phone: () -> ::String
+        def business_name: () -> ::String
+        def logging: () -> ("ENABLED" | "DISABLED")
+        def log_group_name: () -> ::String
+        def created_at: () -> ::Time
+        def modified_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#update_profile-instance_method
+      def update_profile: (
+                            profile_id: ::String,
+                            ?name: ::String,
+                            ?email: ::String,
+                            ?phone: ::String,
+                            ?business_name: ::String
+                          ) -> _UpdateProfileResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProfileResponseSuccess
+
+      interface _UpdateTransformerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTransformerResponse]
+        def transformer_id: () -> ::String
+        def transformer_arn: () -> ::String
+        def name: () -> ::String
+        def file_format: () -> ("XML" | "JSON")
+        def mapping_template: () -> ::String
+        def status: () -> ("active" | "inactive")
+        def edi_type: () -> Types::EdiType
+        def sample_document: () -> ::String
+        def created_at: () -> ::Time
+        def modified_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#update_transformer-instance_method
+      def update_transformer: (
+                                transformer_id: ::String,
+                                ?name: ::String,
+                                ?file_format: ("XML" | "JSON"),
+                                ?mapping_template: ::String,
+                                ?status: ("active" | "inactive"),
+                                ?edi_type: {
+                                  x12_details: {
+                                    transaction_set: ("X12_110" | "X12_180" | "X12_204" | "X12_210" | "X12_214" | "X12_215" | "X12_310" | "X12_315" | "X12_322" | "X12_404" | "X12_410" | "X12_820" | "X12_824" | "X12_830" | "X12_846" | "X12_850" | "X12_852" | "X12_855" | "X12_856" | "X12_860" | "X12_861" | "X12_864" | "X12_940" | "X12_990" | "X12_997")?,
+                                    version: ("VERSION_4010" | "VERSION_4030" | "VERSION_5010")?
+                                  }?
+                                },
+                                ?sample_document: ::String
+                              ) -> _UpdateTransformerResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTransformerResponseSuccess
+    end
+  end
+end
+

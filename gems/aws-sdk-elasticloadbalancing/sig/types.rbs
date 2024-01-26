@@ -1,0 +1,569 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ElasticLoadBalancing
+  module Types
+
+    class AccessLog
+      attr_accessor enabled: bool
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor emit_interval: ::Integer
+      attr_accessor s3_bucket_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class AccessPointNotFoundException < Aws::EmptyStructure
+    end
+
+    class AddAvailabilityZonesInput
+      attr_accessor load_balancer_name: ::String
+      attr_accessor availability_zones: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AddAvailabilityZonesOutput
+      attr_accessor availability_zones: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AddTagsInput
+      attr_accessor load_balancer_names: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class AddTagsOutput < Aws::EmptyStructure
+    end
+
+    class AdditionalAttribute
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class AppCookieStickinessPolicy
+      attr_accessor policy_name: ::String
+      attr_accessor cookie_name: ::String
+      SENSITIVE: []
+    end
+
+    class ApplySecurityGroupsToLoadBalancerInput
+      attr_accessor load_balancer_name: ::String
+      attr_accessor security_groups: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ApplySecurityGroupsToLoadBalancerOutput
+      attr_accessor security_groups: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AttachLoadBalancerToSubnetsInput
+      attr_accessor load_balancer_name: ::String
+      attr_accessor subnets: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AttachLoadBalancerToSubnetsOutput
+      attr_accessor subnets: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BackendServerDescription
+      attr_accessor instance_port: ::Integer
+      attr_accessor policy_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CertificateNotFoundException < Aws::EmptyStructure
+    end
+
+    class ConfigureHealthCheckInput
+      attr_accessor load_balancer_name: ::String
+      attr_accessor health_check: Types::HealthCheck
+      SENSITIVE: []
+    end
+
+    class ConfigureHealthCheckOutput
+      attr_accessor health_check: Types::HealthCheck
+      SENSITIVE: []
+    end
+
+    class ConnectionDraining
+      attr_accessor enabled: bool
+      attr_accessor timeout: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConnectionSettings
+      attr_accessor idle_timeout: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateAccessPointInput
+      attr_accessor load_balancer_name: ::String
+      attr_accessor listeners: ::Array[Types::Listener]
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor subnets: ::Array[::String]
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor scheme: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateAccessPointOutput
+      attr_accessor dns_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAppCookieStickinessPolicyInput
+      attr_accessor load_balancer_name: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor cookie_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAppCookieStickinessPolicyOutput < Aws::EmptyStructure
+    end
+
+    class CreateLBCookieStickinessPolicyInput
+      attr_accessor load_balancer_name: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor cookie_expiration_period: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateLBCookieStickinessPolicyOutput < Aws::EmptyStructure
+    end
+
+    class CreateLoadBalancerListenerInput
+      attr_accessor load_balancer_name: ::String
+      attr_accessor listeners: ::Array[Types::Listener]
+      SENSITIVE: []
+    end
+
+    class CreateLoadBalancerListenerOutput < Aws::EmptyStructure
+    end
+
+    class CreateLoadBalancerPolicyInput
+      attr_accessor load_balancer_name: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor policy_type_name: ::String
+      attr_accessor policy_attributes: ::Array[Types::PolicyAttribute]
+      SENSITIVE: []
+    end
+
+    class CreateLoadBalancerPolicyOutput < Aws::EmptyStructure
+    end
+
+    class CrossZoneLoadBalancing
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class DeleteAccessPointInput
+      attr_accessor load_balancer_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccessPointOutput < Aws::EmptyStructure
+    end
+
+    class DeleteLoadBalancerListenerInput
+      attr_accessor load_balancer_name: ::String
+      attr_accessor load_balancer_ports: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class DeleteLoadBalancerListenerOutput < Aws::EmptyStructure
+    end
+
+    class DeleteLoadBalancerPolicyInput
+      attr_accessor load_balancer_name: ::String
+      attr_accessor policy_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLoadBalancerPolicyOutput < Aws::EmptyStructure
+    end
+
+    class DependencyThrottleException < Aws::EmptyStructure
+    end
+
+    class DeregisterEndPointsInput
+      attr_accessor load_balancer_name: ::String
+      attr_accessor instances: ::Array[Types::Instance]
+      SENSITIVE: []
+    end
+
+    class DeregisterEndPointsOutput
+      attr_accessor instances: ::Array[Types::Instance]
+      SENSITIVE: []
+    end
+
+    class DescribeAccessPointsInput
+      attr_accessor load_balancer_names: ::Array[::String]
+      attr_accessor marker: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeAccessPointsOutput
+      attr_accessor load_balancer_descriptions: ::Array[Types::LoadBalancerDescription]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAccountLimitsInput
+      attr_accessor marker: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeAccountLimitsOutput
+      attr_accessor limits: ::Array[Types::Limit]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEndPointStateInput
+      attr_accessor load_balancer_name: ::String
+      attr_accessor instances: ::Array[Types::Instance]
+      SENSITIVE: []
+    end
+
+    class DescribeEndPointStateOutput
+      attr_accessor instance_states: ::Array[Types::InstanceState]
+      SENSITIVE: []
+    end
+
+    class DescribeLoadBalancerAttributesInput
+      attr_accessor load_balancer_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLoadBalancerAttributesOutput
+      attr_accessor load_balancer_attributes: Types::LoadBalancerAttributes
+      SENSITIVE: []
+    end
+
+    class DescribeLoadBalancerPoliciesInput
+      attr_accessor load_balancer_name: ::String
+      attr_accessor policy_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeLoadBalancerPoliciesOutput
+      attr_accessor policy_descriptions: ::Array[Types::PolicyDescription]
+      SENSITIVE: []
+    end
+
+    class DescribeLoadBalancerPolicyTypesInput
+      attr_accessor policy_type_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeLoadBalancerPolicyTypesOutput
+      attr_accessor policy_type_descriptions: ::Array[Types::PolicyTypeDescription]
+      SENSITIVE: []
+    end
+
+    class DescribeTagsInput
+      attr_accessor load_balancer_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeTagsOutput
+      attr_accessor tag_descriptions: ::Array[Types::TagDescription]
+      SENSITIVE: []
+    end
+
+    class DetachLoadBalancerFromSubnetsInput
+      attr_accessor load_balancer_name: ::String
+      attr_accessor subnets: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DetachLoadBalancerFromSubnetsOutput
+      attr_accessor subnets: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DuplicateAccessPointNameException < Aws::EmptyStructure
+    end
+
+    class DuplicateListenerException < Aws::EmptyStructure
+    end
+
+    class DuplicatePolicyNameException < Aws::EmptyStructure
+    end
+
+    class DuplicateTagKeysException < Aws::EmptyStructure
+    end
+
+    class HealthCheck
+      attr_accessor target: ::String
+      attr_accessor interval: ::Integer
+      attr_accessor timeout: ::Integer
+      attr_accessor unhealthy_threshold: ::Integer
+      attr_accessor healthy_threshold: ::Integer
+      SENSITIVE: []
+    end
+
+    class Instance
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceState
+      attr_accessor instance_id: ::String
+      attr_accessor state: ::String
+      attr_accessor reason_code: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidConfigurationRequestException < Aws::EmptyStructure
+    end
+
+    class InvalidEndPointException < Aws::EmptyStructure
+    end
+
+    class InvalidSchemeException < Aws::EmptyStructure
+    end
+
+    class InvalidSecurityGroupException < Aws::EmptyStructure
+    end
+
+    class InvalidSubnetException < Aws::EmptyStructure
+    end
+
+    class LBCookieStickinessPolicy
+      attr_accessor policy_name: ::String
+      attr_accessor cookie_expiration_period: ::Integer
+      SENSITIVE: []
+    end
+
+    class Limit
+      attr_accessor name: ::String
+      attr_accessor max: ::String
+      SENSITIVE: []
+    end
+
+    class Listener
+      attr_accessor protocol: ::String
+      attr_accessor load_balancer_port: ::Integer
+      attr_accessor instance_protocol: ::String
+      attr_accessor instance_port: ::Integer
+      attr_accessor ssl_certificate_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListenerDescription
+      attr_accessor listener: Types::Listener
+      attr_accessor policy_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListenerNotFoundException < Aws::EmptyStructure
+    end
+
+    class LoadBalancerAttributeNotFoundException < Aws::EmptyStructure
+    end
+
+    class LoadBalancerAttributes
+      attr_accessor cross_zone_load_balancing: Types::CrossZoneLoadBalancing
+      attr_accessor access_log: Types::AccessLog
+      attr_accessor connection_draining: Types::ConnectionDraining
+      attr_accessor connection_settings: Types::ConnectionSettings
+      attr_accessor additional_attributes: ::Array[Types::AdditionalAttribute]
+      SENSITIVE: []
+    end
+
+    class LoadBalancerDescription
+      attr_accessor load_balancer_name: ::String
+      attr_accessor dns_name: ::String
+      attr_accessor canonical_hosted_zone_name: ::String
+      attr_accessor canonical_hosted_zone_name_id: ::String
+      attr_accessor listener_descriptions: ::Array[Types::ListenerDescription]
+      attr_accessor policies: Types::Policies
+      attr_accessor backend_server_descriptions: ::Array[Types::BackendServerDescription]
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor subnets: ::Array[::String]
+      attr_accessor vpc_id: ::String
+      attr_accessor instances: ::Array[Types::Instance]
+      attr_accessor health_check: Types::HealthCheck
+      attr_accessor source_security_group: Types::SourceSecurityGroup
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor created_time: ::Time
+      attr_accessor scheme: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyLoadBalancerAttributesInput
+      attr_accessor load_balancer_name: ::String
+      attr_accessor load_balancer_attributes: Types::LoadBalancerAttributes
+      SENSITIVE: []
+    end
+
+    class ModifyLoadBalancerAttributesOutput
+      attr_accessor load_balancer_name: ::String
+      attr_accessor load_balancer_attributes: Types::LoadBalancerAttributes
+      SENSITIVE: []
+    end
+
+    class OperationNotPermittedException < Aws::EmptyStructure
+    end
+
+    class Policies
+      attr_accessor app_cookie_stickiness_policies: ::Array[Types::AppCookieStickinessPolicy]
+      attr_accessor lb_cookie_stickiness_policies: ::Array[Types::LBCookieStickinessPolicy]
+      attr_accessor other_policies: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PolicyAttribute
+      attr_accessor attribute_name: ::String
+      attr_accessor attribute_value: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyAttributeDescription
+      attr_accessor attribute_name: ::String
+      attr_accessor attribute_value: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyAttributeTypeDescription
+      attr_accessor attribute_name: ::String
+      attr_accessor attribute_type: ::String
+      attr_accessor description: ::String
+      attr_accessor default_value: ::String
+      attr_accessor cardinality: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyDescription
+      attr_accessor policy_name: ::String
+      attr_accessor policy_type_name: ::String
+      attr_accessor policy_attribute_descriptions: ::Array[Types::PolicyAttributeDescription]
+      SENSITIVE: []
+    end
+
+    class PolicyNotFoundException < Aws::EmptyStructure
+    end
+
+    class PolicyTypeDescription
+      attr_accessor policy_type_name: ::String
+      attr_accessor description: ::String
+      attr_accessor policy_attribute_type_descriptions: ::Array[Types::PolicyAttributeTypeDescription]
+      SENSITIVE: []
+    end
+
+    class PolicyTypeNotFoundException < Aws::EmptyStructure
+    end
+
+    class RegisterEndPointsInput
+      attr_accessor load_balancer_name: ::String
+      attr_accessor instances: ::Array[Types::Instance]
+      SENSITIVE: []
+    end
+
+    class RegisterEndPointsOutput
+      attr_accessor instances: ::Array[Types::Instance]
+      SENSITIVE: []
+    end
+
+    class RemoveAvailabilityZonesInput
+      attr_accessor load_balancer_name: ::String
+      attr_accessor availability_zones: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RemoveAvailabilityZonesOutput
+      attr_accessor availability_zones: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RemoveTagsInput
+      attr_accessor load_balancer_names: ::Array[::String]
+      attr_accessor tags: ::Array[Types::TagKeyOnly]
+      SENSITIVE: []
+    end
+
+    class RemoveTagsOutput < Aws::EmptyStructure
+    end
+
+    class SetLoadBalancerListenerSSLCertificateInput
+      attr_accessor load_balancer_name: ::String
+      attr_accessor load_balancer_port: ::Integer
+      attr_accessor ssl_certificate_id: ::String
+      SENSITIVE: []
+    end
+
+    class SetLoadBalancerListenerSSLCertificateOutput < Aws::EmptyStructure
+    end
+
+    class SetLoadBalancerPoliciesForBackendServerInput
+      attr_accessor load_balancer_name: ::String
+      attr_accessor instance_port: ::Integer
+      attr_accessor policy_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SetLoadBalancerPoliciesForBackendServerOutput < Aws::EmptyStructure
+    end
+
+    class SetLoadBalancerPoliciesOfListenerInput
+      attr_accessor load_balancer_name: ::String
+      attr_accessor load_balancer_port: ::Integer
+      attr_accessor policy_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SetLoadBalancerPoliciesOfListenerOutput < Aws::EmptyStructure
+    end
+
+    class SourceSecurityGroup
+      attr_accessor owner_alias: ::String
+      attr_accessor group_name: ::String
+      SENSITIVE: []
+    end
+
+    class SubnetNotFoundException < Aws::EmptyStructure
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagDescription
+      attr_accessor load_balancer_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagKeyOnly
+      attr_accessor key: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyAccessPointsException < Aws::EmptyStructure
+    end
+
+    class TooManyPoliciesException < Aws::EmptyStructure
+    end
+
+    class TooManyTagsException < Aws::EmptyStructure
+    end
+
+    class UnsupportedProtocolException < Aws::EmptyStructure
+    end
+  end
+end

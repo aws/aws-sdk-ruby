@@ -1,0 +1,60 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Chime
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AccessDeniedException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def message: () -> ::String
+      end
+      class BadRequestException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def message: () -> ::String
+      end
+      class ConflictException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def message: () -> ::String
+      end
+      class ForbiddenException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def message: () -> ::String
+      end
+      class NotFoundException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def message: () -> ::String
+      end
+      class ResourceLimitExceededException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def message: () -> ::String
+      end
+      class ServiceFailureException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def message: () -> ::String
+      end
+      class ServiceUnavailableException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def message: () -> ::String
+      end
+      class ThrottledClientException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def message: () -> ::String
+      end
+      class UnauthorizedClientException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def message: () -> ::String
+      end
+      class UnprocessableEntityException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def message: () -> ::String
+      end
+    end
+  end
+end

@@ -1,0 +1,404 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EMRServerless
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRServerless/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CancelJobRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelJobRunResponse]
+        def application_id: () -> ::String
+        def job_run_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRServerless/Client.html#cancel_job_run-instance_method
+      def cancel_job_run: (
+                            application_id: ::String,
+                            job_run_id: ::String
+                          ) -> _CancelJobRunResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelJobRunResponseSuccess
+
+      interface _CreateApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateApplicationResponse]
+        def application_id: () -> ::String
+        def name: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRServerless/Client.html#create_application-instance_method
+      def create_application: (
+                                ?name: ::String,
+                                release_label: ::String,
+                                type: ::String,
+                                client_token: ::String,
+                                ?initial_capacity: Hash[::String, {
+                                    worker_count: ::Integer,
+                                    worker_configuration: {
+                                      cpu: ::String,
+                                      memory: ::String,
+                                      disk: ::String?
+                                    }?
+                                  }],
+                                ?maximum_capacity: {
+                                  cpu: ::String,
+                                  memory: ::String,
+                                  disk: ::String?
+                                },
+                                ?tags: Hash[::String, ::String],
+                                ?auto_start_configuration: {
+                                  enabled: bool?
+                                },
+                                ?auto_stop_configuration: {
+                                  enabled: bool?,
+                                  idle_timeout_minutes: ::Integer?
+                                },
+                                ?network_configuration: {
+                                  subnet_ids: Array[::String]?,
+                                  security_group_ids: Array[::String]?
+                                },
+                                ?architecture: ("ARM64" | "X86_64"),
+                                ?image_configuration: {
+                                  image_uri: ::String?
+                                },
+                                ?worker_type_specifications: Hash[::String, {
+                                    image_configuration: {
+                                      image_uri: ::String?
+                                    }?
+                                  }],
+                                ?runtime_configuration: Array[
+                                  {
+                                    classification: ::String,
+                                    properties: Hash[::String, ::String]?,
+                                    configurations: untyped?
+                                  },
+                                ],
+                                ?monitoring_configuration: {
+                                  s3_monitoring_configuration: {
+                                    log_uri: ::String?,
+                                    encryption_key_arn: ::String?
+                                  }?,
+                                  managed_persistence_monitoring_configuration: {
+                                    enabled: bool?,
+                                    encryption_key_arn: ::String?
+                                  }?,
+                                  cloud_watch_logging_configuration: {
+                                    enabled: bool,
+                                    log_group_name: ::String?,
+                                    log_stream_name_prefix: ::String?,
+                                    encryption_key_arn: ::String?,
+                                    log_types: Hash[::String, Array[::String]]?
+                                  }?
+                                }
+                              ) -> _CreateApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
+
+      interface _DeleteApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteApplicationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRServerless/Client.html#delete_application-instance_method
+      def delete_application: (
+                                application_id: ::String
+                              ) -> _DeleteApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteApplicationResponseSuccess
+
+      interface _GetApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetApplicationResponse]
+        def application: () -> Types::Application
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRServerless/Client.html#get_application-instance_method
+      def get_application: (
+                             application_id: ::String
+                           ) -> _GetApplicationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApplicationResponseSuccess
+
+      interface _GetDashboardForJobRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDashboardForJobRunResponse]
+        def url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRServerless/Client.html#get_dashboard_for_job_run-instance_method
+      def get_dashboard_for_job_run: (
+                                       application_id: ::String,
+                                       job_run_id: ::String
+                                     ) -> _GetDashboardForJobRunResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDashboardForJobRunResponseSuccess
+
+      interface _GetJobRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetJobRunResponse]
+        def job_run: () -> Types::JobRun
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRServerless/Client.html#get_job_run-instance_method
+      def get_job_run: (
+                         application_id: ::String,
+                         job_run_id: ::String
+                       ) -> _GetJobRunResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetJobRunResponseSuccess
+
+      interface _ListApplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationsResponse]
+        def applications: () -> ::Array[Types::ApplicationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRServerless/Client.html#list_applications-instance_method
+      def list_applications: (
+                               ?next_token: ::String,
+                               ?max_results: ::Integer,
+                               ?states: Array[("CREATING" | "CREATED" | "STARTING" | "STARTED" | "STOPPING" | "STOPPED" | "TERMINATED")]
+                             ) -> _ListApplicationsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationsResponseSuccess
+
+      interface _ListJobRunsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListJobRunsResponse]
+        def job_runs: () -> ::Array[Types::JobRunSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRServerless/Client.html#list_job_runs-instance_method
+      def list_job_runs: (
+                           application_id: ::String,
+                           ?next_token: ::String,
+                           ?max_results: ::Integer,
+                           ?created_at_after: ::Time,
+                           ?created_at_before: ::Time,
+                           ?states: Array[("SUBMITTED" | "PENDING" | "SCHEDULED" | "RUNNING" | "SUCCESS" | "FAILED" | "CANCELLING" | "CANCELLED")]
+                         ) -> _ListJobRunsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListJobRunsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRServerless/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _StartApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartApplicationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRServerless/Client.html#start_application-instance_method
+      def start_application: (
+                               application_id: ::String
+                             ) -> _StartApplicationResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartApplicationResponseSuccess
+
+      interface _StartJobRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartJobRunResponse]
+        def application_id: () -> ::String
+        def job_run_id: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRServerless/Client.html#start_job_run-instance_method
+      def start_job_run: (
+                           application_id: ::String,
+                           client_token: ::String,
+                           execution_role_arn: ::String,
+                           ?job_driver: {
+                             spark_submit: {
+                               entry_point: ::String,
+                               entry_point_arguments: Array[::String]?,
+                               spark_submit_parameters: ::String?
+                             }?,
+                             hive: {
+                               query: ::String,
+                               init_query_file: ::String?,
+                               parameters: ::String?
+                             }?
+                           },
+                           ?configuration_overrides: {
+                             application_configuration: Array[
+                               {
+                                 classification: ::String,
+                                 properties: Hash[::String, ::String]?,
+                                 configurations: untyped?
+                               },
+                             ]?,
+                             monitoring_configuration: {
+                               s3_monitoring_configuration: {
+                                 log_uri: ::String?,
+                                 encryption_key_arn: ::String?
+                               }?,
+                               managed_persistence_monitoring_configuration: {
+                                 enabled: bool?,
+                                 encryption_key_arn: ::String?
+                               }?,
+                               cloud_watch_logging_configuration: {
+                                 enabled: bool,
+                                 log_group_name: ::String?,
+                                 log_stream_name_prefix: ::String?,
+                                 encryption_key_arn: ::String?,
+                                 log_types: Hash[::String, Array[::String]]?
+                               }?
+                             }?
+                           },
+                           ?tags: Hash[::String, ::String],
+                           ?execution_timeout_minutes: ::Integer,
+                           ?name: ::String
+                         ) -> _StartJobRunResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartJobRunResponseSuccess
+
+      interface _StopApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopApplicationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRServerless/Client.html#stop_application-instance_method
+      def stop_application: (
+                              application_id: ::String
+                            ) -> _StopApplicationResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopApplicationResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRServerless/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRServerless/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateApplicationResponse]
+        def application: () -> Types::Application
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRServerless/Client.html#update_application-instance_method
+      def update_application: (
+                                application_id: ::String,
+                                client_token: ::String,
+                                ?initial_capacity: Hash[::String, {
+                                    worker_count: ::Integer,
+                                    worker_configuration: {
+                                      cpu: ::String,
+                                      memory: ::String,
+                                      disk: ::String?
+                                    }?
+                                  }],
+                                ?maximum_capacity: {
+                                  cpu: ::String,
+                                  memory: ::String,
+                                  disk: ::String?
+                                },
+                                ?auto_start_configuration: {
+                                  enabled: bool?
+                                },
+                                ?auto_stop_configuration: {
+                                  enabled: bool?,
+                                  idle_timeout_minutes: ::Integer?
+                                },
+                                ?network_configuration: {
+                                  subnet_ids: Array[::String]?,
+                                  security_group_ids: Array[::String]?
+                                },
+                                ?architecture: ("ARM64" | "X86_64"),
+                                ?image_configuration: {
+                                  image_uri: ::String?
+                                },
+                                ?worker_type_specifications: Hash[::String, {
+                                    image_configuration: {
+                                      image_uri: ::String?
+                                    }?
+                                  }],
+                                ?release_label: ::String,
+                                ?runtime_configuration: Array[
+                                  {
+                                    classification: ::String,
+                                    properties: Hash[::String, ::String]?,
+                                    configurations: untyped?
+                                  },
+                                ],
+                                ?monitoring_configuration: {
+                                  s3_monitoring_configuration: {
+                                    log_uri: ::String?,
+                                    encryption_key_arn: ::String?
+                                  }?,
+                                  managed_persistence_monitoring_configuration: {
+                                    enabled: bool?,
+                                    encryption_key_arn: ::String?
+                                  }?,
+                                  cloud_watch_logging_configuration: {
+                                    enabled: bool,
+                                    log_group_name: ::String?,
+                                    log_stream_name_prefix: ::String?,
+                                    encryption_key_arn: ::String?,
+                                    log_types: Hash[::String, Array[::String]]?
+                                  }?
+                                }
+                              ) -> _UpdateApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationResponseSuccess
+    end
+  end
+end
+

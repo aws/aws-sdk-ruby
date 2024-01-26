@@ -1,0 +1,837 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CodeCatalyst
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccessTokenSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor expires_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAccessTokenRequest
+      attr_accessor name: ::String
+      attr_accessor expires_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateAccessTokenResponse
+      attr_accessor secret: ::String
+      attr_accessor name: ::String
+      attr_accessor expires_time: ::Time
+      attr_accessor access_token_id: ::String
+      SENSITIVE: [:secret]
+    end
+
+    class CreateDevEnvironmentRequest
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor repositories: ::Array[Types::RepositoryInput]
+      attr_accessor client_token: ::String
+      attr_accessor alias: ::String
+      attr_accessor ides: ::Array[Types::IdeConfiguration]
+      attr_accessor instance_type: ("dev.standard1.small" | "dev.standard1.medium" | "dev.standard1.large" | "dev.standard1.xlarge")
+      attr_accessor inactivity_timeout_minutes: ::Integer
+      attr_accessor persistent_storage: Types::PersistentStorageConfiguration
+      attr_accessor vpc_connection_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDevEnvironmentResponse
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor id: ::String
+      attr_accessor vpc_connection_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProjectRequest
+      attr_accessor space_name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProjectResponse
+      attr_accessor space_name: ::String
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSourceRepositoryBranchRequest
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor source_repository_name: ::String
+      attr_accessor name: ::String
+      attr_accessor head_commit_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSourceRepositoryBranchResponse
+      attr_accessor ref: ::String
+      attr_accessor name: ::String
+      attr_accessor last_updated_time: ::Time
+      attr_accessor head_commit_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSourceRepositoryRequest
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSourceRepositoryResponse
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccessTokenRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccessTokenResponse < Aws::EmptyStructure
+    end
+
+    class DeleteDevEnvironmentRequest
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDevEnvironmentResponse
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProjectRequest
+      attr_accessor space_name: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProjectResponse
+      attr_accessor space_name: ::String
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSourceRepositoryRequest
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSourceRepositoryResponse
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSpaceRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSpaceResponse
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      SENSITIVE: []
+    end
+
+    class DevEnvironmentAccessDetails
+      attr_accessor stream_url: ::String
+      attr_accessor token_value: ::String
+      SENSITIVE: [:stream_url, :token_value]
+    end
+
+    class DevEnvironmentRepositorySummary
+      attr_accessor repository_name: ::String
+      attr_accessor branch_name: ::String
+      SENSITIVE: []
+    end
+
+    class DevEnvironmentSessionConfiguration
+      attr_accessor session_type: ("SSM" | "SSH")
+      attr_accessor execute_command_session_configuration: Types::ExecuteCommandSessionConfiguration
+      SENSITIVE: []
+    end
+
+    class DevEnvironmentSessionSummary
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor dev_environment_id: ::String
+      attr_accessor started_time: ::Time
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DevEnvironmentSummary
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_time: ::Time
+      attr_accessor creator_id: ::String
+      attr_accessor status: ("PENDING" | "RUNNING" | "STARTING" | "STOPPING" | "STOPPED" | "FAILED" | "DELETING" | "DELETED")
+      attr_accessor status_reason: ::String
+      attr_accessor repositories: ::Array[Types::DevEnvironmentRepositorySummary]
+      attr_accessor alias: ::String
+      attr_accessor ides: ::Array[Types::Ide]
+      attr_accessor instance_type: ("dev.standard1.small" | "dev.standard1.medium" | "dev.standard1.large" | "dev.standard1.xlarge")
+      attr_accessor inactivity_timeout_minutes: ::Integer
+      attr_accessor persistent_storage: Types::PersistentStorage
+      attr_accessor vpc_connection_name: ::String
+      SENSITIVE: []
+    end
+
+    class EmailAddress
+      attr_accessor email: ::String
+      attr_accessor verified: bool
+      SENSITIVE: []
+    end
+
+    class EventLogEntry
+      attr_accessor id: ::String
+      attr_accessor event_name: ::String
+      attr_accessor event_type: ::String
+      attr_accessor event_category: ::String
+      attr_accessor event_source: ::String
+      attr_accessor event_time: ::Time
+      attr_accessor operation_type: ("READONLY" | "MUTATION")
+      attr_accessor user_identity: Types::UserIdentity
+      attr_accessor project_information: Types::ProjectInformation
+      attr_accessor request_id: ::String
+      attr_accessor request_payload: Types::EventPayload
+      attr_accessor response_payload: Types::EventPayload
+      attr_accessor error_code: ::String
+      attr_accessor source_ip_address: ::String
+      attr_accessor user_agent: ::String
+      SENSITIVE: []
+    end
+
+    class EventPayload
+      attr_accessor content_type: ::String
+      attr_accessor data: ::String
+      SENSITIVE: []
+    end
+
+    class ExecuteCommandSessionConfiguration
+      attr_accessor command: ::String
+      attr_accessor arguments: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      attr_accessor comparison_operator: ::String
+      SENSITIVE: []
+    end
+
+    class GetDevEnvironmentRequest
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDevEnvironmentResponse
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_time: ::Time
+      attr_accessor creator_id: ::String
+      attr_accessor status: ("PENDING" | "RUNNING" | "STARTING" | "STOPPING" | "STOPPED" | "FAILED" | "DELETING" | "DELETED")
+      attr_accessor status_reason: ::String
+      attr_accessor repositories: ::Array[Types::DevEnvironmentRepositorySummary]
+      attr_accessor alias: ::String
+      attr_accessor ides: ::Array[Types::Ide]
+      attr_accessor instance_type: ("dev.standard1.small" | "dev.standard1.medium" | "dev.standard1.large" | "dev.standard1.xlarge")
+      attr_accessor inactivity_timeout_minutes: ::Integer
+      attr_accessor persistent_storage: Types::PersistentStorage
+      attr_accessor vpc_connection_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetProjectRequest
+      attr_accessor space_name: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetProjectResponse
+      attr_accessor space_name: ::String
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class GetSourceRepositoryCloneUrlsRequest
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor source_repository_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetSourceRepositoryCloneUrlsResponse
+      attr_accessor https: ::String
+      SENSITIVE: []
+    end
+
+    class GetSourceRepositoryRequest
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetSourceRepositoryResponse
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor last_updated_time: ::Time
+      attr_accessor created_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetSpaceRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetSpaceResponse
+      attr_accessor name: ::String
+      attr_accessor region_name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class GetSubscriptionRequest
+      attr_accessor space_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetSubscriptionResponse
+      attr_accessor subscription_type: ::String
+      attr_accessor aws_account_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetUserDetailsRequest
+      attr_accessor id: ::String
+      attr_accessor user_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetUserDetailsResponse
+      attr_accessor user_id: ::String
+      attr_accessor user_name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor primary_email: Types::EmailAddress
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkflowRequest
+      attr_accessor space_name: ::String
+      attr_accessor id: ::String
+      attr_accessor project_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkflowResponse
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor source_repository_name: ::String
+      attr_accessor source_branch_name: ::String
+      attr_accessor definition: Types::WorkflowDefinition
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor run_mode: ("QUEUED" | "PARALLEL" | "SUPERSEDED")
+      attr_accessor status: ("INVALID" | "ACTIVE")
+      SENSITIVE: []
+    end
+
+    class GetWorkflowRunRequest
+      attr_accessor space_name: ::String
+      attr_accessor id: ::String
+      attr_accessor project_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkflowRunResponse
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor id: ::String
+      attr_accessor workflow_id: ::String
+      attr_accessor status: ("SUCCEEDED" | "FAILED" | "STOPPED" | "SUPERSEDED" | "CANCELLED" | "NOT_RUN" | "VALIDATING" | "PROVISIONING" | "IN_PROGRESS" | "STOPPING" | "ABANDONED")
+      attr_accessor status_reasons: ::Array[Types::WorkflowRunStatusReason]
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class Ide
+      attr_accessor runtime: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class IdeConfiguration
+      attr_accessor runtime: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccessTokensRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccessTokensResponse
+      attr_accessor items: ::Array[Types::AccessTokenSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDevEnvironmentSessionsRequest
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor dev_environment_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDevEnvironmentSessionsResponse
+      attr_accessor items: ::Array[Types::DevEnvironmentSessionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDevEnvironmentsRequest
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDevEnvironmentsResponse
+      attr_accessor items: ::Array[Types::DevEnvironmentSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventLogsRequest
+      attr_accessor space_name: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor event_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEventLogsResponse
+      attr_accessor next_token: ::String
+      attr_accessor items: ::Array[Types::EventLogEntry]
+      SENSITIVE: []
+    end
+
+    class ListProjectsRequest
+      attr_accessor space_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::ProjectListFilter]
+      SENSITIVE: []
+    end
+
+    class ListProjectsResponse
+      attr_accessor next_token: ::String
+      attr_accessor items: ::Array[Types::ProjectSummary]
+      SENSITIVE: []
+    end
+
+    class ListSourceRepositoriesItem
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor last_updated_time: ::Time
+      attr_accessor created_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ListSourceRepositoriesRequest
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSourceRepositoriesResponse
+      attr_accessor items: ::Array[Types::ListSourceRepositoriesItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSourceRepositoryBranchesItem
+      attr_accessor ref: ::String
+      attr_accessor name: ::String
+      attr_accessor last_updated_time: ::Time
+      attr_accessor head_commit_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListSourceRepositoryBranchesRequest
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor source_repository_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSourceRepositoryBranchesResponse
+      attr_accessor next_token: ::String
+      attr_accessor items: ::Array[Types::ListSourceRepositoryBranchesItem]
+      SENSITIVE: []
+    end
+
+    class ListSpacesRequest
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSpacesResponse
+      attr_accessor next_token: ::String
+      attr_accessor items: ::Array[Types::SpaceSummary]
+      SENSITIVE: []
+    end
+
+    class ListWorkflowRunsRequest
+      attr_accessor space_name: ::String
+      attr_accessor workflow_id: ::String
+      attr_accessor project_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor sort_by: ::Array[Types::WorkflowRunSortCriteria]
+      SENSITIVE: []
+    end
+
+    class ListWorkflowRunsResponse
+      attr_accessor next_token: ::String
+      attr_accessor items: ::Array[Types::WorkflowRunSummary]
+      SENSITIVE: []
+    end
+
+    class ListWorkflowsRequest
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor sort_by: ::Array[Types::WorkflowSortCriteria]
+      SENSITIVE: []
+    end
+
+    class ListWorkflowsResponse
+      attr_accessor next_token: ::String
+      attr_accessor items: ::Array[Types::WorkflowSummary]
+      SENSITIVE: []
+    end
+
+    class PersistentStorage
+      attr_accessor size_in_gi_b: ::Integer
+      SENSITIVE: []
+    end
+
+    class PersistentStorageConfiguration
+      attr_accessor size_in_gi_b: ::Integer
+      SENSITIVE: []
+    end
+
+    class ProjectInformation
+      attr_accessor name: ::String
+      attr_accessor project_id: ::String
+      SENSITIVE: []
+    end
+
+    class ProjectListFilter
+      attr_accessor key: ("hasAccessTo" | "name")
+      attr_accessor values: ::Array[::String]
+      attr_accessor comparison_operator: ("EQ" | "GT" | "GE" | "LT" | "LE" | "BEGINS_WITH")
+      SENSITIVE: []
+    end
+
+    class ProjectSummary
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class RepositoryInput
+      attr_accessor repository_name: ::String
+      attr_accessor branch_name: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SpaceSummary
+      attr_accessor name: ::String
+      attr_accessor region_name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class StartDevEnvironmentRequest
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor id: ::String
+      attr_accessor ides: ::Array[Types::IdeConfiguration]
+      attr_accessor instance_type: ("dev.standard1.small" | "dev.standard1.medium" | "dev.standard1.large" | "dev.standard1.xlarge")
+      attr_accessor inactivity_timeout_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class StartDevEnvironmentResponse
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("PENDING" | "RUNNING" | "STARTING" | "STOPPING" | "STOPPED" | "FAILED" | "DELETING" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class StartDevEnvironmentSessionRequest
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor id: ::String
+      attr_accessor session_configuration: Types::DevEnvironmentSessionConfiguration
+      SENSITIVE: []
+    end
+
+    class StartDevEnvironmentSessionResponse
+      attr_accessor access_details: Types::DevEnvironmentAccessDetails
+      attr_accessor session_id: ::String
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor id: ::String
+      SENSITIVE: [:access_details]
+    end
+
+    class StartWorkflowRunRequest
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor workflow_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartWorkflowRunResponse
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor id: ::String
+      attr_accessor workflow_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopDevEnvironmentRequest
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class StopDevEnvironmentResponse
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("PENDING" | "RUNNING" | "STARTING" | "STOPPING" | "STOPPED" | "FAILED" | "DELETING" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class StopDevEnvironmentSessionRequest
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor id: ::String
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopDevEnvironmentSessionResponse
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor id: ::String
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDevEnvironmentRequest
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor id: ::String
+      attr_accessor alias: ::String
+      attr_accessor ides: ::Array[Types::IdeConfiguration]
+      attr_accessor instance_type: ("dev.standard1.small" | "dev.standard1.medium" | "dev.standard1.large" | "dev.standard1.xlarge")
+      attr_accessor inactivity_timeout_minutes: ::Integer
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDevEnvironmentResponse
+      attr_accessor id: ::String
+      attr_accessor space_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor alias: ::String
+      attr_accessor ides: ::Array[Types::IdeConfiguration]
+      attr_accessor instance_type: ("dev.standard1.small" | "dev.standard1.medium" | "dev.standard1.large" | "dev.standard1.xlarge")
+      attr_accessor inactivity_timeout_minutes: ::Integer
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProjectRequest
+      attr_accessor space_name: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProjectResponse
+      attr_accessor space_name: ::String
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSpaceRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSpaceResponse
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UserIdentity
+      attr_accessor user_type: ("USER" | "AWS_ACCOUNT" | "UNKNOWN")
+      attr_accessor principal_id: ::String
+      attr_accessor user_name: ::String
+      attr_accessor aws_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VerifySessionResponse
+      attr_accessor identity: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowDefinition
+      attr_accessor path: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowDefinitionSummary
+      attr_accessor path: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowRunSortCriteria < Aws::EmptyStructure
+    end
+
+    class WorkflowRunStatusReason < Aws::EmptyStructure
+    end
+
+    class WorkflowRunSummary
+      attr_accessor id: ::String
+      attr_accessor workflow_id: ::String
+      attr_accessor workflow_name: ::String
+      attr_accessor status: ("SUCCEEDED" | "FAILED" | "STOPPED" | "SUPERSEDED" | "CANCELLED" | "NOT_RUN" | "VALIDATING" | "PROVISIONING" | "IN_PROGRESS" | "STOPPING" | "ABANDONED")
+      attr_accessor status_reasons: ::Array[Types::WorkflowRunStatusReason]
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class WorkflowSortCriteria < Aws::EmptyStructure
+    end
+
+    class WorkflowSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor source_repository_name: ::String
+      attr_accessor source_branch_name: ::String
+      attr_accessor definition: Types::WorkflowDefinitionSummary
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor run_mode: ("QUEUED" | "PARALLEL" | "SUPERSEDED")
+      attr_accessor status: ("INVALID" | "ACTIVE")
+      SENSITIVE: []
+    end
+  end
+end

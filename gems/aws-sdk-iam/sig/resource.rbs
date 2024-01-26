@@ -1,0 +1,304 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IAM
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html
+    class Resource
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#initialize-instance_method
+      def initialize: (
+                        ?client: Client,
+                        ?credentials: untyped,
+                        ?region: String,
+                        ?access_key_id: String,
+                        ?active_endpoint_cache: bool,
+                        ?adaptive_retry_wait_to_fill: bool,
+                        ?client_side_monitoring: bool,
+                        ?client_side_monitoring_client_id: String,
+                        ?client_side_monitoring_host: String,
+                        ?client_side_monitoring_port: Integer,
+                        ?client_side_monitoring_publisher: untyped,
+                        ?convert_params: bool,
+                        ?correct_clock_skew: bool,
+                        ?defaults_mode: String,
+                        ?disable_host_prefix_injection: bool,
+                        ?disable_request_compression: bool,
+                        ?endpoint: String,
+                        ?endpoint_cache_max_entries: Integer,
+                        ?endpoint_cache_max_threads: Integer,
+                        ?endpoint_cache_poll_interval: Integer,
+                        ?endpoint_discovery: bool,
+                        ?ignore_configured_endpoint_urls: bool,
+                        ?log_formatter: untyped,
+                        ?log_level: Symbol,
+                        ?logger: untyped,
+                        ?max_attempts: Integer,
+                        ?profile: String,
+                        ?request_min_compression_size_bytes: Integer,
+                        ?retry_backoff: Proc,
+                        ?retry_base_delay: Float,
+                        ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                        ?retry_limit: Integer,
+                        ?retry_max_delay: Integer,
+                        ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                        ?sdk_ua_app_id: String,
+                        ?secret_access_key: String,
+                        ?session_token: String,
+                        ?stub_responses: untyped,
+                        ?token_provider: untyped,
+                        ?use_dualstack_endpoint: bool,
+                        ?use_fips_endpoint: bool,
+                        ?validate_params: bool,
+                        ?endpoint_provider: untyped,
+                        ?http_proxy: String,
+                        ?http_open_timeout: (Float | Integer),
+                        ?http_read_timeout: (Float | Integer),
+                        ?http_idle_timeout: (Float | Integer),
+                        ?http_continue_timeout: (Float | Integer),
+                        ?ssl_timeout: (Float | Integer | nil),
+                        ?http_wire_trace: bool,
+                        ?ssl_verify_peer: bool,
+                        ?ssl_ca_bundle: String,
+                        ?ssl_ca_directory: String,
+                        ?ssl_ca_store: String,
+                        ?on_chunk_received: Proc,
+                        ?on_chunk_sent: Proc,
+                        ?raise_response_errors: bool
+                      ) -> void
+                    | (?Hash[Symbol, untyped]) -> void
+
+      def client: () -> Client
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#change_password-instance_method
+      def change_password: (
+                             old_password: ::String,
+                             new_password: ::String
+                           ) -> ::Aws::EmptyStructure
+                         | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#create_account_alias-instance_method
+      def create_account_alias: (
+                                  account_alias: ::String
+                                ) -> ::Aws::EmptyStructure
+                              | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#create_account_password_policy-instance_method
+      def create_account_password_policy: (
+                                            ?minimum_password_length: ::Integer,
+                                            ?require_symbols: bool,
+                                            ?require_numbers: bool,
+                                            ?require_uppercase_characters: bool,
+                                            ?require_lowercase_characters: bool,
+                                            ?allow_users_to_change_password: bool,
+                                            ?max_password_age: ::Integer,
+                                            ?password_reuse_prevention: ::Integer,
+                                            ?hard_expiry: bool
+                                          ) -> AccountPasswordPolicy
+                                        | (?Hash[Symbol, untyped]) -> AccountPasswordPolicy
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#create_group-instance_method
+      def create_group: (
+                          ?path: ::String,
+                          group_name: ::String
+                        ) -> Group
+                      | (?Hash[Symbol, untyped]) -> Group
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#create_instance_profile-instance_method
+      def create_instance_profile: (
+                                     instance_profile_name: ::String,
+                                     ?path: ::String,
+                                     ?tags: Array[
+                                       {
+                                         key: ::String,
+                                         value: ::String
+                                       },
+                                     ]
+                                   ) -> InstanceProfile
+                                 | (?Hash[Symbol, untyped]) -> InstanceProfile
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#create_policy-instance_method
+      def create_policy: (
+                           policy_name: ::String,
+                           ?path: ::String,
+                           policy_document: ::String,
+                           ?description: ::String,
+                           ?tags: Array[
+                             {
+                               key: ::String,
+                               value: ::String
+                             },
+                           ]
+                         ) -> Policy
+                       | (?Hash[Symbol, untyped]) -> Policy
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#create_role-instance_method
+      def create_role: (
+                         ?path: ::String,
+                         role_name: ::String,
+                         assume_role_policy_document: ::String,
+                         ?description: ::String,
+                         ?max_session_duration: ::Integer,
+                         ?permissions_boundary: ::String,
+                         ?tags: Array[
+                           {
+                             key: ::String,
+                             value: ::String
+                           },
+                         ]
+                       ) -> Role
+                     | (?Hash[Symbol, untyped]) -> Role
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#create_saml_provider-instance_method
+      def create_saml_provider: (
+                                  saml_metadata_document: ::String,
+                                  name: ::String,
+                                  ?tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String
+                                    },
+                                  ]
+                                ) -> SamlProvider
+                              | (?Hash[Symbol, untyped]) -> SamlProvider
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#create_server_certificate-instance_method
+      def create_server_certificate: (
+                                       ?path: ::String,
+                                       server_certificate_name: ::String,
+                                       certificate_body: ::String,
+                                       private_key: ::String,
+                                       ?certificate_chain: ::String,
+                                       ?tags: Array[
+                                         {
+                                           key: ::String,
+                                           value: ::String
+                                         },
+                                       ]
+                                     ) -> ServerCertificate
+                                   | (?Hash[Symbol, untyped]) -> ServerCertificate
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#create_signing_certificate-instance_method
+      def create_signing_certificate: (
+                                        ?user_name: ::String,
+                                        certificate_body: ::String
+                                      ) -> SigningCertificate
+                                    | (?Hash[Symbol, untyped]) -> SigningCertificate
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#create_user-instance_method
+      def create_user: (
+                         ?path: ::String,
+                         user_name: ::String,
+                         ?permissions_boundary: ::String,
+                         ?tags: Array[
+                           {
+                             key: ::String,
+                             value: ::String
+                           },
+                         ]
+                       ) -> User
+                     | (?Hash[Symbol, untyped]) -> User
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#create_virtual_mfa_device-instance_method
+      def create_virtual_mfa_device: (
+                                       ?path: ::String,
+                                       virtual_mfa_device_name: ::String,
+                                       ?tags: Array[
+                                         {
+                                           key: ::String,
+                                           value: ::String
+                                         },
+                                       ]
+                                     ) -> VirtualMfaDevice
+                                   | (?Hash[Symbol, untyped]) -> VirtualMfaDevice
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#account_password_policy-instance_method
+      def account_password_policy: () -> AccountPasswordPolicy
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#account_summary-instance_method
+      def account_summary: () -> AccountSummary
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#current_user-instance_method
+      def current_user: () -> CurrentUser
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#group-instance_method
+      def group: (String name) -> Group
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#groups-instance_method
+      def groups: (
+                    ?path_prefix: ::String
+                  ) -> Group::Collection
+                | (?Hash[Symbol, untyped]) -> Group::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#instance_profile-instance_method
+      def instance_profile: (String name) -> InstanceProfile
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#instance_profiles-instance_method
+      def instance_profiles: (
+                               ?path_prefix: ::String
+                             ) -> InstanceProfile::Collection
+                           | (?Hash[Symbol, untyped]) -> InstanceProfile::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#policies-instance_method
+      def policies: (
+                      ?scope: ("All" | "AWS" | "Local"),
+                      ?only_attached: bool,
+                      ?path_prefix: ::String,
+                      ?policy_usage_filter: ("PermissionsPolicy" | "PermissionsBoundary")
+                    ) -> Policy::Collection
+                  | (?Hash[Symbol, untyped]) -> Policy::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#policy-instance_method
+      def policy: (String arn) -> Policy
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#role-instance_method
+      def role: (String name) -> Role
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#roles-instance_method
+      def roles: (
+                   ?path_prefix: ::String
+                 ) -> Role::Collection
+               | (?Hash[Symbol, untyped]) -> Role::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#saml_provider-instance_method
+      def saml_provider: (String arn) -> SamlProvider
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#saml_providers-instance_method
+      def saml_providers: (
+                          ) -> SamlProvider::Collection
+                        | (?Hash[Symbol, untyped]) -> SamlProvider::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#server_certificate-instance_method
+      def server_certificate: (String name) -> ServerCertificate
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#server_certificates-instance_method
+      def server_certificates: (
+                                 ?path_prefix: ::String
+                               ) -> ServerCertificate::Collection
+                             | (?Hash[Symbol, untyped]) -> ServerCertificate::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#user-instance_method
+      def user: (String name) -> User
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#users-instance_method
+      def users: (
+                   ?path_prefix: ::String
+                 ) -> User::Collection
+               | (?Hash[Symbol, untyped]) -> User::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#virtual_mfa_device-instance_method
+      def virtual_mfa_device: (String serial_number) -> VirtualMfaDevice
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Resource.html#virtual_mfa_devices-instance_method
+      def virtual_mfa_devices: (
+                                 ?assignment_status: ("Assigned" | "Unassigned" | "Any")
+                               ) -> VirtualMfaDevice::Collection
+                             | (?Hash[Symbol, untyped]) -> VirtualMfaDevice::Collection
+    end
+  end
+end

@@ -1,0 +1,1239 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Finspace
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AutoScalingConfiguration
+      attr_accessor min_node_count: ::Integer
+      attr_accessor max_node_count: ::Integer
+      attr_accessor auto_scaling_metric: ("CPU_UTILIZATION_PERCENTAGE")
+      attr_accessor metric_target: ::Float
+      attr_accessor scale_in_cooldown_seconds: ::Float
+      attr_accessor scale_out_cooldown_seconds: ::Float
+      SENSITIVE: []
+    end
+
+    class CapacityConfiguration
+      attr_accessor node_type: ::String
+      attr_accessor node_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ChangeRequest
+      attr_accessor change_type: ("PUT" | "DELETE")
+      attr_accessor s3_path: ::String
+      attr_accessor db_path: ::String
+      SENSITIVE: []
+    end
+
+    class CodeConfiguration
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_key: ::String
+      attr_accessor s3_object_version: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class CreateEnvironmentRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor federation_mode: ("FEDERATED" | "LOCAL")
+      attr_accessor federation_parameters: Types::FederationParameters
+      attr_accessor superuser_parameters: Types::SuperuserParameters
+      attr_accessor data_bundles: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateEnvironmentResponse
+      attr_accessor environment_id: ::String
+      attr_accessor environment_arn: ::String
+      attr_accessor environment_url: ::String
+      SENSITIVE: []
+    end
+
+    class CreateKxChangesetRequest
+      attr_accessor environment_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor change_requests: ::Array[Types::ChangeRequest]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateKxChangesetResponse
+      attr_accessor changeset_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor change_requests: ::Array[Types::ChangeRequest]
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_modified_timestamp: ::Time
+      attr_accessor status: ("PENDING" | "PROCESSING" | "FAILED" | "COMPLETED")
+      attr_accessor error_info: Types::ErrorInfo
+      SENSITIVE: []
+    end
+
+    class CreateKxClusterRequest
+      attr_accessor client_token: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor cluster_type: ("HDB" | "RDB" | "GATEWAY" | "GP" | "TICKERPLANT")
+      attr_accessor tickerplant_log_configuration: Types::TickerplantLogConfiguration
+      attr_accessor databases: ::Array[Types::KxDatabaseConfiguration]
+      attr_accessor cache_storage_configurations: ::Array[Types::KxCacheStorageConfiguration]
+      attr_accessor auto_scaling_configuration: Types::AutoScalingConfiguration
+      attr_accessor cluster_description: ::String
+      attr_accessor capacity_configuration: Types::CapacityConfiguration
+      attr_accessor release_label: ::String
+      attr_accessor vpc_configuration: Types::VpcConfiguration
+      attr_accessor initialization_script: ::String
+      attr_accessor command_line_arguments: ::Array[Types::KxCommandLineArgument]
+      attr_accessor code: Types::CodeConfiguration
+      attr_accessor execution_role: ::String
+      attr_accessor savedown_storage_configuration: Types::KxSavedownStorageConfiguration
+      attr_accessor az_mode: ("SINGLE" | "MULTI")
+      attr_accessor availability_zone_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor scaling_group_configuration: Types::KxScalingGroupConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateKxClusterResponse
+      attr_accessor environment_id: ::String
+      attr_accessor status: ("PENDING" | "CREATING" | "CREATE_FAILED" | "RUNNING" | "UPDATING" | "DELETING" | "DELETED" | "DELETE_FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor cluster_type: ("HDB" | "RDB" | "GATEWAY" | "GP" | "TICKERPLANT")
+      attr_accessor tickerplant_log_configuration: Types::TickerplantLogConfiguration
+      attr_accessor volumes: ::Array[Types::Volume]
+      attr_accessor databases: ::Array[Types::KxDatabaseConfiguration]
+      attr_accessor cache_storage_configurations: ::Array[Types::KxCacheStorageConfiguration]
+      attr_accessor auto_scaling_configuration: Types::AutoScalingConfiguration
+      attr_accessor cluster_description: ::String
+      attr_accessor capacity_configuration: Types::CapacityConfiguration
+      attr_accessor release_label: ::String
+      attr_accessor vpc_configuration: Types::VpcConfiguration
+      attr_accessor initialization_script: ::String
+      attr_accessor command_line_arguments: ::Array[Types::KxCommandLineArgument]
+      attr_accessor code: Types::CodeConfiguration
+      attr_accessor execution_role: ::String
+      attr_accessor last_modified_timestamp: ::Time
+      attr_accessor savedown_storage_configuration: Types::KxSavedownStorageConfiguration
+      attr_accessor az_mode: ("SINGLE" | "MULTI")
+      attr_accessor availability_zone_id: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor scaling_group_configuration: Types::KxScalingGroupConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateKxDatabaseRequest
+      attr_accessor environment_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateKxDatabaseResponse
+      attr_accessor database_name: ::String
+      attr_accessor database_arn: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor description: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_modified_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateKxDataviewRequest
+      attr_accessor environment_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor dataview_name: ::String
+      attr_accessor az_mode: ("SINGLE" | "MULTI")
+      attr_accessor availability_zone_id: ::String
+      attr_accessor changeset_id: ::String
+      attr_accessor segment_configurations: ::Array[Types::KxDataviewSegmentConfiguration]
+      attr_accessor auto_update: bool
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateKxDataviewResponse
+      attr_accessor dataview_name: ::String
+      attr_accessor database_name: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor az_mode: ("SINGLE" | "MULTI")
+      attr_accessor availability_zone_id: ::String
+      attr_accessor changeset_id: ::String
+      attr_accessor segment_configurations: ::Array[Types::KxDataviewSegmentConfiguration]
+      attr_accessor description: ::String
+      attr_accessor auto_update: bool
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_modified_timestamp: ::Time
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "FAILED" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class CreateKxEnvironmentRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateKxEnvironmentResponse
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATE_REQUESTED" | "CREATING" | "CREATED" | "DELETE_REQUESTED" | "DELETING" | "DELETED" | "FAILED_CREATION" | "RETRY_DELETION" | "FAILED_DELETION" | "UPDATE_NETWORK_REQUESTED" | "UPDATING_NETWORK" | "FAILED_UPDATING_NETWORK" | "SUSPENDED")
+      attr_accessor environment_id: ::String
+      attr_accessor description: ::String
+      attr_accessor environment_arn: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor creation_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateKxScalingGroupRequest
+      attr_accessor client_token: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor scaling_group_name: ::String
+      attr_accessor host_type: ::String
+      attr_accessor availability_zone_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateKxScalingGroupResponse
+      attr_accessor environment_id: ::String
+      attr_accessor scaling_group_name: ::String
+      attr_accessor host_type: ::String
+      attr_accessor availability_zone_id: ::String
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "DELETED" | "DELETE_FAILED")
+      attr_accessor last_modified_timestamp: ::Time
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateKxUserRequest
+      attr_accessor environment_id: ::String
+      attr_accessor user_name: ::String
+      attr_accessor iam_role: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateKxUserResponse
+      attr_accessor user_name: ::String
+      attr_accessor user_arn: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor iam_role: ::String
+      SENSITIVE: []
+    end
+
+    class CreateKxVolumeRequest
+      attr_accessor client_token: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor volume_type: ("NAS_1")
+      attr_accessor volume_name: ::String
+      attr_accessor description: ::String
+      attr_accessor nas1_configuration: Types::KxNAS1Configuration
+      attr_accessor az_mode: ("SINGLE" | "MULTI")
+      attr_accessor availability_zone_ids: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateKxVolumeResponse
+      attr_accessor environment_id: ::String
+      attr_accessor volume_name: ::String
+      attr_accessor volume_type: ("NAS_1")
+      attr_accessor volume_arn: ::String
+      attr_accessor nas1_configuration: Types::KxNAS1Configuration
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED" | "DELETE_FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor az_mode: ("SINGLE" | "MULTI")
+      attr_accessor description: ::String
+      attr_accessor availability_zone_ids: ::Array[::String]
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class CustomDNSServer
+      attr_accessor custom_dns_server_name: ::String
+      attr_accessor custom_dns_server_ip: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEnvironmentRequest
+      attr_accessor environment_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEnvironmentResponse < Aws::EmptyStructure
+    end
+
+    class DeleteKxClusterRequest
+      attr_accessor environment_id: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteKxClusterResponse < Aws::EmptyStructure
+    end
+
+    class DeleteKxDatabaseRequest
+      attr_accessor environment_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteKxDatabaseResponse < Aws::EmptyStructure
+    end
+
+    class DeleteKxDataviewRequest
+      attr_accessor environment_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor dataview_name: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteKxDataviewResponse < Aws::EmptyStructure
+    end
+
+    class DeleteKxEnvironmentRequest
+      attr_accessor environment_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteKxEnvironmentResponse < Aws::EmptyStructure
+    end
+
+    class DeleteKxScalingGroupRequest
+      attr_accessor environment_id: ::String
+      attr_accessor scaling_group_name: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteKxScalingGroupResponse < Aws::EmptyStructure
+    end
+
+    class DeleteKxUserRequest
+      attr_accessor user_name: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteKxUserResponse < Aws::EmptyStructure
+    end
+
+    class DeleteKxVolumeRequest
+      attr_accessor environment_id: ::String
+      attr_accessor volume_name: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteKxVolumeResponse < Aws::EmptyStructure
+    end
+
+    class Environment
+      attr_accessor name: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor aws_account_id: ::String
+      attr_accessor status: ("CREATE_REQUESTED" | "CREATING" | "CREATED" | "DELETE_REQUESTED" | "DELETING" | "DELETED" | "FAILED_CREATION" | "RETRY_DELETION" | "FAILED_DELETION" | "UPDATE_NETWORK_REQUESTED" | "UPDATING_NETWORK" | "FAILED_UPDATING_NETWORK" | "SUSPENDED")
+      attr_accessor environment_url: ::String
+      attr_accessor description: ::String
+      attr_accessor environment_arn: ::String
+      attr_accessor sage_maker_studio_domain_url: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor dedicated_service_account_id: ::String
+      attr_accessor federation_mode: ("FEDERATED" | "LOCAL")
+      attr_accessor federation_parameters: Types::FederationParameters
+      SENSITIVE: []
+    end
+
+    class ErrorInfo
+      attr_accessor error_message: ::String
+      attr_accessor error_type: ("The inputs to this request are invalid." | "Service limits have been exceeded." | "Missing required permission to perform this request." | "One or more inputs to this request were not found." | "The system temporarily lacks sufficient resources to process the request." | "An internal error has occurred." | "Cancelled" | "A user recoverable error has occurred")
+      SENSITIVE: []
+    end
+
+    class FederationParameters
+      attr_accessor saml_metadata_document: ::String
+      attr_accessor saml_metadata_url: ::String
+      attr_accessor application_call_back_url: ::String
+      attr_accessor federation_urn: ::String
+      attr_accessor federation_provider_name: ::String
+      attr_accessor attribute_map: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentRequest
+      attr_accessor environment_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentResponse
+      attr_accessor environment: Types::Environment
+      SENSITIVE: []
+    end
+
+    class GetKxChangesetRequest
+      attr_accessor environment_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor changeset_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetKxChangesetResponse
+      attr_accessor changeset_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor change_requests: ::Array[Types::ChangeRequest]
+      attr_accessor created_timestamp: ::Time
+      attr_accessor active_from_timestamp: ::Time
+      attr_accessor last_modified_timestamp: ::Time
+      attr_accessor status: ("PENDING" | "PROCESSING" | "FAILED" | "COMPLETED")
+      attr_accessor error_info: Types::ErrorInfo
+      SENSITIVE: []
+    end
+
+    class GetKxClusterRequest
+      attr_accessor environment_id: ::String
+      attr_accessor cluster_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetKxClusterResponse
+      attr_accessor status: ("PENDING" | "CREATING" | "CREATE_FAILED" | "RUNNING" | "UPDATING" | "DELETING" | "DELETED" | "DELETE_FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor cluster_type: ("HDB" | "RDB" | "GATEWAY" | "GP" | "TICKERPLANT")
+      attr_accessor tickerplant_log_configuration: Types::TickerplantLogConfiguration
+      attr_accessor volumes: ::Array[Types::Volume]
+      attr_accessor databases: ::Array[Types::KxDatabaseConfiguration]
+      attr_accessor cache_storage_configurations: ::Array[Types::KxCacheStorageConfiguration]
+      attr_accessor auto_scaling_configuration: Types::AutoScalingConfiguration
+      attr_accessor cluster_description: ::String
+      attr_accessor capacity_configuration: Types::CapacityConfiguration
+      attr_accessor release_label: ::String
+      attr_accessor vpc_configuration: Types::VpcConfiguration
+      attr_accessor initialization_script: ::String
+      attr_accessor command_line_arguments: ::Array[Types::KxCommandLineArgument]
+      attr_accessor code: Types::CodeConfiguration
+      attr_accessor execution_role: ::String
+      attr_accessor last_modified_timestamp: ::Time
+      attr_accessor savedown_storage_configuration: Types::KxSavedownStorageConfiguration
+      attr_accessor az_mode: ("SINGLE" | "MULTI")
+      attr_accessor availability_zone_id: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor scaling_group_configuration: Types::KxScalingGroupConfiguration
+      SENSITIVE: []
+    end
+
+    class GetKxConnectionStringRequest
+      attr_accessor user_arn: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor cluster_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetKxConnectionStringResponse
+      attr_accessor signed_connection_string: ::String
+      SENSITIVE: [:signed_connection_string]
+    end
+
+    class GetKxDatabaseRequest
+      attr_accessor environment_id: ::String
+      attr_accessor database_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetKxDatabaseResponse
+      attr_accessor database_name: ::String
+      attr_accessor database_arn: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor description: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_modified_timestamp: ::Time
+      attr_accessor last_completed_changeset_id: ::String
+      attr_accessor num_bytes: ::Integer
+      attr_accessor num_changesets: ::Integer
+      attr_accessor num_files: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetKxDataviewRequest
+      attr_accessor environment_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor dataview_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetKxDataviewResponse
+      attr_accessor database_name: ::String
+      attr_accessor dataview_name: ::String
+      attr_accessor az_mode: ("SINGLE" | "MULTI")
+      attr_accessor availability_zone_id: ::String
+      attr_accessor changeset_id: ::String
+      attr_accessor segment_configurations: ::Array[Types::KxDataviewSegmentConfiguration]
+      attr_accessor active_versions: ::Array[Types::KxDataviewActiveVersion]
+      attr_accessor description: ::String
+      attr_accessor auto_update: bool
+      attr_accessor environment_id: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_modified_timestamp: ::Time
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "FAILED" | "DELETING")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class GetKxEnvironmentRequest
+      attr_accessor environment_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetKxEnvironmentResponse
+      attr_accessor name: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor aws_account_id: ::String
+      attr_accessor status: ("CREATE_REQUESTED" | "CREATING" | "CREATED" | "DELETE_REQUESTED" | "DELETING" | "DELETED" | "FAILED_CREATION" | "RETRY_DELETION" | "FAILED_DELETION" | "UPDATE_NETWORK_REQUESTED" | "UPDATING_NETWORK" | "FAILED_UPDATING_NETWORK" | "SUSPENDED")
+      attr_accessor tgw_status: ("NONE" | "UPDATE_REQUESTED" | "UPDATING" | "FAILED_UPDATE" | "SUCCESSFULLY_UPDATED")
+      attr_accessor dns_status: ("NONE" | "UPDATE_REQUESTED" | "UPDATING" | "FAILED_UPDATE" | "SUCCESSFULLY_UPDATED")
+      attr_accessor error_message: ::String
+      attr_accessor description: ::String
+      attr_accessor environment_arn: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor dedicated_service_account_id: ::String
+      attr_accessor transit_gateway_configuration: Types::TransitGatewayConfiguration
+      attr_accessor custom_dns_configuration: ::Array[Types::CustomDNSServer]
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor update_timestamp: ::Time
+      attr_accessor availability_zone_ids: ::Array[::String]
+      attr_accessor certificate_authority_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetKxScalingGroupRequest
+      attr_accessor environment_id: ::String
+      attr_accessor scaling_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetKxScalingGroupResponse
+      attr_accessor scaling_group_name: ::String
+      attr_accessor scaling_group_arn: ::String
+      attr_accessor host_type: ::String
+      attr_accessor clusters: ::Array[::String]
+      attr_accessor availability_zone_id: ::String
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "DELETED" | "DELETE_FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor last_modified_timestamp: ::Time
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class GetKxUserRequest
+      attr_accessor user_name: ::String
+      attr_accessor environment_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetKxUserResponse
+      attr_accessor user_name: ::String
+      attr_accessor user_arn: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor iam_role: ::String
+      SENSITIVE: []
+    end
+
+    class GetKxVolumeRequest
+      attr_accessor environment_id: ::String
+      attr_accessor volume_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetKxVolumeResponse
+      attr_accessor environment_id: ::String
+      attr_accessor volume_name: ::String
+      attr_accessor volume_type: ("NAS_1")
+      attr_accessor volume_arn: ::String
+      attr_accessor nas1_configuration: Types::KxNAS1Configuration
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED" | "DELETE_FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor description: ::String
+      attr_accessor az_mode: ("SINGLE" | "MULTI")
+      attr_accessor availability_zone_ids: ::Array[::String]
+      attr_accessor last_modified_timestamp: ::Time
+      attr_accessor attached_clusters: ::Array[Types::KxAttachedCluster]
+      SENSITIVE: []
+    end
+
+    class IcmpTypeCode
+      attr_accessor type: ::Integer
+      attr_accessor code: ::Integer
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KxAttachedCluster
+      attr_accessor cluster_name: ::String
+      attr_accessor cluster_type: ("HDB" | "RDB" | "GATEWAY" | "GP" | "TICKERPLANT")
+      attr_accessor cluster_status: ("PENDING" | "CREATING" | "CREATE_FAILED" | "RUNNING" | "UPDATING" | "DELETING" | "DELETED" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
+    class KxCacheStorageConfiguration
+      attr_accessor type: ::String
+      attr_accessor size: ::Integer
+      SENSITIVE: []
+    end
+
+    class KxChangesetListEntry
+      attr_accessor changeset_id: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor active_from_timestamp: ::Time
+      attr_accessor last_modified_timestamp: ::Time
+      attr_accessor status: ("PENDING" | "PROCESSING" | "FAILED" | "COMPLETED")
+      SENSITIVE: []
+    end
+
+    class KxCluster
+      attr_accessor status: ("PENDING" | "CREATING" | "CREATE_FAILED" | "RUNNING" | "UPDATING" | "DELETING" | "DELETED" | "DELETE_FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor cluster_type: ("HDB" | "RDB" | "GATEWAY" | "GP" | "TICKERPLANT")
+      attr_accessor cluster_description: ::String
+      attr_accessor release_label: ::String
+      attr_accessor volumes: ::Array[Types::Volume]
+      attr_accessor initialization_script: ::String
+      attr_accessor execution_role: ::String
+      attr_accessor az_mode: ("SINGLE" | "MULTI")
+      attr_accessor availability_zone_id: ::String
+      attr_accessor last_modified_timestamp: ::Time
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class KxClusterCodeDeploymentConfiguration
+      attr_accessor deployment_strategy: ("NO_RESTART" | "ROLLING" | "FORCE")
+      SENSITIVE: []
+    end
+
+    class KxCommandLineArgument
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class KxDatabaseCacheConfiguration
+      attr_accessor cache_type: ::String
+      attr_accessor db_paths: ::Array[::String]
+      attr_accessor dataview_name: ::String
+      SENSITIVE: []
+    end
+
+    class KxDatabaseConfiguration
+      attr_accessor database_name: ::String
+      attr_accessor cache_configurations: ::Array[Types::KxDatabaseCacheConfiguration]
+      attr_accessor changeset_id: ::String
+      attr_accessor dataview_name: ::String
+      attr_accessor dataview_configuration: Types::KxDataviewConfiguration
+      SENSITIVE: []
+    end
+
+    class KxDatabaseListEntry
+      attr_accessor database_name: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_modified_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class KxDataviewActiveVersion
+      attr_accessor changeset_id: ::String
+      attr_accessor segment_configurations: ::Array[Types::KxDataviewSegmentConfiguration]
+      attr_accessor attached_clusters: ::Array[::String]
+      attr_accessor created_timestamp: ::Time
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class KxDataviewConfiguration
+      attr_accessor dataview_name: ::String
+      attr_accessor dataview_version_id: ::String
+      attr_accessor changeset_id: ::String
+      attr_accessor segment_configurations: ::Array[Types::KxDataviewSegmentConfiguration]
+      SENSITIVE: []
+    end
+
+    class KxDataviewListEntry
+      attr_accessor environment_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor dataview_name: ::String
+      attr_accessor az_mode: ("SINGLE" | "MULTI")
+      attr_accessor availability_zone_id: ::String
+      attr_accessor changeset_id: ::String
+      attr_accessor segment_configurations: ::Array[Types::KxDataviewSegmentConfiguration]
+      attr_accessor active_versions: ::Array[Types::KxDataviewActiveVersion]
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "FAILED" | "DELETING")
+      attr_accessor description: ::String
+      attr_accessor auto_update: bool
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_modified_timestamp: ::Time
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class KxDataviewSegmentConfiguration
+      attr_accessor db_paths: ::Array[::String]
+      attr_accessor volume_name: ::String
+      SENSITIVE: []
+    end
+
+    class KxDeploymentConfiguration
+      attr_accessor deployment_strategy: ("NO_RESTART" | "ROLLING")
+      SENSITIVE: []
+    end
+
+    class KxEnvironment
+      attr_accessor name: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor aws_account_id: ::String
+      attr_accessor status: ("CREATE_REQUESTED" | "CREATING" | "CREATED" | "DELETE_REQUESTED" | "DELETING" | "DELETED" | "FAILED_CREATION" | "RETRY_DELETION" | "FAILED_DELETION" | "UPDATE_NETWORK_REQUESTED" | "UPDATING_NETWORK" | "FAILED_UPDATING_NETWORK" | "SUSPENDED")
+      attr_accessor tgw_status: ("NONE" | "UPDATE_REQUESTED" | "UPDATING" | "FAILED_UPDATE" | "SUCCESSFULLY_UPDATED")
+      attr_accessor dns_status: ("NONE" | "UPDATE_REQUESTED" | "UPDATING" | "FAILED_UPDATE" | "SUCCESSFULLY_UPDATED")
+      attr_accessor error_message: ::String
+      attr_accessor description: ::String
+      attr_accessor environment_arn: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor dedicated_service_account_id: ::String
+      attr_accessor transit_gateway_configuration: Types::TransitGatewayConfiguration
+      attr_accessor custom_dns_configuration: ::Array[Types::CustomDNSServer]
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor update_timestamp: ::Time
+      attr_accessor availability_zone_ids: ::Array[::String]
+      attr_accessor certificate_authority_arn: ::String
+      SENSITIVE: []
+    end
+
+    class KxNAS1Configuration
+      attr_accessor type: ("SSD_1000" | "SSD_250" | "HDD_12")
+      attr_accessor size: ::Integer
+      SENSITIVE: []
+    end
+
+    class KxNode
+      attr_accessor node_id: ::String
+      attr_accessor availability_zone_id: ::String
+      attr_accessor launch_time: ::Time
+      SENSITIVE: []
+    end
+
+    class KxSavedownStorageConfiguration
+      attr_accessor type: ("SDS01")
+      attr_accessor size: ::Integer
+      attr_accessor volume_name: ::String
+      SENSITIVE: []
+    end
+
+    class KxScalingGroup
+      attr_accessor scaling_group_name: ::String
+      attr_accessor host_type: ::String
+      attr_accessor clusters: ::Array[::String]
+      attr_accessor availability_zone_id: ::String
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "DELETED" | "DELETE_FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor last_modified_timestamp: ::Time
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class KxScalingGroupConfiguration
+      attr_accessor scaling_group_name: ::String
+      attr_accessor memory_limit: ::Integer
+      attr_accessor memory_reservation: ::Integer
+      attr_accessor node_count: ::Integer
+      attr_accessor cpu: ::Float
+      SENSITIVE: []
+    end
+
+    class KxUser
+      attr_accessor user_arn: ::String
+      attr_accessor user_name: ::String
+      attr_accessor iam_role: ::String
+      attr_accessor create_timestamp: ::Time
+      attr_accessor update_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class KxVolume
+      attr_accessor volume_name: ::String
+      attr_accessor volume_type: ("NAS_1")
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED" | "DELETE_FAILED")
+      attr_accessor description: ::String
+      attr_accessor status_reason: ::String
+      attr_accessor az_mode: ("SINGLE" | "MULTI")
+      attr_accessor availability_zone_ids: ::Array[::String]
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_modified_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentsResponse
+      attr_accessor environments: ::Array[Types::Environment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListKxChangesetsRequest
+      attr_accessor environment_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListKxChangesetsResponse
+      attr_accessor kx_changesets: ::Array[Types::KxChangesetListEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListKxClusterNodesRequest
+      attr_accessor environment_id: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListKxClusterNodesResponse
+      attr_accessor nodes: ::Array[Types::KxNode]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListKxClustersRequest
+      attr_accessor environment_id: ::String
+      attr_accessor cluster_type: ("HDB" | "RDB" | "GATEWAY" | "GP" | "TICKERPLANT")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListKxClustersResponse
+      attr_accessor kx_cluster_summaries: ::Array[Types::KxCluster]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListKxDatabasesRequest
+      attr_accessor environment_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListKxDatabasesResponse
+      attr_accessor kx_databases: ::Array[Types::KxDatabaseListEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListKxDataviewsRequest
+      attr_accessor environment_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListKxDataviewsResponse
+      attr_accessor kx_dataviews: ::Array[Types::KxDataviewListEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListKxEnvironmentsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListKxEnvironmentsResponse
+      attr_accessor environments: ::Array[Types::KxEnvironment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListKxScalingGroupsRequest
+      attr_accessor environment_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListKxScalingGroupsResponse
+      attr_accessor scaling_groups: ::Array[Types::KxScalingGroup]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListKxUsersRequest
+      attr_accessor environment_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListKxUsersResponse
+      attr_accessor users: ::Array[Types::KxUser]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListKxVolumesRequest
+      attr_accessor environment_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor volume_type: ("NAS_1")
+      SENSITIVE: []
+    end
+
+    class ListKxVolumesResponse
+      attr_accessor kx_volume_summaries: ::Array[Types::KxVolume]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class NetworkACLEntry
+      attr_accessor rule_number: ::Integer
+      attr_accessor protocol: ::String
+      attr_accessor rule_action: ("allow" | "deny")
+      attr_accessor port_range: Types::PortRange
+      attr_accessor icmp_type_code: Types::IcmpTypeCode
+      attr_accessor cidr_block: ::String
+      SENSITIVE: []
+    end
+
+    class PortRange
+      attr_accessor from: ::Integer
+      attr_accessor to: ::Integer
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SuperuserParameters
+      attr_accessor email_address: ::String
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      SENSITIVE: [:email_address]
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TickerplantLogConfiguration
+      attr_accessor tickerplant_log_volumes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TransitGatewayConfiguration
+      attr_accessor transit_gateway_id: ::String
+      attr_accessor routable_cidr_space: ::String
+      attr_accessor attachment_network_acl_configuration: ::Array[Types::NetworkACLEntry]
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateEnvironmentRequest
+      attr_accessor environment_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor federation_mode: ("FEDERATED" | "LOCAL")
+      attr_accessor federation_parameters: Types::FederationParameters
+      SENSITIVE: []
+    end
+
+    class UpdateEnvironmentResponse
+      attr_accessor environment: Types::Environment
+      SENSITIVE: []
+    end
+
+    class UpdateKxClusterCodeConfigurationRequest
+      attr_accessor environment_id: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor code: Types::CodeConfiguration
+      attr_accessor initialization_script: ::String
+      attr_accessor command_line_arguments: ::Array[Types::KxCommandLineArgument]
+      attr_accessor deployment_configuration: Types::KxClusterCodeDeploymentConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateKxClusterCodeConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class UpdateKxClusterDatabasesRequest
+      attr_accessor environment_id: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor databases: ::Array[Types::KxDatabaseConfiguration]
+      attr_accessor deployment_configuration: Types::KxDeploymentConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateKxClusterDatabasesResponse < Aws::EmptyStructure
+    end
+
+    class UpdateKxDatabaseRequest
+      attr_accessor environment_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor description: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateKxDatabaseResponse
+      attr_accessor database_name: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor description: ::String
+      attr_accessor last_modified_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateKxDataviewRequest
+      attr_accessor environment_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor dataview_name: ::String
+      attr_accessor description: ::String
+      attr_accessor changeset_id: ::String
+      attr_accessor segment_configurations: ::Array[Types::KxDataviewSegmentConfiguration]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateKxDataviewResponse
+      attr_accessor environment_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor dataview_name: ::String
+      attr_accessor az_mode: ("SINGLE" | "MULTI")
+      attr_accessor availability_zone_id: ::String
+      attr_accessor changeset_id: ::String
+      attr_accessor segment_configurations: ::Array[Types::KxDataviewSegmentConfiguration]
+      attr_accessor active_versions: ::Array[Types::KxDataviewActiveVersion]
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "FAILED" | "DELETING")
+      attr_accessor auto_update: bool
+      attr_accessor description: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_modified_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateKxEnvironmentNetworkRequest
+      attr_accessor environment_id: ::String
+      attr_accessor transit_gateway_configuration: Types::TransitGatewayConfiguration
+      attr_accessor custom_dns_configuration: ::Array[Types::CustomDNSServer]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateKxEnvironmentNetworkResponse
+      attr_accessor name: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor aws_account_id: ::String
+      attr_accessor status: ("CREATE_REQUESTED" | "CREATING" | "CREATED" | "DELETE_REQUESTED" | "DELETING" | "DELETED" | "FAILED_CREATION" | "RETRY_DELETION" | "FAILED_DELETION" | "UPDATE_NETWORK_REQUESTED" | "UPDATING_NETWORK" | "FAILED_UPDATING_NETWORK" | "SUSPENDED")
+      attr_accessor tgw_status: ("NONE" | "UPDATE_REQUESTED" | "UPDATING" | "FAILED_UPDATE" | "SUCCESSFULLY_UPDATED")
+      attr_accessor dns_status: ("NONE" | "UPDATE_REQUESTED" | "UPDATING" | "FAILED_UPDATE" | "SUCCESSFULLY_UPDATED")
+      attr_accessor error_message: ::String
+      attr_accessor description: ::String
+      attr_accessor environment_arn: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor dedicated_service_account_id: ::String
+      attr_accessor transit_gateway_configuration: Types::TransitGatewayConfiguration
+      attr_accessor custom_dns_configuration: ::Array[Types::CustomDNSServer]
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor update_timestamp: ::Time
+      attr_accessor availability_zone_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateKxEnvironmentRequest
+      attr_accessor environment_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateKxEnvironmentResponse
+      attr_accessor name: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor aws_account_id: ::String
+      attr_accessor status: ("CREATE_REQUESTED" | "CREATING" | "CREATED" | "DELETE_REQUESTED" | "DELETING" | "DELETED" | "FAILED_CREATION" | "RETRY_DELETION" | "FAILED_DELETION" | "UPDATE_NETWORK_REQUESTED" | "UPDATING_NETWORK" | "FAILED_UPDATING_NETWORK" | "SUSPENDED")
+      attr_accessor tgw_status: ("NONE" | "UPDATE_REQUESTED" | "UPDATING" | "FAILED_UPDATE" | "SUCCESSFULLY_UPDATED")
+      attr_accessor dns_status: ("NONE" | "UPDATE_REQUESTED" | "UPDATING" | "FAILED_UPDATE" | "SUCCESSFULLY_UPDATED")
+      attr_accessor error_message: ::String
+      attr_accessor description: ::String
+      attr_accessor environment_arn: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor dedicated_service_account_id: ::String
+      attr_accessor transit_gateway_configuration: Types::TransitGatewayConfiguration
+      attr_accessor custom_dns_configuration: ::Array[Types::CustomDNSServer]
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor update_timestamp: ::Time
+      attr_accessor availability_zone_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateKxUserRequest
+      attr_accessor environment_id: ::String
+      attr_accessor user_name: ::String
+      attr_accessor iam_role: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateKxUserResponse
+      attr_accessor user_name: ::String
+      attr_accessor user_arn: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor iam_role: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateKxVolumeRequest
+      attr_accessor environment_id: ::String
+      attr_accessor volume_name: ::String
+      attr_accessor description: ::String
+      attr_accessor client_token: ::String
+      attr_accessor nas1_configuration: Types::KxNAS1Configuration
+      SENSITIVE: []
+    end
+
+    class UpdateKxVolumeResponse
+      attr_accessor environment_id: ::String
+      attr_accessor volume_name: ::String
+      attr_accessor volume_type: ("NAS_1")
+      attr_accessor volume_arn: ::String
+      attr_accessor nas1_configuration: Types::KxNAS1Configuration
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED" | "DELETE_FAILED")
+      attr_accessor description: ::String
+      attr_accessor status_reason: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor az_mode: ("SINGLE" | "MULTI")
+      attr_accessor availability_zone_ids: ::Array[::String]
+      attr_accessor last_modified_timestamp: ::Time
+      attr_accessor attached_clusters: ::Array[Types::KxAttachedCluster]
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Volume
+      attr_accessor volume_name: ::String
+      attr_accessor volume_type: ("NAS_1")
+      SENSITIVE: []
+    end
+
+    class VpcConfiguration
+      attr_accessor vpc_id: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor ip_address_type: ("IP_V4")
+      SENSITIVE: []
+    end
+  end
+end

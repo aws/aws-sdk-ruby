@@ -1,0 +1,1093 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AppSync
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateApiResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateApiResponse]
+        def api_association: () -> Types::ApiAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#associate_api-instance_method
+      def associate_api: (
+                           domain_name: ::String,
+                           api_id: ::String
+                         ) -> _AssociateApiResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateApiResponseSuccess
+
+      interface _AssociateMergedGraphqlApiResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateMergedGraphqlApiResponse]
+        def source_api_association: () -> Types::SourceApiAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#associate_merged_graphql_api-instance_method
+      def associate_merged_graphql_api: (
+                                          source_api_identifier: ::String,
+                                          merged_api_identifier: ::String,
+                                          ?description: ::String,
+                                          ?source_api_association_config: {
+                                            merge_type: ("MANUAL_MERGE" | "AUTO_MERGE")?
+                                          }
+                                        ) -> _AssociateMergedGraphqlApiResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateMergedGraphqlApiResponseSuccess
+
+      interface _AssociateSourceGraphqlApiResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateSourceGraphqlApiResponse]
+        def source_api_association: () -> Types::SourceApiAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#associate_source_graphql_api-instance_method
+      def associate_source_graphql_api: (
+                                          merged_api_identifier: ::String,
+                                          source_api_identifier: ::String,
+                                          ?description: ::String,
+                                          ?source_api_association_config: {
+                                            merge_type: ("MANUAL_MERGE" | "AUTO_MERGE")?
+                                          }
+                                        ) -> _AssociateSourceGraphqlApiResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateSourceGraphqlApiResponseSuccess
+
+      interface _CreateApiCacheResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateApiCacheResponse]
+        def api_cache: () -> Types::ApiCache
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#create_api_cache-instance_method
+      def create_api_cache: (
+                              api_id: ::String,
+                              ttl: ::Integer,
+                              ?transit_encryption_enabled: bool,
+                              ?at_rest_encryption_enabled: bool,
+                              api_caching_behavior: ("FULL_REQUEST_CACHING" | "PER_RESOLVER_CACHING"),
+                              type: ("T2_SMALL" | "T2_MEDIUM" | "R4_LARGE" | "R4_XLARGE" | "R4_2XLARGE" | "R4_4XLARGE" | "R4_8XLARGE" | "SMALL" | "MEDIUM" | "LARGE" | "XLARGE" | "LARGE_2X" | "LARGE_4X" | "LARGE_8X" | "LARGE_12X")
+                            ) -> _CreateApiCacheResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApiCacheResponseSuccess
+
+      interface _CreateApiKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateApiKeyResponse]
+        def api_key: () -> Types::ApiKey
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#create_api_key-instance_method
+      def create_api_key: (
+                            api_id: ::String,
+                            ?description: ::String,
+                            ?expires: ::Integer
+                          ) -> _CreateApiKeyResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApiKeyResponseSuccess
+
+      interface _CreateDataSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataSourceResponse]
+        def data_source: () -> Types::DataSource
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#create_data_source-instance_method
+      def create_data_source: (
+                                api_id: ::String,
+                                name: ::String,
+                                ?description: ::String,
+                                type: ("AWS_LAMBDA" | "AMAZON_DYNAMODB" | "AMAZON_ELASTICSEARCH" | "NONE" | "HTTP" | "RELATIONAL_DATABASE" | "AMAZON_OPENSEARCH_SERVICE" | "AMAZON_EVENTBRIDGE"),
+                                ?service_role_arn: ::String,
+                                ?dynamodb_config: {
+                                  table_name: ::String,
+                                  aws_region: ::String,
+                                  use_caller_credentials: bool?,
+                                  delta_sync_config: {
+                                    base_table_ttl: ::Integer?,
+                                    delta_sync_table_name: ::String?,
+                                    delta_sync_table_ttl: ::Integer?
+                                  }?,
+                                  versioned: bool?
+                                },
+                                ?lambda_config: {
+                                  lambda_function_arn: ::String
+                                },
+                                ?elasticsearch_config: {
+                                  endpoint: ::String,
+                                  aws_region: ::String
+                                },
+                                ?open_search_service_config: {
+                                  endpoint: ::String,
+                                  aws_region: ::String
+                                },
+                                ?http_config: {
+                                  endpoint: ::String?,
+                                  authorization_config: {
+                                    authorization_type: ("AWS_IAM"),
+                                    aws_iam_config: {
+                                      signing_region: ::String?,
+                                      signing_service_name: ::String?
+                                    }?
+                                  }?
+                                },
+                                ?relational_database_config: {
+                                  relational_database_source_type: ("RDS_HTTP_ENDPOINT")?,
+                                  rds_http_endpoint_config: {
+                                    aws_region: ::String?,
+                                    db_cluster_identifier: ::String?,
+                                    database_name: ::String?,
+                                    schema: ::String?,
+                                    aws_secret_store_arn: ::String?
+                                  }?
+                                },
+                                ?event_bridge_config: {
+                                  event_bus_arn: ::String
+                                }
+                              ) -> _CreateDataSourceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataSourceResponseSuccess
+
+      interface _CreateDomainNameResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDomainNameResponse]
+        def domain_name_config: () -> Types::DomainNameConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#create_domain_name-instance_method
+      def create_domain_name: (
+                                domain_name: ::String,
+                                certificate_arn: ::String,
+                                ?description: ::String
+                              ) -> _CreateDomainNameResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainNameResponseSuccess
+
+      interface _CreateFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFunctionResponse]
+        def function_configuration: () -> Types::FunctionConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#create_function-instance_method
+      def create_function: (
+                             api_id: ::String,
+                             name: ::String,
+                             ?description: ::String,
+                             data_source_name: ::String,
+                             ?request_mapping_template: ::String,
+                             ?response_mapping_template: ::String,
+                             ?function_version: ::String,
+                             ?sync_config: {
+                               conflict_handler: ("OPTIMISTIC_CONCURRENCY" | "LAMBDA" | "AUTOMERGE" | "NONE")?,
+                               conflict_detection: ("VERSION" | "NONE")?,
+                               lambda_conflict_handler_config: {
+                                 lambda_conflict_handler_arn: ::String?
+                               }?
+                             },
+                             ?max_batch_size: ::Integer,
+                             ?runtime: {
+                               name: ("APPSYNC_JS"),
+                               runtime_version: ::String
+                             },
+                             ?code: ::String
+                           ) -> _CreateFunctionResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFunctionResponseSuccess
+
+      interface _CreateGraphqlApiResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGraphqlApiResponse]
+        def graphql_api: () -> Types::GraphqlApi
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#create_graphql_api-instance_method
+      def create_graphql_api: (
+                                name: ::String,
+                                ?log_config: {
+                                  field_log_level: ("NONE" | "ERROR" | "ALL"),
+                                  cloud_watch_logs_role_arn: ::String,
+                                  exclude_verbose_content: bool?
+                                },
+                                authentication_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA"),
+                                ?user_pool_config: {
+                                  user_pool_id: ::String,
+                                  aws_region: ::String,
+                                  default_action: ("ALLOW" | "DENY"),
+                                  app_id_client_regex: ::String?
+                                },
+                                ?open_id_connect_config: {
+                                  issuer: ::String,
+                                  client_id: ::String?,
+                                  iat_ttl: ::Integer?,
+                                  auth_ttl: ::Integer?
+                                },
+                                ?tags: Hash[::String, ::String],
+                                ?additional_authentication_providers: Array[
+                                  {
+                                    authentication_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")?,
+                                    open_id_connect_config: {
+                                      issuer: ::String,
+                                      client_id: ::String?,
+                                      iat_ttl: ::Integer?,
+                                      auth_ttl: ::Integer?
+                                    }?,
+                                    user_pool_config: {
+                                      user_pool_id: ::String,
+                                      aws_region: ::String,
+                                      app_id_client_regex: ::String?
+                                    }?,
+                                    lambda_authorizer_config: {
+                                      authorizer_result_ttl_in_seconds: ::Integer?,
+                                      authorizer_uri: ::String,
+                                      identity_validation_expression: ::String?
+                                    }?
+                                  },
+                                ],
+                                ?xray_enabled: bool,
+                                ?lambda_authorizer_config: {
+                                  authorizer_result_ttl_in_seconds: ::Integer?,
+                                  authorizer_uri: ::String,
+                                  identity_validation_expression: ::String?
+                                },
+                                ?visibility: ("GLOBAL" | "PRIVATE"),
+                                ?api_type: ("GRAPHQL" | "MERGED"),
+                                ?merged_api_execution_role_arn: ::String,
+                                ?owner_contact: ::String,
+                                ?introspection_config: ("ENABLED" | "DISABLED"),
+                                ?query_depth_limit: ::Integer,
+                                ?resolver_count_limit: ::Integer
+                              ) -> _CreateGraphqlApiResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGraphqlApiResponseSuccess
+
+      interface _CreateResolverResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateResolverResponse]
+        def resolver: () -> Types::Resolver
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#create_resolver-instance_method
+      def create_resolver: (
+                             api_id: ::String,
+                             type_name: ::String,
+                             field_name: ::String,
+                             ?data_source_name: ::String,
+                             ?request_mapping_template: ::String,
+                             ?response_mapping_template: ::String,
+                             ?kind: ("UNIT" | "PIPELINE"),
+                             ?pipeline_config: {
+                               functions: Array[::String]?
+                             },
+                             ?sync_config: {
+                               conflict_handler: ("OPTIMISTIC_CONCURRENCY" | "LAMBDA" | "AUTOMERGE" | "NONE")?,
+                               conflict_detection: ("VERSION" | "NONE")?,
+                               lambda_conflict_handler_config: {
+                                 lambda_conflict_handler_arn: ::String?
+                               }?
+                             },
+                             ?caching_config: {
+                               ttl: ::Integer,
+                               caching_keys: Array[::String]?
+                             },
+                             ?max_batch_size: ::Integer,
+                             ?runtime: {
+                               name: ("APPSYNC_JS"),
+                               runtime_version: ::String
+                             },
+                             ?code: ::String
+                           ) -> _CreateResolverResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResolverResponseSuccess
+
+      interface _CreateTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTypeResponse]
+        def type: () -> Types::Type
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#create_type-instance_method
+      def create_type: (
+                         api_id: ::String,
+                         definition: ::String,
+                         format: ("SDL" | "JSON")
+                       ) -> _CreateTypeResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTypeResponseSuccess
+
+      interface _DeleteApiCacheResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteApiCacheResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#delete_api_cache-instance_method
+      def delete_api_cache: (
+                              api_id: ::String
+                            ) -> _DeleteApiCacheResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteApiCacheResponseSuccess
+
+      interface _DeleteApiKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteApiKeyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#delete_api_key-instance_method
+      def delete_api_key: (
+                            api_id: ::String,
+                            id: ::String
+                          ) -> _DeleteApiKeyResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteApiKeyResponseSuccess
+
+      interface _DeleteDataSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataSourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#delete_data_source-instance_method
+      def delete_data_source: (
+                                api_id: ::String,
+                                name: ::String
+                              ) -> _DeleteDataSourceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataSourceResponseSuccess
+
+      interface _DeleteDomainNameResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDomainNameResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#delete_domain_name-instance_method
+      def delete_domain_name: (
+                                domain_name: ::String
+                              ) -> _DeleteDomainNameResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDomainNameResponseSuccess
+
+      interface _DeleteFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFunctionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#delete_function-instance_method
+      def delete_function: (
+                             api_id: ::String,
+                             function_id: ::String
+                           ) -> _DeleteFunctionResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFunctionResponseSuccess
+
+      interface _DeleteGraphqlApiResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGraphqlApiResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#delete_graphql_api-instance_method
+      def delete_graphql_api: (
+                                api_id: ::String
+                              ) -> _DeleteGraphqlApiResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGraphqlApiResponseSuccess
+
+      interface _DeleteResolverResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResolverResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#delete_resolver-instance_method
+      def delete_resolver: (
+                             api_id: ::String,
+                             type_name: ::String,
+                             field_name: ::String
+                           ) -> _DeleteResolverResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResolverResponseSuccess
+
+      interface _DeleteTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTypeResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#delete_type-instance_method
+      def delete_type: (
+                         api_id: ::String,
+                         type_name: ::String
+                       ) -> _DeleteTypeResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTypeResponseSuccess
+
+      interface _DisassociateApiResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateApiResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#disassociate_api-instance_method
+      def disassociate_api: (
+                              domain_name: ::String
+                            ) -> _DisassociateApiResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateApiResponseSuccess
+
+      interface _DisassociateMergedGraphqlApiResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateMergedGraphqlApiResponse]
+        def source_api_association_status: () -> ("MERGE_SCHEDULED" | "MERGE_FAILED" | "MERGE_SUCCESS" | "MERGE_IN_PROGRESS" | "AUTO_MERGE_SCHEDULE_FAILED" | "DELETION_SCHEDULED" | "DELETION_IN_PROGRESS" | "DELETION_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#disassociate_merged_graphql_api-instance_method
+      def disassociate_merged_graphql_api: (
+                                             source_api_identifier: ::String,
+                                             association_id: ::String
+                                           ) -> _DisassociateMergedGraphqlApiResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateMergedGraphqlApiResponseSuccess
+
+      interface _DisassociateSourceGraphqlApiResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateSourceGraphqlApiResponse]
+        def source_api_association_status: () -> ("MERGE_SCHEDULED" | "MERGE_FAILED" | "MERGE_SUCCESS" | "MERGE_IN_PROGRESS" | "AUTO_MERGE_SCHEDULE_FAILED" | "DELETION_SCHEDULED" | "DELETION_IN_PROGRESS" | "DELETION_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#disassociate_source_graphql_api-instance_method
+      def disassociate_source_graphql_api: (
+                                             merged_api_identifier: ::String,
+                                             association_id: ::String
+                                           ) -> _DisassociateSourceGraphqlApiResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateSourceGraphqlApiResponseSuccess
+
+      interface _EvaluateCodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EvaluateCodeResponse]
+        def evaluation_result: () -> ::String
+        def logs: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#evaluate_code-instance_method
+      def evaluate_code: (
+                           runtime: {
+                             name: ("APPSYNC_JS"),
+                             runtime_version: ::String
+                           },
+                           code: ::String,
+                           context: ::String,
+                           ?function: ::String
+                         ) -> _EvaluateCodeResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EvaluateCodeResponseSuccess
+
+      interface _EvaluateMappingTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EvaluateMappingTemplateResponse]
+        def evaluation_result: () -> ::String
+        def logs: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#evaluate_mapping_template-instance_method
+      def evaluate_mapping_template: (
+                                       template: ::String,
+                                       context: ::String
+                                     ) -> _EvaluateMappingTemplateResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EvaluateMappingTemplateResponseSuccess
+
+      interface _FlushApiCacheResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::FlushApiCacheResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#flush_api_cache-instance_method
+      def flush_api_cache: (
+                             api_id: ::String
+                           ) -> _FlushApiCacheResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _FlushApiCacheResponseSuccess
+
+      interface _GetApiAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetApiAssociationResponse]
+        def api_association: () -> Types::ApiAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#get_api_association-instance_method
+      def get_api_association: (
+                                 domain_name: ::String
+                               ) -> _GetApiAssociationResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApiAssociationResponseSuccess
+
+      interface _GetApiCacheResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetApiCacheResponse]
+        def api_cache: () -> Types::ApiCache
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#get_api_cache-instance_method
+      def get_api_cache: (
+                           api_id: ::String
+                         ) -> _GetApiCacheResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApiCacheResponseSuccess
+
+      interface _GetDataSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataSourceResponse]
+        def data_source: () -> Types::DataSource
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#get_data_source-instance_method
+      def get_data_source: (
+                             api_id: ::String,
+                             name: ::String
+                           ) -> _GetDataSourceResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataSourceResponseSuccess
+
+      interface _GetDataSourceIntrospectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataSourceIntrospectionResponse]
+        def introspection_id: () -> ::String
+        def introspection_status: () -> ("PROCESSING" | "FAILED" | "SUCCESS")
+        def introspection_status_detail: () -> ::String
+        def introspection_result: () -> Types::DataSourceIntrospectionResult
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#get_data_source_introspection-instance_method
+      def get_data_source_introspection: (
+                                           introspection_id: ::String,
+                                           ?include_models_sdl: bool,
+                                           ?next_token: ::String,
+                                           ?max_results: ::Integer
+                                         ) -> _GetDataSourceIntrospectionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataSourceIntrospectionResponseSuccess
+
+      interface _GetDomainNameResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainNameResponse]
+        def domain_name_config: () -> Types::DomainNameConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#get_domain_name-instance_method
+      def get_domain_name: (
+                             domain_name: ::String
+                           ) -> _GetDomainNameResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainNameResponseSuccess
+
+      interface _GetFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFunctionResponse]
+        def function_configuration: () -> Types::FunctionConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#get_function-instance_method
+      def get_function: (
+                          api_id: ::String,
+                          function_id: ::String
+                        ) -> _GetFunctionResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFunctionResponseSuccess
+
+      interface _GetGraphqlApiResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGraphqlApiResponse]
+        def graphql_api: () -> Types::GraphqlApi
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#get_graphql_api-instance_method
+      def get_graphql_api: (
+                             api_id: ::String
+                           ) -> _GetGraphqlApiResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGraphqlApiResponseSuccess
+
+      interface _GetIntrospectionSchemaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIntrospectionSchemaResponse]
+        def schema: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#get_introspection_schema-instance_method
+      def get_introspection_schema: (
+                                      api_id: ::String,
+                                      format: ("SDL" | "JSON"),
+                                      ?include_directives: bool
+                                    ) -> _GetIntrospectionSchemaResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIntrospectionSchemaResponseSuccess
+
+      interface _GetResolverResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResolverResponse]
+        def resolver: () -> Types::Resolver
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#get_resolver-instance_method
+      def get_resolver: (
+                          api_id: ::String,
+                          type_name: ::String,
+                          field_name: ::String
+                        ) -> _GetResolverResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResolverResponseSuccess
+
+      interface _GetSchemaCreationStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSchemaCreationStatusResponse]
+        def status: () -> ("PROCESSING" | "ACTIVE" | "DELETING" | "FAILED" | "SUCCESS" | "NOT_APPLICABLE")
+        def details: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#get_schema_creation_status-instance_method
+      def get_schema_creation_status: (
+                                        api_id: ::String
+                                      ) -> _GetSchemaCreationStatusResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSchemaCreationStatusResponseSuccess
+
+      interface _GetSourceApiAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSourceApiAssociationResponse]
+        def source_api_association: () -> Types::SourceApiAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#get_source_api_association-instance_method
+      def get_source_api_association: (
+                                        merged_api_identifier: ::String,
+                                        association_id: ::String
+                                      ) -> _GetSourceApiAssociationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSourceApiAssociationResponseSuccess
+
+      interface _GetTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTypeResponse]
+        def type: () -> Types::Type
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#get_type-instance_method
+      def get_type: (
+                      api_id: ::String,
+                      type_name: ::String,
+                      format: ("SDL" | "JSON")
+                    ) -> _GetTypeResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTypeResponseSuccess
+
+      interface _ListApiKeysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApiKeysResponse]
+        def api_keys: () -> ::Array[Types::ApiKey]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#list_api_keys-instance_method
+      def list_api_keys: (
+                           api_id: ::String,
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListApiKeysResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApiKeysResponseSuccess
+
+      interface _ListDataSourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataSourcesResponse]
+        def data_sources: () -> ::Array[Types::DataSource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#list_data_sources-instance_method
+      def list_data_sources: (
+                               api_id: ::String,
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
+                             ) -> _ListDataSourcesResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataSourcesResponseSuccess
+
+      interface _ListDomainNamesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainNamesResponse]
+        def domain_name_configs: () -> ::Array[Types::DomainNameConfig]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#list_domain_names-instance_method
+      def list_domain_names: (
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
+                             ) -> _ListDomainNamesResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainNamesResponseSuccess
+
+      interface _ListFunctionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFunctionsResponse]
+        def functions: () -> ::Array[Types::FunctionConfiguration]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#list_functions-instance_method
+      def list_functions: (
+                            api_id: ::String,
+                            ?next_token: ::String,
+                            ?max_results: ::Integer
+                          ) -> _ListFunctionsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFunctionsResponseSuccess
+
+      interface _ListGraphqlApisResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGraphqlApisResponse]
+        def graphql_apis: () -> ::Array[Types::GraphqlApi]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#list_graphql_apis-instance_method
+      def list_graphql_apis: (
+                               ?next_token: ::String,
+                               ?max_results: ::Integer,
+                               ?api_type: ("GRAPHQL" | "MERGED"),
+                               ?owner: ("CURRENT_ACCOUNT" | "OTHER_ACCOUNTS")
+                             ) -> _ListGraphqlApisResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGraphqlApisResponseSuccess
+
+      interface _ListResolversResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResolversResponse]
+        def resolvers: () -> ::Array[Types::Resolver]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#list_resolvers-instance_method
+      def list_resolvers: (
+                            api_id: ::String,
+                            type_name: ::String,
+                            ?next_token: ::String,
+                            ?max_results: ::Integer
+                          ) -> _ListResolversResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResolversResponseSuccess
+
+      interface _ListResolversByFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResolversByFunctionResponse]
+        def resolvers: () -> ::Array[Types::Resolver]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#list_resolvers_by_function-instance_method
+      def list_resolvers_by_function: (
+                                        api_id: ::String,
+                                        function_id: ::String,
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer
+                                      ) -> _ListResolversByFunctionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResolversByFunctionResponseSuccess
+
+      interface _ListSourceApiAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSourceApiAssociationsResponse]
+        def source_api_association_summaries: () -> ::Array[Types::SourceApiAssociationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#list_source_api_associations-instance_method
+      def list_source_api_associations: (
+                                          api_id: ::String,
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListSourceApiAssociationsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSourceApiAssociationsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTypesResponse]
+        def types: () -> ::Array[Types::Type]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#list_types-instance_method
+      def list_types: (
+                        api_id: ::String,
+                        format: ("SDL" | "JSON"),
+                        ?next_token: ::String,
+                        ?max_results: ::Integer
+                      ) -> _ListTypesResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTypesResponseSuccess
+
+      interface _ListTypesByAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTypesByAssociationResponse]
+        def types: () -> ::Array[Types::Type]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#list_types_by_association-instance_method
+      def list_types_by_association: (
+                                       merged_api_identifier: ::String,
+                                       association_id: ::String,
+                                       format: ("SDL" | "JSON"),
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _ListTypesByAssociationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTypesByAssociationResponseSuccess
+
+      interface _StartDataSourceIntrospectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDataSourceIntrospectionResponse]
+        def introspection_id: () -> ::String
+        def introspection_status: () -> ("PROCESSING" | "FAILED" | "SUCCESS")
+        def introspection_status_detail: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#start_data_source_introspection-instance_method
+      def start_data_source_introspection: (
+                                             ?rds_data_api_config: {
+                                               resource_arn: ::String,
+                                               secret_arn: ::String,
+                                               database_name: ::String
+                                             }
+                                           ) -> _StartDataSourceIntrospectionResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDataSourceIntrospectionResponseSuccess
+
+      interface _StartSchemaCreationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartSchemaCreationResponse]
+        def status: () -> ("PROCESSING" | "ACTIVE" | "DELETING" | "FAILED" | "SUCCESS" | "NOT_APPLICABLE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#start_schema_creation-instance_method
+      def start_schema_creation: (
+                                   api_id: ::String,
+                                   definition: ::String
+                                 ) -> _StartSchemaCreationResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartSchemaCreationResponseSuccess
+
+      interface _StartSchemaMergeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartSchemaMergeResponse]
+        def source_api_association_status: () -> ("MERGE_SCHEDULED" | "MERGE_FAILED" | "MERGE_SUCCESS" | "MERGE_IN_PROGRESS" | "AUTO_MERGE_SCHEDULE_FAILED" | "DELETION_SCHEDULED" | "DELETION_IN_PROGRESS" | "DELETION_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#start_schema_merge-instance_method
+      def start_schema_merge: (
+                                association_id: ::String,
+                                merged_api_identifier: ::String
+                              ) -> _StartSchemaMergeResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartSchemaMergeResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateApiCacheResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateApiCacheResponse]
+        def api_cache: () -> Types::ApiCache
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#update_api_cache-instance_method
+      def update_api_cache: (
+                              api_id: ::String,
+                              ttl: ::Integer,
+                              api_caching_behavior: ("FULL_REQUEST_CACHING" | "PER_RESOLVER_CACHING"),
+                              type: ("T2_SMALL" | "T2_MEDIUM" | "R4_LARGE" | "R4_XLARGE" | "R4_2XLARGE" | "R4_4XLARGE" | "R4_8XLARGE" | "SMALL" | "MEDIUM" | "LARGE" | "XLARGE" | "LARGE_2X" | "LARGE_4X" | "LARGE_8X" | "LARGE_12X")
+                            ) -> _UpdateApiCacheResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApiCacheResponseSuccess
+
+      interface _UpdateApiKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateApiKeyResponse]
+        def api_key: () -> Types::ApiKey
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#update_api_key-instance_method
+      def update_api_key: (
+                            api_id: ::String,
+                            id: ::String,
+                            ?description: ::String,
+                            ?expires: ::Integer
+                          ) -> _UpdateApiKeyResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApiKeyResponseSuccess
+
+      interface _UpdateDataSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataSourceResponse]
+        def data_source: () -> Types::DataSource
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#update_data_source-instance_method
+      def update_data_source: (
+                                api_id: ::String,
+                                name: ::String,
+                                ?description: ::String,
+                                type: ("AWS_LAMBDA" | "AMAZON_DYNAMODB" | "AMAZON_ELASTICSEARCH" | "NONE" | "HTTP" | "RELATIONAL_DATABASE" | "AMAZON_OPENSEARCH_SERVICE" | "AMAZON_EVENTBRIDGE"),
+                                ?service_role_arn: ::String,
+                                ?dynamodb_config: {
+                                  table_name: ::String,
+                                  aws_region: ::String,
+                                  use_caller_credentials: bool?,
+                                  delta_sync_config: {
+                                    base_table_ttl: ::Integer?,
+                                    delta_sync_table_name: ::String?,
+                                    delta_sync_table_ttl: ::Integer?
+                                  }?,
+                                  versioned: bool?
+                                },
+                                ?lambda_config: {
+                                  lambda_function_arn: ::String
+                                },
+                                ?elasticsearch_config: {
+                                  endpoint: ::String,
+                                  aws_region: ::String
+                                },
+                                ?open_search_service_config: {
+                                  endpoint: ::String,
+                                  aws_region: ::String
+                                },
+                                ?http_config: {
+                                  endpoint: ::String?,
+                                  authorization_config: {
+                                    authorization_type: ("AWS_IAM"),
+                                    aws_iam_config: {
+                                      signing_region: ::String?,
+                                      signing_service_name: ::String?
+                                    }?
+                                  }?
+                                },
+                                ?relational_database_config: {
+                                  relational_database_source_type: ("RDS_HTTP_ENDPOINT")?,
+                                  rds_http_endpoint_config: {
+                                    aws_region: ::String?,
+                                    db_cluster_identifier: ::String?,
+                                    database_name: ::String?,
+                                    schema: ::String?,
+                                    aws_secret_store_arn: ::String?
+                                  }?
+                                },
+                                ?event_bridge_config: {
+                                  event_bus_arn: ::String
+                                }
+                              ) -> _UpdateDataSourceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataSourceResponseSuccess
+
+      interface _UpdateDomainNameResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDomainNameResponse]
+        def domain_name_config: () -> Types::DomainNameConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#update_domain_name-instance_method
+      def update_domain_name: (
+                                domain_name: ::String,
+                                ?description: ::String
+                              ) -> _UpdateDomainNameResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainNameResponseSuccess
+
+      interface _UpdateFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFunctionResponse]
+        def function_configuration: () -> Types::FunctionConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#update_function-instance_method
+      def update_function: (
+                             api_id: ::String,
+                             name: ::String,
+                             ?description: ::String,
+                             function_id: ::String,
+                             data_source_name: ::String,
+                             ?request_mapping_template: ::String,
+                             ?response_mapping_template: ::String,
+                             ?function_version: ::String,
+                             ?sync_config: {
+                               conflict_handler: ("OPTIMISTIC_CONCURRENCY" | "LAMBDA" | "AUTOMERGE" | "NONE")?,
+                               conflict_detection: ("VERSION" | "NONE")?,
+                               lambda_conflict_handler_config: {
+                                 lambda_conflict_handler_arn: ::String?
+                               }?
+                             },
+                             ?max_batch_size: ::Integer,
+                             ?runtime: {
+                               name: ("APPSYNC_JS"),
+                               runtime_version: ::String
+                             },
+                             ?code: ::String
+                           ) -> _UpdateFunctionResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFunctionResponseSuccess
+
+      interface _UpdateGraphqlApiResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGraphqlApiResponse]
+        def graphql_api: () -> Types::GraphqlApi
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#update_graphql_api-instance_method
+      def update_graphql_api: (
+                                api_id: ::String,
+                                name: ::String,
+                                ?log_config: {
+                                  field_log_level: ("NONE" | "ERROR" | "ALL"),
+                                  cloud_watch_logs_role_arn: ::String,
+                                  exclude_verbose_content: bool?
+                                },
+                                ?authentication_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA"),
+                                ?user_pool_config: {
+                                  user_pool_id: ::String,
+                                  aws_region: ::String,
+                                  default_action: ("ALLOW" | "DENY"),
+                                  app_id_client_regex: ::String?
+                                },
+                                ?open_id_connect_config: {
+                                  issuer: ::String,
+                                  client_id: ::String?,
+                                  iat_ttl: ::Integer?,
+                                  auth_ttl: ::Integer?
+                                },
+                                ?additional_authentication_providers: Array[
+                                  {
+                                    authentication_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")?,
+                                    open_id_connect_config: {
+                                      issuer: ::String,
+                                      client_id: ::String?,
+                                      iat_ttl: ::Integer?,
+                                      auth_ttl: ::Integer?
+                                    }?,
+                                    user_pool_config: {
+                                      user_pool_id: ::String,
+                                      aws_region: ::String,
+                                      app_id_client_regex: ::String?
+                                    }?,
+                                    lambda_authorizer_config: {
+                                      authorizer_result_ttl_in_seconds: ::Integer?,
+                                      authorizer_uri: ::String,
+                                      identity_validation_expression: ::String?
+                                    }?
+                                  },
+                                ],
+                                ?xray_enabled: bool,
+                                ?lambda_authorizer_config: {
+                                  authorizer_result_ttl_in_seconds: ::Integer?,
+                                  authorizer_uri: ::String,
+                                  identity_validation_expression: ::String?
+                                },
+                                ?merged_api_execution_role_arn: ::String,
+                                ?owner_contact: ::String,
+                                ?introspection_config: ("ENABLED" | "DISABLED"),
+                                ?query_depth_limit: ::Integer,
+                                ?resolver_count_limit: ::Integer
+                              ) -> _UpdateGraphqlApiResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGraphqlApiResponseSuccess
+
+      interface _UpdateResolverResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResolverResponse]
+        def resolver: () -> Types::Resolver
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#update_resolver-instance_method
+      def update_resolver: (
+                             api_id: ::String,
+                             type_name: ::String,
+                             field_name: ::String,
+                             ?data_source_name: ::String,
+                             ?request_mapping_template: ::String,
+                             ?response_mapping_template: ::String,
+                             ?kind: ("UNIT" | "PIPELINE"),
+                             ?pipeline_config: {
+                               functions: Array[::String]?
+                             },
+                             ?sync_config: {
+                               conflict_handler: ("OPTIMISTIC_CONCURRENCY" | "LAMBDA" | "AUTOMERGE" | "NONE")?,
+                               conflict_detection: ("VERSION" | "NONE")?,
+                               lambda_conflict_handler_config: {
+                                 lambda_conflict_handler_arn: ::String?
+                               }?
+                             },
+                             ?caching_config: {
+                               ttl: ::Integer,
+                               caching_keys: Array[::String]?
+                             },
+                             ?max_batch_size: ::Integer,
+                             ?runtime: {
+                               name: ("APPSYNC_JS"),
+                               runtime_version: ::String
+                             },
+                             ?code: ::String
+                           ) -> _UpdateResolverResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResolverResponseSuccess
+
+      interface _UpdateSourceApiAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSourceApiAssociationResponse]
+        def source_api_association: () -> Types::SourceApiAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#update_source_api_association-instance_method
+      def update_source_api_association: (
+                                           association_id: ::String,
+                                           merged_api_identifier: ::String,
+                                           ?description: ::String,
+                                           ?source_api_association_config: {
+                                             merge_type: ("MANUAL_MERGE" | "AUTO_MERGE")?
+                                           }
+                                         ) -> _UpdateSourceApiAssociationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSourceApiAssociationResponseSuccess
+
+      interface _UpdateTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTypeResponse]
+        def type: () -> Types::Type
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#update_type-instance_method
+      def update_type: (
+                         api_id: ::String,
+                         type_name: ::String,
+                         ?definition: ::String,
+                         format: ("SDL" | "JSON")
+                       ) -> _UpdateTypeResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTypeResponseSuccess
+    end
+  end
+end
+

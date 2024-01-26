@@ -1,0 +1,2656 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudFront
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#associate_alias-instance_method
+      def associate_alias: (
+                             target_distribution_id: ::String,
+                             alias: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _CopyDistributionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CopyDistributionResult]
+        def distribution: () -> Types::Distribution
+        def location: () -> ::String
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#copy_distribution-instance_method
+      def copy_distribution: (
+                               primary_distribution_id: ::String,
+                               ?staging: bool,
+                               ?if_match: ::String,
+                               caller_reference: ::String,
+                               ?enabled: bool
+                             ) -> _CopyDistributionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopyDistributionResponseSuccess
+
+      interface _CreateCachePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCachePolicyResult]
+        def cache_policy: () -> Types::CachePolicy
+        def location: () -> ::String
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#create_cache_policy-instance_method
+      def create_cache_policy: (
+                                 cache_policy_config: {
+                                   comment: ::String?,
+                                   name: ::String,
+                                   default_ttl: ::Integer?,
+                                   max_ttl: ::Integer?,
+                                   min_ttl: ::Integer,
+                                   parameters_in_cache_key_and_forwarded_to_origin: {
+                                     enable_accept_encoding_gzip: bool,
+                                     enable_accept_encoding_brotli: bool?,
+                                     headers_config: {
+                                       header_behavior: ("none" | "whitelist"),
+                                       headers: {
+                                         quantity: ::Integer,
+                                         items: Array[::String]?
+                                       }?
+                                     },
+                                     cookies_config: {
+                                       cookie_behavior: ("none" | "whitelist" | "allExcept" | "all"),
+                                       cookies: {
+                                         quantity: ::Integer,
+                                         items: Array[::String]?
+                                       }?
+                                     },
+                                     query_strings_config: {
+                                       query_string_behavior: ("none" | "whitelist" | "allExcept" | "all"),
+                                       query_strings: {
+                                         quantity: ::Integer,
+                                         items: Array[::String]?
+                                       }?
+                                     }
+                                   }?
+                                 }
+                               ) -> _CreateCachePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCachePolicyResponseSuccess
+
+      interface _CreateCloudFrontOriginAccessIdentityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCloudFrontOriginAccessIdentityResult]
+        def cloud_front_origin_access_identity: () -> Types::CloudFrontOriginAccessIdentity
+        def location: () -> ::String
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#create_cloud_front_origin_access_identity-instance_method
+      def create_cloud_front_origin_access_identity: (
+                                                       cloud_front_origin_access_identity_config: {
+                                                         caller_reference: ::String,
+                                                         comment: ::String
+                                                       }
+                                                     ) -> _CreateCloudFrontOriginAccessIdentityResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCloudFrontOriginAccessIdentityResponseSuccess
+
+      interface _CreateContinuousDeploymentPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateContinuousDeploymentPolicyResult]
+        def continuous_deployment_policy: () -> Types::ContinuousDeploymentPolicy
+        def location: () -> ::String
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#create_continuous_deployment_policy-instance_method
+      def create_continuous_deployment_policy: (
+                                                 continuous_deployment_policy_config: {
+                                                   staging_distribution_dns_names: {
+                                                     quantity: ::Integer,
+                                                     items: Array[::String]?
+                                                   },
+                                                   enabled: bool,
+                                                   traffic_config: {
+                                                     single_weight_config: {
+                                                       weight: ::Float,
+                                                       session_stickiness_config: {
+                                                         idle_ttl: ::Integer,
+                                                         maximum_ttl: ::Integer
+                                                       }?
+                                                     }?,
+                                                     single_header_config: {
+                                                       header: ::String,
+                                                       value: ::String
+                                                     }?,
+                                                     type: ("SingleWeight" | "SingleHeader")
+                                                   }?
+                                                 }
+                                               ) -> _CreateContinuousDeploymentPolicyResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContinuousDeploymentPolicyResponseSuccess
+
+      interface _CreateDistributionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDistributionResult]
+        def distribution: () -> Types::Distribution
+        def location: () -> ::String
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#create_distribution-instance_method
+      def create_distribution: (
+                                 distribution_config: {
+                                   caller_reference: ::String,
+                                   aliases: {
+                                     quantity: ::Integer,
+                                     items: Array[::String]?
+                                   }?,
+                                   default_root_object: ::String?,
+                                   origins: {
+                                     quantity: ::Integer,
+                                     items: Array[
+                                       {
+                                         id: ::String,
+                                         domain_name: ::String,
+                                         origin_path: ::String?,
+                                         custom_headers: {
+                                           quantity: ::Integer,
+                                           items: Array[
+                                             {
+                                               header_name: ::String,
+                                               header_value: ::String
+                                             },
+                                           ]?
+                                         }?,
+                                         s3_origin_config: {
+                                           origin_access_identity: ::String
+                                         }?,
+                                         custom_origin_config: {
+                                           http_port: ::Integer,
+                                           https_port: ::Integer,
+                                           origin_protocol_policy: ("http-only" | "match-viewer" | "https-only"),
+                                           origin_ssl_protocols: {
+                                             quantity: ::Integer,
+                                             items: Array[("SSLv3" | "TLSv1" | "TLSv1.1" | "TLSv1.2")]
+                                           }?,
+                                           origin_read_timeout: ::Integer?,
+                                           origin_keepalive_timeout: ::Integer?
+                                         }?,
+                                         connection_attempts: ::Integer?,
+                                         connection_timeout: ::Integer?,
+                                         origin_shield: {
+                                           enabled: bool,
+                                           origin_shield_region: ::String?
+                                         }?,
+                                         origin_access_control_id: ::String?
+                                       },
+                                     ]
+                                   },
+                                   origin_groups: {
+                                     quantity: ::Integer,
+                                     items: Array[
+                                       {
+                                         id: ::String,
+                                         failover_criteria: {
+                                           status_codes: {
+                                             quantity: ::Integer,
+                                             items: Array[::Integer]
+                                           }
+                                         },
+                                         members: {
+                                           quantity: ::Integer,
+                                           items: Array[
+                                             {
+                                               origin_id: ::String
+                                             },
+                                           ]
+                                         }
+                                       },
+                                     ]?
+                                   }?,
+                                   default_cache_behavior: {
+                                     target_origin_id: ::String,
+                                     trusted_signers: {
+                                       enabled: bool,
+                                       quantity: ::Integer,
+                                       items: Array[::String]?
+                                     }?,
+                                     trusted_key_groups: {
+                                       enabled: bool,
+                                       quantity: ::Integer,
+                                       items: Array[::String]?
+                                     }?,
+                                     viewer_protocol_policy: ("allow-all" | "https-only" | "redirect-to-https"),
+                                     allowed_methods: {
+                                       quantity: ::Integer,
+                                       items: Array[("GET" | "HEAD" | "POST" | "PUT" | "PATCH" | "OPTIONS" | "DELETE")],
+                                       cached_methods: {
+                                         quantity: ::Integer,
+                                         items: Array[("GET" | "HEAD" | "POST" | "PUT" | "PATCH" | "OPTIONS" | "DELETE")]
+                                       }?
+                                     }?,
+                                     smooth_streaming: bool?,
+                                     compress: bool?,
+                                     lambda_function_associations: {
+                                       quantity: ::Integer,
+                                       items: Array[
+                                         {
+                                           lambda_function_arn: ::String,
+                                           event_type: ("viewer-request" | "viewer-response" | "origin-request" | "origin-response"),
+                                           include_body: bool?
+                                         },
+                                       ]?
+                                     }?,
+                                     function_associations: {
+                                       quantity: ::Integer,
+                                       items: Array[
+                                         {
+                                           function_arn: ::String,
+                                           event_type: ("viewer-request" | "viewer-response" | "origin-request" | "origin-response")
+                                         },
+                                       ]?
+                                     }?,
+                                     field_level_encryption_id: ::String?,
+                                     realtime_log_config_arn: ::String?,
+                                     cache_policy_id: ::String?,
+                                     origin_request_policy_id: ::String?,
+                                     response_headers_policy_id: ::String?,
+                                     forwarded_values: {
+                                       query_string: bool,
+                                       cookies: {
+                                         forward: ("none" | "whitelist" | "all"),
+                                         whitelisted_names: {
+                                           quantity: ::Integer,
+                                           items: Array[::String]?
+                                         }?
+                                       },
+                                       headers: {
+                                         quantity: ::Integer,
+                                         items: Array[::String]?
+                                       }?,
+                                       query_string_cache_keys: {
+                                         quantity: ::Integer,
+                                         items: Array[::String]?
+                                       }?
+                                     }?,
+                                     min_ttl: ::Integer?,
+                                     default_ttl: ::Integer?,
+                                     max_ttl: ::Integer?
+                                   },
+                                   cache_behaviors: {
+                                     quantity: ::Integer,
+                                     items: Array[
+                                       {
+                                         path_pattern: ::String,
+                                         target_origin_id: ::String,
+                                         trusted_signers: {
+                                           enabled: bool,
+                                           quantity: ::Integer,
+                                           items: Array[::String]?
+                                         }?,
+                                         trusted_key_groups: {
+                                           enabled: bool,
+                                           quantity: ::Integer,
+                                           items: Array[::String]?
+                                         }?,
+                                         viewer_protocol_policy: ("allow-all" | "https-only" | "redirect-to-https"),
+                                         allowed_methods: {
+                                           quantity: ::Integer,
+                                           items: Array[("GET" | "HEAD" | "POST" | "PUT" | "PATCH" | "OPTIONS" | "DELETE")],
+                                           cached_methods: {
+                                             quantity: ::Integer,
+                                             items: Array[("GET" | "HEAD" | "POST" | "PUT" | "PATCH" | "OPTIONS" | "DELETE")]
+                                           }?
+                                         }?,
+                                         smooth_streaming: bool?,
+                                         compress: bool?,
+                                         lambda_function_associations: {
+                                           quantity: ::Integer,
+                                           items: Array[
+                                             {
+                                               lambda_function_arn: ::String,
+                                               event_type: ("viewer-request" | "viewer-response" | "origin-request" | "origin-response"),
+                                               include_body: bool?
+                                             },
+                                           ]?
+                                         }?,
+                                         function_associations: {
+                                           quantity: ::Integer,
+                                           items: Array[
+                                             {
+                                               function_arn: ::String,
+                                               event_type: ("viewer-request" | "viewer-response" | "origin-request" | "origin-response")
+                                             },
+                                           ]?
+                                         }?,
+                                         field_level_encryption_id: ::String?,
+                                         realtime_log_config_arn: ::String?,
+                                         cache_policy_id: ::String?,
+                                         origin_request_policy_id: ::String?,
+                                         response_headers_policy_id: ::String?,
+                                         forwarded_values: {
+                                           query_string: bool,
+                                           cookies: {
+                                             forward: ("none" | "whitelist" | "all"),
+                                             whitelisted_names: {
+                                               quantity: ::Integer,
+                                               items: Array[::String]?
+                                             }?
+                                           },
+                                           headers: {
+                                             quantity: ::Integer,
+                                             items: Array[::String]?
+                                           }?,
+                                           query_string_cache_keys: {
+                                             quantity: ::Integer,
+                                             items: Array[::String]?
+                                           }?
+                                         }?,
+                                         min_ttl: ::Integer?,
+                                         default_ttl: ::Integer?,
+                                         max_ttl: ::Integer?
+                                       },
+                                     ]?
+                                   }?,
+                                   custom_error_responses: {
+                                     quantity: ::Integer,
+                                     items: Array[
+                                       {
+                                         error_code: ::Integer,
+                                         response_page_path: ::String?,
+                                         response_code: ::String?,
+                                         error_caching_min_ttl: ::Integer?
+                                       },
+                                     ]?
+                                   }?,
+                                   comment: ::String,
+                                   logging: {
+                                     enabled: bool,
+                                     include_cookies: bool,
+                                     bucket: ::String,
+                                     prefix: ::String
+                                   }?,
+                                   price_class: ("PriceClass_100" | "PriceClass_200" | "PriceClass_All")?,
+                                   enabled: bool,
+                                   viewer_certificate: {
+                                     cloud_front_default_certificate: bool?,
+                                     iam_certificate_id: ::String?,
+                                     acm_certificate_arn: ::String?,
+                                     ssl_support_method: ("sni-only" | "vip" | "static-ip")?,
+                                     minimum_protocol_version: ("SSLv3" | "TLSv1" | "TLSv1_2016" | "TLSv1.1_2016" | "TLSv1.2_2018" | "TLSv1.2_2019" | "TLSv1.2_2021")?,
+                                     certificate: ::String?,
+                                     certificate_source: ("cloudfront" | "iam" | "acm")?
+                                   }?,
+                                   restrictions: {
+                                     geo_restriction: {
+                                       restriction_type: ("blacklist" | "whitelist" | "none"),
+                                       quantity: ::Integer,
+                                       items: Array[::String]?
+                                     }
+                                   }?,
+                                   web_acl_id: ::String?,
+                                   http_version: ("http1.1" | "http2" | "http3" | "http2and3")?,
+                                   is_ipv6_enabled: bool?,
+                                   continuous_deployment_policy_id: ::String?,
+                                   staging: bool?
+                                 }
+                               ) -> _CreateDistributionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDistributionResponseSuccess
+
+      interface _CreateDistributionWithTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDistributionWithTagsResult]
+        def distribution: () -> Types::Distribution
+        def location: () -> ::String
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#create_distribution_with_tags-instance_method
+      def create_distribution_with_tags: (
+                                           distribution_config_with_tags: {
+                                             distribution_config: {
+                                               caller_reference: ::String,
+                                               aliases: {
+                                                 quantity: ::Integer,
+                                                 items: Array[::String]?
+                                               }?,
+                                               default_root_object: ::String?,
+                                               origins: {
+                                                 quantity: ::Integer,
+                                                 items: Array[
+                                                   {
+                                                     id: ::String,
+                                                     domain_name: ::String,
+                                                     origin_path: ::String?,
+                                                     custom_headers: {
+                                                       quantity: ::Integer,
+                                                       items: Array[
+                                                         {
+                                                           header_name: ::String,
+                                                           header_value: ::String
+                                                         },
+                                                       ]?
+                                                     }?,
+                                                     s3_origin_config: {
+                                                       origin_access_identity: ::String
+                                                     }?,
+                                                     custom_origin_config: {
+                                                       http_port: ::Integer,
+                                                       https_port: ::Integer,
+                                                       origin_protocol_policy: ("http-only" | "match-viewer" | "https-only"),
+                                                       origin_ssl_protocols: {
+                                                         quantity: ::Integer,
+                                                         items: Array[("SSLv3" | "TLSv1" | "TLSv1.1" | "TLSv1.2")]
+                                                       }?,
+                                                       origin_read_timeout: ::Integer?,
+                                                       origin_keepalive_timeout: ::Integer?
+                                                     }?,
+                                                     connection_attempts: ::Integer?,
+                                                     connection_timeout: ::Integer?,
+                                                     origin_shield: {
+                                                       enabled: bool,
+                                                       origin_shield_region: ::String?
+                                                     }?,
+                                                     origin_access_control_id: ::String?
+                                                   },
+                                                 ]
+                                               },
+                                               origin_groups: {
+                                                 quantity: ::Integer,
+                                                 items: Array[
+                                                   {
+                                                     id: ::String,
+                                                     failover_criteria: {
+                                                       status_codes: {
+                                                         quantity: ::Integer,
+                                                         items: Array[::Integer]
+                                                       }
+                                                     },
+                                                     members: {
+                                                       quantity: ::Integer,
+                                                       items: Array[
+                                                         {
+                                                           origin_id: ::String
+                                                         },
+                                                       ]
+                                                     }
+                                                   },
+                                                 ]?
+                                               }?,
+                                               default_cache_behavior: {
+                                                 target_origin_id: ::String,
+                                                 trusted_signers: {
+                                                   enabled: bool,
+                                                   quantity: ::Integer,
+                                                   items: Array[::String]?
+                                                 }?,
+                                                 trusted_key_groups: {
+                                                   enabled: bool,
+                                                   quantity: ::Integer,
+                                                   items: Array[::String]?
+                                                 }?,
+                                                 viewer_protocol_policy: ("allow-all" | "https-only" | "redirect-to-https"),
+                                                 allowed_methods: {
+                                                   quantity: ::Integer,
+                                                   items: Array[("GET" | "HEAD" | "POST" | "PUT" | "PATCH" | "OPTIONS" | "DELETE")],
+                                                   cached_methods: {
+                                                     quantity: ::Integer,
+                                                     items: Array[("GET" | "HEAD" | "POST" | "PUT" | "PATCH" | "OPTIONS" | "DELETE")]
+                                                   }?
+                                                 }?,
+                                                 smooth_streaming: bool?,
+                                                 compress: bool?,
+                                                 lambda_function_associations: {
+                                                   quantity: ::Integer,
+                                                   items: Array[
+                                                     {
+                                                       lambda_function_arn: ::String,
+                                                       event_type: ("viewer-request" | "viewer-response" | "origin-request" | "origin-response"),
+                                                       include_body: bool?
+                                                     },
+                                                   ]?
+                                                 }?,
+                                                 function_associations: {
+                                                   quantity: ::Integer,
+                                                   items: Array[
+                                                     {
+                                                       function_arn: ::String,
+                                                       event_type: ("viewer-request" | "viewer-response" | "origin-request" | "origin-response")
+                                                     },
+                                                   ]?
+                                                 }?,
+                                                 field_level_encryption_id: ::String?,
+                                                 realtime_log_config_arn: ::String?,
+                                                 cache_policy_id: ::String?,
+                                                 origin_request_policy_id: ::String?,
+                                                 response_headers_policy_id: ::String?,
+                                                 forwarded_values: {
+                                                   query_string: bool,
+                                                   cookies: {
+                                                     forward: ("none" | "whitelist" | "all"),
+                                                     whitelisted_names: {
+                                                       quantity: ::Integer,
+                                                       items: Array[::String]?
+                                                     }?
+                                                   },
+                                                   headers: {
+                                                     quantity: ::Integer,
+                                                     items: Array[::String]?
+                                                   }?,
+                                                   query_string_cache_keys: {
+                                                     quantity: ::Integer,
+                                                     items: Array[::String]?
+                                                   }?
+                                                 }?,
+                                                 min_ttl: ::Integer?,
+                                                 default_ttl: ::Integer?,
+                                                 max_ttl: ::Integer?
+                                               },
+                                               cache_behaviors: {
+                                                 quantity: ::Integer,
+                                                 items: Array[
+                                                   {
+                                                     path_pattern: ::String,
+                                                     target_origin_id: ::String,
+                                                     trusted_signers: {
+                                                       enabled: bool,
+                                                       quantity: ::Integer,
+                                                       items: Array[::String]?
+                                                     }?,
+                                                     trusted_key_groups: {
+                                                       enabled: bool,
+                                                       quantity: ::Integer,
+                                                       items: Array[::String]?
+                                                     }?,
+                                                     viewer_protocol_policy: ("allow-all" | "https-only" | "redirect-to-https"),
+                                                     allowed_methods: {
+                                                       quantity: ::Integer,
+                                                       items: Array[("GET" | "HEAD" | "POST" | "PUT" | "PATCH" | "OPTIONS" | "DELETE")],
+                                                       cached_methods: {
+                                                         quantity: ::Integer,
+                                                         items: Array[("GET" | "HEAD" | "POST" | "PUT" | "PATCH" | "OPTIONS" | "DELETE")]
+                                                       }?
+                                                     }?,
+                                                     smooth_streaming: bool?,
+                                                     compress: bool?,
+                                                     lambda_function_associations: {
+                                                       quantity: ::Integer,
+                                                       items: Array[
+                                                         {
+                                                           lambda_function_arn: ::String,
+                                                           event_type: ("viewer-request" | "viewer-response" | "origin-request" | "origin-response"),
+                                                           include_body: bool?
+                                                         },
+                                                       ]?
+                                                     }?,
+                                                     function_associations: {
+                                                       quantity: ::Integer,
+                                                       items: Array[
+                                                         {
+                                                           function_arn: ::String,
+                                                           event_type: ("viewer-request" | "viewer-response" | "origin-request" | "origin-response")
+                                                         },
+                                                       ]?
+                                                     }?,
+                                                     field_level_encryption_id: ::String?,
+                                                     realtime_log_config_arn: ::String?,
+                                                     cache_policy_id: ::String?,
+                                                     origin_request_policy_id: ::String?,
+                                                     response_headers_policy_id: ::String?,
+                                                     forwarded_values: {
+                                                       query_string: bool,
+                                                       cookies: {
+                                                         forward: ("none" | "whitelist" | "all"),
+                                                         whitelisted_names: {
+                                                           quantity: ::Integer,
+                                                           items: Array[::String]?
+                                                         }?
+                                                       },
+                                                       headers: {
+                                                         quantity: ::Integer,
+                                                         items: Array[::String]?
+                                                       }?,
+                                                       query_string_cache_keys: {
+                                                         quantity: ::Integer,
+                                                         items: Array[::String]?
+                                                       }?
+                                                     }?,
+                                                     min_ttl: ::Integer?,
+                                                     default_ttl: ::Integer?,
+                                                     max_ttl: ::Integer?
+                                                   },
+                                                 ]?
+                                               }?,
+                                               custom_error_responses: {
+                                                 quantity: ::Integer,
+                                                 items: Array[
+                                                   {
+                                                     error_code: ::Integer,
+                                                     response_page_path: ::String?,
+                                                     response_code: ::String?,
+                                                     error_caching_min_ttl: ::Integer?
+                                                   },
+                                                 ]?
+                                               }?,
+                                               comment: ::String,
+                                               logging: {
+                                                 enabled: bool,
+                                                 include_cookies: bool,
+                                                 bucket: ::String,
+                                                 prefix: ::String
+                                               }?,
+                                               price_class: ("PriceClass_100" | "PriceClass_200" | "PriceClass_All")?,
+                                               enabled: bool,
+                                               viewer_certificate: {
+                                                 cloud_front_default_certificate: bool?,
+                                                 iam_certificate_id: ::String?,
+                                                 acm_certificate_arn: ::String?,
+                                                 ssl_support_method: ("sni-only" | "vip" | "static-ip")?,
+                                                 minimum_protocol_version: ("SSLv3" | "TLSv1" | "TLSv1_2016" | "TLSv1.1_2016" | "TLSv1.2_2018" | "TLSv1.2_2019" | "TLSv1.2_2021")?,
+                                                 certificate: ::String?,
+                                                 certificate_source: ("cloudfront" | "iam" | "acm")?
+                                               }?,
+                                               restrictions: {
+                                                 geo_restriction: {
+                                                   restriction_type: ("blacklist" | "whitelist" | "none"),
+                                                   quantity: ::Integer,
+                                                   items: Array[::String]?
+                                                 }
+                                               }?,
+                                               web_acl_id: ::String?,
+                                               http_version: ("http1.1" | "http2" | "http3" | "http2and3")?,
+                                               is_ipv6_enabled: bool?,
+                                               continuous_deployment_policy_id: ::String?,
+                                               staging: bool?
+                                             },
+                                             tags: {
+                                               items: Array[
+                                                 {
+                                                   key: ::String,
+                                                   value: ::String?
+                                                 },
+                                               ]?
+                                             }
+                                           }
+                                         ) -> _CreateDistributionWithTagsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDistributionWithTagsResponseSuccess
+
+      interface _CreateFieldLevelEncryptionConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFieldLevelEncryptionConfigResult]
+        def field_level_encryption: () -> Types::FieldLevelEncryption
+        def location: () -> ::String
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#create_field_level_encryption_config-instance_method
+      def create_field_level_encryption_config: (
+                                                  field_level_encryption_config: {
+                                                    caller_reference: ::String,
+                                                    comment: ::String?,
+                                                    query_arg_profile_config: {
+                                                      forward_when_query_arg_profile_is_unknown: bool,
+                                                      query_arg_profiles: {
+                                                        quantity: ::Integer,
+                                                        items: Array[
+                                                          {
+                                                            query_arg: ::String,
+                                                            profile_id: ::String
+                                                          },
+                                                        ]?
+                                                      }?
+                                                    }?,
+                                                    content_type_profile_config: {
+                                                      forward_when_content_type_is_unknown: bool,
+                                                      content_type_profiles: {
+                                                        quantity: ::Integer,
+                                                        items: Array[
+                                                          {
+                                                            format: ("URLEncoded"),
+                                                            profile_id: ::String?,
+                                                            content_type: ::String
+                                                          },
+                                                        ]?
+                                                      }?
+                                                    }?
+                                                  }
+                                                ) -> _CreateFieldLevelEncryptionConfigResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFieldLevelEncryptionConfigResponseSuccess
+
+      interface _CreateFieldLevelEncryptionProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFieldLevelEncryptionProfileResult]
+        def field_level_encryption_profile: () -> Types::FieldLevelEncryptionProfile
+        def location: () -> ::String
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#create_field_level_encryption_profile-instance_method
+      def create_field_level_encryption_profile: (
+                                                   field_level_encryption_profile_config: {
+                                                     name: ::String,
+                                                     caller_reference: ::String,
+                                                     comment: ::String?,
+                                                     encryption_entities: {
+                                                       quantity: ::Integer,
+                                                       items: Array[
+                                                         {
+                                                           public_key_id: ::String,
+                                                           provider_id: ::String,
+                                                           field_patterns: {
+                                                             quantity: ::Integer,
+                                                             items: Array[::String]?
+                                                           }
+                                                         },
+                                                       ]?
+                                                     }
+                                                   }
+                                                 ) -> _CreateFieldLevelEncryptionProfileResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFieldLevelEncryptionProfileResponseSuccess
+
+      interface _CreateFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFunctionResult]
+        def function_summary: () -> Types::FunctionSummary
+        def location: () -> ::String
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#create_function-instance_method
+      def create_function: (
+                             name: ::String,
+                             function_config: {
+                               comment: ::String,
+                               runtime: ("cloudfront-js-1.0" | "cloudfront-js-2.0"),
+                               key_value_store_associations: {
+                                 quantity: ::Integer,
+                                 items: Array[
+                                   {
+                                     key_value_store_arn: ::String
+                                   },
+                                 ]?
+                               }?
+                             },
+                             function_code: ::String
+                           ) -> _CreateFunctionResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFunctionResponseSuccess
+
+      interface _CreateInvalidationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateInvalidationResult]
+        def location: () -> ::String
+        def invalidation: () -> Types::Invalidation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#create_invalidation-instance_method
+      def create_invalidation: (
+                                 distribution_id: ::String,
+                                 invalidation_batch: {
+                                   paths: {
+                                     quantity: ::Integer,
+                                     items: Array[::String]?
+                                   },
+                                   caller_reference: ::String
+                                 }
+                               ) -> _CreateInvalidationResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInvalidationResponseSuccess
+
+      interface _CreateKeyGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateKeyGroupResult]
+        def key_group: () -> Types::KeyGroup
+        def location: () -> ::String
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#create_key_group-instance_method
+      def create_key_group: (
+                              key_group_config: {
+                                name: ::String,
+                                items: Array[::String],
+                                comment: ::String?
+                              }
+                            ) -> _CreateKeyGroupResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateKeyGroupResponseSuccess
+
+      interface _CreateKeyValueStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateKeyValueStoreResult]
+        def key_value_store: () -> Types::KeyValueStore
+        def etag: () -> ::String
+        def location: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#create_key_value_store-instance_method
+      def create_key_value_store: (
+                                    name: ::String,
+                                    ?comment: ::String,
+                                    ?import_source: {
+                                      source_type: ("S3"),
+                                      source_arn: ::String
+                                    }
+                                  ) -> _CreateKeyValueStoreResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateKeyValueStoreResponseSuccess
+
+      interface _CreateMonitoringSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMonitoringSubscriptionResult]
+        def monitoring_subscription: () -> Types::MonitoringSubscription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#create_monitoring_subscription-instance_method
+      def create_monitoring_subscription: (
+                                            distribution_id: ::String,
+                                            monitoring_subscription: {
+                                              realtime_metrics_subscription_config: {
+                                                realtime_metrics_subscription_status: ("Enabled" | "Disabled")
+                                              }?
+                                            }
+                                          ) -> _CreateMonitoringSubscriptionResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMonitoringSubscriptionResponseSuccess
+
+      interface _CreateOriginAccessControlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateOriginAccessControlResult]
+        def origin_access_control: () -> Types::OriginAccessControl
+        def location: () -> ::String
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#create_origin_access_control-instance_method
+      def create_origin_access_control: (
+                                          origin_access_control_config: {
+                                            name: ::String,
+                                            description: ::String?,
+                                            signing_protocol: ("sigv4"),
+                                            signing_behavior: ("never" | "always" | "no-override"),
+                                            origin_access_control_origin_type: ("s3" | "mediastore")
+                                          }
+                                        ) -> _CreateOriginAccessControlResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOriginAccessControlResponseSuccess
+
+      interface _CreateOriginRequestPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateOriginRequestPolicyResult]
+        def origin_request_policy: () -> Types::OriginRequestPolicy
+        def location: () -> ::String
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#create_origin_request_policy-instance_method
+      def create_origin_request_policy: (
+                                          origin_request_policy_config: {
+                                            comment: ::String?,
+                                            name: ::String,
+                                            headers_config: {
+                                              header_behavior: ("none" | "whitelist" | "allViewer" | "allViewerAndWhitelistCloudFront" | "allExcept"),
+                                              headers: {
+                                                quantity: ::Integer,
+                                                items: Array[::String]?
+                                              }?
+                                            },
+                                            cookies_config: {
+                                              cookie_behavior: ("none" | "whitelist" | "all" | "allExcept"),
+                                              cookies: {
+                                                quantity: ::Integer,
+                                                items: Array[::String]?
+                                              }?
+                                            },
+                                            query_strings_config: {
+                                              query_string_behavior: ("none" | "whitelist" | "all" | "allExcept"),
+                                              query_strings: {
+                                                quantity: ::Integer,
+                                                items: Array[::String]?
+                                              }?
+                                            }
+                                          }
+                                        ) -> _CreateOriginRequestPolicyResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOriginRequestPolicyResponseSuccess
+
+      interface _CreatePublicKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePublicKeyResult]
+        def public_key: () -> Types::PublicKey
+        def location: () -> ::String
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#create_public_key-instance_method
+      def create_public_key: (
+                               public_key_config: {
+                                 caller_reference: ::String,
+                                 name: ::String,
+                                 encoded_key: ::String,
+                                 comment: ::String?
+                               }
+                             ) -> _CreatePublicKeyResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePublicKeyResponseSuccess
+
+      interface _CreateRealtimeLogConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRealtimeLogConfigResult]
+        def realtime_log_config: () -> Types::RealtimeLogConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#create_realtime_log_config-instance_method
+      def create_realtime_log_config: (
+                                        end_points: Array[
+                                          {
+                                            stream_type: ::String,
+                                            kinesis_stream_config: {
+                                              role_arn: ::String,
+                                              stream_arn: ::String
+                                            }?
+                                          },
+                                        ],
+                                        fields: Array[::String],
+                                        name: ::String,
+                                        sampling_rate: ::Integer
+                                      ) -> _CreateRealtimeLogConfigResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRealtimeLogConfigResponseSuccess
+
+      interface _CreateResponseHeadersPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateResponseHeadersPolicyResult]
+        def response_headers_policy: () -> Types::ResponseHeadersPolicy
+        def location: () -> ::String
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#create_response_headers_policy-instance_method
+      def create_response_headers_policy: (
+                                            response_headers_policy_config: {
+                                              comment: ::String?,
+                                              name: ::String,
+                                              cors_config: {
+                                                access_control_allow_origins: {
+                                                  quantity: ::Integer,
+                                                  items: Array[::String]
+                                                },
+                                                access_control_allow_headers: {
+                                                  quantity: ::Integer,
+                                                  items: Array[::String]
+                                                },
+                                                access_control_allow_methods: {
+                                                  quantity: ::Integer,
+                                                  items: Array[("GET" | "POST" | "OPTIONS" | "PUT" | "DELETE" | "PATCH" | "HEAD" | "ALL")]
+                                                },
+                                                access_control_allow_credentials: bool,
+                                                access_control_expose_headers: {
+                                                  quantity: ::Integer,
+                                                  items: Array[::String]?
+                                                }?,
+                                                access_control_max_age_sec: ::Integer?,
+                                                origin_override: bool
+                                              }?,
+                                              security_headers_config: {
+                                                xss_protection: {
+                                                  override: bool,
+                                                  protection: bool,
+                                                  mode_block: bool?,
+                                                  report_uri: ::String?
+                                                }?,
+                                                frame_options: {
+                                                  override: bool,
+                                                  frame_option: ("DENY" | "SAMEORIGIN")
+                                                }?,
+                                                referrer_policy: {
+                                                  override: bool,
+                                                  referrer_policy: ("no-referrer" | "no-referrer-when-downgrade" | "origin" | "origin-when-cross-origin" | "same-origin" | "strict-origin" | "strict-origin-when-cross-origin" | "unsafe-url")
+                                                }?,
+                                                content_security_policy: {
+                                                  override: bool,
+                                                  content_security_policy: ::String
+                                                }?,
+                                                content_type_options: {
+                                                  override: bool
+                                                }?,
+                                                strict_transport_security: {
+                                                  override: bool,
+                                                  include_subdomains: bool?,
+                                                  preload: bool?,
+                                                  access_control_max_age_sec: ::Integer
+                                                }?
+                                              }?,
+                                              server_timing_headers_config: {
+                                                enabled: bool,
+                                                sampling_rate: ::Float?
+                                              }?,
+                                              custom_headers_config: {
+                                                quantity: ::Integer,
+                                                items: Array[
+                                                  {
+                                                    header: ::String,
+                                                    value: ::String,
+                                                    override: bool
+                                                  },
+                                                ]?
+                                              }?,
+                                              remove_headers_config: {
+                                                quantity: ::Integer,
+                                                items: Array[
+                                                  {
+                                                    header: ::String
+                                                  },
+                                                ]?
+                                              }?
+                                            }
+                                          ) -> _CreateResponseHeadersPolicyResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResponseHeadersPolicyResponseSuccess
+
+      interface _CreateStreamingDistributionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStreamingDistributionResult]
+        def streaming_distribution: () -> Types::StreamingDistribution
+        def location: () -> ::String
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#create_streaming_distribution-instance_method
+      def create_streaming_distribution: (
+                                           streaming_distribution_config: {
+                                             caller_reference: ::String,
+                                             s3_origin: {
+                                               domain_name: ::String,
+                                               origin_access_identity: ::String
+                                             },
+                                             aliases: {
+                                               quantity: ::Integer,
+                                               items: Array[::String]?
+                                             }?,
+                                             comment: ::String,
+                                             logging: {
+                                               enabled: bool,
+                                               bucket: ::String,
+                                               prefix: ::String
+                                             }?,
+                                             trusted_signers: {
+                                               enabled: bool,
+                                               quantity: ::Integer,
+                                               items: Array[::String]?
+                                             },
+                                             price_class: ("PriceClass_100" | "PriceClass_200" | "PriceClass_All")?,
+                                             enabled: bool
+                                           }
+                                         ) -> _CreateStreamingDistributionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStreamingDistributionResponseSuccess
+
+      interface _CreateStreamingDistributionWithTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStreamingDistributionWithTagsResult]
+        def streaming_distribution: () -> Types::StreamingDistribution
+        def location: () -> ::String
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#create_streaming_distribution_with_tags-instance_method
+      def create_streaming_distribution_with_tags: (
+                                                     streaming_distribution_config_with_tags: {
+                                                       streaming_distribution_config: {
+                                                         caller_reference: ::String,
+                                                         s3_origin: {
+                                                           domain_name: ::String,
+                                                           origin_access_identity: ::String
+                                                         },
+                                                         aliases: {
+                                                           quantity: ::Integer,
+                                                           items: Array[::String]?
+                                                         }?,
+                                                         comment: ::String,
+                                                         logging: {
+                                                           enabled: bool,
+                                                           bucket: ::String,
+                                                           prefix: ::String
+                                                         }?,
+                                                         trusted_signers: {
+                                                           enabled: bool,
+                                                           quantity: ::Integer,
+                                                           items: Array[::String]?
+                                                         },
+                                                         price_class: ("PriceClass_100" | "PriceClass_200" | "PriceClass_All")?,
+                                                         enabled: bool
+                                                       },
+                                                       tags: {
+                                                         items: Array[
+                                                           {
+                                                             key: ::String,
+                                                             value: ::String?
+                                                           },
+                                                         ]?
+                                                       }
+                                                     }
+                                                   ) -> _CreateStreamingDistributionWithTagsResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStreamingDistributionWithTagsResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#delete_cache_policy-instance_method
+      def delete_cache_policy: (
+                                 id: ::String,
+                                 ?if_match: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#delete_cloud_front_origin_access_identity-instance_method
+      def delete_cloud_front_origin_access_identity: (
+                                                       id: ::String,
+                                                       ?if_match: ::String
+                                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#delete_continuous_deployment_policy-instance_method
+      def delete_continuous_deployment_policy: (
+                                                 id: ::String,
+                                                 ?if_match: ::String
+                                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#delete_distribution-instance_method
+      def delete_distribution: (
+                                 id: ::String,
+                                 ?if_match: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#delete_field_level_encryption_config-instance_method
+      def delete_field_level_encryption_config: (
+                                                  id: ::String,
+                                                  ?if_match: ::String
+                                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#delete_field_level_encryption_profile-instance_method
+      def delete_field_level_encryption_profile: (
+                                                   id: ::String,
+                                                   ?if_match: ::String
+                                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#delete_function-instance_method
+      def delete_function: (
+                             name: ::String,
+                             if_match: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#delete_key_group-instance_method
+      def delete_key_group: (
+                              id: ::String,
+                              ?if_match: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#delete_key_value_store-instance_method
+      def delete_key_value_store: (
+                                    name: ::String,
+                                    if_match: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteMonitoringSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMonitoringSubscriptionResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#delete_monitoring_subscription-instance_method
+      def delete_monitoring_subscription: (
+                                            distribution_id: ::String
+                                          ) -> _DeleteMonitoringSubscriptionResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMonitoringSubscriptionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#delete_origin_access_control-instance_method
+      def delete_origin_access_control: (
+                                          id: ::String,
+                                          ?if_match: ::String
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#delete_origin_request_policy-instance_method
+      def delete_origin_request_policy: (
+                                          id: ::String,
+                                          ?if_match: ::String
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#delete_public_key-instance_method
+      def delete_public_key: (
+                               id: ::String,
+                               ?if_match: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#delete_realtime_log_config-instance_method
+      def delete_realtime_log_config: (
+                                        ?name: ::String,
+                                        ?arn: ::String
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#delete_response_headers_policy-instance_method
+      def delete_response_headers_policy: (
+                                            id: ::String,
+                                            ?if_match: ::String
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#delete_streaming_distribution-instance_method
+      def delete_streaming_distribution: (
+                                           id: ::String,
+                                           ?if_match: ::String
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFunctionResult]
+        def function_summary: () -> Types::FunctionSummary
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#describe_function-instance_method
+      def describe_function: (
+                               name: ::String,
+                               ?stage: ("DEVELOPMENT" | "LIVE")
+                             ) -> _DescribeFunctionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFunctionResponseSuccess
+
+      interface _DescribeKeyValueStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeKeyValueStoreResult]
+        def key_value_store: () -> Types::KeyValueStore
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#describe_key_value_store-instance_method
+      def describe_key_value_store: (
+                                      name: ::String
+                                    ) -> _DescribeKeyValueStoreResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeKeyValueStoreResponseSuccess
+
+      interface _GetCachePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCachePolicyResult]
+        def cache_policy: () -> Types::CachePolicy
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_cache_policy-instance_method
+      def get_cache_policy: (
+                              id: ::String
+                            ) -> _GetCachePolicyResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCachePolicyResponseSuccess
+
+      interface _GetCachePolicyConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCachePolicyConfigResult]
+        def cache_policy_config: () -> Types::CachePolicyConfig
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_cache_policy_config-instance_method
+      def get_cache_policy_config: (
+                                     id: ::String
+                                   ) -> _GetCachePolicyConfigResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCachePolicyConfigResponseSuccess
+
+      interface _GetCloudFrontOriginAccessIdentityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCloudFrontOriginAccessIdentityResult]
+        def cloud_front_origin_access_identity: () -> Types::CloudFrontOriginAccessIdentity
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_cloud_front_origin_access_identity-instance_method
+      def get_cloud_front_origin_access_identity: (
+                                                    id: ::String
+                                                  ) -> _GetCloudFrontOriginAccessIdentityResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCloudFrontOriginAccessIdentityResponseSuccess
+
+      interface _GetCloudFrontOriginAccessIdentityConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCloudFrontOriginAccessIdentityConfigResult]
+        def cloud_front_origin_access_identity_config: () -> Types::CloudFrontOriginAccessIdentityConfig
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_cloud_front_origin_access_identity_config-instance_method
+      def get_cloud_front_origin_access_identity_config: (
+                                                           id: ::String
+                                                         ) -> _GetCloudFrontOriginAccessIdentityConfigResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCloudFrontOriginAccessIdentityConfigResponseSuccess
+
+      interface _GetContinuousDeploymentPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContinuousDeploymentPolicyResult]
+        def continuous_deployment_policy: () -> Types::ContinuousDeploymentPolicy
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_continuous_deployment_policy-instance_method
+      def get_continuous_deployment_policy: (
+                                              id: ::String
+                                            ) -> _GetContinuousDeploymentPolicyResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContinuousDeploymentPolicyResponseSuccess
+
+      interface _GetContinuousDeploymentPolicyConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContinuousDeploymentPolicyConfigResult]
+        def continuous_deployment_policy_config: () -> Types::ContinuousDeploymentPolicyConfig
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_continuous_deployment_policy_config-instance_method
+      def get_continuous_deployment_policy_config: (
+                                                     id: ::String
+                                                   ) -> _GetContinuousDeploymentPolicyConfigResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContinuousDeploymentPolicyConfigResponseSuccess
+
+      interface _GetDistributionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDistributionResult]
+        def distribution: () -> Types::Distribution
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_distribution-instance_method
+      def get_distribution: (
+                              id: ::String
+                            ) -> _GetDistributionResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDistributionResponseSuccess
+
+      interface _GetDistributionConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDistributionConfigResult]
+        def distribution_config: () -> Types::DistributionConfig
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_distribution_config-instance_method
+      def get_distribution_config: (
+                                     id: ::String
+                                   ) -> _GetDistributionConfigResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDistributionConfigResponseSuccess
+
+      interface _GetFieldLevelEncryptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFieldLevelEncryptionResult]
+        def field_level_encryption: () -> Types::FieldLevelEncryption
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_field_level_encryption-instance_method
+      def get_field_level_encryption: (
+                                        id: ::String
+                                      ) -> _GetFieldLevelEncryptionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFieldLevelEncryptionResponseSuccess
+
+      interface _GetFieldLevelEncryptionConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFieldLevelEncryptionConfigResult]
+        def field_level_encryption_config: () -> Types::FieldLevelEncryptionConfig
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_field_level_encryption_config-instance_method
+      def get_field_level_encryption_config: (
+                                               id: ::String
+                                             ) -> _GetFieldLevelEncryptionConfigResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFieldLevelEncryptionConfigResponseSuccess
+
+      interface _GetFieldLevelEncryptionProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFieldLevelEncryptionProfileResult]
+        def field_level_encryption_profile: () -> Types::FieldLevelEncryptionProfile
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_field_level_encryption_profile-instance_method
+      def get_field_level_encryption_profile: (
+                                                id: ::String
+                                              ) -> _GetFieldLevelEncryptionProfileResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFieldLevelEncryptionProfileResponseSuccess
+
+      interface _GetFieldLevelEncryptionProfileConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFieldLevelEncryptionProfileConfigResult]
+        def field_level_encryption_profile_config: () -> Types::FieldLevelEncryptionProfileConfig
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_field_level_encryption_profile_config-instance_method
+      def get_field_level_encryption_profile_config: (
+                                                       id: ::String
+                                                     ) -> _GetFieldLevelEncryptionProfileConfigResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFieldLevelEncryptionProfileConfigResponseSuccess
+
+      interface _GetFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFunctionResult]
+        def function_code: () -> ::String
+        def etag: () -> ::String
+        def content_type: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_function-instance_method
+      def get_function: (
+                          name: ::String,
+                          ?stage: ("DEVELOPMENT" | "LIVE")
+                        ) -> _GetFunctionResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFunctionResponseSuccess
+
+      interface _GetInvalidationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInvalidationResult]
+        def invalidation: () -> Types::Invalidation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_invalidation-instance_method
+      def get_invalidation: (
+                              distribution_id: ::String,
+                              id: ::String
+                            ) -> _GetInvalidationResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInvalidationResponseSuccess
+
+      interface _GetKeyGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetKeyGroupResult]
+        def key_group: () -> Types::KeyGroup
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_key_group-instance_method
+      def get_key_group: (
+                           id: ::String
+                         ) -> _GetKeyGroupResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetKeyGroupResponseSuccess
+
+      interface _GetKeyGroupConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetKeyGroupConfigResult]
+        def key_group_config: () -> Types::KeyGroupConfig
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_key_group_config-instance_method
+      def get_key_group_config: (
+                                  id: ::String
+                                ) -> _GetKeyGroupConfigResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetKeyGroupConfigResponseSuccess
+
+      interface _GetMonitoringSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMonitoringSubscriptionResult]
+        def monitoring_subscription: () -> Types::MonitoringSubscription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_monitoring_subscription-instance_method
+      def get_monitoring_subscription: (
+                                         distribution_id: ::String
+                                       ) -> _GetMonitoringSubscriptionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMonitoringSubscriptionResponseSuccess
+
+      interface _GetOriginAccessControlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOriginAccessControlResult]
+        def origin_access_control: () -> Types::OriginAccessControl
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_origin_access_control-instance_method
+      def get_origin_access_control: (
+                                       id: ::String
+                                     ) -> _GetOriginAccessControlResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOriginAccessControlResponseSuccess
+
+      interface _GetOriginAccessControlConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOriginAccessControlConfigResult]
+        def origin_access_control_config: () -> Types::OriginAccessControlConfig
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_origin_access_control_config-instance_method
+      def get_origin_access_control_config: (
+                                              id: ::String
+                                            ) -> _GetOriginAccessControlConfigResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOriginAccessControlConfigResponseSuccess
+
+      interface _GetOriginRequestPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOriginRequestPolicyResult]
+        def origin_request_policy: () -> Types::OriginRequestPolicy
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_origin_request_policy-instance_method
+      def get_origin_request_policy: (
+                                       id: ::String
+                                     ) -> _GetOriginRequestPolicyResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOriginRequestPolicyResponseSuccess
+
+      interface _GetOriginRequestPolicyConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOriginRequestPolicyConfigResult]
+        def origin_request_policy_config: () -> Types::OriginRequestPolicyConfig
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_origin_request_policy_config-instance_method
+      def get_origin_request_policy_config: (
+                                              id: ::String
+                                            ) -> _GetOriginRequestPolicyConfigResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOriginRequestPolicyConfigResponseSuccess
+
+      interface _GetPublicKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPublicKeyResult]
+        def public_key: () -> Types::PublicKey
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_public_key-instance_method
+      def get_public_key: (
+                            id: ::String
+                          ) -> _GetPublicKeyResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPublicKeyResponseSuccess
+
+      interface _GetPublicKeyConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPublicKeyConfigResult]
+        def public_key_config: () -> Types::PublicKeyConfig
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_public_key_config-instance_method
+      def get_public_key_config: (
+                                   id: ::String
+                                 ) -> _GetPublicKeyConfigResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPublicKeyConfigResponseSuccess
+
+      interface _GetRealtimeLogConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRealtimeLogConfigResult]
+        def realtime_log_config: () -> Types::RealtimeLogConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_realtime_log_config-instance_method
+      def get_realtime_log_config: (
+                                     ?name: ::String,
+                                     ?arn: ::String
+                                   ) -> _GetRealtimeLogConfigResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRealtimeLogConfigResponseSuccess
+
+      interface _GetResponseHeadersPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResponseHeadersPolicyResult]
+        def response_headers_policy: () -> Types::ResponseHeadersPolicy
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_response_headers_policy-instance_method
+      def get_response_headers_policy: (
+                                         id: ::String
+                                       ) -> _GetResponseHeadersPolicyResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResponseHeadersPolicyResponseSuccess
+
+      interface _GetResponseHeadersPolicyConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResponseHeadersPolicyConfigResult]
+        def response_headers_policy_config: () -> Types::ResponseHeadersPolicyConfig
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_response_headers_policy_config-instance_method
+      def get_response_headers_policy_config: (
+                                                id: ::String
+                                              ) -> _GetResponseHeadersPolicyConfigResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResponseHeadersPolicyConfigResponseSuccess
+
+      interface _GetStreamingDistributionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStreamingDistributionResult]
+        def streaming_distribution: () -> Types::StreamingDistribution
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_streaming_distribution-instance_method
+      def get_streaming_distribution: (
+                                        id: ::String
+                                      ) -> _GetStreamingDistributionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStreamingDistributionResponseSuccess
+
+      interface _GetStreamingDistributionConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStreamingDistributionConfigResult]
+        def streaming_distribution_config: () -> Types::StreamingDistributionConfig
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_streaming_distribution_config-instance_method
+      def get_streaming_distribution_config: (
+                                               id: ::String
+                                             ) -> _GetStreamingDistributionConfigResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStreamingDistributionConfigResponseSuccess
+
+      interface _ListCachePoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCachePoliciesResult]
+        def cache_policy_list: () -> Types::CachePolicyList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_cache_policies-instance_method
+      def list_cache_policies: (
+                                 ?type: ("managed" | "custom"),
+                                 ?marker: ::String,
+                                 ?max_items: ::Integer
+                               ) -> _ListCachePoliciesResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCachePoliciesResponseSuccess
+
+      interface _ListCloudFrontOriginAccessIdentitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCloudFrontOriginAccessIdentitiesResult]
+        def cloud_front_origin_access_identity_list: () -> Types::CloudFrontOriginAccessIdentityList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_cloud_front_origin_access_identities-instance_method
+      def list_cloud_front_origin_access_identities: (
+                                                       ?marker: ::String,
+                                                       ?max_items: ::Integer
+                                                     ) -> _ListCloudFrontOriginAccessIdentitiesResponseSuccess
+                                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCloudFrontOriginAccessIdentitiesResponseSuccess
+
+      interface _ListConflictingAliasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConflictingAliasesResult]
+        def conflicting_aliases_list: () -> Types::ConflictingAliasesList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_conflicting_aliases-instance_method
+      def list_conflicting_aliases: (
+                                      distribution_id: ::String,
+                                      alias: ::String,
+                                      ?marker: ::String,
+                                      ?max_items: ::Integer
+                                    ) -> _ListConflictingAliasesResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConflictingAliasesResponseSuccess
+
+      interface _ListContinuousDeploymentPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListContinuousDeploymentPoliciesResult]
+        def continuous_deployment_policy_list: () -> Types::ContinuousDeploymentPolicyList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_continuous_deployment_policies-instance_method
+      def list_continuous_deployment_policies: (
+                                                 ?marker: ::String,
+                                                 ?max_items: ::Integer
+                                               ) -> _ListContinuousDeploymentPoliciesResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContinuousDeploymentPoliciesResponseSuccess
+
+      interface _ListDistributionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDistributionsResult]
+        def distribution_list: () -> Types::DistributionList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_distributions-instance_method
+      def list_distributions: (
+                                ?marker: ::String,
+                                ?max_items: ::Integer
+                              ) -> _ListDistributionsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDistributionsResponseSuccess
+
+      interface _ListDistributionsByCachePolicyIdResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDistributionsByCachePolicyIdResult]
+        def distribution_id_list: () -> Types::DistributionIdList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_distributions_by_cache_policy_id-instance_method
+      def list_distributions_by_cache_policy_id: (
+                                                   ?marker: ::String,
+                                                   ?max_items: ::Integer,
+                                                   cache_policy_id: ::String
+                                                 ) -> _ListDistributionsByCachePolicyIdResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDistributionsByCachePolicyIdResponseSuccess
+
+      interface _ListDistributionsByKeyGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDistributionsByKeyGroupResult]
+        def distribution_id_list: () -> Types::DistributionIdList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_distributions_by_key_group-instance_method
+      def list_distributions_by_key_group: (
+                                             ?marker: ::String,
+                                             ?max_items: ::Integer,
+                                             key_group_id: ::String
+                                           ) -> _ListDistributionsByKeyGroupResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDistributionsByKeyGroupResponseSuccess
+
+      interface _ListDistributionsByOriginRequestPolicyIdResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDistributionsByOriginRequestPolicyIdResult]
+        def distribution_id_list: () -> Types::DistributionIdList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_distributions_by_origin_request_policy_id-instance_method
+      def list_distributions_by_origin_request_policy_id: (
+                                                            ?marker: ::String,
+                                                            ?max_items: ::Integer,
+                                                            origin_request_policy_id: ::String
+                                                          ) -> _ListDistributionsByOriginRequestPolicyIdResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDistributionsByOriginRequestPolicyIdResponseSuccess
+
+      interface _ListDistributionsByRealtimeLogConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDistributionsByRealtimeLogConfigResult]
+        def distribution_list: () -> Types::DistributionList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_distributions_by_realtime_log_config-instance_method
+      def list_distributions_by_realtime_log_config: (
+                                                       ?marker: ::String,
+                                                       ?max_items: ::Integer,
+                                                       ?realtime_log_config_name: ::String,
+                                                       ?realtime_log_config_arn: ::String
+                                                     ) -> _ListDistributionsByRealtimeLogConfigResponseSuccess
+                                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDistributionsByRealtimeLogConfigResponseSuccess
+
+      interface _ListDistributionsByResponseHeadersPolicyIdResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDistributionsByResponseHeadersPolicyIdResult]
+        def distribution_id_list: () -> Types::DistributionIdList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_distributions_by_response_headers_policy_id-instance_method
+      def list_distributions_by_response_headers_policy_id: (
+                                                              ?marker: ::String,
+                                                              ?max_items: ::Integer,
+                                                              response_headers_policy_id: ::String
+                                                            ) -> _ListDistributionsByResponseHeadersPolicyIdResponseSuccess
+                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDistributionsByResponseHeadersPolicyIdResponseSuccess
+
+      interface _ListDistributionsByWebACLIdResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDistributionsByWebACLIdResult]
+        def distribution_list: () -> Types::DistributionList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_distributions_by_web_acl_id-instance_method
+      def list_distributions_by_web_acl_id: (
+                                              ?marker: ::String,
+                                              ?max_items: ::Integer,
+                                              web_acl_id: ::String
+                                            ) -> _ListDistributionsByWebACLIdResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDistributionsByWebACLIdResponseSuccess
+
+      interface _ListFieldLevelEncryptionConfigsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFieldLevelEncryptionConfigsResult]
+        def field_level_encryption_list: () -> Types::FieldLevelEncryptionList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_field_level_encryption_configs-instance_method
+      def list_field_level_encryption_configs: (
+                                                 ?marker: ::String,
+                                                 ?max_items: ::Integer
+                                               ) -> _ListFieldLevelEncryptionConfigsResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFieldLevelEncryptionConfigsResponseSuccess
+
+      interface _ListFieldLevelEncryptionProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFieldLevelEncryptionProfilesResult]
+        def field_level_encryption_profile_list: () -> Types::FieldLevelEncryptionProfileList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_field_level_encryption_profiles-instance_method
+      def list_field_level_encryption_profiles: (
+                                                  ?marker: ::String,
+                                                  ?max_items: ::Integer
+                                                ) -> _ListFieldLevelEncryptionProfilesResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFieldLevelEncryptionProfilesResponseSuccess
+
+      interface _ListFunctionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFunctionsResult]
+        def function_list: () -> Types::FunctionList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_functions-instance_method
+      def list_functions: (
+                            ?marker: ::String,
+                            ?max_items: ::Integer,
+                            ?stage: ("DEVELOPMENT" | "LIVE")
+                          ) -> _ListFunctionsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFunctionsResponseSuccess
+
+      interface _ListInvalidationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInvalidationsResult]
+        def invalidation_list: () -> Types::InvalidationList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_invalidations-instance_method
+      def list_invalidations: (
+                                distribution_id: ::String,
+                                ?marker: ::String,
+                                ?max_items: ::Integer
+                              ) -> _ListInvalidationsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInvalidationsResponseSuccess
+
+      interface _ListKeyGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListKeyGroupsResult]
+        def key_group_list: () -> Types::KeyGroupList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_key_groups-instance_method
+      def list_key_groups: (
+                             ?marker: ::String,
+                             ?max_items: ::Integer
+                           ) -> _ListKeyGroupsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListKeyGroupsResponseSuccess
+
+      interface _ListKeyValueStoresResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListKeyValueStoresResult]
+        def key_value_store_list: () -> Types::KeyValueStoreList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_key_value_stores-instance_method
+      def list_key_value_stores: (
+                                   ?marker: ::String,
+                                   ?max_items: ::Integer,
+                                   ?status: ::String
+                                 ) -> _ListKeyValueStoresResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListKeyValueStoresResponseSuccess
+
+      interface _ListOriginAccessControlsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOriginAccessControlsResult]
+        def origin_access_control_list: () -> Types::OriginAccessControlList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_origin_access_controls-instance_method
+      def list_origin_access_controls: (
+                                         ?marker: ::String,
+                                         ?max_items: ::Integer
+                                       ) -> _ListOriginAccessControlsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOriginAccessControlsResponseSuccess
+
+      interface _ListOriginRequestPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOriginRequestPoliciesResult]
+        def origin_request_policy_list: () -> Types::OriginRequestPolicyList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_origin_request_policies-instance_method
+      def list_origin_request_policies: (
+                                          ?type: ("managed" | "custom"),
+                                          ?marker: ::String,
+                                          ?max_items: ::Integer
+                                        ) -> _ListOriginRequestPoliciesResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOriginRequestPoliciesResponseSuccess
+
+      interface _ListPublicKeysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPublicKeysResult]
+        def public_key_list: () -> Types::PublicKeyList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_public_keys-instance_method
+      def list_public_keys: (
+                              ?marker: ::String,
+                              ?max_items: ::Integer
+                            ) -> _ListPublicKeysResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPublicKeysResponseSuccess
+
+      interface _ListRealtimeLogConfigsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRealtimeLogConfigsResult]
+        def realtime_log_configs: () -> Types::RealtimeLogConfigs
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_realtime_log_configs-instance_method
+      def list_realtime_log_configs: (
+                                       ?max_items: ::Integer,
+                                       ?marker: ::String
+                                     ) -> _ListRealtimeLogConfigsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRealtimeLogConfigsResponseSuccess
+
+      interface _ListResponseHeadersPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResponseHeadersPoliciesResult]
+        def response_headers_policy_list: () -> Types::ResponseHeadersPolicyList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_response_headers_policies-instance_method
+      def list_response_headers_policies: (
+                                            ?type: ("managed" | "custom"),
+                                            ?marker: ::String,
+                                            ?max_items: ::Integer
+                                          ) -> _ListResponseHeadersPoliciesResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResponseHeadersPoliciesResponseSuccess
+
+      interface _ListStreamingDistributionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStreamingDistributionsResult]
+        def streaming_distribution_list: () -> Types::StreamingDistributionList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_streaming_distributions-instance_method
+      def list_streaming_distributions: (
+                                          ?marker: ::String,
+                                          ?max_items: ::Integer
+                                        ) -> _ListStreamingDistributionsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStreamingDistributionsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResult]
+        def tags: () -> Types::Tags
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PublishFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PublishFunctionResult]
+        def function_summary: () -> Types::FunctionSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#publish_function-instance_method
+      def publish_function: (
+                              name: ::String,
+                              if_match: ::String
+                            ) -> _PublishFunctionResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PublishFunctionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource: ::String,
+                          tags: {
+                            items: Array[
+                              {
+                                key: ::String,
+                                value: ::String?
+                              },
+                            ]?
+                          }
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _TestFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TestFunctionResult]
+        def test_result: () -> Types::TestResult
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#test_function-instance_method
+      def test_function: (
+                           name: ::String,
+                           if_match: ::String,
+                           ?stage: ("DEVELOPMENT" | "LIVE"),
+                           event_object: ::String
+                         ) -> _TestFunctionResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestFunctionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource: ::String,
+                            tag_keys: {
+                              items: Array[::String]?
+                            }
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateCachePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCachePolicyResult]
+        def cache_policy: () -> Types::CachePolicy
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#update_cache_policy-instance_method
+      def update_cache_policy: (
+                                 cache_policy_config: {
+                                   comment: ::String?,
+                                   name: ::String,
+                                   default_ttl: ::Integer?,
+                                   max_ttl: ::Integer?,
+                                   min_ttl: ::Integer,
+                                   parameters_in_cache_key_and_forwarded_to_origin: {
+                                     enable_accept_encoding_gzip: bool,
+                                     enable_accept_encoding_brotli: bool?,
+                                     headers_config: {
+                                       header_behavior: ("none" | "whitelist"),
+                                       headers: {
+                                         quantity: ::Integer,
+                                         items: Array[::String]?
+                                       }?
+                                     },
+                                     cookies_config: {
+                                       cookie_behavior: ("none" | "whitelist" | "allExcept" | "all"),
+                                       cookies: {
+                                         quantity: ::Integer,
+                                         items: Array[::String]?
+                                       }?
+                                     },
+                                     query_strings_config: {
+                                       query_string_behavior: ("none" | "whitelist" | "allExcept" | "all"),
+                                       query_strings: {
+                                         quantity: ::Integer,
+                                         items: Array[::String]?
+                                       }?
+                                     }
+                                   }?
+                                 },
+                                 id: ::String,
+                                 ?if_match: ::String
+                               ) -> _UpdateCachePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCachePolicyResponseSuccess
+
+      interface _UpdateCloudFrontOriginAccessIdentityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCloudFrontOriginAccessIdentityResult]
+        def cloud_front_origin_access_identity: () -> Types::CloudFrontOriginAccessIdentity
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#update_cloud_front_origin_access_identity-instance_method
+      def update_cloud_front_origin_access_identity: (
+                                                       cloud_front_origin_access_identity_config: {
+                                                         caller_reference: ::String,
+                                                         comment: ::String
+                                                       },
+                                                       id: ::String,
+                                                       ?if_match: ::String
+                                                     ) -> _UpdateCloudFrontOriginAccessIdentityResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCloudFrontOriginAccessIdentityResponseSuccess
+
+      interface _UpdateContinuousDeploymentPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateContinuousDeploymentPolicyResult]
+        def continuous_deployment_policy: () -> Types::ContinuousDeploymentPolicy
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#update_continuous_deployment_policy-instance_method
+      def update_continuous_deployment_policy: (
+                                                 continuous_deployment_policy_config: {
+                                                   staging_distribution_dns_names: {
+                                                     quantity: ::Integer,
+                                                     items: Array[::String]?
+                                                   },
+                                                   enabled: bool,
+                                                   traffic_config: {
+                                                     single_weight_config: {
+                                                       weight: ::Float,
+                                                       session_stickiness_config: {
+                                                         idle_ttl: ::Integer,
+                                                         maximum_ttl: ::Integer
+                                                       }?
+                                                     }?,
+                                                     single_header_config: {
+                                                       header: ::String,
+                                                       value: ::String
+                                                     }?,
+                                                     type: ("SingleWeight" | "SingleHeader")
+                                                   }?
+                                                 },
+                                                 id: ::String,
+                                                 ?if_match: ::String
+                                               ) -> _UpdateContinuousDeploymentPolicyResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateContinuousDeploymentPolicyResponseSuccess
+
+      interface _UpdateDistributionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDistributionResult]
+        def distribution: () -> Types::Distribution
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#update_distribution-instance_method
+      def update_distribution: (
+                                 distribution_config: {
+                                   caller_reference: ::String,
+                                   aliases: {
+                                     quantity: ::Integer,
+                                     items: Array[::String]?
+                                   }?,
+                                   default_root_object: ::String?,
+                                   origins: {
+                                     quantity: ::Integer,
+                                     items: Array[
+                                       {
+                                         id: ::String,
+                                         domain_name: ::String,
+                                         origin_path: ::String?,
+                                         custom_headers: {
+                                           quantity: ::Integer,
+                                           items: Array[
+                                             {
+                                               header_name: ::String,
+                                               header_value: ::String
+                                             },
+                                           ]?
+                                         }?,
+                                         s3_origin_config: {
+                                           origin_access_identity: ::String
+                                         }?,
+                                         custom_origin_config: {
+                                           http_port: ::Integer,
+                                           https_port: ::Integer,
+                                           origin_protocol_policy: ("http-only" | "match-viewer" | "https-only"),
+                                           origin_ssl_protocols: {
+                                             quantity: ::Integer,
+                                             items: Array[("SSLv3" | "TLSv1" | "TLSv1.1" | "TLSv1.2")]
+                                           }?,
+                                           origin_read_timeout: ::Integer?,
+                                           origin_keepalive_timeout: ::Integer?
+                                         }?,
+                                         connection_attempts: ::Integer?,
+                                         connection_timeout: ::Integer?,
+                                         origin_shield: {
+                                           enabled: bool,
+                                           origin_shield_region: ::String?
+                                         }?,
+                                         origin_access_control_id: ::String?
+                                       },
+                                     ]
+                                   },
+                                   origin_groups: {
+                                     quantity: ::Integer,
+                                     items: Array[
+                                       {
+                                         id: ::String,
+                                         failover_criteria: {
+                                           status_codes: {
+                                             quantity: ::Integer,
+                                             items: Array[::Integer]
+                                           }
+                                         },
+                                         members: {
+                                           quantity: ::Integer,
+                                           items: Array[
+                                             {
+                                               origin_id: ::String
+                                             },
+                                           ]
+                                         }
+                                       },
+                                     ]?
+                                   }?,
+                                   default_cache_behavior: {
+                                     target_origin_id: ::String,
+                                     trusted_signers: {
+                                       enabled: bool,
+                                       quantity: ::Integer,
+                                       items: Array[::String]?
+                                     }?,
+                                     trusted_key_groups: {
+                                       enabled: bool,
+                                       quantity: ::Integer,
+                                       items: Array[::String]?
+                                     }?,
+                                     viewer_protocol_policy: ("allow-all" | "https-only" | "redirect-to-https"),
+                                     allowed_methods: {
+                                       quantity: ::Integer,
+                                       items: Array[("GET" | "HEAD" | "POST" | "PUT" | "PATCH" | "OPTIONS" | "DELETE")],
+                                       cached_methods: {
+                                         quantity: ::Integer,
+                                         items: Array[("GET" | "HEAD" | "POST" | "PUT" | "PATCH" | "OPTIONS" | "DELETE")]
+                                       }?
+                                     }?,
+                                     smooth_streaming: bool?,
+                                     compress: bool?,
+                                     lambda_function_associations: {
+                                       quantity: ::Integer,
+                                       items: Array[
+                                         {
+                                           lambda_function_arn: ::String,
+                                           event_type: ("viewer-request" | "viewer-response" | "origin-request" | "origin-response"),
+                                           include_body: bool?
+                                         },
+                                       ]?
+                                     }?,
+                                     function_associations: {
+                                       quantity: ::Integer,
+                                       items: Array[
+                                         {
+                                           function_arn: ::String,
+                                           event_type: ("viewer-request" | "viewer-response" | "origin-request" | "origin-response")
+                                         },
+                                       ]?
+                                     }?,
+                                     field_level_encryption_id: ::String?,
+                                     realtime_log_config_arn: ::String?,
+                                     cache_policy_id: ::String?,
+                                     origin_request_policy_id: ::String?,
+                                     response_headers_policy_id: ::String?,
+                                     forwarded_values: {
+                                       query_string: bool,
+                                       cookies: {
+                                         forward: ("none" | "whitelist" | "all"),
+                                         whitelisted_names: {
+                                           quantity: ::Integer,
+                                           items: Array[::String]?
+                                         }?
+                                       },
+                                       headers: {
+                                         quantity: ::Integer,
+                                         items: Array[::String]?
+                                       }?,
+                                       query_string_cache_keys: {
+                                         quantity: ::Integer,
+                                         items: Array[::String]?
+                                       }?
+                                     }?,
+                                     min_ttl: ::Integer?,
+                                     default_ttl: ::Integer?,
+                                     max_ttl: ::Integer?
+                                   },
+                                   cache_behaviors: {
+                                     quantity: ::Integer,
+                                     items: Array[
+                                       {
+                                         path_pattern: ::String,
+                                         target_origin_id: ::String,
+                                         trusted_signers: {
+                                           enabled: bool,
+                                           quantity: ::Integer,
+                                           items: Array[::String]?
+                                         }?,
+                                         trusted_key_groups: {
+                                           enabled: bool,
+                                           quantity: ::Integer,
+                                           items: Array[::String]?
+                                         }?,
+                                         viewer_protocol_policy: ("allow-all" | "https-only" | "redirect-to-https"),
+                                         allowed_methods: {
+                                           quantity: ::Integer,
+                                           items: Array[("GET" | "HEAD" | "POST" | "PUT" | "PATCH" | "OPTIONS" | "DELETE")],
+                                           cached_methods: {
+                                             quantity: ::Integer,
+                                             items: Array[("GET" | "HEAD" | "POST" | "PUT" | "PATCH" | "OPTIONS" | "DELETE")]
+                                           }?
+                                         }?,
+                                         smooth_streaming: bool?,
+                                         compress: bool?,
+                                         lambda_function_associations: {
+                                           quantity: ::Integer,
+                                           items: Array[
+                                             {
+                                               lambda_function_arn: ::String,
+                                               event_type: ("viewer-request" | "viewer-response" | "origin-request" | "origin-response"),
+                                               include_body: bool?
+                                             },
+                                           ]?
+                                         }?,
+                                         function_associations: {
+                                           quantity: ::Integer,
+                                           items: Array[
+                                             {
+                                               function_arn: ::String,
+                                               event_type: ("viewer-request" | "viewer-response" | "origin-request" | "origin-response")
+                                             },
+                                           ]?
+                                         }?,
+                                         field_level_encryption_id: ::String?,
+                                         realtime_log_config_arn: ::String?,
+                                         cache_policy_id: ::String?,
+                                         origin_request_policy_id: ::String?,
+                                         response_headers_policy_id: ::String?,
+                                         forwarded_values: {
+                                           query_string: bool,
+                                           cookies: {
+                                             forward: ("none" | "whitelist" | "all"),
+                                             whitelisted_names: {
+                                               quantity: ::Integer,
+                                               items: Array[::String]?
+                                             }?
+                                           },
+                                           headers: {
+                                             quantity: ::Integer,
+                                             items: Array[::String]?
+                                           }?,
+                                           query_string_cache_keys: {
+                                             quantity: ::Integer,
+                                             items: Array[::String]?
+                                           }?
+                                         }?,
+                                         min_ttl: ::Integer?,
+                                         default_ttl: ::Integer?,
+                                         max_ttl: ::Integer?
+                                       },
+                                     ]?
+                                   }?,
+                                   custom_error_responses: {
+                                     quantity: ::Integer,
+                                     items: Array[
+                                       {
+                                         error_code: ::Integer,
+                                         response_page_path: ::String?,
+                                         response_code: ::String?,
+                                         error_caching_min_ttl: ::Integer?
+                                       },
+                                     ]?
+                                   }?,
+                                   comment: ::String,
+                                   logging: {
+                                     enabled: bool,
+                                     include_cookies: bool,
+                                     bucket: ::String,
+                                     prefix: ::String
+                                   }?,
+                                   price_class: ("PriceClass_100" | "PriceClass_200" | "PriceClass_All")?,
+                                   enabled: bool,
+                                   viewer_certificate: {
+                                     cloud_front_default_certificate: bool?,
+                                     iam_certificate_id: ::String?,
+                                     acm_certificate_arn: ::String?,
+                                     ssl_support_method: ("sni-only" | "vip" | "static-ip")?,
+                                     minimum_protocol_version: ("SSLv3" | "TLSv1" | "TLSv1_2016" | "TLSv1.1_2016" | "TLSv1.2_2018" | "TLSv1.2_2019" | "TLSv1.2_2021")?,
+                                     certificate: ::String?,
+                                     certificate_source: ("cloudfront" | "iam" | "acm")?
+                                   }?,
+                                   restrictions: {
+                                     geo_restriction: {
+                                       restriction_type: ("blacklist" | "whitelist" | "none"),
+                                       quantity: ::Integer,
+                                       items: Array[::String]?
+                                     }
+                                   }?,
+                                   web_acl_id: ::String?,
+                                   http_version: ("http1.1" | "http2" | "http3" | "http2and3")?,
+                                   is_ipv6_enabled: bool?,
+                                   continuous_deployment_policy_id: ::String?,
+                                   staging: bool?
+                                 },
+                                 id: ::String,
+                                 ?if_match: ::String
+                               ) -> _UpdateDistributionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDistributionResponseSuccess
+
+      interface _UpdateDistributionWithStagingConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDistributionWithStagingConfigResult]
+        def distribution: () -> Types::Distribution
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#update_distribution_with_staging_config-instance_method
+      def update_distribution_with_staging_config: (
+                                                     id: ::String,
+                                                     ?staging_distribution_id: ::String,
+                                                     ?if_match: ::String
+                                                   ) -> _UpdateDistributionWithStagingConfigResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDistributionWithStagingConfigResponseSuccess
+
+      interface _UpdateFieldLevelEncryptionConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFieldLevelEncryptionConfigResult]
+        def field_level_encryption: () -> Types::FieldLevelEncryption
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#update_field_level_encryption_config-instance_method
+      def update_field_level_encryption_config: (
+                                                  field_level_encryption_config: {
+                                                    caller_reference: ::String,
+                                                    comment: ::String?,
+                                                    query_arg_profile_config: {
+                                                      forward_when_query_arg_profile_is_unknown: bool,
+                                                      query_arg_profiles: {
+                                                        quantity: ::Integer,
+                                                        items: Array[
+                                                          {
+                                                            query_arg: ::String,
+                                                            profile_id: ::String
+                                                          },
+                                                        ]?
+                                                      }?
+                                                    }?,
+                                                    content_type_profile_config: {
+                                                      forward_when_content_type_is_unknown: bool,
+                                                      content_type_profiles: {
+                                                        quantity: ::Integer,
+                                                        items: Array[
+                                                          {
+                                                            format: ("URLEncoded"),
+                                                            profile_id: ::String?,
+                                                            content_type: ::String
+                                                          },
+                                                        ]?
+                                                      }?
+                                                    }?
+                                                  },
+                                                  id: ::String,
+                                                  ?if_match: ::String
+                                                ) -> _UpdateFieldLevelEncryptionConfigResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFieldLevelEncryptionConfigResponseSuccess
+
+      interface _UpdateFieldLevelEncryptionProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFieldLevelEncryptionProfileResult]
+        def field_level_encryption_profile: () -> Types::FieldLevelEncryptionProfile
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#update_field_level_encryption_profile-instance_method
+      def update_field_level_encryption_profile: (
+                                                   field_level_encryption_profile_config: {
+                                                     name: ::String,
+                                                     caller_reference: ::String,
+                                                     comment: ::String?,
+                                                     encryption_entities: {
+                                                       quantity: ::Integer,
+                                                       items: Array[
+                                                         {
+                                                           public_key_id: ::String,
+                                                           provider_id: ::String,
+                                                           field_patterns: {
+                                                             quantity: ::Integer,
+                                                             items: Array[::String]?
+                                                           }
+                                                         },
+                                                       ]?
+                                                     }
+                                                   },
+                                                   id: ::String,
+                                                   ?if_match: ::String
+                                                 ) -> _UpdateFieldLevelEncryptionProfileResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFieldLevelEncryptionProfileResponseSuccess
+
+      interface _UpdateFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFunctionResult]
+        def function_summary: () -> Types::FunctionSummary
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#update_function-instance_method
+      def update_function: (
+                             name: ::String,
+                             if_match: ::String,
+                             function_config: {
+                               comment: ::String,
+                               runtime: ("cloudfront-js-1.0" | "cloudfront-js-2.0"),
+                               key_value_store_associations: {
+                                 quantity: ::Integer,
+                                 items: Array[
+                                   {
+                                     key_value_store_arn: ::String
+                                   },
+                                 ]?
+                               }?
+                             },
+                             function_code: ::String
+                           ) -> _UpdateFunctionResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFunctionResponseSuccess
+
+      interface _UpdateKeyGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateKeyGroupResult]
+        def key_group: () -> Types::KeyGroup
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#update_key_group-instance_method
+      def update_key_group: (
+                              key_group_config: {
+                                name: ::String,
+                                items: Array[::String],
+                                comment: ::String?
+                              },
+                              id: ::String,
+                              ?if_match: ::String
+                            ) -> _UpdateKeyGroupResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateKeyGroupResponseSuccess
+
+      interface _UpdateKeyValueStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateKeyValueStoreResult]
+        def key_value_store: () -> Types::KeyValueStore
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#update_key_value_store-instance_method
+      def update_key_value_store: (
+                                    name: ::String,
+                                    comment: ::String,
+                                    if_match: ::String
+                                  ) -> _UpdateKeyValueStoreResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateKeyValueStoreResponseSuccess
+
+      interface _UpdateOriginAccessControlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateOriginAccessControlResult]
+        def origin_access_control: () -> Types::OriginAccessControl
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#update_origin_access_control-instance_method
+      def update_origin_access_control: (
+                                          origin_access_control_config: {
+                                            name: ::String,
+                                            description: ::String?,
+                                            signing_protocol: ("sigv4"),
+                                            signing_behavior: ("never" | "always" | "no-override"),
+                                            origin_access_control_origin_type: ("s3" | "mediastore")
+                                          },
+                                          id: ::String,
+                                          ?if_match: ::String
+                                        ) -> _UpdateOriginAccessControlResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOriginAccessControlResponseSuccess
+
+      interface _UpdateOriginRequestPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateOriginRequestPolicyResult]
+        def origin_request_policy: () -> Types::OriginRequestPolicy
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#update_origin_request_policy-instance_method
+      def update_origin_request_policy: (
+                                          origin_request_policy_config: {
+                                            comment: ::String?,
+                                            name: ::String,
+                                            headers_config: {
+                                              header_behavior: ("none" | "whitelist" | "allViewer" | "allViewerAndWhitelistCloudFront" | "allExcept"),
+                                              headers: {
+                                                quantity: ::Integer,
+                                                items: Array[::String]?
+                                              }?
+                                            },
+                                            cookies_config: {
+                                              cookie_behavior: ("none" | "whitelist" | "all" | "allExcept"),
+                                              cookies: {
+                                                quantity: ::Integer,
+                                                items: Array[::String]?
+                                              }?
+                                            },
+                                            query_strings_config: {
+                                              query_string_behavior: ("none" | "whitelist" | "all" | "allExcept"),
+                                              query_strings: {
+                                                quantity: ::Integer,
+                                                items: Array[::String]?
+                                              }?
+                                            }
+                                          },
+                                          id: ::String,
+                                          ?if_match: ::String
+                                        ) -> _UpdateOriginRequestPolicyResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOriginRequestPolicyResponseSuccess
+
+      interface _UpdatePublicKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePublicKeyResult]
+        def public_key: () -> Types::PublicKey
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#update_public_key-instance_method
+      def update_public_key: (
+                               public_key_config: {
+                                 caller_reference: ::String,
+                                 name: ::String,
+                                 encoded_key: ::String,
+                                 comment: ::String?
+                               },
+                               id: ::String,
+                               ?if_match: ::String
+                             ) -> _UpdatePublicKeyResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePublicKeyResponseSuccess
+
+      interface _UpdateRealtimeLogConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRealtimeLogConfigResult]
+        def realtime_log_config: () -> Types::RealtimeLogConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#update_realtime_log_config-instance_method
+      def update_realtime_log_config: (
+                                        ?end_points: Array[
+                                          {
+                                            stream_type: ::String,
+                                            kinesis_stream_config: {
+                                              role_arn: ::String,
+                                              stream_arn: ::String
+                                            }?
+                                          },
+                                        ],
+                                        ?fields: Array[::String],
+                                        ?name: ::String,
+                                        ?arn: ::String,
+                                        ?sampling_rate: ::Integer
+                                      ) -> _UpdateRealtimeLogConfigResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRealtimeLogConfigResponseSuccess
+
+      interface _UpdateResponseHeadersPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResponseHeadersPolicyResult]
+        def response_headers_policy: () -> Types::ResponseHeadersPolicy
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#update_response_headers_policy-instance_method
+      def update_response_headers_policy: (
+                                            response_headers_policy_config: {
+                                              comment: ::String?,
+                                              name: ::String,
+                                              cors_config: {
+                                                access_control_allow_origins: {
+                                                  quantity: ::Integer,
+                                                  items: Array[::String]
+                                                },
+                                                access_control_allow_headers: {
+                                                  quantity: ::Integer,
+                                                  items: Array[::String]
+                                                },
+                                                access_control_allow_methods: {
+                                                  quantity: ::Integer,
+                                                  items: Array[("GET" | "POST" | "OPTIONS" | "PUT" | "DELETE" | "PATCH" | "HEAD" | "ALL")]
+                                                },
+                                                access_control_allow_credentials: bool,
+                                                access_control_expose_headers: {
+                                                  quantity: ::Integer,
+                                                  items: Array[::String]?
+                                                }?,
+                                                access_control_max_age_sec: ::Integer?,
+                                                origin_override: bool
+                                              }?,
+                                              security_headers_config: {
+                                                xss_protection: {
+                                                  override: bool,
+                                                  protection: bool,
+                                                  mode_block: bool?,
+                                                  report_uri: ::String?
+                                                }?,
+                                                frame_options: {
+                                                  override: bool,
+                                                  frame_option: ("DENY" | "SAMEORIGIN")
+                                                }?,
+                                                referrer_policy: {
+                                                  override: bool,
+                                                  referrer_policy: ("no-referrer" | "no-referrer-when-downgrade" | "origin" | "origin-when-cross-origin" | "same-origin" | "strict-origin" | "strict-origin-when-cross-origin" | "unsafe-url")
+                                                }?,
+                                                content_security_policy: {
+                                                  override: bool,
+                                                  content_security_policy: ::String
+                                                }?,
+                                                content_type_options: {
+                                                  override: bool
+                                                }?,
+                                                strict_transport_security: {
+                                                  override: bool,
+                                                  include_subdomains: bool?,
+                                                  preload: bool?,
+                                                  access_control_max_age_sec: ::Integer
+                                                }?
+                                              }?,
+                                              server_timing_headers_config: {
+                                                enabled: bool,
+                                                sampling_rate: ::Float?
+                                              }?,
+                                              custom_headers_config: {
+                                                quantity: ::Integer,
+                                                items: Array[
+                                                  {
+                                                    header: ::String,
+                                                    value: ::String,
+                                                    override: bool
+                                                  },
+                                                ]?
+                                              }?,
+                                              remove_headers_config: {
+                                                quantity: ::Integer,
+                                                items: Array[
+                                                  {
+                                                    header: ::String
+                                                  },
+                                                ]?
+                                              }?
+                                            },
+                                            id: ::String,
+                                            ?if_match: ::String
+                                          ) -> _UpdateResponseHeadersPolicyResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResponseHeadersPolicyResponseSuccess
+
+      interface _UpdateStreamingDistributionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateStreamingDistributionResult]
+        def streaming_distribution: () -> Types::StreamingDistribution
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#update_streaming_distribution-instance_method
+      def update_streaming_distribution: (
+                                           streaming_distribution_config: {
+                                             caller_reference: ::String,
+                                             s3_origin: {
+                                               domain_name: ::String,
+                                               origin_access_identity: ::String
+                                             },
+                                             aliases: {
+                                               quantity: ::Integer,
+                                               items: Array[::String]?
+                                             }?,
+                                             comment: ::String,
+                                             logging: {
+                                               enabled: bool,
+                                               bucket: ::String,
+                                               prefix: ::String
+                                             }?,
+                                             trusted_signers: {
+                                               enabled: bool,
+                                               quantity: ::Integer,
+                                               items: Array[::String]?
+                                             },
+                                             price_class: ("PriceClass_100" | "PriceClass_200" | "PriceClass_All")?,
+                                             enabled: bool
+                                           },
+                                           id: ::String,
+                                           ?if_match: ::String
+                                         ) -> _UpdateStreamingDistributionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStreamingDistributionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#wait_until-instance_method
+      def wait_until: (:distribution_deployed waiter_name, 
+                    id: ::String
+                  ) -> Client::_GetDistributionResponseSuccess
+                    | (:distribution_deployed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetDistributionResponseSuccess
+                    | (:invalidation_completed waiter_name, 
+                    distribution_id: ::String,
+                    id: ::String
+                  ) -> Client::_GetInvalidationResponseSuccess
+                    | (:invalidation_completed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetInvalidationResponseSuccess
+                    | (:streaming_distribution_deployed waiter_name, 
+                    id: ::String
+                  ) -> Client::_GetStreamingDistributionResponseSuccess
+                    | (:streaming_distribution_deployed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetStreamingDistributionResponseSuccess
+    end
+  end
+end
+

@@ -1,0 +1,310 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MediaStore
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaStore/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateContainerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateContainerOutput]
+        def container: () -> Types::Container
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaStore/Client.html#create_container-instance_method
+      def create_container: (
+                              container_name: ::String,
+                              ?tags: Array[
+                                {
+                                  key: ::String,
+                                  value: ::String?
+                                },
+                              ]
+                            ) -> _CreateContainerResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContainerResponseSuccess
+
+      interface _DeleteContainerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteContainerOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaStore/Client.html#delete_container-instance_method
+      def delete_container: (
+                              container_name: ::String
+                            ) -> _DeleteContainerResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteContainerResponseSuccess
+
+      interface _DeleteContainerPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteContainerPolicyOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaStore/Client.html#delete_container_policy-instance_method
+      def delete_container_policy: (
+                                     container_name: ::String
+                                   ) -> _DeleteContainerPolicyResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteContainerPolicyResponseSuccess
+
+      interface _DeleteCorsPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCorsPolicyOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaStore/Client.html#delete_cors_policy-instance_method
+      def delete_cors_policy: (
+                                container_name: ::String
+                              ) -> _DeleteCorsPolicyResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCorsPolicyResponseSuccess
+
+      interface _DeleteLifecyclePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLifecyclePolicyOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaStore/Client.html#delete_lifecycle_policy-instance_method
+      def delete_lifecycle_policy: (
+                                     container_name: ::String
+                                   ) -> _DeleteLifecyclePolicyResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLifecyclePolicyResponseSuccess
+
+      interface _DeleteMetricPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMetricPolicyOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaStore/Client.html#delete_metric_policy-instance_method
+      def delete_metric_policy: (
+                                  container_name: ::String
+                                ) -> _DeleteMetricPolicyResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMetricPolicyResponseSuccess
+
+      interface _DescribeContainerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeContainerOutput]
+        def container: () -> Types::Container
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaStore/Client.html#describe_container-instance_method
+      def describe_container: (
+                                ?container_name: ::String
+                              ) -> _DescribeContainerResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeContainerResponseSuccess
+
+      interface _GetContainerPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContainerPolicyOutput]
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaStore/Client.html#get_container_policy-instance_method
+      def get_container_policy: (
+                                  container_name: ::String
+                                ) -> _GetContainerPolicyResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContainerPolicyResponseSuccess
+
+      interface _GetCorsPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCorsPolicyOutput]
+        def cors_policy: () -> ::Array[Types::CorsRule]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaStore/Client.html#get_cors_policy-instance_method
+      def get_cors_policy: (
+                             container_name: ::String
+                           ) -> _GetCorsPolicyResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCorsPolicyResponseSuccess
+
+      interface _GetLifecyclePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLifecyclePolicyOutput]
+        def lifecycle_policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaStore/Client.html#get_lifecycle_policy-instance_method
+      def get_lifecycle_policy: (
+                                  container_name: ::String
+                                ) -> _GetLifecyclePolicyResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLifecyclePolicyResponseSuccess
+
+      interface _GetMetricPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMetricPolicyOutput]
+        def metric_policy: () -> Types::MetricPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaStore/Client.html#get_metric_policy-instance_method
+      def get_metric_policy: (
+                               container_name: ::String
+                             ) -> _GetMetricPolicyResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMetricPolicyResponseSuccess
+
+      interface _ListContainersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListContainersOutput]
+        def containers: () -> ::Array[Types::Container]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaStore/Client.html#list_containers-instance_method
+      def list_containers: (
+                             ?next_token: ::String,
+                             ?max_results: ::Integer
+                           ) -> _ListContainersResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContainersResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaStore/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutContainerPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutContainerPolicyOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaStore/Client.html#put_container_policy-instance_method
+      def put_container_policy: (
+                                  container_name: ::String,
+                                  policy: ::String
+                                ) -> _PutContainerPolicyResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutContainerPolicyResponseSuccess
+
+      interface _PutCorsPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutCorsPolicyOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaStore/Client.html#put_cors_policy-instance_method
+      def put_cors_policy: (
+                             container_name: ::String,
+                             cors_policy: Array[
+                               {
+                                 allowed_origins: Array[::String],
+                                 allowed_methods: Array[("PUT" | "GET" | "DELETE" | "HEAD")]?,
+                                 allowed_headers: Array[::String],
+                                 max_age_seconds: ::Integer?,
+                                 expose_headers: Array[::String]?
+                               },
+                             ]
+                           ) -> _PutCorsPolicyResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutCorsPolicyResponseSuccess
+
+      interface _PutLifecyclePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutLifecyclePolicyOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaStore/Client.html#put_lifecycle_policy-instance_method
+      def put_lifecycle_policy: (
+                                  container_name: ::String,
+                                  lifecycle_policy: ::String
+                                ) -> _PutLifecyclePolicyResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutLifecyclePolicyResponseSuccess
+
+      interface _PutMetricPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutMetricPolicyOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaStore/Client.html#put_metric_policy-instance_method
+      def put_metric_policy: (
+                               container_name: ::String,
+                               metric_policy: {
+                                 container_level_metrics: ("ENABLED" | "DISABLED"),
+                                 metric_policy_rules: Array[
+                                   {
+                                     object_group: ::String,
+                                     object_group_name: ::String
+                                   },
+                                 ]?
+                               }
+                             ) -> _PutMetricPolicyResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutMetricPolicyResponseSuccess
+
+      interface _StartAccessLoggingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartAccessLoggingOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaStore/Client.html#start_access_logging-instance_method
+      def start_access_logging: (
+                                  container_name: ::String
+                                ) -> _StartAccessLoggingResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAccessLoggingResponseSuccess
+
+      interface _StopAccessLoggingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopAccessLoggingOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaStore/Client.html#stop_access_logging-instance_method
+      def stop_access_logging: (
+                                 container_name: ::String
+                               ) -> _StopAccessLoggingResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopAccessLoggingResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaStore/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String?
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaStore/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+    end
+  end
+end
+

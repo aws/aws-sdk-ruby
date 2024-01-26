@@ -1,0 +1,100 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AutoScaling
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LaunchConfiguration.html
+    class LaunchConfiguration
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LaunchConfiguration.html#initialize-instance_method
+      def initialize: (String name, Hash[Symbol, untyped] options) -> void
+                    | (name: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LaunchConfiguration.html#name-instance_method
+      def name: () -> String
+      alias launch_configuration_name name
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LaunchConfiguration.html#launch_configuration_arn-instance_method
+      def launch_configuration_arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LaunchConfiguration.html#image_id-instance_method
+      def image_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LaunchConfiguration.html#key_name-instance_method
+      def key_name: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LaunchConfiguration.html#security_groups-instance_method
+      def security_groups: () -> ::Array[::String]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LaunchConfiguration.html#classic_link_vpc_id-instance_method
+      def classic_link_vpc_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LaunchConfiguration.html#classic_link_vpc_security_groups-instance_method
+      def classic_link_vpc_security_groups: () -> ::Array[::String]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LaunchConfiguration.html#user_data-instance_method
+      def user_data: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LaunchConfiguration.html#instance_type-instance_method
+      def instance_type: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LaunchConfiguration.html#kernel_id-instance_method
+      def kernel_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LaunchConfiguration.html#ramdisk_id-instance_method
+      def ramdisk_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LaunchConfiguration.html#block_device_mappings-instance_method
+      def block_device_mappings: () -> ::Array[Types::BlockDeviceMapping]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LaunchConfiguration.html#instance_monitoring-instance_method
+      def instance_monitoring: () -> Types::InstanceMonitoring
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LaunchConfiguration.html#spot_price-instance_method
+      def spot_price: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LaunchConfiguration.html#iam_instance_profile-instance_method
+      def iam_instance_profile: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LaunchConfiguration.html#created_time-instance_method
+      def created_time: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LaunchConfiguration.html#ebs_optimized-instance_method
+      def ebs_optimized: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LaunchConfiguration.html#associate_public_ip_address-instance_method
+      def associate_public_ip_address: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LaunchConfiguration.html#placement_tenancy-instance_method
+      def placement_tenancy: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LaunchConfiguration.html#metadata_options-instance_method
+      def metadata_options: () -> Types::InstanceMetadataOptions
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LaunchConfiguration.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LaunchConfiguration.html#data-instance_method
+      def data: () -> Types::LaunchConfiguration
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LaunchConfiguration.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LaunchConfiguration.html#delete-instance_method
+      def delete: (
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      class Collection < ::Aws::Resources::Collection[LaunchConfiguration]
+      end
+    end
+  end
+end

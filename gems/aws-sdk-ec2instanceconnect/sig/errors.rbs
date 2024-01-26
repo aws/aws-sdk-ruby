@@ -1,0 +1,49 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EC2InstanceConnect
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AuthException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class EC2InstanceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class EC2InstanceStateInvalidException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class EC2InstanceTypeInvalidException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class EC2InstanceUnavailableException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidArgsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class SerialConsoleAccessDisabledException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class SerialConsoleSessionLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class SerialConsoleSessionUnavailableException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ServiceException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ThrottlingException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

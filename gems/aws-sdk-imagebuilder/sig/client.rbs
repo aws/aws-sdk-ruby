@@ -1,0 +1,1564 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Imagebuilder
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CancelImageCreationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelImageCreationResponse]
+        def request_id: () -> ::String
+        def client_token: () -> ::String
+        def image_build_version_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#cancel_image_creation-instance_method
+      def cancel_image_creation: (
+                                   image_build_version_arn: ::String,
+                                   client_token: ::String
+                                 ) -> _CancelImageCreationResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelImageCreationResponseSuccess
+
+      interface _CancelLifecycleExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelLifecycleExecutionResponse]
+        def lifecycle_execution_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#cancel_lifecycle_execution-instance_method
+      def cancel_lifecycle_execution: (
+                                        lifecycle_execution_id: ::String,
+                                        client_token: ::String
+                                      ) -> _CancelLifecycleExecutionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelLifecycleExecutionResponseSuccess
+
+      interface _CreateComponentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateComponentResponse]
+        def request_id: () -> ::String
+        def client_token: () -> ::String
+        def component_build_version_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#create_component-instance_method
+      def create_component: (
+                              name: ::String,
+                              semantic_version: ::String,
+                              ?description: ::String,
+                              ?change_description: ::String,
+                              platform: ("Windows" | "Linux"),
+                              ?supported_os_versions: Array[::String],
+                              ?data: ::String,
+                              ?uri: ::String,
+                              ?kms_key_id: ::String,
+                              ?tags: Hash[::String, ::String],
+                              client_token: ::String
+                            ) -> _CreateComponentResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateComponentResponseSuccess
+
+      interface _CreateContainerRecipeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateContainerRecipeResponse]
+        def request_id: () -> ::String
+        def client_token: () -> ::String
+        def container_recipe_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#create_container_recipe-instance_method
+      def create_container_recipe: (
+                                     container_type: ("DOCKER"),
+                                     name: ::String,
+                                     ?description: ::String,
+                                     semantic_version: ::String,
+                                     components: Array[
+                                       {
+                                         component_arn: ::String,
+                                         parameters: Array[
+                                           {
+                                             name: ::String,
+                                             value: Array[::String]
+                                           },
+                                         ]?
+                                       },
+                                     ],
+                                     ?instance_configuration: {
+                                       image: ::String?,
+                                       block_device_mappings: Array[
+                                         {
+                                           device_name: ::String?,
+                                           ebs: {
+                                             encrypted: bool?,
+                                             delete_on_termination: bool?,
+                                             iops: ::Integer?,
+                                             kms_key_id: ::String?,
+                                             snapshot_id: ::String?,
+                                             volume_size: ::Integer?,
+                                             volume_type: ("standard" | "io1" | "io2" | "gp2" | "gp3" | "sc1" | "st1")?,
+                                             throughput: ::Integer?
+                                           }?,
+                                           virtual_name: ::String?,
+                                           no_device: ::String?
+                                         },
+                                       ]?
+                                     },
+                                     ?dockerfile_template_data: ::String,
+                                     ?dockerfile_template_uri: ::String,
+                                     ?platform_override: ("Windows" | "Linux"),
+                                     ?image_os_version_override: ::String,
+                                     parent_image: ::String,
+                                     ?tags: Hash[::String, ::String],
+                                     ?working_directory: ::String,
+                                     target_repository: {
+                                       service: ("ECR"),
+                                       repository_name: ::String
+                                     },
+                                     ?kms_key_id: ::String,
+                                     client_token: ::String
+                                   ) -> _CreateContainerRecipeResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContainerRecipeResponseSuccess
+
+      interface _CreateDistributionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDistributionConfigurationResponse]
+        def request_id: () -> ::String
+        def client_token: () -> ::String
+        def distribution_configuration_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#create_distribution_configuration-instance_method
+      def create_distribution_configuration: (
+                                               name: ::String,
+                                               ?description: ::String,
+                                               distributions: Array[
+                                                 {
+                                                   region: ::String,
+                                                   ami_distribution_configuration: {
+                                                     name: ::String?,
+                                                     description: ::String?,
+                                                     target_account_ids: Array[::String]?,
+                                                     ami_tags: Hash[::String, ::String]?,
+                                                     kms_key_id: ::String?,
+                                                     launch_permission: {
+                                                       user_ids: Array[::String]?,
+                                                       user_groups: Array[::String]?,
+                                                       organization_arns: Array[::String]?,
+                                                       organizational_unit_arns: Array[::String]?
+                                                     }?
+                                                   }?,
+                                                   container_distribution_configuration: {
+                                                     description: ::String?,
+                                                     container_tags: Array[::String]?,
+                                                     target_repository: {
+                                                       service: ("ECR"),
+                                                       repository_name: ::String
+                                                     }
+                                                   }?,
+                                                   license_configuration_arns: Array[::String]?,
+                                                   launch_template_configurations: Array[
+                                                     {
+                                                       launch_template_id: ::String,
+                                                       account_id: ::String?,
+                                                       set_default_version: bool?
+                                                     },
+                                                   ]?,
+                                                   s3_export_configuration: {
+                                                     role_name: ::String,
+                                                     disk_image_format: ("VMDK" | "RAW" | "VHD"),
+                                                     s3_bucket: ::String,
+                                                     s3_prefix: ::String?
+                                                   }?,
+                                                   fast_launch_configurations: Array[
+                                                     {
+                                                       enabled: bool,
+                                                       snapshot_configuration: {
+                                                         target_resource_count: ::Integer?
+                                                       }?,
+                                                       max_parallel_launches: ::Integer?,
+                                                       launch_template: {
+                                                         launch_template_id: ::String?,
+                                                         launch_template_name: ::String?,
+                                                         launch_template_version: ::String?
+                                                       }?,
+                                                       account_id: ::String?
+                                                     },
+                                                   ]?
+                                                 },
+                                               ],
+                                               ?tags: Hash[::String, ::String],
+                                               client_token: ::String
+                                             ) -> _CreateDistributionConfigurationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDistributionConfigurationResponseSuccess
+
+      interface _CreateImageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateImageResponse]
+        def request_id: () -> ::String
+        def client_token: () -> ::String
+        def image_build_version_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#create_image-instance_method
+      def create_image: (
+                          ?image_recipe_arn: ::String,
+                          ?container_recipe_arn: ::String,
+                          ?distribution_configuration_arn: ::String,
+                          infrastructure_configuration_arn: ::String,
+                          ?image_tests_configuration: {
+                            image_tests_enabled: bool?,
+                            timeout_minutes: ::Integer?
+                          },
+                          ?enhanced_image_metadata_enabled: bool,
+                          ?tags: Hash[::String, ::String],
+                          client_token: ::String,
+                          ?image_scanning_configuration: {
+                            image_scanning_enabled: bool?,
+                            ecr_configuration: {
+                              repository_name: ::String?,
+                              container_tags: Array[::String]?
+                            }?
+                          },
+                          ?workflows: Array[
+                            {
+                              workflow_arn: ::String,
+                              parameters: Array[
+                                {
+                                  name: ::String,
+                                  value: Array[::String]
+                                },
+                              ]?,
+                              parallel_group: ::String?,
+                              on_failure: ("CONTINUE" | "ABORT")?
+                            },
+                          ],
+                          ?execution_role: ::String
+                        ) -> _CreateImageResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateImageResponseSuccess
+
+      interface _CreateImagePipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateImagePipelineResponse]
+        def request_id: () -> ::String
+        def client_token: () -> ::String
+        def image_pipeline_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#create_image_pipeline-instance_method
+      def create_image_pipeline: (
+                                   name: ::String,
+                                   ?description: ::String,
+                                   ?image_recipe_arn: ::String,
+                                   ?container_recipe_arn: ::String,
+                                   infrastructure_configuration_arn: ::String,
+                                   ?distribution_configuration_arn: ::String,
+                                   ?image_tests_configuration: {
+                                     image_tests_enabled: bool?,
+                                     timeout_minutes: ::Integer?
+                                   },
+                                   ?enhanced_image_metadata_enabled: bool,
+                                   ?schedule: {
+                                     schedule_expression: ::String?,
+                                     timezone: ::String?,
+                                     pipeline_execution_start_condition: ("EXPRESSION_MATCH_ONLY" | "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE")?
+                                   },
+                                   ?status: ("DISABLED" | "ENABLED"),
+                                   ?tags: Hash[::String, ::String],
+                                   client_token: ::String,
+                                   ?image_scanning_configuration: {
+                                     image_scanning_enabled: bool?,
+                                     ecr_configuration: {
+                                       repository_name: ::String?,
+                                       container_tags: Array[::String]?
+                                     }?
+                                   },
+                                   ?workflows: Array[
+                                     {
+                                       workflow_arn: ::String,
+                                       parameters: Array[
+                                         {
+                                           name: ::String,
+                                           value: Array[::String]
+                                         },
+                                       ]?,
+                                       parallel_group: ::String?,
+                                       on_failure: ("CONTINUE" | "ABORT")?
+                                     },
+                                   ],
+                                   ?execution_role: ::String
+                                 ) -> _CreateImagePipelineResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateImagePipelineResponseSuccess
+
+      interface _CreateImageRecipeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateImageRecipeResponse]
+        def request_id: () -> ::String
+        def client_token: () -> ::String
+        def image_recipe_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#create_image_recipe-instance_method
+      def create_image_recipe: (
+                                 name: ::String,
+                                 ?description: ::String,
+                                 semantic_version: ::String,
+                                 components: Array[
+                                   {
+                                     component_arn: ::String,
+                                     parameters: Array[
+                                       {
+                                         name: ::String,
+                                         value: Array[::String]
+                                       },
+                                     ]?
+                                   },
+                                 ],
+                                 parent_image: ::String,
+                                 ?block_device_mappings: Array[
+                                   {
+                                     device_name: ::String?,
+                                     ebs: {
+                                       encrypted: bool?,
+                                       delete_on_termination: bool?,
+                                       iops: ::Integer?,
+                                       kms_key_id: ::String?,
+                                       snapshot_id: ::String?,
+                                       volume_size: ::Integer?,
+                                       volume_type: ("standard" | "io1" | "io2" | "gp2" | "gp3" | "sc1" | "st1")?,
+                                       throughput: ::Integer?
+                                     }?,
+                                     virtual_name: ::String?,
+                                     no_device: ::String?
+                                   },
+                                 ],
+                                 ?tags: Hash[::String, ::String],
+                                 ?working_directory: ::String,
+                                 ?additional_instance_configuration: {
+                                   systems_manager_agent: {
+                                     uninstall_after_build: bool?
+                                   }?,
+                                   user_data_override: ::String?
+                                 },
+                                 client_token: ::String
+                               ) -> _CreateImageRecipeResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateImageRecipeResponseSuccess
+
+      interface _CreateInfrastructureConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateInfrastructureConfigurationResponse]
+        def request_id: () -> ::String
+        def client_token: () -> ::String
+        def infrastructure_configuration_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#create_infrastructure_configuration-instance_method
+      def create_infrastructure_configuration: (
+                                                 name: ::String,
+                                                 ?description: ::String,
+                                                 ?instance_types: Array[::String],
+                                                 instance_profile_name: ::String,
+                                                 ?security_group_ids: Array[::String],
+                                                 ?subnet_id: ::String,
+                                                 ?logging: {
+                                                   s3_logs: {
+                                                     s3_bucket_name: ::String?,
+                                                     s3_key_prefix: ::String?
+                                                   }?
+                                                 },
+                                                 ?key_pair: ::String,
+                                                 ?terminate_instance_on_failure: bool,
+                                                 ?sns_topic_arn: ::String,
+                                                 ?resource_tags: Hash[::String, ::String],
+                                                 ?instance_metadata_options: {
+                                                   http_tokens: ::String?,
+                                                   http_put_response_hop_limit: ::Integer?
+                                                 },
+                                                 ?tags: Hash[::String, ::String],
+                                                 client_token: ::String
+                                               ) -> _CreateInfrastructureConfigurationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInfrastructureConfigurationResponseSuccess
+
+      interface _CreateLifecyclePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLifecyclePolicyResponse]
+        def client_token: () -> ::String
+        def lifecycle_policy_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#create_lifecycle_policy-instance_method
+      def create_lifecycle_policy: (
+                                     name: ::String,
+                                     ?description: ::String,
+                                     ?status: ("DISABLED" | "ENABLED"),
+                                     execution_role: ::String,
+                                     resource_type: ("AMI_IMAGE" | "CONTAINER_IMAGE"),
+                                     policy_details: Array[
+                                       {
+                                         action: {
+                                           type: ("DELETE" | "DEPRECATE" | "DISABLE"),
+                                           include_resources: {
+                                             amis: bool?,
+                                             snapshots: bool?,
+                                             containers: bool?
+                                           }?
+                                         },
+                                         filter: {
+                                           type: ("AGE" | "COUNT"),
+                                           value: ::Integer,
+                                           unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")?,
+                                           retain_at_least: ::Integer?
+                                         },
+                                         exclusion_rules: {
+                                           tag_map: Hash[::String, ::String]?,
+                                           amis: {
+                                             is_public: bool?,
+                                             regions: Array[::String]?,
+                                             shared_accounts: Array[::String]?,
+                                             last_launched: {
+                                               value: ::Integer,
+                                               unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")
+                                             }?,
+                                             tag_map: Hash[::String, ::String]?
+                                           }?
+                                         }?
+                                       },
+                                     ],
+                                     resource_selection: {
+                                       recipes: Array[
+                                         {
+                                           name: ::String,
+                                           semantic_version: ::String
+                                         },
+                                       ]?,
+                                       tag_map: Hash[::String, ::String]?
+                                     },
+                                     ?tags: Hash[::String, ::String],
+                                     client_token: ::String
+                                   ) -> _CreateLifecyclePolicyResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLifecyclePolicyResponseSuccess
+
+      interface _CreateWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkflowResponse]
+        def client_token: () -> ::String
+        def workflow_build_version_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#create_workflow-instance_method
+      def create_workflow: (
+                             name: ::String,
+                             semantic_version: ::String,
+                             ?description: ::String,
+                             ?change_description: ::String,
+                             ?data: ::String,
+                             ?uri: ::String,
+                             ?kms_key_id: ::String,
+                             ?tags: Hash[::String, ::String],
+                             client_token: ::String,
+                             type: ("BUILD" | "TEST" | "DISTRIBUTION")
+                           ) -> _CreateWorkflowResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkflowResponseSuccess
+
+      interface _DeleteComponentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteComponentResponse]
+        def request_id: () -> ::String
+        def component_build_version_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#delete_component-instance_method
+      def delete_component: (
+                              component_build_version_arn: ::String
+                            ) -> _DeleteComponentResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteComponentResponseSuccess
+
+      interface _DeleteContainerRecipeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteContainerRecipeResponse]
+        def request_id: () -> ::String
+        def container_recipe_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#delete_container_recipe-instance_method
+      def delete_container_recipe: (
+                                     container_recipe_arn: ::String
+                                   ) -> _DeleteContainerRecipeResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteContainerRecipeResponseSuccess
+
+      interface _DeleteDistributionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDistributionConfigurationResponse]
+        def request_id: () -> ::String
+        def distribution_configuration_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#delete_distribution_configuration-instance_method
+      def delete_distribution_configuration: (
+                                               distribution_configuration_arn: ::String
+                                             ) -> _DeleteDistributionConfigurationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDistributionConfigurationResponseSuccess
+
+      interface _DeleteImageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteImageResponse]
+        def request_id: () -> ::String
+        def image_build_version_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#delete_image-instance_method
+      def delete_image: (
+                          image_build_version_arn: ::String
+                        ) -> _DeleteImageResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteImageResponseSuccess
+
+      interface _DeleteImagePipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteImagePipelineResponse]
+        def request_id: () -> ::String
+        def image_pipeline_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#delete_image_pipeline-instance_method
+      def delete_image_pipeline: (
+                                   image_pipeline_arn: ::String
+                                 ) -> _DeleteImagePipelineResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteImagePipelineResponseSuccess
+
+      interface _DeleteImageRecipeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteImageRecipeResponse]
+        def request_id: () -> ::String
+        def image_recipe_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#delete_image_recipe-instance_method
+      def delete_image_recipe: (
+                                 image_recipe_arn: ::String
+                               ) -> _DeleteImageRecipeResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteImageRecipeResponseSuccess
+
+      interface _DeleteInfrastructureConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteInfrastructureConfigurationResponse]
+        def request_id: () -> ::String
+        def infrastructure_configuration_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#delete_infrastructure_configuration-instance_method
+      def delete_infrastructure_configuration: (
+                                                 infrastructure_configuration_arn: ::String
+                                               ) -> _DeleteInfrastructureConfigurationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteInfrastructureConfigurationResponseSuccess
+
+      interface _DeleteLifecyclePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLifecyclePolicyResponse]
+        def lifecycle_policy_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#delete_lifecycle_policy-instance_method
+      def delete_lifecycle_policy: (
+                                     lifecycle_policy_arn: ::String
+                                   ) -> _DeleteLifecyclePolicyResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLifecyclePolicyResponseSuccess
+
+      interface _DeleteWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkflowResponse]
+        def workflow_build_version_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#delete_workflow-instance_method
+      def delete_workflow: (
+                             workflow_build_version_arn: ::String
+                           ) -> _DeleteWorkflowResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkflowResponseSuccess
+
+      interface _GetComponentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetComponentResponse]
+        def request_id: () -> ::String
+        def component: () -> Types::Component
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#get_component-instance_method
+      def get_component: (
+                           component_build_version_arn: ::String
+                         ) -> _GetComponentResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetComponentResponseSuccess
+
+      interface _GetComponentPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetComponentPolicyResponse]
+        def request_id: () -> ::String
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#get_component_policy-instance_method
+      def get_component_policy: (
+                                  component_arn: ::String
+                                ) -> _GetComponentPolicyResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetComponentPolicyResponseSuccess
+
+      interface _GetContainerRecipeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContainerRecipeResponse]
+        def request_id: () -> ::String
+        def container_recipe: () -> Types::ContainerRecipe
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#get_container_recipe-instance_method
+      def get_container_recipe: (
+                                  container_recipe_arn: ::String
+                                ) -> _GetContainerRecipeResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContainerRecipeResponseSuccess
+
+      interface _GetContainerRecipePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContainerRecipePolicyResponse]
+        def request_id: () -> ::String
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#get_container_recipe_policy-instance_method
+      def get_container_recipe_policy: (
+                                         container_recipe_arn: ::String
+                                       ) -> _GetContainerRecipePolicyResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContainerRecipePolicyResponseSuccess
+
+      interface _GetDistributionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDistributionConfigurationResponse]
+        def request_id: () -> ::String
+        def distribution_configuration: () -> Types::DistributionConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#get_distribution_configuration-instance_method
+      def get_distribution_configuration: (
+                                            distribution_configuration_arn: ::String
+                                          ) -> _GetDistributionConfigurationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDistributionConfigurationResponseSuccess
+
+      interface _GetImageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetImageResponse]
+        def request_id: () -> ::String
+        def image: () -> Types::Image
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#get_image-instance_method
+      def get_image: (
+                       image_build_version_arn: ::String
+                     ) -> _GetImageResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetImageResponseSuccess
+
+      interface _GetImagePipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetImagePipelineResponse]
+        def request_id: () -> ::String
+        def image_pipeline: () -> Types::ImagePipeline
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#get_image_pipeline-instance_method
+      def get_image_pipeline: (
+                                image_pipeline_arn: ::String
+                              ) -> _GetImagePipelineResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetImagePipelineResponseSuccess
+
+      interface _GetImagePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetImagePolicyResponse]
+        def request_id: () -> ::String
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#get_image_policy-instance_method
+      def get_image_policy: (
+                              image_arn: ::String
+                            ) -> _GetImagePolicyResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetImagePolicyResponseSuccess
+
+      interface _GetImageRecipeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetImageRecipeResponse]
+        def request_id: () -> ::String
+        def image_recipe: () -> Types::ImageRecipe
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#get_image_recipe-instance_method
+      def get_image_recipe: (
+                              image_recipe_arn: ::String
+                            ) -> _GetImageRecipeResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetImageRecipeResponseSuccess
+
+      interface _GetImageRecipePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetImageRecipePolicyResponse]
+        def request_id: () -> ::String
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#get_image_recipe_policy-instance_method
+      def get_image_recipe_policy: (
+                                     image_recipe_arn: ::String
+                                   ) -> _GetImageRecipePolicyResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetImageRecipePolicyResponseSuccess
+
+      interface _GetInfrastructureConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInfrastructureConfigurationResponse]
+        def request_id: () -> ::String
+        def infrastructure_configuration: () -> Types::InfrastructureConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#get_infrastructure_configuration-instance_method
+      def get_infrastructure_configuration: (
+                                              infrastructure_configuration_arn: ::String
+                                            ) -> _GetInfrastructureConfigurationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInfrastructureConfigurationResponseSuccess
+
+      interface _GetLifecycleExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLifecycleExecutionResponse]
+        def lifecycle_execution: () -> Types::LifecycleExecution
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#get_lifecycle_execution-instance_method
+      def get_lifecycle_execution: (
+                                     lifecycle_execution_id: ::String
+                                   ) -> _GetLifecycleExecutionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLifecycleExecutionResponseSuccess
+
+      interface _GetLifecyclePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLifecyclePolicyResponse]
+        def lifecycle_policy: () -> Types::LifecyclePolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#get_lifecycle_policy-instance_method
+      def get_lifecycle_policy: (
+                                  lifecycle_policy_arn: ::String
+                                ) -> _GetLifecyclePolicyResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLifecyclePolicyResponseSuccess
+
+      interface _GetWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkflowResponse]
+        def workflow: () -> Types::Workflow
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#get_workflow-instance_method
+      def get_workflow: (
+                          workflow_build_version_arn: ::String
+                        ) -> _GetWorkflowResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkflowResponseSuccess
+
+      interface _GetWorkflowExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkflowExecutionResponse]
+        def request_id: () -> ::String
+        def workflow_build_version_arn: () -> ::String
+        def workflow_execution_id: () -> ::String
+        def image_build_version_arn: () -> ::String
+        def type: () -> ("BUILD" | "TEST" | "DISTRIBUTION")
+        def status: () -> ("PENDING" | "SKIPPED" | "RUNNING" | "COMPLETED" | "FAILED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_COMPLETED" | "CANCELLED")
+        def message: () -> ::String
+        def total_step_count: () -> ::Integer
+        def total_steps_succeeded: () -> ::Integer
+        def total_steps_failed: () -> ::Integer
+        def total_steps_skipped: () -> ::Integer
+        def start_time: () -> ::String
+        def end_time: () -> ::String
+        def parallel_group: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#get_workflow_execution-instance_method
+      def get_workflow_execution: (
+                                    workflow_execution_id: ::String
+                                  ) -> _GetWorkflowExecutionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkflowExecutionResponseSuccess
+
+      interface _GetWorkflowStepExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkflowStepExecutionResponse]
+        def request_id: () -> ::String
+        def step_execution_id: () -> ::String
+        def workflow_build_version_arn: () -> ::String
+        def workflow_execution_id: () -> ::String
+        def image_build_version_arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def action: () -> ::String
+        def status: () -> ("PENDING" | "SKIPPED" | "RUNNING" | "COMPLETED" | "FAILED" | "CANCELLED")
+        def rollback_status: () -> ("RUNNING" | "COMPLETED" | "SKIPPED" | "FAILED")
+        def message: () -> ::String
+        def inputs: () -> ::String
+        def outputs: () -> ::String
+        def start_time: () -> ::String
+        def end_time: () -> ::String
+        def on_failure: () -> ::String
+        def timeout_seconds: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#get_workflow_step_execution-instance_method
+      def get_workflow_step_execution: (
+                                         step_execution_id: ::String
+                                       ) -> _GetWorkflowStepExecutionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkflowStepExecutionResponseSuccess
+
+      interface _ImportComponentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportComponentResponse]
+        def request_id: () -> ::String
+        def client_token: () -> ::String
+        def component_build_version_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#import_component-instance_method
+      def import_component: (
+                              name: ::String,
+                              semantic_version: ::String,
+                              ?description: ::String,
+                              ?change_description: ::String,
+                              type: ("BUILD" | "TEST"),
+                              format: ("SHELL"),
+                              platform: ("Windows" | "Linux"),
+                              ?data: ::String,
+                              ?uri: ::String,
+                              ?kms_key_id: ::String,
+                              ?tags: Hash[::String, ::String],
+                              client_token: ::String
+                            ) -> _ImportComponentResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportComponentResponseSuccess
+
+      interface _ImportVmImageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportVmImageResponse]
+        def request_id: () -> ::String
+        def image_arn: () -> ::String
+        def client_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#import_vm_image-instance_method
+      def import_vm_image: (
+                             name: ::String,
+                             semantic_version: ::String,
+                             ?description: ::String,
+                             platform: ("Windows" | "Linux"),
+                             ?os_version: ::String,
+                             vm_import_task_id: ::String,
+                             ?tags: Hash[::String, ::String],
+                             client_token: ::String
+                           ) -> _ImportVmImageResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportVmImageResponseSuccess
+
+      interface _ListComponentBuildVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListComponentBuildVersionsResponse]
+        def request_id: () -> ::String
+        def component_summary_list: () -> ::Array[Types::ComponentSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#list_component_build_versions-instance_method
+      def list_component_build_versions: (
+                                           component_version_arn: ::String,
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String
+                                         ) -> _ListComponentBuildVersionsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListComponentBuildVersionsResponseSuccess
+
+      interface _ListComponentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListComponentsResponse]
+        def request_id: () -> ::String
+        def component_version_list: () -> ::Array[Types::ComponentVersion]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#list_components-instance_method
+      def list_components: (
+                             ?owner: ("Self" | "Shared" | "Amazon" | "ThirdParty"),
+                             ?filters: Array[
+                               {
+                                 name: ::String?,
+                                 values: Array[::String]?
+                               },
+                             ],
+                             ?by_name: bool,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListComponentsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListComponentsResponseSuccess
+
+      interface _ListContainerRecipesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListContainerRecipesResponse]
+        def request_id: () -> ::String
+        def container_recipe_summary_list: () -> ::Array[Types::ContainerRecipeSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#list_container_recipes-instance_method
+      def list_container_recipes: (
+                                    ?owner: ("Self" | "Shared" | "Amazon" | "ThirdParty"),
+                                    ?filters: Array[
+                                      {
+                                        name: ::String?,
+                                        values: Array[::String]?
+                                      },
+                                    ],
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListContainerRecipesResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContainerRecipesResponseSuccess
+
+      interface _ListDistributionConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDistributionConfigurationsResponse]
+        def request_id: () -> ::String
+        def distribution_configuration_summary_list: () -> ::Array[Types::DistributionConfigurationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#list_distribution_configurations-instance_method
+      def list_distribution_configurations: (
+                                              ?filters: Array[
+                                                {
+                                                  name: ::String?,
+                                                  values: Array[::String]?
+                                                },
+                                              ],
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String
+                                            ) -> _ListDistributionConfigurationsResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDistributionConfigurationsResponseSuccess
+
+      interface _ListImageBuildVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListImageBuildVersionsResponse]
+        def request_id: () -> ::String
+        def image_summary_list: () -> ::Array[Types::ImageSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#list_image_build_versions-instance_method
+      def list_image_build_versions: (
+                                       image_version_arn: ::String,
+                                       ?filters: Array[
+                                         {
+                                           name: ::String?,
+                                           values: Array[::String]?
+                                         },
+                                       ],
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListImageBuildVersionsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListImageBuildVersionsResponseSuccess
+
+      interface _ListImagePackagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListImagePackagesResponse]
+        def request_id: () -> ::String
+        def image_package_list: () -> ::Array[Types::ImagePackage]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#list_image_packages-instance_method
+      def list_image_packages: (
+                                 image_build_version_arn: ::String,
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListImagePackagesResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListImagePackagesResponseSuccess
+
+      interface _ListImagePipelineImagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListImagePipelineImagesResponse]
+        def request_id: () -> ::String
+        def image_summary_list: () -> ::Array[Types::ImageSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#list_image_pipeline_images-instance_method
+      def list_image_pipeline_images: (
+                                        image_pipeline_arn: ::String,
+                                        ?filters: Array[
+                                          {
+                                            name: ::String?,
+                                            values: Array[::String]?
+                                          },
+                                        ],
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListImagePipelineImagesResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListImagePipelineImagesResponseSuccess
+
+      interface _ListImagePipelinesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListImagePipelinesResponse]
+        def request_id: () -> ::String
+        def image_pipeline_list: () -> ::Array[Types::ImagePipeline]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#list_image_pipelines-instance_method
+      def list_image_pipelines: (
+                                  ?filters: Array[
+                                    {
+                                      name: ::String?,
+                                      values: Array[::String]?
+                                    },
+                                  ],
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListImagePipelinesResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListImagePipelinesResponseSuccess
+
+      interface _ListImageRecipesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListImageRecipesResponse]
+        def request_id: () -> ::String
+        def image_recipe_summary_list: () -> ::Array[Types::ImageRecipeSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#list_image_recipes-instance_method
+      def list_image_recipes: (
+                                ?owner: ("Self" | "Shared" | "Amazon" | "ThirdParty"),
+                                ?filters: Array[
+                                  {
+                                    name: ::String?,
+                                    values: Array[::String]?
+                                  },
+                                ],
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListImageRecipesResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListImageRecipesResponseSuccess
+
+      interface _ListImageScanFindingAggregationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListImageScanFindingAggregationsResponse]
+        def request_id: () -> ::String
+        def aggregation_type: () -> ::String
+        def responses: () -> ::Array[Types::ImageScanFindingAggregation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#list_image_scan_finding_aggregations-instance_method
+      def list_image_scan_finding_aggregations: (
+                                                  ?filter: {
+                                                    name: ::String?,
+                                                    values: Array[::String]?
+                                                  },
+                                                  ?next_token: ::String
+                                                ) -> _ListImageScanFindingAggregationsResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListImageScanFindingAggregationsResponseSuccess
+
+      interface _ListImageScanFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListImageScanFindingsResponse]
+        def request_id: () -> ::String
+        def findings: () -> ::Array[Types::ImageScanFinding]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#list_image_scan_findings-instance_method
+      def list_image_scan_findings: (
+                                      ?filters: Array[
+                                        {
+                                          name: ::String?,
+                                          values: Array[::String]?
+                                        },
+                                      ],
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListImageScanFindingsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListImageScanFindingsResponseSuccess
+
+      interface _ListImagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListImagesResponse]
+        def request_id: () -> ::String
+        def image_version_list: () -> ::Array[Types::ImageVersion]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#list_images-instance_method
+      def list_images: (
+                         ?owner: ("Self" | "Shared" | "Amazon" | "ThirdParty"),
+                         ?filters: Array[
+                           {
+                             name: ::String?,
+                             values: Array[::String]?
+                           },
+                         ],
+                         ?by_name: bool,
+                         ?max_results: ::Integer,
+                         ?next_token: ::String,
+                         ?include_deprecated: bool
+                       ) -> _ListImagesResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListImagesResponseSuccess
+
+      interface _ListInfrastructureConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInfrastructureConfigurationsResponse]
+        def request_id: () -> ::String
+        def infrastructure_configuration_summary_list: () -> ::Array[Types::InfrastructureConfigurationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#list_infrastructure_configurations-instance_method
+      def list_infrastructure_configurations: (
+                                                ?filters: Array[
+                                                  {
+                                                    name: ::String?,
+                                                    values: Array[::String]?
+                                                  },
+                                                ],
+                                                ?max_results: ::Integer,
+                                                ?next_token: ::String
+                                              ) -> _ListInfrastructureConfigurationsResponseSuccess
+                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInfrastructureConfigurationsResponseSuccess
+
+      interface _ListLifecycleExecutionResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLifecycleExecutionResourcesResponse]
+        def lifecycle_execution_id: () -> ::String
+        def lifecycle_execution_state: () -> Types::LifecycleExecutionState
+        def resources: () -> ::Array[Types::LifecycleExecutionResource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#list_lifecycle_execution_resources-instance_method
+      def list_lifecycle_execution_resources: (
+                                                lifecycle_execution_id: ::String,
+                                                ?parent_resource_id: ::String,
+                                                ?max_results: ::Integer,
+                                                ?next_token: ::String
+                                              ) -> _ListLifecycleExecutionResourcesResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLifecycleExecutionResourcesResponseSuccess
+
+      interface _ListLifecycleExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLifecycleExecutionsResponse]
+        def lifecycle_executions: () -> ::Array[Types::LifecycleExecution]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#list_lifecycle_executions-instance_method
+      def list_lifecycle_executions: (
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String,
+                                       resource_arn: ::String
+                                     ) -> _ListLifecycleExecutionsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLifecycleExecutionsResponseSuccess
+
+      interface _ListLifecyclePoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLifecyclePoliciesResponse]
+        def lifecycle_policy_summary_list: () -> ::Array[Types::LifecyclePolicySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#list_lifecycle_policies-instance_method
+      def list_lifecycle_policies: (
+                                     ?filters: Array[
+                                       {
+                                         name: ::String?,
+                                         values: Array[::String]?
+                                       },
+                                     ],
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListLifecyclePoliciesResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLifecyclePoliciesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListWaitingWorkflowStepsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWaitingWorkflowStepsResponse]
+        def steps: () -> ::Array[Types::WorkflowStepExecution]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#list_waiting_workflow_steps-instance_method
+      def list_waiting_workflow_steps: (
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListWaitingWorkflowStepsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWaitingWorkflowStepsResponseSuccess
+
+      interface _ListWorkflowBuildVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkflowBuildVersionsResponse]
+        def workflow_summary_list: () -> ::Array[Types::WorkflowSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#list_workflow_build_versions-instance_method
+      def list_workflow_build_versions: (
+                                          workflow_version_arn: ::String,
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _ListWorkflowBuildVersionsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkflowBuildVersionsResponseSuccess
+
+      interface _ListWorkflowExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkflowExecutionsResponse]
+        def request_id: () -> ::String
+        def workflow_executions: () -> ::Array[Types::WorkflowExecutionMetadata]
+        def image_build_version_arn: () -> ::String
+        def message: () -> ::String
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#list_workflow_executions-instance_method
+      def list_workflow_executions: (
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String,
+                                      image_build_version_arn: ::String
+                                    ) -> _ListWorkflowExecutionsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkflowExecutionsResponseSuccess
+
+      interface _ListWorkflowStepExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkflowStepExecutionsResponse]
+        def request_id: () -> ::String
+        def steps: () -> ::Array[Types::WorkflowStepMetadata]
+        def workflow_build_version_arn: () -> ::String
+        def workflow_execution_id: () -> ::String
+        def image_build_version_arn: () -> ::String
+        def message: () -> ::String
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#list_workflow_step_executions-instance_method
+      def list_workflow_step_executions: (
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String,
+                                           workflow_execution_id: ::String
+                                         ) -> _ListWorkflowStepExecutionsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkflowStepExecutionsResponseSuccess
+
+      interface _ListWorkflowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkflowsResponse]
+        def workflow_version_list: () -> ::Array[Types::WorkflowVersion]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#list_workflows-instance_method
+      def list_workflows: (
+                            ?owner: ("Self" | "Shared" | "Amazon" | "ThirdParty"),
+                            ?filters: Array[
+                              {
+                                name: ::String?,
+                                values: Array[::String]?
+                              },
+                            ],
+                            ?by_name: bool,
+                            ?max_results: ::Integer,
+                            ?next_token: ::String
+                          ) -> _ListWorkflowsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkflowsResponseSuccess
+
+      interface _PutComponentPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutComponentPolicyResponse]
+        def request_id: () -> ::String
+        def component_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#put_component_policy-instance_method
+      def put_component_policy: (
+                                  component_arn: ::String,
+                                  policy: ::String
+                                ) -> _PutComponentPolicyResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutComponentPolicyResponseSuccess
+
+      interface _PutContainerRecipePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutContainerRecipePolicyResponse]
+        def request_id: () -> ::String
+        def container_recipe_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#put_container_recipe_policy-instance_method
+      def put_container_recipe_policy: (
+                                         container_recipe_arn: ::String,
+                                         policy: ::String
+                                       ) -> _PutContainerRecipePolicyResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutContainerRecipePolicyResponseSuccess
+
+      interface _PutImagePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutImagePolicyResponse]
+        def request_id: () -> ::String
+        def image_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#put_image_policy-instance_method
+      def put_image_policy: (
+                              image_arn: ::String,
+                              policy: ::String
+                            ) -> _PutImagePolicyResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutImagePolicyResponseSuccess
+
+      interface _PutImageRecipePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutImageRecipePolicyResponse]
+        def request_id: () -> ::String
+        def image_recipe_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#put_image_recipe_policy-instance_method
+      def put_image_recipe_policy: (
+                                     image_recipe_arn: ::String,
+                                     policy: ::String
+                                   ) -> _PutImageRecipePolicyResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutImageRecipePolicyResponseSuccess
+
+      interface _SendWorkflowStepActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendWorkflowStepActionResponse]
+        def step_execution_id: () -> ::String
+        def image_build_version_arn: () -> ::String
+        def client_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#send_workflow_step_action-instance_method
+      def send_workflow_step_action: (
+                                       step_execution_id: ::String,
+                                       image_build_version_arn: ::String,
+                                       action: ("RESUME" | "STOP"),
+                                       ?reason: ::String,
+                                       client_token: ::String
+                                     ) -> _SendWorkflowStepActionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendWorkflowStepActionResponseSuccess
+
+      interface _StartImagePipelineExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartImagePipelineExecutionResponse]
+        def request_id: () -> ::String
+        def client_token: () -> ::String
+        def image_build_version_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#start_image_pipeline_execution-instance_method
+      def start_image_pipeline_execution: (
+                                            image_pipeline_arn: ::String,
+                                            client_token: ::String
+                                          ) -> _StartImagePipelineExecutionResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartImagePipelineExecutionResponseSuccess
+
+      interface _StartResourceStateUpdateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartResourceStateUpdateResponse]
+        def lifecycle_execution_id: () -> ::String
+        def resource_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#start_resource_state_update-instance_method
+      def start_resource_state_update: (
+                                         resource_arn: ::String,
+                                         state: {
+                                           status: ("AVAILABLE" | "DELETED" | "DEPRECATED" | "DISABLED")?
+                                         },
+                                         ?execution_role: ::String,
+                                         ?include_resources: {
+                                           amis: bool?,
+                                           snapshots: bool?,
+                                           containers: bool?
+                                         },
+                                         ?exclusion_rules: {
+                                           amis: {
+                                             is_public: bool?,
+                                             regions: Array[::String]?,
+                                             shared_accounts: Array[::String]?,
+                                             last_launched: {
+                                               value: ::Integer,
+                                               unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")
+                                             }?,
+                                             tag_map: Hash[::String, ::String]?
+                                           }?
+                                         },
+                                         ?update_at: ::Time,
+                                         client_token: ::String
+                                       ) -> _StartResourceStateUpdateResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartResourceStateUpdateResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateDistributionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDistributionConfigurationResponse]
+        def request_id: () -> ::String
+        def client_token: () -> ::String
+        def distribution_configuration_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#update_distribution_configuration-instance_method
+      def update_distribution_configuration: (
+                                               distribution_configuration_arn: ::String,
+                                               ?description: ::String,
+                                               distributions: Array[
+                                                 {
+                                                   region: ::String,
+                                                   ami_distribution_configuration: {
+                                                     name: ::String?,
+                                                     description: ::String?,
+                                                     target_account_ids: Array[::String]?,
+                                                     ami_tags: Hash[::String, ::String]?,
+                                                     kms_key_id: ::String?,
+                                                     launch_permission: {
+                                                       user_ids: Array[::String]?,
+                                                       user_groups: Array[::String]?,
+                                                       organization_arns: Array[::String]?,
+                                                       organizational_unit_arns: Array[::String]?
+                                                     }?
+                                                   }?,
+                                                   container_distribution_configuration: {
+                                                     description: ::String?,
+                                                     container_tags: Array[::String]?,
+                                                     target_repository: {
+                                                       service: ("ECR"),
+                                                       repository_name: ::String
+                                                     }
+                                                   }?,
+                                                   license_configuration_arns: Array[::String]?,
+                                                   launch_template_configurations: Array[
+                                                     {
+                                                       launch_template_id: ::String,
+                                                       account_id: ::String?,
+                                                       set_default_version: bool?
+                                                     },
+                                                   ]?,
+                                                   s3_export_configuration: {
+                                                     role_name: ::String,
+                                                     disk_image_format: ("VMDK" | "RAW" | "VHD"),
+                                                     s3_bucket: ::String,
+                                                     s3_prefix: ::String?
+                                                   }?,
+                                                   fast_launch_configurations: Array[
+                                                     {
+                                                       enabled: bool,
+                                                       snapshot_configuration: {
+                                                         target_resource_count: ::Integer?
+                                                       }?,
+                                                       max_parallel_launches: ::Integer?,
+                                                       launch_template: {
+                                                         launch_template_id: ::String?,
+                                                         launch_template_name: ::String?,
+                                                         launch_template_version: ::String?
+                                                       }?,
+                                                       account_id: ::String?
+                                                     },
+                                                   ]?
+                                                 },
+                                               ],
+                                               client_token: ::String
+                                             ) -> _UpdateDistributionConfigurationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDistributionConfigurationResponseSuccess
+
+      interface _UpdateImagePipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateImagePipelineResponse]
+        def request_id: () -> ::String
+        def client_token: () -> ::String
+        def image_pipeline_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#update_image_pipeline-instance_method
+      def update_image_pipeline: (
+                                   image_pipeline_arn: ::String,
+                                   ?description: ::String,
+                                   ?image_recipe_arn: ::String,
+                                   ?container_recipe_arn: ::String,
+                                   infrastructure_configuration_arn: ::String,
+                                   ?distribution_configuration_arn: ::String,
+                                   ?image_tests_configuration: {
+                                     image_tests_enabled: bool?,
+                                     timeout_minutes: ::Integer?
+                                   },
+                                   ?enhanced_image_metadata_enabled: bool,
+                                   ?schedule: {
+                                     schedule_expression: ::String?,
+                                     timezone: ::String?,
+                                     pipeline_execution_start_condition: ("EXPRESSION_MATCH_ONLY" | "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE")?
+                                   },
+                                   ?status: ("DISABLED" | "ENABLED"),
+                                   client_token: ::String,
+                                   ?image_scanning_configuration: {
+                                     image_scanning_enabled: bool?,
+                                     ecr_configuration: {
+                                       repository_name: ::String?,
+                                       container_tags: Array[::String]?
+                                     }?
+                                   },
+                                   ?workflows: Array[
+                                     {
+                                       workflow_arn: ::String,
+                                       parameters: Array[
+                                         {
+                                           name: ::String,
+                                           value: Array[::String]
+                                         },
+                                       ]?,
+                                       parallel_group: ::String?,
+                                       on_failure: ("CONTINUE" | "ABORT")?
+                                     },
+                                   ],
+                                   ?execution_role: ::String
+                                 ) -> _UpdateImagePipelineResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateImagePipelineResponseSuccess
+
+      interface _UpdateInfrastructureConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateInfrastructureConfigurationResponse]
+        def request_id: () -> ::String
+        def client_token: () -> ::String
+        def infrastructure_configuration_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#update_infrastructure_configuration-instance_method
+      def update_infrastructure_configuration: (
+                                                 infrastructure_configuration_arn: ::String,
+                                                 ?description: ::String,
+                                                 ?instance_types: Array[::String],
+                                                 instance_profile_name: ::String,
+                                                 ?security_group_ids: Array[::String],
+                                                 ?subnet_id: ::String,
+                                                 ?logging: {
+                                                   s3_logs: {
+                                                     s3_bucket_name: ::String?,
+                                                     s3_key_prefix: ::String?
+                                                   }?
+                                                 },
+                                                 ?key_pair: ::String,
+                                                 ?terminate_instance_on_failure: bool,
+                                                 ?sns_topic_arn: ::String,
+                                                 client_token: ::String,
+                                                 ?resource_tags: Hash[::String, ::String],
+                                                 ?instance_metadata_options: {
+                                                   http_tokens: ::String?,
+                                                   http_put_response_hop_limit: ::Integer?
+                                                 }
+                                               ) -> _UpdateInfrastructureConfigurationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateInfrastructureConfigurationResponseSuccess
+
+      interface _UpdateLifecyclePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLifecyclePolicyResponse]
+        def lifecycle_policy_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#update_lifecycle_policy-instance_method
+      def update_lifecycle_policy: (
+                                     lifecycle_policy_arn: ::String,
+                                     ?description: ::String,
+                                     ?status: ("DISABLED" | "ENABLED"),
+                                     execution_role: ::String,
+                                     resource_type: ("AMI_IMAGE" | "CONTAINER_IMAGE"),
+                                     policy_details: Array[
+                                       {
+                                         action: {
+                                           type: ("DELETE" | "DEPRECATE" | "DISABLE"),
+                                           include_resources: {
+                                             amis: bool?,
+                                             snapshots: bool?,
+                                             containers: bool?
+                                           }?
+                                         },
+                                         filter: {
+                                           type: ("AGE" | "COUNT"),
+                                           value: ::Integer,
+                                           unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")?,
+                                           retain_at_least: ::Integer?
+                                         },
+                                         exclusion_rules: {
+                                           tag_map: Hash[::String, ::String]?,
+                                           amis: {
+                                             is_public: bool?,
+                                             regions: Array[::String]?,
+                                             shared_accounts: Array[::String]?,
+                                             last_launched: {
+                                               value: ::Integer,
+                                               unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")
+                                             }?,
+                                             tag_map: Hash[::String, ::String]?
+                                           }?
+                                         }?
+                                       },
+                                     ],
+                                     resource_selection: {
+                                       recipes: Array[
+                                         {
+                                           name: ::String,
+                                           semantic_version: ::String
+                                         },
+                                       ]?,
+                                       tag_map: Hash[::String, ::String]?
+                                     },
+                                     client_token: ::String
+                                   ) -> _UpdateLifecyclePolicyResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLifecyclePolicyResponseSuccess
+    end
+  end
+end
+

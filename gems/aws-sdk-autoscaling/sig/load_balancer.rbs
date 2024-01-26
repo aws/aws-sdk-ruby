@@ -1,0 +1,62 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AutoScaling
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LoadBalancer.html
+    class LoadBalancer
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LoadBalancer.html#initialize-instance_method
+      def initialize: (String group_name, String name, Hash[Symbol, untyped] options) -> void
+                    | (group_name: String, name: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LoadBalancer.html#group_name-instance_method
+      def group_name: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LoadBalancer.html#name-instance_method
+      def name: () -> String
+      alias load_balancer_name name
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LoadBalancer.html#state-instance_method
+      def state: () -> ::String
+
+      def client: () -> Client
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LoadBalancer.html#data-instance_method
+      def data: () -> Types::LoadBalancerState
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LoadBalancer.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LoadBalancer.html#attach-instance_method
+      def attach: (
+                  ) -> Types::AttachLoadBalancersResultType
+                | (?Hash[Symbol, untyped]) -> Types::AttachLoadBalancersResultType
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LoadBalancer.html#detach-instance_method
+      def detach: (
+                  ) -> Types::DetachLoadBalancersResultType
+                | (?Hash[Symbol, untyped]) -> Types::DetachLoadBalancersResultType
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LoadBalancer.html#group-instance_method
+      def group: () -> AutoScalingGroup
+
+      class Collection < ::Aws::Resources::Collection[LoadBalancer]
+
+        def batch_attach: (
+                          ) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def batch_detach: (
+                          ) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+      end
+    end
+  end
+end

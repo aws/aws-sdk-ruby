@@ -1,0 +1,1449 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Lambda
+  module Types
+
+    class AccountLimit
+      attr_accessor total_code_size: ::Integer
+      attr_accessor code_size_unzipped: ::Integer
+      attr_accessor code_size_zipped: ::Integer
+      attr_accessor concurrent_executions: ::Integer
+      attr_accessor unreserved_concurrent_executions: ::Integer
+      SENSITIVE: []
+    end
+
+    class AccountUsage
+      attr_accessor total_code_size: ::Integer
+      attr_accessor function_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class AddLayerVersionPermissionRequest
+      attr_accessor layer_name: ::String
+      attr_accessor version_number: ::Integer
+      attr_accessor statement_id: ::String
+      attr_accessor action: ::String
+      attr_accessor principal: ::String
+      attr_accessor organization_id: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class AddLayerVersionPermissionResponse
+      attr_accessor statement: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class AddPermissionRequest
+      attr_accessor function_name: ::String
+      attr_accessor statement_id: ::String
+      attr_accessor action: ::String
+      attr_accessor principal: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor source_account: ::String
+      attr_accessor event_source_token: ::String
+      attr_accessor qualifier: ::String
+      attr_accessor revision_id: ::String
+      attr_accessor principal_org_id: ::String
+      attr_accessor function_url_auth_type: ("NONE" | "AWS_IAM")
+      SENSITIVE: []
+    end
+
+    class AddPermissionResponse
+      attr_accessor statement: ::String
+      SENSITIVE: []
+    end
+
+    class AliasConfiguration
+      attr_accessor alias_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor function_version: ::String
+      attr_accessor description: ::String
+      attr_accessor routing_config: Types::AliasRoutingConfiguration
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class AliasRoutingConfiguration
+      attr_accessor additional_version_weights: ::Hash[::String, ::Float]
+      SENSITIVE: []
+    end
+
+    class AllowedPublishers
+      attr_accessor signing_profile_version_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AmazonManagedKafkaEventSourceConfig
+      attr_accessor consumer_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class CodeSigningConfig
+      attr_accessor code_signing_config_id: ::String
+      attr_accessor code_signing_config_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor allowed_publishers: Types::AllowedPublishers
+      attr_accessor code_signing_policies: Types::CodeSigningPolicies
+      attr_accessor last_modified: ::Time
+      SENSITIVE: []
+    end
+
+    class CodeSigningConfigNotFoundException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CodeSigningPolicies
+      attr_accessor untrusted_artifact_on_deployment: ("Warn" | "Enforce")
+      SENSITIVE: []
+    end
+
+    class CodeStorageExceededException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CodeVerificationFailedException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Concurrency
+      attr_accessor reserved_concurrent_executions: ::Integer
+      SENSITIVE: []
+    end
+
+    class Cors
+      attr_accessor allow_credentials: bool
+      attr_accessor allow_headers: ::Array[::String]
+      attr_accessor allow_methods: ::Array[::String]
+      attr_accessor allow_origins: ::Array[::String]
+      attr_accessor expose_headers: ::Array[::String]
+      attr_accessor max_age: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateAliasRequest
+      attr_accessor function_name: ::String
+      attr_accessor name: ::String
+      attr_accessor function_version: ::String
+      attr_accessor description: ::String
+      attr_accessor routing_config: Types::AliasRoutingConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateCodeSigningConfigRequest
+      attr_accessor description: ::String
+      attr_accessor allowed_publishers: Types::AllowedPublishers
+      attr_accessor code_signing_policies: Types::CodeSigningPolicies
+      SENSITIVE: []
+    end
+
+    class CreateCodeSigningConfigResponse
+      attr_accessor code_signing_config: Types::CodeSigningConfig
+      SENSITIVE: []
+    end
+
+    class CreateEventSourceMappingRequest
+      attr_accessor event_source_arn: ::String
+      attr_accessor function_name: ::String
+      attr_accessor enabled: bool
+      attr_accessor batch_size: ::Integer
+      attr_accessor filter_criteria: Types::FilterCriteria
+      attr_accessor maximum_batching_window_in_seconds: ::Integer
+      attr_accessor parallelization_factor: ::Integer
+      attr_accessor starting_position: ("TRIM_HORIZON" | "LATEST" | "AT_TIMESTAMP")
+      attr_accessor starting_position_timestamp: ::Time
+      attr_accessor destination_config: Types::DestinationConfig
+      attr_accessor maximum_record_age_in_seconds: ::Integer
+      attr_accessor bisect_batch_on_function_error: bool
+      attr_accessor maximum_retry_attempts: ::Integer
+      attr_accessor tumbling_window_in_seconds: ::Integer
+      attr_accessor topics: ::Array[::String]
+      attr_accessor queues: ::Array[::String]
+      attr_accessor source_access_configurations: ::Array[Types::SourceAccessConfiguration]
+      attr_accessor self_managed_event_source: Types::SelfManagedEventSource
+      attr_accessor function_response_types: ::Array[("ReportBatchItemFailures")]
+      attr_accessor amazon_managed_kafka_event_source_config: Types::AmazonManagedKafkaEventSourceConfig
+      attr_accessor self_managed_kafka_event_source_config: Types::SelfManagedKafkaEventSourceConfig
+      attr_accessor scaling_config: Types::ScalingConfig
+      attr_accessor document_db_event_source_config: Types::DocumentDBEventSourceConfig
+      SENSITIVE: []
+    end
+
+    class CreateFunctionRequest
+      attr_accessor function_name: ::String
+      attr_accessor runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21")
+      attr_accessor role: ::String
+      attr_accessor handler: ::String
+      attr_accessor code: Types::FunctionCode
+      attr_accessor description: ::String
+      attr_accessor timeout: ::Integer
+      attr_accessor memory_size: ::Integer
+      attr_accessor publish: bool
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor package_type: ("Zip" | "Image")
+      attr_accessor dead_letter_config: Types::DeadLetterConfig
+      attr_accessor environment: Types::Environment
+      attr_accessor kms_key_arn: ::String
+      attr_accessor tracing_config: Types::TracingConfig
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor layers: ::Array[::String]
+      attr_accessor file_system_configs: ::Array[Types::FileSystemConfig]
+      attr_accessor image_config: Types::ImageConfig
+      attr_accessor code_signing_config_arn: ::String
+      attr_accessor architectures: ::Array[("x86_64" | "arm64")]
+      attr_accessor ephemeral_storage: Types::EphemeralStorage
+      attr_accessor snap_start: Types::SnapStart
+      attr_accessor logging_config: Types::LoggingConfig
+      SENSITIVE: []
+    end
+
+    class CreateFunctionUrlConfigRequest
+      attr_accessor function_name: ::String
+      attr_accessor qualifier: ::String
+      attr_accessor auth_type: ("NONE" | "AWS_IAM")
+      attr_accessor cors: Types::Cors
+      attr_accessor invoke_mode: ("BUFFERED" | "RESPONSE_STREAM")
+      SENSITIVE: []
+    end
+
+    class CreateFunctionUrlConfigResponse
+      attr_accessor function_url: ::String
+      attr_accessor function_arn: ::String
+      attr_accessor auth_type: ("NONE" | "AWS_IAM")
+      attr_accessor cors: Types::Cors
+      attr_accessor creation_time: ::Time
+      attr_accessor invoke_mode: ("BUFFERED" | "RESPONSE_STREAM")
+      SENSITIVE: []
+    end
+
+    class DeadLetterConfig
+      attr_accessor target_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAliasRequest
+      attr_accessor function_name: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCodeSigningConfigRequest
+      attr_accessor code_signing_config_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCodeSigningConfigResponse < Aws::EmptyStructure
+    end
+
+    class DeleteEventSourceMappingRequest
+      attr_accessor uuid: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFunctionCodeSigningConfigRequest
+      attr_accessor function_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFunctionConcurrencyRequest
+      attr_accessor function_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFunctionEventInvokeConfigRequest
+      attr_accessor function_name: ::String
+      attr_accessor qualifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFunctionRequest
+      attr_accessor function_name: ::String
+      attr_accessor qualifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFunctionUrlConfigRequest
+      attr_accessor function_name: ::String
+      attr_accessor qualifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLayerVersionRequest
+      attr_accessor layer_name: ::String
+      attr_accessor version_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteProvisionedConcurrencyConfigRequest
+      attr_accessor function_name: ::String
+      attr_accessor qualifier: ::String
+      SENSITIVE: []
+    end
+
+    class DestinationConfig
+      attr_accessor on_success: Types::OnSuccess
+      attr_accessor on_failure: Types::OnFailure
+      SENSITIVE: []
+    end
+
+    class DocumentDBEventSourceConfig
+      attr_accessor database_name: ::String
+      attr_accessor collection_name: ::String
+      attr_accessor full_document: ("UpdateLookup" | "Default")
+      SENSITIVE: []
+    end
+
+    class EC2AccessDeniedException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EC2ThrottledException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EC2UnexpectedException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      attr_accessor ec2_error_code: ::String
+      SENSITIVE: []
+    end
+
+    class EFSIOException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EFSMountConnectivityException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EFSMountFailureException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EFSMountTimeoutException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ENILimitReachedException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Environment
+      attr_accessor variables: ::Hash[::String, ::String]
+      SENSITIVE: [:variables]
+    end
+
+    class EnvironmentError
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: [:message]
+    end
+
+    class EnvironmentResponse
+      attr_accessor variables: ::Hash[::String, ::String]
+      attr_accessor error: Types::EnvironmentError
+      SENSITIVE: [:variables]
+    end
+
+    class EphemeralStorage
+      attr_accessor size: ::Integer
+      SENSITIVE: []
+    end
+
+    class EventSourceMappingConfiguration
+      attr_accessor uuid: ::String
+      attr_accessor starting_position: ("TRIM_HORIZON" | "LATEST" | "AT_TIMESTAMP")
+      attr_accessor starting_position_timestamp: ::Time
+      attr_accessor batch_size: ::Integer
+      attr_accessor maximum_batching_window_in_seconds: ::Integer
+      attr_accessor parallelization_factor: ::Integer
+      attr_accessor event_source_arn: ::String
+      attr_accessor filter_criteria: Types::FilterCriteria
+      attr_accessor function_arn: ::String
+      attr_accessor last_modified: ::Time
+      attr_accessor last_processing_result: ::String
+      attr_accessor state: ::String
+      attr_accessor state_transition_reason: ::String
+      attr_accessor destination_config: Types::DestinationConfig
+      attr_accessor topics: ::Array[::String]
+      attr_accessor queues: ::Array[::String]
+      attr_accessor source_access_configurations: ::Array[Types::SourceAccessConfiguration]
+      attr_accessor self_managed_event_source: Types::SelfManagedEventSource
+      attr_accessor maximum_record_age_in_seconds: ::Integer
+      attr_accessor bisect_batch_on_function_error: bool
+      attr_accessor maximum_retry_attempts: ::Integer
+      attr_accessor tumbling_window_in_seconds: ::Integer
+      attr_accessor function_response_types: ::Array[("ReportBatchItemFailures")]
+      attr_accessor amazon_managed_kafka_event_source_config: Types::AmazonManagedKafkaEventSourceConfig
+      attr_accessor self_managed_kafka_event_source_config: Types::SelfManagedKafkaEventSourceConfig
+      attr_accessor scaling_config: Types::ScalingConfig
+      attr_accessor document_db_event_source_config: Types::DocumentDBEventSourceConfig
+      SENSITIVE: []
+    end
+
+    class FileSystemConfig
+      attr_accessor arn: ::String
+      attr_accessor local_mount_path: ::String
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor pattern: ::String
+      SENSITIVE: []
+    end
+
+    class FilterCriteria
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class FunctionCode
+      attr_accessor zip_file: ::String
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_key: ::String
+      attr_accessor s3_object_version: ::String
+      attr_accessor image_uri: ::String
+      SENSITIVE: [:zip_file]
+    end
+
+    class FunctionCodeLocation
+      attr_accessor repository_type: ::String
+      attr_accessor location: ::String
+      attr_accessor image_uri: ::String
+      attr_accessor resolved_image_uri: ::String
+      SENSITIVE: []
+    end
+
+    class FunctionConfiguration
+      attr_accessor function_name: ::String
+      attr_accessor function_arn: ::String
+      attr_accessor runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21")
+      attr_accessor role: ::String
+      attr_accessor handler: ::String
+      attr_accessor code_size: ::Integer
+      attr_accessor description: ::String
+      attr_accessor timeout: ::Integer
+      attr_accessor memory_size: ::Integer
+      attr_accessor last_modified: ::Time
+      attr_accessor code_sha_256: ::String
+      attr_accessor version: ::String
+      attr_accessor vpc_config: Types::VpcConfigResponse
+      attr_accessor dead_letter_config: Types::DeadLetterConfig
+      attr_accessor environment: Types::EnvironmentResponse
+      attr_accessor kms_key_arn: ::String
+      attr_accessor tracing_config: Types::TracingConfigResponse
+      attr_accessor master_arn: ::String
+      attr_accessor revision_id: ::String
+      attr_accessor layers: ::Array[Types::Layer]
+      attr_accessor state: ("Pending" | "Active" | "Inactive" | "Failed")
+      attr_accessor state_reason: ::String
+      attr_accessor state_reason_code: ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError")
+      attr_accessor last_update_status: ("Successful" | "Failed" | "InProgress")
+      attr_accessor last_update_status_reason: ::String
+      attr_accessor last_update_status_reason_code: ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError")
+      attr_accessor file_system_configs: ::Array[Types::FileSystemConfig]
+      attr_accessor package_type: ("Zip" | "Image")
+      attr_accessor image_config_response: Types::ImageConfigResponse
+      attr_accessor signing_profile_version_arn: ::String
+      attr_accessor signing_job_arn: ::String
+      attr_accessor architectures: ::Array[("x86_64" | "arm64")]
+      attr_accessor ephemeral_storage: Types::EphemeralStorage
+      attr_accessor snap_start: Types::SnapStartResponse
+      attr_accessor runtime_version_config: Types::RuntimeVersionConfig
+      attr_accessor logging_config: Types::LoggingConfig
+      SENSITIVE: []
+    end
+
+    class FunctionEventInvokeConfig
+      attr_accessor last_modified: ::Time
+      attr_accessor function_arn: ::String
+      attr_accessor maximum_retry_attempts: ::Integer
+      attr_accessor maximum_event_age_in_seconds: ::Integer
+      attr_accessor destination_config: Types::DestinationConfig
+      SENSITIVE: []
+    end
+
+    class FunctionUrlConfig
+      attr_accessor function_url: ::String
+      attr_accessor function_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor cors: Types::Cors
+      attr_accessor auth_type: ("NONE" | "AWS_IAM")
+      attr_accessor invoke_mode: ("BUFFERED" | "RESPONSE_STREAM")
+      SENSITIVE: []
+    end
+
+    class GetAccountSettingsRequest < Aws::EmptyStructure
+    end
+
+    class GetAccountSettingsResponse
+      attr_accessor account_limit: Types::AccountLimit
+      attr_accessor account_usage: Types::AccountUsage
+      SENSITIVE: []
+    end
+
+    class GetAliasRequest
+      attr_accessor function_name: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetCodeSigningConfigRequest
+      attr_accessor code_signing_config_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetCodeSigningConfigResponse
+      attr_accessor code_signing_config: Types::CodeSigningConfig
+      SENSITIVE: []
+    end
+
+    class GetEventSourceMappingRequest
+      attr_accessor uuid: ::String
+      SENSITIVE: []
+    end
+
+    class GetFunctionCodeSigningConfigRequest
+      attr_accessor function_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetFunctionCodeSigningConfigResponse
+      attr_accessor code_signing_config_arn: ::String
+      attr_accessor function_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetFunctionConcurrencyRequest
+      attr_accessor function_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetFunctionConcurrencyResponse
+      attr_accessor reserved_concurrent_executions: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetFunctionConfigurationRequest
+      attr_accessor function_name: ::String
+      attr_accessor qualifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetFunctionEventInvokeConfigRequest
+      attr_accessor function_name: ::String
+      attr_accessor qualifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetFunctionRequest
+      attr_accessor function_name: ::String
+      attr_accessor qualifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetFunctionResponse
+      attr_accessor configuration: Types::FunctionConfiguration
+      attr_accessor code: Types::FunctionCodeLocation
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor concurrency: Types::Concurrency
+      SENSITIVE: []
+    end
+
+    class GetFunctionUrlConfigRequest
+      attr_accessor function_name: ::String
+      attr_accessor qualifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetFunctionUrlConfigResponse
+      attr_accessor function_url: ::String
+      attr_accessor function_arn: ::String
+      attr_accessor auth_type: ("NONE" | "AWS_IAM")
+      attr_accessor cors: Types::Cors
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor invoke_mode: ("BUFFERED" | "RESPONSE_STREAM")
+      SENSITIVE: []
+    end
+
+    class GetLayerVersionByArnRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetLayerVersionPolicyRequest
+      attr_accessor layer_name: ::String
+      attr_accessor version_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetLayerVersionPolicyResponse
+      attr_accessor policy: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetLayerVersionRequest
+      attr_accessor layer_name: ::String
+      attr_accessor version_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetLayerVersionResponse
+      attr_accessor content: Types::LayerVersionContentOutput
+      attr_accessor layer_arn: ::String
+      attr_accessor layer_version_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor version: ::Integer
+      attr_accessor compatible_runtimes: ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21")]
+      attr_accessor license_info: ::String
+      attr_accessor compatible_architectures: ::Array[("x86_64" | "arm64")]
+      SENSITIVE: []
+    end
+
+    class GetPolicyRequest
+      attr_accessor function_name: ::String
+      attr_accessor qualifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetPolicyResponse
+      attr_accessor policy: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetProvisionedConcurrencyConfigRequest
+      attr_accessor function_name: ::String
+      attr_accessor qualifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetProvisionedConcurrencyConfigResponse
+      attr_accessor requested_provisioned_concurrent_executions: ::Integer
+      attr_accessor available_provisioned_concurrent_executions: ::Integer
+      attr_accessor allocated_provisioned_concurrent_executions: ::Integer
+      attr_accessor status: ("IN_PROGRESS" | "READY" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor last_modified: ::Time
+      SENSITIVE: []
+    end
+
+    class GetRuntimeManagementConfigRequest
+      attr_accessor function_name: ::String
+      attr_accessor qualifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetRuntimeManagementConfigResponse
+      attr_accessor update_runtime_on: ("Auto" | "Manual" | "FunctionUpdate")
+      attr_accessor runtime_version_arn: ::String
+      attr_accessor function_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ImageConfig
+      attr_accessor entry_point: ::Array[::String]
+      attr_accessor command: ::Array[::String]
+      attr_accessor working_directory: ::String
+      SENSITIVE: []
+    end
+
+    class ImageConfigError
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: [:message]
+    end
+
+    class ImageConfigResponse
+      attr_accessor image_config: Types::ImageConfig
+      attr_accessor error: Types::ImageConfigError
+      SENSITIVE: []
+    end
+
+    class InvalidCodeSignatureException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterValueException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestContentException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRuntimeException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidSecurityGroupIDException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidSubnetIDException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidZipFileException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvocationRequest
+      attr_accessor function_name: ::String
+      attr_accessor invocation_type: ("Event" | "RequestResponse" | "DryRun")
+      attr_accessor log_type: ("None" | "Tail")
+      attr_accessor client_context: ::String
+      attr_accessor payload: ::String
+      attr_accessor qualifier: ::String
+      SENSITIVE: [:payload]
+    end
+
+    class InvocationResponse
+      attr_accessor status_code: ::Integer
+      attr_accessor function_error: ::String
+      attr_accessor log_result: ::String
+      attr_accessor payload: ::String
+      attr_accessor executed_version: ::String
+      SENSITIVE: [:payload]
+    end
+
+    class InvokeAsyncRequest
+      attr_accessor function_name: ::String
+      attr_accessor invoke_args: ::IO
+      SENSITIVE: []
+    end
+
+    class InvokeAsyncResponse
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class InvokeResponseStreamUpdate
+      attr_accessor payload: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: [:payload]
+    end
+
+    class InvokeWithResponseStreamCompleteEvent
+      attr_accessor error_code: ::String
+      attr_accessor error_details: ::String
+      attr_accessor log_result: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class InvokeWithResponseStreamRequest
+      attr_accessor function_name: ::String
+      attr_accessor invocation_type: ("RequestResponse" | "DryRun")
+      attr_accessor log_type: ("None" | "Tail")
+      attr_accessor client_context: ::String
+      attr_accessor qualifier: ::String
+      attr_accessor payload: ::String
+      SENSITIVE: [:payload]
+    end
+
+    class InvokeWithResponseStreamResponse
+      attr_accessor status_code: ::Integer
+      attr_accessor executed_version: ::String
+      attr_accessor event_stream: Types::InvokeWithResponseStreamResponseEvent
+      attr_accessor response_stream_content_type: ::String
+      SENSITIVE: []
+    end
+
+    class KMSAccessDeniedException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KMSDisabledException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KMSInvalidStateException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KMSNotFoundException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Layer
+      attr_accessor arn: ::String
+      attr_accessor code_size: ::Integer
+      attr_accessor signing_profile_version_arn: ::String
+      attr_accessor signing_job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class LayerVersionContentInput
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_key: ::String
+      attr_accessor s3_object_version: ::String
+      attr_accessor zip_file: ::String
+      SENSITIVE: [:zip_file]
+    end
+
+    class LayerVersionContentOutput
+      attr_accessor location: ::String
+      attr_accessor code_sha_256: ::String
+      attr_accessor code_size: ::Integer
+      attr_accessor signing_profile_version_arn: ::String
+      attr_accessor signing_job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class LayerVersionsListItem
+      attr_accessor layer_version_arn: ::String
+      attr_accessor version: ::Integer
+      attr_accessor description: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor compatible_runtimes: ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21")]
+      attr_accessor license_info: ::String
+      attr_accessor compatible_architectures: ::Array[("x86_64" | "arm64")]
+      SENSITIVE: []
+    end
+
+    class LayersListItem
+      attr_accessor layer_name: ::String
+      attr_accessor layer_arn: ::String
+      attr_accessor latest_matching_version: Types::LayerVersionsListItem
+      SENSITIVE: []
+    end
+
+    class ListAliasesRequest
+      attr_accessor function_name: ::String
+      attr_accessor function_version: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAliasesResponse
+      attr_accessor next_marker: ::String
+      attr_accessor aliases: ::Array[Types::AliasConfiguration]
+      SENSITIVE: []
+    end
+
+    class ListCodeSigningConfigsRequest
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCodeSigningConfigsResponse
+      attr_accessor next_marker: ::String
+      attr_accessor code_signing_configs: ::Array[Types::CodeSigningConfig]
+      SENSITIVE: []
+    end
+
+    class ListEventSourceMappingsRequest
+      attr_accessor event_source_arn: ::String
+      attr_accessor function_name: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEventSourceMappingsResponse
+      attr_accessor next_marker: ::String
+      attr_accessor event_source_mappings: ::Array[Types::EventSourceMappingConfiguration]
+      SENSITIVE: []
+    end
+
+    class ListFunctionEventInvokeConfigsRequest
+      attr_accessor function_name: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFunctionEventInvokeConfigsResponse
+      attr_accessor function_event_invoke_configs: ::Array[Types::FunctionEventInvokeConfig]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListFunctionUrlConfigsRequest
+      attr_accessor function_name: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFunctionUrlConfigsResponse
+      attr_accessor function_url_configs: ::Array[Types::FunctionUrlConfig]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListFunctionsByCodeSigningConfigRequest
+      attr_accessor code_signing_config_arn: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFunctionsByCodeSigningConfigResponse
+      attr_accessor next_marker: ::String
+      attr_accessor function_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListFunctionsRequest
+      attr_accessor master_region: ::String
+      attr_accessor function_version: ("ALL")
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFunctionsResponse
+      attr_accessor next_marker: ::String
+      attr_accessor functions: ::Array[Types::FunctionConfiguration]
+      SENSITIVE: []
+    end
+
+    class ListLayerVersionsRequest
+      attr_accessor compatible_runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21")
+      attr_accessor layer_name: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor compatible_architecture: ("x86_64" | "arm64")
+      SENSITIVE: []
+    end
+
+    class ListLayerVersionsResponse
+      attr_accessor next_marker: ::String
+      attr_accessor layer_versions: ::Array[Types::LayerVersionsListItem]
+      SENSITIVE: []
+    end
+
+    class ListLayersRequest
+      attr_accessor compatible_runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21")
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor compatible_architecture: ("x86_64" | "arm64")
+      SENSITIVE: []
+    end
+
+    class ListLayersResponse
+      attr_accessor next_marker: ::String
+      attr_accessor layers: ::Array[Types::LayersListItem]
+      SENSITIVE: []
+    end
+
+    class ListProvisionedConcurrencyConfigsRequest
+      attr_accessor function_name: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListProvisionedConcurrencyConfigsResponse
+      attr_accessor provisioned_concurrency_configs: ::Array[Types::ProvisionedConcurrencyConfigListItem]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsRequest
+      attr_accessor resource: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListVersionsByFunctionRequest
+      attr_accessor function_name: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListVersionsByFunctionResponse
+      attr_accessor next_marker: ::String
+      attr_accessor versions: ::Array[Types::FunctionConfiguration]
+      SENSITIVE: []
+    end
+
+    class LoggingConfig
+      attr_accessor log_format: ("JSON" | "Text")
+      attr_accessor application_log_level: ("TRACE" | "DEBUG" | "INFO" | "WARN" | "ERROR" | "FATAL")
+      attr_accessor system_log_level: ("DEBUG" | "INFO" | "WARN")
+      attr_accessor log_group: ::String
+      SENSITIVE: []
+    end
+
+    class OnFailure
+      attr_accessor destination: ::String
+      SENSITIVE: []
+    end
+
+    class OnSuccess
+      attr_accessor destination: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyLengthExceededException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PreconditionFailedException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ProvisionedConcurrencyConfigListItem
+      attr_accessor function_arn: ::String
+      attr_accessor requested_provisioned_concurrent_executions: ::Integer
+      attr_accessor available_provisioned_concurrent_executions: ::Integer
+      attr_accessor allocated_provisioned_concurrent_executions: ::Integer
+      attr_accessor status: ("IN_PROGRESS" | "READY" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor last_modified: ::Time
+      SENSITIVE: []
+    end
+
+    class ProvisionedConcurrencyConfigNotFoundException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PublishLayerVersionRequest
+      attr_accessor layer_name: ::String
+      attr_accessor description: ::String
+      attr_accessor content: Types::LayerVersionContentInput
+      attr_accessor compatible_runtimes: ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21")]
+      attr_accessor license_info: ::String
+      attr_accessor compatible_architectures: ::Array[("x86_64" | "arm64")]
+      SENSITIVE: []
+    end
+
+    class PublishLayerVersionResponse
+      attr_accessor content: Types::LayerVersionContentOutput
+      attr_accessor layer_arn: ::String
+      attr_accessor layer_version_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor version: ::Integer
+      attr_accessor compatible_runtimes: ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21")]
+      attr_accessor license_info: ::String
+      attr_accessor compatible_architectures: ::Array[("x86_64" | "arm64")]
+      SENSITIVE: []
+    end
+
+    class PublishVersionRequest
+      attr_accessor function_name: ::String
+      attr_accessor code_sha_256: ::String
+      attr_accessor description: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutFunctionCodeSigningConfigRequest
+      attr_accessor code_signing_config_arn: ::String
+      attr_accessor function_name: ::String
+      SENSITIVE: []
+    end
+
+    class PutFunctionCodeSigningConfigResponse
+      attr_accessor code_signing_config_arn: ::String
+      attr_accessor function_name: ::String
+      SENSITIVE: []
+    end
+
+    class PutFunctionConcurrencyRequest
+      attr_accessor function_name: ::String
+      attr_accessor reserved_concurrent_executions: ::Integer
+      SENSITIVE: []
+    end
+
+    class PutFunctionEventInvokeConfigRequest
+      attr_accessor function_name: ::String
+      attr_accessor qualifier: ::String
+      attr_accessor maximum_retry_attempts: ::Integer
+      attr_accessor maximum_event_age_in_seconds: ::Integer
+      attr_accessor destination_config: Types::DestinationConfig
+      SENSITIVE: []
+    end
+
+    class PutProvisionedConcurrencyConfigRequest
+      attr_accessor function_name: ::String
+      attr_accessor qualifier: ::String
+      attr_accessor provisioned_concurrent_executions: ::Integer
+      SENSITIVE: []
+    end
+
+    class PutProvisionedConcurrencyConfigResponse
+      attr_accessor requested_provisioned_concurrent_executions: ::Integer
+      attr_accessor available_provisioned_concurrent_executions: ::Integer
+      attr_accessor allocated_provisioned_concurrent_executions: ::Integer
+      attr_accessor status: ("IN_PROGRESS" | "READY" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor last_modified: ::Time
+      SENSITIVE: []
+    end
+
+    class PutRuntimeManagementConfigRequest
+      attr_accessor function_name: ::String
+      attr_accessor qualifier: ::String
+      attr_accessor update_runtime_on: ("Auto" | "Manual" | "FunctionUpdate")
+      attr_accessor runtime_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutRuntimeManagementConfigResponse
+      attr_accessor update_runtime_on: ("Auto" | "Manual" | "FunctionUpdate")
+      attr_accessor function_arn: ::String
+      attr_accessor runtime_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RecursiveInvocationException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveLayerVersionPermissionRequest
+      attr_accessor layer_name: ::String
+      attr_accessor version_number: ::Integer
+      attr_accessor statement_id: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class RemovePermissionRequest
+      attr_accessor function_name: ::String
+      attr_accessor statement_id: ::String
+      attr_accessor qualifier: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class RequestTooLargeException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceConflictException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotReadyException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RuntimeVersionConfig
+      attr_accessor runtime_version_arn: ::String
+      attr_accessor error: Types::RuntimeVersionError
+      SENSITIVE: []
+    end
+
+    class RuntimeVersionError
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: [:message]
+    end
+
+    class ScalingConfig
+      attr_accessor maximum_concurrency: ::Integer
+      SENSITIVE: []
+    end
+
+    class SelfManagedEventSource
+      attr_accessor endpoints: ::Hash[("KAFKA_BOOTSTRAP_SERVERS"), ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class SelfManagedKafkaEventSourceConfig
+      attr_accessor consumer_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SnapStart
+      attr_accessor apply_on: ("PublishedVersions" | "None")
+      SENSITIVE: []
+    end
+
+    class SnapStartException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SnapStartNotReadyException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SnapStartResponse
+      attr_accessor apply_on: ("PublishedVersions" | "None")
+      attr_accessor optimization_status: ("On" | "Off")
+      SENSITIVE: []
+    end
+
+    class SnapStartTimeoutException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SourceAccessConfiguration
+      attr_accessor type: ("BASIC_AUTH" | "VPC_SUBNET" | "VPC_SECURITY_GROUP" | "SASL_SCRAM_512_AUTH" | "SASL_SCRAM_256_AUTH" | "VIRTUAL_HOST" | "CLIENT_CERTIFICATE_TLS_AUTH" | "SERVER_ROOT_CA_CERTIFICATE")
+      attr_accessor uri: ::String
+      SENSITIVE: []
+    end
+
+    class SubnetIPAddressLimitReachedException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor retry_after_seconds: ::String
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      attr_accessor reason: ("ConcurrentInvocationLimitExceeded" | "FunctionInvocationRateLimitExceeded" | "ReservedFunctionConcurrentInvocationLimitExceeded" | "ReservedFunctionInvocationRateLimitExceeded" | "CallerRateLimitExceeded" | "ConcurrentSnapshotCreateLimitExceeded")
+      SENSITIVE: []
+    end
+
+    class TracingConfig
+      attr_accessor mode: ("Active" | "PassThrough")
+      SENSITIVE: []
+    end
+
+    class TracingConfigResponse
+      attr_accessor mode: ("Active" | "PassThrough")
+      SENSITIVE: []
+    end
+
+    class UnsupportedMediaTypeException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateAliasRequest
+      attr_accessor function_name: ::String
+      attr_accessor name: ::String
+      attr_accessor function_version: ::String
+      attr_accessor description: ::String
+      attr_accessor routing_config: Types::AliasRoutingConfiguration
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCodeSigningConfigRequest
+      attr_accessor code_signing_config_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor allowed_publishers: Types::AllowedPublishers
+      attr_accessor code_signing_policies: Types::CodeSigningPolicies
+      SENSITIVE: []
+    end
+
+    class UpdateCodeSigningConfigResponse
+      attr_accessor code_signing_config: Types::CodeSigningConfig
+      SENSITIVE: []
+    end
+
+    class UpdateEventSourceMappingRequest
+      attr_accessor uuid: ::String
+      attr_accessor function_name: ::String
+      attr_accessor enabled: bool
+      attr_accessor batch_size: ::Integer
+      attr_accessor filter_criteria: Types::FilterCriteria
+      attr_accessor maximum_batching_window_in_seconds: ::Integer
+      attr_accessor destination_config: Types::DestinationConfig
+      attr_accessor maximum_record_age_in_seconds: ::Integer
+      attr_accessor bisect_batch_on_function_error: bool
+      attr_accessor maximum_retry_attempts: ::Integer
+      attr_accessor parallelization_factor: ::Integer
+      attr_accessor source_access_configurations: ::Array[Types::SourceAccessConfiguration]
+      attr_accessor tumbling_window_in_seconds: ::Integer
+      attr_accessor function_response_types: ::Array[("ReportBatchItemFailures")]
+      attr_accessor scaling_config: Types::ScalingConfig
+      attr_accessor document_db_event_source_config: Types::DocumentDBEventSourceConfig
+      SENSITIVE: []
+    end
+
+    class UpdateFunctionCodeRequest
+      attr_accessor function_name: ::String
+      attr_accessor zip_file: ::String
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_key: ::String
+      attr_accessor s3_object_version: ::String
+      attr_accessor image_uri: ::String
+      attr_accessor publish: bool
+      attr_accessor dry_run: bool
+      attr_accessor revision_id: ::String
+      attr_accessor architectures: ::Array[("x86_64" | "arm64")]
+      SENSITIVE: [:zip_file]
+    end
+
+    class UpdateFunctionConfigurationRequest
+      attr_accessor function_name: ::String
+      attr_accessor role: ::String
+      attr_accessor handler: ::String
+      attr_accessor description: ::String
+      attr_accessor timeout: ::Integer
+      attr_accessor memory_size: ::Integer
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor environment: Types::Environment
+      attr_accessor runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21")
+      attr_accessor dead_letter_config: Types::DeadLetterConfig
+      attr_accessor kms_key_arn: ::String
+      attr_accessor tracing_config: Types::TracingConfig
+      attr_accessor revision_id: ::String
+      attr_accessor layers: ::Array[::String]
+      attr_accessor file_system_configs: ::Array[Types::FileSystemConfig]
+      attr_accessor image_config: Types::ImageConfig
+      attr_accessor ephemeral_storage: Types::EphemeralStorage
+      attr_accessor snap_start: Types::SnapStart
+      attr_accessor logging_config: Types::LoggingConfig
+      SENSITIVE: []
+    end
+
+    class UpdateFunctionEventInvokeConfigRequest
+      attr_accessor function_name: ::String
+      attr_accessor qualifier: ::String
+      attr_accessor maximum_retry_attempts: ::Integer
+      attr_accessor maximum_event_age_in_seconds: ::Integer
+      attr_accessor destination_config: Types::DestinationConfig
+      SENSITIVE: []
+    end
+
+    class UpdateFunctionUrlConfigRequest
+      attr_accessor function_name: ::String
+      attr_accessor qualifier: ::String
+      attr_accessor auth_type: ("NONE" | "AWS_IAM")
+      attr_accessor cors: Types::Cors
+      attr_accessor invoke_mode: ("BUFFERED" | "RESPONSE_STREAM")
+      SENSITIVE: []
+    end
+
+    class UpdateFunctionUrlConfigResponse
+      attr_accessor function_url: ::String
+      attr_accessor function_arn: ::String
+      attr_accessor auth_type: ("NONE" | "AWS_IAM")
+      attr_accessor cors: Types::Cors
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor invoke_mode: ("BUFFERED" | "RESPONSE_STREAM")
+      SENSITIVE: []
+    end
+
+    class VpcConfig
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor ipv_6_allowed_for_dual_stack: bool
+      SENSITIVE: []
+    end
+
+    class VpcConfigResponse
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor vpc_id: ::String
+      attr_accessor ipv_6_allowed_for_dual_stack: bool
+      SENSITIVE: []
+    end
+
+    class InvokeWithResponseStreamResponseEvent < Enumerator[untyped, untyped]
+      def event_types: () -> [:payload_chunk, :invoke_complete]
+    end
+  end
+end

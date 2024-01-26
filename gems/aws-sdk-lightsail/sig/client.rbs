@@ -1,0 +1,2309 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Lightsail
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AllocateStaticIpResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AllocateStaticIpResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#allocate_static_ip-instance_method
+      def allocate_static_ip: (
+                                static_ip_name: ::String
+                              ) -> _AllocateStaticIpResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AllocateStaticIpResponseSuccess
+
+      interface _AttachCertificateToDistributionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AttachCertificateToDistributionResult]
+        def operation: () -> Types::Operation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#attach_certificate_to_distribution-instance_method
+      def attach_certificate_to_distribution: (
+                                                distribution_name: ::String,
+                                                certificate_name: ::String
+                                              ) -> _AttachCertificateToDistributionResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AttachCertificateToDistributionResponseSuccess
+
+      interface _AttachDiskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AttachDiskResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#attach_disk-instance_method
+      def attach_disk: (
+                         disk_name: ::String,
+                         instance_name: ::String,
+                         disk_path: ::String,
+                         ?auto_mounting: bool
+                       ) -> _AttachDiskResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AttachDiskResponseSuccess
+
+      interface _AttachInstancesToLoadBalancerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AttachInstancesToLoadBalancerResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#attach_instances_to_load_balancer-instance_method
+      def attach_instances_to_load_balancer: (
+                                               load_balancer_name: ::String,
+                                               instance_names: Array[::String]
+                                             ) -> _AttachInstancesToLoadBalancerResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AttachInstancesToLoadBalancerResponseSuccess
+
+      interface _AttachLoadBalancerTlsCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AttachLoadBalancerTlsCertificateResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#attach_load_balancer_tls_certificate-instance_method
+      def attach_load_balancer_tls_certificate: (
+                                                  load_balancer_name: ::String,
+                                                  certificate_name: ::String
+                                                ) -> _AttachLoadBalancerTlsCertificateResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AttachLoadBalancerTlsCertificateResponseSuccess
+
+      interface _AttachStaticIpResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AttachStaticIpResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#attach_static_ip-instance_method
+      def attach_static_ip: (
+                              static_ip_name: ::String,
+                              instance_name: ::String
+                            ) -> _AttachStaticIpResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AttachStaticIpResponseSuccess
+
+      interface _CloseInstancePublicPortsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CloseInstancePublicPortsResult]
+        def operation: () -> Types::Operation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#close_instance_public_ports-instance_method
+      def close_instance_public_ports: (
+                                         port_info: {
+                                           from_port: ::Integer?,
+                                           to_port: ::Integer?,
+                                           protocol: ("tcp" | "all" | "udp" | "icmp")?,
+                                           cidrs: Array[::String]?,
+                                           ipv6_cidrs: Array[::String]?,
+                                           cidr_list_aliases: Array[::String]?
+                                         },
+                                         instance_name: ::String
+                                       ) -> _CloseInstancePublicPortsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CloseInstancePublicPortsResponseSuccess
+
+      interface _CopySnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CopySnapshotResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#copy_snapshot-instance_method
+      def copy_snapshot: (
+                           ?source_snapshot_name: ::String,
+                           ?source_resource_name: ::String,
+                           ?restore_date: ::String,
+                           ?use_latest_restorable_auto_snapshot: bool,
+                           target_snapshot_name: ::String,
+                           source_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "eu-north-1")
+                         ) -> _CopySnapshotResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopySnapshotResponseSuccess
+
+      interface _CreateBucketResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBucketResult]
+        def bucket: () -> Types::Bucket
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#create_bucket-instance_method
+      def create_bucket: (
+                           bucket_name: ::String,
+                           bundle_id: ::String,
+                           ?tags: Array[
+                             {
+                               key: ::String?,
+                               value: ::String?
+                             },
+                           ],
+                           ?enable_object_versioning: bool
+                         ) -> _CreateBucketResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBucketResponseSuccess
+
+      interface _CreateBucketAccessKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBucketAccessKeyResult]
+        def access_key: () -> Types::AccessKey
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#create_bucket_access_key-instance_method
+      def create_bucket_access_key: (
+                                      bucket_name: ::String
+                                    ) -> _CreateBucketAccessKeyResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBucketAccessKeyResponseSuccess
+
+      interface _CreateCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCertificateResult]
+        def certificate: () -> Types::CertificateSummary
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#create_certificate-instance_method
+      def create_certificate: (
+                                certificate_name: ::String,
+                                domain_name: ::String,
+                                ?subject_alternative_names: Array[::String],
+                                ?tags: Array[
+                                  {
+                                    key: ::String?,
+                                    value: ::String?
+                                  },
+                                ]
+                              ) -> _CreateCertificateResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCertificateResponseSuccess
+
+      interface _CreateCloudFormationStackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCloudFormationStackResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#create_cloud_formation_stack-instance_method
+      def create_cloud_formation_stack: (
+                                          instances: Array[
+                                            {
+                                              source_name: ::String,
+                                              instance_type: ::String,
+                                              port_info_source: ("DEFAULT" | "INSTANCE" | "NONE" | "CLOSED"),
+                                              user_data: ::String?,
+                                              availability_zone: ::String
+                                            },
+                                          ]
+                                        ) -> _CreateCloudFormationStackResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCloudFormationStackResponseSuccess
+
+      interface _CreateContactMethodResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateContactMethodResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#create_contact_method-instance_method
+      def create_contact_method: (
+                                   protocol: ("Email" | "SMS"),
+                                   contact_endpoint: ::String
+                                 ) -> _CreateContactMethodResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContactMethodResponseSuccess
+
+      interface _CreateContainerServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateContainerServiceResult]
+        def container_service: () -> Types::ContainerService
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#create_container_service-instance_method
+      def create_container_service: (
+                                      service_name: ::String,
+                                      power: ("nano" | "micro" | "small" | "medium" | "large" | "xlarge"),
+                                      scale: ::Integer,
+                                      ?tags: Array[
+                                        {
+                                          key: ::String?,
+                                          value: ::String?
+                                        },
+                                      ],
+                                      ?public_domain_names: Hash[::String, Array[::String]],
+                                      ?deployment: {
+                                        containers: Hash[::String, {
+                                            image: ::String?,
+                                            command: Array[::String]?,
+                                            environment: Hash[::String, ::String]?,
+                                            ports: Hash[::String, ("HTTP" | "HTTPS" | "TCP" | "UDP")]?
+                                          }]?,
+                                        public_endpoint: {
+                                          container_name: ::String,
+                                          container_port: ::Integer,
+                                          health_check: {
+                                            healthy_threshold: ::Integer?,
+                                            unhealthy_threshold: ::Integer?,
+                                            timeout_seconds: ::Integer?,
+                                            interval_seconds: ::Integer?,
+                                            path: ::String?,
+                                            success_codes: ::String?
+                                          }?
+                                        }?
+                                      },
+                                      ?private_registry_access: {
+                                        ecr_image_puller_role: {
+                                          is_active: bool?
+                                        }?
+                                      }
+                                    ) -> _CreateContainerServiceResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContainerServiceResponseSuccess
+
+      interface _CreateContainerServiceDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateContainerServiceDeploymentResult]
+        def container_service: () -> Types::ContainerService
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#create_container_service_deployment-instance_method
+      def create_container_service_deployment: (
+                                                 service_name: ::String,
+                                                 ?containers: Hash[::String, {
+                                                     image: ::String?,
+                                                     command: Array[::String]?,
+                                                     environment: Hash[::String, ::String]?,
+                                                     ports: Hash[::String, ("HTTP" | "HTTPS" | "TCP" | "UDP")]?
+                                                   }],
+                                                 ?public_endpoint: {
+                                                   container_name: ::String,
+                                                   container_port: ::Integer,
+                                                   health_check: {
+                                                     healthy_threshold: ::Integer?,
+                                                     unhealthy_threshold: ::Integer?,
+                                                     timeout_seconds: ::Integer?,
+                                                     interval_seconds: ::Integer?,
+                                                     path: ::String?,
+                                                     success_codes: ::String?
+                                                   }?
+                                                 }
+                                               ) -> _CreateContainerServiceDeploymentResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContainerServiceDeploymentResponseSuccess
+
+      interface _CreateContainerServiceRegistryLoginResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateContainerServiceRegistryLoginResult]
+        def registry_login: () -> Types::ContainerServiceRegistryLogin
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#create_container_service_registry_login-instance_method
+      def create_container_service_registry_login: (
+                                                   ) -> _CreateContainerServiceRegistryLoginResponseSuccess
+                                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContainerServiceRegistryLoginResponseSuccess
+
+      interface _CreateDiskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDiskResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#create_disk-instance_method
+      def create_disk: (
+                         disk_name: ::String,
+                         availability_zone: ::String,
+                         size_in_gb: ::Integer,
+                         ?tags: Array[
+                           {
+                             key: ::String?,
+                             value: ::String?
+                           },
+                         ],
+                         ?add_ons: Array[
+                           {
+                             add_on_type: ("AutoSnapshot" | "StopInstanceOnIdle"),
+                             auto_snapshot_add_on_request: {
+                               snapshot_time_of_day: ::String?
+                             }?,
+                             stop_instance_on_idle_request: {
+                               threshold: ::String?,
+                               duration: ::String?
+                             }?
+                           },
+                         ]
+                       ) -> _CreateDiskResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDiskResponseSuccess
+
+      interface _CreateDiskFromSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDiskFromSnapshotResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#create_disk_from_snapshot-instance_method
+      def create_disk_from_snapshot: (
+                                       disk_name: ::String,
+                                       ?disk_snapshot_name: ::String,
+                                       availability_zone: ::String,
+                                       size_in_gb: ::Integer,
+                                       ?tags: Array[
+                                         {
+                                           key: ::String?,
+                                           value: ::String?
+                                         },
+                                       ],
+                                       ?add_ons: Array[
+                                         {
+                                           add_on_type: ("AutoSnapshot" | "StopInstanceOnIdle"),
+                                           auto_snapshot_add_on_request: {
+                                             snapshot_time_of_day: ::String?
+                                           }?,
+                                           stop_instance_on_idle_request: {
+                                             threshold: ::String?,
+                                             duration: ::String?
+                                           }?
+                                         },
+                                       ],
+                                       ?source_disk_name: ::String,
+                                       ?restore_date: ::String,
+                                       ?use_latest_restorable_auto_snapshot: bool
+                                     ) -> _CreateDiskFromSnapshotResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDiskFromSnapshotResponseSuccess
+
+      interface _CreateDiskSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDiskSnapshotResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#create_disk_snapshot-instance_method
+      def create_disk_snapshot: (
+                                  ?disk_name: ::String,
+                                  disk_snapshot_name: ::String,
+                                  ?instance_name: ::String,
+                                  ?tags: Array[
+                                    {
+                                      key: ::String?,
+                                      value: ::String?
+                                    },
+                                  ]
+                                ) -> _CreateDiskSnapshotResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDiskSnapshotResponseSuccess
+
+      interface _CreateDistributionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDistributionResult]
+        def distribution: () -> Types::LightsailDistribution
+        def operation: () -> Types::Operation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#create_distribution-instance_method
+      def create_distribution: (
+                                 distribution_name: ::String,
+                                 origin: {
+                                   name: ::String?,
+                                   region_name: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "eu-north-1")?,
+                                   protocol_policy: ("http-only" | "https-only")?
+                                 },
+                                 default_cache_behavior: {
+                                   behavior: ("dont-cache" | "cache")?
+                                 },
+                                 ?cache_behavior_settings: {
+                                   default_ttl: ::Integer?,
+                                   minimum_ttl: ::Integer?,
+                                   maximum_ttl: ::Integer?,
+                                   allowed_http_methods: ::String?,
+                                   cached_http_methods: ::String?,
+                                   forwarded_cookies: {
+                                     option: ("none" | "allow-list" | "all")?,
+                                     cookies_allow_list: Array[::String]?
+                                   }?,
+                                   forwarded_headers: {
+                                     option: ("none" | "allow-list" | "all")?,
+                                     headers_allow_list: Array[("Accept" | "Accept-Charset" | "Accept-Datetime" | "Accept-Encoding" | "Accept-Language" | "Authorization" | "CloudFront-Forwarded-Proto" | "CloudFront-Is-Desktop-Viewer" | "CloudFront-Is-Mobile-Viewer" | "CloudFront-Is-SmartTV-Viewer" | "CloudFront-Is-Tablet-Viewer" | "CloudFront-Viewer-Country" | "Host" | "Origin" | "Referer")]?
+                                   }?,
+                                   forwarded_query_strings: {
+                                     option: bool?,
+                                     query_strings_allow_list: Array[::String]?
+                                   }?
+                                 },
+                                 ?cache_behaviors: Array[
+                                   {
+                                     path: ::String?,
+                                     behavior: ("dont-cache" | "cache")?
+                                   },
+                                 ],
+                                 bundle_id: ::String,
+                                 ?ip_address_type: ("dualstack" | "ipv4"),
+                                 ?tags: Array[
+                                   {
+                                     key: ::String?,
+                                     value: ::String?
+                                   },
+                                 ]
+                               ) -> _CreateDistributionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDistributionResponseSuccess
+
+      interface _CreateDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDomainResult]
+        def operation: () -> Types::Operation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#create_domain-instance_method
+      def create_domain: (
+                           domain_name: ::String,
+                           ?tags: Array[
+                             {
+                               key: ::String?,
+                               value: ::String?
+                             },
+                           ]
+                         ) -> _CreateDomainResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainResponseSuccess
+
+      interface _CreateDomainEntryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDomainEntryResult]
+        def operation: () -> Types::Operation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#create_domain_entry-instance_method
+      def create_domain_entry: (
+                                 domain_name: ::String,
+                                 domain_entry: {
+                                   id: ::String?,
+                                   name: ::String?,
+                                   target: ::String?,
+                                   is_alias: bool?,
+                                   type: ::String?,
+                                   options: Hash[::String, ::String]?
+                                 }
+                               ) -> _CreateDomainEntryResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainEntryResponseSuccess
+
+      interface _CreateGUISessionAccessDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGUISessionAccessDetailsResult]
+        def resource_name: () -> ::String
+        def status: () -> ("startExpired" | "notStarted" | "started" | "starting" | "stopped" | "stopping" | "settingUpInstance" | "failedInstanceCreation" | "failedStartingGUISession" | "failedStoppingGUISession")
+        def percentage_complete: () -> ::Integer
+        def failure_reason: () -> ::String
+        def sessions: () -> ::Array[Types::Session]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#create_gui_session_access_details-instance_method
+      def create_gui_session_access_details: (
+                                               resource_name: ::String
+                                             ) -> _CreateGUISessionAccessDetailsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGUISessionAccessDetailsResponseSuccess
+
+      interface _CreateInstanceSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateInstanceSnapshotResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#create_instance_snapshot-instance_method
+      def create_instance_snapshot: (
+                                      instance_snapshot_name: ::String,
+                                      instance_name: ::String,
+                                      ?tags: Array[
+                                        {
+                                          key: ::String?,
+                                          value: ::String?
+                                        },
+                                      ]
+                                    ) -> _CreateInstanceSnapshotResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInstanceSnapshotResponseSuccess
+
+      interface _CreateInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateInstancesResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#create_instances-instance_method
+      def create_instances: (
+                              instance_names: Array[::String],
+                              availability_zone: ::String,
+                              ?custom_image_name: ::String,
+                              blueprint_id: ::String,
+                              bundle_id: ::String,
+                              ?user_data: ::String,
+                              ?key_pair_name: ::String,
+                              ?tags: Array[
+                                {
+                                  key: ::String?,
+                                  value: ::String?
+                                },
+                              ],
+                              ?add_ons: Array[
+                                {
+                                  add_on_type: ("AutoSnapshot" | "StopInstanceOnIdle"),
+                                  auto_snapshot_add_on_request: {
+                                    snapshot_time_of_day: ::String?
+                                  }?,
+                                  stop_instance_on_idle_request: {
+                                    threshold: ::String?,
+                                    duration: ::String?
+                                  }?
+                                },
+                              ],
+                              ?ip_address_type: ("dualstack" | "ipv4")
+                            ) -> _CreateInstancesResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInstancesResponseSuccess
+
+      interface _CreateInstancesFromSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateInstancesFromSnapshotResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#create_instances_from_snapshot-instance_method
+      def create_instances_from_snapshot: (
+                                            instance_names: Array[::String],
+                                            ?attached_disk_mapping: Hash[::String, Array[
+                                                {
+                                                  original_disk_path: ::String?,
+                                                  new_disk_name: ::String?
+                                                },
+                                              ]],
+                                            availability_zone: ::String,
+                                            ?instance_snapshot_name: ::String,
+                                            bundle_id: ::String,
+                                            ?user_data: ::String,
+                                            ?key_pair_name: ::String,
+                                            ?tags: Array[
+                                              {
+                                                key: ::String?,
+                                                value: ::String?
+                                              },
+                                            ],
+                                            ?add_ons: Array[
+                                              {
+                                                add_on_type: ("AutoSnapshot" | "StopInstanceOnIdle"),
+                                                auto_snapshot_add_on_request: {
+                                                  snapshot_time_of_day: ::String?
+                                                }?,
+                                                stop_instance_on_idle_request: {
+                                                  threshold: ::String?,
+                                                  duration: ::String?
+                                                }?
+                                              },
+                                            ],
+                                            ?ip_address_type: ("dualstack" | "ipv4"),
+                                            ?source_instance_name: ::String,
+                                            ?restore_date: ::String,
+                                            ?use_latest_restorable_auto_snapshot: bool
+                                          ) -> _CreateInstancesFromSnapshotResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInstancesFromSnapshotResponseSuccess
+
+      interface _CreateKeyPairResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateKeyPairResult]
+        def key_pair: () -> Types::KeyPair
+        def public_key_base_64: () -> ::String
+        def private_key_base_64: () -> ::String
+        def operation: () -> Types::Operation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#create_key_pair-instance_method
+      def create_key_pair: (
+                             key_pair_name: ::String,
+                             ?tags: Array[
+                               {
+                                 key: ::String?,
+                                 value: ::String?
+                               },
+                             ]
+                           ) -> _CreateKeyPairResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateKeyPairResponseSuccess
+
+      interface _CreateLoadBalancerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLoadBalancerResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#create_load_balancer-instance_method
+      def create_load_balancer: (
+                                  load_balancer_name: ::String,
+                                  instance_port: ::Integer,
+                                  ?health_check_path: ::String,
+                                  ?certificate_name: ::String,
+                                  ?certificate_domain_name: ::String,
+                                  ?certificate_alternative_names: Array[::String],
+                                  ?tags: Array[
+                                    {
+                                      key: ::String?,
+                                      value: ::String?
+                                    },
+                                  ],
+                                  ?ip_address_type: ("dualstack" | "ipv4"),
+                                  ?tls_policy_name: ::String
+                                ) -> _CreateLoadBalancerResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLoadBalancerResponseSuccess
+
+      interface _CreateLoadBalancerTlsCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLoadBalancerTlsCertificateResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#create_load_balancer_tls_certificate-instance_method
+      def create_load_balancer_tls_certificate: (
+                                                  load_balancer_name: ::String,
+                                                  certificate_name: ::String,
+                                                  certificate_domain_name: ::String,
+                                                  ?certificate_alternative_names: Array[::String],
+                                                  ?tags: Array[
+                                                    {
+                                                      key: ::String?,
+                                                      value: ::String?
+                                                    },
+                                                  ]
+                                                ) -> _CreateLoadBalancerTlsCertificateResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLoadBalancerTlsCertificateResponseSuccess
+
+      interface _CreateRelationalDatabaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRelationalDatabaseResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#create_relational_database-instance_method
+      def create_relational_database: (
+                                        relational_database_name: ::String,
+                                        ?availability_zone: ::String,
+                                        relational_database_blueprint_id: ::String,
+                                        relational_database_bundle_id: ::String,
+                                        master_database_name: ::String,
+                                        master_username: ::String,
+                                        ?master_user_password: ::String,
+                                        ?preferred_backup_window: ::String,
+                                        ?preferred_maintenance_window: ::String,
+                                        ?publicly_accessible: bool,
+                                        ?tags: Array[
+                                          {
+                                            key: ::String?,
+                                            value: ::String?
+                                          },
+                                        ]
+                                      ) -> _CreateRelationalDatabaseResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRelationalDatabaseResponseSuccess
+
+      interface _CreateRelationalDatabaseFromSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRelationalDatabaseFromSnapshotResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#create_relational_database_from_snapshot-instance_method
+      def create_relational_database_from_snapshot: (
+                                                      relational_database_name: ::String,
+                                                      ?availability_zone: ::String,
+                                                      ?publicly_accessible: bool,
+                                                      ?relational_database_snapshot_name: ::String,
+                                                      ?relational_database_bundle_id: ::String,
+                                                      ?source_relational_database_name: ::String,
+                                                      ?restore_time: ::Time,
+                                                      ?use_latest_restorable_time: bool,
+                                                      ?tags: Array[
+                                                        {
+                                                          key: ::String?,
+                                                          value: ::String?
+                                                        },
+                                                      ]
+                                                    ) -> _CreateRelationalDatabaseFromSnapshotResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRelationalDatabaseFromSnapshotResponseSuccess
+
+      interface _CreateRelationalDatabaseSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRelationalDatabaseSnapshotResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#create_relational_database_snapshot-instance_method
+      def create_relational_database_snapshot: (
+                                                 relational_database_name: ::String,
+                                                 relational_database_snapshot_name: ::String,
+                                                 ?tags: Array[
+                                                   {
+                                                     key: ::String?,
+                                                     value: ::String?
+                                                   },
+                                                 ]
+                                               ) -> _CreateRelationalDatabaseSnapshotResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRelationalDatabaseSnapshotResponseSuccess
+
+      interface _DeleteAlarmResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAlarmResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#delete_alarm-instance_method
+      def delete_alarm: (
+                          alarm_name: ::String
+                        ) -> _DeleteAlarmResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAlarmResponseSuccess
+
+      interface _DeleteAutoSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAutoSnapshotResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#delete_auto_snapshot-instance_method
+      def delete_auto_snapshot: (
+                                  resource_name: ::String,
+                                  date: ::String
+                                ) -> _DeleteAutoSnapshotResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAutoSnapshotResponseSuccess
+
+      interface _DeleteBucketResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBucketResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#delete_bucket-instance_method
+      def delete_bucket: (
+                           bucket_name: ::String,
+                           ?force_delete: bool
+                         ) -> _DeleteBucketResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBucketResponseSuccess
+
+      interface _DeleteBucketAccessKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBucketAccessKeyResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#delete_bucket_access_key-instance_method
+      def delete_bucket_access_key: (
+                                      bucket_name: ::String,
+                                      access_key_id: ::String
+                                    ) -> _DeleteBucketAccessKeyResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBucketAccessKeyResponseSuccess
+
+      interface _DeleteCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCertificateResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#delete_certificate-instance_method
+      def delete_certificate: (
+                                certificate_name: ::String
+                              ) -> _DeleteCertificateResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCertificateResponseSuccess
+
+      interface _DeleteContactMethodResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteContactMethodResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#delete_contact_method-instance_method
+      def delete_contact_method: (
+                                   protocol: ("Email" | "SMS")
+                                 ) -> _DeleteContactMethodResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteContactMethodResponseSuccess
+
+      interface _DeleteContainerImageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteContainerImageResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#delete_container_image-instance_method
+      def delete_container_image: (
+                                    service_name: ::String,
+                                    image: ::String
+                                  ) -> _DeleteContainerImageResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteContainerImageResponseSuccess
+
+      interface _DeleteContainerServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteContainerServiceResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#delete_container_service-instance_method
+      def delete_container_service: (
+                                      service_name: ::String
+                                    ) -> _DeleteContainerServiceResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteContainerServiceResponseSuccess
+
+      interface _DeleteDiskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDiskResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#delete_disk-instance_method
+      def delete_disk: (
+                         disk_name: ::String,
+                         ?force_delete_add_ons: bool
+                       ) -> _DeleteDiskResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDiskResponseSuccess
+
+      interface _DeleteDiskSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDiskSnapshotResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#delete_disk_snapshot-instance_method
+      def delete_disk_snapshot: (
+                                  disk_snapshot_name: ::String
+                                ) -> _DeleteDiskSnapshotResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDiskSnapshotResponseSuccess
+
+      interface _DeleteDistributionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDistributionResult]
+        def operation: () -> Types::Operation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#delete_distribution-instance_method
+      def delete_distribution: (
+                                 ?distribution_name: ::String
+                               ) -> _DeleteDistributionResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDistributionResponseSuccess
+
+      interface _DeleteDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDomainResult]
+        def operation: () -> Types::Operation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#delete_domain-instance_method
+      def delete_domain: (
+                           domain_name: ::String
+                         ) -> _DeleteDomainResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDomainResponseSuccess
+
+      interface _DeleteDomainEntryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDomainEntryResult]
+        def operation: () -> Types::Operation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#delete_domain_entry-instance_method
+      def delete_domain_entry: (
+                                 domain_name: ::String,
+                                 domain_entry: {
+                                   id: ::String?,
+                                   name: ::String?,
+                                   target: ::String?,
+                                   is_alias: bool?,
+                                   type: ::String?,
+                                   options: Hash[::String, ::String]?
+                                 }
+                               ) -> _DeleteDomainEntryResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDomainEntryResponseSuccess
+
+      interface _DeleteInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteInstanceResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#delete_instance-instance_method
+      def delete_instance: (
+                             instance_name: ::String,
+                             ?force_delete_add_ons: bool
+                           ) -> _DeleteInstanceResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteInstanceResponseSuccess
+
+      interface _DeleteInstanceSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteInstanceSnapshotResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#delete_instance_snapshot-instance_method
+      def delete_instance_snapshot: (
+                                      instance_snapshot_name: ::String
+                                    ) -> _DeleteInstanceSnapshotResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteInstanceSnapshotResponseSuccess
+
+      interface _DeleteKeyPairResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteKeyPairResult]
+        def operation: () -> Types::Operation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#delete_key_pair-instance_method
+      def delete_key_pair: (
+                             key_pair_name: ::String,
+                             ?expected_fingerprint: ::String
+                           ) -> _DeleteKeyPairResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteKeyPairResponseSuccess
+
+      interface _DeleteKnownHostKeysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteKnownHostKeysResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#delete_known_host_keys-instance_method
+      def delete_known_host_keys: (
+                                    instance_name: ::String
+                                  ) -> _DeleteKnownHostKeysResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteKnownHostKeysResponseSuccess
+
+      interface _DeleteLoadBalancerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLoadBalancerResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#delete_load_balancer-instance_method
+      def delete_load_balancer: (
+                                  load_balancer_name: ::String
+                                ) -> _DeleteLoadBalancerResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLoadBalancerResponseSuccess
+
+      interface _DeleteLoadBalancerTlsCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLoadBalancerTlsCertificateResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#delete_load_balancer_tls_certificate-instance_method
+      def delete_load_balancer_tls_certificate: (
+                                                  load_balancer_name: ::String,
+                                                  certificate_name: ::String,
+                                                  ?force: bool
+                                                ) -> _DeleteLoadBalancerTlsCertificateResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLoadBalancerTlsCertificateResponseSuccess
+
+      interface _DeleteRelationalDatabaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRelationalDatabaseResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#delete_relational_database-instance_method
+      def delete_relational_database: (
+                                        relational_database_name: ::String,
+                                        ?skip_final_snapshot: bool,
+                                        ?final_relational_database_snapshot_name: ::String
+                                      ) -> _DeleteRelationalDatabaseResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRelationalDatabaseResponseSuccess
+
+      interface _DeleteRelationalDatabaseSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRelationalDatabaseSnapshotResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#delete_relational_database_snapshot-instance_method
+      def delete_relational_database_snapshot: (
+                                                 relational_database_snapshot_name: ::String
+                                               ) -> _DeleteRelationalDatabaseSnapshotResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRelationalDatabaseSnapshotResponseSuccess
+
+      interface _DetachCertificateFromDistributionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetachCertificateFromDistributionResult]
+        def operation: () -> Types::Operation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#detach_certificate_from_distribution-instance_method
+      def detach_certificate_from_distribution: (
+                                                  distribution_name: ::String
+                                                ) -> _DetachCertificateFromDistributionResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetachCertificateFromDistributionResponseSuccess
+
+      interface _DetachDiskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetachDiskResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#detach_disk-instance_method
+      def detach_disk: (
+                         disk_name: ::String
+                       ) -> _DetachDiskResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetachDiskResponseSuccess
+
+      interface _DetachInstancesFromLoadBalancerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetachInstancesFromLoadBalancerResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#detach_instances_from_load_balancer-instance_method
+      def detach_instances_from_load_balancer: (
+                                                 load_balancer_name: ::String,
+                                                 instance_names: Array[::String]
+                                               ) -> _DetachInstancesFromLoadBalancerResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetachInstancesFromLoadBalancerResponseSuccess
+
+      interface _DetachStaticIpResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetachStaticIpResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#detach_static_ip-instance_method
+      def detach_static_ip: (
+                              static_ip_name: ::String
+                            ) -> _DetachStaticIpResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetachStaticIpResponseSuccess
+
+      interface _DisableAddOnResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableAddOnResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#disable_add_on-instance_method
+      def disable_add_on: (
+                            add_on_type: ("AutoSnapshot" | "StopInstanceOnIdle"),
+                            resource_name: ::String
+                          ) -> _DisableAddOnResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableAddOnResponseSuccess
+
+      interface _DownloadDefaultKeyPairResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DownloadDefaultKeyPairResult]
+        def public_key_base_64: () -> ::String
+        def private_key_base_64: () -> ::String
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#download_default_key_pair-instance_method
+      def download_default_key_pair: (
+                                     ) -> _DownloadDefaultKeyPairResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DownloadDefaultKeyPairResponseSuccess
+
+      interface _EnableAddOnResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableAddOnResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#enable_add_on-instance_method
+      def enable_add_on: (
+                           resource_name: ::String,
+                           add_on_request: {
+                             add_on_type: ("AutoSnapshot" | "StopInstanceOnIdle"),
+                             auto_snapshot_add_on_request: {
+                               snapshot_time_of_day: ::String?
+                             }?,
+                             stop_instance_on_idle_request: {
+                               threshold: ::String?,
+                               duration: ::String?
+                             }?
+                           }
+                         ) -> _EnableAddOnResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableAddOnResponseSuccess
+
+      interface _ExportSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExportSnapshotResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#export_snapshot-instance_method
+      def export_snapshot: (
+                             source_snapshot_name: ::String
+                           ) -> _ExportSnapshotResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportSnapshotResponseSuccess
+
+      interface _GetActiveNamesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetActiveNamesResult]
+        def active_names: () -> ::Array[::String]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_active_names-instance_method
+      def get_active_names: (
+                              ?page_token: ::String
+                            ) -> _GetActiveNamesResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetActiveNamesResponseSuccess
+
+      interface _GetAlarmsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAlarmsResult]
+        def alarms: () -> ::Array[Types::Alarm]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_alarms-instance_method
+      def get_alarms: (
+                        ?alarm_name: ::String,
+                        ?page_token: ::String,
+                        ?monitored_resource_name: ::String
+                      ) -> _GetAlarmsResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAlarmsResponseSuccess
+
+      interface _GetAutoSnapshotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAutoSnapshotsResult]
+        def resource_name: () -> ::String
+        def resource_type: () -> ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+        def auto_snapshots: () -> ::Array[Types::AutoSnapshotDetails]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_auto_snapshots-instance_method
+      def get_auto_snapshots: (
+                                resource_name: ::String
+                              ) -> _GetAutoSnapshotsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAutoSnapshotsResponseSuccess
+
+      interface _GetBlueprintsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBlueprintsResult]
+        def blueprints: () -> ::Array[Types::Blueprint]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_blueprints-instance_method
+      def get_blueprints: (
+                            ?include_inactive: bool,
+                            ?page_token: ::String,
+                            ?app_category: ("LfR")
+                          ) -> _GetBlueprintsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBlueprintsResponseSuccess
+
+      interface _GetBucketAccessKeysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBucketAccessKeysResult]
+        def access_keys: () -> ::Array[Types::AccessKey]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_bucket_access_keys-instance_method
+      def get_bucket_access_keys: (
+                                    bucket_name: ::String
+                                  ) -> _GetBucketAccessKeysResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBucketAccessKeysResponseSuccess
+
+      interface _GetBucketBundlesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBucketBundlesResult]
+        def bundles: () -> ::Array[Types::BucketBundle]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_bucket_bundles-instance_method
+      def get_bucket_bundles: (
+                                ?include_inactive: bool
+                              ) -> _GetBucketBundlesResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBucketBundlesResponseSuccess
+
+      interface _GetBucketMetricDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBucketMetricDataResult]
+        def metric_name: () -> ("BucketSizeBytes" | "NumberOfObjects")
+        def metric_data: () -> ::Array[Types::MetricDatapoint]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_bucket_metric_data-instance_method
+      def get_bucket_metric_data: (
+                                    bucket_name: ::String,
+                                    metric_name: ("BucketSizeBytes" | "NumberOfObjects"),
+                                    start_time: ::Time,
+                                    end_time: ::Time,
+                                    period: ::Integer,
+                                    statistics: Array[("Minimum" | "Maximum" | "Sum" | "Average" | "SampleCount")],
+                                    unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
+                                  ) -> _GetBucketMetricDataResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBucketMetricDataResponseSuccess
+
+      interface _GetBucketsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBucketsResult]
+        def buckets: () -> ::Array[Types::Bucket]
+        def next_page_token: () -> ::String
+        def account_level_bpa_sync: () -> Types::AccountLevelBpaSync
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_buckets-instance_method
+      def get_buckets: (
+                         ?bucket_name: ::String,
+                         ?page_token: ::String,
+                         ?include_connected_resources: bool
+                       ) -> _GetBucketsResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBucketsResponseSuccess
+
+      interface _GetBundlesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBundlesResult]
+        def bundles: () -> ::Array[Types::Bundle]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_bundles-instance_method
+      def get_bundles: (
+                         ?include_inactive: bool,
+                         ?page_token: ::String,
+                         ?app_category: ("LfR")
+                       ) -> _GetBundlesResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBundlesResponseSuccess
+
+      interface _GetCertificatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCertificatesResult]
+        def certificates: () -> ::Array[Types::CertificateSummary]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_certificates-instance_method
+      def get_certificates: (
+                              ?certificate_statuses: Array[("PENDING_VALIDATION" | "ISSUED" | "INACTIVE" | "EXPIRED" | "VALIDATION_TIMED_OUT" | "REVOKED" | "FAILED")],
+                              ?include_certificate_details: bool,
+                              ?certificate_name: ::String,
+                              ?page_token: ::String
+                            ) -> _GetCertificatesResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCertificatesResponseSuccess
+
+      interface _GetCloudFormationStackRecordsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCloudFormationStackRecordsResult]
+        def cloud_formation_stack_records: () -> ::Array[Types::CloudFormationStackRecord]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_cloud_formation_stack_records-instance_method
+      def get_cloud_formation_stack_records: (
+                                               ?page_token: ::String
+                                             ) -> _GetCloudFormationStackRecordsResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCloudFormationStackRecordsResponseSuccess
+
+      interface _GetContactMethodsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContactMethodsResult]
+        def contact_methods: () -> ::Array[Types::ContactMethod]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_contact_methods-instance_method
+      def get_contact_methods: (
+                                 ?protocols: Array[("Email" | "SMS")]
+                               ) -> _GetContactMethodsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContactMethodsResponseSuccess
+
+      interface _GetContainerAPIMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContainerAPIMetadataResult]
+        def metadata: () -> ::Array[::Hash[::String, ::String]]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_container_api_metadata-instance_method
+      def get_container_api_metadata: (
+                                      ) -> _GetContainerAPIMetadataResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContainerAPIMetadataResponseSuccess
+
+      interface _GetContainerImagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContainerImagesResult]
+        def container_images: () -> ::Array[Types::ContainerImage]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_container_images-instance_method
+      def get_container_images: (
+                                  service_name: ::String
+                                ) -> _GetContainerImagesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContainerImagesResponseSuccess
+
+      interface _GetContainerLogResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContainerLogResult]
+        def log_events: () -> ::Array[Types::ContainerServiceLogEvent]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_container_log-instance_method
+      def get_container_log: (
+                               service_name: ::String,
+                               container_name: ::String,
+                               ?start_time: ::Time,
+                               ?end_time: ::Time,
+                               ?filter_pattern: ::String,
+                               ?page_token: ::String
+                             ) -> _GetContainerLogResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContainerLogResponseSuccess
+
+      interface _GetContainerServiceDeploymentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContainerServiceDeploymentsResult]
+        def deployments: () -> ::Array[Types::ContainerServiceDeployment]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_container_service_deployments-instance_method
+      def get_container_service_deployments: (
+                                               service_name: ::String
+                                             ) -> _GetContainerServiceDeploymentsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContainerServiceDeploymentsResponseSuccess
+
+      interface _GetContainerServiceMetricDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContainerServiceMetricDataResult]
+        def metric_name: () -> ("CPUUtilization" | "MemoryUtilization")
+        def metric_data: () -> ::Array[Types::MetricDatapoint]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_container_service_metric_data-instance_method
+      def get_container_service_metric_data: (
+                                               service_name: ::String,
+                                               metric_name: ("CPUUtilization" | "MemoryUtilization"),
+                                               start_time: ::Time,
+                                               end_time: ::Time,
+                                               period: ::Integer,
+                                               statistics: Array[("Minimum" | "Maximum" | "Sum" | "Average" | "SampleCount")]
+                                             ) -> _GetContainerServiceMetricDataResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContainerServiceMetricDataResponseSuccess
+
+      interface _GetContainerServicePowersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContainerServicePowersResult]
+        def powers: () -> ::Array[Types::ContainerServicePower]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_container_service_powers-instance_method
+      def get_container_service_powers: (
+                                        ) -> _GetContainerServicePowersResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContainerServicePowersResponseSuccess
+
+      interface _GetContainerServicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ContainerServicesListResult]
+        def container_services: () -> ::Array[Types::ContainerService]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_container_services-instance_method
+      def get_container_services: (
+                                    ?service_name: ::String
+                                  ) -> _GetContainerServicesResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContainerServicesResponseSuccess
+
+      interface _GetCostEstimateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCostEstimateResult]
+        def resources_budget_estimate: () -> ::Array[Types::ResourceBudgetEstimate]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_cost_estimate-instance_method
+      def get_cost_estimate: (
+                               resource_name: ::String,
+                               start_time: ::Time,
+                               end_time: ::Time
+                             ) -> _GetCostEstimateResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCostEstimateResponseSuccess
+
+      interface _GetDiskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDiskResult]
+        def disk: () -> Types::Disk
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_disk-instance_method
+      def get_disk: (
+                      disk_name: ::String
+                    ) -> _GetDiskResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDiskResponseSuccess
+
+      interface _GetDiskSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDiskSnapshotResult]
+        def disk_snapshot: () -> Types::DiskSnapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_disk_snapshot-instance_method
+      def get_disk_snapshot: (
+                               disk_snapshot_name: ::String
+                             ) -> _GetDiskSnapshotResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDiskSnapshotResponseSuccess
+
+      interface _GetDiskSnapshotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDiskSnapshotsResult]
+        def disk_snapshots: () -> ::Array[Types::DiskSnapshot]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_disk_snapshots-instance_method
+      def get_disk_snapshots: (
+                                ?page_token: ::String
+                              ) -> _GetDiskSnapshotsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDiskSnapshotsResponseSuccess
+
+      interface _GetDisksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDisksResult]
+        def disks: () -> ::Array[Types::Disk]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_disks-instance_method
+      def get_disks: (
+                       ?page_token: ::String
+                     ) -> _GetDisksResponseSuccess
+                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDisksResponseSuccess
+
+      interface _GetDistributionBundlesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDistributionBundlesResult]
+        def bundles: () -> ::Array[Types::DistributionBundle]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_distribution_bundles-instance_method
+      def get_distribution_bundles: (
+                                    ) -> _GetDistributionBundlesResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDistributionBundlesResponseSuccess
+
+      interface _GetDistributionLatestCacheResetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDistributionLatestCacheResetResult]
+        def status: () -> ::String
+        def create_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_distribution_latest_cache_reset-instance_method
+      def get_distribution_latest_cache_reset: (
+                                                 ?distribution_name: ::String
+                                               ) -> _GetDistributionLatestCacheResetResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDistributionLatestCacheResetResponseSuccess
+
+      interface _GetDistributionMetricDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDistributionMetricDataResult]
+        def metric_name: () -> ("Requests" | "BytesDownloaded" | "BytesUploaded" | "TotalErrorRate" | "Http4xxErrorRate" | "Http5xxErrorRate")
+        def metric_data: () -> ::Array[Types::MetricDatapoint]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_distribution_metric_data-instance_method
+      def get_distribution_metric_data: (
+                                          distribution_name: ::String,
+                                          metric_name: ("Requests" | "BytesDownloaded" | "BytesUploaded" | "TotalErrorRate" | "Http4xxErrorRate" | "Http5xxErrorRate"),
+                                          start_time: ::Time,
+                                          end_time: ::Time,
+                                          period: ::Integer,
+                                          unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None"),
+                                          statistics: Array[("Minimum" | "Maximum" | "Sum" | "Average" | "SampleCount")]
+                                        ) -> _GetDistributionMetricDataResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDistributionMetricDataResponseSuccess
+
+      interface _GetDistributionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDistributionsResult]
+        def distributions: () -> ::Array[Types::LightsailDistribution]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_distributions-instance_method
+      def get_distributions: (
+                               ?distribution_name: ::String,
+                               ?page_token: ::String
+                             ) -> _GetDistributionsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDistributionsResponseSuccess
+
+      interface _GetDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainResult]
+        def domain: () -> Types::Domain
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_domain-instance_method
+      def get_domain: (
+                        domain_name: ::String
+                      ) -> _GetDomainResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainResponseSuccess
+
+      interface _GetDomainsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainsResult]
+        def domains: () -> ::Array[Types::Domain]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_domains-instance_method
+      def get_domains: (
+                         ?page_token: ::String
+                       ) -> _GetDomainsResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainsResponseSuccess
+
+      interface _GetExportSnapshotRecordsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetExportSnapshotRecordsResult]
+        def export_snapshot_records: () -> ::Array[Types::ExportSnapshotRecord]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_export_snapshot_records-instance_method
+      def get_export_snapshot_records: (
+                                         ?page_token: ::String
+                                       ) -> _GetExportSnapshotRecordsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetExportSnapshotRecordsResponseSuccess
+
+      interface _GetInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInstanceResult]
+        def instance: () -> Types::Instance
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_instance-instance_method
+      def get_instance: (
+                          instance_name: ::String
+                        ) -> _GetInstanceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInstanceResponseSuccess
+
+      interface _GetInstanceAccessDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInstanceAccessDetailsResult]
+        def access_details: () -> Types::InstanceAccessDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_instance_access_details-instance_method
+      def get_instance_access_details: (
+                                         instance_name: ::String,
+                                         ?protocol: ("ssh" | "rdp")
+                                       ) -> _GetInstanceAccessDetailsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInstanceAccessDetailsResponseSuccess
+
+      interface _GetInstanceMetricDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInstanceMetricDataResult]
+        def metric_name: () -> ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "BurstCapacityTime" | "BurstCapacityPercentage" | "MetadataNoToken")
+        def metric_data: () -> ::Array[Types::MetricDatapoint]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_instance_metric_data-instance_method
+      def get_instance_metric_data: (
+                                      instance_name: ::String,
+                                      metric_name: ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "BurstCapacityTime" | "BurstCapacityPercentage" | "MetadataNoToken"),
+                                      period: ::Integer,
+                                      start_time: ::Time,
+                                      end_time: ::Time,
+                                      unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None"),
+                                      statistics: Array[("Minimum" | "Maximum" | "Sum" | "Average" | "SampleCount")]
+                                    ) -> _GetInstanceMetricDataResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInstanceMetricDataResponseSuccess
+
+      interface _GetInstancePortStatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInstancePortStatesResult]
+        def port_states: () -> ::Array[Types::InstancePortState]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_instance_port_states-instance_method
+      def get_instance_port_states: (
+                                      instance_name: ::String
+                                    ) -> _GetInstancePortStatesResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInstancePortStatesResponseSuccess
+
+      interface _GetInstanceSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInstanceSnapshotResult]
+        def instance_snapshot: () -> Types::InstanceSnapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_instance_snapshot-instance_method
+      def get_instance_snapshot: (
+                                   instance_snapshot_name: ::String
+                                 ) -> _GetInstanceSnapshotResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInstanceSnapshotResponseSuccess
+
+      interface _GetInstanceSnapshotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInstanceSnapshotsResult]
+        def instance_snapshots: () -> ::Array[Types::InstanceSnapshot]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_instance_snapshots-instance_method
+      def get_instance_snapshots: (
+                                    ?page_token: ::String
+                                  ) -> _GetInstanceSnapshotsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInstanceSnapshotsResponseSuccess
+
+      interface _GetInstanceStateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInstanceStateResult]
+        def state: () -> Types::InstanceState
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_instance_state-instance_method
+      def get_instance_state: (
+                                instance_name: ::String
+                              ) -> _GetInstanceStateResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInstanceStateResponseSuccess
+
+      interface _GetInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInstancesResult]
+        def instances: () -> ::Array[Types::Instance]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_instances-instance_method
+      def get_instances: (
+                           ?page_token: ::String
+                         ) -> _GetInstancesResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInstancesResponseSuccess
+
+      interface _GetKeyPairResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetKeyPairResult]
+        def key_pair: () -> Types::KeyPair
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_key_pair-instance_method
+      def get_key_pair: (
+                          key_pair_name: ::String
+                        ) -> _GetKeyPairResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetKeyPairResponseSuccess
+
+      interface _GetKeyPairsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetKeyPairsResult]
+        def key_pairs: () -> ::Array[Types::KeyPair]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_key_pairs-instance_method
+      def get_key_pairs: (
+                           ?page_token: ::String,
+                           ?include_default_key_pair: bool
+                         ) -> _GetKeyPairsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetKeyPairsResponseSuccess
+
+      interface _GetLoadBalancerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLoadBalancerResult]
+        def load_balancer: () -> Types::LoadBalancer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_load_balancer-instance_method
+      def get_load_balancer: (
+                               load_balancer_name: ::String
+                             ) -> _GetLoadBalancerResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLoadBalancerResponseSuccess
+
+      interface _GetLoadBalancerMetricDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLoadBalancerMetricDataResult]
+        def metric_name: () -> ("ClientTLSNegotiationErrorCount" | "HealthyHostCount" | "UnhealthyHostCount" | "HTTPCode_LB_4XX_Count" | "HTTPCode_LB_5XX_Count" | "HTTPCode_Instance_2XX_Count" | "HTTPCode_Instance_3XX_Count" | "HTTPCode_Instance_4XX_Count" | "HTTPCode_Instance_5XX_Count" | "InstanceResponseTime" | "RejectedConnectionCount" | "RequestCount")
+        def metric_data: () -> ::Array[Types::MetricDatapoint]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_load_balancer_metric_data-instance_method
+      def get_load_balancer_metric_data: (
+                                           load_balancer_name: ::String,
+                                           metric_name: ("ClientTLSNegotiationErrorCount" | "HealthyHostCount" | "UnhealthyHostCount" | "HTTPCode_LB_4XX_Count" | "HTTPCode_LB_5XX_Count" | "HTTPCode_Instance_2XX_Count" | "HTTPCode_Instance_3XX_Count" | "HTTPCode_Instance_4XX_Count" | "HTTPCode_Instance_5XX_Count" | "InstanceResponseTime" | "RejectedConnectionCount" | "RequestCount"),
+                                           period: ::Integer,
+                                           start_time: ::Time,
+                                           end_time: ::Time,
+                                           unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None"),
+                                           statistics: Array[("Minimum" | "Maximum" | "Sum" | "Average" | "SampleCount")]
+                                         ) -> _GetLoadBalancerMetricDataResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLoadBalancerMetricDataResponseSuccess
+
+      interface _GetLoadBalancerTlsCertificatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLoadBalancerTlsCertificatesResult]
+        def tls_certificates: () -> ::Array[Types::LoadBalancerTlsCertificate]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_load_balancer_tls_certificates-instance_method
+      def get_load_balancer_tls_certificates: (
+                                                load_balancer_name: ::String
+                                              ) -> _GetLoadBalancerTlsCertificatesResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLoadBalancerTlsCertificatesResponseSuccess
+
+      interface _GetLoadBalancerTlsPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLoadBalancerTlsPoliciesResult]
+        def tls_policies: () -> ::Array[Types::LoadBalancerTlsPolicy]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_load_balancer_tls_policies-instance_method
+      def get_load_balancer_tls_policies: (
+                                            ?page_token: ::String
+                                          ) -> _GetLoadBalancerTlsPoliciesResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLoadBalancerTlsPoliciesResponseSuccess
+
+      interface _GetLoadBalancersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLoadBalancersResult]
+        def load_balancers: () -> ::Array[Types::LoadBalancer]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_load_balancers-instance_method
+      def get_load_balancers: (
+                                ?page_token: ::String
+                              ) -> _GetLoadBalancersResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLoadBalancersResponseSuccess
+
+      interface _GetOperationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOperationResult]
+        def operation: () -> Types::Operation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_operation-instance_method
+      def get_operation: (
+                           operation_id: ::String
+                         ) -> _GetOperationResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOperationResponseSuccess
+
+      interface _GetOperationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOperationsResult]
+        def operations: () -> ::Array[Types::Operation]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_operations-instance_method
+      def get_operations: (
+                            ?page_token: ::String
+                          ) -> _GetOperationsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOperationsResponseSuccess
+
+      interface _GetOperationsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOperationsForResourceResult]
+        def operations: () -> ::Array[Types::Operation]
+        def next_page_count: () -> ::String
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_operations_for_resource-instance_method
+      def get_operations_for_resource: (
+                                         resource_name: ::String,
+                                         ?page_token: ::String
+                                       ) -> _GetOperationsForResourceResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOperationsForResourceResponseSuccess
+
+      interface _GetRegionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRegionsResult]
+        def regions: () -> ::Array[Types::Region]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_regions-instance_method
+      def get_regions: (
+                         ?include_availability_zones: bool,
+                         ?include_relational_database_availability_zones: bool
+                       ) -> _GetRegionsResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRegionsResponseSuccess
+
+      interface _GetRelationalDatabaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRelationalDatabaseResult]
+        def relational_database: () -> Types::RelationalDatabase
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_relational_database-instance_method
+      def get_relational_database: (
+                                     relational_database_name: ::String
+                                   ) -> _GetRelationalDatabaseResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRelationalDatabaseResponseSuccess
+
+      interface _GetRelationalDatabaseBlueprintsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRelationalDatabaseBlueprintsResult]
+        def blueprints: () -> ::Array[Types::RelationalDatabaseBlueprint]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_relational_database_blueprints-instance_method
+      def get_relational_database_blueprints: (
+                                                ?page_token: ::String
+                                              ) -> _GetRelationalDatabaseBlueprintsResponseSuccess
+                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRelationalDatabaseBlueprintsResponseSuccess
+
+      interface _GetRelationalDatabaseBundlesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRelationalDatabaseBundlesResult]
+        def bundles: () -> ::Array[Types::RelationalDatabaseBundle]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_relational_database_bundles-instance_method
+      def get_relational_database_bundles: (
+                                             ?page_token: ::String,
+                                             ?include_inactive: bool
+                                           ) -> _GetRelationalDatabaseBundlesResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRelationalDatabaseBundlesResponseSuccess
+
+      interface _GetRelationalDatabaseEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRelationalDatabaseEventsResult]
+        def relational_database_events: () -> ::Array[Types::RelationalDatabaseEvent]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_relational_database_events-instance_method
+      def get_relational_database_events: (
+                                            relational_database_name: ::String,
+                                            ?duration_in_minutes: ::Integer,
+                                            ?page_token: ::String
+                                          ) -> _GetRelationalDatabaseEventsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRelationalDatabaseEventsResponseSuccess
+
+      interface _GetRelationalDatabaseLogEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRelationalDatabaseLogEventsResult]
+        def resource_log_events: () -> ::Array[Types::LogEvent]
+        def next_backward_token: () -> ::String
+        def next_forward_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_relational_database_log_events-instance_method
+      def get_relational_database_log_events: (
+                                                relational_database_name: ::String,
+                                                log_stream_name: ::String,
+                                                ?start_time: ::Time,
+                                                ?end_time: ::Time,
+                                                ?start_from_head: bool,
+                                                ?page_token: ::String
+                                              ) -> _GetRelationalDatabaseLogEventsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRelationalDatabaseLogEventsResponseSuccess
+
+      interface _GetRelationalDatabaseLogStreamsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRelationalDatabaseLogStreamsResult]
+        def log_streams: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_relational_database_log_streams-instance_method
+      def get_relational_database_log_streams: (
+                                                 relational_database_name: ::String
+                                               ) -> _GetRelationalDatabaseLogStreamsResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRelationalDatabaseLogStreamsResponseSuccess
+
+      interface _GetRelationalDatabaseMasterUserPasswordResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRelationalDatabaseMasterUserPasswordResult]
+        def master_user_password: () -> ::String
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_relational_database_master_user_password-instance_method
+      def get_relational_database_master_user_password: (
+                                                          relational_database_name: ::String,
+                                                          ?password_version: ("CURRENT" | "PREVIOUS" | "PENDING")
+                                                        ) -> _GetRelationalDatabaseMasterUserPasswordResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRelationalDatabaseMasterUserPasswordResponseSuccess
+
+      interface _GetRelationalDatabaseMetricDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRelationalDatabaseMetricDataResult]
+        def metric_name: () -> ("CPUUtilization" | "DatabaseConnections" | "DiskQueueDepth" | "FreeStorageSpace" | "NetworkReceiveThroughput" | "NetworkTransmitThroughput")
+        def metric_data: () -> ::Array[Types::MetricDatapoint]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_relational_database_metric_data-instance_method
+      def get_relational_database_metric_data: (
+                                                 relational_database_name: ::String,
+                                                 metric_name: ("CPUUtilization" | "DatabaseConnections" | "DiskQueueDepth" | "FreeStorageSpace" | "NetworkReceiveThroughput" | "NetworkTransmitThroughput"),
+                                                 period: ::Integer,
+                                                 start_time: ::Time,
+                                                 end_time: ::Time,
+                                                 unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None"),
+                                                 statistics: Array[("Minimum" | "Maximum" | "Sum" | "Average" | "SampleCount")]
+                                               ) -> _GetRelationalDatabaseMetricDataResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRelationalDatabaseMetricDataResponseSuccess
+
+      interface _GetRelationalDatabaseParametersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRelationalDatabaseParametersResult]
+        def parameters: () -> ::Array[Types::RelationalDatabaseParameter]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_relational_database_parameters-instance_method
+      def get_relational_database_parameters: (
+                                                relational_database_name: ::String,
+                                                ?page_token: ::String
+                                              ) -> _GetRelationalDatabaseParametersResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRelationalDatabaseParametersResponseSuccess
+
+      interface _GetRelationalDatabaseSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRelationalDatabaseSnapshotResult]
+        def relational_database_snapshot: () -> Types::RelationalDatabaseSnapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_relational_database_snapshot-instance_method
+      def get_relational_database_snapshot: (
+                                              relational_database_snapshot_name: ::String
+                                            ) -> _GetRelationalDatabaseSnapshotResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRelationalDatabaseSnapshotResponseSuccess
+
+      interface _GetRelationalDatabaseSnapshotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRelationalDatabaseSnapshotsResult]
+        def relational_database_snapshots: () -> ::Array[Types::RelationalDatabaseSnapshot]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_relational_database_snapshots-instance_method
+      def get_relational_database_snapshots: (
+                                               ?page_token: ::String
+                                             ) -> _GetRelationalDatabaseSnapshotsResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRelationalDatabaseSnapshotsResponseSuccess
+
+      interface _GetRelationalDatabasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRelationalDatabasesResult]
+        def relational_databases: () -> ::Array[Types::RelationalDatabase]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_relational_databases-instance_method
+      def get_relational_databases: (
+                                      ?page_token: ::String
+                                    ) -> _GetRelationalDatabasesResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRelationalDatabasesResponseSuccess
+
+      interface _GetSetupHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSetupHistoryResult]
+        def setup_history: () -> ::Array[Types::SetupHistory]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_setup_history-instance_method
+      def get_setup_history: (
+                               resource_name: ::String,
+                               ?page_token: ::String
+                             ) -> _GetSetupHistoryResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSetupHistoryResponseSuccess
+
+      interface _GetStaticIpResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStaticIpResult]
+        def static_ip: () -> Types::StaticIp
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_static_ip-instance_method
+      def get_static_ip: (
+                           static_ip_name: ::String
+                         ) -> _GetStaticIpResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStaticIpResponseSuccess
+
+      interface _GetStaticIpsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStaticIpsResult]
+        def static_ips: () -> ::Array[Types::StaticIp]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_static_ips-instance_method
+      def get_static_ips: (
+                            ?page_token: ::String
+                          ) -> _GetStaticIpsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStaticIpsResponseSuccess
+
+      interface _ImportKeyPairResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportKeyPairResult]
+        def operation: () -> Types::Operation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#import_key_pair-instance_method
+      def import_key_pair: (
+                             key_pair_name: ::String,
+                             public_key_base_64: ::String
+                           ) -> _ImportKeyPairResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportKeyPairResponseSuccess
+
+      interface _IsVpcPeeredResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::IsVpcPeeredResult]
+        def is_peered: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#is_vpc_peered-instance_method
+      def is_vpc_peered: (
+                         ) -> _IsVpcPeeredResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _IsVpcPeeredResponseSuccess
+
+      interface _OpenInstancePublicPortsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::OpenInstancePublicPortsResult]
+        def operation: () -> Types::Operation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#open_instance_public_ports-instance_method
+      def open_instance_public_ports: (
+                                        port_info: {
+                                          from_port: ::Integer?,
+                                          to_port: ::Integer?,
+                                          protocol: ("tcp" | "all" | "udp" | "icmp")?,
+                                          cidrs: Array[::String]?,
+                                          ipv6_cidrs: Array[::String]?,
+                                          cidr_list_aliases: Array[::String]?
+                                        },
+                                        instance_name: ::String
+                                      ) -> _OpenInstancePublicPortsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _OpenInstancePublicPortsResponseSuccess
+
+      interface _PeerVpcResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PeerVpcResult]
+        def operation: () -> Types::Operation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#peer_vpc-instance_method
+      def peer_vpc: (
+                    ) -> _PeerVpcResponseSuccess
+                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PeerVpcResponseSuccess
+
+      interface _PutAlarmResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAlarmResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#put_alarm-instance_method
+      def put_alarm: (
+                       alarm_name: ::String,
+                       metric_name: ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "ClientTLSNegotiationErrorCount" | "HealthyHostCount" | "UnhealthyHostCount" | "HTTPCode_LB_4XX_Count" | "HTTPCode_LB_5XX_Count" | "HTTPCode_Instance_2XX_Count" | "HTTPCode_Instance_3XX_Count" | "HTTPCode_Instance_4XX_Count" | "HTTPCode_Instance_5XX_Count" | "InstanceResponseTime" | "RejectedConnectionCount" | "RequestCount" | "DatabaseConnections" | "DiskQueueDepth" | "FreeStorageSpace" | "NetworkReceiveThroughput" | "NetworkTransmitThroughput" | "BurstCapacityTime" | "BurstCapacityPercentage"),
+                       monitored_resource_name: ::String,
+                       comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold"),
+                       threshold: ::Float,
+                       evaluation_periods: ::Integer,
+                       ?datapoints_to_alarm: ::Integer,
+                       ?treat_missing_data: ("breaching" | "notBreaching" | "ignore" | "missing"),
+                       ?contact_protocols: Array[("Email" | "SMS")],
+                       ?notification_triggers: Array[("OK" | "ALARM" | "INSUFFICIENT_DATA")],
+                       ?notification_enabled: bool
+                     ) -> _PutAlarmResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAlarmResponseSuccess
+
+      interface _PutInstancePublicPortsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutInstancePublicPortsResult]
+        def operation: () -> Types::Operation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#put_instance_public_ports-instance_method
+      def put_instance_public_ports: (
+                                       port_infos: Array[
+                                         {
+                                           from_port: ::Integer?,
+                                           to_port: ::Integer?,
+                                           protocol: ("tcp" | "all" | "udp" | "icmp")?,
+                                           cidrs: Array[::String]?,
+                                           ipv6_cidrs: Array[::String]?,
+                                           cidr_list_aliases: Array[::String]?
+                                         },
+                                       ],
+                                       instance_name: ::String
+                                     ) -> _PutInstancePublicPortsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutInstancePublicPortsResponseSuccess
+
+      interface _RebootInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RebootInstanceResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#reboot_instance-instance_method
+      def reboot_instance: (
+                             instance_name: ::String
+                           ) -> _RebootInstanceResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RebootInstanceResponseSuccess
+
+      interface _RebootRelationalDatabaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RebootRelationalDatabaseResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#reboot_relational_database-instance_method
+      def reboot_relational_database: (
+                                        relational_database_name: ::String
+                                      ) -> _RebootRelationalDatabaseResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RebootRelationalDatabaseResponseSuccess
+
+      interface _RegisterContainerImageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterContainerImageResult]
+        def container_image: () -> Types::ContainerImage
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#register_container_image-instance_method
+      def register_container_image: (
+                                      service_name: ::String,
+                                      label: ::String,
+                                      digest: ::String
+                                    ) -> _RegisterContainerImageResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterContainerImageResponseSuccess
+
+      interface _ReleaseStaticIpResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReleaseStaticIpResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#release_static_ip-instance_method
+      def release_static_ip: (
+                               static_ip_name: ::String
+                             ) -> _ReleaseStaticIpResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReleaseStaticIpResponseSuccess
+
+      interface _ResetDistributionCacheResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResetDistributionCacheResult]
+        def status: () -> ::String
+        def create_time: () -> ::Time
+        def operation: () -> Types::Operation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#reset_distribution_cache-instance_method
+      def reset_distribution_cache: (
+                                      ?distribution_name: ::String
+                                    ) -> _ResetDistributionCacheResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetDistributionCacheResponseSuccess
+
+      interface _SendContactMethodVerificationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendContactMethodVerificationResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#send_contact_method_verification-instance_method
+      def send_contact_method_verification: (
+                                              protocol: ("Email")
+                                            ) -> _SendContactMethodVerificationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendContactMethodVerificationResponseSuccess
+
+      interface _SetIpAddressTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetIpAddressTypeResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#set_ip_address_type-instance_method
+      def set_ip_address_type: (
+                                 resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket"),
+                                 resource_name: ::String,
+                                 ip_address_type: ("dualstack" | "ipv4")
+                               ) -> _SetIpAddressTypeResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetIpAddressTypeResponseSuccess
+
+      interface _SetResourceAccessForBucketResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetResourceAccessForBucketResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#set_resource_access_for_bucket-instance_method
+      def set_resource_access_for_bucket: (
+                                            resource_name: ::String,
+                                            bucket_name: ::String,
+                                            access: ("allow" | "deny")
+                                          ) -> _SetResourceAccessForBucketResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetResourceAccessForBucketResponseSuccess
+
+      interface _SetupInstanceHttpsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetupInstanceHttpsResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#setup_instance_https-instance_method
+      def setup_instance_https: (
+                                  instance_name: ::String,
+                                  email_address: ::String,
+                                  domain_names: Array[::String],
+                                  certificate_provider: ("LetsEncrypt")
+                                ) -> _SetupInstanceHttpsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetupInstanceHttpsResponseSuccess
+
+      interface _StartGUISessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartGUISessionResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#start_gui_session-instance_method
+      def start_gui_session: (
+                               resource_name: ::String
+                             ) -> _StartGUISessionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartGUISessionResponseSuccess
+
+      interface _StartInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartInstanceResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#start_instance-instance_method
+      def start_instance: (
+                            instance_name: ::String
+                          ) -> _StartInstanceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartInstanceResponseSuccess
+
+      interface _StartRelationalDatabaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartRelationalDatabaseResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#start_relational_database-instance_method
+      def start_relational_database: (
+                                       relational_database_name: ::String
+                                     ) -> _StartRelationalDatabaseResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartRelationalDatabaseResponseSuccess
+
+      interface _StopGUISessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopGUISessionResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#stop_gui_session-instance_method
+      def stop_gui_session: (
+                              resource_name: ::String
+                            ) -> _StopGUISessionResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopGUISessionResponseSuccess
+
+      interface _StopInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopInstanceResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#stop_instance-instance_method
+      def stop_instance: (
+                           instance_name: ::String,
+                           ?force: bool
+                         ) -> _StopInstanceResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopInstanceResponseSuccess
+
+      interface _StopRelationalDatabaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopRelationalDatabaseResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#stop_relational_database-instance_method
+      def stop_relational_database: (
+                                      relational_database_name: ::String,
+                                      ?relational_database_snapshot_name: ::String
+                                    ) -> _StopRelationalDatabaseResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopRelationalDatabaseResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_name: ::String,
+                          ?resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String?,
+                              value: ::String?
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _TestAlarmResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TestAlarmResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#test_alarm-instance_method
+      def test_alarm: (
+                        alarm_name: ::String,
+                        state: ("OK" | "ALARM" | "INSUFFICIENT_DATA")
+                      ) -> _TestAlarmResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestAlarmResponseSuccess
+
+      interface _UnpeerVpcResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UnpeerVpcResult]
+        def operation: () -> Types::Operation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#unpeer_vpc-instance_method
+      def unpeer_vpc: (
+                      ) -> _UnpeerVpcResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UnpeerVpcResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_name: ::String,
+                            ?resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateBucketResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBucketResult]
+        def bucket: () -> Types::Bucket
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#update_bucket-instance_method
+      def update_bucket: (
+                           bucket_name: ::String,
+                           ?access_rules: {
+                             get_object: ("public" | "private")?,
+                             allow_public_overrides: bool?
+                           },
+                           ?versioning: ::String,
+                           ?readonly_access_accounts: Array[::String],
+                           ?access_log_config: {
+                             enabled: bool,
+                             destination: ::String?,
+                             prefix: ::String?
+                           }
+                         ) -> _UpdateBucketResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBucketResponseSuccess
+
+      interface _UpdateBucketBundleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBucketBundleResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#update_bucket_bundle-instance_method
+      def update_bucket_bundle: (
+                                  bucket_name: ::String,
+                                  bundle_id: ::String
+                                ) -> _UpdateBucketBundleResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBucketBundleResponseSuccess
+
+      interface _UpdateContainerServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateContainerServiceResult]
+        def container_service: () -> Types::ContainerService
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#update_container_service-instance_method
+      def update_container_service: (
+                                      service_name: ::String,
+                                      ?power: ("nano" | "micro" | "small" | "medium" | "large" | "xlarge"),
+                                      ?scale: ::Integer,
+                                      ?is_disabled: bool,
+                                      ?public_domain_names: Hash[::String, Array[::String]],
+                                      ?private_registry_access: {
+                                        ecr_image_puller_role: {
+                                          is_active: bool?
+                                        }?
+                                      }
+                                    ) -> _UpdateContainerServiceResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateContainerServiceResponseSuccess
+
+      interface _UpdateDistributionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDistributionResult]
+        def operation: () -> Types::Operation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#update_distribution-instance_method
+      def update_distribution: (
+                                 distribution_name: ::String,
+                                 ?origin: {
+                                   name: ::String?,
+                                   region_name: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "eu-north-1")?,
+                                   protocol_policy: ("http-only" | "https-only")?
+                                 },
+                                 ?default_cache_behavior: {
+                                   behavior: ("dont-cache" | "cache")?
+                                 },
+                                 ?cache_behavior_settings: {
+                                   default_ttl: ::Integer?,
+                                   minimum_ttl: ::Integer?,
+                                   maximum_ttl: ::Integer?,
+                                   allowed_http_methods: ::String?,
+                                   cached_http_methods: ::String?,
+                                   forwarded_cookies: {
+                                     option: ("none" | "allow-list" | "all")?,
+                                     cookies_allow_list: Array[::String]?
+                                   }?,
+                                   forwarded_headers: {
+                                     option: ("none" | "allow-list" | "all")?,
+                                     headers_allow_list: Array[("Accept" | "Accept-Charset" | "Accept-Datetime" | "Accept-Encoding" | "Accept-Language" | "Authorization" | "CloudFront-Forwarded-Proto" | "CloudFront-Is-Desktop-Viewer" | "CloudFront-Is-Mobile-Viewer" | "CloudFront-Is-SmartTV-Viewer" | "CloudFront-Is-Tablet-Viewer" | "CloudFront-Viewer-Country" | "Host" | "Origin" | "Referer")]?
+                                   }?,
+                                   forwarded_query_strings: {
+                                     option: bool?,
+                                     query_strings_allow_list: Array[::String]?
+                                   }?
+                                 },
+                                 ?cache_behaviors: Array[
+                                   {
+                                     path: ::String?,
+                                     behavior: ("dont-cache" | "cache")?
+                                   },
+                                 ],
+                                 ?is_enabled: bool
+                               ) -> _UpdateDistributionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDistributionResponseSuccess
+
+      interface _UpdateDistributionBundleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDistributionBundleResult]
+        def operation: () -> Types::Operation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#update_distribution_bundle-instance_method
+      def update_distribution_bundle: (
+                                        ?distribution_name: ::String,
+                                        ?bundle_id: ::String
+                                      ) -> _UpdateDistributionBundleResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDistributionBundleResponseSuccess
+
+      interface _UpdateDomainEntryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDomainEntryResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#update_domain_entry-instance_method
+      def update_domain_entry: (
+                                 domain_name: ::String,
+                                 domain_entry: {
+                                   id: ::String?,
+                                   name: ::String?,
+                                   target: ::String?,
+                                   is_alias: bool?,
+                                   type: ::String?,
+                                   options: Hash[::String, ::String]?
+                                 }
+                               ) -> _UpdateDomainEntryResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainEntryResponseSuccess
+
+      interface _UpdateInstanceMetadataOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateInstanceMetadataOptionsResult]
+        def operation: () -> Types::Operation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#update_instance_metadata_options-instance_method
+      def update_instance_metadata_options: (
+                                              instance_name: ::String,
+                                              ?http_tokens: ("optional" | "required"),
+                                              ?http_endpoint: ("disabled" | "enabled"),
+                                              ?http_put_response_hop_limit: ::Integer,
+                                              ?http_protocol_ipv_6: ("disabled" | "enabled")
+                                            ) -> _UpdateInstanceMetadataOptionsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateInstanceMetadataOptionsResponseSuccess
+
+      interface _UpdateLoadBalancerAttributeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLoadBalancerAttributeResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#update_load_balancer_attribute-instance_method
+      def update_load_balancer_attribute: (
+                                            load_balancer_name: ::String,
+                                            attribute_name: ("HealthCheckPath" | "SessionStickinessEnabled" | "SessionStickiness_LB_CookieDurationSeconds" | "HttpsRedirectionEnabled" | "TlsPolicyName"),
+                                            attribute_value: ::String
+                                          ) -> _UpdateLoadBalancerAttributeResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLoadBalancerAttributeResponseSuccess
+
+      interface _UpdateRelationalDatabaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRelationalDatabaseResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#update_relational_database-instance_method
+      def update_relational_database: (
+                                        relational_database_name: ::String,
+                                        ?master_user_password: ::String,
+                                        ?rotate_master_user_password: bool,
+                                        ?preferred_backup_window: ::String,
+                                        ?preferred_maintenance_window: ::String,
+                                        ?enable_backup_retention: bool,
+                                        ?disable_backup_retention: bool,
+                                        ?publicly_accessible: bool,
+                                        ?apply_immediately: bool,
+                                        ?ca_certificate_identifier: ::String
+                                      ) -> _UpdateRelationalDatabaseResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRelationalDatabaseResponseSuccess
+
+      interface _UpdateRelationalDatabaseParametersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRelationalDatabaseParametersResult]
+        def operations: () -> ::Array[Types::Operation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#update_relational_database_parameters-instance_method
+      def update_relational_database_parameters: (
+                                                   relational_database_name: ::String,
+                                                   parameters: Array[
+                                                     {
+                                                       allowed_values: ::String?,
+                                                       apply_method: ::String?,
+                                                       apply_type: ::String?,
+                                                       data_type: ::String?,
+                                                       description: ::String?,
+                                                       is_modifiable: bool?,
+                                                       parameter_name: ::String?,
+                                                       parameter_value: ::String?
+                                                     },
+                                                   ]
+                                                 ) -> _UpdateRelationalDatabaseParametersResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRelationalDatabaseParametersResponseSuccess
+    end
+  end
+end
+

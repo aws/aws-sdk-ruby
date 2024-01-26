@@ -1,0 +1,106 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RDS
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBClusterParameterGroup.html
+    class DBClusterParameterGroup
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBClusterParameterGroup.html#initialize-instance_method
+      def initialize: (String name, Hash[Symbol, untyped] options) -> void
+                    | (name: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBClusterParameterGroup.html#name-instance_method
+      def name: () -> String
+      alias db_cluster_parameter_group_name name
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBClusterParameterGroup.html#db_parameter_group_family-instance_method
+      def db_parameter_group_family: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBClusterParameterGroup.html#description-instance_method
+      def description: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBClusterParameterGroup.html#db_cluster_parameter_group_arn-instance_method
+      def db_cluster_parameter_group_arn: () -> ::String
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBClusterParameterGroup.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBClusterParameterGroup.html#data-instance_method
+      def data: () -> Types::DBClusterParameterGroup
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBClusterParameterGroup.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBClusterParameterGroup.html#create-instance_method
+      def create: (
+                    db_parameter_group_family: ::String,
+                    description: ::String,
+                    ?tags: Array[
+                      {
+                        key: ::String?,
+                        value: ::String?
+                      },
+                    ]
+                  ) -> DBClusterParameterGroup
+                | (?Hash[Symbol, untyped]) -> DBClusterParameterGroup
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBClusterParameterGroup.html#delete-instance_method
+      def delete: (
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBClusterParameterGroup.html#modify-instance_method
+      def modify: (
+                    parameters: Array[
+                      {
+                        parameter_name: ::String?,
+                        parameter_value: ::String?,
+                        description: ::String?,
+                        source: ::String?,
+                        apply_type: ::String?,
+                        data_type: ::String?,
+                        allowed_values: ::String?,
+                        is_modifiable: bool?,
+                        minimum_engine_version: ::String?,
+                        apply_method: ("immediate" | "pending-reboot")?,
+                        supported_engine_modes: Array[::String]?
+                      },
+                    ]
+                  ) -> DBClusterParameterGroup
+                | (?Hash[Symbol, untyped]) -> DBClusterParameterGroup
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBClusterParameterGroup.html#reset-instance_method
+      def reset: (
+                   ?reset_all_parameters: bool,
+                   ?parameters: Array[
+                     {
+                       parameter_name: ::String?,
+                       parameter_value: ::String?,
+                       description: ::String?,
+                       source: ::String?,
+                       apply_type: ::String?,
+                       data_type: ::String?,
+                       allowed_values: ::String?,
+                       is_modifiable: bool?,
+                       minimum_engine_version: ::String?,
+                       apply_method: ("immediate" | "pending-reboot")?,
+                       supported_engine_modes: Array[::String]?
+                     },
+                   ]
+                 ) -> DBClusterParameterGroup
+               | (?Hash[Symbol, untyped]) -> DBClusterParameterGroup
+
+      class Collection < ::Aws::Resources::Collection[DBClusterParameterGroup]
+      end
+    end
+  end
+end

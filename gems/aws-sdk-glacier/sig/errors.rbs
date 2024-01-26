@@ -1,0 +1,56 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Glacier
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class InsufficientCapacityException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def code: () -> ::String
+        def message: () -> ::String
+      end
+      class InvalidParameterValueException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def code: () -> ::String
+        def message: () -> ::String
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def code: () -> ::String
+        def message: () -> ::String
+      end
+      class MissingParameterValueException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def code: () -> ::String
+        def message: () -> ::String
+      end
+      class PolicyEnforcedException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def code: () -> ::String
+        def message: () -> ::String
+      end
+      class RequestTimeoutException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def code: () -> ::String
+        def message: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def code: () -> ::String
+        def message: () -> ::String
+      end
+      class ServiceUnavailableException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def code: () -> ::String
+        def message: () -> ::String
+      end
+    end
+  end
+end

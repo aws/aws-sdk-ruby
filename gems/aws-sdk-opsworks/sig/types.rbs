@@ -1,0 +1,1269 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::OpsWorks
+  module Types
+
+    class AgentVersion
+      attr_accessor version: ::String
+      attr_accessor configuration_manager: Types::StackConfigurationManager
+      SENSITIVE: []
+    end
+
+    class App
+      attr_accessor app_id: ::String
+      attr_accessor stack_id: ::String
+      attr_accessor shortname: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor data_sources: ::Array[Types::DataSource]
+      attr_accessor type: ("aws-flow-ruby" | "java" | "rails" | "php" | "nodejs" | "static" | "other")
+      attr_accessor app_source: Types::Source
+      attr_accessor domains: ::Array[::String]
+      attr_accessor enable_ssl: bool
+      attr_accessor ssl_configuration: Types::SslConfiguration
+      attr_accessor attributes: ::Hash[("DocumentRoot" | "RailsEnv" | "AutoBundleOnDeploy" | "AwsFlowRubySettings"), ::String]
+      attr_accessor created_at: ::String
+      attr_accessor environment: ::Array[Types::EnvironmentVariable]
+      SENSITIVE: []
+    end
+
+    class AssignInstanceRequest
+      attr_accessor instance_id: ::String
+      attr_accessor layer_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AssignVolumeRequest
+      attr_accessor volume_id: ::String
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateElasticIpRequest
+      attr_accessor elastic_ip: ::String
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class AttachElasticLoadBalancerRequest
+      attr_accessor elastic_load_balancer_name: ::String
+      attr_accessor layer_id: ::String
+      SENSITIVE: []
+    end
+
+    class AutoScalingThresholds
+      attr_accessor instance_count: ::Integer
+      attr_accessor thresholds_wait_time: ::Integer
+      attr_accessor ignore_metrics_time: ::Integer
+      attr_accessor cpu_threshold: ::Float
+      attr_accessor memory_threshold: ::Float
+      attr_accessor load_threshold: ::Float
+      attr_accessor alarms: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BlockDeviceMapping
+      attr_accessor device_name: ::String
+      attr_accessor no_device: ::String
+      attr_accessor virtual_name: ::String
+      attr_accessor ebs: Types::EbsBlockDevice
+      SENSITIVE: []
+    end
+
+    class ChefConfiguration
+      attr_accessor manage_berkshelf: bool
+      attr_accessor berkshelf_version: ::String
+      SENSITIVE: []
+    end
+
+    class CloneStackRequest
+      attr_accessor source_stack_id: ::String
+      attr_accessor name: ::String
+      attr_accessor region: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor attributes: ::Hash[("Color"), ::String]
+      attr_accessor service_role_arn: ::String
+      attr_accessor default_instance_profile_arn: ::String
+      attr_accessor default_os: ::String
+      attr_accessor hostname_theme: ::String
+      attr_accessor default_availability_zone: ::String
+      attr_accessor default_subnet_id: ::String
+      attr_accessor custom_json: ::String
+      attr_accessor configuration_manager: Types::StackConfigurationManager
+      attr_accessor chef_configuration: Types::ChefConfiguration
+      attr_accessor use_custom_cookbooks: bool
+      attr_accessor use_opsworks_security_groups: bool
+      attr_accessor custom_cookbooks_source: Types::Source
+      attr_accessor default_ssh_key_name: ::String
+      attr_accessor clone_permissions: bool
+      attr_accessor clone_app_ids: ::Array[::String]
+      attr_accessor default_root_device_type: ("ebs" | "instance-store")
+      attr_accessor agent_version: ::String
+      SENSITIVE: []
+    end
+
+    class CloneStackResult
+      attr_accessor stack_id: ::String
+      SENSITIVE: []
+    end
+
+    class CloudWatchLogsConfiguration
+      attr_accessor enabled: bool
+      attr_accessor log_streams: ::Array[Types::CloudWatchLogsLogStream]
+      SENSITIVE: []
+    end
+
+    class CloudWatchLogsLogStream
+      attr_accessor log_group_name: ::String
+      attr_accessor datetime_format: ::String
+      attr_accessor time_zone: ("LOCAL" | "UTC")
+      attr_accessor file: ::String
+      attr_accessor file_fingerprint_lines: ::String
+      attr_accessor multi_line_start_pattern: ::String
+      attr_accessor initial_position: ("start_of_file" | "end_of_file")
+      attr_accessor encoding: ("ascii" | "big5" | "big5hkscs" | "cp037" | "cp424" | "cp437" | "cp500" | "cp720" | "cp737" | "cp775" | "cp850" | "cp852" | "cp855" | "cp856" | "cp857" | "cp858" | "cp860" | "cp861" | "cp862" | "cp863" | "cp864" | "cp865" | "cp866" | "cp869" | "cp874" | "cp875" | "cp932" | "cp949" | "cp950" | "cp1006" | "cp1026" | "cp1140" | "cp1250" | "cp1251" | "cp1252" | "cp1253" | "cp1254" | "cp1255" | "cp1256" | "cp1257" | "cp1258" | "euc_jp" | "euc_jis_2004" | "euc_jisx0213" | "euc_kr" | "gb2312" | "gbk" | "gb18030" | "hz" | "iso2022_jp" | "iso2022_jp_1" | "iso2022_jp_2" | "iso2022_jp_2004" | "iso2022_jp_3" | "iso2022_jp_ext" | "iso2022_kr" | "latin_1" | "iso8859_2" | "iso8859_3" | "iso8859_4" | "iso8859_5" | "iso8859_6" | "iso8859_7" | "iso8859_8" | "iso8859_9" | "iso8859_10" | "iso8859_13" | "iso8859_14" | "iso8859_15" | "iso8859_16" | "johab" | "koi8_r" | "koi8_u" | "mac_cyrillic" | "mac_greek" | "mac_iceland" | "mac_latin2" | "mac_roman" | "mac_turkish" | "ptcp154" | "shift_jis" | "shift_jis_2004" | "shift_jisx0213" | "utf_32" | "utf_32_be" | "utf_32_le" | "utf_16" | "utf_16_be" | "utf_16_le" | "utf_7" | "utf_8" | "utf_8_sig")
+      attr_accessor buffer_duration: ::Integer
+      attr_accessor batch_count: ::Integer
+      attr_accessor batch_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class Command
+      attr_accessor command_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor deployment_id: ::String
+      attr_accessor created_at: ::String
+      attr_accessor acknowledged_at: ::String
+      attr_accessor completed_at: ::String
+      attr_accessor status: ::String
+      attr_accessor exit_code: ::Integer
+      attr_accessor log_url: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAppRequest
+      attr_accessor stack_id: ::String
+      attr_accessor shortname: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor data_sources: ::Array[Types::DataSource]
+      attr_accessor type: ("aws-flow-ruby" | "java" | "rails" | "php" | "nodejs" | "static" | "other")
+      attr_accessor app_source: Types::Source
+      attr_accessor domains: ::Array[::String]
+      attr_accessor enable_ssl: bool
+      attr_accessor ssl_configuration: Types::SslConfiguration
+      attr_accessor attributes: ::Hash[("DocumentRoot" | "RailsEnv" | "AutoBundleOnDeploy" | "AwsFlowRubySettings"), ::String]
+      attr_accessor environment: ::Array[Types::EnvironmentVariable]
+      SENSITIVE: []
+    end
+
+    class CreateAppResult
+      attr_accessor app_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDeploymentRequest
+      attr_accessor stack_id: ::String
+      attr_accessor app_id: ::String
+      attr_accessor instance_ids: ::Array[::String]
+      attr_accessor layer_ids: ::Array[::String]
+      attr_accessor command: Types::DeploymentCommand
+      attr_accessor comment: ::String
+      attr_accessor custom_json: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDeploymentResult
+      attr_accessor deployment_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateInstanceRequest
+      attr_accessor stack_id: ::String
+      attr_accessor layer_ids: ::Array[::String]
+      attr_accessor instance_type: ::String
+      attr_accessor auto_scaling_type: ("load" | "timer")
+      attr_accessor hostname: ::String
+      attr_accessor os: ::String
+      attr_accessor ami_id: ::String
+      attr_accessor ssh_key_name: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor virtualization_type: ::String
+      attr_accessor subnet_id: ::String
+      attr_accessor architecture: ("x86_64" | "i386")
+      attr_accessor root_device_type: ("ebs" | "instance-store")
+      attr_accessor block_device_mappings: ::Array[Types::BlockDeviceMapping]
+      attr_accessor install_updates_on_boot: bool
+      attr_accessor ebs_optimized: bool
+      attr_accessor agent_version: ::String
+      attr_accessor tenancy: ::String
+      SENSITIVE: []
+    end
+
+    class CreateInstanceResult
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLayerRequest
+      attr_accessor stack_id: ::String
+      attr_accessor type: ("aws-flow-ruby" | "ecs-cluster" | "java-app" | "lb" | "web" | "php-app" | "rails-app" | "nodejs-app" | "memcached" | "db-master" | "monitoring-master" | "custom")
+      attr_accessor name: ::String
+      attr_accessor shortname: ::String
+      attr_accessor attributes: ::Hash[("EcsClusterArn" | "EnableHaproxyStats" | "HaproxyStatsUrl" | "HaproxyStatsUser" | "HaproxyStatsPassword" | "HaproxyHealthCheckUrl" | "HaproxyHealthCheckMethod" | "MysqlRootPassword" | "MysqlRootPasswordUbiquitous" | "GangliaUrl" | "GangliaUser" | "GangliaPassword" | "MemcachedMemory" | "NodejsVersion" | "RubyVersion" | "RubygemsVersion" | "ManageBundler" | "BundlerVersion" | "RailsStack" | "PassengerVersion" | "Jvm" | "JvmVersion" | "JvmOptions" | "JavaAppServer" | "JavaAppServerVersion"), ::String]
+      attr_accessor cloud_watch_logs_configuration: Types::CloudWatchLogsConfiguration
+      attr_accessor custom_instance_profile_arn: ::String
+      attr_accessor custom_json: ::String
+      attr_accessor custom_security_group_ids: ::Array[::String]
+      attr_accessor packages: ::Array[::String]
+      attr_accessor volume_configurations: ::Array[Types::VolumeConfiguration]
+      attr_accessor enable_auto_healing: bool
+      attr_accessor auto_assign_elastic_ips: bool
+      attr_accessor auto_assign_public_ips: bool
+      attr_accessor custom_recipes: Types::Recipes
+      attr_accessor install_updates_on_boot: bool
+      attr_accessor use_ebs_optimized_instances: bool
+      attr_accessor lifecycle_event_configuration: Types::LifecycleEventConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateLayerResult
+      attr_accessor layer_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateStackRequest
+      attr_accessor name: ::String
+      attr_accessor region: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor attributes: ::Hash[("Color"), ::String]
+      attr_accessor service_role_arn: ::String
+      attr_accessor default_instance_profile_arn: ::String
+      attr_accessor default_os: ::String
+      attr_accessor hostname_theme: ::String
+      attr_accessor default_availability_zone: ::String
+      attr_accessor default_subnet_id: ::String
+      attr_accessor custom_json: ::String
+      attr_accessor configuration_manager: Types::StackConfigurationManager
+      attr_accessor chef_configuration: Types::ChefConfiguration
+      attr_accessor use_custom_cookbooks: bool
+      attr_accessor use_opsworks_security_groups: bool
+      attr_accessor custom_cookbooks_source: Types::Source
+      attr_accessor default_ssh_key_name: ::String
+      attr_accessor default_root_device_type: ("ebs" | "instance-store")
+      attr_accessor agent_version: ::String
+      SENSITIVE: []
+    end
+
+    class CreateStackResult
+      attr_accessor stack_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateUserProfileRequest
+      attr_accessor iam_user_arn: ::String
+      attr_accessor ssh_username: ::String
+      attr_accessor ssh_public_key: ::String
+      attr_accessor allow_self_management: bool
+      SENSITIVE: []
+    end
+
+    class CreateUserProfileResult
+      attr_accessor iam_user_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DataSource
+      attr_accessor type: ::String
+      attr_accessor arn: ::String
+      attr_accessor database_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAppRequest
+      attr_accessor app_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInstanceRequest
+      attr_accessor instance_id: ::String
+      attr_accessor delete_elastic_ip: bool
+      attr_accessor delete_volumes: bool
+      SENSITIVE: []
+    end
+
+    class DeleteLayerRequest
+      attr_accessor layer_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStackRequest
+      attr_accessor stack_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUserProfileRequest
+      attr_accessor iam_user_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Deployment
+      attr_accessor deployment_id: ::String
+      attr_accessor stack_id: ::String
+      attr_accessor app_id: ::String
+      attr_accessor created_at: ::String
+      attr_accessor completed_at: ::String
+      attr_accessor duration: ::Integer
+      attr_accessor iam_user_arn: ::String
+      attr_accessor comment: ::String
+      attr_accessor command: Types::DeploymentCommand
+      attr_accessor status: ::String
+      attr_accessor custom_json: ::String
+      attr_accessor instance_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeploymentCommand
+      attr_accessor name: ("install_dependencies" | "update_dependencies" | "update_custom_cookbooks" | "execute_recipes" | "configure" | "setup" | "deploy" | "rollback" | "start" | "stop" | "restart" | "undeploy")
+      attr_accessor args: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class DeregisterEcsClusterRequest
+      attr_accessor ecs_cluster_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterElasticIpRequest
+      attr_accessor elastic_ip: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterInstanceRequest
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterRdsDbInstanceRequest
+      attr_accessor rds_db_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterVolumeRequest
+      attr_accessor volume_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAgentVersionsRequest
+      attr_accessor stack_id: ::String
+      attr_accessor configuration_manager: Types::StackConfigurationManager
+      SENSITIVE: []
+    end
+
+    class DescribeAgentVersionsResult
+      attr_accessor agent_versions: ::Array[Types::AgentVersion]
+      SENSITIVE: []
+    end
+
+    class DescribeAppsRequest
+      attr_accessor stack_id: ::String
+      attr_accessor app_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeAppsResult
+      attr_accessor apps: ::Array[Types::App]
+      SENSITIVE: []
+    end
+
+    class DescribeCommandsRequest
+      attr_accessor deployment_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor command_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeCommandsResult
+      attr_accessor commands: ::Array[Types::Command]
+      SENSITIVE: []
+    end
+
+    class DescribeDeploymentsRequest
+      attr_accessor stack_id: ::String
+      attr_accessor app_id: ::String
+      attr_accessor deployment_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeDeploymentsResult
+      attr_accessor deployments: ::Array[Types::Deployment]
+      SENSITIVE: []
+    end
+
+    class DescribeEcsClustersRequest
+      attr_accessor ecs_cluster_arns: ::Array[::String]
+      attr_accessor stack_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeEcsClustersResult
+      attr_accessor ecs_clusters: ::Array[Types::EcsCluster]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeElasticIpsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor stack_id: ::String
+      attr_accessor ips: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeElasticIpsResult
+      attr_accessor elastic_ips: ::Array[Types::ElasticIp]
+      SENSITIVE: []
+    end
+
+    class DescribeElasticLoadBalancersRequest
+      attr_accessor stack_id: ::String
+      attr_accessor layer_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeElasticLoadBalancersResult
+      attr_accessor elastic_load_balancers: ::Array[Types::ElasticLoadBalancer]
+      SENSITIVE: []
+    end
+
+    class DescribeInstancesRequest
+      attr_accessor stack_id: ::String
+      attr_accessor layer_id: ::String
+      attr_accessor instance_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeInstancesResult
+      attr_accessor instances: ::Array[Types::Instance]
+      SENSITIVE: []
+    end
+
+    class DescribeLayersRequest
+      attr_accessor stack_id: ::String
+      attr_accessor layer_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeLayersResult
+      attr_accessor layers: ::Array[Types::Layer]
+      SENSITIVE: []
+    end
+
+    class DescribeLoadBasedAutoScalingRequest
+      attr_accessor layer_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeLoadBasedAutoScalingResult
+      attr_accessor load_based_auto_scaling_configurations: ::Array[Types::LoadBasedAutoScalingConfiguration]
+      SENSITIVE: []
+    end
+
+    class DescribeMyUserProfileResult
+      attr_accessor user_profile: Types::SelfUserProfile
+      SENSITIVE: []
+    end
+
+    class DescribeOperatingSystemsResponse
+      attr_accessor operating_systems: ::Array[Types::OperatingSystem]
+      SENSITIVE: []
+    end
+
+    class DescribePermissionsRequest
+      attr_accessor iam_user_arn: ::String
+      attr_accessor stack_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePermissionsResult
+      attr_accessor permissions: ::Array[Types::Permission]
+      SENSITIVE: []
+    end
+
+    class DescribeRaidArraysRequest
+      attr_accessor instance_id: ::String
+      attr_accessor stack_id: ::String
+      attr_accessor raid_array_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeRaidArraysResult
+      attr_accessor raid_arrays: ::Array[Types::RaidArray]
+      SENSITIVE: []
+    end
+
+    class DescribeRdsDbInstancesRequest
+      attr_accessor stack_id: ::String
+      attr_accessor rds_db_instance_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeRdsDbInstancesResult
+      attr_accessor rds_db_instances: ::Array[Types::RdsDbInstance]
+      SENSITIVE: []
+    end
+
+    class DescribeServiceErrorsRequest
+      attr_accessor stack_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor service_error_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeServiceErrorsResult
+      attr_accessor service_errors: ::Array[Types::ServiceError]
+      SENSITIVE: []
+    end
+
+    class DescribeStackProvisioningParametersRequest
+      attr_accessor stack_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStackProvisioningParametersResult
+      attr_accessor agent_installer_url: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DescribeStackSummaryRequest
+      attr_accessor stack_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStackSummaryResult
+      attr_accessor stack_summary: Types::StackSummary
+      SENSITIVE: []
+    end
+
+    class DescribeStacksRequest
+      attr_accessor stack_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeStacksResult
+      attr_accessor stacks: ::Array[Types::Stack]
+      SENSITIVE: []
+    end
+
+    class DescribeTimeBasedAutoScalingRequest
+      attr_accessor instance_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeTimeBasedAutoScalingResult
+      attr_accessor time_based_auto_scaling_configurations: ::Array[Types::TimeBasedAutoScalingConfiguration]
+      SENSITIVE: []
+    end
+
+    class DescribeUserProfilesRequest
+      attr_accessor iam_user_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeUserProfilesResult
+      attr_accessor user_profiles: ::Array[Types::UserProfile]
+      SENSITIVE: []
+    end
+
+    class DescribeVolumesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor stack_id: ::String
+      attr_accessor raid_array_id: ::String
+      attr_accessor volume_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeVolumesResult
+      attr_accessor volumes: ::Array[Types::Volume]
+      SENSITIVE: []
+    end
+
+    class DetachElasticLoadBalancerRequest
+      attr_accessor elastic_load_balancer_name: ::String
+      attr_accessor layer_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateElasticIpRequest
+      attr_accessor elastic_ip: ::String
+      SENSITIVE: []
+    end
+
+    class EbsBlockDevice
+      attr_accessor snapshot_id: ::String
+      attr_accessor iops: ::Integer
+      attr_accessor volume_size: ::Integer
+      attr_accessor volume_type: ("gp2" | "io1" | "standard")
+      attr_accessor delete_on_termination: bool
+      SENSITIVE: []
+    end
+
+    class EcsCluster
+      attr_accessor ecs_cluster_arn: ::String
+      attr_accessor ecs_cluster_name: ::String
+      attr_accessor stack_id: ::String
+      attr_accessor registered_at: ::String
+      SENSITIVE: []
+    end
+
+    class ElasticIp
+      attr_accessor ip: ::String
+      attr_accessor name: ::String
+      attr_accessor domain: ::String
+      attr_accessor region: ::String
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class ElasticLoadBalancer
+      attr_accessor elastic_load_balancer_name: ::String
+      attr_accessor region: ::String
+      attr_accessor dns_name: ::String
+      attr_accessor stack_id: ::String
+      attr_accessor layer_id: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor ec2_instance_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class EnvironmentVariable
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      attr_accessor secure: bool
+      SENSITIVE: []
+    end
+
+    class GetHostnameSuggestionRequest
+      attr_accessor layer_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetHostnameSuggestionResult
+      attr_accessor layer_id: ::String
+      attr_accessor hostname: ::String
+      SENSITIVE: []
+    end
+
+    class GrantAccessRequest
+      attr_accessor instance_id: ::String
+      attr_accessor valid_for_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class GrantAccessResult
+      attr_accessor temporary_credential: Types::TemporaryCredential
+      SENSITIVE: []
+    end
+
+    class Instance
+      attr_accessor agent_version: ::String
+      attr_accessor ami_id: ::String
+      attr_accessor architecture: ("x86_64" | "i386")
+      attr_accessor arn: ::String
+      attr_accessor auto_scaling_type: ("load" | "timer")
+      attr_accessor availability_zone: ::String
+      attr_accessor block_device_mappings: ::Array[Types::BlockDeviceMapping]
+      attr_accessor created_at: ::String
+      attr_accessor ebs_optimized: bool
+      attr_accessor ec2_instance_id: ::String
+      attr_accessor ecs_cluster_arn: ::String
+      attr_accessor ecs_container_instance_arn: ::String
+      attr_accessor elastic_ip: ::String
+      attr_accessor hostname: ::String
+      attr_accessor infrastructure_class: ::String
+      attr_accessor install_updates_on_boot: bool
+      attr_accessor instance_id: ::String
+      attr_accessor instance_profile_arn: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor last_service_error_id: ::String
+      attr_accessor layer_ids: ::Array[::String]
+      attr_accessor os: ::String
+      attr_accessor platform: ::String
+      attr_accessor private_dns: ::String
+      attr_accessor private_ip: ::String
+      attr_accessor public_dns: ::String
+      attr_accessor public_ip: ::String
+      attr_accessor registered_by: ::String
+      attr_accessor reported_agent_version: ::String
+      attr_accessor reported_os: Types::ReportedOs
+      attr_accessor root_device_type: ("ebs" | "instance-store")
+      attr_accessor root_device_volume_id: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor ssh_host_dsa_key_fingerprint: ::String
+      attr_accessor ssh_host_rsa_key_fingerprint: ::String
+      attr_accessor ssh_key_name: ::String
+      attr_accessor stack_id: ::String
+      attr_accessor status: ::String
+      attr_accessor subnet_id: ::String
+      attr_accessor tenancy: ::String
+      attr_accessor virtualization_type: ("paravirtual" | "hvm")
+      SENSITIVE: []
+    end
+
+    class InstanceIdentity
+      attr_accessor document: ::String
+      attr_accessor signature: ::String
+      SENSITIVE: []
+    end
+
+    class InstancesCount
+      attr_accessor assigning: ::Integer
+      attr_accessor booting: ::Integer
+      attr_accessor connection_lost: ::Integer
+      attr_accessor deregistering: ::Integer
+      attr_accessor online: ::Integer
+      attr_accessor pending: ::Integer
+      attr_accessor rebooting: ::Integer
+      attr_accessor registered: ::Integer
+      attr_accessor registering: ::Integer
+      attr_accessor requested: ::Integer
+      attr_accessor running_setup: ::Integer
+      attr_accessor setup_failed: ::Integer
+      attr_accessor shutting_down: ::Integer
+      attr_accessor start_failed: ::Integer
+      attr_accessor stop_failed: ::Integer
+      attr_accessor stopped: ::Integer
+      attr_accessor stopping: ::Integer
+      attr_accessor terminated: ::Integer
+      attr_accessor terminating: ::Integer
+      attr_accessor unassigning: ::Integer
+      SENSITIVE: []
+    end
+
+    class Layer
+      attr_accessor arn: ::String
+      attr_accessor stack_id: ::String
+      attr_accessor layer_id: ::String
+      attr_accessor type: ("aws-flow-ruby" | "ecs-cluster" | "java-app" | "lb" | "web" | "php-app" | "rails-app" | "nodejs-app" | "memcached" | "db-master" | "monitoring-master" | "custom")
+      attr_accessor name: ::String
+      attr_accessor shortname: ::String
+      attr_accessor attributes: ::Hash[("EcsClusterArn" | "EnableHaproxyStats" | "HaproxyStatsUrl" | "HaproxyStatsUser" | "HaproxyStatsPassword" | "HaproxyHealthCheckUrl" | "HaproxyHealthCheckMethod" | "MysqlRootPassword" | "MysqlRootPasswordUbiquitous" | "GangliaUrl" | "GangliaUser" | "GangliaPassword" | "MemcachedMemory" | "NodejsVersion" | "RubyVersion" | "RubygemsVersion" | "ManageBundler" | "BundlerVersion" | "RailsStack" | "PassengerVersion" | "Jvm" | "JvmVersion" | "JvmOptions" | "JavaAppServer" | "JavaAppServerVersion"), ::String]
+      attr_accessor cloud_watch_logs_configuration: Types::CloudWatchLogsConfiguration
+      attr_accessor custom_instance_profile_arn: ::String
+      attr_accessor custom_json: ::String
+      attr_accessor custom_security_group_ids: ::Array[::String]
+      attr_accessor default_security_group_names: ::Array[::String]
+      attr_accessor packages: ::Array[::String]
+      attr_accessor volume_configurations: ::Array[Types::VolumeConfiguration]
+      attr_accessor enable_auto_healing: bool
+      attr_accessor auto_assign_elastic_ips: bool
+      attr_accessor auto_assign_public_ips: bool
+      attr_accessor default_recipes: Types::Recipes
+      attr_accessor custom_recipes: Types::Recipes
+      attr_accessor created_at: ::String
+      attr_accessor install_updates_on_boot: bool
+      attr_accessor use_ebs_optimized_instances: bool
+      attr_accessor lifecycle_event_configuration: Types::LifecycleEventConfiguration
+      SENSITIVE: []
+    end
+
+    class LifecycleEventConfiguration
+      attr_accessor shutdown: Types::ShutdownEventConfiguration
+      SENSITIVE: []
+    end
+
+    class ListTagsRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsResult
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LoadBasedAutoScalingConfiguration
+      attr_accessor layer_id: ::String
+      attr_accessor enable: bool
+      attr_accessor up_scaling: Types::AutoScalingThresholds
+      attr_accessor down_scaling: Types::AutoScalingThresholds
+      SENSITIVE: []
+    end
+
+    class OperatingSystem
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor type: ::String
+      attr_accessor configuration_managers: ::Array[Types::OperatingSystemConfigurationManager]
+      attr_accessor reported_name: ::String
+      attr_accessor reported_version: ::String
+      attr_accessor supported: bool
+      SENSITIVE: []
+    end
+
+    class OperatingSystemConfigurationManager
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class Permission
+      attr_accessor stack_id: ::String
+      attr_accessor iam_user_arn: ::String
+      attr_accessor allow_ssh: bool
+      attr_accessor allow_sudo: bool
+      attr_accessor level: ::String
+      SENSITIVE: []
+    end
+
+    class RaidArray
+      attr_accessor raid_array_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      attr_accessor raid_level: ::Integer
+      attr_accessor number_of_disks: ::Integer
+      attr_accessor size: ::Integer
+      attr_accessor device: ::String
+      attr_accessor mount_point: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor created_at: ::String
+      attr_accessor stack_id: ::String
+      attr_accessor volume_type: ::String
+      attr_accessor iops: ::Integer
+      SENSITIVE: []
+    end
+
+    class RdsDbInstance
+      attr_accessor rds_db_instance_arn: ::String
+      attr_accessor db_instance_identifier: ::String
+      attr_accessor db_user: ::String
+      attr_accessor db_password: ::String
+      attr_accessor region: ::String
+      attr_accessor address: ::String
+      attr_accessor engine: ::String
+      attr_accessor stack_id: ::String
+      attr_accessor missing_on_rds: bool
+      SENSITIVE: []
+    end
+
+    class RebootInstanceRequest
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class Recipes
+      attr_accessor setup: ::Array[::String]
+      attr_accessor configure: ::Array[::String]
+      attr_accessor deploy: ::Array[::String]
+      attr_accessor undeploy: ::Array[::String]
+      attr_accessor shutdown: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RegisterEcsClusterRequest
+      attr_accessor ecs_cluster_arn: ::String
+      attr_accessor stack_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterEcsClusterResult
+      attr_accessor ecs_cluster_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterElasticIpRequest
+      attr_accessor elastic_ip: ::String
+      attr_accessor stack_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterElasticIpResult
+      attr_accessor elastic_ip: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterInstanceRequest
+      attr_accessor stack_id: ::String
+      attr_accessor hostname: ::String
+      attr_accessor public_ip: ::String
+      attr_accessor private_ip: ::String
+      attr_accessor rsa_public_key: ::String
+      attr_accessor rsa_public_key_fingerprint: ::String
+      attr_accessor instance_identity: Types::InstanceIdentity
+      SENSITIVE: []
+    end
+
+    class RegisterInstanceResult
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterRdsDbInstanceRequest
+      attr_accessor stack_id: ::String
+      attr_accessor rds_db_instance_arn: ::String
+      attr_accessor db_user: ::String
+      attr_accessor db_password: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterVolumeRequest
+      attr_accessor ec2_volume_id: ::String
+      attr_accessor stack_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterVolumeResult
+      attr_accessor volume_id: ::String
+      SENSITIVE: []
+    end
+
+    class ReportedOs
+      attr_accessor family: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SelfUserProfile
+      attr_accessor iam_user_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor ssh_username: ::String
+      attr_accessor ssh_public_key: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceError
+      attr_accessor service_error_id: ::String
+      attr_accessor stack_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      attr_accessor created_at: ::String
+      SENSITIVE: []
+    end
+
+    class SetLoadBasedAutoScalingRequest
+      attr_accessor layer_id: ::String
+      attr_accessor enable: bool
+      attr_accessor up_scaling: Types::AutoScalingThresholds
+      attr_accessor down_scaling: Types::AutoScalingThresholds
+      SENSITIVE: []
+    end
+
+    class SetPermissionRequest
+      attr_accessor stack_id: ::String
+      attr_accessor iam_user_arn: ::String
+      attr_accessor allow_ssh: bool
+      attr_accessor allow_sudo: bool
+      attr_accessor level: ::String
+      SENSITIVE: []
+    end
+
+    class SetTimeBasedAutoScalingRequest
+      attr_accessor instance_id: ::String
+      attr_accessor auto_scaling_schedule: Types::WeeklyAutoScalingSchedule
+      SENSITIVE: []
+    end
+
+    class ShutdownEventConfiguration
+      attr_accessor execution_timeout: ::Integer
+      attr_accessor delay_until_elb_connections_drained: bool
+      SENSITIVE: []
+    end
+
+    class Source
+      attr_accessor type: ("git" | "svn" | "archive" | "s3")
+      attr_accessor url: ::String
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      attr_accessor ssh_key: ::String
+      attr_accessor revision: ::String
+      SENSITIVE: []
+    end
+
+    class SslConfiguration
+      attr_accessor certificate: ::String
+      attr_accessor private_key: ::String
+      attr_accessor chain: ::String
+      SENSITIVE: []
+    end
+
+    class Stack
+      attr_accessor stack_id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor region: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor attributes: ::Hash[("Color"), ::String]
+      attr_accessor service_role_arn: ::String
+      attr_accessor default_instance_profile_arn: ::String
+      attr_accessor default_os: ::String
+      attr_accessor hostname_theme: ::String
+      attr_accessor default_availability_zone: ::String
+      attr_accessor default_subnet_id: ::String
+      attr_accessor custom_json: ::String
+      attr_accessor configuration_manager: Types::StackConfigurationManager
+      attr_accessor chef_configuration: Types::ChefConfiguration
+      attr_accessor use_custom_cookbooks: bool
+      attr_accessor use_opsworks_security_groups: bool
+      attr_accessor custom_cookbooks_source: Types::Source
+      attr_accessor default_ssh_key_name: ::String
+      attr_accessor created_at: ::String
+      attr_accessor default_root_device_type: ("ebs" | "instance-store")
+      attr_accessor agent_version: ::String
+      SENSITIVE: []
+    end
+
+    class StackConfigurationManager
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class StackSummary
+      attr_accessor stack_id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor layers_count: ::Integer
+      attr_accessor apps_count: ::Integer
+      attr_accessor instances_count: Types::InstancesCount
+      SENSITIVE: []
+    end
+
+    class StartInstanceRequest
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartStackRequest
+      attr_accessor stack_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopInstanceRequest
+      attr_accessor instance_id: ::String
+      attr_accessor force: bool
+      SENSITIVE: []
+    end
+
+    class StopStackRequest
+      attr_accessor stack_id: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TemporaryCredential
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      attr_accessor valid_for_in_minutes: ::Integer
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class TimeBasedAutoScalingConfiguration
+      attr_accessor instance_id: ::String
+      attr_accessor auto_scaling_schedule: Types::WeeklyAutoScalingSchedule
+      SENSITIVE: []
+    end
+
+    class UnassignInstanceRequest
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class UnassignVolumeRequest
+      attr_accessor volume_id: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateAppRequest
+      attr_accessor app_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor data_sources: ::Array[Types::DataSource]
+      attr_accessor type: ("aws-flow-ruby" | "java" | "rails" | "php" | "nodejs" | "static" | "other")
+      attr_accessor app_source: Types::Source
+      attr_accessor domains: ::Array[::String]
+      attr_accessor enable_ssl: bool
+      attr_accessor ssl_configuration: Types::SslConfiguration
+      attr_accessor attributes: ::Hash[("DocumentRoot" | "RailsEnv" | "AutoBundleOnDeploy" | "AwsFlowRubySettings"), ::String]
+      attr_accessor environment: ::Array[Types::EnvironmentVariable]
+      SENSITIVE: []
+    end
+
+    class UpdateElasticIpRequest
+      attr_accessor elastic_ip: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateInstanceRequest
+      attr_accessor instance_id: ::String
+      attr_accessor layer_ids: ::Array[::String]
+      attr_accessor instance_type: ::String
+      attr_accessor auto_scaling_type: ("load" | "timer")
+      attr_accessor hostname: ::String
+      attr_accessor os: ::String
+      attr_accessor ami_id: ::String
+      attr_accessor ssh_key_name: ::String
+      attr_accessor architecture: ("x86_64" | "i386")
+      attr_accessor install_updates_on_boot: bool
+      attr_accessor ebs_optimized: bool
+      attr_accessor agent_version: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateLayerRequest
+      attr_accessor layer_id: ::String
+      attr_accessor name: ::String
+      attr_accessor shortname: ::String
+      attr_accessor attributes: ::Hash[("EcsClusterArn" | "EnableHaproxyStats" | "HaproxyStatsUrl" | "HaproxyStatsUser" | "HaproxyStatsPassword" | "HaproxyHealthCheckUrl" | "HaproxyHealthCheckMethod" | "MysqlRootPassword" | "MysqlRootPasswordUbiquitous" | "GangliaUrl" | "GangliaUser" | "GangliaPassword" | "MemcachedMemory" | "NodejsVersion" | "RubyVersion" | "RubygemsVersion" | "ManageBundler" | "BundlerVersion" | "RailsStack" | "PassengerVersion" | "Jvm" | "JvmVersion" | "JvmOptions" | "JavaAppServer" | "JavaAppServerVersion"), ::String]
+      attr_accessor cloud_watch_logs_configuration: Types::CloudWatchLogsConfiguration
+      attr_accessor custom_instance_profile_arn: ::String
+      attr_accessor custom_json: ::String
+      attr_accessor custom_security_group_ids: ::Array[::String]
+      attr_accessor packages: ::Array[::String]
+      attr_accessor volume_configurations: ::Array[Types::VolumeConfiguration]
+      attr_accessor enable_auto_healing: bool
+      attr_accessor auto_assign_elastic_ips: bool
+      attr_accessor auto_assign_public_ips: bool
+      attr_accessor custom_recipes: Types::Recipes
+      attr_accessor install_updates_on_boot: bool
+      attr_accessor use_ebs_optimized_instances: bool
+      attr_accessor lifecycle_event_configuration: Types::LifecycleEventConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateMyUserProfileRequest
+      attr_accessor ssh_public_key: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRdsDbInstanceRequest
+      attr_accessor rds_db_instance_arn: ::String
+      attr_accessor db_user: ::String
+      attr_accessor db_password: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateStackRequest
+      attr_accessor stack_id: ::String
+      attr_accessor name: ::String
+      attr_accessor attributes: ::Hash[("Color"), ::String]
+      attr_accessor service_role_arn: ::String
+      attr_accessor default_instance_profile_arn: ::String
+      attr_accessor default_os: ::String
+      attr_accessor hostname_theme: ::String
+      attr_accessor default_availability_zone: ::String
+      attr_accessor default_subnet_id: ::String
+      attr_accessor custom_json: ::String
+      attr_accessor configuration_manager: Types::StackConfigurationManager
+      attr_accessor chef_configuration: Types::ChefConfiguration
+      attr_accessor use_custom_cookbooks: bool
+      attr_accessor custom_cookbooks_source: Types::Source
+      attr_accessor default_ssh_key_name: ::String
+      attr_accessor default_root_device_type: ("ebs" | "instance-store")
+      attr_accessor use_opsworks_security_groups: bool
+      attr_accessor agent_version: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateUserProfileRequest
+      attr_accessor iam_user_arn: ::String
+      attr_accessor ssh_username: ::String
+      attr_accessor ssh_public_key: ::String
+      attr_accessor allow_self_management: bool
+      SENSITIVE: []
+    end
+
+    class UpdateVolumeRequest
+      attr_accessor volume_id: ::String
+      attr_accessor name: ::String
+      attr_accessor mount_point: ::String
+      SENSITIVE: []
+    end
+
+    class UserProfile
+      attr_accessor iam_user_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor ssh_username: ::String
+      attr_accessor ssh_public_key: ::String
+      attr_accessor allow_self_management: bool
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Volume
+      attr_accessor volume_id: ::String
+      attr_accessor ec2_volume_id: ::String
+      attr_accessor name: ::String
+      attr_accessor raid_array_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor status: ::String
+      attr_accessor size: ::Integer
+      attr_accessor device: ::String
+      attr_accessor mount_point: ::String
+      attr_accessor region: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor volume_type: ::String
+      attr_accessor iops: ::Integer
+      attr_accessor encrypted: bool
+      SENSITIVE: []
+    end
+
+    class VolumeConfiguration
+      attr_accessor mount_point: ::String
+      attr_accessor raid_level: ::Integer
+      attr_accessor number_of_disks: ::Integer
+      attr_accessor size: ::Integer
+      attr_accessor volume_type: ::String
+      attr_accessor iops: ::Integer
+      attr_accessor encrypted: bool
+      SENSITIVE: []
+    end
+
+    class WeeklyAutoScalingSchedule
+      attr_accessor monday: ::Hash[::String, ::String]
+      attr_accessor tuesday: ::Hash[::String, ::String]
+      attr_accessor wednesday: ::Hash[::String, ::String]
+      attr_accessor thursday: ::Hash[::String, ::String]
+      attr_accessor friday: ::Hash[::String, ::String]
+      attr_accessor saturday: ::Hash[::String, ::String]
+      attr_accessor sunday: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+  end
+end

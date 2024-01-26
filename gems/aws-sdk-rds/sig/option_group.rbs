@@ -1,0 +1,129 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RDS
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroup.html
+    class OptionGroup
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroup.html#initialize-instance_method
+      def initialize: (String name, Hash[Symbol, untyped] options) -> void
+                    | (name: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroup.html#name-instance_method
+      def name: () -> String
+      alias option_group_name name
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroup.html#option_group_description-instance_method
+      def option_group_description: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroup.html#engine_name-instance_method
+      def engine_name: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroup.html#major_engine_version-instance_method
+      def major_engine_version: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroup.html#options-instance_method
+      def options: () -> ::Array[Types::Option]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroup.html#allows_vpc_and_non_vpc_instance_memberships-instance_method
+      def allows_vpc_and_non_vpc_instance_memberships: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroup.html#vpc_id-instance_method
+      def vpc_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroup.html#option_group_arn-instance_method
+      def option_group_arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroup.html#source_option_group-instance_method
+      def source_option_group: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroup.html#source_account_id-instance_method
+      def source_account_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroup.html#copy_timestamp-instance_method
+      def copy_timestamp: () -> ::Time
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroup.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroup.html#data-instance_method
+      def data: () -> Types::OptionGroup
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroup.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroup.html#create-instance_method
+      def create: (
+                    engine_name: ::String,
+                    major_engine_version: ::String,
+                    option_group_description: ::String,
+                    ?tags: Array[
+                      {
+                        key: ::String?,
+                        value: ::String?
+                      },
+                    ]
+                  ) -> OptionGroup
+                | (?Hash[Symbol, untyped]) -> OptionGroup
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroup.html#copy-instance_method
+      def copy: (
+                  target_option_group_identifier: ::String,
+                  target_option_group_description: ::String,
+                  ?tags: Array[
+                    {
+                      key: ::String?,
+                      value: ::String?
+                    },
+                  ]
+                ) -> OptionGroup
+              | (?Hash[Symbol, untyped]) -> OptionGroup
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroup.html#delete-instance_method
+      def delete: (
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroup.html#modify-instance_method
+      def modify: (
+                    ?options_to_include: Array[
+                      {
+                        option_name: ::String,
+                        port: ::Integer?,
+                        option_version: ::String?,
+                        db_security_group_memberships: Array[::String]?,
+                        vpc_security_group_memberships: Array[::String]?,
+                        option_settings: Array[
+                          {
+                            name: ::String?,
+                            value: ::String?,
+                            default_value: ::String?,
+                            description: ::String?,
+                            apply_type: ::String?,
+                            data_type: ::String?,
+                            allowed_values: ::String?,
+                            is_modifiable: bool?,
+                            is_collection: bool?
+                          },
+                        ]?
+                      },
+                    ],
+                    ?options_to_remove: Array[::String],
+                    ?apply_immediately: bool
+                  ) -> OptionGroup
+                | (?Hash[Symbol, untyped]) -> OptionGroup
+
+      class Collection < ::Aws::Resources::Collection[OptionGroup]
+      end
+    end
+  end
+end

@@ -1,0 +1,79 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RDS
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngine.html
+    class DBEngine
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngine.html#initialize-instance_method
+      def initialize: (String name, Hash[Symbol, untyped] options) -> void
+                    | (name: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngine.html#name-instance_method
+      def name: () -> String
+
+      def client: () -> Client
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngine.html#data-instance_method
+      def data: () -> EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngine.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngine.html#option_group_options-instance_method
+      def option_group_options: (
+                                  ?major_engine_version: ::String,
+                                  ?filters: Array[
+                                    {
+                                      name: ::String,
+                                      values: Array[::String]
+                                    },
+                                  ]
+                                ) -> OptionGroupOption::Collection
+                              | (?Hash[Symbol, untyped]) -> OptionGroupOption::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngine.html#option_groups-instance_method
+      def option_groups: (
+                           ?option_group_name: ::String,
+                           ?filters: Array[
+                             {
+                               name: ::String,
+                               values: Array[::String]
+                             },
+                           ],
+                           ?major_engine_version: ::String
+                         ) -> OptionGroup::Collection
+                       | (?Hash[Symbol, untyped]) -> OptionGroup::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngine.html#version-instance_method
+      def version: (String version) -> DBEngineVersion
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngine.html#versions-instance_method
+      def versions: (
+                      ?engine_version: ::String,
+                      ?db_parameter_group_family: ::String,
+                      ?filters: Array[
+                        {
+                          name: ::String,
+                          values: Array[::String]
+                        },
+                      ],
+                      ?default_only: bool,
+                      ?list_supported_character_sets: bool,
+                      ?list_supported_timezones: bool,
+                      ?include_all: bool
+                    ) -> DBEngineVersion::Collection
+                  | (?Hash[Symbol, untyped]) -> DBEngineVersion::Collection
+
+      class Collection < ::Aws::Resources::Collection[DBEngine]
+      end
+    end
+  end
+end

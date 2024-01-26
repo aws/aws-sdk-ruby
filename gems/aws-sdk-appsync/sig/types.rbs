@@ -1,0 +1,1231 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::AppSync
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AdditionalAuthenticationProvider
+      attr_accessor authentication_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
+      attr_accessor open_id_connect_config: Types::OpenIDConnectConfig
+      attr_accessor user_pool_config: Types::CognitoUserPoolConfig
+      attr_accessor lambda_authorizer_config: Types::LambdaAuthorizerConfig
+      SENSITIVE: []
+    end
+
+    class ApiAssociation
+      attr_accessor domain_name: ::String
+      attr_accessor api_id: ::String
+      attr_accessor association_status: ("PROCESSING" | "FAILED" | "SUCCESS")
+      attr_accessor deployment_detail: ::String
+      SENSITIVE: []
+    end
+
+    class ApiCache
+      attr_accessor ttl: ::Integer
+      attr_accessor api_caching_behavior: ("FULL_REQUEST_CACHING" | "PER_RESOLVER_CACHING")
+      attr_accessor transit_encryption_enabled: bool
+      attr_accessor at_rest_encryption_enabled: bool
+      attr_accessor type: ("T2_SMALL" | "T2_MEDIUM" | "R4_LARGE" | "R4_XLARGE" | "R4_2XLARGE" | "R4_4XLARGE" | "R4_8XLARGE" | "SMALL" | "MEDIUM" | "LARGE" | "XLARGE" | "LARGE_2X" | "LARGE_4X" | "LARGE_8X" | "LARGE_12X")
+      attr_accessor status: ("AVAILABLE" | "CREATING" | "DELETING" | "MODIFYING" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class ApiKey
+      attr_accessor id: ::String
+      attr_accessor description: ::String
+      attr_accessor expires: ::Integer
+      attr_accessor deletes: ::Integer
+      SENSITIVE: []
+    end
+
+    class ApiKeyLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ApiKeyValidityOutOfBoundsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ApiLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AppSyncRuntime
+      attr_accessor name: ("APPSYNC_JS")
+      attr_accessor runtime_version: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateApiRequest
+      attr_accessor domain_name: ::String
+      attr_accessor api_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateApiResponse
+      attr_accessor api_association: Types::ApiAssociation
+      SENSITIVE: []
+    end
+
+    class AssociateMergedGraphqlApiRequest
+      attr_accessor source_api_identifier: ::String
+      attr_accessor merged_api_identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor source_api_association_config: Types::SourceApiAssociationConfig
+      SENSITIVE: []
+    end
+
+    class AssociateMergedGraphqlApiResponse
+      attr_accessor source_api_association: Types::SourceApiAssociation
+      SENSITIVE: []
+    end
+
+    class AssociateSourceGraphqlApiRequest
+      attr_accessor merged_api_identifier: ::String
+      attr_accessor source_api_identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor source_api_association_config: Types::SourceApiAssociationConfig
+      SENSITIVE: []
+    end
+
+    class AssociateSourceGraphqlApiResponse
+      attr_accessor source_api_association: Types::SourceApiAssociation
+      SENSITIVE: []
+    end
+
+    class AuthorizationConfig
+      attr_accessor authorization_type: ("AWS_IAM")
+      attr_accessor aws_iam_config: Types::AwsIamConfig
+      SENSITIVE: []
+    end
+
+    class AwsIamConfig
+      attr_accessor signing_region: ::String
+      attr_accessor signing_service_name: ::String
+      SENSITIVE: []
+    end
+
+    class BadRequestDetail
+      attr_accessor code_errors: ::Array[Types::CodeError]
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      attr_accessor reason: ("CODE_ERROR")
+      attr_accessor detail: Types::BadRequestDetail
+      SENSITIVE: []
+    end
+
+    class CachingConfig
+      attr_accessor ttl: ::Integer
+      attr_accessor caching_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CodeError
+      attr_accessor error_type: ::String
+      attr_accessor value: ::String
+      attr_accessor location: Types::CodeErrorLocation
+      SENSITIVE: []
+    end
+
+    class CodeErrorLocation
+      attr_accessor line: ::Integer
+      attr_accessor column: ::Integer
+      attr_accessor span: ::Integer
+      SENSITIVE: []
+    end
+
+    class CognitoUserPoolConfig
+      attr_accessor user_pool_id: ::String
+      attr_accessor aws_region: ::String
+      attr_accessor app_id_client_regex: ::String
+      SENSITIVE: []
+    end
+
+    class ConcurrentModificationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateApiCacheRequest
+      attr_accessor api_id: ::String
+      attr_accessor ttl: ::Integer
+      attr_accessor transit_encryption_enabled: bool
+      attr_accessor at_rest_encryption_enabled: bool
+      attr_accessor api_caching_behavior: ("FULL_REQUEST_CACHING" | "PER_RESOLVER_CACHING")
+      attr_accessor type: ("T2_SMALL" | "T2_MEDIUM" | "R4_LARGE" | "R4_XLARGE" | "R4_2XLARGE" | "R4_4XLARGE" | "R4_8XLARGE" | "SMALL" | "MEDIUM" | "LARGE" | "XLARGE" | "LARGE_2X" | "LARGE_4X" | "LARGE_8X" | "LARGE_12X")
+      SENSITIVE: []
+    end
+
+    class CreateApiCacheResponse
+      attr_accessor api_cache: Types::ApiCache
+      SENSITIVE: []
+    end
+
+    class CreateApiKeyRequest
+      attr_accessor api_id: ::String
+      attr_accessor description: ::String
+      attr_accessor expires: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateApiKeyResponse
+      attr_accessor api_key: Types::ApiKey
+      SENSITIVE: []
+    end
+
+    class CreateDataSourceRequest
+      attr_accessor api_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("AWS_LAMBDA" | "AMAZON_DYNAMODB" | "AMAZON_ELASTICSEARCH" | "NONE" | "HTTP" | "RELATIONAL_DATABASE" | "AMAZON_OPENSEARCH_SERVICE" | "AMAZON_EVENTBRIDGE")
+      attr_accessor service_role_arn: ::String
+      attr_accessor dynamodb_config: Types::DynamodbDataSourceConfig
+      attr_accessor lambda_config: Types::LambdaDataSourceConfig
+      attr_accessor elasticsearch_config: Types::ElasticsearchDataSourceConfig
+      attr_accessor open_search_service_config: Types::OpenSearchServiceDataSourceConfig
+      attr_accessor http_config: Types::HttpDataSourceConfig
+      attr_accessor relational_database_config: Types::RelationalDatabaseDataSourceConfig
+      attr_accessor event_bridge_config: Types::EventBridgeDataSourceConfig
+      SENSITIVE: []
+    end
+
+    class CreateDataSourceResponse
+      attr_accessor data_source: Types::DataSource
+      SENSITIVE: []
+    end
+
+    class CreateDomainNameRequest
+      attr_accessor domain_name: ::String
+      attr_accessor certificate_arn: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDomainNameResponse
+      attr_accessor domain_name_config: Types::DomainNameConfig
+      SENSITIVE: []
+    end
+
+    class CreateFunctionRequest
+      attr_accessor api_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor data_source_name: ::String
+      attr_accessor request_mapping_template: ::String
+      attr_accessor response_mapping_template: ::String
+      attr_accessor function_version: ::String
+      attr_accessor sync_config: Types::SyncConfig
+      attr_accessor max_batch_size: ::Integer
+      attr_accessor runtime: Types::AppSyncRuntime
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class CreateFunctionResponse
+      attr_accessor function_configuration: Types::FunctionConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateGraphqlApiRequest
+      attr_accessor name: ::String
+      attr_accessor log_config: Types::LogConfig
+      attr_accessor authentication_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
+      attr_accessor user_pool_config: Types::UserPoolConfig
+      attr_accessor open_id_connect_config: Types::OpenIDConnectConfig
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor additional_authentication_providers: ::Array[Types::AdditionalAuthenticationProvider]
+      attr_accessor xray_enabled: bool
+      attr_accessor lambda_authorizer_config: Types::LambdaAuthorizerConfig
+      attr_accessor visibility: ("GLOBAL" | "PRIVATE")
+      attr_accessor api_type: ("GRAPHQL" | "MERGED")
+      attr_accessor merged_api_execution_role_arn: ::String
+      attr_accessor owner_contact: ::String
+      attr_accessor introspection_config: ("ENABLED" | "DISABLED")
+      attr_accessor query_depth_limit: ::Integer
+      attr_accessor resolver_count_limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateGraphqlApiResponse
+      attr_accessor graphql_api: Types::GraphqlApi
+      SENSITIVE: []
+    end
+
+    class CreateResolverRequest
+      attr_accessor api_id: ::String
+      attr_accessor type_name: ::String
+      attr_accessor field_name: ::String
+      attr_accessor data_source_name: ::String
+      attr_accessor request_mapping_template: ::String
+      attr_accessor response_mapping_template: ::String
+      attr_accessor kind: ("UNIT" | "PIPELINE")
+      attr_accessor pipeline_config: Types::PipelineConfig
+      attr_accessor sync_config: Types::SyncConfig
+      attr_accessor caching_config: Types::CachingConfig
+      attr_accessor max_batch_size: ::Integer
+      attr_accessor runtime: Types::AppSyncRuntime
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class CreateResolverResponse
+      attr_accessor resolver: Types::Resolver
+      SENSITIVE: []
+    end
+
+    class CreateTypeRequest
+      attr_accessor api_id: ::String
+      attr_accessor definition: ::String
+      attr_accessor format: ("SDL" | "JSON")
+      SENSITIVE: []
+    end
+
+    class CreateTypeResponse
+      attr_accessor type: Types::Type
+      SENSITIVE: []
+    end
+
+    class DataSource
+      attr_accessor data_source_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("AWS_LAMBDA" | "AMAZON_DYNAMODB" | "AMAZON_ELASTICSEARCH" | "NONE" | "HTTP" | "RELATIONAL_DATABASE" | "AMAZON_OPENSEARCH_SERVICE" | "AMAZON_EVENTBRIDGE")
+      attr_accessor service_role_arn: ::String
+      attr_accessor dynamodb_config: Types::DynamodbDataSourceConfig
+      attr_accessor lambda_config: Types::LambdaDataSourceConfig
+      attr_accessor elasticsearch_config: Types::ElasticsearchDataSourceConfig
+      attr_accessor open_search_service_config: Types::OpenSearchServiceDataSourceConfig
+      attr_accessor http_config: Types::HttpDataSourceConfig
+      attr_accessor relational_database_config: Types::RelationalDatabaseDataSourceConfig
+      attr_accessor event_bridge_config: Types::EventBridgeDataSourceConfig
+      SENSITIVE: []
+    end
+
+    class DataSourceIntrospectionModel
+      attr_accessor name: ::String
+      attr_accessor fields: ::Array[Types::DataSourceIntrospectionModelField]
+      attr_accessor primary_key: Types::DataSourceIntrospectionModelIndex
+      attr_accessor indexes: ::Array[Types::DataSourceIntrospectionModelIndex]
+      attr_accessor sdl: ::String
+      SENSITIVE: []
+    end
+
+    class DataSourceIntrospectionModelField
+      attr_accessor name: ::String
+      attr_accessor type: Types::DataSourceIntrospectionModelFieldType
+      attr_accessor length: ::Integer
+      SENSITIVE: []
+    end
+
+    class DataSourceIntrospectionModelFieldType
+      attr_accessor kind: ::String
+      attr_accessor name: ::String
+      attr_accessor type: Types::DataSourceIntrospectionModelFieldType
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DataSourceIntrospectionModelIndex
+      attr_accessor name: ::String
+      attr_accessor fields: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DataSourceIntrospectionResult
+      attr_accessor models: ::Array[Types::DataSourceIntrospectionModel]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApiCacheRequest
+      attr_accessor api_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApiCacheResponse < Aws::EmptyStructure
+    end
+
+    class DeleteApiKeyRequest
+      attr_accessor api_id: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApiKeyResponse < Aws::EmptyStructure
+    end
+
+    class DeleteDataSourceRequest
+      attr_accessor api_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDataSourceResponse < Aws::EmptyStructure
+    end
+
+    class DeleteDomainNameRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDomainNameResponse < Aws::EmptyStructure
+    end
+
+    class DeleteFunctionRequest
+      attr_accessor api_id: ::String
+      attr_accessor function_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFunctionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteGraphqlApiRequest
+      attr_accessor api_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGraphqlApiResponse < Aws::EmptyStructure
+    end
+
+    class DeleteResolverRequest
+      attr_accessor api_id: ::String
+      attr_accessor type_name: ::String
+      attr_accessor field_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResolverResponse < Aws::EmptyStructure
+    end
+
+    class DeleteTypeRequest
+      attr_accessor api_id: ::String
+      attr_accessor type_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTypeResponse < Aws::EmptyStructure
+    end
+
+    class DeltaSyncConfig
+      attr_accessor base_table_ttl: ::Integer
+      attr_accessor delta_sync_table_name: ::String
+      attr_accessor delta_sync_table_ttl: ::Integer
+      SENSITIVE: []
+    end
+
+    class DisassociateApiRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateApiResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateMergedGraphqlApiRequest
+      attr_accessor source_api_identifier: ::String
+      attr_accessor association_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateMergedGraphqlApiResponse
+      attr_accessor source_api_association_status: ("MERGE_SCHEDULED" | "MERGE_FAILED" | "MERGE_SUCCESS" | "MERGE_IN_PROGRESS" | "AUTO_MERGE_SCHEDULE_FAILED" | "DELETION_SCHEDULED" | "DELETION_IN_PROGRESS" | "DELETION_FAILED")
+      SENSITIVE: []
+    end
+
+    class DisassociateSourceGraphqlApiRequest
+      attr_accessor merged_api_identifier: ::String
+      attr_accessor association_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateSourceGraphqlApiResponse
+      attr_accessor source_api_association_status: ("MERGE_SCHEDULED" | "MERGE_FAILED" | "MERGE_SUCCESS" | "MERGE_IN_PROGRESS" | "AUTO_MERGE_SCHEDULE_FAILED" | "DELETION_SCHEDULED" | "DELETION_IN_PROGRESS" | "DELETION_FAILED")
+      SENSITIVE: []
+    end
+
+    class DomainNameConfig
+      attr_accessor domain_name: ::String
+      attr_accessor description: ::String
+      attr_accessor certificate_arn: ::String
+      attr_accessor appsync_domain_name: ::String
+      attr_accessor hosted_zone_id: ::String
+      SENSITIVE: []
+    end
+
+    class DynamodbDataSourceConfig
+      attr_accessor table_name: ::String
+      attr_accessor aws_region: ::String
+      attr_accessor use_caller_credentials: bool
+      attr_accessor delta_sync_config: Types::DeltaSyncConfig
+      attr_accessor versioned: bool
+      SENSITIVE: []
+    end
+
+    class ElasticsearchDataSourceConfig
+      attr_accessor endpoint: ::String
+      attr_accessor aws_region: ::String
+      SENSITIVE: []
+    end
+
+    class ErrorDetail
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EvaluateCodeErrorDetail
+      attr_accessor message: ::String
+      attr_accessor code_errors: ::Array[Types::CodeError]
+      SENSITIVE: []
+    end
+
+    class EvaluateCodeRequest
+      attr_accessor runtime: Types::AppSyncRuntime
+      attr_accessor code: ::String
+      attr_accessor context: ::String
+      attr_accessor function: ::String
+      SENSITIVE: []
+    end
+
+    class EvaluateCodeResponse
+      attr_accessor evaluation_result: ::String
+      attr_accessor error: Types::EvaluateCodeErrorDetail
+      attr_accessor logs: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class EvaluateMappingTemplateRequest
+      attr_accessor template: ::String
+      attr_accessor context: ::String
+      SENSITIVE: []
+    end
+
+    class EvaluateMappingTemplateResponse
+      attr_accessor evaluation_result: ::String
+      attr_accessor error: Types::ErrorDetail
+      attr_accessor logs: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class EventBridgeDataSourceConfig
+      attr_accessor event_bus_arn: ::String
+      SENSITIVE: []
+    end
+
+    class FlushApiCacheRequest
+      attr_accessor api_id: ::String
+      SENSITIVE: []
+    end
+
+    class FlushApiCacheResponse < Aws::EmptyStructure
+    end
+
+    class FunctionConfiguration
+      attr_accessor function_id: ::String
+      attr_accessor function_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor data_source_name: ::String
+      attr_accessor request_mapping_template: ::String
+      attr_accessor response_mapping_template: ::String
+      attr_accessor function_version: ::String
+      attr_accessor sync_config: Types::SyncConfig
+      attr_accessor max_batch_size: ::Integer
+      attr_accessor runtime: Types::AppSyncRuntime
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class GetApiAssociationRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetApiAssociationResponse
+      attr_accessor api_association: Types::ApiAssociation
+      SENSITIVE: []
+    end
+
+    class GetApiCacheRequest
+      attr_accessor api_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetApiCacheResponse
+      attr_accessor api_cache: Types::ApiCache
+      SENSITIVE: []
+    end
+
+    class GetDataSourceIntrospectionRequest
+      attr_accessor introspection_id: ::String
+      attr_accessor include_models_sdl: bool
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetDataSourceIntrospectionResponse
+      attr_accessor introspection_id: ::String
+      attr_accessor introspection_status: ("PROCESSING" | "FAILED" | "SUCCESS")
+      attr_accessor introspection_status_detail: ::String
+      attr_accessor introspection_result: Types::DataSourceIntrospectionResult
+      SENSITIVE: []
+    end
+
+    class GetDataSourceRequest
+      attr_accessor api_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataSourceResponse
+      attr_accessor data_source: Types::DataSource
+      SENSITIVE: []
+    end
+
+    class GetDomainNameRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDomainNameResponse
+      attr_accessor domain_name_config: Types::DomainNameConfig
+      SENSITIVE: []
+    end
+
+    class GetFunctionRequest
+      attr_accessor api_id: ::String
+      attr_accessor function_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetFunctionResponse
+      attr_accessor function_configuration: Types::FunctionConfiguration
+      SENSITIVE: []
+    end
+
+    class GetGraphqlApiRequest
+      attr_accessor api_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetGraphqlApiResponse
+      attr_accessor graphql_api: Types::GraphqlApi
+      SENSITIVE: []
+    end
+
+    class GetIntrospectionSchemaRequest
+      attr_accessor api_id: ::String
+      attr_accessor format: ("SDL" | "JSON")
+      attr_accessor include_directives: bool
+      SENSITIVE: []
+    end
+
+    class GetIntrospectionSchemaResponse
+      attr_accessor schema: ::String
+      SENSITIVE: []
+    end
+
+    class GetResolverRequest
+      attr_accessor api_id: ::String
+      attr_accessor type_name: ::String
+      attr_accessor field_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetResolverResponse
+      attr_accessor resolver: Types::Resolver
+      SENSITIVE: []
+    end
+
+    class GetSchemaCreationStatusRequest
+      attr_accessor api_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSchemaCreationStatusResponse
+      attr_accessor status: ("PROCESSING" | "ACTIVE" | "DELETING" | "FAILED" | "SUCCESS" | "NOT_APPLICABLE")
+      attr_accessor details: ::String
+      SENSITIVE: []
+    end
+
+    class GetSourceApiAssociationRequest
+      attr_accessor merged_api_identifier: ::String
+      attr_accessor association_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSourceApiAssociationResponse
+      attr_accessor source_api_association: Types::SourceApiAssociation
+      SENSITIVE: []
+    end
+
+    class GetTypeRequest
+      attr_accessor api_id: ::String
+      attr_accessor type_name: ::String
+      attr_accessor format: ("SDL" | "JSON")
+      SENSITIVE: []
+    end
+
+    class GetTypeResponse
+      attr_accessor type: Types::Type
+      SENSITIVE: []
+    end
+
+    class GraphQLSchemaException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GraphqlApi
+      attr_accessor name: ::String
+      attr_accessor api_id: ::String
+      attr_accessor authentication_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
+      attr_accessor log_config: Types::LogConfig
+      attr_accessor user_pool_config: Types::UserPoolConfig
+      attr_accessor open_id_connect_config: Types::OpenIDConnectConfig
+      attr_accessor arn: ::String
+      attr_accessor uris: ::Hash[::String, ::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor additional_authentication_providers: ::Array[Types::AdditionalAuthenticationProvider]
+      attr_accessor xray_enabled: bool
+      attr_accessor waf_web_acl_arn: ::String
+      attr_accessor lambda_authorizer_config: Types::LambdaAuthorizerConfig
+      attr_accessor dns: ::Hash[::String, ::String]
+      attr_accessor visibility: ("GLOBAL" | "PRIVATE")
+      attr_accessor api_type: ("GRAPHQL" | "MERGED")
+      attr_accessor merged_api_execution_role_arn: ::String
+      attr_accessor owner: ::String
+      attr_accessor owner_contact: ::String
+      attr_accessor introspection_config: ("ENABLED" | "DISABLED")
+      attr_accessor query_depth_limit: ::Integer
+      attr_accessor resolver_count_limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class HttpDataSourceConfig
+      attr_accessor endpoint: ::String
+      attr_accessor authorization_config: Types::AuthorizationConfig
+      SENSITIVE: []
+    end
+
+    class InternalFailureException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaAuthorizerConfig
+      attr_accessor authorizer_result_ttl_in_seconds: ::Integer
+      attr_accessor authorizer_uri: ::String
+      attr_accessor identity_validation_expression: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaConflictHandlerConfig
+      attr_accessor lambda_conflict_handler_arn: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaDataSourceConfig
+      attr_accessor lambda_function_arn: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListApiKeysRequest
+      attr_accessor api_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListApiKeysResponse
+      attr_accessor api_keys: ::Array[Types::ApiKey]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataSourcesRequest
+      attr_accessor api_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDataSourcesResponse
+      attr_accessor data_sources: ::Array[Types::DataSource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDomainNamesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDomainNamesResponse
+      attr_accessor domain_name_configs: ::Array[Types::DomainNameConfig]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFunctionsRequest
+      attr_accessor api_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFunctionsResponse
+      attr_accessor functions: ::Array[Types::FunctionConfiguration]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGraphqlApisRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor api_type: ("GRAPHQL" | "MERGED")
+      attr_accessor owner: ("CURRENT_ACCOUNT" | "OTHER_ACCOUNTS")
+      SENSITIVE: []
+    end
+
+    class ListGraphqlApisResponse
+      attr_accessor graphql_apis: ::Array[Types::GraphqlApi]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResolversByFunctionRequest
+      attr_accessor api_id: ::String
+      attr_accessor function_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListResolversByFunctionResponse
+      attr_accessor resolvers: ::Array[Types::Resolver]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResolversRequest
+      attr_accessor api_id: ::String
+      attr_accessor type_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListResolversResponse
+      attr_accessor resolvers: ::Array[Types::Resolver]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSourceApiAssociationsRequest
+      attr_accessor api_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSourceApiAssociationsResponse
+      attr_accessor source_api_association_summaries: ::Array[Types::SourceApiAssociationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListTypesByAssociationRequest
+      attr_accessor merged_api_identifier: ::String
+      attr_accessor association_id: ::String
+      attr_accessor format: ("SDL" | "JSON")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTypesByAssociationResponse
+      attr_accessor types: ::Array[Types::Type]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTypesRequest
+      attr_accessor api_id: ::String
+      attr_accessor format: ("SDL" | "JSON")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTypesResponse
+      attr_accessor types: ::Array[Types::Type]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LogConfig
+      attr_accessor field_log_level: ("NONE" | "ERROR" | "ALL")
+      attr_accessor cloud_watch_logs_role_arn: ::String
+      attr_accessor exclude_verbose_content: bool
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OpenIDConnectConfig
+      attr_accessor issuer: ::String
+      attr_accessor client_id: ::String
+      attr_accessor iat_ttl: ::Integer
+      attr_accessor auth_ttl: ::Integer
+      SENSITIVE: []
+    end
+
+    class OpenSearchServiceDataSourceConfig
+      attr_accessor endpoint: ::String
+      attr_accessor aws_region: ::String
+      SENSITIVE: []
+    end
+
+    class PipelineConfig
+      attr_accessor functions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RdsDataApiConfig
+      attr_accessor resource_arn: ::String
+      attr_accessor secret_arn: ::String
+      attr_accessor database_name: ::String
+      SENSITIVE: []
+    end
+
+    class RdsHttpEndpointConfig
+      attr_accessor aws_region: ::String
+      attr_accessor db_cluster_identifier: ::String
+      attr_accessor database_name: ::String
+      attr_accessor schema: ::String
+      attr_accessor aws_secret_store_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RelationalDatabaseDataSourceConfig
+      attr_accessor relational_database_source_type: ("RDS_HTTP_ENDPOINT")
+      attr_accessor rds_http_endpoint_config: Types::RdsHttpEndpointConfig
+      SENSITIVE: []
+    end
+
+    class Resolver
+      attr_accessor type_name: ::String
+      attr_accessor field_name: ::String
+      attr_accessor data_source_name: ::String
+      attr_accessor resolver_arn: ::String
+      attr_accessor request_mapping_template: ::String
+      attr_accessor response_mapping_template: ::String
+      attr_accessor kind: ("UNIT" | "PIPELINE")
+      attr_accessor pipeline_config: Types::PipelineConfig
+      attr_accessor sync_config: Types::SyncConfig
+      attr_accessor caching_config: Types::CachingConfig
+      attr_accessor max_batch_size: ::Integer
+      attr_accessor runtime: Types::AppSyncRuntime
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class SourceApiAssociation
+      attr_accessor association_id: ::String
+      attr_accessor association_arn: ::String
+      attr_accessor source_api_id: ::String
+      attr_accessor source_api_arn: ::String
+      attr_accessor merged_api_arn: ::String
+      attr_accessor merged_api_id: ::String
+      attr_accessor description: ::String
+      attr_accessor source_api_association_config: Types::SourceApiAssociationConfig
+      attr_accessor source_api_association_status: ("MERGE_SCHEDULED" | "MERGE_FAILED" | "MERGE_SUCCESS" | "MERGE_IN_PROGRESS" | "AUTO_MERGE_SCHEDULE_FAILED" | "DELETION_SCHEDULED" | "DELETION_IN_PROGRESS" | "DELETION_FAILED")
+      attr_accessor source_api_association_status_detail: ::String
+      attr_accessor last_successful_merge_date: ::Time
+      SENSITIVE: []
+    end
+
+    class SourceApiAssociationConfig
+      attr_accessor merge_type: ("MANUAL_MERGE" | "AUTO_MERGE")
+      SENSITIVE: []
+    end
+
+    class SourceApiAssociationSummary
+      attr_accessor association_id: ::String
+      attr_accessor association_arn: ::String
+      attr_accessor source_api_id: ::String
+      attr_accessor source_api_arn: ::String
+      attr_accessor merged_api_id: ::String
+      attr_accessor merged_api_arn: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class StartDataSourceIntrospectionRequest
+      attr_accessor rds_data_api_config: Types::RdsDataApiConfig
+      SENSITIVE: []
+    end
+
+    class StartDataSourceIntrospectionResponse
+      attr_accessor introspection_id: ::String
+      attr_accessor introspection_status: ("PROCESSING" | "FAILED" | "SUCCESS")
+      attr_accessor introspection_status_detail: ::String
+      SENSITIVE: []
+    end
+
+    class StartSchemaCreationRequest
+      attr_accessor api_id: ::String
+      attr_accessor definition: ::String
+      SENSITIVE: []
+    end
+
+    class StartSchemaCreationResponse
+      attr_accessor status: ("PROCESSING" | "ACTIVE" | "DELETING" | "FAILED" | "SUCCESS" | "NOT_APPLICABLE")
+      SENSITIVE: []
+    end
+
+    class StartSchemaMergeRequest
+      attr_accessor association_id: ::String
+      attr_accessor merged_api_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class StartSchemaMergeResponse
+      attr_accessor source_api_association_status: ("MERGE_SCHEDULED" | "MERGE_FAILED" | "MERGE_SUCCESS" | "MERGE_IN_PROGRESS" | "AUTO_MERGE_SCHEDULE_FAILED" | "DELETION_SCHEDULED" | "DELETION_IN_PROGRESS" | "DELETION_FAILED")
+      SENSITIVE: []
+    end
+
+    class SyncConfig
+      attr_accessor conflict_handler: ("OPTIMISTIC_CONCURRENCY" | "LAMBDA" | "AUTOMERGE" | "NONE")
+      attr_accessor conflict_detection: ("VERSION" | "NONE")
+      attr_accessor lambda_conflict_handler_config: Types::LambdaConflictHandlerConfig
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class Type
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor arn: ::String
+      attr_accessor definition: ::String
+      attr_accessor format: ("SDL" | "JSON")
+      SENSITIVE: []
+    end
+
+    class UnauthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateApiCacheRequest
+      attr_accessor api_id: ::String
+      attr_accessor ttl: ::Integer
+      attr_accessor api_caching_behavior: ("FULL_REQUEST_CACHING" | "PER_RESOLVER_CACHING")
+      attr_accessor type: ("T2_SMALL" | "T2_MEDIUM" | "R4_LARGE" | "R4_XLARGE" | "R4_2XLARGE" | "R4_4XLARGE" | "R4_8XLARGE" | "SMALL" | "MEDIUM" | "LARGE" | "XLARGE" | "LARGE_2X" | "LARGE_4X" | "LARGE_8X" | "LARGE_12X")
+      SENSITIVE: []
+    end
+
+    class UpdateApiCacheResponse
+      attr_accessor api_cache: Types::ApiCache
+      SENSITIVE: []
+    end
+
+    class UpdateApiKeyRequest
+      attr_accessor api_id: ::String
+      attr_accessor id: ::String
+      attr_accessor description: ::String
+      attr_accessor expires: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateApiKeyResponse
+      attr_accessor api_key: Types::ApiKey
+      SENSITIVE: []
+    end
+
+    class UpdateDataSourceRequest
+      attr_accessor api_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("AWS_LAMBDA" | "AMAZON_DYNAMODB" | "AMAZON_ELASTICSEARCH" | "NONE" | "HTTP" | "RELATIONAL_DATABASE" | "AMAZON_OPENSEARCH_SERVICE" | "AMAZON_EVENTBRIDGE")
+      attr_accessor service_role_arn: ::String
+      attr_accessor dynamodb_config: Types::DynamodbDataSourceConfig
+      attr_accessor lambda_config: Types::LambdaDataSourceConfig
+      attr_accessor elasticsearch_config: Types::ElasticsearchDataSourceConfig
+      attr_accessor open_search_service_config: Types::OpenSearchServiceDataSourceConfig
+      attr_accessor http_config: Types::HttpDataSourceConfig
+      attr_accessor relational_database_config: Types::RelationalDatabaseDataSourceConfig
+      attr_accessor event_bridge_config: Types::EventBridgeDataSourceConfig
+      SENSITIVE: []
+    end
+
+    class UpdateDataSourceResponse
+      attr_accessor data_source: Types::DataSource
+      SENSITIVE: []
+    end
+
+    class UpdateDomainNameRequest
+      attr_accessor domain_name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDomainNameResponse
+      attr_accessor domain_name_config: Types::DomainNameConfig
+      SENSITIVE: []
+    end
+
+    class UpdateFunctionRequest
+      attr_accessor api_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor function_id: ::String
+      attr_accessor data_source_name: ::String
+      attr_accessor request_mapping_template: ::String
+      attr_accessor response_mapping_template: ::String
+      attr_accessor function_version: ::String
+      attr_accessor sync_config: Types::SyncConfig
+      attr_accessor max_batch_size: ::Integer
+      attr_accessor runtime: Types::AppSyncRuntime
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFunctionResponse
+      attr_accessor function_configuration: Types::FunctionConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateGraphqlApiRequest
+      attr_accessor api_id: ::String
+      attr_accessor name: ::String
+      attr_accessor log_config: Types::LogConfig
+      attr_accessor authentication_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
+      attr_accessor user_pool_config: Types::UserPoolConfig
+      attr_accessor open_id_connect_config: Types::OpenIDConnectConfig
+      attr_accessor additional_authentication_providers: ::Array[Types::AdditionalAuthenticationProvider]
+      attr_accessor xray_enabled: bool
+      attr_accessor lambda_authorizer_config: Types::LambdaAuthorizerConfig
+      attr_accessor merged_api_execution_role_arn: ::String
+      attr_accessor owner_contact: ::String
+      attr_accessor introspection_config: ("ENABLED" | "DISABLED")
+      attr_accessor query_depth_limit: ::Integer
+      attr_accessor resolver_count_limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateGraphqlApiResponse
+      attr_accessor graphql_api: Types::GraphqlApi
+      SENSITIVE: []
+    end
+
+    class UpdateResolverRequest
+      attr_accessor api_id: ::String
+      attr_accessor type_name: ::String
+      attr_accessor field_name: ::String
+      attr_accessor data_source_name: ::String
+      attr_accessor request_mapping_template: ::String
+      attr_accessor response_mapping_template: ::String
+      attr_accessor kind: ("UNIT" | "PIPELINE")
+      attr_accessor pipeline_config: Types::PipelineConfig
+      attr_accessor sync_config: Types::SyncConfig
+      attr_accessor caching_config: Types::CachingConfig
+      attr_accessor max_batch_size: ::Integer
+      attr_accessor runtime: Types::AppSyncRuntime
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateResolverResponse
+      attr_accessor resolver: Types::Resolver
+      SENSITIVE: []
+    end
+
+    class UpdateSourceApiAssociationRequest
+      attr_accessor association_id: ::String
+      attr_accessor merged_api_identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor source_api_association_config: Types::SourceApiAssociationConfig
+      SENSITIVE: []
+    end
+
+    class UpdateSourceApiAssociationResponse
+      attr_accessor source_api_association: Types::SourceApiAssociation
+      SENSITIVE: []
+    end
+
+    class UpdateTypeRequest
+      attr_accessor api_id: ::String
+      attr_accessor type_name: ::String
+      attr_accessor definition: ::String
+      attr_accessor format: ("SDL" | "JSON")
+      SENSITIVE: []
+    end
+
+    class UpdateTypeResponse
+      attr_accessor type: Types::Type
+      SENSITIVE: []
+    end
+
+    class UserPoolConfig
+      attr_accessor user_pool_id: ::String
+      attr_accessor aws_region: ::String
+      attr_accessor default_action: ("ALLOW" | "DENY")
+      attr_accessor app_id_client_regex: ::String
+      SENSITIVE: []
+    end
+  end
+end

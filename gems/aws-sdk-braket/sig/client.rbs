@@ -1,0 +1,341 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Braket
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Braket/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CancelJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelJobResponse]
+        def cancellation_status: () -> ("CANCELLING" | "CANCELLED")
+        def job_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Braket/Client.html#cancel_job-instance_method
+      def cancel_job: (
+                        job_arn: ::String
+                      ) -> _CancelJobResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelJobResponseSuccess
+
+      interface _CancelQuantumTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelQuantumTaskResponse]
+        def cancellation_status: () -> ("CANCELLING" | "CANCELLED")
+        def quantum_task_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Braket/Client.html#cancel_quantum_task-instance_method
+      def cancel_quantum_task: (
+                                 client_token: ::String,
+                                 quantum_task_arn: ::String
+                               ) -> _CancelQuantumTaskResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelQuantumTaskResponseSuccess
+
+      interface _CreateJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateJobResponse]
+        def job_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Braket/Client.html#create_job-instance_method
+      def create_job: (
+                        algorithm_specification: {
+                          container_image: {
+                            uri: ::String
+                          }?,
+                          script_mode_config: {
+                            compression_type: ("NONE" | "GZIP")?,
+                            entry_point: ::String,
+                            s3_uri: ::String
+                          }?
+                        },
+                        ?associations: Array[
+                          {
+                            arn: ::String,
+                            type: ("RESERVATION_TIME_WINDOW_ARN")
+                          },
+                        ],
+                        ?checkpoint_config: {
+                          local_path: ::String?,
+                          s3_uri: ::String
+                        },
+                        client_token: ::String,
+                        device_config: {
+                          device: ::String
+                        },
+                        ?hyper_parameters: Hash[::String, ::String],
+                        ?input_data_config: Array[
+                          {
+                            channel_name: ::String,
+                            content_type: ::String?,
+                            data_source: {
+                              s3_data_source: {
+                                s3_uri: ::String
+                              }
+                            }
+                          },
+                        ],
+                        instance_config: {
+                          instance_count: ::Integer?,
+                          instance_type: ("ml.m4.xlarge" | "ml.m4.2xlarge" | "ml.m4.4xlarge" | "ml.m4.10xlarge" | "ml.m4.16xlarge" | "ml.g4dn.xlarge" | "ml.g4dn.2xlarge" | "ml.g4dn.4xlarge" | "ml.g4dn.8xlarge" | "ml.g4dn.12xlarge" | "ml.g4dn.16xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.12xlarge" | "ml.m5.24xlarge" | "ml.c4.xlarge" | "ml.c4.2xlarge" | "ml.c4.4xlarge" | "ml.c4.8xlarge" | "ml.p2.xlarge" | "ml.p2.8xlarge" | "ml.p2.16xlarge" | "ml.p3.2xlarge" | "ml.p3.8xlarge" | "ml.p3.16xlarge" | "ml.p3dn.24xlarge" | "ml.p4d.24xlarge" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.18xlarge" | "ml.c5n.xlarge" | "ml.c5n.2xlarge" | "ml.c5n.4xlarge" | "ml.c5n.9xlarge" | "ml.c5n.18xlarge"),
+                          volume_size_in_gb: ::Integer
+                        },
+                        job_name: ::String,
+                        output_data_config: {
+                          kms_key_id: ::String?,
+                          s3_path: ::String
+                        },
+                        role_arn: ::String,
+                        ?stopping_condition: {
+                          max_runtime_in_seconds: ::Integer?
+                        },
+                        ?tags: Hash[::String, ::String]
+                      ) -> _CreateJobResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateJobResponseSuccess
+
+      interface _CreateQuantumTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateQuantumTaskResponse]
+        def quantum_task_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Braket/Client.html#create_quantum_task-instance_method
+      def create_quantum_task: (
+                                 action: ::String,
+                                 ?associations: Array[
+                                   {
+                                     arn: ::String,
+                                     type: ("RESERVATION_TIME_WINDOW_ARN")
+                                   },
+                                 ],
+                                 client_token: ::String,
+                                 device_arn: ::String,
+                                 ?device_parameters: ::String,
+                                 ?job_token: ::String,
+                                 output_s3_bucket: ::String,
+                                 output_s3_key_prefix: ::String,
+                                 shots: ::Integer,
+                                 ?tags: Hash[::String, ::String]
+                               ) -> _CreateQuantumTaskResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateQuantumTaskResponseSuccess
+
+      interface _GetDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeviceResponse]
+        def device_arn: () -> ::String
+        def device_capabilities: () -> ::String
+        def device_name: () -> ::String
+        def device_queue_info: () -> ::Array[Types::DeviceQueueInfo]
+        def device_status: () -> ("ONLINE" | "OFFLINE" | "RETIRED")
+        def device_type: () -> ("QPU" | "SIMULATOR")
+        def provider_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Braket/Client.html#get_device-instance_method
+      def get_device: (
+                        device_arn: ::String
+                      ) -> _GetDeviceResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeviceResponseSuccess
+
+      interface _GetJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetJobResponse]
+        def algorithm_specification: () -> Types::AlgorithmSpecification
+        def associations: () -> ::Array[Types::Association]
+        def billable_duration: () -> ::Integer
+        def checkpoint_config: () -> Types::JobCheckpointConfig
+        def created_at: () -> ::Time
+        def device_config: () -> Types::DeviceConfig
+        def ended_at: () -> ::Time
+        def events: () -> ::Array[Types::JobEventDetails]
+        def failure_reason: () -> ::String
+        def hyper_parameters: () -> ::Hash[::String, ::String]
+        def input_data_config: () -> ::Array[Types::InputFileConfig]
+        def instance_config: () -> Types::InstanceConfig
+        def job_arn: () -> ::String
+        def job_name: () -> ::String
+        def output_data_config: () -> Types::JobOutputDataConfig
+        def queue_info: () -> Types::HybridJobQueueInfo
+        def role_arn: () -> ::String
+        def started_at: () -> ::Time
+        def status: () -> ("QUEUED" | "RUNNING" | "COMPLETED" | "FAILED" | "CANCELLING" | "CANCELLED")
+        def stopping_condition: () -> Types::JobStoppingCondition
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Braket/Client.html#get_job-instance_method
+      def get_job: (
+                     ?additional_attribute_names: Array[("QueueInfo")],
+                     job_arn: ::String
+                   ) -> _GetJobResponseSuccess
+                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetJobResponseSuccess
+
+      interface _GetQuantumTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetQuantumTaskResponse]
+        def associations: () -> ::Array[Types::Association]
+        def created_at: () -> ::Time
+        def device_arn: () -> ::String
+        def device_parameters: () -> ::String
+        def ended_at: () -> ::Time
+        def failure_reason: () -> ::String
+        def job_arn: () -> ::String
+        def output_s3_bucket: () -> ::String
+        def output_s3_directory: () -> ::String
+        def quantum_task_arn: () -> ::String
+        def queue_info: () -> Types::QuantumTaskQueueInfo
+        def shots: () -> ::Integer
+        def status: () -> ("CREATED" | "QUEUED" | "RUNNING" | "COMPLETED" | "FAILED" | "CANCELLING" | "CANCELLED")
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Braket/Client.html#get_quantum_task-instance_method
+      def get_quantum_task: (
+                              ?additional_attribute_names: Array[("QueueInfo")],
+                              quantum_task_arn: ::String
+                            ) -> _GetQuantumTaskResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQuantumTaskResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Braket/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _SearchDevicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchDevicesResponse]
+        def devices: () -> ::Array[Types::DeviceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Braket/Client.html#search_devices-instance_method
+      def search_devices: (
+                            filters: Array[
+                              {
+                                name: ::String,
+                                values: Array[::String]
+                              },
+                            ],
+                            ?max_results: ::Integer,
+                            ?next_token: ::String
+                          ) -> _SearchDevicesResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchDevicesResponseSuccess
+
+      interface _SearchJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchJobsResponse]
+        def jobs: () -> ::Array[Types::JobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Braket/Client.html#search_jobs-instance_method
+      def search_jobs: (
+                         filters: Array[
+                           {
+                             name: ::String,
+                             operator: ("LT" | "LTE" | "EQUAL" | "GT" | "GTE" | "BETWEEN" | "CONTAINS"),
+                             values: Array[::String]
+                           },
+                         ],
+                         ?max_results: ::Integer,
+                         ?next_token: ::String
+                       ) -> _SearchJobsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchJobsResponseSuccess
+
+      interface _SearchQuantumTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchQuantumTasksResponse]
+        def next_token: () -> ::String
+        def quantum_tasks: () -> ::Array[Types::QuantumTaskSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Braket/Client.html#search_quantum_tasks-instance_method
+      def search_quantum_tasks: (
+                                  filters: Array[
+                                    {
+                                      name: ::String,
+                                      operator: ("LT" | "LTE" | "EQUAL" | "GT" | "GTE" | "BETWEEN"),
+                                      values: Array[::String]
+                                    },
+                                  ],
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _SearchQuantumTasksResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchQuantumTasksResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Braket/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Braket/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+    end
+  end
+end
+

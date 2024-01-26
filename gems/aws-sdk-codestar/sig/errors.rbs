@@ -1,0 +1,42 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CodeStar
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+      end
+      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+      end
+      class InvalidServiceRoleException < ::Aws::Errors::ServiceError
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+      end
+      class ProjectAlreadyExistsException < ::Aws::Errors::ServiceError
+      end
+      class ProjectConfigurationException < ::Aws::Errors::ServiceError
+      end
+      class ProjectCreationFailedException < ::Aws::Errors::ServiceError
+      end
+      class ProjectNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class TeamMemberAlreadyAssociatedException < ::Aws::Errors::ServiceError
+      end
+      class TeamMemberNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class UserProfileAlreadyExistsException < ::Aws::Errors::ServiceError
+      end
+      class UserProfileNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class ValidationException < ::Aws::Errors::ServiceError
+      end
+    end
+  end
+end

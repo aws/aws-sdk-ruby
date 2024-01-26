@@ -1,0 +1,3515 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::LexModelsV2
+  module Types
+
+    class ActiveContext
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class AdvancedRecognitionSetting
+      attr_accessor audio_recognition_strategy: ("UseSlotValuesAsCustomVocabulary")
+      SENSITIVE: []
+    end
+
+    class AgentTurnResult
+      attr_accessor expected_agent_prompt: ::String
+      attr_accessor actual_agent_prompt: ::String
+      attr_accessor error_details: Types::ExecutionErrorDetails
+      attr_accessor actual_elicited_slot: ::String
+      attr_accessor actual_intent: ::String
+      SENSITIVE: []
+    end
+
+    class AgentTurnSpecification
+      attr_accessor agent_prompt: ::String
+      SENSITIVE: []
+    end
+
+    class AggregatedUtterancesFilter
+      attr_accessor name: ("Utterance")
+      attr_accessor values: ::Array[::String]
+      attr_accessor operator: ("CO" | "EQ")
+      SENSITIVE: []
+    end
+
+    class AggregatedUtterancesSortBy
+      attr_accessor attribute: ("HitCount" | "MissedCount")
+      attr_accessor order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class AggregatedUtterancesSummary
+      attr_accessor utterance: ::String
+      attr_accessor hit_count: ::Integer
+      attr_accessor missed_count: ::Integer
+      attr_accessor utterance_first_recorded_in_aggregation_duration: ::Time
+      attr_accessor utterance_last_recorded_in_aggregation_duration: ::Time
+      attr_accessor contains_data_from_deleted_resources: bool
+      SENSITIVE: []
+    end
+
+    class AllowedInputTypes
+      attr_accessor allow_audio_input: bool
+      attr_accessor allow_dtmf_input: bool
+      SENSITIVE: []
+    end
+
+    class AnalyticsBinBySpecification
+      attr_accessor name: ("ConversationStartTime" | "UtteranceTimestamp")
+      attr_accessor interval: ("OneHour" | "OneDay")
+      attr_accessor order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class AnalyticsBinKey
+      attr_accessor name: ("ConversationStartTime" | "UtteranceTimestamp")
+      attr_accessor value: ::Integer
+      SENSITIVE: []
+    end
+
+    class AnalyticsIntentFilter
+      attr_accessor name: ("BotAliasId" | "BotVersion" | "LocaleId" | "Modality" | "Channel" | "SessionId" | "OriginatingRequestId" | "IntentName" | "IntentEndState")
+      attr_accessor operator: ("EQ" | "GT" | "LT")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AnalyticsIntentGroupByKey
+      attr_accessor name: ("IntentName" | "IntentEndState" | "IntentLevel")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class AnalyticsIntentGroupBySpecification
+      attr_accessor name: ("IntentName" | "IntentEndState" | "IntentLevel")
+      SENSITIVE: []
+    end
+
+    class AnalyticsIntentMetric
+      attr_accessor name: ("Count" | "Success" | "Failure" | "Switched" | "Dropped")
+      attr_accessor statistic: ("Sum" | "Avg" | "Max")
+      attr_accessor order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class AnalyticsIntentMetricResult
+      attr_accessor name: ("Count" | "Success" | "Failure" | "Switched" | "Dropped")
+      attr_accessor statistic: ("Sum" | "Avg" | "Max")
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class AnalyticsIntentNodeSummary
+      attr_accessor intent_name: ::String
+      attr_accessor intent_path: ::String
+      attr_accessor intent_count: ::Integer
+      attr_accessor intent_level: ::Integer
+      attr_accessor node_type: ("Inner" | "Exit")
+      SENSITIVE: []
+    end
+
+    class AnalyticsIntentResult
+      attr_accessor bin_keys: ::Array[Types::AnalyticsBinKey]
+      attr_accessor group_by_keys: ::Array[Types::AnalyticsIntentGroupByKey]
+      attr_accessor metrics_results: ::Array[Types::AnalyticsIntentMetricResult]
+      SENSITIVE: []
+    end
+
+    class AnalyticsIntentStageFilter
+      attr_accessor name: ("BotAliasId" | "BotVersion" | "LocaleId" | "Modality" | "Channel" | "SessionId" | "OriginatingRequestId" | "IntentName" | "IntentStageName")
+      attr_accessor operator: ("EQ" | "GT" | "LT")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AnalyticsIntentStageGroupByKey
+      attr_accessor name: ("IntentStageName" | "SwitchedToIntent")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class AnalyticsIntentStageGroupBySpecification
+      attr_accessor name: ("IntentStageName" | "SwitchedToIntent")
+      SENSITIVE: []
+    end
+
+    class AnalyticsIntentStageMetric
+      attr_accessor name: ("Count" | "Success" | "Failed" | "Dropped" | "Retry")
+      attr_accessor statistic: ("Sum" | "Avg" | "Max")
+      attr_accessor order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class AnalyticsIntentStageMetricResult
+      attr_accessor name: ("Count" | "Success" | "Failed" | "Dropped" | "Retry")
+      attr_accessor statistic: ("Sum" | "Avg" | "Max")
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class AnalyticsIntentStageResult
+      attr_accessor bin_keys: ::Array[Types::AnalyticsBinKey]
+      attr_accessor group_by_keys: ::Array[Types::AnalyticsIntentStageGroupByKey]
+      attr_accessor metrics_results: ::Array[Types::AnalyticsIntentStageMetricResult]
+      SENSITIVE: []
+    end
+
+    class AnalyticsPathFilter
+      attr_accessor name: ("BotAliasId" | "BotVersion" | "LocaleId" | "Modality" | "Channel")
+      attr_accessor operator: ("EQ" | "GT" | "LT")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AnalyticsSessionFilter
+      attr_accessor name: ("BotAliasId" | "BotVersion" | "LocaleId" | "Modality" | "Channel" | "Duration" | "ConversationEndState" | "SessionId" | "OriginatingRequestId" | "IntentPath")
+      attr_accessor operator: ("EQ" | "GT" | "LT")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AnalyticsSessionGroupByKey
+      attr_accessor name: ("ConversationEndState" | "LocaleId")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class AnalyticsSessionGroupBySpecification
+      attr_accessor name: ("ConversationEndState" | "LocaleId")
+      SENSITIVE: []
+    end
+
+    class AnalyticsSessionMetric
+      attr_accessor name: ("Count" | "Success" | "Failure" | "Dropped" | "Duration" | "TurnsPerConversation" | "Concurrency")
+      attr_accessor statistic: ("Sum" | "Avg" | "Max")
+      attr_accessor order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class AnalyticsSessionMetricResult
+      attr_accessor name: ("Count" | "Success" | "Failure" | "Dropped" | "Duration" | "TurnsPerConversation" | "Concurrency")
+      attr_accessor statistic: ("Sum" | "Avg" | "Max")
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class AnalyticsSessionResult
+      attr_accessor bin_keys: ::Array[Types::AnalyticsBinKey]
+      attr_accessor group_by_keys: ::Array[Types::AnalyticsSessionGroupByKey]
+      attr_accessor metrics_results: ::Array[Types::AnalyticsSessionMetricResult]
+      SENSITIVE: []
+    end
+
+    class AnalyticsUtteranceAttribute
+      attr_accessor name: ("LastUsedIntent")
+      SENSITIVE: []
+    end
+
+    class AnalyticsUtteranceAttributeResult
+      attr_accessor last_used_intent: ::String
+      SENSITIVE: []
+    end
+
+    class AnalyticsUtteranceFilter
+      attr_accessor name: ("BotAliasId" | "BotVersion" | "LocaleId" | "Modality" | "Channel" | "SessionId" | "OriginatingRequestId" | "UtteranceState" | "UtteranceText")
+      attr_accessor operator: ("EQ" | "GT" | "LT")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AnalyticsUtteranceGroupByKey
+      attr_accessor name: ("UtteranceText" | "UtteranceState")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class AnalyticsUtteranceGroupBySpecification
+      attr_accessor name: ("UtteranceText" | "UtteranceState")
+      SENSITIVE: []
+    end
+
+    class AnalyticsUtteranceMetric
+      attr_accessor name: ("Count" | "Missed" | "Detected" | "UtteranceTimestamp")
+      attr_accessor statistic: ("Sum" | "Avg" | "Max")
+      attr_accessor order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class AnalyticsUtteranceMetricResult
+      attr_accessor name: ("Count" | "Missed" | "Detected" | "UtteranceTimestamp")
+      attr_accessor statistic: ("Sum" | "Avg" | "Max")
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class AnalyticsUtteranceResult
+      attr_accessor bin_keys: ::Array[Types::AnalyticsBinKey]
+      attr_accessor group_by_keys: ::Array[Types::AnalyticsUtteranceGroupByKey]
+      attr_accessor metrics_results: ::Array[Types::AnalyticsUtteranceMetricResult]
+      attr_accessor attribute_results: ::Array[Types::AnalyticsUtteranceAttributeResult]
+      SENSITIVE: []
+    end
+
+    class AssociatedTranscript
+      attr_accessor transcript: ::String
+      SENSITIVE: []
+    end
+
+    class AssociatedTranscriptFilter
+      attr_accessor name: ("IntentId" | "SlotTypeId")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AudioAndDTMFInputSpecification
+      attr_accessor start_timeout_ms: ::Integer
+      attr_accessor audio_specification: Types::AudioSpecification
+      attr_accessor dtmf_specification: Types::DTMFSpecification
+      SENSITIVE: []
+    end
+
+    class AudioLogDestination
+      attr_accessor s3_bucket: Types::S3BucketLogDestination
+      SENSITIVE: []
+    end
+
+    class AudioLogSetting
+      attr_accessor enabled: bool
+      attr_accessor destination: Types::AudioLogDestination
+      attr_accessor selective_logging_enabled: bool
+      SENSITIVE: []
+    end
+
+    class AudioSpecification
+      attr_accessor max_length_ms: ::Integer
+      attr_accessor end_timeout_ms: ::Integer
+      SENSITIVE: []
+    end
+
+    class BatchCreateCustomVocabularyItemRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor custom_vocabulary_item_list: ::Array[Types::NewCustomVocabularyItem]
+      SENSITIVE: []
+    end
+
+    class BatchCreateCustomVocabularyItemResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor errors: ::Array[Types::FailedCustomVocabularyItem]
+      attr_accessor resources: ::Array[Types::CustomVocabularyItem]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteCustomVocabularyItemRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor custom_vocabulary_item_list: ::Array[Types::CustomVocabularyEntryId]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteCustomVocabularyItemResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor errors: ::Array[Types::FailedCustomVocabularyItem]
+      attr_accessor resources: ::Array[Types::CustomVocabularyItem]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateCustomVocabularyItemRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor custom_vocabulary_item_list: ::Array[Types::CustomVocabularyItem]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateCustomVocabularyItemResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor errors: ::Array[Types::FailedCustomVocabularyItem]
+      attr_accessor resources: ::Array[Types::CustomVocabularyItem]
+      SENSITIVE: []
+    end
+
+    class BedrockModelSpecification
+      attr_accessor model_arn: ::String
+      SENSITIVE: []
+    end
+
+    class BotAliasHistoryEvent
+      attr_accessor bot_version: ::String
+      attr_accessor start_date: ::Time
+      attr_accessor end_date: ::Time
+      SENSITIVE: []
+    end
+
+    class BotAliasLocaleSettings
+      attr_accessor enabled: bool
+      attr_accessor code_hook_specification: Types::CodeHookSpecification
+      SENSITIVE: []
+    end
+
+    class BotAliasSummary
+      attr_accessor bot_alias_id: ::String
+      attr_accessor bot_alias_name: ::String
+      attr_accessor description: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor bot_alias_status: ("Creating" | "Available" | "Deleting" | "Failed")
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class BotAliasTestExecutionTarget
+      attr_accessor bot_id: ::String
+      attr_accessor bot_alias_id: ::String
+      attr_accessor locale_id: ::String
+      SENSITIVE: []
+    end
+
+    class BotExportSpecification
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      SENSITIVE: []
+    end
+
+    class BotFilter
+      attr_accessor name: ("BotName" | "BotType")
+      attr_accessor values: ::Array[::String]
+      attr_accessor operator: ("CO" | "EQ" | "NE")
+      SENSITIVE: []
+    end
+
+    class BotImportSpecification
+      attr_accessor bot_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor data_privacy: Types::DataPrivacy
+      attr_accessor idle_session_ttl_in_seconds: ::Integer
+      attr_accessor bot_tags: ::Hash[::String, ::String]
+      attr_accessor test_bot_alias_tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class BotLocaleExportSpecification
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      SENSITIVE: []
+    end
+
+    class BotLocaleFilter
+      attr_accessor name: ("BotLocaleName")
+      attr_accessor values: ::Array[::String]
+      attr_accessor operator: ("CO" | "EQ")
+      SENSITIVE: []
+    end
+
+    class BotLocaleHistoryEvent
+      attr_accessor event: ::String
+      attr_accessor event_date: ::Time
+      SENSITIVE: []
+    end
+
+    class BotLocaleImportSpecification
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor nlu_intent_confidence_threshold: ::Float
+      attr_accessor voice_settings: Types::VoiceSettings
+      SENSITIVE: []
+    end
+
+    class BotLocaleSortBy
+      attr_accessor attribute: ("BotLocaleName")
+      attr_accessor order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class BotLocaleSummary
+      attr_accessor locale_id: ::String
+      attr_accessor locale_name: ::String
+      attr_accessor description: ::String
+      attr_accessor bot_locale_status: ("Creating" | "Building" | "Built" | "ReadyExpressTesting" | "Failed" | "Deleting" | "NotBuilt" | "Importing" | "Processing")
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor last_build_submitted_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class BotMember
+      attr_accessor bot_member_id: ::String
+      attr_accessor bot_member_name: ::String
+      attr_accessor bot_member_alias_id: ::String
+      attr_accessor bot_member_alias_name: ::String
+      attr_accessor bot_member_version: ::String
+      SENSITIVE: []
+    end
+
+    class BotRecommendationResultStatistics
+      attr_accessor intents: Types::IntentStatistics
+      attr_accessor slot_types: Types::SlotTypeStatistics
+      SENSITIVE: []
+    end
+
+    class BotRecommendationResults
+      attr_accessor bot_locale_export_url: ::String
+      attr_accessor associated_transcripts_url: ::String
+      attr_accessor statistics: Types::BotRecommendationResultStatistics
+      SENSITIVE: []
+    end
+
+    class BotRecommendationSummary
+      attr_accessor bot_recommendation_status: ("Processing" | "Deleting" | "Deleted" | "Downloading" | "Updating" | "Available" | "Failed" | "Stopping" | "Stopped")
+      attr_accessor bot_recommendation_id: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class BotSortBy
+      attr_accessor attribute: ("BotName")
+      attr_accessor order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class BotSummary
+      attr_accessor bot_id: ::String
+      attr_accessor bot_name: ::String
+      attr_accessor description: ::String
+      attr_accessor bot_status: ("Creating" | "Available" | "Inactive" | "Deleting" | "Failed" | "Versioning" | "Importing" | "Updating")
+      attr_accessor latest_bot_version: ::String
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor bot_type: ("Bot" | "BotNetwork")
+      SENSITIVE: []
+    end
+
+    class BotVersionLocaleDetails
+      attr_accessor source_bot_version: ::String
+      SENSITIVE: []
+    end
+
+    class BotVersionSortBy
+      attr_accessor attribute: ("BotVersion")
+      attr_accessor order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class BotVersionSummary
+      attr_accessor bot_name: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor description: ::String
+      attr_accessor bot_status: ("Creating" | "Available" | "Inactive" | "Deleting" | "Failed" | "Versioning" | "Importing" | "Updating")
+      attr_accessor creation_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class BuildBotLocaleRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      SENSITIVE: []
+    end
+
+    class BuildBotLocaleResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor bot_locale_status: ("Creating" | "Building" | "Built" | "ReadyExpressTesting" | "Failed" | "Deleting" | "NotBuilt" | "Importing" | "Processing")
+      attr_accessor last_build_submitted_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class BuildtimeSettings
+      attr_accessor descriptive_bot_builder: Types::DescriptiveBotBuilderSpecification
+      attr_accessor sample_utterance_generation: Types::SampleUtteranceGenerationSpecification
+      SENSITIVE: []
+    end
+
+    class BuiltInIntentSortBy
+      attr_accessor attribute: ("IntentSignature")
+      attr_accessor order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class BuiltInIntentSummary
+      attr_accessor intent_signature: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class BuiltInSlotTypeSortBy
+      attr_accessor attribute: ("SlotTypeSignature")
+      attr_accessor order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class BuiltInSlotTypeSummary
+      attr_accessor slot_type_signature: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class Button
+      attr_accessor text: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class CloudWatchLogGroupLogDestination
+      attr_accessor cloud_watch_log_group_arn: ::String
+      attr_accessor log_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class CodeHookSpecification
+      attr_accessor lambda_code_hook: Types::LambdaCodeHook
+      SENSITIVE: []
+    end
+
+    class CompositeSlotTypeSetting
+      attr_accessor sub_slots: ::Array[Types::SubSlotTypeComposition]
+      SENSITIVE: []
+    end
+
+    class Condition
+      attr_accessor expression_string: ::String
+      SENSITIVE: []
+    end
+
+    class ConditionalBranch
+      attr_accessor name: ::String
+      attr_accessor condition: Types::Condition
+      attr_accessor next_step: Types::DialogState
+      attr_accessor response: Types::ResponseSpecification
+      SENSITIVE: []
+    end
+
+    class ConditionalSpecification
+      attr_accessor active: bool
+      attr_accessor conditional_branches: ::Array[Types::ConditionalBranch]
+      attr_accessor default_branch: Types::DefaultConditionalBranch
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConversationLevelIntentClassificationResultItem
+      attr_accessor intent_name: ::String
+      attr_accessor match_result: ("Matched" | "Mismatched" | "ExecutionError")
+      SENSITIVE: []
+    end
+
+    class ConversationLevelResultDetail
+      attr_accessor end_to_end_result: ("Matched" | "Mismatched" | "ExecutionError")
+      attr_accessor speech_transcription_result: ("Matched" | "Mismatched" | "ExecutionError")
+      SENSITIVE: []
+    end
+
+    class ConversationLevelSlotResolutionResultItem
+      attr_accessor intent_name: ::String
+      attr_accessor slot_name: ::String
+      attr_accessor match_result: ("Matched" | "Mismatched" | "ExecutionError")
+      SENSITIVE: []
+    end
+
+    class ConversationLevelTestResultItem
+      attr_accessor conversation_id: ::String
+      attr_accessor end_to_end_result: ("Matched" | "Mismatched" | "ExecutionError")
+      attr_accessor speech_transcription_result: ("Matched" | "Mismatched" | "ExecutionError")
+      attr_accessor intent_classification_results: ::Array[Types::ConversationLevelIntentClassificationResultItem]
+      attr_accessor slot_resolution_results: ::Array[Types::ConversationLevelSlotResolutionResultItem]
+      SENSITIVE: []
+    end
+
+    class ConversationLevelTestResults
+      attr_accessor items: ::Array[Types::ConversationLevelTestResultItem]
+      SENSITIVE: []
+    end
+
+    class ConversationLevelTestResultsFilterBy
+      attr_accessor end_to_end_result: ("Matched" | "Mismatched" | "ExecutionError")
+      SENSITIVE: []
+    end
+
+    class ConversationLogSettings
+      attr_accessor text_log_settings: ::Array[Types::TextLogSetting]
+      attr_accessor audio_log_settings: ::Array[Types::AudioLogSetting]
+      SENSITIVE: []
+    end
+
+    class ConversationLogsDataSource
+      attr_accessor bot_id: ::String
+      attr_accessor bot_alias_id: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor filter: Types::ConversationLogsDataSourceFilterBy
+      SENSITIVE: []
+    end
+
+    class ConversationLogsDataSourceFilterBy
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor input_mode: ("Speech" | "Text")
+      SENSITIVE: []
+    end
+
+    class CreateBotAliasRequest
+      attr_accessor bot_alias_name: ::String
+      attr_accessor description: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor bot_alias_locale_settings: ::Hash[::String, Types::BotAliasLocaleSettings]
+      attr_accessor conversation_log_settings: Types::ConversationLogSettings
+      attr_accessor sentiment_analysis_settings: Types::SentimentAnalysisSettings
+      attr_accessor bot_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateBotAliasResponse
+      attr_accessor bot_alias_id: ::String
+      attr_accessor bot_alias_name: ::String
+      attr_accessor description: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor bot_alias_locale_settings: ::Hash[::String, Types::BotAliasLocaleSettings]
+      attr_accessor conversation_log_settings: Types::ConversationLogSettings
+      attr_accessor sentiment_analysis_settings: Types::SentimentAnalysisSettings
+      attr_accessor bot_alias_status: ("Creating" | "Available" | "Deleting" | "Failed")
+      attr_accessor bot_id: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateBotLocaleRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor description: ::String
+      attr_accessor nlu_intent_confidence_threshold: ::Float
+      attr_accessor voice_settings: Types::VoiceSettings
+      attr_accessor generative_ai_settings: Types::GenerativeAISettings
+      SENSITIVE: []
+    end
+
+    class CreateBotLocaleResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_name: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor description: ::String
+      attr_accessor nlu_intent_confidence_threshold: ::Float
+      attr_accessor voice_settings: Types::VoiceSettings
+      attr_accessor bot_locale_status: ("Creating" | "Building" | "Built" | "ReadyExpressTesting" | "Failed" | "Deleting" | "NotBuilt" | "Importing" | "Processing")
+      attr_accessor creation_date_time: ::Time
+      attr_accessor generative_ai_settings: Types::GenerativeAISettings
+      SENSITIVE: []
+    end
+
+    class CreateBotRequest
+      attr_accessor bot_name: ::String
+      attr_accessor description: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor data_privacy: Types::DataPrivacy
+      attr_accessor idle_session_ttl_in_seconds: ::Integer
+      attr_accessor bot_tags: ::Hash[::String, ::String]
+      attr_accessor test_bot_alias_tags: ::Hash[::String, ::String]
+      attr_accessor bot_type: ("Bot" | "BotNetwork")
+      attr_accessor bot_members: ::Array[Types::BotMember]
+      SENSITIVE: []
+    end
+
+    class CreateBotResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_name: ::String
+      attr_accessor description: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor data_privacy: Types::DataPrivacy
+      attr_accessor idle_session_ttl_in_seconds: ::Integer
+      attr_accessor bot_status: ("Creating" | "Available" | "Inactive" | "Deleting" | "Failed" | "Versioning" | "Importing" | "Updating")
+      attr_accessor creation_date_time: ::Time
+      attr_accessor bot_tags: ::Hash[::String, ::String]
+      attr_accessor test_bot_alias_tags: ::Hash[::String, ::String]
+      attr_accessor bot_type: ("Bot" | "BotNetwork")
+      attr_accessor bot_members: ::Array[Types::BotMember]
+      SENSITIVE: []
+    end
+
+    class CreateBotVersionRequest
+      attr_accessor bot_id: ::String
+      attr_accessor description: ::String
+      attr_accessor bot_version_locale_specification: ::Hash[::String, Types::BotVersionLocaleDetails]
+      SENSITIVE: []
+    end
+
+    class CreateBotVersionResponse
+      attr_accessor bot_id: ::String
+      attr_accessor description: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor bot_version_locale_specification: ::Hash[::String, Types::BotVersionLocaleDetails]
+      attr_accessor bot_status: ("Creating" | "Available" | "Inactive" | "Deleting" | "Failed" | "Versioning" | "Importing" | "Updating")
+      attr_accessor creation_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateExportRequest
+      attr_accessor resource_specification: Types::ExportResourceSpecification
+      attr_accessor file_format: ("LexJson" | "TSV" | "CSV")
+      attr_accessor file_password: ::String
+      SENSITIVE: [:file_password]
+    end
+
+    class CreateExportResponse
+      attr_accessor export_id: ::String
+      attr_accessor resource_specification: Types::ExportResourceSpecification
+      attr_accessor file_format: ("LexJson" | "TSV" | "CSV")
+      attr_accessor export_status: ("InProgress" | "Completed" | "Failed" | "Deleting")
+      attr_accessor creation_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateIntentRequest
+      attr_accessor intent_name: ::String
+      attr_accessor description: ::String
+      attr_accessor parent_intent_signature: ::String
+      attr_accessor sample_utterances: ::Array[Types::SampleUtterance]
+      attr_accessor dialog_code_hook: Types::DialogCodeHookSettings
+      attr_accessor fulfillment_code_hook: Types::FulfillmentCodeHookSettings
+      attr_accessor intent_confirmation_setting: Types::IntentConfirmationSetting
+      attr_accessor intent_closing_setting: Types::IntentClosingSetting
+      attr_accessor input_contexts: ::Array[Types::InputContext]
+      attr_accessor output_contexts: ::Array[Types::OutputContext]
+      attr_accessor kendra_configuration: Types::KendraConfiguration
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor initial_response_setting: Types::InitialResponseSetting
+      SENSITIVE: []
+    end
+
+    class CreateIntentResponse
+      attr_accessor intent_id: ::String
+      attr_accessor intent_name: ::String
+      attr_accessor description: ::String
+      attr_accessor parent_intent_signature: ::String
+      attr_accessor sample_utterances: ::Array[Types::SampleUtterance]
+      attr_accessor dialog_code_hook: Types::DialogCodeHookSettings
+      attr_accessor fulfillment_code_hook: Types::FulfillmentCodeHookSettings
+      attr_accessor intent_confirmation_setting: Types::IntentConfirmationSetting
+      attr_accessor intent_closing_setting: Types::IntentClosingSetting
+      attr_accessor input_contexts: ::Array[Types::InputContext]
+      attr_accessor output_contexts: ::Array[Types::OutputContext]
+      attr_accessor kendra_configuration: Types::KendraConfiguration
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor initial_response_setting: Types::InitialResponseSetting
+      SENSITIVE: []
+    end
+
+    class CreateResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class CreateResourcePolicyResponse
+      attr_accessor resource_arn: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateResourcePolicyStatementRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor statement_id: ::String
+      attr_accessor effect: ("Allow" | "Deny")
+      attr_accessor principal: ::Array[Types::Principal]
+      attr_accessor action: ::Array[::String]
+      attr_accessor condition: ::Hash[::String, ::Hash[::String, ::String]]
+      attr_accessor expected_revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateResourcePolicyStatementResponse
+      attr_accessor resource_arn: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSlotRequest
+      attr_accessor slot_name: ::String
+      attr_accessor description: ::String
+      attr_accessor slot_type_id: ::String
+      attr_accessor value_elicitation_setting: Types::SlotValueElicitationSetting
+      attr_accessor obfuscation_setting: Types::ObfuscationSetting
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor intent_id: ::String
+      attr_accessor multiple_values_setting: Types::MultipleValuesSetting
+      attr_accessor sub_slot_setting: Types::SubSlotSetting
+      SENSITIVE: []
+    end
+
+    class CreateSlotResponse
+      attr_accessor slot_id: ::String
+      attr_accessor slot_name: ::String
+      attr_accessor description: ::String
+      attr_accessor slot_type_id: ::String
+      attr_accessor value_elicitation_setting: Types::SlotValueElicitationSetting
+      attr_accessor obfuscation_setting: Types::ObfuscationSetting
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor intent_id: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor multiple_values_setting: Types::MultipleValuesSetting
+      attr_accessor sub_slot_setting: Types::SubSlotSetting
+      SENSITIVE: []
+    end
+
+    class CreateSlotTypeRequest
+      attr_accessor slot_type_name: ::String
+      attr_accessor description: ::String
+      attr_accessor slot_type_values: ::Array[Types::SlotTypeValue]
+      attr_accessor value_selection_setting: Types::SlotValueSelectionSetting
+      attr_accessor parent_slot_type_signature: ::String
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor external_source_setting: Types::ExternalSourceSetting
+      attr_accessor composite_slot_type_setting: Types::CompositeSlotTypeSetting
+      SENSITIVE: []
+    end
+
+    class CreateSlotTypeResponse
+      attr_accessor slot_type_id: ::String
+      attr_accessor slot_type_name: ::String
+      attr_accessor description: ::String
+      attr_accessor slot_type_values: ::Array[Types::SlotTypeValue]
+      attr_accessor value_selection_setting: Types::SlotValueSelectionSetting
+      attr_accessor parent_slot_type_signature: ::String
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor external_source_setting: Types::ExternalSourceSetting
+      attr_accessor composite_slot_type_setting: Types::CompositeSlotTypeSetting
+      SENSITIVE: []
+    end
+
+    class CreateTestSetDiscrepancyReportRequest
+      attr_accessor test_set_id: ::String
+      attr_accessor target: Types::TestSetDiscrepancyReportResourceTarget
+      SENSITIVE: []
+    end
+
+    class CreateTestSetDiscrepancyReportResponse
+      attr_accessor test_set_discrepancy_report_id: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor test_set_id: ::String
+      attr_accessor target: Types::TestSetDiscrepancyReportResourceTarget
+      SENSITIVE: []
+    end
+
+    class CreateUploadUrlRequest < Aws::EmptyStructure
+    end
+
+    class CreateUploadUrlResponse
+      attr_accessor import_id: ::String
+      attr_accessor upload_url: ::String
+      SENSITIVE: []
+    end
+
+    class CustomPayload
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class CustomVocabularyEntryId
+      attr_accessor item_id: ::String
+      SENSITIVE: []
+    end
+
+    class CustomVocabularyExportSpecification
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      SENSITIVE: []
+    end
+
+    class CustomVocabularyImportSpecification
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      SENSITIVE: []
+    end
+
+    class CustomVocabularyItem
+      attr_accessor item_id: ::String
+      attr_accessor phrase: ::String
+      attr_accessor weight: ::Integer
+      attr_accessor display_as: ::String
+      SENSITIVE: []
+    end
+
+    class DTMFSpecification
+      attr_accessor max_length: ::Integer
+      attr_accessor end_timeout_ms: ::Integer
+      attr_accessor deletion_character: ::String
+      attr_accessor end_character: ::String
+      SENSITIVE: []
+    end
+
+    class DataPrivacy
+      attr_accessor child_directed: bool
+      SENSITIVE: []
+    end
+
+    class DateRangeFilter
+      attr_accessor start_date_time: ::Time
+      attr_accessor end_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DefaultConditionalBranch
+      attr_accessor next_step: Types::DialogState
+      attr_accessor response: Types::ResponseSpecification
+      SENSITIVE: []
+    end
+
+    class DeleteBotAliasRequest
+      attr_accessor bot_alias_id: ::String
+      attr_accessor bot_id: ::String
+      attr_accessor skip_resource_in_use_check: bool
+      SENSITIVE: []
+    end
+
+    class DeleteBotAliasResponse
+      attr_accessor bot_alias_id: ::String
+      attr_accessor bot_id: ::String
+      attr_accessor bot_alias_status: ("Creating" | "Available" | "Deleting" | "Failed")
+      SENSITIVE: []
+    end
+
+    class DeleteBotLocaleRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBotLocaleResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor bot_locale_status: ("Creating" | "Building" | "Built" | "ReadyExpressTesting" | "Failed" | "Deleting" | "NotBuilt" | "Importing" | "Processing")
+      SENSITIVE: []
+    end
+
+    class DeleteBotRequest
+      attr_accessor bot_id: ::String
+      attr_accessor skip_resource_in_use_check: bool
+      SENSITIVE: []
+    end
+
+    class DeleteBotResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_status: ("Creating" | "Available" | "Inactive" | "Deleting" | "Failed" | "Versioning" | "Importing" | "Updating")
+      SENSITIVE: []
+    end
+
+    class DeleteBotVersionRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor skip_resource_in_use_check: bool
+      SENSITIVE: []
+    end
+
+    class DeleteBotVersionResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor bot_status: ("Creating" | "Available" | "Inactive" | "Deleting" | "Failed" | "Versioning" | "Importing" | "Updating")
+      SENSITIVE: []
+    end
+
+    class DeleteCustomVocabularyRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCustomVocabularyResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor custom_vocabulary_status: ("Ready" | "Deleting" | "Exporting" | "Importing" | "Creating")
+      SENSITIVE: []
+    end
+
+    class DeleteExportRequest
+      attr_accessor export_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteExportResponse
+      attr_accessor export_id: ::String
+      attr_accessor export_status: ("InProgress" | "Completed" | "Failed" | "Deleting")
+      SENSITIVE: []
+    end
+
+    class DeleteImportRequest
+      attr_accessor import_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteImportResponse
+      attr_accessor import_id: ::String
+      attr_accessor import_status: ("InProgress" | "Completed" | "Failed" | "Deleting")
+      SENSITIVE: []
+    end
+
+    class DeleteIntentRequest
+      attr_accessor intent_id: ::String
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor expected_revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyResponse
+      attr_accessor resource_arn: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyStatementRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor statement_id: ::String
+      attr_accessor expected_revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyStatementResponse
+      attr_accessor resource_arn: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSlotRequest
+      attr_accessor slot_id: ::String
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor intent_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSlotTypeRequest
+      attr_accessor slot_type_id: ::String
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor skip_resource_in_use_check: bool
+      SENSITIVE: []
+    end
+
+    class DeleteTestSetRequest
+      attr_accessor test_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUtterancesRequest
+      attr_accessor bot_id: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUtterancesResponse < Aws::EmptyStructure
+    end
+
+    class DescribeBotAliasRequest
+      attr_accessor bot_alias_id: ::String
+      attr_accessor bot_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBotAliasResponse
+      attr_accessor bot_alias_id: ::String
+      attr_accessor bot_alias_name: ::String
+      attr_accessor description: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor bot_alias_locale_settings: ::Hash[::String, Types::BotAliasLocaleSettings]
+      attr_accessor conversation_log_settings: Types::ConversationLogSettings
+      attr_accessor sentiment_analysis_settings: Types::SentimentAnalysisSettings
+      attr_accessor bot_alias_history_events: ::Array[Types::BotAliasHistoryEvent]
+      attr_accessor bot_alias_status: ("Creating" | "Available" | "Deleting" | "Failed")
+      attr_accessor bot_id: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor parent_bot_networks: ::Array[Types::ParentBotNetwork]
+      SENSITIVE: []
+    end
+
+    class DescribeBotLocaleRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBotLocaleResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor locale_name: ::String
+      attr_accessor description: ::String
+      attr_accessor nlu_intent_confidence_threshold: ::Float
+      attr_accessor voice_settings: Types::VoiceSettings
+      attr_accessor intents_count: ::Integer
+      attr_accessor slot_types_count: ::Integer
+      attr_accessor bot_locale_status: ("Creating" | "Building" | "Built" | "ReadyExpressTesting" | "Failed" | "Deleting" | "NotBuilt" | "Importing" | "Processing")
+      attr_accessor failure_reasons: ::Array[::String]
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor last_build_submitted_date_time: ::Time
+      attr_accessor bot_locale_history_events: ::Array[Types::BotLocaleHistoryEvent]
+      attr_accessor recommended_actions: ::Array[::String]
+      attr_accessor generative_ai_settings: Types::GenerativeAISettings
+      SENSITIVE: []
+    end
+
+    class DescribeBotRecommendationRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor bot_recommendation_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBotRecommendationResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor bot_recommendation_status: ("Processing" | "Deleting" | "Deleted" | "Downloading" | "Updating" | "Available" | "Failed" | "Stopping" | "Stopped")
+      attr_accessor bot_recommendation_id: ::String
+      attr_accessor failure_reasons: ::Array[::String]
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor transcript_source_setting: Types::TranscriptSourceSetting
+      attr_accessor encryption_setting: Types::EncryptionSetting
+      attr_accessor bot_recommendation_results: Types::BotRecommendationResults
+      SENSITIVE: []
+    end
+
+    class DescribeBotRequest
+      attr_accessor bot_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBotResourceGenerationRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor generation_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBotResourceGenerationResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor generation_id: ::String
+      attr_accessor failure_reasons: ::Array[::String]
+      attr_accessor generation_status: ("Failed" | "Complete" | "InProgress")
+      attr_accessor generation_input_prompt: ::String
+      attr_accessor generated_bot_locale_url: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor model_arn: ::String
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeBotResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_name: ::String
+      attr_accessor description: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor data_privacy: Types::DataPrivacy
+      attr_accessor idle_session_ttl_in_seconds: ::Integer
+      attr_accessor bot_status: ("Creating" | "Available" | "Inactive" | "Deleting" | "Failed" | "Versioning" | "Importing" | "Updating")
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor bot_type: ("Bot" | "BotNetwork")
+      attr_accessor bot_members: ::Array[Types::BotMember]
+      attr_accessor failure_reasons: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeBotVersionRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBotVersionResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_name: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor description: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor data_privacy: Types::DataPrivacy
+      attr_accessor idle_session_ttl_in_seconds: ::Integer
+      attr_accessor bot_status: ("Creating" | "Available" | "Inactive" | "Deleting" | "Failed" | "Versioning" | "Importing" | "Updating")
+      attr_accessor failure_reasons: ::Array[::String]
+      attr_accessor creation_date_time: ::Time
+      attr_accessor parent_bot_networks: ::Array[Types::ParentBotNetwork]
+      attr_accessor bot_type: ("Bot" | "BotNetwork")
+      attr_accessor bot_members: ::Array[Types::BotMember]
+      SENSITIVE: []
+    end
+
+    class DescribeCustomVocabularyMetadataRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCustomVocabularyMetadataResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor custom_vocabulary_status: ("Ready" | "Deleting" | "Exporting" | "Importing" | "Creating")
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeExportRequest
+      attr_accessor export_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeExportResponse
+      attr_accessor export_id: ::String
+      attr_accessor resource_specification: Types::ExportResourceSpecification
+      attr_accessor file_format: ("LexJson" | "TSV" | "CSV")
+      attr_accessor export_status: ("InProgress" | "Completed" | "Failed" | "Deleting")
+      attr_accessor failure_reasons: ::Array[::String]
+      attr_accessor download_url: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeImportRequest
+      attr_accessor import_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeImportResponse
+      attr_accessor import_id: ::String
+      attr_accessor resource_specification: Types::ImportResourceSpecification
+      attr_accessor imported_resource_id: ::String
+      attr_accessor imported_resource_name: ::String
+      attr_accessor merge_strategy: ("Overwrite" | "FailOnConflict" | "Append")
+      attr_accessor import_status: ("InProgress" | "Completed" | "Failed" | "Deleting")
+      attr_accessor failure_reasons: ::Array[::String]
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeIntentRequest
+      attr_accessor intent_id: ::String
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeIntentResponse
+      attr_accessor intent_id: ::String
+      attr_accessor intent_name: ::String
+      attr_accessor description: ::String
+      attr_accessor parent_intent_signature: ::String
+      attr_accessor sample_utterances: ::Array[Types::SampleUtterance]
+      attr_accessor dialog_code_hook: Types::DialogCodeHookSettings
+      attr_accessor fulfillment_code_hook: Types::FulfillmentCodeHookSettings
+      attr_accessor slot_priorities: ::Array[Types::SlotPriority]
+      attr_accessor intent_confirmation_setting: Types::IntentConfirmationSetting
+      attr_accessor intent_closing_setting: Types::IntentClosingSetting
+      attr_accessor input_contexts: ::Array[Types::InputContext]
+      attr_accessor output_contexts: ::Array[Types::OutputContext]
+      attr_accessor kendra_configuration: Types::KendraConfiguration
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor initial_response_setting: Types::InitialResponseSetting
+      SENSITIVE: []
+    end
+
+    class DescribeResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeResourcePolicyResponse
+      attr_accessor resource_arn: ::String
+      attr_accessor policy: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSlotRequest
+      attr_accessor slot_id: ::String
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor intent_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSlotResponse
+      attr_accessor slot_id: ::String
+      attr_accessor slot_name: ::String
+      attr_accessor description: ::String
+      attr_accessor slot_type_id: ::String
+      attr_accessor value_elicitation_setting: Types::SlotValueElicitationSetting
+      attr_accessor obfuscation_setting: Types::ObfuscationSetting
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor intent_id: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor multiple_values_setting: Types::MultipleValuesSetting
+      attr_accessor sub_slot_setting: Types::SubSlotSetting
+      SENSITIVE: []
+    end
+
+    class DescribeSlotTypeRequest
+      attr_accessor slot_type_id: ::String
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSlotTypeResponse
+      attr_accessor slot_type_id: ::String
+      attr_accessor slot_type_name: ::String
+      attr_accessor description: ::String
+      attr_accessor slot_type_values: ::Array[Types::SlotTypeValue]
+      attr_accessor value_selection_setting: Types::SlotValueSelectionSetting
+      attr_accessor parent_slot_type_signature: ::String
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor external_source_setting: Types::ExternalSourceSetting
+      attr_accessor composite_slot_type_setting: Types::CompositeSlotTypeSetting
+      SENSITIVE: []
+    end
+
+    class DescribeTestExecutionRequest
+      attr_accessor test_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTestExecutionResponse
+      attr_accessor test_execution_id: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor test_execution_status: ("Pending" | "Waiting" | "InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped")
+      attr_accessor test_set_id: ::String
+      attr_accessor test_set_name: ::String
+      attr_accessor target: Types::TestExecutionTarget
+      attr_accessor api_mode: ("Streaming" | "NonStreaming")
+      attr_accessor test_execution_modality: ("Text" | "Audio")
+      attr_accessor failure_reasons: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeTestSetDiscrepancyReportRequest
+      attr_accessor test_set_discrepancy_report_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTestSetDiscrepancyReportResponse
+      attr_accessor test_set_discrepancy_report_id: ::String
+      attr_accessor test_set_id: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor target: Types::TestSetDiscrepancyReportResourceTarget
+      attr_accessor test_set_discrepancy_report_status: ("InProgress" | "Completed" | "Failed")
+      attr_accessor last_updated_data_time: ::Time
+      attr_accessor test_set_discrepancy_top_errors: Types::TestSetDiscrepancyErrors
+      attr_accessor test_set_discrepancy_raw_output_url: ::String
+      attr_accessor failure_reasons: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeTestSetGenerationRequest
+      attr_accessor test_set_generation_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTestSetGenerationResponse
+      attr_accessor test_set_generation_id: ::String
+      attr_accessor test_set_generation_status: ("Generating" | "Ready" | "Failed" | "Pending")
+      attr_accessor failure_reasons: ::Array[::String]
+      attr_accessor test_set_id: ::String
+      attr_accessor test_set_name: ::String
+      attr_accessor description: ::String
+      attr_accessor storage_location: Types::TestSetStorageLocation
+      attr_accessor generation_data_source: Types::TestSetGenerationDataSource
+      attr_accessor role_arn: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeTestSetRequest
+      attr_accessor test_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTestSetResponse
+      attr_accessor test_set_id: ::String
+      attr_accessor test_set_name: ::String
+      attr_accessor description: ::String
+      attr_accessor modality: ("Text" | "Audio")
+      attr_accessor status: ("Importing" | "PendingAnnotation" | "Deleting" | "ValidationError" | "Ready")
+      attr_accessor role_arn: ::String
+      attr_accessor num_turns: ::Integer
+      attr_accessor storage_location: Types::TestSetStorageLocation
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescriptiveBotBuilderSpecification
+      attr_accessor enabled: bool
+      attr_accessor bedrock_model_specification: Types::BedrockModelSpecification
+      SENSITIVE: []
+    end
+
+    class DialogAction
+      attr_accessor type: ("ElicitIntent" | "StartIntent" | "ElicitSlot" | "EvaluateConditional" | "InvokeDialogCodeHook" | "ConfirmIntent" | "FulfillIntent" | "CloseIntent" | "EndConversation")
+      attr_accessor slot_to_elicit: ::String
+      attr_accessor suppress_next_message: bool
+      SENSITIVE: []
+    end
+
+    class DialogCodeHookInvocationSetting
+      attr_accessor enable_code_hook_invocation: bool
+      attr_accessor active: bool
+      attr_accessor invocation_label: ::String
+      attr_accessor post_code_hook_specification: Types::PostDialogCodeHookInvocationSpecification
+      SENSITIVE: []
+    end
+
+    class DialogCodeHookSettings
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class DialogState
+      attr_accessor dialog_action: Types::DialogAction
+      attr_accessor intent: Types::IntentOverride
+      attr_accessor session_attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ElicitationCodeHookInvocationSetting
+      attr_accessor enable_code_hook_invocation: bool
+      attr_accessor invocation_label: ::String
+      SENSITIVE: []
+    end
+
+    class EncryptionSetting
+      attr_accessor kms_key_arn: ::String
+      attr_accessor bot_locale_export_password: ::String
+      attr_accessor associated_transcripts_password: ::String
+      SENSITIVE: [:bot_locale_export_password, :associated_transcripts_password]
+    end
+
+    class ExecutionErrorDetails
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class ExportFilter
+      attr_accessor name: ("ExportResourceType")
+      attr_accessor values: ::Array[::String]
+      attr_accessor operator: ("CO" | "EQ")
+      SENSITIVE: []
+    end
+
+    class ExportResourceSpecification
+      attr_accessor bot_export_specification: Types::BotExportSpecification
+      attr_accessor bot_locale_export_specification: Types::BotLocaleExportSpecification
+      attr_accessor custom_vocabulary_export_specification: Types::CustomVocabularyExportSpecification
+      attr_accessor test_set_export_specification: Types::TestSetExportSpecification
+      SENSITIVE: []
+    end
+
+    class ExportSortBy
+      attr_accessor attribute: ("LastUpdatedDateTime")
+      attr_accessor order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class ExportSummary
+      attr_accessor export_id: ::String
+      attr_accessor resource_specification: Types::ExportResourceSpecification
+      attr_accessor file_format: ("LexJson" | "TSV" | "CSV")
+      attr_accessor export_status: ("InProgress" | "Completed" | "Failed" | "Deleting")
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ExternalSourceSetting
+      attr_accessor grammar_slot_type_setting: Types::GrammarSlotTypeSetting
+      SENSITIVE: []
+    end
+
+    class FailedCustomVocabularyItem
+      attr_accessor item_id: ::String
+      attr_accessor error_message: ::String
+      attr_accessor error_code: ("DUPLICATE_INPUT" | "RESOURCE_DOES_NOT_EXIST" | "RESOURCE_ALREADY_EXISTS" | "INTERNAL_SERVER_FAILURE")
+      SENSITIVE: []
+    end
+
+    class FulfillmentCodeHookSettings
+      attr_accessor enabled: bool
+      attr_accessor post_fulfillment_status_specification: Types::PostFulfillmentStatusSpecification
+      attr_accessor fulfillment_updates_specification: Types::FulfillmentUpdatesSpecification
+      attr_accessor active: bool
+      SENSITIVE: []
+    end
+
+    class FulfillmentStartResponseSpecification
+      attr_accessor delay_in_seconds: ::Integer
+      attr_accessor message_groups: ::Array[Types::MessageGroup]
+      attr_accessor allow_interrupt: bool
+      SENSITIVE: []
+    end
+
+    class FulfillmentUpdateResponseSpecification
+      attr_accessor frequency_in_seconds: ::Integer
+      attr_accessor message_groups: ::Array[Types::MessageGroup]
+      attr_accessor allow_interrupt: bool
+      SENSITIVE: []
+    end
+
+    class FulfillmentUpdatesSpecification
+      attr_accessor active: bool
+      attr_accessor start_response: Types::FulfillmentStartResponseSpecification
+      attr_accessor update_response: Types::FulfillmentUpdateResponseSpecification
+      attr_accessor timeout_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class GenerateBotElementRequest
+      attr_accessor intent_id: ::String
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      SENSITIVE: []
+    end
+
+    class GenerateBotElementResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor intent_id: ::String
+      attr_accessor sample_utterances: ::Array[Types::SampleUtterance]
+      SENSITIVE: []
+    end
+
+    class GenerationSortBy
+      attr_accessor attribute: ("creationStartTime" | "lastUpdatedTime")
+      attr_accessor order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class GenerationSummary
+      attr_accessor generation_id: ::String
+      attr_accessor generation_status: ("Failed" | "Complete" | "InProgress")
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GenerativeAISettings
+      attr_accessor runtime_settings: Types::RuntimeSettings
+      attr_accessor buildtime_settings: Types::BuildtimeSettings
+      SENSITIVE: []
+    end
+
+    class GetTestExecutionArtifactsUrlRequest
+      attr_accessor test_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetTestExecutionArtifactsUrlResponse
+      attr_accessor test_execution_id: ::String
+      attr_accessor download_artifacts_url: ::String
+      SENSITIVE: []
+    end
+
+    class GrammarSlotTypeSetting
+      attr_accessor source: Types::GrammarSlotTypeSource
+      SENSITIVE: []
+    end
+
+    class GrammarSlotTypeSource
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor s3_object_key: ::String
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ImageResponseCard
+      attr_accessor title: ::String
+      attr_accessor subtitle: ::String
+      attr_accessor image_url: ::String
+      attr_accessor buttons: ::Array[Types::Button]
+      SENSITIVE: []
+    end
+
+    class ImportFilter
+      attr_accessor name: ("ImportResourceType")
+      attr_accessor values: ::Array[::String]
+      attr_accessor operator: ("CO" | "EQ")
+      SENSITIVE: []
+    end
+
+    class ImportResourceSpecification
+      attr_accessor bot_import_specification: Types::BotImportSpecification
+      attr_accessor bot_locale_import_specification: Types::BotLocaleImportSpecification
+      attr_accessor custom_vocabulary_import_specification: Types::CustomVocabularyImportSpecification
+      attr_accessor test_set_import_resource_specification: Types::TestSetImportResourceSpecification
+      SENSITIVE: []
+    end
+
+    class ImportSortBy
+      attr_accessor attribute: ("LastUpdatedDateTime")
+      attr_accessor order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class ImportSummary
+      attr_accessor import_id: ::String
+      attr_accessor imported_resource_id: ::String
+      attr_accessor imported_resource_name: ::String
+      attr_accessor import_status: ("InProgress" | "Completed" | "Failed" | "Deleting")
+      attr_accessor merge_strategy: ("Overwrite" | "FailOnConflict" | "Append")
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor imported_resource_type: ("Bot" | "BotLocale" | "CustomVocabulary" | "TestSet")
+      SENSITIVE: []
+    end
+
+    class InitialResponseSetting
+      attr_accessor initial_response: Types::ResponseSpecification
+      attr_accessor next_step: Types::DialogState
+      attr_accessor conditional: Types::ConditionalSpecification
+      attr_accessor code_hook: Types::DialogCodeHookInvocationSetting
+      SENSITIVE: []
+    end
+
+    class InputContext
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class InputSessionStateSpecification
+      attr_accessor session_attributes: ::Hash[::String, ::String]
+      attr_accessor active_contexts: ::Array[Types::ActiveContext]
+      attr_accessor runtime_hints: Types::RuntimeHints
+      SENSITIVE: []
+    end
+
+    class IntentClassificationTestResultItem
+      attr_accessor intent_name: ::String
+      attr_accessor multi_turn_conversation: bool
+      attr_accessor result_counts: Types::IntentClassificationTestResultItemCounts
+      SENSITIVE: []
+    end
+
+    class IntentClassificationTestResultItemCounts
+      attr_accessor total_result_count: ::Integer
+      attr_accessor speech_transcription_result_counts: ::Hash[("Matched" | "Mismatched" | "ExecutionError"), ::Integer]
+      attr_accessor intent_match_result_counts: ::Hash[("Matched" | "Mismatched" | "ExecutionError"), ::Integer]
+      SENSITIVE: []
+    end
+
+    class IntentClassificationTestResults
+      attr_accessor items: ::Array[Types::IntentClassificationTestResultItem]
+      SENSITIVE: []
+    end
+
+    class IntentClosingSetting
+      attr_accessor closing_response: Types::ResponseSpecification
+      attr_accessor active: bool
+      attr_accessor next_step: Types::DialogState
+      attr_accessor conditional: Types::ConditionalSpecification
+      SENSITIVE: []
+    end
+
+    class IntentConfirmationSetting
+      attr_accessor prompt_specification: Types::PromptSpecification
+      attr_accessor declination_response: Types::ResponseSpecification
+      attr_accessor active: bool
+      attr_accessor confirmation_response: Types::ResponseSpecification
+      attr_accessor confirmation_next_step: Types::DialogState
+      attr_accessor confirmation_conditional: Types::ConditionalSpecification
+      attr_accessor declination_next_step: Types::DialogState
+      attr_accessor declination_conditional: Types::ConditionalSpecification
+      attr_accessor failure_response: Types::ResponseSpecification
+      attr_accessor failure_next_step: Types::DialogState
+      attr_accessor failure_conditional: Types::ConditionalSpecification
+      attr_accessor code_hook: Types::DialogCodeHookInvocationSetting
+      attr_accessor elicitation_code_hook: Types::ElicitationCodeHookInvocationSetting
+      SENSITIVE: []
+    end
+
+    class IntentFilter
+      attr_accessor name: ("IntentName")
+      attr_accessor values: ::Array[::String]
+      attr_accessor operator: ("CO" | "EQ")
+      SENSITIVE: []
+    end
+
+    class IntentLevelSlotResolutionTestResultItem
+      attr_accessor intent_name: ::String
+      attr_accessor multi_turn_conversation: bool
+      attr_accessor slot_resolution_results: ::Array[Types::SlotResolutionTestResultItem]
+      SENSITIVE: []
+    end
+
+    class IntentLevelSlotResolutionTestResults
+      attr_accessor items: ::Array[Types::IntentLevelSlotResolutionTestResultItem]
+      SENSITIVE: []
+    end
+
+    class IntentOverride
+      attr_accessor name: ::String
+      attr_accessor slots: ::Hash[::String, Types::SlotValueOverride]
+      SENSITIVE: []
+    end
+
+    class IntentSortBy
+      attr_accessor attribute: ("IntentName" | "LastUpdatedDateTime")
+      attr_accessor order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class IntentStatistics
+      attr_accessor discovered_intent_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class IntentSummary
+      attr_accessor intent_id: ::String
+      attr_accessor intent_name: ::String
+      attr_accessor description: ::String
+      attr_accessor parent_intent_signature: ::String
+      attr_accessor input_contexts: ::Array[Types::InputContext]
+      attr_accessor output_contexts: ::Array[Types::OutputContext]
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvokedIntentSample
+      attr_accessor intent_name: ::String
+      SENSITIVE: []
+    end
+
+    class KendraConfiguration
+      attr_accessor kendra_index: ::String
+      attr_accessor query_filter_string_enabled: bool
+      attr_accessor query_filter_string: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaCodeHook
+      attr_accessor lambda_arn: ::String
+      attr_accessor code_hook_interface_version: ::String
+      SENSITIVE: []
+    end
+
+    class LexTranscriptFilter
+      attr_accessor date_range_filter: Types::DateRangeFilter
+      SENSITIVE: []
+    end
+
+    class ListAggregatedUtterancesRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_alias_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor aggregation_duration: Types::UtteranceAggregationDuration
+      attr_accessor sort_by: Types::AggregatedUtterancesSortBy
+      attr_accessor filters: ::Array[Types::AggregatedUtterancesFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAggregatedUtterancesResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_alias_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor aggregation_duration: Types::UtteranceAggregationDuration
+      attr_accessor aggregation_window_start_time: ::Time
+      attr_accessor aggregation_window_end_time: ::Time
+      attr_accessor aggregation_last_refreshed_date_time: ::Time
+      attr_accessor aggregated_utterances_summaries: ::Array[Types::AggregatedUtterancesSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBotAliasesRequest
+      attr_accessor bot_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBotAliasesResponse
+      attr_accessor bot_alias_summaries: ::Array[Types::BotAliasSummary]
+      attr_accessor next_token: ::String
+      attr_accessor bot_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListBotLocalesRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor sort_by: Types::BotLocaleSortBy
+      attr_accessor filters: ::Array[Types::BotLocaleFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBotLocalesResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor next_token: ::String
+      attr_accessor bot_locale_summaries: ::Array[Types::BotLocaleSummary]
+      SENSITIVE: []
+    end
+
+    class ListBotRecommendationsRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBotRecommendationsResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor bot_recommendation_summaries: ::Array[Types::BotRecommendationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBotResourceGenerationsRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor sort_by: Types::GenerationSortBy
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBotResourceGenerationsResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor generation_summaries: ::Array[Types::GenerationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBotVersionsRequest
+      attr_accessor bot_id: ::String
+      attr_accessor sort_by: Types::BotVersionSortBy
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBotVersionsResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version_summaries: ::Array[Types::BotVersionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBotsRequest
+      attr_accessor sort_by: Types::BotSortBy
+      attr_accessor filters: ::Array[Types::BotFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBotsResponse
+      attr_accessor bot_summaries: ::Array[Types::BotSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBuiltInIntentsRequest
+      attr_accessor locale_id: ::String
+      attr_accessor sort_by: Types::BuiltInIntentSortBy
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBuiltInIntentsResponse
+      attr_accessor built_in_intent_summaries: ::Array[Types::BuiltInIntentSummary]
+      attr_accessor next_token: ::String
+      attr_accessor locale_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListBuiltInSlotTypesRequest
+      attr_accessor locale_id: ::String
+      attr_accessor sort_by: Types::BuiltInSlotTypeSortBy
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBuiltInSlotTypesResponse
+      attr_accessor built_in_slot_type_summaries: ::Array[Types::BuiltInSlotTypeSummary]
+      attr_accessor next_token: ::String
+      attr_accessor locale_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomVocabularyItemsRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomVocabularyItemsResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor custom_vocabulary_items: ::Array[Types::CustomVocabularyItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExportsRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor sort_by: Types::ExportSortBy
+      attr_accessor filters: ::Array[Types::ExportFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor locale_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListExportsResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor export_summaries: ::Array[Types::ExportSummary]
+      attr_accessor next_token: ::String
+      attr_accessor locale_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListImportsRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor sort_by: Types::ImportSortBy
+      attr_accessor filters: ::Array[Types::ImportFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor locale_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListImportsResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor import_summaries: ::Array[Types::ImportSummary]
+      attr_accessor next_token: ::String
+      attr_accessor locale_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListIntentMetricsRequest
+      attr_accessor bot_id: ::String
+      attr_accessor start_date_time: ::Time
+      attr_accessor end_date_time: ::Time
+      attr_accessor metrics: ::Array[Types::AnalyticsIntentMetric]
+      attr_accessor bin_by: ::Array[Types::AnalyticsBinBySpecification]
+      attr_accessor group_by: ::Array[Types::AnalyticsIntentGroupBySpecification]
+      attr_accessor filters: ::Array[Types::AnalyticsIntentFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIntentMetricsResponse
+      attr_accessor bot_id: ::String
+      attr_accessor results: ::Array[Types::AnalyticsIntentResult]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIntentPathsRequest
+      attr_accessor bot_id: ::String
+      attr_accessor start_date_time: ::Time
+      attr_accessor end_date_time: ::Time
+      attr_accessor intent_path: ::String
+      attr_accessor filters: ::Array[Types::AnalyticsPathFilter]
+      SENSITIVE: []
+    end
+
+    class ListIntentPathsResponse
+      attr_accessor node_summaries: ::Array[Types::AnalyticsIntentNodeSummary]
+      SENSITIVE: []
+    end
+
+    class ListIntentStageMetricsRequest
+      attr_accessor bot_id: ::String
+      attr_accessor start_date_time: ::Time
+      attr_accessor end_date_time: ::Time
+      attr_accessor metrics: ::Array[Types::AnalyticsIntentStageMetric]
+      attr_accessor bin_by: ::Array[Types::AnalyticsBinBySpecification]
+      attr_accessor group_by: ::Array[Types::AnalyticsIntentStageGroupBySpecification]
+      attr_accessor filters: ::Array[Types::AnalyticsIntentStageFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIntentStageMetricsResponse
+      attr_accessor bot_id: ::String
+      attr_accessor results: ::Array[Types::AnalyticsIntentStageResult]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIntentsRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor sort_by: Types::IntentSortBy
+      attr_accessor filters: ::Array[Types::IntentFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIntentsResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor intent_summaries: ::Array[Types::IntentSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecommendedIntentsRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor bot_recommendation_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRecommendedIntentsResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor bot_recommendation_id: ::String
+      attr_accessor summary_list: ::Array[Types::RecommendedIntentSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSessionAnalyticsDataRequest
+      attr_accessor bot_id: ::String
+      attr_accessor start_date_time: ::Time
+      attr_accessor end_date_time: ::Time
+      attr_accessor sort_by: Types::SessionDataSortBy
+      attr_accessor filters: ::Array[Types::AnalyticsSessionFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSessionAnalyticsDataResponse
+      attr_accessor bot_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor sessions: ::Array[Types::SessionSpecification]
+      SENSITIVE: []
+    end
+
+    class ListSessionMetricsRequest
+      attr_accessor bot_id: ::String
+      attr_accessor start_date_time: ::Time
+      attr_accessor end_date_time: ::Time
+      attr_accessor metrics: ::Array[Types::AnalyticsSessionMetric]
+      attr_accessor bin_by: ::Array[Types::AnalyticsBinBySpecification]
+      attr_accessor group_by: ::Array[Types::AnalyticsSessionGroupBySpecification]
+      attr_accessor filters: ::Array[Types::AnalyticsSessionFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSessionMetricsResponse
+      attr_accessor bot_id: ::String
+      attr_accessor results: ::Array[Types::AnalyticsSessionResult]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSlotTypesRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor sort_by: Types::SlotTypeSortBy
+      attr_accessor filters: ::Array[Types::SlotTypeFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSlotTypesResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor slot_type_summaries: ::Array[Types::SlotTypeSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSlotsRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor intent_id: ::String
+      attr_accessor sort_by: Types::SlotSortBy
+      attr_accessor filters: ::Array[Types::SlotFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSlotsResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor intent_id: ::String
+      attr_accessor slot_summaries: ::Array[Types::SlotSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListTestExecutionResultItemsRequest
+      attr_accessor test_execution_id: ::String
+      attr_accessor result_filter_by: Types::TestExecutionResultFilterBy
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestExecutionResultItemsResponse
+      attr_accessor test_execution_results: Types::TestExecutionResultItems
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestExecutionsRequest
+      attr_accessor sort_by: Types::TestExecutionSortBy
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestExecutionsResponse
+      attr_accessor test_executions: ::Array[Types::TestExecutionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestSetRecordsRequest
+      attr_accessor test_set_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestSetRecordsResponse
+      attr_accessor test_set_records: ::Array[Types::TestSetTurnRecord]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestSetsRequest
+      attr_accessor sort_by: Types::TestSetSortBy
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestSetsResponse
+      attr_accessor test_sets: ::Array[Types::TestSetSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUtteranceAnalyticsDataRequest
+      attr_accessor bot_id: ::String
+      attr_accessor start_date_time: ::Time
+      attr_accessor end_date_time: ::Time
+      attr_accessor sort_by: Types::UtteranceDataSortBy
+      attr_accessor filters: ::Array[Types::AnalyticsUtteranceFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUtteranceAnalyticsDataResponse
+      attr_accessor bot_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor utterances: ::Array[Types::UtteranceSpecification]
+      SENSITIVE: []
+    end
+
+    class ListUtteranceMetricsRequest
+      attr_accessor bot_id: ::String
+      attr_accessor start_date_time: ::Time
+      attr_accessor end_date_time: ::Time
+      attr_accessor metrics: ::Array[Types::AnalyticsUtteranceMetric]
+      attr_accessor bin_by: ::Array[Types::AnalyticsBinBySpecification]
+      attr_accessor group_by: ::Array[Types::AnalyticsUtteranceGroupBySpecification]
+      attr_accessor attributes: ::Array[Types::AnalyticsUtteranceAttribute]
+      attr_accessor filters: ::Array[Types::AnalyticsUtteranceFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUtteranceMetricsResponse
+      attr_accessor bot_id: ::String
+      attr_accessor results: ::Array[Types::AnalyticsUtteranceResult]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class Message
+      attr_accessor plain_text_message: Types::PlainTextMessage
+      attr_accessor custom_payload: Types::CustomPayload
+      attr_accessor ssml_message: Types::SSMLMessage
+      attr_accessor image_response_card: Types::ImageResponseCard
+      SENSITIVE: []
+    end
+
+    class MessageGroup
+      attr_accessor message: Types::Message
+      attr_accessor variations: ::Array[Types::Message]
+      SENSITIVE: []
+    end
+
+    class MultipleValuesSetting
+      attr_accessor allow_multiple_values: bool
+      SENSITIVE: []
+    end
+
+    class NewCustomVocabularyItem
+      attr_accessor phrase: ::String
+      attr_accessor weight: ::Integer
+      attr_accessor display_as: ::String
+      SENSITIVE: []
+    end
+
+    class ObfuscationSetting
+      attr_accessor obfuscation_setting_type: ("None" | "DefaultObfuscation")
+      SENSITIVE: []
+    end
+
+    class OutputContext
+      attr_accessor name: ::String
+      attr_accessor time_to_live_in_seconds: ::Integer
+      attr_accessor turns_to_live: ::Integer
+      SENSITIVE: []
+    end
+
+    class OverallTestResultItem
+      attr_accessor multi_turn_conversation: bool
+      attr_accessor total_result_count: ::Integer
+      attr_accessor speech_transcription_result_counts: ::Hash[("Matched" | "Mismatched" | "ExecutionError"), ::Integer]
+      attr_accessor end_to_end_result_counts: ::Hash[("Matched" | "Mismatched" | "ExecutionError"), ::Integer]
+      SENSITIVE: []
+    end
+
+    class OverallTestResults
+      attr_accessor items: ::Array[Types::OverallTestResultItem]
+      SENSITIVE: []
+    end
+
+    class ParentBotNetwork
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      SENSITIVE: []
+    end
+
+    class PathFormat
+      attr_accessor object_prefixes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PlainTextMessage
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class PostDialogCodeHookInvocationSpecification
+      attr_accessor success_response: Types::ResponseSpecification
+      attr_accessor success_next_step: Types::DialogState
+      attr_accessor success_conditional: Types::ConditionalSpecification
+      attr_accessor failure_response: Types::ResponseSpecification
+      attr_accessor failure_next_step: Types::DialogState
+      attr_accessor failure_conditional: Types::ConditionalSpecification
+      attr_accessor timeout_response: Types::ResponseSpecification
+      attr_accessor timeout_next_step: Types::DialogState
+      attr_accessor timeout_conditional: Types::ConditionalSpecification
+      SENSITIVE: []
+    end
+
+    class PostFulfillmentStatusSpecification
+      attr_accessor success_response: Types::ResponseSpecification
+      attr_accessor failure_response: Types::ResponseSpecification
+      attr_accessor timeout_response: Types::ResponseSpecification
+      attr_accessor success_next_step: Types::DialogState
+      attr_accessor success_conditional: Types::ConditionalSpecification
+      attr_accessor failure_next_step: Types::DialogState
+      attr_accessor failure_conditional: Types::ConditionalSpecification
+      attr_accessor timeout_next_step: Types::DialogState
+      attr_accessor timeout_conditional: Types::ConditionalSpecification
+      SENSITIVE: []
+    end
+
+    class PreconditionFailedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Principal
+      attr_accessor service: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class PromptAttemptSpecification
+      attr_accessor allow_interrupt: bool
+      attr_accessor allowed_input_types: Types::AllowedInputTypes
+      attr_accessor audio_and_dtmf_input_specification: Types::AudioAndDTMFInputSpecification
+      attr_accessor text_input_specification: Types::TextInputSpecification
+      SENSITIVE: []
+    end
+
+    class PromptSpecification
+      attr_accessor message_groups: ::Array[Types::MessageGroup]
+      attr_accessor max_retries: ::Integer
+      attr_accessor allow_interrupt: bool
+      attr_accessor message_selection_strategy: ("Random" | "Ordered")
+      attr_accessor prompt_attempts_specification: ::Hash[("Initial" | "Retry1" | "Retry2" | "Retry3" | "Retry4" | "Retry5"), Types::PromptAttemptSpecification]
+      SENSITIVE: []
+    end
+
+    class RecommendedIntentSummary
+      attr_accessor intent_id: ::String
+      attr_accessor intent_name: ::String
+      attr_accessor sample_utterances_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class RelativeAggregationDuration
+      attr_accessor time_dimension: ("Hours" | "Days" | "Weeks")
+      attr_accessor time_value: ::Integer
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResponseSpecification
+      attr_accessor message_groups: ::Array[Types::MessageGroup]
+      attr_accessor allow_interrupt: bool
+      SENSITIVE: []
+    end
+
+    class RuntimeHintDetails
+      attr_accessor runtime_hint_values: ::Array[Types::RuntimeHintValue]
+      attr_accessor sub_slot_hints: ::Hash[::String, Types::RuntimeHintDetails]
+      SENSITIVE: []
+    end
+
+    class RuntimeHintValue
+      attr_accessor phrase: ::String
+      SENSITIVE: []
+    end
+
+    class RuntimeHints
+      attr_accessor slot_hints: ::Hash[::String, ::Hash[::String, Types::RuntimeHintDetails]]
+      SENSITIVE: []
+    end
+
+    class RuntimeSettings
+      attr_accessor slot_resolution_improvement: Types::SlotResolutionImprovementSpecification
+      SENSITIVE: []
+    end
+
+    class S3BucketLogDestination
+      attr_accessor kms_key_arn: ::String
+      attr_accessor s3_bucket_arn: ::String
+      attr_accessor log_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class S3BucketTranscriptSource
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor path_format: Types::PathFormat
+      attr_accessor transcript_format: ("Lex")
+      attr_accessor transcript_filter: Types::TranscriptFilter
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SSMLMessage
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SampleUtterance
+      attr_accessor utterance: ::String
+      SENSITIVE: []
+    end
+
+    class SampleUtteranceGenerationSpecification
+      attr_accessor enabled: bool
+      attr_accessor bedrock_model_specification: Types::BedrockModelSpecification
+      SENSITIVE: []
+    end
+
+    class SampleValue
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SearchAssociatedTranscriptsRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor bot_recommendation_id: ::String
+      attr_accessor search_order: ("Ascending" | "Descending")
+      attr_accessor filters: ::Array[Types::AssociatedTranscriptFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_index: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchAssociatedTranscriptsResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor bot_recommendation_id: ::String
+      attr_accessor next_index: ::Integer
+      attr_accessor associated_transcripts: ::Array[Types::AssociatedTranscript]
+      attr_accessor total_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class SentimentAnalysisSettings
+      attr_accessor detect_sentiment: bool
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SessionDataSortBy
+      attr_accessor name: ("ConversationStartTime" | "NumberOfTurns" | "Duration")
+      attr_accessor order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class SessionSpecification
+      attr_accessor bot_alias_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor channel: ::String
+      attr_accessor session_id: ::String
+      attr_accessor conversation_start_time: ::Time
+      attr_accessor conversation_end_time: ::Time
+      attr_accessor conversation_duration_seconds: ::Integer
+      attr_accessor conversation_end_state: ("Success" | "Failure" | "Dropped")
+      attr_accessor mode: ("Speech" | "Text" | "DTMF" | "MultiMode")
+      attr_accessor number_of_turns: ::Integer
+      attr_accessor invoked_intent_samples: ::Array[Types::InvokedIntentSample]
+      attr_accessor originating_request_id: ::String
+      SENSITIVE: []
+    end
+
+    class SlotCaptureSetting
+      attr_accessor capture_response: Types::ResponseSpecification
+      attr_accessor capture_next_step: Types::DialogState
+      attr_accessor capture_conditional: Types::ConditionalSpecification
+      attr_accessor failure_response: Types::ResponseSpecification
+      attr_accessor failure_next_step: Types::DialogState
+      attr_accessor failure_conditional: Types::ConditionalSpecification
+      attr_accessor code_hook: Types::DialogCodeHookInvocationSetting
+      attr_accessor elicitation_code_hook: Types::ElicitationCodeHookInvocationSetting
+      SENSITIVE: []
+    end
+
+    class SlotDefaultValue
+      attr_accessor default_value: ::String
+      SENSITIVE: []
+    end
+
+    class SlotDefaultValueSpecification
+      attr_accessor default_value_list: ::Array[Types::SlotDefaultValue]
+      SENSITIVE: []
+    end
+
+    class SlotFilter
+      attr_accessor name: ("SlotName")
+      attr_accessor values: ::Array[::String]
+      attr_accessor operator: ("CO" | "EQ")
+      SENSITIVE: []
+    end
+
+    class SlotPriority
+      attr_accessor priority: ::Integer
+      attr_accessor slot_id: ::String
+      SENSITIVE: []
+    end
+
+    class SlotResolutionImprovementSpecification
+      attr_accessor enabled: bool
+      attr_accessor bedrock_model_specification: Types::BedrockModelSpecification
+      SENSITIVE: []
+    end
+
+    class SlotResolutionSetting
+      attr_accessor slot_resolution_strategy: ("EnhancedFallback" | "Default")
+      SENSITIVE: []
+    end
+
+    class SlotResolutionTestResultItem
+      attr_accessor slot_name: ::String
+      attr_accessor result_counts: Types::SlotResolutionTestResultItemCounts
+      SENSITIVE: []
+    end
+
+    class SlotResolutionTestResultItemCounts
+      attr_accessor total_result_count: ::Integer
+      attr_accessor speech_transcription_result_counts: ::Hash[("Matched" | "Mismatched" | "ExecutionError"), ::Integer]
+      attr_accessor slot_match_result_counts: ::Hash[("Matched" | "Mismatched" | "ExecutionError"), ::Integer]
+      SENSITIVE: []
+    end
+
+    class SlotSortBy
+      attr_accessor attribute: ("SlotName" | "LastUpdatedDateTime")
+      attr_accessor order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class SlotSummary
+      attr_accessor slot_id: ::String
+      attr_accessor slot_name: ::String
+      attr_accessor description: ::String
+      attr_accessor slot_constraint: ("Required" | "Optional")
+      attr_accessor slot_type_id: ::String
+      attr_accessor value_elicitation_prompt_specification: Types::PromptSpecification
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class SlotTypeFilter
+      attr_accessor name: ("SlotTypeName" | "ExternalSourceType")
+      attr_accessor values: ::Array[::String]
+      attr_accessor operator: ("CO" | "EQ")
+      SENSITIVE: []
+    end
+
+    class SlotTypeSortBy
+      attr_accessor attribute: ("SlotTypeName" | "LastUpdatedDateTime")
+      attr_accessor order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class SlotTypeStatistics
+      attr_accessor discovered_slot_type_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SlotTypeSummary
+      attr_accessor slot_type_id: ::String
+      attr_accessor slot_type_name: ::String
+      attr_accessor description: ::String
+      attr_accessor parent_slot_type_signature: ::String
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor slot_type_category: ("Custom" | "Extended" | "ExternalGrammar" | "Composite")
+      SENSITIVE: []
+    end
+
+    class SlotTypeValue
+      attr_accessor sample_value: Types::SampleValue
+      attr_accessor synonyms: ::Array[Types::SampleValue]
+      SENSITIVE: []
+    end
+
+    class SlotValue
+      attr_accessor interpreted_value: ::String
+      SENSITIVE: []
+    end
+
+    class SlotValueElicitationSetting
+      attr_accessor default_value_specification: Types::SlotDefaultValueSpecification
+      attr_accessor slot_constraint: ("Required" | "Optional")
+      attr_accessor prompt_specification: Types::PromptSpecification
+      attr_accessor sample_utterances: ::Array[Types::SampleUtterance]
+      attr_accessor wait_and_continue_specification: Types::WaitAndContinueSpecification
+      attr_accessor slot_capture_setting: Types::SlotCaptureSetting
+      attr_accessor slot_resolution_setting: Types::SlotResolutionSetting
+      SENSITIVE: []
+    end
+
+    class SlotValueOverride
+      attr_accessor shape: ("Scalar" | "List")
+      attr_accessor value: Types::SlotValue
+      attr_accessor values: ::Array[Types::SlotValueOverride]
+      SENSITIVE: []
+    end
+
+    class SlotValueRegexFilter
+      attr_accessor pattern: ::String
+      SENSITIVE: []
+    end
+
+    class SlotValueSelectionSetting
+      attr_accessor resolution_strategy: ("OriginalValue" | "TopResolution" | "Concatenation")
+      attr_accessor regex_filter: Types::SlotValueRegexFilter
+      attr_accessor advanced_recognition_setting: Types::AdvancedRecognitionSetting
+      SENSITIVE: []
+    end
+
+    class Specifications
+      attr_accessor slot_type_id: ::String
+      attr_accessor value_elicitation_setting: Types::SubSlotValueElicitationSetting
+      SENSITIVE: []
+    end
+
+    class StartBotRecommendationRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor transcript_source_setting: Types::TranscriptSourceSetting
+      attr_accessor encryption_setting: Types::EncryptionSetting
+      SENSITIVE: []
+    end
+
+    class StartBotRecommendationResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor bot_recommendation_status: ("Processing" | "Deleting" | "Deleted" | "Downloading" | "Updating" | "Available" | "Failed" | "Stopping" | "Stopped")
+      attr_accessor bot_recommendation_id: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor transcript_source_setting: Types::TranscriptSourceSetting
+      attr_accessor encryption_setting: Types::EncryptionSetting
+      SENSITIVE: []
+    end
+
+    class StartBotResourceGenerationRequest
+      attr_accessor generation_input_prompt: ::String
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartBotResourceGenerationResponse
+      attr_accessor generation_input_prompt: ::String
+      attr_accessor generation_id: ::String
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor generation_status: ("Failed" | "Complete" | "InProgress")
+      attr_accessor creation_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class StartImportRequest
+      attr_accessor import_id: ::String
+      attr_accessor resource_specification: Types::ImportResourceSpecification
+      attr_accessor merge_strategy: ("Overwrite" | "FailOnConflict" | "Append")
+      attr_accessor file_password: ::String
+      SENSITIVE: [:file_password]
+    end
+
+    class StartImportResponse
+      attr_accessor import_id: ::String
+      attr_accessor resource_specification: Types::ImportResourceSpecification
+      attr_accessor merge_strategy: ("Overwrite" | "FailOnConflict" | "Append")
+      attr_accessor import_status: ("InProgress" | "Completed" | "Failed" | "Deleting")
+      attr_accessor creation_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class StartTestExecutionRequest
+      attr_accessor test_set_id: ::String
+      attr_accessor target: Types::TestExecutionTarget
+      attr_accessor api_mode: ("Streaming" | "NonStreaming")
+      attr_accessor test_execution_modality: ("Text" | "Audio")
+      SENSITIVE: []
+    end
+
+    class StartTestExecutionResponse
+      attr_accessor test_execution_id: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor test_set_id: ::String
+      attr_accessor target: Types::TestExecutionTarget
+      attr_accessor api_mode: ("Streaming" | "NonStreaming")
+      attr_accessor test_execution_modality: ("Text" | "Audio")
+      SENSITIVE: []
+    end
+
+    class StartTestSetGenerationRequest
+      attr_accessor test_set_name: ::String
+      attr_accessor description: ::String
+      attr_accessor storage_location: Types::TestSetStorageLocation
+      attr_accessor generation_data_source: Types::TestSetGenerationDataSource
+      attr_accessor role_arn: ::String
+      attr_accessor test_set_tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartTestSetGenerationResponse
+      attr_accessor test_set_generation_id: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor test_set_generation_status: ("Generating" | "Ready" | "Failed" | "Pending")
+      attr_accessor test_set_name: ::String
+      attr_accessor description: ::String
+      attr_accessor storage_location: Types::TestSetStorageLocation
+      attr_accessor generation_data_source: Types::TestSetGenerationDataSource
+      attr_accessor role_arn: ::String
+      attr_accessor test_set_tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StillWaitingResponseSpecification
+      attr_accessor message_groups: ::Array[Types::MessageGroup]
+      attr_accessor frequency_in_seconds: ::Integer
+      attr_accessor timeout_in_seconds: ::Integer
+      attr_accessor allow_interrupt: bool
+      SENSITIVE: []
+    end
+
+    class StopBotRecommendationRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor bot_recommendation_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopBotRecommendationResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor bot_recommendation_status: ("Processing" | "Deleting" | "Deleted" | "Downloading" | "Updating" | "Available" | "Failed" | "Stopping" | "Stopped")
+      attr_accessor bot_recommendation_id: ::String
+      SENSITIVE: []
+    end
+
+    class SubSlotSetting
+      attr_accessor expression: ::String
+      attr_accessor slot_specifications: ::Hash[::String, Types::Specifications]
+      SENSITIVE: []
+    end
+
+    class SubSlotTypeComposition
+      attr_accessor name: ::String
+      attr_accessor slot_type_id: ::String
+      SENSITIVE: []
+    end
+
+    class SubSlotValueElicitationSetting
+      attr_accessor default_value_specification: Types::SlotDefaultValueSpecification
+      attr_accessor prompt_specification: Types::PromptSpecification
+      attr_accessor sample_utterances: ::Array[Types::SampleUtterance]
+      attr_accessor wait_and_continue_specification: Types::WaitAndContinueSpecification
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TestExecutionResultFilterBy
+      attr_accessor result_type_filter: ("OverallTestResults" | "ConversationLevelTestResults" | "IntentClassificationTestResults" | "SlotResolutionTestResults" | "UtteranceLevelResults")
+      attr_accessor conversation_level_test_results_filter_by: Types::ConversationLevelTestResultsFilterBy
+      SENSITIVE: []
+    end
+
+    class TestExecutionResultItems
+      attr_accessor overall_test_results: Types::OverallTestResults
+      attr_accessor conversation_level_test_results: Types::ConversationLevelTestResults
+      attr_accessor intent_classification_test_results: Types::IntentClassificationTestResults
+      attr_accessor intent_level_slot_resolution_test_results: Types::IntentLevelSlotResolutionTestResults
+      attr_accessor utterance_level_test_results: Types::UtteranceLevelTestResults
+      SENSITIVE: []
+    end
+
+    class TestExecutionSortBy
+      attr_accessor attribute: ("TestSetName" | "CreationDateTime")
+      attr_accessor order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class TestExecutionSummary
+      attr_accessor test_execution_id: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor test_execution_status: ("Pending" | "Waiting" | "InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped")
+      attr_accessor test_set_id: ::String
+      attr_accessor test_set_name: ::String
+      attr_accessor target: Types::TestExecutionTarget
+      attr_accessor api_mode: ("Streaming" | "NonStreaming")
+      attr_accessor test_execution_modality: ("Text" | "Audio")
+      SENSITIVE: []
+    end
+
+    class TestExecutionTarget
+      attr_accessor bot_alias_target: Types::BotAliasTestExecutionTarget
+      SENSITIVE: []
+    end
+
+    class TestSetDiscrepancyErrors
+      attr_accessor intent_discrepancies: ::Array[Types::TestSetIntentDiscrepancyItem]
+      attr_accessor slot_discrepancies: ::Array[Types::TestSetSlotDiscrepancyItem]
+      SENSITIVE: []
+    end
+
+    class TestSetDiscrepancyReportBotAliasTarget
+      attr_accessor bot_id: ::String
+      attr_accessor bot_alias_id: ::String
+      attr_accessor locale_id: ::String
+      SENSITIVE: []
+    end
+
+    class TestSetDiscrepancyReportResourceTarget
+      attr_accessor bot_alias_target: Types::TestSetDiscrepancyReportBotAliasTarget
+      SENSITIVE: []
+    end
+
+    class TestSetExportSpecification
+      attr_accessor test_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class TestSetGenerationDataSource
+      attr_accessor conversation_logs_data_source: Types::ConversationLogsDataSource
+      SENSITIVE: []
+    end
+
+    class TestSetImportInputLocation
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor s3_path: ::String
+      SENSITIVE: []
+    end
+
+    class TestSetImportResourceSpecification
+      attr_accessor test_set_name: ::String
+      attr_accessor description: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor storage_location: Types::TestSetStorageLocation
+      attr_accessor import_input_location: Types::TestSetImportInputLocation
+      attr_accessor modality: ("Text" | "Audio")
+      attr_accessor test_set_tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TestSetIntentDiscrepancyItem
+      attr_accessor intent_name: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class TestSetSlotDiscrepancyItem
+      attr_accessor intent_name: ::String
+      attr_accessor slot_name: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class TestSetSortBy
+      attr_accessor attribute: ("TestSetName" | "LastUpdatedDateTime")
+      attr_accessor order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class TestSetStorageLocation
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor s3_path: ::String
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class TestSetSummary
+      attr_accessor test_set_id: ::String
+      attr_accessor test_set_name: ::String
+      attr_accessor description: ::String
+      attr_accessor modality: ("Text" | "Audio")
+      attr_accessor status: ("Importing" | "PendingAnnotation" | "Deleting" | "ValidationError" | "Ready")
+      attr_accessor role_arn: ::String
+      attr_accessor num_turns: ::Integer
+      attr_accessor storage_location: Types::TestSetStorageLocation
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class TestSetTurnRecord
+      attr_accessor record_number: ::Integer
+      attr_accessor conversation_id: ::String
+      attr_accessor turn_number: ::Integer
+      attr_accessor turn_specification: Types::TurnSpecification
+      SENSITIVE: []
+    end
+
+    class TestSetTurnResult
+      attr_accessor agent: Types::AgentTurnResult
+      attr_accessor user: Types::UserTurnResult
+      SENSITIVE: []
+    end
+
+    class TextInputSpecification
+      attr_accessor start_timeout_ms: ::Integer
+      SENSITIVE: []
+    end
+
+    class TextLogDestination
+      attr_accessor cloud_watch: Types::CloudWatchLogGroupLogDestination
+      SENSITIVE: []
+    end
+
+    class TextLogSetting
+      attr_accessor enabled: bool
+      attr_accessor destination: Types::TextLogDestination
+      attr_accessor selective_logging_enabled: bool
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor retry_after_seconds: ::Integer
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TranscriptFilter
+      attr_accessor lex_transcript_filter: Types::LexTranscriptFilter
+      SENSITIVE: []
+    end
+
+    class TranscriptSourceSetting
+      attr_accessor s3_bucket_transcript_source: Types::S3BucketTranscriptSource
+      SENSITIVE: []
+    end
+
+    class TurnSpecification
+      attr_accessor agent_turn: Types::AgentTurnSpecification
+      attr_accessor user_turn: Types::UserTurnSpecification
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateBotAliasRequest
+      attr_accessor bot_alias_id: ::String
+      attr_accessor bot_alias_name: ::String
+      attr_accessor description: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor bot_alias_locale_settings: ::Hash[::String, Types::BotAliasLocaleSettings]
+      attr_accessor conversation_log_settings: Types::ConversationLogSettings
+      attr_accessor sentiment_analysis_settings: Types::SentimentAnalysisSettings
+      attr_accessor bot_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBotAliasResponse
+      attr_accessor bot_alias_id: ::String
+      attr_accessor bot_alias_name: ::String
+      attr_accessor description: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor bot_alias_locale_settings: ::Hash[::String, Types::BotAliasLocaleSettings]
+      attr_accessor conversation_log_settings: Types::ConversationLogSettings
+      attr_accessor sentiment_analysis_settings: Types::SentimentAnalysisSettings
+      attr_accessor bot_alias_status: ("Creating" | "Available" | "Deleting" | "Failed")
+      attr_accessor bot_id: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateBotLocaleRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor description: ::String
+      attr_accessor nlu_intent_confidence_threshold: ::Float
+      attr_accessor voice_settings: Types::VoiceSettings
+      attr_accessor generative_ai_settings: Types::GenerativeAISettings
+      SENSITIVE: []
+    end
+
+    class UpdateBotLocaleResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor locale_name: ::String
+      attr_accessor description: ::String
+      attr_accessor nlu_intent_confidence_threshold: ::Float
+      attr_accessor voice_settings: Types::VoiceSettings
+      attr_accessor bot_locale_status: ("Creating" | "Building" | "Built" | "ReadyExpressTesting" | "Failed" | "Deleting" | "NotBuilt" | "Importing" | "Processing")
+      attr_accessor failure_reasons: ::Array[::String]
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor recommended_actions: ::Array[::String]
+      attr_accessor generative_ai_settings: Types::GenerativeAISettings
+      SENSITIVE: []
+    end
+
+    class UpdateBotRecommendationRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor bot_recommendation_id: ::String
+      attr_accessor encryption_setting: Types::EncryptionSetting
+      SENSITIVE: []
+    end
+
+    class UpdateBotRecommendationResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor bot_recommendation_status: ("Processing" | "Deleting" | "Deleted" | "Downloading" | "Updating" | "Available" | "Failed" | "Stopping" | "Stopped")
+      attr_accessor bot_recommendation_id: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor transcript_source_setting: Types::TranscriptSourceSetting
+      attr_accessor encryption_setting: Types::EncryptionSetting
+      SENSITIVE: []
+    end
+
+    class UpdateBotRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_name: ::String
+      attr_accessor description: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor data_privacy: Types::DataPrivacy
+      attr_accessor idle_session_ttl_in_seconds: ::Integer
+      attr_accessor bot_type: ("Bot" | "BotNetwork")
+      attr_accessor bot_members: ::Array[Types::BotMember]
+      SENSITIVE: []
+    end
+
+    class UpdateBotResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_name: ::String
+      attr_accessor description: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor data_privacy: Types::DataPrivacy
+      attr_accessor idle_session_ttl_in_seconds: ::Integer
+      attr_accessor bot_status: ("Creating" | "Available" | "Inactive" | "Deleting" | "Failed" | "Versioning" | "Importing" | "Updating")
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor bot_type: ("Bot" | "BotNetwork")
+      attr_accessor bot_members: ::Array[Types::BotMember]
+      SENSITIVE: []
+    end
+
+    class UpdateExportRequest
+      attr_accessor export_id: ::String
+      attr_accessor file_password: ::String
+      SENSITIVE: [:file_password]
+    end
+
+    class UpdateExportResponse
+      attr_accessor export_id: ::String
+      attr_accessor resource_specification: Types::ExportResourceSpecification
+      attr_accessor file_format: ("LexJson" | "TSV" | "CSV")
+      attr_accessor export_status: ("InProgress" | "Completed" | "Failed" | "Deleting")
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateIntentRequest
+      attr_accessor intent_id: ::String
+      attr_accessor intent_name: ::String
+      attr_accessor description: ::String
+      attr_accessor parent_intent_signature: ::String
+      attr_accessor sample_utterances: ::Array[Types::SampleUtterance]
+      attr_accessor dialog_code_hook: Types::DialogCodeHookSettings
+      attr_accessor fulfillment_code_hook: Types::FulfillmentCodeHookSettings
+      attr_accessor slot_priorities: ::Array[Types::SlotPriority]
+      attr_accessor intent_confirmation_setting: Types::IntentConfirmationSetting
+      attr_accessor intent_closing_setting: Types::IntentClosingSetting
+      attr_accessor input_contexts: ::Array[Types::InputContext]
+      attr_accessor output_contexts: ::Array[Types::OutputContext]
+      attr_accessor kendra_configuration: Types::KendraConfiguration
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor initial_response_setting: Types::InitialResponseSetting
+      SENSITIVE: []
+    end
+
+    class UpdateIntentResponse
+      attr_accessor intent_id: ::String
+      attr_accessor intent_name: ::String
+      attr_accessor description: ::String
+      attr_accessor parent_intent_signature: ::String
+      attr_accessor sample_utterances: ::Array[Types::SampleUtterance]
+      attr_accessor dialog_code_hook: Types::DialogCodeHookSettings
+      attr_accessor fulfillment_code_hook: Types::FulfillmentCodeHookSettings
+      attr_accessor slot_priorities: ::Array[Types::SlotPriority]
+      attr_accessor intent_confirmation_setting: Types::IntentConfirmationSetting
+      attr_accessor intent_closing_setting: Types::IntentClosingSetting
+      attr_accessor input_contexts: ::Array[Types::InputContext]
+      attr_accessor output_contexts: ::Array[Types::OutputContext]
+      attr_accessor kendra_configuration: Types::KendraConfiguration
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor initial_response_setting: Types::InitialResponseSetting
+      SENSITIVE: []
+    end
+
+    class UpdateResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor policy: ::String
+      attr_accessor expected_revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateResourcePolicyResponse
+      attr_accessor resource_arn: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSlotRequest
+      attr_accessor slot_id: ::String
+      attr_accessor slot_name: ::String
+      attr_accessor description: ::String
+      attr_accessor slot_type_id: ::String
+      attr_accessor value_elicitation_setting: Types::SlotValueElicitationSetting
+      attr_accessor obfuscation_setting: Types::ObfuscationSetting
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor intent_id: ::String
+      attr_accessor multiple_values_setting: Types::MultipleValuesSetting
+      attr_accessor sub_slot_setting: Types::SubSlotSetting
+      SENSITIVE: []
+    end
+
+    class UpdateSlotResponse
+      attr_accessor slot_id: ::String
+      attr_accessor slot_name: ::String
+      attr_accessor description: ::String
+      attr_accessor slot_type_id: ::String
+      attr_accessor value_elicitation_setting: Types::SlotValueElicitationSetting
+      attr_accessor obfuscation_setting: Types::ObfuscationSetting
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor intent_id: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor multiple_values_setting: Types::MultipleValuesSetting
+      attr_accessor sub_slot_setting: Types::SubSlotSetting
+      SENSITIVE: []
+    end
+
+    class UpdateSlotTypeRequest
+      attr_accessor slot_type_id: ::String
+      attr_accessor slot_type_name: ::String
+      attr_accessor description: ::String
+      attr_accessor slot_type_values: ::Array[Types::SlotTypeValue]
+      attr_accessor value_selection_setting: Types::SlotValueSelectionSetting
+      attr_accessor parent_slot_type_signature: ::String
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor external_source_setting: Types::ExternalSourceSetting
+      attr_accessor composite_slot_type_setting: Types::CompositeSlotTypeSetting
+      SENSITIVE: []
+    end
+
+    class UpdateSlotTypeResponse
+      attr_accessor slot_type_id: ::String
+      attr_accessor slot_type_name: ::String
+      attr_accessor description: ::String
+      attr_accessor slot_type_values: ::Array[Types::SlotTypeValue]
+      attr_accessor value_selection_setting: Types::SlotValueSelectionSetting
+      attr_accessor parent_slot_type_signature: ::String
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor external_source_setting: Types::ExternalSourceSetting
+      attr_accessor composite_slot_type_setting: Types::CompositeSlotTypeSetting
+      SENSITIVE: []
+    end
+
+    class UpdateTestSetRequest
+      attr_accessor test_set_id: ::String
+      attr_accessor test_set_name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateTestSetResponse
+      attr_accessor test_set_id: ::String
+      attr_accessor test_set_name: ::String
+      attr_accessor description: ::String
+      attr_accessor modality: ("Text" | "Audio")
+      attr_accessor status: ("Importing" | "PendingAnnotation" | "Deleting" | "ValidationError" | "Ready")
+      attr_accessor role_arn: ::String
+      attr_accessor num_turns: ::Integer
+      attr_accessor storage_location: Types::TestSetStorageLocation
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UserTurnInputSpecification
+      attr_accessor utterance_input: Types::UtteranceInputSpecification
+      attr_accessor request_attributes: ::Hash[::String, ::String]
+      attr_accessor session_state: Types::InputSessionStateSpecification
+      SENSITIVE: []
+    end
+
+    class UserTurnIntentOutput
+      attr_accessor name: ::String
+      attr_accessor slots: ::Hash[::String, Types::UserTurnSlotOutput]
+      SENSITIVE: []
+    end
+
+    class UserTurnOutputSpecification
+      attr_accessor intent: Types::UserTurnIntentOutput
+      attr_accessor active_contexts: ::Array[Types::ActiveContext]
+      attr_accessor transcript: ::String
+      SENSITIVE: []
+    end
+
+    class UserTurnResult
+      attr_accessor input: Types::UserTurnInputSpecification
+      attr_accessor expected_output: Types::UserTurnOutputSpecification
+      attr_accessor actual_output: Types::UserTurnOutputSpecification
+      attr_accessor error_details: Types::ExecutionErrorDetails
+      attr_accessor end_to_end_result: ("Matched" | "Mismatched" | "ExecutionError")
+      attr_accessor intent_match_result: ("Matched" | "Mismatched" | "ExecutionError")
+      attr_accessor slot_match_result: ("Matched" | "Mismatched" | "ExecutionError")
+      attr_accessor speech_transcription_result: ("Matched" | "Mismatched" | "ExecutionError")
+      attr_accessor conversation_level_result: Types::ConversationLevelResultDetail
+      SENSITIVE: []
+    end
+
+    class UserTurnSlotOutput
+      attr_accessor value: ::String
+      attr_accessor values: ::Array[Types::UserTurnSlotOutput]
+      attr_accessor sub_slots: ::Hash[::String, Types::UserTurnSlotOutput]
+      SENSITIVE: []
+    end
+
+    class UserTurnSpecification
+      attr_accessor input: Types::UserTurnInputSpecification
+      attr_accessor expected: Types::UserTurnOutputSpecification
+      SENSITIVE: []
+    end
+
+    class UtteranceAggregationDuration
+      attr_accessor relative_aggregation_duration: Types::RelativeAggregationDuration
+      SENSITIVE: []
+    end
+
+    class UtteranceAudioInputSpecification
+      attr_accessor audio_file_s3_location: ::String
+      SENSITIVE: []
+    end
+
+    class UtteranceBotResponse
+      attr_accessor content: ::String
+      attr_accessor content_type: ("PlainText" | "CustomPayload" | "SSML" | "ImageResponseCard")
+      attr_accessor image_response_card: Types::ImageResponseCard
+      SENSITIVE: []
+    end
+
+    class UtteranceDataSortBy
+      attr_accessor name: ("UtteranceTimestamp")
+      attr_accessor order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class UtteranceInputSpecification
+      attr_accessor text_input: ::String
+      attr_accessor audio_input: Types::UtteranceAudioInputSpecification
+      SENSITIVE: []
+    end
+
+    class UtteranceLevelTestResultItem
+      attr_accessor record_number: ::Integer
+      attr_accessor conversation_id: ::String
+      attr_accessor turn_result: Types::TestSetTurnResult
+      SENSITIVE: []
+    end
+
+    class UtteranceLevelTestResults
+      attr_accessor items: ::Array[Types::UtteranceLevelTestResultItem]
+      SENSITIVE: []
+    end
+
+    class UtteranceSpecification
+      attr_accessor bot_alias_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor channel: ::String
+      attr_accessor mode: ("Speech" | "Text" | "DTMF" | "MultiMode")
+      attr_accessor conversation_start_time: ::Time
+      attr_accessor conversation_end_time: ::Time
+      attr_accessor utterance: ::String
+      attr_accessor utterance_timestamp: ::Time
+      attr_accessor audio_voice_duration_millis: ::Integer
+      attr_accessor utterance_understood: bool
+      attr_accessor input_type: ::String
+      attr_accessor output_type: ::String
+      attr_accessor associated_intent_name: ::String
+      attr_accessor associated_slot_name: ::String
+      attr_accessor intent_state: ("Failed" | "Fulfilled" | "InProgress" | "ReadyForFulfillment" | "Waiting" | "FulfillmentInProgress")
+      attr_accessor dialog_action_type: ::String
+      attr_accessor bot_response_audio_voice_id: ::String
+      attr_accessor slots_filled_in_session: ::String
+      attr_accessor utterance_request_id: ::String
+      attr_accessor bot_responses: ::Array[Types::UtteranceBotResponse]
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VoiceSettings
+      attr_accessor voice_id: ::String
+      attr_accessor engine: ("standard" | "neural")
+      SENSITIVE: []
+    end
+
+    class WaitAndContinueSpecification
+      attr_accessor waiting_response: Types::ResponseSpecification
+      attr_accessor continue_response: Types::ResponseSpecification
+      attr_accessor still_waiting_response: Types::StillWaitingResponseSpecification
+      attr_accessor active: bool
+      SENSITIVE: []
+    end
+  end
+end

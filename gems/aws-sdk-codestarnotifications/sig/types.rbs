@@ -1,0 +1,257 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CodeStarNotifications
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConcurrentModificationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigurationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateNotificationRuleRequest
+      attr_accessor name: ::String
+      attr_accessor event_type_ids: ::Array[::String]
+      attr_accessor resource: ::String
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor detail_type: ("BASIC" | "FULL")
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: [:name]
+    end
+
+    class CreateNotificationRuleResult
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteNotificationRuleRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteNotificationRuleResult
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTargetRequest
+      attr_accessor target_address: ::String
+      attr_accessor force_unsubscribe_all: bool
+      SENSITIVE: [:target_address]
+    end
+
+    class DeleteTargetResult < Aws::EmptyStructure
+    end
+
+    class DescribeNotificationRuleRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeNotificationRuleResult
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor event_types: ::Array[Types::EventTypeSummary]
+      attr_accessor resource: ::String
+      attr_accessor targets: ::Array[Types::TargetSummary]
+      attr_accessor detail_type: ("BASIC" | "FULL")
+      attr_accessor created_by: ::String
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_modified_timestamp: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:name]
+    end
+
+    class EventTypeSummary
+      attr_accessor event_type_id: ::String
+      attr_accessor service_name: ::String
+      attr_accessor event_type_name: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidNextTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventTypesFilter
+      attr_accessor name: ("RESOURCE_TYPE" | "SERVICE_NAME")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventTypesRequest
+      attr_accessor filters: ::Array[Types::ListEventTypesFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEventTypesResult
+      attr_accessor event_types: ::Array[Types::EventTypeSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNotificationRulesFilter
+      attr_accessor name: ("EVENT_TYPE_ID" | "CREATED_BY" | "RESOURCE" | "TARGET_ADDRESS")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ListNotificationRulesRequest
+      attr_accessor filters: ::Array[Types::ListNotificationRulesFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListNotificationRulesResult
+      attr_accessor next_token: ::String
+      attr_accessor notification_rules: ::Array[Types::NotificationRuleSummary]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResult
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListTargetsFilter
+      attr_accessor name: ("TARGET_TYPE" | "TARGET_ADDRESS" | "TARGET_STATUS")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ListTargetsRequest
+      attr_accessor filters: ::Array[Types::ListTargetsFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTargetsResult
+      attr_accessor targets: ::Array[Types::TargetSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class NotificationRuleSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SubscribeRequest
+      attr_accessor arn: ::String
+      attr_accessor target: Types::Target
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class SubscribeResult
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResult
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Target
+      attr_accessor target_type: ::String
+      attr_accessor target_address: ::String
+      SENSITIVE: [:target_address]
+    end
+
+    class TargetSummary
+      attr_accessor target_address: ::String
+      attr_accessor target_type: ::String
+      attr_accessor target_status: ("PENDING" | "ACTIVE" | "UNREACHABLE" | "INACTIVE" | "DEACTIVATED")
+      SENSITIVE: [:target_address]
+    end
+
+    class UnsubscribeRequest
+      attr_accessor arn: ::String
+      attr_accessor target_address: ::String
+      SENSITIVE: [:target_address]
+    end
+
+    class UnsubscribeResult
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResult < Aws::EmptyStructure
+    end
+
+    class UpdateNotificationRuleRequest
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor event_type_ids: ::Array[::String]
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor detail_type: ("BASIC" | "FULL")
+      SENSITIVE: [:name]
+    end
+
+    class UpdateNotificationRuleResult < Aws::EmptyStructure
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,0 +1,2185 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Redshift
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AcceptReservedNodeExchangeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptReservedNodeExchangeOutputMessage]
+        def exchanged_reserved_node: () -> Types::ReservedNode
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#accept_reserved_node_exchange-instance_method
+      def accept_reserved_node_exchange: (
+                                           reserved_node_id: ::String,
+                                           target_reserved_node_offering_id: ::String
+                                         ) -> _AcceptReservedNodeExchangeResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptReservedNodeExchangeResponseSuccess
+
+      interface _AddPartnerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PartnerIntegrationOutputMessage]
+        def database_name: () -> ::String
+        def partner_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#add_partner-instance_method
+      def add_partner: (
+                         account_id: ::String,
+                         cluster_identifier: ::String,
+                         database_name: ::String,
+                         partner_name: ::String
+                       ) -> _AddPartnerResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddPartnerResponseSuccess
+
+      interface _AssociateDataShareConsumerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DataShare]
+        def data_share_arn: () -> ::String
+        def producer_arn: () -> ::String
+        def allow_publicly_accessible_consumers: () -> bool
+        def data_share_associations: () -> ::Array[Types::DataShareAssociation]
+        def managed_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#associate_data_share_consumer-instance_method
+      def associate_data_share_consumer: (
+                                           data_share_arn: ::String,
+                                           ?associate_entire_account: bool,
+                                           ?consumer_arn: ::String,
+                                           ?consumer_region: ::String,
+                                           ?allow_writes: bool
+                                         ) -> _AssociateDataShareConsumerResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateDataShareConsumerResponseSuccess
+
+      interface _AuthorizeClusterSecurityGroupIngressResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AuthorizeClusterSecurityGroupIngressResult]
+        def cluster_security_group: () -> Types::ClusterSecurityGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#authorize_cluster_security_group_ingress-instance_method
+      def authorize_cluster_security_group_ingress: (
+                                                      cluster_security_group_name: ::String,
+                                                      ?cidrip: ::String,
+                                                      ?ec2_security_group_name: ::String,
+                                                      ?ec2_security_group_owner_id: ::String
+                                                    ) -> _AuthorizeClusterSecurityGroupIngressResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AuthorizeClusterSecurityGroupIngressResponseSuccess
+
+      interface _AuthorizeDataShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DataShare]
+        def data_share_arn: () -> ::String
+        def producer_arn: () -> ::String
+        def allow_publicly_accessible_consumers: () -> bool
+        def data_share_associations: () -> ::Array[Types::DataShareAssociation]
+        def managed_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#authorize_data_share-instance_method
+      def authorize_data_share: (
+                                  data_share_arn: ::String,
+                                  consumer_identifier: ::String,
+                                  ?allow_writes: bool
+                                ) -> _AuthorizeDataShareResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AuthorizeDataShareResponseSuccess
+
+      interface _AuthorizeEndpointAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EndpointAuthorization]
+        def grantor: () -> ::String
+        def grantee: () -> ::String
+        def cluster_identifier: () -> ::String
+        def authorize_time: () -> ::Time
+        def cluster_status: () -> ::String
+        def status: () -> ("Authorized" | "Revoking")
+        def allowed_all_vp_cs: () -> bool
+        def allowed_vp_cs: () -> ::Array[::String]
+        def endpoint_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#authorize_endpoint_access-instance_method
+      def authorize_endpoint_access: (
+                                       ?cluster_identifier: ::String,
+                                       account: ::String,
+                                       ?vpc_ids: Array[::String]
+                                     ) -> _AuthorizeEndpointAccessResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AuthorizeEndpointAccessResponseSuccess
+
+      interface _AuthorizeSnapshotAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AuthorizeSnapshotAccessResult]
+        def snapshot: () -> Types::Snapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#authorize_snapshot_access-instance_method
+      def authorize_snapshot_access: (
+                                       ?snapshot_identifier: ::String,
+                                       ?snapshot_arn: ::String,
+                                       ?snapshot_cluster_identifier: ::String,
+                                       account_with_restore_access: ::String
+                                     ) -> _AuthorizeSnapshotAccessResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AuthorizeSnapshotAccessResponseSuccess
+
+      interface _BatchDeleteClusterSnapshotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteClusterSnapshotsResult]
+        def resources: () -> ::Array[::String]
+        def errors: () -> ::Array[Types::SnapshotErrorMessage]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#batch_delete_cluster_snapshots-instance_method
+      def batch_delete_cluster_snapshots: (
+                                            identifiers: Array[
+                                              {
+                                                snapshot_identifier: ::String,
+                                                snapshot_cluster_identifier: ::String?
+                                              },
+                                            ]
+                                          ) -> _BatchDeleteClusterSnapshotsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteClusterSnapshotsResponseSuccess
+
+      interface _BatchModifyClusterSnapshotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchModifyClusterSnapshotsOutputMessage]
+        def resources: () -> ::Array[::String]
+        def errors: () -> ::Array[Types::SnapshotErrorMessage]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#batch_modify_cluster_snapshots-instance_method
+      def batch_modify_cluster_snapshots: (
+                                            snapshot_identifier_list: Array[::String],
+                                            ?manual_snapshot_retention_period: ::Integer,
+                                            ?force: bool
+                                          ) -> _BatchModifyClusterSnapshotsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchModifyClusterSnapshotsResponseSuccess
+
+      interface _CancelResizeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResizeProgressMessage]
+        def target_node_type: () -> ::String
+        def target_number_of_nodes: () -> ::Integer
+        def target_cluster_type: () -> ::String
+        def status: () -> ::String
+        def import_tables_completed: () -> ::Array[::String]
+        def import_tables_in_progress: () -> ::Array[::String]
+        def import_tables_not_started: () -> ::Array[::String]
+        def avg_resize_rate_in_mega_bytes_per_second: () -> ::Float
+        def total_resize_data_in_mega_bytes: () -> ::Integer
+        def progress_in_mega_bytes: () -> ::Integer
+        def elapsed_time_in_seconds: () -> ::Integer
+        def estimated_time_to_completion_in_seconds: () -> ::Integer
+        def resize_type: () -> ::String
+        def message: () -> ::String
+        def target_encryption_type: () -> ::String
+        def data_transfer_progress_percent: () -> ::Float
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#cancel_resize-instance_method
+      def cancel_resize: (
+                           cluster_identifier: ::String
+                         ) -> _CancelResizeResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelResizeResponseSuccess
+
+      interface _CopyClusterSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CopyClusterSnapshotResult]
+        def snapshot: () -> Types::Snapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#copy_cluster_snapshot-instance_method
+      def copy_cluster_snapshot: (
+                                   source_snapshot_identifier: ::String,
+                                   ?source_snapshot_cluster_identifier: ::String,
+                                   target_snapshot_identifier: ::String,
+                                   ?manual_snapshot_retention_period: ::Integer
+                                 ) -> _CopyClusterSnapshotResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopyClusterSnapshotResponseSuccess
+
+      interface _CreateAuthenticationProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAuthenticationProfileResult]
+        def authentication_profile_name: () -> ::String
+        def authentication_profile_content: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#create_authentication_profile-instance_method
+      def create_authentication_profile: (
+                                           authentication_profile_name: ::String,
+                                           authentication_profile_content: ::String
+                                         ) -> _CreateAuthenticationProfileResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAuthenticationProfileResponseSuccess
+
+      interface _CreateClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateClusterResult]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#create_cluster-instance_method
+      def create_cluster: (
+                            ?db_name: ::String,
+                            cluster_identifier: ::String,
+                            ?cluster_type: ::String,
+                            node_type: ::String,
+                            master_username: ::String,
+                            ?master_user_password: ::String,
+                            ?cluster_security_groups: Array[::String],
+                            ?vpc_security_group_ids: Array[::String],
+                            ?cluster_subnet_group_name: ::String,
+                            ?availability_zone: ::String,
+                            ?preferred_maintenance_window: ::String,
+                            ?cluster_parameter_group_name: ::String,
+                            ?automated_snapshot_retention_period: ::Integer,
+                            ?manual_snapshot_retention_period: ::Integer,
+                            ?port: ::Integer,
+                            ?cluster_version: ::String,
+                            ?allow_version_upgrade: bool,
+                            ?number_of_nodes: ::Integer,
+                            ?publicly_accessible: bool,
+                            ?encrypted: bool,
+                            ?hsm_client_certificate_identifier: ::String,
+                            ?hsm_configuration_identifier: ::String,
+                            ?elastic_ip: ::String,
+                            ?tags: Array[
+                              {
+                                key: ::String?,
+                                value: ::String?
+                              },
+                            ],
+                            ?kms_key_id: ::String,
+                            ?enhanced_vpc_routing: bool,
+                            ?additional_info: ::String,
+                            ?iam_roles: Array[::String],
+                            ?maintenance_track_name: ::String,
+                            ?snapshot_schedule_identifier: ::String,
+                            ?availability_zone_relocation: bool,
+                            ?aqua_configuration_status: ("enabled" | "disabled" | "auto"),
+                            ?default_iam_role_arn: ::String,
+                            ?load_sample_data: ::String,
+                            ?manage_master_password: bool,
+                            ?master_password_secret_kms_key_id: ::String,
+                            ?ip_address_type: ::String,
+                            ?multi_az: bool,
+                            ?redshift_idc_application_arn: ::String
+                          ) -> _CreateClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
+
+      interface _CreateClusterParameterGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateClusterParameterGroupResult]
+        def cluster_parameter_group: () -> Types::ClusterParameterGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#create_cluster_parameter_group-instance_method
+      def create_cluster_parameter_group: (
+                                            parameter_group_name: ::String,
+                                            parameter_group_family: ::String,
+                                            description: ::String,
+                                            ?tags: Array[
+                                              {
+                                                key: ::String?,
+                                                value: ::String?
+                                              },
+                                            ]
+                                          ) -> _CreateClusterParameterGroupResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterParameterGroupResponseSuccess
+
+      interface _CreateClusterSecurityGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateClusterSecurityGroupResult]
+        def cluster_security_group: () -> Types::ClusterSecurityGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#create_cluster_security_group-instance_method
+      def create_cluster_security_group: (
+                                           cluster_security_group_name: ::String,
+                                           description: ::String,
+                                           ?tags: Array[
+                                             {
+                                               key: ::String?,
+                                               value: ::String?
+                                             },
+                                           ]
+                                         ) -> _CreateClusterSecurityGroupResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterSecurityGroupResponseSuccess
+
+      interface _CreateClusterSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateClusterSnapshotResult]
+        def snapshot: () -> Types::Snapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#create_cluster_snapshot-instance_method
+      def create_cluster_snapshot: (
+                                     snapshot_identifier: ::String,
+                                     cluster_identifier: ::String,
+                                     ?manual_snapshot_retention_period: ::Integer,
+                                     ?tags: Array[
+                                       {
+                                         key: ::String?,
+                                         value: ::String?
+                                       },
+                                     ]
+                                   ) -> _CreateClusterSnapshotResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterSnapshotResponseSuccess
+
+      interface _CreateClusterSubnetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateClusterSubnetGroupResult]
+        def cluster_subnet_group: () -> Types::ClusterSubnetGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#create_cluster_subnet_group-instance_method
+      def create_cluster_subnet_group: (
+                                         cluster_subnet_group_name: ::String,
+                                         description: ::String,
+                                         subnet_ids: Array[::String],
+                                         ?tags: Array[
+                                           {
+                                             key: ::String?,
+                                             value: ::String?
+                                           },
+                                         ]
+                                       ) -> _CreateClusterSubnetGroupResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterSubnetGroupResponseSuccess
+
+      interface _CreateCustomDomainAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCustomDomainAssociationResult]
+        def custom_domain_name: () -> ::String
+        def custom_domain_certificate_arn: () -> ::String
+        def cluster_identifier: () -> ::String
+        def custom_domain_cert_expiry_time: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#create_custom_domain_association-instance_method
+      def create_custom_domain_association: (
+                                              custom_domain_name: ::String,
+                                              custom_domain_certificate_arn: ::String,
+                                              cluster_identifier: ::String
+                                            ) -> _CreateCustomDomainAssociationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomDomainAssociationResponseSuccess
+
+      interface _CreateEndpointAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EndpointAccess]
+        def cluster_identifier: () -> ::String
+        def resource_owner: () -> ::String
+        def subnet_group_name: () -> ::String
+        def endpoint_status: () -> ::String
+        def endpoint_name: () -> ::String
+        def endpoint_create_time: () -> ::Time
+        def port: () -> ::Integer
+        def address: () -> ::String
+        def vpc_security_groups: () -> ::Array[Types::VpcSecurityGroupMembership]
+        def vpc_endpoint: () -> Types::VpcEndpoint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#create_endpoint_access-instance_method
+      def create_endpoint_access: (
+                                    ?cluster_identifier: ::String,
+                                    ?resource_owner: ::String,
+                                    endpoint_name: ::String,
+                                    subnet_group_name: ::String,
+                                    ?vpc_security_group_ids: Array[::String]
+                                  ) -> _CreateEndpointAccessResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEndpointAccessResponseSuccess
+
+      interface _CreateEventSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEventSubscriptionResult]
+        def event_subscription: () -> Types::EventSubscription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#create_event_subscription-instance_method
+      def create_event_subscription: (
+                                       subscription_name: ::String,
+                                       sns_topic_arn: ::String,
+                                       ?source_type: ::String,
+                                       ?source_ids: Array[::String],
+                                       ?event_categories: Array[::String],
+                                       ?severity: ::String,
+                                       ?enabled: bool,
+                                       ?tags: Array[
+                                         {
+                                           key: ::String?,
+                                           value: ::String?
+                                         },
+                                       ]
+                                     ) -> _CreateEventSubscriptionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventSubscriptionResponseSuccess
+
+      interface _CreateHsmClientCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateHsmClientCertificateResult]
+        def hsm_client_certificate: () -> Types::HsmClientCertificate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#create_hsm_client_certificate-instance_method
+      def create_hsm_client_certificate: (
+                                           hsm_client_certificate_identifier: ::String,
+                                           ?tags: Array[
+                                             {
+                                               key: ::String?,
+                                               value: ::String?
+                                             },
+                                           ]
+                                         ) -> _CreateHsmClientCertificateResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHsmClientCertificateResponseSuccess
+
+      interface _CreateHsmConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateHsmConfigurationResult]
+        def hsm_configuration: () -> Types::HsmConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#create_hsm_configuration-instance_method
+      def create_hsm_configuration: (
+                                      hsm_configuration_identifier: ::String,
+                                      description: ::String,
+                                      hsm_ip_address: ::String,
+                                      hsm_partition_name: ::String,
+                                      hsm_partition_password: ::String,
+                                      hsm_server_public_certificate: ::String,
+                                      ?tags: Array[
+                                        {
+                                          key: ::String?,
+                                          value: ::String?
+                                        },
+                                      ]
+                                    ) -> _CreateHsmConfigurationResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHsmConfigurationResponseSuccess
+
+      interface _CreateRedshiftIdcApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRedshiftIdcApplicationResult]
+        def redshift_idc_application: () -> Types::RedshiftIdcApplication
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#create_redshift_idc_application-instance_method
+      def create_redshift_idc_application: (
+                                             idc_instance_arn: ::String,
+                                             redshift_idc_application_name: ::String,
+                                             ?identity_namespace: ::String,
+                                             idc_display_name: ::String,
+                                             iam_role_arn: ::String,
+                                             ?authorized_token_issuer_list: Array[
+                                               {
+                                                 trusted_token_issuer_arn: ::String?,
+                                                 authorized_audiences_list: Array[::String]?
+                                               },
+                                             ],
+                                             ?service_integrations: Array[
+                                               {
+                                                 lake_formation: Array[
+                                                   {
+                                                     lake_formation_query: {
+                                                       authorization: ("Enabled" | "Disabled")
+                                                     }?
+                                                   },
+                                                 ]?
+                                               },
+                                             ]
+                                           ) -> _CreateRedshiftIdcApplicationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRedshiftIdcApplicationResponseSuccess
+
+      interface _CreateScheduledActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ScheduledAction]
+        def scheduled_action_name: () -> ::String
+        def target_action: () -> Types::ScheduledActionType
+        def schedule: () -> ::String
+        def iam_role: () -> ::String
+        def scheduled_action_description: () -> ::String
+        def state: () -> ("ACTIVE" | "DISABLED")
+        def next_invocations: () -> ::Array[::Time]
+        def start_time: () -> ::Time
+        def end_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#create_scheduled_action-instance_method
+      def create_scheduled_action: (
+                                     scheduled_action_name: ::String,
+                                     target_action: {
+                                       resize_cluster: {
+                                         cluster_identifier: ::String,
+                                         cluster_type: ::String?,
+                                         node_type: ::String?,
+                                         number_of_nodes: ::Integer?,
+                                         classic: bool?,
+                                         reserved_node_id: ::String?,
+                                         target_reserved_node_offering_id: ::String?
+                                       }?,
+                                       pause_cluster: {
+                                         cluster_identifier: ::String
+                                       }?,
+                                       resume_cluster: {
+                                         cluster_identifier: ::String
+                                       }?
+                                     },
+                                     schedule: ::String,
+                                     iam_role: ::String,
+                                     ?scheduled_action_description: ::String,
+                                     ?start_time: ::Time,
+                                     ?end_time: ::Time,
+                                     ?enable: bool
+                                   ) -> _CreateScheduledActionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateScheduledActionResponseSuccess
+
+      interface _CreateSnapshotCopyGrantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSnapshotCopyGrantResult]
+        def snapshot_copy_grant: () -> Types::SnapshotCopyGrant
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#create_snapshot_copy_grant-instance_method
+      def create_snapshot_copy_grant: (
+                                        snapshot_copy_grant_name: ::String,
+                                        ?kms_key_id: ::String,
+                                        ?tags: Array[
+                                          {
+                                            key: ::String?,
+                                            value: ::String?
+                                          },
+                                        ]
+                                      ) -> _CreateSnapshotCopyGrantResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSnapshotCopyGrantResponseSuccess
+
+      interface _CreateSnapshotScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SnapshotSchedule]
+        def schedule_definitions: () -> ::Array[::String]
+        def schedule_identifier: () -> ::String
+        def schedule_description: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+        def next_invocations: () -> ::Array[::Time]
+        def associated_cluster_count: () -> ::Integer
+        def associated_clusters: () -> ::Array[Types::ClusterAssociatedToSchedule]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#create_snapshot_schedule-instance_method
+      def create_snapshot_schedule: (
+                                      ?schedule_definitions: Array[::String],
+                                      ?schedule_identifier: ::String,
+                                      ?schedule_description: ::String,
+                                      ?tags: Array[
+                                        {
+                                          key: ::String?,
+                                          value: ::String?
+                                        },
+                                      ],
+                                      ?dry_run: bool,
+                                      ?next_invocations: ::Integer
+                                    ) -> _CreateSnapshotScheduleResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSnapshotScheduleResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#create_tags-instance_method
+      def create_tags: (
+                         resource_name: ::String,
+                         tags: Array[
+                           {
+                             key: ::String?,
+                             value: ::String?
+                           },
+                         ]
+                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _CreateUsageLimitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UsageLimit]
+        def usage_limit_id: () -> ::String
+        def cluster_identifier: () -> ::String
+        def feature_type: () -> ("spectrum" | "concurrency-scaling" | "cross-region-datasharing")
+        def limit_type: () -> ("time" | "data-scanned")
+        def amount: () -> ::Integer
+        def period: () -> ("daily" | "weekly" | "monthly")
+        def breach_action: () -> ("log" | "emit-metric" | "disable")
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#create_usage_limit-instance_method
+      def create_usage_limit: (
+                                cluster_identifier: ::String,
+                                feature_type: ("spectrum" | "concurrency-scaling" | "cross-region-datasharing"),
+                                limit_type: ("time" | "data-scanned"),
+                                amount: ::Integer,
+                                ?period: ("daily" | "weekly" | "monthly"),
+                                ?breach_action: ("log" | "emit-metric" | "disable"),
+                                ?tags: Array[
+                                  {
+                                    key: ::String?,
+                                    value: ::String?
+                                  },
+                                ]
+                              ) -> _CreateUsageLimitResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUsageLimitResponseSuccess
+
+      interface _DeauthorizeDataShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DataShare]
+        def data_share_arn: () -> ::String
+        def producer_arn: () -> ::String
+        def allow_publicly_accessible_consumers: () -> bool
+        def data_share_associations: () -> ::Array[Types::DataShareAssociation]
+        def managed_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#deauthorize_data_share-instance_method
+      def deauthorize_data_share: (
+                                    data_share_arn: ::String,
+                                    consumer_identifier: ::String
+                                  ) -> _DeauthorizeDataShareResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeauthorizeDataShareResponseSuccess
+
+      interface _DeleteAuthenticationProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAuthenticationProfileResult]
+        def authentication_profile_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#delete_authentication_profile-instance_method
+      def delete_authentication_profile: (
+                                           authentication_profile_name: ::String
+                                         ) -> _DeleteAuthenticationProfileResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAuthenticationProfileResponseSuccess
+
+      interface _DeleteClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteClusterResult]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#delete_cluster-instance_method
+      def delete_cluster: (
+                            cluster_identifier: ::String,
+                            ?skip_final_cluster_snapshot: bool,
+                            ?final_cluster_snapshot_identifier: ::String,
+                            ?final_cluster_snapshot_retention_period: ::Integer
+                          ) -> _DeleteClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteClusterResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#delete_cluster_parameter_group-instance_method
+      def delete_cluster_parameter_group: (
+                                            parameter_group_name: ::String
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#delete_cluster_security_group-instance_method
+      def delete_cluster_security_group: (
+                                           cluster_security_group_name: ::String
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteClusterSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteClusterSnapshotResult]
+        def snapshot: () -> Types::Snapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#delete_cluster_snapshot-instance_method
+      def delete_cluster_snapshot: (
+                                     snapshot_identifier: ::String,
+                                     ?snapshot_cluster_identifier: ::String
+                                   ) -> _DeleteClusterSnapshotResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteClusterSnapshotResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#delete_cluster_subnet_group-instance_method
+      def delete_cluster_subnet_group: (
+                                         cluster_subnet_group_name: ::String
+                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#delete_custom_domain_association-instance_method
+      def delete_custom_domain_association: (
+                                              cluster_identifier: ::String,
+                                              custom_domain_name: ::String
+                                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteEndpointAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EndpointAccess]
+        def cluster_identifier: () -> ::String
+        def resource_owner: () -> ::String
+        def subnet_group_name: () -> ::String
+        def endpoint_status: () -> ::String
+        def endpoint_name: () -> ::String
+        def endpoint_create_time: () -> ::Time
+        def port: () -> ::Integer
+        def address: () -> ::String
+        def vpc_security_groups: () -> ::Array[Types::VpcSecurityGroupMembership]
+        def vpc_endpoint: () -> Types::VpcEndpoint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#delete_endpoint_access-instance_method
+      def delete_endpoint_access: (
+                                    endpoint_name: ::String
+                                  ) -> _DeleteEndpointAccessResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEndpointAccessResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#delete_event_subscription-instance_method
+      def delete_event_subscription: (
+                                       subscription_name: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#delete_hsm_client_certificate-instance_method
+      def delete_hsm_client_certificate: (
+                                           hsm_client_certificate_identifier: ::String
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#delete_hsm_configuration-instance_method
+      def delete_hsm_configuration: (
+                                      hsm_configuration_identifier: ::String
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeletePartnerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PartnerIntegrationOutputMessage]
+        def database_name: () -> ::String
+        def partner_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#delete_partner-instance_method
+      def delete_partner: (
+                            account_id: ::String,
+                            cluster_identifier: ::String,
+                            database_name: ::String,
+                            partner_name: ::String
+                          ) -> _DeletePartnerResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePartnerResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#delete_redshift_idc_application-instance_method
+      def delete_redshift_idc_application: (
+                                             redshift_idc_application_arn: ::String
+                                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#delete_resource_policy-instance_method
+      def delete_resource_policy: (
+                                    resource_arn: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#delete_scheduled_action-instance_method
+      def delete_scheduled_action: (
+                                     scheduled_action_name: ::String
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#delete_snapshot_copy_grant-instance_method
+      def delete_snapshot_copy_grant: (
+                                        snapshot_copy_grant_name: ::String
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#delete_snapshot_schedule-instance_method
+      def delete_snapshot_schedule: (
+                                      schedule_identifier: ::String
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#delete_tags-instance_method
+      def delete_tags: (
+                         resource_name: ::String,
+                         tag_keys: Array[::String]
+                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#delete_usage_limit-instance_method
+      def delete_usage_limit: (
+                                usage_limit_id: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeAccountAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AccountAttributeList]
+        def account_attributes: () -> ::Array[Types::AccountAttribute]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_account_attributes-instance_method
+      def describe_account_attributes: (
+                                         ?attribute_names: Array[::String]
+                                       ) -> _DescribeAccountAttributesResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccountAttributesResponseSuccess
+
+      interface _DescribeAuthenticationProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAuthenticationProfilesResult]
+        def authentication_profiles: () -> ::Array[Types::AuthenticationProfile]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_authentication_profiles-instance_method
+      def describe_authentication_profiles: (
+                                              ?authentication_profile_name: ::String
+                                            ) -> _DescribeAuthenticationProfilesResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAuthenticationProfilesResponseSuccess
+
+      interface _DescribeClusterDbRevisionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ClusterDbRevisionsMessage]
+        def marker: () -> ::String
+        def cluster_db_revisions: () -> ::Array[Types::ClusterDbRevision]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_cluster_db_revisions-instance_method
+      def describe_cluster_db_revisions: (
+                                           ?cluster_identifier: ::String,
+                                           ?max_records: ::Integer,
+                                           ?marker: ::String
+                                         ) -> _DescribeClusterDbRevisionsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterDbRevisionsResponseSuccess
+
+      interface _DescribeClusterParameterGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ClusterParameterGroupsMessage]
+        def marker: () -> ::String
+        def parameter_groups: () -> ::Array[Types::ClusterParameterGroup]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_cluster_parameter_groups-instance_method
+      def describe_cluster_parameter_groups: (
+                                               ?parameter_group_name: ::String,
+                                               ?max_records: ::Integer,
+                                               ?marker: ::String,
+                                               ?tag_keys: Array[::String],
+                                               ?tag_values: Array[::String]
+                                             ) -> _DescribeClusterParameterGroupsResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterParameterGroupsResponseSuccess
+
+      interface _DescribeClusterParametersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ClusterParameterGroupDetails]
+        def parameters: () -> ::Array[Types::Parameter]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_cluster_parameters-instance_method
+      def describe_cluster_parameters: (
+                                         parameter_group_name: ::String,
+                                         ?source: ::String,
+                                         ?max_records: ::Integer,
+                                         ?marker: ::String
+                                       ) -> _DescribeClusterParametersResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterParametersResponseSuccess
+
+      interface _DescribeClusterSecurityGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ClusterSecurityGroupMessage]
+        def marker: () -> ::String
+        def cluster_security_groups: () -> ::Array[Types::ClusterSecurityGroup]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_cluster_security_groups-instance_method
+      def describe_cluster_security_groups: (
+                                              ?cluster_security_group_name: ::String,
+                                              ?max_records: ::Integer,
+                                              ?marker: ::String,
+                                              ?tag_keys: Array[::String],
+                                              ?tag_values: Array[::String]
+                                            ) -> _DescribeClusterSecurityGroupsResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterSecurityGroupsResponseSuccess
+
+      interface _DescribeClusterSnapshotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SnapshotMessage]
+        def marker: () -> ::String
+        def snapshots: () -> ::Array[Types::Snapshot]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_cluster_snapshots-instance_method
+      def describe_cluster_snapshots: (
+                                        ?cluster_identifier: ::String,
+                                        ?snapshot_identifier: ::String,
+                                        ?snapshot_arn: ::String,
+                                        ?snapshot_type: ::String,
+                                        ?start_time: ::Time,
+                                        ?end_time: ::Time,
+                                        ?max_records: ::Integer,
+                                        ?marker: ::String,
+                                        ?owner_account: ::String,
+                                        ?tag_keys: Array[::String],
+                                        ?tag_values: Array[::String],
+                                        ?cluster_exists: bool,
+                                        ?sorting_entities: Array[
+                                          {
+                                            attribute: ("SOURCE_TYPE" | "TOTAL_SIZE" | "CREATE_TIME"),
+                                            sort_order: ("ASC" | "DESC")?
+                                          },
+                                        ]
+                                      ) -> _DescribeClusterSnapshotsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterSnapshotsResponseSuccess
+
+      interface _DescribeClusterSubnetGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ClusterSubnetGroupMessage]
+        def marker: () -> ::String
+        def cluster_subnet_groups: () -> ::Array[Types::ClusterSubnetGroup]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_cluster_subnet_groups-instance_method
+      def describe_cluster_subnet_groups: (
+                                            ?cluster_subnet_group_name: ::String,
+                                            ?max_records: ::Integer,
+                                            ?marker: ::String,
+                                            ?tag_keys: Array[::String],
+                                            ?tag_values: Array[::String]
+                                          ) -> _DescribeClusterSubnetGroupsResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterSubnetGroupsResponseSuccess
+
+      interface _DescribeClusterTracksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TrackListMessage]
+        def maintenance_tracks: () -> ::Array[Types::MaintenanceTrack]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_cluster_tracks-instance_method
+      def describe_cluster_tracks: (
+                                     ?maintenance_track_name: ::String,
+                                     ?max_records: ::Integer,
+                                     ?marker: ::String
+                                   ) -> _DescribeClusterTracksResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterTracksResponseSuccess
+
+      interface _DescribeClusterVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ClusterVersionsMessage]
+        def marker: () -> ::String
+        def cluster_versions: () -> ::Array[Types::ClusterVersion]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_cluster_versions-instance_method
+      def describe_cluster_versions: (
+                                       ?cluster_version: ::String,
+                                       ?cluster_parameter_group_family: ::String,
+                                       ?max_records: ::Integer,
+                                       ?marker: ::String
+                                     ) -> _DescribeClusterVersionsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterVersionsResponseSuccess
+
+      interface _DescribeClustersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ClustersMessage]
+        def marker: () -> ::String
+        def clusters: () -> ::Array[Types::Cluster]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_clusters-instance_method
+      def describe_clusters: (
+                               ?cluster_identifier: ::String,
+                               ?max_records: ::Integer,
+                               ?marker: ::String,
+                               ?tag_keys: Array[::String],
+                               ?tag_values: Array[::String]
+                             ) -> _DescribeClustersResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClustersResponseSuccess
+
+      interface _DescribeCustomDomainAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CustomDomainAssociationsMessage]
+        def marker: () -> ::String
+        def associations: () -> ::Array[Types::Association]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_custom_domain_associations-instance_method
+      def describe_custom_domain_associations: (
+                                                 ?custom_domain_name: ::String,
+                                                 ?custom_domain_certificate_arn: ::String,
+                                                 ?max_records: ::Integer,
+                                                 ?marker: ::String
+                                               ) -> _DescribeCustomDomainAssociationsResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCustomDomainAssociationsResponseSuccess
+
+      interface _DescribeDataSharesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDataSharesResult]
+        def data_shares: () -> ::Array[Types::DataShare]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_data_shares-instance_method
+      def describe_data_shares: (
+                                  ?data_share_arn: ::String,
+                                  ?max_records: ::Integer,
+                                  ?marker: ::String
+                                ) -> _DescribeDataSharesResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDataSharesResponseSuccess
+
+      interface _DescribeDataSharesForConsumerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDataSharesForConsumerResult]
+        def data_shares: () -> ::Array[Types::DataShare]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_data_shares_for_consumer-instance_method
+      def describe_data_shares_for_consumer: (
+                                               ?consumer_arn: ::String,
+                                               ?status: ("ACTIVE" | "AVAILABLE"),
+                                               ?max_records: ::Integer,
+                                               ?marker: ::String
+                                             ) -> _DescribeDataSharesForConsumerResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDataSharesForConsumerResponseSuccess
+
+      interface _DescribeDataSharesForProducerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDataSharesForProducerResult]
+        def data_shares: () -> ::Array[Types::DataShare]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_data_shares_for_producer-instance_method
+      def describe_data_shares_for_producer: (
+                                               ?producer_arn: ::String,
+                                               ?status: ("ACTIVE" | "AUTHORIZED" | "PENDING_AUTHORIZATION" | "DEAUTHORIZED" | "REJECTED"),
+                                               ?max_records: ::Integer,
+                                               ?marker: ::String
+                                             ) -> _DescribeDataSharesForProducerResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDataSharesForProducerResponseSuccess
+
+      interface _DescribeDefaultClusterParametersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDefaultClusterParametersResult]
+        def default_cluster_parameters: () -> Types::DefaultClusterParameters
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_default_cluster_parameters-instance_method
+      def describe_default_cluster_parameters: (
+                                                 parameter_group_family: ::String,
+                                                 ?max_records: ::Integer,
+                                                 ?marker: ::String
+                                               ) -> _DescribeDefaultClusterParametersResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDefaultClusterParametersResponseSuccess
+
+      interface _DescribeEndpointAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EndpointAccessList]
+        def endpoint_access_list: () -> ::Array[Types::EndpointAccess]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_endpoint_access-instance_method
+      def describe_endpoint_access: (
+                                      ?cluster_identifier: ::String,
+                                      ?resource_owner: ::String,
+                                      ?endpoint_name: ::String,
+                                      ?vpc_id: ::String,
+                                      ?max_records: ::Integer,
+                                      ?marker: ::String
+                                    ) -> _DescribeEndpointAccessResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEndpointAccessResponseSuccess
+
+      interface _DescribeEndpointAuthorizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EndpointAuthorizationList]
+        def endpoint_authorization_list: () -> ::Array[Types::EndpointAuthorization]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_endpoint_authorization-instance_method
+      def describe_endpoint_authorization: (
+                                             ?cluster_identifier: ::String,
+                                             ?account: ::String,
+                                             ?grantee: bool,
+                                             ?max_records: ::Integer,
+                                             ?marker: ::String
+                                           ) -> _DescribeEndpointAuthorizationResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEndpointAuthorizationResponseSuccess
+
+      interface _DescribeEventCategoriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EventCategoriesMessage]
+        def event_categories_map_list: () -> ::Array[Types::EventCategoriesMap]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_event_categories-instance_method
+      def describe_event_categories: (
+                                       ?source_type: ::String
+                                     ) -> _DescribeEventCategoriesResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEventCategoriesResponseSuccess
+
+      interface _DescribeEventSubscriptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EventSubscriptionsMessage]
+        def marker: () -> ::String
+        def event_subscriptions_list: () -> ::Array[Types::EventSubscription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_event_subscriptions-instance_method
+      def describe_event_subscriptions: (
+                                          ?subscription_name: ::String,
+                                          ?max_records: ::Integer,
+                                          ?marker: ::String,
+                                          ?tag_keys: Array[::String],
+                                          ?tag_values: Array[::String]
+                                        ) -> _DescribeEventSubscriptionsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEventSubscriptionsResponseSuccess
+
+      interface _DescribeEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EventsMessage]
+        def marker: () -> ::String
+        def events: () -> ::Array[Types::Event]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_events-instance_method
+      def describe_events: (
+                             ?source_identifier: ::String,
+                             ?source_type: ("cluster" | "cluster-parameter-group" | "cluster-security-group" | "cluster-snapshot" | "scheduled-action"),
+                             ?start_time: ::Time,
+                             ?end_time: ::Time,
+                             ?duration: ::Integer,
+                             ?max_records: ::Integer,
+                             ?marker: ::String
+                           ) -> _DescribeEventsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEventsResponseSuccess
+
+      interface _DescribeHsmClientCertificatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::HsmClientCertificateMessage]
+        def marker: () -> ::String
+        def hsm_client_certificates: () -> ::Array[Types::HsmClientCertificate]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_hsm_client_certificates-instance_method
+      def describe_hsm_client_certificates: (
+                                              ?hsm_client_certificate_identifier: ::String,
+                                              ?max_records: ::Integer,
+                                              ?marker: ::String,
+                                              ?tag_keys: Array[::String],
+                                              ?tag_values: Array[::String]
+                                            ) -> _DescribeHsmClientCertificatesResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeHsmClientCertificatesResponseSuccess
+
+      interface _DescribeHsmConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::HsmConfigurationMessage]
+        def marker: () -> ::String
+        def hsm_configurations: () -> ::Array[Types::HsmConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_hsm_configurations-instance_method
+      def describe_hsm_configurations: (
+                                         ?hsm_configuration_identifier: ::String,
+                                         ?max_records: ::Integer,
+                                         ?marker: ::String,
+                                         ?tag_keys: Array[::String],
+                                         ?tag_values: Array[::String]
+                                       ) -> _DescribeHsmConfigurationsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeHsmConfigurationsResponseSuccess
+
+      interface _DescribeInboundIntegrationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InboundIntegrationsMessage]
+        def marker: () -> ::String
+        def inbound_integrations: () -> ::Array[Types::InboundIntegration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_inbound_integrations-instance_method
+      def describe_inbound_integrations: (
+                                           ?integration_arn: ::String,
+                                           ?target_arn: ::String,
+                                           ?max_records: ::Integer,
+                                           ?marker: ::String
+                                         ) -> _DescribeInboundIntegrationsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInboundIntegrationsResponseSuccess
+
+      interface _DescribeLoggingStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::LoggingStatus]
+        def logging_enabled: () -> bool
+        def bucket_name: () -> ::String
+        def s3_key_prefix: () -> ::String
+        def last_successful_delivery_time: () -> ::Time
+        def last_failure_time: () -> ::Time
+        def last_failure_message: () -> ::String
+        def log_destination_type: () -> ("s3" | "cloudwatch")
+        def log_exports: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_logging_status-instance_method
+      def describe_logging_status: (
+                                     cluster_identifier: ::String
+                                   ) -> _DescribeLoggingStatusResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLoggingStatusResponseSuccess
+
+      interface _DescribeNodeConfigurationOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::NodeConfigurationOptionsMessage]
+        def node_configuration_option_list: () -> ::Array[Types::NodeConfigurationOption]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_node_configuration_options-instance_method
+      def describe_node_configuration_options: (
+                                                 action_type: ("restore-cluster" | "recommend-node-config" | "resize-cluster"),
+                                                 ?cluster_identifier: ::String,
+                                                 ?snapshot_identifier: ::String,
+                                                 ?snapshot_arn: ::String,
+                                                 ?owner_account: ::String,
+                                                 ?filters: Array[
+                                                   {
+                                                     name: ("NodeType" | "NumberOfNodes" | "EstimatedDiskUtilizationPercent" | "Mode")?,
+                                                     operator: ("eq" | "lt" | "gt" | "le" | "ge" | "in" | "between")?,
+                                                     values: Array[::String]?
+                                                   },
+                                                 ],
+                                                 ?marker: ::String,
+                                                 ?max_records: ::Integer
+                                               ) -> _DescribeNodeConfigurationOptionsResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeNodeConfigurationOptionsResponseSuccess
+
+      interface _DescribeOrderableClusterOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::OrderableClusterOptionsMessage]
+        def orderable_cluster_options: () -> ::Array[Types::OrderableClusterOption]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_orderable_cluster_options-instance_method
+      def describe_orderable_cluster_options: (
+                                                ?cluster_version: ::String,
+                                                ?node_type: ::String,
+                                                ?max_records: ::Integer,
+                                                ?marker: ::String
+                                              ) -> _DescribeOrderableClusterOptionsResponseSuccess
+                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeOrderableClusterOptionsResponseSuccess
+
+      interface _DescribePartnersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePartnersOutputMessage]
+        def partner_integration_info_list: () -> ::Array[Types::PartnerIntegrationInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_partners-instance_method
+      def describe_partners: (
+                               account_id: ::String,
+                               cluster_identifier: ::String,
+                               ?database_name: ::String,
+                               ?partner_name: ::String
+                             ) -> _DescribePartnersResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePartnersResponseSuccess
+
+      interface _DescribeRedshiftIdcApplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRedshiftIdcApplicationsResult]
+        def redshift_idc_applications: () -> ::Array[Types::RedshiftIdcApplication]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_redshift_idc_applications-instance_method
+      def describe_redshift_idc_applications: (
+                                                ?redshift_idc_application_arn: ::String,
+                                                ?max_records: ::Integer,
+                                                ?marker: ::String
+                                              ) -> _DescribeRedshiftIdcApplicationsResponseSuccess
+                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRedshiftIdcApplicationsResponseSuccess
+
+      interface _DescribeReservedNodeExchangeStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReservedNodeExchangeStatusOutputMessage]
+        def reserved_node_exchange_status_details: () -> ::Array[Types::ReservedNodeExchangeStatus]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_reserved_node_exchange_status-instance_method
+      def describe_reserved_node_exchange_status: (
+                                                    ?reserved_node_id: ::String,
+                                                    ?reserved_node_exchange_request_id: ::String,
+                                                    ?max_records: ::Integer,
+                                                    ?marker: ::String
+                                                  ) -> _DescribeReservedNodeExchangeStatusResponseSuccess
+                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReservedNodeExchangeStatusResponseSuccess
+
+      interface _DescribeReservedNodeOfferingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReservedNodeOfferingsMessage]
+        def marker: () -> ::String
+        def reserved_node_offerings: () -> ::Array[Types::ReservedNodeOffering]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_reserved_node_offerings-instance_method
+      def describe_reserved_node_offerings: (
+                                              ?reserved_node_offering_id: ::String,
+                                              ?max_records: ::Integer,
+                                              ?marker: ::String
+                                            ) -> _DescribeReservedNodeOfferingsResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReservedNodeOfferingsResponseSuccess
+
+      interface _DescribeReservedNodesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReservedNodesMessage]
+        def marker: () -> ::String
+        def reserved_nodes: () -> ::Array[Types::ReservedNode]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_reserved_nodes-instance_method
+      def describe_reserved_nodes: (
+                                     ?reserved_node_id: ::String,
+                                     ?max_records: ::Integer,
+                                     ?marker: ::String
+                                   ) -> _DescribeReservedNodesResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReservedNodesResponseSuccess
+
+      interface _DescribeResizeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResizeProgressMessage]
+        def target_node_type: () -> ::String
+        def target_number_of_nodes: () -> ::Integer
+        def target_cluster_type: () -> ::String
+        def status: () -> ::String
+        def import_tables_completed: () -> ::Array[::String]
+        def import_tables_in_progress: () -> ::Array[::String]
+        def import_tables_not_started: () -> ::Array[::String]
+        def avg_resize_rate_in_mega_bytes_per_second: () -> ::Float
+        def total_resize_data_in_mega_bytes: () -> ::Integer
+        def progress_in_mega_bytes: () -> ::Integer
+        def elapsed_time_in_seconds: () -> ::Integer
+        def estimated_time_to_completion_in_seconds: () -> ::Integer
+        def resize_type: () -> ::String
+        def message: () -> ::String
+        def target_encryption_type: () -> ::String
+        def data_transfer_progress_percent: () -> ::Float
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_resize-instance_method
+      def describe_resize: (
+                             cluster_identifier: ::String
+                           ) -> _DescribeResizeResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeResizeResponseSuccess
+
+      interface _DescribeScheduledActionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ScheduledActionsMessage]
+        def marker: () -> ::String
+        def scheduled_actions: () -> ::Array[Types::ScheduledAction]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_scheduled_actions-instance_method
+      def describe_scheduled_actions: (
+                                        ?scheduled_action_name: ::String,
+                                        ?target_action_type: ("ResizeCluster" | "PauseCluster" | "ResumeCluster"),
+                                        ?start_time: ::Time,
+                                        ?end_time: ::Time,
+                                        ?active: bool,
+                                        ?filters: Array[
+                                          {
+                                            name: ("cluster-identifier" | "iam-role"),
+                                            values: Array[::String]
+                                          },
+                                        ],
+                                        ?marker: ::String,
+                                        ?max_records: ::Integer
+                                      ) -> _DescribeScheduledActionsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeScheduledActionsResponseSuccess
+
+      interface _DescribeSnapshotCopyGrantsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SnapshotCopyGrantMessage]
+        def marker: () -> ::String
+        def snapshot_copy_grants: () -> ::Array[Types::SnapshotCopyGrant]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_snapshot_copy_grants-instance_method
+      def describe_snapshot_copy_grants: (
+                                           ?snapshot_copy_grant_name: ::String,
+                                           ?max_records: ::Integer,
+                                           ?marker: ::String,
+                                           ?tag_keys: Array[::String],
+                                           ?tag_values: Array[::String]
+                                         ) -> _DescribeSnapshotCopyGrantsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSnapshotCopyGrantsResponseSuccess
+
+      interface _DescribeSnapshotSchedulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSnapshotSchedulesOutputMessage]
+        def snapshot_schedules: () -> ::Array[Types::SnapshotSchedule]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_snapshot_schedules-instance_method
+      def describe_snapshot_schedules: (
+                                         ?cluster_identifier: ::String,
+                                         ?schedule_identifier: ::String,
+                                         ?tag_keys: Array[::String],
+                                         ?tag_values: Array[::String],
+                                         ?marker: ::String,
+                                         ?max_records: ::Integer
+                                       ) -> _DescribeSnapshotSchedulesResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSnapshotSchedulesResponseSuccess
+
+      interface _DescribeStorageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CustomerStorageMessage]
+        def total_backup_size_in_mega_bytes: () -> ::Float
+        def total_provisioned_storage_in_mega_bytes: () -> ::Float
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_storage-instance_method
+      def describe_storage: () -> _DescribeStorageResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStorageResponseSuccess
+
+      interface _DescribeTableRestoreStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TableRestoreStatusMessage]
+        def table_restore_status_details: () -> ::Array[Types::TableRestoreStatus]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_table_restore_status-instance_method
+      def describe_table_restore_status: (
+                                           ?cluster_identifier: ::String,
+                                           ?table_restore_request_id: ::String,
+                                           ?max_records: ::Integer,
+                                           ?marker: ::String
+                                         ) -> _DescribeTableRestoreStatusResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTableRestoreStatusResponseSuccess
+
+      interface _DescribeTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TaggedResourceListMessage]
+        def tagged_resources: () -> ::Array[Types::TaggedResource]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_tags-instance_method
+      def describe_tags: (
+                           ?resource_name: ::String,
+                           ?resource_type: ::String,
+                           ?max_records: ::Integer,
+                           ?marker: ::String,
+                           ?tag_keys: Array[::String],
+                           ?tag_values: Array[::String]
+                         ) -> _DescribeTagsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTagsResponseSuccess
+
+      interface _DescribeUsageLimitsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UsageLimitList]
+        def usage_limits: () -> ::Array[Types::UsageLimit]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_usage_limits-instance_method
+      def describe_usage_limits: (
+                                   ?usage_limit_id: ::String,
+                                   ?cluster_identifier: ::String,
+                                   ?feature_type: ("spectrum" | "concurrency-scaling" | "cross-region-datasharing"),
+                                   ?max_records: ::Integer,
+                                   ?marker: ::String,
+                                   ?tag_keys: Array[::String],
+                                   ?tag_values: Array[::String]
+                                 ) -> _DescribeUsageLimitsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeUsageLimitsResponseSuccess
+
+      interface _DisableLoggingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::LoggingStatus]
+        def logging_enabled: () -> bool
+        def bucket_name: () -> ::String
+        def s3_key_prefix: () -> ::String
+        def last_successful_delivery_time: () -> ::Time
+        def last_failure_time: () -> ::Time
+        def last_failure_message: () -> ::String
+        def log_destination_type: () -> ("s3" | "cloudwatch")
+        def log_exports: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#disable_logging-instance_method
+      def disable_logging: (
+                             cluster_identifier: ::String
+                           ) -> _DisableLoggingResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableLoggingResponseSuccess
+
+      interface _DisableSnapshotCopyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableSnapshotCopyResult]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#disable_snapshot_copy-instance_method
+      def disable_snapshot_copy: (
+                                   cluster_identifier: ::String
+                                 ) -> _DisableSnapshotCopyResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableSnapshotCopyResponseSuccess
+
+      interface _DisassociateDataShareConsumerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DataShare]
+        def data_share_arn: () -> ::String
+        def producer_arn: () -> ::String
+        def allow_publicly_accessible_consumers: () -> bool
+        def data_share_associations: () -> ::Array[Types::DataShareAssociation]
+        def managed_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#disassociate_data_share_consumer-instance_method
+      def disassociate_data_share_consumer: (
+                                              data_share_arn: ::String,
+                                              ?disassociate_entire_account: bool,
+                                              ?consumer_arn: ::String,
+                                              ?consumer_region: ::String
+                                            ) -> _DisassociateDataShareConsumerResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateDataShareConsumerResponseSuccess
+
+      interface _EnableLoggingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::LoggingStatus]
+        def logging_enabled: () -> bool
+        def bucket_name: () -> ::String
+        def s3_key_prefix: () -> ::String
+        def last_successful_delivery_time: () -> ::Time
+        def last_failure_time: () -> ::Time
+        def last_failure_message: () -> ::String
+        def log_destination_type: () -> ("s3" | "cloudwatch")
+        def log_exports: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#enable_logging-instance_method
+      def enable_logging: (
+                            cluster_identifier: ::String,
+                            ?bucket_name: ::String,
+                            ?s3_key_prefix: ::String,
+                            ?log_destination_type: ("s3" | "cloudwatch"),
+                            ?log_exports: Array[::String]
+                          ) -> _EnableLoggingResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableLoggingResponseSuccess
+
+      interface _EnableSnapshotCopyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableSnapshotCopyResult]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#enable_snapshot_copy-instance_method
+      def enable_snapshot_copy: (
+                                  cluster_identifier: ::String,
+                                  destination_region: ::String,
+                                  ?retention_period: ::Integer,
+                                  ?snapshot_copy_grant_name: ::String,
+                                  ?manual_snapshot_retention_period: ::Integer
+                                ) -> _EnableSnapshotCopyResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableSnapshotCopyResponseSuccess
+
+      interface _FailoverPrimaryComputeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::FailoverPrimaryComputeResult]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#failover_primary_compute-instance_method
+      def failover_primary_compute: (
+                                      cluster_identifier: ::String
+                                    ) -> _FailoverPrimaryComputeResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _FailoverPrimaryComputeResponseSuccess
+
+      interface _GetClusterCredentialsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ClusterCredentials]
+        def db_user: () -> ::String
+        def db_password: () -> ::String
+        def expiration: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#get_cluster_credentials-instance_method
+      def get_cluster_credentials: (
+                                     db_user: ::String,
+                                     ?db_name: ::String,
+                                     ?cluster_identifier: ::String,
+                                     ?duration_seconds: ::Integer,
+                                     ?auto_create: bool,
+                                     ?db_groups: Array[::String],
+                                     ?custom_domain_name: ::String
+                                   ) -> _GetClusterCredentialsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetClusterCredentialsResponseSuccess
+
+      interface _GetClusterCredentialsWithIAMResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ClusterExtendedCredentials]
+        def db_user: () -> ::String
+        def db_password: () -> ::String
+        def expiration: () -> ::Time
+        def next_refresh_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#get_cluster_credentials_with_iam-instance_method
+      def get_cluster_credentials_with_iam: (
+                                              ?db_name: ::String,
+                                              ?cluster_identifier: ::String,
+                                              ?duration_seconds: ::Integer,
+                                              ?custom_domain_name: ::String
+                                            ) -> _GetClusterCredentialsWithIAMResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetClusterCredentialsWithIAMResponseSuccess
+
+      interface _GetReservedNodeExchangeConfigurationOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetReservedNodeExchangeConfigurationOptionsOutputMessage]
+        def marker: () -> ::String
+        def reserved_node_configuration_option_list: () -> ::Array[Types::ReservedNodeConfigurationOption]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#get_reserved_node_exchange_configuration_options-instance_method
+      def get_reserved_node_exchange_configuration_options: (
+                                                              action_type: ("restore-cluster" | "resize-cluster"),
+                                                              ?cluster_identifier: ::String,
+                                                              ?snapshot_identifier: ::String,
+                                                              ?max_records: ::Integer,
+                                                              ?marker: ::String
+                                                            ) -> _GetReservedNodeExchangeConfigurationOptionsResponseSuccess
+                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetReservedNodeExchangeConfigurationOptionsResponseSuccess
+
+      interface _GetReservedNodeExchangeOfferingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetReservedNodeExchangeOfferingsOutputMessage]
+        def marker: () -> ::String
+        def reserved_node_offerings: () -> ::Array[Types::ReservedNodeOffering]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#get_reserved_node_exchange_offerings-instance_method
+      def get_reserved_node_exchange_offerings: (
+                                                  reserved_node_id: ::String,
+                                                  ?max_records: ::Integer,
+                                                  ?marker: ::String
+                                                ) -> _GetReservedNodeExchangeOfferingsResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetReservedNodeExchangeOfferingsResponseSuccess
+
+      interface _GetResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcePolicyResult]
+        def resource_policy: () -> Types::ResourcePolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#get_resource_policy-instance_method
+      def get_resource_policy: (
+                                 resource_arn: ::String
+                               ) -> _GetResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePolicyResponseSuccess
+
+      interface _ModifyAquaConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyAquaOutputMessage]
+        def aqua_configuration: () -> Types::AquaConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#modify_aqua_configuration-instance_method
+      def modify_aqua_configuration: (
+                                       cluster_identifier: ::String,
+                                       ?aqua_configuration_status: ("enabled" | "disabled" | "auto")
+                                     ) -> _ModifyAquaConfigurationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyAquaConfigurationResponseSuccess
+
+      interface _ModifyAuthenticationProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyAuthenticationProfileResult]
+        def authentication_profile_name: () -> ::String
+        def authentication_profile_content: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#modify_authentication_profile-instance_method
+      def modify_authentication_profile: (
+                                           authentication_profile_name: ::String,
+                                           authentication_profile_content: ::String
+                                         ) -> _ModifyAuthenticationProfileResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyAuthenticationProfileResponseSuccess
+
+      interface _ModifyClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyClusterResult]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#modify_cluster-instance_method
+      def modify_cluster: (
+                            cluster_identifier: ::String,
+                            ?cluster_type: ::String,
+                            ?node_type: ::String,
+                            ?number_of_nodes: ::Integer,
+                            ?cluster_security_groups: Array[::String],
+                            ?vpc_security_group_ids: Array[::String],
+                            ?master_user_password: ::String,
+                            ?cluster_parameter_group_name: ::String,
+                            ?automated_snapshot_retention_period: ::Integer,
+                            ?manual_snapshot_retention_period: ::Integer,
+                            ?preferred_maintenance_window: ::String,
+                            ?cluster_version: ::String,
+                            ?allow_version_upgrade: bool,
+                            ?hsm_client_certificate_identifier: ::String,
+                            ?hsm_configuration_identifier: ::String,
+                            ?new_cluster_identifier: ::String,
+                            ?publicly_accessible: bool,
+                            ?elastic_ip: ::String,
+                            ?enhanced_vpc_routing: bool,
+                            ?maintenance_track_name: ::String,
+                            ?encrypted: bool,
+                            ?kms_key_id: ::String,
+                            ?availability_zone_relocation: bool,
+                            ?availability_zone: ::String,
+                            ?port: ::Integer,
+                            ?manage_master_password: bool,
+                            ?master_password_secret_kms_key_id: ::String,
+                            ?ip_address_type: ::String,
+                            ?multi_az: bool
+                          ) -> _ModifyClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyClusterResponseSuccess
+
+      interface _ModifyClusterDbRevisionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyClusterDbRevisionResult]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#modify_cluster_db_revision-instance_method
+      def modify_cluster_db_revision: (
+                                        cluster_identifier: ::String,
+                                        revision_target: ::String
+                                      ) -> _ModifyClusterDbRevisionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyClusterDbRevisionResponseSuccess
+
+      interface _ModifyClusterIamRolesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyClusterIamRolesResult]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#modify_cluster_iam_roles-instance_method
+      def modify_cluster_iam_roles: (
+                                      cluster_identifier: ::String,
+                                      ?add_iam_roles: Array[::String],
+                                      ?remove_iam_roles: Array[::String],
+                                      ?default_iam_role_arn: ::String
+                                    ) -> _ModifyClusterIamRolesResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyClusterIamRolesResponseSuccess
+
+      interface _ModifyClusterMaintenanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyClusterMaintenanceResult]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#modify_cluster_maintenance-instance_method
+      def modify_cluster_maintenance: (
+                                        cluster_identifier: ::String,
+                                        ?defer_maintenance: bool,
+                                        ?defer_maintenance_identifier: ::String,
+                                        ?defer_maintenance_start_time: ::Time,
+                                        ?defer_maintenance_end_time: ::Time,
+                                        ?defer_maintenance_duration: ::Integer
+                                      ) -> _ModifyClusterMaintenanceResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyClusterMaintenanceResponseSuccess
+
+      interface _ModifyClusterParameterGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ClusterParameterGroupNameMessage]
+        def parameter_group_name: () -> ::String
+        def parameter_group_status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#modify_cluster_parameter_group-instance_method
+      def modify_cluster_parameter_group: (
+                                            parameter_group_name: ::String,
+                                            parameters: Array[
+                                              {
+                                                parameter_name: ::String?,
+                                                parameter_value: ::String?,
+                                                description: ::String?,
+                                                source: ::String?,
+                                                data_type: ::String?,
+                                                allowed_values: ::String?,
+                                                apply_type: ("static" | "dynamic")?,
+                                                is_modifiable: bool?,
+                                                minimum_engine_version: ::String?
+                                              },
+                                            ]
+                                          ) -> _ModifyClusterParameterGroupResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyClusterParameterGroupResponseSuccess
+
+      interface _ModifyClusterSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyClusterSnapshotResult]
+        def snapshot: () -> Types::Snapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#modify_cluster_snapshot-instance_method
+      def modify_cluster_snapshot: (
+                                     snapshot_identifier: ::String,
+                                     ?manual_snapshot_retention_period: ::Integer,
+                                     ?force: bool
+                                   ) -> _ModifyClusterSnapshotResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyClusterSnapshotResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#modify_cluster_snapshot_schedule-instance_method
+      def modify_cluster_snapshot_schedule: (
+                                              cluster_identifier: ::String,
+                                              ?schedule_identifier: ::String,
+                                              ?disassociate_schedule: bool
+                                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _ModifyClusterSubnetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyClusterSubnetGroupResult]
+        def cluster_subnet_group: () -> Types::ClusterSubnetGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#modify_cluster_subnet_group-instance_method
+      def modify_cluster_subnet_group: (
+                                         cluster_subnet_group_name: ::String,
+                                         ?description: ::String,
+                                         subnet_ids: Array[::String]
+                                       ) -> _ModifyClusterSubnetGroupResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyClusterSubnetGroupResponseSuccess
+
+      interface _ModifyCustomDomainAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyCustomDomainAssociationResult]
+        def custom_domain_name: () -> ::String
+        def custom_domain_certificate_arn: () -> ::String
+        def cluster_identifier: () -> ::String
+        def custom_domain_cert_expiry_time: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#modify_custom_domain_association-instance_method
+      def modify_custom_domain_association: (
+                                              custom_domain_name: ::String,
+                                              custom_domain_certificate_arn: ::String,
+                                              cluster_identifier: ::String
+                                            ) -> _ModifyCustomDomainAssociationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyCustomDomainAssociationResponseSuccess
+
+      interface _ModifyEndpointAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EndpointAccess]
+        def cluster_identifier: () -> ::String
+        def resource_owner: () -> ::String
+        def subnet_group_name: () -> ::String
+        def endpoint_status: () -> ::String
+        def endpoint_name: () -> ::String
+        def endpoint_create_time: () -> ::Time
+        def port: () -> ::Integer
+        def address: () -> ::String
+        def vpc_security_groups: () -> ::Array[Types::VpcSecurityGroupMembership]
+        def vpc_endpoint: () -> Types::VpcEndpoint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#modify_endpoint_access-instance_method
+      def modify_endpoint_access: (
+                                    endpoint_name: ::String,
+                                    ?vpc_security_group_ids: Array[::String]
+                                  ) -> _ModifyEndpointAccessResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyEndpointAccessResponseSuccess
+
+      interface _ModifyEventSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyEventSubscriptionResult]
+        def event_subscription: () -> Types::EventSubscription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#modify_event_subscription-instance_method
+      def modify_event_subscription: (
+                                       subscription_name: ::String,
+                                       ?sns_topic_arn: ::String,
+                                       ?source_type: ::String,
+                                       ?source_ids: Array[::String],
+                                       ?event_categories: Array[::String],
+                                       ?severity: ::String,
+                                       ?enabled: bool
+                                     ) -> _ModifyEventSubscriptionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyEventSubscriptionResponseSuccess
+
+      interface _ModifyRedshiftIdcApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyRedshiftIdcApplicationResult]
+        def redshift_idc_application: () -> Types::RedshiftIdcApplication
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#modify_redshift_idc_application-instance_method
+      def modify_redshift_idc_application: (
+                                             redshift_idc_application_arn: ::String,
+                                             ?identity_namespace: ::String,
+                                             ?iam_role_arn: ::String,
+                                             ?idc_display_name: ::String,
+                                             ?authorized_token_issuer_list: Array[
+                                               {
+                                                 trusted_token_issuer_arn: ::String?,
+                                                 authorized_audiences_list: Array[::String]?
+                                               },
+                                             ],
+                                             ?service_integrations: Array[
+                                               {
+                                                 lake_formation: Array[
+                                                   {
+                                                     lake_formation_query: {
+                                                       authorization: ("Enabled" | "Disabled")
+                                                     }?
+                                                   },
+                                                 ]?
+                                               },
+                                             ]
+                                           ) -> _ModifyRedshiftIdcApplicationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyRedshiftIdcApplicationResponseSuccess
+
+      interface _ModifyScheduledActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ScheduledAction]
+        def scheduled_action_name: () -> ::String
+        def target_action: () -> Types::ScheduledActionType
+        def schedule: () -> ::String
+        def iam_role: () -> ::String
+        def scheduled_action_description: () -> ::String
+        def state: () -> ("ACTIVE" | "DISABLED")
+        def next_invocations: () -> ::Array[::Time]
+        def start_time: () -> ::Time
+        def end_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#modify_scheduled_action-instance_method
+      def modify_scheduled_action: (
+                                     scheduled_action_name: ::String,
+                                     ?target_action: {
+                                       resize_cluster: {
+                                         cluster_identifier: ::String,
+                                         cluster_type: ::String?,
+                                         node_type: ::String?,
+                                         number_of_nodes: ::Integer?,
+                                         classic: bool?,
+                                         reserved_node_id: ::String?,
+                                         target_reserved_node_offering_id: ::String?
+                                       }?,
+                                       pause_cluster: {
+                                         cluster_identifier: ::String
+                                       }?,
+                                       resume_cluster: {
+                                         cluster_identifier: ::String
+                                       }?
+                                     },
+                                     ?schedule: ::String,
+                                     ?iam_role: ::String,
+                                     ?scheduled_action_description: ::String,
+                                     ?start_time: ::Time,
+                                     ?end_time: ::Time,
+                                     ?enable: bool
+                                   ) -> _ModifyScheduledActionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyScheduledActionResponseSuccess
+
+      interface _ModifySnapshotCopyRetentionPeriodResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifySnapshotCopyRetentionPeriodResult]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#modify_snapshot_copy_retention_period-instance_method
+      def modify_snapshot_copy_retention_period: (
+                                                   cluster_identifier: ::String,
+                                                   retention_period: ::Integer,
+                                                   ?manual: bool
+                                                 ) -> _ModifySnapshotCopyRetentionPeriodResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifySnapshotCopyRetentionPeriodResponseSuccess
+
+      interface _ModifySnapshotScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SnapshotSchedule]
+        def schedule_definitions: () -> ::Array[::String]
+        def schedule_identifier: () -> ::String
+        def schedule_description: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+        def next_invocations: () -> ::Array[::Time]
+        def associated_cluster_count: () -> ::Integer
+        def associated_clusters: () -> ::Array[Types::ClusterAssociatedToSchedule]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#modify_snapshot_schedule-instance_method
+      def modify_snapshot_schedule: (
+                                      schedule_identifier: ::String,
+                                      schedule_definitions: Array[::String]
+                                    ) -> _ModifySnapshotScheduleResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifySnapshotScheduleResponseSuccess
+
+      interface _ModifyUsageLimitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UsageLimit]
+        def usage_limit_id: () -> ::String
+        def cluster_identifier: () -> ::String
+        def feature_type: () -> ("spectrum" | "concurrency-scaling" | "cross-region-datasharing")
+        def limit_type: () -> ("time" | "data-scanned")
+        def amount: () -> ::Integer
+        def period: () -> ("daily" | "weekly" | "monthly")
+        def breach_action: () -> ("log" | "emit-metric" | "disable")
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#modify_usage_limit-instance_method
+      def modify_usage_limit: (
+                                usage_limit_id: ::String,
+                                ?amount: ::Integer,
+                                ?breach_action: ("log" | "emit-metric" | "disable")
+                              ) -> _ModifyUsageLimitResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyUsageLimitResponseSuccess
+
+      interface _PauseClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PauseClusterResult]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#pause_cluster-instance_method
+      def pause_cluster: (
+                           cluster_identifier: ::String
+                         ) -> _PauseClusterResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PauseClusterResponseSuccess
+
+      interface _PurchaseReservedNodeOfferingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PurchaseReservedNodeOfferingResult]
+        def reserved_node: () -> Types::ReservedNode
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#purchase_reserved_node_offering-instance_method
+      def purchase_reserved_node_offering: (
+                                             reserved_node_offering_id: ::String,
+                                             ?node_count: ::Integer
+                                           ) -> _PurchaseReservedNodeOfferingResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PurchaseReservedNodeOfferingResponseSuccess
+
+      interface _PutResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyResult]
+        def resource_policy: () -> Types::ResourcePolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#put_resource_policy-instance_method
+      def put_resource_policy: (
+                                 resource_arn: ::String,
+                                 policy: ::String
+                               ) -> _PutResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
+
+      interface _RebootClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RebootClusterResult]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#reboot_cluster-instance_method
+      def reboot_cluster: (
+                            cluster_identifier: ::String
+                          ) -> _RebootClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RebootClusterResponseSuccess
+
+      interface _RejectDataShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DataShare]
+        def data_share_arn: () -> ::String
+        def producer_arn: () -> ::String
+        def allow_publicly_accessible_consumers: () -> bool
+        def data_share_associations: () -> ::Array[Types::DataShareAssociation]
+        def managed_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#reject_data_share-instance_method
+      def reject_data_share: (
+                               data_share_arn: ::String
+                             ) -> _RejectDataShareResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectDataShareResponseSuccess
+
+      interface _ResetClusterParameterGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ClusterParameterGroupNameMessage]
+        def parameter_group_name: () -> ::String
+        def parameter_group_status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#reset_cluster_parameter_group-instance_method
+      def reset_cluster_parameter_group: (
+                                           parameter_group_name: ::String,
+                                           ?reset_all_parameters: bool,
+                                           ?parameters: Array[
+                                             {
+                                               parameter_name: ::String?,
+                                               parameter_value: ::String?,
+                                               description: ::String?,
+                                               source: ::String?,
+                                               data_type: ::String?,
+                                               allowed_values: ::String?,
+                                               apply_type: ("static" | "dynamic")?,
+                                               is_modifiable: bool?,
+                                               minimum_engine_version: ::String?
+                                             },
+                                           ]
+                                         ) -> _ResetClusterParameterGroupResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetClusterParameterGroupResponseSuccess
+
+      interface _ResizeClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResizeClusterResult]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#resize_cluster-instance_method
+      def resize_cluster: (
+                            cluster_identifier: ::String,
+                            ?cluster_type: ::String,
+                            ?node_type: ::String,
+                            ?number_of_nodes: ::Integer,
+                            ?classic: bool,
+                            ?reserved_node_id: ::String,
+                            ?target_reserved_node_offering_id: ::String
+                          ) -> _ResizeClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResizeClusterResponseSuccess
+
+      interface _RestoreFromClusterSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestoreFromClusterSnapshotResult]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#restore_from_cluster_snapshot-instance_method
+      def restore_from_cluster_snapshot: (
+                                           cluster_identifier: ::String,
+                                           ?snapshot_identifier: ::String,
+                                           ?snapshot_arn: ::String,
+                                           ?snapshot_cluster_identifier: ::String,
+                                           ?port: ::Integer,
+                                           ?availability_zone: ::String,
+                                           ?allow_version_upgrade: bool,
+                                           ?cluster_subnet_group_name: ::String,
+                                           ?publicly_accessible: bool,
+                                           ?owner_account: ::String,
+                                           ?hsm_client_certificate_identifier: ::String,
+                                           ?hsm_configuration_identifier: ::String,
+                                           ?elastic_ip: ::String,
+                                           ?cluster_parameter_group_name: ::String,
+                                           ?cluster_security_groups: Array[::String],
+                                           ?vpc_security_group_ids: Array[::String],
+                                           ?preferred_maintenance_window: ::String,
+                                           ?automated_snapshot_retention_period: ::Integer,
+                                           ?manual_snapshot_retention_period: ::Integer,
+                                           ?kms_key_id: ::String,
+                                           ?node_type: ::String,
+                                           ?enhanced_vpc_routing: bool,
+                                           ?additional_info: ::String,
+                                           ?iam_roles: Array[::String],
+                                           ?maintenance_track_name: ::String,
+                                           ?snapshot_schedule_identifier: ::String,
+                                           ?number_of_nodes: ::Integer,
+                                           ?availability_zone_relocation: bool,
+                                           ?aqua_configuration_status: ("enabled" | "disabled" | "auto"),
+                                           ?default_iam_role_arn: ::String,
+                                           ?reserved_node_id: ::String,
+                                           ?target_reserved_node_offering_id: ::String,
+                                           ?encrypted: bool,
+                                           ?manage_master_password: bool,
+                                           ?master_password_secret_kms_key_id: ::String,
+                                           ?ip_address_type: ::String,
+                                           ?multi_az: bool
+                                         ) -> _RestoreFromClusterSnapshotResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreFromClusterSnapshotResponseSuccess
+
+      interface _RestoreTableFromClusterSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestoreTableFromClusterSnapshotResult]
+        def table_restore_status: () -> Types::TableRestoreStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#restore_table_from_cluster_snapshot-instance_method
+      def restore_table_from_cluster_snapshot: (
+                                                 cluster_identifier: ::String,
+                                                 snapshot_identifier: ::String,
+                                                 source_database_name: ::String,
+                                                 ?source_schema_name: ::String,
+                                                 source_table_name: ::String,
+                                                 ?target_database_name: ::String,
+                                                 ?target_schema_name: ::String,
+                                                 new_table_name: ::String,
+                                                 ?enable_case_sensitive_identifier: bool
+                                               ) -> _RestoreTableFromClusterSnapshotResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreTableFromClusterSnapshotResponseSuccess
+
+      interface _ResumeClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResumeClusterResult]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#resume_cluster-instance_method
+      def resume_cluster: (
+                            cluster_identifier: ::String
+                          ) -> _ResumeClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResumeClusterResponseSuccess
+
+      interface _RevokeClusterSecurityGroupIngressResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RevokeClusterSecurityGroupIngressResult]
+        def cluster_security_group: () -> Types::ClusterSecurityGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#revoke_cluster_security_group_ingress-instance_method
+      def revoke_cluster_security_group_ingress: (
+                                                   cluster_security_group_name: ::String,
+                                                   ?cidrip: ::String,
+                                                   ?ec2_security_group_name: ::String,
+                                                   ?ec2_security_group_owner_id: ::String
+                                                 ) -> _RevokeClusterSecurityGroupIngressResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RevokeClusterSecurityGroupIngressResponseSuccess
+
+      interface _RevokeEndpointAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EndpointAuthorization]
+        def grantor: () -> ::String
+        def grantee: () -> ::String
+        def cluster_identifier: () -> ::String
+        def authorize_time: () -> ::Time
+        def cluster_status: () -> ::String
+        def status: () -> ("Authorized" | "Revoking")
+        def allowed_all_vp_cs: () -> bool
+        def allowed_vp_cs: () -> ::Array[::String]
+        def endpoint_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#revoke_endpoint_access-instance_method
+      def revoke_endpoint_access: (
+                                    ?cluster_identifier: ::String,
+                                    ?account: ::String,
+                                    ?vpc_ids: Array[::String],
+                                    ?force: bool
+                                  ) -> _RevokeEndpointAccessResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RevokeEndpointAccessResponseSuccess
+
+      interface _RevokeSnapshotAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RevokeSnapshotAccessResult]
+        def snapshot: () -> Types::Snapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#revoke_snapshot_access-instance_method
+      def revoke_snapshot_access: (
+                                    ?snapshot_identifier: ::String,
+                                    ?snapshot_arn: ::String,
+                                    ?snapshot_cluster_identifier: ::String,
+                                    account_with_restore_access: ::String
+                                  ) -> _RevokeSnapshotAccessResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RevokeSnapshotAccessResponseSuccess
+
+      interface _RotateEncryptionKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RotateEncryptionKeyResult]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#rotate_encryption_key-instance_method
+      def rotate_encryption_key: (
+                                   cluster_identifier: ::String
+                                 ) -> _RotateEncryptionKeyResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RotateEncryptionKeyResponseSuccess
+
+      interface _UpdatePartnerStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PartnerIntegrationOutputMessage]
+        def database_name: () -> ::String
+        def partner_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#update_partner_status-instance_method
+      def update_partner_status: (
+                                   account_id: ::String,
+                                   cluster_identifier: ::String,
+                                   database_name: ::String,
+                                   partner_name: ::String,
+                                   status: ("Active" | "Inactive" | "RuntimeFailure" | "ConnectionFailure"),
+                                   ?status_message: ::String
+                                 ) -> _UpdatePartnerStatusResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePartnerStatusResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#wait_until-instance_method
+      def wait_until: (:cluster_available waiter_name, 
+                    ?cluster_identifier: ::String,
+                    ?max_records: ::Integer,
+                    ?marker: ::String,
+                    ?tag_keys: Array[::String],
+                    ?tag_values: Array[::String]
+                  ) -> Client::_DescribeClustersResponseSuccess
+                    | (:cluster_available waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeClustersResponseSuccess
+                    | (:cluster_deleted waiter_name, 
+                    ?cluster_identifier: ::String,
+                    ?max_records: ::Integer,
+                    ?marker: ::String,
+                    ?tag_keys: Array[::String],
+                    ?tag_values: Array[::String]
+                  ) -> Client::_DescribeClustersResponseSuccess
+                    | (:cluster_deleted waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeClustersResponseSuccess
+                    | (:cluster_restored waiter_name, 
+                    ?cluster_identifier: ::String,
+                    ?max_records: ::Integer,
+                    ?marker: ::String,
+                    ?tag_keys: Array[::String],
+                    ?tag_values: Array[::String]
+                  ) -> Client::_DescribeClustersResponseSuccess
+                    | (:cluster_restored waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeClustersResponseSuccess
+                    | (:snapshot_available waiter_name, 
+                    ?cluster_identifier: ::String,
+                    ?snapshot_identifier: ::String,
+                    ?snapshot_arn: ::String,
+                    ?snapshot_type: ::String,
+                    ?start_time: ::Time,
+                    ?end_time: ::Time,
+                    ?max_records: ::Integer,
+                    ?marker: ::String,
+                    ?owner_account: ::String,
+                    ?tag_keys: Array[::String],
+                    ?tag_values: Array[::String],
+                    ?cluster_exists: bool,
+                    ?sorting_entities: Array[
+                      {
+                        attribute: ("SOURCE_TYPE" | "TOTAL_SIZE" | "CREATE_TIME"),
+                        sort_order: ("ASC" | "DESC")?
+                      },
+                    ]
+                  ) -> Client::_DescribeClusterSnapshotsResponseSuccess
+                    | (:snapshot_available waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeClusterSnapshotsResponseSuccess
+    end
+  end
+end
+

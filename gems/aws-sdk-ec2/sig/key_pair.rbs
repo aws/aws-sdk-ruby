@@ -1,0 +1,54 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EC2
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/KeyPair.html
+    class KeyPair
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/KeyPair.html#initialize-instance_method
+      def initialize: (String name, Hash[Symbol, untyped] options) -> void
+                    | (name: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/KeyPair.html#name-instance_method
+      def name: () -> String
+      alias key_name name
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/KeyPair.html#key_fingerprint-instance_method
+      def key_fingerprint: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/KeyPair.html#key_material-instance_method
+      def key_material: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/KeyPair.html#key_pair_id-instance_method
+      def key_pair_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/KeyPair.html#tags-instance_method
+      def tags: () -> ::Array[Types::Tag]
+
+      def client: () -> Client
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/KeyPair.html#data-instance_method
+      def data: () -> Types::KeyPair
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/KeyPair.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/KeyPair.html#delete-instance_method
+      def delete: (
+                    ?key_pair_id: ::String,
+                    ?dry_run: bool
+                  ) -> Types::DeleteKeyPairResult
+                | (?Hash[Symbol, untyped]) -> Types::DeleteKeyPairResult
+
+      class Collection < ::Aws::Resources::Collection[KeyPair]
+      end
+    end
+  end
+end

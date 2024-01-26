@@ -1,0 +1,454 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ComprehendMedical
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComprehendMedical/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _DescribeEntitiesDetectionV2JobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEntitiesDetectionV2JobResponse]
+        def comprehend_medical_async_job_properties: () -> Types::ComprehendMedicalAsyncJobProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComprehendMedical/Client.html#describe_entities_detection_v2_job-instance_method
+      def describe_entities_detection_v2_job: (
+                                                job_id: ::String
+                                              ) -> _DescribeEntitiesDetectionV2JobResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEntitiesDetectionV2JobResponseSuccess
+
+      interface _DescribeICD10CMInferenceJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeICD10CMInferenceJobResponse]
+        def comprehend_medical_async_job_properties: () -> Types::ComprehendMedicalAsyncJobProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComprehendMedical/Client.html#describe_icd10cm_inference_job-instance_method
+      def describe_icd10cm_inference_job: (
+                                            job_id: ::String
+                                          ) -> _DescribeICD10CMInferenceJobResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeICD10CMInferenceJobResponseSuccess
+
+      interface _DescribePHIDetectionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePHIDetectionJobResponse]
+        def comprehend_medical_async_job_properties: () -> Types::ComprehendMedicalAsyncJobProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComprehendMedical/Client.html#describe_phi_detection_job-instance_method
+      def describe_phi_detection_job: (
+                                        job_id: ::String
+                                      ) -> _DescribePHIDetectionJobResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePHIDetectionJobResponseSuccess
+
+      interface _DescribeRxNormInferenceJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRxNormInferenceJobResponse]
+        def comprehend_medical_async_job_properties: () -> Types::ComprehendMedicalAsyncJobProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComprehendMedical/Client.html#describe_rx_norm_inference_job-instance_method
+      def describe_rx_norm_inference_job: (
+                                            job_id: ::String
+                                          ) -> _DescribeRxNormInferenceJobResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRxNormInferenceJobResponseSuccess
+
+      interface _DescribeSNOMEDCTInferenceJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSNOMEDCTInferenceJobResponse]
+        def comprehend_medical_async_job_properties: () -> Types::ComprehendMedicalAsyncJobProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComprehendMedical/Client.html#describe_snomedct_inference_job-instance_method
+      def describe_snomedct_inference_job: (
+                                             job_id: ::String
+                                           ) -> _DescribeSNOMEDCTInferenceJobResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSNOMEDCTInferenceJobResponseSuccess
+
+      interface _DetectEntitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetectEntitiesResponse]
+        def entities: () -> ::Array[Types::Entity]
+        def unmapped_attributes: () -> ::Array[Types::UnmappedAttribute]
+        def pagination_token: () -> ::String
+        def model_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComprehendMedical/Client.html#detect_entities-instance_method
+      def detect_entities: (
+                             text: ::String
+                           ) -> _DetectEntitiesResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetectEntitiesResponseSuccess
+
+      interface _DetectEntitiesV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetectEntitiesV2Response]
+        def entities: () -> ::Array[Types::Entity]
+        def unmapped_attributes: () -> ::Array[Types::UnmappedAttribute]
+        def pagination_token: () -> ::String
+        def model_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComprehendMedical/Client.html#detect_entities_v2-instance_method
+      def detect_entities_v2: (
+                                text: ::String
+                              ) -> _DetectEntitiesV2ResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetectEntitiesV2ResponseSuccess
+
+      interface _DetectPHIResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetectPHIResponse]
+        def entities: () -> ::Array[Types::Entity]
+        def pagination_token: () -> ::String
+        def model_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComprehendMedical/Client.html#detect_phi-instance_method
+      def detect_phi: (
+                        text: ::String
+                      ) -> _DetectPHIResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetectPHIResponseSuccess
+
+      interface _InferICD10CMResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InferICD10CMResponse]
+        def entities: () -> ::Array[Types::ICD10CMEntity]
+        def pagination_token: () -> ::String
+        def model_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComprehendMedical/Client.html#infer_icd10cm-instance_method
+      def infer_icd10cm: (
+                           text: ::String
+                         ) -> _InferICD10CMResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InferICD10CMResponseSuccess
+
+      interface _InferRxNormResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InferRxNormResponse]
+        def entities: () -> ::Array[Types::RxNormEntity]
+        def pagination_token: () -> ::String
+        def model_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComprehendMedical/Client.html#infer_rx_norm-instance_method
+      def infer_rx_norm: (
+                           text: ::String
+                         ) -> _InferRxNormResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InferRxNormResponseSuccess
+
+      interface _InferSNOMEDCTResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InferSNOMEDCTResponse]
+        def entities: () -> ::Array[Types::SNOMEDCTEntity]
+        def pagination_token: () -> ::String
+        def model_version: () -> ::String
+        def snomedct_details: () -> Types::SNOMEDCTDetails
+        def characters: () -> Types::Characters
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComprehendMedical/Client.html#infer_snomedct-instance_method
+      def infer_snomedct: (
+                            text: ::String
+                          ) -> _InferSNOMEDCTResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InferSNOMEDCTResponseSuccess
+
+      interface _ListEntitiesDetectionV2JobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEntitiesDetectionV2JobsResponse]
+        def comprehend_medical_async_job_properties_list: () -> ::Array[Types::ComprehendMedicalAsyncJobProperties]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComprehendMedical/Client.html#list_entities_detection_v2_jobs-instance_method
+      def list_entities_detection_v2_jobs: (
+                                             ?filter: {
+                                               job_name: ::String?,
+                                               job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "PARTIAL_SUCCESS" | "FAILED" | "STOP_REQUESTED" | "STOPPED")?,
+                                               submit_time_before: ::Time?,
+                                               submit_time_after: ::Time?
+                                             },
+                                             ?next_token: ::String,
+                                             ?max_results: ::Integer
+                                           ) -> _ListEntitiesDetectionV2JobsResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEntitiesDetectionV2JobsResponseSuccess
+
+      interface _ListICD10CMInferenceJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListICD10CMInferenceJobsResponse]
+        def comprehend_medical_async_job_properties_list: () -> ::Array[Types::ComprehendMedicalAsyncJobProperties]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComprehendMedical/Client.html#list_icd10cm_inference_jobs-instance_method
+      def list_icd10cm_inference_jobs: (
+                                         ?filter: {
+                                           job_name: ::String?,
+                                           job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "PARTIAL_SUCCESS" | "FAILED" | "STOP_REQUESTED" | "STOPPED")?,
+                                           submit_time_before: ::Time?,
+                                           submit_time_after: ::Time?
+                                         },
+                                         ?next_token: ::String,
+                                         ?max_results: ::Integer
+                                       ) -> _ListICD10CMInferenceJobsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListICD10CMInferenceJobsResponseSuccess
+
+      interface _ListPHIDetectionJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPHIDetectionJobsResponse]
+        def comprehend_medical_async_job_properties_list: () -> ::Array[Types::ComprehendMedicalAsyncJobProperties]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComprehendMedical/Client.html#list_phi_detection_jobs-instance_method
+      def list_phi_detection_jobs: (
+                                     ?filter: {
+                                       job_name: ::String?,
+                                       job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "PARTIAL_SUCCESS" | "FAILED" | "STOP_REQUESTED" | "STOPPED")?,
+                                       submit_time_before: ::Time?,
+                                       submit_time_after: ::Time?
+                                     },
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _ListPHIDetectionJobsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPHIDetectionJobsResponseSuccess
+
+      interface _ListRxNormInferenceJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRxNormInferenceJobsResponse]
+        def comprehend_medical_async_job_properties_list: () -> ::Array[Types::ComprehendMedicalAsyncJobProperties]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComprehendMedical/Client.html#list_rx_norm_inference_jobs-instance_method
+      def list_rx_norm_inference_jobs: (
+                                         ?filter: {
+                                           job_name: ::String?,
+                                           job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "PARTIAL_SUCCESS" | "FAILED" | "STOP_REQUESTED" | "STOPPED")?,
+                                           submit_time_before: ::Time?,
+                                           submit_time_after: ::Time?
+                                         },
+                                         ?next_token: ::String,
+                                         ?max_results: ::Integer
+                                       ) -> _ListRxNormInferenceJobsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRxNormInferenceJobsResponseSuccess
+
+      interface _ListSNOMEDCTInferenceJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSNOMEDCTInferenceJobsResponse]
+        def comprehend_medical_async_job_properties_list: () -> ::Array[Types::ComprehendMedicalAsyncJobProperties]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComprehendMedical/Client.html#list_snomedct_inference_jobs-instance_method
+      def list_snomedct_inference_jobs: (
+                                          ?filter: {
+                                            job_name: ::String?,
+                                            job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "PARTIAL_SUCCESS" | "FAILED" | "STOP_REQUESTED" | "STOPPED")?,
+                                            submit_time_before: ::Time?,
+                                            submit_time_after: ::Time?
+                                          },
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListSNOMEDCTInferenceJobsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSNOMEDCTInferenceJobsResponseSuccess
+
+      interface _StartEntitiesDetectionV2JobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartEntitiesDetectionV2JobResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComprehendMedical/Client.html#start_entities_detection_v2_job-instance_method
+      def start_entities_detection_v2_job: (
+                                             input_data_config: {
+                                               s3_bucket: ::String,
+                                               s3_key: ::String?
+                                             },
+                                             output_data_config: {
+                                               s3_bucket: ::String,
+                                               s3_key: ::String?
+                                             },
+                                             data_access_role_arn: ::String,
+                                             ?job_name: ::String,
+                                             ?client_request_token: ::String,
+                                             ?kms_key: ::String,
+                                             language_code: ("en")
+                                           ) -> _StartEntitiesDetectionV2JobResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartEntitiesDetectionV2JobResponseSuccess
+
+      interface _StartICD10CMInferenceJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartICD10CMInferenceJobResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComprehendMedical/Client.html#start_icd10cm_inference_job-instance_method
+      def start_icd10cm_inference_job: (
+                                         input_data_config: {
+                                           s3_bucket: ::String,
+                                           s3_key: ::String?
+                                         },
+                                         output_data_config: {
+                                           s3_bucket: ::String,
+                                           s3_key: ::String?
+                                         },
+                                         data_access_role_arn: ::String,
+                                         ?job_name: ::String,
+                                         ?client_request_token: ::String,
+                                         ?kms_key: ::String,
+                                         language_code: ("en")
+                                       ) -> _StartICD10CMInferenceJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartICD10CMInferenceJobResponseSuccess
+
+      interface _StartPHIDetectionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartPHIDetectionJobResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComprehendMedical/Client.html#start_phi_detection_job-instance_method
+      def start_phi_detection_job: (
+                                     input_data_config: {
+                                       s3_bucket: ::String,
+                                       s3_key: ::String?
+                                     },
+                                     output_data_config: {
+                                       s3_bucket: ::String,
+                                       s3_key: ::String?
+                                     },
+                                     data_access_role_arn: ::String,
+                                     ?job_name: ::String,
+                                     ?client_request_token: ::String,
+                                     ?kms_key: ::String,
+                                     language_code: ("en")
+                                   ) -> _StartPHIDetectionJobResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartPHIDetectionJobResponseSuccess
+
+      interface _StartRxNormInferenceJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartRxNormInferenceJobResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComprehendMedical/Client.html#start_rx_norm_inference_job-instance_method
+      def start_rx_norm_inference_job: (
+                                         input_data_config: {
+                                           s3_bucket: ::String,
+                                           s3_key: ::String?
+                                         },
+                                         output_data_config: {
+                                           s3_bucket: ::String,
+                                           s3_key: ::String?
+                                         },
+                                         data_access_role_arn: ::String,
+                                         ?job_name: ::String,
+                                         ?client_request_token: ::String,
+                                         ?kms_key: ::String,
+                                         language_code: ("en")
+                                       ) -> _StartRxNormInferenceJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartRxNormInferenceJobResponseSuccess
+
+      interface _StartSNOMEDCTInferenceJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartSNOMEDCTInferenceJobResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComprehendMedical/Client.html#start_snomedct_inference_job-instance_method
+      def start_snomedct_inference_job: (
+                                          input_data_config: {
+                                            s3_bucket: ::String,
+                                            s3_key: ::String?
+                                          },
+                                          output_data_config: {
+                                            s3_bucket: ::String,
+                                            s3_key: ::String?
+                                          },
+                                          data_access_role_arn: ::String,
+                                          ?job_name: ::String,
+                                          ?client_request_token: ::String,
+                                          ?kms_key: ::String,
+                                          language_code: ("en")
+                                        ) -> _StartSNOMEDCTInferenceJobResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartSNOMEDCTInferenceJobResponseSuccess
+
+      interface _StopEntitiesDetectionV2JobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopEntitiesDetectionV2JobResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComprehendMedical/Client.html#stop_entities_detection_v2_job-instance_method
+      def stop_entities_detection_v2_job: (
+                                            job_id: ::String
+                                          ) -> _StopEntitiesDetectionV2JobResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopEntitiesDetectionV2JobResponseSuccess
+
+      interface _StopICD10CMInferenceJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopICD10CMInferenceJobResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComprehendMedical/Client.html#stop_icd10cm_inference_job-instance_method
+      def stop_icd10cm_inference_job: (
+                                        job_id: ::String
+                                      ) -> _StopICD10CMInferenceJobResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopICD10CMInferenceJobResponseSuccess
+
+      interface _StopPHIDetectionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopPHIDetectionJobResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComprehendMedical/Client.html#stop_phi_detection_job-instance_method
+      def stop_phi_detection_job: (
+                                    job_id: ::String
+                                  ) -> _StopPHIDetectionJobResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopPHIDetectionJobResponseSuccess
+
+      interface _StopRxNormInferenceJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopRxNormInferenceJobResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComprehendMedical/Client.html#stop_rx_norm_inference_job-instance_method
+      def stop_rx_norm_inference_job: (
+                                        job_id: ::String
+                                      ) -> _StopRxNormInferenceJobResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopRxNormInferenceJobResponseSuccess
+
+      interface _StopSNOMEDCTInferenceJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopSNOMEDCTInferenceJobResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComprehendMedical/Client.html#stop_snomedct_inference_job-instance_method
+      def stop_snomedct_inference_job: (
+                                         job_id: ::String
+                                       ) -> _StopSNOMEDCTInferenceJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopSNOMEDCTInferenceJobResponseSuccess
+    end
+  end
+end
+

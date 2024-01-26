@@ -1,0 +1,856 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Batch
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CancelJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelJobResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#cancel_job-instance_method
+      def cancel_job: (
+                        job_id: ::String,
+                        reason: ::String
+                      ) -> _CancelJobResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelJobResponseSuccess
+
+      interface _CreateComputeEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateComputeEnvironmentResponse]
+        def compute_environment_name: () -> ::String
+        def compute_environment_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#create_compute_environment-instance_method
+      def create_compute_environment: (
+                                        compute_environment_name: ::String,
+                                        type: ("MANAGED" | "UNMANAGED"),
+                                        ?state: ("ENABLED" | "DISABLED"),
+                                        ?unmanagedv_cpus: ::Integer,
+                                        ?compute_resources: {
+                                          type: ("EC2" | "SPOT" | "FARGATE" | "FARGATE_SPOT"),
+                                          allocation_strategy: ("BEST_FIT" | "BEST_FIT_PROGRESSIVE" | "SPOT_CAPACITY_OPTIMIZED" | "SPOT_PRICE_CAPACITY_OPTIMIZED")?,
+                                          minv_cpus: ::Integer?,
+                                          maxv_cpus: ::Integer,
+                                          desiredv_cpus: ::Integer?,
+                                          instance_types: Array[::String]?,
+                                          image_id: ::String?,
+                                          subnets: Array[::String],
+                                          security_group_ids: Array[::String]?,
+                                          ec2_key_pair: ::String?,
+                                          instance_role: ::String?,
+                                          tags: Hash[::String, ::String]?,
+                                          placement_group: ::String?,
+                                          bid_percentage: ::Integer?,
+                                          spot_iam_fleet_role: ::String?,
+                                          launch_template: {
+                                            launch_template_id: ::String?,
+                                            launch_template_name: ::String?,
+                                            version: ::String?
+                                          }?,
+                                          ec2_configuration: Array[
+                                            {
+                                              image_type: ::String,
+                                              image_id_override: ::String?,
+                                              image_kubernetes_version: ::String?
+                                            },
+                                          ]?
+                                        },
+                                        ?service_role: ::String,
+                                        ?tags: Hash[::String, ::String],
+                                        ?eks_configuration: {
+                                          eks_cluster_arn: ::String,
+                                          kubernetes_namespace: ::String
+                                        }
+                                      ) -> _CreateComputeEnvironmentResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateComputeEnvironmentResponseSuccess
+
+      interface _CreateJobQueueResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateJobQueueResponse]
+        def job_queue_name: () -> ::String
+        def job_queue_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#create_job_queue-instance_method
+      def create_job_queue: (
+                              job_queue_name: ::String,
+                              ?state: ("ENABLED" | "DISABLED"),
+                              ?scheduling_policy_arn: ::String,
+                              priority: ::Integer,
+                              compute_environment_order: Array[
+                                {
+                                  order: ::Integer,
+                                  compute_environment: ::String
+                                },
+                              ],
+                              ?tags: Hash[::String, ::String]
+                            ) -> _CreateJobQueueResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateJobQueueResponseSuccess
+
+      interface _CreateSchedulingPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSchedulingPolicyResponse]
+        def name: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#create_scheduling_policy-instance_method
+      def create_scheduling_policy: (
+                                      name: ::String,
+                                      ?fairshare_policy: {
+                                        share_decay_seconds: ::Integer?,
+                                        compute_reservation: ::Integer?,
+                                        share_distribution: Array[
+                                          {
+                                            share_identifier: ::String,
+                                            weight_factor: ::Float?
+                                          },
+                                        ]?
+                                      },
+                                      ?tags: Hash[::String, ::String]
+                                    ) -> _CreateSchedulingPolicyResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSchedulingPolicyResponseSuccess
+
+      interface _DeleteComputeEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteComputeEnvironmentResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#delete_compute_environment-instance_method
+      def delete_compute_environment: (
+                                        compute_environment: ::String
+                                      ) -> _DeleteComputeEnvironmentResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteComputeEnvironmentResponseSuccess
+
+      interface _DeleteJobQueueResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteJobQueueResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#delete_job_queue-instance_method
+      def delete_job_queue: (
+                              job_queue: ::String
+                            ) -> _DeleteJobQueueResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteJobQueueResponseSuccess
+
+      interface _DeleteSchedulingPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSchedulingPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#delete_scheduling_policy-instance_method
+      def delete_scheduling_policy: (
+                                      arn: ::String
+                                    ) -> _DeleteSchedulingPolicyResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSchedulingPolicyResponseSuccess
+
+      interface _DeregisterJobDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterJobDefinitionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#deregister_job_definition-instance_method
+      def deregister_job_definition: (
+                                       job_definition: ::String
+                                     ) -> _DeregisterJobDefinitionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterJobDefinitionResponseSuccess
+
+      interface _DescribeComputeEnvironmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeComputeEnvironmentsResponse]
+        def compute_environments: () -> ::Array[Types::ComputeEnvironmentDetail]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#describe_compute_environments-instance_method
+      def describe_compute_environments: (
+                                           ?compute_environments: Array[::String],
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String
+                                         ) -> _DescribeComputeEnvironmentsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeComputeEnvironmentsResponseSuccess
+
+      interface _DescribeJobDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeJobDefinitionsResponse]
+        def job_definitions: () -> ::Array[Types::JobDefinition]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#describe_job_definitions-instance_method
+      def describe_job_definitions: (
+                                      ?job_definitions: Array[::String],
+                                      ?max_results: ::Integer,
+                                      ?job_definition_name: ::String,
+                                      ?status: ::String,
+                                      ?next_token: ::String
+                                    ) -> _DescribeJobDefinitionsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeJobDefinitionsResponseSuccess
+
+      interface _DescribeJobQueuesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeJobQueuesResponse]
+        def job_queues: () -> ::Array[Types::JobQueueDetail]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#describe_job_queues-instance_method
+      def describe_job_queues: (
+                                 ?job_queues: Array[::String],
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _DescribeJobQueuesResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeJobQueuesResponseSuccess
+
+      interface _DescribeJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeJobsResponse]
+        def jobs: () -> ::Array[Types::JobDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#describe_jobs-instance_method
+      def describe_jobs: (
+                           jobs: Array[::String]
+                         ) -> _DescribeJobsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeJobsResponseSuccess
+
+      interface _DescribeSchedulingPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSchedulingPoliciesResponse]
+        def scheduling_policies: () -> ::Array[Types::SchedulingPolicyDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#describe_scheduling_policies-instance_method
+      def describe_scheduling_policies: (
+                                          arns: Array[::String]
+                                        ) -> _DescribeSchedulingPoliciesResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSchedulingPoliciesResponseSuccess
+
+      interface _ListJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListJobsResponse]
+        def job_summary_list: () -> ::Array[Types::JobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#list_jobs-instance_method
+      def list_jobs: (
+                       ?job_queue: ::String,
+                       ?array_job_id: ::String,
+                       ?multi_node_job_id: ::String,
+                       ?job_status: ("SUBMITTED" | "PENDING" | "RUNNABLE" | "STARTING" | "RUNNING" | "SUCCEEDED" | "FAILED"),
+                       ?max_results: ::Integer,
+                       ?next_token: ::String,
+                       ?filters: Array[
+                         {
+                           name: ::String?,
+                           values: Array[::String]?
+                         },
+                       ]
+                     ) -> _ListJobsResponseSuccess
+                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListJobsResponseSuccess
+
+      interface _ListSchedulingPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSchedulingPoliciesResponse]
+        def scheduling_policies: () -> ::Array[Types::SchedulingPolicyListingDetail]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#list_scheduling_policies-instance_method
+      def list_scheduling_policies: (
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListSchedulingPoliciesResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSchedulingPoliciesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _RegisterJobDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterJobDefinitionResponse]
+        def job_definition_name: () -> ::String
+        def job_definition_arn: () -> ::String
+        def revision: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#register_job_definition-instance_method
+      def register_job_definition: (
+                                     job_definition_name: ::String,
+                                     type: ("container" | "multinode"),
+                                     ?parameters: Hash[::String, ::String],
+                                     ?scheduling_priority: ::Integer,
+                                     ?container_properties: {
+                                       image: ::String?,
+                                       vcpus: ::Integer?,
+                                       memory: ::Integer?,
+                                       command: Array[::String]?,
+                                       job_role_arn: ::String?,
+                                       execution_role_arn: ::String?,
+                                       volumes: Array[
+                                         {
+                                           host: {
+                                             source_path: ::String?
+                                           }?,
+                                           name: ::String?,
+                                           efs_volume_configuration: {
+                                             file_system_id: ::String,
+                                             root_directory: ::String?,
+                                             transit_encryption: ("ENABLED" | "DISABLED")?,
+                                             transit_encryption_port: ::Integer?,
+                                             authorization_config: {
+                                               access_point_id: ::String?,
+                                               iam: ("ENABLED" | "DISABLED")?
+                                             }?
+                                           }?
+                                         },
+                                       ]?,
+                                       environment: Array[
+                                         {
+                                           name: ::String?,
+                                           value: ::String?
+                                         },
+                                       ]?,
+                                       mount_points: Array[
+                                         {
+                                           container_path: ::String?,
+                                           read_only: bool?,
+                                           source_volume: ::String?
+                                         },
+                                       ]?,
+                                       readonly_root_filesystem: bool?,
+                                       privileged: bool?,
+                                       ulimits: Array[
+                                         {
+                                           hard_limit: ::Integer,
+                                           name: ::String,
+                                           soft_limit: ::Integer
+                                         },
+                                       ]?,
+                                       user: ::String?,
+                                       instance_type: ::String?,
+                                       resource_requirements: Array[
+                                         {
+                                           value: ::String,
+                                           type: ("GPU" | "VCPU" | "MEMORY")
+                                         },
+                                       ]?,
+                                       linux_parameters: {
+                                         devices: Array[
+                                           {
+                                             host_path: ::String,
+                                             container_path: ::String?,
+                                             permissions: Array[("READ" | "WRITE" | "MKNOD")]?
+                                           },
+                                         ]?,
+                                         init_process_enabled: bool?,
+                                         shared_memory_size: ::Integer?,
+                                         tmpfs: Array[
+                                           {
+                                             container_path: ::String,
+                                             size: ::Integer,
+                                             mount_options: Array[::String]?
+                                           },
+                                         ]?,
+                                         max_swap: ::Integer?,
+                                         swappiness: ::Integer?
+                                       }?,
+                                       log_configuration: {
+                                         log_driver: ("json-file" | "syslog" | "journald" | "gelf" | "fluentd" | "awslogs" | "splunk"),
+                                         options: Hash[::String, ::String]?,
+                                         secret_options: Array[
+                                           {
+                                             name: ::String,
+                                             value_from: ::String
+                                           },
+                                         ]?
+                                       }?,
+                                       secrets: Array[
+                                         {
+                                           name: ::String,
+                                           value_from: ::String
+                                         },
+                                       ]?,
+                                       network_configuration: {
+                                         assign_public_ip: ("ENABLED" | "DISABLED")?
+                                       }?,
+                                       fargate_platform_configuration: {
+                                         platform_version: ::String?
+                                       }?,
+                                       ephemeral_storage: {
+                                         size_in_gi_b: ::Integer
+                                       }?,
+                                       runtime_platform: {
+                                         operating_system_family: ::String?,
+                                         cpu_architecture: ::String?
+                                       }?
+                                     },
+                                     ?node_properties: {
+                                       num_nodes: ::Integer,
+                                       main_node: ::Integer,
+                                       node_range_properties: Array[
+                                         {
+                                           target_nodes: ::String,
+                                           container: {
+                                             image: ::String?,
+                                             vcpus: ::Integer?,
+                                             memory: ::Integer?,
+                                             command: Array[::String]?,
+                                             job_role_arn: ::String?,
+                                             execution_role_arn: ::String?,
+                                             volumes: Array[
+                                               {
+                                                 host: {
+                                                   source_path: ::String?
+                                                 }?,
+                                                 name: ::String?,
+                                                 efs_volume_configuration: {
+                                                   file_system_id: ::String,
+                                                   root_directory: ::String?,
+                                                   transit_encryption: ("ENABLED" | "DISABLED")?,
+                                                   transit_encryption_port: ::Integer?,
+                                                   authorization_config: {
+                                                     access_point_id: ::String?,
+                                                     iam: ("ENABLED" | "DISABLED")?
+                                                   }?
+                                                 }?
+                                               },
+                                             ]?,
+                                             environment: Array[
+                                               {
+                                                 name: ::String?,
+                                                 value: ::String?
+                                               },
+                                             ]?,
+                                             mount_points: Array[
+                                               {
+                                                 container_path: ::String?,
+                                                 read_only: bool?,
+                                                 source_volume: ::String?
+                                               },
+                                             ]?,
+                                             readonly_root_filesystem: bool?,
+                                             privileged: bool?,
+                                             ulimits: Array[
+                                               {
+                                                 hard_limit: ::Integer,
+                                                 name: ::String,
+                                                 soft_limit: ::Integer
+                                               },
+                                             ]?,
+                                             user: ::String?,
+                                             instance_type: ::String?,
+                                             resource_requirements: Array[
+                                               {
+                                                 value: ::String,
+                                                 type: ("GPU" | "VCPU" | "MEMORY")
+                                               },
+                                             ]?,
+                                             linux_parameters: {
+                                               devices: Array[
+                                                 {
+                                                   host_path: ::String,
+                                                   container_path: ::String?,
+                                                   permissions: Array[("READ" | "WRITE" | "MKNOD")]?
+                                                 },
+                                               ]?,
+                                               init_process_enabled: bool?,
+                                               shared_memory_size: ::Integer?,
+                                               tmpfs: Array[
+                                                 {
+                                                   container_path: ::String,
+                                                   size: ::Integer,
+                                                   mount_options: Array[::String]?
+                                                 },
+                                               ]?,
+                                               max_swap: ::Integer?,
+                                               swappiness: ::Integer?
+                                             }?,
+                                             log_configuration: {
+                                               log_driver: ("json-file" | "syslog" | "journald" | "gelf" | "fluentd" | "awslogs" | "splunk"),
+                                               options: Hash[::String, ::String]?,
+                                               secret_options: Array[
+                                                 {
+                                                   name: ::String,
+                                                   value_from: ::String
+                                                 },
+                                               ]?
+                                             }?,
+                                             secrets: Array[
+                                               {
+                                                 name: ::String,
+                                                 value_from: ::String
+                                               },
+                                             ]?,
+                                             network_configuration: {
+                                               assign_public_ip: ("ENABLED" | "DISABLED")?
+                                             }?,
+                                             fargate_platform_configuration: {
+                                               platform_version: ::String?
+                                             }?,
+                                             ephemeral_storage: {
+                                               size_in_gi_b: ::Integer
+                                             }?,
+                                             runtime_platform: {
+                                               operating_system_family: ::String?,
+                                               cpu_architecture: ::String?
+                                             }?
+                                           }?
+                                         },
+                                       ]
+                                     },
+                                     ?retry_strategy: {
+                                       attempts: ::Integer?,
+                                       evaluate_on_exit: Array[
+                                         {
+                                           on_status_reason: ::String?,
+                                           on_reason: ::String?,
+                                           on_exit_code: ::String?,
+                                           action: ("RETRY" | "EXIT")
+                                         },
+                                       ]?
+                                     },
+                                     ?propagate_tags: bool,
+                                     ?timeout: {
+                                       attempt_duration_seconds: ::Integer?
+                                     },
+                                     ?tags: Hash[::String, ::String],
+                                     ?platform_capabilities: Array[("EC2" | "FARGATE")],
+                                     ?eks_properties: {
+                                       pod_properties: {
+                                         service_account_name: ::String?,
+                                         host_network: bool?,
+                                         dns_policy: ::String?,
+                                         containers: Array[
+                                           {
+                                             name: ::String?,
+                                             image: ::String,
+                                             image_pull_policy: ::String?,
+                                             command: Array[::String]?,
+                                             args: Array[::String]?,
+                                             env: Array[
+                                               {
+                                                 name: ::String,
+                                                 value: ::String?
+                                               },
+                                             ]?,
+                                             resources: {
+                                               limits: Hash[::String, ::String]?,
+                                               requests: Hash[::String, ::String]?
+                                             }?,
+                                             volume_mounts: Array[
+                                               {
+                                                 name: ::String?,
+                                                 mount_path: ::String?,
+                                                 read_only: bool?
+                                               },
+                                             ]?,
+                                             security_context: {
+                                               run_as_user: ::Integer?,
+                                               run_as_group: ::Integer?,
+                                               privileged: bool?,
+                                               read_only_root_filesystem: bool?,
+                                               run_as_non_root: bool?
+                                             }?
+                                           },
+                                         ]?,
+                                         volumes: Array[
+                                           {
+                                             name: ::String,
+                                             host_path: {
+                                               path: ::String?
+                                             }?,
+                                             empty_dir: {
+                                               medium: ::String?,
+                                               size_limit: ::String?
+                                             }?,
+                                             secret: {
+                                               secret_name: ::String,
+                                               optional: bool?
+                                             }?
+                                           },
+                                         ]?,
+                                         metadata: {
+                                           labels: Hash[::String, ::String]?
+                                         }?
+                                       }?
+                                     }
+                                   ) -> _RegisterJobDefinitionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterJobDefinitionResponseSuccess
+
+      interface _SubmitJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SubmitJobResponse]
+        def job_arn: () -> ::String
+        def job_name: () -> ::String
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#submit_job-instance_method
+      def submit_job: (
+                        job_name: ::String,
+                        job_queue: ::String,
+                        ?share_identifier: ::String,
+                        ?scheduling_priority_override: ::Integer,
+                        ?array_properties: {
+                          size: ::Integer?
+                        },
+                        ?depends_on: Array[
+                          {
+                            job_id: ::String?,
+                            type: ("N_TO_N" | "SEQUENTIAL")?
+                          },
+                        ],
+                        job_definition: ::String,
+                        ?parameters: Hash[::String, ::String],
+                        ?container_overrides: {
+                          vcpus: ::Integer?,
+                          memory: ::Integer?,
+                          command: Array[::String]?,
+                          instance_type: ::String?,
+                          environment: Array[
+                            {
+                              name: ::String?,
+                              value: ::String?
+                            },
+                          ]?,
+                          resource_requirements: Array[
+                            {
+                              value: ::String,
+                              type: ("GPU" | "VCPU" | "MEMORY")
+                            },
+                          ]?
+                        },
+                        ?node_overrides: {
+                          num_nodes: ::Integer?,
+                          node_property_overrides: Array[
+                            {
+                              target_nodes: ::String,
+                              container_overrides: {
+                                vcpus: ::Integer?,
+                                memory: ::Integer?,
+                                command: Array[::String]?,
+                                instance_type: ::String?,
+                                environment: Array[
+                                  {
+                                    name: ::String?,
+                                    value: ::String?
+                                  },
+                                ]?,
+                                resource_requirements: Array[
+                                  {
+                                    value: ::String,
+                                    type: ("GPU" | "VCPU" | "MEMORY")
+                                  },
+                                ]?
+                              }?
+                            },
+                          ]?
+                        },
+                        ?retry_strategy: {
+                          attempts: ::Integer?,
+                          evaluate_on_exit: Array[
+                            {
+                              on_status_reason: ::String?,
+                              on_reason: ::String?,
+                              on_exit_code: ::String?,
+                              action: ("RETRY" | "EXIT")
+                            },
+                          ]?
+                        },
+                        ?propagate_tags: bool,
+                        ?timeout: {
+                          attempt_duration_seconds: ::Integer?
+                        },
+                        ?tags: Hash[::String, ::String],
+                        ?eks_properties_override: {
+                          pod_properties: {
+                            containers: Array[
+                              {
+                                image: ::String?,
+                                command: Array[::String]?,
+                                args: Array[::String]?,
+                                env: Array[
+                                  {
+                                    name: ::String,
+                                    value: ::String?
+                                  },
+                                ]?,
+                                resources: {
+                                  limits: Hash[::String, ::String]?,
+                                  requests: Hash[::String, ::String]?
+                                }?
+                              },
+                            ]?,
+                            metadata: {
+                              labels: Hash[::String, ::String]?
+                            }?
+                          }?
+                        }
+                      ) -> _SubmitJobResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SubmitJobResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _TerminateJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TerminateJobResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#terminate_job-instance_method
+      def terminate_job: (
+                           job_id: ::String,
+                           reason: ::String
+                         ) -> _TerminateJobResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TerminateJobResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateComputeEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateComputeEnvironmentResponse]
+        def compute_environment_name: () -> ::String
+        def compute_environment_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#update_compute_environment-instance_method
+      def update_compute_environment: (
+                                        compute_environment: ::String,
+                                        ?state: ("ENABLED" | "DISABLED"),
+                                        ?unmanagedv_cpus: ::Integer,
+                                        ?compute_resources: {
+                                          minv_cpus: ::Integer?,
+                                          maxv_cpus: ::Integer?,
+                                          desiredv_cpus: ::Integer?,
+                                          subnets: Array[::String]?,
+                                          security_group_ids: Array[::String]?,
+                                          allocation_strategy: ("BEST_FIT_PROGRESSIVE" | "SPOT_CAPACITY_OPTIMIZED" | "SPOT_PRICE_CAPACITY_OPTIMIZED")?,
+                                          instance_types: Array[::String]?,
+                                          ec2_key_pair: ::String?,
+                                          instance_role: ::String?,
+                                          tags: Hash[::String, ::String]?,
+                                          placement_group: ::String?,
+                                          bid_percentage: ::Integer?,
+                                          launch_template: {
+                                            launch_template_id: ::String?,
+                                            launch_template_name: ::String?,
+                                            version: ::String?
+                                          }?,
+                                          ec2_configuration: Array[
+                                            {
+                                              image_type: ::String,
+                                              image_id_override: ::String?,
+                                              image_kubernetes_version: ::String?
+                                            },
+                                          ]?,
+                                          update_to_latest_image_version: bool?,
+                                          type: ("EC2" | "SPOT" | "FARGATE" | "FARGATE_SPOT")?,
+                                          image_id: ::String?
+                                        },
+                                        ?service_role: ::String,
+                                        ?update_policy: {
+                                          terminate_jobs_on_update: bool?,
+                                          job_execution_timeout_minutes: ::Integer?
+                                        }
+                                      ) -> _UpdateComputeEnvironmentResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateComputeEnvironmentResponseSuccess
+
+      interface _UpdateJobQueueResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateJobQueueResponse]
+        def job_queue_name: () -> ::String
+        def job_queue_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#update_job_queue-instance_method
+      def update_job_queue: (
+                              job_queue: ::String,
+                              ?state: ("ENABLED" | "DISABLED"),
+                              ?scheduling_policy_arn: ::String,
+                              ?priority: ::Integer,
+                              ?compute_environment_order: Array[
+                                {
+                                  order: ::Integer,
+                                  compute_environment: ::String
+                                },
+                              ]
+                            ) -> _UpdateJobQueueResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateJobQueueResponseSuccess
+
+      interface _UpdateSchedulingPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSchedulingPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#update_scheduling_policy-instance_method
+      def update_scheduling_policy: (
+                                      arn: ::String,
+                                      ?fairshare_policy: {
+                                        share_decay_seconds: ::Integer?,
+                                        compute_reservation: ::Integer?,
+                                        share_distribution: Array[
+                                          {
+                                            share_identifier: ::String,
+                                            weight_factor: ::Float?
+                                          },
+                                        ]?
+                                      }
+                                    ) -> _UpdateSchedulingPolicyResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSchedulingPolicyResponseSuccess
+    end
+  end
+end
+

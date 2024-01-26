@@ -1,0 +1,832 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CodePipeline
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AcknowledgeJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcknowledgeJobOutput]
+        def status: () -> ("Created" | "Queued" | "Dispatched" | "InProgress" | "TimedOut" | "Succeeded" | "Failed")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#acknowledge_job-instance_method
+      def acknowledge_job: (
+                             job_id: ::String,
+                             nonce: ::String
+                           ) -> _AcknowledgeJobResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcknowledgeJobResponseSuccess
+
+      interface _AcknowledgeThirdPartyJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcknowledgeThirdPartyJobOutput]
+        def status: () -> ("Created" | "Queued" | "Dispatched" | "InProgress" | "TimedOut" | "Succeeded" | "Failed")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#acknowledge_third_party_job-instance_method
+      def acknowledge_third_party_job: (
+                                         job_id: ::String,
+                                         nonce: ::String,
+                                         client_token: ::String
+                                       ) -> _AcknowledgeThirdPartyJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcknowledgeThirdPartyJobResponseSuccess
+
+      interface _CreateCustomActionTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCustomActionTypeOutput]
+        def action_type: () -> Types::ActionType
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#create_custom_action_type-instance_method
+      def create_custom_action_type: (
+                                       category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval"),
+                                       provider: ::String,
+                                       version: ::String,
+                                       ?settings: {
+                                         third_party_configuration_url: ::String?,
+                                         entity_url_template: ::String?,
+                                         execution_url_template: ::String?,
+                                         revision_url_template: ::String?
+                                       },
+                                       ?configuration_properties: Array[
+                                         {
+                                           name: ::String,
+                                           required: bool,
+                                           key: bool,
+                                           secret: bool,
+                                           queryable: bool?,
+                                           description: ::String?,
+                                           type: ("String" | "Number" | "Boolean")?
+                                         },
+                                       ],
+                                       input_artifact_details: {
+                                         minimum_count: ::Integer,
+                                         maximum_count: ::Integer
+                                       },
+                                       output_artifact_details: {
+                                         minimum_count: ::Integer,
+                                         maximum_count: ::Integer
+                                       },
+                                       ?tags: Array[
+                                         {
+                                           key: ::String,
+                                           value: ::String
+                                         },
+                                       ]
+                                     ) -> _CreateCustomActionTypeResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomActionTypeResponseSuccess
+
+      interface _CreatePipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePipelineOutput]
+        def pipeline: () -> Types::PipelineDeclaration
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#create_pipeline-instance_method
+      def create_pipeline: (
+                             pipeline: {
+                               name: ::String,
+                               role_arn: ::String,
+                               artifact_store: {
+                                 type: ("S3"),
+                                 location: ::String,
+                                 encryption_key: {
+                                   id: ::String,
+                                   type: ("KMS")
+                                 }?
+                               }?,
+                               artifact_stores: Hash[::String, {
+                                   type: ("S3"),
+                                   location: ::String,
+                                   encryption_key: {
+                                     id: ::String,
+                                     type: ("KMS")
+                                   }?
+                                 }]?,
+                               stages: Array[
+                                 {
+                                   name: ::String,
+                                   blockers: Array[
+                                     {
+                                       name: ::String,
+                                       type: ("Schedule")
+                                     },
+                                   ]?,
+                                   actions: Array[
+                                     {
+                                       name: ::String,
+                                       action_type_id: {
+                                         category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval"),
+                                         owner: ("AWS" | "ThirdParty" | "Custom"),
+                                         provider: ::String,
+                                         version: ::String
+                                       },
+                                       run_order: ::Integer?,
+                                       configuration: Hash[::String, ::String]?,
+                                       output_artifacts: Array[
+                                         {
+                                           name: ::String
+                                         },
+                                       ]?,
+                                       input_artifacts: Array[
+                                         {
+                                           name: ::String
+                                         },
+                                       ]?,
+                                       role_arn: ::String?,
+                                       region: ::String?,
+                                       namespace: ::String?
+                                     },
+                                   ]
+                                 },
+                               ],
+                               version: ::Integer?,
+                               pipeline_type: ("V1" | "V2")?,
+                               triggers: Array[
+                                 {
+                                   provider_type: ("CodeStarSourceConnection"),
+                                   git_configuration: {
+                                     source_action_name: ::String,
+                                     push: Array[
+                                       {
+                                         tags: {
+                                           includes: Array[::String]?,
+                                           excludes: Array[::String]?
+                                         }?
+                                       },
+                                     ]?
+                                   }
+                                 },
+                               ]?,
+                               variables: Array[
+                                 {
+                                   name: ::String,
+                                   default_value: ::String?,
+                                   description: ::String?
+                                 },
+                               ]?
+                             },
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String
+                               },
+                             ]
+                           ) -> _CreatePipelineResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePipelineResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#delete_custom_action_type-instance_method
+      def delete_custom_action_type: (
+                                       category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval"),
+                                       provider: ::String,
+                                       version: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#delete_pipeline-instance_method
+      def delete_pipeline: (
+                             name: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteWebhookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWebhookOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#delete_webhook-instance_method
+      def delete_webhook: (
+                            name: ::String
+                          ) -> _DeleteWebhookResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWebhookResponseSuccess
+
+      interface _DeregisterWebhookWithThirdPartyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterWebhookWithThirdPartyOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#deregister_webhook_with_third_party-instance_method
+      def deregister_webhook_with_third_party: (
+                                                 ?webhook_name: ::String
+                                               ) -> _DeregisterWebhookWithThirdPartyResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterWebhookWithThirdPartyResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#disable_stage_transition-instance_method
+      def disable_stage_transition: (
+                                      pipeline_name: ::String,
+                                      stage_name: ::String,
+                                      transition_type: ("Inbound" | "Outbound"),
+                                      reason: ::String
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#enable_stage_transition-instance_method
+      def enable_stage_transition: (
+                                     pipeline_name: ::String,
+                                     stage_name: ::String,
+                                     transition_type: ("Inbound" | "Outbound")
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetActionTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetActionTypeOutput]
+        def action_type: () -> Types::ActionTypeDeclaration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#get_action_type-instance_method
+      def get_action_type: (
+                             category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval"),
+                             owner: ::String,
+                             provider: ::String,
+                             version: ::String
+                           ) -> _GetActionTypeResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetActionTypeResponseSuccess
+
+      interface _GetJobDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetJobDetailsOutput]
+        def job_details: () -> Types::JobDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#get_job_details-instance_method
+      def get_job_details: (
+                             job_id: ::String
+                           ) -> _GetJobDetailsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetJobDetailsResponseSuccess
+
+      interface _GetPipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPipelineOutput]
+        def pipeline: () -> Types::PipelineDeclaration
+        def metadata: () -> Types::PipelineMetadata
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#get_pipeline-instance_method
+      def get_pipeline: (
+                          name: ::String,
+                          ?version: ::Integer
+                        ) -> _GetPipelineResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPipelineResponseSuccess
+
+      interface _GetPipelineExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPipelineExecutionOutput]
+        def pipeline_execution: () -> Types::PipelineExecution
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#get_pipeline_execution-instance_method
+      def get_pipeline_execution: (
+                                    pipeline_name: ::String,
+                                    pipeline_execution_id: ::String
+                                  ) -> _GetPipelineExecutionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPipelineExecutionResponseSuccess
+
+      interface _GetPipelineStateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPipelineStateOutput]
+        def pipeline_name: () -> ::String
+        def pipeline_version: () -> ::Integer
+        def stage_states: () -> ::Array[Types::StageState]
+        def created: () -> ::Time
+        def updated: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#get_pipeline_state-instance_method
+      def get_pipeline_state: (
+                                name: ::String
+                              ) -> _GetPipelineStateResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPipelineStateResponseSuccess
+
+      interface _GetThirdPartyJobDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetThirdPartyJobDetailsOutput]
+        def job_details: () -> Types::ThirdPartyJobDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#get_third_party_job_details-instance_method
+      def get_third_party_job_details: (
+                                         job_id: ::String,
+                                         client_token: ::String
+                                       ) -> _GetThirdPartyJobDetailsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetThirdPartyJobDetailsResponseSuccess
+
+      interface _ListActionExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListActionExecutionsOutput]
+        def action_execution_details: () -> ::Array[Types::ActionExecutionDetail]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#list_action_executions-instance_method
+      def list_action_executions: (
+                                    pipeline_name: ::String,
+                                    ?filter: {
+                                      pipeline_execution_id: ::String?
+                                    },
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListActionExecutionsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListActionExecutionsResponseSuccess
+
+      interface _ListActionTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListActionTypesOutput]
+        def action_types: () -> ::Array[Types::ActionType]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#list_action_types-instance_method
+      def list_action_types: (
+                               ?action_owner_filter: ("AWS" | "ThirdParty" | "Custom"),
+                               ?next_token: ::String,
+                               ?region_filter: ::String
+                             ) -> _ListActionTypesResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListActionTypesResponseSuccess
+
+      interface _ListPipelineExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPipelineExecutionsOutput]
+        def pipeline_execution_summaries: () -> ::Array[Types::PipelineExecutionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#list_pipeline_executions-instance_method
+      def list_pipeline_executions: (
+                                      pipeline_name: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListPipelineExecutionsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPipelineExecutionsResponseSuccess
+
+      interface _ListPipelinesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPipelinesOutput]
+        def pipelines: () -> ::Array[Types::PipelineSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#list_pipelines-instance_method
+      def list_pipelines: (
+                            ?next_token: ::String,
+                            ?max_results: ::Integer
+                          ) -> _ListPipelinesResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPipelinesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Array[Types::Tag]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String,
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListWebhooksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWebhooksOutput]
+        def webhooks: () -> ::Array[Types::ListWebhookItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#list_webhooks-instance_method
+      def list_webhooks: (
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListWebhooksResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWebhooksResponseSuccess
+
+      interface _PollForJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PollForJobsOutput]
+        def jobs: () -> ::Array[Types::Job]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#poll_for_jobs-instance_method
+      def poll_for_jobs: (
+                           action_type_id: {
+                             category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval"),
+                             owner: ("AWS" | "ThirdParty" | "Custom"),
+                             provider: ::String,
+                             version: ::String
+                           },
+                           ?max_batch_size: ::Integer,
+                           ?query_param: Hash[::String, ::String]
+                         ) -> _PollForJobsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PollForJobsResponseSuccess
+
+      interface _PollForThirdPartyJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PollForThirdPartyJobsOutput]
+        def jobs: () -> ::Array[Types::ThirdPartyJob]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#poll_for_third_party_jobs-instance_method
+      def poll_for_third_party_jobs: (
+                                       action_type_id: {
+                                         category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval"),
+                                         owner: ("AWS" | "ThirdParty" | "Custom"),
+                                         provider: ::String,
+                                         version: ::String
+                                       },
+                                       ?max_batch_size: ::Integer
+                                     ) -> _PollForThirdPartyJobsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PollForThirdPartyJobsResponseSuccess
+
+      interface _PutActionRevisionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutActionRevisionOutput]
+        def new_revision: () -> bool
+        def pipeline_execution_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#put_action_revision-instance_method
+      def put_action_revision: (
+                                 pipeline_name: ::String,
+                                 stage_name: ::String,
+                                 action_name: ::String,
+                                 action_revision: {
+                                   revision_id: ::String,
+                                   revision_change_id: ::String,
+                                   created: ::Time
+                                 }
+                               ) -> _PutActionRevisionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutActionRevisionResponseSuccess
+
+      interface _PutApprovalResultResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutApprovalResultOutput]
+        def approved_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#put_approval_result-instance_method
+      def put_approval_result: (
+                                 pipeline_name: ::String,
+                                 stage_name: ::String,
+                                 action_name: ::String,
+                                 result: {
+                                   summary: ::String,
+                                   status: ("Approved" | "Rejected")
+                                 },
+                                 token: ::String
+                               ) -> _PutApprovalResultResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutApprovalResultResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#put_job_failure_result-instance_method
+      def put_job_failure_result: (
+                                    job_id: ::String,
+                                    failure_details: {
+                                      type: ("JobFailed" | "ConfigurationError" | "PermissionError" | "RevisionOutOfSync" | "RevisionUnavailable" | "SystemUnavailable"),
+                                      message: ::String,
+                                      external_execution_id: ::String?
+                                    }
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#put_job_success_result-instance_method
+      def put_job_success_result: (
+                                    job_id: ::String,
+                                    ?current_revision: {
+                                      revision: ::String,
+                                      change_identifier: ::String,
+                                      created: ::Time?,
+                                      revision_summary: ::String?
+                                    },
+                                    ?continuation_token: ::String,
+                                    ?execution_details: {
+                                      summary: ::String?,
+                                      external_execution_id: ::String?,
+                                      percent_complete: ::Integer?
+                                    },
+                                    ?output_variables: Hash[::String, ::String]
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#put_third_party_job_failure_result-instance_method
+      def put_third_party_job_failure_result: (
+                                                job_id: ::String,
+                                                client_token: ::String,
+                                                failure_details: {
+                                                  type: ("JobFailed" | "ConfigurationError" | "PermissionError" | "RevisionOutOfSync" | "RevisionUnavailable" | "SystemUnavailable"),
+                                                  message: ::String,
+                                                  external_execution_id: ::String?
+                                                }
+                                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#put_third_party_job_success_result-instance_method
+      def put_third_party_job_success_result: (
+                                                job_id: ::String,
+                                                client_token: ::String,
+                                                ?current_revision: {
+                                                  revision: ::String,
+                                                  change_identifier: ::String,
+                                                  created: ::Time?,
+                                                  revision_summary: ::String?
+                                                },
+                                                ?continuation_token: ::String,
+                                                ?execution_details: {
+                                                  summary: ::String?,
+                                                  external_execution_id: ::String?,
+                                                  percent_complete: ::Integer?
+                                                }
+                                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _PutWebhookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutWebhookOutput]
+        def webhook: () -> Types::ListWebhookItem
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#put_webhook-instance_method
+      def put_webhook: (
+                         webhook: {
+                           name: ::String,
+                           target_pipeline: ::String,
+                           target_action: ::String,
+                           filters: Array[
+                             {
+                               json_path: ::String,
+                               match_equals: ::String?
+                             },
+                           ],
+                           authentication: ("GITHUB_HMAC" | "IP" | "UNAUTHENTICATED"),
+                           authentication_configuration: {
+                             allowed_ip_range: ::String?,
+                             secret_token: ::String?
+                           }
+                         },
+                         ?tags: Array[
+                           {
+                             key: ::String,
+                             value: ::String
+                           },
+                         ]
+                       ) -> _PutWebhookResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutWebhookResponseSuccess
+
+      interface _RegisterWebhookWithThirdPartyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterWebhookWithThirdPartyOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#register_webhook_with_third_party-instance_method
+      def register_webhook_with_third_party: (
+                                               ?webhook_name: ::String
+                                             ) -> _RegisterWebhookWithThirdPartyResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterWebhookWithThirdPartyResponseSuccess
+
+      interface _RetryStageExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RetryStageExecutionOutput]
+        def pipeline_execution_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#retry_stage_execution-instance_method
+      def retry_stage_execution: (
+                                   pipeline_name: ::String,
+                                   stage_name: ::String,
+                                   pipeline_execution_id: ::String,
+                                   retry_mode: ("FAILED_ACTIONS" | "ALL_ACTIONS")
+                                 ) -> _RetryStageExecutionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RetryStageExecutionResponseSuccess
+
+      interface _StartPipelineExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartPipelineExecutionOutput]
+        def pipeline_execution_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#start_pipeline_execution-instance_method
+      def start_pipeline_execution: (
+                                      name: ::String,
+                                      ?variables: Array[
+                                        {
+                                          name: ::String,
+                                          value: ::String
+                                        },
+                                      ],
+                                      ?client_request_token: ::String,
+                                      ?source_revisions: Array[
+                                        {
+                                          action_name: ::String,
+                                          revision_type: ("COMMIT_ID" | "IMAGE_DIGEST" | "S3_OBJECT_VERSION_ID"),
+                                          revision_value: ::String
+                                        },
+                                      ]
+                                    ) -> _StartPipelineExecutionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartPipelineExecutionResponseSuccess
+
+      interface _StopPipelineExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopPipelineExecutionOutput]
+        def pipeline_execution_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#stop_pipeline_execution-instance_method
+      def stop_pipeline_execution: (
+                                     pipeline_name: ::String,
+                                     pipeline_execution_id: ::String,
+                                     ?abandon: bool,
+                                     ?reason: ::String
+                                   ) -> _StopPipelineExecutionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopPipelineExecutionResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#update_action_type-instance_method
+      def update_action_type: (
+                                action_type: {
+                                  description: ::String?,
+                                  executor: {
+                                    configuration: {
+                                      lambda_executor_configuration: {
+                                        lambda_function_arn: ::String
+                                      }?,
+                                      job_worker_executor_configuration: {
+                                        polling_accounts: Array[::String]?,
+                                        polling_service_principals: Array[::String]?
+                                      }?
+                                    },
+                                    type: ("JobWorker" | "Lambda"),
+                                    policy_statements_template: ::String?,
+                                    job_timeout: ::Integer?
+                                  },
+                                  id: {
+                                    category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval"),
+                                    owner: ::String,
+                                    provider: ::String,
+                                    version: ::String
+                                  },
+                                  input_artifact_details: {
+                                    minimum_count: ::Integer,
+                                    maximum_count: ::Integer
+                                  },
+                                  output_artifact_details: {
+                                    minimum_count: ::Integer,
+                                    maximum_count: ::Integer
+                                  },
+                                  permissions: {
+                                    allowed_accounts: Array[::String]
+                                  }?,
+                                  properties: Array[
+                                    {
+                                      name: ::String,
+                                      optional: bool,
+                                      key: bool,
+                                      no_echo: bool,
+                                      queryable: bool?,
+                                      description: ::String?
+                                    },
+                                  ]?,
+                                  urls: {
+                                    configuration_url: ::String?,
+                                    entity_url_template: ::String?,
+                                    execution_url_template: ::String?,
+                                    revision_url_template: ::String?
+                                  }?
+                                }
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdatePipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePipelineOutput]
+        def pipeline: () -> Types::PipelineDeclaration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#update_pipeline-instance_method
+      def update_pipeline: (
+                             pipeline: {
+                               name: ::String,
+                               role_arn: ::String,
+                               artifact_store: {
+                                 type: ("S3"),
+                                 location: ::String,
+                                 encryption_key: {
+                                   id: ::String,
+                                   type: ("KMS")
+                                 }?
+                               }?,
+                               artifact_stores: Hash[::String, {
+                                   type: ("S3"),
+                                   location: ::String,
+                                   encryption_key: {
+                                     id: ::String,
+                                     type: ("KMS")
+                                   }?
+                                 }]?,
+                               stages: Array[
+                                 {
+                                   name: ::String,
+                                   blockers: Array[
+                                     {
+                                       name: ::String,
+                                       type: ("Schedule")
+                                     },
+                                   ]?,
+                                   actions: Array[
+                                     {
+                                       name: ::String,
+                                       action_type_id: {
+                                         category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval"),
+                                         owner: ("AWS" | "ThirdParty" | "Custom"),
+                                         provider: ::String,
+                                         version: ::String
+                                       },
+                                       run_order: ::Integer?,
+                                       configuration: Hash[::String, ::String]?,
+                                       output_artifacts: Array[
+                                         {
+                                           name: ::String
+                                         },
+                                       ]?,
+                                       input_artifacts: Array[
+                                         {
+                                           name: ::String
+                                         },
+                                       ]?,
+                                       role_arn: ::String?,
+                                       region: ::String?,
+                                       namespace: ::String?
+                                     },
+                                   ]
+                                 },
+                               ],
+                               version: ::Integer?,
+                               pipeline_type: ("V1" | "V2")?,
+                               triggers: Array[
+                                 {
+                                   provider_type: ("CodeStarSourceConnection"),
+                                   git_configuration: {
+                                     source_action_name: ::String,
+                                     push: Array[
+                                       {
+                                         tags: {
+                                           includes: Array[::String]?,
+                                           excludes: Array[::String]?
+                                         }?
+                                       },
+                                     ]?
+                                   }
+                                 },
+                               ]?,
+                               variables: Array[
+                                 {
+                                   name: ::String,
+                                   default_value: ::String?,
+                                   description: ::String?
+                                 },
+                               ]?
+                             }
+                           ) -> _UpdatePipelineResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePipelineResponseSuccess
+    end
+  end
+end
+

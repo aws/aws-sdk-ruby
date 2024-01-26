@@ -1,0 +1,299 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MWAA
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCliTokenRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCliTokenResponse
+      attr_accessor cli_token: ::String
+      attr_accessor web_server_hostname: ::String
+      SENSITIVE: [:cli_token]
+    end
+
+    class CreateEnvironmentInput
+      attr_accessor airflow_configuration_options: ::Hash[::String, ::String]
+      attr_accessor airflow_version: ::String
+      attr_accessor dag_s3_path: ::String
+      attr_accessor endpoint_management: ("CUSTOMER" | "SERVICE")
+      attr_accessor environment_class: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor kms_key: ::String
+      attr_accessor logging_configuration: Types::LoggingConfigurationInput
+      attr_accessor max_workers: ::Integer
+      attr_accessor min_workers: ::Integer
+      attr_accessor name: ::String
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor plugins_s3_object_version: ::String
+      attr_accessor plugins_s3_path: ::String
+      attr_accessor requirements_s3_object_version: ::String
+      attr_accessor requirements_s3_path: ::String
+      attr_accessor schedulers: ::Integer
+      attr_accessor source_bucket_arn: ::String
+      attr_accessor startup_script_s3_object_version: ::String
+      attr_accessor startup_script_s3_path: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor webserver_access_mode: ("PRIVATE_ONLY" | "PUBLIC_ONLY")
+      attr_accessor weekly_maintenance_window_start: ::String
+      SENSITIVE: [:airflow_configuration_options]
+    end
+
+    class CreateEnvironmentOutput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWebLoginTokenRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWebLoginTokenResponse
+      attr_accessor airflow_identity: ::String
+      attr_accessor iam_identity: ::String
+      attr_accessor web_server_hostname: ::String
+      attr_accessor web_token: ::String
+      SENSITIVE: [:web_token]
+    end
+
+    class DeleteEnvironmentInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEnvironmentOutput < Aws::EmptyStructure
+    end
+
+    class Dimension
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class Environment
+      attr_accessor airflow_configuration_options: ::Hash[::String, ::String]
+      attr_accessor airflow_version: ::String
+      attr_accessor arn: ::String
+      attr_accessor celery_executor_queue: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor dag_s3_path: ::String
+      attr_accessor database_vpc_endpoint_service: ::String
+      attr_accessor endpoint_management: ("CUSTOMER" | "SERVICE")
+      attr_accessor environment_class: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor kms_key: ::String
+      attr_accessor last_update: Types::LastUpdate
+      attr_accessor logging_configuration: Types::LoggingConfiguration
+      attr_accessor max_workers: ::Integer
+      attr_accessor min_workers: ::Integer
+      attr_accessor name: ::String
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor plugins_s3_object_version: ::String
+      attr_accessor plugins_s3_path: ::String
+      attr_accessor requirements_s3_object_version: ::String
+      attr_accessor requirements_s3_path: ::String
+      attr_accessor schedulers: ::Integer
+      attr_accessor service_role_arn: ::String
+      attr_accessor source_bucket_arn: ::String
+      attr_accessor startup_script_s3_object_version: ::String
+      attr_accessor startup_script_s3_path: ::String
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "AVAILABLE" | "UPDATING" | "DELETING" | "DELETED" | "UNAVAILABLE" | "UPDATE_FAILED" | "ROLLING_BACK" | "CREATING_SNAPSHOT" | "PENDING")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor webserver_access_mode: ("PRIVATE_ONLY" | "PUBLIC_ONLY")
+      attr_accessor webserver_url: ::String
+      attr_accessor webserver_vpc_endpoint_service: ::String
+      attr_accessor weekly_maintenance_window_start: ::String
+      SENSITIVE: [:airflow_configuration_options]
+    end
+
+    class GetEnvironmentInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentOutput
+      attr_accessor environment: Types::Environment
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LastUpdate
+      attr_accessor created_at: ::Time
+      attr_accessor error: Types::UpdateError
+      attr_accessor source: ::String
+      attr_accessor status: ("SUCCESS" | "PENDING" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentsOutput
+      attr_accessor environments: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class LoggingConfiguration
+      attr_accessor dag_processing_logs: Types::ModuleLoggingConfiguration
+      attr_accessor scheduler_logs: Types::ModuleLoggingConfiguration
+      attr_accessor task_logs: Types::ModuleLoggingConfiguration
+      attr_accessor webserver_logs: Types::ModuleLoggingConfiguration
+      attr_accessor worker_logs: Types::ModuleLoggingConfiguration
+      SENSITIVE: []
+    end
+
+    class LoggingConfigurationInput
+      attr_accessor dag_processing_logs: Types::ModuleLoggingConfigurationInput
+      attr_accessor scheduler_logs: Types::ModuleLoggingConfigurationInput
+      attr_accessor task_logs: Types::ModuleLoggingConfigurationInput
+      attr_accessor webserver_logs: Types::ModuleLoggingConfigurationInput
+      attr_accessor worker_logs: Types::ModuleLoggingConfigurationInput
+      SENSITIVE: []
+    end
+
+    class MetricDatum
+      attr_accessor dimensions: ::Array[Types::Dimension]
+      attr_accessor metric_name: ::String
+      attr_accessor statistic_values: Types::StatisticSet
+      attr_accessor timestamp: ::Time
+      attr_accessor unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class ModuleLoggingConfiguration
+      attr_accessor cloud_watch_log_group_arn: ::String
+      attr_accessor enabled: bool
+      attr_accessor log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
+      SENSITIVE: []
+    end
+
+    class ModuleLoggingConfigurationInput
+      attr_accessor enabled: bool
+      attr_accessor log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
+      SENSITIVE: []
+    end
+
+    class NetworkConfiguration
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PublishMetricsInput
+      attr_accessor environment_name: ::String
+      attr_accessor metric_data: ::Array[Types::MetricDatum]
+      SENSITIVE: []
+    end
+
+    class PublishMetricsOutput < Aws::EmptyStructure
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StatisticSet
+      attr_accessor maximum: ::Float
+      attr_accessor minimum: ::Float
+      attr_accessor sample_count: ::Integer
+      attr_accessor sum: ::Float
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UpdateEnvironmentInput
+      attr_accessor airflow_configuration_options: ::Hash[::String, ::String]
+      attr_accessor airflow_version: ::String
+      attr_accessor dag_s3_path: ::String
+      attr_accessor environment_class: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor logging_configuration: Types::LoggingConfigurationInput
+      attr_accessor max_workers: ::Integer
+      attr_accessor min_workers: ::Integer
+      attr_accessor name: ::String
+      attr_accessor network_configuration: Types::UpdateNetworkConfigurationInput
+      attr_accessor plugins_s3_object_version: ::String
+      attr_accessor plugins_s3_path: ::String
+      attr_accessor requirements_s3_object_version: ::String
+      attr_accessor requirements_s3_path: ::String
+      attr_accessor schedulers: ::Integer
+      attr_accessor source_bucket_arn: ::String
+      attr_accessor startup_script_s3_object_version: ::String
+      attr_accessor startup_script_s3_path: ::String
+      attr_accessor webserver_access_mode: ("PRIVATE_ONLY" | "PUBLIC_ONLY")
+      attr_accessor weekly_maintenance_window_start: ::String
+      SENSITIVE: [:airflow_configuration_options]
+    end
+
+    class UpdateEnvironmentOutput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateError
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateNetworkConfigurationInput
+      attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

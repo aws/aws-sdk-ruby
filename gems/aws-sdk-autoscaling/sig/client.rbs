@@ -1,0 +1,1371 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AutoScaling
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#attach_instances-instance_method
+      def attach_instances: (
+                              ?instance_ids: Array[::String],
+                              auto_scaling_group_name: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _AttachLoadBalancerTargetGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AttachLoadBalancerTargetGroupsResultType]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#attach_load_balancer_target_groups-instance_method
+      def attach_load_balancer_target_groups: (
+                                                auto_scaling_group_name: ::String,
+                                                target_group_arns: Array[::String]
+                                              ) -> _AttachLoadBalancerTargetGroupsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AttachLoadBalancerTargetGroupsResponseSuccess
+
+      interface _AttachLoadBalancersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AttachLoadBalancersResultType]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#attach_load_balancers-instance_method
+      def attach_load_balancers: (
+                                   auto_scaling_group_name: ::String,
+                                   load_balancer_names: Array[::String]
+                                 ) -> _AttachLoadBalancersResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AttachLoadBalancersResponseSuccess
+
+      interface _AttachTrafficSourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AttachTrafficSourcesResultType]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#attach_traffic_sources-instance_method
+      def attach_traffic_sources: (
+                                    auto_scaling_group_name: ::String,
+                                    traffic_sources: Array[
+                                      {
+                                        identifier: ::String,
+                                        type: ::String?
+                                      },
+                                    ]
+                                  ) -> _AttachTrafficSourcesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AttachTrafficSourcesResponseSuccess
+
+      interface _BatchDeleteScheduledActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteScheduledActionAnswer]
+        def failed_scheduled_actions: () -> ::Array[Types::FailedScheduledUpdateGroupActionRequest]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#batch_delete_scheduled_action-instance_method
+      def batch_delete_scheduled_action: (
+                                           auto_scaling_group_name: ::String,
+                                           scheduled_action_names: Array[::String]
+                                         ) -> _BatchDeleteScheduledActionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteScheduledActionResponseSuccess
+
+      interface _BatchPutScheduledUpdateGroupActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchPutScheduledUpdateGroupActionAnswer]
+        def failed_scheduled_update_group_actions: () -> ::Array[Types::FailedScheduledUpdateGroupActionRequest]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#batch_put_scheduled_update_group_action-instance_method
+      def batch_put_scheduled_update_group_action: (
+                                                     auto_scaling_group_name: ::String,
+                                                     scheduled_update_group_actions: Array[
+                                                       {
+                                                         scheduled_action_name: ::String,
+                                                         start_time: ::Time?,
+                                                         end_time: ::Time?,
+                                                         recurrence: ::String?,
+                                                         min_size: ::Integer?,
+                                                         max_size: ::Integer?,
+                                                         desired_capacity: ::Integer?,
+                                                         time_zone: ::String?
+                                                       },
+                                                     ]
+                                                   ) -> _BatchPutScheduledUpdateGroupActionResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchPutScheduledUpdateGroupActionResponseSuccess
+
+      interface _CancelInstanceRefreshResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelInstanceRefreshAnswer]
+        def instance_refresh_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#cancel_instance_refresh-instance_method
+      def cancel_instance_refresh: (
+                                     auto_scaling_group_name: ::String
+                                   ) -> _CancelInstanceRefreshResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelInstanceRefreshResponseSuccess
+
+      interface _CompleteLifecycleActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CompleteLifecycleActionAnswer]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#complete_lifecycle_action-instance_method
+      def complete_lifecycle_action: (
+                                       lifecycle_hook_name: ::String,
+                                       auto_scaling_group_name: ::String,
+                                       ?lifecycle_action_token: ::String,
+                                       lifecycle_action_result: ::String,
+                                       ?instance_id: ::String
+                                     ) -> _CompleteLifecycleActionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CompleteLifecycleActionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#create_auto_scaling_group-instance_method
+      def create_auto_scaling_group: (
+                                       auto_scaling_group_name: ::String,
+                                       ?launch_configuration_name: ::String,
+                                       ?launch_template: {
+                                         launch_template_id: ::String?,
+                                         launch_template_name: ::String?,
+                                         version: ::String?
+                                       },
+                                       ?mixed_instances_policy: {
+                                         launch_template: {
+                                           launch_template_specification: {
+                                             launch_template_id: ::String?,
+                                             launch_template_name: ::String?,
+                                             version: ::String?
+                                           }?,
+                                           overrides: Array[
+                                             {
+                                               instance_type: ::String?,
+                                               weighted_capacity: ::String?,
+                                               launch_template_specification: {
+                                                 launch_template_id: ::String?,
+                                                 launch_template_name: ::String?,
+                                                 version: ::String?
+                                               }?,
+                                               instance_requirements: {
+                                                 v_cpu_count: {
+                                                   min: ::Integer,
+                                                   max: ::Integer?
+                                                 },
+                                                 memory_mi_b: {
+                                                   min: ::Integer,
+                                                   max: ::Integer?
+                                                 },
+                                                 cpu_manufacturers: Array[("intel" | "amd" | "amazon-web-services")]?,
+                                                 memory_gi_b_per_v_cpu: {
+                                                   min: ::Float?,
+                                                   max: ::Float?
+                                                 }?,
+                                                 excluded_instance_types: Array[::String]?,
+                                                 instance_generations: Array[("current" | "previous")]?,
+                                                 spot_max_price_percentage_over_lowest_price: ::Integer?,
+                                                 on_demand_max_price_percentage_over_lowest_price: ::Integer?,
+                                                 bare_metal: ("included" | "excluded" | "required")?,
+                                                 burstable_performance: ("included" | "excluded" | "required")?,
+                                                 require_hibernate_support: bool?,
+                                                 network_interface_count: {
+                                                   min: ::Integer?,
+                                                   max: ::Integer?
+                                                 }?,
+                                                 local_storage: ("included" | "excluded" | "required")?,
+                                                 local_storage_types: Array[("hdd" | "ssd")]?,
+                                                 total_local_storage_gb: {
+                                                   min: ::Float?,
+                                                   max: ::Float?
+                                                 }?,
+                                                 baseline_ebs_bandwidth_mbps: {
+                                                   min: ::Integer?,
+                                                   max: ::Integer?
+                                                 }?,
+                                                 accelerator_types: Array[("gpu" | "fpga" | "inference")]?,
+                                                 accelerator_count: {
+                                                   min: ::Integer?,
+                                                   max: ::Integer?
+                                                 }?,
+                                                 accelerator_manufacturers: Array[("nvidia" | "amd" | "amazon-web-services" | "xilinx")]?,
+                                                 accelerator_names: Array[("a100" | "v100" | "k80" | "t4" | "m60" | "radeon-pro-v520" | "vu9p")]?,
+                                                 accelerator_total_memory_mi_b: {
+                                                   min: ::Integer?,
+                                                   max: ::Integer?
+                                                 }?,
+                                                 network_bandwidth_gbps: {
+                                                   min: ::Float?,
+                                                   max: ::Float?
+                                                 }?,
+                                                 allowed_instance_types: Array[::String]?
+                                               }?
+                                             },
+                                           ]?
+                                         }?,
+                                         instances_distribution: {
+                                           on_demand_allocation_strategy: ::String?,
+                                           on_demand_base_capacity: ::Integer?,
+                                           on_demand_percentage_above_base_capacity: ::Integer?,
+                                           spot_allocation_strategy: ::String?,
+                                           spot_instance_pools: ::Integer?,
+                                           spot_max_price: ::String?
+                                         }?
+                                       },
+                                       ?instance_id: ::String,
+                                       min_size: ::Integer,
+                                       max_size: ::Integer,
+                                       ?desired_capacity: ::Integer,
+                                       ?default_cooldown: ::Integer,
+                                       ?availability_zones: Array[::String],
+                                       ?load_balancer_names: Array[::String],
+                                       ?target_group_arns: Array[::String],
+                                       ?health_check_type: ::String,
+                                       ?health_check_grace_period: ::Integer,
+                                       ?placement_group: ::String,
+                                       ?vpc_zone_identifier: ::String,
+                                       ?termination_policies: Array[::String],
+                                       ?new_instances_protected_from_scale_in: bool,
+                                       ?capacity_rebalance: bool,
+                                       ?lifecycle_hook_specification_list: Array[
+                                         {
+                                           lifecycle_hook_name: ::String,
+                                           lifecycle_transition: ::String,
+                                           notification_metadata: ::String?,
+                                           heartbeat_timeout: ::Integer?,
+                                           default_result: ::String?,
+                                           notification_target_arn: ::String?,
+                                           role_arn: ::String?
+                                         },
+                                       ],
+                                       ?tags: Array[
+                                         {
+                                           resource_id: ::String?,
+                                           resource_type: ::String?,
+                                           key: ::String,
+                                           value: ::String?,
+                                           propagate_at_launch: bool?
+                                         },
+                                       ],
+                                       ?service_linked_role_arn: ::String,
+                                       ?max_instance_lifetime: ::Integer,
+                                       ?context: ::String,
+                                       ?desired_capacity_type: ::String,
+                                       ?default_instance_warmup: ::Integer,
+                                       ?traffic_sources: Array[
+                                         {
+                                           identifier: ::String,
+                                           type: ::String?
+                                         },
+                                       ],
+                                       ?instance_maintenance_policy: {
+                                         min_healthy_percentage: ::Integer?,
+                                         max_healthy_percentage: ::Integer?
+                                       }
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#create_launch_configuration-instance_method
+      def create_launch_configuration: (
+                                         launch_configuration_name: ::String,
+                                         ?image_id: ::String,
+                                         ?key_name: ::String,
+                                         ?security_groups: Array[::String],
+                                         ?classic_link_vpc_id: ::String,
+                                         ?classic_link_vpc_security_groups: Array[::String],
+                                         ?user_data: ::String,
+                                         ?instance_id: ::String,
+                                         ?instance_type: ::String,
+                                         ?kernel_id: ::String,
+                                         ?ramdisk_id: ::String,
+                                         ?block_device_mappings: Array[
+                                           {
+                                             virtual_name: ::String?,
+                                             device_name: ::String,
+                                             ebs: {
+                                               snapshot_id: ::String?,
+                                               volume_size: ::Integer?,
+                                               volume_type: ::String?,
+                                               delete_on_termination: bool?,
+                                               iops: ::Integer?,
+                                               encrypted: bool?,
+                                               throughput: ::Integer?
+                                             }?,
+                                             no_device: bool?
+                                           },
+                                         ],
+                                         ?instance_monitoring: {
+                                           enabled: bool?
+                                         },
+                                         ?spot_price: ::String,
+                                         ?iam_instance_profile: ::String,
+                                         ?ebs_optimized: bool,
+                                         ?associate_public_ip_address: bool,
+                                         ?placement_tenancy: ::String,
+                                         ?metadata_options: {
+                                           http_tokens: ("optional" | "required")?,
+                                           http_put_response_hop_limit: ::Integer?,
+                                           http_endpoint: ("disabled" | "enabled")?
+                                         }
+                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#create_or_update_tags-instance_method
+      def create_or_update_tags: (
+                                   tags: Array[
+                                     {
+                                       resource_id: ::String?,
+                                       resource_type: ::String?,
+                                       key: ::String,
+                                       value: ::String?,
+                                       propagate_at_launch: bool?
+                                     },
+                                   ]
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#delete_auto_scaling_group-instance_method
+      def delete_auto_scaling_group: (
+                                       auto_scaling_group_name: ::String,
+                                       ?force_delete: bool
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#delete_launch_configuration-instance_method
+      def delete_launch_configuration: (
+                                         launch_configuration_name: ::String
+                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteLifecycleHookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLifecycleHookAnswer]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#delete_lifecycle_hook-instance_method
+      def delete_lifecycle_hook: (
+                                   lifecycle_hook_name: ::String,
+                                   auto_scaling_group_name: ::String
+                                 ) -> _DeleteLifecycleHookResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLifecycleHookResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#delete_notification_configuration-instance_method
+      def delete_notification_configuration: (
+                                               auto_scaling_group_name: ::String,
+                                               topic_arn: ::String
+                                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#delete_policy-instance_method
+      def delete_policy: (
+                           ?auto_scaling_group_name: ::String,
+                           policy_name: ::String
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#delete_scheduled_action-instance_method
+      def delete_scheduled_action: (
+                                     auto_scaling_group_name: ::String,
+                                     scheduled_action_name: ::String
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#delete_tags-instance_method
+      def delete_tags: (
+                         tags: Array[
+                           {
+                             resource_id: ::String?,
+                             resource_type: ::String?,
+                             key: ::String,
+                             value: ::String?,
+                             propagate_at_launch: bool?
+                           },
+                         ]
+                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteWarmPoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWarmPoolAnswer]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#delete_warm_pool-instance_method
+      def delete_warm_pool: (
+                              auto_scaling_group_name: ::String,
+                              ?force_delete: bool
+                            ) -> _DeleteWarmPoolResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWarmPoolResponseSuccess
+
+      interface _DescribeAccountLimitsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAccountLimitsAnswer]
+        def max_number_of_auto_scaling_groups: () -> ::Integer
+        def max_number_of_launch_configurations: () -> ::Integer
+        def number_of_auto_scaling_groups: () -> ::Integer
+        def number_of_launch_configurations: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#describe_account_limits-instance_method
+      def describe_account_limits: () -> _DescribeAccountLimitsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccountLimitsResponseSuccess
+
+      interface _DescribeAdjustmentTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAdjustmentTypesAnswer]
+        def adjustment_types: () -> ::Array[Types::AdjustmentType]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#describe_adjustment_types-instance_method
+      def describe_adjustment_types: () -> _DescribeAdjustmentTypesResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAdjustmentTypesResponseSuccess
+
+      interface _DescribeAutoScalingGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AutoScalingGroupsType]
+        def auto_scaling_groups: () -> ::Array[Types::AutoScalingGroup]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#describe_auto_scaling_groups-instance_method
+      def describe_auto_scaling_groups: (
+                                          ?auto_scaling_group_names: Array[::String],
+                                          ?next_token: ::String,
+                                          ?max_records: ::Integer,
+                                          ?filters: Array[
+                                            {
+                                              name: ::String?,
+                                              values: Array[::String]?
+                                            },
+                                          ]
+                                        ) -> _DescribeAutoScalingGroupsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAutoScalingGroupsResponseSuccess
+
+      interface _DescribeAutoScalingInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AutoScalingInstancesType]
+        def auto_scaling_instances: () -> ::Array[Types::AutoScalingInstanceDetails]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#describe_auto_scaling_instances-instance_method
+      def describe_auto_scaling_instances: (
+                                             ?instance_ids: Array[::String],
+                                             ?max_records: ::Integer,
+                                             ?next_token: ::String
+                                           ) -> _DescribeAutoScalingInstancesResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAutoScalingInstancesResponseSuccess
+
+      interface _DescribeAutoScalingNotificationTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAutoScalingNotificationTypesAnswer]
+        def auto_scaling_notification_types: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#describe_auto_scaling_notification_types-instance_method
+      def describe_auto_scaling_notification_types: () -> _DescribeAutoScalingNotificationTypesResponseSuccess
+                                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAutoScalingNotificationTypesResponseSuccess
+
+      interface _DescribeInstanceRefreshesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInstanceRefreshesAnswer]
+        def instance_refreshes: () -> ::Array[Types::InstanceRefresh]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#describe_instance_refreshes-instance_method
+      def describe_instance_refreshes: (
+                                         auto_scaling_group_name: ::String,
+                                         ?instance_refresh_ids: Array[::String],
+                                         ?next_token: ::String,
+                                         ?max_records: ::Integer
+                                       ) -> _DescribeInstanceRefreshesResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInstanceRefreshesResponseSuccess
+
+      interface _DescribeLaunchConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::LaunchConfigurationsType]
+        def launch_configurations: () -> ::Array[Types::LaunchConfiguration]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#describe_launch_configurations-instance_method
+      def describe_launch_configurations: (
+                                            ?launch_configuration_names: Array[::String],
+                                            ?next_token: ::String,
+                                            ?max_records: ::Integer
+                                          ) -> _DescribeLaunchConfigurationsResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLaunchConfigurationsResponseSuccess
+
+      interface _DescribeLifecycleHookTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLifecycleHookTypesAnswer]
+        def lifecycle_hook_types: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#describe_lifecycle_hook_types-instance_method
+      def describe_lifecycle_hook_types: () -> _DescribeLifecycleHookTypesResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLifecycleHookTypesResponseSuccess
+
+      interface _DescribeLifecycleHooksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLifecycleHooksAnswer]
+        def lifecycle_hooks: () -> ::Array[Types::LifecycleHook]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#describe_lifecycle_hooks-instance_method
+      def describe_lifecycle_hooks: (
+                                      auto_scaling_group_name: ::String,
+                                      ?lifecycle_hook_names: Array[::String]
+                                    ) -> _DescribeLifecycleHooksResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLifecycleHooksResponseSuccess
+
+      interface _DescribeLoadBalancerTargetGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLoadBalancerTargetGroupsResponse]
+        def load_balancer_target_groups: () -> ::Array[Types::LoadBalancerTargetGroupState]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#describe_load_balancer_target_groups-instance_method
+      def describe_load_balancer_target_groups: (
+                                                  auto_scaling_group_name: ::String,
+                                                  ?next_token: ::String,
+                                                  ?max_records: ::Integer
+                                                ) -> _DescribeLoadBalancerTargetGroupsResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLoadBalancerTargetGroupsResponseSuccess
+
+      interface _DescribeLoadBalancersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLoadBalancersResponse]
+        def load_balancers: () -> ::Array[Types::LoadBalancerState]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#describe_load_balancers-instance_method
+      def describe_load_balancers: (
+                                     auto_scaling_group_name: ::String,
+                                     ?next_token: ::String,
+                                     ?max_records: ::Integer
+                                   ) -> _DescribeLoadBalancersResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLoadBalancersResponseSuccess
+
+      interface _DescribeMetricCollectionTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMetricCollectionTypesAnswer]
+        def metrics: () -> ::Array[Types::MetricCollectionType]
+        def granularities: () -> ::Array[Types::MetricGranularityType]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#describe_metric_collection_types-instance_method
+      def describe_metric_collection_types: () -> _DescribeMetricCollectionTypesResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMetricCollectionTypesResponseSuccess
+
+      interface _DescribeNotificationConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeNotificationConfigurationsAnswer]
+        def notification_configurations: () -> ::Array[Types::NotificationConfiguration]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#describe_notification_configurations-instance_method
+      def describe_notification_configurations: (
+                                                  ?auto_scaling_group_names: Array[::String],
+                                                  ?next_token: ::String,
+                                                  ?max_records: ::Integer
+                                                ) -> _DescribeNotificationConfigurationsResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeNotificationConfigurationsResponseSuccess
+
+      interface _DescribePoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PoliciesType]
+        def scaling_policies: () -> ::Array[Types::ScalingPolicy]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#describe_policies-instance_method
+      def describe_policies: (
+                               ?auto_scaling_group_name: ::String,
+                               ?policy_names: Array[::String],
+                               ?policy_types: Array[::String],
+                               ?next_token: ::String,
+                               ?max_records: ::Integer
+                             ) -> _DescribePoliciesResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePoliciesResponseSuccess
+
+      interface _DescribeScalingActivitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ActivitiesType]
+        def activities: () -> ::Array[Types::Activity]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#describe_scaling_activities-instance_method
+      def describe_scaling_activities: (
+                                         ?activity_ids: Array[::String],
+                                         ?auto_scaling_group_name: ::String,
+                                         ?include_deleted_groups: bool,
+                                         ?max_records: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _DescribeScalingActivitiesResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeScalingActivitiesResponseSuccess
+
+      interface _DescribeScalingProcessTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ProcessesType]
+        def processes: () -> ::Array[Types::ProcessType]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#describe_scaling_process_types-instance_method
+      def describe_scaling_process_types: () -> _DescribeScalingProcessTypesResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeScalingProcessTypesResponseSuccess
+
+      interface _DescribeScheduledActionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ScheduledActionsType]
+        def scheduled_update_group_actions: () -> ::Array[Types::ScheduledUpdateGroupAction]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#describe_scheduled_actions-instance_method
+      def describe_scheduled_actions: (
+                                        ?auto_scaling_group_name: ::String,
+                                        ?scheduled_action_names: Array[::String],
+                                        ?start_time: ::Time,
+                                        ?end_time: ::Time,
+                                        ?next_token: ::String,
+                                        ?max_records: ::Integer
+                                      ) -> _DescribeScheduledActionsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeScheduledActionsResponseSuccess
+
+      interface _DescribeTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagsType]
+        def tags: () -> ::Array[Types::TagDescription]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#describe_tags-instance_method
+      def describe_tags: (
+                           ?filters: Array[
+                             {
+                               name: ::String?,
+                               values: Array[::String]?
+                             },
+                           ],
+                           ?next_token: ::String,
+                           ?max_records: ::Integer
+                         ) -> _DescribeTagsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTagsResponseSuccess
+
+      interface _DescribeTerminationPolicyTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTerminationPolicyTypesAnswer]
+        def termination_policy_types: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#describe_termination_policy_types-instance_method
+      def describe_termination_policy_types: () -> _DescribeTerminationPolicyTypesResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTerminationPolicyTypesResponseSuccess
+
+      interface _DescribeTrafficSourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTrafficSourcesResponse]
+        def traffic_sources: () -> ::Array[Types::TrafficSourceState]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#describe_traffic_sources-instance_method
+      def describe_traffic_sources: (
+                                      auto_scaling_group_name: ::String,
+                                      ?traffic_source_type: ::String,
+                                      ?next_token: ::String,
+                                      ?max_records: ::Integer
+                                    ) -> _DescribeTrafficSourcesResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTrafficSourcesResponseSuccess
+
+      interface _DescribeWarmPoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeWarmPoolAnswer]
+        def warm_pool_configuration: () -> Types::WarmPoolConfiguration
+        def instances: () -> ::Array[Types::Instance]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#describe_warm_pool-instance_method
+      def describe_warm_pool: (
+                                auto_scaling_group_name: ::String,
+                                ?max_records: ::Integer,
+                                ?next_token: ::String
+                              ) -> _DescribeWarmPoolResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWarmPoolResponseSuccess
+
+      interface _DetachInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetachInstancesAnswer]
+        def activities: () -> ::Array[Types::Activity]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#detach_instances-instance_method
+      def detach_instances: (
+                              ?instance_ids: Array[::String],
+                              auto_scaling_group_name: ::String,
+                              should_decrement_desired_capacity: bool
+                            ) -> _DetachInstancesResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetachInstancesResponseSuccess
+
+      interface _DetachLoadBalancerTargetGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetachLoadBalancerTargetGroupsResultType]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#detach_load_balancer_target_groups-instance_method
+      def detach_load_balancer_target_groups: (
+                                                auto_scaling_group_name: ::String,
+                                                target_group_arns: Array[::String]
+                                              ) -> _DetachLoadBalancerTargetGroupsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetachLoadBalancerTargetGroupsResponseSuccess
+
+      interface _DetachLoadBalancersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetachLoadBalancersResultType]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#detach_load_balancers-instance_method
+      def detach_load_balancers: (
+                                   auto_scaling_group_name: ::String,
+                                   load_balancer_names: Array[::String]
+                                 ) -> _DetachLoadBalancersResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetachLoadBalancersResponseSuccess
+
+      interface _DetachTrafficSourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetachTrafficSourcesResultType]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#detach_traffic_sources-instance_method
+      def detach_traffic_sources: (
+                                    auto_scaling_group_name: ::String,
+                                    traffic_sources: Array[
+                                      {
+                                        identifier: ::String,
+                                        type: ::String?
+                                      },
+                                    ]
+                                  ) -> _DetachTrafficSourcesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetachTrafficSourcesResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#disable_metrics_collection-instance_method
+      def disable_metrics_collection: (
+                                        auto_scaling_group_name: ::String,
+                                        ?metrics: Array[::String]
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#enable_metrics_collection-instance_method
+      def enable_metrics_collection: (
+                                       auto_scaling_group_name: ::String,
+                                       ?metrics: Array[::String],
+                                       granularity: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _EnterStandbyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnterStandbyAnswer]
+        def activities: () -> ::Array[Types::Activity]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#enter_standby-instance_method
+      def enter_standby: (
+                           ?instance_ids: Array[::String],
+                           auto_scaling_group_name: ::String,
+                           should_decrement_desired_capacity: bool
+                         ) -> _EnterStandbyResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnterStandbyResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#execute_policy-instance_method
+      def execute_policy: (
+                            ?auto_scaling_group_name: ::String,
+                            policy_name: ::String,
+                            ?honor_cooldown: bool,
+                            ?metric_value: ::Float,
+                            ?breach_threshold: ::Float
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _ExitStandbyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExitStandbyAnswer]
+        def activities: () -> ::Array[Types::Activity]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#exit_standby-instance_method
+      def exit_standby: (
+                          ?instance_ids: Array[::String],
+                          auto_scaling_group_name: ::String
+                        ) -> _ExitStandbyResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExitStandbyResponseSuccess
+
+      interface _GetPredictiveScalingForecastResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPredictiveScalingForecastAnswer]
+        def load_forecast: () -> ::Array[Types::LoadForecast]
+        def capacity_forecast: () -> Types::CapacityForecast
+        def update_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#get_predictive_scaling_forecast-instance_method
+      def get_predictive_scaling_forecast: (
+                                             auto_scaling_group_name: ::String,
+                                             policy_name: ::String,
+                                             start_time: ::Time,
+                                             end_time: ::Time
+                                           ) -> _GetPredictiveScalingForecastResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPredictiveScalingForecastResponseSuccess
+
+      interface _PutLifecycleHookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutLifecycleHookAnswer]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#put_lifecycle_hook-instance_method
+      def put_lifecycle_hook: (
+                                lifecycle_hook_name: ::String,
+                                auto_scaling_group_name: ::String,
+                                ?lifecycle_transition: ::String,
+                                ?role_arn: ::String,
+                                ?notification_target_arn: ::String,
+                                ?notification_metadata: ::String,
+                                ?heartbeat_timeout: ::Integer,
+                                ?default_result: ::String
+                              ) -> _PutLifecycleHookResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutLifecycleHookResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#put_notification_configuration-instance_method
+      def put_notification_configuration: (
+                                            auto_scaling_group_name: ::String,
+                                            topic_arn: ::String,
+                                            notification_types: Array[::String]
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _PutScalingPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PolicyARNType]
+        def policy_arn: () -> ::String
+        def alarms: () -> ::Array[Types::Alarm]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#put_scaling_policy-instance_method
+      def put_scaling_policy: (
+                                auto_scaling_group_name: ::String,
+                                policy_name: ::String,
+                                ?policy_type: ::String,
+                                ?adjustment_type: ::String,
+                                ?min_adjustment_step: ::Integer,
+                                ?min_adjustment_magnitude: ::Integer,
+                                ?scaling_adjustment: ::Integer,
+                                ?cooldown: ::Integer,
+                                ?metric_aggregation_type: ::String,
+                                ?step_adjustments: Array[
+                                  {
+                                    metric_interval_lower_bound: ::Float?,
+                                    metric_interval_upper_bound: ::Float?,
+                                    scaling_adjustment: ::Integer
+                                  },
+                                ],
+                                ?estimated_instance_warmup: ::Integer,
+                                ?target_tracking_configuration: {
+                                  predefined_metric_specification: {
+                                    predefined_metric_type: ("ASGAverageCPUUtilization" | "ASGAverageNetworkIn" | "ASGAverageNetworkOut" | "ALBRequestCountPerTarget"),
+                                    resource_label: ::String?
+                                  }?,
+                                  customized_metric_specification: {
+                                    metric_name: ::String?,
+                                    namespace: ::String?,
+                                    dimensions: Array[
+                                      {
+                                        name: ::String,
+                                        value: ::String
+                                      },
+                                    ]?,
+                                    statistic: ("Average" | "Minimum" | "Maximum" | "SampleCount" | "Sum")?,
+                                    unit: ::String?,
+                                    metrics: Array[
+                                      {
+                                        id: ::String,
+                                        expression: ::String?,
+                                        metric_stat: {
+                                          metric: {
+                                            namespace: ::String,
+                                            metric_name: ::String,
+                                            dimensions: Array[
+                                              {
+                                                name: ::String,
+                                                value: ::String
+                                              },
+                                            ]?
+                                          },
+                                          stat: ::String,
+                                          unit: ::String?
+                                        }?,
+                                        label: ::String?,
+                                        return_data: bool?
+                                      },
+                                    ]?
+                                  }?,
+                                  target_value: ::Float,
+                                  disable_scale_in: bool?
+                                },
+                                ?enabled: bool,
+                                ?predictive_scaling_configuration: {
+                                  metric_specifications: Array[
+                                    {
+                                      target_value: ::Float,
+                                      predefined_metric_pair_specification: {
+                                        predefined_metric_type: ("ASGCPUUtilization" | "ASGNetworkIn" | "ASGNetworkOut" | "ALBRequestCount"),
+                                        resource_label: ::String?
+                                      }?,
+                                      predefined_scaling_metric_specification: {
+                                        predefined_metric_type: ("ASGAverageCPUUtilization" | "ASGAverageNetworkIn" | "ASGAverageNetworkOut" | "ALBRequestCountPerTarget"),
+                                        resource_label: ::String?
+                                      }?,
+                                      predefined_load_metric_specification: {
+                                        predefined_metric_type: ("ASGTotalCPUUtilization" | "ASGTotalNetworkIn" | "ASGTotalNetworkOut" | "ALBTargetGroupRequestCount"),
+                                        resource_label: ::String?
+                                      }?,
+                                      customized_scaling_metric_specification: {
+                                        metric_data_queries: Array[
+                                          {
+                                            id: ::String,
+                                            expression: ::String?,
+                                            metric_stat: {
+                                              metric: {
+                                                namespace: ::String,
+                                                metric_name: ::String,
+                                                dimensions: Array[
+                                                  {
+                                                    name: ::String,
+                                                    value: ::String
+                                                  },
+                                                ]?
+                                              },
+                                              stat: ::String,
+                                              unit: ::String?
+                                            }?,
+                                            label: ::String?,
+                                            return_data: bool?
+                                          },
+                                        ]
+                                      }?,
+                                      customized_load_metric_specification: {
+                                        metric_data_queries: Array[
+                                          {
+                                            id: ::String,
+                                            expression: ::String?,
+                                            metric_stat: {
+                                              metric: {
+                                                namespace: ::String,
+                                                metric_name: ::String,
+                                                dimensions: Array[
+                                                  {
+                                                    name: ::String,
+                                                    value: ::String
+                                                  },
+                                                ]?
+                                              },
+                                              stat: ::String,
+                                              unit: ::String?
+                                            }?,
+                                            label: ::String?,
+                                            return_data: bool?
+                                          },
+                                        ]
+                                      }?,
+                                      customized_capacity_metric_specification: {
+                                        metric_data_queries: Array[
+                                          {
+                                            id: ::String,
+                                            expression: ::String?,
+                                            metric_stat: {
+                                              metric: {
+                                                namespace: ::String,
+                                                metric_name: ::String,
+                                                dimensions: Array[
+                                                  {
+                                                    name: ::String,
+                                                    value: ::String
+                                                  },
+                                                ]?
+                                              },
+                                              stat: ::String,
+                                              unit: ::String?
+                                            }?,
+                                            label: ::String?,
+                                            return_data: bool?
+                                          },
+                                        ]
+                                      }?
+                                    },
+                                  ],
+                                  mode: ("ForecastAndScale" | "ForecastOnly")?,
+                                  scheduling_buffer_time: ::Integer?,
+                                  max_capacity_breach_behavior: ("HonorMaxCapacity" | "IncreaseMaxCapacity")?,
+                                  max_capacity_buffer: ::Integer?
+                                }
+                              ) -> _PutScalingPolicyResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutScalingPolicyResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#put_scheduled_update_group_action-instance_method
+      def put_scheduled_update_group_action: (
+                                               auto_scaling_group_name: ::String,
+                                               scheduled_action_name: ::String,
+                                               ?time: ::Time,
+                                               ?start_time: ::Time,
+                                               ?end_time: ::Time,
+                                               ?recurrence: ::String,
+                                               ?min_size: ::Integer,
+                                               ?max_size: ::Integer,
+                                               ?desired_capacity: ::Integer,
+                                               ?time_zone: ::String
+                                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _PutWarmPoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutWarmPoolAnswer]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#put_warm_pool-instance_method
+      def put_warm_pool: (
+                           auto_scaling_group_name: ::String,
+                           ?max_group_prepared_capacity: ::Integer,
+                           ?min_size: ::Integer,
+                           ?pool_state: ("Stopped" | "Running" | "Hibernated"),
+                           ?instance_reuse_policy: {
+                             reuse_on_scale_in: bool?
+                           }
+                         ) -> _PutWarmPoolResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutWarmPoolResponseSuccess
+
+      interface _RecordLifecycleActionHeartbeatResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RecordLifecycleActionHeartbeatAnswer]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#record_lifecycle_action_heartbeat-instance_method
+      def record_lifecycle_action_heartbeat: (
+                                               lifecycle_hook_name: ::String,
+                                               auto_scaling_group_name: ::String,
+                                               ?lifecycle_action_token: ::String,
+                                               ?instance_id: ::String
+                                             ) -> _RecordLifecycleActionHeartbeatResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RecordLifecycleActionHeartbeatResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#resume_processes-instance_method
+      def resume_processes: (
+                              auto_scaling_group_name: ::String,
+                              ?scaling_processes: Array[::String]
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _RollbackInstanceRefreshResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RollbackInstanceRefreshAnswer]
+        def instance_refresh_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#rollback_instance_refresh-instance_method
+      def rollback_instance_refresh: (
+                                       auto_scaling_group_name: ::String
+                                     ) -> _RollbackInstanceRefreshResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RollbackInstanceRefreshResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#set_desired_capacity-instance_method
+      def set_desired_capacity: (
+                                  auto_scaling_group_name: ::String,
+                                  desired_capacity: ::Integer,
+                                  ?honor_cooldown: bool
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#set_instance_health-instance_method
+      def set_instance_health: (
+                                 instance_id: ::String,
+                                 health_status: ::String,
+                                 ?should_respect_grace_period: bool
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _SetInstanceProtectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetInstanceProtectionAnswer]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#set_instance_protection-instance_method
+      def set_instance_protection: (
+                                     instance_ids: Array[::String],
+                                     auto_scaling_group_name: ::String,
+                                     protected_from_scale_in: bool
+                                   ) -> _SetInstanceProtectionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetInstanceProtectionResponseSuccess
+
+      interface _StartInstanceRefreshResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartInstanceRefreshAnswer]
+        def instance_refresh_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#start_instance_refresh-instance_method
+      def start_instance_refresh: (
+                                    auto_scaling_group_name: ::String,
+                                    ?strategy: ("Rolling"),
+                                    ?desired_configuration: {
+                                      launch_template: {
+                                        launch_template_id: ::String?,
+                                        launch_template_name: ::String?,
+                                        version: ::String?
+                                      }?,
+                                      mixed_instances_policy: {
+                                        launch_template: {
+                                          launch_template_specification: {
+                                            launch_template_id: ::String?,
+                                            launch_template_name: ::String?,
+                                            version: ::String?
+                                          }?,
+                                          overrides: Array[
+                                            {
+                                              instance_type: ::String?,
+                                              weighted_capacity: ::String?,
+                                              launch_template_specification: {
+                                                launch_template_id: ::String?,
+                                                launch_template_name: ::String?,
+                                                version: ::String?
+                                              }?,
+                                              instance_requirements: {
+                                                v_cpu_count: {
+                                                  min: ::Integer,
+                                                  max: ::Integer?
+                                                },
+                                                memory_mi_b: {
+                                                  min: ::Integer,
+                                                  max: ::Integer?
+                                                },
+                                                cpu_manufacturers: Array[("intel" | "amd" | "amazon-web-services")]?,
+                                                memory_gi_b_per_v_cpu: {
+                                                  min: ::Float?,
+                                                  max: ::Float?
+                                                }?,
+                                                excluded_instance_types: Array[::String]?,
+                                                instance_generations: Array[("current" | "previous")]?,
+                                                spot_max_price_percentage_over_lowest_price: ::Integer?,
+                                                on_demand_max_price_percentage_over_lowest_price: ::Integer?,
+                                                bare_metal: ("included" | "excluded" | "required")?,
+                                                burstable_performance: ("included" | "excluded" | "required")?,
+                                                require_hibernate_support: bool?,
+                                                network_interface_count: {
+                                                  min: ::Integer?,
+                                                  max: ::Integer?
+                                                }?,
+                                                local_storage: ("included" | "excluded" | "required")?,
+                                                local_storage_types: Array[("hdd" | "ssd")]?,
+                                                total_local_storage_gb: {
+                                                  min: ::Float?,
+                                                  max: ::Float?
+                                                }?,
+                                                baseline_ebs_bandwidth_mbps: {
+                                                  min: ::Integer?,
+                                                  max: ::Integer?
+                                                }?,
+                                                accelerator_types: Array[("gpu" | "fpga" | "inference")]?,
+                                                accelerator_count: {
+                                                  min: ::Integer?,
+                                                  max: ::Integer?
+                                                }?,
+                                                accelerator_manufacturers: Array[("nvidia" | "amd" | "amazon-web-services" | "xilinx")]?,
+                                                accelerator_names: Array[("a100" | "v100" | "k80" | "t4" | "m60" | "radeon-pro-v520" | "vu9p")]?,
+                                                accelerator_total_memory_mi_b: {
+                                                  min: ::Integer?,
+                                                  max: ::Integer?
+                                                }?,
+                                                network_bandwidth_gbps: {
+                                                  min: ::Float?,
+                                                  max: ::Float?
+                                                }?,
+                                                allowed_instance_types: Array[::String]?
+                                              }?
+                                            },
+                                          ]?
+                                        }?,
+                                        instances_distribution: {
+                                          on_demand_allocation_strategy: ::String?,
+                                          on_demand_base_capacity: ::Integer?,
+                                          on_demand_percentage_above_base_capacity: ::Integer?,
+                                          spot_allocation_strategy: ::String?,
+                                          spot_instance_pools: ::Integer?,
+                                          spot_max_price: ::String?
+                                        }?
+                                      }?
+                                    },
+                                    ?preferences: {
+                                      min_healthy_percentage: ::Integer?,
+                                      instance_warmup: ::Integer?,
+                                      checkpoint_percentages: Array[::Integer]?,
+                                      checkpoint_delay: ::Integer?,
+                                      skip_matching: bool?,
+                                      auto_rollback: bool?,
+                                      scale_in_protected_instances: ("Refresh" | "Ignore" | "Wait")?,
+                                      standby_instances: ("Terminate" | "Ignore" | "Wait")?,
+                                      alarm_specification: {
+                                        alarms: Array[::String]?
+                                      }?,
+                                      max_healthy_percentage: ::Integer?
+                                    }
+                                  ) -> _StartInstanceRefreshResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartInstanceRefreshResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#suspend_processes-instance_method
+      def suspend_processes: (
+                               auto_scaling_group_name: ::String,
+                               ?scaling_processes: Array[::String]
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _TerminateInstanceInAutoScalingGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ActivityType]
+        def activity: () -> Types::Activity
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#terminate_instance_in_auto_scaling_group-instance_method
+      def terminate_instance_in_auto_scaling_group: (
+                                                      instance_id: ::String,
+                                                      should_decrement_desired_capacity: bool
+                                                    ) -> _TerminateInstanceInAutoScalingGroupResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TerminateInstanceInAutoScalingGroupResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#update_auto_scaling_group-instance_method
+      def update_auto_scaling_group: (
+                                       auto_scaling_group_name: ::String,
+                                       ?launch_configuration_name: ::String,
+                                       ?launch_template: {
+                                         launch_template_id: ::String?,
+                                         launch_template_name: ::String?,
+                                         version: ::String?
+                                       },
+                                       ?mixed_instances_policy: {
+                                         launch_template: {
+                                           launch_template_specification: {
+                                             launch_template_id: ::String?,
+                                             launch_template_name: ::String?,
+                                             version: ::String?
+                                           }?,
+                                           overrides: Array[
+                                             {
+                                               instance_type: ::String?,
+                                               weighted_capacity: ::String?,
+                                               launch_template_specification: {
+                                                 launch_template_id: ::String?,
+                                                 launch_template_name: ::String?,
+                                                 version: ::String?
+                                               }?,
+                                               instance_requirements: {
+                                                 v_cpu_count: {
+                                                   min: ::Integer,
+                                                   max: ::Integer?
+                                                 },
+                                                 memory_mi_b: {
+                                                   min: ::Integer,
+                                                   max: ::Integer?
+                                                 },
+                                                 cpu_manufacturers: Array[("intel" | "amd" | "amazon-web-services")]?,
+                                                 memory_gi_b_per_v_cpu: {
+                                                   min: ::Float?,
+                                                   max: ::Float?
+                                                 }?,
+                                                 excluded_instance_types: Array[::String]?,
+                                                 instance_generations: Array[("current" | "previous")]?,
+                                                 spot_max_price_percentage_over_lowest_price: ::Integer?,
+                                                 on_demand_max_price_percentage_over_lowest_price: ::Integer?,
+                                                 bare_metal: ("included" | "excluded" | "required")?,
+                                                 burstable_performance: ("included" | "excluded" | "required")?,
+                                                 require_hibernate_support: bool?,
+                                                 network_interface_count: {
+                                                   min: ::Integer?,
+                                                   max: ::Integer?
+                                                 }?,
+                                                 local_storage: ("included" | "excluded" | "required")?,
+                                                 local_storage_types: Array[("hdd" | "ssd")]?,
+                                                 total_local_storage_gb: {
+                                                   min: ::Float?,
+                                                   max: ::Float?
+                                                 }?,
+                                                 baseline_ebs_bandwidth_mbps: {
+                                                   min: ::Integer?,
+                                                   max: ::Integer?
+                                                 }?,
+                                                 accelerator_types: Array[("gpu" | "fpga" | "inference")]?,
+                                                 accelerator_count: {
+                                                   min: ::Integer?,
+                                                   max: ::Integer?
+                                                 }?,
+                                                 accelerator_manufacturers: Array[("nvidia" | "amd" | "amazon-web-services" | "xilinx")]?,
+                                                 accelerator_names: Array[("a100" | "v100" | "k80" | "t4" | "m60" | "radeon-pro-v520" | "vu9p")]?,
+                                                 accelerator_total_memory_mi_b: {
+                                                   min: ::Integer?,
+                                                   max: ::Integer?
+                                                 }?,
+                                                 network_bandwidth_gbps: {
+                                                   min: ::Float?,
+                                                   max: ::Float?
+                                                 }?,
+                                                 allowed_instance_types: Array[::String]?
+                                               }?
+                                             },
+                                           ]?
+                                         }?,
+                                         instances_distribution: {
+                                           on_demand_allocation_strategy: ::String?,
+                                           on_demand_base_capacity: ::Integer?,
+                                           on_demand_percentage_above_base_capacity: ::Integer?,
+                                           spot_allocation_strategy: ::String?,
+                                           spot_instance_pools: ::Integer?,
+                                           spot_max_price: ::String?
+                                         }?
+                                       },
+                                       ?min_size: ::Integer,
+                                       ?max_size: ::Integer,
+                                       ?desired_capacity: ::Integer,
+                                       ?default_cooldown: ::Integer,
+                                       ?availability_zones: Array[::String],
+                                       ?health_check_type: ::String,
+                                       ?health_check_grace_period: ::Integer,
+                                       ?placement_group: ::String,
+                                       ?vpc_zone_identifier: ::String,
+                                       ?termination_policies: Array[::String],
+                                       ?new_instances_protected_from_scale_in: bool,
+                                       ?service_linked_role_arn: ::String,
+                                       ?max_instance_lifetime: ::Integer,
+                                       ?capacity_rebalance: bool,
+                                       ?context: ::String,
+                                       ?desired_capacity_type: ::String,
+                                       ?default_instance_warmup: ::Integer,
+                                       ?instance_maintenance_policy: {
+                                         min_healthy_percentage: ::Integer?,
+                                         max_healthy_percentage: ::Integer?
+                                       }
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#wait_until-instance_method
+      def wait_until: (:group_exists waiter_name, 
+                    ?auto_scaling_group_names: Array[::String],
+                    ?next_token: ::String,
+                    ?max_records: ::Integer,
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ]
+                  ) -> Client::_DescribeAutoScalingGroupsResponseSuccess
+                    | (:group_exists waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeAutoScalingGroupsResponseSuccess
+                    | (:group_in_service waiter_name, 
+                    ?auto_scaling_group_names: Array[::String],
+                    ?next_token: ::String,
+                    ?max_records: ::Integer,
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ]
+                  ) -> Client::_DescribeAutoScalingGroupsResponseSuccess
+                    | (:group_in_service waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeAutoScalingGroupsResponseSuccess
+                    | (:group_not_exists waiter_name, 
+                    ?auto_scaling_group_names: Array[::String],
+                    ?next_token: ::String,
+                    ?max_records: ::Integer,
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ]
+                  ) -> Client::_DescribeAutoScalingGroupsResponseSuccess
+                    | (:group_not_exists waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeAutoScalingGroupsResponseSuccess
+    end
+  end
+end
+

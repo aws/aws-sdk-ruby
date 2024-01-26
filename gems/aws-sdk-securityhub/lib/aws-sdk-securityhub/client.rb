@@ -10348,7 +10348,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.100.0'
+      context[:gem_version] = '1.101.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,0 +1,218 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::BackupStorage
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BackupObject
+      attr_accessor name: ::String
+      attr_accessor chunks_count: ::Integer
+      attr_accessor metadata_string: ::String
+      attr_accessor object_checksum: ::String
+      attr_accessor object_checksum_algorithm: ("SUMMARY")
+      attr_accessor object_token: ::String
+      SENSITIVE: []
+    end
+
+    class Chunk
+      attr_accessor index: ::Integer
+      attr_accessor length: ::Integer
+      attr_accessor checksum: ::String
+      attr_accessor checksum_algorithm: ("SHA256")
+      attr_accessor chunk_token: ::String
+      SENSITIVE: []
+    end
+
+    class DataAlreadyExistsException
+      attr_accessor message: ::String
+      attr_accessor checksum: ::String
+      attr_accessor checksum_algorithm: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteObjectInput
+      attr_accessor backup_job_id: ::String
+      attr_accessor object_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetChunkInput
+      attr_accessor storage_job_id: ::String
+      attr_accessor chunk_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetChunkOutput
+      attr_accessor data: ::IO
+      attr_accessor length: ::Integer
+      attr_accessor checksum: ::String
+      attr_accessor checksum_algorithm: ("SHA256")
+      SENSITIVE: []
+    end
+
+    class GetObjectMetadataInput
+      attr_accessor storage_job_id: ::String
+      attr_accessor object_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetObjectMetadataOutput
+      attr_accessor metadata_string: ::String
+      attr_accessor metadata_blob: ::IO
+      attr_accessor metadata_blob_length: ::Integer
+      attr_accessor metadata_blob_checksum: ::String
+      attr_accessor metadata_blob_checksum_algorithm: ("SHA256")
+      SENSITIVE: []
+    end
+
+    class IllegalArgumentException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KMSInvalidKeyUsageException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListChunksInput
+      attr_accessor storage_job_id: ::String
+      attr_accessor object_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListChunksOutput
+      attr_accessor chunk_list: ::Array[Types::Chunk]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListObjectsInput
+      attr_accessor storage_job_id: ::String
+      attr_accessor starting_object_name: ::String
+      attr_accessor starting_object_prefix: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor created_before: ::Time
+      attr_accessor created_after: ::Time
+      SENSITIVE: []
+    end
+
+    class ListObjectsOutput
+      attr_accessor object_list: ::Array[Types::BackupObject]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class NotReadableInputStreamException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NotifyObjectCompleteInput
+      attr_accessor backup_job_id: ::String
+      attr_accessor upload_id: ::String
+      attr_accessor object_checksum: ::String
+      attr_accessor object_checksum_algorithm: ("SUMMARY")
+      attr_accessor metadata_string: ::String
+      attr_accessor metadata_blob: ::IO
+      attr_accessor metadata_blob_length: ::Integer
+      attr_accessor metadata_blob_checksum: ::String
+      attr_accessor metadata_blob_checksum_algorithm: ("SHA256")
+      SENSITIVE: []
+    end
+
+    class NotifyObjectCompleteOutput
+      attr_accessor object_checksum: ::String
+      attr_accessor object_checksum_algorithm: ("SUMMARY")
+      SENSITIVE: []
+    end
+
+    class PutChunkInput
+      attr_accessor backup_job_id: ::String
+      attr_accessor upload_id: ::String
+      attr_accessor chunk_index: ::Integer
+      attr_accessor data: ::IO
+      attr_accessor length: ::Integer
+      attr_accessor checksum: ::String
+      attr_accessor checksum_algorithm: ("SHA256")
+      SENSITIVE: []
+    end
+
+    class PutChunkOutput
+      attr_accessor chunk_checksum: ::String
+      attr_accessor chunk_checksum_algorithm: ("SHA256")
+      SENSITIVE: []
+    end
+
+    class PutObjectInput
+      attr_accessor backup_job_id: ::String
+      attr_accessor object_name: ::String
+      attr_accessor metadata_string: ::String
+      attr_accessor inline_chunk: ::IO
+      attr_accessor inline_chunk_length: ::Integer
+      attr_accessor inline_chunk_checksum: ::String
+      attr_accessor inline_chunk_checksum_algorithm: ::String
+      attr_accessor object_checksum: ::String
+      attr_accessor object_checksum_algorithm: ("SUMMARY")
+      attr_accessor throw_on_duplicate: bool
+      SENSITIVE: []
+    end
+
+    class PutObjectOutput
+      attr_accessor inline_chunk_checksum: ::String
+      attr_accessor inline_chunk_checksum_algorithm: ("SHA256")
+      attr_accessor object_checksum: ::String
+      attr_accessor object_checksum_algorithm: ("SUMMARY")
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RetryableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceInternalException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartObjectInput
+      attr_accessor backup_job_id: ::String
+      attr_accessor object_name: ::String
+      attr_accessor throw_on_duplicate: bool
+      SENSITIVE: []
+    end
+
+    class StartObjectOutput
+      attr_accessor upload_id: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

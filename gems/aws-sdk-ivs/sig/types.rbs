@@ -1,0 +1,582 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::IVS
+  module Types
+
+    class AccessDeniedException
+      attr_accessor exception_message: ::String
+      SENSITIVE: []
+    end
+
+    class AudioConfiguration
+      attr_accessor channels: ::Integer
+      attr_accessor codec: ::String
+      attr_accessor sample_rate: ::Integer
+      attr_accessor target_bitrate: ::Integer
+      SENSITIVE: []
+    end
+
+    class BatchError
+      attr_accessor arn: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetChannelRequest
+      attr_accessor arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetChannelResponse
+      attr_accessor channels: ::Array[Types::Channel]
+      attr_accessor errors: ::Array[Types::BatchError]
+      SENSITIVE: []
+    end
+
+    class BatchGetStreamKeyRequest
+      attr_accessor arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetStreamKeyResponse
+      attr_accessor errors: ::Array[Types::BatchError]
+      attr_accessor stream_keys: ::Array[Types::StreamKey]
+      SENSITIVE: []
+    end
+
+    class BatchStartViewerSessionRevocationError
+      attr_accessor channel_arn: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor viewer_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchStartViewerSessionRevocationRequest
+      attr_accessor viewer_sessions: ::Array[Types::BatchStartViewerSessionRevocationViewerSession]
+      SENSITIVE: []
+    end
+
+    class BatchStartViewerSessionRevocationResponse
+      attr_accessor errors: ::Array[Types::BatchStartViewerSessionRevocationError]
+      SENSITIVE: []
+    end
+
+    class BatchStartViewerSessionRevocationViewerSession
+      attr_accessor channel_arn: ::String
+      attr_accessor viewer_id: ::String
+      attr_accessor viewer_session_versions_less_than_or_equal_to: ::Integer
+      SENSITIVE: []
+    end
+
+    class Channel
+      attr_accessor arn: ::String
+      attr_accessor authorized: bool
+      attr_accessor ingest_endpoint: ::String
+      attr_accessor insecure_ingest: bool
+      attr_accessor latency_mode: ("NORMAL" | "LOW")
+      attr_accessor name: ::String
+      attr_accessor playback_url: ::String
+      attr_accessor preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY")
+      attr_accessor recording_configuration_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("BASIC" | "STANDARD" | "ADVANCED_SD" | "ADVANCED_HD")
+      SENSITIVE: []
+    end
+
+    class ChannelNotBroadcasting
+      attr_accessor exception_message: ::String
+      SENSITIVE: []
+    end
+
+    class ChannelSummary
+      attr_accessor arn: ::String
+      attr_accessor authorized: bool
+      attr_accessor insecure_ingest: bool
+      attr_accessor latency_mode: ("NORMAL" | "LOW")
+      attr_accessor name: ::String
+      attr_accessor preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY")
+      attr_accessor recording_configuration_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("BASIC" | "STANDARD" | "ADVANCED_SD" | "ADVANCED_HD")
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor exception_message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateChannelRequest
+      attr_accessor authorized: bool
+      attr_accessor insecure_ingest: bool
+      attr_accessor latency_mode: ("NORMAL" | "LOW")
+      attr_accessor name: ::String
+      attr_accessor preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY")
+      attr_accessor recording_configuration_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("BASIC" | "STANDARD" | "ADVANCED_SD" | "ADVANCED_HD")
+      SENSITIVE: []
+    end
+
+    class CreateChannelResponse
+      attr_accessor channel: Types::Channel
+      attr_accessor stream_key: Types::StreamKey
+      SENSITIVE: []
+    end
+
+    class CreateRecordingConfigurationRequest
+      attr_accessor destination_configuration: Types::DestinationConfiguration
+      attr_accessor name: ::String
+      attr_accessor recording_reconnect_window_seconds: ::Integer
+      attr_accessor rendition_configuration: Types::RenditionConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor thumbnail_configuration: Types::ThumbnailConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateRecordingConfigurationResponse
+      attr_accessor recording_configuration: Types::RecordingConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateStreamKeyRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateStreamKeyResponse
+      attr_accessor stream_key: Types::StreamKey
+      SENSITIVE: []
+    end
+
+    class DeleteChannelRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePlaybackKeyPairRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePlaybackKeyPairResponse < Aws::EmptyStructure
+    end
+
+    class DeleteRecordingConfigurationRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStreamKeyRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DestinationConfiguration
+      attr_accessor s3: Types::S3DestinationConfiguration
+      SENSITIVE: []
+    end
+
+    class GetChannelRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetChannelResponse
+      attr_accessor channel: Types::Channel
+      SENSITIVE: []
+    end
+
+    class GetPlaybackKeyPairRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetPlaybackKeyPairResponse
+      attr_accessor key_pair: Types::PlaybackKeyPair
+      SENSITIVE: []
+    end
+
+    class GetRecordingConfigurationRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetRecordingConfigurationResponse
+      attr_accessor recording_configuration: Types::RecordingConfiguration
+      SENSITIVE: []
+    end
+
+    class GetStreamKeyRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetStreamKeyResponse
+      attr_accessor stream_key: Types::StreamKey
+      SENSITIVE: []
+    end
+
+    class GetStreamRequest
+      attr_accessor channel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetStreamResponse
+      attr_accessor stream: Types::Stream
+      SENSITIVE: []
+    end
+
+    class GetStreamSessionRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor stream_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetStreamSessionResponse
+      attr_accessor stream_session: Types::StreamSession
+      SENSITIVE: []
+    end
+
+    class ImportPlaybackKeyPairRequest
+      attr_accessor name: ::String
+      attr_accessor public_key_material: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ImportPlaybackKeyPairResponse
+      attr_accessor key_pair: Types::PlaybackKeyPair
+      SENSITIVE: []
+    end
+
+    class IngestConfiguration
+      attr_accessor audio: Types::AudioConfiguration
+      attr_accessor video: Types::VideoConfiguration
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor exception_message: ::String
+      SENSITIVE: []
+    end
+
+    class ListChannelsRequest
+      attr_accessor filter_by_name: ::String
+      attr_accessor filter_by_recording_configuration_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListChannelsResponse
+      attr_accessor channels: ::Array[Types::ChannelSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPlaybackKeyPairsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPlaybackKeyPairsResponse
+      attr_accessor key_pairs: ::Array[Types::PlaybackKeyPairSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecordingConfigurationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecordingConfigurationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor recording_configurations: ::Array[Types::RecordingConfigurationSummary]
+      SENSITIVE: []
+    end
+
+    class ListStreamKeysRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStreamKeysResponse
+      attr_accessor next_token: ::String
+      attr_accessor stream_keys: ::Array[Types::StreamKeySummary]
+      SENSITIVE: []
+    end
+
+    class ListStreamSessionsRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStreamSessionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor stream_sessions: ::Array[Types::StreamSessionSummary]
+      SENSITIVE: []
+    end
+
+    class ListStreamsRequest
+      attr_accessor filter_by: Types::StreamFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStreamsResponse
+      attr_accessor next_token: ::String
+      attr_accessor streams: ::Array[Types::StreamSummary]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PendingVerification
+      attr_accessor exception_message: ::String
+      SENSITIVE: []
+    end
+
+    class PlaybackKeyPair
+      attr_accessor arn: ::String
+      attr_accessor fingerprint: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PlaybackKeyPairSummary
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PutMetadataRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor metadata: ::String
+      SENSITIVE: [:metadata]
+    end
+
+    class RecordingConfiguration
+      attr_accessor arn: ::String
+      attr_accessor destination_configuration: Types::DestinationConfiguration
+      attr_accessor name: ::String
+      attr_accessor recording_reconnect_window_seconds: ::Integer
+      attr_accessor rendition_configuration: Types::RenditionConfiguration
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "ACTIVE")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor thumbnail_configuration: Types::ThumbnailConfiguration
+      SENSITIVE: []
+    end
+
+    class RecordingConfigurationSummary
+      attr_accessor arn: ::String
+      attr_accessor destination_configuration: Types::DestinationConfiguration
+      attr_accessor name: ::String
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "ACTIVE")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RenditionConfiguration
+      attr_accessor rendition_selection: ("ALL" | "NONE" | "CUSTOM")
+      attr_accessor renditions: ::Array[("FULL_HD" | "HD" | "SD" | "LOWEST_RESOLUTION")]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor exception_message: ::String
+      SENSITIVE: []
+    end
+
+    class S3DestinationConfiguration
+      attr_accessor bucket_name: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor exception_message: ::String
+      SENSITIVE: []
+    end
+
+    class StartViewerSessionRevocationRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor viewer_id: ::String
+      attr_accessor viewer_session_versions_less_than_or_equal_to: ::Integer
+      SENSITIVE: []
+    end
+
+    class StartViewerSessionRevocationResponse < Aws::EmptyStructure
+    end
+
+    class StopStreamRequest
+      attr_accessor channel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopStreamResponse < Aws::EmptyStructure
+    end
+
+    class Stream
+      attr_accessor channel_arn: ::String
+      attr_accessor health: ("HEALTHY" | "STARVING" | "UNKNOWN")
+      attr_accessor playback_url: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor state: ("LIVE" | "OFFLINE")
+      attr_accessor stream_id: ::String
+      attr_accessor viewer_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class StreamEvent
+      attr_accessor event_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class StreamFilters
+      attr_accessor health: ("HEALTHY" | "STARVING" | "UNKNOWN")
+      SENSITIVE: []
+    end
+
+    class StreamKey
+      attr_accessor arn: ::String
+      attr_accessor channel_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor value: ::String
+      SENSITIVE: [:value]
+    end
+
+    class StreamKeySummary
+      attr_accessor arn: ::String
+      attr_accessor channel_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StreamSession
+      attr_accessor channel: Types::Channel
+      attr_accessor end_time: ::Time
+      attr_accessor ingest_configuration: Types::IngestConfiguration
+      attr_accessor recording_configuration: Types::RecordingConfiguration
+      attr_accessor start_time: ::Time
+      attr_accessor stream_id: ::String
+      attr_accessor truncated_events: ::Array[Types::StreamEvent]
+      SENSITIVE: []
+    end
+
+    class StreamSessionSummary
+      attr_accessor end_time: ::Time
+      attr_accessor has_error_event: bool
+      attr_accessor start_time: ::Time
+      attr_accessor stream_id: ::String
+      SENSITIVE: []
+    end
+
+    class StreamSummary
+      attr_accessor channel_arn: ::String
+      attr_accessor health: ("HEALTHY" | "STARVING" | "UNKNOWN")
+      attr_accessor start_time: ::Time
+      attr_accessor state: ("LIVE" | "OFFLINE")
+      attr_accessor stream_id: ::String
+      attr_accessor viewer_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class StreamUnavailable
+      attr_accessor exception_message: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor exception_message: ::String
+      SENSITIVE: []
+    end
+
+    class ThumbnailConfiguration
+      attr_accessor recording_mode: ("DISABLED" | "INTERVAL")
+      attr_accessor resolution: ("FULL_HD" | "HD" | "SD" | "LOWEST_RESOLUTION")
+      attr_accessor storage: ::Array[("SEQUENTIAL" | "LATEST")]
+      attr_accessor target_interval_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateChannelRequest
+      attr_accessor arn: ::String
+      attr_accessor authorized: bool
+      attr_accessor insecure_ingest: bool
+      attr_accessor latency_mode: ("NORMAL" | "LOW")
+      attr_accessor name: ::String
+      attr_accessor preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY")
+      attr_accessor recording_configuration_arn: ::String
+      attr_accessor type: ("BASIC" | "STANDARD" | "ADVANCED_SD" | "ADVANCED_HD")
+      SENSITIVE: []
+    end
+
+    class UpdateChannelResponse
+      attr_accessor channel: Types::Channel
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor exception_message: ::String
+      SENSITIVE: []
+    end
+
+    class VideoConfiguration
+      attr_accessor avc_level: ::String
+      attr_accessor avc_profile: ::String
+      attr_accessor codec: ::String
+      attr_accessor encoder: ::String
+      attr_accessor target_bitrate: ::Integer
+      attr_accessor target_framerate: ::Integer
+      attr_accessor video_height: ::Integer
+      attr_accessor video_width: ::Integer
+      SENSITIVE: []
+    end
+  end
+end

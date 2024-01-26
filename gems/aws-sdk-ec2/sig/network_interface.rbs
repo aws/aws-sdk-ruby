@@ -1,0 +1,232 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EC2
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html
+    class NetworkInterface
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#initialize-instance_method
+      def initialize: (String id, Hash[Symbol, untyped] options) -> void
+                    | (id: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#id-instance_method
+      def id: () -> String
+      alias network_interface_id id
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#attachment-instance_method
+      def attachment: () -> Types::NetworkInterfaceAttachment
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#availability_zone-instance_method
+      def availability_zone: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#connection_tracking_configuration-instance_method
+      def connection_tracking_configuration: () -> Types::ConnectionTrackingConfiguration
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#description-instance_method
+      def description: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#groups-instance_method
+      def groups: () -> ::Array[Types::GroupIdentifier]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#interface_type-instance_method
+      def interface_type: () -> ("interface" | "natGateway" | "efa" | "trunk" | "load_balancer" | "network_load_balancer" | "vpc_endpoint" | "branch" | "transit_gateway" | "lambda" | "quicksight" | "global_accelerator_managed" | "api_gateway_managed" | "gateway_load_balancer" | "gateway_load_balancer_endpoint" | "iot_rules_managed" | "aws_codestar_connections_managed")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#ipv_6_addresses-instance_method
+      def ipv_6_addresses: () -> ::Array[Types::NetworkInterfaceIpv6Address]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#mac_address-instance_method
+      def mac_address: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#outpost_arn-instance_method
+      def outpost_arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#owner_id-instance_method
+      def owner_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#private_dns_name-instance_method
+      def private_dns_name: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#private_ip_address-instance_method
+      def private_ip_address: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#private_ip_addresses-instance_method
+      def private_ip_addresses: () -> ::Array[Types::NetworkInterfacePrivateIpAddress]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#ipv_4_prefixes-instance_method
+      def ipv_4_prefixes: () -> ::Array[Types::Ipv4PrefixSpecification]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#ipv_6_prefixes-instance_method
+      def ipv_6_prefixes: () -> ::Array[Types::Ipv6PrefixSpecification]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#requester_id-instance_method
+      def requester_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#requester_managed-instance_method
+      def requester_managed: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#source_dest_check-instance_method
+      def source_dest_check: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#status-instance_method
+      def status: () -> ("available" | "associated" | "attaching" | "in-use" | "detaching")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#subnet_id-instance_method
+      def subnet_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#tag_set-instance_method
+      def tag_set: () -> ::Array[Types::Tag]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#vpc_id-instance_method
+      def vpc_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#deny_all_igw_traffic-instance_method
+      def deny_all_igw_traffic: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#ipv_6_native-instance_method
+      def ipv_6_native: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#ipv_6_address-instance_method
+      def ipv_6_address: () -> ::String
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#data-instance_method
+      def data: () -> Types::NetworkInterface
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#assign_private_ip_addresses-instance_method
+      def assign_private_ip_addresses: (
+                                         ?allow_reassignment: bool,
+                                         ?private_ip_addresses: Array[::String],
+                                         ?secondary_private_ip_address_count: ::Integer,
+                                         ?ipv_4_prefixes: Array[::String],
+                                         ?ipv_4_prefix_count: ::Integer
+                                       ) -> Types::AssignPrivateIpAddressesResult
+                                     | (?Hash[Symbol, untyped]) -> Types::AssignPrivateIpAddressesResult
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#attach-instance_method
+      def attach: (
+                    device_index: ::Integer,
+                    ?dry_run: bool,
+                    instance_id: ::String,
+                    ?network_card_index: ::Integer,
+                    ?ena_srd_specification: {
+                      ena_srd_enabled: bool?,
+                      ena_srd_udp_specification: {
+                        ena_srd_udp_enabled: bool?
+                      }?
+                    }
+                  ) -> Types::AttachNetworkInterfaceResult
+                | (?Hash[Symbol, untyped]) -> Types::AttachNetworkInterfaceResult
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#create_tags-instance_method
+      def create_tags: (
+                         ?dry_run: bool,
+                         tags: Array[
+                           {
+                             key: ::String?,
+                             value: ::String?
+                           },
+                         ]
+                       ) -> Tag::Collection
+                     | (?Hash[Symbol, untyped]) -> Tag::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#delete_tags-instance_method
+      def delete_tags: (
+                         ?dry_run: bool,
+                         ?tags: Array[
+                           {
+                             key: ::String?,
+                             value: ::String?
+                           },
+                         ]
+                       ) -> Tag::Collection
+                     | (?Hash[Symbol, untyped]) -> Tag::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#delete-instance_method
+      def delete: (
+                    ?dry_run: bool
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#describe_attribute-instance_method
+      def describe_attribute: (
+                                ?attribute: ("description" | "groupSet" | "sourceDestCheck" | "attachment"),
+                                ?dry_run: bool
+                              ) -> Types::DescribeNetworkInterfaceAttributeResult
+                            | (?Hash[Symbol, untyped]) -> Types::DescribeNetworkInterfaceAttributeResult
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#detach-instance_method
+      def detach: (
+                    ?dry_run: bool,
+                    ?force: bool
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#modify_attribute-instance_method
+      def modify_attribute: (
+                              ?attachment: {
+                                attachment_id: ::String?,
+                                delete_on_termination: bool?
+                              },
+                              ?description: untyped,
+                              ?dry_run: bool,
+                              ?groups: Array[::String],
+                              ?source_dest_check: {
+                                value: bool?
+                              },
+                              ?ena_srd_specification: {
+                                ena_srd_enabled: bool?,
+                                ena_srd_udp_specification: {
+                                  ena_srd_udp_enabled: bool?
+                                }?
+                              },
+                              ?enable_primary_ipv_6: bool,
+                              ?connection_tracking_specification: {
+                                tcp_established_timeout: ::Integer?,
+                                udp_stream_timeout: ::Integer?,
+                                udp_timeout: ::Integer?
+                              }
+                            ) -> ::Aws::EmptyStructure
+                          | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#reset_attribute-instance_method
+      def reset_attribute: (
+                             ?dry_run: bool,
+                             ?source_dest_check: ::String
+                           ) -> ::Aws::EmptyStructure
+                         | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#unassign_private_ip_addresses-instance_method
+      def unassign_private_ip_addresses: (
+                                           ?private_ip_addresses: Array[::String],
+                                           ?ipv_4_prefixes: Array[::String]
+                                         ) -> ::Aws::EmptyStructure
+                                       | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#association-instance_method
+      def association: () -> NetworkInterfaceAssociation?
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#subnet-instance_method
+      def subnet: () -> Subnet?
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#vpc-instance_method
+      def vpc: () -> Vpc?
+
+      class Collection < ::Aws::Resources::Collection[NetworkInterface]
+      end
+    end
+  end
+end

@@ -1,0 +1,806 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ChimeSDKMessaging
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#associate_channel_flow-instance_method
+      def associate_channel_flow: (
+                                    channel_arn: ::String,
+                                    channel_flow_arn: ::String,
+                                    chime_bearer: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _BatchCreateChannelMembershipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchCreateChannelMembershipResponse]
+        def batch_channel_memberships: () -> Types::BatchChannelMemberships
+        def errors: () -> ::Array[Types::BatchCreateChannelMembershipError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#batch_create_channel_membership-instance_method
+      def batch_create_channel_membership: (
+                                             channel_arn: ::String,
+                                             ?type: ("DEFAULT" | "HIDDEN"),
+                                             member_arns: Array[::String],
+                                             chime_bearer: ::String,
+                                             ?sub_channel_id: ::String
+                                           ) -> _BatchCreateChannelMembershipResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchCreateChannelMembershipResponseSuccess
+
+      interface _ChannelFlowCallbackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ChannelFlowCallbackResponse]
+        def channel_arn: () -> ::String
+        def callback_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#channel_flow_callback-instance_method
+      def channel_flow_callback: (
+                                   callback_id: ::String,
+                                   channel_arn: ::String,
+                                   ?delete_resource: bool,
+                                   channel_message: {
+                                     message_id: ::String,
+                                     content: ::String?,
+                                     metadata: ::String?,
+                                     push_notification: {
+                                       title: ::String?,
+                                       body: ::String?,
+                                       type: ("DEFAULT" | "VOIP")?
+                                     }?,
+                                     message_attributes: Hash[::String, {
+                                         string_values: Array[::String]?
+                                       }]?,
+                                     sub_channel_id: ::String?,
+                                     content_type: ::String?
+                                   }
+                                 ) -> _ChannelFlowCallbackResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ChannelFlowCallbackResponseSuccess
+
+      interface _CreateChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateChannelResponse]
+        def channel_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#create_channel-instance_method
+      def create_channel: (
+                            app_instance_arn: ::String,
+                            name: ::String,
+                            ?mode: ("UNRESTRICTED" | "RESTRICTED"),
+                            ?privacy: ("PUBLIC" | "PRIVATE"),
+                            ?metadata: ::String,
+                            client_request_token: ::String,
+                            ?tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ],
+                            chime_bearer: ::String,
+                            ?channel_id: ::String,
+                            ?member_arns: Array[::String],
+                            ?moderator_arns: Array[::String],
+                            ?elastic_channel_configuration: {
+                              maximum_sub_channels: ::Integer,
+                              target_memberships_per_sub_channel: ::Integer,
+                              minimum_membership_percentage: ::Integer
+                            },
+                            ?expiration_settings: {
+                              expiration_days: ::Integer,
+                              expiration_criterion: ("CREATED_TIMESTAMP" | "LAST_MESSAGE_TIMESTAMP")
+                            }
+                          ) -> _CreateChannelResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelResponseSuccess
+
+      interface _CreateChannelBanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateChannelBanResponse]
+        def channel_arn: () -> ::String
+        def member: () -> Types::Identity
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#create_channel_ban-instance_method
+      def create_channel_ban: (
+                                channel_arn: ::String,
+                                member_arn: ::String,
+                                chime_bearer: ::String
+                              ) -> _CreateChannelBanResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelBanResponseSuccess
+
+      interface _CreateChannelFlowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateChannelFlowResponse]
+        def channel_flow_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#create_channel_flow-instance_method
+      def create_channel_flow: (
+                                 app_instance_arn: ::String,
+                                 processors: Array[
+                                   {
+                                     name: ::String,
+                                     configuration: {
+                                       lambda: {
+                                         resource_arn: ::String,
+                                         invocation_type: ("ASYNC")
+                                       }
+                                     },
+                                     execution_order: ::Integer,
+                                     fallback_action: ("CONTINUE" | "ABORT")
+                                   },
+                                 ],
+                                 name: ::String,
+                                 ?tags: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String
+                                   },
+                                 ],
+                                 client_request_token: ::String
+                               ) -> _CreateChannelFlowResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelFlowResponseSuccess
+
+      interface _CreateChannelMembershipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateChannelMembershipResponse]
+        def channel_arn: () -> ::String
+        def member: () -> Types::Identity
+        def sub_channel_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#create_channel_membership-instance_method
+      def create_channel_membership: (
+                                       channel_arn: ::String,
+                                       member_arn: ::String,
+                                       type: ("DEFAULT" | "HIDDEN"),
+                                       chime_bearer: ::String,
+                                       ?sub_channel_id: ::String
+                                     ) -> _CreateChannelMembershipResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelMembershipResponseSuccess
+
+      interface _CreateChannelModeratorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateChannelModeratorResponse]
+        def channel_arn: () -> ::String
+        def channel_moderator: () -> Types::Identity
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#create_channel_moderator-instance_method
+      def create_channel_moderator: (
+                                      channel_arn: ::String,
+                                      channel_moderator_arn: ::String,
+                                      chime_bearer: ::String
+                                    ) -> _CreateChannelModeratorResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelModeratorResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#delete_channel-instance_method
+      def delete_channel: (
+                            channel_arn: ::String,
+                            chime_bearer: ::String
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#delete_channel_ban-instance_method
+      def delete_channel_ban: (
+                                channel_arn: ::String,
+                                member_arn: ::String,
+                                chime_bearer: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#delete_channel_flow-instance_method
+      def delete_channel_flow: (
+                                 channel_flow_arn: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#delete_channel_membership-instance_method
+      def delete_channel_membership: (
+                                       channel_arn: ::String,
+                                       member_arn: ::String,
+                                       chime_bearer: ::String,
+                                       ?sub_channel_id: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#delete_channel_message-instance_method
+      def delete_channel_message: (
+                                    channel_arn: ::String,
+                                    message_id: ::String,
+                                    chime_bearer: ::String,
+                                    ?sub_channel_id: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#delete_channel_moderator-instance_method
+      def delete_channel_moderator: (
+                                      channel_arn: ::String,
+                                      channel_moderator_arn: ::String,
+                                      chime_bearer: ::String
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#delete_messaging_streaming_configurations-instance_method
+      def delete_messaging_streaming_configurations: (
+                                                       app_instance_arn: ::String
+                                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeChannelResponse]
+        def channel: () -> Types::Channel
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#describe_channel-instance_method
+      def describe_channel: (
+                              channel_arn: ::String,
+                              chime_bearer: ::String
+                            ) -> _DescribeChannelResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeChannelResponseSuccess
+
+      interface _DescribeChannelBanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeChannelBanResponse]
+        def channel_ban: () -> Types::ChannelBan
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#describe_channel_ban-instance_method
+      def describe_channel_ban: (
+                                  channel_arn: ::String,
+                                  member_arn: ::String,
+                                  chime_bearer: ::String
+                                ) -> _DescribeChannelBanResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeChannelBanResponseSuccess
+
+      interface _DescribeChannelFlowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeChannelFlowResponse]
+        def channel_flow: () -> Types::ChannelFlow
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#describe_channel_flow-instance_method
+      def describe_channel_flow: (
+                                   channel_flow_arn: ::String
+                                 ) -> _DescribeChannelFlowResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeChannelFlowResponseSuccess
+
+      interface _DescribeChannelMembershipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeChannelMembershipResponse]
+        def channel_membership: () -> Types::ChannelMembership
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#describe_channel_membership-instance_method
+      def describe_channel_membership: (
+                                         channel_arn: ::String,
+                                         member_arn: ::String,
+                                         chime_bearer: ::String,
+                                         ?sub_channel_id: ::String
+                                       ) -> _DescribeChannelMembershipResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeChannelMembershipResponseSuccess
+
+      interface _DescribeChannelMembershipForAppInstanceUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeChannelMembershipForAppInstanceUserResponse]
+        def channel_membership: () -> Types::ChannelMembershipForAppInstanceUserSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#describe_channel_membership_for_app_instance_user-instance_method
+      def describe_channel_membership_for_app_instance_user: (
+                                                               channel_arn: ::String,
+                                                               app_instance_user_arn: ::String,
+                                                               chime_bearer: ::String
+                                                             ) -> _DescribeChannelMembershipForAppInstanceUserResponseSuccess
+                                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeChannelMembershipForAppInstanceUserResponseSuccess
+
+      interface _DescribeChannelModeratedByAppInstanceUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeChannelModeratedByAppInstanceUserResponse]
+        def channel: () -> Types::ChannelModeratedByAppInstanceUserSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#describe_channel_moderated_by_app_instance_user-instance_method
+      def describe_channel_moderated_by_app_instance_user: (
+                                                             channel_arn: ::String,
+                                                             app_instance_user_arn: ::String,
+                                                             chime_bearer: ::String
+                                                           ) -> _DescribeChannelModeratedByAppInstanceUserResponseSuccess
+                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeChannelModeratedByAppInstanceUserResponseSuccess
+
+      interface _DescribeChannelModeratorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeChannelModeratorResponse]
+        def channel_moderator: () -> Types::ChannelModerator
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#describe_channel_moderator-instance_method
+      def describe_channel_moderator: (
+                                        channel_arn: ::String,
+                                        channel_moderator_arn: ::String,
+                                        chime_bearer: ::String
+                                      ) -> _DescribeChannelModeratorResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeChannelModeratorResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#disassociate_channel_flow-instance_method
+      def disassociate_channel_flow: (
+                                       channel_arn: ::String,
+                                       channel_flow_arn: ::String,
+                                       chime_bearer: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetChannelMembershipPreferencesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetChannelMembershipPreferencesResponse]
+        def channel_arn: () -> ::String
+        def member: () -> Types::Identity
+        def preferences: () -> Types::ChannelMembershipPreferences
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#get_channel_membership_preferences-instance_method
+      def get_channel_membership_preferences: (
+                                                channel_arn: ::String,
+                                                member_arn: ::String,
+                                                chime_bearer: ::String
+                                              ) -> _GetChannelMembershipPreferencesResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetChannelMembershipPreferencesResponseSuccess
+
+      interface _GetChannelMessageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetChannelMessageResponse]
+        def channel_message: () -> Types::ChannelMessage
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#get_channel_message-instance_method
+      def get_channel_message: (
+                                 channel_arn: ::String,
+                                 message_id: ::String,
+                                 chime_bearer: ::String,
+                                 ?sub_channel_id: ::String
+                               ) -> _GetChannelMessageResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetChannelMessageResponseSuccess
+
+      interface _GetChannelMessageStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetChannelMessageStatusResponse]
+        def status: () -> Types::ChannelMessageStatusStructure
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#get_channel_message_status-instance_method
+      def get_channel_message_status: (
+                                        channel_arn: ::String,
+                                        message_id: ::String,
+                                        chime_bearer: ::String,
+                                        ?sub_channel_id: ::String
+                                      ) -> _GetChannelMessageStatusResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetChannelMessageStatusResponseSuccess
+
+      interface _GetMessagingSessionEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMessagingSessionEndpointResponse]
+        def endpoint: () -> Types::MessagingSessionEndpoint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#get_messaging_session_endpoint-instance_method
+      def get_messaging_session_endpoint: (
+                                          ) -> _GetMessagingSessionEndpointResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMessagingSessionEndpointResponseSuccess
+
+      interface _GetMessagingStreamingConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMessagingStreamingConfigurationsResponse]
+        def streaming_configurations: () -> ::Array[Types::StreamingConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#get_messaging_streaming_configurations-instance_method
+      def get_messaging_streaming_configurations: (
+                                                    app_instance_arn: ::String
+                                                  ) -> _GetMessagingStreamingConfigurationsResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMessagingStreamingConfigurationsResponseSuccess
+
+      interface _ListChannelBansResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelBansResponse]
+        def channel_arn: () -> ::String
+        def next_token: () -> ::String
+        def channel_bans: () -> ::Array[Types::ChannelBanSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#list_channel_bans-instance_method
+      def list_channel_bans: (
+                               channel_arn: ::String,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String,
+                               chime_bearer: ::String
+                             ) -> _ListChannelBansResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelBansResponseSuccess
+
+      interface _ListChannelFlowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelFlowsResponse]
+        def channel_flows: () -> ::Array[Types::ChannelFlowSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#list_channel_flows-instance_method
+      def list_channel_flows: (
+                                app_instance_arn: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListChannelFlowsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelFlowsResponseSuccess
+
+      interface _ListChannelMembershipsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelMembershipsResponse]
+        def channel_arn: () -> ::String
+        def channel_memberships: () -> ::Array[Types::ChannelMembershipSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#list_channel_memberships-instance_method
+      def list_channel_memberships: (
+                                      channel_arn: ::String,
+                                      ?type: ("DEFAULT" | "HIDDEN"),
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String,
+                                      chime_bearer: ::String,
+                                      ?sub_channel_id: ::String
+                                    ) -> _ListChannelMembershipsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelMembershipsResponseSuccess
+
+      interface _ListChannelMembershipsForAppInstanceUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelMembershipsForAppInstanceUserResponse]
+        def channel_memberships: () -> ::Array[Types::ChannelMembershipForAppInstanceUserSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#list_channel_memberships_for_app_instance_user-instance_method
+      def list_channel_memberships_for_app_instance_user: (
+                                                            ?app_instance_user_arn: ::String,
+                                                            ?max_results: ::Integer,
+                                                            ?next_token: ::String,
+                                                            chime_bearer: ::String
+                                                          ) -> _ListChannelMembershipsForAppInstanceUserResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelMembershipsForAppInstanceUserResponseSuccess
+
+      interface _ListChannelMessagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelMessagesResponse]
+        def channel_arn: () -> ::String
+        def next_token: () -> ::String
+        def channel_messages: () -> ::Array[Types::ChannelMessageSummary]
+        def sub_channel_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#list_channel_messages-instance_method
+      def list_channel_messages: (
+                                   channel_arn: ::String,
+                                   ?sort_order: ("ASCENDING" | "DESCENDING"),
+                                   ?not_before: ::Time,
+                                   ?not_after: ::Time,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String,
+                                   chime_bearer: ::String,
+                                   ?sub_channel_id: ::String
+                                 ) -> _ListChannelMessagesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelMessagesResponseSuccess
+
+      interface _ListChannelModeratorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelModeratorsResponse]
+        def channel_arn: () -> ::String
+        def next_token: () -> ::String
+        def channel_moderators: () -> ::Array[Types::ChannelModeratorSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#list_channel_moderators-instance_method
+      def list_channel_moderators: (
+                                     channel_arn: ::String,
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String,
+                                     chime_bearer: ::String
+                                   ) -> _ListChannelModeratorsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelModeratorsResponseSuccess
+
+      interface _ListChannelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelsResponse]
+        def channels: () -> ::Array[Types::ChannelSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#list_channels-instance_method
+      def list_channels: (
+                           app_instance_arn: ::String,
+                           ?privacy: ("PUBLIC" | "PRIVATE"),
+                           ?max_results: ::Integer,
+                           ?next_token: ::String,
+                           chime_bearer: ::String
+                         ) -> _ListChannelsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelsResponseSuccess
+
+      interface _ListChannelsAssociatedWithChannelFlowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelsAssociatedWithChannelFlowResponse]
+        def channels: () -> ::Array[Types::ChannelAssociatedWithFlowSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#list_channels_associated_with_channel_flow-instance_method
+      def list_channels_associated_with_channel_flow: (
+                                                        channel_flow_arn: ::String,
+                                                        ?max_results: ::Integer,
+                                                        ?next_token: ::String
+                                                      ) -> _ListChannelsAssociatedWithChannelFlowResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelsAssociatedWithChannelFlowResponseSuccess
+
+      interface _ListChannelsModeratedByAppInstanceUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelsModeratedByAppInstanceUserResponse]
+        def channels: () -> ::Array[Types::ChannelModeratedByAppInstanceUserSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#list_channels_moderated_by_app_instance_user-instance_method
+      def list_channels_moderated_by_app_instance_user: (
+                                                          ?app_instance_user_arn: ::String,
+                                                          ?max_results: ::Integer,
+                                                          ?next_token: ::String,
+                                                          chime_bearer: ::String
+                                                        ) -> _ListChannelsModeratedByAppInstanceUserResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelsModeratedByAppInstanceUserResponseSuccess
+
+      interface _ListSubChannelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSubChannelsResponse]
+        def channel_arn: () -> ::String
+        def sub_channels: () -> ::Array[Types::SubChannelSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#list_sub_channels-instance_method
+      def list_sub_channels: (
+                               channel_arn: ::String,
+                               chime_bearer: ::String,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListSubChannelsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSubChannelsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutChannelExpirationSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutChannelExpirationSettingsResponse]
+        def channel_arn: () -> ::String
+        def expiration_settings: () -> Types::ExpirationSettings
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#put_channel_expiration_settings-instance_method
+      def put_channel_expiration_settings: (
+                                             channel_arn: ::String,
+                                             ?chime_bearer: ::String,
+                                             ?expiration_settings: {
+                                               expiration_days: ::Integer,
+                                               expiration_criterion: ("CREATED_TIMESTAMP" | "LAST_MESSAGE_TIMESTAMP")
+                                             }
+                                           ) -> _PutChannelExpirationSettingsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutChannelExpirationSettingsResponseSuccess
+
+      interface _PutChannelMembershipPreferencesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutChannelMembershipPreferencesResponse]
+        def channel_arn: () -> ::String
+        def member: () -> Types::Identity
+        def preferences: () -> Types::ChannelMembershipPreferences
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#put_channel_membership_preferences-instance_method
+      def put_channel_membership_preferences: (
+                                                channel_arn: ::String,
+                                                member_arn: ::String,
+                                                chime_bearer: ::String,
+                                                preferences: {
+                                                  push_notifications: {
+                                                    allow_notifications: ("ALL" | "NONE" | "FILTERED"),
+                                                    filter_rule: ::String?
+                                                  }?
+                                                }
+                                              ) -> _PutChannelMembershipPreferencesResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutChannelMembershipPreferencesResponseSuccess
+
+      interface _PutMessagingStreamingConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutMessagingStreamingConfigurationsResponse]
+        def streaming_configurations: () -> ::Array[Types::StreamingConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#put_messaging_streaming_configurations-instance_method
+      def put_messaging_streaming_configurations: (
+                                                    app_instance_arn: ::String,
+                                                    streaming_configurations: Array[
+                                                      {
+                                                        data_type: ("Channel" | "ChannelMessage"),
+                                                        resource_arn: ::String
+                                                      },
+                                                    ]
+                                                  ) -> _PutMessagingStreamingConfigurationsResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutMessagingStreamingConfigurationsResponseSuccess
+
+      interface _RedactChannelMessageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RedactChannelMessageResponse]
+        def channel_arn: () -> ::String
+        def message_id: () -> ::String
+        def sub_channel_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#redact_channel_message-instance_method
+      def redact_channel_message: (
+                                    channel_arn: ::String,
+                                    message_id: ::String,
+                                    chime_bearer: ::String,
+                                    ?sub_channel_id: ::String
+                                  ) -> _RedactChannelMessageResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RedactChannelMessageResponseSuccess
+
+      interface _SearchChannelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchChannelsResponse]
+        def channels: () -> ::Array[Types::ChannelSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#search_channels-instance_method
+      def search_channels: (
+                             ?chime_bearer: ::String,
+                             fields: Array[
+                               {
+                                 key: ("MEMBERS"),
+                                 values: Array[::String],
+                                 operator: ("EQUALS" | "INCLUDES")
+                               },
+                             ],
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _SearchChannelsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchChannelsResponseSuccess
+
+      interface _SendChannelMessageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendChannelMessageResponse]
+        def channel_arn: () -> ::String
+        def message_id: () -> ::String
+        def status: () -> Types::ChannelMessageStatusStructure
+        def sub_channel_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#send_channel_message-instance_method
+      def send_channel_message: (
+                                  channel_arn: ::String,
+                                  content: ::String,
+                                  type: ("STANDARD" | "CONTROL"),
+                                  persistence: ("PERSISTENT" | "NON_PERSISTENT"),
+                                  ?metadata: ::String,
+                                  client_request_token: ::String,
+                                  chime_bearer: ::String,
+                                  ?push_notification: {
+                                    title: ::String?,
+                                    body: ::String?,
+                                    type: ("DEFAULT" | "VOIP")?
+                                  },
+                                  ?message_attributes: Hash[::String, {
+                                      string_values: Array[::String]?
+                                    }],
+                                  ?sub_channel_id: ::String,
+                                  ?content_type: ::String,
+                                  ?target: Array[
+                                    {
+                                      member_arn: ::String?
+                                    },
+                                  ]
+                                ) -> _SendChannelMessageResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendChannelMessageResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateChannelResponse]
+        def channel_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#update_channel-instance_method
+      def update_channel: (
+                            channel_arn: ::String,
+                            ?name: ::String,
+                            ?mode: ("UNRESTRICTED" | "RESTRICTED"),
+                            ?metadata: ::String,
+                            chime_bearer: ::String
+                          ) -> _UpdateChannelResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelResponseSuccess
+
+      interface _UpdateChannelFlowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateChannelFlowResponse]
+        def channel_flow_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#update_channel_flow-instance_method
+      def update_channel_flow: (
+                                 channel_flow_arn: ::String,
+                                 processors: Array[
+                                   {
+                                     name: ::String,
+                                     configuration: {
+                                       lambda: {
+                                         resource_arn: ::String,
+                                         invocation_type: ("ASYNC")
+                                       }
+                                     },
+                                     execution_order: ::Integer,
+                                     fallback_action: ("CONTINUE" | "ABORT")
+                                   },
+                                 ],
+                                 name: ::String
+                               ) -> _UpdateChannelFlowResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelFlowResponseSuccess
+
+      interface _UpdateChannelMessageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateChannelMessageResponse]
+        def channel_arn: () -> ::String
+        def message_id: () -> ::String
+        def status: () -> Types::ChannelMessageStatusStructure
+        def sub_channel_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#update_channel_message-instance_method
+      def update_channel_message: (
+                                    channel_arn: ::String,
+                                    message_id: ::String,
+                                    content: ::String,
+                                    ?metadata: ::String,
+                                    chime_bearer: ::String,
+                                    ?sub_channel_id: ::String,
+                                    ?content_type: ::String
+                                  ) -> _UpdateChannelMessageResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelMessageResponseSuccess
+
+      interface _UpdateChannelReadMarkerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateChannelReadMarkerResponse]
+        def channel_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#update_channel_read_marker-instance_method
+      def update_channel_read_marker: (
+                                        channel_arn: ::String,
+                                        chime_bearer: ::String
+                                      ) -> _UpdateChannelReadMarkerResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelReadMarkerResponseSuccess
+    end
+  end
+end
+

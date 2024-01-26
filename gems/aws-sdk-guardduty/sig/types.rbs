@@ -1,0 +1,2183 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::GuardDuty
+  module Types
+
+    class AcceptAdministratorInvitationRequest
+      attr_accessor detector_id: ::String
+      attr_accessor administrator_id: ::String
+      attr_accessor invitation_id: ::String
+      SENSITIVE: []
+    end
+
+    class AcceptAdministratorInvitationResponse < Aws::EmptyStructure
+    end
+
+    class AcceptInvitationRequest
+      attr_accessor detector_id: ::String
+      attr_accessor master_id: ::String
+      attr_accessor invitation_id: ::String
+      SENSITIVE: []
+    end
+
+    class AcceptInvitationResponse < Aws::EmptyStructure
+    end
+
+    class AccessControlList
+      attr_accessor allows_public_read_access: bool
+      attr_accessor allows_public_write_access: bool
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class AccessKeyDetails
+      attr_accessor access_key_id: ::String
+      attr_accessor principal_id: ::String
+      attr_accessor user_name: ::String
+      attr_accessor user_type: ::String
+      SENSITIVE: []
+    end
+
+    class AccountDetail
+      attr_accessor account_id: ::String
+      attr_accessor email: ::String
+      SENSITIVE: []
+    end
+
+    class AccountFreeTrialInfo
+      attr_accessor account_id: ::String
+      attr_accessor data_sources: Types::DataSourcesFreeTrial
+      attr_accessor features: ::Array[Types::FreeTrialFeatureConfigurationResult]
+      SENSITIVE: []
+    end
+
+    class AccountLevelPermissions
+      attr_accessor block_public_access: Types::BlockPublicAccess
+      SENSITIVE: []
+    end
+
+    class Action
+      attr_accessor action_type: ::String
+      attr_accessor aws_api_call_action: Types::AwsApiCallAction
+      attr_accessor dns_request_action: Types::DnsRequestAction
+      attr_accessor network_connection_action: Types::NetworkConnectionAction
+      attr_accessor port_probe_action: Types::PortProbeAction
+      attr_accessor kubernetes_api_call_action: Types::KubernetesApiCallAction
+      attr_accessor rds_login_attempt_action: Types::RdsLoginAttemptAction
+      attr_accessor kubernetes_permission_checked_details: Types::KubernetesPermissionCheckedDetails
+      attr_accessor kubernetes_role_binding_details: Types::KubernetesRoleBindingDetails
+      attr_accessor kubernetes_role_details: Types::KubernetesRoleDetails
+      SENSITIVE: []
+    end
+
+    class AddonDetails
+      attr_accessor addon_version: ::String
+      attr_accessor addon_status: ::String
+      SENSITIVE: []
+    end
+
+    class AdminAccount
+      attr_accessor admin_account_id: ::String
+      attr_accessor admin_status: ("ENABLED" | "DISABLE_IN_PROGRESS")
+      SENSITIVE: []
+    end
+
+    class Administrator
+      attr_accessor account_id: ::String
+      attr_accessor invitation_id: ::String
+      attr_accessor relationship_status: ::String
+      attr_accessor invited_at: ::String
+      SENSITIVE: []
+    end
+
+    class AgentDetails
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class Anomaly
+      attr_accessor profiles: ::Hash[::String, ::Hash[::String, ::Array[Types::AnomalyObject]]]
+      attr_accessor unusual: Types::AnomalyUnusual
+      SENSITIVE: []
+    end
+
+    class AnomalyObject
+      attr_accessor profile_type: ("FREQUENCY")
+      attr_accessor profile_subtype: ("FREQUENT" | "INFREQUENT" | "UNSEEN" | "RARE")
+      attr_accessor observations: Types::Observations
+      SENSITIVE: []
+    end
+
+    class AnomalyUnusual
+      attr_accessor behavior: ::Hash[::String, ::Hash[::String, Types::AnomalyObject]]
+      SENSITIVE: []
+    end
+
+    class ArchiveFindingsRequest
+      attr_accessor detector_id: ::String
+      attr_accessor finding_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ArchiveFindingsResponse < Aws::EmptyStructure
+    end
+
+    class AwsApiCallAction
+      attr_accessor api: ::String
+      attr_accessor caller_type: ::String
+      attr_accessor domain_details: Types::DomainDetails
+      attr_accessor error_code: ::String
+      attr_accessor user_agent: ::String
+      attr_accessor remote_ip_details: Types::RemoteIpDetails
+      attr_accessor service_name: ::String
+      attr_accessor remote_account_details: Types::RemoteAccountDetails
+      attr_accessor affected_resources: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class BlockPublicAccess
+      attr_accessor ignore_public_acls: bool
+      attr_accessor restrict_public_buckets: bool
+      attr_accessor block_public_acls: bool
+      attr_accessor block_public_policy: bool
+      SENSITIVE: []
+    end
+
+    class BucketLevelPermissions
+      attr_accessor access_control_list: Types::AccessControlList
+      attr_accessor bucket_policy: Types::BucketPolicy
+      attr_accessor block_public_access: Types::BlockPublicAccess
+      SENSITIVE: []
+    end
+
+    class BucketPolicy
+      attr_accessor allows_public_read_access: bool
+      attr_accessor allows_public_write_access: bool
+      SENSITIVE: []
+    end
+
+    class City
+      attr_accessor city_name: ::String
+      SENSITIVE: []
+    end
+
+    class CloudTrailConfigurationResult
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class Condition
+      attr_accessor eq: ::Array[::String]
+      attr_accessor neq: ::Array[::String]
+      attr_accessor gt: ::Integer
+      attr_accessor gte: ::Integer
+      attr_accessor lt: ::Integer
+      attr_accessor lte: ::Integer
+      attr_accessor equals: ::Array[::String]
+      attr_accessor not_equals: ::Array[::String]
+      attr_accessor greater_than: ::Integer
+      attr_accessor greater_than_or_equal: ::Integer
+      attr_accessor less_than: ::Integer
+      attr_accessor less_than_or_equal: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class Container
+      attr_accessor container_runtime: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor image: ::String
+      attr_accessor image_prefix: ::String
+      attr_accessor volume_mounts: ::Array[Types::VolumeMount]
+      attr_accessor security_context: Types::SecurityContext
+      SENSITIVE: []
+    end
+
+    class ContainerInstanceDetails
+      attr_accessor covered_container_instances: ::Integer
+      attr_accessor compatible_container_instances: ::Integer
+      SENSITIVE: []
+    end
+
+    class Country
+      attr_accessor country_code: ::String
+      attr_accessor country_name: ::String
+      SENSITIVE: []
+    end
+
+    class CoverageEc2InstanceDetails
+      attr_accessor instance_id: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor cluster_arn: ::String
+      attr_accessor agent_details: Types::AgentDetails
+      attr_accessor management_type: ("AUTO_MANAGED" | "MANUAL" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class CoverageEcsClusterDetails
+      attr_accessor cluster_name: ::String
+      attr_accessor fargate_details: Types::FargateDetails
+      attr_accessor container_instance_details: Types::ContainerInstanceDetails
+      SENSITIVE: []
+    end
+
+    class CoverageEksClusterDetails
+      attr_accessor cluster_name: ::String
+      attr_accessor covered_nodes: ::Integer
+      attr_accessor compatible_nodes: ::Integer
+      attr_accessor addon_details: Types::AddonDetails
+      attr_accessor management_type: ("AUTO_MANAGED" | "MANUAL" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class CoverageFilterCondition
+      attr_accessor equals: ::Array[::String]
+      attr_accessor not_equals: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CoverageFilterCriteria
+      attr_accessor filter_criterion: ::Array[Types::CoverageFilterCriterion]
+      SENSITIVE: []
+    end
+
+    class CoverageFilterCriterion
+      attr_accessor criterion_key: ("ACCOUNT_ID" | "CLUSTER_NAME" | "RESOURCE_TYPE" | "COVERAGE_STATUS" | "ADDON_VERSION" | "MANAGEMENT_TYPE" | "EKS_CLUSTER_NAME" | "ECS_CLUSTER_NAME" | "AGENT_VERSION" | "INSTANCE_ID" | "CLUSTER_ARN")
+      attr_accessor filter_condition: Types::CoverageFilterCondition
+      SENSITIVE: []
+    end
+
+    class CoverageResource
+      attr_accessor resource_id: ::String
+      attr_accessor detector_id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor resource_details: Types::CoverageResourceDetails
+      attr_accessor coverage_status: ("HEALTHY" | "UNHEALTHY")
+      attr_accessor issue: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CoverageResourceDetails
+      attr_accessor eks_cluster_details: Types::CoverageEksClusterDetails
+      attr_accessor resource_type: ("EKS" | "ECS" | "EC2")
+      attr_accessor ecs_cluster_details: Types::CoverageEcsClusterDetails
+      attr_accessor ec2_instance_details: Types::CoverageEc2InstanceDetails
+      SENSITIVE: []
+    end
+
+    class CoverageSortCriteria
+      attr_accessor attribute_name: ("ACCOUNT_ID" | "CLUSTER_NAME" | "COVERAGE_STATUS" | "ISSUE" | "ADDON_VERSION" | "UPDATED_AT" | "EKS_CLUSTER_NAME" | "ECS_CLUSTER_NAME" | "INSTANCE_ID")
+      attr_accessor order_by: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class CoverageStatistics
+      attr_accessor count_by_resource_type: ::Hash[("EKS" | "ECS" | "EC2"), ::Integer]
+      attr_accessor count_by_coverage_status: ::Hash[("HEALTHY" | "UNHEALTHY"), ::Integer]
+      SENSITIVE: []
+    end
+
+    class CreateDetectorRequest
+      attr_accessor enable: bool
+      attr_accessor client_token: ::String
+      attr_accessor finding_publishing_frequency: ("FIFTEEN_MINUTES" | "ONE_HOUR" | "SIX_HOURS")
+      attr_accessor data_sources: Types::DataSourceConfigurations
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor features: ::Array[Types::DetectorFeatureConfiguration]
+      SENSITIVE: []
+    end
+
+    class CreateDetectorResponse
+      attr_accessor detector_id: ::String
+      attr_accessor unprocessed_data_sources: Types::UnprocessedDataSourcesResult
+      SENSITIVE: []
+    end
+
+    class CreateFilterRequest
+      attr_accessor detector_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor action: ("NOOP" | "ARCHIVE")
+      attr_accessor rank: ::Integer
+      attr_accessor finding_criteria: Types::FindingCriteria
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateFilterResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateIPSetRequest
+      attr_accessor detector_id: ::String
+      attr_accessor name: ::String
+      attr_accessor format: ("TXT" | "STIX" | "OTX_CSV" | "ALIEN_VAULT" | "PROOF_POINT" | "FIRE_EYE")
+      attr_accessor location: ::String
+      attr_accessor activate: bool
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateIPSetResponse
+      attr_accessor ip_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMembersRequest
+      attr_accessor detector_id: ::String
+      attr_accessor account_details: ::Array[Types::AccountDetail]
+      SENSITIVE: []
+    end
+
+    class CreateMembersResponse
+      attr_accessor unprocessed_accounts: ::Array[Types::UnprocessedAccount]
+      SENSITIVE: []
+    end
+
+    class CreatePublishingDestinationRequest
+      attr_accessor detector_id: ::String
+      attr_accessor destination_type: ("S3")
+      attr_accessor destination_properties: Types::DestinationProperties
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePublishingDestinationResponse
+      attr_accessor destination_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSampleFindingsRequest
+      attr_accessor detector_id: ::String
+      attr_accessor finding_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateSampleFindingsResponse < Aws::EmptyStructure
+    end
+
+    class CreateThreatIntelSetRequest
+      attr_accessor detector_id: ::String
+      attr_accessor name: ::String
+      attr_accessor format: ("TXT" | "STIX" | "OTX_CSV" | "ALIEN_VAULT" | "PROOF_POINT" | "FIRE_EYE")
+      attr_accessor location: ::String
+      attr_accessor activate: bool
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateThreatIntelSetResponse
+      attr_accessor threat_intel_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class DNSLogsConfigurationResult
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class DataSourceConfigurations
+      attr_accessor s3_logs: Types::S3LogsConfiguration
+      attr_accessor kubernetes: Types::KubernetesConfiguration
+      attr_accessor malware_protection: Types::MalwareProtectionConfiguration
+      SENSITIVE: []
+    end
+
+    class DataSourceConfigurationsResult
+      attr_accessor cloud_trail: Types::CloudTrailConfigurationResult
+      attr_accessor dns_logs: Types::DNSLogsConfigurationResult
+      attr_accessor flow_logs: Types::FlowLogsConfigurationResult
+      attr_accessor s3_logs: Types::S3LogsConfigurationResult
+      attr_accessor kubernetes: Types::KubernetesConfigurationResult
+      attr_accessor malware_protection: Types::MalwareProtectionConfigurationResult
+      SENSITIVE: []
+    end
+
+    class DataSourceFreeTrial
+      attr_accessor free_trial_days_remaining: ::Integer
+      SENSITIVE: []
+    end
+
+    class DataSourcesFreeTrial
+      attr_accessor cloud_trail: Types::DataSourceFreeTrial
+      attr_accessor dns_logs: Types::DataSourceFreeTrial
+      attr_accessor flow_logs: Types::DataSourceFreeTrial
+      attr_accessor s3_logs: Types::DataSourceFreeTrial
+      attr_accessor kubernetes: Types::KubernetesDataSourceFreeTrial
+      attr_accessor malware_protection: Types::MalwareProtectionDataSourceFreeTrial
+      SENSITIVE: []
+    end
+
+    class DeclineInvitationsRequest
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeclineInvitationsResponse
+      attr_accessor unprocessed_accounts: ::Array[Types::UnprocessedAccount]
+      SENSITIVE: []
+    end
+
+    class DefaultServerSideEncryption
+      attr_accessor encryption_type: ::String
+      attr_accessor kms_master_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDetectorRequest
+      attr_accessor detector_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDetectorResponse < Aws::EmptyStructure
+    end
+
+    class DeleteFilterRequest
+      attr_accessor detector_id: ::String
+      attr_accessor filter_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFilterResponse < Aws::EmptyStructure
+    end
+
+    class DeleteIPSetRequest
+      attr_accessor detector_id: ::String
+      attr_accessor ip_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIPSetResponse < Aws::EmptyStructure
+    end
+
+    class DeleteInvitationsRequest
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteInvitationsResponse
+      attr_accessor unprocessed_accounts: ::Array[Types::UnprocessedAccount]
+      SENSITIVE: []
+    end
+
+    class DeleteMembersRequest
+      attr_accessor detector_id: ::String
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteMembersResponse
+      attr_accessor unprocessed_accounts: ::Array[Types::UnprocessedAccount]
+      SENSITIVE: []
+    end
+
+    class DeletePublishingDestinationRequest
+      attr_accessor detector_id: ::String
+      attr_accessor destination_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePublishingDestinationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteThreatIntelSetRequest
+      attr_accessor detector_id: ::String
+      attr_accessor threat_intel_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteThreatIntelSetResponse < Aws::EmptyStructure
+    end
+
+    class DescribeMalwareScansRequest
+      attr_accessor detector_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filter_criteria: Types::FilterCriteria
+      attr_accessor sort_criteria: Types::SortCriteria
+      SENSITIVE: []
+    end
+
+    class DescribeMalwareScansResponse
+      attr_accessor scans: ::Array[Types::Scan]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeOrganizationConfigurationRequest
+      attr_accessor detector_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeOrganizationConfigurationResponse
+      attr_accessor auto_enable: bool
+      attr_accessor member_account_limit_reached: bool
+      attr_accessor data_sources: Types::OrganizationDataSourceConfigurationsResult
+      attr_accessor features: ::Array[Types::OrganizationFeatureConfigurationResult]
+      attr_accessor next_token: ::String
+      attr_accessor auto_enable_organization_members: ("NEW" | "ALL" | "NONE")
+      SENSITIVE: []
+    end
+
+    class DescribePublishingDestinationRequest
+      attr_accessor detector_id: ::String
+      attr_accessor destination_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePublishingDestinationResponse
+      attr_accessor destination_id: ::String
+      attr_accessor destination_type: ("S3")
+      attr_accessor status: ("PENDING_VERIFICATION" | "PUBLISHING" | "UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY" | "STOPPED")
+      attr_accessor publishing_failure_start_timestamp: ::Integer
+      attr_accessor destination_properties: Types::DestinationProperties
+      SENSITIVE: []
+    end
+
+    class Destination
+      attr_accessor destination_id: ::String
+      attr_accessor destination_type: ("S3")
+      attr_accessor status: ("PENDING_VERIFICATION" | "PUBLISHING" | "UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class DestinationProperties
+      attr_accessor destination_arn: ::String
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Detection
+      attr_accessor anomaly: Types::Anomaly
+      SENSITIVE: []
+    end
+
+    class DetectorAdditionalConfiguration
+      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class DetectorAdditionalConfigurationResult
+      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DetectorFeatureConfiguration
+      attr_accessor name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "EKS_RUNTIME_MONITORING" | "LAMBDA_NETWORK_LOGS" | "RUNTIME_MONITORING")
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor additional_configuration: ::Array[Types::DetectorAdditionalConfiguration]
+      SENSITIVE: []
+    end
+
+    class DetectorFeatureConfigurationResult
+      attr_accessor name: ("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "EKS_RUNTIME_MONITORING" | "LAMBDA_NETWORK_LOGS" | "RUNTIME_MONITORING")
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor updated_at: ::Time
+      attr_accessor additional_configuration: ::Array[Types::DetectorAdditionalConfigurationResult]
+      SENSITIVE: []
+    end
+
+    class DisableOrganizationAdminAccountRequest
+      attr_accessor admin_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisableOrganizationAdminAccountResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateFromAdministratorAccountRequest
+      attr_accessor detector_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateFromAdministratorAccountResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateFromMasterAccountRequest
+      attr_accessor detector_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateFromMasterAccountResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateMembersRequest
+      attr_accessor detector_id: ::String
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DisassociateMembersResponse
+      attr_accessor unprocessed_accounts: ::Array[Types::UnprocessedAccount]
+      SENSITIVE: []
+    end
+
+    class DnsRequestAction
+      attr_accessor domain: ::String
+      attr_accessor protocol: ::String
+      attr_accessor blocked: bool
+      attr_accessor domain_with_suffix: ::String
+      SENSITIVE: []
+    end
+
+    class DomainDetails
+      attr_accessor domain: ::String
+      SENSITIVE: []
+    end
+
+    class EbsVolumeDetails
+      attr_accessor scanned_volume_details: ::Array[Types::VolumeDetail]
+      attr_accessor skipped_volume_details: ::Array[Types::VolumeDetail]
+      SENSITIVE: []
+    end
+
+    class EbsVolumeScanDetails
+      attr_accessor scan_id: ::String
+      attr_accessor scan_started_at: ::Time
+      attr_accessor scan_completed_at: ::Time
+      attr_accessor trigger_finding_id: ::String
+      attr_accessor sources: ::Array[::String]
+      attr_accessor scan_detections: Types::ScanDetections
+      attr_accessor scan_type: ("GUARDDUTY_INITIATED" | "ON_DEMAND")
+      SENSITIVE: []
+    end
+
+    class EbsVolumesResult
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class EcsClusterDetails
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ::String
+      attr_accessor active_services_count: ::Integer
+      attr_accessor registered_container_instances_count: ::Integer
+      attr_accessor running_tasks_count: ::Integer
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor task_details: Types::EcsTaskDetails
+      SENSITIVE: []
+    end
+
+    class EcsTaskDetails
+      attr_accessor arn: ::String
+      attr_accessor definition_arn: ::String
+      attr_accessor version: ::String
+      attr_accessor task_created_at: ::Time
+      attr_accessor started_at: ::Time
+      attr_accessor started_by: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor volumes: ::Array[Types::Volume]
+      attr_accessor containers: ::Array[Types::Container]
+      attr_accessor group: ::String
+      SENSITIVE: []
+    end
+
+    class EksClusterDetails
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor status: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class EnableOrganizationAdminAccountRequest
+      attr_accessor admin_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class EnableOrganizationAdminAccountResponse < Aws::EmptyStructure
+    end
+
+    class Evidence
+      attr_accessor threat_intelligence_details: ::Array[Types::ThreatIntelligenceDetail]
+      SENSITIVE: []
+    end
+
+    class FargateDetails
+      attr_accessor issues: ::Array[::String]
+      attr_accessor management_type: ("AUTO_MANAGED" | "MANUAL" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class FilterCondition
+      attr_accessor equals_value: ::String
+      attr_accessor greater_than: ::Integer
+      attr_accessor less_than: ::Integer
+      SENSITIVE: []
+    end
+
+    class FilterCriteria
+      attr_accessor filter_criterion: ::Array[Types::FilterCriterion]
+      SENSITIVE: []
+    end
+
+    class FilterCriterion
+      attr_accessor criterion_key: ("EC2_INSTANCE_ARN" | "SCAN_ID" | "ACCOUNT_ID" | "GUARDDUTY_FINDING_ID" | "SCAN_START_TIME" | "SCAN_STATUS" | "SCAN_TYPE")
+      attr_accessor filter_condition: Types::FilterCondition
+      SENSITIVE: []
+    end
+
+    class Finding
+      attr_accessor account_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor confidence: ::Float
+      attr_accessor created_at: ::String
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor partition: ::String
+      attr_accessor region: ::String
+      attr_accessor resource: Types::Resource
+      attr_accessor schema_version: ::String
+      attr_accessor service: Types::Service
+      attr_accessor severity: ::Float
+      attr_accessor title: ::String
+      attr_accessor type: ::String
+      attr_accessor updated_at: ::String
+      SENSITIVE: []
+    end
+
+    class FindingCriteria
+      attr_accessor criterion: ::Hash[::String, Types::Condition]
+      SENSITIVE: []
+    end
+
+    class FindingStatistics
+      attr_accessor count_by_severity: ::Hash[::String, ::Integer]
+      SENSITIVE: []
+    end
+
+    class FlowLogsConfigurationResult
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class FreeTrialFeatureConfigurationResult
+      attr_accessor name: ("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "EKS_RUNTIME_MONITORING" | "LAMBDA_NETWORK_LOGS" | "FARGATE_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING")
+      attr_accessor free_trial_days_remaining: ::Integer
+      SENSITIVE: []
+    end
+
+    class GeoLocation
+      attr_accessor lat: ::Float
+      attr_accessor lon: ::Float
+      SENSITIVE: []
+    end
+
+    class GetAdministratorAccountRequest
+      attr_accessor detector_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAdministratorAccountResponse
+      attr_accessor administrator: Types::Administrator
+      SENSITIVE: []
+    end
+
+    class GetCoverageStatisticsRequest
+      attr_accessor detector_id: ::String
+      attr_accessor filter_criteria: Types::CoverageFilterCriteria
+      attr_accessor statistics_type: ::Array[("COUNT_BY_RESOURCE_TYPE" | "COUNT_BY_COVERAGE_STATUS")]
+      SENSITIVE: []
+    end
+
+    class GetCoverageStatisticsResponse
+      attr_accessor coverage_statistics: Types::CoverageStatistics
+      SENSITIVE: []
+    end
+
+    class GetDetectorRequest
+      attr_accessor detector_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDetectorResponse
+      attr_accessor created_at: ::String
+      attr_accessor finding_publishing_frequency: ("FIFTEEN_MINUTES" | "ONE_HOUR" | "SIX_HOURS")
+      attr_accessor service_role: ::String
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor updated_at: ::String
+      attr_accessor data_sources: Types::DataSourceConfigurationsResult
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor features: ::Array[Types::DetectorFeatureConfigurationResult]
+      SENSITIVE: []
+    end
+
+    class GetFilterRequest
+      attr_accessor detector_id: ::String
+      attr_accessor filter_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetFilterResponse
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor action: ("NOOP" | "ARCHIVE")
+      attr_accessor rank: ::Integer
+      attr_accessor finding_criteria: Types::FindingCriteria
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetFindingsRequest
+      attr_accessor detector_id: ::String
+      attr_accessor finding_ids: ::Array[::String]
+      attr_accessor sort_criteria: Types::SortCriteria
+      SENSITIVE: []
+    end
+
+    class GetFindingsResponse
+      attr_accessor findings: ::Array[Types::Finding]
+      SENSITIVE: []
+    end
+
+    class GetFindingsStatisticsRequest
+      attr_accessor detector_id: ::String
+      attr_accessor finding_statistic_types: ::Array[("COUNT_BY_SEVERITY")]
+      attr_accessor finding_criteria: Types::FindingCriteria
+      SENSITIVE: []
+    end
+
+    class GetFindingsStatisticsResponse
+      attr_accessor finding_statistics: Types::FindingStatistics
+      SENSITIVE: []
+    end
+
+    class GetIPSetRequest
+      attr_accessor detector_id: ::String
+      attr_accessor ip_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetIPSetResponse
+      attr_accessor name: ::String
+      attr_accessor format: ("TXT" | "STIX" | "OTX_CSV" | "ALIEN_VAULT" | "PROOF_POINT" | "FIRE_EYE")
+      attr_accessor location: ::String
+      attr_accessor status: ("INACTIVE" | "ACTIVATING" | "ACTIVE" | "DEACTIVATING" | "ERROR" | "DELETE_PENDING" | "DELETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetInvitationsCountRequest < Aws::EmptyStructure
+    end
+
+    class GetInvitationsCountResponse
+      attr_accessor invitations_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetMalwareScanSettingsRequest
+      attr_accessor detector_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMalwareScanSettingsResponse
+      attr_accessor scan_resource_criteria: Types::ScanResourceCriteria
+      attr_accessor ebs_snapshot_preservation: ("NO_RETENTION" | "RETENTION_WITH_FINDING")
+      SENSITIVE: []
+    end
+
+    class GetMasterAccountRequest
+      attr_accessor detector_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMasterAccountResponse
+      attr_accessor master: Types::Master
+      SENSITIVE: []
+    end
+
+    class GetMemberDetectorsRequest
+      attr_accessor detector_id: ::String
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetMemberDetectorsResponse
+      attr_accessor member_data_source_configurations: ::Array[Types::MemberDataSourceConfiguration]
+      attr_accessor unprocessed_accounts: ::Array[Types::UnprocessedAccount]
+      SENSITIVE: []
+    end
+
+    class GetMembersRequest
+      attr_accessor detector_id: ::String
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetMembersResponse
+      attr_accessor members: ::Array[Types::Member]
+      attr_accessor unprocessed_accounts: ::Array[Types::UnprocessedAccount]
+      SENSITIVE: []
+    end
+
+    class GetOrganizationStatisticsResponse
+      attr_accessor organization_details: Types::OrganizationDetails
+      SENSITIVE: []
+    end
+
+    class GetRemainingFreeTrialDaysRequest
+      attr_accessor detector_id: ::String
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetRemainingFreeTrialDaysResponse
+      attr_accessor accounts: ::Array[Types::AccountFreeTrialInfo]
+      attr_accessor unprocessed_accounts: ::Array[Types::UnprocessedAccount]
+      SENSITIVE: []
+    end
+
+    class GetThreatIntelSetRequest
+      attr_accessor detector_id: ::String
+      attr_accessor threat_intel_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetThreatIntelSetResponse
+      attr_accessor name: ::String
+      attr_accessor format: ("TXT" | "STIX" | "OTX_CSV" | "ALIEN_VAULT" | "PROOF_POINT" | "FIRE_EYE")
+      attr_accessor location: ::String
+      attr_accessor status: ("INACTIVE" | "ACTIVATING" | "ACTIVE" | "DEACTIVATING" | "ERROR" | "DELETE_PENDING" | "DELETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetUsageStatisticsRequest
+      attr_accessor detector_id: ::String
+      attr_accessor usage_statistic_type: ("SUM_BY_ACCOUNT" | "SUM_BY_DATA_SOURCE" | "SUM_BY_RESOURCE" | "TOP_RESOURCES" | "SUM_BY_FEATURES" | "TOP_ACCOUNTS_BY_FEATURE")
+      attr_accessor usage_criteria: Types::UsageCriteria
+      attr_accessor unit: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetUsageStatisticsResponse
+      attr_accessor usage_statistics: Types::UsageStatistics
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class HighestSeverityThreatDetails
+      attr_accessor severity: ::String
+      attr_accessor threat_name: ::String
+      attr_accessor count: ::Integer
+      SENSITIVE: []
+    end
+
+    class HostPath
+      attr_accessor path: ::String
+      SENSITIVE: []
+    end
+
+    class IamInstanceProfile
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class ImpersonatedUser
+      attr_accessor username: ::String
+      attr_accessor groups: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class InstanceDetails
+      attr_accessor availability_zone: ::String
+      attr_accessor iam_instance_profile: Types::IamInstanceProfile
+      attr_accessor image_description: ::String
+      attr_accessor image_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor instance_state: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor outpost_arn: ::String
+      attr_accessor launch_time: ::String
+      attr_accessor network_interfaces: ::Array[Types::NetworkInterface]
+      attr_accessor platform: ::String
+      attr_accessor product_codes: ::Array[Types::ProductCode]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class InternalServerErrorException
+      attr_accessor message: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class Invitation
+      attr_accessor account_id: ::String
+      attr_accessor invitation_id: ::String
+      attr_accessor relationship_status: ::String
+      attr_accessor invited_at: ::String
+      SENSITIVE: []
+    end
+
+    class InviteMembersRequest
+      attr_accessor detector_id: ::String
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor disable_email_notification: bool
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InviteMembersResponse
+      attr_accessor unprocessed_accounts: ::Array[Types::UnprocessedAccount]
+      SENSITIVE: []
+    end
+
+    class KubernetesApiCallAction
+      attr_accessor request_uri: ::String
+      attr_accessor verb: ::String
+      attr_accessor source_ips: ::Array[::String]
+      attr_accessor user_agent: ::String
+      attr_accessor remote_ip_details: Types::RemoteIpDetails
+      attr_accessor status_code: ::Integer
+      attr_accessor parameters: ::String
+      attr_accessor resource: ::String
+      attr_accessor subresource: ::String
+      attr_accessor namespace: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class KubernetesAuditLogsConfiguration
+      attr_accessor enable: bool
+      SENSITIVE: []
+    end
+
+    class KubernetesAuditLogsConfigurationResult
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class KubernetesConfiguration
+      attr_accessor audit_logs: Types::KubernetesAuditLogsConfiguration
+      SENSITIVE: []
+    end
+
+    class KubernetesConfigurationResult
+      attr_accessor audit_logs: Types::KubernetesAuditLogsConfigurationResult
+      SENSITIVE: []
+    end
+
+    class KubernetesDataSourceFreeTrial
+      attr_accessor audit_logs: Types::DataSourceFreeTrial
+      SENSITIVE: []
+    end
+
+    class KubernetesDetails
+      attr_accessor kubernetes_user_details: Types::KubernetesUserDetails
+      attr_accessor kubernetes_workload_details: Types::KubernetesWorkloadDetails
+      SENSITIVE: []
+    end
+
+    class KubernetesPermissionCheckedDetails
+      attr_accessor verb: ::String
+      attr_accessor resource: ::String
+      attr_accessor namespace: ::String
+      attr_accessor allowed: bool
+      SENSITIVE: []
+    end
+
+    class KubernetesRoleBindingDetails
+      attr_accessor kind: ::String
+      attr_accessor name: ::String
+      attr_accessor uid: ::String
+      attr_accessor role_ref_name: ::String
+      attr_accessor role_ref_kind: ::String
+      SENSITIVE: []
+    end
+
+    class KubernetesRoleDetails
+      attr_accessor kind: ::String
+      attr_accessor name: ::String
+      attr_accessor uid: ::String
+      SENSITIVE: []
+    end
+
+    class KubernetesUserDetails
+      attr_accessor username: ::String
+      attr_accessor uid: ::String
+      attr_accessor groups: ::Array[::String]
+      attr_accessor session_name: ::Array[::String]
+      attr_accessor impersonated_user: Types::ImpersonatedUser
+      SENSITIVE: []
+    end
+
+    class KubernetesWorkloadDetails
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      attr_accessor uid: ::String
+      attr_accessor namespace: ::String
+      attr_accessor host_network: bool
+      attr_accessor containers: ::Array[Types::Container]
+      attr_accessor volumes: ::Array[Types::Volume]
+      attr_accessor service_account_name: ::String
+      attr_accessor host_ipc: bool
+      attr_accessor host_pid: bool
+      SENSITIVE: []
+    end
+
+    class LambdaDetails
+      attr_accessor function_arn: ::String
+      attr_accessor function_name: ::String
+      attr_accessor description: ::String
+      attr_accessor last_modified_at: ::Time
+      attr_accessor revision_id: ::String
+      attr_accessor function_version: ::String
+      attr_accessor role: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class LineageObject
+      attr_accessor start_time: ::Time
+      attr_accessor namespace_pid: ::Integer
+      attr_accessor user_id: ::Integer
+      attr_accessor name: ::String
+      attr_accessor pid: ::Integer
+      attr_accessor uuid: ::String
+      attr_accessor executable_path: ::String
+      attr_accessor euid: ::Integer
+      attr_accessor parent_uuid: ::String
+      SENSITIVE: []
+    end
+
+    class ListCoverageRequest
+      attr_accessor detector_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filter_criteria: Types::CoverageFilterCriteria
+      attr_accessor sort_criteria: Types::CoverageSortCriteria
+      SENSITIVE: []
+    end
+
+    class ListCoverageResponse
+      attr_accessor resources: ::Array[Types::CoverageResource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDetectorsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDetectorsResponse
+      attr_accessor detector_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFiltersRequest
+      attr_accessor detector_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFiltersResponse
+      attr_accessor filter_names: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFindingsRequest
+      attr_accessor detector_id: ::String
+      attr_accessor finding_criteria: Types::FindingCriteria
+      attr_accessor sort_criteria: Types::SortCriteria
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFindingsResponse
+      attr_accessor finding_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIPSetsRequest
+      attr_accessor detector_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIPSetsResponse
+      attr_accessor ip_set_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInvitationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInvitationsResponse
+      attr_accessor invitations: ::Array[Types::Invitation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMembersRequest
+      attr_accessor detector_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor only_associated: ::String
+      SENSITIVE: []
+    end
+
+    class ListMembersResponse
+      attr_accessor members: ::Array[Types::Member]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOrganizationAdminAccountsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOrganizationAdminAccountsResponse
+      attr_accessor admin_accounts: ::Array[Types::AdminAccount]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPublishingDestinationsRequest
+      attr_accessor detector_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPublishingDestinationsResponse
+      attr_accessor destinations: ::Array[Types::Destination]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListThreatIntelSetsRequest
+      attr_accessor detector_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListThreatIntelSetsResponse
+      attr_accessor threat_intel_set_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LocalIpDetails
+      attr_accessor ip_address_v4: ::String
+      SENSITIVE: []
+    end
+
+    class LocalPortDetails
+      attr_accessor port: ::Integer
+      attr_accessor port_name: ::String
+      SENSITIVE: []
+    end
+
+    class LoginAttribute
+      attr_accessor user: ::String
+      attr_accessor application: ::String
+      attr_accessor failed_login_attempts: ::Integer
+      attr_accessor successful_login_attempts: ::Integer
+      SENSITIVE: []
+    end
+
+    class MalwareProtectionConfiguration
+      attr_accessor scan_ec2_instance_with_findings: Types::ScanEc2InstanceWithFindings
+      SENSITIVE: []
+    end
+
+    class MalwareProtectionConfigurationResult
+      attr_accessor scan_ec2_instance_with_findings: Types::ScanEc2InstanceWithFindingsResult
+      attr_accessor service_role: ::String
+      SENSITIVE: []
+    end
+
+    class MalwareProtectionDataSourceFreeTrial
+      attr_accessor scan_ec2_instance_with_findings: Types::DataSourceFreeTrial
+      SENSITIVE: []
+    end
+
+    class Master
+      attr_accessor account_id: ::String
+      attr_accessor invitation_id: ::String
+      attr_accessor relationship_status: ::String
+      attr_accessor invited_at: ::String
+      SENSITIVE: []
+    end
+
+    class Member
+      attr_accessor account_id: ::String
+      attr_accessor detector_id: ::String
+      attr_accessor master_id: ::String
+      attr_accessor email: ::String
+      attr_accessor relationship_status: ::String
+      attr_accessor invited_at: ::String
+      attr_accessor updated_at: ::String
+      attr_accessor administrator_id: ::String
+      SENSITIVE: []
+    end
+
+    class MemberAdditionalConfiguration
+      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class MemberAdditionalConfigurationResult
+      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class MemberDataSourceConfiguration
+      attr_accessor account_id: ::String
+      attr_accessor data_sources: Types::DataSourceConfigurationsResult
+      attr_accessor features: ::Array[Types::MemberFeaturesConfigurationResult]
+      SENSITIVE: []
+    end
+
+    class MemberFeaturesConfiguration
+      attr_accessor name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "EKS_RUNTIME_MONITORING" | "LAMBDA_NETWORK_LOGS" | "RUNTIME_MONITORING")
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor additional_configuration: ::Array[Types::MemberAdditionalConfiguration]
+      SENSITIVE: []
+    end
+
+    class MemberFeaturesConfigurationResult
+      attr_accessor name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "EKS_RUNTIME_MONITORING" | "LAMBDA_NETWORK_LOGS" | "RUNTIME_MONITORING")
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor updated_at: ::Time
+      attr_accessor additional_configuration: ::Array[Types::MemberAdditionalConfigurationResult]
+      SENSITIVE: []
+    end
+
+    class NetworkConnectionAction
+      attr_accessor blocked: bool
+      attr_accessor connection_direction: ::String
+      attr_accessor local_port_details: Types::LocalPortDetails
+      attr_accessor protocol: ::String
+      attr_accessor local_ip_details: Types::LocalIpDetails
+      attr_accessor remote_ip_details: Types::RemoteIpDetails
+      attr_accessor remote_port_details: Types::RemotePortDetails
+      SENSITIVE: []
+    end
+
+    class NetworkInterface
+      attr_accessor ipv_6_addresses: ::Array[::String]
+      attr_accessor network_interface_id: ::String
+      attr_accessor private_dns_name: ::String
+      attr_accessor private_ip_address: ::String
+      attr_accessor private_ip_addresses: ::Array[Types::PrivateIpAddressDetails]
+      attr_accessor public_dns_name: ::String
+      attr_accessor public_ip: ::String
+      attr_accessor security_groups: ::Array[Types::SecurityGroup]
+      attr_accessor subnet_id: ::String
+      attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
+    class Observations
+      attr_accessor text: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Organization
+      attr_accessor asn: ::String
+      attr_accessor asn_org: ::String
+      attr_accessor isp: ::String
+      attr_accessor org: ::String
+      SENSITIVE: []
+    end
+
+    class OrganizationAdditionalConfiguration
+      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")
+      attr_accessor auto_enable: ("NEW" | "NONE" | "ALL")
+      SENSITIVE: []
+    end
+
+    class OrganizationAdditionalConfigurationResult
+      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")
+      attr_accessor auto_enable: ("NEW" | "NONE" | "ALL")
+      SENSITIVE: []
+    end
+
+    class OrganizationDataSourceConfigurations
+      attr_accessor s3_logs: Types::OrganizationS3LogsConfiguration
+      attr_accessor kubernetes: Types::OrganizationKubernetesConfiguration
+      attr_accessor malware_protection: Types::OrganizationMalwareProtectionConfiguration
+      SENSITIVE: []
+    end
+
+    class OrganizationDataSourceConfigurationsResult
+      attr_accessor s3_logs: Types::OrganizationS3LogsConfigurationResult
+      attr_accessor kubernetes: Types::OrganizationKubernetesConfigurationResult
+      attr_accessor malware_protection: Types::OrganizationMalwareProtectionConfigurationResult
+      SENSITIVE: []
+    end
+
+    class OrganizationDetails
+      attr_accessor updated_at: ::Time
+      attr_accessor organization_statistics: Types::OrganizationStatistics
+      SENSITIVE: []
+    end
+
+    class OrganizationEbsVolumes
+      attr_accessor auto_enable: bool
+      SENSITIVE: []
+    end
+
+    class OrganizationEbsVolumesResult
+      attr_accessor auto_enable: bool
+      SENSITIVE: []
+    end
+
+    class OrganizationFeatureConfiguration
+      attr_accessor name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "EKS_RUNTIME_MONITORING" | "LAMBDA_NETWORK_LOGS" | "RUNTIME_MONITORING")
+      attr_accessor auto_enable: ("NEW" | "NONE" | "ALL")
+      attr_accessor additional_configuration: ::Array[Types::OrganizationAdditionalConfiguration]
+      SENSITIVE: []
+    end
+
+    class OrganizationFeatureConfigurationResult
+      attr_accessor name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "EKS_RUNTIME_MONITORING" | "LAMBDA_NETWORK_LOGS" | "RUNTIME_MONITORING")
+      attr_accessor auto_enable: ("NEW" | "NONE" | "ALL")
+      attr_accessor additional_configuration: ::Array[Types::OrganizationAdditionalConfigurationResult]
+      SENSITIVE: []
+    end
+
+    class OrganizationFeatureStatistics
+      attr_accessor name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "EKS_RUNTIME_MONITORING" | "LAMBDA_NETWORK_LOGS" | "RUNTIME_MONITORING")
+      attr_accessor enabled_accounts_count: ::Integer
+      attr_accessor additional_configuration: ::Array[Types::OrganizationFeatureStatisticsAdditionalConfiguration]
+      SENSITIVE: []
+    end
+
+    class OrganizationFeatureStatisticsAdditionalConfiguration
+      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")
+      attr_accessor enabled_accounts_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class OrganizationKubernetesAuditLogsConfiguration
+      attr_accessor auto_enable: bool
+      SENSITIVE: []
+    end
+
+    class OrganizationKubernetesAuditLogsConfigurationResult
+      attr_accessor auto_enable: bool
+      SENSITIVE: []
+    end
+
+    class OrganizationKubernetesConfiguration
+      attr_accessor audit_logs: Types::OrganizationKubernetesAuditLogsConfiguration
+      SENSITIVE: []
+    end
+
+    class OrganizationKubernetesConfigurationResult
+      attr_accessor audit_logs: Types::OrganizationKubernetesAuditLogsConfigurationResult
+      SENSITIVE: []
+    end
+
+    class OrganizationMalwareProtectionConfiguration
+      attr_accessor scan_ec2_instance_with_findings: Types::OrganizationScanEc2InstanceWithFindings
+      SENSITIVE: []
+    end
+
+    class OrganizationMalwareProtectionConfigurationResult
+      attr_accessor scan_ec2_instance_with_findings: Types::OrganizationScanEc2InstanceWithFindingsResult
+      SENSITIVE: []
+    end
+
+    class OrganizationS3LogsConfiguration
+      attr_accessor auto_enable: bool
+      SENSITIVE: []
+    end
+
+    class OrganizationS3LogsConfigurationResult
+      attr_accessor auto_enable: bool
+      SENSITIVE: []
+    end
+
+    class OrganizationScanEc2InstanceWithFindings
+      attr_accessor ebs_volumes: Types::OrganizationEbsVolumes
+      SENSITIVE: []
+    end
+
+    class OrganizationScanEc2InstanceWithFindingsResult
+      attr_accessor ebs_volumes: Types::OrganizationEbsVolumesResult
+      SENSITIVE: []
+    end
+
+    class OrganizationStatistics
+      attr_accessor total_accounts_count: ::Integer
+      attr_accessor member_accounts_count: ::Integer
+      attr_accessor active_accounts_count: ::Integer
+      attr_accessor enabled_accounts_count: ::Integer
+      attr_accessor count_by_feature: ::Array[Types::OrganizationFeatureStatistics]
+      SENSITIVE: []
+    end
+
+    class Owner
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class PermissionConfiguration
+      attr_accessor bucket_level_permissions: Types::BucketLevelPermissions
+      attr_accessor account_level_permissions: Types::AccountLevelPermissions
+      SENSITIVE: []
+    end
+
+    class PortProbeAction
+      attr_accessor blocked: bool
+      attr_accessor port_probe_details: ::Array[Types::PortProbeDetail]
+      SENSITIVE: []
+    end
+
+    class PortProbeDetail
+      attr_accessor local_port_details: Types::LocalPortDetails
+      attr_accessor local_ip_details: Types::LocalIpDetails
+      attr_accessor remote_ip_details: Types::RemoteIpDetails
+      SENSITIVE: []
+    end
+
+    class PrivateIpAddressDetails
+      attr_accessor private_dns_name: ::String
+      attr_accessor private_ip_address: ::String
+      SENSITIVE: []
+    end
+
+    class ProcessDetails
+      attr_accessor name: ::String
+      attr_accessor executable_path: ::String
+      attr_accessor executable_sha_256: ::String
+      attr_accessor namespace_pid: ::Integer
+      attr_accessor pwd: ::String
+      attr_accessor pid: ::Integer
+      attr_accessor start_time: ::Time
+      attr_accessor uuid: ::String
+      attr_accessor parent_uuid: ::String
+      attr_accessor user: ::String
+      attr_accessor user_id: ::Integer
+      attr_accessor euid: ::Integer
+      attr_accessor lineage: ::Array[Types::LineageObject]
+      SENSITIVE: []
+    end
+
+    class ProductCode
+      attr_accessor code: ::String
+      attr_accessor product_type: ::String
+      SENSITIVE: []
+    end
+
+    class PublicAccess
+      attr_accessor permission_configuration: Types::PermissionConfiguration
+      attr_accessor effective_permission: ::String
+      SENSITIVE: []
+    end
+
+    class RdsDbInstanceDetails
+      attr_accessor db_instance_identifier: ::String
+      attr_accessor engine: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor db_cluster_identifier: ::String
+      attr_accessor db_instance_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class RdsDbUserDetails
+      attr_accessor user: ::String
+      attr_accessor application: ::String
+      attr_accessor database: ::String
+      attr_accessor ssl: ::String
+      attr_accessor auth_method: ::String
+      SENSITIVE: []
+    end
+
+    class RdsLoginAttemptAction
+      attr_accessor remote_ip_details: Types::RemoteIpDetails
+      attr_accessor login_attributes: ::Array[Types::LoginAttribute]
+      SENSITIVE: []
+    end
+
+    class RemoteAccountDetails
+      attr_accessor account_id: ::String
+      attr_accessor affiliated: bool
+      SENSITIVE: []
+    end
+
+    class RemoteIpDetails
+      attr_accessor city: Types::City
+      attr_accessor country: Types::Country
+      attr_accessor geo_location: Types::GeoLocation
+      attr_accessor ip_address_v4: ::String
+      attr_accessor organization: Types::Organization
+      SENSITIVE: []
+    end
+
+    class RemotePortDetails
+      attr_accessor port: ::Integer
+      attr_accessor port_name: ::String
+      SENSITIVE: []
+    end
+
+    class Resource
+      attr_accessor access_key_details: Types::AccessKeyDetails
+      attr_accessor s3_bucket_details: ::Array[Types::S3BucketDetail]
+      attr_accessor instance_details: Types::InstanceDetails
+      attr_accessor eks_cluster_details: Types::EksClusterDetails
+      attr_accessor kubernetes_details: Types::KubernetesDetails
+      attr_accessor resource_type: ::String
+      attr_accessor ebs_volume_details: Types::EbsVolumeDetails
+      attr_accessor ecs_cluster_details: Types::EcsClusterDetails
+      attr_accessor container_details: Types::Container
+      attr_accessor rds_db_instance_details: Types::RdsDbInstanceDetails
+      attr_accessor rds_db_user_details: Types::RdsDbUserDetails
+      attr_accessor lambda_details: Types::LambdaDetails
+      SENSITIVE: []
+    end
+
+    class ResourceDetails
+      attr_accessor instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RuntimeContext
+      attr_accessor modifying_process: Types::ProcessDetails
+      attr_accessor modified_at: ::Time
+      attr_accessor script_path: ::String
+      attr_accessor library_path: ::String
+      attr_accessor ld_preload_value: ::String
+      attr_accessor socket_path: ::String
+      attr_accessor runc_binary_path: ::String
+      attr_accessor release_agent_path: ::String
+      attr_accessor mount_source: ::String
+      attr_accessor mount_target: ::String
+      attr_accessor file_system_type: ::String
+      attr_accessor flags: ::Array[::String]
+      attr_accessor module_name: ::String
+      attr_accessor module_file_path: ::String
+      attr_accessor module_sha_256: ::String
+      attr_accessor shell_history_file_path: ::String
+      attr_accessor target_process: Types::ProcessDetails
+      attr_accessor address_family: ::String
+      attr_accessor iana_protocol_number: ::Integer
+      attr_accessor memory_regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RuntimeDetails
+      attr_accessor process: Types::ProcessDetails
+      attr_accessor context: Types::RuntimeContext
+      SENSITIVE: []
+    end
+
+    class S3BucketDetail
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor owner: Types::Owner
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor default_server_side_encryption: Types::DefaultServerSideEncryption
+      attr_accessor public_access: Types::PublicAccess
+      SENSITIVE: []
+    end
+
+    class S3LogsConfiguration
+      attr_accessor enable: bool
+      SENSITIVE: []
+    end
+
+    class S3LogsConfigurationResult
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class Scan
+      attr_accessor detector_id: ::String
+      attr_accessor admin_detector_id: ::String
+      attr_accessor scan_id: ::String
+      attr_accessor scan_status: ("RUNNING" | "COMPLETED" | "FAILED" | "SKIPPED")
+      attr_accessor failure_reason: ::String
+      attr_accessor scan_start_time: ::Time
+      attr_accessor scan_end_time: ::Time
+      attr_accessor trigger_details: Types::TriggerDetails
+      attr_accessor resource_details: Types::ResourceDetails
+      attr_accessor scan_result_details: Types::ScanResultDetails
+      attr_accessor account_id: ::String
+      attr_accessor total_bytes: ::Integer
+      attr_accessor file_count: ::Integer
+      attr_accessor attached_volumes: ::Array[Types::VolumeDetail]
+      attr_accessor scan_type: ("GUARDDUTY_INITIATED" | "ON_DEMAND")
+      SENSITIVE: []
+    end
+
+    class ScanCondition
+      attr_accessor map_equals: ::Array[Types::ScanConditionPair]
+      SENSITIVE: []
+    end
+
+    class ScanConditionPair
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ScanDetections
+      attr_accessor scanned_item_count: Types::ScannedItemCount
+      attr_accessor threats_detected_item_count: Types::ThreatsDetectedItemCount
+      attr_accessor highest_severity_threat_details: Types::HighestSeverityThreatDetails
+      attr_accessor threat_detected_by_name: Types::ThreatDetectedByName
+      SENSITIVE: []
+    end
+
+    class ScanEc2InstanceWithFindings
+      attr_accessor ebs_volumes: bool
+      SENSITIVE: []
+    end
+
+    class ScanEc2InstanceWithFindingsResult
+      attr_accessor ebs_volumes: Types::EbsVolumesResult
+      SENSITIVE: []
+    end
+
+    class ScanFilePath
+      attr_accessor file_path: ::String
+      attr_accessor volume_arn: ::String
+      attr_accessor hash: ::String
+      attr_accessor file_name: ::String
+      SENSITIVE: []
+    end
+
+    class ScanResourceCriteria
+      attr_accessor include: ::Hash[("EC2_INSTANCE_TAG"), Types::ScanCondition]
+      attr_accessor exclude: ::Hash[("EC2_INSTANCE_TAG"), Types::ScanCondition]
+      SENSITIVE: []
+    end
+
+    class ScanResultDetails
+      attr_accessor scan_result: ("CLEAN" | "INFECTED")
+      SENSITIVE: []
+    end
+
+    class ScanThreatName
+      attr_accessor name: ::String
+      attr_accessor severity: ::String
+      attr_accessor item_count: ::Integer
+      attr_accessor file_paths: ::Array[Types::ScanFilePath]
+      SENSITIVE: []
+    end
+
+    class ScannedItemCount
+      attr_accessor total_gb: ::Integer
+      attr_accessor files: ::Integer
+      attr_accessor volumes: ::Integer
+      SENSITIVE: []
+    end
+
+    class SecurityContext
+      attr_accessor privileged: bool
+      attr_accessor allow_privilege_escalation: bool
+      SENSITIVE: []
+    end
+
+    class SecurityGroup
+      attr_accessor group_id: ::String
+      attr_accessor group_name: ::String
+      SENSITIVE: []
+    end
+
+    class Service
+      attr_accessor action: Types::Action
+      attr_accessor evidence: Types::Evidence
+      attr_accessor archived: bool
+      attr_accessor count: ::Integer
+      attr_accessor detector_id: ::String
+      attr_accessor event_first_seen: ::String
+      attr_accessor event_last_seen: ::String
+      attr_accessor resource_role: ::String
+      attr_accessor service_name: ::String
+      attr_accessor user_feedback: ::String
+      attr_accessor additional_info: Types::ServiceAdditionalInfo
+      attr_accessor feature_name: ::String
+      attr_accessor ebs_volume_scan_details: Types::EbsVolumeScanDetails
+      attr_accessor runtime_details: Types::RuntimeDetails
+      attr_accessor detection: Types::Detection
+      SENSITIVE: []
+    end
+
+    class ServiceAdditionalInfo
+      attr_accessor value: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class SortCriteria
+      attr_accessor attribute_name: ::String
+      attr_accessor order_by: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class StartMalwareScanRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartMalwareScanResponse
+      attr_accessor scan_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartMonitoringMembersRequest
+      attr_accessor detector_id: ::String
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StartMonitoringMembersResponse
+      attr_accessor unprocessed_accounts: ::Array[Types::UnprocessedAccount]
+      SENSITIVE: []
+    end
+
+    class StopMonitoringMembersRequest
+      attr_accessor detector_id: ::String
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StopMonitoringMembersResponse
+      attr_accessor unprocessed_accounts: ::Array[Types::UnprocessedAccount]
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThreatDetectedByName
+      attr_accessor item_count: ::Integer
+      attr_accessor unique_threat_name_count: ::Integer
+      attr_accessor shortened: bool
+      attr_accessor threat_names: ::Array[Types::ScanThreatName]
+      SENSITIVE: []
+    end
+
+    class ThreatIntelligenceDetail
+      attr_accessor threat_list_name: ::String
+      attr_accessor threat_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ThreatsDetectedItemCount
+      attr_accessor files: ::Integer
+      SENSITIVE: []
+    end
+
+    class Total
+      attr_accessor amount: ::String
+      attr_accessor unit: ::String
+      SENSITIVE: []
+    end
+
+    class TriggerDetails
+      attr_accessor guard_duty_finding_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UnarchiveFindingsRequest
+      attr_accessor detector_id: ::String
+      attr_accessor finding_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UnarchiveFindingsResponse < Aws::EmptyStructure
+    end
+
+    class UnprocessedAccount
+      attr_accessor account_id: ::String
+      attr_accessor result: ::String
+      SENSITIVE: []
+    end
+
+    class UnprocessedDataSourcesResult
+      attr_accessor malware_protection: Types::MalwareProtectionConfigurationResult
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDetectorRequest
+      attr_accessor detector_id: ::String
+      attr_accessor enable: bool
+      attr_accessor finding_publishing_frequency: ("FIFTEEN_MINUTES" | "ONE_HOUR" | "SIX_HOURS")
+      attr_accessor data_sources: Types::DataSourceConfigurations
+      attr_accessor features: ::Array[Types::DetectorFeatureConfiguration]
+      SENSITIVE: []
+    end
+
+    class UpdateDetectorResponse < Aws::EmptyStructure
+    end
+
+    class UpdateFilterRequest
+      attr_accessor detector_id: ::String
+      attr_accessor filter_name: ::String
+      attr_accessor description: ::String
+      attr_accessor action: ("NOOP" | "ARCHIVE")
+      attr_accessor rank: ::Integer
+      attr_accessor finding_criteria: Types::FindingCriteria
+      SENSITIVE: []
+    end
+
+    class UpdateFilterResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFindingsFeedbackRequest
+      attr_accessor detector_id: ::String
+      attr_accessor finding_ids: ::Array[::String]
+      attr_accessor feedback: ("USEFUL" | "NOT_USEFUL")
+      attr_accessor comments: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFindingsFeedbackResponse < Aws::EmptyStructure
+    end
+
+    class UpdateIPSetRequest
+      attr_accessor detector_id: ::String
+      attr_accessor ip_set_id: ::String
+      attr_accessor name: ::String
+      attr_accessor location: ::String
+      attr_accessor activate: bool
+      SENSITIVE: []
+    end
+
+    class UpdateIPSetResponse < Aws::EmptyStructure
+    end
+
+    class UpdateMalwareScanSettingsRequest
+      attr_accessor detector_id: ::String
+      attr_accessor scan_resource_criteria: Types::ScanResourceCriteria
+      attr_accessor ebs_snapshot_preservation: ("NO_RETENTION" | "RETENTION_WITH_FINDING")
+      SENSITIVE: []
+    end
+
+    class UpdateMalwareScanSettingsResponse < Aws::EmptyStructure
+    end
+
+    class UpdateMemberDetectorsRequest
+      attr_accessor detector_id: ::String
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor data_sources: Types::DataSourceConfigurations
+      attr_accessor features: ::Array[Types::MemberFeaturesConfiguration]
+      SENSITIVE: []
+    end
+
+    class UpdateMemberDetectorsResponse
+      attr_accessor unprocessed_accounts: ::Array[Types::UnprocessedAccount]
+      SENSITIVE: []
+    end
+
+    class UpdateOrganizationConfigurationRequest
+      attr_accessor detector_id: ::String
+      attr_accessor auto_enable: bool
+      attr_accessor data_sources: Types::OrganizationDataSourceConfigurations
+      attr_accessor features: ::Array[Types::OrganizationFeatureConfiguration]
+      attr_accessor auto_enable_organization_members: ("NEW" | "ALL" | "NONE")
+      SENSITIVE: []
+    end
+
+    class UpdateOrganizationConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class UpdatePublishingDestinationRequest
+      attr_accessor detector_id: ::String
+      attr_accessor destination_id: ::String
+      attr_accessor destination_properties: Types::DestinationProperties
+      SENSITIVE: []
+    end
+
+    class UpdatePublishingDestinationResponse < Aws::EmptyStructure
+    end
+
+    class UpdateThreatIntelSetRequest
+      attr_accessor detector_id: ::String
+      attr_accessor threat_intel_set_id: ::String
+      attr_accessor name: ::String
+      attr_accessor location: ::String
+      attr_accessor activate: bool
+      SENSITIVE: []
+    end
+
+    class UpdateThreatIntelSetResponse < Aws::EmptyStructure
+    end
+
+    class UsageAccountResult
+      attr_accessor account_id: ::String
+      attr_accessor total: Types::Total
+      SENSITIVE: []
+    end
+
+    class UsageCriteria
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor data_sources: ::Array[("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_LOGS" | "KUBERNETES_AUDIT_LOGS" | "EC2_MALWARE_SCAN")]
+      attr_accessor resources: ::Array[::String]
+      attr_accessor features: ::Array[("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "FARGATE_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING")]
+      SENSITIVE: []
+    end
+
+    class UsageDataSourceResult
+      attr_accessor data_source: ("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_LOGS" | "KUBERNETES_AUDIT_LOGS" | "EC2_MALWARE_SCAN")
+      attr_accessor total: Types::Total
+      SENSITIVE: []
+    end
+
+    class UsageFeatureResult
+      attr_accessor feature: ("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "FARGATE_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING")
+      attr_accessor total: Types::Total
+      SENSITIVE: []
+    end
+
+    class UsageResourceResult
+      attr_accessor resource: ::String
+      attr_accessor total: Types::Total
+      SENSITIVE: []
+    end
+
+    class UsageStatistics
+      attr_accessor sum_by_account: ::Array[Types::UsageAccountResult]
+      attr_accessor top_accounts_by_feature: ::Array[Types::UsageTopAccountsResult]
+      attr_accessor sum_by_data_source: ::Array[Types::UsageDataSourceResult]
+      attr_accessor sum_by_resource: ::Array[Types::UsageResourceResult]
+      attr_accessor top_resources: ::Array[Types::UsageResourceResult]
+      attr_accessor sum_by_feature: ::Array[Types::UsageFeatureResult]
+      SENSITIVE: []
+    end
+
+    class UsageTopAccountResult
+      attr_accessor account_id: ::String
+      attr_accessor total: Types::Total
+      SENSITIVE: []
+    end
+
+    class UsageTopAccountsResult
+      attr_accessor feature: ("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "FARGATE_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING")
+      attr_accessor accounts: ::Array[Types::UsageTopAccountResult]
+      SENSITIVE: []
+    end
+
+    class Volume
+      attr_accessor name: ::String
+      attr_accessor host_path: Types::HostPath
+      SENSITIVE: []
+    end
+
+    class VolumeDetail
+      attr_accessor volume_arn: ::String
+      attr_accessor volume_type: ::String
+      attr_accessor device_name: ::String
+      attr_accessor volume_size_in_gb: ::Integer
+      attr_accessor encryption_type: ::String
+      attr_accessor snapshot_arn: ::String
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class VolumeMount
+      attr_accessor name: ::String
+      attr_accessor mount_path: ::String
+      SENSITIVE: []
+    end
+
+    class VpcConfig
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor vpc_id: ::String
+      attr_accessor security_groups: ::Array[Types::SecurityGroup]
+      SENSITIVE: []
+    end
+  end
+end

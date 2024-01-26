@@ -1,0 +1,36 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module PinpointEmail
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AccountSuspendedException < ::Aws::Errors::ServiceError
+      end
+      class AlreadyExistsException < ::Aws::Errors::ServiceError
+      end
+      class BadRequestException < ::Aws::Errors::ServiceError
+      end
+      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+      end
+      class MailFromDomainNotVerifiedException < ::Aws::Errors::ServiceError
+      end
+      class MessageRejected < ::Aws::Errors::ServiceError
+      end
+      class NotFoundException < ::Aws::Errors::ServiceError
+      end
+      class SendingPausedException < ::Aws::Errors::ServiceError
+      end
+      class TooManyRequestsException < ::Aws::Errors::ServiceError
+      end
+    end
+  end
+end

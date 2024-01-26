@@ -1,0 +1,1029 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module VPCLattice
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchUpdateRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchUpdateRuleResponse]
+        def successful: () -> ::Array[Types::RuleUpdateSuccess]
+        def unsuccessful: () -> ::Array[Types::RuleUpdateFailure]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#batch_update_rule-instance_method
+      def batch_update_rule: (
+                               listener_identifier: ::String,
+                               rules: Array[
+                                 {
+                                   action: {
+                                     fixed_response: {
+                                       status_code: ::Integer
+                                     }?,
+                                     forward: {
+                                       target_groups: Array[
+                                         {
+                                           target_group_identifier: ::String,
+                                           weight: ::Integer?
+                                         },
+                                       ]
+                                     }?
+                                   }?,
+                                   match: {
+                                     http_match: {
+                                       header_matches: Array[
+                                         {
+                                           case_sensitive: bool?,
+                                           match: {
+                                             contains: ::String?,
+                                             exact: ::String?,
+                                             prefix: ::String?
+                                           },
+                                           name: ::String
+                                         },
+                                       ]?,
+                                       method: ::String?,
+                                       path_match: {
+                                         case_sensitive: bool?,
+                                         match: {
+                                           exact: ::String?,
+                                           prefix: ::String?
+                                         }
+                                       }?
+                                     }?
+                                   }?,
+                                   priority: ::Integer?,
+                                   rule_identifier: ::String
+                                 },
+                               ],
+                               service_identifier: ::String
+                             ) -> _BatchUpdateRuleResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateRuleResponseSuccess
+
+      interface _CreateAccessLogSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccessLogSubscriptionResponse]
+        def arn: () -> ::String
+        def destination_arn: () -> ::String
+        def id: () -> ::String
+        def resource_arn: () -> ::String
+        def resource_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#create_access_log_subscription-instance_method
+      def create_access_log_subscription: (
+                                            ?client_token: ::String,
+                                            destination_arn: ::String,
+                                            resource_identifier: ::String,
+                                            ?tags: Hash[::String, ::String]
+                                          ) -> _CreateAccessLogSubscriptionResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccessLogSubscriptionResponseSuccess
+
+      interface _CreateListenerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateListenerResponse]
+        def arn: () -> ::String
+        def default_action: () -> Types::RuleAction
+        def id: () -> ::String
+        def name: () -> ::String
+        def port: () -> ::Integer
+        def protocol: () -> ("HTTP" | "HTTPS")
+        def service_arn: () -> ::String
+        def service_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#create_listener-instance_method
+      def create_listener: (
+                             ?client_token: ::String,
+                             default_action: {
+                               fixed_response: {
+                                 status_code: ::Integer
+                               }?,
+                               forward: {
+                                 target_groups: Array[
+                                   {
+                                     target_group_identifier: ::String,
+                                     weight: ::Integer?
+                                   },
+                                 ]
+                               }?
+                             },
+                             name: ::String,
+                             ?port: ::Integer,
+                             protocol: ("HTTP" | "HTTPS"),
+                             service_identifier: ::String,
+                             ?tags: Hash[::String, ::String]
+                           ) -> _CreateListenerResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateListenerResponseSuccess
+
+      interface _CreateRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRuleResponse]
+        def action: () -> Types::RuleAction
+        def arn: () -> ::String
+        def id: () -> ::String
+        def match: () -> Types::RuleMatch
+        def name: () -> ::String
+        def priority: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#create_rule-instance_method
+      def create_rule: (
+                         action: {
+                           fixed_response: {
+                             status_code: ::Integer
+                           }?,
+                           forward: {
+                             target_groups: Array[
+                               {
+                                 target_group_identifier: ::String,
+                                 weight: ::Integer?
+                               },
+                             ]
+                           }?
+                         },
+                         ?client_token: ::String,
+                         listener_identifier: ::String,
+                         match: {
+                           http_match: {
+                             header_matches: Array[
+                               {
+                                 case_sensitive: bool?,
+                                 match: {
+                                   contains: ::String?,
+                                   exact: ::String?,
+                                   prefix: ::String?
+                                 },
+                                 name: ::String
+                               },
+                             ]?,
+                             method: ::String?,
+                             path_match: {
+                               case_sensitive: bool?,
+                               match: {
+                                 exact: ::String?,
+                                 prefix: ::String?
+                               }
+                             }?
+                           }?
+                         },
+                         name: ::String,
+                         priority: ::Integer,
+                         service_identifier: ::String,
+                         ?tags: Hash[::String, ::String]
+                       ) -> _CreateRuleResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRuleResponseSuccess
+
+      interface _CreateServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateServiceResponse]
+        def arn: () -> ::String
+        def auth_type: () -> ("NONE" | "AWS_IAM")
+        def certificate_arn: () -> ::String
+        def custom_domain_name: () -> ::String
+        def dns_entry: () -> Types::DnsEntry
+        def id: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("ACTIVE" | "CREATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#create_service-instance_method
+      def create_service: (
+                            ?auth_type: ("NONE" | "AWS_IAM"),
+                            ?certificate_arn: ::String,
+                            ?client_token: ::String,
+                            ?custom_domain_name: ::String,
+                            name: ::String,
+                            ?tags: Hash[::String, ::String]
+                          ) -> _CreateServiceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServiceResponseSuccess
+
+      interface _CreateServiceNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateServiceNetworkResponse]
+        def arn: () -> ::String
+        def auth_type: () -> ("NONE" | "AWS_IAM")
+        def id: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#create_service_network-instance_method
+      def create_service_network: (
+                                    ?auth_type: ("NONE" | "AWS_IAM"),
+                                    ?client_token: ::String,
+                                    name: ::String,
+                                    ?tags: Hash[::String, ::String]
+                                  ) -> _CreateServiceNetworkResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServiceNetworkResponseSuccess
+
+      interface _CreateServiceNetworkServiceAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateServiceNetworkServiceAssociationResponse]
+        def arn: () -> ::String
+        def created_by: () -> ::String
+        def custom_domain_name: () -> ::String
+        def dns_entry: () -> Types::DnsEntry
+        def id: () -> ::String
+        def status: () -> ("CREATE_IN_PROGRESS" | "ACTIVE" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#create_service_network_service_association-instance_method
+      def create_service_network_service_association: (
+                                                        ?client_token: ::String,
+                                                        service_identifier: ::String,
+                                                        service_network_identifier: ::String,
+                                                        ?tags: Hash[::String, ::String]
+                                                      ) -> _CreateServiceNetworkServiceAssociationResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServiceNetworkServiceAssociationResponseSuccess
+
+      interface _CreateServiceNetworkVpcAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateServiceNetworkVpcAssociationResponse]
+        def arn: () -> ::String
+        def created_by: () -> ::String
+        def id: () -> ::String
+        def security_group_ids: () -> ::Array[::String]
+        def status: () -> ("CREATE_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#create_service_network_vpc_association-instance_method
+      def create_service_network_vpc_association: (
+                                                    ?client_token: ::String,
+                                                    ?security_group_ids: Array[::String],
+                                                    service_network_identifier: ::String,
+                                                    ?tags: Hash[::String, ::String],
+                                                    vpc_identifier: ::String
+                                                  ) -> _CreateServiceNetworkVpcAssociationResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServiceNetworkVpcAssociationResponseSuccess
+
+      interface _CreateTargetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTargetGroupResponse]
+        def arn: () -> ::String
+        def config: () -> Types::TargetGroupConfig
+        def id: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("CREATE_IN_PROGRESS" | "ACTIVE" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
+        def type: () -> ("IP" | "LAMBDA" | "INSTANCE" | "ALB")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#create_target_group-instance_method
+      def create_target_group: (
+                                 ?client_token: ::String,
+                                 ?config: {
+                                   health_check: {
+                                     enabled: bool?,
+                                     health_check_interval_seconds: ::Integer?,
+                                     health_check_timeout_seconds: ::Integer?,
+                                     healthy_threshold_count: ::Integer?,
+                                     matcher: {
+                                       http_code: ::String?
+                                     }?,
+                                     path: ::String?,
+                                     port: ::Integer?,
+                                     protocol: ("HTTP" | "HTTPS")?,
+                                     protocol_version: ("HTTP1" | "HTTP2")?,
+                                     unhealthy_threshold_count: ::Integer?
+                                   }?,
+                                   ip_address_type: ("IPV4" | "IPV6")?,
+                                   lambda_event_structure_version: ("V1" | "V2")?,
+                                   port: ::Integer?,
+                                   protocol: ("HTTP" | "HTTPS")?,
+                                   protocol_version: ("HTTP1" | "HTTP2" | "GRPC")?,
+                                   vpc_identifier: ::String?
+                                 },
+                                 name: ::String,
+                                 ?tags: Hash[::String, ::String],
+                                 type: ("IP" | "LAMBDA" | "INSTANCE" | "ALB")
+                               ) -> _CreateTargetGroupResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTargetGroupResponseSuccess
+
+      interface _DeleteAccessLogSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAccessLogSubscriptionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#delete_access_log_subscription-instance_method
+      def delete_access_log_subscription: (
+                                            access_log_subscription_identifier: ::String
+                                          ) -> _DeleteAccessLogSubscriptionResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAccessLogSubscriptionResponseSuccess
+
+      interface _DeleteAuthPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAuthPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#delete_auth_policy-instance_method
+      def delete_auth_policy: (
+                                resource_identifier: ::String
+                              ) -> _DeleteAuthPolicyResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAuthPolicyResponseSuccess
+
+      interface _DeleteListenerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteListenerResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#delete_listener-instance_method
+      def delete_listener: (
+                             listener_identifier: ::String,
+                             service_identifier: ::String
+                           ) -> _DeleteListenerResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteListenerResponseSuccess
+
+      interface _DeleteResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourcePolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#delete_resource_policy-instance_method
+      def delete_resource_policy: (
+                                    resource_arn: ::String
+                                  ) -> _DeleteResourcePolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourcePolicyResponseSuccess
+
+      interface _DeleteRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRuleResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#delete_rule-instance_method
+      def delete_rule: (
+                         listener_identifier: ::String,
+                         rule_identifier: ::String,
+                         service_identifier: ::String
+                       ) -> _DeleteRuleResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRuleResponseSuccess
+
+      interface _DeleteServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteServiceResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("ACTIVE" | "CREATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#delete_service-instance_method
+      def delete_service: (
+                            service_identifier: ::String
+                          ) -> _DeleteServiceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteServiceResponseSuccess
+
+      interface _DeleteServiceNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteServiceNetworkResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#delete_service_network-instance_method
+      def delete_service_network: (
+                                    service_network_identifier: ::String
+                                  ) -> _DeleteServiceNetworkResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteServiceNetworkResponseSuccess
+
+      interface _DeleteServiceNetworkServiceAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteServiceNetworkServiceAssociationResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def status: () -> ("CREATE_IN_PROGRESS" | "ACTIVE" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#delete_service_network_service_association-instance_method
+      def delete_service_network_service_association: (
+                                                        service_network_service_association_identifier: ::String
+                                                      ) -> _DeleteServiceNetworkServiceAssociationResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteServiceNetworkServiceAssociationResponseSuccess
+
+      interface _DeleteServiceNetworkVpcAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteServiceNetworkVpcAssociationResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def status: () -> ("CREATE_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#delete_service_network_vpc_association-instance_method
+      def delete_service_network_vpc_association: (
+                                                    service_network_vpc_association_identifier: ::String
+                                                  ) -> _DeleteServiceNetworkVpcAssociationResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteServiceNetworkVpcAssociationResponseSuccess
+
+      interface _DeleteTargetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTargetGroupResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def status: () -> ("CREATE_IN_PROGRESS" | "ACTIVE" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#delete_target_group-instance_method
+      def delete_target_group: (
+                                 target_group_identifier: ::String
+                               ) -> _DeleteTargetGroupResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTargetGroupResponseSuccess
+
+      interface _DeregisterTargetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterTargetsResponse]
+        def successful: () -> ::Array[Types::Target]
+        def unsuccessful: () -> ::Array[Types::TargetFailure]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#deregister_targets-instance_method
+      def deregister_targets: (
+                                target_group_identifier: ::String,
+                                targets: Array[
+                                  {
+                                    id: ::String,
+                                    port: ::Integer?
+                                  },
+                                ]
+                              ) -> _DeregisterTargetsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterTargetsResponseSuccess
+
+      interface _GetAccessLogSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccessLogSubscriptionResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def destination_arn: () -> ::String
+        def id: () -> ::String
+        def last_updated_at: () -> ::Time
+        def resource_arn: () -> ::String
+        def resource_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#get_access_log_subscription-instance_method
+      def get_access_log_subscription: (
+                                         access_log_subscription_identifier: ::String
+                                       ) -> _GetAccessLogSubscriptionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccessLogSubscriptionResponseSuccess
+
+      interface _GetAuthPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAuthPolicyResponse]
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def policy: () -> ::String
+        def state: () -> ("Active" | "Inactive")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#get_auth_policy-instance_method
+      def get_auth_policy: (
+                             resource_identifier: ::String
+                           ) -> _GetAuthPolicyResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAuthPolicyResponseSuccess
+
+      interface _GetListenerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetListenerResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def default_action: () -> Types::RuleAction
+        def id: () -> ::String
+        def last_updated_at: () -> ::Time
+        def name: () -> ::String
+        def port: () -> ::Integer
+        def protocol: () -> ("HTTP" | "HTTPS")
+        def service_arn: () -> ::String
+        def service_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#get_listener-instance_method
+      def get_listener: (
+                          listener_identifier: ::String,
+                          service_identifier: ::String
+                        ) -> _GetListenerResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetListenerResponseSuccess
+
+      interface _GetResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcePolicyResponse]
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#get_resource_policy-instance_method
+      def get_resource_policy: (
+                                 resource_arn: ::String
+                               ) -> _GetResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePolicyResponseSuccess
+
+      interface _GetRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRuleResponse]
+        def action: () -> Types::RuleAction
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def id: () -> ::String
+        def is_default: () -> bool
+        def last_updated_at: () -> ::Time
+        def match: () -> Types::RuleMatch
+        def name: () -> ::String
+        def priority: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#get_rule-instance_method
+      def get_rule: (
+                      listener_identifier: ::String,
+                      rule_identifier: ::String,
+                      service_identifier: ::String
+                    ) -> _GetRuleResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRuleResponseSuccess
+
+      interface _GetServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceResponse]
+        def arn: () -> ::String
+        def auth_type: () -> ("NONE" | "AWS_IAM")
+        def certificate_arn: () -> ::String
+        def created_at: () -> ::Time
+        def custom_domain_name: () -> ::String
+        def dns_entry: () -> Types::DnsEntry
+        def failure_code: () -> ::String
+        def failure_message: () -> ::String
+        def id: () -> ::String
+        def last_updated_at: () -> ::Time
+        def name: () -> ::String
+        def status: () -> ("ACTIVE" | "CREATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#get_service-instance_method
+      def get_service: (
+                         service_identifier: ::String
+                       ) -> _GetServiceResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceResponseSuccess
+
+      interface _GetServiceNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceNetworkResponse]
+        def arn: () -> ::String
+        def auth_type: () -> ("NONE" | "AWS_IAM")
+        def created_at: () -> ::Time
+        def id: () -> ::String
+        def last_updated_at: () -> ::Time
+        def name: () -> ::String
+        def number_of_associated_services: () -> ::Integer
+        def number_of_associated_vp_cs: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#get_service_network-instance_method
+      def get_service_network: (
+                                 service_network_identifier: ::String
+                               ) -> _GetServiceNetworkResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceNetworkResponseSuccess
+
+      interface _GetServiceNetworkServiceAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceNetworkServiceAssociationResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def custom_domain_name: () -> ::String
+        def dns_entry: () -> Types::DnsEntry
+        def failure_code: () -> ::String
+        def failure_message: () -> ::String
+        def id: () -> ::String
+        def service_arn: () -> ::String
+        def service_id: () -> ::String
+        def service_name: () -> ::String
+        def service_network_arn: () -> ::String
+        def service_network_id: () -> ::String
+        def service_network_name: () -> ::String
+        def status: () -> ("CREATE_IN_PROGRESS" | "ACTIVE" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#get_service_network_service_association-instance_method
+      def get_service_network_service_association: (
+                                                     service_network_service_association_identifier: ::String
+                                                   ) -> _GetServiceNetworkServiceAssociationResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceNetworkServiceAssociationResponseSuccess
+
+      interface _GetServiceNetworkVpcAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceNetworkVpcAssociationResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def failure_code: () -> ::String
+        def failure_message: () -> ::String
+        def id: () -> ::String
+        def last_updated_at: () -> ::Time
+        def security_group_ids: () -> ::Array[::String]
+        def service_network_arn: () -> ::String
+        def service_network_id: () -> ::String
+        def service_network_name: () -> ::String
+        def status: () -> ("CREATE_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED")
+        def vpc_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#get_service_network_vpc_association-instance_method
+      def get_service_network_vpc_association: (
+                                                 service_network_vpc_association_identifier: ::String
+                                               ) -> _GetServiceNetworkVpcAssociationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceNetworkVpcAssociationResponseSuccess
+
+      interface _GetTargetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTargetGroupResponse]
+        def arn: () -> ::String
+        def config: () -> Types::TargetGroupConfig
+        def created_at: () -> ::Time
+        def failure_code: () -> ::String
+        def failure_message: () -> ::String
+        def id: () -> ::String
+        def last_updated_at: () -> ::Time
+        def name: () -> ::String
+        def service_arns: () -> ::Array[::String]
+        def status: () -> ("CREATE_IN_PROGRESS" | "ACTIVE" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
+        def type: () -> ("IP" | "LAMBDA" | "INSTANCE" | "ALB")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#get_target_group-instance_method
+      def get_target_group: (
+                              target_group_identifier: ::String
+                            ) -> _GetTargetGroupResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTargetGroupResponseSuccess
+
+      interface _ListAccessLogSubscriptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccessLogSubscriptionsResponse]
+        def items: () -> ::Array[Types::AccessLogSubscriptionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#list_access_log_subscriptions-instance_method
+      def list_access_log_subscriptions: (
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String,
+                                           resource_identifier: ::String
+                                         ) -> _ListAccessLogSubscriptionsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccessLogSubscriptionsResponseSuccess
+
+      interface _ListListenersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListListenersResponse]
+        def items: () -> ::Array[Types::ListenerSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#list_listeners-instance_method
+      def list_listeners: (
+                            ?max_results: ::Integer,
+                            ?next_token: ::String,
+                            service_identifier: ::String
+                          ) -> _ListListenersResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListListenersResponseSuccess
+
+      interface _ListRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRulesResponse]
+        def items: () -> ::Array[Types::RuleSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#list_rules-instance_method
+      def list_rules: (
+                        listener_identifier: ::String,
+                        ?max_results: ::Integer,
+                        ?next_token: ::String,
+                        service_identifier: ::String
+                      ) -> _ListRulesResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRulesResponseSuccess
+
+      interface _ListServiceNetworkServiceAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceNetworkServiceAssociationsResponse]
+        def items: () -> ::Array[Types::ServiceNetworkServiceAssociationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#list_service_network_service_associations-instance_method
+      def list_service_network_service_associations: (
+                                                       ?max_results: ::Integer,
+                                                       ?next_token: ::String,
+                                                       ?service_identifier: ::String,
+                                                       ?service_network_identifier: ::String
+                                                     ) -> _ListServiceNetworkServiceAssociationsResponseSuccess
+                                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceNetworkServiceAssociationsResponseSuccess
+
+      interface _ListServiceNetworkVpcAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceNetworkVpcAssociationsResponse]
+        def items: () -> ::Array[Types::ServiceNetworkVpcAssociationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#list_service_network_vpc_associations-instance_method
+      def list_service_network_vpc_associations: (
+                                                   ?max_results: ::Integer,
+                                                   ?next_token: ::String,
+                                                   ?service_network_identifier: ::String,
+                                                   ?vpc_identifier: ::String
+                                                 ) -> _ListServiceNetworkVpcAssociationsResponseSuccess
+                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceNetworkVpcAssociationsResponseSuccess
+
+      interface _ListServiceNetworksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceNetworksResponse]
+        def items: () -> ::Array[Types::ServiceNetworkSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#list_service_networks-instance_method
+      def list_service_networks: (
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListServiceNetworksResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceNetworksResponseSuccess
+
+      interface _ListServicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServicesResponse]
+        def items: () -> ::Array[Types::ServiceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#list_services-instance_method
+      def list_services: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListServicesResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServicesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTargetGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTargetGroupsResponse]
+        def items: () -> ::Array[Types::TargetGroupSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#list_target_groups-instance_method
+      def list_target_groups: (
+                                ?max_results: ::Integer,
+                                ?next_token: ::String,
+                                ?target_group_type: ("IP" | "LAMBDA" | "INSTANCE" | "ALB"),
+                                ?vpc_identifier: ::String
+                              ) -> _ListTargetGroupsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTargetGroupsResponseSuccess
+
+      interface _ListTargetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTargetsResponse]
+        def items: () -> ::Array[Types::TargetSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#list_targets-instance_method
+      def list_targets: (
+                          ?max_results: ::Integer,
+                          ?next_token: ::String,
+                          target_group_identifier: ::String,
+                          ?targets: Array[
+                            {
+                              id: ::String,
+                              port: ::Integer?
+                            },
+                          ]
+                        ) -> _ListTargetsResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTargetsResponseSuccess
+
+      interface _PutAuthPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAuthPolicyResponse]
+        def policy: () -> ::String
+        def state: () -> ("Active" | "Inactive")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#put_auth_policy-instance_method
+      def put_auth_policy: (
+                             policy: ::String,
+                             resource_identifier: ::String
+                           ) -> _PutAuthPolicyResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAuthPolicyResponseSuccess
+
+      interface _PutResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#put_resource_policy-instance_method
+      def put_resource_policy: (
+                                 policy: ::String,
+                                 resource_arn: ::String
+                               ) -> _PutResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
+
+      interface _RegisterTargetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterTargetsResponse]
+        def successful: () -> ::Array[Types::Target]
+        def unsuccessful: () -> ::Array[Types::TargetFailure]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#register_targets-instance_method
+      def register_targets: (
+                              target_group_identifier: ::String,
+                              targets: Array[
+                                {
+                                  id: ::String,
+                                  port: ::Integer?
+                                },
+                              ]
+                            ) -> _RegisterTargetsResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterTargetsResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAccessLogSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAccessLogSubscriptionResponse]
+        def arn: () -> ::String
+        def destination_arn: () -> ::String
+        def id: () -> ::String
+        def resource_arn: () -> ::String
+        def resource_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#update_access_log_subscription-instance_method
+      def update_access_log_subscription: (
+                                            access_log_subscription_identifier: ::String,
+                                            destination_arn: ::String
+                                          ) -> _UpdateAccessLogSubscriptionResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccessLogSubscriptionResponseSuccess
+
+      interface _UpdateListenerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateListenerResponse]
+        def arn: () -> ::String
+        def default_action: () -> Types::RuleAction
+        def id: () -> ::String
+        def name: () -> ::String
+        def port: () -> ::Integer
+        def protocol: () -> ("HTTP" | "HTTPS")
+        def service_arn: () -> ::String
+        def service_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#update_listener-instance_method
+      def update_listener: (
+                             default_action: {
+                               fixed_response: {
+                                 status_code: ::Integer
+                               }?,
+                               forward: {
+                                 target_groups: Array[
+                                   {
+                                     target_group_identifier: ::String,
+                                     weight: ::Integer?
+                                   },
+                                 ]
+                               }?
+                             },
+                             listener_identifier: ::String,
+                             service_identifier: ::String
+                           ) -> _UpdateListenerResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateListenerResponseSuccess
+
+      interface _UpdateRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRuleResponse]
+        def action: () -> Types::RuleAction
+        def arn: () -> ::String
+        def id: () -> ::String
+        def is_default: () -> bool
+        def match: () -> Types::RuleMatch
+        def name: () -> ::String
+        def priority: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#update_rule-instance_method
+      def update_rule: (
+                         ?action: {
+                           fixed_response: {
+                             status_code: ::Integer
+                           }?,
+                           forward: {
+                             target_groups: Array[
+                               {
+                                 target_group_identifier: ::String,
+                                 weight: ::Integer?
+                               },
+                             ]
+                           }?
+                         },
+                         listener_identifier: ::String,
+                         ?match: {
+                           http_match: {
+                             header_matches: Array[
+                               {
+                                 case_sensitive: bool?,
+                                 match: {
+                                   contains: ::String?,
+                                   exact: ::String?,
+                                   prefix: ::String?
+                                 },
+                                 name: ::String
+                               },
+                             ]?,
+                             method: ::String?,
+                             path_match: {
+                               case_sensitive: bool?,
+                               match: {
+                                 exact: ::String?,
+                                 prefix: ::String?
+                               }
+                             }?
+                           }?
+                         },
+                         ?priority: ::Integer,
+                         rule_identifier: ::String,
+                         service_identifier: ::String
+                       ) -> _UpdateRuleResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRuleResponseSuccess
+
+      interface _UpdateServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateServiceResponse]
+        def arn: () -> ::String
+        def auth_type: () -> ("NONE" | "AWS_IAM")
+        def certificate_arn: () -> ::String
+        def custom_domain_name: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#update_service-instance_method
+      def update_service: (
+                            ?auth_type: ("NONE" | "AWS_IAM"),
+                            ?certificate_arn: ::String,
+                            service_identifier: ::String
+                          ) -> _UpdateServiceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServiceResponseSuccess
+
+      interface _UpdateServiceNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateServiceNetworkResponse]
+        def arn: () -> ::String
+        def auth_type: () -> ("NONE" | "AWS_IAM")
+        def id: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#update_service_network-instance_method
+      def update_service_network: (
+                                    auth_type: ("NONE" | "AWS_IAM"),
+                                    service_network_identifier: ::String
+                                  ) -> _UpdateServiceNetworkResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServiceNetworkResponseSuccess
+
+      interface _UpdateServiceNetworkVpcAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateServiceNetworkVpcAssociationResponse]
+        def arn: () -> ::String
+        def created_by: () -> ::String
+        def id: () -> ::String
+        def security_group_ids: () -> ::Array[::String]
+        def status: () -> ("CREATE_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#update_service_network_vpc_association-instance_method
+      def update_service_network_vpc_association: (
+                                                    security_group_ids: Array[::String],
+                                                    service_network_vpc_association_identifier: ::String
+                                                  ) -> _UpdateServiceNetworkVpcAssociationResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServiceNetworkVpcAssociationResponseSuccess
+
+      interface _UpdateTargetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTargetGroupResponse]
+        def arn: () -> ::String
+        def config: () -> Types::TargetGroupConfig
+        def id: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("CREATE_IN_PROGRESS" | "ACTIVE" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
+        def type: () -> ("IP" | "LAMBDA" | "INSTANCE" | "ALB")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#update_target_group-instance_method
+      def update_target_group: (
+                                 health_check: {
+                                   enabled: bool?,
+                                   health_check_interval_seconds: ::Integer?,
+                                   health_check_timeout_seconds: ::Integer?,
+                                   healthy_threshold_count: ::Integer?,
+                                   matcher: {
+                                     http_code: ::String?
+                                   }?,
+                                   path: ::String?,
+                                   port: ::Integer?,
+                                   protocol: ("HTTP" | "HTTPS")?,
+                                   protocol_version: ("HTTP1" | "HTTP2")?,
+                                   unhealthy_threshold_count: ::Integer?
+                                 },
+                                 target_group_identifier: ::String
+                               ) -> _UpdateTargetGroupResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTargetGroupResponseSuccess
+    end
+  end
+end
+

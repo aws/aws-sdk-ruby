@@ -1,0 +1,170 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ElastiCache
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class APICallRateForCustomerExceededFault < ::Aws::Errors::ServiceError
+      end
+      class AuthorizationAlreadyExistsFault < ::Aws::Errors::ServiceError
+      end
+      class AuthorizationNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class CacheClusterAlreadyExistsFault < ::Aws::Errors::ServiceError
+      end
+      class CacheClusterNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class CacheParameterGroupAlreadyExistsFault < ::Aws::Errors::ServiceError
+      end
+      class CacheParameterGroupNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class CacheParameterGroupQuotaExceededFault < ::Aws::Errors::ServiceError
+      end
+      class CacheSecurityGroupAlreadyExistsFault < ::Aws::Errors::ServiceError
+      end
+      class CacheSecurityGroupNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class CacheSecurityGroupQuotaExceededFault < ::Aws::Errors::ServiceError
+      end
+      class CacheSubnetGroupAlreadyExistsFault < ::Aws::Errors::ServiceError
+      end
+      class CacheSubnetGroupInUse < ::Aws::Errors::ServiceError
+      end
+      class CacheSubnetGroupNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class CacheSubnetGroupQuotaExceededFault < ::Aws::Errors::ServiceError
+      end
+      class CacheSubnetQuotaExceededFault < ::Aws::Errors::ServiceError
+      end
+      class ClusterQuotaForCustomerExceededFault < ::Aws::Errors::ServiceError
+      end
+      class DefaultUserAssociatedToUserGroupFault < ::Aws::Errors::ServiceError
+      end
+      class DefaultUserRequired < ::Aws::Errors::ServiceError
+      end
+      class DuplicateUserNameFault < ::Aws::Errors::ServiceError
+      end
+      class GlobalReplicationGroupAlreadyExistsFault < ::Aws::Errors::ServiceError
+      end
+      class GlobalReplicationGroupNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class InsufficientCacheClusterCapacityFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidARNFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidCacheClusterStateFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidCacheParameterGroupStateFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidCacheSecurityGroupStateFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidCredentialsException < ::Aws::Errors::ServiceError
+      end
+      class InvalidGlobalReplicationGroupStateFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidKMSKeyFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidParameterCombinationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidParameterValueException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidReplicationGroupStateFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidServerlessCacheSnapshotStateFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidServerlessCacheStateFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidSnapshotStateFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidSubnet < ::Aws::Errors::ServiceError
+      end
+      class InvalidUserGroupStateFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidUserStateFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidVPCNetworkStateFault < ::Aws::Errors::ServiceError
+      end
+      class NoOperationFault < ::Aws::Errors::ServiceError
+      end
+      class NodeGroupNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class NodeGroupsPerReplicationGroupQuotaExceededFault < ::Aws::Errors::ServiceError
+      end
+      class NodeQuotaForClusterExceededFault < ::Aws::Errors::ServiceError
+      end
+      class NodeQuotaForCustomerExceededFault < ::Aws::Errors::ServiceError
+      end
+      class ReplicationGroupAlreadyExistsFault < ::Aws::Errors::ServiceError
+      end
+      class ReplicationGroupAlreadyUnderMigrationFault < ::Aws::Errors::ServiceError
+      end
+      class ReplicationGroupNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class ReplicationGroupNotUnderMigrationFault < ::Aws::Errors::ServiceError
+      end
+      class ReservedCacheNodeAlreadyExistsFault < ::Aws::Errors::ServiceError
+      end
+      class ReservedCacheNodeNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class ReservedCacheNodeQuotaExceededFault < ::Aws::Errors::ServiceError
+      end
+      class ReservedCacheNodesOfferingNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class ServerlessCacheAlreadyExistsFault < ::Aws::Errors::ServiceError
+      end
+      class ServerlessCacheNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class ServerlessCacheQuotaForCustomerExceededFault < ::Aws::Errors::ServiceError
+      end
+      class ServerlessCacheSnapshotAlreadyExistsFault < ::Aws::Errors::ServiceError
+      end
+      class ServerlessCacheSnapshotNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class ServerlessCacheSnapshotQuotaExceededFault < ::Aws::Errors::ServiceError
+      end
+      class ServiceLinkedRoleNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class ServiceUpdateNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class SnapshotAlreadyExistsFault < ::Aws::Errors::ServiceError
+      end
+      class SnapshotFeatureNotSupportedFault < ::Aws::Errors::ServiceError
+      end
+      class SnapshotNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class SnapshotQuotaExceededFault < ::Aws::Errors::ServiceError
+      end
+      class SubnetInUse < ::Aws::Errors::ServiceError
+      end
+      class SubnetNotAllowedFault < ::Aws::Errors::ServiceError
+      end
+      class TagNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class TagQuotaPerResourceExceeded < ::Aws::Errors::ServiceError
+      end
+      class TestFailoverNotAvailableFault < ::Aws::Errors::ServiceError
+      end
+      class UserAlreadyExistsFault < ::Aws::Errors::ServiceError
+      end
+      class UserGroupAlreadyExistsFault < ::Aws::Errors::ServiceError
+      end
+      class UserGroupNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class UserGroupQuotaExceededFault < ::Aws::Errors::ServiceError
+      end
+      class UserNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class UserQuotaExceededFault < ::Aws::Errors::ServiceError
+      end
+    end
+  end
+end

@@ -1,0 +1,1290 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::AuditManager
+  module Types
+
+    class AWSAccount
+      attr_accessor id: ::String
+      attr_accessor email_address: ::String
+      attr_accessor name: ::String
+      SENSITIVE: [:email_address]
+    end
+
+    class AWSService
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Assessment
+      attr_accessor arn: ::String
+      attr_accessor aws_account: Types::AWSAccount
+      attr_accessor metadata: Types::AssessmentMetadata
+      attr_accessor framework: Types::AssessmentFramework
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:framework]
+    end
+
+    class AssessmentControl
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("UNDER_REVIEW" | "REVIEWED" | "INACTIVE")
+      attr_accessor response: ("MANUAL" | "AUTOMATE" | "DEFER" | "IGNORE")
+      attr_accessor comments: ::Array[Types::ControlComment]
+      attr_accessor evidence_sources: ::Array[::String]
+      attr_accessor evidence_count: ::Integer
+      attr_accessor assessment_report_evidence_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class AssessmentControlSet
+      attr_accessor id: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("ACTIVE" | "UNDER_REVIEW" | "REVIEWED")
+      attr_accessor roles: ::Array[Types::Role]
+      attr_accessor controls: ::Array[Types::AssessmentControl]
+      attr_accessor delegations: ::Array[Types::Delegation]
+      attr_accessor system_evidence_count: ::Integer
+      attr_accessor manual_evidence_count: ::Integer
+      SENSITIVE: [:roles]
+    end
+
+    class AssessmentEvidenceFolder
+      attr_accessor name: ::String
+      attr_accessor date: ::Time
+      attr_accessor assessment_id: ::String
+      attr_accessor control_set_id: ::String
+      attr_accessor control_id: ::String
+      attr_accessor id: ::String
+      attr_accessor data_source: ::String
+      attr_accessor author: ::String
+      attr_accessor total_evidence: ::Integer
+      attr_accessor assessment_report_selection_count: ::Integer
+      attr_accessor control_name: ::String
+      attr_accessor evidence_resources_included_count: ::Integer
+      attr_accessor evidence_by_type_configuration_data_count: ::Integer
+      attr_accessor evidence_by_type_manual_count: ::Integer
+      attr_accessor evidence_by_type_compliance_check_count: ::Integer
+      attr_accessor evidence_by_type_compliance_check_issues_count: ::Integer
+      attr_accessor evidence_by_type_user_activity_count: ::Integer
+      attr_accessor evidence_aws_service_source_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class AssessmentFramework
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor metadata: Types::FrameworkMetadata
+      attr_accessor control_sets: ::Array[Types::AssessmentControlSet]
+      SENSITIVE: []
+    end
+
+    class AssessmentFrameworkMetadata
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor type: ("Standard" | "Custom")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor logo: ::String
+      attr_accessor compliance_type: ::String
+      attr_accessor controls_count: ::Integer
+      attr_accessor control_sets_count: ::Integer
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: [:compliance_type]
+    end
+
+    class AssessmentFrameworkShareRequest
+      attr_accessor id: ::String
+      attr_accessor framework_id: ::String
+      attr_accessor framework_name: ::String
+      attr_accessor framework_description: ::String
+      attr_accessor status: ("ACTIVE" | "REPLICATING" | "SHARED" | "EXPIRING" | "FAILED" | "EXPIRED" | "DECLINED" | "REVOKED")
+      attr_accessor source_account: ::String
+      attr_accessor destination_account: ::String
+      attr_accessor destination_region: ::String
+      attr_accessor expiration_time: ::Time
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated: ::Time
+      attr_accessor comment: ::String
+      attr_accessor standard_controls_count: ::Integer
+      attr_accessor custom_controls_count: ::Integer
+      attr_accessor compliance_type: ::String
+      SENSITIVE: [:compliance_type]
+    end
+
+    class AssessmentMetadata
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor description: ::String
+      attr_accessor compliance_type: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor assessment_reports_destination: Types::AssessmentReportsDestination
+      attr_accessor scope: Types::Scope
+      attr_accessor roles: ::Array[Types::Role]
+      attr_accessor delegations: ::Array[Types::Delegation]
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated: ::Time
+      SENSITIVE: [:name, :description, :compliance_type, :assessment_reports_destination, :scope, :roles]
+    end
+
+    class AssessmentMetadataItem
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor compliance_type: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor roles: ::Array[Types::Role]
+      attr_accessor delegations: ::Array[Types::Delegation]
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated: ::Time
+      SENSITIVE: [:name, :compliance_type, :roles]
+    end
+
+    class AssessmentReport
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor aws_account_id: ::String
+      attr_accessor assessment_id: ::String
+      attr_accessor assessment_name: ::String
+      attr_accessor author: ::String
+      attr_accessor status: ("COMPLETE" | "IN_PROGRESS" | "FAILED")
+      attr_accessor creation_time: ::Time
+      SENSITIVE: [:description, :assessment_name, :author]
+    end
+
+    class AssessmentReportEvidenceError
+      attr_accessor evidence_id: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class AssessmentReportMetadata
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor assessment_id: ::String
+      attr_accessor assessment_name: ::String
+      attr_accessor author: ::String
+      attr_accessor status: ("COMPLETE" | "IN_PROGRESS" | "FAILED")
+      attr_accessor creation_time: ::Time
+      SENSITIVE: [:description, :assessment_name, :author]
+    end
+
+    class AssessmentReportsDestination
+      attr_accessor destination_type: ("S3")
+      attr_accessor destination: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateAssessmentReportEvidenceFolderRequest
+      attr_accessor assessment_id: ::String
+      attr_accessor evidence_folder_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateAssessmentReportEvidenceFolderResponse < Aws::EmptyStructure
+    end
+
+    class BatchAssociateAssessmentReportEvidenceRequest
+      attr_accessor assessment_id: ::String
+      attr_accessor evidence_folder_id: ::String
+      attr_accessor evidence_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchAssociateAssessmentReportEvidenceResponse
+      attr_accessor evidence_ids: ::Array[::String]
+      attr_accessor errors: ::Array[Types::AssessmentReportEvidenceError]
+      SENSITIVE: []
+    end
+
+    class BatchCreateDelegationByAssessmentError
+      attr_accessor create_delegation_request: Types::CreateDelegationRequest
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchCreateDelegationByAssessmentRequest
+      attr_accessor create_delegation_requests: ::Array[Types::CreateDelegationRequest]
+      attr_accessor assessment_id: ::String
+      SENSITIVE: [:create_delegation_requests]
+    end
+
+    class BatchCreateDelegationByAssessmentResponse
+      attr_accessor delegations: ::Array[Types::Delegation]
+      attr_accessor errors: ::Array[Types::BatchCreateDelegationByAssessmentError]
+      SENSITIVE: [:errors]
+    end
+
+    class BatchDeleteDelegationByAssessmentError
+      attr_accessor delegation_id: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDeleteDelegationByAssessmentRequest
+      attr_accessor delegation_ids: ::Array[::String]
+      attr_accessor assessment_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDeleteDelegationByAssessmentResponse
+      attr_accessor errors: ::Array[Types::BatchDeleteDelegationByAssessmentError]
+      SENSITIVE: [:errors]
+    end
+
+    class BatchDisassociateAssessmentReportEvidenceRequest
+      attr_accessor assessment_id: ::String
+      attr_accessor evidence_folder_id: ::String
+      attr_accessor evidence_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchDisassociateAssessmentReportEvidenceResponse
+      attr_accessor evidence_ids: ::Array[::String]
+      attr_accessor errors: ::Array[Types::AssessmentReportEvidenceError]
+      SENSITIVE: []
+    end
+
+    class BatchImportEvidenceToAssessmentControlError
+      attr_accessor manual_evidence: Types::ManualEvidence
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchImportEvidenceToAssessmentControlRequest
+      attr_accessor assessment_id: ::String
+      attr_accessor control_set_id: ::String
+      attr_accessor control_id: ::String
+      attr_accessor manual_evidence: ::Array[Types::ManualEvidence]
+      SENSITIVE: []
+    end
+
+    class BatchImportEvidenceToAssessmentControlResponse
+      attr_accessor errors: ::Array[Types::BatchImportEvidenceToAssessmentControlError]
+      SENSITIVE: []
+    end
+
+    class ChangeLog
+      attr_accessor object_type: ("ASSESSMENT" | "CONTROL_SET" | "CONTROL" | "DELEGATION" | "ASSESSMENT_REPORT")
+      attr_accessor object_name: ::String
+      attr_accessor action: ("CREATE" | "UPDATE_METADATA" | "ACTIVE" | "INACTIVE" | "DELETE" | "UNDER_REVIEW" | "REVIEWED" | "IMPORT_EVIDENCE")
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      SENSITIVE: []
+    end
+
+    class Control
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor type: ("Standard" | "Custom")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor testing_information: ::String
+      attr_accessor action_plan_title: ::String
+      attr_accessor action_plan_instructions: ::String
+      attr_accessor control_sources: ::String
+      attr_accessor control_mapping_sources: ::Array[Types::ControlMappingSource]
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor last_updated_by: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:testing_information, :action_plan_title, :action_plan_instructions, :created_by, :last_updated_by]
+    end
+
+    class ControlComment
+      attr_accessor author_name: ::String
+      attr_accessor comment_body: ::String
+      attr_accessor posted_date: ::Time
+      SENSITIVE: [:author_name, :comment_body]
+    end
+
+    class ControlDomainInsights
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor controls_count_by_noncompliant_evidence: ::Integer
+      attr_accessor total_controls_count: ::Integer
+      attr_accessor evidence_insights: Types::EvidenceInsights
+      attr_accessor last_updated: ::Time
+      SENSITIVE: []
+    end
+
+    class ControlInsightsMetadataByAssessmentItem
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor evidence_insights: Types::EvidenceInsights
+      attr_accessor control_set_name: ::String
+      attr_accessor last_updated: ::Time
+      SENSITIVE: []
+    end
+
+    class ControlInsightsMetadataItem
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor evidence_insights: Types::EvidenceInsights
+      attr_accessor last_updated: ::Time
+      SENSITIVE: []
+    end
+
+    class ControlMappingSource
+      attr_accessor source_id: ::String
+      attr_accessor source_name: ::String
+      attr_accessor source_description: ::String
+      attr_accessor source_set_up_option: ("System_Controls_Mapping" | "Procedural_Controls_Mapping")
+      attr_accessor source_type: ("AWS_Cloudtrail" | "AWS_Config" | "AWS_Security_Hub" | "AWS_API_Call" | "MANUAL")
+      attr_accessor source_keyword: Types::SourceKeyword
+      attr_accessor source_frequency: ("DAILY" | "WEEKLY" | "MONTHLY")
+      attr_accessor troubleshooting_text: ::String
+      SENSITIVE: [:troubleshooting_text]
+    end
+
+    class ControlMetadata
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor control_sources: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ControlSet
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor controls: ::Array[Types::Control]
+      SENSITIVE: []
+    end
+
+    class CreateAssessmentFrameworkControl
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAssessmentFrameworkControlSet
+      attr_accessor name: ::String
+      attr_accessor controls: ::Array[Types::CreateAssessmentFrameworkControl]
+      SENSITIVE: []
+    end
+
+    class CreateAssessmentFrameworkRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor compliance_type: ::String
+      attr_accessor control_sets: ::Array[Types::CreateAssessmentFrameworkControlSet]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:compliance_type]
+    end
+
+    class CreateAssessmentFrameworkResponse
+      attr_accessor framework: Types::Framework
+      SENSITIVE: []
+    end
+
+    class CreateAssessmentReportRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor assessment_id: ::String
+      attr_accessor query_statement: ::String
+      SENSITIVE: [:description]
+    end
+
+    class CreateAssessmentReportResponse
+      attr_accessor assessment_report: Types::AssessmentReport
+      SENSITIVE: []
+    end
+
+    class CreateAssessmentRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor assessment_reports_destination: Types::AssessmentReportsDestination
+      attr_accessor scope: Types::Scope
+      attr_accessor roles: ::Array[Types::Role]
+      attr_accessor framework_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:name, :description, :assessment_reports_destination, :scope, :roles]
+    end
+
+    class CreateAssessmentResponse
+      attr_accessor assessment: Types::Assessment
+      SENSITIVE: []
+    end
+
+    class CreateControlMappingSource
+      attr_accessor source_name: ::String
+      attr_accessor source_description: ::String
+      attr_accessor source_set_up_option: ("System_Controls_Mapping" | "Procedural_Controls_Mapping")
+      attr_accessor source_type: ("AWS_Cloudtrail" | "AWS_Config" | "AWS_Security_Hub" | "AWS_API_Call" | "MANUAL")
+      attr_accessor source_keyword: Types::SourceKeyword
+      attr_accessor source_frequency: ("DAILY" | "WEEKLY" | "MONTHLY")
+      attr_accessor troubleshooting_text: ::String
+      SENSITIVE: [:troubleshooting_text]
+    end
+
+    class CreateControlRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor testing_information: ::String
+      attr_accessor action_plan_title: ::String
+      attr_accessor action_plan_instructions: ::String
+      attr_accessor control_mapping_sources: ::Array[Types::CreateControlMappingSource]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:testing_information, :action_plan_title, :action_plan_instructions]
+    end
+
+    class CreateControlResponse
+      attr_accessor control: Types::Control
+      SENSITIVE: []
+    end
+
+    class CreateDelegationRequest
+      attr_accessor comment: ::String
+      attr_accessor control_set_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor role_type: ("PROCESS_OWNER" | "RESOURCE_OWNER")
+      SENSITIVE: [:comment]
+    end
+
+    class DefaultExportDestination
+      attr_accessor destination_type: ("S3")
+      attr_accessor destination: ::String
+      SENSITIVE: []
+    end
+
+    class Delegation
+      attr_accessor id: ::String
+      attr_accessor assessment_name: ::String
+      attr_accessor assessment_id: ::String
+      attr_accessor status: ("IN_PROGRESS" | "UNDER_REVIEW" | "COMPLETE")
+      attr_accessor role_arn: ::String
+      attr_accessor role_type: ("PROCESS_OWNER" | "RESOURCE_OWNER")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated: ::Time
+      attr_accessor control_set_id: ::String
+      attr_accessor comment: ::String
+      attr_accessor created_by: ::String
+      SENSITIVE: [:assessment_name, :comment, :created_by]
+    end
+
+    class DelegationMetadata
+      attr_accessor id: ::String
+      attr_accessor assessment_name: ::String
+      attr_accessor assessment_id: ::String
+      attr_accessor status: ("IN_PROGRESS" | "UNDER_REVIEW" | "COMPLETE")
+      attr_accessor role_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor control_set_name: ::String
+      SENSITIVE: [:assessment_name]
+    end
+
+    class DeleteAssessmentFrameworkRequest
+      attr_accessor framework_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAssessmentFrameworkResponse < Aws::EmptyStructure
+    end
+
+    class DeleteAssessmentFrameworkShareRequest
+      attr_accessor request_id: ::String
+      attr_accessor request_type: ("SENT" | "RECEIVED")
+      SENSITIVE: []
+    end
+
+    class DeleteAssessmentFrameworkShareResponse < Aws::EmptyStructure
+    end
+
+    class DeleteAssessmentReportRequest
+      attr_accessor assessment_id: ::String
+      attr_accessor assessment_report_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAssessmentReportResponse < Aws::EmptyStructure
+    end
+
+    class DeleteAssessmentRequest
+      attr_accessor assessment_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAssessmentResponse < Aws::EmptyStructure
+    end
+
+    class DeleteControlRequest
+      attr_accessor control_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteControlResponse < Aws::EmptyStructure
+    end
+
+    class DeregisterAccountRequest < Aws::EmptyStructure
+    end
+
+    class DeregisterAccountResponse
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "PENDING_ACTIVATION")
+      SENSITIVE: []
+    end
+
+    class DeregisterOrganizationAdminAccountRequest
+      attr_accessor admin_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterOrganizationAdminAccountResponse < Aws::EmptyStructure
+    end
+
+    class DeregistrationPolicy
+      attr_accessor delete_resources: ("ALL" | "DEFAULT")
+      SENSITIVE: []
+    end
+
+    class DisassociateAssessmentReportEvidenceFolderRequest
+      attr_accessor assessment_id: ::String
+      attr_accessor evidence_folder_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateAssessmentReportEvidenceFolderResponse < Aws::EmptyStructure
+    end
+
+    class Evidence
+      attr_accessor data_source: ::String
+      attr_accessor evidence_aws_account_id: ::String
+      attr_accessor time: ::Time
+      attr_accessor event_source: ::String
+      attr_accessor event_name: ::String
+      attr_accessor evidence_by_type: ::String
+      attr_accessor resources_included: ::Array[Types::Resource]
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor iam_id: ::String
+      attr_accessor compliance_check: ::String
+      attr_accessor aws_organization: ::String
+      attr_accessor aws_account_id: ::String
+      attr_accessor evidence_folder_id: ::String
+      attr_accessor id: ::String
+      attr_accessor assessment_report_selection: ::String
+      SENSITIVE: []
+    end
+
+    class EvidenceFinderEnablement
+      attr_accessor event_data_store_arn: ::String
+      attr_accessor enablement_status: ("ENABLED" | "DISABLED" | "ENABLE_IN_PROGRESS" | "DISABLE_IN_PROGRESS")
+      attr_accessor backfill_status: ("NOT_STARTED" | "IN_PROGRESS" | "COMPLETED")
+      attr_accessor error: ::String
+      SENSITIVE: []
+    end
+
+    class EvidenceInsights
+      attr_accessor noncompliant_evidence_count: ::Integer
+      attr_accessor compliant_evidence_count: ::Integer
+      attr_accessor inconclusive_evidence_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class Framework
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("Standard" | "Custom")
+      attr_accessor compliance_type: ::String
+      attr_accessor description: ::String
+      attr_accessor logo: ::String
+      attr_accessor control_sources: ::String
+      attr_accessor control_sets: ::Array[Types::ControlSet]
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor last_updated_by: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:compliance_type, :control_sets, :created_by, :last_updated_by]
+    end
+
+    class FrameworkMetadata
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor logo: ::String
+      attr_accessor compliance_type: ::String
+      SENSITIVE: [:name, :compliance_type]
+    end
+
+    class GetAccountStatusRequest < Aws::EmptyStructure
+    end
+
+    class GetAccountStatusResponse
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "PENDING_ACTIVATION")
+      SENSITIVE: []
+    end
+
+    class GetAssessmentFrameworkRequest
+      attr_accessor framework_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAssessmentFrameworkResponse
+      attr_accessor framework: Types::Framework
+      SENSITIVE: []
+    end
+
+    class GetAssessmentReportUrlRequest
+      attr_accessor assessment_report_id: ::String
+      attr_accessor assessment_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAssessmentReportUrlResponse
+      attr_accessor pre_signed_url: Types::URL
+      SENSITIVE: []
+    end
+
+    class GetAssessmentRequest
+      attr_accessor assessment_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAssessmentResponse
+      attr_accessor assessment: Types::Assessment
+      attr_accessor user_role: Types::Role
+      SENSITIVE: []
+    end
+
+    class GetChangeLogsRequest
+      attr_accessor assessment_id: ::String
+      attr_accessor control_set_id: ::String
+      attr_accessor control_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetChangeLogsResponse
+      attr_accessor change_logs: ::Array[Types::ChangeLog]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetControlRequest
+      attr_accessor control_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetControlResponse
+      attr_accessor control: Types::Control
+      SENSITIVE: []
+    end
+
+    class GetDelegationsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetDelegationsResponse
+      attr_accessor delegations: ::Array[Types::DelegationMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetEvidenceByEvidenceFolderRequest
+      attr_accessor assessment_id: ::String
+      attr_accessor control_set_id: ::String
+      attr_accessor evidence_folder_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetEvidenceByEvidenceFolderResponse
+      attr_accessor evidence: ::Array[Types::Evidence]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetEvidenceFileUploadUrlRequest
+      attr_accessor file_name: ::String
+      SENSITIVE: [:file_name]
+    end
+
+    class GetEvidenceFileUploadUrlResponse
+      attr_accessor evidence_file_name: ::String
+      attr_accessor upload_url: ::String
+      SENSITIVE: []
+    end
+
+    class GetEvidenceFolderRequest
+      attr_accessor assessment_id: ::String
+      attr_accessor control_set_id: ::String
+      attr_accessor evidence_folder_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetEvidenceFolderResponse
+      attr_accessor evidence_folder: Types::AssessmentEvidenceFolder
+      SENSITIVE: []
+    end
+
+    class GetEvidenceFoldersByAssessmentControlRequest
+      attr_accessor assessment_id: ::String
+      attr_accessor control_set_id: ::String
+      attr_accessor control_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetEvidenceFoldersByAssessmentControlResponse
+      attr_accessor evidence_folders: ::Array[Types::AssessmentEvidenceFolder]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetEvidenceFoldersByAssessmentRequest
+      attr_accessor assessment_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetEvidenceFoldersByAssessmentResponse
+      attr_accessor evidence_folders: ::Array[Types::AssessmentEvidenceFolder]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetEvidenceRequest
+      attr_accessor assessment_id: ::String
+      attr_accessor control_set_id: ::String
+      attr_accessor evidence_folder_id: ::String
+      attr_accessor evidence_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetEvidenceResponse
+      attr_accessor evidence: Types::Evidence
+      SENSITIVE: []
+    end
+
+    class GetInsightsByAssessmentRequest
+      attr_accessor assessment_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetInsightsByAssessmentResponse
+      attr_accessor insights: Types::InsightsByAssessment
+      SENSITIVE: []
+    end
+
+    class GetInsightsRequest < Aws::EmptyStructure
+    end
+
+    class GetInsightsResponse
+      attr_accessor insights: Types::Insights
+      SENSITIVE: []
+    end
+
+    class GetOrganizationAdminAccountRequest < Aws::EmptyStructure
+    end
+
+    class GetOrganizationAdminAccountResponse
+      attr_accessor admin_account_id: ::String
+      attr_accessor organization_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetServicesInScopeRequest < Aws::EmptyStructure
+    end
+
+    class GetServicesInScopeResponse
+      attr_accessor service_metadata: ::Array[Types::ServiceMetadata]
+      SENSITIVE: []
+    end
+
+    class GetSettingsRequest
+      attr_accessor attribute: ("ALL" | "IS_AWS_ORG_ENABLED" | "SNS_TOPIC" | "DEFAULT_ASSESSMENT_REPORTS_DESTINATION" | "DEFAULT_PROCESS_OWNERS" | "EVIDENCE_FINDER_ENABLEMENT" | "DEREGISTRATION_POLICY" | "DEFAULT_EXPORT_DESTINATION")
+      SENSITIVE: []
+    end
+
+    class GetSettingsResponse
+      attr_accessor settings: Types::Settings
+      SENSITIVE: []
+    end
+
+    class Insights
+      attr_accessor active_assessments_count: ::Integer
+      attr_accessor noncompliant_evidence_count: ::Integer
+      attr_accessor compliant_evidence_count: ::Integer
+      attr_accessor inconclusive_evidence_count: ::Integer
+      attr_accessor assessment_controls_count_by_noncompliant_evidence: ::Integer
+      attr_accessor total_assessment_controls_count: ::Integer
+      attr_accessor last_updated: ::Time
+      SENSITIVE: []
+    end
+
+    class InsightsByAssessment
+      attr_accessor noncompliant_evidence_count: ::Integer
+      attr_accessor compliant_evidence_count: ::Integer
+      attr_accessor inconclusive_evidence_count: ::Integer
+      attr_accessor assessment_controls_count_by_noncompliant_evidence: ::Integer
+      attr_accessor total_assessment_controls_count: ::Integer
+      attr_accessor last_updated: ::Time
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssessmentControlInsightsByControlDomainRequest
+      attr_accessor control_domain_id: ::String
+      attr_accessor assessment_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAssessmentControlInsightsByControlDomainResponse
+      attr_accessor control_insights_by_assessment: ::Array[Types::ControlInsightsMetadataByAssessmentItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssessmentFrameworkShareRequestsRequest
+      attr_accessor request_type: ("SENT" | "RECEIVED")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAssessmentFrameworkShareRequestsResponse
+      attr_accessor assessment_framework_share_requests: ::Array[Types::AssessmentFrameworkShareRequest]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssessmentFrameworksRequest
+      attr_accessor framework_type: ("Standard" | "Custom")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAssessmentFrameworksResponse
+      attr_accessor framework_metadata_list: ::Array[Types::AssessmentFrameworkMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssessmentReportsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAssessmentReportsResponse
+      attr_accessor assessment_reports: ::Array[Types::AssessmentReportMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssessmentsRequest
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAssessmentsResponse
+      attr_accessor assessment_metadata: ::Array[Types::AssessmentMetadataItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListControlDomainInsightsByAssessmentRequest
+      attr_accessor assessment_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListControlDomainInsightsByAssessmentResponse
+      attr_accessor control_domain_insights: ::Array[Types::ControlDomainInsights]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListControlDomainInsightsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListControlDomainInsightsResponse
+      attr_accessor control_domain_insights: ::Array[Types::ControlDomainInsights]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListControlInsightsByControlDomainRequest
+      attr_accessor control_domain_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListControlInsightsByControlDomainResponse
+      attr_accessor control_insights_metadata: ::Array[Types::ControlInsightsMetadataItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListControlsRequest
+      attr_accessor control_type: ("Standard" | "Custom")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListControlsResponse
+      attr_accessor control_metadata_list: ::Array[Types::ControlMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListKeywordsForDataSourceRequest
+      attr_accessor source: ("AWS_Cloudtrail" | "AWS_Config" | "AWS_Security_Hub" | "AWS_API_Call" | "MANUAL")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListKeywordsForDataSourceResponse
+      attr_accessor keywords: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNotificationsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListNotificationsResponse
+      attr_accessor notifications: ::Array[Types::Notification]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ManualEvidence
+      attr_accessor s3_resource_path: ::String
+      attr_accessor text_response: ::String
+      attr_accessor evidence_file_name: ::String
+      SENSITIVE: [:text_response, :evidence_file_name]
+    end
+
+    class Notification
+      attr_accessor id: ::String
+      attr_accessor assessment_id: ::String
+      attr_accessor assessment_name: ::String
+      attr_accessor control_set_id: ::String
+      attr_accessor control_set_name: ::String
+      attr_accessor description: ::String
+      attr_accessor event_time: ::Time
+      attr_accessor source: ::String
+      SENSITIVE: [:assessment_name]
+    end
+
+    class RegisterAccountRequest
+      attr_accessor kms_key: ::String
+      attr_accessor delegated_admin_account: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterAccountResponse
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "PENDING_ACTIVATION")
+      SENSITIVE: []
+    end
+
+    class RegisterOrganizationAdminAccountRequest
+      attr_accessor admin_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterOrganizationAdminAccountResponse
+      attr_accessor admin_account_id: ::String
+      attr_accessor organization_id: ::String
+      SENSITIVE: []
+    end
+
+    class Resource
+      attr_accessor arn: ::String
+      attr_accessor value: ::String
+      attr_accessor compliance_check: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class Role
+      attr_accessor role_type: ("PROCESS_OWNER" | "RESOURCE_OWNER")
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Scope
+      attr_accessor aws_accounts: ::Array[Types::AWSAccount]
+      attr_accessor aws_services: ::Array[Types::AWSService]
+      SENSITIVE: [:aws_accounts]
+    end
+
+    class ServiceMetadata
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor category: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Settings
+      attr_accessor is_aws_org_enabled: bool
+      attr_accessor sns_topic: ::String
+      attr_accessor default_assessment_reports_destination: Types::AssessmentReportsDestination
+      attr_accessor default_process_owners: ::Array[Types::Role]
+      attr_accessor kms_key: ::String
+      attr_accessor evidence_finder_enablement: Types::EvidenceFinderEnablement
+      attr_accessor deregistration_policy: Types::DeregistrationPolicy
+      attr_accessor default_export_destination: Types::DefaultExportDestination
+      SENSITIVE: [:sns_topic, :default_assessment_reports_destination, :default_process_owners]
+    end
+
+    class SourceKeyword
+      attr_accessor keyword_input_type: ("SELECT_FROM_LIST" | "UPLOAD_FILE" | "INPUT_TEXT")
+      attr_accessor keyword_value: ::String
+      SENSITIVE: []
+    end
+
+    class StartAssessmentFrameworkShareRequest
+      attr_accessor framework_id: ::String
+      attr_accessor destination_account: ::String
+      attr_accessor destination_region: ::String
+      attr_accessor comment: ::String
+      SENSITIVE: []
+    end
+
+    class StartAssessmentFrameworkShareResponse
+      attr_accessor assessment_framework_share_request: Types::AssessmentFrameworkShareRequest
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class URL
+      attr_accessor hyperlink_name: ::String
+      attr_accessor link: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAssessmentControlRequest
+      attr_accessor assessment_id: ::String
+      attr_accessor control_set_id: ::String
+      attr_accessor control_id: ::String
+      attr_accessor control_status: ("UNDER_REVIEW" | "REVIEWED" | "INACTIVE")
+      attr_accessor comment_body: ::String
+      SENSITIVE: [:comment_body]
+    end
+
+    class UpdateAssessmentControlResponse
+      attr_accessor control: Types::AssessmentControl
+      SENSITIVE: []
+    end
+
+    class UpdateAssessmentControlSetStatusRequest
+      attr_accessor assessment_id: ::String
+      attr_accessor control_set_id: ::String
+      attr_accessor status: ("ACTIVE" | "UNDER_REVIEW" | "REVIEWED")
+      attr_accessor comment: ::String
+      SENSITIVE: [:comment]
+    end
+
+    class UpdateAssessmentControlSetStatusResponse
+      attr_accessor control_set: Types::AssessmentControlSet
+      SENSITIVE: []
+    end
+
+    class UpdateAssessmentFrameworkControlSet
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor controls: ::Array[Types::CreateAssessmentFrameworkControl]
+      SENSITIVE: []
+    end
+
+    class UpdateAssessmentFrameworkRequest
+      attr_accessor framework_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor compliance_type: ::String
+      attr_accessor control_sets: ::Array[Types::UpdateAssessmentFrameworkControlSet]
+      SENSITIVE: [:compliance_type]
+    end
+
+    class UpdateAssessmentFrameworkResponse
+      attr_accessor framework: Types::Framework
+      SENSITIVE: []
+    end
+
+    class UpdateAssessmentFrameworkShareRequest
+      attr_accessor request_id: ::String
+      attr_accessor request_type: ("SENT" | "RECEIVED")
+      attr_accessor action: ("ACCEPT" | "DECLINE" | "REVOKE")
+      SENSITIVE: []
+    end
+
+    class UpdateAssessmentFrameworkShareResponse
+      attr_accessor assessment_framework_share_request: Types::AssessmentFrameworkShareRequest
+      SENSITIVE: []
+    end
+
+    class UpdateAssessmentRequest
+      attr_accessor assessment_id: ::String
+      attr_accessor assessment_name: ::String
+      attr_accessor assessment_description: ::String
+      attr_accessor scope: Types::Scope
+      attr_accessor assessment_reports_destination: Types::AssessmentReportsDestination
+      attr_accessor roles: ::Array[Types::Role]
+      SENSITIVE: [:assessment_name, :assessment_description, :scope, :assessment_reports_destination, :roles]
+    end
+
+    class UpdateAssessmentResponse
+      attr_accessor assessment: Types::Assessment
+      SENSITIVE: []
+    end
+
+    class UpdateAssessmentStatusRequest
+      attr_accessor assessment_id: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      SENSITIVE: []
+    end
+
+    class UpdateAssessmentStatusResponse
+      attr_accessor assessment: Types::Assessment
+      SENSITIVE: []
+    end
+
+    class UpdateControlRequest
+      attr_accessor control_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor testing_information: ::String
+      attr_accessor action_plan_title: ::String
+      attr_accessor action_plan_instructions: ::String
+      attr_accessor control_mapping_sources: ::Array[Types::ControlMappingSource]
+      SENSITIVE: [:testing_information, :action_plan_title, :action_plan_instructions]
+    end
+
+    class UpdateControlResponse
+      attr_accessor control: Types::Control
+      SENSITIVE: []
+    end
+
+    class UpdateSettingsRequest
+      attr_accessor sns_topic: ::String
+      attr_accessor default_assessment_reports_destination: Types::AssessmentReportsDestination
+      attr_accessor default_process_owners: ::Array[Types::Role]
+      attr_accessor kms_key: ::String
+      attr_accessor evidence_finder_enabled: bool
+      attr_accessor deregistration_policy: Types::DeregistrationPolicy
+      attr_accessor default_export_destination: Types::DefaultExportDestination
+      SENSITIVE: [:default_assessment_reports_destination, :default_process_owners]
+    end
+
+    class UpdateSettingsResponse
+      attr_accessor settings: Types::Settings
+      SENSITIVE: []
+    end
+
+    class ValidateAssessmentReportIntegrityRequest
+      attr_accessor s3_relative_path: ::String
+      SENSITIVE: []
+    end
+
+    class ValidateAssessmentReportIntegrityResponse
+      attr_accessor signature_valid: bool
+      attr_accessor signature_algorithm: ::String
+      attr_accessor signature_date_time: ::String
+      attr_accessor signature_key_id: ::String
+      attr_accessor validation_errors: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other")
+      attr_accessor fields: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

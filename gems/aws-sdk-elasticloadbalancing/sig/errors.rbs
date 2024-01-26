@@ -1,0 +1,60 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ElasticLoadBalancing
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AccessPointNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class CertificateNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class DependencyThrottleException < ::Aws::Errors::ServiceError
+      end
+      class DuplicateAccessPointNameException < ::Aws::Errors::ServiceError
+      end
+      class DuplicateListenerException < ::Aws::Errors::ServiceError
+      end
+      class DuplicatePolicyNameException < ::Aws::Errors::ServiceError
+      end
+      class DuplicateTagKeysException < ::Aws::Errors::ServiceError
+      end
+      class InvalidConfigurationRequestException < ::Aws::Errors::ServiceError
+      end
+      class InvalidEndPointException < ::Aws::Errors::ServiceError
+      end
+      class InvalidSchemeException < ::Aws::Errors::ServiceError
+      end
+      class InvalidSecurityGroupException < ::Aws::Errors::ServiceError
+      end
+      class InvalidSubnetException < ::Aws::Errors::ServiceError
+      end
+      class ListenerNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class LoadBalancerAttributeNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class OperationNotPermittedException < ::Aws::Errors::ServiceError
+      end
+      class PolicyNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class PolicyTypeNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class SubnetNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class TooManyAccessPointsException < ::Aws::Errors::ServiceError
+      end
+      class TooManyPoliciesException < ::Aws::Errors::ServiceError
+      end
+      class TooManyTagsException < ::Aws::Errors::ServiceError
+      end
+      class UnsupportedProtocolException < ::Aws::Errors::ServiceError
+      end
+    end
+  end
+end

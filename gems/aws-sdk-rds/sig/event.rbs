@@ -1,0 +1,50 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RDS
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Event.html
+    class Event
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Event.html#initialize-instance_method
+      def initialize: (String source_id, String date, Hash[Symbol, untyped] options) -> void
+                    | (source_id: String, date: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Event.html#source_id-instance_method
+      def source_id: () -> String
+      alias source_identifier source_id
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Event.html#date-instance_method
+      def date: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Event.html#source_type-instance_method
+      def source_type: () -> ("db-instance" | "db-parameter-group" | "db-security-group" | "db-snapshot" | "db-cluster" | "db-cluster-snapshot" | "custom-engine-version" | "db-proxy" | "blue-green-deployment")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Event.html#message-instance_method
+      def message: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Event.html#event_categories-instance_method
+      def event_categories: () -> ::Array[::String]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Event.html#source_arn-instance_method
+      def source_arn: () -> ::String
+
+      def client: () -> Client
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Event.html#data-instance_method
+      def data: () -> Types::Event
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Event.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      class Collection < ::Aws::Resources::Collection[Event]
+      end
+    end
+  end
+end

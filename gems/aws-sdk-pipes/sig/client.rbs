@@ -1,0 +1,774 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Pipes
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Pipes/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreatePipeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePipeResponse]
+        def arn: () -> ::String
+        def creation_time: () -> ::Time
+        def current_state: () -> ("RUNNING" | "STOPPED" | "CREATING" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "CREATE_FAILED" | "UPDATE_FAILED" | "START_FAILED" | "STOP_FAILED" | "DELETE_FAILED" | "CREATE_ROLLBACK_FAILED" | "DELETE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_FAILED")
+        def desired_state: () -> ("RUNNING" | "STOPPED")
+        def last_modified_time: () -> ::Time
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Pipes/Client.html#create_pipe-instance_method
+      def create_pipe: (
+                         ?description: ::String,
+                         ?desired_state: ("RUNNING" | "STOPPED"),
+                         ?enrichment: ::String,
+                         ?enrichment_parameters: {
+                           http_parameters: {
+                             header_parameters: Hash[::String, ::String]?,
+                             path_parameter_values: Array[::String]?,
+                             query_string_parameters: Hash[::String, ::String]?
+                           }?,
+                           input_template: ::String?
+                         },
+                         ?log_configuration: {
+                           cloudwatch_logs_log_destination: {
+                             log_group_arn: ::String
+                           }?,
+                           firehose_log_destination: {
+                             delivery_stream_arn: ::String
+                           }?,
+                           include_execution_data: Array[("ALL")]?,
+                           level: ("OFF" | "ERROR" | "INFO" | "TRACE"),
+                           s3_log_destination: {
+                             bucket_name: ::String,
+                             bucket_owner: ::String,
+                             output_format: ("json" | "plain" | "w3c")?,
+                             prefix: ::String?
+                           }?
+                         },
+                         name: ::String,
+                         role_arn: ::String,
+                         source: ::String,
+                         ?source_parameters: {
+                           active_mq_broker_parameters: {
+                             batch_size: ::Integer?,
+                             credentials: {
+                               basic_auth: ::String?
+                             },
+                             maximum_batching_window_in_seconds: ::Integer?,
+                             queue_name: ::String
+                           }?,
+                           dynamo_db_stream_parameters: {
+                             batch_size: ::Integer?,
+                             dead_letter_config: {
+                               arn: ::String?
+                             }?,
+                             maximum_batching_window_in_seconds: ::Integer?,
+                             maximum_record_age_in_seconds: ::Integer?,
+                             maximum_retry_attempts: ::Integer?,
+                             on_partial_batch_item_failure: ("AUTOMATIC_BISECT")?,
+                             parallelization_factor: ::Integer?,
+                             starting_position: ("TRIM_HORIZON" | "LATEST")
+                           }?,
+                           filter_criteria: {
+                             filters: Array[
+                               {
+                                 pattern: ::String?
+                               },
+                             ]?
+                           }?,
+                           kinesis_stream_parameters: {
+                             batch_size: ::Integer?,
+                             dead_letter_config: {
+                               arn: ::String?
+                             }?,
+                             maximum_batching_window_in_seconds: ::Integer?,
+                             maximum_record_age_in_seconds: ::Integer?,
+                             maximum_retry_attempts: ::Integer?,
+                             on_partial_batch_item_failure: ("AUTOMATIC_BISECT")?,
+                             parallelization_factor: ::Integer?,
+                             starting_position: ("TRIM_HORIZON" | "LATEST" | "AT_TIMESTAMP"),
+                             starting_position_timestamp: ::Time?
+                           }?,
+                           managed_streaming_kafka_parameters: {
+                             batch_size: ::Integer?,
+                             consumer_group_id: ::String?,
+                             credentials: {
+                               client_certificate_tls_auth: ::String?,
+                               sasl_scram_512_auth: ::String?
+                             }?,
+                             maximum_batching_window_in_seconds: ::Integer?,
+                             starting_position: ("TRIM_HORIZON" | "LATEST")?,
+                             topic_name: ::String
+                           }?,
+                           rabbit_mq_broker_parameters: {
+                             batch_size: ::Integer?,
+                             credentials: {
+                               basic_auth: ::String?
+                             },
+                             maximum_batching_window_in_seconds: ::Integer?,
+                             queue_name: ::String,
+                             virtual_host: ::String?
+                           }?,
+                           self_managed_kafka_parameters: {
+                             additional_bootstrap_servers: Array[::String]?,
+                             batch_size: ::Integer?,
+                             consumer_group_id: ::String?,
+                             credentials: {
+                               basic_auth: ::String?,
+                               client_certificate_tls_auth: ::String?,
+                               sasl_scram_256_auth: ::String?,
+                               sasl_scram_512_auth: ::String?
+                             }?,
+                             maximum_batching_window_in_seconds: ::Integer?,
+                             server_root_ca_certificate: ::String?,
+                             starting_position: ("TRIM_HORIZON" | "LATEST")?,
+                             topic_name: ::String,
+                             vpc: {
+                               security_group: Array[::String]?,
+                               subnets: Array[::String]?
+                             }?
+                           }?,
+                           sqs_queue_parameters: {
+                             batch_size: ::Integer?,
+                             maximum_batching_window_in_seconds: ::Integer?
+                           }?
+                         },
+                         ?tags: Hash[::String, ::String],
+                         target: ::String,
+                         ?target_parameters: {
+                           batch_job_parameters: {
+                             array_properties: {
+                               size: ::Integer?
+                             }?,
+                             container_overrides: {
+                               command: Array[::String]?,
+                               environment: Array[
+                                 {
+                                   name: ::String?,
+                                   value: ::String?
+                                 },
+                               ]?,
+                               instance_type: ::String?,
+                               resource_requirements: Array[
+                                 {
+                                   type: ("GPU" | "MEMORY" | "VCPU"),
+                                   value: ::String
+                                 },
+                               ]?
+                             }?,
+                             depends_on: Array[
+                               {
+                                 job_id: ::String?,
+                                 type: ("N_TO_N" | "SEQUENTIAL")?
+                               },
+                             ]?,
+                             job_definition: ::String,
+                             job_name: ::String,
+                             parameters: Hash[::String, ::String]?,
+                             retry_strategy: {
+                               attempts: ::Integer?
+                             }?
+                           }?,
+                           cloud_watch_logs_parameters: {
+                             log_stream_name: ::String?,
+                             timestamp: ::String?
+                           }?,
+                           ecs_task_parameters: {
+                             capacity_provider_strategy: Array[
+                               {
+                                 base: ::Integer?,
+                                 capacity_provider: ::String,
+                                 weight: ::Integer?
+                               },
+                             ]?,
+                             enable_ecs_managed_tags: bool?,
+                             enable_execute_command: bool?,
+                             group: ::String?,
+                             launch_type: ("EC2" | "FARGATE" | "EXTERNAL")?,
+                             network_configuration: {
+                               awsvpc_configuration: {
+                                 assign_public_ip: ("ENABLED" | "DISABLED")?,
+                                 security_groups: Array[::String]?,
+                                 subnets: Array[::String]
+                               }?
+                             }?,
+                             overrides: {
+                               container_overrides: Array[
+                                 {
+                                   command: Array[::String]?,
+                                   cpu: ::Integer?,
+                                   environment: Array[
+                                     {
+                                       name: ::String?,
+                                       value: ::String?
+                                     },
+                                   ]?,
+                                   environment_files: Array[
+                                     {
+                                       type: ("s3"),
+                                       value: ::String
+                                     },
+                                   ]?,
+                                   memory: ::Integer?,
+                                   memory_reservation: ::Integer?,
+                                   name: ::String?,
+                                   resource_requirements: Array[
+                                     {
+                                       type: ("GPU" | "InferenceAccelerator"),
+                                       value: ::String
+                                     },
+                                   ]?
+                                 },
+                               ]?,
+                               cpu: ::String?,
+                               ephemeral_storage: {
+                                 size_in_gi_b: ::Integer
+                               }?,
+                               execution_role_arn: ::String?,
+                               inference_accelerator_overrides: Array[
+                                 {
+                                   device_name: ::String?,
+                                   device_type: ::String?
+                                 },
+                               ]?,
+                               memory: ::String?,
+                               task_role_arn: ::String?
+                             }?,
+                             placement_constraints: Array[
+                               {
+                                 expression: ::String?,
+                                 type: ("distinctInstance" | "memberOf")?
+                               },
+                             ]?,
+                             placement_strategy: Array[
+                               {
+                                 field: ::String?,
+                                 type: ("random" | "spread" | "binpack")?
+                               },
+                             ]?,
+                             platform_version: ::String?,
+                             propagate_tags: ("TASK_DEFINITION")?,
+                             reference_id: ::String?,
+                             tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String
+                               },
+                             ]?,
+                             task_count: ::Integer?,
+                             task_definition_arn: ::String
+                           }?,
+                           event_bridge_event_bus_parameters: {
+                             detail_type: ::String?,
+                             endpoint_id: ::String?,
+                             resources: Array[::String]?,
+                             source: ::String?,
+                             time: ::String?
+                           }?,
+                           http_parameters: {
+                             header_parameters: Hash[::String, ::String]?,
+                             path_parameter_values: Array[::String]?,
+                             query_string_parameters: Hash[::String, ::String]?
+                           }?,
+                           input_template: ::String?,
+                           kinesis_stream_parameters: {
+                             partition_key: ::String
+                           }?,
+                           lambda_function_parameters: {
+                             invocation_type: ("REQUEST_RESPONSE" | "FIRE_AND_FORGET")?
+                           }?,
+                           redshift_data_parameters: {
+                             database: ::String,
+                             db_user: ::String?,
+                             secret_manager_arn: ::String?,
+                             sqls: Array[::String],
+                             statement_name: ::String?,
+                             with_event: bool?
+                           }?,
+                           sage_maker_pipeline_parameters: {
+                             pipeline_parameter_list: Array[
+                               {
+                                 name: ::String,
+                                 value: ::String
+                               },
+                             ]?
+                           }?,
+                           sqs_queue_parameters: {
+                             message_deduplication_id: ::String?,
+                             message_group_id: ::String?
+                           }?,
+                           step_function_state_machine_parameters: {
+                             invocation_type: ("REQUEST_RESPONSE" | "FIRE_AND_FORGET")?
+                           }?
+                         }
+                       ) -> _CreatePipeResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePipeResponseSuccess
+
+      interface _DeletePipeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePipeResponse]
+        def arn: () -> ::String
+        def creation_time: () -> ::Time
+        def current_state: () -> ("RUNNING" | "STOPPED" | "CREATING" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "CREATE_FAILED" | "UPDATE_FAILED" | "START_FAILED" | "STOP_FAILED" | "DELETE_FAILED" | "CREATE_ROLLBACK_FAILED" | "DELETE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_FAILED")
+        def desired_state: () -> ("RUNNING" | "STOPPED" | "DELETED")
+        def last_modified_time: () -> ::Time
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Pipes/Client.html#delete_pipe-instance_method
+      def delete_pipe: (
+                         name: ::String
+                       ) -> _DeletePipeResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePipeResponseSuccess
+
+      interface _DescribePipeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePipeResponse]
+        def arn: () -> ::String
+        def creation_time: () -> ::Time
+        def current_state: () -> ("RUNNING" | "STOPPED" | "CREATING" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "CREATE_FAILED" | "UPDATE_FAILED" | "START_FAILED" | "STOP_FAILED" | "DELETE_FAILED" | "CREATE_ROLLBACK_FAILED" | "DELETE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_FAILED")
+        def description: () -> ::String
+        def desired_state: () -> ("RUNNING" | "STOPPED" | "DELETED")
+        def enrichment: () -> ::String
+        def enrichment_parameters: () -> Types::PipeEnrichmentParameters
+        def last_modified_time: () -> ::Time
+        def log_configuration: () -> Types::PipeLogConfiguration
+        def name: () -> ::String
+        def role_arn: () -> ::String
+        def source: () -> ::String
+        def source_parameters: () -> Types::PipeSourceParameters
+        def state_reason: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def target: () -> ::String
+        def target_parameters: () -> Types::PipeTargetParameters
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Pipes/Client.html#describe_pipe-instance_method
+      def describe_pipe: (
+                           name: ::String
+                         ) -> _DescribePipeResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePipeResponseSuccess
+
+      interface _ListPipesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPipesResponse]
+        def next_token: () -> ::String
+        def pipes: () -> ::Array[Types::Pipe]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Pipes/Client.html#list_pipes-instance_method
+      def list_pipes: (
+                        ?current_state: ("RUNNING" | "STOPPED" | "CREATING" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "CREATE_FAILED" | "UPDATE_FAILED" | "START_FAILED" | "STOP_FAILED" | "DELETE_FAILED" | "CREATE_ROLLBACK_FAILED" | "DELETE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_FAILED"),
+                        ?desired_state: ("RUNNING" | "STOPPED"),
+                        ?limit: ::Integer,
+                        ?name_prefix: ::String,
+                        ?next_token: ::String,
+                        ?source_prefix: ::String,
+                        ?target_prefix: ::String
+                      ) -> _ListPipesResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPipesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Pipes/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _StartPipeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartPipeResponse]
+        def arn: () -> ::String
+        def creation_time: () -> ::Time
+        def current_state: () -> ("RUNNING" | "STOPPED" | "CREATING" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "CREATE_FAILED" | "UPDATE_FAILED" | "START_FAILED" | "STOP_FAILED" | "DELETE_FAILED" | "CREATE_ROLLBACK_FAILED" | "DELETE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_FAILED")
+        def desired_state: () -> ("RUNNING" | "STOPPED")
+        def last_modified_time: () -> ::Time
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Pipes/Client.html#start_pipe-instance_method
+      def start_pipe: (
+                        name: ::String
+                      ) -> _StartPipeResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartPipeResponseSuccess
+
+      interface _StopPipeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopPipeResponse]
+        def arn: () -> ::String
+        def creation_time: () -> ::Time
+        def current_state: () -> ("RUNNING" | "STOPPED" | "CREATING" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "CREATE_FAILED" | "UPDATE_FAILED" | "START_FAILED" | "STOP_FAILED" | "DELETE_FAILED" | "CREATE_ROLLBACK_FAILED" | "DELETE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_FAILED")
+        def desired_state: () -> ("RUNNING" | "STOPPED")
+        def last_modified_time: () -> ::Time
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Pipes/Client.html#stop_pipe-instance_method
+      def stop_pipe: (
+                       name: ::String
+                     ) -> _StopPipeResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopPipeResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Pipes/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Pipes/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdatePipeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePipeResponse]
+        def arn: () -> ::String
+        def creation_time: () -> ::Time
+        def current_state: () -> ("RUNNING" | "STOPPED" | "CREATING" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "CREATE_FAILED" | "UPDATE_FAILED" | "START_FAILED" | "STOP_FAILED" | "DELETE_FAILED" | "CREATE_ROLLBACK_FAILED" | "DELETE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_FAILED")
+        def desired_state: () -> ("RUNNING" | "STOPPED")
+        def last_modified_time: () -> ::Time
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Pipes/Client.html#update_pipe-instance_method
+      def update_pipe: (
+                         ?description: ::String,
+                         ?desired_state: ("RUNNING" | "STOPPED"),
+                         ?enrichment: ::String,
+                         ?enrichment_parameters: {
+                           http_parameters: {
+                             header_parameters: Hash[::String, ::String]?,
+                             path_parameter_values: Array[::String]?,
+                             query_string_parameters: Hash[::String, ::String]?
+                           }?,
+                           input_template: ::String?
+                         },
+                         ?log_configuration: {
+                           cloudwatch_logs_log_destination: {
+                             log_group_arn: ::String
+                           }?,
+                           firehose_log_destination: {
+                             delivery_stream_arn: ::String
+                           }?,
+                           include_execution_data: Array[("ALL")]?,
+                           level: ("OFF" | "ERROR" | "INFO" | "TRACE"),
+                           s3_log_destination: {
+                             bucket_name: ::String,
+                             bucket_owner: ::String,
+                             output_format: ("json" | "plain" | "w3c")?,
+                             prefix: ::String?
+                           }?
+                         },
+                         name: ::String,
+                         role_arn: ::String,
+                         ?source_parameters: {
+                           active_mq_broker_parameters: {
+                             batch_size: ::Integer?,
+                             credentials: {
+                               basic_auth: ::String?
+                             },
+                             maximum_batching_window_in_seconds: ::Integer?
+                           }?,
+                           dynamo_db_stream_parameters: {
+                             batch_size: ::Integer?,
+                             dead_letter_config: {
+                               arn: ::String?
+                             }?,
+                             maximum_batching_window_in_seconds: ::Integer?,
+                             maximum_record_age_in_seconds: ::Integer?,
+                             maximum_retry_attempts: ::Integer?,
+                             on_partial_batch_item_failure: ("AUTOMATIC_BISECT")?,
+                             parallelization_factor: ::Integer?
+                           }?,
+                           filter_criteria: {
+                             filters: Array[
+                               {
+                                 pattern: ::String?
+                               },
+                             ]?
+                           }?,
+                           kinesis_stream_parameters: {
+                             batch_size: ::Integer?,
+                             dead_letter_config: {
+                               arn: ::String?
+                             }?,
+                             maximum_batching_window_in_seconds: ::Integer?,
+                             maximum_record_age_in_seconds: ::Integer?,
+                             maximum_retry_attempts: ::Integer?,
+                             on_partial_batch_item_failure: ("AUTOMATIC_BISECT")?,
+                             parallelization_factor: ::Integer?
+                           }?,
+                           managed_streaming_kafka_parameters: {
+                             batch_size: ::Integer?,
+                             credentials: {
+                               client_certificate_tls_auth: ::String?,
+                               sasl_scram_512_auth: ::String?
+                             }?,
+                             maximum_batching_window_in_seconds: ::Integer?
+                           }?,
+                           rabbit_mq_broker_parameters: {
+                             batch_size: ::Integer?,
+                             credentials: {
+                               basic_auth: ::String?
+                             },
+                             maximum_batching_window_in_seconds: ::Integer?
+                           }?,
+                           self_managed_kafka_parameters: {
+                             batch_size: ::Integer?,
+                             credentials: {
+                               basic_auth: ::String?,
+                               client_certificate_tls_auth: ::String?,
+                               sasl_scram_256_auth: ::String?,
+                               sasl_scram_512_auth: ::String?
+                             }?,
+                             maximum_batching_window_in_seconds: ::Integer?,
+                             server_root_ca_certificate: ::String?,
+                             vpc: {
+                               security_group: Array[::String]?,
+                               subnets: Array[::String]?
+                             }?
+                           }?,
+                           sqs_queue_parameters: {
+                             batch_size: ::Integer?,
+                             maximum_batching_window_in_seconds: ::Integer?
+                           }?
+                         },
+                         ?target: ::String,
+                         ?target_parameters: {
+                           batch_job_parameters: {
+                             array_properties: {
+                               size: ::Integer?
+                             }?,
+                             container_overrides: {
+                               command: Array[::String]?,
+                               environment: Array[
+                                 {
+                                   name: ::String?,
+                                   value: ::String?
+                                 },
+                               ]?,
+                               instance_type: ::String?,
+                               resource_requirements: Array[
+                                 {
+                                   type: ("GPU" | "MEMORY" | "VCPU"),
+                                   value: ::String
+                                 },
+                               ]?
+                             }?,
+                             depends_on: Array[
+                               {
+                                 job_id: ::String?,
+                                 type: ("N_TO_N" | "SEQUENTIAL")?
+                               },
+                             ]?,
+                             job_definition: ::String,
+                             job_name: ::String,
+                             parameters: Hash[::String, ::String]?,
+                             retry_strategy: {
+                               attempts: ::Integer?
+                             }?
+                           }?,
+                           cloud_watch_logs_parameters: {
+                             log_stream_name: ::String?,
+                             timestamp: ::String?
+                           }?,
+                           ecs_task_parameters: {
+                             capacity_provider_strategy: Array[
+                               {
+                                 base: ::Integer?,
+                                 capacity_provider: ::String,
+                                 weight: ::Integer?
+                               },
+                             ]?,
+                             enable_ecs_managed_tags: bool?,
+                             enable_execute_command: bool?,
+                             group: ::String?,
+                             launch_type: ("EC2" | "FARGATE" | "EXTERNAL")?,
+                             network_configuration: {
+                               awsvpc_configuration: {
+                                 assign_public_ip: ("ENABLED" | "DISABLED")?,
+                                 security_groups: Array[::String]?,
+                                 subnets: Array[::String]
+                               }?
+                             }?,
+                             overrides: {
+                               container_overrides: Array[
+                                 {
+                                   command: Array[::String]?,
+                                   cpu: ::Integer?,
+                                   environment: Array[
+                                     {
+                                       name: ::String?,
+                                       value: ::String?
+                                     },
+                                   ]?,
+                                   environment_files: Array[
+                                     {
+                                       type: ("s3"),
+                                       value: ::String
+                                     },
+                                   ]?,
+                                   memory: ::Integer?,
+                                   memory_reservation: ::Integer?,
+                                   name: ::String?,
+                                   resource_requirements: Array[
+                                     {
+                                       type: ("GPU" | "InferenceAccelerator"),
+                                       value: ::String
+                                     },
+                                   ]?
+                                 },
+                               ]?,
+                               cpu: ::String?,
+                               ephemeral_storage: {
+                                 size_in_gi_b: ::Integer
+                               }?,
+                               execution_role_arn: ::String?,
+                               inference_accelerator_overrides: Array[
+                                 {
+                                   device_name: ::String?,
+                                   device_type: ::String?
+                                 },
+                               ]?,
+                               memory: ::String?,
+                               task_role_arn: ::String?
+                             }?,
+                             placement_constraints: Array[
+                               {
+                                 expression: ::String?,
+                                 type: ("distinctInstance" | "memberOf")?
+                               },
+                             ]?,
+                             placement_strategy: Array[
+                               {
+                                 field: ::String?,
+                                 type: ("random" | "spread" | "binpack")?
+                               },
+                             ]?,
+                             platform_version: ::String?,
+                             propagate_tags: ("TASK_DEFINITION")?,
+                             reference_id: ::String?,
+                             tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String
+                               },
+                             ]?,
+                             task_count: ::Integer?,
+                             task_definition_arn: ::String
+                           }?,
+                           event_bridge_event_bus_parameters: {
+                             detail_type: ::String?,
+                             endpoint_id: ::String?,
+                             resources: Array[::String]?,
+                             source: ::String?,
+                             time: ::String?
+                           }?,
+                           http_parameters: {
+                             header_parameters: Hash[::String, ::String]?,
+                             path_parameter_values: Array[::String]?,
+                             query_string_parameters: Hash[::String, ::String]?
+                           }?,
+                           input_template: ::String?,
+                           kinesis_stream_parameters: {
+                             partition_key: ::String
+                           }?,
+                           lambda_function_parameters: {
+                             invocation_type: ("REQUEST_RESPONSE" | "FIRE_AND_FORGET")?
+                           }?,
+                           redshift_data_parameters: {
+                             database: ::String,
+                             db_user: ::String?,
+                             secret_manager_arn: ::String?,
+                             sqls: Array[::String],
+                             statement_name: ::String?,
+                             with_event: bool?
+                           }?,
+                           sage_maker_pipeline_parameters: {
+                             pipeline_parameter_list: Array[
+                               {
+                                 name: ::String,
+                                 value: ::String
+                               },
+                             ]?
+                           }?,
+                           sqs_queue_parameters: {
+                             message_deduplication_id: ::String?,
+                             message_group_id: ::String?
+                           }?,
+                           step_function_state_machine_parameters: {
+                             invocation_type: ("REQUEST_RESPONSE" | "FIRE_AND_FORGET")?
+                           }?
+                         }
+                       ) -> _UpdatePipeResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePipeResponseSuccess
+    end
+  end
+end
+

@@ -1,0 +1,1617 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CleanRooms
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      attr_accessor reason: ("INSUFFICIENT_PERMISSIONS")
+      SENSITIVE: []
+    end
+
+    class AggregateColumn
+      attr_accessor column_names: ::Array[::String]
+      attr_accessor function: ("SUM" | "SUM_DISTINCT" | "COUNT" | "COUNT_DISTINCT" | "AVG")
+      SENSITIVE: []
+    end
+
+    class AggregationConstraint
+      attr_accessor column_name: ::String
+      attr_accessor minimum: ::Integer
+      attr_accessor type: ("COUNT_DISTINCT")
+      SENSITIVE: []
+    end
+
+    class AnalysisParameter
+      attr_accessor name: ::String
+      attr_accessor type: ("SMALLINT" | "INTEGER" | "BIGINT" | "DECIMAL" | "REAL" | "DOUBLE_PRECISION" | "BOOLEAN" | "CHAR" | "VARCHAR" | "DATE" | "TIMESTAMP" | "TIMESTAMPTZ" | "TIME" | "TIMETZ" | "VARBYTE")
+      attr_accessor default_value: ::String
+      SENSITIVE: []
+    end
+
+    class AnalysisRule
+      attr_accessor collaboration_id: ::String
+      attr_accessor type: ("AGGREGATION" | "LIST" | "CUSTOM")
+      attr_accessor name: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor policy: Types::AnalysisRulePolicy
+      SENSITIVE: []
+    end
+
+    class AnalysisRuleAggregation
+      attr_accessor aggregate_columns: ::Array[Types::AggregateColumn]
+      attr_accessor join_columns: ::Array[::String]
+      attr_accessor join_required: ("QUERY_RUNNER")
+      attr_accessor allowed_join_operators: ::Array[("OR" | "AND")]
+      attr_accessor dimension_columns: ::Array[::String]
+      attr_accessor scalar_functions: ::Array[("TRUNC" | "ABS" | "CEILING" | "FLOOR" | "LN" | "LOG" | "ROUND" | "SQRT" | "CAST" | "LOWER" | "RTRIM" | "UPPER" | "COALESCE")]
+      attr_accessor output_constraints: ::Array[Types::AggregationConstraint]
+      SENSITIVE: []
+    end
+
+    class AnalysisRuleCustom
+      attr_accessor allowed_analyses: ::Array[::String]
+      attr_accessor allowed_analysis_providers: ::Array[::String]
+      attr_accessor differential_privacy: Types::DifferentialPrivacyConfiguration
+      SENSITIVE: []
+    end
+
+    class AnalysisRuleList
+      attr_accessor join_columns: ::Array[::String]
+      attr_accessor allowed_join_operators: ::Array[("OR" | "AND")]
+      attr_accessor list_columns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AnalysisRulePolicy
+      attr_accessor v1: Types::AnalysisRulePolicyV1
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class V1 < AnalysisRulePolicy
+      end
+      class Unknown < AnalysisRulePolicy
+      end
+    end
+
+    class AnalysisRulePolicyV1
+      attr_accessor list: Types::AnalysisRuleList
+      attr_accessor aggregation: Types::AnalysisRuleAggregation
+      attr_accessor custom: Types::AnalysisRuleCustom
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class List < AnalysisRulePolicyV1
+      end
+      class Aggregation < AnalysisRulePolicyV1
+      end
+      class Custom < AnalysisRulePolicyV1
+      end
+      class Unknown < AnalysisRulePolicyV1
+      end
+    end
+
+    class AnalysisSchema
+      attr_accessor referenced_tables: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AnalysisSource
+      attr_accessor text: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Text < AnalysisSource
+      end
+      class Unknown < AnalysisSource
+      end
+    end
+
+    class AnalysisTemplate
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor collaboration_id: ::String
+      attr_accessor collaboration_arn: ::String
+      attr_accessor membership_id: ::String
+      attr_accessor membership_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor schema: Types::AnalysisSchema
+      attr_accessor format: ("SQL")
+      attr_accessor source: Types::AnalysisSource
+      attr_accessor analysis_parameters: ::Array[Types::AnalysisParameter]
+      SENSITIVE: [:source]
+    end
+
+    class AnalysisTemplateSummary
+      attr_accessor arn: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor update_time: ::Time
+      attr_accessor membership_arn: ::String
+      attr_accessor membership_id: ::String
+      attr_accessor collaboration_arn: ::String
+      attr_accessor collaboration_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetCollaborationAnalysisTemplateError
+      attr_accessor arn: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetCollaborationAnalysisTemplateInput
+      attr_accessor collaboration_identifier: ::String
+      attr_accessor analysis_template_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetCollaborationAnalysisTemplateOutput
+      attr_accessor collaboration_analysis_templates: ::Array[Types::CollaborationAnalysisTemplate]
+      attr_accessor errors: ::Array[Types::BatchGetCollaborationAnalysisTemplateError]
+      SENSITIVE: []
+    end
+
+    class BatchGetSchemaError
+      attr_accessor name: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetSchemaInput
+      attr_accessor collaboration_identifier: ::String
+      attr_accessor names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetSchemaOutput
+      attr_accessor schemas: ::Array[Types::Schema]
+      attr_accessor errors: ::Array[Types::BatchGetSchemaError]
+      SENSITIVE: []
+    end
+
+    class Collaboration
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor creator_account_id: ::String
+      attr_accessor creator_display_name: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor member_status: ("INVITED" | "ACTIVE" | "LEFT" | "REMOVED")
+      attr_accessor membership_id: ::String
+      attr_accessor membership_arn: ::String
+      attr_accessor data_encryption_metadata: Types::DataEncryptionMetadata
+      attr_accessor query_log_status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class CollaborationAnalysisTemplate
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor collaboration_id: ::String
+      attr_accessor collaboration_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor creator_account_id: ::String
+      attr_accessor name: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor schema: Types::AnalysisSchema
+      attr_accessor format: ("SQL")
+      attr_accessor source: Types::AnalysisSource
+      attr_accessor analysis_parameters: ::Array[Types::AnalysisParameter]
+      SENSITIVE: [:source]
+    end
+
+    class CollaborationAnalysisTemplateSummary
+      attr_accessor arn: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor update_time: ::Time
+      attr_accessor collaboration_arn: ::String
+      attr_accessor collaboration_id: ::String
+      attr_accessor creator_account_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class CollaborationConfiguredAudienceModelAssociation
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor collaboration_id: ::String
+      attr_accessor collaboration_arn: ::String
+      attr_accessor configured_audience_model_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor creator_account_id: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CollaborationConfiguredAudienceModelAssociationSummary
+      attr_accessor arn: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor update_time: ::Time
+      attr_accessor collaboration_arn: ::String
+      attr_accessor collaboration_id: ::String
+      attr_accessor creator_account_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class CollaborationPrivacyBudgetSummary
+      attr_accessor id: ::String
+      attr_accessor privacy_budget_template_id: ::String
+      attr_accessor privacy_budget_template_arn: ::String
+      attr_accessor collaboration_id: ::String
+      attr_accessor collaboration_arn: ::String
+      attr_accessor creator_account_id: ::String
+      attr_accessor type: ("DIFFERENTIAL_PRIVACY")
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor budget: Types::PrivacyBudget
+      SENSITIVE: []
+    end
+
+    class CollaborationPrivacyBudgetTemplate
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor collaboration_id: ::String
+      attr_accessor collaboration_arn: ::String
+      attr_accessor creator_account_id: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor privacy_budget_type: ("DIFFERENTIAL_PRIVACY")
+      attr_accessor auto_refresh: ("CALENDAR_MONTH" | "NONE")
+      attr_accessor parameters: Types::PrivacyBudgetTemplateParametersOutput
+      SENSITIVE: []
+    end
+
+    class CollaborationPrivacyBudgetTemplateSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor collaboration_id: ::String
+      attr_accessor collaboration_arn: ::String
+      attr_accessor creator_account_id: ::String
+      attr_accessor privacy_budget_type: ("DIFFERENTIAL_PRIVACY")
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CollaborationSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor creator_account_id: ::String
+      attr_accessor creator_display_name: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor member_status: ("INVITED" | "ACTIVE" | "LEFT" | "REMOVED")
+      attr_accessor membership_id: ::String
+      attr_accessor membership_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Column
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ConfiguredAudienceModelAssociation
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor configured_audience_model_arn: ::String
+      attr_accessor membership_id: ::String
+      attr_accessor membership_arn: ::String
+      attr_accessor collaboration_id: ::String
+      attr_accessor collaboration_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor manage_resource_policies: bool
+      attr_accessor description: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ConfiguredAudienceModelAssociationSummary
+      attr_accessor membership_id: ::String
+      attr_accessor membership_arn: ::String
+      attr_accessor collaboration_arn: ::String
+      attr_accessor collaboration_id: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor configured_audience_model_arn: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class ConfiguredTable
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor table_reference: Types::TableReference
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor analysis_rule_types: ::Array[("AGGREGATION" | "LIST" | "CUSTOM")]
+      attr_accessor analysis_method: ("DIRECT_QUERY")
+      attr_accessor allowed_columns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ConfiguredTableAnalysisRule
+      attr_accessor configured_table_id: ::String
+      attr_accessor configured_table_arn: ::String
+      attr_accessor policy: Types::ConfiguredTableAnalysisRulePolicy
+      attr_accessor type: ("AGGREGATION" | "LIST" | "CUSTOM")
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ConfiguredTableAnalysisRulePolicy
+      attr_accessor v1: Types::ConfiguredTableAnalysisRulePolicyV1
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class V1 < ConfiguredTableAnalysisRulePolicy
+      end
+      class Unknown < ConfiguredTableAnalysisRulePolicy
+      end
+    end
+
+    class ConfiguredTableAnalysisRulePolicyV1
+      attr_accessor list: Types::AnalysisRuleList
+      attr_accessor aggregation: Types::AnalysisRuleAggregation
+      attr_accessor custom: Types::AnalysisRuleCustom
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class List < ConfiguredTableAnalysisRulePolicyV1
+      end
+      class Aggregation < ConfiguredTableAnalysisRulePolicyV1
+      end
+      class Custom < ConfiguredTableAnalysisRulePolicyV1
+      end
+      class Unknown < ConfiguredTableAnalysisRulePolicyV1
+      end
+    end
+
+    class ConfiguredTableAssociation
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor configured_table_id: ::String
+      attr_accessor configured_table_arn: ::String
+      attr_accessor membership_id: ::String
+      attr_accessor membership_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ConfiguredTableAssociationSummary
+      attr_accessor configured_table_id: ::String
+      attr_accessor membership_id: ::String
+      attr_accessor membership_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ConfiguredTableSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor analysis_rule_types: ::Array[("AGGREGATION" | "LIST" | "CUSTOM")]
+      attr_accessor analysis_method: ("DIRECT_QUERY")
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("CONFIGURED_TABLE" | "COLLABORATION" | "MEMBERSHIP" | "CONFIGURED_TABLE_ASSOCIATION")
+      attr_accessor reason: ("ALREADY_EXISTS" | "SUBRESOURCES_EXIST" | "INVALID_STATE")
+      SENSITIVE: []
+    end
+
+    class CreateAnalysisTemplateInput
+      attr_accessor description: ::String
+      attr_accessor membership_identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor format: ("SQL")
+      attr_accessor source: Types::AnalysisSource
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor analysis_parameters: ::Array[Types::AnalysisParameter]
+      SENSITIVE: [:source]
+    end
+
+    class CreateAnalysisTemplateOutput
+      attr_accessor analysis_template: Types::AnalysisTemplate
+      SENSITIVE: []
+    end
+
+    class CreateCollaborationInput
+      attr_accessor members: ::Array[Types::MemberSpecification]
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor creator_member_abilities: ::Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS")]
+      attr_accessor creator_display_name: ::String
+      attr_accessor data_encryption_metadata: Types::DataEncryptionMetadata
+      attr_accessor query_log_status: ("ENABLED" | "DISABLED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor creator_payment_configuration: Types::PaymentConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateCollaborationOutput
+      attr_accessor collaboration: Types::Collaboration
+      SENSITIVE: []
+    end
+
+    class CreateConfiguredAudienceModelAssociationInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor configured_audience_model_arn: ::String
+      attr_accessor configured_audience_model_association_name: ::String
+      attr_accessor manage_resource_policies: bool
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConfiguredAudienceModelAssociationOutput
+      attr_accessor configured_audience_model_association: Types::ConfiguredAudienceModelAssociation
+      SENSITIVE: []
+    end
+
+    class CreateConfiguredTableAnalysisRuleInput
+      attr_accessor configured_table_identifier: ::String
+      attr_accessor analysis_rule_type: ("AGGREGATION" | "LIST" | "CUSTOM")
+      attr_accessor analysis_rule_policy: Types::ConfiguredTableAnalysisRulePolicy
+      SENSITIVE: []
+    end
+
+    class CreateConfiguredTableAnalysisRuleOutput
+      attr_accessor analysis_rule: Types::ConfiguredTableAnalysisRule
+      SENSITIVE: []
+    end
+
+    class CreateConfiguredTableAssociationInput
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor membership_identifier: ::String
+      attr_accessor configured_table_identifier: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateConfiguredTableAssociationOutput
+      attr_accessor configured_table_association: Types::ConfiguredTableAssociation
+      SENSITIVE: []
+    end
+
+    class CreateConfiguredTableInput
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor table_reference: Types::TableReference
+      attr_accessor allowed_columns: ::Array[::String]
+      attr_accessor analysis_method: ("DIRECT_QUERY")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateConfiguredTableOutput
+      attr_accessor configured_table: Types::ConfiguredTable
+      SENSITIVE: []
+    end
+
+    class CreateMembershipInput
+      attr_accessor collaboration_identifier: ::String
+      attr_accessor query_log_status: ("ENABLED" | "DISABLED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor default_result_configuration: Types::MembershipProtectedQueryResultConfiguration
+      attr_accessor payment_configuration: Types::MembershipPaymentConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateMembershipOutput
+      attr_accessor membership: Types::Membership
+      SENSITIVE: []
+    end
+
+    class CreatePrivacyBudgetTemplateInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor auto_refresh: ("CALENDAR_MONTH" | "NONE")
+      attr_accessor privacy_budget_type: ("DIFFERENTIAL_PRIVACY")
+      attr_accessor parameters: Types::PrivacyBudgetTemplateParametersInput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePrivacyBudgetTemplateOutput
+      attr_accessor privacy_budget_template: Types::PrivacyBudgetTemplate
+      SENSITIVE: []
+    end
+
+    class DataEncryptionMetadata
+      attr_accessor allow_cleartext: bool
+      attr_accessor allow_duplicates: bool
+      attr_accessor allow_joins_on_columns_with_different_names: bool
+      attr_accessor preserve_nulls: bool
+      SENSITIVE: []
+    end
+
+    class DeleteAnalysisTemplateInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor analysis_template_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAnalysisTemplateOutput < Aws::EmptyStructure
+    end
+
+    class DeleteCollaborationInput
+      attr_accessor collaboration_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCollaborationOutput < Aws::EmptyStructure
+    end
+
+    class DeleteConfiguredAudienceModelAssociationInput
+      attr_accessor configured_audience_model_association_identifier: ::String
+      attr_accessor membership_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConfiguredAudienceModelAssociationOutput < Aws::EmptyStructure
+    end
+
+    class DeleteConfiguredTableAnalysisRuleInput
+      attr_accessor configured_table_identifier: ::String
+      attr_accessor analysis_rule_type: ("AGGREGATION" | "LIST" | "CUSTOM")
+      SENSITIVE: []
+    end
+
+    class DeleteConfiguredTableAnalysisRuleOutput < Aws::EmptyStructure
+    end
+
+    class DeleteConfiguredTableAssociationInput
+      attr_accessor configured_table_association_identifier: ::String
+      attr_accessor membership_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConfiguredTableAssociationOutput < Aws::EmptyStructure
+    end
+
+    class DeleteConfiguredTableInput
+      attr_accessor configured_table_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConfiguredTableOutput < Aws::EmptyStructure
+    end
+
+    class DeleteMemberInput
+      attr_accessor collaboration_identifier: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMemberOutput < Aws::EmptyStructure
+    end
+
+    class DeleteMembershipInput
+      attr_accessor membership_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMembershipOutput < Aws::EmptyStructure
+    end
+
+    class DeletePrivacyBudgetTemplateInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor privacy_budget_template_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePrivacyBudgetTemplateOutput < Aws::EmptyStructure
+    end
+
+    class DifferentialPrivacyColumn
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DifferentialPrivacyConfiguration
+      attr_accessor columns: ::Array[Types::DifferentialPrivacyColumn]
+      SENSITIVE: []
+    end
+
+    class DifferentialPrivacyParameters
+      attr_accessor sensitivity_parameters: ::Array[Types::DifferentialPrivacySensitivityParameters]
+      SENSITIVE: []
+    end
+
+    class DifferentialPrivacyPreviewAggregation
+      attr_accessor type: ("AVG" | "COUNT" | "COUNT_DISTINCT" | "SUM" | "STDDEV")
+      attr_accessor max_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class DifferentialPrivacyPreviewParametersInput
+      attr_accessor epsilon: ::Integer
+      attr_accessor users_noise_per_query: ::Integer
+      SENSITIVE: []
+    end
+
+    class DifferentialPrivacyPrivacyBudget
+      attr_accessor aggregations: ::Array[Types::DifferentialPrivacyPrivacyBudgetAggregation]
+      attr_accessor epsilon: ::Integer
+      SENSITIVE: []
+    end
+
+    class DifferentialPrivacyPrivacyBudgetAggregation
+      attr_accessor type: ("AVG" | "COUNT" | "COUNT_DISTINCT" | "SUM" | "STDDEV")
+      attr_accessor max_count: ::Integer
+      attr_accessor remaining_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class DifferentialPrivacyPrivacyImpact
+      attr_accessor aggregations: ::Array[Types::DifferentialPrivacyPreviewAggregation]
+      SENSITIVE: []
+    end
+
+    class DifferentialPrivacySensitivityParameters
+      attr_accessor aggregation_type: ("AVG" | "COUNT" | "COUNT_DISTINCT" | "SUM" | "STDDEV")
+      attr_accessor aggregation_expression: ::String
+      attr_accessor user_contribution_limit: ::Integer
+      attr_accessor min_column_value: ::Float
+      attr_accessor max_column_value: ::Float
+      SENSITIVE: []
+    end
+
+    class DifferentialPrivacyTemplateParametersInput
+      attr_accessor epsilon: ::Integer
+      attr_accessor users_noise_per_query: ::Integer
+      SENSITIVE: []
+    end
+
+    class DifferentialPrivacyTemplateParametersOutput
+      attr_accessor epsilon: ::Integer
+      attr_accessor users_noise_per_query: ::Integer
+      SENSITIVE: []
+    end
+
+    class DifferentialPrivacyTemplateUpdateParameters
+      attr_accessor epsilon: ::Integer
+      attr_accessor users_noise_per_query: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetAnalysisTemplateInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor analysis_template_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetAnalysisTemplateOutput
+      attr_accessor analysis_template: Types::AnalysisTemplate
+      SENSITIVE: []
+    end
+
+    class GetCollaborationAnalysisTemplateInput
+      attr_accessor collaboration_identifier: ::String
+      attr_accessor analysis_template_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetCollaborationAnalysisTemplateOutput
+      attr_accessor collaboration_analysis_template: Types::CollaborationAnalysisTemplate
+      SENSITIVE: []
+    end
+
+    class GetCollaborationConfiguredAudienceModelAssociationInput
+      attr_accessor collaboration_identifier: ::String
+      attr_accessor configured_audience_model_association_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetCollaborationConfiguredAudienceModelAssociationOutput
+      attr_accessor collaboration_configured_audience_model_association: Types::CollaborationConfiguredAudienceModelAssociation
+      SENSITIVE: []
+    end
+
+    class GetCollaborationInput
+      attr_accessor collaboration_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetCollaborationOutput
+      attr_accessor collaboration: Types::Collaboration
+      SENSITIVE: []
+    end
+
+    class GetCollaborationPrivacyBudgetTemplateInput
+      attr_accessor collaboration_identifier: ::String
+      attr_accessor privacy_budget_template_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetCollaborationPrivacyBudgetTemplateOutput
+      attr_accessor collaboration_privacy_budget_template: Types::CollaborationPrivacyBudgetTemplate
+      SENSITIVE: []
+    end
+
+    class GetConfiguredAudienceModelAssociationInput
+      attr_accessor configured_audience_model_association_identifier: ::String
+      attr_accessor membership_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetConfiguredAudienceModelAssociationOutput
+      attr_accessor configured_audience_model_association: Types::ConfiguredAudienceModelAssociation
+      SENSITIVE: []
+    end
+
+    class GetConfiguredTableAnalysisRuleInput
+      attr_accessor configured_table_identifier: ::String
+      attr_accessor analysis_rule_type: ("AGGREGATION" | "LIST" | "CUSTOM")
+      SENSITIVE: []
+    end
+
+    class GetConfiguredTableAnalysisRuleOutput
+      attr_accessor analysis_rule: Types::ConfiguredTableAnalysisRule
+      SENSITIVE: []
+    end
+
+    class GetConfiguredTableAssociationInput
+      attr_accessor configured_table_association_identifier: ::String
+      attr_accessor membership_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetConfiguredTableAssociationOutput
+      attr_accessor configured_table_association: Types::ConfiguredTableAssociation
+      SENSITIVE: []
+    end
+
+    class GetConfiguredTableInput
+      attr_accessor configured_table_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetConfiguredTableOutput
+      attr_accessor configured_table: Types::ConfiguredTable
+      SENSITIVE: []
+    end
+
+    class GetMembershipInput
+      attr_accessor membership_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetMembershipOutput
+      attr_accessor membership: Types::Membership
+      SENSITIVE: []
+    end
+
+    class GetPrivacyBudgetTemplateInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor privacy_budget_template_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetPrivacyBudgetTemplateOutput
+      attr_accessor privacy_budget_template: Types::PrivacyBudgetTemplate
+      SENSITIVE: []
+    end
+
+    class GetProtectedQueryInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor protected_query_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetProtectedQueryOutput
+      attr_accessor protected_query: Types::ProtectedQuery
+      SENSITIVE: []
+    end
+
+    class GetSchemaAnalysisRuleInput
+      attr_accessor collaboration_identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("AGGREGATION" | "LIST" | "CUSTOM")
+      SENSITIVE: []
+    end
+
+    class GetSchemaAnalysisRuleOutput
+      attr_accessor analysis_rule: Types::AnalysisRule
+      SENSITIVE: []
+    end
+
+    class GetSchemaInput
+      attr_accessor collaboration_identifier: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetSchemaOutput
+      attr_accessor schema: Types::Schema
+      SENSITIVE: []
+    end
+
+    class GlueTableReference
+      attr_accessor table_name: ::String
+      attr_accessor database_name: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAnalysisTemplatesInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAnalysisTemplatesOutput
+      attr_accessor next_token: ::String
+      attr_accessor analysis_template_summaries: ::Array[Types::AnalysisTemplateSummary]
+      SENSITIVE: []
+    end
+
+    class ListCollaborationAnalysisTemplatesInput
+      attr_accessor collaboration_identifier: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCollaborationAnalysisTemplatesOutput
+      attr_accessor next_token: ::String
+      attr_accessor collaboration_analysis_template_summaries: ::Array[Types::CollaborationAnalysisTemplateSummary]
+      SENSITIVE: []
+    end
+
+    class ListCollaborationConfiguredAudienceModelAssociationsInput
+      attr_accessor collaboration_identifier: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCollaborationConfiguredAudienceModelAssociationsOutput
+      attr_accessor collaboration_configured_audience_model_association_summaries: ::Array[Types::CollaborationConfiguredAudienceModelAssociationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCollaborationPrivacyBudgetTemplatesInput
+      attr_accessor collaboration_identifier: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCollaborationPrivacyBudgetTemplatesOutput
+      attr_accessor next_token: ::String
+      attr_accessor collaboration_privacy_budget_template_summaries: ::Array[Types::CollaborationPrivacyBudgetTemplateSummary]
+      SENSITIVE: []
+    end
+
+    class ListCollaborationPrivacyBudgetsInput
+      attr_accessor collaboration_identifier: ::String
+      attr_accessor privacy_budget_type: ("DIFFERENTIAL_PRIVACY")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCollaborationPrivacyBudgetsOutput
+      attr_accessor collaboration_privacy_budget_summaries: ::Array[Types::CollaborationPrivacyBudgetSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCollaborationsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor member_status: ("INVITED" | "ACTIVE")
+      SENSITIVE: []
+    end
+
+    class ListCollaborationsOutput
+      attr_accessor next_token: ::String
+      attr_accessor collaboration_list: ::Array[Types::CollaborationSummary]
+      SENSITIVE: []
+    end
+
+    class ListConfiguredAudienceModelAssociationsInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListConfiguredAudienceModelAssociationsOutput
+      attr_accessor configured_audience_model_association_summaries: ::Array[Types::ConfiguredAudienceModelAssociationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConfiguredTableAssociationsInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListConfiguredTableAssociationsOutput
+      attr_accessor configured_table_association_summaries: ::Array[Types::ConfiguredTableAssociationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConfiguredTablesInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListConfiguredTablesOutput
+      attr_accessor configured_table_summaries: ::Array[Types::ConfiguredTableSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMembersInput
+      attr_accessor collaboration_identifier: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMembersOutput
+      attr_accessor next_token: ::String
+      attr_accessor member_summaries: ::Array[Types::MemberSummary]
+      SENSITIVE: []
+    end
+
+    class ListMembershipsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor status: ("ACTIVE" | "REMOVED" | "COLLABORATION_DELETED")
+      SENSITIVE: []
+    end
+
+    class ListMembershipsOutput
+      attr_accessor next_token: ::String
+      attr_accessor membership_summaries: ::Array[Types::MembershipSummary]
+      SENSITIVE: []
+    end
+
+    class ListPrivacyBudgetTemplatesInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPrivacyBudgetTemplatesOutput
+      attr_accessor next_token: ::String
+      attr_accessor privacy_budget_template_summaries: ::Array[Types::PrivacyBudgetTemplateSummary]
+      SENSITIVE: []
+    end
+
+    class ListPrivacyBudgetsInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor privacy_budget_type: ("DIFFERENTIAL_PRIVACY")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPrivacyBudgetsOutput
+      attr_accessor privacy_budget_summaries: ::Array[Types::PrivacyBudgetSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProtectedQueriesInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor status: ("SUBMITTED" | "STARTED" | "CANCELLED" | "CANCELLING" | "FAILED" | "SUCCESS" | "TIMED_OUT")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListProtectedQueriesOutput
+      attr_accessor next_token: ::String
+      attr_accessor protected_queries: ::Array[Types::ProtectedQuerySummary]
+      SENSITIVE: []
+    end
+
+    class ListSchemasInput
+      attr_accessor collaboration_identifier: ::String
+      attr_accessor schema_type: ("TABLE")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSchemasOutput
+      attr_accessor schema_summaries: ::Array[Types::SchemaSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class MemberSpecification
+      attr_accessor account_id: ::String
+      attr_accessor member_abilities: ::Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS")]
+      attr_accessor display_name: ::String
+      attr_accessor payment_configuration: Types::PaymentConfiguration
+      SENSITIVE: []
+    end
+
+    class MemberSummary
+      attr_accessor account_id: ::String
+      attr_accessor status: ("INVITED" | "ACTIVE" | "LEFT" | "REMOVED")
+      attr_accessor display_name: ::String
+      attr_accessor abilities: ::Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS")]
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor membership_id: ::String
+      attr_accessor membership_arn: ::String
+      attr_accessor payment_configuration: Types::PaymentConfiguration
+      SENSITIVE: []
+    end
+
+    class Membership
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor collaboration_arn: ::String
+      attr_accessor collaboration_id: ::String
+      attr_accessor collaboration_creator_account_id: ::String
+      attr_accessor collaboration_creator_display_name: ::String
+      attr_accessor collaboration_name: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor status: ("ACTIVE" | "REMOVED" | "COLLABORATION_DELETED")
+      attr_accessor member_abilities: ::Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS")]
+      attr_accessor query_log_status: ("ENABLED" | "DISABLED")
+      attr_accessor default_result_configuration: Types::MembershipProtectedQueryResultConfiguration
+      attr_accessor payment_configuration: Types::MembershipPaymentConfiguration
+      SENSITIVE: []
+    end
+
+    class MembershipPaymentConfiguration
+      attr_accessor query_compute: Types::MembershipQueryComputePaymentConfig
+      SENSITIVE: []
+    end
+
+    class MembershipProtectedQueryOutputConfiguration
+      attr_accessor s3: Types::ProtectedQueryS3OutputConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class S3 < MembershipProtectedQueryOutputConfiguration
+      end
+      class Unknown < MembershipProtectedQueryOutputConfiguration
+      end
+    end
+
+    class MembershipProtectedQueryResultConfiguration
+      attr_accessor output_configuration: Types::MembershipProtectedQueryOutputConfiguration
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class MembershipQueryComputePaymentConfig
+      attr_accessor is_responsible: bool
+      SENSITIVE: []
+    end
+
+    class MembershipSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor collaboration_arn: ::String
+      attr_accessor collaboration_id: ::String
+      attr_accessor collaboration_creator_account_id: ::String
+      attr_accessor collaboration_creator_display_name: ::String
+      attr_accessor collaboration_name: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor status: ("ACTIVE" | "REMOVED" | "COLLABORATION_DELETED")
+      attr_accessor member_abilities: ::Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS")]
+      attr_accessor payment_configuration: Types::MembershipPaymentConfiguration
+      SENSITIVE: []
+    end
+
+    class PaymentConfiguration
+      attr_accessor query_compute: Types::QueryComputePaymentConfig
+      SENSITIVE: []
+    end
+
+    class PreviewPrivacyImpactInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor parameters: Types::PreviewPrivacyImpactParametersInput
+      SENSITIVE: []
+    end
+
+    class PreviewPrivacyImpactOutput
+      attr_accessor privacy_impact: Types::PrivacyImpact
+      SENSITIVE: []
+    end
+
+    class PreviewPrivacyImpactParametersInput
+      attr_accessor differential_privacy: Types::DifferentialPrivacyPreviewParametersInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DifferentialPrivacy < PreviewPrivacyImpactParametersInput
+      end
+      class Unknown < PreviewPrivacyImpactParametersInput
+      end
+    end
+
+    class PrivacyBudget
+      attr_accessor differential_privacy: Types::DifferentialPrivacyPrivacyBudget
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DifferentialPrivacy < PrivacyBudget
+      end
+      class Unknown < PrivacyBudget
+      end
+    end
+
+    class PrivacyBudgetSummary
+      attr_accessor id: ::String
+      attr_accessor privacy_budget_template_id: ::String
+      attr_accessor privacy_budget_template_arn: ::String
+      attr_accessor membership_id: ::String
+      attr_accessor membership_arn: ::String
+      attr_accessor collaboration_id: ::String
+      attr_accessor collaboration_arn: ::String
+      attr_accessor type: ("DIFFERENTIAL_PRIVACY")
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor budget: Types::PrivacyBudget
+      SENSITIVE: []
+    end
+
+    class PrivacyBudgetTemplate
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor membership_id: ::String
+      attr_accessor membership_arn: ::String
+      attr_accessor collaboration_id: ::String
+      attr_accessor collaboration_arn: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor privacy_budget_type: ("DIFFERENTIAL_PRIVACY")
+      attr_accessor auto_refresh: ("CALENDAR_MONTH" | "NONE")
+      attr_accessor parameters: Types::PrivacyBudgetTemplateParametersOutput
+      SENSITIVE: []
+    end
+
+    class PrivacyBudgetTemplateParametersInput
+      attr_accessor differential_privacy: Types::DifferentialPrivacyTemplateParametersInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DifferentialPrivacy < PrivacyBudgetTemplateParametersInput
+      end
+      class Unknown < PrivacyBudgetTemplateParametersInput
+      end
+    end
+
+    class PrivacyBudgetTemplateParametersOutput
+      attr_accessor differential_privacy: Types::DifferentialPrivacyTemplateParametersOutput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DifferentialPrivacy < PrivacyBudgetTemplateParametersOutput
+      end
+      class Unknown < PrivacyBudgetTemplateParametersOutput
+      end
+    end
+
+    class PrivacyBudgetTemplateSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor membership_id: ::String
+      attr_accessor membership_arn: ::String
+      attr_accessor collaboration_id: ::String
+      attr_accessor collaboration_arn: ::String
+      attr_accessor privacy_budget_type: ("DIFFERENTIAL_PRIVACY")
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class PrivacyBudgetTemplateUpdateParameters
+      attr_accessor differential_privacy: Types::DifferentialPrivacyTemplateUpdateParameters
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DifferentialPrivacy < PrivacyBudgetTemplateUpdateParameters
+      end
+      class Unknown < PrivacyBudgetTemplateUpdateParameters
+      end
+    end
+
+    class PrivacyImpact
+      attr_accessor differential_privacy: Types::DifferentialPrivacyPrivacyImpact
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DifferentialPrivacy < PrivacyImpact
+      end
+      class Unknown < PrivacyImpact
+      end
+    end
+
+    class ProtectedQuery
+      attr_accessor id: ::String
+      attr_accessor membership_id: ::String
+      attr_accessor membership_arn: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor sql_parameters: Types::ProtectedQuerySQLParameters
+      attr_accessor status: ("SUBMITTED" | "STARTED" | "CANCELLED" | "CANCELLING" | "FAILED" | "SUCCESS" | "TIMED_OUT")
+      attr_accessor result_configuration: Types::ProtectedQueryResultConfiguration
+      attr_accessor statistics: Types::ProtectedQueryStatistics
+      attr_accessor result: Types::ProtectedQueryResult
+      attr_accessor error: Types::ProtectedQueryError
+      attr_accessor differential_privacy: Types::DifferentialPrivacyParameters
+      SENSITIVE: [:sql_parameters]
+    end
+
+    class ProtectedQueryError
+      attr_accessor message: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class ProtectedQueryOutput
+      attr_accessor s3: Types::ProtectedQueryS3Output
+      attr_accessor member_list: ::Array[Types::ProtectedQuerySingleMemberOutput]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class S3 < ProtectedQueryOutput
+      end
+      class MemberList < ProtectedQueryOutput
+      end
+      class Unknown < ProtectedQueryOutput
+      end
+    end
+
+    class ProtectedQueryOutputConfiguration
+      attr_accessor s3: Types::ProtectedQueryS3OutputConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class S3 < ProtectedQueryOutputConfiguration
+      end
+      class Unknown < ProtectedQueryOutputConfiguration
+      end
+    end
+
+    class ProtectedQueryResult
+      attr_accessor output: Types::ProtectedQueryOutput
+      SENSITIVE: []
+    end
+
+    class ProtectedQueryResultConfiguration
+      attr_accessor output_configuration: Types::ProtectedQueryOutputConfiguration
+      SENSITIVE: []
+    end
+
+    class ProtectedQueryS3Output
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
+    class ProtectedQueryS3OutputConfiguration
+      attr_accessor result_format: ("CSV" | "PARQUET")
+      attr_accessor bucket: ::String
+      attr_accessor key_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ProtectedQuerySQLParameters
+      attr_accessor query_string: ::String
+      attr_accessor analysis_template_arn: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ProtectedQuerySingleMemberOutput
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ProtectedQueryStatistics
+      attr_accessor total_duration_in_millis: ::Integer
+      SENSITIVE: []
+    end
+
+    class ProtectedQuerySummary
+      attr_accessor id: ::String
+      attr_accessor membership_id: ::String
+      attr_accessor membership_arn: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor status: ("SUBMITTED" | "STARTED" | "CANCELLED" | "CANCELLING" | "FAILED" | "SUCCESS" | "TIMED_OUT")
+      SENSITIVE: []
+    end
+
+    class QueryComputePaymentConfig
+      attr_accessor is_responsible: bool
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("CONFIGURED_TABLE" | "COLLABORATION" | "MEMBERSHIP" | "CONFIGURED_TABLE_ASSOCIATION")
+      SENSITIVE: []
+    end
+
+    class Schema
+      attr_accessor columns: ::Array[Types::Column]
+      attr_accessor partition_keys: ::Array[Types::Column]
+      attr_accessor analysis_rule_types: ::Array[("AGGREGATION" | "LIST" | "CUSTOM")]
+      attr_accessor analysis_method: ("DIRECT_QUERY")
+      attr_accessor creator_account_id: ::String
+      attr_accessor name: ::String
+      attr_accessor collaboration_id: ::String
+      attr_accessor collaboration_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor type: ("TABLE")
+      SENSITIVE: []
+    end
+
+    class SchemaSummary
+      attr_accessor name: ::String
+      attr_accessor type: ("TABLE")
+      attr_accessor creator_account_id: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor collaboration_id: ::String
+      attr_accessor collaboration_arn: ::String
+      attr_accessor analysis_rule_types: ::Array[("AGGREGATION" | "LIST" | "CUSTOM")]
+      attr_accessor analysis_method: ("DIRECT_QUERY")
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor quota_name: ::String
+      attr_accessor quota_value: ::Float
+      SENSITIVE: []
+    end
+
+    class StartProtectedQueryInput
+      attr_accessor type: ("SQL")
+      attr_accessor membership_identifier: ::String
+      attr_accessor sql_parameters: Types::ProtectedQuerySQLParameters
+      attr_accessor result_configuration: Types::ProtectedQueryResultConfiguration
+      SENSITIVE: [:sql_parameters]
+    end
+
+    class StartProtectedQueryOutput
+      attr_accessor protected_query: Types::ProtectedQuery
+      SENSITIVE: []
+    end
+
+    class TableReference
+      attr_accessor glue: Types::GlueTableReference
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Glue < TableReference
+      end
+      class Unknown < TableReference
+      end
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UpdateAnalysisTemplateInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor analysis_template_identifier: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAnalysisTemplateOutput
+      attr_accessor analysis_template: Types::AnalysisTemplate
+      SENSITIVE: []
+    end
+
+    class UpdateCollaborationInput
+      attr_accessor collaboration_identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCollaborationOutput
+      attr_accessor collaboration: Types::Collaboration
+      SENSITIVE: []
+    end
+
+    class UpdateConfiguredAudienceModelAssociationInput
+      attr_accessor configured_audience_model_association_identifier: ::String
+      attr_accessor membership_identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConfiguredAudienceModelAssociationOutput
+      attr_accessor configured_audience_model_association: Types::ConfiguredAudienceModelAssociation
+      SENSITIVE: []
+    end
+
+    class UpdateConfiguredTableAnalysisRuleInput
+      attr_accessor configured_table_identifier: ::String
+      attr_accessor analysis_rule_type: ("AGGREGATION" | "LIST" | "CUSTOM")
+      attr_accessor analysis_rule_policy: Types::ConfiguredTableAnalysisRulePolicy
+      SENSITIVE: []
+    end
+
+    class UpdateConfiguredTableAnalysisRuleOutput
+      attr_accessor analysis_rule: Types::ConfiguredTableAnalysisRule
+      SENSITIVE: []
+    end
+
+    class UpdateConfiguredTableAssociationInput
+      attr_accessor configured_table_association_identifier: ::String
+      attr_accessor membership_identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConfiguredTableAssociationOutput
+      attr_accessor configured_table_association: Types::ConfiguredTableAssociation
+      SENSITIVE: []
+    end
+
+    class UpdateConfiguredTableInput
+      attr_accessor configured_table_identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConfiguredTableOutput
+      attr_accessor configured_table: Types::ConfiguredTable
+      SENSITIVE: []
+    end
+
+    class UpdateMembershipInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor query_log_status: ("ENABLED" | "DISABLED")
+      attr_accessor default_result_configuration: Types::MembershipProtectedQueryResultConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateMembershipOutput
+      attr_accessor membership: Types::Membership
+      SENSITIVE: []
+    end
+
+    class UpdatePrivacyBudgetTemplateInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor privacy_budget_template_identifier: ::String
+      attr_accessor privacy_budget_type: ("DIFFERENTIAL_PRIVACY")
+      attr_accessor parameters: Types::PrivacyBudgetTemplateUpdateParameters
+      SENSITIVE: []
+    end
+
+    class UpdatePrivacyBudgetTemplateOutput
+      attr_accessor privacy_budget_template: Types::PrivacyBudgetTemplate
+      SENSITIVE: []
+    end
+
+    class UpdateProtectedQueryInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor protected_query_identifier: ::String
+      attr_accessor target_status: ("CANCELLED")
+      SENSITIVE: []
+    end
+
+    class UpdateProtectedQueryOutput
+      attr_accessor protected_query: Types::ProtectedQuery
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("FIELD_VALIDATION_FAILED" | "INVALID_CONFIGURATION" | "INVALID_QUERY" | "IAM_SYNCHRONIZATION_DELAY")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

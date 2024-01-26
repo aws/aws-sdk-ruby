@@ -2297,7 +2297,7 @@ module Aws::SageMaker
     end
 
     # Creates a `Domain`. A domain consists of an associated Amazon Elastic
-    # File System (EFS) volume, a list of authorized users, and a variety of
+    # File System volume, a list of authorized users, and a variety of
     # security, application, policy, and Amazon Virtual Private Cloud (VPC)
     # configurations. Users within a domain can share notebook files and
     # other artifacts with each other.
@@ -2317,8 +2317,8 @@ module Aws::SageMaker
     #
     # **VPC configuration**
     #
-    # All traffic between the domain and the EFS volume is through the
-    # specified VPC and subnets. For other traffic, you can specify the
+    # All traffic between the domain and the Amazon EFS volume is through
+    # the specified VPC and subnets. For other traffic, you can specify the
     # `AppNetworkAccessType` parameter. `AppNetworkAccessType` corresponds
     # to the network access type that you choose when you onboard to the
     # domain. The following options are available:
@@ -9689,6 +9689,32 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Deletes a hyperparameter tuning job. The
+    # `DeleteHyperParameterTuningJob` API deletes only the tuning job entry
+    # that was created in SageMaker when you called the
+    # `CreateHyperParameterTuningJob` API. It does not delete training jobs,
+    # artifacts, or the IAM role that you specified when creating the model.
+    #
+    # @option params [required, String] :hyper_parameter_tuning_job_name
+    #   The name of the hyperparameter tuning job that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_hyper_parameter_tuning_job({
+    #     hyper_parameter_tuning_job_name: "HyperParameterTuningJobName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteHyperParameterTuningJob AWS API Documentation
+    #
+    # @overload delete_hyper_parameter_tuning_job(params = {})
+    # @param [Hash] params ({})
+    def delete_hyper_parameter_tuning_job(params = {}, options = {})
+      req = build_request(:delete_hyper_parameter_tuning_job, params)
+      req.send_request(options)
+    end
+
     # Deletes a SageMaker image and all versions of the image. The container
     # images aren't deleted.
     #
@@ -14136,7 +14162,7 @@ module Aws::SageMaker
     # Gets a description for the specified model group.
     #
     # @option params [required, String] :model_package_group_name
-    #   The name of gthe model group to describe.
+    #   The name of the model group to describe.
     #
     # @return [Types::DescribeModelPackageGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -23712,15 +23738,18 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Deploys the new `EndpointConfig` specified in the request, switches to
-    # using newly created endpoint, and then deletes resources provisioned
-    # for the endpoint using the previous `EndpointConfig` (there is no
-    # availability loss).
+    # Deploys the `EndpointConfig` specified in the request to a new fleet
+    # of instances. SageMaker shifts endpoint traffic to the new instances
+    # with the updated endpoint configuration and then deletes the old
+    # instances using the previous `EndpointConfig` (there is no
+    # availability loss). For more information about how to control the
+    # update and traffic shifting process, see [ Update models in
+    # production][1].
     #
     # When SageMaker receives the request, it sets the endpoint status to
     # `Updating`. After updating the endpoint, it sets the status to
     # `InService`. To check the status of an endpoint, use the
-    # [DescribeEndpoint][1] API.
+    # [DescribeEndpoint][2] API.
     #
     # <note markdown="1"> You must not delete an `EndpointConfig` in use by an endpoint that is
     # live or while the `UpdateEndpoint` or `CreateEndpoint` operations are
@@ -23736,7 +23765,8 @@ module Aws::SageMaker
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpoint.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/deployment-guardrails.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpoint.html
     #
     # @option params [required, String] :endpoint_name
     #   The name of the endpoint whose configuration you want to update.
@@ -25896,7 +25926,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.229.0'
+      context[:gem_version] = '1.230.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

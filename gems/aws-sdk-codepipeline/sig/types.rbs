@@ -1,0 +1,1138 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CodePipeline
+  module Types
+
+    class AWSSessionCredentials
+      attr_accessor access_key_id: ::String
+      attr_accessor secret_access_key: ::String
+      attr_accessor session_token: ::String
+      SENSITIVE: [:access_key_id, :secret_access_key, :session_token]
+    end
+
+    class AcknowledgeJobInput
+      attr_accessor job_id: ::String
+      attr_accessor nonce: ::String
+      SENSITIVE: []
+    end
+
+    class AcknowledgeJobOutput
+      attr_accessor status: ("Created" | "Queued" | "Dispatched" | "InProgress" | "TimedOut" | "Succeeded" | "Failed")
+      SENSITIVE: []
+    end
+
+    class AcknowledgeThirdPartyJobInput
+      attr_accessor job_id: ::String
+      attr_accessor nonce: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class AcknowledgeThirdPartyJobOutput
+      attr_accessor status: ("Created" | "Queued" | "Dispatched" | "InProgress" | "TimedOut" | "Succeeded" | "Failed")
+      SENSITIVE: []
+    end
+
+    class ActionConfiguration
+      attr_accessor configuration: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ActionConfigurationProperty
+      attr_accessor name: ::String
+      attr_accessor required: bool
+      attr_accessor key: bool
+      attr_accessor secret: bool
+      attr_accessor queryable: bool
+      attr_accessor description: ::String
+      attr_accessor type: ("String" | "Number" | "Boolean")
+      SENSITIVE: []
+    end
+
+    class ActionContext
+      attr_accessor name: ::String
+      attr_accessor action_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class ActionDeclaration
+      attr_accessor name: ::String
+      attr_accessor action_type_id: Types::ActionTypeId
+      attr_accessor run_order: ::Integer
+      attr_accessor configuration: ::Hash[::String, ::String]
+      attr_accessor output_artifacts: ::Array[Types::OutputArtifact]
+      attr_accessor input_artifacts: ::Array[Types::InputArtifact]
+      attr_accessor role_arn: ::String
+      attr_accessor region: ::String
+      attr_accessor namespace: ::String
+      SENSITIVE: []
+    end
+
+    class ActionExecution
+      attr_accessor action_execution_id: ::String
+      attr_accessor status: ("InProgress" | "Abandoned" | "Succeeded" | "Failed")
+      attr_accessor summary: ::String
+      attr_accessor last_status_change: ::Time
+      attr_accessor token: ::String
+      attr_accessor last_updated_by: ::String
+      attr_accessor external_execution_id: ::String
+      attr_accessor external_execution_url: ::String
+      attr_accessor percent_complete: ::Integer
+      attr_accessor error_details: Types::ErrorDetails
+      SENSITIVE: []
+    end
+
+    class ActionExecutionDetail
+      attr_accessor pipeline_execution_id: ::String
+      attr_accessor action_execution_id: ::String
+      attr_accessor pipeline_version: ::Integer
+      attr_accessor stage_name: ::String
+      attr_accessor action_name: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor last_update_time: ::Time
+      attr_accessor status: ("InProgress" | "Abandoned" | "Succeeded" | "Failed")
+      attr_accessor input: Types::ActionExecutionInput
+      attr_accessor output: Types::ActionExecutionOutput
+      SENSITIVE: []
+    end
+
+    class ActionExecutionFilter
+      attr_accessor pipeline_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class ActionExecutionInput
+      attr_accessor action_type_id: Types::ActionTypeId
+      attr_accessor configuration: ::Hash[::String, ::String]
+      attr_accessor resolved_configuration: ::Hash[::String, ::String]
+      attr_accessor role_arn: ::String
+      attr_accessor region: ::String
+      attr_accessor input_artifacts: ::Array[Types::ArtifactDetail]
+      attr_accessor namespace: ::String
+      SENSITIVE: []
+    end
+
+    class ActionExecutionOutput
+      attr_accessor output_artifacts: ::Array[Types::ArtifactDetail]
+      attr_accessor execution_result: Types::ActionExecutionResult
+      attr_accessor output_variables: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ActionExecutionResult
+      attr_accessor external_execution_id: ::String
+      attr_accessor external_execution_summary: ::String
+      attr_accessor external_execution_url: ::String
+      SENSITIVE: []
+    end
+
+    class ActionNotFoundException < Aws::EmptyStructure
+    end
+
+    class ActionRevision
+      attr_accessor revision_id: ::String
+      attr_accessor revision_change_id: ::String
+      attr_accessor created: ::Time
+      SENSITIVE: []
+    end
+
+    class ActionState
+      attr_accessor action_name: ::String
+      attr_accessor current_revision: Types::ActionRevision
+      attr_accessor latest_execution: Types::ActionExecution
+      attr_accessor entity_url: ::String
+      attr_accessor revision_url: ::String
+      SENSITIVE: []
+    end
+
+    class ActionType
+      attr_accessor id: Types::ActionTypeId
+      attr_accessor settings: Types::ActionTypeSettings
+      attr_accessor action_configuration_properties: ::Array[Types::ActionConfigurationProperty]
+      attr_accessor input_artifact_details: Types::ArtifactDetails
+      attr_accessor output_artifact_details: Types::ArtifactDetails
+      SENSITIVE: []
+    end
+
+    class ActionTypeAlreadyExistsException < Aws::EmptyStructure
+    end
+
+    class ActionTypeArtifactDetails
+      attr_accessor minimum_count: ::Integer
+      attr_accessor maximum_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ActionTypeDeclaration
+      attr_accessor description: ::String
+      attr_accessor executor: Types::ActionTypeExecutor
+      attr_accessor id: Types::ActionTypeIdentifier
+      attr_accessor input_artifact_details: Types::ActionTypeArtifactDetails
+      attr_accessor output_artifact_details: Types::ActionTypeArtifactDetails
+      attr_accessor permissions: Types::ActionTypePermissions
+      attr_accessor properties: ::Array[Types::ActionTypeProperty]
+      attr_accessor urls: Types::ActionTypeUrls
+      SENSITIVE: []
+    end
+
+    class ActionTypeExecutor
+      attr_accessor configuration: Types::ExecutorConfiguration
+      attr_accessor type: ("JobWorker" | "Lambda")
+      attr_accessor policy_statements_template: ::String
+      attr_accessor job_timeout: ::Integer
+      SENSITIVE: []
+    end
+
+    class ActionTypeId
+      attr_accessor category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval")
+      attr_accessor owner: ("AWS" | "ThirdParty" | "Custom")
+      attr_accessor provider: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class ActionTypeIdentifier
+      attr_accessor category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval")
+      attr_accessor owner: ::String
+      attr_accessor provider: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class ActionTypeNotFoundException < Aws::EmptyStructure
+    end
+
+    class ActionTypePermissions
+      attr_accessor allowed_accounts: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ActionTypeProperty
+      attr_accessor name: ::String
+      attr_accessor optional: bool
+      attr_accessor key: bool
+      attr_accessor no_echo: bool
+      attr_accessor queryable: bool
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class ActionTypeSettings
+      attr_accessor third_party_configuration_url: ::String
+      attr_accessor entity_url_template: ::String
+      attr_accessor execution_url_template: ::String
+      attr_accessor revision_url_template: ::String
+      SENSITIVE: []
+    end
+
+    class ActionTypeUrls
+      attr_accessor configuration_url: ::String
+      attr_accessor entity_url_template: ::String
+      attr_accessor execution_url_template: ::String
+      attr_accessor revision_url_template: ::String
+      SENSITIVE: []
+    end
+
+    class ApprovalAlreadyCompletedException < Aws::EmptyStructure
+    end
+
+    class ApprovalResult
+      attr_accessor summary: ::String
+      attr_accessor status: ("Approved" | "Rejected")
+      SENSITIVE: []
+    end
+
+    class Artifact
+      attr_accessor name: ::String
+      attr_accessor revision: ::String
+      attr_accessor location: Types::ArtifactLocation
+      SENSITIVE: []
+    end
+
+    class ArtifactDetail
+      attr_accessor name: ::String
+      attr_accessor s3location: Types::S3Location
+      SENSITIVE: []
+    end
+
+    class ArtifactDetails
+      attr_accessor minimum_count: ::Integer
+      attr_accessor maximum_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ArtifactLocation
+      attr_accessor type: ("S3")
+      attr_accessor s3_location: Types::S3ArtifactLocation
+      SENSITIVE: []
+    end
+
+    class ArtifactRevision
+      attr_accessor name: ::String
+      attr_accessor revision_id: ::String
+      attr_accessor revision_change_identifier: ::String
+      attr_accessor revision_summary: ::String
+      attr_accessor created: ::Time
+      attr_accessor revision_url: ::String
+      SENSITIVE: []
+    end
+
+    class ArtifactStore
+      attr_accessor type: ("S3")
+      attr_accessor location: ::String
+      attr_accessor encryption_key: Types::EncryptionKey
+      SENSITIVE: []
+    end
+
+    class BlockerDeclaration
+      attr_accessor name: ::String
+      attr_accessor type: ("Schedule")
+      SENSITIVE: []
+    end
+
+    class ConcurrentModificationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCustomActionTypeInput
+      attr_accessor category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval")
+      attr_accessor provider: ::String
+      attr_accessor version: ::String
+      attr_accessor settings: Types::ActionTypeSettings
+      attr_accessor configuration_properties: ::Array[Types::ActionConfigurationProperty]
+      attr_accessor input_artifact_details: Types::ArtifactDetails
+      attr_accessor output_artifact_details: Types::ArtifactDetails
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateCustomActionTypeOutput
+      attr_accessor action_type: Types::ActionType
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreatePipelineInput
+      attr_accessor pipeline: Types::PipelineDeclaration
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreatePipelineOutput
+      attr_accessor pipeline: Types::PipelineDeclaration
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CurrentRevision
+      attr_accessor revision: ::String
+      attr_accessor change_identifier: ::String
+      attr_accessor created: ::Time
+      attr_accessor revision_summary: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCustomActionTypeInput
+      attr_accessor category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval")
+      attr_accessor provider: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePipelineInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWebhookInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWebhookOutput < Aws::EmptyStructure
+    end
+
+    class DeregisterWebhookWithThirdPartyInput
+      attr_accessor webhook_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterWebhookWithThirdPartyOutput < Aws::EmptyStructure
+    end
+
+    class DisableStageTransitionInput
+      attr_accessor pipeline_name: ::String
+      attr_accessor stage_name: ::String
+      attr_accessor transition_type: ("Inbound" | "Outbound")
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class DuplicatedStopRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EnableStageTransitionInput
+      attr_accessor pipeline_name: ::String
+      attr_accessor stage_name: ::String
+      attr_accessor transition_type: ("Inbound" | "Outbound")
+      SENSITIVE: []
+    end
+
+    class EncryptionKey
+      attr_accessor id: ::String
+      attr_accessor type: ("KMS")
+      SENSITIVE: []
+    end
+
+    class ErrorDetails
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ExecutionDetails
+      attr_accessor summary: ::String
+      attr_accessor external_execution_id: ::String
+      attr_accessor percent_complete: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExecutionTrigger
+      attr_accessor trigger_type: ("CreatePipeline" | "StartPipelineExecution" | "PollForSourceChanges" | "Webhook" | "CloudWatchEvent" | "PutActionRevision" | "WebhookV2")
+      attr_accessor trigger_detail: ::String
+      SENSITIVE: []
+    end
+
+    class ExecutorConfiguration
+      attr_accessor lambda_executor_configuration: Types::LambdaExecutorConfiguration
+      attr_accessor job_worker_executor_configuration: Types::JobWorkerExecutorConfiguration
+      SENSITIVE: []
+    end
+
+    class FailureDetails
+      attr_accessor type: ("JobFailed" | "ConfigurationError" | "PermissionError" | "RevisionOutOfSync" | "RevisionUnavailable" | "SystemUnavailable")
+      attr_accessor message: ::String
+      attr_accessor external_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetActionTypeInput
+      attr_accessor category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval")
+      attr_accessor owner: ::String
+      attr_accessor provider: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class GetActionTypeOutput
+      attr_accessor action_type: Types::ActionTypeDeclaration
+      SENSITIVE: []
+    end
+
+    class GetJobDetailsInput
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetJobDetailsOutput
+      attr_accessor job_details: Types::JobDetails
+      SENSITIVE: []
+    end
+
+    class GetPipelineExecutionInput
+      attr_accessor pipeline_name: ::String
+      attr_accessor pipeline_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPipelineExecutionOutput
+      attr_accessor pipeline_execution: Types::PipelineExecution
+      SENSITIVE: []
+    end
+
+    class GetPipelineInput
+      attr_accessor name: ::String
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetPipelineOutput
+      attr_accessor pipeline: Types::PipelineDeclaration
+      attr_accessor metadata: Types::PipelineMetadata
+      SENSITIVE: []
+    end
+
+    class GetPipelineStateInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetPipelineStateOutput
+      attr_accessor pipeline_name: ::String
+      attr_accessor pipeline_version: ::Integer
+      attr_accessor stage_states: ::Array[Types::StageState]
+      attr_accessor created: ::Time
+      attr_accessor updated: ::Time
+      SENSITIVE: []
+    end
+
+    class GetThirdPartyJobDetailsInput
+      attr_accessor job_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetThirdPartyJobDetailsOutput
+      attr_accessor job_details: Types::ThirdPartyJobDetails
+      SENSITIVE: []
+    end
+
+    class GitConfiguration
+      attr_accessor source_action_name: ::String
+      attr_accessor push: ::Array[Types::GitPushFilter]
+      SENSITIVE: []
+    end
+
+    class GitPushFilter
+      attr_accessor tags: Types::GitTagFilterCriteria
+      SENSITIVE: []
+    end
+
+    class GitTagFilterCriteria
+      attr_accessor includes: ::Array[::String]
+      attr_accessor excludes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class InputArtifact
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidActionDeclarationException < Aws::EmptyStructure
+    end
+
+    class InvalidApprovalTokenException < Aws::EmptyStructure
+    end
+
+    class InvalidArnException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidBlockerDeclarationException < Aws::EmptyStructure
+    end
+
+    class InvalidClientTokenException < Aws::EmptyStructure
+    end
+
+    class InvalidJobException < Aws::EmptyStructure
+    end
+
+    class InvalidJobStateException < Aws::EmptyStructure
+    end
+
+    class InvalidNextTokenException < Aws::EmptyStructure
+    end
+
+    class InvalidNonceException < Aws::EmptyStructure
+    end
+
+    class InvalidStageDeclarationException < Aws::EmptyStructure
+    end
+
+    class InvalidStructureException < Aws::EmptyStructure
+    end
+
+    class InvalidTagsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidWebhookAuthenticationParametersException < Aws::EmptyStructure
+    end
+
+    class InvalidWebhookFilterPatternException < Aws::EmptyStructure
+    end
+
+    class Job
+      attr_accessor id: ::String
+      attr_accessor data: Types::JobData
+      attr_accessor nonce: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class JobData
+      attr_accessor action_type_id: Types::ActionTypeId
+      attr_accessor action_configuration: Types::ActionConfiguration
+      attr_accessor pipeline_context: Types::PipelineContext
+      attr_accessor input_artifacts: ::Array[Types::Artifact]
+      attr_accessor output_artifacts: ::Array[Types::Artifact]
+      attr_accessor artifact_credentials: Types::AWSSessionCredentials
+      attr_accessor continuation_token: ::String
+      attr_accessor encryption_key: Types::EncryptionKey
+      SENSITIVE: [:artifact_credentials]
+    end
+
+    class JobDetails
+      attr_accessor id: ::String
+      attr_accessor data: Types::JobData
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class JobNotFoundException < Aws::EmptyStructure
+    end
+
+    class JobWorkerExecutorConfiguration
+      attr_accessor polling_accounts: ::Array[::String]
+      attr_accessor polling_service_principals: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class LambdaExecutorConfiguration
+      attr_accessor lambda_function_arn: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException < Aws::EmptyStructure
+    end
+
+    class ListActionExecutionsInput
+      attr_accessor pipeline_name: ::String
+      attr_accessor filter: Types::ActionExecutionFilter
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListActionExecutionsOutput
+      attr_accessor action_execution_details: ::Array[Types::ActionExecutionDetail]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListActionTypesInput
+      attr_accessor action_owner_filter: ("AWS" | "ThirdParty" | "Custom")
+      attr_accessor next_token: ::String
+      attr_accessor region_filter: ::String
+      SENSITIVE: []
+    end
+
+    class ListActionTypesOutput
+      attr_accessor action_types: ::Array[Types::ActionType]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPipelineExecutionsInput
+      attr_accessor pipeline_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPipelineExecutionsOutput
+      attr_accessor pipeline_execution_summaries: ::Array[Types::PipelineExecutionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPipelinesInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPipelinesOutput
+      attr_accessor pipelines: ::Array[Types::PipelineSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWebhookItem
+      attr_accessor definition: Types::WebhookDefinition
+      attr_accessor url: ::String
+      attr_accessor error_message: ::String
+      attr_accessor error_code: ::String
+      attr_accessor last_triggered: ::Time
+      attr_accessor arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListWebhooksInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListWebhooksOutput
+      attr_accessor webhooks: ::Array[Types::ListWebhookItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class NotLatestPipelineExecutionException < Aws::EmptyStructure
+    end
+
+    class OutputArtifact
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class OutputVariablesSizeExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PipelineContext
+      attr_accessor pipeline_name: ::String
+      attr_accessor stage: Types::StageContext
+      attr_accessor action: Types::ActionContext
+      attr_accessor pipeline_arn: ::String
+      attr_accessor pipeline_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class PipelineDeclaration
+      attr_accessor name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor artifact_store: Types::ArtifactStore
+      attr_accessor artifact_stores: ::Hash[::String, Types::ArtifactStore]
+      attr_accessor stages: ::Array[Types::StageDeclaration]
+      attr_accessor version: ::Integer
+      attr_accessor pipeline_type: ("V1" | "V2")
+      attr_accessor triggers: ::Array[Types::PipelineTriggerDeclaration]
+      attr_accessor variables: ::Array[Types::PipelineVariableDeclaration]
+      SENSITIVE: []
+    end
+
+    class PipelineExecution
+      attr_accessor pipeline_name: ::String
+      attr_accessor pipeline_version: ::Integer
+      attr_accessor pipeline_execution_id: ::String
+      attr_accessor status: ("Cancelled" | "InProgress" | "Stopped" | "Stopping" | "Succeeded" | "Superseded" | "Failed")
+      attr_accessor status_summary: ::String
+      attr_accessor artifact_revisions: ::Array[Types::ArtifactRevision]
+      attr_accessor trigger: Types::ExecutionTrigger
+      attr_accessor variables: ::Array[Types::ResolvedPipelineVariable]
+      SENSITIVE: []
+    end
+
+    class PipelineExecutionNotFoundException < Aws::EmptyStructure
+    end
+
+    class PipelineExecutionNotStoppableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PipelineExecutionSummary
+      attr_accessor pipeline_execution_id: ::String
+      attr_accessor status: ("Cancelled" | "InProgress" | "Stopped" | "Stopping" | "Succeeded" | "Superseded" | "Failed")
+      attr_accessor start_time: ::Time
+      attr_accessor last_update_time: ::Time
+      attr_accessor source_revisions: ::Array[Types::SourceRevision]
+      attr_accessor trigger: Types::ExecutionTrigger
+      attr_accessor stop_trigger: Types::StopExecutionTrigger
+      SENSITIVE: []
+    end
+
+    class PipelineMetadata
+      attr_accessor pipeline_arn: ::String
+      attr_accessor created: ::Time
+      attr_accessor updated: ::Time
+      attr_accessor polling_disabled_at: ::Time
+      SENSITIVE: []
+    end
+
+    class PipelineNameInUseException < Aws::EmptyStructure
+    end
+
+    class PipelineNotFoundException < Aws::EmptyStructure
+    end
+
+    class PipelineSummary
+      attr_accessor name: ::String
+      attr_accessor version: ::Integer
+      attr_accessor pipeline_type: ("V1" | "V2")
+      attr_accessor created: ::Time
+      attr_accessor updated: ::Time
+      SENSITIVE: []
+    end
+
+    class PipelineTriggerDeclaration
+      attr_accessor provider_type: ("CodeStarSourceConnection")
+      attr_accessor git_configuration: Types::GitConfiguration
+      SENSITIVE: []
+    end
+
+    class PipelineVariable
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class PipelineVariableDeclaration
+      attr_accessor name: ::String
+      attr_accessor default_value: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class PipelineVersionNotFoundException < Aws::EmptyStructure
+    end
+
+    class PollForJobsInput
+      attr_accessor action_type_id: Types::ActionTypeId
+      attr_accessor max_batch_size: ::Integer
+      attr_accessor query_param: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PollForJobsOutput
+      attr_accessor jobs: ::Array[Types::Job]
+      SENSITIVE: []
+    end
+
+    class PollForThirdPartyJobsInput
+      attr_accessor action_type_id: Types::ActionTypeId
+      attr_accessor max_batch_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class PollForThirdPartyJobsOutput
+      attr_accessor jobs: ::Array[Types::ThirdPartyJob]
+      SENSITIVE: []
+    end
+
+    class PutActionRevisionInput
+      attr_accessor pipeline_name: ::String
+      attr_accessor stage_name: ::String
+      attr_accessor action_name: ::String
+      attr_accessor action_revision: Types::ActionRevision
+      SENSITIVE: []
+    end
+
+    class PutActionRevisionOutput
+      attr_accessor new_revision: bool
+      attr_accessor pipeline_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutApprovalResultInput
+      attr_accessor pipeline_name: ::String
+      attr_accessor stage_name: ::String
+      attr_accessor action_name: ::String
+      attr_accessor result: Types::ApprovalResult
+      attr_accessor token: ::String
+      SENSITIVE: []
+    end
+
+    class PutApprovalResultOutput
+      attr_accessor approved_at: ::Time
+      SENSITIVE: []
+    end
+
+    class PutJobFailureResultInput
+      attr_accessor job_id: ::String
+      attr_accessor failure_details: Types::FailureDetails
+      SENSITIVE: []
+    end
+
+    class PutJobSuccessResultInput
+      attr_accessor job_id: ::String
+      attr_accessor current_revision: Types::CurrentRevision
+      attr_accessor continuation_token: ::String
+      attr_accessor execution_details: Types::ExecutionDetails
+      attr_accessor output_variables: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PutThirdPartyJobFailureResultInput
+      attr_accessor job_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor failure_details: Types::FailureDetails
+      SENSITIVE: []
+    end
+
+    class PutThirdPartyJobSuccessResultInput
+      attr_accessor job_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor current_revision: Types::CurrentRevision
+      attr_accessor continuation_token: ::String
+      attr_accessor execution_details: Types::ExecutionDetails
+      SENSITIVE: []
+    end
+
+    class PutWebhookInput
+      attr_accessor webhook: Types::WebhookDefinition
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PutWebhookOutput
+      attr_accessor webhook: Types::ListWebhookItem
+      SENSITIVE: []
+    end
+
+    class RegisterWebhookWithThirdPartyInput
+      attr_accessor webhook_name: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterWebhookWithThirdPartyOutput < Aws::EmptyStructure
+    end
+
+    class RequestFailedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResolvedPipelineVariable
+      attr_accessor name: ::String
+      attr_accessor resolved_value: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException < Aws::EmptyStructure
+    end
+
+    class RetryStageExecutionInput
+      attr_accessor pipeline_name: ::String
+      attr_accessor stage_name: ::String
+      attr_accessor pipeline_execution_id: ::String
+      attr_accessor retry_mode: ("FAILED_ACTIONS" | "ALL_ACTIONS")
+      SENSITIVE: []
+    end
+
+    class RetryStageExecutionOutput
+      attr_accessor pipeline_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class S3ArtifactLocation
+      attr_accessor bucket_name: ::String
+      attr_accessor object_key: ::String
+      SENSITIVE: []
+    end
+
+    class S3Location
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      SENSITIVE: []
+    end
+
+    class SourceRevision
+      attr_accessor action_name: ::String
+      attr_accessor revision_id: ::String
+      attr_accessor revision_summary: ::String
+      attr_accessor revision_url: ::String
+      SENSITIVE: []
+    end
+
+    class SourceRevisionOverride
+      attr_accessor action_name: ::String
+      attr_accessor revision_type: ("COMMIT_ID" | "IMAGE_DIGEST" | "S3_OBJECT_VERSION_ID")
+      attr_accessor revision_value: ::String
+      SENSITIVE: []
+    end
+
+    class StageContext
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class StageDeclaration
+      attr_accessor name: ::String
+      attr_accessor blockers: ::Array[Types::BlockerDeclaration]
+      attr_accessor actions: ::Array[Types::ActionDeclaration]
+      SENSITIVE: []
+    end
+
+    class StageExecution
+      attr_accessor pipeline_execution_id: ::String
+      attr_accessor status: ("Cancelled" | "InProgress" | "Failed" | "Stopped" | "Stopping" | "Succeeded")
+      SENSITIVE: []
+    end
+
+    class StageNotFoundException < Aws::EmptyStructure
+    end
+
+    class StageNotRetryableException < Aws::EmptyStructure
+    end
+
+    class StageState
+      attr_accessor stage_name: ::String
+      attr_accessor inbound_execution: Types::StageExecution
+      attr_accessor inbound_transition_state: Types::TransitionState
+      attr_accessor action_states: ::Array[Types::ActionState]
+      attr_accessor latest_execution: Types::StageExecution
+      SENSITIVE: []
+    end
+
+    class StartPipelineExecutionInput
+      attr_accessor name: ::String
+      attr_accessor variables: ::Array[Types::PipelineVariable]
+      attr_accessor client_request_token: ::String
+      attr_accessor source_revisions: ::Array[Types::SourceRevisionOverride]
+      SENSITIVE: []
+    end
+
+    class StartPipelineExecutionOutput
+      attr_accessor pipeline_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopExecutionTrigger
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class StopPipelineExecutionInput
+      attr_accessor pipeline_name: ::String
+      attr_accessor pipeline_execution_id: ::String
+      attr_accessor abandon: bool
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class StopPipelineExecutionOutput
+      attr_accessor pipeline_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class ThirdPartyJob
+      attr_accessor client_id: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class ThirdPartyJobData
+      attr_accessor action_type_id: Types::ActionTypeId
+      attr_accessor action_configuration: Types::ActionConfiguration
+      attr_accessor pipeline_context: Types::PipelineContext
+      attr_accessor input_artifacts: ::Array[Types::Artifact]
+      attr_accessor output_artifacts: ::Array[Types::Artifact]
+      attr_accessor artifact_credentials: Types::AWSSessionCredentials
+      attr_accessor continuation_token: ::String
+      attr_accessor encryption_key: Types::EncryptionKey
+      SENSITIVE: [:artifact_credentials]
+    end
+
+    class ThirdPartyJobDetails
+      attr_accessor id: ::String
+      attr_accessor data: Types::ThirdPartyJobData
+      attr_accessor nonce: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TransitionState
+      attr_accessor enabled: bool
+      attr_accessor last_changed_by: ::String
+      attr_accessor last_changed_at: ::Time
+      attr_accessor disabled_reason: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UpdateActionTypeInput
+      attr_accessor action_type: Types::ActionTypeDeclaration
+      SENSITIVE: []
+    end
+
+    class UpdatePipelineInput
+      attr_accessor pipeline: Types::PipelineDeclaration
+      SENSITIVE: []
+    end
+
+    class UpdatePipelineOutput
+      attr_accessor pipeline: Types::PipelineDeclaration
+      SENSITIVE: []
+    end
+
+    class ValidationException < Aws::EmptyStructure
+    end
+
+    class WebhookAuthConfiguration
+      attr_accessor allowed_ip_range: ::String
+      attr_accessor secret_token: ::String
+      SENSITIVE: []
+    end
+
+    class WebhookDefinition
+      attr_accessor name: ::String
+      attr_accessor target_pipeline: ::String
+      attr_accessor target_action: ::String
+      attr_accessor filters: ::Array[Types::WebhookFilterRule]
+      attr_accessor authentication: ("GITHUB_HMAC" | "IP" | "UNAUTHENTICATED")
+      attr_accessor authentication_configuration: Types::WebhookAuthConfiguration
+      SENSITIVE: []
+    end
+
+    class WebhookFilterRule
+      attr_accessor json_path: ::String
+      attr_accessor match_equals: ::String
+      SENSITIVE: []
+    end
+
+    class WebhookNotFoundException < Aws::EmptyStructure
+    end
+  end
+end

@@ -6477,7 +6477,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.113.0'
+      context[:gem_version] = '1.114.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

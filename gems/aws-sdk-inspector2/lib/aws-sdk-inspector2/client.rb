@@ -2018,7 +2018,8 @@ module Aws::Inspector2
     #
     # @example Response structure
     #
-    #   resp.ecr_configuration.rescan_duration_state.rescan_duration #=> String, one of "LIFETIME", "DAYS_30", "DAYS_180"
+    #   resp.ecr_configuration.rescan_duration_state.pull_date_rescan_duration #=> String, one of "DAYS_14", "DAYS_30", "DAYS_60", "DAYS_90", "DAYS_180"
+    #   resp.ecr_configuration.rescan_duration_state.rescan_duration #=> String, one of "LIFETIME", "DAYS_30", "DAYS_180", "DAYS_14", "DAYS_60", "DAYS_90"
     #   resp.ecr_configuration.rescan_duration_state.status #=> String, one of "SUCCESS", "PENDING", "FAILED"
     #   resp.ecr_configuration.rescan_duration_state.updated_at #=> Time
     #
@@ -2937,6 +2938,12 @@ module Aws::Inspector2
     #           value: "CoverageStringInput", # required
     #         },
     #       ],
+    #       image_pulled_at: [
+    #         {
+    #           end_inclusive: Time.now,
+    #           start_inclusive: Time.now,
+    #         },
+    #       ],
     #       lambda_function_name: [
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
@@ -3007,6 +3014,7 @@ module Aws::Inspector2
     #   resp.covered_resources[0].resource_metadata.ec2.platform #=> String, one of "WINDOWS", "LINUX", "UNKNOWN", "MACOS"
     #   resp.covered_resources[0].resource_metadata.ec2.tags #=> Hash
     #   resp.covered_resources[0].resource_metadata.ec2.tags["MapKey"] #=> String
+    #   resp.covered_resources[0].resource_metadata.ecr_image.image_pulled_at #=> Time
     #   resp.covered_resources[0].resource_metadata.ecr_image.tags #=> Array
     #   resp.covered_resources[0].resource_metadata.ecr_image.tags[0] #=> String
     #   resp.covered_resources[0].resource_metadata.ecr_repository.name #=> String
@@ -3083,6 +3091,12 @@ module Aws::Inspector2
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
     #           value: "CoverageStringInput", # required
+    #         },
+    #       ],
+    #       image_pulled_at: [
+    #         {
+    #           end_inclusive: Time.now,
+    #           start_inclusive: Time.now,
     #         },
     #       ],
     #       lambda_function_name: [
@@ -4741,7 +4755,8 @@ module Aws::Inspector2
     #
     #   resp = client.update_configuration({
     #     ecr_configuration: { # required
-    #       rescan_duration: "LIFETIME", # required, accepts LIFETIME, DAYS_30, DAYS_180
+    #       pull_date_rescan_duration: "DAYS_14", # accepts DAYS_14, DAYS_30, DAYS_60, DAYS_90, DAYS_180
+    #       rescan_duration: "LIFETIME", # required, accepts LIFETIME, DAYS_30, DAYS_180, DAYS_14, DAYS_60, DAYS_90
     #     },
     #   })
     #
@@ -4805,7 +4820,7 @@ module Aws::Inspector2
     end
 
     # Updates an encryption key. A `ResourceNotFoundException` means that an
-    # AWS owned key is being used for encryption.
+    # Amazon Web Services owned key is being used for encryption.
     #
     # @option params [required, String] :kms_key_id
     #   A KMS key ID for the encryption key.
@@ -5240,7 +5255,7 @@ module Aws::Inspector2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-inspector2'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

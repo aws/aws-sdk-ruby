@@ -1,0 +1,710 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Route53Domains
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AcceptDomainTransferFromAnotherAwsAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptDomainTransferFromAnotherAwsAccountResponse]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#accept_domain_transfer_from_another_aws_account-instance_method
+      def accept_domain_transfer_from_another_aws_account: (
+                                                             domain_name: ::String,
+                                                             password: ::String
+                                                           ) -> _AcceptDomainTransferFromAnotherAwsAccountResponseSuccess
+                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptDomainTransferFromAnotherAwsAccountResponseSuccess
+
+      interface _AssociateDelegationSignerToDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateDelegationSignerToDomainResponse]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#associate_delegation_signer_to_domain-instance_method
+      def associate_delegation_signer_to_domain: (
+                                                   domain_name: ::String,
+                                                   signing_attributes: {
+                                                     algorithm: ::Integer?,
+                                                     flags: ::Integer?,
+                                                     public_key: ::String?
+                                                   }
+                                                 ) -> _AssociateDelegationSignerToDomainResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateDelegationSignerToDomainResponseSuccess
+
+      interface _CancelDomainTransferToAnotherAwsAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelDomainTransferToAnotherAwsAccountResponse]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#cancel_domain_transfer_to_another_aws_account-instance_method
+      def cancel_domain_transfer_to_another_aws_account: (
+                                                           domain_name: ::String
+                                                         ) -> _CancelDomainTransferToAnotherAwsAccountResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelDomainTransferToAnotherAwsAccountResponseSuccess
+
+      interface _CheckDomainAvailabilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CheckDomainAvailabilityResponse]
+        def availability: () -> ("AVAILABLE" | "AVAILABLE_RESERVED" | "AVAILABLE_PREORDER" | "UNAVAILABLE" | "UNAVAILABLE_PREMIUM" | "UNAVAILABLE_RESTRICTED" | "RESERVED" | "DONT_KNOW")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#check_domain_availability-instance_method
+      def check_domain_availability: (
+                                       domain_name: ::String,
+                                       ?idn_lang_code: ::String
+                                     ) -> _CheckDomainAvailabilityResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CheckDomainAvailabilityResponseSuccess
+
+      interface _CheckDomainTransferabilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CheckDomainTransferabilityResponse]
+        def transferability: () -> Types::DomainTransferability
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#check_domain_transferability-instance_method
+      def check_domain_transferability: (
+                                          domain_name: ::String,
+                                          ?auth_code: ::String
+                                        ) -> _CheckDomainTransferabilityResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CheckDomainTransferabilityResponseSuccess
+
+      interface _DeleteDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDomainResponse]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#delete_domain-instance_method
+      def delete_domain: (
+                           domain_name: ::String
+                         ) -> _DeleteDomainResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDomainResponseSuccess
+
+      interface _DeleteTagsForDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTagsForDomainResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#delete_tags_for_domain-instance_method
+      def delete_tags_for_domain: (
+                                    domain_name: ::String,
+                                    tags_to_delete: Array[::String]
+                                  ) -> _DeleteTagsForDomainResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTagsForDomainResponseSuccess
+
+      interface _DisableDomainAutoRenewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableDomainAutoRenewResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#disable_domain_auto_renew-instance_method
+      def disable_domain_auto_renew: (
+                                       domain_name: ::String
+                                     ) -> _DisableDomainAutoRenewResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableDomainAutoRenewResponseSuccess
+
+      interface _DisableDomainTransferLockResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableDomainTransferLockResponse]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#disable_domain_transfer_lock-instance_method
+      def disable_domain_transfer_lock: (
+                                          domain_name: ::String
+                                        ) -> _DisableDomainTransferLockResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableDomainTransferLockResponseSuccess
+
+      interface _DisassociateDelegationSignerFromDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateDelegationSignerFromDomainResponse]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#disassociate_delegation_signer_from_domain-instance_method
+      def disassociate_delegation_signer_from_domain: (
+                                                        domain_name: ::String,
+                                                        id: ::String
+                                                      ) -> _DisassociateDelegationSignerFromDomainResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateDelegationSignerFromDomainResponseSuccess
+
+      interface _EnableDomainAutoRenewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableDomainAutoRenewResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#enable_domain_auto_renew-instance_method
+      def enable_domain_auto_renew: (
+                                      domain_name: ::String
+                                    ) -> _EnableDomainAutoRenewResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableDomainAutoRenewResponseSuccess
+
+      interface _EnableDomainTransferLockResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableDomainTransferLockResponse]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#enable_domain_transfer_lock-instance_method
+      def enable_domain_transfer_lock: (
+                                         domain_name: ::String
+                                       ) -> _EnableDomainTransferLockResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableDomainTransferLockResponseSuccess
+
+      interface _GetContactReachabilityStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContactReachabilityStatusResponse]
+        def domain_name: () -> ::String
+        def status: () -> ("PENDING" | "DONE" | "EXPIRED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#get_contact_reachability_status-instance_method
+      def get_contact_reachability_status: (
+                                             ?domain_name: ::String
+                                           ) -> _GetContactReachabilityStatusResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContactReachabilityStatusResponseSuccess
+
+      interface _GetDomainDetailResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainDetailResponse]
+        def domain_name: () -> ::String
+        def nameservers: () -> ::Array[Types::Nameserver]
+        def auto_renew: () -> bool
+        def admin_contact: () -> Types::ContactDetail
+        def registrant_contact: () -> Types::ContactDetail
+        def tech_contact: () -> Types::ContactDetail
+        def admin_privacy: () -> bool
+        def registrant_privacy: () -> bool
+        def tech_privacy: () -> bool
+        def registrar_name: () -> ::String
+        def who_is_server: () -> ::String
+        def registrar_url: () -> ::String
+        def abuse_contact_email: () -> ::String
+        def abuse_contact_phone: () -> ::String
+        def registry_domain_id: () -> ::String
+        def creation_date: () -> ::Time
+        def updated_date: () -> ::Time
+        def expiration_date: () -> ::Time
+        def reseller: () -> ::String
+        def dns_sec: () -> ::String
+        def status_list: () -> ::Array[::String]
+        def dnssec_keys: () -> ::Array[Types::DnssecKey]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#get_domain_detail-instance_method
+      def get_domain_detail: (
+                               domain_name: ::String
+                             ) -> _GetDomainDetailResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainDetailResponseSuccess
+
+      interface _GetDomainSuggestionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainSuggestionsResponse]
+        def suggestions_list: () -> ::Array[Types::DomainSuggestion]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#get_domain_suggestions-instance_method
+      def get_domain_suggestions: (
+                                    domain_name: ::String,
+                                    suggestion_count: ::Integer,
+                                    only_available: bool
+                                  ) -> _GetDomainSuggestionsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainSuggestionsResponseSuccess
+
+      interface _GetOperationDetailResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOperationDetailResponse]
+        def operation_id: () -> ::String
+        def status: () -> ("SUBMITTED" | "IN_PROGRESS" | "ERROR" | "SUCCESSFUL" | "FAILED")
+        def message: () -> ::String
+        def domain_name: () -> ::String
+        def type: () -> ("REGISTER_DOMAIN" | "DELETE_DOMAIN" | "TRANSFER_IN_DOMAIN" | "UPDATE_DOMAIN_CONTACT" | "UPDATE_NAMESERVER" | "CHANGE_PRIVACY_PROTECTION" | "DOMAIN_LOCK" | "ENABLE_AUTORENEW" | "DISABLE_AUTORENEW" | "ADD_DNSSEC" | "REMOVE_DNSSEC" | "EXPIRE_DOMAIN" | "TRANSFER_OUT_DOMAIN" | "CHANGE_DOMAIN_OWNER" | "RENEW_DOMAIN" | "PUSH_DOMAIN" | "INTERNAL_TRANSFER_OUT_DOMAIN" | "INTERNAL_TRANSFER_IN_DOMAIN")
+        def submitted_date: () -> ::Time
+        def last_updated_date: () -> ::Time
+        def status_flag: () -> ("PENDING_ACCEPTANCE" | "PENDING_CUSTOMER_ACTION" | "PENDING_AUTHORIZATION" | "PENDING_PAYMENT_VERIFICATION" | "PENDING_SUPPORT_CASE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#get_operation_detail-instance_method
+      def get_operation_detail: (
+                                  operation_id: ::String
+                                ) -> _GetOperationDetailResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOperationDetailResponseSuccess
+
+      interface _ListDomainsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainsResponse]
+        def domains: () -> ::Array[Types::DomainSummary]
+        def next_page_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#list_domains-instance_method
+      def list_domains: (
+                          ?filter_conditions: Array[
+                            {
+                              name: ("DomainName" | "Expiry"),
+                              operator: ("LE" | "GE" | "BEGINS_WITH"),
+                              values: Array[::String]
+                            },
+                          ],
+                          ?sort_condition: {
+                            name: ("DomainName" | "Expiry"),
+                            sort_order: ("ASC" | "DESC")
+                          },
+                          ?marker: ::String,
+                          ?max_items: ::Integer
+                        ) -> _ListDomainsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainsResponseSuccess
+
+      interface _ListOperationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOperationsResponse]
+        def operations: () -> ::Array[Types::OperationSummary]
+        def next_page_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#list_operations-instance_method
+      def list_operations: (
+                             ?submitted_since: ::Time,
+                             ?marker: ::String,
+                             ?max_items: ::Integer,
+                             ?status: Array[("SUBMITTED" | "IN_PROGRESS" | "ERROR" | "SUCCESSFUL" | "FAILED")],
+                             ?type: Array[("REGISTER_DOMAIN" | "DELETE_DOMAIN" | "TRANSFER_IN_DOMAIN" | "UPDATE_DOMAIN_CONTACT" | "UPDATE_NAMESERVER" | "CHANGE_PRIVACY_PROTECTION" | "DOMAIN_LOCK" | "ENABLE_AUTORENEW" | "DISABLE_AUTORENEW" | "ADD_DNSSEC" | "REMOVE_DNSSEC" | "EXPIRE_DOMAIN" | "TRANSFER_OUT_DOMAIN" | "CHANGE_DOMAIN_OWNER" | "RENEW_DOMAIN" | "PUSH_DOMAIN" | "INTERNAL_TRANSFER_OUT_DOMAIN" | "INTERNAL_TRANSFER_IN_DOMAIN")],
+                             ?sort_by: ("SubmittedDate"),
+                             ?sort_order: ("ASC" | "DESC")
+                           ) -> _ListOperationsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOperationsResponseSuccess
+
+      interface _ListPricesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPricesResponse]
+        def prices: () -> ::Array[Types::DomainPrice]
+        def next_page_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#list_prices-instance_method
+      def list_prices: (
+                         ?tld: ::String,
+                         ?marker: ::String,
+                         ?max_items: ::Integer
+                       ) -> _ListPricesResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPricesResponseSuccess
+
+      interface _ListTagsForDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForDomainResponse]
+        def tag_list: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#list_tags_for_domain-instance_method
+      def list_tags_for_domain: (
+                                  domain_name: ::String
+                                ) -> _ListTagsForDomainResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForDomainResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#push_domain-instance_method
+      def push_domain: (
+                         domain_name: ::String,
+                         target: ::String
+                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _RegisterDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterDomainResponse]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#register_domain-instance_method
+      def register_domain: (
+                             domain_name: ::String,
+                             ?idn_lang_code: ::String,
+                             duration_in_years: ::Integer,
+                             ?auto_renew: bool,
+                             admin_contact: {
+                               first_name: ::String?,
+                               last_name: ::String?,
+                               contact_type: ("PERSON" | "COMPANY" | "ASSOCIATION" | "PUBLIC_BODY" | "RESELLER")?,
+                               organization_name: ::String?,
+                               address_line_1: ::String?,
+                               address_line_2: ::String?,
+                               city: ::String?,
+                               state: ::String?,
+                               country_code: ("AC" | "AD" | "AE" | "AF" | "AG" | "AI" | "AL" | "AM" | "AN" | "AO" | "AQ" | "AR" | "AS" | "AT" | "AU" | "AW" | "AX" | "AZ" | "BA" | "BB" | "BD" | "BE" | "BF" | "BG" | "BH" | "BI" | "BJ" | "BL" | "BM" | "BN" | "BO" | "BQ" | "BR" | "BS" | "BT" | "BV" | "BW" | "BY" | "BZ" | "CA" | "CC" | "CD" | "CF" | "CG" | "CH" | "CI" | "CK" | "CL" | "CM" | "CN" | "CO" | "CR" | "CU" | "CV" | "CW" | "CX" | "CY" | "CZ" | "DE" | "DJ" | "DK" | "DM" | "DO" | "DZ" | "EC" | "EE" | "EG" | "EH" | "ER" | "ES" | "ET" | "FI" | "FJ" | "FK" | "FM" | "FO" | "FR" | "GA" | "GB" | "GD" | "GE" | "GF" | "GG" | "GH" | "GI" | "GL" | "GM" | "GN" | "GP" | "GQ" | "GR" | "GS" | "GT" | "GU" | "GW" | "GY" | "HK" | "HM" | "HN" | "HR" | "HT" | "HU" | "ID" | "IE" | "IL" | "IM" | "IN" | "IO" | "IQ" | "IR" | "IS" | "IT" | "JE" | "JM" | "JO" | "JP" | "KE" | "KG" | "KH" | "KI" | "KM" | "KN" | "KP" | "KR" | "KW" | "KY" | "KZ" | "LA" | "LB" | "LC" | "LI" | "LK" | "LR" | "LS" | "LT" | "LU" | "LV" | "LY" | "MA" | "MC" | "MD" | "ME" | "MF" | "MG" | "MH" | "MK" | "ML" | "MM" | "MN" | "MO" | "MP" | "MQ" | "MR" | "MS" | "MT" | "MU" | "MV" | "MW" | "MX" | "MY" | "MZ" | "NA" | "NC" | "NE" | "NF" | "NG" | "NI" | "NL" | "NO" | "NP" | "NR" | "NU" | "NZ" | "OM" | "PA" | "PE" | "PF" | "PG" | "PH" | "PK" | "PL" | "PM" | "PN" | "PR" | "PS" | "PT" | "PW" | "PY" | "QA" | "RE" | "RO" | "RS" | "RU" | "RW" | "SA" | "SB" | "SC" | "SD" | "SE" | "SG" | "SH" | "SI" | "SJ" | "SK" | "SL" | "SM" | "SN" | "SO" | "SR" | "SS" | "ST" | "SV" | "SX" | "SY" | "SZ" | "TC" | "TD" | "TF" | "TG" | "TH" | "TJ" | "TK" | "TL" | "TM" | "TN" | "TO" | "TP" | "TR" | "TT" | "TV" | "TW" | "TZ" | "UA" | "UG" | "US" | "UY" | "UZ" | "VA" | "VC" | "VE" | "VG" | "VI" | "VN" | "VU" | "WF" | "WS" | "YE" | "YT" | "ZA" | "ZM" | "ZW")?,
+                               zip_code: ::String?,
+                               phone_number: ::String?,
+                               email: ::String?,
+                               fax: ::String?,
+                               extra_params: Array[
+                                 {
+                                   name: ("DUNS_NUMBER" | "BRAND_NUMBER" | "BIRTH_DEPARTMENT" | "BIRTH_DATE_IN_YYYY_MM_DD" | "BIRTH_COUNTRY" | "BIRTH_CITY" | "DOCUMENT_NUMBER" | "AU_ID_NUMBER" | "AU_ID_TYPE" | "CA_LEGAL_TYPE" | "CA_BUSINESS_ENTITY_TYPE" | "CA_LEGAL_REPRESENTATIVE" | "CA_LEGAL_REPRESENTATIVE_CAPACITY" | "ES_IDENTIFICATION" | "ES_IDENTIFICATION_TYPE" | "ES_LEGAL_FORM" | "FI_BUSINESS_NUMBER" | "FI_ID_NUMBER" | "FI_NATIONALITY" | "FI_ORGANIZATION_TYPE" | "IT_NATIONALITY" | "IT_PIN" | "IT_REGISTRANT_ENTITY_TYPE" | "RU_PASSPORT_DATA" | "SE_ID_NUMBER" | "SG_ID_NUMBER" | "VAT_NUMBER" | "UK_CONTACT_TYPE" | "UK_COMPANY_NUMBER" | "EU_COUNTRY_OF_CITIZENSHIP" | "AU_PRIORITY_TOKEN"),
+                                   value: ::String
+                                 },
+                               ]?
+                             },
+                             registrant_contact: {
+                               first_name: ::String?,
+                               last_name: ::String?,
+                               contact_type: ("PERSON" | "COMPANY" | "ASSOCIATION" | "PUBLIC_BODY" | "RESELLER")?,
+                               organization_name: ::String?,
+                               address_line_1: ::String?,
+                               address_line_2: ::String?,
+                               city: ::String?,
+                               state: ::String?,
+                               country_code: ("AC" | "AD" | "AE" | "AF" | "AG" | "AI" | "AL" | "AM" | "AN" | "AO" | "AQ" | "AR" | "AS" | "AT" | "AU" | "AW" | "AX" | "AZ" | "BA" | "BB" | "BD" | "BE" | "BF" | "BG" | "BH" | "BI" | "BJ" | "BL" | "BM" | "BN" | "BO" | "BQ" | "BR" | "BS" | "BT" | "BV" | "BW" | "BY" | "BZ" | "CA" | "CC" | "CD" | "CF" | "CG" | "CH" | "CI" | "CK" | "CL" | "CM" | "CN" | "CO" | "CR" | "CU" | "CV" | "CW" | "CX" | "CY" | "CZ" | "DE" | "DJ" | "DK" | "DM" | "DO" | "DZ" | "EC" | "EE" | "EG" | "EH" | "ER" | "ES" | "ET" | "FI" | "FJ" | "FK" | "FM" | "FO" | "FR" | "GA" | "GB" | "GD" | "GE" | "GF" | "GG" | "GH" | "GI" | "GL" | "GM" | "GN" | "GP" | "GQ" | "GR" | "GS" | "GT" | "GU" | "GW" | "GY" | "HK" | "HM" | "HN" | "HR" | "HT" | "HU" | "ID" | "IE" | "IL" | "IM" | "IN" | "IO" | "IQ" | "IR" | "IS" | "IT" | "JE" | "JM" | "JO" | "JP" | "KE" | "KG" | "KH" | "KI" | "KM" | "KN" | "KP" | "KR" | "KW" | "KY" | "KZ" | "LA" | "LB" | "LC" | "LI" | "LK" | "LR" | "LS" | "LT" | "LU" | "LV" | "LY" | "MA" | "MC" | "MD" | "ME" | "MF" | "MG" | "MH" | "MK" | "ML" | "MM" | "MN" | "MO" | "MP" | "MQ" | "MR" | "MS" | "MT" | "MU" | "MV" | "MW" | "MX" | "MY" | "MZ" | "NA" | "NC" | "NE" | "NF" | "NG" | "NI" | "NL" | "NO" | "NP" | "NR" | "NU" | "NZ" | "OM" | "PA" | "PE" | "PF" | "PG" | "PH" | "PK" | "PL" | "PM" | "PN" | "PR" | "PS" | "PT" | "PW" | "PY" | "QA" | "RE" | "RO" | "RS" | "RU" | "RW" | "SA" | "SB" | "SC" | "SD" | "SE" | "SG" | "SH" | "SI" | "SJ" | "SK" | "SL" | "SM" | "SN" | "SO" | "SR" | "SS" | "ST" | "SV" | "SX" | "SY" | "SZ" | "TC" | "TD" | "TF" | "TG" | "TH" | "TJ" | "TK" | "TL" | "TM" | "TN" | "TO" | "TP" | "TR" | "TT" | "TV" | "TW" | "TZ" | "UA" | "UG" | "US" | "UY" | "UZ" | "VA" | "VC" | "VE" | "VG" | "VI" | "VN" | "VU" | "WF" | "WS" | "YE" | "YT" | "ZA" | "ZM" | "ZW")?,
+                               zip_code: ::String?,
+                               phone_number: ::String?,
+                               email: ::String?,
+                               fax: ::String?,
+                               extra_params: Array[
+                                 {
+                                   name: ("DUNS_NUMBER" | "BRAND_NUMBER" | "BIRTH_DEPARTMENT" | "BIRTH_DATE_IN_YYYY_MM_DD" | "BIRTH_COUNTRY" | "BIRTH_CITY" | "DOCUMENT_NUMBER" | "AU_ID_NUMBER" | "AU_ID_TYPE" | "CA_LEGAL_TYPE" | "CA_BUSINESS_ENTITY_TYPE" | "CA_LEGAL_REPRESENTATIVE" | "CA_LEGAL_REPRESENTATIVE_CAPACITY" | "ES_IDENTIFICATION" | "ES_IDENTIFICATION_TYPE" | "ES_LEGAL_FORM" | "FI_BUSINESS_NUMBER" | "FI_ID_NUMBER" | "FI_NATIONALITY" | "FI_ORGANIZATION_TYPE" | "IT_NATIONALITY" | "IT_PIN" | "IT_REGISTRANT_ENTITY_TYPE" | "RU_PASSPORT_DATA" | "SE_ID_NUMBER" | "SG_ID_NUMBER" | "VAT_NUMBER" | "UK_CONTACT_TYPE" | "UK_COMPANY_NUMBER" | "EU_COUNTRY_OF_CITIZENSHIP" | "AU_PRIORITY_TOKEN"),
+                                   value: ::String
+                                 },
+                               ]?
+                             },
+                             tech_contact: {
+                               first_name: ::String?,
+                               last_name: ::String?,
+                               contact_type: ("PERSON" | "COMPANY" | "ASSOCIATION" | "PUBLIC_BODY" | "RESELLER")?,
+                               organization_name: ::String?,
+                               address_line_1: ::String?,
+                               address_line_2: ::String?,
+                               city: ::String?,
+                               state: ::String?,
+                               country_code: ("AC" | "AD" | "AE" | "AF" | "AG" | "AI" | "AL" | "AM" | "AN" | "AO" | "AQ" | "AR" | "AS" | "AT" | "AU" | "AW" | "AX" | "AZ" | "BA" | "BB" | "BD" | "BE" | "BF" | "BG" | "BH" | "BI" | "BJ" | "BL" | "BM" | "BN" | "BO" | "BQ" | "BR" | "BS" | "BT" | "BV" | "BW" | "BY" | "BZ" | "CA" | "CC" | "CD" | "CF" | "CG" | "CH" | "CI" | "CK" | "CL" | "CM" | "CN" | "CO" | "CR" | "CU" | "CV" | "CW" | "CX" | "CY" | "CZ" | "DE" | "DJ" | "DK" | "DM" | "DO" | "DZ" | "EC" | "EE" | "EG" | "EH" | "ER" | "ES" | "ET" | "FI" | "FJ" | "FK" | "FM" | "FO" | "FR" | "GA" | "GB" | "GD" | "GE" | "GF" | "GG" | "GH" | "GI" | "GL" | "GM" | "GN" | "GP" | "GQ" | "GR" | "GS" | "GT" | "GU" | "GW" | "GY" | "HK" | "HM" | "HN" | "HR" | "HT" | "HU" | "ID" | "IE" | "IL" | "IM" | "IN" | "IO" | "IQ" | "IR" | "IS" | "IT" | "JE" | "JM" | "JO" | "JP" | "KE" | "KG" | "KH" | "KI" | "KM" | "KN" | "KP" | "KR" | "KW" | "KY" | "KZ" | "LA" | "LB" | "LC" | "LI" | "LK" | "LR" | "LS" | "LT" | "LU" | "LV" | "LY" | "MA" | "MC" | "MD" | "ME" | "MF" | "MG" | "MH" | "MK" | "ML" | "MM" | "MN" | "MO" | "MP" | "MQ" | "MR" | "MS" | "MT" | "MU" | "MV" | "MW" | "MX" | "MY" | "MZ" | "NA" | "NC" | "NE" | "NF" | "NG" | "NI" | "NL" | "NO" | "NP" | "NR" | "NU" | "NZ" | "OM" | "PA" | "PE" | "PF" | "PG" | "PH" | "PK" | "PL" | "PM" | "PN" | "PR" | "PS" | "PT" | "PW" | "PY" | "QA" | "RE" | "RO" | "RS" | "RU" | "RW" | "SA" | "SB" | "SC" | "SD" | "SE" | "SG" | "SH" | "SI" | "SJ" | "SK" | "SL" | "SM" | "SN" | "SO" | "SR" | "SS" | "ST" | "SV" | "SX" | "SY" | "SZ" | "TC" | "TD" | "TF" | "TG" | "TH" | "TJ" | "TK" | "TL" | "TM" | "TN" | "TO" | "TP" | "TR" | "TT" | "TV" | "TW" | "TZ" | "UA" | "UG" | "US" | "UY" | "UZ" | "VA" | "VC" | "VE" | "VG" | "VI" | "VN" | "VU" | "WF" | "WS" | "YE" | "YT" | "ZA" | "ZM" | "ZW")?,
+                               zip_code: ::String?,
+                               phone_number: ::String?,
+                               email: ::String?,
+                               fax: ::String?,
+                               extra_params: Array[
+                                 {
+                                   name: ("DUNS_NUMBER" | "BRAND_NUMBER" | "BIRTH_DEPARTMENT" | "BIRTH_DATE_IN_YYYY_MM_DD" | "BIRTH_COUNTRY" | "BIRTH_CITY" | "DOCUMENT_NUMBER" | "AU_ID_NUMBER" | "AU_ID_TYPE" | "CA_LEGAL_TYPE" | "CA_BUSINESS_ENTITY_TYPE" | "CA_LEGAL_REPRESENTATIVE" | "CA_LEGAL_REPRESENTATIVE_CAPACITY" | "ES_IDENTIFICATION" | "ES_IDENTIFICATION_TYPE" | "ES_LEGAL_FORM" | "FI_BUSINESS_NUMBER" | "FI_ID_NUMBER" | "FI_NATIONALITY" | "FI_ORGANIZATION_TYPE" | "IT_NATIONALITY" | "IT_PIN" | "IT_REGISTRANT_ENTITY_TYPE" | "RU_PASSPORT_DATA" | "SE_ID_NUMBER" | "SG_ID_NUMBER" | "VAT_NUMBER" | "UK_CONTACT_TYPE" | "UK_COMPANY_NUMBER" | "EU_COUNTRY_OF_CITIZENSHIP" | "AU_PRIORITY_TOKEN"),
+                                   value: ::String
+                                 },
+                               ]?
+                             },
+                             ?privacy_protect_admin_contact: bool,
+                             ?privacy_protect_registrant_contact: bool,
+                             ?privacy_protect_tech_contact: bool
+                           ) -> _RegisterDomainResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterDomainResponseSuccess
+
+      interface _RejectDomainTransferFromAnotherAwsAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RejectDomainTransferFromAnotherAwsAccountResponse]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#reject_domain_transfer_from_another_aws_account-instance_method
+      def reject_domain_transfer_from_another_aws_account: (
+                                                             domain_name: ::String
+                                                           ) -> _RejectDomainTransferFromAnotherAwsAccountResponseSuccess
+                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectDomainTransferFromAnotherAwsAccountResponseSuccess
+
+      interface _RenewDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RenewDomainResponse]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#renew_domain-instance_method
+      def renew_domain: (
+                          domain_name: ::String,
+                          ?duration_in_years: ::Integer,
+                          current_expiry_year: ::Integer
+                        ) -> _RenewDomainResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RenewDomainResponseSuccess
+
+      interface _ResendContactReachabilityEmailResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResendContactReachabilityEmailResponse]
+        def domain_name: () -> ::String
+        def email_address: () -> ::String
+        def is_already_verified: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#resend_contact_reachability_email-instance_method
+      def resend_contact_reachability_email: (
+                                               ?domain_name: ::String
+                                             ) -> _ResendContactReachabilityEmailResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResendContactReachabilityEmailResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#resend_operation_authorization-instance_method
+      def resend_operation_authorization: (
+                                            operation_id: ::String
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _RetrieveDomainAuthCodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RetrieveDomainAuthCodeResponse]
+        def auth_code: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#retrieve_domain_auth_code-instance_method
+      def retrieve_domain_auth_code: (
+                                       domain_name: ::String
+                                     ) -> _RetrieveDomainAuthCodeResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RetrieveDomainAuthCodeResponseSuccess
+
+      interface _TransferDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TransferDomainResponse]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#transfer_domain-instance_method
+      def transfer_domain: (
+                             domain_name: ::String,
+                             ?idn_lang_code: ::String,
+                             duration_in_years: ::Integer,
+                             ?nameservers: Array[
+                               {
+                                 name: ::String,
+                                 glue_ips: Array[::String]?
+                               },
+                             ],
+                             ?auth_code: ::String,
+                             ?auto_renew: bool,
+                             admin_contact: {
+                               first_name: ::String?,
+                               last_name: ::String?,
+                               contact_type: ("PERSON" | "COMPANY" | "ASSOCIATION" | "PUBLIC_BODY" | "RESELLER")?,
+                               organization_name: ::String?,
+                               address_line_1: ::String?,
+                               address_line_2: ::String?,
+                               city: ::String?,
+                               state: ::String?,
+                               country_code: ("AC" | "AD" | "AE" | "AF" | "AG" | "AI" | "AL" | "AM" | "AN" | "AO" | "AQ" | "AR" | "AS" | "AT" | "AU" | "AW" | "AX" | "AZ" | "BA" | "BB" | "BD" | "BE" | "BF" | "BG" | "BH" | "BI" | "BJ" | "BL" | "BM" | "BN" | "BO" | "BQ" | "BR" | "BS" | "BT" | "BV" | "BW" | "BY" | "BZ" | "CA" | "CC" | "CD" | "CF" | "CG" | "CH" | "CI" | "CK" | "CL" | "CM" | "CN" | "CO" | "CR" | "CU" | "CV" | "CW" | "CX" | "CY" | "CZ" | "DE" | "DJ" | "DK" | "DM" | "DO" | "DZ" | "EC" | "EE" | "EG" | "EH" | "ER" | "ES" | "ET" | "FI" | "FJ" | "FK" | "FM" | "FO" | "FR" | "GA" | "GB" | "GD" | "GE" | "GF" | "GG" | "GH" | "GI" | "GL" | "GM" | "GN" | "GP" | "GQ" | "GR" | "GS" | "GT" | "GU" | "GW" | "GY" | "HK" | "HM" | "HN" | "HR" | "HT" | "HU" | "ID" | "IE" | "IL" | "IM" | "IN" | "IO" | "IQ" | "IR" | "IS" | "IT" | "JE" | "JM" | "JO" | "JP" | "KE" | "KG" | "KH" | "KI" | "KM" | "KN" | "KP" | "KR" | "KW" | "KY" | "KZ" | "LA" | "LB" | "LC" | "LI" | "LK" | "LR" | "LS" | "LT" | "LU" | "LV" | "LY" | "MA" | "MC" | "MD" | "ME" | "MF" | "MG" | "MH" | "MK" | "ML" | "MM" | "MN" | "MO" | "MP" | "MQ" | "MR" | "MS" | "MT" | "MU" | "MV" | "MW" | "MX" | "MY" | "MZ" | "NA" | "NC" | "NE" | "NF" | "NG" | "NI" | "NL" | "NO" | "NP" | "NR" | "NU" | "NZ" | "OM" | "PA" | "PE" | "PF" | "PG" | "PH" | "PK" | "PL" | "PM" | "PN" | "PR" | "PS" | "PT" | "PW" | "PY" | "QA" | "RE" | "RO" | "RS" | "RU" | "RW" | "SA" | "SB" | "SC" | "SD" | "SE" | "SG" | "SH" | "SI" | "SJ" | "SK" | "SL" | "SM" | "SN" | "SO" | "SR" | "SS" | "ST" | "SV" | "SX" | "SY" | "SZ" | "TC" | "TD" | "TF" | "TG" | "TH" | "TJ" | "TK" | "TL" | "TM" | "TN" | "TO" | "TP" | "TR" | "TT" | "TV" | "TW" | "TZ" | "UA" | "UG" | "US" | "UY" | "UZ" | "VA" | "VC" | "VE" | "VG" | "VI" | "VN" | "VU" | "WF" | "WS" | "YE" | "YT" | "ZA" | "ZM" | "ZW")?,
+                               zip_code: ::String?,
+                               phone_number: ::String?,
+                               email: ::String?,
+                               fax: ::String?,
+                               extra_params: Array[
+                                 {
+                                   name: ("DUNS_NUMBER" | "BRAND_NUMBER" | "BIRTH_DEPARTMENT" | "BIRTH_DATE_IN_YYYY_MM_DD" | "BIRTH_COUNTRY" | "BIRTH_CITY" | "DOCUMENT_NUMBER" | "AU_ID_NUMBER" | "AU_ID_TYPE" | "CA_LEGAL_TYPE" | "CA_BUSINESS_ENTITY_TYPE" | "CA_LEGAL_REPRESENTATIVE" | "CA_LEGAL_REPRESENTATIVE_CAPACITY" | "ES_IDENTIFICATION" | "ES_IDENTIFICATION_TYPE" | "ES_LEGAL_FORM" | "FI_BUSINESS_NUMBER" | "FI_ID_NUMBER" | "FI_NATIONALITY" | "FI_ORGANIZATION_TYPE" | "IT_NATIONALITY" | "IT_PIN" | "IT_REGISTRANT_ENTITY_TYPE" | "RU_PASSPORT_DATA" | "SE_ID_NUMBER" | "SG_ID_NUMBER" | "VAT_NUMBER" | "UK_CONTACT_TYPE" | "UK_COMPANY_NUMBER" | "EU_COUNTRY_OF_CITIZENSHIP" | "AU_PRIORITY_TOKEN"),
+                                   value: ::String
+                                 },
+                               ]?
+                             },
+                             registrant_contact: {
+                               first_name: ::String?,
+                               last_name: ::String?,
+                               contact_type: ("PERSON" | "COMPANY" | "ASSOCIATION" | "PUBLIC_BODY" | "RESELLER")?,
+                               organization_name: ::String?,
+                               address_line_1: ::String?,
+                               address_line_2: ::String?,
+                               city: ::String?,
+                               state: ::String?,
+                               country_code: ("AC" | "AD" | "AE" | "AF" | "AG" | "AI" | "AL" | "AM" | "AN" | "AO" | "AQ" | "AR" | "AS" | "AT" | "AU" | "AW" | "AX" | "AZ" | "BA" | "BB" | "BD" | "BE" | "BF" | "BG" | "BH" | "BI" | "BJ" | "BL" | "BM" | "BN" | "BO" | "BQ" | "BR" | "BS" | "BT" | "BV" | "BW" | "BY" | "BZ" | "CA" | "CC" | "CD" | "CF" | "CG" | "CH" | "CI" | "CK" | "CL" | "CM" | "CN" | "CO" | "CR" | "CU" | "CV" | "CW" | "CX" | "CY" | "CZ" | "DE" | "DJ" | "DK" | "DM" | "DO" | "DZ" | "EC" | "EE" | "EG" | "EH" | "ER" | "ES" | "ET" | "FI" | "FJ" | "FK" | "FM" | "FO" | "FR" | "GA" | "GB" | "GD" | "GE" | "GF" | "GG" | "GH" | "GI" | "GL" | "GM" | "GN" | "GP" | "GQ" | "GR" | "GS" | "GT" | "GU" | "GW" | "GY" | "HK" | "HM" | "HN" | "HR" | "HT" | "HU" | "ID" | "IE" | "IL" | "IM" | "IN" | "IO" | "IQ" | "IR" | "IS" | "IT" | "JE" | "JM" | "JO" | "JP" | "KE" | "KG" | "KH" | "KI" | "KM" | "KN" | "KP" | "KR" | "KW" | "KY" | "KZ" | "LA" | "LB" | "LC" | "LI" | "LK" | "LR" | "LS" | "LT" | "LU" | "LV" | "LY" | "MA" | "MC" | "MD" | "ME" | "MF" | "MG" | "MH" | "MK" | "ML" | "MM" | "MN" | "MO" | "MP" | "MQ" | "MR" | "MS" | "MT" | "MU" | "MV" | "MW" | "MX" | "MY" | "MZ" | "NA" | "NC" | "NE" | "NF" | "NG" | "NI" | "NL" | "NO" | "NP" | "NR" | "NU" | "NZ" | "OM" | "PA" | "PE" | "PF" | "PG" | "PH" | "PK" | "PL" | "PM" | "PN" | "PR" | "PS" | "PT" | "PW" | "PY" | "QA" | "RE" | "RO" | "RS" | "RU" | "RW" | "SA" | "SB" | "SC" | "SD" | "SE" | "SG" | "SH" | "SI" | "SJ" | "SK" | "SL" | "SM" | "SN" | "SO" | "SR" | "SS" | "ST" | "SV" | "SX" | "SY" | "SZ" | "TC" | "TD" | "TF" | "TG" | "TH" | "TJ" | "TK" | "TL" | "TM" | "TN" | "TO" | "TP" | "TR" | "TT" | "TV" | "TW" | "TZ" | "UA" | "UG" | "US" | "UY" | "UZ" | "VA" | "VC" | "VE" | "VG" | "VI" | "VN" | "VU" | "WF" | "WS" | "YE" | "YT" | "ZA" | "ZM" | "ZW")?,
+                               zip_code: ::String?,
+                               phone_number: ::String?,
+                               email: ::String?,
+                               fax: ::String?,
+                               extra_params: Array[
+                                 {
+                                   name: ("DUNS_NUMBER" | "BRAND_NUMBER" | "BIRTH_DEPARTMENT" | "BIRTH_DATE_IN_YYYY_MM_DD" | "BIRTH_COUNTRY" | "BIRTH_CITY" | "DOCUMENT_NUMBER" | "AU_ID_NUMBER" | "AU_ID_TYPE" | "CA_LEGAL_TYPE" | "CA_BUSINESS_ENTITY_TYPE" | "CA_LEGAL_REPRESENTATIVE" | "CA_LEGAL_REPRESENTATIVE_CAPACITY" | "ES_IDENTIFICATION" | "ES_IDENTIFICATION_TYPE" | "ES_LEGAL_FORM" | "FI_BUSINESS_NUMBER" | "FI_ID_NUMBER" | "FI_NATIONALITY" | "FI_ORGANIZATION_TYPE" | "IT_NATIONALITY" | "IT_PIN" | "IT_REGISTRANT_ENTITY_TYPE" | "RU_PASSPORT_DATA" | "SE_ID_NUMBER" | "SG_ID_NUMBER" | "VAT_NUMBER" | "UK_CONTACT_TYPE" | "UK_COMPANY_NUMBER" | "EU_COUNTRY_OF_CITIZENSHIP" | "AU_PRIORITY_TOKEN"),
+                                   value: ::String
+                                 },
+                               ]?
+                             },
+                             tech_contact: {
+                               first_name: ::String?,
+                               last_name: ::String?,
+                               contact_type: ("PERSON" | "COMPANY" | "ASSOCIATION" | "PUBLIC_BODY" | "RESELLER")?,
+                               organization_name: ::String?,
+                               address_line_1: ::String?,
+                               address_line_2: ::String?,
+                               city: ::String?,
+                               state: ::String?,
+                               country_code: ("AC" | "AD" | "AE" | "AF" | "AG" | "AI" | "AL" | "AM" | "AN" | "AO" | "AQ" | "AR" | "AS" | "AT" | "AU" | "AW" | "AX" | "AZ" | "BA" | "BB" | "BD" | "BE" | "BF" | "BG" | "BH" | "BI" | "BJ" | "BL" | "BM" | "BN" | "BO" | "BQ" | "BR" | "BS" | "BT" | "BV" | "BW" | "BY" | "BZ" | "CA" | "CC" | "CD" | "CF" | "CG" | "CH" | "CI" | "CK" | "CL" | "CM" | "CN" | "CO" | "CR" | "CU" | "CV" | "CW" | "CX" | "CY" | "CZ" | "DE" | "DJ" | "DK" | "DM" | "DO" | "DZ" | "EC" | "EE" | "EG" | "EH" | "ER" | "ES" | "ET" | "FI" | "FJ" | "FK" | "FM" | "FO" | "FR" | "GA" | "GB" | "GD" | "GE" | "GF" | "GG" | "GH" | "GI" | "GL" | "GM" | "GN" | "GP" | "GQ" | "GR" | "GS" | "GT" | "GU" | "GW" | "GY" | "HK" | "HM" | "HN" | "HR" | "HT" | "HU" | "ID" | "IE" | "IL" | "IM" | "IN" | "IO" | "IQ" | "IR" | "IS" | "IT" | "JE" | "JM" | "JO" | "JP" | "KE" | "KG" | "KH" | "KI" | "KM" | "KN" | "KP" | "KR" | "KW" | "KY" | "KZ" | "LA" | "LB" | "LC" | "LI" | "LK" | "LR" | "LS" | "LT" | "LU" | "LV" | "LY" | "MA" | "MC" | "MD" | "ME" | "MF" | "MG" | "MH" | "MK" | "ML" | "MM" | "MN" | "MO" | "MP" | "MQ" | "MR" | "MS" | "MT" | "MU" | "MV" | "MW" | "MX" | "MY" | "MZ" | "NA" | "NC" | "NE" | "NF" | "NG" | "NI" | "NL" | "NO" | "NP" | "NR" | "NU" | "NZ" | "OM" | "PA" | "PE" | "PF" | "PG" | "PH" | "PK" | "PL" | "PM" | "PN" | "PR" | "PS" | "PT" | "PW" | "PY" | "QA" | "RE" | "RO" | "RS" | "RU" | "RW" | "SA" | "SB" | "SC" | "SD" | "SE" | "SG" | "SH" | "SI" | "SJ" | "SK" | "SL" | "SM" | "SN" | "SO" | "SR" | "SS" | "ST" | "SV" | "SX" | "SY" | "SZ" | "TC" | "TD" | "TF" | "TG" | "TH" | "TJ" | "TK" | "TL" | "TM" | "TN" | "TO" | "TP" | "TR" | "TT" | "TV" | "TW" | "TZ" | "UA" | "UG" | "US" | "UY" | "UZ" | "VA" | "VC" | "VE" | "VG" | "VI" | "VN" | "VU" | "WF" | "WS" | "YE" | "YT" | "ZA" | "ZM" | "ZW")?,
+                               zip_code: ::String?,
+                               phone_number: ::String?,
+                               email: ::String?,
+                               fax: ::String?,
+                               extra_params: Array[
+                                 {
+                                   name: ("DUNS_NUMBER" | "BRAND_NUMBER" | "BIRTH_DEPARTMENT" | "BIRTH_DATE_IN_YYYY_MM_DD" | "BIRTH_COUNTRY" | "BIRTH_CITY" | "DOCUMENT_NUMBER" | "AU_ID_NUMBER" | "AU_ID_TYPE" | "CA_LEGAL_TYPE" | "CA_BUSINESS_ENTITY_TYPE" | "CA_LEGAL_REPRESENTATIVE" | "CA_LEGAL_REPRESENTATIVE_CAPACITY" | "ES_IDENTIFICATION" | "ES_IDENTIFICATION_TYPE" | "ES_LEGAL_FORM" | "FI_BUSINESS_NUMBER" | "FI_ID_NUMBER" | "FI_NATIONALITY" | "FI_ORGANIZATION_TYPE" | "IT_NATIONALITY" | "IT_PIN" | "IT_REGISTRANT_ENTITY_TYPE" | "RU_PASSPORT_DATA" | "SE_ID_NUMBER" | "SG_ID_NUMBER" | "VAT_NUMBER" | "UK_CONTACT_TYPE" | "UK_COMPANY_NUMBER" | "EU_COUNTRY_OF_CITIZENSHIP" | "AU_PRIORITY_TOKEN"),
+                                   value: ::String
+                                 },
+                               ]?
+                             },
+                             ?privacy_protect_admin_contact: bool,
+                             ?privacy_protect_registrant_contact: bool,
+                             ?privacy_protect_tech_contact: bool
+                           ) -> _TransferDomainResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TransferDomainResponseSuccess
+
+      interface _TransferDomainToAnotherAwsAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TransferDomainToAnotherAwsAccountResponse]
+        def operation_id: () -> ::String
+        def password: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#transfer_domain_to_another_aws_account-instance_method
+      def transfer_domain_to_another_aws_account: (
+                                                    domain_name: ::String,
+                                                    account_id: ::String
+                                                  ) -> _TransferDomainToAnotherAwsAccountResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TransferDomainToAnotherAwsAccountResponseSuccess
+
+      interface _UpdateDomainContactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDomainContactResponse]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#update_domain_contact-instance_method
+      def update_domain_contact: (
+                                   domain_name: ::String,
+                                   ?admin_contact: {
+                                     first_name: ::String?,
+                                     last_name: ::String?,
+                                     contact_type: ("PERSON" | "COMPANY" | "ASSOCIATION" | "PUBLIC_BODY" | "RESELLER")?,
+                                     organization_name: ::String?,
+                                     address_line_1: ::String?,
+                                     address_line_2: ::String?,
+                                     city: ::String?,
+                                     state: ::String?,
+                                     country_code: ("AC" | "AD" | "AE" | "AF" | "AG" | "AI" | "AL" | "AM" | "AN" | "AO" | "AQ" | "AR" | "AS" | "AT" | "AU" | "AW" | "AX" | "AZ" | "BA" | "BB" | "BD" | "BE" | "BF" | "BG" | "BH" | "BI" | "BJ" | "BL" | "BM" | "BN" | "BO" | "BQ" | "BR" | "BS" | "BT" | "BV" | "BW" | "BY" | "BZ" | "CA" | "CC" | "CD" | "CF" | "CG" | "CH" | "CI" | "CK" | "CL" | "CM" | "CN" | "CO" | "CR" | "CU" | "CV" | "CW" | "CX" | "CY" | "CZ" | "DE" | "DJ" | "DK" | "DM" | "DO" | "DZ" | "EC" | "EE" | "EG" | "EH" | "ER" | "ES" | "ET" | "FI" | "FJ" | "FK" | "FM" | "FO" | "FR" | "GA" | "GB" | "GD" | "GE" | "GF" | "GG" | "GH" | "GI" | "GL" | "GM" | "GN" | "GP" | "GQ" | "GR" | "GS" | "GT" | "GU" | "GW" | "GY" | "HK" | "HM" | "HN" | "HR" | "HT" | "HU" | "ID" | "IE" | "IL" | "IM" | "IN" | "IO" | "IQ" | "IR" | "IS" | "IT" | "JE" | "JM" | "JO" | "JP" | "KE" | "KG" | "KH" | "KI" | "KM" | "KN" | "KP" | "KR" | "KW" | "KY" | "KZ" | "LA" | "LB" | "LC" | "LI" | "LK" | "LR" | "LS" | "LT" | "LU" | "LV" | "LY" | "MA" | "MC" | "MD" | "ME" | "MF" | "MG" | "MH" | "MK" | "ML" | "MM" | "MN" | "MO" | "MP" | "MQ" | "MR" | "MS" | "MT" | "MU" | "MV" | "MW" | "MX" | "MY" | "MZ" | "NA" | "NC" | "NE" | "NF" | "NG" | "NI" | "NL" | "NO" | "NP" | "NR" | "NU" | "NZ" | "OM" | "PA" | "PE" | "PF" | "PG" | "PH" | "PK" | "PL" | "PM" | "PN" | "PR" | "PS" | "PT" | "PW" | "PY" | "QA" | "RE" | "RO" | "RS" | "RU" | "RW" | "SA" | "SB" | "SC" | "SD" | "SE" | "SG" | "SH" | "SI" | "SJ" | "SK" | "SL" | "SM" | "SN" | "SO" | "SR" | "SS" | "ST" | "SV" | "SX" | "SY" | "SZ" | "TC" | "TD" | "TF" | "TG" | "TH" | "TJ" | "TK" | "TL" | "TM" | "TN" | "TO" | "TP" | "TR" | "TT" | "TV" | "TW" | "TZ" | "UA" | "UG" | "US" | "UY" | "UZ" | "VA" | "VC" | "VE" | "VG" | "VI" | "VN" | "VU" | "WF" | "WS" | "YE" | "YT" | "ZA" | "ZM" | "ZW")?,
+                                     zip_code: ::String?,
+                                     phone_number: ::String?,
+                                     email: ::String?,
+                                     fax: ::String?,
+                                     extra_params: Array[
+                                       {
+                                         name: ("DUNS_NUMBER" | "BRAND_NUMBER" | "BIRTH_DEPARTMENT" | "BIRTH_DATE_IN_YYYY_MM_DD" | "BIRTH_COUNTRY" | "BIRTH_CITY" | "DOCUMENT_NUMBER" | "AU_ID_NUMBER" | "AU_ID_TYPE" | "CA_LEGAL_TYPE" | "CA_BUSINESS_ENTITY_TYPE" | "CA_LEGAL_REPRESENTATIVE" | "CA_LEGAL_REPRESENTATIVE_CAPACITY" | "ES_IDENTIFICATION" | "ES_IDENTIFICATION_TYPE" | "ES_LEGAL_FORM" | "FI_BUSINESS_NUMBER" | "FI_ID_NUMBER" | "FI_NATIONALITY" | "FI_ORGANIZATION_TYPE" | "IT_NATIONALITY" | "IT_PIN" | "IT_REGISTRANT_ENTITY_TYPE" | "RU_PASSPORT_DATA" | "SE_ID_NUMBER" | "SG_ID_NUMBER" | "VAT_NUMBER" | "UK_CONTACT_TYPE" | "UK_COMPANY_NUMBER" | "EU_COUNTRY_OF_CITIZENSHIP" | "AU_PRIORITY_TOKEN"),
+                                         value: ::String
+                                       },
+                                     ]?
+                                   },
+                                   ?registrant_contact: {
+                                     first_name: ::String?,
+                                     last_name: ::String?,
+                                     contact_type: ("PERSON" | "COMPANY" | "ASSOCIATION" | "PUBLIC_BODY" | "RESELLER")?,
+                                     organization_name: ::String?,
+                                     address_line_1: ::String?,
+                                     address_line_2: ::String?,
+                                     city: ::String?,
+                                     state: ::String?,
+                                     country_code: ("AC" | "AD" | "AE" | "AF" | "AG" | "AI" | "AL" | "AM" | "AN" | "AO" | "AQ" | "AR" | "AS" | "AT" | "AU" | "AW" | "AX" | "AZ" | "BA" | "BB" | "BD" | "BE" | "BF" | "BG" | "BH" | "BI" | "BJ" | "BL" | "BM" | "BN" | "BO" | "BQ" | "BR" | "BS" | "BT" | "BV" | "BW" | "BY" | "BZ" | "CA" | "CC" | "CD" | "CF" | "CG" | "CH" | "CI" | "CK" | "CL" | "CM" | "CN" | "CO" | "CR" | "CU" | "CV" | "CW" | "CX" | "CY" | "CZ" | "DE" | "DJ" | "DK" | "DM" | "DO" | "DZ" | "EC" | "EE" | "EG" | "EH" | "ER" | "ES" | "ET" | "FI" | "FJ" | "FK" | "FM" | "FO" | "FR" | "GA" | "GB" | "GD" | "GE" | "GF" | "GG" | "GH" | "GI" | "GL" | "GM" | "GN" | "GP" | "GQ" | "GR" | "GS" | "GT" | "GU" | "GW" | "GY" | "HK" | "HM" | "HN" | "HR" | "HT" | "HU" | "ID" | "IE" | "IL" | "IM" | "IN" | "IO" | "IQ" | "IR" | "IS" | "IT" | "JE" | "JM" | "JO" | "JP" | "KE" | "KG" | "KH" | "KI" | "KM" | "KN" | "KP" | "KR" | "KW" | "KY" | "KZ" | "LA" | "LB" | "LC" | "LI" | "LK" | "LR" | "LS" | "LT" | "LU" | "LV" | "LY" | "MA" | "MC" | "MD" | "ME" | "MF" | "MG" | "MH" | "MK" | "ML" | "MM" | "MN" | "MO" | "MP" | "MQ" | "MR" | "MS" | "MT" | "MU" | "MV" | "MW" | "MX" | "MY" | "MZ" | "NA" | "NC" | "NE" | "NF" | "NG" | "NI" | "NL" | "NO" | "NP" | "NR" | "NU" | "NZ" | "OM" | "PA" | "PE" | "PF" | "PG" | "PH" | "PK" | "PL" | "PM" | "PN" | "PR" | "PS" | "PT" | "PW" | "PY" | "QA" | "RE" | "RO" | "RS" | "RU" | "RW" | "SA" | "SB" | "SC" | "SD" | "SE" | "SG" | "SH" | "SI" | "SJ" | "SK" | "SL" | "SM" | "SN" | "SO" | "SR" | "SS" | "ST" | "SV" | "SX" | "SY" | "SZ" | "TC" | "TD" | "TF" | "TG" | "TH" | "TJ" | "TK" | "TL" | "TM" | "TN" | "TO" | "TP" | "TR" | "TT" | "TV" | "TW" | "TZ" | "UA" | "UG" | "US" | "UY" | "UZ" | "VA" | "VC" | "VE" | "VG" | "VI" | "VN" | "VU" | "WF" | "WS" | "YE" | "YT" | "ZA" | "ZM" | "ZW")?,
+                                     zip_code: ::String?,
+                                     phone_number: ::String?,
+                                     email: ::String?,
+                                     fax: ::String?,
+                                     extra_params: Array[
+                                       {
+                                         name: ("DUNS_NUMBER" | "BRAND_NUMBER" | "BIRTH_DEPARTMENT" | "BIRTH_DATE_IN_YYYY_MM_DD" | "BIRTH_COUNTRY" | "BIRTH_CITY" | "DOCUMENT_NUMBER" | "AU_ID_NUMBER" | "AU_ID_TYPE" | "CA_LEGAL_TYPE" | "CA_BUSINESS_ENTITY_TYPE" | "CA_LEGAL_REPRESENTATIVE" | "CA_LEGAL_REPRESENTATIVE_CAPACITY" | "ES_IDENTIFICATION" | "ES_IDENTIFICATION_TYPE" | "ES_LEGAL_FORM" | "FI_BUSINESS_NUMBER" | "FI_ID_NUMBER" | "FI_NATIONALITY" | "FI_ORGANIZATION_TYPE" | "IT_NATIONALITY" | "IT_PIN" | "IT_REGISTRANT_ENTITY_TYPE" | "RU_PASSPORT_DATA" | "SE_ID_NUMBER" | "SG_ID_NUMBER" | "VAT_NUMBER" | "UK_CONTACT_TYPE" | "UK_COMPANY_NUMBER" | "EU_COUNTRY_OF_CITIZENSHIP" | "AU_PRIORITY_TOKEN"),
+                                         value: ::String
+                                       },
+                                     ]?
+                                   },
+                                   ?tech_contact: {
+                                     first_name: ::String?,
+                                     last_name: ::String?,
+                                     contact_type: ("PERSON" | "COMPANY" | "ASSOCIATION" | "PUBLIC_BODY" | "RESELLER")?,
+                                     organization_name: ::String?,
+                                     address_line_1: ::String?,
+                                     address_line_2: ::String?,
+                                     city: ::String?,
+                                     state: ::String?,
+                                     country_code: ("AC" | "AD" | "AE" | "AF" | "AG" | "AI" | "AL" | "AM" | "AN" | "AO" | "AQ" | "AR" | "AS" | "AT" | "AU" | "AW" | "AX" | "AZ" | "BA" | "BB" | "BD" | "BE" | "BF" | "BG" | "BH" | "BI" | "BJ" | "BL" | "BM" | "BN" | "BO" | "BQ" | "BR" | "BS" | "BT" | "BV" | "BW" | "BY" | "BZ" | "CA" | "CC" | "CD" | "CF" | "CG" | "CH" | "CI" | "CK" | "CL" | "CM" | "CN" | "CO" | "CR" | "CU" | "CV" | "CW" | "CX" | "CY" | "CZ" | "DE" | "DJ" | "DK" | "DM" | "DO" | "DZ" | "EC" | "EE" | "EG" | "EH" | "ER" | "ES" | "ET" | "FI" | "FJ" | "FK" | "FM" | "FO" | "FR" | "GA" | "GB" | "GD" | "GE" | "GF" | "GG" | "GH" | "GI" | "GL" | "GM" | "GN" | "GP" | "GQ" | "GR" | "GS" | "GT" | "GU" | "GW" | "GY" | "HK" | "HM" | "HN" | "HR" | "HT" | "HU" | "ID" | "IE" | "IL" | "IM" | "IN" | "IO" | "IQ" | "IR" | "IS" | "IT" | "JE" | "JM" | "JO" | "JP" | "KE" | "KG" | "KH" | "KI" | "KM" | "KN" | "KP" | "KR" | "KW" | "KY" | "KZ" | "LA" | "LB" | "LC" | "LI" | "LK" | "LR" | "LS" | "LT" | "LU" | "LV" | "LY" | "MA" | "MC" | "MD" | "ME" | "MF" | "MG" | "MH" | "MK" | "ML" | "MM" | "MN" | "MO" | "MP" | "MQ" | "MR" | "MS" | "MT" | "MU" | "MV" | "MW" | "MX" | "MY" | "MZ" | "NA" | "NC" | "NE" | "NF" | "NG" | "NI" | "NL" | "NO" | "NP" | "NR" | "NU" | "NZ" | "OM" | "PA" | "PE" | "PF" | "PG" | "PH" | "PK" | "PL" | "PM" | "PN" | "PR" | "PS" | "PT" | "PW" | "PY" | "QA" | "RE" | "RO" | "RS" | "RU" | "RW" | "SA" | "SB" | "SC" | "SD" | "SE" | "SG" | "SH" | "SI" | "SJ" | "SK" | "SL" | "SM" | "SN" | "SO" | "SR" | "SS" | "ST" | "SV" | "SX" | "SY" | "SZ" | "TC" | "TD" | "TF" | "TG" | "TH" | "TJ" | "TK" | "TL" | "TM" | "TN" | "TO" | "TP" | "TR" | "TT" | "TV" | "TW" | "TZ" | "UA" | "UG" | "US" | "UY" | "UZ" | "VA" | "VC" | "VE" | "VG" | "VI" | "VN" | "VU" | "WF" | "WS" | "YE" | "YT" | "ZA" | "ZM" | "ZW")?,
+                                     zip_code: ::String?,
+                                     phone_number: ::String?,
+                                     email: ::String?,
+                                     fax: ::String?,
+                                     extra_params: Array[
+                                       {
+                                         name: ("DUNS_NUMBER" | "BRAND_NUMBER" | "BIRTH_DEPARTMENT" | "BIRTH_DATE_IN_YYYY_MM_DD" | "BIRTH_COUNTRY" | "BIRTH_CITY" | "DOCUMENT_NUMBER" | "AU_ID_NUMBER" | "AU_ID_TYPE" | "CA_LEGAL_TYPE" | "CA_BUSINESS_ENTITY_TYPE" | "CA_LEGAL_REPRESENTATIVE" | "CA_LEGAL_REPRESENTATIVE_CAPACITY" | "ES_IDENTIFICATION" | "ES_IDENTIFICATION_TYPE" | "ES_LEGAL_FORM" | "FI_BUSINESS_NUMBER" | "FI_ID_NUMBER" | "FI_NATIONALITY" | "FI_ORGANIZATION_TYPE" | "IT_NATIONALITY" | "IT_PIN" | "IT_REGISTRANT_ENTITY_TYPE" | "RU_PASSPORT_DATA" | "SE_ID_NUMBER" | "SG_ID_NUMBER" | "VAT_NUMBER" | "UK_CONTACT_TYPE" | "UK_COMPANY_NUMBER" | "EU_COUNTRY_OF_CITIZENSHIP" | "AU_PRIORITY_TOKEN"),
+                                         value: ::String
+                                       },
+                                     ]?
+                                   },
+                                   ?consent: {
+                                     max_price: ::Float,
+                                     currency: ::String
+                                   }
+                                 ) -> _UpdateDomainContactResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainContactResponseSuccess
+
+      interface _UpdateDomainContactPrivacyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDomainContactPrivacyResponse]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#update_domain_contact_privacy-instance_method
+      def update_domain_contact_privacy: (
+                                           domain_name: ::String,
+                                           ?admin_privacy: bool,
+                                           ?registrant_privacy: bool,
+                                           ?tech_privacy: bool
+                                         ) -> _UpdateDomainContactPrivacyResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainContactPrivacyResponseSuccess
+
+      interface _UpdateDomainNameserversResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDomainNameserversResponse]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#update_domain_nameservers-instance_method
+      def update_domain_nameservers: (
+                                       domain_name: ::String,
+                                       ?fi_auth_key: ::String,
+                                       nameservers: Array[
+                                         {
+                                           name: ::String,
+                                           glue_ips: Array[::String]?
+                                         },
+                                       ]
+                                     ) -> _UpdateDomainNameserversResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainNameserversResponseSuccess
+
+      interface _UpdateTagsForDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTagsForDomainResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#update_tags_for_domain-instance_method
+      def update_tags_for_domain: (
+                                    domain_name: ::String,
+                                    ?tags_to_update: Array[
+                                      {
+                                        key: ::String?,
+                                        value: ::String?
+                                      },
+                                    ]
+                                  ) -> _UpdateTagsForDomainResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTagsForDomainResponseSuccess
+
+      interface _ViewBillingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ViewBillingResponse]
+        def next_page_marker: () -> ::String
+        def billing_records: () -> ::Array[Types::BillingRecord]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#view_billing-instance_method
+      def view_billing: (
+                          ?start: ::Time,
+                          ?end: ::Time,
+                          ?marker: ::String,
+                          ?max_items: ::Integer
+                        ) -> _ViewBillingResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ViewBillingResponseSuccess
+    end
+  end
+end
+

@@ -1,0 +1,233 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::AutoScalingPlans
+  module Types
+
+    class ApplicationSource
+      attr_accessor cloud_formation_stack_arn: ::String
+      attr_accessor tag_filters: ::Array[Types::TagFilter]
+      SENSITIVE: []
+    end
+
+    class ConcurrentUpdateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateScalingPlanRequest
+      attr_accessor scaling_plan_name: ::String
+      attr_accessor application_source: Types::ApplicationSource
+      attr_accessor scaling_instructions: ::Array[Types::ScalingInstruction]
+      SENSITIVE: []
+    end
+
+    class CreateScalingPlanResponse
+      attr_accessor scaling_plan_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class CustomizedLoadMetricSpecification
+      attr_accessor metric_name: ::String
+      attr_accessor namespace: ::String
+      attr_accessor dimensions: ::Array[Types::MetricDimension]
+      attr_accessor statistic: ("Average" | "Minimum" | "Maximum" | "SampleCount" | "Sum")
+      attr_accessor unit: ::String
+      SENSITIVE: []
+    end
+
+    class CustomizedScalingMetricSpecification
+      attr_accessor metric_name: ::String
+      attr_accessor namespace: ::String
+      attr_accessor dimensions: ::Array[Types::MetricDimension]
+      attr_accessor statistic: ("Average" | "Minimum" | "Maximum" | "SampleCount" | "Sum")
+      attr_accessor unit: ::String
+      SENSITIVE: []
+    end
+
+    class Datapoint
+      attr_accessor timestamp: ::Time
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class DeleteScalingPlanRequest
+      attr_accessor scaling_plan_name: ::String
+      attr_accessor scaling_plan_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteScalingPlanResponse < Aws::EmptyStructure
+    end
+
+    class DescribeScalingPlanResourcesRequest
+      attr_accessor scaling_plan_name: ::String
+      attr_accessor scaling_plan_version: ::Integer
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeScalingPlanResourcesResponse
+      attr_accessor scaling_plan_resources: ::Array[Types::ScalingPlanResource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeScalingPlansRequest
+      attr_accessor scaling_plan_names: ::Array[::String]
+      attr_accessor scaling_plan_version: ::Integer
+      attr_accessor application_sources: ::Array[Types::ApplicationSource]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeScalingPlansResponse
+      attr_accessor scaling_plans: ::Array[Types::ScalingPlan]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetScalingPlanResourceForecastDataRequest
+      attr_accessor scaling_plan_name: ::String
+      attr_accessor scaling_plan_version: ::Integer
+      attr_accessor service_namespace: ("autoscaling" | "ecs" | "ec2" | "rds" | "dynamodb")
+      attr_accessor resource_id: ::String
+      attr_accessor scalable_dimension: ("autoscaling:autoScalingGroup:DesiredCapacity" | "ecs:service:DesiredCount" | "ec2:spot-fleet-request:TargetCapacity" | "rds:cluster:ReadReplicaCount" | "dynamodb:table:ReadCapacityUnits" | "dynamodb:table:WriteCapacityUnits" | "dynamodb:index:ReadCapacityUnits" | "dynamodb:index:WriteCapacityUnits")
+      attr_accessor forecast_data_type: ("CapacityForecast" | "LoadForecast" | "ScheduledActionMinCapacity" | "ScheduledActionMaxCapacity")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetScalingPlanResourceForecastDataResponse
+      attr_accessor datapoints: ::Array[Types::Datapoint]
+      SENSITIVE: []
+    end
+
+    class InternalServiceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidNextTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MetricDimension
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ObjectNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PredefinedLoadMetricSpecification
+      attr_accessor predefined_load_metric_type: ("ASGTotalCPUUtilization" | "ASGTotalNetworkIn" | "ASGTotalNetworkOut" | "ALBTargetGroupRequestCount")
+      attr_accessor resource_label: ::String
+      SENSITIVE: []
+    end
+
+    class PredefinedScalingMetricSpecification
+      attr_accessor predefined_scaling_metric_type: ("ASGAverageCPUUtilization" | "ASGAverageNetworkIn" | "ASGAverageNetworkOut" | "DynamoDBReadCapacityUtilization" | "DynamoDBWriteCapacityUtilization" | "ECSServiceAverageCPUUtilization" | "ECSServiceAverageMemoryUtilization" | "ALBRequestCountPerTarget" | "RDSReaderAverageCPUUtilization" | "RDSReaderAverageDatabaseConnections" | "EC2SpotFleetRequestAverageCPUUtilization" | "EC2SpotFleetRequestAverageNetworkIn" | "EC2SpotFleetRequestAverageNetworkOut")
+      attr_accessor resource_label: ::String
+      SENSITIVE: []
+    end
+
+    class ScalingInstruction
+      attr_accessor service_namespace: ("autoscaling" | "ecs" | "ec2" | "rds" | "dynamodb")
+      attr_accessor resource_id: ::String
+      attr_accessor scalable_dimension: ("autoscaling:autoScalingGroup:DesiredCapacity" | "ecs:service:DesiredCount" | "ec2:spot-fleet-request:TargetCapacity" | "rds:cluster:ReadReplicaCount" | "dynamodb:table:ReadCapacityUnits" | "dynamodb:table:WriteCapacityUnits" | "dynamodb:index:ReadCapacityUnits" | "dynamodb:index:WriteCapacityUnits")
+      attr_accessor min_capacity: ::Integer
+      attr_accessor max_capacity: ::Integer
+      attr_accessor target_tracking_configurations: ::Array[Types::TargetTrackingConfiguration]
+      attr_accessor predefined_load_metric_specification: Types::PredefinedLoadMetricSpecification
+      attr_accessor customized_load_metric_specification: Types::CustomizedLoadMetricSpecification
+      attr_accessor scheduled_action_buffer_time: ::Integer
+      attr_accessor predictive_scaling_max_capacity_behavior: ("SetForecastCapacityToMaxCapacity" | "SetMaxCapacityToForecastCapacity" | "SetMaxCapacityAboveForecastCapacity")
+      attr_accessor predictive_scaling_max_capacity_buffer: ::Integer
+      attr_accessor predictive_scaling_mode: ("ForecastAndScale" | "ForecastOnly")
+      attr_accessor scaling_policy_update_behavior: ("KeepExternalPolicies" | "ReplaceExternalPolicies")
+      attr_accessor disable_dynamic_scaling: bool
+      SENSITIVE: []
+    end
+
+    class ScalingPlan
+      attr_accessor scaling_plan_name: ::String
+      attr_accessor scaling_plan_version: ::Integer
+      attr_accessor application_source: Types::ApplicationSource
+      attr_accessor scaling_instructions: ::Array[Types::ScalingInstruction]
+      attr_accessor status_code: ("Active" | "ActiveWithProblems" | "CreationInProgress" | "CreationFailed" | "DeletionInProgress" | "DeletionFailed" | "UpdateInProgress" | "UpdateFailed")
+      attr_accessor status_message: ::String
+      attr_accessor status_start_time: ::Time
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ScalingPlanResource
+      attr_accessor scaling_plan_name: ::String
+      attr_accessor scaling_plan_version: ::Integer
+      attr_accessor service_namespace: ("autoscaling" | "ecs" | "ec2" | "rds" | "dynamodb")
+      attr_accessor resource_id: ::String
+      attr_accessor scalable_dimension: ("autoscaling:autoScalingGroup:DesiredCapacity" | "ecs:service:DesiredCount" | "ec2:spot-fleet-request:TargetCapacity" | "rds:cluster:ReadReplicaCount" | "dynamodb:table:ReadCapacityUnits" | "dynamodb:table:WriteCapacityUnits" | "dynamodb:index:ReadCapacityUnits" | "dynamodb:index:WriteCapacityUnits")
+      attr_accessor scaling_policies: ::Array[Types::ScalingPolicy]
+      attr_accessor scaling_status_code: ("Inactive" | "PartiallyActive" | "Active")
+      attr_accessor scaling_status_message: ::String
+      SENSITIVE: []
+    end
+
+    class ScalingPolicy
+      attr_accessor policy_name: ::String
+      attr_accessor policy_type: ("TargetTrackingScaling")
+      attr_accessor target_tracking_configuration: Types::TargetTrackingConfiguration
+      SENSITIVE: []
+    end
+
+    class TagFilter
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TargetTrackingConfiguration
+      attr_accessor predefined_scaling_metric_specification: Types::PredefinedScalingMetricSpecification
+      attr_accessor customized_scaling_metric_specification: Types::CustomizedScalingMetricSpecification
+      attr_accessor target_value: ::Float
+      attr_accessor disable_scale_in: bool
+      attr_accessor scale_out_cooldown: ::Integer
+      attr_accessor scale_in_cooldown: ::Integer
+      attr_accessor estimated_instance_warmup: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateScalingPlanRequest
+      attr_accessor scaling_plan_name: ::String
+      attr_accessor scaling_plan_version: ::Integer
+      attr_accessor application_source: Types::ApplicationSource
+      attr_accessor scaling_instructions: ::Array[Types::ScalingInstruction]
+      SENSITIVE: []
+    end
+
+    class UpdateScalingPlanResponse < Aws::EmptyStructure
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,0 +1,252 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module LambdaPreview
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaPreview/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AddEventSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EventSourceConfiguration]
+        def uuid: () -> ::String
+        def batch_size: () -> ::Integer
+        def event_source: () -> ::String
+        def function_name: () -> ::String
+        def parameters: () -> ::Hash[::String, ::String]
+        def role: () -> ::String
+        def last_modified: () -> ::Time
+        def is_active: () -> bool
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaPreview/Client.html#add_event_source-instance_method
+      def add_event_source: (
+                              event_source: ::String,
+                              function_name: ::String,
+                              role: ::String,
+                              ?batch_size: ::Integer,
+                              ?parameters: Hash[::String, ::String]
+                            ) -> _AddEventSourceResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddEventSourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaPreview/Client.html#delete_function-instance_method
+      def delete_function: (
+                             function_name: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetEventSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EventSourceConfiguration]
+        def uuid: () -> ::String
+        def batch_size: () -> ::Integer
+        def event_source: () -> ::String
+        def function_name: () -> ::String
+        def parameters: () -> ::Hash[::String, ::String]
+        def role: () -> ::String
+        def last_modified: () -> ::Time
+        def is_active: () -> bool
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaPreview/Client.html#get_event_source-instance_method
+      def get_event_source: (
+                              uuid: ::String
+                            ) -> _GetEventSourceResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEventSourceResponseSuccess
+
+      interface _GetFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFunctionResponse]
+        def configuration: () -> Types::FunctionConfiguration
+        def code: () -> Types::FunctionCodeLocation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaPreview/Client.html#get_function-instance_method
+      def get_function: (
+                          function_name: ::String
+                        ) -> _GetFunctionResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFunctionResponseSuccess
+
+      interface _GetFunctionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::FunctionConfiguration]
+        def function_name: () -> ::String
+        def function_arn: () -> ::String
+        def configuration_id: () -> ::String
+        def runtime: () -> ("nodejs")
+        def role: () -> ::String
+        def handler: () -> ::String
+        def mode: () -> ("event")
+        def code_size: () -> ::Integer
+        def description: () -> ::String
+        def timeout: () -> ::Integer
+        def memory_size: () -> ::Integer
+        def last_modified: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaPreview/Client.html#get_function_configuration-instance_method
+      def get_function_configuration: (
+                                        function_name: ::String
+                                      ) -> _GetFunctionConfigurationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFunctionConfigurationResponseSuccess
+
+      interface _InvokeAsyncResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InvokeAsyncResponse]
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaPreview/Client.html#invoke_async-instance_method
+      def invoke_async: (
+                          function_name: ::String,
+                          invoke_args: ::String
+                        ) -> _InvokeAsyncResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeAsyncResponseSuccess
+
+      interface _ListEventSourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEventSourcesResponse]
+        def next_marker: () -> ::String
+        def event_sources: () -> ::Array[Types::EventSourceConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaPreview/Client.html#list_event_sources-instance_method
+      def list_event_sources: (
+                                ?event_source_arn: ::String,
+                                ?function_name: ::String,
+                                ?marker: ::String,
+                                ?max_items: ::Integer
+                              ) -> _ListEventSourcesResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEventSourcesResponseSuccess
+
+      interface _ListFunctionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFunctionsResponse]
+        def next_marker: () -> ::String
+        def functions: () -> ::Array[Types::FunctionConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaPreview/Client.html#list_functions-instance_method
+      def list_functions: (
+                            ?marker: ::String,
+                            ?max_items: ::Integer
+                          ) -> _ListFunctionsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFunctionsResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaPreview/Client.html#remove_event_source-instance_method
+      def remove_event_source: (
+                                 uuid: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateFunctionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::FunctionConfiguration]
+        def function_name: () -> ::String
+        def function_arn: () -> ::String
+        def configuration_id: () -> ::String
+        def runtime: () -> ("nodejs")
+        def role: () -> ::String
+        def handler: () -> ::String
+        def mode: () -> ("event")
+        def code_size: () -> ::Integer
+        def description: () -> ::String
+        def timeout: () -> ::Integer
+        def memory_size: () -> ::Integer
+        def last_modified: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaPreview/Client.html#update_function_configuration-instance_method
+      def update_function_configuration: (
+                                           function_name: ::String,
+                                           ?role: ::String,
+                                           ?handler: ::String,
+                                           ?description: ::String,
+                                           ?timeout: ::Integer,
+                                           ?memory_size: ::Integer
+                                         ) -> _UpdateFunctionConfigurationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFunctionConfigurationResponseSuccess
+
+      interface _UploadFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::FunctionConfiguration]
+        def function_name: () -> ::String
+        def function_arn: () -> ::String
+        def configuration_id: () -> ::String
+        def runtime: () -> ("nodejs")
+        def role: () -> ::String
+        def handler: () -> ::String
+        def mode: () -> ("event")
+        def code_size: () -> ::Integer
+        def description: () -> ::String
+        def timeout: () -> ::Integer
+        def memory_size: () -> ::Integer
+        def last_modified: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaPreview/Client.html#upload_function-instance_method
+      def upload_function: (
+                             function_name: ::String,
+                             function_zip: ::String,
+                             runtime: ("nodejs"),
+                             role: ::String,
+                             handler: ::String,
+                             mode: ("event"),
+                             ?description: ::String,
+                             ?timeout: ::Integer,
+                             ?memory_size: ::Integer
+                           ) -> _UploadFunctionResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UploadFunctionResponseSuccess
+    end
+  end
+end
+

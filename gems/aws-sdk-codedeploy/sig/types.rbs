@@ -1,0 +1,1336 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CodeDeploy
+  module Types
+
+    class AddTagsToOnPremisesInstancesInput
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor instance_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Alarm
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class AlarmConfiguration
+      attr_accessor enabled: bool
+      attr_accessor ignore_poll_alarm_failure: bool
+      attr_accessor alarms: ::Array[Types::Alarm]
+      SENSITIVE: []
+    end
+
+    class AlarmsLimitExceededException < Aws::EmptyStructure
+    end
+
+    class AppSpecContent
+      attr_accessor content: ::String
+      attr_accessor sha256: ::String
+      SENSITIVE: []
+    end
+
+    class ApplicationAlreadyExistsException < Aws::EmptyStructure
+    end
+
+    class ApplicationDoesNotExistException < Aws::EmptyStructure
+    end
+
+    class ApplicationInfo
+      attr_accessor application_id: ::String
+      attr_accessor application_name: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor linked_to_git_hub: bool
+      attr_accessor git_hub_account_name: ::String
+      attr_accessor compute_platform: ("Server" | "Lambda" | "ECS")
+      SENSITIVE: []
+    end
+
+    class ApplicationLimitExceededException < Aws::EmptyStructure
+    end
+
+    class ApplicationNameRequiredException < Aws::EmptyStructure
+    end
+
+    class ArnNotSupportedException < Aws::EmptyStructure
+    end
+
+    class AutoRollbackConfiguration
+      attr_accessor enabled: bool
+      attr_accessor events: ::Array[("DEPLOYMENT_FAILURE" | "DEPLOYMENT_STOP_ON_ALARM" | "DEPLOYMENT_STOP_ON_REQUEST")]
+      SENSITIVE: []
+    end
+
+    class AutoScalingGroup
+      attr_accessor name: ::String
+      attr_accessor hook: ::String
+      attr_accessor termination_hook: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetApplicationRevisionsInput
+      attr_accessor application_name: ::String
+      attr_accessor revisions: ::Array[Types::RevisionLocation]
+      SENSITIVE: []
+    end
+
+    class BatchGetApplicationRevisionsOutput
+      attr_accessor application_name: ::String
+      attr_accessor error_message: ::String
+      attr_accessor revisions: ::Array[Types::RevisionInfo]
+      SENSITIVE: []
+    end
+
+    class BatchGetApplicationsInput
+      attr_accessor application_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetApplicationsOutput
+      attr_accessor applications_info: ::Array[Types::ApplicationInfo]
+      SENSITIVE: []
+    end
+
+    class BatchGetDeploymentGroupsInput
+      attr_accessor application_name: ::String
+      attr_accessor deployment_group_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetDeploymentGroupsOutput
+      attr_accessor deployment_groups_info: ::Array[Types::DeploymentGroupInfo]
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetDeploymentInstancesInput
+      attr_accessor deployment_id: ::String
+      attr_accessor instance_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetDeploymentInstancesOutput
+      attr_accessor instances_summary: ::Array[Types::InstanceSummary]
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetDeploymentTargetsInput
+      attr_accessor deployment_id: ::String
+      attr_accessor target_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetDeploymentTargetsOutput
+      attr_accessor deployment_targets: ::Array[Types::DeploymentTarget]
+      SENSITIVE: []
+    end
+
+    class BatchGetDeploymentsInput
+      attr_accessor deployment_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetDeploymentsOutput
+      attr_accessor deployments_info: ::Array[Types::DeploymentInfo]
+      SENSITIVE: []
+    end
+
+    class BatchGetOnPremisesInstancesInput
+      attr_accessor instance_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetOnPremisesInstancesOutput
+      attr_accessor instance_infos: ::Array[Types::InstanceInfo]
+      SENSITIVE: []
+    end
+
+    class BatchLimitExceededException < Aws::EmptyStructure
+    end
+
+    class BlueGreenDeploymentConfiguration
+      attr_accessor terminate_blue_instances_on_deployment_success: Types::BlueInstanceTerminationOption
+      attr_accessor deployment_ready_option: Types::DeploymentReadyOption
+      attr_accessor green_fleet_provisioning_option: Types::GreenFleetProvisioningOption
+      SENSITIVE: []
+    end
+
+    class BlueInstanceTerminationOption
+      attr_accessor action: ("TERMINATE" | "KEEP_ALIVE")
+      attr_accessor termination_wait_time_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class BucketNameFilterRequiredException < Aws::EmptyStructure
+    end
+
+    class CloudFormationTarget
+      attr_accessor deployment_id: ::String
+      attr_accessor target_id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor lifecycle_events: ::Array[Types::LifecycleEvent]
+      attr_accessor status: ("Pending" | "InProgress" | "Succeeded" | "Failed" | "Skipped" | "Unknown" | "Ready")
+      attr_accessor resource_type: ::String
+      attr_accessor target_version_weight: ::Float
+      SENSITIVE: []
+    end
+
+    class ContinueDeploymentInput
+      attr_accessor deployment_id: ::String
+      attr_accessor deployment_wait_type: ("READY_WAIT" | "TERMINATION_WAIT")
+      SENSITIVE: []
+    end
+
+    class CreateApplicationInput
+      attr_accessor application_name: ::String
+      attr_accessor compute_platform: ("Server" | "Lambda" | "ECS")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateApplicationOutput
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDeploymentConfigInput
+      attr_accessor deployment_config_name: ::String
+      attr_accessor minimum_healthy_hosts: Types::MinimumHealthyHosts
+      attr_accessor traffic_routing_config: Types::TrafficRoutingConfig
+      attr_accessor compute_platform: ("Server" | "Lambda" | "ECS")
+      attr_accessor zonal_config: Types::ZonalConfig
+      SENSITIVE: []
+    end
+
+    class CreateDeploymentConfigOutput
+      attr_accessor deployment_config_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDeploymentGroupInput
+      attr_accessor application_name: ::String
+      attr_accessor deployment_group_name: ::String
+      attr_accessor deployment_config_name: ::String
+      attr_accessor ec2_tag_filters: ::Array[Types::EC2TagFilter]
+      attr_accessor on_premises_instance_tag_filters: ::Array[Types::TagFilter]
+      attr_accessor auto_scaling_groups: ::Array[::String]
+      attr_accessor service_role_arn: ::String
+      attr_accessor trigger_configurations: ::Array[Types::TriggerConfig]
+      attr_accessor alarm_configuration: Types::AlarmConfiguration
+      attr_accessor auto_rollback_configuration: Types::AutoRollbackConfiguration
+      attr_accessor outdated_instances_strategy: ("UPDATE" | "IGNORE")
+      attr_accessor deployment_style: Types::DeploymentStyle
+      attr_accessor blue_green_deployment_configuration: Types::BlueGreenDeploymentConfiguration
+      attr_accessor load_balancer_info: Types::LoadBalancerInfo
+      attr_accessor ec2_tag_set: Types::EC2TagSet
+      attr_accessor ecs_services: ::Array[Types::ECSService]
+      attr_accessor on_premises_tag_set: Types::OnPremisesTagSet
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor termination_hook_enabled: bool
+      SENSITIVE: []
+    end
+
+    class CreateDeploymentGroupOutput
+      attr_accessor deployment_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDeploymentInput
+      attr_accessor application_name: ::String
+      attr_accessor deployment_group_name: ::String
+      attr_accessor revision: Types::RevisionLocation
+      attr_accessor deployment_config_name: ::String
+      attr_accessor description: ::String
+      attr_accessor ignore_application_stop_failures: bool
+      attr_accessor target_instances: Types::TargetInstances
+      attr_accessor auto_rollback_configuration: Types::AutoRollbackConfiguration
+      attr_accessor update_outdated_instances_only: bool
+      attr_accessor file_exists_behavior: ("DISALLOW" | "OVERWRITE" | "RETAIN")
+      attr_accessor override_alarm_configuration: Types::AlarmConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateDeploymentOutput
+      attr_accessor deployment_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationInput
+      attr_accessor application_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDeploymentConfigInput
+      attr_accessor deployment_config_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDeploymentGroupInput
+      attr_accessor application_name: ::String
+      attr_accessor deployment_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDeploymentGroupOutput
+      attr_accessor hooks_not_cleaned_up: ::Array[Types::AutoScalingGroup]
+      SENSITIVE: []
+    end
+
+    class DeleteGitHubAccountTokenInput
+      attr_accessor token_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGitHubAccountTokenOutput
+      attr_accessor token_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcesByExternalIdInput
+      attr_accessor external_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcesByExternalIdOutput < Aws::EmptyStructure
+    end
+
+    class DeploymentAlreadyCompletedException < Aws::EmptyStructure
+    end
+
+    class DeploymentAlreadyStartedException < Aws::EmptyStructure
+    end
+
+    class DeploymentConfigAlreadyExistsException < Aws::EmptyStructure
+    end
+
+    class DeploymentConfigDoesNotExistException < Aws::EmptyStructure
+    end
+
+    class DeploymentConfigInUseException < Aws::EmptyStructure
+    end
+
+    class DeploymentConfigInfo
+      attr_accessor deployment_config_id: ::String
+      attr_accessor deployment_config_name: ::String
+      attr_accessor minimum_healthy_hosts: Types::MinimumHealthyHosts
+      attr_accessor create_time: ::Time
+      attr_accessor compute_platform: ("Server" | "Lambda" | "ECS")
+      attr_accessor traffic_routing_config: Types::TrafficRoutingConfig
+      attr_accessor zonal_config: Types::ZonalConfig
+      SENSITIVE: []
+    end
+
+    class DeploymentConfigLimitExceededException < Aws::EmptyStructure
+    end
+
+    class DeploymentConfigNameRequiredException < Aws::EmptyStructure
+    end
+
+    class DeploymentDoesNotExistException < Aws::EmptyStructure
+    end
+
+    class DeploymentGroupAlreadyExistsException < Aws::EmptyStructure
+    end
+
+    class DeploymentGroupDoesNotExistException < Aws::EmptyStructure
+    end
+
+    class DeploymentGroupInfo
+      attr_accessor application_name: ::String
+      attr_accessor deployment_group_id: ::String
+      attr_accessor deployment_group_name: ::String
+      attr_accessor deployment_config_name: ::String
+      attr_accessor ec2_tag_filters: ::Array[Types::EC2TagFilter]
+      attr_accessor on_premises_instance_tag_filters: ::Array[Types::TagFilter]
+      attr_accessor auto_scaling_groups: ::Array[Types::AutoScalingGroup]
+      attr_accessor service_role_arn: ::String
+      attr_accessor target_revision: Types::RevisionLocation
+      attr_accessor trigger_configurations: ::Array[Types::TriggerConfig]
+      attr_accessor alarm_configuration: Types::AlarmConfiguration
+      attr_accessor auto_rollback_configuration: Types::AutoRollbackConfiguration
+      attr_accessor deployment_style: Types::DeploymentStyle
+      attr_accessor outdated_instances_strategy: ("UPDATE" | "IGNORE")
+      attr_accessor blue_green_deployment_configuration: Types::BlueGreenDeploymentConfiguration
+      attr_accessor load_balancer_info: Types::LoadBalancerInfo
+      attr_accessor last_successful_deployment: Types::LastDeploymentInfo
+      attr_accessor last_attempted_deployment: Types::LastDeploymentInfo
+      attr_accessor ec2_tag_set: Types::EC2TagSet
+      attr_accessor on_premises_tag_set: Types::OnPremisesTagSet
+      attr_accessor compute_platform: ("Server" | "Lambda" | "ECS")
+      attr_accessor ecs_services: ::Array[Types::ECSService]
+      attr_accessor termination_hook_enabled: bool
+      SENSITIVE: []
+    end
+
+    class DeploymentGroupLimitExceededException < Aws::EmptyStructure
+    end
+
+    class DeploymentGroupNameRequiredException < Aws::EmptyStructure
+    end
+
+    class DeploymentIdRequiredException < Aws::EmptyStructure
+    end
+
+    class DeploymentInfo
+      attr_accessor application_name: ::String
+      attr_accessor deployment_group_name: ::String
+      attr_accessor deployment_config_name: ::String
+      attr_accessor deployment_id: ::String
+      attr_accessor previous_revision: Types::RevisionLocation
+      attr_accessor revision: Types::RevisionLocation
+      attr_accessor status: ("Created" | "Queued" | "InProgress" | "Baking" | "Succeeded" | "Failed" | "Stopped" | "Ready")
+      attr_accessor error_information: Types::ErrorInformation
+      attr_accessor create_time: ::Time
+      attr_accessor start_time: ::Time
+      attr_accessor complete_time: ::Time
+      attr_accessor deployment_overview: Types::DeploymentOverview
+      attr_accessor description: ::String
+      attr_accessor creator: ("user" | "autoscaling" | "codeDeployRollback" | "CodeDeploy" | "CodeDeployAutoUpdate" | "CloudFormation" | "CloudFormationRollback" | "autoscalingTermination")
+      attr_accessor ignore_application_stop_failures: bool
+      attr_accessor auto_rollback_configuration: Types::AutoRollbackConfiguration
+      attr_accessor update_outdated_instances_only: bool
+      attr_accessor rollback_info: Types::RollbackInfo
+      attr_accessor deployment_style: Types::DeploymentStyle
+      attr_accessor target_instances: Types::TargetInstances
+      attr_accessor instance_termination_wait_time_started: bool
+      attr_accessor blue_green_deployment_configuration: Types::BlueGreenDeploymentConfiguration
+      attr_accessor load_balancer_info: Types::LoadBalancerInfo
+      attr_accessor additional_deployment_status_info: ::String
+      attr_accessor file_exists_behavior: ("DISALLOW" | "OVERWRITE" | "RETAIN")
+      attr_accessor deployment_status_messages: ::Array[::String]
+      attr_accessor compute_platform: ("Server" | "Lambda" | "ECS")
+      attr_accessor external_id: ::String
+      attr_accessor related_deployments: Types::RelatedDeployments
+      attr_accessor override_alarm_configuration: Types::AlarmConfiguration
+      SENSITIVE: []
+    end
+
+    class DeploymentIsNotInReadyStateException < Aws::EmptyStructure
+    end
+
+    class DeploymentLimitExceededException < Aws::EmptyStructure
+    end
+
+    class DeploymentNotStartedException < Aws::EmptyStructure
+    end
+
+    class DeploymentOverview
+      attr_accessor pending: ::Integer
+      attr_accessor in_progress: ::Integer
+      attr_accessor succeeded: ::Integer
+      attr_accessor failed: ::Integer
+      attr_accessor skipped: ::Integer
+      attr_accessor ready: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeploymentReadyOption
+      attr_accessor action_on_timeout: ("CONTINUE_DEPLOYMENT" | "STOP_DEPLOYMENT")
+      attr_accessor wait_time_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeploymentStyle
+      attr_accessor deployment_type: ("IN_PLACE" | "BLUE_GREEN")
+      attr_accessor deployment_option: ("WITH_TRAFFIC_CONTROL" | "WITHOUT_TRAFFIC_CONTROL")
+      SENSITIVE: []
+    end
+
+    class DeploymentTarget
+      attr_accessor deployment_target_type: ("InstanceTarget" | "LambdaTarget" | "ECSTarget" | "CloudFormationTarget")
+      attr_accessor instance_target: Types::InstanceTarget
+      attr_accessor lambda_target: Types::LambdaTarget
+      attr_accessor ecs_target: Types::ECSTarget
+      attr_accessor cloud_formation_target: Types::CloudFormationTarget
+      SENSITIVE: []
+    end
+
+    class DeploymentTargetDoesNotExistException < Aws::EmptyStructure
+    end
+
+    class DeploymentTargetIdRequiredException < Aws::EmptyStructure
+    end
+
+    class DeploymentTargetListSizeExceededException < Aws::EmptyStructure
+    end
+
+    class DeregisterOnPremisesInstanceInput
+      attr_accessor instance_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescriptionTooLongException < Aws::EmptyStructure
+    end
+
+    class Diagnostics
+      attr_accessor error_code: ("Success" | "ScriptMissing" | "ScriptNotExecutable" | "ScriptTimedOut" | "ScriptFailed" | "UnknownError")
+      attr_accessor script_name: ::String
+      attr_accessor message: ::String
+      attr_accessor log_tail: ::String
+      SENSITIVE: []
+    end
+
+    class EC2TagFilter
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      attr_accessor type: ("KEY_ONLY" | "VALUE_ONLY" | "KEY_AND_VALUE")
+      SENSITIVE: []
+    end
+
+    class EC2TagSet
+      attr_accessor ec2_tag_set_list: ::Array[::Array[Types::EC2TagFilter]]
+      SENSITIVE: []
+    end
+
+    class ECSService
+      attr_accessor service_name: ::String
+      attr_accessor cluster_name: ::String
+      SENSITIVE: []
+    end
+
+    class ECSServiceMappingLimitExceededException < Aws::EmptyStructure
+    end
+
+    class ECSTarget
+      attr_accessor deployment_id: ::String
+      attr_accessor target_id: ::String
+      attr_accessor target_arn: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor lifecycle_events: ::Array[Types::LifecycleEvent]
+      attr_accessor status: ("Pending" | "InProgress" | "Succeeded" | "Failed" | "Skipped" | "Unknown" | "Ready")
+      attr_accessor task_sets_info: ::Array[Types::ECSTaskSet]
+      SENSITIVE: []
+    end
+
+    class ECSTaskSet
+      attr_accessor identifer: ::String
+      attr_accessor desired_count: ::Integer
+      attr_accessor pending_count: ::Integer
+      attr_accessor running_count: ::Integer
+      attr_accessor status: ::String
+      attr_accessor traffic_weight: ::Float
+      attr_accessor target_group: Types::TargetGroupInfo
+      attr_accessor task_set_label: ("Blue" | "Green")
+      SENSITIVE: []
+    end
+
+    class ELBInfo
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ErrorInformation
+      attr_accessor code: ("AGENT_ISSUE" | "ALARM_ACTIVE" | "APPLICATION_MISSING" | "AUTOSCALING_VALIDATION_ERROR" | "AUTO_SCALING_CONFIGURATION" | "AUTO_SCALING_IAM_ROLE_PERMISSIONS" | "CODEDEPLOY_RESOURCE_CANNOT_BE_FOUND" | "CUSTOMER_APPLICATION_UNHEALTHY" | "DEPLOYMENT_GROUP_MISSING" | "ECS_UPDATE_ERROR" | "ELASTIC_LOAD_BALANCING_INVALID" | "ELB_INVALID_INSTANCE" | "HEALTH_CONSTRAINTS" | "HEALTH_CONSTRAINTS_INVALID" | "HOOK_EXECUTION_FAILURE" | "IAM_ROLE_MISSING" | "IAM_ROLE_PERMISSIONS" | "INTERNAL_ERROR" | "INVALID_ECS_SERVICE" | "INVALID_LAMBDA_CONFIGURATION" | "INVALID_LAMBDA_FUNCTION" | "INVALID_REVISION" | "MANUAL_STOP" | "MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION" | "MISSING_ELB_INFORMATION" | "MISSING_GITHUB_TOKEN" | "NO_EC2_SUBSCRIPTION" | "NO_INSTANCES" | "OVER_MAX_INSTANCES" | "RESOURCE_LIMIT_EXCEEDED" | "REVISION_MISSING" | "THROTTLED" | "TIMEOUT" | "CLOUDFORMATION_STACK_FAILURE")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GenericRevisionInfo
+      attr_accessor description: ::String
+      attr_accessor deployment_groups: ::Array[::String]
+      attr_accessor first_used_time: ::Time
+      attr_accessor last_used_time: ::Time
+      attr_accessor register_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetApplicationInput
+      attr_accessor application_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetApplicationOutput
+      attr_accessor application: Types::ApplicationInfo
+      SENSITIVE: []
+    end
+
+    class GetApplicationRevisionInput
+      attr_accessor application_name: ::String
+      attr_accessor revision: Types::RevisionLocation
+      SENSITIVE: []
+    end
+
+    class GetApplicationRevisionOutput
+      attr_accessor application_name: ::String
+      attr_accessor revision: Types::RevisionLocation
+      attr_accessor revision_info: Types::GenericRevisionInfo
+      SENSITIVE: []
+    end
+
+    class GetDeploymentConfigInput
+      attr_accessor deployment_config_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeploymentConfigOutput
+      attr_accessor deployment_config_info: Types::DeploymentConfigInfo
+      SENSITIVE: []
+    end
+
+    class GetDeploymentGroupInput
+      attr_accessor application_name: ::String
+      attr_accessor deployment_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeploymentGroupOutput
+      attr_accessor deployment_group_info: Types::DeploymentGroupInfo
+      SENSITIVE: []
+    end
+
+    class GetDeploymentInput
+      attr_accessor deployment_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeploymentInstanceInput
+      attr_accessor deployment_id: ::String
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeploymentInstanceOutput
+      attr_accessor instance_summary: Types::InstanceSummary
+      SENSITIVE: []
+    end
+
+    class GetDeploymentOutput
+      attr_accessor deployment_info: Types::DeploymentInfo
+      SENSITIVE: []
+    end
+
+    class GetDeploymentTargetInput
+      attr_accessor deployment_id: ::String
+      attr_accessor target_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeploymentTargetOutput
+      attr_accessor deployment_target: Types::DeploymentTarget
+      SENSITIVE: []
+    end
+
+    class GetOnPremisesInstanceInput
+      attr_accessor instance_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetOnPremisesInstanceOutput
+      attr_accessor instance_info: Types::InstanceInfo
+      SENSITIVE: []
+    end
+
+    class GitHubAccountTokenDoesNotExistException < Aws::EmptyStructure
+    end
+
+    class GitHubAccountTokenNameRequiredException < Aws::EmptyStructure
+    end
+
+    class GitHubLocation
+      attr_accessor repository: ::String
+      attr_accessor commit_id: ::String
+      SENSITIVE: []
+    end
+
+    class GreenFleetProvisioningOption
+      attr_accessor action: ("DISCOVER_EXISTING" | "COPY_AUTO_SCALING_GROUP")
+      SENSITIVE: []
+    end
+
+    class IamArnRequiredException < Aws::EmptyStructure
+    end
+
+    class IamSessionArnAlreadyRegisteredException < Aws::EmptyStructure
+    end
+
+    class IamUserArnAlreadyRegisteredException < Aws::EmptyStructure
+    end
+
+    class IamUserArnRequiredException < Aws::EmptyStructure
+    end
+
+    class InstanceDoesNotExistException < Aws::EmptyStructure
+    end
+
+    class InstanceIdRequiredException < Aws::EmptyStructure
+    end
+
+    class InstanceInfo
+      attr_accessor instance_name: ::String
+      attr_accessor iam_session_arn: ::String
+      attr_accessor iam_user_arn: ::String
+      attr_accessor instance_arn: ::String
+      attr_accessor register_time: ::Time
+      attr_accessor deregister_time: ::Time
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class InstanceLimitExceededException < Aws::EmptyStructure
+    end
+
+    class InstanceNameAlreadyRegisteredException < Aws::EmptyStructure
+    end
+
+    class InstanceNameRequiredException < Aws::EmptyStructure
+    end
+
+    class InstanceNotRegisteredException < Aws::EmptyStructure
+    end
+
+    class InstanceSummary
+      attr_accessor deployment_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor status: ("Pending" | "InProgress" | "Succeeded" | "Failed" | "Skipped" | "Unknown" | "Ready")
+      attr_accessor last_updated_at: ::Time
+      attr_accessor lifecycle_events: ::Array[Types::LifecycleEvent]
+      attr_accessor instance_type: ("Blue" | "Green")
+      SENSITIVE: []
+    end
+
+    class InstanceTarget
+      attr_accessor deployment_id: ::String
+      attr_accessor target_id: ::String
+      attr_accessor target_arn: ::String
+      attr_accessor status: ("Pending" | "InProgress" | "Succeeded" | "Failed" | "Skipped" | "Unknown" | "Ready")
+      attr_accessor last_updated_at: ::Time
+      attr_accessor lifecycle_events: ::Array[Types::LifecycleEvent]
+      attr_accessor instance_label: ("Blue" | "Green")
+      SENSITIVE: []
+    end
+
+    class InvalidAlarmConfigException < Aws::EmptyStructure
+    end
+
+    class InvalidApplicationNameException < Aws::EmptyStructure
+    end
+
+    class InvalidArnException < Aws::EmptyStructure
+    end
+
+    class InvalidAutoRollbackConfigException < Aws::EmptyStructure
+    end
+
+    class InvalidAutoScalingGroupException < Aws::EmptyStructure
+    end
+
+    class InvalidBlueGreenDeploymentConfigurationException < Aws::EmptyStructure
+    end
+
+    class InvalidBucketNameFilterException < Aws::EmptyStructure
+    end
+
+    class InvalidComputePlatformException < Aws::EmptyStructure
+    end
+
+    class InvalidDeployedStateFilterException < Aws::EmptyStructure
+    end
+
+    class InvalidDeploymentConfigNameException < Aws::EmptyStructure
+    end
+
+    class InvalidDeploymentGroupNameException < Aws::EmptyStructure
+    end
+
+    class InvalidDeploymentIdException < Aws::EmptyStructure
+    end
+
+    class InvalidDeploymentInstanceTypeException < Aws::EmptyStructure
+    end
+
+    class InvalidDeploymentStatusException < Aws::EmptyStructure
+    end
+
+    class InvalidDeploymentStyleException < Aws::EmptyStructure
+    end
+
+    class InvalidDeploymentTargetIdException < Aws::EmptyStructure
+    end
+
+    class InvalidDeploymentWaitTypeException < Aws::EmptyStructure
+    end
+
+    class InvalidEC2TagCombinationException < Aws::EmptyStructure
+    end
+
+    class InvalidEC2TagException < Aws::EmptyStructure
+    end
+
+    class InvalidECSServiceException < Aws::EmptyStructure
+    end
+
+    class InvalidExternalIdException < Aws::EmptyStructure
+    end
+
+    class InvalidFileExistsBehaviorException < Aws::EmptyStructure
+    end
+
+    class InvalidGitHubAccountTokenException < Aws::EmptyStructure
+    end
+
+    class InvalidGitHubAccountTokenNameException < Aws::EmptyStructure
+    end
+
+    class InvalidIamSessionArnException < Aws::EmptyStructure
+    end
+
+    class InvalidIamUserArnException < Aws::EmptyStructure
+    end
+
+    class InvalidIgnoreApplicationStopFailuresValueException < Aws::EmptyStructure
+    end
+
+    class InvalidInputException < Aws::EmptyStructure
+    end
+
+    class InvalidInstanceIdException < Aws::EmptyStructure
+    end
+
+    class InvalidInstanceNameException < Aws::EmptyStructure
+    end
+
+    class InvalidInstanceStatusException < Aws::EmptyStructure
+    end
+
+    class InvalidInstanceTypeException < Aws::EmptyStructure
+    end
+
+    class InvalidKeyPrefixFilterException < Aws::EmptyStructure
+    end
+
+    class InvalidLifecycleEventHookExecutionIdException < Aws::EmptyStructure
+    end
+
+    class InvalidLifecycleEventHookExecutionStatusException < Aws::EmptyStructure
+    end
+
+    class InvalidLoadBalancerInfoException < Aws::EmptyStructure
+    end
+
+    class InvalidMinimumHealthyHostValueException < Aws::EmptyStructure
+    end
+
+    class InvalidNextTokenException < Aws::EmptyStructure
+    end
+
+    class InvalidOnPremisesTagCombinationException < Aws::EmptyStructure
+    end
+
+    class InvalidOperationException < Aws::EmptyStructure
+    end
+
+    class InvalidRegistrationStatusException < Aws::EmptyStructure
+    end
+
+    class InvalidRevisionException < Aws::EmptyStructure
+    end
+
+    class InvalidRoleException < Aws::EmptyStructure
+    end
+
+    class InvalidSortByException < Aws::EmptyStructure
+    end
+
+    class InvalidSortOrderException < Aws::EmptyStructure
+    end
+
+    class InvalidTagException < Aws::EmptyStructure
+    end
+
+    class InvalidTagFilterException < Aws::EmptyStructure
+    end
+
+    class InvalidTagsToAddException < Aws::EmptyStructure
+    end
+
+    class InvalidTargetException < Aws::EmptyStructure
+    end
+
+    class InvalidTargetFilterNameException < Aws::EmptyStructure
+    end
+
+    class InvalidTargetGroupPairException < Aws::EmptyStructure
+    end
+
+    class InvalidTargetInstancesException < Aws::EmptyStructure
+    end
+
+    class InvalidTimeRangeException < Aws::EmptyStructure
+    end
+
+    class InvalidTrafficRoutingConfigurationException < Aws::EmptyStructure
+    end
+
+    class InvalidTriggerConfigException < Aws::EmptyStructure
+    end
+
+    class InvalidUpdateOutdatedInstancesOnlyValueException < Aws::EmptyStructure
+    end
+
+    class InvalidZonalDeploymentConfigurationException < Aws::EmptyStructure
+    end
+
+    class LambdaFunctionInfo
+      attr_accessor function_name: ::String
+      attr_accessor function_alias: ::String
+      attr_accessor current_version: ::String
+      attr_accessor target_version: ::String
+      attr_accessor target_version_weight: ::Float
+      SENSITIVE: []
+    end
+
+    class LambdaTarget
+      attr_accessor deployment_id: ::String
+      attr_accessor target_id: ::String
+      attr_accessor target_arn: ::String
+      attr_accessor status: ("Pending" | "InProgress" | "Succeeded" | "Failed" | "Skipped" | "Unknown" | "Ready")
+      attr_accessor last_updated_at: ::Time
+      attr_accessor lifecycle_events: ::Array[Types::LifecycleEvent]
+      attr_accessor lambda_function_info: Types::LambdaFunctionInfo
+      SENSITIVE: []
+    end
+
+    class LastDeploymentInfo
+      attr_accessor deployment_id: ::String
+      attr_accessor status: ("Created" | "Queued" | "InProgress" | "Baking" | "Succeeded" | "Failed" | "Stopped" | "Ready")
+      attr_accessor end_time: ::Time
+      attr_accessor create_time: ::Time
+      SENSITIVE: []
+    end
+
+    class LifecycleEvent
+      attr_accessor lifecycle_event_name: ::String
+      attr_accessor diagnostics: Types::Diagnostics
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor status: ("Pending" | "InProgress" | "Succeeded" | "Failed" | "Skipped" | "Unknown")
+      SENSITIVE: []
+    end
+
+    class LifecycleEventAlreadyCompletedException < Aws::EmptyStructure
+    end
+
+    class LifecycleHookLimitExceededException < Aws::EmptyStructure
+    end
+
+    class ListApplicationRevisionsInput
+      attr_accessor application_name: ::String
+      attr_accessor sort_by: ("registerTime" | "firstUsedTime" | "lastUsedTime")
+      attr_accessor sort_order: ("ascending" | "descending")
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_key_prefix: ::String
+      attr_accessor deployed: ("include" | "exclude" | "ignore")
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationRevisionsOutput
+      attr_accessor revisions: ::Array[Types::RevisionLocation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationsInput
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationsOutput
+      attr_accessor applications: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeploymentConfigsInput
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeploymentConfigsOutput
+      attr_accessor deployment_configs_list: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeploymentGroupsInput
+      attr_accessor application_name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeploymentGroupsOutput
+      attr_accessor application_name: ::String
+      attr_accessor deployment_groups: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeploymentInstancesInput
+      attr_accessor deployment_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor instance_status_filter: ::Array[("Pending" | "InProgress" | "Succeeded" | "Failed" | "Skipped" | "Unknown" | "Ready")]
+      attr_accessor instance_type_filter: ::Array[("Blue" | "Green")]
+      SENSITIVE: []
+    end
+
+    class ListDeploymentInstancesOutput
+      attr_accessor instances_list: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeploymentTargetsInput
+      attr_accessor deployment_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor target_filters: ::Hash[("TargetStatus" | "ServerInstanceLabel"), ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class ListDeploymentTargetsOutput
+      attr_accessor target_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeploymentsInput
+      attr_accessor application_name: ::String
+      attr_accessor deployment_group_name: ::String
+      attr_accessor external_id: ::String
+      attr_accessor include_only_statuses: ::Array[("Created" | "Queued" | "InProgress" | "Baking" | "Succeeded" | "Failed" | "Stopped" | "Ready")]
+      attr_accessor create_time_range: Types::TimeRange
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeploymentsOutput
+      attr_accessor deployments: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGitHubAccountTokenNamesInput
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGitHubAccountTokenNamesOutput
+      attr_accessor token_name_list: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOnPremisesInstancesInput
+      attr_accessor registration_status: ("Registered" | "Deregistered")
+      attr_accessor tag_filters: ::Array[Types::TagFilter]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOnPremisesInstancesOutput
+      attr_accessor instance_names: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LoadBalancerInfo
+      attr_accessor elb_info_list: ::Array[Types::ELBInfo]
+      attr_accessor target_group_info_list: ::Array[Types::TargetGroupInfo]
+      attr_accessor target_group_pair_info_list: ::Array[Types::TargetGroupPairInfo]
+      SENSITIVE: []
+    end
+
+    class MinimumHealthyHosts
+      attr_accessor type: ("HOST_COUNT" | "FLEET_PERCENT")
+      attr_accessor value: ::Integer
+      SENSITIVE: []
+    end
+
+    class MinimumHealthyHostsPerZone
+      attr_accessor type: ("HOST_COUNT" | "FLEET_PERCENT")
+      attr_accessor value: ::Integer
+      SENSITIVE: []
+    end
+
+    class MultipleIamArnsProvidedException < Aws::EmptyStructure
+    end
+
+    class OnPremisesTagSet
+      attr_accessor on_premises_tag_set_list: ::Array[::Array[Types::TagFilter]]
+      SENSITIVE: []
+    end
+
+    class OperationNotSupportedException < Aws::EmptyStructure
+    end
+
+    class PutLifecycleEventHookExecutionStatusInput
+      attr_accessor deployment_id: ::String
+      attr_accessor lifecycle_event_hook_execution_id: ::String
+      attr_accessor status: ("Pending" | "InProgress" | "Succeeded" | "Failed" | "Skipped" | "Unknown")
+      SENSITIVE: []
+    end
+
+    class PutLifecycleEventHookExecutionStatusOutput
+      attr_accessor lifecycle_event_hook_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class RawString
+      attr_accessor content: ::String
+      attr_accessor sha256: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterApplicationRevisionInput
+      attr_accessor application_name: ::String
+      attr_accessor description: ::String
+      attr_accessor revision: Types::RevisionLocation
+      SENSITIVE: []
+    end
+
+    class RegisterOnPremisesInstanceInput
+      attr_accessor instance_name: ::String
+      attr_accessor iam_session_arn: ::String
+      attr_accessor iam_user_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RelatedDeployments
+      attr_accessor auto_update_outdated_instances_root_deployment_id: ::String
+      attr_accessor auto_update_outdated_instances_deployment_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RemoveTagsFromOnPremisesInstancesInput
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor instance_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResourceArnRequiredException < Aws::EmptyStructure
+    end
+
+    class ResourceValidationException < Aws::EmptyStructure
+    end
+
+    class RevisionDoesNotExistException < Aws::EmptyStructure
+    end
+
+    class RevisionInfo
+      attr_accessor revision_location: Types::RevisionLocation
+      attr_accessor generic_revision_info: Types::GenericRevisionInfo
+      SENSITIVE: []
+    end
+
+    class RevisionLocation
+      attr_accessor revision_type: ("S3" | "GitHub" | "String" | "AppSpecContent")
+      attr_accessor s3_location: Types::S3Location
+      attr_accessor git_hub_location: Types::GitHubLocation
+      attr_accessor string: Types::RawString
+      attr_accessor app_spec_content: Types::AppSpecContent
+      SENSITIVE: []
+    end
+
+    class RevisionRequiredException < Aws::EmptyStructure
+    end
+
+    class RoleRequiredException < Aws::EmptyStructure
+    end
+
+    class RollbackInfo
+      attr_accessor rollback_deployment_id: ::String
+      attr_accessor rollback_triggering_deployment_id: ::String
+      attr_accessor rollback_message: ::String
+      SENSITIVE: []
+    end
+
+    class S3Location
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      attr_accessor bundle_type: ("tar" | "tgz" | "zip" | "YAML" | "JSON")
+      attr_accessor version: ::String
+      attr_accessor e_tag: ::String
+      SENSITIVE: []
+    end
+
+    class SkipWaitTimeForInstanceTerminationInput
+      attr_accessor deployment_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopDeploymentInput
+      attr_accessor deployment_id: ::String
+      attr_accessor auto_rollback_enabled: bool
+      SENSITIVE: []
+    end
+
+    class StopDeploymentOutput
+      attr_accessor status: ("Pending" | "Succeeded")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagFilter
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      attr_accessor type: ("KEY_ONLY" | "VALUE_ONLY" | "KEY_AND_VALUE")
+      SENSITIVE: []
+    end
+
+    class TagLimitExceededException < Aws::EmptyStructure
+    end
+
+    class TagRequiredException < Aws::EmptyStructure
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class TagSetListLimitExceededException < Aws::EmptyStructure
+    end
+
+    class TargetGroupInfo
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class TargetGroupPairInfo
+      attr_accessor target_groups: ::Array[Types::TargetGroupInfo]
+      attr_accessor prod_traffic_route: Types::TrafficRoute
+      attr_accessor test_traffic_route: Types::TrafficRoute
+      SENSITIVE: []
+    end
+
+    class TargetInstances
+      attr_accessor tag_filters: ::Array[Types::EC2TagFilter]
+      attr_accessor auto_scaling_groups: ::Array[::String]
+      attr_accessor ec2_tag_set: Types::EC2TagSet
+      SENSITIVE: []
+    end
+
+    class ThrottlingException < Aws::EmptyStructure
+    end
+
+    class TimeBasedCanary
+      attr_accessor canary_percentage: ::Integer
+      attr_accessor canary_interval: ::Integer
+      SENSITIVE: []
+    end
+
+    class TimeBasedLinear
+      attr_accessor linear_percentage: ::Integer
+      attr_accessor linear_interval: ::Integer
+      SENSITIVE: []
+    end
+
+    class TimeRange
+      attr_accessor start: ::Time
+      attr_accessor end: ::Time
+      SENSITIVE: []
+    end
+
+    class TrafficRoute
+      attr_accessor listener_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TrafficRoutingConfig
+      attr_accessor type: ("TimeBasedCanary" | "TimeBasedLinear" | "AllAtOnce")
+      attr_accessor time_based_canary: Types::TimeBasedCanary
+      attr_accessor time_based_linear: Types::TimeBasedLinear
+      SENSITIVE: []
+    end
+
+    class TriggerConfig
+      attr_accessor trigger_name: ::String
+      attr_accessor trigger_target_arn: ::String
+      attr_accessor trigger_events: ::Array[("DeploymentStart" | "DeploymentSuccess" | "DeploymentFailure" | "DeploymentStop" | "DeploymentRollback" | "DeploymentReady" | "InstanceStart" | "InstanceSuccess" | "InstanceFailure" | "InstanceReady")]
+      SENSITIVE: []
+    end
+
+    class TriggerTargetsLimitExceededException < Aws::EmptyStructure
+    end
+
+    class UnsupportedActionForDeploymentTypeException < Aws::EmptyStructure
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UpdateApplicationInput
+      attr_accessor application_name: ::String
+      attr_accessor new_application_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDeploymentGroupInput
+      attr_accessor application_name: ::String
+      attr_accessor current_deployment_group_name: ::String
+      attr_accessor new_deployment_group_name: ::String
+      attr_accessor deployment_config_name: ::String
+      attr_accessor ec2_tag_filters: ::Array[Types::EC2TagFilter]
+      attr_accessor on_premises_instance_tag_filters: ::Array[Types::TagFilter]
+      attr_accessor auto_scaling_groups: ::Array[::String]
+      attr_accessor service_role_arn: ::String
+      attr_accessor trigger_configurations: ::Array[Types::TriggerConfig]
+      attr_accessor alarm_configuration: Types::AlarmConfiguration
+      attr_accessor auto_rollback_configuration: Types::AutoRollbackConfiguration
+      attr_accessor outdated_instances_strategy: ("UPDATE" | "IGNORE")
+      attr_accessor deployment_style: Types::DeploymentStyle
+      attr_accessor blue_green_deployment_configuration: Types::BlueGreenDeploymentConfiguration
+      attr_accessor load_balancer_info: Types::LoadBalancerInfo
+      attr_accessor ec2_tag_set: Types::EC2TagSet
+      attr_accessor ecs_services: ::Array[Types::ECSService]
+      attr_accessor on_premises_tag_set: Types::OnPremisesTagSet
+      attr_accessor termination_hook_enabled: bool
+      SENSITIVE: []
+    end
+
+    class UpdateDeploymentGroupOutput
+      attr_accessor hooks_not_cleaned_up: ::Array[Types::AutoScalingGroup]
+      SENSITIVE: []
+    end
+
+    class ZonalConfig
+      attr_accessor first_zone_monitor_duration_in_seconds: ::Integer
+      attr_accessor monitor_duration_in_seconds: ::Integer
+      attr_accessor minimum_healthy_hosts_per_zone: Types::MinimumHealthyHostsPerZone
+      SENSITIVE: []
+    end
+  end
+end

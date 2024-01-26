@@ -1,0 +1,1043 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::AccessAnalyzer
+  module Types
+
+    class Access
+      attr_accessor actions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccessPreview
+      attr_accessor id: ::String
+      attr_accessor analyzer_arn: ::String
+      attr_accessor configurations: ::Hash[::String, Types::Configuration]
+      attr_accessor created_at: ::Time
+      attr_accessor status: ("COMPLETED" | "CREATING" | "FAILED")
+      attr_accessor status_reason: Types::AccessPreviewStatusReason
+      SENSITIVE: []
+    end
+
+    class AccessPreviewFinding
+      attr_accessor id: ::String
+      attr_accessor existing_finding_id: ::String
+      attr_accessor existing_finding_status: ("ACTIVE" | "ARCHIVED" | "RESOLVED")
+      attr_accessor principal: ::Hash[::String, ::String]
+      attr_accessor action: ::Array[::String]
+      attr_accessor condition: ::Hash[::String, ::String]
+      attr_accessor resource: ::String
+      attr_accessor is_public: bool
+      attr_accessor resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket")
+      attr_accessor created_at: ::Time
+      attr_accessor change_type: ("CHANGED" | "NEW" | "UNCHANGED")
+      attr_accessor status: ("ACTIVE" | "ARCHIVED" | "RESOLVED")
+      attr_accessor resource_owner_account: ::String
+      attr_accessor error: ::String
+      attr_accessor sources: ::Array[Types::FindingSource]
+      SENSITIVE: []
+    end
+
+    class AccessPreviewStatusReason
+      attr_accessor code: ("INTERNAL_ERROR" | "INVALID_CONFIGURATION")
+      SENSITIVE: []
+    end
+
+    class AccessPreviewSummary
+      attr_accessor id: ::String
+      attr_accessor analyzer_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor status: ("COMPLETED" | "CREATING" | "FAILED")
+      attr_accessor status_reason: Types::AccessPreviewStatusReason
+      SENSITIVE: []
+    end
+
+    class AclGrantee
+      attr_accessor id: ::String
+      attr_accessor uri: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Id < AclGrantee
+      end
+      class Uri < AclGrantee
+      end
+      class Unknown < AclGrantee
+      end
+    end
+
+    class AnalyzedResource
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket")
+      attr_accessor created_at: ::Time
+      attr_accessor analyzed_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor is_public: bool
+      attr_accessor actions: ::Array[::String]
+      attr_accessor shared_via: ::Array[::String]
+      attr_accessor status: ("ACTIVE" | "ARCHIVED" | "RESOLVED")
+      attr_accessor resource_owner_account: ::String
+      attr_accessor error: ::String
+      SENSITIVE: []
+    end
+
+    class AnalyzedResourceSummary
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_owner_account: ::String
+      attr_accessor resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket")
+      SENSITIVE: []
+    end
+
+    class AnalyzerConfiguration
+      attr_accessor unused_access: Types::UnusedAccessConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class UnusedAccess < AnalyzerConfiguration
+      end
+      class Unknown < AnalyzerConfiguration
+      end
+    end
+
+    class AnalyzerSummary
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("ACCOUNT" | "ORGANIZATION" | "ACCOUNT_UNUSED_ACCESS" | "ORGANIZATION_UNUSED_ACCESS")
+      attr_accessor created_at: ::Time
+      attr_accessor last_resource_analyzed: ::String
+      attr_accessor last_resource_analyzed_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor status: ("ACTIVE" | "CREATING" | "DISABLED" | "FAILED")
+      attr_accessor status_reason: Types::StatusReason
+      attr_accessor configuration: Types::AnalyzerConfiguration
+      SENSITIVE: []
+    end
+
+    class ApplyArchiveRuleRequest
+      attr_accessor analyzer_arn: ::String
+      attr_accessor rule_name: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class ArchiveRuleSummary
+      attr_accessor rule_name: ::String
+      attr_accessor filter: ::Hash[::String, Types::Criterion]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CancelPolicyGenerationRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelPolicyGenerationResponse < Aws::EmptyStructure
+    end
+
+    class CheckAccessNotGrantedRequest
+      attr_accessor policy_document: ::String
+      attr_accessor access: ::Array[Types::Access]
+      attr_accessor policy_type: ("IDENTITY_POLICY" | "RESOURCE_POLICY")
+      SENSITIVE: [:policy_document]
+    end
+
+    class CheckAccessNotGrantedResponse
+      attr_accessor result: ("PASS" | "FAIL")
+      attr_accessor message: ::String
+      attr_accessor reasons: ::Array[Types::ReasonSummary]
+      SENSITIVE: []
+    end
+
+    class CheckNoNewAccessRequest
+      attr_accessor new_policy_document: ::String
+      attr_accessor existing_policy_document: ::String
+      attr_accessor policy_type: ("IDENTITY_POLICY" | "RESOURCE_POLICY")
+      SENSITIVE: [:new_policy_document, :existing_policy_document]
+    end
+
+    class CheckNoNewAccessResponse
+      attr_accessor result: ("PASS" | "FAIL")
+      attr_accessor message: ::String
+      attr_accessor reasons: ::Array[Types::ReasonSummary]
+      SENSITIVE: []
+    end
+
+    class CloudTrailDetails
+      attr_accessor trails: ::Array[Types::Trail]
+      attr_accessor access_role: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CloudTrailProperties
+      attr_accessor trail_properties: ::Array[Types::TrailProperties]
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class Configuration
+      attr_accessor ebs_snapshot: Types::EbsSnapshotConfiguration
+      attr_accessor ecr_repository: Types::EcrRepositoryConfiguration
+      attr_accessor iam_role: Types::IamRoleConfiguration
+      attr_accessor efs_file_system: Types::EfsFileSystemConfiguration
+      attr_accessor kms_key: Types::KmsKeyConfiguration
+      attr_accessor rds_db_cluster_snapshot: Types::RdsDbClusterSnapshotConfiguration
+      attr_accessor rds_db_snapshot: Types::RdsDbSnapshotConfiguration
+      attr_accessor secrets_manager_secret: Types::SecretsManagerSecretConfiguration
+      attr_accessor s3_bucket: Types::S3BucketConfiguration
+      attr_accessor sns_topic: Types::SnsTopicConfiguration
+      attr_accessor sqs_queue: Types::SqsQueueConfiguration
+      attr_accessor s3_express_directory_bucket: Types::S3ExpressDirectoryBucketConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class EbsSnapshot < Configuration
+      end
+      class EcrRepository < Configuration
+      end
+      class IamRole < Configuration
+      end
+      class EfsFileSystem < Configuration
+      end
+      class KmsKey < Configuration
+      end
+      class RdsDbClusterSnapshot < Configuration
+      end
+      class RdsDbSnapshot < Configuration
+      end
+      class SecretsManagerSecret < Configuration
+      end
+      class S3Bucket < Configuration
+      end
+      class SnsTopic < Configuration
+      end
+      class SqsQueue < Configuration
+      end
+      class S3ExpressDirectoryBucket < Configuration
+      end
+      class Unknown < Configuration
+      end
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAccessPreviewRequest
+      attr_accessor analyzer_arn: ::String
+      attr_accessor configurations: ::Hash[::String, Types::Configuration]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAccessPreviewResponse
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAnalyzerRequest
+      attr_accessor analyzer_name: ::String
+      attr_accessor type: ("ACCOUNT" | "ORGANIZATION" | "ACCOUNT_UNUSED_ACCESS" | "ORGANIZATION_UNUSED_ACCESS")
+      attr_accessor archive_rules: ::Array[Types::InlineArchiveRule]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      attr_accessor configuration: Types::AnalyzerConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateAnalyzerResponse
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateArchiveRuleRequest
+      attr_accessor analyzer_name: ::String
+      attr_accessor rule_name: ::String
+      attr_accessor filter: ::Hash[::String, Types::Criterion]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class Criterion
+      attr_accessor eq: ::Array[::String]
+      attr_accessor neq: ::Array[::String]
+      attr_accessor contains: ::Array[::String]
+      attr_accessor exists: bool
+      SENSITIVE: []
+    end
+
+    class DeleteAnalyzerRequest
+      attr_accessor analyzer_name: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteArchiveRuleRequest
+      attr_accessor analyzer_name: ::String
+      attr_accessor rule_name: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class EbsSnapshotConfiguration
+      attr_accessor user_ids: ::Array[::String]
+      attr_accessor groups: ::Array[::String]
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class EcrRepositoryConfiguration
+      attr_accessor repository_policy: ::String
+      SENSITIVE: []
+    end
+
+    class EfsFileSystemConfiguration
+      attr_accessor file_system_policy: ::String
+      SENSITIVE: []
+    end
+
+    class ExternalAccessDetails
+      attr_accessor action: ::Array[::String]
+      attr_accessor condition: ::Hash[::String, ::String]
+      attr_accessor is_public: bool
+      attr_accessor principal: ::Hash[::String, ::String]
+      attr_accessor sources: ::Array[Types::FindingSource]
+      SENSITIVE: []
+    end
+
+    class Finding
+      attr_accessor id: ::String
+      attr_accessor principal: ::Hash[::String, ::String]
+      attr_accessor action: ::Array[::String]
+      attr_accessor resource: ::String
+      attr_accessor is_public: bool
+      attr_accessor resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket")
+      attr_accessor condition: ::Hash[::String, ::String]
+      attr_accessor created_at: ::Time
+      attr_accessor analyzed_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("ACTIVE" | "ARCHIVED" | "RESOLVED")
+      attr_accessor resource_owner_account: ::String
+      attr_accessor error: ::String
+      attr_accessor sources: ::Array[Types::FindingSource]
+      SENSITIVE: []
+    end
+
+    class FindingDetails
+      attr_accessor external_access_details: Types::ExternalAccessDetails
+      attr_accessor unused_permission_details: Types::UnusedPermissionDetails
+      attr_accessor unused_iam_user_access_key_details: Types::UnusedIamUserAccessKeyDetails
+      attr_accessor unused_iam_role_details: Types::UnusedIamRoleDetails
+      attr_accessor unused_iam_user_password_details: Types::UnusedIamUserPasswordDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ExternalAccessDetails < FindingDetails
+      end
+      class UnusedPermissionDetails < FindingDetails
+      end
+      class UnusedIamUserAccessKeyDetails < FindingDetails
+      end
+      class UnusedIamRoleDetails < FindingDetails
+      end
+      class UnusedIamUserPasswordDetails < FindingDetails
+      end
+      class Unknown < FindingDetails
+      end
+    end
+
+    class FindingSource
+      attr_accessor type: ("POLICY" | "BUCKET_ACL" | "S3_ACCESS_POINT" | "S3_ACCESS_POINT_ACCOUNT")
+      attr_accessor detail: Types::FindingSourceDetail
+      SENSITIVE: []
+    end
+
+    class FindingSourceDetail
+      attr_accessor access_point_arn: ::String
+      attr_accessor access_point_account: ::String
+      SENSITIVE: []
+    end
+
+    class FindingSummary
+      attr_accessor id: ::String
+      attr_accessor principal: ::Hash[::String, ::String]
+      attr_accessor action: ::Array[::String]
+      attr_accessor resource: ::String
+      attr_accessor is_public: bool
+      attr_accessor resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket")
+      attr_accessor condition: ::Hash[::String, ::String]
+      attr_accessor created_at: ::Time
+      attr_accessor analyzed_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("ACTIVE" | "ARCHIVED" | "RESOLVED")
+      attr_accessor resource_owner_account: ::String
+      attr_accessor error: ::String
+      attr_accessor sources: ::Array[Types::FindingSource]
+      SENSITIVE: []
+    end
+
+    class FindingSummaryV2
+      attr_accessor analyzed_at: ::Time
+      attr_accessor created_at: ::Time
+      attr_accessor error: ::String
+      attr_accessor id: ::String
+      attr_accessor resource: ::String
+      attr_accessor resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket")
+      attr_accessor resource_owner_account: ::String
+      attr_accessor status: ("ACTIVE" | "ARCHIVED" | "RESOLVED")
+      attr_accessor updated_at: ::Time
+      attr_accessor finding_type: ("ExternalAccess" | "UnusedIAMRole" | "UnusedIAMUserAccessKey" | "UnusedIAMUserPassword" | "UnusedPermission")
+      SENSITIVE: []
+    end
+
+    class GeneratedPolicy
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class GeneratedPolicyProperties
+      attr_accessor is_complete: bool
+      attr_accessor principal_arn: ::String
+      attr_accessor cloud_trail_properties: Types::CloudTrailProperties
+      SENSITIVE: []
+    end
+
+    class GeneratedPolicyResult
+      attr_accessor properties: Types::GeneratedPolicyProperties
+      attr_accessor generated_policies: ::Array[Types::GeneratedPolicy]
+      SENSITIVE: []
+    end
+
+    class GetAccessPreviewRequest
+      attr_accessor access_preview_id: ::String
+      attr_accessor analyzer_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessPreviewResponse
+      attr_accessor access_preview: Types::AccessPreview
+      SENSITIVE: []
+    end
+
+    class GetAnalyzedResourceRequest
+      attr_accessor analyzer_arn: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetAnalyzedResourceResponse
+      attr_accessor resource: Types::AnalyzedResource
+      SENSITIVE: []
+    end
+
+    class GetAnalyzerRequest
+      attr_accessor analyzer_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetAnalyzerResponse
+      attr_accessor analyzer: Types::AnalyzerSummary
+      SENSITIVE: []
+    end
+
+    class GetArchiveRuleRequest
+      attr_accessor analyzer_name: ::String
+      attr_accessor rule_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetArchiveRuleResponse
+      attr_accessor archive_rule: Types::ArchiveRuleSummary
+      SENSITIVE: []
+    end
+
+    class GetFindingRequest
+      attr_accessor analyzer_arn: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetFindingResponse
+      attr_accessor finding: Types::Finding
+      SENSITIVE: []
+    end
+
+    class GetFindingV2Request
+      attr_accessor analyzer_arn: ::String
+      attr_accessor id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetFindingV2Response
+      attr_accessor analyzed_at: ::Time
+      attr_accessor created_at: ::Time
+      attr_accessor error: ::String
+      attr_accessor id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor resource: ::String
+      attr_accessor resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket")
+      attr_accessor resource_owner_account: ::String
+      attr_accessor status: ("ACTIVE" | "ARCHIVED" | "RESOLVED")
+      attr_accessor updated_at: ::Time
+      attr_accessor finding_details: ::Array[Types::FindingDetails]
+      attr_accessor finding_type: ("ExternalAccess" | "UnusedIAMRole" | "UnusedIAMUserAccessKey" | "UnusedIAMUserPassword" | "UnusedPermission")
+      SENSITIVE: []
+    end
+
+    class GetGeneratedPolicyRequest
+      attr_accessor job_id: ::String
+      attr_accessor include_resource_placeholders: bool
+      attr_accessor include_service_level_template: bool
+      SENSITIVE: []
+    end
+
+    class GetGeneratedPolicyResponse
+      attr_accessor job_details: Types::JobDetails
+      attr_accessor generated_policy_result: Types::GeneratedPolicyResult
+      SENSITIVE: []
+    end
+
+    class IamRoleConfiguration
+      attr_accessor trust_policy: ::String
+      SENSITIVE: []
+    end
+
+    class InlineArchiveRule
+      attr_accessor rule_name: ::String
+      attr_accessor filter: ::Hash[::String, Types::Criterion]
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class InternetConfiguration < Aws::EmptyStructure
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JobDetails
+      attr_accessor job_id: ::String
+      attr_accessor status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "CANCELED")
+      attr_accessor started_on: ::Time
+      attr_accessor completed_on: ::Time
+      attr_accessor job_error: Types::JobError
+      SENSITIVE: []
+    end
+
+    class JobError
+      attr_accessor code: ("AUTHORIZATION_ERROR" | "RESOURCE_NOT_FOUND_ERROR" | "SERVICE_QUOTA_EXCEEDED_ERROR" | "SERVICE_ERROR")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KmsGrantConfiguration
+      attr_accessor operations: ::Array[("CreateGrant" | "Decrypt" | "DescribeKey" | "Encrypt" | "GenerateDataKey" | "GenerateDataKeyPair" | "GenerateDataKeyPairWithoutPlaintext" | "GenerateDataKeyWithoutPlaintext" | "GetPublicKey" | "ReEncryptFrom" | "ReEncryptTo" | "RetireGrant" | "Sign" | "Verify")]
+      attr_accessor grantee_principal: ::String
+      attr_accessor retiring_principal: ::String
+      attr_accessor constraints: Types::KmsGrantConstraints
+      attr_accessor issuing_account: ::String
+      SENSITIVE: []
+    end
+
+    class KmsGrantConstraints
+      attr_accessor encryption_context_equals: ::Hash[::String, ::String]
+      attr_accessor encryption_context_subset: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class KmsKeyConfiguration
+      attr_accessor key_policies: ::Hash[::String, ::String]
+      attr_accessor grants: ::Array[Types::KmsGrantConfiguration]
+      SENSITIVE: []
+    end
+
+    class ListAccessPreviewFindingsRequest
+      attr_accessor access_preview_id: ::String
+      attr_accessor analyzer_arn: ::String
+      attr_accessor filter: ::Hash[::String, Types::Criterion]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAccessPreviewFindingsResponse
+      attr_accessor findings: ::Array[Types::AccessPreviewFinding]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccessPreviewsRequest
+      attr_accessor analyzer_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAccessPreviewsResponse
+      attr_accessor access_previews: ::Array[Types::AccessPreviewSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAnalyzedResourcesRequest
+      attr_accessor analyzer_arn: ::String
+      attr_accessor resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAnalyzedResourcesResponse
+      attr_accessor analyzed_resources: ::Array[Types::AnalyzedResourceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAnalyzersRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor type: ("ACCOUNT" | "ORGANIZATION" | "ACCOUNT_UNUSED_ACCESS" | "ORGANIZATION_UNUSED_ACCESS")
+      SENSITIVE: []
+    end
+
+    class ListAnalyzersResponse
+      attr_accessor analyzers: ::Array[Types::AnalyzerSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListArchiveRulesRequest
+      attr_accessor analyzer_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListArchiveRulesResponse
+      attr_accessor archive_rules: ::Array[Types::ArchiveRuleSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFindingsRequest
+      attr_accessor analyzer_arn: ::String
+      attr_accessor filter: ::Hash[::String, Types::Criterion]
+      attr_accessor sort: Types::SortCriteria
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFindingsResponse
+      attr_accessor findings: ::Array[Types::FindingSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFindingsV2Request
+      attr_accessor analyzer_arn: ::String
+      attr_accessor filter: ::Hash[::String, Types::Criterion]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort: Types::SortCriteria
+      SENSITIVE: []
+    end
+
+    class ListFindingsV2Response
+      attr_accessor findings: ::Array[Types::FindingSummaryV2]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPolicyGenerationsRequest
+      attr_accessor principal_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPolicyGenerationsResponse
+      attr_accessor policy_generations: ::Array[Types::PolicyGeneration]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Location
+      attr_accessor path: ::Array[Types::PathElement]
+      attr_accessor span: Types::Span
+      SENSITIVE: []
+    end
+
+    class NetworkOriginConfiguration
+      attr_accessor vpc_configuration: Types::VpcConfiguration
+      attr_accessor internet_configuration: Types::InternetConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class VpcConfiguration < NetworkOriginConfiguration
+      end
+      class InternetConfiguration < NetworkOriginConfiguration
+      end
+      class Unknown < NetworkOriginConfiguration
+      end
+    end
+
+    class PathElement
+      attr_accessor index: ::Integer
+      attr_accessor key: ::String
+      attr_accessor substring: Types::Substring
+      attr_accessor value: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Index < PathElement
+      end
+      class Key < PathElement
+      end
+      class Substring < PathElement
+      end
+      class Value < PathElement
+      end
+      class Unknown < PathElement
+      end
+    end
+
+    class PolicyGeneration
+      attr_accessor job_id: ::String
+      attr_accessor principal_arn: ::String
+      attr_accessor status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "CANCELED")
+      attr_accessor started_on: ::Time
+      attr_accessor completed_on: ::Time
+      SENSITIVE: []
+    end
+
+    class PolicyGenerationDetails
+      attr_accessor principal_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Position
+      attr_accessor line: ::Integer
+      attr_accessor column: ::Integer
+      attr_accessor offset: ::Integer
+      SENSITIVE: []
+    end
+
+    class RdsDbClusterSnapshotAttributeValue
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AccountIds < RdsDbClusterSnapshotAttributeValue
+      end
+      class Unknown < RdsDbClusterSnapshotAttributeValue
+      end
+    end
+
+    class RdsDbClusterSnapshotConfiguration
+      attr_accessor attributes: ::Hash[::String, Types::RdsDbClusterSnapshotAttributeValue]
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class RdsDbSnapshotAttributeValue
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AccountIds < RdsDbSnapshotAttributeValue
+      end
+      class Unknown < RdsDbSnapshotAttributeValue
+      end
+    end
+
+    class RdsDbSnapshotConfiguration
+      attr_accessor attributes: ::Hash[::String, Types::RdsDbSnapshotAttributeValue]
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class ReasonSummary
+      attr_accessor description: ::String
+      attr_accessor statement_index: ::Integer
+      attr_accessor statement_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class S3AccessPointConfiguration
+      attr_accessor access_point_policy: ::String
+      attr_accessor public_access_block: Types::S3PublicAccessBlockConfiguration
+      attr_accessor network_origin: Types::NetworkOriginConfiguration
+      SENSITIVE: []
+    end
+
+    class S3BucketAclGrantConfiguration
+      attr_accessor permission: ("READ" | "WRITE" | "READ_ACP" | "WRITE_ACP" | "FULL_CONTROL")
+      attr_accessor grantee: Types::AclGrantee
+      SENSITIVE: []
+    end
+
+    class S3BucketConfiguration
+      attr_accessor bucket_policy: ::String
+      attr_accessor bucket_acl_grants: ::Array[Types::S3BucketAclGrantConfiguration]
+      attr_accessor bucket_public_access_block: Types::S3PublicAccessBlockConfiguration
+      attr_accessor access_points: ::Hash[::String, Types::S3AccessPointConfiguration]
+      SENSITIVE: []
+    end
+
+    class S3ExpressDirectoryBucketConfiguration
+      attr_accessor bucket_policy: ::String
+      SENSITIVE: []
+    end
+
+    class S3PublicAccessBlockConfiguration
+      attr_accessor ignore_public_acls: bool
+      attr_accessor restrict_public_buckets: bool
+      SENSITIVE: []
+    end
+
+    class SecretsManagerSecretConfiguration
+      attr_accessor kms_key_id: ::String
+      attr_accessor secret_policy: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class SnsTopicConfiguration
+      attr_accessor topic_policy: ::String
+      SENSITIVE: []
+    end
+
+    class SortCriteria
+      attr_accessor attribute_name: ::String
+      attr_accessor order_by: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class Span
+      attr_accessor start: Types::Position
+      attr_accessor end: Types::Position
+      SENSITIVE: []
+    end
+
+    class SqsQueueConfiguration
+      attr_accessor queue_policy: ::String
+      SENSITIVE: []
+    end
+
+    class StartPolicyGenerationRequest
+      attr_accessor policy_generation_details: Types::PolicyGenerationDetails
+      attr_accessor cloud_trail_details: Types::CloudTrailDetails
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartPolicyGenerationResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartResourceScanRequest
+      attr_accessor analyzer_arn: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_owner_account: ::String
+      SENSITIVE: []
+    end
+
+    class StatusReason
+      attr_accessor code: ("AWS_SERVICE_ACCESS_DISABLED" | "DELEGATED_ADMINISTRATOR_DEREGISTERED" | "ORGANIZATION_DELETED" | "SERVICE_LINKED_ROLE_CREATION_FAILED")
+      SENSITIVE: []
+    end
+
+    class Substring
+      attr_accessor start: ::Integer
+      attr_accessor length: ::Integer
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class Trail
+      attr_accessor cloud_trail_arn: ::String
+      attr_accessor regions: ::Array[::String]
+      attr_accessor all_regions: bool
+      SENSITIVE: []
+    end
+
+    class TrailProperties
+      attr_accessor cloud_trail_arn: ::String
+      attr_accessor regions: ::Array[::String]
+      attr_accessor all_regions: bool
+      SENSITIVE: []
+    end
+
+    class UnprocessableEntityException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UnusedAccessConfiguration
+      attr_accessor unused_access_age: ::Integer
+      SENSITIVE: []
+    end
+
+    class UnusedAction
+      attr_accessor action: ::String
+      attr_accessor last_accessed: ::Time
+      SENSITIVE: []
+    end
+
+    class UnusedIamRoleDetails
+      attr_accessor last_accessed: ::Time
+      SENSITIVE: []
+    end
+
+    class UnusedIamUserAccessKeyDetails
+      attr_accessor access_key_id: ::String
+      attr_accessor last_accessed: ::Time
+      SENSITIVE: []
+    end
+
+    class UnusedIamUserPasswordDetails
+      attr_accessor last_accessed: ::Time
+      SENSITIVE: []
+    end
+
+    class UnusedPermissionDetails
+      attr_accessor actions: ::Array[Types::UnusedAction]
+      attr_accessor service_namespace: ::String
+      attr_accessor last_accessed: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateArchiveRuleRequest
+      attr_accessor analyzer_name: ::String
+      attr_accessor rule_name: ::String
+      attr_accessor filter: ::Hash[::String, Types::Criterion]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFindingsRequest
+      attr_accessor analyzer_arn: ::String
+      attr_accessor status: ("ACTIVE" | "ARCHIVED")
+      attr_accessor ids: ::Array[::String]
+      attr_accessor resource_arn: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class ValidatePolicyFinding
+      attr_accessor finding_details: ::String
+      attr_accessor finding_type: ("ERROR" | "SECURITY_WARNING" | "SUGGESTION" | "WARNING")
+      attr_accessor issue_code: ::String
+      attr_accessor learn_more_link: ::String
+      attr_accessor locations: ::Array[Types::Location]
+      SENSITIVE: []
+    end
+
+    class ValidatePolicyRequest
+      attr_accessor locale: ("DE" | "EN" | "ES" | "FR" | "IT" | "JA" | "KO" | "PT_BR" | "ZH_CN" | "ZH_TW")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor policy_document: ::String
+      attr_accessor policy_type: ("IDENTITY_POLICY" | "RESOURCE_POLICY" | "SERVICE_CONTROL_POLICY")
+      attr_accessor validate_policy_resource_type: ("AWS::S3::Bucket" | "AWS::S3::AccessPoint" | "AWS::S3::MultiRegionAccessPoint" | "AWS::S3ObjectLambda::AccessPoint" | "AWS::IAM::AssumeRolePolicyDocument")
+      SENSITIVE: []
+    end
+
+    class ValidatePolicyResponse
+      attr_accessor findings: ::Array[Types::ValidatePolicyFinding]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VpcConfiguration
+      attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+  end
+end

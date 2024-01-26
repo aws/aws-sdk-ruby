@@ -1,0 +1,600 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Glacier
+  module Types
+
+    class AbortMultipartUploadInput
+      attr_accessor account_id: ::String
+      attr_accessor vault_name: ::String
+      attr_accessor upload_id: ::String
+      SENSITIVE: []
+    end
+
+    class AbortVaultLockInput
+      attr_accessor account_id: ::String
+      attr_accessor vault_name: ::String
+      SENSITIVE: []
+    end
+
+    class AddTagsToVaultInput
+      attr_accessor account_id: ::String
+      attr_accessor vault_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ArchiveCreationOutput
+      attr_accessor location: ::String
+      attr_accessor checksum: ::String
+      attr_accessor archive_id: ::String
+      SENSITIVE: []
+    end
+
+    class CSVInput
+      attr_accessor file_header_info: ("USE" | "IGNORE" | "NONE")
+      attr_accessor comments: ::String
+      attr_accessor quote_escape_character: ::String
+      attr_accessor record_delimiter: ::String
+      attr_accessor field_delimiter: ::String
+      attr_accessor quote_character: ::String
+      SENSITIVE: []
+    end
+
+    class CSVOutput
+      attr_accessor quote_fields: ("ALWAYS" | "ASNEEDED")
+      attr_accessor quote_escape_character: ::String
+      attr_accessor record_delimiter: ::String
+      attr_accessor field_delimiter: ::String
+      attr_accessor quote_character: ::String
+      SENSITIVE: []
+    end
+
+    class CompleteMultipartUploadInput
+      attr_accessor account_id: ::String
+      attr_accessor vault_name: ::String
+      attr_accessor upload_id: ::String
+      attr_accessor archive_size: ::Integer
+      attr_accessor checksum: ::String
+      SENSITIVE: []
+    end
+
+    class CompleteVaultLockInput
+      attr_accessor account_id: ::String
+      attr_accessor vault_name: ::String
+      attr_accessor lock_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateVaultInput
+      attr_accessor account_id: ::String
+      attr_accessor vault_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateVaultOutput
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
+    class DataRetrievalPolicy
+      attr_accessor rules: ::Array[Types::DataRetrievalRule]
+      SENSITIVE: []
+    end
+
+    class DataRetrievalRule
+      attr_accessor strategy: ::String
+      attr_accessor bytes_per_hour: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteArchiveInput
+      attr_accessor account_id: ::String
+      attr_accessor vault_name: ::String
+      attr_accessor archive_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVaultAccessPolicyInput
+      attr_accessor account_id: ::String
+      attr_accessor vault_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVaultInput
+      attr_accessor account_id: ::String
+      attr_accessor vault_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVaultNotificationsInput
+      attr_accessor account_id: ::String
+      attr_accessor vault_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeJobInput
+      attr_accessor account_id: ::String
+      attr_accessor vault_name: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeVaultInput
+      attr_accessor account_id: ::String
+      attr_accessor vault_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeVaultOutput
+      attr_accessor vault_arn: ::String
+      attr_accessor vault_name: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor last_inventory_date: ::Time
+      attr_accessor number_of_archives: ::Integer
+      attr_accessor size_in_bytes: ::Integer
+      SENSITIVE: []
+    end
+
+    class Encryption
+      attr_accessor encryption_type: ("aws:kms" | "AES256")
+      attr_accessor kms_key_id: ::String
+      attr_accessor kms_context: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataRetrievalPolicyInput
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataRetrievalPolicyOutput
+      attr_accessor policy: Types::DataRetrievalPolicy
+      SENSITIVE: []
+    end
+
+    class GetJobOutputInput
+      attr_accessor account_id: ::String
+      attr_accessor vault_name: ::String
+      attr_accessor job_id: ::String
+      attr_accessor range: ::String
+      SENSITIVE: []
+    end
+
+    class GetJobOutputOutput
+      attr_accessor body: ::IO
+      attr_accessor checksum: ::String
+      attr_accessor status: ::Integer
+      attr_accessor content_range: ::String
+      attr_accessor accept_ranges: ::String
+      attr_accessor content_type: ::String
+      attr_accessor archive_description: ::String
+      SENSITIVE: []
+    end
+
+    class GetVaultAccessPolicyInput
+      attr_accessor account_id: ::String
+      attr_accessor vault_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetVaultAccessPolicyOutput
+      attr_accessor policy: Types::VaultAccessPolicy
+      SENSITIVE: []
+    end
+
+    class GetVaultLockInput
+      attr_accessor account_id: ::String
+      attr_accessor vault_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetVaultLockOutput
+      attr_accessor policy: ::String
+      attr_accessor state: ::String
+      attr_accessor expiration_date: ::Time
+      attr_accessor creation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class GetVaultNotificationsInput
+      attr_accessor account_id: ::String
+      attr_accessor vault_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetVaultNotificationsOutput
+      attr_accessor vault_notification_config: Types::VaultNotificationConfig
+      SENSITIVE: []
+    end
+
+    class GlacierJobDescription
+      attr_accessor job_id: ::String
+      attr_accessor job_description: ::String
+      attr_accessor action: ("ArchiveRetrieval" | "InventoryRetrieval" | "Select")
+      attr_accessor archive_id: ::String
+      attr_accessor vault_arn: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor completed: bool
+      attr_accessor status_code: ("InProgress" | "Succeeded" | "Failed")
+      attr_accessor status_message: ::String
+      attr_accessor archive_size_in_bytes: ::Integer
+      attr_accessor inventory_size_in_bytes: ::Integer
+      attr_accessor sns_topic: ::String
+      attr_accessor completion_date: ::Time
+      attr_accessor sha256_tree_hash: ::String
+      attr_accessor archive_sha256_tree_hash: ::String
+      attr_accessor retrieval_byte_range: ::String
+      attr_accessor tier: ::String
+      attr_accessor inventory_retrieval_parameters: Types::InventoryRetrievalJobDescription
+      attr_accessor job_output_path: ::String
+      attr_accessor select_parameters: Types::SelectParameters
+      attr_accessor output_location: Types::OutputLocation
+      SENSITIVE: []
+    end
+
+    class Grant
+      attr_accessor grantee: Types::Grantee
+      attr_accessor permission: ("FULL_CONTROL" | "WRITE" | "WRITE_ACP" | "READ" | "READ_ACP")
+      SENSITIVE: []
+    end
+
+    class Grantee
+      attr_accessor type: ("AmazonCustomerByEmail" | "CanonicalUser" | "Group")
+      attr_accessor display_name: ::String
+      attr_accessor uri: ::String
+      attr_accessor id: ::String
+      attr_accessor email_address: ::String
+      SENSITIVE: []
+    end
+
+    class InitiateJobInput
+      attr_accessor account_id: ::String
+      attr_accessor vault_name: ::String
+      attr_accessor job_parameters: Types::JobParameters
+      SENSITIVE: []
+    end
+
+    class InitiateJobOutput
+      attr_accessor location: ::String
+      attr_accessor job_id: ::String
+      attr_accessor job_output_path: ::String
+      SENSITIVE: []
+    end
+
+    class InitiateMultipartUploadInput
+      attr_accessor account_id: ::String
+      attr_accessor vault_name: ::String
+      attr_accessor archive_description: ::String
+      attr_accessor part_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class InitiateMultipartUploadOutput
+      attr_accessor location: ::String
+      attr_accessor upload_id: ::String
+      SENSITIVE: []
+    end
+
+    class InitiateVaultLockInput
+      attr_accessor account_id: ::String
+      attr_accessor vault_name: ::String
+      attr_accessor policy: Types::VaultLockPolicy
+      SENSITIVE: []
+    end
+
+    class InitiateVaultLockOutput
+      attr_accessor lock_id: ::String
+      SENSITIVE: []
+    end
+
+    class InputSerialization
+      attr_accessor csv: Types::CSVInput
+      SENSITIVE: []
+    end
+
+    class InsufficientCapacityException
+      attr_accessor type: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterValueException
+      attr_accessor type: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InventoryRetrievalJobDescription
+      attr_accessor format: ::String
+      attr_accessor start_date: ::Time
+      attr_accessor end_date: ::Time
+      attr_accessor limit: ::String
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class InventoryRetrievalJobInput
+      attr_accessor start_date: ::Time
+      attr_accessor end_date: ::Time
+      attr_accessor limit: ::String
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class JobParameters
+      attr_accessor format: ::String
+      attr_accessor type: ::String
+      attr_accessor archive_id: ::String
+      attr_accessor description: ::String
+      attr_accessor sns_topic: ::String
+      attr_accessor retrieval_byte_range: ::String
+      attr_accessor tier: ::String
+      attr_accessor inventory_retrieval_parameters: Types::InventoryRetrievalJobInput
+      attr_accessor select_parameters: Types::SelectParameters
+      attr_accessor output_location: Types::OutputLocation
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor type: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobsInput
+      attr_accessor account_id: ::String
+      attr_accessor vault_name: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor statuscode: ::String
+      attr_accessor completed: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobsOutput
+      attr_accessor job_list: ::Array[Types::GlacierJobDescription]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListMultipartUploadsInput
+      attr_accessor account_id: ::String
+      attr_accessor vault_name: ::String
+      attr_accessor marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMultipartUploadsOutput
+      attr_accessor uploads_list: ::Array[Types::UploadListElement]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListPartsInput
+      attr_accessor account_id: ::String
+      attr_accessor vault_name: ::String
+      attr_accessor upload_id: ::String
+      attr_accessor marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPartsOutput
+      attr_accessor multipart_upload_id: ::String
+      attr_accessor vault_arn: ::String
+      attr_accessor archive_description: ::String
+      attr_accessor part_size_in_bytes: ::Integer
+      attr_accessor creation_date: ::Time
+      attr_accessor parts: ::Array[Types::PartListElement]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListProvisionedCapacityInput
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListProvisionedCapacityOutput
+      attr_accessor provisioned_capacity_list: ::Array[Types::ProvisionedCapacityDescription]
+      SENSITIVE: []
+    end
+
+    class ListTagsForVaultInput
+      attr_accessor account_id: ::String
+      attr_accessor vault_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForVaultOutput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListVaultsInput
+      attr_accessor account_id: ::String
+      attr_accessor marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListVaultsOutput
+      attr_accessor vault_list: ::Array[Types::DescribeVaultOutput]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class MissingParameterValueException
+      attr_accessor type: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OutputLocation
+      attr_accessor s3: Types::S3Location
+      SENSITIVE: []
+    end
+
+    class OutputSerialization
+      attr_accessor csv: Types::CSVOutput
+      SENSITIVE: []
+    end
+
+    class PartListElement
+      attr_accessor range_in_bytes: ::String
+      attr_accessor sha256_tree_hash: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyEnforcedException
+      attr_accessor type: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ProvisionedCapacityDescription
+      attr_accessor capacity_id: ::String
+      attr_accessor start_date: ::Time
+      attr_accessor expiration_date: ::Time
+      SENSITIVE: []
+    end
+
+    class PurchaseProvisionedCapacityInput
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class PurchaseProvisionedCapacityOutput
+      attr_accessor capacity_id: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveTagsFromVaultInput
+      attr_accessor account_id: ::String
+      attr_accessor vault_name: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RequestTimeoutException
+      attr_accessor type: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor type: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class S3Location
+      attr_accessor bucket_name: ::String
+      attr_accessor prefix: ::String
+      attr_accessor encryption: Types::Encryption
+      attr_accessor canned_acl: ("private" | "public-read" | "public-read-write" | "aws-exec-read" | "authenticated-read" | "bucket-owner-read" | "bucket-owner-full-control")
+      attr_accessor access_control_list: ::Array[Types::Grant]
+      attr_accessor tagging: ::Hash[::String, ::String]
+      attr_accessor user_metadata: ::Hash[::String, ::String]
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA")
+      SENSITIVE: []
+    end
+
+    class SelectParameters
+      attr_accessor input_serialization: Types::InputSerialization
+      attr_accessor expression_type: ("SQL")
+      attr_accessor expression: ::String
+      attr_accessor output_serialization: Types::OutputSerialization
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor type: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SetDataRetrievalPolicyInput
+      attr_accessor account_id: ::String
+      attr_accessor policy: Types::DataRetrievalPolicy
+      SENSITIVE: []
+    end
+
+    class SetVaultAccessPolicyInput
+      attr_accessor account_id: ::String
+      attr_accessor vault_name: ::String
+      attr_accessor policy: Types::VaultAccessPolicy
+      SENSITIVE: []
+    end
+
+    class SetVaultNotificationsInput
+      attr_accessor account_id: ::String
+      attr_accessor vault_name: ::String
+      attr_accessor vault_notification_config: Types::VaultNotificationConfig
+      SENSITIVE: []
+    end
+
+    class UploadArchiveInput
+      attr_accessor vault_name: ::String
+      attr_accessor account_id: ::String
+      attr_accessor archive_description: ::String
+      attr_accessor checksum: ::String
+      attr_accessor body: ::IO
+      SENSITIVE: []
+    end
+
+    class UploadListElement
+      attr_accessor multipart_upload_id: ::String
+      attr_accessor vault_arn: ::String
+      attr_accessor archive_description: ::String
+      attr_accessor part_size_in_bytes: ::Integer
+      attr_accessor creation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class UploadMultipartPartInput
+      attr_accessor account_id: ::String
+      attr_accessor vault_name: ::String
+      attr_accessor upload_id: ::String
+      attr_accessor checksum: ::String
+      attr_accessor range: ::String
+      attr_accessor body: ::IO
+      SENSITIVE: []
+    end
+
+    class UploadMultipartPartOutput
+      attr_accessor checksum: ::String
+      SENSITIVE: []
+    end
+
+    class VaultAccessPolicy
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class VaultLockPolicy
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class VaultNotificationConfig
+      attr_accessor sns_topic: ::String
+      attr_accessor events: ::Array[::String]
+      SENSITIVE: []
+    end
+  end
+end

@@ -1668,7 +1668,7 @@ module Aws::CognitoIdentity
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentity'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

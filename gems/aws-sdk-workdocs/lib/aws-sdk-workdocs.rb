@@ -52,6 +52,6 @@ require_relative 'aws-sdk-workdocs/customizations'
 # @!group service
 module Aws::WorkDocs
 
-  GEM_VERSION = '1.53.0'
+  GEM_VERSION = '1.54.0'
 
 end

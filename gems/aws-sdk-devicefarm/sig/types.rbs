@@ -1,0 +1,1476 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::DeviceFarm
+  module Types
+
+    class AccountSettings
+      attr_accessor aws_account_number: ::String
+      attr_accessor unmetered_devices: ::Hash[("ANDROID" | "IOS"), ::Integer]
+      attr_accessor unmetered_remote_access_devices: ::Hash[("ANDROID" | "IOS"), ::Integer]
+      attr_accessor max_job_timeout_minutes: ::Integer
+      attr_accessor trial_minutes: Types::TrialMinutes
+      attr_accessor max_slots: ::Hash[::String, ::Integer]
+      attr_accessor default_job_timeout_minutes: ::Integer
+      attr_accessor skip_app_resign: bool
+      SENSITIVE: []
+    end
+
+    class ArgumentException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Artifact
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("UNKNOWN" | "SCREENSHOT" | "DEVICE_LOG" | "MESSAGE_LOG" | "VIDEO_LOG" | "RESULT_LOG" | "SERVICE_LOG" | "WEBKIT_LOG" | "INSTRUMENTATION_OUTPUT" | "EXERCISER_MONKEY_OUTPUT" | "CALABASH_JSON_OUTPUT" | "CALABASH_PRETTY_OUTPUT" | "CALABASH_STANDARD_OUTPUT" | "CALABASH_JAVA_XML_OUTPUT" | "AUTOMATION_OUTPUT" | "APPIUM_SERVER_OUTPUT" | "APPIUM_JAVA_OUTPUT" | "APPIUM_JAVA_XML_OUTPUT" | "APPIUM_PYTHON_OUTPUT" | "APPIUM_PYTHON_XML_OUTPUT" | "EXPLORER_EVENT_LOG" | "EXPLORER_SUMMARY_LOG" | "APPLICATION_CRASH_REPORT" | "XCTEST_LOG" | "VIDEO" | "CUSTOMER_ARTIFACT" | "CUSTOMER_ARTIFACT_LOG" | "TESTSPEC_OUTPUT")
+      attr_accessor extension: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class CPU
+      attr_accessor frequency: ::String
+      attr_accessor architecture: ::String
+      attr_accessor clock: ::Float
+      SENSITIVE: []
+    end
+
+    class CannotDeleteException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Counters
+      attr_accessor total: ::Integer
+      attr_accessor passed: ::Integer
+      attr_accessor failed: ::Integer
+      attr_accessor warned: ::Integer
+      attr_accessor errored: ::Integer
+      attr_accessor stopped: ::Integer
+      attr_accessor skipped: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateDevicePoolRequest
+      attr_accessor project_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor rules: ::Array[Types::Rule]
+      attr_accessor max_devices: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateDevicePoolResult
+      attr_accessor device_pool: Types::DevicePool
+      SENSITIVE: []
+    end
+
+    class CreateInstanceProfileRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor package_cleanup: bool
+      attr_accessor exclude_app_packages_from_cleanup: ::Array[::String]
+      attr_accessor reboot_after_use: bool
+      SENSITIVE: []
+    end
+
+    class CreateInstanceProfileResult
+      attr_accessor instance_profile: Types::InstanceProfile
+      SENSITIVE: []
+    end
+
+    class CreateNetworkProfileRequest
+      attr_accessor project_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("CURATED" | "PRIVATE")
+      attr_accessor uplink_bandwidth_bits: ::Integer
+      attr_accessor downlink_bandwidth_bits: ::Integer
+      attr_accessor uplink_delay_ms: ::Integer
+      attr_accessor downlink_delay_ms: ::Integer
+      attr_accessor uplink_jitter_ms: ::Integer
+      attr_accessor downlink_jitter_ms: ::Integer
+      attr_accessor uplink_loss_percent: ::Integer
+      attr_accessor downlink_loss_percent: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateNetworkProfileResult
+      attr_accessor network_profile: Types::NetworkProfile
+      SENSITIVE: []
+    end
+
+    class CreateProjectRequest
+      attr_accessor name: ::String
+      attr_accessor default_job_timeout_minutes: ::Integer
+      attr_accessor vpc_config: Types::VpcConfig
+      SENSITIVE: []
+    end
+
+    class CreateProjectResult
+      attr_accessor project: Types::Project
+      SENSITIVE: []
+    end
+
+    class CreateRemoteAccessSessionConfiguration
+      attr_accessor billing_method: ("METERED" | "UNMETERED")
+      attr_accessor vpce_configuration_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateRemoteAccessSessionRequest
+      attr_accessor project_arn: ::String
+      attr_accessor device_arn: ::String
+      attr_accessor instance_arn: ::String
+      attr_accessor ssh_public_key: ::String
+      attr_accessor remote_debug_enabled: bool
+      attr_accessor remote_record_enabled: bool
+      attr_accessor remote_record_app_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor client_id: ::String
+      attr_accessor configuration: Types::CreateRemoteAccessSessionConfiguration
+      attr_accessor interaction_mode: ("INTERACTIVE" | "NO_VIDEO" | "VIDEO_ONLY")
+      attr_accessor skip_app_resign: bool
+      SENSITIVE: []
+    end
+
+    class CreateRemoteAccessSessionResult
+      attr_accessor remote_access_session: Types::RemoteAccessSession
+      SENSITIVE: []
+    end
+
+    class CreateTestGridProjectRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor vpc_config: Types::TestGridVpcConfig
+      SENSITIVE: []
+    end
+
+    class CreateTestGridProjectResult
+      attr_accessor test_grid_project: Types::TestGridProject
+      SENSITIVE: []
+    end
+
+    class CreateTestGridUrlRequest
+      attr_accessor project_arn: ::String
+      attr_accessor expires_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateTestGridUrlResult
+      attr_accessor url: ::String
+      attr_accessor expires: ::Time
+      SENSITIVE: [:url]
+    end
+
+    class CreateUploadRequest
+      attr_accessor project_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("ANDROID_APP" | "IOS_APP" | "WEB_APP" | "EXTERNAL_DATA" | "APPIUM_JAVA_JUNIT_TEST_PACKAGE" | "APPIUM_JAVA_TESTNG_TEST_PACKAGE" | "APPIUM_PYTHON_TEST_PACKAGE" | "APPIUM_NODE_TEST_PACKAGE" | "APPIUM_RUBY_TEST_PACKAGE" | "APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE" | "APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE" | "APPIUM_WEB_PYTHON_TEST_PACKAGE" | "APPIUM_WEB_NODE_TEST_PACKAGE" | "APPIUM_WEB_RUBY_TEST_PACKAGE" | "CALABASH_TEST_PACKAGE" | "INSTRUMENTATION_TEST_PACKAGE" | "UIAUTOMATION_TEST_PACKAGE" | "UIAUTOMATOR_TEST_PACKAGE" | "XCTEST_TEST_PACKAGE" | "XCTEST_UI_TEST_PACKAGE" | "APPIUM_JAVA_JUNIT_TEST_SPEC" | "APPIUM_JAVA_TESTNG_TEST_SPEC" | "APPIUM_PYTHON_TEST_SPEC" | "APPIUM_NODE_TEST_SPEC" | "APPIUM_RUBY_TEST_SPEC" | "APPIUM_WEB_JAVA_JUNIT_TEST_SPEC" | "APPIUM_WEB_JAVA_TESTNG_TEST_SPEC" | "APPIUM_WEB_PYTHON_TEST_SPEC" | "APPIUM_WEB_NODE_TEST_SPEC" | "APPIUM_WEB_RUBY_TEST_SPEC" | "INSTRUMENTATION_TEST_SPEC" | "XCTEST_UI_TEST_SPEC")
+      attr_accessor content_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateUploadResult
+      attr_accessor upload: Types::Upload
+      SENSITIVE: []
+    end
+
+    class CreateVPCEConfigurationRequest
+      attr_accessor vpce_configuration_name: ::String
+      attr_accessor vpce_service_name: ::String
+      attr_accessor service_dns_name: ::String
+      attr_accessor vpce_configuration_description: ::String
+      SENSITIVE: []
+    end
+
+    class CreateVPCEConfigurationResult
+      attr_accessor vpce_configuration: Types::VPCEConfiguration
+      SENSITIVE: []
+    end
+
+    class CustomerArtifactPaths
+      attr_accessor ios_paths: ::Array[::String]
+      attr_accessor android_paths: ::Array[::String]
+      attr_accessor device_host_paths: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteDevicePoolRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDevicePoolResult < Aws::EmptyStructure
+    end
+
+    class DeleteInstanceProfileRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInstanceProfileResult < Aws::EmptyStructure
+    end
+
+    class DeleteNetworkProfileRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteNetworkProfileResult < Aws::EmptyStructure
+    end
+
+    class DeleteProjectRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProjectResult < Aws::EmptyStructure
+    end
+
+    class DeleteRemoteAccessSessionRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRemoteAccessSessionResult < Aws::EmptyStructure
+    end
+
+    class DeleteRunRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRunResult < Aws::EmptyStructure
+    end
+
+    class DeleteTestGridProjectRequest
+      attr_accessor project_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTestGridProjectResult < Aws::EmptyStructure
+    end
+
+    class DeleteUploadRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUploadResult < Aws::EmptyStructure
+    end
+
+    class DeleteVPCEConfigurationRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVPCEConfigurationResult < Aws::EmptyStructure
+    end
+
+    class Device
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor manufacturer: ::String
+      attr_accessor model: ::String
+      attr_accessor model_id: ::String
+      attr_accessor form_factor: ("PHONE" | "TABLET")
+      attr_accessor platform: ("ANDROID" | "IOS")
+      attr_accessor os: ::String
+      attr_accessor cpu: Types::CPU
+      attr_accessor resolution: Types::Resolution
+      attr_accessor heap_size: ::Integer
+      attr_accessor memory: ::Integer
+      attr_accessor image: ::String
+      attr_accessor carrier: ::String
+      attr_accessor radio: ::String
+      attr_accessor remote_access_enabled: bool
+      attr_accessor remote_debug_enabled: bool
+      attr_accessor fleet_type: ::String
+      attr_accessor fleet_name: ::String
+      attr_accessor instances: ::Array[Types::DeviceInstance]
+      attr_accessor availability: ("TEMPORARY_NOT_AVAILABLE" | "BUSY" | "AVAILABLE" | "HIGHLY_AVAILABLE")
+      SENSITIVE: []
+    end
+
+    class DeviceFilter
+      attr_accessor attribute: ("ARN" | "PLATFORM" | "OS_VERSION" | "MODEL" | "AVAILABILITY" | "FORM_FACTOR" | "MANUFACTURER" | "REMOTE_ACCESS_ENABLED" | "REMOTE_DEBUG_ENABLED" | "INSTANCE_ARN" | "INSTANCE_LABELS" | "FLEET_TYPE")
+      attr_accessor operator: ("EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "IN" | "NOT_IN" | "CONTAINS")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeviceInstance
+      attr_accessor arn: ::String
+      attr_accessor device_arn: ::String
+      attr_accessor labels: ::Array[::String]
+      attr_accessor status: ("IN_USE" | "PREPARING" | "AVAILABLE" | "NOT_AVAILABLE")
+      attr_accessor udid: ::String
+      attr_accessor instance_profile: Types::InstanceProfile
+      SENSITIVE: []
+    end
+
+    class DeviceMinutes
+      attr_accessor total: ::Float
+      attr_accessor metered: ::Float
+      attr_accessor unmetered: ::Float
+      SENSITIVE: []
+    end
+
+    class DevicePool
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("CURATED" | "PRIVATE")
+      attr_accessor rules: ::Array[Types::Rule]
+      attr_accessor max_devices: ::Integer
+      SENSITIVE: []
+    end
+
+    class DevicePoolCompatibilityResult
+      attr_accessor device: Types::Device
+      attr_accessor compatible: bool
+      attr_accessor incompatibility_messages: ::Array[Types::IncompatibilityMessage]
+      SENSITIVE: []
+    end
+
+    class DeviceSelectionConfiguration
+      attr_accessor filters: ::Array[Types::DeviceFilter]
+      attr_accessor max_devices: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeviceSelectionResult
+      attr_accessor filters: ::Array[Types::DeviceFilter]
+      attr_accessor matched_devices_count: ::Integer
+      attr_accessor max_devices: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExecutionConfiguration
+      attr_accessor job_timeout_minutes: ::Integer
+      attr_accessor accounts_cleanup: bool
+      attr_accessor app_packages_cleanup: bool
+      attr_accessor video_capture: bool
+      attr_accessor skip_app_resign: bool
+      SENSITIVE: []
+    end
+
+    class GetAccountSettingsRequest < Aws::EmptyStructure
+    end
+
+    class GetAccountSettingsResult
+      attr_accessor account_settings: Types::AccountSettings
+      SENSITIVE: []
+    end
+
+    class GetDeviceInstanceRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeviceInstanceResult
+      attr_accessor device_instance: Types::DeviceInstance
+      SENSITIVE: []
+    end
+
+    class GetDevicePoolCompatibilityRequest
+      attr_accessor device_pool_arn: ::String
+      attr_accessor app_arn: ::String
+      attr_accessor test_type: ("BUILTIN_FUZZ" | "BUILTIN_EXPLORER" | "WEB_PERFORMANCE_PROFILE" | "APPIUM_JAVA_JUNIT" | "APPIUM_JAVA_TESTNG" | "APPIUM_PYTHON" | "APPIUM_NODE" | "APPIUM_RUBY" | "APPIUM_WEB_JAVA_JUNIT" | "APPIUM_WEB_JAVA_TESTNG" | "APPIUM_WEB_PYTHON" | "APPIUM_WEB_NODE" | "APPIUM_WEB_RUBY" | "CALABASH" | "INSTRUMENTATION" | "UIAUTOMATION" | "UIAUTOMATOR" | "XCTEST" | "XCTEST_UI" | "REMOTE_ACCESS_RECORD" | "REMOTE_ACCESS_REPLAY")
+      attr_accessor test: Types::ScheduleRunTest
+      attr_accessor configuration: Types::ScheduleRunConfiguration
+      SENSITIVE: []
+    end
+
+    class GetDevicePoolCompatibilityResult
+      attr_accessor compatible_devices: ::Array[Types::DevicePoolCompatibilityResult]
+      attr_accessor incompatible_devices: ::Array[Types::DevicePoolCompatibilityResult]
+      SENSITIVE: []
+    end
+
+    class GetDevicePoolRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetDevicePoolResult
+      attr_accessor device_pool: Types::DevicePool
+      SENSITIVE: []
+    end
+
+    class GetDeviceRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeviceResult
+      attr_accessor device: Types::Device
+      SENSITIVE: []
+    end
+
+    class GetInstanceProfileRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetInstanceProfileResult
+      attr_accessor instance_profile: Types::InstanceProfile
+      SENSITIVE: []
+    end
+
+    class GetJobRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetJobResult
+      attr_accessor job: Types::Job
+      SENSITIVE: []
+    end
+
+    class GetNetworkProfileRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetNetworkProfileResult
+      attr_accessor network_profile: Types::NetworkProfile
+      SENSITIVE: []
+    end
+
+    class GetOfferingStatusRequest
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetOfferingStatusResult
+      attr_accessor current: ::Hash[::String, Types::OfferingStatus]
+      attr_accessor next_period: ::Hash[::String, Types::OfferingStatus]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetProjectRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetProjectResult
+      attr_accessor project: Types::Project
+      SENSITIVE: []
+    end
+
+    class GetRemoteAccessSessionRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetRemoteAccessSessionResult
+      attr_accessor remote_access_session: Types::RemoteAccessSession
+      SENSITIVE: []
+    end
+
+    class GetRunRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetRunResult
+      attr_accessor run: Types::Run
+      SENSITIVE: []
+    end
+
+    class GetSuiteRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetSuiteResult
+      attr_accessor suite: Types::Suite
+      SENSITIVE: []
+    end
+
+    class GetTestGridProjectRequest
+      attr_accessor project_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetTestGridProjectResult
+      attr_accessor test_grid_project: Types::TestGridProject
+      SENSITIVE: []
+    end
+
+    class GetTestGridSessionRequest
+      attr_accessor project_arn: ::String
+      attr_accessor session_id: ::String
+      attr_accessor session_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetTestGridSessionResult
+      attr_accessor test_grid_session: Types::TestGridSession
+      SENSITIVE: []
+    end
+
+    class GetTestRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetTestResult
+      attr_accessor test: Types::Test
+      SENSITIVE: []
+    end
+
+    class GetUploadRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetUploadResult
+      attr_accessor upload: Types::Upload
+      SENSITIVE: []
+    end
+
+    class GetVPCEConfigurationRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetVPCEConfigurationResult
+      attr_accessor vpce_configuration: Types::VPCEConfiguration
+      SENSITIVE: []
+    end
+
+    class IdempotencyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IncompatibilityMessage
+      attr_accessor message: ::String
+      attr_accessor type: ("ARN" | "PLATFORM" | "FORM_FACTOR" | "MANUFACTURER" | "REMOTE_ACCESS_ENABLED" | "REMOTE_DEBUG_ENABLED" | "APPIUM_VERSION" | "INSTANCE_ARN" | "INSTANCE_LABELS" | "FLEET_TYPE" | "OS_VERSION" | "MODEL" | "AVAILABILITY")
+      SENSITIVE: []
+    end
+
+    class InstallToRemoteAccessSessionRequest
+      attr_accessor remote_access_session_arn: ::String
+      attr_accessor app_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InstallToRemoteAccessSessionResult
+      attr_accessor app_upload: Types::Upload
+      SENSITIVE: []
+    end
+
+    class InstanceProfile
+      attr_accessor arn: ::String
+      attr_accessor package_cleanup: bool
+      attr_accessor exclude_app_packages_from_cleanup: ::Array[::String]
+      attr_accessor reboot_after_use: bool
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServiceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidOperationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Job
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("BUILTIN_FUZZ" | "BUILTIN_EXPLORER" | "WEB_PERFORMANCE_PROFILE" | "APPIUM_JAVA_JUNIT" | "APPIUM_JAVA_TESTNG" | "APPIUM_PYTHON" | "APPIUM_NODE" | "APPIUM_RUBY" | "APPIUM_WEB_JAVA_JUNIT" | "APPIUM_WEB_JAVA_TESTNG" | "APPIUM_WEB_PYTHON" | "APPIUM_WEB_NODE" | "APPIUM_WEB_RUBY" | "CALABASH" | "INSTRUMENTATION" | "UIAUTOMATION" | "UIAUTOMATOR" | "XCTEST" | "XCTEST_UI" | "REMOTE_ACCESS_RECORD" | "REMOTE_ACCESS_REPLAY")
+      attr_accessor created: ::Time
+      attr_accessor status: ("PENDING" | "PENDING_CONCURRENCY" | "PENDING_DEVICE" | "PROCESSING" | "SCHEDULING" | "PREPARING" | "RUNNING" | "COMPLETED" | "STOPPING")
+      attr_accessor result: ("PENDING" | "PASSED" | "WARNED" | "FAILED" | "SKIPPED" | "ERRORED" | "STOPPED")
+      attr_accessor started: ::Time
+      attr_accessor stopped: ::Time
+      attr_accessor counters: Types::Counters
+      attr_accessor message: ::String
+      attr_accessor device: Types::Device
+      attr_accessor instance_arn: ::String
+      attr_accessor device_minutes: Types::DeviceMinutes
+      attr_accessor video_endpoint: ::String
+      attr_accessor video_capture: bool
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListArtifactsRequest
+      attr_accessor arn: ::String
+      attr_accessor type: ("SCREENSHOT" | "FILE" | "LOG")
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListArtifactsResult
+      attr_accessor artifacts: ::Array[Types::Artifact]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeviceInstancesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeviceInstancesResult
+      attr_accessor device_instances: ::Array[Types::DeviceInstance]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDevicePoolsRequest
+      attr_accessor arn: ::String
+      attr_accessor type: ("CURATED" | "PRIVATE")
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDevicePoolsResult
+      attr_accessor device_pools: ::Array[Types::DevicePool]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDevicesRequest
+      attr_accessor arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::DeviceFilter]
+      SENSITIVE: []
+    end
+
+    class ListDevicesResult
+      attr_accessor devices: ::Array[Types::Device]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInstanceProfilesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInstanceProfilesResult
+      attr_accessor instance_profiles: ::Array[Types::InstanceProfile]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobsRequest
+      attr_accessor arn: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobsResult
+      attr_accessor jobs: ::Array[Types::Job]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkProfilesRequest
+      attr_accessor arn: ::String
+      attr_accessor type: ("CURATED" | "PRIVATE")
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkProfilesResult
+      attr_accessor network_profiles: ::Array[Types::NetworkProfile]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOfferingPromotionsRequest
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOfferingPromotionsResult
+      attr_accessor offering_promotions: ::Array[Types::OfferingPromotion]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOfferingTransactionsRequest
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOfferingTransactionsResult
+      attr_accessor offering_transactions: ::Array[Types::OfferingTransaction]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOfferingsRequest
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOfferingsResult
+      attr_accessor offerings: ::Array[Types::Offering]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProjectsRequest
+      attr_accessor arn: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProjectsResult
+      attr_accessor projects: ::Array[Types::Project]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRemoteAccessSessionsRequest
+      attr_accessor arn: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRemoteAccessSessionsResult
+      attr_accessor remote_access_sessions: ::Array[Types::RemoteAccessSession]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRunsRequest
+      attr_accessor arn: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRunsResult
+      attr_accessor runs: ::Array[Types::Run]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSamplesRequest
+      attr_accessor arn: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSamplesResult
+      attr_accessor samples: ::Array[Types::Sample]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSuitesRequest
+      attr_accessor arn: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSuitesResult
+      attr_accessor suites: ::Array[Types::Suite]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListTestGridProjectsRequest
+      attr_accessor max_result: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestGridProjectsResult
+      attr_accessor test_grid_projects: ::Array[Types::TestGridProject]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestGridSessionActionsRequest
+      attr_accessor session_arn: ::String
+      attr_accessor max_result: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestGridSessionActionsResult
+      attr_accessor actions: ::Array[Types::TestGridSessionAction]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestGridSessionArtifactsRequest
+      attr_accessor session_arn: ::String
+      attr_accessor type: ("VIDEO" | "LOG")
+      attr_accessor max_result: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestGridSessionArtifactsResult
+      attr_accessor artifacts: ::Array[Types::TestGridSessionArtifact]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestGridSessionsRequest
+      attr_accessor project_arn: ::String
+      attr_accessor status: ("ACTIVE" | "CLOSED" | "ERRORED")
+      attr_accessor creation_time_after: ::Time
+      attr_accessor creation_time_before: ::Time
+      attr_accessor end_time_after: ::Time
+      attr_accessor end_time_before: ::Time
+      attr_accessor max_result: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestGridSessionsResult
+      attr_accessor test_grid_sessions: ::Array[Types::TestGridSession]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestsRequest
+      attr_accessor arn: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestsResult
+      attr_accessor tests: ::Array[Types::Test]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUniqueProblemsRequest
+      attr_accessor arn: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUniqueProblemsResult
+      attr_accessor unique_problems: ::Hash[("PENDING" | "PASSED" | "WARNED" | "FAILED" | "SKIPPED" | "ERRORED" | "STOPPED"), ::Array[Types::UniqueProblem]]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUploadsRequest
+      attr_accessor arn: ::String
+      attr_accessor type: ("ANDROID_APP" | "IOS_APP" | "WEB_APP" | "EXTERNAL_DATA" | "APPIUM_JAVA_JUNIT_TEST_PACKAGE" | "APPIUM_JAVA_TESTNG_TEST_PACKAGE" | "APPIUM_PYTHON_TEST_PACKAGE" | "APPIUM_NODE_TEST_PACKAGE" | "APPIUM_RUBY_TEST_PACKAGE" | "APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE" | "APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE" | "APPIUM_WEB_PYTHON_TEST_PACKAGE" | "APPIUM_WEB_NODE_TEST_PACKAGE" | "APPIUM_WEB_RUBY_TEST_PACKAGE" | "CALABASH_TEST_PACKAGE" | "INSTRUMENTATION_TEST_PACKAGE" | "UIAUTOMATION_TEST_PACKAGE" | "UIAUTOMATOR_TEST_PACKAGE" | "XCTEST_TEST_PACKAGE" | "XCTEST_UI_TEST_PACKAGE" | "APPIUM_JAVA_JUNIT_TEST_SPEC" | "APPIUM_JAVA_TESTNG_TEST_SPEC" | "APPIUM_PYTHON_TEST_SPEC" | "APPIUM_NODE_TEST_SPEC" | "APPIUM_RUBY_TEST_SPEC" | "APPIUM_WEB_JAVA_JUNIT_TEST_SPEC" | "APPIUM_WEB_JAVA_TESTNG_TEST_SPEC" | "APPIUM_WEB_PYTHON_TEST_SPEC" | "APPIUM_WEB_NODE_TEST_SPEC" | "APPIUM_WEB_RUBY_TEST_SPEC" | "INSTRUMENTATION_TEST_SPEC" | "XCTEST_UI_TEST_SPEC")
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUploadsResult
+      attr_accessor uploads: ::Array[Types::Upload]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVPCEConfigurationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVPCEConfigurationsResult
+      attr_accessor vpce_configurations: ::Array[Types::VPCEConfiguration]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class Location
+      attr_accessor latitude: ::Float
+      attr_accessor longitude: ::Float
+      SENSITIVE: []
+    end
+
+    class MonetaryAmount
+      attr_accessor amount: ::Float
+      attr_accessor currency_code: ("USD")
+      SENSITIVE: []
+    end
+
+    class NetworkProfile
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("CURATED" | "PRIVATE")
+      attr_accessor uplink_bandwidth_bits: ::Integer
+      attr_accessor downlink_bandwidth_bits: ::Integer
+      attr_accessor uplink_delay_ms: ::Integer
+      attr_accessor downlink_delay_ms: ::Integer
+      attr_accessor uplink_jitter_ms: ::Integer
+      attr_accessor downlink_jitter_ms: ::Integer
+      attr_accessor uplink_loss_percent: ::Integer
+      attr_accessor downlink_loss_percent: ::Integer
+      SENSITIVE: []
+    end
+
+    class NotEligibleException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Offering
+      attr_accessor id: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("RECURRING")
+      attr_accessor platform: ("ANDROID" | "IOS")
+      attr_accessor recurring_charges: ::Array[Types::RecurringCharge]
+      SENSITIVE: []
+    end
+
+    class OfferingPromotion
+      attr_accessor id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class OfferingStatus
+      attr_accessor type: ("PURCHASE" | "RENEW" | "SYSTEM")
+      attr_accessor offering: Types::Offering
+      attr_accessor quantity: ::Integer
+      attr_accessor effective_on: ::Time
+      SENSITIVE: []
+    end
+
+    class OfferingTransaction
+      attr_accessor offering_status: Types::OfferingStatus
+      attr_accessor transaction_id: ::String
+      attr_accessor offering_promotion_id: ::String
+      attr_accessor created_on: ::Time
+      attr_accessor cost: Types::MonetaryAmount
+      SENSITIVE: []
+    end
+
+    class Problem
+      attr_accessor run: Types::ProblemDetail
+      attr_accessor job: Types::ProblemDetail
+      attr_accessor suite: Types::ProblemDetail
+      attr_accessor test: Types::ProblemDetail
+      attr_accessor device: Types::Device
+      attr_accessor result: ("PENDING" | "PASSED" | "WARNED" | "FAILED" | "SKIPPED" | "ERRORED" | "STOPPED")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ProblemDetail
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class Project
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor default_job_timeout_minutes: ::Integer
+      attr_accessor created: ::Time
+      attr_accessor vpc_config: Types::VpcConfig
+      SENSITIVE: []
+    end
+
+    class PurchaseOfferingRequest
+      attr_accessor offering_id: ::String
+      attr_accessor quantity: ::Integer
+      attr_accessor offering_promotion_id: ::String
+      SENSITIVE: []
+    end
+
+    class PurchaseOfferingResult
+      attr_accessor offering_transaction: Types::OfferingTransaction
+      SENSITIVE: []
+    end
+
+    class Radios
+      attr_accessor wifi: bool
+      attr_accessor bluetooth: bool
+      attr_accessor nfc: bool
+      attr_accessor gps: bool
+      SENSITIVE: []
+    end
+
+    class RecurringCharge
+      attr_accessor cost: Types::MonetaryAmount
+      attr_accessor frequency: ("MONTHLY")
+      SENSITIVE: []
+    end
+
+    class RemoteAccessSession
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor created: ::Time
+      attr_accessor status: ("PENDING" | "PENDING_CONCURRENCY" | "PENDING_DEVICE" | "PROCESSING" | "SCHEDULING" | "PREPARING" | "RUNNING" | "COMPLETED" | "STOPPING")
+      attr_accessor result: ("PENDING" | "PASSED" | "WARNED" | "FAILED" | "SKIPPED" | "ERRORED" | "STOPPED")
+      attr_accessor message: ::String
+      attr_accessor started: ::Time
+      attr_accessor stopped: ::Time
+      attr_accessor device: Types::Device
+      attr_accessor instance_arn: ::String
+      attr_accessor remote_debug_enabled: bool
+      attr_accessor remote_record_enabled: bool
+      attr_accessor remote_record_app_arn: ::String
+      attr_accessor host_address: ::String
+      attr_accessor client_id: ::String
+      attr_accessor billing_method: ("METERED" | "UNMETERED")
+      attr_accessor device_minutes: Types::DeviceMinutes
+      attr_accessor endpoint: ::String
+      attr_accessor device_udid: ::String
+      attr_accessor interaction_mode: ("INTERACTIVE" | "NO_VIDEO" | "VIDEO_ONLY")
+      attr_accessor skip_app_resign: bool
+      attr_accessor vpc_config: Types::VpcConfig
+      SENSITIVE: []
+    end
+
+    class RenewOfferingRequest
+      attr_accessor offering_id: ::String
+      attr_accessor quantity: ::Integer
+      SENSITIVE: []
+    end
+
+    class RenewOfferingResult
+      attr_accessor offering_transaction: Types::OfferingTransaction
+      SENSITIVE: []
+    end
+
+    class Resolution
+      attr_accessor width: ::Integer
+      attr_accessor height: ::Integer
+      SENSITIVE: []
+    end
+
+    class Rule
+      attr_accessor attribute: ("ARN" | "PLATFORM" | "FORM_FACTOR" | "MANUFACTURER" | "REMOTE_ACCESS_ENABLED" | "REMOTE_DEBUG_ENABLED" | "APPIUM_VERSION" | "INSTANCE_ARN" | "INSTANCE_LABELS" | "FLEET_TYPE" | "OS_VERSION" | "MODEL" | "AVAILABILITY")
+      attr_accessor operator: ("EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "IN" | "NOT_IN" | "CONTAINS")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class Run
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("BUILTIN_FUZZ" | "BUILTIN_EXPLORER" | "WEB_PERFORMANCE_PROFILE" | "APPIUM_JAVA_JUNIT" | "APPIUM_JAVA_TESTNG" | "APPIUM_PYTHON" | "APPIUM_NODE" | "APPIUM_RUBY" | "APPIUM_WEB_JAVA_JUNIT" | "APPIUM_WEB_JAVA_TESTNG" | "APPIUM_WEB_PYTHON" | "APPIUM_WEB_NODE" | "APPIUM_WEB_RUBY" | "CALABASH" | "INSTRUMENTATION" | "UIAUTOMATION" | "UIAUTOMATOR" | "XCTEST" | "XCTEST_UI" | "REMOTE_ACCESS_RECORD" | "REMOTE_ACCESS_REPLAY")
+      attr_accessor platform: ("ANDROID" | "IOS")
+      attr_accessor created: ::Time
+      attr_accessor status: ("PENDING" | "PENDING_CONCURRENCY" | "PENDING_DEVICE" | "PROCESSING" | "SCHEDULING" | "PREPARING" | "RUNNING" | "COMPLETED" | "STOPPING")
+      attr_accessor result: ("PENDING" | "PASSED" | "WARNED" | "FAILED" | "SKIPPED" | "ERRORED" | "STOPPED")
+      attr_accessor started: ::Time
+      attr_accessor stopped: ::Time
+      attr_accessor counters: Types::Counters
+      attr_accessor message: ::String
+      attr_accessor total_jobs: ::Integer
+      attr_accessor completed_jobs: ::Integer
+      attr_accessor billing_method: ("METERED" | "UNMETERED")
+      attr_accessor device_minutes: Types::DeviceMinutes
+      attr_accessor network_profile: Types::NetworkProfile
+      attr_accessor parsing_result_url: ::String
+      attr_accessor result_code: ("PARSING_FAILED" | "VPC_ENDPOINT_SETUP_FAILED")
+      attr_accessor seed: ::Integer
+      attr_accessor app_upload: ::String
+      attr_accessor event_count: ::Integer
+      attr_accessor job_timeout_minutes: ::Integer
+      attr_accessor device_pool_arn: ::String
+      attr_accessor locale: ::String
+      attr_accessor radios: Types::Radios
+      attr_accessor location: Types::Location
+      attr_accessor customer_artifact_paths: Types::CustomerArtifactPaths
+      attr_accessor web_url: ::String
+      attr_accessor skip_app_resign: bool
+      attr_accessor test_spec_arn: ::String
+      attr_accessor device_selection_result: Types::DeviceSelectionResult
+      attr_accessor vpc_config: Types::VpcConfig
+      SENSITIVE: []
+    end
+
+    class Sample
+      attr_accessor arn: ::String
+      attr_accessor type: ("CPU" | "MEMORY" | "THREADS" | "RX_RATE" | "TX_RATE" | "RX" | "TX" | "NATIVE_FRAMES" | "NATIVE_FPS" | "NATIVE_MIN_DRAWTIME" | "NATIVE_AVG_DRAWTIME" | "NATIVE_MAX_DRAWTIME" | "OPENGL_FRAMES" | "OPENGL_FPS" | "OPENGL_MIN_DRAWTIME" | "OPENGL_AVG_DRAWTIME" | "OPENGL_MAX_DRAWTIME")
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class ScheduleRunConfiguration
+      attr_accessor extra_data_package_arn: ::String
+      attr_accessor network_profile_arn: ::String
+      attr_accessor locale: ::String
+      attr_accessor location: Types::Location
+      attr_accessor vpce_configuration_arns: ::Array[::String]
+      attr_accessor customer_artifact_paths: Types::CustomerArtifactPaths
+      attr_accessor radios: Types::Radios
+      attr_accessor auxiliary_apps: ::Array[::String]
+      attr_accessor billing_method: ("METERED" | "UNMETERED")
+      SENSITIVE: []
+    end
+
+    class ScheduleRunRequest
+      attr_accessor project_arn: ::String
+      attr_accessor app_arn: ::String
+      attr_accessor device_pool_arn: ::String
+      attr_accessor device_selection_configuration: Types::DeviceSelectionConfiguration
+      attr_accessor name: ::String
+      attr_accessor test: Types::ScheduleRunTest
+      attr_accessor configuration: Types::ScheduleRunConfiguration
+      attr_accessor execution_configuration: Types::ExecutionConfiguration
+      SENSITIVE: []
+    end
+
+    class ScheduleRunResult
+      attr_accessor run: Types::Run
+      SENSITIVE: []
+    end
+
+    class ScheduleRunTest
+      attr_accessor type: ("BUILTIN_FUZZ" | "BUILTIN_EXPLORER" | "WEB_PERFORMANCE_PROFILE" | "APPIUM_JAVA_JUNIT" | "APPIUM_JAVA_TESTNG" | "APPIUM_PYTHON" | "APPIUM_NODE" | "APPIUM_RUBY" | "APPIUM_WEB_JAVA_JUNIT" | "APPIUM_WEB_JAVA_TESTNG" | "APPIUM_WEB_PYTHON" | "APPIUM_WEB_NODE" | "APPIUM_WEB_RUBY" | "CALABASH" | "INSTRUMENTATION" | "UIAUTOMATION" | "UIAUTOMATOR" | "XCTEST" | "XCTEST_UI" | "REMOTE_ACCESS_RECORD" | "REMOTE_ACCESS_REPLAY")
+      attr_accessor test_package_arn: ::String
+      attr_accessor test_spec_arn: ::String
+      attr_accessor filter: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ServiceAccountException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StopJobRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopJobResult
+      attr_accessor job: Types::Job
+      SENSITIVE: []
+    end
+
+    class StopRemoteAccessSessionRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopRemoteAccessSessionResult
+      attr_accessor remote_access_session: Types::RemoteAccessSession
+      SENSITIVE: []
+    end
+
+    class StopRunRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopRunResult
+      attr_accessor run: Types::Run
+      SENSITIVE: []
+    end
+
+    class Suite
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("BUILTIN_FUZZ" | "BUILTIN_EXPLORER" | "WEB_PERFORMANCE_PROFILE" | "APPIUM_JAVA_JUNIT" | "APPIUM_JAVA_TESTNG" | "APPIUM_PYTHON" | "APPIUM_NODE" | "APPIUM_RUBY" | "APPIUM_WEB_JAVA_JUNIT" | "APPIUM_WEB_JAVA_TESTNG" | "APPIUM_WEB_PYTHON" | "APPIUM_WEB_NODE" | "APPIUM_WEB_RUBY" | "CALABASH" | "INSTRUMENTATION" | "UIAUTOMATION" | "UIAUTOMATOR" | "XCTEST" | "XCTEST_UI" | "REMOTE_ACCESS_RECORD" | "REMOTE_ACCESS_REPLAY")
+      attr_accessor created: ::Time
+      attr_accessor status: ("PENDING" | "PENDING_CONCURRENCY" | "PENDING_DEVICE" | "PROCESSING" | "SCHEDULING" | "PREPARING" | "RUNNING" | "COMPLETED" | "STOPPING")
+      attr_accessor result: ("PENDING" | "PASSED" | "WARNED" | "FAILED" | "SKIPPED" | "ERRORED" | "STOPPED")
+      attr_accessor started: ::Time
+      attr_accessor stopped: ::Time
+      attr_accessor counters: Types::Counters
+      attr_accessor message: ::String
+      attr_accessor device_minutes: Types::DeviceMinutes
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagOperationException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class TagPolicyException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class Test
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("BUILTIN_FUZZ" | "BUILTIN_EXPLORER" | "WEB_PERFORMANCE_PROFILE" | "APPIUM_JAVA_JUNIT" | "APPIUM_JAVA_TESTNG" | "APPIUM_PYTHON" | "APPIUM_NODE" | "APPIUM_RUBY" | "APPIUM_WEB_JAVA_JUNIT" | "APPIUM_WEB_JAVA_TESTNG" | "APPIUM_WEB_PYTHON" | "APPIUM_WEB_NODE" | "APPIUM_WEB_RUBY" | "CALABASH" | "INSTRUMENTATION" | "UIAUTOMATION" | "UIAUTOMATOR" | "XCTEST" | "XCTEST_UI" | "REMOTE_ACCESS_RECORD" | "REMOTE_ACCESS_REPLAY")
+      attr_accessor created: ::Time
+      attr_accessor status: ("PENDING" | "PENDING_CONCURRENCY" | "PENDING_DEVICE" | "PROCESSING" | "SCHEDULING" | "PREPARING" | "RUNNING" | "COMPLETED" | "STOPPING")
+      attr_accessor result: ("PENDING" | "PASSED" | "WARNED" | "FAILED" | "SKIPPED" | "ERRORED" | "STOPPED")
+      attr_accessor started: ::Time
+      attr_accessor stopped: ::Time
+      attr_accessor counters: Types::Counters
+      attr_accessor message: ::String
+      attr_accessor device_minutes: Types::DeviceMinutes
+      SENSITIVE: []
+    end
+
+    class TestGridProject
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor vpc_config: Types::TestGridVpcConfig
+      attr_accessor created: ::Time
+      SENSITIVE: []
+    end
+
+    class TestGridSession
+      attr_accessor arn: ::String
+      attr_accessor status: ("ACTIVE" | "CLOSED" | "ERRORED")
+      attr_accessor created: ::Time
+      attr_accessor ended: ::Time
+      attr_accessor billing_minutes: ::Float
+      attr_accessor selenium_properties: ::String
+      SENSITIVE: []
+    end
+
+    class TestGridSessionAction
+      attr_accessor action: ::String
+      attr_accessor started: ::Time
+      attr_accessor duration: ::Integer
+      attr_accessor status_code: ::String
+      attr_accessor request_method: ::String
+      SENSITIVE: []
+    end
+
+    class TestGridSessionArtifact
+      attr_accessor filename: ::String
+      attr_accessor type: ("UNKNOWN" | "VIDEO" | "SELENIUM_LOG")
+      attr_accessor url: ::String
+      SENSITIVE: [:url]
+    end
+
+    class TestGridVpcConfig
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class TrialMinutes
+      attr_accessor total: ::Float
+      attr_accessor remaining: ::Float
+      SENSITIVE: []
+    end
+
+    class UniqueProblem
+      attr_accessor message: ::String
+      attr_accessor problems: ::Array[Types::Problem]
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDeviceInstanceRequest
+      attr_accessor arn: ::String
+      attr_accessor profile_arn: ::String
+      attr_accessor labels: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateDeviceInstanceResult
+      attr_accessor device_instance: Types::DeviceInstance
+      SENSITIVE: []
+    end
+
+    class UpdateDevicePoolRequest
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor rules: ::Array[Types::Rule]
+      attr_accessor max_devices: ::Integer
+      attr_accessor clear_max_devices: bool
+      SENSITIVE: []
+    end
+
+    class UpdateDevicePoolResult
+      attr_accessor device_pool: Types::DevicePool
+      SENSITIVE: []
+    end
+
+    class UpdateInstanceProfileRequest
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor package_cleanup: bool
+      attr_accessor exclude_app_packages_from_cleanup: ::Array[::String]
+      attr_accessor reboot_after_use: bool
+      SENSITIVE: []
+    end
+
+    class UpdateInstanceProfileResult
+      attr_accessor instance_profile: Types::InstanceProfile
+      SENSITIVE: []
+    end
+
+    class UpdateNetworkProfileRequest
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("CURATED" | "PRIVATE")
+      attr_accessor uplink_bandwidth_bits: ::Integer
+      attr_accessor downlink_bandwidth_bits: ::Integer
+      attr_accessor uplink_delay_ms: ::Integer
+      attr_accessor downlink_delay_ms: ::Integer
+      attr_accessor uplink_jitter_ms: ::Integer
+      attr_accessor downlink_jitter_ms: ::Integer
+      attr_accessor uplink_loss_percent: ::Integer
+      attr_accessor downlink_loss_percent: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateNetworkProfileResult
+      attr_accessor network_profile: Types::NetworkProfile
+      SENSITIVE: []
+    end
+
+    class UpdateProjectRequest
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor default_job_timeout_minutes: ::Integer
+      attr_accessor vpc_config: Types::VpcConfig
+      SENSITIVE: []
+    end
+
+    class UpdateProjectResult
+      attr_accessor project: Types::Project
+      SENSITIVE: []
+    end
+
+    class UpdateTestGridProjectRequest
+      attr_accessor project_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor vpc_config: Types::TestGridVpcConfig
+      SENSITIVE: []
+    end
+
+    class UpdateTestGridProjectResult
+      attr_accessor test_grid_project: Types::TestGridProject
+      SENSITIVE: []
+    end
+
+    class UpdateUploadRequest
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor content_type: ::String
+      attr_accessor edit_content: bool
+      SENSITIVE: []
+    end
+
+    class UpdateUploadResult
+      attr_accessor upload: Types::Upload
+      SENSITIVE: []
+    end
+
+    class UpdateVPCEConfigurationRequest
+      attr_accessor arn: ::String
+      attr_accessor vpce_configuration_name: ::String
+      attr_accessor vpce_service_name: ::String
+      attr_accessor service_dns_name: ::String
+      attr_accessor vpce_configuration_description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateVPCEConfigurationResult
+      attr_accessor vpce_configuration: Types::VPCEConfiguration
+      SENSITIVE: []
+    end
+
+    class Upload
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor created: ::Time
+      attr_accessor type: ("ANDROID_APP" | "IOS_APP" | "WEB_APP" | "EXTERNAL_DATA" | "APPIUM_JAVA_JUNIT_TEST_PACKAGE" | "APPIUM_JAVA_TESTNG_TEST_PACKAGE" | "APPIUM_PYTHON_TEST_PACKAGE" | "APPIUM_NODE_TEST_PACKAGE" | "APPIUM_RUBY_TEST_PACKAGE" | "APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE" | "APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE" | "APPIUM_WEB_PYTHON_TEST_PACKAGE" | "APPIUM_WEB_NODE_TEST_PACKAGE" | "APPIUM_WEB_RUBY_TEST_PACKAGE" | "CALABASH_TEST_PACKAGE" | "INSTRUMENTATION_TEST_PACKAGE" | "UIAUTOMATION_TEST_PACKAGE" | "UIAUTOMATOR_TEST_PACKAGE" | "XCTEST_TEST_PACKAGE" | "XCTEST_UI_TEST_PACKAGE" | "APPIUM_JAVA_JUNIT_TEST_SPEC" | "APPIUM_JAVA_TESTNG_TEST_SPEC" | "APPIUM_PYTHON_TEST_SPEC" | "APPIUM_NODE_TEST_SPEC" | "APPIUM_RUBY_TEST_SPEC" | "APPIUM_WEB_JAVA_JUNIT_TEST_SPEC" | "APPIUM_WEB_JAVA_TESTNG_TEST_SPEC" | "APPIUM_WEB_PYTHON_TEST_SPEC" | "APPIUM_WEB_NODE_TEST_SPEC" | "APPIUM_WEB_RUBY_TEST_SPEC" | "INSTRUMENTATION_TEST_SPEC" | "XCTEST_UI_TEST_SPEC")
+      attr_accessor status: ("INITIALIZED" | "PROCESSING" | "SUCCEEDED" | "FAILED")
+      attr_accessor url: ::String
+      attr_accessor metadata: ::String
+      attr_accessor content_type: ::String
+      attr_accessor message: ::String
+      attr_accessor category: ("CURATED" | "PRIVATE")
+      SENSITIVE: [:url]
+    end
+
+    class VPCEConfiguration
+      attr_accessor arn: ::String
+      attr_accessor vpce_configuration_name: ::String
+      attr_accessor vpce_service_name: ::String
+      attr_accessor service_dns_name: ::String
+      attr_accessor vpce_configuration_description: ::String
+      SENSITIVE: []
+    end
+
+    class VpcConfig
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,0 +1,1486 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::FraudDetector
+  module Types
+
+    class ATIMetricDataPoint
+      attr_accessor cr: ::Float
+      attr_accessor adr: ::Float
+      attr_accessor threshold: ::Float
+      attr_accessor atodr: ::Float
+      SENSITIVE: []
+    end
+
+    class ATIModelPerformance
+      attr_accessor asi: ::Float
+      SENSITIVE: []
+    end
+
+    class ATITrainingMetricsValue
+      attr_accessor metric_data_points: ::Array[Types::ATIMetricDataPoint]
+      attr_accessor model_performance: Types::ATIModelPerformance
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AggregatedLogOddsMetric
+      attr_accessor variable_names: ::Array[::String]
+      attr_accessor aggregated_variables_importance: ::Float
+      SENSITIVE: []
+    end
+
+    class AggregatedVariablesImpactExplanation
+      attr_accessor event_variable_names: ::Array[::String]
+      attr_accessor relative_impact: ::String
+      attr_accessor log_odds_impact: ::Float
+      SENSITIVE: []
+    end
+
+    class AggregatedVariablesImportanceMetrics
+      attr_accessor log_odds_metrics: ::Array[Types::AggregatedLogOddsMetric]
+      SENSITIVE: []
+    end
+
+    class AllowDenyList
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor variable_type: ::String
+      attr_accessor created_time: ::String
+      attr_accessor updated_time: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class BatchCreateVariableError
+      attr_accessor name: ::String
+      attr_accessor code: ::Integer
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchCreateVariableRequest
+      attr_accessor variable_entries: ::Array[Types::VariableEntry]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class BatchCreateVariableResult
+      attr_accessor errors: ::Array[Types::BatchCreateVariableError]
+      SENSITIVE: []
+    end
+
+    class BatchGetVariableError
+      attr_accessor name: ::String
+      attr_accessor code: ::Integer
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetVariableRequest
+      attr_accessor names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetVariableResult
+      attr_accessor variables: ::Array[Types::Variable]
+      attr_accessor errors: ::Array[Types::BatchGetVariableError]
+      SENSITIVE: []
+    end
+
+    class BatchImport
+      attr_accessor job_id: ::String
+      attr_accessor status: ("IN_PROGRESS_INITIALIZING" | "IN_PROGRESS" | "CANCEL_IN_PROGRESS" | "CANCELED" | "COMPLETE" | "FAILED")
+      attr_accessor failure_reason: ::String
+      attr_accessor start_time: ::String
+      attr_accessor completion_time: ::String
+      attr_accessor input_path: ::String
+      attr_accessor output_path: ::String
+      attr_accessor event_type_name: ::String
+      attr_accessor iam_role_arn: ::String
+      attr_accessor arn: ::String
+      attr_accessor processed_records_count: ::Integer
+      attr_accessor failed_records_count: ::Integer
+      attr_accessor total_records_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class BatchPrediction
+      attr_accessor job_id: ::String
+      attr_accessor status: ("IN_PROGRESS_INITIALIZING" | "IN_PROGRESS" | "CANCEL_IN_PROGRESS" | "CANCELED" | "COMPLETE" | "FAILED")
+      attr_accessor failure_reason: ::String
+      attr_accessor start_time: ::String
+      attr_accessor completion_time: ::String
+      attr_accessor last_heartbeat_time: ::String
+      attr_accessor input_path: ::String
+      attr_accessor output_path: ::String
+      attr_accessor event_type_name: ::String
+      attr_accessor detector_name: ::String
+      attr_accessor detector_version: ::String
+      attr_accessor iam_role_arn: ::String
+      attr_accessor arn: ::String
+      attr_accessor processed_records_count: ::Integer
+      attr_accessor total_records_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class CancelBatchImportJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelBatchImportJobResult < Aws::EmptyStructure
+    end
+
+    class CancelBatchPredictionJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelBatchPredictionJobResult < Aws::EmptyStructure
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBatchImportJobRequest
+      attr_accessor job_id: ::String
+      attr_accessor input_path: ::String
+      attr_accessor output_path: ::String
+      attr_accessor event_type_name: ::String
+      attr_accessor iam_role_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateBatchImportJobResult < Aws::EmptyStructure
+    end
+
+    class CreateBatchPredictionJobRequest
+      attr_accessor job_id: ::String
+      attr_accessor input_path: ::String
+      attr_accessor output_path: ::String
+      attr_accessor event_type_name: ::String
+      attr_accessor detector_name: ::String
+      attr_accessor detector_version: ::String
+      attr_accessor iam_role_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateBatchPredictionJobResult < Aws::EmptyStructure
+    end
+
+    class CreateDetectorVersionRequest
+      attr_accessor detector_id: ::String
+      attr_accessor description: ::String
+      attr_accessor external_model_endpoints: ::Array[::String]
+      attr_accessor rules: ::Array[Types::Rule]
+      attr_accessor model_versions: ::Array[Types::ModelVersion]
+      attr_accessor rule_execution_mode: ("ALL_MATCHED" | "FIRST_MATCHED")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateDetectorVersionResult
+      attr_accessor detector_id: ::String
+      attr_accessor detector_version_id: ::String
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "INACTIVE")
+      SENSITIVE: []
+    end
+
+    class CreateListRequest
+      attr_accessor name: ::String
+      attr_accessor elements: ::Array[::String]
+      attr_accessor variable_type: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateListResult < Aws::EmptyStructure
+    end
+
+    class CreateModelRequest
+      attr_accessor model_id: ::String
+      attr_accessor model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS")
+      attr_accessor description: ::String
+      attr_accessor event_type_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateModelResult < Aws::EmptyStructure
+    end
+
+    class CreateModelVersionRequest
+      attr_accessor model_id: ::String
+      attr_accessor model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS")
+      attr_accessor training_data_source: ("EXTERNAL_EVENTS" | "INGESTED_EVENTS")
+      attr_accessor training_data_schema: Types::TrainingDataSchema
+      attr_accessor external_events_detail: Types::ExternalEventsDetail
+      attr_accessor ingested_events_detail: Types::IngestedEventsDetail
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateModelVersionResult
+      attr_accessor model_id: ::String
+      attr_accessor model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS")
+      attr_accessor model_version_number: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRuleRequest
+      attr_accessor rule_id: ::String
+      attr_accessor detector_id: ::String
+      attr_accessor description: ::String
+      attr_accessor expression: ::String
+      attr_accessor language: ("DETECTORPL")
+      attr_accessor outcomes: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:expression]
+    end
+
+    class CreateRuleResult
+      attr_accessor rule: Types::Rule
+      SENSITIVE: []
+    end
+
+    class CreateVariableRequest
+      attr_accessor name: ::String
+      attr_accessor data_type: ("STRING" | "INTEGER" | "FLOAT" | "BOOLEAN" | "DATETIME")
+      attr_accessor data_source: ("EVENT" | "MODEL_SCORE" | "EXTERNAL_MODEL_SCORE")
+      attr_accessor default_value: ::String
+      attr_accessor description: ::String
+      attr_accessor variable_type: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateVariableResult < Aws::EmptyStructure
+    end
+
+    class DataValidationMetrics
+      attr_accessor file_level_messages: ::Array[Types::FileValidationMessage]
+      attr_accessor field_level_messages: ::Array[Types::FieldValidationMessage]
+      SENSITIVE: []
+    end
+
+    class DeleteBatchImportJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBatchImportJobResult < Aws::EmptyStructure
+    end
+
+    class DeleteBatchPredictionJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBatchPredictionJobResult < Aws::EmptyStructure
+    end
+
+    class DeleteDetectorRequest
+      attr_accessor detector_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDetectorResult < Aws::EmptyStructure
+    end
+
+    class DeleteDetectorVersionRequest
+      attr_accessor detector_id: ::String
+      attr_accessor detector_version_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDetectorVersionResult < Aws::EmptyStructure
+    end
+
+    class DeleteEntityTypeRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEntityTypeResult < Aws::EmptyStructure
+    end
+
+    class DeleteEventRequest
+      attr_accessor event_id: ::String
+      attr_accessor event_type_name: ::String
+      attr_accessor delete_audit_history: bool
+      SENSITIVE: []
+    end
+
+    class DeleteEventResult < Aws::EmptyStructure
+    end
+
+    class DeleteEventTypeRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEventTypeResult < Aws::EmptyStructure
+    end
+
+    class DeleteEventsByEventTypeRequest
+      attr_accessor event_type_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEventsByEventTypeResult
+      attr_accessor event_type_name: ::String
+      attr_accessor events_deletion_status: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteExternalModelRequest
+      attr_accessor model_endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteExternalModelResult < Aws::EmptyStructure
+    end
+
+    class DeleteLabelRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLabelResult < Aws::EmptyStructure
+    end
+
+    class DeleteListRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteListResult < Aws::EmptyStructure
+    end
+
+    class DeleteModelRequest
+      attr_accessor model_id: ::String
+      attr_accessor model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS")
+      SENSITIVE: []
+    end
+
+    class DeleteModelResult < Aws::EmptyStructure
+    end
+
+    class DeleteModelVersionRequest
+      attr_accessor model_id: ::String
+      attr_accessor model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS")
+      attr_accessor model_version_number: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteModelVersionResult < Aws::EmptyStructure
+    end
+
+    class DeleteOutcomeRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteOutcomeResult < Aws::EmptyStructure
+    end
+
+    class DeleteRuleRequest
+      attr_accessor rule: Types::Rule
+      SENSITIVE: []
+    end
+
+    class DeleteRuleResult < Aws::EmptyStructure
+    end
+
+    class DeleteVariableRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVariableResult < Aws::EmptyStructure
+    end
+
+    class DescribeDetectorRequest
+      attr_accessor detector_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeDetectorResult
+      attr_accessor detector_id: ::String
+      attr_accessor detector_version_summaries: ::Array[Types::DetectorVersionSummary]
+      attr_accessor next_token: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeModelVersionsRequest
+      attr_accessor model_id: ::String
+      attr_accessor model_version_number: ::String
+      attr_accessor model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeModelVersionsResult
+      attr_accessor model_version_details: ::Array[Types::ModelVersionDetail]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class Detector
+      attr_accessor detector_id: ::String
+      attr_accessor description: ::String
+      attr_accessor event_type_name: ::String
+      attr_accessor last_updated_time: ::String
+      attr_accessor created_time: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DetectorVersionSummary
+      attr_accessor detector_version_id: ::String
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "INACTIVE")
+      attr_accessor description: ::String
+      attr_accessor last_updated_time: ::String
+      SENSITIVE: []
+    end
+
+    class Entity
+      attr_accessor entity_type: ::String
+      attr_accessor entity_id: ::String
+      SENSITIVE: []
+    end
+
+    class EntityType
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor last_updated_time: ::String
+      attr_accessor created_time: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class EvaluatedExternalModel
+      attr_accessor model_endpoint: ::String
+      attr_accessor use_event_variables: bool
+      attr_accessor input_variables: ::Hash[::String, ::String]
+      attr_accessor output_variables: ::Hash[::String, ::String]
+      SENSITIVE: [:input_variables, :output_variables]
+    end
+
+    class EvaluatedModelVersion
+      attr_accessor model_id: ::String
+      attr_accessor model_version: ::String
+      attr_accessor model_type: ::String
+      attr_accessor evaluations: ::Array[Types::ModelVersionEvaluation]
+      SENSITIVE: []
+    end
+
+    class EvaluatedRule
+      attr_accessor rule_id: ::String
+      attr_accessor rule_version: ::String
+      attr_accessor expression: ::String
+      attr_accessor expression_with_values: ::String
+      attr_accessor outcomes: ::Array[::String]
+      attr_accessor evaluated: bool
+      attr_accessor matched: bool
+      SENSITIVE: [:expression, :expression_with_values]
+    end
+
+    class Event
+      attr_accessor event_id: ::String
+      attr_accessor event_type_name: ::String
+      attr_accessor event_timestamp: ::String
+      attr_accessor event_variables: ::Hash[::String, ::String]
+      attr_accessor current_label: ::String
+      attr_accessor label_timestamp: ::String
+      attr_accessor entities: ::Array[Types::Entity]
+      SENSITIVE: []
+    end
+
+    class EventOrchestration
+      attr_accessor event_bridge_enabled: bool
+      SENSITIVE: []
+    end
+
+    class EventPredictionSummary
+      attr_accessor event_id: ::String
+      attr_accessor event_type_name: ::String
+      attr_accessor event_timestamp: ::String
+      attr_accessor prediction_timestamp: ::String
+      attr_accessor detector_id: ::String
+      attr_accessor detector_version_id: ::String
+      SENSITIVE: []
+    end
+
+    class EventType
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor event_variables: ::Array[::String]
+      attr_accessor labels: ::Array[::String]
+      attr_accessor entity_types: ::Array[::String]
+      attr_accessor event_ingestion: ("ENABLED" | "DISABLED")
+      attr_accessor ingested_event_statistics: Types::IngestedEventStatistics
+      attr_accessor last_updated_time: ::String
+      attr_accessor created_time: ::String
+      attr_accessor arn: ::String
+      attr_accessor event_orchestration: Types::EventOrchestration
+      SENSITIVE: []
+    end
+
+    class EventVariableSummary
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      attr_accessor source: ::String
+      SENSITIVE: [:name, :value, :source]
+    end
+
+    class ExternalEventsDetail
+      attr_accessor data_location: ::String
+      attr_accessor data_access_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ExternalModel
+      attr_accessor model_endpoint: ::String
+      attr_accessor model_source: ("SAGEMAKER")
+      attr_accessor invoke_model_endpoint_role_arn: ::String
+      attr_accessor input_configuration: Types::ModelInputConfiguration
+      attr_accessor output_configuration: Types::ModelOutputConfiguration
+      attr_accessor model_endpoint_status: ("ASSOCIATED" | "DISSOCIATED")
+      attr_accessor last_updated_time: ::String
+      attr_accessor created_time: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ExternalModelOutputs
+      attr_accessor external_model: Types::ExternalModelSummary
+      attr_accessor outputs: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ExternalModelSummary
+      attr_accessor model_endpoint: ::String
+      attr_accessor model_source: ("SAGEMAKER")
+      SENSITIVE: []
+    end
+
+    class FieldValidationMessage
+      attr_accessor field_name: ::String
+      attr_accessor identifier: ::String
+      attr_accessor title: ::String
+      attr_accessor content: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class FileValidationMessage
+      attr_accessor title: ::String
+      attr_accessor content: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class FilterCondition
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class GetBatchImportJobsRequest
+      attr_accessor job_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetBatchImportJobsResult
+      attr_accessor batch_imports: ::Array[Types::BatchImport]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetBatchPredictionJobsRequest
+      attr_accessor job_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetBatchPredictionJobsResult
+      attr_accessor batch_predictions: ::Array[Types::BatchPrediction]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeleteEventsByEventTypeStatusRequest
+      attr_accessor event_type_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeleteEventsByEventTypeStatusResult
+      attr_accessor event_type_name: ::String
+      attr_accessor events_deletion_status: ("IN_PROGRESS_INITIALIZING" | "IN_PROGRESS" | "CANCEL_IN_PROGRESS" | "CANCELED" | "COMPLETE" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class GetDetectorVersionRequest
+      attr_accessor detector_id: ::String
+      attr_accessor detector_version_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDetectorVersionResult
+      attr_accessor detector_id: ::String
+      attr_accessor detector_version_id: ::String
+      attr_accessor description: ::String
+      attr_accessor external_model_endpoints: ::Array[::String]
+      attr_accessor model_versions: ::Array[Types::ModelVersion]
+      attr_accessor rules: ::Array[Types::Rule]
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "INACTIVE")
+      attr_accessor last_updated_time: ::String
+      attr_accessor created_time: ::String
+      attr_accessor rule_execution_mode: ("ALL_MATCHED" | "FIRST_MATCHED")
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetDetectorsRequest
+      attr_accessor detector_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetDetectorsResult
+      attr_accessor detectors: ::Array[Types::Detector]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetEntityTypesRequest
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetEntityTypesResult
+      attr_accessor entity_types: ::Array[Types::EntityType]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetEventPredictionMetadataRequest
+      attr_accessor event_id: ::String
+      attr_accessor event_type_name: ::String
+      attr_accessor detector_id: ::String
+      attr_accessor detector_version_id: ::String
+      attr_accessor prediction_timestamp: ::String
+      SENSITIVE: []
+    end
+
+    class GetEventPredictionMetadataResult
+      attr_accessor event_id: ::String
+      attr_accessor event_type_name: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor entity_type: ::String
+      attr_accessor event_timestamp: ::String
+      attr_accessor detector_id: ::String
+      attr_accessor detector_version_id: ::String
+      attr_accessor detector_version_status: ::String
+      attr_accessor event_variables: ::Array[Types::EventVariableSummary]
+      attr_accessor rules: ::Array[Types::EvaluatedRule]
+      attr_accessor rule_execution_mode: ("ALL_MATCHED" | "FIRST_MATCHED")
+      attr_accessor outcomes: ::Array[::String]
+      attr_accessor evaluated_model_versions: ::Array[Types::EvaluatedModelVersion]
+      attr_accessor evaluated_external_models: ::Array[Types::EvaluatedExternalModel]
+      attr_accessor prediction_timestamp: ::String
+      SENSITIVE: []
+    end
+
+    class GetEventPredictionRequest
+      attr_accessor detector_id: ::String
+      attr_accessor detector_version_id: ::String
+      attr_accessor event_id: ::String
+      attr_accessor event_type_name: ::String
+      attr_accessor entities: ::Array[Types::Entity]
+      attr_accessor event_timestamp: ::String
+      attr_accessor event_variables: ::Hash[::String, ::String]
+      attr_accessor external_model_endpoint_data_blobs: ::Hash[::String, Types::ModelEndpointDataBlob]
+      SENSITIVE: [:external_model_endpoint_data_blobs]
+    end
+
+    class GetEventPredictionResult
+      attr_accessor model_scores: ::Array[Types::ModelScores]
+      attr_accessor rule_results: ::Array[Types::RuleResult]
+      attr_accessor external_model_outputs: ::Array[Types::ExternalModelOutputs]
+      SENSITIVE: []
+    end
+
+    class GetEventRequest
+      attr_accessor event_id: ::String
+      attr_accessor event_type_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetEventResult
+      attr_accessor event: Types::Event
+      SENSITIVE: []
+    end
+
+    class GetEventTypesRequest
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetEventTypesResult
+      attr_accessor event_types: ::Array[Types::EventType]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetExternalModelsRequest
+      attr_accessor model_endpoint: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetExternalModelsResult
+      attr_accessor external_models: ::Array[Types::ExternalModel]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetKMSEncryptionKeyResult
+      attr_accessor kms_key: Types::KMSKey
+      SENSITIVE: []
+    end
+
+    class GetLabelsRequest
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetLabelsResult
+      attr_accessor labels: ::Array[Types::Label]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetListElementsRequest
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetListElementsResult
+      attr_accessor elements: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetListsMetadataRequest
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetListsMetadataResult
+      attr_accessor lists: ::Array[Types::AllowDenyList]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetModelVersionRequest
+      attr_accessor model_id: ::String
+      attr_accessor model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS")
+      attr_accessor model_version_number: ::String
+      SENSITIVE: []
+    end
+
+    class GetModelVersionResult
+      attr_accessor model_id: ::String
+      attr_accessor model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS")
+      attr_accessor model_version_number: ::String
+      attr_accessor training_data_source: ("EXTERNAL_EVENTS" | "INGESTED_EVENTS")
+      attr_accessor training_data_schema: Types::TrainingDataSchema
+      attr_accessor external_events_detail: Types::ExternalEventsDetail
+      attr_accessor ingested_events_detail: Types::IngestedEventsDetail
+      attr_accessor status: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetModelsRequest
+      attr_accessor model_id: ::String
+      attr_accessor model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetModelsResult
+      attr_accessor next_token: ::String
+      attr_accessor models: ::Array[Types::Model]
+      SENSITIVE: []
+    end
+
+    class GetOutcomesRequest
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetOutcomesResult
+      attr_accessor outcomes: ::Array[Types::Outcome]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetRulesRequest
+      attr_accessor rule_id: ::String
+      attr_accessor detector_id: ::String
+      attr_accessor rule_version: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetRulesResult
+      attr_accessor rule_details: ::Array[Types::RuleDetail]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetVariablesRequest
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetVariablesResult
+      attr_accessor variables: ::Array[Types::Variable]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class IngestedEventStatistics
+      attr_accessor number_of_events: ::Integer
+      attr_accessor event_data_size_in_bytes: ::Integer
+      attr_accessor least_recent_event: ::String
+      attr_accessor most_recent_event: ::String
+      attr_accessor last_updated_time: ::String
+      SENSITIVE: []
+    end
+
+    class IngestedEventsDetail
+      attr_accessor ingested_events_time_window: Types::IngestedEventsTimeWindow
+      SENSITIVE: []
+    end
+
+    class IngestedEventsTimeWindow
+      attr_accessor start_time: ::String
+      attr_accessor end_time: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KMSKey
+      attr_accessor kms_encryption_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Label
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor last_updated_time: ::String
+      attr_accessor created_time: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class LabelSchema
+      attr_accessor label_mapper: ::Hash[::String, ::Array[::String]]
+      attr_accessor unlabeled_events_treatment: ("IGNORE" | "FRAUD" | "LEGIT" | "AUTO")
+      SENSITIVE: []
+    end
+
+    class ListEventPredictionsRequest
+      attr_accessor event_id: Types::FilterCondition
+      attr_accessor event_type: Types::FilterCondition
+      attr_accessor detector_id: Types::FilterCondition
+      attr_accessor detector_version_id: Types::FilterCondition
+      attr_accessor prediction_time_range: Types::PredictionTimeRange
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEventPredictionsResult
+      attr_accessor event_prediction_summaries: ::Array[Types::EventPredictionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResult
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LogOddsMetric
+      attr_accessor variable_name: ::String
+      attr_accessor variable_type: ::String
+      attr_accessor variable_importance: ::Float
+      SENSITIVE: []
+    end
+
+    class MetricDataPoint
+      attr_accessor fpr: ::Float
+      attr_accessor precision: ::Float
+      attr_accessor tpr: ::Float
+      attr_accessor threshold: ::Float
+      SENSITIVE: []
+    end
+
+    class Model
+      attr_accessor model_id: ::String
+      attr_accessor model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS")
+      attr_accessor description: ::String
+      attr_accessor event_type_name: ::String
+      attr_accessor created_time: ::String
+      attr_accessor last_updated_time: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ModelEndpointDataBlob
+      attr_accessor byte_buffer: ::String
+      attr_accessor content_type: ::String
+      SENSITIVE: []
+    end
+
+    class ModelInputConfiguration
+      attr_accessor event_type_name: ::String
+      attr_accessor format: ("TEXT_CSV" | "APPLICATION_JSON")
+      attr_accessor use_event_variables: bool
+      attr_accessor json_input_template: ::String
+      attr_accessor csv_input_template: ::String
+      SENSITIVE: []
+    end
+
+    class ModelOutputConfiguration
+      attr_accessor format: ("TEXT_CSV" | "APPLICATION_JSONLINES")
+      attr_accessor json_key_to_variable_map: ::Hash[::String, ::String]
+      attr_accessor csv_index_to_variable_map: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ModelScores
+      attr_accessor model_version: Types::ModelVersion
+      attr_accessor scores: ::Hash[::String, ::Float]
+      SENSITIVE: []
+    end
+
+    class ModelVersion
+      attr_accessor model_id: ::String
+      attr_accessor model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS")
+      attr_accessor model_version_number: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ModelVersionDetail
+      attr_accessor model_id: ::String
+      attr_accessor model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS")
+      attr_accessor model_version_number: ::String
+      attr_accessor status: ::String
+      attr_accessor training_data_source: ("EXTERNAL_EVENTS" | "INGESTED_EVENTS")
+      attr_accessor training_data_schema: Types::TrainingDataSchema
+      attr_accessor external_events_detail: Types::ExternalEventsDetail
+      attr_accessor ingested_events_detail: Types::IngestedEventsDetail
+      attr_accessor training_result: Types::TrainingResult
+      attr_accessor last_updated_time: ::String
+      attr_accessor created_time: ::String
+      attr_accessor arn: ::String
+      attr_accessor training_result_v2: Types::TrainingResultV2
+      SENSITIVE: []
+    end
+
+    class ModelVersionEvaluation
+      attr_accessor output_variable_name: ::String
+      attr_accessor evaluation_score: ::String
+      attr_accessor prediction_explanations: Types::PredictionExplanations
+      SENSITIVE: []
+    end
+
+    class OFIMetricDataPoint
+      attr_accessor fpr: ::Float
+      attr_accessor precision: ::Float
+      attr_accessor tpr: ::Float
+      attr_accessor threshold: ::Float
+      SENSITIVE: []
+    end
+
+    class OFIModelPerformance
+      attr_accessor auc: ::Float
+      attr_accessor uncertainty_range: Types::UncertaintyRange
+      SENSITIVE: []
+    end
+
+    class OFITrainingMetricsValue
+      attr_accessor metric_data_points: ::Array[Types::OFIMetricDataPoint]
+      attr_accessor model_performance: Types::OFIModelPerformance
+      SENSITIVE: []
+    end
+
+    class Outcome
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor last_updated_time: ::String
+      attr_accessor created_time: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class PredictionExplanations
+      attr_accessor variable_impact_explanations: ::Array[Types::VariableImpactExplanation]
+      attr_accessor aggregated_variables_impact_explanations: ::Array[Types::AggregatedVariablesImpactExplanation]
+      SENSITIVE: []
+    end
+
+    class PredictionTimeRange
+      attr_accessor start_time: ::String
+      attr_accessor end_time: ::String
+      SENSITIVE: []
+    end
+
+    class PutDetectorRequest
+      attr_accessor detector_id: ::String
+      attr_accessor description: ::String
+      attr_accessor event_type_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PutDetectorResult < Aws::EmptyStructure
+    end
+
+    class PutEntityTypeRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PutEntityTypeResult < Aws::EmptyStructure
+    end
+
+    class PutEventTypeRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor event_variables: ::Array[::String]
+      attr_accessor labels: ::Array[::String]
+      attr_accessor entity_types: ::Array[::String]
+      attr_accessor event_ingestion: ("ENABLED" | "DISABLED")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor event_orchestration: Types::EventOrchestration
+      SENSITIVE: []
+    end
+
+    class PutEventTypeResult < Aws::EmptyStructure
+    end
+
+    class PutExternalModelRequest
+      attr_accessor model_endpoint: ::String
+      attr_accessor model_source: ("SAGEMAKER")
+      attr_accessor invoke_model_endpoint_role_arn: ::String
+      attr_accessor input_configuration: Types::ModelInputConfiguration
+      attr_accessor output_configuration: Types::ModelOutputConfiguration
+      attr_accessor model_endpoint_status: ("ASSOCIATED" | "DISSOCIATED")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PutExternalModelResult < Aws::EmptyStructure
+    end
+
+    class PutKMSEncryptionKeyRequest
+      attr_accessor kms_encryption_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutKMSEncryptionKeyResult < Aws::EmptyStructure
+    end
+
+    class PutLabelRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PutLabelResult < Aws::EmptyStructure
+    end
+
+    class PutOutcomeRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PutOutcomeResult < Aws::EmptyStructure
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Rule
+      attr_accessor detector_id: ::String
+      attr_accessor rule_id: ::String
+      attr_accessor rule_version: ::String
+      SENSITIVE: []
+    end
+
+    class RuleDetail
+      attr_accessor rule_id: ::String
+      attr_accessor description: ::String
+      attr_accessor detector_id: ::String
+      attr_accessor rule_version: ::String
+      attr_accessor expression: ::String
+      attr_accessor language: ("DETECTORPL")
+      attr_accessor outcomes: ::Array[::String]
+      attr_accessor last_updated_time: ::String
+      attr_accessor created_time: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: [:expression]
+    end
+
+    class RuleResult
+      attr_accessor rule_id: ::String
+      attr_accessor outcomes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SendEventRequest
+      attr_accessor event_id: ::String
+      attr_accessor event_type_name: ::String
+      attr_accessor event_timestamp: ::String
+      attr_accessor event_variables: ::Hash[::String, ::String]
+      attr_accessor assigned_label: ::String
+      attr_accessor label_timestamp: ::String
+      attr_accessor entities: ::Array[Types::Entity]
+      SENSITIVE: []
+    end
+
+    class SendEventResult < Aws::EmptyStructure
+    end
+
+    class TFIMetricDataPoint
+      attr_accessor fpr: ::Float
+      attr_accessor precision: ::Float
+      attr_accessor tpr: ::Float
+      attr_accessor threshold: ::Float
+      SENSITIVE: []
+    end
+
+    class TFIModelPerformance
+      attr_accessor auc: ::Float
+      attr_accessor uncertainty_range: Types::UncertaintyRange
+      SENSITIVE: []
+    end
+
+    class TFITrainingMetricsValue
+      attr_accessor metric_data_points: ::Array[Types::TFIMetricDataPoint]
+      attr_accessor model_performance: Types::TFIModelPerformance
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResult < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TrainingDataSchema
+      attr_accessor model_variables: ::Array[::String]
+      attr_accessor label_schema: Types::LabelSchema
+      SENSITIVE: []
+    end
+
+    class TrainingMetrics
+      attr_accessor auc: ::Float
+      attr_accessor metric_data_points: ::Array[Types::MetricDataPoint]
+      SENSITIVE: []
+    end
+
+    class TrainingMetricsV2
+      attr_accessor ofi: Types::OFITrainingMetricsValue
+      attr_accessor tfi: Types::TFITrainingMetricsValue
+      attr_accessor ati: Types::ATITrainingMetricsValue
+      SENSITIVE: []
+    end
+
+    class TrainingResult
+      attr_accessor data_validation_metrics: Types::DataValidationMetrics
+      attr_accessor training_metrics: Types::TrainingMetrics
+      attr_accessor variable_importance_metrics: Types::VariableImportanceMetrics
+      SENSITIVE: []
+    end
+
+    class TrainingResultV2
+      attr_accessor data_validation_metrics: Types::DataValidationMetrics
+      attr_accessor training_metrics_v2: Types::TrainingMetricsV2
+      attr_accessor variable_importance_metrics: Types::VariableImportanceMetrics
+      attr_accessor aggregated_variables_importance_metrics: Types::AggregatedVariablesImportanceMetrics
+      SENSITIVE: []
+    end
+
+    class UncertaintyRange
+      attr_accessor lower_bound_value: ::Float
+      attr_accessor upper_bound_value: ::Float
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResult < Aws::EmptyStructure
+    end
+
+    class UpdateDetectorVersionMetadataRequest
+      attr_accessor detector_id: ::String
+      attr_accessor detector_version_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDetectorVersionMetadataResult < Aws::EmptyStructure
+    end
+
+    class UpdateDetectorVersionRequest
+      attr_accessor detector_id: ::String
+      attr_accessor detector_version_id: ::String
+      attr_accessor external_model_endpoints: ::Array[::String]
+      attr_accessor rules: ::Array[Types::Rule]
+      attr_accessor description: ::String
+      attr_accessor model_versions: ::Array[Types::ModelVersion]
+      attr_accessor rule_execution_mode: ("ALL_MATCHED" | "FIRST_MATCHED")
+      SENSITIVE: []
+    end
+
+    class UpdateDetectorVersionResult < Aws::EmptyStructure
+    end
+
+    class UpdateDetectorVersionStatusRequest
+      attr_accessor detector_id: ::String
+      attr_accessor detector_version_id: ::String
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "INACTIVE")
+      SENSITIVE: []
+    end
+
+    class UpdateDetectorVersionStatusResult < Aws::EmptyStructure
+    end
+
+    class UpdateEventLabelRequest
+      attr_accessor event_id: ::String
+      attr_accessor event_type_name: ::String
+      attr_accessor assigned_label: ::String
+      attr_accessor label_timestamp: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateEventLabelResult < Aws::EmptyStructure
+    end
+
+    class UpdateListRequest
+      attr_accessor name: ::String
+      attr_accessor elements: ::Array[::String]
+      attr_accessor description: ::String
+      attr_accessor update_mode: ("REPLACE" | "APPEND" | "REMOVE")
+      attr_accessor variable_type: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateListResult < Aws::EmptyStructure
+    end
+
+    class UpdateModelRequest
+      attr_accessor model_id: ::String
+      attr_accessor model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS")
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateModelResult < Aws::EmptyStructure
+    end
+
+    class UpdateModelVersionRequest
+      attr_accessor model_id: ::String
+      attr_accessor model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS")
+      attr_accessor major_version_number: ::String
+      attr_accessor external_events_detail: Types::ExternalEventsDetail
+      attr_accessor ingested_events_detail: Types::IngestedEventsDetail
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class UpdateModelVersionResult
+      attr_accessor model_id: ::String
+      attr_accessor model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS")
+      attr_accessor model_version_number: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateModelVersionStatusRequest
+      attr_accessor model_id: ::String
+      attr_accessor model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS")
+      attr_accessor model_version_number: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "TRAINING_CANCELLED")
+      SENSITIVE: []
+    end
+
+    class UpdateModelVersionStatusResult < Aws::EmptyStructure
+    end
+
+    class UpdateRuleMetadataRequest
+      attr_accessor rule: Types::Rule
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRuleMetadataResult < Aws::EmptyStructure
+    end
+
+    class UpdateRuleVersionRequest
+      attr_accessor rule: Types::Rule
+      attr_accessor description: ::String
+      attr_accessor expression: ::String
+      attr_accessor language: ("DETECTORPL")
+      attr_accessor outcomes: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:expression]
+    end
+
+    class UpdateRuleVersionResult
+      attr_accessor rule: Types::Rule
+      SENSITIVE: []
+    end
+
+    class UpdateVariableRequest
+      attr_accessor name: ::String
+      attr_accessor default_value: ::String
+      attr_accessor description: ::String
+      attr_accessor variable_type: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateVariableResult < Aws::EmptyStructure
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Variable
+      attr_accessor name: ::String
+      attr_accessor data_type: ("STRING" | "INTEGER" | "FLOAT" | "BOOLEAN" | "DATETIME")
+      attr_accessor data_source: ("EVENT" | "MODEL_SCORE" | "EXTERNAL_MODEL_SCORE")
+      attr_accessor default_value: ::String
+      attr_accessor description: ::String
+      attr_accessor variable_type: ::String
+      attr_accessor last_updated_time: ::String
+      attr_accessor created_time: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class VariableEntry
+      attr_accessor name: ::String
+      attr_accessor data_type: ::String
+      attr_accessor data_source: ::String
+      attr_accessor default_value: ::String
+      attr_accessor description: ::String
+      attr_accessor variable_type: ::String
+      SENSITIVE: []
+    end
+
+    class VariableImpactExplanation
+      attr_accessor event_variable_name: ::String
+      attr_accessor relative_impact: ::String
+      attr_accessor log_odds_impact: ::Float
+      SENSITIVE: []
+    end
+
+    class VariableImportanceMetrics
+      attr_accessor log_odds_metrics: ::Array[Types::LogOddsMetric]
+      SENSITIVE: []
+    end
+  end
+end

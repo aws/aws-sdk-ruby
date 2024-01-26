@@ -1,0 +1,988 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MemoryDB
+  module Types
+
+    class ACL
+      attr_accessor name: ::String
+      attr_accessor status: ::String
+      attr_accessor user_names: ::Array[::String]
+      attr_accessor minimum_engine_version: ::String
+      attr_accessor pending_changes: Types::ACLPendingChanges
+      attr_accessor clusters: ::Array[::String]
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ACLAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class ACLNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ACLPendingChanges
+      attr_accessor user_names_to_remove: ::Array[::String]
+      attr_accessor user_names_to_add: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ACLQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class ACLsUpdateStatus
+      attr_accessor acl_to_apply: ::String
+      SENSITIVE: []
+    end
+
+    class APICallRateForCustomerExceededFault < Aws::EmptyStructure
+    end
+
+    class Authentication
+      attr_accessor type: ("password" | "no-password" | "iam")
+      attr_accessor password_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class AuthenticationMode
+      attr_accessor type: ("password" | "iam")
+      attr_accessor passwords: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AvailabilityZone
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class BatchUpdateClusterRequest
+      attr_accessor cluster_names: ::Array[::String]
+      attr_accessor service_update: Types::ServiceUpdateRequest
+      SENSITIVE: []
+    end
+
+    class BatchUpdateClusterResponse
+      attr_accessor processed_clusters: ::Array[Types::Cluster]
+      attr_accessor unprocessed_clusters: ::Array[Types::UnprocessedCluster]
+      SENSITIVE: []
+    end
+
+    class Cluster
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ::String
+      attr_accessor pending_updates: Types::ClusterPendingUpdates
+      attr_accessor number_of_shards: ::Integer
+      attr_accessor shards: ::Array[Types::Shard]
+      attr_accessor availability_mode: ("singleaz" | "multiaz")
+      attr_accessor cluster_endpoint: Types::Endpoint
+      attr_accessor node_type: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor engine_patch_version: ::String
+      attr_accessor parameter_group_name: ::String
+      attr_accessor parameter_group_status: ::String
+      attr_accessor security_groups: ::Array[Types::SecurityGroupMembership]
+      attr_accessor subnet_group_name: ::String
+      attr_accessor tls_enabled: bool
+      attr_accessor kms_key_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor sns_topic_status: ::String
+      attr_accessor snapshot_retention_limit: ::Integer
+      attr_accessor maintenance_window: ::String
+      attr_accessor snapshot_window: ::String
+      attr_accessor acl_name: ::String
+      attr_accessor auto_minor_version_upgrade: bool
+      attr_accessor data_tiering: ("true" | "false")
+      SENSITIVE: []
+    end
+
+    class ClusterAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class ClusterConfiguration
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor node_type: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor maintenance_window: ::String
+      attr_accessor topic_arn: ::String
+      attr_accessor port: ::Integer
+      attr_accessor parameter_group_name: ::String
+      attr_accessor subnet_group_name: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor snapshot_retention_limit: ::Integer
+      attr_accessor snapshot_window: ::String
+      attr_accessor num_shards: ::Integer
+      attr_accessor shards: ::Array[Types::ShardDetail]
+      SENSITIVE: []
+    end
+
+    class ClusterNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ClusterPendingUpdates
+      attr_accessor resharding: Types::ReshardingStatus
+      attr_accessor acls: Types::ACLsUpdateStatus
+      attr_accessor service_updates: ::Array[Types::PendingModifiedServiceUpdate]
+      SENSITIVE: []
+    end
+
+    class ClusterQuotaForCustomerExceededFault < Aws::EmptyStructure
+    end
+
+    class CopySnapshotRequest
+      attr_accessor source_snapshot_name: ::String
+      attr_accessor target_snapshot_name: ::String
+      attr_accessor target_bucket: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CopySnapshotResponse
+      attr_accessor snapshot: Types::Snapshot
+      SENSITIVE: []
+    end
+
+    class CreateACLRequest
+      attr_accessor acl_name: ::String
+      attr_accessor user_names: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateACLResponse
+      attr_accessor acl: Types::ACL
+      SENSITIVE: []
+    end
+
+    class CreateClusterRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor node_type: ::String
+      attr_accessor parameter_group_name: ::String
+      attr_accessor description: ::String
+      attr_accessor num_shards: ::Integer
+      attr_accessor num_replicas_per_shard: ::Integer
+      attr_accessor subnet_group_name: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor maintenance_window: ::String
+      attr_accessor port: ::Integer
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor tls_enabled: bool
+      attr_accessor kms_key_id: ::String
+      attr_accessor snapshot_arns: ::Array[::String]
+      attr_accessor snapshot_name: ::String
+      attr_accessor snapshot_retention_limit: ::Integer
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor snapshot_window: ::String
+      attr_accessor acl_name: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor auto_minor_version_upgrade: bool
+      attr_accessor data_tiering: bool
+      SENSITIVE: []
+    end
+
+    class CreateClusterResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class CreateParameterGroupRequest
+      attr_accessor parameter_group_name: ::String
+      attr_accessor family: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateParameterGroupResponse
+      attr_accessor parameter_group: Types::ParameterGroup
+      SENSITIVE: []
+    end
+
+    class CreateSnapshotRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor snapshot_name: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateSnapshotResponse
+      attr_accessor snapshot: Types::Snapshot
+      SENSITIVE: []
+    end
+
+    class CreateSubnetGroupRequest
+      attr_accessor subnet_group_name: ::String
+      attr_accessor description: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateSubnetGroupResponse
+      attr_accessor subnet_group: Types::SubnetGroup
+      SENSITIVE: []
+    end
+
+    class CreateUserRequest
+      attr_accessor user_name: ::String
+      attr_accessor authentication_mode: Types::AuthenticationMode
+      attr_accessor access_string: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateUserResponse
+      attr_accessor user: Types::User
+      SENSITIVE: []
+    end
+
+    class DefaultUserRequired < Aws::EmptyStructure
+    end
+
+    class DeleteACLRequest
+      attr_accessor acl_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteACLResponse
+      attr_accessor acl: Types::ACL
+      SENSITIVE: []
+    end
+
+    class DeleteClusterRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor final_snapshot_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteClusterResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class DeleteParameterGroupRequest
+      attr_accessor parameter_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteParameterGroupResponse
+      attr_accessor parameter_group: Types::ParameterGroup
+      SENSITIVE: []
+    end
+
+    class DeleteSnapshotRequest
+      attr_accessor snapshot_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSnapshotResponse
+      attr_accessor snapshot: Types::Snapshot
+      SENSITIVE: []
+    end
+
+    class DeleteSubnetGroupRequest
+      attr_accessor subnet_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSubnetGroupResponse
+      attr_accessor subnet_group: Types::SubnetGroup
+      SENSITIVE: []
+    end
+
+    class DeleteUserRequest
+      attr_accessor user_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUserResponse
+      attr_accessor user: Types::User
+      SENSITIVE: []
+    end
+
+    class DescribeACLsRequest
+      attr_accessor acl_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeACLsResponse
+      attr_accessor acls: ::Array[Types::ACL]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeClustersRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor show_shard_details: bool
+      SENSITIVE: []
+    end
+
+    class DescribeClustersResponse
+      attr_accessor next_token: ::String
+      attr_accessor clusters: ::Array[Types::Cluster]
+      SENSITIVE: []
+    end
+
+    class DescribeEngineVersionsRequest
+      attr_accessor engine_version: ::String
+      attr_accessor parameter_group_family: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor default_only: bool
+      SENSITIVE: []
+    end
+
+    class DescribeEngineVersionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor engine_versions: ::Array[Types::EngineVersionInfo]
+      SENSITIVE: []
+    end
+
+    class DescribeEventsRequest
+      attr_accessor source_name: ::String
+      attr_accessor source_type: ("node" | "parameter-group" | "subnet-group" | "cluster" | "user" | "acl")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor duration: ::Integer
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEventsResponse
+      attr_accessor next_token: ::String
+      attr_accessor events: ::Array[Types::Event]
+      SENSITIVE: []
+    end
+
+    class DescribeParameterGroupsRequest
+      attr_accessor parameter_group_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeParameterGroupsResponse
+      attr_accessor next_token: ::String
+      attr_accessor parameter_groups: ::Array[Types::ParameterGroup]
+      SENSITIVE: []
+    end
+
+    class DescribeParametersRequest
+      attr_accessor parameter_group_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeParametersResponse
+      attr_accessor next_token: ::String
+      attr_accessor parameters: ::Array[Types::Parameter]
+      SENSITIVE: []
+    end
+
+    class DescribeReservedNodesOfferingsRequest
+      attr_accessor reserved_nodes_offering_id: ::String
+      attr_accessor node_type: ::String
+      attr_accessor duration: ::String
+      attr_accessor offering_type: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReservedNodesOfferingsResponse
+      attr_accessor next_token: ::String
+      attr_accessor reserved_nodes_offerings: ::Array[Types::ReservedNodesOffering]
+      SENSITIVE: []
+    end
+
+    class DescribeReservedNodesRequest
+      attr_accessor reservation_id: ::String
+      attr_accessor reserved_nodes_offering_id: ::String
+      attr_accessor node_type: ::String
+      attr_accessor duration: ::String
+      attr_accessor offering_type: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReservedNodesResponse
+      attr_accessor next_token: ::String
+      attr_accessor reserved_nodes: ::Array[Types::ReservedNode]
+      SENSITIVE: []
+    end
+
+    class DescribeServiceUpdatesRequest
+      attr_accessor service_update_name: ::String
+      attr_accessor cluster_names: ::Array[::String]
+      attr_accessor status: ::Array[("available" | "in-progress" | "complete" | "scheduled")]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeServiceUpdatesResponse
+      attr_accessor next_token: ::String
+      attr_accessor service_updates: ::Array[Types::ServiceUpdate]
+      SENSITIVE: []
+    end
+
+    class DescribeSnapshotsRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor snapshot_name: ::String
+      attr_accessor source: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor show_detail: bool
+      SENSITIVE: []
+    end
+
+    class DescribeSnapshotsResponse
+      attr_accessor next_token: ::String
+      attr_accessor snapshots: ::Array[Types::Snapshot]
+      SENSITIVE: []
+    end
+
+    class DescribeSubnetGroupsRequest
+      attr_accessor subnet_group_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSubnetGroupsResponse
+      attr_accessor next_token: ::String
+      attr_accessor subnet_groups: ::Array[Types::SubnetGroup]
+      SENSITIVE: []
+    end
+
+    class DescribeUsersRequest
+      attr_accessor user_name: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUsersResponse
+      attr_accessor users: ::Array[Types::User]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DuplicateUserNameFault < Aws::EmptyStructure
+    end
+
+    class Endpoint
+      attr_accessor address: ::String
+      attr_accessor port: ::Integer
+      SENSITIVE: []
+    end
+
+    class EngineVersionInfo
+      attr_accessor engine_version: ::String
+      attr_accessor engine_patch_version: ::String
+      attr_accessor parameter_group_family: ::String
+      SENSITIVE: []
+    end
+
+    class Event
+      attr_accessor source_name: ::String
+      attr_accessor source_type: ("node" | "parameter-group" | "subnet-group" | "cluster" | "user" | "acl")
+      attr_accessor message: ::String
+      attr_accessor date: ::Time
+      SENSITIVE: []
+    end
+
+    class FailoverShardRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor shard_name: ::String
+      SENSITIVE: []
+    end
+
+    class FailoverShardResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class InsufficientClusterCapacityFault < Aws::EmptyStructure
+    end
+
+    class InvalidACLStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidARNFault < Aws::EmptyStructure
+    end
+
+    class InvalidClusterStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidCredentialsException < Aws::EmptyStructure
+    end
+
+    class InvalidKMSKeyFault < Aws::EmptyStructure
+    end
+
+    class InvalidNodeStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidParameterCombinationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterGroupStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidParameterValueException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidSnapshotStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidSubnet < Aws::EmptyStructure
+    end
+
+    class InvalidUserStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidVPCNetworkStateFault < Aws::EmptyStructure
+    end
+
+    class ListAllowedNodeTypeUpdatesRequest
+      attr_accessor cluster_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListAllowedNodeTypeUpdatesResponse
+      attr_accessor scale_up_node_types: ::Array[::String]
+      attr_accessor scale_down_node_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListTagsRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsResponse
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class NoOperationFault < Aws::EmptyStructure
+    end
+
+    class Node
+      attr_accessor name: ::String
+      attr_accessor status: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor endpoint: Types::Endpoint
+      SENSITIVE: []
+    end
+
+    class NodeQuotaForClusterExceededFault < Aws::EmptyStructure
+    end
+
+    class NodeQuotaForCustomerExceededFault < Aws::EmptyStructure
+    end
+
+    class Parameter
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      attr_accessor description: ::String
+      attr_accessor data_type: ::String
+      attr_accessor allowed_values: ::String
+      attr_accessor minimum_engine_version: ::String
+      SENSITIVE: []
+    end
+
+    class ParameterGroup
+      attr_accessor name: ::String
+      attr_accessor family: ::String
+      attr_accessor description: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ParameterGroupAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class ParameterGroupNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ParameterGroupQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class ParameterNameValue
+      attr_accessor parameter_name: ::String
+      attr_accessor parameter_value: ::String
+      SENSITIVE: []
+    end
+
+    class PendingModifiedServiceUpdate
+      attr_accessor service_update_name: ::String
+      attr_accessor status: ("available" | "in-progress" | "complete" | "scheduled")
+      SENSITIVE: []
+    end
+
+    class PurchaseReservedNodesOfferingRequest
+      attr_accessor reserved_nodes_offering_id: ::String
+      attr_accessor reservation_id: ::String
+      attr_accessor node_count: ::Integer
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PurchaseReservedNodesOfferingResponse
+      attr_accessor reserved_node: Types::ReservedNode
+      SENSITIVE: []
+    end
+
+    class RecurringCharge
+      attr_accessor recurring_charge_amount: ::Float
+      attr_accessor recurring_charge_frequency: ::String
+      SENSITIVE: []
+    end
+
+    class ReplicaConfigurationRequest
+      attr_accessor replica_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ReservedNode
+      attr_accessor reservation_id: ::String
+      attr_accessor reserved_nodes_offering_id: ::String
+      attr_accessor node_type: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor duration: ::Integer
+      attr_accessor fixed_price: ::Float
+      attr_accessor node_count: ::Integer
+      attr_accessor offering_type: ::String
+      attr_accessor state: ::String
+      attr_accessor recurring_charges: ::Array[Types::RecurringCharge]
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ReservedNodeAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class ReservedNodeNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ReservedNodeQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class ReservedNodesOffering
+      attr_accessor reserved_nodes_offering_id: ::String
+      attr_accessor node_type: ::String
+      attr_accessor duration: ::Integer
+      attr_accessor fixed_price: ::Float
+      attr_accessor offering_type: ::String
+      attr_accessor recurring_charges: ::Array[Types::RecurringCharge]
+      SENSITIVE: []
+    end
+
+    class ReservedNodesOfferingNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ResetParameterGroupRequest
+      attr_accessor parameter_group_name: ::String
+      attr_accessor all_parameters: bool
+      attr_accessor parameter_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResetParameterGroupResponse
+      attr_accessor parameter_group: Types::ParameterGroup
+      SENSITIVE: []
+    end
+
+    class ReshardingStatus
+      attr_accessor slot_migration: Types::SlotMigration
+      SENSITIVE: []
+    end
+
+    class SecurityGroupMembership
+      attr_accessor security_group_id: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceLinkedRoleNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ServiceUpdate
+      attr_accessor cluster_name: ::String
+      attr_accessor service_update_name: ::String
+      attr_accessor release_date: ::Time
+      attr_accessor description: ::String
+      attr_accessor status: ("available" | "in-progress" | "complete" | "scheduled")
+      attr_accessor type: ("security-update")
+      attr_accessor nodes_updated: ::String
+      attr_accessor auto_update_start_date: ::Time
+      SENSITIVE: []
+    end
+
+    class ServiceUpdateNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ServiceUpdateRequest
+      attr_accessor service_update_name_to_apply: ::String
+      SENSITIVE: []
+    end
+
+    class Shard
+      attr_accessor name: ::String
+      attr_accessor status: ::String
+      attr_accessor slots: ::String
+      attr_accessor nodes: ::Array[Types::Node]
+      attr_accessor number_of_nodes: ::Integer
+      SENSITIVE: []
+    end
+
+    class ShardConfiguration
+      attr_accessor slots: ::String
+      attr_accessor replica_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ShardConfigurationRequest
+      attr_accessor shard_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ShardDetail
+      attr_accessor name: ::String
+      attr_accessor configuration: Types::ShardConfiguration
+      attr_accessor size: ::String
+      attr_accessor snapshot_creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ShardNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ShardsPerClusterQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class SlotMigration
+      attr_accessor progress_percentage: ::Float
+      SENSITIVE: []
+    end
+
+    class Snapshot
+      attr_accessor name: ::String
+      attr_accessor status: ::String
+      attr_accessor source: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor cluster_configuration: Types::ClusterConfiguration
+      attr_accessor data_tiering: ("true" | "false")
+      SENSITIVE: []
+    end
+
+    class SnapshotAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class SnapshotNotFoundFault < Aws::EmptyStructure
+    end
+
+    class SnapshotQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class Subnet
+      attr_accessor identifier: ::String
+      attr_accessor availability_zone: Types::AvailabilityZone
+      SENSITIVE: []
+    end
+
+    class SubnetGroup
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor subnets: ::Array[Types::Subnet]
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class SubnetGroupAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class SubnetGroupInUseFault < Aws::EmptyStructure
+    end
+
+    class SubnetGroupNotFoundFault < Aws::EmptyStructure
+    end
+
+    class SubnetGroupQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class SubnetInUse < Aws::EmptyStructure
+    end
+
+    class SubnetNotAllowedFault < Aws::EmptyStructure
+    end
+
+    class SubnetQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagNotFoundFault < Aws::EmptyStructure
+    end
+
+    class TagQuotaPerResourceExceeded < Aws::EmptyStructure
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TestFailoverNotAvailableFault < Aws::EmptyStructure
+    end
+
+    class UnprocessedCluster
+      attr_accessor cluster_name: ::String
+      attr_accessor error_type: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class UpdateACLRequest
+      attr_accessor acl_name: ::String
+      attr_accessor user_names_to_add: ::Array[::String]
+      attr_accessor user_names_to_remove: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateACLResponse
+      attr_accessor acl: Types::ACL
+      SENSITIVE: []
+    end
+
+    class UpdateClusterRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor description: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor maintenance_window: ::String
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor sns_topic_status: ::String
+      attr_accessor parameter_group_name: ::String
+      attr_accessor snapshot_window: ::String
+      attr_accessor snapshot_retention_limit: ::Integer
+      attr_accessor node_type: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor replica_configuration: Types::ReplicaConfigurationRequest
+      attr_accessor shard_configuration: Types::ShardConfigurationRequest
+      attr_accessor acl_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateClusterResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class UpdateParameterGroupRequest
+      attr_accessor parameter_group_name: ::String
+      attr_accessor parameter_name_values: ::Array[Types::ParameterNameValue]
+      SENSITIVE: []
+    end
+
+    class UpdateParameterGroupResponse
+      attr_accessor parameter_group: Types::ParameterGroup
+      SENSITIVE: []
+    end
+
+    class UpdateSubnetGroupRequest
+      attr_accessor subnet_group_name: ::String
+      attr_accessor description: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateSubnetGroupResponse
+      attr_accessor subnet_group: Types::SubnetGroup
+      SENSITIVE: []
+    end
+
+    class UpdateUserRequest
+      attr_accessor user_name: ::String
+      attr_accessor authentication_mode: Types::AuthenticationMode
+      attr_accessor access_string: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateUserResponse
+      attr_accessor user: Types::User
+      SENSITIVE: []
+    end
+
+    class User
+      attr_accessor name: ::String
+      attr_accessor status: ::String
+      attr_accessor access_string: ::String
+      attr_accessor acl_names: ::Array[::String]
+      attr_accessor minimum_engine_version: ::String
+      attr_accessor authentication: Types::Authentication
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class UserAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class UserNotFoundFault < Aws::EmptyStructure
+    end
+
+    class UserQuotaExceededFault < Aws::EmptyStructure
+    end
+  end
+end

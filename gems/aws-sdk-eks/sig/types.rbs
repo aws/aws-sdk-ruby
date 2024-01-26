@@ -1,0 +1,1385 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::EKS
+  module Types
+
+    class AccessConfigResponse
+      attr_accessor bootstrap_cluster_creator_admin_permissions: bool
+      attr_accessor authentication_mode: ("API" | "API_AND_CONFIG_MAP" | "CONFIG_MAP")
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccessEntry
+      attr_accessor cluster_name: ::String
+      attr_accessor principal_arn: ::String
+      attr_accessor kubernetes_groups: ::Array[::String]
+      attr_accessor access_entry_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor username: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class AccessPolicy
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class AccessScope
+      attr_accessor type: ("cluster" | "namespace")
+      attr_accessor namespaces: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Addon
+      attr_accessor addon_name: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "CREATE_FAILED" | "UPDATING" | "DELETING" | "DELETE_FAILED" | "DEGRADED" | "UPDATE_FAILED")
+      attr_accessor addon_version: ::String
+      attr_accessor health: Types::AddonHealth
+      attr_accessor addon_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor service_account_role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor publisher: ::String
+      attr_accessor owner: ::String
+      attr_accessor marketplace_information: Types::MarketplaceInformation
+      attr_accessor configuration_values: ::String
+      SENSITIVE: []
+    end
+
+    class AddonHealth
+      attr_accessor issues: ::Array[Types::AddonIssue]
+      SENSITIVE: []
+    end
+
+    class AddonInfo
+      attr_accessor addon_name: ::String
+      attr_accessor type: ::String
+      attr_accessor addon_versions: ::Array[Types::AddonVersionInfo]
+      attr_accessor publisher: ::String
+      attr_accessor owner: ::String
+      attr_accessor marketplace_information: Types::MarketplaceInformation
+      SENSITIVE: []
+    end
+
+    class AddonIssue
+      attr_accessor code: ("AccessDenied" | "InternalFailure" | "ClusterUnreachable" | "InsufficientNumberOfReplicas" | "ConfigurationConflict" | "AdmissionRequestDenied" | "UnsupportedAddonModification" | "K8sResourceNotFound")
+      attr_accessor message: ::String
+      attr_accessor resource_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AddonVersionInfo
+      attr_accessor addon_version: ::String
+      attr_accessor architecture: ::Array[::String]
+      attr_accessor compatibilities: ::Array[Types::Compatibility]
+      attr_accessor requires_configuration: bool
+      SENSITIVE: []
+    end
+
+    class AssociateAccessPolicyRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor principal_arn: ::String
+      attr_accessor policy_arn: ::String
+      attr_accessor access_scope: Types::AccessScope
+      SENSITIVE: []
+    end
+
+    class AssociateAccessPolicyResponse
+      attr_accessor cluster_name: ::String
+      attr_accessor principal_arn: ::String
+      attr_accessor associated_access_policy: Types::AssociatedAccessPolicy
+      SENSITIVE: []
+    end
+
+    class AssociateEncryptionConfigRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor encryption_config: ::Array[Types::EncryptionConfig]
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateEncryptionConfigResponse
+      attr_accessor update: Types::Update
+      SENSITIVE: []
+    end
+
+    class AssociateIdentityProviderConfigRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor oidc: Types::OidcIdentityProviderConfigRequest
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateIdentityProviderConfigResponse
+      attr_accessor update: Types::Update
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class AssociatedAccessPolicy
+      attr_accessor policy_arn: ::String
+      attr_accessor access_scope: Types::AccessScope
+      attr_accessor associated_at: ::Time
+      attr_accessor modified_at: ::Time
+      SENSITIVE: []
+    end
+
+    class AutoScalingGroup
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Certificate
+      attr_accessor data: ::String
+      SENSITIVE: []
+    end
+
+    class ClientException
+      attr_accessor cluster_name: ::String
+      attr_accessor nodegroup_name: ::String
+      attr_accessor addon_name: ::String
+      attr_accessor subscription_id: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ClientStat
+      attr_accessor user_agent: ::String
+      attr_accessor number_of_requests_last_30_days: ::Integer
+      attr_accessor last_request_time: ::Time
+      SENSITIVE: []
+    end
+
+    class Cluster
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor version: ::String
+      attr_accessor endpoint: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor resources_vpc_config: Types::VpcConfigResponse
+      attr_accessor kubernetes_network_config: Types::KubernetesNetworkConfigResponse
+      attr_accessor logging: Types::Logging
+      attr_accessor identity: Types::Identity
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING" | "PENDING")
+      attr_accessor certificate_authority: Types::Certificate
+      attr_accessor client_request_token: ::String
+      attr_accessor platform_version: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor encryption_config: ::Array[Types::EncryptionConfig]
+      attr_accessor connector_config: Types::ConnectorConfigResponse
+      attr_accessor id: ::String
+      attr_accessor health: Types::ClusterHealth
+      attr_accessor outpost_config: Types::OutpostConfigResponse
+      attr_accessor access_config: Types::AccessConfigResponse
+      SENSITIVE: []
+    end
+
+    class ClusterHealth
+      attr_accessor issues: ::Array[Types::ClusterIssue]
+      SENSITIVE: []
+    end
+
+    class ClusterIssue
+      attr_accessor code: ("AccessDenied" | "ClusterUnreachable" | "ConfigurationConflict" | "InternalFailure" | "ResourceLimitExceeded" | "ResourceNotFound" | "IamRoleNotFound" | "VpcNotFound" | "InsufficientFreeAddresses" | "Ec2ServiceNotSubscribed" | "Ec2SubnetNotFound" | "Ec2SecurityGroupNotFound" | "KmsGrantRevoked" | "KmsKeyNotFound" | "KmsKeyMarkedForDeletion" | "KmsKeyDisabled" | "StsRegionalEndpointDisabled" | "UnsupportedVersion" | "Other")
+      attr_accessor message: ::String
+      attr_accessor resource_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Compatibility
+      attr_accessor cluster_version: ::String
+      attr_accessor platform_versions: ::Array[::String]
+      attr_accessor default_version: bool
+      SENSITIVE: []
+    end
+
+    class ConnectorConfigRequest
+      attr_accessor role_arn: ::String
+      attr_accessor provider: ("EKS_ANYWHERE" | "ANTHOS" | "GKE" | "AKS" | "OPENSHIFT" | "TANZU" | "RANCHER" | "EC2" | "OTHER")
+      SENSITIVE: []
+    end
+
+    class ConnectorConfigResponse
+      attr_accessor activation_id: ::String
+      attr_accessor activation_code: ::String
+      attr_accessor activation_expiry: ::Time
+      attr_accessor provider: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ControlPlanePlacementRequest
+      attr_accessor group_name: ::String
+      SENSITIVE: []
+    end
+
+    class ControlPlanePlacementResponse
+      attr_accessor group_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAccessConfigRequest
+      attr_accessor bootstrap_cluster_creator_admin_permissions: bool
+      attr_accessor authentication_mode: ("API" | "API_AND_CONFIG_MAP" | "CONFIG_MAP")
+      SENSITIVE: []
+    end
+
+    class CreateAccessEntryRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor principal_arn: ::String
+      attr_accessor kubernetes_groups: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_request_token: ::String
+      attr_accessor username: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAccessEntryResponse
+      attr_accessor access_entry: Types::AccessEntry
+      SENSITIVE: []
+    end
+
+    class CreateAddonRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor addon_name: ::String
+      attr_accessor addon_version: ::String
+      attr_accessor service_account_role_arn: ::String
+      attr_accessor resolve_conflicts: ("OVERWRITE" | "NONE" | "PRESERVE")
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor configuration_values: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAddonResponse
+      attr_accessor addon: Types::Addon
+      SENSITIVE: []
+    end
+
+    class CreateClusterRequest
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor resources_vpc_config: Types::VpcConfigRequest
+      attr_accessor kubernetes_network_config: Types::KubernetesNetworkConfigRequest
+      attr_accessor logging: Types::Logging
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor encryption_config: ::Array[Types::EncryptionConfig]
+      attr_accessor outpost_config: Types::OutpostConfigRequest
+      attr_accessor access_config: Types::CreateAccessConfigRequest
+      SENSITIVE: []
+    end
+
+    class CreateClusterResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class CreateEksAnywhereSubscriptionRequest
+      attr_accessor name: ::String
+      attr_accessor term: Types::EksAnywhereSubscriptionTerm
+      attr_accessor license_quantity: ::Integer
+      attr_accessor license_type: ("Cluster")
+      attr_accessor auto_renew: bool
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateEksAnywhereSubscriptionResponse
+      attr_accessor subscription: Types::EksAnywhereSubscription
+      SENSITIVE: []
+    end
+
+    class CreateFargateProfileRequest
+      attr_accessor fargate_profile_name: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor pod_execution_role_arn: ::String
+      attr_accessor subnets: ::Array[::String]
+      attr_accessor selectors: ::Array[Types::FargateProfileSelector]
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateFargateProfileResponse
+      attr_accessor fargate_profile: Types::FargateProfile
+      SENSITIVE: []
+    end
+
+    class CreateNodegroupRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor nodegroup_name: ::String
+      attr_accessor scaling_config: Types::NodegroupScalingConfig
+      attr_accessor disk_size: ::Integer
+      attr_accessor subnets: ::Array[::String]
+      attr_accessor instance_types: ::Array[::String]
+      attr_accessor ami_type: ("AL2_x86_64" | "AL2_x86_64_GPU" | "AL2_ARM_64" | "CUSTOM" | "BOTTLEROCKET_ARM_64" | "BOTTLEROCKET_x86_64" | "BOTTLEROCKET_ARM_64_NVIDIA" | "BOTTLEROCKET_x86_64_NVIDIA" | "WINDOWS_CORE_2019_x86_64" | "WINDOWS_FULL_2019_x86_64" | "WINDOWS_CORE_2022_x86_64" | "WINDOWS_FULL_2022_x86_64")
+      attr_accessor remote_access: Types::RemoteAccessConfig
+      attr_accessor node_role: ::String
+      attr_accessor labels: ::Hash[::String, ::String]
+      attr_accessor taints: ::Array[Types::Taint]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_request_token: ::String
+      attr_accessor launch_template: Types::LaunchTemplateSpecification
+      attr_accessor update_config: Types::NodegroupUpdateConfig
+      attr_accessor capacity_type: ("ON_DEMAND" | "SPOT")
+      attr_accessor version: ::String
+      attr_accessor release_version: ::String
+      SENSITIVE: []
+    end
+
+    class CreateNodegroupResponse
+      attr_accessor nodegroup: Types::Nodegroup
+      SENSITIVE: []
+    end
+
+    class CreatePodIdentityAssociationRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor namespace: ::String
+      attr_accessor service_account: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePodIdentityAssociationResponse
+      attr_accessor association: Types::PodIdentityAssociation
+      SENSITIVE: []
+    end
+
+    class DeleteAccessEntryRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor principal_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccessEntryResponse < Aws::EmptyStructure
+    end
+
+    class DeleteAddonRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor addon_name: ::String
+      attr_accessor preserve: bool
+      SENSITIVE: []
+    end
+
+    class DeleteAddonResponse
+      attr_accessor addon: Types::Addon
+      SENSITIVE: []
+    end
+
+    class DeleteClusterRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteClusterResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class DeleteEksAnywhereSubscriptionRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEksAnywhereSubscriptionResponse
+      attr_accessor subscription: Types::EksAnywhereSubscription
+      SENSITIVE: []
+    end
+
+    class DeleteFargateProfileRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor fargate_profile_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFargateProfileResponse
+      attr_accessor fargate_profile: Types::FargateProfile
+      SENSITIVE: []
+    end
+
+    class DeleteNodegroupRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor nodegroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteNodegroupResponse
+      attr_accessor nodegroup: Types::Nodegroup
+      SENSITIVE: []
+    end
+
+    class DeletePodIdentityAssociationRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor association_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePodIdentityAssociationResponse
+      attr_accessor association: Types::PodIdentityAssociation
+      SENSITIVE: []
+    end
+
+    class DeprecationDetail
+      attr_accessor usage: ::String
+      attr_accessor replaced_with: ::String
+      attr_accessor stop_serving_version: ::String
+      attr_accessor start_serving_replacement_version: ::String
+      attr_accessor client_stats: ::Array[Types::ClientStat]
+      SENSITIVE: []
+    end
+
+    class DeregisterClusterRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterClusterResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class DescribeAccessEntryRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor principal_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAccessEntryResponse
+      attr_accessor access_entry: Types::AccessEntry
+      SENSITIVE: []
+    end
+
+    class DescribeAddonConfigurationRequest
+      attr_accessor addon_name: ::String
+      attr_accessor addon_version: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAddonConfigurationResponse
+      attr_accessor addon_name: ::String
+      attr_accessor addon_version: ::String
+      attr_accessor configuration_schema: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAddonRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor addon_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAddonResponse
+      attr_accessor addon: Types::Addon
+      SENSITIVE: []
+    end
+
+    class DescribeAddonVersionsRequest
+      attr_accessor kubernetes_version: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor addon_name: ::String
+      attr_accessor types: ::Array[::String]
+      attr_accessor publishers: ::Array[::String]
+      attr_accessor owners: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeAddonVersionsResponse
+      attr_accessor addons: ::Array[Types::AddonInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeClusterRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeClusterResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class DescribeEksAnywhereSubscriptionRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEksAnywhereSubscriptionResponse
+      attr_accessor subscription: Types::EksAnywhereSubscription
+      SENSITIVE: []
+    end
+
+    class DescribeFargateProfileRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor fargate_profile_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFargateProfileResponse
+      attr_accessor fargate_profile: Types::FargateProfile
+      SENSITIVE: []
+    end
+
+    class DescribeIdentityProviderConfigRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor identity_provider_config: Types::IdentityProviderConfig
+      SENSITIVE: []
+    end
+
+    class DescribeIdentityProviderConfigResponse
+      attr_accessor identity_provider_config: Types::IdentityProviderConfigResponse
+      SENSITIVE: []
+    end
+
+    class DescribeInsightRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInsightResponse
+      attr_accessor insight: Types::Insight
+      SENSITIVE: []
+    end
+
+    class DescribeNodegroupRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor nodegroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeNodegroupResponse
+      attr_accessor nodegroup: Types::Nodegroup
+      SENSITIVE: []
+    end
+
+    class DescribePodIdentityAssociationRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor association_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePodIdentityAssociationResponse
+      attr_accessor association: Types::PodIdentityAssociation
+      SENSITIVE: []
+    end
+
+    class DescribeUpdateRequest
+      attr_accessor name: ::String
+      attr_accessor update_id: ::String
+      attr_accessor nodegroup_name: ::String
+      attr_accessor addon_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUpdateResponse
+      attr_accessor update: Types::Update
+      SENSITIVE: []
+    end
+
+    class DisassociateAccessPolicyRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor principal_arn: ::String
+      attr_accessor policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateAccessPolicyResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateIdentityProviderConfigRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor identity_provider_config: Types::IdentityProviderConfig
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateIdentityProviderConfigResponse
+      attr_accessor update: Types::Update
+      SENSITIVE: []
+    end
+
+    class EksAnywhereSubscription
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor effective_date: ::Time
+      attr_accessor expiration_date: ::Time
+      attr_accessor license_quantity: ::Integer
+      attr_accessor license_type: ("Cluster")
+      attr_accessor term: Types::EksAnywhereSubscriptionTerm
+      attr_accessor status: ::String
+      attr_accessor auto_renew: bool
+      attr_accessor license_arns: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class EksAnywhereSubscriptionTerm
+      attr_accessor duration: ::Integer
+      attr_accessor unit: ("MONTHS")
+      SENSITIVE: []
+    end
+
+    class EncryptionConfig
+      attr_accessor resources: ::Array[::String]
+      attr_accessor provider: Types::Provider
+      SENSITIVE: []
+    end
+
+    class ErrorDetail
+      attr_accessor error_code: ("SubnetNotFound" | "SecurityGroupNotFound" | "EniLimitReached" | "IpNotAvailable" | "AccessDenied" | "OperationNotPermitted" | "VpcIdNotFound" | "Unknown" | "NodeCreationFailure" | "PodEvictionFailure" | "InsufficientFreeAddresses" | "ClusterUnreachable" | "InsufficientNumberOfReplicas" | "ConfigurationConflict" | "AdmissionRequestDenied" | "UnsupportedAddonModification" | "K8sResourceNotFound")
+      attr_accessor error_message: ::String
+      attr_accessor resource_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class FargateProfile
+      attr_accessor fargate_profile_name: ::String
+      attr_accessor fargate_profile_arn: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor pod_execution_role_arn: ::String
+      attr_accessor subnets: ::Array[::String]
+      attr_accessor selectors: ::Array[Types::FargateProfileSelector]
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class FargateProfileSelector
+      attr_accessor namespace: ::String
+      attr_accessor labels: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Identity
+      attr_accessor oidc: Types::OIDC
+      SENSITIVE: []
+    end
+
+    class IdentityProviderConfig
+      attr_accessor type: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class IdentityProviderConfigResponse
+      attr_accessor oidc: Types::OidcIdentityProviderConfig
+      SENSITIVE: []
+    end
+
+    class Insight
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor category: ("UPGRADE_READINESS")
+      attr_accessor kubernetes_version: ::String
+      attr_accessor last_refresh_time: ::Time
+      attr_accessor last_transition_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor insight_status: Types::InsightStatus
+      attr_accessor recommendation: ::String
+      attr_accessor additional_info: ::Hash[::String, ::String]
+      attr_accessor resources: ::Array[Types::InsightResourceDetail]
+      attr_accessor category_specific_summary: Types::InsightCategorySpecificSummary
+      SENSITIVE: []
+    end
+
+    class InsightCategorySpecificSummary
+      attr_accessor deprecation_details: ::Array[Types::DeprecationDetail]
+      SENSITIVE: []
+    end
+
+    class InsightResourceDetail
+      attr_accessor insight_status: Types::InsightStatus
+      attr_accessor kubernetes_resource_uri: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class InsightStatus
+      attr_accessor status: ("PASSING" | "WARNING" | "ERROR" | "UNKNOWN")
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class InsightSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor category: ("UPGRADE_READINESS")
+      attr_accessor kubernetes_version: ::String
+      attr_accessor last_refresh_time: ::Time
+      attr_accessor last_transition_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor insight_status: Types::InsightStatus
+      SENSITIVE: []
+    end
+
+    class InsightsFilter
+      attr_accessor categories: ::Array[("UPGRADE_READINESS")]
+      attr_accessor kubernetes_versions: ::Array[::String]
+      attr_accessor statuses: ::Array[("PASSING" | "WARNING" | "ERROR" | "UNKNOWN")]
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor cluster_name: ::String
+      attr_accessor nodegroup_name: ::String
+      attr_accessor fargate_profile_name: ::String
+      attr_accessor addon_name: ::String
+      attr_accessor subscription_id: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor cluster_name: ::String
+      attr_accessor nodegroup_name: ::String
+      attr_accessor addon_name: ::String
+      attr_accessor subscription_id: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Issue
+      attr_accessor code: ("AutoScalingGroupNotFound" | "AutoScalingGroupInvalidConfiguration" | "Ec2SecurityGroupNotFound" | "Ec2SecurityGroupDeletionFailure" | "Ec2LaunchTemplateNotFound" | "Ec2LaunchTemplateVersionMismatch" | "Ec2SubnetNotFound" | "Ec2SubnetInvalidConfiguration" | "IamInstanceProfileNotFound" | "Ec2SubnetMissingIpv6Assignment" | "IamLimitExceeded" | "IamNodeRoleNotFound" | "NodeCreationFailure" | "AsgInstanceLaunchFailures" | "InstanceLimitExceeded" | "InsufficientFreeAddresses" | "AccessDenied" | "InternalFailure" | "ClusterUnreachable" | "AmiIdNotFound" | "AutoScalingGroupOptInRequired" | "AutoScalingGroupRateLimitExceeded" | "Ec2LaunchTemplateDeletionFailure" | "Ec2LaunchTemplateInvalidConfiguration" | "Ec2LaunchTemplateMaxLimitExceeded" | "Ec2SubnetListTooLong" | "IamThrottling" | "NodeTerminationFailure" | "PodEvictionFailure" | "SourceEc2LaunchTemplateNotFound" | "LimitExceeded" | "Unknown" | "AutoScalingGroupInstanceRefreshActive")
+      attr_accessor message: ::String
+      attr_accessor resource_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class KubernetesNetworkConfigRequest
+      attr_accessor service_ipv_4_cidr: ::String
+      attr_accessor ip_family: ("ipv4" | "ipv6")
+      SENSITIVE: []
+    end
+
+    class KubernetesNetworkConfigResponse
+      attr_accessor service_ipv_4_cidr: ::String
+      attr_accessor service_ipv_6_cidr: ::String
+      attr_accessor ip_family: ("ipv4" | "ipv6")
+      SENSITIVE: []
+    end
+
+    class LaunchTemplateSpecification
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccessEntriesRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor associated_policy_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccessEntriesResponse
+      attr_accessor access_entries: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccessPoliciesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccessPoliciesResponse
+      attr_accessor access_policies: ::Array[Types::AccessPolicy]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAddonsRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAddonsResponse
+      attr_accessor addons: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssociatedAccessPoliciesRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor principal_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssociatedAccessPoliciesResponse
+      attr_accessor cluster_name: ::String
+      attr_accessor principal_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor associated_access_policies: ::Array[Types::AssociatedAccessPolicy]
+      SENSITIVE: []
+    end
+
+    class ListClustersRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor include: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListClustersResponse
+      attr_accessor clusters: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEksAnywhereSubscriptionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor include_status: ::Array[("CREATING" | "ACTIVE" | "UPDATING" | "EXPIRING" | "EXPIRED" | "DELETING")]
+      SENSITIVE: []
+    end
+
+    class ListEksAnywhereSubscriptionsResponse
+      attr_accessor subscriptions: ::Array[Types::EksAnywhereSubscription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFargateProfilesRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFargateProfilesResponse
+      attr_accessor fargate_profile_names: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIdentityProviderConfigsRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIdentityProviderConfigsResponse
+      attr_accessor identity_provider_configs: ::Array[Types::IdentityProviderConfig]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInsightsRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor filter: Types::InsightsFilter
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInsightsResponse
+      attr_accessor insights: ::Array[Types::InsightSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNodegroupsRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNodegroupsResponse
+      attr_accessor nodegroups: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPodIdentityAssociationsRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor namespace: ::String
+      attr_accessor service_account: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPodIdentityAssociationsResponse
+      attr_accessor associations: ::Array[Types::PodIdentityAssociationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListUpdatesRequest
+      attr_accessor name: ::String
+      attr_accessor nodegroup_name: ::String
+      attr_accessor addon_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListUpdatesResponse
+      attr_accessor update_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LogSetup
+      attr_accessor types: ::Array[("api" | "audit" | "authenticator" | "controllerManager" | "scheduler")]
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class Logging
+      attr_accessor cluster_logging: ::Array[Types::LogSetup]
+      SENSITIVE: []
+    end
+
+    class MarketplaceInformation
+      attr_accessor product_id: ::String
+      attr_accessor product_url: ::String
+      SENSITIVE: []
+    end
+
+    class Nodegroup
+      attr_accessor nodegroup_name: ::String
+      attr_accessor nodegroup_arn: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor version: ::String
+      attr_accessor release_version: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED" | "DEGRADED")
+      attr_accessor capacity_type: ("ON_DEMAND" | "SPOT")
+      attr_accessor scaling_config: Types::NodegroupScalingConfig
+      attr_accessor instance_types: ::Array[::String]
+      attr_accessor subnets: ::Array[::String]
+      attr_accessor remote_access: Types::RemoteAccessConfig
+      attr_accessor ami_type: ("AL2_x86_64" | "AL2_x86_64_GPU" | "AL2_ARM_64" | "CUSTOM" | "BOTTLEROCKET_ARM_64" | "BOTTLEROCKET_x86_64" | "BOTTLEROCKET_ARM_64_NVIDIA" | "BOTTLEROCKET_x86_64_NVIDIA" | "WINDOWS_CORE_2019_x86_64" | "WINDOWS_FULL_2019_x86_64" | "WINDOWS_CORE_2022_x86_64" | "WINDOWS_FULL_2022_x86_64")
+      attr_accessor node_role: ::String
+      attr_accessor labels: ::Hash[::String, ::String]
+      attr_accessor taints: ::Array[Types::Taint]
+      attr_accessor resources: Types::NodegroupResources
+      attr_accessor disk_size: ::Integer
+      attr_accessor health: Types::NodegroupHealth
+      attr_accessor update_config: Types::NodegroupUpdateConfig
+      attr_accessor launch_template: Types::LaunchTemplateSpecification
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class NodegroupHealth
+      attr_accessor issues: ::Array[Types::Issue]
+      SENSITIVE: []
+    end
+
+    class NodegroupResources
+      attr_accessor auto_scaling_groups: ::Array[Types::AutoScalingGroup]
+      attr_accessor remote_access_security_group: ::String
+      SENSITIVE: []
+    end
+
+    class NodegroupScalingConfig
+      attr_accessor min_size: ::Integer
+      attr_accessor max_size: ::Integer
+      attr_accessor desired_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class NodegroupUpdateConfig
+      attr_accessor max_unavailable: ::Integer
+      attr_accessor max_unavailable_percentage: ::Integer
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OIDC
+      attr_accessor issuer: ::String
+      SENSITIVE: []
+    end
+
+    class OidcIdentityProviderConfig
+      attr_accessor identity_provider_config_name: ::String
+      attr_accessor identity_provider_config_arn: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor issuer_url: ::String
+      attr_accessor client_id: ::String
+      attr_accessor username_claim: ::String
+      attr_accessor username_prefix: ::String
+      attr_accessor groups_claim: ::String
+      attr_accessor groups_prefix: ::String
+      attr_accessor required_claims: ::Hash[::String, ::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor status: ("CREATING" | "DELETING" | "ACTIVE")
+      SENSITIVE: []
+    end
+
+    class OidcIdentityProviderConfigRequest
+      attr_accessor identity_provider_config_name: ::String
+      attr_accessor issuer_url: ::String
+      attr_accessor client_id: ::String
+      attr_accessor username_claim: ::String
+      attr_accessor username_prefix: ::String
+      attr_accessor groups_claim: ::String
+      attr_accessor groups_prefix: ::String
+      attr_accessor required_claims: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class OutpostConfigRequest
+      attr_accessor outpost_arns: ::Array[::String]
+      attr_accessor control_plane_instance_type: ::String
+      attr_accessor control_plane_placement: Types::ControlPlanePlacementRequest
+      SENSITIVE: []
+    end
+
+    class OutpostConfigResponse
+      attr_accessor outpost_arns: ::Array[::String]
+      attr_accessor control_plane_instance_type: ::String
+      attr_accessor control_plane_placement: Types::ControlPlanePlacementResponse
+      SENSITIVE: []
+    end
+
+    class PodIdentityAssociation
+      attr_accessor cluster_name: ::String
+      attr_accessor namespace: ::String
+      attr_accessor service_account: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor association_arn: ::String
+      attr_accessor association_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      SENSITIVE: []
+    end
+
+    class PodIdentityAssociationSummary
+      attr_accessor cluster_name: ::String
+      attr_accessor namespace: ::String
+      attr_accessor service_account: ::String
+      attr_accessor association_arn: ::String
+      attr_accessor association_id: ::String
+      SENSITIVE: []
+    end
+
+    class Provider
+      attr_accessor key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterClusterRequest
+      attr_accessor name: ::String
+      attr_accessor connector_config: Types::ConnectorConfigRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RegisterClusterResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class RemoteAccessConfig
+      attr_accessor ec2_ssh_key: ::String
+      attr_accessor source_security_groups: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException
+      attr_accessor cluster_name: ::String
+      attr_accessor nodegroup_name: ::String
+      attr_accessor addon_name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceLimitExceededException
+      attr_accessor cluster_name: ::String
+      attr_accessor nodegroup_name: ::String
+      attr_accessor subscription_id: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor cluster_name: ::String
+      attr_accessor nodegroup_name: ::String
+      attr_accessor fargate_profile_name: ::String
+      attr_accessor addon_name: ::String
+      attr_accessor subscription_id: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourcePropagationDelayException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServerException
+      attr_accessor cluster_name: ::String
+      attr_accessor nodegroup_name: ::String
+      attr_accessor addon_name: ::String
+      attr_accessor subscription_id: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class Taint
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      attr_accessor effect: ("NO_SCHEDULE" | "NO_EXECUTE" | "PREFER_NO_SCHEDULE")
+      SENSITIVE: []
+    end
+
+    class UnsupportedAvailabilityZoneException
+      attr_accessor message: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor nodegroup_name: ::String
+      attr_accessor valid_zones: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class Update
+      attr_accessor id: ::String
+      attr_accessor status: ("InProgress" | "Failed" | "Cancelled" | "Successful")
+      attr_accessor type: ("VersionUpdate" | "EndpointAccessUpdate" | "LoggingUpdate" | "ConfigUpdate" | "AssociateIdentityProviderConfig" | "DisassociateIdentityProviderConfig" | "AssociateEncryptionConfig" | "AddonUpdate" | "VpcConfigUpdate" | "AccessConfigUpdate")
+      attr_accessor params: ::Array[Types::UpdateParam]
+      attr_accessor created_at: ::Time
+      attr_accessor errors: ::Array[Types::ErrorDetail]
+      SENSITIVE: []
+    end
+
+    class UpdateAccessConfigRequest
+      attr_accessor authentication_mode: ("API" | "API_AND_CONFIG_MAP" | "CONFIG_MAP")
+      SENSITIVE: []
+    end
+
+    class UpdateAccessEntryRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor principal_arn: ::String
+      attr_accessor kubernetes_groups: ::Array[::String]
+      attr_accessor client_request_token: ::String
+      attr_accessor username: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAccessEntryResponse
+      attr_accessor access_entry: Types::AccessEntry
+      SENSITIVE: []
+    end
+
+    class UpdateAddonRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor addon_name: ::String
+      attr_accessor addon_version: ::String
+      attr_accessor service_account_role_arn: ::String
+      attr_accessor resolve_conflicts: ("OVERWRITE" | "NONE" | "PRESERVE")
+      attr_accessor client_request_token: ::String
+      attr_accessor configuration_values: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAddonResponse
+      attr_accessor update: Types::Update
+      SENSITIVE: []
+    end
+
+    class UpdateClusterConfigRequest
+      attr_accessor name: ::String
+      attr_accessor resources_vpc_config: Types::VpcConfigRequest
+      attr_accessor logging: Types::Logging
+      attr_accessor client_request_token: ::String
+      attr_accessor access_config: Types::UpdateAccessConfigRequest
+      SENSITIVE: []
+    end
+
+    class UpdateClusterConfigResponse
+      attr_accessor update: Types::Update
+      SENSITIVE: []
+    end
+
+    class UpdateClusterVersionRequest
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateClusterVersionResponse
+      attr_accessor update: Types::Update
+      SENSITIVE: []
+    end
+
+    class UpdateEksAnywhereSubscriptionRequest
+      attr_accessor id: ::String
+      attr_accessor auto_renew: bool
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateEksAnywhereSubscriptionResponse
+      attr_accessor subscription: Types::EksAnywhereSubscription
+      SENSITIVE: []
+    end
+
+    class UpdateLabelsPayload
+      attr_accessor add_or_update_labels: ::Hash[::String, ::String]
+      attr_accessor remove_labels: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateNodegroupConfigRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor nodegroup_name: ::String
+      attr_accessor labels: Types::UpdateLabelsPayload
+      attr_accessor taints: Types::UpdateTaintsPayload
+      attr_accessor scaling_config: Types::NodegroupScalingConfig
+      attr_accessor update_config: Types::NodegroupUpdateConfig
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateNodegroupConfigResponse
+      attr_accessor update: Types::Update
+      SENSITIVE: []
+    end
+
+    class UpdateNodegroupVersionRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor nodegroup_name: ::String
+      attr_accessor version: ::String
+      attr_accessor release_version: ::String
+      attr_accessor launch_template: Types::LaunchTemplateSpecification
+      attr_accessor force: bool
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateNodegroupVersionResponse
+      attr_accessor update: Types::Update
+      SENSITIVE: []
+    end
+
+    class UpdateParam
+      attr_accessor type: ("Version" | "PlatformVersion" | "EndpointPrivateAccess" | "EndpointPublicAccess" | "ClusterLogging" | "DesiredSize" | "LabelsToAdd" | "LabelsToRemove" | "TaintsToAdd" | "TaintsToRemove" | "MaxSize" | "MinSize" | "ReleaseVersion" | "PublicAccessCidrs" | "LaunchTemplateName" | "LaunchTemplateVersion" | "IdentityProviderConfig" | "EncryptionConfig" | "AddonVersion" | "ServiceAccountRoleArn" | "ResolveConflicts" | "MaxUnavailable" | "MaxUnavailablePercentage" | "ConfigurationValues" | "SecurityGroups" | "Subnets" | "AuthenticationMode")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePodIdentityAssociationRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor association_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePodIdentityAssociationResponse
+      attr_accessor association: Types::PodIdentityAssociation
+      SENSITIVE: []
+    end
+
+    class UpdateTaintsPayload
+      attr_accessor add_or_update_taints: ::Array[Types::Taint]
+      attr_accessor remove_taints: ::Array[Types::Taint]
+      SENSITIVE: []
+    end
+
+    class VpcConfigRequest
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor endpoint_public_access: bool
+      attr_accessor endpoint_private_access: bool
+      attr_accessor public_access_cidrs: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class VpcConfigResponse
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor cluster_security_group_id: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor endpoint_public_access: bool
+      attr_accessor endpoint_private_access: bool
+      attr_accessor public_access_cidrs: ::Array[::String]
+      SENSITIVE: []
+    end
+  end
+end

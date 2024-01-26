@@ -1,0 +1,269 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SavingsPlans
+  module Types
+
+    class CreateSavingsPlanRequest
+      attr_accessor savings_plan_offering_id: ::String
+      attr_accessor commitment: ::String
+      attr_accessor upfront_payment_amount: ::String
+      attr_accessor purchase_time: ::Time
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateSavingsPlanResponse
+      attr_accessor savings_plan_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteQueuedSavingsPlanRequest
+      attr_accessor savings_plan_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteQueuedSavingsPlanResponse < Aws::EmptyStructure
+    end
+
+    class DescribeSavingsPlanRatesRequest
+      attr_accessor savings_plan_id: ::String
+      attr_accessor filters: ::Array[Types::SavingsPlanRateFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeSavingsPlanRatesResponse
+      attr_accessor savings_plan_id: ::String
+      attr_accessor search_results: ::Array[Types::SavingsPlanRate]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSavingsPlansOfferingRatesRequest
+      attr_accessor savings_plan_offering_ids: ::Array[::String]
+      attr_accessor savings_plan_payment_options: ::Array[("All Upfront" | "Partial Upfront" | "No Upfront")]
+      attr_accessor savings_plan_types: ::Array[("Compute" | "EC2Instance" | "SageMaker")]
+      attr_accessor products: ::Array[("EC2" | "Fargate" | "Lambda" | "SageMaker")]
+      attr_accessor service_codes: ::Array[("AmazonEC2" | "AmazonECS" | "AmazonEKS" | "AWSLambda" | "AmazonSageMaker")]
+      attr_accessor usage_types: ::Array[::String]
+      attr_accessor operations: ::Array[::String]
+      attr_accessor filters: ::Array[Types::SavingsPlanOfferingRateFilterElement]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeSavingsPlansOfferingRatesResponse
+      attr_accessor search_results: ::Array[Types::SavingsPlanOfferingRate]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSavingsPlansOfferingsRequest
+      attr_accessor offering_ids: ::Array[::String]
+      attr_accessor payment_options: ::Array[("All Upfront" | "Partial Upfront" | "No Upfront")]
+      attr_accessor product_type: ("EC2" | "Fargate" | "Lambda" | "SageMaker")
+      attr_accessor plan_types: ::Array[("Compute" | "EC2Instance" | "SageMaker")]
+      attr_accessor durations: ::Array[::Integer]
+      attr_accessor currencies: ::Array[("CNY" | "USD")]
+      attr_accessor descriptions: ::Array[::String]
+      attr_accessor service_codes: ::Array[::String]
+      attr_accessor usage_types: ::Array[::String]
+      attr_accessor operations: ::Array[::String]
+      attr_accessor filters: ::Array[Types::SavingsPlanOfferingFilterElement]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeSavingsPlansOfferingsResponse
+      attr_accessor search_results: ::Array[Types::SavingsPlanOffering]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSavingsPlansRequest
+      attr_accessor savings_plan_arns: ::Array[::String]
+      attr_accessor savings_plan_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor states: ::Array[("payment-pending" | "payment-failed" | "active" | "retired" | "queued" | "queued-deleted")]
+      attr_accessor filters: ::Array[Types::SavingsPlanFilter]
+      SENSITIVE: []
+    end
+
+    class DescribeSavingsPlansResponse
+      attr_accessor savings_plans: ::Array[Types::SavingsPlan]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ParentSavingsPlanOffering
+      attr_accessor offering_id: ::String
+      attr_accessor payment_option: ("All Upfront" | "Partial Upfront" | "No Upfront")
+      attr_accessor plan_type: ("Compute" | "EC2Instance" | "SageMaker")
+      attr_accessor duration_seconds: ::Integer
+      attr_accessor currency: ("CNY" | "USD")
+      attr_accessor plan_description: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SavingsPlan
+      attr_accessor offering_id: ::String
+      attr_accessor savings_plan_id: ::String
+      attr_accessor savings_plan_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor start: ::String
+      attr_accessor end: ::String
+      attr_accessor state: ("payment-pending" | "payment-failed" | "active" | "retired" | "queued" | "queued-deleted")
+      attr_accessor region: ::String
+      attr_accessor ec2_instance_family: ::String
+      attr_accessor savings_plan_type: ("Compute" | "EC2Instance" | "SageMaker")
+      attr_accessor payment_option: ("All Upfront" | "Partial Upfront" | "No Upfront")
+      attr_accessor product_types: ::Array[("EC2" | "Fargate" | "Lambda" | "SageMaker")]
+      attr_accessor currency: ("CNY" | "USD")
+      attr_accessor commitment: ::String
+      attr_accessor upfront_payment_amount: ::String
+      attr_accessor recurring_payment_amount: ::String
+      attr_accessor term_duration_in_seconds: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class SavingsPlanFilter
+      attr_accessor name: ("region" | "ec2-instance-family" | "commitment" | "upfront" | "term" | "savings-plan-type" | "payment-option" | "start" | "end")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SavingsPlanOffering
+      attr_accessor offering_id: ::String
+      attr_accessor product_types: ::Array[("EC2" | "Fargate" | "Lambda" | "SageMaker")]
+      attr_accessor plan_type: ("Compute" | "EC2Instance" | "SageMaker")
+      attr_accessor description: ::String
+      attr_accessor payment_option: ("All Upfront" | "Partial Upfront" | "No Upfront")
+      attr_accessor duration_seconds: ::Integer
+      attr_accessor currency: ("CNY" | "USD")
+      attr_accessor service_code: ::String
+      attr_accessor usage_type: ::String
+      attr_accessor operation: ::String
+      attr_accessor properties: ::Array[Types::SavingsPlanOfferingProperty]
+      SENSITIVE: []
+    end
+
+    class SavingsPlanOfferingFilterElement
+      attr_accessor name: ("region" | "instanceFamily")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SavingsPlanOfferingProperty
+      attr_accessor name: ("region" | "instanceFamily")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SavingsPlanOfferingRate
+      attr_accessor savings_plan_offering: Types::ParentSavingsPlanOffering
+      attr_accessor rate: ::String
+      attr_accessor unit: ("Hrs" | "Lambda-GB-Second" | "Request")
+      attr_accessor product_type: ("EC2" | "Fargate" | "Lambda" | "SageMaker")
+      attr_accessor service_code: ("AmazonEC2" | "AmazonECS" | "AmazonEKS" | "AWSLambda" | "AmazonSageMaker")
+      attr_accessor usage_type: ::String
+      attr_accessor operation: ::String
+      attr_accessor properties: ::Array[Types::SavingsPlanOfferingRateProperty]
+      SENSITIVE: []
+    end
+
+    class SavingsPlanOfferingRateFilterElement
+      attr_accessor name: ("region" | "instanceFamily" | "instanceType" | "productDescription" | "tenancy" | "productId")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SavingsPlanOfferingRateProperty
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SavingsPlanRate
+      attr_accessor rate: ::String
+      attr_accessor currency: ("CNY" | "USD")
+      attr_accessor unit: ("Hrs" | "Lambda-GB-Second" | "Request")
+      attr_accessor product_type: ("EC2" | "Fargate" | "Lambda" | "SageMaker")
+      attr_accessor service_code: ("AmazonEC2" | "AmazonECS" | "AmazonEKS" | "AWSLambda" | "AmazonSageMaker")
+      attr_accessor usage_type: ::String
+      attr_accessor operation: ::String
+      attr_accessor properties: ::Array[Types::SavingsPlanRateProperty]
+      SENSITIVE: []
+    end
+
+    class SavingsPlanRateFilter
+      attr_accessor name: ("region" | "instanceType" | "productDescription" | "tenancy" | "productType" | "serviceCode" | "usageType" | "operation")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SavingsPlanRateProperty
+      attr_accessor name: ("region" | "instanceType" | "instanceFamily" | "productDescription" | "tenancy")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

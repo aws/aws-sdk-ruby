@@ -1,0 +1,873 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ElasticsearchService
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AcceptInboundCrossClusterSearchConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptInboundCrossClusterSearchConnectionResponse]
+        def cross_cluster_search_connection: () -> Types::InboundCrossClusterSearchConnection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#accept_inbound_cross_cluster_search_connection-instance_method
+      def accept_inbound_cross_cluster_search_connection: (
+                                                            cross_cluster_search_connection_id: ::String
+                                                          ) -> _AcceptInboundCrossClusterSearchConnectionResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptInboundCrossClusterSearchConnectionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#add_tags-instance_method
+      def add_tags: (
+                      arn: ::String,
+                      tag_list: Array[
+                        {
+                          key: ::String,
+                          value: ::String
+                        },
+                      ]
+                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _AssociatePackageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociatePackageResponse]
+        def domain_package_details: () -> Types::DomainPackageDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#associate_package-instance_method
+      def associate_package: (
+                               package_id: ::String,
+                               domain_name: ::String
+                             ) -> _AssociatePackageResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociatePackageResponseSuccess
+
+      interface _AuthorizeVpcEndpointAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AuthorizeVpcEndpointAccessResponse]
+        def authorized_principal: () -> Types::AuthorizedPrincipal
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#authorize_vpc_endpoint_access-instance_method
+      def authorize_vpc_endpoint_access: (
+                                           domain_name: ::String,
+                                           account: ::String
+                                         ) -> _AuthorizeVpcEndpointAccessResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AuthorizeVpcEndpointAccessResponseSuccess
+
+      interface _CancelElasticsearchServiceSoftwareUpdateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelElasticsearchServiceSoftwareUpdateResponse]
+        def service_software_options: () -> Types::ServiceSoftwareOptions
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#cancel_elasticsearch_service_software_update-instance_method
+      def cancel_elasticsearch_service_software_update: (
+                                                          domain_name: ::String
+                                                        ) -> _CancelElasticsearchServiceSoftwareUpdateResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelElasticsearchServiceSoftwareUpdateResponseSuccess
+
+      interface _CreateElasticsearchDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateElasticsearchDomainResponse]
+        def domain_status: () -> Types::ElasticsearchDomainStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#create_elasticsearch_domain-instance_method
+      def create_elasticsearch_domain: (
+                                         domain_name: ::String,
+                                         ?elasticsearch_version: ::String,
+                                         ?elasticsearch_cluster_config: {
+                                           instance_type: ("m3.medium.elasticsearch" | "m3.large.elasticsearch" | "m3.xlarge.elasticsearch" | "m3.2xlarge.elasticsearch" | "m4.large.elasticsearch" | "m4.xlarge.elasticsearch" | "m4.2xlarge.elasticsearch" | "m4.4xlarge.elasticsearch" | "m4.10xlarge.elasticsearch" | "m5.large.elasticsearch" | "m5.xlarge.elasticsearch" | "m5.2xlarge.elasticsearch" | "m5.4xlarge.elasticsearch" | "m5.12xlarge.elasticsearch" | "r5.large.elasticsearch" | "r5.xlarge.elasticsearch" | "r5.2xlarge.elasticsearch" | "r5.4xlarge.elasticsearch" | "r5.12xlarge.elasticsearch" | "c5.large.elasticsearch" | "c5.xlarge.elasticsearch" | "c5.2xlarge.elasticsearch" | "c5.4xlarge.elasticsearch" | "c5.9xlarge.elasticsearch" | "c5.18xlarge.elasticsearch" | "ultrawarm1.medium.elasticsearch" | "ultrawarm1.large.elasticsearch" | "t2.micro.elasticsearch" | "t2.small.elasticsearch" | "t2.medium.elasticsearch" | "r3.large.elasticsearch" | "r3.xlarge.elasticsearch" | "r3.2xlarge.elasticsearch" | "r3.4xlarge.elasticsearch" | "r3.8xlarge.elasticsearch" | "i2.xlarge.elasticsearch" | "i2.2xlarge.elasticsearch" | "d2.xlarge.elasticsearch" | "d2.2xlarge.elasticsearch" | "d2.4xlarge.elasticsearch" | "d2.8xlarge.elasticsearch" | "c4.large.elasticsearch" | "c4.xlarge.elasticsearch" | "c4.2xlarge.elasticsearch" | "c4.4xlarge.elasticsearch" | "c4.8xlarge.elasticsearch" | "r4.large.elasticsearch" | "r4.xlarge.elasticsearch" | "r4.2xlarge.elasticsearch" | "r4.4xlarge.elasticsearch" | "r4.8xlarge.elasticsearch" | "r4.16xlarge.elasticsearch" | "i3.large.elasticsearch" | "i3.xlarge.elasticsearch" | "i3.2xlarge.elasticsearch" | "i3.4xlarge.elasticsearch" | "i3.8xlarge.elasticsearch" | "i3.16xlarge.elasticsearch")?,
+                                           instance_count: ::Integer?,
+                                           dedicated_master_enabled: bool?,
+                                           zone_awareness_enabled: bool?,
+                                           zone_awareness_config: {
+                                             availability_zone_count: ::Integer?
+                                           }?,
+                                           dedicated_master_type: ("m3.medium.elasticsearch" | "m3.large.elasticsearch" | "m3.xlarge.elasticsearch" | "m3.2xlarge.elasticsearch" | "m4.large.elasticsearch" | "m4.xlarge.elasticsearch" | "m4.2xlarge.elasticsearch" | "m4.4xlarge.elasticsearch" | "m4.10xlarge.elasticsearch" | "m5.large.elasticsearch" | "m5.xlarge.elasticsearch" | "m5.2xlarge.elasticsearch" | "m5.4xlarge.elasticsearch" | "m5.12xlarge.elasticsearch" | "r5.large.elasticsearch" | "r5.xlarge.elasticsearch" | "r5.2xlarge.elasticsearch" | "r5.4xlarge.elasticsearch" | "r5.12xlarge.elasticsearch" | "c5.large.elasticsearch" | "c5.xlarge.elasticsearch" | "c5.2xlarge.elasticsearch" | "c5.4xlarge.elasticsearch" | "c5.9xlarge.elasticsearch" | "c5.18xlarge.elasticsearch" | "ultrawarm1.medium.elasticsearch" | "ultrawarm1.large.elasticsearch" | "t2.micro.elasticsearch" | "t2.small.elasticsearch" | "t2.medium.elasticsearch" | "r3.large.elasticsearch" | "r3.xlarge.elasticsearch" | "r3.2xlarge.elasticsearch" | "r3.4xlarge.elasticsearch" | "r3.8xlarge.elasticsearch" | "i2.xlarge.elasticsearch" | "i2.2xlarge.elasticsearch" | "d2.xlarge.elasticsearch" | "d2.2xlarge.elasticsearch" | "d2.4xlarge.elasticsearch" | "d2.8xlarge.elasticsearch" | "c4.large.elasticsearch" | "c4.xlarge.elasticsearch" | "c4.2xlarge.elasticsearch" | "c4.4xlarge.elasticsearch" | "c4.8xlarge.elasticsearch" | "r4.large.elasticsearch" | "r4.xlarge.elasticsearch" | "r4.2xlarge.elasticsearch" | "r4.4xlarge.elasticsearch" | "r4.8xlarge.elasticsearch" | "r4.16xlarge.elasticsearch" | "i3.large.elasticsearch" | "i3.xlarge.elasticsearch" | "i3.2xlarge.elasticsearch" | "i3.4xlarge.elasticsearch" | "i3.8xlarge.elasticsearch" | "i3.16xlarge.elasticsearch")?,
+                                           dedicated_master_count: ::Integer?,
+                                           warm_enabled: bool?,
+                                           warm_type: ("ultrawarm1.medium.elasticsearch" | "ultrawarm1.large.elasticsearch")?,
+                                           warm_count: ::Integer?,
+                                           cold_storage_options: {
+                                             enabled: bool
+                                           }?
+                                         },
+                                         ?ebs_options: {
+                                           ebs_enabled: bool?,
+                                           volume_type: ("standard" | "gp2" | "io1" | "gp3")?,
+                                           volume_size: ::Integer?,
+                                           iops: ::Integer?,
+                                           throughput: ::Integer?
+                                         },
+                                         ?access_policies: ::String,
+                                         ?snapshot_options: {
+                                           automated_snapshot_start_hour: ::Integer?
+                                         },
+                                         ?vpc_options: {
+                                           subnet_ids: Array[::String]?,
+                                           security_group_ids: Array[::String]?
+                                         },
+                                         ?cognito_options: {
+                                           enabled: bool?,
+                                           user_pool_id: ::String?,
+                                           identity_pool_id: ::String?,
+                                           role_arn: ::String?
+                                         },
+                                         ?encryption_at_rest_options: {
+                                           enabled: bool?,
+                                           kms_key_id: ::String?
+                                         },
+                                         ?node_to_node_encryption_options: {
+                                           enabled: bool?
+                                         },
+                                         ?advanced_options: Hash[::String, ::String],
+                                         ?log_publishing_options: Hash[("INDEX_SLOW_LOGS" | "SEARCH_SLOW_LOGS" | "ES_APPLICATION_LOGS" | "AUDIT_LOGS"), {
+                                             cloud_watch_logs_log_group_arn: ::String?,
+                                             enabled: bool?
+                                           }],
+                                         ?domain_endpoint_options: {
+                                           enforce_https: bool?,
+                                           tls_security_policy: ("Policy-Min-TLS-1-0-2019-07" | "Policy-Min-TLS-1-2-2019-07" | "Policy-Min-TLS-1-2-PFS-2023-10")?,
+                                           custom_endpoint_enabled: bool?,
+                                           custom_endpoint: ::String?,
+                                           custom_endpoint_certificate_arn: ::String?
+                                         },
+                                         ?advanced_security_options: {
+                                           enabled: bool?,
+                                           internal_user_database_enabled: bool?,
+                                           master_user_options: {
+                                             master_user_arn: ::String?,
+                                             master_user_name: ::String?,
+                                             master_user_password: ::String?
+                                           }?,
+                                           saml_options: {
+                                             enabled: bool?,
+                                             idp: {
+                                               metadata_content: ::String,
+                                               entity_id: ::String
+                                             }?,
+                                             master_user_name: ::String?,
+                                             master_backend_role: ::String?,
+                                             subject_key: ::String?,
+                                             roles_key: ::String?,
+                                             session_timeout_minutes: ::Integer?
+                                           }?,
+                                           anonymous_auth_enabled: bool?
+                                         },
+                                         ?auto_tune_options: {
+                                           desired_state: ("ENABLED" | "DISABLED")?,
+                                           maintenance_schedules: Array[
+                                             {
+                                               start_at: ::Time?,
+                                               duration: {
+                                                 value: ::Integer?,
+                                                 unit: ("HOURS")?
+                                               }?,
+                                               cron_expression_for_recurrence: ::String?
+                                             },
+                                           ]?
+                                         },
+                                         ?tag_list: Array[
+                                           {
+                                             key: ::String,
+                                             value: ::String
+                                           },
+                                         ]
+                                       ) -> _CreateElasticsearchDomainResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateElasticsearchDomainResponseSuccess
+
+      interface _CreateOutboundCrossClusterSearchConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateOutboundCrossClusterSearchConnectionResponse]
+        def source_domain_info: () -> Types::DomainInformation
+        def destination_domain_info: () -> Types::DomainInformation
+        def connection_alias: () -> ::String
+        def connection_status: () -> Types::OutboundCrossClusterSearchConnectionStatus
+        def cross_cluster_search_connection_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#create_outbound_cross_cluster_search_connection-instance_method
+      def create_outbound_cross_cluster_search_connection: (
+                                                             source_domain_info: {
+                                                               owner_id: ::String?,
+                                                               domain_name: ::String,
+                                                               region: ::String?
+                                                             },
+                                                             destination_domain_info: {
+                                                               owner_id: ::String?,
+                                                               domain_name: ::String,
+                                                               region: ::String?
+                                                             },
+                                                             connection_alias: ::String
+                                                           ) -> _CreateOutboundCrossClusterSearchConnectionResponseSuccess
+                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOutboundCrossClusterSearchConnectionResponseSuccess
+
+      interface _CreatePackageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePackageResponse]
+        def package_details: () -> Types::PackageDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#create_package-instance_method
+      def create_package: (
+                            package_name: ::String,
+                            package_type: ("TXT-DICTIONARY"),
+                            ?package_description: ::String,
+                            package_source: {
+                              s3_bucket_name: ::String?,
+                              s3_key: ::String?
+                            }
+                          ) -> _CreatePackageResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePackageResponseSuccess
+
+      interface _CreateVpcEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVpcEndpointResponse]
+        def vpc_endpoint: () -> Types::VpcEndpoint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#create_vpc_endpoint-instance_method
+      def create_vpc_endpoint: (
+                                 domain_arn: ::String,
+                                 vpc_options: {
+                                   subnet_ids: Array[::String]?,
+                                   security_group_ids: Array[::String]?
+                                 },
+                                 ?client_token: ::String
+                               ) -> _CreateVpcEndpointResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVpcEndpointResponseSuccess
+
+      interface _DeleteElasticsearchDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteElasticsearchDomainResponse]
+        def domain_status: () -> Types::ElasticsearchDomainStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#delete_elasticsearch_domain-instance_method
+      def delete_elasticsearch_domain: (
+                                         domain_name: ::String
+                                       ) -> _DeleteElasticsearchDomainResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteElasticsearchDomainResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#delete_elasticsearch_service_role-instance_method
+      def delete_elasticsearch_service_role: () -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteInboundCrossClusterSearchConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteInboundCrossClusterSearchConnectionResponse]
+        def cross_cluster_search_connection: () -> Types::InboundCrossClusterSearchConnection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#delete_inbound_cross_cluster_search_connection-instance_method
+      def delete_inbound_cross_cluster_search_connection: (
+                                                            cross_cluster_search_connection_id: ::String
+                                                          ) -> _DeleteInboundCrossClusterSearchConnectionResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteInboundCrossClusterSearchConnectionResponseSuccess
+
+      interface _DeleteOutboundCrossClusterSearchConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteOutboundCrossClusterSearchConnectionResponse]
+        def cross_cluster_search_connection: () -> Types::OutboundCrossClusterSearchConnection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#delete_outbound_cross_cluster_search_connection-instance_method
+      def delete_outbound_cross_cluster_search_connection: (
+                                                             cross_cluster_search_connection_id: ::String
+                                                           ) -> _DeleteOutboundCrossClusterSearchConnectionResponseSuccess
+                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteOutboundCrossClusterSearchConnectionResponseSuccess
+
+      interface _DeletePackageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePackageResponse]
+        def package_details: () -> Types::PackageDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#delete_package-instance_method
+      def delete_package: (
+                            package_id: ::String
+                          ) -> _DeletePackageResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePackageResponseSuccess
+
+      interface _DeleteVpcEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVpcEndpointResponse]
+        def vpc_endpoint_summary: () -> Types::VpcEndpointSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#delete_vpc_endpoint-instance_method
+      def delete_vpc_endpoint: (
+                                 vpc_endpoint_id: ::String
+                               ) -> _DeleteVpcEndpointResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVpcEndpointResponseSuccess
+
+      interface _DescribeDomainAutoTunesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDomainAutoTunesResponse]
+        def auto_tunes: () -> ::Array[Types::AutoTune]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#describe_domain_auto_tunes-instance_method
+      def describe_domain_auto_tunes: (
+                                        domain_name: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _DescribeDomainAutoTunesResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDomainAutoTunesResponseSuccess
+
+      interface _DescribeDomainChangeProgressResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDomainChangeProgressResponse]
+        def change_progress_status: () -> Types::ChangeProgressStatusDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#describe_domain_change_progress-instance_method
+      def describe_domain_change_progress: (
+                                             domain_name: ::String,
+                                             ?change_id: ::String
+                                           ) -> _DescribeDomainChangeProgressResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDomainChangeProgressResponseSuccess
+
+      interface _DescribeElasticsearchDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeElasticsearchDomainResponse]
+        def domain_status: () -> Types::ElasticsearchDomainStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#describe_elasticsearch_domain-instance_method
+      def describe_elasticsearch_domain: (
+                                           domain_name: ::String
+                                         ) -> _DescribeElasticsearchDomainResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeElasticsearchDomainResponseSuccess
+
+      interface _DescribeElasticsearchDomainConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeElasticsearchDomainConfigResponse]
+        def domain_config: () -> Types::ElasticsearchDomainConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#describe_elasticsearch_domain_config-instance_method
+      def describe_elasticsearch_domain_config: (
+                                                  domain_name: ::String
+                                                ) -> _DescribeElasticsearchDomainConfigResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeElasticsearchDomainConfigResponseSuccess
+
+      interface _DescribeElasticsearchDomainsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeElasticsearchDomainsResponse]
+        def domain_status_list: () -> ::Array[Types::ElasticsearchDomainStatus]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#describe_elasticsearch_domains-instance_method
+      def describe_elasticsearch_domains: (
+                                            domain_names: Array[::String]
+                                          ) -> _DescribeElasticsearchDomainsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeElasticsearchDomainsResponseSuccess
+
+      interface _DescribeElasticsearchInstanceTypeLimitsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeElasticsearchInstanceTypeLimitsResponse]
+        def limits_by_role: () -> ::Hash[::String, Types::Limits]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#describe_elasticsearch_instance_type_limits-instance_method
+      def describe_elasticsearch_instance_type_limits: (
+                                                         ?domain_name: ::String,
+                                                         instance_type: ("m3.medium.elasticsearch" | "m3.large.elasticsearch" | "m3.xlarge.elasticsearch" | "m3.2xlarge.elasticsearch" | "m4.large.elasticsearch" | "m4.xlarge.elasticsearch" | "m4.2xlarge.elasticsearch" | "m4.4xlarge.elasticsearch" | "m4.10xlarge.elasticsearch" | "m5.large.elasticsearch" | "m5.xlarge.elasticsearch" | "m5.2xlarge.elasticsearch" | "m5.4xlarge.elasticsearch" | "m5.12xlarge.elasticsearch" | "r5.large.elasticsearch" | "r5.xlarge.elasticsearch" | "r5.2xlarge.elasticsearch" | "r5.4xlarge.elasticsearch" | "r5.12xlarge.elasticsearch" | "c5.large.elasticsearch" | "c5.xlarge.elasticsearch" | "c5.2xlarge.elasticsearch" | "c5.4xlarge.elasticsearch" | "c5.9xlarge.elasticsearch" | "c5.18xlarge.elasticsearch" | "ultrawarm1.medium.elasticsearch" | "ultrawarm1.large.elasticsearch" | "t2.micro.elasticsearch" | "t2.small.elasticsearch" | "t2.medium.elasticsearch" | "r3.large.elasticsearch" | "r3.xlarge.elasticsearch" | "r3.2xlarge.elasticsearch" | "r3.4xlarge.elasticsearch" | "r3.8xlarge.elasticsearch" | "i2.xlarge.elasticsearch" | "i2.2xlarge.elasticsearch" | "d2.xlarge.elasticsearch" | "d2.2xlarge.elasticsearch" | "d2.4xlarge.elasticsearch" | "d2.8xlarge.elasticsearch" | "c4.large.elasticsearch" | "c4.xlarge.elasticsearch" | "c4.2xlarge.elasticsearch" | "c4.4xlarge.elasticsearch" | "c4.8xlarge.elasticsearch" | "r4.large.elasticsearch" | "r4.xlarge.elasticsearch" | "r4.2xlarge.elasticsearch" | "r4.4xlarge.elasticsearch" | "r4.8xlarge.elasticsearch" | "r4.16xlarge.elasticsearch" | "i3.large.elasticsearch" | "i3.xlarge.elasticsearch" | "i3.2xlarge.elasticsearch" | "i3.4xlarge.elasticsearch" | "i3.8xlarge.elasticsearch" | "i3.16xlarge.elasticsearch"),
+                                                         elasticsearch_version: ::String
+                                                       ) -> _DescribeElasticsearchInstanceTypeLimitsResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeElasticsearchInstanceTypeLimitsResponseSuccess
+
+      interface _DescribeInboundCrossClusterSearchConnectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInboundCrossClusterSearchConnectionsResponse]
+        def cross_cluster_search_connections: () -> ::Array[Types::InboundCrossClusterSearchConnection]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#describe_inbound_cross_cluster_search_connections-instance_method
+      def describe_inbound_cross_cluster_search_connections: (
+                                                               ?filters: Array[
+                                                                 {
+                                                                   name: ::String?,
+                                                                   values: Array[::String]?
+                                                                 },
+                                                               ],
+                                                               ?max_results: ::Integer,
+                                                               ?next_token: ::String
+                                                             ) -> _DescribeInboundCrossClusterSearchConnectionsResponseSuccess
+                                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInboundCrossClusterSearchConnectionsResponseSuccess
+
+      interface _DescribeOutboundCrossClusterSearchConnectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeOutboundCrossClusterSearchConnectionsResponse]
+        def cross_cluster_search_connections: () -> ::Array[Types::OutboundCrossClusterSearchConnection]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#describe_outbound_cross_cluster_search_connections-instance_method
+      def describe_outbound_cross_cluster_search_connections: (
+                                                                ?filters: Array[
+                                                                  {
+                                                                    name: ::String?,
+                                                                    values: Array[::String]?
+                                                                  },
+                                                                ],
+                                                                ?max_results: ::Integer,
+                                                                ?next_token: ::String
+                                                              ) -> _DescribeOutboundCrossClusterSearchConnectionsResponseSuccess
+                                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeOutboundCrossClusterSearchConnectionsResponseSuccess
+
+      interface _DescribePackagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePackagesResponse]
+        def package_details_list: () -> ::Array[Types::PackageDetails]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#describe_packages-instance_method
+      def describe_packages: (
+                               ?filters: Array[
+                                 {
+                                   name: ("PackageID" | "PackageName" | "PackageStatus")?,
+                                   value: Array[::String]?
+                                 },
+                               ],
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _DescribePackagesResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePackagesResponseSuccess
+
+      interface _DescribeReservedElasticsearchInstanceOfferingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReservedElasticsearchInstanceOfferingsResponse]
+        def next_token: () -> ::String
+        def reserved_elasticsearch_instance_offerings: () -> ::Array[Types::ReservedElasticsearchInstanceOffering]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#describe_reserved_elasticsearch_instance_offerings-instance_method
+      def describe_reserved_elasticsearch_instance_offerings: (
+                                                                ?reserved_elasticsearch_instance_offering_id: ::String,
+                                                                ?max_results: ::Integer,
+                                                                ?next_token: ::String
+                                                              ) -> _DescribeReservedElasticsearchInstanceOfferingsResponseSuccess
+                                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReservedElasticsearchInstanceOfferingsResponseSuccess
+
+      interface _DescribeReservedElasticsearchInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReservedElasticsearchInstancesResponse]
+        def next_token: () -> ::String
+        def reserved_elasticsearch_instances: () -> ::Array[Types::ReservedElasticsearchInstance]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#describe_reserved_elasticsearch_instances-instance_method
+      def describe_reserved_elasticsearch_instances: (
+                                                       ?reserved_elasticsearch_instance_id: ::String,
+                                                       ?max_results: ::Integer,
+                                                       ?next_token: ::String
+                                                     ) -> _DescribeReservedElasticsearchInstancesResponseSuccess
+                                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReservedElasticsearchInstancesResponseSuccess
+
+      interface _DescribeVpcEndpointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeVpcEndpointsResponse]
+        def vpc_endpoints: () -> ::Array[Types::VpcEndpoint]
+        def vpc_endpoint_errors: () -> ::Array[Types::VpcEndpointError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#describe_vpc_endpoints-instance_method
+      def describe_vpc_endpoints: (
+                                    vpc_endpoint_ids: Array[::String]
+                                  ) -> _DescribeVpcEndpointsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeVpcEndpointsResponseSuccess
+
+      interface _DissociatePackageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DissociatePackageResponse]
+        def domain_package_details: () -> Types::DomainPackageDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#dissociate_package-instance_method
+      def dissociate_package: (
+                                package_id: ::String,
+                                domain_name: ::String
+                              ) -> _DissociatePackageResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DissociatePackageResponseSuccess
+
+      interface _GetCompatibleElasticsearchVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCompatibleElasticsearchVersionsResponse]
+        def compatible_elasticsearch_versions: () -> ::Array[Types::CompatibleVersionsMap]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#get_compatible_elasticsearch_versions-instance_method
+      def get_compatible_elasticsearch_versions: (
+                                                   ?domain_name: ::String
+                                                 ) -> _GetCompatibleElasticsearchVersionsResponseSuccess
+                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCompatibleElasticsearchVersionsResponseSuccess
+
+      interface _GetPackageVersionHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPackageVersionHistoryResponse]
+        def package_id: () -> ::String
+        def package_version_history_list: () -> ::Array[Types::PackageVersionHistory]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#get_package_version_history-instance_method
+      def get_package_version_history: (
+                                         package_id: ::String,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _GetPackageVersionHistoryResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPackageVersionHistoryResponseSuccess
+
+      interface _GetUpgradeHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUpgradeHistoryResponse]
+        def upgrade_histories: () -> ::Array[Types::UpgradeHistory]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#get_upgrade_history-instance_method
+      def get_upgrade_history: (
+                                 domain_name: ::String,
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _GetUpgradeHistoryResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUpgradeHistoryResponseSuccess
+
+      interface _GetUpgradeStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUpgradeStatusResponse]
+        def upgrade_step: () -> ("PRE_UPGRADE_CHECK" | "SNAPSHOT" | "UPGRADE")
+        def step_status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "SUCCEEDED_WITH_ISSUES" | "FAILED")
+        def upgrade_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#get_upgrade_status-instance_method
+      def get_upgrade_status: (
+                                domain_name: ::String
+                              ) -> _GetUpgradeStatusResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUpgradeStatusResponseSuccess
+
+      interface _ListDomainNamesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainNamesResponse]
+        def domain_names: () -> ::Array[Types::DomainInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#list_domain_names-instance_method
+      def list_domain_names: (
+                               ?engine_type: ("OpenSearch" | "Elasticsearch")
+                             ) -> _ListDomainNamesResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainNamesResponseSuccess
+
+      interface _ListDomainsForPackageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainsForPackageResponse]
+        def domain_package_details_list: () -> ::Array[Types::DomainPackageDetails]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#list_domains_for_package-instance_method
+      def list_domains_for_package: (
+                                      package_id: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListDomainsForPackageResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainsForPackageResponseSuccess
+
+      interface _ListElasticsearchInstanceTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListElasticsearchInstanceTypesResponse]
+        def elasticsearch_instance_types: () -> ::Array[("m3.medium.elasticsearch" | "m3.large.elasticsearch" | "m3.xlarge.elasticsearch" | "m3.2xlarge.elasticsearch" | "m4.large.elasticsearch" | "m4.xlarge.elasticsearch" | "m4.2xlarge.elasticsearch" | "m4.4xlarge.elasticsearch" | "m4.10xlarge.elasticsearch" | "m5.large.elasticsearch" | "m5.xlarge.elasticsearch" | "m5.2xlarge.elasticsearch" | "m5.4xlarge.elasticsearch" | "m5.12xlarge.elasticsearch" | "r5.large.elasticsearch" | "r5.xlarge.elasticsearch" | "r5.2xlarge.elasticsearch" | "r5.4xlarge.elasticsearch" | "r5.12xlarge.elasticsearch" | "c5.large.elasticsearch" | "c5.xlarge.elasticsearch" | "c5.2xlarge.elasticsearch" | "c5.4xlarge.elasticsearch" | "c5.9xlarge.elasticsearch" | "c5.18xlarge.elasticsearch" | "ultrawarm1.medium.elasticsearch" | "ultrawarm1.large.elasticsearch" | "t2.micro.elasticsearch" | "t2.small.elasticsearch" | "t2.medium.elasticsearch" | "r3.large.elasticsearch" | "r3.xlarge.elasticsearch" | "r3.2xlarge.elasticsearch" | "r3.4xlarge.elasticsearch" | "r3.8xlarge.elasticsearch" | "i2.xlarge.elasticsearch" | "i2.2xlarge.elasticsearch" | "d2.xlarge.elasticsearch" | "d2.2xlarge.elasticsearch" | "d2.4xlarge.elasticsearch" | "d2.8xlarge.elasticsearch" | "c4.large.elasticsearch" | "c4.xlarge.elasticsearch" | "c4.2xlarge.elasticsearch" | "c4.4xlarge.elasticsearch" | "c4.8xlarge.elasticsearch" | "r4.large.elasticsearch" | "r4.xlarge.elasticsearch" | "r4.2xlarge.elasticsearch" | "r4.4xlarge.elasticsearch" | "r4.8xlarge.elasticsearch" | "r4.16xlarge.elasticsearch" | "i3.large.elasticsearch" | "i3.xlarge.elasticsearch" | "i3.2xlarge.elasticsearch" | "i3.4xlarge.elasticsearch" | "i3.8xlarge.elasticsearch" | "i3.16xlarge.elasticsearch")]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#list_elasticsearch_instance_types-instance_method
+      def list_elasticsearch_instance_types: (
+                                               elasticsearch_version: ::String,
+                                               ?domain_name: ::String,
+                                               ?max_results: ::Integer,
+                                               ?next_token: ::String
+                                             ) -> _ListElasticsearchInstanceTypesResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListElasticsearchInstanceTypesResponseSuccess
+
+      interface _ListElasticsearchVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListElasticsearchVersionsResponse]
+        def elasticsearch_versions: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#list_elasticsearch_versions-instance_method
+      def list_elasticsearch_versions: (
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListElasticsearchVersionsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListElasticsearchVersionsResponseSuccess
+
+      interface _ListPackagesForDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPackagesForDomainResponse]
+        def domain_package_details_list: () -> ::Array[Types::DomainPackageDetails]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#list_packages_for_domain-instance_method
+      def list_packages_for_domain: (
+                                      domain_name: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListPackagesForDomainResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPackagesForDomainResponseSuccess
+
+      interface _ListTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsResponse]
+        def tag_list: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#list_tags-instance_method
+      def list_tags: (
+                       arn: ::String
+                     ) -> _ListTagsResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsResponseSuccess
+
+      interface _ListVpcEndpointAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVpcEndpointAccessResponse]
+        def authorized_principal_list: () -> ::Array[Types::AuthorizedPrincipal]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#list_vpc_endpoint_access-instance_method
+      def list_vpc_endpoint_access: (
+                                      domain_name: ::String,
+                                      ?next_token: ::String
+                                    ) -> _ListVpcEndpointAccessResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVpcEndpointAccessResponseSuccess
+
+      interface _ListVpcEndpointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVpcEndpointsResponse]
+        def vpc_endpoint_summary_list: () -> ::Array[Types::VpcEndpointSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#list_vpc_endpoints-instance_method
+      def list_vpc_endpoints: (
+                                ?next_token: ::String
+                              ) -> _ListVpcEndpointsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVpcEndpointsResponseSuccess
+
+      interface _ListVpcEndpointsForDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVpcEndpointsForDomainResponse]
+        def vpc_endpoint_summary_list: () -> ::Array[Types::VpcEndpointSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#list_vpc_endpoints_for_domain-instance_method
+      def list_vpc_endpoints_for_domain: (
+                                           domain_name: ::String,
+                                           ?next_token: ::String
+                                         ) -> _ListVpcEndpointsForDomainResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVpcEndpointsForDomainResponseSuccess
+
+      interface _PurchaseReservedElasticsearchInstanceOfferingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PurchaseReservedElasticsearchInstanceOfferingResponse]
+        def reserved_elasticsearch_instance_id: () -> ::String
+        def reservation_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#purchase_reserved_elasticsearch_instance_offering-instance_method
+      def purchase_reserved_elasticsearch_instance_offering: (
+                                                               reserved_elasticsearch_instance_offering_id: ::String,
+                                                               reservation_name: ::String,
+                                                               ?instance_count: ::Integer
+                                                             ) -> _PurchaseReservedElasticsearchInstanceOfferingResponseSuccess
+                                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PurchaseReservedElasticsearchInstanceOfferingResponseSuccess
+
+      interface _RejectInboundCrossClusterSearchConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RejectInboundCrossClusterSearchConnectionResponse]
+        def cross_cluster_search_connection: () -> Types::InboundCrossClusterSearchConnection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#reject_inbound_cross_cluster_search_connection-instance_method
+      def reject_inbound_cross_cluster_search_connection: (
+                                                            cross_cluster_search_connection_id: ::String
+                                                          ) -> _RejectInboundCrossClusterSearchConnectionResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectInboundCrossClusterSearchConnectionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#remove_tags-instance_method
+      def remove_tags: (
+                         arn: ::String,
+                         tag_keys: Array[::String]
+                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _RevokeVpcEndpointAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RevokeVpcEndpointAccessResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#revoke_vpc_endpoint_access-instance_method
+      def revoke_vpc_endpoint_access: (
+                                        domain_name: ::String,
+                                        account: ::String
+                                      ) -> _RevokeVpcEndpointAccessResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RevokeVpcEndpointAccessResponseSuccess
+
+      interface _StartElasticsearchServiceSoftwareUpdateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartElasticsearchServiceSoftwareUpdateResponse]
+        def service_software_options: () -> Types::ServiceSoftwareOptions
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#start_elasticsearch_service_software_update-instance_method
+      def start_elasticsearch_service_software_update: (
+                                                         domain_name: ::String
+                                                       ) -> _StartElasticsearchServiceSoftwareUpdateResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartElasticsearchServiceSoftwareUpdateResponseSuccess
+
+      interface _UpdateElasticsearchDomainConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateElasticsearchDomainConfigResponse]
+        def domain_config: () -> Types::ElasticsearchDomainConfig
+        def dry_run_results: () -> Types::DryRunResults
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#update_elasticsearch_domain_config-instance_method
+      def update_elasticsearch_domain_config: (
+                                                domain_name: ::String,
+                                                ?elasticsearch_cluster_config: {
+                                                  instance_type: ("m3.medium.elasticsearch" | "m3.large.elasticsearch" | "m3.xlarge.elasticsearch" | "m3.2xlarge.elasticsearch" | "m4.large.elasticsearch" | "m4.xlarge.elasticsearch" | "m4.2xlarge.elasticsearch" | "m4.4xlarge.elasticsearch" | "m4.10xlarge.elasticsearch" | "m5.large.elasticsearch" | "m5.xlarge.elasticsearch" | "m5.2xlarge.elasticsearch" | "m5.4xlarge.elasticsearch" | "m5.12xlarge.elasticsearch" | "r5.large.elasticsearch" | "r5.xlarge.elasticsearch" | "r5.2xlarge.elasticsearch" | "r5.4xlarge.elasticsearch" | "r5.12xlarge.elasticsearch" | "c5.large.elasticsearch" | "c5.xlarge.elasticsearch" | "c5.2xlarge.elasticsearch" | "c5.4xlarge.elasticsearch" | "c5.9xlarge.elasticsearch" | "c5.18xlarge.elasticsearch" | "ultrawarm1.medium.elasticsearch" | "ultrawarm1.large.elasticsearch" | "t2.micro.elasticsearch" | "t2.small.elasticsearch" | "t2.medium.elasticsearch" | "r3.large.elasticsearch" | "r3.xlarge.elasticsearch" | "r3.2xlarge.elasticsearch" | "r3.4xlarge.elasticsearch" | "r3.8xlarge.elasticsearch" | "i2.xlarge.elasticsearch" | "i2.2xlarge.elasticsearch" | "d2.xlarge.elasticsearch" | "d2.2xlarge.elasticsearch" | "d2.4xlarge.elasticsearch" | "d2.8xlarge.elasticsearch" | "c4.large.elasticsearch" | "c4.xlarge.elasticsearch" | "c4.2xlarge.elasticsearch" | "c4.4xlarge.elasticsearch" | "c4.8xlarge.elasticsearch" | "r4.large.elasticsearch" | "r4.xlarge.elasticsearch" | "r4.2xlarge.elasticsearch" | "r4.4xlarge.elasticsearch" | "r4.8xlarge.elasticsearch" | "r4.16xlarge.elasticsearch" | "i3.large.elasticsearch" | "i3.xlarge.elasticsearch" | "i3.2xlarge.elasticsearch" | "i3.4xlarge.elasticsearch" | "i3.8xlarge.elasticsearch" | "i3.16xlarge.elasticsearch")?,
+                                                  instance_count: ::Integer?,
+                                                  dedicated_master_enabled: bool?,
+                                                  zone_awareness_enabled: bool?,
+                                                  zone_awareness_config: {
+                                                    availability_zone_count: ::Integer?
+                                                  }?,
+                                                  dedicated_master_type: ("m3.medium.elasticsearch" | "m3.large.elasticsearch" | "m3.xlarge.elasticsearch" | "m3.2xlarge.elasticsearch" | "m4.large.elasticsearch" | "m4.xlarge.elasticsearch" | "m4.2xlarge.elasticsearch" | "m4.4xlarge.elasticsearch" | "m4.10xlarge.elasticsearch" | "m5.large.elasticsearch" | "m5.xlarge.elasticsearch" | "m5.2xlarge.elasticsearch" | "m5.4xlarge.elasticsearch" | "m5.12xlarge.elasticsearch" | "r5.large.elasticsearch" | "r5.xlarge.elasticsearch" | "r5.2xlarge.elasticsearch" | "r5.4xlarge.elasticsearch" | "r5.12xlarge.elasticsearch" | "c5.large.elasticsearch" | "c5.xlarge.elasticsearch" | "c5.2xlarge.elasticsearch" | "c5.4xlarge.elasticsearch" | "c5.9xlarge.elasticsearch" | "c5.18xlarge.elasticsearch" | "ultrawarm1.medium.elasticsearch" | "ultrawarm1.large.elasticsearch" | "t2.micro.elasticsearch" | "t2.small.elasticsearch" | "t2.medium.elasticsearch" | "r3.large.elasticsearch" | "r3.xlarge.elasticsearch" | "r3.2xlarge.elasticsearch" | "r3.4xlarge.elasticsearch" | "r3.8xlarge.elasticsearch" | "i2.xlarge.elasticsearch" | "i2.2xlarge.elasticsearch" | "d2.xlarge.elasticsearch" | "d2.2xlarge.elasticsearch" | "d2.4xlarge.elasticsearch" | "d2.8xlarge.elasticsearch" | "c4.large.elasticsearch" | "c4.xlarge.elasticsearch" | "c4.2xlarge.elasticsearch" | "c4.4xlarge.elasticsearch" | "c4.8xlarge.elasticsearch" | "r4.large.elasticsearch" | "r4.xlarge.elasticsearch" | "r4.2xlarge.elasticsearch" | "r4.4xlarge.elasticsearch" | "r4.8xlarge.elasticsearch" | "r4.16xlarge.elasticsearch" | "i3.large.elasticsearch" | "i3.xlarge.elasticsearch" | "i3.2xlarge.elasticsearch" | "i3.4xlarge.elasticsearch" | "i3.8xlarge.elasticsearch" | "i3.16xlarge.elasticsearch")?,
+                                                  dedicated_master_count: ::Integer?,
+                                                  warm_enabled: bool?,
+                                                  warm_type: ("ultrawarm1.medium.elasticsearch" | "ultrawarm1.large.elasticsearch")?,
+                                                  warm_count: ::Integer?,
+                                                  cold_storage_options: {
+                                                    enabled: bool
+                                                  }?
+                                                },
+                                                ?ebs_options: {
+                                                  ebs_enabled: bool?,
+                                                  volume_type: ("standard" | "gp2" | "io1" | "gp3")?,
+                                                  volume_size: ::Integer?,
+                                                  iops: ::Integer?,
+                                                  throughput: ::Integer?
+                                                },
+                                                ?snapshot_options: {
+                                                  automated_snapshot_start_hour: ::Integer?
+                                                },
+                                                ?vpc_options: {
+                                                  subnet_ids: Array[::String]?,
+                                                  security_group_ids: Array[::String]?
+                                                },
+                                                ?cognito_options: {
+                                                  enabled: bool?,
+                                                  user_pool_id: ::String?,
+                                                  identity_pool_id: ::String?,
+                                                  role_arn: ::String?
+                                                },
+                                                ?advanced_options: Hash[::String, ::String],
+                                                ?access_policies: ::String,
+                                                ?log_publishing_options: Hash[("INDEX_SLOW_LOGS" | "SEARCH_SLOW_LOGS" | "ES_APPLICATION_LOGS" | "AUDIT_LOGS"), {
+                                                    cloud_watch_logs_log_group_arn: ::String?,
+                                                    enabled: bool?
+                                                  }],
+                                                ?domain_endpoint_options: {
+                                                  enforce_https: bool?,
+                                                  tls_security_policy: ("Policy-Min-TLS-1-0-2019-07" | "Policy-Min-TLS-1-2-2019-07" | "Policy-Min-TLS-1-2-PFS-2023-10")?,
+                                                  custom_endpoint_enabled: bool?,
+                                                  custom_endpoint: ::String?,
+                                                  custom_endpoint_certificate_arn: ::String?
+                                                },
+                                                ?advanced_security_options: {
+                                                  enabled: bool?,
+                                                  internal_user_database_enabled: bool?,
+                                                  master_user_options: {
+                                                    master_user_arn: ::String?,
+                                                    master_user_name: ::String?,
+                                                    master_user_password: ::String?
+                                                  }?,
+                                                  saml_options: {
+                                                    enabled: bool?,
+                                                    idp: {
+                                                      metadata_content: ::String,
+                                                      entity_id: ::String
+                                                    }?,
+                                                    master_user_name: ::String?,
+                                                    master_backend_role: ::String?,
+                                                    subject_key: ::String?,
+                                                    roles_key: ::String?,
+                                                    session_timeout_minutes: ::Integer?
+                                                  }?,
+                                                  anonymous_auth_enabled: bool?
+                                                },
+                                                ?node_to_node_encryption_options: {
+                                                  enabled: bool?
+                                                },
+                                                ?encryption_at_rest_options: {
+                                                  enabled: bool?,
+                                                  kms_key_id: ::String?
+                                                },
+                                                ?auto_tune_options: {
+                                                  desired_state: ("ENABLED" | "DISABLED")?,
+                                                  rollback_on_disable: ("NO_ROLLBACK" | "DEFAULT_ROLLBACK")?,
+                                                  maintenance_schedules: Array[
+                                                    {
+                                                      start_at: ::Time?,
+                                                      duration: {
+                                                        value: ::Integer?,
+                                                        unit: ("HOURS")?
+                                                      }?,
+                                                      cron_expression_for_recurrence: ::String?
+                                                    },
+                                                  ]?
+                                                },
+                                                ?dry_run: bool
+                                              ) -> _UpdateElasticsearchDomainConfigResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateElasticsearchDomainConfigResponseSuccess
+
+      interface _UpdatePackageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePackageResponse]
+        def package_details: () -> Types::PackageDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#update_package-instance_method
+      def update_package: (
+                            package_id: ::String,
+                            package_source: {
+                              s3_bucket_name: ::String?,
+                              s3_key: ::String?
+                            },
+                            ?package_description: ::String,
+                            ?commit_message: ::String
+                          ) -> _UpdatePackageResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePackageResponseSuccess
+
+      interface _UpdateVpcEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateVpcEndpointResponse]
+        def vpc_endpoint: () -> Types::VpcEndpoint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#update_vpc_endpoint-instance_method
+      def update_vpc_endpoint: (
+                                 vpc_endpoint_id: ::String,
+                                 vpc_options: {
+                                   subnet_ids: Array[::String]?,
+                                   security_group_ids: Array[::String]?
+                                 }
+                               ) -> _UpdateVpcEndpointResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVpcEndpointResponseSuccess
+
+      interface _UpgradeElasticsearchDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpgradeElasticsearchDomainResponse]
+        def domain_name: () -> ::String
+        def target_version: () -> ::String
+        def perform_check_only: () -> bool
+        def change_progress_details: () -> Types::ChangeProgressDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#upgrade_elasticsearch_domain-instance_method
+      def upgrade_elasticsearch_domain: (
+                                          domain_name: ::String,
+                                          target_version: ::String,
+                                          ?perform_check_only: bool
+                                        ) -> _UpgradeElasticsearchDomainResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpgradeElasticsearchDomainResponseSuccess
+    end
+  end
+end
+

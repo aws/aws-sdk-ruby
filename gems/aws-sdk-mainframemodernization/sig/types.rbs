@@ -1,0 +1,939 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MainframeModernization
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AlternateKey
+      attr_accessor allow_duplicates: bool
+      attr_accessor length: ::Integer
+      attr_accessor name: ::String
+      attr_accessor offset: ::Integer
+      SENSITIVE: []
+    end
+
+    class ApplicationSummary
+      attr_accessor application_arn: ::String
+      attr_accessor application_id: ::String
+      attr_accessor application_version: ::Integer
+      attr_accessor creation_time: ::Time
+      attr_accessor deployment_status: ("Deploying" | "Deployed")
+      attr_accessor description: ::String
+      attr_accessor engine_type: ("microfocus" | "bluage")
+      attr_accessor environment_id: ::String
+      attr_accessor last_start_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor status: ("Creating" | "Created" | "Available" | "Ready" | "Starting" | "Running" | "Stopping" | "Stopped" | "Failed" | "Deleting" | "Deleting From Environment")
+      attr_accessor version_status: ("Creating" | "Available" | "Failed")
+      SENSITIVE: []
+    end
+
+    class ApplicationVersionSummary
+      attr_accessor application_version: ::Integer
+      attr_accessor creation_time: ::Time
+      attr_accessor status: ("Creating" | "Available" | "Failed")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class BatchJobDefinition
+      attr_accessor file_batch_job_definition: Types::FileBatchJobDefinition
+      attr_accessor script_batch_job_definition: Types::ScriptBatchJobDefinition
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class FileBatchJobDefinition < BatchJobDefinition
+      end
+      class ScriptBatchJobDefinition < BatchJobDefinition
+      end
+      class Unknown < BatchJobDefinition
+      end
+    end
+
+    class BatchJobExecutionSummary
+      attr_accessor application_id: ::String
+      attr_accessor batch_job_identifier: Types::BatchJobIdentifier
+      attr_accessor end_time: ::Time
+      attr_accessor execution_id: ::String
+      attr_accessor job_id: ::String
+      attr_accessor job_name: ::String
+      attr_accessor job_type: ("VSE" | "JES2" | "JES3")
+      attr_accessor return_code: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor status: ("Submitting" | "Holding" | "Dispatching" | "Running" | "Cancelling" | "Cancelled" | "Succeeded" | "Failed" | "Succeeded With Warning")
+      SENSITIVE: []
+    end
+
+    class BatchJobIdentifier
+      attr_accessor file_batch_job_identifier: Types::FileBatchJobIdentifier
+      attr_accessor s3_batch_job_identifier: Types::S3BatchJobIdentifier
+      attr_accessor script_batch_job_identifier: Types::ScriptBatchJobIdentifier
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class FileBatchJobIdentifier < BatchJobIdentifier
+      end
+      class S3BatchJobIdentifier < BatchJobIdentifier
+      end
+      class ScriptBatchJobIdentifier < BatchJobIdentifier
+      end
+      class Unknown < BatchJobIdentifier
+      end
+    end
+
+    class CancelBatchJobExecutionRequest
+      attr_accessor application_id: ::String
+      attr_accessor execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelBatchJobExecutionResponse < Aws::EmptyStructure
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateApplicationRequest
+      attr_accessor client_token: ::String
+      attr_accessor definition: Types::Definition
+      attr_accessor description: ::String
+      attr_accessor engine_type: ("microfocus" | "bluage")
+      attr_accessor kms_key_id: ::String
+      attr_accessor name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateApplicationResponse
+      attr_accessor application_arn: ::String
+      attr_accessor application_id: ::String
+      attr_accessor application_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateDataSetImportTaskRequest
+      attr_accessor application_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor import_config: Types::DataSetImportConfig
+      SENSITIVE: []
+    end
+
+    class CreateDataSetImportTaskResponse
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDeploymentRequest
+      attr_accessor application_id: ::String
+      attr_accessor application_version: ::Integer
+      attr_accessor client_token: ::String
+      attr_accessor environment_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDeploymentResponse
+      attr_accessor deployment_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateEnvironmentRequest
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor engine_type: ("microfocus" | "bluage")
+      attr_accessor engine_version: ::String
+      attr_accessor high_availability_config: Types::HighAvailabilityConfig
+      attr_accessor instance_type: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor name: ::String
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor publicly_accessible: bool
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor storage_configurations: ::Array[Types::StorageConfiguration]
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateEnvironmentResponse
+      attr_accessor environment_id: ::String
+      SENSITIVE: []
+    end
+
+    class DataSet
+      attr_accessor dataset_name: ::String
+      attr_accessor dataset_org: Types::DatasetOrgAttributes
+      attr_accessor record_length: Types::RecordLength
+      attr_accessor relative_path: ::String
+      attr_accessor storage_type: ::String
+      SENSITIVE: []
+    end
+
+    class DataSetImportConfig
+      attr_accessor data_sets: ::Array[Types::DataSetImportItem]
+      attr_accessor s3_location: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DataSets < DataSetImportConfig
+      end
+      class S3Location < DataSetImportConfig
+      end
+      class Unknown < DataSetImportConfig
+      end
+    end
+
+    class DataSetImportItem
+      attr_accessor data_set: Types::DataSet
+      attr_accessor external_location: Types::ExternalLocation
+      SENSITIVE: []
+    end
+
+    class DataSetImportSummary
+      attr_accessor failed: ::Integer
+      attr_accessor in_progress: ::Integer
+      attr_accessor pending: ::Integer
+      attr_accessor succeeded: ::Integer
+      attr_accessor total: ::Integer
+      SENSITIVE: []
+    end
+
+    class DataSetImportTask
+      attr_accessor status: ("Creating" | "Running" | "Completed" | "Failed")
+      attr_accessor status_reason: ::String
+      attr_accessor summary: Types::DataSetImportSummary
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class DataSetSummary
+      attr_accessor creation_time: ::Time
+      attr_accessor data_set_name: ::String
+      attr_accessor data_set_org: ::String
+      attr_accessor format: ::String
+      attr_accessor last_referenced_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DatasetDetailOrgAttributes
+      attr_accessor gdg: Types::GdgDetailAttributes
+      attr_accessor po: Types::PoDetailAttributes
+      attr_accessor ps: Types::PsDetailAttributes
+      attr_accessor vsam: Types::VsamDetailAttributes
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Gdg < DatasetDetailOrgAttributes
+      end
+      class Po < DatasetDetailOrgAttributes
+      end
+      class Ps < DatasetDetailOrgAttributes
+      end
+      class Vsam < DatasetDetailOrgAttributes
+      end
+      class Unknown < DatasetDetailOrgAttributes
+      end
+    end
+
+    class DatasetOrgAttributes
+      attr_accessor gdg: Types::GdgAttributes
+      attr_accessor po: Types::PoAttributes
+      attr_accessor ps: Types::PsAttributes
+      attr_accessor vsam: Types::VsamAttributes
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Gdg < DatasetOrgAttributes
+      end
+      class Po < DatasetOrgAttributes
+      end
+      class Ps < DatasetOrgAttributes
+      end
+      class Vsam < DatasetOrgAttributes
+      end
+      class Unknown < DatasetOrgAttributes
+      end
+    end
+
+    class Definition
+      attr_accessor content: ::String
+      attr_accessor s3_location: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Content < Definition
+      end
+      class S3Location < Definition
+      end
+      class Unknown < Definition
+      end
+    end
+
+    class DeleteApplicationFromEnvironmentRequest
+      attr_accessor application_id: ::String
+      attr_accessor environment_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationFromEnvironmentResponse < Aws::EmptyStructure
+    end
+
+    class DeleteApplicationRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteEnvironmentRequest
+      attr_accessor environment_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEnvironmentResponse < Aws::EmptyStructure
+    end
+
+    class DeployedVersionSummary
+      attr_accessor application_version: ::Integer
+      attr_accessor status: ("Deploying" | "Succeeded" | "Failed" | "Updating Deployment")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class DeploymentSummary
+      attr_accessor application_id: ::String
+      attr_accessor application_version: ::Integer
+      attr_accessor creation_time: ::Time
+      attr_accessor deployment_id: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor status: ("Deploying" | "Succeeded" | "Failed" | "Updating Deployment")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class EfsStorageConfiguration
+      attr_accessor file_system_id: ::String
+      attr_accessor mount_point: ::String
+      SENSITIVE: []
+    end
+
+    class EngineVersionsSummary
+      attr_accessor engine_type: ::String
+      attr_accessor engine_version: ::String
+      SENSITIVE: []
+    end
+
+    class EnvironmentSummary
+      attr_accessor creation_time: ::Time
+      attr_accessor engine_type: ("microfocus" | "bluage")
+      attr_accessor engine_version: ::String
+      attr_accessor environment_arn: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("Creating" | "Available" | "Updating" | "Deleting" | "Failed")
+      SENSITIVE: []
+    end
+
+    class ExecutionTimeoutException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ExternalLocation
+      attr_accessor s3_location: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class S3Location < ExternalLocation
+      end
+      class Unknown < ExternalLocation
+      end
+    end
+
+    class FileBatchJobDefinition
+      attr_accessor file_name: ::String
+      attr_accessor folder_path: ::String
+      SENSITIVE: []
+    end
+
+    class FileBatchJobIdentifier
+      attr_accessor file_name: ::String
+      attr_accessor folder_path: ::String
+      SENSITIVE: []
+    end
+
+    class FsxStorageConfiguration
+      attr_accessor file_system_id: ::String
+      attr_accessor mount_point: ::String
+      SENSITIVE: []
+    end
+
+    class GdgAttributes
+      attr_accessor limit: ::Integer
+      attr_accessor roll_disposition: ::String
+      SENSITIVE: []
+    end
+
+    class GdgDetailAttributes
+      attr_accessor limit: ::Integer
+      attr_accessor roll_disposition: ::String
+      SENSITIVE: []
+    end
+
+    class GetApplicationRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetApplicationResponse
+      attr_accessor application_arn: ::String
+      attr_accessor application_id: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor deployed_version: Types::DeployedVersionSummary
+      attr_accessor description: ::String
+      attr_accessor engine_type: ("microfocus" | "bluage")
+      attr_accessor environment_id: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor last_start_time: ::Time
+      attr_accessor latest_version: Types::ApplicationVersionSummary
+      attr_accessor listener_arns: ::Array[::String]
+      attr_accessor listener_ports: ::Array[::Integer]
+      attr_accessor load_balancer_dns_name: ::String
+      attr_accessor log_groups: ::Array[Types::LogGroupSummary]
+      attr_accessor name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor status: ("Creating" | "Created" | "Available" | "Ready" | "Starting" | "Running" | "Stopping" | "Stopped" | "Failed" | "Deleting" | "Deleting From Environment")
+      attr_accessor status_reason: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor target_group_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetApplicationVersionRequest
+      attr_accessor application_id: ::String
+      attr_accessor application_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetApplicationVersionResponse
+      attr_accessor application_version: ::Integer
+      attr_accessor creation_time: ::Time
+      attr_accessor definition_content: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("Creating" | "Available" | "Failed")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class GetBatchJobExecutionRequest
+      attr_accessor application_id: ::String
+      attr_accessor execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetBatchJobExecutionResponse
+      attr_accessor application_id: ::String
+      attr_accessor batch_job_identifier: Types::BatchJobIdentifier
+      attr_accessor end_time: ::Time
+      attr_accessor execution_id: ::String
+      attr_accessor job_id: ::String
+      attr_accessor job_name: ::String
+      attr_accessor job_type: ("VSE" | "JES2" | "JES3")
+      attr_accessor job_user: ::String
+      attr_accessor return_code: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor status: ("Submitting" | "Holding" | "Dispatching" | "Running" | "Cancelling" | "Cancelled" | "Succeeded" | "Failed" | "Succeeded With Warning")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataSetDetailsRequest
+      attr_accessor application_id: ::String
+      attr_accessor data_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataSetDetailsResponse
+      attr_accessor blocksize: ::Integer
+      attr_accessor creation_time: ::Time
+      attr_accessor data_set_name: ::String
+      attr_accessor data_set_org: Types::DatasetDetailOrgAttributes
+      attr_accessor file_size: ::Integer
+      attr_accessor last_referenced_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor location: ::String
+      attr_accessor record_length: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetDataSetImportTaskRequest
+      attr_accessor application_id: ::String
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataSetImportTaskResponse
+      attr_accessor status: ("Creating" | "Running" | "Completed" | "Failed")
+      attr_accessor summary: Types::DataSetImportSummary
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeploymentRequest
+      attr_accessor application_id: ::String
+      attr_accessor deployment_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeploymentResponse
+      attr_accessor application_id: ::String
+      attr_accessor application_version: ::Integer
+      attr_accessor creation_time: ::Time
+      attr_accessor deployment_id: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor status: ("Deploying" | "Succeeded" | "Failed" | "Updating Deployment")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentRequest
+      attr_accessor environment_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentResponse
+      attr_accessor actual_capacity: ::Integer
+      attr_accessor creation_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor engine_type: ("microfocus" | "bluage")
+      attr_accessor engine_version: ::String
+      attr_accessor environment_arn: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor high_availability_config: Types::HighAvailabilityConfig
+      attr_accessor instance_type: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor load_balancer_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor pending_maintenance: Types::PendingMaintenance
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor publicly_accessible: bool
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor status: ("Creating" | "Available" | "Updating" | "Deleting" | "Failed")
+      attr_accessor status_reason: ::String
+      attr_accessor storage_configurations: ::Array[Types::StorageConfiguration]
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSignedBluinsightsUrlResponse
+      attr_accessor signed_bi_url: ::String
+      SENSITIVE: []
+    end
+
+    class HighAvailabilityConfig
+      attr_accessor desired_capacity: ::Integer
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class JobIdentifier
+      attr_accessor file_name: ::String
+      attr_accessor script_name: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class FileName < JobIdentifier
+      end
+      class ScriptName < JobIdentifier
+      end
+      class Unknown < JobIdentifier
+      end
+    end
+
+    class ListApplicationVersionsRequest
+      attr_accessor application_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationVersionsResponse
+      attr_accessor application_versions: ::Array[Types::ApplicationVersionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationsRequest
+      attr_accessor environment_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor names: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationsResponse
+      attr_accessor applications: ::Array[Types::ApplicationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBatchJobDefinitionsRequest
+      attr_accessor application_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ListBatchJobDefinitionsResponse
+      attr_accessor batch_job_definitions: ::Array[Types::BatchJobDefinition]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBatchJobExecutionsRequest
+      attr_accessor application_id: ::String
+      attr_accessor execution_ids: ::Array[::String]
+      attr_accessor job_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor started_after: ::Time
+      attr_accessor started_before: ::Time
+      attr_accessor status: ("Submitting" | "Holding" | "Dispatching" | "Running" | "Cancelling" | "Cancelled" | "Succeeded" | "Failed" | "Succeeded With Warning")
+      SENSITIVE: []
+    end
+
+    class ListBatchJobExecutionsResponse
+      attr_accessor batch_job_executions: ::Array[Types::BatchJobExecutionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataSetImportHistoryRequest
+      attr_accessor application_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataSetImportHistoryResponse
+      attr_accessor data_set_import_tasks: ::Array[Types::DataSetImportTask]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataSetsRequest
+      attr_accessor application_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor name_filter: ::String
+      attr_accessor next_token: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataSetsResponse
+      attr_accessor data_sets: ::Array[Types::DataSetSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeploymentsRequest
+      attr_accessor application_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeploymentsResponse
+      attr_accessor deployments: ::Array[Types::DeploymentSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEngineVersionsRequest
+      attr_accessor engine_type: ("microfocus" | "bluage")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEngineVersionsResponse
+      attr_accessor engine_versions: ::Array[Types::EngineVersionsSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentsRequest
+      attr_accessor engine_type: ("microfocus" | "bluage")
+      attr_accessor max_results: ::Integer
+      attr_accessor names: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentsResponse
+      attr_accessor environments: ::Array[Types::EnvironmentSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class LogGroupSummary
+      attr_accessor log_group_name: ::String
+      attr_accessor log_type: ::String
+      SENSITIVE: []
+    end
+
+    class MaintenanceSchedule
+      attr_accessor end_time: ::Time
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class PendingMaintenance
+      attr_accessor engine_version: ::String
+      attr_accessor schedule: Types::MaintenanceSchedule
+      SENSITIVE: []
+    end
+
+    class PoAttributes
+      attr_accessor encoding: ::String
+      attr_accessor format: ::String
+      attr_accessor member_file_extensions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PoDetailAttributes
+      attr_accessor encoding: ::String
+      attr_accessor format: ::String
+      SENSITIVE: []
+    end
+
+    class PrimaryKey
+      attr_accessor length: ::Integer
+      attr_accessor name: ::String
+      attr_accessor offset: ::Integer
+      SENSITIVE: []
+    end
+
+    class PsAttributes
+      attr_accessor encoding: ::String
+      attr_accessor format: ::String
+      SENSITIVE: []
+    end
+
+    class PsDetailAttributes
+      attr_accessor encoding: ::String
+      attr_accessor format: ::String
+      SENSITIVE: []
+    end
+
+    class RecordLength
+      attr_accessor max: ::Integer
+      attr_accessor min: ::Integer
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class S3BatchJobIdentifier
+      attr_accessor bucket: ::String
+      attr_accessor identifier: Types::JobIdentifier
+      attr_accessor key_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ScriptBatchJobDefinition
+      attr_accessor script_name: ::String
+      SENSITIVE: []
+    end
+
+    class ScriptBatchJobIdentifier
+      attr_accessor script_name: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartApplicationRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartApplicationResponse < Aws::EmptyStructure
+    end
+
+    class StartBatchJobRequest
+      attr_accessor application_id: ::String
+      attr_accessor batch_job_identifier: Types::BatchJobIdentifier
+      attr_accessor job_params: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartBatchJobResponse
+      attr_accessor execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopApplicationRequest
+      attr_accessor application_id: ::String
+      attr_accessor force_stop: bool
+      SENSITIVE: []
+    end
+
+    class StopApplicationResponse < Aws::EmptyStructure
+    end
+
+    class StorageConfiguration
+      attr_accessor efs: Types::EfsStorageConfiguration
+      attr_accessor fsx: Types::FsxStorageConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Efs < StorageConfiguration
+      end
+      class Fsx < StorageConfiguration
+      end
+      class Unknown < StorageConfiguration
+      end
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateApplicationRequest
+      attr_accessor application_id: ::String
+      attr_accessor current_application_version: ::Integer
+      attr_accessor definition: Types::Definition
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateApplicationResponse
+      attr_accessor application_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateEnvironmentRequest
+      attr_accessor apply_during_maintenance_window: bool
+      attr_accessor desired_capacity: ::Integer
+      attr_accessor engine_version: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor force_update: bool
+      attr_accessor instance_type: ::String
+      attr_accessor preferred_maintenance_window: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateEnvironmentResponse
+      attr_accessor environment_id: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      attr_accessor message: ::String
+      attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other")
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor message: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class VsamAttributes
+      attr_accessor alternate_keys: ::Array[Types::AlternateKey]
+      attr_accessor compressed: bool
+      attr_accessor encoding: ::String
+      attr_accessor format: ::String
+      attr_accessor primary_key: Types::PrimaryKey
+      SENSITIVE: []
+    end
+
+    class VsamDetailAttributes
+      attr_accessor alternate_keys: ::Array[Types::AlternateKey]
+      attr_accessor cache_at_startup: bool
+      attr_accessor compressed: bool
+      attr_accessor encoding: ::String
+      attr_accessor primary_key: Types::PrimaryKey
+      attr_accessor record_format: ::String
+      SENSITIVE: []
+    end
+  end
+end

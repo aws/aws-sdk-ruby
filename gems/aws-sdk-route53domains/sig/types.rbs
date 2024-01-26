@@ -1,0 +1,591 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Route53Domains
+  module Types
+
+    class AcceptDomainTransferFromAnotherAwsAccountRequest
+      attr_accessor domain_name: ::String
+      attr_accessor password: ::String
+      SENSITIVE: [:password]
+    end
+
+    class AcceptDomainTransferFromAnotherAwsAccountResponse
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateDelegationSignerToDomainRequest
+      attr_accessor domain_name: ::String
+      attr_accessor signing_attributes: Types::DnssecSigningAttributes
+      SENSITIVE: []
+    end
+
+    class AssociateDelegationSignerToDomainResponse
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class BillingRecord
+      attr_accessor domain_name: ::String
+      attr_accessor operation: ("REGISTER_DOMAIN" | "DELETE_DOMAIN" | "TRANSFER_IN_DOMAIN" | "UPDATE_DOMAIN_CONTACT" | "UPDATE_NAMESERVER" | "CHANGE_PRIVACY_PROTECTION" | "DOMAIN_LOCK" | "ENABLE_AUTORENEW" | "DISABLE_AUTORENEW" | "ADD_DNSSEC" | "REMOVE_DNSSEC" | "EXPIRE_DOMAIN" | "TRANSFER_OUT_DOMAIN" | "CHANGE_DOMAIN_OWNER" | "RENEW_DOMAIN" | "PUSH_DOMAIN" | "INTERNAL_TRANSFER_OUT_DOMAIN" | "INTERNAL_TRANSFER_IN_DOMAIN")
+      attr_accessor invoice_id: ::String
+      attr_accessor bill_date: ::Time
+      attr_accessor price: ::Float
+      SENSITIVE: []
+    end
+
+    class CancelDomainTransferToAnotherAwsAccountRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class CancelDomainTransferToAnotherAwsAccountResponse
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class CheckDomainAvailabilityRequest
+      attr_accessor domain_name: ::String
+      attr_accessor idn_lang_code: ::String
+      SENSITIVE: []
+    end
+
+    class CheckDomainAvailabilityResponse
+      attr_accessor availability: ("AVAILABLE" | "AVAILABLE_RESERVED" | "AVAILABLE_PREORDER" | "UNAVAILABLE" | "UNAVAILABLE_PREMIUM" | "UNAVAILABLE_RESTRICTED" | "RESERVED" | "DONT_KNOW")
+      SENSITIVE: []
+    end
+
+    class CheckDomainTransferabilityRequest
+      attr_accessor domain_name: ::String
+      attr_accessor auth_code: ::String
+      SENSITIVE: [:auth_code]
+    end
+
+    class CheckDomainTransferabilityResponse
+      attr_accessor transferability: Types::DomainTransferability
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Consent
+      attr_accessor max_price: ::Float
+      attr_accessor currency: ::String
+      SENSITIVE: []
+    end
+
+    class ContactDetail
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor contact_type: ("PERSON" | "COMPANY" | "ASSOCIATION" | "PUBLIC_BODY" | "RESELLER")
+      attr_accessor organization_name: ::String
+      attr_accessor address_line_1: ::String
+      attr_accessor address_line_2: ::String
+      attr_accessor city: ::String
+      attr_accessor state: ::String
+      attr_accessor country_code: ("AC" | "AD" | "AE" | "AF" | "AG" | "AI" | "AL" | "AM" | "AN" | "AO" | "AQ" | "AR" | "AS" | "AT" | "AU" | "AW" | "AX" | "AZ" | "BA" | "BB" | "BD" | "BE" | "BF" | "BG" | "BH" | "BI" | "BJ" | "BL" | "BM" | "BN" | "BO" | "BQ" | "BR" | "BS" | "BT" | "BV" | "BW" | "BY" | "BZ" | "CA" | "CC" | "CD" | "CF" | "CG" | "CH" | "CI" | "CK" | "CL" | "CM" | "CN" | "CO" | "CR" | "CU" | "CV" | "CW" | "CX" | "CY" | "CZ" | "DE" | "DJ" | "DK" | "DM" | "DO" | "DZ" | "EC" | "EE" | "EG" | "EH" | "ER" | "ES" | "ET" | "FI" | "FJ" | "FK" | "FM" | "FO" | "FR" | "GA" | "GB" | "GD" | "GE" | "GF" | "GG" | "GH" | "GI" | "GL" | "GM" | "GN" | "GP" | "GQ" | "GR" | "GS" | "GT" | "GU" | "GW" | "GY" | "HK" | "HM" | "HN" | "HR" | "HT" | "HU" | "ID" | "IE" | "IL" | "IM" | "IN" | "IO" | "IQ" | "IR" | "IS" | "IT" | "JE" | "JM" | "JO" | "JP" | "KE" | "KG" | "KH" | "KI" | "KM" | "KN" | "KP" | "KR" | "KW" | "KY" | "KZ" | "LA" | "LB" | "LC" | "LI" | "LK" | "LR" | "LS" | "LT" | "LU" | "LV" | "LY" | "MA" | "MC" | "MD" | "ME" | "MF" | "MG" | "MH" | "MK" | "ML" | "MM" | "MN" | "MO" | "MP" | "MQ" | "MR" | "MS" | "MT" | "MU" | "MV" | "MW" | "MX" | "MY" | "MZ" | "NA" | "NC" | "NE" | "NF" | "NG" | "NI" | "NL" | "NO" | "NP" | "NR" | "NU" | "NZ" | "OM" | "PA" | "PE" | "PF" | "PG" | "PH" | "PK" | "PL" | "PM" | "PN" | "PR" | "PS" | "PT" | "PW" | "PY" | "QA" | "RE" | "RO" | "RS" | "RU" | "RW" | "SA" | "SB" | "SC" | "SD" | "SE" | "SG" | "SH" | "SI" | "SJ" | "SK" | "SL" | "SM" | "SN" | "SO" | "SR" | "SS" | "ST" | "SV" | "SX" | "SY" | "SZ" | "TC" | "TD" | "TF" | "TG" | "TH" | "TJ" | "TK" | "TL" | "TM" | "TN" | "TO" | "TP" | "TR" | "TT" | "TV" | "TW" | "TZ" | "UA" | "UG" | "US" | "UY" | "UZ" | "VA" | "VC" | "VE" | "VG" | "VI" | "VN" | "VU" | "WF" | "WS" | "YE" | "YT" | "ZA" | "ZM" | "ZW")
+      attr_accessor zip_code: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor email: ::String
+      attr_accessor fax: ::String
+      attr_accessor extra_params: ::Array[Types::ExtraParam]
+      SENSITIVE: [:first_name, :last_name, :organization_name, :address_line_1, :address_line_2, :city, :state, :country_code, :zip_code, :phone_number, :email, :fax]
+    end
+
+    class DeleteDomainRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDomainResponse
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTagsForDomainRequest
+      attr_accessor domain_name: ::String
+      attr_accessor tags_to_delete: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteTagsForDomainResponse < Aws::EmptyStructure
+    end
+
+    class DisableDomainAutoRenewRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DisableDomainAutoRenewResponse < Aws::EmptyStructure
+    end
+
+    class DisableDomainTransferLockRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DisableDomainTransferLockResponse
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateDelegationSignerFromDomainRequest
+      attr_accessor domain_name: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateDelegationSignerFromDomainResponse
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class DnssecKey
+      attr_accessor algorithm: ::Integer
+      attr_accessor flags: ::Integer
+      attr_accessor public_key: ::String
+      attr_accessor digest_type: ::Integer
+      attr_accessor digest: ::String
+      attr_accessor key_tag: ::Integer
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DnssecLimitExceeded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DnssecSigningAttributes
+      attr_accessor algorithm: ::Integer
+      attr_accessor flags: ::Integer
+      attr_accessor public_key: ::String
+      SENSITIVE: []
+    end
+
+    class DomainLimitExceeded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DomainPrice
+      attr_accessor name: ::String
+      attr_accessor registration_price: Types::PriceWithCurrency
+      attr_accessor transfer_price: Types::PriceWithCurrency
+      attr_accessor renewal_price: Types::PriceWithCurrency
+      attr_accessor change_ownership_price: Types::PriceWithCurrency
+      attr_accessor restoration_price: Types::PriceWithCurrency
+      SENSITIVE: []
+    end
+
+    class DomainSuggestion
+      attr_accessor domain_name: ::String
+      attr_accessor availability: ::String
+      SENSITIVE: []
+    end
+
+    class DomainSummary
+      attr_accessor domain_name: ::String
+      attr_accessor auto_renew: bool
+      attr_accessor transfer_lock: bool
+      attr_accessor expiry: ::Time
+      SENSITIVE: []
+    end
+
+    class DomainTransferability
+      attr_accessor transferable: ("TRANSFERABLE" | "UNTRANSFERABLE" | "DONT_KNOW" | "DOMAIN_IN_OWN_ACCOUNT" | "DOMAIN_IN_ANOTHER_ACCOUNT" | "PREMIUM_DOMAIN")
+      SENSITIVE: []
+    end
+
+    class DuplicateRequest
+      attr_accessor request_id: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EnableDomainAutoRenewRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class EnableDomainAutoRenewResponse < Aws::EmptyStructure
+    end
+
+    class EnableDomainTransferLockRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class EnableDomainTransferLockResponse
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class ExtraParam
+      attr_accessor name: ("DUNS_NUMBER" | "BRAND_NUMBER" | "BIRTH_DEPARTMENT" | "BIRTH_DATE_IN_YYYY_MM_DD" | "BIRTH_COUNTRY" | "BIRTH_CITY" | "DOCUMENT_NUMBER" | "AU_ID_NUMBER" | "AU_ID_TYPE" | "CA_LEGAL_TYPE" | "CA_BUSINESS_ENTITY_TYPE" | "CA_LEGAL_REPRESENTATIVE" | "CA_LEGAL_REPRESENTATIVE_CAPACITY" | "ES_IDENTIFICATION" | "ES_IDENTIFICATION_TYPE" | "ES_LEGAL_FORM" | "FI_BUSINESS_NUMBER" | "FI_ID_NUMBER" | "FI_NATIONALITY" | "FI_ORGANIZATION_TYPE" | "IT_NATIONALITY" | "IT_PIN" | "IT_REGISTRANT_ENTITY_TYPE" | "RU_PASSPORT_DATA" | "SE_ID_NUMBER" | "SG_ID_NUMBER" | "VAT_NUMBER" | "UK_CONTACT_TYPE" | "UK_COMPANY_NUMBER" | "EU_COUNTRY_OF_CITIZENSHIP" | "AU_PRIORITY_TOKEN")
+      attr_accessor value: ::String
+      SENSITIVE: [:value]
+    end
+
+    class FilterCondition
+      attr_accessor name: ("DomainName" | "Expiry")
+      attr_accessor operator: ("LE" | "GE" | "BEGINS_WITH")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetContactReachabilityStatusRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetContactReachabilityStatusResponse
+      attr_accessor domain_name: ::String
+      attr_accessor status: ("PENDING" | "DONE" | "EXPIRED")
+      SENSITIVE: []
+    end
+
+    class GetDomainDetailRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDomainDetailResponse
+      attr_accessor domain_name: ::String
+      attr_accessor nameservers: ::Array[Types::Nameserver]
+      attr_accessor auto_renew: bool
+      attr_accessor admin_contact: Types::ContactDetail
+      attr_accessor registrant_contact: Types::ContactDetail
+      attr_accessor tech_contact: Types::ContactDetail
+      attr_accessor admin_privacy: bool
+      attr_accessor registrant_privacy: bool
+      attr_accessor tech_privacy: bool
+      attr_accessor registrar_name: ::String
+      attr_accessor who_is_server: ::String
+      attr_accessor registrar_url: ::String
+      attr_accessor abuse_contact_email: ::String
+      attr_accessor abuse_contact_phone: ::String
+      attr_accessor registry_domain_id: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor updated_date: ::Time
+      attr_accessor expiration_date: ::Time
+      attr_accessor reseller: ::String
+      attr_accessor dns_sec: ::String
+      attr_accessor status_list: ::Array[::String]
+      attr_accessor dnssec_keys: ::Array[Types::DnssecKey]
+      SENSITIVE: [:admin_contact, :registrant_contact, :tech_contact, :abuse_contact_email, :abuse_contact_phone]
+    end
+
+    class GetDomainSuggestionsRequest
+      attr_accessor domain_name: ::String
+      attr_accessor suggestion_count: ::Integer
+      attr_accessor only_available: bool
+      SENSITIVE: []
+    end
+
+    class GetDomainSuggestionsResponse
+      attr_accessor suggestions_list: ::Array[Types::DomainSuggestion]
+      SENSITIVE: []
+    end
+
+    class GetOperationDetailRequest
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetOperationDetailResponse
+      attr_accessor operation_id: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "ERROR" | "SUCCESSFUL" | "FAILED")
+      attr_accessor message: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor type: ("REGISTER_DOMAIN" | "DELETE_DOMAIN" | "TRANSFER_IN_DOMAIN" | "UPDATE_DOMAIN_CONTACT" | "UPDATE_NAMESERVER" | "CHANGE_PRIVACY_PROTECTION" | "DOMAIN_LOCK" | "ENABLE_AUTORENEW" | "DISABLE_AUTORENEW" | "ADD_DNSSEC" | "REMOVE_DNSSEC" | "EXPIRE_DOMAIN" | "TRANSFER_OUT_DOMAIN" | "CHANGE_DOMAIN_OWNER" | "RENEW_DOMAIN" | "PUSH_DOMAIN" | "INTERNAL_TRANSFER_OUT_DOMAIN" | "INTERNAL_TRANSFER_IN_DOMAIN")
+      attr_accessor submitted_date: ::Time
+      attr_accessor last_updated_date: ::Time
+      attr_accessor status_flag: ("PENDING_ACCEPTANCE" | "PENDING_CUSTOMER_ACTION" | "PENDING_AUTHORIZATION" | "PENDING_PAYMENT_VERIFICATION" | "PENDING_SUPPORT_CASE")
+      SENSITIVE: []
+    end
+
+    class InvalidInput
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListDomainsRequest
+      attr_accessor filter_conditions: ::Array[Types::FilterCondition]
+      attr_accessor sort_condition: Types::SortCondition
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDomainsResponse
+      attr_accessor domains: ::Array[Types::DomainSummary]
+      attr_accessor next_page_marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListOperationsRequest
+      attr_accessor submitted_since: ::Time
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor status: ::Array[("SUBMITTED" | "IN_PROGRESS" | "ERROR" | "SUCCESSFUL" | "FAILED")]
+      attr_accessor type: ::Array[("REGISTER_DOMAIN" | "DELETE_DOMAIN" | "TRANSFER_IN_DOMAIN" | "UPDATE_DOMAIN_CONTACT" | "UPDATE_NAMESERVER" | "CHANGE_PRIVACY_PROTECTION" | "DOMAIN_LOCK" | "ENABLE_AUTORENEW" | "DISABLE_AUTORENEW" | "ADD_DNSSEC" | "REMOVE_DNSSEC" | "EXPIRE_DOMAIN" | "TRANSFER_OUT_DOMAIN" | "CHANGE_DOMAIN_OWNER" | "RENEW_DOMAIN" | "PUSH_DOMAIN" | "INTERNAL_TRANSFER_OUT_DOMAIN" | "INTERNAL_TRANSFER_IN_DOMAIN")]
+      attr_accessor sort_by: ("SubmittedDate")
+      attr_accessor sort_order: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class ListOperationsResponse
+      attr_accessor operations: ::Array[Types::OperationSummary]
+      attr_accessor next_page_marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListPricesRequest
+      attr_accessor tld: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPricesResponse
+      attr_accessor prices: ::Array[Types::DomainPrice]
+      attr_accessor next_page_marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForDomainRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForDomainResponse
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class Nameserver
+      attr_accessor name: ::String
+      attr_accessor glue_ips: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class OperationLimitExceeded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OperationSummary
+      attr_accessor operation_id: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "ERROR" | "SUCCESSFUL" | "FAILED")
+      attr_accessor type: ("REGISTER_DOMAIN" | "DELETE_DOMAIN" | "TRANSFER_IN_DOMAIN" | "UPDATE_DOMAIN_CONTACT" | "UPDATE_NAMESERVER" | "CHANGE_PRIVACY_PROTECTION" | "DOMAIN_LOCK" | "ENABLE_AUTORENEW" | "DISABLE_AUTORENEW" | "ADD_DNSSEC" | "REMOVE_DNSSEC" | "EXPIRE_DOMAIN" | "TRANSFER_OUT_DOMAIN" | "CHANGE_DOMAIN_OWNER" | "RENEW_DOMAIN" | "PUSH_DOMAIN" | "INTERNAL_TRANSFER_OUT_DOMAIN" | "INTERNAL_TRANSFER_IN_DOMAIN")
+      attr_accessor submitted_date: ::Time
+      attr_accessor domain_name: ::String
+      attr_accessor message: ::String
+      attr_accessor status_flag: ("PENDING_ACCEPTANCE" | "PENDING_CUSTOMER_ACTION" | "PENDING_AUTHORIZATION" | "PENDING_PAYMENT_VERIFICATION" | "PENDING_SUPPORT_CASE")
+      attr_accessor last_updated_date: ::Time
+      SENSITIVE: []
+    end
+
+    class PriceWithCurrency
+      attr_accessor price: ::Float
+      attr_accessor currency: ::String
+      SENSITIVE: []
+    end
+
+    class PushDomainRequest
+      attr_accessor domain_name: ::String
+      attr_accessor target: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterDomainRequest
+      attr_accessor domain_name: ::String
+      attr_accessor idn_lang_code: ::String
+      attr_accessor duration_in_years: ::Integer
+      attr_accessor auto_renew: bool
+      attr_accessor admin_contact: Types::ContactDetail
+      attr_accessor registrant_contact: Types::ContactDetail
+      attr_accessor tech_contact: Types::ContactDetail
+      attr_accessor privacy_protect_admin_contact: bool
+      attr_accessor privacy_protect_registrant_contact: bool
+      attr_accessor privacy_protect_tech_contact: bool
+      SENSITIVE: [:admin_contact, :registrant_contact, :tech_contact]
+    end
+
+    class RegisterDomainResponse
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class RejectDomainTransferFromAnotherAwsAccountRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class RejectDomainTransferFromAnotherAwsAccountResponse
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class RenewDomainRequest
+      attr_accessor domain_name: ::String
+      attr_accessor duration_in_years: ::Integer
+      attr_accessor current_expiry_year: ::Integer
+      SENSITIVE: []
+    end
+
+    class RenewDomainResponse
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResendContactReachabilityEmailRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class ResendContactReachabilityEmailResponse
+      attr_accessor domain_name: ::String
+      attr_accessor email_address: ::String
+      attr_accessor is_already_verified: bool
+      SENSITIVE: [:email_address]
+    end
+
+    class ResendOperationAuthorizationRequest
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class RetrieveDomainAuthCodeRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class RetrieveDomainAuthCodeResponse
+      attr_accessor auth_code: ::String
+      SENSITIVE: [:auth_code]
+    end
+
+    class SortCondition
+      attr_accessor name: ("DomainName" | "Expiry")
+      attr_accessor sort_order: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class TLDRulesViolation
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TransferDomainRequest
+      attr_accessor domain_name: ::String
+      attr_accessor idn_lang_code: ::String
+      attr_accessor duration_in_years: ::Integer
+      attr_accessor nameservers: ::Array[Types::Nameserver]
+      attr_accessor auth_code: ::String
+      attr_accessor auto_renew: bool
+      attr_accessor admin_contact: Types::ContactDetail
+      attr_accessor registrant_contact: Types::ContactDetail
+      attr_accessor tech_contact: Types::ContactDetail
+      attr_accessor privacy_protect_admin_contact: bool
+      attr_accessor privacy_protect_registrant_contact: bool
+      attr_accessor privacy_protect_tech_contact: bool
+      SENSITIVE: [:auth_code, :admin_contact, :registrant_contact, :tech_contact]
+    end
+
+    class TransferDomainResponse
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class TransferDomainToAnotherAwsAccountRequest
+      attr_accessor domain_name: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class TransferDomainToAnotherAwsAccountResponse
+      attr_accessor operation_id: ::String
+      attr_accessor password: ::String
+      SENSITIVE: [:password]
+    end
+
+    class UnsupportedTLD
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDomainContactPrivacyRequest
+      attr_accessor domain_name: ::String
+      attr_accessor admin_privacy: bool
+      attr_accessor registrant_privacy: bool
+      attr_accessor tech_privacy: bool
+      SENSITIVE: []
+    end
+
+    class UpdateDomainContactPrivacyResponse
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDomainContactRequest
+      attr_accessor domain_name: ::String
+      attr_accessor admin_contact: Types::ContactDetail
+      attr_accessor registrant_contact: Types::ContactDetail
+      attr_accessor tech_contact: Types::ContactDetail
+      attr_accessor consent: Types::Consent
+      SENSITIVE: [:admin_contact, :registrant_contact, :tech_contact]
+    end
+
+    class UpdateDomainContactResponse
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDomainNameserversRequest
+      attr_accessor domain_name: ::String
+      attr_accessor fi_auth_key: ::String
+      attr_accessor nameservers: ::Array[Types::Nameserver]
+      SENSITIVE: [:fi_auth_key]
+    end
+
+    class UpdateDomainNameserversResponse
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateTagsForDomainRequest
+      attr_accessor domain_name: ::String
+      attr_accessor tags_to_update: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class UpdateTagsForDomainResponse < Aws::EmptyStructure
+    end
+
+    class ViewBillingRequest
+      attr_accessor start: ::Time
+      attr_accessor end: ::Time
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ViewBillingResponse
+      attr_accessor next_page_marker: ::String
+      attr_accessor billing_records: ::Array[Types::BillingRecord]
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,0 +1,989 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EKS
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateAccessPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateAccessPolicyResponse]
+        def cluster_name: () -> ::String
+        def principal_arn: () -> ::String
+        def associated_access_policy: () -> Types::AssociatedAccessPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#associate_access_policy-instance_method
+      def associate_access_policy: (
+                                     cluster_name: ::String,
+                                     principal_arn: ::String,
+                                     policy_arn: ::String,
+                                     access_scope: {
+                                       type: ("cluster" | "namespace")?,
+                                       namespaces: Array[::String]?
+                                     }
+                                   ) -> _AssociateAccessPolicyResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateAccessPolicyResponseSuccess
+
+      interface _AssociateEncryptionConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateEncryptionConfigResponse]
+        def update: () -> Types::Update
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#associate_encryption_config-instance_method
+      def associate_encryption_config: (
+                                         cluster_name: ::String,
+                                         encryption_config: Array[
+                                           {
+                                             resources: Array[::String]?,
+                                             provider: {
+                                               key_arn: ::String?
+                                             }?
+                                           },
+                                         ],
+                                         ?client_request_token: ::String
+                                       ) -> _AssociateEncryptionConfigResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateEncryptionConfigResponseSuccess
+
+      interface _AssociateIdentityProviderConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateIdentityProviderConfigResponse]
+        def update: () -> Types::Update
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#associate_identity_provider_config-instance_method
+      def associate_identity_provider_config: (
+                                                cluster_name: ::String,
+                                                oidc: {
+                                                  identity_provider_config_name: ::String,
+                                                  issuer_url: ::String,
+                                                  client_id: ::String,
+                                                  username_claim: ::String?,
+                                                  username_prefix: ::String?,
+                                                  groups_claim: ::String?,
+                                                  groups_prefix: ::String?,
+                                                  required_claims: Hash[::String, ::String]?
+                                                },
+                                                ?tags: Hash[::String, ::String],
+                                                ?client_request_token: ::String
+                                              ) -> _AssociateIdentityProviderConfigResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateIdentityProviderConfigResponseSuccess
+
+      interface _CreateAccessEntryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccessEntryResponse]
+        def access_entry: () -> Types::AccessEntry
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#create_access_entry-instance_method
+      def create_access_entry: (
+                                 cluster_name: ::String,
+                                 principal_arn: ::String,
+                                 ?kubernetes_groups: Array[::String],
+                                 ?tags: Hash[::String, ::String],
+                                 ?client_request_token: ::String,
+                                 ?username: ::String,
+                                 ?type: ::String
+                               ) -> _CreateAccessEntryResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccessEntryResponseSuccess
+
+      interface _CreateAddonResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAddonResponse]
+        def addon: () -> Types::Addon
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#create_addon-instance_method
+      def create_addon: (
+                          cluster_name: ::String,
+                          addon_name: ::String,
+                          ?addon_version: ::String,
+                          ?service_account_role_arn: ::String,
+                          ?resolve_conflicts: ("OVERWRITE" | "NONE" | "PRESERVE"),
+                          ?client_request_token: ::String,
+                          ?tags: Hash[::String, ::String],
+                          ?configuration_values: ::String
+                        ) -> _CreateAddonResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAddonResponseSuccess
+
+      interface _CreateClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateClusterResponse]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#create_cluster-instance_method
+      def create_cluster: (
+                            name: ::String,
+                            ?version: ::String,
+                            role_arn: ::String,
+                            resources_vpc_config: {
+                              subnet_ids: Array[::String]?,
+                              security_group_ids: Array[::String]?,
+                              endpoint_public_access: bool?,
+                              endpoint_private_access: bool?,
+                              public_access_cidrs: Array[::String]?
+                            },
+                            ?kubernetes_network_config: {
+                              service_ipv_4_cidr: ::String?,
+                              ip_family: ("ipv4" | "ipv6")?
+                            },
+                            ?logging: {
+                              cluster_logging: Array[
+                                {
+                                  types: Array[("api" | "audit" | "authenticator" | "controllerManager" | "scheduler")]?,
+                                  enabled: bool?
+                                },
+                              ]?
+                            },
+                            ?client_request_token: ::String,
+                            ?tags: Hash[::String, ::String],
+                            ?encryption_config: Array[
+                              {
+                                resources: Array[::String]?,
+                                provider: {
+                                  key_arn: ::String?
+                                }?
+                              },
+                            ],
+                            ?outpost_config: {
+                              outpost_arns: Array[::String],
+                              control_plane_instance_type: ::String,
+                              control_plane_placement: {
+                                group_name: ::String?
+                              }?
+                            },
+                            ?access_config: {
+                              bootstrap_cluster_creator_admin_permissions: bool?,
+                              authentication_mode: ("API" | "API_AND_CONFIG_MAP" | "CONFIG_MAP")?
+                            }
+                          ) -> _CreateClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
+
+      interface _CreateEksAnywhereSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEksAnywhereSubscriptionResponse]
+        def subscription: () -> Types::EksAnywhereSubscription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#create_eks_anywhere_subscription-instance_method
+      def create_eks_anywhere_subscription: (
+                                              name: ::String,
+                                              term: {
+                                                duration: ::Integer?,
+                                                unit: ("MONTHS")?
+                                              },
+                                              ?license_quantity: ::Integer,
+                                              ?license_type: ("Cluster"),
+                                              ?auto_renew: bool,
+                                              ?client_request_token: ::String,
+                                              ?tags: Hash[::String, ::String]
+                                            ) -> _CreateEksAnywhereSubscriptionResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEksAnywhereSubscriptionResponseSuccess
+
+      interface _CreateFargateProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFargateProfileResponse]
+        def fargate_profile: () -> Types::FargateProfile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#create_fargate_profile-instance_method
+      def create_fargate_profile: (
+                                    fargate_profile_name: ::String,
+                                    cluster_name: ::String,
+                                    pod_execution_role_arn: ::String,
+                                    ?subnets: Array[::String],
+                                    ?selectors: Array[
+                                      {
+                                        namespace: ::String?,
+                                        labels: Hash[::String, ::String]?
+                                      },
+                                    ],
+                                    ?client_request_token: ::String,
+                                    ?tags: Hash[::String, ::String]
+                                  ) -> _CreateFargateProfileResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFargateProfileResponseSuccess
+
+      interface _CreateNodegroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateNodegroupResponse]
+        def nodegroup: () -> Types::Nodegroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#create_nodegroup-instance_method
+      def create_nodegroup: (
+                              cluster_name: ::String,
+                              nodegroup_name: ::String,
+                              ?scaling_config: {
+                                min_size: ::Integer?,
+                                max_size: ::Integer?,
+                                desired_size: ::Integer?
+                              },
+                              ?disk_size: ::Integer,
+                              subnets: Array[::String],
+                              ?instance_types: Array[::String],
+                              ?ami_type: ("AL2_x86_64" | "AL2_x86_64_GPU" | "AL2_ARM_64" | "CUSTOM" | "BOTTLEROCKET_ARM_64" | "BOTTLEROCKET_x86_64" | "BOTTLEROCKET_ARM_64_NVIDIA" | "BOTTLEROCKET_x86_64_NVIDIA" | "WINDOWS_CORE_2019_x86_64" | "WINDOWS_FULL_2019_x86_64" | "WINDOWS_CORE_2022_x86_64" | "WINDOWS_FULL_2022_x86_64"),
+                              ?remote_access: {
+                                ec2_ssh_key: ::String?,
+                                source_security_groups: Array[::String]?
+                              },
+                              node_role: ::String,
+                              ?labels: Hash[::String, ::String],
+                              ?taints: Array[
+                                {
+                                  key: ::String?,
+                                  value: ::String?,
+                                  effect: ("NO_SCHEDULE" | "NO_EXECUTE" | "PREFER_NO_SCHEDULE")?
+                                },
+                              ],
+                              ?tags: Hash[::String, ::String],
+                              ?client_request_token: ::String,
+                              ?launch_template: {
+                                name: ::String?,
+                                version: ::String?,
+                                id: ::String?
+                              },
+                              ?update_config: {
+                                max_unavailable: ::Integer?,
+                                max_unavailable_percentage: ::Integer?
+                              },
+                              ?capacity_type: ("ON_DEMAND" | "SPOT"),
+                              ?version: ::String,
+                              ?release_version: ::String
+                            ) -> _CreateNodegroupResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNodegroupResponseSuccess
+
+      interface _CreatePodIdentityAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePodIdentityAssociationResponse]
+        def association: () -> Types::PodIdentityAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#create_pod_identity_association-instance_method
+      def create_pod_identity_association: (
+                                             cluster_name: ::String,
+                                             namespace: ::String,
+                                             service_account: ::String,
+                                             role_arn: ::String,
+                                             ?client_request_token: ::String,
+                                             ?tags: Hash[::String, ::String]
+                                           ) -> _CreatePodIdentityAssociationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePodIdentityAssociationResponseSuccess
+
+      interface _DeleteAccessEntryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAccessEntryResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#delete_access_entry-instance_method
+      def delete_access_entry: (
+                                 cluster_name: ::String,
+                                 principal_arn: ::String
+                               ) -> _DeleteAccessEntryResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAccessEntryResponseSuccess
+
+      interface _DeleteAddonResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAddonResponse]
+        def addon: () -> Types::Addon
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#delete_addon-instance_method
+      def delete_addon: (
+                          cluster_name: ::String,
+                          addon_name: ::String,
+                          ?preserve: bool
+                        ) -> _DeleteAddonResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAddonResponseSuccess
+
+      interface _DeleteClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteClusterResponse]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#delete_cluster-instance_method
+      def delete_cluster: (
+                            name: ::String
+                          ) -> _DeleteClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteClusterResponseSuccess
+
+      interface _DeleteEksAnywhereSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEksAnywhereSubscriptionResponse]
+        def subscription: () -> Types::EksAnywhereSubscription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#delete_eks_anywhere_subscription-instance_method
+      def delete_eks_anywhere_subscription: (
+                                              id: ::String
+                                            ) -> _DeleteEksAnywhereSubscriptionResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEksAnywhereSubscriptionResponseSuccess
+
+      interface _DeleteFargateProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFargateProfileResponse]
+        def fargate_profile: () -> Types::FargateProfile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#delete_fargate_profile-instance_method
+      def delete_fargate_profile: (
+                                    cluster_name: ::String,
+                                    fargate_profile_name: ::String
+                                  ) -> _DeleteFargateProfileResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFargateProfileResponseSuccess
+
+      interface _DeleteNodegroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteNodegroupResponse]
+        def nodegroup: () -> Types::Nodegroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#delete_nodegroup-instance_method
+      def delete_nodegroup: (
+                              cluster_name: ::String,
+                              nodegroup_name: ::String
+                            ) -> _DeleteNodegroupResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteNodegroupResponseSuccess
+
+      interface _DeletePodIdentityAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePodIdentityAssociationResponse]
+        def association: () -> Types::PodIdentityAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#delete_pod_identity_association-instance_method
+      def delete_pod_identity_association: (
+                                             cluster_name: ::String,
+                                             association_id: ::String
+                                           ) -> _DeletePodIdentityAssociationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePodIdentityAssociationResponseSuccess
+
+      interface _DeregisterClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterClusterResponse]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#deregister_cluster-instance_method
+      def deregister_cluster: (
+                                name: ::String
+                              ) -> _DeregisterClusterResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterClusterResponseSuccess
+
+      interface _DescribeAccessEntryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAccessEntryResponse]
+        def access_entry: () -> Types::AccessEntry
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#describe_access_entry-instance_method
+      def describe_access_entry: (
+                                   cluster_name: ::String,
+                                   principal_arn: ::String
+                                 ) -> _DescribeAccessEntryResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccessEntryResponseSuccess
+
+      interface _DescribeAddonResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAddonResponse]
+        def addon: () -> Types::Addon
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#describe_addon-instance_method
+      def describe_addon: (
+                            cluster_name: ::String,
+                            addon_name: ::String
+                          ) -> _DescribeAddonResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAddonResponseSuccess
+
+      interface _DescribeAddonConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAddonConfigurationResponse]
+        def addon_name: () -> ::String
+        def addon_version: () -> ::String
+        def configuration_schema: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#describe_addon_configuration-instance_method
+      def describe_addon_configuration: (
+                                          addon_name: ::String,
+                                          addon_version: ::String
+                                        ) -> _DescribeAddonConfigurationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAddonConfigurationResponseSuccess
+
+      interface _DescribeAddonVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAddonVersionsResponse]
+        def addons: () -> ::Array[Types::AddonInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#describe_addon_versions-instance_method
+      def describe_addon_versions: (
+                                     ?kubernetes_version: ::String,
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String,
+                                     ?addon_name: ::String,
+                                     ?types: Array[::String],
+                                     ?publishers: Array[::String],
+                                     ?owners: Array[::String]
+                                   ) -> _DescribeAddonVersionsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAddonVersionsResponseSuccess
+
+      interface _DescribeClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClusterResponse]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#describe_cluster-instance_method
+      def describe_cluster: (
+                              name: ::String
+                            ) -> _DescribeClusterResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterResponseSuccess
+
+      interface _DescribeEksAnywhereSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEksAnywhereSubscriptionResponse]
+        def subscription: () -> Types::EksAnywhereSubscription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#describe_eks_anywhere_subscription-instance_method
+      def describe_eks_anywhere_subscription: (
+                                                id: ::String
+                                              ) -> _DescribeEksAnywhereSubscriptionResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEksAnywhereSubscriptionResponseSuccess
+
+      interface _DescribeFargateProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFargateProfileResponse]
+        def fargate_profile: () -> Types::FargateProfile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#describe_fargate_profile-instance_method
+      def describe_fargate_profile: (
+                                      cluster_name: ::String,
+                                      fargate_profile_name: ::String
+                                    ) -> _DescribeFargateProfileResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFargateProfileResponseSuccess
+
+      interface _DescribeIdentityProviderConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeIdentityProviderConfigResponse]
+        def identity_provider_config: () -> Types::IdentityProviderConfigResponse
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#describe_identity_provider_config-instance_method
+      def describe_identity_provider_config: (
+                                               cluster_name: ::String,
+                                               identity_provider_config: {
+                                                 type: ::String,
+                                                 name: ::String
+                                               }
+                                             ) -> _DescribeIdentityProviderConfigResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeIdentityProviderConfigResponseSuccess
+
+      interface _DescribeInsightResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInsightResponse]
+        def insight: () -> Types::Insight
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#describe_insight-instance_method
+      def describe_insight: (
+                              cluster_name: ::String,
+                              id: ::String
+                            ) -> _DescribeInsightResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInsightResponseSuccess
+
+      interface _DescribeNodegroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeNodegroupResponse]
+        def nodegroup: () -> Types::Nodegroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#describe_nodegroup-instance_method
+      def describe_nodegroup: (
+                                cluster_name: ::String,
+                                nodegroup_name: ::String
+                              ) -> _DescribeNodegroupResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeNodegroupResponseSuccess
+
+      interface _DescribePodIdentityAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePodIdentityAssociationResponse]
+        def association: () -> Types::PodIdentityAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#describe_pod_identity_association-instance_method
+      def describe_pod_identity_association: (
+                                               cluster_name: ::String,
+                                               association_id: ::String
+                                             ) -> _DescribePodIdentityAssociationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePodIdentityAssociationResponseSuccess
+
+      interface _DescribeUpdateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeUpdateResponse]
+        def update: () -> Types::Update
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#describe_update-instance_method
+      def describe_update: (
+                             name: ::String,
+                             update_id: ::String,
+                             ?nodegroup_name: ::String,
+                             ?addon_name: ::String
+                           ) -> _DescribeUpdateResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeUpdateResponseSuccess
+
+      interface _DisassociateAccessPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateAccessPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#disassociate_access_policy-instance_method
+      def disassociate_access_policy: (
+                                        cluster_name: ::String,
+                                        principal_arn: ::String,
+                                        policy_arn: ::String
+                                      ) -> _DisassociateAccessPolicyResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateAccessPolicyResponseSuccess
+
+      interface _DisassociateIdentityProviderConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateIdentityProviderConfigResponse]
+        def update: () -> Types::Update
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#disassociate_identity_provider_config-instance_method
+      def disassociate_identity_provider_config: (
+                                                   cluster_name: ::String,
+                                                   identity_provider_config: {
+                                                     type: ::String,
+                                                     name: ::String
+                                                   },
+                                                   ?client_request_token: ::String
+                                                 ) -> _DisassociateIdentityProviderConfigResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateIdentityProviderConfigResponseSuccess
+
+      interface _ListAccessEntriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccessEntriesResponse]
+        def access_entries: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#list_access_entries-instance_method
+      def list_access_entries: (
+                                 cluster_name: ::String,
+                                 ?associated_policy_arn: ::String,
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListAccessEntriesResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccessEntriesResponseSuccess
+
+      interface _ListAccessPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccessPoliciesResponse]
+        def access_policies: () -> ::Array[Types::AccessPolicy]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#list_access_policies-instance_method
+      def list_access_policies: (
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListAccessPoliciesResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccessPoliciesResponseSuccess
+
+      interface _ListAddonsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAddonsResponse]
+        def addons: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#list_addons-instance_method
+      def list_addons: (
+                         cluster_name: ::String,
+                         ?max_results: ::Integer,
+                         ?next_token: ::String
+                       ) -> _ListAddonsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAddonsResponseSuccess
+
+      interface _ListAssociatedAccessPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssociatedAccessPoliciesResponse]
+        def cluster_name: () -> ::String
+        def principal_arn: () -> ::String
+        def next_token: () -> ::String
+        def associated_access_policies: () -> ::Array[Types::AssociatedAccessPolicy]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#list_associated_access_policies-instance_method
+      def list_associated_access_policies: (
+                                             cluster_name: ::String,
+                                             principal_arn: ::String,
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String
+                                           ) -> _ListAssociatedAccessPoliciesResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssociatedAccessPoliciesResponseSuccess
+
+      interface _ListClustersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListClustersResponse]
+        def clusters: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#list_clusters-instance_method
+      def list_clusters: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String,
+                           ?include: Array[::String]
+                         ) -> _ListClustersResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClustersResponseSuccess
+
+      interface _ListEksAnywhereSubscriptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEksAnywhereSubscriptionsResponse]
+        def subscriptions: () -> ::Array[Types::EksAnywhereSubscription]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#list_eks_anywhere_subscriptions-instance_method
+      def list_eks_anywhere_subscriptions: (
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String,
+                                             ?include_status: Array[("CREATING" | "ACTIVE" | "UPDATING" | "EXPIRING" | "EXPIRED" | "DELETING")]
+                                           ) -> _ListEksAnywhereSubscriptionsResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEksAnywhereSubscriptionsResponseSuccess
+
+      interface _ListFargateProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFargateProfilesResponse]
+        def fargate_profile_names: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#list_fargate_profiles-instance_method
+      def list_fargate_profiles: (
+                                   cluster_name: ::String,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListFargateProfilesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFargateProfilesResponseSuccess
+
+      interface _ListIdentityProviderConfigsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIdentityProviderConfigsResponse]
+        def identity_provider_configs: () -> ::Array[Types::IdentityProviderConfig]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#list_identity_provider_configs-instance_method
+      def list_identity_provider_configs: (
+                                            cluster_name: ::String,
+                                            ?max_results: ::Integer,
+                                            ?next_token: ::String
+                                          ) -> _ListIdentityProviderConfigsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIdentityProviderConfigsResponseSuccess
+
+      interface _ListInsightsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInsightsResponse]
+        def insights: () -> ::Array[Types::InsightSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#list_insights-instance_method
+      def list_insights: (
+                           cluster_name: ::String,
+                           ?filter: {
+                             categories: Array[("UPGRADE_READINESS")]?,
+                             kubernetes_versions: Array[::String]?,
+                             statuses: Array[("PASSING" | "WARNING" | "ERROR" | "UNKNOWN")]?
+                           },
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListInsightsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInsightsResponseSuccess
+
+      interface _ListNodegroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNodegroupsResponse]
+        def nodegroups: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#list_nodegroups-instance_method
+      def list_nodegroups: (
+                             cluster_name: ::String,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListNodegroupsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNodegroupsResponseSuccess
+
+      interface _ListPodIdentityAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPodIdentityAssociationsResponse]
+        def associations: () -> ::Array[Types::PodIdentityAssociationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#list_pod_identity_associations-instance_method
+      def list_pod_identity_associations: (
+                                            cluster_name: ::String,
+                                            ?namespace: ::String,
+                                            ?service_account: ::String,
+                                            ?max_results: ::Integer,
+                                            ?next_token: ::String
+                                          ) -> _ListPodIdentityAssociationsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPodIdentityAssociationsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListUpdatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListUpdatesResponse]
+        def update_ids: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#list_updates-instance_method
+      def list_updates: (
+                          name: ::String,
+                          ?nodegroup_name: ::String,
+                          ?addon_name: ::String,
+                          ?next_token: ::String,
+                          ?max_results: ::Integer
+                        ) -> _ListUpdatesResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUpdatesResponseSuccess
+
+      interface _RegisterClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterClusterResponse]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#register_cluster-instance_method
+      def register_cluster: (
+                              name: ::String,
+                              connector_config: {
+                                role_arn: ::String,
+                                provider: ("EKS_ANYWHERE" | "ANTHOS" | "GKE" | "AKS" | "OPENSHIFT" | "TANZU" | "RANCHER" | "EC2" | "OTHER")
+                              },
+                              ?client_request_token: ::String,
+                              ?tags: Hash[::String, ::String]
+                            ) -> _RegisterClusterResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterClusterResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAccessEntryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAccessEntryResponse]
+        def access_entry: () -> Types::AccessEntry
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#update_access_entry-instance_method
+      def update_access_entry: (
+                                 cluster_name: ::String,
+                                 principal_arn: ::String,
+                                 ?kubernetes_groups: Array[::String],
+                                 ?client_request_token: ::String,
+                                 ?username: ::String
+                               ) -> _UpdateAccessEntryResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccessEntryResponseSuccess
+
+      interface _UpdateAddonResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAddonResponse]
+        def update: () -> Types::Update
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#update_addon-instance_method
+      def update_addon: (
+                          cluster_name: ::String,
+                          addon_name: ::String,
+                          ?addon_version: ::String,
+                          ?service_account_role_arn: ::String,
+                          ?resolve_conflicts: ("OVERWRITE" | "NONE" | "PRESERVE"),
+                          ?client_request_token: ::String,
+                          ?configuration_values: ::String
+                        ) -> _UpdateAddonResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAddonResponseSuccess
+
+      interface _UpdateClusterConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateClusterConfigResponse]
+        def update: () -> Types::Update
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#update_cluster_config-instance_method
+      def update_cluster_config: (
+                                   name: ::String,
+                                   ?resources_vpc_config: {
+                                     subnet_ids: Array[::String]?,
+                                     security_group_ids: Array[::String]?,
+                                     endpoint_public_access: bool?,
+                                     endpoint_private_access: bool?,
+                                     public_access_cidrs: Array[::String]?
+                                   },
+                                   ?logging: {
+                                     cluster_logging: Array[
+                                       {
+                                         types: Array[("api" | "audit" | "authenticator" | "controllerManager" | "scheduler")]?,
+                                         enabled: bool?
+                                       },
+                                     ]?
+                                   },
+                                   ?client_request_token: ::String,
+                                   ?access_config: {
+                                     authentication_mode: ("API" | "API_AND_CONFIG_MAP" | "CONFIG_MAP")?
+                                   }
+                                 ) -> _UpdateClusterConfigResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterConfigResponseSuccess
+
+      interface _UpdateClusterVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateClusterVersionResponse]
+        def update: () -> Types::Update
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#update_cluster_version-instance_method
+      def update_cluster_version: (
+                                    name: ::String,
+                                    version: ::String,
+                                    ?client_request_token: ::String
+                                  ) -> _UpdateClusterVersionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterVersionResponseSuccess
+
+      interface _UpdateEksAnywhereSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEksAnywhereSubscriptionResponse]
+        def subscription: () -> Types::EksAnywhereSubscription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#update_eks_anywhere_subscription-instance_method
+      def update_eks_anywhere_subscription: (
+                                              id: ::String,
+                                              auto_renew: bool,
+                                              ?client_request_token: ::String
+                                            ) -> _UpdateEksAnywhereSubscriptionResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEksAnywhereSubscriptionResponseSuccess
+
+      interface _UpdateNodegroupConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNodegroupConfigResponse]
+        def update: () -> Types::Update
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#update_nodegroup_config-instance_method
+      def update_nodegroup_config: (
+                                     cluster_name: ::String,
+                                     nodegroup_name: ::String,
+                                     ?labels: {
+                                       add_or_update_labels: Hash[::String, ::String]?,
+                                       remove_labels: Array[::String]?
+                                     },
+                                     ?taints: {
+                                       add_or_update_taints: Array[
+                                         {
+                                           key: ::String?,
+                                           value: ::String?,
+                                           effect: ("NO_SCHEDULE" | "NO_EXECUTE" | "PREFER_NO_SCHEDULE")?
+                                         },
+                                       ]?,
+                                       remove_taints: Array[
+                                         {
+                                           key: ::String?,
+                                           value: ::String?,
+                                           effect: ("NO_SCHEDULE" | "NO_EXECUTE" | "PREFER_NO_SCHEDULE")?
+                                         },
+                                       ]?
+                                     },
+                                     ?scaling_config: {
+                                       min_size: ::Integer?,
+                                       max_size: ::Integer?,
+                                       desired_size: ::Integer?
+                                     },
+                                     ?update_config: {
+                                       max_unavailable: ::Integer?,
+                                       max_unavailable_percentage: ::Integer?
+                                     },
+                                     ?client_request_token: ::String
+                                   ) -> _UpdateNodegroupConfigResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNodegroupConfigResponseSuccess
+
+      interface _UpdateNodegroupVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNodegroupVersionResponse]
+        def update: () -> Types::Update
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#update_nodegroup_version-instance_method
+      def update_nodegroup_version: (
+                                      cluster_name: ::String,
+                                      nodegroup_name: ::String,
+                                      ?version: ::String,
+                                      ?release_version: ::String,
+                                      ?launch_template: {
+                                        name: ::String?,
+                                        version: ::String?,
+                                        id: ::String?
+                                      },
+                                      ?force: bool,
+                                      ?client_request_token: ::String
+                                    ) -> _UpdateNodegroupVersionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNodegroupVersionResponseSuccess
+
+      interface _UpdatePodIdentityAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePodIdentityAssociationResponse]
+        def association: () -> Types::PodIdentityAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#update_pod_identity_association-instance_method
+      def update_pod_identity_association: (
+                                             cluster_name: ::String,
+                                             association_id: ::String,
+                                             ?role_arn: ::String,
+                                             ?client_request_token: ::String
+                                           ) -> _UpdatePodIdentityAssociationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePodIdentityAssociationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#wait_until-instance_method
+      def wait_until: (:addon_active waiter_name, 
+                    cluster_name: ::String,
+                    addon_name: ::String
+                  ) -> Client::_DescribeAddonResponseSuccess
+                    | (:addon_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeAddonResponseSuccess
+                    | (:addon_deleted waiter_name, 
+                    cluster_name: ::String,
+                    addon_name: ::String
+                  ) -> Client::_DescribeAddonResponseSuccess
+                    | (:addon_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeAddonResponseSuccess
+                    | (:cluster_active waiter_name, 
+                    name: ::String
+                  ) -> Client::_DescribeClusterResponseSuccess
+                    | (:cluster_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeClusterResponseSuccess
+                    | (:cluster_deleted waiter_name, 
+                    name: ::String
+                  ) -> Client::_DescribeClusterResponseSuccess
+                    | (:cluster_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeClusterResponseSuccess
+                    | (:fargate_profile_active waiter_name, 
+                    cluster_name: ::String,
+                    fargate_profile_name: ::String
+                  ) -> Client::_DescribeFargateProfileResponseSuccess
+                    | (:fargate_profile_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeFargateProfileResponseSuccess
+                    | (:fargate_profile_deleted waiter_name, 
+                    cluster_name: ::String,
+                    fargate_profile_name: ::String
+                  ) -> Client::_DescribeFargateProfileResponseSuccess
+                    | (:fargate_profile_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeFargateProfileResponseSuccess
+                    | (:nodegroup_active waiter_name, 
+                    cluster_name: ::String,
+                    nodegroup_name: ::String
+                  ) -> Client::_DescribeNodegroupResponseSuccess
+                    | (:nodegroup_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeNodegroupResponseSuccess
+                    | (:nodegroup_deleted waiter_name, 
+                    cluster_name: ::String,
+                    nodegroup_name: ::String
+                  ) -> Client::_DescribeNodegroupResponseSuccess
+                    | (:nodegroup_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeNodegroupResponseSuccess
+    end
+  end
+end
+

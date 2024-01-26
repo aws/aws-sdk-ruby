@@ -1,0 +1,976 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MediaTailor
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _ConfigureLogsForChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConfigureLogsForChannelResponse]
+        def channel_name: () -> ::String
+        def log_types: () -> ::Array[("AS_RUN")]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#configure_logs_for_channel-instance_method
+      def configure_logs_for_channel: (
+                                        channel_name: ::String,
+                                        log_types: Array[("AS_RUN")]
+                                      ) -> _ConfigureLogsForChannelResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConfigureLogsForChannelResponseSuccess
+
+      interface _ConfigureLogsForPlaybackConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConfigureLogsForPlaybackConfigurationResponse]
+        def percent_enabled: () -> ::Integer
+        def playback_configuration_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#configure_logs_for_playback_configuration-instance_method
+      def configure_logs_for_playback_configuration: (
+                                                       percent_enabled: ::Integer,
+                                                       playback_configuration_name: ::String
+                                                     ) -> _ConfigureLogsForPlaybackConfigurationResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConfigureLogsForPlaybackConfigurationResponseSuccess
+
+      interface _CreateChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateChannelResponse]
+        def arn: () -> ::String
+        def channel_name: () -> ::String
+        def channel_state: () -> ("RUNNING" | "STOPPED")
+        def creation_time: () -> ::Time
+        def filler_slate: () -> Types::SlateSource
+        def last_modified_time: () -> ::Time
+        def outputs: () -> ::Array[Types::ResponseOutputItem]
+        def playback_mode: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def tier: () -> ::String
+        def time_shift_configuration: () -> Types::TimeShiftConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#create_channel-instance_method
+      def create_channel: (
+                            channel_name: ::String,
+                            ?filler_slate: {
+                              source_location_name: ::String?,
+                              vod_source_name: ::String?
+                            },
+                            outputs: Array[
+                              {
+                                dash_playlist_settings: {
+                                  manifest_window_seconds: ::Integer?,
+                                  min_buffer_time_seconds: ::Integer?,
+                                  min_update_period_seconds: ::Integer?,
+                                  suggested_presentation_delay_seconds: ::Integer?
+                                }?,
+                                hls_playlist_settings: {
+                                  ad_markup_type: Array[("DATERANGE" | "SCTE35_ENHANCED")]?,
+                                  manifest_window_seconds: ::Integer?
+                                }?,
+                                manifest_name: ::String,
+                                source_group: ::String
+                              },
+                            ],
+                            playback_mode: ("LOOP" | "LINEAR"),
+                            ?tags: Hash[::String, ::String],
+                            ?tier: ("BASIC" | "STANDARD"),
+                            ?time_shift_configuration: {
+                              max_time_delay_seconds: ::Integer
+                            }
+                          ) -> _CreateChannelResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelResponseSuccess
+
+      interface _CreateLiveSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLiveSourceResponse]
+        def arn: () -> ::String
+        def creation_time: () -> ::Time
+        def http_package_configurations: () -> ::Array[Types::HttpPackageConfiguration]
+        def last_modified_time: () -> ::Time
+        def live_source_name: () -> ::String
+        def source_location_name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#create_live_source-instance_method
+      def create_live_source: (
+                                http_package_configurations: Array[
+                                  {
+                                    path: ::String,
+                                    source_group: ::String,
+                                    type: ("DASH" | "HLS")
+                                  },
+                                ],
+                                live_source_name: ::String,
+                                source_location_name: ::String,
+                                ?tags: Hash[::String, ::String]
+                              ) -> _CreateLiveSourceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLiveSourceResponseSuccess
+
+      interface _CreatePrefetchScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePrefetchScheduleResponse]
+        def arn: () -> ::String
+        def consumption: () -> Types::PrefetchConsumption
+        def name: () -> ::String
+        def playback_configuration_name: () -> ::String
+        def retrieval: () -> Types::PrefetchRetrieval
+        def stream_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#create_prefetch_schedule-instance_method
+      def create_prefetch_schedule: (
+                                      consumption: {
+                                        avail_matching_criteria: Array[
+                                          {
+                                            dynamic_variable: ::String,
+                                            operator: ("EQUALS")
+                                          },
+                                        ]?,
+                                        end_time: ::Time,
+                                        start_time: ::Time?
+                                      },
+                                      name: ::String,
+                                      playback_configuration_name: ::String,
+                                      retrieval: {
+                                        dynamic_variables: Hash[::String, ::String]?,
+                                        end_time: ::Time,
+                                        start_time: ::Time?
+                                      },
+                                      ?stream_id: ::String
+                                    ) -> _CreatePrefetchScheduleResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePrefetchScheduleResponseSuccess
+
+      interface _CreateProgramResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProgramResponse]
+        def ad_breaks: () -> ::Array[Types::AdBreak]
+        def arn: () -> ::String
+        def channel_name: () -> ::String
+        def clip_range: () -> Types::ClipRange
+        def creation_time: () -> ::Time
+        def duration_millis: () -> ::Integer
+        def live_source_name: () -> ::String
+        def program_name: () -> ::String
+        def scheduled_start_time: () -> ::Time
+        def source_location_name: () -> ::String
+        def vod_source_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#create_program-instance_method
+      def create_program: (
+                            ?ad_breaks: Array[
+                              {
+                                ad_break_metadata: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String
+                                  },
+                                ]?,
+                                message_type: ("SPLICE_INSERT" | "TIME_SIGNAL")?,
+                                offset_millis: ::Integer?,
+                                slate: {
+                                  source_location_name: ::String?,
+                                  vod_source_name: ::String?
+                                }?,
+                                splice_insert_message: {
+                                  avail_num: ::Integer?,
+                                  avails_expected: ::Integer?,
+                                  splice_event_id: ::Integer?,
+                                  unique_program_id: ::Integer?
+                                }?,
+                                time_signal_message: {
+                                  segmentation_descriptors: Array[
+                                    {
+                                      segment_num: ::Integer?,
+                                      segmentation_event_id: ::Integer?,
+                                      segmentation_type_id: ::Integer?,
+                                      segmentation_upid: ::String?,
+                                      segmentation_upid_type: ::Integer?,
+                                      segments_expected: ::Integer?,
+                                      sub_segment_num: ::Integer?,
+                                      sub_segments_expected: ::Integer?
+                                    },
+                                  ]?
+                                }?
+                              },
+                            ],
+                            channel_name: ::String,
+                            ?live_source_name: ::String,
+                            program_name: ::String,
+                            schedule_configuration: {
+                              clip_range: {
+                                end_offset_millis: ::Integer
+                              }?,
+                              transition: {
+                                duration_millis: ::Integer?,
+                                relative_position: ("BEFORE_PROGRAM" | "AFTER_PROGRAM"),
+                                relative_program: ::String?,
+                                scheduled_start_time_millis: ::Integer?,
+                                type: ::String
+                              }
+                            },
+                            source_location_name: ::String,
+                            ?vod_source_name: ::String
+                          ) -> _CreateProgramResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProgramResponseSuccess
+
+      interface _CreateSourceLocationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSourceLocationResponse]
+        def access_configuration: () -> Types::AccessConfiguration
+        def arn: () -> ::String
+        def creation_time: () -> ::Time
+        def default_segment_delivery_configuration: () -> Types::DefaultSegmentDeliveryConfiguration
+        def http_configuration: () -> Types::HttpConfiguration
+        def last_modified_time: () -> ::Time
+        def segment_delivery_configurations: () -> ::Array[Types::SegmentDeliveryConfiguration]
+        def source_location_name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#create_source_location-instance_method
+      def create_source_location: (
+                                    ?access_configuration: {
+                                      access_type: ("S3_SIGV4" | "SECRETS_MANAGER_ACCESS_TOKEN" | "AUTODETECT_SIGV4")?,
+                                      secrets_manager_access_token_configuration: {
+                                        header_name: ::String?,
+                                        secret_arn: ::String?,
+                                        secret_string_key: ::String?
+                                      }?
+                                    },
+                                    ?default_segment_delivery_configuration: {
+                                      base_url: ::String?
+                                    },
+                                    http_configuration: {
+                                      base_url: ::String
+                                    },
+                                    ?segment_delivery_configurations: Array[
+                                      {
+                                        base_url: ::String?,
+                                        name: ::String?
+                                      },
+                                    ],
+                                    source_location_name: ::String,
+                                    ?tags: Hash[::String, ::String]
+                                  ) -> _CreateSourceLocationResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSourceLocationResponseSuccess
+
+      interface _CreateVodSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVodSourceResponse]
+        def arn: () -> ::String
+        def creation_time: () -> ::Time
+        def http_package_configurations: () -> ::Array[Types::HttpPackageConfiguration]
+        def last_modified_time: () -> ::Time
+        def source_location_name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def vod_source_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#create_vod_source-instance_method
+      def create_vod_source: (
+                               http_package_configurations: Array[
+                                 {
+                                   path: ::String,
+                                   source_group: ::String,
+                                   type: ("DASH" | "HLS")
+                                 },
+                               ],
+                               source_location_name: ::String,
+                               ?tags: Hash[::String, ::String],
+                               vod_source_name: ::String
+                             ) -> _CreateVodSourceResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVodSourceResponseSuccess
+
+      interface _DeleteChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteChannelResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#delete_channel-instance_method
+      def delete_channel: (
+                            channel_name: ::String
+                          ) -> _DeleteChannelResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteChannelResponseSuccess
+
+      interface _DeleteChannelPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteChannelPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#delete_channel_policy-instance_method
+      def delete_channel_policy: (
+                                   channel_name: ::String
+                                 ) -> _DeleteChannelPolicyResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteChannelPolicyResponseSuccess
+
+      interface _DeleteLiveSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLiveSourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#delete_live_source-instance_method
+      def delete_live_source: (
+                                live_source_name: ::String,
+                                source_location_name: ::String
+                              ) -> _DeleteLiveSourceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLiveSourceResponseSuccess
+
+      interface _DeletePlaybackConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePlaybackConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#delete_playback_configuration-instance_method
+      def delete_playback_configuration: (
+                                           name: ::String
+                                         ) -> _DeletePlaybackConfigurationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePlaybackConfigurationResponseSuccess
+
+      interface _DeletePrefetchScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePrefetchScheduleResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#delete_prefetch_schedule-instance_method
+      def delete_prefetch_schedule: (
+                                      name: ::String,
+                                      playback_configuration_name: ::String
+                                    ) -> _DeletePrefetchScheduleResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePrefetchScheduleResponseSuccess
+
+      interface _DeleteProgramResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProgramResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#delete_program-instance_method
+      def delete_program: (
+                            channel_name: ::String,
+                            program_name: ::String
+                          ) -> _DeleteProgramResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProgramResponseSuccess
+
+      interface _DeleteSourceLocationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSourceLocationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#delete_source_location-instance_method
+      def delete_source_location: (
+                                    source_location_name: ::String
+                                  ) -> _DeleteSourceLocationResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSourceLocationResponseSuccess
+
+      interface _DeleteVodSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVodSourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#delete_vod_source-instance_method
+      def delete_vod_source: (
+                               source_location_name: ::String,
+                               vod_source_name: ::String
+                             ) -> _DeleteVodSourceResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVodSourceResponseSuccess
+
+      interface _DescribeChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeChannelResponse]
+        def arn: () -> ::String
+        def channel_name: () -> ::String
+        def channel_state: () -> ("RUNNING" | "STOPPED")
+        def creation_time: () -> ::Time
+        def filler_slate: () -> Types::SlateSource
+        def last_modified_time: () -> ::Time
+        def log_configuration: () -> Types::LogConfigurationForChannel
+        def outputs: () -> ::Array[Types::ResponseOutputItem]
+        def playback_mode: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def tier: () -> ::String
+        def time_shift_configuration: () -> Types::TimeShiftConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#describe_channel-instance_method
+      def describe_channel: (
+                              channel_name: ::String
+                            ) -> _DescribeChannelResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeChannelResponseSuccess
+
+      interface _DescribeLiveSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLiveSourceResponse]
+        def arn: () -> ::String
+        def creation_time: () -> ::Time
+        def http_package_configurations: () -> ::Array[Types::HttpPackageConfiguration]
+        def last_modified_time: () -> ::Time
+        def live_source_name: () -> ::String
+        def source_location_name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#describe_live_source-instance_method
+      def describe_live_source: (
+                                  live_source_name: ::String,
+                                  source_location_name: ::String
+                                ) -> _DescribeLiveSourceResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLiveSourceResponseSuccess
+
+      interface _DescribeProgramResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeProgramResponse]
+        def ad_breaks: () -> ::Array[Types::AdBreak]
+        def arn: () -> ::String
+        def channel_name: () -> ::String
+        def clip_range: () -> Types::ClipRange
+        def creation_time: () -> ::Time
+        def duration_millis: () -> ::Integer
+        def live_source_name: () -> ::String
+        def program_name: () -> ::String
+        def scheduled_start_time: () -> ::Time
+        def source_location_name: () -> ::String
+        def vod_source_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#describe_program-instance_method
+      def describe_program: (
+                              channel_name: ::String,
+                              program_name: ::String
+                            ) -> _DescribeProgramResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeProgramResponseSuccess
+
+      interface _DescribeSourceLocationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSourceLocationResponse]
+        def access_configuration: () -> Types::AccessConfiguration
+        def arn: () -> ::String
+        def creation_time: () -> ::Time
+        def default_segment_delivery_configuration: () -> Types::DefaultSegmentDeliveryConfiguration
+        def http_configuration: () -> Types::HttpConfiguration
+        def last_modified_time: () -> ::Time
+        def segment_delivery_configurations: () -> ::Array[Types::SegmentDeliveryConfiguration]
+        def source_location_name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#describe_source_location-instance_method
+      def describe_source_location: (
+                                      source_location_name: ::String
+                                    ) -> _DescribeSourceLocationResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSourceLocationResponseSuccess
+
+      interface _DescribeVodSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeVodSourceResponse]
+        def ad_break_opportunities: () -> ::Array[Types::AdBreakOpportunity]
+        def arn: () -> ::String
+        def creation_time: () -> ::Time
+        def http_package_configurations: () -> ::Array[Types::HttpPackageConfiguration]
+        def last_modified_time: () -> ::Time
+        def source_location_name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def vod_source_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#describe_vod_source-instance_method
+      def describe_vod_source: (
+                                 source_location_name: ::String,
+                                 vod_source_name: ::String
+                               ) -> _DescribeVodSourceResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeVodSourceResponseSuccess
+
+      interface _GetChannelPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetChannelPolicyResponse]
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#get_channel_policy-instance_method
+      def get_channel_policy: (
+                                channel_name: ::String
+                              ) -> _GetChannelPolicyResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetChannelPolicyResponseSuccess
+
+      interface _GetChannelScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetChannelScheduleResponse]
+        def items: () -> ::Array[Types::ScheduleEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#get_channel_schedule-instance_method
+      def get_channel_schedule: (
+                                  channel_name: ::String,
+                                  ?duration_minutes: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _GetChannelScheduleResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetChannelScheduleResponseSuccess
+
+      interface _GetPlaybackConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPlaybackConfigurationResponse]
+        def ad_decision_server_url: () -> ::String
+        def avail_suppression: () -> Types::AvailSuppression
+        def bumper: () -> Types::Bumper
+        def cdn_configuration: () -> Types::CdnConfiguration
+        def configuration_aliases: () -> ::Hash[::String, ::Hash[::String, ::String]]
+        def dash_configuration: () -> Types::DashConfiguration
+        def hls_configuration: () -> Types::HlsConfiguration
+        def live_pre_roll_configuration: () -> Types::LivePreRollConfiguration
+        def log_configuration: () -> Types::LogConfiguration
+        def manifest_processing_rules: () -> Types::ManifestProcessingRules
+        def name: () -> ::String
+        def personalization_threshold_seconds: () -> ::Integer
+        def playback_configuration_arn: () -> ::String
+        def playback_endpoint_prefix: () -> ::String
+        def session_initialization_endpoint_prefix: () -> ::String
+        def slate_ad_url: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def transcode_profile_name: () -> ::String
+        def video_content_source_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#get_playback_configuration-instance_method
+      def get_playback_configuration: (
+                                        name: ::String
+                                      ) -> _GetPlaybackConfigurationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPlaybackConfigurationResponseSuccess
+
+      interface _GetPrefetchScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPrefetchScheduleResponse]
+        def arn: () -> ::String
+        def consumption: () -> Types::PrefetchConsumption
+        def name: () -> ::String
+        def playback_configuration_name: () -> ::String
+        def retrieval: () -> Types::PrefetchRetrieval
+        def stream_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#get_prefetch_schedule-instance_method
+      def get_prefetch_schedule: (
+                                   name: ::String,
+                                   playback_configuration_name: ::String
+                                 ) -> _GetPrefetchScheduleResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPrefetchScheduleResponseSuccess
+
+      interface _ListAlertsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAlertsResponse]
+        def items: () -> ::Array[Types::Alert]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#list_alerts-instance_method
+      def list_alerts: (
+                         ?max_results: ::Integer,
+                         ?next_token: ::String,
+                         resource_arn: ::String
+                       ) -> _ListAlertsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAlertsResponseSuccess
+
+      interface _ListChannelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelsResponse]
+        def items: () -> ::Array[Types::Channel]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#list_channels-instance_method
+      def list_channels: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListChannelsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelsResponseSuccess
+
+      interface _ListLiveSourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLiveSourcesResponse]
+        def items: () -> ::Array[Types::LiveSource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#list_live_sources-instance_method
+      def list_live_sources: (
+                               ?max_results: ::Integer,
+                               ?next_token: ::String,
+                               source_location_name: ::String
+                             ) -> _ListLiveSourcesResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLiveSourcesResponseSuccess
+
+      interface _ListPlaybackConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPlaybackConfigurationsResponse]
+        def items: () -> ::Array[Types::PlaybackConfiguration]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#list_playback_configurations-instance_method
+      def list_playback_configurations: (
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _ListPlaybackConfigurationsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPlaybackConfigurationsResponseSuccess
+
+      interface _ListPrefetchSchedulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPrefetchSchedulesResponse]
+        def items: () -> ::Array[Types::PrefetchSchedule]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#list_prefetch_schedules-instance_method
+      def list_prefetch_schedules: (
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String,
+                                     playback_configuration_name: ::String,
+                                     ?stream_id: ::String
+                                   ) -> _ListPrefetchSchedulesResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPrefetchSchedulesResponseSuccess
+
+      interface _ListSourceLocationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSourceLocationsResponse]
+        def items: () -> ::Array[Types::SourceLocation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#list_source_locations-instance_method
+      def list_source_locations: (
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListSourceLocationsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSourceLocationsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListVodSourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVodSourcesResponse]
+        def items: () -> ::Array[Types::VodSource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#list_vod_sources-instance_method
+      def list_vod_sources: (
+                              ?max_results: ::Integer,
+                              ?next_token: ::String,
+                              source_location_name: ::String
+                            ) -> _ListVodSourcesResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVodSourcesResponseSuccess
+
+      interface _PutChannelPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutChannelPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#put_channel_policy-instance_method
+      def put_channel_policy: (
+                                channel_name: ::String,
+                                policy: ::String
+                              ) -> _PutChannelPolicyResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutChannelPolicyResponseSuccess
+
+      interface _PutPlaybackConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutPlaybackConfigurationResponse]
+        def ad_decision_server_url: () -> ::String
+        def avail_suppression: () -> Types::AvailSuppression
+        def bumper: () -> Types::Bumper
+        def cdn_configuration: () -> Types::CdnConfiguration
+        def configuration_aliases: () -> ::Hash[::String, ::Hash[::String, ::String]]
+        def dash_configuration: () -> Types::DashConfiguration
+        def hls_configuration: () -> Types::HlsConfiguration
+        def live_pre_roll_configuration: () -> Types::LivePreRollConfiguration
+        def log_configuration: () -> Types::LogConfiguration
+        def manifest_processing_rules: () -> Types::ManifestProcessingRules
+        def name: () -> ::String
+        def personalization_threshold_seconds: () -> ::Integer
+        def playback_configuration_arn: () -> ::String
+        def playback_endpoint_prefix: () -> ::String
+        def session_initialization_endpoint_prefix: () -> ::String
+        def slate_ad_url: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def transcode_profile_name: () -> ::String
+        def video_content_source_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#put_playback_configuration-instance_method
+      def put_playback_configuration: (
+                                        ?ad_decision_server_url: ::String,
+                                        ?avail_suppression: {
+                                          fill_policy: ("FULL_AVAIL_ONLY" | "PARTIAL_AVAIL")?,
+                                          mode: ("OFF" | "BEHIND_LIVE_EDGE" | "AFTER_LIVE_EDGE")?,
+                                          value: ::String?
+                                        },
+                                        ?bumper: {
+                                          end_url: ::String?,
+                                          start_url: ::String?
+                                        },
+                                        ?cdn_configuration: {
+                                          ad_segment_url_prefix: ::String?,
+                                          content_segment_url_prefix: ::String?
+                                        },
+                                        ?configuration_aliases: Hash[::String, Hash[::String, ::String]],
+                                        ?dash_configuration: {
+                                          mpd_location: ::String?,
+                                          origin_manifest_type: ("SINGLE_PERIOD" | "MULTI_PERIOD")?
+                                        },
+                                        ?live_pre_roll_configuration: {
+                                          ad_decision_server_url: ::String?,
+                                          max_duration_seconds: ::Integer?
+                                        },
+                                        ?manifest_processing_rules: {
+                                          ad_marker_passthrough: {
+                                            enabled: bool?
+                                          }?
+                                        },
+                                        name: ::String,
+                                        ?personalization_threshold_seconds: ::Integer,
+                                        ?slate_ad_url: ::String,
+                                        ?tags: Hash[::String, ::String],
+                                        ?transcode_profile_name: ::String,
+                                        ?video_content_source_url: ::String
+                                      ) -> _PutPlaybackConfigurationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutPlaybackConfigurationResponseSuccess
+
+      interface _StartChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartChannelResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#start_channel-instance_method
+      def start_channel: (
+                           channel_name: ::String
+                         ) -> _StartChannelResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartChannelResponseSuccess
+
+      interface _StopChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopChannelResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#stop_channel-instance_method
+      def stop_channel: (
+                          channel_name: ::String
+                        ) -> _StopChannelResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopChannelResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateChannelResponse]
+        def arn: () -> ::String
+        def channel_name: () -> ::String
+        def channel_state: () -> ("RUNNING" | "STOPPED")
+        def creation_time: () -> ::Time
+        def filler_slate: () -> Types::SlateSource
+        def last_modified_time: () -> ::Time
+        def outputs: () -> ::Array[Types::ResponseOutputItem]
+        def playback_mode: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def tier: () -> ::String
+        def time_shift_configuration: () -> Types::TimeShiftConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#update_channel-instance_method
+      def update_channel: (
+                            channel_name: ::String,
+                            ?filler_slate: {
+                              source_location_name: ::String?,
+                              vod_source_name: ::String?
+                            },
+                            outputs: Array[
+                              {
+                                dash_playlist_settings: {
+                                  manifest_window_seconds: ::Integer?,
+                                  min_buffer_time_seconds: ::Integer?,
+                                  min_update_period_seconds: ::Integer?,
+                                  suggested_presentation_delay_seconds: ::Integer?
+                                }?,
+                                hls_playlist_settings: {
+                                  ad_markup_type: Array[("DATERANGE" | "SCTE35_ENHANCED")]?,
+                                  manifest_window_seconds: ::Integer?
+                                }?,
+                                manifest_name: ::String,
+                                source_group: ::String
+                              },
+                            ],
+                            ?time_shift_configuration: {
+                              max_time_delay_seconds: ::Integer
+                            }
+                          ) -> _UpdateChannelResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelResponseSuccess
+
+      interface _UpdateLiveSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLiveSourceResponse]
+        def arn: () -> ::String
+        def creation_time: () -> ::Time
+        def http_package_configurations: () -> ::Array[Types::HttpPackageConfiguration]
+        def last_modified_time: () -> ::Time
+        def live_source_name: () -> ::String
+        def source_location_name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#update_live_source-instance_method
+      def update_live_source: (
+                                http_package_configurations: Array[
+                                  {
+                                    path: ::String,
+                                    source_group: ::String,
+                                    type: ("DASH" | "HLS")
+                                  },
+                                ],
+                                live_source_name: ::String,
+                                source_location_name: ::String
+                              ) -> _UpdateLiveSourceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLiveSourceResponseSuccess
+
+      interface _UpdateProgramResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProgramResponse]
+        def ad_breaks: () -> ::Array[Types::AdBreak]
+        def arn: () -> ::String
+        def channel_name: () -> ::String
+        def clip_range: () -> Types::ClipRange
+        def creation_time: () -> ::Time
+        def duration_millis: () -> ::Integer
+        def live_source_name: () -> ::String
+        def program_name: () -> ::String
+        def scheduled_start_time: () -> ::Time
+        def source_location_name: () -> ::String
+        def vod_source_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#update_program-instance_method
+      def update_program: (
+                            ?ad_breaks: Array[
+                              {
+                                ad_break_metadata: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String
+                                  },
+                                ]?,
+                                message_type: ("SPLICE_INSERT" | "TIME_SIGNAL")?,
+                                offset_millis: ::Integer?,
+                                slate: {
+                                  source_location_name: ::String?,
+                                  vod_source_name: ::String?
+                                }?,
+                                splice_insert_message: {
+                                  avail_num: ::Integer?,
+                                  avails_expected: ::Integer?,
+                                  splice_event_id: ::Integer?,
+                                  unique_program_id: ::Integer?
+                                }?,
+                                time_signal_message: {
+                                  segmentation_descriptors: Array[
+                                    {
+                                      segment_num: ::Integer?,
+                                      segmentation_event_id: ::Integer?,
+                                      segmentation_type_id: ::Integer?,
+                                      segmentation_upid: ::String?,
+                                      segmentation_upid_type: ::Integer?,
+                                      segments_expected: ::Integer?,
+                                      sub_segment_num: ::Integer?,
+                                      sub_segments_expected: ::Integer?
+                                    },
+                                  ]?
+                                }?
+                              },
+                            ],
+                            channel_name: ::String,
+                            program_name: ::String,
+                            schedule_configuration: {
+                              clip_range: {
+                                end_offset_millis: ::Integer
+                              }?,
+                              transition: {
+                                duration_millis: ::Integer?,
+                                scheduled_start_time_millis: ::Integer?
+                              }?
+                            }
+                          ) -> _UpdateProgramResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProgramResponseSuccess
+
+      interface _UpdateSourceLocationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSourceLocationResponse]
+        def access_configuration: () -> Types::AccessConfiguration
+        def arn: () -> ::String
+        def creation_time: () -> ::Time
+        def default_segment_delivery_configuration: () -> Types::DefaultSegmentDeliveryConfiguration
+        def http_configuration: () -> Types::HttpConfiguration
+        def last_modified_time: () -> ::Time
+        def segment_delivery_configurations: () -> ::Array[Types::SegmentDeliveryConfiguration]
+        def source_location_name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#update_source_location-instance_method
+      def update_source_location: (
+                                    ?access_configuration: {
+                                      access_type: ("S3_SIGV4" | "SECRETS_MANAGER_ACCESS_TOKEN" | "AUTODETECT_SIGV4")?,
+                                      secrets_manager_access_token_configuration: {
+                                        header_name: ::String?,
+                                        secret_arn: ::String?,
+                                        secret_string_key: ::String?
+                                      }?
+                                    },
+                                    ?default_segment_delivery_configuration: {
+                                      base_url: ::String?
+                                    },
+                                    http_configuration: {
+                                      base_url: ::String
+                                    },
+                                    ?segment_delivery_configurations: Array[
+                                      {
+                                        base_url: ::String?,
+                                        name: ::String?
+                                      },
+                                    ],
+                                    source_location_name: ::String
+                                  ) -> _UpdateSourceLocationResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSourceLocationResponseSuccess
+
+      interface _UpdateVodSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateVodSourceResponse]
+        def arn: () -> ::String
+        def creation_time: () -> ::Time
+        def http_package_configurations: () -> ::Array[Types::HttpPackageConfiguration]
+        def last_modified_time: () -> ::Time
+        def source_location_name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def vod_source_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#update_vod_source-instance_method
+      def update_vod_source: (
+                               http_package_configurations: Array[
+                                 {
+                                   path: ::String,
+                                   source_group: ::String,
+                                   type: ("DASH" | "HLS")
+                                 },
+                               ],
+                               source_location_name: ::String,
+                               vod_source_name: ::String
+                             ) -> _UpdateVodSourceResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVodSourceResponseSuccess
+    end
+  end
+end
+

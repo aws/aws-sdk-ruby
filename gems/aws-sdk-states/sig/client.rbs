@@ -1,0 +1,625 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module States
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateActivityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateActivityOutput]
+        def activity_arn: () -> ::String
+        def creation_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#create_activity-instance_method
+      def create_activity: (
+                             name: ::String,
+                             ?tags: Array[
+                               {
+                                 key: ::String?,
+                                 value: ::String?
+                               },
+                             ]
+                           ) -> _CreateActivityResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateActivityResponseSuccess
+
+      interface _CreateStateMachineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStateMachineOutput]
+        def state_machine_arn: () -> ::String
+        def creation_date: () -> ::Time
+        def state_machine_version_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#create_state_machine-instance_method
+      def create_state_machine: (
+                                  name: ::String,
+                                  definition: ::String,
+                                  role_arn: ::String,
+                                  ?type: ("STANDARD" | "EXPRESS"),
+                                  ?logging_configuration: {
+                                    level: ("ALL" | "ERROR" | "FATAL" | "OFF")?,
+                                    include_execution_data: bool?,
+                                    destinations: Array[
+                                      {
+                                        cloud_watch_logs_log_group: {
+                                          log_group_arn: ::String?
+                                        }?
+                                      },
+                                    ]?
+                                  },
+                                  ?tags: Array[
+                                    {
+                                      key: ::String?,
+                                      value: ::String?
+                                    },
+                                  ],
+                                  ?tracing_configuration: {
+                                    enabled: bool?
+                                  },
+                                  ?publish: bool,
+                                  ?version_description: ::String
+                                ) -> _CreateStateMachineResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStateMachineResponseSuccess
+
+      interface _CreateStateMachineAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStateMachineAliasOutput]
+        def state_machine_alias_arn: () -> ::String
+        def creation_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#create_state_machine_alias-instance_method
+      def create_state_machine_alias: (
+                                        ?description: ::String,
+                                        name: ::String,
+                                        routing_configuration: Array[
+                                          {
+                                            state_machine_version_arn: ::String,
+                                            weight: ::Integer
+                                          },
+                                        ]
+                                      ) -> _CreateStateMachineAliasResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStateMachineAliasResponseSuccess
+
+      interface _DeleteActivityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteActivityOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#delete_activity-instance_method
+      def delete_activity: (
+                             activity_arn: ::String
+                           ) -> _DeleteActivityResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteActivityResponseSuccess
+
+      interface _DeleteStateMachineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteStateMachineOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#delete_state_machine-instance_method
+      def delete_state_machine: (
+                                  state_machine_arn: ::String
+                                ) -> _DeleteStateMachineResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteStateMachineResponseSuccess
+
+      interface _DeleteStateMachineAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteStateMachineAliasOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#delete_state_machine_alias-instance_method
+      def delete_state_machine_alias: (
+                                        state_machine_alias_arn: ::String
+                                      ) -> _DeleteStateMachineAliasResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteStateMachineAliasResponseSuccess
+
+      interface _DeleteStateMachineVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteStateMachineVersionOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#delete_state_machine_version-instance_method
+      def delete_state_machine_version: (
+                                          state_machine_version_arn: ::String
+                                        ) -> _DeleteStateMachineVersionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteStateMachineVersionResponseSuccess
+
+      interface _DescribeActivityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeActivityOutput]
+        def activity_arn: () -> ::String
+        def name: () -> ::String
+        def creation_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#describe_activity-instance_method
+      def describe_activity: (
+                               activity_arn: ::String
+                             ) -> _DescribeActivityResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeActivityResponseSuccess
+
+      interface _DescribeExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeExecutionOutput]
+        def execution_arn: () -> ::String
+        def state_machine_arn: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "ABORTED" | "PENDING_REDRIVE")
+        def start_date: () -> ::Time
+        def stop_date: () -> ::Time
+        def input: () -> ::String
+        def input_details: () -> Types::CloudWatchEventsExecutionDataDetails
+        def output: () -> ::String
+        def output_details: () -> Types::CloudWatchEventsExecutionDataDetails
+        def trace_header: () -> ::String
+        def map_run_arn: () -> ::String
+        def cause: () -> ::String
+        def state_machine_version_arn: () -> ::String
+        def state_machine_alias_arn: () -> ::String
+        def redrive_count: () -> ::Integer
+        def redrive_date: () -> ::Time
+        def redrive_status: () -> ("REDRIVABLE" | "NOT_REDRIVABLE" | "REDRIVABLE_BY_MAP_RUN")
+        def redrive_status_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#describe_execution-instance_method
+      def describe_execution: (
+                                execution_arn: ::String
+                              ) -> _DescribeExecutionResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeExecutionResponseSuccess
+
+      interface _DescribeMapRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMapRunOutput]
+        def map_run_arn: () -> ::String
+        def execution_arn: () -> ::String
+        def status: () -> ("RUNNING" | "SUCCEEDED" | "FAILED" | "ABORTED")
+        def start_date: () -> ::Time
+        def stop_date: () -> ::Time
+        def max_concurrency: () -> ::Integer
+        def tolerated_failure_percentage: () -> ::Float
+        def tolerated_failure_count: () -> ::Integer
+        def item_counts: () -> Types::MapRunItemCounts
+        def execution_counts: () -> Types::MapRunExecutionCounts
+        def redrive_count: () -> ::Integer
+        def redrive_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#describe_map_run-instance_method
+      def describe_map_run: (
+                              map_run_arn: ::String
+                            ) -> _DescribeMapRunResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMapRunResponseSuccess
+
+      interface _DescribeStateMachineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStateMachineOutput]
+        def state_machine_arn: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("ACTIVE" | "DELETING")
+        def definition: () -> ::String
+        def role_arn: () -> ::String
+        def type: () -> ("STANDARD" | "EXPRESS")
+        def creation_date: () -> ::Time
+        def logging_configuration: () -> Types::LoggingConfiguration
+        def tracing_configuration: () -> Types::TracingConfiguration
+        def label: () -> ::String
+        def revision_id: () -> ::String
+        def description: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#describe_state_machine-instance_method
+      def describe_state_machine: (
+                                    state_machine_arn: ::String
+                                  ) -> _DescribeStateMachineResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStateMachineResponseSuccess
+
+      interface _DescribeStateMachineAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStateMachineAliasOutput]
+        def state_machine_alias_arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def routing_configuration: () -> ::Array[Types::RoutingConfigurationListItem]
+        def creation_date: () -> ::Time
+        def update_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#describe_state_machine_alias-instance_method
+      def describe_state_machine_alias: (
+                                          state_machine_alias_arn: ::String
+                                        ) -> _DescribeStateMachineAliasResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStateMachineAliasResponseSuccess
+
+      interface _DescribeStateMachineForExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStateMachineForExecutionOutput]
+        def state_machine_arn: () -> ::String
+        def name: () -> ::String
+        def definition: () -> ::String
+        def role_arn: () -> ::String
+        def update_date: () -> ::Time
+        def logging_configuration: () -> Types::LoggingConfiguration
+        def tracing_configuration: () -> Types::TracingConfiguration
+        def map_run_arn: () -> ::String
+        def label: () -> ::String
+        def revision_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#describe_state_machine_for_execution-instance_method
+      def describe_state_machine_for_execution: (
+                                                  execution_arn: ::String
+                                                ) -> _DescribeStateMachineForExecutionResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStateMachineForExecutionResponseSuccess
+
+      interface _GetActivityTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetActivityTaskOutput]
+        def task_token: () -> ::String
+        def input: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#get_activity_task-instance_method
+      def get_activity_task: (
+                               activity_arn: ::String,
+                               ?worker_name: ::String
+                             ) -> _GetActivityTaskResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetActivityTaskResponseSuccess
+
+      interface _GetExecutionHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetExecutionHistoryOutput]
+        def events: () -> ::Array[Types::HistoryEvent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#get_execution_history-instance_method
+      def get_execution_history: (
+                                   execution_arn: ::String,
+                                   ?max_results: ::Integer,
+                                   ?reverse_order: bool,
+                                   ?next_token: ::String,
+                                   ?include_execution_data: bool
+                                 ) -> _GetExecutionHistoryResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetExecutionHistoryResponseSuccess
+
+      interface _ListActivitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListActivitiesOutput]
+        def activities: () -> ::Array[Types::ActivityListItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#list_activities-instance_method
+      def list_activities: (
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListActivitiesResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListActivitiesResponseSuccess
+
+      interface _ListExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListExecutionsOutput]
+        def executions: () -> ::Array[Types::ExecutionListItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#list_executions-instance_method
+      def list_executions: (
+                             ?state_machine_arn: ::String,
+                             ?status_filter: ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "ABORTED" | "PENDING_REDRIVE"),
+                             ?max_results: ::Integer,
+                             ?next_token: ::String,
+                             ?map_run_arn: ::String,
+                             ?redrive_filter: ("REDRIVEN" | "NOT_REDRIVEN")
+                           ) -> _ListExecutionsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExecutionsResponseSuccess
+
+      interface _ListMapRunsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMapRunsOutput]
+        def map_runs: () -> ::Array[Types::MapRunListItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#list_map_runs-instance_method
+      def list_map_runs: (
+                           execution_arn: ::String,
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListMapRunsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMapRunsResponseSuccess
+
+      interface _ListStateMachineAliasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStateMachineAliasesOutput]
+        def state_machine_aliases: () -> ::Array[Types::StateMachineAliasListItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#list_state_machine_aliases-instance_method
+      def list_state_machine_aliases: (
+                                        state_machine_arn: ::String,
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer
+                                      ) -> _ListStateMachineAliasesResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStateMachineAliasesResponseSuccess
+
+      interface _ListStateMachineVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStateMachineVersionsOutput]
+        def state_machine_versions: () -> ::Array[Types::StateMachineVersionListItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#list_state_machine_versions-instance_method
+      def list_state_machine_versions: (
+                                         state_machine_arn: ::String,
+                                         ?next_token: ::String,
+                                         ?max_results: ::Integer
+                                       ) -> _ListStateMachineVersionsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStateMachineVersionsResponseSuccess
+
+      interface _ListStateMachinesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStateMachinesOutput]
+        def state_machines: () -> ::Array[Types::StateMachineListItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#list_state_machines-instance_method
+      def list_state_machines: (
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListStateMachinesResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStateMachinesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PublishStateMachineVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PublishStateMachineVersionOutput]
+        def creation_date: () -> ::Time
+        def state_machine_version_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#publish_state_machine_version-instance_method
+      def publish_state_machine_version: (
+                                           state_machine_arn: ::String,
+                                           ?revision_id: ::String,
+                                           ?description: ::String
+                                         ) -> _PublishStateMachineVersionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PublishStateMachineVersionResponseSuccess
+
+      interface _RedriveExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RedriveExecutionOutput]
+        def redrive_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#redrive_execution-instance_method
+      def redrive_execution: (
+                               execution_arn: ::String,
+                               ?client_token: ::String
+                             ) -> _RedriveExecutionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RedriveExecutionResponseSuccess
+
+      interface _SendTaskFailureResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendTaskFailureOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#send_task_failure-instance_method
+      def send_task_failure: (
+                               task_token: ::String,
+                               ?error: ::String,
+                               ?cause: ::String
+                             ) -> _SendTaskFailureResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendTaskFailureResponseSuccess
+
+      interface _SendTaskHeartbeatResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendTaskHeartbeatOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#send_task_heartbeat-instance_method
+      def send_task_heartbeat: (
+                                 task_token: ::String
+                               ) -> _SendTaskHeartbeatResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendTaskHeartbeatResponseSuccess
+
+      interface _SendTaskSuccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendTaskSuccessOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#send_task_success-instance_method
+      def send_task_success: (
+                               task_token: ::String,
+                               output: ::String
+                             ) -> _SendTaskSuccessResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendTaskSuccessResponseSuccess
+
+      interface _StartExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartExecutionOutput]
+        def execution_arn: () -> ::String
+        def start_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#start_execution-instance_method
+      def start_execution: (
+                             state_machine_arn: ::String,
+                             ?name: ::String,
+                             ?input: ::String,
+                             ?trace_header: ::String
+                           ) -> _StartExecutionResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartExecutionResponseSuccess
+
+      interface _StartSyncExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartSyncExecutionOutput]
+        def execution_arn: () -> ::String
+        def state_machine_arn: () -> ::String
+        def name: () -> ::String
+        def start_date: () -> ::Time
+        def stop_date: () -> ::Time
+        def status: () -> ("SUCCEEDED" | "FAILED" | "TIMED_OUT")
+        def cause: () -> ::String
+        def input: () -> ::String
+        def input_details: () -> Types::CloudWatchEventsExecutionDataDetails
+        def output: () -> ::String
+        def output_details: () -> Types::CloudWatchEventsExecutionDataDetails
+        def trace_header: () -> ::String
+        def billing_details: () -> Types::BillingDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#start_sync_execution-instance_method
+      def start_sync_execution: (
+                                  state_machine_arn: ::String,
+                                  ?name: ::String,
+                                  ?input: ::String,
+                                  ?trace_header: ::String
+                                ) -> _StartSyncExecutionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartSyncExecutionResponseSuccess
+
+      interface _StopExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopExecutionOutput]
+        def stop_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#stop_execution-instance_method
+      def stop_execution: (
+                            execution_arn: ::String,
+                            ?error: ::String,
+                            ?cause: ::String
+                          ) -> _StopExecutionResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopExecutionResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String?,
+                              value: ::String?
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _TestStateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TestStateOutput]
+        def output: () -> ::String
+        def cause: () -> ::String
+        def inspection_data: () -> Types::InspectionData
+        def next_state: () -> ::String
+        def status: () -> ("SUCCEEDED" | "FAILED" | "RETRIABLE" | "CAUGHT_ERROR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#test_state-instance_method
+      def test_state: (
+                        definition: ::String,
+                        role_arn: ::String,
+                        ?input: ::String,
+                        ?inspection_level: ("INFO" | "DEBUG" | "TRACE"),
+                        ?reveal_secrets: bool
+                      ) -> _TestStateResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestStateResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateMapRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMapRunOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#update_map_run-instance_method
+      def update_map_run: (
+                            map_run_arn: ::String,
+                            ?max_concurrency: ::Integer,
+                            ?tolerated_failure_percentage: ::Float,
+                            ?tolerated_failure_count: ::Integer
+                          ) -> _UpdateMapRunResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMapRunResponseSuccess
+
+      interface _UpdateStateMachineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateStateMachineOutput]
+        def update_date: () -> ::Time
+        def revision_id: () -> ::String
+        def state_machine_version_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#update_state_machine-instance_method
+      def update_state_machine: (
+                                  state_machine_arn: ::String,
+                                  ?definition: ::String,
+                                  ?role_arn: ::String,
+                                  ?logging_configuration: {
+                                    level: ("ALL" | "ERROR" | "FATAL" | "OFF")?,
+                                    include_execution_data: bool?,
+                                    destinations: Array[
+                                      {
+                                        cloud_watch_logs_log_group: {
+                                          log_group_arn: ::String?
+                                        }?
+                                      },
+                                    ]?
+                                  },
+                                  ?tracing_configuration: {
+                                    enabled: bool?
+                                  },
+                                  ?publish: bool,
+                                  ?version_description: ::String
+                                ) -> _UpdateStateMachineResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStateMachineResponseSuccess
+
+      interface _UpdateStateMachineAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateStateMachineAliasOutput]
+        def update_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#update_state_machine_alias-instance_method
+      def update_state_machine_alias: (
+                                        state_machine_alias_arn: ::String,
+                                        ?description: ::String,
+                                        ?routing_configuration: Array[
+                                          {
+                                            state_machine_version_arn: ::String,
+                                            weight: ::Integer
+                                          },
+                                        ]
+                                      ) -> _UpdateStateMachineAliasResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStateMachineAliasResponseSuccess
+    end
+  end
+end
+

@@ -1,0 +1,4227 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SSM
+  module Types
+
+    class AccountSharingInfo
+      attr_accessor account_id: ::String
+      attr_accessor shared_document_version: ::String
+      SENSITIVE: []
+    end
+
+    class Activation
+      attr_accessor activation_id: ::String
+      attr_accessor description: ::String
+      attr_accessor default_instance_name: ::String
+      attr_accessor iam_role: ::String
+      attr_accessor registration_limit: ::Integer
+      attr_accessor registrations_count: ::Integer
+      attr_accessor expiration_date: ::Time
+      attr_accessor expired: bool
+      attr_accessor created_date: ::Time
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class AddTagsToResourceRequest
+      attr_accessor resource_type: ("Document" | "ManagedInstance" | "MaintenanceWindow" | "Parameter" | "PatchBaseline" | "OpsItem" | "OpsMetadata" | "Automation" | "Association")
+      attr_accessor resource_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class AddTagsToResourceResult < Aws::EmptyStructure
+    end
+
+    class Alarm
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class AlarmConfiguration
+      attr_accessor ignore_poll_alarm_failure: bool
+      attr_accessor alarms: ::Array[Types::Alarm]
+      SENSITIVE: []
+    end
+
+    class AlarmStateInformation
+      attr_accessor name: ::String
+      attr_accessor state: ("UNKNOWN" | "ALARM")
+      SENSITIVE: []
+    end
+
+    class AlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateOpsItemRelatedItemRequest
+      attr_accessor ops_item_id: ::String
+      attr_accessor association_type: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor resource_uri: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateOpsItemRelatedItemResponse
+      attr_accessor association_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociatedInstances < Aws::EmptyStructure
+    end
+
+    class Association
+      attr_accessor name: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor association_id: ::String
+      attr_accessor association_version: ::String
+      attr_accessor document_version: ::String
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor last_execution_date: ::Time
+      attr_accessor overview: Types::AssociationOverview
+      attr_accessor schedule_expression: ::String
+      attr_accessor association_name: ::String
+      attr_accessor schedule_offset: ::Integer
+      attr_accessor target_maps: ::Array[::Hash[::String, ::Array[::String]]]
+      SENSITIVE: []
+    end
+
+    class AssociationAlreadyExists < Aws::EmptyStructure
+    end
+
+    class AssociationDescription
+      attr_accessor name: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor association_version: ::String
+      attr_accessor date: ::Time
+      attr_accessor last_update_association_date: ::Time
+      attr_accessor status: Types::AssociationStatus
+      attr_accessor overview: Types::AssociationOverview
+      attr_accessor document_version: ::String
+      attr_accessor automation_target_parameter_name: ::String
+      attr_accessor parameters: ::Hash[::String, ::Array[::String]]
+      attr_accessor association_id: ::String
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor schedule_expression: ::String
+      attr_accessor output_location: Types::InstanceAssociationOutputLocation
+      attr_accessor last_execution_date: ::Time
+      attr_accessor last_successful_execution_date: ::Time
+      attr_accessor association_name: ::String
+      attr_accessor max_errors: ::String
+      attr_accessor max_concurrency: ::String
+      attr_accessor compliance_severity: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "UNSPECIFIED")
+      attr_accessor sync_compliance: ("AUTO" | "MANUAL")
+      attr_accessor apply_only_at_cron_interval: bool
+      attr_accessor calendar_names: ::Array[::String]
+      attr_accessor target_locations: ::Array[Types::TargetLocation]
+      attr_accessor schedule_offset: ::Integer
+      attr_accessor target_maps: ::Array[::Hash[::String, ::Array[::String]]]
+      attr_accessor alarm_configuration: Types::AlarmConfiguration
+      attr_accessor triggered_alarms: ::Array[Types::AlarmStateInformation]
+      SENSITIVE: [:parameters]
+    end
+
+    class AssociationDoesNotExist
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AssociationExecution
+      attr_accessor association_id: ::String
+      attr_accessor association_version: ::String
+      attr_accessor execution_id: ::String
+      attr_accessor status: ::String
+      attr_accessor detailed_status: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor last_execution_date: ::Time
+      attr_accessor resource_count_by_status: ::String
+      attr_accessor alarm_configuration: Types::AlarmConfiguration
+      attr_accessor triggered_alarms: ::Array[Types::AlarmStateInformation]
+      SENSITIVE: []
+    end
+
+    class AssociationExecutionDoesNotExist
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AssociationExecutionFilter
+      attr_accessor key: ("ExecutionId" | "Status" | "CreatedTime")
+      attr_accessor value: ::String
+      attr_accessor type: ("EQUAL" | "LESS_THAN" | "GREATER_THAN")
+      SENSITIVE: []
+    end
+
+    class AssociationExecutionTarget
+      attr_accessor association_id: ::String
+      attr_accessor association_version: ::String
+      attr_accessor execution_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor status: ::String
+      attr_accessor detailed_status: ::String
+      attr_accessor last_execution_date: ::Time
+      attr_accessor output_source: Types::OutputSource
+      SENSITIVE: []
+    end
+
+    class AssociationExecutionTargetsFilter
+      attr_accessor key: ("Status" | "ResourceId" | "ResourceType")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class AssociationFilter
+      attr_accessor key: ("InstanceId" | "Name" | "AssociationId" | "AssociationStatusName" | "LastExecutedBefore" | "LastExecutedAfter" | "AssociationName" | "ResourceGroupName")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class AssociationLimitExceeded < Aws::EmptyStructure
+    end
+
+    class AssociationOverview
+      attr_accessor status: ::String
+      attr_accessor detailed_status: ::String
+      attr_accessor association_status_aggregated_count: ::Hash[::String, ::Integer]
+      SENSITIVE: []
+    end
+
+    class AssociationStatus
+      attr_accessor date: ::Time
+      attr_accessor name: ("Pending" | "Success" | "Failed")
+      attr_accessor message: ::String
+      attr_accessor additional_info: ::String
+      SENSITIVE: []
+    end
+
+    class AssociationVersionInfo
+      attr_accessor association_id: ::String
+      attr_accessor association_version: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor name: ::String
+      attr_accessor document_version: ::String
+      attr_accessor parameters: ::Hash[::String, ::Array[::String]]
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor schedule_expression: ::String
+      attr_accessor output_location: Types::InstanceAssociationOutputLocation
+      attr_accessor association_name: ::String
+      attr_accessor max_errors: ::String
+      attr_accessor max_concurrency: ::String
+      attr_accessor compliance_severity: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "UNSPECIFIED")
+      attr_accessor sync_compliance: ("AUTO" | "MANUAL")
+      attr_accessor apply_only_at_cron_interval: bool
+      attr_accessor calendar_names: ::Array[::String]
+      attr_accessor target_locations: ::Array[Types::TargetLocation]
+      attr_accessor schedule_offset: ::Integer
+      attr_accessor target_maps: ::Array[::Hash[::String, ::Array[::String]]]
+      SENSITIVE: [:parameters]
+    end
+
+    class AssociationVersionLimitExceeded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AttachmentContent
+      attr_accessor name: ::String
+      attr_accessor size: ::Integer
+      attr_accessor hash: ::String
+      attr_accessor hash_type: ("Sha256")
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class AttachmentInformation
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class AttachmentsSource
+      attr_accessor key: ("SourceUrl" | "S3FileUrl" | "AttachmentReference")
+      attr_accessor values: ::Array[::String]
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class AutomationDefinitionNotApprovedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AutomationDefinitionNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AutomationDefinitionVersionNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AutomationExecution
+      attr_accessor automation_execution_id: ::String
+      attr_accessor document_name: ::String
+      attr_accessor document_version: ::String
+      attr_accessor execution_start_time: ::Time
+      attr_accessor execution_end_time: ::Time
+      attr_accessor automation_execution_status: ("Pending" | "InProgress" | "Waiting" | "Success" | "TimedOut" | "Cancelling" | "Cancelled" | "Failed" | "PendingApproval" | "Approved" | "Rejected" | "Scheduled" | "RunbookInProgress" | "PendingChangeCalendarOverride" | "ChangeCalendarOverrideApproved" | "ChangeCalendarOverrideRejected" | "CompletedWithSuccess" | "CompletedWithFailure" | "Exited")
+      attr_accessor step_executions: ::Array[Types::StepExecution]
+      attr_accessor step_executions_truncated: bool
+      attr_accessor parameters: ::Hash[::String, ::Array[::String]]
+      attr_accessor outputs: ::Hash[::String, ::Array[::String]]
+      attr_accessor failure_message: ::String
+      attr_accessor mode: ("Auto" | "Interactive")
+      attr_accessor parent_automation_execution_id: ::String
+      attr_accessor executed_by: ::String
+      attr_accessor current_step_name: ::String
+      attr_accessor current_action: ::String
+      attr_accessor target_parameter_name: ::String
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor target_maps: ::Array[::Hash[::String, ::Array[::String]]]
+      attr_accessor resolved_targets: Types::ResolvedTargets
+      attr_accessor max_concurrency: ::String
+      attr_accessor max_errors: ::String
+      attr_accessor target: ::String
+      attr_accessor target_locations: ::Array[Types::TargetLocation]
+      attr_accessor progress_counters: Types::ProgressCounters
+      attr_accessor alarm_configuration: Types::AlarmConfiguration
+      attr_accessor triggered_alarms: ::Array[Types::AlarmStateInformation]
+      attr_accessor automation_subtype: ("ChangeRequest")
+      attr_accessor scheduled_time: ::Time
+      attr_accessor runbooks: ::Array[Types::Runbook]
+      attr_accessor ops_item_id: ::String
+      attr_accessor association_id: ::String
+      attr_accessor change_request_name: ::String
+      attr_accessor variables: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class AutomationExecutionFilter
+      attr_accessor key: ("DocumentNamePrefix" | "ExecutionStatus" | "ExecutionId" | "ParentExecutionId" | "CurrentAction" | "StartTimeBefore" | "StartTimeAfter" | "AutomationType" | "TagKey" | "TargetResourceGroup" | "AutomationSubtype" | "OpsItemId")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AutomationExecutionLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AutomationExecutionMetadata
+      attr_accessor automation_execution_id: ::String
+      attr_accessor document_name: ::String
+      attr_accessor document_version: ::String
+      attr_accessor automation_execution_status: ("Pending" | "InProgress" | "Waiting" | "Success" | "TimedOut" | "Cancelling" | "Cancelled" | "Failed" | "PendingApproval" | "Approved" | "Rejected" | "Scheduled" | "RunbookInProgress" | "PendingChangeCalendarOverride" | "ChangeCalendarOverrideApproved" | "ChangeCalendarOverrideRejected" | "CompletedWithSuccess" | "CompletedWithFailure" | "Exited")
+      attr_accessor execution_start_time: ::Time
+      attr_accessor execution_end_time: ::Time
+      attr_accessor executed_by: ::String
+      attr_accessor log_file: ::String
+      attr_accessor outputs: ::Hash[::String, ::Array[::String]]
+      attr_accessor mode: ("Auto" | "Interactive")
+      attr_accessor parent_automation_execution_id: ::String
+      attr_accessor current_step_name: ::String
+      attr_accessor current_action: ::String
+      attr_accessor failure_message: ::String
+      attr_accessor target_parameter_name: ::String
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor target_maps: ::Array[::Hash[::String, ::Array[::String]]]
+      attr_accessor resolved_targets: Types::ResolvedTargets
+      attr_accessor max_concurrency: ::String
+      attr_accessor max_errors: ::String
+      attr_accessor target: ::String
+      attr_accessor automation_type: ("CrossAccount" | "Local")
+      attr_accessor alarm_configuration: Types::AlarmConfiguration
+      attr_accessor triggered_alarms: ::Array[Types::AlarmStateInformation]
+      attr_accessor automation_subtype: ("ChangeRequest")
+      attr_accessor scheduled_time: ::Time
+      attr_accessor runbooks: ::Array[Types::Runbook]
+      attr_accessor ops_item_id: ::String
+      attr_accessor association_id: ::String
+      attr_accessor change_request_name: ::String
+      SENSITIVE: []
+    end
+
+    class AutomationExecutionNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AutomationStepNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BaselineOverride
+      attr_accessor operating_system: ("WINDOWS" | "AMAZON_LINUX" | "AMAZON_LINUX_2" | "AMAZON_LINUX_2022" | "UBUNTU" | "REDHAT_ENTERPRISE_LINUX" | "SUSE" | "CENTOS" | "ORACLE_LINUX" | "DEBIAN" | "MACOS" | "RASPBIAN" | "ROCKY_LINUX" | "ALMA_LINUX" | "AMAZON_LINUX_2023")
+      attr_accessor global_filters: Types::PatchFilterGroup
+      attr_accessor approval_rules: Types::PatchRuleGroup
+      attr_accessor approved_patches: ::Array[::String]
+      attr_accessor approved_patches_compliance_level: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "INFORMATIONAL" | "UNSPECIFIED")
+      attr_accessor rejected_patches: ::Array[::String]
+      attr_accessor rejected_patches_action: ("ALLOW_AS_DEPENDENCY" | "BLOCK")
+      attr_accessor approved_patches_enable_non_security: bool
+      attr_accessor sources: ::Array[Types::PatchSource]
+      SENSITIVE: []
+    end
+
+    class CancelCommandRequest
+      attr_accessor command_id: ::String
+      attr_accessor instance_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CancelCommandResult < Aws::EmptyStructure
+    end
+
+    class CancelMaintenanceWindowExecutionRequest
+      attr_accessor window_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelMaintenanceWindowExecutionResult
+      attr_accessor window_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class CloudWatchOutputConfig
+      attr_accessor cloud_watch_log_group_name: ::String
+      attr_accessor cloud_watch_output_enabled: bool
+      SENSITIVE: []
+    end
+
+    class Command
+      attr_accessor command_id: ::String
+      attr_accessor document_name: ::String
+      attr_accessor document_version: ::String
+      attr_accessor comment: ::String
+      attr_accessor expires_after: ::Time
+      attr_accessor parameters: ::Hash[::String, ::Array[::String]]
+      attr_accessor instance_ids: ::Array[::String]
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor requested_date_time: ::Time
+      attr_accessor status: ("Pending" | "InProgress" | "Success" | "Cancelled" | "Failed" | "TimedOut" | "Cancelling")
+      attr_accessor status_details: ::String
+      attr_accessor output_s3_region: ::String
+      attr_accessor output_s3_bucket_name: ::String
+      attr_accessor output_s3_key_prefix: ::String
+      attr_accessor max_concurrency: ::String
+      attr_accessor max_errors: ::String
+      attr_accessor target_count: ::Integer
+      attr_accessor completed_count: ::Integer
+      attr_accessor error_count: ::Integer
+      attr_accessor delivery_timed_out_count: ::Integer
+      attr_accessor service_role: ::String
+      attr_accessor notification_config: Types::NotificationConfig
+      attr_accessor cloud_watch_output_config: Types::CloudWatchOutputConfig
+      attr_accessor timeout_seconds: ::Integer
+      attr_accessor alarm_configuration: Types::AlarmConfiguration
+      attr_accessor triggered_alarms: ::Array[Types::AlarmStateInformation]
+      SENSITIVE: [:parameters]
+    end
+
+    class CommandFilter
+      attr_accessor key: ("InvokedAfter" | "InvokedBefore" | "Status" | "ExecutionStage" | "DocumentName")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class CommandInvocation
+      attr_accessor command_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor instance_name: ::String
+      attr_accessor comment: ::String
+      attr_accessor document_name: ::String
+      attr_accessor document_version: ::String
+      attr_accessor requested_date_time: ::Time
+      attr_accessor status: ("Pending" | "InProgress" | "Delayed" | "Success" | "Cancelled" | "TimedOut" | "Failed" | "Cancelling")
+      attr_accessor status_details: ::String
+      attr_accessor trace_output: ::String
+      attr_accessor standard_output_url: ::String
+      attr_accessor standard_error_url: ::String
+      attr_accessor command_plugins: ::Array[Types::CommandPlugin]
+      attr_accessor service_role: ::String
+      attr_accessor notification_config: Types::NotificationConfig
+      attr_accessor cloud_watch_output_config: Types::CloudWatchOutputConfig
+      SENSITIVE: []
+    end
+
+    class CommandPlugin
+      attr_accessor name: ::String
+      attr_accessor status: ("Pending" | "InProgress" | "Success" | "TimedOut" | "Cancelled" | "Failed")
+      attr_accessor status_details: ::String
+      attr_accessor response_code: ::Integer
+      attr_accessor response_start_date_time: ::Time
+      attr_accessor response_finish_date_time: ::Time
+      attr_accessor output: ::String
+      attr_accessor standard_output_url: ::String
+      attr_accessor standard_error_url: ::String
+      attr_accessor output_s3_region: ::String
+      attr_accessor output_s3_bucket_name: ::String
+      attr_accessor output_s3_key_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ComplianceExecutionSummary
+      attr_accessor execution_time: ::Time
+      attr_accessor execution_id: ::String
+      attr_accessor execution_type: ::String
+      SENSITIVE: []
+    end
+
+    class ComplianceItem
+      attr_accessor compliance_type: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor id: ::String
+      attr_accessor title: ::String
+      attr_accessor status: ("COMPLIANT" | "NON_COMPLIANT")
+      attr_accessor severity: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "INFORMATIONAL" | "UNSPECIFIED")
+      attr_accessor execution_summary: Types::ComplianceExecutionSummary
+      attr_accessor details: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ComplianceItemEntry
+      attr_accessor id: ::String
+      attr_accessor title: ::String
+      attr_accessor severity: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "INFORMATIONAL" | "UNSPECIFIED")
+      attr_accessor status: ("COMPLIANT" | "NON_COMPLIANT")
+      attr_accessor details: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ComplianceStringFilter
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      attr_accessor type: ("EQUAL" | "NOT_EQUAL" | "BEGIN_WITH" | "LESS_THAN" | "GREATER_THAN")
+      SENSITIVE: []
+    end
+
+    class ComplianceSummaryItem
+      attr_accessor compliance_type: ::String
+      attr_accessor compliant_summary: Types::CompliantSummary
+      attr_accessor non_compliant_summary: Types::NonCompliantSummary
+      SENSITIVE: []
+    end
+
+    class ComplianceTypeCountLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CompliantSummary
+      attr_accessor compliant_count: ::Integer
+      attr_accessor severity_summary: Types::SeveritySummary
+      SENSITIVE: []
+    end
+
+    class CreateActivationRequest
+      attr_accessor description: ::String
+      attr_accessor default_instance_name: ::String
+      attr_accessor iam_role: ::String
+      attr_accessor registration_limit: ::Integer
+      attr_accessor expiration_date: ::Time
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor registration_metadata: ::Array[Types::RegistrationMetadataItem]
+      SENSITIVE: []
+    end
+
+    class CreateActivationResult
+      attr_accessor activation_id: ::String
+      attr_accessor activation_code: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAssociationBatchRequest
+      attr_accessor entries: ::Array[Types::CreateAssociationBatchRequestEntry]
+      SENSITIVE: []
+    end
+
+    class CreateAssociationBatchRequestEntry
+      attr_accessor name: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor parameters: ::Hash[::String, ::Array[::String]]
+      attr_accessor automation_target_parameter_name: ::String
+      attr_accessor document_version: ::String
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor schedule_expression: ::String
+      attr_accessor output_location: Types::InstanceAssociationOutputLocation
+      attr_accessor association_name: ::String
+      attr_accessor max_errors: ::String
+      attr_accessor max_concurrency: ::String
+      attr_accessor compliance_severity: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "UNSPECIFIED")
+      attr_accessor sync_compliance: ("AUTO" | "MANUAL")
+      attr_accessor apply_only_at_cron_interval: bool
+      attr_accessor calendar_names: ::Array[::String]
+      attr_accessor target_locations: ::Array[Types::TargetLocation]
+      attr_accessor schedule_offset: ::Integer
+      attr_accessor target_maps: ::Array[::Hash[::String, ::Array[::String]]]
+      attr_accessor alarm_configuration: Types::AlarmConfiguration
+      SENSITIVE: [:parameters]
+    end
+
+    class CreateAssociationBatchResult
+      attr_accessor successful: ::Array[Types::AssociationDescription]
+      attr_accessor failed: ::Array[Types::FailedCreateAssociation]
+      SENSITIVE: []
+    end
+
+    class CreateAssociationRequest
+      attr_accessor name: ::String
+      attr_accessor document_version: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor parameters: ::Hash[::String, ::Array[::String]]
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor schedule_expression: ::String
+      attr_accessor output_location: Types::InstanceAssociationOutputLocation
+      attr_accessor association_name: ::String
+      attr_accessor automation_target_parameter_name: ::String
+      attr_accessor max_errors: ::String
+      attr_accessor max_concurrency: ::String
+      attr_accessor compliance_severity: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "UNSPECIFIED")
+      attr_accessor sync_compliance: ("AUTO" | "MANUAL")
+      attr_accessor apply_only_at_cron_interval: bool
+      attr_accessor calendar_names: ::Array[::String]
+      attr_accessor target_locations: ::Array[Types::TargetLocation]
+      attr_accessor schedule_offset: ::Integer
+      attr_accessor target_maps: ::Array[::Hash[::String, ::Array[::String]]]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor alarm_configuration: Types::AlarmConfiguration
+      SENSITIVE: [:parameters]
+    end
+
+    class CreateAssociationResult
+      attr_accessor association_description: Types::AssociationDescription
+      SENSITIVE: []
+    end
+
+    class CreateDocumentRequest
+      attr_accessor content: ::String
+      attr_accessor requires: ::Array[Types::DocumentRequires]
+      attr_accessor attachments: ::Array[Types::AttachmentsSource]
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor version_name: ::String
+      attr_accessor document_type: ("Command" | "Policy" | "Automation" | "Session" | "Package" | "ApplicationConfiguration" | "ApplicationConfigurationSchema" | "DeploymentStrategy" | "ChangeCalendar" | "Automation.ChangeTemplate" | "ProblemAnalysis" | "ProblemAnalysisTemplate" | "CloudFormation" | "ConformancePackTemplate" | "QuickSetup")
+      attr_accessor document_format: ("YAML" | "JSON" | "TEXT")
+      attr_accessor target_type: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateDocumentResult
+      attr_accessor document_description: Types::DocumentDescription
+      SENSITIVE: []
+    end
+
+    class CreateMaintenanceWindowRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor start_date: ::String
+      attr_accessor end_date: ::String
+      attr_accessor schedule: ::String
+      attr_accessor schedule_timezone: ::String
+      attr_accessor schedule_offset: ::Integer
+      attr_accessor duration: ::Integer
+      attr_accessor cutoff: ::Integer
+      attr_accessor allow_unassociated_targets: bool
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:description]
+    end
+
+    class CreateMaintenanceWindowResult
+      attr_accessor window_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateOpsItemRequest
+      attr_accessor description: ::String
+      attr_accessor ops_item_type: ::String
+      attr_accessor operational_data: ::Hash[::String, Types::OpsItemDataValue]
+      attr_accessor notifications: ::Array[Types::OpsItemNotification]
+      attr_accessor priority: ::Integer
+      attr_accessor related_ops_items: ::Array[Types::RelatedOpsItem]
+      attr_accessor source: ::String
+      attr_accessor title: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor category: ::String
+      attr_accessor severity: ::String
+      attr_accessor actual_start_time: ::Time
+      attr_accessor actual_end_time: ::Time
+      attr_accessor planned_start_time: ::Time
+      attr_accessor planned_end_time: ::Time
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateOpsItemResponse
+      attr_accessor ops_item_id: ::String
+      attr_accessor ops_item_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateOpsMetadataRequest
+      attr_accessor resource_id: ::String
+      attr_accessor metadata: ::Hash[::String, Types::MetadataValue]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateOpsMetadataResult
+      attr_accessor ops_metadata_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePatchBaselineRequest
+      attr_accessor operating_system: ("WINDOWS" | "AMAZON_LINUX" | "AMAZON_LINUX_2" | "AMAZON_LINUX_2022" | "UBUNTU" | "REDHAT_ENTERPRISE_LINUX" | "SUSE" | "CENTOS" | "ORACLE_LINUX" | "DEBIAN" | "MACOS" | "RASPBIAN" | "ROCKY_LINUX" | "ALMA_LINUX" | "AMAZON_LINUX_2023")
+      attr_accessor name: ::String
+      attr_accessor global_filters: Types::PatchFilterGroup
+      attr_accessor approval_rules: Types::PatchRuleGroup
+      attr_accessor approved_patches: ::Array[::String]
+      attr_accessor approved_patches_compliance_level: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "INFORMATIONAL" | "UNSPECIFIED")
+      attr_accessor approved_patches_enable_non_security: bool
+      attr_accessor rejected_patches: ::Array[::String]
+      attr_accessor rejected_patches_action: ("ALLOW_AS_DEPENDENCY" | "BLOCK")
+      attr_accessor description: ::String
+      attr_accessor sources: ::Array[Types::PatchSource]
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreatePatchBaselineResult
+      attr_accessor baseline_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateResourceDataSyncRequest
+      attr_accessor sync_name: ::String
+      attr_accessor s3_destination: Types::ResourceDataSyncS3Destination
+      attr_accessor sync_type: ::String
+      attr_accessor sync_source: Types::ResourceDataSyncSource
+      SENSITIVE: []
+    end
+
+    class CreateResourceDataSyncResult < Aws::EmptyStructure
+    end
+
+    class CustomSchemaCountLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteActivationRequest
+      attr_accessor activation_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteActivationResult < Aws::EmptyStructure
+    end
+
+    class DeleteAssociationRequest
+      attr_accessor name: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor association_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAssociationResult < Aws::EmptyStructure
+    end
+
+    class DeleteDocumentRequest
+      attr_accessor name: ::String
+      attr_accessor document_version: ::String
+      attr_accessor version_name: ::String
+      attr_accessor force: bool
+      SENSITIVE: []
+    end
+
+    class DeleteDocumentResult < Aws::EmptyStructure
+    end
+
+    class DeleteInventoryRequest
+      attr_accessor type_name: ::String
+      attr_accessor schema_delete_option: ("DisableSchema" | "DeleteSchema")
+      attr_accessor dry_run: bool
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInventoryResult
+      attr_accessor deletion_id: ::String
+      attr_accessor type_name: ::String
+      attr_accessor deletion_summary: Types::InventoryDeletionSummary
+      SENSITIVE: []
+    end
+
+    class DeleteMaintenanceWindowRequest
+      attr_accessor window_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMaintenanceWindowResult
+      attr_accessor window_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteOpsItemRequest
+      attr_accessor ops_item_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteOpsItemResponse < Aws::EmptyStructure
+    end
+
+    class DeleteOpsMetadataRequest
+      attr_accessor ops_metadata_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteOpsMetadataResult < Aws::EmptyStructure
+    end
+
+    class DeleteParameterRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteParameterResult < Aws::EmptyStructure
+    end
+
+    class DeleteParametersRequest
+      attr_accessor names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteParametersResult
+      attr_accessor deleted_parameters: ::Array[::String]
+      attr_accessor invalid_parameters: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeletePatchBaselineRequest
+      attr_accessor baseline_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePatchBaselineResult
+      attr_accessor baseline_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourceDataSyncRequest
+      attr_accessor sync_name: ::String
+      attr_accessor sync_type: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourceDataSyncResult < Aws::EmptyStructure
+    end
+
+    class DeleteResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor policy_id: ::String
+      attr_accessor policy_hash: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyResponse < Aws::EmptyStructure
+    end
+
+    class DeregisterManagedInstanceRequest
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterManagedInstanceResult < Aws::EmptyStructure
+    end
+
+    class DeregisterPatchBaselineForPatchGroupRequest
+      attr_accessor baseline_id: ::String
+      attr_accessor patch_group: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterPatchBaselineForPatchGroupResult
+      attr_accessor baseline_id: ::String
+      attr_accessor patch_group: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterTargetFromMaintenanceWindowRequest
+      attr_accessor window_id: ::String
+      attr_accessor window_target_id: ::String
+      attr_accessor safe: bool
+      SENSITIVE: []
+    end
+
+    class DeregisterTargetFromMaintenanceWindowResult
+      attr_accessor window_id: ::String
+      attr_accessor window_target_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterTaskFromMaintenanceWindowRequest
+      attr_accessor window_id: ::String
+      attr_accessor window_task_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterTaskFromMaintenanceWindowResult
+      attr_accessor window_id: ::String
+      attr_accessor window_task_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeActivationsFilter
+      attr_accessor filter_key: ("ActivationIds" | "DefaultInstanceName" | "IamRole")
+      attr_accessor filter_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeActivationsRequest
+      attr_accessor filters: ::Array[Types::DescribeActivationsFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeActivationsResult
+      attr_accessor activation_list: ::Array[Types::Activation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAssociationExecutionTargetsRequest
+      attr_accessor association_id: ::String
+      attr_accessor execution_id: ::String
+      attr_accessor filters: ::Array[Types::AssociationExecutionTargetsFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAssociationExecutionTargetsResult
+      attr_accessor association_execution_targets: ::Array[Types::AssociationExecutionTarget]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAssociationExecutionsRequest
+      attr_accessor association_id: ::String
+      attr_accessor filters: ::Array[Types::AssociationExecutionFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAssociationExecutionsResult
+      attr_accessor association_executions: ::Array[Types::AssociationExecution]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAssociationRequest
+      attr_accessor name: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor association_id: ::String
+      attr_accessor association_version: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAssociationResult
+      attr_accessor association_description: Types::AssociationDescription
+      SENSITIVE: []
+    end
+
+    class DescribeAutomationExecutionsRequest
+      attr_accessor filters: ::Array[Types::AutomationExecutionFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAutomationExecutionsResult
+      attr_accessor automation_execution_metadata_list: ::Array[Types::AutomationExecutionMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAutomationStepExecutionsRequest
+      attr_accessor automation_execution_id: ::String
+      attr_accessor filters: ::Array[Types::StepExecutionFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor reverse_order: bool
+      SENSITIVE: []
+    end
+
+    class DescribeAutomationStepExecutionsResult
+      attr_accessor step_executions: ::Array[Types::StepExecution]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAvailablePatchesRequest
+      attr_accessor filters: ::Array[Types::PatchOrchestratorFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAvailablePatchesResult
+      attr_accessor patches: ::Array[Types::Patch]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDocumentPermissionRequest
+      attr_accessor name: ::String
+      attr_accessor permission_type: ("Share")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDocumentPermissionResponse
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor account_sharing_info_list: ::Array[Types::AccountSharingInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDocumentRequest
+      attr_accessor name: ::String
+      attr_accessor document_version: ::String
+      attr_accessor version_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDocumentResult
+      attr_accessor document: Types::DocumentDescription
+      SENSITIVE: []
+    end
+
+    class DescribeEffectiveInstanceAssociationsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEffectiveInstanceAssociationsResult
+      attr_accessor associations: ::Array[Types::InstanceAssociation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEffectivePatchesForPatchBaselineRequest
+      attr_accessor baseline_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEffectivePatchesForPatchBaselineResult
+      attr_accessor effective_patches: ::Array[Types::EffectivePatch]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInstanceAssociationsStatusRequest
+      attr_accessor instance_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInstanceAssociationsStatusResult
+      attr_accessor instance_association_status_infos: ::Array[Types::InstanceAssociationStatusInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInstanceInformationRequest
+      attr_accessor instance_information_filter_list: ::Array[Types::InstanceInformationFilter]
+      attr_accessor filters: ::Array[Types::InstanceInformationStringFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInstanceInformationResult
+      attr_accessor instance_information_list: ::Array[Types::InstanceInformation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInstancePatchStatesForPatchGroupRequest
+      attr_accessor patch_group: ::String
+      attr_accessor filters: ::Array[Types::InstancePatchStateFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeInstancePatchStatesForPatchGroupResult
+      attr_accessor instance_patch_states: ::Array[Types::InstancePatchState]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInstancePatchStatesRequest
+      attr_accessor instance_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeInstancePatchStatesResult
+      attr_accessor instance_patch_states: ::Array[Types::InstancePatchState]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInstancePatchesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor filters: ::Array[Types::PatchOrchestratorFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeInstancePatchesResult
+      attr_accessor patches: ::Array[Types::PatchComplianceData]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInventoryDeletionsRequest
+      attr_accessor deletion_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeInventoryDeletionsResult
+      attr_accessor inventory_deletions: ::Array[Types::InventoryDeletionStatusItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMaintenanceWindowExecutionTaskInvocationsRequest
+      attr_accessor window_execution_id: ::String
+      attr_accessor task_id: ::String
+      attr_accessor filters: ::Array[Types::MaintenanceWindowFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMaintenanceWindowExecutionTaskInvocationsResult
+      attr_accessor window_execution_task_invocation_identities: ::Array[Types::MaintenanceWindowExecutionTaskInvocationIdentity]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMaintenanceWindowExecutionTasksRequest
+      attr_accessor window_execution_id: ::String
+      attr_accessor filters: ::Array[Types::MaintenanceWindowFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMaintenanceWindowExecutionTasksResult
+      attr_accessor window_execution_task_identities: ::Array[Types::MaintenanceWindowExecutionTaskIdentity]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMaintenanceWindowExecutionsRequest
+      attr_accessor window_id: ::String
+      attr_accessor filters: ::Array[Types::MaintenanceWindowFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMaintenanceWindowExecutionsResult
+      attr_accessor window_executions: ::Array[Types::MaintenanceWindowExecution]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMaintenanceWindowScheduleRequest
+      attr_accessor window_id: ::String
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor resource_type: ("INSTANCE" | "RESOURCE_GROUP")
+      attr_accessor filters: ::Array[Types::PatchOrchestratorFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMaintenanceWindowScheduleResult
+      attr_accessor scheduled_window_executions: ::Array[Types::ScheduledWindowExecution]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMaintenanceWindowTargetsRequest
+      attr_accessor window_id: ::String
+      attr_accessor filters: ::Array[Types::MaintenanceWindowFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMaintenanceWindowTargetsResult
+      attr_accessor targets: ::Array[Types::MaintenanceWindowTarget]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMaintenanceWindowTasksRequest
+      attr_accessor window_id: ::String
+      attr_accessor filters: ::Array[Types::MaintenanceWindowFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMaintenanceWindowTasksResult
+      attr_accessor tasks: ::Array[Types::MaintenanceWindowTask]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMaintenanceWindowsForTargetRequest
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor resource_type: ("INSTANCE" | "RESOURCE_GROUP")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMaintenanceWindowsForTargetResult
+      attr_accessor window_identities: ::Array[Types::MaintenanceWindowIdentityForTarget]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMaintenanceWindowsRequest
+      attr_accessor filters: ::Array[Types::MaintenanceWindowFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMaintenanceWindowsResult
+      attr_accessor window_identities: ::Array[Types::MaintenanceWindowIdentity]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeOpsItemsRequest
+      attr_accessor ops_item_filters: ::Array[Types::OpsItemFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeOpsItemsResponse
+      attr_accessor next_token: ::String
+      attr_accessor ops_item_summaries: ::Array[Types::OpsItemSummary]
+      SENSITIVE: []
+    end
+
+    class DescribeParametersRequest
+      attr_accessor filters: ::Array[Types::ParametersFilter]
+      attr_accessor parameter_filters: ::Array[Types::ParameterStringFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeParametersResult
+      attr_accessor parameters: ::Array[Types::ParameterMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePatchBaselinesRequest
+      attr_accessor filters: ::Array[Types::PatchOrchestratorFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePatchBaselinesResult
+      attr_accessor baseline_identities: ::Array[Types::PatchBaselineIdentity]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePatchGroupStateRequest
+      attr_accessor patch_group: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePatchGroupStateResult
+      attr_accessor instances: ::Integer
+      attr_accessor instances_with_installed_patches: ::Integer
+      attr_accessor instances_with_installed_other_patches: ::Integer
+      attr_accessor instances_with_installed_pending_reboot_patches: ::Integer
+      attr_accessor instances_with_installed_rejected_patches: ::Integer
+      attr_accessor instances_with_missing_patches: ::Integer
+      attr_accessor instances_with_failed_patches: ::Integer
+      attr_accessor instances_with_not_applicable_patches: ::Integer
+      attr_accessor instances_with_unreported_not_applicable_patches: ::Integer
+      attr_accessor instances_with_critical_non_compliant_patches: ::Integer
+      attr_accessor instances_with_security_non_compliant_patches: ::Integer
+      attr_accessor instances_with_other_non_compliant_patches: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribePatchGroupsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::PatchOrchestratorFilter]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePatchGroupsResult
+      attr_accessor mappings: ::Array[Types::PatchGroupPatchBaselineMapping]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePatchPropertiesRequest
+      attr_accessor operating_system: ("WINDOWS" | "AMAZON_LINUX" | "AMAZON_LINUX_2" | "AMAZON_LINUX_2022" | "UBUNTU" | "REDHAT_ENTERPRISE_LINUX" | "SUSE" | "CENTOS" | "ORACLE_LINUX" | "DEBIAN" | "MACOS" | "RASPBIAN" | "ROCKY_LINUX" | "ALMA_LINUX" | "AMAZON_LINUX_2023")
+      attr_accessor property: ("PRODUCT" | "PRODUCT_FAMILY" | "CLASSIFICATION" | "MSRC_SEVERITY" | "PRIORITY" | "SEVERITY")
+      attr_accessor patch_set: ("OS" | "APPLICATION")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePatchPropertiesResult
+      attr_accessor properties: ::Array[::Hash[::String, ::String]]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSessionsRequest
+      attr_accessor state: ("Active" | "History")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::SessionFilter]
+      SENSITIVE: []
+    end
+
+    class DescribeSessionsResponse
+      attr_accessor sessions: ::Array[Types::Session]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateOpsItemRelatedItemRequest
+      attr_accessor ops_item_id: ::String
+      attr_accessor association_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateOpsItemRelatedItemResponse < Aws::EmptyStructure
+    end
+
+    class DocumentAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DocumentDefaultVersionDescription
+      attr_accessor name: ::String
+      attr_accessor default_version: ::String
+      attr_accessor default_version_name: ::String
+      SENSITIVE: []
+    end
+
+    class DocumentDescription
+      attr_accessor sha_1: ::String
+      attr_accessor hash: ::String
+      attr_accessor hash_type: ("Sha256" | "Sha1")
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor version_name: ::String
+      attr_accessor owner: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor status: ("Creating" | "Active" | "Updating" | "Deleting" | "Failed")
+      attr_accessor status_information: ::String
+      attr_accessor document_version: ::String
+      attr_accessor description: ::String
+      attr_accessor parameters: ::Array[Types::DocumentParameter]
+      attr_accessor platform_types: ::Array[("Windows" | "Linux" | "MacOS")]
+      attr_accessor document_type: ("Command" | "Policy" | "Automation" | "Session" | "Package" | "ApplicationConfiguration" | "ApplicationConfigurationSchema" | "DeploymentStrategy" | "ChangeCalendar" | "Automation.ChangeTemplate" | "ProblemAnalysis" | "ProblemAnalysisTemplate" | "CloudFormation" | "ConformancePackTemplate" | "QuickSetup")
+      attr_accessor schema_version: ::String
+      attr_accessor latest_version: ::String
+      attr_accessor default_version: ::String
+      attr_accessor document_format: ("YAML" | "JSON" | "TEXT")
+      attr_accessor target_type: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor attachments_information: ::Array[Types::AttachmentInformation]
+      attr_accessor requires: ::Array[Types::DocumentRequires]
+      attr_accessor author: ::String
+      attr_accessor review_information: ::Array[Types::ReviewInformation]
+      attr_accessor approved_version: ::String
+      attr_accessor pending_review_version: ::String
+      attr_accessor review_status: ("APPROVED" | "NOT_REVIEWED" | "PENDING" | "REJECTED")
+      attr_accessor category: ::Array[::String]
+      attr_accessor category_enum: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DocumentFilter
+      attr_accessor key: ("Name" | "Owner" | "PlatformTypes" | "DocumentType")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class DocumentIdentifier
+      attr_accessor name: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor display_name: ::String
+      attr_accessor owner: ::String
+      attr_accessor version_name: ::String
+      attr_accessor platform_types: ::Array[("Windows" | "Linux" | "MacOS")]
+      attr_accessor document_version: ::String
+      attr_accessor document_type: ("Command" | "Policy" | "Automation" | "Session" | "Package" | "ApplicationConfiguration" | "ApplicationConfigurationSchema" | "DeploymentStrategy" | "ChangeCalendar" | "Automation.ChangeTemplate" | "ProblemAnalysis" | "ProblemAnalysisTemplate" | "CloudFormation" | "ConformancePackTemplate" | "QuickSetup")
+      attr_accessor schema_version: ::String
+      attr_accessor document_format: ("YAML" | "JSON" | "TEXT")
+      attr_accessor target_type: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor requires: ::Array[Types::DocumentRequires]
+      attr_accessor review_status: ("APPROVED" | "NOT_REVIEWED" | "PENDING" | "REJECTED")
+      attr_accessor author: ::String
+      SENSITIVE: []
+    end
+
+    class DocumentKeyValuesFilter
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DocumentLimitExceeded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DocumentMetadataResponseInfo
+      attr_accessor reviewer_response: ::Array[Types::DocumentReviewerResponseSource]
+      SENSITIVE: []
+    end
+
+    class DocumentParameter
+      attr_accessor name: ::String
+      attr_accessor type: ("String" | "StringList")
+      attr_accessor description: ::String
+      attr_accessor default_value: ::String
+      SENSITIVE: []
+    end
+
+    class DocumentPermissionLimit
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DocumentRequires
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor require_type: ::String
+      attr_accessor version_name: ::String
+      SENSITIVE: []
+    end
+
+    class DocumentReviewCommentSource
+      attr_accessor type: ("Comment")
+      attr_accessor content: ::String
+      SENSITIVE: []
+    end
+
+    class DocumentReviewerResponseSource
+      attr_accessor create_time: ::Time
+      attr_accessor updated_time: ::Time
+      attr_accessor review_status: ("APPROVED" | "NOT_REVIEWED" | "PENDING" | "REJECTED")
+      attr_accessor comment: ::Array[Types::DocumentReviewCommentSource]
+      attr_accessor reviewer: ::String
+      SENSITIVE: []
+    end
+
+    class DocumentReviews
+      attr_accessor action: ("SendForReview" | "UpdateReview" | "Approve" | "Reject")
+      attr_accessor comment: ::Array[Types::DocumentReviewCommentSource]
+      SENSITIVE: []
+    end
+
+    class DocumentVersionInfo
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor document_version: ::String
+      attr_accessor version_name: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor is_default_version: bool
+      attr_accessor document_format: ("YAML" | "JSON" | "TEXT")
+      attr_accessor status: ("Creating" | "Active" | "Updating" | "Deleting" | "Failed")
+      attr_accessor status_information: ::String
+      attr_accessor review_status: ("APPROVED" | "NOT_REVIEWED" | "PENDING" | "REJECTED")
+      SENSITIVE: []
+    end
+
+    class DocumentVersionLimitExceeded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DoesNotExistException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DuplicateDocumentContent
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DuplicateDocumentVersionName
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DuplicateInstanceId < Aws::EmptyStructure
+    end
+
+    class EffectivePatch
+      attr_accessor patch: Types::Patch
+      attr_accessor patch_status: Types::PatchStatus
+      SENSITIVE: []
+    end
+
+    class FailedCreateAssociation
+      attr_accessor entry: Types::CreateAssociationBatchRequestEntry
+      attr_accessor message: ::String
+      attr_accessor fault: ("Client" | "Server" | "Unknown")
+      SENSITIVE: []
+    end
+
+    class FailureDetails
+      attr_accessor failure_stage: ::String
+      attr_accessor failure_type: ::String
+      attr_accessor details: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class FeatureNotAvailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetAutomationExecutionRequest
+      attr_accessor automation_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAutomationExecutionResult
+      attr_accessor automation_execution: Types::AutomationExecution
+      SENSITIVE: []
+    end
+
+    class GetCalendarStateRequest
+      attr_accessor calendar_names: ::Array[::String]
+      attr_accessor at_time: ::String
+      SENSITIVE: []
+    end
+
+    class GetCalendarStateResponse
+      attr_accessor state: ("OPEN" | "CLOSED")
+      attr_accessor at_time: ::String
+      attr_accessor next_transition_time: ::String
+      SENSITIVE: []
+    end
+
+    class GetCommandInvocationRequest
+      attr_accessor command_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor plugin_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetCommandInvocationResult
+      attr_accessor command_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor comment: ::String
+      attr_accessor document_name: ::String
+      attr_accessor document_version: ::String
+      attr_accessor plugin_name: ::String
+      attr_accessor response_code: ::Integer
+      attr_accessor execution_start_date_time: ::String
+      attr_accessor execution_elapsed_time: ::String
+      attr_accessor execution_end_date_time: ::String
+      attr_accessor status: ("Pending" | "InProgress" | "Delayed" | "Success" | "Cancelled" | "TimedOut" | "Failed" | "Cancelling")
+      attr_accessor status_details: ::String
+      attr_accessor standard_output_content: ::String
+      attr_accessor standard_output_url: ::String
+      attr_accessor standard_error_content: ::String
+      attr_accessor standard_error_url: ::String
+      attr_accessor cloud_watch_output_config: Types::CloudWatchOutputConfig
+      SENSITIVE: []
+    end
+
+    class GetConnectionStatusRequest
+      attr_accessor target: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectionStatusResponse
+      attr_accessor target: ::String
+      attr_accessor status: ("connected" | "notconnected")
+      SENSITIVE: []
+    end
+
+    class GetDefaultPatchBaselineRequest
+      attr_accessor operating_system: ("WINDOWS" | "AMAZON_LINUX" | "AMAZON_LINUX_2" | "AMAZON_LINUX_2022" | "UBUNTU" | "REDHAT_ENTERPRISE_LINUX" | "SUSE" | "CENTOS" | "ORACLE_LINUX" | "DEBIAN" | "MACOS" | "RASPBIAN" | "ROCKY_LINUX" | "ALMA_LINUX" | "AMAZON_LINUX_2023")
+      SENSITIVE: []
+    end
+
+    class GetDefaultPatchBaselineResult
+      attr_accessor baseline_id: ::String
+      attr_accessor operating_system: ("WINDOWS" | "AMAZON_LINUX" | "AMAZON_LINUX_2" | "AMAZON_LINUX_2022" | "UBUNTU" | "REDHAT_ENTERPRISE_LINUX" | "SUSE" | "CENTOS" | "ORACLE_LINUX" | "DEBIAN" | "MACOS" | "RASPBIAN" | "ROCKY_LINUX" | "ALMA_LINUX" | "AMAZON_LINUX_2023")
+      SENSITIVE: []
+    end
+
+    class GetDeployablePatchSnapshotForInstanceRequest
+      attr_accessor instance_id: ::String
+      attr_accessor snapshot_id: ::String
+      attr_accessor baseline_override: Types::BaselineOverride
+      SENSITIVE: []
+    end
+
+    class GetDeployablePatchSnapshotForInstanceResult
+      attr_accessor instance_id: ::String
+      attr_accessor snapshot_id: ::String
+      attr_accessor snapshot_download_url: ::String
+      attr_accessor product: ::String
+      SENSITIVE: []
+    end
+
+    class GetDocumentRequest
+      attr_accessor name: ::String
+      attr_accessor version_name: ::String
+      attr_accessor document_version: ::String
+      attr_accessor document_format: ("YAML" | "JSON" | "TEXT")
+      SENSITIVE: []
+    end
+
+    class GetDocumentResult
+      attr_accessor name: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor display_name: ::String
+      attr_accessor version_name: ::String
+      attr_accessor document_version: ::String
+      attr_accessor status: ("Creating" | "Active" | "Updating" | "Deleting" | "Failed")
+      attr_accessor status_information: ::String
+      attr_accessor content: ::String
+      attr_accessor document_type: ("Command" | "Policy" | "Automation" | "Session" | "Package" | "ApplicationConfiguration" | "ApplicationConfigurationSchema" | "DeploymentStrategy" | "ChangeCalendar" | "Automation.ChangeTemplate" | "ProblemAnalysis" | "ProblemAnalysisTemplate" | "CloudFormation" | "ConformancePackTemplate" | "QuickSetup")
+      attr_accessor document_format: ("YAML" | "JSON" | "TEXT")
+      attr_accessor requires: ::Array[Types::DocumentRequires]
+      attr_accessor attachments_content: ::Array[Types::AttachmentContent]
+      attr_accessor review_status: ("APPROVED" | "NOT_REVIEWED" | "PENDING" | "REJECTED")
+      SENSITIVE: []
+    end
+
+    class GetInventoryRequest
+      attr_accessor filters: ::Array[Types::InventoryFilter]
+      attr_accessor aggregators: ::Array[Types::InventoryAggregator]
+      attr_accessor result_attributes: ::Array[Types::ResultAttribute]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetInventoryResult
+      attr_accessor entities: ::Array[Types::InventoryResultEntity]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetInventorySchemaRequest
+      attr_accessor type_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor aggregator: bool
+      attr_accessor sub_type: bool
+      SENSITIVE: []
+    end
+
+    class GetInventorySchemaResult
+      attr_accessor schemas: ::Array[Types::InventoryItemSchema]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetMaintenanceWindowExecutionRequest
+      attr_accessor window_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMaintenanceWindowExecutionResult
+      attr_accessor window_execution_id: ::String
+      attr_accessor task_ids: ::Array[::String]
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "SUCCESS" | "FAILED" | "TIMED_OUT" | "CANCELLING" | "CANCELLED" | "SKIPPED_OVERLAPPING")
+      attr_accessor status_details: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetMaintenanceWindowExecutionTaskInvocationRequest
+      attr_accessor window_execution_id: ::String
+      attr_accessor task_id: ::String
+      attr_accessor invocation_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMaintenanceWindowExecutionTaskInvocationResult
+      attr_accessor window_execution_id: ::String
+      attr_accessor task_execution_id: ::String
+      attr_accessor invocation_id: ::String
+      attr_accessor execution_id: ::String
+      attr_accessor task_type: ("RUN_COMMAND" | "AUTOMATION" | "STEP_FUNCTIONS" | "LAMBDA")
+      attr_accessor parameters: ::String
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "SUCCESS" | "FAILED" | "TIMED_OUT" | "CANCELLING" | "CANCELLED" | "SKIPPED_OVERLAPPING")
+      attr_accessor status_details: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor owner_information: ::String
+      attr_accessor window_target_id: ::String
+      SENSITIVE: [:parameters, :owner_information]
+    end
+
+    class GetMaintenanceWindowExecutionTaskRequest
+      attr_accessor window_execution_id: ::String
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMaintenanceWindowExecutionTaskResult
+      attr_accessor window_execution_id: ::String
+      attr_accessor task_execution_id: ::String
+      attr_accessor task_arn: ::String
+      attr_accessor service_role: ::String
+      attr_accessor type: ("RUN_COMMAND" | "AUTOMATION" | "STEP_FUNCTIONS" | "LAMBDA")
+      attr_accessor task_parameters: ::Array[::Hash[::String, Types::MaintenanceWindowTaskParameterValueExpression]]
+      attr_accessor priority: ::Integer
+      attr_accessor max_concurrency: ::String
+      attr_accessor max_errors: ::String
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "SUCCESS" | "FAILED" | "TIMED_OUT" | "CANCELLING" | "CANCELLED" | "SKIPPED_OVERLAPPING")
+      attr_accessor status_details: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor alarm_configuration: Types::AlarmConfiguration
+      attr_accessor triggered_alarms: ::Array[Types::AlarmStateInformation]
+      SENSITIVE: [:task_parameters]
+    end
+
+    class GetMaintenanceWindowRequest
+      attr_accessor window_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMaintenanceWindowResult
+      attr_accessor window_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor start_date: ::String
+      attr_accessor end_date: ::String
+      attr_accessor schedule: ::String
+      attr_accessor schedule_timezone: ::String
+      attr_accessor schedule_offset: ::Integer
+      attr_accessor next_execution_time: ::String
+      attr_accessor duration: ::Integer
+      attr_accessor cutoff: ::Integer
+      attr_accessor allow_unassociated_targets: bool
+      attr_accessor enabled: bool
+      attr_accessor created_date: ::Time
+      attr_accessor modified_date: ::Time
+      SENSITIVE: [:description]
+    end
+
+    class GetMaintenanceWindowTaskRequest
+      attr_accessor window_id: ::String
+      attr_accessor window_task_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMaintenanceWindowTaskResult
+      attr_accessor window_id: ::String
+      attr_accessor window_task_id: ::String
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor task_arn: ::String
+      attr_accessor service_role_arn: ::String
+      attr_accessor task_type: ("RUN_COMMAND" | "AUTOMATION" | "STEP_FUNCTIONS" | "LAMBDA")
+      attr_accessor task_parameters: ::Hash[::String, Types::MaintenanceWindowTaskParameterValueExpression]
+      attr_accessor task_invocation_parameters: Types::MaintenanceWindowTaskInvocationParameters
+      attr_accessor priority: ::Integer
+      attr_accessor max_concurrency: ::String
+      attr_accessor max_errors: ::String
+      attr_accessor logging_info: Types::LoggingInfo
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor cutoff_behavior: ("CONTINUE_TASK" | "CANCEL_TASK")
+      attr_accessor alarm_configuration: Types::AlarmConfiguration
+      SENSITIVE: [:task_parameters, :description]
+    end
+
+    class GetOpsItemRequest
+      attr_accessor ops_item_id: ::String
+      attr_accessor ops_item_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetOpsItemResponse
+      attr_accessor ops_item: Types::OpsItem
+      SENSITIVE: []
+    end
+
+    class GetOpsMetadataRequest
+      attr_accessor ops_metadata_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetOpsMetadataResult
+      attr_accessor resource_id: ::String
+      attr_accessor metadata: ::Hash[::String, Types::MetadataValue]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetOpsSummaryRequest
+      attr_accessor sync_name: ::String
+      attr_accessor filters: ::Array[Types::OpsFilter]
+      attr_accessor aggregators: ::Array[Types::OpsAggregator]
+      attr_accessor result_attributes: ::Array[Types::OpsResultAttribute]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetOpsSummaryResult
+      attr_accessor entities: ::Array[Types::OpsEntity]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetParameterHistoryRequest
+      attr_accessor name: ::String
+      attr_accessor with_decryption: bool
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetParameterHistoryResult
+      attr_accessor parameters: ::Array[Types::ParameterHistory]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetParameterRequest
+      attr_accessor name: ::String
+      attr_accessor with_decryption: bool
+      SENSITIVE: []
+    end
+
+    class GetParameterResult
+      attr_accessor parameter: Types::Parameter
+      SENSITIVE: []
+    end
+
+    class GetParametersByPathRequest
+      attr_accessor path: ::String
+      attr_accessor recursive: bool
+      attr_accessor parameter_filters: ::Array[Types::ParameterStringFilter]
+      attr_accessor with_decryption: bool
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetParametersByPathResult
+      attr_accessor parameters: ::Array[Types::Parameter]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetParametersRequest
+      attr_accessor names: ::Array[::String]
+      attr_accessor with_decryption: bool
+      SENSITIVE: []
+    end
+
+    class GetParametersResult
+      attr_accessor parameters: ::Array[Types::Parameter]
+      attr_accessor invalid_parameters: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetPatchBaselineForPatchGroupRequest
+      attr_accessor patch_group: ::String
+      attr_accessor operating_system: ("WINDOWS" | "AMAZON_LINUX" | "AMAZON_LINUX_2" | "AMAZON_LINUX_2022" | "UBUNTU" | "REDHAT_ENTERPRISE_LINUX" | "SUSE" | "CENTOS" | "ORACLE_LINUX" | "DEBIAN" | "MACOS" | "RASPBIAN" | "ROCKY_LINUX" | "ALMA_LINUX" | "AMAZON_LINUX_2023")
+      SENSITIVE: []
+    end
+
+    class GetPatchBaselineForPatchGroupResult
+      attr_accessor baseline_id: ::String
+      attr_accessor patch_group: ::String
+      attr_accessor operating_system: ("WINDOWS" | "AMAZON_LINUX" | "AMAZON_LINUX_2" | "AMAZON_LINUX_2022" | "UBUNTU" | "REDHAT_ENTERPRISE_LINUX" | "SUSE" | "CENTOS" | "ORACLE_LINUX" | "DEBIAN" | "MACOS" | "RASPBIAN" | "ROCKY_LINUX" | "ALMA_LINUX" | "AMAZON_LINUX_2023")
+      SENSITIVE: []
+    end
+
+    class GetPatchBaselineRequest
+      attr_accessor baseline_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPatchBaselineResult
+      attr_accessor baseline_id: ::String
+      attr_accessor name: ::String
+      attr_accessor operating_system: ("WINDOWS" | "AMAZON_LINUX" | "AMAZON_LINUX_2" | "AMAZON_LINUX_2022" | "UBUNTU" | "REDHAT_ENTERPRISE_LINUX" | "SUSE" | "CENTOS" | "ORACLE_LINUX" | "DEBIAN" | "MACOS" | "RASPBIAN" | "ROCKY_LINUX" | "ALMA_LINUX" | "AMAZON_LINUX_2023")
+      attr_accessor global_filters: Types::PatchFilterGroup
+      attr_accessor approval_rules: Types::PatchRuleGroup
+      attr_accessor approved_patches: ::Array[::String]
+      attr_accessor approved_patches_compliance_level: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "INFORMATIONAL" | "UNSPECIFIED")
+      attr_accessor approved_patches_enable_non_security: bool
+      attr_accessor rejected_patches: ::Array[::String]
+      attr_accessor rejected_patches_action: ("ALLOW_AS_DEPENDENCY" | "BLOCK")
+      attr_accessor patch_groups: ::Array[::String]
+      attr_accessor created_date: ::Time
+      attr_accessor modified_date: ::Time
+      attr_accessor description: ::String
+      attr_accessor sources: ::Array[Types::PatchSource]
+      SENSITIVE: []
+    end
+
+    class GetResourcePoliciesRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetResourcePoliciesResponse
+      attr_accessor next_token: ::String
+      attr_accessor policies: ::Array[Types::GetResourcePoliciesResponseEntry]
+      SENSITIVE: []
+    end
+
+    class GetResourcePoliciesResponseEntry
+      attr_accessor policy_id: ::String
+      attr_accessor policy_hash: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceSettingRequest
+      attr_accessor setting_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceSettingResult
+      attr_accessor service_setting: Types::ServiceSetting
+      SENSITIVE: []
+    end
+
+    class HierarchyLevelLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class HierarchyTypeMismatchException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IdempotentParameterMismatch
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IncompatiblePolicyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceAggregatedAssociationOverview
+      attr_accessor detailed_status: ::String
+      attr_accessor instance_association_status_aggregated_count: ::Hash[::String, ::Integer]
+      SENSITIVE: []
+    end
+
+    class InstanceAssociation
+      attr_accessor association_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor content: ::String
+      attr_accessor association_version: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceAssociationOutputLocation
+      attr_accessor s3_location: Types::S3OutputLocation
+      SENSITIVE: []
+    end
+
+    class InstanceAssociationOutputUrl
+      attr_accessor s3_output_url: Types::S3OutputUrl
+      SENSITIVE: []
+    end
+
+    class InstanceAssociationStatusInfo
+      attr_accessor association_id: ::String
+      attr_accessor name: ::String
+      attr_accessor document_version: ::String
+      attr_accessor association_version: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor execution_date: ::Time
+      attr_accessor status: ::String
+      attr_accessor detailed_status: ::String
+      attr_accessor execution_summary: ::String
+      attr_accessor error_code: ::String
+      attr_accessor output_url: Types::InstanceAssociationOutputUrl
+      attr_accessor association_name: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceInformation
+      attr_accessor instance_id: ::String
+      attr_accessor ping_status: ("Online" | "ConnectionLost" | "Inactive")
+      attr_accessor last_ping_date_time: ::Time
+      attr_accessor agent_version: ::String
+      attr_accessor is_latest_version: bool
+      attr_accessor platform_type: ("Windows" | "Linux" | "MacOS")
+      attr_accessor platform_name: ::String
+      attr_accessor platform_version: ::String
+      attr_accessor activation_id: ::String
+      attr_accessor iam_role: ::String
+      attr_accessor registration_date: ::Time
+      attr_accessor resource_type: ("ManagedInstance" | "EC2Instance")
+      attr_accessor name: ::String
+      attr_accessor ip_address: ::String
+      attr_accessor computer_name: ::String
+      attr_accessor association_status: ::String
+      attr_accessor last_association_execution_date: ::Time
+      attr_accessor last_successful_association_execution_date: ::Time
+      attr_accessor association_overview: Types::InstanceAggregatedAssociationOverview
+      attr_accessor source_id: ::String
+      attr_accessor source_type: ("AWS::EC2::Instance" | "AWS::IoT::Thing" | "AWS::SSM::ManagedInstance")
+      SENSITIVE: []
+    end
+
+    class InstanceInformationFilter
+      attr_accessor key: ("InstanceIds" | "AgentVersion" | "PingStatus" | "PlatformTypes" | "ActivationIds" | "IamRole" | "ResourceType" | "AssociationStatus")
+      attr_accessor value_set: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class InstanceInformationStringFilter
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class InstancePatchState
+      attr_accessor instance_id: ::String
+      attr_accessor patch_group: ::String
+      attr_accessor baseline_id: ::String
+      attr_accessor snapshot_id: ::String
+      attr_accessor install_override_list: ::String
+      attr_accessor owner_information: ::String
+      attr_accessor installed_count: ::Integer
+      attr_accessor installed_other_count: ::Integer
+      attr_accessor installed_pending_reboot_count: ::Integer
+      attr_accessor installed_rejected_count: ::Integer
+      attr_accessor missing_count: ::Integer
+      attr_accessor failed_count: ::Integer
+      attr_accessor unreported_not_applicable_count: ::Integer
+      attr_accessor not_applicable_count: ::Integer
+      attr_accessor operation_start_time: ::Time
+      attr_accessor operation_end_time: ::Time
+      attr_accessor operation: ("Scan" | "Install")
+      attr_accessor last_no_reboot_install_operation_time: ::Time
+      attr_accessor reboot_option: ("RebootIfNeeded" | "NoReboot")
+      attr_accessor critical_non_compliant_count: ::Integer
+      attr_accessor security_non_compliant_count: ::Integer
+      attr_accessor other_non_compliant_count: ::Integer
+      SENSITIVE: [:owner_information]
+    end
+
+    class InstancePatchStateFilter
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      attr_accessor type: ("Equal" | "NotEqual" | "LessThan" | "GreaterThan")
+      SENSITIVE: []
+    end
+
+    class InternalServerError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidActivation
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidActivationId
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidAggregatorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidAllowedPatternException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidAssociation
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidAssociationVersion
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidAutomationExecutionParametersException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidAutomationSignalException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidAutomationStatusUpdateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidCommandId < Aws::EmptyStructure
+    end
+
+    class InvalidDeleteInventoryParametersException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidDeletionIdException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidDocument
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidDocumentContent
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidDocumentOperation
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidDocumentSchemaVersion
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidDocumentType
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidDocumentVersion
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidFilter
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidFilterKey < Aws::EmptyStructure
+    end
+
+    class InvalidFilterOption
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidFilterValue
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidInstanceId
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidInstanceInformationFilterValue
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidInventoryGroupException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidInventoryItemContextException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidInventoryRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidItemContentException
+      attr_accessor type_name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidKeyId
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidNextToken
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidNotificationConfig
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidOptionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidOutputFolder < Aws::EmptyStructure
+    end
+
+    class InvalidOutputLocation < Aws::EmptyStructure
+    end
+
+    class InvalidParameters
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidPermissionType
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidPluginName < Aws::EmptyStructure
+    end
+
+    class InvalidPolicyAttributeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidPolicyTypeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidResourceId < Aws::EmptyStructure
+    end
+
+    class InvalidResourceType < Aws::EmptyStructure
+    end
+
+    class InvalidResultAttributeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRole
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidSchedule
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidTag
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidTarget
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidTargetMaps
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidTypeNameException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidUpdate
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InventoryAggregator
+      attr_accessor expression: ::String
+      attr_accessor aggregators: ::Array[Types::InventoryAggregator]
+      attr_accessor groups: ::Array[Types::InventoryGroup]
+      SENSITIVE: []
+    end
+
+    class InventoryDeletionStatusItem
+      attr_accessor deletion_id: ::String
+      attr_accessor type_name: ::String
+      attr_accessor deletion_start_time: ::Time
+      attr_accessor last_status: ("InProgress" | "Complete")
+      attr_accessor last_status_message: ::String
+      attr_accessor deletion_summary: Types::InventoryDeletionSummary
+      attr_accessor last_status_update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class InventoryDeletionSummary
+      attr_accessor total_count: ::Integer
+      attr_accessor remaining_count: ::Integer
+      attr_accessor summary_items: ::Array[Types::InventoryDeletionSummaryItem]
+      SENSITIVE: []
+    end
+
+    class InventoryDeletionSummaryItem
+      attr_accessor version: ::String
+      attr_accessor count: ::Integer
+      attr_accessor remaining_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class InventoryFilter
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      attr_accessor type: ("Equal" | "NotEqual" | "BeginWith" | "LessThan" | "GreaterThan" | "Exists")
+      SENSITIVE: []
+    end
+
+    class InventoryGroup
+      attr_accessor name: ::String
+      attr_accessor filters: ::Array[Types::InventoryFilter]
+      SENSITIVE: []
+    end
+
+    class InventoryItem
+      attr_accessor type_name: ::String
+      attr_accessor schema_version: ::String
+      attr_accessor capture_time: ::String
+      attr_accessor content_hash: ::String
+      attr_accessor content: ::Array[::Hash[::String, ::String]]
+      attr_accessor context: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class InventoryItemAttribute
+      attr_accessor name: ::String
+      attr_accessor data_type: ("string" | "number")
+      SENSITIVE: []
+    end
+
+    class InventoryItemSchema
+      attr_accessor type_name: ::String
+      attr_accessor version: ::String
+      attr_accessor attributes: ::Array[Types::InventoryItemAttribute]
+      attr_accessor display_name: ::String
+      SENSITIVE: []
+    end
+
+    class InventoryResultEntity
+      attr_accessor id: ::String
+      attr_accessor data: ::Hash[::String, Types::InventoryResultItem]
+      SENSITIVE: []
+    end
+
+    class InventoryResultItem
+      attr_accessor type_name: ::String
+      attr_accessor schema_version: ::String
+      attr_accessor capture_time: ::String
+      attr_accessor content_hash: ::String
+      attr_accessor content: ::Array[::Hash[::String, ::String]]
+      SENSITIVE: []
+    end
+
+    class InvocationDoesNotExist < Aws::EmptyStructure
+    end
+
+    class ItemContentMismatchException
+      attr_accessor type_name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ItemSizeLimitExceededException
+      attr_accessor type_name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LabelParameterVersionRequest
+      attr_accessor name: ::String
+      attr_accessor parameter_version: ::Integer
+      attr_accessor labels: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class LabelParameterVersionResult
+      attr_accessor invalid_labels: ::Array[::String]
+      attr_accessor parameter_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAssociationVersionsRequest
+      attr_accessor association_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssociationVersionsResult
+      attr_accessor association_versions: ::Array[Types::AssociationVersionInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssociationsRequest
+      attr_accessor association_filter_list: ::Array[Types::AssociationFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssociationsResult
+      attr_accessor associations: ::Array[Types::Association]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCommandInvocationsRequest
+      attr_accessor command_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::CommandFilter]
+      attr_accessor details: bool
+      SENSITIVE: []
+    end
+
+    class ListCommandInvocationsResult
+      attr_accessor command_invocations: ::Array[Types::CommandInvocation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCommandsRequest
+      attr_accessor command_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::CommandFilter]
+      SENSITIVE: []
+    end
+
+    class ListCommandsResult
+      attr_accessor commands: ::Array[Types::Command]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListComplianceItemsRequest
+      attr_accessor filters: ::Array[Types::ComplianceStringFilter]
+      attr_accessor resource_ids: ::Array[::String]
+      attr_accessor resource_types: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListComplianceItemsResult
+      attr_accessor compliance_items: ::Array[Types::ComplianceItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListComplianceSummariesRequest
+      attr_accessor filters: ::Array[Types::ComplianceStringFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListComplianceSummariesResult
+      attr_accessor compliance_summary_items: ::Array[Types::ComplianceSummaryItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDocumentMetadataHistoryRequest
+      attr_accessor name: ::String
+      attr_accessor document_version: ::String
+      attr_accessor metadata: ("DocumentReviews")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDocumentMetadataHistoryResponse
+      attr_accessor name: ::String
+      attr_accessor document_version: ::String
+      attr_accessor author: ::String
+      attr_accessor metadata: Types::DocumentMetadataResponseInfo
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDocumentVersionsRequest
+      attr_accessor name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDocumentVersionsResult
+      attr_accessor document_versions: ::Array[Types::DocumentVersionInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDocumentsRequest
+      attr_accessor document_filter_list: ::Array[Types::DocumentFilter]
+      attr_accessor filters: ::Array[Types::DocumentKeyValuesFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDocumentsResult
+      attr_accessor document_identifiers: ::Array[Types::DocumentIdentifier]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInventoryEntriesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor type_name: ::String
+      attr_accessor filters: ::Array[Types::InventoryFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListInventoryEntriesResult
+      attr_accessor type_name: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor schema_version: ::String
+      attr_accessor capture_time: ::String
+      attr_accessor entries: ::Array[::Hash[::String, ::String]]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOpsItemEventsRequest
+      attr_accessor filters: ::Array[Types::OpsItemEventFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOpsItemEventsResponse
+      attr_accessor next_token: ::String
+      attr_accessor summaries: ::Array[Types::OpsItemEventSummary]
+      SENSITIVE: []
+    end
+
+    class ListOpsItemRelatedItemsRequest
+      attr_accessor ops_item_id: ::String
+      attr_accessor filters: ::Array[Types::OpsItemRelatedItemsFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOpsItemRelatedItemsResponse
+      attr_accessor next_token: ::String
+      attr_accessor summaries: ::Array[Types::OpsItemRelatedItemSummary]
+      SENSITIVE: []
+    end
+
+    class ListOpsMetadataRequest
+      attr_accessor filters: ::Array[Types::OpsMetadataFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOpsMetadataResult
+      attr_accessor ops_metadata_list: ::Array[Types::OpsMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceComplianceSummariesRequest
+      attr_accessor filters: ::Array[Types::ComplianceStringFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListResourceComplianceSummariesResult
+      attr_accessor resource_compliance_summary_items: ::Array[Types::ResourceComplianceSummaryItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceDataSyncRequest
+      attr_accessor sync_type: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListResourceDataSyncResult
+      attr_accessor resource_data_sync_items: ::Array[Types::ResourceDataSyncItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_type: ("Document" | "ManagedInstance" | "MaintenanceWindow" | "Parameter" | "PatchBaseline" | "OpsItem" | "OpsMetadata" | "Automation" | "Association")
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResult
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class LoggingInfo
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor s3_key_prefix: ::String
+      attr_accessor s3_region: ::String
+      SENSITIVE: []
+    end
+
+    class MaintenanceWindowAutomationParameters
+      attr_accessor document_version: ::String
+      attr_accessor parameters: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class MaintenanceWindowExecution
+      attr_accessor window_id: ::String
+      attr_accessor window_execution_id: ::String
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "SUCCESS" | "FAILED" | "TIMED_OUT" | "CANCELLING" | "CANCELLED" | "SKIPPED_OVERLAPPING")
+      attr_accessor status_details: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class MaintenanceWindowExecutionTaskIdentity
+      attr_accessor window_execution_id: ::String
+      attr_accessor task_execution_id: ::String
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "SUCCESS" | "FAILED" | "TIMED_OUT" | "CANCELLING" | "CANCELLED" | "SKIPPED_OVERLAPPING")
+      attr_accessor status_details: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor task_arn: ::String
+      attr_accessor task_type: ("RUN_COMMAND" | "AUTOMATION" | "STEP_FUNCTIONS" | "LAMBDA")
+      attr_accessor alarm_configuration: Types::AlarmConfiguration
+      attr_accessor triggered_alarms: ::Array[Types::AlarmStateInformation]
+      SENSITIVE: []
+    end
+
+    class MaintenanceWindowExecutionTaskInvocationIdentity
+      attr_accessor window_execution_id: ::String
+      attr_accessor task_execution_id: ::String
+      attr_accessor invocation_id: ::String
+      attr_accessor execution_id: ::String
+      attr_accessor task_type: ("RUN_COMMAND" | "AUTOMATION" | "STEP_FUNCTIONS" | "LAMBDA")
+      attr_accessor parameters: ::String
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "SUCCESS" | "FAILED" | "TIMED_OUT" | "CANCELLING" | "CANCELLED" | "SKIPPED_OVERLAPPING")
+      attr_accessor status_details: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor owner_information: ::String
+      attr_accessor window_target_id: ::String
+      SENSITIVE: [:parameters, :owner_information]
+    end
+
+    class MaintenanceWindowFilter
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class MaintenanceWindowIdentity
+      attr_accessor window_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor enabled: bool
+      attr_accessor duration: ::Integer
+      attr_accessor cutoff: ::Integer
+      attr_accessor schedule: ::String
+      attr_accessor schedule_timezone: ::String
+      attr_accessor schedule_offset: ::Integer
+      attr_accessor end_date: ::String
+      attr_accessor start_date: ::String
+      attr_accessor next_execution_time: ::String
+      SENSITIVE: [:description]
+    end
+
+    class MaintenanceWindowIdentityForTarget
+      attr_accessor window_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class MaintenanceWindowLambdaParameters
+      attr_accessor client_context: ::String
+      attr_accessor qualifier: ::String
+      attr_accessor payload: ::String
+      SENSITIVE: [:payload]
+    end
+
+    class MaintenanceWindowRunCommandParameters
+      attr_accessor comment: ::String
+      attr_accessor cloud_watch_output_config: Types::CloudWatchOutputConfig
+      attr_accessor document_hash: ::String
+      attr_accessor document_hash_type: ("Sha256" | "Sha1")
+      attr_accessor document_version: ::String
+      attr_accessor notification_config: Types::NotificationConfig
+      attr_accessor output_s3_bucket_name: ::String
+      attr_accessor output_s3_key_prefix: ::String
+      attr_accessor parameters: ::Hash[::String, ::Array[::String]]
+      attr_accessor service_role_arn: ::String
+      attr_accessor timeout_seconds: ::Integer
+      SENSITIVE: [:parameters]
+    end
+
+    class MaintenanceWindowStepFunctionsParameters
+      attr_accessor input: ::String
+      attr_accessor name: ::String
+      SENSITIVE: [:input]
+    end
+
+    class MaintenanceWindowTarget
+      attr_accessor window_id: ::String
+      attr_accessor window_target_id: ::String
+      attr_accessor resource_type: ("INSTANCE" | "RESOURCE_GROUP")
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor owner_information: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: [:owner_information, :description]
+    end
+
+    class MaintenanceWindowTask
+      attr_accessor window_id: ::String
+      attr_accessor window_task_id: ::String
+      attr_accessor task_arn: ::String
+      attr_accessor type: ("RUN_COMMAND" | "AUTOMATION" | "STEP_FUNCTIONS" | "LAMBDA")
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor task_parameters: ::Hash[::String, Types::MaintenanceWindowTaskParameterValueExpression]
+      attr_accessor priority: ::Integer
+      attr_accessor logging_info: Types::LoggingInfo
+      attr_accessor service_role_arn: ::String
+      attr_accessor max_concurrency: ::String
+      attr_accessor max_errors: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor cutoff_behavior: ("CONTINUE_TASK" | "CANCEL_TASK")
+      attr_accessor alarm_configuration: Types::AlarmConfiguration
+      SENSITIVE: [:task_parameters, :description]
+    end
+
+    class MaintenanceWindowTaskInvocationParameters
+      attr_accessor run_command: Types::MaintenanceWindowRunCommandParameters
+      attr_accessor automation: Types::MaintenanceWindowAutomationParameters
+      attr_accessor step_functions: Types::MaintenanceWindowStepFunctionsParameters
+      attr_accessor lambda: Types::MaintenanceWindowLambdaParameters
+      SENSITIVE: []
+    end
+
+    class MaintenanceWindowTaskParameterValueExpression
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: [:values]
+    end
+
+    class MaxDocumentSizeExceeded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MetadataValue
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyDocumentPermissionRequest
+      attr_accessor name: ::String
+      attr_accessor permission_type: ("Share")
+      attr_accessor account_ids_to_add: ::Array[::String]
+      attr_accessor account_ids_to_remove: ::Array[::String]
+      attr_accessor shared_document_version: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyDocumentPermissionResponse < Aws::EmptyStructure
+    end
+
+    class NonCompliantSummary
+      attr_accessor non_compliant_count: ::Integer
+      attr_accessor severity_summary: Types::SeveritySummary
+      SENSITIVE: []
+    end
+
+    class NotificationConfig
+      attr_accessor notification_arn: ::String
+      attr_accessor notification_events: ::Array[("All" | "InProgress" | "Success" | "TimedOut" | "Cancelled" | "Failed")]
+      attr_accessor notification_type: ("Command" | "Invocation")
+      SENSITIVE: []
+    end
+
+    class OpsAggregator
+      attr_accessor aggregator_type: ::String
+      attr_accessor type_name: ::String
+      attr_accessor attribute_name: ::String
+      attr_accessor values: ::Hash[::String, ::String]
+      attr_accessor filters: ::Array[Types::OpsFilter]
+      attr_accessor aggregators: ::Array[Types::OpsAggregator]
+      SENSITIVE: []
+    end
+
+    class OpsEntity
+      attr_accessor id: ::String
+      attr_accessor data: ::Hash[::String, Types::OpsEntityItem]
+      SENSITIVE: []
+    end
+
+    class OpsEntityItem
+      attr_accessor capture_time: ::String
+      attr_accessor content: ::Array[::Hash[::String, ::String]]
+      SENSITIVE: []
+    end
+
+    class OpsFilter
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      attr_accessor type: ("Equal" | "NotEqual" | "BeginWith" | "LessThan" | "GreaterThan" | "Exists")
+      SENSITIVE: []
+    end
+
+    class OpsItem
+      attr_accessor created_by: ::String
+      attr_accessor ops_item_type: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor notifications: ::Array[Types::OpsItemNotification]
+      attr_accessor priority: ::Integer
+      attr_accessor related_ops_items: ::Array[Types::RelatedOpsItem]
+      attr_accessor status: ("Open" | "InProgress" | "Resolved" | "Pending" | "TimedOut" | "Cancelling" | "Cancelled" | "Failed" | "CompletedWithSuccess" | "CompletedWithFailure" | "Scheduled" | "RunbookInProgress" | "PendingChangeCalendarOverride" | "ChangeCalendarOverrideApproved" | "ChangeCalendarOverrideRejected" | "PendingApproval" | "Approved" | "Rejected" | "Closed")
+      attr_accessor ops_item_id: ::String
+      attr_accessor version: ::String
+      attr_accessor title: ::String
+      attr_accessor source: ::String
+      attr_accessor operational_data: ::Hash[::String, Types::OpsItemDataValue]
+      attr_accessor category: ::String
+      attr_accessor severity: ::String
+      attr_accessor actual_start_time: ::Time
+      attr_accessor actual_end_time: ::Time
+      attr_accessor planned_start_time: ::Time
+      attr_accessor planned_end_time: ::Time
+      attr_accessor ops_item_arn: ::String
+      SENSITIVE: []
+    end
+
+    class OpsItemAccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OpsItemAlreadyExistsException
+      attr_accessor message: ::String
+      attr_accessor ops_item_id: ::String
+      SENSITIVE: []
+    end
+
+    class OpsItemConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OpsItemDataValue
+      attr_accessor value: ::String
+      attr_accessor type: ("SearchableString" | "String")
+      SENSITIVE: []
+    end
+
+    class OpsItemEventFilter
+      attr_accessor key: ("OpsItemId")
+      attr_accessor values: ::Array[::String]
+      attr_accessor operator: ("Equal")
+      SENSITIVE: []
+    end
+
+    class OpsItemEventSummary
+      attr_accessor ops_item_id: ::String
+      attr_accessor event_id: ::String
+      attr_accessor source: ::String
+      attr_accessor detail_type: ::String
+      attr_accessor detail: ::String
+      attr_accessor created_by: Types::OpsItemIdentity
+      attr_accessor created_time: ::Time
+      SENSITIVE: []
+    end
+
+    class OpsItemFilter
+      attr_accessor key: ("Status" | "CreatedBy" | "Source" | "Priority" | "Title" | "OpsItemId" | "CreatedTime" | "LastModifiedTime" | "ActualStartTime" | "ActualEndTime" | "PlannedStartTime" | "PlannedEndTime" | "OperationalData" | "OperationalDataKey" | "OperationalDataValue" | "ResourceId" | "AutomationId" | "Category" | "Severity" | "OpsItemType" | "ChangeRequestByRequesterArn" | "ChangeRequestByRequesterName" | "ChangeRequestByApproverArn" | "ChangeRequestByApproverName" | "ChangeRequestByTemplate" | "ChangeRequestByTargetsResourceGroup" | "InsightByType" | "AccountId")
+      attr_accessor values: ::Array[::String]
+      attr_accessor operator: ("Equal" | "Contains" | "GreaterThan" | "LessThan")
+      SENSITIVE: []
+    end
+
+    class OpsItemIdentity
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class OpsItemInvalidParameterException
+      attr_accessor parameter_names: ::Array[::String]
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OpsItemLimitExceededException
+      attr_accessor resource_types: ::Array[::String]
+      attr_accessor limit: ::Integer
+      attr_accessor limit_type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OpsItemNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OpsItemNotification
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class OpsItemRelatedItemAlreadyExistsException
+      attr_accessor message: ::String
+      attr_accessor resource_uri: ::String
+      attr_accessor ops_item_id: ::String
+      SENSITIVE: []
+    end
+
+    class OpsItemRelatedItemAssociationNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OpsItemRelatedItemSummary
+      attr_accessor ops_item_id: ::String
+      attr_accessor association_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor association_type: ::String
+      attr_accessor resource_uri: ::String
+      attr_accessor created_by: Types::OpsItemIdentity
+      attr_accessor created_time: ::Time
+      attr_accessor last_modified_by: Types::OpsItemIdentity
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class OpsItemRelatedItemsFilter
+      attr_accessor key: ("ResourceType" | "AssociationId" | "ResourceUri")
+      attr_accessor values: ::Array[::String]
+      attr_accessor operator: ("Equal")
+      SENSITIVE: []
+    end
+
+    class OpsItemSummary
+      attr_accessor created_by: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor priority: ::Integer
+      attr_accessor source: ::String
+      attr_accessor status: ("Open" | "InProgress" | "Resolved" | "Pending" | "TimedOut" | "Cancelling" | "Cancelled" | "Failed" | "CompletedWithSuccess" | "CompletedWithFailure" | "Scheduled" | "RunbookInProgress" | "PendingChangeCalendarOverride" | "ChangeCalendarOverrideApproved" | "ChangeCalendarOverrideRejected" | "PendingApproval" | "Approved" | "Rejected" | "Closed")
+      attr_accessor ops_item_id: ::String
+      attr_accessor title: ::String
+      attr_accessor operational_data: ::Hash[::String, Types::OpsItemDataValue]
+      attr_accessor category: ::String
+      attr_accessor severity: ::String
+      attr_accessor ops_item_type: ::String
+      attr_accessor actual_start_time: ::Time
+      attr_accessor actual_end_time: ::Time
+      attr_accessor planned_start_time: ::Time
+      attr_accessor planned_end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class OpsMetadata
+      attr_accessor resource_id: ::String
+      attr_accessor ops_metadata_arn: ::String
+      attr_accessor last_modified_date: ::Time
+      attr_accessor last_modified_user: ::String
+      attr_accessor creation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class OpsMetadataAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OpsMetadataFilter
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class OpsMetadataInvalidArgumentException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OpsMetadataKeyLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OpsMetadataLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OpsMetadataNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OpsMetadataTooManyUpdatesException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OpsResultAttribute
+      attr_accessor type_name: ::String
+      SENSITIVE: []
+    end
+
+    class OutputSource
+      attr_accessor output_source_id: ::String
+      attr_accessor output_source_type: ::String
+      SENSITIVE: []
+    end
+
+    class Parameter
+      attr_accessor name: ::String
+      attr_accessor type: ("String" | "StringList" | "SecureString")
+      attr_accessor value: ::String
+      attr_accessor version: ::Integer
+      attr_accessor selector: ::String
+      attr_accessor source_result: ::String
+      attr_accessor last_modified_date: ::Time
+      attr_accessor arn: ::String
+      attr_accessor data_type: ::String
+      SENSITIVE: [:value]
+    end
+
+    class ParameterAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ParameterHistory
+      attr_accessor name: ::String
+      attr_accessor type: ("String" | "StringList" | "SecureString")
+      attr_accessor key_id: ::String
+      attr_accessor last_modified_date: ::Time
+      attr_accessor last_modified_user: ::String
+      attr_accessor description: ::String
+      attr_accessor value: ::String
+      attr_accessor allowed_pattern: ::String
+      attr_accessor version: ::Integer
+      attr_accessor labels: ::Array[::String]
+      attr_accessor tier: ("Standard" | "Advanced" | "Intelligent-Tiering")
+      attr_accessor policies: ::Array[Types::ParameterInlinePolicy]
+      attr_accessor data_type: ::String
+      SENSITIVE: [:value]
+    end
+
+    class ParameterInlinePolicy
+      attr_accessor policy_text: ::String
+      attr_accessor policy_type: ::String
+      attr_accessor policy_status: ::String
+      SENSITIVE: []
+    end
+
+    class ParameterLimitExceeded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ParameterMaxVersionLimitExceeded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ParameterMetadata
+      attr_accessor name: ::String
+      attr_accessor type: ("String" | "StringList" | "SecureString")
+      attr_accessor key_id: ::String
+      attr_accessor last_modified_date: ::Time
+      attr_accessor last_modified_user: ::String
+      attr_accessor description: ::String
+      attr_accessor allowed_pattern: ::String
+      attr_accessor version: ::Integer
+      attr_accessor tier: ("Standard" | "Advanced" | "Intelligent-Tiering")
+      attr_accessor policies: ::Array[Types::ParameterInlinePolicy]
+      attr_accessor data_type: ::String
+      SENSITIVE: []
+    end
+
+    class ParameterNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ParameterPatternMismatchException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ParameterStringFilter
+      attr_accessor key: ::String
+      attr_accessor option: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ParameterVersionLabelLimitExceeded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ParameterVersionNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ParametersFilter
+      attr_accessor key: ("Name" | "Type" | "KeyId")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ParentStepDetails
+      attr_accessor step_execution_id: ::String
+      attr_accessor step_name: ::String
+      attr_accessor action: ::String
+      attr_accessor iteration: ::Integer
+      attr_accessor iterator_value: ::String
+      SENSITIVE: []
+    end
+
+    class Patch
+      attr_accessor id: ::String
+      attr_accessor release_date: ::Time
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor content_url: ::String
+      attr_accessor vendor: ::String
+      attr_accessor product_family: ::String
+      attr_accessor product: ::String
+      attr_accessor classification: ::String
+      attr_accessor msrc_severity: ::String
+      attr_accessor kb_number: ::String
+      attr_accessor msrc_number: ::String
+      attr_accessor language: ::String
+      attr_accessor advisory_ids: ::Array[::String]
+      attr_accessor bugzilla_ids: ::Array[::String]
+      attr_accessor cve_ids: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor epoch: ::Integer
+      attr_accessor version: ::String
+      attr_accessor release: ::String
+      attr_accessor arch: ::String
+      attr_accessor severity: ::String
+      attr_accessor repository: ::String
+      SENSITIVE: []
+    end
+
+    class PatchBaselineIdentity
+      attr_accessor baseline_id: ::String
+      attr_accessor baseline_name: ::String
+      attr_accessor operating_system: ("WINDOWS" | "AMAZON_LINUX" | "AMAZON_LINUX_2" | "AMAZON_LINUX_2022" | "UBUNTU" | "REDHAT_ENTERPRISE_LINUX" | "SUSE" | "CENTOS" | "ORACLE_LINUX" | "DEBIAN" | "MACOS" | "RASPBIAN" | "ROCKY_LINUX" | "ALMA_LINUX" | "AMAZON_LINUX_2023")
+      attr_accessor baseline_description: ::String
+      attr_accessor default_baseline: bool
+      SENSITIVE: []
+    end
+
+    class PatchComplianceData
+      attr_accessor title: ::String
+      attr_accessor kb_id: ::String
+      attr_accessor classification: ::String
+      attr_accessor severity: ::String
+      attr_accessor state: ("INSTALLED" | "INSTALLED_OTHER" | "INSTALLED_PENDING_REBOOT" | "INSTALLED_REJECTED" | "MISSING" | "NOT_APPLICABLE" | "FAILED")
+      attr_accessor installed_time: ::Time
+      attr_accessor cve_ids: ::String
+      SENSITIVE: []
+    end
+
+    class PatchFilter
+      attr_accessor key: ("ARCH" | "ADVISORY_ID" | "BUGZILLA_ID" | "PATCH_SET" | "PRODUCT" | "PRODUCT_FAMILY" | "CLASSIFICATION" | "CVE_ID" | "EPOCH" | "MSRC_SEVERITY" | "NAME" | "PATCH_ID" | "SECTION" | "PRIORITY" | "REPOSITORY" | "RELEASE" | "SEVERITY" | "SECURITY" | "VERSION")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PatchFilterGroup
+      attr_accessor patch_filters: ::Array[Types::PatchFilter]
+      SENSITIVE: []
+    end
+
+    class PatchGroupPatchBaselineMapping
+      attr_accessor patch_group: ::String
+      attr_accessor baseline_identity: Types::PatchBaselineIdentity
+      SENSITIVE: []
+    end
+
+    class PatchOrchestratorFilter
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PatchRule
+      attr_accessor patch_filter_group: Types::PatchFilterGroup
+      attr_accessor compliance_level: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "INFORMATIONAL" | "UNSPECIFIED")
+      attr_accessor approve_after_days: ::Integer
+      attr_accessor approve_until_date: ::String
+      attr_accessor enable_non_security: bool
+      SENSITIVE: []
+    end
+
+    class PatchRuleGroup
+      attr_accessor patch_rules: ::Array[Types::PatchRule]
+      SENSITIVE: []
+    end
+
+    class PatchSource
+      attr_accessor name: ::String
+      attr_accessor products: ::Array[::String]
+      attr_accessor configuration: ::String
+      SENSITIVE: [:configuration]
+    end
+
+    class PatchStatus
+      attr_accessor deployment_status: ("APPROVED" | "PENDING_APPROVAL" | "EXPLICIT_APPROVED" | "EXPLICIT_REJECTED")
+      attr_accessor compliance_level: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "INFORMATIONAL" | "UNSPECIFIED")
+      attr_accessor approval_date: ::Time
+      SENSITIVE: []
+    end
+
+    class PoliciesLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ProgressCounters
+      attr_accessor total_steps: ::Integer
+      attr_accessor success_steps: ::Integer
+      attr_accessor failed_steps: ::Integer
+      attr_accessor cancelled_steps: ::Integer
+      attr_accessor timed_out_steps: ::Integer
+      SENSITIVE: []
+    end
+
+    class PutComplianceItemsRequest
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor compliance_type: ::String
+      attr_accessor execution_summary: Types::ComplianceExecutionSummary
+      attr_accessor items: ::Array[Types::ComplianceItemEntry]
+      attr_accessor item_content_hash: ::String
+      attr_accessor upload_type: ("COMPLETE" | "PARTIAL")
+      SENSITIVE: []
+    end
+
+    class PutComplianceItemsResult < Aws::EmptyStructure
+    end
+
+    class PutInventoryRequest
+      attr_accessor instance_id: ::String
+      attr_accessor items: ::Array[Types::InventoryItem]
+      SENSITIVE: []
+    end
+
+    class PutInventoryResult
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PutParameterRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor value: ::String
+      attr_accessor type: ("String" | "StringList" | "SecureString")
+      attr_accessor key_id: ::String
+      attr_accessor overwrite: bool
+      attr_accessor allowed_pattern: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor tier: ("Standard" | "Advanced" | "Intelligent-Tiering")
+      attr_accessor policies: ::String
+      attr_accessor data_type: ::String
+      SENSITIVE: [:value]
+    end
+
+    class PutParameterResult
+      attr_accessor version: ::Integer
+      attr_accessor tier: ("Standard" | "Advanced" | "Intelligent-Tiering")
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor policy: ::String
+      attr_accessor policy_id: ::String
+      attr_accessor policy_hash: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyResponse
+      attr_accessor policy_id: ::String
+      attr_accessor policy_hash: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterDefaultPatchBaselineRequest
+      attr_accessor baseline_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterDefaultPatchBaselineResult
+      attr_accessor baseline_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterPatchBaselineForPatchGroupRequest
+      attr_accessor baseline_id: ::String
+      attr_accessor patch_group: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterPatchBaselineForPatchGroupResult
+      attr_accessor baseline_id: ::String
+      attr_accessor patch_group: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterTargetWithMaintenanceWindowRequest
+      attr_accessor window_id: ::String
+      attr_accessor resource_type: ("INSTANCE" | "RESOURCE_GROUP")
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor owner_information: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: [:owner_information, :description]
+    end
+
+    class RegisterTargetWithMaintenanceWindowResult
+      attr_accessor window_target_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterTaskWithMaintenanceWindowRequest
+      attr_accessor window_id: ::String
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor task_arn: ::String
+      attr_accessor service_role_arn: ::String
+      attr_accessor task_type: ("RUN_COMMAND" | "AUTOMATION" | "STEP_FUNCTIONS" | "LAMBDA")
+      attr_accessor task_parameters: ::Hash[::String, Types::MaintenanceWindowTaskParameterValueExpression]
+      attr_accessor task_invocation_parameters: Types::MaintenanceWindowTaskInvocationParameters
+      attr_accessor priority: ::Integer
+      attr_accessor max_concurrency: ::String
+      attr_accessor max_errors: ::String
+      attr_accessor logging_info: Types::LoggingInfo
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor client_token: ::String
+      attr_accessor cutoff_behavior: ("CONTINUE_TASK" | "CANCEL_TASK")
+      attr_accessor alarm_configuration: Types::AlarmConfiguration
+      SENSITIVE: [:task_parameters, :description]
+    end
+
+    class RegisterTaskWithMaintenanceWindowResult
+      attr_accessor window_task_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegistrationMetadataItem
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class RelatedOpsItem
+      attr_accessor ops_item_id: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveTagsFromResourceRequest
+      attr_accessor resource_type: ("Document" | "ManagedInstance" | "MaintenanceWindow" | "Parameter" | "PatchBaseline" | "OpsItem" | "OpsMetadata" | "Automation" | "Association")
+      attr_accessor resource_id: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RemoveTagsFromResourceResult < Aws::EmptyStructure
+    end
+
+    class ResetServiceSettingRequest
+      attr_accessor setting_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResetServiceSettingResult
+      attr_accessor service_setting: Types::ServiceSetting
+      SENSITIVE: []
+    end
+
+    class ResolvedTargets
+      attr_accessor parameter_values: ::Array[::String]
+      attr_accessor truncated: bool
+      SENSITIVE: []
+    end
+
+    class ResourceComplianceSummaryItem
+      attr_accessor compliance_type: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor status: ("COMPLIANT" | "NON_COMPLIANT")
+      attr_accessor overall_severity: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "INFORMATIONAL" | "UNSPECIFIED")
+      attr_accessor execution_summary: Types::ComplianceExecutionSummary
+      attr_accessor compliant_summary: Types::CompliantSummary
+      attr_accessor non_compliant_summary: Types::NonCompliantSummary
+      SENSITIVE: []
+    end
+
+    class ResourceDataSyncAlreadyExistsException
+      attr_accessor sync_name: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceDataSyncAwsOrganizationsSource
+      attr_accessor organization_source_type: ::String
+      attr_accessor organizational_units: ::Array[Types::ResourceDataSyncOrganizationalUnit]
+      SENSITIVE: []
+    end
+
+    class ResourceDataSyncConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceDataSyncCountExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceDataSyncDestinationDataSharing
+      attr_accessor destination_data_sharing_type: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceDataSyncInvalidConfigurationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceDataSyncItem
+      attr_accessor sync_name: ::String
+      attr_accessor sync_type: ::String
+      attr_accessor sync_source: Types::ResourceDataSyncSourceWithState
+      attr_accessor s3_destination: Types::ResourceDataSyncS3Destination
+      attr_accessor last_sync_time: ::Time
+      attr_accessor last_successful_sync_time: ::Time
+      attr_accessor sync_last_modified_time: ::Time
+      attr_accessor last_status: ("Successful" | "Failed" | "InProgress")
+      attr_accessor sync_created_time: ::Time
+      attr_accessor last_sync_status_message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceDataSyncNotFoundException
+      attr_accessor sync_name: ::String
+      attr_accessor sync_type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceDataSyncOrganizationalUnit
+      attr_accessor organizational_unit_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceDataSyncS3Destination
+      attr_accessor bucket_name: ::String
+      attr_accessor prefix: ::String
+      attr_accessor sync_format: ("JsonSerDe")
+      attr_accessor region: ::String
+      attr_accessor awskms_key_arn: ::String
+      attr_accessor destination_data_sharing: Types::ResourceDataSyncDestinationDataSharing
+      SENSITIVE: []
+    end
+
+    class ResourceDataSyncSource
+      attr_accessor source_type: ::String
+      attr_accessor aws_organizations_source: Types::ResourceDataSyncAwsOrganizationsSource
+      attr_accessor source_regions: ::Array[::String]
+      attr_accessor include_future_regions: bool
+      attr_accessor enable_all_ops_data_sources: bool
+      SENSITIVE: []
+    end
+
+    class ResourceDataSyncSourceWithState
+      attr_accessor source_type: ::String
+      attr_accessor aws_organizations_source: Types::ResourceDataSyncAwsOrganizationsSource
+      attr_accessor source_regions: ::Array[::String]
+      attr_accessor include_future_regions: bool
+      attr_accessor state: ::String
+      attr_accessor enable_all_ops_data_sources: bool
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourcePolicyConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourcePolicyInvalidParameterException
+      attr_accessor parameter_names: ::Array[::String]
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourcePolicyLimitExceededException
+      attr_accessor limit: ::Integer
+      attr_accessor limit_type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResultAttribute
+      attr_accessor type_name: ::String
+      SENSITIVE: []
+    end
+
+    class ResumeSessionRequest
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResumeSessionResponse
+      attr_accessor session_id: ::String
+      attr_accessor token_value: ::String
+      attr_accessor stream_url: ::String
+      SENSITIVE: []
+    end
+
+    class ReviewInformation
+      attr_accessor reviewed_time: ::Time
+      attr_accessor status: ("APPROVED" | "NOT_REVIEWED" | "PENDING" | "REJECTED")
+      attr_accessor reviewer: ::String
+      SENSITIVE: []
+    end
+
+    class Runbook
+      attr_accessor document_name: ::String
+      attr_accessor document_version: ::String
+      attr_accessor parameters: ::Hash[::String, ::Array[::String]]
+      attr_accessor target_parameter_name: ::String
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor target_maps: ::Array[::Hash[::String, ::Array[::String]]]
+      attr_accessor max_concurrency: ::String
+      attr_accessor max_errors: ::String
+      attr_accessor target_locations: ::Array[Types::TargetLocation]
+      SENSITIVE: []
+    end
+
+    class S3OutputLocation
+      attr_accessor output_s3_region: ::String
+      attr_accessor output_s3_bucket_name: ::String
+      attr_accessor output_s3_key_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class S3OutputUrl
+      attr_accessor output_url: ::String
+      SENSITIVE: []
+    end
+
+    class ScheduledWindowExecution
+      attr_accessor window_id: ::String
+      attr_accessor name: ::String
+      attr_accessor execution_time: ::String
+      SENSITIVE: []
+    end
+
+    class SendAutomationSignalRequest
+      attr_accessor automation_execution_id: ::String
+      attr_accessor signal_type: ("Approve" | "Reject" | "StartStep" | "StopStep" | "Resume")
+      attr_accessor payload: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class SendAutomationSignalResult < Aws::EmptyStructure
+    end
+
+    class SendCommandRequest
+      attr_accessor instance_ids: ::Array[::String]
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor document_name: ::String
+      attr_accessor document_version: ::String
+      attr_accessor document_hash: ::String
+      attr_accessor document_hash_type: ("Sha256" | "Sha1")
+      attr_accessor timeout_seconds: ::Integer
+      attr_accessor comment: ::String
+      attr_accessor parameters: ::Hash[::String, ::Array[::String]]
+      attr_accessor output_s3_region: ::String
+      attr_accessor output_s3_bucket_name: ::String
+      attr_accessor output_s3_key_prefix: ::String
+      attr_accessor max_concurrency: ::String
+      attr_accessor max_errors: ::String
+      attr_accessor service_role_arn: ::String
+      attr_accessor notification_config: Types::NotificationConfig
+      attr_accessor cloud_watch_output_config: Types::CloudWatchOutputConfig
+      attr_accessor alarm_configuration: Types::AlarmConfiguration
+      SENSITIVE: [:parameters]
+    end
+
+    class SendCommandResult
+      attr_accessor command: Types::Command
+      SENSITIVE: []
+    end
+
+    class ServiceSetting
+      attr_accessor setting_id: ::String
+      attr_accessor setting_value: ::String
+      attr_accessor last_modified_date: ::Time
+      attr_accessor last_modified_user: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceSettingNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Session
+      attr_accessor session_id: ::String
+      attr_accessor target: ::String
+      attr_accessor status: ("Connected" | "Connecting" | "Disconnected" | "Terminated" | "Terminating" | "Failed")
+      attr_accessor start_date: ::Time
+      attr_accessor end_date: ::Time
+      attr_accessor document_name: ::String
+      attr_accessor owner: ::String
+      attr_accessor reason: ::String
+      attr_accessor details: ::String
+      attr_accessor output_url: Types::SessionManagerOutputUrl
+      attr_accessor max_session_duration: ::String
+      SENSITIVE: []
+    end
+
+    class SessionFilter
+      attr_accessor key: ("InvokedAfter" | "InvokedBefore" | "Target" | "Owner" | "Status" | "SessionId")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SessionManagerOutputUrl
+      attr_accessor s3_output_url: ::String
+      attr_accessor cloud_watch_output_url: ::String
+      SENSITIVE: []
+    end
+
+    class SeveritySummary
+      attr_accessor critical_count: ::Integer
+      attr_accessor high_count: ::Integer
+      attr_accessor medium_count: ::Integer
+      attr_accessor low_count: ::Integer
+      attr_accessor informational_count: ::Integer
+      attr_accessor unspecified_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class StartAssociationsOnceRequest
+      attr_accessor association_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StartAssociationsOnceResult < Aws::EmptyStructure
+    end
+
+    class StartAutomationExecutionRequest
+      attr_accessor document_name: ::String
+      attr_accessor document_version: ::String
+      attr_accessor parameters: ::Hash[::String, ::Array[::String]]
+      attr_accessor client_token: ::String
+      attr_accessor mode: ("Auto" | "Interactive")
+      attr_accessor target_parameter_name: ::String
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor target_maps: ::Array[::Hash[::String, ::Array[::String]]]
+      attr_accessor max_concurrency: ::String
+      attr_accessor max_errors: ::String
+      attr_accessor target_locations: ::Array[Types::TargetLocation]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor alarm_configuration: Types::AlarmConfiguration
+      SENSITIVE: []
+    end
+
+    class StartAutomationExecutionResult
+      attr_accessor automation_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartChangeRequestExecutionRequest
+      attr_accessor scheduled_time: ::Time
+      attr_accessor document_name: ::String
+      attr_accessor document_version: ::String
+      attr_accessor parameters: ::Hash[::String, ::Array[::String]]
+      attr_accessor change_request_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor auto_approve: bool
+      attr_accessor runbooks: ::Array[Types::Runbook]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor scheduled_end_time: ::Time
+      attr_accessor change_details: ::String
+      SENSITIVE: []
+    end
+
+    class StartChangeRequestExecutionResult
+      attr_accessor automation_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartSessionRequest
+      attr_accessor target: ::String
+      attr_accessor document_name: ::String
+      attr_accessor reason: ::String
+      attr_accessor parameters: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class StartSessionResponse
+      attr_accessor session_id: ::String
+      attr_accessor token_value: ::String
+      attr_accessor stream_url: ::String
+      SENSITIVE: []
+    end
+
+    class StatusUnchanged < Aws::EmptyStructure
+    end
+
+    class StepExecution
+      attr_accessor step_name: ::String
+      attr_accessor action: ::String
+      attr_accessor timeout_seconds: ::Integer
+      attr_accessor on_failure: ::String
+      attr_accessor max_attempts: ::Integer
+      attr_accessor execution_start_time: ::Time
+      attr_accessor execution_end_time: ::Time
+      attr_accessor step_status: ("Pending" | "InProgress" | "Waiting" | "Success" | "TimedOut" | "Cancelling" | "Cancelled" | "Failed" | "PendingApproval" | "Approved" | "Rejected" | "Scheduled" | "RunbookInProgress" | "PendingChangeCalendarOverride" | "ChangeCalendarOverrideApproved" | "ChangeCalendarOverrideRejected" | "CompletedWithSuccess" | "CompletedWithFailure" | "Exited")
+      attr_accessor response_code: ::String
+      attr_accessor inputs: ::Hash[::String, ::String]
+      attr_accessor outputs: ::Hash[::String, ::Array[::String]]
+      attr_accessor response: ::String
+      attr_accessor failure_message: ::String
+      attr_accessor failure_details: Types::FailureDetails
+      attr_accessor step_execution_id: ::String
+      attr_accessor overridden_parameters: ::Hash[::String, ::Array[::String]]
+      attr_accessor is_end: bool
+      attr_accessor next_step: ::String
+      attr_accessor is_critical: bool
+      attr_accessor valid_next_steps: ::Array[::String]
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor target_location: Types::TargetLocation
+      attr_accessor triggered_alarms: ::Array[Types::AlarmStateInformation]
+      attr_accessor parent_step_details: Types::ParentStepDetails
+      SENSITIVE: []
+    end
+
+    class StepExecutionFilter
+      attr_accessor key: ("StartTimeBefore" | "StartTimeAfter" | "StepExecutionStatus" | "StepExecutionId" | "StepName" | "Action" | "ParentStepExecutionId" | "ParentStepIteration" | "ParentStepIteratorValue")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StopAutomationExecutionRequest
+      attr_accessor automation_execution_id: ::String
+      attr_accessor type: ("Complete" | "Cancel")
+      SENSITIVE: []
+    end
+
+    class StopAutomationExecutionResult < Aws::EmptyStructure
+    end
+
+    class SubTypeCountLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class Target
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TargetInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TargetLocation
+      attr_accessor accounts: ::Array[::String]
+      attr_accessor regions: ::Array[::String]
+      attr_accessor target_location_max_concurrency: ::String
+      attr_accessor target_location_max_errors: ::String
+      attr_accessor execution_role_name: ::String
+      attr_accessor target_location_alarm_configuration: Types::AlarmConfiguration
+      SENSITIVE: []
+    end
+
+    class TargetNotConnected
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TerminateSessionRequest
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class TerminateSessionResponse
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyTagsError < Aws::EmptyStructure
+    end
+
+    class TooManyUpdates
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TotalSizeLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnlabelParameterVersionRequest
+      attr_accessor name: ::String
+      attr_accessor parameter_version: ::Integer
+      attr_accessor labels: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UnlabelParameterVersionResult
+      attr_accessor removed_labels: ::Array[::String]
+      attr_accessor invalid_labels: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UnsupportedCalendarException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedFeatureRequiredException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedInventoryItemContextException
+      attr_accessor type_name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedInventorySchemaVersionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedOperatingSystem
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedParameterType
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedPlatformType
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAssociationRequest
+      attr_accessor association_id: ::String
+      attr_accessor parameters: ::Hash[::String, ::Array[::String]]
+      attr_accessor document_version: ::String
+      attr_accessor schedule_expression: ::String
+      attr_accessor output_location: Types::InstanceAssociationOutputLocation
+      attr_accessor name: ::String
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor association_name: ::String
+      attr_accessor association_version: ::String
+      attr_accessor automation_target_parameter_name: ::String
+      attr_accessor max_errors: ::String
+      attr_accessor max_concurrency: ::String
+      attr_accessor compliance_severity: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "UNSPECIFIED")
+      attr_accessor sync_compliance: ("AUTO" | "MANUAL")
+      attr_accessor apply_only_at_cron_interval: bool
+      attr_accessor calendar_names: ::Array[::String]
+      attr_accessor target_locations: ::Array[Types::TargetLocation]
+      attr_accessor schedule_offset: ::Integer
+      attr_accessor target_maps: ::Array[::Hash[::String, ::Array[::String]]]
+      attr_accessor alarm_configuration: Types::AlarmConfiguration
+      SENSITIVE: [:parameters]
+    end
+
+    class UpdateAssociationResult
+      attr_accessor association_description: Types::AssociationDescription
+      SENSITIVE: []
+    end
+
+    class UpdateAssociationStatusRequest
+      attr_accessor name: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor association_status: Types::AssociationStatus
+      SENSITIVE: []
+    end
+
+    class UpdateAssociationStatusResult
+      attr_accessor association_description: Types::AssociationDescription
+      SENSITIVE: []
+    end
+
+    class UpdateDocumentDefaultVersionRequest
+      attr_accessor name: ::String
+      attr_accessor document_version: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDocumentDefaultVersionResult
+      attr_accessor description: Types::DocumentDefaultVersionDescription
+      SENSITIVE: []
+    end
+
+    class UpdateDocumentMetadataRequest
+      attr_accessor name: ::String
+      attr_accessor document_version: ::String
+      attr_accessor document_reviews: Types::DocumentReviews
+      SENSITIVE: []
+    end
+
+    class UpdateDocumentMetadataResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDocumentRequest
+      attr_accessor content: ::String
+      attr_accessor attachments: ::Array[Types::AttachmentsSource]
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor version_name: ::String
+      attr_accessor document_version: ::String
+      attr_accessor document_format: ("YAML" | "JSON" | "TEXT")
+      attr_accessor target_type: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDocumentResult
+      attr_accessor document_description: Types::DocumentDescription
+      SENSITIVE: []
+    end
+
+    class UpdateMaintenanceWindowRequest
+      attr_accessor window_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor start_date: ::String
+      attr_accessor end_date: ::String
+      attr_accessor schedule: ::String
+      attr_accessor schedule_timezone: ::String
+      attr_accessor schedule_offset: ::Integer
+      attr_accessor duration: ::Integer
+      attr_accessor cutoff: ::Integer
+      attr_accessor allow_unassociated_targets: bool
+      attr_accessor enabled: bool
+      attr_accessor replace: bool
+      SENSITIVE: [:description]
+    end
+
+    class UpdateMaintenanceWindowResult
+      attr_accessor window_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor start_date: ::String
+      attr_accessor end_date: ::String
+      attr_accessor schedule: ::String
+      attr_accessor schedule_timezone: ::String
+      attr_accessor schedule_offset: ::Integer
+      attr_accessor duration: ::Integer
+      attr_accessor cutoff: ::Integer
+      attr_accessor allow_unassociated_targets: bool
+      attr_accessor enabled: bool
+      SENSITIVE: [:description]
+    end
+
+    class UpdateMaintenanceWindowTargetRequest
+      attr_accessor window_id: ::String
+      attr_accessor window_target_id: ::String
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor owner_information: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor replace: bool
+      SENSITIVE: [:owner_information, :description]
+    end
+
+    class UpdateMaintenanceWindowTargetResult
+      attr_accessor window_id: ::String
+      attr_accessor window_target_id: ::String
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor owner_information: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: [:owner_information, :description]
+    end
+
+    class UpdateMaintenanceWindowTaskRequest
+      attr_accessor window_id: ::String
+      attr_accessor window_task_id: ::String
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor task_arn: ::String
+      attr_accessor service_role_arn: ::String
+      attr_accessor task_parameters: ::Hash[::String, Types::MaintenanceWindowTaskParameterValueExpression]
+      attr_accessor task_invocation_parameters: Types::MaintenanceWindowTaskInvocationParameters
+      attr_accessor priority: ::Integer
+      attr_accessor max_concurrency: ::String
+      attr_accessor max_errors: ::String
+      attr_accessor logging_info: Types::LoggingInfo
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor replace: bool
+      attr_accessor cutoff_behavior: ("CONTINUE_TASK" | "CANCEL_TASK")
+      attr_accessor alarm_configuration: Types::AlarmConfiguration
+      SENSITIVE: [:task_parameters, :description]
+    end
+
+    class UpdateMaintenanceWindowTaskResult
+      attr_accessor window_id: ::String
+      attr_accessor window_task_id: ::String
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor task_arn: ::String
+      attr_accessor service_role_arn: ::String
+      attr_accessor task_parameters: ::Hash[::String, Types::MaintenanceWindowTaskParameterValueExpression]
+      attr_accessor task_invocation_parameters: Types::MaintenanceWindowTaskInvocationParameters
+      attr_accessor priority: ::Integer
+      attr_accessor max_concurrency: ::String
+      attr_accessor max_errors: ::String
+      attr_accessor logging_info: Types::LoggingInfo
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor cutoff_behavior: ("CONTINUE_TASK" | "CANCEL_TASK")
+      attr_accessor alarm_configuration: Types::AlarmConfiguration
+      SENSITIVE: [:task_parameters, :description]
+    end
+
+    class UpdateManagedInstanceRoleRequest
+      attr_accessor instance_id: ::String
+      attr_accessor iam_role: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateManagedInstanceRoleResult < Aws::EmptyStructure
+    end
+
+    class UpdateOpsItemRequest
+      attr_accessor description: ::String
+      attr_accessor operational_data: ::Hash[::String, Types::OpsItemDataValue]
+      attr_accessor operational_data_to_delete: ::Array[::String]
+      attr_accessor notifications: ::Array[Types::OpsItemNotification]
+      attr_accessor priority: ::Integer
+      attr_accessor related_ops_items: ::Array[Types::RelatedOpsItem]
+      attr_accessor status: ("Open" | "InProgress" | "Resolved" | "Pending" | "TimedOut" | "Cancelling" | "Cancelled" | "Failed" | "CompletedWithSuccess" | "CompletedWithFailure" | "Scheduled" | "RunbookInProgress" | "PendingChangeCalendarOverride" | "ChangeCalendarOverrideApproved" | "ChangeCalendarOverrideRejected" | "PendingApproval" | "Approved" | "Rejected" | "Closed")
+      attr_accessor ops_item_id: ::String
+      attr_accessor title: ::String
+      attr_accessor category: ::String
+      attr_accessor severity: ::String
+      attr_accessor actual_start_time: ::Time
+      attr_accessor actual_end_time: ::Time
+      attr_accessor planned_start_time: ::Time
+      attr_accessor planned_end_time: ::Time
+      attr_accessor ops_item_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateOpsItemResponse < Aws::EmptyStructure
+    end
+
+    class UpdateOpsMetadataRequest
+      attr_accessor ops_metadata_arn: ::String
+      attr_accessor metadata_to_update: ::Hash[::String, Types::MetadataValue]
+      attr_accessor keys_to_delete: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateOpsMetadataResult
+      attr_accessor ops_metadata_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePatchBaselineRequest
+      attr_accessor baseline_id: ::String
+      attr_accessor name: ::String
+      attr_accessor global_filters: Types::PatchFilterGroup
+      attr_accessor approval_rules: Types::PatchRuleGroup
+      attr_accessor approved_patches: ::Array[::String]
+      attr_accessor approved_patches_compliance_level: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "INFORMATIONAL" | "UNSPECIFIED")
+      attr_accessor approved_patches_enable_non_security: bool
+      attr_accessor rejected_patches: ::Array[::String]
+      attr_accessor rejected_patches_action: ("ALLOW_AS_DEPENDENCY" | "BLOCK")
+      attr_accessor description: ::String
+      attr_accessor sources: ::Array[Types::PatchSource]
+      attr_accessor replace: bool
+      SENSITIVE: []
+    end
+
+    class UpdatePatchBaselineResult
+      attr_accessor baseline_id: ::String
+      attr_accessor name: ::String
+      attr_accessor operating_system: ("WINDOWS" | "AMAZON_LINUX" | "AMAZON_LINUX_2" | "AMAZON_LINUX_2022" | "UBUNTU" | "REDHAT_ENTERPRISE_LINUX" | "SUSE" | "CENTOS" | "ORACLE_LINUX" | "DEBIAN" | "MACOS" | "RASPBIAN" | "ROCKY_LINUX" | "ALMA_LINUX" | "AMAZON_LINUX_2023")
+      attr_accessor global_filters: Types::PatchFilterGroup
+      attr_accessor approval_rules: Types::PatchRuleGroup
+      attr_accessor approved_patches: ::Array[::String]
+      attr_accessor approved_patches_compliance_level: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "INFORMATIONAL" | "UNSPECIFIED")
+      attr_accessor approved_patches_enable_non_security: bool
+      attr_accessor rejected_patches: ::Array[::String]
+      attr_accessor rejected_patches_action: ("ALLOW_AS_DEPENDENCY" | "BLOCK")
+      attr_accessor created_date: ::Time
+      attr_accessor modified_date: ::Time
+      attr_accessor description: ::String
+      attr_accessor sources: ::Array[Types::PatchSource]
+      SENSITIVE: []
+    end
+
+    class UpdateResourceDataSyncRequest
+      attr_accessor sync_name: ::String
+      attr_accessor sync_type: ::String
+      attr_accessor sync_source: Types::ResourceDataSyncSource
+      SENSITIVE: []
+    end
+
+    class UpdateResourceDataSyncResult < Aws::EmptyStructure
+    end
+
+    class UpdateServiceSettingRequest
+      attr_accessor setting_id: ::String
+      attr_accessor setting_value: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateServiceSettingResult < Aws::EmptyStructure
+    end
+  end
+end

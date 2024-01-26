@@ -1,0 +1,1068 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ElasticLoadBalancingV2
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AddListenerCertificatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddListenerCertificatesOutput]
+        def certificates: () -> ::Array[Types::Certificate]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#add_listener_certificates-instance_method
+      def add_listener_certificates: (
+                                       listener_arn: ::String,
+                                       certificates: Array[
+                                         {
+                                           certificate_arn: ::String?,
+                                           is_default: bool?
+                                         },
+                                       ]
+                                     ) -> _AddListenerCertificatesResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddListenerCertificatesResponseSuccess
+
+      interface _AddTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddTagsOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#add_tags-instance_method
+      def add_tags: (
+                      resource_arns: Array[::String],
+                      tags: Array[
+                        {
+                          key: ::String,
+                          value: ::String?
+                        },
+                      ]
+                    ) -> _AddTagsResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddTagsResponseSuccess
+
+      interface _AddTrustStoreRevocationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddTrustStoreRevocationsOutput]
+        def trust_store_revocations: () -> ::Array[Types::TrustStoreRevocation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#add_trust_store_revocations-instance_method
+      def add_trust_store_revocations: (
+                                         trust_store_arn: ::String,
+                                         ?revocation_contents: Array[
+                                           {
+                                             s3_bucket: ::String?,
+                                             s3_key: ::String?,
+                                             s3_object_version: ::String?,
+                                             revocation_type: ("CRL")?
+                                           },
+                                         ]
+                                       ) -> _AddTrustStoreRevocationsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddTrustStoreRevocationsResponseSuccess
+
+      interface _CreateListenerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateListenerOutput]
+        def listeners: () -> ::Array[Types::Listener]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#create_listener-instance_method
+      def create_listener: (
+                             load_balancer_arn: ::String,
+                             ?protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE"),
+                             ?port: ::Integer,
+                             ?ssl_policy: ::String,
+                             ?certificates: Array[
+                               {
+                                 certificate_arn: ::String?,
+                                 is_default: bool?
+                               },
+                             ],
+                             default_actions: Array[
+                               {
+                                 type: ("forward" | "authenticate-oidc" | "authenticate-cognito" | "redirect" | "fixed-response"),
+                                 target_group_arn: ::String?,
+                                 authenticate_oidc_config: {
+                                   issuer: ::String,
+                                   authorization_endpoint: ::String,
+                                   token_endpoint: ::String,
+                                   user_info_endpoint: ::String,
+                                   client_id: ::String,
+                                   client_secret: ::String?,
+                                   session_cookie_name: ::String?,
+                                   scope: ::String?,
+                                   session_timeout: ::Integer?,
+                                   authentication_request_extra_params: Hash[::String, ::String]?,
+                                   on_unauthenticated_request: ("deny" | "allow" | "authenticate")?,
+                                   use_existing_client_secret: bool?
+                                 }?,
+                                 authenticate_cognito_config: {
+                                   user_pool_arn: ::String,
+                                   user_pool_client_id: ::String,
+                                   user_pool_domain: ::String,
+                                   session_cookie_name: ::String?,
+                                   scope: ::String?,
+                                   session_timeout: ::Integer?,
+                                   authentication_request_extra_params: Hash[::String, ::String]?,
+                                   on_unauthenticated_request: ("deny" | "allow" | "authenticate")?
+                                 }?,
+                                 order: ::Integer?,
+                                 redirect_config: {
+                                   protocol: ::String?,
+                                   port: ::String?,
+                                   host: ::String?,
+                                   path: ::String?,
+                                   query: ::String?,
+                                   status_code: ("HTTP_301" | "HTTP_302")
+                                 }?,
+                                 fixed_response_config: {
+                                   message_body: ::String?,
+                                   status_code: ::String,
+                                   content_type: ::String?
+                                 }?,
+                                 forward_config: {
+                                   target_groups: Array[
+                                     {
+                                       target_group_arn: ::String?,
+                                       weight: ::Integer?
+                                     },
+                                   ]?,
+                                   target_group_stickiness_config: {
+                                     enabled: bool?,
+                                     duration_seconds: ::Integer?
+                                   }?
+                                 }?
+                               },
+                             ],
+                             ?alpn_policy: Array[::String],
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String?
+                               },
+                             ],
+                             ?mutual_authentication: {
+                               mode: ::String?,
+                               trust_store_arn: ::String?,
+                               ignore_client_certificate_expiry: bool?
+                             }
+                           ) -> _CreateListenerResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateListenerResponseSuccess
+
+      interface _CreateLoadBalancerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLoadBalancerOutput]
+        def load_balancers: () -> ::Array[Types::LoadBalancer]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#create_load_balancer-instance_method
+      def create_load_balancer: (
+                                  name: ::String,
+                                  ?subnets: Array[::String],
+                                  ?subnet_mappings: Array[
+                                    {
+                                      subnet_id: ::String?,
+                                      allocation_id: ::String?,
+                                      private_i_pv_4_address: ::String?,
+                                      i_pv_6_address: ::String?
+                                    },
+                                  ],
+                                  ?security_groups: Array[::String],
+                                  ?scheme: ("internet-facing" | "internal"),
+                                  ?tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String?
+                                    },
+                                  ],
+                                  ?type: ("application" | "network" | "gateway"),
+                                  ?ip_address_type: ("ipv4" | "dualstack"),
+                                  ?customer_owned_ipv_4_pool: ::String
+                                ) -> _CreateLoadBalancerResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLoadBalancerResponseSuccess
+
+      interface _CreateRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRuleOutput]
+        def rules: () -> ::Array[Types::Rule]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#create_rule-instance_method
+      def create_rule: (
+                         listener_arn: ::String,
+                         conditions: Array[
+                           {
+                             field: ::String?,
+                             values: Array[::String]?,
+                             host_header_config: {
+                               values: Array[::String]?
+                             }?,
+                             path_pattern_config: {
+                               values: Array[::String]?
+                             }?,
+                             http_header_config: {
+                               http_header_name: ::String?,
+                               values: Array[::String]?
+                             }?,
+                             query_string_config: {
+                               values: Array[
+                                 {
+                                   key: ::String?,
+                                   value: ::String?
+                                 },
+                               ]?
+                             }?,
+                             http_request_method_config: {
+                               values: Array[::String]?
+                             }?,
+                             source_ip_config: {
+                               values: Array[::String]?
+                             }?
+                           },
+                         ],
+                         priority: ::Integer,
+                         actions: Array[
+                           {
+                             type: ("forward" | "authenticate-oidc" | "authenticate-cognito" | "redirect" | "fixed-response"),
+                             target_group_arn: ::String?,
+                             authenticate_oidc_config: {
+                               issuer: ::String,
+                               authorization_endpoint: ::String,
+                               token_endpoint: ::String,
+                               user_info_endpoint: ::String,
+                               client_id: ::String,
+                               client_secret: ::String?,
+                               session_cookie_name: ::String?,
+                               scope: ::String?,
+                               session_timeout: ::Integer?,
+                               authentication_request_extra_params: Hash[::String, ::String]?,
+                               on_unauthenticated_request: ("deny" | "allow" | "authenticate")?,
+                               use_existing_client_secret: bool?
+                             }?,
+                             authenticate_cognito_config: {
+                               user_pool_arn: ::String,
+                               user_pool_client_id: ::String,
+                               user_pool_domain: ::String,
+                               session_cookie_name: ::String?,
+                               scope: ::String?,
+                               session_timeout: ::Integer?,
+                               authentication_request_extra_params: Hash[::String, ::String]?,
+                               on_unauthenticated_request: ("deny" | "allow" | "authenticate")?
+                             }?,
+                             order: ::Integer?,
+                             redirect_config: {
+                               protocol: ::String?,
+                               port: ::String?,
+                               host: ::String?,
+                               path: ::String?,
+                               query: ::String?,
+                               status_code: ("HTTP_301" | "HTTP_302")
+                             }?,
+                             fixed_response_config: {
+                               message_body: ::String?,
+                               status_code: ::String,
+                               content_type: ::String?
+                             }?,
+                             forward_config: {
+                               target_groups: Array[
+                                 {
+                                   target_group_arn: ::String?,
+                                   weight: ::Integer?
+                                 },
+                               ]?,
+                               target_group_stickiness_config: {
+                                 enabled: bool?,
+                                 duration_seconds: ::Integer?
+                               }?
+                             }?
+                           },
+                         ],
+                         ?tags: Array[
+                           {
+                             key: ::String,
+                             value: ::String?
+                           },
+                         ]
+                       ) -> _CreateRuleResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRuleResponseSuccess
+
+      interface _CreateTargetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTargetGroupOutput]
+        def target_groups: () -> ::Array[Types::TargetGroup]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#create_target_group-instance_method
+      def create_target_group: (
+                                 name: ::String,
+                                 ?protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE"),
+                                 ?protocol_version: ::String,
+                                 ?port: ::Integer,
+                                 ?vpc_id: ::String,
+                                 ?health_check_protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE"),
+                                 ?health_check_port: ::String,
+                                 ?health_check_enabled: bool,
+                                 ?health_check_path: ::String,
+                                 ?health_check_interval_seconds: ::Integer,
+                                 ?health_check_timeout_seconds: ::Integer,
+                                 ?healthy_threshold_count: ::Integer,
+                                 ?unhealthy_threshold_count: ::Integer,
+                                 ?matcher: {
+                                   http_code: ::String?,
+                                   grpc_code: ::String?
+                                 },
+                                 ?target_type: ("instance" | "ip" | "lambda" | "alb"),
+                                 ?tags: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String?
+                                   },
+                                 ],
+                                 ?ip_address_type: ("ipv4" | "ipv6")
+                               ) -> _CreateTargetGroupResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTargetGroupResponseSuccess
+
+      interface _CreateTrustStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTrustStoreOutput]
+        def trust_stores: () -> ::Array[Types::TrustStore]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#create_trust_store-instance_method
+      def create_trust_store: (
+                                name: ::String,
+                                ca_certificates_bundle_s3_bucket: ::String,
+                                ca_certificates_bundle_s3_key: ::String,
+                                ?ca_certificates_bundle_s3_object_version: ::String,
+                                ?tags: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String?
+                                  },
+                                ]
+                              ) -> _CreateTrustStoreResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTrustStoreResponseSuccess
+
+      interface _DeleteListenerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteListenerOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#delete_listener-instance_method
+      def delete_listener: (
+                             listener_arn: ::String
+                           ) -> _DeleteListenerResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteListenerResponseSuccess
+
+      interface _DeleteLoadBalancerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLoadBalancerOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#delete_load_balancer-instance_method
+      def delete_load_balancer: (
+                                  load_balancer_arn: ::String
+                                ) -> _DeleteLoadBalancerResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLoadBalancerResponseSuccess
+
+      interface _DeleteRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRuleOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#delete_rule-instance_method
+      def delete_rule: (
+                         rule_arn: ::String
+                       ) -> _DeleteRuleResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRuleResponseSuccess
+
+      interface _DeleteTargetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTargetGroupOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#delete_target_group-instance_method
+      def delete_target_group: (
+                                 target_group_arn: ::String
+                               ) -> _DeleteTargetGroupResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTargetGroupResponseSuccess
+
+      interface _DeleteTrustStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTrustStoreOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#delete_trust_store-instance_method
+      def delete_trust_store: (
+                                trust_store_arn: ::String
+                              ) -> _DeleteTrustStoreResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTrustStoreResponseSuccess
+
+      interface _DeregisterTargetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterTargetsOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#deregister_targets-instance_method
+      def deregister_targets: (
+                                target_group_arn: ::String,
+                                targets: Array[
+                                  {
+                                    id: ::String,
+                                    port: ::Integer?,
+                                    availability_zone: ::String?
+                                  },
+                                ]
+                              ) -> _DeregisterTargetsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterTargetsResponseSuccess
+
+      interface _DescribeAccountLimitsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAccountLimitsOutput]
+        def limits: () -> ::Array[Types::Limit]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#describe_account_limits-instance_method
+      def describe_account_limits: (
+                                     ?marker: ::String,
+                                     ?page_size: ::Integer
+                                   ) -> _DescribeAccountLimitsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccountLimitsResponseSuccess
+
+      interface _DescribeListenerCertificatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeListenerCertificatesOutput]
+        def certificates: () -> ::Array[Types::Certificate]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#describe_listener_certificates-instance_method
+      def describe_listener_certificates: (
+                                            listener_arn: ::String,
+                                            ?marker: ::String,
+                                            ?page_size: ::Integer
+                                          ) -> _DescribeListenerCertificatesResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeListenerCertificatesResponseSuccess
+
+      interface _DescribeListenersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeListenersOutput]
+        def listeners: () -> ::Array[Types::Listener]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#describe_listeners-instance_method
+      def describe_listeners: (
+                                ?load_balancer_arn: ::String,
+                                ?listener_arns: Array[::String],
+                                ?marker: ::String,
+                                ?page_size: ::Integer
+                              ) -> _DescribeListenersResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeListenersResponseSuccess
+
+      interface _DescribeLoadBalancerAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLoadBalancerAttributesOutput]
+        def attributes: () -> ::Array[Types::LoadBalancerAttribute]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#describe_load_balancer_attributes-instance_method
+      def describe_load_balancer_attributes: (
+                                               load_balancer_arn: ::String
+                                             ) -> _DescribeLoadBalancerAttributesResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLoadBalancerAttributesResponseSuccess
+
+      interface _DescribeLoadBalancersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLoadBalancersOutput]
+        def load_balancers: () -> ::Array[Types::LoadBalancer]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#describe_load_balancers-instance_method
+      def describe_load_balancers: (
+                                     ?load_balancer_arns: Array[::String],
+                                     ?names: Array[::String],
+                                     ?marker: ::String,
+                                     ?page_size: ::Integer
+                                   ) -> _DescribeLoadBalancersResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLoadBalancersResponseSuccess
+
+      interface _DescribeRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRulesOutput]
+        def rules: () -> ::Array[Types::Rule]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#describe_rules-instance_method
+      def describe_rules: (
+                            ?listener_arn: ::String,
+                            ?rule_arns: Array[::String],
+                            ?marker: ::String,
+                            ?page_size: ::Integer
+                          ) -> _DescribeRulesResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRulesResponseSuccess
+
+      interface _DescribeSSLPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSSLPoliciesOutput]
+        def ssl_policies: () -> ::Array[Types::SslPolicy]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#describe_ssl_policies-instance_method
+      def describe_ssl_policies: (
+                                   ?names: Array[::String],
+                                   ?marker: ::String,
+                                   ?page_size: ::Integer,
+                                   ?load_balancer_type: ("application" | "network" | "gateway")
+                                 ) -> _DescribeSSLPoliciesResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSSLPoliciesResponseSuccess
+
+      interface _DescribeTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTagsOutput]
+        def tag_descriptions: () -> ::Array[Types::TagDescription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#describe_tags-instance_method
+      def describe_tags: (
+                           resource_arns: Array[::String]
+                         ) -> _DescribeTagsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTagsResponseSuccess
+
+      interface _DescribeTargetGroupAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTargetGroupAttributesOutput]
+        def attributes: () -> ::Array[Types::TargetGroupAttribute]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#describe_target_group_attributes-instance_method
+      def describe_target_group_attributes: (
+                                              target_group_arn: ::String
+                                            ) -> _DescribeTargetGroupAttributesResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTargetGroupAttributesResponseSuccess
+
+      interface _DescribeTargetGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTargetGroupsOutput]
+        def target_groups: () -> ::Array[Types::TargetGroup]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#describe_target_groups-instance_method
+      def describe_target_groups: (
+                                    ?load_balancer_arn: ::String,
+                                    ?target_group_arns: Array[::String],
+                                    ?names: Array[::String],
+                                    ?marker: ::String,
+                                    ?page_size: ::Integer
+                                  ) -> _DescribeTargetGroupsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTargetGroupsResponseSuccess
+
+      interface _DescribeTargetHealthResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTargetHealthOutput]
+        def target_health_descriptions: () -> ::Array[Types::TargetHealthDescription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#describe_target_health-instance_method
+      def describe_target_health: (
+                                    target_group_arn: ::String,
+                                    ?targets: Array[
+                                      {
+                                        id: ::String,
+                                        port: ::Integer?,
+                                        availability_zone: ::String?
+                                      },
+                                    ],
+                                    ?include: Array[("AnomalyDetection" | "All")]
+                                  ) -> _DescribeTargetHealthResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTargetHealthResponseSuccess
+
+      interface _DescribeTrustStoreAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTrustStoreAssociationsOutput]
+        def trust_store_associations: () -> ::Array[Types::TrustStoreAssociation]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#describe_trust_store_associations-instance_method
+      def describe_trust_store_associations: (
+                                               trust_store_arn: ::String,
+                                               ?marker: ::String,
+                                               ?page_size: ::Integer
+                                             ) -> _DescribeTrustStoreAssociationsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTrustStoreAssociationsResponseSuccess
+
+      interface _DescribeTrustStoreRevocationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTrustStoreRevocationsOutput]
+        def trust_store_revocations: () -> ::Array[Types::DescribeTrustStoreRevocation]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#describe_trust_store_revocations-instance_method
+      def describe_trust_store_revocations: (
+                                              trust_store_arn: ::String,
+                                              ?revocation_ids: Array[::Integer],
+                                              ?marker: ::String,
+                                              ?page_size: ::Integer
+                                            ) -> _DescribeTrustStoreRevocationsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTrustStoreRevocationsResponseSuccess
+
+      interface _DescribeTrustStoresResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTrustStoresOutput]
+        def trust_stores: () -> ::Array[Types::TrustStore]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#describe_trust_stores-instance_method
+      def describe_trust_stores: (
+                                   ?trust_store_arns: Array[::String],
+                                   ?names: Array[::String],
+                                   ?marker: ::String,
+                                   ?page_size: ::Integer
+                                 ) -> _DescribeTrustStoresResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTrustStoresResponseSuccess
+
+      interface _GetTrustStoreCaCertificatesBundleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTrustStoreCaCertificatesBundleOutput]
+        def location: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#get_trust_store_ca_certificates_bundle-instance_method
+      def get_trust_store_ca_certificates_bundle: (
+                                                    trust_store_arn: ::String
+                                                  ) -> _GetTrustStoreCaCertificatesBundleResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTrustStoreCaCertificatesBundleResponseSuccess
+
+      interface _GetTrustStoreRevocationContentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTrustStoreRevocationContentOutput]
+        def location: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#get_trust_store_revocation_content-instance_method
+      def get_trust_store_revocation_content: (
+                                                trust_store_arn: ::String,
+                                                revocation_id: ::Integer
+                                              ) -> _GetTrustStoreRevocationContentResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTrustStoreRevocationContentResponseSuccess
+
+      interface _ModifyListenerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyListenerOutput]
+        def listeners: () -> ::Array[Types::Listener]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#modify_listener-instance_method
+      def modify_listener: (
+                             listener_arn: ::String,
+                             ?port: ::Integer,
+                             ?protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE"),
+                             ?ssl_policy: ::String,
+                             ?certificates: Array[
+                               {
+                                 certificate_arn: ::String?,
+                                 is_default: bool?
+                               },
+                             ],
+                             ?default_actions: Array[
+                               {
+                                 type: ("forward" | "authenticate-oidc" | "authenticate-cognito" | "redirect" | "fixed-response"),
+                                 target_group_arn: ::String?,
+                                 authenticate_oidc_config: {
+                                   issuer: ::String,
+                                   authorization_endpoint: ::String,
+                                   token_endpoint: ::String,
+                                   user_info_endpoint: ::String,
+                                   client_id: ::String,
+                                   client_secret: ::String?,
+                                   session_cookie_name: ::String?,
+                                   scope: ::String?,
+                                   session_timeout: ::Integer?,
+                                   authentication_request_extra_params: Hash[::String, ::String]?,
+                                   on_unauthenticated_request: ("deny" | "allow" | "authenticate")?,
+                                   use_existing_client_secret: bool?
+                                 }?,
+                                 authenticate_cognito_config: {
+                                   user_pool_arn: ::String,
+                                   user_pool_client_id: ::String,
+                                   user_pool_domain: ::String,
+                                   session_cookie_name: ::String?,
+                                   scope: ::String?,
+                                   session_timeout: ::Integer?,
+                                   authentication_request_extra_params: Hash[::String, ::String]?,
+                                   on_unauthenticated_request: ("deny" | "allow" | "authenticate")?
+                                 }?,
+                                 order: ::Integer?,
+                                 redirect_config: {
+                                   protocol: ::String?,
+                                   port: ::String?,
+                                   host: ::String?,
+                                   path: ::String?,
+                                   query: ::String?,
+                                   status_code: ("HTTP_301" | "HTTP_302")
+                                 }?,
+                                 fixed_response_config: {
+                                   message_body: ::String?,
+                                   status_code: ::String,
+                                   content_type: ::String?
+                                 }?,
+                                 forward_config: {
+                                   target_groups: Array[
+                                     {
+                                       target_group_arn: ::String?,
+                                       weight: ::Integer?
+                                     },
+                                   ]?,
+                                   target_group_stickiness_config: {
+                                     enabled: bool?,
+                                     duration_seconds: ::Integer?
+                                   }?
+                                 }?
+                               },
+                             ],
+                             ?alpn_policy: Array[::String],
+                             ?mutual_authentication: {
+                               mode: ::String?,
+                               trust_store_arn: ::String?,
+                               ignore_client_certificate_expiry: bool?
+                             }
+                           ) -> _ModifyListenerResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyListenerResponseSuccess
+
+      interface _ModifyLoadBalancerAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyLoadBalancerAttributesOutput]
+        def attributes: () -> ::Array[Types::LoadBalancerAttribute]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#modify_load_balancer_attributes-instance_method
+      def modify_load_balancer_attributes: (
+                                             load_balancer_arn: ::String,
+                                             attributes: Array[
+                                               {
+                                                 key: ::String?,
+                                                 value: ::String?
+                                               },
+                                             ]
+                                           ) -> _ModifyLoadBalancerAttributesResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyLoadBalancerAttributesResponseSuccess
+
+      interface _ModifyRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyRuleOutput]
+        def rules: () -> ::Array[Types::Rule]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#modify_rule-instance_method
+      def modify_rule: (
+                         rule_arn: ::String,
+                         ?conditions: Array[
+                           {
+                             field: ::String?,
+                             values: Array[::String]?,
+                             host_header_config: {
+                               values: Array[::String]?
+                             }?,
+                             path_pattern_config: {
+                               values: Array[::String]?
+                             }?,
+                             http_header_config: {
+                               http_header_name: ::String?,
+                               values: Array[::String]?
+                             }?,
+                             query_string_config: {
+                               values: Array[
+                                 {
+                                   key: ::String?,
+                                   value: ::String?
+                                 },
+                               ]?
+                             }?,
+                             http_request_method_config: {
+                               values: Array[::String]?
+                             }?,
+                             source_ip_config: {
+                               values: Array[::String]?
+                             }?
+                           },
+                         ],
+                         ?actions: Array[
+                           {
+                             type: ("forward" | "authenticate-oidc" | "authenticate-cognito" | "redirect" | "fixed-response"),
+                             target_group_arn: ::String?,
+                             authenticate_oidc_config: {
+                               issuer: ::String,
+                               authorization_endpoint: ::String,
+                               token_endpoint: ::String,
+                               user_info_endpoint: ::String,
+                               client_id: ::String,
+                               client_secret: ::String?,
+                               session_cookie_name: ::String?,
+                               scope: ::String?,
+                               session_timeout: ::Integer?,
+                               authentication_request_extra_params: Hash[::String, ::String]?,
+                               on_unauthenticated_request: ("deny" | "allow" | "authenticate")?,
+                               use_existing_client_secret: bool?
+                             }?,
+                             authenticate_cognito_config: {
+                               user_pool_arn: ::String,
+                               user_pool_client_id: ::String,
+                               user_pool_domain: ::String,
+                               session_cookie_name: ::String?,
+                               scope: ::String?,
+                               session_timeout: ::Integer?,
+                               authentication_request_extra_params: Hash[::String, ::String]?,
+                               on_unauthenticated_request: ("deny" | "allow" | "authenticate")?
+                             }?,
+                             order: ::Integer?,
+                             redirect_config: {
+                               protocol: ::String?,
+                               port: ::String?,
+                               host: ::String?,
+                               path: ::String?,
+                               query: ::String?,
+                               status_code: ("HTTP_301" | "HTTP_302")
+                             }?,
+                             fixed_response_config: {
+                               message_body: ::String?,
+                               status_code: ::String,
+                               content_type: ::String?
+                             }?,
+                             forward_config: {
+                               target_groups: Array[
+                                 {
+                                   target_group_arn: ::String?,
+                                   weight: ::Integer?
+                                 },
+                               ]?,
+                               target_group_stickiness_config: {
+                                 enabled: bool?,
+                                 duration_seconds: ::Integer?
+                               }?
+                             }?
+                           },
+                         ]
+                       ) -> _ModifyRuleResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyRuleResponseSuccess
+
+      interface _ModifyTargetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyTargetGroupOutput]
+        def target_groups: () -> ::Array[Types::TargetGroup]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#modify_target_group-instance_method
+      def modify_target_group: (
+                                 target_group_arn: ::String,
+                                 ?health_check_protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE"),
+                                 ?health_check_port: ::String,
+                                 ?health_check_path: ::String,
+                                 ?health_check_enabled: bool,
+                                 ?health_check_interval_seconds: ::Integer,
+                                 ?health_check_timeout_seconds: ::Integer,
+                                 ?healthy_threshold_count: ::Integer,
+                                 ?unhealthy_threshold_count: ::Integer,
+                                 ?matcher: {
+                                   http_code: ::String?,
+                                   grpc_code: ::String?
+                                 }
+                               ) -> _ModifyTargetGroupResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyTargetGroupResponseSuccess
+
+      interface _ModifyTargetGroupAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyTargetGroupAttributesOutput]
+        def attributes: () -> ::Array[Types::TargetGroupAttribute]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#modify_target_group_attributes-instance_method
+      def modify_target_group_attributes: (
+                                            target_group_arn: ::String,
+                                            attributes: Array[
+                                              {
+                                                key: ::String?,
+                                                value: ::String?
+                                              },
+                                            ]
+                                          ) -> _ModifyTargetGroupAttributesResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyTargetGroupAttributesResponseSuccess
+
+      interface _ModifyTrustStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyTrustStoreOutput]
+        def trust_stores: () -> ::Array[Types::TrustStore]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#modify_trust_store-instance_method
+      def modify_trust_store: (
+                                trust_store_arn: ::String,
+                                ca_certificates_bundle_s3_bucket: ::String,
+                                ca_certificates_bundle_s3_key: ::String,
+                                ?ca_certificates_bundle_s3_object_version: ::String
+                              ) -> _ModifyTrustStoreResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyTrustStoreResponseSuccess
+
+      interface _RegisterTargetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterTargetsOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#register_targets-instance_method
+      def register_targets: (
+                              target_group_arn: ::String,
+                              targets: Array[
+                                {
+                                  id: ::String,
+                                  port: ::Integer?,
+                                  availability_zone: ::String?
+                                },
+                              ]
+                            ) -> _RegisterTargetsResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterTargetsResponseSuccess
+
+      interface _RemoveListenerCertificatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveListenerCertificatesOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#remove_listener_certificates-instance_method
+      def remove_listener_certificates: (
+                                          listener_arn: ::String,
+                                          certificates: Array[
+                                            {
+                                              certificate_arn: ::String?,
+                                              is_default: bool?
+                                            },
+                                          ]
+                                        ) -> _RemoveListenerCertificatesResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveListenerCertificatesResponseSuccess
+
+      interface _RemoveTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveTagsOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#remove_tags-instance_method
+      def remove_tags: (
+                         resource_arns: Array[::String],
+                         tag_keys: Array[::String]
+                       ) -> _RemoveTagsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveTagsResponseSuccess
+
+      interface _RemoveTrustStoreRevocationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveTrustStoreRevocationsOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#remove_trust_store_revocations-instance_method
+      def remove_trust_store_revocations: (
+                                            trust_store_arn: ::String,
+                                            revocation_ids: Array[::Integer]
+                                          ) -> _RemoveTrustStoreRevocationsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveTrustStoreRevocationsResponseSuccess
+
+      interface _SetIpAddressTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetIpAddressTypeOutput]
+        def ip_address_type: () -> ("ipv4" | "dualstack")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#set_ip_address_type-instance_method
+      def set_ip_address_type: (
+                                 load_balancer_arn: ::String,
+                                 ip_address_type: ("ipv4" | "dualstack")
+                               ) -> _SetIpAddressTypeResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetIpAddressTypeResponseSuccess
+
+      interface _SetRulePrioritiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetRulePrioritiesOutput]
+        def rules: () -> ::Array[Types::Rule]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#set_rule_priorities-instance_method
+      def set_rule_priorities: (
+                                 rule_priorities: Array[
+                                   {
+                                     rule_arn: ::String?,
+                                     priority: ::Integer?
+                                   },
+                                 ]
+                               ) -> _SetRulePrioritiesResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetRulePrioritiesResponseSuccess
+
+      interface _SetSecurityGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetSecurityGroupsOutput]
+        def security_group_ids: () -> ::Array[::String]
+        def enforce_security_group_inbound_rules_on_private_link_traffic: () -> ("on" | "off")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#set_security_groups-instance_method
+      def set_security_groups: (
+                                 load_balancer_arn: ::String,
+                                 security_groups: Array[::String],
+                                 ?enforce_security_group_inbound_rules_on_private_link_traffic: ("on" | "off")
+                               ) -> _SetSecurityGroupsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetSecurityGroupsResponseSuccess
+
+      interface _SetSubnetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetSubnetsOutput]
+        def availability_zones: () -> ::Array[Types::AvailabilityZone]
+        def ip_address_type: () -> ("ipv4" | "dualstack")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#set_subnets-instance_method
+      def set_subnets: (
+                         load_balancer_arn: ::String,
+                         ?subnets: Array[::String],
+                         ?subnet_mappings: Array[
+                           {
+                             subnet_id: ::String?,
+                             allocation_id: ::String?,
+                             private_i_pv_4_address: ::String?,
+                             i_pv_6_address: ::String?
+                           },
+                         ],
+                         ?ip_address_type: ("ipv4" | "dualstack")
+                       ) -> _SetSubnetsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetSubnetsResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#wait_until-instance_method
+      def wait_until: (:load_balancer_available waiter_name, 
+                    ?load_balancer_arns: Array[::String],
+                    ?names: Array[::String],
+                    ?marker: ::String,
+                    ?page_size: ::Integer
+                  ) -> Client::_DescribeLoadBalancersResponseSuccess
+                    | (:load_balancer_available waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeLoadBalancersResponseSuccess
+                    | (:load_balancer_exists waiter_name, 
+                    ?load_balancer_arns: Array[::String],
+                    ?names: Array[::String],
+                    ?marker: ::String,
+                    ?page_size: ::Integer
+                  ) -> Client::_DescribeLoadBalancersResponseSuccess
+                    | (:load_balancer_exists waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeLoadBalancersResponseSuccess
+                    | (:load_balancers_deleted waiter_name, 
+                    ?load_balancer_arns: Array[::String],
+                    ?names: Array[::String],
+                    ?marker: ::String,
+                    ?page_size: ::Integer
+                  ) -> Client::_DescribeLoadBalancersResponseSuccess
+                    | (:load_balancers_deleted waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeLoadBalancersResponseSuccess
+                    | (:target_deregistered waiter_name, 
+                    target_group_arn: ::String,
+                    ?targets: Array[
+                      {
+                        id: ::String,
+                        port: ::Integer?,
+                        availability_zone: ::String?
+                      },
+                    ],
+                    ?include: Array[("AnomalyDetection" | "All")]
+                  ) -> Client::_DescribeTargetHealthResponseSuccess
+                    | (:target_deregistered waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeTargetHealthResponseSuccess
+                    | (:target_in_service waiter_name, 
+                    target_group_arn: ::String,
+                    ?targets: Array[
+                      {
+                        id: ::String,
+                        port: ::Integer?,
+                        availability_zone: ::String?
+                      },
+                    ],
+                    ?include: Array[("AnomalyDetection" | "All")]
+                  ) -> Client::_DescribeTargetHealthResponseSuccess
+                    | (:target_in_service waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeTargetHealthResponseSuccess
+    end
+  end
+end
+

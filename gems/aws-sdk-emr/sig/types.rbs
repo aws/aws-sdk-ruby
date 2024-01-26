@@ -1,0 +1,1555 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::EMR
+  module Types
+
+    class AddInstanceFleetInput
+      attr_accessor cluster_id: ::String
+      attr_accessor instance_fleet: Types::InstanceFleetConfig
+      SENSITIVE: []
+    end
+
+    class AddInstanceFleetOutput
+      attr_accessor cluster_id: ::String
+      attr_accessor instance_fleet_id: ::String
+      attr_accessor cluster_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AddInstanceGroupsInput
+      attr_accessor instance_groups: ::Array[Types::InstanceGroupConfig]
+      attr_accessor job_flow_id: ::String
+      SENSITIVE: []
+    end
+
+    class AddInstanceGroupsOutput
+      attr_accessor job_flow_id: ::String
+      attr_accessor instance_group_ids: ::Array[::String]
+      attr_accessor cluster_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AddJobFlowStepsInput
+      attr_accessor job_flow_id: ::String
+      attr_accessor steps: ::Array[Types::StepConfig]
+      attr_accessor execution_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AddJobFlowStepsOutput
+      attr_accessor step_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AddTagsInput
+      attr_accessor resource_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class AddTagsOutput < Aws::EmptyStructure
+    end
+
+    class Application
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor args: ::Array[::String]
+      attr_accessor additional_info: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class AutoScalingPolicy
+      attr_accessor constraints: Types::ScalingConstraints
+      attr_accessor rules: ::Array[Types::ScalingRule]
+      SENSITIVE: []
+    end
+
+    class AutoScalingPolicyDescription
+      attr_accessor status: Types::AutoScalingPolicyStatus
+      attr_accessor constraints: Types::ScalingConstraints
+      attr_accessor rules: ::Array[Types::ScalingRule]
+      SENSITIVE: []
+    end
+
+    class AutoScalingPolicyStateChangeReason
+      attr_accessor code: ("USER_REQUEST" | "PROVISION_FAILURE" | "CLEANUP_FAILURE")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AutoScalingPolicyStatus
+      attr_accessor state: ("PENDING" | "ATTACHING" | "ATTACHED" | "DETACHING" | "DETACHED" | "FAILED")
+      attr_accessor state_change_reason: Types::AutoScalingPolicyStateChangeReason
+      SENSITIVE: []
+    end
+
+    class AutoTerminationPolicy
+      attr_accessor idle_timeout: ::Integer
+      SENSITIVE: []
+    end
+
+    class BlockPublicAccessConfiguration
+      attr_accessor block_public_security_group_rules: bool
+      attr_accessor permitted_public_security_group_rule_ranges: ::Array[Types::PortRange]
+      SENSITIVE: []
+    end
+
+    class BlockPublicAccessConfigurationMetadata
+      attr_accessor creation_date_time: ::Time
+      attr_accessor created_by_arn: ::String
+      SENSITIVE: []
+    end
+
+    class BootstrapActionConfig
+      attr_accessor name: ::String
+      attr_accessor script_bootstrap_action: Types::ScriptBootstrapActionConfig
+      SENSITIVE: []
+    end
+
+    class BootstrapActionDetail
+      attr_accessor bootstrap_action_config: Types::BootstrapActionConfig
+      SENSITIVE: []
+    end
+
+    class CancelStepsInfo
+      attr_accessor step_id: ::String
+      attr_accessor status: ("SUBMITTED" | "FAILED")
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class CancelStepsInput
+      attr_accessor cluster_id: ::String
+      attr_accessor step_ids: ::Array[::String]
+      attr_accessor step_cancellation_option: ("SEND_INTERRUPT" | "TERMINATE_PROCESS")
+      SENSITIVE: []
+    end
+
+    class CancelStepsOutput
+      attr_accessor cancel_steps_info_list: ::Array[Types::CancelStepsInfo]
+      SENSITIVE: []
+    end
+
+    class CloudWatchAlarmDefinition
+      attr_accessor comparison_operator: ("GREATER_THAN_OR_EQUAL" | "GREATER_THAN" | "LESS_THAN" | "LESS_THAN_OR_EQUAL")
+      attr_accessor evaluation_periods: ::Integer
+      attr_accessor metric_name: ::String
+      attr_accessor namespace: ::String
+      attr_accessor period: ::Integer
+      attr_accessor statistic: ("SAMPLE_COUNT" | "AVERAGE" | "SUM" | "MINIMUM" | "MAXIMUM")
+      attr_accessor threshold: ::Float
+      attr_accessor unit: ("NONE" | "SECONDS" | "MICRO_SECONDS" | "MILLI_SECONDS" | "BYTES" | "KILO_BYTES" | "MEGA_BYTES" | "GIGA_BYTES" | "TERA_BYTES" | "BITS" | "KILO_BITS" | "MEGA_BITS" | "GIGA_BITS" | "TERA_BITS" | "PERCENT" | "COUNT" | "BYTES_PER_SECOND" | "KILO_BYTES_PER_SECOND" | "MEGA_BYTES_PER_SECOND" | "GIGA_BYTES_PER_SECOND" | "TERA_BYTES_PER_SECOND" | "BITS_PER_SECOND" | "KILO_BITS_PER_SECOND" | "MEGA_BITS_PER_SECOND" | "GIGA_BITS_PER_SECOND" | "TERA_BITS_PER_SECOND" | "COUNT_PER_SECOND")
+      attr_accessor dimensions: ::Array[Types::MetricDimension]
+      SENSITIVE: []
+    end
+
+    class Cluster
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: Types::ClusterStatus
+      attr_accessor ec2_instance_attributes: Types::Ec2InstanceAttributes
+      attr_accessor instance_collection_type: ("INSTANCE_FLEET" | "INSTANCE_GROUP")
+      attr_accessor log_uri: ::String
+      attr_accessor log_encryption_kms_key_id: ::String
+      attr_accessor requested_ami_version: ::String
+      attr_accessor running_ami_version: ::String
+      attr_accessor release_label: ::String
+      attr_accessor auto_terminate: bool
+      attr_accessor termination_protected: bool
+      attr_accessor visible_to_all_users: bool
+      attr_accessor applications: ::Array[Types::Application]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor service_role: ::String
+      attr_accessor normalized_instance_hours: ::Integer
+      attr_accessor master_public_dns_name: ::String
+      attr_accessor configurations: ::Array[Types::Configuration]
+      attr_accessor security_configuration: ::String
+      attr_accessor auto_scaling_role: ::String
+      attr_accessor scale_down_behavior: ("TERMINATE_AT_INSTANCE_HOUR" | "TERMINATE_AT_TASK_COMPLETION")
+      attr_accessor custom_ami_id: ::String
+      attr_accessor ebs_root_volume_size: ::Integer
+      attr_accessor repo_upgrade_on_boot: ("SECURITY" | "NONE")
+      attr_accessor kerberos_attributes: Types::KerberosAttributes
+      attr_accessor cluster_arn: ::String
+      attr_accessor outpost_arn: ::String
+      attr_accessor step_concurrency_level: ::Integer
+      attr_accessor placement_groups: ::Array[Types::PlacementGroupConfig]
+      attr_accessor os_release_label: ::String
+      attr_accessor ebs_root_volume_iops: ::Integer
+      attr_accessor ebs_root_volume_throughput: ::Integer
+      SENSITIVE: []
+    end
+
+    class ClusterStateChangeReason
+      attr_accessor code: ("INTERNAL_ERROR" | "VALIDATION_ERROR" | "INSTANCE_FAILURE" | "INSTANCE_FLEET_TIMEOUT" | "BOOTSTRAP_FAILURE" | "USER_REQUEST" | "STEP_FAILURE" | "ALL_STEPS_COMPLETED")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ClusterStatus
+      attr_accessor state: ("STARTING" | "BOOTSTRAPPING" | "RUNNING" | "WAITING" | "TERMINATING" | "TERMINATED" | "TERMINATED_WITH_ERRORS")
+      attr_accessor state_change_reason: Types::ClusterStateChangeReason
+      attr_accessor timeline: Types::ClusterTimeline
+      attr_accessor error_details: ::Array[Types::ErrorDetail]
+      SENSITIVE: []
+    end
+
+    class ClusterSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: Types::ClusterStatus
+      attr_accessor normalized_instance_hours: ::Integer
+      attr_accessor cluster_arn: ::String
+      attr_accessor outpost_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ClusterTimeline
+      attr_accessor creation_date_time: ::Time
+      attr_accessor ready_date_time: ::Time
+      attr_accessor end_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class Command
+      attr_accessor name: ::String
+      attr_accessor script_path: ::String
+      attr_accessor args: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ComputeLimits
+      attr_accessor unit_type: ("InstanceFleetUnits" | "Instances" | "VCPU")
+      attr_accessor minimum_capacity_units: ::Integer
+      attr_accessor maximum_capacity_units: ::Integer
+      attr_accessor maximum_on_demand_capacity_units: ::Integer
+      attr_accessor maximum_core_capacity_units: ::Integer
+      SENSITIVE: []
+    end
+
+    class Configuration
+      attr_accessor classification: ::String
+      attr_accessor configurations: ::Array[Types::Configuration]
+      attr_accessor properties: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateSecurityConfigurationInput
+      attr_accessor name: ::String
+      attr_accessor security_configuration: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSecurityConfigurationOutput
+      attr_accessor name: ::String
+      attr_accessor creation_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateStudioInput
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor auth_mode: ("SSO" | "IAM")
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor service_role: ::String
+      attr_accessor user_role: ::String
+      attr_accessor workspace_security_group_id: ::String
+      attr_accessor engine_security_group_id: ::String
+      attr_accessor default_s3_location: ::String
+      attr_accessor idp_auth_url: ::String
+      attr_accessor idp_relay_state_parameter_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor trusted_identity_propagation_enabled: bool
+      attr_accessor idc_user_assignment: ("REQUIRED" | "OPTIONAL")
+      attr_accessor idc_instance_arn: ::String
+      attr_accessor encryption_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateStudioOutput
+      attr_accessor studio_id: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class CreateStudioSessionMappingInput
+      attr_accessor studio_id: ::String
+      attr_accessor identity_id: ::String
+      attr_accessor identity_name: ::String
+      attr_accessor identity_type: ("USER" | "GROUP")
+      attr_accessor session_policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Credentials
+      attr_accessor username_password: Types::UsernamePassword
+      attr_accessor unknown: untyped
+      SENSITIVE: [:username_password]
+
+      class UsernamePassword < Credentials
+      end
+      class Unknown < Credentials
+      end
+    end
+
+    class DeleteSecurityConfigurationInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSecurityConfigurationOutput < Aws::EmptyStructure
+    end
+
+    class DeleteStudioInput
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStudioSessionMappingInput
+      attr_accessor studio_id: ::String
+      attr_accessor identity_id: ::String
+      attr_accessor identity_name: ::String
+      attr_accessor identity_type: ("USER" | "GROUP")
+      SENSITIVE: []
+    end
+
+    class DescribeClusterInput
+      attr_accessor cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeClusterOutput
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class DescribeJobFlowsInput
+      attr_accessor created_after: ::Time
+      attr_accessor created_before: ::Time
+      attr_accessor job_flow_ids: ::Array[::String]
+      attr_accessor job_flow_states: ::Array[("STARTING" | "BOOTSTRAPPING" | "RUNNING" | "WAITING" | "SHUTTING_DOWN" | "TERMINATED" | "COMPLETED" | "FAILED")]
+      SENSITIVE: []
+    end
+
+    class DescribeJobFlowsOutput
+      attr_accessor job_flows: ::Array[Types::JobFlowDetail]
+      SENSITIVE: []
+    end
+
+    class DescribeNotebookExecutionInput
+      attr_accessor notebook_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeNotebookExecutionOutput
+      attr_accessor notebook_execution: Types::NotebookExecution
+      SENSITIVE: []
+    end
+
+    class DescribeReleaseLabelInput
+      attr_accessor release_label: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeReleaseLabelOutput
+      attr_accessor release_label: ::String
+      attr_accessor applications: ::Array[Types::SimplifiedApplication]
+      attr_accessor next_token: ::String
+      attr_accessor available_os_releases: ::Array[Types::OSRelease]
+      SENSITIVE: []
+    end
+
+    class DescribeSecurityConfigurationInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSecurityConfigurationOutput
+      attr_accessor name: ::String
+      attr_accessor security_configuration: ::String
+      attr_accessor creation_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeStepInput
+      attr_accessor cluster_id: ::String
+      attr_accessor step_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStepOutput
+      attr_accessor step: Types::Step
+      SENSITIVE: []
+    end
+
+    class DescribeStudioInput
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStudioOutput
+      attr_accessor studio: Types::Studio
+      SENSITIVE: []
+    end
+
+    class EbsBlockDevice
+      attr_accessor volume_specification: Types::VolumeSpecification
+      attr_accessor device: ::String
+      SENSITIVE: []
+    end
+
+    class EbsBlockDeviceConfig
+      attr_accessor volume_specification: Types::VolumeSpecification
+      attr_accessor volumes_per_instance: ::Integer
+      SENSITIVE: []
+    end
+
+    class EbsConfiguration
+      attr_accessor ebs_block_device_configs: ::Array[Types::EbsBlockDeviceConfig]
+      attr_accessor ebs_optimized: bool
+      SENSITIVE: []
+    end
+
+    class EbsVolume
+      attr_accessor device: ::String
+      attr_accessor volume_id: ::String
+      SENSITIVE: []
+    end
+
+    class Ec2InstanceAttributes
+      attr_accessor ec2_key_name: ::String
+      attr_accessor ec2_subnet_id: ::String
+      attr_accessor requested_ec2_subnet_ids: ::Array[::String]
+      attr_accessor ec2_availability_zone: ::String
+      attr_accessor requested_ec2_availability_zones: ::Array[::String]
+      attr_accessor iam_instance_profile: ::String
+      attr_accessor emr_managed_master_security_group: ::String
+      attr_accessor emr_managed_slave_security_group: ::String
+      attr_accessor service_access_security_group: ::String
+      attr_accessor additional_master_security_groups: ::Array[::String]
+      attr_accessor additional_slave_security_groups: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ErrorDetail
+      attr_accessor error_code: ::String
+      attr_accessor error_data: ::Array[::Hash[::String, ::String]]
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class ExecutionEngineConfig
+      attr_accessor id: ::String
+      attr_accessor type: ("EMR")
+      attr_accessor master_instance_security_group_id: ::String
+      attr_accessor execution_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class FailureDetails
+      attr_accessor reason: ::String
+      attr_accessor message: ::String
+      attr_accessor log_file: ::String
+      SENSITIVE: []
+    end
+
+    class GetAutoTerminationPolicyInput
+      attr_accessor cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAutoTerminationPolicyOutput
+      attr_accessor auto_termination_policy: Types::AutoTerminationPolicy
+      SENSITIVE: []
+    end
+
+    class GetBlockPublicAccessConfigurationInput < Aws::EmptyStructure
+    end
+
+    class GetBlockPublicAccessConfigurationOutput
+      attr_accessor block_public_access_configuration: Types::BlockPublicAccessConfiguration
+      attr_accessor block_public_access_configuration_metadata: Types::BlockPublicAccessConfigurationMetadata
+      SENSITIVE: []
+    end
+
+    class GetClusterSessionCredentialsInput
+      attr_accessor cluster_id: ::String
+      attr_accessor execution_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetClusterSessionCredentialsOutput
+      attr_accessor credentials: Types::Credentials
+      attr_accessor expires_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetManagedScalingPolicyInput
+      attr_accessor cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetManagedScalingPolicyOutput
+      attr_accessor managed_scaling_policy: Types::ManagedScalingPolicy
+      SENSITIVE: []
+    end
+
+    class GetStudioSessionMappingInput
+      attr_accessor studio_id: ::String
+      attr_accessor identity_id: ::String
+      attr_accessor identity_name: ::String
+      attr_accessor identity_type: ("USER" | "GROUP")
+      SENSITIVE: []
+    end
+
+    class GetStudioSessionMappingOutput
+      attr_accessor session_mapping: Types::SessionMappingDetail
+      SENSITIVE: []
+    end
+
+    class HadoopJarStepConfig
+      attr_accessor properties: ::Array[Types::KeyValue]
+      attr_accessor jar: ::String
+      attr_accessor main_class: ::String
+      attr_accessor args: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class HadoopStepConfig
+      attr_accessor jar: ::String
+      attr_accessor properties: ::Hash[::String, ::String]
+      attr_accessor main_class: ::String
+      attr_accessor args: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Instance
+      attr_accessor id: ::String
+      attr_accessor ec2_instance_id: ::String
+      attr_accessor public_dns_name: ::String
+      attr_accessor public_ip_address: ::String
+      attr_accessor private_dns_name: ::String
+      attr_accessor private_ip_address: ::String
+      attr_accessor status: Types::InstanceStatus
+      attr_accessor instance_group_id: ::String
+      attr_accessor instance_fleet_id: ::String
+      attr_accessor market: ("ON_DEMAND" | "SPOT")
+      attr_accessor instance_type: ::String
+      attr_accessor ebs_volumes: ::Array[Types::EbsVolume]
+      SENSITIVE: []
+    end
+
+    class InstanceFleet
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: Types::InstanceFleetStatus
+      attr_accessor instance_fleet_type: ("MASTER" | "CORE" | "TASK")
+      attr_accessor target_on_demand_capacity: ::Integer
+      attr_accessor target_spot_capacity: ::Integer
+      attr_accessor provisioned_on_demand_capacity: ::Integer
+      attr_accessor provisioned_spot_capacity: ::Integer
+      attr_accessor instance_type_specifications: ::Array[Types::InstanceTypeSpecification]
+      attr_accessor launch_specifications: Types::InstanceFleetProvisioningSpecifications
+      attr_accessor resize_specifications: Types::InstanceFleetResizingSpecifications
+      SENSITIVE: []
+    end
+
+    class InstanceFleetConfig
+      attr_accessor name: ::String
+      attr_accessor instance_fleet_type: ("MASTER" | "CORE" | "TASK")
+      attr_accessor target_on_demand_capacity: ::Integer
+      attr_accessor target_spot_capacity: ::Integer
+      attr_accessor instance_type_configs: ::Array[Types::InstanceTypeConfig]
+      attr_accessor launch_specifications: Types::InstanceFleetProvisioningSpecifications
+      attr_accessor resize_specifications: Types::InstanceFleetResizingSpecifications
+      SENSITIVE: []
+    end
+
+    class InstanceFleetModifyConfig
+      attr_accessor instance_fleet_id: ::String
+      attr_accessor target_on_demand_capacity: ::Integer
+      attr_accessor target_spot_capacity: ::Integer
+      attr_accessor resize_specifications: Types::InstanceFleetResizingSpecifications
+      SENSITIVE: []
+    end
+
+    class InstanceFleetProvisioningSpecifications
+      attr_accessor spot_specification: Types::SpotProvisioningSpecification
+      attr_accessor on_demand_specification: Types::OnDemandProvisioningSpecification
+      SENSITIVE: []
+    end
+
+    class InstanceFleetResizingSpecifications
+      attr_accessor spot_resize_specification: Types::SpotResizingSpecification
+      attr_accessor on_demand_resize_specification: Types::OnDemandResizingSpecification
+      SENSITIVE: []
+    end
+
+    class InstanceFleetStateChangeReason
+      attr_accessor code: ("INTERNAL_ERROR" | "VALIDATION_ERROR" | "INSTANCE_FAILURE" | "CLUSTER_TERMINATED")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceFleetStatus
+      attr_accessor state: ("PROVISIONING" | "BOOTSTRAPPING" | "RUNNING" | "RESIZING" | "SUSPENDED" | "TERMINATING" | "TERMINATED")
+      attr_accessor state_change_reason: Types::InstanceFleetStateChangeReason
+      attr_accessor timeline: Types::InstanceFleetTimeline
+      SENSITIVE: []
+    end
+
+    class InstanceFleetTimeline
+      attr_accessor creation_date_time: ::Time
+      attr_accessor ready_date_time: ::Time
+      attr_accessor end_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class InstanceGroup
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor market: ("ON_DEMAND" | "SPOT")
+      attr_accessor instance_group_type: ("MASTER" | "CORE" | "TASK")
+      attr_accessor bid_price: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor requested_instance_count: ::Integer
+      attr_accessor running_instance_count: ::Integer
+      attr_accessor status: Types::InstanceGroupStatus
+      attr_accessor configurations: ::Array[Types::Configuration]
+      attr_accessor configurations_version: ::Integer
+      attr_accessor last_successfully_applied_configurations: ::Array[Types::Configuration]
+      attr_accessor last_successfully_applied_configurations_version: ::Integer
+      attr_accessor ebs_block_devices: ::Array[Types::EbsBlockDevice]
+      attr_accessor ebs_optimized: bool
+      attr_accessor shrink_policy: Types::ShrinkPolicy
+      attr_accessor auto_scaling_policy: Types::AutoScalingPolicyDescription
+      attr_accessor custom_ami_id: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceGroupConfig
+      attr_accessor name: ::String
+      attr_accessor market: ("ON_DEMAND" | "SPOT")
+      attr_accessor instance_role: ("MASTER" | "CORE" | "TASK")
+      attr_accessor bid_price: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor instance_count: ::Integer
+      attr_accessor configurations: ::Array[Types::Configuration]
+      attr_accessor ebs_configuration: Types::EbsConfiguration
+      attr_accessor auto_scaling_policy: Types::AutoScalingPolicy
+      attr_accessor custom_ami_id: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceGroupDetail
+      attr_accessor instance_group_id: ::String
+      attr_accessor name: ::String
+      attr_accessor market: ("ON_DEMAND" | "SPOT")
+      attr_accessor instance_role: ("MASTER" | "CORE" | "TASK")
+      attr_accessor bid_price: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor instance_request_count: ::Integer
+      attr_accessor instance_running_count: ::Integer
+      attr_accessor state: ("PROVISIONING" | "BOOTSTRAPPING" | "RUNNING" | "RECONFIGURING" | "RESIZING" | "SUSPENDED" | "TERMINATING" | "TERMINATED" | "ARRESTED" | "SHUTTING_DOWN" | "ENDED")
+      attr_accessor last_state_change_reason: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor start_date_time: ::Time
+      attr_accessor ready_date_time: ::Time
+      attr_accessor end_date_time: ::Time
+      attr_accessor custom_ami_id: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceGroupModifyConfig
+      attr_accessor instance_group_id: ::String
+      attr_accessor instance_count: ::Integer
+      attr_accessor ec2_instance_ids_to_terminate: ::Array[::String]
+      attr_accessor shrink_policy: Types::ShrinkPolicy
+      attr_accessor reconfiguration_type: ("OVERWRITE" | "MERGE")
+      attr_accessor configurations: ::Array[Types::Configuration]
+      SENSITIVE: []
+    end
+
+    class InstanceGroupStateChangeReason
+      attr_accessor code: ("INTERNAL_ERROR" | "VALIDATION_ERROR" | "INSTANCE_FAILURE" | "CLUSTER_TERMINATED")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceGroupStatus
+      attr_accessor state: ("PROVISIONING" | "BOOTSTRAPPING" | "RUNNING" | "RECONFIGURING" | "RESIZING" | "SUSPENDED" | "TERMINATING" | "TERMINATED" | "ARRESTED" | "SHUTTING_DOWN" | "ENDED")
+      attr_accessor state_change_reason: Types::InstanceGroupStateChangeReason
+      attr_accessor timeline: Types::InstanceGroupTimeline
+      SENSITIVE: []
+    end
+
+    class InstanceGroupTimeline
+      attr_accessor creation_date_time: ::Time
+      attr_accessor ready_date_time: ::Time
+      attr_accessor end_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class InstanceResizePolicy
+      attr_accessor instances_to_terminate: ::Array[::String]
+      attr_accessor instances_to_protect: ::Array[::String]
+      attr_accessor instance_termination_timeout: ::Integer
+      SENSITIVE: []
+    end
+
+    class InstanceStateChangeReason
+      attr_accessor code: ("INTERNAL_ERROR" | "VALIDATION_ERROR" | "INSTANCE_FAILURE" | "BOOTSTRAP_FAILURE" | "CLUSTER_TERMINATED")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceStatus
+      attr_accessor state: ("AWAITING_FULFILLMENT" | "PROVISIONING" | "BOOTSTRAPPING" | "RUNNING" | "TERMINATED")
+      attr_accessor state_change_reason: Types::InstanceStateChangeReason
+      attr_accessor timeline: Types::InstanceTimeline
+      SENSITIVE: []
+    end
+
+    class InstanceTimeline
+      attr_accessor creation_date_time: ::Time
+      attr_accessor ready_date_time: ::Time
+      attr_accessor end_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class InstanceTypeConfig
+      attr_accessor instance_type: ::String
+      attr_accessor weighted_capacity: ::Integer
+      attr_accessor bid_price: ::String
+      attr_accessor bid_price_as_percentage_of_on_demand_price: ::Float
+      attr_accessor ebs_configuration: Types::EbsConfiguration
+      attr_accessor configurations: ::Array[Types::Configuration]
+      attr_accessor custom_ami_id: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceTypeSpecification
+      attr_accessor instance_type: ::String
+      attr_accessor weighted_capacity: ::Integer
+      attr_accessor bid_price: ::String
+      attr_accessor bid_price_as_percentage_of_on_demand_price: ::Float
+      attr_accessor configurations: ::Array[Types::Configuration]
+      attr_accessor ebs_block_devices: ::Array[Types::EbsBlockDevice]
+      attr_accessor ebs_optimized: bool
+      attr_accessor custom_ami_id: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerError < Aws::EmptyStructure
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JobFlowDetail
+      attr_accessor job_flow_id: ::String
+      attr_accessor name: ::String
+      attr_accessor log_uri: ::String
+      attr_accessor log_encryption_kms_key_id: ::String
+      attr_accessor ami_version: ::String
+      attr_accessor execution_status_detail: Types::JobFlowExecutionStatusDetail
+      attr_accessor instances: Types::JobFlowInstancesDetail
+      attr_accessor steps: ::Array[Types::StepDetail]
+      attr_accessor bootstrap_actions: ::Array[Types::BootstrapActionDetail]
+      attr_accessor supported_products: ::Array[::String]
+      attr_accessor visible_to_all_users: bool
+      attr_accessor job_flow_role: ::String
+      attr_accessor service_role: ::String
+      attr_accessor auto_scaling_role: ::String
+      attr_accessor scale_down_behavior: ("TERMINATE_AT_INSTANCE_HOUR" | "TERMINATE_AT_TASK_COMPLETION")
+      SENSITIVE: []
+    end
+
+    class JobFlowExecutionStatusDetail
+      attr_accessor state: ("STARTING" | "BOOTSTRAPPING" | "RUNNING" | "WAITING" | "SHUTTING_DOWN" | "TERMINATED" | "COMPLETED" | "FAILED")
+      attr_accessor creation_date_time: ::Time
+      attr_accessor start_date_time: ::Time
+      attr_accessor ready_date_time: ::Time
+      attr_accessor end_date_time: ::Time
+      attr_accessor last_state_change_reason: ::String
+      SENSITIVE: []
+    end
+
+    class JobFlowInstancesConfig
+      attr_accessor master_instance_type: ::String
+      attr_accessor slave_instance_type: ::String
+      attr_accessor instance_count: ::Integer
+      attr_accessor instance_groups: ::Array[Types::InstanceGroupConfig]
+      attr_accessor instance_fleets: ::Array[Types::InstanceFleetConfig]
+      attr_accessor ec2_key_name: ::String
+      attr_accessor placement: Types::PlacementType
+      attr_accessor keep_job_flow_alive_when_no_steps: bool
+      attr_accessor termination_protected: bool
+      attr_accessor hadoop_version: ::String
+      attr_accessor ec2_subnet_id: ::String
+      attr_accessor ec2_subnet_ids: ::Array[::String]
+      attr_accessor emr_managed_master_security_group: ::String
+      attr_accessor emr_managed_slave_security_group: ::String
+      attr_accessor service_access_security_group: ::String
+      attr_accessor additional_master_security_groups: ::Array[::String]
+      attr_accessor additional_slave_security_groups: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class JobFlowInstancesDetail
+      attr_accessor master_instance_type: ::String
+      attr_accessor master_public_dns_name: ::String
+      attr_accessor master_instance_id: ::String
+      attr_accessor slave_instance_type: ::String
+      attr_accessor instance_count: ::Integer
+      attr_accessor instance_groups: ::Array[Types::InstanceGroupDetail]
+      attr_accessor normalized_instance_hours: ::Integer
+      attr_accessor ec2_key_name: ::String
+      attr_accessor ec2_subnet_id: ::String
+      attr_accessor placement: Types::PlacementType
+      attr_accessor keep_job_flow_alive_when_no_steps: bool
+      attr_accessor termination_protected: bool
+      attr_accessor hadoop_version: ::String
+      SENSITIVE: []
+    end
+
+    class KerberosAttributes
+      attr_accessor realm: ::String
+      attr_accessor kdc_admin_password: ::String
+      attr_accessor cross_realm_trust_principal_password: ::String
+      attr_accessor ad_domain_join_user: ::String
+      attr_accessor ad_domain_join_password: ::String
+      SENSITIVE: []
+    end
+
+    class KeyValue
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ListBootstrapActionsInput
+      attr_accessor cluster_id: ::String
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListBootstrapActionsOutput
+      attr_accessor bootstrap_actions: ::Array[Types::Command]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListClustersInput
+      attr_accessor created_after: ::Time
+      attr_accessor created_before: ::Time
+      attr_accessor cluster_states: ::Array[("STARTING" | "BOOTSTRAPPING" | "RUNNING" | "WAITING" | "TERMINATING" | "TERMINATED" | "TERMINATED_WITH_ERRORS")]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListClustersOutput
+      attr_accessor clusters: ::Array[Types::ClusterSummary]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListInstanceFleetsInput
+      attr_accessor cluster_id: ::String
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListInstanceFleetsOutput
+      attr_accessor instance_fleets: ::Array[Types::InstanceFleet]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListInstanceGroupsInput
+      attr_accessor cluster_id: ::String
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListInstanceGroupsOutput
+      attr_accessor instance_groups: ::Array[Types::InstanceGroup]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListInstancesInput
+      attr_accessor cluster_id: ::String
+      attr_accessor instance_group_id: ::String
+      attr_accessor instance_group_types: ::Array[("MASTER" | "CORE" | "TASK")]
+      attr_accessor instance_fleet_id: ::String
+      attr_accessor instance_fleet_type: ("MASTER" | "CORE" | "TASK")
+      attr_accessor instance_states: ::Array[("AWAITING_FULFILLMENT" | "PROVISIONING" | "BOOTSTRAPPING" | "RUNNING" | "TERMINATED")]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListInstancesOutput
+      attr_accessor instances: ::Array[Types::Instance]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListNotebookExecutionsInput
+      attr_accessor editor_id: ::String
+      attr_accessor status: ("START_PENDING" | "STARTING" | "RUNNING" | "FINISHING" | "FINISHED" | "FAILING" | "FAILED" | "STOP_PENDING" | "STOPPING" | "STOPPED")
+      attr_accessor from: ::Time
+      attr_accessor to: ::Time
+      attr_accessor marker: ::String
+      attr_accessor execution_engine_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListNotebookExecutionsOutput
+      attr_accessor notebook_executions: ::Array[Types::NotebookExecutionSummary]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListReleaseLabelsInput
+      attr_accessor filters: Types::ReleaseLabelFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListReleaseLabelsOutput
+      attr_accessor release_labels: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSecurityConfigurationsInput
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListSecurityConfigurationsOutput
+      attr_accessor security_configurations: ::Array[Types::SecurityConfigurationSummary]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListStepsInput
+      attr_accessor cluster_id: ::String
+      attr_accessor step_states: ::Array[("PENDING" | "CANCEL_PENDING" | "RUNNING" | "COMPLETED" | "CANCELLED" | "FAILED" | "INTERRUPTED")]
+      attr_accessor step_ids: ::Array[::String]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListStepsOutput
+      attr_accessor steps: ::Array[Types::StepSummary]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListStudioSessionMappingsInput
+      attr_accessor studio_id: ::String
+      attr_accessor identity_type: ("USER" | "GROUP")
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListStudioSessionMappingsOutput
+      attr_accessor session_mappings: ::Array[Types::SessionMappingSummary]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListStudiosInput
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListStudiosOutput
+      attr_accessor studios: ::Array[Types::StudioSummary]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListSupportedInstanceTypesInput
+      attr_accessor release_label: ::String
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListSupportedInstanceTypesOutput
+      attr_accessor supported_instance_types: ::Array[Types::SupportedInstanceType]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ManagedScalingPolicy
+      attr_accessor compute_limits: Types::ComputeLimits
+      SENSITIVE: []
+    end
+
+    class MetricDimension
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyClusterInput
+      attr_accessor cluster_id: ::String
+      attr_accessor step_concurrency_level: ::Integer
+      SENSITIVE: []
+    end
+
+    class ModifyClusterOutput
+      attr_accessor step_concurrency_level: ::Integer
+      SENSITIVE: []
+    end
+
+    class ModifyInstanceFleetInput
+      attr_accessor cluster_id: ::String
+      attr_accessor instance_fleet: Types::InstanceFleetModifyConfig
+      SENSITIVE: []
+    end
+
+    class ModifyInstanceGroupsInput
+      attr_accessor cluster_id: ::String
+      attr_accessor instance_groups: ::Array[Types::InstanceGroupModifyConfig]
+      SENSITIVE: []
+    end
+
+    class NotebookExecution
+      attr_accessor notebook_execution_id: ::String
+      attr_accessor editor_id: ::String
+      attr_accessor execution_engine: Types::ExecutionEngineConfig
+      attr_accessor notebook_execution_name: ::String
+      attr_accessor notebook_params: ::String
+      attr_accessor status: ("START_PENDING" | "STARTING" | "RUNNING" | "FINISHING" | "FINISHED" | "FAILING" | "FAILED" | "STOP_PENDING" | "STOPPING" | "STOPPED")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor arn: ::String
+      attr_accessor output_notebook_uri: ::String
+      attr_accessor last_state_change_reason: ::String
+      attr_accessor notebook_instance_security_group_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor notebook_s3_location: Types::NotebookS3LocationForOutput
+      attr_accessor output_notebook_s3_location: Types::OutputNotebookS3LocationForOutput
+      attr_accessor output_notebook_format: ("HTML")
+      attr_accessor environment_variables: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class NotebookExecutionSummary
+      attr_accessor notebook_execution_id: ::String
+      attr_accessor editor_id: ::String
+      attr_accessor notebook_execution_name: ::String
+      attr_accessor status: ("START_PENDING" | "STARTING" | "RUNNING" | "FINISHING" | "FINISHED" | "FAILING" | "FAILED" | "STOP_PENDING" | "STOPPING" | "STOPPED")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor notebook_s3_location: Types::NotebookS3LocationForOutput
+      attr_accessor execution_engine_id: ::String
+      SENSITIVE: []
+    end
+
+    class NotebookS3LocationForOutput
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      SENSITIVE: []
+    end
+
+    class NotebookS3LocationFromInput
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      SENSITIVE: []
+    end
+
+    class OSRelease
+      attr_accessor label: ::String
+      SENSITIVE: []
+    end
+
+    class OnDemandCapacityReservationOptions
+      attr_accessor usage_strategy: ("use-capacity-reservations-first")
+      attr_accessor capacity_reservation_preference: ("open" | "none")
+      attr_accessor capacity_reservation_resource_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class OnDemandProvisioningSpecification
+      attr_accessor allocation_strategy: ("lowest-price")
+      attr_accessor capacity_reservation_options: Types::OnDemandCapacityReservationOptions
+      SENSITIVE: []
+    end
+
+    class OnDemandResizingSpecification
+      attr_accessor timeout_duration_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class OutputNotebookS3LocationForOutput
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      SENSITIVE: []
+    end
+
+    class OutputNotebookS3LocationFromInput
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      SENSITIVE: []
+    end
+
+    class PlacementGroupConfig
+      attr_accessor instance_role: ("MASTER" | "CORE" | "TASK")
+      attr_accessor placement_strategy: ("SPREAD" | "PARTITION" | "CLUSTER" | "NONE")
+      SENSITIVE: []
+    end
+
+    class PlacementType
+      attr_accessor availability_zone: ::String
+      attr_accessor availability_zones: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PortRange
+      attr_accessor min_range: ::Integer
+      attr_accessor max_range: ::Integer
+      SENSITIVE: []
+    end
+
+    class PutAutoScalingPolicyInput
+      attr_accessor cluster_id: ::String
+      attr_accessor instance_group_id: ::String
+      attr_accessor auto_scaling_policy: Types::AutoScalingPolicy
+      SENSITIVE: []
+    end
+
+    class PutAutoScalingPolicyOutput
+      attr_accessor cluster_id: ::String
+      attr_accessor instance_group_id: ::String
+      attr_accessor auto_scaling_policy: Types::AutoScalingPolicyDescription
+      attr_accessor cluster_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutAutoTerminationPolicyInput
+      attr_accessor cluster_id: ::String
+      attr_accessor auto_termination_policy: Types::AutoTerminationPolicy
+      SENSITIVE: []
+    end
+
+    class PutAutoTerminationPolicyOutput < Aws::EmptyStructure
+    end
+
+    class PutBlockPublicAccessConfigurationInput
+      attr_accessor block_public_access_configuration: Types::BlockPublicAccessConfiguration
+      SENSITIVE: []
+    end
+
+    class PutBlockPublicAccessConfigurationOutput < Aws::EmptyStructure
+    end
+
+    class PutManagedScalingPolicyInput
+      attr_accessor cluster_id: ::String
+      attr_accessor managed_scaling_policy: Types::ManagedScalingPolicy
+      SENSITIVE: []
+    end
+
+    class PutManagedScalingPolicyOutput < Aws::EmptyStructure
+    end
+
+    class ReleaseLabelFilter
+      attr_accessor prefix: ::String
+      attr_accessor application: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveAutoScalingPolicyInput
+      attr_accessor cluster_id: ::String
+      attr_accessor instance_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveAutoScalingPolicyOutput < Aws::EmptyStructure
+    end
+
+    class RemoveAutoTerminationPolicyInput
+      attr_accessor cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveAutoTerminationPolicyOutput < Aws::EmptyStructure
+    end
+
+    class RemoveManagedScalingPolicyInput
+      attr_accessor cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveManagedScalingPolicyOutput < Aws::EmptyStructure
+    end
+
+    class RemoveTagsInput
+      attr_accessor resource_id: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RemoveTagsOutput < Aws::EmptyStructure
+    end
+
+    class RunJobFlowInput
+      attr_accessor name: ::String
+      attr_accessor log_uri: ::String
+      attr_accessor log_encryption_kms_key_id: ::String
+      attr_accessor additional_info: ::String
+      attr_accessor ami_version: ::String
+      attr_accessor release_label: ::String
+      attr_accessor instances: Types::JobFlowInstancesConfig
+      attr_accessor steps: ::Array[Types::StepConfig]
+      attr_accessor bootstrap_actions: ::Array[Types::BootstrapActionConfig]
+      attr_accessor supported_products: ::Array[::String]
+      attr_accessor new_supported_products: ::Array[Types::SupportedProductConfig]
+      attr_accessor applications: ::Array[Types::Application]
+      attr_accessor configurations: ::Array[Types::Configuration]
+      attr_accessor visible_to_all_users: bool
+      attr_accessor job_flow_role: ::String
+      attr_accessor service_role: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor security_configuration: ::String
+      attr_accessor auto_scaling_role: ::String
+      attr_accessor scale_down_behavior: ("TERMINATE_AT_INSTANCE_HOUR" | "TERMINATE_AT_TASK_COMPLETION")
+      attr_accessor custom_ami_id: ::String
+      attr_accessor ebs_root_volume_size: ::Integer
+      attr_accessor repo_upgrade_on_boot: ("SECURITY" | "NONE")
+      attr_accessor kerberos_attributes: Types::KerberosAttributes
+      attr_accessor step_concurrency_level: ::Integer
+      attr_accessor managed_scaling_policy: Types::ManagedScalingPolicy
+      attr_accessor placement_group_configs: ::Array[Types::PlacementGroupConfig]
+      attr_accessor auto_termination_policy: Types::AutoTerminationPolicy
+      attr_accessor os_release_label: ::String
+      attr_accessor ebs_root_volume_iops: ::Integer
+      attr_accessor ebs_root_volume_throughput: ::Integer
+      SENSITIVE: []
+    end
+
+    class RunJobFlowOutput
+      attr_accessor job_flow_id: ::String
+      attr_accessor cluster_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ScalingAction
+      attr_accessor market: ("ON_DEMAND" | "SPOT")
+      attr_accessor simple_scaling_policy_configuration: Types::SimpleScalingPolicyConfiguration
+      SENSITIVE: []
+    end
+
+    class ScalingConstraints
+      attr_accessor min_capacity: ::Integer
+      attr_accessor max_capacity: ::Integer
+      SENSITIVE: []
+    end
+
+    class ScalingRule
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor action: Types::ScalingAction
+      attr_accessor trigger: Types::ScalingTrigger
+      SENSITIVE: []
+    end
+
+    class ScalingTrigger
+      attr_accessor cloud_watch_alarm_definition: Types::CloudWatchAlarmDefinition
+      SENSITIVE: []
+    end
+
+    class ScriptBootstrapActionConfig
+      attr_accessor path: ::String
+      attr_accessor args: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SecurityConfigurationSummary
+      attr_accessor name: ::String
+      attr_accessor creation_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class SessionMappingDetail
+      attr_accessor studio_id: ::String
+      attr_accessor identity_id: ::String
+      attr_accessor identity_name: ::String
+      attr_accessor identity_type: ("USER" | "GROUP")
+      attr_accessor session_policy_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class SessionMappingSummary
+      attr_accessor studio_id: ::String
+      attr_accessor identity_id: ::String
+      attr_accessor identity_name: ::String
+      attr_accessor identity_type: ("USER" | "GROUP")
+      attr_accessor session_policy_arn: ::String
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class SetKeepJobFlowAliveWhenNoStepsInput
+      attr_accessor job_flow_ids: ::Array[::String]
+      attr_accessor keep_job_flow_alive_when_no_steps: bool
+      SENSITIVE: []
+    end
+
+    class SetTerminationProtectionInput
+      attr_accessor job_flow_ids: ::Array[::String]
+      attr_accessor termination_protected: bool
+      SENSITIVE: []
+    end
+
+    class SetVisibleToAllUsersInput
+      attr_accessor job_flow_ids: ::Array[::String]
+      attr_accessor visible_to_all_users: bool
+      SENSITIVE: []
+    end
+
+    class ShrinkPolicy
+      attr_accessor decommission_timeout: ::Integer
+      attr_accessor instance_resize_policy: Types::InstanceResizePolicy
+      SENSITIVE: []
+    end
+
+    class SimpleScalingPolicyConfiguration
+      attr_accessor adjustment_type: ("CHANGE_IN_CAPACITY" | "PERCENT_CHANGE_IN_CAPACITY" | "EXACT_CAPACITY")
+      attr_accessor scaling_adjustment: ::Integer
+      attr_accessor cool_down: ::Integer
+      SENSITIVE: []
+    end
+
+    class SimplifiedApplication
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class SpotProvisioningSpecification
+      attr_accessor timeout_duration_minutes: ::Integer
+      attr_accessor timeout_action: ("SWITCH_TO_ON_DEMAND" | "TERMINATE_CLUSTER")
+      attr_accessor block_duration_minutes: ::Integer
+      attr_accessor allocation_strategy: ("capacity-optimized" | "price-capacity-optimized" | "lowest-price" | "diversified")
+      SENSITIVE: []
+    end
+
+    class SpotResizingSpecification
+      attr_accessor timeout_duration_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class StartNotebookExecutionInput
+      attr_accessor editor_id: ::String
+      attr_accessor relative_path: ::String
+      attr_accessor notebook_execution_name: ::String
+      attr_accessor notebook_params: ::String
+      attr_accessor execution_engine: Types::ExecutionEngineConfig
+      attr_accessor service_role: ::String
+      attr_accessor notebook_instance_security_group_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor notebook_s3_location: Types::NotebookS3LocationFromInput
+      attr_accessor output_notebook_s3_location: Types::OutputNotebookS3LocationFromInput
+      attr_accessor output_notebook_format: ("HTML")
+      attr_accessor environment_variables: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartNotebookExecutionOutput
+      attr_accessor notebook_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class Step
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor config: Types::HadoopStepConfig
+      attr_accessor action_on_failure: ("TERMINATE_JOB_FLOW" | "TERMINATE_CLUSTER" | "CANCEL_AND_WAIT" | "CONTINUE")
+      attr_accessor status: Types::StepStatus
+      attr_accessor execution_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StepConfig
+      attr_accessor name: ::String
+      attr_accessor action_on_failure: ("TERMINATE_JOB_FLOW" | "TERMINATE_CLUSTER" | "CANCEL_AND_WAIT" | "CONTINUE")
+      attr_accessor hadoop_jar_step: Types::HadoopJarStepConfig
+      SENSITIVE: []
+    end
+
+    class StepDetail
+      attr_accessor step_config: Types::StepConfig
+      attr_accessor execution_status_detail: Types::StepExecutionStatusDetail
+      SENSITIVE: []
+    end
+
+    class StepExecutionStatusDetail
+      attr_accessor state: ("PENDING" | "RUNNING" | "CONTINUE" | "COMPLETED" | "CANCELLED" | "FAILED" | "INTERRUPTED")
+      attr_accessor creation_date_time: ::Time
+      attr_accessor start_date_time: ::Time
+      attr_accessor end_date_time: ::Time
+      attr_accessor last_state_change_reason: ::String
+      SENSITIVE: []
+    end
+
+    class StepStateChangeReason
+      attr_accessor code: ("NONE")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StepStatus
+      attr_accessor state: ("PENDING" | "CANCEL_PENDING" | "RUNNING" | "COMPLETED" | "CANCELLED" | "FAILED" | "INTERRUPTED")
+      attr_accessor state_change_reason: Types::StepStateChangeReason
+      attr_accessor failure_details: Types::FailureDetails
+      attr_accessor timeline: Types::StepTimeline
+      SENSITIVE: []
+    end
+
+    class StepSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor config: Types::HadoopStepConfig
+      attr_accessor action_on_failure: ("TERMINATE_JOB_FLOW" | "TERMINATE_CLUSTER" | "CANCEL_AND_WAIT" | "CONTINUE")
+      attr_accessor status: Types::StepStatus
+      SENSITIVE: []
+    end
+
+    class StepTimeline
+      attr_accessor creation_date_time: ::Time
+      attr_accessor start_date_time: ::Time
+      attr_accessor end_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class StopNotebookExecutionInput
+      attr_accessor notebook_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class Studio
+      attr_accessor studio_id: ::String
+      attr_accessor studio_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor auth_mode: ("SSO" | "IAM")
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor service_role: ::String
+      attr_accessor user_role: ::String
+      attr_accessor workspace_security_group_id: ::String
+      attr_accessor engine_security_group_id: ::String
+      attr_accessor url: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor default_s3_location: ::String
+      attr_accessor idp_auth_url: ::String
+      attr_accessor idp_relay_state_parameter_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor idc_instance_arn: ::String
+      attr_accessor trusted_identity_propagation_enabled: bool
+      attr_accessor idc_user_assignment: ("REQUIRED" | "OPTIONAL")
+      attr_accessor encryption_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StudioSummary
+      attr_accessor studio_id: ::String
+      attr_accessor name: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor description: ::String
+      attr_accessor url: ::String
+      attr_accessor auth_mode: ("SSO" | "IAM")
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class SupportedInstanceType
+      attr_accessor type: ::String
+      attr_accessor memory_gb: ::Float
+      attr_accessor storage_gb: ::Integer
+      attr_accessor vcpu: ::Integer
+      attr_accessor is_64_bits_only: bool
+      attr_accessor instance_family_id: ::String
+      attr_accessor ebs_optimized_available: bool
+      attr_accessor ebs_optimized_by_default: bool
+      attr_accessor number_of_disks: ::Integer
+      attr_accessor ebs_storage_only: bool
+      attr_accessor architecture: ::String
+      SENSITIVE: []
+    end
+
+    class SupportedProductConfig
+      attr_accessor name: ::String
+      attr_accessor args: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TerminateJobFlowsInput
+      attr_accessor job_flow_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateStudioInput
+      attr_accessor studio_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor default_s3_location: ::String
+      attr_accessor encryption_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateStudioSessionMappingInput
+      attr_accessor studio_id: ::String
+      attr_accessor identity_id: ::String
+      attr_accessor identity_name: ::String
+      attr_accessor identity_type: ("USER" | "GROUP")
+      attr_accessor session_policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UsernamePassword
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      SENSITIVE: []
+    end
+
+    class VolumeSpecification
+      attr_accessor volume_type: ::String
+      attr_accessor iops: ::Integer
+      attr_accessor size_in_gb: ::Integer
+      attr_accessor throughput: ::Integer
+      SENSITIVE: []
+    end
+  end
+end

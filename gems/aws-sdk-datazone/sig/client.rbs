@@ -1,0 +1,2290 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DataZone
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AcceptPredictionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptPredictionsOutput]
+        def asset_id: () -> ::String
+        def domain_id: () -> ::String
+        def revision: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#accept_predictions-instance_method
+      def accept_predictions: (
+                                ?accept_choices: Array[
+                                  {
+                                    prediction_choice: ::Integer?,
+                                    prediction_target: ::String?
+                                  },
+                                ],
+                                ?accept_rule: {
+                                  rule: ("ALL" | "NONE")?,
+                                  threshold: ::Float?
+                                },
+                                ?client_token: ::String,
+                                domain_identifier: ::String,
+                                identifier: ::String,
+                                ?revision: ::String
+                              ) -> _AcceptPredictionsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptPredictionsResponseSuccess
+
+      interface _AcceptSubscriptionRequestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptSubscriptionRequestOutput]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def decision_comment: () -> ::String
+        def domain_id: () -> ::String
+        def id: () -> ::String
+        def request_reason: () -> ::String
+        def reviewer_id: () -> ::String
+        def status: () -> ("PENDING" | "ACCEPTED" | "REJECTED")
+        def subscribed_listings: () -> ::Array[Types::SubscribedListing]
+        def subscribed_principals: () -> ::Array[Types::SubscribedPrincipal]
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#accept_subscription_request-instance_method
+      def accept_subscription_request: (
+                                         ?decision_comment: ::String,
+                                         domain_identifier: ::String,
+                                         identifier: ::String
+                                       ) -> _AcceptSubscriptionRequestResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptSubscriptionRequestResponseSuccess
+
+      interface _CancelSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelSubscriptionOutput]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def domain_id: () -> ::String
+        def id: () -> ::String
+        def retain_permissions: () -> bool
+        def status: () -> ("APPROVED" | "REVOKED" | "CANCELLED")
+        def subscribed_listing: () -> Types::SubscribedListing
+        def subscribed_principal: () -> Types::SubscribedPrincipal
+        def subscription_request_id: () -> ::String
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#cancel_subscription-instance_method
+      def cancel_subscription: (
+                                 domain_identifier: ::String,
+                                 identifier: ::String
+                               ) -> _CancelSubscriptionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelSubscriptionResponseSuccess
+
+      interface _CreateAssetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAssetOutput]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def external_identifier: () -> ::String
+        def first_revision_created_at: () -> ::Time
+        def first_revision_created_by: () -> ::String
+        def forms_output: () -> ::Array[Types::FormOutput]
+        def glossary_terms: () -> ::Array[::String]
+        def id: () -> ::String
+        def listing: () -> Types::AssetListingDetails
+        def name: () -> ::String
+        def owning_project_id: () -> ::String
+        def prediction_configuration: () -> Types::PredictionConfiguration
+        def read_only_forms_output: () -> ::Array[Types::FormOutput]
+        def revision: () -> ::String
+        def type_identifier: () -> ::String
+        def type_revision: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_asset-instance_method
+      def create_asset: (
+                          ?client_token: ::String,
+                          ?description: ::String,
+                          domain_identifier: ::String,
+                          ?external_identifier: ::String,
+                          ?forms_input: Array[
+                            {
+                              content: ::String?,
+                              form_name: ::String,
+                              type_identifier: ::String?,
+                              type_revision: ::String?
+                            },
+                          ],
+                          ?glossary_terms: Array[::String],
+                          name: ::String,
+                          owning_project_identifier: ::String,
+                          ?prediction_configuration: {
+                            business_name_generation: {
+                              enabled: bool?
+                            }?
+                          },
+                          type_identifier: ::String,
+                          ?type_revision: ::String
+                        ) -> _CreateAssetResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssetResponseSuccess
+
+      interface _CreateAssetRevisionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAssetRevisionOutput]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def external_identifier: () -> ::String
+        def first_revision_created_at: () -> ::Time
+        def first_revision_created_by: () -> ::String
+        def forms_output: () -> ::Array[Types::FormOutput]
+        def glossary_terms: () -> ::Array[::String]
+        def id: () -> ::String
+        def listing: () -> Types::AssetListingDetails
+        def name: () -> ::String
+        def owning_project_id: () -> ::String
+        def prediction_configuration: () -> Types::PredictionConfiguration
+        def read_only_forms_output: () -> ::Array[Types::FormOutput]
+        def revision: () -> ::String
+        def type_identifier: () -> ::String
+        def type_revision: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_asset_revision-instance_method
+      def create_asset_revision: (
+                                   ?client_token: ::String,
+                                   ?description: ::String,
+                                   domain_identifier: ::String,
+                                   ?forms_input: Array[
+                                     {
+                                       content: ::String?,
+                                       form_name: ::String,
+                                       type_identifier: ::String?,
+                                       type_revision: ::String?
+                                     },
+                                   ],
+                                   ?glossary_terms: Array[::String],
+                                   identifier: ::String,
+                                   name: ::String,
+                                   ?prediction_configuration: {
+                                     business_name_generation: {
+                                       enabled: bool?
+                                     }?
+                                   },
+                                   ?type_revision: ::String
+                                 ) -> _CreateAssetRevisionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssetRevisionResponseSuccess
+
+      interface _CreateAssetTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAssetTypeOutput]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def forms_output: () -> ::Hash[::String, Types::FormEntryOutput]
+        def name: () -> ::String
+        def origin_domain_id: () -> ::String
+        def origin_project_id: () -> ::String
+        def owning_project_id: () -> ::String
+        def revision: () -> ::String
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_asset_type-instance_method
+      def create_asset_type: (
+                               ?description: ::String,
+                               domain_identifier: ::String,
+                               forms_input: Hash[::String, {
+                                   required: bool?,
+                                   type_identifier: ::String,
+                                   type_revision: ::String
+                                 }],
+                               name: ::String,
+                               owning_project_identifier: ::String
+                             ) -> _CreateAssetTypeResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssetTypeResponseSuccess
+
+      interface _CreateDataSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataSourceOutput]
+        def asset_forms_output: () -> ::Array[Types::FormOutput]
+        def configuration: () -> Types::DataSourceConfigurationOutput
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def enable_setting: () -> ("ENABLED" | "DISABLED")
+        def environment_id: () -> ::String
+        def error_message: () -> Types::DataSourceErrorMessage
+        def id: () -> ::String
+        def last_run_at: () -> ::Time
+        def last_run_error_message: () -> Types::DataSourceErrorMessage
+        def last_run_status: () -> ("REQUESTED" | "RUNNING" | "FAILED" | "PARTIALLY_SUCCEEDED" | "SUCCESS")
+        def name: () -> ::String
+        def project_id: () -> ::String
+        def publish_on_import: () -> bool
+        def recommendation: () -> Types::RecommendationConfiguration
+        def schedule: () -> Types::ScheduleConfiguration
+        def status: () -> ("CREATING" | "FAILED_CREATION" | "READY" | "UPDATING" | "FAILED_UPDATE" | "RUNNING" | "DELETING" | "FAILED_DELETION")
+        def type: () -> ::String
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_data_source-instance_method
+      def create_data_source: (
+                                ?asset_forms_input: Array[
+                                  {
+                                    content: ::String?,
+                                    form_name: ::String,
+                                    type_identifier: ::String?,
+                                    type_revision: ::String?
+                                  },
+                                ],
+                                ?client_token: ::String,
+                                ?configuration: {
+                                  glue_run_configuration: {
+                                    data_access_role: ::String?,
+                                    relational_filter_configurations: Array[
+                                      {
+                                        database_name: ::String,
+                                        filter_expressions: Array[
+                                          {
+                                            expression: ::String,
+                                            type: ("INCLUDE" | "EXCLUDE")
+                                          },
+                                        ]?,
+                                        schema_name: ::String?
+                                      },
+                                    ]
+                                  }?,
+                                  redshift_run_configuration: {
+                                    data_access_role: ::String?,
+                                    redshift_credential_configuration: {
+                                      secret_manager_arn: ::String
+                                    },
+                                    redshift_storage: {
+                                      redshift_cluster_source: {
+                                        cluster_name: ::String
+                                      }?,
+                                      redshift_serverless_source: {
+                                        workgroup_name: ::String
+                                      }?
+                                    },
+                                    relational_filter_configurations: Array[
+                                      {
+                                        database_name: ::String,
+                                        filter_expressions: Array[
+                                          {
+                                            expression: ::String,
+                                            type: ("INCLUDE" | "EXCLUDE")
+                                          },
+                                        ]?,
+                                        schema_name: ::String?
+                                      },
+                                    ]
+                                  }?
+                                },
+                                ?description: ::String,
+                                domain_identifier: ::String,
+                                ?enable_setting: ("ENABLED" | "DISABLED"),
+                                environment_identifier: ::String,
+                                name: ::String,
+                                project_identifier: ::String,
+                                ?publish_on_import: bool,
+                                ?recommendation: {
+                                  enable_business_name_generation: bool?
+                                },
+                                ?schedule: {
+                                  schedule: ::String?,
+                                  timezone: ("UTC" | "AFRICA_JOHANNESBURG" | "AMERICA_MONTREAL" | "AMERICA_SAO_PAULO" | "ASIA_BAHRAIN" | "ASIA_BANGKOK" | "ASIA_CALCUTTA" | "ASIA_DUBAI" | "ASIA_HONG_KONG" | "ASIA_JAKARTA" | "ASIA_KUALA_LUMPUR" | "ASIA_SEOUL" | "ASIA_SHANGHAI" | "ASIA_SINGAPORE" | "ASIA_TAIPEI" | "ASIA_TOKYO" | "AUSTRALIA_MELBOURNE" | "AUSTRALIA_SYDNEY" | "CANADA_CENTRAL" | "CET" | "CST6CDT" | "ETC_GMT" | "ETC_GMT0" | "ETC_GMT_ADD_0" | "ETC_GMT_ADD_1" | "ETC_GMT_ADD_10" | "ETC_GMT_ADD_11" | "ETC_GMT_ADD_12" | "ETC_GMT_ADD_2" | "ETC_GMT_ADD_3" | "ETC_GMT_ADD_4" | "ETC_GMT_ADD_5" | "ETC_GMT_ADD_6" | "ETC_GMT_ADD_7" | "ETC_GMT_ADD_8" | "ETC_GMT_ADD_9" | "ETC_GMT_NEG_0" | "ETC_GMT_NEG_1" | "ETC_GMT_NEG_10" | "ETC_GMT_NEG_11" | "ETC_GMT_NEG_12" | "ETC_GMT_NEG_13" | "ETC_GMT_NEG_14" | "ETC_GMT_NEG_2" | "ETC_GMT_NEG_3" | "ETC_GMT_NEG_4" | "ETC_GMT_NEG_5" | "ETC_GMT_NEG_6" | "ETC_GMT_NEG_7" | "ETC_GMT_NEG_8" | "ETC_GMT_NEG_9" | "EUROPE_DUBLIN" | "EUROPE_LONDON" | "EUROPE_PARIS" | "EUROPE_STOCKHOLM" | "EUROPE_ZURICH" | "ISRAEL" | "MEXICO_GENERAL" | "MST7MDT" | "PACIFIC_AUCKLAND" | "US_CENTRAL" | "US_EASTERN" | "US_MOUNTAIN" | "US_PACIFIC")?
+                                },
+                                type: ::String
+                              ) -> _CreateDataSourceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataSourceResponseSuccess
+
+      interface _CreateDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDomainOutput]
+        def arn: () -> ::String
+        def description: () -> ::String
+        def domain_execution_role: () -> ::String
+        def id: () -> ::String
+        def kms_key_identifier: () -> ::String
+        def name: () -> ::String
+        def portal_url: () -> ::String
+        def single_sign_on: () -> Types::SingleSignOn
+        def status: () -> ("CREATING" | "AVAILABLE" | "CREATION_FAILED" | "DELETING" | "DELETED" | "DELETION_FAILED")
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_domain-instance_method
+      def create_domain: (
+                           ?client_token: ::String,
+                           ?description: ::String,
+                           domain_execution_role: ::String,
+                           ?kms_key_identifier: ::String,
+                           name: ::String,
+                           ?single_sign_on: {
+                             type: ("IAM_IDC" | "DISABLED")?,
+                             user_assignment: ("AUTOMATIC" | "MANUAL")?
+                           },
+                           ?tags: Hash[::String, ::String]
+                         ) -> _CreateDomainResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainResponseSuccess
+
+      interface _CreateEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEnvironmentOutput]
+        def aws_account_id: () -> ::String
+        def aws_account_region: () -> ::String
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def deployment_properties: () -> Types::DeploymentProperties
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def environment_actions: () -> ::Array[Types::ConfigurableEnvironmentAction]
+        def environment_blueprint_id: () -> ::String
+        def environment_profile_id: () -> ::String
+        def glossary_terms: () -> ::Array[::String]
+        def id: () -> ::String
+        def last_deployment: () -> Types::Deployment
+        def name: () -> ::String
+        def project_id: () -> ::String
+        def provider: () -> ::String
+        def provisioned_resources: () -> ::Array[Types::Resource]
+        def provisioning_properties: () -> Types::ProvisioningProperties
+        def status: () -> ("ACTIVE" | "CREATING" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "VALIDATION_FAILED" | "SUSPENDED" | "DISABLED" | "EXPIRED" | "DELETED" | "INACCESSIBLE")
+        def updated_at: () -> ::Time
+        def user_parameters: () -> ::Array[Types::CustomParameter]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_environment-instance_method
+      def create_environment: (
+                                ?description: ::String,
+                                domain_identifier: ::String,
+                                environment_profile_identifier: ::String,
+                                ?glossary_terms: Array[::String],
+                                name: ::String,
+                                project_identifier: ::String,
+                                ?user_parameters: Array[
+                                  {
+                                    name: ::String?,
+                                    value: ::String?
+                                  },
+                                ]
+                              ) -> _CreateEnvironmentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentResponseSuccess
+
+      interface _CreateEnvironmentProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEnvironmentProfileOutput]
+        def aws_account_id: () -> ::String
+        def aws_account_region: () -> ::String
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def environment_blueprint_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def project_id: () -> ::String
+        def updated_at: () -> ::Time
+        def user_parameters: () -> ::Array[Types::CustomParameter]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_environment_profile-instance_method
+      def create_environment_profile: (
+                                        ?aws_account_id: ::String,
+                                        ?aws_account_region: ::String,
+                                        ?description: ::String,
+                                        domain_identifier: ::String,
+                                        environment_blueprint_identifier: ::String,
+                                        name: ::String,
+                                        project_identifier: ::String,
+                                        ?user_parameters: Array[
+                                          {
+                                            name: ::String?,
+                                            value: ::String?
+                                          },
+                                        ]
+                                      ) -> _CreateEnvironmentProfileResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentProfileResponseSuccess
+
+      interface _CreateFormTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFormTypeOutput]
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def name: () -> ::String
+        def origin_domain_id: () -> ::String
+        def origin_project_id: () -> ::String
+        def owning_project_id: () -> ::String
+        def revision: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_form_type-instance_method
+      def create_form_type: (
+                              ?description: ::String,
+                              domain_identifier: ::String,
+                              model: {
+                                smithy: ::String?
+                              },
+                              name: ::String,
+                              owning_project_identifier: ::String,
+                              ?status: ("ENABLED" | "DISABLED")
+                            ) -> _CreateFormTypeResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFormTypeResponseSuccess
+
+      interface _CreateGlossaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGlossaryOutput]
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def owning_project_id: () -> ::String
+        def status: () -> ("DISABLED" | "ENABLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_glossary-instance_method
+      def create_glossary: (
+                             ?client_token: ::String,
+                             ?description: ::String,
+                             domain_identifier: ::String,
+                             name: ::String,
+                             owning_project_identifier: ::String,
+                             ?status: ("DISABLED" | "ENABLED")
+                           ) -> _CreateGlossaryResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGlossaryResponseSuccess
+
+      interface _CreateGlossaryTermResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGlossaryTermOutput]
+        def domain_id: () -> ::String
+        def glossary_id: () -> ::String
+        def id: () -> ::String
+        def long_description: () -> ::String
+        def name: () -> ::String
+        def short_description: () -> ::String
+        def status: () -> ("ENABLED" | "DISABLED")
+        def term_relations: () -> Types::TermRelations
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_glossary_term-instance_method
+      def create_glossary_term: (
+                                  ?client_token: ::String,
+                                  domain_identifier: ::String,
+                                  glossary_identifier: ::String,
+                                  ?long_description: ::String,
+                                  name: ::String,
+                                  ?short_description: ::String,
+                                  ?status: ("ENABLED" | "DISABLED"),
+                                  ?term_relations: {
+                                    classifies: Array[::String]?,
+                                    is_a: Array[::String]?
+                                  }
+                                ) -> _CreateGlossaryTermResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGlossaryTermResponseSuccess
+
+      interface _CreateGroupProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGroupProfileOutput]
+        def domain_id: () -> ::String
+        def group_name: () -> ::String
+        def id: () -> ::String
+        def status: () -> ("ASSIGNED" | "NOT_ASSIGNED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_group_profile-instance_method
+      def create_group_profile: (
+                                  ?client_token: ::String,
+                                  domain_identifier: ::String,
+                                  group_identifier: ::String
+                                ) -> _CreateGroupProfileResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGroupProfileResponseSuccess
+
+      interface _CreateListingChangeSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateListingChangeSetOutput]
+        def listing_id: () -> ::String
+        def listing_revision: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "INACTIVE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_listing_change_set-instance_method
+      def create_listing_change_set: (
+                                       action: ("PUBLISH" | "UNPUBLISH"),
+                                       ?client_token: ::String,
+                                       domain_identifier: ::String,
+                                       entity_identifier: ::String,
+                                       ?entity_revision: ::String,
+                                       entity_type: ("ASSET")
+                                     ) -> _CreateListingChangeSetResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateListingChangeSetResponseSuccess
+
+      interface _CreateProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProjectOutput]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def glossary_terms: () -> ::Array[::String]
+        def id: () -> ::String
+        def last_updated_at: () -> ::Time
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_project-instance_method
+      def create_project: (
+                            ?description: ::String,
+                            domain_identifier: ::String,
+                            ?glossary_terms: Array[::String],
+                            name: ::String
+                          ) -> _CreateProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProjectResponseSuccess
+
+      interface _CreateProjectMembershipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProjectMembershipOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_project_membership-instance_method
+      def create_project_membership: (
+                                       designation: ("PROJECT_OWNER" | "PROJECT_CONTRIBUTOR"),
+                                       domain_identifier: ::String,
+                                       member: {
+                                         group_identifier: ::String?,
+                                         user_identifier: ::String?
+                                       },
+                                       project_identifier: ::String
+                                     ) -> _CreateProjectMembershipResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProjectMembershipResponseSuccess
+
+      interface _CreateSubscriptionGrantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSubscriptionGrantOutput]
+        def assets: () -> ::Array[Types::SubscribedAsset]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def domain_id: () -> ::String
+        def granted_entity: () -> Types::GrantedEntity
+        def id: () -> ::String
+        def status: () -> ("PENDING" | "IN_PROGRESS" | "GRANT_FAILED" | "REVOKE_FAILED" | "GRANT_AND_REVOKE_FAILED" | "COMPLETED" | "INACCESSIBLE")
+        def subscription_id: () -> ::String
+        def subscription_target_id: () -> ::String
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_subscription_grant-instance_method
+      def create_subscription_grant: (
+                                       ?asset_target_names: Array[
+                                         {
+                                           asset_id: ::String,
+                                           target_name: ::String
+                                         },
+                                       ],
+                                       ?client_token: ::String,
+                                       domain_identifier: ::String,
+                                       environment_identifier: ::String,
+                                       granted_entity: {
+                                         listing: {
+                                           identifier: ::String,
+                                           revision: ::String
+                                         }?
+                                       },
+                                       subscription_target_identifier: ::String
+                                     ) -> _CreateSubscriptionGrantResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSubscriptionGrantResponseSuccess
+
+      interface _CreateSubscriptionRequestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSubscriptionRequestOutput]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def decision_comment: () -> ::String
+        def domain_id: () -> ::String
+        def id: () -> ::String
+        def request_reason: () -> ::String
+        def reviewer_id: () -> ::String
+        def status: () -> ("PENDING" | "ACCEPTED" | "REJECTED")
+        def subscribed_listings: () -> ::Array[Types::SubscribedListing]
+        def subscribed_principals: () -> ::Array[Types::SubscribedPrincipal]
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_subscription_request-instance_method
+      def create_subscription_request: (
+                                         ?client_token: ::String,
+                                         domain_identifier: ::String,
+                                         request_reason: ::String,
+                                         subscribed_listings: Array[
+                                           {
+                                             identifier: ::String
+                                           },
+                                         ],
+                                         subscribed_principals: Array[
+                                           {
+                                             project: {
+                                               identifier: ::String?
+                                             }?
+                                           },
+                                         ]
+                                       ) -> _CreateSubscriptionRequestResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSubscriptionRequestResponseSuccess
+
+      interface _CreateSubscriptionTargetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSubscriptionTargetOutput]
+        def applicable_asset_types: () -> ::Array[::String]
+        def authorized_principals: () -> ::Array[::String]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def domain_id: () -> ::String
+        def environment_id: () -> ::String
+        def id: () -> ::String
+        def manage_access_role: () -> ::String
+        def name: () -> ::String
+        def project_id: () -> ::String
+        def provider: () -> ::String
+        def subscription_target_config: () -> ::Array[Types::SubscriptionTargetForm]
+        def type: () -> ::String
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_subscription_target-instance_method
+      def create_subscription_target: (
+                                        applicable_asset_types: Array[::String],
+                                        authorized_principals: Array[::String],
+                                        ?client_token: ::String,
+                                        domain_identifier: ::String,
+                                        environment_identifier: ::String,
+                                        manage_access_role: ::String,
+                                        name: ::String,
+                                        ?provider: ::String,
+                                        subscription_target_config: Array[
+                                          {
+                                            content: ::String,
+                                            form_name: ::String
+                                          },
+                                        ],
+                                        type: ::String
+                                      ) -> _CreateSubscriptionTargetResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSubscriptionTargetResponseSuccess
+
+      interface _CreateUserProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateUserProfileOutput]
+        def details: () -> Types::UserProfileDetails
+        def domain_id: () -> ::String
+        def id: () -> ::String
+        def status: () -> ("ASSIGNED" | "NOT_ASSIGNED" | "ACTIVATED" | "DEACTIVATED")
+        def type: () -> ("IAM" | "SSO")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_user_profile-instance_method
+      def create_user_profile: (
+                                 ?client_token: ::String,
+                                 domain_identifier: ::String,
+                                 user_identifier: ::String,
+                                 ?user_type: ("IAM_USER" | "IAM_ROLE" | "SSO_USER")
+                               ) -> _CreateUserProfileResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserProfileResponseSuccess
+
+      interface _DeleteAssetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAssetOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_asset-instance_method
+      def delete_asset: (
+                          domain_identifier: ::String,
+                          identifier: ::String
+                        ) -> _DeleteAssetResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAssetResponseSuccess
+
+      interface _DeleteAssetTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAssetTypeOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_asset_type-instance_method
+      def delete_asset_type: (
+                               domain_identifier: ::String,
+                               identifier: ::String
+                             ) -> _DeleteAssetTypeResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAssetTypeResponseSuccess
+
+      interface _DeleteDataSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataSourceOutput]
+        def asset_forms_output: () -> ::Array[Types::FormOutput]
+        def configuration: () -> Types::DataSourceConfigurationOutput
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def enable_setting: () -> ("ENABLED" | "DISABLED")
+        def environment_id: () -> ::String
+        def error_message: () -> Types::DataSourceErrorMessage
+        def id: () -> ::String
+        def last_run_at: () -> ::Time
+        def last_run_error_message: () -> Types::DataSourceErrorMessage
+        def last_run_status: () -> ("REQUESTED" | "RUNNING" | "FAILED" | "PARTIALLY_SUCCEEDED" | "SUCCESS")
+        def name: () -> ::String
+        def project_id: () -> ::String
+        def publish_on_import: () -> bool
+        def schedule: () -> Types::ScheduleConfiguration
+        def status: () -> ("CREATING" | "FAILED_CREATION" | "READY" | "UPDATING" | "FAILED_UPDATE" | "RUNNING" | "DELETING" | "FAILED_DELETION")
+        def type: () -> ::String
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_data_source-instance_method
+      def delete_data_source: (
+                                ?client_token: ::String,
+                                domain_identifier: ::String,
+                                identifier: ::String
+                              ) -> _DeleteDataSourceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataSourceResponseSuccess
+
+      interface _DeleteDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDomainOutput]
+        def status: () -> ("CREATING" | "AVAILABLE" | "CREATION_FAILED" | "DELETING" | "DELETED" | "DELETION_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_domain-instance_method
+      def delete_domain: (
+                           ?client_token: ::String,
+                           identifier: ::String
+                         ) -> _DeleteDomainResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDomainResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_environment-instance_method
+      def delete_environment: (
+                                domain_identifier: ::String,
+                                identifier: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteEnvironmentBlueprintConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEnvironmentBlueprintConfigurationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_environment_blueprint_configuration-instance_method
+      def delete_environment_blueprint_configuration: (
+                                                        domain_identifier: ::String,
+                                                        environment_blueprint_identifier: ::String
+                                                      ) -> _DeleteEnvironmentBlueprintConfigurationResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEnvironmentBlueprintConfigurationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_environment_profile-instance_method
+      def delete_environment_profile: (
+                                        domain_identifier: ::String,
+                                        identifier: ::String
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteFormTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFormTypeOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_form_type-instance_method
+      def delete_form_type: (
+                              domain_identifier: ::String,
+                              form_type_identifier: ::String
+                            ) -> _DeleteFormTypeResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFormTypeResponseSuccess
+
+      interface _DeleteGlossaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGlossaryOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_glossary-instance_method
+      def delete_glossary: (
+                             domain_identifier: ::String,
+                             identifier: ::String
+                           ) -> _DeleteGlossaryResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGlossaryResponseSuccess
+
+      interface _DeleteGlossaryTermResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGlossaryTermOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_glossary_term-instance_method
+      def delete_glossary_term: (
+                                  domain_identifier: ::String,
+                                  identifier: ::String
+                                ) -> _DeleteGlossaryTermResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGlossaryTermResponseSuccess
+
+      interface _DeleteListingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteListingOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_listing-instance_method
+      def delete_listing: (
+                            domain_identifier: ::String,
+                            identifier: ::String
+                          ) -> _DeleteListingResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteListingResponseSuccess
+
+      interface _DeleteProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProjectOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_project-instance_method
+      def delete_project: (
+                            domain_identifier: ::String,
+                            identifier: ::String
+                          ) -> _DeleteProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProjectResponseSuccess
+
+      interface _DeleteProjectMembershipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProjectMembershipOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_project_membership-instance_method
+      def delete_project_membership: (
+                                       domain_identifier: ::String,
+                                       member: {
+                                         group_identifier: ::String?,
+                                         user_identifier: ::String?
+                                       },
+                                       project_identifier: ::String
+                                     ) -> _DeleteProjectMembershipResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProjectMembershipResponseSuccess
+
+      interface _DeleteSubscriptionGrantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSubscriptionGrantOutput]
+        def assets: () -> ::Array[Types::SubscribedAsset]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def domain_id: () -> ::String
+        def granted_entity: () -> Types::GrantedEntity
+        def id: () -> ::String
+        def status: () -> ("PENDING" | "IN_PROGRESS" | "GRANT_FAILED" | "REVOKE_FAILED" | "GRANT_AND_REVOKE_FAILED" | "COMPLETED" | "INACCESSIBLE")
+        def subscription_id: () -> ::String
+        def subscription_target_id: () -> ::String
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_subscription_grant-instance_method
+      def delete_subscription_grant: (
+                                       domain_identifier: ::String,
+                                       identifier: ::String
+                                     ) -> _DeleteSubscriptionGrantResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSubscriptionGrantResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_subscription_request-instance_method
+      def delete_subscription_request: (
+                                         domain_identifier: ::String,
+                                         identifier: ::String
+                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_subscription_target-instance_method
+      def delete_subscription_target: (
+                                        domain_identifier: ::String,
+                                        environment_identifier: ::String,
+                                        identifier: ::String
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetAssetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAssetOutput]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def external_identifier: () -> ::String
+        def first_revision_created_at: () -> ::Time
+        def first_revision_created_by: () -> ::String
+        def forms_output: () -> ::Array[Types::FormOutput]
+        def glossary_terms: () -> ::Array[::String]
+        def id: () -> ::String
+        def listing: () -> Types::AssetListingDetails
+        def name: () -> ::String
+        def owning_project_id: () -> ::String
+        def read_only_forms_output: () -> ::Array[Types::FormOutput]
+        def revision: () -> ::String
+        def type_identifier: () -> ::String
+        def type_revision: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_asset-instance_method
+      def get_asset: (
+                       domain_identifier: ::String,
+                       identifier: ::String,
+                       ?revision: ::String
+                     ) -> _GetAssetResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAssetResponseSuccess
+
+      interface _GetAssetTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAssetTypeOutput]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def forms_output: () -> ::Hash[::String, Types::FormEntryOutput]
+        def name: () -> ::String
+        def origin_domain_id: () -> ::String
+        def origin_project_id: () -> ::String
+        def owning_project_id: () -> ::String
+        def revision: () -> ::String
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_asset_type-instance_method
+      def get_asset_type: (
+                            domain_identifier: ::String,
+                            identifier: ::String,
+                            ?revision: ::String
+                          ) -> _GetAssetTypeResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAssetTypeResponseSuccess
+
+      interface _GetDataSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataSourceOutput]
+        def asset_forms_output: () -> ::Array[Types::FormOutput]
+        def configuration: () -> Types::DataSourceConfigurationOutput
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def enable_setting: () -> ("ENABLED" | "DISABLED")
+        def environment_id: () -> ::String
+        def error_message: () -> Types::DataSourceErrorMessage
+        def id: () -> ::String
+        def last_run_asset_count: () -> ::Integer
+        def last_run_at: () -> ::Time
+        def last_run_error_message: () -> Types::DataSourceErrorMessage
+        def last_run_status: () -> ("REQUESTED" | "RUNNING" | "FAILED" | "PARTIALLY_SUCCEEDED" | "SUCCESS")
+        def name: () -> ::String
+        def project_id: () -> ::String
+        def publish_on_import: () -> bool
+        def recommendation: () -> Types::RecommendationConfiguration
+        def schedule: () -> Types::ScheduleConfiguration
+        def status: () -> ("CREATING" | "FAILED_CREATION" | "READY" | "UPDATING" | "FAILED_UPDATE" | "RUNNING" | "DELETING" | "FAILED_DELETION")
+        def type: () -> ::String
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_data_source-instance_method
+      def get_data_source: (
+                             domain_identifier: ::String,
+                             identifier: ::String
+                           ) -> _GetDataSourceResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataSourceResponseSuccess
+
+      interface _GetDataSourceRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataSourceRunOutput]
+        def created_at: () -> ::Time
+        def data_source_configuration_snapshot: () -> ::String
+        def data_source_id: () -> ::String
+        def domain_id: () -> ::String
+        def error_message: () -> Types::DataSourceErrorMessage
+        def id: () -> ::String
+        def project_id: () -> ::String
+        def run_statistics_for_assets: () -> Types::RunStatisticsForAssets
+        def started_at: () -> ::Time
+        def status: () -> ("REQUESTED" | "RUNNING" | "FAILED" | "PARTIALLY_SUCCEEDED" | "SUCCESS")
+        def stopped_at: () -> ::Time
+        def type: () -> ("PRIORITIZED" | "SCHEDULED")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_data_source_run-instance_method
+      def get_data_source_run: (
+                                 domain_identifier: ::String,
+                                 identifier: ::String
+                               ) -> _GetDataSourceRunResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataSourceRunResponseSuccess
+
+      interface _GetDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainOutput]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def domain_execution_role: () -> ::String
+        def id: () -> ::String
+        def kms_key_identifier: () -> ::String
+        def last_updated_at: () -> ::Time
+        def name: () -> ::String
+        def portal_url: () -> ::String
+        def single_sign_on: () -> Types::SingleSignOn
+        def status: () -> ("CREATING" | "AVAILABLE" | "CREATION_FAILED" | "DELETING" | "DELETED" | "DELETION_FAILED")
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_domain-instance_method
+      def get_domain: (
+                        identifier: ::String
+                      ) -> _GetDomainResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainResponseSuccess
+
+      interface _GetEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEnvironmentOutput]
+        def aws_account_id: () -> ::String
+        def aws_account_region: () -> ::String
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def deployment_properties: () -> Types::DeploymentProperties
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def environment_actions: () -> ::Array[Types::ConfigurableEnvironmentAction]
+        def environment_blueprint_id: () -> ::String
+        def environment_profile_id: () -> ::String
+        def glossary_terms: () -> ::Array[::String]
+        def id: () -> ::String
+        def last_deployment: () -> Types::Deployment
+        def name: () -> ::String
+        def project_id: () -> ::String
+        def provider: () -> ::String
+        def provisioned_resources: () -> ::Array[Types::Resource]
+        def provisioning_properties: () -> Types::ProvisioningProperties
+        def status: () -> ("ACTIVE" | "CREATING" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "VALIDATION_FAILED" | "SUSPENDED" | "DISABLED" | "EXPIRED" | "DELETED" | "INACCESSIBLE")
+        def updated_at: () -> ::Time
+        def user_parameters: () -> ::Array[Types::CustomParameter]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_environment-instance_method
+      def get_environment: (
+                             domain_identifier: ::String,
+                             identifier: ::String
+                           ) -> _GetEnvironmentResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnvironmentResponseSuccess
+
+      interface _GetEnvironmentBlueprintResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEnvironmentBlueprintOutput]
+        def created_at: () -> ::Time
+        def deployment_properties: () -> Types::DeploymentProperties
+        def description: () -> ::String
+        def glossary_terms: () -> ::Array[::String]
+        def id: () -> ::String
+        def name: () -> ::String
+        def provider: () -> ::String
+        def provisioning_properties: () -> Types::ProvisioningProperties
+        def updated_at: () -> ::Time
+        def user_parameters: () -> ::Array[Types::CustomParameter]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_environment_blueprint-instance_method
+      def get_environment_blueprint: (
+                                       domain_identifier: ::String,
+                                       identifier: ::String
+                                     ) -> _GetEnvironmentBlueprintResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnvironmentBlueprintResponseSuccess
+
+      interface _GetEnvironmentBlueprintConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEnvironmentBlueprintConfigurationOutput]
+        def created_at: () -> ::Time
+        def domain_id: () -> ::String
+        def enabled_regions: () -> ::Array[::String]
+        def environment_blueprint_id: () -> ::String
+        def manage_access_role_arn: () -> ::String
+        def provisioning_role_arn: () -> ::String
+        def regional_parameters: () -> ::Hash[::String, ::Hash[::String, ::String]]
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_environment_blueprint_configuration-instance_method
+      def get_environment_blueprint_configuration: (
+                                                     domain_identifier: ::String,
+                                                     environment_blueprint_identifier: ::String
+                                                   ) -> _GetEnvironmentBlueprintConfigurationResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnvironmentBlueprintConfigurationResponseSuccess
+
+      interface _GetEnvironmentProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEnvironmentProfileOutput]
+        def aws_account_id: () -> ::String
+        def aws_account_region: () -> ::String
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def environment_blueprint_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def project_id: () -> ::String
+        def updated_at: () -> ::Time
+        def user_parameters: () -> ::Array[Types::CustomParameter]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_environment_profile-instance_method
+      def get_environment_profile: (
+                                     domain_identifier: ::String,
+                                     identifier: ::String
+                                   ) -> _GetEnvironmentProfileResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnvironmentProfileResponseSuccess
+
+      interface _GetFormTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFormTypeOutput]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def imports: () -> ::Array[Types::Import]
+        def model: () -> Types::Model
+        def name: () -> ::String
+        def origin_domain_id: () -> ::String
+        def origin_project_id: () -> ::String
+        def owning_project_id: () -> ::String
+        def revision: () -> ::String
+        def status: () -> ("ENABLED" | "DISABLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_form_type-instance_method
+      def get_form_type: (
+                           domain_identifier: ::String,
+                           form_type_identifier: ::String,
+                           ?revision: ::String
+                         ) -> _GetFormTypeResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFormTypeResponseSuccess
+
+      interface _GetGlossaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGlossaryOutput]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def owning_project_id: () -> ::String
+        def status: () -> ("DISABLED" | "ENABLED")
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_glossary-instance_method
+      def get_glossary: (
+                          domain_identifier: ::String,
+                          identifier: ::String
+                        ) -> _GetGlossaryResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGlossaryResponseSuccess
+
+      interface _GetGlossaryTermResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGlossaryTermOutput]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def domain_id: () -> ::String
+        def glossary_id: () -> ::String
+        def id: () -> ::String
+        def long_description: () -> ::String
+        def name: () -> ::String
+        def short_description: () -> ::String
+        def status: () -> ("ENABLED" | "DISABLED")
+        def term_relations: () -> Types::TermRelations
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_glossary_term-instance_method
+      def get_glossary_term: (
+                               domain_identifier: ::String,
+                               identifier: ::String
+                             ) -> _GetGlossaryTermResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGlossaryTermResponseSuccess
+
+      interface _GetGroupProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGroupProfileOutput]
+        def domain_id: () -> ::String
+        def group_name: () -> ::String
+        def id: () -> ::String
+        def status: () -> ("ASSIGNED" | "NOT_ASSIGNED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_group_profile-instance_method
+      def get_group_profile: (
+                               domain_identifier: ::String,
+                               group_identifier: ::String
+                             ) -> _GetGroupProfileResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGroupProfileResponseSuccess
+
+      interface _GetIamPortalLoginUrlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIamPortalLoginUrlOutput]
+        def auth_code_url: () -> ::String
+        def user_profile_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_iam_portal_login_url-instance_method
+      def get_iam_portal_login_url: (
+                                      domain_identifier: ::String
+                                    ) -> _GetIamPortalLoginUrlResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIamPortalLoginUrlResponseSuccess
+
+      interface _GetListingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetListingOutput]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def id: () -> ::String
+        def item: () -> Types::ListingItem
+        def listing_revision: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "INACTIVE")
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_listing-instance_method
+      def get_listing: (
+                         domain_identifier: ::String,
+                         identifier: ::String,
+                         ?listing_revision: ::String
+                       ) -> _GetListingResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetListingResponseSuccess
+
+      interface _GetProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProjectOutput]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def glossary_terms: () -> ::Array[::String]
+        def id: () -> ::String
+        def last_updated_at: () -> ::Time
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_project-instance_method
+      def get_project: (
+                         domain_identifier: ::String,
+                         identifier: ::String
+                       ) -> _GetProjectResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProjectResponseSuccess
+
+      interface _GetSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSubscriptionOutput]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def domain_id: () -> ::String
+        def id: () -> ::String
+        def retain_permissions: () -> bool
+        def status: () -> ("APPROVED" | "REVOKED" | "CANCELLED")
+        def subscribed_listing: () -> Types::SubscribedListing
+        def subscribed_principal: () -> Types::SubscribedPrincipal
+        def subscription_request_id: () -> ::String
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_subscription-instance_method
+      def get_subscription: (
+                              domain_identifier: ::String,
+                              identifier: ::String
+                            ) -> _GetSubscriptionResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSubscriptionResponseSuccess
+
+      interface _GetSubscriptionGrantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSubscriptionGrantOutput]
+        def assets: () -> ::Array[Types::SubscribedAsset]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def domain_id: () -> ::String
+        def granted_entity: () -> Types::GrantedEntity
+        def id: () -> ::String
+        def status: () -> ("PENDING" | "IN_PROGRESS" | "GRANT_FAILED" | "REVOKE_FAILED" | "GRANT_AND_REVOKE_FAILED" | "COMPLETED" | "INACCESSIBLE")
+        def subscription_id: () -> ::String
+        def subscription_target_id: () -> ::String
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_subscription_grant-instance_method
+      def get_subscription_grant: (
+                                    domain_identifier: ::String,
+                                    identifier: ::String
+                                  ) -> _GetSubscriptionGrantResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSubscriptionGrantResponseSuccess
+
+      interface _GetSubscriptionRequestDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSubscriptionRequestDetailsOutput]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def decision_comment: () -> ::String
+        def domain_id: () -> ::String
+        def id: () -> ::String
+        def request_reason: () -> ::String
+        def reviewer_id: () -> ::String
+        def status: () -> ("PENDING" | "ACCEPTED" | "REJECTED")
+        def subscribed_listings: () -> ::Array[Types::SubscribedListing]
+        def subscribed_principals: () -> ::Array[Types::SubscribedPrincipal]
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_subscription_request_details-instance_method
+      def get_subscription_request_details: (
+                                              domain_identifier: ::String,
+                                              identifier: ::String
+                                            ) -> _GetSubscriptionRequestDetailsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSubscriptionRequestDetailsResponseSuccess
+
+      interface _GetSubscriptionTargetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSubscriptionTargetOutput]
+        def applicable_asset_types: () -> ::Array[::String]
+        def authorized_principals: () -> ::Array[::String]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def domain_id: () -> ::String
+        def environment_id: () -> ::String
+        def id: () -> ::String
+        def manage_access_role: () -> ::String
+        def name: () -> ::String
+        def project_id: () -> ::String
+        def provider: () -> ::String
+        def subscription_target_config: () -> ::Array[Types::SubscriptionTargetForm]
+        def type: () -> ::String
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_subscription_target-instance_method
+      def get_subscription_target: (
+                                     domain_identifier: ::String,
+                                     environment_identifier: ::String,
+                                     identifier: ::String
+                                   ) -> _GetSubscriptionTargetResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSubscriptionTargetResponseSuccess
+
+      interface _GetUserProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUserProfileOutput]
+        def details: () -> Types::UserProfileDetails
+        def domain_id: () -> ::String
+        def id: () -> ::String
+        def status: () -> ("ASSIGNED" | "NOT_ASSIGNED" | "ACTIVATED" | "DEACTIVATED")
+        def type: () -> ("IAM" | "SSO")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_user_profile-instance_method
+      def get_user_profile: (
+                              domain_identifier: ::String,
+                              ?type: ("IAM" | "SSO"),
+                              user_identifier: ::String
+                            ) -> _GetUserProfileResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUserProfileResponseSuccess
+
+      interface _ListAssetRevisionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssetRevisionsOutput]
+        def items: () -> ::Array[Types::AssetRevision]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_asset_revisions-instance_method
+      def list_asset_revisions: (
+                                  domain_identifier: ::String,
+                                  identifier: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListAssetRevisionsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssetRevisionsResponseSuccess
+
+      interface _ListDataSourceRunActivitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataSourceRunActivitiesOutput]
+        def items: () -> ::Array[Types::DataSourceRunActivity]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_data_source_run_activities-instance_method
+      def list_data_source_run_activities: (
+                                             domain_identifier: ::String,
+                                             identifier: ::String,
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String,
+                                             ?status: ("FAILED" | "PUBLISHING_FAILED" | "SUCCEEDED_CREATED" | "SUCCEEDED_UPDATED" | "SKIPPED_ALREADY_IMPORTED" | "SKIPPED_ARCHIVED" | "SKIPPED_NO_ACCESS" | "UNCHANGED")
+                                           ) -> _ListDataSourceRunActivitiesResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataSourceRunActivitiesResponseSuccess
+
+      interface _ListDataSourceRunsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataSourceRunsOutput]
+        def items: () -> ::Array[Types::DataSourceRunSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_data_source_runs-instance_method
+      def list_data_source_runs: (
+                                   data_source_identifier: ::String,
+                                   domain_identifier: ::String,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String,
+                                   ?status: ("REQUESTED" | "RUNNING" | "FAILED" | "PARTIALLY_SUCCEEDED" | "SUCCESS")
+                                 ) -> _ListDataSourceRunsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataSourceRunsResponseSuccess
+
+      interface _ListDataSourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataSourcesOutput]
+        def items: () -> ::Array[Types::DataSourceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_data_sources-instance_method
+      def list_data_sources: (
+                               domain_identifier: ::String,
+                               ?environment_identifier: ::String,
+                               ?max_results: ::Integer,
+                               ?name: ::String,
+                               ?next_token: ::String,
+                               project_identifier: ::String,
+                               ?status: ("CREATING" | "FAILED_CREATION" | "READY" | "UPDATING" | "FAILED_UPDATE" | "RUNNING" | "DELETING" | "FAILED_DELETION"),
+                               ?type: ::String
+                             ) -> _ListDataSourcesResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataSourcesResponseSuccess
+
+      interface _ListDomainsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainsOutput]
+        def items: () -> ::Array[Types::DomainSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_domains-instance_method
+      def list_domains: (
+                          ?max_results: ::Integer,
+                          ?next_token: ::String,
+                          ?status: ("CREATING" | "AVAILABLE" | "CREATION_FAILED" | "DELETING" | "DELETED" | "DELETION_FAILED")
+                        ) -> _ListDomainsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainsResponseSuccess
+
+      interface _ListEnvironmentBlueprintConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEnvironmentBlueprintConfigurationsOutput]
+        def items: () -> ::Array[Types::EnvironmentBlueprintConfigurationItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_environment_blueprint_configurations-instance_method
+      def list_environment_blueprint_configurations: (
+                                                       domain_identifier: ::String,
+                                                       ?max_results: ::Integer,
+                                                       ?next_token: ::String
+                                                     ) -> _ListEnvironmentBlueprintConfigurationsResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnvironmentBlueprintConfigurationsResponseSuccess
+
+      interface _ListEnvironmentBlueprintsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEnvironmentBlueprintsOutput]
+        def items: () -> ::Array[Types::EnvironmentBlueprintSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_environment_blueprints-instance_method
+      def list_environment_blueprints: (
+                                         domain_identifier: ::String,
+                                         ?managed: bool,
+                                         ?max_results: ::Integer,
+                                         ?name: ::String,
+                                         ?next_token: ::String
+                                       ) -> _ListEnvironmentBlueprintsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnvironmentBlueprintsResponseSuccess
+
+      interface _ListEnvironmentProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEnvironmentProfilesOutput]
+        def items: () -> ::Array[Types::EnvironmentProfileSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_environment_profiles-instance_method
+      def list_environment_profiles: (
+                                       ?aws_account_id: ::String,
+                                       ?aws_account_region: ::String,
+                                       domain_identifier: ::String,
+                                       ?environment_blueprint_identifier: ::String,
+                                       ?max_results: ::Integer,
+                                       ?name: ::String,
+                                       ?next_token: ::String,
+                                       ?project_identifier: ::String
+                                     ) -> _ListEnvironmentProfilesResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnvironmentProfilesResponseSuccess
+
+      interface _ListEnvironmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEnvironmentsOutput]
+        def items: () -> ::Array[Types::EnvironmentSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_environments-instance_method
+      def list_environments: (
+                               ?aws_account_id: ::String,
+                               ?aws_account_region: ::String,
+                               domain_identifier: ::String,
+                               ?environment_blueprint_identifier: ::String,
+                               ?environment_profile_identifier: ::String,
+                               ?max_results: ::Integer,
+                               ?name: ::String,
+                               ?next_token: ::String,
+                               project_identifier: ::String,
+                               ?provider: ::String,
+                               ?status: ("ACTIVE" | "CREATING" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "VALIDATION_FAILED" | "SUSPENDED" | "DISABLED" | "EXPIRED" | "DELETED" | "INACCESSIBLE")
+                             ) -> _ListEnvironmentsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnvironmentsResponseSuccess
+
+      interface _ListNotificationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNotificationsOutput]
+        def next_token: () -> ::String
+        def notifications: () -> ::Array[Types::NotificationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_notifications-instance_method
+      def list_notifications: (
+                                ?after_timestamp: ::Time,
+                                ?before_timestamp: ::Time,
+                                domain_identifier: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String,
+                                ?subjects: Array[::String],
+                                ?task_status: ("ACTIVE" | "INACTIVE"),
+                                type: ("TASK" | "EVENT")
+                              ) -> _ListNotificationsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNotificationsResponseSuccess
+
+      interface _ListProjectMembershipsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProjectMembershipsOutput]
+        def members: () -> ::Array[Types::ProjectMember]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_project_memberships-instance_method
+      def list_project_memberships: (
+                                      domain_identifier: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String,
+                                      project_identifier: ::String,
+                                      ?sort_by: ("NAME"),
+                                      ?sort_order: ("ASCENDING" | "DESCENDING")
+                                    ) -> _ListProjectMembershipsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProjectMembershipsResponseSuccess
+
+      interface _ListProjectsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProjectsOutput]
+        def items: () -> ::Array[Types::ProjectSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_projects-instance_method
+      def list_projects: (
+                           domain_identifier: ::String,
+                           ?group_identifier: ::String,
+                           ?max_results: ::Integer,
+                           ?name: ::String,
+                           ?next_token: ::String,
+                           ?user_identifier: ::String
+                         ) -> _ListProjectsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProjectsResponseSuccess
+
+      interface _ListSubscriptionGrantsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSubscriptionGrantsOutput]
+        def items: () -> ::Array[Types::SubscriptionGrantSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_subscription_grants-instance_method
+      def list_subscription_grants: (
+                                      domain_identifier: ::String,
+                                      ?environment_id: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String,
+                                      ?sort_by: ("CREATED_AT" | "UPDATED_AT"),
+                                      ?sort_order: ("ASCENDING" | "DESCENDING"),
+                                      ?subscribed_listing_id: ::String,
+                                      ?subscription_id: ::String,
+                                      ?subscription_target_id: ::String
+                                    ) -> _ListSubscriptionGrantsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSubscriptionGrantsResponseSuccess
+
+      interface _ListSubscriptionRequestsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSubscriptionRequestsOutput]
+        def items: () -> ::Array[Types::SubscriptionRequestSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_subscription_requests-instance_method
+      def list_subscription_requests: (
+                                        ?approver_project_id: ::String,
+                                        domain_identifier: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String,
+                                        ?owning_project_id: ::String,
+                                        ?sort_by: ("CREATED_AT" | "UPDATED_AT"),
+                                        ?sort_order: ("ASCENDING" | "DESCENDING"),
+                                        ?status: ("PENDING" | "ACCEPTED" | "REJECTED"),
+                                        ?subscribed_listing_id: ::String
+                                      ) -> _ListSubscriptionRequestsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSubscriptionRequestsResponseSuccess
+
+      interface _ListSubscriptionTargetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSubscriptionTargetsOutput]
+        def items: () -> ::Array[Types::SubscriptionTargetSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_subscription_targets-instance_method
+      def list_subscription_targets: (
+                                       domain_identifier: ::String,
+                                       environment_identifier: ::String,
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String,
+                                       ?sort_by: ("CREATED_AT" | "UPDATED_AT"),
+                                       ?sort_order: ("ASCENDING" | "DESCENDING")
+                                     ) -> _ListSubscriptionTargetsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSubscriptionTargetsResponseSuccess
+
+      interface _ListSubscriptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSubscriptionsOutput]
+        def items: () -> ::Array[Types::SubscriptionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_subscriptions-instance_method
+      def list_subscriptions: (
+                                ?approver_project_id: ::String,
+                                domain_identifier: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String,
+                                ?owning_project_id: ::String,
+                                ?sort_by: ("CREATED_AT" | "UPDATED_AT"),
+                                ?sort_order: ("ASCENDING" | "DESCENDING"),
+                                ?status: ("APPROVED" | "REVOKED" | "CANCELLED"),
+                                ?subscribed_listing_id: ::String,
+                                ?subscription_request_identifier: ::String
+                              ) -> _ListSubscriptionsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSubscriptionsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutEnvironmentBlueprintConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutEnvironmentBlueprintConfigurationOutput]
+        def created_at: () -> ::Time
+        def domain_id: () -> ::String
+        def enabled_regions: () -> ::Array[::String]
+        def environment_blueprint_id: () -> ::String
+        def manage_access_role_arn: () -> ::String
+        def provisioning_role_arn: () -> ::String
+        def regional_parameters: () -> ::Hash[::String, ::Hash[::String, ::String]]
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#put_environment_blueprint_configuration-instance_method
+      def put_environment_blueprint_configuration: (
+                                                     domain_identifier: ::String,
+                                                     enabled_regions: Array[::String],
+                                                     environment_blueprint_identifier: ::String,
+                                                     ?manage_access_role_arn: ::String,
+                                                     ?provisioning_role_arn: ::String,
+                                                     ?regional_parameters: Hash[::String, Hash[::String, ::String]]
+                                                   ) -> _PutEnvironmentBlueprintConfigurationResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEnvironmentBlueprintConfigurationResponseSuccess
+
+      interface _RejectPredictionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RejectPredictionsOutput]
+        def asset_id: () -> ::String
+        def asset_revision: () -> ::String
+        def domain_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#reject_predictions-instance_method
+      def reject_predictions: (
+                                ?client_token: ::String,
+                                domain_identifier: ::String,
+                                identifier: ::String,
+                                ?reject_choices: Array[
+                                  {
+                                    prediction_choices: Array[::Integer]?,
+                                    prediction_target: ::String?
+                                  },
+                                ],
+                                ?reject_rule: {
+                                  rule: ("ALL" | "NONE")?,
+                                  threshold: ::Float?
+                                },
+                                ?revision: ::String
+                              ) -> _RejectPredictionsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectPredictionsResponseSuccess
+
+      interface _RejectSubscriptionRequestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RejectSubscriptionRequestOutput]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def decision_comment: () -> ::String
+        def domain_id: () -> ::String
+        def id: () -> ::String
+        def request_reason: () -> ::String
+        def reviewer_id: () -> ::String
+        def status: () -> ("PENDING" | "ACCEPTED" | "REJECTED")
+        def subscribed_listings: () -> ::Array[Types::SubscribedListing]
+        def subscribed_principals: () -> ::Array[Types::SubscribedPrincipal]
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#reject_subscription_request-instance_method
+      def reject_subscription_request: (
+                                         ?decision_comment: ::String,
+                                         domain_identifier: ::String,
+                                         identifier: ::String
+                                       ) -> _RejectSubscriptionRequestResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectSubscriptionRequestResponseSuccess
+
+      interface _RevokeSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RevokeSubscriptionOutput]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def domain_id: () -> ::String
+        def id: () -> ::String
+        def retain_permissions: () -> bool
+        def status: () -> ("APPROVED" | "REVOKED" | "CANCELLED")
+        def subscribed_listing: () -> Types::SubscribedListing
+        def subscribed_principal: () -> Types::SubscribedPrincipal
+        def subscription_request_id: () -> ::String
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#revoke_subscription-instance_method
+      def revoke_subscription: (
+                                 domain_identifier: ::String,
+                                 identifier: ::String,
+                                 ?retain_permissions: bool
+                               ) -> _RevokeSubscriptionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RevokeSubscriptionResponseSuccess
+
+      interface _SearchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchOutput]
+        def items: () -> ::Array[Types::SearchInventoryResultItem]
+        def next_token: () -> ::String
+        def total_match_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#search-instance_method
+      def search: (
+                    ?additional_attributes: Array[("FORMS")],
+                    domain_identifier: ::String,
+                    ?filters: {
+                      and: Array[
+                        untyped,
+                      ]?,
+                      filter: {
+                        attribute: ::String,
+                        value: ::String
+                      }?,
+                      or: Array[
+                        untyped,
+                      ]?
+                    },
+                    ?max_results: ::Integer,
+                    ?next_token: ::String,
+                    ?owning_project_identifier: ::String,
+                    ?search_in: Array[
+                      {
+                        attribute: ::String
+                      },
+                    ],
+                    search_scope: ("ASSET" | "GLOSSARY" | "GLOSSARY_TERM"),
+                    ?search_text: ::String,
+                    ?sort: {
+                      attribute: ::String,
+                      order: ("ASCENDING" | "DESCENDING")?
+                    }
+                  ) -> _SearchResponseSuccess
+                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchResponseSuccess
+
+      interface _SearchGroupProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchGroupProfilesOutput]
+        def items: () -> ::Array[Types::GroupProfileSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#search_group_profiles-instance_method
+      def search_group_profiles: (
+                                   domain_identifier: ::String,
+                                   group_type: ("SSO_GROUP" | "DATAZONE_SSO_GROUP"),
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String,
+                                   ?search_text: ::String
+                                 ) -> _SearchGroupProfilesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchGroupProfilesResponseSuccess
+
+      interface _SearchListingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchListingsOutput]
+        def items: () -> ::Array[Types::SearchResultItem]
+        def next_token: () -> ::String
+        def total_match_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#search_listings-instance_method
+      def search_listings: (
+                             ?additional_attributes: Array[("FORMS")],
+                             domain_identifier: ::String,
+                             ?filters: {
+                               and: Array[
+                                 untyped,
+                               ]?,
+                               filter: {
+                                 attribute: ::String,
+                                 value: ::String
+                               }?,
+                               or: Array[
+                                 untyped,
+                               ]?
+                             },
+                             ?max_results: ::Integer,
+                             ?next_token: ::String,
+                             ?search_in: Array[
+                               {
+                                 attribute: ::String
+                               },
+                             ],
+                             ?search_text: ::String,
+                             ?sort: {
+                               attribute: ::String,
+                               order: ("ASCENDING" | "DESCENDING")?
+                             }
+                           ) -> _SearchListingsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchListingsResponseSuccess
+
+      interface _SearchTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchTypesOutput]
+        def items: () -> ::Array[Types::SearchTypesResultItem]
+        def next_token: () -> ::String
+        def total_match_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#search_types-instance_method
+      def search_types: (
+                          domain_identifier: ::String,
+                          ?filters: {
+                            and: Array[
+                              untyped,
+                            ]?,
+                            filter: {
+                              attribute: ::String,
+                              value: ::String
+                            }?,
+                            or: Array[
+                              untyped,
+                            ]?
+                          },
+                          managed: bool,
+                          ?max_results: ::Integer,
+                          ?next_token: ::String,
+                          ?search_in: Array[
+                            {
+                              attribute: ::String
+                            },
+                          ],
+                          search_scope: ("ASSET_TYPE" | "FORM_TYPE"),
+                          ?search_text: ::String,
+                          ?sort: {
+                            attribute: ::String,
+                            order: ("ASCENDING" | "DESCENDING")?
+                          }
+                        ) -> _SearchTypesResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchTypesResponseSuccess
+
+      interface _SearchUserProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchUserProfilesOutput]
+        def items: () -> ::Array[Types::UserProfileSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#search_user_profiles-instance_method
+      def search_user_profiles: (
+                                  domain_identifier: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String,
+                                  ?search_text: ::String,
+                                  user_type: ("SSO_USER" | "DATAZONE_USER" | "DATAZONE_SSO_USER" | "DATAZONE_IAM_USER")
+                                ) -> _SearchUserProfilesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchUserProfilesResponseSuccess
+
+      interface _StartDataSourceRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDataSourceRunOutput]
+        def created_at: () -> ::Time
+        def data_source_configuration_snapshot: () -> ::String
+        def data_source_id: () -> ::String
+        def domain_id: () -> ::String
+        def error_message: () -> Types::DataSourceErrorMessage
+        def id: () -> ::String
+        def project_id: () -> ::String
+        def run_statistics_for_assets: () -> Types::RunStatisticsForAssets
+        def started_at: () -> ::Time
+        def status: () -> ("REQUESTED" | "RUNNING" | "FAILED" | "PARTIALLY_SUCCEEDED" | "SUCCESS")
+        def stopped_at: () -> ::Time
+        def type: () -> ("PRIORITIZED" | "SCHEDULED")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#start_data_source_run-instance_method
+      def start_data_source_run: (
+                                   ?client_token: ::String,
+                                   data_source_identifier: ::String,
+                                   domain_identifier: ::String
+                                 ) -> _StartDataSourceRunResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDataSourceRunResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateDataSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataSourceOutput]
+        def asset_forms_output: () -> ::Array[Types::FormOutput]
+        def configuration: () -> Types::DataSourceConfigurationOutput
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def enable_setting: () -> ("ENABLED" | "DISABLED")
+        def environment_id: () -> ::String
+        def error_message: () -> Types::DataSourceErrorMessage
+        def id: () -> ::String
+        def last_run_at: () -> ::Time
+        def last_run_error_message: () -> Types::DataSourceErrorMessage
+        def last_run_status: () -> ("REQUESTED" | "RUNNING" | "FAILED" | "PARTIALLY_SUCCEEDED" | "SUCCESS")
+        def name: () -> ::String
+        def project_id: () -> ::String
+        def publish_on_import: () -> bool
+        def recommendation: () -> Types::RecommendationConfiguration
+        def schedule: () -> Types::ScheduleConfiguration
+        def status: () -> ("CREATING" | "FAILED_CREATION" | "READY" | "UPDATING" | "FAILED_UPDATE" | "RUNNING" | "DELETING" | "FAILED_DELETION")
+        def type: () -> ::String
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_data_source-instance_method
+      def update_data_source: (
+                                ?asset_forms_input: Array[
+                                  {
+                                    content: ::String?,
+                                    form_name: ::String,
+                                    type_identifier: ::String?,
+                                    type_revision: ::String?
+                                  },
+                                ],
+                                ?configuration: {
+                                  glue_run_configuration: {
+                                    data_access_role: ::String?,
+                                    relational_filter_configurations: Array[
+                                      {
+                                        database_name: ::String,
+                                        filter_expressions: Array[
+                                          {
+                                            expression: ::String,
+                                            type: ("INCLUDE" | "EXCLUDE")
+                                          },
+                                        ]?,
+                                        schema_name: ::String?
+                                      },
+                                    ]
+                                  }?,
+                                  redshift_run_configuration: {
+                                    data_access_role: ::String?,
+                                    redshift_credential_configuration: {
+                                      secret_manager_arn: ::String
+                                    },
+                                    redshift_storage: {
+                                      redshift_cluster_source: {
+                                        cluster_name: ::String
+                                      }?,
+                                      redshift_serverless_source: {
+                                        workgroup_name: ::String
+                                      }?
+                                    },
+                                    relational_filter_configurations: Array[
+                                      {
+                                        database_name: ::String,
+                                        filter_expressions: Array[
+                                          {
+                                            expression: ::String,
+                                            type: ("INCLUDE" | "EXCLUDE")
+                                          },
+                                        ]?,
+                                        schema_name: ::String?
+                                      },
+                                    ]
+                                  }?
+                                },
+                                ?description: ::String,
+                                domain_identifier: ::String,
+                                ?enable_setting: ("ENABLED" | "DISABLED"),
+                                identifier: ::String,
+                                ?name: ::String,
+                                ?publish_on_import: bool,
+                                ?recommendation: {
+                                  enable_business_name_generation: bool?
+                                },
+                                ?schedule: {
+                                  schedule: ::String?,
+                                  timezone: ("UTC" | "AFRICA_JOHANNESBURG" | "AMERICA_MONTREAL" | "AMERICA_SAO_PAULO" | "ASIA_BAHRAIN" | "ASIA_BANGKOK" | "ASIA_CALCUTTA" | "ASIA_DUBAI" | "ASIA_HONG_KONG" | "ASIA_JAKARTA" | "ASIA_KUALA_LUMPUR" | "ASIA_SEOUL" | "ASIA_SHANGHAI" | "ASIA_SINGAPORE" | "ASIA_TAIPEI" | "ASIA_TOKYO" | "AUSTRALIA_MELBOURNE" | "AUSTRALIA_SYDNEY" | "CANADA_CENTRAL" | "CET" | "CST6CDT" | "ETC_GMT" | "ETC_GMT0" | "ETC_GMT_ADD_0" | "ETC_GMT_ADD_1" | "ETC_GMT_ADD_10" | "ETC_GMT_ADD_11" | "ETC_GMT_ADD_12" | "ETC_GMT_ADD_2" | "ETC_GMT_ADD_3" | "ETC_GMT_ADD_4" | "ETC_GMT_ADD_5" | "ETC_GMT_ADD_6" | "ETC_GMT_ADD_7" | "ETC_GMT_ADD_8" | "ETC_GMT_ADD_9" | "ETC_GMT_NEG_0" | "ETC_GMT_NEG_1" | "ETC_GMT_NEG_10" | "ETC_GMT_NEG_11" | "ETC_GMT_NEG_12" | "ETC_GMT_NEG_13" | "ETC_GMT_NEG_14" | "ETC_GMT_NEG_2" | "ETC_GMT_NEG_3" | "ETC_GMT_NEG_4" | "ETC_GMT_NEG_5" | "ETC_GMT_NEG_6" | "ETC_GMT_NEG_7" | "ETC_GMT_NEG_8" | "ETC_GMT_NEG_9" | "EUROPE_DUBLIN" | "EUROPE_LONDON" | "EUROPE_PARIS" | "EUROPE_STOCKHOLM" | "EUROPE_ZURICH" | "ISRAEL" | "MEXICO_GENERAL" | "MST7MDT" | "PACIFIC_AUCKLAND" | "US_CENTRAL" | "US_EASTERN" | "US_MOUNTAIN" | "US_PACIFIC")?
+                                }
+                              ) -> _UpdateDataSourceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataSourceResponseSuccess
+
+      interface _UpdateDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDomainOutput]
+        def description: () -> ::String
+        def domain_execution_role: () -> ::String
+        def id: () -> ::String
+        def last_updated_at: () -> ::Time
+        def name: () -> ::String
+        def single_sign_on: () -> Types::SingleSignOn
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_domain-instance_method
+      def update_domain: (
+                           ?client_token: ::String,
+                           ?description: ::String,
+                           ?domain_execution_role: ::String,
+                           identifier: ::String,
+                           ?name: ::String,
+                           ?single_sign_on: {
+                             type: ("IAM_IDC" | "DISABLED")?,
+                             user_assignment: ("AUTOMATIC" | "MANUAL")?
+                           }
+                         ) -> _UpdateDomainResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainResponseSuccess
+
+      interface _UpdateEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEnvironmentOutput]
+        def aws_account_id: () -> ::String
+        def aws_account_region: () -> ::String
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def deployment_properties: () -> Types::DeploymentProperties
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def environment_actions: () -> ::Array[Types::ConfigurableEnvironmentAction]
+        def environment_blueprint_id: () -> ::String
+        def environment_profile_id: () -> ::String
+        def glossary_terms: () -> ::Array[::String]
+        def id: () -> ::String
+        def last_deployment: () -> Types::Deployment
+        def name: () -> ::String
+        def project_id: () -> ::String
+        def provider: () -> ::String
+        def provisioned_resources: () -> ::Array[Types::Resource]
+        def provisioning_properties: () -> Types::ProvisioningProperties
+        def status: () -> ("ACTIVE" | "CREATING" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "VALIDATION_FAILED" | "SUSPENDED" | "DISABLED" | "EXPIRED" | "DELETED" | "INACCESSIBLE")
+        def updated_at: () -> ::Time
+        def user_parameters: () -> ::Array[Types::CustomParameter]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_environment-instance_method
+      def update_environment: (
+                                ?description: ::String,
+                                domain_identifier: ::String,
+                                ?glossary_terms: Array[::String],
+                                identifier: ::String,
+                                ?name: ::String
+                              ) -> _UpdateEnvironmentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentResponseSuccess
+
+      interface _UpdateEnvironmentProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEnvironmentProfileOutput]
+        def aws_account_id: () -> ::String
+        def aws_account_region: () -> ::String
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def environment_blueprint_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def project_id: () -> ::String
+        def updated_at: () -> ::Time
+        def user_parameters: () -> ::Array[Types::CustomParameter]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_environment_profile-instance_method
+      def update_environment_profile: (
+                                        ?aws_account_id: ::String,
+                                        ?aws_account_region: ::String,
+                                        ?description: ::String,
+                                        domain_identifier: ::String,
+                                        identifier: ::String,
+                                        ?name: ::String,
+                                        ?user_parameters: Array[
+                                          {
+                                            name: ::String?,
+                                            value: ::String?
+                                          },
+                                        ]
+                                      ) -> _UpdateEnvironmentProfileResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentProfileResponseSuccess
+
+      interface _UpdateGlossaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGlossaryOutput]
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def owning_project_id: () -> ::String
+        def status: () -> ("DISABLED" | "ENABLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_glossary-instance_method
+      def update_glossary: (
+                             ?client_token: ::String,
+                             ?description: ::String,
+                             domain_identifier: ::String,
+                             identifier: ::String,
+                             ?name: ::String,
+                             ?status: ("DISABLED" | "ENABLED")
+                           ) -> _UpdateGlossaryResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGlossaryResponseSuccess
+
+      interface _UpdateGlossaryTermResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGlossaryTermOutput]
+        def domain_id: () -> ::String
+        def glossary_id: () -> ::String
+        def id: () -> ::String
+        def long_description: () -> ::String
+        def name: () -> ::String
+        def short_description: () -> ::String
+        def status: () -> ("ENABLED" | "DISABLED")
+        def term_relations: () -> Types::TermRelations
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_glossary_term-instance_method
+      def update_glossary_term: (
+                                  domain_identifier: ::String,
+                                  ?glossary_identifier: ::String,
+                                  identifier: ::String,
+                                  ?long_description: ::String,
+                                  ?name: ::String,
+                                  ?short_description: ::String,
+                                  ?status: ("ENABLED" | "DISABLED"),
+                                  ?term_relations: {
+                                    classifies: Array[::String]?,
+                                    is_a: Array[::String]?
+                                  }
+                                ) -> _UpdateGlossaryTermResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGlossaryTermResponseSuccess
+
+      interface _UpdateGroupProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGroupProfileOutput]
+        def domain_id: () -> ::String
+        def group_name: () -> ::String
+        def id: () -> ::String
+        def status: () -> ("ASSIGNED" | "NOT_ASSIGNED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_group_profile-instance_method
+      def update_group_profile: (
+                                  domain_identifier: ::String,
+                                  group_identifier: ::String,
+                                  status: ("ASSIGNED" | "NOT_ASSIGNED")
+                                ) -> _UpdateGroupProfileResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGroupProfileResponseSuccess
+
+      interface _UpdateProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProjectOutput]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def glossary_terms: () -> ::Array[::String]
+        def id: () -> ::String
+        def last_updated_at: () -> ::Time
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_project-instance_method
+      def update_project: (
+                            ?description: ::String,
+                            domain_identifier: ::String,
+                            ?glossary_terms: Array[::String],
+                            identifier: ::String,
+                            ?name: ::String
+                          ) -> _UpdateProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProjectResponseSuccess
+
+      interface _UpdateSubscriptionGrantStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSubscriptionGrantStatusOutput]
+        def assets: () -> ::Array[Types::SubscribedAsset]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def domain_id: () -> ::String
+        def granted_entity: () -> Types::GrantedEntity
+        def id: () -> ::String
+        def status: () -> ("PENDING" | "IN_PROGRESS" | "GRANT_FAILED" | "REVOKE_FAILED" | "GRANT_AND_REVOKE_FAILED" | "COMPLETED" | "INACCESSIBLE")
+        def subscription_id: () -> ::String
+        def subscription_target_id: () -> ::String
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_subscription_grant_status-instance_method
+      def update_subscription_grant_status: (
+                                              asset_identifier: ::String,
+                                              domain_identifier: ::String,
+                                              ?failure_cause: {
+                                                message: ::String?
+                                              },
+                                              identifier: ::String,
+                                              status: ("GRANT_PENDING" | "REVOKE_PENDING" | "GRANT_IN_PROGRESS" | "REVOKE_IN_PROGRESS" | "GRANTED" | "REVOKED" | "GRANT_FAILED" | "REVOKE_FAILED"),
+                                              ?target_name: ::String
+                                            ) -> _UpdateSubscriptionGrantStatusResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSubscriptionGrantStatusResponseSuccess
+
+      interface _UpdateSubscriptionRequestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSubscriptionRequestOutput]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def decision_comment: () -> ::String
+        def domain_id: () -> ::String
+        def id: () -> ::String
+        def request_reason: () -> ::String
+        def reviewer_id: () -> ::String
+        def status: () -> ("PENDING" | "ACCEPTED" | "REJECTED")
+        def subscribed_listings: () -> ::Array[Types::SubscribedListing]
+        def subscribed_principals: () -> ::Array[Types::SubscribedPrincipal]
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_subscription_request-instance_method
+      def update_subscription_request: (
+                                         domain_identifier: ::String,
+                                         identifier: ::String,
+                                         request_reason: ::String
+                                       ) -> _UpdateSubscriptionRequestResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSubscriptionRequestResponseSuccess
+
+      interface _UpdateSubscriptionTargetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSubscriptionTargetOutput]
+        def applicable_asset_types: () -> ::Array[::String]
+        def authorized_principals: () -> ::Array[::String]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def domain_id: () -> ::String
+        def environment_id: () -> ::String
+        def id: () -> ::String
+        def manage_access_role: () -> ::String
+        def name: () -> ::String
+        def project_id: () -> ::String
+        def provider: () -> ::String
+        def subscription_target_config: () -> ::Array[Types::SubscriptionTargetForm]
+        def type: () -> ::String
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_subscription_target-instance_method
+      def update_subscription_target: (
+                                        ?applicable_asset_types: Array[::String],
+                                        ?authorized_principals: Array[::String],
+                                        domain_identifier: ::String,
+                                        environment_identifier: ::String,
+                                        identifier: ::String,
+                                        ?manage_access_role: ::String,
+                                        ?name: ::String,
+                                        ?provider: ::String,
+                                        ?subscription_target_config: Array[
+                                          {
+                                            content: ::String,
+                                            form_name: ::String
+                                          },
+                                        ]
+                                      ) -> _UpdateSubscriptionTargetResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSubscriptionTargetResponseSuccess
+
+      interface _UpdateUserProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateUserProfileOutput]
+        def details: () -> Types::UserProfileDetails
+        def domain_id: () -> ::String
+        def id: () -> ::String
+        def status: () -> ("ASSIGNED" | "NOT_ASSIGNED" | "ACTIVATED" | "DEACTIVATED")
+        def type: () -> ("IAM" | "SSO")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_user_profile-instance_method
+      def update_user_profile: (
+                                 domain_identifier: ::String,
+                                 status: ("ASSIGNED" | "NOT_ASSIGNED" | "ACTIVATED" | "DEACTIVATED"),
+                                 ?type: ("IAM" | "SSO"),
+                                 user_identifier: ::String
+                               ) -> _UpdateUserProfileResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUserProfileResponseSuccess
+    end
+  end
+end
+

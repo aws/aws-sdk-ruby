@@ -1,0 +1,36 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SageMakerMetrics
+  module Types
+
+    class BatchPutMetricsError
+      attr_accessor code: ("METRIC_LIMIT_EXCEEDED" | "INTERNAL_ERROR" | "VALIDATION_ERROR" | "CONFLICT_ERROR")
+      attr_accessor metric_index: ::Integer
+      SENSITIVE: []
+    end
+
+    class BatchPutMetricsRequest
+      attr_accessor trial_component_name: ::String
+      attr_accessor metric_data: ::Array[Types::RawMetricData]
+      SENSITIVE: []
+    end
+
+    class BatchPutMetricsResponse
+      attr_accessor errors: ::Array[Types::BatchPutMetricsError]
+      SENSITIVE: []
+    end
+
+    class RawMetricData
+      attr_accessor metric_name: ::String
+      attr_accessor timestamp: ::Time
+      attr_accessor step: ::Integer
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+  end
+end

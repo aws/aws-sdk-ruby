@@ -1,0 +1,1525 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Backup
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CancelLegalHoldResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelLegalHoldOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#cancel_legal_hold-instance_method
+      def cancel_legal_hold: (
+                               legal_hold_id: ::String,
+                               cancel_description: ::String,
+                               ?retain_record_in_days: ::Integer
+                             ) -> _CancelLegalHoldResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelLegalHoldResponseSuccess
+
+      interface _CreateBackupPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBackupPlanOutput]
+        def backup_plan_id: () -> ::String
+        def backup_plan_arn: () -> ::String
+        def creation_date: () -> ::Time
+        def version_id: () -> ::String
+        def advanced_backup_settings: () -> ::Array[Types::AdvancedBackupSetting]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#create_backup_plan-instance_method
+      def create_backup_plan: (
+                                backup_plan: {
+                                  backup_plan_name: ::String,
+                                  rules: Array[
+                                    {
+                                      rule_name: ::String,
+                                      target_backup_vault_name: ::String,
+                                      schedule_expression: ::String?,
+                                      start_window_minutes: ::Integer?,
+                                      completion_window_minutes: ::Integer?,
+                                      lifecycle: {
+                                        move_to_cold_storage_after_days: ::Integer?,
+                                        delete_after_days: ::Integer?,
+                                        opt_in_to_archive_for_supported_resources: bool?
+                                      }?,
+                                      recovery_point_tags: Hash[::String, ::String]?,
+                                      copy_actions: Array[
+                                        {
+                                          lifecycle: {
+                                            move_to_cold_storage_after_days: ::Integer?,
+                                            delete_after_days: ::Integer?,
+                                            opt_in_to_archive_for_supported_resources: bool?
+                                          }?,
+                                          destination_backup_vault_arn: ::String
+                                        },
+                                      ]?,
+                                      enable_continuous_backup: bool?,
+                                      schedule_expression_timezone: ::String?
+                                    },
+                                  ],
+                                  advanced_backup_settings: Array[
+                                    {
+                                      resource_type: ::String?,
+                                      backup_options: Hash[::String, ::String]?
+                                    },
+                                  ]?
+                                },
+                                ?backup_plan_tags: Hash[::String, ::String],
+                                ?creator_request_id: ::String
+                              ) -> _CreateBackupPlanResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBackupPlanResponseSuccess
+
+      interface _CreateBackupSelectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBackupSelectionOutput]
+        def selection_id: () -> ::String
+        def backup_plan_id: () -> ::String
+        def creation_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#create_backup_selection-instance_method
+      def create_backup_selection: (
+                                     backup_plan_id: ::String,
+                                     backup_selection: {
+                                       selection_name: ::String,
+                                       iam_role_arn: ::String,
+                                       resources: Array[::String]?,
+                                       list_of_tags: Array[
+                                         {
+                                           condition_type: ("STRINGEQUALS"),
+                                           condition_key: ::String,
+                                           condition_value: ::String
+                                         },
+                                       ]?,
+                                       not_resources: Array[::String]?,
+                                       conditions: {
+                                         string_equals: Array[
+                                           {
+                                             condition_key: ::String?,
+                                             condition_value: ::String?
+                                           },
+                                         ]?,
+                                         string_not_equals: Array[
+                                           {
+                                             condition_key: ::String?,
+                                             condition_value: ::String?
+                                           },
+                                         ]?,
+                                         string_like: Array[
+                                           {
+                                             condition_key: ::String?,
+                                             condition_value: ::String?
+                                           },
+                                         ]?,
+                                         string_not_like: Array[
+                                           {
+                                             condition_key: ::String?,
+                                             condition_value: ::String?
+                                           },
+                                         ]?
+                                       }?
+                                     },
+                                     ?creator_request_id: ::String
+                                   ) -> _CreateBackupSelectionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBackupSelectionResponseSuccess
+
+      interface _CreateBackupVaultResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBackupVaultOutput]
+        def backup_vault_name: () -> ::String
+        def backup_vault_arn: () -> ::String
+        def creation_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#create_backup_vault-instance_method
+      def create_backup_vault: (
+                                 backup_vault_name: ::String,
+                                 ?backup_vault_tags: Hash[::String, ::String],
+                                 ?encryption_key_arn: ::String,
+                                 ?creator_request_id: ::String
+                               ) -> _CreateBackupVaultResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBackupVaultResponseSuccess
+
+      interface _CreateFrameworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFrameworkOutput]
+        def framework_name: () -> ::String
+        def framework_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#create_framework-instance_method
+      def create_framework: (
+                              framework_name: ::String,
+                              ?framework_description: ::String,
+                              framework_controls: Array[
+                                {
+                                  control_name: ::String,
+                                  control_input_parameters: Array[
+                                    {
+                                      parameter_name: ::String?,
+                                      parameter_value: ::String?
+                                    },
+                                  ]?,
+                                  control_scope: {
+                                    compliance_resource_ids: Array[::String]?,
+                                    compliance_resource_types: Array[::String]?,
+                                    tags: Hash[::String, ::String]?
+                                  }?
+                                },
+                              ],
+                              ?idempotency_token: ::String,
+                              ?framework_tags: Hash[::String, ::String]
+                            ) -> _CreateFrameworkResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFrameworkResponseSuccess
+
+      interface _CreateLegalHoldResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLegalHoldOutput]
+        def title: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "CANCELING" | "CANCELED")
+        def description: () -> ::String
+        def legal_hold_id: () -> ::String
+        def legal_hold_arn: () -> ::String
+        def creation_date: () -> ::Time
+        def recovery_point_selection: () -> Types::RecoveryPointSelection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#create_legal_hold-instance_method
+      def create_legal_hold: (
+                               title: ::String,
+                               description: ::String,
+                               ?idempotency_token: ::String,
+                               ?recovery_point_selection: {
+                                 vault_names: Array[::String]?,
+                                 resource_identifiers: Array[::String]?,
+                                 date_range: {
+                                   from_date: ::Time,
+                                   to_date: ::Time
+                                 }?
+                               },
+                               ?tags: Hash[::String, ::String]
+                             ) -> _CreateLegalHoldResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLegalHoldResponseSuccess
+
+      interface _CreateLogicallyAirGappedBackupVaultResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLogicallyAirGappedBackupVaultOutput]
+        def backup_vault_name: () -> ::String
+        def backup_vault_arn: () -> ::String
+        def creation_date: () -> ::Time
+        def vault_state: () -> ("CREATING" | "AVAILABLE" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#create_logically_air_gapped_backup_vault-instance_method
+      def create_logically_air_gapped_backup_vault: (
+                                                      backup_vault_name: ::String,
+                                                      ?backup_vault_tags: Hash[::String, ::String],
+                                                      ?creator_request_id: ::String,
+                                                      min_retention_days: ::Integer,
+                                                      max_retention_days: ::Integer
+                                                    ) -> _CreateLogicallyAirGappedBackupVaultResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLogicallyAirGappedBackupVaultResponseSuccess
+
+      interface _CreateReportPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateReportPlanOutput]
+        def report_plan_name: () -> ::String
+        def report_plan_arn: () -> ::String
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#create_report_plan-instance_method
+      def create_report_plan: (
+                                report_plan_name: ::String,
+                                ?report_plan_description: ::String,
+                                report_delivery_channel: {
+                                  s3_bucket_name: ::String,
+                                  s3_key_prefix: ::String?,
+                                  formats: Array[::String]?
+                                },
+                                report_setting: {
+                                  report_template: ::String,
+                                  framework_arns: Array[::String]?,
+                                  number_of_frameworks: ::Integer?,
+                                  accounts: Array[::String]?,
+                                  organization_units: Array[::String]?,
+                                  regions: Array[::String]?
+                                },
+                                ?report_plan_tags: Hash[::String, ::String],
+                                ?idempotency_token: ::String
+                              ) -> _CreateReportPlanResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateReportPlanResponseSuccess
+
+      interface _CreateRestoreTestingPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRestoreTestingPlanOutput]
+        def creation_time: () -> ::Time
+        def restore_testing_plan_arn: () -> ::String
+        def restore_testing_plan_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#create_restore_testing_plan-instance_method
+      def create_restore_testing_plan: (
+                                         ?creator_request_id: ::String,
+                                         restore_testing_plan: {
+                                           recovery_point_selection: {
+                                             algorithm: ("LATEST_WITHIN_WINDOW" | "RANDOM_WITHIN_WINDOW")?,
+                                             exclude_vaults: Array[::String]?,
+                                             include_vaults: Array[::String]?,
+                                             recovery_point_types: Array[("CONTINUOUS" | "SNAPSHOT")]?,
+                                             selection_window_days: ::Integer?
+                                           },
+                                           restore_testing_plan_name: ::String,
+                                           schedule_expression: ::String,
+                                           schedule_expression_timezone: ::String?,
+                                           start_window_hours: ::Integer?
+                                         },
+                                         ?tags: Hash[::String, ::String]
+                                       ) -> _CreateRestoreTestingPlanResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRestoreTestingPlanResponseSuccess
+
+      interface _CreateRestoreTestingSelectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRestoreTestingSelectionOutput]
+        def creation_time: () -> ::Time
+        def restore_testing_plan_arn: () -> ::String
+        def restore_testing_plan_name: () -> ::String
+        def restore_testing_selection_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#create_restore_testing_selection-instance_method
+      def create_restore_testing_selection: (
+                                              ?creator_request_id: ::String,
+                                              restore_testing_plan_name: ::String,
+                                              restore_testing_selection: {
+                                                iam_role_arn: ::String,
+                                                protected_resource_arns: Array[::String]?,
+                                                protected_resource_conditions: {
+                                                  string_equals: Array[
+                                                    {
+                                                      key: ::String,
+                                                      value: ::String
+                                                    },
+                                                  ]?,
+                                                  string_not_equals: Array[
+                                                    {
+                                                      key: ::String,
+                                                      value: ::String
+                                                    },
+                                                  ]?
+                                                }?,
+                                                protected_resource_type: ::String,
+                                                restore_metadata_overrides: Hash[::String, ::String]?,
+                                                restore_testing_selection_name: ::String,
+                                                validation_window_hours: ::Integer?
+                                              }
+                                            ) -> _CreateRestoreTestingSelectionResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRestoreTestingSelectionResponseSuccess
+
+      interface _DeleteBackupPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBackupPlanOutput]
+        def backup_plan_id: () -> ::String
+        def backup_plan_arn: () -> ::String
+        def deletion_date: () -> ::Time
+        def version_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#delete_backup_plan-instance_method
+      def delete_backup_plan: (
+                                backup_plan_id: ::String
+                              ) -> _DeleteBackupPlanResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBackupPlanResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#delete_backup_selection-instance_method
+      def delete_backup_selection: (
+                                     backup_plan_id: ::String,
+                                     selection_id: ::String
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#delete_backup_vault-instance_method
+      def delete_backup_vault: (
+                                 backup_vault_name: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#delete_backup_vault_access_policy-instance_method
+      def delete_backup_vault_access_policy: (
+                                               backup_vault_name: ::String
+                                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#delete_backup_vault_lock_configuration-instance_method
+      def delete_backup_vault_lock_configuration: (
+                                                    backup_vault_name: ::String
+                                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#delete_backup_vault_notifications-instance_method
+      def delete_backup_vault_notifications: (
+                                               backup_vault_name: ::String
+                                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#delete_framework-instance_method
+      def delete_framework: (
+                              framework_name: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#delete_recovery_point-instance_method
+      def delete_recovery_point: (
+                                   backup_vault_name: ::String,
+                                   recovery_point_arn: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#delete_report_plan-instance_method
+      def delete_report_plan: (
+                                report_plan_name: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#delete_restore_testing_plan-instance_method
+      def delete_restore_testing_plan: (
+                                         restore_testing_plan_name: ::String
+                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#delete_restore_testing_selection-instance_method
+      def delete_restore_testing_selection: (
+                                              restore_testing_plan_name: ::String,
+                                              restore_testing_selection_name: ::String
+                                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeBackupJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBackupJobOutput]
+        def account_id: () -> ::String
+        def backup_job_id: () -> ::String
+        def backup_vault_name: () -> ::String
+        def backup_vault_arn: () -> ::String
+        def recovery_point_arn: () -> ::String
+        def resource_arn: () -> ::String
+        def creation_date: () -> ::Time
+        def completion_date: () -> ::Time
+        def state: () -> ("CREATED" | "PENDING" | "RUNNING" | "ABORTING" | "ABORTED" | "COMPLETED" | "FAILED" | "EXPIRED" | "PARTIAL")
+        def status_message: () -> ::String
+        def percent_done: () -> ::String
+        def backup_size_in_bytes: () -> ::Integer
+        def iam_role_arn: () -> ::String
+        def created_by: () -> Types::RecoveryPointCreator
+        def resource_type: () -> ::String
+        def bytes_transferred: () -> ::Integer
+        def expected_completion_date: () -> ::Time
+        def start_by: () -> ::Time
+        def backup_options: () -> ::Hash[::String, ::String]
+        def backup_type: () -> ::String
+        def parent_job_id: () -> ::String
+        def is_parent: () -> bool
+        def number_of_child_jobs: () -> ::Integer
+        def child_jobs_in_state: () -> ::Hash[("CREATED" | "PENDING" | "RUNNING" | "ABORTING" | "ABORTED" | "COMPLETED" | "FAILED" | "EXPIRED" | "PARTIAL"), ::Integer]
+        def resource_name: () -> ::String
+        def initiation_date: () -> ::Time
+        def message_category: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#describe_backup_job-instance_method
+      def describe_backup_job: (
+                                 backup_job_id: ::String
+                               ) -> _DescribeBackupJobResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBackupJobResponseSuccess
+
+      interface _DescribeBackupVaultResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBackupVaultOutput]
+        def backup_vault_name: () -> ::String
+        def backup_vault_arn: () -> ::String
+        def vault_type: () -> ("BACKUP_VAULT" | "LOGICALLY_AIR_GAPPED_BACKUP_VAULT")
+        def encryption_key_arn: () -> ::String
+        def creation_date: () -> ::Time
+        def creator_request_id: () -> ::String
+        def number_of_recovery_points: () -> ::Integer
+        def locked: () -> bool
+        def min_retention_days: () -> ::Integer
+        def max_retention_days: () -> ::Integer
+        def lock_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#describe_backup_vault-instance_method
+      def describe_backup_vault: (
+                                   backup_vault_name: ::String,
+                                   ?backup_vault_account_id: ::String
+                                 ) -> _DescribeBackupVaultResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBackupVaultResponseSuccess
+
+      interface _DescribeCopyJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCopyJobOutput]
+        def copy_job: () -> Types::CopyJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#describe_copy_job-instance_method
+      def describe_copy_job: (
+                               copy_job_id: ::String
+                             ) -> _DescribeCopyJobResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCopyJobResponseSuccess
+
+      interface _DescribeFrameworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFrameworkOutput]
+        def framework_name: () -> ::String
+        def framework_arn: () -> ::String
+        def framework_description: () -> ::String
+        def framework_controls: () -> ::Array[Types::FrameworkControl]
+        def creation_time: () -> ::Time
+        def deployment_status: () -> ::String
+        def framework_status: () -> ::String
+        def idempotency_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#describe_framework-instance_method
+      def describe_framework: (
+                                framework_name: ::String
+                              ) -> _DescribeFrameworkResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFrameworkResponseSuccess
+
+      interface _DescribeGlobalSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGlobalSettingsOutput]
+        def global_settings: () -> ::Hash[::String, ::String]
+        def last_update_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#describe_global_settings-instance_method
+      def describe_global_settings: (
+                                    ) -> _DescribeGlobalSettingsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeGlobalSettingsResponseSuccess
+
+      interface _DescribeProtectedResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeProtectedResourceOutput]
+        def resource_arn: () -> ::String
+        def resource_type: () -> ::String
+        def last_backup_time: () -> ::Time
+        def resource_name: () -> ::String
+        def last_backup_vault_arn: () -> ::String
+        def last_recovery_point_arn: () -> ::String
+        def latest_restore_execution_time_minutes: () -> ::Integer
+        def latest_restore_job_creation_date: () -> ::Time
+        def latest_restore_recovery_point_creation_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#describe_protected_resource-instance_method
+      def describe_protected_resource: (
+                                         resource_arn: ::String
+                                       ) -> _DescribeProtectedResourceResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeProtectedResourceResponseSuccess
+
+      interface _DescribeRecoveryPointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRecoveryPointOutput]
+        def recovery_point_arn: () -> ::String
+        def backup_vault_name: () -> ::String
+        def backup_vault_arn: () -> ::String
+        def source_backup_vault_arn: () -> ::String
+        def resource_arn: () -> ::String
+        def resource_type: () -> ::String
+        def created_by: () -> Types::RecoveryPointCreator
+        def iam_role_arn: () -> ::String
+        def status: () -> ("COMPLETED" | "PARTIAL" | "DELETING" | "EXPIRED")
+        def status_message: () -> ::String
+        def creation_date: () -> ::Time
+        def completion_date: () -> ::Time
+        def backup_size_in_bytes: () -> ::Integer
+        def calculated_lifecycle: () -> Types::CalculatedLifecycle
+        def lifecycle: () -> Types::Lifecycle
+        def encryption_key_arn: () -> ::String
+        def is_encrypted: () -> bool
+        def storage_class: () -> ("WARM" | "COLD" | "DELETED")
+        def last_restore_time: () -> ::Time
+        def parent_recovery_point_arn: () -> ::String
+        def composite_member_identifier: () -> ::String
+        def is_parent: () -> bool
+        def resource_name: () -> ::String
+        def vault_type: () -> ("BACKUP_VAULT" | "LOGICALLY_AIR_GAPPED_BACKUP_VAULT")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#describe_recovery_point-instance_method
+      def describe_recovery_point: (
+                                     backup_vault_name: ::String,
+                                     recovery_point_arn: ::String,
+                                     ?backup_vault_account_id: ::String
+                                   ) -> _DescribeRecoveryPointResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRecoveryPointResponseSuccess
+
+      interface _DescribeRegionSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRegionSettingsOutput]
+        def resource_type_opt_in_preference: () -> ::Hash[::String, bool]
+        def resource_type_management_preference: () -> ::Hash[::String, bool]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#describe_region_settings-instance_method
+      def describe_region_settings: (
+                                    ) -> _DescribeRegionSettingsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRegionSettingsResponseSuccess
+
+      interface _DescribeReportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReportJobOutput]
+        def report_job: () -> Types::ReportJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#describe_report_job-instance_method
+      def describe_report_job: (
+                                 report_job_id: ::String
+                               ) -> _DescribeReportJobResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReportJobResponseSuccess
+
+      interface _DescribeReportPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReportPlanOutput]
+        def report_plan: () -> Types::ReportPlan
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#describe_report_plan-instance_method
+      def describe_report_plan: (
+                                  report_plan_name: ::String
+                                ) -> _DescribeReportPlanResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReportPlanResponseSuccess
+
+      interface _DescribeRestoreJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRestoreJobOutput]
+        def account_id: () -> ::String
+        def restore_job_id: () -> ::String
+        def recovery_point_arn: () -> ::String
+        def creation_date: () -> ::Time
+        def completion_date: () -> ::Time
+        def status: () -> ("PENDING" | "RUNNING" | "COMPLETED" | "ABORTED" | "FAILED")
+        def status_message: () -> ::String
+        def percent_done: () -> ::String
+        def backup_size_in_bytes: () -> ::Integer
+        def iam_role_arn: () -> ::String
+        def expected_completion_time_minutes: () -> ::Integer
+        def created_resource_arn: () -> ::String
+        def resource_type: () -> ::String
+        def recovery_point_creation_date: () -> ::Time
+        def created_by: () -> Types::RestoreJobCreator
+        def validation_status: () -> ("FAILED" | "SUCCESSFUL" | "TIMED_OUT" | "VALIDATING")
+        def validation_status_message: () -> ::String
+        def deletion_status: () -> ("DELETING" | "FAILED" | "SUCCESSFUL")
+        def deletion_status_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#describe_restore_job-instance_method
+      def describe_restore_job: (
+                                  restore_job_id: ::String
+                                ) -> _DescribeRestoreJobResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRestoreJobResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#disassociate_recovery_point-instance_method
+      def disassociate_recovery_point: (
+                                         backup_vault_name: ::String,
+                                         recovery_point_arn: ::String
+                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#disassociate_recovery_point_from_parent-instance_method
+      def disassociate_recovery_point_from_parent: (
+                                                     backup_vault_name: ::String,
+                                                     recovery_point_arn: ::String
+                                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _ExportBackupPlanTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExportBackupPlanTemplateOutput]
+        def backup_plan_template_json: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#export_backup_plan_template-instance_method
+      def export_backup_plan_template: (
+                                         backup_plan_id: ::String
+                                       ) -> _ExportBackupPlanTemplateResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportBackupPlanTemplateResponseSuccess
+
+      interface _GetBackupPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBackupPlanOutput]
+        def backup_plan: () -> Types::BackupPlan
+        def backup_plan_id: () -> ::String
+        def backup_plan_arn: () -> ::String
+        def version_id: () -> ::String
+        def creator_request_id: () -> ::String
+        def creation_date: () -> ::Time
+        def deletion_date: () -> ::Time
+        def last_execution_date: () -> ::Time
+        def advanced_backup_settings: () -> ::Array[Types::AdvancedBackupSetting]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#get_backup_plan-instance_method
+      def get_backup_plan: (
+                             backup_plan_id: ::String,
+                             ?version_id: ::String
+                           ) -> _GetBackupPlanResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBackupPlanResponseSuccess
+
+      interface _GetBackupPlanFromJSONResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBackupPlanFromJSONOutput]
+        def backup_plan: () -> Types::BackupPlan
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#get_backup_plan_from_json-instance_method
+      def get_backup_plan_from_json: (
+                                       backup_plan_template_json: ::String
+                                     ) -> _GetBackupPlanFromJSONResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBackupPlanFromJSONResponseSuccess
+
+      interface _GetBackupPlanFromTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBackupPlanFromTemplateOutput]
+        def backup_plan_document: () -> Types::BackupPlan
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#get_backup_plan_from_template-instance_method
+      def get_backup_plan_from_template: (
+                                           backup_plan_template_id: ::String
+                                         ) -> _GetBackupPlanFromTemplateResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBackupPlanFromTemplateResponseSuccess
+
+      interface _GetBackupSelectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBackupSelectionOutput]
+        def backup_selection: () -> Types::BackupSelection
+        def selection_id: () -> ::String
+        def backup_plan_id: () -> ::String
+        def creation_date: () -> ::Time
+        def creator_request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#get_backup_selection-instance_method
+      def get_backup_selection: (
+                                  backup_plan_id: ::String,
+                                  selection_id: ::String
+                                ) -> _GetBackupSelectionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBackupSelectionResponseSuccess
+
+      interface _GetBackupVaultAccessPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBackupVaultAccessPolicyOutput]
+        def backup_vault_name: () -> ::String
+        def backup_vault_arn: () -> ::String
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#get_backup_vault_access_policy-instance_method
+      def get_backup_vault_access_policy: (
+                                            backup_vault_name: ::String
+                                          ) -> _GetBackupVaultAccessPolicyResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBackupVaultAccessPolicyResponseSuccess
+
+      interface _GetBackupVaultNotificationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBackupVaultNotificationsOutput]
+        def backup_vault_name: () -> ::String
+        def backup_vault_arn: () -> ::String
+        def sns_topic_arn: () -> ::String
+        def backup_vault_events: () -> ::Array[("BACKUP_JOB_STARTED" | "BACKUP_JOB_COMPLETED" | "BACKUP_JOB_SUCCESSFUL" | "BACKUP_JOB_FAILED" | "BACKUP_JOB_EXPIRED" | "RESTORE_JOB_STARTED" | "RESTORE_JOB_COMPLETED" | "RESTORE_JOB_SUCCESSFUL" | "RESTORE_JOB_FAILED" | "COPY_JOB_STARTED" | "COPY_JOB_SUCCESSFUL" | "COPY_JOB_FAILED" | "RECOVERY_POINT_MODIFIED" | "BACKUP_PLAN_CREATED" | "BACKUP_PLAN_MODIFIED" | "S3_BACKUP_OBJECT_FAILED" | "S3_RESTORE_OBJECT_FAILED")]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#get_backup_vault_notifications-instance_method
+      def get_backup_vault_notifications: (
+                                            backup_vault_name: ::String
+                                          ) -> _GetBackupVaultNotificationsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBackupVaultNotificationsResponseSuccess
+
+      interface _GetLegalHoldResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLegalHoldOutput]
+        def title: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "CANCELING" | "CANCELED")
+        def description: () -> ::String
+        def cancel_description: () -> ::String
+        def legal_hold_id: () -> ::String
+        def legal_hold_arn: () -> ::String
+        def creation_date: () -> ::Time
+        def cancellation_date: () -> ::Time
+        def retain_record_until: () -> ::Time
+        def recovery_point_selection: () -> Types::RecoveryPointSelection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#get_legal_hold-instance_method
+      def get_legal_hold: (
+                            legal_hold_id: ::String
+                          ) -> _GetLegalHoldResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLegalHoldResponseSuccess
+
+      interface _GetRecoveryPointRestoreMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRecoveryPointRestoreMetadataOutput]
+        def backup_vault_arn: () -> ::String
+        def recovery_point_arn: () -> ::String
+        def restore_metadata: () -> ::Hash[::String, ::String]
+        def resource_type: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#get_recovery_point_restore_metadata-instance_method
+      def get_recovery_point_restore_metadata: (
+                                                 backup_vault_name: ::String,
+                                                 recovery_point_arn: ::String,
+                                                 ?backup_vault_account_id: ::String
+                                               ) -> _GetRecoveryPointRestoreMetadataResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRecoveryPointRestoreMetadataResponseSuccess
+
+      interface _GetRestoreJobMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRestoreJobMetadataOutput]
+        def restore_job_id: () -> ::String
+        def metadata: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#get_restore_job_metadata-instance_method
+      def get_restore_job_metadata: (
+                                      restore_job_id: ::String
+                                    ) -> _GetRestoreJobMetadataResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRestoreJobMetadataResponseSuccess
+
+      interface _GetRestoreTestingInferredMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRestoreTestingInferredMetadataOutput]
+        def inferred_metadata: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#get_restore_testing_inferred_metadata-instance_method
+      def get_restore_testing_inferred_metadata: (
+                                                   ?backup_vault_account_id: ::String,
+                                                   backup_vault_name: ::String,
+                                                   recovery_point_arn: ::String
+                                                 ) -> _GetRestoreTestingInferredMetadataResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRestoreTestingInferredMetadataResponseSuccess
+
+      interface _GetRestoreTestingPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRestoreTestingPlanOutput]
+        def restore_testing_plan: () -> Types::RestoreTestingPlanForGet
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#get_restore_testing_plan-instance_method
+      def get_restore_testing_plan: (
+                                      restore_testing_plan_name: ::String
+                                    ) -> _GetRestoreTestingPlanResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRestoreTestingPlanResponseSuccess
+
+      interface _GetRestoreTestingSelectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRestoreTestingSelectionOutput]
+        def restore_testing_selection: () -> Types::RestoreTestingSelectionForGet
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#get_restore_testing_selection-instance_method
+      def get_restore_testing_selection: (
+                                           restore_testing_plan_name: ::String,
+                                           restore_testing_selection_name: ::String
+                                         ) -> _GetRestoreTestingSelectionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRestoreTestingSelectionResponseSuccess
+
+      interface _GetSupportedResourceTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSupportedResourceTypesOutput]
+        def resource_types: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#get_supported_resource_types-instance_method
+      def get_supported_resource_types: () -> _GetSupportedResourceTypesResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSupportedResourceTypesResponseSuccess
+
+      interface _ListBackupJobSummariesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBackupJobSummariesOutput]
+        def backup_job_summaries: () -> ::Array[Types::BackupJobSummary]
+        def aggregation_period: () -> ::String
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_backup_job_summaries-instance_method
+      def list_backup_job_summaries: (
+                                       ?account_id: ::String,
+                                       ?state: ("CREATED" | "PENDING" | "RUNNING" | "ABORTING" | "ABORTED" | "COMPLETED" | "FAILED" | "EXPIRED" | "PARTIAL" | "AGGREGATE_ALL" | "ANY"),
+                                       ?resource_type: ::String,
+                                       ?message_category: ::String,
+                                       ?aggregation_period: ("ONE_DAY" | "SEVEN_DAYS" | "FOURTEEN_DAYS"),
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListBackupJobSummariesResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBackupJobSummariesResponseSuccess
+
+      interface _ListBackupJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBackupJobsOutput]
+        def backup_jobs: () -> ::Array[Types::BackupJob]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_backup_jobs-instance_method
+      def list_backup_jobs: (
+                              ?next_token: ::String,
+                              ?max_results: ::Integer,
+                              ?by_resource_arn: ::String,
+                              ?by_state: ("CREATED" | "PENDING" | "RUNNING" | "ABORTING" | "ABORTED" | "COMPLETED" | "FAILED" | "EXPIRED" | "PARTIAL"),
+                              ?by_backup_vault_name: ::String,
+                              ?by_created_before: ::Time,
+                              ?by_created_after: ::Time,
+                              ?by_resource_type: ::String,
+                              ?by_account_id: ::String,
+                              ?by_complete_after: ::Time,
+                              ?by_complete_before: ::Time,
+                              ?by_parent_job_id: ::String,
+                              ?by_message_category: ::String
+                            ) -> _ListBackupJobsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBackupJobsResponseSuccess
+
+      interface _ListBackupPlanTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBackupPlanTemplatesOutput]
+        def next_token: () -> ::String
+        def backup_plan_templates_list: () -> ::Array[Types::BackupPlanTemplatesListMember]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_backup_plan_templates-instance_method
+      def list_backup_plan_templates: (
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer
+                                      ) -> _ListBackupPlanTemplatesResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBackupPlanTemplatesResponseSuccess
+
+      interface _ListBackupPlanVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBackupPlanVersionsOutput]
+        def next_token: () -> ::String
+        def backup_plan_versions_list: () -> ::Array[Types::BackupPlansListMember]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_backup_plan_versions-instance_method
+      def list_backup_plan_versions: (
+                                       backup_plan_id: ::String,
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _ListBackupPlanVersionsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBackupPlanVersionsResponseSuccess
+
+      interface _ListBackupPlansResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBackupPlansOutput]
+        def next_token: () -> ::String
+        def backup_plans_list: () -> ::Array[Types::BackupPlansListMember]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_backup_plans-instance_method
+      def list_backup_plans: (
+                               ?next_token: ::String,
+                               ?max_results: ::Integer,
+                               ?include_deleted: bool
+                             ) -> _ListBackupPlansResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBackupPlansResponseSuccess
+
+      interface _ListBackupSelectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBackupSelectionsOutput]
+        def next_token: () -> ::String
+        def backup_selections_list: () -> ::Array[Types::BackupSelectionsListMember]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_backup_selections-instance_method
+      def list_backup_selections: (
+                                    backup_plan_id: ::String,
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListBackupSelectionsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBackupSelectionsResponseSuccess
+
+      interface _ListBackupVaultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBackupVaultsOutput]
+        def backup_vault_list: () -> ::Array[Types::BackupVaultListMember]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_backup_vaults-instance_method
+      def list_backup_vaults: (
+                                ?by_vault_type: ("BACKUP_VAULT" | "LOGICALLY_AIR_GAPPED_BACKUP_VAULT"),
+                                ?by_shared: bool,
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _ListBackupVaultsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBackupVaultsResponseSuccess
+
+      interface _ListCopyJobSummariesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCopyJobSummariesOutput]
+        def copy_job_summaries: () -> ::Array[Types::CopyJobSummary]
+        def aggregation_period: () -> ::String
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_copy_job_summaries-instance_method
+      def list_copy_job_summaries: (
+                                     ?account_id: ::String,
+                                     ?state: ("CREATED" | "RUNNING" | "ABORTING" | "ABORTED" | "COMPLETING" | "COMPLETED" | "FAILING" | "FAILED" | "PARTIAL" | "AGGREGATE_ALL" | "ANY"),
+                                     ?resource_type: ::String,
+                                     ?message_category: ::String,
+                                     ?aggregation_period: ("ONE_DAY" | "SEVEN_DAYS" | "FOURTEEN_DAYS"),
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListCopyJobSummariesResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCopyJobSummariesResponseSuccess
+
+      interface _ListCopyJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCopyJobsOutput]
+        def copy_jobs: () -> ::Array[Types::CopyJob]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_copy_jobs-instance_method
+      def list_copy_jobs: (
+                            ?next_token: ::String,
+                            ?max_results: ::Integer,
+                            ?by_resource_arn: ::String,
+                            ?by_state: ("CREATED" | "RUNNING" | "COMPLETED" | "FAILED" | "PARTIAL"),
+                            ?by_created_before: ::Time,
+                            ?by_created_after: ::Time,
+                            ?by_resource_type: ::String,
+                            ?by_destination_vault_arn: ::String,
+                            ?by_account_id: ::String,
+                            ?by_complete_before: ::Time,
+                            ?by_complete_after: ::Time,
+                            ?by_parent_job_id: ::String,
+                            ?by_message_category: ::String
+                          ) -> _ListCopyJobsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCopyJobsResponseSuccess
+
+      interface _ListFrameworksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFrameworksOutput]
+        def frameworks: () -> ::Array[Types::Framework]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_frameworks-instance_method
+      def list_frameworks: (
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListFrameworksResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFrameworksResponseSuccess
+
+      interface _ListLegalHoldsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLegalHoldsOutput]
+        def next_token: () -> ::String
+        def legal_holds: () -> ::Array[Types::LegalHold]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_legal_holds-instance_method
+      def list_legal_holds: (
+                              ?next_token: ::String,
+                              ?max_results: ::Integer
+                            ) -> _ListLegalHoldsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLegalHoldsResponseSuccess
+
+      interface _ListProtectedResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProtectedResourcesOutput]
+        def results: () -> ::Array[Types::ProtectedResource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_protected_resources-instance_method
+      def list_protected_resources: (
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListProtectedResourcesResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProtectedResourcesResponseSuccess
+
+      interface _ListProtectedResourcesByBackupVaultResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProtectedResourcesByBackupVaultOutput]
+        def results: () -> ::Array[Types::ProtectedResource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_protected_resources_by_backup_vault-instance_method
+      def list_protected_resources_by_backup_vault: (
+                                                      backup_vault_name: ::String,
+                                                      ?backup_vault_account_id: ::String,
+                                                      ?next_token: ::String,
+                                                      ?max_results: ::Integer
+                                                    ) -> _ListProtectedResourcesByBackupVaultResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProtectedResourcesByBackupVaultResponseSuccess
+
+      interface _ListRecoveryPointsByBackupVaultResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecoveryPointsByBackupVaultOutput]
+        def next_token: () -> ::String
+        def recovery_points: () -> ::Array[Types::RecoveryPointByBackupVault]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_recovery_points_by_backup_vault-instance_method
+      def list_recovery_points_by_backup_vault: (
+                                                  backup_vault_name: ::String,
+                                                  ?backup_vault_account_id: ::String,
+                                                  ?next_token: ::String,
+                                                  ?max_results: ::Integer,
+                                                  ?by_resource_arn: ::String,
+                                                  ?by_resource_type: ::String,
+                                                  ?by_backup_plan_id: ::String,
+                                                  ?by_created_before: ::Time,
+                                                  ?by_created_after: ::Time,
+                                                  ?by_parent_recovery_point_arn: ::String
+                                                ) -> _ListRecoveryPointsByBackupVaultResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecoveryPointsByBackupVaultResponseSuccess
+
+      interface _ListRecoveryPointsByLegalHoldResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecoveryPointsByLegalHoldOutput]
+        def recovery_points: () -> ::Array[Types::RecoveryPointMember]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_recovery_points_by_legal_hold-instance_method
+      def list_recovery_points_by_legal_hold: (
+                                                legal_hold_id: ::String,
+                                                ?next_token: ::String,
+                                                ?max_results: ::Integer
+                                              ) -> _ListRecoveryPointsByLegalHoldResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecoveryPointsByLegalHoldResponseSuccess
+
+      interface _ListRecoveryPointsByResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecoveryPointsByResourceOutput]
+        def next_token: () -> ::String
+        def recovery_points: () -> ::Array[Types::RecoveryPointByResource]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_recovery_points_by_resource-instance_method
+      def list_recovery_points_by_resource: (
+                                              resource_arn: ::String,
+                                              ?next_token: ::String,
+                                              ?max_results: ::Integer
+                                            ) -> _ListRecoveryPointsByResourceResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecoveryPointsByResourceResponseSuccess
+
+      interface _ListReportJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReportJobsOutput]
+        def report_jobs: () -> ::Array[Types::ReportJob]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_report_jobs-instance_method
+      def list_report_jobs: (
+                              ?by_report_plan_name: ::String,
+                              ?by_creation_before: ::Time,
+                              ?by_creation_after: ::Time,
+                              ?by_status: ::String,
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _ListReportJobsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReportJobsResponseSuccess
+
+      interface _ListReportPlansResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReportPlansOutput]
+        def report_plans: () -> ::Array[Types::ReportPlan]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_report_plans-instance_method
+      def list_report_plans: (
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListReportPlansResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReportPlansResponseSuccess
+
+      interface _ListRestoreJobSummariesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRestoreJobSummariesOutput]
+        def restore_job_summaries: () -> ::Array[Types::RestoreJobSummary]
+        def aggregation_period: () -> ::String
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_restore_job_summaries-instance_method
+      def list_restore_job_summaries: (
+                                        ?account_id: ::String,
+                                        ?state: ("CREATED" | "PENDING" | "RUNNING" | "ABORTED" | "COMPLETED" | "FAILED" | "AGGREGATE_ALL" | "ANY"),
+                                        ?resource_type: ::String,
+                                        ?aggregation_period: ("ONE_DAY" | "SEVEN_DAYS" | "FOURTEEN_DAYS"),
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListRestoreJobSummariesResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRestoreJobSummariesResponseSuccess
+
+      interface _ListRestoreJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRestoreJobsOutput]
+        def restore_jobs: () -> ::Array[Types::RestoreJobsListMember]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_restore_jobs-instance_method
+      def list_restore_jobs: (
+                               ?next_token: ::String,
+                               ?max_results: ::Integer,
+                               ?by_account_id: ::String,
+                               ?by_resource_type: ::String,
+                               ?by_created_before: ::Time,
+                               ?by_created_after: ::Time,
+                               ?by_status: ("PENDING" | "RUNNING" | "COMPLETED" | "ABORTED" | "FAILED"),
+                               ?by_complete_before: ::Time,
+                               ?by_complete_after: ::Time,
+                               ?by_restore_testing_plan_arn: ::String
+                             ) -> _ListRestoreJobsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRestoreJobsResponseSuccess
+
+      interface _ListRestoreJobsByProtectedResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRestoreJobsByProtectedResourceOutput]
+        def restore_jobs: () -> ::Array[Types::RestoreJobsListMember]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_restore_jobs_by_protected_resource-instance_method
+      def list_restore_jobs_by_protected_resource: (
+                                                     resource_arn: ::String,
+                                                     ?by_status: ("PENDING" | "RUNNING" | "COMPLETED" | "ABORTED" | "FAILED"),
+                                                     ?by_recovery_point_creation_date_after: ::Time,
+                                                     ?by_recovery_point_creation_date_before: ::Time,
+                                                     ?next_token: ::String,
+                                                     ?max_results: ::Integer
+                                                   ) -> _ListRestoreJobsByProtectedResourceResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRestoreJobsByProtectedResourceResponseSuccess
+
+      interface _ListRestoreTestingPlansResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRestoreTestingPlansOutput]
+        def next_token: () -> ::String
+        def restore_testing_plans: () -> ::Array[Types::RestoreTestingPlanForList]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_restore_testing_plans-instance_method
+      def list_restore_testing_plans: (
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListRestoreTestingPlansResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRestoreTestingPlansResponseSuccess
+
+      interface _ListRestoreTestingSelectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRestoreTestingSelectionsOutput]
+        def next_token: () -> ::String
+        def restore_testing_selections: () -> ::Array[Types::RestoreTestingSelectionForList]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_restore_testing_selections-instance_method
+      def list_restore_testing_selections: (
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String,
+                                             restore_testing_plan_name: ::String
+                                           ) -> _ListRestoreTestingSelectionsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRestoreTestingSelectionsResponseSuccess
+
+      interface _ListTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsOutput]
+        def next_token: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_tags-instance_method
+      def list_tags: (
+                       resource_arn: ::String,
+                       ?next_token: ::String,
+                       ?max_results: ::Integer
+                     ) -> _ListTagsResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#put_backup_vault_access_policy-instance_method
+      def put_backup_vault_access_policy: (
+                                            backup_vault_name: ::String,
+                                            ?policy: ::String
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#put_backup_vault_lock_configuration-instance_method
+      def put_backup_vault_lock_configuration: (
+                                                 backup_vault_name: ::String,
+                                                 ?min_retention_days: ::Integer,
+                                                 ?max_retention_days: ::Integer,
+                                                 ?changeable_for_days: ::Integer
+                                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#put_backup_vault_notifications-instance_method
+      def put_backup_vault_notifications: (
+                                            backup_vault_name: ::String,
+                                            sns_topic_arn: ::String,
+                                            backup_vault_events: Array[("BACKUP_JOB_STARTED" | "BACKUP_JOB_COMPLETED" | "BACKUP_JOB_SUCCESSFUL" | "BACKUP_JOB_FAILED" | "BACKUP_JOB_EXPIRED" | "RESTORE_JOB_STARTED" | "RESTORE_JOB_COMPLETED" | "RESTORE_JOB_SUCCESSFUL" | "RESTORE_JOB_FAILED" | "COPY_JOB_STARTED" | "COPY_JOB_SUCCESSFUL" | "COPY_JOB_FAILED" | "RECOVERY_POINT_MODIFIED" | "BACKUP_PLAN_CREATED" | "BACKUP_PLAN_MODIFIED" | "S3_BACKUP_OBJECT_FAILED" | "S3_RESTORE_OBJECT_FAILED")]
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#put_restore_validation_result-instance_method
+      def put_restore_validation_result: (
+                                           restore_job_id: ::String,
+                                           validation_status: ("FAILED" | "SUCCESSFUL" | "TIMED_OUT" | "VALIDATING"),
+                                           ?validation_status_message: ::String
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _StartBackupJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartBackupJobOutput]
+        def backup_job_id: () -> ::String
+        def recovery_point_arn: () -> ::String
+        def creation_date: () -> ::Time
+        def is_parent: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#start_backup_job-instance_method
+      def start_backup_job: (
+                              backup_vault_name: ::String,
+                              resource_arn: ::String,
+                              iam_role_arn: ::String,
+                              ?idempotency_token: ::String,
+                              ?start_window_minutes: ::Integer,
+                              ?complete_window_minutes: ::Integer,
+                              ?lifecycle: {
+                                move_to_cold_storage_after_days: ::Integer?,
+                                delete_after_days: ::Integer?,
+                                opt_in_to_archive_for_supported_resources: bool?
+                              },
+                              ?recovery_point_tags: Hash[::String, ::String],
+                              ?backup_options: Hash[::String, ::String]
+                            ) -> _StartBackupJobResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartBackupJobResponseSuccess
+
+      interface _StartCopyJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartCopyJobOutput]
+        def copy_job_id: () -> ::String
+        def creation_date: () -> ::Time
+        def is_parent: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#start_copy_job-instance_method
+      def start_copy_job: (
+                            recovery_point_arn: ::String,
+                            source_backup_vault_name: ::String,
+                            destination_backup_vault_arn: ::String,
+                            iam_role_arn: ::String,
+                            ?idempotency_token: ::String,
+                            ?lifecycle: {
+                              move_to_cold_storage_after_days: ::Integer?,
+                              delete_after_days: ::Integer?,
+                              opt_in_to_archive_for_supported_resources: bool?
+                            }
+                          ) -> _StartCopyJobResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCopyJobResponseSuccess
+
+      interface _StartReportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartReportJobOutput]
+        def report_job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#start_report_job-instance_method
+      def start_report_job: (
+                              report_plan_name: ::String,
+                              ?idempotency_token: ::String
+                            ) -> _StartReportJobResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartReportJobResponseSuccess
+
+      interface _StartRestoreJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartRestoreJobOutput]
+        def restore_job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#start_restore_job-instance_method
+      def start_restore_job: (
+                               recovery_point_arn: ::String,
+                               metadata: Hash[::String, ::String],
+                               ?iam_role_arn: ::String,
+                               ?idempotency_token: ::String,
+                               ?resource_type: ::String,
+                               ?copy_source_tags_to_restored_resource: bool
+                             ) -> _StartRestoreJobResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartRestoreJobResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#stop_backup_job-instance_method
+      def stop_backup_job: (
+                             backup_job_id: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_key_list: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateBackupPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBackupPlanOutput]
+        def backup_plan_id: () -> ::String
+        def backup_plan_arn: () -> ::String
+        def creation_date: () -> ::Time
+        def version_id: () -> ::String
+        def advanced_backup_settings: () -> ::Array[Types::AdvancedBackupSetting]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#update_backup_plan-instance_method
+      def update_backup_plan: (
+                                backup_plan_id: ::String,
+                                backup_plan: {
+                                  backup_plan_name: ::String,
+                                  rules: Array[
+                                    {
+                                      rule_name: ::String,
+                                      target_backup_vault_name: ::String,
+                                      schedule_expression: ::String?,
+                                      start_window_minutes: ::Integer?,
+                                      completion_window_minutes: ::Integer?,
+                                      lifecycle: {
+                                        move_to_cold_storage_after_days: ::Integer?,
+                                        delete_after_days: ::Integer?,
+                                        opt_in_to_archive_for_supported_resources: bool?
+                                      }?,
+                                      recovery_point_tags: Hash[::String, ::String]?,
+                                      copy_actions: Array[
+                                        {
+                                          lifecycle: {
+                                            move_to_cold_storage_after_days: ::Integer?,
+                                            delete_after_days: ::Integer?,
+                                            opt_in_to_archive_for_supported_resources: bool?
+                                          }?,
+                                          destination_backup_vault_arn: ::String
+                                        },
+                                      ]?,
+                                      enable_continuous_backup: bool?,
+                                      schedule_expression_timezone: ::String?
+                                    },
+                                  ],
+                                  advanced_backup_settings: Array[
+                                    {
+                                      resource_type: ::String?,
+                                      backup_options: Hash[::String, ::String]?
+                                    },
+                                  ]?
+                                }
+                              ) -> _UpdateBackupPlanResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBackupPlanResponseSuccess
+
+      interface _UpdateFrameworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFrameworkOutput]
+        def framework_name: () -> ::String
+        def framework_arn: () -> ::String
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#update_framework-instance_method
+      def update_framework: (
+                              framework_name: ::String,
+                              ?framework_description: ::String,
+                              ?framework_controls: Array[
+                                {
+                                  control_name: ::String,
+                                  control_input_parameters: Array[
+                                    {
+                                      parameter_name: ::String?,
+                                      parameter_value: ::String?
+                                    },
+                                  ]?,
+                                  control_scope: {
+                                    compliance_resource_ids: Array[::String]?,
+                                    compliance_resource_types: Array[::String]?,
+                                    tags: Hash[::String, ::String]?
+                                  }?
+                                },
+                              ],
+                              ?idempotency_token: ::String
+                            ) -> _UpdateFrameworkResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFrameworkResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#update_global_settings-instance_method
+      def update_global_settings: (
+                                    ?global_settings: Hash[::String, ::String]
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateRecoveryPointLifecycleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRecoveryPointLifecycleOutput]
+        def backup_vault_arn: () -> ::String
+        def recovery_point_arn: () -> ::String
+        def lifecycle: () -> Types::Lifecycle
+        def calculated_lifecycle: () -> Types::CalculatedLifecycle
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#update_recovery_point_lifecycle-instance_method
+      def update_recovery_point_lifecycle: (
+                                             backup_vault_name: ::String,
+                                             recovery_point_arn: ::String,
+                                             ?lifecycle: {
+                                               move_to_cold_storage_after_days: ::Integer?,
+                                               delete_after_days: ::Integer?,
+                                               opt_in_to_archive_for_supported_resources: bool?
+                                             }
+                                           ) -> _UpdateRecoveryPointLifecycleResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRecoveryPointLifecycleResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#update_region_settings-instance_method
+      def update_region_settings: (
+                                    ?resource_type_opt_in_preference: Hash[::String, bool],
+                                    ?resource_type_management_preference: Hash[::String, bool]
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateReportPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateReportPlanOutput]
+        def report_plan_name: () -> ::String
+        def report_plan_arn: () -> ::String
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#update_report_plan-instance_method
+      def update_report_plan: (
+                                report_plan_name: ::String,
+                                ?report_plan_description: ::String,
+                                ?report_delivery_channel: {
+                                  s3_bucket_name: ::String,
+                                  s3_key_prefix: ::String?,
+                                  formats: Array[::String]?
+                                },
+                                ?report_setting: {
+                                  report_template: ::String,
+                                  framework_arns: Array[::String]?,
+                                  number_of_frameworks: ::Integer?,
+                                  accounts: Array[::String]?,
+                                  organization_units: Array[::String]?,
+                                  regions: Array[::String]?
+                                },
+                                ?idempotency_token: ::String
+                              ) -> _UpdateReportPlanResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateReportPlanResponseSuccess
+
+      interface _UpdateRestoreTestingPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRestoreTestingPlanOutput]
+        def creation_time: () -> ::Time
+        def restore_testing_plan_arn: () -> ::String
+        def restore_testing_plan_name: () -> ::String
+        def update_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#update_restore_testing_plan-instance_method
+      def update_restore_testing_plan: (
+                                         restore_testing_plan: {
+                                           recovery_point_selection: {
+                                             algorithm: ("LATEST_WITHIN_WINDOW" | "RANDOM_WITHIN_WINDOW")?,
+                                             exclude_vaults: Array[::String]?,
+                                             include_vaults: Array[::String]?,
+                                             recovery_point_types: Array[("CONTINUOUS" | "SNAPSHOT")]?,
+                                             selection_window_days: ::Integer?
+                                           }?,
+                                           schedule_expression: ::String?,
+                                           schedule_expression_timezone: ::String?,
+                                           start_window_hours: ::Integer?
+                                         },
+                                         restore_testing_plan_name: ::String
+                                       ) -> _UpdateRestoreTestingPlanResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRestoreTestingPlanResponseSuccess
+
+      interface _UpdateRestoreTestingSelectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRestoreTestingSelectionOutput]
+        def creation_time: () -> ::Time
+        def restore_testing_plan_arn: () -> ::String
+        def restore_testing_plan_name: () -> ::String
+        def restore_testing_selection_name: () -> ::String
+        def update_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#update_restore_testing_selection-instance_method
+      def update_restore_testing_selection: (
+                                              restore_testing_plan_name: ::String,
+                                              restore_testing_selection: {
+                                                iam_role_arn: ::String?,
+                                                protected_resource_arns: Array[::String]?,
+                                                protected_resource_conditions: {
+                                                  string_equals: Array[
+                                                    {
+                                                      key: ::String,
+                                                      value: ::String
+                                                    },
+                                                  ]?,
+                                                  string_not_equals: Array[
+                                                    {
+                                                      key: ::String,
+                                                      value: ::String
+                                                    },
+                                                  ]?
+                                                }?,
+                                                restore_metadata_overrides: Hash[::String, ::String]?,
+                                                validation_window_hours: ::Integer?
+                                              },
+                                              restore_testing_selection_name: ::String
+                                            ) -> _UpdateRestoreTestingSelectionResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRestoreTestingSelectionResponseSuccess
+    end
+  end
+end
+

@@ -1,0 +1,95 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::PersonalizeRuntime
+  module Types
+
+    class GetActionRecommendationsRequest
+      attr_accessor campaign_arn: ::String
+      attr_accessor user_id: ::String
+      attr_accessor num_results: ::Integer
+      attr_accessor filter_arn: ::String
+      attr_accessor filter_values: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetActionRecommendationsResponse
+      attr_accessor action_list: ::Array[Types::PredictedAction]
+      attr_accessor recommendation_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPersonalizedRankingRequest
+      attr_accessor campaign_arn: ::String
+      attr_accessor input_list: ::Array[::String]
+      attr_accessor user_id: ::String
+      attr_accessor context: ::Hash[::String, ::String]
+      attr_accessor filter_arn: ::String
+      attr_accessor filter_values: ::Hash[::String, ::String]
+      attr_accessor metadata_columns: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class GetPersonalizedRankingResponse
+      attr_accessor personalized_ranking: ::Array[Types::PredictedItem]
+      attr_accessor recommendation_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRecommendationsRequest
+      attr_accessor campaign_arn: ::String
+      attr_accessor item_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor num_results: ::Integer
+      attr_accessor context: ::Hash[::String, ::String]
+      attr_accessor filter_arn: ::String
+      attr_accessor filter_values: ::Hash[::String, ::String]
+      attr_accessor recommender_arn: ::String
+      attr_accessor promotions: ::Array[Types::Promotion]
+      attr_accessor metadata_columns: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class GetRecommendationsResponse
+      attr_accessor item_list: ::Array[Types::PredictedItem]
+      attr_accessor recommendation_id: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidInputException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PredictedAction
+      attr_accessor action_id: ::String
+      attr_accessor score: ::Float
+      SENSITIVE: []
+    end
+
+    class PredictedItem
+      attr_accessor item_id: ::String
+      attr_accessor score: ::Float
+      attr_accessor promotion_name: ::String
+      attr_accessor metadata: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Promotion
+      attr_accessor name: ::String
+      attr_accessor percent_promoted_items: ::Integer
+      attr_accessor filter_arn: ::String
+      attr_accessor filter_values: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,0 +1,462 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module WorkLink
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateDomainResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#associate_domain-instance_method
+      def associate_domain: (
+                              fleet_arn: ::String,
+                              domain_name: ::String,
+                              ?display_name: ::String,
+                              acm_certificate_arn: ::String
+                            ) -> _AssociateDomainResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateDomainResponseSuccess
+
+      interface _AssociateWebsiteAuthorizationProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateWebsiteAuthorizationProviderResponse]
+        def authorization_provider_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#associate_website_authorization_provider-instance_method
+      def associate_website_authorization_provider: (
+                                                      fleet_arn: ::String,
+                                                      authorization_provider_type: ("SAML"),
+                                                      ?domain_name: ::String
+                                                    ) -> _AssociateWebsiteAuthorizationProviderResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateWebsiteAuthorizationProviderResponseSuccess
+
+      interface _AssociateWebsiteCertificateAuthorityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateWebsiteCertificateAuthorityResponse]
+        def website_ca_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#associate_website_certificate_authority-instance_method
+      def associate_website_certificate_authority: (
+                                                     fleet_arn: ::String,
+                                                     certificate: ::String,
+                                                     ?display_name: ::String
+                                                   ) -> _AssociateWebsiteCertificateAuthorityResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateWebsiteCertificateAuthorityResponseSuccess
+
+      interface _CreateFleetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFleetResponse]
+        def fleet_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#create_fleet-instance_method
+      def create_fleet: (
+                          fleet_name: ::String,
+                          ?display_name: ::String,
+                          ?optimize_for_end_user_location: bool,
+                          ?tags: Hash[::String, ::String]
+                        ) -> _CreateFleetResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFleetResponseSuccess
+
+      interface _DeleteFleetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFleetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#delete_fleet-instance_method
+      def delete_fleet: (
+                          fleet_arn: ::String
+                        ) -> _DeleteFleetResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFleetResponseSuccess
+
+      interface _DescribeAuditStreamConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAuditStreamConfigurationResponse]
+        def audit_stream_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#describe_audit_stream_configuration-instance_method
+      def describe_audit_stream_configuration: (
+                                                 fleet_arn: ::String
+                                               ) -> _DescribeAuditStreamConfigurationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAuditStreamConfigurationResponseSuccess
+
+      interface _DescribeCompanyNetworkConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCompanyNetworkConfigurationResponse]
+        def vpc_id: () -> ::String
+        def subnet_ids: () -> ::Array[::String]
+        def security_group_ids: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#describe_company_network_configuration-instance_method
+      def describe_company_network_configuration: (
+                                                    fleet_arn: ::String
+                                                  ) -> _DescribeCompanyNetworkConfigurationResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCompanyNetworkConfigurationResponseSuccess
+
+      interface _DescribeDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDeviceResponse]
+        def status: () -> ("ACTIVE" | "SIGNED_OUT")
+        def model: () -> ::String
+        def manufacturer: () -> ::String
+        def operating_system: () -> ::String
+        def operating_system_version: () -> ::String
+        def patch_level: () -> ::String
+        def first_accessed_time: () -> ::Time
+        def last_accessed_time: () -> ::Time
+        def username: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#describe_device-instance_method
+      def describe_device: (
+                             fleet_arn: ::String,
+                             device_id: ::String
+                           ) -> _DescribeDeviceResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDeviceResponseSuccess
+
+      interface _DescribeDevicePolicyConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDevicePolicyConfigurationResponse]
+        def device_ca_certificate: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#describe_device_policy_configuration-instance_method
+      def describe_device_policy_configuration: (
+                                                  fleet_arn: ::String
+                                                ) -> _DescribeDevicePolicyConfigurationResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDevicePolicyConfigurationResponseSuccess
+
+      interface _DescribeDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDomainResponse]
+        def domain_name: () -> ::String
+        def display_name: () -> ::String
+        def created_time: () -> ::Time
+        def domain_status: () -> ("PENDING_VALIDATION" | "ASSOCIATING" | "ACTIVE" | "INACTIVE" | "DISASSOCIATING" | "DISASSOCIATED" | "FAILED_TO_ASSOCIATE" | "FAILED_TO_DISASSOCIATE")
+        def acm_certificate_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#describe_domain-instance_method
+      def describe_domain: (
+                             fleet_arn: ::String,
+                             domain_name: ::String
+                           ) -> _DescribeDomainResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDomainResponseSuccess
+
+      interface _DescribeFleetMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFleetMetadataResponse]
+        def created_time: () -> ::Time
+        def last_updated_time: () -> ::Time
+        def fleet_name: () -> ::String
+        def display_name: () -> ::String
+        def optimize_for_end_user_location: () -> bool
+        def company_code: () -> ::String
+        def fleet_status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "FAILED_TO_CREATE" | "FAILED_TO_DELETE")
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#describe_fleet_metadata-instance_method
+      def describe_fleet_metadata: (
+                                     fleet_arn: ::String
+                                   ) -> _DescribeFleetMetadataResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFleetMetadataResponseSuccess
+
+      interface _DescribeIdentityProviderConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeIdentityProviderConfigurationResponse]
+        def identity_provider_type: () -> ("SAML")
+        def service_provider_saml_metadata: () -> ::String
+        def identity_provider_saml_metadata: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#describe_identity_provider_configuration-instance_method
+      def describe_identity_provider_configuration: (
+                                                      fleet_arn: ::String
+                                                    ) -> _DescribeIdentityProviderConfigurationResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeIdentityProviderConfigurationResponseSuccess
+
+      interface _DescribeWebsiteCertificateAuthorityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeWebsiteCertificateAuthorityResponse]
+        def certificate: () -> ::String
+        def created_time: () -> ::Time
+        def display_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#describe_website_certificate_authority-instance_method
+      def describe_website_certificate_authority: (
+                                                    fleet_arn: ::String,
+                                                    website_ca_id: ::String
+                                                  ) -> _DescribeWebsiteCertificateAuthorityResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWebsiteCertificateAuthorityResponseSuccess
+
+      interface _DisassociateDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateDomainResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#disassociate_domain-instance_method
+      def disassociate_domain: (
+                                 fleet_arn: ::String,
+                                 domain_name: ::String
+                               ) -> _DisassociateDomainResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateDomainResponseSuccess
+
+      interface _DisassociateWebsiteAuthorizationProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateWebsiteAuthorizationProviderResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#disassociate_website_authorization_provider-instance_method
+      def disassociate_website_authorization_provider: (
+                                                         fleet_arn: ::String,
+                                                         authorization_provider_id: ::String
+                                                       ) -> _DisassociateWebsiteAuthorizationProviderResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateWebsiteAuthorizationProviderResponseSuccess
+
+      interface _DisassociateWebsiteCertificateAuthorityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateWebsiteCertificateAuthorityResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#disassociate_website_certificate_authority-instance_method
+      def disassociate_website_certificate_authority: (
+                                                        fleet_arn: ::String,
+                                                        website_ca_id: ::String
+                                                      ) -> _DisassociateWebsiteCertificateAuthorityResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateWebsiteCertificateAuthorityResponseSuccess
+
+      interface _ListDevicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDevicesResponse]
+        def devices: () -> ::Array[Types::DeviceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#list_devices-instance_method
+      def list_devices: (
+                          fleet_arn: ::String,
+                          ?next_token: ::String,
+                          ?max_results: ::Integer
+                        ) -> _ListDevicesResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDevicesResponseSuccess
+
+      interface _ListDomainsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainsResponse]
+        def domains: () -> ::Array[Types::DomainSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#list_domains-instance_method
+      def list_domains: (
+                          fleet_arn: ::String,
+                          ?next_token: ::String,
+                          ?max_results: ::Integer
+                        ) -> _ListDomainsResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainsResponseSuccess
+
+      interface _ListFleetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFleetsResponse]
+        def fleet_summary_list: () -> ::Array[Types::FleetSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#list_fleets-instance_method
+      def list_fleets: (
+                         ?next_token: ::String,
+                         ?max_results: ::Integer
+                       ) -> _ListFleetsResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFleetsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListWebsiteAuthorizationProvidersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWebsiteAuthorizationProvidersResponse]
+        def website_authorization_providers: () -> ::Array[Types::WebsiteAuthorizationProviderSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#list_website_authorization_providers-instance_method
+      def list_website_authorization_providers: (
+                                                  fleet_arn: ::String,
+                                                  ?next_token: ::String,
+                                                  ?max_results: ::Integer
+                                                ) -> _ListWebsiteAuthorizationProvidersResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWebsiteAuthorizationProvidersResponseSuccess
+
+      interface _ListWebsiteCertificateAuthoritiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWebsiteCertificateAuthoritiesResponse]
+        def website_certificate_authorities: () -> ::Array[Types::WebsiteCaSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#list_website_certificate_authorities-instance_method
+      def list_website_certificate_authorities: (
+                                                  fleet_arn: ::String,
+                                                  ?max_results: ::Integer,
+                                                  ?next_token: ::String
+                                                ) -> _ListWebsiteCertificateAuthoritiesResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWebsiteCertificateAuthoritiesResponseSuccess
+
+      interface _RestoreDomainAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestoreDomainAccessResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#restore_domain_access-instance_method
+      def restore_domain_access: (
+                                   fleet_arn: ::String,
+                                   domain_name: ::String
+                                 ) -> _RestoreDomainAccessResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDomainAccessResponseSuccess
+
+      interface _RevokeDomainAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RevokeDomainAccessResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#revoke_domain_access-instance_method
+      def revoke_domain_access: (
+                                  fleet_arn: ::String,
+                                  domain_name: ::String
+                                ) -> _RevokeDomainAccessResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RevokeDomainAccessResponseSuccess
+
+      interface _SignOutUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SignOutUserResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#sign_out_user-instance_method
+      def sign_out_user: (
+                           fleet_arn: ::String,
+                           username: ::String
+                         ) -> _SignOutUserResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SignOutUserResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAuditStreamConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAuditStreamConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#update_audit_stream_configuration-instance_method
+      def update_audit_stream_configuration: (
+                                               fleet_arn: ::String,
+                                               ?audit_stream_arn: ::String
+                                             ) -> _UpdateAuditStreamConfigurationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAuditStreamConfigurationResponseSuccess
+
+      interface _UpdateCompanyNetworkConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCompanyNetworkConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#update_company_network_configuration-instance_method
+      def update_company_network_configuration: (
+                                                  fleet_arn: ::String,
+                                                  vpc_id: ::String,
+                                                  subnet_ids: Array[::String],
+                                                  security_group_ids: Array[::String]
+                                                ) -> _UpdateCompanyNetworkConfigurationResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCompanyNetworkConfigurationResponseSuccess
+
+      interface _UpdateDevicePolicyConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDevicePolicyConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#update_device_policy_configuration-instance_method
+      def update_device_policy_configuration: (
+                                                fleet_arn: ::String,
+                                                ?device_ca_certificate: ::String
+                                              ) -> _UpdateDevicePolicyConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDevicePolicyConfigurationResponseSuccess
+
+      interface _UpdateDomainMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDomainMetadataResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#update_domain_metadata-instance_method
+      def update_domain_metadata: (
+                                    fleet_arn: ::String,
+                                    domain_name: ::String,
+                                    ?display_name: ::String
+                                  ) -> _UpdateDomainMetadataResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainMetadataResponseSuccess
+
+      interface _UpdateFleetMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFleetMetadataResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#update_fleet_metadata-instance_method
+      def update_fleet_metadata: (
+                                   fleet_arn: ::String,
+                                   ?display_name: ::String,
+                                   ?optimize_for_end_user_location: bool
+                                 ) -> _UpdateFleetMetadataResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFleetMetadataResponseSuccess
+
+      interface _UpdateIdentityProviderConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIdentityProviderConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkLink/Client.html#update_identity_provider_configuration-instance_method
+      def update_identity_provider_configuration: (
+                                                    fleet_arn: ::String,
+                                                    identity_provider_type: ("SAML"),
+                                                    ?identity_provider_saml_metadata: ::String
+                                                  ) -> _UpdateIdentityProviderConfigurationResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIdentityProviderConfigurationResponseSuccess
+    end
+  end
+end
+

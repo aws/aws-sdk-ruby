@@ -1,0 +1,1627 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CloudDirectory
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AddFacetToObjectRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor schema_facet: Types::SchemaFacet
+      attr_accessor object_attribute_list: ::Array[Types::AttributeKeyAndValue]
+      attr_accessor object_reference: Types::ObjectReference
+      SENSITIVE: []
+    end
+
+    class AddFacetToObjectResponse < Aws::EmptyStructure
+    end
+
+    class ApplySchemaRequest
+      attr_accessor published_schema_arn: ::String
+      attr_accessor directory_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ApplySchemaResponse
+      attr_accessor applied_schema_arn: ::String
+      attr_accessor directory_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AttachObjectRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor parent_reference: Types::ObjectReference
+      attr_accessor child_reference: Types::ObjectReference
+      attr_accessor link_name: ::String
+      SENSITIVE: []
+    end
+
+    class AttachObjectResponse
+      attr_accessor attached_object_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class AttachPolicyRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor policy_reference: Types::ObjectReference
+      attr_accessor object_reference: Types::ObjectReference
+      SENSITIVE: []
+    end
+
+    class AttachPolicyResponse < Aws::EmptyStructure
+    end
+
+    class AttachToIndexRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor index_reference: Types::ObjectReference
+      attr_accessor target_reference: Types::ObjectReference
+      SENSITIVE: []
+    end
+
+    class AttachToIndexResponse
+      attr_accessor attached_object_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class AttachTypedLinkRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor source_object_reference: Types::ObjectReference
+      attr_accessor target_object_reference: Types::ObjectReference
+      attr_accessor typed_link_facet: Types::TypedLinkSchemaAndFacetName
+      attr_accessor attributes: ::Array[Types::AttributeNameAndValue]
+      SENSITIVE: []
+    end
+
+    class AttachTypedLinkResponse
+      attr_accessor typed_link_specifier: Types::TypedLinkSpecifier
+      SENSITIVE: []
+    end
+
+    class AttributeKey
+      attr_accessor schema_arn: ::String
+      attr_accessor facet_name: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class AttributeKeyAndValue
+      attr_accessor key: Types::AttributeKey
+      attr_accessor value: Types::TypedAttributeValue
+      SENSITIVE: []
+    end
+
+    class AttributeNameAndValue
+      attr_accessor attribute_name: ::String
+      attr_accessor value: Types::TypedAttributeValue
+      SENSITIVE: []
+    end
+
+    class BatchAddFacetToObject
+      attr_accessor schema_facet: Types::SchemaFacet
+      attr_accessor object_attribute_list: ::Array[Types::AttributeKeyAndValue]
+      attr_accessor object_reference: Types::ObjectReference
+      SENSITIVE: []
+    end
+
+    class BatchAddFacetToObjectResponse < Aws::EmptyStructure
+    end
+
+    class BatchAttachObject
+      attr_accessor parent_reference: Types::ObjectReference
+      attr_accessor child_reference: Types::ObjectReference
+      attr_accessor link_name: ::String
+      SENSITIVE: []
+    end
+
+    class BatchAttachObjectResponse
+      attr_accessor attached_object_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class BatchAttachPolicy
+      attr_accessor policy_reference: Types::ObjectReference
+      attr_accessor object_reference: Types::ObjectReference
+      SENSITIVE: []
+    end
+
+    class BatchAttachPolicyResponse < Aws::EmptyStructure
+    end
+
+    class BatchAttachToIndex
+      attr_accessor index_reference: Types::ObjectReference
+      attr_accessor target_reference: Types::ObjectReference
+      SENSITIVE: []
+    end
+
+    class BatchAttachToIndexResponse
+      attr_accessor attached_object_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class BatchAttachTypedLink
+      attr_accessor source_object_reference: Types::ObjectReference
+      attr_accessor target_object_reference: Types::ObjectReference
+      attr_accessor typed_link_facet: Types::TypedLinkSchemaAndFacetName
+      attr_accessor attributes: ::Array[Types::AttributeNameAndValue]
+      SENSITIVE: []
+    end
+
+    class BatchAttachTypedLinkResponse
+      attr_accessor typed_link_specifier: Types::TypedLinkSpecifier
+      SENSITIVE: []
+    end
+
+    class BatchCreateIndex
+      attr_accessor ordered_indexed_attribute_list: ::Array[Types::AttributeKey]
+      attr_accessor is_unique: bool
+      attr_accessor parent_reference: Types::ObjectReference
+      attr_accessor link_name: ::String
+      attr_accessor batch_reference_name: ::String
+      SENSITIVE: []
+    end
+
+    class BatchCreateIndexResponse
+      attr_accessor object_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class BatchCreateObject
+      attr_accessor schema_facet: ::Array[Types::SchemaFacet]
+      attr_accessor object_attribute_list: ::Array[Types::AttributeKeyAndValue]
+      attr_accessor parent_reference: Types::ObjectReference
+      attr_accessor link_name: ::String
+      attr_accessor batch_reference_name: ::String
+      SENSITIVE: []
+    end
+
+    class BatchCreateObjectResponse
+      attr_accessor object_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDeleteObject
+      attr_accessor object_reference: Types::ObjectReference
+      SENSITIVE: []
+    end
+
+    class BatchDeleteObjectResponse < Aws::EmptyStructure
+    end
+
+    class BatchDetachFromIndex
+      attr_accessor index_reference: Types::ObjectReference
+      attr_accessor target_reference: Types::ObjectReference
+      SENSITIVE: []
+    end
+
+    class BatchDetachFromIndexResponse
+      attr_accessor detached_object_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDetachObject
+      attr_accessor parent_reference: Types::ObjectReference
+      attr_accessor link_name: ::String
+      attr_accessor batch_reference_name: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDetachObjectResponse
+      attr_accessor detached_object_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDetachPolicy
+      attr_accessor policy_reference: Types::ObjectReference
+      attr_accessor object_reference: Types::ObjectReference
+      SENSITIVE: []
+    end
+
+    class BatchDetachPolicyResponse < Aws::EmptyStructure
+    end
+
+    class BatchDetachTypedLink
+      attr_accessor typed_link_specifier: Types::TypedLinkSpecifier
+      SENSITIVE: []
+    end
+
+    class BatchDetachTypedLinkResponse < Aws::EmptyStructure
+    end
+
+    class BatchGetLinkAttributes
+      attr_accessor typed_link_specifier: Types::TypedLinkSpecifier
+      attr_accessor attribute_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetLinkAttributesResponse
+      attr_accessor attributes: ::Array[Types::AttributeKeyAndValue]
+      SENSITIVE: []
+    end
+
+    class BatchGetObjectAttributes
+      attr_accessor object_reference: Types::ObjectReference
+      attr_accessor schema_facet: Types::SchemaFacet
+      attr_accessor attribute_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetObjectAttributesResponse
+      attr_accessor attributes: ::Array[Types::AttributeKeyAndValue]
+      SENSITIVE: []
+    end
+
+    class BatchGetObjectInformation
+      attr_accessor object_reference: Types::ObjectReference
+      SENSITIVE: []
+    end
+
+    class BatchGetObjectInformationResponse
+      attr_accessor schema_facets: ::Array[Types::SchemaFacet]
+      attr_accessor object_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class BatchListAttachedIndices
+      attr_accessor target_reference: Types::ObjectReference
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class BatchListAttachedIndicesResponse
+      attr_accessor index_attachments: ::Array[Types::IndexAttachment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchListIncomingTypedLinks
+      attr_accessor object_reference: Types::ObjectReference
+      attr_accessor filter_attribute_ranges: ::Array[Types::TypedLinkAttributeRange]
+      attr_accessor filter_typed_link: Types::TypedLinkSchemaAndFacetName
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class BatchListIncomingTypedLinksResponse
+      attr_accessor link_specifiers: ::Array[Types::TypedLinkSpecifier]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchListIndex
+      attr_accessor ranges_on_indexed_values: ::Array[Types::ObjectAttributeRange]
+      attr_accessor index_reference: Types::ObjectReference
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchListIndexResponse
+      attr_accessor index_attachments: ::Array[Types::IndexAttachment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchListObjectAttributes
+      attr_accessor object_reference: Types::ObjectReference
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor facet_filter: Types::SchemaFacet
+      SENSITIVE: []
+    end
+
+    class BatchListObjectAttributesResponse
+      attr_accessor attributes: ::Array[Types::AttributeKeyAndValue]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchListObjectChildren
+      attr_accessor object_reference: Types::ObjectReference
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class BatchListObjectChildrenResponse
+      attr_accessor children: ::Hash[::String, ::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchListObjectParentPaths
+      attr_accessor object_reference: Types::ObjectReference
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class BatchListObjectParentPathsResponse
+      attr_accessor path_to_object_identifiers_list: ::Array[Types::PathToObjectIdentifiers]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchListObjectParents
+      attr_accessor object_reference: Types::ObjectReference
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class BatchListObjectParentsResponse
+      attr_accessor parent_links: ::Array[Types::ObjectIdentifierAndLinkNameTuple]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchListObjectPolicies
+      attr_accessor object_reference: Types::ObjectReference
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class BatchListObjectPoliciesResponse
+      attr_accessor attached_policy_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchListOutgoingTypedLinks
+      attr_accessor object_reference: Types::ObjectReference
+      attr_accessor filter_attribute_ranges: ::Array[Types::TypedLinkAttributeRange]
+      attr_accessor filter_typed_link: Types::TypedLinkSchemaAndFacetName
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class BatchListOutgoingTypedLinksResponse
+      attr_accessor typed_link_specifiers: ::Array[Types::TypedLinkSpecifier]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchListPolicyAttachments
+      attr_accessor policy_reference: Types::ObjectReference
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class BatchListPolicyAttachmentsResponse
+      attr_accessor object_identifiers: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchLookupPolicy
+      attr_accessor object_reference: Types::ObjectReference
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class BatchLookupPolicyResponse
+      attr_accessor policy_to_path_list: ::Array[Types::PolicyToPath]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchReadException
+      attr_accessor type: ("ValidationException" | "InvalidArnException" | "ResourceNotFoundException" | "InvalidNextTokenException" | "AccessDeniedException" | "NotNodeException" | "FacetValidationException" | "CannotListParentOfRootException" | "NotIndexException" | "NotPolicyException" | "DirectoryNotEnabledException" | "LimitExceededException" | "InternalServiceException")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchReadOperation
+      attr_accessor list_object_attributes: Types::BatchListObjectAttributes
+      attr_accessor list_object_children: Types::BatchListObjectChildren
+      attr_accessor list_attached_indices: Types::BatchListAttachedIndices
+      attr_accessor list_object_parent_paths: Types::BatchListObjectParentPaths
+      attr_accessor get_object_information: Types::BatchGetObjectInformation
+      attr_accessor get_object_attributes: Types::BatchGetObjectAttributes
+      attr_accessor list_object_parents: Types::BatchListObjectParents
+      attr_accessor list_object_policies: Types::BatchListObjectPolicies
+      attr_accessor list_policy_attachments: Types::BatchListPolicyAttachments
+      attr_accessor lookup_policy: Types::BatchLookupPolicy
+      attr_accessor list_index: Types::BatchListIndex
+      attr_accessor list_outgoing_typed_links: Types::BatchListOutgoingTypedLinks
+      attr_accessor list_incoming_typed_links: Types::BatchListIncomingTypedLinks
+      attr_accessor get_link_attributes: Types::BatchGetLinkAttributes
+      SENSITIVE: []
+    end
+
+    class BatchReadOperationResponse
+      attr_accessor successful_response: Types::BatchReadSuccessfulResponse
+      attr_accessor exception_response: Types::BatchReadException
+      SENSITIVE: []
+    end
+
+    class BatchReadRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor operations: ::Array[Types::BatchReadOperation]
+      attr_accessor consistency_level: ("SERIALIZABLE" | "EVENTUAL")
+      SENSITIVE: []
+    end
+
+    class BatchReadResponse
+      attr_accessor responses: ::Array[Types::BatchReadOperationResponse]
+      SENSITIVE: []
+    end
+
+    class BatchReadSuccessfulResponse
+      attr_accessor list_object_attributes: Types::BatchListObjectAttributesResponse
+      attr_accessor list_object_children: Types::BatchListObjectChildrenResponse
+      attr_accessor get_object_information: Types::BatchGetObjectInformationResponse
+      attr_accessor get_object_attributes: Types::BatchGetObjectAttributesResponse
+      attr_accessor list_attached_indices: Types::BatchListAttachedIndicesResponse
+      attr_accessor list_object_parent_paths: Types::BatchListObjectParentPathsResponse
+      attr_accessor list_object_policies: Types::BatchListObjectPoliciesResponse
+      attr_accessor list_policy_attachments: Types::BatchListPolicyAttachmentsResponse
+      attr_accessor lookup_policy: Types::BatchLookupPolicyResponse
+      attr_accessor list_index: Types::BatchListIndexResponse
+      attr_accessor list_outgoing_typed_links: Types::BatchListOutgoingTypedLinksResponse
+      attr_accessor list_incoming_typed_links: Types::BatchListIncomingTypedLinksResponse
+      attr_accessor get_link_attributes: Types::BatchGetLinkAttributesResponse
+      attr_accessor list_object_parents: Types::BatchListObjectParentsResponse
+      SENSITIVE: []
+    end
+
+    class BatchRemoveFacetFromObject
+      attr_accessor schema_facet: Types::SchemaFacet
+      attr_accessor object_reference: Types::ObjectReference
+      SENSITIVE: []
+    end
+
+    class BatchRemoveFacetFromObjectResponse < Aws::EmptyStructure
+    end
+
+    class BatchUpdateLinkAttributes
+      attr_accessor typed_link_specifier: Types::TypedLinkSpecifier
+      attr_accessor attribute_updates: ::Array[Types::LinkAttributeUpdate]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateLinkAttributesResponse < Aws::EmptyStructure
+    end
+
+    class BatchUpdateObjectAttributes
+      attr_accessor object_reference: Types::ObjectReference
+      attr_accessor attribute_updates: ::Array[Types::ObjectAttributeUpdate]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateObjectAttributesResponse
+      attr_accessor object_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class BatchWriteException
+      attr_accessor index: ::Integer
+      attr_accessor type: ("InternalServiceException" | "ValidationException" | "InvalidArnException" | "LinkNameAlreadyInUseException" | "StillContainsLinksException" | "FacetValidationException" | "ObjectNotDetachedException" | "ResourceNotFoundException" | "AccessDeniedException" | "InvalidAttachmentException" | "NotIndexException" | "NotNodeException" | "IndexedAttributeMissingException" | "ObjectAlreadyDetachedException" | "NotPolicyException" | "DirectoryNotEnabledException" | "LimitExceededException" | "UnsupportedIndexTypeException")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchWriteOperation
+      attr_accessor create_object: Types::BatchCreateObject
+      attr_accessor attach_object: Types::BatchAttachObject
+      attr_accessor detach_object: Types::BatchDetachObject
+      attr_accessor update_object_attributes: Types::BatchUpdateObjectAttributes
+      attr_accessor delete_object: Types::BatchDeleteObject
+      attr_accessor add_facet_to_object: Types::BatchAddFacetToObject
+      attr_accessor remove_facet_from_object: Types::BatchRemoveFacetFromObject
+      attr_accessor attach_policy: Types::BatchAttachPolicy
+      attr_accessor detach_policy: Types::BatchDetachPolicy
+      attr_accessor create_index: Types::BatchCreateIndex
+      attr_accessor attach_to_index: Types::BatchAttachToIndex
+      attr_accessor detach_from_index: Types::BatchDetachFromIndex
+      attr_accessor attach_typed_link: Types::BatchAttachTypedLink
+      attr_accessor detach_typed_link: Types::BatchDetachTypedLink
+      attr_accessor update_link_attributes: Types::BatchUpdateLinkAttributes
+      SENSITIVE: []
+    end
+
+    class BatchWriteOperationResponse
+      attr_accessor create_object: Types::BatchCreateObjectResponse
+      attr_accessor attach_object: Types::BatchAttachObjectResponse
+      attr_accessor detach_object: Types::BatchDetachObjectResponse
+      attr_accessor update_object_attributes: Types::BatchUpdateObjectAttributesResponse
+      attr_accessor delete_object: Types::BatchDeleteObjectResponse
+      attr_accessor add_facet_to_object: Types::BatchAddFacetToObjectResponse
+      attr_accessor remove_facet_from_object: Types::BatchRemoveFacetFromObjectResponse
+      attr_accessor attach_policy: Types::BatchAttachPolicyResponse
+      attr_accessor detach_policy: Types::BatchDetachPolicyResponse
+      attr_accessor create_index: Types::BatchCreateIndexResponse
+      attr_accessor attach_to_index: Types::BatchAttachToIndexResponse
+      attr_accessor detach_from_index: Types::BatchDetachFromIndexResponse
+      attr_accessor attach_typed_link: Types::BatchAttachTypedLinkResponse
+      attr_accessor detach_typed_link: Types::BatchDetachTypedLinkResponse
+      attr_accessor update_link_attributes: Types::BatchUpdateLinkAttributesResponse
+      SENSITIVE: []
+    end
+
+    class BatchWriteRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor operations: ::Array[Types::BatchWriteOperation]
+      SENSITIVE: []
+    end
+
+    class BatchWriteResponse
+      attr_accessor responses: ::Array[Types::BatchWriteOperationResponse]
+      SENSITIVE: []
+    end
+
+    class CannotListParentOfRootException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDirectoryRequest
+      attr_accessor name: ::String
+      attr_accessor schema_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDirectoryResponse
+      attr_accessor directory_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor object_identifier: ::String
+      attr_accessor applied_schema_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateFacetRequest
+      attr_accessor schema_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor attributes: ::Array[Types::FacetAttribute]
+      attr_accessor object_type: ("NODE" | "LEAF_NODE" | "POLICY" | "INDEX")
+      attr_accessor facet_style: ("STATIC" | "DYNAMIC")
+      SENSITIVE: []
+    end
+
+    class CreateFacetResponse < Aws::EmptyStructure
+    end
+
+    class CreateIndexRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor ordered_indexed_attribute_list: ::Array[Types::AttributeKey]
+      attr_accessor is_unique: bool
+      attr_accessor parent_reference: Types::ObjectReference
+      attr_accessor link_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateIndexResponse
+      attr_accessor object_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class CreateObjectRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor schema_facets: ::Array[Types::SchemaFacet]
+      attr_accessor object_attribute_list: ::Array[Types::AttributeKeyAndValue]
+      attr_accessor parent_reference: Types::ObjectReference
+      attr_accessor link_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateObjectResponse
+      attr_accessor object_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSchemaRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSchemaResponse
+      attr_accessor schema_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTypedLinkFacetRequest
+      attr_accessor schema_arn: ::String
+      attr_accessor facet: Types::TypedLinkFacet
+      SENSITIVE: []
+    end
+
+    class CreateTypedLinkFacetResponse < Aws::EmptyStructure
+    end
+
+    class DeleteDirectoryRequest
+      attr_accessor directory_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDirectoryResponse
+      attr_accessor directory_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFacetRequest
+      attr_accessor schema_arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFacetResponse < Aws::EmptyStructure
+    end
+
+    class DeleteObjectRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor object_reference: Types::ObjectReference
+      SENSITIVE: []
+    end
+
+    class DeleteObjectResponse < Aws::EmptyStructure
+    end
+
+    class DeleteSchemaRequest
+      attr_accessor schema_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSchemaResponse
+      attr_accessor schema_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTypedLinkFacetRequest
+      attr_accessor schema_arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTypedLinkFacetResponse < Aws::EmptyStructure
+    end
+
+    class DetachFromIndexRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor index_reference: Types::ObjectReference
+      attr_accessor target_reference: Types::ObjectReference
+      SENSITIVE: []
+    end
+
+    class DetachFromIndexResponse
+      attr_accessor detached_object_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DetachObjectRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor parent_reference: Types::ObjectReference
+      attr_accessor link_name: ::String
+      SENSITIVE: []
+    end
+
+    class DetachObjectResponse
+      attr_accessor detached_object_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DetachPolicyRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor policy_reference: Types::ObjectReference
+      attr_accessor object_reference: Types::ObjectReference
+      SENSITIVE: []
+    end
+
+    class DetachPolicyResponse < Aws::EmptyStructure
+    end
+
+    class DetachTypedLinkRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor typed_link_specifier: Types::TypedLinkSpecifier
+      SENSITIVE: []
+    end
+
+    class Directory
+      attr_accessor name: ::String
+      attr_accessor directory_arn: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED" | "DELETED")
+      attr_accessor creation_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DirectoryAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DirectoryDeletedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DirectoryNotDisabledException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DirectoryNotEnabledException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DisableDirectoryRequest
+      attr_accessor directory_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisableDirectoryResponse
+      attr_accessor directory_arn: ::String
+      SENSITIVE: []
+    end
+
+    class EnableDirectoryRequest
+      attr_accessor directory_arn: ::String
+      SENSITIVE: []
+    end
+
+    class EnableDirectoryResponse
+      attr_accessor directory_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Facet
+      attr_accessor name: ::String
+      attr_accessor object_type: ("NODE" | "LEAF_NODE" | "POLICY" | "INDEX")
+      attr_accessor facet_style: ("STATIC" | "DYNAMIC")
+      SENSITIVE: []
+    end
+
+    class FacetAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FacetAttribute
+      attr_accessor name: ::String
+      attr_accessor attribute_definition: Types::FacetAttributeDefinition
+      attr_accessor attribute_reference: Types::FacetAttributeReference
+      attr_accessor required_behavior: ("REQUIRED_ALWAYS" | "NOT_REQUIRED")
+      SENSITIVE: []
+    end
+
+    class FacetAttributeDefinition
+      attr_accessor type: ("STRING" | "BINARY" | "BOOLEAN" | "NUMBER" | "DATETIME" | "VARIANT")
+      attr_accessor default_value: Types::TypedAttributeValue
+      attr_accessor is_immutable: bool
+      attr_accessor rules: ::Hash[::String, Types::Rule]
+      SENSITIVE: []
+    end
+
+    class FacetAttributeReference
+      attr_accessor target_facet_name: ::String
+      attr_accessor target_attribute_name: ::String
+      SENSITIVE: []
+    end
+
+    class FacetAttributeUpdate
+      attr_accessor attribute: Types::FacetAttribute
+      attr_accessor action: ("CREATE_OR_UPDATE" | "DELETE")
+      SENSITIVE: []
+    end
+
+    class FacetInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FacetNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FacetValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetAppliedSchemaVersionRequest
+      attr_accessor schema_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetAppliedSchemaVersionResponse
+      attr_accessor applied_schema_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetDirectoryRequest
+      attr_accessor directory_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetDirectoryResponse
+      attr_accessor directory: Types::Directory
+      SENSITIVE: []
+    end
+
+    class GetFacetRequest
+      attr_accessor schema_arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetFacetResponse
+      attr_accessor facet: Types::Facet
+      SENSITIVE: []
+    end
+
+    class GetLinkAttributesRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor typed_link_specifier: Types::TypedLinkSpecifier
+      attr_accessor attribute_names: ::Array[::String]
+      attr_accessor consistency_level: ("SERIALIZABLE" | "EVENTUAL")
+      SENSITIVE: []
+    end
+
+    class GetLinkAttributesResponse
+      attr_accessor attributes: ::Array[Types::AttributeKeyAndValue]
+      SENSITIVE: []
+    end
+
+    class GetObjectAttributesRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor object_reference: Types::ObjectReference
+      attr_accessor consistency_level: ("SERIALIZABLE" | "EVENTUAL")
+      attr_accessor schema_facet: Types::SchemaFacet
+      attr_accessor attribute_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetObjectAttributesResponse
+      attr_accessor attributes: ::Array[Types::AttributeKeyAndValue]
+      SENSITIVE: []
+    end
+
+    class GetObjectInformationRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor object_reference: Types::ObjectReference
+      attr_accessor consistency_level: ("SERIALIZABLE" | "EVENTUAL")
+      SENSITIVE: []
+    end
+
+    class GetObjectInformationResponse
+      attr_accessor schema_facets: ::Array[Types::SchemaFacet]
+      attr_accessor object_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetSchemaAsJsonRequest
+      attr_accessor schema_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetSchemaAsJsonResponse
+      attr_accessor name: ::String
+      attr_accessor document: ::String
+      SENSITIVE: []
+    end
+
+    class GetTypedLinkFacetInformationRequest
+      attr_accessor schema_arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetTypedLinkFacetInformationResponse
+      attr_accessor identity_attribute_order: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class IncompatibleSchemaException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IndexAttachment
+      attr_accessor indexed_attributes: ::Array[Types::AttributeKeyAndValue]
+      attr_accessor object_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class IndexedAttributeMissingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServiceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidArnException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidAttachmentException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidFacetUpdateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidNextTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRuleException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidSchemaDocException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidTaggingRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LinkAttributeAction
+      attr_accessor attribute_action_type: ("CREATE_OR_UPDATE" | "DELETE")
+      attr_accessor attribute_update_value: Types::TypedAttributeValue
+      SENSITIVE: []
+    end
+
+    class LinkAttributeUpdate
+      attr_accessor attribute_key: Types::AttributeKey
+      attr_accessor attribute_action: Types::LinkAttributeAction
+      SENSITIVE: []
+    end
+
+    class LinkNameAlreadyInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppliedSchemaArnsRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor schema_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAppliedSchemaArnsResponse
+      attr_accessor schema_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAttachedIndicesRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor target_reference: Types::ObjectReference
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor consistency_level: ("SERIALIZABLE" | "EVENTUAL")
+      SENSITIVE: []
+    end
+
+    class ListAttachedIndicesResponse
+      attr_accessor index_attachments: ::Array[Types::IndexAttachment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDevelopmentSchemaArnsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDevelopmentSchemaArnsResponse
+      attr_accessor schema_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDirectoriesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor state: ("ENABLED" | "DISABLED" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class ListDirectoriesResponse
+      attr_accessor directories: ::Array[Types::Directory]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFacetAttributesRequest
+      attr_accessor schema_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFacetAttributesResponse
+      attr_accessor attributes: ::Array[Types::FacetAttribute]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFacetNamesRequest
+      attr_accessor schema_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFacetNamesResponse
+      attr_accessor facet_names: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIncomingTypedLinksRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor object_reference: Types::ObjectReference
+      attr_accessor filter_attribute_ranges: ::Array[Types::TypedLinkAttributeRange]
+      attr_accessor filter_typed_link: Types::TypedLinkSchemaAndFacetName
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor consistency_level: ("SERIALIZABLE" | "EVENTUAL")
+      SENSITIVE: []
+    end
+
+    class ListIncomingTypedLinksResponse
+      attr_accessor link_specifiers: ::Array[Types::TypedLinkSpecifier]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIndexRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor ranges_on_indexed_values: ::Array[Types::ObjectAttributeRange]
+      attr_accessor index_reference: Types::ObjectReference
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor consistency_level: ("SERIALIZABLE" | "EVENTUAL")
+      SENSITIVE: []
+    end
+
+    class ListIndexResponse
+      attr_accessor index_attachments: ::Array[Types::IndexAttachment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListManagedSchemaArnsRequest
+      attr_accessor schema_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListManagedSchemaArnsResponse
+      attr_accessor schema_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListObjectAttributesRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor object_reference: Types::ObjectReference
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor consistency_level: ("SERIALIZABLE" | "EVENTUAL")
+      attr_accessor facet_filter: Types::SchemaFacet
+      SENSITIVE: []
+    end
+
+    class ListObjectAttributesResponse
+      attr_accessor attributes: ::Array[Types::AttributeKeyAndValue]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListObjectChildrenRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor object_reference: Types::ObjectReference
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor consistency_level: ("SERIALIZABLE" | "EVENTUAL")
+      SENSITIVE: []
+    end
+
+    class ListObjectChildrenResponse
+      attr_accessor children: ::Hash[::String, ::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListObjectParentPathsRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor object_reference: Types::ObjectReference
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListObjectParentPathsResponse
+      attr_accessor path_to_object_identifiers_list: ::Array[Types::PathToObjectIdentifiers]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListObjectParentsRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor object_reference: Types::ObjectReference
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor consistency_level: ("SERIALIZABLE" | "EVENTUAL")
+      attr_accessor include_all_links_to_each_parent: bool
+      SENSITIVE: []
+    end
+
+    class ListObjectParentsResponse
+      attr_accessor parents: ::Hash[::String, ::String]
+      attr_accessor next_token: ::String
+      attr_accessor parent_links: ::Array[Types::ObjectIdentifierAndLinkNameTuple]
+      SENSITIVE: []
+    end
+
+    class ListObjectPoliciesRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor object_reference: Types::ObjectReference
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor consistency_level: ("SERIALIZABLE" | "EVENTUAL")
+      SENSITIVE: []
+    end
+
+    class ListObjectPoliciesResponse
+      attr_accessor attached_policy_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOutgoingTypedLinksRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor object_reference: Types::ObjectReference
+      attr_accessor filter_attribute_ranges: ::Array[Types::TypedLinkAttributeRange]
+      attr_accessor filter_typed_link: Types::TypedLinkSchemaAndFacetName
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor consistency_level: ("SERIALIZABLE" | "EVENTUAL")
+      SENSITIVE: []
+    end
+
+    class ListOutgoingTypedLinksResponse
+      attr_accessor typed_link_specifiers: ::Array[Types::TypedLinkSpecifier]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPolicyAttachmentsRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor policy_reference: Types::ObjectReference
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor consistency_level: ("SERIALIZABLE" | "EVENTUAL")
+      SENSITIVE: []
+    end
+
+    class ListPolicyAttachmentsResponse
+      attr_accessor object_identifiers: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPublishedSchemaArnsRequest
+      attr_accessor schema_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPublishedSchemaArnsResponse
+      attr_accessor schema_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTypedLinkFacetAttributesRequest
+      attr_accessor schema_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTypedLinkFacetAttributesResponse
+      attr_accessor attributes: ::Array[Types::TypedLinkAttributeDefinition]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTypedLinkFacetNamesRequest
+      attr_accessor schema_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTypedLinkFacetNamesResponse
+      attr_accessor facet_names: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LookupPolicyRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor object_reference: Types::ObjectReference
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class LookupPolicyResponse
+      attr_accessor policy_to_path_list: ::Array[Types::PolicyToPath]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class NotIndexException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NotNodeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NotPolicyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ObjectAlreadyDetachedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ObjectAttributeAction
+      attr_accessor object_attribute_action_type: ("CREATE_OR_UPDATE" | "DELETE")
+      attr_accessor object_attribute_update_value: Types::TypedAttributeValue
+      SENSITIVE: []
+    end
+
+    class ObjectAttributeRange
+      attr_accessor attribute_key: Types::AttributeKey
+      attr_accessor range: Types::TypedAttributeValueRange
+      SENSITIVE: []
+    end
+
+    class ObjectAttributeUpdate
+      attr_accessor object_attribute_key: Types::AttributeKey
+      attr_accessor object_attribute_action: Types::ObjectAttributeAction
+      SENSITIVE: []
+    end
+
+    class ObjectIdentifierAndLinkNameTuple
+      attr_accessor object_identifier: ::String
+      attr_accessor link_name: ::String
+      SENSITIVE: []
+    end
+
+    class ObjectNotDetachedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ObjectReference
+      attr_accessor selector: ::String
+      SENSITIVE: []
+    end
+
+    class PathToObjectIdentifiers
+      attr_accessor path: ::String
+      attr_accessor object_identifiers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PolicyAttachment
+      attr_accessor policy_id: ::String
+      attr_accessor object_identifier: ::String
+      attr_accessor policy_type: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyToPath
+      attr_accessor path: ::String
+      attr_accessor policies: ::Array[Types::PolicyAttachment]
+      SENSITIVE: []
+    end
+
+    class PublishSchemaRequest
+      attr_accessor development_schema_arn: ::String
+      attr_accessor version: ::String
+      attr_accessor minor_version: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class PublishSchemaResponse
+      attr_accessor published_schema_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutSchemaFromJsonRequest
+      attr_accessor schema_arn: ::String
+      attr_accessor document: ::String
+      SENSITIVE: []
+    end
+
+    class PutSchemaFromJsonResponse
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveFacetFromObjectRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor schema_facet: Types::SchemaFacet
+      attr_accessor object_reference: Types::ObjectReference
+      SENSITIVE: []
+    end
+
+    class RemoveFacetFromObjectResponse < Aws::EmptyStructure
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RetryableConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Rule
+      attr_accessor type: ("BINARY_LENGTH" | "NUMBER_COMPARISON" | "STRING_FROM_SET" | "STRING_LENGTH")
+      attr_accessor parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class SchemaAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SchemaAlreadyPublishedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SchemaFacet
+      attr_accessor schema_arn: ::String
+      attr_accessor facet_name: ::String
+      SENSITIVE: []
+    end
+
+    class StillContainsLinksException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TypedAttributeValue
+      attr_accessor string_value: ::String
+      attr_accessor binary_value: ::String
+      attr_accessor boolean_value: bool
+      attr_accessor number_value: ::String
+      attr_accessor datetime_value: ::Time
+      SENSITIVE: []
+    end
+
+    class TypedAttributeValueRange
+      attr_accessor start_mode: ("FIRST" | "LAST" | "LAST_BEFORE_MISSING_VALUES" | "INCLUSIVE" | "EXCLUSIVE")
+      attr_accessor start_value: Types::TypedAttributeValue
+      attr_accessor end_mode: ("FIRST" | "LAST" | "LAST_BEFORE_MISSING_VALUES" | "INCLUSIVE" | "EXCLUSIVE")
+      attr_accessor end_value: Types::TypedAttributeValue
+      SENSITIVE: []
+    end
+
+    class TypedLinkAttributeDefinition
+      attr_accessor name: ::String
+      attr_accessor type: ("STRING" | "BINARY" | "BOOLEAN" | "NUMBER" | "DATETIME" | "VARIANT")
+      attr_accessor default_value: Types::TypedAttributeValue
+      attr_accessor is_immutable: bool
+      attr_accessor rules: ::Hash[::String, Types::Rule]
+      attr_accessor required_behavior: ("REQUIRED_ALWAYS" | "NOT_REQUIRED")
+      SENSITIVE: []
+    end
+
+    class TypedLinkAttributeRange
+      attr_accessor attribute_name: ::String
+      attr_accessor range: Types::TypedAttributeValueRange
+      SENSITIVE: []
+    end
+
+    class TypedLinkFacet
+      attr_accessor name: ::String
+      attr_accessor attributes: ::Array[Types::TypedLinkAttributeDefinition]
+      attr_accessor identity_attribute_order: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TypedLinkFacetAttributeUpdate
+      attr_accessor attribute: Types::TypedLinkAttributeDefinition
+      attr_accessor action: ("CREATE_OR_UPDATE" | "DELETE")
+      SENSITIVE: []
+    end
+
+    class TypedLinkSchemaAndFacetName
+      attr_accessor schema_arn: ::String
+      attr_accessor typed_link_name: ::String
+      SENSITIVE: []
+    end
+
+    class TypedLinkSpecifier
+      attr_accessor typed_link_facet: Types::TypedLinkSchemaAndFacetName
+      attr_accessor source_object_reference: Types::ObjectReference
+      attr_accessor target_object_reference: Types::ObjectReference
+      attr_accessor identity_attribute_values: ::Array[Types::AttributeNameAndValue]
+      SENSITIVE: []
+    end
+
+    class UnsupportedIndexTypeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateFacetRequest
+      attr_accessor schema_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor attribute_updates: ::Array[Types::FacetAttributeUpdate]
+      attr_accessor object_type: ("NODE" | "LEAF_NODE" | "POLICY" | "INDEX")
+      SENSITIVE: []
+    end
+
+    class UpdateFacetResponse < Aws::EmptyStructure
+    end
+
+    class UpdateLinkAttributesRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor typed_link_specifier: Types::TypedLinkSpecifier
+      attr_accessor attribute_updates: ::Array[Types::LinkAttributeUpdate]
+      SENSITIVE: []
+    end
+
+    class UpdateLinkAttributesResponse < Aws::EmptyStructure
+    end
+
+    class UpdateObjectAttributesRequest
+      attr_accessor directory_arn: ::String
+      attr_accessor object_reference: Types::ObjectReference
+      attr_accessor attribute_updates: ::Array[Types::ObjectAttributeUpdate]
+      SENSITIVE: []
+    end
+
+    class UpdateObjectAttributesResponse
+      attr_accessor object_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSchemaRequest
+      attr_accessor schema_arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSchemaResponse
+      attr_accessor schema_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateTypedLinkFacetRequest
+      attr_accessor schema_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor attribute_updates: ::Array[Types::TypedLinkFacetAttributeUpdate]
+      attr_accessor identity_attribute_order: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateTypedLinkFacetResponse < Aws::EmptyStructure
+    end
+
+    class UpgradeAppliedSchemaRequest
+      attr_accessor published_schema_arn: ::String
+      attr_accessor directory_arn: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class UpgradeAppliedSchemaResponse
+      attr_accessor upgraded_schema_arn: ::String
+      attr_accessor directory_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpgradePublishedSchemaRequest
+      attr_accessor development_schema_arn: ::String
+      attr_accessor published_schema_arn: ::String
+      attr_accessor minor_version: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class UpgradePublishedSchemaResponse
+      attr_accessor upgraded_schema_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

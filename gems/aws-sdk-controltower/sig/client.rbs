@@ -1,0 +1,267 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ControlTower
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateLandingZoneResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLandingZoneOutput]
+        def arn: () -> ::String
+        def operation_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#create_landing_zone-instance_method
+      def create_landing_zone: (
+                                 manifest: {
+                                 },
+                                 ?tags: Hash[::String, ::String],
+                                 version: ::String
+                               ) -> _CreateLandingZoneResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLandingZoneResponseSuccess
+
+      interface _DeleteLandingZoneResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLandingZoneOutput]
+        def operation_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#delete_landing_zone-instance_method
+      def delete_landing_zone: (
+                                 landing_zone_identifier: ::String
+                               ) -> _DeleteLandingZoneResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLandingZoneResponseSuccess
+
+      interface _DisableControlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableControlOutput]
+        def operation_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#disable_control-instance_method
+      def disable_control: (
+                             control_identifier: ::String,
+                             target_identifier: ::String
+                           ) -> _DisableControlResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableControlResponseSuccess
+
+      interface _EnableControlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableControlOutput]
+        def arn: () -> ::String
+        def operation_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#enable_control-instance_method
+      def enable_control: (
+                            control_identifier: ::String,
+                            ?parameters: Array[
+                              {
+                                key: ::String,
+                                value: {
+                                }
+                              },
+                            ],
+                            ?tags: Hash[::String, ::String],
+                            target_identifier: ::String
+                          ) -> _EnableControlResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableControlResponseSuccess
+
+      interface _GetControlOperationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetControlOperationOutput]
+        def control_operation: () -> Types::ControlOperation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#get_control_operation-instance_method
+      def get_control_operation: (
+                                   operation_identifier: ::String
+                                 ) -> _GetControlOperationResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetControlOperationResponseSuccess
+
+      interface _GetEnabledControlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEnabledControlOutput]
+        def enabled_control_details: () -> Types::EnabledControlDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#get_enabled_control-instance_method
+      def get_enabled_control: (
+                                 enabled_control_identifier: ::String
+                               ) -> _GetEnabledControlResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnabledControlResponseSuccess
+
+      interface _GetLandingZoneResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLandingZoneOutput]
+        def landing_zone: () -> Types::LandingZoneDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#get_landing_zone-instance_method
+      def get_landing_zone: (
+                              landing_zone_identifier: ::String
+                            ) -> _GetLandingZoneResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLandingZoneResponseSuccess
+
+      interface _GetLandingZoneOperationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLandingZoneOperationOutput]
+        def operation_details: () -> Types::LandingZoneOperationDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#get_landing_zone_operation-instance_method
+      def get_landing_zone_operation: (
+                                        operation_identifier: ::String
+                                      ) -> _GetLandingZoneOperationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLandingZoneOperationResponseSuccess
+
+      interface _ListEnabledControlsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEnabledControlsOutput]
+        def enabled_controls: () -> ::Array[Types::EnabledControlSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#list_enabled_controls-instance_method
+      def list_enabled_controls: (
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String,
+                                   target_identifier: ::String
+                                 ) -> _ListEnabledControlsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnabledControlsResponseSuccess
+
+      interface _ListLandingZonesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLandingZonesOutput]
+        def landing_zones: () -> ::Array[Types::LandingZoneSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#list_landing_zones-instance_method
+      def list_landing_zones: (
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListLandingZonesResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLandingZonesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ResetLandingZoneResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResetLandingZoneOutput]
+        def operation_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#reset_landing_zone-instance_method
+      def reset_landing_zone: (
+                                landing_zone_identifier: ::String
+                              ) -> _ResetLandingZoneResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetLandingZoneResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateEnabledControlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEnabledControlOutput]
+        def operation_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#update_enabled_control-instance_method
+      def update_enabled_control: (
+                                    enabled_control_identifier: ::String,
+                                    parameters: Array[
+                                      {
+                                        key: ::String,
+                                        value: {
+                                        }
+                                      },
+                                    ]
+                                  ) -> _UpdateEnabledControlResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnabledControlResponseSuccess
+
+      interface _UpdateLandingZoneResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLandingZoneOutput]
+        def operation_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#update_landing_zone-instance_method
+      def update_landing_zone: (
+                                 landing_zone_identifier: ::String,
+                                 manifest: {
+                                 },
+                                 version: ::String
+                               ) -> _UpdateLandingZoneResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLandingZoneResponseSuccess
+    end
+  end
+end
+

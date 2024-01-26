@@ -991,7 +991,7 @@ module Aws::NetworkMonitor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-networkmonitor'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

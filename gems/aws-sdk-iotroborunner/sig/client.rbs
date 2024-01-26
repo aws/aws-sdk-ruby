@@ -1,0 +1,410 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IoTRoboRunner
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTRoboRunner/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDestinationResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def state: () -> ("ENABLED" | "DISABLED" | "DECOMMISSIONED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTRoboRunner/Client.html#create_destination-instance_method
+      def create_destination: (
+                                ?client_token: ::String,
+                                name: ::String,
+                                site: ::String,
+                                ?state: ("ENABLED" | "DISABLED" | "DECOMMISSIONED"),
+                                ?additional_fixed_properties: ::String
+                              ) -> _CreateDestinationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDestinationResponseSuccess
+
+      interface _CreateSiteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSiteResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTRoboRunner/Client.html#create_site-instance_method
+      def create_site: (
+                         ?client_token: ::String,
+                         name: ::String,
+                         country_code: ::String,
+                         ?description: ::String
+                       ) -> _CreateSiteResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSiteResponseSuccess
+
+      interface _CreateWorkerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkerResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def site: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTRoboRunner/Client.html#create_worker-instance_method
+      def create_worker: (
+                           ?client_token: ::String,
+                           name: ::String,
+                           fleet: ::String,
+                           ?additional_transient_properties: ::String,
+                           ?additional_fixed_properties: ::String,
+                           ?vendor_properties: {
+                             vendor_worker_id: ::String,
+                             vendor_worker_ip_address: ::String?,
+                             vendor_additional_transient_properties: ::String?,
+                             vendor_additional_fixed_properties: ::String?
+                           },
+                           ?position: {
+                             cartesian_coordinates: {
+                               x: ::Float,
+                               y: ::Float,
+                               z: ::Float?
+                             }?
+                           },
+                           ?orientation: {
+                             degrees: ::Float?
+                           }
+                         ) -> _CreateWorkerResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkerResponseSuccess
+
+      interface _CreateWorkerFleetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkerFleetResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTRoboRunner/Client.html#create_worker_fleet-instance_method
+      def create_worker_fleet: (
+                                 ?client_token: ::String,
+                                 name: ::String,
+                                 site: ::String,
+                                 ?additional_fixed_properties: ::String
+                               ) -> _CreateWorkerFleetResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkerFleetResponseSuccess
+
+      interface _DeleteDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDestinationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTRoboRunner/Client.html#delete_destination-instance_method
+      def delete_destination: (
+                                id: ::String
+                              ) -> _DeleteDestinationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDestinationResponseSuccess
+
+      interface _DeleteSiteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSiteResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTRoboRunner/Client.html#delete_site-instance_method
+      def delete_site: (
+                         id: ::String
+                       ) -> _DeleteSiteResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSiteResponseSuccess
+
+      interface _DeleteWorkerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkerResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTRoboRunner/Client.html#delete_worker-instance_method
+      def delete_worker: (
+                           id: ::String
+                         ) -> _DeleteWorkerResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkerResponseSuccess
+
+      interface _DeleteWorkerFleetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkerFleetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTRoboRunner/Client.html#delete_worker_fleet-instance_method
+      def delete_worker_fleet: (
+                                 id: ::String
+                               ) -> _DeleteWorkerFleetResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkerFleetResponseSuccess
+
+      interface _GetDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDestinationResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def site: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def state: () -> ("ENABLED" | "DISABLED" | "DECOMMISSIONED")
+        def additional_fixed_properties: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTRoboRunner/Client.html#get_destination-instance_method
+      def get_destination: (
+                             id: ::String
+                           ) -> _GetDestinationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDestinationResponseSuccess
+
+      interface _GetSiteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSiteResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def country_code: () -> ::String
+        def description: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTRoboRunner/Client.html#get_site-instance_method
+      def get_site: (
+                      id: ::String
+                    ) -> _GetSiteResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSiteResponseSuccess
+
+      interface _GetWorkerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkerResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def fleet: () -> ::String
+        def site: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def name: () -> ::String
+        def additional_transient_properties: () -> ::String
+        def additional_fixed_properties: () -> ::String
+        def vendor_properties: () -> Types::VendorProperties
+        def position: () -> Types::PositionCoordinates
+        def orientation: () -> Types::Orientation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTRoboRunner/Client.html#get_worker-instance_method
+      def get_worker: (
+                        id: ::String
+                      ) -> _GetWorkerResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkerResponseSuccess
+
+      interface _GetWorkerFleetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkerFleetResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def name: () -> ::String
+        def site: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def additional_fixed_properties: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTRoboRunner/Client.html#get_worker_fleet-instance_method
+      def get_worker_fleet: (
+                              id: ::String
+                            ) -> _GetWorkerFleetResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkerFleetResponseSuccess
+
+      interface _ListDestinationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDestinationsResponse]
+        def next_token: () -> ::String
+        def destinations: () -> ::Array[Types::Destination]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTRoboRunner/Client.html#list_destinations-instance_method
+      def list_destinations: (
+                               site: ::String,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String,
+                               ?state: ("ENABLED" | "DISABLED" | "DECOMMISSIONED")
+                             ) -> _ListDestinationsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDestinationsResponseSuccess
+
+      interface _ListSitesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSitesResponse]
+        def next_token: () -> ::String
+        def sites: () -> ::Array[Types::Site]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTRoboRunner/Client.html#list_sites-instance_method
+      def list_sites: (
+                        ?max_results: ::Integer,
+                        ?next_token: ::String
+                      ) -> _ListSitesResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSitesResponseSuccess
+
+      interface _ListWorkerFleetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkerFleetsResponse]
+        def next_token: () -> ::String
+        def worker_fleets: () -> ::Array[Types::WorkerFleet]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTRoboRunner/Client.html#list_worker_fleets-instance_method
+      def list_worker_fleets: (
+                                site: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListWorkerFleetsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkerFleetsResponseSuccess
+
+      interface _ListWorkersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkersResponse]
+        def next_token: () -> ::String
+        def workers: () -> ::Array[Types::Worker]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTRoboRunner/Client.html#list_workers-instance_method
+      def list_workers: (
+                          site: ::String,
+                          ?max_results: ::Integer,
+                          ?next_token: ::String,
+                          ?fleet: ::String
+                        ) -> _ListWorkersResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkersResponseSuccess
+
+      interface _UpdateDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDestinationResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def updated_at: () -> ::Time
+        def state: () -> ("ENABLED" | "DISABLED" | "DECOMMISSIONED")
+        def additional_fixed_properties: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTRoboRunner/Client.html#update_destination-instance_method
+      def update_destination: (
+                                id: ::String,
+                                ?name: ::String,
+                                ?state: ("ENABLED" | "DISABLED" | "DECOMMISSIONED"),
+                                ?additional_fixed_properties: ::String
+                              ) -> _UpdateDestinationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDestinationResponseSuccess
+
+      interface _UpdateSiteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSiteResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def country_code: () -> ::String
+        def description: () -> ::String
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTRoboRunner/Client.html#update_site-instance_method
+      def update_site: (
+                         id: ::String,
+                         ?name: ::String,
+                         ?country_code: ::String,
+                         ?description: ::String
+                       ) -> _UpdateSiteResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSiteResponseSuccess
+
+      interface _UpdateWorkerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWorkerResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def fleet: () -> ::String
+        def updated_at: () -> ::Time
+        def name: () -> ::String
+        def additional_transient_properties: () -> ::String
+        def additional_fixed_properties: () -> ::String
+        def orientation: () -> Types::Orientation
+        def vendor_properties: () -> Types::VendorProperties
+        def position: () -> Types::PositionCoordinates
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTRoboRunner/Client.html#update_worker-instance_method
+      def update_worker: (
+                           id: ::String,
+                           ?name: ::String,
+                           ?additional_transient_properties: ::String,
+                           ?additional_fixed_properties: ::String,
+                           ?vendor_properties: {
+                             vendor_worker_id: ::String,
+                             vendor_worker_ip_address: ::String?,
+                             vendor_additional_transient_properties: ::String?,
+                             vendor_additional_fixed_properties: ::String?
+                           },
+                           ?position: {
+                             cartesian_coordinates: {
+                               x: ::Float,
+                               y: ::Float,
+                               z: ::Float?
+                             }?
+                           },
+                           ?orientation: {
+                             degrees: ::Float?
+                           }
+                         ) -> _UpdateWorkerResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkerResponseSuccess
+
+      interface _UpdateWorkerFleetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWorkerFleetResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def updated_at: () -> ::Time
+        def additional_fixed_properties: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTRoboRunner/Client.html#update_worker_fleet-instance_method
+      def update_worker_fleet: (
+                                 id: ::String,
+                                 ?name: ::String,
+                                 ?additional_fixed_properties: ::String
+                               ) -> _UpdateWorkerFleetResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkerFleetResponseSuccess
+    end
+  end
+end
+

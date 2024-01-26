@@ -1,0 +1,1392 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::WorkSpaces
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccountModification
+      attr_accessor modification_state: ("PENDING" | "COMPLETED" | "FAILED")
+      attr_accessor dedicated_tenancy_support: ("ENABLED" | "DISABLED")
+      attr_accessor dedicated_tenancy_management_cidr_range: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class ApplicationNotSupportedException < Aws::EmptyStructure
+    end
+
+    class ApplicationResourceAssociation
+      attr_accessor application_id: ::String
+      attr_accessor associated_resource_id: ::String
+      attr_accessor associated_resource_type: ("WORKSPACE" | "BUNDLE" | "IMAGE")
+      attr_accessor created: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor state: ("PENDING_INSTALL" | "PENDING_INSTALL_DEPLOYMENT" | "PENDING_UNINSTALL" | "PENDING_UNINSTALL_DEPLOYMENT" | "INSTALLING" | "UNINSTALLING" | "ERROR" | "COMPLETED" | "REMOVED")
+      attr_accessor state_reason: Types::AssociationStateReason
+      SENSITIVE: []
+    end
+
+    class AssociateConnectionAliasRequest
+      attr_accessor alias_id: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateConnectionAliasResult
+      attr_accessor connection_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateIpGroupsRequest
+      attr_accessor directory_id: ::String
+      attr_accessor group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AssociateIpGroupsResult < Aws::EmptyStructure
+    end
+
+    class AssociateWorkspaceApplicationRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateWorkspaceApplicationResult
+      attr_accessor association: Types::WorkspaceResourceAssociation
+      SENSITIVE: []
+    end
+
+    class AssociationStateReason
+      attr_accessor error_code: ("ValidationError.InsufficientDiskSpace" | "ValidationError.InsufficientMemory" | "ValidationError.UnsupportedOperatingSystem" | "DeploymentError.InternalServerError" | "DeploymentError.WorkspaceUnreachable")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class AuthorizeIpRulesRequest
+      attr_accessor group_id: ::String
+      attr_accessor user_rules: ::Array[Types::IpRuleItem]
+      SENSITIVE: []
+    end
+
+    class AuthorizeIpRulesResult < Aws::EmptyStructure
+    end
+
+    class BundleResourceAssociation
+      attr_accessor associated_resource_id: ::String
+      attr_accessor associated_resource_type: ("APPLICATION")
+      attr_accessor bundle_id: ::String
+      attr_accessor created: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor state: ("PENDING_INSTALL" | "PENDING_INSTALL_DEPLOYMENT" | "PENDING_UNINSTALL" | "PENDING_UNINSTALL_DEPLOYMENT" | "INSTALLING" | "UNINSTALLING" | "ERROR" | "COMPLETED" | "REMOVED")
+      attr_accessor state_reason: Types::AssociationStateReason
+      SENSITIVE: []
+    end
+
+    class CertificateBasedAuthProperties
+      attr_accessor status: ("DISABLED" | "ENABLED")
+      attr_accessor certificate_authority_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ClientProperties
+      attr_accessor reconnect_enabled: ("ENABLED" | "DISABLED")
+      attr_accessor log_upload_enabled: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class ClientPropertiesResult
+      attr_accessor resource_id: ::String
+      attr_accessor client_properties: Types::ClientProperties
+      SENSITIVE: []
+    end
+
+    class ComputeNotCompatibleException < Aws::EmptyStructure
+    end
+
+    class ComputeType
+      attr_accessor name: ("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN")
+      SENSITIVE: []
+    end
+
+    class ConnectClientAddIn
+      attr_accessor add_in_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor name: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectionAlias
+      attr_accessor connection_string: ::String
+      attr_accessor alias_id: ::String
+      attr_accessor state: ("CREATING" | "CREATED" | "DELETING")
+      attr_accessor owner_account_id: ::String
+      attr_accessor associations: ::Array[Types::ConnectionAliasAssociation]
+      SENSITIVE: []
+    end
+
+    class ConnectionAliasAssociation
+      attr_accessor association_status: ("NOT_ASSOCIATED" | "ASSOCIATED_WITH_OWNER_ACCOUNT" | "ASSOCIATED_WITH_SHARED_ACCOUNT" | "PENDING_ASSOCIATION" | "PENDING_DISASSOCIATION")
+      attr_accessor associated_account_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor connection_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectionAliasPermission
+      attr_accessor shared_account_id: ::String
+      attr_accessor allow_association: bool
+      SENSITIVE: []
+    end
+
+    class CopyWorkspaceImageRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor source_image_id: ::String
+      attr_accessor source_region: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CopyWorkspaceImageResult
+      attr_accessor image_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConnectClientAddInRequest
+      attr_accessor resource_id: ::String
+      attr_accessor name: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConnectClientAddInResult
+      attr_accessor add_in_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConnectionAliasRequest
+      attr_accessor connection_string: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateConnectionAliasResult
+      attr_accessor alias_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateIpGroupRequest
+      attr_accessor group_name: ::String
+      attr_accessor group_desc: ::String
+      attr_accessor user_rules: ::Array[Types::IpRuleItem]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateIpGroupResult
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateStandbyWorkspacesRequest
+      attr_accessor primary_region: ::String
+      attr_accessor standby_workspaces: ::Array[Types::StandbyWorkspace]
+      SENSITIVE: []
+    end
+
+    class CreateStandbyWorkspacesResult
+      attr_accessor failed_standby_requests: ::Array[Types::FailedCreateStandbyWorkspacesRequest]
+      attr_accessor pending_standby_requests: ::Array[Types::PendingCreateStandbyWorkspacesRequest]
+      SENSITIVE: []
+    end
+
+    class CreateTagsRequest
+      attr_accessor resource_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateTagsResult < Aws::EmptyStructure
+    end
+
+    class CreateUpdatedWorkspaceImageRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor source_image_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateUpdatedWorkspaceImageResult
+      attr_accessor image_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWorkspaceBundleRequest
+      attr_accessor bundle_name: ::String
+      attr_accessor bundle_description: ::String
+      attr_accessor image_id: ::String
+      attr_accessor compute_type: Types::ComputeType
+      attr_accessor user_storage: Types::UserStorage
+      attr_accessor root_storage: Types::RootStorage
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateWorkspaceBundleResult
+      attr_accessor workspace_bundle: Types::WorkspaceBundle
+      SENSITIVE: []
+    end
+
+    class CreateWorkspaceImageRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor workspace_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateWorkspaceImageResult
+      attr_accessor image_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor operating_system: Types::OperatingSystem
+      attr_accessor state: ("AVAILABLE" | "PENDING" | "ERROR")
+      attr_accessor required_tenancy: ("DEFAULT" | "DEDICATED")
+      attr_accessor created: ::Time
+      attr_accessor owner_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWorkspacesRequest
+      attr_accessor workspaces: ::Array[Types::WorkspaceRequest]
+      SENSITIVE: []
+    end
+
+    class CreateWorkspacesResult
+      attr_accessor failed_requests: ::Array[Types::FailedCreateWorkspaceRequest]
+      attr_accessor pending_requests: ::Array[Types::Workspace]
+      SENSITIVE: []
+    end
+
+    class DataReplicationSettings
+      attr_accessor data_replication: ("NO_REPLICATION" | "PRIMARY_AS_SOURCE")
+      attr_accessor recovery_snapshot_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DefaultClientBrandingAttributes
+      attr_accessor logo_url: ::String
+      attr_accessor support_email: ::String
+      attr_accessor support_link: ::String
+      attr_accessor forgot_password_link: ::String
+      attr_accessor login_message: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DefaultImportClientBrandingAttributes
+      attr_accessor logo: ::String
+      attr_accessor support_email: ::String
+      attr_accessor support_link: ::String
+      attr_accessor forgot_password_link: ::String
+      attr_accessor login_message: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DefaultWorkspaceCreationProperties
+      attr_accessor enable_work_docs: bool
+      attr_accessor enable_internet_access: bool
+      attr_accessor default_ou: ::String
+      attr_accessor custom_security_group_id: ::String
+      attr_accessor user_enabled_as_local_administrator: bool
+      attr_accessor enable_maintenance_mode: bool
+      SENSITIVE: []
+    end
+
+    class DeleteClientBrandingRequest
+      attr_accessor resource_id: ::String
+      attr_accessor platforms: ::Array[("DeviceTypeWindows" | "DeviceTypeOsx" | "DeviceTypeAndroid" | "DeviceTypeIos" | "DeviceTypeLinux" | "DeviceTypeWeb")]
+      SENSITIVE: []
+    end
+
+    class DeleteClientBrandingResult < Aws::EmptyStructure
+    end
+
+    class DeleteConnectClientAddInRequest
+      attr_accessor add_in_id: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConnectClientAddInResult < Aws::EmptyStructure
+    end
+
+    class DeleteConnectionAliasRequest
+      attr_accessor alias_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConnectionAliasResult < Aws::EmptyStructure
+    end
+
+    class DeleteIpGroupRequest
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIpGroupResult < Aws::EmptyStructure
+    end
+
+    class DeleteTagsRequest
+      attr_accessor resource_id: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteTagsResult < Aws::EmptyStructure
+    end
+
+    class DeleteWorkspaceBundleRequest
+      attr_accessor bundle_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkspaceBundleResult < Aws::EmptyStructure
+    end
+
+    class DeleteWorkspaceImageRequest
+      attr_accessor image_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkspaceImageResult < Aws::EmptyStructure
+    end
+
+    class DeployWorkspaceApplicationsRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor force: bool
+      SENSITIVE: []
+    end
+
+    class DeployWorkspaceApplicationsResult
+      attr_accessor deployment: Types::WorkSpaceApplicationDeployment
+      SENSITIVE: []
+    end
+
+    class DeregisterWorkspaceDirectoryRequest
+      attr_accessor directory_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterWorkspaceDirectoryResult < Aws::EmptyStructure
+    end
+
+    class DescribeAccountModificationsRequest
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAccountModificationsResult
+      attr_accessor account_modifications: ::Array[Types::AccountModification]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAccountRequest < Aws::EmptyStructure
+    end
+
+    class DescribeAccountResult
+      attr_accessor dedicated_tenancy_support: ("ENABLED" | "DISABLED")
+      attr_accessor dedicated_tenancy_management_cidr_range: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationAssociationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor application_id: ::String
+      attr_accessor associated_resource_types: ::Array[("WORKSPACE" | "BUNDLE" | "IMAGE")]
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationAssociationsResult
+      attr_accessor associations: ::Array[Types::ApplicationResourceAssociation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationsRequest
+      attr_accessor application_ids: ::Array[::String]
+      attr_accessor compute_type_names: ::Array[("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN")]
+      attr_accessor license_type: ("LICENSED" | "UNLICENSED")
+      attr_accessor operating_system_names: ::Array[("AMAZON_LINUX_2" | "UBUNTU_18_04" | "UBUNTU_20_04" | "UBUNTU_22_04" | "UNKNOWN" | "WINDOWS_10" | "WINDOWS_11" | "WINDOWS_7" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022")]
+      attr_accessor owner: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationsResult
+      attr_accessor applications: ::Array[Types::WorkSpaceApplication]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBundleAssociationsRequest
+      attr_accessor bundle_id: ::String
+      attr_accessor associated_resource_types: ::Array[("APPLICATION")]
+      SENSITIVE: []
+    end
+
+    class DescribeBundleAssociationsResult
+      attr_accessor associations: ::Array[Types::BundleResourceAssociation]
+      SENSITIVE: []
+    end
+
+    class DescribeClientBrandingRequest
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeClientBrandingResult
+      attr_accessor device_type_windows: Types::DefaultClientBrandingAttributes
+      attr_accessor device_type_osx: Types::DefaultClientBrandingAttributes
+      attr_accessor device_type_android: Types::DefaultClientBrandingAttributes
+      attr_accessor device_type_ios: Types::IosClientBrandingAttributes
+      attr_accessor device_type_linux: Types::DefaultClientBrandingAttributes
+      attr_accessor device_type_web: Types::DefaultClientBrandingAttributes
+      SENSITIVE: []
+    end
+
+    class DescribeClientPropertiesRequest
+      attr_accessor resource_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeClientPropertiesResult
+      attr_accessor client_properties_list: ::Array[Types::ClientPropertiesResult]
+      SENSITIVE: []
+    end
+
+    class DescribeConnectClientAddInsRequest
+      attr_accessor resource_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeConnectClientAddInsResult
+      attr_accessor add_ins: ::Array[Types::ConnectClientAddIn]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeConnectionAliasPermissionsRequest
+      attr_accessor alias_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeConnectionAliasPermissionsResult
+      attr_accessor alias_id: ::String
+      attr_accessor connection_alias_permissions: ::Array[Types::ConnectionAliasPermission]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeConnectionAliasesRequest
+      attr_accessor alias_ids: ::Array[::String]
+      attr_accessor resource_id: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeConnectionAliasesResult
+      attr_accessor connection_aliases: ::Array[Types::ConnectionAlias]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeImageAssociationsRequest
+      attr_accessor image_id: ::String
+      attr_accessor associated_resource_types: ::Array[("APPLICATION")]
+      SENSITIVE: []
+    end
+
+    class DescribeImageAssociationsResult
+      attr_accessor associations: ::Array[Types::ImageResourceAssociation]
+      SENSITIVE: []
+    end
+
+    class DescribeIpGroupsRequest
+      attr_accessor group_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeIpGroupsResult
+      attr_accessor result: ::Array[Types::WorkspacesIpGroup]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTagsRequest
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTagsResult
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class DescribeWorkspaceAssociationsRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor associated_resource_types: ::Array[("APPLICATION")]
+      SENSITIVE: []
+    end
+
+    class DescribeWorkspaceAssociationsResult
+      attr_accessor associations: ::Array[Types::WorkspaceResourceAssociation]
+      SENSITIVE: []
+    end
+
+    class DescribeWorkspaceBundlesRequest
+      attr_accessor bundle_ids: ::Array[::String]
+      attr_accessor owner: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorkspaceBundlesResult
+      attr_accessor bundles: ::Array[Types::WorkspaceBundle]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorkspaceDirectoriesRequest
+      attr_accessor directory_ids: ::Array[::String]
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorkspaceDirectoriesResult
+      attr_accessor directories: ::Array[Types::WorkspaceDirectory]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorkspaceImagePermissionsRequest
+      attr_accessor image_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeWorkspaceImagePermissionsResult
+      attr_accessor image_id: ::String
+      attr_accessor image_permissions: ::Array[Types::ImagePermission]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorkspaceImagesRequest
+      attr_accessor image_ids: ::Array[::String]
+      attr_accessor image_type: ("OWNED" | "SHARED")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeWorkspaceImagesResult
+      attr_accessor images: ::Array[Types::WorkspaceImage]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorkspaceSnapshotsRequest
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorkspaceSnapshotsResult
+      attr_accessor rebuild_snapshots: ::Array[Types::Snapshot]
+      attr_accessor restore_snapshots: ::Array[Types::Snapshot]
+      SENSITIVE: []
+    end
+
+    class DescribeWorkspacesConnectionStatusRequest
+      attr_accessor workspace_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorkspacesConnectionStatusResult
+      attr_accessor workspaces_connection_status: ::Array[Types::WorkspaceConnectionStatus]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorkspacesRequest
+      attr_accessor workspace_ids: ::Array[::String]
+      attr_accessor directory_id: ::String
+      attr_accessor user_name: ::String
+      attr_accessor bundle_id: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorkspacesResult
+      attr_accessor workspaces: ::Array[Types::Workspace]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateConnectionAliasRequest
+      attr_accessor alias_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateConnectionAliasResult < Aws::EmptyStructure
+    end
+
+    class DisassociateIpGroupsRequest
+      attr_accessor directory_id: ::String
+      attr_accessor group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DisassociateIpGroupsResult < Aws::EmptyStructure
+    end
+
+    class DisassociateWorkspaceApplicationRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateWorkspaceApplicationResult
+      attr_accessor association: Types::WorkspaceResourceAssociation
+      SENSITIVE: []
+    end
+
+    class ErrorDetails
+      attr_accessor error_code: ("OutdatedPowershellVersion" | "OfficeInstalled" | "PCoIPAgentInstalled" | "WindowsUpdatesEnabled" | "AutoMountDisabled" | "WorkspacesBYOLAccountNotFound" | "WorkspacesBYOLAccountDisabled" | "DHCPDisabled" | "DiskFreeSpace" | "AdditionalDrivesAttached" | "OSNotSupported" | "DomainJoined" | "AzureDomainJoined" | "FirewallEnabled" | "VMWareToolsInstalled" | "DiskSizeExceeded" | "IncompatiblePartitioning" | "PendingReboot" | "AutoLogonEnabled" | "RealTimeUniversalDisabled" | "MultipleBootPartition" | "Requires64BitOS" | "ZeroRearmCount" | "InPlaceUpgrade" | "AntiVirusInstalled" | "UEFINotSupported")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class FailedCreateStandbyWorkspacesRequest
+      attr_accessor standby_workspace_request: Types::StandbyWorkspace
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class FailedCreateWorkspaceRequest
+      attr_accessor workspace_request: Types::WorkspaceRequest
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class FailedWorkspaceChangeRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class ImagePermission
+      attr_accessor shared_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ImageResourceAssociation
+      attr_accessor associated_resource_id: ::String
+      attr_accessor associated_resource_type: ("APPLICATION")
+      attr_accessor created: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor image_id: ::String
+      attr_accessor state: ("PENDING_INSTALL" | "PENDING_INSTALL_DEPLOYMENT" | "PENDING_UNINSTALL" | "PENDING_UNINSTALL_DEPLOYMENT" | "INSTALLING" | "UNINSTALLING" | "ERROR" | "COMPLETED" | "REMOVED")
+      attr_accessor state_reason: Types::AssociationStateReason
+      SENSITIVE: []
+    end
+
+    class ImportClientBrandingRequest
+      attr_accessor resource_id: ::String
+      attr_accessor device_type_windows: Types::DefaultImportClientBrandingAttributes
+      attr_accessor device_type_osx: Types::DefaultImportClientBrandingAttributes
+      attr_accessor device_type_android: Types::DefaultImportClientBrandingAttributes
+      attr_accessor device_type_ios: Types::IosImportClientBrandingAttributes
+      attr_accessor device_type_linux: Types::DefaultImportClientBrandingAttributes
+      attr_accessor device_type_web: Types::DefaultImportClientBrandingAttributes
+      SENSITIVE: []
+    end
+
+    class ImportClientBrandingResult
+      attr_accessor device_type_windows: Types::DefaultClientBrandingAttributes
+      attr_accessor device_type_osx: Types::DefaultClientBrandingAttributes
+      attr_accessor device_type_android: Types::DefaultClientBrandingAttributes
+      attr_accessor device_type_ios: Types::IosClientBrandingAttributes
+      attr_accessor device_type_linux: Types::DefaultClientBrandingAttributes
+      attr_accessor device_type_web: Types::DefaultClientBrandingAttributes
+      SENSITIVE: []
+    end
+
+    class ImportWorkspaceImageRequest
+      attr_accessor ec2_image_id: ::String
+      attr_accessor ingestion_process: ("BYOL_REGULAR" | "BYOL_GRAPHICS" | "BYOL_GRAPHICSPRO" | "BYOL_GRAPHICS_G4DN" | "BYOL_REGULAR_WSP" | "BYOL_REGULAR_BYOP" | "BYOL_GRAPHICS_G4DN_BYOP")
+      attr_accessor image_name: ::String
+      attr_accessor image_description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor applications: ::Array[("Microsoft_Office_2016" | "Microsoft_Office_2019")]
+      SENSITIVE: []
+    end
+
+    class ImportWorkspaceImageResult
+      attr_accessor image_id: ::String
+      SENSITIVE: []
+    end
+
+    class IncompatibleApplicationsException < Aws::EmptyStructure
+    end
+
+    class InvalidParameterValuesException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidResourceStateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IosClientBrandingAttributes
+      attr_accessor logo_url: ::String
+      attr_accessor logo_2x_url: ::String
+      attr_accessor logo_3x_url: ::String
+      attr_accessor support_email: ::String
+      attr_accessor support_link: ::String
+      attr_accessor forgot_password_link: ::String
+      attr_accessor login_message: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class IosImportClientBrandingAttributes
+      attr_accessor logo: ::String
+      attr_accessor logo_2x: ::String
+      attr_accessor logo_3x: ::String
+      attr_accessor support_email: ::String
+      attr_accessor support_link: ::String
+      attr_accessor forgot_password_link: ::String
+      attr_accessor login_message: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class IpRuleItem
+      attr_accessor ip_rule: ::String
+      attr_accessor rule_desc: ::String
+      SENSITIVE: []
+    end
+
+    class ListAvailableManagementCidrRangesRequest
+      attr_accessor management_cidr_range_constraint: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAvailableManagementCidrRangesResult
+      attr_accessor management_cidr_ranges: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MigrateWorkspaceRequest
+      attr_accessor source_workspace_id: ::String
+      attr_accessor bundle_id: ::String
+      SENSITIVE: []
+    end
+
+    class MigrateWorkspaceResult
+      attr_accessor source_workspace_id: ::String
+      attr_accessor target_workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class ModificationState
+      attr_accessor resource: ("ROOT_VOLUME" | "USER_VOLUME" | "COMPUTE_TYPE")
+      attr_accessor state: ("UPDATE_INITIATED" | "UPDATE_IN_PROGRESS")
+      SENSITIVE: []
+    end
+
+    class ModifyAccountRequest
+      attr_accessor dedicated_tenancy_support: ("ENABLED")
+      attr_accessor dedicated_tenancy_management_cidr_range: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyAccountResult < Aws::EmptyStructure
+    end
+
+    class ModifyCertificateBasedAuthPropertiesRequest
+      attr_accessor resource_id: ::String
+      attr_accessor certificate_based_auth_properties: Types::CertificateBasedAuthProperties
+      attr_accessor properties_to_delete: ::Array[("CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARN")]
+      SENSITIVE: []
+    end
+
+    class ModifyCertificateBasedAuthPropertiesResult < Aws::EmptyStructure
+    end
+
+    class ModifyClientPropertiesRequest
+      attr_accessor resource_id: ::String
+      attr_accessor client_properties: Types::ClientProperties
+      SENSITIVE: []
+    end
+
+    class ModifyClientPropertiesResult < Aws::EmptyStructure
+    end
+
+    class ModifySamlPropertiesRequest
+      attr_accessor resource_id: ::String
+      attr_accessor saml_properties: Types::SamlProperties
+      attr_accessor properties_to_delete: ::Array[("SAML_PROPERTIES_USER_ACCESS_URL" | "SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME")]
+      SENSITIVE: []
+    end
+
+    class ModifySamlPropertiesResult < Aws::EmptyStructure
+    end
+
+    class ModifySelfservicePermissionsRequest
+      attr_accessor resource_id: ::String
+      attr_accessor selfservice_permissions: Types::SelfservicePermissions
+      SENSITIVE: []
+    end
+
+    class ModifySelfservicePermissionsResult < Aws::EmptyStructure
+    end
+
+    class ModifyWorkspaceAccessPropertiesRequest
+      attr_accessor resource_id: ::String
+      attr_accessor workspace_access_properties: Types::WorkspaceAccessProperties
+      SENSITIVE: []
+    end
+
+    class ModifyWorkspaceAccessPropertiesResult < Aws::EmptyStructure
+    end
+
+    class ModifyWorkspaceCreationPropertiesRequest
+      attr_accessor resource_id: ::String
+      attr_accessor workspace_creation_properties: Types::WorkspaceCreationProperties
+      SENSITIVE: []
+    end
+
+    class ModifyWorkspaceCreationPropertiesResult < Aws::EmptyStructure
+    end
+
+    class ModifyWorkspacePropertiesRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor workspace_properties: Types::WorkspaceProperties
+      attr_accessor data_replication: ("NO_REPLICATION" | "PRIMARY_AS_SOURCE")
+      SENSITIVE: []
+    end
+
+    class ModifyWorkspacePropertiesResult < Aws::EmptyStructure
+    end
+
+    class ModifyWorkspaceStateRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor workspace_state: ("AVAILABLE" | "ADMIN_MAINTENANCE")
+      SENSITIVE: []
+    end
+
+    class ModifyWorkspaceStateResult < Aws::EmptyStructure
+    end
+
+    class OperatingSystem
+      attr_accessor type: ("WINDOWS" | "LINUX")
+      SENSITIVE: []
+    end
+
+    class OperatingSystemNotCompatibleException < Aws::EmptyStructure
+    end
+
+    class OperationInProgressException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OperationNotSupportedException
+      attr_accessor message: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class PendingCreateStandbyWorkspacesRequest
+      attr_accessor user_name: ::String
+      attr_accessor directory_id: ::String
+      attr_accessor state: ("PENDING" | "AVAILABLE" | "IMPAIRED" | "UNHEALTHY" | "REBOOTING" | "STARTING" | "REBUILDING" | "RESTORING" | "MAINTENANCE" | "ADMIN_MAINTENANCE" | "TERMINATING" | "TERMINATED" | "SUSPENDED" | "UPDATING" | "STOPPING" | "STOPPED" | "ERROR")
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class RebootRequest
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class RebootWorkspacesRequest
+      attr_accessor reboot_workspace_requests: ::Array[Types::RebootRequest]
+      SENSITIVE: []
+    end
+
+    class RebootWorkspacesResult
+      attr_accessor failed_requests: ::Array[Types::FailedWorkspaceChangeRequest]
+      SENSITIVE: []
+    end
+
+    class RebuildRequest
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class RebuildWorkspacesRequest
+      attr_accessor rebuild_workspace_requests: ::Array[Types::RebuildRequest]
+      SENSITIVE: []
+    end
+
+    class RebuildWorkspacesResult
+      attr_accessor failed_requests: ::Array[Types::FailedWorkspaceChangeRequest]
+      SENSITIVE: []
+    end
+
+    class RegisterWorkspaceDirectoryRequest
+      attr_accessor directory_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor enable_work_docs: bool
+      attr_accessor enable_self_service: bool
+      attr_accessor tenancy: ("DEDICATED" | "SHARED")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class RegisterWorkspaceDirectoryResult < Aws::EmptyStructure
+    end
+
+    class RelatedWorkspaceProperties
+      attr_accessor workspace_id: ::String
+      attr_accessor region: ::String
+      attr_accessor state: ("PENDING" | "AVAILABLE" | "IMPAIRED" | "UNHEALTHY" | "REBOOTING" | "STARTING" | "REBUILDING" | "RESTORING" | "MAINTENANCE" | "ADMIN_MAINTENANCE" | "TERMINATING" | "TERMINATED" | "SUSPENDED" | "UPDATING" | "STOPPING" | "STOPPED" | "ERROR")
+      attr_accessor type: ("PRIMARY" | "STANDBY")
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceAssociatedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceCreationFailedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceUnavailableException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreWorkspaceRequest
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreWorkspaceResult < Aws::EmptyStructure
+    end
+
+    class RevokeIpRulesRequest
+      attr_accessor group_id: ::String
+      attr_accessor user_rules: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RevokeIpRulesResult < Aws::EmptyStructure
+    end
+
+    class RootStorage
+      attr_accessor capacity: ::String
+      SENSITIVE: []
+    end
+
+    class SamlProperties
+      attr_accessor status: ("DISABLED" | "ENABLED" | "ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK")
+      attr_accessor user_access_url: ::String
+      attr_accessor relay_state_parameter_name: ::String
+      SENSITIVE: []
+    end
+
+    class SelfservicePermissions
+      attr_accessor restart_workspace: ("ENABLED" | "DISABLED")
+      attr_accessor increase_volume_size: ("ENABLED" | "DISABLED")
+      attr_accessor change_compute_type: ("ENABLED" | "DISABLED")
+      attr_accessor switch_running_mode: ("ENABLED" | "DISABLED")
+      attr_accessor rebuild_workspace: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class Snapshot
+      attr_accessor snapshot_time: ::Time
+      SENSITIVE: []
+    end
+
+    class StandbyWorkspace
+      attr_accessor primary_workspace_id: ::String
+      attr_accessor volume_encryption_key: ::String
+      attr_accessor directory_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor data_replication: ("NO_REPLICATION" | "PRIMARY_AS_SOURCE")
+      SENSITIVE: []
+    end
+
+    class StandbyWorkspacesProperties
+      attr_accessor standby_workspace_id: ::String
+      attr_accessor data_replication: ("NO_REPLICATION" | "PRIMARY_AS_SOURCE")
+      attr_accessor recovery_snapshot_time: ::Time
+      SENSITIVE: []
+    end
+
+    class StartRequest
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartWorkspacesRequest
+      attr_accessor start_workspace_requests: ::Array[Types::StartRequest]
+      SENSITIVE: []
+    end
+
+    class StartWorkspacesResult
+      attr_accessor failed_requests: ::Array[Types::FailedWorkspaceChangeRequest]
+      SENSITIVE: []
+    end
+
+    class StopRequest
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopWorkspacesRequest
+      attr_accessor stop_workspace_requests: ::Array[Types::StopRequest]
+      SENSITIVE: []
+    end
+
+    class StopWorkspacesResult
+      attr_accessor failed_requests: ::Array[Types::FailedWorkspaceChangeRequest]
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TerminateRequest
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class TerminateWorkspacesRequest
+      attr_accessor terminate_workspace_requests: ::Array[Types::TerminateRequest]
+      SENSITIVE: []
+    end
+
+    class TerminateWorkspacesResult
+      attr_accessor failed_requests: ::Array[Types::FailedWorkspaceChangeRequest]
+      SENSITIVE: []
+    end
+
+    class UnsupportedNetworkConfigurationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedWorkspaceConfigurationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConnectClientAddInRequest
+      attr_accessor add_in_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor name: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConnectClientAddInResult < Aws::EmptyStructure
+    end
+
+    class UpdateConnectionAliasPermissionRequest
+      attr_accessor alias_id: ::String
+      attr_accessor connection_alias_permission: Types::ConnectionAliasPermission
+      SENSITIVE: []
+    end
+
+    class UpdateConnectionAliasPermissionResult < Aws::EmptyStructure
+    end
+
+    class UpdateResult
+      attr_accessor update_available: bool
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRulesOfIpGroupRequest
+      attr_accessor group_id: ::String
+      attr_accessor user_rules: ::Array[Types::IpRuleItem]
+      SENSITIVE: []
+    end
+
+    class UpdateRulesOfIpGroupResult < Aws::EmptyStructure
+    end
+
+    class UpdateWorkspaceBundleRequest
+      attr_accessor bundle_id: ::String
+      attr_accessor image_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateWorkspaceBundleResult < Aws::EmptyStructure
+    end
+
+    class UpdateWorkspaceImagePermissionRequest
+      attr_accessor image_id: ::String
+      attr_accessor allow_copy_image: bool
+      attr_accessor shared_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateWorkspaceImagePermissionResult < Aws::EmptyStructure
+    end
+
+    class UserStorage
+      attr_accessor capacity: ::String
+      SENSITIVE: []
+    end
+
+    class WorkSpaceApplication
+      attr_accessor application_id: ::String
+      attr_accessor created: ::Time
+      attr_accessor description: ::String
+      attr_accessor license_type: ("LICENSED" | "UNLICENSED")
+      attr_accessor name: ::String
+      attr_accessor owner: ::String
+      attr_accessor state: ("PENDING" | "ERROR" | "AVAILABLE" | "UNINSTALL_ONLY")
+      attr_accessor supported_compute_type_names: ::Array[("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN")]
+      attr_accessor supported_operating_system_names: ::Array[("AMAZON_LINUX_2" | "UBUNTU_18_04" | "UBUNTU_20_04" | "UBUNTU_22_04" | "UNKNOWN" | "WINDOWS_10" | "WINDOWS_11" | "WINDOWS_7" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022")]
+      SENSITIVE: []
+    end
+
+    class WorkSpaceApplicationDeployment
+      attr_accessor associations: ::Array[Types::WorkspaceResourceAssociation]
+      SENSITIVE: []
+    end
+
+    class Workspace
+      attr_accessor workspace_id: ::String
+      attr_accessor directory_id: ::String
+      attr_accessor user_name: ::String
+      attr_accessor ip_address: ::String
+      attr_accessor state: ("PENDING" | "AVAILABLE" | "IMPAIRED" | "UNHEALTHY" | "REBOOTING" | "STARTING" | "REBUILDING" | "RESTORING" | "MAINTENANCE" | "ADMIN_MAINTENANCE" | "TERMINATING" | "TERMINATED" | "SUSPENDED" | "UPDATING" | "STOPPING" | "STOPPED" | "ERROR")
+      attr_accessor bundle_id: ::String
+      attr_accessor subnet_id: ::String
+      attr_accessor error_message: ::String
+      attr_accessor error_code: ::String
+      attr_accessor computer_name: ::String
+      attr_accessor volume_encryption_key: ::String
+      attr_accessor user_volume_encryption_enabled: bool
+      attr_accessor root_volume_encryption_enabled: bool
+      attr_accessor workspace_properties: Types::WorkspaceProperties
+      attr_accessor modification_states: ::Array[Types::ModificationState]
+      attr_accessor related_workspaces: ::Array[Types::RelatedWorkspaceProperties]
+      attr_accessor data_replication_settings: Types::DataReplicationSettings
+      attr_accessor standby_workspaces_properties: ::Array[Types::StandbyWorkspacesProperties]
+      SENSITIVE: []
+    end
+
+    class WorkspaceAccessProperties
+      attr_accessor device_type_windows: ("ALLOW" | "DENY")
+      attr_accessor device_type_osx: ("ALLOW" | "DENY")
+      attr_accessor device_type_web: ("ALLOW" | "DENY")
+      attr_accessor device_type_ios: ("ALLOW" | "DENY")
+      attr_accessor device_type_android: ("ALLOW" | "DENY")
+      attr_accessor device_type_chrome_os: ("ALLOW" | "DENY")
+      attr_accessor device_type_zero_client: ("ALLOW" | "DENY")
+      attr_accessor device_type_linux: ("ALLOW" | "DENY")
+      SENSITIVE: []
+    end
+
+    class WorkspaceBundle
+      attr_accessor bundle_id: ::String
+      attr_accessor name: ::String
+      attr_accessor owner: ::String
+      attr_accessor description: ::String
+      attr_accessor image_id: ::String
+      attr_accessor root_storage: Types::RootStorage
+      attr_accessor user_storage: Types::UserStorage
+      attr_accessor compute_type: Types::ComputeType
+      attr_accessor last_updated_time: ::Time
+      attr_accessor creation_time: ::Time
+      attr_accessor state: ("AVAILABLE" | "PENDING" | "ERROR")
+      attr_accessor bundle_type: ("REGULAR" | "STANDBY")
+      SENSITIVE: []
+    end
+
+    class WorkspaceConnectionStatus
+      attr_accessor workspace_id: ::String
+      attr_accessor connection_state: ("CONNECTED" | "DISCONNECTED" | "UNKNOWN")
+      attr_accessor connection_state_check_timestamp: ::Time
+      attr_accessor last_known_user_connection_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class WorkspaceCreationProperties
+      attr_accessor enable_work_docs: bool
+      attr_accessor enable_internet_access: bool
+      attr_accessor default_ou: ::String
+      attr_accessor custom_security_group_id: ::String
+      attr_accessor user_enabled_as_local_administrator: bool
+      attr_accessor enable_maintenance_mode: bool
+      SENSITIVE: []
+    end
+
+    class WorkspaceDirectory
+      attr_accessor directory_id: ::String
+      attr_accessor alias: ::String
+      attr_accessor directory_name: ::String
+      attr_accessor registration_code: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor dns_ip_addresses: ::Array[::String]
+      attr_accessor customer_user_name: ::String
+      attr_accessor iam_role_id: ::String
+      attr_accessor directory_type: ("SIMPLE_AD" | "AD_CONNECTOR")
+      attr_accessor workspace_security_group_id: ::String
+      attr_accessor state: ("REGISTERING" | "REGISTERED" | "DEREGISTERING" | "DEREGISTERED" | "ERROR")
+      attr_accessor workspace_creation_properties: Types::DefaultWorkspaceCreationProperties
+      attr_accessor ip_group_ids: ::Array[::String]
+      attr_accessor workspace_access_properties: Types::WorkspaceAccessProperties
+      attr_accessor tenancy: ("DEDICATED" | "SHARED")
+      attr_accessor selfservice_permissions: Types::SelfservicePermissions
+      attr_accessor saml_properties: Types::SamlProperties
+      attr_accessor certificate_based_auth_properties: Types::CertificateBasedAuthProperties
+      SENSITIVE: []
+    end
+
+    class WorkspaceImage
+      attr_accessor image_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor operating_system: Types::OperatingSystem
+      attr_accessor state: ("AVAILABLE" | "PENDING" | "ERROR")
+      attr_accessor required_tenancy: ("DEFAULT" | "DEDICATED")
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      attr_accessor created: ::Time
+      attr_accessor owner_account_id: ::String
+      attr_accessor updates: Types::UpdateResult
+      attr_accessor error_details: ::Array[Types::ErrorDetails]
+      SENSITIVE: []
+    end
+
+    class WorkspaceProperties
+      attr_accessor running_mode: ("AUTO_STOP" | "ALWAYS_ON" | "MANUAL")
+      attr_accessor running_mode_auto_stop_timeout_in_minutes: ::Integer
+      attr_accessor root_volume_size_gib: ::Integer
+      attr_accessor user_volume_size_gib: ::Integer
+      attr_accessor compute_type_name: ("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN")
+      attr_accessor protocols: ::Array[("PCOIP" | "WSP")]
+      attr_accessor operating_system_name: ("AMAZON_LINUX_2" | "UBUNTU_18_04" | "UBUNTU_20_04" | "UBUNTU_22_04" | "UNKNOWN" | "WINDOWS_10" | "WINDOWS_11" | "WINDOWS_7" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022")
+      SENSITIVE: []
+    end
+
+    class WorkspaceRequest
+      attr_accessor directory_id: ::String
+      attr_accessor user_name: ::String
+      attr_accessor bundle_id: ::String
+      attr_accessor volume_encryption_key: ::String
+      attr_accessor user_volume_encryption_enabled: bool
+      attr_accessor root_volume_encryption_enabled: bool
+      attr_accessor workspace_properties: Types::WorkspaceProperties
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class WorkspaceResourceAssociation
+      attr_accessor associated_resource_id: ::String
+      attr_accessor associated_resource_type: ("APPLICATION")
+      attr_accessor created: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor state: ("PENDING_INSTALL" | "PENDING_INSTALL_DEPLOYMENT" | "PENDING_UNINSTALL" | "PENDING_UNINSTALL_DEPLOYMENT" | "INSTALLING" | "UNINSTALLING" | "ERROR" | "COMPLETED" | "REMOVED")
+      attr_accessor state_reason: Types::AssociationStateReason
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class WorkspacesDefaultRoleNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WorkspacesIpGroup
+      attr_accessor group_id: ::String
+      attr_accessor group_name: ::String
+      attr_accessor group_desc: ::String
+      attr_accessor user_rules: ::Array[Types::IpRuleItem]
+      SENSITIVE: []
+    end
+  end
+end

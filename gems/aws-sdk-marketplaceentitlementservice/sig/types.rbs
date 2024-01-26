@@ -1,0 +1,57 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MarketplaceEntitlementService
+  module Types
+
+    class Entitlement
+      attr_accessor product_code: ::String
+      attr_accessor dimension: ::String
+      attr_accessor customer_identifier: ::String
+      attr_accessor value: Types::EntitlementValue
+      attr_accessor expiration_date: ::Time
+      SENSITIVE: []
+    end
+
+    class EntitlementValue
+      attr_accessor integer_value: ::Integer
+      attr_accessor double_value: ::Float
+      attr_accessor boolean_value: bool
+      attr_accessor string_value: ::String
+      SENSITIVE: []
+    end
+
+    class GetEntitlementsRequest
+      attr_accessor product_code: ::String
+      attr_accessor filter: ::Hash[("CUSTOMER_IDENTIFIER" | "DIMENSION"), ::Array[::String]]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetEntitlementsResult
+      attr_accessor entitlements: ::Array[Types::Entitlement]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServiceErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

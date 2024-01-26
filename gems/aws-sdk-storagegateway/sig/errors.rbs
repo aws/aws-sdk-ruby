@@ -1,0 +1,28 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module StorageGateway
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class InternalServerError < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def error: () -> ::String
+      end
+      class InvalidGatewayRequestException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def error: () -> ::String
+      end
+      class ServiceUnavailableError < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def error: () -> ::String
+      end
+    end
+  end
+end

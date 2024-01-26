@@ -1,0 +1,1274 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ForecastService
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateAutoPredictorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAutoPredictorResponse]
+        def predictor_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#create_auto_predictor-instance_method
+      def create_auto_predictor: (
+                                   predictor_name: ::String,
+                                   ?forecast_horizon: ::Integer,
+                                   ?forecast_types: Array[::String],
+                                   ?forecast_dimensions: Array[::String],
+                                   ?forecast_frequency: ::String,
+                                   ?data_config: {
+                                     dataset_group_arn: ::String,
+                                     attribute_configs: Array[
+                                       {
+                                         attribute_name: ::String,
+                                         transformations: Hash[::String, ::String]
+                                       },
+                                     ]?,
+                                     additional_datasets: Array[
+                                       {
+                                         name: ::String,
+                                         configuration: Hash[::String, Array[::String]]?
+                                       },
+                                     ]?
+                                   },
+                                   ?encryption_config: {
+                                     role_arn: ::String,
+                                     kms_key_arn: ::String
+                                   },
+                                   ?reference_predictor_arn: ::String,
+                                   ?optimization_metric: ("WAPE" | "RMSE" | "AverageWeightedQuantileLoss" | "MASE" | "MAPE"),
+                                   ?explain_predictor: bool,
+                                   ?tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ],
+                                   ?monitor_config: {
+                                     monitor_name: ::String
+                                   },
+                                   ?time_alignment_boundary: {
+                                     month: ("JANUARY" | "FEBRUARY" | "MARCH" | "APRIL" | "MAY" | "JUNE" | "JULY" | "AUGUST" | "SEPTEMBER" | "OCTOBER" | "NOVEMBER" | "DECEMBER")?,
+                                     day_of_month: ::Integer?,
+                                     day_of_week: ("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY")?,
+                                     hour: ::Integer?
+                                   }
+                                 ) -> _CreateAutoPredictorResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAutoPredictorResponseSuccess
+
+      interface _CreateDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDatasetResponse]
+        def dataset_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#create_dataset-instance_method
+      def create_dataset: (
+                            dataset_name: ::String,
+                            domain: ("RETAIL" | "CUSTOM" | "INVENTORY_PLANNING" | "EC2_CAPACITY" | "WORK_FORCE" | "WEB_TRAFFIC" | "METRICS"),
+                            dataset_type: ("TARGET_TIME_SERIES" | "RELATED_TIME_SERIES" | "ITEM_METADATA"),
+                            ?data_frequency: ::String,
+                            schema: {
+                              attributes: Array[
+                                {
+                                  attribute_name: ::String?,
+                                  attribute_type: ("string" | "integer" | "float" | "timestamp" | "geolocation")?
+                                },
+                              ]?
+                            },
+                            ?encryption_config: {
+                              role_arn: ::String,
+                              kms_key_arn: ::String
+                            },
+                            ?tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ]
+                          ) -> _CreateDatasetResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatasetResponseSuccess
+
+      interface _CreateDatasetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDatasetGroupResponse]
+        def dataset_group_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#create_dataset_group-instance_method
+      def create_dataset_group: (
+                                  dataset_group_name: ::String,
+                                  domain: ("RETAIL" | "CUSTOM" | "INVENTORY_PLANNING" | "EC2_CAPACITY" | "WORK_FORCE" | "WEB_TRAFFIC" | "METRICS"),
+                                  ?dataset_arns: Array[::String],
+                                  ?tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String
+                                    },
+                                  ]
+                                ) -> _CreateDatasetGroupResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatasetGroupResponseSuccess
+
+      interface _CreateDatasetImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDatasetImportJobResponse]
+        def dataset_import_job_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#create_dataset_import_job-instance_method
+      def create_dataset_import_job: (
+                                       dataset_import_job_name: ::String,
+                                       dataset_arn: ::String,
+                                       data_source: {
+                                         s3_config: {
+                                           path: ::String,
+                                           role_arn: ::String,
+                                           kms_key_arn: ::String?
+                                         }
+                                       },
+                                       ?timestamp_format: ::String,
+                                       ?time_zone: ::String,
+                                       ?use_geolocation_for_time_zone: bool,
+                                       ?geolocation_format: ::String,
+                                       ?tags: Array[
+                                         {
+                                           key: ::String,
+                                           value: ::String
+                                         },
+                                       ],
+                                       ?format: ::String,
+                                       ?import_mode: ("FULL" | "INCREMENTAL")
+                                     ) -> _CreateDatasetImportJobResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatasetImportJobResponseSuccess
+
+      interface _CreateExplainabilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateExplainabilityResponse]
+        def explainability_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#create_explainability-instance_method
+      def create_explainability: (
+                                   explainability_name: ::String,
+                                   resource_arn: ::String,
+                                   explainability_config: {
+                                     time_series_granularity: ("ALL" | "SPECIFIC"),
+                                     time_point_granularity: ("ALL" | "SPECIFIC")
+                                   },
+                                   ?data_source: {
+                                     s3_config: {
+                                       path: ::String,
+                                       role_arn: ::String,
+                                       kms_key_arn: ::String?
+                                     }
+                                   },
+                                   ?schema: {
+                                     attributes: Array[
+                                       {
+                                         attribute_name: ::String?,
+                                         attribute_type: ("string" | "integer" | "float" | "timestamp" | "geolocation")?
+                                       },
+                                     ]?
+                                   },
+                                   ?enable_visualization: bool,
+                                   ?start_date_time: ::String,
+                                   ?end_date_time: ::String,
+                                   ?tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ]
+                                 ) -> _CreateExplainabilityResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateExplainabilityResponseSuccess
+
+      interface _CreateExplainabilityExportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateExplainabilityExportResponse]
+        def explainability_export_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#create_explainability_export-instance_method
+      def create_explainability_export: (
+                                          explainability_export_name: ::String,
+                                          explainability_arn: ::String,
+                                          destination: {
+                                            s3_config: {
+                                              path: ::String,
+                                              role_arn: ::String,
+                                              kms_key_arn: ::String?
+                                            }
+                                          },
+                                          ?tags: Array[
+                                            {
+                                              key: ::String,
+                                              value: ::String
+                                            },
+                                          ],
+                                          ?format: ::String
+                                        ) -> _CreateExplainabilityExportResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateExplainabilityExportResponseSuccess
+
+      interface _CreateForecastResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateForecastResponse]
+        def forecast_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#create_forecast-instance_method
+      def create_forecast: (
+                             forecast_name: ::String,
+                             predictor_arn: ::String,
+                             ?forecast_types: Array[::String],
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String
+                               },
+                             ],
+                             ?time_series_selector: {
+                               time_series_identifiers: {
+                                 data_source: {
+                                   s3_config: {
+                                     path: ::String,
+                                     role_arn: ::String,
+                                     kms_key_arn: ::String?
+                                   }
+                                 }?,
+                                 schema: {
+                                   attributes: Array[
+                                     {
+                                       attribute_name: ::String?,
+                                       attribute_type: ("string" | "integer" | "float" | "timestamp" | "geolocation")?
+                                     },
+                                   ]?
+                                 }?,
+                                 format: ::String?
+                               }?
+                             }
+                           ) -> _CreateForecastResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateForecastResponseSuccess
+
+      interface _CreateForecastExportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateForecastExportJobResponse]
+        def forecast_export_job_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#create_forecast_export_job-instance_method
+      def create_forecast_export_job: (
+                                        forecast_export_job_name: ::String,
+                                        forecast_arn: ::String,
+                                        destination: {
+                                          s3_config: {
+                                            path: ::String,
+                                            role_arn: ::String,
+                                            kms_key_arn: ::String?
+                                          }
+                                        },
+                                        ?tags: Array[
+                                          {
+                                            key: ::String,
+                                            value: ::String
+                                          },
+                                        ],
+                                        ?format: ::String
+                                      ) -> _CreateForecastExportJobResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateForecastExportJobResponseSuccess
+
+      interface _CreateMonitorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMonitorResponse]
+        def monitor_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#create_monitor-instance_method
+      def create_monitor: (
+                            monitor_name: ::String,
+                            resource_arn: ::String,
+                            ?tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ]
+                          ) -> _CreateMonitorResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMonitorResponseSuccess
+
+      interface _CreatePredictorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePredictorResponse]
+        def predictor_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#create_predictor-instance_method
+      def create_predictor: (
+                              predictor_name: ::String,
+                              ?algorithm_arn: ::String,
+                              forecast_horizon: ::Integer,
+                              ?forecast_types: Array[::String],
+                              ?perform_auto_ml: bool,
+                              ?auto_ml_override_strategy: ("LatencyOptimized" | "AccuracyOptimized"),
+                              ?perform_hpo: bool,
+                              ?training_parameters: Hash[::String, ::String],
+                              ?evaluation_parameters: {
+                                number_of_backtest_windows: ::Integer?,
+                                back_test_window_offset: ::Integer?
+                              },
+                              ?hpo_config: {
+                                parameter_ranges: {
+                                  categorical_parameter_ranges: Array[
+                                    {
+                                      name: ::String,
+                                      values: Array[::String]
+                                    },
+                                  ]?,
+                                  continuous_parameter_ranges: Array[
+                                    {
+                                      name: ::String,
+                                      max_value: ::Float,
+                                      min_value: ::Float,
+                                      scaling_type: ("Auto" | "Linear" | "Logarithmic" | "ReverseLogarithmic")?
+                                    },
+                                  ]?,
+                                  integer_parameter_ranges: Array[
+                                    {
+                                      name: ::String,
+                                      max_value: ::Integer,
+                                      min_value: ::Integer,
+                                      scaling_type: ("Auto" | "Linear" | "Logarithmic" | "ReverseLogarithmic")?
+                                    },
+                                  ]?
+                                }?
+                              },
+                              input_data_config: {
+                                dataset_group_arn: ::String,
+                                supplementary_features: Array[
+                                  {
+                                    name: ::String,
+                                    value: ::String
+                                  },
+                                ]?
+                              },
+                              featurization_config: {
+                                forecast_frequency: ::String,
+                                forecast_dimensions: Array[::String]?,
+                                featurizations: Array[
+                                  {
+                                    attribute_name: ::String,
+                                    featurization_pipeline: Array[
+                                      {
+                                        featurization_method_name: ("filling"),
+                                        featurization_method_parameters: Hash[::String, ::String]?
+                                      },
+                                    ]?
+                                  },
+                                ]?
+                              },
+                              ?encryption_config: {
+                                role_arn: ::String,
+                                kms_key_arn: ::String
+                              },
+                              ?tags: Array[
+                                {
+                                  key: ::String,
+                                  value: ::String
+                                },
+                              ],
+                              ?optimization_metric: ("WAPE" | "RMSE" | "AverageWeightedQuantileLoss" | "MASE" | "MAPE")
+                            ) -> _CreatePredictorResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePredictorResponseSuccess
+
+      interface _CreatePredictorBacktestExportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePredictorBacktestExportJobResponse]
+        def predictor_backtest_export_job_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#create_predictor_backtest_export_job-instance_method
+      def create_predictor_backtest_export_job: (
+                                                  predictor_backtest_export_job_name: ::String,
+                                                  predictor_arn: ::String,
+                                                  destination: {
+                                                    s3_config: {
+                                                      path: ::String,
+                                                      role_arn: ::String,
+                                                      kms_key_arn: ::String?
+                                                    }
+                                                  },
+                                                  ?tags: Array[
+                                                    {
+                                                      key: ::String,
+                                                      value: ::String
+                                                    },
+                                                  ],
+                                                  ?format: ::String
+                                                ) -> _CreatePredictorBacktestExportJobResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePredictorBacktestExportJobResponseSuccess
+
+      interface _CreateWhatIfAnalysisResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWhatIfAnalysisResponse]
+        def what_if_analysis_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#create_what_if_analysis-instance_method
+      def create_what_if_analysis: (
+                                     what_if_analysis_name: ::String,
+                                     forecast_arn: ::String,
+                                     ?time_series_selector: {
+                                       time_series_identifiers: {
+                                         data_source: {
+                                           s3_config: {
+                                             path: ::String,
+                                             role_arn: ::String,
+                                             kms_key_arn: ::String?
+                                           }
+                                         }?,
+                                         schema: {
+                                           attributes: Array[
+                                             {
+                                               attribute_name: ::String?,
+                                               attribute_type: ("string" | "integer" | "float" | "timestamp" | "geolocation")?
+                                             },
+                                           ]?
+                                         }?,
+                                         format: ::String?
+                                       }?
+                                     },
+                                     ?tags: Array[
+                                       {
+                                         key: ::String,
+                                         value: ::String
+                                       },
+                                     ]
+                                   ) -> _CreateWhatIfAnalysisResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWhatIfAnalysisResponseSuccess
+
+      interface _CreateWhatIfForecastResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWhatIfForecastResponse]
+        def what_if_forecast_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#create_what_if_forecast-instance_method
+      def create_what_if_forecast: (
+                                     what_if_forecast_name: ::String,
+                                     what_if_analysis_arn: ::String,
+                                     ?time_series_transformations: Array[
+                                       {
+                                         action: {
+                                           attribute_name: ::String,
+                                           operation: ("ADD" | "SUBTRACT" | "MULTIPLY" | "DIVIDE"),
+                                           value: ::Float
+                                         }?,
+                                         time_series_conditions: Array[
+                                           {
+                                             attribute_name: ::String,
+                                             attribute_value: ::String,
+                                             condition: ("EQUALS" | "NOT_EQUALS" | "LESS_THAN" | "GREATER_THAN")
+                                           },
+                                         ]?
+                                       },
+                                     ],
+                                     ?time_series_replacements_data_source: {
+                                       s3_config: {
+                                         path: ::String,
+                                         role_arn: ::String,
+                                         kms_key_arn: ::String?
+                                       },
+                                       schema: {
+                                         attributes: Array[
+                                           {
+                                             attribute_name: ::String?,
+                                             attribute_type: ("string" | "integer" | "float" | "timestamp" | "geolocation")?
+                                           },
+                                         ]?
+                                       },
+                                       format: ::String?,
+                                       timestamp_format: ::String?
+                                     },
+                                     ?tags: Array[
+                                       {
+                                         key: ::String,
+                                         value: ::String
+                                       },
+                                     ]
+                                   ) -> _CreateWhatIfForecastResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWhatIfForecastResponseSuccess
+
+      interface _CreateWhatIfForecastExportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWhatIfForecastExportResponse]
+        def what_if_forecast_export_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#create_what_if_forecast_export-instance_method
+      def create_what_if_forecast_export: (
+                                            what_if_forecast_export_name: ::String,
+                                            what_if_forecast_arns: Array[::String],
+                                            destination: {
+                                              s3_config: {
+                                                path: ::String,
+                                                role_arn: ::String,
+                                                kms_key_arn: ::String?
+                                              }
+                                            },
+                                            ?tags: Array[
+                                              {
+                                                key: ::String,
+                                                value: ::String
+                                              },
+                                            ],
+                                            ?format: ::String
+                                          ) -> _CreateWhatIfForecastExportResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWhatIfForecastExportResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#delete_dataset-instance_method
+      def delete_dataset: (
+                            dataset_arn: ::String
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#delete_dataset_group-instance_method
+      def delete_dataset_group: (
+                                  dataset_group_arn: ::String
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#delete_dataset_import_job-instance_method
+      def delete_dataset_import_job: (
+                                       dataset_import_job_arn: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#delete_explainability-instance_method
+      def delete_explainability: (
+                                   explainability_arn: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#delete_explainability_export-instance_method
+      def delete_explainability_export: (
+                                          explainability_export_arn: ::String
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#delete_forecast-instance_method
+      def delete_forecast: (
+                             forecast_arn: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#delete_forecast_export_job-instance_method
+      def delete_forecast_export_job: (
+                                        forecast_export_job_arn: ::String
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#delete_monitor-instance_method
+      def delete_monitor: (
+                            monitor_arn: ::String
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#delete_predictor-instance_method
+      def delete_predictor: (
+                              predictor_arn: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#delete_predictor_backtest_export_job-instance_method
+      def delete_predictor_backtest_export_job: (
+                                                  predictor_backtest_export_job_arn: ::String
+                                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#delete_resource_tree-instance_method
+      def delete_resource_tree: (
+                                  resource_arn: ::String
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#delete_what_if_analysis-instance_method
+      def delete_what_if_analysis: (
+                                     what_if_analysis_arn: ::String
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#delete_what_if_forecast-instance_method
+      def delete_what_if_forecast: (
+                                     what_if_forecast_arn: ::String
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#delete_what_if_forecast_export-instance_method
+      def delete_what_if_forecast_export: (
+                                            what_if_forecast_export_arn: ::String
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeAutoPredictorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAutoPredictorResponse]
+        def predictor_arn: () -> ::String
+        def predictor_name: () -> ::String
+        def forecast_horizon: () -> ::Integer
+        def forecast_types: () -> ::Array[::String]
+        def forecast_frequency: () -> ::String
+        def forecast_dimensions: () -> ::Array[::String]
+        def dataset_import_job_arns: () -> ::Array[::String]
+        def data_config: () -> Types::DataConfig
+        def encryption_config: () -> Types::EncryptionConfig
+        def reference_predictor_summary: () -> Types::ReferencePredictorSummary
+        def estimated_time_remaining_in_minutes: () -> ::Integer
+        def status: () -> ::String
+        def message: () -> ::String
+        def creation_time: () -> ::Time
+        def last_modification_time: () -> ::Time
+        def optimization_metric: () -> ("WAPE" | "RMSE" | "AverageWeightedQuantileLoss" | "MASE" | "MAPE")
+        def explainability_info: () -> Types::ExplainabilityInfo
+        def monitor_info: () -> Types::MonitorInfo
+        def time_alignment_boundary: () -> Types::TimeAlignmentBoundary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#describe_auto_predictor-instance_method
+      def describe_auto_predictor: (
+                                     predictor_arn: ::String
+                                   ) -> _DescribeAutoPredictorResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAutoPredictorResponseSuccess
+
+      interface _DescribeDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDatasetResponse]
+        def dataset_arn: () -> ::String
+        def dataset_name: () -> ::String
+        def domain: () -> ("RETAIL" | "CUSTOM" | "INVENTORY_PLANNING" | "EC2_CAPACITY" | "WORK_FORCE" | "WEB_TRAFFIC" | "METRICS")
+        def dataset_type: () -> ("TARGET_TIME_SERIES" | "RELATED_TIME_SERIES" | "ITEM_METADATA")
+        def data_frequency: () -> ::String
+        def schema: () -> Types::Schema
+        def encryption_config: () -> Types::EncryptionConfig
+        def status: () -> ::String
+        def creation_time: () -> ::Time
+        def last_modification_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#describe_dataset-instance_method
+      def describe_dataset: (
+                              dataset_arn: ::String
+                            ) -> _DescribeDatasetResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDatasetResponseSuccess
+
+      interface _DescribeDatasetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDatasetGroupResponse]
+        def dataset_group_name: () -> ::String
+        def dataset_group_arn: () -> ::String
+        def dataset_arns: () -> ::Array[::String]
+        def domain: () -> ("RETAIL" | "CUSTOM" | "INVENTORY_PLANNING" | "EC2_CAPACITY" | "WORK_FORCE" | "WEB_TRAFFIC" | "METRICS")
+        def status: () -> ::String
+        def creation_time: () -> ::Time
+        def last_modification_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#describe_dataset_group-instance_method
+      def describe_dataset_group: (
+                                    dataset_group_arn: ::String
+                                  ) -> _DescribeDatasetGroupResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDatasetGroupResponseSuccess
+
+      interface _DescribeDatasetImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDatasetImportJobResponse]
+        def dataset_import_job_name: () -> ::String
+        def dataset_import_job_arn: () -> ::String
+        def dataset_arn: () -> ::String
+        def timestamp_format: () -> ::String
+        def time_zone: () -> ::String
+        def use_geolocation_for_time_zone: () -> bool
+        def geolocation_format: () -> ::String
+        def data_source: () -> Types::DataSource
+        def estimated_time_remaining_in_minutes: () -> ::Integer
+        def field_statistics: () -> ::Hash[::String, Types::Statistics]
+        def data_size: () -> ::Float
+        def status: () -> ::String
+        def message: () -> ::String
+        def creation_time: () -> ::Time
+        def last_modification_time: () -> ::Time
+        def format: () -> ::String
+        def import_mode: () -> ("FULL" | "INCREMENTAL")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#describe_dataset_import_job-instance_method
+      def describe_dataset_import_job: (
+                                         dataset_import_job_arn: ::String
+                                       ) -> _DescribeDatasetImportJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDatasetImportJobResponseSuccess
+
+      interface _DescribeExplainabilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeExplainabilityResponse]
+        def explainability_arn: () -> ::String
+        def explainability_name: () -> ::String
+        def resource_arn: () -> ::String
+        def explainability_config: () -> Types::ExplainabilityConfig
+        def enable_visualization: () -> bool
+        def data_source: () -> Types::DataSource
+        def schema: () -> Types::Schema
+        def start_date_time: () -> ::String
+        def end_date_time: () -> ::String
+        def estimated_time_remaining_in_minutes: () -> ::Integer
+        def message: () -> ::String
+        def status: () -> ::String
+        def creation_time: () -> ::Time
+        def last_modification_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#describe_explainability-instance_method
+      def describe_explainability: (
+                                     explainability_arn: ::String
+                                   ) -> _DescribeExplainabilityResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeExplainabilityResponseSuccess
+
+      interface _DescribeExplainabilityExportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeExplainabilityExportResponse]
+        def explainability_export_arn: () -> ::String
+        def explainability_export_name: () -> ::String
+        def explainability_arn: () -> ::String
+        def destination: () -> Types::DataDestination
+        def message: () -> ::String
+        def status: () -> ::String
+        def creation_time: () -> ::Time
+        def last_modification_time: () -> ::Time
+        def format: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#describe_explainability_export-instance_method
+      def describe_explainability_export: (
+                                            explainability_export_arn: ::String
+                                          ) -> _DescribeExplainabilityExportResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeExplainabilityExportResponseSuccess
+
+      interface _DescribeForecastResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeForecastResponse]
+        def forecast_arn: () -> ::String
+        def forecast_name: () -> ::String
+        def forecast_types: () -> ::Array[::String]
+        def predictor_arn: () -> ::String
+        def dataset_group_arn: () -> ::String
+        def estimated_time_remaining_in_minutes: () -> ::Integer
+        def status: () -> ::String
+        def message: () -> ::String
+        def creation_time: () -> ::Time
+        def last_modification_time: () -> ::Time
+        def time_series_selector: () -> Types::TimeSeriesSelector
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#describe_forecast-instance_method
+      def describe_forecast: (
+                               forecast_arn: ::String
+                             ) -> _DescribeForecastResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeForecastResponseSuccess
+
+      interface _DescribeForecastExportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeForecastExportJobResponse]
+        def forecast_export_job_arn: () -> ::String
+        def forecast_export_job_name: () -> ::String
+        def forecast_arn: () -> ::String
+        def destination: () -> Types::DataDestination
+        def message: () -> ::String
+        def status: () -> ::String
+        def creation_time: () -> ::Time
+        def last_modification_time: () -> ::Time
+        def format: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#describe_forecast_export_job-instance_method
+      def describe_forecast_export_job: (
+                                          forecast_export_job_arn: ::String
+                                        ) -> _DescribeForecastExportJobResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeForecastExportJobResponseSuccess
+
+      interface _DescribeMonitorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMonitorResponse]
+        def monitor_name: () -> ::String
+        def monitor_arn: () -> ::String
+        def resource_arn: () -> ::String
+        def status: () -> ::String
+        def last_evaluation_time: () -> ::Time
+        def last_evaluation_state: () -> ::String
+        def baseline: () -> Types::Baseline
+        def message: () -> ::String
+        def creation_time: () -> ::Time
+        def last_modification_time: () -> ::Time
+        def estimated_evaluation_time_remaining_in_minutes: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#describe_monitor-instance_method
+      def describe_monitor: (
+                              monitor_arn: ::String
+                            ) -> _DescribeMonitorResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMonitorResponseSuccess
+
+      interface _DescribePredictorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePredictorResponse]
+        def predictor_arn: () -> ::String
+        def predictor_name: () -> ::String
+        def algorithm_arn: () -> ::String
+        def auto_ml_algorithm_arns: () -> ::Array[::String]
+        def forecast_horizon: () -> ::Integer
+        def forecast_types: () -> ::Array[::String]
+        def perform_auto_ml: () -> bool
+        def auto_ml_override_strategy: () -> ("LatencyOptimized" | "AccuracyOptimized")
+        def perform_hpo: () -> bool
+        def training_parameters: () -> ::Hash[::String, ::String]
+        def evaluation_parameters: () -> Types::EvaluationParameters
+        def hpo_config: () -> Types::HyperParameterTuningJobConfig
+        def input_data_config: () -> Types::InputDataConfig
+        def featurization_config: () -> Types::FeaturizationConfig
+        def encryption_config: () -> Types::EncryptionConfig
+        def predictor_execution_details: () -> Types::PredictorExecutionDetails
+        def estimated_time_remaining_in_minutes: () -> ::Integer
+        def is_auto_predictor: () -> bool
+        def dataset_import_job_arns: () -> ::Array[::String]
+        def status: () -> ::String
+        def message: () -> ::String
+        def creation_time: () -> ::Time
+        def last_modification_time: () -> ::Time
+        def optimization_metric: () -> ("WAPE" | "RMSE" | "AverageWeightedQuantileLoss" | "MASE" | "MAPE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#describe_predictor-instance_method
+      def describe_predictor: (
+                                predictor_arn: ::String
+                              ) -> _DescribePredictorResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePredictorResponseSuccess
+
+      interface _DescribePredictorBacktestExportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePredictorBacktestExportJobResponse]
+        def predictor_backtest_export_job_arn: () -> ::String
+        def predictor_backtest_export_job_name: () -> ::String
+        def predictor_arn: () -> ::String
+        def destination: () -> Types::DataDestination
+        def message: () -> ::String
+        def status: () -> ::String
+        def creation_time: () -> ::Time
+        def last_modification_time: () -> ::Time
+        def format: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#describe_predictor_backtest_export_job-instance_method
+      def describe_predictor_backtest_export_job: (
+                                                    predictor_backtest_export_job_arn: ::String
+                                                  ) -> _DescribePredictorBacktestExportJobResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePredictorBacktestExportJobResponseSuccess
+
+      interface _DescribeWhatIfAnalysisResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeWhatIfAnalysisResponse]
+        def what_if_analysis_name: () -> ::String
+        def what_if_analysis_arn: () -> ::String
+        def forecast_arn: () -> ::String
+        def estimated_time_remaining_in_minutes: () -> ::Integer
+        def status: () -> ::String
+        def message: () -> ::String
+        def creation_time: () -> ::Time
+        def last_modification_time: () -> ::Time
+        def time_series_selector: () -> Types::TimeSeriesSelector
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#describe_what_if_analysis-instance_method
+      def describe_what_if_analysis: (
+                                       what_if_analysis_arn: ::String
+                                     ) -> _DescribeWhatIfAnalysisResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWhatIfAnalysisResponseSuccess
+
+      interface _DescribeWhatIfForecastResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeWhatIfForecastResponse]
+        def what_if_forecast_name: () -> ::String
+        def what_if_forecast_arn: () -> ::String
+        def what_if_analysis_arn: () -> ::String
+        def estimated_time_remaining_in_minutes: () -> ::Integer
+        def status: () -> ::String
+        def message: () -> ::String
+        def creation_time: () -> ::Time
+        def last_modification_time: () -> ::Time
+        def time_series_transformations: () -> ::Array[Types::TimeSeriesTransformation]
+        def time_series_replacements_data_source: () -> Types::TimeSeriesReplacementsDataSource
+        def forecast_types: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#describe_what_if_forecast-instance_method
+      def describe_what_if_forecast: (
+                                       what_if_forecast_arn: ::String
+                                     ) -> _DescribeWhatIfForecastResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWhatIfForecastResponseSuccess
+
+      interface _DescribeWhatIfForecastExportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeWhatIfForecastExportResponse]
+        def what_if_forecast_export_arn: () -> ::String
+        def what_if_forecast_export_name: () -> ::String
+        def what_if_forecast_arns: () -> ::Array[::String]
+        def destination: () -> Types::DataDestination
+        def message: () -> ::String
+        def status: () -> ::String
+        def creation_time: () -> ::Time
+        def estimated_time_remaining_in_minutes: () -> ::Integer
+        def last_modification_time: () -> ::Time
+        def format: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#describe_what_if_forecast_export-instance_method
+      def describe_what_if_forecast_export: (
+                                              what_if_forecast_export_arn: ::String
+                                            ) -> _DescribeWhatIfForecastExportResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWhatIfForecastExportResponseSuccess
+
+      interface _GetAccuracyMetricsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccuracyMetricsResponse]
+        def predictor_evaluation_results: () -> ::Array[Types::EvaluationResult]
+        def is_auto_predictor: () -> bool
+        def auto_ml_override_strategy: () -> ("LatencyOptimized" | "AccuracyOptimized")
+        def optimization_metric: () -> ("WAPE" | "RMSE" | "AverageWeightedQuantileLoss" | "MASE" | "MAPE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#get_accuracy_metrics-instance_method
+      def get_accuracy_metrics: (
+                                  predictor_arn: ::String
+                                ) -> _GetAccuracyMetricsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccuracyMetricsResponseSuccess
+
+      interface _ListDatasetGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasetGroupsResponse]
+        def dataset_groups: () -> ::Array[Types::DatasetGroupSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#list_dataset_groups-instance_method
+      def list_dataset_groups: (
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer
+                               ) -> _ListDatasetGroupsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatasetGroupsResponseSuccess
+
+      interface _ListDatasetImportJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasetImportJobsResponse]
+        def dataset_import_jobs: () -> ::Array[Types::DatasetImportJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#list_dataset_import_jobs-instance_method
+      def list_dataset_import_jobs: (
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer,
+                                      ?filters: Array[
+                                        {
+                                          key: ::String,
+                                          value: ::String,
+                                          condition: ("IS" | "IS_NOT")
+                                        },
+                                      ]
+                                    ) -> _ListDatasetImportJobsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatasetImportJobsResponseSuccess
+
+      interface _ListDatasetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasetsResponse]
+        def datasets: () -> ::Array[Types::DatasetSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#list_datasets-instance_method
+      def list_datasets: (
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListDatasetsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatasetsResponseSuccess
+
+      interface _ListExplainabilitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListExplainabilitiesResponse]
+        def explainabilities: () -> ::Array[Types::ExplainabilitySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#list_explainabilities-instance_method
+      def list_explainabilities: (
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer,
+                                   ?filters: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String,
+                                       condition: ("IS" | "IS_NOT")
+                                     },
+                                   ]
+                                 ) -> _ListExplainabilitiesResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExplainabilitiesResponseSuccess
+
+      interface _ListExplainabilityExportsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListExplainabilityExportsResponse]
+        def explainability_exports: () -> ::Array[Types::ExplainabilityExportSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#list_explainability_exports-instance_method
+      def list_explainability_exports: (
+                                         ?next_token: ::String,
+                                         ?max_results: ::Integer,
+                                         ?filters: Array[
+                                           {
+                                             key: ::String,
+                                             value: ::String,
+                                             condition: ("IS" | "IS_NOT")
+                                           },
+                                         ]
+                                       ) -> _ListExplainabilityExportsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExplainabilityExportsResponseSuccess
+
+      interface _ListForecastExportJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListForecastExportJobsResponse]
+        def forecast_export_jobs: () -> ::Array[Types::ForecastExportJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#list_forecast_export_jobs-instance_method
+      def list_forecast_export_jobs: (
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer,
+                                       ?filters: Array[
+                                         {
+                                           key: ::String,
+                                           value: ::String,
+                                           condition: ("IS" | "IS_NOT")
+                                         },
+                                       ]
+                                     ) -> _ListForecastExportJobsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListForecastExportJobsResponseSuccess
+
+      interface _ListForecastsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListForecastsResponse]
+        def forecasts: () -> ::Array[Types::ForecastSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#list_forecasts-instance_method
+      def list_forecasts: (
+                            ?next_token: ::String,
+                            ?max_results: ::Integer,
+                            ?filters: Array[
+                              {
+                                key: ::String,
+                                value: ::String,
+                                condition: ("IS" | "IS_NOT")
+                              },
+                            ]
+                          ) -> _ListForecastsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListForecastsResponseSuccess
+
+      interface _ListMonitorEvaluationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMonitorEvaluationsResponse]
+        def next_token: () -> ::String
+        def predictor_monitor_evaluations: () -> ::Array[Types::PredictorMonitorEvaluation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#list_monitor_evaluations-instance_method
+      def list_monitor_evaluations: (
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer,
+                                      monitor_arn: ::String,
+                                      ?filters: Array[
+                                        {
+                                          key: ::String,
+                                          value: ::String,
+                                          condition: ("IS" | "IS_NOT")
+                                        },
+                                      ]
+                                    ) -> _ListMonitorEvaluationsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMonitorEvaluationsResponseSuccess
+
+      interface _ListMonitorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMonitorsResponse]
+        def monitors: () -> ::Array[Types::MonitorSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#list_monitors-instance_method
+      def list_monitors: (
+                           ?next_token: ::String,
+                           ?max_results: ::Integer,
+                           ?filters: Array[
+                             {
+                               key: ::String,
+                               value: ::String,
+                               condition: ("IS" | "IS_NOT")
+                             },
+                           ]
+                         ) -> _ListMonitorsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMonitorsResponseSuccess
+
+      interface _ListPredictorBacktestExportJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPredictorBacktestExportJobsResponse]
+        def predictor_backtest_export_jobs: () -> ::Array[Types::PredictorBacktestExportJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#list_predictor_backtest_export_jobs-instance_method
+      def list_predictor_backtest_export_jobs: (
+                                                 ?next_token: ::String,
+                                                 ?max_results: ::Integer,
+                                                 ?filters: Array[
+                                                   {
+                                                     key: ::String,
+                                                     value: ::String,
+                                                     condition: ("IS" | "IS_NOT")
+                                                   },
+                                                 ]
+                                               ) -> _ListPredictorBacktestExportJobsResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPredictorBacktestExportJobsResponseSuccess
+
+      interface _ListPredictorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPredictorsResponse]
+        def predictors: () -> ::Array[Types::PredictorSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#list_predictors-instance_method
+      def list_predictors: (
+                             ?next_token: ::String,
+                             ?max_results: ::Integer,
+                             ?filters: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String,
+                                 condition: ("IS" | "IS_NOT")
+                               },
+                             ]
+                           ) -> _ListPredictorsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPredictorsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListWhatIfAnalysesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWhatIfAnalysesResponse]
+        def what_if_analyses: () -> ::Array[Types::WhatIfAnalysisSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#list_what_if_analyses-instance_method
+      def list_what_if_analyses: (
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer,
+                                   ?filters: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String,
+                                       condition: ("IS" | "IS_NOT")
+                                     },
+                                   ]
+                                 ) -> _ListWhatIfAnalysesResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWhatIfAnalysesResponseSuccess
+
+      interface _ListWhatIfForecastExportsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWhatIfForecastExportsResponse]
+        def what_if_forecast_exports: () -> ::Array[Types::WhatIfForecastExportSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#list_what_if_forecast_exports-instance_method
+      def list_what_if_forecast_exports: (
+                                           ?next_token: ::String,
+                                           ?max_results: ::Integer,
+                                           ?filters: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String,
+                                               condition: ("IS" | "IS_NOT")
+                                             },
+                                           ]
+                                         ) -> _ListWhatIfForecastExportsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWhatIfForecastExportsResponseSuccess
+
+      interface _ListWhatIfForecastsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWhatIfForecastsResponse]
+        def what_if_forecasts: () -> ::Array[Types::WhatIfForecastSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#list_what_if_forecasts-instance_method
+      def list_what_if_forecasts: (
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer,
+                                    ?filters: Array[
+                                      {
+                                        key: ::String,
+                                        value: ::String,
+                                        condition: ("IS" | "IS_NOT")
+                                      },
+                                    ]
+                                  ) -> _ListWhatIfForecastsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWhatIfForecastsResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#resume_resource-instance_method
+      def resume_resource: (
+                             resource_arn: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#stop_resource-instance_method
+      def stop_resource: (
+                           resource_arn: ::String
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateDatasetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDatasetGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ForecastService/Client.html#update_dataset_group-instance_method
+      def update_dataset_group: (
+                                  dataset_group_arn: ::String,
+                                  dataset_arns: Array[::String]
+                                ) -> _UpdateDatasetGroupResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDatasetGroupResponseSuccess
+    end
+  end
+end
+

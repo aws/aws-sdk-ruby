@@ -1,0 +1,627 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module BillingConductor
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateAccountsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateAccountsOutput]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#associate_accounts-instance_method
+      def associate_accounts: (
+                                arn: ::String,
+                                account_ids: Array[::String]
+                              ) -> _AssociateAccountsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateAccountsResponseSuccess
+
+      interface _AssociatePricingRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociatePricingRulesOutput]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#associate_pricing_rules-instance_method
+      def associate_pricing_rules: (
+                                     arn: ::String,
+                                     pricing_rule_arns: Array[::String]
+                                   ) -> _AssociatePricingRulesResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociatePricingRulesResponseSuccess
+
+      interface _BatchAssociateResourcesToCustomLineItemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchAssociateResourcesToCustomLineItemOutput]
+        def successfully_associated_resources: () -> ::Array[Types::AssociateResourceResponseElement]
+        def failed_associated_resources: () -> ::Array[Types::AssociateResourceResponseElement]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#batch_associate_resources_to_custom_line_item-instance_method
+      def batch_associate_resources_to_custom_line_item: (
+                                                           target_arn: ::String,
+                                                           resource_arns: Array[::String],
+                                                           ?billing_period_range: {
+                                                             inclusive_start_billing_period: ::String,
+                                                             exclusive_end_billing_period: ::String?
+                                                           }
+                                                         ) -> _BatchAssociateResourcesToCustomLineItemResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchAssociateResourcesToCustomLineItemResponseSuccess
+
+      interface _BatchDisassociateResourcesFromCustomLineItemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDisassociateResourcesFromCustomLineItemOutput]
+        def successfully_disassociated_resources: () -> ::Array[Types::DisassociateResourceResponseElement]
+        def failed_disassociated_resources: () -> ::Array[Types::DisassociateResourceResponseElement]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#batch_disassociate_resources_from_custom_line_item-instance_method
+      def batch_disassociate_resources_from_custom_line_item: (
+                                                                target_arn: ::String,
+                                                                resource_arns: Array[::String],
+                                                                ?billing_period_range: {
+                                                                  inclusive_start_billing_period: ::String,
+                                                                  exclusive_end_billing_period: ::String?
+                                                                }
+                                                              ) -> _BatchDisassociateResourcesFromCustomLineItemResponseSuccess
+                                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDisassociateResourcesFromCustomLineItemResponseSuccess
+
+      interface _CreateBillingGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBillingGroupOutput]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#create_billing_group-instance_method
+      def create_billing_group: (
+                                  ?client_token: ::String,
+                                  name: ::String,
+                                  account_grouping: {
+                                    linked_account_ids: Array[::String],
+                                    auto_associate: bool?
+                                  },
+                                  computation_preference: {
+                                    pricing_plan_arn: ::String
+                                  },
+                                  ?primary_account_id: ::String,
+                                  ?description: ::String,
+                                  ?tags: Hash[::String, ::String]
+                                ) -> _CreateBillingGroupResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBillingGroupResponseSuccess
+
+      interface _CreateCustomLineItemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCustomLineItemOutput]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#create_custom_line_item-instance_method
+      def create_custom_line_item: (
+                                     ?client_token: ::String,
+                                     name: ::String,
+                                     description: ::String,
+                                     billing_group_arn: ::String,
+                                     ?billing_period_range: {
+                                       inclusive_start_billing_period: ::String,
+                                       exclusive_end_billing_period: ::String?
+                                     },
+                                     ?tags: Hash[::String, ::String],
+                                     charge_details: {
+                                       flat: {
+                                         charge_value: ::Float
+                                       }?,
+                                       percentage: {
+                                         percentage_value: ::Float,
+                                         associated_values: Array[::String]?
+                                       }?,
+                                       type: ("CREDIT" | "FEE"),
+                                       line_item_filters: Array[
+                                         {
+                                           attribute: ("LINE_ITEM_TYPE"),
+                                           match_option: ("NOT_EQUAL"),
+                                           values: Array[("SAVINGS_PLAN_NEGATION")]
+                                         },
+                                       ]?
+                                     },
+                                     ?account_id: ::String
+                                   ) -> _CreateCustomLineItemResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomLineItemResponseSuccess
+
+      interface _CreatePricingPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePricingPlanOutput]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#create_pricing_plan-instance_method
+      def create_pricing_plan: (
+                                 ?client_token: ::String,
+                                 name: ::String,
+                                 ?description: ::String,
+                                 ?pricing_rule_arns: Array[::String],
+                                 ?tags: Hash[::String, ::String]
+                               ) -> _CreatePricingPlanResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePricingPlanResponseSuccess
+
+      interface _CreatePricingRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePricingRuleOutput]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#create_pricing_rule-instance_method
+      def create_pricing_rule: (
+                                 ?client_token: ::String,
+                                 name: ::String,
+                                 ?description: ::String,
+                                 scope: ("GLOBAL" | "SERVICE" | "BILLING_ENTITY" | "SKU"),
+                                 type: ("MARKUP" | "DISCOUNT" | "TIERING"),
+                                 ?modifier_percentage: ::Float,
+                                 ?service: ::String,
+                                 ?tags: Hash[::String, ::String],
+                                 ?billing_entity: ::String,
+                                 ?tiering: {
+                                   free_tier: {
+                                     activated: bool
+                                   }
+                                 },
+                                 ?usage_type: ::String,
+                                 ?operation: ::String
+                               ) -> _CreatePricingRuleResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePricingRuleResponseSuccess
+
+      interface _DeleteBillingGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBillingGroupOutput]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#delete_billing_group-instance_method
+      def delete_billing_group: (
+                                  arn: ::String
+                                ) -> _DeleteBillingGroupResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBillingGroupResponseSuccess
+
+      interface _DeleteCustomLineItemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCustomLineItemOutput]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#delete_custom_line_item-instance_method
+      def delete_custom_line_item: (
+                                     arn: ::String,
+                                     ?billing_period_range: {
+                                       inclusive_start_billing_period: ::String,
+                                       exclusive_end_billing_period: ::String?
+                                     }
+                                   ) -> _DeleteCustomLineItemResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCustomLineItemResponseSuccess
+
+      interface _DeletePricingPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePricingPlanOutput]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#delete_pricing_plan-instance_method
+      def delete_pricing_plan: (
+                                 arn: ::String
+                               ) -> _DeletePricingPlanResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePricingPlanResponseSuccess
+
+      interface _DeletePricingRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePricingRuleOutput]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#delete_pricing_rule-instance_method
+      def delete_pricing_rule: (
+                                 arn: ::String
+                               ) -> _DeletePricingRuleResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePricingRuleResponseSuccess
+
+      interface _DisassociateAccountsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateAccountsOutput]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#disassociate_accounts-instance_method
+      def disassociate_accounts: (
+                                   arn: ::String,
+                                   account_ids: Array[::String]
+                                 ) -> _DisassociateAccountsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateAccountsResponseSuccess
+
+      interface _DisassociatePricingRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociatePricingRulesOutput]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#disassociate_pricing_rules-instance_method
+      def disassociate_pricing_rules: (
+                                        arn: ::String,
+                                        pricing_rule_arns: Array[::String]
+                                      ) -> _DisassociatePricingRulesResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociatePricingRulesResponseSuccess
+
+      interface _GetBillingGroupCostReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBillingGroupCostReportOutput]
+        def billing_group_cost_report_results: () -> ::Array[Types::BillingGroupCostReportResultElement]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#get_billing_group_cost_report-instance_method
+      def get_billing_group_cost_report: (
+                                           arn: ::String,
+                                           ?billing_period_range: {
+                                             inclusive_start_billing_period: ::String,
+                                             exclusive_end_billing_period: ::String
+                                           },
+                                           ?group_by: Array[("PRODUCT_NAME" | "BILLING_PERIOD")],
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String
+                                         ) -> _GetBillingGroupCostReportResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBillingGroupCostReportResponseSuccess
+
+      interface _ListAccountAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccountAssociationsOutput]
+        def linked_accounts: () -> ::Array[Types::AccountAssociationsListElement]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#list_account_associations-instance_method
+      def list_account_associations: (
+                                       ?billing_period: ::String,
+                                       ?filters: {
+                                         association: ::String?,
+                                         account_id: ::String?,
+                                         account_ids: Array[::String]?
+                                       },
+                                       ?next_token: ::String
+                                     ) -> _ListAccountAssociationsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccountAssociationsResponseSuccess
+
+      interface _ListBillingGroupCostReportsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBillingGroupCostReportsOutput]
+        def billing_group_cost_reports: () -> ::Array[Types::BillingGroupCostReportElement]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#list_billing_group_cost_reports-instance_method
+      def list_billing_group_cost_reports: (
+                                             ?billing_period: ::String,
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String,
+                                             ?filters: {
+                                               billing_group_arns: Array[::String]?
+                                             }
+                                           ) -> _ListBillingGroupCostReportsResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBillingGroupCostReportsResponseSuccess
+
+      interface _ListBillingGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBillingGroupsOutput]
+        def billing_groups: () -> ::Array[Types::BillingGroupListElement]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#list_billing_groups-instance_method
+      def list_billing_groups: (
+                                 ?billing_period: ::String,
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String,
+                                 ?filters: {
+                                   arns: Array[::String]?,
+                                   pricing_plan: ::String?,
+                                   statuses: Array[("ACTIVE" | "PRIMARY_ACCOUNT_MISSING")]?,
+                                   auto_associate: bool?
+                                 }
+                               ) -> _ListBillingGroupsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBillingGroupsResponseSuccess
+
+      interface _ListCustomLineItemVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCustomLineItemVersionsOutput]
+        def custom_line_item_versions: () -> ::Array[Types::CustomLineItemVersionListElement]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#list_custom_line_item_versions-instance_method
+      def list_custom_line_item_versions: (
+                                            arn: ::String,
+                                            ?max_results: ::Integer,
+                                            ?next_token: ::String,
+                                            ?filters: {
+                                              billing_period_range: {
+                                                start_billing_period: ::String?,
+                                                end_billing_period: ::String?
+                                              }?
+                                            }
+                                          ) -> _ListCustomLineItemVersionsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCustomLineItemVersionsResponseSuccess
+
+      interface _ListCustomLineItemsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCustomLineItemsOutput]
+        def custom_line_items: () -> ::Array[Types::CustomLineItemListElement]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#list_custom_line_items-instance_method
+      def list_custom_line_items: (
+                                    ?billing_period: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String,
+                                    ?filters: {
+                                      names: Array[::String]?,
+                                      billing_groups: Array[::String]?,
+                                      arns: Array[::String]?,
+                                      account_ids: Array[::String]?
+                                    }
+                                  ) -> _ListCustomLineItemsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCustomLineItemsResponseSuccess
+
+      interface _ListPricingPlansResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPricingPlansOutput]
+        def billing_period: () -> ::String
+        def pricing_plans: () -> ::Array[Types::PricingPlanListElement]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#list_pricing_plans-instance_method
+      def list_pricing_plans: (
+                                ?billing_period: ::String,
+                                ?filters: {
+                                  arns: Array[::String]?
+                                },
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListPricingPlansResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPricingPlansResponseSuccess
+
+      interface _ListPricingPlansAssociatedWithPricingRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPricingPlansAssociatedWithPricingRuleOutput]
+        def billing_period: () -> ::String
+        def pricing_rule_arn: () -> ::String
+        def pricing_plan_arns: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#list_pricing_plans_associated_with_pricing_rule-instance_method
+      def list_pricing_plans_associated_with_pricing_rule: (
+                                                             ?billing_period: ::String,
+                                                             pricing_rule_arn: ::String,
+                                                             ?max_results: ::Integer,
+                                                             ?next_token: ::String
+                                                           ) -> _ListPricingPlansAssociatedWithPricingRuleResponseSuccess
+                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPricingPlansAssociatedWithPricingRuleResponseSuccess
+
+      interface _ListPricingRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPricingRulesOutput]
+        def billing_period: () -> ::String
+        def pricing_rules: () -> ::Array[Types::PricingRuleListElement]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#list_pricing_rules-instance_method
+      def list_pricing_rules: (
+                                ?billing_period: ::String,
+                                ?filters: {
+                                  arns: Array[::String]?
+                                },
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListPricingRulesResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPricingRulesResponseSuccess
+
+      interface _ListPricingRulesAssociatedToPricingPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPricingRulesAssociatedToPricingPlanOutput]
+        def billing_period: () -> ::String
+        def pricing_plan_arn: () -> ::String
+        def pricing_rule_arns: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#list_pricing_rules_associated_to_pricing_plan-instance_method
+      def list_pricing_rules_associated_to_pricing_plan: (
+                                                           ?billing_period: ::String,
+                                                           pricing_plan_arn: ::String,
+                                                           ?max_results: ::Integer,
+                                                           ?next_token: ::String
+                                                         ) -> _ListPricingRulesAssociatedToPricingPlanResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPricingRulesAssociatedToPricingPlanResponseSuccess
+
+      interface _ListResourcesAssociatedToCustomLineItemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourcesAssociatedToCustomLineItemOutput]
+        def arn: () -> ::String
+        def associated_resources: () -> ::Array[Types::ListResourcesAssociatedToCustomLineItemResponseElement]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#list_resources_associated_to_custom_line_item-instance_method
+      def list_resources_associated_to_custom_line_item: (
+                                                           ?billing_period: ::String,
+                                                           arn: ::String,
+                                                           ?max_results: ::Integer,
+                                                           ?next_token: ::String,
+                                                           ?filters: {
+                                                             relationship: ("PARENT" | "CHILD")?
+                                                           }
+                                                         ) -> _ListResourcesAssociatedToCustomLineItemResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourcesAssociatedToCustomLineItemResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateBillingGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBillingGroupOutput]
+        def arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def primary_account_id: () -> ::String
+        def pricing_plan_arn: () -> ::String
+        def size: () -> ::Integer
+        def last_modified_time: () -> ::Integer
+        def status: () -> ("ACTIVE" | "PRIMARY_ACCOUNT_MISSING")
+        def status_reason: () -> ::String
+        def account_grouping: () -> Types::UpdateBillingGroupAccountGrouping
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#update_billing_group-instance_method
+      def update_billing_group: (
+                                  arn: ::String,
+                                  ?name: ::String,
+                                  ?status: ("ACTIVE" | "PRIMARY_ACCOUNT_MISSING"),
+                                  ?computation_preference: {
+                                    pricing_plan_arn: ::String
+                                  },
+                                  ?description: ::String,
+                                  ?account_grouping: {
+                                    auto_associate: bool?
+                                  }
+                                ) -> _UpdateBillingGroupResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBillingGroupResponseSuccess
+
+      interface _UpdateCustomLineItemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCustomLineItemOutput]
+        def arn: () -> ::String
+        def billing_group_arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def charge_details: () -> Types::ListCustomLineItemChargeDetails
+        def last_modified_time: () -> ::Integer
+        def association_size: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#update_custom_line_item-instance_method
+      def update_custom_line_item: (
+                                     arn: ::String,
+                                     ?name: ::String,
+                                     ?description: ::String,
+                                     ?charge_details: {
+                                       flat: {
+                                         charge_value: ::Float
+                                       }?,
+                                       percentage: {
+                                         percentage_value: ::Float
+                                       }?,
+                                       line_item_filters: Array[
+                                         {
+                                           attribute: ("LINE_ITEM_TYPE"),
+                                           match_option: ("NOT_EQUAL"),
+                                           values: Array[("SAVINGS_PLAN_NEGATION")]
+                                         },
+                                       ]?
+                                     },
+                                     ?billing_period_range: {
+                                       inclusive_start_billing_period: ::String,
+                                       exclusive_end_billing_period: ::String?
+                                     }
+                                   ) -> _UpdateCustomLineItemResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCustomLineItemResponseSuccess
+
+      interface _UpdatePricingPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePricingPlanOutput]
+        def arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def size: () -> ::Integer
+        def last_modified_time: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#update_pricing_plan-instance_method
+      def update_pricing_plan: (
+                                 arn: ::String,
+                                 ?name: ::String,
+                                 ?description: ::String
+                               ) -> _UpdatePricingPlanResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePricingPlanResponseSuccess
+
+      interface _UpdatePricingRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePricingRuleOutput]
+        def arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def scope: () -> ("GLOBAL" | "SERVICE" | "BILLING_ENTITY" | "SKU")
+        def type: () -> ("MARKUP" | "DISCOUNT" | "TIERING")
+        def modifier_percentage: () -> ::Float
+        def service: () -> ::String
+        def associated_pricing_plan_count: () -> ::Integer
+        def last_modified_time: () -> ::Integer
+        def billing_entity: () -> ::String
+        def tiering: () -> Types::UpdateTieringInput
+        def usage_type: () -> ::String
+        def operation: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#update_pricing_rule-instance_method
+      def update_pricing_rule: (
+                                 arn: ::String,
+                                 ?name: ::String,
+                                 ?description: ::String,
+                                 ?type: ("MARKUP" | "DISCOUNT" | "TIERING"),
+                                 ?modifier_percentage: ::Float,
+                                 ?tiering: {
+                                   free_tier: {
+                                     activated: bool
+                                   }
+                                 }
+                               ) -> _UpdatePricingRuleResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePricingRuleResponseSuccess
+    end
+  end
+end
+

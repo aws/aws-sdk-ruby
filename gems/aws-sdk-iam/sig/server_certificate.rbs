@@ -1,0 +1,61 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IAM
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/ServerCertificate.html
+    class ServerCertificate
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/ServerCertificate.html#initialize-instance_method
+      def initialize: (String name, Hash[Symbol, untyped] options) -> void
+                    | (name: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/ServerCertificate.html#name-instance_method
+      def name: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/ServerCertificate.html#server_certificate_metadata-instance_method
+      def server_certificate_metadata: () -> Types::ServerCertificateMetadata
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/ServerCertificate.html#certificate_body-instance_method
+      def certificate_body: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/ServerCertificate.html#certificate_chain-instance_method
+      def certificate_chain: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/ServerCertificate.html#tags-instance_method
+      def tags: () -> ::Array[Types::Tag]
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/ServerCertificate.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/ServerCertificate.html#data-instance_method
+      def data: () -> Types::ServerCertificate
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/ServerCertificate.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/ServerCertificate.html#delete-instance_method
+      def delete: (
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/ServerCertificate.html#update-instance_method
+      def update: (
+                    ?new_path: ::String,
+                    ?new_server_certificate_name: ::String
+                  ) -> ServerCertificate
+                | (?Hash[Symbol, untyped]) -> ServerCertificate
+
+      class Collection < ::Aws::Resources::Collection[ServerCertificate]
+      end
+    end
+  end
+end

@@ -1,0 +1,99 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EKS
+    module Waiters
+
+      class AddonActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    cluster_name: ::String,
+                    addon_name: ::String
+                  ) -> Client::_DescribeAddonResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeAddonResponseSuccess
+      end
+
+      class AddonDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    cluster_name: ::String,
+                    addon_name: ::String
+                  ) -> Client::_DescribeAddonResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeAddonResponseSuccess
+      end
+
+      class ClusterActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    name: ::String
+                  ) -> Client::_DescribeClusterResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeClusterResponseSuccess
+      end
+
+      class ClusterDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    name: ::String
+                  ) -> Client::_DescribeClusterResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeClusterResponseSuccess
+      end
+
+      class FargateProfileActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    cluster_name: ::String,
+                    fargate_profile_name: ::String
+                  ) -> Client::_DescribeFargateProfileResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeFargateProfileResponseSuccess
+      end
+
+      class FargateProfileDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    cluster_name: ::String,
+                    fargate_profile_name: ::String
+                  ) -> Client::_DescribeFargateProfileResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeFargateProfileResponseSuccess
+      end
+
+      class NodegroupActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    cluster_name: ::String,
+                    nodegroup_name: ::String
+                  ) -> Client::_DescribeNodegroupResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeNodegroupResponseSuccess
+      end
+
+      class NodegroupDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    cluster_name: ::String,
+                    nodegroup_name: ::String
+                  ) -> Client::_DescribeNodegroupResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeNodegroupResponseSuccess
+      end
+    end
+  end
+end

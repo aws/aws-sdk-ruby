@@ -1,0 +1,451 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module VoiceID
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateFraudsterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateFraudsterResponse]
+        def fraudster: () -> Types::Fraudster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#associate_fraudster-instance_method
+      def associate_fraudster: (
+                                 domain_id: ::String,
+                                 fraudster_id: ::String,
+                                 watchlist_id: ::String
+                               ) -> _AssociateFraudsterResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateFraudsterResponseSuccess
+
+      interface _CreateDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDomainResponse]
+        def domain: () -> Types::Domain
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#create_domain-instance_method
+      def create_domain: (
+                           ?client_token: ::String,
+                           ?description: ::String,
+                           name: ::String,
+                           server_side_encryption_configuration: {
+                             kms_key_id: ::String
+                           },
+                           ?tags: Array[
+                             {
+                               key: ::String,
+                               value: ::String
+                             },
+                           ]
+                         ) -> _CreateDomainResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainResponseSuccess
+
+      interface _CreateWatchlistResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWatchlistResponse]
+        def watchlist: () -> Types::Watchlist
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#create_watchlist-instance_method
+      def create_watchlist: (
+                              ?client_token: ::String,
+                              ?description: ::String,
+                              domain_id: ::String,
+                              name: ::String
+                            ) -> _CreateWatchlistResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWatchlistResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#delete_domain-instance_method
+      def delete_domain: (
+                           domain_id: ::String
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#delete_fraudster-instance_method
+      def delete_fraudster: (
+                              domain_id: ::String,
+                              fraudster_id: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#delete_speaker-instance_method
+      def delete_speaker: (
+                            domain_id: ::String,
+                            speaker_id: ::String
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#delete_watchlist-instance_method
+      def delete_watchlist: (
+                              domain_id: ::String,
+                              watchlist_id: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDomainResponse]
+        def domain: () -> Types::Domain
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#describe_domain-instance_method
+      def describe_domain: (
+                             domain_id: ::String
+                           ) -> _DescribeDomainResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDomainResponseSuccess
+
+      interface _DescribeFraudsterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFraudsterResponse]
+        def fraudster: () -> Types::Fraudster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#describe_fraudster-instance_method
+      def describe_fraudster: (
+                                domain_id: ::String,
+                                fraudster_id: ::String
+                              ) -> _DescribeFraudsterResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFraudsterResponseSuccess
+
+      interface _DescribeFraudsterRegistrationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFraudsterRegistrationJobResponse]
+        def job: () -> Types::FraudsterRegistrationJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#describe_fraudster_registration_job-instance_method
+      def describe_fraudster_registration_job: (
+                                                 domain_id: ::String,
+                                                 job_id: ::String
+                                               ) -> _DescribeFraudsterRegistrationJobResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFraudsterRegistrationJobResponseSuccess
+
+      interface _DescribeSpeakerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSpeakerResponse]
+        def speaker: () -> Types::Speaker
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#describe_speaker-instance_method
+      def describe_speaker: (
+                              domain_id: ::String,
+                              speaker_id: ::String
+                            ) -> _DescribeSpeakerResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSpeakerResponseSuccess
+
+      interface _DescribeSpeakerEnrollmentJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSpeakerEnrollmentJobResponse]
+        def job: () -> Types::SpeakerEnrollmentJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#describe_speaker_enrollment_job-instance_method
+      def describe_speaker_enrollment_job: (
+                                             domain_id: ::String,
+                                             job_id: ::String
+                                           ) -> _DescribeSpeakerEnrollmentJobResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSpeakerEnrollmentJobResponseSuccess
+
+      interface _DescribeWatchlistResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeWatchlistResponse]
+        def watchlist: () -> Types::Watchlist
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#describe_watchlist-instance_method
+      def describe_watchlist: (
+                                domain_id: ::String,
+                                watchlist_id: ::String
+                              ) -> _DescribeWatchlistResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWatchlistResponseSuccess
+
+      interface _DisassociateFraudsterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateFraudsterResponse]
+        def fraudster: () -> Types::Fraudster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#disassociate_fraudster-instance_method
+      def disassociate_fraudster: (
+                                    domain_id: ::String,
+                                    fraudster_id: ::String,
+                                    watchlist_id: ::String
+                                  ) -> _DisassociateFraudsterResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateFraudsterResponseSuccess
+
+      interface _EvaluateSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EvaluateSessionResponse]
+        def authentication_result: () -> Types::AuthenticationResult
+        def domain_id: () -> ::String
+        def fraud_detection_result: () -> Types::FraudDetectionResult
+        def session_id: () -> ::String
+        def session_name: () -> ::String
+        def streaming_status: () -> ("PENDING_CONFIGURATION" | "ONGOING" | "ENDED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#evaluate_session-instance_method
+      def evaluate_session: (
+                              domain_id: ::String,
+                              session_name_or_id: ::String
+                            ) -> _EvaluateSessionResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EvaluateSessionResponseSuccess
+
+      interface _ListDomainsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainsResponse]
+        def domain_summaries: () -> ::Array[Types::DomainSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#list_domains-instance_method
+      def list_domains: (
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListDomainsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainsResponseSuccess
+
+      interface _ListFraudsterRegistrationJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFraudsterRegistrationJobsResponse]
+        def job_summaries: () -> ::Array[Types::FraudsterRegistrationJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#list_fraudster_registration_jobs-instance_method
+      def list_fraudster_registration_jobs: (
+                                              domain_id: ::String,
+                                              ?job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "FAILED"),
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String
+                                            ) -> _ListFraudsterRegistrationJobsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFraudsterRegistrationJobsResponseSuccess
+
+      interface _ListFraudstersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFraudstersResponse]
+        def fraudster_summaries: () -> ::Array[Types::FraudsterSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#list_fraudsters-instance_method
+      def list_fraudsters: (
+                             domain_id: ::String,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String,
+                             ?watchlist_id: ::String
+                           ) -> _ListFraudstersResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFraudstersResponseSuccess
+
+      interface _ListSpeakerEnrollmentJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSpeakerEnrollmentJobsResponse]
+        def job_summaries: () -> ::Array[Types::SpeakerEnrollmentJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#list_speaker_enrollment_jobs-instance_method
+      def list_speaker_enrollment_jobs: (
+                                          domain_id: ::String,
+                                          ?job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "FAILED"),
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _ListSpeakerEnrollmentJobsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSpeakerEnrollmentJobsResponseSuccess
+
+      interface _ListSpeakersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSpeakersResponse]
+        def next_token: () -> ::String
+        def speaker_summaries: () -> ::Array[Types::SpeakerSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#list_speakers-instance_method
+      def list_speakers: (
+                           domain_id: ::String,
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListSpeakersResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSpeakersResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListWatchlistsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWatchlistsResponse]
+        def next_token: () -> ::String
+        def watchlist_summaries: () -> ::Array[Types::WatchlistSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#list_watchlists-instance_method
+      def list_watchlists: (
+                             domain_id: ::String,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListWatchlistsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWatchlistsResponseSuccess
+
+      interface _OptOutSpeakerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::OptOutSpeakerResponse]
+        def speaker: () -> Types::Speaker
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#opt_out_speaker-instance_method
+      def opt_out_speaker: (
+                             domain_id: ::String,
+                             speaker_id: ::String
+                           ) -> _OptOutSpeakerResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _OptOutSpeakerResponseSuccess
+
+      interface _StartFraudsterRegistrationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartFraudsterRegistrationJobResponse]
+        def job: () -> Types::FraudsterRegistrationJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#start_fraudster_registration_job-instance_method
+      def start_fraudster_registration_job: (
+                                              ?client_token: ::String,
+                                              data_access_role_arn: ::String,
+                                              domain_id: ::String,
+                                              input_data_config: {
+                                                s3_uri: ::String
+                                              },
+                                              ?job_name: ::String,
+                                              output_data_config: {
+                                                kms_key_id: ::String?,
+                                                s3_uri: ::String
+                                              },
+                                              ?registration_config: {
+                                                duplicate_registration_action: ("SKIP" | "REGISTER_AS_NEW")?,
+                                                fraudster_similarity_threshold: ::Integer?,
+                                                watchlist_ids: Array[::String]?
+                                              }
+                                            ) -> _StartFraudsterRegistrationJobResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartFraudsterRegistrationJobResponseSuccess
+
+      interface _StartSpeakerEnrollmentJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartSpeakerEnrollmentJobResponse]
+        def job: () -> Types::SpeakerEnrollmentJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#start_speaker_enrollment_job-instance_method
+      def start_speaker_enrollment_job: (
+                                          ?client_token: ::String,
+                                          data_access_role_arn: ::String,
+                                          domain_id: ::String,
+                                          ?enrollment_config: {
+                                            existing_enrollment_action: ("SKIP" | "OVERWRITE")?,
+                                            fraud_detection_config: {
+                                              fraud_detection_action: ("IGNORE" | "FAIL")?,
+                                              risk_threshold: ::Integer?,
+                                              watchlist_ids: Array[::String]?
+                                            }?
+                                          },
+                                          input_data_config: {
+                                            s3_uri: ::String
+                                          },
+                                          ?job_name: ::String,
+                                          output_data_config: {
+                                            kms_key_id: ::String?,
+                                            s3_uri: ::String
+                                          }
+                                        ) -> _StartSpeakerEnrollmentJobResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartSpeakerEnrollmentJobResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDomainResponse]
+        def domain: () -> Types::Domain
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#update_domain-instance_method
+      def update_domain: (
+                           ?description: ::String,
+                           domain_id: ::String,
+                           name: ::String,
+                           server_side_encryption_configuration: {
+                             kms_key_id: ::String
+                           }
+                         ) -> _UpdateDomainResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainResponseSuccess
+
+      interface _UpdateWatchlistResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWatchlistResponse]
+        def watchlist: () -> Types::Watchlist
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VoiceID/Client.html#update_watchlist-instance_method
+      def update_watchlist: (
+                              ?description: ::String,
+                              domain_id: ::String,
+                              ?name: ::String,
+                              watchlist_id: ::String
+                            ) -> _UpdateWatchlistResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWatchlistResponseSuccess
+    end
+  end
+end
+

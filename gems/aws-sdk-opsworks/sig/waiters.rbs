@@ -1,0 +1,84 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module OpsWorks
+    module Waiters
+
+      class AppExists
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?stack_id: ::String,
+                    ?app_ids: Array[::String]
+                  ) -> Client::_DescribeAppsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeAppsResponseSuccess
+      end
+
+      class DeploymentSuccessful
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?stack_id: ::String,
+                    ?app_id: ::String,
+                    ?deployment_ids: Array[::String]
+                  ) -> Client::_DescribeDeploymentsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeDeploymentsResponseSuccess
+      end
+
+      class InstanceOnline
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?stack_id: ::String,
+                    ?layer_id: ::String,
+                    ?instance_ids: Array[::String]
+                  ) -> Client::_DescribeInstancesResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeInstancesResponseSuccess
+      end
+
+      class InstanceRegistered
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?stack_id: ::String,
+                    ?layer_id: ::String,
+                    ?instance_ids: Array[::String]
+                  ) -> Client::_DescribeInstancesResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeInstancesResponseSuccess
+      end
+
+      class InstanceStopped
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?stack_id: ::String,
+                    ?layer_id: ::String,
+                    ?instance_ids: Array[::String]
+                  ) -> Client::_DescribeInstancesResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeInstancesResponseSuccess
+      end
+
+      class InstanceTerminated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?stack_id: ::String,
+                    ?layer_id: ::String,
+                    ?instance_ids: Array[::String]
+                  ) -> Client::_DescribeInstancesResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeInstancesResponseSuccess
+      end
+    end
+  end
+end

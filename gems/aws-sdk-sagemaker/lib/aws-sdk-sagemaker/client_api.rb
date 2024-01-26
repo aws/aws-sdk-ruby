@@ -517,6 +517,7 @@ module Aws::SageMaker
     DeleteHubRequest = Shapes::StructureShape.new(name: 'DeleteHubRequest')
     DeleteHumanTaskUiRequest = Shapes::StructureShape.new(name: 'DeleteHumanTaskUiRequest')
     DeleteHumanTaskUiResponse = Shapes::StructureShape.new(name: 'DeleteHumanTaskUiResponse')
+    DeleteHyperParameterTuningJobRequest = Shapes::StructureShape.new(name: 'DeleteHyperParameterTuningJobRequest')
     DeleteImageRequest = Shapes::StructureShape.new(name: 'DeleteImageRequest')
     DeleteImageResponse = Shapes::StructureShape.new(name: 'DeleteImageResponse')
     DeleteImageVersionRequest = Shapes::StructureShape.new(name: 'DeleteImageVersionRequest')
@@ -3923,6 +3924,9 @@ module Aws::SageMaker
     DeleteHumanTaskUiRequest.struct_class = Types::DeleteHumanTaskUiRequest
 
     DeleteHumanTaskUiResponse.struct_class = Types::DeleteHumanTaskUiResponse
+
+    DeleteHyperParameterTuningJobRequest.add_member(:hyper_parameter_tuning_job_name, Shapes::ShapeRef.new(shape: HyperParameterTuningJobName, required: true, location_name: "HyperParameterTuningJobName"))
+    DeleteHyperParameterTuningJobRequest.struct_class = Types::DeleteHyperParameterTuningJobRequest
 
     DeleteImageRequest.add_member(:image_name, Shapes::ShapeRef.new(shape: ImageName, required: true, location_name: "ImageName"))
     DeleteImageRequest.struct_class = Types::DeleteImageRequest
@@ -10690,6 +10694,14 @@ module Aws::SageMaker
         o.input = Shapes::ShapeRef.new(shape: DeleteHumanTaskUiRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteHumanTaskUiResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:delete_hyper_parameter_tuning_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteHyperParameterTuningJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteHyperParameterTuningJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
       api.add_operation(:delete_image, Seahorse::Model::Operation.new.tap do |o|

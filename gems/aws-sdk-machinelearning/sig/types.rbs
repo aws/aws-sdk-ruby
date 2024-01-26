@@ -1,0 +1,678 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MachineLearning
+  module Types
+
+    class AddTagsInput
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("BatchPrediction" | "DataSource" | "Evaluation" | "MLModel")
+      SENSITIVE: []
+    end
+
+    class AddTagsOutput
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("BatchPrediction" | "DataSource" | "Evaluation" | "MLModel")
+      SENSITIVE: []
+    end
+
+    class BatchPrediction
+      attr_accessor batch_prediction_id: ::String
+      attr_accessor ml_model_id: ::String
+      attr_accessor batch_prediction_data_source_id: ::String
+      attr_accessor input_data_location_s3: ::String
+      attr_accessor created_by_iam_user: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor status: ("PENDING" | "INPROGRESS" | "FAILED" | "COMPLETED" | "DELETED")
+      attr_accessor output_uri: ::String
+      attr_accessor message: ::String
+      attr_accessor compute_time: ::Integer
+      attr_accessor finished_at: ::Time
+      attr_accessor started_at: ::Time
+      attr_accessor total_record_count: ::Integer
+      attr_accessor invalid_record_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateBatchPredictionInput
+      attr_accessor batch_prediction_id: ::String
+      attr_accessor batch_prediction_name: ::String
+      attr_accessor ml_model_id: ::String
+      attr_accessor batch_prediction_data_source_id: ::String
+      attr_accessor output_uri: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBatchPredictionOutput
+      attr_accessor batch_prediction_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDataSourceFromRDSInput
+      attr_accessor data_source_id: ::String
+      attr_accessor data_source_name: ::String
+      attr_accessor rds_data: Types::RDSDataSpec
+      attr_accessor role_arn: ::String
+      attr_accessor compute_statistics: bool
+      SENSITIVE: []
+    end
+
+    class CreateDataSourceFromRDSOutput
+      attr_accessor data_source_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDataSourceFromRedshiftInput
+      attr_accessor data_source_id: ::String
+      attr_accessor data_source_name: ::String
+      attr_accessor data_spec: Types::RedshiftDataSpec
+      attr_accessor role_arn: ::String
+      attr_accessor compute_statistics: bool
+      SENSITIVE: []
+    end
+
+    class CreateDataSourceFromRedshiftOutput
+      attr_accessor data_source_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDataSourceFromS3Input
+      attr_accessor data_source_id: ::String
+      attr_accessor data_source_name: ::String
+      attr_accessor data_spec: Types::S3DataSpec
+      attr_accessor compute_statistics: bool
+      SENSITIVE: []
+    end
+
+    class CreateDataSourceFromS3Output
+      attr_accessor data_source_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateEvaluationInput
+      attr_accessor evaluation_id: ::String
+      attr_accessor evaluation_name: ::String
+      attr_accessor ml_model_id: ::String
+      attr_accessor evaluation_data_source_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateEvaluationOutput
+      attr_accessor evaluation_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMLModelInput
+      attr_accessor ml_model_id: ::String
+      attr_accessor ml_model_name: ::String
+      attr_accessor ml_model_type: ("REGRESSION" | "BINARY" | "MULTICLASS")
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor training_data_source_id: ::String
+      attr_accessor recipe: ::String
+      attr_accessor recipe_uri: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMLModelOutput
+      attr_accessor ml_model_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRealtimeEndpointInput
+      attr_accessor ml_model_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRealtimeEndpointOutput
+      attr_accessor ml_model_id: ::String
+      attr_accessor realtime_endpoint_info: Types::RealtimeEndpointInfo
+      SENSITIVE: []
+    end
+
+    class DataSource
+      attr_accessor data_source_id: ::String
+      attr_accessor data_location_s3: ::String
+      attr_accessor data_rearrangement: ::String
+      attr_accessor created_by_iam_user: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor data_size_in_bytes: ::Integer
+      attr_accessor number_of_files: ::Integer
+      attr_accessor name: ::String
+      attr_accessor status: ("PENDING" | "INPROGRESS" | "FAILED" | "COMPLETED" | "DELETED")
+      attr_accessor message: ::String
+      attr_accessor redshift_metadata: Types::RedshiftMetadata
+      attr_accessor rds_metadata: Types::RDSMetadata
+      attr_accessor role_arn: ::String
+      attr_accessor compute_statistics: bool
+      attr_accessor compute_time: ::Integer
+      attr_accessor finished_at: ::Time
+      attr_accessor started_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteBatchPredictionInput
+      attr_accessor batch_prediction_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBatchPredictionOutput
+      attr_accessor batch_prediction_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDataSourceInput
+      attr_accessor data_source_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDataSourceOutput
+      attr_accessor data_source_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEvaluationInput
+      attr_accessor evaluation_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEvaluationOutput
+      attr_accessor evaluation_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMLModelInput
+      attr_accessor ml_model_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMLModelOutput
+      attr_accessor ml_model_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRealtimeEndpointInput
+      attr_accessor ml_model_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRealtimeEndpointOutput
+      attr_accessor ml_model_id: ::String
+      attr_accessor realtime_endpoint_info: Types::RealtimeEndpointInfo
+      SENSITIVE: []
+    end
+
+    class DeleteTagsInput
+      attr_accessor tag_keys: ::Array[::String]
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("BatchPrediction" | "DataSource" | "Evaluation" | "MLModel")
+      SENSITIVE: []
+    end
+
+    class DeleteTagsOutput
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("BatchPrediction" | "DataSource" | "Evaluation" | "MLModel")
+      SENSITIVE: []
+    end
+
+    class DescribeBatchPredictionsInput
+      attr_accessor filter_variable: ("CreatedAt" | "LastUpdatedAt" | "Status" | "Name" | "IAMUser" | "MLModelId" | "DataSourceId" | "DataURI")
+      attr_accessor eq: ::String
+      attr_accessor gt: ::String
+      attr_accessor lt: ::String
+      attr_accessor ge: ::String
+      attr_accessor le: ::String
+      attr_accessor ne: ::String
+      attr_accessor prefix: ::String
+      attr_accessor sort_order: ("asc" | "dsc")
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeBatchPredictionsOutput
+      attr_accessor results: ::Array[Types::BatchPrediction]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDataSourcesInput
+      attr_accessor filter_variable: ("CreatedAt" | "LastUpdatedAt" | "Status" | "Name" | "DataLocationS3" | "IAMUser")
+      attr_accessor eq: ::String
+      attr_accessor gt: ::String
+      attr_accessor lt: ::String
+      attr_accessor ge: ::String
+      attr_accessor le: ::String
+      attr_accessor ne: ::String
+      attr_accessor prefix: ::String
+      attr_accessor sort_order: ("asc" | "dsc")
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeDataSourcesOutput
+      attr_accessor results: ::Array[Types::DataSource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEvaluationsInput
+      attr_accessor filter_variable: ("CreatedAt" | "LastUpdatedAt" | "Status" | "Name" | "IAMUser" | "MLModelId" | "DataSourceId" | "DataURI")
+      attr_accessor eq: ::String
+      attr_accessor gt: ::String
+      attr_accessor lt: ::String
+      attr_accessor ge: ::String
+      attr_accessor le: ::String
+      attr_accessor ne: ::String
+      attr_accessor prefix: ::String
+      attr_accessor sort_order: ("asc" | "dsc")
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeEvaluationsOutput
+      attr_accessor results: ::Array[Types::Evaluation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMLModelsInput
+      attr_accessor filter_variable: ("CreatedAt" | "LastUpdatedAt" | "Status" | "Name" | "IAMUser" | "TrainingDataSourceId" | "RealtimeEndpointStatus" | "MLModelType" | "Algorithm" | "TrainingDataURI")
+      attr_accessor eq: ::String
+      attr_accessor gt: ::String
+      attr_accessor lt: ::String
+      attr_accessor ge: ::String
+      attr_accessor le: ::String
+      attr_accessor ne: ::String
+      attr_accessor prefix: ::String
+      attr_accessor sort_order: ("asc" | "dsc")
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeMLModelsOutput
+      attr_accessor results: ::Array[Types::MLModel]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTagsInput
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("BatchPrediction" | "DataSource" | "Evaluation" | "MLModel")
+      SENSITIVE: []
+    end
+
+    class DescribeTagsOutput
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("BatchPrediction" | "DataSource" | "Evaluation" | "MLModel")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class Evaluation
+      attr_accessor evaluation_id: ::String
+      attr_accessor ml_model_id: ::String
+      attr_accessor evaluation_data_source_id: ::String
+      attr_accessor input_data_location_s3: ::String
+      attr_accessor created_by_iam_user: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor status: ("PENDING" | "INPROGRESS" | "FAILED" | "COMPLETED" | "DELETED")
+      attr_accessor performance_metrics: Types::PerformanceMetrics
+      attr_accessor message: ::String
+      attr_accessor compute_time: ::Integer
+      attr_accessor finished_at: ::Time
+      attr_accessor started_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetBatchPredictionInput
+      attr_accessor batch_prediction_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetBatchPredictionOutput
+      attr_accessor batch_prediction_id: ::String
+      attr_accessor ml_model_id: ::String
+      attr_accessor batch_prediction_data_source_id: ::String
+      attr_accessor input_data_location_s3: ::String
+      attr_accessor created_by_iam_user: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor status: ("PENDING" | "INPROGRESS" | "FAILED" | "COMPLETED" | "DELETED")
+      attr_accessor output_uri: ::String
+      attr_accessor log_uri: ::String
+      attr_accessor message: ::String
+      attr_accessor compute_time: ::Integer
+      attr_accessor finished_at: ::Time
+      attr_accessor started_at: ::Time
+      attr_accessor total_record_count: ::Integer
+      attr_accessor invalid_record_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetDataSourceInput
+      attr_accessor data_source_id: ::String
+      attr_accessor verbose: bool
+      SENSITIVE: []
+    end
+
+    class GetDataSourceOutput
+      attr_accessor data_source_id: ::String
+      attr_accessor data_location_s3: ::String
+      attr_accessor data_rearrangement: ::String
+      attr_accessor created_by_iam_user: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor data_size_in_bytes: ::Integer
+      attr_accessor number_of_files: ::Integer
+      attr_accessor name: ::String
+      attr_accessor status: ("PENDING" | "INPROGRESS" | "FAILED" | "COMPLETED" | "DELETED")
+      attr_accessor log_uri: ::String
+      attr_accessor message: ::String
+      attr_accessor redshift_metadata: Types::RedshiftMetadata
+      attr_accessor rds_metadata: Types::RDSMetadata
+      attr_accessor role_arn: ::String
+      attr_accessor compute_statistics: bool
+      attr_accessor compute_time: ::Integer
+      attr_accessor finished_at: ::Time
+      attr_accessor started_at: ::Time
+      attr_accessor data_source_schema: ::String
+      SENSITIVE: []
+    end
+
+    class GetEvaluationInput
+      attr_accessor evaluation_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetEvaluationOutput
+      attr_accessor evaluation_id: ::String
+      attr_accessor ml_model_id: ::String
+      attr_accessor evaluation_data_source_id: ::String
+      attr_accessor input_data_location_s3: ::String
+      attr_accessor created_by_iam_user: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor status: ("PENDING" | "INPROGRESS" | "FAILED" | "COMPLETED" | "DELETED")
+      attr_accessor performance_metrics: Types::PerformanceMetrics
+      attr_accessor log_uri: ::String
+      attr_accessor message: ::String
+      attr_accessor compute_time: ::Integer
+      attr_accessor finished_at: ::Time
+      attr_accessor started_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetMLModelInput
+      attr_accessor ml_model_id: ::String
+      attr_accessor verbose: bool
+      SENSITIVE: []
+    end
+
+    class GetMLModelOutput
+      attr_accessor ml_model_id: ::String
+      attr_accessor training_data_source_id: ::String
+      attr_accessor created_by_iam_user: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor status: ("PENDING" | "INPROGRESS" | "FAILED" | "COMPLETED" | "DELETED")
+      attr_accessor size_in_bytes: ::Integer
+      attr_accessor endpoint_info: Types::RealtimeEndpointInfo
+      attr_accessor training_parameters: ::Hash[::String, ::String]
+      attr_accessor input_data_location_s3: ::String
+      attr_accessor ml_model_type: ("REGRESSION" | "BINARY" | "MULTICLASS")
+      attr_accessor score_threshold: ::Float
+      attr_accessor score_threshold_last_updated_at: ::Time
+      attr_accessor log_uri: ::String
+      attr_accessor message: ::String
+      attr_accessor compute_time: ::Integer
+      attr_accessor finished_at: ::Time
+      attr_accessor started_at: ::Time
+      attr_accessor recipe: ::String
+      attr_accessor schema: ::String
+      SENSITIVE: []
+    end
+
+    class IdempotentParameterMismatchException
+      attr_accessor message: ::String
+      attr_accessor code: ::Integer
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor code: ::Integer
+      SENSITIVE: []
+    end
+
+    class InvalidInputException
+      attr_accessor message: ::String
+      attr_accessor code: ::Integer
+      SENSITIVE: []
+    end
+
+    class InvalidTagException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      attr_accessor code: ::Integer
+      SENSITIVE: []
+    end
+
+    class MLModel
+      attr_accessor ml_model_id: ::String
+      attr_accessor training_data_source_id: ::String
+      attr_accessor created_by_iam_user: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor status: ("PENDING" | "INPROGRESS" | "FAILED" | "COMPLETED" | "DELETED")
+      attr_accessor size_in_bytes: ::Integer
+      attr_accessor endpoint_info: Types::RealtimeEndpointInfo
+      attr_accessor training_parameters: ::Hash[::String, ::String]
+      attr_accessor input_data_location_s3: ::String
+      attr_accessor algorithm: ("sgd")
+      attr_accessor ml_model_type: ("REGRESSION" | "BINARY" | "MULTICLASS")
+      attr_accessor score_threshold: ::Float
+      attr_accessor score_threshold_last_updated_at: ::Time
+      attr_accessor message: ::String
+      attr_accessor compute_time: ::Integer
+      attr_accessor finished_at: ::Time
+      attr_accessor started_at: ::Time
+      SENSITIVE: []
+    end
+
+    class PerformanceMetrics
+      attr_accessor properties: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PredictInput
+      attr_accessor ml_model_id: ::String
+      attr_accessor record: ::Hash[::String, ::String]
+      attr_accessor predict_endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class PredictOutput
+      attr_accessor prediction: Types::Prediction
+      SENSITIVE: []
+    end
+
+    class Prediction
+      attr_accessor predicted_label: ::String
+      attr_accessor predicted_value: ::Float
+      attr_accessor predicted_scores: ::Hash[::String, ::Float]
+      attr_accessor details: ::Hash[("PredictiveModelType" | "Algorithm"), ::String]
+      SENSITIVE: []
+    end
+
+    class PredictorNotMountedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RDSDataSpec
+      attr_accessor database_information: Types::RDSDatabase
+      attr_accessor select_sql_query: ::String
+      attr_accessor database_credentials: Types::RDSDatabaseCredentials
+      attr_accessor s3_staging_location: ::String
+      attr_accessor data_rearrangement: ::String
+      attr_accessor data_schema: ::String
+      attr_accessor data_schema_uri: ::String
+      attr_accessor resource_role: ::String
+      attr_accessor service_role: ::String
+      attr_accessor subnet_id: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RDSDatabase
+      attr_accessor instance_identifier: ::String
+      attr_accessor database_name: ::String
+      SENSITIVE: []
+    end
+
+    class RDSDatabaseCredentials
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      SENSITIVE: [:password]
+    end
+
+    class RDSMetadata
+      attr_accessor database: Types::RDSDatabase
+      attr_accessor database_user_name: ::String
+      attr_accessor select_sql_query: ::String
+      attr_accessor resource_role: ::String
+      attr_accessor service_role: ::String
+      attr_accessor data_pipeline_id: ::String
+      SENSITIVE: []
+    end
+
+    class RealtimeEndpointInfo
+      attr_accessor peak_requests_per_second: ::Integer
+      attr_accessor created_at: ::Time
+      attr_accessor endpoint_url: ::String
+      attr_accessor endpoint_status: ("NONE" | "READY" | "UPDATING" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class RedshiftDataSpec
+      attr_accessor database_information: Types::RedshiftDatabase
+      attr_accessor select_sql_query: ::String
+      attr_accessor database_credentials: Types::RedshiftDatabaseCredentials
+      attr_accessor s3_staging_location: ::String
+      attr_accessor data_rearrangement: ::String
+      attr_accessor data_schema: ::String
+      attr_accessor data_schema_uri: ::String
+      SENSITIVE: []
+    end
+
+    class RedshiftDatabase
+      attr_accessor database_name: ::String
+      attr_accessor cluster_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class RedshiftDatabaseCredentials
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      SENSITIVE: [:password]
+    end
+
+    class RedshiftMetadata
+      attr_accessor redshift_database: Types::RedshiftDatabase
+      attr_accessor database_user_name: ::String
+      attr_accessor select_sql_query: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor code: ::Integer
+      SENSITIVE: []
+    end
+
+    class S3DataSpec
+      attr_accessor data_location_s3: ::String
+      attr_accessor data_rearrangement: ::String
+      attr_accessor data_schema: ::String
+      attr_accessor data_schema_location_s3: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBatchPredictionInput
+      attr_accessor batch_prediction_id: ::String
+      attr_accessor batch_prediction_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBatchPredictionOutput
+      attr_accessor batch_prediction_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDataSourceInput
+      attr_accessor data_source_id: ::String
+      attr_accessor data_source_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDataSourceOutput
+      attr_accessor data_source_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateEvaluationInput
+      attr_accessor evaluation_id: ::String
+      attr_accessor evaluation_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateEvaluationOutput
+      attr_accessor evaluation_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateMLModelInput
+      attr_accessor ml_model_id: ::String
+      attr_accessor ml_model_name: ::String
+      attr_accessor score_threshold: ::Float
+      SENSITIVE: []
+    end
+
+    class UpdateMLModelOutput
+      attr_accessor ml_model_id: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,0 +1,576 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::KafkaConnect
+  module Types
+
+    class ApacheKafkaCluster
+      attr_accessor bootstrap_servers: ::String
+      attr_accessor vpc: Types::Vpc
+      SENSITIVE: []
+    end
+
+    class ApacheKafkaClusterDescription
+      attr_accessor bootstrap_servers: ::String
+      attr_accessor vpc: Types::VpcDescription
+      SENSITIVE: []
+    end
+
+    class AutoScaling
+      attr_accessor max_worker_count: ::Integer
+      attr_accessor mcu_count: ::Integer
+      attr_accessor min_worker_count: ::Integer
+      attr_accessor scale_in_policy: Types::ScaleInPolicy
+      attr_accessor scale_out_policy: Types::ScaleOutPolicy
+      SENSITIVE: []
+    end
+
+    class AutoScalingDescription
+      attr_accessor max_worker_count: ::Integer
+      attr_accessor mcu_count: ::Integer
+      attr_accessor min_worker_count: ::Integer
+      attr_accessor scale_in_policy: Types::ScaleInPolicyDescription
+      attr_accessor scale_out_policy: Types::ScaleOutPolicyDescription
+      SENSITIVE: []
+    end
+
+    class AutoScalingUpdate
+      attr_accessor max_worker_count: ::Integer
+      attr_accessor mcu_count: ::Integer
+      attr_accessor min_worker_count: ::Integer
+      attr_accessor scale_in_policy: Types::ScaleInPolicyUpdate
+      attr_accessor scale_out_policy: Types::ScaleOutPolicyUpdate
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Capacity
+      attr_accessor auto_scaling: Types::AutoScaling
+      attr_accessor provisioned_capacity: Types::ProvisionedCapacity
+      SENSITIVE: []
+    end
+
+    class CapacityDescription
+      attr_accessor auto_scaling: Types::AutoScalingDescription
+      attr_accessor provisioned_capacity: Types::ProvisionedCapacityDescription
+      SENSITIVE: []
+    end
+
+    class CapacityUpdate
+      attr_accessor auto_scaling: Types::AutoScalingUpdate
+      attr_accessor provisioned_capacity: Types::ProvisionedCapacityUpdate
+      SENSITIVE: []
+    end
+
+    class CloudWatchLogsLogDelivery
+      attr_accessor enabled: bool
+      attr_accessor log_group: ::String
+      SENSITIVE: []
+    end
+
+    class CloudWatchLogsLogDeliveryDescription
+      attr_accessor enabled: bool
+      attr_accessor log_group: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectorSummary
+      attr_accessor capacity: Types::CapacityDescription
+      attr_accessor connector_arn: ::String
+      attr_accessor connector_description: ::String
+      attr_accessor connector_name: ::String
+      attr_accessor connector_state: ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED")
+      attr_accessor creation_time: ::Time
+      attr_accessor current_version: ::String
+      attr_accessor kafka_cluster: Types::KafkaClusterDescription
+      attr_accessor kafka_cluster_client_authentication: Types::KafkaClusterClientAuthenticationDescription
+      attr_accessor kafka_cluster_encryption_in_transit: Types::KafkaClusterEncryptionInTransitDescription
+      attr_accessor kafka_connect_version: ::String
+      attr_accessor log_delivery: Types::LogDeliveryDescription
+      attr_accessor plugins: ::Array[Types::PluginDescription]
+      attr_accessor service_execution_role_arn: ::String
+      attr_accessor worker_configuration: Types::WorkerConfigurationDescription
+      SENSITIVE: []
+    end
+
+    class CreateConnectorRequest
+      attr_accessor capacity: Types::Capacity
+      attr_accessor connector_configuration: ::Hash[::String, ::String]
+      attr_accessor connector_description: ::String
+      attr_accessor connector_name: ::String
+      attr_accessor kafka_cluster: Types::KafkaCluster
+      attr_accessor kafka_cluster_client_authentication: Types::KafkaClusterClientAuthentication
+      attr_accessor kafka_cluster_encryption_in_transit: Types::KafkaClusterEncryptionInTransit
+      attr_accessor kafka_connect_version: ::String
+      attr_accessor log_delivery: Types::LogDelivery
+      attr_accessor plugins: ::Array[Types::Plugin]
+      attr_accessor service_execution_role_arn: ::String
+      attr_accessor worker_configuration: Types::WorkerConfiguration
+      SENSITIVE: [:connector_configuration]
+    end
+
+    class CreateConnectorResponse
+      attr_accessor connector_arn: ::String
+      attr_accessor connector_name: ::String
+      attr_accessor connector_state: ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class CreateCustomPluginRequest
+      attr_accessor content_type: ("JAR" | "ZIP")
+      attr_accessor description: ::String
+      attr_accessor location: Types::CustomPluginLocation
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCustomPluginResponse
+      attr_accessor custom_plugin_arn: ::String
+      attr_accessor custom_plugin_state: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "UPDATING" | "UPDATE_FAILED" | "DELETING")
+      attr_accessor name: ::String
+      attr_accessor revision: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateWorkerConfigurationRequest
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor properties_file_content: ::String
+      SENSITIVE: [:properties_file_content]
+    end
+
+    class CreateWorkerConfigurationResponse
+      attr_accessor creation_time: ::Time
+      attr_accessor latest_revision: Types::WorkerConfigurationRevisionSummary
+      attr_accessor name: ::String
+      attr_accessor worker_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CustomPlugin
+      attr_accessor custom_plugin_arn: ::String
+      attr_accessor revision: ::Integer
+      SENSITIVE: []
+    end
+
+    class CustomPluginDescription
+      attr_accessor custom_plugin_arn: ::String
+      attr_accessor revision: ::Integer
+      SENSITIVE: []
+    end
+
+    class CustomPluginFileDescription
+      attr_accessor file_md_5: ::String
+      attr_accessor file_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class CustomPluginLocation
+      attr_accessor s3_location: Types::S3Location
+      SENSITIVE: []
+    end
+
+    class CustomPluginLocationDescription
+      attr_accessor s3_location: Types::S3LocationDescription
+      SENSITIVE: []
+    end
+
+    class CustomPluginRevisionSummary
+      attr_accessor content_type: ("JAR" | "ZIP")
+      attr_accessor creation_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor file_description: Types::CustomPluginFileDescription
+      attr_accessor location: Types::CustomPluginLocationDescription
+      attr_accessor revision: ::Integer
+      SENSITIVE: []
+    end
+
+    class CustomPluginSummary
+      attr_accessor creation_time: ::Time
+      attr_accessor custom_plugin_arn: ::String
+      attr_accessor custom_plugin_state: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "UPDATING" | "UPDATE_FAILED" | "DELETING")
+      attr_accessor description: ::String
+      attr_accessor latest_revision: Types::CustomPluginRevisionSummary
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConnectorRequest
+      attr_accessor connector_arn: ::String
+      attr_accessor current_version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConnectorResponse
+      attr_accessor connector_arn: ::String
+      attr_accessor connector_state: ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class DeleteCustomPluginRequest
+      attr_accessor custom_plugin_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCustomPluginResponse
+      attr_accessor custom_plugin_arn: ::String
+      attr_accessor custom_plugin_state: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "UPDATING" | "UPDATE_FAILED" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class DescribeConnectorRequest
+      attr_accessor connector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeConnectorResponse
+      attr_accessor capacity: Types::CapacityDescription
+      attr_accessor connector_arn: ::String
+      attr_accessor connector_configuration: ::Hash[::String, ::String]
+      attr_accessor connector_description: ::String
+      attr_accessor connector_name: ::String
+      attr_accessor connector_state: ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED")
+      attr_accessor creation_time: ::Time
+      attr_accessor current_version: ::String
+      attr_accessor kafka_cluster: Types::KafkaClusterDescription
+      attr_accessor kafka_cluster_client_authentication: Types::KafkaClusterClientAuthenticationDescription
+      attr_accessor kafka_cluster_encryption_in_transit: Types::KafkaClusterEncryptionInTransitDescription
+      attr_accessor kafka_connect_version: ::String
+      attr_accessor log_delivery: Types::LogDeliveryDescription
+      attr_accessor plugins: ::Array[Types::PluginDescription]
+      attr_accessor service_execution_role_arn: ::String
+      attr_accessor state_description: Types::StateDescription
+      attr_accessor worker_configuration: Types::WorkerConfigurationDescription
+      SENSITIVE: [:connector_configuration]
+    end
+
+    class DescribeCustomPluginRequest
+      attr_accessor custom_plugin_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCustomPluginResponse
+      attr_accessor creation_time: ::Time
+      attr_accessor custom_plugin_arn: ::String
+      attr_accessor custom_plugin_state: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "UPDATING" | "UPDATE_FAILED" | "DELETING")
+      attr_accessor description: ::String
+      attr_accessor latest_revision: Types::CustomPluginRevisionSummary
+      attr_accessor name: ::String
+      attr_accessor state_description: Types::StateDescription
+      SENSITIVE: []
+    end
+
+    class DescribeWorkerConfigurationRequest
+      attr_accessor worker_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorkerConfigurationResponse
+      attr_accessor creation_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor latest_revision: Types::WorkerConfigurationRevisionDescription
+      attr_accessor name: ::String
+      attr_accessor worker_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class FirehoseLogDelivery
+      attr_accessor delivery_stream: ::String
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class FirehoseLogDeliveryDescription
+      attr_accessor delivery_stream: ::String
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class ForbiddenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KafkaCluster
+      attr_accessor apache_kafka_cluster: Types::ApacheKafkaCluster
+      SENSITIVE: []
+    end
+
+    class KafkaClusterClientAuthentication
+      attr_accessor authentication_type: ("NONE" | "IAM")
+      SENSITIVE: []
+    end
+
+    class KafkaClusterClientAuthenticationDescription
+      attr_accessor authentication_type: ("NONE" | "IAM")
+      SENSITIVE: []
+    end
+
+    class KafkaClusterDescription
+      attr_accessor apache_kafka_cluster: Types::ApacheKafkaClusterDescription
+      SENSITIVE: []
+    end
+
+    class KafkaClusterEncryptionInTransit
+      attr_accessor encryption_type: ("PLAINTEXT" | "TLS")
+      SENSITIVE: []
+    end
+
+    class KafkaClusterEncryptionInTransitDescription
+      attr_accessor encryption_type: ("PLAINTEXT" | "TLS")
+      SENSITIVE: []
+    end
+
+    class ListConnectorsRequest
+      attr_accessor connector_name_prefix: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConnectorsResponse
+      attr_accessor connectors: ::Array[Types::ConnectorSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomPluginsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomPluginsResponse
+      attr_accessor custom_plugins: ::Array[Types::CustomPluginSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkerConfigurationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkerConfigurationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor worker_configurations: ::Array[Types::WorkerConfigurationSummary]
+      SENSITIVE: []
+    end
+
+    class LogDelivery
+      attr_accessor worker_log_delivery: Types::WorkerLogDelivery
+      SENSITIVE: []
+    end
+
+    class LogDeliveryDescription
+      attr_accessor worker_log_delivery: Types::WorkerLogDeliveryDescription
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Plugin
+      attr_accessor custom_plugin: Types::CustomPlugin
+      SENSITIVE: []
+    end
+
+    class PluginDescription
+      attr_accessor custom_plugin: Types::CustomPluginDescription
+      SENSITIVE: []
+    end
+
+    class ProvisionedCapacity
+      attr_accessor mcu_count: ::Integer
+      attr_accessor worker_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ProvisionedCapacityDescription
+      attr_accessor mcu_count: ::Integer
+      attr_accessor worker_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ProvisionedCapacityUpdate
+      attr_accessor mcu_count: ::Integer
+      attr_accessor worker_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class S3Location
+      attr_accessor bucket_arn: ::String
+      attr_accessor file_key: ::String
+      attr_accessor object_version: ::String
+      SENSITIVE: []
+    end
+
+    class S3LocationDescription
+      attr_accessor bucket_arn: ::String
+      attr_accessor file_key: ::String
+      attr_accessor object_version: ::String
+      SENSITIVE: []
+    end
+
+    class S3LogDelivery
+      attr_accessor bucket: ::String
+      attr_accessor enabled: bool
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class S3LogDeliveryDescription
+      attr_accessor bucket: ::String
+      attr_accessor enabled: bool
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ScaleInPolicy
+      attr_accessor cpu_utilization_percentage: ::Integer
+      SENSITIVE: []
+    end
+
+    class ScaleInPolicyDescription
+      attr_accessor cpu_utilization_percentage: ::Integer
+      SENSITIVE: []
+    end
+
+    class ScaleInPolicyUpdate
+      attr_accessor cpu_utilization_percentage: ::Integer
+      SENSITIVE: []
+    end
+
+    class ScaleOutPolicy
+      attr_accessor cpu_utilization_percentage: ::Integer
+      SENSITIVE: []
+    end
+
+    class ScaleOutPolicyDescription
+      attr_accessor cpu_utilization_percentage: ::Integer
+      SENSITIVE: []
+    end
+
+    class ScaleOutPolicyUpdate
+      attr_accessor cpu_utilization_percentage: ::Integer
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StateDescription
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnauthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConnectorRequest
+      attr_accessor capacity: Types::CapacityUpdate
+      attr_accessor connector_arn: ::String
+      attr_accessor current_version: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConnectorResponse
+      attr_accessor connector_arn: ::String
+      attr_accessor connector_state: ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class Vpc
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor subnets: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class VpcDescription
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor subnets: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class WorkerConfiguration
+      attr_accessor revision: ::Integer
+      attr_accessor worker_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class WorkerConfigurationDescription
+      attr_accessor revision: ::Integer
+      attr_accessor worker_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class WorkerConfigurationRevisionDescription
+      attr_accessor creation_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor properties_file_content: ::String
+      attr_accessor revision: ::Integer
+      SENSITIVE: [:properties_file_content]
+    end
+
+    class WorkerConfigurationRevisionSummary
+      attr_accessor creation_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor revision: ::Integer
+      SENSITIVE: []
+    end
+
+    class WorkerConfigurationSummary
+      attr_accessor creation_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor latest_revision: Types::WorkerConfigurationRevisionSummary
+      attr_accessor name: ::String
+      attr_accessor worker_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class WorkerLogDelivery
+      attr_accessor cloud_watch_logs: Types::CloudWatchLogsLogDelivery
+      attr_accessor firehose: Types::FirehoseLogDelivery
+      attr_accessor s3: Types::S3LogDelivery
+      SENSITIVE: []
+    end
+
+    class WorkerLogDeliveryDescription
+      attr_accessor cloud_watch_logs: Types::CloudWatchLogsLogDeliveryDescription
+      attr_accessor firehose: Types::FirehoseLogDeliveryDescription
+      attr_accessor s3: Types::S3LogDeliveryDescription
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,0 +1,553 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module FinSpaceData
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateUserToPermissionGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateUserToPermissionGroupResponse]
+        def status_code: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#associate_user_to_permission_group-instance_method
+      def associate_user_to_permission_group: (
+                                                permission_group_id: ::String,
+                                                user_id: ::String,
+                                                ?client_token: ::String
+                                              ) -> _AssociateUserToPermissionGroupResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateUserToPermissionGroupResponseSuccess
+
+      interface _CreateChangesetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateChangesetResponse]
+        def dataset_id: () -> ::String
+        def changeset_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#create_changeset-instance_method
+      def create_changeset: (
+                              ?client_token: ::String,
+                              dataset_id: ::String,
+                              change_type: ("REPLACE" | "APPEND" | "MODIFY"),
+                              source_params: Hash[::String, ::String],
+                              format_params: Hash[::String, ::String]
+                            ) -> _CreateChangesetResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChangesetResponseSuccess
+
+      interface _CreateDataViewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataViewResponse]
+        def dataset_id: () -> ::String
+        def data_view_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#create_data_view-instance_method
+      def create_data_view: (
+                              ?client_token: ::String,
+                              dataset_id: ::String,
+                              ?auto_update: bool,
+                              ?sort_columns: Array[::String],
+                              ?partition_columns: Array[::String],
+                              ?as_of_timestamp: ::Integer,
+                              destination_type_params: {
+                                destination_type: ::String,
+                                s3_destination_export_file_format: ("PARQUET" | "DELIMITED_TEXT")?,
+                                s3_destination_export_file_format_options: Hash[::String, ::String]?
+                              }
+                            ) -> _CreateDataViewResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataViewResponseSuccess
+
+      interface _CreateDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDatasetResponse]
+        def dataset_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#create_dataset-instance_method
+      def create_dataset: (
+                            ?client_token: ::String,
+                            dataset_title: ::String,
+                            kind: ("TABULAR" | "NON_TABULAR"),
+                            ?dataset_description: ::String,
+                            ?owner_info: {
+                              name: ::String?,
+                              phone_number: ::String?,
+                              email: ::String?
+                            },
+                            permission_group_params: {
+                              permission_group_id: ::String?,
+                              dataset_permissions: Array[
+                                {
+                                  permission: ::String?
+                                },
+                              ]?
+                            },
+                            ?alias: ::String,
+                            ?schema_definition: {
+                              tabular_schema_config: {
+                                columns: Array[
+                                  {
+                                    data_type: ("STRING" | "CHAR" | "INTEGER" | "TINYINT" | "SMALLINT" | "BIGINT" | "FLOAT" | "DOUBLE" | "DATE" | "DATETIME" | "BOOLEAN" | "BINARY")?,
+                                    column_name: ::String?,
+                                    column_description: ::String?
+                                  },
+                                ]?,
+                                primary_key_columns: Array[::String]?
+                              }?
+                            }
+                          ) -> _CreateDatasetResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatasetResponseSuccess
+
+      interface _CreatePermissionGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePermissionGroupResponse]
+        def permission_group_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#create_permission_group-instance_method
+      def create_permission_group: (
+                                     name: ::String,
+                                     ?description: ::String,
+                                     application_permissions: Array[("CreateDataset" | "ManageClusters" | "ManageUsersAndGroups" | "ManageAttributeSets" | "ViewAuditData" | "AccessNotebooks" | "GetTemporaryCredentials")],
+                                     ?client_token: ::String
+                                   ) -> _CreatePermissionGroupResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePermissionGroupResponseSuccess
+
+      interface _CreateUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateUserResponse]
+        def user_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#create_user-instance_method
+      def create_user: (
+                         email_address: ::String,
+                         type: ("SUPER_USER" | "APP_USER"),
+                         ?first_name: ::String,
+                         ?last_name: ::String,
+                         ?api_access: ("ENABLED" | "DISABLED"),
+                         ?api_access_principal_arn: ::String,
+                         ?client_token: ::String
+                       ) -> _CreateUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserResponseSuccess
+
+      interface _DeleteDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDatasetResponse]
+        def dataset_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#delete_dataset-instance_method
+      def delete_dataset: (
+                            ?client_token: ::String,
+                            dataset_id: ::String
+                          ) -> _DeleteDatasetResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDatasetResponseSuccess
+
+      interface _DeletePermissionGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePermissionGroupResponse]
+        def permission_group_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#delete_permission_group-instance_method
+      def delete_permission_group: (
+                                     permission_group_id: ::String,
+                                     ?client_token: ::String
+                                   ) -> _DeletePermissionGroupResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePermissionGroupResponseSuccess
+
+      interface _DisableUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableUserResponse]
+        def user_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#disable_user-instance_method
+      def disable_user: (
+                          user_id: ::String,
+                          ?client_token: ::String
+                        ) -> _DisableUserResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableUserResponseSuccess
+
+      interface _DisassociateUserFromPermissionGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateUserFromPermissionGroupResponse]
+        def status_code: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#disassociate_user_from_permission_group-instance_method
+      def disassociate_user_from_permission_group: (
+                                                     permission_group_id: ::String,
+                                                     user_id: ::String,
+                                                     ?client_token: ::String
+                                                   ) -> _DisassociateUserFromPermissionGroupResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateUserFromPermissionGroupResponseSuccess
+
+      interface _EnableUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableUserResponse]
+        def user_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#enable_user-instance_method
+      def enable_user: (
+                         user_id: ::String,
+                         ?client_token: ::String
+                       ) -> _EnableUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableUserResponseSuccess
+
+      interface _GetChangesetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetChangesetResponse]
+        def changeset_id: () -> ::String
+        def changeset_arn: () -> ::String
+        def dataset_id: () -> ::String
+        def change_type: () -> ("REPLACE" | "APPEND" | "MODIFY")
+        def source_params: () -> ::Hash[::String, ::String]
+        def format_params: () -> ::Hash[::String, ::String]
+        def create_time: () -> ::Integer
+        def status: () -> ("PENDING" | "FAILED" | "SUCCESS" | "RUNNING" | "STOP_REQUESTED")
+        def error_info: () -> Types::ChangesetErrorInfo
+        def active_until_timestamp: () -> ::Integer
+        def active_from_timestamp: () -> ::Integer
+        def updates_changeset_id: () -> ::String
+        def updated_by_changeset_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#get_changeset-instance_method
+      def get_changeset: (
+                           dataset_id: ::String,
+                           changeset_id: ::String
+                         ) -> _GetChangesetResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetChangesetResponseSuccess
+
+      interface _GetDataViewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataViewResponse]
+        def auto_update: () -> bool
+        def partition_columns: () -> ::Array[::String]
+        def dataset_id: () -> ::String
+        def as_of_timestamp: () -> ::Integer
+        def error_info: () -> Types::DataViewErrorInfo
+        def last_modified_time: () -> ::Integer
+        def create_time: () -> ::Integer
+        def sort_columns: () -> ::Array[::String]
+        def data_view_id: () -> ::String
+        def data_view_arn: () -> ::String
+        def destination_type_params: () -> Types::DataViewDestinationTypeParams
+        def status: () -> ("RUNNING" | "STARTING" | "FAILED" | "CANCELLED" | "TIMEOUT" | "SUCCESS" | "PENDING" | "FAILED_CLEANUP_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#get_data_view-instance_method
+      def get_data_view: (
+                           data_view_id: ::String,
+                           dataset_id: ::String
+                         ) -> _GetDataViewResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataViewResponseSuccess
+
+      interface _GetDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDatasetResponse]
+        def dataset_id: () -> ::String
+        def dataset_arn: () -> ::String
+        def dataset_title: () -> ::String
+        def kind: () -> ("TABULAR" | "NON_TABULAR")
+        def dataset_description: () -> ::String
+        def create_time: () -> ::Integer
+        def last_modified_time: () -> ::Integer
+        def schema_definition: () -> Types::SchemaUnion
+        def alias: () -> ::String
+        def status: () -> ("PENDING" | "FAILED" | "SUCCESS" | "RUNNING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#get_dataset-instance_method
+      def get_dataset: (
+                         dataset_id: ::String
+                       ) -> _GetDatasetResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDatasetResponseSuccess
+
+      interface _GetExternalDataViewAccessDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetExternalDataViewAccessDetailsResponse]
+        def credentials: () -> Types::AwsCredentials
+        def s3_location: () -> Types::S3Location
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#get_external_data_view_access_details-instance_method
+      def get_external_data_view_access_details: (
+                                                   data_view_id: ::String,
+                                                   dataset_id: ::String
+                                                 ) -> _GetExternalDataViewAccessDetailsResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetExternalDataViewAccessDetailsResponseSuccess
+
+      interface _GetPermissionGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPermissionGroupResponse]
+        def permission_group: () -> Types::PermissionGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#get_permission_group-instance_method
+      def get_permission_group: (
+                                  permission_group_id: ::String
+                                ) -> _GetPermissionGroupResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPermissionGroupResponseSuccess
+
+      interface _GetProgrammaticAccessCredentialsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProgrammaticAccessCredentialsResponse]
+        def credentials: () -> Types::Credentials
+        def duration_in_minutes: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#get_programmatic_access_credentials-instance_method
+      def get_programmatic_access_credentials: (
+                                                 ?duration_in_minutes: ::Integer,
+                                                 environment_id: ::String
+                                               ) -> _GetProgrammaticAccessCredentialsResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProgrammaticAccessCredentialsResponseSuccess
+
+      interface _GetUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUserResponse]
+        def user_id: () -> ::String
+        def status: () -> ("CREATING" | "ENABLED" | "DISABLED")
+        def first_name: () -> ::String
+        def last_name: () -> ::String
+        def email_address: () -> ::String
+        def type: () -> ("SUPER_USER" | "APP_USER")
+        def api_access: () -> ("ENABLED" | "DISABLED")
+        def api_access_principal_arn: () -> ::String
+        def create_time: () -> ::Integer
+        def last_enabled_time: () -> ::Integer
+        def last_disabled_time: () -> ::Integer
+        def last_modified_time: () -> ::Integer
+        def last_login_time: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#get_user-instance_method
+      def get_user: (
+                      user_id: ::String
+                    ) -> _GetUserResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUserResponseSuccess
+
+      interface _GetWorkingLocationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkingLocationResponse]
+        def s3_uri: () -> ::String
+        def s3_path: () -> ::String
+        def s3_bucket: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#get_working_location-instance_method
+      def get_working_location: (
+                                  ?location_type: ("INGESTION" | "SAGEMAKER")
+                                ) -> _GetWorkingLocationResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkingLocationResponseSuccess
+
+      interface _ListChangesetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChangesetsResponse]
+        def changesets: () -> ::Array[Types::ChangesetSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#list_changesets-instance_method
+      def list_changesets: (
+                             dataset_id: ::String,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListChangesetsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChangesetsResponseSuccess
+
+      interface _ListDataViewsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataViewsResponse]
+        def next_token: () -> ::String
+        def data_views: () -> ::Array[Types::DataViewSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#list_data_views-instance_method
+      def list_data_views: (
+                             dataset_id: ::String,
+                             ?next_token: ::String,
+                             ?max_results: ::Integer
+                           ) -> _ListDataViewsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataViewsResponseSuccess
+
+      interface _ListDatasetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasetsResponse]
+        def datasets: () -> ::Array[Types::Dataset]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#list_datasets-instance_method
+      def list_datasets: (
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListDatasetsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatasetsResponseSuccess
+
+      interface _ListPermissionGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPermissionGroupsResponse]
+        def permission_groups: () -> ::Array[Types::PermissionGroup]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#list_permission_groups-instance_method
+      def list_permission_groups: (
+                                    ?next_token: ::String,
+                                    max_results: ::Integer
+                                  ) -> _ListPermissionGroupsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPermissionGroupsResponseSuccess
+
+      interface _ListPermissionGroupsByUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPermissionGroupsByUserResponse]
+        def permission_groups: () -> ::Array[Types::PermissionGroupByUser]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#list_permission_groups_by_user-instance_method
+      def list_permission_groups_by_user: (
+                                            user_id: ::String,
+                                            ?next_token: ::String,
+                                            max_results: ::Integer
+                                          ) -> _ListPermissionGroupsByUserResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPermissionGroupsByUserResponseSuccess
+
+      interface _ListUsersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListUsersResponse]
+        def users: () -> ::Array[Types::User]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#list_users-instance_method
+      def list_users: (
+                        ?next_token: ::String,
+                        max_results: ::Integer
+                      ) -> _ListUsersResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUsersResponseSuccess
+
+      interface _ListUsersByPermissionGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListUsersByPermissionGroupResponse]
+        def users: () -> ::Array[Types::UserByPermissionGroup]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#list_users_by_permission_group-instance_method
+      def list_users_by_permission_group: (
+                                            permission_group_id: ::String,
+                                            ?next_token: ::String,
+                                            max_results: ::Integer
+                                          ) -> _ListUsersByPermissionGroupResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUsersByPermissionGroupResponseSuccess
+
+      interface _ResetUserPasswordResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResetUserPasswordResponse]
+        def user_id: () -> ::String
+        def temporary_password: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#reset_user_password-instance_method
+      def reset_user_password: (
+                                 user_id: ::String,
+                                 ?client_token: ::String
+                               ) -> _ResetUserPasswordResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetUserPasswordResponseSuccess
+
+      interface _UpdateChangesetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateChangesetResponse]
+        def changeset_id: () -> ::String
+        def dataset_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#update_changeset-instance_method
+      def update_changeset: (
+                              ?client_token: ::String,
+                              dataset_id: ::String,
+                              changeset_id: ::String,
+                              source_params: Hash[::String, ::String],
+                              format_params: Hash[::String, ::String]
+                            ) -> _UpdateChangesetResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChangesetResponseSuccess
+
+      interface _UpdateDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDatasetResponse]
+        def dataset_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#update_dataset-instance_method
+      def update_dataset: (
+                            ?client_token: ::String,
+                            dataset_id: ::String,
+                            dataset_title: ::String,
+                            kind: ("TABULAR" | "NON_TABULAR"),
+                            ?dataset_description: ::String,
+                            ?alias: ::String,
+                            ?schema_definition: {
+                              tabular_schema_config: {
+                                columns: Array[
+                                  {
+                                    data_type: ("STRING" | "CHAR" | "INTEGER" | "TINYINT" | "SMALLINT" | "BIGINT" | "FLOAT" | "DOUBLE" | "DATE" | "DATETIME" | "BOOLEAN" | "BINARY")?,
+                                    column_name: ::String?,
+                                    column_description: ::String?
+                                  },
+                                ]?,
+                                primary_key_columns: Array[::String]?
+                              }?
+                            }
+                          ) -> _UpdateDatasetResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDatasetResponseSuccess
+
+      interface _UpdatePermissionGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePermissionGroupResponse]
+        def permission_group_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#update_permission_group-instance_method
+      def update_permission_group: (
+                                     permission_group_id: ::String,
+                                     ?name: ::String,
+                                     ?description: ::String,
+                                     ?application_permissions: Array[("CreateDataset" | "ManageClusters" | "ManageUsersAndGroups" | "ManageAttributeSets" | "ViewAuditData" | "AccessNotebooks" | "GetTemporaryCredentials")],
+                                     ?client_token: ::String
+                                   ) -> _UpdatePermissionGroupResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePermissionGroupResponseSuccess
+
+      interface _UpdateUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateUserResponse]
+        def user_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FinSpaceData/Client.html#update_user-instance_method
+      def update_user: (
+                         user_id: ::String,
+                         ?type: ("SUPER_USER" | "APP_USER"),
+                         ?first_name: ::String,
+                         ?last_name: ::String,
+                         ?api_access: ("ENABLED" | "DISABLED"),
+                         ?api_access_principal_arn: ::String,
+                         ?client_token: ::String
+                       ) -> _UpdateUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUserResponseSuccess
+    end
+  end
+end
+

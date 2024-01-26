@@ -1,0 +1,1016 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module LocationService
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateTrackerConsumerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateTrackerConsumerResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#associate_tracker_consumer-instance_method
+      def associate_tracker_consumer: (
+                                        consumer_arn: ::String,
+                                        tracker_name: ::String
+                                      ) -> _AssociateTrackerConsumerResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateTrackerConsumerResponseSuccess
+
+      interface _BatchDeleteDevicePositionHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteDevicePositionHistoryResponse]
+        def errors: () -> ::Array[Types::BatchDeleteDevicePositionHistoryError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#batch_delete_device_position_history-instance_method
+      def batch_delete_device_position_history: (
+                                                  device_ids: Array[::String],
+                                                  tracker_name: ::String
+                                                ) -> _BatchDeleteDevicePositionHistoryResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteDevicePositionHistoryResponseSuccess
+
+      interface _BatchDeleteGeofenceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteGeofenceResponse]
+        def errors: () -> ::Array[Types::BatchDeleteGeofenceError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#batch_delete_geofence-instance_method
+      def batch_delete_geofence: (
+                                   collection_name: ::String,
+                                   geofence_ids: Array[::String]
+                                 ) -> _BatchDeleteGeofenceResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteGeofenceResponseSuccess
+
+      interface _BatchEvaluateGeofencesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchEvaluateGeofencesResponse]
+        def errors: () -> ::Array[Types::BatchEvaluateGeofencesError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#batch_evaluate_geofences-instance_method
+      def batch_evaluate_geofences: (
+                                      collection_name: ::String,
+                                      device_position_updates: Array[
+                                        {
+                                          accuracy: {
+                                            horizontal: ::Float
+                                          }?,
+                                          device_id: ::String,
+                                          position: Array[::Float],
+                                          position_properties: Hash[::String, ::String]?,
+                                          sample_time: ::Time
+                                        },
+                                      ]
+                                    ) -> _BatchEvaluateGeofencesResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchEvaluateGeofencesResponseSuccess
+
+      interface _BatchGetDevicePositionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetDevicePositionResponse]
+        def device_positions: () -> ::Array[Types::DevicePosition]
+        def errors: () -> ::Array[Types::BatchGetDevicePositionError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#batch_get_device_position-instance_method
+      def batch_get_device_position: (
+                                       device_ids: Array[::String],
+                                       tracker_name: ::String
+                                     ) -> _BatchGetDevicePositionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetDevicePositionResponseSuccess
+
+      interface _BatchPutGeofenceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchPutGeofenceResponse]
+        def errors: () -> ::Array[Types::BatchPutGeofenceError]
+        def successes: () -> ::Array[Types::BatchPutGeofenceSuccess]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#batch_put_geofence-instance_method
+      def batch_put_geofence: (
+                                collection_name: ::String,
+                                entries: Array[
+                                  {
+                                    geofence_id: ::String,
+                                    geofence_properties: Hash[::String, ::String]?,
+                                    geometry: {
+                                      circle: {
+                                        center: Array[::Float],
+                                        radius: ::Float
+                                      }?,
+                                      polygon: Array[
+                                        Array[
+                                          Array[::Float],
+                                        ],
+                                      ]?
+                                    }
+                                  },
+                                ]
+                              ) -> _BatchPutGeofenceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchPutGeofenceResponseSuccess
+
+      interface _BatchUpdateDevicePositionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchUpdateDevicePositionResponse]
+        def errors: () -> ::Array[Types::BatchUpdateDevicePositionError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#batch_update_device_position-instance_method
+      def batch_update_device_position: (
+                                          tracker_name: ::String,
+                                          updates: Array[
+                                            {
+                                              accuracy: {
+                                                horizontal: ::Float
+                                              }?,
+                                              device_id: ::String,
+                                              position: Array[::Float],
+                                              position_properties: Hash[::String, ::String]?,
+                                              sample_time: ::Time
+                                            },
+                                          ]
+                                        ) -> _BatchUpdateDevicePositionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateDevicePositionResponseSuccess
+
+      interface _CalculateRouteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CalculateRouteResponse]
+        def legs: () -> ::Array[Types::Leg]
+        def summary: () -> Types::CalculateRouteSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#calculate_route-instance_method
+      def calculate_route: (
+                             ?arrival_time: ::Time,
+                             calculator_name: ::String,
+                             ?car_mode_options: {
+                               avoid_ferries: bool?,
+                               avoid_tolls: bool?
+                             },
+                             ?depart_now: bool,
+                             departure_position: Array[::Float],
+                             ?departure_time: ::Time,
+                             destination_position: Array[::Float],
+                             ?distance_unit: ("Kilometers" | "Miles"),
+                             ?include_leg_geometry: bool,
+                             ?key: ::String,
+                             ?optimize_for: ("FastestRoute" | "ShortestRoute"),
+                             ?travel_mode: ("Car" | "Truck" | "Walking" | "Bicycle" | "Motorcycle"),
+                             ?truck_mode_options: {
+                               avoid_ferries: bool?,
+                               avoid_tolls: bool?,
+                               dimensions: {
+                                 height: ::Float?,
+                                 length: ::Float?,
+                                 unit: ("Meters" | "Feet")?,
+                                 width: ::Float?
+                               }?,
+                               weight: {
+                                 total: ::Float?,
+                                 unit: ("Kilograms" | "Pounds")?
+                               }?
+                             },
+                             ?waypoint_positions: Array[
+                               Array[::Float],
+                             ]
+                           ) -> _CalculateRouteResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CalculateRouteResponseSuccess
+
+      interface _CalculateRouteMatrixResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CalculateRouteMatrixResponse]
+        def route_matrix: () -> ::Array[::Array[Types::RouteMatrixEntry]]
+        def snapped_departure_positions: () -> ::Array[::Array[::Float]]
+        def snapped_destination_positions: () -> ::Array[::Array[::Float]]
+        def summary: () -> Types::CalculateRouteMatrixSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#calculate_route_matrix-instance_method
+      def calculate_route_matrix: (
+                                    calculator_name: ::String,
+                                    ?car_mode_options: {
+                                      avoid_ferries: bool?,
+                                      avoid_tolls: bool?
+                                    },
+                                    ?depart_now: bool,
+                                    departure_positions: Array[
+                                      Array[::Float],
+                                    ],
+                                    ?departure_time: ::Time,
+                                    destination_positions: Array[
+                                      Array[::Float],
+                                    ],
+                                    ?distance_unit: ("Kilometers" | "Miles"),
+                                    ?key: ::String,
+                                    ?travel_mode: ("Car" | "Truck" | "Walking" | "Bicycle" | "Motorcycle"),
+                                    ?truck_mode_options: {
+                                      avoid_ferries: bool?,
+                                      avoid_tolls: bool?,
+                                      dimensions: {
+                                        height: ::Float?,
+                                        length: ::Float?,
+                                        unit: ("Meters" | "Feet")?,
+                                        width: ::Float?
+                                      }?,
+                                      weight: {
+                                        total: ::Float?,
+                                        unit: ("Kilograms" | "Pounds")?
+                                      }?
+                                    }
+                                  ) -> _CalculateRouteMatrixResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CalculateRouteMatrixResponseSuccess
+
+      interface _CreateGeofenceCollectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGeofenceCollectionResponse]
+        def collection_arn: () -> ::String
+        def collection_name: () -> ::String
+        def create_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#create_geofence_collection-instance_method
+      def create_geofence_collection: (
+                                        collection_name: ::String,
+                                        ?description: ::String,
+                                        ?kms_key_id: ::String,
+                                        ?pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement"),
+                                        ?pricing_plan_data_source: ::String,
+                                        ?tags: Hash[::String, ::String]
+                                      ) -> _CreateGeofenceCollectionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGeofenceCollectionResponseSuccess
+
+      interface _CreateKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateKeyResponse]
+        def create_time: () -> ::Time
+        def key: () -> ::String
+        def key_arn: () -> ::String
+        def key_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#create_key-instance_method
+      def create_key: (
+                        ?description: ::String,
+                        ?expire_time: ::Time,
+                        key_name: ::String,
+                        ?no_expiry: bool,
+                        restrictions: {
+                          allow_actions: Array[::String],
+                          allow_referers: Array[::String]?,
+                          allow_resources: Array[::String]
+                        },
+                        ?tags: Hash[::String, ::String]
+                      ) -> _CreateKeyResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateKeyResponseSuccess
+
+      interface _CreateMapResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMapResponse]
+        def create_time: () -> ::Time
+        def map_arn: () -> ::String
+        def map_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#create_map-instance_method
+      def create_map: (
+                        configuration: {
+                          custom_layers: Array[::String]?,
+                          political_view: ::String?,
+                          style: ::String
+                        },
+                        ?description: ::String,
+                        map_name: ::String,
+                        ?pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement"),
+                        ?tags: Hash[::String, ::String]
+                      ) -> _CreateMapResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMapResponseSuccess
+
+      interface _CreatePlaceIndexResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePlaceIndexResponse]
+        def create_time: () -> ::Time
+        def index_arn: () -> ::String
+        def index_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#create_place_index-instance_method
+      def create_place_index: (
+                                data_source: ::String,
+                                ?data_source_configuration: {
+                                  intended_use: ("SingleUse" | "Storage")?
+                                },
+                                ?description: ::String,
+                                index_name: ::String,
+                                ?pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement"),
+                                ?tags: Hash[::String, ::String]
+                              ) -> _CreatePlaceIndexResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePlaceIndexResponseSuccess
+
+      interface _CreateRouteCalculatorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRouteCalculatorResponse]
+        def calculator_arn: () -> ::String
+        def calculator_name: () -> ::String
+        def create_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#create_route_calculator-instance_method
+      def create_route_calculator: (
+                                     calculator_name: ::String,
+                                     data_source: ::String,
+                                     ?description: ::String,
+                                     ?pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement"),
+                                     ?tags: Hash[::String, ::String]
+                                   ) -> _CreateRouteCalculatorResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRouteCalculatorResponseSuccess
+
+      interface _CreateTrackerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTrackerResponse]
+        def create_time: () -> ::Time
+        def tracker_arn: () -> ::String
+        def tracker_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#create_tracker-instance_method
+      def create_tracker: (
+                            ?description: ::String,
+                            ?event_bridge_enabled: bool,
+                            ?kms_key_enable_geospatial_queries: bool,
+                            ?kms_key_id: ::String,
+                            ?position_filtering: ("TimeBased" | "DistanceBased" | "AccuracyBased"),
+                            ?pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement"),
+                            ?pricing_plan_data_source: ::String,
+                            ?tags: Hash[::String, ::String],
+                            tracker_name: ::String
+                          ) -> _CreateTrackerResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTrackerResponseSuccess
+
+      interface _DeleteGeofenceCollectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGeofenceCollectionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#delete_geofence_collection-instance_method
+      def delete_geofence_collection: (
+                                        collection_name: ::String
+                                      ) -> _DeleteGeofenceCollectionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGeofenceCollectionResponseSuccess
+
+      interface _DeleteKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteKeyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#delete_key-instance_method
+      def delete_key: (
+                        ?force_delete: bool,
+                        key_name: ::String
+                      ) -> _DeleteKeyResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteKeyResponseSuccess
+
+      interface _DeleteMapResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMapResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#delete_map-instance_method
+      def delete_map: (
+                        map_name: ::String
+                      ) -> _DeleteMapResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMapResponseSuccess
+
+      interface _DeletePlaceIndexResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePlaceIndexResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#delete_place_index-instance_method
+      def delete_place_index: (
+                                index_name: ::String
+                              ) -> _DeletePlaceIndexResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePlaceIndexResponseSuccess
+
+      interface _DeleteRouteCalculatorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRouteCalculatorResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#delete_route_calculator-instance_method
+      def delete_route_calculator: (
+                                     calculator_name: ::String
+                                   ) -> _DeleteRouteCalculatorResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRouteCalculatorResponseSuccess
+
+      interface _DeleteTrackerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTrackerResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#delete_tracker-instance_method
+      def delete_tracker: (
+                            tracker_name: ::String
+                          ) -> _DeleteTrackerResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTrackerResponseSuccess
+
+      interface _DescribeGeofenceCollectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGeofenceCollectionResponse]
+        def collection_arn: () -> ::String
+        def collection_name: () -> ::String
+        def create_time: () -> ::Time
+        def description: () -> ::String
+        def geofence_count: () -> ::Integer
+        def kms_key_id: () -> ::String
+        def pricing_plan: () -> ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
+        def pricing_plan_data_source: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def update_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#describe_geofence_collection-instance_method
+      def describe_geofence_collection: (
+                                          collection_name: ::String
+                                        ) -> _DescribeGeofenceCollectionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeGeofenceCollectionResponseSuccess
+
+      interface _DescribeKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeKeyResponse]
+        def create_time: () -> ::Time
+        def description: () -> ::String
+        def expire_time: () -> ::Time
+        def key: () -> ::String
+        def key_arn: () -> ::String
+        def key_name: () -> ::String
+        def restrictions: () -> Types::ApiKeyRestrictions
+        def tags: () -> ::Hash[::String, ::String]
+        def update_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#describe_key-instance_method
+      def describe_key: (
+                          key_name: ::String
+                        ) -> _DescribeKeyResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeKeyResponseSuccess
+
+      interface _DescribeMapResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMapResponse]
+        def configuration: () -> Types::MapConfiguration
+        def create_time: () -> ::Time
+        def data_source: () -> ::String
+        def description: () -> ::String
+        def map_arn: () -> ::String
+        def map_name: () -> ::String
+        def pricing_plan: () -> ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
+        def tags: () -> ::Hash[::String, ::String]
+        def update_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#describe_map-instance_method
+      def describe_map: (
+                          map_name: ::String
+                        ) -> _DescribeMapResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMapResponseSuccess
+
+      interface _DescribePlaceIndexResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePlaceIndexResponse]
+        def create_time: () -> ::Time
+        def data_source: () -> ::String
+        def data_source_configuration: () -> Types::DataSourceConfiguration
+        def description: () -> ::String
+        def index_arn: () -> ::String
+        def index_name: () -> ::String
+        def pricing_plan: () -> ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
+        def tags: () -> ::Hash[::String, ::String]
+        def update_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#describe_place_index-instance_method
+      def describe_place_index: (
+                                  index_name: ::String
+                                ) -> _DescribePlaceIndexResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePlaceIndexResponseSuccess
+
+      interface _DescribeRouteCalculatorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRouteCalculatorResponse]
+        def calculator_arn: () -> ::String
+        def calculator_name: () -> ::String
+        def create_time: () -> ::Time
+        def data_source: () -> ::String
+        def description: () -> ::String
+        def pricing_plan: () -> ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
+        def tags: () -> ::Hash[::String, ::String]
+        def update_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#describe_route_calculator-instance_method
+      def describe_route_calculator: (
+                                       calculator_name: ::String
+                                     ) -> _DescribeRouteCalculatorResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRouteCalculatorResponseSuccess
+
+      interface _DescribeTrackerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTrackerResponse]
+        def create_time: () -> ::Time
+        def description: () -> ::String
+        def event_bridge_enabled: () -> bool
+        def kms_key_enable_geospatial_queries: () -> bool
+        def kms_key_id: () -> ::String
+        def position_filtering: () -> ("TimeBased" | "DistanceBased" | "AccuracyBased")
+        def pricing_plan: () -> ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
+        def pricing_plan_data_source: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def tracker_arn: () -> ::String
+        def tracker_name: () -> ::String
+        def update_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#describe_tracker-instance_method
+      def describe_tracker: (
+                              tracker_name: ::String
+                            ) -> _DescribeTrackerResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTrackerResponseSuccess
+
+      interface _DisassociateTrackerConsumerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateTrackerConsumerResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#disassociate_tracker_consumer-instance_method
+      def disassociate_tracker_consumer: (
+                                           consumer_arn: ::String,
+                                           tracker_name: ::String
+                                         ) -> _DisassociateTrackerConsumerResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateTrackerConsumerResponseSuccess
+
+      interface _GetDevicePositionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDevicePositionResponse]
+        def accuracy: () -> Types::PositionalAccuracy
+        def device_id: () -> ::String
+        def position: () -> ::Array[::Float]
+        def position_properties: () -> ::Hash[::String, ::String]
+        def received_time: () -> ::Time
+        def sample_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#get_device_position-instance_method
+      def get_device_position: (
+                                 device_id: ::String,
+                                 tracker_name: ::String
+                               ) -> _GetDevicePositionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDevicePositionResponseSuccess
+
+      interface _GetDevicePositionHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDevicePositionHistoryResponse]
+        def device_positions: () -> ::Array[Types::DevicePosition]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#get_device_position_history-instance_method
+      def get_device_position_history: (
+                                         device_id: ::String,
+                                         ?end_time_exclusive: ::Time,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String,
+                                         ?start_time_inclusive: ::Time,
+                                         tracker_name: ::String
+                                       ) -> _GetDevicePositionHistoryResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDevicePositionHistoryResponseSuccess
+
+      interface _GetGeofenceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGeofenceResponse]
+        def create_time: () -> ::Time
+        def geofence_id: () -> ::String
+        def geofence_properties: () -> ::Hash[::String, ::String]
+        def geometry: () -> Types::GeofenceGeometry
+        def status: () -> ::String
+        def update_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#get_geofence-instance_method
+      def get_geofence: (
+                          collection_name: ::String,
+                          geofence_id: ::String
+                        ) -> _GetGeofenceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGeofenceResponseSuccess
+
+      interface _GetMapGlyphsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMapGlyphsResponse]
+        def blob: () -> ::IO
+        def cache_control: () -> ::String
+        def content_type: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#get_map_glyphs-instance_method
+      def get_map_glyphs: (
+                            font_stack: ::String,
+                            font_unicode_range: ::String,
+                            ?key: ::String,
+                            map_name: ::String
+                          ) ?{ (*untyped) -> void } -> _GetMapGlyphsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _GetMapGlyphsResponseSuccess
+
+      interface _GetMapSpritesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMapSpritesResponse]
+        def blob: () -> ::IO
+        def cache_control: () -> ::String
+        def content_type: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#get_map_sprites-instance_method
+      def get_map_sprites: (
+                             file_name: ::String,
+                             ?key: ::String,
+                             map_name: ::String
+                           ) ?{ (*untyped) -> void } -> _GetMapSpritesResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _GetMapSpritesResponseSuccess
+
+      interface _GetMapStyleDescriptorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMapStyleDescriptorResponse]
+        def blob: () -> ::IO
+        def cache_control: () -> ::String
+        def content_type: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#get_map_style_descriptor-instance_method
+      def get_map_style_descriptor: (
+                                      ?key: ::String,
+                                      map_name: ::String
+                                    ) ?{ (*untyped) -> void } -> _GetMapStyleDescriptorResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _GetMapStyleDescriptorResponseSuccess
+
+      interface _GetMapTileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMapTileResponse]
+        def blob: () -> ::IO
+        def cache_control: () -> ::String
+        def content_type: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#get_map_tile-instance_method
+      def get_map_tile: (
+                          ?key: ::String,
+                          map_name: ::String,
+                          x: ::String,
+                          y: ::String,
+                          z: ::String
+                        ) ?{ (*untyped) -> void } -> _GetMapTileResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _GetMapTileResponseSuccess
+
+      interface _GetPlaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPlaceResponse]
+        def place: () -> Types::Place
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#get_place-instance_method
+      def get_place: (
+                       index_name: ::String,
+                       ?key: ::String,
+                       ?language: ::String,
+                       place_id: ::String
+                     ) -> _GetPlaceResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPlaceResponseSuccess
+
+      interface _ListDevicePositionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDevicePositionsResponse]
+        def entries: () -> ::Array[Types::ListDevicePositionsResponseEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#list_device_positions-instance_method
+      def list_device_positions: (
+                                   ?filter_geometry: {
+                                     polygon: Array[
+                                       Array[
+                                         Array[::Float],
+                                       ],
+                                     ]?
+                                   },
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String,
+                                   tracker_name: ::String
+                                 ) -> _ListDevicePositionsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDevicePositionsResponseSuccess
+
+      interface _ListGeofenceCollectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGeofenceCollectionsResponse]
+        def entries: () -> ::Array[Types::ListGeofenceCollectionsResponseEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#list_geofence_collections-instance_method
+      def list_geofence_collections: (
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListGeofenceCollectionsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGeofenceCollectionsResponseSuccess
+
+      interface _ListGeofencesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGeofencesResponse]
+        def entries: () -> ::Array[Types::ListGeofenceResponseEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#list_geofences-instance_method
+      def list_geofences: (
+                            collection_name: ::String,
+                            ?max_results: ::Integer,
+                            ?next_token: ::String
+                          ) -> _ListGeofencesResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGeofencesResponseSuccess
+
+      interface _ListKeysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListKeysResponse]
+        def entries: () -> ::Array[Types::ListKeysResponseEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#list_keys-instance_method
+      def list_keys: (
+                       ?filter: {
+                         key_status: ("Active" | "Expired")?
+                       },
+                       ?max_results: ::Integer,
+                       ?next_token: ::String
+                     ) -> _ListKeysResponseSuccess
+                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListKeysResponseSuccess
+
+      interface _ListMapsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMapsResponse]
+        def entries: () -> ::Array[Types::ListMapsResponseEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#list_maps-instance_method
+      def list_maps: (
+                       ?max_results: ::Integer,
+                       ?next_token: ::String
+                     ) -> _ListMapsResponseSuccess
+                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMapsResponseSuccess
+
+      interface _ListPlaceIndexesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPlaceIndexesResponse]
+        def entries: () -> ::Array[Types::ListPlaceIndexesResponseEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#list_place_indexes-instance_method
+      def list_place_indexes: (
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListPlaceIndexesResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPlaceIndexesResponseSuccess
+
+      interface _ListRouteCalculatorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRouteCalculatorsResponse]
+        def entries: () -> ::Array[Types::ListRouteCalculatorsResponseEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#list_route_calculators-instance_method
+      def list_route_calculators: (
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListRouteCalculatorsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRouteCalculatorsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTrackerConsumersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTrackerConsumersResponse]
+        def consumer_arns: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#list_tracker_consumers-instance_method
+      def list_tracker_consumers: (
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String,
+                                    tracker_name: ::String
+                                  ) -> _ListTrackerConsumersResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTrackerConsumersResponseSuccess
+
+      interface _ListTrackersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTrackersResponse]
+        def entries: () -> ::Array[Types::ListTrackersResponseEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#list_trackers-instance_method
+      def list_trackers: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListTrackersResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTrackersResponseSuccess
+
+      interface _PutGeofenceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutGeofenceResponse]
+        def create_time: () -> ::Time
+        def geofence_id: () -> ::String
+        def update_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#put_geofence-instance_method
+      def put_geofence: (
+                          collection_name: ::String,
+                          geofence_id: ::String,
+                          ?geofence_properties: Hash[::String, ::String],
+                          geometry: {
+                            circle: {
+                              center: Array[::Float],
+                              radius: ::Float
+                            }?,
+                            polygon: Array[
+                              Array[
+                                Array[::Float],
+                              ],
+                            ]?
+                          }
+                        ) -> _PutGeofenceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutGeofenceResponseSuccess
+
+      interface _SearchPlaceIndexForPositionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchPlaceIndexForPositionResponse]
+        def results: () -> ::Array[Types::SearchForPositionResult]
+        def summary: () -> Types::SearchPlaceIndexForPositionSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#search_place_index_for_position-instance_method
+      def search_place_index_for_position: (
+                                             index_name: ::String,
+                                             ?key: ::String,
+                                             ?language: ::String,
+                                             ?max_results: ::Integer,
+                                             position: Array[::Float]
+                                           ) -> _SearchPlaceIndexForPositionResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchPlaceIndexForPositionResponseSuccess
+
+      interface _SearchPlaceIndexForSuggestionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchPlaceIndexForSuggestionsResponse]
+        def results: () -> ::Array[Types::SearchForSuggestionsResult]
+        def summary: () -> Types::SearchPlaceIndexForSuggestionsSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#search_place_index_for_suggestions-instance_method
+      def search_place_index_for_suggestions: (
+                                                ?bias_position: Array[::Float],
+                                                ?filter_b_box: Array[::Float],
+                                                ?filter_categories: Array[::String],
+                                                ?filter_countries: Array[::String],
+                                                index_name: ::String,
+                                                ?key: ::String,
+                                                ?language: ::String,
+                                                ?max_results: ::Integer,
+                                                text: ::String
+                                              ) -> _SearchPlaceIndexForSuggestionsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchPlaceIndexForSuggestionsResponseSuccess
+
+      interface _SearchPlaceIndexForTextResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchPlaceIndexForTextResponse]
+        def results: () -> ::Array[Types::SearchForTextResult]
+        def summary: () -> Types::SearchPlaceIndexForTextSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#search_place_index_for_text-instance_method
+      def search_place_index_for_text: (
+                                         ?bias_position: Array[::Float],
+                                         ?filter_b_box: Array[::Float],
+                                         ?filter_categories: Array[::String],
+                                         ?filter_countries: Array[::String],
+                                         index_name: ::String,
+                                         ?key: ::String,
+                                         ?language: ::String,
+                                         ?max_results: ::Integer,
+                                         text: ::String
+                                       ) -> _SearchPlaceIndexForTextResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchPlaceIndexForTextResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateGeofenceCollectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGeofenceCollectionResponse]
+        def collection_arn: () -> ::String
+        def collection_name: () -> ::String
+        def update_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#update_geofence_collection-instance_method
+      def update_geofence_collection: (
+                                        collection_name: ::String,
+                                        ?description: ::String,
+                                        ?pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement"),
+                                        ?pricing_plan_data_source: ::String
+                                      ) -> _UpdateGeofenceCollectionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGeofenceCollectionResponseSuccess
+
+      interface _UpdateKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateKeyResponse]
+        def key_arn: () -> ::String
+        def key_name: () -> ::String
+        def update_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#update_key-instance_method
+      def update_key: (
+                        ?description: ::String,
+                        ?expire_time: ::Time,
+                        ?force_update: bool,
+                        key_name: ::String,
+                        ?no_expiry: bool,
+                        ?restrictions: {
+                          allow_actions: Array[::String],
+                          allow_referers: Array[::String]?,
+                          allow_resources: Array[::String]
+                        }
+                      ) -> _UpdateKeyResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateKeyResponseSuccess
+
+      interface _UpdateMapResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMapResponse]
+        def map_arn: () -> ::String
+        def map_name: () -> ::String
+        def update_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#update_map-instance_method
+      def update_map: (
+                        ?configuration_update: {
+                          custom_layers: Array[::String]?,
+                          political_view: ::String?
+                        },
+                        ?description: ::String,
+                        map_name: ::String,
+                        ?pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
+                      ) -> _UpdateMapResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMapResponseSuccess
+
+      interface _UpdatePlaceIndexResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePlaceIndexResponse]
+        def index_arn: () -> ::String
+        def index_name: () -> ::String
+        def update_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#update_place_index-instance_method
+      def update_place_index: (
+                                ?data_source_configuration: {
+                                  intended_use: ("SingleUse" | "Storage")?
+                                },
+                                ?description: ::String,
+                                index_name: ::String,
+                                ?pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
+                              ) -> _UpdatePlaceIndexResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePlaceIndexResponseSuccess
+
+      interface _UpdateRouteCalculatorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRouteCalculatorResponse]
+        def calculator_arn: () -> ::String
+        def calculator_name: () -> ::String
+        def update_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#update_route_calculator-instance_method
+      def update_route_calculator: (
+                                     calculator_name: ::String,
+                                     ?description: ::String,
+                                     ?pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
+                                   ) -> _UpdateRouteCalculatorResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRouteCalculatorResponseSuccess
+
+      interface _UpdateTrackerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTrackerResponse]
+        def tracker_arn: () -> ::String
+        def tracker_name: () -> ::String
+        def update_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#update_tracker-instance_method
+      def update_tracker: (
+                            ?description: ::String,
+                            ?event_bridge_enabled: bool,
+                            ?kms_key_enable_geospatial_queries: bool,
+                            ?position_filtering: ("TimeBased" | "DistanceBased" | "AccuracyBased"),
+                            ?pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement"),
+                            ?pricing_plan_data_source: ::String,
+                            tracker_name: ::String
+                          ) -> _UpdateTrackerResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTrackerResponseSuccess
+    end
+  end
+end
+

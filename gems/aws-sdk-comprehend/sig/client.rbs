@@ -1,0 +1,1580 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Comprehend
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchDetectDominantLanguageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDetectDominantLanguageResponse]
+        def result_list: () -> ::Array[Types::BatchDetectDominantLanguageItemResult]
+        def error_list: () -> ::Array[Types::BatchItemError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#batch_detect_dominant_language-instance_method
+      def batch_detect_dominant_language: (
+                                            text_list: Array[::String]
+                                          ) -> _BatchDetectDominantLanguageResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDetectDominantLanguageResponseSuccess
+
+      interface _BatchDetectEntitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDetectEntitiesResponse]
+        def result_list: () -> ::Array[Types::BatchDetectEntitiesItemResult]
+        def error_list: () -> ::Array[Types::BatchItemError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#batch_detect_entities-instance_method
+      def batch_detect_entities: (
+                                   text_list: Array[::String],
+                                   language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+                                 ) -> _BatchDetectEntitiesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDetectEntitiesResponseSuccess
+
+      interface _BatchDetectKeyPhrasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDetectKeyPhrasesResponse]
+        def result_list: () -> ::Array[Types::BatchDetectKeyPhrasesItemResult]
+        def error_list: () -> ::Array[Types::BatchItemError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#batch_detect_key_phrases-instance_method
+      def batch_detect_key_phrases: (
+                                      text_list: Array[::String],
+                                      language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+                                    ) -> _BatchDetectKeyPhrasesResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDetectKeyPhrasesResponseSuccess
+
+      interface _BatchDetectSentimentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDetectSentimentResponse]
+        def result_list: () -> ::Array[Types::BatchDetectSentimentItemResult]
+        def error_list: () -> ::Array[Types::BatchItemError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#batch_detect_sentiment-instance_method
+      def batch_detect_sentiment: (
+                                    text_list: Array[::String],
+                                    language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+                                  ) -> _BatchDetectSentimentResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDetectSentimentResponseSuccess
+
+      interface _BatchDetectSyntaxResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDetectSyntaxResponse]
+        def result_list: () -> ::Array[Types::BatchDetectSyntaxItemResult]
+        def error_list: () -> ::Array[Types::BatchItemError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#batch_detect_syntax-instance_method
+      def batch_detect_syntax: (
+                                 text_list: Array[::String],
+                                 language_code: ("en" | "es" | "fr" | "de" | "it" | "pt")
+                               ) -> _BatchDetectSyntaxResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDetectSyntaxResponseSuccess
+
+      interface _BatchDetectTargetedSentimentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDetectTargetedSentimentResponse]
+        def result_list: () -> ::Array[Types::BatchDetectTargetedSentimentItemResult]
+        def error_list: () -> ::Array[Types::BatchItemError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#batch_detect_targeted_sentiment-instance_method
+      def batch_detect_targeted_sentiment: (
+                                             text_list: Array[::String],
+                                             language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+                                           ) -> _BatchDetectTargetedSentimentResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDetectTargetedSentimentResponseSuccess
+
+      interface _ClassifyDocumentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ClassifyDocumentResponse]
+        def classes: () -> ::Array[Types::DocumentClass]
+        def labels: () -> ::Array[Types::DocumentLabel]
+        def document_metadata: () -> Types::DocumentMetadata
+        def document_type: () -> ::Array[Types::DocumentTypeListItem]
+        def errors: () -> ::Array[Types::ErrorsListItem]
+        def warnings: () -> ::Array[Types::WarningsListItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#classify_document-instance_method
+      def classify_document: (
+                               ?text: ::String,
+                               endpoint_arn: ::String,
+                               ?bytes: ::String,
+                               ?document_reader_config: {
+                                 document_read_action: ("TEXTRACT_DETECT_DOCUMENT_TEXT" | "TEXTRACT_ANALYZE_DOCUMENT"),
+                                 document_read_mode: ("SERVICE_DEFAULT" | "FORCE_DOCUMENT_READ_ACTION")?,
+                                 feature_types: Array[("TABLES" | "FORMS")]?
+                               }
+                             ) -> _ClassifyDocumentResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ClassifyDocumentResponseSuccess
+
+      interface _ContainsPiiEntitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ContainsPiiEntitiesResponse]
+        def labels: () -> ::Array[Types::EntityLabel]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#contains_pii_entities-instance_method
+      def contains_pii_entities: (
+                                   text: ::String,
+                                   language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+                                 ) -> _ContainsPiiEntitiesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ContainsPiiEntitiesResponseSuccess
+
+      interface _CreateDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDatasetResponse]
+        def dataset_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#create_dataset-instance_method
+      def create_dataset: (
+                            flywheel_arn: ::String,
+                            dataset_name: ::String,
+                            ?dataset_type: ("TRAIN" | "TEST"),
+                            ?description: ::String,
+                            input_data_config: {
+                              augmented_manifests: Array[
+                                {
+                                  attribute_names: Array[::String],
+                                  s3_uri: ::String,
+                                  annotation_data_s3_uri: ::String?,
+                                  source_documents_s3_uri: ::String?,
+                                  document_type: ("PLAIN_TEXT_DOCUMENT" | "SEMI_STRUCTURED_DOCUMENT")?
+                                },
+                              ]?,
+                              data_format: ("COMPREHEND_CSV" | "AUGMENTED_MANIFEST")?,
+                              document_classifier_input_data_config: {
+                                s3_uri: ::String,
+                                label_delimiter: ::String?
+                              }?,
+                              entity_recognizer_input_data_config: {
+                                annotations: {
+                                  s3_uri: ::String
+                                }?,
+                                documents: {
+                                  s3_uri: ::String,
+                                  input_format: ("ONE_DOC_PER_FILE" | "ONE_DOC_PER_LINE")?
+                                },
+                                entity_list: {
+                                  s3_uri: ::String
+                                }?
+                              }?
+                            },
+                            ?client_request_token: ::String,
+                            ?tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String?
+                              },
+                            ]
+                          ) -> _CreateDatasetResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatasetResponseSuccess
+
+      interface _CreateDocumentClassifierResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDocumentClassifierResponse]
+        def document_classifier_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#create_document_classifier-instance_method
+      def create_document_classifier: (
+                                        document_classifier_name: ::String,
+                                        ?version_name: ::String,
+                                        data_access_role_arn: ::String,
+                                        ?tags: Array[
+                                          {
+                                            key: ::String,
+                                            value: ::String?
+                                          },
+                                        ],
+                                        input_data_config: {
+                                          data_format: ("COMPREHEND_CSV" | "AUGMENTED_MANIFEST")?,
+                                          s3_uri: ::String?,
+                                          test_s3_uri: ::String?,
+                                          label_delimiter: ::String?,
+                                          augmented_manifests: Array[
+                                            {
+                                              s3_uri: ::String,
+                                              split: ("TRAIN" | "TEST")?,
+                                              attribute_names: Array[::String],
+                                              annotation_data_s3_uri: ::String?,
+                                              source_documents_s3_uri: ::String?,
+                                              document_type: ("PLAIN_TEXT_DOCUMENT" | "SEMI_STRUCTURED_DOCUMENT")?
+                                            },
+                                          ]?,
+                                          document_type: ("PLAIN_TEXT_DOCUMENT" | "SEMI_STRUCTURED_DOCUMENT")?,
+                                          documents: {
+                                            s3_uri: ::String,
+                                            test_s3_uri: ::String?
+                                          }?,
+                                          document_reader_config: {
+                                            document_read_action: ("TEXTRACT_DETECT_DOCUMENT_TEXT" | "TEXTRACT_ANALYZE_DOCUMENT"),
+                                            document_read_mode: ("SERVICE_DEFAULT" | "FORCE_DOCUMENT_READ_ACTION")?,
+                                            feature_types: Array[("TABLES" | "FORMS")]?
+                                          }?
+                                        },
+                                        ?output_data_config: {
+                                          s3_uri: ::String?,
+                                          kms_key_id: ::String?,
+                                          flywheel_stats_s3_prefix: ::String?
+                                        },
+                                        ?client_request_token: ::String,
+                                        language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW"),
+                                        ?volume_kms_key_id: ::String,
+                                        ?vpc_config: {
+                                          security_group_ids: Array[::String],
+                                          subnets: Array[::String]
+                                        },
+                                        ?mode: ("MULTI_CLASS" | "MULTI_LABEL"),
+                                        ?model_kms_key_id: ::String,
+                                        ?model_policy: ::String
+                                      ) -> _CreateDocumentClassifierResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDocumentClassifierResponseSuccess
+
+      interface _CreateEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEndpointResponse]
+        def endpoint_arn: () -> ::String
+        def model_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#create_endpoint-instance_method
+      def create_endpoint: (
+                             endpoint_name: ::String,
+                             ?model_arn: ::String,
+                             desired_inference_units: ::Integer,
+                             ?client_request_token: ::String,
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String?
+                               },
+                             ],
+                             ?data_access_role_arn: ::String,
+                             ?flywheel_arn: ::String
+                           ) -> _CreateEndpointResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEndpointResponseSuccess
+
+      interface _CreateEntityRecognizerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEntityRecognizerResponse]
+        def entity_recognizer_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#create_entity_recognizer-instance_method
+      def create_entity_recognizer: (
+                                      recognizer_name: ::String,
+                                      ?version_name: ::String,
+                                      data_access_role_arn: ::String,
+                                      ?tags: Array[
+                                        {
+                                          key: ::String,
+                                          value: ::String?
+                                        },
+                                      ],
+                                      input_data_config: {
+                                        data_format: ("COMPREHEND_CSV" | "AUGMENTED_MANIFEST")?,
+                                        entity_types: Array[
+                                          {
+                                            type: ::String
+                                          },
+                                        ],
+                                        documents: {
+                                          s3_uri: ::String,
+                                          test_s3_uri: ::String?,
+                                          input_format: ("ONE_DOC_PER_FILE" | "ONE_DOC_PER_LINE")?
+                                        }?,
+                                        annotations: {
+                                          s3_uri: ::String,
+                                          test_s3_uri: ::String?
+                                        }?,
+                                        entity_list: {
+                                          s3_uri: ::String
+                                        }?,
+                                        augmented_manifests: Array[
+                                          {
+                                            s3_uri: ::String,
+                                            split: ("TRAIN" | "TEST")?,
+                                            attribute_names: Array[::String],
+                                            annotation_data_s3_uri: ::String?,
+                                            source_documents_s3_uri: ::String?,
+                                            document_type: ("PLAIN_TEXT_DOCUMENT" | "SEMI_STRUCTURED_DOCUMENT")?
+                                          },
+                                        ]?
+                                      },
+                                      ?client_request_token: ::String,
+                                      language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW"),
+                                      ?volume_kms_key_id: ::String,
+                                      ?vpc_config: {
+                                        security_group_ids: Array[::String],
+                                        subnets: Array[::String]
+                                      },
+                                      ?model_kms_key_id: ::String,
+                                      ?model_policy: ::String
+                                    ) -> _CreateEntityRecognizerResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEntityRecognizerResponseSuccess
+
+      interface _CreateFlywheelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFlywheelResponse]
+        def flywheel_arn: () -> ::String
+        def active_model_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#create_flywheel-instance_method
+      def create_flywheel: (
+                             flywheel_name: ::String,
+                             ?active_model_arn: ::String,
+                             data_access_role_arn: ::String,
+                             ?task_config: {
+                               language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW"),
+                               document_classification_config: {
+                                 mode: ("MULTI_CLASS" | "MULTI_LABEL"),
+                                 labels: Array[::String]?
+                               }?,
+                               entity_recognition_config: {
+                                 entity_types: Array[
+                                   {
+                                     type: ::String
+                                   },
+                                 ]
+                               }?
+                             },
+                             ?model_type: ("DOCUMENT_CLASSIFIER" | "ENTITY_RECOGNIZER"),
+                             data_lake_s3_uri: ::String,
+                             ?data_security_config: {
+                               model_kms_key_id: ::String?,
+                               volume_kms_key_id: ::String?,
+                               data_lake_kms_key_id: ::String?,
+                               vpc_config: {
+                                 security_group_ids: Array[::String],
+                                 subnets: Array[::String]
+                               }?
+                             },
+                             ?client_request_token: ::String,
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String?
+                               },
+                             ]
+                           ) -> _CreateFlywheelResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFlywheelResponseSuccess
+
+      interface _DeleteDocumentClassifierResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDocumentClassifierResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#delete_document_classifier-instance_method
+      def delete_document_classifier: (
+                                        document_classifier_arn: ::String
+                                      ) -> _DeleteDocumentClassifierResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDocumentClassifierResponseSuccess
+
+      interface _DeleteEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEndpointResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#delete_endpoint-instance_method
+      def delete_endpoint: (
+                             endpoint_arn: ::String
+                           ) -> _DeleteEndpointResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEndpointResponseSuccess
+
+      interface _DeleteEntityRecognizerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEntityRecognizerResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#delete_entity_recognizer-instance_method
+      def delete_entity_recognizer: (
+                                      entity_recognizer_arn: ::String
+                                    ) -> _DeleteEntityRecognizerResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEntityRecognizerResponseSuccess
+
+      interface _DeleteFlywheelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFlywheelResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#delete_flywheel-instance_method
+      def delete_flywheel: (
+                             flywheel_arn: ::String
+                           ) -> _DeleteFlywheelResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFlywheelResponseSuccess
+
+      interface _DeleteResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourcePolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#delete_resource_policy-instance_method
+      def delete_resource_policy: (
+                                    resource_arn: ::String,
+                                    ?policy_revision_id: ::String
+                                  ) -> _DeleteResourcePolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourcePolicyResponseSuccess
+
+      interface _DescribeDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDatasetResponse]
+        def dataset_properties: () -> Types::DatasetProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#describe_dataset-instance_method
+      def describe_dataset: (
+                              dataset_arn: ::String
+                            ) -> _DescribeDatasetResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDatasetResponseSuccess
+
+      interface _DescribeDocumentClassificationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDocumentClassificationJobResponse]
+        def document_classification_job_properties: () -> Types::DocumentClassificationJobProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#describe_document_classification_job-instance_method
+      def describe_document_classification_job: (
+                                                  job_id: ::String
+                                                ) -> _DescribeDocumentClassificationJobResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDocumentClassificationJobResponseSuccess
+
+      interface _DescribeDocumentClassifierResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDocumentClassifierResponse]
+        def document_classifier_properties: () -> Types::DocumentClassifierProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#describe_document_classifier-instance_method
+      def describe_document_classifier: (
+                                          document_classifier_arn: ::String
+                                        ) -> _DescribeDocumentClassifierResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDocumentClassifierResponseSuccess
+
+      interface _DescribeDominantLanguageDetectionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDominantLanguageDetectionJobResponse]
+        def dominant_language_detection_job_properties: () -> Types::DominantLanguageDetectionJobProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#describe_dominant_language_detection_job-instance_method
+      def describe_dominant_language_detection_job: (
+                                                      job_id: ::String
+                                                    ) -> _DescribeDominantLanguageDetectionJobResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDominantLanguageDetectionJobResponseSuccess
+
+      interface _DescribeEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEndpointResponse]
+        def endpoint_properties: () -> Types::EndpointProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#describe_endpoint-instance_method
+      def describe_endpoint: (
+                               endpoint_arn: ::String
+                             ) -> _DescribeEndpointResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEndpointResponseSuccess
+
+      interface _DescribeEntitiesDetectionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEntitiesDetectionJobResponse]
+        def entities_detection_job_properties: () -> Types::EntitiesDetectionJobProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#describe_entities_detection_job-instance_method
+      def describe_entities_detection_job: (
+                                             job_id: ::String
+                                           ) -> _DescribeEntitiesDetectionJobResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEntitiesDetectionJobResponseSuccess
+
+      interface _DescribeEntityRecognizerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEntityRecognizerResponse]
+        def entity_recognizer_properties: () -> Types::EntityRecognizerProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#describe_entity_recognizer-instance_method
+      def describe_entity_recognizer: (
+                                        entity_recognizer_arn: ::String
+                                      ) -> _DescribeEntityRecognizerResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEntityRecognizerResponseSuccess
+
+      interface _DescribeEventsDetectionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEventsDetectionJobResponse]
+        def events_detection_job_properties: () -> Types::EventsDetectionJobProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#describe_events_detection_job-instance_method
+      def describe_events_detection_job: (
+                                           job_id: ::String
+                                         ) -> _DescribeEventsDetectionJobResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEventsDetectionJobResponseSuccess
+
+      interface _DescribeFlywheelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFlywheelResponse]
+        def flywheel_properties: () -> Types::FlywheelProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#describe_flywheel-instance_method
+      def describe_flywheel: (
+                               flywheel_arn: ::String
+                             ) -> _DescribeFlywheelResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFlywheelResponseSuccess
+
+      interface _DescribeFlywheelIterationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFlywheelIterationResponse]
+        def flywheel_iteration_properties: () -> Types::FlywheelIterationProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#describe_flywheel_iteration-instance_method
+      def describe_flywheel_iteration: (
+                                         flywheel_arn: ::String,
+                                         flywheel_iteration_id: ::String
+                                       ) -> _DescribeFlywheelIterationResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFlywheelIterationResponseSuccess
+
+      interface _DescribeKeyPhrasesDetectionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeKeyPhrasesDetectionJobResponse]
+        def key_phrases_detection_job_properties: () -> Types::KeyPhrasesDetectionJobProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#describe_key_phrases_detection_job-instance_method
+      def describe_key_phrases_detection_job: (
+                                                job_id: ::String
+                                              ) -> _DescribeKeyPhrasesDetectionJobResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeKeyPhrasesDetectionJobResponseSuccess
+
+      interface _DescribePiiEntitiesDetectionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePiiEntitiesDetectionJobResponse]
+        def pii_entities_detection_job_properties: () -> Types::PiiEntitiesDetectionJobProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#describe_pii_entities_detection_job-instance_method
+      def describe_pii_entities_detection_job: (
+                                                 job_id: ::String
+                                               ) -> _DescribePiiEntitiesDetectionJobResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePiiEntitiesDetectionJobResponseSuccess
+
+      interface _DescribeResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeResourcePolicyResponse]
+        def resource_policy: () -> ::String
+        def creation_time: () -> ::Time
+        def last_modified_time: () -> ::Time
+        def policy_revision_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#describe_resource_policy-instance_method
+      def describe_resource_policy: (
+                                      resource_arn: ::String
+                                    ) -> _DescribeResourcePolicyResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeResourcePolicyResponseSuccess
+
+      interface _DescribeSentimentDetectionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSentimentDetectionJobResponse]
+        def sentiment_detection_job_properties: () -> Types::SentimentDetectionJobProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#describe_sentiment_detection_job-instance_method
+      def describe_sentiment_detection_job: (
+                                              job_id: ::String
+                                            ) -> _DescribeSentimentDetectionJobResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSentimentDetectionJobResponseSuccess
+
+      interface _DescribeTargetedSentimentDetectionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTargetedSentimentDetectionJobResponse]
+        def targeted_sentiment_detection_job_properties: () -> Types::TargetedSentimentDetectionJobProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#describe_targeted_sentiment_detection_job-instance_method
+      def describe_targeted_sentiment_detection_job: (
+                                                       job_id: ::String
+                                                     ) -> _DescribeTargetedSentimentDetectionJobResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTargetedSentimentDetectionJobResponseSuccess
+
+      interface _DescribeTopicsDetectionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTopicsDetectionJobResponse]
+        def topics_detection_job_properties: () -> Types::TopicsDetectionJobProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#describe_topics_detection_job-instance_method
+      def describe_topics_detection_job: (
+                                           job_id: ::String
+                                         ) -> _DescribeTopicsDetectionJobResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTopicsDetectionJobResponseSuccess
+
+      interface _DetectDominantLanguageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetectDominantLanguageResponse]
+        def languages: () -> ::Array[Types::DominantLanguage]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#detect_dominant_language-instance_method
+      def detect_dominant_language: (
+                                      text: ::String
+                                    ) -> _DetectDominantLanguageResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetectDominantLanguageResponseSuccess
+
+      interface _DetectEntitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetectEntitiesResponse]
+        def entities: () -> ::Array[Types::Entity]
+        def document_metadata: () -> Types::DocumentMetadata
+        def document_type: () -> ::Array[Types::DocumentTypeListItem]
+        def blocks: () -> ::Array[Types::Block]
+        def errors: () -> ::Array[Types::ErrorsListItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#detect_entities-instance_method
+      def detect_entities: (
+                             ?text: ::String,
+                             ?language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW"),
+                             ?endpoint_arn: ::String,
+                             ?bytes: ::String,
+                             ?document_reader_config: {
+                               document_read_action: ("TEXTRACT_DETECT_DOCUMENT_TEXT" | "TEXTRACT_ANALYZE_DOCUMENT"),
+                               document_read_mode: ("SERVICE_DEFAULT" | "FORCE_DOCUMENT_READ_ACTION")?,
+                               feature_types: Array[("TABLES" | "FORMS")]?
+                             }
+                           ) -> _DetectEntitiesResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetectEntitiesResponseSuccess
+
+      interface _DetectKeyPhrasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetectKeyPhrasesResponse]
+        def key_phrases: () -> ::Array[Types::KeyPhrase]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#detect_key_phrases-instance_method
+      def detect_key_phrases: (
+                                text: ::String,
+                                language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+                              ) -> _DetectKeyPhrasesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetectKeyPhrasesResponseSuccess
+
+      interface _DetectPiiEntitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetectPiiEntitiesResponse]
+        def entities: () -> ::Array[Types::PiiEntity]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#detect_pii_entities-instance_method
+      def detect_pii_entities: (
+                                 text: ::String,
+                                 language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+                               ) -> _DetectPiiEntitiesResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetectPiiEntitiesResponseSuccess
+
+      interface _DetectSentimentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetectSentimentResponse]
+        def sentiment: () -> ("POSITIVE" | "NEGATIVE" | "NEUTRAL" | "MIXED")
+        def sentiment_score: () -> Types::SentimentScore
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#detect_sentiment-instance_method
+      def detect_sentiment: (
+                              text: ::String,
+                              language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+                            ) -> _DetectSentimentResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetectSentimentResponseSuccess
+
+      interface _DetectSyntaxResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetectSyntaxResponse]
+        def syntax_tokens: () -> ::Array[Types::SyntaxToken]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#detect_syntax-instance_method
+      def detect_syntax: (
+                           text: ::String,
+                           language_code: ("en" | "es" | "fr" | "de" | "it" | "pt")
+                         ) -> _DetectSyntaxResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetectSyntaxResponseSuccess
+
+      interface _DetectTargetedSentimentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetectTargetedSentimentResponse]
+        def entities: () -> ::Array[Types::TargetedSentimentEntity]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#detect_targeted_sentiment-instance_method
+      def detect_targeted_sentiment: (
+                                       text: ::String,
+                                       language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+                                     ) -> _DetectTargetedSentimentResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetectTargetedSentimentResponseSuccess
+
+      interface _DetectToxicContentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetectToxicContentResponse]
+        def result_list: () -> ::Array[Types::ToxicLabels]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#detect_toxic_content-instance_method
+      def detect_toxic_content: (
+                                  text_segments: Array[
+                                    {
+                                      text: ::String
+                                    },
+                                  ],
+                                  language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+                                ) -> _DetectToxicContentResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetectToxicContentResponseSuccess
+
+      interface _ImportModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportModelResponse]
+        def model_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#import_model-instance_method
+      def import_model: (
+                          source_model_arn: ::String,
+                          ?model_name: ::String,
+                          ?version_name: ::String,
+                          ?model_kms_key_id: ::String,
+                          ?data_access_role_arn: ::String,
+                          ?tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String?
+                            },
+                          ]
+                        ) -> _ImportModelResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportModelResponseSuccess
+
+      interface _ListDatasetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasetsResponse]
+        def dataset_properties_list: () -> ::Array[Types::DatasetProperties]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#list_datasets-instance_method
+      def list_datasets: (
+                           ?flywheel_arn: ::String,
+                           ?filter: {
+                             status: ("CREATING" | "COMPLETED" | "FAILED")?,
+                             dataset_type: ("TRAIN" | "TEST")?,
+                             creation_time_after: ::Time?,
+                             creation_time_before: ::Time?
+                           },
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListDatasetsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatasetsResponseSuccess
+
+      interface _ListDocumentClassificationJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDocumentClassificationJobsResponse]
+        def document_classification_job_properties_list: () -> ::Array[Types::DocumentClassificationJobProperties]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#list_document_classification_jobs-instance_method
+      def list_document_classification_jobs: (
+                                               ?filter: {
+                                                 job_name: ::String?,
+                                                 job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")?,
+                                                 submit_time_before: ::Time?,
+                                                 submit_time_after: ::Time?
+                                               },
+                                               ?next_token: ::String,
+                                               ?max_results: ::Integer
+                                             ) -> _ListDocumentClassificationJobsResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDocumentClassificationJobsResponseSuccess
+
+      interface _ListDocumentClassifierSummariesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDocumentClassifierSummariesResponse]
+        def document_classifier_summaries_list: () -> ::Array[Types::DocumentClassifierSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#list_document_classifier_summaries-instance_method
+      def list_document_classifier_summaries: (
+                                                ?next_token: ::String,
+                                                ?max_results: ::Integer
+                                              ) -> _ListDocumentClassifierSummariesResponseSuccess
+                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDocumentClassifierSummariesResponseSuccess
+
+      interface _ListDocumentClassifiersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDocumentClassifiersResponse]
+        def document_classifier_properties_list: () -> ::Array[Types::DocumentClassifierProperties]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#list_document_classifiers-instance_method
+      def list_document_classifiers: (
+                                       ?filter: {
+                                         status: ("SUBMITTED" | "TRAINING" | "DELETING" | "STOP_REQUESTED" | "STOPPED" | "IN_ERROR" | "TRAINED" | "TRAINED_WITH_WARNING")?,
+                                         document_classifier_name: ::String?,
+                                         submit_time_before: ::Time?,
+                                         submit_time_after: ::Time?
+                                       },
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _ListDocumentClassifiersResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDocumentClassifiersResponseSuccess
+
+      interface _ListDominantLanguageDetectionJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDominantLanguageDetectionJobsResponse]
+        def dominant_language_detection_job_properties_list: () -> ::Array[Types::DominantLanguageDetectionJobProperties]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#list_dominant_language_detection_jobs-instance_method
+      def list_dominant_language_detection_jobs: (
+                                                   ?filter: {
+                                                     job_name: ::String?,
+                                                     job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")?,
+                                                     submit_time_before: ::Time?,
+                                                     submit_time_after: ::Time?
+                                                   },
+                                                   ?next_token: ::String,
+                                                   ?max_results: ::Integer
+                                                 ) -> _ListDominantLanguageDetectionJobsResponseSuccess
+                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDominantLanguageDetectionJobsResponseSuccess
+
+      interface _ListEndpointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEndpointsResponse]
+        def endpoint_properties_list: () -> ::Array[Types::EndpointProperties]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#list_endpoints-instance_method
+      def list_endpoints: (
+                            ?filter: {
+                              model_arn: ::String?,
+                              status: ("CREATING" | "DELETING" | "FAILED" | "IN_SERVICE" | "UPDATING")?,
+                              creation_time_before: ::Time?,
+                              creation_time_after: ::Time?
+                            },
+                            ?next_token: ::String,
+                            ?max_results: ::Integer
+                          ) -> _ListEndpointsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEndpointsResponseSuccess
+
+      interface _ListEntitiesDetectionJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEntitiesDetectionJobsResponse]
+        def entities_detection_job_properties_list: () -> ::Array[Types::EntitiesDetectionJobProperties]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#list_entities_detection_jobs-instance_method
+      def list_entities_detection_jobs: (
+                                          ?filter: {
+                                            job_name: ::String?,
+                                            job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")?,
+                                            submit_time_before: ::Time?,
+                                            submit_time_after: ::Time?
+                                          },
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListEntitiesDetectionJobsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEntitiesDetectionJobsResponseSuccess
+
+      interface _ListEntityRecognizerSummariesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEntityRecognizerSummariesResponse]
+        def entity_recognizer_summaries_list: () -> ::Array[Types::EntityRecognizerSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#list_entity_recognizer_summaries-instance_method
+      def list_entity_recognizer_summaries: (
+                                              ?next_token: ::String,
+                                              ?max_results: ::Integer
+                                            ) -> _ListEntityRecognizerSummariesResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEntityRecognizerSummariesResponseSuccess
+
+      interface _ListEntityRecognizersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEntityRecognizersResponse]
+        def entity_recognizer_properties_list: () -> ::Array[Types::EntityRecognizerProperties]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#list_entity_recognizers-instance_method
+      def list_entity_recognizers: (
+                                     ?filter: {
+                                       status: ("SUBMITTED" | "TRAINING" | "DELETING" | "STOP_REQUESTED" | "STOPPED" | "IN_ERROR" | "TRAINED" | "TRAINED_WITH_WARNING")?,
+                                       recognizer_name: ::String?,
+                                       submit_time_before: ::Time?,
+                                       submit_time_after: ::Time?
+                                     },
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _ListEntityRecognizersResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEntityRecognizersResponseSuccess
+
+      interface _ListEventsDetectionJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEventsDetectionJobsResponse]
+        def events_detection_job_properties_list: () -> ::Array[Types::EventsDetectionJobProperties]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#list_events_detection_jobs-instance_method
+      def list_events_detection_jobs: (
+                                        ?filter: {
+                                          job_name: ::String?,
+                                          job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")?,
+                                          submit_time_before: ::Time?,
+                                          submit_time_after: ::Time?
+                                        },
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer
+                                      ) -> _ListEventsDetectionJobsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEventsDetectionJobsResponseSuccess
+
+      interface _ListFlywheelIterationHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFlywheelIterationHistoryResponse]
+        def flywheel_iteration_properties_list: () -> ::Array[Types::FlywheelIterationProperties]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#list_flywheel_iteration_history-instance_method
+      def list_flywheel_iteration_history: (
+                                             flywheel_arn: ::String,
+                                             ?filter: {
+                                               creation_time_after: ::Time?,
+                                               creation_time_before: ::Time?
+                                             },
+                                             ?next_token: ::String,
+                                             ?max_results: ::Integer
+                                           ) -> _ListFlywheelIterationHistoryResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFlywheelIterationHistoryResponseSuccess
+
+      interface _ListFlywheelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFlywheelsResponse]
+        def flywheel_summary_list: () -> ::Array[Types::FlywheelSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#list_flywheels-instance_method
+      def list_flywheels: (
+                            ?filter: {
+                              status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "FAILED")?,
+                              creation_time_after: ::Time?,
+                              creation_time_before: ::Time?
+                            },
+                            ?next_token: ::String,
+                            ?max_results: ::Integer
+                          ) -> _ListFlywheelsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFlywheelsResponseSuccess
+
+      interface _ListKeyPhrasesDetectionJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListKeyPhrasesDetectionJobsResponse]
+        def key_phrases_detection_job_properties_list: () -> ::Array[Types::KeyPhrasesDetectionJobProperties]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#list_key_phrases_detection_jobs-instance_method
+      def list_key_phrases_detection_jobs: (
+                                             ?filter: {
+                                               job_name: ::String?,
+                                               job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")?,
+                                               submit_time_before: ::Time?,
+                                               submit_time_after: ::Time?
+                                             },
+                                             ?next_token: ::String,
+                                             ?max_results: ::Integer
+                                           ) -> _ListKeyPhrasesDetectionJobsResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListKeyPhrasesDetectionJobsResponseSuccess
+
+      interface _ListPiiEntitiesDetectionJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPiiEntitiesDetectionJobsResponse]
+        def pii_entities_detection_job_properties_list: () -> ::Array[Types::PiiEntitiesDetectionJobProperties]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#list_pii_entities_detection_jobs-instance_method
+      def list_pii_entities_detection_jobs: (
+                                              ?filter: {
+                                                job_name: ::String?,
+                                                job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")?,
+                                                submit_time_before: ::Time?,
+                                                submit_time_after: ::Time?
+                                              },
+                                              ?next_token: ::String,
+                                              ?max_results: ::Integer
+                                            ) -> _ListPiiEntitiesDetectionJobsResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPiiEntitiesDetectionJobsResponseSuccess
+
+      interface _ListSentimentDetectionJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSentimentDetectionJobsResponse]
+        def sentiment_detection_job_properties_list: () -> ::Array[Types::SentimentDetectionJobProperties]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#list_sentiment_detection_jobs-instance_method
+      def list_sentiment_detection_jobs: (
+                                           ?filter: {
+                                             job_name: ::String?,
+                                             job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")?,
+                                             submit_time_before: ::Time?,
+                                             submit_time_after: ::Time?
+                                           },
+                                           ?next_token: ::String,
+                                           ?max_results: ::Integer
+                                         ) -> _ListSentimentDetectionJobsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSentimentDetectionJobsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def resource_arn: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTargetedSentimentDetectionJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTargetedSentimentDetectionJobsResponse]
+        def targeted_sentiment_detection_job_properties_list: () -> ::Array[Types::TargetedSentimentDetectionJobProperties]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#list_targeted_sentiment_detection_jobs-instance_method
+      def list_targeted_sentiment_detection_jobs: (
+                                                    ?filter: {
+                                                      job_name: ::String?,
+                                                      job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")?,
+                                                      submit_time_before: ::Time?,
+                                                      submit_time_after: ::Time?
+                                                    },
+                                                    ?next_token: ::String,
+                                                    ?max_results: ::Integer
+                                                  ) -> _ListTargetedSentimentDetectionJobsResponseSuccess
+                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTargetedSentimentDetectionJobsResponseSuccess
+
+      interface _ListTopicsDetectionJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTopicsDetectionJobsResponse]
+        def topics_detection_job_properties_list: () -> ::Array[Types::TopicsDetectionJobProperties]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#list_topics_detection_jobs-instance_method
+      def list_topics_detection_jobs: (
+                                        ?filter: {
+                                          job_name: ::String?,
+                                          job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")?,
+                                          submit_time_before: ::Time?,
+                                          submit_time_after: ::Time?
+                                        },
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer
+                                      ) -> _ListTopicsDetectionJobsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTopicsDetectionJobsResponseSuccess
+
+      interface _PutResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyResponse]
+        def policy_revision_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#put_resource_policy-instance_method
+      def put_resource_policy: (
+                                 resource_arn: ::String,
+                                 resource_policy: ::String,
+                                 ?policy_revision_id: ::String
+                               ) -> _PutResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
+
+      interface _StartDocumentClassificationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDocumentClassificationJobResponse]
+        def job_id: () -> ::String
+        def job_arn: () -> ::String
+        def job_status: () -> ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+        def document_classifier_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#start_document_classification_job-instance_method
+      def start_document_classification_job: (
+                                               ?job_name: ::String,
+                                               ?document_classifier_arn: ::String,
+                                               input_data_config: {
+                                                 s3_uri: ::String,
+                                                 input_format: ("ONE_DOC_PER_FILE" | "ONE_DOC_PER_LINE")?,
+                                                 document_reader_config: {
+                                                   document_read_action: ("TEXTRACT_DETECT_DOCUMENT_TEXT" | "TEXTRACT_ANALYZE_DOCUMENT"),
+                                                   document_read_mode: ("SERVICE_DEFAULT" | "FORCE_DOCUMENT_READ_ACTION")?,
+                                                   feature_types: Array[("TABLES" | "FORMS")]?
+                                                 }?
+                                               },
+                                               output_data_config: {
+                                                 s3_uri: ::String,
+                                                 kms_key_id: ::String?
+                                               },
+                                               data_access_role_arn: ::String,
+                                               ?client_request_token: ::String,
+                                               ?volume_kms_key_id: ::String,
+                                               ?vpc_config: {
+                                                 security_group_ids: Array[::String],
+                                                 subnets: Array[::String]
+                                               },
+                                               ?tags: Array[
+                                                 {
+                                                   key: ::String,
+                                                   value: ::String?
+                                                 },
+                                               ],
+                                               ?flywheel_arn: ::String
+                                             ) -> _StartDocumentClassificationJobResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDocumentClassificationJobResponseSuccess
+
+      interface _StartDominantLanguageDetectionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDominantLanguageDetectionJobResponse]
+        def job_id: () -> ::String
+        def job_arn: () -> ::String
+        def job_status: () -> ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#start_dominant_language_detection_job-instance_method
+      def start_dominant_language_detection_job: (
+                                                   input_data_config: {
+                                                     s3_uri: ::String,
+                                                     input_format: ("ONE_DOC_PER_FILE" | "ONE_DOC_PER_LINE")?,
+                                                     document_reader_config: {
+                                                       document_read_action: ("TEXTRACT_DETECT_DOCUMENT_TEXT" | "TEXTRACT_ANALYZE_DOCUMENT"),
+                                                       document_read_mode: ("SERVICE_DEFAULT" | "FORCE_DOCUMENT_READ_ACTION")?,
+                                                       feature_types: Array[("TABLES" | "FORMS")]?
+                                                     }?
+                                                   },
+                                                   output_data_config: {
+                                                     s3_uri: ::String,
+                                                     kms_key_id: ::String?
+                                                   },
+                                                   data_access_role_arn: ::String,
+                                                   ?job_name: ::String,
+                                                   ?client_request_token: ::String,
+                                                   ?volume_kms_key_id: ::String,
+                                                   ?vpc_config: {
+                                                     security_group_ids: Array[::String],
+                                                     subnets: Array[::String]
+                                                   },
+                                                   ?tags: Array[
+                                                     {
+                                                       key: ::String,
+                                                       value: ::String?
+                                                     },
+                                                   ]
+                                                 ) -> _StartDominantLanguageDetectionJobResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDominantLanguageDetectionJobResponseSuccess
+
+      interface _StartEntitiesDetectionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartEntitiesDetectionJobResponse]
+        def job_id: () -> ::String
+        def job_arn: () -> ::String
+        def job_status: () -> ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+        def entity_recognizer_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#start_entities_detection_job-instance_method
+      def start_entities_detection_job: (
+                                          input_data_config: {
+                                            s3_uri: ::String,
+                                            input_format: ("ONE_DOC_PER_FILE" | "ONE_DOC_PER_LINE")?,
+                                            document_reader_config: {
+                                              document_read_action: ("TEXTRACT_DETECT_DOCUMENT_TEXT" | "TEXTRACT_ANALYZE_DOCUMENT"),
+                                              document_read_mode: ("SERVICE_DEFAULT" | "FORCE_DOCUMENT_READ_ACTION")?,
+                                              feature_types: Array[("TABLES" | "FORMS")]?
+                                            }?
+                                          },
+                                          output_data_config: {
+                                            s3_uri: ::String,
+                                            kms_key_id: ::String?
+                                          },
+                                          data_access_role_arn: ::String,
+                                          ?job_name: ::String,
+                                          ?entity_recognizer_arn: ::String,
+                                          language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW"),
+                                          ?client_request_token: ::String,
+                                          ?volume_kms_key_id: ::String,
+                                          ?vpc_config: {
+                                            security_group_ids: Array[::String],
+                                            subnets: Array[::String]
+                                          },
+                                          ?tags: Array[
+                                            {
+                                              key: ::String,
+                                              value: ::String?
+                                            },
+                                          ],
+                                          ?flywheel_arn: ::String
+                                        ) -> _StartEntitiesDetectionJobResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartEntitiesDetectionJobResponseSuccess
+
+      interface _StartEventsDetectionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartEventsDetectionJobResponse]
+        def job_id: () -> ::String
+        def job_arn: () -> ::String
+        def job_status: () -> ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#start_events_detection_job-instance_method
+      def start_events_detection_job: (
+                                        input_data_config: {
+                                          s3_uri: ::String,
+                                          input_format: ("ONE_DOC_PER_FILE" | "ONE_DOC_PER_LINE")?,
+                                          document_reader_config: {
+                                            document_read_action: ("TEXTRACT_DETECT_DOCUMENT_TEXT" | "TEXTRACT_ANALYZE_DOCUMENT"),
+                                            document_read_mode: ("SERVICE_DEFAULT" | "FORCE_DOCUMENT_READ_ACTION")?,
+                                            feature_types: Array[("TABLES" | "FORMS")]?
+                                          }?
+                                        },
+                                        output_data_config: {
+                                          s3_uri: ::String,
+                                          kms_key_id: ::String?
+                                        },
+                                        data_access_role_arn: ::String,
+                                        ?job_name: ::String,
+                                        language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW"),
+                                        ?client_request_token: ::String,
+                                        target_event_types: Array[::String],
+                                        ?tags: Array[
+                                          {
+                                            key: ::String,
+                                            value: ::String?
+                                          },
+                                        ]
+                                      ) -> _StartEventsDetectionJobResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartEventsDetectionJobResponseSuccess
+
+      interface _StartFlywheelIterationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartFlywheelIterationResponse]
+        def flywheel_arn: () -> ::String
+        def flywheel_iteration_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#start_flywheel_iteration-instance_method
+      def start_flywheel_iteration: (
+                                      flywheel_arn: ::String,
+                                      ?client_request_token: ::String
+                                    ) -> _StartFlywheelIterationResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartFlywheelIterationResponseSuccess
+
+      interface _StartKeyPhrasesDetectionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartKeyPhrasesDetectionJobResponse]
+        def job_id: () -> ::String
+        def job_arn: () -> ::String
+        def job_status: () -> ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#start_key_phrases_detection_job-instance_method
+      def start_key_phrases_detection_job: (
+                                             input_data_config: {
+                                               s3_uri: ::String,
+                                               input_format: ("ONE_DOC_PER_FILE" | "ONE_DOC_PER_LINE")?,
+                                               document_reader_config: {
+                                                 document_read_action: ("TEXTRACT_DETECT_DOCUMENT_TEXT" | "TEXTRACT_ANALYZE_DOCUMENT"),
+                                                 document_read_mode: ("SERVICE_DEFAULT" | "FORCE_DOCUMENT_READ_ACTION")?,
+                                                 feature_types: Array[("TABLES" | "FORMS")]?
+                                               }?
+                                             },
+                                             output_data_config: {
+                                               s3_uri: ::String,
+                                               kms_key_id: ::String?
+                                             },
+                                             data_access_role_arn: ::String,
+                                             ?job_name: ::String,
+                                             language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW"),
+                                             ?client_request_token: ::String,
+                                             ?volume_kms_key_id: ::String,
+                                             ?vpc_config: {
+                                               security_group_ids: Array[::String],
+                                               subnets: Array[::String]
+                                             },
+                                             ?tags: Array[
+                                               {
+                                                 key: ::String,
+                                                 value: ::String?
+                                               },
+                                             ]
+                                           ) -> _StartKeyPhrasesDetectionJobResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartKeyPhrasesDetectionJobResponseSuccess
+
+      interface _StartPiiEntitiesDetectionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartPiiEntitiesDetectionJobResponse]
+        def job_id: () -> ::String
+        def job_arn: () -> ::String
+        def job_status: () -> ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#start_pii_entities_detection_job-instance_method
+      def start_pii_entities_detection_job: (
+                                              input_data_config: {
+                                                s3_uri: ::String,
+                                                input_format: ("ONE_DOC_PER_FILE" | "ONE_DOC_PER_LINE")?,
+                                                document_reader_config: {
+                                                  document_read_action: ("TEXTRACT_DETECT_DOCUMENT_TEXT" | "TEXTRACT_ANALYZE_DOCUMENT"),
+                                                  document_read_mode: ("SERVICE_DEFAULT" | "FORCE_DOCUMENT_READ_ACTION")?,
+                                                  feature_types: Array[("TABLES" | "FORMS")]?
+                                                }?
+                                              },
+                                              output_data_config: {
+                                                s3_uri: ::String,
+                                                kms_key_id: ::String?
+                                              },
+                                              mode: ("ONLY_REDACTION" | "ONLY_OFFSETS"),
+                                              ?redaction_config: {
+                                                pii_entity_types: Array[("BANK_ACCOUNT_NUMBER" | "BANK_ROUTING" | "CREDIT_DEBIT_NUMBER" | "CREDIT_DEBIT_CVV" | "CREDIT_DEBIT_EXPIRY" | "PIN" | "EMAIL" | "ADDRESS" | "NAME" | "PHONE" | "SSN" | "DATE_TIME" | "PASSPORT_NUMBER" | "DRIVER_ID" | "URL" | "AGE" | "USERNAME" | "PASSWORD" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "IP_ADDRESS" | "MAC_ADDRESS" | "ALL" | "LICENSE_PLATE" | "VEHICLE_IDENTIFICATION_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER" | "IN_PERMANENT_ACCOUNT_NUMBER" | "IN_NREGA" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "SWIFT_CODE" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "CA_HEALTH_NUMBER" | "IN_AADHAAR" | "IN_VOTER_NUMBER")]?,
+                                                mask_mode: ("MASK" | "REPLACE_WITH_PII_ENTITY_TYPE")?,
+                                                mask_character: ::String?
+                                              },
+                                              data_access_role_arn: ::String,
+                                              ?job_name: ::String,
+                                              language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW"),
+                                              ?client_request_token: ::String,
+                                              ?tags: Array[
+                                                {
+                                                  key: ::String,
+                                                  value: ::String?
+                                                },
+                                              ]
+                                            ) -> _StartPiiEntitiesDetectionJobResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartPiiEntitiesDetectionJobResponseSuccess
+
+      interface _StartSentimentDetectionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartSentimentDetectionJobResponse]
+        def job_id: () -> ::String
+        def job_arn: () -> ::String
+        def job_status: () -> ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#start_sentiment_detection_job-instance_method
+      def start_sentiment_detection_job: (
+                                           input_data_config: {
+                                             s3_uri: ::String,
+                                             input_format: ("ONE_DOC_PER_FILE" | "ONE_DOC_PER_LINE")?,
+                                             document_reader_config: {
+                                               document_read_action: ("TEXTRACT_DETECT_DOCUMENT_TEXT" | "TEXTRACT_ANALYZE_DOCUMENT"),
+                                               document_read_mode: ("SERVICE_DEFAULT" | "FORCE_DOCUMENT_READ_ACTION")?,
+                                               feature_types: Array[("TABLES" | "FORMS")]?
+                                             }?
+                                           },
+                                           output_data_config: {
+                                             s3_uri: ::String,
+                                             kms_key_id: ::String?
+                                           },
+                                           data_access_role_arn: ::String,
+                                           ?job_name: ::String,
+                                           language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW"),
+                                           ?client_request_token: ::String,
+                                           ?volume_kms_key_id: ::String,
+                                           ?vpc_config: {
+                                             security_group_ids: Array[::String],
+                                             subnets: Array[::String]
+                                           },
+                                           ?tags: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String?
+                                             },
+                                           ]
+                                         ) -> _StartSentimentDetectionJobResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartSentimentDetectionJobResponseSuccess
+
+      interface _StartTargetedSentimentDetectionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartTargetedSentimentDetectionJobResponse]
+        def job_id: () -> ::String
+        def job_arn: () -> ::String
+        def job_status: () -> ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#start_targeted_sentiment_detection_job-instance_method
+      def start_targeted_sentiment_detection_job: (
+                                                    input_data_config: {
+                                                      s3_uri: ::String,
+                                                      input_format: ("ONE_DOC_PER_FILE" | "ONE_DOC_PER_LINE")?,
+                                                      document_reader_config: {
+                                                        document_read_action: ("TEXTRACT_DETECT_DOCUMENT_TEXT" | "TEXTRACT_ANALYZE_DOCUMENT"),
+                                                        document_read_mode: ("SERVICE_DEFAULT" | "FORCE_DOCUMENT_READ_ACTION")?,
+                                                        feature_types: Array[("TABLES" | "FORMS")]?
+                                                      }?
+                                                    },
+                                                    output_data_config: {
+                                                      s3_uri: ::String,
+                                                      kms_key_id: ::String?
+                                                    },
+                                                    data_access_role_arn: ::String,
+                                                    ?job_name: ::String,
+                                                    language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW"),
+                                                    ?client_request_token: ::String,
+                                                    ?volume_kms_key_id: ::String,
+                                                    ?vpc_config: {
+                                                      security_group_ids: Array[::String],
+                                                      subnets: Array[::String]
+                                                    },
+                                                    ?tags: Array[
+                                                      {
+                                                        key: ::String,
+                                                        value: ::String?
+                                                      },
+                                                    ]
+                                                  ) -> _StartTargetedSentimentDetectionJobResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTargetedSentimentDetectionJobResponseSuccess
+
+      interface _StartTopicsDetectionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartTopicsDetectionJobResponse]
+        def job_id: () -> ::String
+        def job_arn: () -> ::String
+        def job_status: () -> ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#start_topics_detection_job-instance_method
+      def start_topics_detection_job: (
+                                        input_data_config: {
+                                          s3_uri: ::String,
+                                          input_format: ("ONE_DOC_PER_FILE" | "ONE_DOC_PER_LINE")?,
+                                          document_reader_config: {
+                                            document_read_action: ("TEXTRACT_DETECT_DOCUMENT_TEXT" | "TEXTRACT_ANALYZE_DOCUMENT"),
+                                            document_read_mode: ("SERVICE_DEFAULT" | "FORCE_DOCUMENT_READ_ACTION")?,
+                                            feature_types: Array[("TABLES" | "FORMS")]?
+                                          }?
+                                        },
+                                        output_data_config: {
+                                          s3_uri: ::String,
+                                          kms_key_id: ::String?
+                                        },
+                                        data_access_role_arn: ::String,
+                                        ?job_name: ::String,
+                                        ?number_of_topics: ::Integer,
+                                        ?client_request_token: ::String,
+                                        ?volume_kms_key_id: ::String,
+                                        ?vpc_config: {
+                                          security_group_ids: Array[::String],
+                                          subnets: Array[::String]
+                                        },
+                                        ?tags: Array[
+                                          {
+                                            key: ::String,
+                                            value: ::String?
+                                          },
+                                        ]
+                                      ) -> _StartTopicsDetectionJobResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTopicsDetectionJobResponseSuccess
+
+      interface _StopDominantLanguageDetectionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopDominantLanguageDetectionJobResponse]
+        def job_id: () -> ::String
+        def job_status: () -> ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#stop_dominant_language_detection_job-instance_method
+      def stop_dominant_language_detection_job: (
+                                                  job_id: ::String
+                                                ) -> _StopDominantLanguageDetectionJobResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopDominantLanguageDetectionJobResponseSuccess
+
+      interface _StopEntitiesDetectionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopEntitiesDetectionJobResponse]
+        def job_id: () -> ::String
+        def job_status: () -> ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#stop_entities_detection_job-instance_method
+      def stop_entities_detection_job: (
+                                         job_id: ::String
+                                       ) -> _StopEntitiesDetectionJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopEntitiesDetectionJobResponseSuccess
+
+      interface _StopEventsDetectionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopEventsDetectionJobResponse]
+        def job_id: () -> ::String
+        def job_status: () -> ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#stop_events_detection_job-instance_method
+      def stop_events_detection_job: (
+                                       job_id: ::String
+                                     ) -> _StopEventsDetectionJobResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopEventsDetectionJobResponseSuccess
+
+      interface _StopKeyPhrasesDetectionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopKeyPhrasesDetectionJobResponse]
+        def job_id: () -> ::String
+        def job_status: () -> ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#stop_key_phrases_detection_job-instance_method
+      def stop_key_phrases_detection_job: (
+                                            job_id: ::String
+                                          ) -> _StopKeyPhrasesDetectionJobResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopKeyPhrasesDetectionJobResponseSuccess
+
+      interface _StopPiiEntitiesDetectionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopPiiEntitiesDetectionJobResponse]
+        def job_id: () -> ::String
+        def job_status: () -> ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#stop_pii_entities_detection_job-instance_method
+      def stop_pii_entities_detection_job: (
+                                             job_id: ::String
+                                           ) -> _StopPiiEntitiesDetectionJobResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopPiiEntitiesDetectionJobResponseSuccess
+
+      interface _StopSentimentDetectionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopSentimentDetectionJobResponse]
+        def job_id: () -> ::String
+        def job_status: () -> ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#stop_sentiment_detection_job-instance_method
+      def stop_sentiment_detection_job: (
+                                          job_id: ::String
+                                        ) -> _StopSentimentDetectionJobResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopSentimentDetectionJobResponseSuccess
+
+      interface _StopTargetedSentimentDetectionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopTargetedSentimentDetectionJobResponse]
+        def job_id: () -> ::String
+        def job_status: () -> ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#stop_targeted_sentiment_detection_job-instance_method
+      def stop_targeted_sentiment_detection_job: (
+                                                   job_id: ::String
+                                                 ) -> _StopTargetedSentimentDetectionJobResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopTargetedSentimentDetectionJobResponseSuccess
+
+      interface _StopTrainingDocumentClassifierResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopTrainingDocumentClassifierResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#stop_training_document_classifier-instance_method
+      def stop_training_document_classifier: (
+                                               document_classifier_arn: ::String
+                                             ) -> _StopTrainingDocumentClassifierResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopTrainingDocumentClassifierResponseSuccess
+
+      interface _StopTrainingEntityRecognizerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopTrainingEntityRecognizerResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#stop_training_entity_recognizer-instance_method
+      def stop_training_entity_recognizer: (
+                                             entity_recognizer_arn: ::String
+                                           ) -> _StopTrainingEntityRecognizerResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopTrainingEntityRecognizerResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String?
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEndpointResponse]
+        def desired_model_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#update_endpoint-instance_method
+      def update_endpoint: (
+                             endpoint_arn: ::String,
+                             ?desired_model_arn: ::String,
+                             ?desired_inference_units: ::Integer,
+                             ?desired_data_access_role_arn: ::String,
+                             ?flywheel_arn: ::String
+                           ) -> _UpdateEndpointResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEndpointResponseSuccess
+
+      interface _UpdateFlywheelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFlywheelResponse]
+        def flywheel_properties: () -> Types::FlywheelProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Comprehend/Client.html#update_flywheel-instance_method
+      def update_flywheel: (
+                             flywheel_arn: ::String,
+                             ?active_model_arn: ::String,
+                             ?data_access_role_arn: ::String,
+                             ?data_security_config: {
+                               model_kms_key_id: ::String?,
+                               volume_kms_key_id: ::String?,
+                               vpc_config: {
+                                 security_group_ids: Array[::String],
+                                 subnets: Array[::String]
+                               }?
+                             }
+                           ) -> _UpdateFlywheelResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFlywheelResponseSuccess
+    end
+  end
+end
+

@@ -1,0 +1,4980 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::IoT
+  module Types
+
+    class AbortConfig
+      attr_accessor criteria_list: ::Array[Types::AbortCriteria]
+      SENSITIVE: []
+    end
+
+    class AbortCriteria
+      attr_accessor failure_type: ("FAILED" | "REJECTED" | "TIMED_OUT" | "ALL")
+      attr_accessor action: ("CANCEL")
+      attr_accessor threshold_percentage: ::Float
+      attr_accessor min_number_of_executed_things: ::Integer
+      SENSITIVE: []
+    end
+
+    class AcceptCertificateTransferRequest
+      attr_accessor certificate_id: ::String
+      attr_accessor set_as_active: bool
+      SENSITIVE: []
+    end
+
+    class Action
+      attr_accessor dynamo_db: Types::DynamoDBAction
+      attr_accessor dynamo_d_bv_2: Types::DynamoDBv2Action
+      attr_accessor lambda: Types::LambdaAction
+      attr_accessor sns: Types::SnsAction
+      attr_accessor sqs: Types::SqsAction
+      attr_accessor kinesis: Types::KinesisAction
+      attr_accessor republish: Types::RepublishAction
+      attr_accessor s3: Types::S3Action
+      attr_accessor firehose: Types::FirehoseAction
+      attr_accessor cloudwatch_metric: Types::CloudwatchMetricAction
+      attr_accessor cloudwatch_alarm: Types::CloudwatchAlarmAction
+      attr_accessor cloudwatch_logs: Types::CloudwatchLogsAction
+      attr_accessor elasticsearch: Types::ElasticsearchAction
+      attr_accessor salesforce: Types::SalesforceAction
+      attr_accessor iot_analytics: Types::IotAnalyticsAction
+      attr_accessor iot_events: Types::IotEventsAction
+      attr_accessor iot_site_wise: Types::IotSiteWiseAction
+      attr_accessor step_functions: Types::StepFunctionsAction
+      attr_accessor timestream: Types::TimestreamAction
+      attr_accessor http: Types::HttpAction
+      attr_accessor kafka: Types::KafkaAction
+      attr_accessor open_search: Types::OpenSearchAction
+      attr_accessor location: Types::LocationAction
+      SENSITIVE: []
+    end
+
+    class ActiveViolation
+      attr_accessor violation_id: ::String
+      attr_accessor thing_name: ::String
+      attr_accessor security_profile_name: ::String
+      attr_accessor behavior: Types::Behavior
+      attr_accessor last_violation_value: Types::MetricValue
+      attr_accessor violation_event_additional_info: Types::ViolationEventAdditionalInfo
+      attr_accessor verification_state: ("FALSE_POSITIVE" | "BENIGN_POSITIVE" | "TRUE_POSITIVE" | "UNKNOWN")
+      attr_accessor verification_state_description: ::String
+      attr_accessor last_violation_time: ::Time
+      attr_accessor violation_start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class AddThingToBillingGroupRequest
+      attr_accessor billing_group_name: ::String
+      attr_accessor billing_group_arn: ::String
+      attr_accessor thing_name: ::String
+      attr_accessor thing_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AddThingToBillingGroupResponse < Aws::EmptyStructure
+    end
+
+    class AddThingToThingGroupRequest
+      attr_accessor thing_group_name: ::String
+      attr_accessor thing_group_arn: ::String
+      attr_accessor thing_name: ::String
+      attr_accessor thing_arn: ::String
+      attr_accessor override_dynamic_groups: bool
+      SENSITIVE: []
+    end
+
+    class AddThingToThingGroupResponse < Aws::EmptyStructure
+    end
+
+    class AddThingsToThingGroupParams
+      attr_accessor thing_group_names: ::Array[::String]
+      attr_accessor override_dynamic_groups: bool
+      SENSITIVE: []
+    end
+
+    class AggregationType
+      attr_accessor name: ("Statistics" | "Percentiles" | "Cardinality")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AlertTarget
+      attr_accessor alert_target_arn: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Allowed
+      attr_accessor policies: ::Array[Types::Policy]
+      SENSITIVE: []
+    end
+
+    class AssetPropertyTimestamp
+      attr_accessor time_in_seconds: ::String
+      attr_accessor offset_in_nanos: ::String
+      SENSITIVE: []
+    end
+
+    class AssetPropertyValue
+      attr_accessor value: Types::AssetPropertyVariant
+      attr_accessor timestamp: Types::AssetPropertyTimestamp
+      attr_accessor quality: ::String
+      SENSITIVE: []
+    end
+
+    class AssetPropertyVariant
+      attr_accessor string_value: ::String
+      attr_accessor integer_value: ::String
+      attr_accessor double_value: ::String
+      attr_accessor boolean_value: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateTargetsWithJobRequest
+      attr_accessor targets: ::Array[::String]
+      attr_accessor job_id: ::String
+      attr_accessor comment: ::String
+      attr_accessor namespace_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateTargetsWithJobResponse
+      attr_accessor job_arn: ::String
+      attr_accessor job_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class AttachPolicyRequest
+      attr_accessor policy_name: ::String
+      attr_accessor target: ::String
+      SENSITIVE: []
+    end
+
+    class AttachPrincipalPolicyRequest
+      attr_accessor policy_name: ::String
+      attr_accessor principal: ::String
+      SENSITIVE: []
+    end
+
+    class AttachSecurityProfileRequest
+      attr_accessor security_profile_name: ::String
+      attr_accessor security_profile_target_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AttachSecurityProfileResponse < Aws::EmptyStructure
+    end
+
+    class AttachThingPrincipalRequest
+      attr_accessor thing_name: ::String
+      attr_accessor principal: ::String
+      SENSITIVE: []
+    end
+
+    class AttachThingPrincipalResponse < Aws::EmptyStructure
+    end
+
+    class AttributePayload
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor merge: bool
+      SENSITIVE: []
+    end
+
+    class AuditCheckConfiguration
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class AuditCheckDetails
+      attr_accessor check_run_status: ("IN_PROGRESS" | "WAITING_FOR_DATA_COLLECTION" | "CANCELED" | "COMPLETED_COMPLIANT" | "COMPLETED_NON_COMPLIANT" | "FAILED")
+      attr_accessor check_compliant: bool
+      attr_accessor total_resources_count: ::Integer
+      attr_accessor non_compliant_resources_count: ::Integer
+      attr_accessor suppressed_non_compliant_resources_count: ::Integer
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AuditFinding
+      attr_accessor finding_id: ::String
+      attr_accessor task_id: ::String
+      attr_accessor check_name: ::String
+      attr_accessor task_start_time: ::Time
+      attr_accessor finding_time: ::Time
+      attr_accessor severity: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW")
+      attr_accessor non_compliant_resource: Types::NonCompliantResource
+      attr_accessor related_resources: ::Array[Types::RelatedResource]
+      attr_accessor reason_for_non_compliance: ::String
+      attr_accessor reason_for_non_compliance_code: ::String
+      attr_accessor is_suppressed: bool
+      SENSITIVE: []
+    end
+
+    class AuditMitigationActionExecutionMetadata
+      attr_accessor task_id: ::String
+      attr_accessor finding_id: ::String
+      attr_accessor action_name: ::String
+      attr_accessor action_id: ::String
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETED" | "FAILED" | "CANCELED" | "SKIPPED" | "PENDING")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AuditMitigationActionsTaskMetadata
+      attr_accessor task_id: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor task_status: ("IN_PROGRESS" | "COMPLETED" | "FAILED" | "CANCELED")
+      SENSITIVE: []
+    end
+
+    class AuditMitigationActionsTaskTarget
+      attr_accessor audit_task_id: ::String
+      attr_accessor finding_ids: ::Array[::String]
+      attr_accessor audit_check_to_reason_code_filter: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class AuditNotificationTarget
+      attr_accessor target_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class AuditSuppression
+      attr_accessor check_name: ::String
+      attr_accessor resource_identifier: Types::ResourceIdentifier
+      attr_accessor expiration_date: ::Time
+      attr_accessor suppress_indefinitely: bool
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class AuditTaskMetadata
+      attr_accessor task_id: ::String
+      attr_accessor task_status: ("IN_PROGRESS" | "COMPLETED" | "FAILED" | "CANCELED")
+      attr_accessor task_type: ("ON_DEMAND_AUDIT_TASK" | "SCHEDULED_AUDIT_TASK")
+      SENSITIVE: []
+    end
+
+    class AuthInfo
+      attr_accessor action_type: ("PUBLISH" | "SUBSCRIBE" | "RECEIVE" | "CONNECT")
+      attr_accessor resources: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AuthResult
+      attr_accessor auth_info: Types::AuthInfo
+      attr_accessor allowed: Types::Allowed
+      attr_accessor denied: Types::Denied
+      attr_accessor auth_decision: ("ALLOWED" | "EXPLICIT_DENY" | "IMPLICIT_DENY")
+      attr_accessor missing_context_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AuthorizerConfig
+      attr_accessor default_authorizer_name: ::String
+      attr_accessor allow_authorizer_override: bool
+      SENSITIVE: []
+    end
+
+    class AuthorizerDescription
+      attr_accessor authorizer_name: ::String
+      attr_accessor authorizer_arn: ::String
+      attr_accessor authorizer_function_arn: ::String
+      attr_accessor token_key_name: ::String
+      attr_accessor token_signing_public_keys: ::Hash[::String, ::String]
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      attr_accessor signing_disabled: bool
+      attr_accessor enable_caching_for_http: bool
+      SENSITIVE: []
+    end
+
+    class AuthorizerSummary
+      attr_accessor authorizer_name: ::String
+      attr_accessor authorizer_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AwsJobAbortConfig
+      attr_accessor abort_criteria_list: ::Array[Types::AwsJobAbortCriteria]
+      SENSITIVE: []
+    end
+
+    class AwsJobAbortCriteria
+      attr_accessor failure_type: ("FAILED" | "REJECTED" | "TIMED_OUT" | "ALL")
+      attr_accessor action: ("CANCEL")
+      attr_accessor threshold_percentage: ::Float
+      attr_accessor min_number_of_executed_things: ::Integer
+      SENSITIVE: []
+    end
+
+    class AwsJobExecutionsRolloutConfig
+      attr_accessor maximum_per_minute: ::Integer
+      attr_accessor exponential_rate: Types::AwsJobExponentialRolloutRate
+      SENSITIVE: []
+    end
+
+    class AwsJobExponentialRolloutRate
+      attr_accessor base_rate_per_minute: ::Integer
+      attr_accessor increment_factor: ::Float
+      attr_accessor rate_increase_criteria: Types::AwsJobRateIncreaseCriteria
+      SENSITIVE: []
+    end
+
+    class AwsJobPresignedUrlConfig
+      attr_accessor expires_in_sec: ::Integer
+      SENSITIVE: []
+    end
+
+    class AwsJobRateIncreaseCriteria
+      attr_accessor number_of_notified_things: ::Integer
+      attr_accessor number_of_succeeded_things: ::Integer
+      SENSITIVE: []
+    end
+
+    class AwsJobTimeoutConfig
+      attr_accessor in_progress_timeout_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class Behavior
+      attr_accessor name: ::String
+      attr_accessor metric: ::String
+      attr_accessor metric_dimension: Types::MetricDimension
+      attr_accessor criteria: Types::BehaviorCriteria
+      attr_accessor suppress_alerts: bool
+      attr_accessor export_metric: bool
+      SENSITIVE: []
+    end
+
+    class BehaviorCriteria
+      attr_accessor comparison_operator: ("less-than" | "less-than-equals" | "greater-than" | "greater-than-equals" | "in-cidr-set" | "not-in-cidr-set" | "in-port-set" | "not-in-port-set" | "in-set" | "not-in-set")
+      attr_accessor value: Types::MetricValue
+      attr_accessor duration_seconds: ::Integer
+      attr_accessor consecutive_datapoints_to_alarm: ::Integer
+      attr_accessor consecutive_datapoints_to_clear: ::Integer
+      attr_accessor statistical_threshold: Types::StatisticalThreshold
+      attr_accessor ml_detection_config: Types::MachineLearningDetectionConfig
+      SENSITIVE: []
+    end
+
+    class BehaviorModelTrainingSummary
+      attr_accessor security_profile_name: ::String
+      attr_accessor behavior_name: ::String
+      attr_accessor training_data_collection_start_date: ::Time
+      attr_accessor model_status: ("PENDING_BUILD" | "ACTIVE" | "EXPIRED")
+      attr_accessor datapoints_collection_percentage: ::Float
+      attr_accessor last_model_refresh_date: ::Time
+      SENSITIVE: []
+    end
+
+    class BillingGroupMetadata
+      attr_accessor creation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class BillingGroupProperties
+      attr_accessor billing_group_description: ::String
+      SENSITIVE: []
+    end
+
+    class Bucket
+      attr_accessor key_value: ::String
+      attr_accessor count: ::Integer
+      SENSITIVE: []
+    end
+
+    class BucketsAggregationType
+      attr_accessor terms_aggregation: Types::TermsAggregation
+      SENSITIVE: []
+    end
+
+    class CACertificate
+      attr_accessor certificate_arn: ::String
+      attr_accessor certificate_id: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor creation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class CACertificateDescription
+      attr_accessor certificate_arn: ::String
+      attr_accessor certificate_id: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor certificate_pem: ::String
+      attr_accessor owned_by: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor auto_registration_status: ("ENABLE" | "DISABLE")
+      attr_accessor last_modified_date: ::Time
+      attr_accessor customer_version: ::Integer
+      attr_accessor generation_id: ::String
+      attr_accessor validity: Types::CertificateValidity
+      attr_accessor certificate_mode: ("DEFAULT" | "SNI_ONLY")
+      SENSITIVE: []
+    end
+
+    class CancelAuditMitigationActionsTaskRequest
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelAuditMitigationActionsTaskResponse < Aws::EmptyStructure
+    end
+
+    class CancelAuditTaskRequest
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelAuditTaskResponse < Aws::EmptyStructure
+    end
+
+    class CancelCertificateTransferRequest
+      attr_accessor certificate_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelDetectMitigationActionsTaskRequest
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelDetectMitigationActionsTaskResponse < Aws::EmptyStructure
+    end
+
+    class CancelJobExecutionRequest
+      attr_accessor job_id: ::String
+      attr_accessor thing_name: ::String
+      attr_accessor force: bool
+      attr_accessor expected_version: ::Integer
+      attr_accessor status_details: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CancelJobRequest
+      attr_accessor job_id: ::String
+      attr_accessor reason_code: ::String
+      attr_accessor comment: ::String
+      attr_accessor force: bool
+      SENSITIVE: []
+    end
+
+    class CancelJobResponse
+      attr_accessor job_arn: ::String
+      attr_accessor job_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class Certificate
+      attr_accessor certificate_arn: ::String
+      attr_accessor certificate_id: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "REVOKED" | "PENDING_TRANSFER" | "REGISTER_INACTIVE" | "PENDING_ACTIVATION")
+      attr_accessor certificate_mode: ("DEFAULT" | "SNI_ONLY")
+      attr_accessor creation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class CertificateConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CertificateDescription
+      attr_accessor certificate_arn: ::String
+      attr_accessor certificate_id: ::String
+      attr_accessor ca_certificate_id: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "REVOKED" | "PENDING_TRANSFER" | "REGISTER_INACTIVE" | "PENDING_ACTIVATION")
+      attr_accessor certificate_pem: ::String
+      attr_accessor owned_by: ::String
+      attr_accessor previous_owned_by: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      attr_accessor customer_version: ::Integer
+      attr_accessor transfer_data: Types::TransferData
+      attr_accessor generation_id: ::String
+      attr_accessor validity: Types::CertificateValidity
+      attr_accessor certificate_mode: ("DEFAULT" | "SNI_ONLY")
+      SENSITIVE: []
+    end
+
+    class CertificateProviderSummary
+      attr_accessor certificate_provider_name: ::String
+      attr_accessor certificate_provider_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CertificateStateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CertificateValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CertificateValidity
+      attr_accessor not_before: ::Time
+      attr_accessor not_after: ::Time
+      SENSITIVE: []
+    end
+
+    class ClearDefaultAuthorizerRequest < Aws::EmptyStructure
+    end
+
+    class ClearDefaultAuthorizerResponse < Aws::EmptyStructure
+    end
+
+    class CloudwatchAlarmAction
+      attr_accessor role_arn: ::String
+      attr_accessor alarm_name: ::String
+      attr_accessor state_reason: ::String
+      attr_accessor state_value: ::String
+      SENSITIVE: []
+    end
+
+    class CloudwatchLogsAction
+      attr_accessor role_arn: ::String
+      attr_accessor log_group_name: ::String
+      attr_accessor batch_mode: bool
+      SENSITIVE: []
+    end
+
+    class CloudwatchMetricAction
+      attr_accessor role_arn: ::String
+      attr_accessor metric_namespace: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor metric_value: ::String
+      attr_accessor metric_unit: ::String
+      attr_accessor metric_timestamp: ::String
+      SENSITIVE: []
+    end
+
+    class CodeSigning
+      attr_accessor aws_signer_job_id: ::String
+      attr_accessor start_signing_job_parameter: Types::StartSigningJobParameter
+      attr_accessor custom_code_signing: Types::CustomCodeSigning
+      SENSITIVE: []
+    end
+
+    class CodeSigningCertificateChain
+      attr_accessor certificate_name: ::String
+      attr_accessor inline_document: ::String
+      SENSITIVE: []
+    end
+
+    class CodeSigningSignature
+      attr_accessor inline_document: ::String
+      SENSITIVE: []
+    end
+
+    class Configuration
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class ConfirmTopicRuleDestinationRequest
+      attr_accessor confirmation_token: ::String
+      SENSITIVE: []
+    end
+
+    class ConfirmTopicRuleDestinationResponse < Aws::EmptyStructure
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictingResourceUpdateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAuditSuppressionRequest
+      attr_accessor check_name: ::String
+      attr_accessor resource_identifier: Types::ResourceIdentifier
+      attr_accessor expiration_date: ::Time
+      attr_accessor suppress_indefinitely: bool
+      attr_accessor description: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAuditSuppressionResponse < Aws::EmptyStructure
+    end
+
+    class CreateAuthorizerRequest
+      attr_accessor authorizer_name: ::String
+      attr_accessor authorizer_function_arn: ::String
+      attr_accessor token_key_name: ::String
+      attr_accessor token_signing_public_keys: ::Hash[::String, ::String]
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor signing_disabled: bool
+      attr_accessor enable_caching_for_http: bool
+      SENSITIVE: []
+    end
+
+    class CreateAuthorizerResponse
+      attr_accessor authorizer_name: ::String
+      attr_accessor authorizer_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBillingGroupRequest
+      attr_accessor billing_group_name: ::String
+      attr_accessor billing_group_properties: Types::BillingGroupProperties
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateBillingGroupResponse
+      attr_accessor billing_group_name: ::String
+      attr_accessor billing_group_arn: ::String
+      attr_accessor billing_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCertificateFromCsrRequest
+      attr_accessor certificate_signing_request: ::String
+      attr_accessor set_as_active: bool
+      SENSITIVE: []
+    end
+
+    class CreateCertificateFromCsrResponse
+      attr_accessor certificate_arn: ::String
+      attr_accessor certificate_id: ::String
+      attr_accessor certificate_pem: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCertificateProviderRequest
+      attr_accessor certificate_provider_name: ::String
+      attr_accessor lambda_function_arn: ::String
+      attr_accessor account_default_for_operations: ::Array[("CreateCertificateFromCsr")]
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateCertificateProviderResponse
+      attr_accessor certificate_provider_name: ::String
+      attr_accessor certificate_provider_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCustomMetricRequest
+      attr_accessor metric_name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor metric_type: ("string-list" | "ip-address-list" | "number-list" | "number")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCustomMetricResponse
+      attr_accessor metric_name: ::String
+      attr_accessor metric_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDimensionRequest
+      attr_accessor name: ::String
+      attr_accessor type: ("TOPIC_FILTER")
+      attr_accessor string_values: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDimensionResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDomainConfigurationRequest
+      attr_accessor domain_configuration_name: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor server_certificate_arns: ::Array[::String]
+      attr_accessor validation_certificate_arn: ::String
+      attr_accessor authorizer_config: Types::AuthorizerConfig
+      attr_accessor service_type: ("DATA" | "CREDENTIAL_PROVIDER" | "JOBS")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor tls_config: Types::TlsConfig
+      SENSITIVE: []
+    end
+
+    class CreateDomainConfigurationResponse
+      attr_accessor domain_configuration_name: ::String
+      attr_accessor domain_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDynamicThingGroupRequest
+      attr_accessor thing_group_name: ::String
+      attr_accessor thing_group_properties: Types::ThingGroupProperties
+      attr_accessor index_name: ::String
+      attr_accessor query_string: ::String
+      attr_accessor query_version: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateDynamicThingGroupResponse
+      attr_accessor thing_group_name: ::String
+      attr_accessor thing_group_arn: ::String
+      attr_accessor thing_group_id: ::String
+      attr_accessor index_name: ::String
+      attr_accessor query_string: ::String
+      attr_accessor query_version: ::String
+      SENSITIVE: []
+    end
+
+    class CreateFleetMetricRequest
+      attr_accessor metric_name: ::String
+      attr_accessor query_string: ::String
+      attr_accessor aggregation_type: Types::AggregationType
+      attr_accessor period: ::Integer
+      attr_accessor aggregation_field: ::String
+      attr_accessor description: ::String
+      attr_accessor query_version: ::String
+      attr_accessor index_name: ::String
+      attr_accessor unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateFleetMetricResponse
+      attr_accessor metric_name: ::String
+      attr_accessor metric_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateJobRequest
+      attr_accessor job_id: ::String
+      attr_accessor targets: ::Array[::String]
+      attr_accessor document_source: ::String
+      attr_accessor document: ::String
+      attr_accessor description: ::String
+      attr_accessor presigned_url_config: Types::PresignedUrlConfig
+      attr_accessor target_selection: ("CONTINUOUS" | "SNAPSHOT")
+      attr_accessor job_executions_rollout_config: Types::JobExecutionsRolloutConfig
+      attr_accessor abort_config: Types::AbortConfig
+      attr_accessor timeout_config: Types::TimeoutConfig
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor namespace_id: ::String
+      attr_accessor job_template_arn: ::String
+      attr_accessor job_executions_retry_config: Types::JobExecutionsRetryConfig
+      attr_accessor document_parameters: ::Hash[::String, ::String]
+      attr_accessor scheduling_config: Types::SchedulingConfig
+      attr_accessor destination_package_versions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateJobResponse
+      attr_accessor job_arn: ::String
+      attr_accessor job_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class CreateJobTemplateRequest
+      attr_accessor job_template_id: ::String
+      attr_accessor job_arn: ::String
+      attr_accessor document_source: ::String
+      attr_accessor document: ::String
+      attr_accessor description: ::String
+      attr_accessor presigned_url_config: Types::PresignedUrlConfig
+      attr_accessor job_executions_rollout_config: Types::JobExecutionsRolloutConfig
+      attr_accessor abort_config: Types::AbortConfig
+      attr_accessor timeout_config: Types::TimeoutConfig
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor job_executions_retry_config: Types::JobExecutionsRetryConfig
+      attr_accessor maintenance_windows: ::Array[Types::MaintenanceWindow]
+      attr_accessor destination_package_versions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateJobTemplateResponse
+      attr_accessor job_template_arn: ::String
+      attr_accessor job_template_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateKeysAndCertificateRequest
+      attr_accessor set_as_active: bool
+      SENSITIVE: []
+    end
+
+    class CreateKeysAndCertificateResponse
+      attr_accessor certificate_arn: ::String
+      attr_accessor certificate_id: ::String
+      attr_accessor certificate_pem: ::String
+      attr_accessor key_pair: Types::KeyPair
+      SENSITIVE: []
+    end
+
+    class CreateMitigationActionRequest
+      attr_accessor action_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor action_params: Types::MitigationActionParams
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateMitigationActionResponse
+      attr_accessor action_arn: ::String
+      attr_accessor action_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateOTAUpdateRequest
+      attr_accessor ota_update_id: ::String
+      attr_accessor description: ::String
+      attr_accessor targets: ::Array[::String]
+      attr_accessor protocols: ::Array[("MQTT" | "HTTP")]
+      attr_accessor target_selection: ("CONTINUOUS" | "SNAPSHOT")
+      attr_accessor aws_job_executions_rollout_config: Types::AwsJobExecutionsRolloutConfig
+      attr_accessor aws_job_presigned_url_config: Types::AwsJobPresignedUrlConfig
+      attr_accessor aws_job_abort_config: Types::AwsJobAbortConfig
+      attr_accessor aws_job_timeout_config: Types::AwsJobTimeoutConfig
+      attr_accessor files: ::Array[Types::OTAUpdateFile]
+      attr_accessor role_arn: ::String
+      attr_accessor additional_parameters: ::Hash[::String, ::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateOTAUpdateResponse
+      attr_accessor ota_update_id: ::String
+      attr_accessor aws_iot_job_id: ::String
+      attr_accessor ota_update_arn: ::String
+      attr_accessor aws_iot_job_arn: ::String
+      attr_accessor ota_update_status: ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
+    class CreatePackageRequest
+      attr_accessor package_name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: [:description]
+    end
+
+    class CreatePackageResponse
+      attr_accessor package_name: ::String
+      attr_accessor package_arn: ::String
+      attr_accessor description: ::String
+      SENSITIVE: [:description]
+    end
+
+    class CreatePackageVersionRequest
+      attr_accessor package_name: ::String
+      attr_accessor version_name: ::String
+      attr_accessor description: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: [:description, :attributes]
+    end
+
+    class CreatePackageVersionResponse
+      attr_accessor package_version_arn: ::String
+      attr_accessor package_name: ::String
+      attr_accessor version_name: ::String
+      attr_accessor description: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor status: ("DRAFT" | "PUBLISHED" | "DEPRECATED")
+      attr_accessor error_reason: ::String
+      SENSITIVE: [:description, :attributes]
+    end
+
+    class CreatePolicyRequest
+      attr_accessor policy_name: ::String
+      attr_accessor policy_document: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreatePolicyResponse
+      attr_accessor policy_name: ::String
+      attr_accessor policy_arn: ::String
+      attr_accessor policy_document: ::String
+      attr_accessor policy_version_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePolicyVersionRequest
+      attr_accessor policy_name: ::String
+      attr_accessor policy_document: ::String
+      attr_accessor set_as_default: bool
+      SENSITIVE: []
+    end
+
+    class CreatePolicyVersionResponse
+      attr_accessor policy_arn: ::String
+      attr_accessor policy_document: ::String
+      attr_accessor policy_version_id: ::String
+      attr_accessor is_default_version: bool
+      SENSITIVE: []
+    end
+
+    class CreateProvisioningClaimRequest
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProvisioningClaimResponse
+      attr_accessor certificate_id: ::String
+      attr_accessor certificate_pem: ::String
+      attr_accessor key_pair: Types::KeyPair
+      attr_accessor expiration: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateProvisioningTemplateRequest
+      attr_accessor template_name: ::String
+      attr_accessor description: ::String
+      attr_accessor template_body: ::String
+      attr_accessor enabled: bool
+      attr_accessor provisioning_role_arn: ::String
+      attr_accessor pre_provisioning_hook: Types::ProvisioningHook
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor type: ("FLEET_PROVISIONING" | "JITP")
+      SENSITIVE: []
+    end
+
+    class CreateProvisioningTemplateResponse
+      attr_accessor template_arn: ::String
+      attr_accessor template_name: ::String
+      attr_accessor default_version_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateProvisioningTemplateVersionRequest
+      attr_accessor template_name: ::String
+      attr_accessor template_body: ::String
+      attr_accessor set_as_default: bool
+      SENSITIVE: []
+    end
+
+    class CreateProvisioningTemplateVersionResponse
+      attr_accessor template_arn: ::String
+      attr_accessor template_name: ::String
+      attr_accessor version_id: ::Integer
+      attr_accessor is_default_version: bool
+      SENSITIVE: []
+    end
+
+    class CreateRoleAliasRequest
+      attr_accessor role_alias: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor credential_duration_seconds: ::Integer
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateRoleAliasResponse
+      attr_accessor role_alias: ::String
+      attr_accessor role_alias_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateScheduledAuditRequest
+      attr_accessor frequency: ("DAILY" | "WEEKLY" | "BIWEEKLY" | "MONTHLY")
+      attr_accessor day_of_month: ::String
+      attr_accessor day_of_week: ("SUN" | "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT")
+      attr_accessor target_check_names: ::Array[::String]
+      attr_accessor scheduled_audit_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateScheduledAuditResponse
+      attr_accessor scheduled_audit_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSecurityProfileRequest
+      attr_accessor security_profile_name: ::String
+      attr_accessor security_profile_description: ::String
+      attr_accessor behaviors: ::Array[Types::Behavior]
+      attr_accessor alert_targets: ::Hash[("SNS"), Types::AlertTarget]
+      attr_accessor additional_metrics_to_retain: ::Array[::String]
+      attr_accessor additional_metrics_to_retain_v2: ::Array[Types::MetricToRetain]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor metrics_export_config: Types::MetricsExportConfig
+      SENSITIVE: []
+    end
+
+    class CreateSecurityProfileResponse
+      attr_accessor security_profile_name: ::String
+      attr_accessor security_profile_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateStreamRequest
+      attr_accessor stream_id: ::String
+      attr_accessor description: ::String
+      attr_accessor files: ::Array[Types::StreamFile]
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateStreamResponse
+      attr_accessor stream_id: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor stream_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateThingGroupRequest
+      attr_accessor thing_group_name: ::String
+      attr_accessor parent_group_name: ::String
+      attr_accessor thing_group_properties: Types::ThingGroupProperties
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateThingGroupResponse
+      attr_accessor thing_group_name: ::String
+      attr_accessor thing_group_arn: ::String
+      attr_accessor thing_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateThingRequest
+      attr_accessor thing_name: ::String
+      attr_accessor thing_type_name: ::String
+      attr_accessor attribute_payload: Types::AttributePayload
+      attr_accessor billing_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateThingResponse
+      attr_accessor thing_name: ::String
+      attr_accessor thing_arn: ::String
+      attr_accessor thing_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateThingTypeRequest
+      attr_accessor thing_type_name: ::String
+      attr_accessor thing_type_properties: Types::ThingTypeProperties
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateThingTypeResponse
+      attr_accessor thing_type_name: ::String
+      attr_accessor thing_type_arn: ::String
+      attr_accessor thing_type_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTopicRuleDestinationRequest
+      attr_accessor destination_configuration: Types::TopicRuleDestinationConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateTopicRuleDestinationResponse
+      attr_accessor topic_rule_destination: Types::TopicRuleDestination
+      SENSITIVE: []
+    end
+
+    class CreateTopicRuleRequest
+      attr_accessor rule_name: ::String
+      attr_accessor topic_rule_payload: Types::TopicRulePayload
+      attr_accessor tags: ::String
+      SENSITIVE: []
+    end
+
+    class CustomCodeSigning
+      attr_accessor signature: Types::CodeSigningSignature
+      attr_accessor certificate_chain: Types::CodeSigningCertificateChain
+      attr_accessor hash_algorithm: ::String
+      attr_accessor signature_algorithm: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccountAuditConfigurationRequest
+      attr_accessor delete_scheduled_audits: bool
+      SENSITIVE: []
+    end
+
+    class DeleteAccountAuditConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteAuditSuppressionRequest
+      attr_accessor check_name: ::String
+      attr_accessor resource_identifier: Types::ResourceIdentifier
+      SENSITIVE: []
+    end
+
+    class DeleteAuditSuppressionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteAuthorizerRequest
+      attr_accessor authorizer_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAuthorizerResponse < Aws::EmptyStructure
+    end
+
+    class DeleteBillingGroupRequest
+      attr_accessor billing_group_name: ::String
+      attr_accessor expected_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteBillingGroupResponse < Aws::EmptyStructure
+    end
+
+    class DeleteCACertificateRequest
+      attr_accessor certificate_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCACertificateResponse < Aws::EmptyStructure
+    end
+
+    class DeleteCertificateProviderRequest
+      attr_accessor certificate_provider_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCertificateProviderResponse < Aws::EmptyStructure
+    end
+
+    class DeleteCertificateRequest
+      attr_accessor certificate_id: ::String
+      attr_accessor force_delete: bool
+      SENSITIVE: []
+    end
+
+    class DeleteConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCustomMetricRequest
+      attr_accessor metric_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCustomMetricResponse < Aws::EmptyStructure
+    end
+
+    class DeleteDimensionRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDimensionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteDomainConfigurationRequest
+      attr_accessor domain_configuration_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDomainConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteDynamicThingGroupRequest
+      attr_accessor thing_group_name: ::String
+      attr_accessor expected_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteDynamicThingGroupResponse < Aws::EmptyStructure
+    end
+
+    class DeleteFleetMetricRequest
+      attr_accessor metric_name: ::String
+      attr_accessor expected_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteJobExecutionRequest
+      attr_accessor job_id: ::String
+      attr_accessor thing_name: ::String
+      attr_accessor execution_number: ::Integer
+      attr_accessor force: bool
+      attr_accessor namespace_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteJobRequest
+      attr_accessor job_id: ::String
+      attr_accessor force: bool
+      attr_accessor namespace_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteJobTemplateRequest
+      attr_accessor job_template_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMitigationActionRequest
+      attr_accessor action_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMitigationActionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteOTAUpdateRequest
+      attr_accessor ota_update_id: ::String
+      attr_accessor delete_stream: bool
+      attr_accessor force_delete_aws_job: bool
+      SENSITIVE: []
+    end
+
+    class DeleteOTAUpdateResponse < Aws::EmptyStructure
+    end
+
+    class DeletePackageRequest
+      attr_accessor package_name: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePackageResponse < Aws::EmptyStructure
+    end
+
+    class DeletePackageVersionRequest
+      attr_accessor package_name: ::String
+      attr_accessor version_name: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePackageVersionResponse < Aws::EmptyStructure
+    end
+
+    class DeletePolicyRequest
+      attr_accessor policy_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePolicyVersionRequest
+      attr_accessor policy_name: ::String
+      attr_accessor policy_version_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProvisioningTemplateRequest
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProvisioningTemplateResponse < Aws::EmptyStructure
+    end
+
+    class DeleteProvisioningTemplateVersionRequest
+      attr_accessor template_name: ::String
+      attr_accessor version_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteProvisioningTemplateVersionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteRegistrationCodeRequest < Aws::EmptyStructure
+    end
+
+    class DeleteRegistrationCodeResponse < Aws::EmptyStructure
+    end
+
+    class DeleteRoleAliasRequest
+      attr_accessor role_alias: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRoleAliasResponse < Aws::EmptyStructure
+    end
+
+    class DeleteScheduledAuditRequest
+      attr_accessor scheduled_audit_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteScheduledAuditResponse < Aws::EmptyStructure
+    end
+
+    class DeleteSecurityProfileRequest
+      attr_accessor security_profile_name: ::String
+      attr_accessor expected_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteSecurityProfileResponse < Aws::EmptyStructure
+    end
+
+    class DeleteStreamRequest
+      attr_accessor stream_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStreamResponse < Aws::EmptyStructure
+    end
+
+    class DeleteThingGroupRequest
+      attr_accessor thing_group_name: ::String
+      attr_accessor expected_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteThingGroupResponse < Aws::EmptyStructure
+    end
+
+    class DeleteThingRequest
+      attr_accessor thing_name: ::String
+      attr_accessor expected_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteThingResponse < Aws::EmptyStructure
+    end
+
+    class DeleteThingTypeRequest
+      attr_accessor thing_type_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteThingTypeResponse < Aws::EmptyStructure
+    end
+
+    class DeleteTopicRuleDestinationRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTopicRuleDestinationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteTopicRuleRequest
+      attr_accessor rule_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteV2LoggingLevelRequest
+      attr_accessor target_type: ("DEFAULT" | "THING_GROUP" | "CLIENT_ID" | "SOURCE_IP" | "PRINCIPAL_ID")
+      attr_accessor target_name: ::String
+      SENSITIVE: []
+    end
+
+    class Denied
+      attr_accessor implicit_deny: Types::ImplicitDeny
+      attr_accessor explicit_deny: Types::ExplicitDeny
+      SENSITIVE: []
+    end
+
+    class DeprecateThingTypeRequest
+      attr_accessor thing_type_name: ::String
+      attr_accessor undo_deprecate: bool
+      SENSITIVE: []
+    end
+
+    class DeprecateThingTypeResponse < Aws::EmptyStructure
+    end
+
+    class DescribeAccountAuditConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class DescribeAccountAuditConfigurationResponse
+      attr_accessor role_arn: ::String
+      attr_accessor audit_notification_target_configurations: ::Hash[("SNS"), Types::AuditNotificationTarget]
+      attr_accessor audit_check_configurations: ::Hash[::String, Types::AuditCheckConfiguration]
+      SENSITIVE: []
+    end
+
+    class DescribeAuditFindingRequest
+      attr_accessor finding_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAuditFindingResponse
+      attr_accessor finding: Types::AuditFinding
+      SENSITIVE: []
+    end
+
+    class DescribeAuditMitigationActionsTaskRequest
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAuditMitigationActionsTaskResponse
+      attr_accessor task_status: ("IN_PROGRESS" | "COMPLETED" | "FAILED" | "CANCELED")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor task_statistics: ::Hash[::String, Types::TaskStatisticsForAuditCheck]
+      attr_accessor target: Types::AuditMitigationActionsTaskTarget
+      attr_accessor audit_check_to_actions_mapping: ::Hash[::String, ::Array[::String]]
+      attr_accessor actions_definition: ::Array[Types::MitigationAction]
+      SENSITIVE: []
+    end
+
+    class DescribeAuditSuppressionRequest
+      attr_accessor check_name: ::String
+      attr_accessor resource_identifier: Types::ResourceIdentifier
+      SENSITIVE: []
+    end
+
+    class DescribeAuditSuppressionResponse
+      attr_accessor check_name: ::String
+      attr_accessor resource_identifier: Types::ResourceIdentifier
+      attr_accessor expiration_date: ::Time
+      attr_accessor suppress_indefinitely: bool
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAuditTaskRequest
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAuditTaskResponse
+      attr_accessor task_status: ("IN_PROGRESS" | "COMPLETED" | "FAILED" | "CANCELED")
+      attr_accessor task_type: ("ON_DEMAND_AUDIT_TASK" | "SCHEDULED_AUDIT_TASK")
+      attr_accessor task_start_time: ::Time
+      attr_accessor task_statistics: Types::TaskStatistics
+      attr_accessor scheduled_audit_name: ::String
+      attr_accessor audit_details: ::Hash[::String, Types::AuditCheckDetails]
+      SENSITIVE: []
+    end
+
+    class DescribeAuthorizerRequest
+      attr_accessor authorizer_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAuthorizerResponse
+      attr_accessor authorizer_description: Types::AuthorizerDescription
+      SENSITIVE: []
+    end
+
+    class DescribeBillingGroupRequest
+      attr_accessor billing_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBillingGroupResponse
+      attr_accessor billing_group_name: ::String
+      attr_accessor billing_group_id: ::String
+      attr_accessor billing_group_arn: ::String
+      attr_accessor version: ::Integer
+      attr_accessor billing_group_properties: Types::BillingGroupProperties
+      attr_accessor billing_group_metadata: Types::BillingGroupMetadata
+      SENSITIVE: []
+    end
+
+    class DescribeCACertificateRequest
+      attr_accessor certificate_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCACertificateResponse
+      attr_accessor certificate_description: Types::CACertificateDescription
+      attr_accessor registration_config: Types::RegistrationConfig
+      SENSITIVE: []
+    end
+
+    class DescribeCertificateProviderRequest
+      attr_accessor certificate_provider_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCertificateProviderResponse
+      attr_accessor certificate_provider_name: ::String
+      attr_accessor certificate_provider_arn: ::String
+      attr_accessor lambda_function_arn: ::String
+      attr_accessor account_default_for_operations: ::Array[("CreateCertificateFromCsr")]
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeCertificateRequest
+      attr_accessor certificate_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCertificateResponse
+      attr_accessor certificate_description: Types::CertificateDescription
+      SENSITIVE: []
+    end
+
+    class DescribeCustomMetricRequest
+      attr_accessor metric_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCustomMetricResponse
+      attr_accessor metric_name: ::String
+      attr_accessor metric_arn: ::String
+      attr_accessor metric_type: ("string-list" | "ip-address-list" | "number-list" | "number")
+      attr_accessor display_name: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeDefaultAuthorizerRequest < Aws::EmptyStructure
+    end
+
+    class DescribeDefaultAuthorizerResponse
+      attr_accessor authorizer_description: Types::AuthorizerDescription
+      SENSITIVE: []
+    end
+
+    class DescribeDetectMitigationActionsTaskRequest
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDetectMitigationActionsTaskResponse
+      attr_accessor task_summary: Types::DetectMitigationActionsTaskSummary
+      SENSITIVE: []
+    end
+
+    class DescribeDimensionRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDimensionResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor type: ("TOPIC_FILTER")
+      attr_accessor string_values: ::Array[::String]
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeDomainConfigurationRequest
+      attr_accessor domain_configuration_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDomainConfigurationResponse
+      attr_accessor domain_configuration_name: ::String
+      attr_accessor domain_configuration_arn: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor server_certificates: ::Array[Types::ServerCertificateSummary]
+      attr_accessor authorizer_config: Types::AuthorizerConfig
+      attr_accessor domain_configuration_status: ("ENABLED" | "DISABLED")
+      attr_accessor service_type: ("DATA" | "CREDENTIAL_PROVIDER" | "JOBS")
+      attr_accessor domain_type: ("ENDPOINT" | "AWS_MANAGED" | "CUSTOMER_MANAGED")
+      attr_accessor last_status_change_date: ::Time
+      attr_accessor tls_config: Types::TlsConfig
+      SENSITIVE: []
+    end
+
+    class DescribeEndpointRequest
+      attr_accessor endpoint_type: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEndpointResponse
+      attr_accessor endpoint_address: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEventConfigurationsRequest < Aws::EmptyStructure
+    end
+
+    class DescribeEventConfigurationsResponse
+      attr_accessor event_configurations: ::Hash[("THING" | "THING_GROUP" | "THING_TYPE" | "THING_GROUP_MEMBERSHIP" | "THING_GROUP_HIERARCHY" | "THING_TYPE_ASSOCIATION" | "JOB" | "JOB_EXECUTION" | "POLICY" | "CERTIFICATE" | "CA_CERTIFICATE"), Types::Configuration]
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeFleetMetricRequest
+      attr_accessor metric_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFleetMetricResponse
+      attr_accessor metric_name: ::String
+      attr_accessor query_string: ::String
+      attr_accessor aggregation_type: Types::AggregationType
+      attr_accessor period: ::Integer
+      attr_accessor aggregation_field: ::String
+      attr_accessor description: ::String
+      attr_accessor query_version: ::String
+      attr_accessor index_name: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      attr_accessor unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
+      attr_accessor version: ::Integer
+      attr_accessor metric_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeIndexRequest
+      attr_accessor index_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeIndexResponse
+      attr_accessor index_name: ::String
+      attr_accessor index_status: ("ACTIVE" | "BUILDING" | "REBUILDING")
+      attr_accessor schema: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeJobExecutionRequest
+      attr_accessor job_id: ::String
+      attr_accessor thing_name: ::String
+      attr_accessor execution_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeJobExecutionResponse
+      attr_accessor execution: Types::JobExecution
+      SENSITIVE: []
+    end
+
+    class DescribeJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeJobResponse
+      attr_accessor document_source: ::String
+      attr_accessor job: Types::Job
+      SENSITIVE: []
+    end
+
+    class DescribeJobTemplateRequest
+      attr_accessor job_template_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeJobTemplateResponse
+      attr_accessor job_template_arn: ::String
+      attr_accessor job_template_id: ::String
+      attr_accessor description: ::String
+      attr_accessor document_source: ::String
+      attr_accessor document: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor presigned_url_config: Types::PresignedUrlConfig
+      attr_accessor job_executions_rollout_config: Types::JobExecutionsRolloutConfig
+      attr_accessor abort_config: Types::AbortConfig
+      attr_accessor timeout_config: Types::TimeoutConfig
+      attr_accessor job_executions_retry_config: Types::JobExecutionsRetryConfig
+      attr_accessor maintenance_windows: ::Array[Types::MaintenanceWindow]
+      attr_accessor destination_package_versions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeManagedJobTemplateRequest
+      attr_accessor template_name: ::String
+      attr_accessor template_version: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeManagedJobTemplateResponse
+      attr_accessor template_name: ::String
+      attr_accessor template_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor template_version: ::String
+      attr_accessor environments: ::Array[::String]
+      attr_accessor document_parameters: ::Array[Types::DocumentParameter]
+      attr_accessor document: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMitigationActionRequest
+      attr_accessor action_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMitigationActionResponse
+      attr_accessor action_name: ::String
+      attr_accessor action_type: ("UPDATE_DEVICE_CERTIFICATE" | "UPDATE_CA_CERTIFICATE" | "ADD_THINGS_TO_THING_GROUP" | "REPLACE_DEFAULT_POLICY_VERSION" | "ENABLE_IOT_LOGGING" | "PUBLISH_FINDING_TO_SNS")
+      attr_accessor action_arn: ::String
+      attr_accessor action_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor action_params: Types::MitigationActionParams
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeProvisioningTemplateRequest
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeProvisioningTemplateResponse
+      attr_accessor template_arn: ::String
+      attr_accessor template_name: ::String
+      attr_accessor description: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      attr_accessor default_version_id: ::Integer
+      attr_accessor template_body: ::String
+      attr_accessor enabled: bool
+      attr_accessor provisioning_role_arn: ::String
+      attr_accessor pre_provisioning_hook: Types::ProvisioningHook
+      attr_accessor type: ("FLEET_PROVISIONING" | "JITP")
+      SENSITIVE: []
+    end
+
+    class DescribeProvisioningTemplateVersionRequest
+      attr_accessor template_name: ::String
+      attr_accessor version_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeProvisioningTemplateVersionResponse
+      attr_accessor version_id: ::Integer
+      attr_accessor creation_date: ::Time
+      attr_accessor template_body: ::String
+      attr_accessor is_default_version: bool
+      SENSITIVE: []
+    end
+
+    class DescribeRoleAliasRequest
+      attr_accessor role_alias: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRoleAliasResponse
+      attr_accessor role_alias_description: Types::RoleAliasDescription
+      SENSITIVE: []
+    end
+
+    class DescribeScheduledAuditRequest
+      attr_accessor scheduled_audit_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeScheduledAuditResponse
+      attr_accessor frequency: ("DAILY" | "WEEKLY" | "BIWEEKLY" | "MONTHLY")
+      attr_accessor day_of_month: ::String
+      attr_accessor day_of_week: ("SUN" | "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT")
+      attr_accessor target_check_names: ::Array[::String]
+      attr_accessor scheduled_audit_name: ::String
+      attr_accessor scheduled_audit_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSecurityProfileRequest
+      attr_accessor security_profile_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSecurityProfileResponse
+      attr_accessor security_profile_name: ::String
+      attr_accessor security_profile_arn: ::String
+      attr_accessor security_profile_description: ::String
+      attr_accessor behaviors: ::Array[Types::Behavior]
+      attr_accessor alert_targets: ::Hash[("SNS"), Types::AlertTarget]
+      attr_accessor additional_metrics_to_retain: ::Array[::String]
+      attr_accessor additional_metrics_to_retain_v2: ::Array[Types::MetricToRetain]
+      attr_accessor version: ::Integer
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      attr_accessor metrics_export_config: Types::MetricsExportConfig
+      SENSITIVE: []
+    end
+
+    class DescribeStreamRequest
+      attr_accessor stream_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStreamResponse
+      attr_accessor stream_info: Types::StreamInfo
+      SENSITIVE: []
+    end
+
+    class DescribeThingGroupRequest
+      attr_accessor thing_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeThingGroupResponse
+      attr_accessor thing_group_name: ::String
+      attr_accessor thing_group_id: ::String
+      attr_accessor thing_group_arn: ::String
+      attr_accessor version: ::Integer
+      attr_accessor thing_group_properties: Types::ThingGroupProperties
+      attr_accessor thing_group_metadata: Types::ThingGroupMetadata
+      attr_accessor index_name: ::String
+      attr_accessor query_string: ::String
+      attr_accessor query_version: ::String
+      attr_accessor status: ("ACTIVE" | "BUILDING" | "REBUILDING")
+      SENSITIVE: []
+    end
+
+    class DescribeThingRegistrationTaskRequest
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeThingRegistrationTaskResponse
+      attr_accessor task_id: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      attr_accessor template_body: ::String
+      attr_accessor input_file_bucket: ::String
+      attr_accessor input_file_key: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor status: ("InProgress" | "Completed" | "Failed" | "Cancelled" | "Cancelling")
+      attr_accessor message: ::String
+      attr_accessor success_count: ::Integer
+      attr_accessor failure_count: ::Integer
+      attr_accessor percentage_progress: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeThingRequest
+      attr_accessor thing_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeThingResponse
+      attr_accessor default_client_id: ::String
+      attr_accessor thing_name: ::String
+      attr_accessor thing_id: ::String
+      attr_accessor thing_arn: ::String
+      attr_accessor thing_type_name: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor version: ::Integer
+      attr_accessor billing_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeThingTypeRequest
+      attr_accessor thing_type_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeThingTypeResponse
+      attr_accessor thing_type_name: ::String
+      attr_accessor thing_type_id: ::String
+      attr_accessor thing_type_arn: ::String
+      attr_accessor thing_type_properties: Types::ThingTypeProperties
+      attr_accessor thing_type_metadata: Types::ThingTypeMetadata
+      SENSITIVE: []
+    end
+
+    class Destination
+      attr_accessor s3_destination: Types::S3Destination
+      SENSITIVE: []
+    end
+
+    class DetachPolicyRequest
+      attr_accessor policy_name: ::String
+      attr_accessor target: ::String
+      SENSITIVE: []
+    end
+
+    class DetachPrincipalPolicyRequest
+      attr_accessor policy_name: ::String
+      attr_accessor principal: ::String
+      SENSITIVE: []
+    end
+
+    class DetachSecurityProfileRequest
+      attr_accessor security_profile_name: ::String
+      attr_accessor security_profile_target_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DetachSecurityProfileResponse < Aws::EmptyStructure
+    end
+
+    class DetachThingPrincipalRequest
+      attr_accessor thing_name: ::String
+      attr_accessor principal: ::String
+      SENSITIVE: []
+    end
+
+    class DetachThingPrincipalResponse < Aws::EmptyStructure
+    end
+
+    class DetectMitigationActionExecution
+      attr_accessor task_id: ::String
+      attr_accessor violation_id: ::String
+      attr_accessor action_name: ::String
+      attr_accessor thing_name: ::String
+      attr_accessor execution_start_date: ::Time
+      attr_accessor execution_end_date: ::Time
+      attr_accessor status: ("IN_PROGRESS" | "SUCCESSFUL" | "FAILED" | "SKIPPED")
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DetectMitigationActionsTaskStatistics
+      attr_accessor actions_executed: ::Integer
+      attr_accessor actions_skipped: ::Integer
+      attr_accessor actions_failed: ::Integer
+      SENSITIVE: []
+    end
+
+    class DetectMitigationActionsTaskSummary
+      attr_accessor task_id: ::String
+      attr_accessor task_status: ("IN_PROGRESS" | "SUCCESSFUL" | "FAILED" | "CANCELED")
+      attr_accessor task_start_time: ::Time
+      attr_accessor task_end_time: ::Time
+      attr_accessor target: Types::DetectMitigationActionsTaskTarget
+      attr_accessor violation_event_occurrence_range: Types::ViolationEventOccurrenceRange
+      attr_accessor only_active_violations_included: bool
+      attr_accessor suppressed_alerts_included: bool
+      attr_accessor actions_definition: ::Array[Types::MitigationAction]
+      attr_accessor task_statistics: Types::DetectMitigationActionsTaskStatistics
+      SENSITIVE: []
+    end
+
+    class DetectMitigationActionsTaskTarget
+      attr_accessor violation_ids: ::Array[::String]
+      attr_accessor security_profile_name: ::String
+      attr_accessor behavior_name: ::String
+      SENSITIVE: []
+    end
+
+    class DisableTopicRuleRequest
+      attr_accessor rule_name: ::String
+      SENSITIVE: []
+    end
+
+    class DocumentParameter
+      attr_accessor key: ::String
+      attr_accessor description: ::String
+      attr_accessor regex: ::String
+      attr_accessor example: ::String
+      attr_accessor optional: bool
+      SENSITIVE: []
+    end
+
+    class DomainConfigurationSummary
+      attr_accessor domain_configuration_name: ::String
+      attr_accessor domain_configuration_arn: ::String
+      attr_accessor service_type: ("DATA" | "CREDENTIAL_PROVIDER" | "JOBS")
+      SENSITIVE: []
+    end
+
+    class DynamoDBAction
+      attr_accessor table_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor operation: ::String
+      attr_accessor hash_key_field: ::String
+      attr_accessor hash_key_value: ::String
+      attr_accessor hash_key_type: ("STRING" | "NUMBER")
+      attr_accessor range_key_field: ::String
+      attr_accessor range_key_value: ::String
+      attr_accessor range_key_type: ("STRING" | "NUMBER")
+      attr_accessor payload_field: ::String
+      SENSITIVE: []
+    end
+
+    class DynamoDBv2Action
+      attr_accessor role_arn: ::String
+      attr_accessor put_item: Types::PutItemInput
+      SENSITIVE: []
+    end
+
+    class EffectivePolicy
+      attr_accessor policy_name: ::String
+      attr_accessor policy_arn: ::String
+      attr_accessor policy_document: ::String
+      SENSITIVE: []
+    end
+
+    class ElasticsearchAction
+      attr_accessor role_arn: ::String
+      attr_accessor endpoint: ::String
+      attr_accessor index: ::String
+      attr_accessor type: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class EnableIoTLoggingParams
+      attr_accessor role_arn_for_logging: ::String
+      attr_accessor log_level: ("DEBUG" | "INFO" | "ERROR" | "WARN" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class EnableTopicRuleRequest
+      attr_accessor rule_name: ::String
+      SENSITIVE: []
+    end
+
+    class ErrorInfo
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ExplicitDeny
+      attr_accessor policies: ::Array[Types::Policy]
+      SENSITIVE: []
+    end
+
+    class ExponentialRolloutRate
+      attr_accessor base_rate_per_minute: ::Integer
+      attr_accessor increment_factor: ::Float
+      attr_accessor rate_increase_criteria: Types::RateIncreaseCriteria
+      SENSITIVE: []
+    end
+
+    class Field
+      attr_accessor name: ::String
+      attr_accessor type: ("Number" | "String" | "Boolean")
+      SENSITIVE: []
+    end
+
+    class FileLocation
+      attr_accessor stream: Types::Stream
+      attr_accessor s3_location: Types::S3Location
+      SENSITIVE: []
+    end
+
+    class FirehoseAction
+      attr_accessor role_arn: ::String
+      attr_accessor delivery_stream_name: ::String
+      attr_accessor separator: ::String
+      attr_accessor batch_mode: bool
+      SENSITIVE: []
+    end
+
+    class FleetMetricNameAndArn
+      attr_accessor metric_name: ::String
+      attr_accessor metric_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GeoLocationTarget
+      attr_accessor name: ::String
+      attr_accessor order: ("LatLon" | "LonLat")
+      SENSITIVE: []
+    end
+
+    class GetBehaviorModelTrainingSummariesRequest
+      attr_accessor security_profile_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetBehaviorModelTrainingSummariesResponse
+      attr_accessor summaries: ::Array[Types::BehaviorModelTrainingSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetBucketsAggregationRequest
+      attr_accessor index_name: ::String
+      attr_accessor query_string: ::String
+      attr_accessor aggregation_field: ::String
+      attr_accessor query_version: ::String
+      attr_accessor buckets_aggregation_type: Types::BucketsAggregationType
+      SENSITIVE: []
+    end
+
+    class GetBucketsAggregationResponse
+      attr_accessor total_count: ::Integer
+      attr_accessor buckets: ::Array[Types::Bucket]
+      SENSITIVE: []
+    end
+
+    class GetCardinalityRequest
+      attr_accessor index_name: ::String
+      attr_accessor query_string: ::String
+      attr_accessor aggregation_field: ::String
+      attr_accessor query_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetCardinalityResponse
+      attr_accessor cardinality: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetEffectivePoliciesRequest
+      attr_accessor principal: ::String
+      attr_accessor cognito_identity_pool_id: ::String
+      attr_accessor thing_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetEffectivePoliciesResponse
+      attr_accessor effective_policies: ::Array[Types::EffectivePolicy]
+      SENSITIVE: []
+    end
+
+    class GetIndexingConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class GetIndexingConfigurationResponse
+      attr_accessor thing_indexing_configuration: Types::ThingIndexingConfiguration
+      attr_accessor thing_group_indexing_configuration: Types::ThingGroupIndexingConfiguration
+      SENSITIVE: []
+    end
+
+    class GetJobDocumentRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetJobDocumentResponse
+      attr_accessor document: ::String
+      SENSITIVE: []
+    end
+
+    class GetLoggingOptionsRequest < Aws::EmptyStructure
+    end
+
+    class GetLoggingOptionsResponse
+      attr_accessor role_arn: ::String
+      attr_accessor log_level: ("DEBUG" | "INFO" | "ERROR" | "WARN" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class GetOTAUpdateRequest
+      attr_accessor ota_update_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetOTAUpdateResponse
+      attr_accessor ota_update_info: Types::OTAUpdateInfo
+      SENSITIVE: []
+    end
+
+    class GetPackageConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class GetPackageConfigurationResponse
+      attr_accessor version_update_by_jobs_config: Types::VersionUpdateByJobsConfig
+      SENSITIVE: []
+    end
+
+    class GetPackageRequest
+      attr_accessor package_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetPackageResponse
+      attr_accessor package_name: ::String
+      attr_accessor package_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor default_version_name: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      SENSITIVE: [:description]
+    end
+
+    class GetPackageVersionRequest
+      attr_accessor package_name: ::String
+      attr_accessor version_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetPackageVersionResponse
+      attr_accessor package_version_arn: ::String
+      attr_accessor package_name: ::String
+      attr_accessor version_name: ::String
+      attr_accessor description: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor status: ("DRAFT" | "PUBLISHED" | "DEPRECATED")
+      attr_accessor error_reason: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      SENSITIVE: [:description, :attributes]
+    end
+
+    class GetPercentilesRequest
+      attr_accessor index_name: ::String
+      attr_accessor query_string: ::String
+      attr_accessor aggregation_field: ::String
+      attr_accessor query_version: ::String
+      attr_accessor percents: ::Array[::Float]
+      SENSITIVE: []
+    end
+
+    class GetPercentilesResponse
+      attr_accessor percentiles: ::Array[Types::PercentPair]
+      SENSITIVE: []
+    end
+
+    class GetPolicyRequest
+      attr_accessor policy_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetPolicyResponse
+      attr_accessor policy_name: ::String
+      attr_accessor policy_arn: ::String
+      attr_accessor policy_document: ::String
+      attr_accessor default_version_id: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      attr_accessor generation_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPolicyVersionRequest
+      attr_accessor policy_name: ::String
+      attr_accessor policy_version_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPolicyVersionResponse
+      attr_accessor policy_arn: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor policy_document: ::String
+      attr_accessor policy_version_id: ::String
+      attr_accessor is_default_version: bool
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      attr_accessor generation_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRegistrationCodeRequest < Aws::EmptyStructure
+    end
+
+    class GetRegistrationCodeResponse
+      attr_accessor registration_code: ::String
+      SENSITIVE: []
+    end
+
+    class GetStatisticsRequest
+      attr_accessor index_name: ::String
+      attr_accessor query_string: ::String
+      attr_accessor aggregation_field: ::String
+      attr_accessor query_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetStatisticsResponse
+      attr_accessor statistics: Types::Statistics
+      SENSITIVE: []
+    end
+
+    class GetTopicRuleDestinationRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetTopicRuleDestinationResponse
+      attr_accessor topic_rule_destination: Types::TopicRuleDestination
+      SENSITIVE: []
+    end
+
+    class GetTopicRuleRequest
+      attr_accessor rule_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetTopicRuleResponse
+      attr_accessor rule_arn: ::String
+      attr_accessor rule: Types::TopicRule
+      SENSITIVE: []
+    end
+
+    class GetV2LoggingOptionsRequest < Aws::EmptyStructure
+    end
+
+    class GetV2LoggingOptionsResponse
+      attr_accessor role_arn: ::String
+      attr_accessor default_log_level: ("DEBUG" | "INFO" | "ERROR" | "WARN" | "DISABLED")
+      attr_accessor disable_all_logs: bool
+      SENSITIVE: []
+    end
+
+    class GroupNameAndArn
+      attr_accessor group_name: ::String
+      attr_accessor group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class HttpAction
+      attr_accessor url: ::String
+      attr_accessor confirmation_url: ::String
+      attr_accessor headers: ::Array[Types::HttpActionHeader]
+      attr_accessor auth: Types::HttpAuthorization
+      SENSITIVE: []
+    end
+
+    class HttpActionHeader
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class HttpAuthorization
+      attr_accessor sigv4: Types::SigV4Authorization
+      SENSITIVE: []
+    end
+
+    class HttpContext
+      attr_accessor headers: ::Hash[::String, ::String]
+      attr_accessor query_string: ::String
+      SENSITIVE: []
+    end
+
+    class HttpUrlDestinationConfiguration
+      attr_accessor confirmation_url: ::String
+      SENSITIVE: []
+    end
+
+    class HttpUrlDestinationProperties
+      attr_accessor confirmation_url: ::String
+      SENSITIVE: []
+    end
+
+    class HttpUrlDestinationSummary
+      attr_accessor confirmation_url: ::String
+      SENSITIVE: []
+    end
+
+    class ImplicitDeny
+      attr_accessor policies: ::Array[Types::Policy]
+      SENSITIVE: []
+    end
+
+    class IndexNotReadyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IndexingFilter
+      attr_accessor named_shadow_names: ::Array[::String]
+      attr_accessor geo_locations: ::Array[Types::GeoLocationTarget]
+      SENSITIVE: []
+    end
+
+    class InternalException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalFailureException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidAggregationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidQueryException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidResponseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidStateTransitionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IotAnalyticsAction
+      attr_accessor channel_arn: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor batch_mode: bool
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class IotEventsAction
+      attr_accessor input_name: ::String
+      attr_accessor message_id: ::String
+      attr_accessor batch_mode: bool
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class IotSiteWiseAction
+      attr_accessor put_asset_property_value_entries: ::Array[Types::PutAssetPropertyValueEntry]
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class IssuerCertificateIdentifier
+      attr_accessor issuer_certificate_subject: ::String
+      attr_accessor issuer_id: ::String
+      attr_accessor issuer_certificate_serial_number: ::String
+      SENSITIVE: []
+    end
+
+    class Job
+      attr_accessor job_arn: ::String
+      attr_accessor job_id: ::String
+      attr_accessor target_selection: ("CONTINUOUS" | "SNAPSHOT")
+      attr_accessor status: ("IN_PROGRESS" | "CANCELED" | "COMPLETED" | "DELETION_IN_PROGRESS" | "SCHEDULED")
+      attr_accessor force_canceled: bool
+      attr_accessor reason_code: ::String
+      attr_accessor comment: ::String
+      attr_accessor targets: ::Array[::String]
+      attr_accessor description: ::String
+      attr_accessor presigned_url_config: Types::PresignedUrlConfig
+      attr_accessor job_executions_rollout_config: Types::JobExecutionsRolloutConfig
+      attr_accessor abort_config: Types::AbortConfig
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor completed_at: ::Time
+      attr_accessor job_process_details: Types::JobProcessDetails
+      attr_accessor timeout_config: Types::TimeoutConfig
+      attr_accessor namespace_id: ::String
+      attr_accessor job_template_arn: ::String
+      attr_accessor job_executions_retry_config: Types::JobExecutionsRetryConfig
+      attr_accessor document_parameters: ::Hash[::String, ::String]
+      attr_accessor is_concurrent: bool
+      attr_accessor scheduling_config: Types::SchedulingConfig
+      attr_accessor scheduled_job_rollouts: ::Array[Types::ScheduledJobRollout]
+      attr_accessor destination_package_versions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class JobExecution
+      attr_accessor job_id: ::String
+      attr_accessor status: ("QUEUED" | "IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "REJECTED" | "REMOVED" | "CANCELED")
+      attr_accessor force_canceled: bool
+      attr_accessor status_details: Types::JobExecutionStatusDetails
+      attr_accessor thing_arn: ::String
+      attr_accessor queued_at: ::Time
+      attr_accessor started_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor execution_number: ::Integer
+      attr_accessor version_number: ::Integer
+      attr_accessor approximate_seconds_before_timed_out: ::Integer
+      SENSITIVE: []
+    end
+
+    class JobExecutionStatusDetails
+      attr_accessor details_map: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class JobExecutionSummary
+      attr_accessor status: ("QUEUED" | "IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "REJECTED" | "REMOVED" | "CANCELED")
+      attr_accessor queued_at: ::Time
+      attr_accessor started_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor execution_number: ::Integer
+      attr_accessor retry_attempt: ::Integer
+      SENSITIVE: []
+    end
+
+    class JobExecutionSummaryForJob
+      attr_accessor thing_arn: ::String
+      attr_accessor job_execution_summary: Types::JobExecutionSummary
+      SENSITIVE: []
+    end
+
+    class JobExecutionSummaryForThing
+      attr_accessor job_id: ::String
+      attr_accessor job_execution_summary: Types::JobExecutionSummary
+      SENSITIVE: []
+    end
+
+    class JobExecutionsRetryConfig
+      attr_accessor criteria_list: ::Array[Types::RetryCriteria]
+      SENSITIVE: []
+    end
+
+    class JobExecutionsRolloutConfig
+      attr_accessor maximum_per_minute: ::Integer
+      attr_accessor exponential_rate: Types::ExponentialRolloutRate
+      SENSITIVE: []
+    end
+
+    class JobProcessDetails
+      attr_accessor processing_targets: ::Array[::String]
+      attr_accessor number_of_canceled_things: ::Integer
+      attr_accessor number_of_succeeded_things: ::Integer
+      attr_accessor number_of_failed_things: ::Integer
+      attr_accessor number_of_rejected_things: ::Integer
+      attr_accessor number_of_queued_things: ::Integer
+      attr_accessor number_of_in_progress_things: ::Integer
+      attr_accessor number_of_removed_things: ::Integer
+      attr_accessor number_of_timed_out_things: ::Integer
+      SENSITIVE: []
+    end
+
+    class JobSummary
+      attr_accessor job_arn: ::String
+      attr_accessor job_id: ::String
+      attr_accessor thing_group_id: ::String
+      attr_accessor target_selection: ("CONTINUOUS" | "SNAPSHOT")
+      attr_accessor status: ("IN_PROGRESS" | "CANCELED" | "COMPLETED" | "DELETION_IN_PROGRESS" | "SCHEDULED")
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor completed_at: ::Time
+      attr_accessor is_concurrent: bool
+      SENSITIVE: []
+    end
+
+    class JobTemplateSummary
+      attr_accessor job_template_arn: ::String
+      attr_accessor job_template_id: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class KafkaAction
+      attr_accessor destination_arn: ::String
+      attr_accessor topic: ::String
+      attr_accessor key: ::String
+      attr_accessor partition: ::String
+      attr_accessor client_properties: ::Hash[::String, ::String]
+      attr_accessor headers: ::Array[Types::KafkaActionHeader]
+      SENSITIVE: []
+    end
+
+    class KafkaActionHeader
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class KeyPair
+      attr_accessor public_key: ::String
+      attr_accessor private_key: ::String
+      SENSITIVE: [:private_key]
+    end
+
+    class KinesisAction
+      attr_accessor role_arn: ::String
+      attr_accessor stream_name: ::String
+      attr_accessor partition_key: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaAction
+      attr_accessor function_arn: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListActiveViolationsRequest
+      attr_accessor thing_name: ::String
+      attr_accessor security_profile_name: ::String
+      attr_accessor behavior_criteria_type: ("STATIC" | "STATISTICAL" | "MACHINE_LEARNING")
+      attr_accessor list_suppressed_alerts: bool
+      attr_accessor verification_state: ("FALSE_POSITIVE" | "BENIGN_POSITIVE" | "TRUE_POSITIVE" | "UNKNOWN")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListActiveViolationsResponse
+      attr_accessor active_violations: ::Array[Types::ActiveViolation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAttachedPoliciesRequest
+      attr_accessor target: ::String
+      attr_accessor recursive: bool
+      attr_accessor marker: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAttachedPoliciesResponse
+      attr_accessor policies: ::Array[Types::Policy]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListAuditFindingsRequest
+      attr_accessor task_id: ::String
+      attr_accessor check_name: ::String
+      attr_accessor resource_identifier: Types::ResourceIdentifier
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor list_suppressed_findings: bool
+      SENSITIVE: []
+    end
+
+    class ListAuditFindingsResponse
+      attr_accessor findings: ::Array[Types::AuditFinding]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAuditMitigationActionsExecutionsRequest
+      attr_accessor task_id: ::String
+      attr_accessor action_status: ("IN_PROGRESS" | "COMPLETED" | "FAILED" | "CANCELED" | "SKIPPED" | "PENDING")
+      attr_accessor finding_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAuditMitigationActionsExecutionsResponse
+      attr_accessor actions_executions: ::Array[Types::AuditMitigationActionExecutionMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAuditMitigationActionsTasksRequest
+      attr_accessor audit_task_id: ::String
+      attr_accessor finding_id: ::String
+      attr_accessor task_status: ("IN_PROGRESS" | "COMPLETED" | "FAILED" | "CANCELED")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ListAuditMitigationActionsTasksResponse
+      attr_accessor tasks: ::Array[Types::AuditMitigationActionsTaskMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAuditSuppressionsRequest
+      attr_accessor check_name: ::String
+      attr_accessor resource_identifier: Types::ResourceIdentifier
+      attr_accessor ascending_order: bool
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAuditSuppressionsResponse
+      attr_accessor suppressions: ::Array[Types::AuditSuppression]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAuditTasksRequest
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor task_type: ("ON_DEMAND_AUDIT_TASK" | "SCHEDULED_AUDIT_TASK")
+      attr_accessor task_status: ("IN_PROGRESS" | "COMPLETED" | "FAILED" | "CANCELED")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAuditTasksResponse
+      attr_accessor tasks: ::Array[Types::AuditTaskMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAuthorizersRequest
+      attr_accessor page_size: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor ascending_order: bool
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      SENSITIVE: []
+    end
+
+    class ListAuthorizersResponse
+      attr_accessor authorizers: ::Array[Types::AuthorizerSummary]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListBillingGroupsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor name_prefix_filter: ::String
+      SENSITIVE: []
+    end
+
+    class ListBillingGroupsResponse
+      attr_accessor billing_groups: ::Array[Types::GroupNameAndArn]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCACertificatesRequest
+      attr_accessor page_size: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor ascending_order: bool
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListCACertificatesResponse
+      attr_accessor certificates: ::Array[Types::CACertificate]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListCertificateProvidersRequest
+      attr_accessor next_token: ::String
+      attr_accessor ascending_order: bool
+      SENSITIVE: []
+    end
+
+    class ListCertificateProvidersResponse
+      attr_accessor certificate_providers: ::Array[Types::CertificateProviderSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCertificatesByCARequest
+      attr_accessor ca_certificate_id: ::String
+      attr_accessor page_size: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor ascending_order: bool
+      SENSITIVE: []
+    end
+
+    class ListCertificatesByCAResponse
+      attr_accessor certificates: ::Array[Types::Certificate]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListCertificatesRequest
+      attr_accessor page_size: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor ascending_order: bool
+      SENSITIVE: []
+    end
+
+    class ListCertificatesResponse
+      attr_accessor certificates: ::Array[Types::Certificate]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomMetricsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCustomMetricsResponse
+      attr_accessor metric_names: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDetectMitigationActionsExecutionsRequest
+      attr_accessor task_id: ::String
+      attr_accessor violation_id: ::String
+      attr_accessor thing_name: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDetectMitigationActionsExecutionsResponse
+      attr_accessor actions_executions: ::Array[Types::DetectMitigationActionExecution]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDetectMitigationActionsTasksRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ListDetectMitigationActionsTasksResponse
+      attr_accessor tasks: ::Array[Types::DetectMitigationActionsTaskSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDimensionsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDimensionsResponse
+      attr_accessor dimension_names: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDomainConfigurationsRequest
+      attr_accessor marker: ::String
+      attr_accessor page_size: ::Integer
+      attr_accessor service_type: ("DATA" | "CREDENTIAL_PROVIDER" | "JOBS")
+      SENSITIVE: []
+    end
+
+    class ListDomainConfigurationsResponse
+      attr_accessor domain_configurations: ::Array[Types::DomainConfigurationSummary]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListFleetMetricsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFleetMetricsResponse
+      attr_accessor fleet_metrics: ::Array[Types::FleetMetricNameAndArn]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIndicesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListIndicesResponse
+      attr_accessor index_names: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobExecutionsForJobRequest
+      attr_accessor job_id: ::String
+      attr_accessor status: ("QUEUED" | "IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "REJECTED" | "REMOVED" | "CANCELED")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobExecutionsForJobResponse
+      attr_accessor execution_summaries: ::Array[Types::JobExecutionSummaryForJob]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobExecutionsForThingRequest
+      attr_accessor thing_name: ::String
+      attr_accessor status: ("QUEUED" | "IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "REJECTED" | "REMOVED" | "CANCELED")
+      attr_accessor namespace_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobExecutionsForThingResponse
+      attr_accessor execution_summaries: ::Array[Types::JobExecutionSummaryForThing]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobTemplatesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobTemplatesResponse
+      attr_accessor job_templates: ::Array[Types::JobTemplateSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobsRequest
+      attr_accessor status: ("IN_PROGRESS" | "CANCELED" | "COMPLETED" | "DELETION_IN_PROGRESS" | "SCHEDULED")
+      attr_accessor target_selection: ("CONTINUOUS" | "SNAPSHOT")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor thing_group_name: ::String
+      attr_accessor thing_group_id: ::String
+      attr_accessor namespace_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobsResponse
+      attr_accessor jobs: ::Array[Types::JobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListManagedJobTemplatesRequest
+      attr_accessor template_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListManagedJobTemplatesResponse
+      attr_accessor managed_job_templates: ::Array[Types::ManagedJobTemplateSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMetricValuesRequest
+      attr_accessor thing_name: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor dimension_name: ::String
+      attr_accessor dimension_value_operator: ("IN" | "NOT_IN")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMetricValuesResponse
+      attr_accessor metric_datum_list: ::Array[Types::MetricDatum]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMitigationActionsRequest
+      attr_accessor action_type: ("UPDATE_DEVICE_CERTIFICATE" | "UPDATE_CA_CERTIFICATE" | "ADD_THINGS_TO_THING_GROUP" | "REPLACE_DEFAULT_POLICY_VERSION" | "ENABLE_IOT_LOGGING" | "PUBLISH_FINDING_TO_SNS")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMitigationActionsResponse
+      attr_accessor action_identifiers: ::Array[Types::MitigationActionIdentifier]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOTAUpdatesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor ota_update_status: ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
+    class ListOTAUpdatesResponse
+      attr_accessor ota_updates: ::Array[Types::OTAUpdateSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOutgoingCertificatesRequest
+      attr_accessor page_size: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor ascending_order: bool
+      SENSITIVE: []
+    end
+
+    class ListOutgoingCertificatesResponse
+      attr_accessor outgoing_certificates: ::Array[Types::OutgoingCertificate]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListPackageVersionsRequest
+      attr_accessor package_name: ::String
+      attr_accessor status: ("DRAFT" | "PUBLISHED" | "DEPRECATED")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPackageVersionsResponse
+      attr_accessor package_version_summaries: ::Array[Types::PackageVersionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPackagesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPackagesResponse
+      attr_accessor package_summaries: ::Array[Types::PackageSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPoliciesRequest
+      attr_accessor marker: ::String
+      attr_accessor page_size: ::Integer
+      attr_accessor ascending_order: bool
+      SENSITIVE: []
+    end
+
+    class ListPoliciesResponse
+      attr_accessor policies: ::Array[Types::Policy]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListPolicyPrincipalsRequest
+      attr_accessor policy_name: ::String
+      attr_accessor marker: ::String
+      attr_accessor page_size: ::Integer
+      attr_accessor ascending_order: bool
+      SENSITIVE: []
+    end
+
+    class ListPolicyPrincipalsResponse
+      attr_accessor principals: ::Array[::String]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListPolicyVersionsRequest
+      attr_accessor policy_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListPolicyVersionsResponse
+      attr_accessor policy_versions: ::Array[Types::PolicyVersion]
+      SENSITIVE: []
+    end
+
+    class ListPrincipalPoliciesRequest
+      attr_accessor principal: ::String
+      attr_accessor marker: ::String
+      attr_accessor page_size: ::Integer
+      attr_accessor ascending_order: bool
+      SENSITIVE: []
+    end
+
+    class ListPrincipalPoliciesResponse
+      attr_accessor policies: ::Array[Types::Policy]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListPrincipalThingsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor principal: ::String
+      SENSITIVE: []
+    end
+
+    class ListPrincipalThingsResponse
+      attr_accessor things: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProvisioningTemplateVersionsRequest
+      attr_accessor template_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProvisioningTemplateVersionsResponse
+      attr_accessor versions: ::Array[Types::ProvisioningTemplateVersionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProvisioningTemplatesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProvisioningTemplatesResponse
+      attr_accessor templates: ::Array[Types::ProvisioningTemplateSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRelatedResourcesForAuditFindingRequest
+      attr_accessor finding_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRelatedResourcesForAuditFindingResponse
+      attr_accessor related_resources: ::Array[Types::RelatedResource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRoleAliasesRequest
+      attr_accessor page_size: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor ascending_order: bool
+      SENSITIVE: []
+    end
+
+    class ListRoleAliasesResponse
+      attr_accessor role_aliases: ::Array[::String]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListScheduledAuditsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListScheduledAuditsResponse
+      attr_accessor scheduled_audits: ::Array[Types::ScheduledAuditMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSecurityProfilesForTargetRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor recursive: bool
+      attr_accessor security_profile_target_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListSecurityProfilesForTargetResponse
+      attr_accessor security_profile_target_mappings: ::Array[Types::SecurityProfileTargetMapping]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSecurityProfilesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor dimension_name: ::String
+      attr_accessor metric_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListSecurityProfilesResponse
+      attr_accessor security_profile_identifiers: ::Array[Types::SecurityProfileIdentifier]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStreamsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor ascending_order: bool
+      SENSITIVE: []
+    end
+
+    class ListStreamsResponse
+      attr_accessor streams: ::Array[Types::StreamSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTargetsForPolicyRequest
+      attr_accessor policy_name: ::String
+      attr_accessor marker: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTargetsForPolicyResponse
+      attr_accessor targets: ::Array[::String]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListTargetsForSecurityProfileRequest
+      attr_accessor security_profile_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTargetsForSecurityProfileResponse
+      attr_accessor security_profile_targets: ::Array[Types::SecurityProfileTarget]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListThingGroupsForThingRequest
+      attr_accessor thing_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListThingGroupsForThingResponse
+      attr_accessor thing_groups: ::Array[Types::GroupNameAndArn]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListThingGroupsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor parent_group: ::String
+      attr_accessor name_prefix_filter: ::String
+      attr_accessor recursive: bool
+      SENSITIVE: []
+    end
+
+    class ListThingGroupsResponse
+      attr_accessor thing_groups: ::Array[Types::GroupNameAndArn]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListThingPrincipalsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor thing_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListThingPrincipalsResponse
+      attr_accessor principals: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListThingRegistrationTaskReportsRequest
+      attr_accessor task_id: ::String
+      attr_accessor report_type: ("ERRORS" | "RESULTS")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListThingRegistrationTaskReportsResponse
+      attr_accessor resource_links: ::Array[::String]
+      attr_accessor report_type: ("ERRORS" | "RESULTS")
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListThingRegistrationTasksRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor status: ("InProgress" | "Completed" | "Failed" | "Cancelled" | "Cancelling")
+      SENSITIVE: []
+    end
+
+    class ListThingRegistrationTasksResponse
+      attr_accessor task_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListThingTypesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor thing_type_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListThingTypesResponse
+      attr_accessor thing_types: ::Array[Types::ThingTypeDefinition]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListThingsInBillingGroupRequest
+      attr_accessor billing_group_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListThingsInBillingGroupResponse
+      attr_accessor things: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListThingsInThingGroupRequest
+      attr_accessor thing_group_name: ::String
+      attr_accessor recursive: bool
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListThingsInThingGroupResponse
+      attr_accessor things: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListThingsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor attribute_name: ::String
+      attr_accessor attribute_value: ::String
+      attr_accessor thing_type_name: ::String
+      attr_accessor use_prefix_attribute_value: bool
+      SENSITIVE: []
+    end
+
+    class ListThingsResponse
+      attr_accessor things: ::Array[Types::ThingAttribute]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTopicRuleDestinationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTopicRuleDestinationsResponse
+      attr_accessor destination_summaries: ::Array[Types::TopicRuleDestinationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTopicRulesRequest
+      attr_accessor topic: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor rule_disabled: bool
+      SENSITIVE: []
+    end
+
+    class ListTopicRulesResponse
+      attr_accessor rules: ::Array[Types::TopicRuleListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListV2LoggingLevelsRequest
+      attr_accessor target_type: ("DEFAULT" | "THING_GROUP" | "CLIENT_ID" | "SOURCE_IP" | "PRINCIPAL_ID")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListV2LoggingLevelsResponse
+      attr_accessor log_target_configurations: ::Array[Types::LogTargetConfiguration]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListViolationEventsRequest
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor thing_name: ::String
+      attr_accessor security_profile_name: ::String
+      attr_accessor behavior_criteria_type: ("STATIC" | "STATISTICAL" | "MACHINE_LEARNING")
+      attr_accessor list_suppressed_alerts: bool
+      attr_accessor verification_state: ("FALSE_POSITIVE" | "BENIGN_POSITIVE" | "TRUE_POSITIVE" | "UNKNOWN")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListViolationEventsResponse
+      attr_accessor violation_events: ::Array[Types::ViolationEvent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LocationAction
+      attr_accessor role_arn: ::String
+      attr_accessor tracker_name: ::String
+      attr_accessor device_id: ::String
+      attr_accessor timestamp: Types::LocationTimestamp
+      attr_accessor latitude: ::String
+      attr_accessor longitude: ::String
+      SENSITIVE: []
+    end
+
+    class LocationTimestamp
+      attr_accessor value: ::String
+      attr_accessor unit: ::String
+      SENSITIVE: []
+    end
+
+    class LogTarget
+      attr_accessor target_type: ("DEFAULT" | "THING_GROUP" | "CLIENT_ID" | "SOURCE_IP" | "PRINCIPAL_ID")
+      attr_accessor target_name: ::String
+      SENSITIVE: []
+    end
+
+    class LogTargetConfiguration
+      attr_accessor log_target: Types::LogTarget
+      attr_accessor log_level: ("DEBUG" | "INFO" | "ERROR" | "WARN" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class LoggingOptionsPayload
+      attr_accessor role_arn: ::String
+      attr_accessor log_level: ("DEBUG" | "INFO" | "ERROR" | "WARN" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class MachineLearningDetectionConfig
+      attr_accessor confidence_level: ("LOW" | "MEDIUM" | "HIGH")
+      SENSITIVE: []
+    end
+
+    class MaintenanceWindow
+      attr_accessor start_time: ::String
+      attr_accessor duration_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class MalformedPolicyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ManagedJobTemplateSummary
+      attr_accessor template_arn: ::String
+      attr_accessor template_name: ::String
+      attr_accessor description: ::String
+      attr_accessor environments: ::Array[::String]
+      attr_accessor template_version: ::String
+      SENSITIVE: []
+    end
+
+    class MetricDatum
+      attr_accessor timestamp: ::Time
+      attr_accessor value: Types::MetricValue
+      SENSITIVE: []
+    end
+
+    class MetricDimension
+      attr_accessor dimension_name: ::String
+      attr_accessor operator: ("IN" | "NOT_IN")
+      SENSITIVE: []
+    end
+
+    class MetricToRetain
+      attr_accessor metric: ::String
+      attr_accessor metric_dimension: Types::MetricDimension
+      attr_accessor export_metric: bool
+      SENSITIVE: []
+    end
+
+    class MetricValue
+      attr_accessor count: ::Integer
+      attr_accessor cidrs: ::Array[::String]
+      attr_accessor ports: ::Array[::Integer]
+      attr_accessor number: ::Float
+      attr_accessor numbers: ::Array[::Float]
+      attr_accessor strings: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class MetricsExportConfig
+      attr_accessor mqtt_topic: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class MitigationAction
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor action_params: Types::MitigationActionParams
+      SENSITIVE: []
+    end
+
+    class MitigationActionIdentifier
+      attr_accessor action_name: ::String
+      attr_accessor action_arn: ::String
+      attr_accessor creation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class MitigationActionParams
+      attr_accessor update_device_certificate_params: Types::UpdateDeviceCertificateParams
+      attr_accessor update_ca_certificate_params: Types::UpdateCACertificateParams
+      attr_accessor add_things_to_thing_group_params: Types::AddThingsToThingGroupParams
+      attr_accessor replace_default_policy_version_params: Types::ReplaceDefaultPolicyVersionParams
+      attr_accessor enable_io_t_logging_params: Types::EnableIoTLoggingParams
+      attr_accessor publish_finding_to_sns_params: Types::PublishFindingToSnsParams
+      SENSITIVE: []
+    end
+
+    class MqttContext
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      attr_accessor client_id: ::String
+      SENSITIVE: []
+    end
+
+    class MqttHeaders
+      attr_accessor payload_format_indicator: ::String
+      attr_accessor content_type: ::String
+      attr_accessor response_topic: ::String
+      attr_accessor correlation_data: ::String
+      attr_accessor message_expiry: ::String
+      attr_accessor user_properties: ::Array[Types::UserProperty]
+      SENSITIVE: []
+    end
+
+    class NonCompliantResource
+      attr_accessor resource_type: ("DEVICE_CERTIFICATE" | "CA_CERTIFICATE" | "IOT_POLICY" | "COGNITO_IDENTITY_POOL" | "CLIENT_ID" | "ACCOUNT_SETTINGS" | "ROLE_ALIAS" | "IAM_ROLE" | "ISSUER_CERTIFICATE")
+      attr_accessor resource_identifier: Types::ResourceIdentifier
+      attr_accessor additional_info: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class NotConfiguredException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OTAUpdateFile
+      attr_accessor file_name: ::String
+      attr_accessor file_type: ::Integer
+      attr_accessor file_version: ::String
+      attr_accessor file_location: Types::FileLocation
+      attr_accessor code_signing: Types::CodeSigning
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class OTAUpdateInfo
+      attr_accessor ota_update_id: ::String
+      attr_accessor ota_update_arn: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      attr_accessor description: ::String
+      attr_accessor targets: ::Array[::String]
+      attr_accessor protocols: ::Array[("MQTT" | "HTTP")]
+      attr_accessor aws_job_executions_rollout_config: Types::AwsJobExecutionsRolloutConfig
+      attr_accessor aws_job_presigned_url_config: Types::AwsJobPresignedUrlConfig
+      attr_accessor target_selection: ("CONTINUOUS" | "SNAPSHOT")
+      attr_accessor ota_update_files: ::Array[Types::OTAUpdateFile]
+      attr_accessor ota_update_status: ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
+      attr_accessor aws_iot_job_id: ::String
+      attr_accessor aws_iot_job_arn: ::String
+      attr_accessor error_info: Types::ErrorInfo
+      attr_accessor additional_parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class OTAUpdateSummary
+      attr_accessor ota_update_id: ::String
+      attr_accessor ota_update_arn: ::String
+      attr_accessor creation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class OpenSearchAction
+      attr_accessor role_arn: ::String
+      attr_accessor endpoint: ::String
+      attr_accessor index: ::String
+      attr_accessor type: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class OutgoingCertificate
+      attr_accessor certificate_arn: ::String
+      attr_accessor certificate_id: ::String
+      attr_accessor transferred_to: ::String
+      attr_accessor transfer_date: ::Time
+      attr_accessor transfer_message: ::String
+      attr_accessor creation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class PackageSummary
+      attr_accessor package_name: ::String
+      attr_accessor default_version_name: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      SENSITIVE: []
+    end
+
+    class PackageVersionSummary
+      attr_accessor package_name: ::String
+      attr_accessor version_name: ::String
+      attr_accessor status: ("DRAFT" | "PUBLISHED" | "DEPRECATED")
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      SENSITIVE: []
+    end
+
+    class PercentPair
+      attr_accessor percent: ::Float
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class Policy
+      attr_accessor policy_name: ::String
+      attr_accessor policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyVersion
+      attr_accessor version_id: ::String
+      attr_accessor is_default_version: bool
+      attr_accessor create_date: ::Time
+      SENSITIVE: []
+    end
+
+    class PolicyVersionIdentifier
+      attr_accessor policy_name: ::String
+      attr_accessor policy_version_id: ::String
+      SENSITIVE: []
+    end
+
+    class PresignedUrlConfig
+      attr_accessor role_arn: ::String
+      attr_accessor expires_in_sec: ::Integer
+      SENSITIVE: []
+    end
+
+    class ProvisioningHook
+      attr_accessor payload_version: ::String
+      attr_accessor target_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ProvisioningTemplateSummary
+      attr_accessor template_arn: ::String
+      attr_accessor template_name: ::String
+      attr_accessor description: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      attr_accessor enabled: bool
+      attr_accessor type: ("FLEET_PROVISIONING" | "JITP")
+      SENSITIVE: []
+    end
+
+    class ProvisioningTemplateVersionSummary
+      attr_accessor version_id: ::Integer
+      attr_accessor creation_date: ::Time
+      attr_accessor is_default_version: bool
+      SENSITIVE: []
+    end
+
+    class PublishFindingToSnsParams
+      attr_accessor topic_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutAssetPropertyValueEntry
+      attr_accessor entry_id: ::String
+      attr_accessor asset_id: ::String
+      attr_accessor property_id: ::String
+      attr_accessor property_alias: ::String
+      attr_accessor property_values: ::Array[Types::AssetPropertyValue]
+      SENSITIVE: []
+    end
+
+    class PutItemInput
+      attr_accessor table_name: ::String
+      SENSITIVE: []
+    end
+
+    class PutVerificationStateOnViolationRequest
+      attr_accessor violation_id: ::String
+      attr_accessor verification_state: ("FALSE_POSITIVE" | "BENIGN_POSITIVE" | "TRUE_POSITIVE" | "UNKNOWN")
+      attr_accessor verification_state_description: ::String
+      SENSITIVE: []
+    end
+
+    class PutVerificationStateOnViolationResponse < Aws::EmptyStructure
+    end
+
+    class RateIncreaseCriteria
+      attr_accessor number_of_notified_things: ::Integer
+      attr_accessor number_of_succeeded_things: ::Integer
+      SENSITIVE: []
+    end
+
+    class RegisterCACertificateRequest
+      attr_accessor ca_certificate: ::String
+      attr_accessor verification_certificate: ::String
+      attr_accessor set_as_active: bool
+      attr_accessor allow_auto_registration: bool
+      attr_accessor registration_config: Types::RegistrationConfig
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor certificate_mode: ("DEFAULT" | "SNI_ONLY")
+      SENSITIVE: []
+    end
+
+    class RegisterCACertificateResponse
+      attr_accessor certificate_arn: ::String
+      attr_accessor certificate_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterCertificateRequest
+      attr_accessor certificate_pem: ::String
+      attr_accessor ca_certificate_pem: ::String
+      attr_accessor set_as_active: bool
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "REVOKED" | "PENDING_TRANSFER" | "REGISTER_INACTIVE" | "PENDING_ACTIVATION")
+      SENSITIVE: []
+    end
+
+    class RegisterCertificateResponse
+      attr_accessor certificate_arn: ::String
+      attr_accessor certificate_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterCertificateWithoutCARequest
+      attr_accessor certificate_pem: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "REVOKED" | "PENDING_TRANSFER" | "REGISTER_INACTIVE" | "PENDING_ACTIVATION")
+      SENSITIVE: []
+    end
+
+    class RegisterCertificateWithoutCAResponse
+      attr_accessor certificate_arn: ::String
+      attr_accessor certificate_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterThingRequest
+      attr_accessor template_body: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RegisterThingResponse
+      attr_accessor certificate_pem: ::String
+      attr_accessor resource_arns: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RegistrationCodeValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RegistrationConfig
+      attr_accessor template_body: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class RejectCertificateTransferRequest
+      attr_accessor certificate_id: ::String
+      attr_accessor reject_reason: ::String
+      SENSITIVE: []
+    end
+
+    class RelatedResource
+      attr_accessor resource_type: ("DEVICE_CERTIFICATE" | "CA_CERTIFICATE" | "IOT_POLICY" | "COGNITO_IDENTITY_POOL" | "CLIENT_ID" | "ACCOUNT_SETTINGS" | "ROLE_ALIAS" | "IAM_ROLE" | "ISSUER_CERTIFICATE")
+      attr_accessor resource_identifier: Types::ResourceIdentifier
+      attr_accessor additional_info: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RemoveThingFromBillingGroupRequest
+      attr_accessor billing_group_name: ::String
+      attr_accessor billing_group_arn: ::String
+      attr_accessor thing_name: ::String
+      attr_accessor thing_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveThingFromBillingGroupResponse < Aws::EmptyStructure
+    end
+
+    class RemoveThingFromThingGroupRequest
+      attr_accessor thing_group_name: ::String
+      attr_accessor thing_group_arn: ::String
+      attr_accessor thing_name: ::String
+      attr_accessor thing_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveThingFromThingGroupResponse < Aws::EmptyStructure
+    end
+
+    class ReplaceDefaultPolicyVersionParams
+      attr_accessor template_name: ("BLANK_POLICY")
+      SENSITIVE: []
+    end
+
+    class ReplaceTopicRuleRequest
+      attr_accessor rule_name: ::String
+      attr_accessor topic_rule_payload: Types::TopicRulePayload
+      SENSITIVE: []
+    end
+
+    class RepublishAction
+      attr_accessor role_arn: ::String
+      attr_accessor topic: ::String
+      attr_accessor qos: ::Integer
+      attr_accessor headers: Types::MqttHeaders
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyExistsException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceIdentifier
+      attr_accessor device_certificate_id: ::String
+      attr_accessor ca_certificate_id: ::String
+      attr_accessor cognito_identity_pool_id: ::String
+      attr_accessor client_id: ::String
+      attr_accessor policy_version_identifier: Types::PolicyVersionIdentifier
+      attr_accessor account: ::String
+      attr_accessor iam_role_arn: ::String
+      attr_accessor role_alias_arn: ::String
+      attr_accessor issuer_certificate_identifier: Types::IssuerCertificateIdentifier
+      attr_accessor device_certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceRegistrationFailureException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RetryCriteria
+      attr_accessor failure_type: ("FAILED" | "TIMED_OUT" | "ALL")
+      attr_accessor number_of_retries: ::Integer
+      SENSITIVE: []
+    end
+
+    class RoleAliasDescription
+      attr_accessor role_alias: ::String
+      attr_accessor role_alias_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor owner: ::String
+      attr_accessor credential_duration_seconds: ::Integer
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      SENSITIVE: []
+    end
+
+    class S3Action
+      attr_accessor role_arn: ::String
+      attr_accessor bucket_name: ::String
+      attr_accessor key: ::String
+      attr_accessor canned_acl: ("private" | "public-read" | "public-read-write" | "aws-exec-read" | "authenticated-read" | "bucket-owner-read" | "bucket-owner-full-control" | "log-delivery-write")
+      SENSITIVE: []
+    end
+
+    class S3Destination
+      attr_accessor bucket: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class S3Location
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class SalesforceAction
+      attr_accessor token: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class ScheduledAuditMetadata
+      attr_accessor scheduled_audit_name: ::String
+      attr_accessor scheduled_audit_arn: ::String
+      attr_accessor frequency: ("DAILY" | "WEEKLY" | "BIWEEKLY" | "MONTHLY")
+      attr_accessor day_of_month: ::String
+      attr_accessor day_of_week: ("SUN" | "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT")
+      SENSITIVE: []
+    end
+
+    class ScheduledJobRollout
+      attr_accessor start_time: ::String
+      SENSITIVE: []
+    end
+
+    class SchedulingConfig
+      attr_accessor start_time: ::String
+      attr_accessor end_time: ::String
+      attr_accessor end_behavior: ("STOP_ROLLOUT" | "CANCEL" | "FORCE_CANCEL")
+      attr_accessor maintenance_windows: ::Array[Types::MaintenanceWindow]
+      SENSITIVE: []
+    end
+
+    class SearchIndexRequest
+      attr_accessor index_name: ::String
+      attr_accessor query_string: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor query_version: ::String
+      SENSITIVE: []
+    end
+
+    class SearchIndexResponse
+      attr_accessor next_token: ::String
+      attr_accessor things: ::Array[Types::ThingDocument]
+      attr_accessor thing_groups: ::Array[Types::ThingGroupDocument]
+      SENSITIVE: []
+    end
+
+    class SecurityProfileIdentifier
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class SecurityProfileTarget
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class SecurityProfileTargetMapping
+      attr_accessor security_profile_identifier: Types::SecurityProfileIdentifier
+      attr_accessor target: Types::SecurityProfileTarget
+      SENSITIVE: []
+    end
+
+    class ServerCertificateSummary
+      attr_accessor server_certificate_arn: ::String
+      attr_accessor server_certificate_status: ("INVALID" | "VALID")
+      attr_accessor server_certificate_status_detail: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SetDefaultAuthorizerRequest
+      attr_accessor authorizer_name: ::String
+      SENSITIVE: []
+    end
+
+    class SetDefaultAuthorizerResponse
+      attr_accessor authorizer_name: ::String
+      attr_accessor authorizer_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SetDefaultPolicyVersionRequest
+      attr_accessor policy_name: ::String
+      attr_accessor policy_version_id: ::String
+      SENSITIVE: []
+    end
+
+    class SetLoggingOptionsRequest
+      attr_accessor logging_options_payload: Types::LoggingOptionsPayload
+      SENSITIVE: []
+    end
+
+    class SetV2LoggingLevelRequest
+      attr_accessor log_target: Types::LogTarget
+      attr_accessor log_level: ("DEBUG" | "INFO" | "ERROR" | "WARN" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class SetV2LoggingOptionsRequest
+      attr_accessor role_arn: ::String
+      attr_accessor default_log_level: ("DEBUG" | "INFO" | "ERROR" | "WARN" | "DISABLED")
+      attr_accessor disable_all_logs: bool
+      SENSITIVE: []
+    end
+
+    class SigV4Authorization
+      attr_accessor signing_region: ::String
+      attr_accessor service_name: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SigningProfileParameter
+      attr_accessor certificate_arn: ::String
+      attr_accessor platform: ::String
+      attr_accessor certificate_path_on_device: ::String
+      SENSITIVE: []
+    end
+
+    class SnsAction
+      attr_accessor target_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor message_format: ("RAW" | "JSON")
+      SENSITIVE: []
+    end
+
+    class SqlParseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SqsAction
+      attr_accessor role_arn: ::String
+      attr_accessor queue_url: ::String
+      attr_accessor use_base_64: bool
+      SENSITIVE: []
+    end
+
+    class StartAuditMitigationActionsTaskRequest
+      attr_accessor task_id: ::String
+      attr_accessor target: Types::AuditMitigationActionsTaskTarget
+      attr_accessor audit_check_to_actions_mapping: ::Hash[::String, ::Array[::String]]
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartAuditMitigationActionsTaskResponse
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartDetectMitigationActionsTaskRequest
+      attr_accessor task_id: ::String
+      attr_accessor target: Types::DetectMitigationActionsTaskTarget
+      attr_accessor actions: ::Array[::String]
+      attr_accessor violation_event_occurrence_range: Types::ViolationEventOccurrenceRange
+      attr_accessor include_only_active_violations: bool
+      attr_accessor include_suppressed_alerts: bool
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartDetectMitigationActionsTaskResponse
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartOnDemandAuditTaskRequest
+      attr_accessor target_check_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StartOnDemandAuditTaskResponse
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartSigningJobParameter
+      attr_accessor signing_profile_parameter: Types::SigningProfileParameter
+      attr_accessor signing_profile_name: ::String
+      attr_accessor destination: Types::Destination
+      SENSITIVE: []
+    end
+
+    class StartThingRegistrationTaskRequest
+      attr_accessor template_body: ::String
+      attr_accessor input_file_bucket: ::String
+      attr_accessor input_file_key: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartThingRegistrationTaskResponse
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class StatisticalThreshold
+      attr_accessor statistic: ::String
+      SENSITIVE: []
+    end
+
+    class Statistics
+      attr_accessor count: ::Integer
+      attr_accessor average: ::Float
+      attr_accessor sum: ::Float
+      attr_accessor minimum: ::Float
+      attr_accessor maximum: ::Float
+      attr_accessor sum_of_squares: ::Float
+      attr_accessor variance: ::Float
+      attr_accessor std_deviation: ::Float
+      SENSITIVE: []
+    end
+
+    class StepFunctionsAction
+      attr_accessor execution_name_prefix: ::String
+      attr_accessor state_machine_name: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopThingRegistrationTaskRequest
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopThingRegistrationTaskResponse < Aws::EmptyStructure
+    end
+
+    class Stream
+      attr_accessor stream_id: ::String
+      attr_accessor file_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class StreamFile
+      attr_accessor file_id: ::Integer
+      attr_accessor s3_location: Types::S3Location
+      SENSITIVE: []
+    end
+
+    class StreamInfo
+      attr_accessor stream_id: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor stream_version: ::Integer
+      attr_accessor description: ::String
+      attr_accessor files: ::Array[Types::StreamFile]
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StreamSummary
+      attr_accessor stream_id: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor stream_version: ::Integer
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TaskAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TaskStatistics
+      attr_accessor total_checks: ::Integer
+      attr_accessor in_progress_checks: ::Integer
+      attr_accessor waiting_for_data_collection_checks: ::Integer
+      attr_accessor compliant_checks: ::Integer
+      attr_accessor non_compliant_checks: ::Integer
+      attr_accessor failed_checks: ::Integer
+      attr_accessor canceled_checks: ::Integer
+      SENSITIVE: []
+    end
+
+    class TaskStatisticsForAuditCheck
+      attr_accessor total_findings_count: ::Integer
+      attr_accessor failed_findings_count: ::Integer
+      attr_accessor succeeded_findings_count: ::Integer
+      attr_accessor skipped_findings_count: ::Integer
+      attr_accessor canceled_findings_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class TermsAggregation
+      attr_accessor max_buckets: ::Integer
+      SENSITIVE: []
+    end
+
+    class TestAuthorizationRequest
+      attr_accessor principal: ::String
+      attr_accessor cognito_identity_pool_id: ::String
+      attr_accessor auth_infos: ::Array[Types::AuthInfo]
+      attr_accessor client_id: ::String
+      attr_accessor policy_names_to_add: ::Array[::String]
+      attr_accessor policy_names_to_skip: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TestAuthorizationResponse
+      attr_accessor auth_results: ::Array[Types::AuthResult]
+      SENSITIVE: []
+    end
+
+    class TestInvokeAuthorizerRequest
+      attr_accessor authorizer_name: ::String
+      attr_accessor token: ::String
+      attr_accessor token_signature: ::String
+      attr_accessor http_context: Types::HttpContext
+      attr_accessor mqtt_context: Types::MqttContext
+      attr_accessor tls_context: Types::TlsContext
+      SENSITIVE: []
+    end
+
+    class TestInvokeAuthorizerResponse
+      attr_accessor is_authenticated: bool
+      attr_accessor principal_id: ::String
+      attr_accessor policy_documents: ::Array[::String]
+      attr_accessor refresh_after_in_seconds: ::Integer
+      attr_accessor disconnect_after_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class ThingAttribute
+      attr_accessor thing_name: ::String
+      attr_accessor thing_type_name: ::String
+      attr_accessor thing_arn: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class ThingConnectivity
+      attr_accessor connected: bool
+      attr_accessor timestamp: ::Integer
+      attr_accessor disconnect_reason: ::String
+      SENSITIVE: []
+    end
+
+    class ThingDocument
+      attr_accessor thing_name: ::String
+      attr_accessor thing_id: ::String
+      attr_accessor thing_type_name: ::String
+      attr_accessor thing_group_names: ::Array[::String]
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor shadow: ::String
+      attr_accessor device_defender: ::String
+      attr_accessor connectivity: Types::ThingConnectivity
+      SENSITIVE: []
+    end
+
+    class ThingGroupDocument
+      attr_accessor thing_group_name: ::String
+      attr_accessor thing_group_id: ::String
+      attr_accessor thing_group_description: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor parent_group_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ThingGroupIndexingConfiguration
+      attr_accessor thing_group_indexing_mode: ("OFF" | "ON")
+      attr_accessor managed_fields: ::Array[Types::Field]
+      attr_accessor custom_fields: ::Array[Types::Field]
+      SENSITIVE: []
+    end
+
+    class ThingGroupMetadata
+      attr_accessor parent_group_name: ::String
+      attr_accessor root_to_parent_thing_groups: ::Array[Types::GroupNameAndArn]
+      attr_accessor creation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class ThingGroupProperties
+      attr_accessor thing_group_description: ::String
+      attr_accessor attribute_payload: Types::AttributePayload
+      SENSITIVE: []
+    end
+
+    class ThingIndexingConfiguration
+      attr_accessor thing_indexing_mode: ("OFF" | "REGISTRY" | "REGISTRY_AND_SHADOW")
+      attr_accessor thing_connectivity_indexing_mode: ("OFF" | "STATUS")
+      attr_accessor device_defender_indexing_mode: ("OFF" | "VIOLATIONS")
+      attr_accessor named_shadow_indexing_mode: ("OFF" | "ON")
+      attr_accessor managed_fields: ::Array[Types::Field]
+      attr_accessor custom_fields: ::Array[Types::Field]
+      attr_accessor filter: Types::IndexingFilter
+      SENSITIVE: []
+    end
+
+    class ThingTypeDefinition
+      attr_accessor thing_type_name: ::String
+      attr_accessor thing_type_arn: ::String
+      attr_accessor thing_type_properties: Types::ThingTypeProperties
+      attr_accessor thing_type_metadata: Types::ThingTypeMetadata
+      SENSITIVE: []
+    end
+
+    class ThingTypeMetadata
+      attr_accessor deprecated: bool
+      attr_accessor deprecation_date: ::Time
+      attr_accessor creation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class ThingTypeProperties
+      attr_accessor thing_type_description: ::String
+      attr_accessor searchable_attributes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TimeoutConfig
+      attr_accessor in_progress_timeout_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class TimestreamAction
+      attr_accessor role_arn: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor dimensions: ::Array[Types::TimestreamDimension]
+      attr_accessor timestamp: Types::TimestreamTimestamp
+      SENSITIVE: []
+    end
+
+    class TimestreamDimension
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TimestreamTimestamp
+      attr_accessor value: ::String
+      attr_accessor unit: ::String
+      SENSITIVE: []
+    end
+
+    class TlsConfig
+      attr_accessor security_policy: ::String
+      SENSITIVE: []
+    end
+
+    class TlsContext
+      attr_accessor server_name: ::String
+      SENSITIVE: []
+    end
+
+    class TopicRule
+      attr_accessor rule_name: ::String
+      attr_accessor sql: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor actions: ::Array[Types::Action]
+      attr_accessor rule_disabled: bool
+      attr_accessor aws_iot_sql_version: ::String
+      attr_accessor error_action: Types::Action
+      SENSITIVE: []
+    end
+
+    class TopicRuleDestination
+      attr_accessor arn: ::String
+      attr_accessor status: ("ENABLED" | "IN_PROGRESS" | "DISABLED" | "ERROR" | "DELETING")
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor status_reason: ::String
+      attr_accessor http_url_properties: Types::HttpUrlDestinationProperties
+      attr_accessor vpc_properties: Types::VpcDestinationProperties
+      SENSITIVE: []
+    end
+
+    class TopicRuleDestinationConfiguration
+      attr_accessor http_url_configuration: Types::HttpUrlDestinationConfiguration
+      attr_accessor vpc_configuration: Types::VpcDestinationConfiguration
+      SENSITIVE: []
+    end
+
+    class TopicRuleDestinationSummary
+      attr_accessor arn: ::String
+      attr_accessor status: ("ENABLED" | "IN_PROGRESS" | "DISABLED" | "ERROR" | "DELETING")
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor status_reason: ::String
+      attr_accessor http_url_summary: Types::HttpUrlDestinationSummary
+      attr_accessor vpc_destination_summary: Types::VpcDestinationSummary
+      SENSITIVE: []
+    end
+
+    class TopicRuleListItem
+      attr_accessor rule_arn: ::String
+      attr_accessor rule_name: ::String
+      attr_accessor topic_pattern: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor rule_disabled: bool
+      SENSITIVE: []
+    end
+
+    class TopicRulePayload
+      attr_accessor sql: ::String
+      attr_accessor description: ::String
+      attr_accessor actions: ::Array[Types::Action]
+      attr_accessor rule_disabled: bool
+      attr_accessor aws_iot_sql_version: ::String
+      attr_accessor error_action: Types::Action
+      SENSITIVE: []
+    end
+
+    class TransferAlreadyCompletedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TransferCertificateRequest
+      attr_accessor certificate_id: ::String
+      attr_accessor target_aws_account: ::String
+      attr_accessor transfer_message: ::String
+      SENSITIVE: []
+    end
+
+    class TransferCertificateResponse
+      attr_accessor transferred_certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class TransferConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TransferData
+      attr_accessor transfer_message: ::String
+      attr_accessor reject_reason: ::String
+      attr_accessor transfer_date: ::Time
+      attr_accessor accept_date: ::Time
+      attr_accessor reject_date: ::Time
+      SENSITIVE: []
+    end
+
+    class UnauthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAccountAuditConfigurationRequest
+      attr_accessor role_arn: ::String
+      attr_accessor audit_notification_target_configurations: ::Hash[("SNS"), Types::AuditNotificationTarget]
+      attr_accessor audit_check_configurations: ::Hash[::String, Types::AuditCheckConfiguration]
+      SENSITIVE: []
+    end
+
+    class UpdateAccountAuditConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAuditSuppressionRequest
+      attr_accessor check_name: ::String
+      attr_accessor resource_identifier: Types::ResourceIdentifier
+      attr_accessor expiration_date: ::Time
+      attr_accessor suppress_indefinitely: bool
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAuditSuppressionResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAuthorizerRequest
+      attr_accessor authorizer_name: ::String
+      attr_accessor authorizer_function_arn: ::String
+      attr_accessor token_key_name: ::String
+      attr_accessor token_signing_public_keys: ::Hash[::String, ::String]
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor enable_caching_for_http: bool
+      SENSITIVE: []
+    end
+
+    class UpdateAuthorizerResponse
+      attr_accessor authorizer_name: ::String
+      attr_accessor authorizer_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBillingGroupRequest
+      attr_accessor billing_group_name: ::String
+      attr_accessor billing_group_properties: Types::BillingGroupProperties
+      attr_accessor expected_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateBillingGroupResponse
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateCACertificateParams
+      attr_accessor action: ("DEACTIVATE")
+      SENSITIVE: []
+    end
+
+    class UpdateCACertificateRequest
+      attr_accessor certificate_id: ::String
+      attr_accessor new_status: ("ACTIVE" | "INACTIVE")
+      attr_accessor new_auto_registration_status: ("ENABLE" | "DISABLE")
+      attr_accessor registration_config: Types::RegistrationConfig
+      attr_accessor remove_auto_registration: bool
+      SENSITIVE: []
+    end
+
+    class UpdateCertificateProviderRequest
+      attr_accessor certificate_provider_name: ::String
+      attr_accessor lambda_function_arn: ::String
+      attr_accessor account_default_for_operations: ::Array[("CreateCertificateFromCsr")]
+      SENSITIVE: []
+    end
+
+    class UpdateCertificateProviderResponse
+      attr_accessor certificate_provider_name: ::String
+      attr_accessor certificate_provider_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCertificateRequest
+      attr_accessor certificate_id: ::String
+      attr_accessor new_status: ("ACTIVE" | "INACTIVE" | "REVOKED" | "PENDING_TRANSFER" | "REGISTER_INACTIVE" | "PENDING_ACTIVATION")
+      SENSITIVE: []
+    end
+
+    class UpdateCustomMetricRequest
+      attr_accessor metric_name: ::String
+      attr_accessor display_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCustomMetricResponse
+      attr_accessor metric_name: ::String
+      attr_accessor metric_arn: ::String
+      attr_accessor metric_type: ("string-list" | "ip-address-list" | "number-list" | "number")
+      attr_accessor display_name: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateDeviceCertificateParams
+      attr_accessor action: ("DEACTIVATE")
+      SENSITIVE: []
+    end
+
+    class UpdateDimensionRequest
+      attr_accessor name: ::String
+      attr_accessor string_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateDimensionResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor type: ("TOPIC_FILTER")
+      attr_accessor string_values: ::Array[::String]
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateDomainConfigurationRequest
+      attr_accessor domain_configuration_name: ::String
+      attr_accessor authorizer_config: Types::AuthorizerConfig
+      attr_accessor domain_configuration_status: ("ENABLED" | "DISABLED")
+      attr_accessor remove_authorizer_config: bool
+      attr_accessor tls_config: Types::TlsConfig
+      SENSITIVE: []
+    end
+
+    class UpdateDomainConfigurationResponse
+      attr_accessor domain_configuration_name: ::String
+      attr_accessor domain_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDynamicThingGroupRequest
+      attr_accessor thing_group_name: ::String
+      attr_accessor thing_group_properties: Types::ThingGroupProperties
+      attr_accessor expected_version: ::Integer
+      attr_accessor index_name: ::String
+      attr_accessor query_string: ::String
+      attr_accessor query_version: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDynamicThingGroupResponse
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateEventConfigurationsRequest
+      attr_accessor event_configurations: ::Hash[("THING" | "THING_GROUP" | "THING_TYPE" | "THING_GROUP_MEMBERSHIP" | "THING_GROUP_HIERARCHY" | "THING_TYPE_ASSOCIATION" | "JOB" | "JOB_EXECUTION" | "POLICY" | "CERTIFICATE" | "CA_CERTIFICATE"), Types::Configuration]
+      SENSITIVE: []
+    end
+
+    class UpdateEventConfigurationsResponse < Aws::EmptyStructure
+    end
+
+    class UpdateFleetMetricRequest
+      attr_accessor metric_name: ::String
+      attr_accessor query_string: ::String
+      attr_accessor aggregation_type: Types::AggregationType
+      attr_accessor period: ::Integer
+      attr_accessor aggregation_field: ::String
+      attr_accessor description: ::String
+      attr_accessor query_version: ::String
+      attr_accessor index_name: ::String
+      attr_accessor unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
+      attr_accessor expected_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateIndexingConfigurationRequest
+      attr_accessor thing_indexing_configuration: Types::ThingIndexingConfiguration
+      attr_accessor thing_group_indexing_configuration: Types::ThingGroupIndexingConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateIndexingConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class UpdateJobRequest
+      attr_accessor job_id: ::String
+      attr_accessor description: ::String
+      attr_accessor presigned_url_config: Types::PresignedUrlConfig
+      attr_accessor job_executions_rollout_config: Types::JobExecutionsRolloutConfig
+      attr_accessor abort_config: Types::AbortConfig
+      attr_accessor timeout_config: Types::TimeoutConfig
+      attr_accessor namespace_id: ::String
+      attr_accessor job_executions_retry_config: Types::JobExecutionsRetryConfig
+      SENSITIVE: []
+    end
+
+    class UpdateMitigationActionRequest
+      attr_accessor action_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor action_params: Types::MitigationActionParams
+      SENSITIVE: []
+    end
+
+    class UpdateMitigationActionResponse
+      attr_accessor action_arn: ::String
+      attr_accessor action_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePackageConfigurationRequest
+      attr_accessor version_update_by_jobs_config: Types::VersionUpdateByJobsConfig
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePackageConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class UpdatePackageRequest
+      attr_accessor package_name: ::String
+      attr_accessor description: ::String
+      attr_accessor default_version_name: ::String
+      attr_accessor unset_default_version: bool
+      attr_accessor client_token: ::String
+      SENSITIVE: [:description]
+    end
+
+    class UpdatePackageResponse < Aws::EmptyStructure
+    end
+
+    class UpdatePackageVersionRequest
+      attr_accessor package_name: ::String
+      attr_accessor version_name: ::String
+      attr_accessor description: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor action: ("PUBLISH" | "DEPRECATE")
+      attr_accessor client_token: ::String
+      SENSITIVE: [:description, :attributes]
+    end
+
+    class UpdatePackageVersionResponse < Aws::EmptyStructure
+    end
+
+    class UpdateProvisioningTemplateRequest
+      attr_accessor template_name: ::String
+      attr_accessor description: ::String
+      attr_accessor enabled: bool
+      attr_accessor default_version_id: ::Integer
+      attr_accessor provisioning_role_arn: ::String
+      attr_accessor pre_provisioning_hook: Types::ProvisioningHook
+      attr_accessor remove_pre_provisioning_hook: bool
+      SENSITIVE: []
+    end
+
+    class UpdateProvisioningTemplateResponse < Aws::EmptyStructure
+    end
+
+    class UpdateRoleAliasRequest
+      attr_accessor role_alias: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor credential_duration_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateRoleAliasResponse
+      attr_accessor role_alias: ::String
+      attr_accessor role_alias_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateScheduledAuditRequest
+      attr_accessor frequency: ("DAILY" | "WEEKLY" | "BIWEEKLY" | "MONTHLY")
+      attr_accessor day_of_month: ::String
+      attr_accessor day_of_week: ("SUN" | "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT")
+      attr_accessor target_check_names: ::Array[::String]
+      attr_accessor scheduled_audit_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateScheduledAuditResponse
+      attr_accessor scheduled_audit_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSecurityProfileRequest
+      attr_accessor security_profile_name: ::String
+      attr_accessor security_profile_description: ::String
+      attr_accessor behaviors: ::Array[Types::Behavior]
+      attr_accessor alert_targets: ::Hash[("SNS"), Types::AlertTarget]
+      attr_accessor additional_metrics_to_retain: ::Array[::String]
+      attr_accessor additional_metrics_to_retain_v2: ::Array[Types::MetricToRetain]
+      attr_accessor delete_behaviors: bool
+      attr_accessor delete_alert_targets: bool
+      attr_accessor delete_additional_metrics_to_retain: bool
+      attr_accessor expected_version: ::Integer
+      attr_accessor metrics_export_config: Types::MetricsExportConfig
+      attr_accessor delete_metrics_export_config: bool
+      SENSITIVE: []
+    end
+
+    class UpdateSecurityProfileResponse
+      attr_accessor security_profile_name: ::String
+      attr_accessor security_profile_arn: ::String
+      attr_accessor security_profile_description: ::String
+      attr_accessor behaviors: ::Array[Types::Behavior]
+      attr_accessor alert_targets: ::Hash[("SNS"), Types::AlertTarget]
+      attr_accessor additional_metrics_to_retain: ::Array[::String]
+      attr_accessor additional_metrics_to_retain_v2: ::Array[Types::MetricToRetain]
+      attr_accessor version: ::Integer
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      attr_accessor metrics_export_config: Types::MetricsExportConfig
+      SENSITIVE: []
+    end
+
+    class UpdateStreamRequest
+      attr_accessor stream_id: ::String
+      attr_accessor description: ::String
+      attr_accessor files: ::Array[Types::StreamFile]
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateStreamResponse
+      attr_accessor stream_id: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor stream_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateThingGroupRequest
+      attr_accessor thing_group_name: ::String
+      attr_accessor thing_group_properties: Types::ThingGroupProperties
+      attr_accessor expected_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateThingGroupResponse
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateThingGroupsForThingRequest
+      attr_accessor thing_name: ::String
+      attr_accessor thing_groups_to_add: ::Array[::String]
+      attr_accessor thing_groups_to_remove: ::Array[::String]
+      attr_accessor override_dynamic_groups: bool
+      SENSITIVE: []
+    end
+
+    class UpdateThingGroupsForThingResponse < Aws::EmptyStructure
+    end
+
+    class UpdateThingRequest
+      attr_accessor thing_name: ::String
+      attr_accessor thing_type_name: ::String
+      attr_accessor attribute_payload: Types::AttributePayload
+      attr_accessor expected_version: ::Integer
+      attr_accessor remove_thing_type: bool
+      SENSITIVE: []
+    end
+
+    class UpdateThingResponse < Aws::EmptyStructure
+    end
+
+    class UpdateTopicRuleDestinationRequest
+      attr_accessor arn: ::String
+      attr_accessor status: ("ENABLED" | "IN_PROGRESS" | "DISABLED" | "ERROR" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class UpdateTopicRuleDestinationResponse < Aws::EmptyStructure
+    end
+
+    class UserProperty
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ValidateSecurityProfileBehaviorsRequest
+      attr_accessor behaviors: ::Array[Types::Behavior]
+      SENSITIVE: []
+    end
+
+    class ValidateSecurityProfileBehaviorsResponse
+      attr_accessor valid: bool
+      attr_accessor validation_errors: ::Array[Types::ValidationError]
+      SENSITIVE: []
+    end
+
+    class ValidationError
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VersionConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VersionUpdateByJobsConfig
+      attr_accessor enabled: bool
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class VersionsLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ViolationEvent
+      attr_accessor violation_id: ::String
+      attr_accessor thing_name: ::String
+      attr_accessor security_profile_name: ::String
+      attr_accessor behavior: Types::Behavior
+      attr_accessor metric_value: Types::MetricValue
+      attr_accessor violation_event_additional_info: Types::ViolationEventAdditionalInfo
+      attr_accessor violation_event_type: ("in-alarm" | "alarm-cleared" | "alarm-invalidated")
+      attr_accessor verification_state: ("FALSE_POSITIVE" | "BENIGN_POSITIVE" | "TRUE_POSITIVE" | "UNKNOWN")
+      attr_accessor verification_state_description: ::String
+      attr_accessor violation_event_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ViolationEventAdditionalInfo
+      attr_accessor confidence_level: ("LOW" | "MEDIUM" | "HIGH")
+      SENSITIVE: []
+    end
+
+    class ViolationEventOccurrenceRange
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class VpcDestinationConfiguration
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor vpc_id: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class VpcDestinationProperties
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor vpc_id: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class VpcDestinationSummary
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor vpc_id: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+  end
+end

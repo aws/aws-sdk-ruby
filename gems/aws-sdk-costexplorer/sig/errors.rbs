@@ -1,0 +1,54 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CostExplorer
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class BillExpirationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DataUnavailableException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class GenerationExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class RequestChangedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def resource_name: () -> ::String
+      end
+      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyTagsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def resource_name: () -> ::String
+      end
+      class UnknownMonitorException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnknownSubscriptionException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnresolvableUsageUnitException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

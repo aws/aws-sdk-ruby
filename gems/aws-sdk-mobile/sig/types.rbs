@@ -1,0 +1,195 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Mobile
+  module Types
+
+    class AccountActionRequiredException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BundleDetails
+      attr_accessor bundle_id: ::String
+      attr_accessor title: ::String
+      attr_accessor version: ::String
+      attr_accessor description: ::String
+      attr_accessor icon_url: ::String
+      attr_accessor available_platforms: ::Array[("OSX" | "WINDOWS" | "LINUX" | "OBJC" | "SWIFT" | "ANDROID" | "JAVASCRIPT")]
+      SENSITIVE: []
+    end
+
+    class CreateProjectRequest
+      attr_accessor name: ::String
+      attr_accessor region: ::String
+      attr_accessor contents: ::String
+      attr_accessor snapshot_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProjectResult
+      attr_accessor details: Types::ProjectDetails
+      SENSITIVE: []
+    end
+
+    class DeleteProjectRequest
+      attr_accessor project_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProjectResult
+      attr_accessor deleted_resources: ::Array[Types::Resource]
+      attr_accessor orphaned_resources: ::Array[Types::Resource]
+      SENSITIVE: []
+    end
+
+    class DescribeBundleRequest
+      attr_accessor bundle_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBundleResult
+      attr_accessor details: Types::BundleDetails
+      SENSITIVE: []
+    end
+
+    class DescribeProjectRequest
+      attr_accessor project_id: ::String
+      attr_accessor sync_from_resources: bool
+      SENSITIVE: []
+    end
+
+    class DescribeProjectResult
+      attr_accessor details: Types::ProjectDetails
+      SENSITIVE: []
+    end
+
+    class ExportBundleRequest
+      attr_accessor bundle_id: ::String
+      attr_accessor project_id: ::String
+      attr_accessor platform: ("OSX" | "WINDOWS" | "LINUX" | "OBJC" | "SWIFT" | "ANDROID" | "JAVASCRIPT")
+      SENSITIVE: []
+    end
+
+    class ExportBundleResult
+      attr_accessor download_url: ::String
+      SENSITIVE: []
+    end
+
+    class ExportProjectRequest
+      attr_accessor project_id: ::String
+      SENSITIVE: []
+    end
+
+    class ExportProjectResult
+      attr_accessor download_url: ::String
+      attr_accessor share_url: ::String
+      attr_accessor snapshot_id: ::String
+      SENSITIVE: []
+    end
+
+    class InternalFailureException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor retry_after_seconds: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListBundlesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBundlesResult
+      attr_accessor bundle_list: ::Array[Types::BundleDetails]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProjectsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProjectsResult
+      attr_accessor projects: ::Array[Types::ProjectSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ProjectDetails
+      attr_accessor name: ::String
+      attr_accessor project_id: ::String
+      attr_accessor region: ::String
+      attr_accessor state: ("NORMAL" | "SYNCING" | "IMPORTING")
+      attr_accessor created_date: ::Time
+      attr_accessor last_updated_date: ::Time
+      attr_accessor console_url: ::String
+      attr_accessor resources: ::Array[Types::Resource]
+      SENSITIVE: []
+    end
+
+    class ProjectSummary
+      attr_accessor name: ::String
+      attr_accessor project_id: ::String
+      SENSITIVE: []
+    end
+
+    class Resource
+      attr_accessor type: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor feature: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor retry_after_seconds: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor retry_after_seconds: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnauthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProjectRequest
+      attr_accessor contents: ::String
+      attr_accessor project_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProjectResult
+      attr_accessor details: Types::ProjectDetails
+      SENSITIVE: []
+    end
+  end
+end

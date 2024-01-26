@@ -1,0 +1,194 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CostandUsageReportService
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostandUsageReportService/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _DeleteReportDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteReportDefinitionResponse]
+        def response_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostandUsageReportService/Client.html#delete_report_definition-instance_method
+      def delete_report_definition: (
+                                      report_name: ::String
+                                    ) -> _DeleteReportDefinitionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteReportDefinitionResponseSuccess
+
+      interface _DescribeReportDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReportDefinitionsResponse]
+        def report_definitions: () -> ::Array[Types::ReportDefinition]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostandUsageReportService/Client.html#describe_report_definitions-instance_method
+      def describe_report_definitions: (
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _DescribeReportDefinitionsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReportDefinitionsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostandUsageReportService/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    report_name: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ModifyReportDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyReportDefinitionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostandUsageReportService/Client.html#modify_report_definition-instance_method
+      def modify_report_definition: (
+                                      report_name: ::String,
+                                      report_definition: {
+                                        report_name: ::String,
+                                        time_unit: ("HOURLY" | "DAILY" | "MONTHLY"),
+                                        format: ("textORcsv" | "Parquet"),
+                                        compression: ("ZIP" | "GZIP" | "Parquet"),
+                                        additional_schema_elements: Array[("RESOURCES" | "SPLIT_COST_ALLOCATION_DATA" | "MANUAL_DISCOUNT_COMPATIBILITY")],
+                                        s3_bucket: ::String,
+                                        s3_prefix: ::String,
+                                        s3_region: ("af-south-1" | "ap-east-1" | "ap-south-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "ca-central-1" | "eu-central-1" | "eu-central-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-north-1" | "eu-south-1" | "eu-south-2" | "me-central-1" | "me-south-1" | "sa-east-1" | "us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "cn-north-1" | "cn-northwest-1"),
+                                        additional_artifacts: Array[("REDSHIFT" | "QUICKSIGHT" | "ATHENA")]?,
+                                        refresh_closed_reports: bool?,
+                                        report_versioning: ("CREATE_NEW_REPORT" | "OVERWRITE_REPORT")?,
+                                        billing_view_arn: ::String?,
+                                        report_status: {
+                                          last_delivery: ::String?,
+                                          last_status: ("SUCCESS" | "ERROR_PERMISSIONS" | "ERROR_NO_BUCKET")?
+                                        }?
+                                      }
+                                    ) -> _ModifyReportDefinitionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyReportDefinitionResponseSuccess
+
+      interface _PutReportDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutReportDefinitionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostandUsageReportService/Client.html#put_report_definition-instance_method
+      def put_report_definition: (
+                                   report_definition: {
+                                     report_name: ::String,
+                                     time_unit: ("HOURLY" | "DAILY" | "MONTHLY"),
+                                     format: ("textORcsv" | "Parquet"),
+                                     compression: ("ZIP" | "GZIP" | "Parquet"),
+                                     additional_schema_elements: Array[("RESOURCES" | "SPLIT_COST_ALLOCATION_DATA" | "MANUAL_DISCOUNT_COMPATIBILITY")],
+                                     s3_bucket: ::String,
+                                     s3_prefix: ::String,
+                                     s3_region: ("af-south-1" | "ap-east-1" | "ap-south-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "ca-central-1" | "eu-central-1" | "eu-central-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-north-1" | "eu-south-1" | "eu-south-2" | "me-central-1" | "me-south-1" | "sa-east-1" | "us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "cn-north-1" | "cn-northwest-1"),
+                                     additional_artifacts: Array[("REDSHIFT" | "QUICKSIGHT" | "ATHENA")]?,
+                                     refresh_closed_reports: bool?,
+                                     report_versioning: ("CREATE_NEW_REPORT" | "OVERWRITE_REPORT")?,
+                                     billing_view_arn: ::String?,
+                                     report_status: {
+                                       last_delivery: ::String?,
+                                       last_status: ("SUCCESS" | "ERROR_PERMISSIONS" | "ERROR_NO_BUCKET")?
+                                     }?
+                                   },
+                                   ?tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ]
+                                 ) -> _PutReportDefinitionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutReportDefinitionResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostandUsageReportService/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          report_name: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostandUsageReportService/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            report_name: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+    end
+  end
+end
+

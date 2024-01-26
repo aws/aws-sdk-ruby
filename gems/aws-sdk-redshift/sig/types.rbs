@@ -1,0 +1,2812 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Redshift
+  module Types
+
+    class AcceptReservedNodeExchangeInputMessage
+      attr_accessor reserved_node_id: ::String
+      attr_accessor target_reserved_node_offering_id: ::String
+      SENSITIVE: []
+    end
+
+    class AcceptReservedNodeExchangeOutputMessage
+      attr_accessor exchanged_reserved_node: Types::ReservedNode
+      SENSITIVE: []
+    end
+
+    class AccessToClusterDeniedFault < Aws::EmptyStructure
+    end
+
+    class AccessToSnapshotDeniedFault < Aws::EmptyStructure
+    end
+
+    class AccountAttribute
+      attr_accessor attribute_name: ::String
+      attr_accessor attribute_values: ::Array[Types::AttributeValueTarget]
+      SENSITIVE: []
+    end
+
+    class AccountAttributeList
+      attr_accessor account_attributes: ::Array[Types::AccountAttribute]
+      SENSITIVE: []
+    end
+
+    class AccountWithRestoreAccess
+      attr_accessor account_id: ::String
+      attr_accessor account_alias: ::String
+      SENSITIVE: []
+    end
+
+    class AquaConfiguration
+      attr_accessor aqua_status: ("enabled" | "disabled" | "applying")
+      attr_accessor aqua_configuration_status: ("enabled" | "disabled" | "auto")
+      SENSITIVE: []
+    end
+
+    class AssociateDataShareConsumerMessage
+      attr_accessor data_share_arn: ::String
+      attr_accessor associate_entire_account: bool
+      attr_accessor consumer_arn: ::String
+      attr_accessor consumer_region: ::String
+      attr_accessor allow_writes: bool
+      SENSITIVE: []
+    end
+
+    class Association
+      attr_accessor custom_domain_certificate_arn: ::String
+      attr_accessor custom_domain_certificate_expiry_date: ::Time
+      attr_accessor certificate_associations: ::Array[Types::CertificateAssociation]
+      SENSITIVE: []
+    end
+
+    class AttributeValueTarget
+      attr_accessor attribute_value: ::String
+      SENSITIVE: []
+    end
+
+    class AuthenticationProfile
+      attr_accessor authentication_profile_name: ::String
+      attr_accessor authentication_profile_content: ::String
+      SENSITIVE: []
+    end
+
+    class AuthenticationProfileAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class AuthenticationProfileNotFoundFault < Aws::EmptyStructure
+    end
+
+    class AuthenticationProfileQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class AuthorizationAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class AuthorizationNotFoundFault < Aws::EmptyStructure
+    end
+
+    class AuthorizationQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class AuthorizeClusterSecurityGroupIngressMessage
+      attr_accessor cluster_security_group_name: ::String
+      attr_accessor cidrip: ::String
+      attr_accessor ec2_security_group_name: ::String
+      attr_accessor ec2_security_group_owner_id: ::String
+      SENSITIVE: []
+    end
+
+    class AuthorizeClusterSecurityGroupIngressResult
+      attr_accessor cluster_security_group: Types::ClusterSecurityGroup
+      SENSITIVE: []
+    end
+
+    class AuthorizeDataShareMessage
+      attr_accessor data_share_arn: ::String
+      attr_accessor consumer_identifier: ::String
+      attr_accessor allow_writes: bool
+      SENSITIVE: []
+    end
+
+    class AuthorizeEndpointAccessMessage
+      attr_accessor cluster_identifier: ::String
+      attr_accessor account: ::String
+      attr_accessor vpc_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AuthorizeSnapshotAccessMessage
+      attr_accessor snapshot_identifier: ::String
+      attr_accessor snapshot_arn: ::String
+      attr_accessor snapshot_cluster_identifier: ::String
+      attr_accessor account_with_restore_access: ::String
+      SENSITIVE: []
+    end
+
+    class AuthorizeSnapshotAccessResult
+      attr_accessor snapshot: Types::Snapshot
+      SENSITIVE: []
+    end
+
+    class AuthorizedTokenIssuer
+      attr_accessor trusted_token_issuer_arn: ::String
+      attr_accessor authorized_audiences_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AvailabilityZone
+      attr_accessor name: ::String
+      attr_accessor supported_platforms: ::Array[Types::SupportedPlatform]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteClusterSnapshotsRequest
+      attr_accessor identifiers: ::Array[Types::DeleteClusterSnapshotMessage]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteClusterSnapshotsResult
+      attr_accessor resources: ::Array[::String]
+      attr_accessor errors: ::Array[Types::SnapshotErrorMessage]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteRequestSizeExceededFault < Aws::EmptyStructure
+    end
+
+    class BatchModifyClusterSnapshotsLimitExceededFault < Aws::EmptyStructure
+    end
+
+    class BatchModifyClusterSnapshotsMessage
+      attr_accessor snapshot_identifier_list: ::Array[::String]
+      attr_accessor manual_snapshot_retention_period: ::Integer
+      attr_accessor force: bool
+      SENSITIVE: []
+    end
+
+    class BatchModifyClusterSnapshotsOutputMessage
+      attr_accessor resources: ::Array[::String]
+      attr_accessor errors: ::Array[Types::SnapshotErrorMessage]
+      SENSITIVE: []
+    end
+
+    class BucketNotFoundFault < Aws::EmptyStructure
+    end
+
+    class CancelResizeMessage
+      attr_accessor cluster_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class CertificateAssociation
+      attr_accessor custom_domain_name: ::String
+      attr_accessor cluster_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class Cluster
+      attr_accessor cluster_identifier: ::String
+      attr_accessor node_type: ::String
+      attr_accessor cluster_status: ::String
+      attr_accessor cluster_availability_status: ::String
+      attr_accessor modify_status: ::String
+      attr_accessor master_username: ::String
+      attr_accessor db_name: ::String
+      attr_accessor endpoint: Types::Endpoint
+      attr_accessor cluster_create_time: ::Time
+      attr_accessor automated_snapshot_retention_period: ::Integer
+      attr_accessor manual_snapshot_retention_period: ::Integer
+      attr_accessor cluster_security_groups: ::Array[Types::ClusterSecurityGroupMembership]
+      attr_accessor vpc_security_groups: ::Array[Types::VpcSecurityGroupMembership]
+      attr_accessor cluster_parameter_groups: ::Array[Types::ClusterParameterGroupStatus]
+      attr_accessor cluster_subnet_group_name: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor pending_modified_values: Types::PendingModifiedValues
+      attr_accessor cluster_version: ::String
+      attr_accessor allow_version_upgrade: bool
+      attr_accessor number_of_nodes: ::Integer
+      attr_accessor publicly_accessible: bool
+      attr_accessor encrypted: bool
+      attr_accessor restore_status: Types::RestoreStatus
+      attr_accessor data_transfer_progress: Types::DataTransferProgress
+      attr_accessor hsm_status: Types::HsmStatus
+      attr_accessor cluster_snapshot_copy_status: Types::ClusterSnapshotCopyStatus
+      attr_accessor cluster_public_key: ::String
+      attr_accessor cluster_nodes: ::Array[Types::ClusterNode]
+      attr_accessor elastic_ip_status: Types::ElasticIpStatus
+      attr_accessor cluster_revision_number: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor kms_key_id: ::String
+      attr_accessor enhanced_vpc_routing: bool
+      attr_accessor iam_roles: ::Array[Types::ClusterIamRole]
+      attr_accessor pending_actions: ::Array[::String]
+      attr_accessor maintenance_track_name: ::String
+      attr_accessor elastic_resize_number_of_node_options: ::String
+      attr_accessor deferred_maintenance_windows: ::Array[Types::DeferredMaintenanceWindow]
+      attr_accessor snapshot_schedule_identifier: ::String
+      attr_accessor snapshot_schedule_state: ("MODIFYING" | "ACTIVE" | "FAILED")
+      attr_accessor expected_next_snapshot_schedule_time: ::Time
+      attr_accessor expected_next_snapshot_schedule_time_status: ::String
+      attr_accessor next_maintenance_window_start_time: ::Time
+      attr_accessor resize_info: Types::ResizeInfo
+      attr_accessor availability_zone_relocation_status: ::String
+      attr_accessor cluster_namespace_arn: ::String
+      attr_accessor total_storage_capacity_in_mega_bytes: ::Integer
+      attr_accessor aqua_configuration: Types::AquaConfiguration
+      attr_accessor default_iam_role_arn: ::String
+      attr_accessor reserved_node_exchange_status: Types::ReservedNodeExchangeStatus
+      attr_accessor custom_domain_name: ::String
+      attr_accessor custom_domain_certificate_arn: ::String
+      attr_accessor custom_domain_certificate_expiry_date: ::Time
+      attr_accessor master_password_secret_arn: ::String
+      attr_accessor master_password_secret_kms_key_id: ::String
+      attr_accessor ip_address_type: ::String
+      attr_accessor multi_az: ::String
+      attr_accessor multi_az_secondary: Types::SecondaryClusterInfo
+      SENSITIVE: []
+    end
+
+    class ClusterAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class ClusterAssociatedToSchedule
+      attr_accessor cluster_identifier: ::String
+      attr_accessor schedule_association_state: ("MODIFYING" | "ACTIVE" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class ClusterCredentials
+      attr_accessor db_user: ::String
+      attr_accessor db_password: ::String
+      attr_accessor expiration: ::Time
+      SENSITIVE: [:db_password]
+    end
+
+    class ClusterDbRevision
+      attr_accessor cluster_identifier: ::String
+      attr_accessor current_database_revision: ::String
+      attr_accessor database_revision_release_date: ::Time
+      attr_accessor revision_targets: ::Array[Types::RevisionTarget]
+      SENSITIVE: []
+    end
+
+    class ClusterDbRevisionsMessage
+      attr_accessor marker: ::String
+      attr_accessor cluster_db_revisions: ::Array[Types::ClusterDbRevision]
+      SENSITIVE: []
+    end
+
+    class ClusterExtendedCredentials
+      attr_accessor db_user: ::String
+      attr_accessor db_password: ::String
+      attr_accessor expiration: ::Time
+      attr_accessor next_refresh_time: ::Time
+      SENSITIVE: [:db_password]
+    end
+
+    class ClusterIamRole
+      attr_accessor iam_role_arn: ::String
+      attr_accessor apply_status: ::String
+      SENSITIVE: []
+    end
+
+    class ClusterNode
+      attr_accessor node_role: ::String
+      attr_accessor private_ip_address: ::String
+      attr_accessor public_ip_address: ::String
+      SENSITIVE: []
+    end
+
+    class ClusterNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ClusterOnLatestRevisionFault < Aws::EmptyStructure
+    end
+
+    class ClusterParameterGroup
+      attr_accessor parameter_group_name: ::String
+      attr_accessor parameter_group_family: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ClusterParameterGroupAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class ClusterParameterGroupDetails
+      attr_accessor parameters: ::Array[Types::Parameter]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ClusterParameterGroupNameMessage
+      attr_accessor parameter_group_name: ::String
+      attr_accessor parameter_group_status: ::String
+      SENSITIVE: []
+    end
+
+    class ClusterParameterGroupNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ClusterParameterGroupQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class ClusterParameterGroupStatus
+      attr_accessor parameter_group_name: ::String
+      attr_accessor parameter_apply_status: ::String
+      attr_accessor cluster_parameter_status_list: ::Array[Types::ClusterParameterStatus]
+      SENSITIVE: []
+    end
+
+    class ClusterParameterGroupsMessage
+      attr_accessor marker: ::String
+      attr_accessor parameter_groups: ::Array[Types::ClusterParameterGroup]
+      SENSITIVE: []
+    end
+
+    class ClusterParameterStatus
+      attr_accessor parameter_name: ::String
+      attr_accessor parameter_apply_status: ::String
+      attr_accessor parameter_apply_error_description: ::String
+      SENSITIVE: []
+    end
+
+    class ClusterQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class ClusterSecurityGroup
+      attr_accessor cluster_security_group_name: ::String
+      attr_accessor description: ::String
+      attr_accessor ec2_security_groups: ::Array[Types::EC2SecurityGroup]
+      attr_accessor ip_ranges: ::Array[Types::IPRange]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ClusterSecurityGroupAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class ClusterSecurityGroupMembership
+      attr_accessor cluster_security_group_name: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class ClusterSecurityGroupMessage
+      attr_accessor marker: ::String
+      attr_accessor cluster_security_groups: ::Array[Types::ClusterSecurityGroup]
+      SENSITIVE: []
+    end
+
+    class ClusterSecurityGroupNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ClusterSecurityGroupQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class ClusterSnapshotAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class ClusterSnapshotCopyStatus
+      attr_accessor destination_region: ::String
+      attr_accessor retention_period: ::Integer
+      attr_accessor manual_snapshot_retention_period: ::Integer
+      attr_accessor snapshot_copy_grant_name: ::String
+      SENSITIVE: []
+    end
+
+    class ClusterSnapshotNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ClusterSnapshotQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class ClusterSubnetGroup
+      attr_accessor cluster_subnet_group_name: ::String
+      attr_accessor description: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_group_status: ::String
+      attr_accessor subnets: ::Array[Types::Subnet]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor supported_cluster_ip_address_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ClusterSubnetGroupAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class ClusterSubnetGroupMessage
+      attr_accessor marker: ::String
+      attr_accessor cluster_subnet_groups: ::Array[Types::ClusterSubnetGroup]
+      SENSITIVE: []
+    end
+
+    class ClusterSubnetGroupNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ClusterSubnetGroupQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class ClusterSubnetQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class ClusterVersion
+      attr_accessor cluster_version: ::String
+      attr_accessor cluster_parameter_group_family: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class ClusterVersionsMessage
+      attr_accessor marker: ::String
+      attr_accessor cluster_versions: ::Array[Types::ClusterVersion]
+      SENSITIVE: []
+    end
+
+    class ClustersMessage
+      attr_accessor marker: ::String
+      attr_accessor clusters: ::Array[Types::Cluster]
+      SENSITIVE: []
+    end
+
+    class ConflictPolicyUpdateFault < Aws::EmptyStructure
+    end
+
+    class CopyClusterSnapshotMessage
+      attr_accessor source_snapshot_identifier: ::String
+      attr_accessor source_snapshot_cluster_identifier: ::String
+      attr_accessor target_snapshot_identifier: ::String
+      attr_accessor manual_snapshot_retention_period: ::Integer
+      SENSITIVE: []
+    end
+
+    class CopyClusterSnapshotResult
+      attr_accessor snapshot: Types::Snapshot
+      SENSITIVE: []
+    end
+
+    class CopyToRegionDisabledFault < Aws::EmptyStructure
+    end
+
+    class CreateAuthenticationProfileMessage
+      attr_accessor authentication_profile_name: ::String
+      attr_accessor authentication_profile_content: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAuthenticationProfileResult
+      attr_accessor authentication_profile_name: ::String
+      attr_accessor authentication_profile_content: ::String
+      SENSITIVE: []
+    end
+
+    class CreateClusterMessage
+      attr_accessor db_name: ::String
+      attr_accessor cluster_identifier: ::String
+      attr_accessor cluster_type: ::String
+      attr_accessor node_type: ::String
+      attr_accessor master_username: ::String
+      attr_accessor master_user_password: ::String
+      attr_accessor cluster_security_groups: ::Array[::String]
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      attr_accessor cluster_subnet_group_name: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor cluster_parameter_group_name: ::String
+      attr_accessor automated_snapshot_retention_period: ::Integer
+      attr_accessor manual_snapshot_retention_period: ::Integer
+      attr_accessor port: ::Integer
+      attr_accessor cluster_version: ::String
+      attr_accessor allow_version_upgrade: bool
+      attr_accessor number_of_nodes: ::Integer
+      attr_accessor publicly_accessible: bool
+      attr_accessor encrypted: bool
+      attr_accessor hsm_client_certificate_identifier: ::String
+      attr_accessor hsm_configuration_identifier: ::String
+      attr_accessor elastic_ip: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor kms_key_id: ::String
+      attr_accessor enhanced_vpc_routing: bool
+      attr_accessor additional_info: ::String
+      attr_accessor iam_roles: ::Array[::String]
+      attr_accessor maintenance_track_name: ::String
+      attr_accessor snapshot_schedule_identifier: ::String
+      attr_accessor availability_zone_relocation: bool
+      attr_accessor aqua_configuration_status: ("enabled" | "disabled" | "auto")
+      attr_accessor default_iam_role_arn: ::String
+      attr_accessor load_sample_data: ::String
+      attr_accessor manage_master_password: bool
+      attr_accessor master_password_secret_kms_key_id: ::String
+      attr_accessor ip_address_type: ::String
+      attr_accessor multi_az: bool
+      attr_accessor redshift_idc_application_arn: ::String
+      SENSITIVE: [:master_user_password]
+    end
+
+    class CreateClusterParameterGroupMessage
+      attr_accessor parameter_group_name: ::String
+      attr_accessor parameter_group_family: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateClusterParameterGroupResult
+      attr_accessor cluster_parameter_group: Types::ClusterParameterGroup
+      SENSITIVE: []
+    end
+
+    class CreateClusterResult
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class CreateClusterSecurityGroupMessage
+      attr_accessor cluster_security_group_name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateClusterSecurityGroupResult
+      attr_accessor cluster_security_group: Types::ClusterSecurityGroup
+      SENSITIVE: []
+    end
+
+    class CreateClusterSnapshotMessage
+      attr_accessor snapshot_identifier: ::String
+      attr_accessor cluster_identifier: ::String
+      attr_accessor manual_snapshot_retention_period: ::Integer
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateClusterSnapshotResult
+      attr_accessor snapshot: Types::Snapshot
+      SENSITIVE: []
+    end
+
+    class CreateClusterSubnetGroupMessage
+      attr_accessor cluster_subnet_group_name: ::String
+      attr_accessor description: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateClusterSubnetGroupResult
+      attr_accessor cluster_subnet_group: Types::ClusterSubnetGroup
+      SENSITIVE: []
+    end
+
+    class CreateCustomDomainAssociationMessage
+      attr_accessor custom_domain_name: ::String
+      attr_accessor custom_domain_certificate_arn: ::String
+      attr_accessor cluster_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCustomDomainAssociationResult
+      attr_accessor custom_domain_name: ::String
+      attr_accessor custom_domain_certificate_arn: ::String
+      attr_accessor cluster_identifier: ::String
+      attr_accessor custom_domain_cert_expiry_time: ::String
+      SENSITIVE: []
+    end
+
+    class CreateEndpointAccessMessage
+      attr_accessor cluster_identifier: ::String
+      attr_accessor resource_owner: ::String
+      attr_accessor endpoint_name: ::String
+      attr_accessor subnet_group_name: ::String
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateEventSubscriptionMessage
+      attr_accessor subscription_name: ::String
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor source_type: ::String
+      attr_accessor source_ids: ::Array[::String]
+      attr_accessor event_categories: ::Array[::String]
+      attr_accessor severity: ::String
+      attr_accessor enabled: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateEventSubscriptionResult
+      attr_accessor event_subscription: Types::EventSubscription
+      SENSITIVE: []
+    end
+
+    class CreateHsmClientCertificateMessage
+      attr_accessor hsm_client_certificate_identifier: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateHsmClientCertificateResult
+      attr_accessor hsm_client_certificate: Types::HsmClientCertificate
+      SENSITIVE: []
+    end
+
+    class CreateHsmConfigurationMessage
+      attr_accessor hsm_configuration_identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor hsm_ip_address: ::String
+      attr_accessor hsm_partition_name: ::String
+      attr_accessor hsm_partition_password: ::String
+      attr_accessor hsm_server_public_certificate: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateHsmConfigurationResult
+      attr_accessor hsm_configuration: Types::HsmConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateRedshiftIdcApplicationMessage
+      attr_accessor idc_instance_arn: ::String
+      attr_accessor redshift_idc_application_name: ::String
+      attr_accessor identity_namespace: ::String
+      attr_accessor idc_display_name: ::String
+      attr_accessor iam_role_arn: ::String
+      attr_accessor authorized_token_issuer_list: ::Array[Types::AuthorizedTokenIssuer]
+      attr_accessor service_integrations: ::Array[Types::ServiceIntegrationsUnion]
+      SENSITIVE: []
+    end
+
+    class CreateRedshiftIdcApplicationResult
+      attr_accessor redshift_idc_application: Types::RedshiftIdcApplication
+      SENSITIVE: []
+    end
+
+    class CreateScheduledActionMessage
+      attr_accessor scheduled_action_name: ::String
+      attr_accessor target_action: Types::ScheduledActionType
+      attr_accessor schedule: ::String
+      attr_accessor iam_role: ::String
+      attr_accessor scheduled_action_description: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor enable: bool
+      SENSITIVE: []
+    end
+
+    class CreateSnapshotCopyGrantMessage
+      attr_accessor snapshot_copy_grant_name: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateSnapshotCopyGrantResult
+      attr_accessor snapshot_copy_grant: Types::SnapshotCopyGrant
+      SENSITIVE: []
+    end
+
+    class CreateSnapshotScheduleMessage
+      attr_accessor schedule_definitions: ::Array[::String]
+      attr_accessor schedule_identifier: ::String
+      attr_accessor schedule_description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor dry_run: bool
+      attr_accessor next_invocations: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateTagsMessage
+      attr_accessor resource_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateUsageLimitMessage
+      attr_accessor cluster_identifier: ::String
+      attr_accessor feature_type: ("spectrum" | "concurrency-scaling" | "cross-region-datasharing")
+      attr_accessor limit_type: ("time" | "data-scanned")
+      attr_accessor amount: ::Integer
+      attr_accessor period: ("daily" | "weekly" | "monthly")
+      attr_accessor breach_action: ("log" | "emit-metric" | "disable")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CustomCnameAssociationFault < Aws::EmptyStructure
+    end
+
+    class CustomDomainAssociationNotFoundFault < Aws::EmptyStructure
+    end
+
+    class CustomDomainAssociationsMessage
+      attr_accessor marker: ::String
+      attr_accessor associations: ::Array[Types::Association]
+      SENSITIVE: []
+    end
+
+    class CustomerStorageMessage
+      attr_accessor total_backup_size_in_mega_bytes: ::Float
+      attr_accessor total_provisioned_storage_in_mega_bytes: ::Float
+      SENSITIVE: []
+    end
+
+    class DataShare
+      attr_accessor data_share_arn: ::String
+      attr_accessor producer_arn: ::String
+      attr_accessor allow_publicly_accessible_consumers: bool
+      attr_accessor data_share_associations: ::Array[Types::DataShareAssociation]
+      attr_accessor managed_by: ::String
+      SENSITIVE: []
+    end
+
+    class DataShareAssociation
+      attr_accessor consumer_identifier: ::String
+      attr_accessor status: ("ACTIVE" | "PENDING_AUTHORIZATION" | "AUTHORIZED" | "DEAUTHORIZED" | "REJECTED" | "AVAILABLE")
+      attr_accessor consumer_region: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor status_change_date: ::Time
+      attr_accessor producer_allowed_writes: bool
+      attr_accessor consumer_accepted_writes: bool
+      SENSITIVE: []
+    end
+
+    class DataTransferProgress
+      attr_accessor status: ::String
+      attr_accessor current_rate_in_mega_bytes_per_second: ::Float
+      attr_accessor total_data_in_mega_bytes: ::Integer
+      attr_accessor data_transferred_in_mega_bytes: ::Integer
+      attr_accessor estimated_time_to_completion_in_seconds: ::Integer
+      attr_accessor elapsed_time_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeauthorizeDataShareMessage
+      attr_accessor data_share_arn: ::String
+      attr_accessor consumer_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DefaultClusterParameters
+      attr_accessor parameter_group_family: ::String
+      attr_accessor marker: ::String
+      attr_accessor parameters: ::Array[Types::Parameter]
+      SENSITIVE: []
+    end
+
+    class DeferredMaintenanceWindow
+      attr_accessor defer_maintenance_identifier: ::String
+      attr_accessor defer_maintenance_start_time: ::Time
+      attr_accessor defer_maintenance_end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteAuthenticationProfileMessage
+      attr_accessor authentication_profile_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAuthenticationProfileResult
+      attr_accessor authentication_profile_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteClusterMessage
+      attr_accessor cluster_identifier: ::String
+      attr_accessor skip_final_cluster_snapshot: bool
+      attr_accessor final_cluster_snapshot_identifier: ::String
+      attr_accessor final_cluster_snapshot_retention_period: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteClusterParameterGroupMessage
+      attr_accessor parameter_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteClusterResult
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class DeleteClusterSecurityGroupMessage
+      attr_accessor cluster_security_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteClusterSnapshotMessage
+      attr_accessor snapshot_identifier: ::String
+      attr_accessor snapshot_cluster_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteClusterSnapshotResult
+      attr_accessor snapshot: Types::Snapshot
+      SENSITIVE: []
+    end
+
+    class DeleteClusterSubnetGroupMessage
+      attr_accessor cluster_subnet_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCustomDomainAssociationMessage
+      attr_accessor cluster_identifier: ::String
+      attr_accessor custom_domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEndpointAccessMessage
+      attr_accessor endpoint_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEventSubscriptionMessage
+      attr_accessor subscription_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteHsmClientCertificateMessage
+      attr_accessor hsm_client_certificate_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteHsmConfigurationMessage
+      attr_accessor hsm_configuration_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRedshiftIdcApplicationMessage
+      attr_accessor redshift_idc_application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyMessage
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteScheduledActionMessage
+      attr_accessor scheduled_action_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSnapshotCopyGrantMessage
+      attr_accessor snapshot_copy_grant_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSnapshotScheduleMessage
+      attr_accessor schedule_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTagsMessage
+      attr_accessor resource_name: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteUsageLimitMessage
+      attr_accessor usage_limit_id: ::String
+      SENSITIVE: []
+    end
+
+    class DependentServiceAccessDeniedFault < Aws::EmptyStructure
+    end
+
+    class DependentServiceRequestThrottlingFault < Aws::EmptyStructure
+    end
+
+    class DependentServiceUnavailableFault < Aws::EmptyStructure
+    end
+
+    class DescribeAccountAttributesMessage
+      attr_accessor attribute_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeAuthenticationProfilesMessage
+      attr_accessor authentication_profile_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAuthenticationProfilesResult
+      attr_accessor authentication_profiles: ::Array[Types::AuthenticationProfile]
+      SENSITIVE: []
+    end
+
+    class DescribeClusterDbRevisionsMessage
+      attr_accessor cluster_identifier: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeClusterParameterGroupsMessage
+      attr_accessor parameter_group_name: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      attr_accessor tag_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeClusterParametersMessage
+      attr_accessor parameter_group_name: ::String
+      attr_accessor source: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeClusterSecurityGroupsMessage
+      attr_accessor cluster_security_group_name: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      attr_accessor tag_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeClusterSnapshotsMessage
+      attr_accessor cluster_identifier: ::String
+      attr_accessor snapshot_identifier: ::String
+      attr_accessor snapshot_arn: ::String
+      attr_accessor snapshot_type: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor owner_account: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      attr_accessor tag_values: ::Array[::String]
+      attr_accessor cluster_exists: bool
+      attr_accessor sorting_entities: ::Array[Types::SnapshotSortingEntity]
+      SENSITIVE: []
+    end
+
+    class DescribeClusterSubnetGroupsMessage
+      attr_accessor cluster_subnet_group_name: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      attr_accessor tag_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeClusterTracksMessage
+      attr_accessor maintenance_track_name: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeClusterVersionsMessage
+      attr_accessor cluster_version: ::String
+      attr_accessor cluster_parameter_group_family: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeClustersMessage
+      attr_accessor cluster_identifier: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      attr_accessor tag_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeCustomDomainAssociationsMessage
+      attr_accessor custom_domain_name: ::String
+      attr_accessor custom_domain_certificate_arn: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDataSharesForConsumerMessage
+      attr_accessor consumer_arn: ::String
+      attr_accessor status: ("ACTIVE" | "AVAILABLE")
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDataSharesForConsumerResult
+      attr_accessor data_shares: ::Array[Types::DataShare]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDataSharesForProducerMessage
+      attr_accessor producer_arn: ::String
+      attr_accessor status: ("ACTIVE" | "AUTHORIZED" | "PENDING_AUTHORIZATION" | "DEAUTHORIZED" | "REJECTED")
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDataSharesForProducerResult
+      attr_accessor data_shares: ::Array[Types::DataShare]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDataSharesMessage
+      attr_accessor data_share_arn: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDataSharesResult
+      attr_accessor data_shares: ::Array[Types::DataShare]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDefaultClusterParametersMessage
+      attr_accessor parameter_group_family: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDefaultClusterParametersResult
+      attr_accessor default_cluster_parameters: Types::DefaultClusterParameters
+      SENSITIVE: []
+    end
+
+    class DescribeEndpointAccessMessage
+      attr_accessor cluster_identifier: ::String
+      attr_accessor resource_owner: ::String
+      attr_accessor endpoint_name: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEndpointAuthorizationMessage
+      attr_accessor cluster_identifier: ::String
+      attr_accessor account: ::String
+      attr_accessor grantee: bool
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEventCategoriesMessage
+      attr_accessor source_type: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEventSubscriptionsMessage
+      attr_accessor subscription_name: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      attr_accessor tag_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeEventsMessage
+      attr_accessor source_identifier: ::String
+      attr_accessor source_type: ("cluster" | "cluster-parameter-group" | "cluster-security-group" | "cluster-snapshot" | "scheduled-action")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor duration: ::Integer
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeHsmClientCertificatesMessage
+      attr_accessor hsm_client_certificate_identifier: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      attr_accessor tag_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeHsmConfigurationsMessage
+      attr_accessor hsm_configuration_identifier: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      attr_accessor tag_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeInboundIntegrationsMessage
+      attr_accessor integration_arn: ::String
+      attr_accessor target_arn: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLoggingStatusMessage
+      attr_accessor cluster_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeNodeConfigurationOptionsMessage
+      attr_accessor action_type: ("restore-cluster" | "recommend-node-config" | "resize-cluster")
+      attr_accessor cluster_identifier: ::String
+      attr_accessor snapshot_identifier: ::String
+      attr_accessor snapshot_arn: ::String
+      attr_accessor owner_account: ::String
+      attr_accessor filters: ::Array[Types::NodeConfigurationOptionsFilter]
+      attr_accessor marker: ::String
+      attr_accessor max_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeOrderableClusterOptionsMessage
+      attr_accessor cluster_version: ::String
+      attr_accessor node_type: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePartnersInputMessage
+      attr_accessor account_id: ::String
+      attr_accessor cluster_identifier: ::String
+      attr_accessor database_name: ::String
+      attr_accessor partner_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePartnersOutputMessage
+      attr_accessor partner_integration_info_list: ::Array[Types::PartnerIntegrationInfo]
+      SENSITIVE: []
+    end
+
+    class DescribeRedshiftIdcApplicationsMessage
+      attr_accessor redshift_idc_application_arn: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRedshiftIdcApplicationsResult
+      attr_accessor redshift_idc_applications: ::Array[Types::RedshiftIdcApplication]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReservedNodeExchangeStatusInputMessage
+      attr_accessor reserved_node_id: ::String
+      attr_accessor reserved_node_exchange_request_id: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReservedNodeExchangeStatusOutputMessage
+      attr_accessor reserved_node_exchange_status_details: ::Array[Types::ReservedNodeExchangeStatus]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReservedNodeOfferingsMessage
+      attr_accessor reserved_node_offering_id: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReservedNodesMessage
+      attr_accessor reserved_node_id: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeResizeMessage
+      attr_accessor cluster_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeScheduledActionsMessage
+      attr_accessor scheduled_action_name: ::String
+      attr_accessor target_action_type: ("ResizeCluster" | "PauseCluster" | "ResumeCluster")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor active: bool
+      attr_accessor filters: ::Array[Types::ScheduledActionFilter]
+      attr_accessor marker: ::String
+      attr_accessor max_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeSnapshotCopyGrantsMessage
+      attr_accessor snapshot_copy_grant_name: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      attr_accessor tag_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeSnapshotSchedulesMessage
+      attr_accessor cluster_identifier: ::String
+      attr_accessor schedule_identifier: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      attr_accessor tag_values: ::Array[::String]
+      attr_accessor marker: ::String
+      attr_accessor max_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeSnapshotSchedulesOutputMessage
+      attr_accessor snapshot_schedules: ::Array[Types::SnapshotSchedule]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTableRestoreStatusMessage
+      attr_accessor cluster_identifier: ::String
+      attr_accessor table_restore_request_id: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTagsMessage
+      attr_accessor resource_name: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      attr_accessor tag_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeUsageLimitsMessage
+      attr_accessor usage_limit_id: ::String
+      attr_accessor cluster_identifier: ::String
+      attr_accessor feature_type: ("spectrum" | "concurrency-scaling" | "cross-region-datasharing")
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      attr_accessor tag_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DisableLoggingMessage
+      attr_accessor cluster_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DisableSnapshotCopyMessage
+      attr_accessor cluster_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DisableSnapshotCopyResult
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class DisassociateDataShareConsumerMessage
+      attr_accessor data_share_arn: ::String
+      attr_accessor disassociate_entire_account: bool
+      attr_accessor consumer_arn: ::String
+      attr_accessor consumer_region: ::String
+      SENSITIVE: []
+    end
+
+    class EC2SecurityGroup
+      attr_accessor status: ::String
+      attr_accessor ec2_security_group_name: ::String
+      attr_accessor ec2_security_group_owner_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ElasticIpStatus
+      attr_accessor elastic_ip: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class EnableLoggingMessage
+      attr_accessor cluster_identifier: ::String
+      attr_accessor bucket_name: ::String
+      attr_accessor s3_key_prefix: ::String
+      attr_accessor log_destination_type: ("s3" | "cloudwatch")
+      attr_accessor log_exports: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class EnableSnapshotCopyMessage
+      attr_accessor cluster_identifier: ::String
+      attr_accessor destination_region: ::String
+      attr_accessor retention_period: ::Integer
+      attr_accessor snapshot_copy_grant_name: ::String
+      attr_accessor manual_snapshot_retention_period: ::Integer
+      SENSITIVE: []
+    end
+
+    class EnableSnapshotCopyResult
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class Endpoint
+      attr_accessor address: ::String
+      attr_accessor port: ::Integer
+      attr_accessor vpc_endpoints: ::Array[Types::VpcEndpoint]
+      SENSITIVE: []
+    end
+
+    class EndpointAccess
+      attr_accessor cluster_identifier: ::String
+      attr_accessor resource_owner: ::String
+      attr_accessor subnet_group_name: ::String
+      attr_accessor endpoint_status: ::String
+      attr_accessor endpoint_name: ::String
+      attr_accessor endpoint_create_time: ::Time
+      attr_accessor port: ::Integer
+      attr_accessor address: ::String
+      attr_accessor vpc_security_groups: ::Array[Types::VpcSecurityGroupMembership]
+      attr_accessor vpc_endpoint: Types::VpcEndpoint
+      SENSITIVE: []
+    end
+
+    class EndpointAccessList
+      attr_accessor endpoint_access_list: ::Array[Types::EndpointAccess]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class EndpointAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class EndpointAuthorization
+      attr_accessor grantor: ::String
+      attr_accessor grantee: ::String
+      attr_accessor cluster_identifier: ::String
+      attr_accessor authorize_time: ::Time
+      attr_accessor cluster_status: ::String
+      attr_accessor status: ("Authorized" | "Revoking")
+      attr_accessor allowed_all_vp_cs: bool
+      attr_accessor allowed_vp_cs: ::Array[::String]
+      attr_accessor endpoint_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class EndpointAuthorizationAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class EndpointAuthorizationList
+      attr_accessor endpoint_authorization_list: ::Array[Types::EndpointAuthorization]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class EndpointAuthorizationNotFoundFault < Aws::EmptyStructure
+    end
+
+    class EndpointAuthorizationsPerClusterLimitExceededFault < Aws::EmptyStructure
+    end
+
+    class EndpointNotFoundFault < Aws::EmptyStructure
+    end
+
+    class EndpointsPerAuthorizationLimitExceededFault < Aws::EmptyStructure
+    end
+
+    class EndpointsPerClusterLimitExceededFault < Aws::EmptyStructure
+    end
+
+    class Event
+      attr_accessor source_identifier: ::String
+      attr_accessor source_type: ("cluster" | "cluster-parameter-group" | "cluster-security-group" | "cluster-snapshot" | "scheduled-action")
+      attr_accessor message: ::String
+      attr_accessor event_categories: ::Array[::String]
+      attr_accessor severity: ::String
+      attr_accessor date: ::Time
+      attr_accessor event_id: ::String
+      SENSITIVE: []
+    end
+
+    class EventCategoriesMap
+      attr_accessor source_type: ::String
+      attr_accessor events: ::Array[Types::EventInfoMap]
+      SENSITIVE: []
+    end
+
+    class EventCategoriesMessage
+      attr_accessor event_categories_map_list: ::Array[Types::EventCategoriesMap]
+      SENSITIVE: []
+    end
+
+    class EventInfoMap
+      attr_accessor event_id: ::String
+      attr_accessor event_categories: ::Array[::String]
+      attr_accessor event_description: ::String
+      attr_accessor severity: ::String
+      SENSITIVE: []
+    end
+
+    class EventSubscription
+      attr_accessor customer_aws_id: ::String
+      attr_accessor cust_subscription_id: ::String
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor status: ::String
+      attr_accessor subscription_creation_time: ::Time
+      attr_accessor source_type: ::String
+      attr_accessor source_ids_list: ::Array[::String]
+      attr_accessor event_categories_list: ::Array[::String]
+      attr_accessor severity: ::String
+      attr_accessor enabled: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class EventSubscriptionQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class EventSubscriptionsMessage
+      attr_accessor marker: ::String
+      attr_accessor event_subscriptions_list: ::Array[Types::EventSubscription]
+      SENSITIVE: []
+    end
+
+    class EventsMessage
+      attr_accessor marker: ::String
+      attr_accessor events: ::Array[Types::Event]
+      SENSITIVE: []
+    end
+
+    class FailoverPrimaryComputeInputMessage
+      attr_accessor cluster_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class FailoverPrimaryComputeResult
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class GetClusterCredentialsMessage
+      attr_accessor db_user: ::String
+      attr_accessor db_name: ::String
+      attr_accessor cluster_identifier: ::String
+      attr_accessor duration_seconds: ::Integer
+      attr_accessor auto_create: bool
+      attr_accessor db_groups: ::Array[::String]
+      attr_accessor custom_domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetClusterCredentialsWithIAMMessage
+      attr_accessor db_name: ::String
+      attr_accessor cluster_identifier: ::String
+      attr_accessor duration_seconds: ::Integer
+      attr_accessor custom_domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetReservedNodeExchangeConfigurationOptionsInputMessage
+      attr_accessor action_type: ("restore-cluster" | "resize-cluster")
+      attr_accessor cluster_identifier: ::String
+      attr_accessor snapshot_identifier: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class GetReservedNodeExchangeConfigurationOptionsOutputMessage
+      attr_accessor marker: ::String
+      attr_accessor reserved_node_configuration_option_list: ::Array[Types::ReservedNodeConfigurationOption]
+      SENSITIVE: []
+    end
+
+    class GetReservedNodeExchangeOfferingsInputMessage
+      attr_accessor reserved_node_id: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class GetReservedNodeExchangeOfferingsOutputMessage
+      attr_accessor marker: ::String
+      attr_accessor reserved_node_offerings: ::Array[Types::ReservedNodeOffering]
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyMessage
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyResult
+      attr_accessor resource_policy: Types::ResourcePolicy
+      SENSITIVE: []
+    end
+
+    class HsmClientCertificate
+      attr_accessor hsm_client_certificate_identifier: ::String
+      attr_accessor hsm_client_certificate_public_key: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class HsmClientCertificateAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class HsmClientCertificateMessage
+      attr_accessor marker: ::String
+      attr_accessor hsm_client_certificates: ::Array[Types::HsmClientCertificate]
+      SENSITIVE: []
+    end
+
+    class HsmClientCertificateNotFoundFault < Aws::EmptyStructure
+    end
+
+    class HsmClientCertificateQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class HsmConfiguration
+      attr_accessor hsm_configuration_identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor hsm_ip_address: ::String
+      attr_accessor hsm_partition_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class HsmConfigurationAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class HsmConfigurationMessage
+      attr_accessor marker: ::String
+      attr_accessor hsm_configurations: ::Array[Types::HsmConfiguration]
+      SENSITIVE: []
+    end
+
+    class HsmConfigurationNotFoundFault < Aws::EmptyStructure
+    end
+
+    class HsmConfigurationQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class HsmStatus
+      attr_accessor hsm_client_certificate_identifier: ::String
+      attr_accessor hsm_configuration_identifier: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class IPRange
+      attr_accessor status: ::String
+      attr_accessor cidrip: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class InProgressTableRestoreQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class InboundIntegration
+      attr_accessor integration_arn: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor target_arn: ::String
+      attr_accessor status: ("creating" | "active" | "modifying" | "failed" | "deleting" | "syncing" | "needs_attention")
+      attr_accessor errors: ::Array[Types::IntegrationError]
+      attr_accessor create_time: ::Time
+      SENSITIVE: []
+    end
+
+    class InboundIntegrationsMessage
+      attr_accessor marker: ::String
+      attr_accessor inbound_integrations: ::Array[Types::InboundIntegration]
+      SENSITIVE: []
+    end
+
+    class IncompatibleOrderableOptions < Aws::EmptyStructure
+    end
+
+    class InsufficientClusterCapacityFault < Aws::EmptyStructure
+    end
+
+    class InsufficientS3BucketPolicyFault < Aws::EmptyStructure
+    end
+
+    class IntegrationError
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class IntegrationNotFoundFault < Aws::EmptyStructure
+    end
+
+    class InvalidAuthenticationProfileRequestFault < Aws::EmptyStructure
+    end
+
+    class InvalidAuthorizationStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidClusterParameterGroupStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidClusterSecurityGroupStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidClusterSnapshotScheduleStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidClusterSnapshotStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidClusterStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidClusterSubnetGroupStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidClusterSubnetStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidClusterTrackFault < Aws::EmptyStructure
+    end
+
+    class InvalidDataShareFault < Aws::EmptyStructure
+    end
+
+    class InvalidElasticIpFault < Aws::EmptyStructure
+    end
+
+    class InvalidEndpointStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidHsmClientCertificateStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidHsmConfigurationStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidNamespaceFault < Aws::EmptyStructure
+    end
+
+    class InvalidPolicyFault < Aws::EmptyStructure
+    end
+
+    class InvalidReservedNodeStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidRestoreFault < Aws::EmptyStructure
+    end
+
+    class InvalidRetentionPeriodFault < Aws::EmptyStructure
+    end
+
+    class InvalidS3BucketNameFault < Aws::EmptyStructure
+    end
+
+    class InvalidS3KeyPrefixFault < Aws::EmptyStructure
+    end
+
+    class InvalidScheduleFault < Aws::EmptyStructure
+    end
+
+    class InvalidScheduledActionFault < Aws::EmptyStructure
+    end
+
+    class InvalidSnapshotCopyGrantStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidSubnet < Aws::EmptyStructure
+    end
+
+    class InvalidSubscriptionStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidTableRestoreArgumentFault < Aws::EmptyStructure
+    end
+
+    class InvalidTagFault < Aws::EmptyStructure
+    end
+
+    class InvalidUsageLimitFault < Aws::EmptyStructure
+    end
+
+    class InvalidVPCNetworkStateFault < Aws::EmptyStructure
+    end
+
+    class Ipv6CidrBlockNotFoundFault < Aws::EmptyStructure
+    end
+
+    class LakeFormationQuery
+      attr_accessor authorization: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class LakeFormationScopeUnion
+      attr_accessor lake_formation_query: Types::LakeFormationQuery
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class LakeFormationQuery < LakeFormationScopeUnion
+      end
+      class Unknown < LakeFormationScopeUnion
+      end
+    end
+
+    class LimitExceededFault < Aws::EmptyStructure
+    end
+
+    class LoggingStatus
+      attr_accessor logging_enabled: bool
+      attr_accessor bucket_name: ::String
+      attr_accessor s3_key_prefix: ::String
+      attr_accessor last_successful_delivery_time: ::Time
+      attr_accessor last_failure_time: ::Time
+      attr_accessor last_failure_message: ::String
+      attr_accessor log_destination_type: ("s3" | "cloudwatch")
+      attr_accessor log_exports: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class MaintenanceTrack
+      attr_accessor maintenance_track_name: ::String
+      attr_accessor database_version: ::String
+      attr_accessor update_targets: ::Array[Types::UpdateTarget]
+      SENSITIVE: []
+    end
+
+    class ModifyAquaInputMessage
+      attr_accessor cluster_identifier: ::String
+      attr_accessor aqua_configuration_status: ("enabled" | "disabled" | "auto")
+      SENSITIVE: []
+    end
+
+    class ModifyAquaOutputMessage
+      attr_accessor aqua_configuration: Types::AquaConfiguration
+      SENSITIVE: []
+    end
+
+    class ModifyAuthenticationProfileMessage
+      attr_accessor authentication_profile_name: ::String
+      attr_accessor authentication_profile_content: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyAuthenticationProfileResult
+      attr_accessor authentication_profile_name: ::String
+      attr_accessor authentication_profile_content: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyClusterDbRevisionMessage
+      attr_accessor cluster_identifier: ::String
+      attr_accessor revision_target: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyClusterDbRevisionResult
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class ModifyClusterIamRolesMessage
+      attr_accessor cluster_identifier: ::String
+      attr_accessor add_iam_roles: ::Array[::String]
+      attr_accessor remove_iam_roles: ::Array[::String]
+      attr_accessor default_iam_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyClusterIamRolesResult
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class ModifyClusterMaintenanceMessage
+      attr_accessor cluster_identifier: ::String
+      attr_accessor defer_maintenance: bool
+      attr_accessor defer_maintenance_identifier: ::String
+      attr_accessor defer_maintenance_start_time: ::Time
+      attr_accessor defer_maintenance_end_time: ::Time
+      attr_accessor defer_maintenance_duration: ::Integer
+      SENSITIVE: []
+    end
+
+    class ModifyClusterMaintenanceResult
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class ModifyClusterMessage
+      attr_accessor cluster_identifier: ::String
+      attr_accessor cluster_type: ::String
+      attr_accessor node_type: ::String
+      attr_accessor number_of_nodes: ::Integer
+      attr_accessor cluster_security_groups: ::Array[::String]
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      attr_accessor master_user_password: ::String
+      attr_accessor cluster_parameter_group_name: ::String
+      attr_accessor automated_snapshot_retention_period: ::Integer
+      attr_accessor manual_snapshot_retention_period: ::Integer
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor cluster_version: ::String
+      attr_accessor allow_version_upgrade: bool
+      attr_accessor hsm_client_certificate_identifier: ::String
+      attr_accessor hsm_configuration_identifier: ::String
+      attr_accessor new_cluster_identifier: ::String
+      attr_accessor publicly_accessible: bool
+      attr_accessor elastic_ip: ::String
+      attr_accessor enhanced_vpc_routing: bool
+      attr_accessor maintenance_track_name: ::String
+      attr_accessor encrypted: bool
+      attr_accessor kms_key_id: ::String
+      attr_accessor availability_zone_relocation: bool
+      attr_accessor availability_zone: ::String
+      attr_accessor port: ::Integer
+      attr_accessor manage_master_password: bool
+      attr_accessor master_password_secret_kms_key_id: ::String
+      attr_accessor ip_address_type: ::String
+      attr_accessor multi_az: bool
+      SENSITIVE: [:master_user_password]
+    end
+
+    class ModifyClusterParameterGroupMessage
+      attr_accessor parameter_group_name: ::String
+      attr_accessor parameters: ::Array[Types::Parameter]
+      SENSITIVE: []
+    end
+
+    class ModifyClusterResult
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class ModifyClusterSnapshotMessage
+      attr_accessor snapshot_identifier: ::String
+      attr_accessor manual_snapshot_retention_period: ::Integer
+      attr_accessor force: bool
+      SENSITIVE: []
+    end
+
+    class ModifyClusterSnapshotResult
+      attr_accessor snapshot: Types::Snapshot
+      SENSITIVE: []
+    end
+
+    class ModifyClusterSnapshotScheduleMessage
+      attr_accessor cluster_identifier: ::String
+      attr_accessor schedule_identifier: ::String
+      attr_accessor disassociate_schedule: bool
+      SENSITIVE: []
+    end
+
+    class ModifyClusterSubnetGroupMessage
+      attr_accessor cluster_subnet_group_name: ::String
+      attr_accessor description: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ModifyClusterSubnetGroupResult
+      attr_accessor cluster_subnet_group: Types::ClusterSubnetGroup
+      SENSITIVE: []
+    end
+
+    class ModifyCustomDomainAssociationMessage
+      attr_accessor custom_domain_name: ::String
+      attr_accessor custom_domain_certificate_arn: ::String
+      attr_accessor cluster_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyCustomDomainAssociationResult
+      attr_accessor custom_domain_name: ::String
+      attr_accessor custom_domain_certificate_arn: ::String
+      attr_accessor cluster_identifier: ::String
+      attr_accessor custom_domain_cert_expiry_time: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyEndpointAccessMessage
+      attr_accessor endpoint_name: ::String
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ModifyEventSubscriptionMessage
+      attr_accessor subscription_name: ::String
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor source_type: ::String
+      attr_accessor source_ids: ::Array[::String]
+      attr_accessor event_categories: ::Array[::String]
+      attr_accessor severity: ::String
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class ModifyEventSubscriptionResult
+      attr_accessor event_subscription: Types::EventSubscription
+      SENSITIVE: []
+    end
+
+    class ModifyRedshiftIdcApplicationMessage
+      attr_accessor redshift_idc_application_arn: ::String
+      attr_accessor identity_namespace: ::String
+      attr_accessor iam_role_arn: ::String
+      attr_accessor idc_display_name: ::String
+      attr_accessor authorized_token_issuer_list: ::Array[Types::AuthorizedTokenIssuer]
+      attr_accessor service_integrations: ::Array[Types::ServiceIntegrationsUnion]
+      SENSITIVE: []
+    end
+
+    class ModifyRedshiftIdcApplicationResult
+      attr_accessor redshift_idc_application: Types::RedshiftIdcApplication
+      SENSITIVE: []
+    end
+
+    class ModifyScheduledActionMessage
+      attr_accessor scheduled_action_name: ::String
+      attr_accessor target_action: Types::ScheduledActionType
+      attr_accessor schedule: ::String
+      attr_accessor iam_role: ::String
+      attr_accessor scheduled_action_description: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor enable: bool
+      SENSITIVE: []
+    end
+
+    class ModifySnapshotCopyRetentionPeriodMessage
+      attr_accessor cluster_identifier: ::String
+      attr_accessor retention_period: ::Integer
+      attr_accessor manual: bool
+      SENSITIVE: []
+    end
+
+    class ModifySnapshotCopyRetentionPeriodResult
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class ModifySnapshotScheduleMessage
+      attr_accessor schedule_identifier: ::String
+      attr_accessor schedule_definitions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ModifyUsageLimitMessage
+      attr_accessor usage_limit_id: ::String
+      attr_accessor amount: ::Integer
+      attr_accessor breach_action: ("log" | "emit-metric" | "disable")
+      SENSITIVE: []
+    end
+
+    class NetworkInterface
+      attr_accessor network_interface_id: ::String
+      attr_accessor subnet_id: ::String
+      attr_accessor private_ip_address: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor ipv_6_address: ::String
+      SENSITIVE: []
+    end
+
+    class NodeConfigurationOption
+      attr_accessor node_type: ::String
+      attr_accessor number_of_nodes: ::Integer
+      attr_accessor estimated_disk_utilization_percent: ::Float
+      attr_accessor mode: ("standard" | "high-performance")
+      SENSITIVE: []
+    end
+
+    class NodeConfigurationOptionsFilter
+      attr_accessor name: ("NodeType" | "NumberOfNodes" | "EstimatedDiskUtilizationPercent" | "Mode")
+      attr_accessor operator: ("eq" | "lt" | "gt" | "le" | "ge" | "in" | "between")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class NodeConfigurationOptionsMessage
+      attr_accessor node_configuration_option_list: ::Array[Types::NodeConfigurationOption]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class NumberOfNodesPerClusterLimitExceededFault < Aws::EmptyStructure
+    end
+
+    class NumberOfNodesQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class OrderableClusterOption
+      attr_accessor cluster_version: ::String
+      attr_accessor cluster_type: ::String
+      attr_accessor node_type: ::String
+      attr_accessor availability_zones: ::Array[Types::AvailabilityZone]
+      SENSITIVE: []
+    end
+
+    class OrderableClusterOptionsMessage
+      attr_accessor orderable_cluster_options: ::Array[Types::OrderableClusterOption]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class Parameter
+      attr_accessor parameter_name: ::String
+      attr_accessor parameter_value: ::String
+      attr_accessor description: ::String
+      attr_accessor source: ::String
+      attr_accessor data_type: ::String
+      attr_accessor allowed_values: ::String
+      attr_accessor apply_type: ("static" | "dynamic")
+      attr_accessor is_modifiable: bool
+      attr_accessor minimum_engine_version: ::String
+      SENSITIVE: []
+    end
+
+    class PartnerIntegrationInfo
+      attr_accessor database_name: ::String
+      attr_accessor partner_name: ::String
+      attr_accessor status: ("Active" | "Inactive" | "RuntimeFailure" | "ConnectionFailure")
+      attr_accessor status_message: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class PartnerIntegrationInputMessage
+      attr_accessor account_id: ::String
+      attr_accessor cluster_identifier: ::String
+      attr_accessor database_name: ::String
+      attr_accessor partner_name: ::String
+      SENSITIVE: []
+    end
+
+    class PartnerIntegrationOutputMessage
+      attr_accessor database_name: ::String
+      attr_accessor partner_name: ::String
+      SENSITIVE: []
+    end
+
+    class PartnerNotFoundFault < Aws::EmptyStructure
+    end
+
+    class PauseClusterMessage
+      attr_accessor cluster_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class PauseClusterResult
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class PendingModifiedValues
+      attr_accessor master_user_password: ::String
+      attr_accessor node_type: ::String
+      attr_accessor number_of_nodes: ::Integer
+      attr_accessor cluster_type: ::String
+      attr_accessor cluster_version: ::String
+      attr_accessor automated_snapshot_retention_period: ::Integer
+      attr_accessor cluster_identifier: ::String
+      attr_accessor publicly_accessible: bool
+      attr_accessor enhanced_vpc_routing: bool
+      attr_accessor maintenance_track_name: ::String
+      attr_accessor encryption_type: ::String
+      SENSITIVE: [:master_user_password]
+    end
+
+    class PurchaseReservedNodeOfferingMessage
+      attr_accessor reserved_node_offering_id: ::String
+      attr_accessor node_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class PurchaseReservedNodeOfferingResult
+      attr_accessor reserved_node: Types::ReservedNode
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyMessage
+      attr_accessor resource_arn: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyResult
+      attr_accessor resource_policy: Types::ResourcePolicy
+      SENSITIVE: []
+    end
+
+    class RebootClusterMessage
+      attr_accessor cluster_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class RebootClusterResult
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class RecurringCharge
+      attr_accessor recurring_charge_amount: ::Float
+      attr_accessor recurring_charge_frequency: ::String
+      SENSITIVE: []
+    end
+
+    class RedshiftIdcApplication
+      attr_accessor idc_instance_arn: ::String
+      attr_accessor redshift_idc_application_name: ::String
+      attr_accessor redshift_idc_application_arn: ::String
+      attr_accessor identity_namespace: ::String
+      attr_accessor idc_display_name: ::String
+      attr_accessor iam_role_arn: ::String
+      attr_accessor idc_managed_application_arn: ::String
+      attr_accessor idc_onboard_status: ::String
+      attr_accessor authorized_token_issuer_list: ::Array[Types::AuthorizedTokenIssuer]
+      attr_accessor service_integrations: ::Array[Types::ServiceIntegrationsUnion]
+      SENSITIVE: []
+    end
+
+    class RedshiftIdcApplicationAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class RedshiftIdcApplicationNotExistsFault < Aws::EmptyStructure
+    end
+
+    class RedshiftIdcApplicationQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class RejectDataShareMessage
+      attr_accessor data_share_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ReservedNode
+      attr_accessor reserved_node_id: ::String
+      attr_accessor reserved_node_offering_id: ::String
+      attr_accessor node_type: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor duration: ::Integer
+      attr_accessor fixed_price: ::Float
+      attr_accessor usage_price: ::Float
+      attr_accessor currency_code: ::String
+      attr_accessor node_count: ::Integer
+      attr_accessor state: ::String
+      attr_accessor offering_type: ::String
+      attr_accessor recurring_charges: ::Array[Types::RecurringCharge]
+      attr_accessor reserved_node_offering_type: ("Regular" | "Upgradable")
+      SENSITIVE: []
+    end
+
+    class ReservedNodeAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class ReservedNodeAlreadyMigratedFault < Aws::EmptyStructure
+    end
+
+    class ReservedNodeConfigurationOption
+      attr_accessor source_reserved_node: Types::ReservedNode
+      attr_accessor target_reserved_node_count: ::Integer
+      attr_accessor target_reserved_node_offering: Types::ReservedNodeOffering
+      SENSITIVE: []
+    end
+
+    class ReservedNodeExchangeNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ReservedNodeExchangeStatus
+      attr_accessor reserved_node_exchange_request_id: ::String
+      attr_accessor status: ("REQUESTED" | "PENDING" | "IN_PROGRESS" | "RETRYING" | "SUCCEEDED" | "FAILED")
+      attr_accessor request_time: ::Time
+      attr_accessor source_reserved_node_id: ::String
+      attr_accessor source_reserved_node_type: ::String
+      attr_accessor source_reserved_node_count: ::Integer
+      attr_accessor target_reserved_node_offering_id: ::String
+      attr_accessor target_reserved_node_type: ::String
+      attr_accessor target_reserved_node_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ReservedNodeNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ReservedNodeOffering
+      attr_accessor reserved_node_offering_id: ::String
+      attr_accessor node_type: ::String
+      attr_accessor duration: ::Integer
+      attr_accessor fixed_price: ::Float
+      attr_accessor usage_price: ::Float
+      attr_accessor currency_code: ::String
+      attr_accessor offering_type: ::String
+      attr_accessor recurring_charges: ::Array[Types::RecurringCharge]
+      attr_accessor reserved_node_offering_type: ("Regular" | "Upgradable")
+      SENSITIVE: []
+    end
+
+    class ReservedNodeOfferingNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ReservedNodeOfferingsMessage
+      attr_accessor marker: ::String
+      attr_accessor reserved_node_offerings: ::Array[Types::ReservedNodeOffering]
+      SENSITIVE: []
+    end
+
+    class ReservedNodeQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class ReservedNodesMessage
+      attr_accessor marker: ::String
+      attr_accessor reserved_nodes: ::Array[Types::ReservedNode]
+      SENSITIVE: []
+    end
+
+    class ResetClusterParameterGroupMessage
+      attr_accessor parameter_group_name: ::String
+      attr_accessor reset_all_parameters: bool
+      attr_accessor parameters: ::Array[Types::Parameter]
+      SENSITIVE: []
+    end
+
+    class ResizeClusterMessage
+      attr_accessor cluster_identifier: ::String
+      attr_accessor cluster_type: ::String
+      attr_accessor node_type: ::String
+      attr_accessor number_of_nodes: ::Integer
+      attr_accessor classic: bool
+      attr_accessor reserved_node_id: ::String
+      attr_accessor target_reserved_node_offering_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResizeClusterResult
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class ResizeInfo
+      attr_accessor resize_type: ::String
+      attr_accessor allow_cancel_resize: bool
+      SENSITIVE: []
+    end
+
+    class ResizeNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ResizeProgressMessage
+      attr_accessor target_node_type: ::String
+      attr_accessor target_number_of_nodes: ::Integer
+      attr_accessor target_cluster_type: ::String
+      attr_accessor status: ::String
+      attr_accessor import_tables_completed: ::Array[::String]
+      attr_accessor import_tables_in_progress: ::Array[::String]
+      attr_accessor import_tables_not_started: ::Array[::String]
+      attr_accessor avg_resize_rate_in_mega_bytes_per_second: ::Float
+      attr_accessor total_resize_data_in_mega_bytes: ::Integer
+      attr_accessor progress_in_mega_bytes: ::Integer
+      attr_accessor elapsed_time_in_seconds: ::Integer
+      attr_accessor estimated_time_to_completion_in_seconds: ::Integer
+      attr_accessor resize_type: ::String
+      attr_accessor message: ::String
+      attr_accessor target_encryption_type: ::String
+      attr_accessor data_transfer_progress_percent: ::Float
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ResourcePolicy
+      attr_accessor resource_arn: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreFromClusterSnapshotMessage
+      attr_accessor cluster_identifier: ::String
+      attr_accessor snapshot_identifier: ::String
+      attr_accessor snapshot_arn: ::String
+      attr_accessor snapshot_cluster_identifier: ::String
+      attr_accessor port: ::Integer
+      attr_accessor availability_zone: ::String
+      attr_accessor allow_version_upgrade: bool
+      attr_accessor cluster_subnet_group_name: ::String
+      attr_accessor publicly_accessible: bool
+      attr_accessor owner_account: ::String
+      attr_accessor hsm_client_certificate_identifier: ::String
+      attr_accessor hsm_configuration_identifier: ::String
+      attr_accessor elastic_ip: ::String
+      attr_accessor cluster_parameter_group_name: ::String
+      attr_accessor cluster_security_groups: ::Array[::String]
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor automated_snapshot_retention_period: ::Integer
+      attr_accessor manual_snapshot_retention_period: ::Integer
+      attr_accessor kms_key_id: ::String
+      attr_accessor node_type: ::String
+      attr_accessor enhanced_vpc_routing: bool
+      attr_accessor additional_info: ::String
+      attr_accessor iam_roles: ::Array[::String]
+      attr_accessor maintenance_track_name: ::String
+      attr_accessor snapshot_schedule_identifier: ::String
+      attr_accessor number_of_nodes: ::Integer
+      attr_accessor availability_zone_relocation: bool
+      attr_accessor aqua_configuration_status: ("enabled" | "disabled" | "auto")
+      attr_accessor default_iam_role_arn: ::String
+      attr_accessor reserved_node_id: ::String
+      attr_accessor target_reserved_node_offering_id: ::String
+      attr_accessor encrypted: bool
+      attr_accessor manage_master_password: bool
+      attr_accessor master_password_secret_kms_key_id: ::String
+      attr_accessor ip_address_type: ::String
+      attr_accessor multi_az: bool
+      SENSITIVE: []
+    end
+
+    class RestoreFromClusterSnapshotResult
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class RestoreStatus
+      attr_accessor status: ::String
+      attr_accessor current_restore_rate_in_mega_bytes_per_second: ::Float
+      attr_accessor snapshot_size_in_mega_bytes: ::Integer
+      attr_accessor progress_in_mega_bytes: ::Integer
+      attr_accessor elapsed_time_in_seconds: ::Integer
+      attr_accessor estimated_time_to_completion_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class RestoreTableFromClusterSnapshotMessage
+      attr_accessor cluster_identifier: ::String
+      attr_accessor snapshot_identifier: ::String
+      attr_accessor source_database_name: ::String
+      attr_accessor source_schema_name: ::String
+      attr_accessor source_table_name: ::String
+      attr_accessor target_database_name: ::String
+      attr_accessor target_schema_name: ::String
+      attr_accessor new_table_name: ::String
+      attr_accessor enable_case_sensitive_identifier: bool
+      SENSITIVE: []
+    end
+
+    class RestoreTableFromClusterSnapshotResult
+      attr_accessor table_restore_status: Types::TableRestoreStatus
+      SENSITIVE: []
+    end
+
+    class ResumeClusterMessage
+      attr_accessor cluster_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ResumeClusterResult
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class RevisionTarget
+      attr_accessor database_revision: ::String
+      attr_accessor description: ::String
+      attr_accessor database_revision_release_date: ::Time
+      SENSITIVE: []
+    end
+
+    class RevokeClusterSecurityGroupIngressMessage
+      attr_accessor cluster_security_group_name: ::String
+      attr_accessor cidrip: ::String
+      attr_accessor ec2_security_group_name: ::String
+      attr_accessor ec2_security_group_owner_id: ::String
+      SENSITIVE: []
+    end
+
+    class RevokeClusterSecurityGroupIngressResult
+      attr_accessor cluster_security_group: Types::ClusterSecurityGroup
+      SENSITIVE: []
+    end
+
+    class RevokeEndpointAccessMessage
+      attr_accessor cluster_identifier: ::String
+      attr_accessor account: ::String
+      attr_accessor vpc_ids: ::Array[::String]
+      attr_accessor force: bool
+      SENSITIVE: []
+    end
+
+    class RevokeSnapshotAccessMessage
+      attr_accessor snapshot_identifier: ::String
+      attr_accessor snapshot_arn: ::String
+      attr_accessor snapshot_cluster_identifier: ::String
+      attr_accessor account_with_restore_access: ::String
+      SENSITIVE: []
+    end
+
+    class RevokeSnapshotAccessResult
+      attr_accessor snapshot: Types::Snapshot
+      SENSITIVE: []
+    end
+
+    class RotateEncryptionKeyMessage
+      attr_accessor cluster_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class RotateEncryptionKeyResult
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class SNSInvalidTopicFault < Aws::EmptyStructure
+    end
+
+    class SNSNoAuthorizationFault < Aws::EmptyStructure
+    end
+
+    class SNSTopicArnNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ScheduleDefinitionTypeUnsupportedFault < Aws::EmptyStructure
+    end
+
+    class ScheduledAction
+      attr_accessor scheduled_action_name: ::String
+      attr_accessor target_action: Types::ScheduledActionType
+      attr_accessor schedule: ::String
+      attr_accessor iam_role: ::String
+      attr_accessor scheduled_action_description: ::String
+      attr_accessor state: ("ACTIVE" | "DISABLED")
+      attr_accessor next_invocations: ::Array[::Time]
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ScheduledActionAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class ScheduledActionFilter
+      attr_accessor name: ("cluster-identifier" | "iam-role")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ScheduledActionNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ScheduledActionQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class ScheduledActionType
+      attr_accessor resize_cluster: Types::ResizeClusterMessage
+      attr_accessor pause_cluster: Types::PauseClusterMessage
+      attr_accessor resume_cluster: Types::ResumeClusterMessage
+      SENSITIVE: []
+    end
+
+    class ScheduledActionTypeUnsupportedFault < Aws::EmptyStructure
+    end
+
+    class ScheduledActionsMessage
+      attr_accessor marker: ::String
+      attr_accessor scheduled_actions: ::Array[Types::ScheduledAction]
+      SENSITIVE: []
+    end
+
+    class SecondaryClusterInfo
+      attr_accessor availability_zone: ::String
+      attr_accessor cluster_nodes: ::Array[Types::ClusterNode]
+      SENSITIVE: []
+    end
+
+    class ServiceIntegrationsUnion
+      attr_accessor lake_formation: ::Array[Types::LakeFormationScopeUnion]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class LakeFormation < ServiceIntegrationsUnion
+      end
+      class Unknown < ServiceIntegrationsUnion
+      end
+    end
+
+    class Snapshot
+      attr_accessor snapshot_identifier: ::String
+      attr_accessor cluster_identifier: ::String
+      attr_accessor snapshot_create_time: ::Time
+      attr_accessor status: ::String
+      attr_accessor port: ::Integer
+      attr_accessor availability_zone: ::String
+      attr_accessor cluster_create_time: ::Time
+      attr_accessor master_username: ::String
+      attr_accessor cluster_version: ::String
+      attr_accessor engine_full_version: ::String
+      attr_accessor snapshot_type: ::String
+      attr_accessor node_type: ::String
+      attr_accessor number_of_nodes: ::Integer
+      attr_accessor db_name: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor encrypted: bool
+      attr_accessor kms_key_id: ::String
+      attr_accessor encrypted_with_hsm: bool
+      attr_accessor accounts_with_restore_access: ::Array[Types::AccountWithRestoreAccess]
+      attr_accessor owner_account: ::String
+      attr_accessor total_backup_size_in_mega_bytes: ::Float
+      attr_accessor actual_incremental_backup_size_in_mega_bytes: ::Float
+      attr_accessor backup_progress_in_mega_bytes: ::Float
+      attr_accessor current_backup_rate_in_mega_bytes_per_second: ::Float
+      attr_accessor estimated_seconds_to_completion: ::Integer
+      attr_accessor elapsed_time_in_seconds: ::Integer
+      attr_accessor source_region: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor restorable_node_types: ::Array[::String]
+      attr_accessor enhanced_vpc_routing: bool
+      attr_accessor maintenance_track_name: ::String
+      attr_accessor manual_snapshot_retention_period: ::Integer
+      attr_accessor manual_snapshot_remaining_days: ::Integer
+      attr_accessor snapshot_retention_start_time: ::Time
+      attr_accessor master_password_secret_arn: ::String
+      attr_accessor master_password_secret_kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class SnapshotCopyAlreadyDisabledFault < Aws::EmptyStructure
+    end
+
+    class SnapshotCopyAlreadyEnabledFault < Aws::EmptyStructure
+    end
+
+    class SnapshotCopyDisabledFault < Aws::EmptyStructure
+    end
+
+    class SnapshotCopyGrant
+      attr_accessor snapshot_copy_grant_name: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class SnapshotCopyGrantAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class SnapshotCopyGrantMessage
+      attr_accessor marker: ::String
+      attr_accessor snapshot_copy_grants: ::Array[Types::SnapshotCopyGrant]
+      SENSITIVE: []
+    end
+
+    class SnapshotCopyGrantNotFoundFault < Aws::EmptyStructure
+    end
+
+    class SnapshotCopyGrantQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class SnapshotErrorMessage
+      attr_accessor snapshot_identifier: ::String
+      attr_accessor snapshot_cluster_identifier: ::String
+      attr_accessor failure_code: ::String
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class SnapshotMessage
+      attr_accessor marker: ::String
+      attr_accessor snapshots: ::Array[Types::Snapshot]
+      SENSITIVE: []
+    end
+
+    class SnapshotSchedule
+      attr_accessor schedule_definitions: ::Array[::String]
+      attr_accessor schedule_identifier: ::String
+      attr_accessor schedule_description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor next_invocations: ::Array[::Time]
+      attr_accessor associated_cluster_count: ::Integer
+      attr_accessor associated_clusters: ::Array[Types::ClusterAssociatedToSchedule]
+      SENSITIVE: []
+    end
+
+    class SnapshotScheduleAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class SnapshotScheduleNotFoundFault < Aws::EmptyStructure
+    end
+
+    class SnapshotScheduleQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class SnapshotScheduleUpdateInProgressFault < Aws::EmptyStructure
+    end
+
+    class SnapshotSortingEntity
+      attr_accessor attribute: ("SOURCE_TYPE" | "TOTAL_SIZE" | "CREATE_TIME")
+      attr_accessor sort_order: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class SourceNotFoundFault < Aws::EmptyStructure
+    end
+
+    class Subnet
+      attr_accessor subnet_identifier: ::String
+      attr_accessor subnet_availability_zone: Types::AvailabilityZone
+      attr_accessor subnet_status: ::String
+      SENSITIVE: []
+    end
+
+    class SubnetAlreadyInUse < Aws::EmptyStructure
+    end
+
+    class SubscriptionAlreadyExistFault < Aws::EmptyStructure
+    end
+
+    class SubscriptionCategoryNotFoundFault < Aws::EmptyStructure
+    end
+
+    class SubscriptionEventIdNotFoundFault < Aws::EmptyStructure
+    end
+
+    class SubscriptionNotFoundFault < Aws::EmptyStructure
+    end
+
+    class SubscriptionSeverityNotFoundFault < Aws::EmptyStructure
+    end
+
+    class SupportedOperation
+      attr_accessor operation_name: ::String
+      SENSITIVE: []
+    end
+
+    class SupportedPlatform
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class TableLimitExceededFault < Aws::EmptyStructure
+    end
+
+    class TableRestoreNotFoundFault < Aws::EmptyStructure
+    end
+
+    class TableRestoreStatus
+      attr_accessor table_restore_request_id: ::String
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "CANCELED")
+      attr_accessor message: ::String
+      attr_accessor request_time: ::Time
+      attr_accessor progress_in_mega_bytes: ::Integer
+      attr_accessor total_data_in_mega_bytes: ::Integer
+      attr_accessor cluster_identifier: ::String
+      attr_accessor snapshot_identifier: ::String
+      attr_accessor source_database_name: ::String
+      attr_accessor source_schema_name: ::String
+      attr_accessor source_table_name: ::String
+      attr_accessor target_database_name: ::String
+      attr_accessor target_schema_name: ::String
+      attr_accessor new_table_name: ::String
+      SENSITIVE: []
+    end
+
+    class TableRestoreStatusMessage
+      attr_accessor table_restore_status_details: ::Array[Types::TableRestoreStatus]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagLimitExceededFault < Aws::EmptyStructure
+    end
+
+    class TaggedResource
+      attr_accessor tag: Types::Tag
+      attr_accessor resource_name: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class TaggedResourceListMessage
+      attr_accessor tagged_resources: ::Array[Types::TaggedResource]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class TrackListMessage
+      attr_accessor maintenance_tracks: ::Array[Types::MaintenanceTrack]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class UnauthorizedOperation < Aws::EmptyStructure
+    end
+
+    class UnauthorizedPartnerIntegrationFault < Aws::EmptyStructure
+    end
+
+    class UnknownSnapshotCopyRegionFault < Aws::EmptyStructure
+    end
+
+    class UnsupportedOperationFault < Aws::EmptyStructure
+    end
+
+    class UnsupportedOptionFault < Aws::EmptyStructure
+    end
+
+    class UpdatePartnerStatusInputMessage
+      attr_accessor account_id: ::String
+      attr_accessor cluster_identifier: ::String
+      attr_accessor database_name: ::String
+      attr_accessor partner_name: ::String
+      attr_accessor status: ("Active" | "Inactive" | "RuntimeFailure" | "ConnectionFailure")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateTarget
+      attr_accessor maintenance_track_name: ::String
+      attr_accessor database_version: ::String
+      attr_accessor supported_operations: ::Array[Types::SupportedOperation]
+      SENSITIVE: []
+    end
+
+    class UsageLimit
+      attr_accessor usage_limit_id: ::String
+      attr_accessor cluster_identifier: ::String
+      attr_accessor feature_type: ("spectrum" | "concurrency-scaling" | "cross-region-datasharing")
+      attr_accessor limit_type: ("time" | "data-scanned")
+      attr_accessor amount: ::Integer
+      attr_accessor period: ("daily" | "weekly" | "monthly")
+      attr_accessor breach_action: ("log" | "emit-metric" | "disable")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class UsageLimitAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class UsageLimitList
+      attr_accessor usage_limits: ::Array[Types::UsageLimit]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class UsageLimitNotFoundFault < Aws::EmptyStructure
+    end
+
+    class VpcEndpoint
+      attr_accessor vpc_endpoint_id: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor network_interfaces: ::Array[Types::NetworkInterface]
+      SENSITIVE: []
+    end
+
+    class VpcSecurityGroupMembership
+      attr_accessor vpc_security_group_id: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+  end
+end

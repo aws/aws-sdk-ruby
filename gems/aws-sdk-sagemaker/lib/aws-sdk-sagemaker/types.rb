@@ -10647,6 +10647,18 @@ module Aws::SageMaker
     #
     class DeleteHumanTaskUiResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] hyper_parameter_tuning_job_name
+    #   The name of the hyperparameter tuning job that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteHyperParameterTuningJobRequest AWS API Documentation
+    #
+    class DeleteHyperParameterTuningJobRequest < Struct.new(
+      :hyper_parameter_tuning_job_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] image_name
     #   The name of the image to delete.
     #   @return [String]
@@ -12539,8 +12551,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] home_efs_file_system_id
-    #   The ID of the Amazon Elastic File System (EFS) managed by this
-    #   Domain.
+    #   The ID of the Amazon Elastic File System managed by this Domain.
     #   @return [String]
     #
     # @!attribute [rw] single_sign_on_managed_application_instance_id
@@ -13244,17 +13255,17 @@ module Aws::SageMaker
     #   @return [Types::OfflineStoreConfig]
     #
     # @!attribute [rw] throughput_config
-    #   Active throughput configuration of the feature group. Used to set
-    #   feature group throughput configuration. There are two modes:
-    #   `ON_DEMAND` and `PROVISIONED`. With on-demand mode, you are charged
-    #   for data reads and writes that your application performs on your
-    #   feature group. You do not need to specify read and write throughput
-    #   because Feature Store accommodates your workloads as they ramp up
-    #   and down. You can switch a feature group to on-demand only once in a
-    #   24 hour period. With provisioned throughput mode, you specify the
-    #   read and write capacity per second that you expect your application
-    #   to require, and you are billed based on those limits. Exceeding
-    #   provisioned throughput will result in your requests being throttled.
+    #   Active throughput configuration of the feature group. There are two
+    #   modes: `ON_DEMAND` and `PROVISIONED`. With on-demand mode, you are
+    #   charged for data reads and writes that your application performs on
+    #   your feature group. You do not need to specify read and write
+    #   throughput because Feature Store accommodates your workloads as they
+    #   ramp up and down. You can switch a feature group to on-demand only
+    #   once in a 24 hour period. With provisioned throughput mode, you
+    #   specify the read and write capacity per second that you expect your
+    #   application to require, and you are billed based on those limits.
+    #   Exceeding provisioned throughput will result in your requests being
+    #   throttled.
     #
     #   Note: `PROVISIONED` throughput mode is supported only for feature
     #   groups that are offline-only, or use the [ `Standard` ][1] tier
@@ -13756,8 +13767,7 @@ module Aws::SageMaker
     #   @return [Array<Types::HyperParameterTrainingJobDefinition>]
     #
     # @!attribute [rw] hyper_parameter_tuning_job_status
-    #   The status of the tuning job: InProgress, Completed, Failed,
-    #   Stopping, or Stopped.
+    #   The status of the tuning job.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -15054,7 +15064,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] model_package_group_name
-    #   The name of gthe model group to describe.
+    #   The name of the model group to describe.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelPackageGroupInput AWS API Documentation
@@ -30211,14 +30221,22 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The access configuration file for the ML model. You can explicitly
-    # accept the model end-user license agreement (EULA) within the
-    # `ModelAccessConfig`. For more information, see [End-user license
-    # agreements][1].
+    # The access configuration file to control access to the ML model. You
+    # can explicitly accept the model end-user license agreement (EULA)
+    # within the `ModelAccessConfig`.
+    #
+    # * If you are a Jumpstart user, see the [End-user license
+    #   agreements][1] section for more details on accepting the EULA.
+    #
+    # * If you are an AutoML user, see the *Optional Parameters* section of
+    #   *Create an AutoML job to fine-tune text generation models using the
+    #   API* for details on [How to set the EULA acceptance when fine-tuning
+    #   a model using the AutoML API][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-choose.html#jumpstart-foundation-models-choose-eula
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-create-experiment-finetune-llms.html#autopilot-llms-finetuning-api-optional-params
     #
     # @!attribute [rw] accept_eula
     #   Specifies agreement to the model end-user license agreement (EULA).
@@ -37731,7 +37749,7 @@ module Aws::SageMaker
     #   either a key name prefix or a manifest. For example:
     #
     #   * A key name prefix might look like this:
-    #     `s3://bucketname/exampleprefix`
+    #     `s3://bucketname/exampleprefix/`
     #
     #   * A manifest might look like this:
     #     `s3://bucketname/example.manifest`
@@ -40092,14 +40110,22 @@ module Aws::SageMaker
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] model_access_config
-    #   The access configuration file for the ML model. You can explicitly
-    #   accept the model end-user license agreement (EULA) within the
-    #   `ModelAccessConfig`. For more information, see [End-user license
-    #   agreements][1].
+    #   The access configuration file to control access to the ML model. You
+    #   can explicitly accept the model end-user license agreement (EULA)
+    #   within the `ModelAccessConfig`.
+    #
+    #   * If you are a Jumpstart user, see the [End-user license
+    #     agreements][1] section for more details on accepting the EULA.
+    #
+    #   * If you are an AutoML user, see the *Optional Parameters* section
+    #     of *Create an AutoML job to fine-tune text generation models using
+    #     the API* for details on [How to set the EULA acceptance when
+    #     fine-tuning a model using the AutoML API][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-choose.html#jumpstart-foundation-models-choose-eula
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-create-experiment-finetune-llms.html#autopilot-llms-finetuning-api-optional-params
     #   @return [Types::ModelAccessConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TextGenerationJobConfig AWS API Documentation
@@ -40177,17 +40203,17 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Active throughput configuration of the feature group. Used to set
-    # feature group throughput configuration. There are two modes:
-    # `ON_DEMAND` and `PROVISIONED`. With on-demand mode, you are charged
-    # for data reads and writes that your application performs on your
-    # feature group. You do not need to specify read and write throughput
-    # because Feature Store accommodates your workloads as they ramp up and
-    # down. You can switch a feature group to on-demand only once in a 24
-    # hour period. With provisioned throughput mode, you specify the read
-    # and write capacity per second that you expect your application to
-    # require, and you are billed based on those limits. Exceeding
-    # provisioned throughput will result in your requests being throttled.
+    # Active throughput configuration of the feature group. There are two
+    # modes: `ON_DEMAND` and `PROVISIONED`. With on-demand mode, you are
+    # charged for data reads and writes that your application performs on
+    # your feature group. You do not need to specify read and write
+    # throughput because Feature Store accommodates your workloads as they
+    # ramp up and down. You can switch a feature group to on-demand only
+    # once in a 24 hour period. With provisioned throughput mode, you
+    # specify the read and write capacity per second that you expect your
+    # application to require, and you are billed based on those limits.
+    # Exceeding provisioned throughput will result in your requests being
+    # throttled.
     #
     # Note: `PROVISIONED` throughput mode is supported only for feature
     # groups that are offline-only, or use the [ `Standard` ][1] tier online
@@ -41777,7 +41803,7 @@ module Aws::SageMaker
     #   either a key name prefix or a manifest. For example:
     #
     #   * A key name prefix might look like this:
-    #     `s3://bucketname/exampleprefix`.
+    #     `s3://bucketname/exampleprefix/`.
     #
     #   * A manifest might look like this:
     #     `s3://bucketname/example.manifest`

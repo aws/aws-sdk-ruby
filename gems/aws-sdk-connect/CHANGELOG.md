@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.150.0 (2024-01-26)
+------------------
+
+* Feature - Update list and string length limits for predefined attributes.
+
 1.149.0 (2024-01-18)
 ------------------
 

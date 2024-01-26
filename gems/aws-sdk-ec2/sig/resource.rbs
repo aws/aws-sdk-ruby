@@ -1,0 +1,1009 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EC2
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html
+    class Resource
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#initialize-instance_method
+      def initialize: (
+                        ?client: Client,
+                        ?credentials: untyped,
+                        ?region: String,
+                        ?access_key_id: String,
+                        ?active_endpoint_cache: bool,
+                        ?adaptive_retry_wait_to_fill: bool,
+                        ?client_side_monitoring: bool,
+                        ?client_side_monitoring_client_id: String,
+                        ?client_side_monitoring_host: String,
+                        ?client_side_monitoring_port: Integer,
+                        ?client_side_monitoring_publisher: untyped,
+                        ?convert_params: bool,
+                        ?correct_clock_skew: bool,
+                        ?defaults_mode: String,
+                        ?disable_host_prefix_injection: bool,
+                        ?disable_request_compression: bool,
+                        ?endpoint: String,
+                        ?endpoint_cache_max_entries: Integer,
+                        ?endpoint_cache_max_threads: Integer,
+                        ?endpoint_cache_poll_interval: Integer,
+                        ?endpoint_discovery: bool,
+                        ?ignore_configured_endpoint_urls: bool,
+                        ?log_formatter: untyped,
+                        ?log_level: Symbol,
+                        ?logger: untyped,
+                        ?max_attempts: Integer,
+                        ?profile: String,
+                        ?request_min_compression_size_bytes: Integer,
+                        ?retry_backoff: Proc,
+                        ?retry_base_delay: Float,
+                        ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                        ?retry_limit: Integer,
+                        ?retry_max_delay: Integer,
+                        ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                        ?sdk_ua_app_id: String,
+                        ?secret_access_key: String,
+                        ?session_token: String,
+                        ?stub_responses: untyped,
+                        ?token_provider: untyped,
+                        ?use_dualstack_endpoint: bool,
+                        ?use_fips_endpoint: bool,
+                        ?validate_params: bool,
+                        ?endpoint_provider: untyped,
+                        ?http_proxy: String,
+                        ?http_open_timeout: (Float | Integer),
+                        ?http_read_timeout: (Float | Integer),
+                        ?http_idle_timeout: (Float | Integer),
+                        ?http_continue_timeout: (Float | Integer),
+                        ?ssl_timeout: (Float | Integer | nil),
+                        ?http_wire_trace: bool,
+                        ?ssl_verify_peer: bool,
+                        ?ssl_ca_bundle: String,
+                        ?ssl_ca_directory: String,
+                        ?ssl_ca_store: String,
+                        ?on_chunk_received: Proc,
+                        ?on_chunk_sent: Proc,
+                        ?raise_response_errors: bool
+                      ) -> void
+                    | (?Hash[Symbol, untyped]) -> void
+
+      def client: () -> Client
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#create_dhcp_options-instance_method
+      def create_dhcp_options: (
+                                 dhcp_configurations: Array[
+                                   {
+                                     key: ::String?,
+                                     values: Array[::String]?
+                                   },
+                                 ],
+                                 ?tag_specifications: Array[
+                                   {
+                                     resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint")?,
+                                     tags: Array[
+                                       {
+                                         key: ::String?,
+                                         value: ::String?
+                                       },
+                                     ]?
+                                   },
+                                 ],
+                                 ?dry_run: bool
+                               ) -> DhcpOptions
+                             | (?Hash[Symbol, untyped]) -> DhcpOptions
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#create_instances-instance_method
+      def create_instances: (
+                              ?block_device_mappings: Array[
+                                {
+                                  device_name: ::String?,
+                                  virtual_name: ::String?,
+                                  ebs: {
+                                    delete_on_termination: bool?,
+                                    iops: ::Integer?,
+                                    snapshot_id: ::String?,
+                                    volume_size: ::Integer?,
+                                    volume_type: ("standard" | "io1" | "io2" | "gp2" | "sc1" | "st1" | "gp3")?,
+                                    kms_key_id: ::String?,
+                                    throughput: ::Integer?,
+                                    outpost_arn: ::String?,
+                                    encrypted: bool?
+                                  }?,
+                                  no_device: ::String?
+                                },
+                              ],
+                              ?image_id: ::String,
+                              ?instance_type: ("a1.medium" | "a1.large" | "a1.xlarge" | "a1.2xlarge" | "a1.4xlarge" | "a1.metal" | "c1.medium" | "c1.xlarge" | "c3.large" | "c3.xlarge" | "c3.2xlarge" | "c3.4xlarge" | "c3.8xlarge" | "c4.large" | "c4.xlarge" | "c4.2xlarge" | "c4.4xlarge" | "c4.8xlarge" | "c5.large" | "c5.xlarge" | "c5.2xlarge" | "c5.4xlarge" | "c5.9xlarge" | "c5.12xlarge" | "c5.18xlarge" | "c5.24xlarge" | "c5.metal" | "c5a.large" | "c5a.xlarge" | "c5a.2xlarge" | "c5a.4xlarge" | "c5a.8xlarge" | "c5a.12xlarge" | "c5a.16xlarge" | "c5a.24xlarge" | "c5ad.large" | "c5ad.xlarge" | "c5ad.2xlarge" | "c5ad.4xlarge" | "c5ad.8xlarge" | "c5ad.12xlarge" | "c5ad.16xlarge" | "c5ad.24xlarge" | "c5d.large" | "c5d.xlarge" | "c5d.2xlarge" | "c5d.4xlarge" | "c5d.9xlarge" | "c5d.12xlarge" | "c5d.18xlarge" | "c5d.24xlarge" | "c5d.metal" | "c5n.large" | "c5n.xlarge" | "c5n.2xlarge" | "c5n.4xlarge" | "c5n.9xlarge" | "c5n.18xlarge" | "c5n.metal" | "c6g.medium" | "c6g.large" | "c6g.xlarge" | "c6g.2xlarge" | "c6g.4xlarge" | "c6g.8xlarge" | "c6g.12xlarge" | "c6g.16xlarge" | "c6g.metal" | "c6gd.medium" | "c6gd.large" | "c6gd.xlarge" | "c6gd.2xlarge" | "c6gd.4xlarge" | "c6gd.8xlarge" | "c6gd.12xlarge" | "c6gd.16xlarge" | "c6gd.metal" | "c6gn.medium" | "c6gn.large" | "c6gn.xlarge" | "c6gn.2xlarge" | "c6gn.4xlarge" | "c6gn.8xlarge" | "c6gn.12xlarge" | "c6gn.16xlarge" | "c6i.large" | "c6i.xlarge" | "c6i.2xlarge" | "c6i.4xlarge" | "c6i.8xlarge" | "c6i.12xlarge" | "c6i.16xlarge" | "c6i.24xlarge" | "c6i.32xlarge" | "c6i.metal" | "cc1.4xlarge" | "cc2.8xlarge" | "cg1.4xlarge" | "cr1.8xlarge" | "d2.xlarge" | "d2.2xlarge" | "d2.4xlarge" | "d2.8xlarge" | "d3.xlarge" | "d3.2xlarge" | "d3.4xlarge" | "d3.8xlarge" | "d3en.xlarge" | "d3en.2xlarge" | "d3en.4xlarge" | "d3en.6xlarge" | "d3en.8xlarge" | "d3en.12xlarge" | "dl1.24xlarge" | "f1.2xlarge" | "f1.4xlarge" | "f1.16xlarge" | "g2.2xlarge" | "g2.8xlarge" | "g3.4xlarge" | "g3.8xlarge" | "g3.16xlarge" | "g3s.xlarge" | "g4ad.xlarge" | "g4ad.2xlarge" | "g4ad.4xlarge" | "g4ad.8xlarge" | "g4ad.16xlarge" | "g4dn.xlarge" | "g4dn.2xlarge" | "g4dn.4xlarge" | "g4dn.8xlarge" | "g4dn.12xlarge" | "g4dn.16xlarge" | "g4dn.metal" | "g5.xlarge" | "g5.2xlarge" | "g5.4xlarge" | "g5.8xlarge" | "g5.12xlarge" | "g5.16xlarge" | "g5.24xlarge" | "g5.48xlarge" | "g5g.xlarge" | "g5g.2xlarge" | "g5g.4xlarge" | "g5g.8xlarge" | "g5g.16xlarge" | "g5g.metal" | "hi1.4xlarge" | "hpc6a.48xlarge" | "hs1.8xlarge" | "h1.2xlarge" | "h1.4xlarge" | "h1.8xlarge" | "h1.16xlarge" | "i2.xlarge" | "i2.2xlarge" | "i2.4xlarge" | "i2.8xlarge" | "i3.large" | "i3.xlarge" | "i3.2xlarge" | "i3.4xlarge" | "i3.8xlarge" | "i3.16xlarge" | "i3.metal" | "i3en.large" | "i3en.xlarge" | "i3en.2xlarge" | "i3en.3xlarge" | "i3en.6xlarge" | "i3en.12xlarge" | "i3en.24xlarge" | "i3en.metal" | "im4gn.large" | "im4gn.xlarge" | "im4gn.2xlarge" | "im4gn.4xlarge" | "im4gn.8xlarge" | "im4gn.16xlarge" | "inf1.xlarge" | "inf1.2xlarge" | "inf1.6xlarge" | "inf1.24xlarge" | "is4gen.medium" | "is4gen.large" | "is4gen.xlarge" | "is4gen.2xlarge" | "is4gen.4xlarge" | "is4gen.8xlarge" | "m1.small" | "m1.medium" | "m1.large" | "m1.xlarge" | "m2.xlarge" | "m2.2xlarge" | "m2.4xlarge" | "m3.medium" | "m3.large" | "m3.xlarge" | "m3.2xlarge" | "m4.large" | "m4.xlarge" | "m4.2xlarge" | "m4.4xlarge" | "m4.10xlarge" | "m4.16xlarge" | "m5.large" | "m5.xlarge" | "m5.2xlarge" | "m5.4xlarge" | "m5.8xlarge" | "m5.12xlarge" | "m5.16xlarge" | "m5.24xlarge" | "m5.metal" | "m5a.large" | "m5a.xlarge" | "m5a.2xlarge" | "m5a.4xlarge" | "m5a.8xlarge" | "m5a.12xlarge" | "m5a.16xlarge" | "m5a.24xlarge" | "m5ad.large" | "m5ad.xlarge" | "m5ad.2xlarge" | "m5ad.4xlarge" | "m5ad.8xlarge" | "m5ad.12xlarge" | "m5ad.16xlarge" | "m5ad.24xlarge" | "m5d.large" | "m5d.xlarge" | "m5d.2xlarge" | "m5d.4xlarge" | "m5d.8xlarge" | "m5d.12xlarge" | "m5d.16xlarge" | "m5d.24xlarge" | "m5d.metal" | "m5dn.large" | "m5dn.xlarge" | "m5dn.2xlarge" | "m5dn.4xlarge" | "m5dn.8xlarge" | "m5dn.12xlarge" | "m5dn.16xlarge" | "m5dn.24xlarge" | "m5dn.metal" | "m5n.large" | "m5n.xlarge" | "m5n.2xlarge" | "m5n.4xlarge" | "m5n.8xlarge" | "m5n.12xlarge" | "m5n.16xlarge" | "m5n.24xlarge" | "m5n.metal" | "m5zn.large" | "m5zn.xlarge" | "m5zn.2xlarge" | "m5zn.3xlarge" | "m5zn.6xlarge" | "m5zn.12xlarge" | "m5zn.metal" | "m6a.large" | "m6a.xlarge" | "m6a.2xlarge" | "m6a.4xlarge" | "m6a.8xlarge" | "m6a.12xlarge" | "m6a.16xlarge" | "m6a.24xlarge" | "m6a.32xlarge" | "m6a.48xlarge" | "m6g.metal" | "m6g.medium" | "m6g.large" | "m6g.xlarge" | "m6g.2xlarge" | "m6g.4xlarge" | "m6g.8xlarge" | "m6g.12xlarge" | "m6g.16xlarge" | "m6gd.metal" | "m6gd.medium" | "m6gd.large" | "m6gd.xlarge" | "m6gd.2xlarge" | "m6gd.4xlarge" | "m6gd.8xlarge" | "m6gd.12xlarge" | "m6gd.16xlarge" | "m6i.large" | "m6i.xlarge" | "m6i.2xlarge" | "m6i.4xlarge" | "m6i.8xlarge" | "m6i.12xlarge" | "m6i.16xlarge" | "m6i.24xlarge" | "m6i.32xlarge" | "m6i.metal" | "mac1.metal" | "p2.xlarge" | "p2.8xlarge" | "p2.16xlarge" | "p3.2xlarge" | "p3.8xlarge" | "p3.16xlarge" | "p3dn.24xlarge" | "p4d.24xlarge" | "r3.large" | "r3.xlarge" | "r3.2xlarge" | "r3.4xlarge" | "r3.8xlarge" | "r4.large" | "r4.xlarge" | "r4.2xlarge" | "r4.4xlarge" | "r4.8xlarge" | "r4.16xlarge" | "r5.large" | "r5.xlarge" | "r5.2xlarge" | "r5.4xlarge" | "r5.8xlarge" | "r5.12xlarge" | "r5.16xlarge" | "r5.24xlarge" | "r5.metal" | "r5a.large" | "r5a.xlarge" | "r5a.2xlarge" | "r5a.4xlarge" | "r5a.8xlarge" | "r5a.12xlarge" | "r5a.16xlarge" | "r5a.24xlarge" | "r5ad.large" | "r5ad.xlarge" | "r5ad.2xlarge" | "r5ad.4xlarge" | "r5ad.8xlarge" | "r5ad.12xlarge" | "r5ad.16xlarge" | "r5ad.24xlarge" | "r5b.large" | "r5b.xlarge" | "r5b.2xlarge" | "r5b.4xlarge" | "r5b.8xlarge" | "r5b.12xlarge" | "r5b.16xlarge" | "r5b.24xlarge" | "r5b.metal" | "r5d.large" | "r5d.xlarge" | "r5d.2xlarge" | "r5d.4xlarge" | "r5d.8xlarge" | "r5d.12xlarge" | "r5d.16xlarge" | "r5d.24xlarge" | "r5d.metal" | "r5dn.large" | "r5dn.xlarge" | "r5dn.2xlarge" | "r5dn.4xlarge" | "r5dn.8xlarge" | "r5dn.12xlarge" | "r5dn.16xlarge" | "r5dn.24xlarge" | "r5dn.metal" | "r5n.large" | "r5n.xlarge" | "r5n.2xlarge" | "r5n.4xlarge" | "r5n.8xlarge" | "r5n.12xlarge" | "r5n.16xlarge" | "r5n.24xlarge" | "r5n.metal" | "r6g.medium" | "r6g.large" | "r6g.xlarge" | "r6g.2xlarge" | "r6g.4xlarge" | "r6g.8xlarge" | "r6g.12xlarge" | "r6g.16xlarge" | "r6g.metal" | "r6gd.medium" | "r6gd.large" | "r6gd.xlarge" | "r6gd.2xlarge" | "r6gd.4xlarge" | "r6gd.8xlarge" | "r6gd.12xlarge" | "r6gd.16xlarge" | "r6gd.metal" | "r6i.large" | "r6i.xlarge" | "r6i.2xlarge" | "r6i.4xlarge" | "r6i.8xlarge" | "r6i.12xlarge" | "r6i.16xlarge" | "r6i.24xlarge" | "r6i.32xlarge" | "r6i.metal" | "t1.micro" | "t2.nano" | "t2.micro" | "t2.small" | "t2.medium" | "t2.large" | "t2.xlarge" | "t2.2xlarge" | "t3.nano" | "t3.micro" | "t3.small" | "t3.medium" | "t3.large" | "t3.xlarge" | "t3.2xlarge" | "t3a.nano" | "t3a.micro" | "t3a.small" | "t3a.medium" | "t3a.large" | "t3a.xlarge" | "t3a.2xlarge" | "t4g.nano" | "t4g.micro" | "t4g.small" | "t4g.medium" | "t4g.large" | "t4g.xlarge" | "t4g.2xlarge" | "u-6tb1.56xlarge" | "u-6tb1.112xlarge" | "u-9tb1.112xlarge" | "u-12tb1.112xlarge" | "u-6tb1.metal" | "u-9tb1.metal" | "u-12tb1.metal" | "u-18tb1.metal" | "u-24tb1.metal" | "vt1.3xlarge" | "vt1.6xlarge" | "vt1.24xlarge" | "x1.16xlarge" | "x1.32xlarge" | "x1e.xlarge" | "x1e.2xlarge" | "x1e.4xlarge" | "x1e.8xlarge" | "x1e.16xlarge" | "x1e.32xlarge" | "x2iezn.2xlarge" | "x2iezn.4xlarge" | "x2iezn.6xlarge" | "x2iezn.8xlarge" | "x2iezn.12xlarge" | "x2iezn.metal" | "x2gd.medium" | "x2gd.large" | "x2gd.xlarge" | "x2gd.2xlarge" | "x2gd.4xlarge" | "x2gd.8xlarge" | "x2gd.12xlarge" | "x2gd.16xlarge" | "x2gd.metal" | "z1d.large" | "z1d.xlarge" | "z1d.2xlarge" | "z1d.3xlarge" | "z1d.6xlarge" | "z1d.12xlarge" | "z1d.metal" | "x2idn.16xlarge" | "x2idn.24xlarge" | "x2idn.32xlarge" | "x2iedn.xlarge" | "x2iedn.2xlarge" | "x2iedn.4xlarge" | "x2iedn.8xlarge" | "x2iedn.16xlarge" | "x2iedn.24xlarge" | "x2iedn.32xlarge" | "c6a.large" | "c6a.xlarge" | "c6a.2xlarge" | "c6a.4xlarge" | "c6a.8xlarge" | "c6a.12xlarge" | "c6a.16xlarge" | "c6a.24xlarge" | "c6a.32xlarge" | "c6a.48xlarge" | "c6a.metal" | "m6a.metal" | "i4i.large" | "i4i.xlarge" | "i4i.2xlarge" | "i4i.4xlarge" | "i4i.8xlarge" | "i4i.16xlarge" | "i4i.32xlarge" | "i4i.metal" | "x2idn.metal" | "x2iedn.metal" | "c7g.medium" | "c7g.large" | "c7g.xlarge" | "c7g.2xlarge" | "c7g.4xlarge" | "c7g.8xlarge" | "c7g.12xlarge" | "c7g.16xlarge" | "mac2.metal" | "c6id.large" | "c6id.xlarge" | "c6id.2xlarge" | "c6id.4xlarge" | "c6id.8xlarge" | "c6id.12xlarge" | "c6id.16xlarge" | "c6id.24xlarge" | "c6id.32xlarge" | "c6id.metal" | "m6id.large" | "m6id.xlarge" | "m6id.2xlarge" | "m6id.4xlarge" | "m6id.8xlarge" | "m6id.12xlarge" | "m6id.16xlarge" | "m6id.24xlarge" | "m6id.32xlarge" | "m6id.metal" | "r6id.large" | "r6id.xlarge" | "r6id.2xlarge" | "r6id.4xlarge" | "r6id.8xlarge" | "r6id.12xlarge" | "r6id.16xlarge" | "r6id.24xlarge" | "r6id.32xlarge" | "r6id.metal" | "r6a.large" | "r6a.xlarge" | "r6a.2xlarge" | "r6a.4xlarge" | "r6a.8xlarge" | "r6a.12xlarge" | "r6a.16xlarge" | "r6a.24xlarge" | "r6a.32xlarge" | "r6a.48xlarge" | "r6a.metal" | "p4de.24xlarge" | "u-3tb1.56xlarge" | "u-18tb1.112xlarge" | "u-24tb1.112xlarge" | "trn1.2xlarge" | "trn1.32xlarge" | "hpc6id.32xlarge" | "c6in.large" | "c6in.xlarge" | "c6in.2xlarge" | "c6in.4xlarge" | "c6in.8xlarge" | "c6in.12xlarge" | "c6in.16xlarge" | "c6in.24xlarge" | "c6in.32xlarge" | "m6in.large" | "m6in.xlarge" | "m6in.2xlarge" | "m6in.4xlarge" | "m6in.8xlarge" | "m6in.12xlarge" | "m6in.16xlarge" | "m6in.24xlarge" | "m6in.32xlarge" | "m6idn.large" | "m6idn.xlarge" | "m6idn.2xlarge" | "m6idn.4xlarge" | "m6idn.8xlarge" | "m6idn.12xlarge" | "m6idn.16xlarge" | "m6idn.24xlarge" | "m6idn.32xlarge" | "r6in.large" | "r6in.xlarge" | "r6in.2xlarge" | "r6in.4xlarge" | "r6in.8xlarge" | "r6in.12xlarge" | "r6in.16xlarge" | "r6in.24xlarge" | "r6in.32xlarge" | "r6idn.large" | "r6idn.xlarge" | "r6idn.2xlarge" | "r6idn.4xlarge" | "r6idn.8xlarge" | "r6idn.12xlarge" | "r6idn.16xlarge" | "r6idn.24xlarge" | "r6idn.32xlarge" | "c7g.metal" | "m7g.medium" | "m7g.large" | "m7g.xlarge" | "m7g.2xlarge" | "m7g.4xlarge" | "m7g.8xlarge" | "m7g.12xlarge" | "m7g.16xlarge" | "m7g.metal" | "r7g.medium" | "r7g.large" | "r7g.xlarge" | "r7g.2xlarge" | "r7g.4xlarge" | "r7g.8xlarge" | "r7g.12xlarge" | "r7g.16xlarge" | "r7g.metal" | "c6in.metal" | "m6in.metal" | "m6idn.metal" | "r6in.metal" | "r6idn.metal" | "inf2.xlarge" | "inf2.8xlarge" | "inf2.24xlarge" | "inf2.48xlarge" | "trn1n.32xlarge" | "i4g.large" | "i4g.xlarge" | "i4g.2xlarge" | "i4g.4xlarge" | "i4g.8xlarge" | "i4g.16xlarge" | "hpc7g.4xlarge" | "hpc7g.8xlarge" | "hpc7g.16xlarge" | "c7gn.medium" | "c7gn.large" | "c7gn.xlarge" | "c7gn.2xlarge" | "c7gn.4xlarge" | "c7gn.8xlarge" | "c7gn.12xlarge" | "c7gn.16xlarge" | "p5.48xlarge" | "m7i.large" | "m7i.xlarge" | "m7i.2xlarge" | "m7i.4xlarge" | "m7i.8xlarge" | "m7i.12xlarge" | "m7i.16xlarge" | "m7i.24xlarge" | "m7i.48xlarge" | "m7i-flex.large" | "m7i-flex.xlarge" | "m7i-flex.2xlarge" | "m7i-flex.4xlarge" | "m7i-flex.8xlarge" | "m7a.medium" | "m7a.large" | "m7a.xlarge" | "m7a.2xlarge" | "m7a.4xlarge" | "m7a.8xlarge" | "m7a.12xlarge" | "m7a.16xlarge" | "m7a.24xlarge" | "m7a.32xlarge" | "m7a.48xlarge" | "m7a.metal-48xl" | "hpc7a.12xlarge" | "hpc7a.24xlarge" | "hpc7a.48xlarge" | "hpc7a.96xlarge" | "c7gd.medium" | "c7gd.large" | "c7gd.xlarge" | "c7gd.2xlarge" | "c7gd.4xlarge" | "c7gd.8xlarge" | "c7gd.12xlarge" | "c7gd.16xlarge" | "m7gd.medium" | "m7gd.large" | "m7gd.xlarge" | "m7gd.2xlarge" | "m7gd.4xlarge" | "m7gd.8xlarge" | "m7gd.12xlarge" | "m7gd.16xlarge" | "r7gd.medium" | "r7gd.large" | "r7gd.xlarge" | "r7gd.2xlarge" | "r7gd.4xlarge" | "r7gd.8xlarge" | "r7gd.12xlarge" | "r7gd.16xlarge" | "r7a.medium" | "r7a.large" | "r7a.xlarge" | "r7a.2xlarge" | "r7a.4xlarge" | "r7a.8xlarge" | "r7a.12xlarge" | "r7a.16xlarge" | "r7a.24xlarge" | "r7a.32xlarge" | "r7a.48xlarge" | "c7i.large" | "c7i.xlarge" | "c7i.2xlarge" | "c7i.4xlarge" | "c7i.8xlarge" | "c7i.12xlarge" | "c7i.16xlarge" | "c7i.24xlarge" | "c7i.48xlarge" | "mac2-m2pro.metal" | "r7iz.large" | "r7iz.xlarge" | "r7iz.2xlarge" | "r7iz.4xlarge" | "r7iz.8xlarge" | "r7iz.12xlarge" | "r7iz.16xlarge" | "r7iz.32xlarge" | "c7a.medium" | "c7a.large" | "c7a.xlarge" | "c7a.2xlarge" | "c7a.4xlarge" | "c7a.8xlarge" | "c7a.12xlarge" | "c7a.16xlarge" | "c7a.24xlarge" | "c7a.32xlarge" | "c7a.48xlarge" | "c7a.metal-48xl" | "r7a.metal-48xl" | "r7i.large" | "r7i.xlarge" | "r7i.2xlarge" | "r7i.4xlarge" | "r7i.8xlarge" | "r7i.12xlarge" | "r7i.16xlarge" | "r7i.24xlarge" | "r7i.48xlarge" | "dl2q.24xlarge" | "mac2-m2.metal" | "i4i.12xlarge" | "i4i.24xlarge" | "c7i.metal-24xl" | "c7i.metal-48xl" | "m7i.metal-24xl" | "m7i.metal-48xl" | "r7i.metal-24xl" | "r7i.metal-48xl" | "r7iz.metal-16xl" | "r7iz.metal-32xl"),
+                              ?ipv_6_address_count: ::Integer,
+                              ?ipv_6_addresses: Array[
+                                {
+                                  ipv_6_address: ::String?,
+                                  is_primary_ipv_6: bool?
+                                },
+                              ],
+                              ?kernel_id: ::String,
+                              ?key_name: ::String,
+                              max_count: ::Integer,
+                              min_count: ::Integer,
+                              ?monitoring: {
+                                enabled: bool
+                              },
+                              ?placement: {
+                                availability_zone: ::String?,
+                                affinity: ::String?,
+                                group_name: ::String?,
+                                partition_number: ::Integer?,
+                                host_id: ::String?,
+                                tenancy: ("default" | "dedicated" | "host")?,
+                                spread_domain: ::String?,
+                                host_resource_group_arn: ::String?,
+                                group_id: ::String?
+                              },
+                              ?ramdisk_id: ::String,
+                              ?security_group_ids: Array[::String],
+                              ?security_groups: Array[::String],
+                              ?subnet_id: ::String,
+                              ?user_data: ::String,
+                              ?additional_info: ::String,
+                              ?client_token: ::String,
+                              ?disable_api_termination: bool,
+                              ?dry_run: bool,
+                              ?ebs_optimized: bool,
+                              ?iam_instance_profile: {
+                                arn: ::String?,
+                                name: ::String?
+                              },
+                              ?instance_initiated_shutdown_behavior: ("stop" | "terminate"),
+                              ?network_interfaces: Array[
+                                {
+                                  associate_public_ip_address: bool?,
+                                  delete_on_termination: bool?,
+                                  description: ::String?,
+                                  device_index: ::Integer?,
+                                  groups: Array[::String]?,
+                                  ipv_6_address_count: ::Integer?,
+                                  ipv_6_addresses: Array[
+                                    {
+                                      ipv_6_address: ::String?,
+                                      is_primary_ipv_6: bool?
+                                    },
+                                  ]?,
+                                  network_interface_id: ::String?,
+                                  private_ip_address: ::String?,
+                                  private_ip_addresses: Array[
+                                    {
+                                      primary: bool?,
+                                      private_ip_address: ::String?
+                                    },
+                                  ]?,
+                                  secondary_private_ip_address_count: ::Integer?,
+                                  subnet_id: ::String?,
+                                  associate_carrier_ip_address: bool?,
+                                  interface_type: ::String?,
+                                  network_card_index: ::Integer?,
+                                  ipv_4_prefixes: Array[
+                                    {
+                                      ipv_4_prefix: ::String?
+                                    },
+                                  ]?,
+                                  ipv_4_prefix_count: ::Integer?,
+                                  ipv_6_prefixes: Array[
+                                    {
+                                      ipv_6_prefix: ::String?
+                                    },
+                                  ]?,
+                                  ipv_6_prefix_count: ::Integer?,
+                                  primary_ipv_6: bool?,
+                                  ena_srd_specification: {
+                                    ena_srd_enabled: bool?,
+                                    ena_srd_udp_specification: {
+                                      ena_srd_udp_enabled: bool?
+                                    }?
+                                  }?,
+                                  connection_tracking_specification: {
+                                    tcp_established_timeout: ::Integer?,
+                                    udp_stream_timeout: ::Integer?,
+                                    udp_timeout: ::Integer?
+                                  }?
+                                },
+                              ],
+                              ?private_ip_address: ::String,
+                              ?elastic_gpu_specification: Array[
+                                {
+                                  type: ::String
+                                },
+                              ],
+                              ?elastic_inference_accelerators: Array[
+                                {
+                                  type: ::String,
+                                  count: ::Integer?
+                                },
+                              ],
+                              ?tag_specifications: Array[
+                                {
+                                  resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint")?,
+                                  tags: Array[
+                                    {
+                                      key: ::String?,
+                                      value: ::String?
+                                    },
+                                  ]?
+                                },
+                              ],
+                              ?launch_template: {
+                                launch_template_id: ::String?,
+                                launch_template_name: ::String?,
+                                version: ::String?
+                              },
+                              ?instance_market_options: {
+                                market_type: ("spot" | "capacity-block")?,
+                                spot_options: {
+                                  max_price: ::String?,
+                                  spot_instance_type: ("one-time" | "persistent")?,
+                                  block_duration_minutes: ::Integer?,
+                                  valid_until: ::Time?,
+                                  instance_interruption_behavior: ("hibernate" | "stop" | "terminate")?
+                                }?
+                              },
+                              ?credit_specification: {
+                                cpu_credits: ::String
+                              },
+                              ?cpu_options: {
+                                core_count: ::Integer?,
+                                threads_per_core: ::Integer?,
+                                amd_sev_snp: ("enabled" | "disabled")?
+                              },
+                              ?capacity_reservation_specification: {
+                                capacity_reservation_preference: ("open" | "none")?,
+                                capacity_reservation_target: {
+                                  capacity_reservation_id: ::String?,
+                                  capacity_reservation_resource_group_arn: ::String?
+                                }?
+                              },
+                              ?hibernation_options: {
+                                configured: bool?
+                              },
+                              ?license_specifications: Array[
+                                {
+                                  license_configuration_arn: ::String?
+                                },
+                              ],
+                              ?metadata_options: {
+                                http_tokens: ("optional" | "required")?,
+                                http_put_response_hop_limit: ::Integer?,
+                                http_endpoint: ("disabled" | "enabled")?,
+                                http_protocol_ipv_6: ("disabled" | "enabled")?,
+                                instance_metadata_tags: ("disabled" | "enabled")?
+                              },
+                              ?enclave_options: {
+                                enabled: bool?
+                              },
+                              ?private_dns_name_options: {
+                                hostname_type: ("ip-name" | "resource-name")?,
+                                enable_resource_name_dns_a_record: bool?,
+                                enable_resource_name_dns_aaaa_record: bool?
+                              },
+                              ?maintenance_options: {
+                                auto_recovery: ("disabled" | "default")?
+                              },
+                              ?disable_api_stop: bool,
+                              ?enable_primary_ipv_6: bool
+                            ) -> Instance::Collection
+                          | (?Hash[Symbol, untyped]) -> Instance::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#create_internet_gateway-instance_method
+      def create_internet_gateway: (
+                                     ?tag_specifications: Array[
+                                       {
+                                         resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint")?,
+                                         tags: Array[
+                                           {
+                                             key: ::String?,
+                                             value: ::String?
+                                           },
+                                         ]?
+                                       },
+                                     ],
+                                     ?dry_run: bool
+                                   ) -> InternetGateway
+                                 | (?Hash[Symbol, untyped]) -> InternetGateway
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#create_key_pair-instance_method
+      def create_key_pair: (
+                             key_name: ::String,
+                             ?dry_run: bool,
+                             ?key_type: ("rsa" | "ed25519"),
+                             ?tag_specifications: Array[
+                               {
+                                 resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint")?,
+                                 tags: Array[
+                                   {
+                                     key: ::String?,
+                                     value: ::String?
+                                   },
+                                 ]?
+                               },
+                             ],
+                             ?key_format: ("pem" | "ppk")
+                           ) -> KeyPair
+                         | (?Hash[Symbol, untyped]) -> KeyPair
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#create_nat_gateway-instance_method
+      def create_nat_gateway: (
+                                ?allocation_id: ::String,
+                                ?client_token: ::String,
+                                ?dry_run: bool,
+                                subnet_id: ::String,
+                                ?tag_specifications: Array[
+                                  {
+                                    resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint")?,
+                                    tags: Array[
+                                      {
+                                        key: ::String?,
+                                        value: ::String?
+                                      },
+                                    ]?
+                                  },
+                                ],
+                                ?connectivity_type: ("private" | "public"),
+                                ?private_ip_address: ::String,
+                                ?secondary_allocation_ids: Array[::String],
+                                ?secondary_private_ip_addresses: Array[::String],
+                                ?secondary_private_ip_address_count: ::Integer
+                              ) -> NatGateway
+                            | (?Hash[Symbol, untyped]) -> NatGateway
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#create_network_acl-instance_method
+      def create_network_acl: (
+                                ?dry_run: bool,
+                                vpc_id: ::String,
+                                ?tag_specifications: Array[
+                                  {
+                                    resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint")?,
+                                    tags: Array[
+                                      {
+                                        key: ::String?,
+                                        value: ::String?
+                                      },
+                                    ]?
+                                  },
+                                ],
+                                ?client_token: ::String
+                              ) -> NetworkAcl
+                            | (?Hash[Symbol, untyped]) -> NetworkAcl
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#create_network_interface-instance_method
+      def create_network_interface: (
+                                      ?description: ::String,
+                                      ?dry_run: bool,
+                                      ?groups: Array[::String],
+                                      ?ipv_6_address_count: ::Integer,
+                                      ?ipv_6_addresses: Array[
+                                        {
+                                          ipv_6_address: ::String?,
+                                          is_primary_ipv_6: bool?
+                                        },
+                                      ],
+                                      ?private_ip_address: ::String,
+                                      ?private_ip_addresses: Array[
+                                        {
+                                          primary: bool?,
+                                          private_ip_address: ::String?
+                                        },
+                                      ],
+                                      ?secondary_private_ip_address_count: ::Integer,
+                                      ?ipv_4_prefixes: Array[
+                                        {
+                                          ipv_4_prefix: ::String?
+                                        },
+                                      ],
+                                      ?ipv_4_prefix_count: ::Integer,
+                                      ?ipv_6_prefixes: Array[
+                                        {
+                                          ipv_6_prefix: ::String?
+                                        },
+                                      ],
+                                      ?ipv_6_prefix_count: ::Integer,
+                                      ?interface_type: ("efa" | "branch" | "trunk"),
+                                      subnet_id: ::String,
+                                      ?tag_specifications: Array[
+                                        {
+                                          resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint")?,
+                                          tags: Array[
+                                            {
+                                              key: ::String?,
+                                              value: ::String?
+                                            },
+                                          ]?
+                                        },
+                                      ],
+                                      ?client_token: ::String,
+                                      ?enable_primary_ipv_6: bool,
+                                      ?connection_tracking_specification: {
+                                        tcp_established_timeout: ::Integer?,
+                                        udp_stream_timeout: ::Integer?,
+                                        udp_timeout: ::Integer?
+                                      }
+                                    ) -> NetworkInterface
+                                  | (?Hash[Symbol, untyped]) -> NetworkInterface
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#create_placement_group-instance_method
+      def create_placement_group: (
+                                    ?dry_run: bool,
+                                    ?group_name: ::String,
+                                    ?strategy: ("cluster" | "spread" | "partition"),
+                                    ?partition_count: ::Integer,
+                                    ?tag_specifications: Array[
+                                      {
+                                        resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint")?,
+                                        tags: Array[
+                                          {
+                                            key: ::String?,
+                                            value: ::String?
+                                          },
+                                        ]?
+                                      },
+                                    ],
+                                    ?spread_level: ("host" | "rack")
+                                  ) -> PlacementGroup
+                                | (?Hash[Symbol, untyped]) -> PlacementGroup
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#create_route_table-instance_method
+      def create_route_table: (
+                                ?dry_run: bool,
+                                vpc_id: ::String,
+                                ?tag_specifications: Array[
+                                  {
+                                    resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint")?,
+                                    tags: Array[
+                                      {
+                                        key: ::String?,
+                                        value: ::String?
+                                      },
+                                    ]?
+                                  },
+                                ],
+                                ?client_token: ::String
+                              ) -> RouteTable
+                            | (?Hash[Symbol, untyped]) -> RouteTable
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#create_security_group-instance_method
+      def create_security_group: (
+                                   description: ::String,
+                                   group_name: ::String,
+                                   ?vpc_id: ::String,
+                                   ?tag_specifications: Array[
+                                     {
+                                       resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint")?,
+                                       tags: Array[
+                                         {
+                                           key: ::String?,
+                                           value: ::String?
+                                         },
+                                       ]?
+                                     },
+                                   ],
+                                   ?dry_run: bool
+                                 ) -> SecurityGroup
+                               | (?Hash[Symbol, untyped]) -> SecurityGroup
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#create_snapshot-instance_method
+      def create_snapshot: (
+                             ?description: ::String,
+                             ?outpost_arn: ::String,
+                             volume_id: ::String,
+                             ?tag_specifications: Array[
+                               {
+                                 resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint")?,
+                                 tags: Array[
+                                   {
+                                     key: ::String?,
+                                     value: ::String?
+                                   },
+                                 ]?
+                               },
+                             ],
+                             ?dry_run: bool
+                           ) -> Snapshot
+                         | (?Hash[Symbol, untyped]) -> Snapshot
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#create_subnet-instance_method
+      def create_subnet: (
+                           ?tag_specifications: Array[
+                             {
+                               resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint")?,
+                               tags: Array[
+                                 {
+                                   key: ::String?,
+                                   value: ::String?
+                                 },
+                               ]?
+                             },
+                           ],
+                           ?availability_zone: ::String,
+                           ?availability_zone_id: ::String,
+                           ?cidr_block: ::String,
+                           ?ipv_6_cidr_block: ::String,
+                           ?outpost_arn: ::String,
+                           vpc_id: ::String,
+                           ?dry_run: bool,
+                           ?ipv_6_native: bool,
+                           ?ipv_4_ipam_pool_id: ::String,
+                           ?ipv_4_netmask_length: ::Integer,
+                           ?ipv_6_ipam_pool_id: ::String,
+                           ?ipv_6_netmask_length: ::Integer
+                         ) -> Subnet
+                       | (?Hash[Symbol, untyped]) -> Subnet
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#create_tags-instance_method
+      def create_tags: (
+                         ?dry_run: bool,
+                         resources: Array[::String],
+                         tags: Array[
+                           {
+                             key: ::String?,
+                             value: ::String?
+                           },
+                         ]
+                       ) -> ::Aws::EmptyStructure
+                     | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#delete_tags-instance_method
+      def delete_tags: (
+                         ?dry_run: bool,
+                         resources: Array[::String],
+                         ?tags: Array[
+                           {
+                             key: ::String?,
+                             value: ::String?
+                           },
+                         ]
+                       ) -> ::Aws::EmptyStructure
+                     | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#create_volume-instance_method
+      def create_volume: (
+                           availability_zone: ::String,
+                           ?encrypted: bool,
+                           ?iops: ::Integer,
+                           ?kms_key_id: ::String,
+                           ?outpost_arn: ::String,
+                           ?size: ::Integer,
+                           ?snapshot_id: ::String,
+                           ?volume_type: ("standard" | "io1" | "io2" | "gp2" | "sc1" | "st1" | "gp3"),
+                           ?dry_run: bool,
+                           ?tag_specifications: Array[
+                             {
+                               resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint")?,
+                               tags: Array[
+                                 {
+                                   key: ::String?,
+                                   value: ::String?
+                                 },
+                               ]?
+                             },
+                           ],
+                           ?multi_attach_enabled: bool,
+                           ?throughput: ::Integer,
+                           ?client_token: ::String
+                         ) -> Volume
+                       | (?Hash[Symbol, untyped]) -> Volume
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#create_vpc-instance_method
+      def create_vpc: (
+                        ?cidr_block: ::String,
+                        ?amazon_provided_ipv_6_cidr_block: bool,
+                        ?ipv_6_pool: ::String,
+                        ?ipv_6_cidr_block: ::String,
+                        ?ipv_4_ipam_pool_id: ::String,
+                        ?ipv_4_netmask_length: ::Integer,
+                        ?ipv_6_ipam_pool_id: ::String,
+                        ?ipv_6_netmask_length: ::Integer,
+                        ?dry_run: bool,
+                        ?instance_tenancy: ("default" | "dedicated" | "host"),
+                        ?ipv_6_cidr_block_network_border_group: ::String,
+                        ?tag_specifications: Array[
+                          {
+                            resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint")?,
+                            tags: Array[
+                              {
+                                key: ::String?,
+                                value: ::String?
+                              },
+                            ]?
+                          },
+                        ]
+                      ) -> Vpc
+                    | (?Hash[Symbol, untyped]) -> Vpc
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#create_vpc_peering_connection-instance_method
+      def create_vpc_peering_connection: (
+                                           ?dry_run: bool,
+                                           ?peer_owner_id: ::String,
+                                           ?peer_vpc_id: ::String,
+                                           vpc_id: ::String,
+                                           ?peer_region: ::String,
+                                           ?tag_specifications: Array[
+                                             {
+                                               resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint")?,
+                                               tags: Array[
+                                                 {
+                                                   key: ::String?,
+                                                   value: ::String?
+                                                 },
+                                               ]?
+                                             },
+                                           ]
+                                         ) -> VpcPeeringConnection
+                                       | (?Hash[Symbol, untyped]) -> VpcPeeringConnection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#disassociate_route_table-instance_method
+      def disassociate_route_table: (
+                                      association_id: ::String,
+                                      ?dry_run: bool
+                                    ) -> ::Aws::EmptyStructure
+                                  | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#import_key_pair-instance_method
+      def import_key_pair: (
+                             ?dry_run: bool,
+                             key_name: ::String,
+                             public_key_material: ::String,
+                             ?tag_specifications: Array[
+                               {
+                                 resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint")?,
+                                 tags: Array[
+                                   {
+                                     key: ::String?,
+                                     value: ::String?
+                                   },
+                                 ]?
+                               },
+                             ]
+                           ) -> KeyPairInfo
+                         | (?Hash[Symbol, untyped]) -> KeyPairInfo
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#register_image-instance_method
+      def register_image: (
+                            ?image_location: ::String,
+                            ?architecture: ("i386" | "x86_64" | "arm64" | "x86_64_mac" | "arm64_mac"),
+                            ?block_device_mappings: Array[
+                              {
+                                device_name: ::String?,
+                                virtual_name: ::String?,
+                                ebs: {
+                                  delete_on_termination: bool?,
+                                  iops: ::Integer?,
+                                  snapshot_id: ::String?,
+                                  volume_size: ::Integer?,
+                                  volume_type: ("standard" | "io1" | "io2" | "gp2" | "sc1" | "st1" | "gp3")?,
+                                  kms_key_id: ::String?,
+                                  throughput: ::Integer?,
+                                  outpost_arn: ::String?,
+                                  encrypted: bool?
+                                }?,
+                                no_device: ::String?
+                              },
+                            ],
+                            ?description: ::String,
+                            ?dry_run: bool,
+                            ?ena_support: bool,
+                            ?kernel_id: ::String,
+                            name: ::String,
+                            ?billing_products: Array[::String],
+                            ?ramdisk_id: ::String,
+                            ?root_device_name: ::String,
+                            ?sriov_net_support: ::String,
+                            ?virtualization_type: ::String,
+                            ?boot_mode: ("legacy-bios" | "uefi" | "uefi-preferred"),
+                            ?tpm_support: ("v2.0"),
+                            ?uefi_data: ::String,
+                            ?imds_support: ("v2.0")
+                          ) -> Image
+                        | (?Hash[Symbol, untyped]) -> Image
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#classic_addresses-instance_method
+      def classic_addresses: (
+                               ?filters: Array[
+                                 {
+                                   name: ::String?,
+                                   values: Array[::String]?
+                                 },
+                               ],
+                               ?public_ips: Array[::String],
+                               ?allocation_ids: Array[::String],
+                               ?dry_run: bool
+                             ) -> ClassicAddress::Collection
+                           | (?Hash[Symbol, untyped]) -> ClassicAddress::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#dhcp_options-instance_method
+      def dhcp_options: (String id) -> DhcpOptions
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#dhcp_options_sets-instance_method
+      def dhcp_options_sets: (
+                               ?dhcp_options_ids: Array[::String],
+                               ?filters: Array[
+                                 {
+                                   name: ::String?,
+                                   values: Array[::String]?
+                                 },
+                               ],
+                               ?dry_run: bool
+                             ) -> DhcpOptions::Collection
+                           | (?Hash[Symbol, untyped]) -> DhcpOptions::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#image-instance_method
+      def image: (String id) -> Image
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#images-instance_method
+      def images: (
+                    ?executable_users: Array[::String],
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?image_ids: Array[::String],
+                    ?owners: Array[::String],
+                    ?include_deprecated: bool,
+                    ?include_disabled: bool,
+                    ?dry_run: bool
+                  ) -> Image::Collection
+                | (?Hash[Symbol, untyped]) -> Image::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#instance-instance_method
+      def instance: (String id) -> Instance
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#instances-instance_method
+      def instances: (
+                       ?filters: Array[
+                         {
+                           name: ::String?,
+                           values: Array[::String]?
+                         },
+                       ],
+                       ?instance_ids: Array[::String],
+                       ?dry_run: bool
+                     ) -> Instance::Collection
+                   | (?Hash[Symbol, untyped]) -> Instance::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#internet_gateway-instance_method
+      def internet_gateway: (String id) -> InternetGateway
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#internet_gateways-instance_method
+      def internet_gateways: (
+                               ?filters: Array[
+                                 {
+                                   name: ::String?,
+                                   values: Array[::String]?
+                                 },
+                               ],
+                               ?dry_run: bool,
+                               ?internet_gateway_ids: Array[::String]
+                             ) -> InternetGateway::Collection
+                           | (?Hash[Symbol, untyped]) -> InternetGateway::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#key_pair-instance_method
+      def key_pair: (String name) -> KeyPairInfo
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#key_pairs-instance_method
+      def key_pairs: (
+                       ?filters: Array[
+                         {
+                           name: ::String?,
+                           values: Array[::String]?
+                         },
+                       ],
+                       ?key_names: Array[::String],
+                       ?key_pair_ids: Array[::String],
+                       ?dry_run: bool,
+                       ?include_public_key: bool
+                     ) -> KeyPairInfo::Collection
+                   | (?Hash[Symbol, untyped]) -> KeyPairInfo::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#nat_gateway-instance_method
+      def nat_gateway: (String id) -> NatGateway
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#nat_gateways-instance_method
+      def nat_gateways: (
+                          ?dry_run: bool,
+                          ?filter: Array[
+                            {
+                              name: ::String?,
+                              values: Array[::String]?
+                            },
+                          ],
+                          ?nat_gateway_ids: Array[::String]
+                        ) -> NatGateway::Collection
+                      | (?Hash[Symbol, untyped]) -> NatGateway::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#network_acl-instance_method
+      def network_acl: (String id) -> NetworkAcl
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#network_acls-instance_method
+      def network_acls: (
+                          ?filters: Array[
+                            {
+                              name: ::String?,
+                              values: Array[::String]?
+                            },
+                          ],
+                          ?dry_run: bool,
+                          ?network_acl_ids: Array[::String]
+                        ) -> NetworkAcl::Collection
+                      | (?Hash[Symbol, untyped]) -> NetworkAcl::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#network_interface-instance_method
+      def network_interface: (String id) -> NetworkInterface
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#network_interfaces-instance_method
+      def network_interfaces: (
+                                ?filters: Array[
+                                  {
+                                    name: ::String?,
+                                    values: Array[::String]?
+                                  },
+                                ],
+                                ?dry_run: bool,
+                                ?network_interface_ids: Array[::String]
+                              ) -> NetworkInterface::Collection
+                            | (?Hash[Symbol, untyped]) -> NetworkInterface::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#placement_group-instance_method
+      def placement_group: (String name) -> PlacementGroup
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#placement_groups-instance_method
+      def placement_groups: (
+                              ?filters: Array[
+                                {
+                                  name: ::String?,
+                                  values: Array[::String]?
+                                },
+                              ],
+                              ?dry_run: bool,
+                              ?group_names: Array[::String],
+                              ?group_ids: Array[::String]
+                            ) -> PlacementGroup::Collection
+                          | (?Hash[Symbol, untyped]) -> PlacementGroup::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#route_table-instance_method
+      def route_table: (String id) -> RouteTable
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#route_table_association-instance_method
+      def route_table_association: (String id) -> RouteTableAssociation
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#route_tables-instance_method
+      def route_tables: (
+                          ?filters: Array[
+                            {
+                              name: ::String?,
+                              values: Array[::String]?
+                            },
+                          ],
+                          ?dry_run: bool,
+                          ?route_table_ids: Array[::String]
+                        ) -> RouteTable::Collection
+                      | (?Hash[Symbol, untyped]) -> RouteTable::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#security_group-instance_method
+      def security_group: (String id) -> SecurityGroup
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#security_groups-instance_method
+      def security_groups: (
+                             ?filters: Array[
+                               {
+                                 name: ::String?,
+                                 values: Array[::String]?
+                               },
+                             ],
+                             ?group_ids: Array[::String],
+                             ?group_names: Array[::String],
+                             ?dry_run: bool
+                           ) -> SecurityGroup::Collection
+                         | (?Hash[Symbol, untyped]) -> SecurityGroup::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#snapshot-instance_method
+      def snapshot: (String id) -> Snapshot
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#snapshots-instance_method
+      def snapshots: (
+                       ?filters: Array[
+                         {
+                           name: ::String?,
+                           values: Array[::String]?
+                         },
+                       ],
+                       ?owner_ids: Array[::String],
+                       ?restorable_by_user_ids: Array[::String],
+                       ?snapshot_ids: Array[::String],
+                       ?dry_run: bool
+                     ) -> Snapshot::Collection
+                   | (?Hash[Symbol, untyped]) -> Snapshot::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#subnet-instance_method
+      def subnet: (String id) -> Subnet
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#subnets-instance_method
+      def subnets: (
+                     ?filters: Array[
+                       {
+                         name: ::String?,
+                         values: Array[::String]?
+                       },
+                     ],
+                     ?subnet_ids: Array[::String],
+                     ?dry_run: bool
+                   ) -> Subnet::Collection
+                 | (?Hash[Symbol, untyped]) -> Subnet::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#volume-instance_method
+      def volume: (String id) -> Volume
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#volumes-instance_method
+      def volumes: (
+                     ?filters: Array[
+                       {
+                         name: ::String?,
+                         values: Array[::String]?
+                       },
+                     ],
+                     ?volume_ids: Array[::String],
+                     ?dry_run: bool
+                   ) -> Volume::Collection
+                 | (?Hash[Symbol, untyped]) -> Volume::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#vpc-instance_method
+      def vpc: (String id) -> Vpc
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#vpc_addresses-instance_method
+      def vpc_addresses: (
+                           ?filters: Array[
+                             {
+                               name: ::String?,
+                               values: Array[::String]?
+                             },
+                           ],
+                           ?public_ips: Array[::String],
+                           ?allocation_ids: Array[::String],
+                           ?dry_run: bool
+                         ) -> VpcAddress::Collection
+                       | (?Hash[Symbol, untyped]) -> VpcAddress::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#vpc_peering_connection-instance_method
+      def vpc_peering_connection: (String id) -> VpcPeeringConnection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#vpc_peering_connections-instance_method
+      def vpc_peering_connections: (
+                                     ?filters: Array[
+                                       {
+                                         name: ::String?,
+                                         values: Array[::String]?
+                                       },
+                                     ],
+                                     ?dry_run: bool,
+                                     ?vpc_peering_connection_ids: Array[::String]
+                                   ) -> VpcPeeringConnection::Collection
+                                 | (?Hash[Symbol, untyped]) -> VpcPeeringConnection::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#vpcs-instance_method
+      def vpcs: (
+                  ?filters: Array[
+                    {
+                      name: ::String?,
+                      values: Array[::String]?
+                    },
+                  ],
+                  ?vpc_ids: Array[::String],
+                  ?dry_run: bool
+                ) -> Vpc::Collection
+              | (?Hash[Symbol, untyped]) -> Vpc::Collection
+    end
+  end
+end

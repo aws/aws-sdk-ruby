@@ -1,0 +1,46 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AutoScaling
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class ActiveInstanceRefreshNotFoundFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class AlreadyExistsFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InstanceRefreshInProgressFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidNextToken < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class IrreversibleInstanceRefreshFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LimitExceededFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceContentionFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceInUseFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ScalingActivityInProgressFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ServiceLinkedRoleFailure < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

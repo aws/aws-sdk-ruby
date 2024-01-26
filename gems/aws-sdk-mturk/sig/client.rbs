@@ -1,0 +1,681 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MTurk
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AcceptQualificationRequestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptQualificationRequestResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#accept_qualification_request-instance_method
+      def accept_qualification_request: (
+                                          qualification_request_id: ::String,
+                                          ?integer_value: ::Integer
+                                        ) -> _AcceptQualificationRequestResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptQualificationRequestResponseSuccess
+
+      interface _ApproveAssignmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ApproveAssignmentResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#approve_assignment-instance_method
+      def approve_assignment: (
+                                assignment_id: ::String,
+                                ?requester_feedback: ::String,
+                                ?override_rejection: bool
+                              ) -> _ApproveAssignmentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ApproveAssignmentResponseSuccess
+
+      interface _AssociateQualificationWithWorkerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateQualificationWithWorkerResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#associate_qualification_with_worker-instance_method
+      def associate_qualification_with_worker: (
+                                                 qualification_type_id: ::String,
+                                                 worker_id: ::String,
+                                                 ?integer_value: ::Integer,
+                                                 ?send_notification: bool
+                                               ) -> _AssociateQualificationWithWorkerResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateQualificationWithWorkerResponseSuccess
+
+      interface _CreateAdditionalAssignmentsForHITResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAdditionalAssignmentsForHITResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#create_additional_assignments_for_hit-instance_method
+      def create_additional_assignments_for_hit: (
+                                                   hit_id: ::String,
+                                                   number_of_additional_assignments: ::Integer,
+                                                   ?unique_request_token: ::String
+                                                 ) -> _CreateAdditionalAssignmentsForHITResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAdditionalAssignmentsForHITResponseSuccess
+
+      interface _CreateHITResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateHITResponse]
+        def hit: () -> Types::HIT
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#create_hit-instance_method
+      def create_hit: (
+                        ?max_assignments: ::Integer,
+                        ?auto_approval_delay_in_seconds: ::Integer,
+                        lifetime_in_seconds: ::Integer,
+                        assignment_duration_in_seconds: ::Integer,
+                        reward: ::String,
+                        title: ::String,
+                        ?keywords: ::String,
+                        description: ::String,
+                        ?question: ::String,
+                        ?requester_annotation: ::String,
+                        ?qualification_requirements: Array[
+                          {
+                            qualification_type_id: ::String,
+                            comparator: ("LessThan" | "LessThanOrEqualTo" | "GreaterThan" | "GreaterThanOrEqualTo" | "EqualTo" | "NotEqualTo" | "Exists" | "DoesNotExist" | "In" | "NotIn"),
+                            integer_values: Array[::Integer]?,
+                            locale_values: Array[
+                              {
+                                country: ::String,
+                                subdivision: ::String?
+                              },
+                            ]?,
+                            required_to_preview: bool?,
+                            actions_guarded: ("Accept" | "PreviewAndAccept" | "DiscoverPreviewAndAccept")?
+                          },
+                        ],
+                        ?unique_request_token: ::String,
+                        ?assignment_review_policy: {
+                          policy_name: ::String,
+                          parameters: Array[
+                            {
+                              key: ::String?,
+                              values: Array[::String]?,
+                              map_entries: Array[
+                                {
+                                  key: ::String?,
+                                  values: Array[::String]?
+                                },
+                              ]?
+                            },
+                          ]?
+                        },
+                        ?hit_review_policy: {
+                          policy_name: ::String,
+                          parameters: Array[
+                            {
+                              key: ::String?,
+                              values: Array[::String]?,
+                              map_entries: Array[
+                                {
+                                  key: ::String?,
+                                  values: Array[::String]?
+                                },
+                              ]?
+                            },
+                          ]?
+                        },
+                        ?hit_layout_id: ::String,
+                        ?hit_layout_parameters: Array[
+                          {
+                            name: ::String,
+                            value: ::String
+                          },
+                        ]
+                      ) -> _CreateHITResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHITResponseSuccess
+
+      interface _CreateHITTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateHITTypeResponse]
+        def hit_type_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#create_hit_type-instance_method
+      def create_hit_type: (
+                             ?auto_approval_delay_in_seconds: ::Integer,
+                             assignment_duration_in_seconds: ::Integer,
+                             reward: ::String,
+                             title: ::String,
+                             ?keywords: ::String,
+                             description: ::String,
+                             ?qualification_requirements: Array[
+                               {
+                                 qualification_type_id: ::String,
+                                 comparator: ("LessThan" | "LessThanOrEqualTo" | "GreaterThan" | "GreaterThanOrEqualTo" | "EqualTo" | "NotEqualTo" | "Exists" | "DoesNotExist" | "In" | "NotIn"),
+                                 integer_values: Array[::Integer]?,
+                                 locale_values: Array[
+                                   {
+                                     country: ::String,
+                                     subdivision: ::String?
+                                   },
+                                 ]?,
+                                 required_to_preview: bool?,
+                                 actions_guarded: ("Accept" | "PreviewAndAccept" | "DiscoverPreviewAndAccept")?
+                               },
+                             ]
+                           ) -> _CreateHITTypeResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHITTypeResponseSuccess
+
+      interface _CreateHITWithHITTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateHITWithHITTypeResponse]
+        def hit: () -> Types::HIT
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#create_hit_with_hit_type-instance_method
+      def create_hit_with_hit_type: (
+                                      hit_type_id: ::String,
+                                      ?max_assignments: ::Integer,
+                                      lifetime_in_seconds: ::Integer,
+                                      ?question: ::String,
+                                      ?requester_annotation: ::String,
+                                      ?unique_request_token: ::String,
+                                      ?assignment_review_policy: {
+                                        policy_name: ::String,
+                                        parameters: Array[
+                                          {
+                                            key: ::String?,
+                                            values: Array[::String]?,
+                                            map_entries: Array[
+                                              {
+                                                key: ::String?,
+                                                values: Array[::String]?
+                                              },
+                                            ]?
+                                          },
+                                        ]?
+                                      },
+                                      ?hit_review_policy: {
+                                        policy_name: ::String,
+                                        parameters: Array[
+                                          {
+                                            key: ::String?,
+                                            values: Array[::String]?,
+                                            map_entries: Array[
+                                              {
+                                                key: ::String?,
+                                                values: Array[::String]?
+                                              },
+                                            ]?
+                                          },
+                                        ]?
+                                      },
+                                      ?hit_layout_id: ::String,
+                                      ?hit_layout_parameters: Array[
+                                        {
+                                          name: ::String,
+                                          value: ::String
+                                        },
+                                      ]
+                                    ) -> _CreateHITWithHITTypeResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHITWithHITTypeResponseSuccess
+
+      interface _CreateQualificationTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateQualificationTypeResponse]
+        def qualification_type: () -> Types::QualificationType
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#create_qualification_type-instance_method
+      def create_qualification_type: (
+                                       name: ::String,
+                                       ?keywords: ::String,
+                                       description: ::String,
+                                       qualification_type_status: ("Active" | "Inactive"),
+                                       ?retry_delay_in_seconds: ::Integer,
+                                       ?test: ::String,
+                                       ?answer_key: ::String,
+                                       ?test_duration_in_seconds: ::Integer,
+                                       ?auto_granted: bool,
+                                       ?auto_granted_value: ::Integer
+                                     ) -> _CreateQualificationTypeResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateQualificationTypeResponseSuccess
+
+      interface _CreateWorkerBlockResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkerBlockResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#create_worker_block-instance_method
+      def create_worker_block: (
+                                 worker_id: ::String,
+                                 reason: ::String
+                               ) -> _CreateWorkerBlockResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkerBlockResponseSuccess
+
+      interface _DeleteHITResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteHITResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#delete_hit-instance_method
+      def delete_hit: (
+                        hit_id: ::String
+                      ) -> _DeleteHITResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteHITResponseSuccess
+
+      interface _DeleteQualificationTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteQualificationTypeResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#delete_qualification_type-instance_method
+      def delete_qualification_type: (
+                                       qualification_type_id: ::String
+                                     ) -> _DeleteQualificationTypeResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteQualificationTypeResponseSuccess
+
+      interface _DeleteWorkerBlockResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkerBlockResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#delete_worker_block-instance_method
+      def delete_worker_block: (
+                                 worker_id: ::String,
+                                 ?reason: ::String
+                               ) -> _DeleteWorkerBlockResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkerBlockResponseSuccess
+
+      interface _DisassociateQualificationFromWorkerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateQualificationFromWorkerResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#disassociate_qualification_from_worker-instance_method
+      def disassociate_qualification_from_worker: (
+                                                    worker_id: ::String,
+                                                    qualification_type_id: ::String,
+                                                    ?reason: ::String
+                                                  ) -> _DisassociateQualificationFromWorkerResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateQualificationFromWorkerResponseSuccess
+
+      interface _GetAccountBalanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountBalanceResponse]
+        def available_balance: () -> ::String
+        def on_hold_balance: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#get_account_balance-instance_method
+      def get_account_balance: (
+                               ) -> _GetAccountBalanceResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountBalanceResponseSuccess
+
+      interface _GetAssignmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAssignmentResponse]
+        def assignment: () -> Types::Assignment
+        def hit: () -> Types::HIT
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#get_assignment-instance_method
+      def get_assignment: (
+                            assignment_id: ::String
+                          ) -> _GetAssignmentResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAssignmentResponseSuccess
+
+      interface _GetFileUploadURLResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFileUploadURLResponse]
+        def file_upload_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#get_file_upload_url-instance_method
+      def get_file_upload_url: (
+                                 assignment_id: ::String,
+                                 question_identifier: ::String
+                               ) -> _GetFileUploadURLResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFileUploadURLResponseSuccess
+
+      interface _GetHITResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetHITResponse]
+        def hit: () -> Types::HIT
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#get_hit-instance_method
+      def get_hit: (
+                     hit_id: ::String
+                   ) -> _GetHITResponseSuccess
+                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetHITResponseSuccess
+
+      interface _GetQualificationScoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetQualificationScoreResponse]
+        def qualification: () -> Types::Qualification
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#get_qualification_score-instance_method
+      def get_qualification_score: (
+                                     qualification_type_id: ::String,
+                                     worker_id: ::String
+                                   ) -> _GetQualificationScoreResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQualificationScoreResponseSuccess
+
+      interface _GetQualificationTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetQualificationTypeResponse]
+        def qualification_type: () -> Types::QualificationType
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#get_qualification_type-instance_method
+      def get_qualification_type: (
+                                    qualification_type_id: ::String
+                                  ) -> _GetQualificationTypeResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQualificationTypeResponseSuccess
+
+      interface _ListAssignmentsForHITResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssignmentsForHITResponse]
+        def next_token: () -> ::String
+        def num_results: () -> ::Integer
+        def assignments: () -> ::Array[Types::Assignment]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#list_assignments_for_hit-instance_method
+      def list_assignments_for_hit: (
+                                      hit_id: ::String,
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer,
+                                      ?assignment_statuses: Array[("Submitted" | "Approved" | "Rejected")]
+                                    ) -> _ListAssignmentsForHITResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssignmentsForHITResponseSuccess
+
+      interface _ListBonusPaymentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBonusPaymentsResponse]
+        def num_results: () -> ::Integer
+        def next_token: () -> ::String
+        def bonus_payments: () -> ::Array[Types::BonusPayment]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#list_bonus_payments-instance_method
+      def list_bonus_payments: (
+                                 ?hit_id: ::String,
+                                 ?assignment_id: ::String,
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer
+                               ) -> _ListBonusPaymentsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBonusPaymentsResponseSuccess
+
+      interface _ListHITsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListHITsResponse]
+        def next_token: () -> ::String
+        def num_results: () -> ::Integer
+        def hits: () -> ::Array[Types::HIT]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#list_hits-instance_method
+      def list_hits: (
+                       ?next_token: ::String,
+                       ?max_results: ::Integer
+                     ) -> _ListHITsResponseSuccess
+                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHITsResponseSuccess
+
+      interface _ListHITsForQualificationTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListHITsForQualificationTypeResponse]
+        def next_token: () -> ::String
+        def num_results: () -> ::Integer
+        def hits: () -> ::Array[Types::HIT]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#list_hits_for_qualification_type-instance_method
+      def list_hits_for_qualification_type: (
+                                              qualification_type_id: ::String,
+                                              ?next_token: ::String,
+                                              ?max_results: ::Integer
+                                            ) -> _ListHITsForQualificationTypeResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHITsForQualificationTypeResponseSuccess
+
+      interface _ListQualificationRequestsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListQualificationRequestsResponse]
+        def num_results: () -> ::Integer
+        def next_token: () -> ::String
+        def qualification_requests: () -> ::Array[Types::QualificationRequest]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#list_qualification_requests-instance_method
+      def list_qualification_requests: (
+                                         ?qualification_type_id: ::String,
+                                         ?next_token: ::String,
+                                         ?max_results: ::Integer
+                                       ) -> _ListQualificationRequestsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListQualificationRequestsResponseSuccess
+
+      interface _ListQualificationTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListQualificationTypesResponse]
+        def num_results: () -> ::Integer
+        def next_token: () -> ::String
+        def qualification_types: () -> ::Array[Types::QualificationType]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#list_qualification_types-instance_method
+      def list_qualification_types: (
+                                      ?query: ::String,
+                                      must_be_requestable: bool,
+                                      ?must_be_owned_by_caller: bool,
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListQualificationTypesResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListQualificationTypesResponseSuccess
+
+      interface _ListReviewPolicyResultsForHITResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReviewPolicyResultsForHITResponse]
+        def hit_id: () -> ::String
+        def assignment_review_policy: () -> Types::ReviewPolicy
+        def hit_review_policy: () -> Types::ReviewPolicy
+        def assignment_review_report: () -> Types::ReviewReport
+        def hit_review_report: () -> Types::ReviewReport
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#list_review_policy_results_for_hit-instance_method
+      def list_review_policy_results_for_hit: (
+                                                hit_id: ::String,
+                                                ?policy_levels: Array[("Assignment" | "HIT")],
+                                                ?retrieve_actions: bool,
+                                                ?retrieve_results: bool,
+                                                ?next_token: ::String,
+                                                ?max_results: ::Integer
+                                              ) -> _ListReviewPolicyResultsForHITResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReviewPolicyResultsForHITResponseSuccess
+
+      interface _ListReviewableHITsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReviewableHITsResponse]
+        def next_token: () -> ::String
+        def num_results: () -> ::Integer
+        def hits: () -> ::Array[Types::HIT]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#list_reviewable_hits-instance_method
+      def list_reviewable_hits: (
+                                  ?hit_type_id: ::String,
+                                  ?status: ("Reviewable" | "Reviewing"),
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListReviewableHITsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReviewableHITsResponseSuccess
+
+      interface _ListWorkerBlocksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkerBlocksResponse]
+        def next_token: () -> ::String
+        def num_results: () -> ::Integer
+        def worker_blocks: () -> ::Array[Types::WorkerBlock]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#list_worker_blocks-instance_method
+      def list_worker_blocks: (
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _ListWorkerBlocksResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkerBlocksResponseSuccess
+
+      interface _ListWorkersWithQualificationTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkersWithQualificationTypeResponse]
+        def next_token: () -> ::String
+        def num_results: () -> ::Integer
+        def qualifications: () -> ::Array[Types::Qualification]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#list_workers_with_qualification_type-instance_method
+      def list_workers_with_qualification_type: (
+                                                  qualification_type_id: ::String,
+                                                  ?status: ("Granted" | "Revoked"),
+                                                  ?next_token: ::String,
+                                                  ?max_results: ::Integer
+                                                ) -> _ListWorkersWithQualificationTypeResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkersWithQualificationTypeResponseSuccess
+
+      interface _NotifyWorkersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::NotifyWorkersResponse]
+        def notify_workers_failure_statuses: () -> ::Array[Types::NotifyWorkersFailureStatus]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#notify_workers-instance_method
+      def notify_workers: (
+                            subject: ::String,
+                            message_text: ::String,
+                            worker_ids: Array[::String]
+                          ) -> _NotifyWorkersResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _NotifyWorkersResponseSuccess
+
+      interface _RejectAssignmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RejectAssignmentResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#reject_assignment-instance_method
+      def reject_assignment: (
+                               assignment_id: ::String,
+                               requester_feedback: ::String
+                             ) -> _RejectAssignmentResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectAssignmentResponseSuccess
+
+      interface _RejectQualificationRequestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RejectQualificationRequestResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#reject_qualification_request-instance_method
+      def reject_qualification_request: (
+                                          qualification_request_id: ::String,
+                                          ?reason: ::String
+                                        ) -> _RejectQualificationRequestResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectQualificationRequestResponseSuccess
+
+      interface _SendBonusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendBonusResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#send_bonus-instance_method
+      def send_bonus: (
+                        worker_id: ::String,
+                        bonus_amount: ::String,
+                        assignment_id: ::String,
+                        reason: ::String,
+                        ?unique_request_token: ::String
+                      ) -> _SendBonusResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendBonusResponseSuccess
+
+      interface _SendTestEventNotificationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendTestEventNotificationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#send_test_event_notification-instance_method
+      def send_test_event_notification: (
+                                          notification: {
+                                            destination: ::String,
+                                            transport: ("Email" | "SQS" | "SNS"),
+                                            version: ::String,
+                                            event_types: Array[("AssignmentAccepted" | "AssignmentAbandoned" | "AssignmentReturned" | "AssignmentSubmitted" | "AssignmentRejected" | "AssignmentApproved" | "HITCreated" | "HITExpired" | "HITReviewable" | "HITExtended" | "HITDisposed" | "Ping")]
+                                          },
+                                          test_event_type: ("AssignmentAccepted" | "AssignmentAbandoned" | "AssignmentReturned" | "AssignmentSubmitted" | "AssignmentRejected" | "AssignmentApproved" | "HITCreated" | "HITExpired" | "HITReviewable" | "HITExtended" | "HITDisposed" | "Ping")
+                                        ) -> _SendTestEventNotificationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendTestEventNotificationResponseSuccess
+
+      interface _UpdateExpirationForHITResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateExpirationForHITResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#update_expiration_for_hit-instance_method
+      def update_expiration_for_hit: (
+                                       hit_id: ::String,
+                                       expire_at: ::Time
+                                     ) -> _UpdateExpirationForHITResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateExpirationForHITResponseSuccess
+
+      interface _UpdateHITReviewStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateHITReviewStatusResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#update_hit_review_status-instance_method
+      def update_hit_review_status: (
+                                      hit_id: ::String,
+                                      ?revert: bool
+                                    ) -> _UpdateHITReviewStatusResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateHITReviewStatusResponseSuccess
+
+      interface _UpdateHITTypeOfHITResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateHITTypeOfHITResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#update_hit_type_of_hit-instance_method
+      def update_hit_type_of_hit: (
+                                    hit_id: ::String,
+                                    hit_type_id: ::String
+                                  ) -> _UpdateHITTypeOfHITResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateHITTypeOfHITResponseSuccess
+
+      interface _UpdateNotificationSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNotificationSettingsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#update_notification_settings-instance_method
+      def update_notification_settings: (
+                                          hit_type_id: ::String,
+                                          ?notification: {
+                                            destination: ::String,
+                                            transport: ("Email" | "SQS" | "SNS"),
+                                            version: ::String,
+                                            event_types: Array[("AssignmentAccepted" | "AssignmentAbandoned" | "AssignmentReturned" | "AssignmentSubmitted" | "AssignmentRejected" | "AssignmentApproved" | "HITCreated" | "HITExpired" | "HITReviewable" | "HITExtended" | "HITDisposed" | "Ping")]
+                                          },
+                                          ?active: bool
+                                        ) -> _UpdateNotificationSettingsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNotificationSettingsResponseSuccess
+
+      interface _UpdateQualificationTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateQualificationTypeResponse]
+        def qualification_type: () -> Types::QualificationType
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MTurk/Client.html#update_qualification_type-instance_method
+      def update_qualification_type: (
+                                       qualification_type_id: ::String,
+                                       ?description: ::String,
+                                       ?qualification_type_status: ("Active" | "Inactive"),
+                                       ?test: ::String,
+                                       ?answer_key: ::String,
+                                       ?test_duration_in_seconds: ::Integer,
+                                       ?retry_delay_in_seconds: ::Integer,
+                                       ?auto_granted: bool,
+                                       ?auto_granted_value: ::Integer
+                                     ) -> _UpdateQualificationTypeResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateQualificationTypeResponseSuccess
+    end
+  end
+end
+

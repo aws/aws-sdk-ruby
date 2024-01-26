@@ -1,0 +1,294 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AutoScalingPlans
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScalingPlans/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateScalingPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateScalingPlanResponse]
+        def scaling_plan_version: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScalingPlans/Client.html#create_scaling_plan-instance_method
+      def create_scaling_plan: (
+                                 scaling_plan_name: ::String,
+                                 application_source: {
+                                   cloud_formation_stack_arn: ::String?,
+                                   tag_filters: Array[
+                                     {
+                                       key: ::String?,
+                                       values: Array[::String]?
+                                     },
+                                   ]?
+                                 },
+                                 scaling_instructions: Array[
+                                   {
+                                     service_namespace: ("autoscaling" | "ecs" | "ec2" | "rds" | "dynamodb"),
+                                     resource_id: ::String,
+                                     scalable_dimension: ("autoscaling:autoScalingGroup:DesiredCapacity" | "ecs:service:DesiredCount" | "ec2:spot-fleet-request:TargetCapacity" | "rds:cluster:ReadReplicaCount" | "dynamodb:table:ReadCapacityUnits" | "dynamodb:table:WriteCapacityUnits" | "dynamodb:index:ReadCapacityUnits" | "dynamodb:index:WriteCapacityUnits"),
+                                     min_capacity: ::Integer,
+                                     max_capacity: ::Integer,
+                                     target_tracking_configurations: Array[
+                                       {
+                                         predefined_scaling_metric_specification: {
+                                           predefined_scaling_metric_type: ("ASGAverageCPUUtilization" | "ASGAverageNetworkIn" | "ASGAverageNetworkOut" | "DynamoDBReadCapacityUtilization" | "DynamoDBWriteCapacityUtilization" | "ECSServiceAverageCPUUtilization" | "ECSServiceAverageMemoryUtilization" | "ALBRequestCountPerTarget" | "RDSReaderAverageCPUUtilization" | "RDSReaderAverageDatabaseConnections" | "EC2SpotFleetRequestAverageCPUUtilization" | "EC2SpotFleetRequestAverageNetworkIn" | "EC2SpotFleetRequestAverageNetworkOut"),
+                                           resource_label: ::String?
+                                         }?,
+                                         customized_scaling_metric_specification: {
+                                           metric_name: ::String,
+                                           namespace: ::String,
+                                           dimensions: Array[
+                                             {
+                                               name: ::String,
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           statistic: ("Average" | "Minimum" | "Maximum" | "SampleCount" | "Sum"),
+                                           unit: ::String?
+                                         }?,
+                                         target_value: ::Float,
+                                         disable_scale_in: bool?,
+                                         scale_out_cooldown: ::Integer?,
+                                         scale_in_cooldown: ::Integer?,
+                                         estimated_instance_warmup: ::Integer?
+                                       },
+                                     ],
+                                     predefined_load_metric_specification: {
+                                       predefined_load_metric_type: ("ASGTotalCPUUtilization" | "ASGTotalNetworkIn" | "ASGTotalNetworkOut" | "ALBTargetGroupRequestCount"),
+                                       resource_label: ::String?
+                                     }?,
+                                     customized_load_metric_specification: {
+                                       metric_name: ::String,
+                                       namespace: ::String,
+                                       dimensions: Array[
+                                         {
+                                           name: ::String,
+                                           value: ::String
+                                         },
+                                       ]?,
+                                       statistic: ("Average" | "Minimum" | "Maximum" | "SampleCount" | "Sum"),
+                                       unit: ::String?
+                                     }?,
+                                     scheduled_action_buffer_time: ::Integer?,
+                                     predictive_scaling_max_capacity_behavior: ("SetForecastCapacityToMaxCapacity" | "SetMaxCapacityToForecastCapacity" | "SetMaxCapacityAboveForecastCapacity")?,
+                                     predictive_scaling_max_capacity_buffer: ::Integer?,
+                                     predictive_scaling_mode: ("ForecastAndScale" | "ForecastOnly")?,
+                                     scaling_policy_update_behavior: ("KeepExternalPolicies" | "ReplaceExternalPolicies")?,
+                                     disable_dynamic_scaling: bool?
+                                   },
+                                 ]
+                               ) -> _CreateScalingPlanResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateScalingPlanResponseSuccess
+
+      interface _DeleteScalingPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteScalingPlanResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScalingPlans/Client.html#delete_scaling_plan-instance_method
+      def delete_scaling_plan: (
+                                 scaling_plan_name: ::String,
+                                 scaling_plan_version: ::Integer
+                               ) -> _DeleteScalingPlanResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteScalingPlanResponseSuccess
+
+      interface _DescribeScalingPlanResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeScalingPlanResourcesResponse]
+        def scaling_plan_resources: () -> ::Array[Types::ScalingPlanResource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScalingPlans/Client.html#describe_scaling_plan_resources-instance_method
+      def describe_scaling_plan_resources: (
+                                             scaling_plan_name: ::String,
+                                             scaling_plan_version: ::Integer,
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String
+                                           ) -> _DescribeScalingPlanResourcesResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeScalingPlanResourcesResponseSuccess
+
+      interface _DescribeScalingPlansResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeScalingPlansResponse]
+        def scaling_plans: () -> ::Array[Types::ScalingPlan]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScalingPlans/Client.html#describe_scaling_plans-instance_method
+      def describe_scaling_plans: (
+                                    ?scaling_plan_names: Array[::String],
+                                    ?scaling_plan_version: ::Integer,
+                                    ?application_sources: Array[
+                                      {
+                                        cloud_formation_stack_arn: ::String?,
+                                        tag_filters: Array[
+                                          {
+                                            key: ::String?,
+                                            values: Array[::String]?
+                                          },
+                                        ]?
+                                      },
+                                    ],
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _DescribeScalingPlansResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeScalingPlansResponseSuccess
+
+      interface _GetScalingPlanResourceForecastDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetScalingPlanResourceForecastDataResponse]
+        def datapoints: () -> ::Array[Types::Datapoint]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScalingPlans/Client.html#get_scaling_plan_resource_forecast_data-instance_method
+      def get_scaling_plan_resource_forecast_data: (
+                                                     scaling_plan_name: ::String,
+                                                     scaling_plan_version: ::Integer,
+                                                     service_namespace: ("autoscaling" | "ecs" | "ec2" | "rds" | "dynamodb"),
+                                                     resource_id: ::String,
+                                                     scalable_dimension: ("autoscaling:autoScalingGroup:DesiredCapacity" | "ecs:service:DesiredCount" | "ec2:spot-fleet-request:TargetCapacity" | "rds:cluster:ReadReplicaCount" | "dynamodb:table:ReadCapacityUnits" | "dynamodb:table:WriteCapacityUnits" | "dynamodb:index:ReadCapacityUnits" | "dynamodb:index:WriteCapacityUnits"),
+                                                     forecast_data_type: ("CapacityForecast" | "LoadForecast" | "ScheduledActionMinCapacity" | "ScheduledActionMaxCapacity"),
+                                                     start_time: ::Time,
+                                                     end_time: ::Time
+                                                   ) -> _GetScalingPlanResourceForecastDataResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetScalingPlanResourceForecastDataResponseSuccess
+
+      interface _UpdateScalingPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateScalingPlanResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScalingPlans/Client.html#update_scaling_plan-instance_method
+      def update_scaling_plan: (
+                                 scaling_plan_name: ::String,
+                                 scaling_plan_version: ::Integer,
+                                 ?application_source: {
+                                   cloud_formation_stack_arn: ::String?,
+                                   tag_filters: Array[
+                                     {
+                                       key: ::String?,
+                                       values: Array[::String]?
+                                     },
+                                   ]?
+                                 },
+                                 ?scaling_instructions: Array[
+                                   {
+                                     service_namespace: ("autoscaling" | "ecs" | "ec2" | "rds" | "dynamodb"),
+                                     resource_id: ::String,
+                                     scalable_dimension: ("autoscaling:autoScalingGroup:DesiredCapacity" | "ecs:service:DesiredCount" | "ec2:spot-fleet-request:TargetCapacity" | "rds:cluster:ReadReplicaCount" | "dynamodb:table:ReadCapacityUnits" | "dynamodb:table:WriteCapacityUnits" | "dynamodb:index:ReadCapacityUnits" | "dynamodb:index:WriteCapacityUnits"),
+                                     min_capacity: ::Integer,
+                                     max_capacity: ::Integer,
+                                     target_tracking_configurations: Array[
+                                       {
+                                         predefined_scaling_metric_specification: {
+                                           predefined_scaling_metric_type: ("ASGAverageCPUUtilization" | "ASGAverageNetworkIn" | "ASGAverageNetworkOut" | "DynamoDBReadCapacityUtilization" | "DynamoDBWriteCapacityUtilization" | "ECSServiceAverageCPUUtilization" | "ECSServiceAverageMemoryUtilization" | "ALBRequestCountPerTarget" | "RDSReaderAverageCPUUtilization" | "RDSReaderAverageDatabaseConnections" | "EC2SpotFleetRequestAverageCPUUtilization" | "EC2SpotFleetRequestAverageNetworkIn" | "EC2SpotFleetRequestAverageNetworkOut"),
+                                           resource_label: ::String?
+                                         }?,
+                                         customized_scaling_metric_specification: {
+                                           metric_name: ::String,
+                                           namespace: ::String,
+                                           dimensions: Array[
+                                             {
+                                               name: ::String,
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           statistic: ("Average" | "Minimum" | "Maximum" | "SampleCount" | "Sum"),
+                                           unit: ::String?
+                                         }?,
+                                         target_value: ::Float,
+                                         disable_scale_in: bool?,
+                                         scale_out_cooldown: ::Integer?,
+                                         scale_in_cooldown: ::Integer?,
+                                         estimated_instance_warmup: ::Integer?
+                                       },
+                                     ],
+                                     predefined_load_metric_specification: {
+                                       predefined_load_metric_type: ("ASGTotalCPUUtilization" | "ASGTotalNetworkIn" | "ASGTotalNetworkOut" | "ALBTargetGroupRequestCount"),
+                                       resource_label: ::String?
+                                     }?,
+                                     customized_load_metric_specification: {
+                                       metric_name: ::String,
+                                       namespace: ::String,
+                                       dimensions: Array[
+                                         {
+                                           name: ::String,
+                                           value: ::String
+                                         },
+                                       ]?,
+                                       statistic: ("Average" | "Minimum" | "Maximum" | "SampleCount" | "Sum"),
+                                       unit: ::String?
+                                     }?,
+                                     scheduled_action_buffer_time: ::Integer?,
+                                     predictive_scaling_max_capacity_behavior: ("SetForecastCapacityToMaxCapacity" | "SetMaxCapacityToForecastCapacity" | "SetMaxCapacityAboveForecastCapacity")?,
+                                     predictive_scaling_max_capacity_buffer: ::Integer?,
+                                     predictive_scaling_mode: ("ForecastAndScale" | "ForecastOnly")?,
+                                     scaling_policy_update_behavior: ("KeepExternalPolicies" | "ReplaceExternalPolicies")?,
+                                     disable_dynamic_scaling: bool?
+                                   },
+                                 ]
+                               ) -> _UpdateScalingPlanResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateScalingPlanResponseSuccess
+    end
+  end
+end
+

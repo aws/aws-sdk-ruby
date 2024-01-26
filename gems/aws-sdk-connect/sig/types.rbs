@@ -1,0 +1,5100 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Connect
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ActionSummary
+      attr_accessor action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "END_ASSOCIATED_TASKS")
+      SENSITIVE: []
+    end
+
+    class ActivateEvaluationFormRequest
+      attr_accessor instance_id: ::String
+      attr_accessor evaluation_form_id: ::String
+      attr_accessor evaluation_form_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class ActivateEvaluationFormResponse
+      attr_accessor evaluation_form_id: ::String
+      attr_accessor evaluation_form_arn: ::String
+      attr_accessor evaluation_form_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class AgentConfig
+      attr_accessor distributions: ::Array[Types::Distribution]
+      SENSITIVE: []
+    end
+
+    class AgentContactReference
+      attr_accessor contact_id: ::String
+      attr_accessor channel: ("VOICE" | "CHAT" | "TASK")
+      attr_accessor initiation_method: ("INBOUND" | "OUTBOUND" | "TRANSFER" | "QUEUE_TRANSFER" | "CALLBACK" | "API" | "DISCONNECT" | "MONITOR" | "EXTERNAL_OUTBOUND")
+      attr_accessor agent_contact_state: ("INCOMING" | "PENDING" | "CONNECTING" | "CONNECTED" | "CONNECTED_ONHOLD" | "MISSED" | "ERROR" | "ENDED" | "REJECTED")
+      attr_accessor state_start_timestamp: ::Time
+      attr_accessor connected_to_agent_timestamp: ::Time
+      attr_accessor queue: Types::QueueReference
+      SENSITIVE: []
+    end
+
+    class AgentHierarchyGroups
+      attr_accessor l1_ids: ::Array[::String]
+      attr_accessor l2_ids: ::Array[::String]
+      attr_accessor l3_ids: ::Array[::String]
+      attr_accessor l4_ids: ::Array[::String]
+      attr_accessor l5_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AgentInfo
+      attr_accessor id: ::String
+      attr_accessor connected_to_agent_timestamp: ::Time
+      attr_accessor agent_pause_duration_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class AgentStatus
+      attr_accessor agent_status_arn: ::String
+      attr_accessor agent_status_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("ROUTABLE" | "CUSTOM" | "OFFLINE")
+      attr_accessor display_order: ::Integer
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class AgentStatusReference
+      attr_accessor status_start_timestamp: ::Time
+      attr_accessor status_arn: ::String
+      attr_accessor status_name: ::String
+      SENSITIVE: []
+    end
+
+    class AgentStatusSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("ROUTABLE" | "CUSTOM" | "OFFLINE")
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class AllowedCapabilities
+      attr_accessor customer: Types::ParticipantCapabilities
+      attr_accessor agent: Types::ParticipantCapabilities
+      SENSITIVE: []
+    end
+
+    class AnalyticsDataAssociationResult
+      attr_accessor data_set_id: ::String
+      attr_accessor target_account_id: ::String
+      attr_accessor resource_share_id: ::String
+      attr_accessor resource_share_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AnswerMachineDetectionConfig
+      attr_accessor enable_answer_machine_detection: bool
+      attr_accessor await_answer_machine_prompt: bool
+      SENSITIVE: []
+    end
+
+    class Application
+      attr_accessor namespace: ::String
+      attr_accessor application_permissions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AssignContactCategoryActionDefinition < Aws::EmptyStructure
+    end
+
+    class AssociateAnalyticsDataSetRequest
+      attr_accessor instance_id: ::String
+      attr_accessor data_set_id: ::String
+      attr_accessor target_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateAnalyticsDataSetResponse
+      attr_accessor data_set_id: ::String
+      attr_accessor target_account_id: ::String
+      attr_accessor resource_share_id: ::String
+      attr_accessor resource_share_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateApprovedOriginRequest
+      attr_accessor instance_id: ::String
+      attr_accessor origin: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateBotRequest
+      attr_accessor instance_id: ::String
+      attr_accessor lex_bot: Types::LexBot
+      attr_accessor lex_v2_bot: Types::LexV2Bot
+      SENSITIVE: []
+    end
+
+    class AssociateDefaultVocabularyRequest
+      attr_accessor instance_id: ::String
+      attr_accessor language_code: ("ar-AE" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fr-CA" | "fr-FR" | "hi-IN" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "pt-PT" | "zh-CN" | "en-NZ" | "en-ZA")
+      attr_accessor vocabulary_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateDefaultVocabularyResponse < Aws::EmptyStructure
+    end
+
+    class AssociateFlowRequest
+      attr_accessor instance_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor flow_id: ::String
+      attr_accessor resource_type: ("SMS_PHONE_NUMBER")
+      SENSITIVE: []
+    end
+
+    class AssociateFlowResponse < Aws::EmptyStructure
+    end
+
+    class AssociateInstanceStorageConfigRequest
+      attr_accessor instance_id: ::String
+      attr_accessor resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS")
+      attr_accessor storage_config: Types::InstanceStorageConfig
+      SENSITIVE: []
+    end
+
+    class AssociateInstanceStorageConfigResponse
+      attr_accessor association_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateLambdaFunctionRequest
+      attr_accessor instance_id: ::String
+      attr_accessor function_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateLexBotRequest
+      attr_accessor instance_id: ::String
+      attr_accessor lex_bot: Types::LexBot
+      SENSITIVE: []
+    end
+
+    class AssociatePhoneNumberContactFlowRequest
+      attr_accessor phone_number_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateQueueQuickConnectsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor queue_id: ::String
+      attr_accessor quick_connect_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AssociateRoutingProfileQueuesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor routing_profile_id: ::String
+      attr_accessor queue_configs: ::Array[Types::RoutingProfileQueueConfig]
+      SENSITIVE: []
+    end
+
+    class AssociateSecurityKeyRequest
+      attr_accessor instance_id: ::String
+      attr_accessor key: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateSecurityKeyResponse
+      attr_accessor association_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateTrafficDistributionGroupUserRequest
+      attr_accessor traffic_distribution_group_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateTrafficDistributionGroupUserResponse < Aws::EmptyStructure
+    end
+
+    class AssociateUserProficienciesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor user_proficiencies: ::Array[Types::UserProficiency]
+      SENSITIVE: []
+    end
+
+    class AttachmentReference
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      attr_accessor status: ("APPROVED" | "REJECTED")
+      SENSITIVE: []
+    end
+
+    class Attendee
+      attr_accessor attendee_id: ::String
+      attr_accessor join_token: ::String
+      SENSITIVE: [:join_token]
+    end
+
+    class Attribute
+      attr_accessor attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class AudioFeatures
+      attr_accessor echo_reduction: ("AVAILABLE" | "UNAVAILABLE")
+      SENSITIVE: []
+    end
+
+    class AvailableNumberSummary
+      attr_accessor phone_number: ::String
+      attr_accessor phone_number_country_code: ("AF" | "AL" | "DZ" | "AS" | "AD" | "AO" | "AI" | "AQ" | "AG" | "AR" | "AM" | "AW" | "AU" | "AT" | "AZ" | "BS" | "BH" | "BD" | "BB" | "BY" | "BE" | "BZ" | "BJ" | "BM" | "BT" | "BO" | "BA" | "BW" | "BR" | "IO" | "VG" | "BN" | "BG" | "BF" | "BI" | "KH" | "CM" | "CA" | "CV" | "KY" | "CF" | "TD" | "CL" | "CN" | "CX" | "CC" | "CO" | "KM" | "CK" | "CR" | "HR" | "CU" | "CW" | "CY" | "CZ" | "CD" | "DK" | "DJ" | "DM" | "DO" | "TL" | "EC" | "EG" | "SV" | "GQ" | "ER" | "EE" | "ET" | "FK" | "FO" | "FJ" | "FI" | "FR" | "PF" | "GA" | "GM" | "GE" | "DE" | "GH" | "GI" | "GR" | "GL" | "GD" | "GU" | "GT" | "GG" | "GN" | "GW" | "GY" | "HT" | "HN" | "HK" | "HU" | "IS" | "IN" | "ID" | "IR" | "IQ" | "IE" | "IM" | "IL" | "IT" | "CI" | "JM" | "JP" | "JE" | "JO" | "KZ" | "KE" | "KI" | "KW" | "KG" | "LA" | "LV" | "LB" | "LS" | "LR" | "LY" | "LI" | "LT" | "LU" | "MO" | "MK" | "MG" | "MW" | "MY" | "MV" | "ML" | "MT" | "MH" | "MR" | "MU" | "YT" | "MX" | "FM" | "MD" | "MC" | "MN" | "ME" | "MS" | "MA" | "MZ" | "MM" | "NA" | "NR" | "NP" | "NL" | "AN" | "NC" | "NZ" | "NI" | "NE" | "NG" | "NU" | "KP" | "MP" | "NO" | "OM" | "PK" | "PW" | "PA" | "PG" | "PY" | "PE" | "PH" | "PN" | "PL" | "PT" | "PR" | "QA" | "CG" | "RE" | "RO" | "RU" | "RW" | "BL" | "SH" | "KN" | "LC" | "MF" | "PM" | "VC" | "WS" | "SM" | "ST" | "SA" | "SN" | "RS" | "SC" | "SL" | "SG" | "SX" | "SK" | "SI" | "SB" | "SO" | "ZA" | "KR" | "ES" | "LK" | "SD" | "SR" | "SJ" | "SZ" | "SE" | "CH" | "SY" | "TW" | "TJ" | "TZ" | "TH" | "TG" | "TK" | "TO" | "TT" | "TN" | "TR" | "TM" | "TC" | "TV" | "VI" | "UG" | "UA" | "AE" | "GB" | "US" | "UY" | "UZ" | "VU" | "VA" | "VE" | "VN" | "WF" | "EH" | "YE" | "ZM" | "ZW")
+      attr_accessor phone_number_type: ("TOLL_FREE" | "DID" | "UIFN" | "SHARED" | "THIRD_PARTY_TF" | "THIRD_PARTY_DID" | "SHORT_CODE")
+      SENSITIVE: []
+    end
+
+    class BatchAssociateAnalyticsDataSetRequest
+      attr_accessor instance_id: ::String
+      attr_accessor data_set_ids: ::Array[::String]
+      attr_accessor target_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchAssociateAnalyticsDataSetResponse
+      attr_accessor created: ::Array[Types::AnalyticsDataAssociationResult]
+      attr_accessor errors: ::Array[Types::ErrorResult]
+      SENSITIVE: []
+    end
+
+    class BatchDisassociateAnalyticsDataSetRequest
+      attr_accessor instance_id: ::String
+      attr_accessor data_set_ids: ::Array[::String]
+      attr_accessor target_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDisassociateAnalyticsDataSetResponse
+      attr_accessor deleted: ::Array[::String]
+      attr_accessor errors: ::Array[Types::ErrorResult]
+      SENSITIVE: []
+    end
+
+    class BatchGetFlowAssociationRequest
+      attr_accessor instance_id: ::String
+      attr_accessor resource_ids: ::Array[::String]
+      attr_accessor resource_type: ("VOICE_PHONE_NUMBER")
+      SENSITIVE: []
+    end
+
+    class BatchGetFlowAssociationResponse
+      attr_accessor flow_association_summary_list: ::Array[Types::FlowAssociationSummary]
+      SENSITIVE: []
+    end
+
+    class BatchPutContactRequest
+      attr_accessor client_token: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor contact_data_request_list: ::Array[Types::ContactDataRequest]
+      SENSITIVE: []
+    end
+
+    class BatchPutContactResponse
+      attr_accessor successful_request_list: ::Array[Types::SuccessfulRequest]
+      attr_accessor failed_request_list: ::Array[Types::FailedRequest]
+      SENSITIVE: []
+    end
+
+    class Campaign
+      attr_accessor campaign_id: ::String
+      SENSITIVE: []
+    end
+
+    class ChatEvent
+      attr_accessor type: ("DISCONNECT" | "MESSAGE" | "EVENT")
+      attr_accessor content_type: ::String
+      attr_accessor content: ::String
+      SENSITIVE: []
+    end
+
+    class ChatMessage
+      attr_accessor content_type: ::String
+      attr_accessor content: ::String
+      SENSITIVE: []
+    end
+
+    class ChatParticipantRoleConfig
+      attr_accessor participant_timer_config_list: ::Array[Types::ParticipantTimerConfiguration]
+      SENSITIVE: []
+    end
+
+    class ChatStreamingConfiguration
+      attr_accessor streaming_endpoint_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ClaimPhoneNumberRequest
+      attr_accessor target_arn: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor phone_number_description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class ClaimPhoneNumberResponse
+      attr_accessor phone_number_id: ::String
+      attr_accessor phone_number_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ClaimedPhoneNumberSummary
+      attr_accessor phone_number_id: ::String
+      attr_accessor phone_number_arn: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor phone_number_country_code: ("AF" | "AL" | "DZ" | "AS" | "AD" | "AO" | "AI" | "AQ" | "AG" | "AR" | "AM" | "AW" | "AU" | "AT" | "AZ" | "BS" | "BH" | "BD" | "BB" | "BY" | "BE" | "BZ" | "BJ" | "BM" | "BT" | "BO" | "BA" | "BW" | "BR" | "IO" | "VG" | "BN" | "BG" | "BF" | "BI" | "KH" | "CM" | "CA" | "CV" | "KY" | "CF" | "TD" | "CL" | "CN" | "CX" | "CC" | "CO" | "KM" | "CK" | "CR" | "HR" | "CU" | "CW" | "CY" | "CZ" | "CD" | "DK" | "DJ" | "DM" | "DO" | "TL" | "EC" | "EG" | "SV" | "GQ" | "ER" | "EE" | "ET" | "FK" | "FO" | "FJ" | "FI" | "FR" | "PF" | "GA" | "GM" | "GE" | "DE" | "GH" | "GI" | "GR" | "GL" | "GD" | "GU" | "GT" | "GG" | "GN" | "GW" | "GY" | "HT" | "HN" | "HK" | "HU" | "IS" | "IN" | "ID" | "IR" | "IQ" | "IE" | "IM" | "IL" | "IT" | "CI" | "JM" | "JP" | "JE" | "JO" | "KZ" | "KE" | "KI" | "KW" | "KG" | "LA" | "LV" | "LB" | "LS" | "LR" | "LY" | "LI" | "LT" | "LU" | "MO" | "MK" | "MG" | "MW" | "MY" | "MV" | "ML" | "MT" | "MH" | "MR" | "MU" | "YT" | "MX" | "FM" | "MD" | "MC" | "MN" | "ME" | "MS" | "MA" | "MZ" | "MM" | "NA" | "NR" | "NP" | "NL" | "AN" | "NC" | "NZ" | "NI" | "NE" | "NG" | "NU" | "KP" | "MP" | "NO" | "OM" | "PK" | "PW" | "PA" | "PG" | "PY" | "PE" | "PH" | "PN" | "PL" | "PT" | "PR" | "QA" | "CG" | "RE" | "RO" | "RU" | "RW" | "BL" | "SH" | "KN" | "LC" | "MF" | "PM" | "VC" | "WS" | "SM" | "ST" | "SA" | "SN" | "RS" | "SC" | "SL" | "SG" | "SX" | "SK" | "SI" | "SB" | "SO" | "ZA" | "KR" | "ES" | "LK" | "SD" | "SR" | "SJ" | "SZ" | "SE" | "CH" | "SY" | "TW" | "TJ" | "TZ" | "TH" | "TG" | "TK" | "TO" | "TT" | "TN" | "TR" | "TM" | "TC" | "TV" | "VI" | "UG" | "UA" | "AE" | "GB" | "US" | "UY" | "UZ" | "VU" | "VA" | "VE" | "VN" | "WF" | "EH" | "YE" | "ZM" | "ZW")
+      attr_accessor phone_number_type: ("TOLL_FREE" | "DID" | "UIFN" | "SHARED" | "THIRD_PARTY_TF" | "THIRD_PARTY_DID" | "SHORT_CODE")
+      attr_accessor phone_number_description: ::String
+      attr_accessor target_arn: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor phone_number_status: Types::PhoneNumberStatus
+      attr_accessor source_phone_number_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectionData
+      attr_accessor attendee: Types::Attendee
+      attr_accessor meeting: Types::Meeting
+      SENSITIVE: []
+    end
+
+    class Contact
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor initial_contact_id: ::String
+      attr_accessor previous_contact_id: ::String
+      attr_accessor initiation_method: ("INBOUND" | "OUTBOUND" | "TRANSFER" | "QUEUE_TRANSFER" | "CALLBACK" | "API" | "DISCONNECT" | "MONITOR" | "EXTERNAL_OUTBOUND")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor channel: ("VOICE" | "CHAT" | "TASK")
+      attr_accessor queue_info: Types::QueueInfo
+      attr_accessor agent_info: Types::AgentInfo
+      attr_accessor initiation_timestamp: ::Time
+      attr_accessor disconnect_timestamp: ::Time
+      attr_accessor last_update_timestamp: ::Time
+      attr_accessor last_paused_timestamp: ::Time
+      attr_accessor last_resumed_timestamp: ::Time
+      attr_accessor total_pause_count: ::Integer
+      attr_accessor total_pause_duration_in_seconds: ::Integer
+      attr_accessor scheduled_timestamp: ::Time
+      attr_accessor related_contact_id: ::String
+      attr_accessor wisdom_info: Types::WisdomInfo
+      attr_accessor queue_time_adjustment_seconds: ::Integer
+      attr_accessor queue_priority: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:name, :description]
+    end
+
+    class ContactAnalysis
+      attr_accessor transcript: Types::Transcript
+      SENSITIVE: []
+    end
+
+    class ContactDataRequest
+      attr_accessor system_endpoint: Types::Endpoint
+      attr_accessor customer_endpoint: Types::Endpoint
+      attr_accessor request_identifier: ::String
+      attr_accessor queue_id: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor campaign: Types::Campaign
+      SENSITIVE: []
+    end
+
+    class ContactFilter
+      attr_accessor contact_states: ::Array[("INCOMING" | "PENDING" | "CONNECTING" | "CONNECTED" | "CONNECTED_ONHOLD" | "MISSED" | "ERROR" | "ENDED" | "REJECTED")]
+      SENSITIVE: []
+    end
+
+    class ContactFlow
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER")
+      attr_accessor state: ("ACTIVE" | "ARCHIVED")
+      attr_accessor description: ::String
+      attr_accessor content: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ContactFlowModule
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor content: ::String
+      attr_accessor description: ::String
+      attr_accessor state: ("ACTIVE" | "ARCHIVED")
+      attr_accessor status: ("PUBLISHED" | "SAVED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ContactFlowModuleSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor state: ("ACTIVE" | "ARCHIVED")
+      SENSITIVE: []
+    end
+
+    class ContactFlowNotPublishedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ContactFlowSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor contact_flow_type: ("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER")
+      attr_accessor contact_flow_state: ("ACTIVE" | "ARCHIVED")
+      SENSITIVE: []
+    end
+
+    class ContactNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ContactSearchSummary
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor initial_contact_id: ::String
+      attr_accessor previous_contact_id: ::String
+      attr_accessor initiation_method: ("INBOUND" | "OUTBOUND" | "TRANSFER" | "QUEUE_TRANSFER" | "CALLBACK" | "API" | "DISCONNECT" | "MONITOR" | "EXTERNAL_OUTBOUND")
+      attr_accessor channel: ("VOICE" | "CHAT" | "TASK")
+      attr_accessor queue_info: Types::ContactSearchSummaryQueueInfo
+      attr_accessor agent_info: Types::ContactSearchSummaryAgentInfo
+      attr_accessor initiation_timestamp: ::Time
+      attr_accessor disconnect_timestamp: ::Time
+      attr_accessor scheduled_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class ContactSearchSummaryAgentInfo
+      attr_accessor id: ::String
+      attr_accessor connected_to_agent_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class ContactSearchSummaryQueueInfo
+      attr_accessor id: ::String
+      attr_accessor enqueue_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class ControlPlaneTagFilter
+      attr_accessor or_conditions: ::Array[::Array[Types::TagCondition]]
+      attr_accessor and_conditions: ::Array[Types::TagCondition]
+      attr_accessor tag_condition: Types::TagCondition
+      SENSITIVE: []
+    end
+
+    class CreateAgentStatusRequest
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor display_order: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateAgentStatusResponse
+      attr_accessor agent_status_arn: ::String
+      attr_accessor agent_status_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCaseActionDefinition
+      attr_accessor fields: ::Array[Types::FieldValue]
+      attr_accessor template_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateContactFlowModuleRequest
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor content: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateContactFlowModuleResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateContactFlowRequest
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER")
+      attr_accessor description: ::String
+      attr_accessor content: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateContactFlowResponse
+      attr_accessor contact_flow_id: ::String
+      attr_accessor contact_flow_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateEvaluationFormRequest
+      attr_accessor instance_id: ::String
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor items: ::Array[Types::EvaluationFormItem]
+      attr_accessor scoring_strategy: Types::EvaluationFormScoringStrategy
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateEvaluationFormResponse
+      attr_accessor evaluation_form_id: ::String
+      attr_accessor evaluation_form_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateHoursOfOperationRequest
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor time_zone: ::String
+      attr_accessor config: ::Array[Types::HoursOfOperationConfig]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateHoursOfOperationResponse
+      attr_accessor hours_of_operation_id: ::String
+      attr_accessor hours_of_operation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateInstanceRequest
+      attr_accessor client_token: ::String
+      attr_accessor identity_management_type: ("SAML" | "CONNECT_MANAGED" | "EXISTING_DIRECTORY")
+      attr_accessor instance_alias: ::String
+      attr_accessor directory_id: ::String
+      attr_accessor inbound_calls_enabled: bool
+      attr_accessor outbound_calls_enabled: bool
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:instance_alias]
+    end
+
+    class CreateInstanceResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateIntegrationAssociationRequest
+      attr_accessor instance_id: ::String
+      attr_accessor integration_type: ("EVENT" | "VOICE_ID" | "PINPOINT_APP" | "WISDOM_ASSISTANT" | "WISDOM_KNOWLEDGE_BASE" | "WISDOM_QUICK_RESPONSES" | "CASES_DOMAIN" | "APPLICATION" | "FILE_SCANNER")
+      attr_accessor integration_arn: ::String
+      attr_accessor source_application_url: ::String
+      attr_accessor source_application_name: ::String
+      attr_accessor source_type: ("SALESFORCE" | "ZENDESK" | "CASES")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateIntegrationAssociationResponse
+      attr_accessor integration_association_id: ::String
+      attr_accessor integration_association_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateParticipantRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor participant_details: Types::ParticipantDetailsToAdd
+      SENSITIVE: []
+    end
+
+    class CreateParticipantResponse
+      attr_accessor participant_credentials: Types::ParticipantTokenCredentials
+      attr_accessor participant_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePersistentContactAssociationRequest
+      attr_accessor instance_id: ::String
+      attr_accessor initial_contact_id: ::String
+      attr_accessor rehydration_type: ("ENTIRE_PAST_SESSION" | "FROM_SEGMENT")
+      attr_accessor source_contact_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePersistentContactAssociationResponse
+      attr_accessor continued_from_contact_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePredefinedAttributeRequest
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      attr_accessor values: Types::PredefinedAttributeValues
+      SENSITIVE: []
+    end
+
+    class CreatePromptRequest
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor s3_uri: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePromptResponse
+      attr_accessor prompt_arn: ::String
+      attr_accessor prompt_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateQueueRequest
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor outbound_caller_config: Types::OutboundCallerConfig
+      attr_accessor hours_of_operation_id: ::String
+      attr_accessor max_contacts: ::Integer
+      attr_accessor quick_connect_ids: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateQueueResponse
+      attr_accessor queue_arn: ::String
+      attr_accessor queue_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateQuickConnectRequest
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor quick_connect_config: Types::QuickConnectConfig
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateQuickConnectResponse
+      attr_accessor quick_connect_arn: ::String
+      attr_accessor quick_connect_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRoutingProfileRequest
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor default_outbound_queue_id: ::String
+      attr_accessor queue_configs: ::Array[Types::RoutingProfileQueueConfig]
+      attr_accessor media_concurrencies: ::Array[Types::MediaConcurrency]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor agent_availability_timer: ("TIME_SINCE_LAST_ACTIVITY" | "TIME_SINCE_LAST_INBOUND")
+      SENSITIVE: []
+    end
+
+    class CreateRoutingProfileResponse
+      attr_accessor routing_profile_arn: ::String
+      attr_accessor routing_profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRuleRequest
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      attr_accessor trigger_event_source: Types::RuleTriggerEventSource
+      attr_accessor function: ::String
+      attr_accessor actions: ::Array[Types::RuleAction]
+      attr_accessor publish_status: ("DRAFT" | "PUBLISHED")
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRuleResponse
+      attr_accessor rule_arn: ::String
+      attr_accessor rule_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSecurityProfileRequest
+      attr_accessor security_profile_name: ::String
+      attr_accessor description: ::String
+      attr_accessor permissions: ::Array[::String]
+      attr_accessor instance_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor allowed_access_control_tags: ::Hash[::String, ::String]
+      attr_accessor tag_restricted_resources: ::Array[::String]
+      attr_accessor applications: ::Array[Types::Application]
+      SENSITIVE: []
+    end
+
+    class CreateSecurityProfileResponse
+      attr_accessor security_profile_id: ::String
+      attr_accessor security_profile_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTaskTemplateRequest
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor contact_flow_id: ::String
+      attr_accessor constraints: Types::TaskTemplateConstraints
+      attr_accessor defaults: Types::TaskTemplateDefaults
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor fields: ::Array[Types::TaskTemplateField]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTaskTemplateResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTrafficDistributionGroupRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateTrafficDistributionGroupResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateUseCaseRequest
+      attr_accessor instance_id: ::String
+      attr_accessor integration_association_id: ::String
+      attr_accessor use_case_type: ("RULES_EVALUATION" | "CONNECT_CAMPAIGNS")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateUseCaseResponse
+      attr_accessor use_case_id: ::String
+      attr_accessor use_case_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateUserHierarchyGroupRequest
+      attr_accessor name: ::String
+      attr_accessor parent_group_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateUserHierarchyGroupResponse
+      attr_accessor hierarchy_group_id: ::String
+      attr_accessor hierarchy_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateUserRequest
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      attr_accessor identity_info: Types::UserIdentityInfo
+      attr_accessor phone_config: Types::UserPhoneConfig
+      attr_accessor directory_user_id: ::String
+      attr_accessor security_profile_ids: ::Array[::String]
+      attr_accessor routing_profile_id: ::String
+      attr_accessor hierarchy_group_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:password]
+    end
+
+    class CreateUserResponse
+      attr_accessor user_id: ::String
+      attr_accessor user_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateViewRequest
+      attr_accessor instance_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor status: ("PUBLISHED" | "SAVED")
+      attr_accessor content: Types::ViewInputContent
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:name]
+    end
+
+    class CreateViewResponse
+      attr_accessor view: Types::View
+      SENSITIVE: []
+    end
+
+    class CreateViewVersionRequest
+      attr_accessor instance_id: ::String
+      attr_accessor view_id: ::String
+      attr_accessor version_description: ::String
+      attr_accessor view_content_sha_256: ::String
+      SENSITIVE: []
+    end
+
+    class CreateViewVersionResponse
+      attr_accessor view: Types::View
+      SENSITIVE: []
+    end
+
+    class CreateVocabularyRequest
+      attr_accessor client_token: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor vocabulary_name: ::String
+      attr_accessor language_code: ("ar-AE" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fr-CA" | "fr-FR" | "hi-IN" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "pt-PT" | "zh-CN" | "en-NZ" | "en-ZA")
+      attr_accessor content: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateVocabularyResponse
+      attr_accessor vocabulary_arn: ::String
+      attr_accessor vocabulary_id: ::String
+      attr_accessor state: ("CREATION_IN_PROGRESS" | "ACTIVE" | "CREATION_FAILED" | "DELETE_IN_PROGRESS")
+      SENSITIVE: []
+    end
+
+    class Credentials
+      attr_accessor access_token: ::String
+      attr_accessor access_token_expiration: ::Time
+      attr_accessor refresh_token: ::String
+      attr_accessor refresh_token_expiration: ::Time
+      SENSITIVE: [:access_token, :refresh_token]
+    end
+
+    class CrossChannelBehavior
+      attr_accessor behavior_type: ("ROUTE_CURRENT_CHANNEL_ONLY" | "ROUTE_ANY_CHANNEL")
+      SENSITIVE: []
+    end
+
+    class CurrentMetric
+      attr_accessor name: ("AGENTS_ONLINE" | "AGENTS_AVAILABLE" | "AGENTS_ON_CALL" | "AGENTS_NON_PRODUCTIVE" | "AGENTS_AFTER_CONTACT_WORK" | "AGENTS_ERROR" | "AGENTS_STAFFED" | "CONTACTS_IN_QUEUE" | "OLDEST_CONTACT_AGE" | "CONTACTS_SCHEDULED" | "AGENTS_ON_CONTACT" | "SLOTS_ACTIVE" | "SLOTS_AVAILABLE")
+      attr_accessor unit: ("SECONDS" | "COUNT" | "PERCENT")
+      SENSITIVE: []
+    end
+
+    class CurrentMetricData
+      attr_accessor metric: Types::CurrentMetric
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class CurrentMetricResult
+      attr_accessor dimensions: Types::Dimensions
+      attr_accessor collections: ::Array[Types::CurrentMetricData]
+      SENSITIVE: []
+    end
+
+    class CurrentMetricSortCriteria
+      attr_accessor sort_by_metric: ("AGENTS_ONLINE" | "AGENTS_AVAILABLE" | "AGENTS_ON_CALL" | "AGENTS_NON_PRODUCTIVE" | "AGENTS_AFTER_CONTACT_WORK" | "AGENTS_ERROR" | "AGENTS_STAFFED" | "CONTACTS_IN_QUEUE" | "OLDEST_CONTACT_AGE" | "CONTACTS_SCHEDULED" | "AGENTS_ON_CONTACT" | "SLOTS_ACTIVE" | "SLOTS_AVAILABLE")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class DateReference
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class DeactivateEvaluationFormRequest
+      attr_accessor instance_id: ::String
+      attr_accessor evaluation_form_id: ::String
+      attr_accessor evaluation_form_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeactivateEvaluationFormResponse
+      attr_accessor evaluation_form_id: ::String
+      attr_accessor evaluation_form_arn: ::String
+      attr_accessor evaluation_form_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class DefaultVocabulary
+      attr_accessor instance_id: ::String
+      attr_accessor language_code: ("ar-AE" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fr-CA" | "fr-FR" | "hi-IN" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "pt-PT" | "zh-CN" | "en-NZ" | "en-ZA")
+      attr_accessor vocabulary_id: ::String
+      attr_accessor vocabulary_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteContactEvaluationRequest
+      attr_accessor instance_id: ::String
+      attr_accessor evaluation_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteContactFlowModuleRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_module_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteContactFlowModuleResponse < Aws::EmptyStructure
+    end
+
+    class DeleteContactFlowRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteContactFlowResponse < Aws::EmptyStructure
+    end
+
+    class DeleteEvaluationFormRequest
+      attr_accessor instance_id: ::String
+      attr_accessor evaluation_form_id: ::String
+      attr_accessor evaluation_form_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteHoursOfOperationRequest
+      attr_accessor instance_id: ::String
+      attr_accessor hours_of_operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInstanceRequest
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIntegrationAssociationRequest
+      attr_accessor instance_id: ::String
+      attr_accessor integration_association_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePredefinedAttributeRequest
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePromptRequest
+      attr_accessor instance_id: ::String
+      attr_accessor prompt_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteQueueRequest
+      attr_accessor instance_id: ::String
+      attr_accessor queue_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteQuickConnectRequest
+      attr_accessor instance_id: ::String
+      attr_accessor quick_connect_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRoutingProfileRequest
+      attr_accessor instance_id: ::String
+      attr_accessor routing_profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRuleRequest
+      attr_accessor instance_id: ::String
+      attr_accessor rule_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSecurityProfileRequest
+      attr_accessor instance_id: ::String
+      attr_accessor security_profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTaskTemplateRequest
+      attr_accessor instance_id: ::String
+      attr_accessor task_template_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTaskTemplateResponse < Aws::EmptyStructure
+    end
+
+    class DeleteTrafficDistributionGroupRequest
+      attr_accessor traffic_distribution_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTrafficDistributionGroupResponse < Aws::EmptyStructure
+    end
+
+    class DeleteUseCaseRequest
+      attr_accessor instance_id: ::String
+      attr_accessor integration_association_id: ::String
+      attr_accessor use_case_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUserHierarchyGroupRequest
+      attr_accessor hierarchy_group_id: ::String
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUserRequest
+      attr_accessor instance_id: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteViewRequest
+      attr_accessor instance_id: ::String
+      attr_accessor view_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteViewResponse < Aws::EmptyStructure
+    end
+
+    class DeleteViewVersionRequest
+      attr_accessor instance_id: ::String
+      attr_accessor view_id: ::String
+      attr_accessor view_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteViewVersionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteVocabularyRequest
+      attr_accessor instance_id: ::String
+      attr_accessor vocabulary_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVocabularyResponse
+      attr_accessor vocabulary_arn: ::String
+      attr_accessor vocabulary_id: ::String
+      attr_accessor state: ("CREATION_IN_PROGRESS" | "ACTIVE" | "CREATION_FAILED" | "DELETE_IN_PROGRESS")
+      SENSITIVE: []
+    end
+
+    class DescribeAgentStatusRequest
+      attr_accessor instance_id: ::String
+      attr_accessor agent_status_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAgentStatusResponse
+      attr_accessor agent_status: Types::AgentStatus
+      SENSITIVE: []
+    end
+
+    class DescribeContactEvaluationRequest
+      attr_accessor instance_id: ::String
+      attr_accessor evaluation_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeContactEvaluationResponse
+      attr_accessor evaluation: Types::Evaluation
+      attr_accessor evaluation_form: Types::EvaluationFormContent
+      SENSITIVE: []
+    end
+
+    class DescribeContactFlowModuleRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_module_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeContactFlowModuleResponse
+      attr_accessor contact_flow_module: Types::ContactFlowModule
+      SENSITIVE: []
+    end
+
+    class DescribeContactFlowRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeContactFlowResponse
+      attr_accessor contact_flow: Types::ContactFlow
+      SENSITIVE: []
+    end
+
+    class DescribeContactRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeContactResponse
+      attr_accessor contact: Types::Contact
+      SENSITIVE: []
+    end
+
+    class DescribeEvaluationFormRequest
+      attr_accessor instance_id: ::String
+      attr_accessor evaluation_form_id: ::String
+      attr_accessor evaluation_form_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeEvaluationFormResponse
+      attr_accessor evaluation_form: Types::EvaluationForm
+      SENSITIVE: []
+    end
+
+    class DescribeHoursOfOperationRequest
+      attr_accessor instance_id: ::String
+      attr_accessor hours_of_operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeHoursOfOperationResponse
+      attr_accessor hours_of_operation: Types::HoursOfOperation
+      SENSITIVE: []
+    end
+
+    class DescribeInstanceAttributeRequest
+      attr_accessor instance_id: ::String
+      attr_accessor attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING")
+      SENSITIVE: []
+    end
+
+    class DescribeInstanceAttributeResponse
+      attr_accessor attribute: Types::Attribute
+      SENSITIVE: []
+    end
+
+    class DescribeInstanceRequest
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInstanceResponse
+      attr_accessor instance: Types::Instance
+      SENSITIVE: []
+    end
+
+    class DescribeInstanceStorageConfigRequest
+      attr_accessor instance_id: ::String
+      attr_accessor association_id: ::String
+      attr_accessor resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS")
+      SENSITIVE: []
+    end
+
+    class DescribeInstanceStorageConfigResponse
+      attr_accessor storage_config: Types::InstanceStorageConfig
+      SENSITIVE: []
+    end
+
+    class DescribePhoneNumberRequest
+      attr_accessor phone_number_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePhoneNumberResponse
+      attr_accessor claimed_phone_number_summary: Types::ClaimedPhoneNumberSummary
+      SENSITIVE: []
+    end
+
+    class DescribePredefinedAttributeRequest
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePredefinedAttributeResponse
+      attr_accessor predefined_attribute: Types::PredefinedAttribute
+      SENSITIVE: []
+    end
+
+    class DescribePromptRequest
+      attr_accessor instance_id: ::String
+      attr_accessor prompt_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePromptResponse
+      attr_accessor prompt: Types::Prompt
+      SENSITIVE: []
+    end
+
+    class DescribeQueueRequest
+      attr_accessor instance_id: ::String
+      attr_accessor queue_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeQueueResponse
+      attr_accessor queue: Types::Queue
+      SENSITIVE: []
+    end
+
+    class DescribeQuickConnectRequest
+      attr_accessor instance_id: ::String
+      attr_accessor quick_connect_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeQuickConnectResponse
+      attr_accessor quick_connect: Types::QuickConnect
+      SENSITIVE: []
+    end
+
+    class DescribeRoutingProfileRequest
+      attr_accessor instance_id: ::String
+      attr_accessor routing_profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRoutingProfileResponse
+      attr_accessor routing_profile: Types::RoutingProfile
+      SENSITIVE: []
+    end
+
+    class DescribeRuleRequest
+      attr_accessor instance_id: ::String
+      attr_accessor rule_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRuleResponse
+      attr_accessor rule: Types::Rule
+      SENSITIVE: []
+    end
+
+    class DescribeSecurityProfileRequest
+      attr_accessor security_profile_id: ::String
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSecurityProfileResponse
+      attr_accessor security_profile: Types::SecurityProfile
+      SENSITIVE: []
+    end
+
+    class DescribeTrafficDistributionGroupRequest
+      attr_accessor traffic_distribution_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTrafficDistributionGroupResponse
+      attr_accessor traffic_distribution_group: Types::TrafficDistributionGroup
+      SENSITIVE: []
+    end
+
+    class DescribeUserHierarchyGroupRequest
+      attr_accessor hierarchy_group_id: ::String
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUserHierarchyGroupResponse
+      attr_accessor hierarchy_group: Types::HierarchyGroup
+      SENSITIVE: []
+    end
+
+    class DescribeUserHierarchyStructureRequest
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUserHierarchyStructureResponse
+      attr_accessor hierarchy_structure: Types::HierarchyStructure
+      SENSITIVE: []
+    end
+
+    class DescribeUserRequest
+      attr_accessor user_id: ::String
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUserResponse
+      attr_accessor user: Types::User
+      SENSITIVE: []
+    end
+
+    class DescribeViewRequest
+      attr_accessor instance_id: ::String
+      attr_accessor view_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeViewResponse
+      attr_accessor view: Types::View
+      SENSITIVE: []
+    end
+
+    class DescribeVocabularyRequest
+      attr_accessor instance_id: ::String
+      attr_accessor vocabulary_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeVocabularyResponse
+      attr_accessor vocabulary: Types::Vocabulary
+      SENSITIVE: []
+    end
+
+    class DestinationNotAllowedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Dimensions
+      attr_accessor queue: Types::QueueReference
+      attr_accessor channel: ("VOICE" | "CHAT" | "TASK")
+      attr_accessor routing_profile: Types::RoutingProfileReference
+      attr_accessor routing_step_expression: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateAnalyticsDataSetRequest
+      attr_accessor instance_id: ::String
+      attr_accessor data_set_id: ::String
+      attr_accessor target_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateApprovedOriginRequest
+      attr_accessor instance_id: ::String
+      attr_accessor origin: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateBotRequest
+      attr_accessor instance_id: ::String
+      attr_accessor lex_bot: Types::LexBot
+      attr_accessor lex_v2_bot: Types::LexV2Bot
+      SENSITIVE: []
+    end
+
+    class DisassociateFlowRequest
+      attr_accessor instance_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("SMS_PHONE_NUMBER")
+      SENSITIVE: []
+    end
+
+    class DisassociateFlowResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateInstanceStorageConfigRequest
+      attr_accessor instance_id: ::String
+      attr_accessor association_id: ::String
+      attr_accessor resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS")
+      SENSITIVE: []
+    end
+
+    class DisassociateLambdaFunctionRequest
+      attr_accessor instance_id: ::String
+      attr_accessor function_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateLexBotRequest
+      attr_accessor instance_id: ::String
+      attr_accessor bot_name: ::String
+      attr_accessor lex_region: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociatePhoneNumberContactFlowRequest
+      attr_accessor phone_number_id: ::String
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateQueueQuickConnectsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor queue_id: ::String
+      attr_accessor quick_connect_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DisassociateRoutingProfileQueuesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor routing_profile_id: ::String
+      attr_accessor queue_references: ::Array[Types::RoutingProfileQueueReference]
+      SENSITIVE: []
+    end
+
+    class DisassociateSecurityKeyRequest
+      attr_accessor instance_id: ::String
+      attr_accessor association_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateTrafficDistributionGroupUserRequest
+      attr_accessor traffic_distribution_group_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateTrafficDistributionGroupUserResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateUserProficienciesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor user_proficiencies: ::Array[Types::UserProficiencyDisassociate]
+      SENSITIVE: []
+    end
+
+    class DisconnectReason
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class DismissUserContactRequest
+      attr_accessor user_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
+      SENSITIVE: []
+    end
+
+    class DismissUserContactResponse < Aws::EmptyStructure
+    end
+
+    class Distribution
+      attr_accessor region: ::String
+      attr_accessor percentage: ::Integer
+      SENSITIVE: []
+    end
+
+    class DuplicateResourceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EmailReference
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class EmptyFieldValue < Aws::EmptyStructure
+    end
+
+    class EncryptionConfig
+      attr_accessor encryption_type: ("KMS")
+      attr_accessor key_id: ::String
+      SENSITIVE: []
+    end
+
+    class EndAssociatedTasksActionDefinition < Aws::EmptyStructure
+    end
+
+    class Endpoint
+      attr_accessor type: ("TELEPHONE_NUMBER" | "VOIP" | "CONTACT_FLOW")
+      attr_accessor address: ::String
+      SENSITIVE: []
+    end
+
+    class ErrorResult
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class Evaluation
+      attr_accessor evaluation_id: ::String
+      attr_accessor evaluation_arn: ::String
+      attr_accessor metadata: Types::EvaluationMetadata
+      attr_accessor answers: ::Hash[::String, Types::EvaluationAnswerOutput]
+      attr_accessor notes: ::Hash[::String, Types::EvaluationNote]
+      attr_accessor status: ("DRAFT" | "SUBMITTED")
+      attr_accessor scores: ::Hash[::String, Types::EvaluationScore]
+      attr_accessor created_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class EvaluationAnswerData
+      attr_accessor string_value: ::String
+      attr_accessor numeric_value: ::Float
+      attr_accessor not_applicable: bool
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class StringValue < EvaluationAnswerData
+      end
+      class NumericValue < EvaluationAnswerData
+      end
+      class NotApplicable < EvaluationAnswerData
+      end
+      class Unknown < EvaluationAnswerData
+      end
+    end
+
+    class EvaluationAnswerInput
+      attr_accessor value: Types::EvaluationAnswerData
+      SENSITIVE: []
+    end
+
+    class EvaluationAnswerOutput
+      attr_accessor value: Types::EvaluationAnswerData
+      attr_accessor system_suggested_value: Types::EvaluationAnswerData
+      SENSITIVE: []
+    end
+
+    class EvaluationForm
+      attr_accessor evaluation_form_id: ::String
+      attr_accessor evaluation_form_version: ::Integer
+      attr_accessor locked: bool
+      attr_accessor evaluation_form_arn: ::String
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("DRAFT" | "ACTIVE")
+      attr_accessor items: ::Array[Types::EvaluationFormItem]
+      attr_accessor scoring_strategy: Types::EvaluationFormScoringStrategy
+      attr_accessor created_time: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_by: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class EvaluationFormContent
+      attr_accessor evaluation_form_version: ::Integer
+      attr_accessor evaluation_form_id: ::String
+      attr_accessor evaluation_form_arn: ::String
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor items: ::Array[Types::EvaluationFormItem]
+      attr_accessor scoring_strategy: Types::EvaluationFormScoringStrategy
+      SENSITIVE: []
+    end
+
+    class EvaluationFormItem
+      attr_accessor section: Types::EvaluationFormSection
+      attr_accessor question: Types::EvaluationFormQuestion
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Section < EvaluationFormItem
+      end
+      class Question < EvaluationFormItem
+      end
+      class Unknown < EvaluationFormItem
+      end
+    end
+
+    class EvaluationFormNumericQuestionAutomation
+      attr_accessor property_value: Types::NumericQuestionPropertyValueAutomation
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class PropertyValue < EvaluationFormNumericQuestionAutomation
+      end
+      class Unknown < EvaluationFormNumericQuestionAutomation
+      end
+    end
+
+    class EvaluationFormNumericQuestionOption
+      attr_accessor min_value: ::Integer
+      attr_accessor max_value: ::Integer
+      attr_accessor score: ::Integer
+      attr_accessor automatic_fail: bool
+      SENSITIVE: []
+    end
+
+    class EvaluationFormNumericQuestionProperties
+      attr_accessor min_value: ::Integer
+      attr_accessor max_value: ::Integer
+      attr_accessor options: ::Array[Types::EvaluationFormNumericQuestionOption]
+      attr_accessor automation: Types::EvaluationFormNumericQuestionAutomation
+      SENSITIVE: []
+    end
+
+    class EvaluationFormQuestion
+      attr_accessor title: ::String
+      attr_accessor instructions: ::String
+      attr_accessor ref_id: ::String
+      attr_accessor not_applicable_enabled: bool
+      attr_accessor question_type: ("TEXT" | "SINGLESELECT" | "NUMERIC")
+      attr_accessor question_type_properties: Types::EvaluationFormQuestionTypeProperties
+      attr_accessor weight: ::Float
+      SENSITIVE: []
+    end
+
+    class EvaluationFormQuestionTypeProperties
+      attr_accessor numeric: Types::EvaluationFormNumericQuestionProperties
+      attr_accessor single_select: Types::EvaluationFormSingleSelectQuestionProperties
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Numeric < EvaluationFormQuestionTypeProperties
+      end
+      class SingleSelect < EvaluationFormQuestionTypeProperties
+      end
+      class Unknown < EvaluationFormQuestionTypeProperties
+      end
+    end
+
+    class EvaluationFormScoringStrategy
+      attr_accessor mode: ("QUESTION_ONLY" | "SECTION_ONLY")
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class EvaluationFormSection
+      attr_accessor title: ::String
+      attr_accessor ref_id: ::String
+      attr_accessor instructions: ::String
+      attr_accessor items: ::Array[Types::EvaluationFormItem]
+      attr_accessor weight: ::Float
+      SENSITIVE: []
+    end
+
+    class EvaluationFormSingleSelectQuestionAutomation
+      attr_accessor options: ::Array[Types::EvaluationFormSingleSelectQuestionAutomationOption]
+      attr_accessor default_option_ref_id: ::String
+      SENSITIVE: []
+    end
+
+    class EvaluationFormSingleSelectQuestionAutomationOption
+      attr_accessor rule_category: Types::SingleSelectQuestionRuleCategoryAutomation
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class RuleCategory < EvaluationFormSingleSelectQuestionAutomationOption
+      end
+      class Unknown < EvaluationFormSingleSelectQuestionAutomationOption
+      end
+    end
+
+    class EvaluationFormSingleSelectQuestionOption
+      attr_accessor ref_id: ::String
+      attr_accessor text: ::String
+      attr_accessor score: ::Integer
+      attr_accessor automatic_fail: bool
+      SENSITIVE: []
+    end
+
+    class EvaluationFormSingleSelectQuestionProperties
+      attr_accessor options: ::Array[Types::EvaluationFormSingleSelectQuestionOption]
+      attr_accessor display_as: ("DROPDOWN" | "RADIO")
+      attr_accessor automation: Types::EvaluationFormSingleSelectQuestionAutomation
+      SENSITIVE: []
+    end
+
+    class EvaluationFormSummary
+      attr_accessor evaluation_form_id: ::String
+      attr_accessor evaluation_form_arn: ::String
+      attr_accessor title: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_activated_time: ::Time
+      attr_accessor last_activated_by: ::String
+      attr_accessor latest_version: ::Integer
+      attr_accessor active_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class EvaluationFormVersionSummary
+      attr_accessor evaluation_form_arn: ::String
+      attr_accessor evaluation_form_id: ::String
+      attr_accessor evaluation_form_version: ::Integer
+      attr_accessor locked: bool
+      attr_accessor status: ("DRAFT" | "ACTIVE")
+      attr_accessor created_time: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_by: ::String
+      SENSITIVE: []
+    end
+
+    class EvaluationMetadata
+      attr_accessor contact_id: ::String
+      attr_accessor evaluator_arn: ::String
+      attr_accessor contact_agent_id: ::String
+      attr_accessor score: Types::EvaluationScore
+      SENSITIVE: []
+    end
+
+    class EvaluationNote
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class EvaluationScore
+      attr_accessor percentage: ::Float
+      attr_accessor not_applicable: bool
+      attr_accessor automatic_fail: bool
+      SENSITIVE: []
+    end
+
+    class EvaluationSummary
+      attr_accessor evaluation_id: ::String
+      attr_accessor evaluation_arn: ::String
+      attr_accessor evaluation_form_title: ::String
+      attr_accessor evaluation_form_id: ::String
+      attr_accessor status: ("DRAFT" | "SUBMITTED")
+      attr_accessor evaluator_arn: ::String
+      attr_accessor score: Types::EvaluationScore
+      attr_accessor created_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class EventBridgeActionDefinition
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class FailedRequest
+      attr_accessor request_identifier: ::String
+      attr_accessor failure_reason_code: ("INVALID_ATTRIBUTE_KEY" | "INVALID_CUSTOMER_ENDPOINT" | "INVALID_SYSTEM_ENDPOINT" | "INVALID_QUEUE" | "MISSING_CAMPAIGN" | "MISSING_CUSTOMER_ENDPOINT" | "MISSING_QUEUE_ID_AND_SYSTEM_ENDPOINT" | "REQUEST_THROTTLED" | "IDEMPOTENCY_EXCEPTION" | "INTERNAL_ERROR")
+      attr_accessor failure_reason_message: ::String
+      SENSITIVE: []
+    end
+
+    class FieldValue
+      attr_accessor id: ::String
+      attr_accessor value: Types::FieldValueUnion
+      SENSITIVE: []
+    end
+
+    class FieldValueUnion
+      attr_accessor boolean_value: bool
+      attr_accessor double_value: ::Float
+      attr_accessor empty_value: Types::EmptyFieldValue
+      attr_accessor string_value: ::String
+      SENSITIVE: []
+    end
+
+    class FilterV2
+      attr_accessor filter_key: ::String
+      attr_accessor filter_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Filters
+      attr_accessor queues: ::Array[::String]
+      attr_accessor channels: ::Array[("VOICE" | "CHAT" | "TASK")]
+      attr_accessor routing_profiles: ::Array[::String]
+      attr_accessor routing_step_expressions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class FlowAssociationSummary
+      attr_accessor resource_id: ::String
+      attr_accessor flow_id: ::String
+      attr_accessor resource_type: ("VOICE_PHONE_NUMBER")
+      SENSITIVE: []
+    end
+
+    class GetContactAttributesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor initial_contact_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetContactAttributesResponse
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetCurrentMetricDataRequest
+      attr_accessor instance_id: ::String
+      attr_accessor filters: Types::Filters
+      attr_accessor groupings: ::Array[("QUEUE" | "CHANNEL" | "ROUTING_PROFILE" | "ROUTING_STEP_EXPRESSION")]
+      attr_accessor current_metrics: ::Array[Types::CurrentMetric]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor sort_criteria: ::Array[Types::CurrentMetricSortCriteria]
+      SENSITIVE: []
+    end
+
+    class GetCurrentMetricDataResponse
+      attr_accessor next_token: ::String
+      attr_accessor metric_results: ::Array[Types::CurrentMetricResult]
+      attr_accessor data_snapshot_time: ::Time
+      attr_accessor approximate_total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetCurrentUserDataRequest
+      attr_accessor instance_id: ::String
+      attr_accessor filters: Types::UserDataFilters
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetCurrentUserDataResponse
+      attr_accessor next_token: ::String
+      attr_accessor user_data_list: ::Array[Types::UserData]
+      attr_accessor approximate_total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetFederationTokenRequest
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetFederationTokenResponse
+      attr_accessor credentials: Types::Credentials
+      attr_accessor sign_in_url: ::String
+      attr_accessor user_arn: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: [:credentials]
+    end
+
+    class GetFlowAssociationRequest
+      attr_accessor instance_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("SMS_PHONE_NUMBER")
+      SENSITIVE: []
+    end
+
+    class GetFlowAssociationResponse
+      attr_accessor resource_id: ::String
+      attr_accessor flow_id: ::String
+      attr_accessor resource_type: ("SMS_PHONE_NUMBER")
+      SENSITIVE: []
+    end
+
+    class GetMetricDataRequest
+      attr_accessor instance_id: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor filters: Types::Filters
+      attr_accessor groupings: ::Array[("QUEUE" | "CHANNEL" | "ROUTING_PROFILE" | "ROUTING_STEP_EXPRESSION")]
+      attr_accessor historical_metrics: ::Array[Types::HistoricalMetric]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetMetricDataResponse
+      attr_accessor next_token: ::String
+      attr_accessor metric_results: ::Array[Types::HistoricalMetricResult]
+      SENSITIVE: []
+    end
+
+    class GetMetricDataV2Request
+      attr_accessor resource_arn: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor interval: Types::IntervalDetails
+      attr_accessor filters: ::Array[Types::FilterV2]
+      attr_accessor groupings: ::Array[::String]
+      attr_accessor metrics: ::Array[Types::MetricV2]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetMetricDataV2Response
+      attr_accessor next_token: ::String
+      attr_accessor metric_results: ::Array[Types::MetricResultV2]
+      SENSITIVE: []
+    end
+
+    class GetPromptFileRequest
+      attr_accessor instance_id: ::String
+      attr_accessor prompt_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPromptFileResponse
+      attr_accessor prompt_presigned_url: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class GetTaskTemplateRequest
+      attr_accessor instance_id: ::String
+      attr_accessor task_template_id: ::String
+      attr_accessor snapshot_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetTaskTemplateResponse
+      attr_accessor instance_id: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor contact_flow_id: ::String
+      attr_accessor constraints: Types::TaskTemplateConstraints
+      attr_accessor defaults: Types::TaskTemplateDefaults
+      attr_accessor fields: ::Array[Types::TaskTemplateField]
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor last_modified_time: ::Time
+      attr_accessor created_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetTrafficDistributionRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetTrafficDistributionResponse
+      attr_accessor telephony_config: Types::TelephonyConfig
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor sign_in_config: Types::SignInConfig
+      attr_accessor agent_config: Types::AgentConfig
+      SENSITIVE: []
+    end
+
+    class HierarchyGroup
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor level_id: ::String
+      attr_accessor hierarchy_path: Types::HierarchyPath
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class HierarchyGroupCondition
+      attr_accessor value: ::String
+      attr_accessor hierarchy_group_match_type: ("EXACT" | "WITH_CHILD_GROUPS")
+      SENSITIVE: []
+    end
+
+    class HierarchyGroupSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class HierarchyGroupSummaryReference
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class HierarchyLevel
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class HierarchyLevelUpdate
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class HierarchyPath
+      attr_accessor level_one: Types::HierarchyGroupSummary
+      attr_accessor level_two: Types::HierarchyGroupSummary
+      attr_accessor level_three: Types::HierarchyGroupSummary
+      attr_accessor level_four: Types::HierarchyGroupSummary
+      attr_accessor level_five: Types::HierarchyGroupSummary
+      SENSITIVE: []
+    end
+
+    class HierarchyPathReference
+      attr_accessor level_one: Types::HierarchyGroupSummaryReference
+      attr_accessor level_two: Types::HierarchyGroupSummaryReference
+      attr_accessor level_three: Types::HierarchyGroupSummaryReference
+      attr_accessor level_four: Types::HierarchyGroupSummaryReference
+      attr_accessor level_five: Types::HierarchyGroupSummaryReference
+      SENSITIVE: []
+    end
+
+    class HierarchyStructure
+      attr_accessor level_one: Types::HierarchyLevel
+      attr_accessor level_two: Types::HierarchyLevel
+      attr_accessor level_three: Types::HierarchyLevel
+      attr_accessor level_four: Types::HierarchyLevel
+      attr_accessor level_five: Types::HierarchyLevel
+      SENSITIVE: []
+    end
+
+    class HierarchyStructureUpdate
+      attr_accessor level_one: Types::HierarchyLevelUpdate
+      attr_accessor level_two: Types::HierarchyLevelUpdate
+      attr_accessor level_three: Types::HierarchyLevelUpdate
+      attr_accessor level_four: Types::HierarchyLevelUpdate
+      attr_accessor level_five: Types::HierarchyLevelUpdate
+      SENSITIVE: []
+    end
+
+    class HistoricalMetric
+      attr_accessor name: ("CONTACTS_QUEUED" | "CONTACTS_HANDLED" | "CONTACTS_ABANDONED" | "CONTACTS_CONSULTED" | "CONTACTS_AGENT_HUNG_UP_FIRST" | "CONTACTS_HANDLED_INCOMING" | "CONTACTS_HANDLED_OUTBOUND" | "CONTACTS_HOLD_ABANDONS" | "CONTACTS_TRANSFERRED_IN" | "CONTACTS_TRANSFERRED_OUT" | "CONTACTS_TRANSFERRED_IN_FROM_QUEUE" | "CONTACTS_TRANSFERRED_OUT_FROM_QUEUE" | "CONTACTS_MISSED" | "CALLBACK_CONTACTS_HANDLED" | "API_CONTACTS_HANDLED" | "OCCUPANCY" | "HANDLE_TIME" | "AFTER_CONTACT_WORK_TIME" | "QUEUED_TIME" | "ABANDON_TIME" | "QUEUE_ANSWER_TIME" | "HOLD_TIME" | "INTERACTION_TIME" | "INTERACTION_AND_HOLD_TIME" | "SERVICE_LEVEL")
+      attr_accessor threshold: Types::Threshold
+      attr_accessor statistic: ("SUM" | "MAX" | "AVG")
+      attr_accessor unit: ("SECONDS" | "COUNT" | "PERCENT")
+      SENSITIVE: []
+    end
+
+    class HistoricalMetricData
+      attr_accessor metric: Types::HistoricalMetric
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class HistoricalMetricResult
+      attr_accessor dimensions: Types::Dimensions
+      attr_accessor collections: ::Array[Types::HistoricalMetricData]
+      SENSITIVE: []
+    end
+
+    class HoursOfOperation
+      attr_accessor hours_of_operation_id: ::String
+      attr_accessor hours_of_operation_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor time_zone: ::String
+      attr_accessor config: ::Array[Types::HoursOfOperationConfig]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class HoursOfOperationConfig
+      attr_accessor day: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY")
+      attr_accessor start_time: Types::HoursOfOperationTimeSlice
+      attr_accessor end_time: Types::HoursOfOperationTimeSlice
+      SENSITIVE: []
+    end
+
+    class HoursOfOperationSearchCriteria
+      attr_accessor or_conditions: ::Array[Types::HoursOfOperationSearchCriteria]
+      attr_accessor and_conditions: ::Array[Types::HoursOfOperationSearchCriteria]
+      attr_accessor string_condition: Types::StringCondition
+      SENSITIVE: []
+    end
+
+    class HoursOfOperationSearchFilter
+      attr_accessor tag_filter: Types::ControlPlaneTagFilter
+      SENSITIVE: []
+    end
+
+    class HoursOfOperationSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class HoursOfOperationTimeSlice
+      attr_accessor hours: ::Integer
+      attr_accessor minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class IdempotencyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ImportPhoneNumberRequest
+      attr_accessor instance_id: ::String
+      attr_accessor source_phone_number_arn: ::String
+      attr_accessor phone_number_description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class ImportPhoneNumberResponse
+      attr_accessor phone_number_id: ::String
+      attr_accessor phone_number_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Instance
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor identity_management_type: ("SAML" | "CONNECT_MANAGED" | "EXISTING_DIRECTORY")
+      attr_accessor instance_alias: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor service_role: ::String
+      attr_accessor instance_status: ("CREATION_IN_PROGRESS" | "ACTIVE" | "CREATION_FAILED")
+      attr_accessor status_reason: Types::InstanceStatusReason
+      attr_accessor inbound_calls_enabled: bool
+      attr_accessor outbound_calls_enabled: bool
+      attr_accessor instance_access_url: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:instance_alias]
+    end
+
+    class InstanceStatusReason
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceStorageConfig
+      attr_accessor association_id: ::String
+      attr_accessor storage_type: ("S3" | "KINESIS_VIDEO_STREAM" | "KINESIS_STREAM" | "KINESIS_FIREHOSE")
+      attr_accessor s3_config: Types::S3Config
+      attr_accessor kinesis_video_stream_config: Types::KinesisVideoStreamConfig
+      attr_accessor kinesis_stream_config: Types::KinesisStreamConfig
+      attr_accessor kinesis_firehose_config: Types::KinesisFirehoseConfig
+      SENSITIVE: []
+    end
+
+    class InstanceSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor identity_management_type: ("SAML" | "CONNECT_MANAGED" | "EXISTING_DIRECTORY")
+      attr_accessor instance_alias: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor service_role: ::String
+      attr_accessor instance_status: ("CREATION_IN_PROGRESS" | "ACTIVE" | "CREATION_FAILED")
+      attr_accessor inbound_calls_enabled: bool
+      attr_accessor outbound_calls_enabled: bool
+      attr_accessor instance_access_url: ::String
+      SENSITIVE: [:instance_alias]
+    end
+
+    class IntegrationAssociationSummary
+      attr_accessor integration_association_id: ::String
+      attr_accessor integration_association_arn: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor integration_type: ("EVENT" | "VOICE_ID" | "PINPOINT_APP" | "WISDOM_ASSISTANT" | "WISDOM_KNOWLEDGE_BASE" | "WISDOM_QUICK_RESPONSES" | "CASES_DOMAIN" | "APPLICATION" | "FILE_SCANNER")
+      attr_accessor integration_arn: ::String
+      attr_accessor source_application_url: ::String
+      attr_accessor source_application_name: ::String
+      attr_accessor source_type: ("SALESFORCE" | "ZENDESK" | "CASES")
+      SENSITIVE: []
+    end
+
+    class InternalServiceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IntervalDetails
+      attr_accessor time_zone: ::String
+      attr_accessor interval_period: ("FIFTEEN_MIN" | "THIRTY_MIN" | "HOUR" | "DAY" | "WEEK" | "TOTAL")
+      SENSITIVE: []
+    end
+
+    class InvalidContactFlowException
+      attr_accessor problems: ::Array[Types::ProblemDetail]
+      SENSITIVE: []
+    end
+
+    class InvalidContactFlowModuleException
+      attr_accessor problems: ::Array[Types::ProblemDetail]
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvisibleFieldInfo
+      attr_accessor id: Types::TaskTemplateFieldIdentifier
+      SENSITIVE: []
+    end
+
+    class KinesisFirehoseConfig
+      attr_accessor firehose_arn: ::String
+      SENSITIVE: []
+    end
+
+    class KinesisStreamConfig
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class KinesisVideoStreamConfig
+      attr_accessor prefix: ::String
+      attr_accessor retention_period_hours: ::Integer
+      attr_accessor encryption_config: Types::EncryptionConfig
+      SENSITIVE: []
+    end
+
+    class LexBot
+      attr_accessor name: ::String
+      attr_accessor lex_region: ::String
+      SENSITIVE: []
+    end
+
+    class LexBotConfig
+      attr_accessor lex_bot: Types::LexBot
+      attr_accessor lex_v2_bot: Types::LexV2Bot
+      SENSITIVE: []
+    end
+
+    class LexV2Bot
+      attr_accessor alias_arn: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentStatusRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor agent_status_types: ::Array[("ROUTABLE" | "CUSTOM" | "OFFLINE")]
+      SENSITIVE: []
+    end
+
+    class ListAgentStatusResponse
+      attr_accessor next_token: ::String
+      attr_accessor agent_status_summary_list: ::Array[Types::AgentStatusSummary]
+      SENSITIVE: []
+    end
+
+    class ListAnalyticsDataAssociationsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor data_set_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAnalyticsDataAssociationsResponse
+      attr_accessor results: ::Array[Types::AnalyticsDataAssociationResult]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApprovedOriginsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListApprovedOriginsResponse
+      attr_accessor origins: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBotsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor lex_version: ("V1" | "V2")
+      SENSITIVE: []
+    end
+
+    class ListBotsResponse
+      attr_accessor lex_bots: ::Array[Types::LexBotConfig]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContactEvaluationsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContactEvaluationsResponse
+      attr_accessor evaluation_summary_list: ::Array[Types::EvaluationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContactFlowModulesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor contact_flow_module_state: ("ACTIVE" | "ARCHIVED")
+      SENSITIVE: []
+    end
+
+    class ListContactFlowModulesResponse
+      attr_accessor contact_flow_modules_summary_list: ::Array[Types::ContactFlowModuleSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContactFlowsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_types: ::Array[("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER")]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListContactFlowsResponse
+      attr_accessor contact_flow_summary_list: ::Array[Types::ContactFlowSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContactReferencesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
+      attr_accessor reference_types: ::Array[("URL" | "ATTACHMENT" | "NUMBER" | "STRING" | "DATE" | "EMAIL")]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContactReferencesResponse
+      attr_accessor reference_summary_list: ::Array[Types::ReferenceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDefaultVocabulariesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor language_code: ("ar-AE" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fr-CA" | "fr-FR" | "hi-IN" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "pt-PT" | "zh-CN" | "en-NZ" | "en-ZA")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDefaultVocabulariesResponse
+      attr_accessor default_vocabulary_list: ::Array[Types::DefaultVocabulary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEvaluationFormVersionsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor evaluation_form_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEvaluationFormVersionsResponse
+      attr_accessor evaluation_form_version_summary_list: ::Array[Types::EvaluationFormVersionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEvaluationFormsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEvaluationFormsResponse
+      attr_accessor evaluation_form_summary_list: ::Array[Types::EvaluationFormSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFlowAssociationsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor resource_type: ("VOICE_PHONE_NUMBER")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFlowAssociationsResponse
+      attr_accessor flow_association_summary_list: ::Array[Types::FlowAssociationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListHoursOfOperationsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListHoursOfOperationsResponse
+      attr_accessor hours_of_operation_summary_list: ::Array[Types::HoursOfOperationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInstanceAttributesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListInstanceAttributesResponse
+      attr_accessor attributes: ::Array[Types::Attribute]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInstanceStorageConfigsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListInstanceStorageConfigsResponse
+      attr_accessor storage_configs: ::Array[Types::InstanceStorageConfig]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInstancesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListInstancesResponse
+      attr_accessor instance_summary_list: ::Array[Types::InstanceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIntegrationAssociationsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor integration_type: ("EVENT" | "VOICE_ID" | "PINPOINT_APP" | "WISDOM_ASSISTANT" | "WISDOM_KNOWLEDGE_BASE" | "WISDOM_QUICK_RESPONSES" | "CASES_DOMAIN" | "APPLICATION" | "FILE_SCANNER")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor integration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListIntegrationAssociationsResponse
+      attr_accessor integration_association_summary_list: ::Array[Types::IntegrationAssociationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLambdaFunctionsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListLambdaFunctionsResponse
+      attr_accessor lambda_functions: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLexBotsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListLexBotsResponse
+      attr_accessor lex_bots: ::Array[Types::LexBot]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPhoneNumbersRequest
+      attr_accessor instance_id: ::String
+      attr_accessor phone_number_types: ::Array[("TOLL_FREE" | "DID" | "UIFN" | "SHARED" | "THIRD_PARTY_TF" | "THIRD_PARTY_DID" | "SHORT_CODE")]
+      attr_accessor phone_number_country_codes: ::Array[("AF" | "AL" | "DZ" | "AS" | "AD" | "AO" | "AI" | "AQ" | "AG" | "AR" | "AM" | "AW" | "AU" | "AT" | "AZ" | "BS" | "BH" | "BD" | "BB" | "BY" | "BE" | "BZ" | "BJ" | "BM" | "BT" | "BO" | "BA" | "BW" | "BR" | "IO" | "VG" | "BN" | "BG" | "BF" | "BI" | "KH" | "CM" | "CA" | "CV" | "KY" | "CF" | "TD" | "CL" | "CN" | "CX" | "CC" | "CO" | "KM" | "CK" | "CR" | "HR" | "CU" | "CW" | "CY" | "CZ" | "CD" | "DK" | "DJ" | "DM" | "DO" | "TL" | "EC" | "EG" | "SV" | "GQ" | "ER" | "EE" | "ET" | "FK" | "FO" | "FJ" | "FI" | "FR" | "PF" | "GA" | "GM" | "GE" | "DE" | "GH" | "GI" | "GR" | "GL" | "GD" | "GU" | "GT" | "GG" | "GN" | "GW" | "GY" | "HT" | "HN" | "HK" | "HU" | "IS" | "IN" | "ID" | "IR" | "IQ" | "IE" | "IM" | "IL" | "IT" | "CI" | "JM" | "JP" | "JE" | "JO" | "KZ" | "KE" | "KI" | "KW" | "KG" | "LA" | "LV" | "LB" | "LS" | "LR" | "LY" | "LI" | "LT" | "LU" | "MO" | "MK" | "MG" | "MW" | "MY" | "MV" | "ML" | "MT" | "MH" | "MR" | "MU" | "YT" | "MX" | "FM" | "MD" | "MC" | "MN" | "ME" | "MS" | "MA" | "MZ" | "MM" | "NA" | "NR" | "NP" | "NL" | "AN" | "NC" | "NZ" | "NI" | "NE" | "NG" | "NU" | "KP" | "MP" | "NO" | "OM" | "PK" | "PW" | "PA" | "PG" | "PY" | "PE" | "PH" | "PN" | "PL" | "PT" | "PR" | "QA" | "CG" | "RE" | "RO" | "RU" | "RW" | "BL" | "SH" | "KN" | "LC" | "MF" | "PM" | "VC" | "WS" | "SM" | "ST" | "SA" | "SN" | "RS" | "SC" | "SL" | "SG" | "SX" | "SK" | "SI" | "SB" | "SO" | "ZA" | "KR" | "ES" | "LK" | "SD" | "SR" | "SJ" | "SZ" | "SE" | "CH" | "SY" | "TW" | "TJ" | "TZ" | "TH" | "TG" | "TK" | "TO" | "TT" | "TN" | "TR" | "TM" | "TC" | "TV" | "VI" | "UG" | "UA" | "AE" | "GB" | "US" | "UY" | "UZ" | "VU" | "VA" | "VE" | "VN" | "WF" | "EH" | "YE" | "ZM" | "ZW")]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPhoneNumbersResponse
+      attr_accessor phone_number_summary_list: ::Array[Types::PhoneNumberSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPhoneNumbersSummary
+      attr_accessor phone_number_id: ::String
+      attr_accessor phone_number_arn: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor phone_number_country_code: ("AF" | "AL" | "DZ" | "AS" | "AD" | "AO" | "AI" | "AQ" | "AG" | "AR" | "AM" | "AW" | "AU" | "AT" | "AZ" | "BS" | "BH" | "BD" | "BB" | "BY" | "BE" | "BZ" | "BJ" | "BM" | "BT" | "BO" | "BA" | "BW" | "BR" | "IO" | "VG" | "BN" | "BG" | "BF" | "BI" | "KH" | "CM" | "CA" | "CV" | "KY" | "CF" | "TD" | "CL" | "CN" | "CX" | "CC" | "CO" | "KM" | "CK" | "CR" | "HR" | "CU" | "CW" | "CY" | "CZ" | "CD" | "DK" | "DJ" | "DM" | "DO" | "TL" | "EC" | "EG" | "SV" | "GQ" | "ER" | "EE" | "ET" | "FK" | "FO" | "FJ" | "FI" | "FR" | "PF" | "GA" | "GM" | "GE" | "DE" | "GH" | "GI" | "GR" | "GL" | "GD" | "GU" | "GT" | "GG" | "GN" | "GW" | "GY" | "HT" | "HN" | "HK" | "HU" | "IS" | "IN" | "ID" | "IR" | "IQ" | "IE" | "IM" | "IL" | "IT" | "CI" | "JM" | "JP" | "JE" | "JO" | "KZ" | "KE" | "KI" | "KW" | "KG" | "LA" | "LV" | "LB" | "LS" | "LR" | "LY" | "LI" | "LT" | "LU" | "MO" | "MK" | "MG" | "MW" | "MY" | "MV" | "ML" | "MT" | "MH" | "MR" | "MU" | "YT" | "MX" | "FM" | "MD" | "MC" | "MN" | "ME" | "MS" | "MA" | "MZ" | "MM" | "NA" | "NR" | "NP" | "NL" | "AN" | "NC" | "NZ" | "NI" | "NE" | "NG" | "NU" | "KP" | "MP" | "NO" | "OM" | "PK" | "PW" | "PA" | "PG" | "PY" | "PE" | "PH" | "PN" | "PL" | "PT" | "PR" | "QA" | "CG" | "RE" | "RO" | "RU" | "RW" | "BL" | "SH" | "KN" | "LC" | "MF" | "PM" | "VC" | "WS" | "SM" | "ST" | "SA" | "SN" | "RS" | "SC" | "SL" | "SG" | "SX" | "SK" | "SI" | "SB" | "SO" | "ZA" | "KR" | "ES" | "LK" | "SD" | "SR" | "SJ" | "SZ" | "SE" | "CH" | "SY" | "TW" | "TJ" | "TZ" | "TH" | "TG" | "TK" | "TO" | "TT" | "TN" | "TR" | "TM" | "TC" | "TV" | "VI" | "UG" | "UA" | "AE" | "GB" | "US" | "UY" | "UZ" | "VU" | "VA" | "VE" | "VN" | "WF" | "EH" | "YE" | "ZM" | "ZW")
+      attr_accessor phone_number_type: ("TOLL_FREE" | "DID" | "UIFN" | "SHARED" | "THIRD_PARTY_TF" | "THIRD_PARTY_DID" | "SHORT_CODE")
+      attr_accessor target_arn: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor phone_number_description: ::String
+      attr_accessor source_phone_number_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListPhoneNumbersV2Request
+      attr_accessor target_arn: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor phone_number_country_codes: ::Array[("AF" | "AL" | "DZ" | "AS" | "AD" | "AO" | "AI" | "AQ" | "AG" | "AR" | "AM" | "AW" | "AU" | "AT" | "AZ" | "BS" | "BH" | "BD" | "BB" | "BY" | "BE" | "BZ" | "BJ" | "BM" | "BT" | "BO" | "BA" | "BW" | "BR" | "IO" | "VG" | "BN" | "BG" | "BF" | "BI" | "KH" | "CM" | "CA" | "CV" | "KY" | "CF" | "TD" | "CL" | "CN" | "CX" | "CC" | "CO" | "KM" | "CK" | "CR" | "HR" | "CU" | "CW" | "CY" | "CZ" | "CD" | "DK" | "DJ" | "DM" | "DO" | "TL" | "EC" | "EG" | "SV" | "GQ" | "ER" | "EE" | "ET" | "FK" | "FO" | "FJ" | "FI" | "FR" | "PF" | "GA" | "GM" | "GE" | "DE" | "GH" | "GI" | "GR" | "GL" | "GD" | "GU" | "GT" | "GG" | "GN" | "GW" | "GY" | "HT" | "HN" | "HK" | "HU" | "IS" | "IN" | "ID" | "IR" | "IQ" | "IE" | "IM" | "IL" | "IT" | "CI" | "JM" | "JP" | "JE" | "JO" | "KZ" | "KE" | "KI" | "KW" | "KG" | "LA" | "LV" | "LB" | "LS" | "LR" | "LY" | "LI" | "LT" | "LU" | "MO" | "MK" | "MG" | "MW" | "MY" | "MV" | "ML" | "MT" | "MH" | "MR" | "MU" | "YT" | "MX" | "FM" | "MD" | "MC" | "MN" | "ME" | "MS" | "MA" | "MZ" | "MM" | "NA" | "NR" | "NP" | "NL" | "AN" | "NC" | "NZ" | "NI" | "NE" | "NG" | "NU" | "KP" | "MP" | "NO" | "OM" | "PK" | "PW" | "PA" | "PG" | "PY" | "PE" | "PH" | "PN" | "PL" | "PT" | "PR" | "QA" | "CG" | "RE" | "RO" | "RU" | "RW" | "BL" | "SH" | "KN" | "LC" | "MF" | "PM" | "VC" | "WS" | "SM" | "ST" | "SA" | "SN" | "RS" | "SC" | "SL" | "SG" | "SX" | "SK" | "SI" | "SB" | "SO" | "ZA" | "KR" | "ES" | "LK" | "SD" | "SR" | "SJ" | "SZ" | "SE" | "CH" | "SY" | "TW" | "TJ" | "TZ" | "TH" | "TG" | "TK" | "TO" | "TT" | "TN" | "TR" | "TM" | "TC" | "TV" | "VI" | "UG" | "UA" | "AE" | "GB" | "US" | "UY" | "UZ" | "VU" | "VA" | "VE" | "VN" | "WF" | "EH" | "YE" | "ZM" | "ZW")]
+      attr_accessor phone_number_types: ::Array[("TOLL_FREE" | "DID" | "UIFN" | "SHARED" | "THIRD_PARTY_TF" | "THIRD_PARTY_DID" | "SHORT_CODE")]
+      attr_accessor phone_number_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ListPhoneNumbersV2Response
+      attr_accessor next_token: ::String
+      attr_accessor list_phone_numbers_summary_list: ::Array[Types::ListPhoneNumbersSummary]
+      SENSITIVE: []
+    end
+
+    class ListPredefinedAttributesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPredefinedAttributesResponse
+      attr_accessor next_token: ::String
+      attr_accessor predefined_attribute_summary_list: ::Array[Types::PredefinedAttributeSummary]
+      SENSITIVE: []
+    end
+
+    class ListPromptsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPromptsResponse
+      attr_accessor prompt_summary_list: ::Array[Types::PromptSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListQueueQuickConnectsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor queue_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListQueueQuickConnectsResponse
+      attr_accessor next_token: ::String
+      attr_accessor quick_connect_summary_list: ::Array[Types::QuickConnectSummary]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class ListQueuesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor queue_types: ::Array[("STANDARD" | "AGENT")]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListQueuesResponse
+      attr_accessor queue_summary_list: ::Array[Types::QueueSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListQuickConnectsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor quick_connect_types: ::Array[("USER" | "QUEUE" | "PHONE_NUMBER")]
+      SENSITIVE: []
+    end
+
+    class ListQuickConnectsResponse
+      attr_accessor quick_connect_summary_list: ::Array[Types::QuickConnectSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRealtimeContactAnalysisSegmentsV2Request
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor output_type: ("Raw" | "Redacted")
+      attr_accessor segment_types: ::Array[("Transcript" | "Categories" | "Issues" | "Event" | "Attachments")]
+      SENSITIVE: []
+    end
+
+    class ListRealtimeContactAnalysisSegmentsV2Response
+      attr_accessor channel: ("VOICE" | "CHAT")
+      attr_accessor status: ("IN_PROGRESS" | "FAILED" | "COMPLETED")
+      attr_accessor segments: ::Array[Types::RealtimeContactAnalysisSegment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRoutingProfileQueuesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor routing_profile_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRoutingProfileQueuesResponse
+      attr_accessor next_token: ::String
+      attr_accessor routing_profile_queue_config_summary_list: ::Array[Types::RoutingProfileQueueConfigSummary]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class ListRoutingProfilesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRoutingProfilesResponse
+      attr_accessor routing_profile_summary_list: ::Array[Types::RoutingProfileSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRulesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor publish_status: ("DRAFT" | "PUBLISHED")
+      attr_accessor event_source_name: ("OnPostCallAnalysisAvailable" | "OnRealTimeCallAnalysisAvailable" | "OnRealTimeChatAnalysisAvailable" | "OnPostChatAnalysisAvailable" | "OnZendeskTicketCreate" | "OnZendeskTicketStatusUpdate" | "OnSalesforceCaseCreate" | "OnContactEvaluationSubmit" | "OnMetricDataUpdate" | "OnCaseCreate" | "OnCaseUpdate")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRulesResponse
+      attr_accessor rule_summary_list: ::Array[Types::RuleSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSecurityKeysRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSecurityKeysResponse
+      attr_accessor security_keys: ::Array[Types::SecurityKey]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSecurityProfileApplicationsRequest
+      attr_accessor security_profile_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSecurityProfileApplicationsResponse
+      attr_accessor applications: ::Array[Types::Application]
+      attr_accessor next_token: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class ListSecurityProfilePermissionsRequest
+      attr_accessor security_profile_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSecurityProfilePermissionsResponse
+      attr_accessor permissions: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class ListSecurityProfilesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSecurityProfilesResponse
+      attr_accessor security_profile_summary_list: ::Array[Types::SecurityProfileSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListTaskTemplatesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ListTaskTemplatesResponse
+      attr_accessor task_templates: ::Array[Types::TaskTemplateMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTrafficDistributionGroupUsersRequest
+      attr_accessor traffic_distribution_group_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTrafficDistributionGroupUsersResponse
+      attr_accessor next_token: ::String
+      attr_accessor traffic_distribution_group_user_summary_list: ::Array[Types::TrafficDistributionGroupUserSummary]
+      SENSITIVE: []
+    end
+
+    class ListTrafficDistributionGroupsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListTrafficDistributionGroupsResponse
+      attr_accessor next_token: ::String
+      attr_accessor traffic_distribution_group_summary_list: ::Array[Types::TrafficDistributionGroupSummary]
+      SENSITIVE: []
+    end
+
+    class ListUseCasesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor integration_association_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListUseCasesResponse
+      attr_accessor use_case_summary_list: ::Array[Types::UseCase]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUserHierarchyGroupsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListUserHierarchyGroupsResponse
+      attr_accessor user_hierarchy_group_summary_list: ::Array[Types::HierarchyGroupSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUserProficienciesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListUserProficienciesResponse
+      attr_accessor next_token: ::String
+      attr_accessor user_proficiency_list: ::Array[Types::UserProficiency]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class ListUsersRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListUsersResponse
+      attr_accessor user_summary_list: ::Array[Types::UserSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListViewVersionsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor view_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListViewVersionsResponse
+      attr_accessor view_version_summary_list: ::Array[Types::ViewVersionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListViewsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor type: ("CUSTOMER_MANAGED" | "AWS_MANAGED")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListViewsResponse
+      attr_accessor views_summary_list: ::Array[Types::ViewSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MaximumResultReturnedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MediaConcurrency
+      attr_accessor channel: ("VOICE" | "CHAT" | "TASK")
+      attr_accessor concurrency: ::Integer
+      attr_accessor cross_channel_behavior: Types::CrossChannelBehavior
+      SENSITIVE: []
+    end
+
+    class MediaPlacement
+      attr_accessor audio_host_url: ::String
+      attr_accessor audio_fallback_url: ::String
+      attr_accessor signaling_url: ::String
+      attr_accessor turn_control_url: ::String
+      attr_accessor event_ingestion_url: ::String
+      SENSITIVE: []
+    end
+
+    class Meeting
+      attr_accessor media_region: ::String
+      attr_accessor media_placement: Types::MediaPlacement
+      attr_accessor meeting_features: Types::MeetingFeaturesConfiguration
+      attr_accessor meeting_id: ::String
+      SENSITIVE: []
+    end
+
+    class MeetingFeaturesConfiguration
+      attr_accessor audio: Types::AudioFeatures
+      SENSITIVE: []
+    end
+
+    class MetricDataV2
+      attr_accessor metric: Types::MetricV2
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class MetricFilterV2
+      attr_accessor metric_filter_key: ::String
+      attr_accessor metric_filter_values: ::Array[::String]
+      attr_accessor negate: bool
+      SENSITIVE: []
+    end
+
+    class MetricInterval
+      attr_accessor interval: ("FIFTEEN_MIN" | "THIRTY_MIN" | "HOUR" | "DAY" | "WEEK" | "TOTAL")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class MetricResultV2
+      attr_accessor dimensions: ::Hash[::String, ::String]
+      attr_accessor metric_interval: Types::MetricInterval
+      attr_accessor collections: ::Array[Types::MetricDataV2]
+      SENSITIVE: []
+    end
+
+    class MetricV2
+      attr_accessor name: ::String
+      attr_accessor threshold: ::Array[Types::ThresholdV2]
+      attr_accessor metric_filters: ::Array[Types::MetricFilterV2]
+      SENSITIVE: []
+    end
+
+    class MonitorContactRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor allowed_monitor_capabilities: ::Array[("SILENT_MONITOR" | "BARGE")]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class MonitorContactResponse
+      attr_accessor contact_id: ::String
+      attr_accessor contact_arn: ::String
+      SENSITIVE: []
+    end
+
+    class NewSessionDetails
+      attr_accessor supported_messaging_content_types: ::Array[::String]
+      attr_accessor participant_details: Types::ParticipantDetails
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor streaming_configuration: Types::ChatStreamingConfiguration
+      SENSITIVE: []
+    end
+
+    class NotificationRecipientType
+      attr_accessor user_tags: ::Hash[::String, ::String]
+      attr_accessor user_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class NumberReference
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class NumericQuestionPropertyValueAutomation
+      attr_accessor label: ("OVERALL_CUSTOMER_SENTIMENT_SCORE" | "OVERALL_AGENT_SENTIMENT_SCORE" | "NON_TALK_TIME" | "NON_TALK_TIME_PERCENTAGE" | "NUMBER_OF_INTERRUPTIONS" | "CONTACT_DURATION" | "AGENT_INTERACTION_DURATION" | "CUSTOMER_HOLD_TIME")
+      SENSITIVE: []
+    end
+
+    class OutboundCallerConfig
+      attr_accessor outbound_caller_id_name: ::String
+      attr_accessor outbound_caller_id_number_id: ::String
+      attr_accessor outbound_flow_id: ::String
+      SENSITIVE: []
+    end
+
+    class OutboundContactNotPermittedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OutputTypeNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ParticipantCapabilities
+      attr_accessor video: ("SEND")
+      SENSITIVE: []
+    end
+
+    class ParticipantDetails
+      attr_accessor display_name: ::String
+      SENSITIVE: []
+    end
+
+    class ParticipantDetailsToAdd
+      attr_accessor participant_role: ("AGENT" | "CUSTOMER" | "SYSTEM" | "CUSTOM_BOT" | "SUPERVISOR")
+      attr_accessor display_name: ::String
+      SENSITIVE: []
+    end
+
+    class ParticipantTimerConfiguration
+      attr_accessor participant_role: ("CUSTOMER" | "AGENT")
+      attr_accessor timer_type: ("IDLE" | "DISCONNECT_NONCUSTOMER")
+      attr_accessor timer_value: Types::ParticipantTimerValue
+      SENSITIVE: []
+    end
+
+    class ParticipantTimerValue
+      attr_accessor participant_timer_action: ("Unset")
+      attr_accessor participant_timer_duration_in_minutes: ::Integer
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ParticipantTimerAction < ParticipantTimerValue
+      end
+      class ParticipantTimerDurationInMinutes < ParticipantTimerValue
+      end
+      class Unknown < ParticipantTimerValue
+      end
+    end
+
+    class ParticipantTokenCredentials
+      attr_accessor participant_token: ::String
+      attr_accessor expiry: ::String
+      SENSITIVE: []
+    end
+
+    class PauseContactRequest
+      attr_accessor contact_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_id: ::String
+      SENSITIVE: []
+    end
+
+    class PauseContactResponse < Aws::EmptyStructure
+    end
+
+    class PersistentChat
+      attr_accessor rehydration_type: ("ENTIRE_PAST_SESSION" | "FROM_SEGMENT")
+      attr_accessor source_contact_id: ::String
+      SENSITIVE: []
+    end
+
+    class PhoneNumberQuickConnectConfig
+      attr_accessor phone_number: ::String
+      SENSITIVE: []
+    end
+
+    class PhoneNumberStatus
+      attr_accessor status: ("CLAIMED" | "IN_PROGRESS" | "FAILED")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PhoneNumberSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor phone_number_type: ("TOLL_FREE" | "DID" | "UIFN" | "SHARED" | "THIRD_PARTY_TF" | "THIRD_PARTY_DID" | "SHORT_CODE")
+      attr_accessor phone_number_country_code: ("AF" | "AL" | "DZ" | "AS" | "AD" | "AO" | "AI" | "AQ" | "AG" | "AR" | "AM" | "AW" | "AU" | "AT" | "AZ" | "BS" | "BH" | "BD" | "BB" | "BY" | "BE" | "BZ" | "BJ" | "BM" | "BT" | "BO" | "BA" | "BW" | "BR" | "IO" | "VG" | "BN" | "BG" | "BF" | "BI" | "KH" | "CM" | "CA" | "CV" | "KY" | "CF" | "TD" | "CL" | "CN" | "CX" | "CC" | "CO" | "KM" | "CK" | "CR" | "HR" | "CU" | "CW" | "CY" | "CZ" | "CD" | "DK" | "DJ" | "DM" | "DO" | "TL" | "EC" | "EG" | "SV" | "GQ" | "ER" | "EE" | "ET" | "FK" | "FO" | "FJ" | "FI" | "FR" | "PF" | "GA" | "GM" | "GE" | "DE" | "GH" | "GI" | "GR" | "GL" | "GD" | "GU" | "GT" | "GG" | "GN" | "GW" | "GY" | "HT" | "HN" | "HK" | "HU" | "IS" | "IN" | "ID" | "IR" | "IQ" | "IE" | "IM" | "IL" | "IT" | "CI" | "JM" | "JP" | "JE" | "JO" | "KZ" | "KE" | "KI" | "KW" | "KG" | "LA" | "LV" | "LB" | "LS" | "LR" | "LY" | "LI" | "LT" | "LU" | "MO" | "MK" | "MG" | "MW" | "MY" | "MV" | "ML" | "MT" | "MH" | "MR" | "MU" | "YT" | "MX" | "FM" | "MD" | "MC" | "MN" | "ME" | "MS" | "MA" | "MZ" | "MM" | "NA" | "NR" | "NP" | "NL" | "AN" | "NC" | "NZ" | "NI" | "NE" | "NG" | "NU" | "KP" | "MP" | "NO" | "OM" | "PK" | "PW" | "PA" | "PG" | "PY" | "PE" | "PH" | "PN" | "PL" | "PT" | "PR" | "QA" | "CG" | "RE" | "RO" | "RU" | "RW" | "BL" | "SH" | "KN" | "LC" | "MF" | "PM" | "VC" | "WS" | "SM" | "ST" | "SA" | "SN" | "RS" | "SC" | "SL" | "SG" | "SX" | "SK" | "SI" | "SB" | "SO" | "ZA" | "KR" | "ES" | "LK" | "SD" | "SR" | "SJ" | "SZ" | "SE" | "CH" | "SY" | "TW" | "TJ" | "TZ" | "TH" | "TG" | "TK" | "TO" | "TT" | "TN" | "TR" | "TM" | "TC" | "TV" | "VI" | "UG" | "UA" | "AE" | "GB" | "US" | "UY" | "UZ" | "VU" | "VA" | "VE" | "VN" | "WF" | "EH" | "YE" | "ZM" | "ZW")
+      SENSITIVE: []
+    end
+
+    class PredefinedAttribute
+      attr_accessor name: ::String
+      attr_accessor values: Types::PredefinedAttributeValues
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class PredefinedAttributeSearchCriteria
+      attr_accessor or_conditions: ::Array[Types::PredefinedAttributeSearchCriteria]
+      attr_accessor and_conditions: ::Array[Types::PredefinedAttributeSearchCriteria]
+      attr_accessor string_condition: Types::StringCondition
+      SENSITIVE: []
+    end
+
+    class PredefinedAttributeSummary
+      attr_accessor name: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class PredefinedAttributeValues
+      attr_accessor string_list: ::Array[::String]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class StringList < PredefinedAttributeValues
+      end
+      class Unknown < PredefinedAttributeValues
+      end
+    end
+
+    class ProblemDetail
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Prompt
+      attr_accessor prompt_arn: ::String
+      attr_accessor prompt_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class PromptSearchCriteria
+      attr_accessor or_conditions: ::Array[Types::PromptSearchCriteria]
+      attr_accessor and_conditions: ::Array[Types::PromptSearchCriteria]
+      attr_accessor string_condition: Types::StringCondition
+      SENSITIVE: []
+    end
+
+    class PromptSearchFilter
+      attr_accessor tag_filter: Types::ControlPlaneTagFilter
+      SENSITIVE: []
+    end
+
+    class PromptSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class PropertyValidationException
+      attr_accessor message: ::String
+      attr_accessor property_list: ::Array[Types::PropertyValidationExceptionProperty]
+      SENSITIVE: []
+    end
+
+    class PropertyValidationExceptionProperty
+      attr_accessor property_path: ::String
+      attr_accessor reason: ("INVALID_FORMAT" | "UNIQUE_CONSTRAINT_VIOLATED" | "REFERENCED_RESOURCE_NOT_FOUND" | "RESOURCE_NAME_ALREADY_EXISTS" | "REQUIRED_PROPERTY_MISSING" | "NOT_SUPPORTED")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PutUserStatusRequest
+      attr_accessor user_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor agent_status_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutUserStatusResponse < Aws::EmptyStructure
+    end
+
+    class Queue
+      attr_accessor name: ::String
+      attr_accessor queue_arn: ::String
+      attr_accessor queue_id: ::String
+      attr_accessor description: ::String
+      attr_accessor outbound_caller_config: Types::OutboundCallerConfig
+      attr_accessor hours_of_operation_id: ::String
+      attr_accessor max_contacts: ::Integer
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class QueueInfo
+      attr_accessor id: ::String
+      attr_accessor enqueue_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class QueueQuickConnectConfig
+      attr_accessor queue_id: ::String
+      attr_accessor contact_flow_id: ::String
+      SENSITIVE: []
+    end
+
+    class QueueReference
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class QueueSearchCriteria
+      attr_accessor or_conditions: ::Array[Types::QueueSearchCriteria]
+      attr_accessor and_conditions: ::Array[Types::QueueSearchCriteria]
+      attr_accessor string_condition: Types::StringCondition
+      attr_accessor queue_type_condition: ("STANDARD")
+      SENSITIVE: []
+    end
+
+    class QueueSearchFilter
+      attr_accessor tag_filter: Types::ControlPlaneTagFilter
+      SENSITIVE: []
+    end
+
+    class QueueSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor queue_type: ("STANDARD" | "AGENT")
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class QuickConnect
+      attr_accessor quick_connect_arn: ::String
+      attr_accessor quick_connect_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor quick_connect_config: Types::QuickConnectConfig
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class QuickConnectConfig
+      attr_accessor quick_connect_type: ("USER" | "QUEUE" | "PHONE_NUMBER")
+      attr_accessor user_config: Types::UserQuickConnectConfig
+      attr_accessor queue_config: Types::QueueQuickConnectConfig
+      attr_accessor phone_config: Types::PhoneNumberQuickConnectConfig
+      SENSITIVE: []
+    end
+
+    class QuickConnectSearchCriteria
+      attr_accessor or_conditions: ::Array[Types::QuickConnectSearchCriteria]
+      attr_accessor and_conditions: ::Array[Types::QuickConnectSearchCriteria]
+      attr_accessor string_condition: Types::StringCondition
+      SENSITIVE: []
+    end
+
+    class QuickConnectSearchFilter
+      attr_accessor tag_filter: Types::ControlPlaneTagFilter
+      SENSITIVE: []
+    end
+
+    class QuickConnectSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor quick_connect_type: ("USER" | "QUEUE" | "PHONE_NUMBER")
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class ReadOnlyFieldInfo
+      attr_accessor id: Types::TaskTemplateFieldIdentifier
+      SENSITIVE: []
+    end
+
+    class RealTimeContactAnalysisAttachment
+      attr_accessor attachment_name: ::String
+      attr_accessor content_type: ::String
+      attr_accessor attachment_id: ::String
+      attr_accessor status: ("APPROVED" | "REJECTED" | "IN_PROGRESS")
+      SENSITIVE: []
+    end
+
+    class RealTimeContactAnalysisCategoryDetails
+      attr_accessor points_of_interest: ::Array[Types::RealTimeContactAnalysisPointOfInterest]
+      SENSITIVE: []
+    end
+
+    class RealTimeContactAnalysisCharacterInterval
+      attr_accessor begin_offset_char: ::Integer
+      attr_accessor end_offset_char: ::Integer
+      SENSITIVE: []
+    end
+
+    class RealTimeContactAnalysisIssueDetected
+      attr_accessor transcript_items: ::Array[Types::RealTimeContactAnalysisTranscriptItemWithContent]
+      SENSITIVE: []
+    end
+
+    class RealTimeContactAnalysisPointOfInterest
+      attr_accessor transcript_items: ::Array[Types::RealTimeContactAnalysisTranscriptItemWithCharacterOffsets]
+      SENSITIVE: []
+    end
+
+    class RealTimeContactAnalysisSegmentAttachments
+      attr_accessor id: ::String
+      attr_accessor participant_id: ::String
+      attr_accessor participant_role: ("AGENT" | "CUSTOMER" | "SYSTEM" | "CUSTOM_BOT" | "SUPERVISOR")
+      attr_accessor display_name: ::String
+      attr_accessor attachments: ::Array[Types::RealTimeContactAnalysisAttachment]
+      attr_accessor time: Types::RealTimeContactAnalysisTimeData
+      SENSITIVE: []
+    end
+
+    class RealTimeContactAnalysisSegmentCategories
+      attr_accessor matched_details: ::Hash[::String, Types::RealTimeContactAnalysisCategoryDetails]
+      SENSITIVE: []
+    end
+
+    class RealTimeContactAnalysisSegmentEvent
+      attr_accessor id: ::String
+      attr_accessor participant_id: ::String
+      attr_accessor participant_role: ("AGENT" | "CUSTOMER" | "SYSTEM" | "CUSTOM_BOT" | "SUPERVISOR")
+      attr_accessor display_name: ::String
+      attr_accessor event_type: ::String
+      attr_accessor time: Types::RealTimeContactAnalysisTimeData
+      SENSITIVE: []
+    end
+
+    class RealTimeContactAnalysisSegmentIssues
+      attr_accessor issues_detected: ::Array[Types::RealTimeContactAnalysisIssueDetected]
+      SENSITIVE: []
+    end
+
+    class RealTimeContactAnalysisSegmentTranscript
+      attr_accessor id: ::String
+      attr_accessor participant_id: ::String
+      attr_accessor participant_role: ("AGENT" | "CUSTOMER" | "SYSTEM" | "CUSTOM_BOT" | "SUPERVISOR")
+      attr_accessor display_name: ::String
+      attr_accessor content: ::String
+      attr_accessor content_type: ::String
+      attr_accessor time: Types::RealTimeContactAnalysisTimeData
+      attr_accessor redaction: Types::RealTimeContactAnalysisTranscriptItemRedaction
+      attr_accessor sentiment: ("POSITIVE" | "NEGATIVE" | "NEUTRAL")
+      SENSITIVE: []
+    end
+
+    class RealTimeContactAnalysisTimeData
+      attr_accessor absolute_time: ::Time
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AbsoluteTime < RealTimeContactAnalysisTimeData
+      end
+      class Unknown < RealTimeContactAnalysisTimeData
+      end
+    end
+
+    class RealTimeContactAnalysisTranscriptItemRedaction
+      attr_accessor character_offsets: ::Array[Types::RealTimeContactAnalysisCharacterInterval]
+      SENSITIVE: []
+    end
+
+    class RealTimeContactAnalysisTranscriptItemWithCharacterOffsets
+      attr_accessor id: ::String
+      attr_accessor character_offsets: Types::RealTimeContactAnalysisCharacterInterval
+      SENSITIVE: []
+    end
+
+    class RealTimeContactAnalysisTranscriptItemWithContent
+      attr_accessor content: ::String
+      attr_accessor id: ::String
+      attr_accessor character_offsets: Types::RealTimeContactAnalysisCharacterInterval
+      SENSITIVE: []
+    end
+
+    class RealtimeContactAnalysisSegment
+      attr_accessor transcript: Types::RealTimeContactAnalysisSegmentTranscript
+      attr_accessor categories: Types::RealTimeContactAnalysisSegmentCategories
+      attr_accessor issues: Types::RealTimeContactAnalysisSegmentIssues
+      attr_accessor event: Types::RealTimeContactAnalysisSegmentEvent
+      attr_accessor attachments: Types::RealTimeContactAnalysisSegmentAttachments
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Transcript < RealtimeContactAnalysisSegment
+      end
+      class Categories < RealtimeContactAnalysisSegment
+      end
+      class Issues < RealtimeContactAnalysisSegment
+      end
+      class Event < RealtimeContactAnalysisSegment
+      end
+      class Attachments < RealtimeContactAnalysisSegment
+      end
+      class Unknown < RealtimeContactAnalysisSegment
+      end
+    end
+
+    class Reference
+      attr_accessor value: ::String
+      attr_accessor type: ("URL" | "ATTACHMENT" | "NUMBER" | "STRING" | "DATE" | "EMAIL")
+      SENSITIVE: []
+    end
+
+    class ReferenceSummary
+      attr_accessor url: Types::UrlReference
+      attr_accessor attachment: Types::AttachmentReference
+      attr_accessor string: Types::StringReference
+      attr_accessor number: Types::NumberReference
+      attr_accessor date: Types::DateReference
+      attr_accessor email: Types::EmailReference
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Url < ReferenceSummary
+      end
+      class Attachment < ReferenceSummary
+      end
+      class String < ReferenceSummary
+      end
+      class Number < ReferenceSummary
+      end
+      class Date < ReferenceSummary
+      end
+      class Email < ReferenceSummary
+      end
+      class Unknown < ReferenceSummary
+      end
+    end
+
+    class ReleasePhoneNumberRequest
+      attr_accessor phone_number_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class ReplicateInstanceRequest
+      attr_accessor instance_id: ::String
+      attr_accessor replica_region: ::String
+      attr_accessor client_token: ::String
+      attr_accessor replica_alias: ::String
+      SENSITIVE: [:replica_alias]
+    end
+
+    class ReplicateInstanceResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class RequiredFieldInfo
+      attr_accessor id: Types::TaskTemplateFieldIdentifier
+      SENSITIVE: []
+    end
+
+    class ResourceConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException
+      attr_accessor message: ::String
+      attr_accessor resource_type: ("CONTACT" | "CONTACT_FLOW" | "INSTANCE" | "PARTICIPANT" | "HIERARCHY_LEVEL" | "HIERARCHY_GROUP" | "USER" | "PHONE_NUMBER")
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotReadyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceTagsSearchCriteria
+      attr_accessor tag_search_condition: Types::TagSearchCondition
+      SENSITIVE: []
+    end
+
+    class ResumeContactRecordingRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
+      attr_accessor initial_contact_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResumeContactRecordingResponse < Aws::EmptyStructure
+    end
+
+    class ResumeContactRequest
+      attr_accessor contact_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResumeContactResponse < Aws::EmptyStructure
+    end
+
+    class RoutingProfile
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      attr_accessor routing_profile_arn: ::String
+      attr_accessor routing_profile_id: ::String
+      attr_accessor description: ::String
+      attr_accessor media_concurrencies: ::Array[Types::MediaConcurrency]
+      attr_accessor default_outbound_queue_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor number_of_associated_queues: ::Integer
+      attr_accessor number_of_associated_users: ::Integer
+      attr_accessor agent_availability_timer: ("TIME_SINCE_LAST_ACTIVITY" | "TIME_SINCE_LAST_INBOUND")
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      attr_accessor is_default: bool
+      SENSITIVE: []
+    end
+
+    class RoutingProfileQueueConfig
+      attr_accessor queue_reference: Types::RoutingProfileQueueReference
+      attr_accessor priority: ::Integer
+      attr_accessor delay: ::Integer
+      SENSITIVE: []
+    end
+
+    class RoutingProfileQueueConfigSummary
+      attr_accessor queue_id: ::String
+      attr_accessor queue_arn: ::String
+      attr_accessor queue_name: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor delay: ::Integer
+      attr_accessor channel: ("VOICE" | "CHAT" | "TASK")
+      SENSITIVE: []
+    end
+
+    class RoutingProfileQueueReference
+      attr_accessor queue_id: ::String
+      attr_accessor channel: ("VOICE" | "CHAT" | "TASK")
+      SENSITIVE: []
+    end
+
+    class RoutingProfileReference
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class RoutingProfileSearchCriteria
+      attr_accessor or_conditions: ::Array[Types::RoutingProfileSearchCriteria]
+      attr_accessor and_conditions: ::Array[Types::RoutingProfileSearchCriteria]
+      attr_accessor string_condition: Types::StringCondition
+      SENSITIVE: []
+    end
+
+    class RoutingProfileSearchFilter
+      attr_accessor tag_filter: Types::ControlPlaneTagFilter
+      SENSITIVE: []
+    end
+
+    class RoutingProfileSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class Rule
+      attr_accessor name: ::String
+      attr_accessor rule_id: ::String
+      attr_accessor rule_arn: ::String
+      attr_accessor trigger_event_source: Types::RuleTriggerEventSource
+      attr_accessor function: ::String
+      attr_accessor actions: ::Array[Types::RuleAction]
+      attr_accessor publish_status: ("DRAFT" | "PUBLISHED")
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor last_updated_by: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RuleAction
+      attr_accessor action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "END_ASSOCIATED_TASKS")
+      attr_accessor task_action: Types::TaskActionDefinition
+      attr_accessor event_bridge_action: Types::EventBridgeActionDefinition
+      attr_accessor assign_contact_category_action: Types::AssignContactCategoryActionDefinition
+      attr_accessor send_notification_action: Types::SendNotificationActionDefinition
+      attr_accessor create_case_action: Types::CreateCaseActionDefinition
+      attr_accessor update_case_action: Types::UpdateCaseActionDefinition
+      attr_accessor end_associated_tasks_action: Types::EndAssociatedTasksActionDefinition
+      SENSITIVE: []
+    end
+
+    class RuleSummary
+      attr_accessor name: ::String
+      attr_accessor rule_id: ::String
+      attr_accessor rule_arn: ::String
+      attr_accessor event_source_name: ("OnPostCallAnalysisAvailable" | "OnRealTimeCallAnalysisAvailable" | "OnRealTimeChatAnalysisAvailable" | "OnPostChatAnalysisAvailable" | "OnZendeskTicketCreate" | "OnZendeskTicketStatusUpdate" | "OnSalesforceCaseCreate" | "OnContactEvaluationSubmit" | "OnMetricDataUpdate" | "OnCaseCreate" | "OnCaseUpdate")
+      attr_accessor publish_status: ("DRAFT" | "PUBLISHED")
+      attr_accessor action_summaries: ::Array[Types::ActionSummary]
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class RuleTriggerEventSource
+      attr_accessor event_source_name: ("OnPostCallAnalysisAvailable" | "OnRealTimeCallAnalysisAvailable" | "OnRealTimeChatAnalysisAvailable" | "OnPostChatAnalysisAvailable" | "OnZendeskTicketCreate" | "OnZendeskTicketStatusUpdate" | "OnSalesforceCaseCreate" | "OnContactEvaluationSubmit" | "OnMetricDataUpdate" | "OnCaseCreate" | "OnCaseUpdate")
+      attr_accessor integration_association_id: ::String
+      SENSITIVE: []
+    end
+
+    class S3Config
+      attr_accessor bucket_name: ::String
+      attr_accessor bucket_prefix: ::String
+      attr_accessor encryption_config: Types::EncryptionConfig
+      SENSITIVE: []
+    end
+
+    class SearchAvailablePhoneNumbersRequest
+      attr_accessor target_arn: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor phone_number_country_code: ("AF" | "AL" | "DZ" | "AS" | "AD" | "AO" | "AI" | "AQ" | "AG" | "AR" | "AM" | "AW" | "AU" | "AT" | "AZ" | "BS" | "BH" | "BD" | "BB" | "BY" | "BE" | "BZ" | "BJ" | "BM" | "BT" | "BO" | "BA" | "BW" | "BR" | "IO" | "VG" | "BN" | "BG" | "BF" | "BI" | "KH" | "CM" | "CA" | "CV" | "KY" | "CF" | "TD" | "CL" | "CN" | "CX" | "CC" | "CO" | "KM" | "CK" | "CR" | "HR" | "CU" | "CW" | "CY" | "CZ" | "CD" | "DK" | "DJ" | "DM" | "DO" | "TL" | "EC" | "EG" | "SV" | "GQ" | "ER" | "EE" | "ET" | "FK" | "FO" | "FJ" | "FI" | "FR" | "PF" | "GA" | "GM" | "GE" | "DE" | "GH" | "GI" | "GR" | "GL" | "GD" | "GU" | "GT" | "GG" | "GN" | "GW" | "GY" | "HT" | "HN" | "HK" | "HU" | "IS" | "IN" | "ID" | "IR" | "IQ" | "IE" | "IM" | "IL" | "IT" | "CI" | "JM" | "JP" | "JE" | "JO" | "KZ" | "KE" | "KI" | "KW" | "KG" | "LA" | "LV" | "LB" | "LS" | "LR" | "LY" | "LI" | "LT" | "LU" | "MO" | "MK" | "MG" | "MW" | "MY" | "MV" | "ML" | "MT" | "MH" | "MR" | "MU" | "YT" | "MX" | "FM" | "MD" | "MC" | "MN" | "ME" | "MS" | "MA" | "MZ" | "MM" | "NA" | "NR" | "NP" | "NL" | "AN" | "NC" | "NZ" | "NI" | "NE" | "NG" | "NU" | "KP" | "MP" | "NO" | "OM" | "PK" | "PW" | "PA" | "PG" | "PY" | "PE" | "PH" | "PN" | "PL" | "PT" | "PR" | "QA" | "CG" | "RE" | "RO" | "RU" | "RW" | "BL" | "SH" | "KN" | "LC" | "MF" | "PM" | "VC" | "WS" | "SM" | "ST" | "SA" | "SN" | "RS" | "SC" | "SL" | "SG" | "SX" | "SK" | "SI" | "SB" | "SO" | "ZA" | "KR" | "ES" | "LK" | "SD" | "SR" | "SJ" | "SZ" | "SE" | "CH" | "SY" | "TW" | "TJ" | "TZ" | "TH" | "TG" | "TK" | "TO" | "TT" | "TN" | "TR" | "TM" | "TC" | "TV" | "VI" | "UG" | "UA" | "AE" | "GB" | "US" | "UY" | "UZ" | "VU" | "VA" | "VE" | "VN" | "WF" | "EH" | "YE" | "ZM" | "ZW")
+      attr_accessor phone_number_type: ("TOLL_FREE" | "DID" | "UIFN" | "SHARED" | "THIRD_PARTY_TF" | "THIRD_PARTY_DID" | "SHORT_CODE")
+      attr_accessor phone_number_prefix: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchAvailablePhoneNumbersResponse
+      attr_accessor next_token: ::String
+      attr_accessor available_numbers_list: ::Array[Types::AvailableNumberSummary]
+      SENSITIVE: []
+    end
+
+    class SearchContactsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor time_range: Types::SearchContactsTimeRange
+      attr_accessor search_criteria: Types::SearchCriteria
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort: Types::Sort
+      SENSITIVE: []
+    end
+
+    class SearchContactsResponse
+      attr_accessor contacts: ::Array[Types::ContactSearchSummary]
+      attr_accessor next_token: ::String
+      attr_accessor total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchContactsTimeRange
+      attr_accessor type: ("INITIATION_TIMESTAMP" | "SCHEDULED_TIMESTAMP" | "CONNECTED_TO_AGENT_TIMESTAMP" | "DISCONNECT_TIMESTAMP")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class SearchCriteria
+      attr_accessor agent_ids: ::Array[::String]
+      attr_accessor agent_hierarchy_groups: Types::AgentHierarchyGroups
+      attr_accessor channels: ::Array[("VOICE" | "CHAT" | "TASK")]
+      attr_accessor contact_analysis: Types::ContactAnalysis
+      attr_accessor initiation_methods: ::Array[("INBOUND" | "OUTBOUND" | "TRANSFER" | "QUEUE_TRANSFER" | "CALLBACK" | "API" | "DISCONNECT" | "MONITOR" | "EXTERNAL_OUTBOUND")]
+      attr_accessor queue_ids: ::Array[::String]
+      attr_accessor searchable_contact_attributes: Types::SearchableContactAttributes
+      SENSITIVE: []
+    end
+
+    class SearchHoursOfOperationsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor search_filter: Types::HoursOfOperationSearchFilter
+      attr_accessor search_criteria: Types::HoursOfOperationSearchCriteria
+      SENSITIVE: []
+    end
+
+    class SearchHoursOfOperationsResponse
+      attr_accessor hours_of_operations: ::Array[Types::HoursOfOperation]
+      attr_accessor next_token: ::String
+      attr_accessor approximate_total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchPredefinedAttributesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor search_criteria: Types::PredefinedAttributeSearchCriteria
+      SENSITIVE: []
+    end
+
+    class SearchPredefinedAttributesResponse
+      attr_accessor predefined_attributes: ::Array[Types::PredefinedAttribute]
+      attr_accessor next_token: ::String
+      attr_accessor approximate_total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchPromptsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor search_filter: Types::PromptSearchFilter
+      attr_accessor search_criteria: Types::PromptSearchCriteria
+      SENSITIVE: []
+    end
+
+    class SearchPromptsResponse
+      attr_accessor prompts: ::Array[Types::Prompt]
+      attr_accessor next_token: ::String
+      attr_accessor approximate_total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchQueuesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor search_filter: Types::QueueSearchFilter
+      attr_accessor search_criteria: Types::QueueSearchCriteria
+      SENSITIVE: []
+    end
+
+    class SearchQueuesResponse
+      attr_accessor queues: ::Array[Types::Queue]
+      attr_accessor next_token: ::String
+      attr_accessor approximate_total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchQuickConnectsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor search_filter: Types::QuickConnectSearchFilter
+      attr_accessor search_criteria: Types::QuickConnectSearchCriteria
+      SENSITIVE: []
+    end
+
+    class SearchQuickConnectsResponse
+      attr_accessor quick_connects: ::Array[Types::QuickConnect]
+      attr_accessor next_token: ::String
+      attr_accessor approximate_total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchResourceTagsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor resource_types: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor search_criteria: Types::ResourceTagsSearchCriteria
+      SENSITIVE: []
+    end
+
+    class SearchResourceTagsResponse
+      attr_accessor tags: ::Array[Types::TagSet]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchRoutingProfilesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor search_filter: Types::RoutingProfileSearchFilter
+      attr_accessor search_criteria: Types::RoutingProfileSearchCriteria
+      SENSITIVE: []
+    end
+
+    class SearchRoutingProfilesResponse
+      attr_accessor routing_profiles: ::Array[Types::RoutingProfile]
+      attr_accessor next_token: ::String
+      attr_accessor approximate_total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchSecurityProfilesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor search_criteria: Types::SecurityProfileSearchCriteria
+      attr_accessor search_filter: Types::SecurityProfilesSearchFilter
+      SENSITIVE: []
+    end
+
+    class SearchSecurityProfilesResponse
+      attr_accessor security_profiles: ::Array[Types::SecurityProfileSearchSummary]
+      attr_accessor next_token: ::String
+      attr_accessor approximate_total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchUsersRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor search_filter: Types::UserSearchFilter
+      attr_accessor search_criteria: Types::UserSearchCriteria
+      SENSITIVE: []
+    end
+
+    class SearchUsersResponse
+      attr_accessor users: ::Array[Types::UserSearchSummary]
+      attr_accessor next_token: ::String
+      attr_accessor approximate_total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchVocabulariesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor state: ("CREATION_IN_PROGRESS" | "ACTIVE" | "CREATION_FAILED" | "DELETE_IN_PROGRESS")
+      attr_accessor name_starts_with: ::String
+      attr_accessor language_code: ("ar-AE" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fr-CA" | "fr-FR" | "hi-IN" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "pt-PT" | "zh-CN" | "en-NZ" | "en-ZA")
+      SENSITIVE: []
+    end
+
+    class SearchVocabulariesResponse
+      attr_accessor vocabulary_summary_list: ::Array[Types::VocabularySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchableContactAttributes
+      attr_accessor criteria: ::Array[Types::SearchableContactAttributesCriteria]
+      attr_accessor match_type: ("MATCH_ALL" | "MATCH_ANY")
+      SENSITIVE: []
+    end
+
+    class SearchableContactAttributesCriteria
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: [:key]
+    end
+
+    class SecurityKey
+      attr_accessor association_id: ::String
+      attr_accessor key: ::String
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class SecurityProfile
+      attr_accessor id: ::String
+      attr_accessor organization_resource_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor security_profile_name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor allowed_access_control_tags: ::Hash[::String, ::String]
+      attr_accessor tag_restricted_resources: ::Array[::String]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class SecurityProfileSearchCriteria
+      attr_accessor or_conditions: ::Array[Types::SecurityProfileSearchCriteria]
+      attr_accessor and_conditions: ::Array[Types::SecurityProfileSearchCriteria]
+      attr_accessor string_condition: Types::StringCondition
+      SENSITIVE: []
+    end
+
+    class SecurityProfileSearchSummary
+      attr_accessor id: ::String
+      attr_accessor organization_resource_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor security_profile_name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class SecurityProfileSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class SecurityProfilesSearchFilter
+      attr_accessor tag_filter: Types::ControlPlaneTagFilter
+      SENSITIVE: []
+    end
+
+    class SegmentAttributeValue
+      attr_accessor value_string: ::String
+      SENSITIVE: []
+    end
+
+    class SendChatIntegrationEventRequest
+      attr_accessor source_id: ::String
+      attr_accessor destination_id: ::String
+      attr_accessor subtype: ::String
+      attr_accessor event: Types::ChatEvent
+      attr_accessor new_session_details: Types::NewSessionDetails
+      SENSITIVE: []
+    end
+
+    class SendChatIntegrationEventResponse
+      attr_accessor initial_contact_id: ::String
+      attr_accessor new_chat_created: bool
+      SENSITIVE: []
+    end
+
+    class SendNotificationActionDefinition
+      attr_accessor delivery_method: ("EMAIL")
+      attr_accessor subject: ::String
+      attr_accessor content: ::String
+      attr_accessor content_type: ("PLAIN_TEXT")
+      attr_accessor recipient: Types::NotificationRecipientType
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SignInConfig
+      attr_accessor distributions: ::Array[Types::SignInDistribution]
+      SENSITIVE: []
+    end
+
+    class SignInDistribution
+      attr_accessor region: ::String
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class SingleSelectQuestionRuleCategoryAutomation
+      attr_accessor category: ::String
+      attr_accessor condition: ("PRESENT" | "NOT_PRESENT")
+      attr_accessor option_ref_id: ::String
+      SENSITIVE: []
+    end
+
+    class Sort
+      attr_accessor field_name: ("INITIATION_TIMESTAMP" | "SCHEDULED_TIMESTAMP" | "CONNECTED_TO_AGENT_TIMESTAMP" | "DISCONNECT_TIMESTAMP" | "INITIATION_METHOD" | "CHANNEL")
+      attr_accessor order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class StartChatContactRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_id: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor participant_details: Types::ParticipantDetails
+      attr_accessor initial_message: Types::ChatMessage
+      attr_accessor client_token: ::String
+      attr_accessor chat_duration_in_minutes: ::Integer
+      attr_accessor supported_messaging_content_types: ::Array[::String]
+      attr_accessor persistent_chat: Types::PersistentChat
+      attr_accessor related_contact_id: ::String
+      attr_accessor segment_attributes: ::Hash[::String, Types::SegmentAttributeValue]
+      SENSITIVE: []
+    end
+
+    class StartChatContactResponse
+      attr_accessor contact_id: ::String
+      attr_accessor participant_id: ::String
+      attr_accessor participant_token: ::String
+      attr_accessor continued_from_contact_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartContactEvaluationRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
+      attr_accessor evaluation_form_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartContactEvaluationResponse
+      attr_accessor evaluation_id: ::String
+      attr_accessor evaluation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartContactRecordingRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
+      attr_accessor initial_contact_id: ::String
+      attr_accessor voice_recording_configuration: Types::VoiceRecordingConfiguration
+      SENSITIVE: []
+    end
+
+    class StartContactRecordingResponse < Aws::EmptyStructure
+    end
+
+    class StartContactStreamingRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
+      attr_accessor chat_streaming_configuration: Types::ChatStreamingConfiguration
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartContactStreamingResponse
+      attr_accessor streaming_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartOutboundVoiceContactRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor references: ::Hash[::String, Types::Reference]
+      attr_accessor related_contact_id: ::String
+      attr_accessor destination_phone_number: ::String
+      attr_accessor contact_flow_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor source_phone_number: ::String
+      attr_accessor queue_id: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor answer_machine_detection_config: Types::AnswerMachineDetectionConfig
+      attr_accessor campaign_id: ::String
+      attr_accessor traffic_type: ("GENERAL" | "CAMPAIGN")
+      SENSITIVE: [:name, :description]
+    end
+
+    class StartOutboundVoiceContactResponse
+      attr_accessor contact_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartTaskContactRequest
+      attr_accessor instance_id: ::String
+      attr_accessor previous_contact_id: ::String
+      attr_accessor contact_flow_id: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor name: ::String
+      attr_accessor references: ::Hash[::String, Types::Reference]
+      attr_accessor description: ::String
+      attr_accessor client_token: ::String
+      attr_accessor scheduled_time: ::Time
+      attr_accessor task_template_id: ::String
+      attr_accessor quick_connect_id: ::String
+      attr_accessor related_contact_id: ::String
+      SENSITIVE: [:name, :description]
+    end
+
+    class StartTaskContactResponse
+      attr_accessor contact_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartWebRTCContactRequest
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      attr_accessor contact_flow_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor allowed_capabilities: Types::AllowedCapabilities
+      attr_accessor participant_details: Types::ParticipantDetails
+      attr_accessor related_contact_id: ::String
+      attr_accessor references: ::Hash[::String, Types::Reference]
+      attr_accessor description: ::String
+      SENSITIVE: [:description]
+    end
+
+    class StartWebRTCContactResponse
+      attr_accessor connection_data: Types::ConnectionData
+      attr_accessor contact_id: ::String
+      attr_accessor participant_id: ::String
+      attr_accessor participant_token: ::String
+      SENSITIVE: []
+    end
+
+    class StopContactRecordingRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
+      attr_accessor initial_contact_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopContactRecordingResponse < Aws::EmptyStructure
+    end
+
+    class StopContactRequest
+      attr_accessor contact_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor disconnect_reason: Types::DisconnectReason
+      SENSITIVE: []
+    end
+
+    class StopContactResponse < Aws::EmptyStructure
+    end
+
+    class StopContactStreamingRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
+      attr_accessor streaming_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopContactStreamingResponse < Aws::EmptyStructure
+    end
+
+    class StringCondition
+      attr_accessor field_name: ::String
+      attr_accessor value: ::String
+      attr_accessor comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")
+      SENSITIVE: []
+    end
+
+    class StringReference
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SubmitContactEvaluationRequest
+      attr_accessor instance_id: ::String
+      attr_accessor evaluation_id: ::String
+      attr_accessor answers: ::Hash[::String, Types::EvaluationAnswerInput]
+      attr_accessor notes: ::Hash[::String, Types::EvaluationNote]
+      SENSITIVE: []
+    end
+
+    class SubmitContactEvaluationResponse
+      attr_accessor evaluation_id: ::String
+      attr_accessor evaluation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SuccessfulRequest
+      attr_accessor request_identifier: ::String
+      attr_accessor contact_id: ::String
+      SENSITIVE: []
+    end
+
+    class SuspendContactRecordingRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
+      attr_accessor initial_contact_id: ::String
+      SENSITIVE: []
+    end
+
+    class SuspendContactRecordingResponse < Aws::EmptyStructure
+    end
+
+    class TagCondition
+      attr_accessor tag_key: ::String
+      attr_accessor tag_value: ::String
+      SENSITIVE: []
+    end
+
+    class TagContactRequest
+      attr_accessor contact_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagContactResponse < Aws::EmptyStructure
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagSearchCondition
+      attr_accessor tag_key: ::String
+      attr_accessor tag_value: ::String
+      attr_accessor tag_key_comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")
+      attr_accessor tag_value_comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")
+      SENSITIVE: []
+    end
+
+    class TagSet
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TaskActionDefinition
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor contact_flow_id: ::String
+      attr_accessor references: ::Hash[::String, Types::Reference]
+      SENSITIVE: []
+    end
+
+    class TaskTemplateConstraints
+      attr_accessor required_fields: ::Array[Types::RequiredFieldInfo]
+      attr_accessor read_only_fields: ::Array[Types::ReadOnlyFieldInfo]
+      attr_accessor invisible_fields: ::Array[Types::InvisibleFieldInfo]
+      SENSITIVE: []
+    end
+
+    class TaskTemplateDefaultFieldValue
+      attr_accessor id: Types::TaskTemplateFieldIdentifier
+      attr_accessor default_value: ::String
+      SENSITIVE: []
+    end
+
+    class TaskTemplateDefaults
+      attr_accessor default_field_values: ::Array[Types::TaskTemplateDefaultFieldValue]
+      SENSITIVE: []
+    end
+
+    class TaskTemplateField
+      attr_accessor id: Types::TaskTemplateFieldIdentifier
+      attr_accessor description: ::String
+      attr_accessor type: ("NAME" | "DESCRIPTION" | "SCHEDULED_TIME" | "QUICK_CONNECT" | "URL" | "NUMBER" | "TEXT" | "TEXT_AREA" | "DATE_TIME" | "BOOLEAN" | "SINGLE_SELECT" | "EMAIL")
+      attr_accessor single_select_options: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TaskTemplateFieldIdentifier
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class TaskTemplateMetadata
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor last_modified_time: ::Time
+      attr_accessor created_time: ::Time
+      SENSITIVE: []
+    end
+
+    class TelephonyConfig
+      attr_accessor distributions: ::Array[Types::Distribution]
+      SENSITIVE: []
+    end
+
+    class Threshold
+      attr_accessor comparison: ("LT")
+      attr_accessor threshold_value: ::Float
+      SENSITIVE: []
+    end
+
+    class ThresholdV2
+      attr_accessor comparison: ::String
+      attr_accessor threshold_value: ::Float
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TrafficDistributionGroup
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor instance_arn: ::String
+      attr_accessor status: ("CREATION_IN_PROGRESS" | "ACTIVE" | "CREATION_FAILED" | "PENDING_DELETION" | "DELETION_FAILED" | "UPDATE_IN_PROGRESS")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor is_default: bool
+      SENSITIVE: []
+    end
+
+    class TrafficDistributionGroupSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor instance_arn: ::String
+      attr_accessor status: ("CREATION_IN_PROGRESS" | "ACTIVE" | "CREATION_FAILED" | "PENDING_DELETION" | "DELETION_FAILED" | "UPDATE_IN_PROGRESS")
+      attr_accessor is_default: bool
+      SENSITIVE: []
+    end
+
+    class TrafficDistributionGroupUserSummary
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class Transcript
+      attr_accessor criteria: ::Array[Types::TranscriptCriteria]
+      attr_accessor match_type: ("MATCH_ALL" | "MATCH_ANY")
+      SENSITIVE: []
+    end
+
+    class TranscriptCriteria
+      attr_accessor participant_role: ("AGENT" | "CUSTOMER" | "SYSTEM" | "CUSTOM_BOT" | "SUPERVISOR")
+      attr_accessor search_text: ::Array[::String]
+      attr_accessor match_type: ("MATCH_ALL" | "MATCH_ANY")
+      SENSITIVE: []
+    end
+
+    class TransferContactRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
+      attr_accessor queue_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor contact_flow_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class TransferContactResponse
+      attr_accessor contact_id: ::String
+      attr_accessor contact_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UntagContactRequest
+      attr_accessor contact_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagContactResponse < Aws::EmptyStructure
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateAgentStatusRequest
+      attr_accessor instance_id: ::String
+      attr_accessor agent_status_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor display_order: ::Integer
+      attr_accessor reset_order_number: bool
+      SENSITIVE: []
+    end
+
+    class UpdateCaseActionDefinition
+      attr_accessor fields: ::Array[Types::FieldValue]
+      SENSITIVE: []
+    end
+
+    class UpdateContactAttributesRequest
+      attr_accessor initial_contact_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateContactAttributesResponse < Aws::EmptyStructure
+    end
+
+    class UpdateContactEvaluationRequest
+      attr_accessor instance_id: ::String
+      attr_accessor evaluation_id: ::String
+      attr_accessor answers: ::Hash[::String, Types::EvaluationAnswerInput]
+      attr_accessor notes: ::Hash[::String, Types::EvaluationNote]
+      SENSITIVE: []
+    end
+
+    class UpdateContactEvaluationResponse
+      attr_accessor evaluation_id: ::String
+      attr_accessor evaluation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateContactFlowContentRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_id: ::String
+      attr_accessor content: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateContactFlowContentResponse < Aws::EmptyStructure
+    end
+
+    class UpdateContactFlowMetadataRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor contact_flow_state: ("ACTIVE" | "ARCHIVED")
+      SENSITIVE: []
+    end
+
+    class UpdateContactFlowMetadataResponse < Aws::EmptyStructure
+    end
+
+    class UpdateContactFlowModuleContentRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_module_id: ::String
+      attr_accessor content: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateContactFlowModuleContentResponse < Aws::EmptyStructure
+    end
+
+    class UpdateContactFlowModuleMetadataRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_module_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor state: ("ACTIVE" | "ARCHIVED")
+      SENSITIVE: []
+    end
+
+    class UpdateContactFlowModuleMetadataResponse < Aws::EmptyStructure
+    end
+
+    class UpdateContactFlowNameRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateContactFlowNameResponse < Aws::EmptyStructure
+    end
+
+    class UpdateContactRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor references: ::Hash[::String, Types::Reference]
+      SENSITIVE: [:name, :description]
+    end
+
+    class UpdateContactResponse < Aws::EmptyStructure
+    end
+
+    class UpdateContactRoutingDataRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
+      attr_accessor queue_time_adjustment_seconds: ::Integer
+      attr_accessor queue_priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateContactRoutingDataResponse < Aws::EmptyStructure
+    end
+
+    class UpdateContactScheduleRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
+      attr_accessor scheduled_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateContactScheduleResponse < Aws::EmptyStructure
+    end
+
+    class UpdateEvaluationFormRequest
+      attr_accessor instance_id: ::String
+      attr_accessor evaluation_form_id: ::String
+      attr_accessor evaluation_form_version: ::Integer
+      attr_accessor create_new_version: bool
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor items: ::Array[Types::EvaluationFormItem]
+      attr_accessor scoring_strategy: Types::EvaluationFormScoringStrategy
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateEvaluationFormResponse
+      attr_accessor evaluation_form_id: ::String
+      attr_accessor evaluation_form_arn: ::String
+      attr_accessor evaluation_form_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateHoursOfOperationRequest
+      attr_accessor instance_id: ::String
+      attr_accessor hours_of_operation_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor time_zone: ::String
+      attr_accessor config: ::Array[Types::HoursOfOperationConfig]
+      SENSITIVE: []
+    end
+
+    class UpdateInstanceAttributeRequest
+      attr_accessor instance_id: ::String
+      attr_accessor attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateInstanceStorageConfigRequest
+      attr_accessor instance_id: ::String
+      attr_accessor association_id: ::String
+      attr_accessor resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS")
+      attr_accessor storage_config: Types::InstanceStorageConfig
+      SENSITIVE: []
+    end
+
+    class UpdateParticipantRoleConfigChannelInfo
+      attr_accessor chat: Types::ChatParticipantRoleConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Chat < UpdateParticipantRoleConfigChannelInfo
+      end
+      class Unknown < UpdateParticipantRoleConfigChannelInfo
+      end
+    end
+
+    class UpdateParticipantRoleConfigRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
+      attr_accessor channel_configuration: Types::UpdateParticipantRoleConfigChannelInfo
+      SENSITIVE: []
+    end
+
+    class UpdateParticipantRoleConfigResponse < Aws::EmptyStructure
+    end
+
+    class UpdatePhoneNumberMetadataRequest
+      attr_accessor phone_number_id: ::String
+      attr_accessor phone_number_description: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePhoneNumberRequest
+      attr_accessor phone_number_id: ::String
+      attr_accessor target_arn: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePhoneNumberResponse
+      attr_accessor phone_number_id: ::String
+      attr_accessor phone_number_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePredefinedAttributeRequest
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      attr_accessor values: Types::PredefinedAttributeValues
+      SENSITIVE: []
+    end
+
+    class UpdatePromptRequest
+      attr_accessor instance_id: ::String
+      attr_accessor prompt_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor s3_uri: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePromptResponse
+      attr_accessor prompt_arn: ::String
+      attr_accessor prompt_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateQueueHoursOfOperationRequest
+      attr_accessor instance_id: ::String
+      attr_accessor queue_id: ::String
+      attr_accessor hours_of_operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateQueueMaxContactsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor queue_id: ::String
+      attr_accessor max_contacts: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateQueueNameRequest
+      attr_accessor instance_id: ::String
+      attr_accessor queue_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateQueueOutboundCallerConfigRequest
+      attr_accessor instance_id: ::String
+      attr_accessor queue_id: ::String
+      attr_accessor outbound_caller_config: Types::OutboundCallerConfig
+      SENSITIVE: []
+    end
+
+    class UpdateQueueStatusRequest
+      attr_accessor instance_id: ::String
+      attr_accessor queue_id: ::String
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateQuickConnectConfigRequest
+      attr_accessor instance_id: ::String
+      attr_accessor quick_connect_id: ::String
+      attr_accessor quick_connect_config: Types::QuickConnectConfig
+      SENSITIVE: []
+    end
+
+    class UpdateQuickConnectNameRequest
+      attr_accessor instance_id: ::String
+      attr_accessor quick_connect_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRoutingProfileAgentAvailabilityTimerRequest
+      attr_accessor instance_id: ::String
+      attr_accessor routing_profile_id: ::String
+      attr_accessor agent_availability_timer: ("TIME_SINCE_LAST_ACTIVITY" | "TIME_SINCE_LAST_INBOUND")
+      SENSITIVE: []
+    end
+
+    class UpdateRoutingProfileConcurrencyRequest
+      attr_accessor instance_id: ::String
+      attr_accessor routing_profile_id: ::String
+      attr_accessor media_concurrencies: ::Array[Types::MediaConcurrency]
+      SENSITIVE: []
+    end
+
+    class UpdateRoutingProfileDefaultOutboundQueueRequest
+      attr_accessor instance_id: ::String
+      attr_accessor routing_profile_id: ::String
+      attr_accessor default_outbound_queue_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRoutingProfileNameRequest
+      attr_accessor instance_id: ::String
+      attr_accessor routing_profile_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRoutingProfileQueuesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor routing_profile_id: ::String
+      attr_accessor queue_configs: ::Array[Types::RoutingProfileQueueConfig]
+      SENSITIVE: []
+    end
+
+    class UpdateRuleRequest
+      attr_accessor rule_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      attr_accessor function: ::String
+      attr_accessor actions: ::Array[Types::RuleAction]
+      attr_accessor publish_status: ("DRAFT" | "PUBLISHED")
+      SENSITIVE: []
+    end
+
+    class UpdateSecurityProfileRequest
+      attr_accessor description: ::String
+      attr_accessor permissions: ::Array[::String]
+      attr_accessor security_profile_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor allowed_access_control_tags: ::Hash[::String, ::String]
+      attr_accessor tag_restricted_resources: ::Array[::String]
+      attr_accessor applications: ::Array[Types::Application]
+      SENSITIVE: []
+    end
+
+    class UpdateTaskTemplateRequest
+      attr_accessor task_template_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor contact_flow_id: ::String
+      attr_accessor constraints: Types::TaskTemplateConstraints
+      attr_accessor defaults: Types::TaskTemplateDefaults
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor fields: ::Array[Types::TaskTemplateField]
+      SENSITIVE: []
+    end
+
+    class UpdateTaskTemplateResponse
+      attr_accessor instance_id: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor contact_flow_id: ::String
+      attr_accessor constraints: Types::TaskTemplateConstraints
+      attr_accessor defaults: Types::TaskTemplateDefaults
+      attr_accessor fields: ::Array[Types::TaskTemplateField]
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor last_modified_time: ::Time
+      attr_accessor created_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateTrafficDistributionRequest
+      attr_accessor id: ::String
+      attr_accessor telephony_config: Types::TelephonyConfig
+      attr_accessor sign_in_config: Types::SignInConfig
+      attr_accessor agent_config: Types::AgentConfig
+      SENSITIVE: []
+    end
+
+    class UpdateTrafficDistributionResponse < Aws::EmptyStructure
+    end
+
+    class UpdateUserHierarchyGroupNameRequest
+      attr_accessor name: ::String
+      attr_accessor hierarchy_group_id: ::String
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateUserHierarchyRequest
+      attr_accessor hierarchy_group_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateUserHierarchyStructureRequest
+      attr_accessor hierarchy_structure: Types::HierarchyStructureUpdate
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateUserIdentityInfoRequest
+      attr_accessor identity_info: Types::UserIdentityInfo
+      attr_accessor user_id: ::String
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateUserPhoneConfigRequest
+      attr_accessor phone_config: Types::UserPhoneConfig
+      attr_accessor user_id: ::String
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateUserProficienciesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor user_proficiencies: ::Array[Types::UserProficiency]
+      SENSITIVE: []
+    end
+
+    class UpdateUserRoutingProfileRequest
+      attr_accessor routing_profile_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateUserSecurityProfilesRequest
+      attr_accessor security_profile_ids: ::Array[::String]
+      attr_accessor user_id: ::String
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateViewContentRequest
+      attr_accessor instance_id: ::String
+      attr_accessor view_id: ::String
+      attr_accessor status: ("PUBLISHED" | "SAVED")
+      attr_accessor content: Types::ViewInputContent
+      SENSITIVE: []
+    end
+
+    class UpdateViewContentResponse
+      attr_accessor view: Types::View
+      SENSITIVE: []
+    end
+
+    class UpdateViewMetadataRequest
+      attr_accessor instance_id: ::String
+      attr_accessor view_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: [:name]
+    end
+
+    class UpdateViewMetadataResponse < Aws::EmptyStructure
+    end
+
+    class UrlReference
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class UseCase
+      attr_accessor use_case_id: ::String
+      attr_accessor use_case_arn: ::String
+      attr_accessor use_case_type: ("RULES_EVALUATION" | "CONNECT_CAMPAIGNS")
+      SENSITIVE: []
+    end
+
+    class User
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor username: ::String
+      attr_accessor identity_info: Types::UserIdentityInfo
+      attr_accessor phone_config: Types::UserPhoneConfig
+      attr_accessor directory_user_id: ::String
+      attr_accessor security_profile_ids: ::Array[::String]
+      attr_accessor routing_profile_id: ::String
+      attr_accessor hierarchy_group_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class UserData
+      attr_accessor user: Types::UserReference
+      attr_accessor routing_profile: Types::RoutingProfileReference
+      attr_accessor hierarchy_path: Types::HierarchyPathReference
+      attr_accessor status: Types::AgentStatusReference
+      attr_accessor available_slots_by_channel: ::Hash[("VOICE" | "CHAT" | "TASK"), ::Integer]
+      attr_accessor max_slots_by_channel: ::Hash[("VOICE" | "CHAT" | "TASK"), ::Integer]
+      attr_accessor active_slots_by_channel: ::Hash[("VOICE" | "CHAT" | "TASK"), ::Integer]
+      attr_accessor contacts: ::Array[Types::AgentContactReference]
+      attr_accessor next_status: ::String
+      SENSITIVE: []
+    end
+
+    class UserDataFilters
+      attr_accessor queues: ::Array[::String]
+      attr_accessor contact_filter: Types::ContactFilter
+      attr_accessor routing_profiles: ::Array[::String]
+      attr_accessor agents: ::Array[::String]
+      attr_accessor user_hierarchy_groups: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UserIdentityInfo
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor email: ::String
+      attr_accessor secondary_email: ::String
+      attr_accessor mobile: ::String
+      SENSITIVE: [:first_name, :last_name, :email, :secondary_email]
+    end
+
+    class UserIdentityInfoLite
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      SENSITIVE: [:first_name, :last_name]
+    end
+
+    class UserNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UserPhoneConfig
+      attr_accessor phone_type: ("SOFT_PHONE" | "DESK_PHONE")
+      attr_accessor auto_accept: bool
+      attr_accessor after_contact_work_time_limit: ::Integer
+      attr_accessor desk_phone_number: ::String
+      SENSITIVE: []
+    end
+
+    class UserProficiency
+      attr_accessor attribute_name: ::String
+      attr_accessor attribute_value: ::String
+      attr_accessor level: ::Float
+      SENSITIVE: []
+    end
+
+    class UserProficiencyDisassociate
+      attr_accessor attribute_name: ::String
+      attr_accessor attribute_value: ::String
+      SENSITIVE: []
+    end
+
+    class UserQuickConnectConfig
+      attr_accessor user_id: ::String
+      attr_accessor contact_flow_id: ::String
+      SENSITIVE: []
+    end
+
+    class UserReference
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class UserSearchCriteria
+      attr_accessor or_conditions: ::Array[Types::UserSearchCriteria]
+      attr_accessor and_conditions: ::Array[Types::UserSearchCriteria]
+      attr_accessor string_condition: Types::StringCondition
+      attr_accessor hierarchy_group_condition: Types::HierarchyGroupCondition
+      SENSITIVE: []
+    end
+
+    class UserSearchFilter
+      attr_accessor tag_filter: Types::ControlPlaneTagFilter
+      SENSITIVE: []
+    end
+
+    class UserSearchSummary
+      attr_accessor arn: ::String
+      attr_accessor directory_user_id: ::String
+      attr_accessor hierarchy_group_id: ::String
+      attr_accessor id: ::String
+      attr_accessor identity_info: Types::UserIdentityInfoLite
+      attr_accessor phone_config: Types::UserPhoneConfig
+      attr_accessor routing_profile_id: ::String
+      attr_accessor security_profile_ids: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor username: ::String
+      SENSITIVE: []
+    end
+
+    class UserSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor username: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class View
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("PUBLISHED" | "SAVED")
+      attr_accessor type: ("CUSTOMER_MANAGED" | "AWS_MANAGED")
+      attr_accessor description: ::String
+      attr_accessor version: ::Integer
+      attr_accessor version_description: ::String
+      attr_accessor content: Types::ViewContent
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor created_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor view_content_sha_256: ::String
+      SENSITIVE: [:name]
+    end
+
+    class ViewContent
+      attr_accessor input_schema: ::String
+      attr_accessor template: ::String
+      attr_accessor actions: ::Array[::String]
+      SENSITIVE: [:input_schema]
+    end
+
+    class ViewInputContent
+      attr_accessor template: ::String
+      attr_accessor actions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ViewSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("CUSTOMER_MANAGED" | "AWS_MANAGED")
+      attr_accessor status: ("PUBLISHED" | "SAVED")
+      attr_accessor description: ::String
+      SENSITIVE: [:name]
+    end
+
+    class ViewVersionSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("CUSTOMER_MANAGED" | "AWS_MANAGED")
+      attr_accessor version: ::Integer
+      attr_accessor version_description: ::String
+      SENSITIVE: [:name]
+    end
+
+    class Vocabulary
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor language_code: ("ar-AE" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fr-CA" | "fr-FR" | "hi-IN" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "pt-PT" | "zh-CN" | "en-NZ" | "en-ZA")
+      attr_accessor state: ("CREATION_IN_PROGRESS" | "ACTIVE" | "CREATION_FAILED" | "DELETE_IN_PROGRESS")
+      attr_accessor last_modified_time: ::Time
+      attr_accessor failure_reason: ::String
+      attr_accessor content: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class VocabularySummary
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor language_code: ("ar-AE" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fr-CA" | "fr-FR" | "hi-IN" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "pt-PT" | "zh-CN" | "en-NZ" | "en-ZA")
+      attr_accessor state: ("CREATION_IN_PROGRESS" | "ACTIVE" | "CREATION_FAILED" | "DELETE_IN_PROGRESS")
+      attr_accessor last_modified_time: ::Time
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class VoiceRecordingConfiguration
+      attr_accessor voice_recording_track: ("FROM_AGENT" | "TO_AGENT" | "ALL")
+      SENSITIVE: []
+    end
+
+    class WisdomInfo
+      attr_accessor session_arn: ::String
+      SENSITIVE: []
+    end
+  end
+end

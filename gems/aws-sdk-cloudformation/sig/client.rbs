@@ -1,0 +1,1366 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudFormation
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _ActivateOrganizationsAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ActivateOrganizationsAccessOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#activate_organizations_access-instance_method
+      def activate_organizations_access: (
+                                         ) -> _ActivateOrganizationsAccessResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ActivateOrganizationsAccessResponseSuccess
+
+      interface _ActivateTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ActivateTypeOutput]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#activate_type-instance_method
+      def activate_type: (
+                           ?type: ("RESOURCE" | "MODULE" | "HOOK"),
+                           ?public_type_arn: ::String,
+                           ?publisher_id: ::String,
+                           ?type_name: ::String,
+                           ?type_name_alias: ::String,
+                           ?auto_update: bool,
+                           ?logging_config: {
+                             log_role_arn: ::String,
+                             log_group_name: ::String
+                           },
+                           ?execution_role_arn: ::String,
+                           ?version_bump: ("MAJOR" | "MINOR"),
+                           ?major_version: ::Integer
+                         ) -> _ActivateTypeResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ActivateTypeResponseSuccess
+
+      interface _BatchDescribeTypeConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDescribeTypeConfigurationsOutput]
+        def errors: () -> ::Array[Types::BatchDescribeTypeConfigurationsError]
+        def unprocessed_type_configurations: () -> ::Array[Types::TypeConfigurationIdentifier]
+        def type_configurations: () -> ::Array[Types::TypeConfigurationDetails]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#batch_describe_type_configurations-instance_method
+      def batch_describe_type_configurations: (
+                                                type_configuration_identifiers: Array[
+                                                  {
+                                                    type_arn: ::String?,
+                                                    type_configuration_alias: ::String?,
+                                                    type_configuration_arn: ::String?,
+                                                    type: ("RESOURCE" | "MODULE" | "HOOK")?,
+                                                    type_name: ::String?
+                                                  },
+                                                ]
+                                              ) -> _BatchDescribeTypeConfigurationsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDescribeTypeConfigurationsResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#cancel_update_stack-instance_method
+      def cancel_update_stack: (
+                                 stack_name: ::String,
+                                 ?client_request_token: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _ContinueUpdateRollbackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ContinueUpdateRollbackOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#continue_update_rollback-instance_method
+      def continue_update_rollback: (
+                                      stack_name: ::String,
+                                      ?role_arn: ::String,
+                                      ?resources_to_skip: Array[::String],
+                                      ?client_request_token: ::String
+                                    ) -> _ContinueUpdateRollbackResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ContinueUpdateRollbackResponseSuccess
+
+      interface _CreateChangeSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateChangeSetOutput]
+        def id: () -> ::String
+        def stack_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#create_change_set-instance_method
+      def create_change_set: (
+                               stack_name: ::String,
+                               ?template_body: ::String,
+                               ?template_url: ::String,
+                               ?use_previous_template: bool,
+                               ?parameters: Array[
+                                 {
+                                   parameter_key: ::String?,
+                                   parameter_value: ::String?,
+                                   use_previous_value: bool?,
+                                   resolved_value: ::String?
+                                 },
+                               ],
+                               ?capabilities: Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")],
+                               ?resource_types: Array[::String],
+                               ?role_arn: ::String,
+                               ?rollback_configuration: {
+                                 rollback_triggers: Array[
+                                   {
+                                     arn: ::String,
+                                     type: ::String
+                                   },
+                                 ]?,
+                                 monitoring_time_in_minutes: ::Integer?
+                               },
+                               ?notification_arns: Array[::String],
+                               ?tags: Array[
+                                 {
+                                   key: ::String,
+                                   value: ::String
+                                 },
+                               ],
+                               change_set_name: ::String,
+                               ?client_token: ::String,
+                               ?description: ::String,
+                               ?change_set_type: ("CREATE" | "UPDATE" | "IMPORT"),
+                               ?resources_to_import: Array[
+                                 {
+                                   resource_type: ::String,
+                                   logical_resource_id: ::String,
+                                   resource_identifier: Hash[::String, ::String]
+                                 },
+                               ],
+                               ?include_nested_stacks: bool,
+                               ?on_stack_failure: ("DO_NOTHING" | "ROLLBACK" | "DELETE"),
+                               ?import_existing_resources: bool
+                             ) -> _CreateChangeSetResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChangeSetResponseSuccess
+
+      interface _CreateStackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStackOutput]
+        def stack_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#create_stack-instance_method
+      def create_stack: (
+                          stack_name: ::String,
+                          ?template_body: ::String,
+                          ?template_url: ::String,
+                          ?parameters: Array[
+                            {
+                              parameter_key: ::String?,
+                              parameter_value: ::String?,
+                              use_previous_value: bool?,
+                              resolved_value: ::String?
+                            },
+                          ],
+                          ?disable_rollback: bool,
+                          ?rollback_configuration: {
+                            rollback_triggers: Array[
+                              {
+                                arn: ::String,
+                                type: ::String
+                              },
+                            ]?,
+                            monitoring_time_in_minutes: ::Integer?
+                          },
+                          ?timeout_in_minutes: ::Integer,
+                          ?notification_arns: Array[::String],
+                          ?capabilities: Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")],
+                          ?resource_types: Array[::String],
+                          ?role_arn: ::String,
+                          ?on_failure: ("DO_NOTHING" | "ROLLBACK" | "DELETE"),
+                          ?stack_policy_body: ::String,
+                          ?stack_policy_url: ::String,
+                          ?tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ],
+                          ?client_request_token: ::String,
+                          ?enable_termination_protection: bool,
+                          ?retain_except_on_create: bool
+                        ) -> _CreateStackResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStackResponseSuccess
+
+      interface _CreateStackInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStackInstancesOutput]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#create_stack_instances-instance_method
+      def create_stack_instances: (
+                                    stack_set_name: ::String,
+                                    ?accounts: Array[::String],
+                                    ?deployment_targets: {
+                                      accounts: Array[::String]?,
+                                      accounts_url: ::String?,
+                                      organizational_unit_ids: Array[::String]?,
+                                      account_filter_type: ("NONE" | "INTERSECTION" | "DIFFERENCE" | "UNION")?
+                                    },
+                                    regions: Array[::String],
+                                    ?parameter_overrides: Array[
+                                      {
+                                        parameter_key: ::String?,
+                                        parameter_value: ::String?,
+                                        use_previous_value: bool?,
+                                        resolved_value: ::String?
+                                      },
+                                    ],
+                                    ?operation_preferences: {
+                                      region_concurrency_type: ("SEQUENTIAL" | "PARALLEL")?,
+                                      region_order: Array[::String]?,
+                                      failure_tolerance_count: ::Integer?,
+                                      failure_tolerance_percentage: ::Integer?,
+                                      max_concurrent_count: ::Integer?,
+                                      max_concurrent_percentage: ::Integer?,
+                                      concurrency_mode: ("STRICT_FAILURE_TOLERANCE" | "SOFT_FAILURE_TOLERANCE")?
+                                    },
+                                    ?operation_id: ::String,
+                                    ?call_as: ("SELF" | "DELEGATED_ADMIN")
+                                  ) -> _CreateStackInstancesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStackInstancesResponseSuccess
+
+      interface _CreateStackSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStackSetOutput]
+        def stack_set_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#create_stack_set-instance_method
+      def create_stack_set: (
+                              stack_set_name: ::String,
+                              ?description: ::String,
+                              ?template_body: ::String,
+                              ?template_url: ::String,
+                              ?stack_id: ::String,
+                              ?parameters: Array[
+                                {
+                                  parameter_key: ::String?,
+                                  parameter_value: ::String?,
+                                  use_previous_value: bool?,
+                                  resolved_value: ::String?
+                                },
+                              ],
+                              ?capabilities: Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")],
+                              ?tags: Array[
+                                {
+                                  key: ::String,
+                                  value: ::String
+                                },
+                              ],
+                              ?administration_role_arn: ::String,
+                              ?execution_role_name: ::String,
+                              ?permission_model: ("SERVICE_MANAGED" | "SELF_MANAGED"),
+                              ?auto_deployment: {
+                                enabled: bool?,
+                                retain_stacks_on_account_removal: bool?
+                              },
+                              ?call_as: ("SELF" | "DELEGATED_ADMIN"),
+                              ?client_request_token: ::String,
+                              ?managed_execution: {
+                                active: bool?
+                              }
+                            ) -> _CreateStackSetResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStackSetResponseSuccess
+
+      interface _DeactivateOrganizationsAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeactivateOrganizationsAccessOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#deactivate_organizations_access-instance_method
+      def deactivate_organizations_access: (
+                                           ) -> _DeactivateOrganizationsAccessResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeactivateOrganizationsAccessResponseSuccess
+
+      interface _DeactivateTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeactivateTypeOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#deactivate_type-instance_method
+      def deactivate_type: (
+                             ?type_name: ::String,
+                             ?type: ("RESOURCE" | "MODULE" | "HOOK"),
+                             ?arn: ::String
+                           ) -> _DeactivateTypeResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeactivateTypeResponseSuccess
+
+      interface _DeleteChangeSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteChangeSetOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#delete_change_set-instance_method
+      def delete_change_set: (
+                               change_set_name: ::String,
+                               ?stack_name: ::String
+                             ) -> _DeleteChangeSetResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteChangeSetResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#delete_stack-instance_method
+      def delete_stack: (
+                          stack_name: ::String,
+                          ?retain_resources: Array[::String],
+                          ?role_arn: ::String,
+                          ?client_request_token: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteStackInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteStackInstancesOutput]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#delete_stack_instances-instance_method
+      def delete_stack_instances: (
+                                    stack_set_name: ::String,
+                                    ?accounts: Array[::String],
+                                    ?deployment_targets: {
+                                      accounts: Array[::String]?,
+                                      accounts_url: ::String?,
+                                      organizational_unit_ids: Array[::String]?,
+                                      account_filter_type: ("NONE" | "INTERSECTION" | "DIFFERENCE" | "UNION")?
+                                    },
+                                    regions: Array[::String],
+                                    ?operation_preferences: {
+                                      region_concurrency_type: ("SEQUENTIAL" | "PARALLEL")?,
+                                      region_order: Array[::String]?,
+                                      failure_tolerance_count: ::Integer?,
+                                      failure_tolerance_percentage: ::Integer?,
+                                      max_concurrent_count: ::Integer?,
+                                      max_concurrent_percentage: ::Integer?,
+                                      concurrency_mode: ("STRICT_FAILURE_TOLERANCE" | "SOFT_FAILURE_TOLERANCE")?
+                                    },
+                                    retain_stacks: bool,
+                                    ?operation_id: ::String,
+                                    ?call_as: ("SELF" | "DELEGATED_ADMIN")
+                                  ) -> _DeleteStackInstancesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteStackInstancesResponseSuccess
+
+      interface _DeleteStackSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteStackSetOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#delete_stack_set-instance_method
+      def delete_stack_set: (
+                              stack_set_name: ::String,
+                              ?call_as: ("SELF" | "DELEGATED_ADMIN")
+                            ) -> _DeleteStackSetResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteStackSetResponseSuccess
+
+      interface _DeregisterTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterTypeOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#deregister_type-instance_method
+      def deregister_type: (
+                             ?arn: ::String,
+                             ?type: ("RESOURCE" | "MODULE" | "HOOK"),
+                             ?type_name: ::String,
+                             ?version_id: ::String
+                           ) -> _DeregisterTypeResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterTypeResponseSuccess
+
+      interface _DescribeAccountLimitsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAccountLimitsOutput]
+        def account_limits: () -> ::Array[Types::AccountLimit]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#describe_account_limits-instance_method
+      def describe_account_limits: (
+                                     ?next_token: ::String
+                                   ) -> _DescribeAccountLimitsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccountLimitsResponseSuccess
+
+      interface _DescribeChangeSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeChangeSetOutput]
+        def change_set_name: () -> ::String
+        def change_set_id: () -> ::String
+        def stack_id: () -> ::String
+        def stack_name: () -> ::String
+        def description: () -> ::String
+        def parameters: () -> ::Array[Types::Parameter]
+        def creation_time: () -> ::Time
+        def execution_status: () -> ("UNAVAILABLE" | "AVAILABLE" | "EXECUTE_IN_PROGRESS" | "EXECUTE_COMPLETE" | "EXECUTE_FAILED" | "OBSOLETE")
+        def status: () -> ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "DELETE_PENDING" | "DELETE_IN_PROGRESS" | "DELETE_COMPLETE" | "DELETE_FAILED" | "FAILED")
+        def status_reason: () -> ::String
+        def notification_arns: () -> ::Array[::String]
+        def rollback_configuration: () -> Types::RollbackConfiguration
+        def capabilities: () -> ::Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")]
+        def tags: () -> ::Array[Types::Tag]
+        def changes: () -> ::Array[Types::Change]
+        def next_token: () -> ::String
+        def include_nested_stacks: () -> bool
+        def parent_change_set_id: () -> ::String
+        def root_change_set_id: () -> ::String
+        def on_stack_failure: () -> ("DO_NOTHING" | "ROLLBACK" | "DELETE")
+        def import_existing_resources: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#describe_change_set-instance_method
+      def describe_change_set: (
+                                 change_set_name: ::String,
+                                 ?stack_name: ::String,
+                                 ?next_token: ::String
+                               ) -> _DescribeChangeSetResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeChangeSetResponseSuccess
+
+      interface _DescribeChangeSetHooksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeChangeSetHooksOutput]
+        def change_set_id: () -> ::String
+        def change_set_name: () -> ::String
+        def hooks: () -> ::Array[Types::ChangeSetHook]
+        def status: () -> ("PLANNING" | "PLANNED" | "UNAVAILABLE")
+        def next_token: () -> ::String
+        def stack_id: () -> ::String
+        def stack_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#describe_change_set_hooks-instance_method
+      def describe_change_set_hooks: (
+                                       change_set_name: ::String,
+                                       ?stack_name: ::String,
+                                       ?next_token: ::String,
+                                       ?logical_resource_id: ::String
+                                     ) -> _DescribeChangeSetHooksResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeChangeSetHooksResponseSuccess
+
+      interface _DescribeOrganizationsAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeOrganizationsAccessOutput]
+        def status: () -> ("ENABLED" | "DISABLED" | "DISABLED_PERMANENTLY")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#describe_organizations_access-instance_method
+      def describe_organizations_access: (
+                                           ?call_as: ("SELF" | "DELEGATED_ADMIN")
+                                         ) -> _DescribeOrganizationsAccessResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeOrganizationsAccessResponseSuccess
+
+      interface _DescribePublisherResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePublisherOutput]
+        def publisher_id: () -> ::String
+        def publisher_status: () -> ("VERIFIED" | "UNVERIFIED")
+        def identity_provider: () -> ("AWS_Marketplace" | "GitHub" | "Bitbucket")
+        def publisher_profile: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#describe_publisher-instance_method
+      def describe_publisher: (
+                                ?publisher_id: ::String
+                              ) -> _DescribePublisherResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePublisherResponseSuccess
+
+      interface _DescribeStackDriftDetectionStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStackDriftDetectionStatusOutput]
+        def stack_id: () -> ::String
+        def stack_drift_detection_id: () -> ::String
+        def stack_drift_status: () -> ("DRIFTED" | "IN_SYNC" | "UNKNOWN" | "NOT_CHECKED")
+        def detection_status: () -> ("DETECTION_IN_PROGRESS" | "DETECTION_FAILED" | "DETECTION_COMPLETE")
+        def detection_status_reason: () -> ::String
+        def drifted_stack_resource_count: () -> ::Integer
+        def timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#describe_stack_drift_detection_status-instance_method
+      def describe_stack_drift_detection_status: (
+                                                   stack_drift_detection_id: ::String
+                                                 ) -> _DescribeStackDriftDetectionStatusResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStackDriftDetectionStatusResponseSuccess
+
+      interface _DescribeStackEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStackEventsOutput]
+        def stack_events: () -> ::Array[Types::StackEvent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#describe_stack_events-instance_method
+      def describe_stack_events: (
+                                   ?stack_name: ::String,
+                                   ?next_token: ::String
+                                 ) -> _DescribeStackEventsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStackEventsResponseSuccess
+
+      interface _DescribeStackInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStackInstanceOutput]
+        def stack_instance: () -> Types::StackInstance
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#describe_stack_instance-instance_method
+      def describe_stack_instance: (
+                                     stack_set_name: ::String,
+                                     stack_instance_account: ::String,
+                                     stack_instance_region: ::String,
+                                     ?call_as: ("SELF" | "DELEGATED_ADMIN")
+                                   ) -> _DescribeStackInstanceResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStackInstanceResponseSuccess
+
+      interface _DescribeStackResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStackResourceOutput]
+        def stack_resource_detail: () -> Types::StackResourceDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#describe_stack_resource-instance_method
+      def describe_stack_resource: (
+                                     stack_name: ::String,
+                                     logical_resource_id: ::String
+                                   ) -> _DescribeStackResourceResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStackResourceResponseSuccess
+
+      interface _DescribeStackResourceDriftsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStackResourceDriftsOutput]
+        def stack_resource_drifts: () -> ::Array[Types::StackResourceDrift]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#describe_stack_resource_drifts-instance_method
+      def describe_stack_resource_drifts: (
+                                            stack_name: ::String,
+                                            ?stack_resource_drift_status_filters: Array[("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED")],
+                                            ?next_token: ::String,
+                                            ?max_results: ::Integer
+                                          ) -> _DescribeStackResourceDriftsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStackResourceDriftsResponseSuccess
+
+      interface _DescribeStackResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStackResourcesOutput]
+        def stack_resources: () -> ::Array[Types::StackResource]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#describe_stack_resources-instance_method
+      def describe_stack_resources: (
+                                      ?stack_name: ::String,
+                                      ?logical_resource_id: ::String,
+                                      ?physical_resource_id: ::String
+                                    ) -> _DescribeStackResourcesResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStackResourcesResponseSuccess
+
+      interface _DescribeStackSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStackSetOutput]
+        def stack_set: () -> Types::StackSet
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#describe_stack_set-instance_method
+      def describe_stack_set: (
+                                stack_set_name: ::String,
+                                ?call_as: ("SELF" | "DELEGATED_ADMIN")
+                              ) -> _DescribeStackSetResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStackSetResponseSuccess
+
+      interface _DescribeStackSetOperationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStackSetOperationOutput]
+        def stack_set_operation: () -> Types::StackSetOperation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#describe_stack_set_operation-instance_method
+      def describe_stack_set_operation: (
+                                          stack_set_name: ::String,
+                                          operation_id: ::String,
+                                          ?call_as: ("SELF" | "DELEGATED_ADMIN")
+                                        ) -> _DescribeStackSetOperationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStackSetOperationResponseSuccess
+
+      interface _DescribeStacksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStacksOutput]
+        def stacks: () -> ::Array[Types::Stack]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#describe_stacks-instance_method
+      def describe_stacks: (
+                             ?stack_name: ::String,
+                             ?next_token: ::String
+                           ) -> _DescribeStacksResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStacksResponseSuccess
+
+      interface _DescribeTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTypeOutput]
+        def arn: () -> ::String
+        def type: () -> ("RESOURCE" | "MODULE" | "HOOK")
+        def type_name: () -> ::String
+        def default_version_id: () -> ::String
+        def is_default_version: () -> bool
+        def type_tests_status: () -> ("PASSED" | "FAILED" | "IN_PROGRESS" | "NOT_TESTED")
+        def type_tests_status_description: () -> ::String
+        def description: () -> ::String
+        def schema: () -> ::String
+        def provisioning_type: () -> ("NON_PROVISIONABLE" | "IMMUTABLE" | "FULLY_MUTABLE")
+        def deprecated_status: () -> ("LIVE" | "DEPRECATED")
+        def logging_config: () -> Types::LoggingConfig
+        def required_activated_types: () -> ::Array[Types::RequiredActivatedType]
+        def execution_role_arn: () -> ::String
+        def visibility: () -> ("PUBLIC" | "PRIVATE")
+        def source_url: () -> ::String
+        def documentation_url: () -> ::String
+        def last_updated: () -> ::Time
+        def time_created: () -> ::Time
+        def configuration_schema: () -> ::String
+        def publisher_id: () -> ::String
+        def original_type_name: () -> ::String
+        def original_type_arn: () -> ::String
+        def public_version_number: () -> ::String
+        def latest_public_version: () -> ::String
+        def is_activated: () -> bool
+        def auto_update: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#describe_type-instance_method
+      def describe_type: (
+                           ?type: ("RESOURCE" | "MODULE" | "HOOK"),
+                           ?type_name: ::String,
+                           ?arn: ::String,
+                           ?version_id: ::String,
+                           ?publisher_id: ::String,
+                           ?public_version_number: ::String
+                         ) -> _DescribeTypeResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTypeResponseSuccess
+
+      interface _DescribeTypeRegistrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTypeRegistrationOutput]
+        def progress_status: () -> ("COMPLETE" | "IN_PROGRESS" | "FAILED")
+        def description: () -> ::String
+        def type_arn: () -> ::String
+        def type_version_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#describe_type_registration-instance_method
+      def describe_type_registration: (
+                                        registration_token: ::String
+                                      ) -> _DescribeTypeRegistrationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTypeRegistrationResponseSuccess
+
+      interface _DetectStackDriftResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetectStackDriftOutput]
+        def stack_drift_detection_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#detect_stack_drift-instance_method
+      def detect_stack_drift: (
+                                stack_name: ::String,
+                                ?logical_resource_ids: Array[::String]
+                              ) -> _DetectStackDriftResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetectStackDriftResponseSuccess
+
+      interface _DetectStackResourceDriftResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetectStackResourceDriftOutput]
+        def stack_resource_drift: () -> Types::StackResourceDrift
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#detect_stack_resource_drift-instance_method
+      def detect_stack_resource_drift: (
+                                         stack_name: ::String,
+                                         logical_resource_id: ::String
+                                       ) -> _DetectStackResourceDriftResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetectStackResourceDriftResponseSuccess
+
+      interface _DetectStackSetDriftResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetectStackSetDriftOutput]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#detect_stack_set_drift-instance_method
+      def detect_stack_set_drift: (
+                                    stack_set_name: ::String,
+                                    ?operation_preferences: {
+                                      region_concurrency_type: ("SEQUENTIAL" | "PARALLEL")?,
+                                      region_order: Array[::String]?,
+                                      failure_tolerance_count: ::Integer?,
+                                      failure_tolerance_percentage: ::Integer?,
+                                      max_concurrent_count: ::Integer?,
+                                      max_concurrent_percentage: ::Integer?,
+                                      concurrency_mode: ("STRICT_FAILURE_TOLERANCE" | "SOFT_FAILURE_TOLERANCE")?
+                                    },
+                                    ?operation_id: ::String,
+                                    ?call_as: ("SELF" | "DELEGATED_ADMIN")
+                                  ) -> _DetectStackSetDriftResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetectStackSetDriftResponseSuccess
+
+      interface _EstimateTemplateCostResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EstimateTemplateCostOutput]
+        def url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#estimate_template_cost-instance_method
+      def estimate_template_cost: (
+                                    ?template_body: ::String,
+                                    ?template_url: ::String,
+                                    ?parameters: Array[
+                                      {
+                                        parameter_key: ::String?,
+                                        parameter_value: ::String?,
+                                        use_previous_value: bool?,
+                                        resolved_value: ::String?
+                                      },
+                                    ]
+                                  ) -> _EstimateTemplateCostResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EstimateTemplateCostResponseSuccess
+
+      interface _ExecuteChangeSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExecuteChangeSetOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#execute_change_set-instance_method
+      def execute_change_set: (
+                                change_set_name: ::String,
+                                ?stack_name: ::String,
+                                ?client_request_token: ::String,
+                                ?disable_rollback: bool,
+                                ?retain_except_on_create: bool
+                              ) -> _ExecuteChangeSetResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExecuteChangeSetResponseSuccess
+
+      interface _GetStackPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStackPolicyOutput]
+        def stack_policy_body: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#get_stack_policy-instance_method
+      def get_stack_policy: (
+                              stack_name: ::String
+                            ) -> _GetStackPolicyResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStackPolicyResponseSuccess
+
+      interface _GetTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTemplateOutput]
+        def template_body: () -> ::String
+        def stages_available: () -> ::Array[("Original" | "Processed")]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#get_template-instance_method
+      def get_template: (
+                          ?stack_name: ::String,
+                          ?change_set_name: ::String,
+                          ?template_stage: ("Original" | "Processed")
+                        ) -> _GetTemplateResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTemplateResponseSuccess
+
+      interface _GetTemplateSummaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTemplateSummaryOutput]
+        def parameters: () -> ::Array[Types::ParameterDeclaration]
+        def description: () -> ::String
+        def capabilities: () -> ::Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")]
+        def capabilities_reason: () -> ::String
+        def resource_types: () -> ::Array[::String]
+        def version: () -> ::String
+        def metadata: () -> ::String
+        def declared_transforms: () -> ::Array[::String]
+        def resource_identifier_summaries: () -> ::Array[Types::ResourceIdentifierSummary]
+        def warnings: () -> Types::Warnings
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#get_template_summary-instance_method
+      def get_template_summary: (
+                                  ?template_body: ::String,
+                                  ?template_url: ::String,
+                                  ?stack_name: ::String,
+                                  ?stack_set_name: ::String,
+                                  ?call_as: ("SELF" | "DELEGATED_ADMIN"),
+                                  ?template_summary_config: {
+                                    treat_unrecognized_resource_types_as_warnings: bool?
+                                  }
+                                ) -> _GetTemplateSummaryResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTemplateSummaryResponseSuccess
+
+      interface _ImportStacksToStackSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportStacksToStackSetOutput]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#import_stacks_to_stack_set-instance_method
+      def import_stacks_to_stack_set: (
+                                        stack_set_name: ::String,
+                                        ?stack_ids: Array[::String],
+                                        ?stack_ids_url: ::String,
+                                        ?organizational_unit_ids: Array[::String],
+                                        ?operation_preferences: {
+                                          region_concurrency_type: ("SEQUENTIAL" | "PARALLEL")?,
+                                          region_order: Array[::String]?,
+                                          failure_tolerance_count: ::Integer?,
+                                          failure_tolerance_percentage: ::Integer?,
+                                          max_concurrent_count: ::Integer?,
+                                          max_concurrent_percentage: ::Integer?,
+                                          concurrency_mode: ("STRICT_FAILURE_TOLERANCE" | "SOFT_FAILURE_TOLERANCE")?
+                                        },
+                                        ?operation_id: ::String,
+                                        ?call_as: ("SELF" | "DELEGATED_ADMIN")
+                                      ) -> _ImportStacksToStackSetResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportStacksToStackSetResponseSuccess
+
+      interface _ListChangeSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChangeSetsOutput]
+        def summaries: () -> ::Array[Types::ChangeSetSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#list_change_sets-instance_method
+      def list_change_sets: (
+                              stack_name: ::String,
+                              ?next_token: ::String
+                            ) -> _ListChangeSetsResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChangeSetsResponseSuccess
+
+      interface _ListExportsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListExportsOutput]
+        def exports: () -> ::Array[Types::Export]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#list_exports-instance_method
+      def list_exports: (
+                          ?next_token: ::String
+                        ) -> _ListExportsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExportsResponseSuccess
+
+      interface _ListImportsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListImportsOutput]
+        def imports: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#list_imports-instance_method
+      def list_imports: (
+                          export_name: ::String,
+                          ?next_token: ::String
+                        ) -> _ListImportsResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListImportsResponseSuccess
+
+      interface _ListStackInstanceResourceDriftsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStackInstanceResourceDriftsOutput]
+        def summaries: () -> ::Array[Types::StackInstanceResourceDriftsSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#list_stack_instance_resource_drifts-instance_method
+      def list_stack_instance_resource_drifts: (
+                                                 stack_set_name: ::String,
+                                                 ?next_token: ::String,
+                                                 ?max_results: ::Integer,
+                                                 ?stack_instance_resource_drift_statuses: Array[("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED")],
+                                                 stack_instance_account: ::String,
+                                                 stack_instance_region: ::String,
+                                                 operation_id: ::String,
+                                                 ?call_as: ("SELF" | "DELEGATED_ADMIN")
+                                               ) -> _ListStackInstanceResourceDriftsResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStackInstanceResourceDriftsResponseSuccess
+
+      interface _ListStackInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStackInstancesOutput]
+        def summaries: () -> ::Array[Types::StackInstanceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#list_stack_instances-instance_method
+      def list_stack_instances: (
+                                  stack_set_name: ::String,
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer,
+                                  ?filters: Array[
+                                    {
+                                      name: ("DETAILED_STATUS" | "LAST_OPERATION_ID" | "DRIFT_STATUS")?,
+                                      values: ::String?
+                                    },
+                                  ],
+                                  ?stack_instance_account: ::String,
+                                  ?stack_instance_region: ::String,
+                                  ?call_as: ("SELF" | "DELEGATED_ADMIN")
+                                ) -> _ListStackInstancesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStackInstancesResponseSuccess
+
+      interface _ListStackResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStackResourcesOutput]
+        def stack_resource_summaries: () -> ::Array[Types::StackResourceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#list_stack_resources-instance_method
+      def list_stack_resources: (
+                                  stack_name: ::String,
+                                  ?next_token: ::String
+                                ) -> _ListStackResourcesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStackResourcesResponseSuccess
+
+      interface _ListStackSetOperationResultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStackSetOperationResultsOutput]
+        def summaries: () -> ::Array[Types::StackSetOperationResultSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#list_stack_set_operation_results-instance_method
+      def list_stack_set_operation_results: (
+                                              stack_set_name: ::String,
+                                              operation_id: ::String,
+                                              ?next_token: ::String,
+                                              ?max_results: ::Integer,
+                                              ?call_as: ("SELF" | "DELEGATED_ADMIN"),
+                                              ?filters: Array[
+                                                {
+                                                  name: ("OPERATION_RESULT_STATUS")?,
+                                                  values: ::String?
+                                                },
+                                              ]
+                                            ) -> _ListStackSetOperationResultsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStackSetOperationResultsResponseSuccess
+
+      interface _ListStackSetOperationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStackSetOperationsOutput]
+        def summaries: () -> ::Array[Types::StackSetOperationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#list_stack_set_operations-instance_method
+      def list_stack_set_operations: (
+                                       stack_set_name: ::String,
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer,
+                                       ?call_as: ("SELF" | "DELEGATED_ADMIN")
+                                     ) -> _ListStackSetOperationsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStackSetOperationsResponseSuccess
+
+      interface _ListStackSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStackSetsOutput]
+        def summaries: () -> ::Array[Types::StackSetSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#list_stack_sets-instance_method
+      def list_stack_sets: (
+                             ?next_token: ::String,
+                             ?max_results: ::Integer,
+                             ?status: ("ACTIVE" | "DELETED"),
+                             ?call_as: ("SELF" | "DELEGATED_ADMIN")
+                           ) -> _ListStackSetsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStackSetsResponseSuccess
+
+      interface _ListStacksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStacksOutput]
+        def stack_summaries: () -> ::Array[Types::StackSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#list_stacks-instance_method
+      def list_stacks: (
+                         ?next_token: ::String,
+                         ?stack_status_filter: Array[("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATE_COMPLETE" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_FAILED" | "ROLLBACK_COMPLETE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_FAILED" | "UPDATE_ROLLBACK_IN_PROGRESS" | "UPDATE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS" | "UPDATE_ROLLBACK_COMPLETE" | "REVIEW_IN_PROGRESS" | "IMPORT_IN_PROGRESS" | "IMPORT_COMPLETE" | "IMPORT_ROLLBACK_IN_PROGRESS" | "IMPORT_ROLLBACK_FAILED" | "IMPORT_ROLLBACK_COMPLETE")]
+                       ) -> _ListStacksResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStacksResponseSuccess
+
+      interface _ListTypeRegistrationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTypeRegistrationsOutput]
+        def registration_token_list: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#list_type_registrations-instance_method
+      def list_type_registrations: (
+                                     ?type: ("RESOURCE" | "MODULE" | "HOOK"),
+                                     ?type_name: ::String,
+                                     ?type_arn: ::String,
+                                     ?registration_status_filter: ("COMPLETE" | "IN_PROGRESS" | "FAILED"),
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListTypeRegistrationsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTypeRegistrationsResponseSuccess
+
+      interface _ListTypeVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTypeVersionsOutput]
+        def type_version_summaries: () -> ::Array[Types::TypeVersionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#list_type_versions-instance_method
+      def list_type_versions: (
+                                ?type: ("RESOURCE" | "MODULE" | "HOOK"),
+                                ?type_name: ::String,
+                                ?arn: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String,
+                                ?deprecated_status: ("LIVE" | "DEPRECATED"),
+                                ?publisher_id: ::String
+                              ) -> _ListTypeVersionsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTypeVersionsResponseSuccess
+
+      interface _ListTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTypesOutput]
+        def type_summaries: () -> ::Array[Types::TypeSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#list_types-instance_method
+      def list_types: (
+                        ?visibility: ("PUBLIC" | "PRIVATE"),
+                        ?provisioning_type: ("NON_PROVISIONABLE" | "IMMUTABLE" | "FULLY_MUTABLE"),
+                        ?deprecated_status: ("LIVE" | "DEPRECATED"),
+                        ?type: ("RESOURCE" | "MODULE" | "HOOK"),
+                        ?filters: {
+                          category: ("REGISTERED" | "ACTIVATED" | "THIRD_PARTY" | "AWS_TYPES")?,
+                          publisher_id: ::String?,
+                          type_name_prefix: ::String?
+                        },
+                        ?max_results: ::Integer,
+                        ?next_token: ::String
+                      ) -> _ListTypesResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTypesResponseSuccess
+
+      interface _PublishTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PublishTypeOutput]
+        def public_type_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#publish_type-instance_method
+      def publish_type: (
+                          ?type: ("RESOURCE" | "MODULE" | "HOOK"),
+                          ?arn: ::String,
+                          ?type_name: ::String,
+                          ?public_version_number: ::String
+                        ) -> _PublishTypeResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PublishTypeResponseSuccess
+
+      interface _RecordHandlerProgressResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RecordHandlerProgressOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#record_handler_progress-instance_method
+      def record_handler_progress: (
+                                     bearer_token: ::String,
+                                     operation_status: ("PENDING" | "IN_PROGRESS" | "SUCCESS" | "FAILED"),
+                                     ?current_operation_status: ("PENDING" | "IN_PROGRESS" | "SUCCESS" | "FAILED"),
+                                     ?status_message: ::String,
+                                     ?error_code: ("NotUpdatable" | "InvalidRequest" | "AccessDenied" | "InvalidCredentials" | "AlreadyExists" | "NotFound" | "ResourceConflict" | "Throttling" | "ServiceLimitExceeded" | "NotStabilized" | "GeneralServiceException" | "ServiceInternalError" | "NetworkFailure" | "InternalFailure" | "InvalidTypeConfiguration" | "HandlerInternalFailure" | "NonCompliant" | "Unknown" | "UnsupportedTarget"),
+                                     ?resource_model: ::String,
+                                     ?client_request_token: ::String
+                                   ) -> _RecordHandlerProgressResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RecordHandlerProgressResponseSuccess
+
+      interface _RegisterPublisherResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterPublisherOutput]
+        def publisher_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#register_publisher-instance_method
+      def register_publisher: (
+                                ?accept_terms_and_conditions: bool,
+                                ?connection_arn: ::String
+                              ) -> _RegisterPublisherResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterPublisherResponseSuccess
+
+      interface _RegisterTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterTypeOutput]
+        def registration_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#register_type-instance_method
+      def register_type: (
+                           ?type: ("RESOURCE" | "MODULE" | "HOOK"),
+                           type_name: ::String,
+                           schema_handler_package: ::String,
+                           ?logging_config: {
+                             log_role_arn: ::String,
+                             log_group_name: ::String
+                           },
+                           ?execution_role_arn: ::String,
+                           ?client_request_token: ::String
+                         ) -> _RegisterTypeResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterTypeResponseSuccess
+
+      interface _RollbackStackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RollbackStackOutput]
+        def stack_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#rollback_stack-instance_method
+      def rollback_stack: (
+                            stack_name: ::String,
+                            ?role_arn: ::String,
+                            ?client_request_token: ::String,
+                            ?retain_except_on_create: bool
+                          ) -> _RollbackStackResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RollbackStackResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#set_stack_policy-instance_method
+      def set_stack_policy: (
+                              stack_name: ::String,
+                              ?stack_policy_body: ::String,
+                              ?stack_policy_url: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _SetTypeConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetTypeConfigurationOutput]
+        def configuration_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#set_type_configuration-instance_method
+      def set_type_configuration: (
+                                    ?type_arn: ::String,
+                                    configuration: ::String,
+                                    ?configuration_alias: ::String,
+                                    ?type_name: ::String,
+                                    ?type: ("RESOURCE" | "MODULE" | "HOOK")
+                                  ) -> _SetTypeConfigurationResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetTypeConfigurationResponseSuccess
+
+      interface _SetTypeDefaultVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetTypeDefaultVersionOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#set_type_default_version-instance_method
+      def set_type_default_version: (
+                                      ?arn: ::String,
+                                      ?type: ("RESOURCE" | "MODULE" | "HOOK"),
+                                      ?type_name: ::String,
+                                      ?version_id: ::String
+                                    ) -> _SetTypeDefaultVersionResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetTypeDefaultVersionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#signal_resource-instance_method
+      def signal_resource: (
+                             stack_name: ::String,
+                             logical_resource_id: ::String,
+                             unique_id: ::String,
+                             status: ("SUCCESS" | "FAILURE")
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _StopStackSetOperationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopStackSetOperationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#stop_stack_set_operation-instance_method
+      def stop_stack_set_operation: (
+                                      stack_set_name: ::String,
+                                      operation_id: ::String,
+                                      ?call_as: ("SELF" | "DELEGATED_ADMIN")
+                                    ) -> _StopStackSetOperationResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopStackSetOperationResponseSuccess
+
+      interface _TestTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TestTypeOutput]
+        def type_version_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#test_type-instance_method
+      def test_type: (
+                       ?arn: ::String,
+                       ?type: ("RESOURCE" | "MODULE" | "HOOK"),
+                       ?type_name: ::String,
+                       ?version_id: ::String,
+                       ?log_delivery_bucket: ::String
+                     ) -> _TestTypeResponseSuccess
+                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestTypeResponseSuccess
+
+      interface _UpdateStackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateStackOutput]
+        def stack_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#update_stack-instance_method
+      def update_stack: (
+                          stack_name: ::String,
+                          ?template_body: ::String,
+                          ?template_url: ::String,
+                          ?use_previous_template: bool,
+                          ?stack_policy_during_update_body: ::String,
+                          ?stack_policy_during_update_url: ::String,
+                          ?parameters: Array[
+                            {
+                              parameter_key: ::String?,
+                              parameter_value: ::String?,
+                              use_previous_value: bool?,
+                              resolved_value: ::String?
+                            },
+                          ],
+                          ?capabilities: Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")],
+                          ?resource_types: Array[::String],
+                          ?role_arn: ::String,
+                          ?rollback_configuration: {
+                            rollback_triggers: Array[
+                              {
+                                arn: ::String,
+                                type: ::String
+                              },
+                            ]?,
+                            monitoring_time_in_minutes: ::Integer?
+                          },
+                          ?stack_policy_body: ::String,
+                          ?stack_policy_url: ::String,
+                          ?notification_arns: Array[::String],
+                          ?tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ],
+                          ?disable_rollback: bool,
+                          ?client_request_token: ::String,
+                          ?retain_except_on_create: bool
+                        ) -> _UpdateStackResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStackResponseSuccess
+
+      interface _UpdateStackInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateStackInstancesOutput]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#update_stack_instances-instance_method
+      def update_stack_instances: (
+                                    stack_set_name: ::String,
+                                    ?accounts: Array[::String],
+                                    ?deployment_targets: {
+                                      accounts: Array[::String]?,
+                                      accounts_url: ::String?,
+                                      organizational_unit_ids: Array[::String]?,
+                                      account_filter_type: ("NONE" | "INTERSECTION" | "DIFFERENCE" | "UNION")?
+                                    },
+                                    regions: Array[::String],
+                                    ?parameter_overrides: Array[
+                                      {
+                                        parameter_key: ::String?,
+                                        parameter_value: ::String?,
+                                        use_previous_value: bool?,
+                                        resolved_value: ::String?
+                                      },
+                                    ],
+                                    ?operation_preferences: {
+                                      region_concurrency_type: ("SEQUENTIAL" | "PARALLEL")?,
+                                      region_order: Array[::String]?,
+                                      failure_tolerance_count: ::Integer?,
+                                      failure_tolerance_percentage: ::Integer?,
+                                      max_concurrent_count: ::Integer?,
+                                      max_concurrent_percentage: ::Integer?,
+                                      concurrency_mode: ("STRICT_FAILURE_TOLERANCE" | "SOFT_FAILURE_TOLERANCE")?
+                                    },
+                                    ?operation_id: ::String,
+                                    ?call_as: ("SELF" | "DELEGATED_ADMIN")
+                                  ) -> _UpdateStackInstancesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStackInstancesResponseSuccess
+
+      interface _UpdateStackSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateStackSetOutput]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#update_stack_set-instance_method
+      def update_stack_set: (
+                              stack_set_name: ::String,
+                              ?description: ::String,
+                              ?template_body: ::String,
+                              ?template_url: ::String,
+                              ?use_previous_template: bool,
+                              ?parameters: Array[
+                                {
+                                  parameter_key: ::String?,
+                                  parameter_value: ::String?,
+                                  use_previous_value: bool?,
+                                  resolved_value: ::String?
+                                },
+                              ],
+                              ?capabilities: Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")],
+                              ?tags: Array[
+                                {
+                                  key: ::String,
+                                  value: ::String
+                                },
+                              ],
+                              ?operation_preferences: {
+                                region_concurrency_type: ("SEQUENTIAL" | "PARALLEL")?,
+                                region_order: Array[::String]?,
+                                failure_tolerance_count: ::Integer?,
+                                failure_tolerance_percentage: ::Integer?,
+                                max_concurrent_count: ::Integer?,
+                                max_concurrent_percentage: ::Integer?,
+                                concurrency_mode: ("STRICT_FAILURE_TOLERANCE" | "SOFT_FAILURE_TOLERANCE")?
+                              },
+                              ?administration_role_arn: ::String,
+                              ?execution_role_name: ::String,
+                              ?deployment_targets: {
+                                accounts: Array[::String]?,
+                                accounts_url: ::String?,
+                                organizational_unit_ids: Array[::String]?,
+                                account_filter_type: ("NONE" | "INTERSECTION" | "DIFFERENCE" | "UNION")?
+                              },
+                              ?permission_model: ("SERVICE_MANAGED" | "SELF_MANAGED"),
+                              ?auto_deployment: {
+                                enabled: bool?,
+                                retain_stacks_on_account_removal: bool?
+                              },
+                              ?operation_id: ::String,
+                              ?accounts: Array[::String],
+                              ?regions: Array[::String],
+                              ?call_as: ("SELF" | "DELEGATED_ADMIN"),
+                              ?managed_execution: {
+                                active: bool?
+                              }
+                            ) -> _UpdateStackSetResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStackSetResponseSuccess
+
+      interface _UpdateTerminationProtectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTerminationProtectionOutput]
+        def stack_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#update_termination_protection-instance_method
+      def update_termination_protection: (
+                                           enable_termination_protection: bool,
+                                           stack_name: ::String
+                                         ) -> _UpdateTerminationProtectionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTerminationProtectionResponseSuccess
+
+      interface _ValidateTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ValidateTemplateOutput]
+        def parameters: () -> ::Array[Types::TemplateParameter]
+        def description: () -> ::String
+        def capabilities: () -> ::Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")]
+        def capabilities_reason: () -> ::String
+        def declared_transforms: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#validate_template-instance_method
+      def validate_template: (
+                               ?template_body: ::String,
+                               ?template_url: ::String
+                             ) -> _ValidateTemplateResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ValidateTemplateResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#wait_until-instance_method
+      def wait_until: (:change_set_create_complete waiter_name, 
+                    change_set_name: ::String,
+                    ?stack_name: ::String,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeChangeSetResponseSuccess
+                    | (:change_set_create_complete waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeChangeSetResponseSuccess
+                    | (:stack_create_complete waiter_name, 
+                    ?stack_name: ::String,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeStacksResponseSuccess
+                    | (:stack_create_complete waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeStacksResponseSuccess
+                    | (:stack_delete_complete waiter_name, 
+                    ?stack_name: ::String,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeStacksResponseSuccess
+                    | (:stack_delete_complete waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeStacksResponseSuccess
+                    | (:stack_exists waiter_name, 
+                    ?stack_name: ::String,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeStacksResponseSuccess
+                    | (:stack_exists waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeStacksResponseSuccess
+                    | (:stack_import_complete waiter_name, 
+                    ?stack_name: ::String,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeStacksResponseSuccess
+                    | (:stack_import_complete waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeStacksResponseSuccess
+                    | (:stack_rollback_complete waiter_name, 
+                    ?stack_name: ::String,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeStacksResponseSuccess
+                    | (:stack_rollback_complete waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeStacksResponseSuccess
+                    | (:stack_update_complete waiter_name, 
+                    ?stack_name: ::String,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeStacksResponseSuccess
+                    | (:stack_update_complete waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeStacksResponseSuccess
+                    | (:type_registration_complete waiter_name, 
+                    registration_token: ::String
+                  ) -> Client::_DescribeTypeRegistrationResponseSuccess
+                    | (:type_registration_complete waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeTypeRegistrationResponseSuccess
+    end
+  end
+end
+

@@ -1,0 +1,933 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module LexModelBuildingService
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateBotVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBotVersionResponse]
+        def name: () -> ::String
+        def description: () -> ::String
+        def intents: () -> ::Array[Types::Intent]
+        def clarification_prompt: () -> Types::Prompt
+        def abort_statement: () -> Types::Statement
+        def status: () -> ("BUILDING" | "READY" | "READY_BASIC_TESTING" | "FAILED" | "NOT_BUILT")
+        def failure_reason: () -> ::String
+        def last_updated_date: () -> ::Time
+        def created_date: () -> ::Time
+        def idle_session_ttl_in_seconds: () -> ::Integer
+        def voice_id: () -> ::String
+        def checksum: () -> ::String
+        def version: () -> ::String
+        def locale: () -> ("de-DE" | "en-AU" | "en-GB" | "en-IN" | "en-US" | "es-419" | "es-ES" | "es-US" | "fr-FR" | "fr-CA" | "it-IT" | "ja-JP" | "ko-KR")
+        def child_directed: () -> bool
+        def enable_model_improvements: () -> bool
+        def detect_sentiment: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#create_bot_version-instance_method
+      def create_bot_version: (
+                                name: ::String,
+                                ?checksum: ::String
+                              ) -> _CreateBotVersionResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBotVersionResponseSuccess
+
+      interface _CreateIntentVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateIntentVersionResponse]
+        def name: () -> ::String
+        def description: () -> ::String
+        def slots: () -> ::Array[Types::Slot]
+        def sample_utterances: () -> ::Array[::String]
+        def confirmation_prompt: () -> Types::Prompt
+        def rejection_statement: () -> Types::Statement
+        def follow_up_prompt: () -> Types::FollowUpPrompt
+        def conclusion_statement: () -> Types::Statement
+        def dialog_code_hook: () -> Types::CodeHook
+        def fulfillment_activity: () -> Types::FulfillmentActivity
+        def parent_intent_signature: () -> ::String
+        def last_updated_date: () -> ::Time
+        def created_date: () -> ::Time
+        def version: () -> ::String
+        def checksum: () -> ::String
+        def kendra_configuration: () -> Types::KendraConfiguration
+        def input_contexts: () -> ::Array[Types::InputContext]
+        def output_contexts: () -> ::Array[Types::OutputContext]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#create_intent_version-instance_method
+      def create_intent_version: (
+                                   name: ::String,
+                                   ?checksum: ::String
+                                 ) -> _CreateIntentVersionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIntentVersionResponseSuccess
+
+      interface _CreateSlotTypeVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSlotTypeVersionResponse]
+        def name: () -> ::String
+        def description: () -> ::String
+        def enumeration_values: () -> ::Array[Types::EnumerationValue]
+        def last_updated_date: () -> ::Time
+        def created_date: () -> ::Time
+        def version: () -> ::String
+        def checksum: () -> ::String
+        def value_selection_strategy: () -> ("ORIGINAL_VALUE" | "TOP_RESOLUTION")
+        def parent_slot_type_signature: () -> ::String
+        def slot_type_configurations: () -> ::Array[Types::SlotTypeConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#create_slot_type_version-instance_method
+      def create_slot_type_version: (
+                                      name: ::String,
+                                      ?checksum: ::String
+                                    ) -> _CreateSlotTypeVersionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSlotTypeVersionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#delete_bot-instance_method
+      def delete_bot: (
+                        name: ::String
+                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#delete_bot_alias-instance_method
+      def delete_bot_alias: (
+                              name: ::String,
+                              bot_name: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#delete_bot_channel_association-instance_method
+      def delete_bot_channel_association: (
+                                            name: ::String,
+                                            bot_name: ::String,
+                                            bot_alias: ::String
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#delete_bot_version-instance_method
+      def delete_bot_version: (
+                                name: ::String,
+                                version: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#delete_intent-instance_method
+      def delete_intent: (
+                           name: ::String
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#delete_intent_version-instance_method
+      def delete_intent_version: (
+                                   name: ::String,
+                                   version: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#delete_slot_type-instance_method
+      def delete_slot_type: (
+                              name: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#delete_slot_type_version-instance_method
+      def delete_slot_type_version: (
+                                      name: ::String,
+                                      version: ::String
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#delete_utterances-instance_method
+      def delete_utterances: (
+                               bot_name: ::String,
+                               user_id: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetBotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBotResponse]
+        def name: () -> ::String
+        def description: () -> ::String
+        def intents: () -> ::Array[Types::Intent]
+        def enable_model_improvements: () -> bool
+        def nlu_intent_confidence_threshold: () -> ::Float
+        def clarification_prompt: () -> Types::Prompt
+        def abort_statement: () -> Types::Statement
+        def status: () -> ("BUILDING" | "READY" | "READY_BASIC_TESTING" | "FAILED" | "NOT_BUILT")
+        def failure_reason: () -> ::String
+        def last_updated_date: () -> ::Time
+        def created_date: () -> ::Time
+        def idle_session_ttl_in_seconds: () -> ::Integer
+        def voice_id: () -> ::String
+        def checksum: () -> ::String
+        def version: () -> ::String
+        def locale: () -> ("de-DE" | "en-AU" | "en-GB" | "en-IN" | "en-US" | "es-419" | "es-ES" | "es-US" | "fr-FR" | "fr-CA" | "it-IT" | "ja-JP" | "ko-KR")
+        def child_directed: () -> bool
+        def detect_sentiment: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#get_bot-instance_method
+      def get_bot: (
+                     name: ::String,
+                     version_or_alias: ::String
+                   ) -> _GetBotResponseSuccess
+                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBotResponseSuccess
+
+      interface _GetBotAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBotAliasResponse]
+        def name: () -> ::String
+        def description: () -> ::String
+        def bot_version: () -> ::String
+        def bot_name: () -> ::String
+        def last_updated_date: () -> ::Time
+        def created_date: () -> ::Time
+        def checksum: () -> ::String
+        def conversation_logs: () -> Types::ConversationLogsResponse
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#get_bot_alias-instance_method
+      def get_bot_alias: (
+                           name: ::String,
+                           bot_name: ::String
+                         ) -> _GetBotAliasResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBotAliasResponseSuccess
+
+      interface _GetBotAliasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBotAliasesResponse]
+        def bot_aliases: () -> ::Array[Types::BotAliasMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#get_bot_aliases-instance_method
+      def get_bot_aliases: (
+                             bot_name: ::String,
+                             ?next_token: ::String,
+                             ?max_results: ::Integer,
+                             ?name_contains: ::String
+                           ) -> _GetBotAliasesResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBotAliasesResponseSuccess
+
+      interface _GetBotChannelAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBotChannelAssociationResponse]
+        def name: () -> ::String
+        def description: () -> ::String
+        def bot_alias: () -> ::String
+        def bot_name: () -> ::String
+        def created_date: () -> ::Time
+        def type: () -> ("Facebook" | "Slack" | "Twilio-Sms" | "Kik")
+        def bot_configuration: () -> ::Hash[::String, ::String]
+        def status: () -> ("IN_PROGRESS" | "CREATED" | "FAILED")
+        def failure_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#get_bot_channel_association-instance_method
+      def get_bot_channel_association: (
+                                         name: ::String,
+                                         bot_name: ::String,
+                                         bot_alias: ::String
+                                       ) -> _GetBotChannelAssociationResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBotChannelAssociationResponseSuccess
+
+      interface _GetBotChannelAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBotChannelAssociationsResponse]
+        def bot_channel_associations: () -> ::Array[Types::BotChannelAssociation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#get_bot_channel_associations-instance_method
+      def get_bot_channel_associations: (
+                                          bot_name: ::String,
+                                          bot_alias: ::String,
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer,
+                                          ?name_contains: ::String
+                                        ) -> _GetBotChannelAssociationsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBotChannelAssociationsResponseSuccess
+
+      interface _GetBotVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBotVersionsResponse]
+        def bots: () -> ::Array[Types::BotMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#get_bot_versions-instance_method
+      def get_bot_versions: (
+                              name: ::String,
+                              ?next_token: ::String,
+                              ?max_results: ::Integer
+                            ) -> _GetBotVersionsResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBotVersionsResponseSuccess
+
+      interface _GetBotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBotsResponse]
+        def bots: () -> ::Array[Types::BotMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#get_bots-instance_method
+      def get_bots: (
+                      ?next_token: ::String,
+                      ?max_results: ::Integer,
+                      ?name_contains: ::String
+                    ) -> _GetBotsResponseSuccess
+                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBotsResponseSuccess
+
+      interface _GetBuiltinIntentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBuiltinIntentResponse]
+        def signature: () -> ::String
+        def supported_locales: () -> ::Array[("de-DE" | "en-AU" | "en-GB" | "en-IN" | "en-US" | "es-419" | "es-ES" | "es-US" | "fr-FR" | "fr-CA" | "it-IT" | "ja-JP" | "ko-KR")]
+        def slots: () -> ::Array[Types::BuiltinIntentSlot]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#get_builtin_intent-instance_method
+      def get_builtin_intent: (
+                                signature: ::String
+                              ) -> _GetBuiltinIntentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBuiltinIntentResponseSuccess
+
+      interface _GetBuiltinIntentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBuiltinIntentsResponse]
+        def intents: () -> ::Array[Types::BuiltinIntentMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#get_builtin_intents-instance_method
+      def get_builtin_intents: (
+                                 ?locale: ("de-DE" | "en-AU" | "en-GB" | "en-IN" | "en-US" | "es-419" | "es-ES" | "es-US" | "fr-FR" | "fr-CA" | "it-IT" | "ja-JP" | "ko-KR"),
+                                 ?signature_contains: ::String,
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer
+                               ) -> _GetBuiltinIntentsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBuiltinIntentsResponseSuccess
+
+      interface _GetBuiltinSlotTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBuiltinSlotTypesResponse]
+        def slot_types: () -> ::Array[Types::BuiltinSlotTypeMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#get_builtin_slot_types-instance_method
+      def get_builtin_slot_types: (
+                                    ?locale: ("de-DE" | "en-AU" | "en-GB" | "en-IN" | "en-US" | "es-419" | "es-ES" | "es-US" | "fr-FR" | "fr-CA" | "it-IT" | "ja-JP" | "ko-KR"),
+                                    ?signature_contains: ::String,
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _GetBuiltinSlotTypesResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBuiltinSlotTypesResponseSuccess
+
+      interface _GetExportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetExportResponse]
+        def name: () -> ::String
+        def version: () -> ::String
+        def resource_type: () -> ("BOT" | "INTENT" | "SLOT_TYPE")
+        def export_type: () -> ("ALEXA_SKILLS_KIT" | "LEX")
+        def export_status: () -> ("IN_PROGRESS" | "READY" | "FAILED")
+        def failure_reason: () -> ::String
+        def url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#get_export-instance_method
+      def get_export: (
+                        name: ::String,
+                        version: ::String,
+                        resource_type: ("BOT" | "INTENT" | "SLOT_TYPE"),
+                        export_type: ("ALEXA_SKILLS_KIT" | "LEX")
+                      ) -> _GetExportResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetExportResponseSuccess
+
+      interface _GetImportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetImportResponse]
+        def name: () -> ::String
+        def resource_type: () -> ("BOT" | "INTENT" | "SLOT_TYPE")
+        def merge_strategy: () -> ("OVERWRITE_LATEST" | "FAIL_ON_CONFLICT")
+        def import_id: () -> ::String
+        def import_status: () -> ("IN_PROGRESS" | "COMPLETE" | "FAILED")
+        def failure_reason: () -> ::Array[::String]
+        def created_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#get_import-instance_method
+      def get_import: (
+                        import_id: ::String
+                      ) -> _GetImportResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetImportResponseSuccess
+
+      interface _GetIntentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIntentResponse]
+        def name: () -> ::String
+        def description: () -> ::String
+        def slots: () -> ::Array[Types::Slot]
+        def sample_utterances: () -> ::Array[::String]
+        def confirmation_prompt: () -> Types::Prompt
+        def rejection_statement: () -> Types::Statement
+        def follow_up_prompt: () -> Types::FollowUpPrompt
+        def conclusion_statement: () -> Types::Statement
+        def dialog_code_hook: () -> Types::CodeHook
+        def fulfillment_activity: () -> Types::FulfillmentActivity
+        def parent_intent_signature: () -> ::String
+        def last_updated_date: () -> ::Time
+        def created_date: () -> ::Time
+        def version: () -> ::String
+        def checksum: () -> ::String
+        def kendra_configuration: () -> Types::KendraConfiguration
+        def input_contexts: () -> ::Array[Types::InputContext]
+        def output_contexts: () -> ::Array[Types::OutputContext]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#get_intent-instance_method
+      def get_intent: (
+                        name: ::String,
+                        version: ::String
+                      ) -> _GetIntentResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIntentResponseSuccess
+
+      interface _GetIntentVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIntentVersionsResponse]
+        def intents: () -> ::Array[Types::IntentMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#get_intent_versions-instance_method
+      def get_intent_versions: (
+                                 name: ::String,
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer
+                               ) -> _GetIntentVersionsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIntentVersionsResponseSuccess
+
+      interface _GetIntentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIntentsResponse]
+        def intents: () -> ::Array[Types::IntentMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#get_intents-instance_method
+      def get_intents: (
+                         ?next_token: ::String,
+                         ?max_results: ::Integer,
+                         ?name_contains: ::String
+                       ) -> _GetIntentsResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIntentsResponseSuccess
+
+      interface _GetMigrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMigrationResponse]
+        def migration_id: () -> ::String
+        def v1_bot_name: () -> ::String
+        def v1_bot_version: () -> ::String
+        def v1_bot_locale: () -> ("de-DE" | "en-AU" | "en-GB" | "en-IN" | "en-US" | "es-419" | "es-ES" | "es-US" | "fr-FR" | "fr-CA" | "it-IT" | "ja-JP" | "ko-KR")
+        def v2_bot_id: () -> ::String
+        def v2_bot_role: () -> ::String
+        def migration_status: () -> ("IN_PROGRESS" | "COMPLETED" | "FAILED")
+        def migration_strategy: () -> ("CREATE_NEW" | "UPDATE_EXISTING")
+        def migration_timestamp: () -> ::Time
+        def alerts: () -> ::Array[Types::MigrationAlert]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#get_migration-instance_method
+      def get_migration: (
+                           migration_id: ::String
+                         ) -> _GetMigrationResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMigrationResponseSuccess
+
+      interface _GetMigrationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMigrationsResponse]
+        def migration_summaries: () -> ::Array[Types::MigrationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#get_migrations-instance_method
+      def get_migrations: (
+                            ?sort_by_attribute: ("V1_BOT_NAME" | "MIGRATION_DATE_TIME"),
+                            ?sort_by_order: ("ASCENDING" | "DESCENDING"),
+                            ?v1_bot_name_contains: ::String,
+                            ?migration_status_equals: ("IN_PROGRESS" | "COMPLETED" | "FAILED"),
+                            ?max_results: ::Integer,
+                            ?next_token: ::String
+                          ) -> _GetMigrationsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMigrationsResponseSuccess
+
+      interface _GetSlotTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSlotTypeResponse]
+        def name: () -> ::String
+        def description: () -> ::String
+        def enumeration_values: () -> ::Array[Types::EnumerationValue]
+        def last_updated_date: () -> ::Time
+        def created_date: () -> ::Time
+        def version: () -> ::String
+        def checksum: () -> ::String
+        def value_selection_strategy: () -> ("ORIGINAL_VALUE" | "TOP_RESOLUTION")
+        def parent_slot_type_signature: () -> ::String
+        def slot_type_configurations: () -> ::Array[Types::SlotTypeConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#get_slot_type-instance_method
+      def get_slot_type: (
+                           name: ::String,
+                           version: ::String
+                         ) -> _GetSlotTypeResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSlotTypeResponseSuccess
+
+      interface _GetSlotTypeVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSlotTypeVersionsResponse]
+        def slot_types: () -> ::Array[Types::SlotTypeMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#get_slot_type_versions-instance_method
+      def get_slot_type_versions: (
+                                    name: ::String,
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _GetSlotTypeVersionsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSlotTypeVersionsResponseSuccess
+
+      interface _GetSlotTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSlotTypesResponse]
+        def slot_types: () -> ::Array[Types::SlotTypeMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#get_slot_types-instance_method
+      def get_slot_types: (
+                            ?next_token: ::String,
+                            ?max_results: ::Integer,
+                            ?name_contains: ::String
+                          ) -> _GetSlotTypesResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSlotTypesResponseSuccess
+
+      interface _GetUtterancesViewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUtterancesViewResponse]
+        def bot_name: () -> ::String
+        def utterances: () -> ::Array[Types::UtteranceList]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#get_utterances_view-instance_method
+      def get_utterances_view: (
+                                 bot_name: ::String,
+                                 bot_versions: Array[::String],
+                                 status_type: ("Detected" | "Missed")
+                               ) -> _GetUtterancesViewResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUtterancesViewResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutBotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutBotResponse]
+        def name: () -> ::String
+        def description: () -> ::String
+        def intents: () -> ::Array[Types::Intent]
+        def enable_model_improvements: () -> bool
+        def nlu_intent_confidence_threshold: () -> ::Float
+        def clarification_prompt: () -> Types::Prompt
+        def abort_statement: () -> Types::Statement
+        def status: () -> ("BUILDING" | "READY" | "READY_BASIC_TESTING" | "FAILED" | "NOT_BUILT")
+        def failure_reason: () -> ::String
+        def last_updated_date: () -> ::Time
+        def created_date: () -> ::Time
+        def idle_session_ttl_in_seconds: () -> ::Integer
+        def voice_id: () -> ::String
+        def checksum: () -> ::String
+        def version: () -> ::String
+        def locale: () -> ("de-DE" | "en-AU" | "en-GB" | "en-IN" | "en-US" | "es-419" | "es-ES" | "es-US" | "fr-FR" | "fr-CA" | "it-IT" | "ja-JP" | "ko-KR")
+        def child_directed: () -> bool
+        def create_version: () -> bool
+        def detect_sentiment: () -> bool
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#put_bot-instance_method
+      def put_bot: (
+                     name: ::String,
+                     ?description: ::String,
+                     ?intents: Array[
+                       {
+                         intent_name: ::String,
+                         intent_version: ::String
+                       },
+                     ],
+                     ?enable_model_improvements: bool,
+                     ?nlu_intent_confidence_threshold: ::Float,
+                     ?clarification_prompt: {
+                       messages: Array[
+                         {
+                           content_type: ("PlainText" | "SSML" | "CustomPayload"),
+                           content: ::String,
+                           group_number: ::Integer?
+                         },
+                       ],
+                       max_attempts: ::Integer,
+                       response_card: ::String?
+                     },
+                     ?abort_statement: {
+                       messages: Array[
+                         {
+                           content_type: ("PlainText" | "SSML" | "CustomPayload"),
+                           content: ::String,
+                           group_number: ::Integer?
+                         },
+                       ],
+                       response_card: ::String?
+                     },
+                     ?idle_session_ttl_in_seconds: ::Integer,
+                     ?voice_id: ::String,
+                     ?checksum: ::String,
+                     ?process_behavior: ("SAVE" | "BUILD"),
+                     locale: ("de-DE" | "en-AU" | "en-GB" | "en-IN" | "en-US" | "es-419" | "es-ES" | "es-US" | "fr-FR" | "fr-CA" | "it-IT" | "ja-JP" | "ko-KR"),
+                     child_directed: bool,
+                     ?detect_sentiment: bool,
+                     ?create_version: bool,
+                     ?tags: Array[
+                       {
+                         key: ::String,
+                         value: ::String
+                       },
+                     ]
+                   ) -> _PutBotResponseSuccess
+                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutBotResponseSuccess
+
+      interface _PutBotAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutBotAliasResponse]
+        def name: () -> ::String
+        def description: () -> ::String
+        def bot_version: () -> ::String
+        def bot_name: () -> ::String
+        def last_updated_date: () -> ::Time
+        def created_date: () -> ::Time
+        def checksum: () -> ::String
+        def conversation_logs: () -> Types::ConversationLogsResponse
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#put_bot_alias-instance_method
+      def put_bot_alias: (
+                           name: ::String,
+                           ?description: ::String,
+                           bot_version: ::String,
+                           bot_name: ::String,
+                           ?checksum: ::String,
+                           ?conversation_logs: {
+                             log_settings: Array[
+                               {
+                                 log_type: ("AUDIO" | "TEXT"),
+                                 destination: ("CLOUDWATCH_LOGS" | "S3"),
+                                 kms_key_arn: ::String?,
+                                 resource_arn: ::String
+                               },
+                             ],
+                             iam_role_arn: ::String
+                           },
+                           ?tags: Array[
+                             {
+                               key: ::String,
+                               value: ::String
+                             },
+                           ]
+                         ) -> _PutBotAliasResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutBotAliasResponseSuccess
+
+      interface _PutIntentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutIntentResponse]
+        def name: () -> ::String
+        def description: () -> ::String
+        def slots: () -> ::Array[Types::Slot]
+        def sample_utterances: () -> ::Array[::String]
+        def confirmation_prompt: () -> Types::Prompt
+        def rejection_statement: () -> Types::Statement
+        def follow_up_prompt: () -> Types::FollowUpPrompt
+        def conclusion_statement: () -> Types::Statement
+        def dialog_code_hook: () -> Types::CodeHook
+        def fulfillment_activity: () -> Types::FulfillmentActivity
+        def parent_intent_signature: () -> ::String
+        def last_updated_date: () -> ::Time
+        def created_date: () -> ::Time
+        def version: () -> ::String
+        def checksum: () -> ::String
+        def create_version: () -> bool
+        def kendra_configuration: () -> Types::KendraConfiguration
+        def input_contexts: () -> ::Array[Types::InputContext]
+        def output_contexts: () -> ::Array[Types::OutputContext]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#put_intent-instance_method
+      def put_intent: (
+                        name: ::String,
+                        ?description: ::String,
+                        ?slots: Array[
+                          {
+                            name: ::String,
+                            description: ::String?,
+                            slot_constraint: ("Required" | "Optional"),
+                            slot_type: ::String?,
+                            slot_type_version: ::String?,
+                            value_elicitation_prompt: {
+                              messages: Array[
+                                {
+                                  content_type: ("PlainText" | "SSML" | "CustomPayload"),
+                                  content: ::String,
+                                  group_number: ::Integer?
+                                },
+                              ],
+                              max_attempts: ::Integer,
+                              response_card: ::String?
+                            }?,
+                            priority: ::Integer?,
+                            sample_utterances: Array[::String]?,
+                            response_card: ::String?,
+                            obfuscation_setting: ("NONE" | "DEFAULT_OBFUSCATION")?,
+                            default_value_spec: {
+                              default_value_list: Array[
+                                {
+                                  default_value: ::String
+                                },
+                              ]
+                            }?
+                          },
+                        ],
+                        ?sample_utterances: Array[::String],
+                        ?confirmation_prompt: {
+                          messages: Array[
+                            {
+                              content_type: ("PlainText" | "SSML" | "CustomPayload"),
+                              content: ::String,
+                              group_number: ::Integer?
+                            },
+                          ],
+                          max_attempts: ::Integer,
+                          response_card: ::String?
+                        },
+                        ?rejection_statement: {
+                          messages: Array[
+                            {
+                              content_type: ("PlainText" | "SSML" | "CustomPayload"),
+                              content: ::String,
+                              group_number: ::Integer?
+                            },
+                          ],
+                          response_card: ::String?
+                        },
+                        ?follow_up_prompt: {
+                          prompt: {
+                            messages: Array[
+                              {
+                                content_type: ("PlainText" | "SSML" | "CustomPayload"),
+                                content: ::String,
+                                group_number: ::Integer?
+                              },
+                            ],
+                            max_attempts: ::Integer,
+                            response_card: ::String?
+                          },
+                          rejection_statement: {
+                            messages: Array[
+                              {
+                                content_type: ("PlainText" | "SSML" | "CustomPayload"),
+                                content: ::String,
+                                group_number: ::Integer?
+                              },
+                            ],
+                            response_card: ::String?
+                          }
+                        },
+                        ?conclusion_statement: {
+                          messages: Array[
+                            {
+                              content_type: ("PlainText" | "SSML" | "CustomPayload"),
+                              content: ::String,
+                              group_number: ::Integer?
+                            },
+                          ],
+                          response_card: ::String?
+                        },
+                        ?dialog_code_hook: {
+                          uri: ::String,
+                          message_version: ::String
+                        },
+                        ?fulfillment_activity: {
+                          type: ("ReturnIntent" | "CodeHook"),
+                          code_hook: {
+                            uri: ::String,
+                            message_version: ::String
+                          }?
+                        },
+                        ?parent_intent_signature: ::String,
+                        ?checksum: ::String,
+                        ?create_version: bool,
+                        ?kendra_configuration: {
+                          kendra_index: ::String,
+                          query_filter_string: ::String?,
+                          role: ::String
+                        },
+                        ?input_contexts: Array[
+                          {
+                            name: ::String
+                          },
+                        ],
+                        ?output_contexts: Array[
+                          {
+                            name: ::String,
+                            time_to_live_in_seconds: ::Integer,
+                            turns_to_live: ::Integer
+                          },
+                        ]
+                      ) -> _PutIntentResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutIntentResponseSuccess
+
+      interface _PutSlotTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutSlotTypeResponse]
+        def name: () -> ::String
+        def description: () -> ::String
+        def enumeration_values: () -> ::Array[Types::EnumerationValue]
+        def last_updated_date: () -> ::Time
+        def created_date: () -> ::Time
+        def version: () -> ::String
+        def checksum: () -> ::String
+        def value_selection_strategy: () -> ("ORIGINAL_VALUE" | "TOP_RESOLUTION")
+        def create_version: () -> bool
+        def parent_slot_type_signature: () -> ::String
+        def slot_type_configurations: () -> ::Array[Types::SlotTypeConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#put_slot_type-instance_method
+      def put_slot_type: (
+                           name: ::String,
+                           ?description: ::String,
+                           ?enumeration_values: Array[
+                             {
+                               value: ::String,
+                               synonyms: Array[::String]?
+                             },
+                           ],
+                           ?checksum: ::String,
+                           ?value_selection_strategy: ("ORIGINAL_VALUE" | "TOP_RESOLUTION"),
+                           ?create_version: bool,
+                           ?parent_slot_type_signature: ::String,
+                           ?slot_type_configurations: Array[
+                             {
+                               regex_configuration: {
+                                 pattern: ::String
+                               }?
+                             },
+                           ]
+                         ) -> _PutSlotTypeResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutSlotTypeResponseSuccess
+
+      interface _StartImportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartImportResponse]
+        def name: () -> ::String
+        def resource_type: () -> ("BOT" | "INTENT" | "SLOT_TYPE")
+        def merge_strategy: () -> ("OVERWRITE_LATEST" | "FAIL_ON_CONFLICT")
+        def import_id: () -> ::String
+        def import_status: () -> ("IN_PROGRESS" | "COMPLETE" | "FAILED")
+        def tags: () -> ::Array[Types::Tag]
+        def created_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#start_import-instance_method
+      def start_import: (
+                          payload: ::String,
+                          resource_type: ("BOT" | "INTENT" | "SLOT_TYPE"),
+                          merge_strategy: ("OVERWRITE_LATEST" | "FAIL_ON_CONFLICT"),
+                          ?tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _StartImportResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartImportResponseSuccess
+
+      interface _StartMigrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMigrationResponse]
+        def v1_bot_name: () -> ::String
+        def v1_bot_version: () -> ::String
+        def v1_bot_locale: () -> ("de-DE" | "en-AU" | "en-GB" | "en-IN" | "en-US" | "es-419" | "es-ES" | "es-US" | "fr-FR" | "fr-CA" | "it-IT" | "ja-JP" | "ko-KR")
+        def v2_bot_id: () -> ::String
+        def v2_bot_role: () -> ::String
+        def migration_id: () -> ::String
+        def migration_strategy: () -> ("CREATE_NEW" | "UPDATE_EXISTING")
+        def migration_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#start_migration-instance_method
+      def start_migration: (
+                             v1_bot_name: ::String,
+                             v1_bot_version: ::String,
+                             v2_bot_name: ::String,
+                             v2_bot_role: ::String,
+                             migration_strategy: ("CREATE_NEW" | "UPDATE_EXISTING")
+                           ) -> _StartMigrationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMigrationResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelBuildingService/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+    end
+  end
+end
+

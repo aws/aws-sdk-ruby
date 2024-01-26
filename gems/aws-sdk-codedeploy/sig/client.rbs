@@ -1,0 +1,984 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CodeDeploy
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#add_tags_to_on_premises_instances-instance_method
+      def add_tags_to_on_premises_instances: (
+                                               tags: Array[
+                                                 {
+                                                   key: ::String?,
+                                                   value: ::String?
+                                                 },
+                                               ],
+                                               instance_names: Array[::String]
+                                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _BatchGetApplicationRevisionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetApplicationRevisionsOutput]
+        def application_name: () -> ::String
+        def error_message: () -> ::String
+        def revisions: () -> ::Array[Types::RevisionInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#batch_get_application_revisions-instance_method
+      def batch_get_application_revisions: (
+                                             application_name: ::String,
+                                             revisions: Array[
+                                               {
+                                                 revision_type: ("S3" | "GitHub" | "String" | "AppSpecContent")?,
+                                                 s3_location: {
+                                                   bucket: ::String?,
+                                                   key: ::String?,
+                                                   bundle_type: ("tar" | "tgz" | "zip" | "YAML" | "JSON")?,
+                                                   version: ::String?,
+                                                   e_tag: ::String?
+                                                 }?,
+                                                 git_hub_location: {
+                                                   repository: ::String?,
+                                                   commit_id: ::String?
+                                                 }?,
+                                                 string: {
+                                                   content: ::String?,
+                                                   sha256: ::String?
+                                                 }?,
+                                                 app_spec_content: {
+                                                   content: ::String?,
+                                                   sha256: ::String?
+                                                 }?
+                                               },
+                                             ]
+                                           ) -> _BatchGetApplicationRevisionsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetApplicationRevisionsResponseSuccess
+
+      interface _BatchGetApplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetApplicationsOutput]
+        def applications_info: () -> ::Array[Types::ApplicationInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#batch_get_applications-instance_method
+      def batch_get_applications: (
+                                    application_names: Array[::String]
+                                  ) -> _BatchGetApplicationsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetApplicationsResponseSuccess
+
+      interface _BatchGetDeploymentGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetDeploymentGroupsOutput]
+        def deployment_groups_info: () -> ::Array[Types::DeploymentGroupInfo]
+        def error_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#batch_get_deployment_groups-instance_method
+      def batch_get_deployment_groups: (
+                                         application_name: ::String,
+                                         deployment_group_names: Array[::String]
+                                       ) -> _BatchGetDeploymentGroupsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetDeploymentGroupsResponseSuccess
+
+      interface _BatchGetDeploymentInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetDeploymentInstancesOutput]
+        def instances_summary: () -> ::Array[Types::InstanceSummary]
+        def error_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#batch_get_deployment_instances-instance_method
+      def batch_get_deployment_instances: (
+                                            deployment_id: ::String,
+                                            instance_ids: Array[::String]
+                                          ) -> _BatchGetDeploymentInstancesResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetDeploymentInstancesResponseSuccess
+
+      interface _BatchGetDeploymentTargetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetDeploymentTargetsOutput]
+        def deployment_targets: () -> ::Array[Types::DeploymentTarget]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#batch_get_deployment_targets-instance_method
+      def batch_get_deployment_targets: (
+                                          deployment_id: ::String,
+                                          target_ids: Array[::String]
+                                        ) -> _BatchGetDeploymentTargetsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetDeploymentTargetsResponseSuccess
+
+      interface _BatchGetDeploymentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetDeploymentsOutput]
+        def deployments_info: () -> ::Array[Types::DeploymentInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#batch_get_deployments-instance_method
+      def batch_get_deployments: (
+                                   deployment_ids: Array[::String]
+                                 ) -> _BatchGetDeploymentsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetDeploymentsResponseSuccess
+
+      interface _BatchGetOnPremisesInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetOnPremisesInstancesOutput]
+        def instance_infos: () -> ::Array[Types::InstanceInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#batch_get_on_premises_instances-instance_method
+      def batch_get_on_premises_instances: (
+                                             instance_names: Array[::String]
+                                           ) -> _BatchGetOnPremisesInstancesResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetOnPremisesInstancesResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#continue_deployment-instance_method
+      def continue_deployment: (
+                                 ?deployment_id: ::String,
+                                 ?deployment_wait_type: ("READY_WAIT" | "TERMINATION_WAIT")
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _CreateApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateApplicationOutput]
+        def application_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#create_application-instance_method
+      def create_application: (
+                                application_name: ::String,
+                                ?compute_platform: ("Server" | "Lambda" | "ECS"),
+                                ?tags: Array[
+                                  {
+                                    key: ::String?,
+                                    value: ::String?
+                                  },
+                                ]
+                              ) -> _CreateApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
+
+      interface _CreateDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDeploymentOutput]
+        def deployment_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#create_deployment-instance_method
+      def create_deployment: (
+                               application_name: ::String,
+                               ?deployment_group_name: ::String,
+                               ?revision: {
+                                 revision_type: ("S3" | "GitHub" | "String" | "AppSpecContent")?,
+                                 s3_location: {
+                                   bucket: ::String?,
+                                   key: ::String?,
+                                   bundle_type: ("tar" | "tgz" | "zip" | "YAML" | "JSON")?,
+                                   version: ::String?,
+                                   e_tag: ::String?
+                                 }?,
+                                 git_hub_location: {
+                                   repository: ::String?,
+                                   commit_id: ::String?
+                                 }?,
+                                 string: {
+                                   content: ::String?,
+                                   sha256: ::String?
+                                 }?,
+                                 app_spec_content: {
+                                   content: ::String?,
+                                   sha256: ::String?
+                                 }?
+                               },
+                               ?deployment_config_name: ::String,
+                               ?description: ::String,
+                               ?ignore_application_stop_failures: bool,
+                               ?target_instances: {
+                                 tag_filters: Array[
+                                   {
+                                     key: ::String?,
+                                     value: ::String?,
+                                     type: ("KEY_ONLY" | "VALUE_ONLY" | "KEY_AND_VALUE")?
+                                   },
+                                 ]?,
+                                 auto_scaling_groups: Array[::String]?,
+                                 ec2_tag_set: {
+                                   ec2_tag_set_list: Array[
+                                     Array[
+                                       {
+                                         key: ::String?,
+                                         value: ::String?,
+                                         type: ("KEY_ONLY" | "VALUE_ONLY" | "KEY_AND_VALUE")?
+                                       },
+                                     ],
+                                   ]?
+                                 }?
+                               },
+                               ?auto_rollback_configuration: {
+                                 enabled: bool?,
+                                 events: Array[("DEPLOYMENT_FAILURE" | "DEPLOYMENT_STOP_ON_ALARM" | "DEPLOYMENT_STOP_ON_REQUEST")]?
+                               },
+                               ?update_outdated_instances_only: bool,
+                               ?file_exists_behavior: ("DISALLOW" | "OVERWRITE" | "RETAIN"),
+                               ?override_alarm_configuration: {
+                                 enabled: bool?,
+                                 ignore_poll_alarm_failure: bool?,
+                                 alarms: Array[
+                                   {
+                                     name: ::String?
+                                   },
+                                 ]?
+                               }
+                             ) -> _CreateDeploymentResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDeploymentResponseSuccess
+
+      interface _CreateDeploymentConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDeploymentConfigOutput]
+        def deployment_config_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#create_deployment_config-instance_method
+      def create_deployment_config: (
+                                      deployment_config_name: ::String,
+                                      ?minimum_healthy_hosts: {
+                                        type: ("HOST_COUNT" | "FLEET_PERCENT")?,
+                                        value: ::Integer?
+                                      },
+                                      ?traffic_routing_config: {
+                                        type: ("TimeBasedCanary" | "TimeBasedLinear" | "AllAtOnce")?,
+                                        time_based_canary: {
+                                          canary_percentage: ::Integer?,
+                                          canary_interval: ::Integer?
+                                        }?,
+                                        time_based_linear: {
+                                          linear_percentage: ::Integer?,
+                                          linear_interval: ::Integer?
+                                        }?
+                                      },
+                                      ?compute_platform: ("Server" | "Lambda" | "ECS"),
+                                      ?zonal_config: {
+                                        first_zone_monitor_duration_in_seconds: ::Integer?,
+                                        monitor_duration_in_seconds: ::Integer?,
+                                        minimum_healthy_hosts_per_zone: {
+                                          type: ("HOST_COUNT" | "FLEET_PERCENT")?,
+                                          value: ::Integer?
+                                        }?
+                                      }
+                                    ) -> _CreateDeploymentConfigResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDeploymentConfigResponseSuccess
+
+      interface _CreateDeploymentGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDeploymentGroupOutput]
+        def deployment_group_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#create_deployment_group-instance_method
+      def create_deployment_group: (
+                                     application_name: ::String,
+                                     deployment_group_name: ::String,
+                                     ?deployment_config_name: ::String,
+                                     ?ec2_tag_filters: Array[
+                                       {
+                                         key: ::String?,
+                                         value: ::String?,
+                                         type: ("KEY_ONLY" | "VALUE_ONLY" | "KEY_AND_VALUE")?
+                                       },
+                                     ],
+                                     ?on_premises_instance_tag_filters: Array[
+                                       {
+                                         key: ::String?,
+                                         value: ::String?,
+                                         type: ("KEY_ONLY" | "VALUE_ONLY" | "KEY_AND_VALUE")?
+                                       },
+                                     ],
+                                     ?auto_scaling_groups: Array[::String],
+                                     service_role_arn: ::String,
+                                     ?trigger_configurations: Array[
+                                       {
+                                         trigger_name: ::String?,
+                                         trigger_target_arn: ::String?,
+                                         trigger_events: Array[("DeploymentStart" | "DeploymentSuccess" | "DeploymentFailure" | "DeploymentStop" | "DeploymentRollback" | "DeploymentReady" | "InstanceStart" | "InstanceSuccess" | "InstanceFailure" | "InstanceReady")]?
+                                       },
+                                     ],
+                                     ?alarm_configuration: {
+                                       enabled: bool?,
+                                       ignore_poll_alarm_failure: bool?,
+                                       alarms: Array[
+                                         {
+                                           name: ::String?
+                                         },
+                                       ]?
+                                     },
+                                     ?auto_rollback_configuration: {
+                                       enabled: bool?,
+                                       events: Array[("DEPLOYMENT_FAILURE" | "DEPLOYMENT_STOP_ON_ALARM" | "DEPLOYMENT_STOP_ON_REQUEST")]?
+                                     },
+                                     ?outdated_instances_strategy: ("UPDATE" | "IGNORE"),
+                                     ?deployment_style: {
+                                       deployment_type: ("IN_PLACE" | "BLUE_GREEN")?,
+                                       deployment_option: ("WITH_TRAFFIC_CONTROL" | "WITHOUT_TRAFFIC_CONTROL")?
+                                     },
+                                     ?blue_green_deployment_configuration: {
+                                       terminate_blue_instances_on_deployment_success: {
+                                         action: ("TERMINATE" | "KEEP_ALIVE")?,
+                                         termination_wait_time_in_minutes: ::Integer?
+                                       }?,
+                                       deployment_ready_option: {
+                                         action_on_timeout: ("CONTINUE_DEPLOYMENT" | "STOP_DEPLOYMENT")?,
+                                         wait_time_in_minutes: ::Integer?
+                                       }?,
+                                       green_fleet_provisioning_option: {
+                                         action: ("DISCOVER_EXISTING" | "COPY_AUTO_SCALING_GROUP")?
+                                       }?
+                                     },
+                                     ?load_balancer_info: {
+                                       elb_info_list: Array[
+                                         {
+                                           name: ::String?
+                                         },
+                                       ]?,
+                                       target_group_info_list: Array[
+                                         {
+                                           name: ::String?
+                                         },
+                                       ]?,
+                                       target_group_pair_info_list: Array[
+                                         {
+                                           target_groups: Array[
+                                             {
+                                               name: ::String?
+                                             },
+                                           ]?,
+                                           prod_traffic_route: {
+                                             listener_arns: Array[::String]?
+                                           }?,
+                                           test_traffic_route: {
+                                             listener_arns: Array[::String]?
+                                           }?
+                                         },
+                                       ]?
+                                     },
+                                     ?ec2_tag_set: {
+                                       ec2_tag_set_list: Array[
+                                         Array[
+                                           {
+                                             key: ::String?,
+                                             value: ::String?,
+                                             type: ("KEY_ONLY" | "VALUE_ONLY" | "KEY_AND_VALUE")?
+                                           },
+                                         ],
+                                       ]?
+                                     },
+                                     ?ecs_services: Array[
+                                       {
+                                         service_name: ::String?,
+                                         cluster_name: ::String?
+                                       },
+                                     ],
+                                     ?on_premises_tag_set: {
+                                       on_premises_tag_set_list: Array[
+                                         Array[
+                                           {
+                                             key: ::String?,
+                                             value: ::String?,
+                                             type: ("KEY_ONLY" | "VALUE_ONLY" | "KEY_AND_VALUE")?
+                                           },
+                                         ],
+                                       ]?
+                                     },
+                                     ?tags: Array[
+                                       {
+                                         key: ::String?,
+                                         value: ::String?
+                                       },
+                                     ],
+                                     ?termination_hook_enabled: bool
+                                   ) -> _CreateDeploymentGroupResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDeploymentGroupResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#delete_application-instance_method
+      def delete_application: (
+                                application_name: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#delete_deployment_config-instance_method
+      def delete_deployment_config: (
+                                      deployment_config_name: ::String
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteDeploymentGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDeploymentGroupOutput]
+        def hooks_not_cleaned_up: () -> ::Array[Types::AutoScalingGroup]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#delete_deployment_group-instance_method
+      def delete_deployment_group: (
+                                     application_name: ::String,
+                                     deployment_group_name: ::String
+                                   ) -> _DeleteDeploymentGroupResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDeploymentGroupResponseSuccess
+
+      interface _DeleteGitHubAccountTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGitHubAccountTokenOutput]
+        def token_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#delete_git_hub_account_token-instance_method
+      def delete_git_hub_account_token: (
+                                          ?token_name: ::String
+                                        ) -> _DeleteGitHubAccountTokenResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGitHubAccountTokenResponseSuccess
+
+      interface _DeleteResourcesByExternalIdResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourcesByExternalIdOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#delete_resources_by_external_id-instance_method
+      def delete_resources_by_external_id: (
+                                             ?external_id: ::String
+                                           ) -> _DeleteResourcesByExternalIdResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourcesByExternalIdResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#deregister_on_premises_instance-instance_method
+      def deregister_on_premises_instance: (
+                                             instance_name: ::String
+                                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetApplicationOutput]
+        def application: () -> Types::ApplicationInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#get_application-instance_method
+      def get_application: (
+                             application_name: ::String
+                           ) -> _GetApplicationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApplicationResponseSuccess
+
+      interface _GetApplicationRevisionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetApplicationRevisionOutput]
+        def application_name: () -> ::String
+        def revision: () -> Types::RevisionLocation
+        def revision_info: () -> Types::GenericRevisionInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#get_application_revision-instance_method
+      def get_application_revision: (
+                                      application_name: ::String,
+                                      revision: {
+                                        revision_type: ("S3" | "GitHub" | "String" | "AppSpecContent")?,
+                                        s3_location: {
+                                          bucket: ::String?,
+                                          key: ::String?,
+                                          bundle_type: ("tar" | "tgz" | "zip" | "YAML" | "JSON")?,
+                                          version: ::String?,
+                                          e_tag: ::String?
+                                        }?,
+                                        git_hub_location: {
+                                          repository: ::String?,
+                                          commit_id: ::String?
+                                        }?,
+                                        string: {
+                                          content: ::String?,
+                                          sha256: ::String?
+                                        }?,
+                                        app_spec_content: {
+                                          content: ::String?,
+                                          sha256: ::String?
+                                        }?
+                                      }
+                                    ) -> _GetApplicationRevisionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApplicationRevisionResponseSuccess
+
+      interface _GetDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeploymentOutput]
+        def deployment_info: () -> Types::DeploymentInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#get_deployment-instance_method
+      def get_deployment: (
+                            deployment_id: ::String
+                          ) -> _GetDeploymentResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeploymentResponseSuccess
+
+      interface _GetDeploymentConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeploymentConfigOutput]
+        def deployment_config_info: () -> Types::DeploymentConfigInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#get_deployment_config-instance_method
+      def get_deployment_config: (
+                                   deployment_config_name: ::String
+                                 ) -> _GetDeploymentConfigResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeploymentConfigResponseSuccess
+
+      interface _GetDeploymentGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeploymentGroupOutput]
+        def deployment_group_info: () -> Types::DeploymentGroupInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#get_deployment_group-instance_method
+      def get_deployment_group: (
+                                  application_name: ::String,
+                                  deployment_group_name: ::String
+                                ) -> _GetDeploymentGroupResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeploymentGroupResponseSuccess
+
+      interface _GetDeploymentInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeploymentInstanceOutput]
+        def instance_summary: () -> Types::InstanceSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#get_deployment_instance-instance_method
+      def get_deployment_instance: (
+                                     deployment_id: ::String,
+                                     instance_id: ::String
+                                   ) -> _GetDeploymentInstanceResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeploymentInstanceResponseSuccess
+
+      interface _GetDeploymentTargetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeploymentTargetOutput]
+        def deployment_target: () -> Types::DeploymentTarget
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#get_deployment_target-instance_method
+      def get_deployment_target: (
+                                   deployment_id: ::String,
+                                   target_id: ::String
+                                 ) -> _GetDeploymentTargetResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeploymentTargetResponseSuccess
+
+      interface _GetOnPremisesInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOnPremisesInstanceOutput]
+        def instance_info: () -> Types::InstanceInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#get_on_premises_instance-instance_method
+      def get_on_premises_instance: (
+                                      instance_name: ::String
+                                    ) -> _GetOnPremisesInstanceResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOnPremisesInstanceResponseSuccess
+
+      interface _ListApplicationRevisionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationRevisionsOutput]
+        def revisions: () -> ::Array[Types::RevisionLocation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#list_application_revisions-instance_method
+      def list_application_revisions: (
+                                        application_name: ::String,
+                                        ?sort_by: ("registerTime" | "firstUsedTime" | "lastUsedTime"),
+                                        ?sort_order: ("ascending" | "descending"),
+                                        ?s3_bucket: ::String,
+                                        ?s3_key_prefix: ::String,
+                                        ?deployed: ("include" | "exclude" | "ignore"),
+                                        ?next_token: ::String
+                                      ) -> _ListApplicationRevisionsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationRevisionsResponseSuccess
+
+      interface _ListApplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationsOutput]
+        def applications: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#list_applications-instance_method
+      def list_applications: (
+                               ?next_token: ::String
+                             ) -> _ListApplicationsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationsResponseSuccess
+
+      interface _ListDeploymentConfigsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDeploymentConfigsOutput]
+        def deployment_configs_list: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#list_deployment_configs-instance_method
+      def list_deployment_configs: (
+                                     ?next_token: ::String
+                                   ) -> _ListDeploymentConfigsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeploymentConfigsResponseSuccess
+
+      interface _ListDeploymentGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDeploymentGroupsOutput]
+        def application_name: () -> ::String
+        def deployment_groups: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#list_deployment_groups-instance_method
+      def list_deployment_groups: (
+                                    application_name: ::String,
+                                    ?next_token: ::String
+                                  ) -> _ListDeploymentGroupsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeploymentGroupsResponseSuccess
+
+      interface _ListDeploymentInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDeploymentInstancesOutput]
+        def instances_list: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#list_deployment_instances-instance_method
+      def list_deployment_instances: (
+                                       deployment_id: ::String,
+                                       ?next_token: ::String,
+                                       ?instance_status_filter: Array[("Pending" | "InProgress" | "Succeeded" | "Failed" | "Skipped" | "Unknown" | "Ready")],
+                                       ?instance_type_filter: Array[("Blue" | "Green")]
+                                     ) -> _ListDeploymentInstancesResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeploymentInstancesResponseSuccess
+
+      interface _ListDeploymentTargetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDeploymentTargetsOutput]
+        def target_ids: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#list_deployment_targets-instance_method
+      def list_deployment_targets: (
+                                     deployment_id: ::String,
+                                     ?next_token: ::String,
+                                     ?target_filters: Hash[("TargetStatus" | "ServerInstanceLabel"), Array[::String]]
+                                   ) -> _ListDeploymentTargetsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeploymentTargetsResponseSuccess
+
+      interface _ListDeploymentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDeploymentsOutput]
+        def deployments: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#list_deployments-instance_method
+      def list_deployments: (
+                              ?application_name: ::String,
+                              ?deployment_group_name: ::String,
+                              ?external_id: ::String,
+                              ?include_only_statuses: Array[("Created" | "Queued" | "InProgress" | "Baking" | "Succeeded" | "Failed" | "Stopped" | "Ready")],
+                              ?create_time_range: {
+                                start: ::Time?,
+                                end: ::Time?
+                              },
+                              ?next_token: ::String
+                            ) -> _ListDeploymentsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeploymentsResponseSuccess
+
+      interface _ListGitHubAccountTokenNamesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGitHubAccountTokenNamesOutput]
+        def token_name_list: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#list_git_hub_account_token_names-instance_method
+      def list_git_hub_account_token_names: (
+                                              ?next_token: ::String
+                                            ) -> _ListGitHubAccountTokenNamesResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGitHubAccountTokenNamesResponseSuccess
+
+      interface _ListOnPremisesInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOnPremisesInstancesOutput]
+        def instance_names: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#list_on_premises_instances-instance_method
+      def list_on_premises_instances: (
+                                        ?registration_status: ("Registered" | "Deregistered"),
+                                        ?tag_filters: Array[
+                                          {
+                                            key: ::String?,
+                                            value: ::String?,
+                                            type: ("KEY_ONLY" | "VALUE_ONLY" | "KEY_AND_VALUE")?
+                                          },
+                                        ],
+                                        ?next_token: ::String
+                                      ) -> _ListOnPremisesInstancesResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOnPremisesInstancesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Array[Types::Tag]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String,
+                                    ?next_token: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutLifecycleEventHookExecutionStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutLifecycleEventHookExecutionStatusOutput]
+        def lifecycle_event_hook_execution_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#put_lifecycle_event_hook_execution_status-instance_method
+      def put_lifecycle_event_hook_execution_status: (
+                                                       ?deployment_id: ::String,
+                                                       ?lifecycle_event_hook_execution_id: ::String,
+                                                       ?status: ("Pending" | "InProgress" | "Succeeded" | "Failed" | "Skipped" | "Unknown")
+                                                     ) -> _PutLifecycleEventHookExecutionStatusResponseSuccess
+                                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutLifecycleEventHookExecutionStatusResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#register_application_revision-instance_method
+      def register_application_revision: (
+                                           application_name: ::String,
+                                           ?description: ::String,
+                                           revision: {
+                                             revision_type: ("S3" | "GitHub" | "String" | "AppSpecContent")?,
+                                             s3_location: {
+                                               bucket: ::String?,
+                                               key: ::String?,
+                                               bundle_type: ("tar" | "tgz" | "zip" | "YAML" | "JSON")?,
+                                               version: ::String?,
+                                               e_tag: ::String?
+                                             }?,
+                                             git_hub_location: {
+                                               repository: ::String?,
+                                               commit_id: ::String?
+                                             }?,
+                                             string: {
+                                               content: ::String?,
+                                               sha256: ::String?
+                                             }?,
+                                             app_spec_content: {
+                                               content: ::String?,
+                                               sha256: ::String?
+                                             }?
+                                           }
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#register_on_premises_instance-instance_method
+      def register_on_premises_instance: (
+                                           instance_name: ::String,
+                                           ?iam_session_arn: ::String,
+                                           ?iam_user_arn: ::String
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#remove_tags_from_on_premises_instances-instance_method
+      def remove_tags_from_on_premises_instances: (
+                                                    tags: Array[
+                                                      {
+                                                        key: ::String?,
+                                                        value: ::String?
+                                                      },
+                                                    ],
+                                                    instance_names: Array[::String]
+                                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#skip_wait_time_for_instance_termination-instance_method
+      def skip_wait_time_for_instance_termination: (
+                                                     ?deployment_id: ::String
+                                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _StopDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopDeploymentOutput]
+        def status: () -> ("Pending" | "Succeeded")
+        def status_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#stop_deployment-instance_method
+      def stop_deployment: (
+                             deployment_id: ::String,
+                             ?auto_rollback_enabled: bool
+                           ) -> _StopDeploymentResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopDeploymentResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String?,
+                              value: ::String?
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#update_application-instance_method
+      def update_application: (
+                                ?application_name: ::String,
+                                ?new_application_name: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateDeploymentGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDeploymentGroupOutput]
+        def hooks_not_cleaned_up: () -> ::Array[Types::AutoScalingGroup]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#update_deployment_group-instance_method
+      def update_deployment_group: (
+                                     application_name: ::String,
+                                     current_deployment_group_name: ::String,
+                                     ?new_deployment_group_name: ::String,
+                                     ?deployment_config_name: ::String,
+                                     ?ec2_tag_filters: Array[
+                                       {
+                                         key: ::String?,
+                                         value: ::String?,
+                                         type: ("KEY_ONLY" | "VALUE_ONLY" | "KEY_AND_VALUE")?
+                                       },
+                                     ],
+                                     ?on_premises_instance_tag_filters: Array[
+                                       {
+                                         key: ::String?,
+                                         value: ::String?,
+                                         type: ("KEY_ONLY" | "VALUE_ONLY" | "KEY_AND_VALUE")?
+                                       },
+                                     ],
+                                     ?auto_scaling_groups: Array[::String],
+                                     ?service_role_arn: ::String,
+                                     ?trigger_configurations: Array[
+                                       {
+                                         trigger_name: ::String?,
+                                         trigger_target_arn: ::String?,
+                                         trigger_events: Array[("DeploymentStart" | "DeploymentSuccess" | "DeploymentFailure" | "DeploymentStop" | "DeploymentRollback" | "DeploymentReady" | "InstanceStart" | "InstanceSuccess" | "InstanceFailure" | "InstanceReady")]?
+                                       },
+                                     ],
+                                     ?alarm_configuration: {
+                                       enabled: bool?,
+                                       ignore_poll_alarm_failure: bool?,
+                                       alarms: Array[
+                                         {
+                                           name: ::String?
+                                         },
+                                       ]?
+                                     },
+                                     ?auto_rollback_configuration: {
+                                       enabled: bool?,
+                                       events: Array[("DEPLOYMENT_FAILURE" | "DEPLOYMENT_STOP_ON_ALARM" | "DEPLOYMENT_STOP_ON_REQUEST")]?
+                                     },
+                                     ?outdated_instances_strategy: ("UPDATE" | "IGNORE"),
+                                     ?deployment_style: {
+                                       deployment_type: ("IN_PLACE" | "BLUE_GREEN")?,
+                                       deployment_option: ("WITH_TRAFFIC_CONTROL" | "WITHOUT_TRAFFIC_CONTROL")?
+                                     },
+                                     ?blue_green_deployment_configuration: {
+                                       terminate_blue_instances_on_deployment_success: {
+                                         action: ("TERMINATE" | "KEEP_ALIVE")?,
+                                         termination_wait_time_in_minutes: ::Integer?
+                                       }?,
+                                       deployment_ready_option: {
+                                         action_on_timeout: ("CONTINUE_DEPLOYMENT" | "STOP_DEPLOYMENT")?,
+                                         wait_time_in_minutes: ::Integer?
+                                       }?,
+                                       green_fleet_provisioning_option: {
+                                         action: ("DISCOVER_EXISTING" | "COPY_AUTO_SCALING_GROUP")?
+                                       }?
+                                     },
+                                     ?load_balancer_info: {
+                                       elb_info_list: Array[
+                                         {
+                                           name: ::String?
+                                         },
+                                       ]?,
+                                       target_group_info_list: Array[
+                                         {
+                                           name: ::String?
+                                         },
+                                       ]?,
+                                       target_group_pair_info_list: Array[
+                                         {
+                                           target_groups: Array[
+                                             {
+                                               name: ::String?
+                                             },
+                                           ]?,
+                                           prod_traffic_route: {
+                                             listener_arns: Array[::String]?
+                                           }?,
+                                           test_traffic_route: {
+                                             listener_arns: Array[::String]?
+                                           }?
+                                         },
+                                       ]?
+                                     },
+                                     ?ec2_tag_set: {
+                                       ec2_tag_set_list: Array[
+                                         Array[
+                                           {
+                                             key: ::String?,
+                                             value: ::String?,
+                                             type: ("KEY_ONLY" | "VALUE_ONLY" | "KEY_AND_VALUE")?
+                                           },
+                                         ],
+                                       ]?
+                                     },
+                                     ?ecs_services: Array[
+                                       {
+                                         service_name: ::String?,
+                                         cluster_name: ::String?
+                                       },
+                                     ],
+                                     ?on_premises_tag_set: {
+                                       on_premises_tag_set_list: Array[
+                                         Array[
+                                           {
+                                             key: ::String?,
+                                             value: ::String?,
+                                             type: ("KEY_ONLY" | "VALUE_ONLY" | "KEY_AND_VALUE")?
+                                           },
+                                         ],
+                                       ]?
+                                     },
+                                     ?termination_hook_enabled: bool
+                                   ) -> _UpdateDeploymentGroupResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDeploymentGroupResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#wait_until-instance_method
+      def wait_until: (:deployment_successful waiter_name, 
+                    deployment_id: ::String
+                  ) -> Client::_GetDeploymentResponseSuccess
+                    | (:deployment_successful waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetDeploymentResponseSuccess
+    end
+  end
+end
+

@@ -1,0 +1,164 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DirectoryService
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AccessDeniedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class AuthenticationFailedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class CertificateAlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class CertificateDoesNotExistException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class CertificateInUseException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class CertificateLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class ClientException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class DirectoryAlreadyInRegionException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class DirectoryAlreadySharedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class DirectoryDoesNotExistException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class DirectoryInDesiredStateException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class DirectoryLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class DirectoryNotSharedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class DirectoryUnavailableException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class DomainControllerLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class EntityAlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class EntityDoesNotExistException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class IncompatibleSettingsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class InsufficientPermissionsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class InvalidCertificateException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class InvalidClientAuthStatusException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class InvalidLDAPSStatusException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class InvalidParameterException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class InvalidPasswordException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class InvalidTargetException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class IpRouteLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class NoAvailableCertificateException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class OrganizationsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class RegionLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class ServiceException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class ShareLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class SnapshotLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class TagLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class UnsupportedOperationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class UnsupportedSettingsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class UserDoesNotExistException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+    end
+  end
+end

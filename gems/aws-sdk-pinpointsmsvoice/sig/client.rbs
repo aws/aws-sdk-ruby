@@ -1,0 +1,205 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module PinpointSMSVoice
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoice/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateConfigurationSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConfigurationSetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoice/Client.html#create_configuration_set-instance_method
+      def create_configuration_set: (
+                                      ?configuration_set_name: ::String
+                                    ) -> _CreateConfigurationSetResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfigurationSetResponseSuccess
+
+      interface _CreateConfigurationSetEventDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConfigurationSetEventDestinationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoice/Client.html#create_configuration_set_event_destination-instance_method
+      def create_configuration_set_event_destination: (
+                                                        configuration_set_name: ::String,
+                                                        ?event_destination: {
+                                                          cloud_watch_logs_destination: {
+                                                            iam_role_arn: ::String?,
+                                                            log_group_arn: ::String?
+                                                          }?,
+                                                          enabled: bool?,
+                                                          kinesis_firehose_destination: {
+                                                            delivery_stream_arn: ::String?,
+                                                            iam_role_arn: ::String?
+                                                          }?,
+                                                          matching_event_types: Array[("INITIATED_CALL" | "RINGING" | "ANSWERED" | "COMPLETED_CALL" | "BUSY" | "FAILED" | "NO_ANSWER")]?,
+                                                          sns_destination: {
+                                                            topic_arn: ::String?
+                                                          }?
+                                                        },
+                                                        ?event_destination_name: ::String
+                                                      ) -> _CreateConfigurationSetEventDestinationResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfigurationSetEventDestinationResponseSuccess
+
+      interface _DeleteConfigurationSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConfigurationSetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoice/Client.html#delete_configuration_set-instance_method
+      def delete_configuration_set: (
+                                      configuration_set_name: ::String
+                                    ) -> _DeleteConfigurationSetResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConfigurationSetResponseSuccess
+
+      interface _DeleteConfigurationSetEventDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConfigurationSetEventDestinationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoice/Client.html#delete_configuration_set_event_destination-instance_method
+      def delete_configuration_set_event_destination: (
+                                                        configuration_set_name: ::String,
+                                                        event_destination_name: ::String
+                                                      ) -> _DeleteConfigurationSetEventDestinationResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConfigurationSetEventDestinationResponseSuccess
+
+      interface _GetConfigurationSetEventDestinationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConfigurationSetEventDestinationsResponse]
+        def event_destinations: () -> ::Array[Types::EventDestination]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoice/Client.html#get_configuration_set_event_destinations-instance_method
+      def get_configuration_set_event_destinations: (
+                                                      configuration_set_name: ::String
+                                                    ) -> _GetConfigurationSetEventDestinationsResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConfigurationSetEventDestinationsResponseSuccess
+
+      interface _ListConfigurationSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConfigurationSetsResponse]
+        def configuration_sets: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoice/Client.html#list_configuration_sets-instance_method
+      def list_configuration_sets: (
+                                     ?next_token: ::String,
+                                     ?page_size: ::String
+                                   ) -> _ListConfigurationSetsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConfigurationSetsResponseSuccess
+
+      interface _SendVoiceMessageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendVoiceMessageResponse]
+        def message_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoice/Client.html#send_voice_message-instance_method
+      def send_voice_message: (
+                                ?caller_id: ::String,
+                                ?configuration_set_name: ::String,
+                                ?content: {
+                                  call_instructions_message: {
+                                    text: ::String?
+                                  }?,
+                                  plain_text_message: {
+                                    language_code: ::String?,
+                                    text: ::String?,
+                                    voice_id: ::String?
+                                  }?,
+                                  ssml_message: {
+                                    language_code: ::String?,
+                                    text: ::String?,
+                                    voice_id: ::String?
+                                  }?
+                                },
+                                ?destination_phone_number: ::String,
+                                ?origination_phone_number: ::String
+                              ) -> _SendVoiceMessageResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendVoiceMessageResponseSuccess
+
+      interface _UpdateConfigurationSetEventDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConfigurationSetEventDestinationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoice/Client.html#update_configuration_set_event_destination-instance_method
+      def update_configuration_set_event_destination: (
+                                                        configuration_set_name: ::String,
+                                                        ?event_destination: {
+                                                          cloud_watch_logs_destination: {
+                                                            iam_role_arn: ::String?,
+                                                            log_group_arn: ::String?
+                                                          }?,
+                                                          enabled: bool?,
+                                                          kinesis_firehose_destination: {
+                                                            delivery_stream_arn: ::String?,
+                                                            iam_role_arn: ::String?
+                                                          }?,
+                                                          matching_event_types: Array[("INITIATED_CALL" | "RINGING" | "ANSWERED" | "COMPLETED_CALL" | "BUSY" | "FAILED" | "NO_ANSWER")]?,
+                                                          sns_destination: {
+                                                            topic_arn: ::String?
+                                                          }?
+                                                        },
+                                                        event_destination_name: ::String
+                                                      ) -> _UpdateConfigurationSetEventDestinationResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfigurationSetEventDestinationResponseSuccess
+    end
+  end
+end
+

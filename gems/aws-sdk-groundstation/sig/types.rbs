@@ -1,0 +1,877 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::GroundStation
+  module Types
+
+    class AgentDetails
+      attr_accessor agent_cpu_cores: ::Array[::Integer]
+      attr_accessor agent_version: ::String
+      attr_accessor component_versions: ::Array[Types::ComponentVersion]
+      attr_accessor instance_id: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor reserved_cpu_cores: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class AggregateStatus
+      attr_accessor signature_map: ::Hash[::String, bool]
+      attr_accessor status: ("SUCCESS" | "FAILED" | "ACTIVE" | "INACTIVE")
+      SENSITIVE: []
+    end
+
+    class AntennaDemodDecodeDetails
+      attr_accessor output_node: ::String
+      SENSITIVE: []
+    end
+
+    class AntennaDownlinkConfig
+      attr_accessor spectrum_config: Types::SpectrumConfig
+      SENSITIVE: []
+    end
+
+    class AntennaDownlinkDemodDecodeConfig
+      attr_accessor decode_config: Types::DecodeConfig
+      attr_accessor demodulation_config: Types::DemodulationConfig
+      attr_accessor spectrum_config: Types::SpectrumConfig
+      SENSITIVE: []
+    end
+
+    class AntennaUplinkConfig
+      attr_accessor spectrum_config: Types::UplinkSpectrumConfig
+      attr_accessor target_eirp: Types::Eirp
+      attr_accessor transmit_disabled: bool
+      SENSITIVE: []
+    end
+
+    class AwsGroundStationAgentEndpoint
+      attr_accessor agent_status: ("SUCCESS" | "FAILED" | "ACTIVE" | "INACTIVE")
+      attr_accessor audit_results: ("HEALTHY" | "UNHEALTHY")
+      attr_accessor egress_address: Types::ConnectionDetails
+      attr_accessor ingress_address: Types::RangedConnectionDetails
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CancelContactRequest
+      attr_accessor contact_id: ::String
+      SENSITIVE: []
+    end
+
+    class ComponentStatusData
+      attr_accessor bytes_received: ::Integer
+      attr_accessor bytes_sent: ::Integer
+      attr_accessor capability_arn: ::String
+      attr_accessor component_type: ::String
+      attr_accessor dataflow_id: ::String
+      attr_accessor packets_dropped: ::Integer
+      attr_accessor status: ("SUCCESS" | "FAILED" | "ACTIVE" | "INACTIVE")
+      SENSITIVE: []
+    end
+
+    class ComponentVersion
+      attr_accessor component_type: ::String
+      attr_accessor versions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ConfigDetails
+      attr_accessor antenna_demod_decode_details: Types::AntennaDemodDecodeDetails
+      attr_accessor endpoint_details: Types::EndpointDetails
+      attr_accessor s3_recording_details: Types::S3RecordingDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AntennaDemodDecodeDetails < ConfigDetails
+      end
+      class EndpointDetails < ConfigDetails
+      end
+      class S3RecordingDetails < ConfigDetails
+      end
+      class Unknown < ConfigDetails
+      end
+    end
+
+    class ConfigIdResponse
+      attr_accessor config_arn: ::String
+      attr_accessor config_id: ::String
+      attr_accessor config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "antenna-uplink" | "dataflow-endpoint" | "tracking" | "uplink-echo" | "s3-recording")
+      SENSITIVE: []
+    end
+
+    class ConfigListItem
+      attr_accessor config_arn: ::String
+      attr_accessor config_id: ::String
+      attr_accessor config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "antenna-uplink" | "dataflow-endpoint" | "tracking" | "uplink-echo" | "s3-recording")
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigTypeData
+      attr_accessor antenna_downlink_config: Types::AntennaDownlinkConfig
+      attr_accessor antenna_downlink_demod_decode_config: Types::AntennaDownlinkDemodDecodeConfig
+      attr_accessor antenna_uplink_config: Types::AntennaUplinkConfig
+      attr_accessor dataflow_endpoint_config: Types::DataflowEndpointConfig
+      attr_accessor s3_recording_config: Types::S3RecordingConfig
+      attr_accessor tracking_config: Types::TrackingConfig
+      attr_accessor uplink_echo_config: Types::UplinkEchoConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AntennaDownlinkConfig < ConfigTypeData
+      end
+      class AntennaDownlinkDemodDecodeConfig < ConfigTypeData
+      end
+      class AntennaUplinkConfig < ConfigTypeData
+      end
+      class DataflowEndpointConfig < ConfigTypeData
+      end
+      class S3RecordingConfig < ConfigTypeData
+      end
+      class TrackingConfig < ConfigTypeData
+      end
+      class UplinkEchoConfig < ConfigTypeData
+      end
+      class Unknown < ConfigTypeData
+      end
+    end
+
+    class ConnectionDetails
+      attr_accessor mtu: ::Integer
+      attr_accessor socket_address: Types::SocketAddress
+      SENSITIVE: []
+    end
+
+    class ContactData
+      attr_accessor contact_id: ::String
+      attr_accessor contact_status: ("AVAILABLE" | "AWS_CANCELLED" | "AWS_FAILED" | "CANCELLED" | "CANCELLING" | "COMPLETED" | "FAILED" | "FAILED_TO_SCHEDULE" | "PASS" | "POSTPASS" | "PREPASS" | "SCHEDULED" | "SCHEDULING")
+      attr_accessor end_time: ::Time
+      attr_accessor error_message: ::String
+      attr_accessor ground_station: ::String
+      attr_accessor maximum_elevation: Types::Elevation
+      attr_accessor mission_profile_arn: ::String
+      attr_accessor post_pass_end_time: ::Time
+      attr_accessor pre_pass_start_time: ::Time
+      attr_accessor region: ::String
+      attr_accessor satellite_arn: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ContactIdResponse
+      attr_accessor contact_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConfigRequest
+      attr_accessor config_data: Types::ConfigTypeData
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDataflowEndpointGroupRequest
+      attr_accessor contact_post_pass_duration_seconds: ::Integer
+      attr_accessor contact_pre_pass_duration_seconds: ::Integer
+      attr_accessor endpoint_details: ::Array[Types::EndpointDetails]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateEphemerisRequest
+      attr_accessor enabled: bool
+      attr_accessor ephemeris: Types::EphemerisData
+      attr_accessor expiration_time: ::Time
+      attr_accessor kms_key_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor satellite_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateMissionProfileRequest
+      attr_accessor contact_post_pass_duration_seconds: ::Integer
+      attr_accessor contact_pre_pass_duration_seconds: ::Integer
+      attr_accessor dataflow_edges: ::Array[::Array[::String]]
+      attr_accessor minimum_viable_contact_duration_seconds: ::Integer
+      attr_accessor name: ::String
+      attr_accessor streams_kms_key: Types::KmsKey
+      attr_accessor streams_kms_role: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor tracking_config_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DataflowDetail
+      attr_accessor destination: Types::Destination
+      attr_accessor error_message: ::String
+      attr_accessor source: Types::Source
+      SENSITIVE: []
+    end
+
+    class DataflowEndpoint
+      attr_accessor address: Types::SocketAddress
+      attr_accessor mtu: ::Integer
+      attr_accessor name: ::String
+      attr_accessor status: ("created" | "creating" | "deleted" | "deleting" | "failed")
+      SENSITIVE: []
+    end
+
+    class DataflowEndpointConfig
+      attr_accessor dataflow_endpoint_name: ::String
+      attr_accessor dataflow_endpoint_region: ::String
+      SENSITIVE: []
+    end
+
+    class DataflowEndpointGroupIdResponse
+      attr_accessor dataflow_endpoint_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class DataflowEndpointListItem
+      attr_accessor dataflow_endpoint_group_arn: ::String
+      attr_accessor dataflow_endpoint_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class DecodeConfig
+      attr_accessor unvalidated_json: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConfigRequest
+      attr_accessor config_id: ::String
+      attr_accessor config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "antenna-uplink" | "dataflow-endpoint" | "tracking" | "uplink-echo" | "s3-recording")
+      SENSITIVE: []
+    end
+
+    class DeleteDataflowEndpointGroupRequest
+      attr_accessor dataflow_endpoint_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEphemerisRequest
+      attr_accessor ephemeris_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMissionProfileRequest
+      attr_accessor mission_profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class DemodulationConfig
+      attr_accessor unvalidated_json: ::String
+      SENSITIVE: []
+    end
+
+    class DependencyException
+      attr_accessor message: ::String
+      attr_accessor parameter_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeContactRequest
+      attr_accessor contact_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeContactResponse
+      attr_accessor contact_id: ::String
+      attr_accessor contact_status: ("AVAILABLE" | "AWS_CANCELLED" | "AWS_FAILED" | "CANCELLED" | "CANCELLING" | "COMPLETED" | "FAILED" | "FAILED_TO_SCHEDULE" | "PASS" | "POSTPASS" | "PREPASS" | "SCHEDULED" | "SCHEDULING")
+      attr_accessor dataflow_list: ::Array[Types::DataflowDetail]
+      attr_accessor end_time: ::Time
+      attr_accessor error_message: ::String
+      attr_accessor ground_station: ::String
+      attr_accessor maximum_elevation: Types::Elevation
+      attr_accessor mission_profile_arn: ::String
+      attr_accessor post_pass_end_time: ::Time
+      attr_accessor pre_pass_start_time: ::Time
+      attr_accessor region: ::String
+      attr_accessor satellite_arn: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DescribeEphemerisRequest
+      attr_accessor ephemeris_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEphemerisResponse
+      attr_accessor creation_time: ::Time
+      attr_accessor enabled: bool
+      attr_accessor ephemeris_id: ::String
+      attr_accessor invalid_reason: ("METADATA_INVALID" | "TIME_RANGE_INVALID" | "TRAJECTORY_INVALID" | "KMS_KEY_INVALID" | "VALIDATION_ERROR")
+      attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor satellite_id: ::String
+      attr_accessor status: ("VALIDATING" | "INVALID" | "ERROR" | "ENABLED" | "DISABLED" | "EXPIRED")
+      attr_accessor supplied_data: Types::EphemerisTypeDescription
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Destination
+      attr_accessor config_details: Types::ConfigDetails
+      attr_accessor config_id: ::String
+      attr_accessor config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "antenna-uplink" | "dataflow-endpoint" | "tracking" | "uplink-echo" | "s3-recording")
+      attr_accessor dataflow_destination_region: ::String
+      SENSITIVE: []
+    end
+
+    class DiscoveryData
+      attr_accessor capability_arns: ::Array[::String]
+      attr_accessor private_ip_addresses: ::Array[::String]
+      attr_accessor public_ip_addresses: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Eirp
+      attr_accessor units: ("dBW")
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class Elevation
+      attr_accessor unit: ("DEGREE_ANGLE" | "RADIAN")
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class EndpointDetails
+      attr_accessor aws_ground_station_agent_endpoint: Types::AwsGroundStationAgentEndpoint
+      attr_accessor endpoint: Types::DataflowEndpoint
+      attr_accessor health_reasons: ::Array[("NO_REGISTERED_AGENT" | "INVALID_IP_OWNERSHIP" | "NOT_AUTHORIZED_TO_CREATE_SLR" | "UNVERIFIED_IP_OWNERSHIP" | "INITIALIZING_DATAPLANE" | "DATAPLANE_FAILURE" | "HEALTHY")]
+      attr_accessor health_status: ("UNHEALTHY" | "HEALTHY")
+      attr_accessor security_details: Types::SecurityDetails
+      SENSITIVE: []
+    end
+
+    class EphemerisData
+      attr_accessor oem: Types::OEMEphemeris
+      attr_accessor tle: Types::TLEEphemeris
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Oem < EphemerisData
+      end
+      class Tle < EphemerisData
+      end
+      class Unknown < EphemerisData
+      end
+    end
+
+    class EphemerisDescription
+      attr_accessor ephemeris_data: ::String
+      attr_accessor source_s3_object: Types::S3Object
+      SENSITIVE: []
+    end
+
+    class EphemerisIdResponse
+      attr_accessor ephemeris_id: ::String
+      SENSITIVE: []
+    end
+
+    class EphemerisItem
+      attr_accessor creation_time: ::Time
+      attr_accessor enabled: bool
+      attr_accessor ephemeris_id: ::String
+      attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor source_s3_object: Types::S3Object
+      attr_accessor status: ("VALIDATING" | "INVALID" | "ERROR" | "ENABLED" | "DISABLED" | "EXPIRED")
+      SENSITIVE: []
+    end
+
+    class EphemerisMetaData
+      attr_accessor ephemeris_id: ::String
+      attr_accessor epoch: ::Time
+      attr_accessor name: ::String
+      attr_accessor source: ("CUSTOMER_PROVIDED" | "SPACE_TRACK")
+      SENSITIVE: []
+    end
+
+    class EphemerisTypeDescription
+      attr_accessor oem: Types::EphemerisDescription
+      attr_accessor tle: Types::EphemerisDescription
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Oem < EphemerisTypeDescription
+      end
+      class Tle < EphemerisTypeDescription
+      end
+      class Unknown < EphemerisTypeDescription
+      end
+    end
+
+    class Frequency
+      attr_accessor units: ("GHz" | "MHz" | "kHz")
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class FrequencyBandwidth
+      attr_accessor units: ("GHz" | "MHz" | "kHz")
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class GetAgentConfigurationRequest
+      attr_accessor agent_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAgentConfigurationResponse
+      attr_accessor agent_id: ::String
+      attr_accessor tasking_document: ::String
+      SENSITIVE: []
+    end
+
+    class GetConfigRequest
+      attr_accessor config_id: ::String
+      attr_accessor config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "antenna-uplink" | "dataflow-endpoint" | "tracking" | "uplink-echo" | "s3-recording")
+      SENSITIVE: []
+    end
+
+    class GetConfigResponse
+      attr_accessor config_arn: ::String
+      attr_accessor config_data: Types::ConfigTypeData
+      attr_accessor config_id: ::String
+      attr_accessor config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "antenna-uplink" | "dataflow-endpoint" | "tracking" | "uplink-echo" | "s3-recording")
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetDataflowEndpointGroupRequest
+      attr_accessor dataflow_endpoint_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataflowEndpointGroupResponse
+      attr_accessor contact_post_pass_duration_seconds: ::Integer
+      attr_accessor contact_pre_pass_duration_seconds: ::Integer
+      attr_accessor dataflow_endpoint_group_arn: ::String
+      attr_accessor dataflow_endpoint_group_id: ::String
+      attr_accessor endpoints_details: ::Array[Types::EndpointDetails]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetMinuteUsageRequest
+      attr_accessor month: ::Integer
+      attr_accessor year: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetMinuteUsageResponse
+      attr_accessor estimated_minutes_remaining: ::Integer
+      attr_accessor is_reserved_minutes_customer: bool
+      attr_accessor total_reserved_minute_allocation: ::Integer
+      attr_accessor total_scheduled_minutes: ::Integer
+      attr_accessor upcoming_minutes_scheduled: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetMissionProfileRequest
+      attr_accessor mission_profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMissionProfileResponse
+      attr_accessor contact_post_pass_duration_seconds: ::Integer
+      attr_accessor contact_pre_pass_duration_seconds: ::Integer
+      attr_accessor dataflow_edges: ::Array[::Array[::String]]
+      attr_accessor minimum_viable_contact_duration_seconds: ::Integer
+      attr_accessor mission_profile_arn: ::String
+      attr_accessor mission_profile_id: ::String
+      attr_accessor name: ::String
+      attr_accessor region: ::String
+      attr_accessor streams_kms_key: Types::KmsKey
+      attr_accessor streams_kms_role: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor tracking_config_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetSatelliteRequest
+      attr_accessor satellite_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSatelliteResponse
+      attr_accessor current_ephemeris: Types::EphemerisMetaData
+      attr_accessor ground_stations: ::Array[::String]
+      attr_accessor norad_satellite_id: ::Integer
+      attr_accessor satellite_arn: ::String
+      attr_accessor satellite_id: ::String
+      SENSITIVE: []
+    end
+
+    class GroundStationData
+      attr_accessor ground_station_id: ::String
+      attr_accessor ground_station_name: ::String
+      attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
+    class IntegerRange
+      attr_accessor maximum: ::Integer
+      attr_accessor minimum: ::Integer
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      attr_accessor parameter_name: ::String
+      SENSITIVE: []
+    end
+
+    class KmsKey
+      attr_accessor kms_alias_arn: ::String
+      attr_accessor kms_alias_name: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class KmsAliasArn < KmsKey
+      end
+      class KmsAliasName < KmsKey
+      end
+      class KmsKeyArn < KmsKey
+      end
+      class Unknown < KmsKey
+      end
+    end
+
+    class ListConfigsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConfigsResponse
+      attr_accessor config_list: ::Array[Types::ConfigListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContactsRequest
+      attr_accessor end_time: ::Time
+      attr_accessor ground_station: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor mission_profile_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor satellite_arn: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor status_list: ::Array[("AVAILABLE" | "AWS_CANCELLED" | "AWS_FAILED" | "CANCELLED" | "CANCELLING" | "COMPLETED" | "FAILED" | "FAILED_TO_SCHEDULE" | "PASS" | "POSTPASS" | "PREPASS" | "SCHEDULED" | "SCHEDULING")]
+      SENSITIVE: []
+    end
+
+    class ListContactsResponse
+      attr_accessor contact_list: ::Array[Types::ContactData]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataflowEndpointGroupsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataflowEndpointGroupsResponse
+      attr_accessor dataflow_endpoint_group_list: ::Array[Types::DataflowEndpointListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEphemeridesRequest
+      attr_accessor end_time: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor satellite_id: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor status_list: ::Array[("VALIDATING" | "INVALID" | "ERROR" | "ENABLED" | "DISABLED" | "EXPIRED")]
+      SENSITIVE: []
+    end
+
+    class ListEphemeridesResponse
+      attr_accessor ephemerides: ::Array[Types::EphemerisItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroundStationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor satellite_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroundStationsResponse
+      attr_accessor ground_station_list: ::Array[Types::GroundStationData]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMissionProfilesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMissionProfilesResponse
+      attr_accessor mission_profile_list: ::Array[Types::MissionProfileListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSatellitesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSatellitesResponse
+      attr_accessor next_token: ::String
+      attr_accessor satellites: ::Array[Types::SatelliteListItem]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class MissionProfileIdResponse
+      attr_accessor mission_profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class MissionProfileListItem
+      attr_accessor mission_profile_arn: ::String
+      attr_accessor mission_profile_id: ::String
+      attr_accessor name: ::String
+      attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
+    class OEMEphemeris
+      attr_accessor oem_data: ::String
+      attr_accessor s3_object: Types::S3Object
+      SENSITIVE: []
+    end
+
+    class RangedConnectionDetails
+      attr_accessor mtu: ::Integer
+      attr_accessor socket_address: Types::RangedSocketAddress
+      SENSITIVE: []
+    end
+
+    class RangedSocketAddress
+      attr_accessor name: ::String
+      attr_accessor port_range: Types::IntegerRange
+      SENSITIVE: []
+    end
+
+    class RegisterAgentRequest
+      attr_accessor agent_details: Types::AgentDetails
+      attr_accessor discovery_data: Types::DiscoveryData
+      SENSITIVE: []
+    end
+
+    class RegisterAgentResponse
+      attr_accessor agent_id: ::String
+      SENSITIVE: []
+    end
+
+    class ReserveContactRequest
+      attr_accessor end_time: ::Time
+      attr_accessor ground_station: ::String
+      attr_accessor mission_profile_arn: ::String
+      attr_accessor satellite_arn: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ResourceLimitExceededException
+      attr_accessor message: ::String
+      attr_accessor parameter_name: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class S3Object
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class S3RecordingConfig
+      attr_accessor bucket_arn: ::String
+      attr_accessor prefix: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class S3RecordingDetails
+      attr_accessor bucket_arn: ::String
+      attr_accessor key_template: ::String
+      SENSITIVE: []
+    end
+
+    class SatelliteListItem
+      attr_accessor current_ephemeris: Types::EphemerisMetaData
+      attr_accessor ground_stations: ::Array[::String]
+      attr_accessor norad_satellite_id: ::Integer
+      attr_accessor satellite_arn: ::String
+      attr_accessor satellite_id: ::String
+      SENSITIVE: []
+    end
+
+    class SecurityDetails
+      attr_accessor role_arn: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SocketAddress
+      attr_accessor name: ::String
+      attr_accessor port: ::Integer
+      SENSITIVE: []
+    end
+
+    class Source
+      attr_accessor config_details: Types::ConfigDetails
+      attr_accessor config_id: ::String
+      attr_accessor config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "antenna-uplink" | "dataflow-endpoint" | "tracking" | "uplink-echo" | "s3-recording")
+      attr_accessor dataflow_source_region: ::String
+      SENSITIVE: []
+    end
+
+    class SpectrumConfig
+      attr_accessor bandwidth: Types::FrequencyBandwidth
+      attr_accessor center_frequency: Types::Frequency
+      attr_accessor polarization: ("LEFT_HAND" | "NONE" | "RIGHT_HAND")
+      SENSITIVE: []
+    end
+
+    class TLEData
+      attr_accessor tle_line_1: ::String
+      attr_accessor tle_line_2: ::String
+      attr_accessor valid_time_range: Types::TimeRange
+      SENSITIVE: []
+    end
+
+    class TLEEphemeris
+      attr_accessor s3_object: Types::S3Object
+      attr_accessor tle_data: ::Array[Types::TLEData]
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TimeRange
+      attr_accessor end_time: ::Time
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class TrackingConfig
+      attr_accessor autotrack: ("PREFERRED" | "REMOVED" | "REQUIRED")
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAgentStatusRequest
+      attr_accessor agent_id: ::String
+      attr_accessor aggregate_status: Types::AggregateStatus
+      attr_accessor component_statuses: ::Array[Types::ComponentStatusData]
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAgentStatusResponse
+      attr_accessor agent_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConfigRequest
+      attr_accessor config_data: Types::ConfigTypeData
+      attr_accessor config_id: ::String
+      attr_accessor config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "antenna-uplink" | "dataflow-endpoint" | "tracking" | "uplink-echo" | "s3-recording")
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateEphemerisRequest
+      attr_accessor enabled: bool
+      attr_accessor ephemeris_id: ::String
+      attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateMissionProfileRequest
+      attr_accessor contact_post_pass_duration_seconds: ::Integer
+      attr_accessor contact_pre_pass_duration_seconds: ::Integer
+      attr_accessor dataflow_edges: ::Array[::Array[::String]]
+      attr_accessor minimum_viable_contact_duration_seconds: ::Integer
+      attr_accessor mission_profile_id: ::String
+      attr_accessor name: ::String
+      attr_accessor streams_kms_key: Types::KmsKey
+      attr_accessor streams_kms_role: ::String
+      attr_accessor tracking_config_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UplinkEchoConfig
+      attr_accessor antenna_uplink_config_arn: ::String
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class UplinkSpectrumConfig
+      attr_accessor center_frequency: Types::Frequency
+      attr_accessor polarization: ("LEFT_HAND" | "NONE" | "RIGHT_HAND")
+      SENSITIVE: []
+    end
+  end
+end

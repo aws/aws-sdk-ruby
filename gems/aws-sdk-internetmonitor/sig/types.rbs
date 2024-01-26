@@ -1,0 +1,382 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::InternetMonitor
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AvailabilityMeasurement
+      attr_accessor experience_score: ::Float
+      attr_accessor percent_of_total_traffic_impacted: ::Float
+      attr_accessor percent_of_client_location_impacted: ::Float
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMonitorInput
+      attr_accessor monitor_name: ::String
+      attr_accessor resources: ::Array[::String]
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor max_city_networks_to_monitor: ::Integer
+      attr_accessor internet_measurements_log_delivery: Types::InternetMeasurementsLogDelivery
+      attr_accessor traffic_percentage_to_monitor: ::Integer
+      attr_accessor health_events_config: Types::HealthEventsConfig
+      SENSITIVE: []
+    end
+
+    class CreateMonitorOutput
+      attr_accessor arn: ::String
+      attr_accessor status: ("PENDING" | "ACTIVE" | "INACTIVE" | "ERROR")
+      SENSITIVE: []
+    end
+
+    class DeleteMonitorInput
+      attr_accessor monitor_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMonitorOutput < Aws::EmptyStructure
+    end
+
+    class FilterParameter
+      attr_accessor field: ::String
+      attr_accessor operator: ("EQUALS" | "NOT_EQUALS")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetHealthEventInput
+      attr_accessor monitor_name: ::String
+      attr_accessor event_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetHealthEventOutput
+      attr_accessor event_arn: ::String
+      attr_accessor event_id: ::String
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor impacted_locations: ::Array[Types::ImpactedLocation]
+      attr_accessor status: ("ACTIVE" | "RESOLVED")
+      attr_accessor percent_of_total_traffic_impacted: ::Float
+      attr_accessor impact_type: ("AVAILABILITY" | "PERFORMANCE" | "LOCAL_AVAILABILITY" | "LOCAL_PERFORMANCE")
+      attr_accessor health_score_threshold: ::Float
+      SENSITIVE: []
+    end
+
+    class GetMonitorInput
+      attr_accessor monitor_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetMonitorOutput
+      attr_accessor monitor_name: ::String
+      attr_accessor monitor_arn: ::String
+      attr_accessor resources: ::Array[::String]
+      attr_accessor status: ("PENDING" | "ACTIVE" | "INACTIVE" | "ERROR")
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor processing_status: ("OK" | "INACTIVE" | "COLLECTING_DATA" | "INSUFFICIENT_DATA" | "FAULT_SERVICE" | "FAULT_ACCESS_CLOUDWATCH")
+      attr_accessor processing_status_info: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor max_city_networks_to_monitor: ::Integer
+      attr_accessor internet_measurements_log_delivery: Types::InternetMeasurementsLogDelivery
+      attr_accessor traffic_percentage_to_monitor: ::Integer
+      attr_accessor health_events_config: Types::HealthEventsConfig
+      SENSITIVE: []
+    end
+
+    class GetQueryResultsInput
+      attr_accessor monitor_name: ::String
+      attr_accessor query_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetQueryResultsOutput
+      attr_accessor fields: ::Array[Types::QueryField]
+      attr_accessor data: ::Array[::Array[::String]]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetQueryStatusInput
+      attr_accessor monitor_name: ::String
+      attr_accessor query_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetQueryStatusOutput
+      attr_accessor status: ("QUEUED" | "RUNNING" | "SUCCEEDED" | "FAILED" | "CANCELED")
+      SENSITIVE: []
+    end
+
+    class HealthEvent
+      attr_accessor event_arn: ::String
+      attr_accessor event_id: ::String
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor impacted_locations: ::Array[Types::ImpactedLocation]
+      attr_accessor status: ("ACTIVE" | "RESOLVED")
+      attr_accessor percent_of_total_traffic_impacted: ::Float
+      attr_accessor impact_type: ("AVAILABILITY" | "PERFORMANCE" | "LOCAL_AVAILABILITY" | "LOCAL_PERFORMANCE")
+      attr_accessor health_score_threshold: ::Float
+      SENSITIVE: []
+    end
+
+    class HealthEventsConfig
+      attr_accessor availability_score_threshold: ::Float
+      attr_accessor performance_score_threshold: ::Float
+      attr_accessor availability_local_health_events_config: Types::LocalHealthEventsConfig
+      attr_accessor performance_local_health_events_config: Types::LocalHealthEventsConfig
+      SENSITIVE: []
+    end
+
+    class ImpactedLocation
+      attr_accessor as_name: ::String
+      attr_accessor as_number: ::Integer
+      attr_accessor country: ::String
+      attr_accessor subdivision: ::String
+      attr_accessor metro: ::String
+      attr_accessor city: ::String
+      attr_accessor latitude: ::Float
+      attr_accessor longitude: ::Float
+      attr_accessor country_code: ::String
+      attr_accessor subdivision_code: ::String
+      attr_accessor service_location: ::String
+      attr_accessor status: ("ACTIVE" | "RESOLVED")
+      attr_accessor caused_by: Types::NetworkImpairment
+      attr_accessor internet_health: Types::InternetHealth
+      SENSITIVE: []
+    end
+
+    class InternalServerErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternetHealth
+      attr_accessor availability: Types::AvailabilityMeasurement
+      attr_accessor performance: Types::PerformanceMeasurement
+      SENSITIVE: []
+    end
+
+    class InternetMeasurementsLogDelivery
+      attr_accessor s3_config: Types::S3Config
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListHealthEventsInput
+      attr_accessor monitor_name: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor event_status: ("ACTIVE" | "RESOLVED")
+      SENSITIVE: []
+    end
+
+    class ListHealthEventsOutput
+      attr_accessor health_events: ::Array[Types::HealthEvent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMonitorsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor monitor_status: ::String
+      SENSITIVE: []
+    end
+
+    class ListMonitorsOutput
+      attr_accessor monitors: ::Array[Types::Monitor]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class LocalHealthEventsConfig
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor health_score_threshold: ::Float
+      attr_accessor min_traffic_impact: ::Float
+      SENSITIVE: []
+    end
+
+    class Monitor
+      attr_accessor monitor_name: ::String
+      attr_accessor monitor_arn: ::String
+      attr_accessor status: ("PENDING" | "ACTIVE" | "INACTIVE" | "ERROR")
+      attr_accessor processing_status: ("OK" | "INACTIVE" | "COLLECTING_DATA" | "INSUFFICIENT_DATA" | "FAULT_SERVICE" | "FAULT_ACCESS_CLOUDWATCH")
+      SENSITIVE: []
+    end
+
+    class Network
+      attr_accessor as_name: ::String
+      attr_accessor as_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class NetworkImpairment
+      attr_accessor networks: ::Array[Types::Network]
+      attr_accessor as_path: ::Array[Types::Network]
+      attr_accessor network_event_type: ("AWS" | "Internet")
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PerformanceMeasurement
+      attr_accessor experience_score: ::Float
+      attr_accessor percent_of_total_traffic_impacted: ::Float
+      attr_accessor percent_of_client_location_impacted: ::Float
+      attr_accessor round_trip_time: Types::RoundTripTime
+      SENSITIVE: []
+    end
+
+    class QueryField
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RoundTripTime
+      attr_accessor p50: ::Float
+      attr_accessor p90: ::Float
+      attr_accessor p95: ::Float
+      SENSITIVE: []
+    end
+
+    class S3Config
+      attr_accessor bucket_name: ::String
+      attr_accessor bucket_prefix: ::String
+      attr_accessor log_delivery_status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class StartQueryInput
+      attr_accessor monitor_name: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor query_type: ("MEASUREMENTS" | "TOP_LOCATIONS" | "TOP_LOCATION_DETAILS")
+      attr_accessor filter_parameters: ::Array[Types::FilterParameter]
+      SENSITIVE: []
+    end
+
+    class StartQueryOutput
+      attr_accessor query_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopQueryInput
+      attr_accessor monitor_name: ::String
+      attr_accessor query_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopQueryOutput < Aws::EmptyStructure
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UpdateMonitorInput
+      attr_accessor monitor_name: ::String
+      attr_accessor resources_to_add: ::Array[::String]
+      attr_accessor resources_to_remove: ::Array[::String]
+      attr_accessor status: ("PENDING" | "ACTIVE" | "INACTIVE" | "ERROR")
+      attr_accessor client_token: ::String
+      attr_accessor max_city_networks_to_monitor: ::Integer
+      attr_accessor internet_measurements_log_delivery: Types::InternetMeasurementsLogDelivery
+      attr_accessor traffic_percentage_to_monitor: ::Integer
+      attr_accessor health_events_config: Types::HealthEventsConfig
+      SENSITIVE: []
+    end
+
+    class UpdateMonitorOutput
+      attr_accessor monitor_arn: ::String
+      attr_accessor status: ("PENDING" | "ACTIVE" | "INACTIVE" | "ERROR")
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

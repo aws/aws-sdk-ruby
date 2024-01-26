@@ -1,0 +1,346 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ACM
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AddTagsToCertificateRequest
+      attr_accessor certificate_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CertificateDetail
+      attr_accessor certificate_arn: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor subject_alternative_names: ::Array[::String]
+      attr_accessor domain_validation_options: ::Array[Types::DomainValidation]
+      attr_accessor serial: ::String
+      attr_accessor subject: ::String
+      attr_accessor issuer: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor issued_at: ::Time
+      attr_accessor imported_at: ::Time
+      attr_accessor status: ("PENDING_VALIDATION" | "ISSUED" | "INACTIVE" | "EXPIRED" | "VALIDATION_TIMED_OUT" | "REVOKED" | "FAILED")
+      attr_accessor revoked_at: ::Time
+      attr_accessor revocation_reason: ("UNSPECIFIED" | "KEY_COMPROMISE" | "CA_COMPROMISE" | "AFFILIATION_CHANGED" | "SUPERCEDED" | "CESSATION_OF_OPERATION" | "CERTIFICATE_HOLD" | "REMOVE_FROM_CRL" | "PRIVILEGE_WITHDRAWN" | "A_A_COMPROMISE")
+      attr_accessor not_before: ::Time
+      attr_accessor not_after: ::Time
+      attr_accessor key_algorithm: ("RSA_1024" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1" | "EC_secp521r1")
+      attr_accessor signature_algorithm: ::String
+      attr_accessor in_use_by: ::Array[::String]
+      attr_accessor failure_reason: ("NO_AVAILABLE_CONTACTS" | "ADDITIONAL_VERIFICATION_REQUIRED" | "DOMAIN_NOT_ALLOWED" | "INVALID_PUBLIC_DOMAIN" | "DOMAIN_VALIDATION_DENIED" | "CAA_ERROR" | "PCA_LIMIT_EXCEEDED" | "PCA_INVALID_ARN" | "PCA_INVALID_STATE" | "PCA_REQUEST_FAILED" | "PCA_NAME_CONSTRAINTS_VALIDATION" | "PCA_RESOURCE_NOT_FOUND" | "PCA_INVALID_ARGS" | "PCA_INVALID_DURATION" | "PCA_ACCESS_DENIED" | "SLR_NOT_FOUND" | "OTHER")
+      attr_accessor type: ("IMPORTED" | "AMAZON_ISSUED" | "PRIVATE")
+      attr_accessor renewal_summary: Types::RenewalSummary
+      attr_accessor key_usages: ::Array[Types::KeyUsage]
+      attr_accessor extended_key_usages: ::Array[Types::ExtendedKeyUsage]
+      attr_accessor certificate_authority_arn: ::String
+      attr_accessor renewal_eligibility: ("ELIGIBLE" | "INELIGIBLE")
+      attr_accessor options: Types::CertificateOptions
+      SENSITIVE: []
+    end
+
+    class CertificateOptions
+      attr_accessor certificate_transparency_logging_preference: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class CertificateSummary
+      attr_accessor certificate_arn: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor subject_alternative_name_summaries: ::Array[::String]
+      attr_accessor has_additional_subject_alternative_names: bool
+      attr_accessor status: ("PENDING_VALIDATION" | "ISSUED" | "INACTIVE" | "EXPIRED" | "VALIDATION_TIMED_OUT" | "REVOKED" | "FAILED")
+      attr_accessor type: ("IMPORTED" | "AMAZON_ISSUED" | "PRIVATE")
+      attr_accessor key_algorithm: ("RSA_1024" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1" | "EC_secp521r1")
+      attr_accessor key_usages: ::Array[("DIGITAL_SIGNATURE" | "NON_REPUDIATION" | "KEY_ENCIPHERMENT" | "DATA_ENCIPHERMENT" | "KEY_AGREEMENT" | "CERTIFICATE_SIGNING" | "CRL_SIGNING" | "ENCIPHER_ONLY" | "DECIPHER_ONLY" | "ANY" | "CUSTOM")]
+      attr_accessor extended_key_usages: ::Array[("TLS_WEB_SERVER_AUTHENTICATION" | "TLS_WEB_CLIENT_AUTHENTICATION" | "CODE_SIGNING" | "EMAIL_PROTECTION" | "TIME_STAMPING" | "OCSP_SIGNING" | "IPSEC_END_SYSTEM" | "IPSEC_TUNNEL" | "IPSEC_USER" | "ANY" | "NONE" | "CUSTOM")]
+      attr_accessor in_use: bool
+      attr_accessor exported: bool
+      attr_accessor renewal_eligibility: ("ELIGIBLE" | "INELIGIBLE")
+      attr_accessor not_before: ::Time
+      attr_accessor not_after: ::Time
+      attr_accessor created_at: ::Time
+      attr_accessor issued_at: ::Time
+      attr_accessor imported_at: ::Time
+      attr_accessor revoked_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCertificateRequest
+      attr_accessor certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCertificateRequest
+      attr_accessor certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCertificateResponse
+      attr_accessor certificate: Types::CertificateDetail
+      SENSITIVE: []
+    end
+
+    class DomainValidation
+      attr_accessor domain_name: ::String
+      attr_accessor validation_emails: ::Array[::String]
+      attr_accessor validation_domain: ::String
+      attr_accessor validation_status: ("PENDING_VALIDATION" | "SUCCESS" | "FAILED")
+      attr_accessor resource_record: Types::ResourceRecord
+      attr_accessor validation_method: ("EMAIL" | "DNS")
+      SENSITIVE: []
+    end
+
+    class DomainValidationOption
+      attr_accessor domain_name: ::String
+      attr_accessor validation_domain: ::String
+      SENSITIVE: []
+    end
+
+    class ExpiryEventsConfiguration
+      attr_accessor days_before_expiry: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExportCertificateRequest
+      attr_accessor certificate_arn: ::String
+      attr_accessor passphrase: ::String
+      SENSITIVE: [:passphrase]
+    end
+
+    class ExportCertificateResponse
+      attr_accessor certificate: ::String
+      attr_accessor certificate_chain: ::String
+      attr_accessor private_key: ::String
+      SENSITIVE: [:private_key]
+    end
+
+    class ExtendedKeyUsage
+      attr_accessor name: ("TLS_WEB_SERVER_AUTHENTICATION" | "TLS_WEB_CLIENT_AUTHENTICATION" | "CODE_SIGNING" | "EMAIL_PROTECTION" | "TIME_STAMPING" | "OCSP_SIGNING" | "IPSEC_END_SYSTEM" | "IPSEC_TUNNEL" | "IPSEC_USER" | "ANY" | "NONE" | "CUSTOM")
+      attr_accessor oid: ::String
+      SENSITIVE: []
+    end
+
+    class Filters
+      attr_accessor extended_key_usage: ::Array[("TLS_WEB_SERVER_AUTHENTICATION" | "TLS_WEB_CLIENT_AUTHENTICATION" | "CODE_SIGNING" | "EMAIL_PROTECTION" | "TIME_STAMPING" | "OCSP_SIGNING" | "IPSEC_END_SYSTEM" | "IPSEC_TUNNEL" | "IPSEC_USER" | "ANY" | "NONE" | "CUSTOM")]
+      attr_accessor key_usage: ::Array[("DIGITAL_SIGNATURE" | "NON_REPUDIATION" | "KEY_ENCIPHERMENT" | "DATA_ENCIPHERMENT" | "KEY_AGREEMENT" | "CERTIFICATE_SIGNING" | "CRL_SIGNING" | "ENCIPHER_ONLY" | "DECIPHER_ONLY" | "ANY" | "CUSTOM")]
+      attr_accessor key_types: ::Array[("RSA_1024" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1" | "EC_secp521r1")]
+      SENSITIVE: []
+    end
+
+    class GetAccountConfigurationResponse
+      attr_accessor expiry_events: Types::ExpiryEventsConfiguration
+      SENSITIVE: []
+    end
+
+    class GetCertificateRequest
+      attr_accessor certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetCertificateResponse
+      attr_accessor certificate: ::String
+      attr_accessor certificate_chain: ::String
+      SENSITIVE: []
+    end
+
+    class ImportCertificateRequest
+      attr_accessor certificate_arn: ::String
+      attr_accessor certificate: ::String
+      attr_accessor private_key: ::String
+      attr_accessor certificate_chain: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:private_key]
+    end
+
+    class ImportCertificateResponse
+      attr_accessor certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidArgsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidArnException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidDomainValidationOptionsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidStateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidTagException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KeyUsage
+      attr_accessor name: ("DIGITAL_SIGNATURE" | "NON_REPUDIATION" | "KEY_ENCIPHERMENT" | "DATA_ENCIPHERMENT" | "KEY_AGREEMENT" | "CERTIFICATE_SIGNING" | "CRL_SIGNING" | "ENCIPHER_ONLY" | "DECIPHER_ONLY" | "ANY" | "CUSTOM")
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListCertificatesRequest
+      attr_accessor certificate_statuses: ::Array[("PENDING_VALIDATION" | "ISSUED" | "INACTIVE" | "EXPIRED" | "VALIDATION_TIMED_OUT" | "REVOKED" | "FAILED")]
+      attr_accessor includes: Types::Filters
+      attr_accessor next_token: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor sort_by: ("CREATED_AT")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class ListCertificatesResponse
+      attr_accessor next_token: ::String
+      attr_accessor certificate_summary_list: ::Array[Types::CertificateSummary]
+      SENSITIVE: []
+    end
+
+    class ListTagsForCertificateRequest
+      attr_accessor certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForCertificateResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PutAccountConfigurationRequest
+      attr_accessor expiry_events: Types::ExpiryEventsConfiguration
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveTagsFromCertificateRequest
+      attr_accessor certificate_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class RenewCertificateRequest
+      attr_accessor certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RenewalSummary
+      attr_accessor renewal_status: ("PENDING_AUTO_RENEWAL" | "PENDING_VALIDATION" | "SUCCESS" | "FAILED")
+      attr_accessor domain_validation_options: ::Array[Types::DomainValidation]
+      attr_accessor renewal_status_reason: ("NO_AVAILABLE_CONTACTS" | "ADDITIONAL_VERIFICATION_REQUIRED" | "DOMAIN_NOT_ALLOWED" | "INVALID_PUBLIC_DOMAIN" | "DOMAIN_VALIDATION_DENIED" | "CAA_ERROR" | "PCA_LIMIT_EXCEEDED" | "PCA_INVALID_ARN" | "PCA_INVALID_STATE" | "PCA_REQUEST_FAILED" | "PCA_NAME_CONSTRAINTS_VALIDATION" | "PCA_RESOURCE_NOT_FOUND" | "PCA_INVALID_ARGS" | "PCA_INVALID_DURATION" | "PCA_ACCESS_DENIED" | "SLR_NOT_FOUND" | "OTHER")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class RequestCertificateRequest
+      attr_accessor domain_name: ::String
+      attr_accessor validation_method: ("EMAIL" | "DNS")
+      attr_accessor subject_alternative_names: ::Array[::String]
+      attr_accessor idempotency_token: ::String
+      attr_accessor domain_validation_options: ::Array[Types::DomainValidationOption]
+      attr_accessor options: Types::CertificateOptions
+      attr_accessor certificate_authority_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor key_algorithm: ("RSA_1024" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1" | "EC_secp521r1")
+      SENSITIVE: []
+    end
+
+    class RequestCertificateResponse
+      attr_accessor certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RequestInProgressException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResendValidationEmailRequest
+      attr_accessor certificate_arn: ::String
+      attr_accessor domain: ::String
+      attr_accessor validation_domain: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceRecord
+      attr_accessor name: ::String
+      attr_accessor type: ("CNAME")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagPolicyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCertificateOptionsRequest
+      attr_accessor certificate_arn: ::String
+      attr_accessor options: Types::CertificateOptions
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

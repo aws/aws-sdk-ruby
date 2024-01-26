@@ -1,0 +1,1494 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::APIGateway
+  module Types
+
+    class AccessLogSettings
+      attr_accessor format: ::String
+      attr_accessor destination_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Account
+      attr_accessor cloudwatch_role_arn: ::String
+      attr_accessor throttle_settings: Types::ThrottleSettings
+      attr_accessor features: ::Array[::String]
+      attr_accessor api_key_version: ::String
+      SENSITIVE: []
+    end
+
+    class ApiKey
+      attr_accessor id: ::String
+      attr_accessor value: ::String
+      attr_accessor name: ::String
+      attr_accessor customer_id: ::String
+      attr_accessor description: ::String
+      attr_accessor enabled: bool
+      attr_accessor created_date: ::Time
+      attr_accessor last_updated_date: ::Time
+      attr_accessor stage_keys: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ApiKeyIds
+      attr_accessor ids: ::Array[::String]
+      attr_accessor warnings: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ApiKeys
+      attr_accessor warnings: ::Array[::String]
+      attr_accessor position: ::String
+      attr_accessor items: ::Array[Types::ApiKey]
+      SENSITIVE: []
+    end
+
+    class ApiStage
+      attr_accessor api_id: ::String
+      attr_accessor stage: ::String
+      attr_accessor throttle: ::Hash[::String, Types::ThrottleSettings]
+      SENSITIVE: []
+    end
+
+    class Authorizer
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("TOKEN" | "REQUEST" | "COGNITO_USER_POOLS")
+      attr_accessor provider_arns: ::Array[::String]
+      attr_accessor auth_type: ::String
+      attr_accessor authorizer_uri: ::String
+      attr_accessor authorizer_credentials: ::String
+      attr_accessor identity_source: ::String
+      attr_accessor identity_validation_expression: ::String
+      attr_accessor authorizer_result_ttl_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class Authorizers
+      attr_accessor position: ::String
+      attr_accessor items: ::Array[Types::Authorizer]
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BasePathMapping
+      attr_accessor base_path: ::String
+      attr_accessor rest_api_id: ::String
+      attr_accessor stage: ::String
+      SENSITIVE: []
+    end
+
+    class BasePathMappings
+      attr_accessor position: ::String
+      attr_accessor items: ::Array[Types::BasePathMapping]
+      SENSITIVE: []
+    end
+
+    class CanarySettings
+      attr_accessor percent_traffic: ::Float
+      attr_accessor deployment_id: ::String
+      attr_accessor stage_variable_overrides: ::Hash[::String, ::String]
+      attr_accessor use_stage_cache: bool
+      SENSITIVE: []
+    end
+
+    class ClientCertificate
+      attr_accessor client_certificate_id: ::String
+      attr_accessor description: ::String
+      attr_accessor pem_encoded_certificate: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor expiration_date: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ClientCertificates
+      attr_accessor position: ::String
+      attr_accessor items: ::Array[Types::ClientCertificate]
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateApiKeyRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor enabled: bool
+      attr_accessor generate_distinct_id: bool
+      attr_accessor value: ::String
+      attr_accessor stage_keys: ::Array[Types::StageKey]
+      attr_accessor customer_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateAuthorizerRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("TOKEN" | "REQUEST" | "COGNITO_USER_POOLS")
+      attr_accessor provider_arns: ::Array[::String]
+      attr_accessor auth_type: ::String
+      attr_accessor authorizer_uri: ::String
+      attr_accessor authorizer_credentials: ::String
+      attr_accessor identity_source: ::String
+      attr_accessor identity_validation_expression: ::String
+      attr_accessor authorizer_result_ttl_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateBasePathMappingRequest
+      attr_accessor domain_name: ::String
+      attr_accessor base_path: ::String
+      attr_accessor rest_api_id: ::String
+      attr_accessor stage: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDeploymentRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor stage_name: ::String
+      attr_accessor stage_description: ::String
+      attr_accessor description: ::String
+      attr_accessor cache_cluster_enabled: bool
+      attr_accessor cache_cluster_size: ("0.5" | "1.6" | "6.1" | "13.5" | "28.4" | "58.2" | "118" | "237")
+      attr_accessor variables: ::Hash[::String, ::String]
+      attr_accessor canary_settings: Types::DeploymentCanarySettings
+      attr_accessor tracing_enabled: bool
+      SENSITIVE: []
+    end
+
+    class CreateDocumentationPartRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor location: Types::DocumentationPartLocation
+      attr_accessor properties: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDocumentationVersionRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor documentation_version: ::String
+      attr_accessor stage_name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDomainNameRequest
+      attr_accessor domain_name: ::String
+      attr_accessor certificate_name: ::String
+      attr_accessor certificate_body: ::String
+      attr_accessor certificate_private_key: ::String
+      attr_accessor certificate_chain: ::String
+      attr_accessor certificate_arn: ::String
+      attr_accessor regional_certificate_name: ::String
+      attr_accessor regional_certificate_arn: ::String
+      attr_accessor endpoint_configuration: Types::EndpointConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor security_policy: ("TLS_1_0" | "TLS_1_2")
+      attr_accessor mutual_tls_authentication: Types::MutualTlsAuthenticationInput
+      attr_accessor ownership_verification_certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateModelRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor schema: ::String
+      attr_accessor content_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRequestValidatorRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor name: ::String
+      attr_accessor validate_request_body: bool
+      attr_accessor validate_request_parameters: bool
+      SENSITIVE: []
+    end
+
+    class CreateResourceRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor parent_id: ::String
+      attr_accessor path_part: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRestApiRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor version: ::String
+      attr_accessor clone_from: ::String
+      attr_accessor binary_media_types: ::Array[::String]
+      attr_accessor minimum_compression_size: ::Integer
+      attr_accessor api_key_source: ("HEADER" | "AUTHORIZER")
+      attr_accessor endpoint_configuration: Types::EndpointConfiguration
+      attr_accessor policy: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor disable_execute_api_endpoint: bool
+      SENSITIVE: []
+    end
+
+    class CreateStageRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor stage_name: ::String
+      attr_accessor deployment_id: ::String
+      attr_accessor description: ::String
+      attr_accessor cache_cluster_enabled: bool
+      attr_accessor cache_cluster_size: ("0.5" | "1.6" | "6.1" | "13.5" | "28.4" | "58.2" | "118" | "237")
+      attr_accessor variables: ::Hash[::String, ::String]
+      attr_accessor documentation_version: ::String
+      attr_accessor canary_settings: Types::CanarySettings
+      attr_accessor tracing_enabled: bool
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateUsagePlanKeyRequest
+      attr_accessor usage_plan_id: ::String
+      attr_accessor key_id: ::String
+      attr_accessor key_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateUsagePlanRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor api_stages: ::Array[Types::ApiStage]
+      attr_accessor throttle: Types::ThrottleSettings
+      attr_accessor quota: Types::QuotaSettings
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateVpcLinkRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor target_arns: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DeleteApiKeyRequest
+      attr_accessor api_key: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAuthorizerRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor authorizer_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBasePathMappingRequest
+      attr_accessor domain_name: ::String
+      attr_accessor base_path: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteClientCertificateRequest
+      attr_accessor client_certificate_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDeploymentRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor deployment_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDocumentationPartRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor documentation_part_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDocumentationVersionRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor documentation_version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDomainNameRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGatewayResponseRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor response_type: ("DEFAULT_4XX" | "DEFAULT_5XX" | "RESOURCE_NOT_FOUND" | "UNAUTHORIZED" | "INVALID_API_KEY" | "ACCESS_DENIED" | "AUTHORIZER_FAILURE" | "AUTHORIZER_CONFIGURATION_ERROR" | "INVALID_SIGNATURE" | "EXPIRED_TOKEN" | "MISSING_AUTHENTICATION_TOKEN" | "INTEGRATION_FAILURE" | "INTEGRATION_TIMEOUT" | "API_CONFIGURATION_ERROR" | "UNSUPPORTED_MEDIA_TYPE" | "BAD_REQUEST_PARAMETERS" | "BAD_REQUEST_BODY" | "REQUEST_TOO_LARGE" | "THROTTLED" | "QUOTA_EXCEEDED" | "WAF_FILTERED")
+      SENSITIVE: []
+    end
+
+    class DeleteIntegrationRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor http_method: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIntegrationResponseRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor http_method: ::String
+      attr_accessor status_code: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMethodRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor http_method: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMethodResponseRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor http_method: ::String
+      attr_accessor status_code: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteModelRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor model_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRequestValidatorRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor request_validator_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourceRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRestApiRequest
+      attr_accessor rest_api_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStageRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor stage_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUsagePlanKeyRequest
+      attr_accessor usage_plan_id: ::String
+      attr_accessor key_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUsagePlanRequest
+      attr_accessor usage_plan_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVpcLinkRequest
+      attr_accessor vpc_link_id: ::String
+      SENSITIVE: []
+    end
+
+    class Deployment
+      attr_accessor id: ::String
+      attr_accessor description: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor api_summary: ::Hash[::String, ::Hash[::String, Types::MethodSnapshot]]
+      SENSITIVE: []
+    end
+
+    class DeploymentCanarySettings
+      attr_accessor percent_traffic: ::Float
+      attr_accessor stage_variable_overrides: ::Hash[::String, ::String]
+      attr_accessor use_stage_cache: bool
+      SENSITIVE: []
+    end
+
+    class Deployments
+      attr_accessor position: ::String
+      attr_accessor items: ::Array[Types::Deployment]
+      SENSITIVE: []
+    end
+
+    class DocumentationPart
+      attr_accessor id: ::String
+      attr_accessor location: Types::DocumentationPartLocation
+      attr_accessor properties: ::String
+      SENSITIVE: []
+    end
+
+    class DocumentationPartIds
+      attr_accessor ids: ::Array[::String]
+      attr_accessor warnings: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DocumentationPartLocation
+      attr_accessor type: ("API" | "AUTHORIZER" | "MODEL" | "RESOURCE" | "METHOD" | "PATH_PARAMETER" | "QUERY_PARAMETER" | "REQUEST_HEADER" | "REQUEST_BODY" | "RESPONSE" | "RESPONSE_HEADER" | "RESPONSE_BODY")
+      attr_accessor path: ::String
+      attr_accessor method: ::String
+      attr_accessor status_code: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DocumentationParts
+      attr_accessor position: ::String
+      attr_accessor items: ::Array[Types::DocumentationPart]
+      SENSITIVE: []
+    end
+
+    class DocumentationVersion
+      attr_accessor version: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class DocumentationVersions
+      attr_accessor position: ::String
+      attr_accessor items: ::Array[Types::DocumentationVersion]
+      SENSITIVE: []
+    end
+
+    class DomainName
+      attr_accessor domain_name: ::String
+      attr_accessor certificate_name: ::String
+      attr_accessor certificate_arn: ::String
+      attr_accessor certificate_upload_date: ::Time
+      attr_accessor regional_domain_name: ::String
+      attr_accessor regional_hosted_zone_id: ::String
+      attr_accessor regional_certificate_name: ::String
+      attr_accessor regional_certificate_arn: ::String
+      attr_accessor distribution_domain_name: ::String
+      attr_accessor distribution_hosted_zone_id: ::String
+      attr_accessor endpoint_configuration: Types::EndpointConfiguration
+      attr_accessor domain_name_status: ("AVAILABLE" | "UPDATING" | "PENDING" | "PENDING_CERTIFICATE_REIMPORT" | "PENDING_OWNERSHIP_VERIFICATION")
+      attr_accessor domain_name_status_message: ::String
+      attr_accessor security_policy: ("TLS_1_0" | "TLS_1_2")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor mutual_tls_authentication: Types::MutualTlsAuthentication
+      attr_accessor ownership_verification_certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DomainNames
+      attr_accessor position: ::String
+      attr_accessor items: ::Array[Types::DomainName]
+      SENSITIVE: []
+    end
+
+    class EndpointConfiguration
+      attr_accessor types: ::Array[("REGIONAL" | "EDGE" | "PRIVATE")]
+      attr_accessor vpc_endpoint_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ExportResponse
+      attr_accessor content_type: ::String
+      attr_accessor content_disposition: ::String
+      attr_accessor body: ::String
+      SENSITIVE: []
+    end
+
+    class FlushStageAuthorizersCacheRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor stage_name: ::String
+      SENSITIVE: []
+    end
+
+    class FlushStageCacheRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor stage_name: ::String
+      SENSITIVE: []
+    end
+
+    class GatewayResponse
+      attr_accessor response_type: ("DEFAULT_4XX" | "DEFAULT_5XX" | "RESOURCE_NOT_FOUND" | "UNAUTHORIZED" | "INVALID_API_KEY" | "ACCESS_DENIED" | "AUTHORIZER_FAILURE" | "AUTHORIZER_CONFIGURATION_ERROR" | "INVALID_SIGNATURE" | "EXPIRED_TOKEN" | "MISSING_AUTHENTICATION_TOKEN" | "INTEGRATION_FAILURE" | "INTEGRATION_TIMEOUT" | "API_CONFIGURATION_ERROR" | "UNSUPPORTED_MEDIA_TYPE" | "BAD_REQUEST_PARAMETERS" | "BAD_REQUEST_BODY" | "REQUEST_TOO_LARGE" | "THROTTLED" | "QUOTA_EXCEEDED" | "WAF_FILTERED")
+      attr_accessor status_code: ::String
+      attr_accessor response_parameters: ::Hash[::String, ::String]
+      attr_accessor response_templates: ::Hash[::String, ::String]
+      attr_accessor default_response: bool
+      SENSITIVE: []
+    end
+
+    class GatewayResponses
+      attr_accessor position: ::String
+      attr_accessor items: ::Array[Types::GatewayResponse]
+      SENSITIVE: []
+    end
+
+    class GenerateClientCertificateRequest
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetAccountRequest < Aws::EmptyStructure
+    end
+
+    class GetApiKeyRequest
+      attr_accessor api_key: ::String
+      attr_accessor include_value: bool
+      SENSITIVE: []
+    end
+
+    class GetApiKeysRequest
+      attr_accessor position: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor name_query: ::String
+      attr_accessor customer_id: ::String
+      attr_accessor include_values: bool
+      SENSITIVE: []
+    end
+
+    class GetAuthorizerRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor authorizer_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAuthorizersRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor position: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetBasePathMappingRequest
+      attr_accessor domain_name: ::String
+      attr_accessor base_path: ::String
+      SENSITIVE: []
+    end
+
+    class GetBasePathMappingsRequest
+      attr_accessor domain_name: ::String
+      attr_accessor position: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetClientCertificateRequest
+      attr_accessor client_certificate_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetClientCertificatesRequest
+      attr_accessor position: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetDeploymentRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor deployment_id: ::String
+      attr_accessor embed: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetDeploymentsRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor position: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetDocumentationPartRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor documentation_part_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDocumentationPartsRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor type: ("API" | "AUTHORIZER" | "MODEL" | "RESOURCE" | "METHOD" | "PATH_PARAMETER" | "QUERY_PARAMETER" | "REQUEST_HEADER" | "REQUEST_BODY" | "RESPONSE" | "RESPONSE_HEADER" | "RESPONSE_BODY")
+      attr_accessor name_query: ::String
+      attr_accessor path: ::String
+      attr_accessor position: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor location_status: ("DOCUMENTED" | "UNDOCUMENTED")
+      SENSITIVE: []
+    end
+
+    class GetDocumentationVersionRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor documentation_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetDocumentationVersionsRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor position: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetDomainNameRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDomainNamesRequest
+      attr_accessor position: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetExportRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor stage_name: ::String
+      attr_accessor export_type: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor accepts: ::String
+      SENSITIVE: []
+    end
+
+    class GetGatewayResponseRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor response_type: ("DEFAULT_4XX" | "DEFAULT_5XX" | "RESOURCE_NOT_FOUND" | "UNAUTHORIZED" | "INVALID_API_KEY" | "ACCESS_DENIED" | "AUTHORIZER_FAILURE" | "AUTHORIZER_CONFIGURATION_ERROR" | "INVALID_SIGNATURE" | "EXPIRED_TOKEN" | "MISSING_AUTHENTICATION_TOKEN" | "INTEGRATION_FAILURE" | "INTEGRATION_TIMEOUT" | "API_CONFIGURATION_ERROR" | "UNSUPPORTED_MEDIA_TYPE" | "BAD_REQUEST_PARAMETERS" | "BAD_REQUEST_BODY" | "REQUEST_TOO_LARGE" | "THROTTLED" | "QUOTA_EXCEEDED" | "WAF_FILTERED")
+      SENSITIVE: []
+    end
+
+    class GetGatewayResponsesRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor position: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetIntegrationRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor http_method: ::String
+      SENSITIVE: []
+    end
+
+    class GetIntegrationResponseRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor http_method: ::String
+      attr_accessor status_code: ::String
+      SENSITIVE: []
+    end
+
+    class GetMethodRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor http_method: ::String
+      SENSITIVE: []
+    end
+
+    class GetMethodResponseRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor http_method: ::String
+      attr_accessor status_code: ::String
+      SENSITIVE: []
+    end
+
+    class GetModelRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor model_name: ::String
+      attr_accessor flatten: bool
+      SENSITIVE: []
+    end
+
+    class GetModelTemplateRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor model_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetModelsRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor position: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetRequestValidatorRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor request_validator_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRequestValidatorsRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor position: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetResourceRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor embed: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetResourcesRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor position: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor embed: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetRestApiRequest
+      attr_accessor rest_api_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRestApisRequest
+      attr_accessor position: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetSdkRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor stage_name: ::String
+      attr_accessor sdk_type: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetSdkTypeRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSdkTypesRequest
+      attr_accessor position: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetStageRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor stage_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetStagesRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor deployment_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetTagsRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor position: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetUsagePlanKeyRequest
+      attr_accessor usage_plan_id: ::String
+      attr_accessor key_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetUsagePlanKeysRequest
+      attr_accessor usage_plan_id: ::String
+      attr_accessor position: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor name_query: ::String
+      SENSITIVE: []
+    end
+
+    class GetUsagePlanRequest
+      attr_accessor usage_plan_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetUsagePlansRequest
+      attr_accessor position: ::String
+      attr_accessor key_id: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetUsageRequest
+      attr_accessor usage_plan_id: ::String
+      attr_accessor key_id: ::String
+      attr_accessor start_date: ::String
+      attr_accessor end_date: ::String
+      attr_accessor position: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetVpcLinkRequest
+      attr_accessor vpc_link_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetVpcLinksRequest
+      attr_accessor position: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ImportApiKeysRequest
+      attr_accessor body: ::String
+      attr_accessor format: ("csv")
+      attr_accessor fail_on_warnings: bool
+      SENSITIVE: []
+    end
+
+    class ImportDocumentationPartsRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor mode: ("merge" | "overwrite")
+      attr_accessor fail_on_warnings: bool
+      attr_accessor body: ::String
+      SENSITIVE: []
+    end
+
+    class ImportRestApiRequest
+      attr_accessor fail_on_warnings: bool
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor body: ::String
+      SENSITIVE: []
+    end
+
+    class Integration
+      attr_accessor type: ("HTTP" | "AWS" | "MOCK" | "HTTP_PROXY" | "AWS_PROXY")
+      attr_accessor http_method: ::String
+      attr_accessor uri: ::String
+      attr_accessor connection_type: ("INTERNET" | "VPC_LINK")
+      attr_accessor connection_id: ::String
+      attr_accessor credentials: ::String
+      attr_accessor request_parameters: ::Hash[::String, ::String]
+      attr_accessor request_templates: ::Hash[::String, ::String]
+      attr_accessor passthrough_behavior: ::String
+      attr_accessor content_handling: ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
+      attr_accessor timeout_in_millis: ::Integer
+      attr_accessor cache_namespace: ::String
+      attr_accessor cache_key_parameters: ::Array[::String]
+      attr_accessor integration_responses: ::Hash[::String, Types::IntegrationResponse]
+      attr_accessor tls_config: Types::TlsConfig
+      SENSITIVE: []
+    end
+
+    class IntegrationResponse
+      attr_accessor status_code: ::String
+      attr_accessor selection_pattern: ::String
+      attr_accessor response_parameters: ::Hash[::String, ::String]
+      attr_accessor response_templates: ::Hash[::String, ::String]
+      attr_accessor content_handling: ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor retry_after_seconds: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Method
+      attr_accessor http_method: ::String
+      attr_accessor authorization_type: ::String
+      attr_accessor authorizer_id: ::String
+      attr_accessor api_key_required: bool
+      attr_accessor request_validator_id: ::String
+      attr_accessor operation_name: ::String
+      attr_accessor request_parameters: ::Hash[::String, bool]
+      attr_accessor request_models: ::Hash[::String, ::String]
+      attr_accessor method_responses: ::Hash[::String, Types::MethodResponse]
+      attr_accessor method_integration: Types::Integration
+      attr_accessor authorization_scopes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class MethodResponse
+      attr_accessor status_code: ::String
+      attr_accessor response_parameters: ::Hash[::String, bool]
+      attr_accessor response_models: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class MethodSetting
+      attr_accessor metrics_enabled: bool
+      attr_accessor logging_level: ::String
+      attr_accessor data_trace_enabled: bool
+      attr_accessor throttling_burst_limit: ::Integer
+      attr_accessor throttling_rate_limit: ::Float
+      attr_accessor caching_enabled: bool
+      attr_accessor cache_ttl_in_seconds: ::Integer
+      attr_accessor cache_data_encrypted: bool
+      attr_accessor require_authorization_for_cache_control: bool
+      attr_accessor unauthorized_cache_control_header_strategy: ("FAIL_WITH_403" | "SUCCEED_WITH_RESPONSE_HEADER" | "SUCCEED_WITHOUT_RESPONSE_HEADER")
+      SENSITIVE: []
+    end
+
+    class MethodSnapshot
+      attr_accessor authorization_type: ::String
+      attr_accessor api_key_required: bool
+      SENSITIVE: []
+    end
+
+    class Model
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor schema: ::String
+      attr_accessor content_type: ::String
+      SENSITIVE: []
+    end
+
+    class Models
+      attr_accessor position: ::String
+      attr_accessor items: ::Array[Types::Model]
+      SENSITIVE: []
+    end
+
+    class MutualTlsAuthentication
+      attr_accessor truststore_uri: ::String
+      attr_accessor truststore_version: ::String
+      attr_accessor truststore_warnings: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class MutualTlsAuthenticationInput
+      attr_accessor truststore_uri: ::String
+      attr_accessor truststore_version: ::String
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PatchOperation
+      attr_accessor op: ("add" | "remove" | "replace" | "move" | "copy" | "test")
+      attr_accessor path: ::String
+      attr_accessor value: ::String
+      attr_accessor from: ::String
+      SENSITIVE: []
+    end
+
+    class PutGatewayResponseRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor response_type: ("DEFAULT_4XX" | "DEFAULT_5XX" | "RESOURCE_NOT_FOUND" | "UNAUTHORIZED" | "INVALID_API_KEY" | "ACCESS_DENIED" | "AUTHORIZER_FAILURE" | "AUTHORIZER_CONFIGURATION_ERROR" | "INVALID_SIGNATURE" | "EXPIRED_TOKEN" | "MISSING_AUTHENTICATION_TOKEN" | "INTEGRATION_FAILURE" | "INTEGRATION_TIMEOUT" | "API_CONFIGURATION_ERROR" | "UNSUPPORTED_MEDIA_TYPE" | "BAD_REQUEST_PARAMETERS" | "BAD_REQUEST_BODY" | "REQUEST_TOO_LARGE" | "THROTTLED" | "QUOTA_EXCEEDED" | "WAF_FILTERED")
+      attr_accessor status_code: ::String
+      attr_accessor response_parameters: ::Hash[::String, ::String]
+      attr_accessor response_templates: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PutIntegrationRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor http_method: ::String
+      attr_accessor type: ("HTTP" | "AWS" | "MOCK" | "HTTP_PROXY" | "AWS_PROXY")
+      attr_accessor integration_http_method: ::String
+      attr_accessor uri: ::String
+      attr_accessor connection_type: ("INTERNET" | "VPC_LINK")
+      attr_accessor connection_id: ::String
+      attr_accessor credentials: ::String
+      attr_accessor request_parameters: ::Hash[::String, ::String]
+      attr_accessor request_templates: ::Hash[::String, ::String]
+      attr_accessor passthrough_behavior: ::String
+      attr_accessor cache_namespace: ::String
+      attr_accessor cache_key_parameters: ::Array[::String]
+      attr_accessor content_handling: ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
+      attr_accessor timeout_in_millis: ::Integer
+      attr_accessor tls_config: Types::TlsConfig
+      SENSITIVE: []
+    end
+
+    class PutIntegrationResponseRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor http_method: ::String
+      attr_accessor status_code: ::String
+      attr_accessor selection_pattern: ::String
+      attr_accessor response_parameters: ::Hash[::String, ::String]
+      attr_accessor response_templates: ::Hash[::String, ::String]
+      attr_accessor content_handling: ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
+      SENSITIVE: []
+    end
+
+    class PutMethodRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor http_method: ::String
+      attr_accessor authorization_type: ::String
+      attr_accessor authorizer_id: ::String
+      attr_accessor api_key_required: bool
+      attr_accessor operation_name: ::String
+      attr_accessor request_parameters: ::Hash[::String, bool]
+      attr_accessor request_models: ::Hash[::String, ::String]
+      attr_accessor request_validator_id: ::String
+      attr_accessor authorization_scopes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PutMethodResponseRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor http_method: ::String
+      attr_accessor status_code: ::String
+      attr_accessor response_parameters: ::Hash[::String, bool]
+      attr_accessor response_models: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PutRestApiRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor mode: ("merge" | "overwrite")
+      attr_accessor fail_on_warnings: bool
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor body: ::String
+      SENSITIVE: []
+    end
+
+    class QuotaSettings
+      attr_accessor limit: ::Integer
+      attr_accessor offset: ::Integer
+      attr_accessor period: ("DAY" | "WEEK" | "MONTH")
+      SENSITIVE: []
+    end
+
+    class RequestValidator
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor validate_request_body: bool
+      attr_accessor validate_request_parameters: bool
+      SENSITIVE: []
+    end
+
+    class RequestValidators
+      attr_accessor position: ::String
+      attr_accessor items: ::Array[Types::RequestValidator]
+      SENSITIVE: []
+    end
+
+    class Resource
+      attr_accessor id: ::String
+      attr_accessor parent_id: ::String
+      attr_accessor path_part: ::String
+      attr_accessor path: ::String
+      attr_accessor resource_methods: ::Hash[::String, Types::Method]
+      SENSITIVE: []
+    end
+
+    class Resources
+      attr_accessor position: ::String
+      attr_accessor items: ::Array[Types::Resource]
+      SENSITIVE: []
+    end
+
+    class RestApi
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor version: ::String
+      attr_accessor warnings: ::Array[::String]
+      attr_accessor binary_media_types: ::Array[::String]
+      attr_accessor minimum_compression_size: ::Integer
+      attr_accessor api_key_source: ("HEADER" | "AUTHORIZER")
+      attr_accessor endpoint_configuration: Types::EndpointConfiguration
+      attr_accessor policy: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor disable_execute_api_endpoint: bool
+      attr_accessor root_resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class RestApis
+      attr_accessor position: ::String
+      attr_accessor items: ::Array[Types::RestApi]
+      SENSITIVE: []
+    end
+
+    class SdkConfigurationProperty
+      attr_accessor name: ::String
+      attr_accessor friendly_name: ::String
+      attr_accessor description: ::String
+      attr_accessor required: bool
+      attr_accessor default_value: ::String
+      SENSITIVE: []
+    end
+
+    class SdkResponse
+      attr_accessor content_type: ::String
+      attr_accessor content_disposition: ::String
+      attr_accessor body: ::String
+      SENSITIVE: []
+    end
+
+    class SdkType
+      attr_accessor id: ::String
+      attr_accessor friendly_name: ::String
+      attr_accessor description: ::String
+      attr_accessor configuration_properties: ::Array[Types::SdkConfigurationProperty]
+      SENSITIVE: []
+    end
+
+    class SdkTypes
+      attr_accessor position: ::String
+      attr_accessor items: ::Array[Types::SdkType]
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor retry_after_seconds: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Stage
+      attr_accessor deployment_id: ::String
+      attr_accessor client_certificate_id: ::String
+      attr_accessor stage_name: ::String
+      attr_accessor description: ::String
+      attr_accessor cache_cluster_enabled: bool
+      attr_accessor cache_cluster_size: ("0.5" | "1.6" | "6.1" | "13.5" | "28.4" | "58.2" | "118" | "237")
+      attr_accessor cache_cluster_status: ("CREATE_IN_PROGRESS" | "AVAILABLE" | "DELETE_IN_PROGRESS" | "NOT_AVAILABLE" | "FLUSH_IN_PROGRESS")
+      attr_accessor method_settings: ::Hash[::String, Types::MethodSetting]
+      attr_accessor variables: ::Hash[::String, ::String]
+      attr_accessor documentation_version: ::String
+      attr_accessor access_log_settings: Types::AccessLogSettings
+      attr_accessor canary_settings: Types::CanarySettings
+      attr_accessor tracing_enabled: bool
+      attr_accessor web_acl_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor created_date: ::Time
+      attr_accessor last_updated_date: ::Time
+      SENSITIVE: []
+    end
+
+    class StageKey
+      attr_accessor rest_api_id: ::String
+      attr_accessor stage_name: ::String
+      SENSITIVE: []
+    end
+
+    class Stages
+      attr_accessor item: ::Array[Types::Stage]
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Tags
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Template
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TestInvokeAuthorizerRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor authorizer_id: ::String
+      attr_accessor headers: ::Hash[::String, ::String]
+      attr_accessor multi_value_headers: ::Hash[::String, ::Array[::String]]
+      attr_accessor path_with_query_string: ::String
+      attr_accessor body: ::String
+      attr_accessor stage_variables: ::Hash[::String, ::String]
+      attr_accessor additional_context: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TestInvokeAuthorizerResponse
+      attr_accessor client_status: ::Integer
+      attr_accessor log: ::String
+      attr_accessor latency: ::Integer
+      attr_accessor principal_id: ::String
+      attr_accessor policy: ::String
+      attr_accessor authorization: ::Hash[::String, ::Array[::String]]
+      attr_accessor claims: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TestInvokeMethodRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor http_method: ::String
+      attr_accessor path_with_query_string: ::String
+      attr_accessor body: ::String
+      attr_accessor headers: ::Hash[::String, ::String]
+      attr_accessor multi_value_headers: ::Hash[::String, ::Array[::String]]
+      attr_accessor client_certificate_id: ::String
+      attr_accessor stage_variables: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TestInvokeMethodResponse
+      attr_accessor status: ::Integer
+      attr_accessor body: ::String
+      attr_accessor headers: ::Hash[::String, ::String]
+      attr_accessor multi_value_headers: ::Hash[::String, ::Array[::String]]
+      attr_accessor log: ::String
+      attr_accessor latency: ::Integer
+      SENSITIVE: []
+    end
+
+    class ThrottleSettings
+      attr_accessor burst_limit: ::Integer
+      attr_accessor rate_limit: ::Float
+      SENSITIVE: []
+    end
+
+    class TlsConfig
+      attr_accessor insecure_skip_verification: bool
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor retry_after_seconds: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnauthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateAccountRequest
+      attr_accessor patch_operations: ::Array[Types::PatchOperation]
+      SENSITIVE: []
+    end
+
+    class UpdateApiKeyRequest
+      attr_accessor api_key: ::String
+      attr_accessor patch_operations: ::Array[Types::PatchOperation]
+      SENSITIVE: []
+    end
+
+    class UpdateAuthorizerRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor authorizer_id: ::String
+      attr_accessor patch_operations: ::Array[Types::PatchOperation]
+      SENSITIVE: []
+    end
+
+    class UpdateBasePathMappingRequest
+      attr_accessor domain_name: ::String
+      attr_accessor base_path: ::String
+      attr_accessor patch_operations: ::Array[Types::PatchOperation]
+      SENSITIVE: []
+    end
+
+    class UpdateClientCertificateRequest
+      attr_accessor client_certificate_id: ::String
+      attr_accessor patch_operations: ::Array[Types::PatchOperation]
+      SENSITIVE: []
+    end
+
+    class UpdateDeploymentRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor deployment_id: ::String
+      attr_accessor patch_operations: ::Array[Types::PatchOperation]
+      SENSITIVE: []
+    end
+
+    class UpdateDocumentationPartRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor documentation_part_id: ::String
+      attr_accessor patch_operations: ::Array[Types::PatchOperation]
+      SENSITIVE: []
+    end
+
+    class UpdateDocumentationVersionRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor documentation_version: ::String
+      attr_accessor patch_operations: ::Array[Types::PatchOperation]
+      SENSITIVE: []
+    end
+
+    class UpdateDomainNameRequest
+      attr_accessor domain_name: ::String
+      attr_accessor patch_operations: ::Array[Types::PatchOperation]
+      SENSITIVE: []
+    end
+
+    class UpdateGatewayResponseRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor response_type: ("DEFAULT_4XX" | "DEFAULT_5XX" | "RESOURCE_NOT_FOUND" | "UNAUTHORIZED" | "INVALID_API_KEY" | "ACCESS_DENIED" | "AUTHORIZER_FAILURE" | "AUTHORIZER_CONFIGURATION_ERROR" | "INVALID_SIGNATURE" | "EXPIRED_TOKEN" | "MISSING_AUTHENTICATION_TOKEN" | "INTEGRATION_FAILURE" | "INTEGRATION_TIMEOUT" | "API_CONFIGURATION_ERROR" | "UNSUPPORTED_MEDIA_TYPE" | "BAD_REQUEST_PARAMETERS" | "BAD_REQUEST_BODY" | "REQUEST_TOO_LARGE" | "THROTTLED" | "QUOTA_EXCEEDED" | "WAF_FILTERED")
+      attr_accessor patch_operations: ::Array[Types::PatchOperation]
+      SENSITIVE: []
+    end
+
+    class UpdateIntegrationRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor http_method: ::String
+      attr_accessor patch_operations: ::Array[Types::PatchOperation]
+      SENSITIVE: []
+    end
+
+    class UpdateIntegrationResponseRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor http_method: ::String
+      attr_accessor status_code: ::String
+      attr_accessor patch_operations: ::Array[Types::PatchOperation]
+      SENSITIVE: []
+    end
+
+    class UpdateMethodRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor http_method: ::String
+      attr_accessor patch_operations: ::Array[Types::PatchOperation]
+      SENSITIVE: []
+    end
+
+    class UpdateMethodResponseRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor http_method: ::String
+      attr_accessor status_code: ::String
+      attr_accessor patch_operations: ::Array[Types::PatchOperation]
+      SENSITIVE: []
+    end
+
+    class UpdateModelRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor model_name: ::String
+      attr_accessor patch_operations: ::Array[Types::PatchOperation]
+      SENSITIVE: []
+    end
+
+    class UpdateRequestValidatorRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor request_validator_id: ::String
+      attr_accessor patch_operations: ::Array[Types::PatchOperation]
+      SENSITIVE: []
+    end
+
+    class UpdateResourceRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor patch_operations: ::Array[Types::PatchOperation]
+      SENSITIVE: []
+    end
+
+    class UpdateRestApiRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor patch_operations: ::Array[Types::PatchOperation]
+      SENSITIVE: []
+    end
+
+    class UpdateStageRequest
+      attr_accessor rest_api_id: ::String
+      attr_accessor stage_name: ::String
+      attr_accessor patch_operations: ::Array[Types::PatchOperation]
+      SENSITIVE: []
+    end
+
+    class UpdateUsagePlanRequest
+      attr_accessor usage_plan_id: ::String
+      attr_accessor patch_operations: ::Array[Types::PatchOperation]
+      SENSITIVE: []
+    end
+
+    class UpdateUsageRequest
+      attr_accessor usage_plan_id: ::String
+      attr_accessor key_id: ::String
+      attr_accessor patch_operations: ::Array[Types::PatchOperation]
+      SENSITIVE: []
+    end
+
+    class UpdateVpcLinkRequest
+      attr_accessor vpc_link_id: ::String
+      attr_accessor patch_operations: ::Array[Types::PatchOperation]
+      SENSITIVE: []
+    end
+
+    class Usage
+      attr_accessor usage_plan_id: ::String
+      attr_accessor start_date: ::String
+      attr_accessor end_date: ::String
+      attr_accessor position: ::String
+      attr_accessor items: ::Hash[::String, ::Array[::Array[::Integer]]]
+      SENSITIVE: []
+    end
+
+    class UsagePlan
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor api_stages: ::Array[Types::ApiStage]
+      attr_accessor throttle: Types::ThrottleSettings
+      attr_accessor quota: Types::QuotaSettings
+      attr_accessor product_code: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UsagePlanKey
+      attr_accessor id: ::String
+      attr_accessor type: ::String
+      attr_accessor value: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UsagePlanKeys
+      attr_accessor position: ::String
+      attr_accessor items: ::Array[Types::UsagePlanKey]
+      SENSITIVE: []
+    end
+
+    class UsagePlans
+      attr_accessor position: ::String
+      attr_accessor items: ::Array[Types::UsagePlan]
+      SENSITIVE: []
+    end
+
+    class VpcLink
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor target_arns: ::Array[::String]
+      attr_accessor status: ("AVAILABLE" | "PENDING" | "DELETING" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class VpcLinks
+      attr_accessor position: ::String
+      attr_accessor items: ::Array[Types::VpcLink]
+      SENSITIVE: []
+    end
+  end
+end

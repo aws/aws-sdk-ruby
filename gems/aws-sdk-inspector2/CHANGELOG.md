@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2024-01-26)
+------------------
+
+* Feature - This release adds ECR container image scanning based on their lastRecordedPullTime.
+
 1.25.0 (2024-01-23)
 ------------------
 

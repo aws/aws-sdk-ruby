@@ -1,0 +1,430 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module FIS
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FIS/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateExperimentTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateExperimentTemplateResponse]
+        def experiment_template: () -> Types::ExperimentTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FIS/Client.html#create_experiment_template-instance_method
+      def create_experiment_template: (
+                                        client_token: ::String,
+                                        description: ::String,
+                                        stop_conditions: Array[
+                                          {
+                                            source: ::String,
+                                            value: ::String?
+                                          },
+                                        ],
+                                        ?targets: Hash[::String, {
+                                            resource_type: ::String,
+                                            resource_arns: Array[::String]?,
+                                            resource_tags: Hash[::String, ::String]?,
+                                            filters: Array[
+                                              {
+                                                path: ::String,
+                                                values: Array[::String]
+                                              },
+                                            ]?,
+                                            selection_mode: ::String,
+                                            parameters: Hash[::String, ::String]?
+                                          }],
+                                        actions: Hash[::String, {
+                                            action_id: ::String,
+                                            description: ::String?,
+                                            parameters: Hash[::String, ::String]?,
+                                            targets: Hash[::String, ::String]?,
+                                            start_after: Array[::String]?
+                                          }],
+                                        role_arn: ::String,
+                                        ?tags: Hash[::String, ::String],
+                                        ?log_configuration: {
+                                          cloud_watch_logs_configuration: {
+                                            log_group_arn: ::String
+                                          }?,
+                                          s3_configuration: {
+                                            bucket_name: ::String,
+                                            prefix: ::String?
+                                          }?,
+                                          log_schema_version: ::Integer
+                                        },
+                                        ?experiment_options: {
+                                          account_targeting: ("single-account" | "multi-account")?,
+                                          empty_target_resolution_mode: ("fail" | "skip")?
+                                        }
+                                      ) -> _CreateExperimentTemplateResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateExperimentTemplateResponseSuccess
+
+      interface _CreateTargetAccountConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTargetAccountConfigurationResponse]
+        def target_account_configuration: () -> Types::TargetAccountConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FIS/Client.html#create_target_account_configuration-instance_method
+      def create_target_account_configuration: (
+                                                 ?client_token: ::String,
+                                                 experiment_template_id: ::String,
+                                                 account_id: ::String,
+                                                 role_arn: ::String,
+                                                 ?description: ::String
+                                               ) -> _CreateTargetAccountConfigurationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTargetAccountConfigurationResponseSuccess
+
+      interface _DeleteExperimentTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteExperimentTemplateResponse]
+        def experiment_template: () -> Types::ExperimentTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FIS/Client.html#delete_experiment_template-instance_method
+      def delete_experiment_template: (
+                                        id: ::String
+                                      ) -> _DeleteExperimentTemplateResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteExperimentTemplateResponseSuccess
+
+      interface _DeleteTargetAccountConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTargetAccountConfigurationResponse]
+        def target_account_configuration: () -> Types::TargetAccountConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FIS/Client.html#delete_target_account_configuration-instance_method
+      def delete_target_account_configuration: (
+                                                 experiment_template_id: ::String,
+                                                 account_id: ::String
+                                               ) -> _DeleteTargetAccountConfigurationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTargetAccountConfigurationResponseSuccess
+
+      interface _GetActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetActionResponse]
+        def action: () -> Types::Action
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FIS/Client.html#get_action-instance_method
+      def get_action: (
+                        id: ::String
+                      ) -> _GetActionResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetActionResponseSuccess
+
+      interface _GetExperimentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetExperimentResponse]
+        def experiment: () -> Types::Experiment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FIS/Client.html#get_experiment-instance_method
+      def get_experiment: (
+                            id: ::String
+                          ) -> _GetExperimentResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetExperimentResponseSuccess
+
+      interface _GetExperimentTargetAccountConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetExperimentTargetAccountConfigurationResponse]
+        def target_account_configuration: () -> Types::ExperimentTargetAccountConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FIS/Client.html#get_experiment_target_account_configuration-instance_method
+      def get_experiment_target_account_configuration: (
+                                                         experiment_id: ::String,
+                                                         account_id: ::String
+                                                       ) -> _GetExperimentTargetAccountConfigurationResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetExperimentTargetAccountConfigurationResponseSuccess
+
+      interface _GetExperimentTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetExperimentTemplateResponse]
+        def experiment_template: () -> Types::ExperimentTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FIS/Client.html#get_experiment_template-instance_method
+      def get_experiment_template: (
+                                     id: ::String
+                                   ) -> _GetExperimentTemplateResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetExperimentTemplateResponseSuccess
+
+      interface _GetTargetAccountConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTargetAccountConfigurationResponse]
+        def target_account_configuration: () -> Types::TargetAccountConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FIS/Client.html#get_target_account_configuration-instance_method
+      def get_target_account_configuration: (
+                                              experiment_template_id: ::String,
+                                              account_id: ::String
+                                            ) -> _GetTargetAccountConfigurationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTargetAccountConfigurationResponseSuccess
+
+      interface _GetTargetResourceTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTargetResourceTypeResponse]
+        def target_resource_type: () -> Types::TargetResourceType
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FIS/Client.html#get_target_resource_type-instance_method
+      def get_target_resource_type: (
+                                      resource_type: ::String
+                                    ) -> _GetTargetResourceTypeResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTargetResourceTypeResponseSuccess
+
+      interface _ListActionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListActionsResponse]
+        def actions: () -> ::Array[Types::ActionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FIS/Client.html#list_actions-instance_method
+      def list_actions: (
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListActionsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListActionsResponseSuccess
+
+      interface _ListExperimentResolvedTargetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListExperimentResolvedTargetsResponse]
+        def resolved_targets: () -> ::Array[Types::ResolvedTarget]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FIS/Client.html#list_experiment_resolved_targets-instance_method
+      def list_experiment_resolved_targets: (
+                                              experiment_id: ::String,
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String,
+                                              ?target_name: ::String
+                                            ) -> _ListExperimentResolvedTargetsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExperimentResolvedTargetsResponseSuccess
+
+      interface _ListExperimentTargetAccountConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListExperimentTargetAccountConfigurationsResponse]
+        def target_account_configurations: () -> ::Array[Types::ExperimentTargetAccountConfigurationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FIS/Client.html#list_experiment_target_account_configurations-instance_method
+      def list_experiment_target_account_configurations: (
+                                                           experiment_id: ::String,
+                                                           ?next_token: ::String
+                                                         ) -> _ListExperimentTargetAccountConfigurationsResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExperimentTargetAccountConfigurationsResponseSuccess
+
+      interface _ListExperimentTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListExperimentTemplatesResponse]
+        def experiment_templates: () -> ::Array[Types::ExperimentTemplateSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FIS/Client.html#list_experiment_templates-instance_method
+      def list_experiment_templates: (
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListExperimentTemplatesResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExperimentTemplatesResponseSuccess
+
+      interface _ListExperimentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListExperimentsResponse]
+        def experiments: () -> ::Array[Types::ExperimentSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FIS/Client.html#list_experiments-instance_method
+      def list_experiments: (
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _ListExperimentsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExperimentsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FIS/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTargetAccountConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTargetAccountConfigurationsResponse]
+        def target_account_configurations: () -> ::Array[Types::TargetAccountConfigurationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FIS/Client.html#list_target_account_configurations-instance_method
+      def list_target_account_configurations: (
+                                                experiment_template_id: ::String,
+                                                ?max_results: ::Integer,
+                                                ?next_token: ::String
+                                              ) -> _ListTargetAccountConfigurationsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTargetAccountConfigurationsResponseSuccess
+
+      interface _ListTargetResourceTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTargetResourceTypesResponse]
+        def target_resource_types: () -> ::Array[Types::TargetResourceTypeSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FIS/Client.html#list_target_resource_types-instance_method
+      def list_target_resource_types: (
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListTargetResourceTypesResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTargetResourceTypesResponseSuccess
+
+      interface _StartExperimentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartExperimentResponse]
+        def experiment: () -> Types::Experiment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FIS/Client.html#start_experiment-instance_method
+      def start_experiment: (
+                              client_token: ::String,
+                              experiment_template_id: ::String,
+                              ?tags: Hash[::String, ::String]
+                            ) -> _StartExperimentResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartExperimentResponseSuccess
+
+      interface _StopExperimentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopExperimentResponse]
+        def experiment: () -> Types::Experiment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FIS/Client.html#stop_experiment-instance_method
+      def stop_experiment: (
+                             id: ::String
+                           ) -> _StopExperimentResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopExperimentResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FIS/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FIS/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            ?tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateExperimentTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateExperimentTemplateResponse]
+        def experiment_template: () -> Types::ExperimentTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FIS/Client.html#update_experiment_template-instance_method
+      def update_experiment_template: (
+                                        id: ::String,
+                                        ?description: ::String,
+                                        ?stop_conditions: Array[
+                                          {
+                                            source: ::String,
+                                            value: ::String?
+                                          },
+                                        ],
+                                        ?targets: Hash[::String, {
+                                            resource_type: ::String,
+                                            resource_arns: Array[::String]?,
+                                            resource_tags: Hash[::String, ::String]?,
+                                            filters: Array[
+                                              {
+                                                path: ::String,
+                                                values: Array[::String]
+                                              },
+                                            ]?,
+                                            selection_mode: ::String,
+                                            parameters: Hash[::String, ::String]?
+                                          }],
+                                        ?actions: Hash[::String, {
+                                            action_id: ::String?,
+                                            description: ::String?,
+                                            parameters: Hash[::String, ::String]?,
+                                            targets: Hash[::String, ::String]?,
+                                            start_after: Array[::String]?
+                                          }],
+                                        ?role_arn: ::String,
+                                        ?log_configuration: {
+                                          cloud_watch_logs_configuration: {
+                                            log_group_arn: ::String
+                                          }?,
+                                          s3_configuration: {
+                                            bucket_name: ::String,
+                                            prefix: ::String?
+                                          }?,
+                                          log_schema_version: ::Integer?
+                                        },
+                                        ?experiment_options: {
+                                          empty_target_resolution_mode: ("fail" | "skip")?
+                                        }
+                                      ) -> _UpdateExperimentTemplateResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateExperimentTemplateResponseSuccess
+
+      interface _UpdateTargetAccountConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTargetAccountConfigurationResponse]
+        def target_account_configuration: () -> Types::TargetAccountConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FIS/Client.html#update_target_account_configuration-instance_method
+      def update_target_account_configuration: (
+                                                 experiment_template_id: ::String,
+                                                 account_id: ::String,
+                                                 ?role_arn: ::String,
+                                                 ?description: ::String
+                                               ) -> _UpdateTargetAccountConfigurationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTargetAccountConfigurationResponseSuccess
+    end
+  end
+end
+

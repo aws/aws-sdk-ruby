@@ -1,0 +1,1105 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module OpenSearchService
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AcceptInboundConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptInboundConnectionResponse]
+        def connection: () -> Types::InboundConnection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#accept_inbound_connection-instance_method
+      def accept_inbound_connection: (
+                                       connection_id: ::String
+                                     ) -> _AcceptInboundConnectionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptInboundConnectionResponseSuccess
+
+      interface _AddDataSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddDataSourceResponse]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#add_data_source-instance_method
+      def add_data_source: (
+                             domain_name: ::String,
+                             name: ::String,
+                             data_source_type: {
+                               s3_glue_data_catalog: {
+                                 role_arn: ::String?
+                               }?
+                             },
+                             ?description: ::String
+                           ) -> _AddDataSourceResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddDataSourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#add_tags-instance_method
+      def add_tags: (
+                      arn: ::String,
+                      tag_list: Array[
+                        {
+                          key: ::String,
+                          value: ::String
+                        },
+                      ]
+                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _AssociatePackageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociatePackageResponse]
+        def domain_package_details: () -> Types::DomainPackageDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#associate_package-instance_method
+      def associate_package: (
+                               package_id: ::String,
+                               domain_name: ::String
+                             ) -> _AssociatePackageResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociatePackageResponseSuccess
+
+      interface _AuthorizeVpcEndpointAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AuthorizeVpcEndpointAccessResponse]
+        def authorized_principal: () -> Types::AuthorizedPrincipal
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#authorize_vpc_endpoint_access-instance_method
+      def authorize_vpc_endpoint_access: (
+                                           domain_name: ::String,
+                                           account: ::String
+                                         ) -> _AuthorizeVpcEndpointAccessResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AuthorizeVpcEndpointAccessResponseSuccess
+
+      interface _CancelServiceSoftwareUpdateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelServiceSoftwareUpdateResponse]
+        def service_software_options: () -> Types::ServiceSoftwareOptions
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#cancel_service_software_update-instance_method
+      def cancel_service_software_update: (
+                                            domain_name: ::String
+                                          ) -> _CancelServiceSoftwareUpdateResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelServiceSoftwareUpdateResponseSuccess
+
+      interface _CreateDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDomainResponse]
+        def domain_status: () -> Types::DomainStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#create_domain-instance_method
+      def create_domain: (
+                           domain_name: ::String,
+                           ?engine_version: ::String,
+                           ?cluster_config: {
+                             instance_type: ("m3.medium.search" | "m3.large.search" | "m3.xlarge.search" | "m3.2xlarge.search" | "m4.large.search" | "m4.xlarge.search" | "m4.2xlarge.search" | "m4.4xlarge.search" | "m4.10xlarge.search" | "m5.large.search" | "m5.xlarge.search" | "m5.2xlarge.search" | "m5.4xlarge.search" | "m5.12xlarge.search" | "m5.24xlarge.search" | "r5.large.search" | "r5.xlarge.search" | "r5.2xlarge.search" | "r5.4xlarge.search" | "r5.12xlarge.search" | "r5.24xlarge.search" | "c5.large.search" | "c5.xlarge.search" | "c5.2xlarge.search" | "c5.4xlarge.search" | "c5.9xlarge.search" | "c5.18xlarge.search" | "t3.nano.search" | "t3.micro.search" | "t3.small.search" | "t3.medium.search" | "t3.large.search" | "t3.xlarge.search" | "t3.2xlarge.search" | "ultrawarm1.medium.search" | "ultrawarm1.large.search" | "ultrawarm1.xlarge.search" | "t2.micro.search" | "t2.small.search" | "t2.medium.search" | "r3.large.search" | "r3.xlarge.search" | "r3.2xlarge.search" | "r3.4xlarge.search" | "r3.8xlarge.search" | "i2.xlarge.search" | "i2.2xlarge.search" | "d2.xlarge.search" | "d2.2xlarge.search" | "d2.4xlarge.search" | "d2.8xlarge.search" | "c4.large.search" | "c4.xlarge.search" | "c4.2xlarge.search" | "c4.4xlarge.search" | "c4.8xlarge.search" | "r4.large.search" | "r4.xlarge.search" | "r4.2xlarge.search" | "r4.4xlarge.search" | "r4.8xlarge.search" | "r4.16xlarge.search" | "i3.large.search" | "i3.xlarge.search" | "i3.2xlarge.search" | "i3.4xlarge.search" | "i3.8xlarge.search" | "i3.16xlarge.search" | "r6g.large.search" | "r6g.xlarge.search" | "r6g.2xlarge.search" | "r6g.4xlarge.search" | "r6g.8xlarge.search" | "r6g.12xlarge.search" | "m6g.large.search" | "m6g.xlarge.search" | "m6g.2xlarge.search" | "m6g.4xlarge.search" | "m6g.8xlarge.search" | "m6g.12xlarge.search" | "c6g.large.search" | "c6g.xlarge.search" | "c6g.2xlarge.search" | "c6g.4xlarge.search" | "c6g.8xlarge.search" | "c6g.12xlarge.search" | "r6gd.large.search" | "r6gd.xlarge.search" | "r6gd.2xlarge.search" | "r6gd.4xlarge.search" | "r6gd.8xlarge.search" | "r6gd.12xlarge.search" | "r6gd.16xlarge.search" | "t4g.small.search" | "t4g.medium.search")?,
+                             instance_count: ::Integer?,
+                             dedicated_master_enabled: bool?,
+                             zone_awareness_enabled: bool?,
+                             zone_awareness_config: {
+                               availability_zone_count: ::Integer?
+                             }?,
+                             dedicated_master_type: ("m3.medium.search" | "m3.large.search" | "m3.xlarge.search" | "m3.2xlarge.search" | "m4.large.search" | "m4.xlarge.search" | "m4.2xlarge.search" | "m4.4xlarge.search" | "m4.10xlarge.search" | "m5.large.search" | "m5.xlarge.search" | "m5.2xlarge.search" | "m5.4xlarge.search" | "m5.12xlarge.search" | "m5.24xlarge.search" | "r5.large.search" | "r5.xlarge.search" | "r5.2xlarge.search" | "r5.4xlarge.search" | "r5.12xlarge.search" | "r5.24xlarge.search" | "c5.large.search" | "c5.xlarge.search" | "c5.2xlarge.search" | "c5.4xlarge.search" | "c5.9xlarge.search" | "c5.18xlarge.search" | "t3.nano.search" | "t3.micro.search" | "t3.small.search" | "t3.medium.search" | "t3.large.search" | "t3.xlarge.search" | "t3.2xlarge.search" | "ultrawarm1.medium.search" | "ultrawarm1.large.search" | "ultrawarm1.xlarge.search" | "t2.micro.search" | "t2.small.search" | "t2.medium.search" | "r3.large.search" | "r3.xlarge.search" | "r3.2xlarge.search" | "r3.4xlarge.search" | "r3.8xlarge.search" | "i2.xlarge.search" | "i2.2xlarge.search" | "d2.xlarge.search" | "d2.2xlarge.search" | "d2.4xlarge.search" | "d2.8xlarge.search" | "c4.large.search" | "c4.xlarge.search" | "c4.2xlarge.search" | "c4.4xlarge.search" | "c4.8xlarge.search" | "r4.large.search" | "r4.xlarge.search" | "r4.2xlarge.search" | "r4.4xlarge.search" | "r4.8xlarge.search" | "r4.16xlarge.search" | "i3.large.search" | "i3.xlarge.search" | "i3.2xlarge.search" | "i3.4xlarge.search" | "i3.8xlarge.search" | "i3.16xlarge.search" | "r6g.large.search" | "r6g.xlarge.search" | "r6g.2xlarge.search" | "r6g.4xlarge.search" | "r6g.8xlarge.search" | "r6g.12xlarge.search" | "m6g.large.search" | "m6g.xlarge.search" | "m6g.2xlarge.search" | "m6g.4xlarge.search" | "m6g.8xlarge.search" | "m6g.12xlarge.search" | "c6g.large.search" | "c6g.xlarge.search" | "c6g.2xlarge.search" | "c6g.4xlarge.search" | "c6g.8xlarge.search" | "c6g.12xlarge.search" | "r6gd.large.search" | "r6gd.xlarge.search" | "r6gd.2xlarge.search" | "r6gd.4xlarge.search" | "r6gd.8xlarge.search" | "r6gd.12xlarge.search" | "r6gd.16xlarge.search" | "t4g.small.search" | "t4g.medium.search")?,
+                             dedicated_master_count: ::Integer?,
+                             warm_enabled: bool?,
+                             warm_type: ("ultrawarm1.medium.search" | "ultrawarm1.large.search" | "ultrawarm1.xlarge.search")?,
+                             warm_count: ::Integer?,
+                             cold_storage_options: {
+                               enabled: bool
+                             }?,
+                             multi_az_with_standby_enabled: bool?
+                           },
+                           ?ebs_options: {
+                             ebs_enabled: bool?,
+                             volume_type: ("standard" | "gp2" | "io1" | "gp3")?,
+                             volume_size: ::Integer?,
+                             iops: ::Integer?,
+                             throughput: ::Integer?
+                           },
+                           ?access_policies: ::String,
+                           ?ip_address_type: ("ipv4" | "dualstack"),
+                           ?snapshot_options: {
+                             automated_snapshot_start_hour: ::Integer?
+                           },
+                           ?vpc_options: {
+                             subnet_ids: Array[::String]?,
+                             security_group_ids: Array[::String]?
+                           },
+                           ?cognito_options: {
+                             enabled: bool?,
+                             user_pool_id: ::String?,
+                             identity_pool_id: ::String?,
+                             role_arn: ::String?
+                           },
+                           ?encryption_at_rest_options: {
+                             enabled: bool?,
+                             kms_key_id: ::String?
+                           },
+                           ?node_to_node_encryption_options: {
+                             enabled: bool?
+                           },
+                           ?advanced_options: Hash[::String, ::String],
+                           ?log_publishing_options: Hash[("INDEX_SLOW_LOGS" | "SEARCH_SLOW_LOGS" | "ES_APPLICATION_LOGS" | "AUDIT_LOGS"), {
+                               cloud_watch_logs_log_group_arn: ::String?,
+                               enabled: bool?
+                             }],
+                           ?domain_endpoint_options: {
+                             enforce_https: bool?,
+                             tls_security_policy: ("Policy-Min-TLS-1-0-2019-07" | "Policy-Min-TLS-1-2-2019-07" | "Policy-Min-TLS-1-2-PFS-2023-10")?,
+                             custom_endpoint_enabled: bool?,
+                             custom_endpoint: ::String?,
+                             custom_endpoint_certificate_arn: ::String?
+                           },
+                           ?advanced_security_options: {
+                             enabled: bool?,
+                             internal_user_database_enabled: bool?,
+                             master_user_options: {
+                               master_user_arn: ::String?,
+                               master_user_name: ::String?,
+                               master_user_password: ::String?
+                             }?,
+                             saml_options: {
+                               enabled: bool?,
+                               idp: {
+                                 metadata_content: ::String,
+                                 entity_id: ::String
+                               }?,
+                               master_user_name: ::String?,
+                               master_backend_role: ::String?,
+                               subject_key: ::String?,
+                               roles_key: ::String?,
+                               session_timeout_minutes: ::Integer?
+                             }?,
+                             anonymous_auth_enabled: bool?
+                           },
+                           ?tag_list: Array[
+                             {
+                               key: ::String,
+                               value: ::String
+                             },
+                           ],
+                           ?auto_tune_options: {
+                             desired_state: ("ENABLED" | "DISABLED")?,
+                             maintenance_schedules: Array[
+                               {
+                                 start_at: ::Time?,
+                                 duration: {
+                                   value: ::Integer?,
+                                   unit: ("HOURS")?
+                                 }?,
+                                 cron_expression_for_recurrence: ::String?
+                               },
+                             ]?,
+                             use_off_peak_window: bool?
+                           },
+                           ?off_peak_window_options: {
+                             enabled: bool?,
+                             off_peak_window: {
+                               window_start_time: {
+                                 hours: ::Integer,
+                                 minutes: ::Integer
+                               }?
+                             }?
+                           },
+                           ?software_update_options: {
+                             auto_software_update_enabled: bool?
+                           }
+                         ) -> _CreateDomainResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainResponseSuccess
+
+      interface _CreateOutboundConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateOutboundConnectionResponse]
+        def local_domain_info: () -> Types::DomainInformationContainer
+        def remote_domain_info: () -> Types::DomainInformationContainer
+        def connection_alias: () -> ::String
+        def connection_status: () -> Types::OutboundConnectionStatus
+        def connection_id: () -> ::String
+        def connection_mode: () -> ("DIRECT" | "VPC_ENDPOINT")
+        def connection_properties: () -> Types::ConnectionProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#create_outbound_connection-instance_method
+      def create_outbound_connection: (
+                                        local_domain_info: {
+                                          aws_domain_information: {
+                                            owner_id: ::String?,
+                                            domain_name: ::String,
+                                            region: ::String?
+                                          }?
+                                        },
+                                        remote_domain_info: {
+                                          aws_domain_information: {
+                                            owner_id: ::String?,
+                                            domain_name: ::String,
+                                            region: ::String?
+                                          }?
+                                        },
+                                        connection_alias: ::String,
+                                        ?connection_mode: ("DIRECT" | "VPC_ENDPOINT"),
+                                        ?connection_properties: {
+                                          endpoint: ::String?,
+                                          cross_cluster_search: {
+                                            skip_unavailable: ("ENABLED" | "DISABLED")?
+                                          }?
+                                        }
+                                      ) -> _CreateOutboundConnectionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOutboundConnectionResponseSuccess
+
+      interface _CreatePackageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePackageResponse]
+        def package_details: () -> Types::PackageDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#create_package-instance_method
+      def create_package: (
+                            package_name: ::String,
+                            package_type: ("TXT-DICTIONARY" | "ZIP-PLUGIN"),
+                            ?package_description: ::String,
+                            package_source: {
+                              s3_bucket_name: ::String?,
+                              s3_key: ::String?
+                            }
+                          ) -> _CreatePackageResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePackageResponseSuccess
+
+      interface _CreateVpcEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVpcEndpointResponse]
+        def vpc_endpoint: () -> Types::VpcEndpoint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#create_vpc_endpoint-instance_method
+      def create_vpc_endpoint: (
+                                 domain_arn: ::String,
+                                 vpc_options: {
+                                   subnet_ids: Array[::String]?,
+                                   security_group_ids: Array[::String]?
+                                 },
+                                 ?client_token: ::String
+                               ) -> _CreateVpcEndpointResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVpcEndpointResponseSuccess
+
+      interface _DeleteDataSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataSourceResponse]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#delete_data_source-instance_method
+      def delete_data_source: (
+                                domain_name: ::String,
+                                name: ::String
+                              ) -> _DeleteDataSourceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataSourceResponseSuccess
+
+      interface _DeleteDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDomainResponse]
+        def domain_status: () -> Types::DomainStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#delete_domain-instance_method
+      def delete_domain: (
+                           domain_name: ::String
+                         ) -> _DeleteDomainResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDomainResponseSuccess
+
+      interface _DeleteInboundConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteInboundConnectionResponse]
+        def connection: () -> Types::InboundConnection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#delete_inbound_connection-instance_method
+      def delete_inbound_connection: (
+                                       connection_id: ::String
+                                     ) -> _DeleteInboundConnectionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteInboundConnectionResponseSuccess
+
+      interface _DeleteOutboundConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteOutboundConnectionResponse]
+        def connection: () -> Types::OutboundConnection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#delete_outbound_connection-instance_method
+      def delete_outbound_connection: (
+                                        connection_id: ::String
+                                      ) -> _DeleteOutboundConnectionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteOutboundConnectionResponseSuccess
+
+      interface _DeletePackageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePackageResponse]
+        def package_details: () -> Types::PackageDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#delete_package-instance_method
+      def delete_package: (
+                            package_id: ::String
+                          ) -> _DeletePackageResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePackageResponseSuccess
+
+      interface _DeleteVpcEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVpcEndpointResponse]
+        def vpc_endpoint_summary: () -> Types::VpcEndpointSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#delete_vpc_endpoint-instance_method
+      def delete_vpc_endpoint: (
+                                 vpc_endpoint_id: ::String
+                               ) -> _DeleteVpcEndpointResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVpcEndpointResponseSuccess
+
+      interface _DescribeDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDomainResponse]
+        def domain_status: () -> Types::DomainStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#describe_domain-instance_method
+      def describe_domain: (
+                             domain_name: ::String
+                           ) -> _DescribeDomainResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDomainResponseSuccess
+
+      interface _DescribeDomainAutoTunesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDomainAutoTunesResponse]
+        def auto_tunes: () -> ::Array[Types::AutoTune]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#describe_domain_auto_tunes-instance_method
+      def describe_domain_auto_tunes: (
+                                        domain_name: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _DescribeDomainAutoTunesResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDomainAutoTunesResponseSuccess
+
+      interface _DescribeDomainChangeProgressResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDomainChangeProgressResponse]
+        def change_progress_status: () -> Types::ChangeProgressStatusDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#describe_domain_change_progress-instance_method
+      def describe_domain_change_progress: (
+                                             domain_name: ::String,
+                                             ?change_id: ::String
+                                           ) -> _DescribeDomainChangeProgressResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDomainChangeProgressResponseSuccess
+
+      interface _DescribeDomainConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDomainConfigResponse]
+        def domain_config: () -> Types::DomainConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#describe_domain_config-instance_method
+      def describe_domain_config: (
+                                    domain_name: ::String
+                                  ) -> _DescribeDomainConfigResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDomainConfigResponseSuccess
+
+      interface _DescribeDomainHealthResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDomainHealthResponse]
+        def domain_state: () -> ("Active" | "Processing" | "NotAvailable")
+        def availability_zone_count: () -> ::String
+        def active_availability_zone_count: () -> ::String
+        def stand_by_availability_zone_count: () -> ::String
+        def data_node_count: () -> ::String
+        def dedicated_master: () -> bool
+        def master_eligible_node_count: () -> ::String
+        def warm_node_count: () -> ::String
+        def master_node: () -> ("Available" | "UnAvailable")
+        def cluster_health: () -> ("Red" | "Yellow" | "Green" | "NotAvailable")
+        def total_shards: () -> ::String
+        def total_un_assigned_shards: () -> ::String
+        def environment_information: () -> ::Array[Types::EnvironmentInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#describe_domain_health-instance_method
+      def describe_domain_health: (
+                                    domain_name: ::String
+                                  ) -> _DescribeDomainHealthResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDomainHealthResponseSuccess
+
+      interface _DescribeDomainNodesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDomainNodesResponse]
+        def domain_nodes_status_list: () -> ::Array[Types::DomainNodesStatus]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#describe_domain_nodes-instance_method
+      def describe_domain_nodes: (
+                                   domain_name: ::String
+                                 ) -> _DescribeDomainNodesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDomainNodesResponseSuccess
+
+      interface _DescribeDomainsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDomainsResponse]
+        def domain_status_list: () -> ::Array[Types::DomainStatus]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#describe_domains-instance_method
+      def describe_domains: (
+                              domain_names: Array[::String]
+                            ) -> _DescribeDomainsResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDomainsResponseSuccess
+
+      interface _DescribeDryRunProgressResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDryRunProgressResponse]
+        def dry_run_progress_status: () -> Types::DryRunProgressStatus
+        def dry_run_config: () -> Types::DomainStatus
+        def dry_run_results: () -> Types::DryRunResults
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#describe_dry_run_progress-instance_method
+      def describe_dry_run_progress: (
+                                       domain_name: ::String,
+                                       ?dry_run_id: ::String,
+                                       ?load_dry_run_config: bool
+                                     ) -> _DescribeDryRunProgressResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDryRunProgressResponseSuccess
+
+      interface _DescribeInboundConnectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInboundConnectionsResponse]
+        def connections: () -> ::Array[Types::InboundConnection]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#describe_inbound_connections-instance_method
+      def describe_inbound_connections: (
+                                          ?filters: Array[
+                                            {
+                                              name: ::String?,
+                                              values: Array[::String]?
+                                            },
+                                          ],
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _DescribeInboundConnectionsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInboundConnectionsResponseSuccess
+
+      interface _DescribeInstanceTypeLimitsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInstanceTypeLimitsResponse]
+        def limits_by_role: () -> ::Hash[::String, Types::Limits]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#describe_instance_type_limits-instance_method
+      def describe_instance_type_limits: (
+                                           ?domain_name: ::String,
+                                           instance_type: ("m3.medium.search" | "m3.large.search" | "m3.xlarge.search" | "m3.2xlarge.search" | "m4.large.search" | "m4.xlarge.search" | "m4.2xlarge.search" | "m4.4xlarge.search" | "m4.10xlarge.search" | "m5.large.search" | "m5.xlarge.search" | "m5.2xlarge.search" | "m5.4xlarge.search" | "m5.12xlarge.search" | "m5.24xlarge.search" | "r5.large.search" | "r5.xlarge.search" | "r5.2xlarge.search" | "r5.4xlarge.search" | "r5.12xlarge.search" | "r5.24xlarge.search" | "c5.large.search" | "c5.xlarge.search" | "c5.2xlarge.search" | "c5.4xlarge.search" | "c5.9xlarge.search" | "c5.18xlarge.search" | "t3.nano.search" | "t3.micro.search" | "t3.small.search" | "t3.medium.search" | "t3.large.search" | "t3.xlarge.search" | "t3.2xlarge.search" | "ultrawarm1.medium.search" | "ultrawarm1.large.search" | "ultrawarm1.xlarge.search" | "t2.micro.search" | "t2.small.search" | "t2.medium.search" | "r3.large.search" | "r3.xlarge.search" | "r3.2xlarge.search" | "r3.4xlarge.search" | "r3.8xlarge.search" | "i2.xlarge.search" | "i2.2xlarge.search" | "d2.xlarge.search" | "d2.2xlarge.search" | "d2.4xlarge.search" | "d2.8xlarge.search" | "c4.large.search" | "c4.xlarge.search" | "c4.2xlarge.search" | "c4.4xlarge.search" | "c4.8xlarge.search" | "r4.large.search" | "r4.xlarge.search" | "r4.2xlarge.search" | "r4.4xlarge.search" | "r4.8xlarge.search" | "r4.16xlarge.search" | "i3.large.search" | "i3.xlarge.search" | "i3.2xlarge.search" | "i3.4xlarge.search" | "i3.8xlarge.search" | "i3.16xlarge.search" | "r6g.large.search" | "r6g.xlarge.search" | "r6g.2xlarge.search" | "r6g.4xlarge.search" | "r6g.8xlarge.search" | "r6g.12xlarge.search" | "m6g.large.search" | "m6g.xlarge.search" | "m6g.2xlarge.search" | "m6g.4xlarge.search" | "m6g.8xlarge.search" | "m6g.12xlarge.search" | "c6g.large.search" | "c6g.xlarge.search" | "c6g.2xlarge.search" | "c6g.4xlarge.search" | "c6g.8xlarge.search" | "c6g.12xlarge.search" | "r6gd.large.search" | "r6gd.xlarge.search" | "r6gd.2xlarge.search" | "r6gd.4xlarge.search" | "r6gd.8xlarge.search" | "r6gd.12xlarge.search" | "r6gd.16xlarge.search" | "t4g.small.search" | "t4g.medium.search"),
+                                           engine_version: ::String
+                                         ) -> _DescribeInstanceTypeLimitsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInstanceTypeLimitsResponseSuccess
+
+      interface _DescribeOutboundConnectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeOutboundConnectionsResponse]
+        def connections: () -> ::Array[Types::OutboundConnection]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#describe_outbound_connections-instance_method
+      def describe_outbound_connections: (
+                                           ?filters: Array[
+                                             {
+                                               name: ::String?,
+                                               values: Array[::String]?
+                                             },
+                                           ],
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String
+                                         ) -> _DescribeOutboundConnectionsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeOutboundConnectionsResponseSuccess
+
+      interface _DescribePackagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePackagesResponse]
+        def package_details_list: () -> ::Array[Types::PackageDetails]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#describe_packages-instance_method
+      def describe_packages: (
+                               ?filters: Array[
+                                 {
+                                   name: ("PackageID" | "PackageName" | "PackageStatus" | "PackageType" | "EngineVersion")?,
+                                   value: Array[::String]?
+                                 },
+                               ],
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _DescribePackagesResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePackagesResponseSuccess
+
+      interface _DescribeReservedInstanceOfferingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReservedInstanceOfferingsResponse]
+        def next_token: () -> ::String
+        def reserved_instance_offerings: () -> ::Array[Types::ReservedInstanceOffering]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#describe_reserved_instance_offerings-instance_method
+      def describe_reserved_instance_offerings: (
+                                                  ?reserved_instance_offering_id: ::String,
+                                                  ?max_results: ::Integer,
+                                                  ?next_token: ::String
+                                                ) -> _DescribeReservedInstanceOfferingsResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReservedInstanceOfferingsResponseSuccess
+
+      interface _DescribeReservedInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReservedInstancesResponse]
+        def next_token: () -> ::String
+        def reserved_instances: () -> ::Array[Types::ReservedInstance]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#describe_reserved_instances-instance_method
+      def describe_reserved_instances: (
+                                         ?reserved_instance_id: ::String,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _DescribeReservedInstancesResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReservedInstancesResponseSuccess
+
+      interface _DescribeVpcEndpointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeVpcEndpointsResponse]
+        def vpc_endpoints: () -> ::Array[Types::VpcEndpoint]
+        def vpc_endpoint_errors: () -> ::Array[Types::VpcEndpointError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#describe_vpc_endpoints-instance_method
+      def describe_vpc_endpoints: (
+                                    vpc_endpoint_ids: Array[::String]
+                                  ) -> _DescribeVpcEndpointsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeVpcEndpointsResponseSuccess
+
+      interface _DissociatePackageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DissociatePackageResponse]
+        def domain_package_details: () -> Types::DomainPackageDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#dissociate_package-instance_method
+      def dissociate_package: (
+                                package_id: ::String,
+                                domain_name: ::String
+                              ) -> _DissociatePackageResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DissociatePackageResponseSuccess
+
+      interface _GetCompatibleVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCompatibleVersionsResponse]
+        def compatible_versions: () -> ::Array[Types::CompatibleVersionsMap]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#get_compatible_versions-instance_method
+      def get_compatible_versions: (
+                                     ?domain_name: ::String
+                                   ) -> _GetCompatibleVersionsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCompatibleVersionsResponseSuccess
+
+      interface _GetDataSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataSourceResponse]
+        def data_source_type: () -> Types::DataSourceType
+        def name: () -> ::String
+        def description: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#get_data_source-instance_method
+      def get_data_source: (
+                             domain_name: ::String,
+                             name: ::String
+                           ) -> _GetDataSourceResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataSourceResponseSuccess
+
+      interface _GetDomainMaintenanceStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainMaintenanceStatusResponse]
+        def status: () -> ("PENDING" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "TIMED_OUT")
+        def status_message: () -> ::String
+        def node_id: () -> ::String
+        def action: () -> ("REBOOT_NODE" | "RESTART_SEARCH_PROCESS" | "RESTART_DASHBOARD")
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#get_domain_maintenance_status-instance_method
+      def get_domain_maintenance_status: (
+                                           domain_name: ::String,
+                                           maintenance_id: ::String
+                                         ) -> _GetDomainMaintenanceStatusResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainMaintenanceStatusResponseSuccess
+
+      interface _GetPackageVersionHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPackageVersionHistoryResponse]
+        def package_id: () -> ::String
+        def package_version_history_list: () -> ::Array[Types::PackageVersionHistory]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#get_package_version_history-instance_method
+      def get_package_version_history: (
+                                         package_id: ::String,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _GetPackageVersionHistoryResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPackageVersionHistoryResponseSuccess
+
+      interface _GetUpgradeHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUpgradeHistoryResponse]
+        def upgrade_histories: () -> ::Array[Types::UpgradeHistory]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#get_upgrade_history-instance_method
+      def get_upgrade_history: (
+                                 domain_name: ::String,
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _GetUpgradeHistoryResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUpgradeHistoryResponseSuccess
+
+      interface _GetUpgradeStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUpgradeStatusResponse]
+        def upgrade_step: () -> ("PRE_UPGRADE_CHECK" | "SNAPSHOT" | "UPGRADE")
+        def step_status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "SUCCEEDED_WITH_ISSUES" | "FAILED")
+        def upgrade_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#get_upgrade_status-instance_method
+      def get_upgrade_status: (
+                                domain_name: ::String
+                              ) -> _GetUpgradeStatusResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUpgradeStatusResponseSuccess
+
+      interface _ListDataSourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataSourcesResponse]
+        def data_sources: () -> ::Array[Types::DataSourceDetails]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#list_data_sources-instance_method
+      def list_data_sources: (
+                               domain_name: ::String
+                             ) -> _ListDataSourcesResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataSourcesResponseSuccess
+
+      interface _ListDomainMaintenancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainMaintenancesResponse]
+        def domain_maintenances: () -> ::Array[Types::DomainMaintenanceDetails]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#list_domain_maintenances-instance_method
+      def list_domain_maintenances: (
+                                      domain_name: ::String,
+                                      ?action: ("REBOOT_NODE" | "RESTART_SEARCH_PROCESS" | "RESTART_DASHBOARD"),
+                                      ?status: ("PENDING" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "TIMED_OUT"),
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListDomainMaintenancesResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainMaintenancesResponseSuccess
+
+      interface _ListDomainNamesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainNamesResponse]
+        def domain_names: () -> ::Array[Types::DomainInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#list_domain_names-instance_method
+      def list_domain_names: (
+                               ?engine_type: ("OpenSearch" | "Elasticsearch")
+                             ) -> _ListDomainNamesResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainNamesResponseSuccess
+
+      interface _ListDomainsForPackageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainsForPackageResponse]
+        def domain_package_details_list: () -> ::Array[Types::DomainPackageDetails]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#list_domains_for_package-instance_method
+      def list_domains_for_package: (
+                                      package_id: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListDomainsForPackageResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainsForPackageResponseSuccess
+
+      interface _ListInstanceTypeDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInstanceTypeDetailsResponse]
+        def instance_type_details: () -> ::Array[Types::InstanceTypeDetails]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#list_instance_type_details-instance_method
+      def list_instance_type_details: (
+                                        engine_version: ::String,
+                                        ?domain_name: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String,
+                                        ?retrieve_a_zs: bool,
+                                        ?instance_type: ::String
+                                      ) -> _ListInstanceTypeDetailsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInstanceTypeDetailsResponseSuccess
+
+      interface _ListPackagesForDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPackagesForDomainResponse]
+        def domain_package_details_list: () -> ::Array[Types::DomainPackageDetails]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#list_packages_for_domain-instance_method
+      def list_packages_for_domain: (
+                                      domain_name: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListPackagesForDomainResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPackagesForDomainResponseSuccess
+
+      interface _ListScheduledActionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListScheduledActionsResponse]
+        def scheduled_actions: () -> ::Array[Types::ScheduledAction]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#list_scheduled_actions-instance_method
+      def list_scheduled_actions: (
+                                    domain_name: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListScheduledActionsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListScheduledActionsResponseSuccess
+
+      interface _ListTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsResponse]
+        def tag_list: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#list_tags-instance_method
+      def list_tags: (
+                       arn: ::String
+                     ) -> _ListTagsResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsResponseSuccess
+
+      interface _ListVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVersionsResponse]
+        def versions: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#list_versions-instance_method
+      def list_versions: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListVersionsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVersionsResponseSuccess
+
+      interface _ListVpcEndpointAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVpcEndpointAccessResponse]
+        def authorized_principal_list: () -> ::Array[Types::AuthorizedPrincipal]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#list_vpc_endpoint_access-instance_method
+      def list_vpc_endpoint_access: (
+                                      domain_name: ::String,
+                                      ?next_token: ::String
+                                    ) -> _ListVpcEndpointAccessResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVpcEndpointAccessResponseSuccess
+
+      interface _ListVpcEndpointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVpcEndpointsResponse]
+        def vpc_endpoint_summary_list: () -> ::Array[Types::VpcEndpointSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#list_vpc_endpoints-instance_method
+      def list_vpc_endpoints: (
+                                ?next_token: ::String
+                              ) -> _ListVpcEndpointsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVpcEndpointsResponseSuccess
+
+      interface _ListVpcEndpointsForDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVpcEndpointsForDomainResponse]
+        def vpc_endpoint_summary_list: () -> ::Array[Types::VpcEndpointSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#list_vpc_endpoints_for_domain-instance_method
+      def list_vpc_endpoints_for_domain: (
+                                           domain_name: ::String,
+                                           ?next_token: ::String
+                                         ) -> _ListVpcEndpointsForDomainResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVpcEndpointsForDomainResponseSuccess
+
+      interface _PurchaseReservedInstanceOfferingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PurchaseReservedInstanceOfferingResponse]
+        def reserved_instance_id: () -> ::String
+        def reservation_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#purchase_reserved_instance_offering-instance_method
+      def purchase_reserved_instance_offering: (
+                                                 reserved_instance_offering_id: ::String,
+                                                 reservation_name: ::String,
+                                                 ?instance_count: ::Integer
+                                               ) -> _PurchaseReservedInstanceOfferingResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PurchaseReservedInstanceOfferingResponseSuccess
+
+      interface _RejectInboundConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RejectInboundConnectionResponse]
+        def connection: () -> Types::InboundConnection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#reject_inbound_connection-instance_method
+      def reject_inbound_connection: (
+                                       connection_id: ::String
+                                     ) -> _RejectInboundConnectionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectInboundConnectionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#remove_tags-instance_method
+      def remove_tags: (
+                         arn: ::String,
+                         tag_keys: Array[::String]
+                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _RevokeVpcEndpointAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RevokeVpcEndpointAccessResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#revoke_vpc_endpoint_access-instance_method
+      def revoke_vpc_endpoint_access: (
+                                        domain_name: ::String,
+                                        account: ::String
+                                      ) -> _RevokeVpcEndpointAccessResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RevokeVpcEndpointAccessResponseSuccess
+
+      interface _StartDomainMaintenanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDomainMaintenanceResponse]
+        def maintenance_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#start_domain_maintenance-instance_method
+      def start_domain_maintenance: (
+                                      domain_name: ::String,
+                                      action: ("REBOOT_NODE" | "RESTART_SEARCH_PROCESS" | "RESTART_DASHBOARD"),
+                                      ?node_id: ::String
+                                    ) -> _StartDomainMaintenanceResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDomainMaintenanceResponseSuccess
+
+      interface _StartServiceSoftwareUpdateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartServiceSoftwareUpdateResponse]
+        def service_software_options: () -> Types::ServiceSoftwareOptions
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#start_service_software_update-instance_method
+      def start_service_software_update: (
+                                           domain_name: ::String,
+                                           ?schedule_at: ("NOW" | "TIMESTAMP" | "OFF_PEAK_WINDOW"),
+                                           ?desired_start_time: ::Integer
+                                         ) -> _StartServiceSoftwareUpdateResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartServiceSoftwareUpdateResponseSuccess
+
+      interface _UpdateDataSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataSourceResponse]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#update_data_source-instance_method
+      def update_data_source: (
+                                domain_name: ::String,
+                                name: ::String,
+                                data_source_type: {
+                                  s3_glue_data_catalog: {
+                                    role_arn: ::String?
+                                  }?
+                                },
+                                ?description: ::String
+                              ) -> _UpdateDataSourceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataSourceResponseSuccess
+
+      interface _UpdateDomainConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDomainConfigResponse]
+        def domain_config: () -> Types::DomainConfig
+        def dry_run_results: () -> Types::DryRunResults
+        def dry_run_progress_status: () -> Types::DryRunProgressStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#update_domain_config-instance_method
+      def update_domain_config: (
+                                  domain_name: ::String,
+                                  ?cluster_config: {
+                                    instance_type: ("m3.medium.search" | "m3.large.search" | "m3.xlarge.search" | "m3.2xlarge.search" | "m4.large.search" | "m4.xlarge.search" | "m4.2xlarge.search" | "m4.4xlarge.search" | "m4.10xlarge.search" | "m5.large.search" | "m5.xlarge.search" | "m5.2xlarge.search" | "m5.4xlarge.search" | "m5.12xlarge.search" | "m5.24xlarge.search" | "r5.large.search" | "r5.xlarge.search" | "r5.2xlarge.search" | "r5.4xlarge.search" | "r5.12xlarge.search" | "r5.24xlarge.search" | "c5.large.search" | "c5.xlarge.search" | "c5.2xlarge.search" | "c5.4xlarge.search" | "c5.9xlarge.search" | "c5.18xlarge.search" | "t3.nano.search" | "t3.micro.search" | "t3.small.search" | "t3.medium.search" | "t3.large.search" | "t3.xlarge.search" | "t3.2xlarge.search" | "ultrawarm1.medium.search" | "ultrawarm1.large.search" | "ultrawarm1.xlarge.search" | "t2.micro.search" | "t2.small.search" | "t2.medium.search" | "r3.large.search" | "r3.xlarge.search" | "r3.2xlarge.search" | "r3.4xlarge.search" | "r3.8xlarge.search" | "i2.xlarge.search" | "i2.2xlarge.search" | "d2.xlarge.search" | "d2.2xlarge.search" | "d2.4xlarge.search" | "d2.8xlarge.search" | "c4.large.search" | "c4.xlarge.search" | "c4.2xlarge.search" | "c4.4xlarge.search" | "c4.8xlarge.search" | "r4.large.search" | "r4.xlarge.search" | "r4.2xlarge.search" | "r4.4xlarge.search" | "r4.8xlarge.search" | "r4.16xlarge.search" | "i3.large.search" | "i3.xlarge.search" | "i3.2xlarge.search" | "i3.4xlarge.search" | "i3.8xlarge.search" | "i3.16xlarge.search" | "r6g.large.search" | "r6g.xlarge.search" | "r6g.2xlarge.search" | "r6g.4xlarge.search" | "r6g.8xlarge.search" | "r6g.12xlarge.search" | "m6g.large.search" | "m6g.xlarge.search" | "m6g.2xlarge.search" | "m6g.4xlarge.search" | "m6g.8xlarge.search" | "m6g.12xlarge.search" | "c6g.large.search" | "c6g.xlarge.search" | "c6g.2xlarge.search" | "c6g.4xlarge.search" | "c6g.8xlarge.search" | "c6g.12xlarge.search" | "r6gd.large.search" | "r6gd.xlarge.search" | "r6gd.2xlarge.search" | "r6gd.4xlarge.search" | "r6gd.8xlarge.search" | "r6gd.12xlarge.search" | "r6gd.16xlarge.search" | "t4g.small.search" | "t4g.medium.search")?,
+                                    instance_count: ::Integer?,
+                                    dedicated_master_enabled: bool?,
+                                    zone_awareness_enabled: bool?,
+                                    zone_awareness_config: {
+                                      availability_zone_count: ::Integer?
+                                    }?,
+                                    dedicated_master_type: ("m3.medium.search" | "m3.large.search" | "m3.xlarge.search" | "m3.2xlarge.search" | "m4.large.search" | "m4.xlarge.search" | "m4.2xlarge.search" | "m4.4xlarge.search" | "m4.10xlarge.search" | "m5.large.search" | "m5.xlarge.search" | "m5.2xlarge.search" | "m5.4xlarge.search" | "m5.12xlarge.search" | "m5.24xlarge.search" | "r5.large.search" | "r5.xlarge.search" | "r5.2xlarge.search" | "r5.4xlarge.search" | "r5.12xlarge.search" | "r5.24xlarge.search" | "c5.large.search" | "c5.xlarge.search" | "c5.2xlarge.search" | "c5.4xlarge.search" | "c5.9xlarge.search" | "c5.18xlarge.search" | "t3.nano.search" | "t3.micro.search" | "t3.small.search" | "t3.medium.search" | "t3.large.search" | "t3.xlarge.search" | "t3.2xlarge.search" | "ultrawarm1.medium.search" | "ultrawarm1.large.search" | "ultrawarm1.xlarge.search" | "t2.micro.search" | "t2.small.search" | "t2.medium.search" | "r3.large.search" | "r3.xlarge.search" | "r3.2xlarge.search" | "r3.4xlarge.search" | "r3.8xlarge.search" | "i2.xlarge.search" | "i2.2xlarge.search" | "d2.xlarge.search" | "d2.2xlarge.search" | "d2.4xlarge.search" | "d2.8xlarge.search" | "c4.large.search" | "c4.xlarge.search" | "c4.2xlarge.search" | "c4.4xlarge.search" | "c4.8xlarge.search" | "r4.large.search" | "r4.xlarge.search" | "r4.2xlarge.search" | "r4.4xlarge.search" | "r4.8xlarge.search" | "r4.16xlarge.search" | "i3.large.search" | "i3.xlarge.search" | "i3.2xlarge.search" | "i3.4xlarge.search" | "i3.8xlarge.search" | "i3.16xlarge.search" | "r6g.large.search" | "r6g.xlarge.search" | "r6g.2xlarge.search" | "r6g.4xlarge.search" | "r6g.8xlarge.search" | "r6g.12xlarge.search" | "m6g.large.search" | "m6g.xlarge.search" | "m6g.2xlarge.search" | "m6g.4xlarge.search" | "m6g.8xlarge.search" | "m6g.12xlarge.search" | "c6g.large.search" | "c6g.xlarge.search" | "c6g.2xlarge.search" | "c6g.4xlarge.search" | "c6g.8xlarge.search" | "c6g.12xlarge.search" | "r6gd.large.search" | "r6gd.xlarge.search" | "r6gd.2xlarge.search" | "r6gd.4xlarge.search" | "r6gd.8xlarge.search" | "r6gd.12xlarge.search" | "r6gd.16xlarge.search" | "t4g.small.search" | "t4g.medium.search")?,
+                                    dedicated_master_count: ::Integer?,
+                                    warm_enabled: bool?,
+                                    warm_type: ("ultrawarm1.medium.search" | "ultrawarm1.large.search" | "ultrawarm1.xlarge.search")?,
+                                    warm_count: ::Integer?,
+                                    cold_storage_options: {
+                                      enabled: bool
+                                    }?,
+                                    multi_az_with_standby_enabled: bool?
+                                  },
+                                  ?ebs_options: {
+                                    ebs_enabled: bool?,
+                                    volume_type: ("standard" | "gp2" | "io1" | "gp3")?,
+                                    volume_size: ::Integer?,
+                                    iops: ::Integer?,
+                                    throughput: ::Integer?
+                                  },
+                                  ?snapshot_options: {
+                                    automated_snapshot_start_hour: ::Integer?
+                                  },
+                                  ?vpc_options: {
+                                    subnet_ids: Array[::String]?,
+                                    security_group_ids: Array[::String]?
+                                  },
+                                  ?cognito_options: {
+                                    enabled: bool?,
+                                    user_pool_id: ::String?,
+                                    identity_pool_id: ::String?,
+                                    role_arn: ::String?
+                                  },
+                                  ?advanced_options: Hash[::String, ::String],
+                                  ?access_policies: ::String,
+                                  ?ip_address_type: ("ipv4" | "dualstack"),
+                                  ?log_publishing_options: Hash[("INDEX_SLOW_LOGS" | "SEARCH_SLOW_LOGS" | "ES_APPLICATION_LOGS" | "AUDIT_LOGS"), {
+                                      cloud_watch_logs_log_group_arn: ::String?,
+                                      enabled: bool?
+                                    }],
+                                  ?encryption_at_rest_options: {
+                                    enabled: bool?,
+                                    kms_key_id: ::String?
+                                  },
+                                  ?domain_endpoint_options: {
+                                    enforce_https: bool?,
+                                    tls_security_policy: ("Policy-Min-TLS-1-0-2019-07" | "Policy-Min-TLS-1-2-2019-07" | "Policy-Min-TLS-1-2-PFS-2023-10")?,
+                                    custom_endpoint_enabled: bool?,
+                                    custom_endpoint: ::String?,
+                                    custom_endpoint_certificate_arn: ::String?
+                                  },
+                                  ?node_to_node_encryption_options: {
+                                    enabled: bool?
+                                  },
+                                  ?advanced_security_options: {
+                                    enabled: bool?,
+                                    internal_user_database_enabled: bool?,
+                                    master_user_options: {
+                                      master_user_arn: ::String?,
+                                      master_user_name: ::String?,
+                                      master_user_password: ::String?
+                                    }?,
+                                    saml_options: {
+                                      enabled: bool?,
+                                      idp: {
+                                        metadata_content: ::String,
+                                        entity_id: ::String
+                                      }?,
+                                      master_user_name: ::String?,
+                                      master_backend_role: ::String?,
+                                      subject_key: ::String?,
+                                      roles_key: ::String?,
+                                      session_timeout_minutes: ::Integer?
+                                    }?,
+                                    anonymous_auth_enabled: bool?
+                                  },
+                                  ?auto_tune_options: {
+                                    desired_state: ("ENABLED" | "DISABLED")?,
+                                    rollback_on_disable: ("NO_ROLLBACK" | "DEFAULT_ROLLBACK")?,
+                                    maintenance_schedules: Array[
+                                      {
+                                        start_at: ::Time?,
+                                        duration: {
+                                          value: ::Integer?,
+                                          unit: ("HOURS")?
+                                        }?,
+                                        cron_expression_for_recurrence: ::String?
+                                      },
+                                    ]?,
+                                    use_off_peak_window: bool?
+                                  },
+                                  ?dry_run: bool,
+                                  ?dry_run_mode: ("Basic" | "Verbose"),
+                                  ?off_peak_window_options: {
+                                    enabled: bool?,
+                                    off_peak_window: {
+                                      window_start_time: {
+                                        hours: ::Integer,
+                                        minutes: ::Integer
+                                      }?
+                                    }?
+                                  },
+                                  ?software_update_options: {
+                                    auto_software_update_enabled: bool?
+                                  }
+                                ) -> _UpdateDomainConfigResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainConfigResponseSuccess
+
+      interface _UpdatePackageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePackageResponse]
+        def package_details: () -> Types::PackageDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#update_package-instance_method
+      def update_package: (
+                            package_id: ::String,
+                            package_source: {
+                              s3_bucket_name: ::String?,
+                              s3_key: ::String?
+                            },
+                            ?package_description: ::String,
+                            ?commit_message: ::String
+                          ) -> _UpdatePackageResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePackageResponseSuccess
+
+      interface _UpdateScheduledActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateScheduledActionResponse]
+        def scheduled_action: () -> Types::ScheduledAction
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#update_scheduled_action-instance_method
+      def update_scheduled_action: (
+                                     domain_name: ::String,
+                                     action_id: ::String,
+                                     action_type: ("SERVICE_SOFTWARE_UPDATE" | "JVM_HEAP_SIZE_TUNING" | "JVM_YOUNG_GEN_TUNING"),
+                                     schedule_at: ("NOW" | "TIMESTAMP" | "OFF_PEAK_WINDOW"),
+                                     ?desired_start_time: ::Integer
+                                   ) -> _UpdateScheduledActionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateScheduledActionResponseSuccess
+
+      interface _UpdateVpcEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateVpcEndpointResponse]
+        def vpc_endpoint: () -> Types::VpcEndpoint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#update_vpc_endpoint-instance_method
+      def update_vpc_endpoint: (
+                                 vpc_endpoint_id: ::String,
+                                 vpc_options: {
+                                   subnet_ids: Array[::String]?,
+                                   security_group_ids: Array[::String]?
+                                 }
+                               ) -> _UpdateVpcEndpointResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVpcEndpointResponseSuccess
+
+      interface _UpgradeDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpgradeDomainResponse]
+        def upgrade_id: () -> ::String
+        def domain_name: () -> ::String
+        def target_version: () -> ::String
+        def perform_check_only: () -> bool
+        def advanced_options: () -> ::Hash[::String, ::String]
+        def change_progress_details: () -> Types::ChangeProgressDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#upgrade_domain-instance_method
+      def upgrade_domain: (
+                            domain_name: ::String,
+                            target_version: ::String,
+                            ?perform_check_only: bool,
+                            ?advanced_options: Hash[::String, ::String]
+                          ) -> _UpgradeDomainResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpgradeDomainResponseSuccess
+    end
+  end
+end
+

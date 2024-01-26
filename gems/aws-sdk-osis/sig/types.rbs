@@ -1,0 +1,302 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::OSIS
+  module Types
+
+    class AccessDeniedException < Aws::EmptyStructure
+    end
+
+    class BufferOptions
+      attr_accessor persistent_buffer_enabled: bool
+      SENSITIVE: []
+    end
+
+    class ChangeProgressStage
+      attr_accessor name: ::String
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor description: ::String
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ChangeProgressStatus
+      attr_accessor start_time: ::Time
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor total_number_of_stages: ::Integer
+      attr_accessor change_progress_stages: ::Array[Types::ChangeProgressStage]
+      SENSITIVE: []
+    end
+
+    class CloudWatchLogDestination
+      attr_accessor log_group: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException < Aws::EmptyStructure
+    end
+
+    class CreatePipelineRequest
+      attr_accessor pipeline_name: ::String
+      attr_accessor min_units: ::Integer
+      attr_accessor max_units: ::Integer
+      attr_accessor pipeline_configuration_body: ::String
+      attr_accessor log_publishing_options: Types::LogPublishingOptions
+      attr_accessor vpc_options: Types::VpcOptions
+      attr_accessor buffer_options: Types::BufferOptions
+      attr_accessor encryption_at_rest_options: Types::EncryptionAtRestOptions
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreatePipelineResponse
+      attr_accessor pipeline: Types::Pipeline
+      SENSITIVE: []
+    end
+
+    class DeletePipelineRequest
+      attr_accessor pipeline_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePipelineResponse < Aws::EmptyStructure
+    end
+
+    class EncryptionAtRestOptions
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetPipelineBlueprintRequest
+      attr_accessor blueprint_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetPipelineBlueprintResponse
+      attr_accessor blueprint: Types::PipelineBlueprint
+      SENSITIVE: []
+    end
+
+    class GetPipelineChangeProgressRequest
+      attr_accessor pipeline_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetPipelineChangeProgressResponse
+      attr_accessor change_progress_statuses: ::Array[Types::ChangeProgressStatus]
+      SENSITIVE: []
+    end
+
+    class GetPipelineRequest
+      attr_accessor pipeline_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetPipelineResponse
+      attr_accessor pipeline: Types::Pipeline
+      SENSITIVE: []
+    end
+
+    class InternalException < Aws::EmptyStructure
+    end
+
+    class InvalidPaginationTokenException < Aws::EmptyStructure
+    end
+
+    class LimitExceededException < Aws::EmptyStructure
+    end
+
+    class ListPipelineBlueprintsRequest < Aws::EmptyStructure
+    end
+
+    class ListPipelineBlueprintsResponse
+      attr_accessor blueprints: ::Array[Types::PipelineBlueprintSummary]
+      SENSITIVE: []
+    end
+
+    class ListPipelinesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPipelinesResponse
+      attr_accessor next_token: ::String
+      attr_accessor pipelines: ::Array[Types::PipelineSummary]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class LogPublishingOptions
+      attr_accessor is_logging_enabled: bool
+      attr_accessor cloud_watch_log_destination: Types::CloudWatchLogDestination
+      SENSITIVE: []
+    end
+
+    class Pipeline
+      attr_accessor pipeline_name: ::String
+      attr_accessor pipeline_arn: ::String
+      attr_accessor min_units: ::Integer
+      attr_accessor max_units: ::Integer
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "STARTING" | "START_FAILED" | "STOPPING" | "STOPPED")
+      attr_accessor status_reason: Types::PipelineStatusReason
+      attr_accessor pipeline_configuration_body: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor ingest_endpoint_urls: ::Array[::String]
+      attr_accessor log_publishing_options: Types::LogPublishingOptions
+      attr_accessor vpc_endpoints: ::Array[Types::VpcEndpoint]
+      attr_accessor buffer_options: Types::BufferOptions
+      attr_accessor encryption_at_rest_options: Types::EncryptionAtRestOptions
+      attr_accessor service_vpc_endpoints: ::Array[Types::ServiceVpcEndpoint]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PipelineBlueprint
+      attr_accessor blueprint_name: ::String
+      attr_accessor pipeline_configuration_body: ::String
+      SENSITIVE: []
+    end
+
+    class PipelineBlueprintSummary
+      attr_accessor blueprint_name: ::String
+      SENSITIVE: []
+    end
+
+    class PipelineStatusReason
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class PipelineSummary
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "STARTING" | "START_FAILED" | "STOPPING" | "STOPPED")
+      attr_accessor status_reason: Types::PipelineStatusReason
+      attr_accessor pipeline_name: ::String
+      attr_accessor pipeline_arn: ::String
+      attr_accessor min_units: ::Integer
+      attr_accessor max_units: ::Integer
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyExistsException < Aws::EmptyStructure
+    end
+
+    class ResourceNotFoundException < Aws::EmptyStructure
+    end
+
+    class ServiceVpcEndpoint
+      attr_accessor service_name: ("OPENSEARCH_SERVERLESS")
+      attr_accessor vpc_endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartPipelineRequest
+      attr_accessor pipeline_name: ::String
+      SENSITIVE: []
+    end
+
+    class StartPipelineResponse
+      attr_accessor pipeline: Types::Pipeline
+      SENSITIVE: []
+    end
+
+    class StopPipelineRequest
+      attr_accessor pipeline_name: ::String
+      SENSITIVE: []
+    end
+
+    class StopPipelineResponse
+      attr_accessor pipeline: Types::Pipeline
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UntagResourceRequest
+      attr_accessor arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdatePipelineRequest
+      attr_accessor pipeline_name: ::String
+      attr_accessor min_units: ::Integer
+      attr_accessor max_units: ::Integer
+      attr_accessor pipeline_configuration_body: ::String
+      attr_accessor log_publishing_options: Types::LogPublishingOptions
+      attr_accessor buffer_options: Types::BufferOptions
+      attr_accessor encryption_at_rest_options: Types::EncryptionAtRestOptions
+      SENSITIVE: []
+    end
+
+    class UpdatePipelineResponse
+      attr_accessor pipeline: Types::Pipeline
+      SENSITIVE: []
+    end
+
+    class ValidatePipelineRequest
+      attr_accessor pipeline_configuration_body: ::String
+      SENSITIVE: []
+    end
+
+    class ValidatePipelineResponse
+      attr_accessor is_valid: bool
+      attr_accessor errors: ::Array[Types::ValidationMessage]
+      SENSITIVE: []
+    end
+
+    class ValidationException < Aws::EmptyStructure
+    end
+
+    class ValidationMessage
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VpcEndpoint
+      attr_accessor vpc_endpoint_id: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor vpc_options: Types::VpcOptions
+      SENSITIVE: []
+    end
+
+    class VpcOptions
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,0 +1,674 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Snowball
+  module Types
+
+    class Address
+      attr_accessor address_id: ::String
+      attr_accessor name: ::String
+      attr_accessor company: ::String
+      attr_accessor street_1: ::String
+      attr_accessor street_2: ::String
+      attr_accessor street_3: ::String
+      attr_accessor city: ::String
+      attr_accessor state_or_province: ::String
+      attr_accessor prefecture_or_district: ::String
+      attr_accessor landmark: ::String
+      attr_accessor country: ::String
+      attr_accessor postal_code: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor is_restricted: bool
+      attr_accessor type: ("CUST_PICKUP" | "AWS_SHIP")
+      SENSITIVE: []
+    end
+
+    class CancelClusterRequest
+      attr_accessor cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelClusterResult < Aws::EmptyStructure
+    end
+
+    class CancelJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelJobResult < Aws::EmptyStructure
+    end
+
+    class ClusterLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ClusterListEntry
+      attr_accessor cluster_id: ::String
+      attr_accessor cluster_state: ("AwaitingQuorum" | "Pending" | "InUse" | "Complete" | "Cancelled")
+      attr_accessor creation_date: ::Time
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class ClusterMetadata
+      attr_accessor cluster_id: ::String
+      attr_accessor description: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor cluster_state: ("AwaitingQuorum" | "Pending" | "InUse" | "Complete" | "Cancelled")
+      attr_accessor job_type: ("IMPORT" | "EXPORT" | "LOCAL_USE")
+      attr_accessor snowball_type: ("STANDARD" | "EDGE" | "EDGE_C" | "EDGE_CG" | "EDGE_S" | "SNC1_HDD" | "SNC1_SSD" | "V3_5C" | "V3_5S" | "RACK_5U_C")
+      attr_accessor creation_date: ::Time
+      attr_accessor resources: Types::JobResource
+      attr_accessor address_id: ::String
+      attr_accessor shipping_option: ("SECOND_DAY" | "NEXT_DAY" | "EXPRESS" | "STANDARD")
+      attr_accessor notification: Types::Notification
+      attr_accessor forwarding_address_id: ::String
+      attr_accessor tax_documents: Types::TaxDocuments
+      attr_accessor on_device_service_configuration: Types::OnDeviceServiceConfiguration
+      SENSITIVE: []
+    end
+
+    class CompatibleImage
+      attr_accessor ami_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor conflict_resource: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAddressRequest
+      attr_accessor address: Types::Address
+      SENSITIVE: []
+    end
+
+    class CreateAddressResult
+      attr_accessor address_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateClusterRequest
+      attr_accessor job_type: ("IMPORT" | "EXPORT" | "LOCAL_USE")
+      attr_accessor resources: Types::JobResource
+      attr_accessor on_device_service_configuration: Types::OnDeviceServiceConfiguration
+      attr_accessor description: ::String
+      attr_accessor address_id: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor snowball_type: ("STANDARD" | "EDGE" | "EDGE_C" | "EDGE_CG" | "EDGE_S" | "SNC1_HDD" | "SNC1_SSD" | "V3_5C" | "V3_5S" | "RACK_5U_C")
+      attr_accessor shipping_option: ("SECOND_DAY" | "NEXT_DAY" | "EXPRESS" | "STANDARD")
+      attr_accessor notification: Types::Notification
+      attr_accessor forwarding_address_id: ::String
+      attr_accessor tax_documents: Types::TaxDocuments
+      attr_accessor remote_management: ("INSTALLED_ONLY" | "INSTALLED_AUTOSTART" | "NOT_INSTALLED")
+      attr_accessor initial_cluster_size: ::Integer
+      attr_accessor force_create_jobs: bool
+      attr_accessor long_term_pricing_ids: ::Array[::String]
+      attr_accessor snowball_capacity_preference: ("T50" | "T80" | "T100" | "T42" | "T98" | "T8" | "T14" | "T32" | "NoPreference" | "T240" | "T13")
+      SENSITIVE: []
+    end
+
+    class CreateClusterResult
+      attr_accessor cluster_id: ::String
+      attr_accessor job_list_entries: ::Array[Types::JobListEntry]
+      SENSITIVE: []
+    end
+
+    class CreateJobRequest
+      attr_accessor job_type: ("IMPORT" | "EXPORT" | "LOCAL_USE")
+      attr_accessor resources: Types::JobResource
+      attr_accessor on_device_service_configuration: Types::OnDeviceServiceConfiguration
+      attr_accessor description: ::String
+      attr_accessor address_id: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor snowball_capacity_preference: ("T50" | "T80" | "T100" | "T42" | "T98" | "T8" | "T14" | "T32" | "NoPreference" | "T240" | "T13")
+      attr_accessor shipping_option: ("SECOND_DAY" | "NEXT_DAY" | "EXPRESS" | "STANDARD")
+      attr_accessor notification: Types::Notification
+      attr_accessor cluster_id: ::String
+      attr_accessor snowball_type: ("STANDARD" | "EDGE" | "EDGE_C" | "EDGE_CG" | "EDGE_S" | "SNC1_HDD" | "SNC1_SSD" | "V3_5C" | "V3_5S" | "RACK_5U_C")
+      attr_accessor forwarding_address_id: ::String
+      attr_accessor tax_documents: Types::TaxDocuments
+      attr_accessor device_configuration: Types::DeviceConfiguration
+      attr_accessor remote_management: ("INSTALLED_ONLY" | "INSTALLED_AUTOSTART" | "NOT_INSTALLED")
+      attr_accessor long_term_pricing_id: ::String
+      attr_accessor impact_level: ("IL2" | "IL4" | "IL5" | "IL6" | "IL99")
+      attr_accessor pickup_details: Types::PickupDetails
+      SENSITIVE: []
+    end
+
+    class CreateJobResult
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLongTermPricingRequest
+      attr_accessor long_term_pricing_type: ("OneYear" | "ThreeYear" | "OneMonth")
+      attr_accessor is_long_term_pricing_auto_renew: bool
+      attr_accessor snowball_type: ("STANDARD" | "EDGE" | "EDGE_C" | "EDGE_CG" | "EDGE_S" | "SNC1_HDD" | "SNC1_SSD" | "V3_5C" | "V3_5S" | "RACK_5U_C")
+      SENSITIVE: []
+    end
+
+    class CreateLongTermPricingResult
+      attr_accessor long_term_pricing_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateReturnShippingLabelRequest
+      attr_accessor job_id: ::String
+      attr_accessor shipping_option: ("SECOND_DAY" | "NEXT_DAY" | "EXPRESS" | "STANDARD")
+      SENSITIVE: []
+    end
+
+    class CreateReturnShippingLabelResult
+      attr_accessor status: ("InProgress" | "TimedOut" | "Succeeded" | "Failed")
+      SENSITIVE: []
+    end
+
+    class DataTransfer
+      attr_accessor bytes_transferred: ::Integer
+      attr_accessor objects_transferred: ::Integer
+      attr_accessor total_bytes: ::Integer
+      attr_accessor total_objects: ::Integer
+      SENSITIVE: []
+    end
+
+    class DependentService
+      attr_accessor service_name: ("KUBERNETES" | "EKS_ANYWHERE")
+      attr_accessor service_version: Types::ServiceVersion
+      SENSITIVE: []
+    end
+
+    class DescribeAddressRequest
+      attr_accessor address_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAddressResult
+      attr_accessor address: Types::Address
+      SENSITIVE: []
+    end
+
+    class DescribeAddressesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAddressesResult
+      attr_accessor addresses: ::Array[Types::Address]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeClusterRequest
+      attr_accessor cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeClusterResult
+      attr_accessor cluster_metadata: Types::ClusterMetadata
+      SENSITIVE: []
+    end
+
+    class DescribeJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeJobResult
+      attr_accessor job_metadata: Types::JobMetadata
+      attr_accessor sub_job_metadata: ::Array[Types::JobMetadata]
+      SENSITIVE: []
+    end
+
+    class DescribeReturnShippingLabelRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReturnShippingLabelResult
+      attr_accessor status: ("InProgress" | "TimedOut" | "Succeeded" | "Failed")
+      attr_accessor expiration_date: ::Time
+      attr_accessor return_shipping_label_uri: ::String
+      SENSITIVE: []
+    end
+
+    class DeviceConfiguration
+      attr_accessor snowcone_device_configuration: Types::SnowconeDeviceConfiguration
+      SENSITIVE: []
+    end
+
+    class EKSOnDeviceServiceConfiguration
+      attr_accessor kubernetes_version: ::String
+      attr_accessor eks_anywhere_version: ::String
+      SENSITIVE: []
+    end
+
+    class Ec2AmiResource
+      attr_accessor ami_id: ::String
+      attr_accessor snowball_ami_id: ::String
+      SENSITIVE: []
+    end
+
+    class Ec2RequestFailedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EventTriggerDefinition
+      attr_accessor event_resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetJobManifestRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetJobManifestResult
+      attr_accessor manifest_uri: ::String
+      SENSITIVE: []
+    end
+
+    class GetJobUnlockCodeRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetJobUnlockCodeResult
+      attr_accessor unlock_code: ::String
+      SENSITIVE: []
+    end
+
+    class GetSnowballUsageRequest < Aws::EmptyStructure
+    end
+
+    class GetSnowballUsageResult
+      attr_accessor snowball_limit: ::Integer
+      attr_accessor snowballs_in_use: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetSoftwareUpdatesRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSoftwareUpdatesResult
+      attr_accessor updates_uri: ::String
+      SENSITIVE: []
+    end
+
+    class INDTaxDocuments
+      attr_accessor gstin: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidAddressException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidInputCombinationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidJobStateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidNextTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidResourceException
+      attr_accessor message: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class JobListEntry
+      attr_accessor job_id: ::String
+      attr_accessor job_state: ("New" | "PreparingAppliance" | "PreparingShipment" | "InTransitToCustomer" | "WithCustomer" | "InTransitToAWS" | "WithAWSSortingFacility" | "WithAWS" | "InProgress" | "Complete" | "Cancelled" | "Listing" | "Pending")
+      attr_accessor is_master: bool
+      attr_accessor job_type: ("IMPORT" | "EXPORT" | "LOCAL_USE")
+      attr_accessor snowball_type: ("STANDARD" | "EDGE" | "EDGE_C" | "EDGE_CG" | "EDGE_S" | "SNC1_HDD" | "SNC1_SSD" | "V3_5C" | "V3_5S" | "RACK_5U_C")
+      attr_accessor creation_date: ::Time
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class JobLogs
+      attr_accessor job_completion_report_uri: ::String
+      attr_accessor job_success_log_uri: ::String
+      attr_accessor job_failure_log_uri: ::String
+      SENSITIVE: []
+    end
+
+    class JobMetadata
+      attr_accessor job_id: ::String
+      attr_accessor job_state: ("New" | "PreparingAppliance" | "PreparingShipment" | "InTransitToCustomer" | "WithCustomer" | "InTransitToAWS" | "WithAWSSortingFacility" | "WithAWS" | "InProgress" | "Complete" | "Cancelled" | "Listing" | "Pending")
+      attr_accessor job_type: ("IMPORT" | "EXPORT" | "LOCAL_USE")
+      attr_accessor snowball_type: ("STANDARD" | "EDGE" | "EDGE_C" | "EDGE_CG" | "EDGE_S" | "SNC1_HDD" | "SNC1_SSD" | "V3_5C" | "V3_5S" | "RACK_5U_C")
+      attr_accessor creation_date: ::Time
+      attr_accessor resources: Types::JobResource
+      attr_accessor description: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor address_id: ::String
+      attr_accessor shipping_details: Types::ShippingDetails
+      attr_accessor snowball_capacity_preference: ("T50" | "T80" | "T100" | "T42" | "T98" | "T8" | "T14" | "T32" | "NoPreference" | "T240" | "T13")
+      attr_accessor notification: Types::Notification
+      attr_accessor data_transfer_progress: Types::DataTransfer
+      attr_accessor job_log_info: Types::JobLogs
+      attr_accessor cluster_id: ::String
+      attr_accessor forwarding_address_id: ::String
+      attr_accessor tax_documents: Types::TaxDocuments
+      attr_accessor device_configuration: Types::DeviceConfiguration
+      attr_accessor remote_management: ("INSTALLED_ONLY" | "INSTALLED_AUTOSTART" | "NOT_INSTALLED")
+      attr_accessor long_term_pricing_id: ::String
+      attr_accessor on_device_service_configuration: Types::OnDeviceServiceConfiguration
+      attr_accessor impact_level: ("IL2" | "IL4" | "IL5" | "IL6" | "IL99")
+      attr_accessor pickup_details: Types::PickupDetails
+      attr_accessor snowball_id: ::String
+      SENSITIVE: []
+    end
+
+    class JobResource
+      attr_accessor s3_resources: ::Array[Types::S3Resource]
+      attr_accessor lambda_resources: ::Array[Types::LambdaResource]
+      attr_accessor ec2_ami_resources: ::Array[Types::Ec2AmiResource]
+      SENSITIVE: []
+    end
+
+    class KMSRequestFailedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KeyRange
+      attr_accessor begin_marker: ::String
+      attr_accessor end_marker: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaResource
+      attr_accessor lambda_arn: ::String
+      attr_accessor event_triggers: ::Array[Types::EventTriggerDefinition]
+      SENSITIVE: []
+    end
+
+    class ListClusterJobsRequest
+      attr_accessor cluster_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListClusterJobsResult
+      attr_accessor job_list_entries: ::Array[Types::JobListEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListClustersRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListClustersResult
+      attr_accessor cluster_list_entries: ::Array[Types::ClusterListEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCompatibleImagesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCompatibleImagesResult
+      attr_accessor compatible_images: ::Array[Types::CompatibleImage]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobsResult
+      attr_accessor job_list_entries: ::Array[Types::JobListEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLongTermPricingRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLongTermPricingResult
+      attr_accessor long_term_pricing_entries: ::Array[Types::LongTermPricingListEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPickupLocationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPickupLocationsResult
+      attr_accessor addresses: ::Array[Types::Address]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceVersionsRequest
+      attr_accessor service_name: ("KUBERNETES" | "EKS_ANYWHERE")
+      attr_accessor dependent_services: ::Array[Types::DependentService]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceVersionsResult
+      attr_accessor service_versions: ::Array[Types::ServiceVersion]
+      attr_accessor service_name: ("KUBERNETES" | "EKS_ANYWHERE")
+      attr_accessor dependent_services: ::Array[Types::DependentService]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LongTermPricingListEntry
+      attr_accessor long_term_pricing_id: ::String
+      attr_accessor long_term_pricing_end_date: ::Time
+      attr_accessor long_term_pricing_start_date: ::Time
+      attr_accessor long_term_pricing_type: ("OneYear" | "ThreeYear" | "OneMonth")
+      attr_accessor current_active_job: ::String
+      attr_accessor replacement_job: ::String
+      attr_accessor is_long_term_pricing_auto_renew: bool
+      attr_accessor long_term_pricing_status: ::String
+      attr_accessor snowball_type: ("STANDARD" | "EDGE" | "EDGE_C" | "EDGE_CG" | "EDGE_S" | "SNC1_HDD" | "SNC1_SSD" | "V3_5C" | "V3_5S" | "RACK_5U_C")
+      attr_accessor job_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class NFSOnDeviceServiceConfiguration
+      attr_accessor storage_limit: ::Integer
+      attr_accessor storage_unit: ("TB")
+      SENSITIVE: []
+    end
+
+    class Notification
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor job_states_to_notify: ::Array[("New" | "PreparingAppliance" | "PreparingShipment" | "InTransitToCustomer" | "WithCustomer" | "InTransitToAWS" | "WithAWSSortingFacility" | "WithAWS" | "InProgress" | "Complete" | "Cancelled" | "Listing" | "Pending")]
+      attr_accessor notify_all: bool
+      attr_accessor device_pickup_sns_topic_arn: ::String
+      SENSITIVE: []
+    end
+
+    class OnDeviceServiceConfiguration
+      attr_accessor nfs_on_device_service: Types::NFSOnDeviceServiceConfiguration
+      attr_accessor tgw_on_device_service: Types::TGWOnDeviceServiceConfiguration
+      attr_accessor eks_on_device_service: Types::EKSOnDeviceServiceConfiguration
+      attr_accessor s3_on_device_service: Types::S3OnDeviceServiceConfiguration
+      SENSITIVE: []
+    end
+
+    class PickupDetails
+      attr_accessor name: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor email: ::String
+      attr_accessor identification_number: ::String
+      attr_accessor identification_expiration_date: ::Time
+      attr_accessor identification_issuing_org: ::String
+      attr_accessor device_pickup_id: ::String
+      SENSITIVE: [:phone_number, :email]
+    end
+
+    class ReturnShippingLabelAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class S3OnDeviceServiceConfiguration
+      attr_accessor storage_limit: ::Float
+      attr_accessor storage_unit: ("TB")
+      attr_accessor service_size: ::Integer
+      attr_accessor fault_tolerance: ::Integer
+      SENSITIVE: []
+    end
+
+    class S3Resource
+      attr_accessor bucket_arn: ::String
+      attr_accessor key_range: Types::KeyRange
+      attr_accessor target_on_device_services: ::Array[Types::TargetOnDeviceService]
+      SENSITIVE: []
+    end
+
+    class ServiceVersion
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class Shipment
+      attr_accessor status: ::String
+      attr_accessor tracking_number: ::String
+      SENSITIVE: []
+    end
+
+    class ShippingDetails
+      attr_accessor shipping_option: ("SECOND_DAY" | "NEXT_DAY" | "EXPRESS" | "STANDARD")
+      attr_accessor inbound_shipment: Types::Shipment
+      attr_accessor outbound_shipment: Types::Shipment
+      SENSITIVE: []
+    end
+
+    class SnowconeDeviceConfiguration
+      attr_accessor wireless_connection: Types::WirelessConnection
+      SENSITIVE: []
+    end
+
+    class TGWOnDeviceServiceConfiguration
+      attr_accessor storage_limit: ::Integer
+      attr_accessor storage_unit: ("TB")
+      SENSITIVE: []
+    end
+
+    class TargetOnDeviceService
+      attr_accessor service_name: ("NFS_ON_DEVICE_SERVICE" | "S3_ON_DEVICE_SERVICE")
+      attr_accessor transfer_option: ("IMPORT" | "EXPORT" | "LOCAL_USE")
+      SENSITIVE: []
+    end
+
+    class TaxDocuments
+      attr_accessor ind: Types::INDTaxDocuments
+      SENSITIVE: []
+    end
+
+    class UnsupportedAddressException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateClusterRequest
+      attr_accessor cluster_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor resources: Types::JobResource
+      attr_accessor on_device_service_configuration: Types::OnDeviceServiceConfiguration
+      attr_accessor address_id: ::String
+      attr_accessor shipping_option: ("SECOND_DAY" | "NEXT_DAY" | "EXPRESS" | "STANDARD")
+      attr_accessor notification: Types::Notification
+      attr_accessor forwarding_address_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateClusterResult < Aws::EmptyStructure
+    end
+
+    class UpdateJobRequest
+      attr_accessor job_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor notification: Types::Notification
+      attr_accessor resources: Types::JobResource
+      attr_accessor on_device_service_configuration: Types::OnDeviceServiceConfiguration
+      attr_accessor address_id: ::String
+      attr_accessor shipping_option: ("SECOND_DAY" | "NEXT_DAY" | "EXPRESS" | "STANDARD")
+      attr_accessor description: ::String
+      attr_accessor snowball_capacity_preference: ("T50" | "T80" | "T100" | "T42" | "T98" | "T8" | "T14" | "T32" | "NoPreference" | "T240" | "T13")
+      attr_accessor forwarding_address_id: ::String
+      attr_accessor pickup_details: Types::PickupDetails
+      SENSITIVE: []
+    end
+
+    class UpdateJobResult < Aws::EmptyStructure
+    end
+
+    class UpdateJobShipmentStateRequest
+      attr_accessor job_id: ::String
+      attr_accessor shipment_state: ("RECEIVED" | "RETURNED")
+      SENSITIVE: []
+    end
+
+    class UpdateJobShipmentStateResult < Aws::EmptyStructure
+    end
+
+    class UpdateLongTermPricingRequest
+      attr_accessor long_term_pricing_id: ::String
+      attr_accessor replacement_job: ::String
+      attr_accessor is_long_term_pricing_auto_renew: bool
+      SENSITIVE: []
+    end
+
+    class UpdateLongTermPricingResult < Aws::EmptyStructure
+    end
+
+    class WirelessConnection
+      attr_accessor is_wifi_enabled: bool
+      SENSITIVE: []
+    end
+  end
+end

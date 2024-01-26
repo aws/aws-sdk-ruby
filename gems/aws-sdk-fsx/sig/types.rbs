@@ -1,0 +1,1748 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::FSx
+  module Types
+
+    class ActiveDirectoryBackupAttributes
+      attr_accessor domain_name: ::String
+      attr_accessor active_directory_id: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ActiveDirectoryError
+      attr_accessor active_directory_id: ::String
+      attr_accessor type: ("DOMAIN_NOT_FOUND" | "INCOMPATIBLE_DOMAIN_MODE" | "WRONG_VPC" | "INVALID_DOMAIN_STAGE")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AdministrativeAction
+      attr_accessor administrative_action_type: ("FILE_SYSTEM_UPDATE" | "STORAGE_OPTIMIZATION" | "FILE_SYSTEM_ALIAS_ASSOCIATION" | "FILE_SYSTEM_ALIAS_DISASSOCIATION" | "VOLUME_UPDATE" | "SNAPSHOT_UPDATE" | "RELEASE_NFS_V3_LOCKS" | "VOLUME_RESTORE" | "THROUGHPUT_OPTIMIZATION" | "IOPS_OPTIMIZATION" | "STORAGE_TYPE_OPTIMIZATION" | "MISCONFIGURED_STATE_RECOVERY" | "VOLUME_UPDATE_WITH_SNAPSHOT" | "VOLUME_INITIALIZE_WITH_SNAPSHOT")
+      attr_accessor progress_percent: ::Integer
+      attr_accessor request_time: ::Time
+      attr_accessor status: ("FAILED" | "IN_PROGRESS" | "PENDING" | "COMPLETED" | "UPDATED_OPTIMIZING")
+      attr_accessor target_file_system_values: Types::FileSystem
+      attr_accessor failure_details: Types::AdministrativeActionFailureDetails
+      attr_accessor target_volume_values: Types::Volume
+      attr_accessor target_snapshot_values: Types::Snapshot
+      attr_accessor total_transfer_bytes: ::Integer
+      attr_accessor remaining_transfer_bytes: ::Integer
+      SENSITIVE: []
+    end
+
+    class AdministrativeActionFailureDetails
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AggregateConfiguration
+      attr_accessor aggregates: ::Array[::String]
+      attr_accessor total_constituents: ::Integer
+      SENSITIVE: []
+    end
+
+    class Alias
+      attr_accessor name: ::String
+      attr_accessor lifecycle: ("AVAILABLE" | "CREATING" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
+    class AssociateFileSystemAliasesRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor file_system_id: ::String
+      attr_accessor aliases: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AssociateFileSystemAliasesResponse
+      attr_accessor aliases: ::Array[Types::Alias]
+      SENSITIVE: []
+    end
+
+    class AutoExportPolicy
+      attr_accessor events: ::Array[("NEW" | "CHANGED" | "DELETED")]
+      SENSITIVE: []
+    end
+
+    class AutoImportPolicy
+      attr_accessor events: ::Array[("NEW" | "CHANGED" | "DELETED")]
+      SENSITIVE: []
+    end
+
+    class AutocommitPeriod
+      attr_accessor type: ("MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "NONE")
+      attr_accessor value: ::Integer
+      SENSITIVE: []
+    end
+
+    class Backup
+      attr_accessor backup_id: ::String
+      attr_accessor lifecycle: ("AVAILABLE" | "CREATING" | "TRANSFERRING" | "DELETED" | "FAILED" | "PENDING" | "COPYING")
+      attr_accessor failure_details: Types::BackupFailureDetails
+      attr_accessor type: ("AUTOMATIC" | "USER_INITIATED" | "AWS_BACKUP")
+      attr_accessor progress_percent: ::Integer
+      attr_accessor creation_time: ::Time
+      attr_accessor kms_key_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor file_system: Types::FileSystem
+      attr_accessor directory_information: Types::ActiveDirectoryBackupAttributes
+      attr_accessor owner_id: ::String
+      attr_accessor source_backup_id: ::String
+      attr_accessor source_backup_region: ::String
+      attr_accessor resource_type: ("FILE_SYSTEM" | "VOLUME")
+      attr_accessor volume: Types::Volume
+      SENSITIVE: []
+    end
+
+    class BackupBeingCopied
+      attr_accessor message: ::String
+      attr_accessor backup_id: ::String
+      SENSITIVE: []
+    end
+
+    class BackupFailureDetails
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BackupInProgress
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BackupNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BackupRestoring
+      attr_accessor message: ::String
+      attr_accessor file_system_id: ::String
+      SENSITIVE: []
+    end
+
+    class BadRequest
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CancelDataRepositoryTaskRequest
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelDataRepositoryTaskResponse
+      attr_accessor lifecycle: ("PENDING" | "EXECUTING" | "FAILED" | "SUCCEEDED" | "CANCELED" | "CANCELING")
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class CompletionReport
+      attr_accessor enabled: bool
+      attr_accessor path: ::String
+      attr_accessor format: ("REPORT_CSV_20191124")
+      attr_accessor scope: ("FAILED_FILES_ONLY")
+      SENSITIVE: []
+    end
+
+    class CopyBackupRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor source_backup_id: ::String
+      attr_accessor source_region: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor copy_tags: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CopyBackupResponse
+      attr_accessor backup: Types::Backup
+      SENSITIVE: []
+    end
+
+    class CopySnapshotAndUpdateVolumeRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor volume_id: ::String
+      attr_accessor source_snapshot_arn: ::String
+      attr_accessor copy_strategy: ("CLONE" | "FULL_COPY" | "INCREMENTAL_COPY")
+      attr_accessor options: ::Array[("DELETE_INTERMEDIATE_SNAPSHOTS" | "DELETE_CLONED_VOLUMES" | "DELETE_INTERMEDIATE_DATA")]
+      SENSITIVE: []
+    end
+
+    class CopySnapshotAndUpdateVolumeResponse
+      attr_accessor volume_id: ::String
+      attr_accessor lifecycle: ("CREATING" | "CREATED" | "DELETING" | "FAILED" | "MISCONFIGURED" | "PENDING" | "AVAILABLE")
+      attr_accessor administrative_actions: ::Array[Types::AdministrativeAction]
+      SENSITIVE: []
+    end
+
+    class CreateAggregateConfiguration
+      attr_accessor aggregates: ::Array[::String]
+      attr_accessor constituents_per_aggregate: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateBackupRequest
+      attr_accessor file_system_id: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor volume_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBackupResponse
+      attr_accessor backup: Types::Backup
+      SENSITIVE: []
+    end
+
+    class CreateDataRepositoryAssociationRequest
+      attr_accessor file_system_id: ::String
+      attr_accessor file_system_path: ::String
+      attr_accessor data_repository_path: ::String
+      attr_accessor batch_import_meta_data_on_create: bool
+      attr_accessor imported_file_chunk_size: ::Integer
+      attr_accessor s3: Types::S3DataRepositoryConfiguration
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateDataRepositoryAssociationResponse
+      attr_accessor association: Types::DataRepositoryAssociation
+      SENSITIVE: []
+    end
+
+    class CreateDataRepositoryTaskRequest
+      attr_accessor type: ("EXPORT_TO_REPOSITORY" | "IMPORT_METADATA_FROM_REPOSITORY" | "RELEASE_DATA_FROM_FILESYSTEM" | "AUTO_RELEASE_DATA")
+      attr_accessor paths: ::Array[::String]
+      attr_accessor file_system_id: ::String
+      attr_accessor report: Types::CompletionReport
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor capacity_to_release: ::Integer
+      attr_accessor release_configuration: Types::ReleaseConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateDataRepositoryTaskResponse
+      attr_accessor data_repository_task: Types::DataRepositoryTask
+      SENSITIVE: []
+    end
+
+    class CreateFileCacheLustreConfiguration
+      attr_accessor per_unit_storage_throughput: ::Integer
+      attr_accessor deployment_type: ("CACHE_1")
+      attr_accessor weekly_maintenance_start_time: ::String
+      attr_accessor metadata_configuration: Types::FileCacheLustreMetadataConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateFileCacheRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor file_cache_type: ("LUSTRE")
+      attr_accessor file_cache_type_version: ::String
+      attr_accessor storage_capacity: ::Integer
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor copy_tags_to_data_repository_associations: bool
+      attr_accessor kms_key_id: ::String
+      attr_accessor lustre_configuration: Types::CreateFileCacheLustreConfiguration
+      attr_accessor data_repository_associations: ::Array[Types::FileCacheDataRepositoryAssociation]
+      SENSITIVE: []
+    end
+
+    class CreateFileCacheResponse
+      attr_accessor file_cache: Types::FileCacheCreating
+      SENSITIVE: []
+    end
+
+    class CreateFileSystemFromBackupRequest
+      attr_accessor backup_id: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor windows_configuration: Types::CreateFileSystemWindowsConfiguration
+      attr_accessor lustre_configuration: Types::CreateFileSystemLustreConfiguration
+      attr_accessor storage_type: ("SSD" | "HDD")
+      attr_accessor kms_key_id: ::String
+      attr_accessor file_system_type_version: ::String
+      attr_accessor open_zfs_configuration: Types::CreateFileSystemOpenZFSConfiguration
+      attr_accessor storage_capacity: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateFileSystemFromBackupResponse
+      attr_accessor file_system: Types::FileSystem
+      SENSITIVE: []
+    end
+
+    class CreateFileSystemLustreConfiguration
+      attr_accessor weekly_maintenance_start_time: ::String
+      attr_accessor import_path: ::String
+      attr_accessor export_path: ::String
+      attr_accessor imported_file_chunk_size: ::Integer
+      attr_accessor deployment_type: ("SCRATCH_1" | "SCRATCH_2" | "PERSISTENT_1" | "PERSISTENT_2")
+      attr_accessor auto_import_policy: ("NONE" | "NEW" | "NEW_CHANGED" | "NEW_CHANGED_DELETED")
+      attr_accessor per_unit_storage_throughput: ::Integer
+      attr_accessor daily_automatic_backup_start_time: ::String
+      attr_accessor automatic_backup_retention_days: ::Integer
+      attr_accessor copy_tags_to_backups: bool
+      attr_accessor drive_cache_type: ("NONE" | "READ")
+      attr_accessor data_compression_type: ("NONE" | "LZ4")
+      attr_accessor log_configuration: Types::LustreLogCreateConfiguration
+      attr_accessor root_squash_configuration: Types::LustreRootSquashConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateFileSystemOntapConfiguration
+      attr_accessor automatic_backup_retention_days: ::Integer
+      attr_accessor daily_automatic_backup_start_time: ::String
+      attr_accessor deployment_type: ("MULTI_AZ_1" | "SINGLE_AZ_1" | "SINGLE_AZ_2")
+      attr_accessor endpoint_ip_address_range: ::String
+      attr_accessor fsx_admin_password: ::String
+      attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration
+      attr_accessor preferred_subnet_id: ::String
+      attr_accessor route_table_ids: ::Array[::String]
+      attr_accessor throughput_capacity: ::Integer
+      attr_accessor weekly_maintenance_start_time: ::String
+      attr_accessor ha_pairs: ::Integer
+      attr_accessor throughput_capacity_per_ha_pair: ::Integer
+      SENSITIVE: [:fsx_admin_password]
+    end
+
+    class CreateFileSystemOpenZFSConfiguration
+      attr_accessor automatic_backup_retention_days: ::Integer
+      attr_accessor copy_tags_to_backups: bool
+      attr_accessor copy_tags_to_volumes: bool
+      attr_accessor daily_automatic_backup_start_time: ::String
+      attr_accessor deployment_type: ("SINGLE_AZ_1" | "SINGLE_AZ_2" | "MULTI_AZ_1")
+      attr_accessor throughput_capacity: ::Integer
+      attr_accessor weekly_maintenance_start_time: ::String
+      attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration
+      attr_accessor root_volume_configuration: Types::OpenZFSCreateRootVolumeConfiguration
+      attr_accessor preferred_subnet_id: ::String
+      attr_accessor endpoint_ip_address_range: ::String
+      attr_accessor route_table_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateFileSystemRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor file_system_type: ("WINDOWS" | "LUSTRE" | "ONTAP" | "OPENZFS")
+      attr_accessor storage_capacity: ::Integer
+      attr_accessor storage_type: ("SSD" | "HDD")
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor kms_key_id: ::String
+      attr_accessor windows_configuration: Types::CreateFileSystemWindowsConfiguration
+      attr_accessor lustre_configuration: Types::CreateFileSystemLustreConfiguration
+      attr_accessor ontap_configuration: Types::CreateFileSystemOntapConfiguration
+      attr_accessor file_system_type_version: ::String
+      attr_accessor open_zfs_configuration: Types::CreateFileSystemOpenZFSConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateFileSystemResponse
+      attr_accessor file_system: Types::FileSystem
+      SENSITIVE: []
+    end
+
+    class CreateFileSystemWindowsConfiguration
+      attr_accessor active_directory_id: ::String
+      attr_accessor self_managed_active_directory_configuration: Types::SelfManagedActiveDirectoryConfiguration
+      attr_accessor deployment_type: ("MULTI_AZ_1" | "SINGLE_AZ_1" | "SINGLE_AZ_2")
+      attr_accessor preferred_subnet_id: ::String
+      attr_accessor throughput_capacity: ::Integer
+      attr_accessor weekly_maintenance_start_time: ::String
+      attr_accessor daily_automatic_backup_start_time: ::String
+      attr_accessor automatic_backup_retention_days: ::Integer
+      attr_accessor copy_tags_to_backups: bool
+      attr_accessor aliases: ::Array[::String]
+      attr_accessor audit_log_configuration: Types::WindowsAuditLogCreateConfiguration
+      attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateOntapVolumeConfiguration
+      attr_accessor junction_path: ::String
+      attr_accessor security_style: ("UNIX" | "NTFS" | "MIXED")
+      attr_accessor size_in_megabytes: ::Integer
+      attr_accessor storage_efficiency_enabled: bool
+      attr_accessor storage_virtual_machine_id: ::String
+      attr_accessor tiering_policy: Types::TieringPolicy
+      attr_accessor ontap_volume_type: ("RW" | "DP")
+      attr_accessor snapshot_policy: ::String
+      attr_accessor copy_tags_to_backups: bool
+      attr_accessor snaplock_configuration: Types::CreateSnaplockConfiguration
+      attr_accessor volume_style: ("FLEXVOL" | "FLEXGROUP")
+      attr_accessor aggregate_configuration: Types::CreateAggregateConfiguration
+      attr_accessor size_in_bytes: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateOpenZFSOriginSnapshotConfiguration
+      attr_accessor snapshot_arn: ::String
+      attr_accessor copy_strategy: ("CLONE" | "FULL_COPY" | "INCREMENTAL_COPY")
+      SENSITIVE: []
+    end
+
+    class CreateOpenZFSVolumeConfiguration
+      attr_accessor parent_volume_id: ::String
+      attr_accessor storage_capacity_reservation_gi_b: ::Integer
+      attr_accessor storage_capacity_quota_gi_b: ::Integer
+      attr_accessor record_size_ki_b: ::Integer
+      attr_accessor data_compression_type: ("NONE" | "ZSTD" | "LZ4")
+      attr_accessor copy_tags_to_snapshots: bool
+      attr_accessor origin_snapshot: Types::CreateOpenZFSOriginSnapshotConfiguration
+      attr_accessor read_only: bool
+      attr_accessor nfs_exports: ::Array[Types::OpenZFSNfsExport]
+      attr_accessor user_and_group_quotas: ::Array[Types::OpenZFSUserOrGroupQuota]
+      SENSITIVE: []
+    end
+
+    class CreateSnaplockConfiguration
+      attr_accessor audit_log_volume: bool
+      attr_accessor autocommit_period: Types::AutocommitPeriod
+      attr_accessor privileged_delete: ("DISABLED" | "ENABLED" | "PERMANENTLY_DISABLED")
+      attr_accessor retention_period: Types::SnaplockRetentionPeriod
+      attr_accessor snaplock_type: ("COMPLIANCE" | "ENTERPRISE")
+      attr_accessor volume_append_mode_enabled: bool
+      SENSITIVE: []
+    end
+
+    class CreateSnapshotRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor name: ::String
+      attr_accessor volume_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateSnapshotResponse
+      attr_accessor snapshot: Types::Snapshot
+      SENSITIVE: []
+    end
+
+    class CreateStorageVirtualMachineRequest
+      attr_accessor active_directory_configuration: Types::CreateSvmActiveDirectoryConfiguration
+      attr_accessor client_request_token: ::String
+      attr_accessor file_system_id: ::String
+      attr_accessor name: ::String
+      attr_accessor svm_admin_password: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor root_volume_security_style: ("UNIX" | "NTFS" | "MIXED")
+      SENSITIVE: [:svm_admin_password]
+    end
+
+    class CreateStorageVirtualMachineResponse
+      attr_accessor storage_virtual_machine: Types::StorageVirtualMachine
+      SENSITIVE: []
+    end
+
+    class CreateSvmActiveDirectoryConfiguration
+      attr_accessor net_bios_name: ::String
+      attr_accessor self_managed_active_directory_configuration: Types::SelfManagedActiveDirectoryConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateVolumeFromBackupRequest
+      attr_accessor backup_id: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor name: ::String
+      attr_accessor ontap_configuration: Types::CreateOntapVolumeConfiguration
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateVolumeFromBackupResponse
+      attr_accessor volume: Types::Volume
+      SENSITIVE: []
+    end
+
+    class CreateVolumeRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor volume_type: ("ONTAP" | "OPENZFS")
+      attr_accessor name: ::String
+      attr_accessor ontap_configuration: Types::CreateOntapVolumeConfiguration
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor open_zfs_configuration: Types::CreateOpenZFSVolumeConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateVolumeResponse
+      attr_accessor volume: Types::Volume
+      SENSITIVE: []
+    end
+
+    class DataRepositoryAssociation
+      attr_accessor association_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor file_system_id: ::String
+      attr_accessor lifecycle: ("CREATING" | "AVAILABLE" | "MISCONFIGURED" | "UPDATING" | "DELETING" | "FAILED")
+      attr_accessor failure_details: Types::DataRepositoryFailureDetails
+      attr_accessor file_system_path: ::String
+      attr_accessor data_repository_path: ::String
+      attr_accessor batch_import_meta_data_on_create: bool
+      attr_accessor imported_file_chunk_size: ::Integer
+      attr_accessor s3: Types::S3DataRepositoryConfiguration
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor creation_time: ::Time
+      attr_accessor file_cache_id: ::String
+      attr_accessor file_cache_path: ::String
+      attr_accessor data_repository_subdirectories: ::Array[::String]
+      attr_accessor nfs: Types::NFSDataRepositoryConfiguration
+      SENSITIVE: []
+    end
+
+    class DataRepositoryAssociationNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DataRepositoryConfiguration
+      attr_accessor lifecycle: ("CREATING" | "AVAILABLE" | "MISCONFIGURED" | "UPDATING" | "DELETING" | "FAILED")
+      attr_accessor import_path: ::String
+      attr_accessor export_path: ::String
+      attr_accessor imported_file_chunk_size: ::Integer
+      attr_accessor auto_import_policy: ("NONE" | "NEW" | "NEW_CHANGED" | "NEW_CHANGED_DELETED")
+      attr_accessor failure_details: Types::DataRepositoryFailureDetails
+      SENSITIVE: []
+    end
+
+    class DataRepositoryFailureDetails
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DataRepositoryTask
+      attr_accessor task_id: ::String
+      attr_accessor lifecycle: ("PENDING" | "EXECUTING" | "FAILED" | "SUCCEEDED" | "CANCELED" | "CANCELING")
+      attr_accessor type: ("EXPORT_TO_REPOSITORY" | "IMPORT_METADATA_FROM_REPOSITORY" | "RELEASE_DATA_FROM_FILESYSTEM" | "AUTO_RELEASE_DATA")
+      attr_accessor creation_time: ::Time
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor file_system_id: ::String
+      attr_accessor paths: ::Array[::String]
+      attr_accessor failure_details: Types::DataRepositoryTaskFailureDetails
+      attr_accessor status: Types::DataRepositoryTaskStatus
+      attr_accessor report: Types::CompletionReport
+      attr_accessor capacity_to_release: ::Integer
+      attr_accessor file_cache_id: ::String
+      attr_accessor release_configuration: Types::ReleaseConfiguration
+      SENSITIVE: []
+    end
+
+    class DataRepositoryTaskEnded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DataRepositoryTaskExecuting
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DataRepositoryTaskFailureDetails
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DataRepositoryTaskFilter
+      attr_accessor name: ("file-system-id" | "task-lifecycle" | "data-repository-association-id" | "file-cache-id")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DataRepositoryTaskNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DataRepositoryTaskStatus
+      attr_accessor total_count: ::Integer
+      attr_accessor succeeded_count: ::Integer
+      attr_accessor failed_count: ::Integer
+      attr_accessor last_updated_time: ::Time
+      attr_accessor released_capacity: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteBackupRequest
+      attr_accessor backup_id: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBackupResponse
+      attr_accessor backup_id: ::String
+      attr_accessor lifecycle: ("AVAILABLE" | "CREATING" | "TRANSFERRING" | "DELETED" | "FAILED" | "PENDING" | "COPYING")
+      SENSITIVE: []
+    end
+
+    class DeleteDataRepositoryAssociationRequest
+      attr_accessor association_id: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor delete_data_in_file_system: bool
+      SENSITIVE: []
+    end
+
+    class DeleteDataRepositoryAssociationResponse
+      attr_accessor association_id: ::String
+      attr_accessor lifecycle: ("CREATING" | "AVAILABLE" | "MISCONFIGURED" | "UPDATING" | "DELETING" | "FAILED")
+      attr_accessor delete_data_in_file_system: bool
+      SENSITIVE: []
+    end
+
+    class DeleteFileCacheRequest
+      attr_accessor file_cache_id: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFileCacheResponse
+      attr_accessor file_cache_id: ::String
+      attr_accessor lifecycle: ("AVAILABLE" | "CREATING" | "DELETING" | "UPDATING" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class DeleteFileSystemLustreConfiguration
+      attr_accessor skip_final_backup: bool
+      attr_accessor final_backup_tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class DeleteFileSystemLustreResponse
+      attr_accessor final_backup_id: ::String
+      attr_accessor final_backup_tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class DeleteFileSystemOpenZFSConfiguration
+      attr_accessor skip_final_backup: bool
+      attr_accessor final_backup_tags: ::Array[Types::Tag]
+      attr_accessor options: ::Array[("DELETE_CHILD_VOLUMES_AND_SNAPSHOTS")]
+      SENSITIVE: []
+    end
+
+    class DeleteFileSystemOpenZFSResponse
+      attr_accessor final_backup_id: ::String
+      attr_accessor final_backup_tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class DeleteFileSystemRequest
+      attr_accessor file_system_id: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor windows_configuration: Types::DeleteFileSystemWindowsConfiguration
+      attr_accessor lustre_configuration: Types::DeleteFileSystemLustreConfiguration
+      attr_accessor open_zfs_configuration: Types::DeleteFileSystemOpenZFSConfiguration
+      SENSITIVE: []
+    end
+
+    class DeleteFileSystemResponse
+      attr_accessor file_system_id: ::String
+      attr_accessor lifecycle: ("AVAILABLE" | "CREATING" | "FAILED" | "DELETING" | "MISCONFIGURED" | "UPDATING" | "MISCONFIGURED_UNAVAILABLE")
+      attr_accessor windows_response: Types::DeleteFileSystemWindowsResponse
+      attr_accessor lustre_response: Types::DeleteFileSystemLustreResponse
+      attr_accessor open_zfs_response: Types::DeleteFileSystemOpenZFSResponse
+      SENSITIVE: []
+    end
+
+    class DeleteFileSystemWindowsConfiguration
+      attr_accessor skip_final_backup: bool
+      attr_accessor final_backup_tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class DeleteFileSystemWindowsResponse
+      attr_accessor final_backup_id: ::String
+      attr_accessor final_backup_tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class DeleteSnapshotRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor snapshot_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSnapshotResponse
+      attr_accessor snapshot_id: ::String
+      attr_accessor lifecycle: ("PENDING" | "CREATING" | "DELETING" | "AVAILABLE")
+      SENSITIVE: []
+    end
+
+    class DeleteStorageVirtualMachineRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor storage_virtual_machine_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStorageVirtualMachineResponse
+      attr_accessor storage_virtual_machine_id: ::String
+      attr_accessor lifecycle: ("CREATED" | "CREATING" | "DELETING" | "FAILED" | "MISCONFIGURED" | "PENDING")
+      SENSITIVE: []
+    end
+
+    class DeleteVolumeOntapConfiguration
+      attr_accessor skip_final_backup: bool
+      attr_accessor final_backup_tags: ::Array[Types::Tag]
+      attr_accessor bypass_snaplock_enterprise_retention: bool
+      SENSITIVE: []
+    end
+
+    class DeleteVolumeOntapResponse
+      attr_accessor final_backup_id: ::String
+      attr_accessor final_backup_tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class DeleteVolumeOpenZFSConfiguration
+      attr_accessor options: ::Array[("DELETE_CHILD_VOLUMES_AND_SNAPSHOTS")]
+      SENSITIVE: []
+    end
+
+    class DeleteVolumeRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor volume_id: ::String
+      attr_accessor ontap_configuration: Types::DeleteVolumeOntapConfiguration
+      attr_accessor open_zfs_configuration: Types::DeleteVolumeOpenZFSConfiguration
+      SENSITIVE: []
+    end
+
+    class DeleteVolumeResponse
+      attr_accessor volume_id: ::String
+      attr_accessor lifecycle: ("CREATING" | "CREATED" | "DELETING" | "FAILED" | "MISCONFIGURED" | "PENDING" | "AVAILABLE")
+      attr_accessor ontap_response: Types::DeleteVolumeOntapResponse
+      SENSITIVE: []
+    end
+
+    class DescribeBackupsRequest
+      attr_accessor backup_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBackupsResponse
+      attr_accessor backups: ::Array[Types::Backup]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDataRepositoryAssociationsRequest
+      attr_accessor association_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDataRepositoryAssociationsResponse
+      attr_accessor associations: ::Array[Types::DataRepositoryAssociation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDataRepositoryTasksRequest
+      attr_accessor task_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::DataRepositoryTaskFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDataRepositoryTasksResponse
+      attr_accessor data_repository_tasks: ::Array[Types::DataRepositoryTask]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFileCachesRequest
+      attr_accessor file_cache_ids: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFileCachesResponse
+      attr_accessor file_caches: ::Array[Types::FileCache]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFileSystemAliasesRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor file_system_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFileSystemAliasesResponse
+      attr_accessor aliases: ::Array[Types::Alias]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFileSystemsRequest
+      attr_accessor file_system_ids: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFileSystemsResponse
+      attr_accessor file_systems: ::Array[Types::FileSystem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSharedVpcConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class DescribeSharedVpcConfigurationResponse
+      attr_accessor enable_fsx_route_table_updates_from_participant_accounts: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSnapshotsRequest
+      attr_accessor snapshot_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::SnapshotFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor include_shared: bool
+      SENSITIVE: []
+    end
+
+    class DescribeSnapshotsResponse
+      attr_accessor snapshots: ::Array[Types::Snapshot]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStorageVirtualMachinesRequest
+      attr_accessor storage_virtual_machine_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::StorageVirtualMachineFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStorageVirtualMachinesResponse
+      attr_accessor storage_virtual_machines: ::Array[Types::StorageVirtualMachine]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeVolumesRequest
+      attr_accessor volume_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::VolumeFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeVolumesResponse
+      attr_accessor volumes: ::Array[Types::Volume]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateFileSystemAliasesRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor file_system_id: ::String
+      attr_accessor aliases: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DisassociateFileSystemAliasesResponse
+      attr_accessor aliases: ::Array[Types::Alias]
+      SENSITIVE: []
+    end
+
+    class DiskIopsConfiguration
+      attr_accessor mode: ("AUTOMATIC" | "USER_PROVISIONED")
+      attr_accessor iops: ::Integer
+      SENSITIVE: []
+    end
+
+    class DurationSinceLastAccess
+      attr_accessor unit: ("DAYS")
+      attr_accessor value: ::Integer
+      SENSITIVE: []
+    end
+
+    class FileCache
+      attr_accessor owner_id: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor file_cache_id: ::String
+      attr_accessor file_cache_type: ("LUSTRE")
+      attr_accessor file_cache_type_version: ::String
+      attr_accessor lifecycle: ("AVAILABLE" | "CREATING" | "DELETING" | "UPDATING" | "FAILED")
+      attr_accessor failure_details: Types::FileCacheFailureDetails
+      attr_accessor storage_capacity: ::Integer
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor network_interface_ids: ::Array[::String]
+      attr_accessor dns_name: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor lustre_configuration: Types::FileCacheLustreConfiguration
+      attr_accessor data_repository_association_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class FileCacheCreating
+      attr_accessor owner_id: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor file_cache_id: ::String
+      attr_accessor file_cache_type: ("LUSTRE")
+      attr_accessor file_cache_type_version: ::String
+      attr_accessor lifecycle: ("AVAILABLE" | "CREATING" | "DELETING" | "UPDATING" | "FAILED")
+      attr_accessor failure_details: Types::FileCacheFailureDetails
+      attr_accessor storage_capacity: ::Integer
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor network_interface_ids: ::Array[::String]
+      attr_accessor dns_name: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor copy_tags_to_data_repository_associations: bool
+      attr_accessor lustre_configuration: Types::FileCacheLustreConfiguration
+      attr_accessor data_repository_association_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class FileCacheDataRepositoryAssociation
+      attr_accessor file_cache_path: ::String
+      attr_accessor data_repository_path: ::String
+      attr_accessor data_repository_subdirectories: ::Array[::String]
+      attr_accessor nfs: Types::FileCacheNFSConfiguration
+      SENSITIVE: []
+    end
+
+    class FileCacheFailureDetails
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FileCacheLustreConfiguration
+      attr_accessor per_unit_storage_throughput: ::Integer
+      attr_accessor deployment_type: ("CACHE_1")
+      attr_accessor mount_name: ::String
+      attr_accessor weekly_maintenance_start_time: ::String
+      attr_accessor metadata_configuration: Types::FileCacheLustreMetadataConfiguration
+      attr_accessor log_configuration: Types::LustreLogConfiguration
+      SENSITIVE: []
+    end
+
+    class FileCacheLustreMetadataConfiguration
+      attr_accessor storage_capacity: ::Integer
+      SENSITIVE: []
+    end
+
+    class FileCacheNFSConfiguration
+      attr_accessor version: ("NFS3")
+      attr_accessor dns_ips: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class FileCacheNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FileSystem
+      attr_accessor owner_id: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor file_system_id: ::String
+      attr_accessor file_system_type: ("WINDOWS" | "LUSTRE" | "ONTAP" | "OPENZFS")
+      attr_accessor lifecycle: ("AVAILABLE" | "CREATING" | "FAILED" | "DELETING" | "MISCONFIGURED" | "UPDATING" | "MISCONFIGURED_UNAVAILABLE")
+      attr_accessor failure_details: Types::FileSystemFailureDetails
+      attr_accessor storage_capacity: ::Integer
+      attr_accessor storage_type: ("SSD" | "HDD")
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor network_interface_ids: ::Array[::String]
+      attr_accessor dns_name: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor windows_configuration: Types::WindowsFileSystemConfiguration
+      attr_accessor lustre_configuration: Types::LustreFileSystemConfiguration
+      attr_accessor administrative_actions: ::Array[Types::AdministrativeAction]
+      attr_accessor ontap_configuration: Types::OntapFileSystemConfiguration
+      attr_accessor file_system_type_version: ::String
+      attr_accessor open_zfs_configuration: Types::OpenZFSFileSystemConfiguration
+      SENSITIVE: []
+    end
+
+    class FileSystemEndpoint
+      attr_accessor dns_name: ::String
+      attr_accessor ip_addresses: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class FileSystemEndpoints
+      attr_accessor intercluster: Types::FileSystemEndpoint
+      attr_accessor management: Types::FileSystemEndpoint
+      SENSITIVE: []
+    end
+
+    class FileSystemFailureDetails
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FileSystemNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor name: ("file-system-id" | "backup-type" | "file-system-type" | "volume-id" | "data-repository-type" | "file-cache-id" | "file-cache-type")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class IncompatibleParameterError
+      attr_accessor parameter: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IncompatibleRegionForMultiAZ
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidDataRepositoryType
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidDestinationKmsKey
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidExportPath
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidImportPath
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidNetworkSettings
+      attr_accessor message: ::String
+      attr_accessor invalid_subnet_id: ::String
+      attr_accessor invalid_security_group_id: ::String
+      attr_accessor invalid_route_table_id: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidPerUnitStorageThroughput
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRegion
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidSourceKmsKey
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LifecycleTransitionReason
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LustreFileSystemConfiguration
+      attr_accessor weekly_maintenance_start_time: ::String
+      attr_accessor data_repository_configuration: Types::DataRepositoryConfiguration
+      attr_accessor deployment_type: ("SCRATCH_1" | "SCRATCH_2" | "PERSISTENT_1" | "PERSISTENT_2")
+      attr_accessor per_unit_storage_throughput: ::Integer
+      attr_accessor mount_name: ::String
+      attr_accessor daily_automatic_backup_start_time: ::String
+      attr_accessor automatic_backup_retention_days: ::Integer
+      attr_accessor copy_tags_to_backups: bool
+      attr_accessor drive_cache_type: ("NONE" | "READ")
+      attr_accessor data_compression_type: ("NONE" | "LZ4")
+      attr_accessor log_configuration: Types::LustreLogConfiguration
+      attr_accessor root_squash_configuration: Types::LustreRootSquashConfiguration
+      SENSITIVE: []
+    end
+
+    class LustreLogConfiguration
+      attr_accessor level: ("DISABLED" | "WARN_ONLY" | "ERROR_ONLY" | "WARN_ERROR")
+      attr_accessor destination: ::String
+      SENSITIVE: []
+    end
+
+    class LustreLogCreateConfiguration
+      attr_accessor level: ("DISABLED" | "WARN_ONLY" | "ERROR_ONLY" | "WARN_ERROR")
+      attr_accessor destination: ::String
+      SENSITIVE: []
+    end
+
+    class LustreRootSquashConfiguration
+      attr_accessor root_squash: ::String
+      attr_accessor no_squash_nids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class MissingFileCacheConfiguration
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MissingFileSystemConfiguration
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MissingVolumeConfiguration
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NFSDataRepositoryConfiguration
+      attr_accessor version: ("NFS3")
+      attr_accessor dns_ips: ::Array[::String]
+      attr_accessor auto_export_policy: Types::AutoExportPolicy
+      SENSITIVE: []
+    end
+
+    class NotServiceResourceError
+      attr_accessor resource_arn: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OntapFileSystemConfiguration
+      attr_accessor automatic_backup_retention_days: ::Integer
+      attr_accessor daily_automatic_backup_start_time: ::String
+      attr_accessor deployment_type: ("MULTI_AZ_1" | "SINGLE_AZ_1" | "SINGLE_AZ_2")
+      attr_accessor endpoint_ip_address_range: ::String
+      attr_accessor endpoints: Types::FileSystemEndpoints
+      attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration
+      attr_accessor preferred_subnet_id: ::String
+      attr_accessor route_table_ids: ::Array[::String]
+      attr_accessor throughput_capacity: ::Integer
+      attr_accessor weekly_maintenance_start_time: ::String
+      attr_accessor fsx_admin_password: ::String
+      attr_accessor ha_pairs: ::Integer
+      attr_accessor throughput_capacity_per_ha_pair: ::Integer
+      SENSITIVE: [:fsx_admin_password]
+    end
+
+    class OntapVolumeConfiguration
+      attr_accessor flex_cache_endpoint_type: ("NONE" | "ORIGIN" | "CACHE")
+      attr_accessor junction_path: ::String
+      attr_accessor security_style: ("UNIX" | "NTFS" | "MIXED")
+      attr_accessor size_in_megabytes: ::Integer
+      attr_accessor storage_efficiency_enabled: bool
+      attr_accessor storage_virtual_machine_id: ::String
+      attr_accessor storage_virtual_machine_root: bool
+      attr_accessor tiering_policy: Types::TieringPolicy
+      attr_accessor uuid: ::String
+      attr_accessor ontap_volume_type: ("RW" | "DP" | "LS")
+      attr_accessor snapshot_policy: ::String
+      attr_accessor copy_tags_to_backups: bool
+      attr_accessor snaplock_configuration: Types::SnaplockConfiguration
+      attr_accessor volume_style: ("FLEXVOL" | "FLEXGROUP")
+      attr_accessor aggregate_configuration: Types::AggregateConfiguration
+      attr_accessor size_in_bytes: ::Integer
+      SENSITIVE: []
+    end
+
+    class OpenZFSClientConfiguration
+      attr_accessor clients: ::String
+      attr_accessor options: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class OpenZFSCreateRootVolumeConfiguration
+      attr_accessor record_size_ki_b: ::Integer
+      attr_accessor data_compression_type: ("NONE" | "ZSTD" | "LZ4")
+      attr_accessor nfs_exports: ::Array[Types::OpenZFSNfsExport]
+      attr_accessor user_and_group_quotas: ::Array[Types::OpenZFSUserOrGroupQuota]
+      attr_accessor copy_tags_to_snapshots: bool
+      attr_accessor read_only: bool
+      SENSITIVE: []
+    end
+
+    class OpenZFSFileSystemConfiguration
+      attr_accessor automatic_backup_retention_days: ::Integer
+      attr_accessor copy_tags_to_backups: bool
+      attr_accessor copy_tags_to_volumes: bool
+      attr_accessor daily_automatic_backup_start_time: ::String
+      attr_accessor deployment_type: ("SINGLE_AZ_1" | "SINGLE_AZ_2" | "MULTI_AZ_1")
+      attr_accessor throughput_capacity: ::Integer
+      attr_accessor weekly_maintenance_start_time: ::String
+      attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration
+      attr_accessor root_volume_id: ::String
+      attr_accessor preferred_subnet_id: ::String
+      attr_accessor endpoint_ip_address_range: ::String
+      attr_accessor route_table_ids: ::Array[::String]
+      attr_accessor endpoint_ip_address: ::String
+      SENSITIVE: []
+    end
+
+    class OpenZFSNfsExport
+      attr_accessor client_configurations: ::Array[Types::OpenZFSClientConfiguration]
+      SENSITIVE: []
+    end
+
+    class OpenZFSOriginSnapshotConfiguration
+      attr_accessor snapshot_arn: ::String
+      attr_accessor copy_strategy: ("CLONE" | "FULL_COPY" | "INCREMENTAL_COPY")
+      SENSITIVE: []
+    end
+
+    class OpenZFSUserOrGroupQuota
+      attr_accessor type: ("USER" | "GROUP")
+      attr_accessor id: ::Integer
+      attr_accessor storage_capacity_quota_gi_b: ::Integer
+      SENSITIVE: []
+    end
+
+    class OpenZFSVolumeConfiguration
+      attr_accessor parent_volume_id: ::String
+      attr_accessor volume_path: ::String
+      attr_accessor storage_capacity_reservation_gi_b: ::Integer
+      attr_accessor storage_capacity_quota_gi_b: ::Integer
+      attr_accessor record_size_ki_b: ::Integer
+      attr_accessor data_compression_type: ("NONE" | "ZSTD" | "LZ4")
+      attr_accessor copy_tags_to_snapshots: bool
+      attr_accessor origin_snapshot: Types::OpenZFSOriginSnapshotConfiguration
+      attr_accessor read_only: bool
+      attr_accessor nfs_exports: ::Array[Types::OpenZFSNfsExport]
+      attr_accessor user_and_group_quotas: ::Array[Types::OpenZFSUserOrGroupQuota]
+      attr_accessor restore_to_snapshot: ::String
+      attr_accessor delete_intermediate_snaphots: bool
+      attr_accessor delete_cloned_volumes: bool
+      attr_accessor delete_intermediate_data: bool
+      attr_accessor source_snapshot_arn: ::String
+      attr_accessor destination_snapshot: ::String
+      attr_accessor copy_strategy: ("CLONE" | "FULL_COPY" | "INCREMENTAL_COPY")
+      SENSITIVE: []
+    end
+
+    class ReleaseConfiguration
+      attr_accessor duration_since_last_access: Types::DurationSinceLastAccess
+      SENSITIVE: []
+    end
+
+    class ReleaseFileSystemNfsV3LocksRequest
+      attr_accessor file_system_id: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class ReleaseFileSystemNfsV3LocksResponse
+      attr_accessor file_system: Types::FileSystem
+      SENSITIVE: []
+    end
+
+    class ResourceDoesNotSupportTagging
+      attr_accessor resource_arn: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFound
+      attr_accessor resource_arn: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreVolumeFromSnapshotRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor volume_id: ::String
+      attr_accessor snapshot_id: ::String
+      attr_accessor options: ::Array[("DELETE_INTERMEDIATE_SNAPSHOTS" | "DELETE_CLONED_VOLUMES")]
+      SENSITIVE: []
+    end
+
+    class RestoreVolumeFromSnapshotResponse
+      attr_accessor volume_id: ::String
+      attr_accessor lifecycle: ("CREATING" | "CREATED" | "DELETING" | "FAILED" | "MISCONFIGURED" | "PENDING" | "AVAILABLE")
+      attr_accessor administrative_actions: ::Array[Types::AdministrativeAction]
+      SENSITIVE: []
+    end
+
+    class RetentionPeriod
+      attr_accessor type: ("SECONDS" | "MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "INFINITE" | "UNSPECIFIED")
+      attr_accessor value: ::Integer
+      SENSITIVE: []
+    end
+
+    class S3DataRepositoryConfiguration
+      attr_accessor auto_import_policy: Types::AutoImportPolicy
+      attr_accessor auto_export_policy: Types::AutoExportPolicy
+      SENSITIVE: []
+    end
+
+    class SelfManagedActiveDirectoryAttributes
+      attr_accessor domain_name: ::String
+      attr_accessor organizational_unit_distinguished_name: ::String
+      attr_accessor file_system_administrators_group: ::String
+      attr_accessor user_name: ::String
+      attr_accessor dns_ips: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SelfManagedActiveDirectoryConfiguration
+      attr_accessor domain_name: ::String
+      attr_accessor organizational_unit_distinguished_name: ::String
+      attr_accessor file_system_administrators_group: ::String
+      attr_accessor user_name: ::String
+      attr_accessor password: ::String
+      attr_accessor dns_ips: ::Array[::String]
+      SENSITIVE: [:password]
+    end
+
+    class SelfManagedActiveDirectoryConfigurationUpdates
+      attr_accessor user_name: ::String
+      attr_accessor password: ::String
+      attr_accessor dns_ips: ::Array[::String]
+      attr_accessor domain_name: ::String
+      attr_accessor organizational_unit_distinguished_name: ::String
+      attr_accessor file_system_administrators_group: ::String
+      SENSITIVE: [:password]
+    end
+
+    class ServiceLimitExceeded
+      attr_accessor limit: ("FILE_SYSTEM_COUNT" | "TOTAL_THROUGHPUT_CAPACITY" | "TOTAL_STORAGE" | "TOTAL_USER_INITIATED_BACKUPS" | "TOTAL_USER_TAGS" | "TOTAL_IN_PROGRESS_COPY_BACKUPS" | "STORAGE_VIRTUAL_MACHINES_PER_FILE_SYSTEM" | "VOLUMES_PER_FILE_SYSTEM" | "TOTAL_SSD_IOPS" | "FILE_CACHE_COUNT")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SnaplockConfiguration
+      attr_accessor audit_log_volume: bool
+      attr_accessor autocommit_period: Types::AutocommitPeriod
+      attr_accessor privileged_delete: ("DISABLED" | "ENABLED" | "PERMANENTLY_DISABLED")
+      attr_accessor retention_period: Types::SnaplockRetentionPeriod
+      attr_accessor snaplock_type: ("COMPLIANCE" | "ENTERPRISE")
+      attr_accessor volume_append_mode_enabled: bool
+      SENSITIVE: []
+    end
+
+    class SnaplockRetentionPeriod
+      attr_accessor default_retention: Types::RetentionPeriod
+      attr_accessor minimum_retention: Types::RetentionPeriod
+      attr_accessor maximum_retention: Types::RetentionPeriod
+      SENSITIVE: []
+    end
+
+    class Snapshot
+      attr_accessor resource_arn: ::String
+      attr_accessor snapshot_id: ::String
+      attr_accessor name: ::String
+      attr_accessor volume_id: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor lifecycle: ("PENDING" | "CREATING" | "DELETING" | "AVAILABLE")
+      attr_accessor lifecycle_transition_reason: Types::LifecycleTransitionReason
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor administrative_actions: ::Array[Types::AdministrativeAction]
+      SENSITIVE: []
+    end
+
+    class SnapshotFilter
+      attr_accessor name: ("file-system-id" | "volume-id")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SnapshotNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SourceBackupUnavailable
+      attr_accessor message: ::String
+      attr_accessor backup_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartMisconfiguredStateRecoveryRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor file_system_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartMisconfiguredStateRecoveryResponse
+      attr_accessor file_system: Types::FileSystem
+      SENSITIVE: []
+    end
+
+    class StorageVirtualMachine
+      attr_accessor active_directory_configuration: Types::SvmActiveDirectoryConfiguration
+      attr_accessor creation_time: ::Time
+      attr_accessor endpoints: Types::SvmEndpoints
+      attr_accessor file_system_id: ::String
+      attr_accessor lifecycle: ("CREATED" | "CREATING" | "DELETING" | "FAILED" | "MISCONFIGURED" | "PENDING")
+      attr_accessor name: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor storage_virtual_machine_id: ::String
+      attr_accessor subtype: ("DEFAULT" | "DP_DESTINATION" | "SYNC_DESTINATION" | "SYNC_SOURCE")
+      attr_accessor uuid: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor lifecycle_transition_reason: Types::LifecycleTransitionReason
+      attr_accessor root_volume_security_style: ("UNIX" | "NTFS" | "MIXED")
+      SENSITIVE: []
+    end
+
+    class StorageVirtualMachineFilter
+      attr_accessor name: ("file-system-id")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StorageVirtualMachineNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SvmActiveDirectoryConfiguration
+      attr_accessor net_bios_name: ::String
+      attr_accessor self_managed_active_directory_configuration: Types::SelfManagedActiveDirectoryAttributes
+      SENSITIVE: []
+    end
+
+    class SvmEndpoint
+      attr_accessor dns_name: ::String
+      attr_accessor ip_addresses: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SvmEndpoints
+      attr_accessor iscsi: Types::SvmEndpoint
+      attr_accessor management: Types::SvmEndpoint
+      attr_accessor nfs: Types::SvmEndpoint
+      attr_accessor smb: Types::SvmEndpoint
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TieringPolicy
+      attr_accessor cooling_period: ::Integer
+      attr_accessor name: ("SNAPSHOT_ONLY" | "AUTO" | "ALL" | "NONE")
+      SENSITIVE: []
+    end
+
+    class UnsupportedOperation
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDataRepositoryAssociationRequest
+      attr_accessor association_id: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor imported_file_chunk_size: ::Integer
+      attr_accessor s3: Types::S3DataRepositoryConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateDataRepositoryAssociationResponse
+      attr_accessor association: Types::DataRepositoryAssociation
+      SENSITIVE: []
+    end
+
+    class UpdateFileCacheLustreConfiguration
+      attr_accessor weekly_maintenance_start_time: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFileCacheRequest
+      attr_accessor file_cache_id: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor lustre_configuration: Types::UpdateFileCacheLustreConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateFileCacheResponse
+      attr_accessor file_cache: Types::FileCache
+      SENSITIVE: []
+    end
+
+    class UpdateFileSystemLustreConfiguration
+      attr_accessor weekly_maintenance_start_time: ::String
+      attr_accessor daily_automatic_backup_start_time: ::String
+      attr_accessor automatic_backup_retention_days: ::Integer
+      attr_accessor auto_import_policy: ("NONE" | "NEW" | "NEW_CHANGED" | "NEW_CHANGED_DELETED")
+      attr_accessor data_compression_type: ("NONE" | "LZ4")
+      attr_accessor log_configuration: Types::LustreLogCreateConfiguration
+      attr_accessor root_squash_configuration: Types::LustreRootSquashConfiguration
+      attr_accessor per_unit_storage_throughput: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateFileSystemOntapConfiguration
+      attr_accessor automatic_backup_retention_days: ::Integer
+      attr_accessor daily_automatic_backup_start_time: ::String
+      attr_accessor fsx_admin_password: ::String
+      attr_accessor weekly_maintenance_start_time: ::String
+      attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration
+      attr_accessor throughput_capacity: ::Integer
+      attr_accessor add_route_table_ids: ::Array[::String]
+      attr_accessor remove_route_table_ids: ::Array[::String]
+      attr_accessor throughput_capacity_per_ha_pair: ::Integer
+      SENSITIVE: [:fsx_admin_password]
+    end
+
+    class UpdateFileSystemOpenZFSConfiguration
+      attr_accessor automatic_backup_retention_days: ::Integer
+      attr_accessor copy_tags_to_backups: bool
+      attr_accessor copy_tags_to_volumes: bool
+      attr_accessor daily_automatic_backup_start_time: ::String
+      attr_accessor throughput_capacity: ::Integer
+      attr_accessor weekly_maintenance_start_time: ::String
+      attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration
+      attr_accessor add_route_table_ids: ::Array[::String]
+      attr_accessor remove_route_table_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateFileSystemRequest
+      attr_accessor file_system_id: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor storage_capacity: ::Integer
+      attr_accessor windows_configuration: Types::UpdateFileSystemWindowsConfiguration
+      attr_accessor lustre_configuration: Types::UpdateFileSystemLustreConfiguration
+      attr_accessor ontap_configuration: Types::UpdateFileSystemOntapConfiguration
+      attr_accessor open_zfs_configuration: Types::UpdateFileSystemOpenZFSConfiguration
+      attr_accessor storage_type: ("SSD" | "HDD")
+      SENSITIVE: []
+    end
+
+    class UpdateFileSystemResponse
+      attr_accessor file_system: Types::FileSystem
+      SENSITIVE: []
+    end
+
+    class UpdateFileSystemWindowsConfiguration
+      attr_accessor weekly_maintenance_start_time: ::String
+      attr_accessor daily_automatic_backup_start_time: ::String
+      attr_accessor automatic_backup_retention_days: ::Integer
+      attr_accessor throughput_capacity: ::Integer
+      attr_accessor self_managed_active_directory_configuration: Types::SelfManagedActiveDirectoryConfigurationUpdates
+      attr_accessor audit_log_configuration: Types::WindowsAuditLogCreateConfiguration
+      attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateOntapVolumeConfiguration
+      attr_accessor junction_path: ::String
+      attr_accessor security_style: ("UNIX" | "NTFS" | "MIXED")
+      attr_accessor size_in_megabytes: ::Integer
+      attr_accessor storage_efficiency_enabled: bool
+      attr_accessor tiering_policy: Types::TieringPolicy
+      attr_accessor snapshot_policy: ::String
+      attr_accessor copy_tags_to_backups: bool
+      attr_accessor snaplock_configuration: Types::UpdateSnaplockConfiguration
+      attr_accessor size_in_bytes: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateOpenZFSVolumeConfiguration
+      attr_accessor storage_capacity_reservation_gi_b: ::Integer
+      attr_accessor storage_capacity_quota_gi_b: ::Integer
+      attr_accessor record_size_ki_b: ::Integer
+      attr_accessor data_compression_type: ("NONE" | "ZSTD" | "LZ4")
+      attr_accessor nfs_exports: ::Array[Types::OpenZFSNfsExport]
+      attr_accessor user_and_group_quotas: ::Array[Types::OpenZFSUserOrGroupQuota]
+      attr_accessor read_only: bool
+      SENSITIVE: []
+    end
+
+    class UpdateSharedVpcConfigurationRequest
+      attr_accessor enable_fsx_route_table_updates_from_participant_accounts: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSharedVpcConfigurationResponse
+      attr_accessor enable_fsx_route_table_updates_from_participant_accounts: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSnaplockConfiguration
+      attr_accessor audit_log_volume: bool
+      attr_accessor autocommit_period: Types::AutocommitPeriod
+      attr_accessor privileged_delete: ("DISABLED" | "ENABLED" | "PERMANENTLY_DISABLED")
+      attr_accessor retention_period: Types::SnaplockRetentionPeriod
+      attr_accessor volume_append_mode_enabled: bool
+      SENSITIVE: []
+    end
+
+    class UpdateSnapshotRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor name: ::String
+      attr_accessor snapshot_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSnapshotResponse
+      attr_accessor snapshot: Types::Snapshot
+      SENSITIVE: []
+    end
+
+    class UpdateStorageVirtualMachineRequest
+      attr_accessor active_directory_configuration: Types::UpdateSvmActiveDirectoryConfiguration
+      attr_accessor client_request_token: ::String
+      attr_accessor storage_virtual_machine_id: ::String
+      attr_accessor svm_admin_password: ::String
+      SENSITIVE: [:svm_admin_password]
+    end
+
+    class UpdateStorageVirtualMachineResponse
+      attr_accessor storage_virtual_machine: Types::StorageVirtualMachine
+      SENSITIVE: []
+    end
+
+    class UpdateSvmActiveDirectoryConfiguration
+      attr_accessor self_managed_active_directory_configuration: Types::SelfManagedActiveDirectoryConfigurationUpdates
+      attr_accessor net_bios_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateVolumeRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor volume_id: ::String
+      attr_accessor ontap_configuration: Types::UpdateOntapVolumeConfiguration
+      attr_accessor name: ::String
+      attr_accessor open_zfs_configuration: Types::UpdateOpenZFSVolumeConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateVolumeResponse
+      attr_accessor volume: Types::Volume
+      SENSITIVE: []
+    end
+
+    class Volume
+      attr_accessor creation_time: ::Time
+      attr_accessor file_system_id: ::String
+      attr_accessor lifecycle: ("CREATING" | "CREATED" | "DELETING" | "FAILED" | "MISCONFIGURED" | "PENDING" | "AVAILABLE")
+      attr_accessor name: ::String
+      attr_accessor ontap_configuration: Types::OntapVolumeConfiguration
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor volume_id: ::String
+      attr_accessor volume_type: ("ONTAP" | "OPENZFS")
+      attr_accessor lifecycle_transition_reason: Types::LifecycleTransitionReason
+      attr_accessor administrative_actions: ::Array[Types::AdministrativeAction]
+      attr_accessor open_zfs_configuration: Types::OpenZFSVolumeConfiguration
+      SENSITIVE: []
+    end
+
+    class VolumeFilter
+      attr_accessor name: ("file-system-id" | "storage-virtual-machine-id")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class VolumeNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WindowsAuditLogConfiguration
+      attr_accessor file_access_audit_log_level: ("DISABLED" | "SUCCESS_ONLY" | "FAILURE_ONLY" | "SUCCESS_AND_FAILURE")
+      attr_accessor file_share_access_audit_log_level: ("DISABLED" | "SUCCESS_ONLY" | "FAILURE_ONLY" | "SUCCESS_AND_FAILURE")
+      attr_accessor audit_log_destination: ::String
+      SENSITIVE: []
+    end
+
+    class WindowsAuditLogCreateConfiguration
+      attr_accessor file_access_audit_log_level: ("DISABLED" | "SUCCESS_ONLY" | "FAILURE_ONLY" | "SUCCESS_AND_FAILURE")
+      attr_accessor file_share_access_audit_log_level: ("DISABLED" | "SUCCESS_ONLY" | "FAILURE_ONLY" | "SUCCESS_AND_FAILURE")
+      attr_accessor audit_log_destination: ::String
+      SENSITIVE: []
+    end
+
+    class WindowsFileSystemConfiguration
+      attr_accessor active_directory_id: ::String
+      attr_accessor self_managed_active_directory_configuration: Types::SelfManagedActiveDirectoryAttributes
+      attr_accessor deployment_type: ("MULTI_AZ_1" | "SINGLE_AZ_1" | "SINGLE_AZ_2")
+      attr_accessor remote_administration_endpoint: ::String
+      attr_accessor preferred_subnet_id: ::String
+      attr_accessor preferred_file_server_ip: ::String
+      attr_accessor throughput_capacity: ::Integer
+      attr_accessor maintenance_operations_in_progress: ::Array[("PATCHING" | "BACKING_UP")]
+      attr_accessor weekly_maintenance_start_time: ::String
+      attr_accessor daily_automatic_backup_start_time: ::String
+      attr_accessor automatic_backup_retention_days: ::Integer
+      attr_accessor copy_tags_to_backups: bool
+      attr_accessor aliases: ::Array[Types::Alias]
+      attr_accessor audit_log_configuration: Types::WindowsAuditLogConfiguration
+      attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration
+      SENSITIVE: []
+    end
+  end
+end

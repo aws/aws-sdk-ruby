@@ -1,0 +1,40 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RedshiftDataAPIService
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class ActiveStatementsExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class BatchExecuteStatementException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def statement_id: () -> ::String
+      end
+      class DatabaseConnectionException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ExecuteStatementException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def statement_id: () -> ::String
+      end
+      class InternalServerException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def resource_id: () -> ::String
+      end
+      class ValidationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

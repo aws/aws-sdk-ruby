@@ -1,0 +1,447 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CleanRoomsML
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRoomsML/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateAudienceModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAudienceModelResponse]
+        def audience_model_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRoomsML/Client.html#create_audience_model-instance_method
+      def create_audience_model: (
+                                   ?description: ::String,
+                                   ?kms_key_arn: ::String,
+                                   name: ::String,
+                                   ?tags: Hash[::String, ::String],
+                                   ?training_data_end_time: ::Time,
+                                   ?training_data_start_time: ::Time,
+                                   training_dataset_arn: ::String
+                                 ) -> _CreateAudienceModelResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAudienceModelResponseSuccess
+
+      interface _CreateConfiguredAudienceModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConfiguredAudienceModelResponse]
+        def configured_audience_model_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRoomsML/Client.html#create_configured_audience_model-instance_method
+      def create_configured_audience_model: (
+                                              audience_model_arn: ::String,
+                                              ?audience_size_config: {
+                                                audience_size_bins: Array[::Integer],
+                                                audience_size_type: ("ABSOLUTE" | "PERCENTAGE")
+                                              },
+                                              ?child_resource_tag_on_create_policy: ("FROM_PARENT_RESOURCE" | "NONE"),
+                                              ?description: ::String,
+                                              ?min_matching_seed_size: ::Integer,
+                                              name: ::String,
+                                              output_config: {
+                                                destination: {
+                                                  s3_destination: {
+                                                    s3_uri: ::String
+                                                  }
+                                                },
+                                                role_arn: ::String
+                                              },
+                                              shared_audience_metrics: Array[("ALL" | "NONE")],
+                                              ?tags: Hash[::String, ::String]
+                                            ) -> _CreateConfiguredAudienceModelResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfiguredAudienceModelResponseSuccess
+
+      interface _CreateTrainingDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTrainingDatasetResponse]
+        def training_dataset_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRoomsML/Client.html#create_training_dataset-instance_method
+      def create_training_dataset: (
+                                     ?description: ::String,
+                                     name: ::String,
+                                     role_arn: ::String,
+                                     ?tags: Hash[::String, ::String],
+                                     training_data: Array[
+                                       {
+                                         input_config: {
+                                           data_source: {
+                                             glue_data_source: {
+                                               catalog_id: ::String?,
+                                               database_name: ::String,
+                                               table_name: ::String
+                                             }
+                                           },
+                                           schema: Array[
+                                             {
+                                               column_name: ::String,
+                                               column_types: Array[("USER_ID" | "ITEM_ID" | "TIMESTAMP" | "CATEGORICAL_FEATURE" | "NUMERICAL_FEATURE")]
+                                             },
+                                           ]
+                                         },
+                                         type: ("INTERACTIONS")
+                                       },
+                                     ]
+                                   ) -> _CreateTrainingDatasetResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTrainingDatasetResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRoomsML/Client.html#delete_audience_generation_job-instance_method
+      def delete_audience_generation_job: (
+                                            audience_generation_job_arn: ::String
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRoomsML/Client.html#delete_audience_model-instance_method
+      def delete_audience_model: (
+                                   audience_model_arn: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRoomsML/Client.html#delete_configured_audience_model-instance_method
+      def delete_configured_audience_model: (
+                                              configured_audience_model_arn: ::String
+                                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRoomsML/Client.html#delete_configured_audience_model_policy-instance_method
+      def delete_configured_audience_model_policy: (
+                                                     configured_audience_model_arn: ::String
+                                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRoomsML/Client.html#delete_training_dataset-instance_method
+      def delete_training_dataset: (
+                                     training_dataset_arn: ::String
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetAudienceGenerationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAudienceGenerationJobResponse]
+        def audience_generation_job_arn: () -> ::String
+        def collaboration_id: () -> ::String
+        def configured_audience_model_arn: () -> ::String
+        def create_time: () -> ::Time
+        def description: () -> ::String
+        def include_seed_in_output: () -> bool
+        def metrics: () -> Types::AudienceQualityMetrics
+        def name: () -> ::String
+        def seed_audience: () -> Types::AudienceGenerationJobDataSource
+        def started_by: () -> ::String
+        def status: () -> ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "ACTIVE" | "DELETE_PENDING" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
+        def status_details: () -> Types::StatusDetails
+        def tags: () -> ::Hash[::String, ::String]
+        def update_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRoomsML/Client.html#get_audience_generation_job-instance_method
+      def get_audience_generation_job: (
+                                         audience_generation_job_arn: ::String
+                                       ) -> _GetAudienceGenerationJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAudienceGenerationJobResponseSuccess
+
+      interface _GetAudienceModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAudienceModelResponse]
+        def audience_model_arn: () -> ::String
+        def create_time: () -> ::Time
+        def description: () -> ::String
+        def kms_key_arn: () -> ::String
+        def metrics: () -> ::Array[Types::AudienceModelMetric]
+        def name: () -> ::String
+        def status: () -> ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "ACTIVE" | "DELETE_PENDING" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
+        def status_details: () -> Types::StatusDetails
+        def tags: () -> ::Hash[::String, ::String]
+        def training_data_end_time: () -> ::Time
+        def training_data_start_time: () -> ::Time
+        def training_dataset_arn: () -> ::String
+        def update_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRoomsML/Client.html#get_audience_model-instance_method
+      def get_audience_model: (
+                                audience_model_arn: ::String
+                              ) -> _GetAudienceModelResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAudienceModelResponseSuccess
+
+      interface _GetConfiguredAudienceModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConfiguredAudienceModelResponse]
+        def audience_model_arn: () -> ::String
+        def audience_size_config: () -> Types::AudienceSizeConfig
+        def child_resource_tag_on_create_policy: () -> ("FROM_PARENT_RESOURCE" | "NONE")
+        def configured_audience_model_arn: () -> ::String
+        def create_time: () -> ::Time
+        def description: () -> ::String
+        def min_matching_seed_size: () -> ::Integer
+        def name: () -> ::String
+        def output_config: () -> Types::ConfiguredAudienceModelOutputConfig
+        def shared_audience_metrics: () -> ::Array[("ALL" | "NONE")]
+        def status: () -> ("ACTIVE")
+        def tags: () -> ::Hash[::String, ::String]
+        def update_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRoomsML/Client.html#get_configured_audience_model-instance_method
+      def get_configured_audience_model: (
+                                           configured_audience_model_arn: ::String
+                                         ) -> _GetConfiguredAudienceModelResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConfiguredAudienceModelResponseSuccess
+
+      interface _GetConfiguredAudienceModelPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConfiguredAudienceModelPolicyResponse]
+        def configured_audience_model_arn: () -> ::String
+        def configured_audience_model_policy: () -> ::String
+        def policy_hash: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRoomsML/Client.html#get_configured_audience_model_policy-instance_method
+      def get_configured_audience_model_policy: (
+                                                  configured_audience_model_arn: ::String
+                                                ) -> _GetConfiguredAudienceModelPolicyResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConfiguredAudienceModelPolicyResponseSuccess
+
+      interface _GetTrainingDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTrainingDatasetResponse]
+        def create_time: () -> ::Time
+        def description: () -> ::String
+        def name: () -> ::String
+        def role_arn: () -> ::String
+        def status: () -> ("ACTIVE")
+        def tags: () -> ::Hash[::String, ::String]
+        def training_data: () -> ::Array[Types::Dataset]
+        def training_dataset_arn: () -> ::String
+        def update_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRoomsML/Client.html#get_training_dataset-instance_method
+      def get_training_dataset: (
+                                  training_dataset_arn: ::String
+                                ) -> _GetTrainingDatasetResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTrainingDatasetResponseSuccess
+
+      interface _ListAudienceExportJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAudienceExportJobsResponse]
+        def audience_export_jobs: () -> ::Array[Types::AudienceExportJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRoomsML/Client.html#list_audience_export_jobs-instance_method
+      def list_audience_export_jobs: (
+                                       ?audience_generation_job_arn: ::String,
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListAudienceExportJobsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAudienceExportJobsResponseSuccess
+
+      interface _ListAudienceGenerationJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAudienceGenerationJobsResponse]
+        def audience_generation_jobs: () -> ::Array[Types::AudienceGenerationJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRoomsML/Client.html#list_audience_generation_jobs-instance_method
+      def list_audience_generation_jobs: (
+                                           ?collaboration_id: ::String,
+                                           ?configured_audience_model_arn: ::String,
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String
+                                         ) -> _ListAudienceGenerationJobsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAudienceGenerationJobsResponseSuccess
+
+      interface _ListAudienceModelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAudienceModelsResponse]
+        def audience_models: () -> ::Array[Types::AudienceModelSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRoomsML/Client.html#list_audience_models-instance_method
+      def list_audience_models: (
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListAudienceModelsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAudienceModelsResponseSuccess
+
+      interface _ListConfiguredAudienceModelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConfiguredAudienceModelsResponse]
+        def configured_audience_models: () -> ::Array[Types::ConfiguredAudienceModelSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRoomsML/Client.html#list_configured_audience_models-instance_method
+      def list_configured_audience_models: (
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String
+                                           ) -> _ListConfiguredAudienceModelsResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConfiguredAudienceModelsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRoomsML/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTrainingDatasetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTrainingDatasetsResponse]
+        def next_token: () -> ::String
+        def training_datasets: () -> ::Array[Types::TrainingDatasetSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRoomsML/Client.html#list_training_datasets-instance_method
+      def list_training_datasets: (
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListTrainingDatasetsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTrainingDatasetsResponseSuccess
+
+      interface _PutConfiguredAudienceModelPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutConfiguredAudienceModelPolicyResponse]
+        def configured_audience_model_policy: () -> ::String
+        def policy_hash: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRoomsML/Client.html#put_configured_audience_model_policy-instance_method
+      def put_configured_audience_model_policy: (
+                                                  configured_audience_model_arn: ::String,
+                                                  configured_audience_model_policy: ::String,
+                                                  ?policy_existence_condition: ("POLICY_MUST_EXIST" | "POLICY_MUST_NOT_EXIST"),
+                                                  ?previous_policy_hash: ::String
+                                                ) -> _PutConfiguredAudienceModelPolicyResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutConfiguredAudienceModelPolicyResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRoomsML/Client.html#start_audience_export_job-instance_method
+      def start_audience_export_job: (
+                                       audience_generation_job_arn: ::String,
+                                       audience_size: {
+                                         type: ("ABSOLUTE" | "PERCENTAGE"),
+                                         value: ::Integer
+                                       },
+                                       ?description: ::String,
+                                       name: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _StartAudienceGenerationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartAudienceGenerationJobResponse]
+        def audience_generation_job_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRoomsML/Client.html#start_audience_generation_job-instance_method
+      def start_audience_generation_job: (
+                                           ?collaboration_id: ::String,
+                                           configured_audience_model_arn: ::String,
+                                           ?description: ::String,
+                                           ?include_seed_in_output: bool,
+                                           name: ::String,
+                                           seed_audience: {
+                                             data_source: {
+                                               s3_uri: ::String
+                                             },
+                                             role_arn: ::String
+                                           },
+                                           ?tags: Hash[::String, ::String]
+                                         ) -> _StartAudienceGenerationJobResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAudienceGenerationJobResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRoomsML/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRoomsML/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateConfiguredAudienceModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConfiguredAudienceModelResponse]
+        def configured_audience_model_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRoomsML/Client.html#update_configured_audience_model-instance_method
+      def update_configured_audience_model: (
+                                              ?audience_model_arn: ::String,
+                                              ?audience_size_config: {
+                                                audience_size_bins: Array[::Integer],
+                                                audience_size_type: ("ABSOLUTE" | "PERCENTAGE")
+                                              },
+                                              configured_audience_model_arn: ::String,
+                                              ?description: ::String,
+                                              ?min_matching_seed_size: ::Integer,
+                                              ?output_config: {
+                                                destination: {
+                                                  s3_destination: {
+                                                    s3_uri: ::String
+                                                  }
+                                                },
+                                                role_arn: ::String
+                                              },
+                                              ?shared_audience_metrics: Array[("ALL" | "NONE")]
+                                            ) -> _UpdateConfiguredAudienceModelResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfiguredAudienceModelResponseSuccess
+    end
+  end
+end
+

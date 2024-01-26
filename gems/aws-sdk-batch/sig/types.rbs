@@ -1,0 +1,976 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Batch
+  module Types
+
+    class ArrayProperties
+      attr_accessor size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ArrayPropertiesDetail
+      attr_accessor status_summary: ::Hash[::String, ::Integer]
+      attr_accessor size: ::Integer
+      attr_accessor index: ::Integer
+      SENSITIVE: []
+    end
+
+    class ArrayPropertiesSummary
+      attr_accessor size: ::Integer
+      attr_accessor index: ::Integer
+      SENSITIVE: []
+    end
+
+    class AttemptContainerDetail
+      attr_accessor container_instance_arn: ::String
+      attr_accessor task_arn: ::String
+      attr_accessor exit_code: ::Integer
+      attr_accessor reason: ::String
+      attr_accessor log_stream_name: ::String
+      attr_accessor network_interfaces: ::Array[Types::NetworkInterface]
+      SENSITIVE: []
+    end
+
+    class AttemptDetail
+      attr_accessor container: Types::AttemptContainerDetail
+      attr_accessor started_at: ::Integer
+      attr_accessor stopped_at: ::Integer
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class CancelJobRequest
+      attr_accessor job_id: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class CancelJobResponse < Aws::EmptyStructure
+    end
+
+    class ClientException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ComputeEnvironmentDetail
+      attr_accessor compute_environment_name: ::String
+      attr_accessor compute_environment_arn: ::String
+      attr_accessor unmanagedv_cpus: ::Integer
+      attr_accessor ecs_cluster_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("MANAGED" | "UNMANAGED")
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "DELETED" | "VALID" | "INVALID")
+      attr_accessor status_reason: ::String
+      attr_accessor compute_resources: Types::ComputeResource
+      attr_accessor service_role: ::String
+      attr_accessor update_policy: Types::UpdatePolicy
+      attr_accessor eks_configuration: Types::EksConfiguration
+      attr_accessor container_orchestration_type: ("ECS" | "EKS")
+      attr_accessor uuid: ::String
+      SENSITIVE: []
+    end
+
+    class ComputeEnvironmentOrder
+      attr_accessor order: ::Integer
+      attr_accessor compute_environment: ::String
+      SENSITIVE: []
+    end
+
+    class ComputeResource
+      attr_accessor type: ("EC2" | "SPOT" | "FARGATE" | "FARGATE_SPOT")
+      attr_accessor allocation_strategy: ("BEST_FIT" | "BEST_FIT_PROGRESSIVE" | "SPOT_CAPACITY_OPTIMIZED" | "SPOT_PRICE_CAPACITY_OPTIMIZED")
+      attr_accessor minv_cpus: ::Integer
+      attr_accessor maxv_cpus: ::Integer
+      attr_accessor desiredv_cpus: ::Integer
+      attr_accessor instance_types: ::Array[::String]
+      attr_accessor image_id: ::String
+      attr_accessor subnets: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor ec2_key_pair: ::String
+      attr_accessor instance_role: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor placement_group: ::String
+      attr_accessor bid_percentage: ::Integer
+      attr_accessor spot_iam_fleet_role: ::String
+      attr_accessor launch_template: Types::LaunchTemplateSpecification
+      attr_accessor ec2_configuration: ::Array[Types::Ec2Configuration]
+      SENSITIVE: []
+    end
+
+    class ComputeResourceUpdate
+      attr_accessor minv_cpus: ::Integer
+      attr_accessor maxv_cpus: ::Integer
+      attr_accessor desiredv_cpus: ::Integer
+      attr_accessor subnets: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor allocation_strategy: ("BEST_FIT_PROGRESSIVE" | "SPOT_CAPACITY_OPTIMIZED" | "SPOT_PRICE_CAPACITY_OPTIMIZED")
+      attr_accessor instance_types: ::Array[::String]
+      attr_accessor ec2_key_pair: ::String
+      attr_accessor instance_role: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor placement_group: ::String
+      attr_accessor bid_percentage: ::Integer
+      attr_accessor launch_template: Types::LaunchTemplateSpecification
+      attr_accessor ec2_configuration: ::Array[Types::Ec2Configuration]
+      attr_accessor update_to_latest_image_version: bool
+      attr_accessor type: ("EC2" | "SPOT" | "FARGATE" | "FARGATE_SPOT")
+      attr_accessor image_id: ::String
+      SENSITIVE: []
+    end
+
+    class ContainerDetail
+      attr_accessor image: ::String
+      attr_accessor vcpus: ::Integer
+      attr_accessor memory: ::Integer
+      attr_accessor command: ::Array[::String]
+      attr_accessor job_role_arn: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor volumes: ::Array[Types::Volume]
+      attr_accessor environment: ::Array[Types::KeyValuePair]
+      attr_accessor mount_points: ::Array[Types::MountPoint]
+      attr_accessor readonly_root_filesystem: bool
+      attr_accessor ulimits: ::Array[Types::Ulimit]
+      attr_accessor privileged: bool
+      attr_accessor user: ::String
+      attr_accessor exit_code: ::Integer
+      attr_accessor reason: ::String
+      attr_accessor container_instance_arn: ::String
+      attr_accessor task_arn: ::String
+      attr_accessor log_stream_name: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor network_interfaces: ::Array[Types::NetworkInterface]
+      attr_accessor resource_requirements: ::Array[Types::ResourceRequirement]
+      attr_accessor linux_parameters: Types::LinuxParameters
+      attr_accessor log_configuration: Types::LogConfiguration
+      attr_accessor secrets: ::Array[Types::Secret]
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor fargate_platform_configuration: Types::FargatePlatformConfiguration
+      attr_accessor ephemeral_storage: Types::EphemeralStorage
+      attr_accessor runtime_platform: Types::RuntimePlatform
+      SENSITIVE: []
+    end
+
+    class ContainerOverrides
+      attr_accessor vcpus: ::Integer
+      attr_accessor memory: ::Integer
+      attr_accessor command: ::Array[::String]
+      attr_accessor instance_type: ::String
+      attr_accessor environment: ::Array[Types::KeyValuePair]
+      attr_accessor resource_requirements: ::Array[Types::ResourceRequirement]
+      SENSITIVE: []
+    end
+
+    class ContainerProperties
+      attr_accessor image: ::String
+      attr_accessor vcpus: ::Integer
+      attr_accessor memory: ::Integer
+      attr_accessor command: ::Array[::String]
+      attr_accessor job_role_arn: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor volumes: ::Array[Types::Volume]
+      attr_accessor environment: ::Array[Types::KeyValuePair]
+      attr_accessor mount_points: ::Array[Types::MountPoint]
+      attr_accessor readonly_root_filesystem: bool
+      attr_accessor privileged: bool
+      attr_accessor ulimits: ::Array[Types::Ulimit]
+      attr_accessor user: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor resource_requirements: ::Array[Types::ResourceRequirement]
+      attr_accessor linux_parameters: Types::LinuxParameters
+      attr_accessor log_configuration: Types::LogConfiguration
+      attr_accessor secrets: ::Array[Types::Secret]
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor fargate_platform_configuration: Types::FargatePlatformConfiguration
+      attr_accessor ephemeral_storage: Types::EphemeralStorage
+      attr_accessor runtime_platform: Types::RuntimePlatform
+      SENSITIVE: []
+    end
+
+    class ContainerSummary
+      attr_accessor exit_code: ::Integer
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class CreateComputeEnvironmentRequest
+      attr_accessor compute_environment_name: ::String
+      attr_accessor type: ("MANAGED" | "UNMANAGED")
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor unmanagedv_cpus: ::Integer
+      attr_accessor compute_resources: Types::ComputeResource
+      attr_accessor service_role: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor eks_configuration: Types::EksConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateComputeEnvironmentResponse
+      attr_accessor compute_environment_name: ::String
+      attr_accessor compute_environment_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateJobQueueRequest
+      attr_accessor job_queue_name: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor scheduling_policy_arn: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor compute_environment_order: ::Array[Types::ComputeEnvironmentOrder]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateJobQueueResponse
+      attr_accessor job_queue_name: ::String
+      attr_accessor job_queue_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSchedulingPolicyRequest
+      attr_accessor name: ::String
+      attr_accessor fairshare_policy: Types::FairsharePolicy
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateSchedulingPolicyResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteComputeEnvironmentRequest
+      attr_accessor compute_environment: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteComputeEnvironmentResponse < Aws::EmptyStructure
+    end
+
+    class DeleteJobQueueRequest
+      attr_accessor job_queue: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteJobQueueResponse < Aws::EmptyStructure
+    end
+
+    class DeleteSchedulingPolicyRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSchedulingPolicyResponse < Aws::EmptyStructure
+    end
+
+    class DeregisterJobDefinitionRequest
+      attr_accessor job_definition: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterJobDefinitionResponse < Aws::EmptyStructure
+    end
+
+    class DescribeComputeEnvironmentsRequest
+      attr_accessor compute_environments: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeComputeEnvironmentsResponse
+      attr_accessor compute_environments: ::Array[Types::ComputeEnvironmentDetail]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeJobDefinitionsRequest
+      attr_accessor job_definitions: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor job_definition_name: ::String
+      attr_accessor status: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeJobDefinitionsResponse
+      attr_accessor job_definitions: ::Array[Types::JobDefinition]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeJobQueuesRequest
+      attr_accessor job_queues: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeJobQueuesResponse
+      attr_accessor job_queues: ::Array[Types::JobQueueDetail]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeJobsRequest
+      attr_accessor jobs: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeJobsResponse
+      attr_accessor jobs: ::Array[Types::JobDetail]
+      SENSITIVE: []
+    end
+
+    class DescribeSchedulingPoliciesRequest
+      attr_accessor arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeSchedulingPoliciesResponse
+      attr_accessor scheduling_policies: ::Array[Types::SchedulingPolicyDetail]
+      SENSITIVE: []
+    end
+
+    class Device
+      attr_accessor host_path: ::String
+      attr_accessor container_path: ::String
+      attr_accessor permissions: ::Array[("READ" | "WRITE" | "MKNOD")]
+      SENSITIVE: []
+    end
+
+    class EFSAuthorizationConfig
+      attr_accessor access_point_id: ::String
+      attr_accessor iam: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class EFSVolumeConfiguration
+      attr_accessor file_system_id: ::String
+      attr_accessor root_directory: ::String
+      attr_accessor transit_encryption: ("ENABLED" | "DISABLED")
+      attr_accessor transit_encryption_port: ::Integer
+      attr_accessor authorization_config: Types::EFSAuthorizationConfig
+      SENSITIVE: []
+    end
+
+    class Ec2Configuration
+      attr_accessor image_type: ::String
+      attr_accessor image_id_override: ::String
+      attr_accessor image_kubernetes_version: ::String
+      SENSITIVE: []
+    end
+
+    class EksAttemptContainerDetail
+      attr_accessor exit_code: ::Integer
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class EksAttemptDetail
+      attr_accessor containers: ::Array[Types::EksAttemptContainerDetail]
+      attr_accessor pod_name: ::String
+      attr_accessor node_name: ::String
+      attr_accessor started_at: ::Integer
+      attr_accessor stopped_at: ::Integer
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class EksConfiguration
+      attr_accessor eks_cluster_arn: ::String
+      attr_accessor kubernetes_namespace: ::String
+      SENSITIVE: []
+    end
+
+    class EksContainer
+      attr_accessor name: ::String
+      attr_accessor image: ::String
+      attr_accessor image_pull_policy: ::String
+      attr_accessor command: ::Array[::String]
+      attr_accessor args: ::Array[::String]
+      attr_accessor env: ::Array[Types::EksContainerEnvironmentVariable]
+      attr_accessor resources: Types::EksContainerResourceRequirements
+      attr_accessor volume_mounts: ::Array[Types::EksContainerVolumeMount]
+      attr_accessor security_context: Types::EksContainerSecurityContext
+      SENSITIVE: []
+    end
+
+    class EksContainerDetail
+      attr_accessor name: ::String
+      attr_accessor image: ::String
+      attr_accessor image_pull_policy: ::String
+      attr_accessor command: ::Array[::String]
+      attr_accessor args: ::Array[::String]
+      attr_accessor env: ::Array[Types::EksContainerEnvironmentVariable]
+      attr_accessor resources: Types::EksContainerResourceRequirements
+      attr_accessor exit_code: ::Integer
+      attr_accessor reason: ::String
+      attr_accessor volume_mounts: ::Array[Types::EksContainerVolumeMount]
+      attr_accessor security_context: Types::EksContainerSecurityContext
+      SENSITIVE: []
+    end
+
+    class EksContainerEnvironmentVariable
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class EksContainerOverride
+      attr_accessor image: ::String
+      attr_accessor command: ::Array[::String]
+      attr_accessor args: ::Array[::String]
+      attr_accessor env: ::Array[Types::EksContainerEnvironmentVariable]
+      attr_accessor resources: Types::EksContainerResourceRequirements
+      SENSITIVE: []
+    end
+
+    class EksContainerResourceRequirements
+      attr_accessor limits: ::Hash[::String, ::String]
+      attr_accessor requests: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class EksContainerSecurityContext
+      attr_accessor run_as_user: ::Integer
+      attr_accessor run_as_group: ::Integer
+      attr_accessor privileged: bool
+      attr_accessor read_only_root_filesystem: bool
+      attr_accessor run_as_non_root: bool
+      SENSITIVE: []
+    end
+
+    class EksContainerVolumeMount
+      attr_accessor name: ::String
+      attr_accessor mount_path: ::String
+      attr_accessor read_only: bool
+      SENSITIVE: []
+    end
+
+    class EksEmptyDir
+      attr_accessor medium: ::String
+      attr_accessor size_limit: ::String
+      SENSITIVE: []
+    end
+
+    class EksHostPath
+      attr_accessor path: ::String
+      SENSITIVE: []
+    end
+
+    class EksMetadata
+      attr_accessor labels: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class EksPodProperties
+      attr_accessor service_account_name: ::String
+      attr_accessor host_network: bool
+      attr_accessor dns_policy: ::String
+      attr_accessor containers: ::Array[Types::EksContainer]
+      attr_accessor volumes: ::Array[Types::EksVolume]
+      attr_accessor metadata: Types::EksMetadata
+      SENSITIVE: []
+    end
+
+    class EksPodPropertiesDetail
+      attr_accessor service_account_name: ::String
+      attr_accessor host_network: bool
+      attr_accessor dns_policy: ::String
+      attr_accessor containers: ::Array[Types::EksContainerDetail]
+      attr_accessor volumes: ::Array[Types::EksVolume]
+      attr_accessor pod_name: ::String
+      attr_accessor node_name: ::String
+      attr_accessor metadata: Types::EksMetadata
+      SENSITIVE: []
+    end
+
+    class EksPodPropertiesOverride
+      attr_accessor containers: ::Array[Types::EksContainerOverride]
+      attr_accessor metadata: Types::EksMetadata
+      SENSITIVE: []
+    end
+
+    class EksProperties
+      attr_accessor pod_properties: Types::EksPodProperties
+      SENSITIVE: []
+    end
+
+    class EksPropertiesDetail
+      attr_accessor pod_properties: Types::EksPodPropertiesDetail
+      SENSITIVE: []
+    end
+
+    class EksPropertiesOverride
+      attr_accessor pod_properties: Types::EksPodPropertiesOverride
+      SENSITIVE: []
+    end
+
+    class EksSecret
+      attr_accessor secret_name: ::String
+      attr_accessor optional: bool
+      SENSITIVE: []
+    end
+
+    class EksVolume
+      attr_accessor name: ::String
+      attr_accessor host_path: Types::EksHostPath
+      attr_accessor empty_dir: Types::EksEmptyDir
+      attr_accessor secret: Types::EksSecret
+      SENSITIVE: []
+    end
+
+    class EphemeralStorage
+      attr_accessor size_in_gi_b: ::Integer
+      SENSITIVE: []
+    end
+
+    class EvaluateOnExit
+      attr_accessor on_status_reason: ::String
+      attr_accessor on_reason: ::String
+      attr_accessor on_exit_code: ::String
+      attr_accessor action: ("RETRY" | "EXIT")
+      SENSITIVE: []
+    end
+
+    class FairsharePolicy
+      attr_accessor share_decay_seconds: ::Integer
+      attr_accessor compute_reservation: ::Integer
+      attr_accessor share_distribution: ::Array[Types::ShareAttributes]
+      SENSITIVE: []
+    end
+
+    class FargatePlatformConfiguration
+      attr_accessor platform_version: ::String
+      SENSITIVE: []
+    end
+
+    class Host
+      attr_accessor source_path: ::String
+      SENSITIVE: []
+    end
+
+    class JobDefinition
+      attr_accessor job_definition_name: ::String
+      attr_accessor job_definition_arn: ::String
+      attr_accessor revision: ::Integer
+      attr_accessor status: ::String
+      attr_accessor type: ::String
+      attr_accessor scheduling_priority: ::Integer
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor retry_strategy: Types::RetryStrategy
+      attr_accessor container_properties: Types::ContainerProperties
+      attr_accessor timeout: Types::JobTimeout
+      attr_accessor node_properties: Types::NodeProperties
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor propagate_tags: bool
+      attr_accessor platform_capabilities: ::Array[("EC2" | "FARGATE")]
+      attr_accessor eks_properties: Types::EksProperties
+      attr_accessor container_orchestration_type: ("ECS" | "EKS")
+      SENSITIVE: []
+    end
+
+    class JobDependency
+      attr_accessor job_id: ::String
+      attr_accessor type: ("N_TO_N" | "SEQUENTIAL")
+      SENSITIVE: []
+    end
+
+    class JobDetail
+      attr_accessor job_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor job_id: ::String
+      attr_accessor job_queue: ::String
+      attr_accessor status: ("SUBMITTED" | "PENDING" | "RUNNABLE" | "STARTING" | "RUNNING" | "SUCCEEDED" | "FAILED")
+      attr_accessor share_identifier: ::String
+      attr_accessor scheduling_priority: ::Integer
+      attr_accessor attempts: ::Array[Types::AttemptDetail]
+      attr_accessor status_reason: ::String
+      attr_accessor created_at: ::Integer
+      attr_accessor retry_strategy: Types::RetryStrategy
+      attr_accessor started_at: ::Integer
+      attr_accessor stopped_at: ::Integer
+      attr_accessor depends_on: ::Array[Types::JobDependency]
+      attr_accessor job_definition: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor container: Types::ContainerDetail
+      attr_accessor node_details: Types::NodeDetails
+      attr_accessor node_properties: Types::NodeProperties
+      attr_accessor array_properties: Types::ArrayPropertiesDetail
+      attr_accessor timeout: Types::JobTimeout
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor propagate_tags: bool
+      attr_accessor platform_capabilities: ::Array[("EC2" | "FARGATE")]
+      attr_accessor eks_properties: Types::EksPropertiesDetail
+      attr_accessor eks_attempts: ::Array[Types::EksAttemptDetail]
+      attr_accessor is_cancelled: bool
+      attr_accessor is_terminated: bool
+      SENSITIVE: []
+    end
+
+    class JobQueueDetail
+      attr_accessor job_queue_name: ::String
+      attr_accessor job_queue_arn: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor scheduling_policy_arn: ::String
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "DELETED" | "VALID" | "INVALID")
+      attr_accessor status_reason: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor compute_environment_order: ::Array[Types::ComputeEnvironmentOrder]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class JobSummary
+      attr_accessor job_arn: ::String
+      attr_accessor job_id: ::String
+      attr_accessor job_name: ::String
+      attr_accessor created_at: ::Integer
+      attr_accessor status: ("SUBMITTED" | "PENDING" | "RUNNABLE" | "STARTING" | "RUNNING" | "SUCCEEDED" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor started_at: ::Integer
+      attr_accessor stopped_at: ::Integer
+      attr_accessor container: Types::ContainerSummary
+      attr_accessor array_properties: Types::ArrayPropertiesSummary
+      attr_accessor node_properties: Types::NodePropertiesSummary
+      attr_accessor job_definition: ::String
+      SENSITIVE: []
+    end
+
+    class JobTimeout
+      attr_accessor attempt_duration_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class KeyValuePair
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class KeyValuesPair
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class LaunchTemplateSpecification
+      attr_accessor launch_template_id: ::String
+      attr_accessor launch_template_name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class LinuxParameters
+      attr_accessor devices: ::Array[Types::Device]
+      attr_accessor init_process_enabled: bool
+      attr_accessor shared_memory_size: ::Integer
+      attr_accessor tmpfs: ::Array[Types::Tmpfs]
+      attr_accessor max_swap: ::Integer
+      attr_accessor swappiness: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListJobsRequest
+      attr_accessor job_queue: ::String
+      attr_accessor array_job_id: ::String
+      attr_accessor multi_node_job_id: ::String
+      attr_accessor job_status: ("SUBMITTED" | "PENDING" | "RUNNABLE" | "STARTING" | "RUNNING" | "SUCCEEDED" | "FAILED")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::KeyValuesPair]
+      SENSITIVE: []
+    end
+
+    class ListJobsResponse
+      attr_accessor job_summary_list: ::Array[Types::JobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSchedulingPoliciesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSchedulingPoliciesResponse
+      attr_accessor scheduling_policies: ::Array[Types::SchedulingPolicyListingDetail]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class LogConfiguration
+      attr_accessor log_driver: ("json-file" | "syslog" | "journald" | "gelf" | "fluentd" | "awslogs" | "splunk")
+      attr_accessor options: ::Hash[::String, ::String]
+      attr_accessor secret_options: ::Array[Types::Secret]
+      SENSITIVE: []
+    end
+
+    class MountPoint
+      attr_accessor container_path: ::String
+      attr_accessor read_only: bool
+      attr_accessor source_volume: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkConfiguration
+      attr_accessor assign_public_ip: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class NetworkInterface
+      attr_accessor attachment_id: ::String
+      attr_accessor ipv6_address: ::String
+      attr_accessor private_ipv_4_address: ::String
+      SENSITIVE: []
+    end
+
+    class NodeDetails
+      attr_accessor node_index: ::Integer
+      attr_accessor is_main_node: bool
+      SENSITIVE: []
+    end
+
+    class NodeOverrides
+      attr_accessor num_nodes: ::Integer
+      attr_accessor node_property_overrides: ::Array[Types::NodePropertyOverride]
+      SENSITIVE: []
+    end
+
+    class NodeProperties
+      attr_accessor num_nodes: ::Integer
+      attr_accessor main_node: ::Integer
+      attr_accessor node_range_properties: ::Array[Types::NodeRangeProperty]
+      SENSITIVE: []
+    end
+
+    class NodePropertiesSummary
+      attr_accessor is_main_node: bool
+      attr_accessor num_nodes: ::Integer
+      attr_accessor node_index: ::Integer
+      SENSITIVE: []
+    end
+
+    class NodePropertyOverride
+      attr_accessor target_nodes: ::String
+      attr_accessor container_overrides: Types::ContainerOverrides
+      SENSITIVE: []
+    end
+
+    class NodeRangeProperty
+      attr_accessor target_nodes: ::String
+      attr_accessor container: Types::ContainerProperties
+      SENSITIVE: []
+    end
+
+    class RegisterJobDefinitionRequest
+      attr_accessor job_definition_name: ::String
+      attr_accessor type: ("container" | "multinode")
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor scheduling_priority: ::Integer
+      attr_accessor container_properties: Types::ContainerProperties
+      attr_accessor node_properties: Types::NodeProperties
+      attr_accessor retry_strategy: Types::RetryStrategy
+      attr_accessor propagate_tags: bool
+      attr_accessor timeout: Types::JobTimeout
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor platform_capabilities: ::Array[("EC2" | "FARGATE")]
+      attr_accessor eks_properties: Types::EksProperties
+      SENSITIVE: []
+    end
+
+    class RegisterJobDefinitionResponse
+      attr_accessor job_definition_name: ::String
+      attr_accessor job_definition_arn: ::String
+      attr_accessor revision: ::Integer
+      SENSITIVE: []
+    end
+
+    class ResourceRequirement
+      attr_accessor value: ::String
+      attr_accessor type: ("GPU" | "VCPU" | "MEMORY")
+      SENSITIVE: []
+    end
+
+    class RetryStrategy
+      attr_accessor attempts: ::Integer
+      attr_accessor evaluate_on_exit: ::Array[Types::EvaluateOnExit]
+      SENSITIVE: []
+    end
+
+    class RuntimePlatform
+      attr_accessor operating_system_family: ::String
+      attr_accessor cpu_architecture: ::String
+      SENSITIVE: []
+    end
+
+    class SchedulingPolicyDetail
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor fairshare_policy: Types::FairsharePolicy
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class SchedulingPolicyListingDetail
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class Secret
+      attr_accessor name: ::String
+      attr_accessor value_from: ::String
+      SENSITIVE: []
+    end
+
+    class ServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ShareAttributes
+      attr_accessor share_identifier: ::String
+      attr_accessor weight_factor: ::Float
+      SENSITIVE: []
+    end
+
+    class SubmitJobRequest
+      attr_accessor job_name: ::String
+      attr_accessor job_queue: ::String
+      attr_accessor share_identifier: ::String
+      attr_accessor scheduling_priority_override: ::Integer
+      attr_accessor array_properties: Types::ArrayProperties
+      attr_accessor depends_on: ::Array[Types::JobDependency]
+      attr_accessor job_definition: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor container_overrides: Types::ContainerOverrides
+      attr_accessor node_overrides: Types::NodeOverrides
+      attr_accessor retry_strategy: Types::RetryStrategy
+      attr_accessor propagate_tags: bool
+      attr_accessor timeout: Types::JobTimeout
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor eks_properties_override: Types::EksPropertiesOverride
+      SENSITIVE: []
+    end
+
+    class SubmitJobResponse
+      attr_accessor job_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TerminateJobRequest
+      attr_accessor job_id: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class TerminateJobResponse < Aws::EmptyStructure
+    end
+
+    class Tmpfs
+      attr_accessor container_path: ::String
+      attr_accessor size: ::Integer
+      attr_accessor mount_options: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Ulimit
+      attr_accessor hard_limit: ::Integer
+      attr_accessor name: ::String
+      attr_accessor soft_limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateComputeEnvironmentRequest
+      attr_accessor compute_environment: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor unmanagedv_cpus: ::Integer
+      attr_accessor compute_resources: Types::ComputeResourceUpdate
+      attr_accessor service_role: ::String
+      attr_accessor update_policy: Types::UpdatePolicy
+      SENSITIVE: []
+    end
+
+    class UpdateComputeEnvironmentResponse
+      attr_accessor compute_environment_name: ::String
+      attr_accessor compute_environment_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateJobQueueRequest
+      attr_accessor job_queue: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor scheduling_policy_arn: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor compute_environment_order: ::Array[Types::ComputeEnvironmentOrder]
+      SENSITIVE: []
+    end
+
+    class UpdateJobQueueResponse
+      attr_accessor job_queue_name: ::String
+      attr_accessor job_queue_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePolicy
+      attr_accessor terminate_jobs_on_update: bool
+      attr_accessor job_execution_timeout_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateSchedulingPolicyRequest
+      attr_accessor arn: ::String
+      attr_accessor fairshare_policy: Types::FairsharePolicy
+      SENSITIVE: []
+    end
+
+    class UpdateSchedulingPolicyResponse < Aws::EmptyStructure
+    end
+
+    class Volume
+      attr_accessor host: Types::Host
+      attr_accessor name: ::String
+      attr_accessor efs_volume_configuration: Types::EFSVolumeConfiguration
+      SENSITIVE: []
+    end
+  end
+end

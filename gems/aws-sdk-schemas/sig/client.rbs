@@ -1,0 +1,491 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Schemas
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateDiscovererResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDiscovererResponse]
+        def description: () -> ::String
+        def discoverer_arn: () -> ::String
+        def discoverer_id: () -> ::String
+        def source_arn: () -> ::String
+        def state: () -> ("STARTED" | "STOPPED")
+        def cross_account: () -> bool
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#create_discoverer-instance_method
+      def create_discoverer: (
+                               ?description: ::String,
+                               source_arn: ::String,
+                               ?cross_account: bool,
+                               ?tags: Hash[::String, ::String]
+                             ) -> _CreateDiscovererResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDiscovererResponseSuccess
+
+      interface _CreateRegistryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRegistryResponse]
+        def description: () -> ::String
+        def registry_arn: () -> ::String
+        def registry_name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#create_registry-instance_method
+      def create_registry: (
+                             ?description: ::String,
+                             registry_name: ::String,
+                             ?tags: Hash[::String, ::String]
+                           ) -> _CreateRegistryResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRegistryResponseSuccess
+
+      interface _CreateSchemaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSchemaResponse]
+        def description: () -> ::String
+        def last_modified: () -> ::Time
+        def schema_arn: () -> ::String
+        def schema_name: () -> ::String
+        def schema_version: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def type: () -> ::String
+        def version_created_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#create_schema-instance_method
+      def create_schema: (
+                           content: ::String,
+                           ?description: ::String,
+                           registry_name: ::String,
+                           schema_name: ::String,
+                           ?tags: Hash[::String, ::String],
+                           type: ("OpenApi3")
+                         ) -> _CreateSchemaResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSchemaResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#delete_discoverer-instance_method
+      def delete_discoverer: (
+                               discoverer_id: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#delete_registry-instance_method
+      def delete_registry: (
+                             registry_name: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#delete_resource_policy-instance_method
+      def delete_resource_policy: (
+                                    ?registry_name: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#delete_schema-instance_method
+      def delete_schema: (
+                           registry_name: ::String,
+                           schema_name: ::String
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#delete_schema_version-instance_method
+      def delete_schema_version: (
+                                   registry_name: ::String,
+                                   schema_name: ::String,
+                                   schema_version: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeCodeBindingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCodeBindingResponse]
+        def creation_date: () -> ::Time
+        def last_modified: () -> ::Time
+        def schema_version: () -> ::String
+        def status: () -> ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#describe_code_binding-instance_method
+      def describe_code_binding: (
+                                   language: ::String,
+                                   registry_name: ::String,
+                                   schema_name: ::String,
+                                   ?schema_version: ::String
+                                 ) -> _DescribeCodeBindingResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCodeBindingResponseSuccess
+
+      interface _DescribeDiscovererResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDiscovererResponse]
+        def description: () -> ::String
+        def discoverer_arn: () -> ::String
+        def discoverer_id: () -> ::String
+        def source_arn: () -> ::String
+        def state: () -> ("STARTED" | "STOPPED")
+        def cross_account: () -> bool
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#describe_discoverer-instance_method
+      def describe_discoverer: (
+                                 discoverer_id: ::String
+                               ) -> _DescribeDiscovererResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDiscovererResponseSuccess
+
+      interface _DescribeRegistryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRegistryResponse]
+        def description: () -> ::String
+        def registry_arn: () -> ::String
+        def registry_name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#describe_registry-instance_method
+      def describe_registry: (
+                               registry_name: ::String
+                             ) -> _DescribeRegistryResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRegistryResponseSuccess
+
+      interface _DescribeSchemaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSchemaResponse]
+        def content: () -> ::String
+        def description: () -> ::String
+        def last_modified: () -> ::Time
+        def schema_arn: () -> ::String
+        def schema_name: () -> ::String
+        def schema_version: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def type: () -> ::String
+        def version_created_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#describe_schema-instance_method
+      def describe_schema: (
+                             registry_name: ::String,
+                             schema_name: ::String,
+                             ?schema_version: ::String
+                           ) -> _DescribeSchemaResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSchemaResponseSuccess
+
+      interface _GetCodeBindingSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCodeBindingSourceResponse]
+        def body: () -> ::IO
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#get_code_binding_source-instance_method
+      def get_code_binding_source: (
+                                     language: ::String,
+                                     registry_name: ::String,
+                                     schema_name: ::String,
+                                     ?schema_version: ::String
+                                   ) ?{ (*untyped) -> void } -> _GetCodeBindingSourceResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _GetCodeBindingSourceResponseSuccess
+
+      interface _GetDiscoveredSchemaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDiscoveredSchemaResponse]
+        def content: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#get_discovered_schema-instance_method
+      def get_discovered_schema: (
+                                   events: Array[::String],
+                                   type: ("OpenApi3")
+                                 ) -> _GetDiscoveredSchemaResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDiscoveredSchemaResponseSuccess
+
+      interface _GetResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcePolicyResponse]
+        def policy: () -> ::String
+        def revision_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#get_resource_policy-instance_method
+      def get_resource_policy: (
+                                 ?registry_name: ::String
+                               ) -> _GetResourcePolicyResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePolicyResponseSuccess
+
+      interface _ListDiscoverersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDiscoverersResponse]
+        def discoverers: () -> ::Array[Types::DiscovererSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#list_discoverers-instance_method
+      def list_discoverers: (
+                              ?discoverer_id_prefix: ::String,
+                              ?limit: ::Integer,
+                              ?next_token: ::String,
+                              ?source_arn_prefix: ::String
+                            ) -> _ListDiscoverersResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDiscoverersResponseSuccess
+
+      interface _ListRegistriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRegistriesResponse]
+        def next_token: () -> ::String
+        def registries: () -> ::Array[Types::RegistrySummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#list_registries-instance_method
+      def list_registries: (
+                             ?limit: ::Integer,
+                             ?next_token: ::String,
+                             ?registry_name_prefix: ::String,
+                             ?scope: ::String
+                           ) -> _ListRegistriesResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRegistriesResponseSuccess
+
+      interface _ListSchemaVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSchemaVersionsResponse]
+        def next_token: () -> ::String
+        def schema_versions: () -> ::Array[Types::SchemaVersionSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#list_schema_versions-instance_method
+      def list_schema_versions: (
+                                  ?limit: ::Integer,
+                                  ?next_token: ::String,
+                                  registry_name: ::String,
+                                  schema_name: ::String
+                                ) -> _ListSchemaVersionsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSchemaVersionsResponseSuccess
+
+      interface _ListSchemasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSchemasResponse]
+        def next_token: () -> ::String
+        def schemas: () -> ::Array[Types::SchemaSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#list_schemas-instance_method
+      def list_schemas: (
+                          ?limit: ::Integer,
+                          ?next_token: ::String,
+                          registry_name: ::String,
+                          ?schema_name_prefix: ::String
+                        ) -> _ListSchemasResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSchemasResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutCodeBindingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutCodeBindingResponse]
+        def creation_date: () -> ::Time
+        def last_modified: () -> ::Time
+        def schema_version: () -> ::String
+        def status: () -> ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#put_code_binding-instance_method
+      def put_code_binding: (
+                              language: ::String,
+                              registry_name: ::String,
+                              schema_name: ::String,
+                              ?schema_version: ::String
+                            ) -> _PutCodeBindingResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutCodeBindingResponseSuccess
+
+      interface _PutResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyResponse]
+        def policy: () -> ::String
+        def revision_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#put_resource_policy-instance_method
+      def put_resource_policy: (
+                                 policy: ::String,
+                                 ?registry_name: ::String,
+                                 ?revision_id: ::String
+                               ) -> _PutResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
+
+      interface _SearchSchemasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchSchemasResponse]
+        def next_token: () -> ::String
+        def schemas: () -> ::Array[Types::SearchSchemaSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#search_schemas-instance_method
+      def search_schemas: (
+                            keywords: ::String,
+                            ?limit: ::Integer,
+                            ?next_token: ::String,
+                            registry_name: ::String
+                          ) -> _SearchSchemasResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchSchemasResponseSuccess
+
+      interface _StartDiscovererResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDiscovererResponse]
+        def discoverer_id: () -> ::String
+        def state: () -> ("STARTED" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#start_discoverer-instance_method
+      def start_discoverer: (
+                              discoverer_id: ::String
+                            ) -> _StartDiscovererResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDiscovererResponseSuccess
+
+      interface _StopDiscovererResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopDiscovererResponse]
+        def discoverer_id: () -> ::String
+        def state: () -> ("STARTED" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#stop_discoverer-instance_method
+      def stop_discoverer: (
+                             discoverer_id: ::String
+                           ) -> _StopDiscovererResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopDiscovererResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateDiscovererResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDiscovererResponse]
+        def description: () -> ::String
+        def discoverer_arn: () -> ::String
+        def discoverer_id: () -> ::String
+        def source_arn: () -> ::String
+        def state: () -> ("STARTED" | "STOPPED")
+        def cross_account: () -> bool
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#update_discoverer-instance_method
+      def update_discoverer: (
+                               ?description: ::String,
+                               discoverer_id: ::String,
+                               ?cross_account: bool
+                             ) -> _UpdateDiscovererResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDiscovererResponseSuccess
+
+      interface _UpdateRegistryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRegistryResponse]
+        def description: () -> ::String
+        def registry_arn: () -> ::String
+        def registry_name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#update_registry-instance_method
+      def update_registry: (
+                             ?description: ::String,
+                             registry_name: ::String
+                           ) -> _UpdateRegistryResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRegistryResponseSuccess
+
+      interface _UpdateSchemaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSchemaResponse]
+        def description: () -> ::String
+        def last_modified: () -> ::Time
+        def schema_arn: () -> ::String
+        def schema_name: () -> ::String
+        def schema_version: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def type: () -> ::String
+        def version_created_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#update_schema-instance_method
+      def update_schema: (
+                           ?client_token_id: ::String,
+                           ?content: ::String,
+                           ?description: ::String,
+                           registry_name: ::String,
+                           schema_name: ::String,
+                           ?type: ("OpenApi3")
+                         ) -> _UpdateSchemaResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSchemaResponseSuccess
+
+      interface _ExportSchemaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExportSchemaResponse]
+        def content: () -> ::String
+        def schema_arn: () -> ::String
+        def schema_name: () -> ::String
+        def schema_version: () -> ::String
+        def type: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#export_schema-instance_method
+      def export_schema: (
+                           registry_name: ::String,
+                           schema_name: ::String,
+                           ?schema_version: ::String,
+                           type: ::String
+                         ) -> _ExportSchemaResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportSchemaResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Schemas/Client.html#wait_until-instance_method
+      def wait_until: (:code_binding_exists waiter_name, 
+                    language: ::String,
+                    registry_name: ::String,
+                    schema_name: ::String,
+                    ?schema_version: ::String
+                  ) -> Client::_DescribeCodeBindingResponseSuccess
+                    | (:code_binding_exists waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeCodeBindingResponseSuccess
+    end
+  end
+end
+

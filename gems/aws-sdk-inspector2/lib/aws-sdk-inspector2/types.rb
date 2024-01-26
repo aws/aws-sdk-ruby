@@ -158,11 +158,13 @@ module Aws::Inspector2
     #   @return [Types::ImageLayerAggregation]
     #
     # @!attribute [rw] lambda_function_aggregation
-    #   Returns an object with findings aggregated by AWS Lambda function.
+    #   Returns an object with findings aggregated by Amazon Web Services
+    #   Lambda function.
     #   @return [Types::LambdaFunctionAggregation]
     #
     # @!attribute [rw] lambda_layer_aggregation
-    #   Returns an object with findings aggregated by AWS Lambda layer.
+    #   Returns an object with findings aggregated by Amazon Web Services
+    #   Lambda layer.
     #   @return [Types::LambdaLayerAggregation]
     #
     # @!attribute [rw] package_aggregation
@@ -249,11 +251,11 @@ module Aws::Inspector2
     #   @return [Types::ImageLayerAggregationResponse]
     #
     # @!attribute [rw] lambda_function_aggregation
-    #   An aggregation of findings by AWS Lambda function.
+    #   An aggregation of findings by Amazon Web Services Lambda function.
     #   @return [Types::LambdaFunctionAggregationResponse]
     #
     # @!attribute [rw] lambda_layer_aggregation
-    #   An aggregation of findings by AWS Lambda layer.
+    #   An aggregation of findings by Amazon Web Services Lambda layer.
     #   @return [Types::LambdaLayerAggregationResponse]
     #
     # @!attribute [rw] package_aggregation
@@ -433,13 +435,14 @@ module Aws::Inspector2
     #   @return [Boolean]
     #
     # @!attribute [rw] lambda
-    #   Represents whether AWS Lambda standard scans are automatically
-    #   enabled for new members of your Amazon Inspector organization.
+    #   Represents whether Amazon Web Services Lambda standard scans are
+    #   automatically enabled for new members of your Amazon Inspector
+    #   organization.
     #   @return [Boolean]
     #
     # @!attribute [rw] lambda_code
-    #   Represents whether AWS Lambda code scans are automatically enabled
-    #   for new members of your Amazon Inspector organization.      </p>
+    #   Represents whether Lambda code scans are automatically enabled for
+    #   new members of your Amazon Inspector organization.      </p>
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AutoEnable AWS API Documentation
@@ -651,24 +654,26 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # A summary of information about the AWS Lambda function.
+    # A summary of information about the Amazon Web Services Lambda
+    # function.
     #
     # @!attribute [rw] architectures
-    #   The instruction set architecture that the AWS Lambda function
-    #   supports. Architecture is a string array with one of the valid
-    #   values. The default architecture value is `x86_64`.
+    #   The instruction set architecture that the Amazon Web Services Lambda
+    #   function supports. Architecture is a string array with one of the
+    #   valid values. The default architecture value is `x86_64`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] code_sha_256
-    #   The SHA256 hash of the AWS Lambda function's deployment package.
+    #   The SHA256 hash of the Amazon Web Services Lambda function's
+    #   deployment package.
     #   @return [String]
     #
     # @!attribute [rw] execution_role_arn
-    #   The AWS Lambda function's execution role.
+    #   The Amazon Web Services Lambda function's execution role.
     #   @return [String]
     #
     # @!attribute [rw] function_name
-    #   The name of the AWS Lambda function.
+    #   The name of the Amazon Web Services Lambda function.
     #   @return [String]
     #
     # @!attribute [rw] last_modified_at
@@ -681,8 +686,8 @@ module Aws::Inspector2
     #   @return [Time]
     #
     # @!attribute [rw] layers
-    #   The AWS Lambda function's [ layers][1]. A Lambda function can have
-    #   up to five layers.
+    #   The Amazon Web Services Lambda function's [ layers][1]. A Lambda
+    #   function can have up to five layers.
     #
     #
     #
@@ -695,15 +700,15 @@ module Aws::Inspector2
     #   @return [String]
     #
     # @!attribute [rw] runtime
-    #   The runtime environment for the AWS Lambda function.
+    #   The runtime environment for the Amazon Web Services Lambda function.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The version of the AWS Lambda function.
+    #   The version of the Amazon Web Services Lambda function.
     #   @return [String]
     #
     # @!attribute [rw] vpc_config
-    #   The AWS Lambda function's networking configuration.
+    #   The Amazon Web Services Lambda function's networking configuration.
     #   @return [Types::LambdaVpcConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AwsLambdaFunctionDetails AWS API Documentation
@@ -1916,19 +1921,23 @@ module Aws::Inspector2
     #   The Amazon ECR repository name to filter on.
     #   @return [Array<Types::CoverageStringFilter>]
     #
+    # @!attribute [rw] image_pulled_at
+    #   The date an image was last pulled at.
+    #   @return [Array<Types::CoverageDateFilter>]
+    #
     # @!attribute [rw] lambda_function_name
-    #   Returns coverage statistics for AWS Lambda functions filtered by
-    #   function names.
+    #   Returns coverage statistics for Amazon Web Services Lambda functions
+    #   filtered by function names.
     #   @return [Array<Types::CoverageStringFilter>]
     #
     # @!attribute [rw] lambda_function_runtime
-    #   Returns coverage statistics for AWS Lambda functions filtered by
-    #   runtime.
+    #   Returns coverage statistics for Amazon Web Services Lambda functions
+    #   filtered by runtime.
     #   @return [Array<Types::CoverageStringFilter>]
     #
     # @!attribute [rw] lambda_function_tags
-    #   Returns coverage statistics for AWS Lambda functions filtered by
-    #   tag.
+    #   Returns coverage statistics for Amazon Web Services Lambda functions
+    #   filtered by tag.
     #   @return [Array<Types::CoverageMapFilter>]
     #
     # @!attribute [rw] last_scanned_at
@@ -1972,6 +1981,7 @@ module Aws::Inspector2
       :ec2_instance_tags,
       :ecr_image_tags,
       :ecr_repository_name,
+      :image_pulled_at,
       :lambda_function_name,
       :lambda_function_runtime,
       :lambda_function_tags,
@@ -2766,17 +2776,18 @@ module Aws::Inspector2
     # Details about the ECR automated re-scan duration setting for your
     # environment.
     #
+    # @!attribute [rw] pull_date_rescan_duration
+    #   The rescan duration configured for image pull date.
+    #   @return [String]
+    #
     # @!attribute [rw] rescan_duration
-    #   The ECR automated re-scan duration defines how long an ECR image
-    #   will be actively scanned by Amazon Inspector. When the number of
-    #   days since an image was last pushed exceeds the automated re-scan
-    #   duration the monitoring state of that image becomes `inactive` and
-    #   all associated findings are scheduled for closure.
+    #   The rescan duration configured for image push date.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/EcrConfiguration AWS API Documentation
     #
     class EcrConfiguration < Struct.new(
+      :pull_date_rescan_duration,
       :rescan_duration)
       SENSITIVE = []
       include Aws::Structure
@@ -2785,8 +2796,8 @@ module Aws::Inspector2
     # Details about the state of the ECR scans for your environment.
     #
     # @!attribute [rw] rescan_duration_state
-    #   An object that contains details about the state of the ECR automated
-    #   re-scan setting.
+    #   An object that contains details about the state of the ECR re-scan
+    #   settings.
     #   @return [Types::EcrRescanDurationState]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/EcrConfigurationState AWS API Documentation
@@ -2800,6 +2811,10 @@ module Aws::Inspector2
     # Information on the Amazon ECR image metadata associated with a
     # finding.
     #
+    # @!attribute [rw] image_pulled_at
+    #   The date an image was last pulled at.
+    #   @return [Time]
+    #
     # @!attribute [rw] tags
     #   Tags associated with the Amazon ECR image metadata.
     #   @return [Array<String>]
@@ -2807,6 +2822,7 @@ module Aws::Inspector2
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/EcrContainerImageMetadata AWS API Documentation
     #
     class EcrContainerImageMetadata < Struct.new(
+      :image_pulled_at,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -2832,15 +2848,20 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # Details about the state of any changes to the ECR automated re-scan
-    # duration setting.
+    # Details about the state of your ECR re-scan duration settings. The ECR
+    # re-scan duration defines how long an ECR image will be actively
+    # scanned by Amazon Inspector. When the number of days since an image
+    # was last pushed exceeds the duration configured for image pull date,
+    # and the duration configured for image pull date, the monitoring state
+    # of that image becomes `inactive` and all associated findings are
+    # scheduled for closure.
+    #
+    # @!attribute [rw] pull_date_rescan_duration
+    #   The rescan duration configured for image pull date.
+    #   @return [String]
     #
     # @!attribute [rw] rescan_duration
-    #   The ECR automated re-scan duration defines how long an ECR image
-    #   will be actively scanned by Amazon Inspector. When the number of
-    #   days since an image was last pushed exceeds the automated re-scan
-    #   duration the monitoring state of that image becomes `inactive` and
-    #   all associated findings are scheduled for closure.
+    #   The rescan duration configured for image push date.      </p>
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2855,6 +2876,7 @@ module Aws::Inspector2
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/EcrRescanDurationState AWS API Documentation
     #
     class EcrRescanDurationState < Struct.new(
+      :pull_date_rescan_duration,
       :rescan_duration,
       :status,
       :updated_at)
@@ -3239,8 +3261,8 @@ module Aws::Inspector2
     #   @return [Array<Types::NumberFilter>]
     #
     # @!attribute [rw] exploit_available
-    #   Filters the list of AWS Lambda findings by the availability of
-    #   exploits.
+    #   Filters the list of Amazon Web Services Lambda findings by the
+    #   availability of exploits.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] finding_arn
@@ -3272,12 +3294,14 @@ module Aws::Inspector2
     #   @return [Array<Types::NumberFilter>]
     #
     # @!attribute [rw] lambda_function_execution_role_arn
-    #   Filters the list of AWS Lambda functions by execution role.
+    #   Filters the list of Amazon Web Services Lambda functions by
+    #   execution role.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] lambda_function_last_modified_at
-    #   Filters the list of AWS Lambda functions by the date and time that a
-    #   user last updated the configuration, in [ISO 8601 format][1]
+    #   Filters the list of Amazon Web Services Lambda functions by the date
+    #   and time that a user last updated the configuration, in [ISO 8601
+    #   format][1]
     #
     #
     #
@@ -3285,8 +3309,9 @@ module Aws::Inspector2
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] lambda_function_layers
-    #   Filters the list of AWS Lambda functions by the function's [
-    #   layers][1]. A Lambda function can have up to five layers.
+    #   Filters the list of Amazon Web Services Lambda functions by the
+    #   function's [ layers][1]. A Lambda function can have up to five
+    #   layers.
     #
     #
     #
@@ -3294,13 +3319,13 @@ module Aws::Inspector2
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] lambda_function_name
-    #   Filters the list of AWS Lambda functions by the name of the
-    #   function.
+    #   Filters the list of Amazon Web Services Lambda functions by the name
+    #   of the function.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] lambda_function_runtime
-    #   Filters the list of AWS Lambda functions by the runtime environment
-    #   for the Lambda function.
+    #   Filters the list of Amazon Web Services Lambda functions by the
+    #   runtime environment for the Lambda function.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] last_observed_at
@@ -4210,11 +4235,12 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # The details that define a findings aggregation based on AWS Lambda
-    # functions.
+    # The details that define a findings aggregation based on Amazon Web
+    # Services Lambda functions.
     #
     # @!attribute [rw] function_names
-    #   The AWS Lambda function names to include in the aggregation results.
+    #   The Amazon Web Services Lambda function names to include in the
+    #   aggregation results.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] function_tags
@@ -4226,8 +4252,8 @@ module Aws::Inspector2
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] runtimes
-    #   Returns findings aggregated by AWS Lambda function runtime
-    #   environments.
+    #   Returns findings aggregated by Amazon Web Services Lambda function
+    #   runtime environments.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] sort_by
@@ -4251,15 +4277,17 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # A response that contains the results of an AWS Lambda function finding
-    # aggregation.
+    # A response that contains the results of an Amazon Web Services Lambda
+    # function finding aggregation.
     #
     # @!attribute [rw] account_id
-    #   The ID of the AWS account that owns the AWS Lambda function.
+    #   The ID of the Amazon Web Services account that owns the Amazon Web
+    #   Services Lambda function.
     #   @return [String]
     #
     # @!attribute [rw] function_name
-    #   The AWS Lambda function names included in the aggregation results.
+    #   The Amazon Web Services Lambda function names included in the
+    #   aggregation results.
     #   @return [String]
     #
     # @!attribute [rw] lambda_tags
@@ -4267,8 +4295,8 @@ module Aws::Inspector2
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] last_modified_at
-    #   The date that the AWS Lambda function included in the aggregation
-    #   results was last changed.
+    #   The date that the Amazon Web Services Lambda function included in
+    #   the aggregation results was last changed.
     #   @return [Time]
     #
     # @!attribute [rw] resource_id
@@ -4298,23 +4326,23 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # The AWS Lambda function metadata.
+    # The Amazon Web Services Lambda function metadata.
     #
     # @!attribute [rw] function_name
     #   The name of a function.
     #   @return [String]
     #
     # @!attribute [rw] function_tags
-    #   The resource tags on an AWS Lambda function.
+    #   The resource tags on an Amazon Web Services Lambda function.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] layers
-    #   The layers for an AWS Lambda function. A Lambda function can have up
-    #   to five layers.
+    #   The layers for an Amazon Web Services Lambda function. A Lambda
+    #   function can have up to five layers.
     #   @return [Array<String>]
     #
     # @!attribute [rw] runtime
-    #   An AWS Lambda function's runtime.
+    #   An Amazon Web Services Lambda function's runtime.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/LambdaFunctionMetadata AWS API Documentation
@@ -4328,19 +4356,21 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # The details that define a findings aggregation based on an AWS Lambda
-    # function's layers.
+    # The details that define a findings aggregation based on an Amazon Web
+    # Services Lambda function's layers.
     #
     # @!attribute [rw] function_names
-    #   The names of the AWS Lambda functions associated with the layers.
+    #   The names of the Amazon Web Services Lambda functions associated
+    #   with the layers.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] layer_arns
-    #   The Amazon Resource Name (ARN) of the AWS Lambda function layer.
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Lambda
+    #   function layer.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] resource_ids
-    #   The resource IDs for the AWS Lambda function layers.
+    #   The resource IDs for the Amazon Web Services Lambda function layers.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] sort_by
@@ -4363,23 +4393,25 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # A response that contains the results of an AWS Lambda function layer
-    # finding aggregation.
+    # A response that contains the results of an Amazon Web Services Lambda
+    # function layer finding aggregation.
     #
     # @!attribute [rw] account_id
-    #   The account ID of the AWS Lambda function layer.
+    #   The account ID of the Amazon Web Services Lambda function layer.
     #   @return [String]
     #
     # @!attribute [rw] function_name
-    #   The names of the AWS Lambda functions associated with the layers.
+    #   The names of the Amazon Web Services Lambda functions associated
+    #   with the layers.
     #   @return [String]
     #
     # @!attribute [rw] layer_arn
-    #   The Amazon Resource Name (ARN) of the AWS Lambda function layer.
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Lambda
+    #   function layer.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The Resource ID of the AWS Lambda function layer.
+    #   The Resource ID of the Amazon Web Services Lambda function layer.
     #   @return [String]
     #
     # @!attribute [rw] severity_counts
@@ -4399,16 +4431,17 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # The VPC security groups and subnets that are attached to an AWS Lambda
-    # function. For more information, see [VPC Settings][1].
+    # The VPC security groups and subnets that are attached to an Amazon Web
+    # Services Lambda function. For more information, see [VPC Settings][1].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html
     #
     # @!attribute [rw] security_group_ids
-    #   The VPC security groups and subnets that are attached to an AWS
-    #   Lambda function. For more information, see [VPC Settings][1].
+    #   The VPC security groups and subnets that are attached to an Amazon
+    #   Web Services Lambda function. For more information, see [VPC
+    #   Settings][1].
     #
     #
     #
@@ -5817,8 +5850,8 @@ module Aws::Inspector2
     #   @return [Types::AwsEcrContainerImageDetails]
     #
     # @!attribute [rw] aws_lambda_function
-    #   A summary of the information about an AWS Lambda function affected
-    #   by a finding.
+    #   A summary of the information about an Amazon Web Services Lambda
+    #   function affected by a finding.
     #   @return [Types::AwsLambdaFunctionDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResourceDetails AWS API Documentation
@@ -5851,11 +5884,13 @@ module Aws::Inspector2
     #   @return [Array<Types::ResourceStringFilter>]
     #
     # @!attribute [rw] lambda_function_name
-    #   The AWS Lambda function name used as resource filter criteria.
+    #   The Amazon Web Services Lambda function name used as resource filter
+    #   criteria.
     #   @return [Array<Types::ResourceStringFilter>]
     #
     # @!attribute [rw] lambda_function_tags
-    #   The AWS Lambda function tags used as resource filter criteria.
+    #   The Amazon Web Services Lambda function tags used as resource filter
+    #   criteria.
     #   @return [Array<Types::ResourceMapFilter>]
     #
     # @!attribute [rw] resource_id
@@ -5937,7 +5972,8 @@ module Aws::Inspector2
     #   @return [Types::EcrRepositoryMetadata]
     #
     # @!attribute [rw] lambda_function
-    #   An object that contains metadata details for an AWS Lambda function.
+    #   An object that contains metadata details for an Amazon Web Services
+    #   Lambda function.
     #   @return [Types::LambdaFunctionMetadata]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResourceScanMetadata AWS API Documentation
@@ -5997,7 +6033,8 @@ module Aws::Inspector2
     #   @return [String]
     #
     # @!attribute [rw] lambda
-    #   The status of Amazon Inspector scanning for AWS Lambda function.
+    #   The status of Amazon Inspector scanning for Amazon Web Services
+    #   Lambda function.
     #   @return [String]
     #
     # @!attribute [rw] lambda_code
@@ -7289,8 +7326,8 @@ module Aws::Inspector2
     #   @return [String]
     #
     # @!attribute [rw] source_lambda_layer_arn
-    #   The Amazon Resource Number (ARN) of the AWS Lambda function affected
-    #   by a finding.
+    #   The Amazon Resource Number (ARN) of the Amazon Web Services Lambda
+    #   function affected by a finding.
     #   @return [String]
     #
     # @!attribute [rw] source_layer_hash

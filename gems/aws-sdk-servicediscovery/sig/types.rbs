@@ -1,0 +1,648 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ServiceDiscovery
+  module Types
+
+    class CreateHttpNamespaceRequest
+      attr_accessor name: ::String
+      attr_accessor creator_request_id: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateHttpNamespaceResponse
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePrivateDnsNamespaceRequest
+      attr_accessor name: ::String
+      attr_accessor creator_request_id: ::String
+      attr_accessor description: ::String
+      attr_accessor vpc: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor properties: Types::PrivateDnsNamespaceProperties
+      SENSITIVE: []
+    end
+
+    class CreatePrivateDnsNamespaceResponse
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePublicDnsNamespaceRequest
+      attr_accessor name: ::String
+      attr_accessor creator_request_id: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor properties: Types::PublicDnsNamespaceProperties
+      SENSITIVE: []
+    end
+
+    class CreatePublicDnsNamespaceResponse
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateServiceRequest
+      attr_accessor name: ::String
+      attr_accessor namespace_id: ::String
+      attr_accessor creator_request_id: ::String
+      attr_accessor description: ::String
+      attr_accessor dns_config: Types::DnsConfig
+      attr_accessor health_check_config: Types::HealthCheckConfig
+      attr_accessor health_check_custom_config: Types::HealthCheckCustomConfig
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor type: ("HTTP")
+      SENSITIVE: []
+    end
+
+    class CreateServiceResponse
+      attr_accessor service: Types::Service
+      SENSITIVE: []
+    end
+
+    class CustomHealthNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteNamespaceRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteNamespaceResponse
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteServiceRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteServiceResponse < Aws::EmptyStructure
+    end
+
+    class DeregisterInstanceRequest
+      attr_accessor service_id: ::String
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterInstanceResponse
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class DiscoverInstancesRequest
+      attr_accessor namespace_name: ::String
+      attr_accessor service_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor query_parameters: ::Hash[::String, ::String]
+      attr_accessor optional_parameters: ::Hash[::String, ::String]
+      attr_accessor health_status: ("HEALTHY" | "UNHEALTHY" | "ALL" | "HEALTHY_OR_ELSE_ALL")
+      SENSITIVE: []
+    end
+
+    class DiscoverInstancesResponse
+      attr_accessor instances: ::Array[Types::HttpInstanceSummary]
+      attr_accessor instances_revision: ::Integer
+      SENSITIVE: []
+    end
+
+    class DiscoverInstancesRevisionRequest
+      attr_accessor namespace_name: ::String
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class DiscoverInstancesRevisionResponse
+      attr_accessor instances_revision: ::Integer
+      SENSITIVE: []
+    end
+
+    class DnsConfig
+      attr_accessor namespace_id: ::String
+      attr_accessor routing_policy: ("MULTIVALUE" | "WEIGHTED")
+      attr_accessor dns_records: ::Array[Types::DnsRecord]
+      SENSITIVE: []
+    end
+
+    class DnsConfigChange
+      attr_accessor dns_records: ::Array[Types::DnsRecord]
+      SENSITIVE: []
+    end
+
+    class DnsProperties
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor soa: Types::SOA
+      SENSITIVE: []
+    end
+
+    class DnsRecord
+      attr_accessor type: ("SRV" | "A" | "AAAA" | "CNAME")
+      attr_accessor ttl: ::Integer
+      SENSITIVE: []
+    end
+
+    class DuplicateRequest
+      attr_accessor message: ::String
+      attr_accessor duplicate_operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetInstanceRequest
+      attr_accessor service_id: ::String
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetInstanceResponse
+      attr_accessor instance: Types::Instance
+      SENSITIVE: []
+    end
+
+    class GetInstancesHealthStatusRequest
+      attr_accessor service_id: ::String
+      attr_accessor instances: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetInstancesHealthStatusResponse
+      attr_accessor status: ::Hash[::String, ("HEALTHY" | "UNHEALTHY" | "UNKNOWN")]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetNamespaceRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetNamespaceResponse
+      attr_accessor namespace: Types::Namespace
+      SENSITIVE: []
+    end
+
+    class GetOperationRequest
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetOperationResponse
+      attr_accessor operation: Types::Operation
+      SENSITIVE: []
+    end
+
+    class GetServiceRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceResponse
+      attr_accessor service: Types::Service
+      SENSITIVE: []
+    end
+
+    class HealthCheckConfig
+      attr_accessor type: ("HTTP" | "HTTPS" | "TCP")
+      attr_accessor resource_path: ::String
+      attr_accessor failure_threshold: ::Integer
+      SENSITIVE: []
+    end
+
+    class HealthCheckCustomConfig
+      attr_accessor failure_threshold: ::Integer
+      SENSITIVE: []
+    end
+
+    class HttpInstanceSummary
+      attr_accessor instance_id: ::String
+      attr_accessor namespace_name: ::String
+      attr_accessor service_name: ::String
+      attr_accessor health_status: ("HEALTHY" | "UNHEALTHY" | "UNKNOWN")
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class HttpNamespaceChange
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class HttpProperties
+      attr_accessor http_name: ::String
+      SENSITIVE: []
+    end
+
+    class Instance
+      attr_accessor id: ::String
+      attr_accessor creator_request_id: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class InstanceNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceSummary
+      attr_accessor id: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class InvalidInput
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListInstancesRequest
+      attr_accessor service_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListInstancesResponse
+      attr_accessor instances: ::Array[Types::InstanceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNamespacesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::NamespaceFilter]
+      SENSITIVE: []
+    end
+
+    class ListNamespacesResponse
+      attr_accessor namespaces: ::Array[Types::NamespaceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOperationsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::OperationFilter]
+      SENSITIVE: []
+    end
+
+    class ListOperationsResponse
+      attr_accessor operations: ::Array[Types::OperationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServicesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::ServiceFilter]
+      SENSITIVE: []
+    end
+
+    class ListServicesResponse
+      attr_accessor services: ::Array[Types::ServiceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class Namespace
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("DNS_PUBLIC" | "DNS_PRIVATE" | "HTTP")
+      attr_accessor description: ::String
+      attr_accessor service_count: ::Integer
+      attr_accessor properties: Types::NamespaceProperties
+      attr_accessor create_date: ::Time
+      attr_accessor creator_request_id: ::String
+      SENSITIVE: []
+    end
+
+    class NamespaceAlreadyExists
+      attr_accessor message: ::String
+      attr_accessor creator_request_id: ::String
+      attr_accessor namespace_id: ::String
+      SENSITIVE: []
+    end
+
+    class NamespaceFilter
+      attr_accessor name: ("TYPE" | "NAME" | "HTTP_NAME")
+      attr_accessor values: ::Array[::String]
+      attr_accessor condition: ("EQ" | "IN" | "BETWEEN" | "BEGINS_WITH")
+      SENSITIVE: []
+    end
+
+    class NamespaceNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NamespaceProperties
+      attr_accessor dns_properties: Types::DnsProperties
+      attr_accessor http_properties: Types::HttpProperties
+      SENSITIVE: []
+    end
+
+    class NamespaceSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("DNS_PUBLIC" | "DNS_PRIVATE" | "HTTP")
+      attr_accessor description: ::String
+      attr_accessor service_count: ::Integer
+      attr_accessor properties: Types::NamespaceProperties
+      attr_accessor create_date: ::Time
+      SENSITIVE: []
+    end
+
+    class Operation
+      attr_accessor id: ::String
+      attr_accessor type: ("CREATE_NAMESPACE" | "DELETE_NAMESPACE" | "UPDATE_NAMESPACE" | "UPDATE_SERVICE" | "REGISTER_INSTANCE" | "DEREGISTER_INSTANCE")
+      attr_accessor status: ("SUBMITTED" | "PENDING" | "SUCCESS" | "FAIL")
+      attr_accessor error_message: ::String
+      attr_accessor error_code: ::String
+      attr_accessor create_date: ::Time
+      attr_accessor update_date: ::Time
+      attr_accessor targets: ::Hash[("NAMESPACE" | "SERVICE" | "INSTANCE"), ::String]
+      SENSITIVE: []
+    end
+
+    class OperationFilter
+      attr_accessor name: ("NAMESPACE_ID" | "SERVICE_ID" | "STATUS" | "TYPE" | "UPDATE_DATE")
+      attr_accessor values: ::Array[::String]
+      attr_accessor condition: ("EQ" | "IN" | "BETWEEN" | "BEGINS_WITH")
+      SENSITIVE: []
+    end
+
+    class OperationNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OperationSummary
+      attr_accessor id: ::String
+      attr_accessor status: ("SUBMITTED" | "PENDING" | "SUCCESS" | "FAIL")
+      SENSITIVE: []
+    end
+
+    class PrivateDnsNamespaceChange
+      attr_accessor description: ::String
+      attr_accessor properties: Types::PrivateDnsNamespacePropertiesChange
+      SENSITIVE: []
+    end
+
+    class PrivateDnsNamespaceProperties
+      attr_accessor dns_properties: Types::PrivateDnsPropertiesMutable
+      SENSITIVE: []
+    end
+
+    class PrivateDnsNamespacePropertiesChange
+      attr_accessor dns_properties: Types::PrivateDnsPropertiesMutableChange
+      SENSITIVE: []
+    end
+
+    class PrivateDnsPropertiesMutable
+      attr_accessor soa: Types::SOA
+      SENSITIVE: []
+    end
+
+    class PrivateDnsPropertiesMutableChange
+      attr_accessor soa: Types::SOAChange
+      SENSITIVE: []
+    end
+
+    class PublicDnsNamespaceChange
+      attr_accessor description: ::String
+      attr_accessor properties: Types::PublicDnsNamespacePropertiesChange
+      SENSITIVE: []
+    end
+
+    class PublicDnsNamespaceProperties
+      attr_accessor dns_properties: Types::PublicDnsPropertiesMutable
+      SENSITIVE: []
+    end
+
+    class PublicDnsNamespacePropertiesChange
+      attr_accessor dns_properties: Types::PublicDnsPropertiesMutableChange
+      SENSITIVE: []
+    end
+
+    class PublicDnsPropertiesMutable
+      attr_accessor soa: Types::SOA
+      SENSITIVE: []
+    end
+
+    class PublicDnsPropertiesMutableChange
+      attr_accessor soa: Types::SOAChange
+      SENSITIVE: []
+    end
+
+    class RegisterInstanceRequest
+      attr_accessor service_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor creator_request_id: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RegisterInstanceResponse
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class RequestLimitExceeded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceInUse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceLimitExceeded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SOA
+      attr_accessor ttl: ::Integer
+      SENSITIVE: []
+    end
+
+    class SOAChange
+      attr_accessor ttl: ::Integer
+      SENSITIVE: []
+    end
+
+    class Service
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor namespace_id: ::String
+      attr_accessor description: ::String
+      attr_accessor instance_count: ::Integer
+      attr_accessor dns_config: Types::DnsConfig
+      attr_accessor type: ("HTTP" | "DNS_HTTP" | "DNS")
+      attr_accessor health_check_config: Types::HealthCheckConfig
+      attr_accessor health_check_custom_config: Types::HealthCheckCustomConfig
+      attr_accessor create_date: ::Time
+      attr_accessor creator_request_id: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceAlreadyExists
+      attr_accessor message: ::String
+      attr_accessor creator_request_id: ::String
+      attr_accessor service_id: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceChange
+      attr_accessor description: ::String
+      attr_accessor dns_config: Types::DnsConfigChange
+      attr_accessor health_check_config: Types::HealthCheckConfig
+      SENSITIVE: []
+    end
+
+    class ServiceFilter
+      attr_accessor name: ("NAMESPACE_ID")
+      attr_accessor values: ::Array[::String]
+      attr_accessor condition: ("EQ" | "IN" | "BETWEEN" | "BEGINS_WITH")
+      SENSITIVE: []
+    end
+
+    class ServiceNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("HTTP" | "DNS_HTTP" | "DNS")
+      attr_accessor description: ::String
+      attr_accessor instance_count: ::Integer
+      attr_accessor dns_config: Types::DnsConfig
+      attr_accessor health_check_config: Types::HealthCheckConfig
+      attr_accessor health_check_custom_config: Types::HealthCheckCustomConfig
+      attr_accessor create_date: ::Time
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateHttpNamespaceRequest
+      attr_accessor id: ::String
+      attr_accessor updater_request_id: ::String
+      attr_accessor namespace: Types::HttpNamespaceChange
+      SENSITIVE: []
+    end
+
+    class UpdateHttpNamespaceResponse
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateInstanceCustomHealthStatusRequest
+      attr_accessor service_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor status: ("HEALTHY" | "UNHEALTHY")
+      SENSITIVE: []
+    end
+
+    class UpdatePrivateDnsNamespaceRequest
+      attr_accessor id: ::String
+      attr_accessor updater_request_id: ::String
+      attr_accessor namespace: Types::PrivateDnsNamespaceChange
+      SENSITIVE: []
+    end
+
+    class UpdatePrivateDnsNamespaceResponse
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePublicDnsNamespaceRequest
+      attr_accessor id: ::String
+      attr_accessor updater_request_id: ::String
+      attr_accessor namespace: Types::PublicDnsNamespaceChange
+      SENSITIVE: []
+    end
+
+    class UpdatePublicDnsNamespaceResponse
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateServiceRequest
+      attr_accessor id: ::String
+      attr_accessor service: Types::ServiceChange
+      SENSITIVE: []
+    end
+
+    class UpdateServiceResponse
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+  end
+end

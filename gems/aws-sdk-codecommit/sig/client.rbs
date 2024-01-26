@@ -1,0 +1,1268 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CodeCommit
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#associate_approval_rule_template_with_repository-instance_method
+      def associate_approval_rule_template_with_repository: (
+                                                              approval_rule_template_name: ::String,
+                                                              repository_name: ::String
+                                                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _BatchAssociateApprovalRuleTemplateWithRepositoriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchAssociateApprovalRuleTemplateWithRepositoriesOutput]
+        def associated_repository_names: () -> ::Array[::String]
+        def errors: () -> ::Array[Types::BatchAssociateApprovalRuleTemplateWithRepositoriesError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#batch_associate_approval_rule_template_with_repositories-instance_method
+      def batch_associate_approval_rule_template_with_repositories: (
+                                                                      approval_rule_template_name: ::String,
+                                                                      repository_names: Array[::String]
+                                                                    ) -> _BatchAssociateApprovalRuleTemplateWithRepositoriesResponseSuccess
+                                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchAssociateApprovalRuleTemplateWithRepositoriesResponseSuccess
+
+      interface _BatchDescribeMergeConflictsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDescribeMergeConflictsOutput]
+        def conflicts: () -> ::Array[Types::Conflict]
+        def next_token: () -> ::String
+        def errors: () -> ::Array[Types::BatchDescribeMergeConflictsError]
+        def destination_commit_id: () -> ::String
+        def source_commit_id: () -> ::String
+        def base_commit_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#batch_describe_merge_conflicts-instance_method
+      def batch_describe_merge_conflicts: (
+                                            repository_name: ::String,
+                                            destination_commit_specifier: ::String,
+                                            source_commit_specifier: ::String,
+                                            merge_option: ("FAST_FORWARD_MERGE" | "SQUASH_MERGE" | "THREE_WAY_MERGE"),
+                                            ?max_merge_hunks: ::Integer,
+                                            ?max_conflict_files: ::Integer,
+                                            ?file_paths: Array[::String],
+                                            ?conflict_detail_level: ("FILE_LEVEL" | "LINE_LEVEL"),
+                                            ?conflict_resolution_strategy: ("NONE" | "ACCEPT_SOURCE" | "ACCEPT_DESTINATION" | "AUTOMERGE"),
+                                            ?next_token: ::String
+                                          ) -> _BatchDescribeMergeConflictsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDescribeMergeConflictsResponseSuccess
+
+      interface _BatchDisassociateApprovalRuleTemplateFromRepositoriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput]
+        def disassociated_repository_names: () -> ::Array[::String]
+        def errors: () -> ::Array[Types::BatchDisassociateApprovalRuleTemplateFromRepositoriesError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#batch_disassociate_approval_rule_template_from_repositories-instance_method
+      def batch_disassociate_approval_rule_template_from_repositories: (
+                                                                         approval_rule_template_name: ::String,
+                                                                         repository_names: Array[::String]
+                                                                       ) -> _BatchDisassociateApprovalRuleTemplateFromRepositoriesResponseSuccess
+                                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDisassociateApprovalRuleTemplateFromRepositoriesResponseSuccess
+
+      interface _BatchGetCommitsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetCommitsOutput]
+        def commits: () -> ::Array[Types::Commit]
+        def errors: () -> ::Array[Types::BatchGetCommitsError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#batch_get_commits-instance_method
+      def batch_get_commits: (
+                               commit_ids: Array[::String],
+                               repository_name: ::String
+                             ) -> _BatchGetCommitsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetCommitsResponseSuccess
+
+      interface _BatchGetRepositoriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetRepositoriesOutput]
+        def repositories: () -> ::Array[Types::RepositoryMetadata]
+        def repositories_not_found: () -> ::Array[::String]
+        def errors: () -> ::Array[Types::BatchGetRepositoriesError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#batch_get_repositories-instance_method
+      def batch_get_repositories: (
+                                    repository_names: Array[::String]
+                                  ) -> _BatchGetRepositoriesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetRepositoriesResponseSuccess
+
+      interface _CreateApprovalRuleTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateApprovalRuleTemplateOutput]
+        def approval_rule_template: () -> Types::ApprovalRuleTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#create_approval_rule_template-instance_method
+      def create_approval_rule_template: (
+                                           approval_rule_template_name: ::String,
+                                           approval_rule_template_content: ::String,
+                                           ?approval_rule_template_description: ::String
+                                         ) -> _CreateApprovalRuleTemplateResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApprovalRuleTemplateResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#create_branch-instance_method
+      def create_branch: (
+                           repository_name: ::String,
+                           branch_name: ::String,
+                           commit_id: ::String
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _CreateCommitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCommitOutput]
+        def commit_id: () -> ::String
+        def tree_id: () -> ::String
+        def files_added: () -> ::Array[Types::FileMetadata]
+        def files_updated: () -> ::Array[Types::FileMetadata]
+        def files_deleted: () -> ::Array[Types::FileMetadata]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#create_commit-instance_method
+      def create_commit: (
+                           repository_name: ::String,
+                           branch_name: ::String,
+                           ?parent_commit_id: ::String,
+                           ?author_name: ::String,
+                           ?email: ::String,
+                           ?commit_message: ::String,
+                           ?keep_empty_folders: bool,
+                           ?put_files: Array[
+                             {
+                               file_path: ::String,
+                               file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")?,
+                               file_content: ::String?,
+                               source_file: {
+                                 file_path: ::String,
+                                 is_move: bool?
+                               }?
+                             },
+                           ],
+                           ?delete_files: Array[
+                             {
+                               file_path: ::String
+                             },
+                           ],
+                           ?set_file_modes: Array[
+                             {
+                               file_path: ::String,
+                               file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")
+                             },
+                           ]
+                         ) -> _CreateCommitResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCommitResponseSuccess
+
+      interface _CreatePullRequestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePullRequestOutput]
+        def pull_request: () -> Types::PullRequest
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#create_pull_request-instance_method
+      def create_pull_request: (
+                                 title: ::String,
+                                 ?description: ::String,
+                                 targets: Array[
+                                   {
+                                     repository_name: ::String,
+                                     source_reference: ::String,
+                                     destination_reference: ::String?
+                                   },
+                                 ],
+                                 ?client_request_token: ::String
+                               ) -> _CreatePullRequestResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePullRequestResponseSuccess
+
+      interface _CreatePullRequestApprovalRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePullRequestApprovalRuleOutput]
+        def approval_rule: () -> Types::ApprovalRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#create_pull_request_approval_rule-instance_method
+      def create_pull_request_approval_rule: (
+                                               pull_request_id: ::String,
+                                               approval_rule_name: ::String,
+                                               approval_rule_content: ::String
+                                             ) -> _CreatePullRequestApprovalRuleResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePullRequestApprovalRuleResponseSuccess
+
+      interface _CreateRepositoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRepositoryOutput]
+        def repository_metadata: () -> Types::RepositoryMetadata
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#create_repository-instance_method
+      def create_repository: (
+                               repository_name: ::String,
+                               ?repository_description: ::String,
+                               ?tags: Hash[::String, ::String],
+                               ?kms_key_id: ::String
+                             ) -> _CreateRepositoryResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRepositoryResponseSuccess
+
+      interface _CreateUnreferencedMergeCommitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateUnreferencedMergeCommitOutput]
+        def commit_id: () -> ::String
+        def tree_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#create_unreferenced_merge_commit-instance_method
+      def create_unreferenced_merge_commit: (
+                                              repository_name: ::String,
+                                              source_commit_specifier: ::String,
+                                              destination_commit_specifier: ::String,
+                                              merge_option: ("FAST_FORWARD_MERGE" | "SQUASH_MERGE" | "THREE_WAY_MERGE"),
+                                              ?conflict_detail_level: ("FILE_LEVEL" | "LINE_LEVEL"),
+                                              ?conflict_resolution_strategy: ("NONE" | "ACCEPT_SOURCE" | "ACCEPT_DESTINATION" | "AUTOMERGE"),
+                                              ?author_name: ::String,
+                                              ?email: ::String,
+                                              ?commit_message: ::String,
+                                              ?keep_empty_folders: bool,
+                                              ?conflict_resolution: {
+                                                replace_contents: Array[
+                                                  {
+                                                    file_path: ::String,
+                                                    replacement_type: ("KEEP_BASE" | "KEEP_SOURCE" | "KEEP_DESTINATION" | "USE_NEW_CONTENT"),
+                                                    content: ::String?,
+                                                    file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")?
+                                                  },
+                                                ]?,
+                                                delete_files: Array[
+                                                  {
+                                                    file_path: ::String
+                                                  },
+                                                ]?,
+                                                set_file_modes: Array[
+                                                  {
+                                                    file_path: ::String,
+                                                    file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")
+                                                  },
+                                                ]?
+                                              }
+                                            ) -> _CreateUnreferencedMergeCommitResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUnreferencedMergeCommitResponseSuccess
+
+      interface _DeleteApprovalRuleTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteApprovalRuleTemplateOutput]
+        def approval_rule_template_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#delete_approval_rule_template-instance_method
+      def delete_approval_rule_template: (
+                                           approval_rule_template_name: ::String
+                                         ) -> _DeleteApprovalRuleTemplateResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteApprovalRuleTemplateResponseSuccess
+
+      interface _DeleteBranchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBranchOutput]
+        def deleted_branch: () -> Types::BranchInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#delete_branch-instance_method
+      def delete_branch: (
+                           repository_name: ::String,
+                           branch_name: ::String
+                         ) -> _DeleteBranchResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBranchResponseSuccess
+
+      interface _DeleteCommentContentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCommentContentOutput]
+        def comment: () -> Types::Comment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#delete_comment_content-instance_method
+      def delete_comment_content: (
+                                    comment_id: ::String
+                                  ) -> _DeleteCommentContentResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCommentContentResponseSuccess
+
+      interface _DeleteFileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFileOutput]
+        def commit_id: () -> ::String
+        def blob_id: () -> ::String
+        def tree_id: () -> ::String
+        def file_path: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#delete_file-instance_method
+      def delete_file: (
+                         repository_name: ::String,
+                         branch_name: ::String,
+                         file_path: ::String,
+                         parent_commit_id: ::String,
+                         ?keep_empty_folders: bool,
+                         ?commit_message: ::String,
+                         ?name: ::String,
+                         ?email: ::String
+                       ) -> _DeleteFileResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFileResponseSuccess
+
+      interface _DeletePullRequestApprovalRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePullRequestApprovalRuleOutput]
+        def approval_rule_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#delete_pull_request_approval_rule-instance_method
+      def delete_pull_request_approval_rule: (
+                                               pull_request_id: ::String,
+                                               approval_rule_name: ::String
+                                             ) -> _DeletePullRequestApprovalRuleResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePullRequestApprovalRuleResponseSuccess
+
+      interface _DeleteRepositoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRepositoryOutput]
+        def repository_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#delete_repository-instance_method
+      def delete_repository: (
+                               repository_name: ::String
+                             ) -> _DeleteRepositoryResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRepositoryResponseSuccess
+
+      interface _DescribeMergeConflictsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMergeConflictsOutput]
+        def conflict_metadata: () -> Types::ConflictMetadata
+        def merge_hunks: () -> ::Array[Types::MergeHunk]
+        def next_token: () -> ::String
+        def destination_commit_id: () -> ::String
+        def source_commit_id: () -> ::String
+        def base_commit_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#describe_merge_conflicts-instance_method
+      def describe_merge_conflicts: (
+                                      repository_name: ::String,
+                                      destination_commit_specifier: ::String,
+                                      source_commit_specifier: ::String,
+                                      merge_option: ("FAST_FORWARD_MERGE" | "SQUASH_MERGE" | "THREE_WAY_MERGE"),
+                                      ?max_merge_hunks: ::Integer,
+                                      file_path: ::String,
+                                      ?conflict_detail_level: ("FILE_LEVEL" | "LINE_LEVEL"),
+                                      ?conflict_resolution_strategy: ("NONE" | "ACCEPT_SOURCE" | "ACCEPT_DESTINATION" | "AUTOMERGE"),
+                                      ?next_token: ::String
+                                    ) -> _DescribeMergeConflictsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMergeConflictsResponseSuccess
+
+      interface _DescribePullRequestEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePullRequestEventsOutput]
+        def pull_request_events: () -> ::Array[Types::PullRequestEvent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#describe_pull_request_events-instance_method
+      def describe_pull_request_events: (
+                                          pull_request_id: ::String,
+                                          ?pull_request_event_type: ("PULL_REQUEST_CREATED" | "PULL_REQUEST_STATUS_CHANGED" | "PULL_REQUEST_SOURCE_REFERENCE_UPDATED" | "PULL_REQUEST_MERGE_STATE_CHANGED" | "PULL_REQUEST_APPROVAL_RULE_CREATED" | "PULL_REQUEST_APPROVAL_RULE_UPDATED" | "PULL_REQUEST_APPROVAL_RULE_DELETED" | "PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN" | "PULL_REQUEST_APPROVAL_STATE_CHANGED"),
+                                          ?actor_arn: ::String,
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _DescribePullRequestEventsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePullRequestEventsResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#disassociate_approval_rule_template_from_repository-instance_method
+      def disassociate_approval_rule_template_from_repository: (
+                                                                 approval_rule_template_name: ::String,
+                                                                 repository_name: ::String
+                                                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _EvaluatePullRequestApprovalRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EvaluatePullRequestApprovalRulesOutput]
+        def evaluation: () -> Types::Evaluation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#evaluate_pull_request_approval_rules-instance_method
+      def evaluate_pull_request_approval_rules: (
+                                                  pull_request_id: ::String,
+                                                  revision_id: ::String
+                                                ) -> _EvaluatePullRequestApprovalRulesResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EvaluatePullRequestApprovalRulesResponseSuccess
+
+      interface _GetApprovalRuleTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetApprovalRuleTemplateOutput]
+        def approval_rule_template: () -> Types::ApprovalRuleTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#get_approval_rule_template-instance_method
+      def get_approval_rule_template: (
+                                        approval_rule_template_name: ::String
+                                      ) -> _GetApprovalRuleTemplateResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApprovalRuleTemplateResponseSuccess
+
+      interface _GetBlobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBlobOutput]
+        def content: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#get_blob-instance_method
+      def get_blob: (
+                      repository_name: ::String,
+                      blob_id: ::String
+                    ) -> _GetBlobResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBlobResponseSuccess
+
+      interface _GetBranchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBranchOutput]
+        def branch: () -> Types::BranchInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#get_branch-instance_method
+      def get_branch: (
+                        ?repository_name: ::String,
+                        ?branch_name: ::String
+                      ) -> _GetBranchResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBranchResponseSuccess
+
+      interface _GetCommentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCommentOutput]
+        def comment: () -> Types::Comment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#get_comment-instance_method
+      def get_comment: (
+                         comment_id: ::String
+                       ) -> _GetCommentResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCommentResponseSuccess
+
+      interface _GetCommentReactionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCommentReactionsOutput]
+        def reactions_for_comment: () -> ::Array[Types::ReactionForComment]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#get_comment_reactions-instance_method
+      def get_comment_reactions: (
+                                   comment_id: ::String,
+                                   ?reaction_user_arn: ::String,
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
+                                 ) -> _GetCommentReactionsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCommentReactionsResponseSuccess
+
+      interface _GetCommentsForComparedCommitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCommentsForComparedCommitOutput]
+        def comments_for_compared_commit_data: () -> ::Array[Types::CommentsForComparedCommit]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#get_comments_for_compared_commit-instance_method
+      def get_comments_for_compared_commit: (
+                                              repository_name: ::String,
+                                              ?before_commit_id: ::String,
+                                              after_commit_id: ::String,
+                                              ?next_token: ::String,
+                                              ?max_results: ::Integer
+                                            ) -> _GetCommentsForComparedCommitResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCommentsForComparedCommitResponseSuccess
+
+      interface _GetCommentsForPullRequestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCommentsForPullRequestOutput]
+        def comments_for_pull_request_data: () -> ::Array[Types::CommentsForPullRequest]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#get_comments_for_pull_request-instance_method
+      def get_comments_for_pull_request: (
+                                           pull_request_id: ::String,
+                                           ?repository_name: ::String,
+                                           ?before_commit_id: ::String,
+                                           ?after_commit_id: ::String,
+                                           ?next_token: ::String,
+                                           ?max_results: ::Integer
+                                         ) -> _GetCommentsForPullRequestResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCommentsForPullRequestResponseSuccess
+
+      interface _GetCommitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCommitOutput]
+        def commit: () -> Types::Commit
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#get_commit-instance_method
+      def get_commit: (
+                        repository_name: ::String,
+                        commit_id: ::String
+                      ) -> _GetCommitResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCommitResponseSuccess
+
+      interface _GetDifferencesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDifferencesOutput]
+        def differences: () -> ::Array[Types::Difference]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#get_differences-instance_method
+      def get_differences: (
+                             repository_name: ::String,
+                             ?before_commit_specifier: ::String,
+                             after_commit_specifier: ::String,
+                             ?before_path: ::String,
+                             ?after_path: ::String,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _GetDifferencesResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDifferencesResponseSuccess
+
+      interface _GetFileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFileOutput]
+        def commit_id: () -> ::String
+        def blob_id: () -> ::String
+        def file_path: () -> ::String
+        def file_mode: () -> ("EXECUTABLE" | "NORMAL" | "SYMLINK")
+        def file_size: () -> ::Integer
+        def file_content: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#get_file-instance_method
+      def get_file: (
+                      repository_name: ::String,
+                      ?commit_specifier: ::String,
+                      file_path: ::String
+                    ) -> _GetFileResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFileResponseSuccess
+
+      interface _GetFolderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFolderOutput]
+        def commit_id: () -> ::String
+        def folder_path: () -> ::String
+        def tree_id: () -> ::String
+        def sub_folders: () -> ::Array[Types::Folder]
+        def files: () -> ::Array[Types::File]
+        def symbolic_links: () -> ::Array[Types::SymbolicLink]
+        def sub_modules: () -> ::Array[Types::SubModule]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#get_folder-instance_method
+      def get_folder: (
+                        repository_name: ::String,
+                        ?commit_specifier: ::String,
+                        folder_path: ::String
+                      ) -> _GetFolderResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFolderResponseSuccess
+
+      interface _GetMergeCommitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMergeCommitOutput]
+        def source_commit_id: () -> ::String
+        def destination_commit_id: () -> ::String
+        def base_commit_id: () -> ::String
+        def merged_commit_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#get_merge_commit-instance_method
+      def get_merge_commit: (
+                              repository_name: ::String,
+                              source_commit_specifier: ::String,
+                              destination_commit_specifier: ::String,
+                              ?conflict_detail_level: ("FILE_LEVEL" | "LINE_LEVEL"),
+                              ?conflict_resolution_strategy: ("NONE" | "ACCEPT_SOURCE" | "ACCEPT_DESTINATION" | "AUTOMERGE")
+                            ) -> _GetMergeCommitResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMergeCommitResponseSuccess
+
+      interface _GetMergeConflictsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMergeConflictsOutput]
+        def mergeable: () -> bool
+        def destination_commit_id: () -> ::String
+        def source_commit_id: () -> ::String
+        def base_commit_id: () -> ::String
+        def conflict_metadata_list: () -> ::Array[Types::ConflictMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#get_merge_conflicts-instance_method
+      def get_merge_conflicts: (
+                                 repository_name: ::String,
+                                 destination_commit_specifier: ::String,
+                                 source_commit_specifier: ::String,
+                                 merge_option: ("FAST_FORWARD_MERGE" | "SQUASH_MERGE" | "THREE_WAY_MERGE"),
+                                 ?conflict_detail_level: ("FILE_LEVEL" | "LINE_LEVEL"),
+                                 ?max_conflict_files: ::Integer,
+                                 ?conflict_resolution_strategy: ("NONE" | "ACCEPT_SOURCE" | "ACCEPT_DESTINATION" | "AUTOMERGE"),
+                                 ?next_token: ::String
+                               ) -> _GetMergeConflictsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMergeConflictsResponseSuccess
+
+      interface _GetMergeOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMergeOptionsOutput]
+        def merge_options: () -> ::Array[("FAST_FORWARD_MERGE" | "SQUASH_MERGE" | "THREE_WAY_MERGE")]
+        def source_commit_id: () -> ::String
+        def destination_commit_id: () -> ::String
+        def base_commit_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#get_merge_options-instance_method
+      def get_merge_options: (
+                               repository_name: ::String,
+                               source_commit_specifier: ::String,
+                               destination_commit_specifier: ::String,
+                               ?conflict_detail_level: ("FILE_LEVEL" | "LINE_LEVEL"),
+                               ?conflict_resolution_strategy: ("NONE" | "ACCEPT_SOURCE" | "ACCEPT_DESTINATION" | "AUTOMERGE")
+                             ) -> _GetMergeOptionsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMergeOptionsResponseSuccess
+
+      interface _GetPullRequestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPullRequestOutput]
+        def pull_request: () -> Types::PullRequest
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#get_pull_request-instance_method
+      def get_pull_request: (
+                              pull_request_id: ::String
+                            ) -> _GetPullRequestResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPullRequestResponseSuccess
+
+      interface _GetPullRequestApprovalStatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPullRequestApprovalStatesOutput]
+        def approvals: () -> ::Array[Types::Approval]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#get_pull_request_approval_states-instance_method
+      def get_pull_request_approval_states: (
+                                              pull_request_id: ::String,
+                                              revision_id: ::String
+                                            ) -> _GetPullRequestApprovalStatesResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPullRequestApprovalStatesResponseSuccess
+
+      interface _GetPullRequestOverrideStateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPullRequestOverrideStateOutput]
+        def overridden: () -> bool
+        def overrider: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#get_pull_request_override_state-instance_method
+      def get_pull_request_override_state: (
+                                             pull_request_id: ::String,
+                                             revision_id: ::String
+                                           ) -> _GetPullRequestOverrideStateResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPullRequestOverrideStateResponseSuccess
+
+      interface _GetRepositoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRepositoryOutput]
+        def repository_metadata: () -> Types::RepositoryMetadata
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#get_repository-instance_method
+      def get_repository: (
+                            repository_name: ::String
+                          ) -> _GetRepositoryResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRepositoryResponseSuccess
+
+      interface _GetRepositoryTriggersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRepositoryTriggersOutput]
+        def configuration_id: () -> ::String
+        def triggers: () -> ::Array[Types::RepositoryTrigger]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#get_repository_triggers-instance_method
+      def get_repository_triggers: (
+                                     repository_name: ::String
+                                   ) -> _GetRepositoryTriggersResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRepositoryTriggersResponseSuccess
+
+      interface _ListApprovalRuleTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApprovalRuleTemplatesOutput]
+        def approval_rule_template_names: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#list_approval_rule_templates-instance_method
+      def list_approval_rule_templates: (
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListApprovalRuleTemplatesResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApprovalRuleTemplatesResponseSuccess
+
+      interface _ListAssociatedApprovalRuleTemplatesForRepositoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssociatedApprovalRuleTemplatesForRepositoryOutput]
+        def approval_rule_template_names: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#list_associated_approval_rule_templates_for_repository-instance_method
+      def list_associated_approval_rule_templates_for_repository: (
+                                                                    repository_name: ::String,
+                                                                    ?next_token: ::String,
+                                                                    ?max_results: ::Integer
+                                                                  ) -> _ListAssociatedApprovalRuleTemplatesForRepositoryResponseSuccess
+                                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssociatedApprovalRuleTemplatesForRepositoryResponseSuccess
+
+      interface _ListBranchesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBranchesOutput]
+        def branches: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#list_branches-instance_method
+      def list_branches: (
+                           repository_name: ::String,
+                           ?next_token: ::String
+                         ) -> _ListBranchesResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBranchesResponseSuccess
+
+      interface _ListFileCommitHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFileCommitHistoryResponse]
+        def revision_dag: () -> ::Array[Types::FileVersion]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#list_file_commit_history-instance_method
+      def list_file_commit_history: (
+                                      repository_name: ::String,
+                                      ?commit_specifier: ::String,
+                                      file_path: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListFileCommitHistoryResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFileCommitHistoryResponseSuccess
+
+      interface _ListPullRequestsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPullRequestsOutput]
+        def pull_request_ids: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#list_pull_requests-instance_method
+      def list_pull_requests: (
+                                repository_name: ::String,
+                                ?author_arn: ::String,
+                                ?pull_request_status: ("OPEN" | "CLOSED"),
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _ListPullRequestsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPullRequestsResponseSuccess
+
+      interface _ListRepositoriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRepositoriesOutput]
+        def repositories: () -> ::Array[Types::RepositoryNameIdPair]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#list_repositories-instance_method
+      def list_repositories: (
+                               ?next_token: ::String,
+                               ?sort_by: ("repositoryName" | "lastModifiedDate"),
+                               ?order: ("ascending" | "descending")
+                             ) -> _ListRepositoriesResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRepositoriesResponseSuccess
+
+      interface _ListRepositoriesForApprovalRuleTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRepositoriesForApprovalRuleTemplateOutput]
+        def repository_names: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#list_repositories_for_approval_rule_template-instance_method
+      def list_repositories_for_approval_rule_template: (
+                                                          approval_rule_template_name: ::String,
+                                                          ?next_token: ::String,
+                                                          ?max_results: ::Integer
+                                                        ) -> _ListRepositoriesForApprovalRuleTemplateResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRepositoriesForApprovalRuleTemplateResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Hash[::String, ::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String,
+                                    ?next_token: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _MergeBranchesByFastForwardResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::MergeBranchesByFastForwardOutput]
+        def commit_id: () -> ::String
+        def tree_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#merge_branches_by_fast_forward-instance_method
+      def merge_branches_by_fast_forward: (
+                                            repository_name: ::String,
+                                            source_commit_specifier: ::String,
+                                            destination_commit_specifier: ::String,
+                                            ?target_branch: ::String
+                                          ) -> _MergeBranchesByFastForwardResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _MergeBranchesByFastForwardResponseSuccess
+
+      interface _MergeBranchesBySquashResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::MergeBranchesBySquashOutput]
+        def commit_id: () -> ::String
+        def tree_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#merge_branches_by_squash-instance_method
+      def merge_branches_by_squash: (
+                                      repository_name: ::String,
+                                      source_commit_specifier: ::String,
+                                      destination_commit_specifier: ::String,
+                                      ?target_branch: ::String,
+                                      ?conflict_detail_level: ("FILE_LEVEL" | "LINE_LEVEL"),
+                                      ?conflict_resolution_strategy: ("NONE" | "ACCEPT_SOURCE" | "ACCEPT_DESTINATION" | "AUTOMERGE"),
+                                      ?author_name: ::String,
+                                      ?email: ::String,
+                                      ?commit_message: ::String,
+                                      ?keep_empty_folders: bool,
+                                      ?conflict_resolution: {
+                                        replace_contents: Array[
+                                          {
+                                            file_path: ::String,
+                                            replacement_type: ("KEEP_BASE" | "KEEP_SOURCE" | "KEEP_DESTINATION" | "USE_NEW_CONTENT"),
+                                            content: ::String?,
+                                            file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")?
+                                          },
+                                        ]?,
+                                        delete_files: Array[
+                                          {
+                                            file_path: ::String
+                                          },
+                                        ]?,
+                                        set_file_modes: Array[
+                                          {
+                                            file_path: ::String,
+                                            file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")
+                                          },
+                                        ]?
+                                      }
+                                    ) -> _MergeBranchesBySquashResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _MergeBranchesBySquashResponseSuccess
+
+      interface _MergeBranchesByThreeWayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::MergeBranchesByThreeWayOutput]
+        def commit_id: () -> ::String
+        def tree_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#merge_branches_by_three_way-instance_method
+      def merge_branches_by_three_way: (
+                                         repository_name: ::String,
+                                         source_commit_specifier: ::String,
+                                         destination_commit_specifier: ::String,
+                                         ?target_branch: ::String,
+                                         ?conflict_detail_level: ("FILE_LEVEL" | "LINE_LEVEL"),
+                                         ?conflict_resolution_strategy: ("NONE" | "ACCEPT_SOURCE" | "ACCEPT_DESTINATION" | "AUTOMERGE"),
+                                         ?author_name: ::String,
+                                         ?email: ::String,
+                                         ?commit_message: ::String,
+                                         ?keep_empty_folders: bool,
+                                         ?conflict_resolution: {
+                                           replace_contents: Array[
+                                             {
+                                               file_path: ::String,
+                                               replacement_type: ("KEEP_BASE" | "KEEP_SOURCE" | "KEEP_DESTINATION" | "USE_NEW_CONTENT"),
+                                               content: ::String?,
+                                               file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")?
+                                             },
+                                           ]?,
+                                           delete_files: Array[
+                                             {
+                                               file_path: ::String
+                                             },
+                                           ]?,
+                                           set_file_modes: Array[
+                                             {
+                                               file_path: ::String,
+                                               file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")
+                                             },
+                                           ]?
+                                         }
+                                       ) -> _MergeBranchesByThreeWayResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _MergeBranchesByThreeWayResponseSuccess
+
+      interface _MergePullRequestByFastForwardResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::MergePullRequestByFastForwardOutput]
+        def pull_request: () -> Types::PullRequest
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#merge_pull_request_by_fast_forward-instance_method
+      def merge_pull_request_by_fast_forward: (
+                                                pull_request_id: ::String,
+                                                repository_name: ::String,
+                                                ?source_commit_id: ::String
+                                              ) -> _MergePullRequestByFastForwardResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _MergePullRequestByFastForwardResponseSuccess
+
+      interface _MergePullRequestBySquashResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::MergePullRequestBySquashOutput]
+        def pull_request: () -> Types::PullRequest
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#merge_pull_request_by_squash-instance_method
+      def merge_pull_request_by_squash: (
+                                          pull_request_id: ::String,
+                                          repository_name: ::String,
+                                          ?source_commit_id: ::String,
+                                          ?conflict_detail_level: ("FILE_LEVEL" | "LINE_LEVEL"),
+                                          ?conflict_resolution_strategy: ("NONE" | "ACCEPT_SOURCE" | "ACCEPT_DESTINATION" | "AUTOMERGE"),
+                                          ?commit_message: ::String,
+                                          ?author_name: ::String,
+                                          ?email: ::String,
+                                          ?keep_empty_folders: bool,
+                                          ?conflict_resolution: {
+                                            replace_contents: Array[
+                                              {
+                                                file_path: ::String,
+                                                replacement_type: ("KEEP_BASE" | "KEEP_SOURCE" | "KEEP_DESTINATION" | "USE_NEW_CONTENT"),
+                                                content: ::String?,
+                                                file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")?
+                                              },
+                                            ]?,
+                                            delete_files: Array[
+                                              {
+                                                file_path: ::String
+                                              },
+                                            ]?,
+                                            set_file_modes: Array[
+                                              {
+                                                file_path: ::String,
+                                                file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")
+                                              },
+                                            ]?
+                                          }
+                                        ) -> _MergePullRequestBySquashResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _MergePullRequestBySquashResponseSuccess
+
+      interface _MergePullRequestByThreeWayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::MergePullRequestByThreeWayOutput]
+        def pull_request: () -> Types::PullRequest
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#merge_pull_request_by_three_way-instance_method
+      def merge_pull_request_by_three_way: (
+                                             pull_request_id: ::String,
+                                             repository_name: ::String,
+                                             ?source_commit_id: ::String,
+                                             ?conflict_detail_level: ("FILE_LEVEL" | "LINE_LEVEL"),
+                                             ?conflict_resolution_strategy: ("NONE" | "ACCEPT_SOURCE" | "ACCEPT_DESTINATION" | "AUTOMERGE"),
+                                             ?commit_message: ::String,
+                                             ?author_name: ::String,
+                                             ?email: ::String,
+                                             ?keep_empty_folders: bool,
+                                             ?conflict_resolution: {
+                                               replace_contents: Array[
+                                                 {
+                                                   file_path: ::String,
+                                                   replacement_type: ("KEEP_BASE" | "KEEP_SOURCE" | "KEEP_DESTINATION" | "USE_NEW_CONTENT"),
+                                                   content: ::String?,
+                                                   file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")?
+                                                 },
+                                               ]?,
+                                               delete_files: Array[
+                                                 {
+                                                   file_path: ::String
+                                                 },
+                                               ]?,
+                                               set_file_modes: Array[
+                                                 {
+                                                   file_path: ::String,
+                                                   file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")
+                                                 },
+                                               ]?
+                                             }
+                                           ) -> _MergePullRequestByThreeWayResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _MergePullRequestByThreeWayResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#override_pull_request_approval_rules-instance_method
+      def override_pull_request_approval_rules: (
+                                                  pull_request_id: ::String,
+                                                  revision_id: ::String,
+                                                  override_status: ("OVERRIDE" | "REVOKE")
+                                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _PostCommentForComparedCommitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PostCommentForComparedCommitOutput]
+        def repository_name: () -> ::String
+        def before_commit_id: () -> ::String
+        def after_commit_id: () -> ::String
+        def before_blob_id: () -> ::String
+        def after_blob_id: () -> ::String
+        def location: () -> Types::Location
+        def comment: () -> Types::Comment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#post_comment_for_compared_commit-instance_method
+      def post_comment_for_compared_commit: (
+                                              repository_name: ::String,
+                                              ?before_commit_id: ::String,
+                                              after_commit_id: ::String,
+                                              ?location: {
+                                                file_path: ::String?,
+                                                file_position: ::Integer?,
+                                                relative_file_version: ("BEFORE" | "AFTER")?
+                                              },
+                                              content: ::String,
+                                              ?client_request_token: ::String
+                                            ) -> _PostCommentForComparedCommitResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PostCommentForComparedCommitResponseSuccess
+
+      interface _PostCommentForPullRequestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PostCommentForPullRequestOutput]
+        def repository_name: () -> ::String
+        def pull_request_id: () -> ::String
+        def before_commit_id: () -> ::String
+        def after_commit_id: () -> ::String
+        def before_blob_id: () -> ::String
+        def after_blob_id: () -> ::String
+        def location: () -> Types::Location
+        def comment: () -> Types::Comment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#post_comment_for_pull_request-instance_method
+      def post_comment_for_pull_request: (
+                                           pull_request_id: ::String,
+                                           repository_name: ::String,
+                                           before_commit_id: ::String,
+                                           after_commit_id: ::String,
+                                           ?location: {
+                                             file_path: ::String?,
+                                             file_position: ::Integer?,
+                                             relative_file_version: ("BEFORE" | "AFTER")?
+                                           },
+                                           content: ::String,
+                                           ?client_request_token: ::String
+                                         ) -> _PostCommentForPullRequestResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PostCommentForPullRequestResponseSuccess
+
+      interface _PostCommentReplyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PostCommentReplyOutput]
+        def comment: () -> Types::Comment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#post_comment_reply-instance_method
+      def post_comment_reply: (
+                                in_reply_to: ::String,
+                                ?client_request_token: ::String,
+                                content: ::String
+                              ) -> _PostCommentReplyResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PostCommentReplyResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#put_comment_reaction-instance_method
+      def put_comment_reaction: (
+                                  comment_id: ::String,
+                                  reaction_value: ::String
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _PutFileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutFileOutput]
+        def commit_id: () -> ::String
+        def blob_id: () -> ::String
+        def tree_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#put_file-instance_method
+      def put_file: (
+                      repository_name: ::String,
+                      branch_name: ::String,
+                      file_content: ::String,
+                      file_path: ::String,
+                      ?file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK"),
+                      ?parent_commit_id: ::String,
+                      ?commit_message: ::String,
+                      ?name: ::String,
+                      ?email: ::String
+                    ) -> _PutFileResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutFileResponseSuccess
+
+      interface _PutRepositoryTriggersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutRepositoryTriggersOutput]
+        def configuration_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#put_repository_triggers-instance_method
+      def put_repository_triggers: (
+                                     repository_name: ::String,
+                                     triggers: Array[
+                                       {
+                                         name: ::String,
+                                         destination_arn: ::String,
+                                         custom_data: ::String?,
+                                         branches: Array[::String]?,
+                                         events: Array[("all" | "updateReference" | "createReference" | "deleteReference")]
+                                       },
+                                     ]
+                                   ) -> _PutRepositoryTriggersResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutRepositoryTriggersResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _TestRepositoryTriggersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TestRepositoryTriggersOutput]
+        def successful_executions: () -> ::Array[::String]
+        def failed_executions: () -> ::Array[Types::RepositoryTriggerExecutionFailure]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#test_repository_triggers-instance_method
+      def test_repository_triggers: (
+                                      repository_name: ::String,
+                                      triggers: Array[
+                                        {
+                                          name: ::String,
+                                          destination_arn: ::String,
+                                          custom_data: ::String?,
+                                          branches: Array[::String]?,
+                                          events: Array[("all" | "updateReference" | "createReference" | "deleteReference")]
+                                        },
+                                      ]
+                                    ) -> _TestRepositoryTriggersResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestRepositoryTriggersResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateApprovalRuleTemplateContentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateApprovalRuleTemplateContentOutput]
+        def approval_rule_template: () -> Types::ApprovalRuleTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#update_approval_rule_template_content-instance_method
+      def update_approval_rule_template_content: (
+                                                   approval_rule_template_name: ::String,
+                                                   new_rule_content: ::String,
+                                                   ?existing_rule_content_sha_256: ::String
+                                                 ) -> _UpdateApprovalRuleTemplateContentResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApprovalRuleTemplateContentResponseSuccess
+
+      interface _UpdateApprovalRuleTemplateDescriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateApprovalRuleTemplateDescriptionOutput]
+        def approval_rule_template: () -> Types::ApprovalRuleTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#update_approval_rule_template_description-instance_method
+      def update_approval_rule_template_description: (
+                                                       approval_rule_template_name: ::String,
+                                                       approval_rule_template_description: ::String
+                                                     ) -> _UpdateApprovalRuleTemplateDescriptionResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApprovalRuleTemplateDescriptionResponseSuccess
+
+      interface _UpdateApprovalRuleTemplateNameResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateApprovalRuleTemplateNameOutput]
+        def approval_rule_template: () -> Types::ApprovalRuleTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#update_approval_rule_template_name-instance_method
+      def update_approval_rule_template_name: (
+                                                old_approval_rule_template_name: ::String,
+                                                new_approval_rule_template_name: ::String
+                                              ) -> _UpdateApprovalRuleTemplateNameResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApprovalRuleTemplateNameResponseSuccess
+
+      interface _UpdateCommentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCommentOutput]
+        def comment: () -> Types::Comment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#update_comment-instance_method
+      def update_comment: (
+                            comment_id: ::String,
+                            content: ::String
+                          ) -> _UpdateCommentResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCommentResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#update_default_branch-instance_method
+      def update_default_branch: (
+                                   repository_name: ::String,
+                                   default_branch_name: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdatePullRequestApprovalRuleContentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePullRequestApprovalRuleContentOutput]
+        def approval_rule: () -> Types::ApprovalRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#update_pull_request_approval_rule_content-instance_method
+      def update_pull_request_approval_rule_content: (
+                                                       pull_request_id: ::String,
+                                                       approval_rule_name: ::String,
+                                                       ?existing_rule_content_sha_256: ::String,
+                                                       new_rule_content: ::String
+                                                     ) -> _UpdatePullRequestApprovalRuleContentResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePullRequestApprovalRuleContentResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#update_pull_request_approval_state-instance_method
+      def update_pull_request_approval_state: (
+                                                pull_request_id: ::String,
+                                                revision_id: ::String,
+                                                approval_state: ("APPROVE" | "REVOKE")
+                                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdatePullRequestDescriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePullRequestDescriptionOutput]
+        def pull_request: () -> Types::PullRequest
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#update_pull_request_description-instance_method
+      def update_pull_request_description: (
+                                             pull_request_id: ::String,
+                                             description: ::String
+                                           ) -> _UpdatePullRequestDescriptionResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePullRequestDescriptionResponseSuccess
+
+      interface _UpdatePullRequestStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePullRequestStatusOutput]
+        def pull_request: () -> Types::PullRequest
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#update_pull_request_status-instance_method
+      def update_pull_request_status: (
+                                        pull_request_id: ::String,
+                                        pull_request_status: ("OPEN" | "CLOSED")
+                                      ) -> _UpdatePullRequestStatusResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePullRequestStatusResponseSuccess
+
+      interface _UpdatePullRequestTitleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePullRequestTitleOutput]
+        def pull_request: () -> Types::PullRequest
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#update_pull_request_title-instance_method
+      def update_pull_request_title: (
+                                       pull_request_id: ::String,
+                                       title: ::String
+                                     ) -> _UpdatePullRequestTitleResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePullRequestTitleResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#update_repository_description-instance_method
+      def update_repository_description: (
+                                           repository_name: ::String,
+                                           ?repository_description: ::String
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateRepositoryEncryptionKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRepositoryEncryptionKeyOutput]
+        def repository_id: () -> ::String
+        def kms_key_id: () -> ::String
+        def original_kms_key_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#update_repository_encryption_key-instance_method
+      def update_repository_encryption_key: (
+                                              repository_name: ::String,
+                                              kms_key_id: ::String
+                                            ) -> _UpdateRepositoryEncryptionKeyResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRepositoryEncryptionKeyResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#update_repository_name-instance_method
+      def update_repository_name: (
+                                    old_name: ::String,
+                                    new_name: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+    end
+  end
+end
+

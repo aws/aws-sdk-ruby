@@ -1,0 +1,524 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RDS
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html
+    class DBCluster
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#initialize-instance_method
+      def initialize: (String id, Hash[Symbol, untyped] options) -> void
+                    | (id: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#id-instance_method
+      def id: () -> String
+      alias db_cluster_identifier id
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#allocated_storage-instance_method
+      def allocated_storage: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#availability_zones-instance_method
+      def availability_zones: () -> ::Array[::String]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#backup_retention_period-instance_method
+      def backup_retention_period: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#character_set_name-instance_method
+      def character_set_name: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#database_name-instance_method
+      def database_name: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#db_cluster_parameter_group-instance_method
+      def db_cluster_parameter_group: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#db_subnet_group-instance_method
+      def db_subnet_group: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#status-instance_method
+      def status: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#automatic_restart_time-instance_method
+      def automatic_restart_time: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#percent_progress-instance_method
+      def percent_progress: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#earliest_restorable_time-instance_method
+      def earliest_restorable_time: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#endpoint-instance_method
+      def endpoint: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#reader_endpoint-instance_method
+      def reader_endpoint: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#custom_endpoints-instance_method
+      def custom_endpoints: () -> ::Array[::String]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#multi_az-instance_method
+      def multi_az: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#engine-instance_method
+      def engine: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#engine_version-instance_method
+      def engine_version: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#latest_restorable_time-instance_method
+      def latest_restorable_time: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#port-instance_method
+      def port: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#master_username-instance_method
+      def master_username: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#db_cluster_option_group_memberships-instance_method
+      def db_cluster_option_group_memberships: () -> ::Array[Types::DBClusterOptionGroupStatus]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#preferred_backup_window-instance_method
+      def preferred_backup_window: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#preferred_maintenance_window-instance_method
+      def preferred_maintenance_window: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#replication_source_identifier-instance_method
+      def replication_source_identifier: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#read_replica_identifiers-instance_method
+      def read_replica_identifiers: () -> ::Array[::String]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#status_infos-instance_method
+      def status_infos: () -> ::Array[Types::DBClusterStatusInfo]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#db_cluster_members-instance_method
+      def db_cluster_members: () -> ::Array[Types::DBClusterMember]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#vpc_security_groups-instance_method
+      def vpc_security_groups: () -> ::Array[Types::VpcSecurityGroupMembership]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#hosted_zone_id-instance_method
+      def hosted_zone_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#storage_encrypted-instance_method
+      def storage_encrypted: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#kms_key_id-instance_method
+      def kms_key_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#db_cluster_resource_id-instance_method
+      def db_cluster_resource_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#db_cluster_arn-instance_method
+      def db_cluster_arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#associated_roles-instance_method
+      def associated_roles: () -> ::Array[Types::DBClusterRole]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#iam_database_authentication_enabled-instance_method
+      def iam_database_authentication_enabled: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#clone_group_id-instance_method
+      def clone_group_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#cluster_create_time-instance_method
+      def cluster_create_time: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#earliest_backtrack_time-instance_method
+      def earliest_backtrack_time: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#backtrack_window-instance_method
+      def backtrack_window: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#backtrack_consumed_change_records-instance_method
+      def backtrack_consumed_change_records: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#enabled_cloudwatch_logs_exports-instance_method
+      def enabled_cloudwatch_logs_exports: () -> ::Array[::String]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#capacity-instance_method
+      def capacity: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#engine_mode-instance_method
+      def engine_mode: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#scaling_configuration_info-instance_method
+      def scaling_configuration_info: () -> Types::ScalingConfigurationInfo
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#rds_custom_cluster_configuration-instance_method
+      def rds_custom_cluster_configuration: () -> Types::RdsCustomClusterConfiguration
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#deletion_protection-instance_method
+      def deletion_protection: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#http_endpoint_enabled-instance_method
+      def http_endpoint_enabled: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#activity_stream_mode-instance_method
+      def activity_stream_mode: () -> ("sync" | "async")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#activity_stream_status-instance_method
+      def activity_stream_status: () -> ("stopped" | "starting" | "started" | "stopping")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#activity_stream_kms_key_id-instance_method
+      def activity_stream_kms_key_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#activity_stream_kinesis_stream_name-instance_method
+      def activity_stream_kinesis_stream_name: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#copy_tags_to_snapshot-instance_method
+      def copy_tags_to_snapshot: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#cross_account_clone-instance_method
+      def cross_account_clone: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#domain_memberships-instance_method
+      def domain_memberships: () -> ::Array[Types::DomainMembership]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#tag_list-instance_method
+      def tag_list: () -> ::Array[Types::Tag]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#global_write_forwarding_status-instance_method
+      def global_write_forwarding_status: () -> ("enabled" | "disabled" | "enabling" | "disabling" | "unknown")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#global_write_forwarding_requested-instance_method
+      def global_write_forwarding_requested: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#pending_modified_values-instance_method
+      def pending_modified_values: () -> Types::ClusterPendingModifiedValues
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#db_cluster_instance_class-instance_method
+      def db_cluster_instance_class: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#storage_type-instance_method
+      def storage_type: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#iops-instance_method
+      def iops: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#publicly_accessible-instance_method
+      def publicly_accessible: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#auto_minor_version_upgrade-instance_method
+      def auto_minor_version_upgrade: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#monitoring_interval-instance_method
+      def monitoring_interval: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#monitoring_role_arn-instance_method
+      def monitoring_role_arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#performance_insights_enabled-instance_method
+      def performance_insights_enabled: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#performance_insights_kms_key_id-instance_method
+      def performance_insights_kms_key_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#performance_insights_retention_period-instance_method
+      def performance_insights_retention_period: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#serverless_v2_scaling_configuration-instance_method
+      def serverless_v2_scaling_configuration: () -> Types::ServerlessV2ScalingConfigurationInfo
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#network_type-instance_method
+      def network_type: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#db_system_id-instance_method
+      def db_system_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#master_user_secret-instance_method
+      def master_user_secret: () -> Types::MasterUserSecret
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#io_optimized_next_allowed_modification_time-instance_method
+      def io_optimized_next_allowed_modification_time: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#local_write_forwarding_status-instance_method
+      def local_write_forwarding_status: () -> ("enabled" | "disabled" | "enabling" | "disabling" | "requested")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#aws_backup_recovery_point_arn-instance_method
+      def aws_backup_recovery_point_arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#limitless_database-instance_method
+      def limitless_database: () -> Types::LimitlessDatabase
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#data-instance_method
+      def data: () -> Types::DBCluster
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#create-instance_method
+      def create: (
+                    ?availability_zones: Array[::String],
+                    ?backup_retention_period: ::Integer,
+                    ?character_set_name: ::String,
+                    ?database_name: ::String,
+                    ?db_cluster_parameter_group_name: ::String,
+                    ?vpc_security_group_ids: Array[::String],
+                    ?db_subnet_group_name: ::String,
+                    engine: ::String,
+                    ?engine_version: ::String,
+                    ?port: ::Integer,
+                    ?master_username: ::String,
+                    ?master_user_password: ::String,
+                    ?option_group_name: ::String,
+                    ?preferred_backup_window: ::String,
+                    ?preferred_maintenance_window: ::String,
+                    ?replication_source_identifier: ::String,
+                    ?tags: Array[
+                      {
+                        key: ::String?,
+                        value: ::String?
+                      },
+                    ],
+                    ?storage_encrypted: bool,
+                    ?kms_key_id: ::String,
+                    ?pre_signed_url: ::String,
+                    ?enable_iam_database_authentication: bool,
+                    ?backtrack_window: ::Integer,
+                    ?enable_cloudwatch_logs_exports: Array[::String],
+                    ?engine_mode: ::String,
+                    ?scaling_configuration: {
+                      min_capacity: ::Integer?,
+                      max_capacity: ::Integer?,
+                      auto_pause: bool?,
+                      seconds_until_auto_pause: ::Integer?,
+                      timeout_action: ::String?,
+                      seconds_before_timeout: ::Integer?
+                    },
+                    ?rds_custom_cluster_configuration: {
+                      interconnect_subnet_id: ::String?,
+                      transit_gateway_multicast_domain_id: ::String?,
+                      replica_mode: ("open-read-only" | "mounted")?
+                    },
+                    ?deletion_protection: bool,
+                    ?global_cluster_identifier: ::String,
+                    ?enable_http_endpoint: bool,
+                    ?copy_tags_to_snapshot: bool,
+                    ?domain: ::String,
+                    ?domain_iam_role_name: ::String,
+                    ?enable_global_write_forwarding: bool,
+                    ?db_cluster_instance_class: ::String,
+                    ?allocated_storage: ::Integer,
+                    ?storage_type: ::String,
+                    ?iops: ::Integer,
+                    ?publicly_accessible: bool,
+                    ?auto_minor_version_upgrade: bool,
+                    ?monitoring_interval: ::Integer,
+                    ?monitoring_role_arn: ::String,
+                    ?enable_performance_insights: bool,
+                    ?performance_insights_kms_key_id: ::String,
+                    ?performance_insights_retention_period: ::Integer,
+                    ?enable_limitless_database: bool,
+                    ?serverless_v2_scaling_configuration: {
+                      min_capacity: ::Float?,
+                      max_capacity: ::Float?
+                    },
+                    ?network_type: ::String,
+                    ?db_system_id: ::String,
+                    ?manage_master_user_password: bool,
+                    ?master_user_secret_kms_key_id: ::String,
+                    ?enable_local_write_forwarding: bool,
+                    ?source_region: ::String
+                  ) -> DBCluster
+                | (?Hash[Symbol, untyped]) -> DBCluster
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#create_snapshot-instance_method
+      def create_snapshot: (
+                             db_cluster_snapshot_identifier: ::String,
+                             ?tags: Array[
+                               {
+                                 key: ::String?,
+                                 value: ::String?
+                               },
+                             ]
+                           ) -> DBClusterSnapshot
+                         | (?Hash[Symbol, untyped]) -> DBClusterSnapshot
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#delete-instance_method
+      def delete: (
+                    ?skip_final_snapshot: bool,
+                    ?final_db_snapshot_identifier: ::String,
+                    ?delete_automated_backups: bool
+                  ) -> DBCluster
+                | (?Hash[Symbol, untyped]) -> DBCluster
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#failover-instance_method
+      def failover: (
+                      ?target_db_instance_identifier: ::String
+                    ) -> DBCluster
+                  | (?Hash[Symbol, untyped]) -> DBCluster
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#modify-instance_method
+      def modify: (
+                    ?new_db_cluster_identifier: ::String,
+                    ?apply_immediately: bool,
+                    ?backup_retention_period: ::Integer,
+                    ?db_cluster_parameter_group_name: ::String,
+                    ?vpc_security_group_ids: Array[::String],
+                    ?port: ::Integer,
+                    ?master_user_password: ::String,
+                    ?option_group_name: ::String,
+                    ?preferred_backup_window: ::String,
+                    ?preferred_maintenance_window: ::String,
+                    ?enable_iam_database_authentication: bool,
+                    ?backtrack_window: ::Integer,
+                    ?cloudwatch_logs_export_configuration: {
+                      enable_log_types: Array[::String]?,
+                      disable_log_types: Array[::String]?
+                    },
+                    ?engine_version: ::String,
+                    ?allow_major_version_upgrade: bool,
+                    ?db_instance_parameter_group_name: ::String,
+                    ?domain: ::String,
+                    ?domain_iam_role_name: ::String,
+                    ?scaling_configuration: {
+                      min_capacity: ::Integer?,
+                      max_capacity: ::Integer?,
+                      auto_pause: bool?,
+                      seconds_until_auto_pause: ::Integer?,
+                      timeout_action: ::String?,
+                      seconds_before_timeout: ::Integer?
+                    },
+                    ?deletion_protection: bool,
+                    ?enable_http_endpoint: bool,
+                    ?copy_tags_to_snapshot: bool,
+                    ?enable_global_write_forwarding: bool,
+                    ?db_cluster_instance_class: ::String,
+                    ?allocated_storage: ::Integer,
+                    ?storage_type: ::String,
+                    ?iops: ::Integer,
+                    ?auto_minor_version_upgrade: bool,
+                    ?monitoring_interval: ::Integer,
+                    ?monitoring_role_arn: ::String,
+                    ?enable_performance_insights: bool,
+                    ?performance_insights_kms_key_id: ::String,
+                    ?performance_insights_retention_period: ::Integer,
+                    ?serverless_v2_scaling_configuration: {
+                      min_capacity: ::Float?,
+                      max_capacity: ::Float?
+                    },
+                    ?network_type: ::String,
+                    ?manage_master_user_password: bool,
+                    ?rotate_master_user_password: bool,
+                    ?master_user_secret_kms_key_id: ::String,
+                    ?engine_mode: ::String,
+                    ?allow_engine_mode_change: bool,
+                    ?enable_local_write_forwarding: bool,
+                    ?aws_backup_recovery_point_arn: ::String,
+                    ?enable_limitless_database: bool
+                  ) -> DBCluster
+                | (?Hash[Symbol, untyped]) -> DBCluster
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#restore-instance_method
+      def restore: (
+                     db_cluster_identifier: ::String,
+                     ?restore_type: ::String,
+                     ?restore_to_time: ::Time,
+                     ?use_latest_restorable_time: bool,
+                     ?port: ::Integer,
+                     ?db_subnet_group_name: ::String,
+                     ?option_group_name: ::String,
+                     ?vpc_security_group_ids: Array[::String],
+                     ?tags: Array[
+                       {
+                         key: ::String?,
+                         value: ::String?
+                       },
+                     ],
+                     ?kms_key_id: ::String,
+                     ?enable_iam_database_authentication: bool,
+                     ?backtrack_window: ::Integer,
+                     ?enable_cloudwatch_logs_exports: Array[::String],
+                     ?db_cluster_parameter_group_name: ::String,
+                     ?deletion_protection: bool,
+                     ?copy_tags_to_snapshot: bool,
+                     ?domain: ::String,
+                     ?domain_iam_role_name: ::String,
+                     ?scaling_configuration: {
+                       min_capacity: ::Integer?,
+                       max_capacity: ::Integer?,
+                       auto_pause: bool?,
+                       seconds_until_auto_pause: ::Integer?,
+                       timeout_action: ::String?,
+                       seconds_before_timeout: ::Integer?
+                     },
+                     ?engine_mode: ::String,
+                     ?db_cluster_instance_class: ::String,
+                     ?storage_type: ::String,
+                     ?publicly_accessible: bool,
+                     ?iops: ::Integer,
+                     ?serverless_v2_scaling_configuration: {
+                       min_capacity: ::Float?,
+                       max_capacity: ::Float?
+                     },
+                     ?network_type: ::String,
+                     ?source_db_cluster_resource_id: ::String,
+                     ?rds_custom_cluster_configuration: {
+                       interconnect_subnet_id: ::String?,
+                       transit_gateway_multicast_domain_id: ::String?,
+                       replica_mode: ("open-read-only" | "mounted")?
+                     }
+                   ) -> DBCluster
+                 | (?Hash[Symbol, untyped]) -> DBCluster
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#events-instance_method
+      def events: (
+                    ?start_time: ::Time,
+                    ?end_time: ::Time,
+                    ?duration: ::Integer,
+                    ?event_categories: Array[::String],
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ]
+                  ) -> Event::Collection
+                | (?Hash[Symbol, untyped]) -> Event::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#members-instance_method
+      def members: () -> DBInstance::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#option_groups-instance_method
+      def option_groups: () -> OptionGroup::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#parameter_group-instance_method
+      def parameter_group: () -> DBClusterParameterGroup?
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#snapshots-instance_method
+      def snapshots: (
+                       ?db_cluster_snapshot_identifier: ::String,
+                       ?snapshot_type: ::String,
+                       ?filters: Array[
+                         {
+                           name: ::String,
+                           values: Array[::String]
+                         },
+                       ],
+                       ?include_shared: bool,
+                       ?include_public: bool,
+                       ?db_cluster_resource_id: ::String
+                     ) -> DBClusterSnapshot::Collection
+                   | (?Hash[Symbol, untyped]) -> DBClusterSnapshot::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#subnet_group-instance_method
+      def subnet_group: () -> DBSubnetGroup?
+
+      class Collection < ::Aws::Resources::Collection[DBCluster]
+      end
+    end
+  end
+end

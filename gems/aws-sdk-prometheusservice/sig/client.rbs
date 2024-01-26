@@ -1,0 +1,402 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module PrometheusService
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateAlertManagerDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAlertManagerDefinitionResponse]
+        def status: () -> Types::AlertManagerDefinitionStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#create_alert_manager_definition-instance_method
+      def create_alert_manager_definition: (
+                                             workspace_id: ::String,
+                                             data: ::String,
+                                             ?client_token: ::String
+                                           ) -> _CreateAlertManagerDefinitionResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAlertManagerDefinitionResponseSuccess
+
+      interface _CreateLoggingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLoggingConfigurationResponse]
+        def status: () -> Types::LoggingConfigurationStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#create_logging_configuration-instance_method
+      def create_logging_configuration: (
+                                          workspace_id: ::String,
+                                          log_group_arn: ::String,
+                                          ?client_token: ::String
+                                        ) -> _CreateLoggingConfigurationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLoggingConfigurationResponseSuccess
+
+      interface _CreateRuleGroupsNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRuleGroupsNamespaceResponse]
+        def name: () -> ::String
+        def arn: () -> ::String
+        def status: () -> Types::RuleGroupsNamespaceStatus
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#create_rule_groups_namespace-instance_method
+      def create_rule_groups_namespace: (
+                                          workspace_id: ::String,
+                                          name: ::String,
+                                          data: ::String,
+                                          ?client_token: ::String,
+                                          ?tags: Hash[::String, ::String]
+                                        ) -> _CreateRuleGroupsNamespaceResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRuleGroupsNamespaceResponseSuccess
+
+      interface _CreateScraperResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateScraperResponse]
+        def scraper_id: () -> ::String
+        def arn: () -> ::String
+        def status: () -> Types::ScraperStatus
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#create_scraper-instance_method
+      def create_scraper: (
+                            ?alias: ::String,
+                            scrape_configuration: {
+                              configuration_blob: ::String?
+                            },
+                            source: {
+                              eks_configuration: {
+                                cluster_arn: ::String,
+                                security_group_ids: Array[::String]?,
+                                subnet_ids: Array[::String]
+                              }?
+                            },
+                            destination: {
+                              amp_configuration: {
+                                workspace_arn: ::String
+                              }?
+                            },
+                            ?client_token: ::String,
+                            ?tags: Hash[::String, ::String]
+                          ) -> _CreateScraperResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateScraperResponseSuccess
+
+      interface _CreateWorkspaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkspaceResponse]
+        def workspace_id: () -> ::String
+        def arn: () -> ::String
+        def status: () -> Types::WorkspaceStatus
+        def tags: () -> ::Hash[::String, ::String]
+        def kms_key_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#create_workspace-instance_method
+      def create_workspace: (
+                              ?alias: ::String,
+                              ?client_token: ::String,
+                              ?tags: Hash[::String, ::String],
+                              ?kms_key_arn: ::String
+                            ) -> _CreateWorkspaceResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkspaceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#delete_alert_manager_definition-instance_method
+      def delete_alert_manager_definition: (
+                                             workspace_id: ::String,
+                                             ?client_token: ::String
+                                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#delete_logging_configuration-instance_method
+      def delete_logging_configuration: (
+                                          workspace_id: ::String,
+                                          ?client_token: ::String
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#delete_rule_groups_namespace-instance_method
+      def delete_rule_groups_namespace: (
+                                          workspace_id: ::String,
+                                          name: ::String,
+                                          ?client_token: ::String
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteScraperResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteScraperResponse]
+        def scraper_id: () -> ::String
+        def status: () -> Types::ScraperStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#delete_scraper-instance_method
+      def delete_scraper: (
+                            scraper_id: ::String,
+                            ?client_token: ::String
+                          ) -> _DeleteScraperResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteScraperResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#delete_workspace-instance_method
+      def delete_workspace: (
+                              workspace_id: ::String,
+                              ?client_token: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeAlertManagerDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAlertManagerDefinitionResponse]
+        def alert_manager_definition: () -> Types::AlertManagerDefinitionDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#describe_alert_manager_definition-instance_method
+      def describe_alert_manager_definition: (
+                                               workspace_id: ::String
+                                             ) -> _DescribeAlertManagerDefinitionResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAlertManagerDefinitionResponseSuccess
+
+      interface _DescribeLoggingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLoggingConfigurationResponse]
+        def logging_configuration: () -> Types::LoggingConfigurationMetadata
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#describe_logging_configuration-instance_method
+      def describe_logging_configuration: (
+                                            workspace_id: ::String
+                                          ) -> _DescribeLoggingConfigurationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLoggingConfigurationResponseSuccess
+
+      interface _DescribeRuleGroupsNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRuleGroupsNamespaceResponse]
+        def rule_groups_namespace: () -> Types::RuleGroupsNamespaceDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#describe_rule_groups_namespace-instance_method
+      def describe_rule_groups_namespace: (
+                                            workspace_id: ::String,
+                                            name: ::String
+                                          ) -> _DescribeRuleGroupsNamespaceResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRuleGroupsNamespaceResponseSuccess
+
+      interface _DescribeScraperResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeScraperResponse]
+        def scraper: () -> Types::ScraperDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#describe_scraper-instance_method
+      def describe_scraper: (
+                              scraper_id: ::String
+                            ) -> _DescribeScraperResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeScraperResponseSuccess
+
+      interface _DescribeWorkspaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeWorkspaceResponse]
+        def workspace: () -> Types::WorkspaceDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#describe_workspace-instance_method
+      def describe_workspace: (
+                                workspace_id: ::String
+                              ) -> _DescribeWorkspaceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWorkspaceResponseSuccess
+
+      interface _GetDefaultScraperConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDefaultScraperConfigurationResponse]
+        def configuration: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#get_default_scraper_configuration-instance_method
+      def get_default_scraper_configuration: (
+                                             ) -> _GetDefaultScraperConfigurationResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDefaultScraperConfigurationResponseSuccess
+
+      interface _ListRuleGroupsNamespacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRuleGroupsNamespacesResponse]
+        def rule_groups_namespaces: () -> ::Array[Types::RuleGroupsNamespaceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#list_rule_groups_namespaces-instance_method
+      def list_rule_groups_namespaces: (
+                                         workspace_id: ::String,
+                                         ?name: ::String,
+                                         ?next_token: ::String,
+                                         ?max_results: ::Integer
+                                       ) -> _ListRuleGroupsNamespacesResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRuleGroupsNamespacesResponseSuccess
+
+      interface _ListScrapersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListScrapersResponse]
+        def scrapers: () -> ::Array[Types::ScraperSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#list_scrapers-instance_method
+      def list_scrapers: (
+                           ?filters: Hash[::String, Array[::String]],
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListScrapersResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListScrapersResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListWorkspacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkspacesResponse]
+        def workspaces: () -> ::Array[Types::WorkspaceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#list_workspaces-instance_method
+      def list_workspaces: (
+                             ?next_token: ::String,
+                             ?alias: ::String,
+                             ?max_results: ::Integer
+                           ) -> _ListWorkspacesResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkspacesResponseSuccess
+
+      interface _PutAlertManagerDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAlertManagerDefinitionResponse]
+        def status: () -> Types::AlertManagerDefinitionStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#put_alert_manager_definition-instance_method
+      def put_alert_manager_definition: (
+                                          workspace_id: ::String,
+                                          data: ::String,
+                                          ?client_token: ::String
+                                        ) -> _PutAlertManagerDefinitionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAlertManagerDefinitionResponseSuccess
+
+      interface _PutRuleGroupsNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutRuleGroupsNamespaceResponse]
+        def name: () -> ::String
+        def arn: () -> ::String
+        def status: () -> Types::RuleGroupsNamespaceStatus
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#put_rule_groups_namespace-instance_method
+      def put_rule_groups_namespace: (
+                                       workspace_id: ::String,
+                                       name: ::String,
+                                       data: ::String,
+                                       ?client_token: ::String
+                                     ) -> _PutRuleGroupsNamespaceResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutRuleGroupsNamespaceResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateLoggingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLoggingConfigurationResponse]
+        def status: () -> Types::LoggingConfigurationStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#update_logging_configuration-instance_method
+      def update_logging_configuration: (
+                                          workspace_id: ::String,
+                                          log_group_arn: ::String,
+                                          ?client_token: ::String
+                                        ) -> _UpdateLoggingConfigurationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLoggingConfigurationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#update_workspace_alias-instance_method
+      def update_workspace_alias: (
+                                    workspace_id: ::String,
+                                    ?alias: ::String,
+                                    ?client_token: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#wait_until-instance_method
+      def wait_until: (:scraper_active waiter_name, 
+                    scraper_id: ::String
+                  ) -> Client::_DescribeScraperResponseSuccess
+                    | (:scraper_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeScraperResponseSuccess
+                    | (:scraper_deleted waiter_name, 
+                    scraper_id: ::String
+                  ) -> Client::_DescribeScraperResponseSuccess
+                    | (:scraper_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeScraperResponseSuccess
+                    | (:workspace_active waiter_name, 
+                    workspace_id: ::String
+                  ) -> Client::_DescribeWorkspaceResponseSuccess
+                    | (:workspace_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeWorkspaceResponseSuccess
+                    | (:workspace_deleted waiter_name, 
+                    workspace_id: ::String
+                  ) -> Client::_DescribeWorkspaceResponseSuccess
+                    | (:workspace_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeWorkspaceResponseSuccess
+    end
+  end
+end
+

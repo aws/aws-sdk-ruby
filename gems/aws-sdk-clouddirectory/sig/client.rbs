@@ -1,0 +1,1767 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudDirectory
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AddFacetToObjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddFacetToObjectResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#add_facet_to_object-instance_method
+      def add_facet_to_object: (
+                                 directory_arn: ::String,
+                                 schema_facet: {
+                                   schema_arn: ::String?,
+                                   facet_name: ::String?
+                                 },
+                                 ?object_attribute_list: Array[
+                                   {
+                                     key: {
+                                       schema_arn: ::String,
+                                       facet_name: ::String,
+                                       name: ::String
+                                     },
+                                     value: {
+                                       string_value: ::String?,
+                                       binary_value: ::String?,
+                                       boolean_value: bool?,
+                                       number_value: ::String?,
+                                       datetime_value: ::Time?
+                                     }
+                                   },
+                                 ],
+                                 object_reference: {
+                                   selector: ::String?
+                                 }
+                               ) -> _AddFacetToObjectResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddFacetToObjectResponseSuccess
+
+      interface _ApplySchemaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ApplySchemaResponse]
+        def applied_schema_arn: () -> ::String
+        def directory_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#apply_schema-instance_method
+      def apply_schema: (
+                          published_schema_arn: ::String,
+                          directory_arn: ::String
+                        ) -> _ApplySchemaResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ApplySchemaResponseSuccess
+
+      interface _AttachObjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AttachObjectResponse]
+        def attached_object_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#attach_object-instance_method
+      def attach_object: (
+                           directory_arn: ::String,
+                           parent_reference: {
+                             selector: ::String?
+                           },
+                           child_reference: {
+                             selector: ::String?
+                           },
+                           link_name: ::String
+                         ) -> _AttachObjectResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AttachObjectResponseSuccess
+
+      interface _AttachPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AttachPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#attach_policy-instance_method
+      def attach_policy: (
+                           directory_arn: ::String,
+                           policy_reference: {
+                             selector: ::String?
+                           },
+                           object_reference: {
+                             selector: ::String?
+                           }
+                         ) -> _AttachPolicyResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AttachPolicyResponseSuccess
+
+      interface _AttachToIndexResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AttachToIndexResponse]
+        def attached_object_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#attach_to_index-instance_method
+      def attach_to_index: (
+                             directory_arn: ::String,
+                             index_reference: {
+                               selector: ::String?
+                             },
+                             target_reference: {
+                               selector: ::String?
+                             }
+                           ) -> _AttachToIndexResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AttachToIndexResponseSuccess
+
+      interface _AttachTypedLinkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AttachTypedLinkResponse]
+        def typed_link_specifier: () -> Types::TypedLinkSpecifier
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#attach_typed_link-instance_method
+      def attach_typed_link: (
+                               directory_arn: ::String,
+                               source_object_reference: {
+                                 selector: ::String?
+                               },
+                               target_object_reference: {
+                                 selector: ::String?
+                               },
+                               typed_link_facet: {
+                                 schema_arn: ::String,
+                                 typed_link_name: ::String
+                               },
+                               attributes: Array[
+                                 {
+                                   attribute_name: ::String,
+                                   value: {
+                                     string_value: ::String?,
+                                     binary_value: ::String?,
+                                     boolean_value: bool?,
+                                     number_value: ::String?,
+                                     datetime_value: ::Time?
+                                   }
+                                 },
+                               ]
+                             ) -> _AttachTypedLinkResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AttachTypedLinkResponseSuccess
+
+      interface _BatchReadResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchReadResponse]
+        def responses: () -> ::Array[Types::BatchReadOperationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#batch_read-instance_method
+      def batch_read: (
+                        directory_arn: ::String,
+                        operations: Array[
+                          {
+                            list_object_attributes: {
+                              object_reference: {
+                                selector: ::String?
+                              },
+                              next_token: ::String?,
+                              max_results: ::Integer?,
+                              facet_filter: {
+                                schema_arn: ::String?,
+                                facet_name: ::String?
+                              }?
+                            }?,
+                            list_object_children: {
+                              object_reference: {
+                                selector: ::String?
+                              },
+                              next_token: ::String?,
+                              max_results: ::Integer?
+                            }?,
+                            list_attached_indices: {
+                              target_reference: {
+                                selector: ::String?
+                              },
+                              next_token: ::String?,
+                              max_results: ::Integer?
+                            }?,
+                            list_object_parent_paths: {
+                              object_reference: {
+                                selector: ::String?
+                              },
+                              next_token: ::String?,
+                              max_results: ::Integer?
+                            }?,
+                            get_object_information: {
+                              object_reference: {
+                                selector: ::String?
+                              }
+                            }?,
+                            get_object_attributes: {
+                              object_reference: {
+                                selector: ::String?
+                              },
+                              schema_facet: {
+                                schema_arn: ::String?,
+                                facet_name: ::String?
+                              },
+                              attribute_names: Array[::String]
+                            }?,
+                            list_object_parents: {
+                              object_reference: {
+                                selector: ::String?
+                              },
+                              next_token: ::String?,
+                              max_results: ::Integer?
+                            }?,
+                            list_object_policies: {
+                              object_reference: {
+                                selector: ::String?
+                              },
+                              next_token: ::String?,
+                              max_results: ::Integer?
+                            }?,
+                            list_policy_attachments: {
+                              policy_reference: {
+                                selector: ::String?
+                              },
+                              next_token: ::String?,
+                              max_results: ::Integer?
+                            }?,
+                            lookup_policy: {
+                              object_reference: {
+                                selector: ::String?
+                              },
+                              next_token: ::String?,
+                              max_results: ::Integer?
+                            }?,
+                            list_index: {
+                              ranges_on_indexed_values: Array[
+                                {
+                                  attribute_key: {
+                                    schema_arn: ::String,
+                                    facet_name: ::String,
+                                    name: ::String
+                                  }?,
+                                  range: {
+                                    start_mode: ("FIRST" | "LAST" | "LAST_BEFORE_MISSING_VALUES" | "INCLUSIVE" | "EXCLUSIVE"),
+                                    start_value: {
+                                      string_value: ::String?,
+                                      binary_value: ::String?,
+                                      boolean_value: bool?,
+                                      number_value: ::String?,
+                                      datetime_value: ::Time?
+                                    }?,
+                                    end_mode: ("FIRST" | "LAST" | "LAST_BEFORE_MISSING_VALUES" | "INCLUSIVE" | "EXCLUSIVE"),
+                                    end_value: {
+                                      string_value: ::String?,
+                                      binary_value: ::String?,
+                                      boolean_value: bool?,
+                                      number_value: ::String?,
+                                      datetime_value: ::Time?
+                                    }?
+                                  }?
+                                },
+                              ]?,
+                              index_reference: {
+                                selector: ::String?
+                              },
+                              max_results: ::Integer?,
+                              next_token: ::String?
+                            }?,
+                            list_outgoing_typed_links: {
+                              object_reference: {
+                                selector: ::String?
+                              },
+                              filter_attribute_ranges: Array[
+                                {
+                                  attribute_name: ::String?,
+                                  range: {
+                                    start_mode: ("FIRST" | "LAST" | "LAST_BEFORE_MISSING_VALUES" | "INCLUSIVE" | "EXCLUSIVE"),
+                                    start_value: {
+                                      string_value: ::String?,
+                                      binary_value: ::String?,
+                                      boolean_value: bool?,
+                                      number_value: ::String?,
+                                      datetime_value: ::Time?
+                                    }?,
+                                    end_mode: ("FIRST" | "LAST" | "LAST_BEFORE_MISSING_VALUES" | "INCLUSIVE" | "EXCLUSIVE"),
+                                    end_value: {
+                                      string_value: ::String?,
+                                      binary_value: ::String?,
+                                      boolean_value: bool?,
+                                      number_value: ::String?,
+                                      datetime_value: ::Time?
+                                    }?
+                                  }
+                                },
+                              ]?,
+                              filter_typed_link: {
+                                schema_arn: ::String,
+                                typed_link_name: ::String
+                              }?,
+                              next_token: ::String?,
+                              max_results: ::Integer?
+                            }?,
+                            list_incoming_typed_links: {
+                              object_reference: {
+                                selector: ::String?
+                              },
+                              filter_attribute_ranges: Array[
+                                {
+                                  attribute_name: ::String?,
+                                  range: {
+                                    start_mode: ("FIRST" | "LAST" | "LAST_BEFORE_MISSING_VALUES" | "INCLUSIVE" | "EXCLUSIVE"),
+                                    start_value: {
+                                      string_value: ::String?,
+                                      binary_value: ::String?,
+                                      boolean_value: bool?,
+                                      number_value: ::String?,
+                                      datetime_value: ::Time?
+                                    }?,
+                                    end_mode: ("FIRST" | "LAST" | "LAST_BEFORE_MISSING_VALUES" | "INCLUSIVE" | "EXCLUSIVE"),
+                                    end_value: {
+                                      string_value: ::String?,
+                                      binary_value: ::String?,
+                                      boolean_value: bool?,
+                                      number_value: ::String?,
+                                      datetime_value: ::Time?
+                                    }?
+                                  }
+                                },
+                              ]?,
+                              filter_typed_link: {
+                                schema_arn: ::String,
+                                typed_link_name: ::String
+                              }?,
+                              next_token: ::String?,
+                              max_results: ::Integer?
+                            }?,
+                            get_link_attributes: {
+                              typed_link_specifier: {
+                                typed_link_facet: {
+                                  schema_arn: ::String,
+                                  typed_link_name: ::String
+                                },
+                                source_object_reference: {
+                                  selector: ::String?
+                                },
+                                target_object_reference: {
+                                  selector: ::String?
+                                },
+                                identity_attribute_values: Array[
+                                  {
+                                    attribute_name: ::String,
+                                    value: {
+                                      string_value: ::String?,
+                                      binary_value: ::String?,
+                                      boolean_value: bool?,
+                                      number_value: ::String?,
+                                      datetime_value: ::Time?
+                                    }
+                                  },
+                                ]
+                              },
+                              attribute_names: Array[::String]
+                            }?
+                          },
+                        ],
+                        ?consistency_level: ("SERIALIZABLE" | "EVENTUAL")
+                      ) -> _BatchReadResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchReadResponseSuccess
+
+      interface _BatchWriteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchWriteResponse]
+        def responses: () -> ::Array[Types::BatchWriteOperationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#batch_write-instance_method
+      def batch_write: (
+                         directory_arn: ::String,
+                         operations: Array[
+                           {
+                             create_object: {
+                               schema_facet: Array[
+                                 {
+                                   schema_arn: ::String?,
+                                   facet_name: ::String?
+                                 },
+                               ],
+                               object_attribute_list: Array[
+                                 {
+                                   key: {
+                                     schema_arn: ::String,
+                                     facet_name: ::String,
+                                     name: ::String
+                                   },
+                                   value: {
+                                     string_value: ::String?,
+                                     binary_value: ::String?,
+                                     boolean_value: bool?,
+                                     number_value: ::String?,
+                                     datetime_value: ::Time?
+                                   }
+                                 },
+                               ],
+                               parent_reference: {
+                                 selector: ::String?
+                               }?,
+                               link_name: ::String?,
+                               batch_reference_name: ::String?
+                             }?,
+                             attach_object: {
+                               parent_reference: {
+                                 selector: ::String?
+                               },
+                               child_reference: {
+                                 selector: ::String?
+                               },
+                               link_name: ::String
+                             }?,
+                             detach_object: {
+                               parent_reference: {
+                                 selector: ::String?
+                               },
+                               link_name: ::String,
+                               batch_reference_name: ::String?
+                             }?,
+                             update_object_attributes: {
+                               object_reference: {
+                                 selector: ::String?
+                               },
+                               attribute_updates: Array[
+                                 {
+                                   object_attribute_key: {
+                                     schema_arn: ::String,
+                                     facet_name: ::String,
+                                     name: ::String
+                                   }?,
+                                   object_attribute_action: {
+                                     object_attribute_action_type: ("CREATE_OR_UPDATE" | "DELETE")?,
+                                     object_attribute_update_value: {
+                                       string_value: ::String?,
+                                       binary_value: ::String?,
+                                       boolean_value: bool?,
+                                       number_value: ::String?,
+                                       datetime_value: ::Time?
+                                     }?
+                                   }?
+                                 },
+                               ]
+                             }?,
+                             delete_object: {
+                               object_reference: {
+                                 selector: ::String?
+                               }
+                             }?,
+                             add_facet_to_object: {
+                               schema_facet: {
+                                 schema_arn: ::String?,
+                                 facet_name: ::String?
+                               },
+                               object_attribute_list: Array[
+                                 {
+                                   key: {
+                                     schema_arn: ::String,
+                                     facet_name: ::String,
+                                     name: ::String
+                                   },
+                                   value: {
+                                     string_value: ::String?,
+                                     binary_value: ::String?,
+                                     boolean_value: bool?,
+                                     number_value: ::String?,
+                                     datetime_value: ::Time?
+                                   }
+                                 },
+                               ],
+                               object_reference: {
+                                 selector: ::String?
+                               }
+                             }?,
+                             remove_facet_from_object: {
+                               schema_facet: {
+                                 schema_arn: ::String?,
+                                 facet_name: ::String?
+                               },
+                               object_reference: {
+                                 selector: ::String?
+                               }
+                             }?,
+                             attach_policy: {
+                               policy_reference: {
+                                 selector: ::String?
+                               },
+                               object_reference: {
+                                 selector: ::String?
+                               }
+                             }?,
+                             detach_policy: {
+                               policy_reference: {
+                                 selector: ::String?
+                               },
+                               object_reference: {
+                                 selector: ::String?
+                               }
+                             }?,
+                             create_index: {
+                               ordered_indexed_attribute_list: Array[
+                                 {
+                                   schema_arn: ::String,
+                                   facet_name: ::String,
+                                   name: ::String
+                                 },
+                               ],
+                               is_unique: bool,
+                               parent_reference: {
+                                 selector: ::String?
+                               }?,
+                               link_name: ::String?,
+                               batch_reference_name: ::String?
+                             }?,
+                             attach_to_index: {
+                               index_reference: {
+                                 selector: ::String?
+                               },
+                               target_reference: {
+                                 selector: ::String?
+                               }
+                             }?,
+                             detach_from_index: {
+                               index_reference: {
+                                 selector: ::String?
+                               },
+                               target_reference: {
+                                 selector: ::String?
+                               }
+                             }?,
+                             attach_typed_link: {
+                               source_object_reference: {
+                                 selector: ::String?
+                               },
+                               target_object_reference: {
+                                 selector: ::String?
+                               },
+                               typed_link_facet: {
+                                 schema_arn: ::String,
+                                 typed_link_name: ::String
+                               },
+                               attributes: Array[
+                                 {
+                                   attribute_name: ::String,
+                                   value: {
+                                     string_value: ::String?,
+                                     binary_value: ::String?,
+                                     boolean_value: bool?,
+                                     number_value: ::String?,
+                                     datetime_value: ::Time?
+                                   }
+                                 },
+                               ]
+                             }?,
+                             detach_typed_link: {
+                               typed_link_specifier: {
+                                 typed_link_facet: {
+                                   schema_arn: ::String,
+                                   typed_link_name: ::String
+                                 },
+                                 source_object_reference: {
+                                   selector: ::String?
+                                 },
+                                 target_object_reference: {
+                                   selector: ::String?
+                                 },
+                                 identity_attribute_values: Array[
+                                   {
+                                     attribute_name: ::String,
+                                     value: {
+                                       string_value: ::String?,
+                                       binary_value: ::String?,
+                                       boolean_value: bool?,
+                                       number_value: ::String?,
+                                       datetime_value: ::Time?
+                                     }
+                                   },
+                                 ]
+                               }
+                             }?,
+                             update_link_attributes: {
+                               typed_link_specifier: {
+                                 typed_link_facet: {
+                                   schema_arn: ::String,
+                                   typed_link_name: ::String
+                                 },
+                                 source_object_reference: {
+                                   selector: ::String?
+                                 },
+                                 target_object_reference: {
+                                   selector: ::String?
+                                 },
+                                 identity_attribute_values: Array[
+                                   {
+                                     attribute_name: ::String,
+                                     value: {
+                                       string_value: ::String?,
+                                       binary_value: ::String?,
+                                       boolean_value: bool?,
+                                       number_value: ::String?,
+                                       datetime_value: ::Time?
+                                     }
+                                   },
+                                 ]
+                               },
+                               attribute_updates: Array[
+                                 {
+                                   attribute_key: {
+                                     schema_arn: ::String,
+                                     facet_name: ::String,
+                                     name: ::String
+                                   }?,
+                                   attribute_action: {
+                                     attribute_action_type: ("CREATE_OR_UPDATE" | "DELETE")?,
+                                     attribute_update_value: {
+                                       string_value: ::String?,
+                                       binary_value: ::String?,
+                                       boolean_value: bool?,
+                                       number_value: ::String?,
+                                       datetime_value: ::Time?
+                                     }?
+                                   }?
+                                 },
+                               ]
+                             }?
+                           },
+                         ]
+                       ) -> _BatchWriteResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchWriteResponseSuccess
+
+      interface _CreateDirectoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDirectoryResponse]
+        def directory_arn: () -> ::String
+        def name: () -> ::String
+        def object_identifier: () -> ::String
+        def applied_schema_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#create_directory-instance_method
+      def create_directory: (
+                              name: ::String,
+                              schema_arn: ::String
+                            ) -> _CreateDirectoryResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDirectoryResponseSuccess
+
+      interface _CreateFacetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFacetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#create_facet-instance_method
+      def create_facet: (
+                          schema_arn: ::String,
+                          name: ::String,
+                          ?attributes: Array[
+                            {
+                              name: ::String,
+                              attribute_definition: {
+                                type: ("STRING" | "BINARY" | "BOOLEAN" | "NUMBER" | "DATETIME" | "VARIANT"),
+                                default_value: {
+                                  string_value: ::String?,
+                                  binary_value: ::String?,
+                                  boolean_value: bool?,
+                                  number_value: ::String?,
+                                  datetime_value: ::Time?
+                                }?,
+                                is_immutable: bool?,
+                                rules: Hash[::String, {
+                                    type: ("BINARY_LENGTH" | "NUMBER_COMPARISON" | "STRING_FROM_SET" | "STRING_LENGTH")?,
+                                    parameters: Hash[::String, ::String]?
+                                  }]?
+                              }?,
+                              attribute_reference: {
+                                target_facet_name: ::String,
+                                target_attribute_name: ::String
+                              }?,
+                              required_behavior: ("REQUIRED_ALWAYS" | "NOT_REQUIRED")?
+                            },
+                          ],
+                          ?object_type: ("NODE" | "LEAF_NODE" | "POLICY" | "INDEX"),
+                          ?facet_style: ("STATIC" | "DYNAMIC")
+                        ) -> _CreateFacetResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFacetResponseSuccess
+
+      interface _CreateIndexResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateIndexResponse]
+        def object_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#create_index-instance_method
+      def create_index: (
+                          directory_arn: ::String,
+                          ordered_indexed_attribute_list: Array[
+                            {
+                              schema_arn: ::String,
+                              facet_name: ::String,
+                              name: ::String
+                            },
+                          ],
+                          is_unique: bool,
+                          ?parent_reference: {
+                            selector: ::String?
+                          },
+                          ?link_name: ::String
+                        ) -> _CreateIndexResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIndexResponseSuccess
+
+      interface _CreateObjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateObjectResponse]
+        def object_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#create_object-instance_method
+      def create_object: (
+                           directory_arn: ::String,
+                           schema_facets: Array[
+                             {
+                               schema_arn: ::String?,
+                               facet_name: ::String?
+                             },
+                           ],
+                           ?object_attribute_list: Array[
+                             {
+                               key: {
+                                 schema_arn: ::String,
+                                 facet_name: ::String,
+                                 name: ::String
+                               },
+                               value: {
+                                 string_value: ::String?,
+                                 binary_value: ::String?,
+                                 boolean_value: bool?,
+                                 number_value: ::String?,
+                                 datetime_value: ::Time?
+                               }
+                             },
+                           ],
+                           ?parent_reference: {
+                             selector: ::String?
+                           },
+                           ?link_name: ::String
+                         ) -> _CreateObjectResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateObjectResponseSuccess
+
+      interface _CreateSchemaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSchemaResponse]
+        def schema_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#create_schema-instance_method
+      def create_schema: (
+                           name: ::String
+                         ) -> _CreateSchemaResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSchemaResponseSuccess
+
+      interface _CreateTypedLinkFacetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTypedLinkFacetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#create_typed_link_facet-instance_method
+      def create_typed_link_facet: (
+                                     schema_arn: ::String,
+                                     facet: {
+                                       name: ::String,
+                                       attributes: Array[
+                                         {
+                                           name: ::String,
+                                           type: ("STRING" | "BINARY" | "BOOLEAN" | "NUMBER" | "DATETIME" | "VARIANT"),
+                                           default_value: {
+                                             string_value: ::String?,
+                                             binary_value: ::String?,
+                                             boolean_value: bool?,
+                                             number_value: ::String?,
+                                             datetime_value: ::Time?
+                                           }?,
+                                           is_immutable: bool?,
+                                           rules: Hash[::String, {
+                                               type: ("BINARY_LENGTH" | "NUMBER_COMPARISON" | "STRING_FROM_SET" | "STRING_LENGTH")?,
+                                               parameters: Hash[::String, ::String]?
+                                             }]?,
+                                           required_behavior: ("REQUIRED_ALWAYS" | "NOT_REQUIRED")
+                                         },
+                                       ],
+                                       identity_attribute_order: Array[::String]
+                                     }
+                                   ) -> _CreateTypedLinkFacetResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTypedLinkFacetResponseSuccess
+
+      interface _DeleteDirectoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDirectoryResponse]
+        def directory_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#delete_directory-instance_method
+      def delete_directory: (
+                              directory_arn: ::String
+                            ) -> _DeleteDirectoryResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDirectoryResponseSuccess
+
+      interface _DeleteFacetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFacetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#delete_facet-instance_method
+      def delete_facet: (
+                          schema_arn: ::String,
+                          name: ::String
+                        ) -> _DeleteFacetResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFacetResponseSuccess
+
+      interface _DeleteObjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteObjectResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#delete_object-instance_method
+      def delete_object: (
+                           directory_arn: ::String,
+                           object_reference: {
+                             selector: ::String?
+                           }
+                         ) -> _DeleteObjectResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteObjectResponseSuccess
+
+      interface _DeleteSchemaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSchemaResponse]
+        def schema_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#delete_schema-instance_method
+      def delete_schema: (
+                           schema_arn: ::String
+                         ) -> _DeleteSchemaResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSchemaResponseSuccess
+
+      interface _DeleteTypedLinkFacetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTypedLinkFacetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#delete_typed_link_facet-instance_method
+      def delete_typed_link_facet: (
+                                     schema_arn: ::String,
+                                     name: ::String
+                                   ) -> _DeleteTypedLinkFacetResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTypedLinkFacetResponseSuccess
+
+      interface _DetachFromIndexResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetachFromIndexResponse]
+        def detached_object_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#detach_from_index-instance_method
+      def detach_from_index: (
+                               directory_arn: ::String,
+                               index_reference: {
+                                 selector: ::String?
+                               },
+                               target_reference: {
+                                 selector: ::String?
+                               }
+                             ) -> _DetachFromIndexResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetachFromIndexResponseSuccess
+
+      interface _DetachObjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetachObjectResponse]
+        def detached_object_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#detach_object-instance_method
+      def detach_object: (
+                           directory_arn: ::String,
+                           parent_reference: {
+                             selector: ::String?
+                           },
+                           link_name: ::String
+                         ) -> _DetachObjectResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetachObjectResponseSuccess
+
+      interface _DetachPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetachPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#detach_policy-instance_method
+      def detach_policy: (
+                           directory_arn: ::String,
+                           policy_reference: {
+                             selector: ::String?
+                           },
+                           object_reference: {
+                             selector: ::String?
+                           }
+                         ) -> _DetachPolicyResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetachPolicyResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#detach_typed_link-instance_method
+      def detach_typed_link: (
+                               directory_arn: ::String,
+                               typed_link_specifier: {
+                                 typed_link_facet: {
+                                   schema_arn: ::String,
+                                   typed_link_name: ::String
+                                 },
+                                 source_object_reference: {
+                                   selector: ::String?
+                                 },
+                                 target_object_reference: {
+                                   selector: ::String?
+                                 },
+                                 identity_attribute_values: Array[
+                                   {
+                                     attribute_name: ::String,
+                                     value: {
+                                       string_value: ::String?,
+                                       binary_value: ::String?,
+                                       boolean_value: bool?,
+                                       number_value: ::String?,
+                                       datetime_value: ::Time?
+                                     }
+                                   },
+                                 ]
+                               }
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DisableDirectoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableDirectoryResponse]
+        def directory_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#disable_directory-instance_method
+      def disable_directory: (
+                               directory_arn: ::String
+                             ) -> _DisableDirectoryResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableDirectoryResponseSuccess
+
+      interface _EnableDirectoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableDirectoryResponse]
+        def directory_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#enable_directory-instance_method
+      def enable_directory: (
+                              directory_arn: ::String
+                            ) -> _EnableDirectoryResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableDirectoryResponseSuccess
+
+      interface _GetAppliedSchemaVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAppliedSchemaVersionResponse]
+        def applied_schema_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#get_applied_schema_version-instance_method
+      def get_applied_schema_version: (
+                                        schema_arn: ::String
+                                      ) -> _GetAppliedSchemaVersionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAppliedSchemaVersionResponseSuccess
+
+      interface _GetDirectoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDirectoryResponse]
+        def directory: () -> Types::Directory
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#get_directory-instance_method
+      def get_directory: (
+                           directory_arn: ::String
+                         ) -> _GetDirectoryResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDirectoryResponseSuccess
+
+      interface _GetFacetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFacetResponse]
+        def facet: () -> Types::Facet
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#get_facet-instance_method
+      def get_facet: (
+                       schema_arn: ::String,
+                       name: ::String
+                     ) -> _GetFacetResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFacetResponseSuccess
+
+      interface _GetLinkAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLinkAttributesResponse]
+        def attributes: () -> ::Array[Types::AttributeKeyAndValue]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#get_link_attributes-instance_method
+      def get_link_attributes: (
+                                 directory_arn: ::String,
+                                 typed_link_specifier: {
+                                   typed_link_facet: {
+                                     schema_arn: ::String,
+                                     typed_link_name: ::String
+                                   },
+                                   source_object_reference: {
+                                     selector: ::String?
+                                   },
+                                   target_object_reference: {
+                                     selector: ::String?
+                                   },
+                                   identity_attribute_values: Array[
+                                     {
+                                       attribute_name: ::String,
+                                       value: {
+                                         string_value: ::String?,
+                                         binary_value: ::String?,
+                                         boolean_value: bool?,
+                                         number_value: ::String?,
+                                         datetime_value: ::Time?
+                                       }
+                                     },
+                                   ]
+                                 },
+                                 attribute_names: Array[::String],
+                                 ?consistency_level: ("SERIALIZABLE" | "EVENTUAL")
+                               ) -> _GetLinkAttributesResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLinkAttributesResponseSuccess
+
+      interface _GetObjectAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetObjectAttributesResponse]
+        def attributes: () -> ::Array[Types::AttributeKeyAndValue]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#get_object_attributes-instance_method
+      def get_object_attributes: (
+                                   directory_arn: ::String,
+                                   object_reference: {
+                                     selector: ::String?
+                                   },
+                                   ?consistency_level: ("SERIALIZABLE" | "EVENTUAL"),
+                                   schema_facet: {
+                                     schema_arn: ::String?,
+                                     facet_name: ::String?
+                                   },
+                                   attribute_names: Array[::String]
+                                 ) -> _GetObjectAttributesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetObjectAttributesResponseSuccess
+
+      interface _GetObjectInformationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetObjectInformationResponse]
+        def schema_facets: () -> ::Array[Types::SchemaFacet]
+        def object_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#get_object_information-instance_method
+      def get_object_information: (
+                                    directory_arn: ::String,
+                                    object_reference: {
+                                      selector: ::String?
+                                    },
+                                    ?consistency_level: ("SERIALIZABLE" | "EVENTUAL")
+                                  ) -> _GetObjectInformationResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetObjectInformationResponseSuccess
+
+      interface _GetSchemaAsJsonResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSchemaAsJsonResponse]
+        def name: () -> ::String
+        def document: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#get_schema_as_json-instance_method
+      def get_schema_as_json: (
+                                schema_arn: ::String
+                              ) -> _GetSchemaAsJsonResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSchemaAsJsonResponseSuccess
+
+      interface _GetTypedLinkFacetInformationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTypedLinkFacetInformationResponse]
+        def identity_attribute_order: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#get_typed_link_facet_information-instance_method
+      def get_typed_link_facet_information: (
+                                              schema_arn: ::String,
+                                              name: ::String
+                                            ) -> _GetTypedLinkFacetInformationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTypedLinkFacetInformationResponseSuccess
+
+      interface _ListAppliedSchemaArnsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAppliedSchemaArnsResponse]
+        def schema_arns: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#list_applied_schema_arns-instance_method
+      def list_applied_schema_arns: (
+                                      directory_arn: ::String,
+                                      ?schema_arn: ::String,
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListAppliedSchemaArnsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAppliedSchemaArnsResponseSuccess
+
+      interface _ListAttachedIndicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAttachedIndicesResponse]
+        def index_attachments: () -> ::Array[Types::IndexAttachment]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#list_attached_indices-instance_method
+      def list_attached_indices: (
+                                   directory_arn: ::String,
+                                   target_reference: {
+                                     selector: ::String?
+                                   },
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer,
+                                   ?consistency_level: ("SERIALIZABLE" | "EVENTUAL")
+                                 ) -> _ListAttachedIndicesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAttachedIndicesResponseSuccess
+
+      interface _ListDevelopmentSchemaArnsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDevelopmentSchemaArnsResponse]
+        def schema_arns: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#list_development_schema_arns-instance_method
+      def list_development_schema_arns: (
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListDevelopmentSchemaArnsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDevelopmentSchemaArnsResponseSuccess
+
+      interface _ListDirectoriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDirectoriesResponse]
+        def directories: () -> ::Array[Types::Directory]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#list_directories-instance_method
+      def list_directories: (
+                              ?next_token: ::String,
+                              ?max_results: ::Integer,
+                              ?state: ("ENABLED" | "DISABLED" | "DELETED")
+                            ) -> _ListDirectoriesResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDirectoriesResponseSuccess
+
+      interface _ListFacetAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFacetAttributesResponse]
+        def attributes: () -> ::Array[Types::FacetAttribute]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#list_facet_attributes-instance_method
+      def list_facet_attributes: (
+                                   schema_arn: ::String,
+                                   name: ::String,
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
+                                 ) -> _ListFacetAttributesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFacetAttributesResponseSuccess
+
+      interface _ListFacetNamesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFacetNamesResponse]
+        def facet_names: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#list_facet_names-instance_method
+      def list_facet_names: (
+                              schema_arn: ::String,
+                              ?next_token: ::String,
+                              ?max_results: ::Integer
+                            ) -> _ListFacetNamesResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFacetNamesResponseSuccess
+
+      interface _ListIncomingTypedLinksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIncomingTypedLinksResponse]
+        def link_specifiers: () -> ::Array[Types::TypedLinkSpecifier]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#list_incoming_typed_links-instance_method
+      def list_incoming_typed_links: (
+                                       directory_arn: ::String,
+                                       object_reference: {
+                                         selector: ::String?
+                                       },
+                                       ?filter_attribute_ranges: Array[
+                                         {
+                                           attribute_name: ::String?,
+                                           range: {
+                                             start_mode: ("FIRST" | "LAST" | "LAST_BEFORE_MISSING_VALUES" | "INCLUSIVE" | "EXCLUSIVE"),
+                                             start_value: {
+                                               string_value: ::String?,
+                                               binary_value: ::String?,
+                                               boolean_value: bool?,
+                                               number_value: ::String?,
+                                               datetime_value: ::Time?
+                                             }?,
+                                             end_mode: ("FIRST" | "LAST" | "LAST_BEFORE_MISSING_VALUES" | "INCLUSIVE" | "EXCLUSIVE"),
+                                             end_value: {
+                                               string_value: ::String?,
+                                               binary_value: ::String?,
+                                               boolean_value: bool?,
+                                               number_value: ::String?,
+                                               datetime_value: ::Time?
+                                             }?
+                                           }
+                                         },
+                                       ],
+                                       ?filter_typed_link: {
+                                         schema_arn: ::String,
+                                         typed_link_name: ::String
+                                       },
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer,
+                                       ?consistency_level: ("SERIALIZABLE" | "EVENTUAL")
+                                     ) -> _ListIncomingTypedLinksResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIncomingTypedLinksResponseSuccess
+
+      interface _ListIndexResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIndexResponse]
+        def index_attachments: () -> ::Array[Types::IndexAttachment]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#list_index-instance_method
+      def list_index: (
+                        directory_arn: ::String,
+                        ?ranges_on_indexed_values: Array[
+                          {
+                            attribute_key: {
+                              schema_arn: ::String,
+                              facet_name: ::String,
+                              name: ::String
+                            }?,
+                            range: {
+                              start_mode: ("FIRST" | "LAST" | "LAST_BEFORE_MISSING_VALUES" | "INCLUSIVE" | "EXCLUSIVE"),
+                              start_value: {
+                                string_value: ::String?,
+                                binary_value: ::String?,
+                                boolean_value: bool?,
+                                number_value: ::String?,
+                                datetime_value: ::Time?
+                              }?,
+                              end_mode: ("FIRST" | "LAST" | "LAST_BEFORE_MISSING_VALUES" | "INCLUSIVE" | "EXCLUSIVE"),
+                              end_value: {
+                                string_value: ::String?,
+                                binary_value: ::String?,
+                                boolean_value: bool?,
+                                number_value: ::String?,
+                                datetime_value: ::Time?
+                              }?
+                            }?
+                          },
+                        ],
+                        index_reference: {
+                          selector: ::String?
+                        },
+                        ?max_results: ::Integer,
+                        ?next_token: ::String,
+                        ?consistency_level: ("SERIALIZABLE" | "EVENTUAL")
+                      ) -> _ListIndexResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIndexResponseSuccess
+
+      interface _ListManagedSchemaArnsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListManagedSchemaArnsResponse]
+        def schema_arns: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#list_managed_schema_arns-instance_method
+      def list_managed_schema_arns: (
+                                      ?schema_arn: ::String,
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListManagedSchemaArnsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListManagedSchemaArnsResponseSuccess
+
+      interface _ListObjectAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListObjectAttributesResponse]
+        def attributes: () -> ::Array[Types::AttributeKeyAndValue]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#list_object_attributes-instance_method
+      def list_object_attributes: (
+                                    directory_arn: ::String,
+                                    object_reference: {
+                                      selector: ::String?
+                                    },
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer,
+                                    ?consistency_level: ("SERIALIZABLE" | "EVENTUAL"),
+                                    ?facet_filter: {
+                                      schema_arn: ::String?,
+                                      facet_name: ::String?
+                                    }
+                                  ) -> _ListObjectAttributesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListObjectAttributesResponseSuccess
+
+      interface _ListObjectChildrenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListObjectChildrenResponse]
+        def children: () -> ::Hash[::String, ::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#list_object_children-instance_method
+      def list_object_children: (
+                                  directory_arn: ::String,
+                                  object_reference: {
+                                    selector: ::String?
+                                  },
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer,
+                                  ?consistency_level: ("SERIALIZABLE" | "EVENTUAL")
+                                ) -> _ListObjectChildrenResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListObjectChildrenResponseSuccess
+
+      interface _ListObjectParentPathsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListObjectParentPathsResponse]
+        def path_to_object_identifiers_list: () -> ::Array[Types::PathToObjectIdentifiers]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#list_object_parent_paths-instance_method
+      def list_object_parent_paths: (
+                                      directory_arn: ::String,
+                                      object_reference: {
+                                        selector: ::String?
+                                      },
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListObjectParentPathsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListObjectParentPathsResponseSuccess
+
+      interface _ListObjectParentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListObjectParentsResponse]
+        def parents: () -> ::Hash[::String, ::String]
+        def next_token: () -> ::String
+        def parent_links: () -> ::Array[Types::ObjectIdentifierAndLinkNameTuple]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#list_object_parents-instance_method
+      def list_object_parents: (
+                                 directory_arn: ::String,
+                                 object_reference: {
+                                   selector: ::String?
+                                 },
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer,
+                                 ?consistency_level: ("SERIALIZABLE" | "EVENTUAL"),
+                                 ?include_all_links_to_each_parent: bool
+                               ) -> _ListObjectParentsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListObjectParentsResponseSuccess
+
+      interface _ListObjectPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListObjectPoliciesResponse]
+        def attached_policy_ids: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#list_object_policies-instance_method
+      def list_object_policies: (
+                                  directory_arn: ::String,
+                                  object_reference: {
+                                    selector: ::String?
+                                  },
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer,
+                                  ?consistency_level: ("SERIALIZABLE" | "EVENTUAL")
+                                ) -> _ListObjectPoliciesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListObjectPoliciesResponseSuccess
+
+      interface _ListOutgoingTypedLinksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOutgoingTypedLinksResponse]
+        def typed_link_specifiers: () -> ::Array[Types::TypedLinkSpecifier]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#list_outgoing_typed_links-instance_method
+      def list_outgoing_typed_links: (
+                                       directory_arn: ::String,
+                                       object_reference: {
+                                         selector: ::String?
+                                       },
+                                       ?filter_attribute_ranges: Array[
+                                         {
+                                           attribute_name: ::String?,
+                                           range: {
+                                             start_mode: ("FIRST" | "LAST" | "LAST_BEFORE_MISSING_VALUES" | "INCLUSIVE" | "EXCLUSIVE"),
+                                             start_value: {
+                                               string_value: ::String?,
+                                               binary_value: ::String?,
+                                               boolean_value: bool?,
+                                               number_value: ::String?,
+                                               datetime_value: ::Time?
+                                             }?,
+                                             end_mode: ("FIRST" | "LAST" | "LAST_BEFORE_MISSING_VALUES" | "INCLUSIVE" | "EXCLUSIVE"),
+                                             end_value: {
+                                               string_value: ::String?,
+                                               binary_value: ::String?,
+                                               boolean_value: bool?,
+                                               number_value: ::String?,
+                                               datetime_value: ::Time?
+                                             }?
+                                           }
+                                         },
+                                       ],
+                                       ?filter_typed_link: {
+                                         schema_arn: ::String,
+                                         typed_link_name: ::String
+                                       },
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer,
+                                       ?consistency_level: ("SERIALIZABLE" | "EVENTUAL")
+                                     ) -> _ListOutgoingTypedLinksResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOutgoingTypedLinksResponseSuccess
+
+      interface _ListPolicyAttachmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPolicyAttachmentsResponse]
+        def object_identifiers: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#list_policy_attachments-instance_method
+      def list_policy_attachments: (
+                                     directory_arn: ::String,
+                                     policy_reference: {
+                                       selector: ::String?
+                                     },
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer,
+                                     ?consistency_level: ("SERIALIZABLE" | "EVENTUAL")
+                                   ) -> _ListPolicyAttachmentsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPolicyAttachmentsResponseSuccess
+
+      interface _ListPublishedSchemaArnsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPublishedSchemaArnsResponse]
+        def schema_arns: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#list_published_schema_arns-instance_method
+      def list_published_schema_arns: (
+                                        ?schema_arn: ::String,
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer
+                                      ) -> _ListPublishedSchemaArnsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPublishedSchemaArnsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String,
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTypedLinkFacetAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTypedLinkFacetAttributesResponse]
+        def attributes: () -> ::Array[Types::TypedLinkAttributeDefinition]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#list_typed_link_facet_attributes-instance_method
+      def list_typed_link_facet_attributes: (
+                                              schema_arn: ::String,
+                                              name: ::String,
+                                              ?next_token: ::String,
+                                              ?max_results: ::Integer
+                                            ) -> _ListTypedLinkFacetAttributesResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTypedLinkFacetAttributesResponseSuccess
+
+      interface _ListTypedLinkFacetNamesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTypedLinkFacetNamesResponse]
+        def facet_names: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#list_typed_link_facet_names-instance_method
+      def list_typed_link_facet_names: (
+                                         schema_arn: ::String,
+                                         ?next_token: ::String,
+                                         ?max_results: ::Integer
+                                       ) -> _ListTypedLinkFacetNamesResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTypedLinkFacetNamesResponseSuccess
+
+      interface _LookupPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::LookupPolicyResponse]
+        def policy_to_path_list: () -> ::Array[Types::PolicyToPath]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#lookup_policy-instance_method
+      def lookup_policy: (
+                           directory_arn: ::String,
+                           object_reference: {
+                             selector: ::String?
+                           },
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _LookupPolicyResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _LookupPolicyResponseSuccess
+
+      interface _PublishSchemaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PublishSchemaResponse]
+        def published_schema_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#publish_schema-instance_method
+      def publish_schema: (
+                            development_schema_arn: ::String,
+                            version: ::String,
+                            ?minor_version: ::String,
+                            ?name: ::String
+                          ) -> _PublishSchemaResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PublishSchemaResponseSuccess
+
+      interface _PutSchemaFromJsonResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutSchemaFromJsonResponse]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#put_schema_from_json-instance_method
+      def put_schema_from_json: (
+                                  schema_arn: ::String,
+                                  document: ::String
+                                ) -> _PutSchemaFromJsonResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutSchemaFromJsonResponseSuccess
+
+      interface _RemoveFacetFromObjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveFacetFromObjectResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#remove_facet_from_object-instance_method
+      def remove_facet_from_object: (
+                                      directory_arn: ::String,
+                                      schema_facet: {
+                                        schema_arn: ::String?,
+                                        facet_name: ::String?
+                                      },
+                                      object_reference: {
+                                        selector: ::String?
+                                      }
+                                    ) -> _RemoveFacetFromObjectResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveFacetFromObjectResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String?,
+                              value: ::String?
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateFacetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFacetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#update_facet-instance_method
+      def update_facet: (
+                          schema_arn: ::String,
+                          name: ::String,
+                          ?attribute_updates: Array[
+                            {
+                              attribute: {
+                                name: ::String,
+                                attribute_definition: {
+                                  type: ("STRING" | "BINARY" | "BOOLEAN" | "NUMBER" | "DATETIME" | "VARIANT"),
+                                  default_value: {
+                                    string_value: ::String?,
+                                    binary_value: ::String?,
+                                    boolean_value: bool?,
+                                    number_value: ::String?,
+                                    datetime_value: ::Time?
+                                  }?,
+                                  is_immutable: bool?,
+                                  rules: Hash[::String, {
+                                      type: ("BINARY_LENGTH" | "NUMBER_COMPARISON" | "STRING_FROM_SET" | "STRING_LENGTH")?,
+                                      parameters: Hash[::String, ::String]?
+                                    }]?
+                                }?,
+                                attribute_reference: {
+                                  target_facet_name: ::String,
+                                  target_attribute_name: ::String
+                                }?,
+                                required_behavior: ("REQUIRED_ALWAYS" | "NOT_REQUIRED")?
+                              }?,
+                              action: ("CREATE_OR_UPDATE" | "DELETE")?
+                            },
+                          ],
+                          ?object_type: ("NODE" | "LEAF_NODE" | "POLICY" | "INDEX")
+                        ) -> _UpdateFacetResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFacetResponseSuccess
+
+      interface _UpdateLinkAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLinkAttributesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#update_link_attributes-instance_method
+      def update_link_attributes: (
+                                    directory_arn: ::String,
+                                    typed_link_specifier: {
+                                      typed_link_facet: {
+                                        schema_arn: ::String,
+                                        typed_link_name: ::String
+                                      },
+                                      source_object_reference: {
+                                        selector: ::String?
+                                      },
+                                      target_object_reference: {
+                                        selector: ::String?
+                                      },
+                                      identity_attribute_values: Array[
+                                        {
+                                          attribute_name: ::String,
+                                          value: {
+                                            string_value: ::String?,
+                                            binary_value: ::String?,
+                                            boolean_value: bool?,
+                                            number_value: ::String?,
+                                            datetime_value: ::Time?
+                                          }
+                                        },
+                                      ]
+                                    },
+                                    attribute_updates: Array[
+                                      {
+                                        attribute_key: {
+                                          schema_arn: ::String,
+                                          facet_name: ::String,
+                                          name: ::String
+                                        }?,
+                                        attribute_action: {
+                                          attribute_action_type: ("CREATE_OR_UPDATE" | "DELETE")?,
+                                          attribute_update_value: {
+                                            string_value: ::String?,
+                                            binary_value: ::String?,
+                                            boolean_value: bool?,
+                                            number_value: ::String?,
+                                            datetime_value: ::Time?
+                                          }?
+                                        }?
+                                      },
+                                    ]
+                                  ) -> _UpdateLinkAttributesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLinkAttributesResponseSuccess
+
+      interface _UpdateObjectAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateObjectAttributesResponse]
+        def object_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#update_object_attributes-instance_method
+      def update_object_attributes: (
+                                      directory_arn: ::String,
+                                      object_reference: {
+                                        selector: ::String?
+                                      },
+                                      attribute_updates: Array[
+                                        {
+                                          object_attribute_key: {
+                                            schema_arn: ::String,
+                                            facet_name: ::String,
+                                            name: ::String
+                                          }?,
+                                          object_attribute_action: {
+                                            object_attribute_action_type: ("CREATE_OR_UPDATE" | "DELETE")?,
+                                            object_attribute_update_value: {
+                                              string_value: ::String?,
+                                              binary_value: ::String?,
+                                              boolean_value: bool?,
+                                              number_value: ::String?,
+                                              datetime_value: ::Time?
+                                            }?
+                                          }?
+                                        },
+                                      ]
+                                    ) -> _UpdateObjectAttributesResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateObjectAttributesResponseSuccess
+
+      interface _UpdateSchemaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSchemaResponse]
+        def schema_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#update_schema-instance_method
+      def update_schema: (
+                           schema_arn: ::String,
+                           name: ::String
+                         ) -> _UpdateSchemaResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSchemaResponseSuccess
+
+      interface _UpdateTypedLinkFacetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTypedLinkFacetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#update_typed_link_facet-instance_method
+      def update_typed_link_facet: (
+                                     schema_arn: ::String,
+                                     name: ::String,
+                                     attribute_updates: Array[
+                                       {
+                                         attribute: {
+                                           name: ::String,
+                                           type: ("STRING" | "BINARY" | "BOOLEAN" | "NUMBER" | "DATETIME" | "VARIANT"),
+                                           default_value: {
+                                             string_value: ::String?,
+                                             binary_value: ::String?,
+                                             boolean_value: bool?,
+                                             number_value: ::String?,
+                                             datetime_value: ::Time?
+                                           }?,
+                                           is_immutable: bool?,
+                                           rules: Hash[::String, {
+                                               type: ("BINARY_LENGTH" | "NUMBER_COMPARISON" | "STRING_FROM_SET" | "STRING_LENGTH")?,
+                                               parameters: Hash[::String, ::String]?
+                                             }]?,
+                                           required_behavior: ("REQUIRED_ALWAYS" | "NOT_REQUIRED")
+                                         },
+                                         action: ("CREATE_OR_UPDATE" | "DELETE")
+                                       },
+                                     ],
+                                     identity_attribute_order: Array[::String]
+                                   ) -> _UpdateTypedLinkFacetResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTypedLinkFacetResponseSuccess
+
+      interface _UpgradeAppliedSchemaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpgradeAppliedSchemaResponse]
+        def upgraded_schema_arn: () -> ::String
+        def directory_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#upgrade_applied_schema-instance_method
+      def upgrade_applied_schema: (
+                                    published_schema_arn: ::String,
+                                    directory_arn: ::String,
+                                    ?dry_run: bool
+                                  ) -> _UpgradeAppliedSchemaResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpgradeAppliedSchemaResponseSuccess
+
+      interface _UpgradePublishedSchemaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpgradePublishedSchemaResponse]
+        def upgraded_schema_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#upgrade_published_schema-instance_method
+      def upgrade_published_schema: (
+                                      development_schema_arn: ::String,
+                                      published_schema_arn: ::String,
+                                      minor_version: ::String,
+                                      ?dry_run: bool
+                                    ) -> _UpgradePublishedSchemaResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpgradePublishedSchemaResponseSuccess
+    end
+  end
+end
+

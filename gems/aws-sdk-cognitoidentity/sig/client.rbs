@@ -1,0 +1,411 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CognitoIdentity
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentity/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateIdentityPoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::IdentityPool]
+        def identity_pool_id: () -> ::String
+        def identity_pool_name: () -> ::String
+        def allow_unauthenticated_identities: () -> bool
+        def allow_classic_flow: () -> bool
+        def supported_login_providers: () -> ::Hash[::String, ::String]
+        def developer_provider_name: () -> ::String
+        def open_id_connect_provider_arns: () -> ::Array[::String]
+        def cognito_identity_providers: () -> ::Array[Types::CognitoIdentityProvider]
+        def saml_provider_arns: () -> ::Array[::String]
+        def identity_pool_tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentity/Client.html#create_identity_pool-instance_method
+      def create_identity_pool: (
+                                  identity_pool_name: ::String,
+                                  allow_unauthenticated_identities: bool,
+                                  ?allow_classic_flow: bool,
+                                  ?supported_login_providers: Hash[::String, ::String],
+                                  ?developer_provider_name: ::String,
+                                  ?open_id_connect_provider_arns: Array[::String],
+                                  ?cognito_identity_providers: Array[
+                                    {
+                                      provider_name: ::String?,
+                                      client_id: ::String?,
+                                      server_side_token_check: bool?
+                                    },
+                                  ],
+                                  ?saml_provider_arns: Array[::String],
+                                  ?identity_pool_tags: Hash[::String, ::String]
+                                ) -> _CreateIdentityPoolResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIdentityPoolResponseSuccess
+
+      interface _DeleteIdentitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIdentitiesResponse]
+        def unprocessed_identity_ids: () -> ::Array[Types::UnprocessedIdentityId]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentity/Client.html#delete_identities-instance_method
+      def delete_identities: (
+                               identity_ids_to_delete: Array[::String]
+                             ) -> _DeleteIdentitiesResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIdentitiesResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentity/Client.html#delete_identity_pool-instance_method
+      def delete_identity_pool: (
+                                  identity_pool_id: ::String
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeIdentityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::IdentityDescription]
+        def identity_id: () -> ::String
+        def logins: () -> ::Array[::String]
+        def creation_date: () -> ::Time
+        def last_modified_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentity/Client.html#describe_identity-instance_method
+      def describe_identity: (
+                               identity_id: ::String
+                             ) -> _DescribeIdentityResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeIdentityResponseSuccess
+
+      interface _DescribeIdentityPoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::IdentityPool]
+        def identity_pool_id: () -> ::String
+        def identity_pool_name: () -> ::String
+        def allow_unauthenticated_identities: () -> bool
+        def allow_classic_flow: () -> bool
+        def supported_login_providers: () -> ::Hash[::String, ::String]
+        def developer_provider_name: () -> ::String
+        def open_id_connect_provider_arns: () -> ::Array[::String]
+        def cognito_identity_providers: () -> ::Array[Types::CognitoIdentityProvider]
+        def saml_provider_arns: () -> ::Array[::String]
+        def identity_pool_tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentity/Client.html#describe_identity_pool-instance_method
+      def describe_identity_pool: (
+                                    identity_pool_id: ::String
+                                  ) -> _DescribeIdentityPoolResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeIdentityPoolResponseSuccess
+
+      interface _GetCredentialsForIdentityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCredentialsForIdentityResponse]
+        def identity_id: () -> ::String
+        def credentials: () -> Types::Credentials
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentity/Client.html#get_credentials_for_identity-instance_method
+      def get_credentials_for_identity: (
+                                          identity_id: ::String,
+                                          ?logins: Hash[::String, ::String],
+                                          ?custom_role_arn: ::String
+                                        ) -> _GetCredentialsForIdentityResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCredentialsForIdentityResponseSuccess
+
+      interface _GetIdResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIdResponse]
+        def identity_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentity/Client.html#get_id-instance_method
+      def get_id: (
+                    ?account_id: ::String,
+                    identity_pool_id: ::String,
+                    ?logins: Hash[::String, ::String]
+                  ) -> _GetIdResponseSuccess
+                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIdResponseSuccess
+
+      interface _GetIdentityPoolRolesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIdentityPoolRolesResponse]
+        def identity_pool_id: () -> ::String
+        def roles: () -> ::Hash[::String, ::String]
+        def role_mappings: () -> ::Hash[::String, Types::RoleMapping]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentity/Client.html#get_identity_pool_roles-instance_method
+      def get_identity_pool_roles: (
+                                     identity_pool_id: ::String
+                                   ) -> _GetIdentityPoolRolesResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIdentityPoolRolesResponseSuccess
+
+      interface _GetOpenIdTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOpenIdTokenResponse]
+        def identity_id: () -> ::String
+        def token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentity/Client.html#get_open_id_token-instance_method
+      def get_open_id_token: (
+                               identity_id: ::String,
+                               ?logins: Hash[::String, ::String]
+                             ) -> _GetOpenIdTokenResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOpenIdTokenResponseSuccess
+
+      interface _GetOpenIdTokenForDeveloperIdentityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOpenIdTokenForDeveloperIdentityResponse]
+        def identity_id: () -> ::String
+        def token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentity/Client.html#get_open_id_token_for_developer_identity-instance_method
+      def get_open_id_token_for_developer_identity: (
+                                                      identity_pool_id: ::String,
+                                                      ?identity_id: ::String,
+                                                      logins: Hash[::String, ::String],
+                                                      ?principal_tags: Hash[::String, ::String],
+                                                      ?token_duration: ::Integer
+                                                    ) -> _GetOpenIdTokenForDeveloperIdentityResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOpenIdTokenForDeveloperIdentityResponseSuccess
+
+      interface _GetPrincipalTagAttributeMapResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPrincipalTagAttributeMapResponse]
+        def identity_pool_id: () -> ::String
+        def identity_provider_name: () -> ::String
+        def use_defaults: () -> bool
+        def principal_tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentity/Client.html#get_principal_tag_attribute_map-instance_method
+      def get_principal_tag_attribute_map: (
+                                             identity_pool_id: ::String,
+                                             identity_provider_name: ::String
+                                           ) -> _GetPrincipalTagAttributeMapResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPrincipalTagAttributeMapResponseSuccess
+
+      interface _ListIdentitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIdentitiesResponse]
+        def identity_pool_id: () -> ::String
+        def identities: () -> ::Array[Types::IdentityDescription]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentity/Client.html#list_identities-instance_method
+      def list_identities: (
+                             identity_pool_id: ::String,
+                             max_results: ::Integer,
+                             ?next_token: ::String,
+                             ?hide_disabled: bool
+                           ) -> _ListIdentitiesResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIdentitiesResponseSuccess
+
+      interface _ListIdentityPoolsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIdentityPoolsResponse]
+        def identity_pools: () -> ::Array[Types::IdentityPoolShortDescription]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentity/Client.html#list_identity_pools-instance_method
+      def list_identity_pools: (
+                                 max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListIdentityPoolsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIdentityPoolsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentity/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _LookupDeveloperIdentityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::LookupDeveloperIdentityResponse]
+        def identity_id: () -> ::String
+        def developer_user_identifier_list: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentity/Client.html#lookup_developer_identity-instance_method
+      def lookup_developer_identity: (
+                                       identity_pool_id: ::String,
+                                       ?identity_id: ::String,
+                                       ?developer_user_identifier: ::String,
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _LookupDeveloperIdentityResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _LookupDeveloperIdentityResponseSuccess
+
+      interface _MergeDeveloperIdentitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::MergeDeveloperIdentitiesResponse]
+        def identity_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentity/Client.html#merge_developer_identities-instance_method
+      def merge_developer_identities: (
+                                        source_user_identifier: ::String,
+                                        destination_user_identifier: ::String,
+                                        developer_provider_name: ::String,
+                                        identity_pool_id: ::String
+                                      ) -> _MergeDeveloperIdentitiesResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _MergeDeveloperIdentitiesResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentity/Client.html#set_identity_pool_roles-instance_method
+      def set_identity_pool_roles: (
+                                     identity_pool_id: ::String,
+                                     roles: Hash[::String, ::String],
+                                     ?role_mappings: Hash[::String, {
+                                         type: ("Token" | "Rules"),
+                                         ambiguous_role_resolution: ("AuthenticatedRole" | "Deny")?,
+                                         rules_configuration: {
+                                           rules: Array[
+                                             {
+                                               claim: ::String,
+                                               match_type: ("Equals" | "Contains" | "StartsWith" | "NotEqual"),
+                                               value: ::String,
+                                               role_arn: ::String
+                                             },
+                                           ]
+                                         }?
+                                       }]
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _SetPrincipalTagAttributeMapResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetPrincipalTagAttributeMapResponse]
+        def identity_pool_id: () -> ::String
+        def identity_provider_name: () -> ::String
+        def use_defaults: () -> bool
+        def principal_tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentity/Client.html#set_principal_tag_attribute_map-instance_method
+      def set_principal_tag_attribute_map: (
+                                             identity_pool_id: ::String,
+                                             identity_provider_name: ::String,
+                                             ?use_defaults: bool,
+                                             ?principal_tags: Hash[::String, ::String]
+                                           ) -> _SetPrincipalTagAttributeMapResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetPrincipalTagAttributeMapResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentity/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentity/Client.html#unlink_developer_identity-instance_method
+      def unlink_developer_identity: (
+                                       identity_id: ::String,
+                                       identity_pool_id: ::String,
+                                       developer_provider_name: ::String,
+                                       developer_user_identifier: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentity/Client.html#unlink_identity-instance_method
+      def unlink_identity: (
+                             identity_id: ::String,
+                             logins: Hash[::String, ::String],
+                             logins_to_remove: Array[::String]
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentity/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateIdentityPoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::IdentityPool]
+        def identity_pool_id: () -> ::String
+        def identity_pool_name: () -> ::String
+        def allow_unauthenticated_identities: () -> bool
+        def allow_classic_flow: () -> bool
+        def supported_login_providers: () -> ::Hash[::String, ::String]
+        def developer_provider_name: () -> ::String
+        def open_id_connect_provider_arns: () -> ::Array[::String]
+        def cognito_identity_providers: () -> ::Array[Types::CognitoIdentityProvider]
+        def saml_provider_arns: () -> ::Array[::String]
+        def identity_pool_tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentity/Client.html#update_identity_pool-instance_method
+      def update_identity_pool: (
+                                  identity_pool_id: ::String,
+                                  identity_pool_name: ::String,
+                                  allow_unauthenticated_identities: bool,
+                                  ?allow_classic_flow: bool,
+                                  ?supported_login_providers: Hash[::String, ::String],
+                                  ?developer_provider_name: ::String,
+                                  ?open_id_connect_provider_arns: Array[::String],
+                                  ?cognito_identity_providers: Array[
+                                    {
+                                      provider_name: ::String?,
+                                      client_id: ::String?,
+                                      server_side_token_check: bool?
+                                    },
+                                  ],
+                                  ?saml_provider_arns: Array[::String],
+                                  ?identity_pool_tags: Hash[::String, ::String]
+                                ) -> _UpdateIdentityPoolResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIdentityPoolResponseSuccess
+    end
+  end
+end
+

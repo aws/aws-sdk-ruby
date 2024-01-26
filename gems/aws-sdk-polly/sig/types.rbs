@@ -1,0 +1,285 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Polly
+  module Types
+
+    class DeleteLexiconInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLexiconOutput < Aws::EmptyStructure
+    end
+
+    class DescribeVoicesInput
+      attr_accessor engine: ("standard" | "neural" | "long-form")
+      attr_accessor language_code: ("arb" | "cmn-CN" | "cy-GB" | "da-DK" | "de-DE" | "en-AU" | "en-GB" | "en-GB-WLS" | "en-IN" | "en-US" | "es-ES" | "es-MX" | "es-US" | "fr-CA" | "fr-FR" | "is-IS" | "it-IT" | "ja-JP" | "hi-IN" | "ko-KR" | "nb-NO" | "nl-NL" | "pl-PL" | "pt-BR" | "pt-PT" | "ro-RO" | "ru-RU" | "sv-SE" | "tr-TR" | "en-NZ" | "en-ZA" | "ca-ES" | "de-AT" | "yue-CN" | "ar-AE" | "fi-FI" | "en-IE" | "nl-BE" | "fr-BE")
+      attr_accessor include_additional_language_codes: bool
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeVoicesOutput
+      attr_accessor voices: ::Array[Types::Voice]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class EngineNotSupportedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetLexiconInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetLexiconOutput
+      attr_accessor lexicon: Types::Lexicon
+      attr_accessor lexicon_attributes: Types::LexiconAttributes
+      SENSITIVE: []
+    end
+
+    class GetSpeechSynthesisTaskInput
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSpeechSynthesisTaskOutput
+      attr_accessor synthesis_task: Types::SynthesisTask
+      SENSITIVE: []
+    end
+
+    class InvalidLexiconException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidNextTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidS3BucketException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidS3KeyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidSampleRateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidSnsTopicArnException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidSsmlException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidTaskIdException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LanguageNotSupportedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Lexicon
+      attr_accessor content: ::String
+      attr_accessor name: ::String
+      SENSITIVE: [:content]
+    end
+
+    class LexiconAttributes
+      attr_accessor alphabet: ::String
+      attr_accessor language_code: ("arb" | "cmn-CN" | "cy-GB" | "da-DK" | "de-DE" | "en-AU" | "en-GB" | "en-GB-WLS" | "en-IN" | "en-US" | "es-ES" | "es-MX" | "es-US" | "fr-CA" | "fr-FR" | "is-IS" | "it-IT" | "ja-JP" | "hi-IN" | "ko-KR" | "nb-NO" | "nl-NL" | "pl-PL" | "pt-BR" | "pt-PT" | "ro-RO" | "ru-RU" | "sv-SE" | "tr-TR" | "en-NZ" | "en-ZA" | "ca-ES" | "de-AT" | "yue-CN" | "ar-AE" | "fi-FI" | "en-IE" | "nl-BE" | "fr-BE")
+      attr_accessor last_modified: ::Time
+      attr_accessor lexicon_arn: ::String
+      attr_accessor lexemes_count: ::Integer
+      attr_accessor size: ::Integer
+      SENSITIVE: []
+    end
+
+    class LexiconDescription
+      attr_accessor name: ::String
+      attr_accessor attributes: Types::LexiconAttributes
+      SENSITIVE: []
+    end
+
+    class LexiconNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LexiconSizeExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListLexiconsInput
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLexiconsOutput
+      attr_accessor lexicons: ::Array[Types::LexiconDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSpeechSynthesisTasksInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor status: ("scheduled" | "inProgress" | "completed" | "failed")
+      SENSITIVE: []
+    end
+
+    class ListSpeechSynthesisTasksOutput
+      attr_accessor next_token: ::String
+      attr_accessor synthesis_tasks: ::Array[Types::SynthesisTask]
+      SENSITIVE: []
+    end
+
+    class MarksNotSupportedForFormatException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MaxLexemeLengthExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MaxLexiconsNumberExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PutLexiconInput
+      attr_accessor name: ::String
+      attr_accessor content: ::String
+      SENSITIVE: [:content]
+    end
+
+    class PutLexiconOutput < Aws::EmptyStructure
+    end
+
+    class ServiceFailureException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SsmlMarksNotSupportedForTextTypeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartSpeechSynthesisTaskInput
+      attr_accessor engine: ("standard" | "neural" | "long-form")
+      attr_accessor language_code: ("arb" | "cmn-CN" | "cy-GB" | "da-DK" | "de-DE" | "en-AU" | "en-GB" | "en-GB-WLS" | "en-IN" | "en-US" | "es-ES" | "es-MX" | "es-US" | "fr-CA" | "fr-FR" | "is-IS" | "it-IT" | "ja-JP" | "hi-IN" | "ko-KR" | "nb-NO" | "nl-NL" | "pl-PL" | "pt-BR" | "pt-PT" | "ro-RO" | "ru-RU" | "sv-SE" | "tr-TR" | "en-NZ" | "en-ZA" | "ca-ES" | "de-AT" | "yue-CN" | "ar-AE" | "fi-FI" | "en-IE" | "nl-BE" | "fr-BE")
+      attr_accessor lexicon_names: ::Array[::String]
+      attr_accessor output_format: ("json" | "mp3" | "ogg_vorbis" | "pcm")
+      attr_accessor output_s3_bucket_name: ::String
+      attr_accessor output_s3_key_prefix: ::String
+      attr_accessor sample_rate: ::String
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor speech_mark_types: ::Array[("sentence" | "ssml" | "viseme" | "word")]
+      attr_accessor text: ::String
+      attr_accessor text_type: ("ssml" | "text")
+      attr_accessor voice_id: ("Aditi" | "Amy" | "Astrid" | "Bianca" | "Brian" | "Camila" | "Carla" | "Carmen" | "Celine" | "Chantal" | "Conchita" | "Cristiano" | "Dora" | "Emma" | "Enrique" | "Ewa" | "Filiz" | "Gabrielle" | "Geraint" | "Giorgio" | "Gwyneth" | "Hans" | "Ines" | "Ivy" | "Jacek" | "Jan" | "Joanna" | "Joey" | "Justin" | "Karl" | "Kendra" | "Kevin" | "Kimberly" | "Lea" | "Liv" | "Lotte" | "Lucia" | "Lupe" | "Mads" | "Maja" | "Marlene" | "Mathieu" | "Matthew" | "Maxim" | "Mia" | "Miguel" | "Mizuki" | "Naja" | "Nicole" | "Olivia" | "Penelope" | "Raveena" | "Ricardo" | "Ruben" | "Russell" | "Salli" | "Seoyeon" | "Takumi" | "Tatyana" | "Vicki" | "Vitoria" | "Zeina" | "Zhiyu" | "Aria" | "Ayanda" | "Arlet" | "Hannah" | "Arthur" | "Daniel" | "Liam" | "Pedro" | "Kajal" | "Hiujin" | "Laura" | "Elin" | "Ida" | "Suvi" | "Ola" | "Hala" | "Andres" | "Sergio" | "Remi" | "Adriano" | "Thiago" | "Ruth" | "Stephen" | "Kazuha" | "Tomoko" | "Niamh" | "Sofie" | "Lisa" | "Isabelle" | "Zayd" | "Danielle" | "Gregory")
+      SENSITIVE: []
+    end
+
+    class StartSpeechSynthesisTaskOutput
+      attr_accessor synthesis_task: Types::SynthesisTask
+      SENSITIVE: []
+    end
+
+    class SynthesisTask
+      attr_accessor engine: ("standard" | "neural" | "long-form")
+      attr_accessor task_id: ::String
+      attr_accessor task_status: ("scheduled" | "inProgress" | "completed" | "failed")
+      attr_accessor task_status_reason: ::String
+      attr_accessor output_uri: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor request_characters: ::Integer
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor lexicon_names: ::Array[::String]
+      attr_accessor output_format: ("json" | "mp3" | "ogg_vorbis" | "pcm")
+      attr_accessor sample_rate: ::String
+      attr_accessor speech_mark_types: ::Array[("sentence" | "ssml" | "viseme" | "word")]
+      attr_accessor text_type: ("ssml" | "text")
+      attr_accessor voice_id: ("Aditi" | "Amy" | "Astrid" | "Bianca" | "Brian" | "Camila" | "Carla" | "Carmen" | "Celine" | "Chantal" | "Conchita" | "Cristiano" | "Dora" | "Emma" | "Enrique" | "Ewa" | "Filiz" | "Gabrielle" | "Geraint" | "Giorgio" | "Gwyneth" | "Hans" | "Ines" | "Ivy" | "Jacek" | "Jan" | "Joanna" | "Joey" | "Justin" | "Karl" | "Kendra" | "Kevin" | "Kimberly" | "Lea" | "Liv" | "Lotte" | "Lucia" | "Lupe" | "Mads" | "Maja" | "Marlene" | "Mathieu" | "Matthew" | "Maxim" | "Mia" | "Miguel" | "Mizuki" | "Naja" | "Nicole" | "Olivia" | "Penelope" | "Raveena" | "Ricardo" | "Ruben" | "Russell" | "Salli" | "Seoyeon" | "Takumi" | "Tatyana" | "Vicki" | "Vitoria" | "Zeina" | "Zhiyu" | "Aria" | "Ayanda" | "Arlet" | "Hannah" | "Arthur" | "Daniel" | "Liam" | "Pedro" | "Kajal" | "Hiujin" | "Laura" | "Elin" | "Ida" | "Suvi" | "Ola" | "Hala" | "Andres" | "Sergio" | "Remi" | "Adriano" | "Thiago" | "Ruth" | "Stephen" | "Kazuha" | "Tomoko" | "Niamh" | "Sofie" | "Lisa" | "Isabelle" | "Zayd" | "Danielle" | "Gregory")
+      attr_accessor language_code: ("arb" | "cmn-CN" | "cy-GB" | "da-DK" | "de-DE" | "en-AU" | "en-GB" | "en-GB-WLS" | "en-IN" | "en-US" | "es-ES" | "es-MX" | "es-US" | "fr-CA" | "fr-FR" | "is-IS" | "it-IT" | "ja-JP" | "hi-IN" | "ko-KR" | "nb-NO" | "nl-NL" | "pl-PL" | "pt-BR" | "pt-PT" | "ro-RO" | "ru-RU" | "sv-SE" | "tr-TR" | "en-NZ" | "en-ZA" | "ca-ES" | "de-AT" | "yue-CN" | "ar-AE" | "fi-FI" | "en-IE" | "nl-BE" | "fr-BE")
+      SENSITIVE: []
+    end
+
+    class SynthesisTaskNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SynthesizeSpeechInput
+      attr_accessor engine: ("standard" | "neural" | "long-form")
+      attr_accessor language_code: ("arb" | "cmn-CN" | "cy-GB" | "da-DK" | "de-DE" | "en-AU" | "en-GB" | "en-GB-WLS" | "en-IN" | "en-US" | "es-ES" | "es-MX" | "es-US" | "fr-CA" | "fr-FR" | "is-IS" | "it-IT" | "ja-JP" | "hi-IN" | "ko-KR" | "nb-NO" | "nl-NL" | "pl-PL" | "pt-BR" | "pt-PT" | "ro-RO" | "ru-RU" | "sv-SE" | "tr-TR" | "en-NZ" | "en-ZA" | "ca-ES" | "de-AT" | "yue-CN" | "ar-AE" | "fi-FI" | "en-IE" | "nl-BE" | "fr-BE")
+      attr_accessor lexicon_names: ::Array[::String]
+      attr_accessor output_format: ("json" | "mp3" | "ogg_vorbis" | "pcm")
+      attr_accessor sample_rate: ::String
+      attr_accessor speech_mark_types: ::Array[("sentence" | "ssml" | "viseme" | "word")]
+      attr_accessor text: ::String
+      attr_accessor text_type: ("ssml" | "text")
+      attr_accessor voice_id: ("Aditi" | "Amy" | "Astrid" | "Bianca" | "Brian" | "Camila" | "Carla" | "Carmen" | "Celine" | "Chantal" | "Conchita" | "Cristiano" | "Dora" | "Emma" | "Enrique" | "Ewa" | "Filiz" | "Gabrielle" | "Geraint" | "Giorgio" | "Gwyneth" | "Hans" | "Ines" | "Ivy" | "Jacek" | "Jan" | "Joanna" | "Joey" | "Justin" | "Karl" | "Kendra" | "Kevin" | "Kimberly" | "Lea" | "Liv" | "Lotte" | "Lucia" | "Lupe" | "Mads" | "Maja" | "Marlene" | "Mathieu" | "Matthew" | "Maxim" | "Mia" | "Miguel" | "Mizuki" | "Naja" | "Nicole" | "Olivia" | "Penelope" | "Raveena" | "Ricardo" | "Ruben" | "Russell" | "Salli" | "Seoyeon" | "Takumi" | "Tatyana" | "Vicki" | "Vitoria" | "Zeina" | "Zhiyu" | "Aria" | "Ayanda" | "Arlet" | "Hannah" | "Arthur" | "Daniel" | "Liam" | "Pedro" | "Kajal" | "Hiujin" | "Laura" | "Elin" | "Ida" | "Suvi" | "Ola" | "Hala" | "Andres" | "Sergio" | "Remi" | "Adriano" | "Thiago" | "Ruth" | "Stephen" | "Kazuha" | "Tomoko" | "Niamh" | "Sofie" | "Lisa" | "Isabelle" | "Zayd" | "Danielle" | "Gregory")
+      SENSITIVE: []
+    end
+
+    class SynthesizeSpeechOutput
+      attr_accessor audio_stream: ::IO
+      attr_accessor content_type: ::String
+      attr_accessor request_characters: ::Integer
+      SENSITIVE: []
+    end
+
+    class TextLengthExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedPlsAlphabetException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedPlsLanguageException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Voice
+      attr_accessor gender: ("Female" | "Male")
+      attr_accessor id: ("Aditi" | "Amy" | "Astrid" | "Bianca" | "Brian" | "Camila" | "Carla" | "Carmen" | "Celine" | "Chantal" | "Conchita" | "Cristiano" | "Dora" | "Emma" | "Enrique" | "Ewa" | "Filiz" | "Gabrielle" | "Geraint" | "Giorgio" | "Gwyneth" | "Hans" | "Ines" | "Ivy" | "Jacek" | "Jan" | "Joanna" | "Joey" | "Justin" | "Karl" | "Kendra" | "Kevin" | "Kimberly" | "Lea" | "Liv" | "Lotte" | "Lucia" | "Lupe" | "Mads" | "Maja" | "Marlene" | "Mathieu" | "Matthew" | "Maxim" | "Mia" | "Miguel" | "Mizuki" | "Naja" | "Nicole" | "Olivia" | "Penelope" | "Raveena" | "Ricardo" | "Ruben" | "Russell" | "Salli" | "Seoyeon" | "Takumi" | "Tatyana" | "Vicki" | "Vitoria" | "Zeina" | "Zhiyu" | "Aria" | "Ayanda" | "Arlet" | "Hannah" | "Arthur" | "Daniel" | "Liam" | "Pedro" | "Kajal" | "Hiujin" | "Laura" | "Elin" | "Ida" | "Suvi" | "Ola" | "Hala" | "Andres" | "Sergio" | "Remi" | "Adriano" | "Thiago" | "Ruth" | "Stephen" | "Kazuha" | "Tomoko" | "Niamh" | "Sofie" | "Lisa" | "Isabelle" | "Zayd" | "Danielle" | "Gregory")
+      attr_accessor language_code: ("arb" | "cmn-CN" | "cy-GB" | "da-DK" | "de-DE" | "en-AU" | "en-GB" | "en-GB-WLS" | "en-IN" | "en-US" | "es-ES" | "es-MX" | "es-US" | "fr-CA" | "fr-FR" | "is-IS" | "it-IT" | "ja-JP" | "hi-IN" | "ko-KR" | "nb-NO" | "nl-NL" | "pl-PL" | "pt-BR" | "pt-PT" | "ro-RO" | "ru-RU" | "sv-SE" | "tr-TR" | "en-NZ" | "en-ZA" | "ca-ES" | "de-AT" | "yue-CN" | "ar-AE" | "fi-FI" | "en-IE" | "nl-BE" | "fr-BE")
+      attr_accessor language_name: ::String
+      attr_accessor name: ::String
+      attr_accessor additional_language_codes: ::Array[("arb" | "cmn-CN" | "cy-GB" | "da-DK" | "de-DE" | "en-AU" | "en-GB" | "en-GB-WLS" | "en-IN" | "en-US" | "es-ES" | "es-MX" | "es-US" | "fr-CA" | "fr-FR" | "is-IS" | "it-IT" | "ja-JP" | "hi-IN" | "ko-KR" | "nb-NO" | "nl-NL" | "pl-PL" | "pt-BR" | "pt-PT" | "ro-RO" | "ru-RU" | "sv-SE" | "tr-TR" | "en-NZ" | "en-ZA" | "ca-ES" | "de-AT" | "yue-CN" | "ar-AE" | "fi-FI" | "en-IE" | "nl-BE" | "fr-BE")]
+      attr_accessor supported_engines: ::Array[("standard" | "neural" | "long-form")]
+      SENSITIVE: []
+    end
+  end
+end

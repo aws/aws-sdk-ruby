@@ -1,0 +1,77 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IAM
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/CurrentUser.html
+    class CurrentUser
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/CurrentUser.html#initialize-instance_method
+      def initialize: (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/CurrentUser.html#path-instance_method
+      def path: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/CurrentUser.html#user_name-instance_method
+      def user_name: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/CurrentUser.html#user_id-instance_method
+      def user_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/CurrentUser.html#arn-instance_method
+      def arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/CurrentUser.html#create_date-instance_method
+      def create_date: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/CurrentUser.html#password_last_used-instance_method
+      def password_last_used: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/CurrentUser.html#permissions_boundary-instance_method
+      def permissions_boundary: () -> Types::AttachedPermissionsBoundary
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/CurrentUser.html#tags-instance_method
+      def tags: () -> ::Array[Types::Tag]
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/CurrentUser.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/CurrentUser.html#data-instance_method
+      def data: () -> Types::User
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/CurrentUser.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/CurrentUser.html#access_keys-instance_method
+      def access_keys: (
+                         ?user_name: ::String
+                       ) -> AccessKey::Collection
+                     | (?Hash[Symbol, untyped]) -> AccessKey::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/CurrentUser.html#mfa_devices-instance_method
+      def mfa_devices: (
+                         ?user_name: ::String
+                       ) -> MfaDevice::Collection
+                     | (?Hash[Symbol, untyped]) -> MfaDevice::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/CurrentUser.html#signing_certificates-instance_method
+      def signing_certificates: (
+                                  ?user_name: ::String
+                                ) -> SigningCertificate::Collection
+                              | (?Hash[Symbol, untyped]) -> SigningCertificate::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/CurrentUser.html#user-instance_method
+      def user: () -> User?
+
+      class Collection < ::Aws::Resources::Collection[CurrentUser]
+      end
+    end
+  end
+end

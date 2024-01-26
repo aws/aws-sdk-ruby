@@ -2081,7 +2081,7 @@ module Aws::AmplifyBackend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplifybackend'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

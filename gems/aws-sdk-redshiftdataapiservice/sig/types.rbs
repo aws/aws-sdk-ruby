@@ -1,0 +1,327 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::RedshiftDataAPIService
+  module Types
+
+    class ActiveStatementsExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchExecuteStatementException
+      attr_accessor message: ::String
+      attr_accessor statement_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchExecuteStatementInput
+      attr_accessor client_token: ::String
+      attr_accessor cluster_identifier: ::String
+      attr_accessor database: ::String
+      attr_accessor db_user: ::String
+      attr_accessor secret_arn: ::String
+      attr_accessor sqls: ::Array[::String]
+      attr_accessor statement_name: ::String
+      attr_accessor with_event: bool
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class BatchExecuteStatementOutput
+      attr_accessor cluster_identifier: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor database: ::String
+      attr_accessor db_user: ::String
+      attr_accessor id: ::String
+      attr_accessor secret_arn: ::String
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class CancelStatementRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelStatementResponse
+      attr_accessor status: bool
+      SENSITIVE: []
+    end
+
+    class ColumnMetadata
+      attr_accessor column_default: ::String
+      attr_accessor is_case_sensitive: bool
+      attr_accessor is_currency: bool
+      attr_accessor is_signed: bool
+      attr_accessor label: ::String
+      attr_accessor length: ::Integer
+      attr_accessor name: ::String
+      attr_accessor nullable: ::Integer
+      attr_accessor precision: ::Integer
+      attr_accessor scale: ::Integer
+      attr_accessor schema_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor type_name: ::String
+      SENSITIVE: []
+    end
+
+    class DatabaseConnectionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStatementRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStatementResponse
+      attr_accessor cluster_identifier: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor database: ::String
+      attr_accessor db_user: ::String
+      attr_accessor duration: ::Integer
+      attr_accessor error: ::String
+      attr_accessor has_result_set: bool
+      attr_accessor id: ::String
+      attr_accessor query_parameters: ::Array[Types::SqlParameter]
+      attr_accessor query_string: ::String
+      attr_accessor redshift_pid: ::Integer
+      attr_accessor redshift_query_id: ::Integer
+      attr_accessor result_rows: ::Integer
+      attr_accessor result_size: ::Integer
+      attr_accessor secret_arn: ::String
+      attr_accessor status: ("SUBMITTED" | "PICKED" | "STARTED" | "FINISHED" | "ABORTED" | "FAILED" | "ALL")
+      attr_accessor sub_statements: ::Array[Types::SubStatementData]
+      attr_accessor updated_at: ::Time
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTableRequest
+      attr_accessor cluster_identifier: ::String
+      attr_accessor connected_database: ::String
+      attr_accessor database: ::String
+      attr_accessor db_user: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor schema: ::String
+      attr_accessor secret_arn: ::String
+      attr_accessor table: ::String
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTableResponse
+      attr_accessor column_list: ::Array[Types::ColumnMetadata]
+      attr_accessor next_token: ::String
+      attr_accessor table_name: ::String
+      SENSITIVE: []
+    end
+
+    class ExecuteStatementException
+      attr_accessor message: ::String
+      attr_accessor statement_id: ::String
+      SENSITIVE: []
+    end
+
+    class ExecuteStatementInput
+      attr_accessor client_token: ::String
+      attr_accessor cluster_identifier: ::String
+      attr_accessor database: ::String
+      attr_accessor db_user: ::String
+      attr_accessor parameters: ::Array[Types::SqlParameter]
+      attr_accessor secret_arn: ::String
+      attr_accessor sql: ::String
+      attr_accessor statement_name: ::String
+      attr_accessor with_event: bool
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class ExecuteStatementOutput
+      attr_accessor cluster_identifier: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor database: ::String
+      attr_accessor db_user: ::String
+      attr_accessor id: ::String
+      attr_accessor secret_arn: ::String
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class Field
+      attr_accessor blob_value: ::String
+      attr_accessor boolean_value: bool
+      attr_accessor double_value: ::Float
+      attr_accessor is_null: bool
+      attr_accessor long_value: ::Integer
+      attr_accessor string_value: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class BlobValue < Field
+      end
+      class BooleanValue < Field
+      end
+      class DoubleValue < Field
+      end
+      class IsNull < Field
+      end
+      class LongValue < Field
+      end
+      class StringValue < Field
+      end
+      class Unknown < Field
+      end
+    end
+
+    class GetStatementResultRequest
+      attr_accessor id: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetStatementResultResponse
+      attr_accessor column_metadata: ::Array[Types::ColumnMetadata]
+      attr_accessor next_token: ::String
+      attr_accessor records: ::Array[::Array[Types::Field]]
+      attr_accessor total_num_rows: ::Integer
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListDatabasesRequest
+      attr_accessor cluster_identifier: ::String
+      attr_accessor database: ::String
+      attr_accessor db_user: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor secret_arn: ::String
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListDatabasesResponse
+      attr_accessor databases: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSchemasRequest
+      attr_accessor cluster_identifier: ::String
+      attr_accessor connected_database: ::String
+      attr_accessor database: ::String
+      attr_accessor db_user: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor schema_pattern: ::String
+      attr_accessor secret_arn: ::String
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListSchemasResponse
+      attr_accessor next_token: ::String
+      attr_accessor schemas: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListStatementsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor role_level: bool
+      attr_accessor statement_name: ::String
+      attr_accessor status: ("SUBMITTED" | "PICKED" | "STARTED" | "FINISHED" | "ABORTED" | "FAILED" | "ALL")
+      SENSITIVE: []
+    end
+
+    class ListStatementsResponse
+      attr_accessor next_token: ::String
+      attr_accessor statements: ::Array[Types::StatementData]
+      SENSITIVE: []
+    end
+
+    class ListTablesRequest
+      attr_accessor cluster_identifier: ::String
+      attr_accessor connected_database: ::String
+      attr_accessor database: ::String
+      attr_accessor db_user: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor schema_pattern: ::String
+      attr_accessor secret_arn: ::String
+      attr_accessor table_pattern: ::String
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListTablesResponse
+      attr_accessor next_token: ::String
+      attr_accessor tables: ::Array[Types::TableMember]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class SqlParameter
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class StatementData
+      attr_accessor created_at: ::Time
+      attr_accessor id: ::String
+      attr_accessor is_batch_statement: bool
+      attr_accessor query_parameters: ::Array[Types::SqlParameter]
+      attr_accessor query_string: ::String
+      attr_accessor query_strings: ::Array[::String]
+      attr_accessor secret_arn: ::String
+      attr_accessor statement_name: ::String
+      attr_accessor status: ("SUBMITTED" | "PICKED" | "STARTED" | "FINISHED" | "ABORTED" | "FAILED" | "ALL")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class SubStatementData
+      attr_accessor created_at: ::Time
+      attr_accessor duration: ::Integer
+      attr_accessor error: ::String
+      attr_accessor has_result_set: bool
+      attr_accessor id: ::String
+      attr_accessor query_string: ::String
+      attr_accessor redshift_query_id: ::Integer
+      attr_accessor result_rows: ::Integer
+      attr_accessor result_size: ::Integer
+      attr_accessor status: ("SUBMITTED" | "PICKED" | "STARTED" | "FINISHED" | "ABORTED" | "FAILED")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class TableMember
+      attr_accessor name: ::String
+      attr_accessor schema: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

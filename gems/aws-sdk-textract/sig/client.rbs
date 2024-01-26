@@ -1,0 +1,569 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Textract
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AnalyzeDocumentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AnalyzeDocumentResponse]
+        def document_metadata: () -> Types::DocumentMetadata
+        def blocks: () -> ::Array[Types::Block]
+        def human_loop_activation_output: () -> Types::HumanLoopActivationOutput
+        def analyze_document_model_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#analyze_document-instance_method
+      def analyze_document: (
+                              document: {
+                                bytes: ::String?,
+                                s3_object: {
+                                  bucket: ::String?,
+                                  name: ::String?,
+                                  version: ::String?
+                                }?
+                              },
+                              feature_types: Array[("TABLES" | "FORMS" | "QUERIES" | "SIGNATURES" | "LAYOUT")],
+                              ?human_loop_config: {
+                                human_loop_name: ::String,
+                                flow_definition_arn: ::String,
+                                data_attributes: {
+                                  content_classifiers: Array[("FreeOfPersonallyIdentifiableInformation" | "FreeOfAdultContent")]?
+                                }?
+                              },
+                              ?queries_config: {
+                                queries: Array[
+                                  {
+                                    text: ::String,
+                                    alias: ::String?,
+                                    pages: Array[::String]?
+                                  },
+                                ]
+                              },
+                              ?adapters_config: {
+                                adapters: Array[
+                                  {
+                                    adapter_id: ::String,
+                                    pages: Array[::String]?,
+                                    version: ::String
+                                  },
+                                ]
+                              }
+                            ) -> _AnalyzeDocumentResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AnalyzeDocumentResponseSuccess
+
+      interface _AnalyzeExpenseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AnalyzeExpenseResponse]
+        def document_metadata: () -> Types::DocumentMetadata
+        def expense_documents: () -> ::Array[Types::ExpenseDocument]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#analyze_expense-instance_method
+      def analyze_expense: (
+                             document: {
+                               bytes: ::String?,
+                               s3_object: {
+                                 bucket: ::String?,
+                                 name: ::String?,
+                                 version: ::String?
+                               }?
+                             }
+                           ) -> _AnalyzeExpenseResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AnalyzeExpenseResponseSuccess
+
+      interface _AnalyzeIDResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AnalyzeIDResponse]
+        def identity_documents: () -> ::Array[Types::IdentityDocument]
+        def document_metadata: () -> Types::DocumentMetadata
+        def analyze_id_model_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#analyze_id-instance_method
+      def analyze_id: (
+                        document_pages: Array[
+                          {
+                            bytes: ::String?,
+                            s3_object: {
+                              bucket: ::String?,
+                              name: ::String?,
+                              version: ::String?
+                            }?
+                          },
+                        ]
+                      ) -> _AnalyzeIDResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AnalyzeIDResponseSuccess
+
+      interface _CreateAdapterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAdapterResponse]
+        def adapter_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#create_adapter-instance_method
+      def create_adapter: (
+                            adapter_name: ::String,
+                            ?client_request_token: ::String,
+                            ?description: ::String,
+                            feature_types: Array[("TABLES" | "FORMS" | "QUERIES" | "SIGNATURES" | "LAYOUT")],
+                            ?auto_update: ("ENABLED" | "DISABLED"),
+                            ?tags: Hash[::String, ::String]
+                          ) -> _CreateAdapterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAdapterResponseSuccess
+
+      interface _CreateAdapterVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAdapterVersionResponse]
+        def adapter_id: () -> ::String
+        def adapter_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#create_adapter_version-instance_method
+      def create_adapter_version: (
+                                    adapter_id: ::String,
+                                    ?client_request_token: ::String,
+                                    dataset_config: {
+                                      manifest_s3_object: {
+                                        bucket: ::String?,
+                                        name: ::String?,
+                                        version: ::String?
+                                      }?
+                                    },
+                                    ?kms_key_id: ::String,
+                                    output_config: {
+                                      s3_bucket: ::String,
+                                      s3_prefix: ::String?
+                                    },
+                                    ?tags: Hash[::String, ::String]
+                                  ) -> _CreateAdapterVersionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAdapterVersionResponseSuccess
+
+      interface _DeleteAdapterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAdapterResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#delete_adapter-instance_method
+      def delete_adapter: (
+                            adapter_id: ::String
+                          ) -> _DeleteAdapterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAdapterResponseSuccess
+
+      interface _DeleteAdapterVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAdapterVersionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#delete_adapter_version-instance_method
+      def delete_adapter_version: (
+                                    adapter_id: ::String,
+                                    adapter_version: ::String
+                                  ) -> _DeleteAdapterVersionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAdapterVersionResponseSuccess
+
+      interface _DetectDocumentTextResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetectDocumentTextResponse]
+        def document_metadata: () -> Types::DocumentMetadata
+        def blocks: () -> ::Array[Types::Block]
+        def detect_document_text_model_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#detect_document_text-instance_method
+      def detect_document_text: (
+                                  document: {
+                                    bytes: ::String?,
+                                    s3_object: {
+                                      bucket: ::String?,
+                                      name: ::String?,
+                                      version: ::String?
+                                    }?
+                                  }
+                                ) -> _DetectDocumentTextResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetectDocumentTextResponseSuccess
+
+      interface _GetAdapterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAdapterResponse]
+        def adapter_id: () -> ::String
+        def adapter_name: () -> ::String
+        def creation_time: () -> ::Time
+        def description: () -> ::String
+        def feature_types: () -> ::Array[("TABLES" | "FORMS" | "QUERIES" | "SIGNATURES" | "LAYOUT")]
+        def auto_update: () -> ("ENABLED" | "DISABLED")
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#get_adapter-instance_method
+      def get_adapter: (
+                         adapter_id: ::String
+                       ) -> _GetAdapterResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAdapterResponseSuccess
+
+      interface _GetAdapterVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAdapterVersionResponse]
+        def adapter_id: () -> ::String
+        def adapter_version: () -> ::String
+        def creation_time: () -> ::Time
+        def feature_types: () -> ::Array[("TABLES" | "FORMS" | "QUERIES" | "SIGNATURES" | "LAYOUT")]
+        def status: () -> ("ACTIVE" | "AT_RISK" | "DEPRECATED" | "CREATION_ERROR" | "CREATION_IN_PROGRESS")
+        def status_message: () -> ::String
+        def dataset_config: () -> Types::AdapterVersionDatasetConfig
+        def kms_key_id: () -> ::String
+        def output_config: () -> Types::OutputConfig
+        def evaluation_metrics: () -> ::Array[Types::AdapterVersionEvaluationMetric]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#get_adapter_version-instance_method
+      def get_adapter_version: (
+                                 adapter_id: ::String,
+                                 adapter_version: ::String
+                               ) -> _GetAdapterVersionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAdapterVersionResponseSuccess
+
+      interface _GetDocumentAnalysisResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDocumentAnalysisResponse]
+        def document_metadata: () -> Types::DocumentMetadata
+        def job_status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "PARTIAL_SUCCESS")
+        def next_token: () -> ::String
+        def blocks: () -> ::Array[Types::Block]
+        def warnings: () -> ::Array[Types::Warning]
+        def status_message: () -> ::String
+        def analyze_document_model_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#get_document_analysis-instance_method
+      def get_document_analysis: (
+                                   job_id: ::String,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _GetDocumentAnalysisResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDocumentAnalysisResponseSuccess
+
+      interface _GetDocumentTextDetectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDocumentTextDetectionResponse]
+        def document_metadata: () -> Types::DocumentMetadata
+        def job_status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "PARTIAL_SUCCESS")
+        def next_token: () -> ::String
+        def blocks: () -> ::Array[Types::Block]
+        def warnings: () -> ::Array[Types::Warning]
+        def status_message: () -> ::String
+        def detect_document_text_model_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#get_document_text_detection-instance_method
+      def get_document_text_detection: (
+                                         job_id: ::String,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _GetDocumentTextDetectionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDocumentTextDetectionResponseSuccess
+
+      interface _GetExpenseAnalysisResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetExpenseAnalysisResponse]
+        def document_metadata: () -> Types::DocumentMetadata
+        def job_status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "PARTIAL_SUCCESS")
+        def next_token: () -> ::String
+        def expense_documents: () -> ::Array[Types::ExpenseDocument]
+        def warnings: () -> ::Array[Types::Warning]
+        def status_message: () -> ::String
+        def analyze_expense_model_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#get_expense_analysis-instance_method
+      def get_expense_analysis: (
+                                  job_id: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _GetExpenseAnalysisResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetExpenseAnalysisResponseSuccess
+
+      interface _GetLendingAnalysisResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLendingAnalysisResponse]
+        def document_metadata: () -> Types::DocumentMetadata
+        def job_status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "PARTIAL_SUCCESS")
+        def next_token: () -> ::String
+        def results: () -> ::Array[Types::LendingResult]
+        def warnings: () -> ::Array[Types::Warning]
+        def status_message: () -> ::String
+        def analyze_lending_model_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#get_lending_analysis-instance_method
+      def get_lending_analysis: (
+                                  job_id: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _GetLendingAnalysisResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLendingAnalysisResponseSuccess
+
+      interface _GetLendingAnalysisSummaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLendingAnalysisSummaryResponse]
+        def document_metadata: () -> Types::DocumentMetadata
+        def job_status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "PARTIAL_SUCCESS")
+        def summary: () -> Types::LendingSummary
+        def warnings: () -> ::Array[Types::Warning]
+        def status_message: () -> ::String
+        def analyze_lending_model_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#get_lending_analysis_summary-instance_method
+      def get_lending_analysis_summary: (
+                                          job_id: ::String
+                                        ) -> _GetLendingAnalysisSummaryResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLendingAnalysisSummaryResponseSuccess
+
+      interface _ListAdapterVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAdapterVersionsResponse]
+        def adapter_versions: () -> ::Array[Types::AdapterVersionOverview]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#list_adapter_versions-instance_method
+      def list_adapter_versions: (
+                                   ?adapter_id: ::String,
+                                   ?after_creation_time: ::Time,
+                                   ?before_creation_time: ::Time,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListAdapterVersionsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAdapterVersionsResponseSuccess
+
+      interface _ListAdaptersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAdaptersResponse]
+        def adapters: () -> ::Array[Types::AdapterOverview]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#list_adapters-instance_method
+      def list_adapters: (
+                           ?after_creation_time: ::Time,
+                           ?before_creation_time: ::Time,
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListAdaptersResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAdaptersResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _StartDocumentAnalysisResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDocumentAnalysisResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#start_document_analysis-instance_method
+      def start_document_analysis: (
+                                     document_location: {
+                                       s3_object: {
+                                         bucket: ::String?,
+                                         name: ::String?,
+                                         version: ::String?
+                                       }?
+                                     },
+                                     feature_types: Array[("TABLES" | "FORMS" | "QUERIES" | "SIGNATURES" | "LAYOUT")],
+                                     ?client_request_token: ::String,
+                                     ?job_tag: ::String,
+                                     ?notification_channel: {
+                                       sns_topic_arn: ::String,
+                                       role_arn: ::String
+                                     },
+                                     ?output_config: {
+                                       s3_bucket: ::String,
+                                       s3_prefix: ::String?
+                                     },
+                                     ?kms_key_id: ::String,
+                                     ?queries_config: {
+                                       queries: Array[
+                                         {
+                                           text: ::String,
+                                           alias: ::String?,
+                                           pages: Array[::String]?
+                                         },
+                                       ]
+                                     },
+                                     ?adapters_config: {
+                                       adapters: Array[
+                                         {
+                                           adapter_id: ::String,
+                                           pages: Array[::String]?,
+                                           version: ::String
+                                         },
+                                       ]
+                                     }
+                                   ) -> _StartDocumentAnalysisResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDocumentAnalysisResponseSuccess
+
+      interface _StartDocumentTextDetectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDocumentTextDetectionResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#start_document_text_detection-instance_method
+      def start_document_text_detection: (
+                                           document_location: {
+                                             s3_object: {
+                                               bucket: ::String?,
+                                               name: ::String?,
+                                               version: ::String?
+                                             }?
+                                           },
+                                           ?client_request_token: ::String,
+                                           ?job_tag: ::String,
+                                           ?notification_channel: {
+                                             sns_topic_arn: ::String,
+                                             role_arn: ::String
+                                           },
+                                           ?output_config: {
+                                             s3_bucket: ::String,
+                                             s3_prefix: ::String?
+                                           },
+                                           ?kms_key_id: ::String
+                                         ) -> _StartDocumentTextDetectionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDocumentTextDetectionResponseSuccess
+
+      interface _StartExpenseAnalysisResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartExpenseAnalysisResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#start_expense_analysis-instance_method
+      def start_expense_analysis: (
+                                    document_location: {
+                                      s3_object: {
+                                        bucket: ::String?,
+                                        name: ::String?,
+                                        version: ::String?
+                                      }?
+                                    },
+                                    ?client_request_token: ::String,
+                                    ?job_tag: ::String,
+                                    ?notification_channel: {
+                                      sns_topic_arn: ::String,
+                                      role_arn: ::String
+                                    },
+                                    ?output_config: {
+                                      s3_bucket: ::String,
+                                      s3_prefix: ::String?
+                                    },
+                                    ?kms_key_id: ::String
+                                  ) -> _StartExpenseAnalysisResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartExpenseAnalysisResponseSuccess
+
+      interface _StartLendingAnalysisResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartLendingAnalysisResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#start_lending_analysis-instance_method
+      def start_lending_analysis: (
+                                    document_location: {
+                                      s3_object: {
+                                        bucket: ::String?,
+                                        name: ::String?,
+                                        version: ::String?
+                                      }?
+                                    },
+                                    ?client_request_token: ::String,
+                                    ?job_tag: ::String,
+                                    ?notification_channel: {
+                                      sns_topic_arn: ::String,
+                                      role_arn: ::String
+                                    },
+                                    ?output_config: {
+                                      s3_bucket: ::String,
+                                      s3_prefix: ::String?
+                                    },
+                                    ?kms_key_id: ::String
+                                  ) -> _StartLendingAnalysisResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartLendingAnalysisResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAdapterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAdapterResponse]
+        def adapter_id: () -> ::String
+        def adapter_name: () -> ::String
+        def creation_time: () -> ::Time
+        def description: () -> ::String
+        def feature_types: () -> ::Array[("TABLES" | "FORMS" | "QUERIES" | "SIGNATURES" | "LAYOUT")]
+        def auto_update: () -> ("ENABLED" | "DISABLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#update_adapter-instance_method
+      def update_adapter: (
+                            adapter_id: ::String,
+                            ?description: ::String,
+                            ?adapter_name: ::String,
+                            ?auto_update: ("ENABLED" | "DISABLED")
+                          ) -> _UpdateAdapterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAdapterResponseSuccess
+    end
+  end
+end
+

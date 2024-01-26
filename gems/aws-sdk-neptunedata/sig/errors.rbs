@@ -1,0 +1,186 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Neptunedata
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AccessDeniedException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class BadRequestException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class BulkLoadIdNotFoundException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class CancelledByUserException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class ClientTimeoutException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class ConstraintViolationException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class ExpiredStreamException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class FailureByQueryException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class IllegalArgumentException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class InternalFailureException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class InvalidArgumentException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class InvalidNumericDataException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class InvalidParameterException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class LoadUrlAccessDeniedException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class MLResourceNotFoundException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class MalformedQueryException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class MemoryLimitExceededException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class MethodNotAllowedException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class MissingParameterException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class ParsingException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class PreconditionsFailedException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class QueryLimitExceededException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class QueryLimitException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class QueryTooLargeException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class ReadOnlyViolationException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class S3Exception < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class ServerShutdownException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class StatisticsNotAvailableException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class StreamRecordsNotFoundException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class ThrottlingException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class TimeLimitExceededException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class TooManyRequestsException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class UnsupportedOperationException < ::Aws::Errors::ServiceError
+        def detailed_message: () -> ::String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+    end
+  end
+end

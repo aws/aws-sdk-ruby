@@ -1,0 +1,3419 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Pinpoint
+  module Types
+
+    class ADMChannelRequest
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class ADMChannelResponse
+      attr_accessor application_id: ::String
+      attr_accessor creation_date: ::String
+      attr_accessor enabled: bool
+      attr_accessor has_credential: bool
+      attr_accessor id: ::String
+      attr_accessor is_archived: bool
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_date: ::String
+      attr_accessor platform: ::String
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class ADMMessage
+      attr_accessor action: ("OPEN_APP" | "DEEP_LINK" | "URL")
+      attr_accessor body: ::String
+      attr_accessor consolidation_key: ::String
+      attr_accessor data: ::Hash[::String, ::String]
+      attr_accessor expires_after: ::String
+      attr_accessor icon_reference: ::String
+      attr_accessor image_icon_url: ::String
+      attr_accessor image_url: ::String
+      attr_accessor md5: ::String
+      attr_accessor raw_content: ::String
+      attr_accessor silent_push: bool
+      attr_accessor small_image_icon_url: ::String
+      attr_accessor sound: ::String
+      attr_accessor substitutions: ::Hash[::String, ::Array[::String]]
+      attr_accessor title: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class APNSChannelRequest
+      attr_accessor bundle_id: ::String
+      attr_accessor certificate: ::String
+      attr_accessor default_authentication_method: ::String
+      attr_accessor enabled: bool
+      attr_accessor private_key: ::String
+      attr_accessor team_id: ::String
+      attr_accessor token_key: ::String
+      attr_accessor token_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class APNSChannelResponse
+      attr_accessor application_id: ::String
+      attr_accessor creation_date: ::String
+      attr_accessor default_authentication_method: ::String
+      attr_accessor enabled: bool
+      attr_accessor has_credential: bool
+      attr_accessor has_token_key: bool
+      attr_accessor id: ::String
+      attr_accessor is_archived: bool
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_date: ::String
+      attr_accessor platform: ::String
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class APNSMessage
+      attr_accessor apns_push_type: ::String
+      attr_accessor action: ("OPEN_APP" | "DEEP_LINK" | "URL")
+      attr_accessor badge: ::Integer
+      attr_accessor body: ::String
+      attr_accessor category: ::String
+      attr_accessor collapse_id: ::String
+      attr_accessor data: ::Hash[::String, ::String]
+      attr_accessor media_url: ::String
+      attr_accessor preferred_authentication_method: ::String
+      attr_accessor priority: ::String
+      attr_accessor raw_content: ::String
+      attr_accessor silent_push: bool
+      attr_accessor sound: ::String
+      attr_accessor substitutions: ::Hash[::String, ::Array[::String]]
+      attr_accessor thread_id: ::String
+      attr_accessor time_to_live: ::Integer
+      attr_accessor title: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class APNSPushNotificationTemplate
+      attr_accessor action: ("OPEN_APP" | "DEEP_LINK" | "URL")
+      attr_accessor body: ::String
+      attr_accessor media_url: ::String
+      attr_accessor raw_content: ::String
+      attr_accessor sound: ::String
+      attr_accessor title: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class APNSSandboxChannelRequest
+      attr_accessor bundle_id: ::String
+      attr_accessor certificate: ::String
+      attr_accessor default_authentication_method: ::String
+      attr_accessor enabled: bool
+      attr_accessor private_key: ::String
+      attr_accessor team_id: ::String
+      attr_accessor token_key: ::String
+      attr_accessor token_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class APNSSandboxChannelResponse
+      attr_accessor application_id: ::String
+      attr_accessor creation_date: ::String
+      attr_accessor default_authentication_method: ::String
+      attr_accessor enabled: bool
+      attr_accessor has_credential: bool
+      attr_accessor has_token_key: bool
+      attr_accessor id: ::String
+      attr_accessor is_archived: bool
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_date: ::String
+      attr_accessor platform: ::String
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class APNSVoipChannelRequest
+      attr_accessor bundle_id: ::String
+      attr_accessor certificate: ::String
+      attr_accessor default_authentication_method: ::String
+      attr_accessor enabled: bool
+      attr_accessor private_key: ::String
+      attr_accessor team_id: ::String
+      attr_accessor token_key: ::String
+      attr_accessor token_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class APNSVoipChannelResponse
+      attr_accessor application_id: ::String
+      attr_accessor creation_date: ::String
+      attr_accessor default_authentication_method: ::String
+      attr_accessor enabled: bool
+      attr_accessor has_credential: bool
+      attr_accessor has_token_key: bool
+      attr_accessor id: ::String
+      attr_accessor is_archived: bool
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_date: ::String
+      attr_accessor platform: ::String
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class APNSVoipSandboxChannelRequest
+      attr_accessor bundle_id: ::String
+      attr_accessor certificate: ::String
+      attr_accessor default_authentication_method: ::String
+      attr_accessor enabled: bool
+      attr_accessor private_key: ::String
+      attr_accessor team_id: ::String
+      attr_accessor token_key: ::String
+      attr_accessor token_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class APNSVoipSandboxChannelResponse
+      attr_accessor application_id: ::String
+      attr_accessor creation_date: ::String
+      attr_accessor default_authentication_method: ::String
+      attr_accessor enabled: bool
+      attr_accessor has_credential: bool
+      attr_accessor has_token_key: bool
+      attr_accessor id: ::String
+      attr_accessor is_archived: bool
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_date: ::String
+      attr_accessor platform: ::String
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class ActivitiesResponse
+      attr_accessor item: ::Array[Types::ActivityResponse]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class Activity
+      attr_accessor custom: Types::CustomMessageActivity
+      attr_accessor conditional_split: Types::ConditionalSplitActivity
+      attr_accessor description: ::String
+      attr_accessor email: Types::EmailMessageActivity
+      attr_accessor holdout: Types::HoldoutActivity
+      attr_accessor multi_condition: Types::MultiConditionalSplitActivity
+      attr_accessor push: Types::PushMessageActivity
+      attr_accessor random_split: Types::RandomSplitActivity
+      attr_accessor sms: Types::SMSMessageActivity
+      attr_accessor wait: Types::WaitActivity
+      attr_accessor contact_center: Types::ContactCenterActivity
+      SENSITIVE: []
+    end
+
+    class ActivityResponse
+      attr_accessor application_id: ::String
+      attr_accessor campaign_id: ::String
+      attr_accessor end: ::String
+      attr_accessor id: ::String
+      attr_accessor result: ::String
+      attr_accessor scheduled_start: ::String
+      attr_accessor start: ::String
+      attr_accessor state: ::String
+      attr_accessor successful_endpoint_count: ::Integer
+      attr_accessor timezones_completed_count: ::Integer
+      attr_accessor timezones_total_count: ::Integer
+      attr_accessor total_endpoint_count: ::Integer
+      attr_accessor treatment_id: ::String
+      attr_accessor execution_metrics: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class AddressConfiguration
+      attr_accessor body_override: ::String
+      attr_accessor channel_type: ("PUSH" | "GCM" | "APNS" | "APNS_SANDBOX" | "APNS_VOIP" | "APNS_VOIP_SANDBOX" | "ADM" | "SMS" | "VOICE" | "EMAIL" | "BAIDU" | "CUSTOM" | "IN_APP")
+      attr_accessor context: ::Hash[::String, ::String]
+      attr_accessor raw_content: ::String
+      attr_accessor substitutions: ::Hash[::String, ::Array[::String]]
+      attr_accessor title_override: ::String
+      SENSITIVE: []
+    end
+
+    class AndroidPushNotificationTemplate
+      attr_accessor action: ("OPEN_APP" | "DEEP_LINK" | "URL")
+      attr_accessor body: ::String
+      attr_accessor image_icon_url: ::String
+      attr_accessor image_url: ::String
+      attr_accessor raw_content: ::String
+      attr_accessor small_image_icon_url: ::String
+      attr_accessor sound: ::String
+      attr_accessor title: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class ApplicationDateRangeKpiResponse
+      attr_accessor application_id: ::String
+      attr_accessor end_time: ::Time
+      attr_accessor kpi_name: ::String
+      attr_accessor kpi_result: Types::BaseKpiResult
+      attr_accessor next_token: ::String
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ApplicationResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor creation_date: ::String
+      SENSITIVE: []
+    end
+
+    class ApplicationSettingsJourneyLimits
+      attr_accessor daily_cap: ::Integer
+      attr_accessor timeframe_cap: Types::JourneyTimeframeCap
+      attr_accessor total_cap: ::Integer
+      SENSITIVE: []
+    end
+
+    class ApplicationSettingsResource
+      attr_accessor application_id: ::String
+      attr_accessor campaign_hook: Types::CampaignHook
+      attr_accessor last_modified_date: ::String
+      attr_accessor limits: Types::CampaignLimits
+      attr_accessor quiet_time: Types::QuietTime
+      attr_accessor journey_limits: Types::ApplicationSettingsJourneyLimits
+      SENSITIVE: []
+    end
+
+    class ApplicationsResponse
+      attr_accessor item: ::Array[Types::ApplicationResponse]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class AttributeDimension
+      attr_accessor attribute_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEFORE" | "AFTER" | "BETWEEN" | "ON")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AttributesResource
+      attr_accessor application_id: ::String
+      attr_accessor attribute_type: ::String
+      attr_accessor attributes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class BaiduChannelRequest
+      attr_accessor api_key: ::String
+      attr_accessor enabled: bool
+      attr_accessor secret_key: ::String
+      SENSITIVE: []
+    end
+
+    class BaiduChannelResponse
+      attr_accessor application_id: ::String
+      attr_accessor creation_date: ::String
+      attr_accessor credential: ::String
+      attr_accessor enabled: bool
+      attr_accessor has_credential: bool
+      attr_accessor id: ::String
+      attr_accessor is_archived: bool
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_date: ::String
+      attr_accessor platform: ::String
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class BaiduMessage
+      attr_accessor action: ("OPEN_APP" | "DEEP_LINK" | "URL")
+      attr_accessor body: ::String
+      attr_accessor data: ::Hash[::String, ::String]
+      attr_accessor icon_reference: ::String
+      attr_accessor image_icon_url: ::String
+      attr_accessor image_url: ::String
+      attr_accessor raw_content: ::String
+      attr_accessor silent_push: bool
+      attr_accessor small_image_icon_url: ::String
+      attr_accessor sound: ::String
+      attr_accessor substitutions: ::Hash[::String, ::Array[::String]]
+      attr_accessor time_to_live: ::Integer
+      attr_accessor title: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class BaseKpiResult
+      attr_accessor rows: ::Array[Types::ResultRow]
+      SENSITIVE: []
+    end
+
+    class CampaignCustomMessage
+      attr_accessor data: ::String
+      SENSITIVE: []
+    end
+
+    class CampaignDateRangeKpiResponse
+      attr_accessor application_id: ::String
+      attr_accessor campaign_id: ::String
+      attr_accessor end_time: ::Time
+      attr_accessor kpi_name: ::String
+      attr_accessor kpi_result: Types::BaseKpiResult
+      attr_accessor next_token: ::String
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CampaignEmailMessage
+      attr_accessor body: ::String
+      attr_accessor from_address: ::String
+      attr_accessor html_body: ::String
+      attr_accessor title: ::String
+      SENSITIVE: []
+    end
+
+    class CampaignEventFilter
+      attr_accessor dimensions: Types::EventDimensions
+      attr_accessor filter_type: ("SYSTEM" | "ENDPOINT")
+      SENSITIVE: []
+    end
+
+    class CampaignHook
+      attr_accessor lambda_function_name: ::String
+      attr_accessor mode: ("DELIVERY" | "FILTER")
+      attr_accessor web_url: ::String
+      SENSITIVE: []
+    end
+
+    class CampaignInAppMessage
+      attr_accessor body: ::String
+      attr_accessor content: ::Array[Types::InAppMessageContent]
+      attr_accessor custom_config: ::Hash[::String, ::String]
+      attr_accessor layout: ("BOTTOM_BANNER" | "TOP_BANNER" | "OVERLAYS" | "MOBILE_FEED" | "MIDDLE_BANNER" | "CAROUSEL")
+      SENSITIVE: []
+    end
+
+    class CampaignLimits
+      attr_accessor daily: ::Integer
+      attr_accessor maximum_duration: ::Integer
+      attr_accessor messages_per_second: ::Integer
+      attr_accessor total: ::Integer
+      attr_accessor session: ::Integer
+      SENSITIVE: []
+    end
+
+    class CampaignResponse
+      attr_accessor additional_treatments: ::Array[Types::TreatmentResource]
+      attr_accessor application_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor creation_date: ::String
+      attr_accessor custom_delivery_configuration: Types::CustomDeliveryConfiguration
+      attr_accessor default_state: Types::CampaignState
+      attr_accessor description: ::String
+      attr_accessor holdout_percent: ::Integer
+      attr_accessor hook: Types::CampaignHook
+      attr_accessor id: ::String
+      attr_accessor is_paused: bool
+      attr_accessor last_modified_date: ::String
+      attr_accessor limits: Types::CampaignLimits
+      attr_accessor message_configuration: Types::MessageConfiguration
+      attr_accessor name: ::String
+      attr_accessor schedule: Types::Schedule
+      attr_accessor segment_id: ::String
+      attr_accessor segment_version: ::Integer
+      attr_accessor state: Types::CampaignState
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor template_configuration: Types::TemplateConfiguration
+      attr_accessor treatment_description: ::String
+      attr_accessor treatment_name: ::String
+      attr_accessor version: ::Integer
+      attr_accessor priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class CampaignSmsMessage
+      attr_accessor body: ::String
+      attr_accessor message_type: ("TRANSACTIONAL" | "PROMOTIONAL")
+      attr_accessor origination_number: ::String
+      attr_accessor sender_id: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor template_id: ::String
+      SENSITIVE: []
+    end
+
+    class CampaignState
+      attr_accessor campaign_status: ("SCHEDULED" | "EXECUTING" | "PENDING_NEXT_RUN" | "COMPLETED" | "PAUSED" | "DELETED" | "INVALID")
+      SENSITIVE: []
+    end
+
+    class CampaignsResponse
+      attr_accessor item: ::Array[Types::CampaignResponse]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ChannelResponse
+      attr_accessor application_id: ::String
+      attr_accessor creation_date: ::String
+      attr_accessor enabled: bool
+      attr_accessor has_credential: bool
+      attr_accessor id: ::String
+      attr_accessor is_archived: bool
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_date: ::String
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class ChannelsResponse
+      attr_accessor channels: ::Hash[::String, Types::ChannelResponse]
+      SENSITIVE: []
+    end
+
+    class Condition
+      attr_accessor conditions: ::Array[Types::SimpleCondition]
+      attr_accessor operator: ("ALL" | "ANY")
+      SENSITIVE: []
+    end
+
+    class ConditionalSplitActivity
+      attr_accessor condition: Types::Condition
+      attr_accessor evaluation_wait_time: Types::WaitTime
+      attr_accessor false_activity: ::String
+      attr_accessor true_activity: ::String
+      SENSITIVE: []
+    end
+
+    class ContactCenterActivity
+      attr_accessor next_activity: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAppRequest
+      attr_accessor create_application_request: Types::CreateApplicationRequest
+      SENSITIVE: []
+    end
+
+    class CreateAppResponse
+      attr_accessor application_response: Types::ApplicationResponse
+      SENSITIVE: []
+    end
+
+    class CreateApplicationRequest
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateCampaignRequest
+      attr_accessor application_id: ::String
+      attr_accessor write_campaign_request: Types::WriteCampaignRequest
+      SENSITIVE: []
+    end
+
+    class CreateCampaignResponse
+      attr_accessor campaign_response: Types::CampaignResponse
+      SENSITIVE: []
+    end
+
+    class CreateEmailTemplateRequest
+      attr_accessor email_template_request: Types::EmailTemplateRequest
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateEmailTemplateResponse
+      attr_accessor create_template_message_body: Types::CreateTemplateMessageBody
+      SENSITIVE: []
+    end
+
+    class CreateExportJobRequest
+      attr_accessor application_id: ::String
+      attr_accessor export_job_request: Types::ExportJobRequest
+      SENSITIVE: []
+    end
+
+    class CreateExportJobResponse
+      attr_accessor export_job_response: Types::ExportJobResponse
+      SENSITIVE: []
+    end
+
+    class CreateImportJobRequest
+      attr_accessor application_id: ::String
+      attr_accessor import_job_request: Types::ImportJobRequest
+      SENSITIVE: []
+    end
+
+    class CreateImportJobResponse
+      attr_accessor import_job_response: Types::ImportJobResponse
+      SENSITIVE: []
+    end
+
+    class CreateInAppTemplateRequest
+      attr_accessor in_app_template_request: Types::InAppTemplateRequest
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateInAppTemplateResponse
+      attr_accessor template_create_message_body: Types::TemplateCreateMessageBody
+      SENSITIVE: []
+    end
+
+    class CreateJourneyRequest
+      attr_accessor application_id: ::String
+      attr_accessor write_journey_request: Types::WriteJourneyRequest
+      SENSITIVE: []
+    end
+
+    class CreateJourneyResponse
+      attr_accessor journey_response: Types::JourneyResponse
+      SENSITIVE: []
+    end
+
+    class CreatePushTemplateRequest
+      attr_accessor push_notification_template_request: Types::PushNotificationTemplateRequest
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePushTemplateResponse
+      attr_accessor create_template_message_body: Types::CreateTemplateMessageBody
+      SENSITIVE: []
+    end
+
+    class CreateRecommenderConfiguration
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor recommendation_provider_id_type: ::String
+      attr_accessor recommendation_provider_role_arn: ::String
+      attr_accessor recommendation_provider_uri: ::String
+      attr_accessor recommendation_transformer_uri: ::String
+      attr_accessor recommendations_display_name: ::String
+      attr_accessor recommendations_per_message: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateRecommenderConfigurationRequest
+      attr_accessor create_recommender_configuration: Types::CreateRecommenderConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateRecommenderConfigurationResponse
+      attr_accessor recommender_configuration_response: Types::RecommenderConfigurationResponse
+      SENSITIVE: []
+    end
+
+    class CreateSegmentRequest
+      attr_accessor application_id: ::String
+      attr_accessor write_segment_request: Types::WriteSegmentRequest
+      SENSITIVE: []
+    end
+
+    class CreateSegmentResponse
+      attr_accessor segment_response: Types::SegmentResponse
+      SENSITIVE: []
+    end
+
+    class CreateSmsTemplateRequest
+      attr_accessor sms_template_request: Types::SMSTemplateRequest
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSmsTemplateResponse
+      attr_accessor create_template_message_body: Types::CreateTemplateMessageBody
+      SENSITIVE: []
+    end
+
+    class CreateTemplateMessageBody
+      attr_accessor arn: ::String
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateVoiceTemplateRequest
+      attr_accessor template_name: ::String
+      attr_accessor voice_template_request: Types::VoiceTemplateRequest
+      SENSITIVE: []
+    end
+
+    class CreateVoiceTemplateResponse
+      attr_accessor create_template_message_body: Types::CreateTemplateMessageBody
+      SENSITIVE: []
+    end
+
+    class CustomDeliveryConfiguration
+      attr_accessor delivery_uri: ::String
+      attr_accessor endpoint_types: ::Array[("PUSH" | "GCM" | "APNS" | "APNS_SANDBOX" | "APNS_VOIP" | "APNS_VOIP_SANDBOX" | "ADM" | "SMS" | "VOICE" | "EMAIL" | "BAIDU" | "CUSTOM" | "IN_APP")]
+      SENSITIVE: []
+    end
+
+    class CustomMessageActivity
+      attr_accessor delivery_uri: ::String
+      attr_accessor endpoint_types: ::Array[("PUSH" | "GCM" | "APNS" | "APNS_SANDBOX" | "APNS_VOIP" | "APNS_VOIP_SANDBOX" | "ADM" | "SMS" | "VOICE" | "EMAIL" | "BAIDU" | "CUSTOM" | "IN_APP")]
+      attr_accessor message_config: Types::JourneyCustomMessage
+      attr_accessor next_activity: ::String
+      attr_accessor template_name: ::String
+      attr_accessor template_version: ::String
+      SENSITIVE: []
+    end
+
+    class DefaultButtonConfiguration
+      attr_accessor background_color: ::String
+      attr_accessor border_radius: ::Integer
+      attr_accessor button_action: ("LINK" | "DEEP_LINK" | "CLOSE")
+      attr_accessor link: ::String
+      attr_accessor text: ::String
+      attr_accessor text_color: ::String
+      SENSITIVE: []
+    end
+
+    class DefaultMessage
+      attr_accessor body: ::String
+      attr_accessor substitutions: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class DefaultPushNotificationMessage
+      attr_accessor action: ("OPEN_APP" | "DEEP_LINK" | "URL")
+      attr_accessor body: ::String
+      attr_accessor data: ::Hash[::String, ::String]
+      attr_accessor silent_push: bool
+      attr_accessor substitutions: ::Hash[::String, ::Array[::String]]
+      attr_accessor title: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class DefaultPushNotificationTemplate
+      attr_accessor action: ("OPEN_APP" | "DEEP_LINK" | "URL")
+      attr_accessor body: ::String
+      attr_accessor sound: ::String
+      attr_accessor title: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAdmChannelRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAdmChannelResponse
+      attr_accessor adm_channel_response: Types::ADMChannelResponse
+      SENSITIVE: []
+    end
+
+    class DeleteApnsChannelRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApnsChannelResponse
+      attr_accessor apns_channel_response: Types::APNSChannelResponse
+      SENSITIVE: []
+    end
+
+    class DeleteApnsSandboxChannelRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApnsSandboxChannelResponse
+      attr_accessor apns_sandbox_channel_response: Types::APNSSandboxChannelResponse
+      SENSITIVE: []
+    end
+
+    class DeleteApnsVoipChannelRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApnsVoipChannelResponse
+      attr_accessor apns_voip_channel_response: Types::APNSVoipChannelResponse
+      SENSITIVE: []
+    end
+
+    class DeleteApnsVoipSandboxChannelRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApnsVoipSandboxChannelResponse
+      attr_accessor apns_voip_sandbox_channel_response: Types::APNSVoipSandboxChannelResponse
+      SENSITIVE: []
+    end
+
+    class DeleteAppRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAppResponse
+      attr_accessor application_response: Types::ApplicationResponse
+      SENSITIVE: []
+    end
+
+    class DeleteBaiduChannelRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBaiduChannelResponse
+      attr_accessor baidu_channel_response: Types::BaiduChannelResponse
+      SENSITIVE: []
+    end
+
+    class DeleteCampaignRequest
+      attr_accessor application_id: ::String
+      attr_accessor campaign_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCampaignResponse
+      attr_accessor campaign_response: Types::CampaignResponse
+      SENSITIVE: []
+    end
+
+    class DeleteEmailChannelRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEmailChannelResponse
+      attr_accessor email_channel_response: Types::EmailChannelResponse
+      SENSITIVE: []
+    end
+
+    class DeleteEmailTemplateRequest
+      attr_accessor template_name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEmailTemplateResponse
+      attr_accessor message_body: Types::MessageBody
+      SENSITIVE: []
+    end
+
+    class DeleteEndpointRequest
+      attr_accessor application_id: ::String
+      attr_accessor endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEndpointResponse
+      attr_accessor endpoint_response: Types::EndpointResponse
+      SENSITIVE: []
+    end
+
+    class DeleteEventStreamRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEventStreamResponse
+      attr_accessor event_stream: Types::EventStream
+      SENSITIVE: []
+    end
+
+    class DeleteGcmChannelRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGcmChannelResponse
+      attr_accessor gcm_channel_response: Types::GCMChannelResponse
+      SENSITIVE: []
+    end
+
+    class DeleteInAppTemplateRequest
+      attr_accessor template_name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInAppTemplateResponse
+      attr_accessor message_body: Types::MessageBody
+      SENSITIVE: []
+    end
+
+    class DeleteJourneyRequest
+      attr_accessor application_id: ::String
+      attr_accessor journey_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteJourneyResponse
+      attr_accessor journey_response: Types::JourneyResponse
+      SENSITIVE: []
+    end
+
+    class DeletePushTemplateRequest
+      attr_accessor template_name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePushTemplateResponse
+      attr_accessor message_body: Types::MessageBody
+      SENSITIVE: []
+    end
+
+    class DeleteRecommenderConfigurationRequest
+      attr_accessor recommender_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRecommenderConfigurationResponse
+      attr_accessor recommender_configuration_response: Types::RecommenderConfigurationResponse
+      SENSITIVE: []
+    end
+
+    class DeleteSegmentRequest
+      attr_accessor application_id: ::String
+      attr_accessor segment_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSegmentResponse
+      attr_accessor segment_response: Types::SegmentResponse
+      SENSITIVE: []
+    end
+
+    class DeleteSmsChannelRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSmsChannelResponse
+      attr_accessor sms_channel_response: Types::SMSChannelResponse
+      SENSITIVE: []
+    end
+
+    class DeleteSmsTemplateRequest
+      attr_accessor template_name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSmsTemplateResponse
+      attr_accessor message_body: Types::MessageBody
+      SENSITIVE: []
+    end
+
+    class DeleteUserEndpointsRequest
+      attr_accessor application_id: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUserEndpointsResponse
+      attr_accessor endpoints_response: Types::EndpointsResponse
+      SENSITIVE: []
+    end
+
+    class DeleteVoiceChannelRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVoiceChannelResponse
+      attr_accessor voice_channel_response: Types::VoiceChannelResponse
+      SENSITIVE: []
+    end
+
+    class DeleteVoiceTemplateRequest
+      attr_accessor template_name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVoiceTemplateResponse
+      attr_accessor message_body: Types::MessageBody
+      SENSITIVE: []
+    end
+
+    class DirectMessageConfiguration
+      attr_accessor adm_message: Types::ADMMessage
+      attr_accessor apns_message: Types::APNSMessage
+      attr_accessor baidu_message: Types::BaiduMessage
+      attr_accessor default_message: Types::DefaultMessage
+      attr_accessor default_push_notification_message: Types::DefaultPushNotificationMessage
+      attr_accessor email_message: Types::EmailMessage
+      attr_accessor gcm_message: Types::GCMMessage
+      attr_accessor sms_message: Types::SMSMessage
+      attr_accessor voice_message: Types::VoiceMessage
+      SENSITIVE: []
+    end
+
+    class EmailChannelRequest
+      attr_accessor configuration_set: ::String
+      attr_accessor enabled: bool
+      attr_accessor from_address: ::String
+      attr_accessor identity: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class EmailChannelResponse
+      attr_accessor application_id: ::String
+      attr_accessor configuration_set: ::String
+      attr_accessor creation_date: ::String
+      attr_accessor enabled: bool
+      attr_accessor from_address: ::String
+      attr_accessor has_credential: bool
+      attr_accessor id: ::String
+      attr_accessor identity: ::String
+      attr_accessor is_archived: bool
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_date: ::String
+      attr_accessor messages_per_second: ::Integer
+      attr_accessor platform: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class EmailMessage
+      attr_accessor body: ::String
+      attr_accessor feedback_forwarding_address: ::String
+      attr_accessor from_address: ::String
+      attr_accessor raw_email: Types::RawEmail
+      attr_accessor reply_to_addresses: ::Array[::String]
+      attr_accessor simple_email: Types::SimpleEmail
+      attr_accessor substitutions: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class EmailMessageActivity
+      attr_accessor message_config: Types::JourneyEmailMessage
+      attr_accessor next_activity: ::String
+      attr_accessor template_name: ::String
+      attr_accessor template_version: ::String
+      SENSITIVE: []
+    end
+
+    class EmailTemplateRequest
+      attr_accessor default_substitutions: ::String
+      attr_accessor html_part: ::String
+      attr_accessor recommender_id: ::String
+      attr_accessor subject: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor template_description: ::String
+      attr_accessor text_part: ::String
+      SENSITIVE: []
+    end
+
+    class EmailTemplateResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_date: ::String
+      attr_accessor default_substitutions: ::String
+      attr_accessor html_part: ::String
+      attr_accessor last_modified_date: ::String
+      attr_accessor recommender_id: ::String
+      attr_accessor subject: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor template_description: ::String
+      attr_accessor template_name: ::String
+      attr_accessor template_type: ("EMAIL" | "SMS" | "VOICE" | "PUSH" | "INAPP")
+      attr_accessor text_part: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class EndpointBatchItem
+      attr_accessor address: ::String
+      attr_accessor attributes: ::Hash[::String, ::Array[::String]]
+      attr_accessor channel_type: ("PUSH" | "GCM" | "APNS" | "APNS_SANDBOX" | "APNS_VOIP" | "APNS_VOIP_SANDBOX" | "ADM" | "SMS" | "VOICE" | "EMAIL" | "BAIDU" | "CUSTOM" | "IN_APP")
+      attr_accessor demographic: Types::EndpointDemographic
+      attr_accessor effective_date: ::String
+      attr_accessor endpoint_status: ::String
+      attr_accessor id: ::String
+      attr_accessor location: Types::EndpointLocation
+      attr_accessor metrics: ::Hash[::String, ::Float]
+      attr_accessor opt_out: ::String
+      attr_accessor request_id: ::String
+      attr_accessor user: Types::EndpointUser
+      SENSITIVE: []
+    end
+
+    class EndpointBatchRequest
+      attr_accessor item: ::Array[Types::EndpointBatchItem]
+      SENSITIVE: []
+    end
+
+    class EndpointDemographic
+      attr_accessor app_version: ::String
+      attr_accessor locale: ::String
+      attr_accessor make: ::String
+      attr_accessor model: ::String
+      attr_accessor model_version: ::String
+      attr_accessor platform: ::String
+      attr_accessor platform_version: ::String
+      attr_accessor timezone: ::String
+      SENSITIVE: []
+    end
+
+    class EndpointItemResponse
+      attr_accessor message: ::String
+      attr_accessor status_code: ::Integer
+      SENSITIVE: []
+    end
+
+    class EndpointLocation
+      attr_accessor city: ::String
+      attr_accessor country: ::String
+      attr_accessor latitude: ::Float
+      attr_accessor longitude: ::Float
+      attr_accessor postal_code: ::String
+      attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
+    class EndpointMessageResult
+      attr_accessor address: ::String
+      attr_accessor delivery_status: ("SUCCESSFUL" | "THROTTLED" | "TEMPORARY_FAILURE" | "PERMANENT_FAILURE" | "UNKNOWN_FAILURE" | "OPT_OUT" | "DUPLICATE")
+      attr_accessor message_id: ::String
+      attr_accessor status_code: ::Integer
+      attr_accessor status_message: ::String
+      attr_accessor updated_token: ::String
+      SENSITIVE: []
+    end
+
+    class EndpointRequest
+      attr_accessor address: ::String
+      attr_accessor attributes: ::Hash[::String, ::Array[::String]]
+      attr_accessor channel_type: ("PUSH" | "GCM" | "APNS" | "APNS_SANDBOX" | "APNS_VOIP" | "APNS_VOIP_SANDBOX" | "ADM" | "SMS" | "VOICE" | "EMAIL" | "BAIDU" | "CUSTOM" | "IN_APP")
+      attr_accessor demographic: Types::EndpointDemographic
+      attr_accessor effective_date: ::String
+      attr_accessor endpoint_status: ::String
+      attr_accessor location: Types::EndpointLocation
+      attr_accessor metrics: ::Hash[::String, ::Float]
+      attr_accessor opt_out: ::String
+      attr_accessor request_id: ::String
+      attr_accessor user: Types::EndpointUser
+      SENSITIVE: []
+    end
+
+    class EndpointResponse
+      attr_accessor address: ::String
+      attr_accessor application_id: ::String
+      attr_accessor attributes: ::Hash[::String, ::Array[::String]]
+      attr_accessor channel_type: ("PUSH" | "GCM" | "APNS" | "APNS_SANDBOX" | "APNS_VOIP" | "APNS_VOIP_SANDBOX" | "ADM" | "SMS" | "VOICE" | "EMAIL" | "BAIDU" | "CUSTOM" | "IN_APP")
+      attr_accessor cohort_id: ::String
+      attr_accessor creation_date: ::String
+      attr_accessor demographic: Types::EndpointDemographic
+      attr_accessor effective_date: ::String
+      attr_accessor endpoint_status: ::String
+      attr_accessor id: ::String
+      attr_accessor location: Types::EndpointLocation
+      attr_accessor metrics: ::Hash[::String, ::Float]
+      attr_accessor opt_out: ::String
+      attr_accessor request_id: ::String
+      attr_accessor user: Types::EndpointUser
+      SENSITIVE: []
+    end
+
+    class EndpointSendConfiguration
+      attr_accessor body_override: ::String
+      attr_accessor context: ::Hash[::String, ::String]
+      attr_accessor raw_content: ::String
+      attr_accessor substitutions: ::Hash[::String, ::Array[::String]]
+      attr_accessor title_override: ::String
+      SENSITIVE: []
+    end
+
+    class EndpointUser
+      attr_accessor user_attributes: ::Hash[::String, ::Array[::String]]
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class EndpointsResponse
+      attr_accessor item: ::Array[Types::EndpointResponse]
+      SENSITIVE: []
+    end
+
+    class Event
+      attr_accessor app_package_name: ::String
+      attr_accessor app_title: ::String
+      attr_accessor app_version_code: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor client_sdk_version: ::String
+      attr_accessor event_type: ::String
+      attr_accessor metrics: ::Hash[::String, ::Float]
+      attr_accessor sdk_name: ::String
+      attr_accessor session: Types::Session
+      attr_accessor timestamp: ::String
+      SENSITIVE: []
+    end
+
+    class EventCondition
+      attr_accessor dimensions: Types::EventDimensions
+      attr_accessor message_activity: ::String
+      SENSITIVE: []
+    end
+
+    class EventDimensions
+      attr_accessor attributes: ::Hash[::String, Types::AttributeDimension]
+      attr_accessor event_type: Types::SetDimension
+      attr_accessor metrics: ::Hash[::String, Types::MetricDimension]
+      SENSITIVE: []
+    end
+
+    class EventFilter
+      attr_accessor dimensions: Types::EventDimensions
+      attr_accessor filter_type: ("SYSTEM" | "ENDPOINT")
+      SENSITIVE: []
+    end
+
+    class EventItemResponse
+      attr_accessor message: ::String
+      attr_accessor status_code: ::Integer
+      SENSITIVE: []
+    end
+
+    class EventStartCondition
+      attr_accessor event_filter: Types::EventFilter
+      attr_accessor segment_id: ::String
+      SENSITIVE: []
+    end
+
+    class EventStream
+      attr_accessor application_id: ::String
+      attr_accessor destination_stream_arn: ::String
+      attr_accessor external_id: ::String
+      attr_accessor last_modified_date: ::String
+      attr_accessor last_updated_by: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class EventsBatch
+      attr_accessor endpoint: Types::PublicEndpoint
+      attr_accessor events: ::Hash[::String, Types::Event]
+      SENSITIVE: []
+    end
+
+    class EventsRequest
+      attr_accessor batch_item: ::Hash[::String, Types::EventsBatch]
+      SENSITIVE: []
+    end
+
+    class EventsResponse
+      attr_accessor results: ::Hash[::String, Types::ItemResponse]
+      SENSITIVE: []
+    end
+
+    class ExportJobRequest
+      attr_accessor role_arn: ::String
+      attr_accessor s3_url_prefix: ::String
+      attr_accessor segment_id: ::String
+      attr_accessor segment_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExportJobResource
+      attr_accessor role_arn: ::String
+      attr_accessor s3_url_prefix: ::String
+      attr_accessor segment_id: ::String
+      attr_accessor segment_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExportJobResponse
+      attr_accessor application_id: ::String
+      attr_accessor completed_pieces: ::Integer
+      attr_accessor completion_date: ::String
+      attr_accessor creation_date: ::String
+      attr_accessor definition: Types::ExportJobResource
+      attr_accessor failed_pieces: ::Integer
+      attr_accessor failures: ::Array[::String]
+      attr_accessor id: ::String
+      attr_accessor job_status: ("CREATED" | "PREPARING_FOR_INITIALIZATION" | "INITIALIZING" | "PROCESSING" | "PENDING_JOB" | "COMPLETING" | "COMPLETED" | "FAILING" | "FAILED")
+      attr_accessor total_failures: ::Integer
+      attr_accessor total_pieces: ::Integer
+      attr_accessor total_processed: ::Integer
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ExportJobsResponse
+      attr_accessor item: ::Array[Types::ExportJobResponse]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ForbiddenException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class GCMChannelRequest
+      attr_accessor api_key: ::String
+      attr_accessor default_authentication_method: ::String
+      attr_accessor enabled: bool
+      attr_accessor service_json: ::String
+      SENSITIVE: []
+    end
+
+    class GCMChannelResponse
+      attr_accessor application_id: ::String
+      attr_accessor creation_date: ::String
+      attr_accessor credential: ::String
+      attr_accessor default_authentication_method: ::String
+      attr_accessor enabled: bool
+      attr_accessor has_credential: bool
+      attr_accessor has_fcm_service_credentials: bool
+      attr_accessor id: ::String
+      attr_accessor is_archived: bool
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_date: ::String
+      attr_accessor platform: ::String
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class GCMMessage
+      attr_accessor action: ("OPEN_APP" | "DEEP_LINK" | "URL")
+      attr_accessor body: ::String
+      attr_accessor collapse_key: ::String
+      attr_accessor data: ::Hash[::String, ::String]
+      attr_accessor icon_reference: ::String
+      attr_accessor image_icon_url: ::String
+      attr_accessor image_url: ::String
+      attr_accessor preferred_authentication_method: ::String
+      attr_accessor priority: ::String
+      attr_accessor raw_content: ::String
+      attr_accessor restricted_package_name: ::String
+      attr_accessor silent_push: bool
+      attr_accessor small_image_icon_url: ::String
+      attr_accessor sound: ::String
+      attr_accessor substitutions: ::Hash[::String, ::Array[::String]]
+      attr_accessor time_to_live: ::Integer
+      attr_accessor title: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class GPSCoordinates
+      attr_accessor latitude: ::Float
+      attr_accessor longitude: ::Float
+      SENSITIVE: []
+    end
+
+    class GPSPointDimension
+      attr_accessor coordinates: Types::GPSCoordinates
+      attr_accessor range_in_kilometers: ::Float
+      SENSITIVE: []
+    end
+
+    class GetAdmChannelRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAdmChannelResponse
+      attr_accessor adm_channel_response: Types::ADMChannelResponse
+      SENSITIVE: []
+    end
+
+    class GetApnsChannelRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetApnsChannelResponse
+      attr_accessor apns_channel_response: Types::APNSChannelResponse
+      SENSITIVE: []
+    end
+
+    class GetApnsSandboxChannelRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetApnsSandboxChannelResponse
+      attr_accessor apns_sandbox_channel_response: Types::APNSSandboxChannelResponse
+      SENSITIVE: []
+    end
+
+    class GetApnsVoipChannelRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetApnsVoipChannelResponse
+      attr_accessor apns_voip_channel_response: Types::APNSVoipChannelResponse
+      SENSITIVE: []
+    end
+
+    class GetApnsVoipSandboxChannelRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetApnsVoipSandboxChannelResponse
+      attr_accessor apns_voip_sandbox_channel_response: Types::APNSVoipSandboxChannelResponse
+      SENSITIVE: []
+    end
+
+    class GetAppRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAppResponse
+      attr_accessor application_response: Types::ApplicationResponse
+      SENSITIVE: []
+    end
+
+    class GetApplicationDateRangeKpiRequest
+      attr_accessor application_id: ::String
+      attr_accessor end_time: ::Time
+      attr_accessor kpi_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::String
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetApplicationDateRangeKpiResponse
+      attr_accessor application_date_range_kpi_response: Types::ApplicationDateRangeKpiResponse
+      SENSITIVE: []
+    end
+
+    class GetApplicationSettingsRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetApplicationSettingsResponse
+      attr_accessor application_settings_resource: Types::ApplicationSettingsResource
+      SENSITIVE: []
+    end
+
+    class GetAppsRequest
+      attr_accessor page_size: ::String
+      attr_accessor token: ::String
+      SENSITIVE: []
+    end
+
+    class GetAppsResponse
+      attr_accessor applications_response: Types::ApplicationsResponse
+      SENSITIVE: []
+    end
+
+    class GetBaiduChannelRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetBaiduChannelResponse
+      attr_accessor baidu_channel_response: Types::BaiduChannelResponse
+      SENSITIVE: []
+    end
+
+    class GetCampaignActivitiesRequest
+      attr_accessor application_id: ::String
+      attr_accessor campaign_id: ::String
+      attr_accessor page_size: ::String
+      attr_accessor token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCampaignActivitiesResponse
+      attr_accessor activities_response: Types::ActivitiesResponse
+      SENSITIVE: []
+    end
+
+    class GetCampaignDateRangeKpiRequest
+      attr_accessor application_id: ::String
+      attr_accessor campaign_id: ::String
+      attr_accessor end_time: ::Time
+      attr_accessor kpi_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::String
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetCampaignDateRangeKpiResponse
+      attr_accessor campaign_date_range_kpi_response: Types::CampaignDateRangeKpiResponse
+      SENSITIVE: []
+    end
+
+    class GetCampaignRequest
+      attr_accessor application_id: ::String
+      attr_accessor campaign_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCampaignResponse
+      attr_accessor campaign_response: Types::CampaignResponse
+      SENSITIVE: []
+    end
+
+    class GetCampaignVersionRequest
+      attr_accessor application_id: ::String
+      attr_accessor campaign_id: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class GetCampaignVersionResponse
+      attr_accessor campaign_response: Types::CampaignResponse
+      SENSITIVE: []
+    end
+
+    class GetCampaignVersionsRequest
+      attr_accessor application_id: ::String
+      attr_accessor campaign_id: ::String
+      attr_accessor page_size: ::String
+      attr_accessor token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCampaignVersionsResponse
+      attr_accessor campaigns_response: Types::CampaignsResponse
+      SENSITIVE: []
+    end
+
+    class GetCampaignsRequest
+      attr_accessor application_id: ::String
+      attr_accessor page_size: ::String
+      attr_accessor token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCampaignsResponse
+      attr_accessor campaigns_response: Types::CampaignsResponse
+      SENSITIVE: []
+    end
+
+    class GetChannelsRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetChannelsResponse
+      attr_accessor channels_response: Types::ChannelsResponse
+      SENSITIVE: []
+    end
+
+    class GetEmailChannelRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetEmailChannelResponse
+      attr_accessor email_channel_response: Types::EmailChannelResponse
+      SENSITIVE: []
+    end
+
+    class GetEmailTemplateRequest
+      attr_accessor template_name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class GetEmailTemplateResponse
+      attr_accessor email_template_response: Types::EmailTemplateResponse
+      SENSITIVE: []
+    end
+
+    class GetEndpointRequest
+      attr_accessor application_id: ::String
+      attr_accessor endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetEndpointResponse
+      attr_accessor endpoint_response: Types::EndpointResponse
+      SENSITIVE: []
+    end
+
+    class GetEventStreamRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetEventStreamResponse
+      attr_accessor event_stream: Types::EventStream
+      SENSITIVE: []
+    end
+
+    class GetExportJobRequest
+      attr_accessor application_id: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetExportJobResponse
+      attr_accessor export_job_response: Types::ExportJobResponse
+      SENSITIVE: []
+    end
+
+    class GetExportJobsRequest
+      attr_accessor application_id: ::String
+      attr_accessor page_size: ::String
+      attr_accessor token: ::String
+      SENSITIVE: []
+    end
+
+    class GetExportJobsResponse
+      attr_accessor export_jobs_response: Types::ExportJobsResponse
+      SENSITIVE: []
+    end
+
+    class GetGcmChannelRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetGcmChannelResponse
+      attr_accessor gcm_channel_response: Types::GCMChannelResponse
+      SENSITIVE: []
+    end
+
+    class GetImportJobRequest
+      attr_accessor application_id: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetImportJobResponse
+      attr_accessor import_job_response: Types::ImportJobResponse
+      SENSITIVE: []
+    end
+
+    class GetImportJobsRequest
+      attr_accessor application_id: ::String
+      attr_accessor page_size: ::String
+      attr_accessor token: ::String
+      SENSITIVE: []
+    end
+
+    class GetImportJobsResponse
+      attr_accessor import_jobs_response: Types::ImportJobsResponse
+      SENSITIVE: []
+    end
+
+    class GetInAppMessagesRequest
+      attr_accessor application_id: ::String
+      attr_accessor endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetInAppMessagesResponse
+      attr_accessor in_app_messages_response: Types::InAppMessagesResponse
+      SENSITIVE: []
+    end
+
+    class GetInAppTemplateRequest
+      attr_accessor template_name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class GetInAppTemplateResponse
+      attr_accessor in_app_template_response: Types::InAppTemplateResponse
+      SENSITIVE: []
+    end
+
+    class GetJourneyDateRangeKpiRequest
+      attr_accessor application_id: ::String
+      attr_accessor end_time: ::Time
+      attr_accessor journey_id: ::String
+      attr_accessor kpi_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::String
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetJourneyDateRangeKpiResponse
+      attr_accessor journey_date_range_kpi_response: Types::JourneyDateRangeKpiResponse
+      SENSITIVE: []
+    end
+
+    class GetJourneyExecutionActivityMetricsRequest
+      attr_accessor application_id: ::String
+      attr_accessor journey_activity_id: ::String
+      attr_accessor journey_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::String
+      SENSITIVE: []
+    end
+
+    class GetJourneyExecutionActivityMetricsResponse
+      attr_accessor journey_execution_activity_metrics_response: Types::JourneyExecutionActivityMetricsResponse
+      SENSITIVE: []
+    end
+
+    class GetJourneyExecutionMetricsRequest
+      attr_accessor application_id: ::String
+      attr_accessor journey_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::String
+      SENSITIVE: []
+    end
+
+    class GetJourneyExecutionMetricsResponse
+      attr_accessor journey_execution_metrics_response: Types::JourneyExecutionMetricsResponse
+      SENSITIVE: []
+    end
+
+    class GetJourneyRequest
+      attr_accessor application_id: ::String
+      attr_accessor journey_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetJourneyResponse
+      attr_accessor journey_response: Types::JourneyResponse
+      SENSITIVE: []
+    end
+
+    class GetJourneyRunExecutionActivityMetricsRequest
+      attr_accessor application_id: ::String
+      attr_accessor journey_activity_id: ::String
+      attr_accessor journey_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::String
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetJourneyRunExecutionActivityMetricsResponse
+      attr_accessor journey_run_execution_activity_metrics_response: Types::JourneyRunExecutionActivityMetricsResponse
+      SENSITIVE: []
+    end
+
+    class GetJourneyRunExecutionMetricsRequest
+      attr_accessor application_id: ::String
+      attr_accessor journey_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::String
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetJourneyRunExecutionMetricsResponse
+      attr_accessor journey_run_execution_metrics_response: Types::JourneyRunExecutionMetricsResponse
+      SENSITIVE: []
+    end
+
+    class GetJourneyRunsRequest
+      attr_accessor application_id: ::String
+      attr_accessor journey_id: ::String
+      attr_accessor page_size: ::String
+      attr_accessor token: ::String
+      SENSITIVE: []
+    end
+
+    class GetJourneyRunsResponse
+      attr_accessor journey_runs_response: Types::JourneyRunsResponse
+      SENSITIVE: []
+    end
+
+    class GetPushTemplateRequest
+      attr_accessor template_name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class GetPushTemplateResponse
+      attr_accessor push_notification_template_response: Types::PushNotificationTemplateResponse
+      SENSITIVE: []
+    end
+
+    class GetRecommenderConfigurationRequest
+      attr_accessor recommender_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRecommenderConfigurationResponse
+      attr_accessor recommender_configuration_response: Types::RecommenderConfigurationResponse
+      SENSITIVE: []
+    end
+
+    class GetRecommenderConfigurationsRequest
+      attr_accessor page_size: ::String
+      attr_accessor token: ::String
+      SENSITIVE: []
+    end
+
+    class GetRecommenderConfigurationsResponse
+      attr_accessor list_recommender_configurations_response: Types::ListRecommenderConfigurationsResponse
+      SENSITIVE: []
+    end
+
+    class GetSegmentExportJobsRequest
+      attr_accessor application_id: ::String
+      attr_accessor page_size: ::String
+      attr_accessor segment_id: ::String
+      attr_accessor token: ::String
+      SENSITIVE: []
+    end
+
+    class GetSegmentExportJobsResponse
+      attr_accessor export_jobs_response: Types::ExportJobsResponse
+      SENSITIVE: []
+    end
+
+    class GetSegmentImportJobsRequest
+      attr_accessor application_id: ::String
+      attr_accessor page_size: ::String
+      attr_accessor segment_id: ::String
+      attr_accessor token: ::String
+      SENSITIVE: []
+    end
+
+    class GetSegmentImportJobsResponse
+      attr_accessor import_jobs_response: Types::ImportJobsResponse
+      SENSITIVE: []
+    end
+
+    class GetSegmentRequest
+      attr_accessor application_id: ::String
+      attr_accessor segment_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSegmentResponse
+      attr_accessor segment_response: Types::SegmentResponse
+      SENSITIVE: []
+    end
+
+    class GetSegmentVersionRequest
+      attr_accessor application_id: ::String
+      attr_accessor segment_id: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class GetSegmentVersionResponse
+      attr_accessor segment_response: Types::SegmentResponse
+      SENSITIVE: []
+    end
+
+    class GetSegmentVersionsRequest
+      attr_accessor application_id: ::String
+      attr_accessor page_size: ::String
+      attr_accessor segment_id: ::String
+      attr_accessor token: ::String
+      SENSITIVE: []
+    end
+
+    class GetSegmentVersionsResponse
+      attr_accessor segments_response: Types::SegmentsResponse
+      SENSITIVE: []
+    end
+
+    class GetSegmentsRequest
+      attr_accessor application_id: ::String
+      attr_accessor page_size: ::String
+      attr_accessor token: ::String
+      SENSITIVE: []
+    end
+
+    class GetSegmentsResponse
+      attr_accessor segments_response: Types::SegmentsResponse
+      SENSITIVE: []
+    end
+
+    class GetSmsChannelRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSmsChannelResponse
+      attr_accessor sms_channel_response: Types::SMSChannelResponse
+      SENSITIVE: []
+    end
+
+    class GetSmsTemplateRequest
+      attr_accessor template_name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class GetSmsTemplateResponse
+      attr_accessor sms_template_response: Types::SMSTemplateResponse
+      SENSITIVE: []
+    end
+
+    class GetUserEndpointsRequest
+      attr_accessor application_id: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetUserEndpointsResponse
+      attr_accessor endpoints_response: Types::EndpointsResponse
+      SENSITIVE: []
+    end
+
+    class GetVoiceChannelRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetVoiceChannelResponse
+      attr_accessor voice_channel_response: Types::VoiceChannelResponse
+      SENSITIVE: []
+    end
+
+    class GetVoiceTemplateRequest
+      attr_accessor template_name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class GetVoiceTemplateResponse
+      attr_accessor voice_template_response: Types::VoiceTemplateResponse
+      SENSITIVE: []
+    end
+
+    class HoldoutActivity
+      attr_accessor next_activity: ::String
+      attr_accessor percentage: ::Integer
+      SENSITIVE: []
+    end
+
+    class ImportJobRequest
+      attr_accessor define_segment: bool
+      attr_accessor external_id: ::String
+      attr_accessor format: ("CSV" | "JSON")
+      attr_accessor register_endpoints: bool
+      attr_accessor role_arn: ::String
+      attr_accessor s3_url: ::String
+      attr_accessor segment_id: ::String
+      attr_accessor segment_name: ::String
+      SENSITIVE: []
+    end
+
+    class ImportJobResource
+      attr_accessor define_segment: bool
+      attr_accessor external_id: ::String
+      attr_accessor format: ("CSV" | "JSON")
+      attr_accessor register_endpoints: bool
+      attr_accessor role_arn: ::String
+      attr_accessor s3_url: ::String
+      attr_accessor segment_id: ::String
+      attr_accessor segment_name: ::String
+      SENSITIVE: []
+    end
+
+    class ImportJobResponse
+      attr_accessor application_id: ::String
+      attr_accessor completed_pieces: ::Integer
+      attr_accessor completion_date: ::String
+      attr_accessor creation_date: ::String
+      attr_accessor definition: Types::ImportJobResource
+      attr_accessor failed_pieces: ::Integer
+      attr_accessor failures: ::Array[::String]
+      attr_accessor id: ::String
+      attr_accessor job_status: ("CREATED" | "PREPARING_FOR_INITIALIZATION" | "INITIALIZING" | "PROCESSING" | "PENDING_JOB" | "COMPLETING" | "COMPLETED" | "FAILING" | "FAILED")
+      attr_accessor total_failures: ::Integer
+      attr_accessor total_pieces: ::Integer
+      attr_accessor total_processed: ::Integer
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ImportJobsResponse
+      attr_accessor item: ::Array[Types::ImportJobResponse]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class InAppCampaignSchedule
+      attr_accessor end_date: ::String
+      attr_accessor event_filter: Types::CampaignEventFilter
+      attr_accessor quiet_time: Types::QuietTime
+      SENSITIVE: []
+    end
+
+    class InAppMessage
+      attr_accessor content: ::Array[Types::InAppMessageContent]
+      attr_accessor custom_config: ::Hash[::String, ::String]
+      attr_accessor layout: ("BOTTOM_BANNER" | "TOP_BANNER" | "OVERLAYS" | "MOBILE_FEED" | "MIDDLE_BANNER" | "CAROUSEL")
+      SENSITIVE: []
+    end
+
+    class InAppMessageBodyConfig
+      attr_accessor alignment: ("LEFT" | "CENTER" | "RIGHT")
+      attr_accessor body: ::String
+      attr_accessor text_color: ::String
+      SENSITIVE: []
+    end
+
+    class InAppMessageButton
+      attr_accessor android: Types::OverrideButtonConfiguration
+      attr_accessor default_config: Types::DefaultButtonConfiguration
+      attr_accessor ios: Types::OverrideButtonConfiguration
+      attr_accessor web: Types::OverrideButtonConfiguration
+      SENSITIVE: []
+    end
+
+    class InAppMessageCampaign
+      attr_accessor campaign_id: ::String
+      attr_accessor daily_cap: ::Integer
+      attr_accessor in_app_message: Types::InAppMessage
+      attr_accessor priority: ::Integer
+      attr_accessor schedule: Types::InAppCampaignSchedule
+      attr_accessor session_cap: ::Integer
+      attr_accessor total_cap: ::Integer
+      attr_accessor treatment_id: ::String
+      SENSITIVE: []
+    end
+
+    class InAppMessageContent
+      attr_accessor background_color: ::String
+      attr_accessor body_config: Types::InAppMessageBodyConfig
+      attr_accessor header_config: Types::InAppMessageHeaderConfig
+      attr_accessor image_url: ::String
+      attr_accessor primary_btn: Types::InAppMessageButton
+      attr_accessor secondary_btn: Types::InAppMessageButton
+      SENSITIVE: []
+    end
+
+    class InAppMessageHeaderConfig
+      attr_accessor alignment: ("LEFT" | "CENTER" | "RIGHT")
+      attr_accessor header: ::String
+      attr_accessor text_color: ::String
+      SENSITIVE: []
+    end
+
+    class InAppMessagesResponse
+      attr_accessor in_app_message_campaigns: ::Array[Types::InAppMessageCampaign]
+      SENSITIVE: []
+    end
+
+    class InAppTemplateRequest
+      attr_accessor content: ::Array[Types::InAppMessageContent]
+      attr_accessor custom_config: ::Hash[::String, ::String]
+      attr_accessor layout: ("BOTTOM_BANNER" | "TOP_BANNER" | "OVERLAYS" | "MOBILE_FEED" | "MIDDLE_BANNER" | "CAROUSEL")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor template_description: ::String
+      SENSITIVE: []
+    end
+
+    class InAppTemplateResponse
+      attr_accessor arn: ::String
+      attr_accessor content: ::Array[Types::InAppMessageContent]
+      attr_accessor creation_date: ::String
+      attr_accessor custom_config: ::Hash[::String, ::String]
+      attr_accessor last_modified_date: ::String
+      attr_accessor layout: ("BOTTOM_BANNER" | "TOP_BANNER" | "OVERLAYS" | "MOBILE_FEED" | "MIDDLE_BANNER" | "CAROUSEL")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor template_description: ::String
+      attr_accessor template_name: ::String
+      attr_accessor template_type: ("EMAIL" | "SMS" | "VOICE" | "PUSH" | "INAPP")
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerErrorException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class ItemResponse
+      attr_accessor endpoint_item_response: Types::EndpointItemResponse
+      attr_accessor events_item_response: ::Hash[::String, Types::EventItemResponse]
+      SENSITIVE: []
+    end
+
+    class JourneyCustomMessage
+      attr_accessor data: ::String
+      SENSITIVE: []
+    end
+
+    class JourneyDateRangeKpiResponse
+      attr_accessor application_id: ::String
+      attr_accessor end_time: ::Time
+      attr_accessor journey_id: ::String
+      attr_accessor kpi_name: ::String
+      attr_accessor kpi_result: Types::BaseKpiResult
+      attr_accessor next_token: ::String
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class JourneyEmailMessage
+      attr_accessor from_address: ::String
+      SENSITIVE: []
+    end
+
+    class JourneyExecutionActivityMetricsResponse
+      attr_accessor activity_type: ::String
+      attr_accessor application_id: ::String
+      attr_accessor journey_activity_id: ::String
+      attr_accessor journey_id: ::String
+      attr_accessor last_evaluated_time: ::String
+      attr_accessor metrics: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class JourneyExecutionMetricsResponse
+      attr_accessor application_id: ::String
+      attr_accessor journey_id: ::String
+      attr_accessor last_evaluated_time: ::String
+      attr_accessor metrics: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class JourneyLimits
+      attr_accessor daily_cap: ::Integer
+      attr_accessor endpoint_reentry_cap: ::Integer
+      attr_accessor messages_per_second: ::Integer
+      attr_accessor endpoint_reentry_interval: ::String
+      attr_accessor timeframe_cap: Types::JourneyTimeframeCap
+      attr_accessor total_cap: ::Integer
+      SENSITIVE: []
+    end
+
+    class JourneyPushMessage
+      attr_accessor time_to_live: ::String
+      SENSITIVE: []
+    end
+
+    class JourneyChannelSettings
+      attr_accessor connect_campaign_arn: ::String
+      attr_accessor connect_campaign_execution_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class JourneyResponse
+      attr_accessor activities: ::Hash[::String, Types::Activity]
+      attr_accessor application_id: ::String
+      attr_accessor creation_date: ::String
+      attr_accessor id: ::String
+      attr_accessor last_modified_date: ::String
+      attr_accessor limits: Types::JourneyLimits
+      attr_accessor local_time: bool
+      attr_accessor name: ::String
+      attr_accessor quiet_time: Types::QuietTime
+      attr_accessor refresh_frequency: ::String
+      attr_accessor schedule: Types::JourneySchedule
+      attr_accessor start_activity: ::String
+      attr_accessor start_condition: Types::StartCondition
+      attr_accessor state: ("DRAFT" | "ACTIVE" | "COMPLETED" | "CANCELLED" | "CLOSED" | "PAUSED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor wait_for_quiet_time: bool
+      attr_accessor refresh_on_segment_update: bool
+      attr_accessor journey_channel_settings: Types::JourneyChannelSettings
+      attr_accessor sending_schedule: bool
+      attr_accessor open_hours: Types::OpenHours
+      attr_accessor closed_days: Types::ClosedDays
+      attr_accessor timezone_estimation_methods: ::Array[("PHONE_NUMBER" | "POSTAL_CODE")]
+      SENSITIVE: []
+    end
+
+    class JourneyRunExecutionActivityMetricsResponse
+      attr_accessor activity_type: ::String
+      attr_accessor application_id: ::String
+      attr_accessor journey_activity_id: ::String
+      attr_accessor journey_id: ::String
+      attr_accessor last_evaluated_time: ::String
+      attr_accessor metrics: ::Hash[::String, ::String]
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class JourneyRunExecutionMetricsResponse
+      attr_accessor application_id: ::String
+      attr_accessor journey_id: ::String
+      attr_accessor last_evaluated_time: ::String
+      attr_accessor metrics: ::Hash[::String, ::String]
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class JourneyRunResponse
+      attr_accessor creation_time: ::String
+      attr_accessor last_update_time: ::String
+      attr_accessor run_id: ::String
+      attr_accessor status: ("SCHEDULED" | "RUNNING" | "COMPLETED" | "CANCELLED")
+      SENSITIVE: []
+    end
+
+    class JourneyRunsResponse
+      attr_accessor item: ::Array[Types::JourneyRunResponse]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class JourneySMSMessage
+      attr_accessor message_type: ("TRANSACTIONAL" | "PROMOTIONAL")
+      attr_accessor origination_number: ::String
+      attr_accessor sender_id: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor template_id: ::String
+      SENSITIVE: []
+    end
+
+    class JourneySchedule
+      attr_accessor end_time: ::Time
+      attr_accessor start_time: ::Time
+      attr_accessor timezone: ::String
+      SENSITIVE: []
+    end
+
+    class JourneyStateRequest
+      attr_accessor state: ("DRAFT" | "ACTIVE" | "COMPLETED" | "CANCELLED" | "CLOSED" | "PAUSED")
+      SENSITIVE: []
+    end
+
+    class JourneyTimeframeCap
+      attr_accessor cap: ::Integer
+      attr_accessor days: ::Integer
+      SENSITIVE: []
+    end
+
+    class JourneysResponse
+      attr_accessor item: ::Array[Types::JourneyResponse]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJourneysRequest
+      attr_accessor application_id: ::String
+      attr_accessor page_size: ::String
+      attr_accessor token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJourneysResponse
+      attr_accessor journeys_response: Types::JourneysResponse
+      SENSITIVE: []
+    end
+
+    class ListRecommenderConfigurationsResponse
+      attr_accessor item: ::Array[Types::RecommenderConfigurationResponse]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags_model: Types::TagsModel
+      SENSITIVE: []
+    end
+
+    class ListTemplateVersionsRequest
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::String
+      attr_accessor template_name: ::String
+      attr_accessor template_type: ::String
+      SENSITIVE: []
+    end
+
+    class ListTemplateVersionsResponse
+      attr_accessor template_versions_response: Types::TemplateVersionsResponse
+      SENSITIVE: []
+    end
+
+    class ListTemplatesRequest
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::String
+      attr_accessor prefix: ::String
+      attr_accessor template_type: ::String
+      SENSITIVE: []
+    end
+
+    class ListTemplatesResponse
+      attr_accessor templates_response: Types::TemplatesResponse
+      SENSITIVE: []
+    end
+
+    class Message
+      attr_accessor action: ("OPEN_APP" | "DEEP_LINK" | "URL")
+      attr_accessor body: ::String
+      attr_accessor image_icon_url: ::String
+      attr_accessor image_small_icon_url: ::String
+      attr_accessor image_url: ::String
+      attr_accessor json_body: ::String
+      attr_accessor media_url: ::String
+      attr_accessor raw_content: ::String
+      attr_accessor silent_push: bool
+      attr_accessor time_to_live: ::Integer
+      attr_accessor title: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class MessageBody
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class MessageConfiguration
+      attr_accessor adm_message: Types::Message
+      attr_accessor apns_message: Types::Message
+      attr_accessor baidu_message: Types::Message
+      attr_accessor custom_message: Types::CampaignCustomMessage
+      attr_accessor default_message: Types::Message
+      attr_accessor email_message: Types::CampaignEmailMessage
+      attr_accessor gcm_message: Types::Message
+      attr_accessor sms_message: Types::CampaignSmsMessage
+      attr_accessor in_app_message: Types::CampaignInAppMessage
+      SENSITIVE: []
+    end
+
+    class MessageRequest
+      attr_accessor addresses: ::Hash[::String, Types::AddressConfiguration]
+      attr_accessor context: ::Hash[::String, ::String]
+      attr_accessor endpoints: ::Hash[::String, Types::EndpointSendConfiguration]
+      attr_accessor message_configuration: Types::DirectMessageConfiguration
+      attr_accessor template_configuration: Types::TemplateConfiguration
+      attr_accessor trace_id: ::String
+      SENSITIVE: []
+    end
+
+    class MessageResponse
+      attr_accessor application_id: ::String
+      attr_accessor endpoint_result: ::Hash[::String, Types::EndpointMessageResult]
+      attr_accessor request_id: ::String
+      attr_accessor result: ::Hash[::String, Types::MessageResult]
+      SENSITIVE: []
+    end
+
+    class MessageResult
+      attr_accessor delivery_status: ("SUCCESSFUL" | "THROTTLED" | "TEMPORARY_FAILURE" | "PERMANENT_FAILURE" | "UNKNOWN_FAILURE" | "OPT_OUT" | "DUPLICATE")
+      attr_accessor message_id: ::String
+      attr_accessor status_code: ::Integer
+      attr_accessor status_message: ::String
+      attr_accessor updated_token: ::String
+      SENSITIVE: []
+    end
+
+    class MethodNotAllowedException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class MetricDimension
+      attr_accessor comparison_operator: ::String
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class MultiConditionalBranch
+      attr_accessor condition: Types::SimpleCondition
+      attr_accessor next_activity: ::String
+      SENSITIVE: []
+    end
+
+    class MultiConditionalSplitActivity
+      attr_accessor branches: ::Array[Types::MultiConditionalBranch]
+      attr_accessor default_activity: ::String
+      attr_accessor evaluation_wait_time: Types::WaitTime
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class NumberValidateRequest
+      attr_accessor iso_country_code: ::String
+      attr_accessor phone_number: ::String
+      SENSITIVE: []
+    end
+
+    class NumberValidateResponse
+      attr_accessor carrier: ::String
+      attr_accessor city: ::String
+      attr_accessor cleansed_phone_number_e164: ::String
+      attr_accessor cleansed_phone_number_national: ::String
+      attr_accessor country: ::String
+      attr_accessor country_code_iso_2: ::String
+      attr_accessor country_code_numeric: ::String
+      attr_accessor county: ::String
+      attr_accessor original_country_code_iso_2: ::String
+      attr_accessor original_phone_number: ::String
+      attr_accessor phone_type: ::String
+      attr_accessor phone_type_code: ::Integer
+      attr_accessor timezone: ::String
+      attr_accessor zip_code: ::String
+      SENSITIVE: []
+    end
+
+    class OverrideButtonConfiguration
+      attr_accessor button_action: ("LINK" | "DEEP_LINK" | "CLOSE")
+      attr_accessor link: ::String
+      SENSITIVE: []
+    end
+
+    class PayloadTooLargeException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class PhoneNumberValidateRequest
+      attr_accessor number_validate_request: Types::NumberValidateRequest
+      SENSITIVE: []
+    end
+
+    class PhoneNumberValidateResponse
+      attr_accessor number_validate_response: Types::NumberValidateResponse
+      SENSITIVE: []
+    end
+
+    class PublicEndpoint
+      attr_accessor address: ::String
+      attr_accessor attributes: ::Hash[::String, ::Array[::String]]
+      attr_accessor channel_type: ("PUSH" | "GCM" | "APNS" | "APNS_SANDBOX" | "APNS_VOIP" | "APNS_VOIP_SANDBOX" | "ADM" | "SMS" | "VOICE" | "EMAIL" | "BAIDU" | "CUSTOM" | "IN_APP")
+      attr_accessor demographic: Types::EndpointDemographic
+      attr_accessor effective_date: ::String
+      attr_accessor endpoint_status: ::String
+      attr_accessor location: Types::EndpointLocation
+      attr_accessor metrics: ::Hash[::String, ::Float]
+      attr_accessor opt_out: ::String
+      attr_accessor request_id: ::String
+      attr_accessor user: Types::EndpointUser
+      SENSITIVE: []
+    end
+
+    class PushMessageActivity
+      attr_accessor message_config: Types::JourneyPushMessage
+      attr_accessor next_activity: ::String
+      attr_accessor template_name: ::String
+      attr_accessor template_version: ::String
+      SENSITIVE: []
+    end
+
+    class PushNotificationTemplateRequest
+      attr_accessor adm: Types::AndroidPushNotificationTemplate
+      attr_accessor apns: Types::APNSPushNotificationTemplate
+      attr_accessor baidu: Types::AndroidPushNotificationTemplate
+      attr_accessor default: Types::DefaultPushNotificationTemplate
+      attr_accessor default_substitutions: ::String
+      attr_accessor gcm: Types::AndroidPushNotificationTemplate
+      attr_accessor recommender_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor template_description: ::String
+      SENSITIVE: []
+    end
+
+    class PushNotificationTemplateResponse
+      attr_accessor adm: Types::AndroidPushNotificationTemplate
+      attr_accessor apns: Types::APNSPushNotificationTemplate
+      attr_accessor arn: ::String
+      attr_accessor baidu: Types::AndroidPushNotificationTemplate
+      attr_accessor creation_date: ::String
+      attr_accessor default: Types::DefaultPushNotificationTemplate
+      attr_accessor default_substitutions: ::String
+      attr_accessor gcm: Types::AndroidPushNotificationTemplate
+      attr_accessor last_modified_date: ::String
+      attr_accessor recommender_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor template_description: ::String
+      attr_accessor template_name: ::String
+      attr_accessor template_type: ("EMAIL" | "SMS" | "VOICE" | "PUSH" | "INAPP")
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class PutEventStreamRequest
+      attr_accessor application_id: ::String
+      attr_accessor write_event_stream: Types::WriteEventStream
+      SENSITIVE: []
+    end
+
+    class PutEventStreamResponse
+      attr_accessor event_stream: Types::EventStream
+      SENSITIVE: []
+    end
+
+    class PutEventsRequest
+      attr_accessor application_id: ::String
+      attr_accessor events_request: Types::EventsRequest
+      SENSITIVE: []
+    end
+
+    class PutEventsResponse
+      attr_accessor events_response: Types::EventsResponse
+      SENSITIVE: []
+    end
+
+    class QuietTime
+      attr_accessor end: ::String
+      attr_accessor start: ::String
+      SENSITIVE: []
+    end
+
+    class RandomSplitActivity
+      attr_accessor branches: ::Array[Types::RandomSplitEntry]
+      SENSITIVE: []
+    end
+
+    class RandomSplitEntry
+      attr_accessor next_activity: ::String
+      attr_accessor percentage: ::Integer
+      SENSITIVE: []
+    end
+
+    class RawEmail
+      attr_accessor data: ::String
+      SENSITIVE: []
+    end
+
+    class RecencyDimension
+      attr_accessor duration: ("HR_24" | "DAY_7" | "DAY_14" | "DAY_30")
+      attr_accessor recency_type: ("ACTIVE" | "INACTIVE")
+      SENSITIVE: []
+    end
+
+    class RecommenderConfigurationResponse
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor creation_date: ::String
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor last_modified_date: ::String
+      attr_accessor name: ::String
+      attr_accessor recommendation_provider_id_type: ::String
+      attr_accessor recommendation_provider_role_arn: ::String
+      attr_accessor recommendation_provider_uri: ::String
+      attr_accessor recommendation_transformer_uri: ::String
+      attr_accessor recommendations_display_name: ::String
+      attr_accessor recommendations_per_message: ::Integer
+      SENSITIVE: []
+    end
+
+    class RemoveAttributesRequest
+      attr_accessor application_id: ::String
+      attr_accessor attribute_type: ::String
+      attr_accessor update_attributes_request: Types::UpdateAttributesRequest
+      SENSITIVE: []
+    end
+
+    class RemoveAttributesResponse
+      attr_accessor attributes_resource: Types::AttributesResource
+      SENSITIVE: []
+    end
+
+    class ResultRow
+      attr_accessor grouped_bys: ::Array[Types::ResultRowValue]
+      attr_accessor values: ::Array[Types::ResultRowValue]
+      SENSITIVE: []
+    end
+
+    class ResultRowValue
+      attr_accessor key: ::String
+      attr_accessor type: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SMSChannelRequest
+      attr_accessor enabled: bool
+      attr_accessor sender_id: ::String
+      attr_accessor short_code: ::String
+      SENSITIVE: []
+    end
+
+    class SMSChannelResponse
+      attr_accessor application_id: ::String
+      attr_accessor creation_date: ::String
+      attr_accessor enabled: bool
+      attr_accessor has_credential: bool
+      attr_accessor id: ::String
+      attr_accessor is_archived: bool
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_date: ::String
+      attr_accessor platform: ::String
+      attr_accessor promotional_messages_per_second: ::Integer
+      attr_accessor sender_id: ::String
+      attr_accessor short_code: ::String
+      attr_accessor transactional_messages_per_second: ::Integer
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class SMSMessage
+      attr_accessor body: ::String
+      attr_accessor keyword: ::String
+      attr_accessor media_url: ::String
+      attr_accessor message_type: ("TRANSACTIONAL" | "PROMOTIONAL")
+      attr_accessor origination_number: ::String
+      attr_accessor sender_id: ::String
+      attr_accessor substitutions: ::Hash[::String, ::Array[::String]]
+      attr_accessor entity_id: ::String
+      attr_accessor template_id: ::String
+      SENSITIVE: []
+    end
+
+    class SMSMessageActivity
+      attr_accessor message_config: Types::JourneySMSMessage
+      attr_accessor next_activity: ::String
+      attr_accessor template_name: ::String
+      attr_accessor template_version: ::String
+      SENSITIVE: []
+    end
+
+    class SMSTemplateRequest
+      attr_accessor body: ::String
+      attr_accessor default_substitutions: ::String
+      attr_accessor recommender_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor template_description: ::String
+      SENSITIVE: []
+    end
+
+    class SMSTemplateResponse
+      attr_accessor arn: ::String
+      attr_accessor body: ::String
+      attr_accessor creation_date: ::String
+      attr_accessor default_substitutions: ::String
+      attr_accessor last_modified_date: ::String
+      attr_accessor recommender_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor template_description: ::String
+      attr_accessor template_name: ::String
+      attr_accessor template_type: ("EMAIL" | "SMS" | "VOICE" | "PUSH" | "INAPP")
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class Schedule
+      attr_accessor end_time: ::String
+      attr_accessor event_filter: Types::CampaignEventFilter
+      attr_accessor frequency: ("ONCE" | "HOURLY" | "DAILY" | "WEEKLY" | "MONTHLY" | "EVENT" | "IN_APP_EVENT")
+      attr_accessor is_local_time: bool
+      attr_accessor quiet_time: Types::QuietTime
+      attr_accessor start_time: ::String
+      attr_accessor timezone: ::String
+      SENSITIVE: []
+    end
+
+    class SegmentBehaviors
+      attr_accessor recency: Types::RecencyDimension
+      SENSITIVE: []
+    end
+
+    class SegmentCondition
+      attr_accessor segment_id: ::String
+      SENSITIVE: []
+    end
+
+    class SegmentDemographics
+      attr_accessor app_version: Types::SetDimension
+      attr_accessor channel: Types::SetDimension
+      attr_accessor device_type: Types::SetDimension
+      attr_accessor make: Types::SetDimension
+      attr_accessor model: Types::SetDimension
+      attr_accessor platform: Types::SetDimension
+      SENSITIVE: []
+    end
+
+    class SegmentDimensions
+      attr_accessor attributes: ::Hash[::String, Types::AttributeDimension]
+      attr_accessor behavior: Types::SegmentBehaviors
+      attr_accessor demographic: Types::SegmentDemographics
+      attr_accessor location: Types::SegmentLocation
+      attr_accessor metrics: ::Hash[::String, Types::MetricDimension]
+      attr_accessor user_attributes: ::Hash[::String, Types::AttributeDimension]
+      SENSITIVE: []
+    end
+
+    class SegmentGroup
+      attr_accessor dimensions: ::Array[Types::SegmentDimensions]
+      attr_accessor source_segments: ::Array[Types::SegmentReference]
+      attr_accessor source_type: ("ALL" | "ANY" | "NONE")
+      attr_accessor type: ("ALL" | "ANY" | "NONE")
+      SENSITIVE: []
+    end
+
+    class SegmentGroupList
+      attr_accessor groups: ::Array[Types::SegmentGroup]
+      attr_accessor include: ("ALL" | "ANY" | "NONE")
+      SENSITIVE: []
+    end
+
+    class SegmentImportResource
+      attr_accessor channel_counts: ::Hash[::String, ::Integer]
+      attr_accessor external_id: ::String
+      attr_accessor format: ("CSV" | "JSON")
+      attr_accessor role_arn: ::String
+      attr_accessor s3_url: ::String
+      attr_accessor size: ::Integer
+      SENSITIVE: []
+    end
+
+    class SegmentLocation
+      attr_accessor country: Types::SetDimension
+      attr_accessor gps_point: Types::GPSPointDimension
+      SENSITIVE: []
+    end
+
+    class SegmentReference
+      attr_accessor id: ::String
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class SegmentResponse
+      attr_accessor application_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor creation_date: ::String
+      attr_accessor dimensions: Types::SegmentDimensions
+      attr_accessor id: ::String
+      attr_accessor import_definition: Types::SegmentImportResource
+      attr_accessor last_modified_date: ::String
+      attr_accessor name: ::String
+      attr_accessor segment_groups: Types::SegmentGroupList
+      attr_accessor segment_type: ("DIMENSIONAL" | "IMPORT")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class SegmentsResponse
+      attr_accessor item: ::Array[Types::SegmentResponse]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SendMessagesRequest
+      attr_accessor application_id: ::String
+      attr_accessor message_request: Types::MessageRequest
+      SENSITIVE: []
+    end
+
+    class SendMessagesResponse
+      attr_accessor message_response: Types::MessageResponse
+      SENSITIVE: []
+    end
+
+    class SendOTPMessageRequest
+      attr_accessor application_id: ::String
+      attr_accessor send_otp_message_request_parameters: Types::SendOTPMessageRequestParameters
+      SENSITIVE: []
+    end
+
+    class SendOTPMessageRequestParameters
+      attr_accessor allowed_attempts: ::Integer
+      attr_accessor brand_name: ::String
+      attr_accessor channel: ::String
+      attr_accessor code_length: ::Integer
+      attr_accessor destination_identity: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor language: ::String
+      attr_accessor origination_identity: ::String
+      attr_accessor reference_id: ::String
+      attr_accessor template_id: ::String
+      attr_accessor validity_period: ::Integer
+      SENSITIVE: []
+    end
+
+    class SendOTPMessageResponse
+      attr_accessor message_response: Types::MessageResponse
+      SENSITIVE: []
+    end
+
+    class SendUsersMessageRequest
+      attr_accessor context: ::Hash[::String, ::String]
+      attr_accessor message_configuration: Types::DirectMessageConfiguration
+      attr_accessor template_configuration: Types::TemplateConfiguration
+      attr_accessor trace_id: ::String
+      attr_accessor users: ::Hash[::String, Types::EndpointSendConfiguration]
+      SENSITIVE: []
+    end
+
+    class SendUsersMessageResponse
+      attr_accessor application_id: ::String
+      attr_accessor request_id: ::String
+      attr_accessor result: ::Hash[::String, ::Hash[::String, Types::EndpointMessageResult]]
+      SENSITIVE: []
+    end
+
+    class SendUsersMessagesRequest
+      attr_accessor application_id: ::String
+      attr_accessor send_users_message_request: Types::SendUsersMessageRequest
+      SENSITIVE: []
+    end
+
+    class SendUsersMessagesResponse
+      attr_accessor send_users_message_response: Types::SendUsersMessageResponse
+      SENSITIVE: []
+    end
+
+    class Session
+      attr_accessor duration: ::Integer
+      attr_accessor id: ::String
+      attr_accessor start_timestamp: ::String
+      attr_accessor stop_timestamp: ::String
+      SENSITIVE: []
+    end
+
+    class SetDimension
+      attr_accessor dimension_type: ("INCLUSIVE" | "EXCLUSIVE")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SimpleCondition
+      attr_accessor event_condition: Types::EventCondition
+      attr_accessor segment_condition: Types::SegmentCondition
+      attr_accessor segment_dimensions: Types::SegmentDimensions
+      SENSITIVE: []
+    end
+
+    class SimpleEmail
+      attr_accessor html_part: Types::SimpleEmailPart
+      attr_accessor subject: Types::SimpleEmailPart
+      attr_accessor text_part: Types::SimpleEmailPart
+      SENSITIVE: []
+    end
+
+    class SimpleEmailPart
+      attr_accessor charset: ::String
+      attr_accessor data: ::String
+      SENSITIVE: []
+    end
+
+    class StartCondition
+      attr_accessor description: ::String
+      attr_accessor event_start_condition: Types::EventStartCondition
+      attr_accessor segment_start_condition: Types::SegmentCondition
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags_model: Types::TagsModel
+      SENSITIVE: []
+    end
+
+    class TagsModel
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Template
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class TemplateActiveVersionRequest
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class TemplateConfiguration
+      attr_accessor email_template: Types::Template
+      attr_accessor push_template: Types::Template
+      attr_accessor sms_template: Types::Template
+      attr_accessor voice_template: Types::Template
+      attr_accessor in_app_template: Types::Template
+      SENSITIVE: []
+    end
+
+    class TemplateCreateMessageBody
+      attr_accessor arn: ::String
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class TemplateResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_date: ::String
+      attr_accessor default_substitutions: ::String
+      attr_accessor last_modified_date: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor template_description: ::String
+      attr_accessor template_name: ::String
+      attr_accessor template_type: ("EMAIL" | "SMS" | "VOICE" | "PUSH" | "INAPP")
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class TemplateVersionResponse
+      attr_accessor creation_date: ::String
+      attr_accessor default_substitutions: ::String
+      attr_accessor last_modified_date: ::String
+      attr_accessor template_description: ::String
+      attr_accessor template_name: ::String
+      attr_accessor template_type: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class TemplateVersionsResponse
+      attr_accessor item: ::Array[Types::TemplateVersionResponse]
+      attr_accessor message: ::String
+      attr_accessor next_token: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class TemplatesResponse
+      attr_accessor item: ::Array[Types::TemplateResponse]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class TreatmentResource
+      attr_accessor custom_delivery_configuration: Types::CustomDeliveryConfiguration
+      attr_accessor id: ::String
+      attr_accessor message_configuration: Types::MessageConfiguration
+      attr_accessor schedule: Types::Schedule
+      attr_accessor size_percent: ::Integer
+      attr_accessor state: Types::CampaignState
+      attr_accessor template_configuration: Types::TemplateConfiguration
+      attr_accessor treatment_description: ::String
+      attr_accessor treatment_name: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateAdmChannelRequest
+      attr_accessor adm_channel_request: Types::ADMChannelRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAdmChannelResponse
+      attr_accessor adm_channel_response: Types::ADMChannelResponse
+      SENSITIVE: []
+    end
+
+    class UpdateApnsChannelRequest
+      attr_accessor apns_channel_request: Types::APNSChannelRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateApnsChannelResponse
+      attr_accessor apns_channel_response: Types::APNSChannelResponse
+      SENSITIVE: []
+    end
+
+    class UpdateApnsSandboxChannelRequest
+      attr_accessor apns_sandbox_channel_request: Types::APNSSandboxChannelRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateApnsSandboxChannelResponse
+      attr_accessor apns_sandbox_channel_response: Types::APNSSandboxChannelResponse
+      SENSITIVE: []
+    end
+
+    class UpdateApnsVoipChannelRequest
+      attr_accessor apns_voip_channel_request: Types::APNSVoipChannelRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateApnsVoipChannelResponse
+      attr_accessor apns_voip_channel_response: Types::APNSVoipChannelResponse
+      SENSITIVE: []
+    end
+
+    class UpdateApnsVoipSandboxChannelRequest
+      attr_accessor apns_voip_sandbox_channel_request: Types::APNSVoipSandboxChannelRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateApnsVoipSandboxChannelResponse
+      attr_accessor apns_voip_sandbox_channel_response: Types::APNSVoipSandboxChannelResponse
+      SENSITIVE: []
+    end
+
+    class UpdateApplicationSettingsRequest
+      attr_accessor application_id: ::String
+      attr_accessor write_application_settings_request: Types::WriteApplicationSettingsRequest
+      SENSITIVE: []
+    end
+
+    class UpdateApplicationSettingsResponse
+      attr_accessor application_settings_resource: Types::ApplicationSettingsResource
+      SENSITIVE: []
+    end
+
+    class UpdateAttributesRequest
+      attr_accessor blacklist: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateBaiduChannelRequest
+      attr_accessor application_id: ::String
+      attr_accessor baidu_channel_request: Types::BaiduChannelRequest
+      SENSITIVE: []
+    end
+
+    class UpdateBaiduChannelResponse
+      attr_accessor baidu_channel_response: Types::BaiduChannelResponse
+      SENSITIVE: []
+    end
+
+    class UpdateCampaignRequest
+      attr_accessor application_id: ::String
+      attr_accessor campaign_id: ::String
+      attr_accessor write_campaign_request: Types::WriteCampaignRequest
+      SENSITIVE: []
+    end
+
+    class UpdateCampaignResponse
+      attr_accessor campaign_response: Types::CampaignResponse
+      SENSITIVE: []
+    end
+
+    class UpdateEmailChannelRequest
+      attr_accessor application_id: ::String
+      attr_accessor email_channel_request: Types::EmailChannelRequest
+      SENSITIVE: []
+    end
+
+    class UpdateEmailChannelResponse
+      attr_accessor email_channel_response: Types::EmailChannelResponse
+      SENSITIVE: []
+    end
+
+    class UpdateEmailTemplateRequest
+      attr_accessor create_new_version: bool
+      attr_accessor email_template_request: Types::EmailTemplateRequest
+      attr_accessor template_name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateEmailTemplateResponse
+      attr_accessor message_body: Types::MessageBody
+      SENSITIVE: []
+    end
+
+    class UpdateEndpointRequest
+      attr_accessor application_id: ::String
+      attr_accessor endpoint_id: ::String
+      attr_accessor endpoint_request: Types::EndpointRequest
+      SENSITIVE: []
+    end
+
+    class UpdateEndpointResponse
+      attr_accessor message_body: Types::MessageBody
+      SENSITIVE: []
+    end
+
+    class UpdateEndpointsBatchRequest
+      attr_accessor application_id: ::String
+      attr_accessor endpoint_batch_request: Types::EndpointBatchRequest
+      SENSITIVE: []
+    end
+
+    class UpdateEndpointsBatchResponse
+      attr_accessor message_body: Types::MessageBody
+      SENSITIVE: []
+    end
+
+    class UpdateGcmChannelRequest
+      attr_accessor application_id: ::String
+      attr_accessor gcm_channel_request: Types::GCMChannelRequest
+      SENSITIVE: []
+    end
+
+    class UpdateGcmChannelResponse
+      attr_accessor gcm_channel_response: Types::GCMChannelResponse
+      SENSITIVE: []
+    end
+
+    class UpdateInAppTemplateRequest
+      attr_accessor create_new_version: bool
+      attr_accessor in_app_template_request: Types::InAppTemplateRequest
+      attr_accessor template_name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateInAppTemplateResponse
+      attr_accessor message_body: Types::MessageBody
+      SENSITIVE: []
+    end
+
+    class UpdateJourneyRequest
+      attr_accessor application_id: ::String
+      attr_accessor journey_id: ::String
+      attr_accessor write_journey_request: Types::WriteJourneyRequest
+      SENSITIVE: []
+    end
+
+    class UpdateJourneyResponse
+      attr_accessor journey_response: Types::JourneyResponse
+      SENSITIVE: []
+    end
+
+    class UpdateJourneyStateRequest
+      attr_accessor application_id: ::String
+      attr_accessor journey_id: ::String
+      attr_accessor journey_state_request: Types::JourneyStateRequest
+      SENSITIVE: []
+    end
+
+    class UpdateJourneyStateResponse
+      attr_accessor journey_response: Types::JourneyResponse
+      SENSITIVE: []
+    end
+
+    class UpdatePushTemplateRequest
+      attr_accessor create_new_version: bool
+      attr_accessor push_notification_template_request: Types::PushNotificationTemplateRequest
+      attr_accessor template_name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePushTemplateResponse
+      attr_accessor message_body: Types::MessageBody
+      SENSITIVE: []
+    end
+
+    class UpdateRecommenderConfiguration
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor recommendation_provider_id_type: ::String
+      attr_accessor recommendation_provider_role_arn: ::String
+      attr_accessor recommendation_provider_uri: ::String
+      attr_accessor recommendation_transformer_uri: ::String
+      attr_accessor recommendations_display_name: ::String
+      attr_accessor recommendations_per_message: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateRecommenderConfigurationRequest
+      attr_accessor recommender_id: ::String
+      attr_accessor update_recommender_configuration: Types::UpdateRecommenderConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateRecommenderConfigurationResponse
+      attr_accessor recommender_configuration_response: Types::RecommenderConfigurationResponse
+      SENSITIVE: []
+    end
+
+    class UpdateSegmentRequest
+      attr_accessor application_id: ::String
+      attr_accessor segment_id: ::String
+      attr_accessor write_segment_request: Types::WriteSegmentRequest
+      SENSITIVE: []
+    end
+
+    class UpdateSegmentResponse
+      attr_accessor segment_response: Types::SegmentResponse
+      SENSITIVE: []
+    end
+
+    class UpdateSmsChannelRequest
+      attr_accessor application_id: ::String
+      attr_accessor sms_channel_request: Types::SMSChannelRequest
+      SENSITIVE: []
+    end
+
+    class UpdateSmsChannelResponse
+      attr_accessor sms_channel_response: Types::SMSChannelResponse
+      SENSITIVE: []
+    end
+
+    class UpdateSmsTemplateRequest
+      attr_accessor create_new_version: bool
+      attr_accessor sms_template_request: Types::SMSTemplateRequest
+      attr_accessor template_name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSmsTemplateResponse
+      attr_accessor message_body: Types::MessageBody
+      SENSITIVE: []
+    end
+
+    class UpdateTemplateActiveVersionRequest
+      attr_accessor template_active_version_request: Types::TemplateActiveVersionRequest
+      attr_accessor template_name: ::String
+      attr_accessor template_type: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateTemplateActiveVersionResponse
+      attr_accessor message_body: Types::MessageBody
+      SENSITIVE: []
+    end
+
+    class UpdateVoiceChannelRequest
+      attr_accessor application_id: ::String
+      attr_accessor voice_channel_request: Types::VoiceChannelRequest
+      SENSITIVE: []
+    end
+
+    class UpdateVoiceChannelResponse
+      attr_accessor voice_channel_response: Types::VoiceChannelResponse
+      SENSITIVE: []
+    end
+
+    class UpdateVoiceTemplateRequest
+      attr_accessor create_new_version: bool
+      attr_accessor template_name: ::String
+      attr_accessor version: ::String
+      attr_accessor voice_template_request: Types::VoiceTemplateRequest
+      SENSITIVE: []
+    end
+
+    class UpdateVoiceTemplateResponse
+      attr_accessor message_body: Types::MessageBody
+      SENSITIVE: []
+    end
+
+    class VerificationResponse
+      attr_accessor valid: bool
+      SENSITIVE: []
+    end
+
+    class VerifyOTPMessageRequest
+      attr_accessor application_id: ::String
+      attr_accessor verify_otp_message_request_parameters: Types::VerifyOTPMessageRequestParameters
+      SENSITIVE: []
+    end
+
+    class VerifyOTPMessageRequestParameters
+      attr_accessor destination_identity: ::String
+      attr_accessor otp: ::String
+      attr_accessor reference_id: ::String
+      SENSITIVE: []
+    end
+
+    class VerifyOTPMessageResponse
+      attr_accessor verification_response: Types::VerificationResponse
+      SENSITIVE: []
+    end
+
+    class VoiceChannelRequest
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class VoiceChannelResponse
+      attr_accessor application_id: ::String
+      attr_accessor creation_date: ::String
+      attr_accessor enabled: bool
+      attr_accessor has_credential: bool
+      attr_accessor id: ::String
+      attr_accessor is_archived: bool
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_date: ::String
+      attr_accessor platform: ::String
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class VoiceMessage
+      attr_accessor body: ::String
+      attr_accessor language_code: ::String
+      attr_accessor origination_number: ::String
+      attr_accessor substitutions: ::Hash[::String, ::Array[::String]]
+      attr_accessor voice_id: ::String
+      SENSITIVE: []
+    end
+
+    class VoiceTemplateRequest
+      attr_accessor body: ::String
+      attr_accessor default_substitutions: ::String
+      attr_accessor language_code: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor template_description: ::String
+      attr_accessor voice_id: ::String
+      SENSITIVE: []
+    end
+
+    class VoiceTemplateResponse
+      attr_accessor arn: ::String
+      attr_accessor body: ::String
+      attr_accessor creation_date: ::String
+      attr_accessor default_substitutions: ::String
+      attr_accessor language_code: ::String
+      attr_accessor last_modified_date: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor template_description: ::String
+      attr_accessor template_name: ::String
+      attr_accessor template_type: ("EMAIL" | "SMS" | "VOICE" | "PUSH" | "INAPP")
+      attr_accessor version: ::String
+      attr_accessor voice_id: ::String
+      SENSITIVE: []
+    end
+
+    class WaitActivity
+      attr_accessor next_activity: ::String
+      attr_accessor wait_time: Types::WaitTime
+      SENSITIVE: []
+    end
+
+    class WaitTime
+      attr_accessor wait_for: ::String
+      attr_accessor wait_until: ::String
+      SENSITIVE: []
+    end
+
+    class WriteApplicationSettingsRequest
+      attr_accessor campaign_hook: Types::CampaignHook
+      attr_accessor cloud_watch_metrics_enabled: bool
+      attr_accessor limits: Types::CampaignLimits
+      attr_accessor quiet_time: Types::QuietTime
+      attr_accessor journey_limits: Types::ApplicationSettingsJourneyLimits
+      SENSITIVE: []
+    end
+
+    class WriteCampaignRequest
+      attr_accessor additional_treatments: ::Array[Types::WriteTreatmentResource]
+      attr_accessor custom_delivery_configuration: Types::CustomDeliveryConfiguration
+      attr_accessor description: ::String
+      attr_accessor holdout_percent: ::Integer
+      attr_accessor hook: Types::CampaignHook
+      attr_accessor is_paused: bool
+      attr_accessor limits: Types::CampaignLimits
+      attr_accessor message_configuration: Types::MessageConfiguration
+      attr_accessor name: ::String
+      attr_accessor schedule: Types::Schedule
+      attr_accessor segment_id: ::String
+      attr_accessor segment_version: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor template_configuration: Types::TemplateConfiguration
+      attr_accessor treatment_description: ::String
+      attr_accessor treatment_name: ::String
+      attr_accessor priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class WriteEventStream
+      attr_accessor destination_stream_arn: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class WriteJourneyRequest
+      attr_accessor activities: ::Hash[::String, Types::Activity]
+      attr_accessor creation_date: ::String
+      attr_accessor last_modified_date: ::String
+      attr_accessor limits: Types::JourneyLimits
+      attr_accessor local_time: bool
+      attr_accessor name: ::String
+      attr_accessor quiet_time: Types::QuietTime
+      attr_accessor refresh_frequency: ::String
+      attr_accessor schedule: Types::JourneySchedule
+      attr_accessor start_activity: ::String
+      attr_accessor start_condition: Types::StartCondition
+      attr_accessor state: ("DRAFT" | "ACTIVE" | "COMPLETED" | "CANCELLED" | "CLOSED" | "PAUSED")
+      attr_accessor wait_for_quiet_time: bool
+      attr_accessor refresh_on_segment_update: bool
+      attr_accessor journey_channel_settings: Types::JourneyChannelSettings
+      attr_accessor sending_schedule: bool
+      attr_accessor open_hours: Types::OpenHours
+      attr_accessor closed_days: Types::ClosedDays
+      attr_accessor timezone_estimation_methods: ::Array[("PHONE_NUMBER" | "POSTAL_CODE")]
+      SENSITIVE: []
+    end
+
+    class WriteSegmentRequest
+      attr_accessor dimensions: Types::SegmentDimensions
+      attr_accessor name: ::String
+      attr_accessor segment_groups: Types::SegmentGroupList
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class WriteTreatmentResource
+      attr_accessor custom_delivery_configuration: Types::CustomDeliveryConfiguration
+      attr_accessor message_configuration: Types::MessageConfiguration
+      attr_accessor schedule: Types::Schedule
+      attr_accessor size_percent: ::Integer
+      attr_accessor template_configuration: Types::TemplateConfiguration
+      attr_accessor treatment_description: ::String
+      attr_accessor treatment_name: ::String
+      SENSITIVE: []
+    end
+
+    class OpenHoursRule
+      attr_accessor start_time: ::String
+      attr_accessor end_time: ::String
+      SENSITIVE: []
+    end
+
+    class OpenHours
+      attr_accessor email: ::Hash[("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY"), ::Array[Types::OpenHoursRule]]
+      attr_accessor sms: ::Hash[("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY"), ::Array[Types::OpenHoursRule]]
+      attr_accessor push: ::Hash[("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY"), ::Array[Types::OpenHoursRule]]
+      attr_accessor voice: ::Hash[("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY"), ::Array[Types::OpenHoursRule]]
+      attr_accessor custom: ::Hash[("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY"), ::Array[Types::OpenHoursRule]]
+      SENSITIVE: []
+    end
+
+    class ClosedDaysRule
+      attr_accessor name: ::String
+      attr_accessor start_date_time: ::String
+      attr_accessor end_date_time: ::String
+      SENSITIVE: []
+    end
+
+    class ClosedDays
+      attr_accessor email: ::Array[Types::ClosedDaysRule]
+      attr_accessor sms: ::Array[Types::ClosedDaysRule]
+      attr_accessor push: ::Array[Types::ClosedDaysRule]
+      attr_accessor voice: ::Array[Types::ClosedDaysRule]
+      attr_accessor custom: ::Array[Types::ClosedDaysRule]
+      SENSITIVE: []
+    end
+  end
+end

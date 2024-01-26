@@ -1,0 +1,50 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module S3Control
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class BadRequestException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class BucketAlreadyExists < ::Aws::Errors::ServiceError
+      end
+      class BucketAlreadyOwnedByYou < ::Aws::Errors::ServiceError
+      end
+      class IdempotencyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InternalServiceException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidRequestException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class JobStatusException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchPublicAccessBlockConfiguration < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyRequestsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyTagsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

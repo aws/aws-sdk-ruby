@@ -1,0 +1,318 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ConnectCampaignService
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCampaignService/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateCampaignResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCampaignResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCampaignService/Client.html#create_campaign-instance_method
+      def create_campaign: (
+                             name: ::String,
+                             connect_instance_id: ::String,
+                             dialer_config: {
+                               progressive_dialer_config: {
+                                 bandwidth_allocation: ::Float,
+                                 dialing_capacity: ::Float?
+                               }?,
+                               predictive_dialer_config: {
+                                 bandwidth_allocation: ::Float,
+                                 dialing_capacity: ::Float?
+                               }?,
+                               agentless_dialer_config: {
+                                 dialing_capacity: ::Float?
+                               }?
+                             },
+                             outbound_call_config: {
+                               connect_contact_flow_id: ::String,
+                               connect_source_phone_number: ::String?,
+                               connect_queue_id: ::String?,
+                               answer_machine_detection_config: {
+                                 enable_answer_machine_detection: bool
+                               }?
+                             },
+                             ?tags: Hash[::String, ::String]
+                           ) -> _CreateCampaignResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCampaignResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCampaignService/Client.html#delete_campaign-instance_method
+      def delete_campaign: (
+                             id: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCampaignService/Client.html#delete_connect_instance_config-instance_method
+      def delete_connect_instance_config: (
+                                            connect_instance_id: ::String
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCampaignService/Client.html#delete_instance_onboarding_job-instance_method
+      def delete_instance_onboarding_job: (
+                                            connect_instance_id: ::String
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeCampaignResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCampaignResponse]
+        def campaign: () -> Types::Campaign
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCampaignService/Client.html#describe_campaign-instance_method
+      def describe_campaign: (
+                               id: ::String
+                             ) -> _DescribeCampaignResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCampaignResponseSuccess
+
+      interface _GetCampaignStateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCampaignStateResponse]
+        def state: () -> ("Initialized" | "Running" | "Paused" | "Stopped" | "Failed")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCampaignService/Client.html#get_campaign_state-instance_method
+      def get_campaign_state: (
+                                id: ::String
+                              ) -> _GetCampaignStateResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCampaignStateResponseSuccess
+
+      interface _GetCampaignStateBatchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCampaignStateBatchResponse]
+        def successful_requests: () -> ::Array[Types::SuccessfulCampaignStateResponse]
+        def failed_requests: () -> ::Array[Types::FailedCampaignStateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCampaignService/Client.html#get_campaign_state_batch-instance_method
+      def get_campaign_state_batch: (
+                                      campaign_ids: Array[::String]
+                                    ) -> _GetCampaignStateBatchResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCampaignStateBatchResponseSuccess
+
+      interface _GetConnectInstanceConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectInstanceConfigResponse]
+        def connect_instance_config: () -> Types::InstanceConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCampaignService/Client.html#get_connect_instance_config-instance_method
+      def get_connect_instance_config: (
+                                         connect_instance_id: ::String
+                                       ) -> _GetConnectInstanceConfigResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConnectInstanceConfigResponseSuccess
+
+      interface _GetInstanceOnboardingJobStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInstanceOnboardingJobStatusResponse]
+        def connect_instance_onboarding_job_status: () -> Types::InstanceOnboardingJobStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCampaignService/Client.html#get_instance_onboarding_job_status-instance_method
+      def get_instance_onboarding_job_status: (
+                                                connect_instance_id: ::String
+                                              ) -> _GetInstanceOnboardingJobStatusResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInstanceOnboardingJobStatusResponseSuccess
+
+      interface _ListCampaignsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCampaignsResponse]
+        def next_token: () -> ::String
+        def campaign_summary_list: () -> ::Array[Types::CampaignSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCampaignService/Client.html#list_campaigns-instance_method
+      def list_campaigns: (
+                            ?max_results: ::Integer,
+                            ?next_token: ::String,
+                            ?filters: {
+                              instance_id_filter: {
+                                value: ::String,
+                                operator: ("Eq")
+                              }?
+                            }
+                          ) -> _ListCampaignsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCampaignsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCampaignService/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCampaignService/Client.html#pause_campaign-instance_method
+      def pause_campaign: (
+                            id: ::String
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _PutDialRequestBatchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutDialRequestBatchResponse]
+        def successful_requests: () -> ::Array[Types::SuccessfulRequest]
+        def failed_requests: () -> ::Array[Types::FailedRequest]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCampaignService/Client.html#put_dial_request_batch-instance_method
+      def put_dial_request_batch: (
+                                    id: ::String,
+                                    dial_requests: Array[
+                                      {
+                                        client_token: ::String,
+                                        phone_number: ::String,
+                                        expiration_time: ::Time,
+                                        attributes: Hash[::String, ::String]
+                                      },
+                                    ]
+                                  ) -> _PutDialRequestBatchResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDialRequestBatchResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCampaignService/Client.html#resume_campaign-instance_method
+      def resume_campaign: (
+                             id: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCampaignService/Client.html#start_campaign-instance_method
+      def start_campaign: (
+                            id: ::String
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _StartInstanceOnboardingJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartInstanceOnboardingJobResponse]
+        def connect_instance_onboarding_job_status: () -> Types::InstanceOnboardingJobStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCampaignService/Client.html#start_instance_onboarding_job-instance_method
+      def start_instance_onboarding_job: (
+                                           connect_instance_id: ::String,
+                                           encryption_config: {
+                                             enabled: bool,
+                                             encryption_type: ("KMS")?,
+                                             key_arn: ::String?
+                                           }
+                                         ) -> _StartInstanceOnboardingJobResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartInstanceOnboardingJobResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCampaignService/Client.html#stop_campaign-instance_method
+      def stop_campaign: (
+                           id: ::String
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCampaignService/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCampaignService/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCampaignService/Client.html#update_campaign_dialer_config-instance_method
+      def update_campaign_dialer_config: (
+                                           id: ::String,
+                                           dialer_config: {
+                                             progressive_dialer_config: {
+                                               bandwidth_allocation: ::Float,
+                                               dialing_capacity: ::Float?
+                                             }?,
+                                             predictive_dialer_config: {
+                                               bandwidth_allocation: ::Float,
+                                               dialing_capacity: ::Float?
+                                             }?,
+                                             agentless_dialer_config: {
+                                               dialing_capacity: ::Float?
+                                             }?
+                                           }
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCampaignService/Client.html#update_campaign_name-instance_method
+      def update_campaign_name: (
+                                  id: ::String,
+                                  name: ::String
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCampaignService/Client.html#update_campaign_outbound_call_config-instance_method
+      def update_campaign_outbound_call_config: (
+                                                  id: ::String,
+                                                  ?connect_contact_flow_id: ::String,
+                                                  ?connect_source_phone_number: ::String,
+                                                  ?answer_machine_detection_config: {
+                                                    enable_answer_machine_detection: bool
+                                                  }
+                                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+    end
+  end
+end
+

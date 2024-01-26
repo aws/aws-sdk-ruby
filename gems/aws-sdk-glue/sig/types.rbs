@@ -1,0 +1,5786 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Glue
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Action
+      attr_accessor job_name: ::String
+      attr_accessor arguments: ::Hash[::String, ::String]
+      attr_accessor timeout: ::Integer
+      attr_accessor security_configuration: ::String
+      attr_accessor notification_property: Types::NotificationProperty
+      attr_accessor crawler_name: ::String
+      SENSITIVE: []
+    end
+
+    class Aggregate
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor groups: ::Array[::Array[::String]]
+      attr_accessor aggs: ::Array[Types::AggregateOperation]
+      SENSITIVE: []
+    end
+
+    class AggregateOperation
+      attr_accessor column: ::Array[::String]
+      attr_accessor agg_func: ("avg" | "countDistinct" | "count" | "first" | "last" | "kurtosis" | "max" | "min" | "skewness" | "stddev_samp" | "stddev_pop" | "sum" | "sumDistinct" | "var_samp" | "var_pop")
+      SENSITIVE: []
+    end
+
+    class AlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AmazonRedshiftAdvancedOption
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class AmazonRedshiftNodeData
+      attr_accessor access_type: ::String
+      attr_accessor source_type: ::String
+      attr_accessor connection: Types::Option
+      attr_accessor schema: Types::Option
+      attr_accessor table: Types::Option
+      attr_accessor catalog_database: Types::Option
+      attr_accessor catalog_table: Types::Option
+      attr_accessor catalog_redshift_schema: ::String
+      attr_accessor catalog_redshift_table: ::String
+      attr_accessor temp_dir: ::String
+      attr_accessor iam_role: Types::Option
+      attr_accessor advanced_options: ::Array[Types::AmazonRedshiftAdvancedOption]
+      attr_accessor sample_query: ::String
+      attr_accessor pre_action: ::String
+      attr_accessor post_action: ::String
+      attr_accessor action: ::String
+      attr_accessor table_prefix: ::String
+      attr_accessor upsert: bool
+      attr_accessor merge_action: ::String
+      attr_accessor merge_when_matched: ::String
+      attr_accessor merge_when_not_matched: ::String
+      attr_accessor merge_clause: ::String
+      attr_accessor crawler_connection: ::String
+      attr_accessor table_schema: ::Array[Types::Option]
+      attr_accessor staging_table: ::String
+      attr_accessor selected_columns: ::Array[Types::Option]
+      SENSITIVE: []
+    end
+
+    class AmazonRedshiftSource
+      attr_accessor name: ::String
+      attr_accessor data: Types::AmazonRedshiftNodeData
+      SENSITIVE: []
+    end
+
+    class AmazonRedshiftTarget
+      attr_accessor name: ::String
+      attr_accessor data: Types::AmazonRedshiftNodeData
+      attr_accessor inputs: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ApplyMapping
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor mapping: ::Array[Types::Mapping]
+      SENSITIVE: []
+    end
+
+    class AthenaConnectorSource
+      attr_accessor name: ::String
+      attr_accessor connection_name: ::String
+      attr_accessor connector_name: ::String
+      attr_accessor connection_type: ::String
+      attr_accessor connection_table: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
+      SENSITIVE: []
+    end
+
+    class AuditContext
+      attr_accessor additional_audit_context: ::String
+      attr_accessor requested_columns: ::Array[::String]
+      attr_accessor all_columns_requested: bool
+      SENSITIVE: []
+    end
+
+    class BackfillError
+      attr_accessor code: ("ENCRYPTED_PARTITION_ERROR" | "INTERNAL_ERROR" | "INVALID_PARTITION_TYPE_DATA_ERROR" | "MISSING_PARTITION_VALUE_ERROR" | "UNSUPPORTED_PARTITION_CHARACTER_ERROR")
+      attr_accessor partitions: ::Array[Types::PartitionValueList]
+      SENSITIVE: []
+    end
+
+    class BasicCatalogTarget
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor database: ::String
+      attr_accessor table: ::String
+      SENSITIVE: []
+    end
+
+    class BatchCreatePartitionRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor partition_input_list: ::Array[Types::PartitionInput]
+      SENSITIVE: []
+    end
+
+    class BatchCreatePartitionResponse
+      attr_accessor errors: ::Array[Types::PartitionError]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteConnectionRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor connection_name_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteConnectionResponse
+      attr_accessor succeeded: ::Array[::String]
+      attr_accessor errors: ::Hash[::String, Types::ErrorDetail]
+      SENSITIVE: []
+    end
+
+    class BatchDeletePartitionRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor partitions_to_delete: ::Array[Types::PartitionValueList]
+      SENSITIVE: []
+    end
+
+    class BatchDeletePartitionResponse
+      attr_accessor errors: ::Array[Types::PartitionError]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteTableRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor tables_to_delete: ::Array[::String]
+      attr_accessor transaction_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDeleteTableResponse
+      attr_accessor errors: ::Array[Types::TableError]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteTableVersionRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor version_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteTableVersionResponse
+      attr_accessor errors: ::Array[Types::TableVersionError]
+      SENSITIVE: []
+    end
+
+    class BatchGetBlueprintsRequest
+      attr_accessor names: ::Array[::String]
+      attr_accessor include_blueprint: bool
+      attr_accessor include_parameter_spec: bool
+      SENSITIVE: []
+    end
+
+    class BatchGetBlueprintsResponse
+      attr_accessor blueprints: ::Array[Types::Blueprint]
+      attr_accessor missing_blueprints: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetCrawlersRequest
+      attr_accessor crawler_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetCrawlersResponse
+      attr_accessor crawlers: ::Array[Types::Crawler]
+      attr_accessor crawlers_not_found: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetCustomEntityTypesRequest
+      attr_accessor names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetCustomEntityTypesResponse
+      attr_accessor custom_entity_types: ::Array[Types::CustomEntityType]
+      attr_accessor custom_entity_types_not_found: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetDataQualityResultRequest
+      attr_accessor result_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetDataQualityResultResponse
+      attr_accessor results: ::Array[Types::DataQualityResult]
+      attr_accessor results_not_found: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetDevEndpointsRequest
+      attr_accessor dev_endpoint_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetDevEndpointsResponse
+      attr_accessor dev_endpoints: ::Array[Types::DevEndpoint]
+      attr_accessor dev_endpoints_not_found: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetJobsRequest
+      attr_accessor job_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetJobsResponse
+      attr_accessor jobs: ::Array[Types::Job]
+      attr_accessor jobs_not_found: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetPartitionRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor partitions_to_get: ::Array[Types::PartitionValueList]
+      SENSITIVE: []
+    end
+
+    class BatchGetPartitionResponse
+      attr_accessor partitions: ::Array[Types::Partition]
+      attr_accessor unprocessed_keys: ::Array[Types::PartitionValueList]
+      SENSITIVE: []
+    end
+
+    class BatchGetTableOptimizerEntry
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor type: ("compaction")
+      SENSITIVE: []
+    end
+
+    class BatchGetTableOptimizerError
+      attr_accessor error: Types::ErrorDetail
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor type: ("compaction")
+      SENSITIVE: []
+    end
+
+    class BatchGetTableOptimizerRequest
+      attr_accessor entries: ::Array[Types::BatchGetTableOptimizerEntry]
+      SENSITIVE: []
+    end
+
+    class BatchGetTableOptimizerResponse
+      attr_accessor table_optimizers: ::Array[Types::BatchTableOptimizer]
+      attr_accessor failures: ::Array[Types::BatchGetTableOptimizerError]
+      SENSITIVE: []
+    end
+
+    class BatchGetTriggersRequest
+      attr_accessor trigger_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetTriggersResponse
+      attr_accessor triggers: ::Array[Types::Trigger]
+      attr_accessor triggers_not_found: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetWorkflowsRequest
+      attr_accessor names: ::Array[::String]
+      attr_accessor include_graph: bool
+      SENSITIVE: []
+    end
+
+    class BatchGetWorkflowsResponse
+      attr_accessor workflows: ::Array[Types::Workflow]
+      attr_accessor missing_workflows: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchStopJobRunError
+      attr_accessor job_name: ::String
+      attr_accessor job_run_id: ::String
+      attr_accessor error_detail: Types::ErrorDetail
+      SENSITIVE: []
+    end
+
+    class BatchStopJobRunRequest
+      attr_accessor job_name: ::String
+      attr_accessor job_run_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchStopJobRunResponse
+      attr_accessor successful_submissions: ::Array[Types::BatchStopJobRunSuccessfulSubmission]
+      attr_accessor errors: ::Array[Types::BatchStopJobRunError]
+      SENSITIVE: []
+    end
+
+    class BatchStopJobRunSuccessfulSubmission
+      attr_accessor job_name: ::String
+      attr_accessor job_run_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchTableOptimizer
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor table_optimizer: Types::TableOptimizer
+      SENSITIVE: []
+    end
+
+    class BatchUpdatePartitionFailureEntry
+      attr_accessor partition_value_list: ::Array[::String]
+      attr_accessor error_detail: Types::ErrorDetail
+      SENSITIVE: []
+    end
+
+    class BatchUpdatePartitionRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor entries: ::Array[Types::BatchUpdatePartitionRequestEntry]
+      SENSITIVE: []
+    end
+
+    class BatchUpdatePartitionRequestEntry
+      attr_accessor partition_value_list: ::Array[::String]
+      attr_accessor partition_input: Types::PartitionInput
+      SENSITIVE: []
+    end
+
+    class BatchUpdatePartitionResponse
+      attr_accessor errors: ::Array[Types::BatchUpdatePartitionFailureEntry]
+      SENSITIVE: []
+    end
+
+    class BinaryColumnStatisticsData
+      attr_accessor maximum_length: ::Integer
+      attr_accessor average_length: ::Float
+      attr_accessor number_of_nulls: ::Integer
+      SENSITIVE: []
+    end
+
+    class Blueprint
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_on: ::Time
+      attr_accessor last_modified_on: ::Time
+      attr_accessor parameter_spec: ::String
+      attr_accessor blueprint_location: ::String
+      attr_accessor blueprint_service_location: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "FAILED")
+      attr_accessor error_message: ::String
+      attr_accessor last_active_definition: Types::LastActiveDefinition
+      SENSITIVE: []
+    end
+
+    class BlueprintDetails
+      attr_accessor blueprint_name: ::String
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class BlueprintRun
+      attr_accessor blueprint_name: ::String
+      attr_accessor run_id: ::String
+      attr_accessor workflow_name: ::String
+      attr_accessor state: ("RUNNING" | "SUCCEEDED" | "FAILED" | "ROLLING_BACK")
+      attr_accessor started_on: ::Time
+      attr_accessor completed_on: ::Time
+      attr_accessor error_message: ::String
+      attr_accessor rollback_error_message: ::String
+      attr_accessor parameters: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class BooleanColumnStatisticsData
+      attr_accessor number_of_trues: ::Integer
+      attr_accessor number_of_falses: ::Integer
+      attr_accessor number_of_nulls: ::Integer
+      SENSITIVE: []
+    end
+
+    class CancelDataQualityRuleRecommendationRunRequest
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelDataQualityRuleRecommendationRunResponse < Aws::EmptyStructure
+    end
+
+    class CancelDataQualityRulesetEvaluationRunRequest
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelDataQualityRulesetEvaluationRunResponse < Aws::EmptyStructure
+    end
+
+    class CancelMLTaskRunRequest
+      attr_accessor transform_id: ::String
+      attr_accessor task_run_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelMLTaskRunResponse
+      attr_accessor transform_id: ::String
+      attr_accessor task_run_id: ::String
+      attr_accessor status: ("STARTING" | "RUNNING" | "STOPPING" | "STOPPED" | "SUCCEEDED" | "FAILED" | "TIMEOUT")
+      SENSITIVE: []
+    end
+
+    class CancelStatementRequest
+      attr_accessor session_id: ::String
+      attr_accessor id: ::Integer
+      attr_accessor request_origin: ::String
+      SENSITIVE: []
+    end
+
+    class CancelStatementResponse < Aws::EmptyStructure
+    end
+
+    class CatalogDeltaSource
+      attr_accessor name: ::String
+      attr_accessor database: ::String
+      attr_accessor table: ::String
+      attr_accessor additional_delta_options: ::Hash[::String, ::String]
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
+      SENSITIVE: []
+    end
+
+    class CatalogEntry
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      SENSITIVE: []
+    end
+
+    class CatalogHudiSource
+      attr_accessor name: ::String
+      attr_accessor database: ::String
+      attr_accessor table: ::String
+      attr_accessor additional_hudi_options: ::Hash[::String, ::String]
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
+      SENSITIVE: []
+    end
+
+    class CatalogImportStatus
+      attr_accessor import_completed: bool
+      attr_accessor import_time: ::Time
+      attr_accessor imported_by: ::String
+      SENSITIVE: []
+    end
+
+    class CatalogKafkaSource
+      attr_accessor name: ::String
+      attr_accessor window_size: ::Integer
+      attr_accessor detect_schema: bool
+      attr_accessor table: ::String
+      attr_accessor database: ::String
+      attr_accessor streaming_options: Types::KafkaStreamingSourceOptions
+      attr_accessor data_preview_options: Types::StreamingDataPreviewOptions
+      SENSITIVE: []
+    end
+
+    class CatalogKinesisSource
+      attr_accessor name: ::String
+      attr_accessor window_size: ::Integer
+      attr_accessor detect_schema: bool
+      attr_accessor table: ::String
+      attr_accessor database: ::String
+      attr_accessor streaming_options: Types::KinesisStreamingSourceOptions
+      attr_accessor data_preview_options: Types::StreamingDataPreviewOptions
+      SENSITIVE: []
+    end
+
+    class CatalogSchemaChangePolicy
+      attr_accessor enable_update_catalog: bool
+      attr_accessor update_behavior: ("UPDATE_IN_DATABASE" | "LOG")
+      SENSITIVE: []
+    end
+
+    class CatalogSource
+      attr_accessor name: ::String
+      attr_accessor database: ::String
+      attr_accessor table: ::String
+      SENSITIVE: []
+    end
+
+    class CatalogTarget
+      attr_accessor database_name: ::String
+      attr_accessor tables: ::Array[::String]
+      attr_accessor connection_name: ::String
+      attr_accessor event_queue_arn: ::String
+      attr_accessor dlq_event_queue_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CheckSchemaVersionValidityInput
+      attr_accessor data_format: ("AVRO" | "JSON" | "PROTOBUF")
+      attr_accessor schema_definition: ::String
+      SENSITIVE: []
+    end
+
+    class CheckSchemaVersionValidityResponse
+      attr_accessor valid: bool
+      attr_accessor error: ::String
+      SENSITIVE: []
+    end
+
+    class Classifier
+      attr_accessor grok_classifier: Types::GrokClassifier
+      attr_accessor xml_classifier: Types::XMLClassifier
+      attr_accessor json_classifier: Types::JsonClassifier
+      attr_accessor csv_classifier: Types::CsvClassifier
+      SENSITIVE: []
+    end
+
+    class CloudWatchEncryption
+      attr_accessor cloud_watch_encryption_mode: ("DISABLED" | "SSE-KMS")
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CodeGenConfigurationNode
+      attr_accessor athena_connector_source: Types::AthenaConnectorSource
+      attr_accessor jdbc_connector_source: Types::JDBCConnectorSource
+      attr_accessor spark_connector_source: Types::SparkConnectorSource
+      attr_accessor catalog_source: Types::CatalogSource
+      attr_accessor redshift_source: Types::RedshiftSource
+      attr_accessor s3_catalog_source: Types::S3CatalogSource
+      attr_accessor s3_csv_source: Types::S3CsvSource
+      attr_accessor s3_json_source: Types::S3JsonSource
+      attr_accessor s3_parquet_source: Types::S3ParquetSource
+      attr_accessor relational_catalog_source: Types::RelationalCatalogSource
+      attr_accessor dynamo_db_catalog_source: Types::DynamoDBCatalogSource
+      attr_accessor jdbc_connector_target: Types::JDBCConnectorTarget
+      attr_accessor spark_connector_target: Types::SparkConnectorTarget
+      attr_accessor catalog_target: Types::BasicCatalogTarget
+      attr_accessor redshift_target: Types::RedshiftTarget
+      attr_accessor s3_catalog_target: Types::S3CatalogTarget
+      attr_accessor s3_glue_parquet_target: Types::S3GlueParquetTarget
+      attr_accessor s3_direct_target: Types::S3DirectTarget
+      attr_accessor apply_mapping: Types::ApplyMapping
+      attr_accessor select_fields: Types::SelectFields
+      attr_accessor drop_fields: Types::DropFields
+      attr_accessor rename_field: Types::RenameField
+      attr_accessor spigot: Types::Spigot
+      attr_accessor join: Types::Join
+      attr_accessor split_fields: Types::SplitFields
+      attr_accessor select_from_collection: Types::SelectFromCollection
+      attr_accessor fill_missing_values: Types::FillMissingValues
+      attr_accessor filter: Types::Filter
+      attr_accessor custom_code: Types::CustomCode
+      attr_accessor spark_sql: Types::SparkSQL
+      attr_accessor direct_kinesis_source: Types::DirectKinesisSource
+      attr_accessor direct_kafka_source: Types::DirectKafkaSource
+      attr_accessor catalog_kinesis_source: Types::CatalogKinesisSource
+      attr_accessor catalog_kafka_source: Types::CatalogKafkaSource
+      attr_accessor drop_null_fields: Types::DropNullFields
+      attr_accessor merge: Types::Merge
+      attr_accessor union: Types::Union
+      attr_accessor pii_detection: Types::PIIDetection
+      attr_accessor aggregate: Types::Aggregate
+      attr_accessor drop_duplicates: Types::DropDuplicates
+      attr_accessor governed_catalog_target: Types::GovernedCatalogTarget
+      attr_accessor governed_catalog_source: Types::GovernedCatalogSource
+      attr_accessor microsoft_sql_server_catalog_source: Types::MicrosoftSQLServerCatalogSource
+      attr_accessor my_sql_catalog_source: Types::MySQLCatalogSource
+      attr_accessor oracle_sql_catalog_source: Types::OracleSQLCatalogSource
+      attr_accessor postgre_sql_catalog_source: Types::PostgreSQLCatalogSource
+      attr_accessor microsoft_sql_server_catalog_target: Types::MicrosoftSQLServerCatalogTarget
+      attr_accessor my_sql_catalog_target: Types::MySQLCatalogTarget
+      attr_accessor oracle_sql_catalog_target: Types::OracleSQLCatalogTarget
+      attr_accessor postgre_sql_catalog_target: Types::PostgreSQLCatalogTarget
+      attr_accessor dynamic_transform: Types::DynamicTransform
+      attr_accessor evaluate_data_quality: Types::EvaluateDataQuality
+      attr_accessor s3_catalog_hudi_source: Types::S3CatalogHudiSource
+      attr_accessor catalog_hudi_source: Types::CatalogHudiSource
+      attr_accessor s3_hudi_source: Types::S3HudiSource
+      attr_accessor s3_hudi_catalog_target: Types::S3HudiCatalogTarget
+      attr_accessor s3_hudi_direct_target: Types::S3HudiDirectTarget
+      attr_accessor direct_jdbc_source: Types::DirectJDBCSource
+      attr_accessor s3_catalog_delta_source: Types::S3CatalogDeltaSource
+      attr_accessor catalog_delta_source: Types::CatalogDeltaSource
+      attr_accessor s3_delta_source: Types::S3DeltaSource
+      attr_accessor s3_delta_catalog_target: Types::S3DeltaCatalogTarget
+      attr_accessor s3_delta_direct_target: Types::S3DeltaDirectTarget
+      attr_accessor amazon_redshift_source: Types::AmazonRedshiftSource
+      attr_accessor amazon_redshift_target: Types::AmazonRedshiftTarget
+      attr_accessor evaluate_data_quality_multi_frame: Types::EvaluateDataQualityMultiFrame
+      attr_accessor recipe: Types::Recipe
+      attr_accessor snowflake_source: Types::SnowflakeSource
+      attr_accessor snowflake_target: Types::SnowflakeTarget
+      attr_accessor connector_data_source: Types::ConnectorDataSource
+      attr_accessor connector_data_target: Types::ConnectorDataTarget
+      SENSITIVE: []
+    end
+
+    class CodeGenEdge
+      attr_accessor source: ::String
+      attr_accessor target: ::String
+      attr_accessor target_parameter: ::String
+      SENSITIVE: []
+    end
+
+    class CodeGenNode
+      attr_accessor id: ::String
+      attr_accessor node_type: ::String
+      attr_accessor args: ::Array[Types::CodeGenNodeArg]
+      attr_accessor line_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class CodeGenNodeArg
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      attr_accessor param: bool
+      SENSITIVE: []
+    end
+
+    class Column
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      attr_accessor comment: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ColumnError
+      attr_accessor column_name: ::String
+      attr_accessor error: Types::ErrorDetail
+      SENSITIVE: []
+    end
+
+    class ColumnImportance
+      attr_accessor column_name: ::String
+      attr_accessor importance: ::Float
+      SENSITIVE: []
+    end
+
+    class ColumnRowFilter
+      attr_accessor column_name: ::String
+      attr_accessor row_filter_expression: ::String
+      SENSITIVE: []
+    end
+
+    class ColumnStatistics
+      attr_accessor column_name: ::String
+      attr_accessor column_type: ::String
+      attr_accessor analyzed_time: ::Time
+      attr_accessor statistics_data: Types::ColumnStatisticsData
+      SENSITIVE: []
+    end
+
+    class ColumnStatisticsData
+      attr_accessor type: ("BOOLEAN" | "DATE" | "DECIMAL" | "DOUBLE" | "LONG" | "STRING" | "BINARY")
+      attr_accessor boolean_column_statistics_data: Types::BooleanColumnStatisticsData
+      attr_accessor date_column_statistics_data: Types::DateColumnStatisticsData
+      attr_accessor decimal_column_statistics_data: Types::DecimalColumnStatisticsData
+      attr_accessor double_column_statistics_data: Types::DoubleColumnStatisticsData
+      attr_accessor long_column_statistics_data: Types::LongColumnStatisticsData
+      attr_accessor string_column_statistics_data: Types::StringColumnStatisticsData
+      attr_accessor binary_column_statistics_data: Types::BinaryColumnStatisticsData
+      SENSITIVE: []
+    end
+
+    class ColumnStatisticsError
+      attr_accessor column_statistics: Types::ColumnStatistics
+      attr_accessor error: Types::ErrorDetail
+      SENSITIVE: []
+    end
+
+    class ColumnStatisticsTaskNotRunningException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ColumnStatisticsTaskRun
+      attr_accessor customer_id: ::String
+      attr_accessor column_statistics_task_run_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor column_name_list: ::Array[::String]
+      attr_accessor catalog_id: ::String
+      attr_accessor role: ::String
+      attr_accessor sample_size: ::Float
+      attr_accessor security_configuration: ::String
+      attr_accessor number_of_workers: ::Integer
+      attr_accessor worker_type: ::String
+      attr_accessor status: ("STARTING" | "RUNNING" | "SUCCEEDED" | "FAILED" | "STOPPED")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated: ::Time
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor error_message: ::String
+      attr_accessor dpu_seconds: ::Float
+      SENSITIVE: []
+    end
+
+    class ColumnStatisticsTaskRunningException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ColumnStatisticsTaskStoppingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConcurrentModificationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConcurrentRunsExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Condition
+      attr_accessor logical_operator: ("EQUALS")
+      attr_accessor job_name: ::String
+      attr_accessor state: ("STARTING" | "RUNNING" | "STOPPING" | "STOPPED" | "SUCCEEDED" | "FAILED" | "TIMEOUT" | "ERROR" | "WAITING")
+      attr_accessor crawler_name: ::String
+      attr_accessor crawl_state: ("RUNNING" | "CANCELLING" | "CANCELLED" | "SUCCEEDED" | "FAILED" | "ERROR")
+      SENSITIVE: []
+    end
+
+    class ConditionCheckFailureException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConfusionMatrix
+      attr_accessor num_true_positives: ::Integer
+      attr_accessor num_false_positives: ::Integer
+      attr_accessor num_true_negatives: ::Integer
+      attr_accessor num_false_negatives: ::Integer
+      SENSITIVE: []
+    end
+
+    class Connection
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor connection_type: ("JDBC" | "SFTP" | "MONGODB" | "KAFKA" | "NETWORK" | "MARKETPLACE" | "CUSTOM")
+      attr_accessor match_criteria: ::Array[::String]
+      attr_accessor connection_properties: ::Hash[("HOST" | "PORT" | "USERNAME" | "PASSWORD" | "ENCRYPTED_PASSWORD" | "JDBC_DRIVER_JAR_URI" | "JDBC_DRIVER_CLASS_NAME" | "JDBC_ENGINE" | "JDBC_ENGINE_VERSION" | "CONFIG_FILES" | "INSTANCE_ID" | "JDBC_CONNECTION_URL" | "JDBC_ENFORCE_SSL" | "CUSTOM_JDBC_CERT" | "SKIP_CUSTOM_JDBC_CERT_VALIDATION" | "CUSTOM_JDBC_CERT_STRING" | "CONNECTION_URL" | "KAFKA_BOOTSTRAP_SERVERS" | "KAFKA_SSL_ENABLED" | "KAFKA_CUSTOM_CERT" | "KAFKA_SKIP_CUSTOM_CERT_VALIDATION" | "KAFKA_CLIENT_KEYSTORE" | "KAFKA_CLIENT_KEYSTORE_PASSWORD" | "KAFKA_CLIENT_KEY_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD" | "SECRET_ID" | "CONNECTOR_URL" | "CONNECTOR_TYPE" | "CONNECTOR_CLASS_NAME" | "KAFKA_SASL_MECHANISM" | "KAFKA_SASL_SCRAM_USERNAME" | "KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_SCRAM_SECRETS_ARN" | "ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_GSSAPI_KEYTAB" | "KAFKA_SASL_GSSAPI_KRB5_CONF" | "KAFKA_SASL_GSSAPI_SERVICE" | "KAFKA_SASL_GSSAPI_PRINCIPAL"), ::String]
+      attr_accessor physical_connection_requirements: Types::PhysicalConnectionRequirements
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor last_updated_by: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectionInput
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor connection_type: ("JDBC" | "SFTP" | "MONGODB" | "KAFKA" | "NETWORK" | "MARKETPLACE" | "CUSTOM")
+      attr_accessor match_criteria: ::Array[::String]
+      attr_accessor connection_properties: ::Hash[("HOST" | "PORT" | "USERNAME" | "PASSWORD" | "ENCRYPTED_PASSWORD" | "JDBC_DRIVER_JAR_URI" | "JDBC_DRIVER_CLASS_NAME" | "JDBC_ENGINE" | "JDBC_ENGINE_VERSION" | "CONFIG_FILES" | "INSTANCE_ID" | "JDBC_CONNECTION_URL" | "JDBC_ENFORCE_SSL" | "CUSTOM_JDBC_CERT" | "SKIP_CUSTOM_JDBC_CERT_VALIDATION" | "CUSTOM_JDBC_CERT_STRING" | "CONNECTION_URL" | "KAFKA_BOOTSTRAP_SERVERS" | "KAFKA_SSL_ENABLED" | "KAFKA_CUSTOM_CERT" | "KAFKA_SKIP_CUSTOM_CERT_VALIDATION" | "KAFKA_CLIENT_KEYSTORE" | "KAFKA_CLIENT_KEYSTORE_PASSWORD" | "KAFKA_CLIENT_KEY_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD" | "SECRET_ID" | "CONNECTOR_URL" | "CONNECTOR_TYPE" | "CONNECTOR_CLASS_NAME" | "KAFKA_SASL_MECHANISM" | "KAFKA_SASL_SCRAM_USERNAME" | "KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_SCRAM_SECRETS_ARN" | "ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_GSSAPI_KEYTAB" | "KAFKA_SASL_GSSAPI_KRB5_CONF" | "KAFKA_SASL_GSSAPI_SERVICE" | "KAFKA_SASL_GSSAPI_PRINCIPAL"), ::String]
+      attr_accessor physical_connection_requirements: Types::PhysicalConnectionRequirements
+      SENSITIVE: []
+    end
+
+    class ConnectionPasswordEncryption
+      attr_accessor return_connection_password_encrypted: bool
+      attr_accessor aws_kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectionsList
+      attr_accessor connections: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ConnectorDataSource
+      attr_accessor name: ::String
+      attr_accessor connection_type: ::String
+      attr_accessor data: ::Hash[::String, ::String]
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
+      SENSITIVE: []
+    end
+
+    class ConnectorDataTarget
+      attr_accessor name: ::String
+      attr_accessor connection_type: ::String
+      attr_accessor data: ::Hash[::String, ::String]
+      attr_accessor inputs: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Crawl
+      attr_accessor state: ("RUNNING" | "CANCELLING" | "CANCELLED" | "SUCCEEDED" | "FAILED" | "ERROR")
+      attr_accessor started_on: ::Time
+      attr_accessor completed_on: ::Time
+      attr_accessor error_message: ::String
+      attr_accessor log_group: ::String
+      attr_accessor log_stream: ::String
+      SENSITIVE: []
+    end
+
+    class Crawler
+      attr_accessor name: ::String
+      attr_accessor role: ::String
+      attr_accessor targets: Types::CrawlerTargets
+      attr_accessor database_name: ::String
+      attr_accessor description: ::String
+      attr_accessor classifiers: ::Array[::String]
+      attr_accessor recrawl_policy: Types::RecrawlPolicy
+      attr_accessor schema_change_policy: Types::SchemaChangePolicy
+      attr_accessor lineage_configuration: Types::LineageConfiguration
+      attr_accessor state: ("READY" | "RUNNING" | "STOPPING")
+      attr_accessor table_prefix: ::String
+      attr_accessor schedule: Types::Schedule
+      attr_accessor crawl_elapsed_time: ::Integer
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated: ::Time
+      attr_accessor last_crawl: Types::LastCrawlInfo
+      attr_accessor version: ::Integer
+      attr_accessor configuration: ::String
+      attr_accessor crawler_security_configuration: ::String
+      attr_accessor lake_formation_configuration: Types::LakeFormationConfiguration
+      SENSITIVE: []
+    end
+
+    class CrawlerHistory
+      attr_accessor crawl_id: ::String
+      attr_accessor state: ("RUNNING" | "COMPLETED" | "FAILED" | "STOPPED")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor summary: ::String
+      attr_accessor error_message: ::String
+      attr_accessor log_group: ::String
+      attr_accessor log_stream: ::String
+      attr_accessor message_prefix: ::String
+      attr_accessor dpu_hour: ::Float
+      SENSITIVE: []
+    end
+
+    class CrawlerMetrics
+      attr_accessor crawler_name: ::String
+      attr_accessor time_left_seconds: ::Float
+      attr_accessor still_estimating: bool
+      attr_accessor last_runtime_seconds: ::Float
+      attr_accessor median_runtime_seconds: ::Float
+      attr_accessor tables_created: ::Integer
+      attr_accessor tables_updated: ::Integer
+      attr_accessor tables_deleted: ::Integer
+      SENSITIVE: []
+    end
+
+    class CrawlerNodeDetails
+      attr_accessor crawls: ::Array[Types::Crawl]
+      SENSITIVE: []
+    end
+
+    class CrawlerNotRunningException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CrawlerRunningException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CrawlerStoppingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CrawlerTargets
+      attr_accessor s3_targets: ::Array[Types::S3Target]
+      attr_accessor jdbc_targets: ::Array[Types::JdbcTarget]
+      attr_accessor mongo_db_targets: ::Array[Types::MongoDBTarget]
+      attr_accessor dynamo_db_targets: ::Array[Types::DynamoDBTarget]
+      attr_accessor catalog_targets: ::Array[Types::CatalogTarget]
+      attr_accessor delta_targets: ::Array[Types::DeltaTarget]
+      attr_accessor iceberg_targets: ::Array[Types::IcebergTarget]
+      attr_accessor hudi_targets: ::Array[Types::HudiTarget]
+      SENSITIVE: []
+    end
+
+    class CrawlsFilter
+      attr_accessor field_name: ("CRAWL_ID" | "STATE" | "START_TIME" | "END_TIME" | "DPU_HOUR")
+      attr_accessor filter_operator: ("GT" | "GE" | "LT" | "LE" | "EQ" | "NE")
+      attr_accessor field_value: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBlueprintRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor blueprint_location: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateBlueprintResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateClassifierRequest
+      attr_accessor grok_classifier: Types::CreateGrokClassifierRequest
+      attr_accessor xml_classifier: Types::CreateXMLClassifierRequest
+      attr_accessor json_classifier: Types::CreateJsonClassifierRequest
+      attr_accessor csv_classifier: Types::CreateCsvClassifierRequest
+      SENSITIVE: []
+    end
+
+    class CreateClassifierResponse < Aws::EmptyStructure
+    end
+
+    class CreateConnectionRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor connection_input: Types::ConnectionInput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateConnectionResponse < Aws::EmptyStructure
+    end
+
+    class CreateCrawlerRequest
+      attr_accessor name: ::String
+      attr_accessor role: ::String
+      attr_accessor database_name: ::String
+      attr_accessor description: ::String
+      attr_accessor targets: Types::CrawlerTargets
+      attr_accessor schedule: ::String
+      attr_accessor classifiers: ::Array[::String]
+      attr_accessor table_prefix: ::String
+      attr_accessor schema_change_policy: Types::SchemaChangePolicy
+      attr_accessor recrawl_policy: Types::RecrawlPolicy
+      attr_accessor lineage_configuration: Types::LineageConfiguration
+      attr_accessor lake_formation_configuration: Types::LakeFormationConfiguration
+      attr_accessor configuration: ::String
+      attr_accessor crawler_security_configuration: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateCrawlerResponse < Aws::EmptyStructure
+    end
+
+    class CreateCsvClassifierRequest
+      attr_accessor name: ::String
+      attr_accessor delimiter: ::String
+      attr_accessor quote_symbol: ::String
+      attr_accessor contains_header: ("UNKNOWN" | "PRESENT" | "ABSENT")
+      attr_accessor header: ::Array[::String]
+      attr_accessor disable_value_trimming: bool
+      attr_accessor allow_single_column: bool
+      attr_accessor custom_datatype_configured: bool
+      attr_accessor custom_datatypes: ::Array[::String]
+      attr_accessor serde: ("OpenCSVSerDe" | "LazySimpleSerDe" | "None")
+      SENSITIVE: []
+    end
+
+    class CreateCustomEntityTypeRequest
+      attr_accessor name: ::String
+      attr_accessor regex_string: ::String
+      attr_accessor context_words: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateCustomEntityTypeResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDataQualityRulesetRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor ruleset: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor target_table: Types::DataQualityTargetTable
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDataQualityRulesetResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDatabaseRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_input: Types::DatabaseInput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDatabaseResponse < Aws::EmptyStructure
+    end
+
+    class CreateDevEndpointRequest
+      attr_accessor endpoint_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_id: ::String
+      attr_accessor public_key: ::String
+      attr_accessor public_keys: ::Array[::String]
+      attr_accessor number_of_nodes: ::Integer
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor glue_version: ::String
+      attr_accessor number_of_workers: ::Integer
+      attr_accessor extra_python_libs_s3_path: ::String
+      attr_accessor extra_jars_s3_path: ::String
+      attr_accessor security_configuration: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor arguments: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDevEndpointResponse
+      attr_accessor endpoint_name: ::String
+      attr_accessor status: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor yarn_endpoint_address: ::String
+      attr_accessor zeppelin_remote_spark_interpreter_port: ::Integer
+      attr_accessor number_of_nodes: ::Integer
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor glue_version: ::String
+      attr_accessor number_of_workers: ::Integer
+      attr_accessor availability_zone: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor extra_python_libs_s3_path: ::String
+      attr_accessor extra_jars_s3_path: ::String
+      attr_accessor failure_reason: ::String
+      attr_accessor security_configuration: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor arguments: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateGrokClassifierRequest
+      attr_accessor classification: ::String
+      attr_accessor name: ::String
+      attr_accessor grok_pattern: ::String
+      attr_accessor custom_patterns: ::String
+      SENSITIVE: []
+    end
+
+    class CreateJobRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor log_uri: ::String
+      attr_accessor role: ::String
+      attr_accessor execution_property: Types::ExecutionProperty
+      attr_accessor command: Types::JobCommand
+      attr_accessor default_arguments: ::Hash[::String, ::String]
+      attr_accessor non_overridable_arguments: ::Hash[::String, ::String]
+      attr_accessor connections: Types::ConnectionsList
+      attr_accessor max_retries: ::Integer
+      attr_accessor allocated_capacity: ::Integer
+      attr_accessor timeout: ::Integer
+      attr_accessor max_capacity: ::Float
+      attr_accessor security_configuration: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor notification_property: Types::NotificationProperty
+      attr_accessor glue_version: ::String
+      attr_accessor number_of_workers: ::Integer
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor code_gen_configuration_nodes: ::Hash[::String, Types::CodeGenConfigurationNode]
+      attr_accessor execution_class: ("FLEX" | "STANDARD")
+      attr_accessor source_control_details: Types::SourceControlDetails
+      SENSITIVE: [:code_gen_configuration_nodes]
+    end
+
+    class CreateJobResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateJsonClassifierRequest
+      attr_accessor name: ::String
+      attr_accessor json_path: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMLTransformRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor input_record_tables: ::Array[Types::GlueTable]
+      attr_accessor parameters: Types::TransformParameters
+      attr_accessor role: ::String
+      attr_accessor glue_version: ::String
+      attr_accessor max_capacity: ::Float
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor number_of_workers: ::Integer
+      attr_accessor timeout: ::Integer
+      attr_accessor max_retries: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor transform_encryption: Types::TransformEncryption
+      SENSITIVE: []
+    end
+
+    class CreateMLTransformResponse
+      attr_accessor transform_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePartitionIndexRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor partition_index: Types::PartitionIndex
+      SENSITIVE: []
+    end
+
+    class CreatePartitionIndexResponse < Aws::EmptyStructure
+    end
+
+    class CreatePartitionRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor partition_input: Types::PartitionInput
+      SENSITIVE: []
+    end
+
+    class CreatePartitionResponse < Aws::EmptyStructure
+    end
+
+    class CreateRegistryInput
+      attr_accessor registry_name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateRegistryResponse
+      attr_accessor registry_arn: ::String
+      attr_accessor registry_name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateSchemaInput
+      attr_accessor registry_id: Types::RegistryId
+      attr_accessor schema_name: ::String
+      attr_accessor data_format: ("AVRO" | "JSON" | "PROTOBUF")
+      attr_accessor compatibility: ("NONE" | "DISABLED" | "BACKWARD" | "BACKWARD_ALL" | "FORWARD" | "FORWARD_ALL" | "FULL" | "FULL_ALL")
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor schema_definition: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSchemaResponse
+      attr_accessor registry_name: ::String
+      attr_accessor registry_arn: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor schema_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor data_format: ("AVRO" | "JSON" | "PROTOBUF")
+      attr_accessor compatibility: ("NONE" | "DISABLED" | "BACKWARD" | "BACKWARD_ALL" | "FORWARD" | "FORWARD_ALL" | "FULL" | "FULL_ALL")
+      attr_accessor schema_checkpoint: ::Integer
+      attr_accessor latest_schema_version: ::Integer
+      attr_accessor next_schema_version: ::Integer
+      attr_accessor schema_status: ("AVAILABLE" | "PENDING" | "DELETING")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor schema_version_id: ::String
+      attr_accessor schema_version_status: ("AVAILABLE" | "PENDING" | "FAILURE" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class CreateScriptRequest
+      attr_accessor dag_nodes: ::Array[Types::CodeGenNode]
+      attr_accessor dag_edges: ::Array[Types::CodeGenEdge]
+      attr_accessor language: ("PYTHON" | "SCALA")
+      SENSITIVE: []
+    end
+
+    class CreateScriptResponse
+      attr_accessor python_script: ::String
+      attr_accessor scala_code: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSecurityConfigurationRequest
+      attr_accessor name: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateSecurityConfigurationResponse
+      attr_accessor name: ::String
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateSessionRequest
+      attr_accessor id: ::String
+      attr_accessor description: ::String
+      attr_accessor role: ::String
+      attr_accessor command: Types::SessionCommand
+      attr_accessor timeout: ::Integer
+      attr_accessor idle_timeout: ::Integer
+      attr_accessor default_arguments: ::Hash[::String, ::String]
+      attr_accessor connections: Types::ConnectionsList
+      attr_accessor max_capacity: ::Float
+      attr_accessor number_of_workers: ::Integer
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor security_configuration: ::String
+      attr_accessor glue_version: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor request_origin: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSessionResponse
+      attr_accessor session: Types::Session
+      SENSITIVE: []
+    end
+
+    class CreateTableOptimizerRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor type: ("compaction")
+      attr_accessor table_optimizer_configuration: Types::TableOptimizerConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateTableOptimizerResponse < Aws::EmptyStructure
+    end
+
+    class CreateTableRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_input: Types::TableInput
+      attr_accessor partition_indexes: ::Array[Types::PartitionIndex]
+      attr_accessor transaction_id: ::String
+      attr_accessor open_table_format_input: Types::OpenTableFormatInput
+      SENSITIVE: []
+    end
+
+    class CreateTableResponse < Aws::EmptyStructure
+    end
+
+    class CreateTriggerRequest
+      attr_accessor name: ::String
+      attr_accessor workflow_name: ::String
+      attr_accessor type: ("SCHEDULED" | "CONDITIONAL" | "ON_DEMAND" | "EVENT")
+      attr_accessor schedule: ::String
+      attr_accessor predicate: Types::Predicate
+      attr_accessor actions: ::Array[Types::Action]
+      attr_accessor description: ::String
+      attr_accessor start_on_creation: bool
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor event_batching_condition: Types::EventBatchingCondition
+      SENSITIVE: []
+    end
+
+    class CreateTriggerResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateUserDefinedFunctionRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor function_input: Types::UserDefinedFunctionInput
+      SENSITIVE: []
+    end
+
+    class CreateUserDefinedFunctionResponse < Aws::EmptyStructure
+    end
+
+    class CreateWorkflowRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor default_run_properties: ::Hash[::String, ::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor max_concurrent_runs: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateWorkflowResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateXMLClassifierRequest
+      attr_accessor classification: ::String
+      attr_accessor name: ::String
+      attr_accessor row_tag: ::String
+      SENSITIVE: []
+    end
+
+    class CsvClassifier
+      attr_accessor name: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated: ::Time
+      attr_accessor version: ::Integer
+      attr_accessor delimiter: ::String
+      attr_accessor quote_symbol: ::String
+      attr_accessor contains_header: ("UNKNOWN" | "PRESENT" | "ABSENT")
+      attr_accessor header: ::Array[::String]
+      attr_accessor disable_value_trimming: bool
+      attr_accessor allow_single_column: bool
+      attr_accessor custom_datatype_configured: bool
+      attr_accessor custom_datatypes: ::Array[::String]
+      attr_accessor serde: ("OpenCSVSerDe" | "LazySimpleSerDe" | "None")
+      SENSITIVE: []
+    end
+
+    class CustomCode
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor code: ::String
+      attr_accessor class_name: ::String
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
+      SENSITIVE: []
+    end
+
+    class CustomEntityType
+      attr_accessor name: ::String
+      attr_accessor regex_string: ::String
+      attr_accessor context_words: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DQResultsPublishingOptions
+      attr_accessor evaluation_context: ::String
+      attr_accessor results_s3_prefix: ::String
+      attr_accessor cloud_watch_metrics_enabled: bool
+      attr_accessor results_publishing_enabled: bool
+      SENSITIVE: []
+    end
+
+    class DQStopJobOnFailureOptions
+      attr_accessor stop_job_on_failure_timing: ("Immediate" | "AfterDataLoad")
+      SENSITIVE: []
+    end
+
+    class DataCatalogEncryptionSettings
+      attr_accessor encryption_at_rest: Types::EncryptionAtRest
+      attr_accessor connection_password_encryption: Types::ConnectionPasswordEncryption
+      SENSITIVE: []
+    end
+
+    class DataLakePrincipal
+      attr_accessor data_lake_principal_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DataQualityAnalyzerResult
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor evaluation_message: ::String
+      attr_accessor evaluated_metrics: ::Hash[::String, ::Float]
+      SENSITIVE: []
+    end
+
+    class DataQualityEvaluationRunAdditionalRunOptions
+      attr_accessor cloud_watch_metrics_enabled: bool
+      attr_accessor results_s3_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class DataQualityMetricValues
+      attr_accessor actual_value: ::Float
+      attr_accessor expected_value: ::Float
+      attr_accessor lower_limit: ::Float
+      attr_accessor upper_limit: ::Float
+      SENSITIVE: []
+    end
+
+    class DataQualityObservation
+      attr_accessor description: ::String
+      attr_accessor metric_based_observation: Types::MetricBasedObservation
+      SENSITIVE: []
+    end
+
+    class DataQualityResult
+      attr_accessor result_id: ::String
+      attr_accessor score: ::Float
+      attr_accessor data_source: Types::DataSource
+      attr_accessor ruleset_name: ::String
+      attr_accessor evaluation_context: ::String
+      attr_accessor started_on: ::Time
+      attr_accessor completed_on: ::Time
+      attr_accessor job_name: ::String
+      attr_accessor job_run_id: ::String
+      attr_accessor ruleset_evaluation_run_id: ::String
+      attr_accessor rule_results: ::Array[Types::DataQualityRuleResult]
+      attr_accessor analyzer_results: ::Array[Types::DataQualityAnalyzerResult]
+      attr_accessor observations: ::Array[Types::DataQualityObservation]
+      SENSITIVE: []
+    end
+
+    class DataQualityResultDescription
+      attr_accessor result_id: ::String
+      attr_accessor data_source: Types::DataSource
+      attr_accessor job_name: ::String
+      attr_accessor job_run_id: ::String
+      attr_accessor started_on: ::Time
+      SENSITIVE: []
+    end
+
+    class DataQualityResultFilterCriteria
+      attr_accessor data_source: Types::DataSource
+      attr_accessor job_name: ::String
+      attr_accessor job_run_id: ::String
+      attr_accessor started_after: ::Time
+      attr_accessor started_before: ::Time
+      SENSITIVE: []
+    end
+
+    class DataQualityRuleRecommendationRunDescription
+      attr_accessor run_id: ::String
+      attr_accessor status: ("STARTING" | "RUNNING" | "STOPPING" | "STOPPED" | "SUCCEEDED" | "FAILED" | "TIMEOUT")
+      attr_accessor started_on: ::Time
+      attr_accessor data_source: Types::DataSource
+      SENSITIVE: []
+    end
+
+    class DataQualityRuleRecommendationRunFilter
+      attr_accessor data_source: Types::DataSource
+      attr_accessor started_before: ::Time
+      attr_accessor started_after: ::Time
+      SENSITIVE: []
+    end
+
+    class DataQualityRuleResult
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor evaluation_message: ::String
+      attr_accessor result: ("PASS" | "FAIL" | "ERROR")
+      attr_accessor evaluated_metrics: ::Hash[::String, ::Float]
+      SENSITIVE: []
+    end
+
+    class DataQualityRulesetEvaluationRunDescription
+      attr_accessor run_id: ::String
+      attr_accessor status: ("STARTING" | "RUNNING" | "STOPPING" | "STOPPED" | "SUCCEEDED" | "FAILED" | "TIMEOUT")
+      attr_accessor started_on: ::Time
+      attr_accessor data_source: Types::DataSource
+      SENSITIVE: []
+    end
+
+    class DataQualityRulesetEvaluationRunFilter
+      attr_accessor data_source: Types::DataSource
+      attr_accessor started_before: ::Time
+      attr_accessor started_after: ::Time
+      SENSITIVE: []
+    end
+
+    class DataQualityRulesetFilterCriteria
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_before: ::Time
+      attr_accessor created_after: ::Time
+      attr_accessor last_modified_before: ::Time
+      attr_accessor last_modified_after: ::Time
+      attr_accessor target_table: Types::DataQualityTargetTable
+      SENSITIVE: []
+    end
+
+    class DataQualityRulesetListDetails
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_on: ::Time
+      attr_accessor last_modified_on: ::Time
+      attr_accessor target_table: Types::DataQualityTargetTable
+      attr_accessor recommendation_run_id: ::String
+      attr_accessor rule_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class DataQualityTargetTable
+      attr_accessor table_name: ::String
+      attr_accessor database_name: ::String
+      attr_accessor catalog_id: ::String
+      SENSITIVE: []
+    end
+
+    class DataSource
+      attr_accessor glue_table: Types::GlueTable
+      SENSITIVE: []
+    end
+
+    class Database
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor location_uri: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor create_time: ::Time
+      attr_accessor create_table_default_permissions: ::Array[Types::PrincipalPermissions]
+      attr_accessor target_database: Types::DatabaseIdentifier
+      attr_accessor catalog_id: ::String
+      attr_accessor federated_database: Types::FederatedDatabase
+      SENSITIVE: []
+    end
+
+    class DatabaseIdentifier
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
+    class DatabaseInput
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor location_uri: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor create_table_default_permissions: ::Array[Types::PrincipalPermissions]
+      attr_accessor target_database: Types::DatabaseIdentifier
+      attr_accessor federated_database: Types::FederatedDatabase
+      SENSITIVE: []
+    end
+
+    class Datatype
+      attr_accessor id: ::String
+      attr_accessor label: ::String
+      SENSITIVE: []
+    end
+
+    class DateColumnStatisticsData
+      attr_accessor minimum_value: ::Time
+      attr_accessor maximum_value: ::Time
+      attr_accessor number_of_nulls: ::Integer
+      attr_accessor number_of_distinct_values: ::Integer
+      SENSITIVE: []
+    end
+
+    class DecimalColumnStatisticsData
+      attr_accessor minimum_value: Types::DecimalNumber
+      attr_accessor maximum_value: Types::DecimalNumber
+      attr_accessor number_of_nulls: ::Integer
+      attr_accessor number_of_distinct_values: ::Integer
+      SENSITIVE: []
+    end
+
+    class DecimalNumber
+      attr_accessor unscaled_value: ::String
+      attr_accessor scale: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteBlueprintRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBlueprintResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteClassifierRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteClassifierResponse < Aws::EmptyStructure
+    end
+
+    class DeleteColumnStatisticsForPartitionRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor partition_values: ::Array[::String]
+      attr_accessor column_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteColumnStatisticsForPartitionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteColumnStatisticsForTableRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor column_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteColumnStatisticsForTableResponse < Aws::EmptyStructure
+    end
+
+    class DeleteConnectionRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor connection_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConnectionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteCrawlerRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCrawlerResponse < Aws::EmptyStructure
+    end
+
+    class DeleteCustomEntityTypeRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCustomEntityTypeResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDataQualityRulesetRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDataQualityRulesetResponse < Aws::EmptyStructure
+    end
+
+    class DeleteDatabaseRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDatabaseResponse < Aws::EmptyStructure
+    end
+
+    class DeleteDevEndpointRequest
+      attr_accessor endpoint_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDevEndpointResponse < Aws::EmptyStructure
+    end
+
+    class DeleteJobRequest
+      attr_accessor job_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteJobResponse
+      attr_accessor job_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMLTransformRequest
+      attr_accessor transform_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMLTransformResponse
+      attr_accessor transform_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePartitionIndexRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor index_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePartitionIndexResponse < Aws::EmptyStructure
+    end
+
+    class DeletePartitionRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor partition_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeletePartitionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteRegistryInput
+      attr_accessor registry_id: Types::RegistryId
+      SENSITIVE: []
+    end
+
+    class DeleteRegistryResponse
+      attr_accessor registry_name: ::String
+      attr_accessor registry_arn: ::String
+      attr_accessor status: ("AVAILABLE" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyRequest
+      attr_accessor policy_hash_condition: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyResponse < Aws::EmptyStructure
+    end
+
+    class DeleteSchemaInput
+      attr_accessor schema_id: Types::SchemaId
+      SENSITIVE: []
+    end
+
+    class DeleteSchemaResponse
+      attr_accessor schema_arn: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor status: ("AVAILABLE" | "PENDING" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class DeleteSchemaVersionsInput
+      attr_accessor schema_id: Types::SchemaId
+      attr_accessor versions: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSchemaVersionsResponse
+      attr_accessor schema_version_errors: ::Array[Types::SchemaVersionErrorItem]
+      SENSITIVE: []
+    end
+
+    class DeleteSecurityConfigurationRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSecurityConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteSessionRequest
+      attr_accessor id: ::String
+      attr_accessor request_origin: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSessionResponse
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTableOptimizerRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor type: ("compaction")
+      SENSITIVE: []
+    end
+
+    class DeleteTableOptimizerResponse < Aws::EmptyStructure
+    end
+
+    class DeleteTableRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor name: ::String
+      attr_accessor transaction_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTableResponse < Aws::EmptyStructure
+    end
+
+    class DeleteTableVersionRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTableVersionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteTriggerRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTriggerResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUserDefinedFunctionRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor function_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUserDefinedFunctionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteWorkflowRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkflowResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeltaTarget
+      attr_accessor delta_tables: ::Array[::String]
+      attr_accessor connection_name: ::String
+      attr_accessor write_manifest: bool
+      attr_accessor create_native_delta_table: bool
+      SENSITIVE: []
+    end
+
+    class DevEndpoint
+      attr_accessor endpoint_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_id: ::String
+      attr_accessor yarn_endpoint_address: ::String
+      attr_accessor private_address: ::String
+      attr_accessor zeppelin_remote_spark_interpreter_port: ::Integer
+      attr_accessor public_address: ::String
+      attr_accessor status: ::String
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor glue_version: ::String
+      attr_accessor number_of_workers: ::Integer
+      attr_accessor number_of_nodes: ::Integer
+      attr_accessor availability_zone: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor extra_python_libs_s3_path: ::String
+      attr_accessor extra_jars_s3_path: ::String
+      attr_accessor failure_reason: ::String
+      attr_accessor last_update_status: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_modified_timestamp: ::Time
+      attr_accessor public_key: ::String
+      attr_accessor public_keys: ::Array[::String]
+      attr_accessor security_configuration: ::String
+      attr_accessor arguments: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DevEndpointCustomLibraries
+      attr_accessor extra_python_libs_s3_path: ::String
+      attr_accessor extra_jars_s3_path: ::String
+      SENSITIVE: []
+    end
+
+    class DirectJDBCSource
+      attr_accessor name: ::String
+      attr_accessor database: ::String
+      attr_accessor table: ::String
+      attr_accessor connection_name: ::String
+      attr_accessor connection_type: ("sqlserver" | "mysql" | "oracle" | "postgresql" | "redshift")
+      attr_accessor redshift_tmp_dir: ::String
+      SENSITIVE: []
+    end
+
+    class DirectKafkaSource
+      attr_accessor name: ::String
+      attr_accessor streaming_options: Types::KafkaStreamingSourceOptions
+      attr_accessor window_size: ::Integer
+      attr_accessor detect_schema: bool
+      attr_accessor data_preview_options: Types::StreamingDataPreviewOptions
+      SENSITIVE: []
+    end
+
+    class DirectKinesisSource
+      attr_accessor name: ::String
+      attr_accessor window_size: ::Integer
+      attr_accessor detect_schema: bool
+      attr_accessor streaming_options: Types::KinesisStreamingSourceOptions
+      attr_accessor data_preview_options: Types::StreamingDataPreviewOptions
+      SENSITIVE: []
+    end
+
+    class DirectSchemaChangePolicy
+      attr_accessor enable_update_catalog: bool
+      attr_accessor update_behavior: ("UPDATE_IN_DATABASE" | "LOG")
+      attr_accessor table: ::String
+      attr_accessor database: ::String
+      SENSITIVE: []
+    end
+
+    class DoubleColumnStatisticsData
+      attr_accessor minimum_value: ::Float
+      attr_accessor maximum_value: ::Float
+      attr_accessor number_of_nulls: ::Integer
+      attr_accessor number_of_distinct_values: ::Integer
+      SENSITIVE: []
+    end
+
+    class DropDuplicates
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor columns: ::Array[::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class DropFields
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor paths: ::Array[::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class DropNullFields
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor null_check_box_list: Types::NullCheckBoxList
+      attr_accessor null_text_list: ::Array[Types::NullValueField]
+      SENSITIVE: []
+    end
+
+    class DynamicTransform
+      attr_accessor name: ::String
+      attr_accessor transform_name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor parameters: ::Array[Types::TransformConfigParameter]
+      attr_accessor function_name: ::String
+      attr_accessor path: ::String
+      attr_accessor version: ::String
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
+      SENSITIVE: []
+    end
+
+    class DynamoDBCatalogSource
+      attr_accessor name: ::String
+      attr_accessor database: ::String
+      attr_accessor table: ::String
+      SENSITIVE: []
+    end
+
+    class DynamoDBTarget
+      attr_accessor path: ::String
+      attr_accessor scan_all: bool
+      attr_accessor scan_rate: ::Float
+      SENSITIVE: []
+    end
+
+    class Edge
+      attr_accessor source_id: ::String
+      attr_accessor destination_id: ::String
+      SENSITIVE: []
+    end
+
+    class EncryptionAtRest
+      attr_accessor catalog_encryption_mode: ("DISABLED" | "SSE-KMS")
+      attr_accessor sse_aws_kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class EncryptionConfiguration
+      attr_accessor s3_encryption: ::Array[Types::S3Encryption]
+      attr_accessor cloud_watch_encryption: Types::CloudWatchEncryption
+      attr_accessor job_bookmarks_encryption: Types::JobBookmarksEncryption
+      SENSITIVE: []
+    end
+
+    class EntityNotFoundException
+      attr_accessor message: ::String
+      attr_accessor from_federation_source: bool
+      SENSITIVE: []
+    end
+
+    class ErrorDetail
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class ErrorDetails
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class EvaluateDataQuality
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor ruleset: ::String
+      attr_accessor output: ("PrimaryInput" | "EvaluationResults")
+      attr_accessor publishing_options: Types::DQResultsPublishingOptions
+      attr_accessor stop_job_on_failure_options: Types::DQStopJobOnFailureOptions
+      SENSITIVE: []
+    end
+
+    class EvaluateDataQualityMultiFrame
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor additional_data_sources: ::Hash[::String, ::String]
+      attr_accessor ruleset: ::String
+      attr_accessor publishing_options: Types::DQResultsPublishingOptions
+      attr_accessor additional_options: ::Hash[("performanceTuning.caching" | "observations.scope"), ::String]
+      attr_accessor stop_job_on_failure_options: Types::DQStopJobOnFailureOptions
+      SENSITIVE: []
+    end
+
+    class EvaluationMetrics
+      attr_accessor transform_type: ("FIND_MATCHES")
+      attr_accessor find_matches_metrics: Types::FindMatchesMetrics
+      SENSITIVE: []
+    end
+
+    class EventBatchingCondition
+      attr_accessor batch_size: ::Integer
+      attr_accessor batch_window: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExecutionProperty
+      attr_accessor max_concurrent_runs: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExportLabelsTaskRunProperties
+      attr_accessor output_s3_path: ::String
+      SENSITIVE: []
+    end
+
+    class FederatedDatabase
+      attr_accessor identifier: ::String
+      attr_accessor connection_name: ::String
+      SENSITIVE: []
+    end
+
+    class FederatedResourceAlreadyExistsException
+      attr_accessor message: ::String
+      attr_accessor associated_glue_resource: ::String
+      SENSITIVE: []
+    end
+
+    class FederatedTable
+      attr_accessor identifier: ::String
+      attr_accessor database_identifier: ::String
+      attr_accessor connection_name: ::String
+      SENSITIVE: []
+    end
+
+    class FederationSourceException
+      attr_accessor federation_source_error_code: ("InvalidResponseException" | "OperationTimeoutException" | "OperationNotSupportedException" | "InternalServiceException" | "ThrottlingException")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FederationSourceRetryableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FillMissingValues
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor imputed_path: ::String
+      attr_accessor filled_path: ::String
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor logical_operator: ("AND" | "OR")
+      attr_accessor filters: ::Array[Types::FilterExpression]
+      SENSITIVE: []
+    end
+
+    class FilterExpression
+      attr_accessor operation: ("EQ" | "LT" | "GT" | "LTE" | "GTE" | "REGEX" | "ISNULL")
+      attr_accessor negated: bool
+      attr_accessor values: ::Array[Types::FilterValue]
+      SENSITIVE: []
+    end
+
+    class FilterValue
+      attr_accessor type: ("COLUMNEXTRACTED" | "CONSTANT")
+      attr_accessor value: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class FindMatchesMetrics
+      attr_accessor area_under_pr_curve: ::Float
+      attr_accessor precision: ::Float
+      attr_accessor recall: ::Float
+      attr_accessor f1: ::Float
+      attr_accessor confusion_matrix: Types::ConfusionMatrix
+      attr_accessor column_importances: ::Array[Types::ColumnImportance]
+      SENSITIVE: []
+    end
+
+    class FindMatchesParameters
+      attr_accessor primary_key_column_name: ::String
+      attr_accessor precision_recall_tradeoff: ::Float
+      attr_accessor accuracy_cost_tradeoff: ::Float
+      attr_accessor enforce_provided_labels: bool
+      SENSITIVE: []
+    end
+
+    class FindMatchesTaskRunProperties
+      attr_accessor job_id: ::String
+      attr_accessor job_name: ::String
+      attr_accessor job_run_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetBlueprintRequest
+      attr_accessor name: ::String
+      attr_accessor include_blueprint: bool
+      attr_accessor include_parameter_spec: bool
+      SENSITIVE: []
+    end
+
+    class GetBlueprintResponse
+      attr_accessor blueprint: Types::Blueprint
+      SENSITIVE: []
+    end
+
+    class GetBlueprintRunRequest
+      attr_accessor blueprint_name: ::String
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetBlueprintRunResponse
+      attr_accessor blueprint_run: Types::BlueprintRun
+      SENSITIVE: []
+    end
+
+    class GetBlueprintRunsRequest
+      attr_accessor blueprint_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetBlueprintRunsResponse
+      attr_accessor blueprint_runs: ::Array[Types::BlueprintRun]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCatalogImportStatusRequest
+      attr_accessor catalog_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCatalogImportStatusResponse
+      attr_accessor import_status: Types::CatalogImportStatus
+      SENSITIVE: []
+    end
+
+    class GetClassifierRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetClassifierResponse
+      attr_accessor classifier: Types::Classifier
+      SENSITIVE: []
+    end
+
+    class GetClassifiersRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetClassifiersResponse
+      attr_accessor classifiers: ::Array[Types::Classifier]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetColumnStatisticsForPartitionRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor partition_values: ::Array[::String]
+      attr_accessor column_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetColumnStatisticsForPartitionResponse
+      attr_accessor column_statistics_list: ::Array[Types::ColumnStatistics]
+      attr_accessor errors: ::Array[Types::ColumnError]
+      SENSITIVE: []
+    end
+
+    class GetColumnStatisticsForTableRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor column_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetColumnStatisticsForTableResponse
+      attr_accessor column_statistics_list: ::Array[Types::ColumnStatistics]
+      attr_accessor errors: ::Array[Types::ColumnError]
+      SENSITIVE: []
+    end
+
+    class GetColumnStatisticsTaskRunRequest
+      attr_accessor column_statistics_task_run_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetColumnStatisticsTaskRunResponse
+      attr_accessor column_statistics_task_run: Types::ColumnStatisticsTaskRun
+      SENSITIVE: []
+    end
+
+    class GetColumnStatisticsTaskRunsRequest
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetColumnStatisticsTaskRunsResponse
+      attr_accessor column_statistics_task_runs: ::Array[Types::ColumnStatisticsTaskRun]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectionRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor name: ::String
+      attr_accessor hide_password: bool
+      SENSITIVE: []
+    end
+
+    class GetConnectionResponse
+      attr_accessor connection: Types::Connection
+      SENSITIVE: []
+    end
+
+    class GetConnectionsFilter
+      attr_accessor match_criteria: ::Array[::String]
+      attr_accessor connection_type: ("JDBC" | "SFTP" | "MONGODB" | "KAFKA" | "NETWORK" | "MARKETPLACE" | "CUSTOM")
+      SENSITIVE: []
+    end
+
+    class GetConnectionsRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor filter: Types::GetConnectionsFilter
+      attr_accessor hide_password: bool
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetConnectionsResponse
+      attr_accessor connection_list: ::Array[Types::Connection]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCrawlerMetricsRequest
+      attr_accessor crawler_name_list: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCrawlerMetricsResponse
+      attr_accessor crawler_metrics_list: ::Array[Types::CrawlerMetrics]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCrawlerRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetCrawlerResponse
+      attr_accessor crawler: Types::Crawler
+      SENSITIVE: []
+    end
+
+    class GetCrawlersRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCrawlersResponse
+      attr_accessor crawlers: ::Array[Types::Crawler]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCustomEntityTypeRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetCustomEntityTypeResponse
+      attr_accessor name: ::String
+      attr_accessor regex_string: ::String
+      attr_accessor context_words: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetDataCatalogEncryptionSettingsRequest
+      attr_accessor catalog_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataCatalogEncryptionSettingsResponse
+      attr_accessor data_catalog_encryption_settings: Types::DataCatalogEncryptionSettings
+      SENSITIVE: []
+    end
+
+    class GetDataQualityResultRequest
+      attr_accessor result_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataQualityResultResponse
+      attr_accessor result_id: ::String
+      attr_accessor score: ::Float
+      attr_accessor data_source: Types::DataSource
+      attr_accessor ruleset_name: ::String
+      attr_accessor evaluation_context: ::String
+      attr_accessor started_on: ::Time
+      attr_accessor completed_on: ::Time
+      attr_accessor job_name: ::String
+      attr_accessor job_run_id: ::String
+      attr_accessor ruleset_evaluation_run_id: ::String
+      attr_accessor rule_results: ::Array[Types::DataQualityRuleResult]
+      attr_accessor analyzer_results: ::Array[Types::DataQualityAnalyzerResult]
+      attr_accessor observations: ::Array[Types::DataQualityObservation]
+      SENSITIVE: []
+    end
+
+    class GetDataQualityRuleRecommendationRunRequest
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataQualityRuleRecommendationRunResponse
+      attr_accessor run_id: ::String
+      attr_accessor data_source: Types::DataSource
+      attr_accessor role: ::String
+      attr_accessor number_of_workers: ::Integer
+      attr_accessor timeout: ::Integer
+      attr_accessor status: ("STARTING" | "RUNNING" | "STOPPING" | "STOPPED" | "SUCCEEDED" | "FAILED" | "TIMEOUT")
+      attr_accessor error_string: ::String
+      attr_accessor started_on: ::Time
+      attr_accessor last_modified_on: ::Time
+      attr_accessor completed_on: ::Time
+      attr_accessor execution_time: ::Integer
+      attr_accessor recommended_ruleset: ::String
+      attr_accessor created_ruleset_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataQualityRulesetEvaluationRunRequest
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataQualityRulesetEvaluationRunResponse
+      attr_accessor run_id: ::String
+      attr_accessor data_source: Types::DataSource
+      attr_accessor role: ::String
+      attr_accessor number_of_workers: ::Integer
+      attr_accessor timeout: ::Integer
+      attr_accessor additional_run_options: Types::DataQualityEvaluationRunAdditionalRunOptions
+      attr_accessor status: ("STARTING" | "RUNNING" | "STOPPING" | "STOPPED" | "SUCCEEDED" | "FAILED" | "TIMEOUT")
+      attr_accessor error_string: ::String
+      attr_accessor started_on: ::Time
+      attr_accessor last_modified_on: ::Time
+      attr_accessor completed_on: ::Time
+      attr_accessor execution_time: ::Integer
+      attr_accessor ruleset_names: ::Array[::String]
+      attr_accessor result_ids: ::Array[::String]
+      attr_accessor additional_data_sources: ::Hash[::String, Types::DataSource]
+      SENSITIVE: []
+    end
+
+    class GetDataQualityRulesetRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataQualityRulesetResponse
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor ruleset: ::String
+      attr_accessor target_table: Types::DataQualityTargetTable
+      attr_accessor created_on: ::Time
+      attr_accessor last_modified_on: ::Time
+      attr_accessor recommendation_run_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDatabaseRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDatabaseResponse
+      attr_accessor database: Types::Database
+      SENSITIVE: []
+    end
+
+    class GetDatabasesRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor resource_share_type: ("FOREIGN" | "ALL" | "FEDERATED")
+      SENSITIVE: []
+    end
+
+    class GetDatabasesResponse
+      attr_accessor database_list: ::Array[Types::Database]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataflowGraphRequest
+      attr_accessor python_script: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataflowGraphResponse
+      attr_accessor dag_nodes: ::Array[Types::CodeGenNode]
+      attr_accessor dag_edges: ::Array[Types::CodeGenEdge]
+      SENSITIVE: []
+    end
+
+    class GetDevEndpointRequest
+      attr_accessor endpoint_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDevEndpointResponse
+      attr_accessor dev_endpoint: Types::DevEndpoint
+      SENSITIVE: []
+    end
+
+    class GetDevEndpointsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetDevEndpointsResponse
+      attr_accessor dev_endpoints: ::Array[Types::DevEndpoint]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetJobBookmarkRequest
+      attr_accessor job_name: ::String
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetJobBookmarkResponse
+      attr_accessor job_bookmark_entry: Types::JobBookmarkEntry
+      SENSITIVE: []
+    end
+
+    class GetJobRequest
+      attr_accessor job_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetJobResponse
+      attr_accessor job: Types::Job
+      SENSITIVE: []
+    end
+
+    class GetJobRunRequest
+      attr_accessor job_name: ::String
+      attr_accessor run_id: ::String
+      attr_accessor predecessors_included: bool
+      SENSITIVE: []
+    end
+
+    class GetJobRunResponse
+      attr_accessor job_run: Types::JobRun
+      SENSITIVE: []
+    end
+
+    class GetJobRunsRequest
+      attr_accessor job_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetJobRunsResponse
+      attr_accessor job_runs: ::Array[Types::JobRun]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetJobsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetJobsResponse
+      attr_accessor jobs: ::Array[Types::Job]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetMLTaskRunRequest
+      attr_accessor transform_id: ::String
+      attr_accessor task_run_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMLTaskRunResponse
+      attr_accessor transform_id: ::String
+      attr_accessor task_run_id: ::String
+      attr_accessor status: ("STARTING" | "RUNNING" | "STOPPING" | "STOPPED" | "SUCCEEDED" | "FAILED" | "TIMEOUT")
+      attr_accessor log_group_name: ::String
+      attr_accessor properties: Types::TaskRunProperties
+      attr_accessor error_string: ::String
+      attr_accessor started_on: ::Time
+      attr_accessor last_modified_on: ::Time
+      attr_accessor completed_on: ::Time
+      attr_accessor execution_time: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetMLTaskRunsRequest
+      attr_accessor transform_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filter: Types::TaskRunFilterCriteria
+      attr_accessor sort: Types::TaskRunSortCriteria
+      SENSITIVE: []
+    end
+
+    class GetMLTaskRunsResponse
+      attr_accessor task_runs: ::Array[Types::TaskRun]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetMLTransformRequest
+      attr_accessor transform_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMLTransformResponse
+      attr_accessor transform_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("NOT_READY" | "READY" | "DELETING")
+      attr_accessor created_on: ::Time
+      attr_accessor last_modified_on: ::Time
+      attr_accessor input_record_tables: ::Array[Types::GlueTable]
+      attr_accessor parameters: Types::TransformParameters
+      attr_accessor evaluation_metrics: Types::EvaluationMetrics
+      attr_accessor label_count: ::Integer
+      attr_accessor schema: ::Array[Types::SchemaColumn]
+      attr_accessor role: ::String
+      attr_accessor glue_version: ::String
+      attr_accessor max_capacity: ::Float
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor number_of_workers: ::Integer
+      attr_accessor timeout: ::Integer
+      attr_accessor max_retries: ::Integer
+      attr_accessor transform_encryption: Types::TransformEncryption
+      SENSITIVE: []
+    end
+
+    class GetMLTransformsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filter: Types::TransformFilterCriteria
+      attr_accessor sort: Types::TransformSortCriteria
+      SENSITIVE: []
+    end
+
+    class GetMLTransformsResponse
+      attr_accessor transforms: ::Array[Types::MLTransform]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetMappingRequest
+      attr_accessor source: Types::CatalogEntry
+      attr_accessor sinks: ::Array[Types::CatalogEntry]
+      attr_accessor location: Types::Location
+      SENSITIVE: []
+    end
+
+    class GetMappingResponse
+      attr_accessor mapping: ::Array[Types::MappingEntry]
+      SENSITIVE: []
+    end
+
+    class GetPartitionIndexesRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetPartitionIndexesResponse
+      attr_accessor partition_index_descriptor_list: ::Array[Types::PartitionIndexDescriptor]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetPartitionRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor partition_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetPartitionResponse
+      attr_accessor partition: Types::Partition
+      SENSITIVE: []
+    end
+
+    class GetPartitionsRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor expression: ::String
+      attr_accessor next_token: ::String
+      attr_accessor segment: Types::Segment
+      attr_accessor max_results: ::Integer
+      attr_accessor exclude_column_schema: bool
+      attr_accessor transaction_id: ::String
+      attr_accessor query_as_of_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetPartitionsResponse
+      attr_accessor partitions: ::Array[Types::Partition]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetPlanRequest
+      attr_accessor mapping: ::Array[Types::MappingEntry]
+      attr_accessor source: Types::CatalogEntry
+      attr_accessor sinks: ::Array[Types::CatalogEntry]
+      attr_accessor location: Types::Location
+      attr_accessor language: ("PYTHON" | "SCALA")
+      attr_accessor additional_plan_options_map: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetPlanResponse
+      attr_accessor python_script: ::String
+      attr_accessor scala_code: ::String
+      SENSITIVE: []
+    end
+
+    class GetRegistryInput
+      attr_accessor registry_id: Types::RegistryId
+      SENSITIVE: []
+    end
+
+    class GetRegistryResponse
+      attr_accessor registry_name: ::String
+      attr_accessor registry_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("AVAILABLE" | "DELETING")
+      attr_accessor created_time: ::String
+      attr_accessor updated_time: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePoliciesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetResourcePoliciesResponse
+      attr_accessor get_resource_policies_response_list: ::Array[Types::GluePolicy]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyResponse
+      attr_accessor policy_in_json: ::String
+      attr_accessor policy_hash: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetSchemaByDefinitionInput
+      attr_accessor schema_id: Types::SchemaId
+      attr_accessor schema_definition: ::String
+      SENSITIVE: []
+    end
+
+    class GetSchemaByDefinitionResponse
+      attr_accessor schema_version_id: ::String
+      attr_accessor schema_arn: ::String
+      attr_accessor data_format: ("AVRO" | "JSON" | "PROTOBUF")
+      attr_accessor status: ("AVAILABLE" | "PENDING" | "FAILURE" | "DELETING")
+      attr_accessor created_time: ::String
+      SENSITIVE: []
+    end
+
+    class GetSchemaInput
+      attr_accessor schema_id: Types::SchemaId
+      SENSITIVE: []
+    end
+
+    class GetSchemaResponse
+      attr_accessor registry_name: ::String
+      attr_accessor registry_arn: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor schema_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor data_format: ("AVRO" | "JSON" | "PROTOBUF")
+      attr_accessor compatibility: ("NONE" | "DISABLED" | "BACKWARD" | "BACKWARD_ALL" | "FORWARD" | "FORWARD_ALL" | "FULL" | "FULL_ALL")
+      attr_accessor schema_checkpoint: ::Integer
+      attr_accessor latest_schema_version: ::Integer
+      attr_accessor next_schema_version: ::Integer
+      attr_accessor schema_status: ("AVAILABLE" | "PENDING" | "DELETING")
+      attr_accessor created_time: ::String
+      attr_accessor updated_time: ::String
+      SENSITIVE: []
+    end
+
+    class GetSchemaVersionInput
+      attr_accessor schema_id: Types::SchemaId
+      attr_accessor schema_version_id: ::String
+      attr_accessor schema_version_number: Types::SchemaVersionNumber
+      SENSITIVE: []
+    end
+
+    class GetSchemaVersionResponse
+      attr_accessor schema_version_id: ::String
+      attr_accessor schema_definition: ::String
+      attr_accessor data_format: ("AVRO" | "JSON" | "PROTOBUF")
+      attr_accessor schema_arn: ::String
+      attr_accessor version_number: ::Integer
+      attr_accessor status: ("AVAILABLE" | "PENDING" | "FAILURE" | "DELETING")
+      attr_accessor created_time: ::String
+      SENSITIVE: []
+    end
+
+    class GetSchemaVersionsDiffInput
+      attr_accessor schema_id: Types::SchemaId
+      attr_accessor first_schema_version_number: Types::SchemaVersionNumber
+      attr_accessor second_schema_version_number: Types::SchemaVersionNumber
+      attr_accessor schema_diff_type: ("SYNTAX_DIFF")
+      SENSITIVE: []
+    end
+
+    class GetSchemaVersionsDiffResponse
+      attr_accessor diff: ::String
+      SENSITIVE: []
+    end
+
+    class GetSecurityConfigurationRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetSecurityConfigurationResponse
+      attr_accessor security_configuration: Types::SecurityConfiguration
+      SENSITIVE: []
+    end
+
+    class GetSecurityConfigurationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetSecurityConfigurationsResponse
+      attr_accessor security_configurations: ::Array[Types::SecurityConfiguration]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetSessionRequest
+      attr_accessor id: ::String
+      attr_accessor request_origin: ::String
+      SENSITIVE: []
+    end
+
+    class GetSessionResponse
+      attr_accessor session: Types::Session
+      SENSITIVE: []
+    end
+
+    class GetStatementRequest
+      attr_accessor session_id: ::String
+      attr_accessor id: ::Integer
+      attr_accessor request_origin: ::String
+      SENSITIVE: []
+    end
+
+    class GetStatementResponse
+      attr_accessor statement: Types::Statement
+      SENSITIVE: []
+    end
+
+    class GetTableOptimizerRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor type: ("compaction")
+      SENSITIVE: []
+    end
+
+    class GetTableOptimizerResponse
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor table_optimizer: Types::TableOptimizer
+      SENSITIVE: []
+    end
+
+    class GetTableRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor name: ::String
+      attr_accessor transaction_id: ::String
+      attr_accessor query_as_of_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetTableResponse
+      attr_accessor table: Types::Table
+      SENSITIVE: []
+    end
+
+    class GetTableVersionRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetTableVersionResponse
+      attr_accessor table_version: Types::TableVersion
+      SENSITIVE: []
+    end
+
+    class GetTableVersionsRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetTableVersionsResponse
+      attr_accessor table_versions: ::Array[Types::TableVersion]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetTablesRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor expression: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor transaction_id: ::String
+      attr_accessor query_as_of_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetTablesResponse
+      attr_accessor table_list: ::Array[Types::Table]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetTagsRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetTagsResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetTriggerRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetTriggerResponse
+      attr_accessor trigger: Types::Trigger
+      SENSITIVE: []
+    end
+
+    class GetTriggersRequest
+      attr_accessor next_token: ::String
+      attr_accessor dependent_job_name: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetTriggersResponse
+      attr_accessor triggers: ::Array[Types::Trigger]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetUnfilteredPartitionMetadataRequest
+      attr_accessor region: ::String
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor partition_values: ::Array[::String]
+      attr_accessor audit_context: Types::AuditContext
+      attr_accessor supported_permission_types: ::Array[("COLUMN_PERMISSION" | "CELL_FILTER_PERMISSION" | "NESTED_PERMISSION" | "NESTED_CELL_PERMISSION")]
+      attr_accessor query_session_context: Types::QuerySessionContext
+      SENSITIVE: []
+    end
+
+    class GetUnfilteredPartitionMetadataResponse
+      attr_accessor partition: Types::Partition
+      attr_accessor authorized_columns: ::Array[::String]
+      attr_accessor is_registered_with_lake_formation: bool
+      SENSITIVE: []
+    end
+
+    class GetUnfilteredPartitionsMetadataRequest
+      attr_accessor region: ::String
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor expression: ::String
+      attr_accessor audit_context: Types::AuditContext
+      attr_accessor supported_permission_types: ::Array[("COLUMN_PERMISSION" | "CELL_FILTER_PERMISSION" | "NESTED_PERMISSION" | "NESTED_CELL_PERMISSION")]
+      attr_accessor next_token: ::String
+      attr_accessor segment: Types::Segment
+      attr_accessor max_results: ::Integer
+      attr_accessor query_session_context: Types::QuerySessionContext
+      SENSITIVE: []
+    end
+
+    class GetUnfilteredPartitionsMetadataResponse
+      attr_accessor unfiltered_partitions: ::Array[Types::UnfilteredPartition]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetUnfilteredTableMetadataRequest
+      attr_accessor region: ::String
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor name: ::String
+      attr_accessor audit_context: Types::AuditContext
+      attr_accessor supported_permission_types: ::Array[("COLUMN_PERMISSION" | "CELL_FILTER_PERMISSION" | "NESTED_PERMISSION" | "NESTED_CELL_PERMISSION")]
+      attr_accessor supported_dialect: Types::SupportedDialect
+      attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS")]
+      attr_accessor query_session_context: Types::QuerySessionContext
+      SENSITIVE: []
+    end
+
+    class GetUnfilteredTableMetadataResponse
+      attr_accessor table: Types::Table
+      attr_accessor authorized_columns: ::Array[::String]
+      attr_accessor is_registered_with_lake_formation: bool
+      attr_accessor cell_filters: ::Array[Types::ColumnRowFilter]
+      attr_accessor query_authorization_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS")]
+      SENSITIVE: []
+    end
+
+    class GetUserDefinedFunctionRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor function_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetUserDefinedFunctionResponse
+      attr_accessor user_defined_function: Types::UserDefinedFunction
+      SENSITIVE: []
+    end
+
+    class GetUserDefinedFunctionsRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor pattern: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetUserDefinedFunctionsResponse
+      attr_accessor user_defined_functions: ::Array[Types::UserDefinedFunction]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkflowRequest
+      attr_accessor name: ::String
+      attr_accessor include_graph: bool
+      SENSITIVE: []
+    end
+
+    class GetWorkflowResponse
+      attr_accessor workflow: Types::Workflow
+      SENSITIVE: []
+    end
+
+    class GetWorkflowRunPropertiesRequest
+      attr_accessor name: ::String
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkflowRunPropertiesResponse
+      attr_accessor run_properties: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetWorkflowRunRequest
+      attr_accessor name: ::String
+      attr_accessor run_id: ::String
+      attr_accessor include_graph: bool
+      SENSITIVE: []
+    end
+
+    class GetWorkflowRunResponse
+      attr_accessor run: Types::WorkflowRun
+      SENSITIVE: []
+    end
+
+    class GetWorkflowRunsRequest
+      attr_accessor name: ::String
+      attr_accessor include_graph: bool
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetWorkflowRunsResponse
+      attr_accessor runs: ::Array[Types::WorkflowRun]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GlueEncryptionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GluePolicy
+      attr_accessor policy_in_json: ::String
+      attr_accessor policy_hash: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GlueSchema
+      attr_accessor columns: ::Array[Types::GlueStudioSchemaColumn]
+      SENSITIVE: []
+    end
+
+    class GlueStudioSchemaColumn
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class GlueTable
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor catalog_id: ::String
+      attr_accessor connection_name: ::String
+      attr_accessor additional_options: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GovernedCatalogSource
+      attr_accessor name: ::String
+      attr_accessor database: ::String
+      attr_accessor table: ::String
+      attr_accessor partition_predicate: ::String
+      attr_accessor additional_options: Types::S3SourceAdditionalOptions
+      SENSITIVE: []
+    end
+
+    class GovernedCatalogTarget
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor partition_keys: ::Array[::Array[::String]]
+      attr_accessor table: ::String
+      attr_accessor database: ::String
+      attr_accessor schema_change_policy: Types::CatalogSchemaChangePolicy
+      SENSITIVE: []
+    end
+
+    class GrokClassifier
+      attr_accessor name: ::String
+      attr_accessor classification: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated: ::Time
+      attr_accessor version: ::Integer
+      attr_accessor grok_pattern: ::String
+      attr_accessor custom_patterns: ::String
+      SENSITIVE: []
+    end
+
+    class HudiTarget
+      attr_accessor paths: ::Array[::String]
+      attr_accessor connection_name: ::String
+      attr_accessor exclusions: ::Array[::String]
+      attr_accessor maximum_traversal_depth: ::Integer
+      SENSITIVE: []
+    end
+
+    class IcebergInput
+      attr_accessor metadata_operation: ("CREATE")
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class IcebergTarget
+      attr_accessor paths: ::Array[::String]
+      attr_accessor connection_name: ::String
+      attr_accessor exclusions: ::Array[::String]
+      attr_accessor maximum_traversal_depth: ::Integer
+      SENSITIVE: []
+    end
+
+    class IdempotentParameterMismatchException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IllegalBlueprintStateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IllegalSessionStateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IllegalWorkflowStateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ImportCatalogToGlueRequest
+      attr_accessor catalog_id: ::String
+      SENSITIVE: []
+    end
+
+    class ImportCatalogToGlueResponse < Aws::EmptyStructure
+    end
+
+    class ImportLabelsTaskRunProperties
+      attr_accessor input_s3_path: ::String
+      attr_accessor replace: bool
+      SENSITIVE: []
+    end
+
+    class InternalServiceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidInputException
+      attr_accessor message: ::String
+      attr_accessor from_federation_source: bool
+      SENSITIVE: []
+    end
+
+    class InvalidStateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JDBCConnectorOptions
+      attr_accessor filter_predicate: ::String
+      attr_accessor partition_column: ::String
+      attr_accessor lower_bound: ::Integer
+      attr_accessor upper_bound: ::Integer
+      attr_accessor num_partitions: ::Integer
+      attr_accessor job_bookmark_keys: ::Array[::String]
+      attr_accessor job_bookmark_keys_sort_order: ::String
+      attr_accessor data_type_mapping: ::Hash[("ARRAY" | "BIGINT" | "BINARY" | "BIT" | "BLOB" | "BOOLEAN" | "CHAR" | "CLOB" | "DATALINK" | "DATE" | "DECIMAL" | "DISTINCT" | "DOUBLE" | "FLOAT" | "INTEGER" | "JAVA_OBJECT" | "LONGNVARCHAR" | "LONGVARBINARY" | "LONGVARCHAR" | "NCHAR" | "NCLOB" | "NULL" | "NUMERIC" | "NVARCHAR" | "OTHER" | "REAL" | "REF" | "REF_CURSOR" | "ROWID" | "SMALLINT" | "SQLXML" | "STRUCT" | "TIME" | "TIME_WITH_TIMEZONE" | "TIMESTAMP" | "TIMESTAMP_WITH_TIMEZONE" | "TINYINT" | "VARBINARY" | "VARCHAR"), ("DATE" | "STRING" | "TIMESTAMP" | "INT" | "FLOAT" | "LONG" | "BIGDECIMAL" | "BYTE" | "SHORT" | "DOUBLE")]
+      SENSITIVE: []
+    end
+
+    class JDBCConnectorSource
+      attr_accessor name: ::String
+      attr_accessor connection_name: ::String
+      attr_accessor connector_name: ::String
+      attr_accessor connection_type: ::String
+      attr_accessor additional_options: Types::JDBCConnectorOptions
+      attr_accessor connection_table: ::String
+      attr_accessor query: ::String
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
+      SENSITIVE: []
+    end
+
+    class JDBCConnectorTarget
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor connection_name: ::String
+      attr_accessor connection_table: ::String
+      attr_accessor connector_name: ::String
+      attr_accessor connection_type: ::String
+      attr_accessor additional_options: ::Hash[::String, ::String]
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
+      SENSITIVE: []
+    end
+
+    class JdbcTarget
+      attr_accessor connection_name: ::String
+      attr_accessor path: ::String
+      attr_accessor exclusions: ::Array[::String]
+      attr_accessor enable_additional_metadata: ::Array[("COMMENTS" | "RAWTYPES")]
+      SENSITIVE: []
+    end
+
+    class Job
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor log_uri: ::String
+      attr_accessor role: ::String
+      attr_accessor created_on: ::Time
+      attr_accessor last_modified_on: ::Time
+      attr_accessor execution_property: Types::ExecutionProperty
+      attr_accessor command: Types::JobCommand
+      attr_accessor default_arguments: ::Hash[::String, ::String]
+      attr_accessor non_overridable_arguments: ::Hash[::String, ::String]
+      attr_accessor connections: Types::ConnectionsList
+      attr_accessor max_retries: ::Integer
+      attr_accessor allocated_capacity: ::Integer
+      attr_accessor timeout: ::Integer
+      attr_accessor max_capacity: ::Float
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor number_of_workers: ::Integer
+      attr_accessor security_configuration: ::String
+      attr_accessor notification_property: Types::NotificationProperty
+      attr_accessor glue_version: ::String
+      attr_accessor code_gen_configuration_nodes: ::Hash[::String, Types::CodeGenConfigurationNode]
+      attr_accessor execution_class: ("FLEX" | "STANDARD")
+      attr_accessor source_control_details: Types::SourceControlDetails
+      SENSITIVE: [:code_gen_configuration_nodes]
+    end
+
+    class JobBookmarkEntry
+      attr_accessor job_name: ::String
+      attr_accessor version: ::Integer
+      attr_accessor run: ::Integer
+      attr_accessor attempt: ::Integer
+      attr_accessor previous_run_id: ::String
+      attr_accessor run_id: ::String
+      attr_accessor job_bookmark: ::String
+      SENSITIVE: []
+    end
+
+    class JobBookmarksEncryption
+      attr_accessor job_bookmarks_encryption_mode: ("DISABLED" | "CSE-KMS")
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class JobCommand
+      attr_accessor name: ::String
+      attr_accessor script_location: ::String
+      attr_accessor python_version: ::String
+      attr_accessor runtime: ::String
+      SENSITIVE: []
+    end
+
+    class JobNodeDetails
+      attr_accessor job_runs: ::Array[Types::JobRun]
+      SENSITIVE: []
+    end
+
+    class JobRun
+      attr_accessor id: ::String
+      attr_accessor attempt: ::Integer
+      attr_accessor previous_run_id: ::String
+      attr_accessor trigger_name: ::String
+      attr_accessor job_name: ::String
+      attr_accessor started_on: ::Time
+      attr_accessor last_modified_on: ::Time
+      attr_accessor completed_on: ::Time
+      attr_accessor job_run_state: ("STARTING" | "RUNNING" | "STOPPING" | "STOPPED" | "SUCCEEDED" | "FAILED" | "TIMEOUT" | "ERROR" | "WAITING")
+      attr_accessor arguments: ::Hash[::String, ::String]
+      attr_accessor error_message: ::String
+      attr_accessor predecessor_runs: ::Array[Types::Predecessor]
+      attr_accessor allocated_capacity: ::Integer
+      attr_accessor execution_time: ::Integer
+      attr_accessor timeout: ::Integer
+      attr_accessor max_capacity: ::Float
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor number_of_workers: ::Integer
+      attr_accessor security_configuration: ::String
+      attr_accessor log_group_name: ::String
+      attr_accessor notification_property: Types::NotificationProperty
+      attr_accessor glue_version: ::String
+      attr_accessor dpu_seconds: ::Float
+      attr_accessor execution_class: ("FLEX" | "STANDARD")
+      SENSITIVE: []
+    end
+
+    class JobUpdate
+      attr_accessor description: ::String
+      attr_accessor log_uri: ::String
+      attr_accessor role: ::String
+      attr_accessor execution_property: Types::ExecutionProperty
+      attr_accessor command: Types::JobCommand
+      attr_accessor default_arguments: ::Hash[::String, ::String]
+      attr_accessor non_overridable_arguments: ::Hash[::String, ::String]
+      attr_accessor connections: Types::ConnectionsList
+      attr_accessor max_retries: ::Integer
+      attr_accessor allocated_capacity: ::Integer
+      attr_accessor timeout: ::Integer
+      attr_accessor max_capacity: ::Float
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor number_of_workers: ::Integer
+      attr_accessor security_configuration: ::String
+      attr_accessor notification_property: Types::NotificationProperty
+      attr_accessor glue_version: ::String
+      attr_accessor code_gen_configuration_nodes: ::Hash[::String, Types::CodeGenConfigurationNode]
+      attr_accessor execution_class: ("FLEX" | "STANDARD")
+      attr_accessor source_control_details: Types::SourceControlDetails
+      SENSITIVE: [:code_gen_configuration_nodes]
+    end
+
+    class Join
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor join_type: ("equijoin" | "left" | "right" | "outer" | "leftsemi" | "leftanti")
+      attr_accessor columns: ::Array[Types::JoinColumn]
+      SENSITIVE: []
+    end
+
+    class JoinColumn
+      attr_accessor from: ::String
+      attr_accessor keys: ::Array[::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class JsonClassifier
+      attr_accessor name: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated: ::Time
+      attr_accessor version: ::Integer
+      attr_accessor json_path: ::String
+      SENSITIVE: []
+    end
+
+    class KafkaStreamingSourceOptions
+      attr_accessor bootstrap_servers: ::String
+      attr_accessor security_protocol: ::String
+      attr_accessor connection_name: ::String
+      attr_accessor topic_name: ::String
+      attr_accessor assign: ::String
+      attr_accessor subscribe_pattern: ::String
+      attr_accessor classification: ::String
+      attr_accessor delimiter: ::String
+      attr_accessor starting_offsets: ::String
+      attr_accessor ending_offsets: ::String
+      attr_accessor poll_timeout_ms: ::Integer
+      attr_accessor num_retries: ::Integer
+      attr_accessor retry_interval_ms: ::Integer
+      attr_accessor max_offsets_per_trigger: ::Integer
+      attr_accessor min_partitions: ::Integer
+      attr_accessor include_headers: bool
+      attr_accessor add_record_timestamp: ::String
+      attr_accessor emit_consumer_lag_metrics: ::String
+      attr_accessor starting_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class KeySchemaElement
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class KinesisStreamingSourceOptions
+      attr_accessor endpoint_url: ::String
+      attr_accessor stream_name: ::String
+      attr_accessor classification: ::String
+      attr_accessor delimiter: ::String
+      attr_accessor starting_position: ("latest" | "trim_horizon" | "earliest" | "timestamp")
+      attr_accessor max_fetch_time_in_ms: ::Integer
+      attr_accessor max_fetch_records_per_shard: ::Integer
+      attr_accessor max_record_per_read: ::Integer
+      attr_accessor add_idle_time_between_reads: bool
+      attr_accessor idle_time_between_reads_in_ms: ::Integer
+      attr_accessor describe_shard_interval: ::Integer
+      attr_accessor num_retries: ::Integer
+      attr_accessor retry_interval_ms: ::Integer
+      attr_accessor max_retry_interval_ms: ::Integer
+      attr_accessor avoid_empty_batches: bool
+      attr_accessor stream_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor role_session_name: ::String
+      attr_accessor add_record_timestamp: ::String
+      attr_accessor emit_consumer_lag_metrics: ::String
+      attr_accessor starting_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class LabelingSetGenerationTaskRunProperties
+      attr_accessor output_s3_path: ::String
+      SENSITIVE: []
+    end
+
+    class LakeFormationConfiguration
+      attr_accessor use_lake_formation_credentials: bool
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class LastActiveDefinition
+      attr_accessor description: ::String
+      attr_accessor last_modified_on: ::Time
+      attr_accessor parameter_spec: ::String
+      attr_accessor blueprint_location: ::String
+      attr_accessor blueprint_service_location: ::String
+      SENSITIVE: []
+    end
+
+    class LastCrawlInfo
+      attr_accessor status: ("SUCCEEDED" | "CANCELLED" | "FAILED")
+      attr_accessor error_message: ::String
+      attr_accessor log_group: ::String
+      attr_accessor log_stream: ::String
+      attr_accessor message_prefix: ::String
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class LineageConfiguration
+      attr_accessor crawler_lineage_settings: ("ENABLE" | "DISABLE")
+      SENSITIVE: []
+    end
+
+    class ListBlueprintsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListBlueprintsResponse
+      attr_accessor blueprints: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListColumnStatisticsTaskRunsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListColumnStatisticsTaskRunsResponse
+      attr_accessor column_statistics_task_run_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCrawlersRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListCrawlersResponse
+      attr_accessor crawler_names: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCrawlsRequest
+      attr_accessor crawler_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::CrawlsFilter]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCrawlsResponse
+      attr_accessor crawls: ::Array[Types::CrawlerHistory]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomEntityTypesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListCustomEntityTypesResponse
+      attr_accessor custom_entity_types: ::Array[Types::CustomEntityType]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataQualityResultsRequest
+      attr_accessor filter: Types::DataQualityResultFilterCriteria
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDataQualityResultsResponse
+      attr_accessor results: ::Array[Types::DataQualityResultDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataQualityRuleRecommendationRunsRequest
+      attr_accessor filter: Types::DataQualityRuleRecommendationRunFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDataQualityRuleRecommendationRunsResponse
+      attr_accessor runs: ::Array[Types::DataQualityRuleRecommendationRunDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataQualityRulesetEvaluationRunsRequest
+      attr_accessor filter: Types::DataQualityRulesetEvaluationRunFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDataQualityRulesetEvaluationRunsResponse
+      attr_accessor runs: ::Array[Types::DataQualityRulesetEvaluationRunDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataQualityRulesetsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filter: Types::DataQualityRulesetFilterCriteria
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListDataQualityRulesetsResponse
+      attr_accessor rulesets: ::Array[Types::DataQualityRulesetListDetails]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDevEndpointsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListDevEndpointsResponse
+      attr_accessor dev_endpoint_names: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListJobsResponse
+      attr_accessor job_names: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMLTransformsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filter: Types::TransformFilterCriteria
+      attr_accessor sort: Types::TransformSortCriteria
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListMLTransformsResponse
+      attr_accessor transform_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRegistriesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRegistriesResponse
+      attr_accessor registries: ::Array[Types::RegistryListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSchemaVersionsInput
+      attr_accessor schema_id: Types::SchemaId
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSchemaVersionsResponse
+      attr_accessor schemas: ::Array[Types::SchemaVersionListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSchemasInput
+      attr_accessor registry_id: Types::RegistryId
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSchemasResponse
+      attr_accessor schemas: ::Array[Types::SchemaListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSessionsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor request_origin: ::String
+      SENSITIVE: []
+    end
+
+    class ListSessionsResponse
+      attr_accessor ids: ::Array[::String]
+      attr_accessor sessions: ::Array[Types::Session]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStatementsRequest
+      attr_accessor session_id: ::String
+      attr_accessor request_origin: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStatementsResponse
+      attr_accessor statements: ::Array[Types::Statement]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTableOptimizerRunsRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor type: ("compaction")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTableOptimizerRunsResponse
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor table_optimizer_runs: ::Array[Types::TableOptimizerRun]
+      SENSITIVE: []
+    end
+
+    class ListTriggersRequest
+      attr_accessor next_token: ::String
+      attr_accessor dependent_job_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListTriggersResponse
+      attr_accessor trigger_names: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkflowsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListWorkflowsResponse
+      attr_accessor workflows: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class Location
+      attr_accessor jdbc: ::Array[Types::CodeGenNodeArg]
+      attr_accessor s3: ::Array[Types::CodeGenNodeArg]
+      attr_accessor dynamo_db: ::Array[Types::CodeGenNodeArg]
+      SENSITIVE: []
+    end
+
+    class LongColumnStatisticsData
+      attr_accessor minimum_value: ::Integer
+      attr_accessor maximum_value: ::Integer
+      attr_accessor number_of_nulls: ::Integer
+      attr_accessor number_of_distinct_values: ::Integer
+      SENSITIVE: []
+    end
+
+    class MLTransform
+      attr_accessor transform_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("NOT_READY" | "READY" | "DELETING")
+      attr_accessor created_on: ::Time
+      attr_accessor last_modified_on: ::Time
+      attr_accessor input_record_tables: ::Array[Types::GlueTable]
+      attr_accessor parameters: Types::TransformParameters
+      attr_accessor evaluation_metrics: Types::EvaluationMetrics
+      attr_accessor label_count: ::Integer
+      attr_accessor schema: ::Array[Types::SchemaColumn]
+      attr_accessor role: ::String
+      attr_accessor glue_version: ::String
+      attr_accessor max_capacity: ::Float
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor number_of_workers: ::Integer
+      attr_accessor timeout: ::Integer
+      attr_accessor max_retries: ::Integer
+      attr_accessor transform_encryption: Types::TransformEncryption
+      SENSITIVE: []
+    end
+
+    class MLTransformNotReadyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MLUserDataEncryption
+      attr_accessor ml_user_data_encryption_mode: ("DISABLED" | "SSE-KMS")
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class Mapping
+      attr_accessor to_key: ::String
+      attr_accessor from_path: ::Array[::String]
+      attr_accessor from_type: ::String
+      attr_accessor to_type: ::String
+      attr_accessor dropped: bool
+      attr_accessor children: ::Array[Types::Mapping]
+      SENSITIVE: []
+    end
+
+    class MappingEntry
+      attr_accessor source_table: ::String
+      attr_accessor source_path: ::String
+      attr_accessor source_type: ::String
+      attr_accessor target_table: ::String
+      attr_accessor target_path: ::String
+      attr_accessor target_type: ::String
+      SENSITIVE: []
+    end
+
+    class Merge
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor source: ::String
+      attr_accessor primary_keys: ::Array[::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class MetadataInfo
+      attr_accessor metadata_value: ::String
+      attr_accessor created_time: ::String
+      attr_accessor other_metadata_value_list: ::Array[Types::OtherMetadataValueListItem]
+      SENSITIVE: []
+    end
+
+    class MetadataKeyValuePair
+      attr_accessor metadata_key: ::String
+      attr_accessor metadata_value: ::String
+      SENSITIVE: []
+    end
+
+    class MetricBasedObservation
+      attr_accessor metric_name: ::String
+      attr_accessor metric_values: Types::DataQualityMetricValues
+      attr_accessor new_rules: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class MicrosoftSQLServerCatalogSource
+      attr_accessor name: ::String
+      attr_accessor database: ::String
+      attr_accessor table: ::String
+      SENSITIVE: []
+    end
+
+    class MicrosoftSQLServerCatalogTarget
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor database: ::String
+      attr_accessor table: ::String
+      SENSITIVE: []
+    end
+
+    class MongoDBTarget
+      attr_accessor connection_name: ::String
+      attr_accessor path: ::String
+      attr_accessor scan_all: bool
+      SENSITIVE: []
+    end
+
+    class MySQLCatalogSource
+      attr_accessor name: ::String
+      attr_accessor database: ::String
+      attr_accessor table: ::String
+      SENSITIVE: []
+    end
+
+    class MySQLCatalogTarget
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor database: ::String
+      attr_accessor table: ::String
+      SENSITIVE: []
+    end
+
+    class NoScheduleException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Node
+      attr_accessor type: ("CRAWLER" | "JOB" | "TRIGGER")
+      attr_accessor name: ::String
+      attr_accessor unique_id: ::String
+      attr_accessor trigger_details: Types::TriggerNodeDetails
+      attr_accessor job_details: Types::JobNodeDetails
+      attr_accessor crawler_details: Types::CrawlerNodeDetails
+      SENSITIVE: []
+    end
+
+    class NotificationProperty
+      attr_accessor notify_delay_after: ::Integer
+      SENSITIVE: []
+    end
+
+    class NullCheckBoxList
+      attr_accessor is_empty: bool
+      attr_accessor is_null_string: bool
+      attr_accessor is_neg_one: bool
+      SENSITIVE: []
+    end
+
+    class NullValueField
+      attr_accessor value: ::String
+      attr_accessor datatype: Types::Datatype
+      SENSITIVE: []
+    end
+
+    class OpenTableFormatInput
+      attr_accessor iceberg_input: Types::IcebergInput
+      SENSITIVE: []
+    end
+
+    class OperationTimeoutException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Option
+      attr_accessor value: ::String
+      attr_accessor label: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class OracleSQLCatalogSource
+      attr_accessor name: ::String
+      attr_accessor database: ::String
+      attr_accessor table: ::String
+      SENSITIVE: []
+    end
+
+    class OracleSQLCatalogTarget
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor database: ::String
+      attr_accessor table: ::String
+      SENSITIVE: []
+    end
+
+    class Order
+      attr_accessor column: ::String
+      attr_accessor sort_order: ::Integer
+      SENSITIVE: []
+    end
+
+    class OtherMetadataValueListItem
+      attr_accessor metadata_value: ::String
+      attr_accessor created_time: ::String
+      SENSITIVE: []
+    end
+
+    class PIIDetection
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor pii_type: ("RowAudit" | "RowMasking" | "ColumnAudit" | "ColumnMasking")
+      attr_accessor entity_types_to_detect: ::Array[::String]
+      attr_accessor output_column_name: ::String
+      attr_accessor sample_fraction: ::Float
+      attr_accessor threshold_fraction: ::Float
+      attr_accessor mask_value: ::String
+      SENSITIVE: []
+    end
+
+    class Partition
+      attr_accessor values: ::Array[::String]
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_access_time: ::Time
+      attr_accessor storage_descriptor: Types::StorageDescriptor
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor last_analyzed_time: ::Time
+      attr_accessor catalog_id: ::String
+      SENSITIVE: []
+    end
+
+    class PartitionError
+      attr_accessor partition_values: ::Array[::String]
+      attr_accessor error_detail: Types::ErrorDetail
+      SENSITIVE: []
+    end
+
+    class PartitionIndex
+      attr_accessor keys: ::Array[::String]
+      attr_accessor index_name: ::String
+      SENSITIVE: []
+    end
+
+    class PartitionIndexDescriptor
+      attr_accessor index_name: ::String
+      attr_accessor keys: ::Array[Types::KeySchemaElement]
+      attr_accessor index_status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
+      attr_accessor backfill_errors: ::Array[Types::BackfillError]
+      SENSITIVE: []
+    end
+
+    class PartitionInput
+      attr_accessor values: ::Array[::String]
+      attr_accessor last_access_time: ::Time
+      attr_accessor storage_descriptor: Types::StorageDescriptor
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor last_analyzed_time: ::Time
+      SENSITIVE: []
+    end
+
+    class PartitionValueList
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PermissionTypeMismatchException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PhysicalConnectionRequirements
+      attr_accessor subnet_id: ::String
+      attr_accessor security_group_id_list: ::Array[::String]
+      attr_accessor availability_zone: ::String
+      SENSITIVE: []
+    end
+
+    class PostgreSQLCatalogSource
+      attr_accessor name: ::String
+      attr_accessor database: ::String
+      attr_accessor table: ::String
+      SENSITIVE: []
+    end
+
+    class PostgreSQLCatalogTarget
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor database: ::String
+      attr_accessor table: ::String
+      SENSITIVE: []
+    end
+
+    class Predecessor
+      attr_accessor job_name: ::String
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class Predicate
+      attr_accessor logical: ("AND" | "ANY")
+      attr_accessor conditions: ::Array[Types::Condition]
+      SENSITIVE: []
+    end
+
+    class PrincipalPermissions
+      attr_accessor principal: Types::DataLakePrincipal
+      attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS")]
+      SENSITIVE: []
+    end
+
+    class PropertyPredicate
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      attr_accessor comparator: ("EQUALS" | "GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_EQUALS" | "LESS_THAN_EQUALS")
+      SENSITIVE: []
+    end
+
+    class PutDataCatalogEncryptionSettingsRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor data_catalog_encryption_settings: Types::DataCatalogEncryptionSettings
+      SENSITIVE: []
+    end
+
+    class PutDataCatalogEncryptionSettingsResponse < Aws::EmptyStructure
+    end
+
+    class PutResourcePolicyRequest
+      attr_accessor policy_in_json: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor policy_hash_condition: ::String
+      attr_accessor policy_exists_condition: ("MUST_EXIST" | "NOT_EXIST" | "NONE")
+      attr_accessor enable_hybrid: ("TRUE" | "FALSE")
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyResponse
+      attr_accessor policy_hash: ::String
+      SENSITIVE: []
+    end
+
+    class PutSchemaVersionMetadataInput
+      attr_accessor schema_id: Types::SchemaId
+      attr_accessor schema_version_number: Types::SchemaVersionNumber
+      attr_accessor schema_version_id: ::String
+      attr_accessor metadata_key_value: Types::MetadataKeyValuePair
+      SENSITIVE: []
+    end
+
+    class PutSchemaVersionMetadataResponse
+      attr_accessor schema_arn: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor registry_name: ::String
+      attr_accessor latest_version: bool
+      attr_accessor version_number: ::Integer
+      attr_accessor schema_version_id: ::String
+      attr_accessor metadata_key: ::String
+      attr_accessor metadata_value: ::String
+      SENSITIVE: []
+    end
+
+    class PutWorkflowRunPropertiesRequest
+      attr_accessor name: ::String
+      attr_accessor run_id: ::String
+      attr_accessor run_properties: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PutWorkflowRunPropertiesResponse < Aws::EmptyStructure
+    end
+
+    class QuerySchemaVersionMetadataInput
+      attr_accessor schema_id: Types::SchemaId
+      attr_accessor schema_version_number: Types::SchemaVersionNumber
+      attr_accessor schema_version_id: ::String
+      attr_accessor metadata_list: ::Array[Types::MetadataKeyValuePair]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class QuerySchemaVersionMetadataResponse
+      attr_accessor metadata_info_map: ::Hash[::String, Types::MetadataInfo]
+      attr_accessor schema_version_id: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class QuerySessionContext
+      attr_accessor query_id: ::String
+      attr_accessor query_start_time: ::Time
+      attr_accessor cluster_id: ::String
+      attr_accessor query_authorization_id: ::String
+      attr_accessor additional_context: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Recipe
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor recipe_reference: Types::RecipeReference
+      SENSITIVE: []
+    end
+
+    class RecipeReference
+      attr_accessor recipe_arn: ::String
+      attr_accessor recipe_version: ::String
+      SENSITIVE: []
+    end
+
+    class RecrawlPolicy
+      attr_accessor recrawl_behavior: ("CRAWL_EVERYTHING" | "CRAWL_NEW_FOLDERS_ONLY" | "CRAWL_EVENT_MODE")
+      SENSITIVE: []
+    end
+
+    class RedshiftSource
+      attr_accessor name: ::String
+      attr_accessor database: ::String
+      attr_accessor table: ::String
+      attr_accessor redshift_tmp_dir: ::String
+      attr_accessor tmp_dir_iam_role: ::String
+      SENSITIVE: []
+    end
+
+    class RedshiftTarget
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor database: ::String
+      attr_accessor table: ::String
+      attr_accessor redshift_tmp_dir: ::String
+      attr_accessor tmp_dir_iam_role: ::String
+      attr_accessor upsert_redshift_options: Types::UpsertRedshiftTargetOptions
+      SENSITIVE: []
+    end
+
+    class RegisterSchemaVersionInput
+      attr_accessor schema_id: Types::SchemaId
+      attr_accessor schema_definition: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterSchemaVersionResponse
+      attr_accessor schema_version_id: ::String
+      attr_accessor version_number: ::Integer
+      attr_accessor status: ("AVAILABLE" | "PENDING" | "FAILURE" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class RegistryId
+      attr_accessor registry_name: ::String
+      attr_accessor registry_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RegistryListItem
+      attr_accessor registry_name: ::String
+      attr_accessor registry_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("AVAILABLE" | "DELETING")
+      attr_accessor created_time: ::String
+      attr_accessor updated_time: ::String
+      SENSITIVE: []
+    end
+
+    class RelationalCatalogSource
+      attr_accessor name: ::String
+      attr_accessor database: ::String
+      attr_accessor table: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveSchemaVersionMetadataInput
+      attr_accessor schema_id: Types::SchemaId
+      attr_accessor schema_version_number: Types::SchemaVersionNumber
+      attr_accessor schema_version_id: ::String
+      attr_accessor metadata_key_value: Types::MetadataKeyValuePair
+      SENSITIVE: []
+    end
+
+    class RemoveSchemaVersionMetadataResponse
+      attr_accessor schema_arn: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor registry_name: ::String
+      attr_accessor latest_version: bool
+      attr_accessor version_number: ::Integer
+      attr_accessor schema_version_id: ::String
+      attr_accessor metadata_key: ::String
+      attr_accessor metadata_value: ::String
+      SENSITIVE: []
+    end
+
+    class RenameField
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor source_path: ::Array[::String]
+      attr_accessor target_path: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResetJobBookmarkRequest
+      attr_accessor job_name: ::String
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResetJobBookmarkResponse
+      attr_accessor job_bookmark_entry: Types::JobBookmarkEntry
+      SENSITIVE: []
+    end
+
+    class ResourceNotReadyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNumberLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceUri
+      attr_accessor resource_type: ("JAR" | "FILE" | "ARCHIVE")
+      attr_accessor uri: ::String
+      SENSITIVE: []
+    end
+
+    class ResumeWorkflowRunRequest
+      attr_accessor name: ::String
+      attr_accessor run_id: ::String
+      attr_accessor node_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResumeWorkflowRunResponse
+      attr_accessor run_id: ::String
+      attr_accessor node_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RunMetrics
+      attr_accessor number_of_bytes_compacted: ::String
+      attr_accessor number_of_files_compacted: ::String
+      attr_accessor number_of_dpus: ::String
+      attr_accessor job_duration_in_hour: ::String
+      SENSITIVE: []
+    end
+
+    class RunStatementRequest
+      attr_accessor session_id: ::String
+      attr_accessor code: ::String
+      attr_accessor request_origin: ::String
+      SENSITIVE: []
+    end
+
+    class RunStatementResponse
+      attr_accessor id: ::Integer
+      SENSITIVE: []
+    end
+
+    class S3CatalogDeltaSource
+      attr_accessor name: ::String
+      attr_accessor database: ::String
+      attr_accessor table: ::String
+      attr_accessor additional_delta_options: ::Hash[::String, ::String]
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
+      SENSITIVE: []
+    end
+
+    class S3CatalogHudiSource
+      attr_accessor name: ::String
+      attr_accessor database: ::String
+      attr_accessor table: ::String
+      attr_accessor additional_hudi_options: ::Hash[::String, ::String]
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
+      SENSITIVE: []
+    end
+
+    class S3CatalogSource
+      attr_accessor name: ::String
+      attr_accessor database: ::String
+      attr_accessor table: ::String
+      attr_accessor partition_predicate: ::String
+      attr_accessor additional_options: Types::S3SourceAdditionalOptions
+      SENSITIVE: []
+    end
+
+    class S3CatalogTarget
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor partition_keys: ::Array[::Array[::String]]
+      attr_accessor table: ::String
+      attr_accessor database: ::String
+      attr_accessor schema_change_policy: Types::CatalogSchemaChangePolicy
+      SENSITIVE: []
+    end
+
+    class S3CsvSource
+      attr_accessor name: ::String
+      attr_accessor paths: ::Array[::String]
+      attr_accessor compression_type: ("gzip" | "bzip2")
+      attr_accessor exclusions: ::Array[::String]
+      attr_accessor group_size: ::String
+      attr_accessor group_files: ::String
+      attr_accessor recurse: bool
+      attr_accessor max_band: ::Integer
+      attr_accessor max_files_in_band: ::Integer
+      attr_accessor additional_options: Types::S3DirectSourceAdditionalOptions
+      attr_accessor separator: ("comma" | "ctrla" | "pipe" | "semicolon" | "tab")
+      attr_accessor escaper: ::String
+      attr_accessor quote_char: ("quote" | "quillemet" | "single_quote" | "disabled")
+      attr_accessor multiline: bool
+      attr_accessor with_header: bool
+      attr_accessor write_header: bool
+      attr_accessor skip_first: bool
+      attr_accessor optimize_performance: bool
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
+      SENSITIVE: []
+    end
+
+    class S3DeltaCatalogTarget
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor partition_keys: ::Array[::Array[::String]]
+      attr_accessor table: ::String
+      attr_accessor database: ::String
+      attr_accessor additional_options: ::Hash[::String, ::String]
+      attr_accessor schema_change_policy: Types::CatalogSchemaChangePolicy
+      SENSITIVE: []
+    end
+
+    class S3DeltaDirectTarget
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor partition_keys: ::Array[::Array[::String]]
+      attr_accessor path: ::String
+      attr_accessor compression: ("uncompressed" | "snappy")
+      attr_accessor format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta")
+      attr_accessor additional_options: ::Hash[::String, ::String]
+      attr_accessor schema_change_policy: Types::DirectSchemaChangePolicy
+      SENSITIVE: []
+    end
+
+    class S3DeltaSource
+      attr_accessor name: ::String
+      attr_accessor paths: ::Array[::String]
+      attr_accessor additional_delta_options: ::Hash[::String, ::String]
+      attr_accessor additional_options: Types::S3DirectSourceAdditionalOptions
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
+      SENSITIVE: []
+    end
+
+    class S3DirectSourceAdditionalOptions
+      attr_accessor bounded_size: ::Integer
+      attr_accessor bounded_files: ::Integer
+      attr_accessor enable_sample_path: bool
+      attr_accessor sample_path: ::String
+      SENSITIVE: []
+    end
+
+    class S3DirectTarget
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor partition_keys: ::Array[::Array[::String]]
+      attr_accessor path: ::String
+      attr_accessor compression: ::String
+      attr_accessor format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta")
+      attr_accessor schema_change_policy: Types::DirectSchemaChangePolicy
+      SENSITIVE: []
+    end
+
+    class S3Encryption
+      attr_accessor s3_encryption_mode: ("DISABLED" | "SSE-KMS" | "SSE-S3")
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class S3GlueParquetTarget
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor partition_keys: ::Array[::Array[::String]]
+      attr_accessor path: ::String
+      attr_accessor compression: ("snappy" | "lzo" | "gzip" | "uncompressed" | "none")
+      attr_accessor schema_change_policy: Types::DirectSchemaChangePolicy
+      SENSITIVE: []
+    end
+
+    class S3HudiCatalogTarget
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor partition_keys: ::Array[::Array[::String]]
+      attr_accessor table: ::String
+      attr_accessor database: ::String
+      attr_accessor additional_options: ::Hash[::String, ::String]
+      attr_accessor schema_change_policy: Types::CatalogSchemaChangePolicy
+      SENSITIVE: []
+    end
+
+    class S3HudiDirectTarget
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor path: ::String
+      attr_accessor compression: ("gzip" | "lzo" | "uncompressed" | "snappy")
+      attr_accessor partition_keys: ::Array[::Array[::String]]
+      attr_accessor format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta")
+      attr_accessor additional_options: ::Hash[::String, ::String]
+      attr_accessor schema_change_policy: Types::DirectSchemaChangePolicy
+      SENSITIVE: []
+    end
+
+    class S3HudiSource
+      attr_accessor name: ::String
+      attr_accessor paths: ::Array[::String]
+      attr_accessor additional_hudi_options: ::Hash[::String, ::String]
+      attr_accessor additional_options: Types::S3DirectSourceAdditionalOptions
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
+      SENSITIVE: []
+    end
+
+    class S3JsonSource
+      attr_accessor name: ::String
+      attr_accessor paths: ::Array[::String]
+      attr_accessor compression_type: ("gzip" | "bzip2")
+      attr_accessor exclusions: ::Array[::String]
+      attr_accessor group_size: ::String
+      attr_accessor group_files: ::String
+      attr_accessor recurse: bool
+      attr_accessor max_band: ::Integer
+      attr_accessor max_files_in_band: ::Integer
+      attr_accessor additional_options: Types::S3DirectSourceAdditionalOptions
+      attr_accessor json_path: ::String
+      attr_accessor multiline: bool
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
+      SENSITIVE: []
+    end
+
+    class S3ParquetSource
+      attr_accessor name: ::String
+      attr_accessor paths: ::Array[::String]
+      attr_accessor compression_type: ("snappy" | "lzo" | "gzip" | "uncompressed" | "none")
+      attr_accessor exclusions: ::Array[::String]
+      attr_accessor group_size: ::String
+      attr_accessor group_files: ::String
+      attr_accessor recurse: bool
+      attr_accessor max_band: ::Integer
+      attr_accessor max_files_in_band: ::Integer
+      attr_accessor additional_options: Types::S3DirectSourceAdditionalOptions
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
+      SENSITIVE: []
+    end
+
+    class S3SourceAdditionalOptions
+      attr_accessor bounded_size: ::Integer
+      attr_accessor bounded_files: ::Integer
+      SENSITIVE: []
+    end
+
+    class S3Target
+      attr_accessor path: ::String
+      attr_accessor exclusions: ::Array[::String]
+      attr_accessor connection_name: ::String
+      attr_accessor sample_size: ::Integer
+      attr_accessor event_queue_arn: ::String
+      attr_accessor dlq_event_queue_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Schedule
+      attr_accessor schedule_expression: ::String
+      attr_accessor state: ("SCHEDULED" | "NOT_SCHEDULED" | "TRANSITIONING")
+      SENSITIVE: []
+    end
+
+    class SchedulerNotRunningException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SchedulerRunningException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SchedulerTransitioningException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SchemaChangePolicy
+      attr_accessor update_behavior: ("LOG" | "UPDATE_IN_DATABASE")
+      attr_accessor delete_behavior: ("LOG" | "DELETE_FROM_DATABASE" | "DEPRECATE_IN_DATABASE")
+      SENSITIVE: []
+    end
+
+    class SchemaColumn
+      attr_accessor name: ::String
+      attr_accessor data_type: ::String
+      SENSITIVE: []
+    end
+
+    class SchemaId
+      attr_accessor schema_arn: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor registry_name: ::String
+      SENSITIVE: []
+    end
+
+    class SchemaListItem
+      attr_accessor registry_name: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor schema_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor schema_status: ("AVAILABLE" | "PENDING" | "DELETING")
+      attr_accessor created_time: ::String
+      attr_accessor updated_time: ::String
+      SENSITIVE: []
+    end
+
+    class SchemaReference
+      attr_accessor schema_id: Types::SchemaId
+      attr_accessor schema_version_id: ::String
+      attr_accessor schema_version_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class SchemaVersionErrorItem
+      attr_accessor version_number: ::Integer
+      attr_accessor error_details: Types::ErrorDetails
+      SENSITIVE: []
+    end
+
+    class SchemaVersionListItem
+      attr_accessor schema_arn: ::String
+      attr_accessor schema_version_id: ::String
+      attr_accessor version_number: ::Integer
+      attr_accessor status: ("AVAILABLE" | "PENDING" | "FAILURE" | "DELETING")
+      attr_accessor created_time: ::String
+      SENSITIVE: []
+    end
+
+    class SchemaVersionNumber
+      attr_accessor latest_version: bool
+      attr_accessor version_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchTablesRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::PropertyPredicate]
+      attr_accessor search_text: ::String
+      attr_accessor sort_criteria: ::Array[Types::SortCriterion]
+      attr_accessor max_results: ::Integer
+      attr_accessor resource_share_type: ("FOREIGN" | "ALL" | "FEDERATED")
+      SENSITIVE: []
+    end
+
+    class SearchTablesResponse
+      attr_accessor next_token: ::String
+      attr_accessor table_list: ::Array[Types::Table]
+      SENSITIVE: []
+    end
+
+    class SecurityConfiguration
+      attr_accessor name: ::String
+      attr_accessor created_time_stamp: ::Time
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class Segment
+      attr_accessor segment_number: ::Integer
+      attr_accessor total_segments: ::Integer
+      SENSITIVE: []
+    end
+
+    class SelectFields
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor paths: ::Array[::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class SelectFromCollection
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor index: ::Integer
+      SENSITIVE: []
+    end
+
+    class SerDeInfo
+      attr_accessor name: ::String
+      attr_accessor serialization_library: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Session
+      attr_accessor id: ::String
+      attr_accessor created_on: ::Time
+      attr_accessor status: ("PROVISIONING" | "READY" | "FAILED" | "TIMEOUT" | "STOPPING" | "STOPPED")
+      attr_accessor error_message: ::String
+      attr_accessor description: ::String
+      attr_accessor role: ::String
+      attr_accessor command: Types::SessionCommand
+      attr_accessor default_arguments: ::Hash[::String, ::String]
+      attr_accessor connections: Types::ConnectionsList
+      attr_accessor progress: ::Float
+      attr_accessor max_capacity: ::Float
+      attr_accessor security_configuration: ::String
+      attr_accessor glue_version: ::String
+      attr_accessor number_of_workers: ::Integer
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor completed_on: ::Time
+      attr_accessor execution_time: ::Float
+      attr_accessor dpu_seconds: ::Float
+      attr_accessor idle_timeout: ::Integer
+      SENSITIVE: []
+    end
+
+    class SessionCommand
+      attr_accessor name: ::String
+      attr_accessor python_version: ::String
+      SENSITIVE: []
+    end
+
+    class SkewedInfo
+      attr_accessor skewed_column_names: ::Array[::String]
+      attr_accessor skewed_column_values: ::Array[::String]
+      attr_accessor skewed_column_value_location_maps: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class SnowflakeNodeData
+      attr_accessor source_type: ::String
+      attr_accessor connection: Types::Option
+      attr_accessor schema: ::String
+      attr_accessor table: ::String
+      attr_accessor database: ::String
+      attr_accessor temp_dir: ::String
+      attr_accessor iam_role: Types::Option
+      attr_accessor additional_options: ::Hash[::String, ::String]
+      attr_accessor sample_query: ::String
+      attr_accessor pre_action: ::String
+      attr_accessor post_action: ::String
+      attr_accessor action: ::String
+      attr_accessor upsert: bool
+      attr_accessor merge_action: ::String
+      attr_accessor merge_when_matched: ::String
+      attr_accessor merge_when_not_matched: ::String
+      attr_accessor merge_clause: ::String
+      attr_accessor staging_table: ::String
+      attr_accessor selected_columns: ::Array[Types::Option]
+      attr_accessor auto_pushdown: bool
+      attr_accessor table_schema: ::Array[Types::Option]
+      SENSITIVE: []
+    end
+
+    class SnowflakeSource
+      attr_accessor name: ::String
+      attr_accessor data: Types::SnowflakeNodeData
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
+      SENSITIVE: []
+    end
+
+    class SnowflakeTarget
+      attr_accessor name: ::String
+      attr_accessor data: Types::SnowflakeNodeData
+      attr_accessor inputs: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SortCriterion
+      attr_accessor field_name: ::String
+      attr_accessor sort: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class SourceControlDetails
+      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "AWS_CODE_COMMIT")
+      attr_accessor repository: ::String
+      attr_accessor owner: ::String
+      attr_accessor branch: ::String
+      attr_accessor folder: ::String
+      attr_accessor last_commit_id: ::String
+      attr_accessor auth_strategy: ("PERSONAL_ACCESS_TOKEN" | "AWS_SECRETS_MANAGER")
+      attr_accessor auth_token: ::String
+      SENSITIVE: []
+    end
+
+    class SparkConnectorSource
+      attr_accessor name: ::String
+      attr_accessor connection_name: ::String
+      attr_accessor connector_name: ::String
+      attr_accessor connection_type: ::String
+      attr_accessor additional_options: ::Hash[::String, ::String]
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
+      SENSITIVE: []
+    end
+
+    class SparkConnectorTarget
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor connection_name: ::String
+      attr_accessor connector_name: ::String
+      attr_accessor connection_type: ::String
+      attr_accessor additional_options: ::Hash[::String, ::String]
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
+      SENSITIVE: []
+    end
+
+    class SparkSQL
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor sql_query: ::String
+      attr_accessor sql_aliases: ::Array[Types::SqlAlias]
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
+      SENSITIVE: []
+    end
+
+    class Spigot
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor path: ::String
+      attr_accessor topk: ::Integer
+      attr_accessor prob: ::Float
+      SENSITIVE: []
+    end
+
+    class SplitFields
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor paths: ::Array[::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class SqlAlias
+      attr_accessor from: ::String
+      attr_accessor alias: ::String
+      SENSITIVE: []
+    end
+
+    class StartBlueprintRunRequest
+      attr_accessor blueprint_name: ::String
+      attr_accessor parameters: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartBlueprintRunResponse
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartColumnStatisticsTaskRunRequest
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor column_name_list: ::Array[::String]
+      attr_accessor role: ::String
+      attr_accessor sample_size: ::Float
+      attr_accessor catalog_id: ::String
+      attr_accessor security_configuration: ::String
+      SENSITIVE: []
+    end
+
+    class StartColumnStatisticsTaskRunResponse
+      attr_accessor column_statistics_task_run_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartCrawlerRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class StartCrawlerResponse < Aws::EmptyStructure
+    end
+
+    class StartCrawlerScheduleRequest
+      attr_accessor crawler_name: ::String
+      SENSITIVE: []
+    end
+
+    class StartCrawlerScheduleResponse < Aws::EmptyStructure
+    end
+
+    class StartDataQualityRuleRecommendationRunRequest
+      attr_accessor data_source: Types::DataSource
+      attr_accessor role: ::String
+      attr_accessor number_of_workers: ::Integer
+      attr_accessor timeout: ::Integer
+      attr_accessor created_ruleset_name: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartDataQualityRuleRecommendationRunResponse
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartDataQualityRulesetEvaluationRunRequest
+      attr_accessor data_source: Types::DataSource
+      attr_accessor role: ::String
+      attr_accessor number_of_workers: ::Integer
+      attr_accessor timeout: ::Integer
+      attr_accessor client_token: ::String
+      attr_accessor additional_run_options: Types::DataQualityEvaluationRunAdditionalRunOptions
+      attr_accessor ruleset_names: ::Array[::String]
+      attr_accessor additional_data_sources: ::Hash[::String, Types::DataSource]
+      SENSITIVE: []
+    end
+
+    class StartDataQualityRulesetEvaluationRunResponse
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartExportLabelsTaskRunRequest
+      attr_accessor transform_id: ::String
+      attr_accessor output_s3_path: ::String
+      SENSITIVE: []
+    end
+
+    class StartExportLabelsTaskRunResponse
+      attr_accessor task_run_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartImportLabelsTaskRunRequest
+      attr_accessor transform_id: ::String
+      attr_accessor input_s3_path: ::String
+      attr_accessor replace_all_labels: bool
+      SENSITIVE: []
+    end
+
+    class StartImportLabelsTaskRunResponse
+      attr_accessor task_run_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartJobRunRequest
+      attr_accessor job_name: ::String
+      attr_accessor job_run_id: ::String
+      attr_accessor arguments: ::Hash[::String, ::String]
+      attr_accessor allocated_capacity: ::Integer
+      attr_accessor timeout: ::Integer
+      attr_accessor max_capacity: ::Float
+      attr_accessor security_configuration: ::String
+      attr_accessor notification_property: Types::NotificationProperty
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor number_of_workers: ::Integer
+      attr_accessor execution_class: ("FLEX" | "STANDARD")
+      SENSITIVE: []
+    end
+
+    class StartJobRunResponse
+      attr_accessor job_run_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartMLEvaluationTaskRunRequest
+      attr_accessor transform_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartMLEvaluationTaskRunResponse
+      attr_accessor task_run_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartMLLabelingSetGenerationTaskRunRequest
+      attr_accessor transform_id: ::String
+      attr_accessor output_s3_path: ::String
+      SENSITIVE: []
+    end
+
+    class StartMLLabelingSetGenerationTaskRunResponse
+      attr_accessor task_run_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartTriggerRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class StartTriggerResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class StartWorkflowRunRequest
+      attr_accessor name: ::String
+      attr_accessor run_properties: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartWorkflowRunResponse
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartingEventBatchCondition
+      attr_accessor batch_size: ::Integer
+      attr_accessor batch_window: ::Integer
+      SENSITIVE: []
+    end
+
+    class Statement
+      attr_accessor id: ::Integer
+      attr_accessor code: ::String
+      attr_accessor state: ("WAITING" | "RUNNING" | "AVAILABLE" | "CANCELLING" | "CANCELLED" | "ERROR")
+      attr_accessor output: Types::StatementOutput
+      attr_accessor progress: ::Float
+      attr_accessor started_on: ::Integer
+      attr_accessor completed_on: ::Integer
+      SENSITIVE: []
+    end
+
+    class StatementOutput
+      attr_accessor data: Types::StatementOutputData
+      attr_accessor execution_count: ::Integer
+      attr_accessor status: ("WAITING" | "RUNNING" | "AVAILABLE" | "CANCELLING" | "CANCELLED" | "ERROR")
+      attr_accessor error_name: ::String
+      attr_accessor error_value: ::String
+      attr_accessor traceback: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StatementOutputData
+      attr_accessor text_plain: ::String
+      SENSITIVE: []
+    end
+
+    class StopColumnStatisticsTaskRunRequest
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      SENSITIVE: []
+    end
+
+    class StopColumnStatisticsTaskRunResponse < Aws::EmptyStructure
+    end
+
+    class StopCrawlerRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class StopCrawlerResponse < Aws::EmptyStructure
+    end
+
+    class StopCrawlerScheduleRequest
+      attr_accessor crawler_name: ::String
+      SENSITIVE: []
+    end
+
+    class StopCrawlerScheduleResponse < Aws::EmptyStructure
+    end
+
+    class StopSessionRequest
+      attr_accessor id: ::String
+      attr_accessor request_origin: ::String
+      SENSITIVE: []
+    end
+
+    class StopSessionResponse
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class StopTriggerRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class StopTriggerResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class StopWorkflowRunRequest
+      attr_accessor name: ::String
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopWorkflowRunResponse < Aws::EmptyStructure
+    end
+
+    class StorageDescriptor
+      attr_accessor columns: ::Array[Types::Column]
+      attr_accessor location: ::String
+      attr_accessor additional_locations: ::Array[::String]
+      attr_accessor input_format: ::String
+      attr_accessor output_format: ::String
+      attr_accessor compressed: bool
+      attr_accessor number_of_buckets: ::Integer
+      attr_accessor serde_info: Types::SerDeInfo
+      attr_accessor bucket_columns: ::Array[::String]
+      attr_accessor sort_columns: ::Array[Types::Order]
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor skewed_info: Types::SkewedInfo
+      attr_accessor stored_as_sub_directories: bool
+      attr_accessor schema_reference: Types::SchemaReference
+      SENSITIVE: []
+    end
+
+    class StreamingDataPreviewOptions
+      attr_accessor polling_time: ::Integer
+      attr_accessor record_polling_limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class StringColumnStatisticsData
+      attr_accessor maximum_length: ::Integer
+      attr_accessor average_length: ::Float
+      attr_accessor number_of_nulls: ::Integer
+      attr_accessor number_of_distinct_values: ::Integer
+      SENSITIVE: []
+    end
+
+    class SupportedDialect
+      attr_accessor dialect: ("REDSHIFT" | "ATHENA" | "SPARK")
+      attr_accessor dialect_version: ::String
+      SENSITIVE: []
+    end
+
+    class Table
+      attr_accessor name: ::String
+      attr_accessor database_name: ::String
+      attr_accessor description: ::String
+      attr_accessor owner: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor last_access_time: ::Time
+      attr_accessor last_analyzed_time: ::Time
+      attr_accessor retention: ::Integer
+      attr_accessor storage_descriptor: Types::StorageDescriptor
+      attr_accessor partition_keys: ::Array[Types::Column]
+      attr_accessor view_original_text: ::String
+      attr_accessor view_expanded_text: ::String
+      attr_accessor table_type: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor created_by: ::String
+      attr_accessor is_registered_with_lake_formation: bool
+      attr_accessor target_table: Types::TableIdentifier
+      attr_accessor catalog_id: ::String
+      attr_accessor version_id: ::String
+      attr_accessor federated_table: Types::FederatedTable
+      SENSITIVE: []
+    end
+
+    class TableError
+      attr_accessor table_name: ::String
+      attr_accessor error_detail: Types::ErrorDetail
+      SENSITIVE: []
+    end
+
+    class TableIdentifier
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor name: ::String
+      attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
+    class TableInput
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor owner: ::String
+      attr_accessor last_access_time: ::Time
+      attr_accessor last_analyzed_time: ::Time
+      attr_accessor retention: ::Integer
+      attr_accessor storage_descriptor: Types::StorageDescriptor
+      attr_accessor partition_keys: ::Array[Types::Column]
+      attr_accessor view_original_text: ::String
+      attr_accessor view_expanded_text: ::String
+      attr_accessor table_type: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor target_table: Types::TableIdentifier
+      SENSITIVE: []
+    end
+
+    class TableOptimizer
+      attr_accessor type: ("compaction")
+      attr_accessor configuration: Types::TableOptimizerConfiguration
+      attr_accessor last_run: Types::TableOptimizerRun
+      SENSITIVE: []
+    end
+
+    class TableOptimizerConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class TableOptimizerRun
+      attr_accessor event_type: ("starting" | "completed" | "failed" | "in_progress")
+      attr_accessor start_timestamp: ::Time
+      attr_accessor end_timestamp: ::Time
+      attr_accessor metrics: Types::RunMetrics
+      attr_accessor error: ::String
+      SENSITIVE: []
+    end
+
+    class TableVersion
+      attr_accessor table: Types::Table
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class TableVersionError
+      attr_accessor table_name: ::String
+      attr_accessor version_id: ::String
+      attr_accessor error_detail: Types::ErrorDetail
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags_to_add: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TaskRun
+      attr_accessor transform_id: ::String
+      attr_accessor task_run_id: ::String
+      attr_accessor status: ("STARTING" | "RUNNING" | "STOPPING" | "STOPPED" | "SUCCEEDED" | "FAILED" | "TIMEOUT")
+      attr_accessor log_group_name: ::String
+      attr_accessor properties: Types::TaskRunProperties
+      attr_accessor error_string: ::String
+      attr_accessor started_on: ::Time
+      attr_accessor last_modified_on: ::Time
+      attr_accessor completed_on: ::Time
+      attr_accessor execution_time: ::Integer
+      SENSITIVE: []
+    end
+
+    class TaskRunFilterCriteria
+      attr_accessor task_run_type: ("EVALUATION" | "LABELING_SET_GENERATION" | "IMPORT_LABELS" | "EXPORT_LABELS" | "FIND_MATCHES")
+      attr_accessor status: ("STARTING" | "RUNNING" | "STOPPING" | "STOPPED" | "SUCCEEDED" | "FAILED" | "TIMEOUT")
+      attr_accessor started_before: ::Time
+      attr_accessor started_after: ::Time
+      SENSITIVE: []
+    end
+
+    class TaskRunProperties
+      attr_accessor task_type: ("EVALUATION" | "LABELING_SET_GENERATION" | "IMPORT_LABELS" | "EXPORT_LABELS" | "FIND_MATCHES")
+      attr_accessor import_labels_task_run_properties: Types::ImportLabelsTaskRunProperties
+      attr_accessor export_labels_task_run_properties: Types::ExportLabelsTaskRunProperties
+      attr_accessor labeling_set_generation_task_run_properties: Types::LabelingSetGenerationTaskRunProperties
+      attr_accessor find_matches_task_run_properties: Types::FindMatchesTaskRunProperties
+      SENSITIVE: []
+    end
+
+    class TaskRunSortCriteria
+      attr_accessor column: ("TASK_RUN_TYPE" | "STATUS" | "STARTED")
+      attr_accessor sort_direction: ("DESCENDING" | "ASCENDING")
+      SENSITIVE: []
+    end
+
+    class TransformConfigParameter
+      attr_accessor name: ::String
+      attr_accessor type: ("str" | "int" | "float" | "complex" | "bool" | "list" | "null")
+      attr_accessor validation_rule: ::String
+      attr_accessor validation_message: ::String
+      attr_accessor value: ::Array[::String]
+      attr_accessor list_type: ("str" | "int" | "float" | "complex" | "bool" | "list" | "null")
+      attr_accessor is_optional: bool
+      SENSITIVE: []
+    end
+
+    class TransformEncryption
+      attr_accessor ml_user_data_encryption: Types::MLUserDataEncryption
+      attr_accessor task_run_security_configuration_name: ::String
+      SENSITIVE: []
+    end
+
+    class TransformFilterCriteria
+      attr_accessor name: ::String
+      attr_accessor transform_type: ("FIND_MATCHES")
+      attr_accessor status: ("NOT_READY" | "READY" | "DELETING")
+      attr_accessor glue_version: ::String
+      attr_accessor created_before: ::Time
+      attr_accessor created_after: ::Time
+      attr_accessor last_modified_before: ::Time
+      attr_accessor last_modified_after: ::Time
+      attr_accessor schema: ::Array[Types::SchemaColumn]
+      SENSITIVE: []
+    end
+
+    class TransformParameters
+      attr_accessor transform_type: ("FIND_MATCHES")
+      attr_accessor find_matches_parameters: Types::FindMatchesParameters
+      SENSITIVE: []
+    end
+
+    class TransformSortCriteria
+      attr_accessor column: ("NAME" | "TRANSFORM_TYPE" | "STATUS" | "CREATED" | "LAST_MODIFIED")
+      attr_accessor sort_direction: ("DESCENDING" | "ASCENDING")
+      SENSITIVE: []
+    end
+
+    class Trigger
+      attr_accessor name: ::String
+      attr_accessor workflow_name: ::String
+      attr_accessor id: ::String
+      attr_accessor type: ("SCHEDULED" | "CONDITIONAL" | "ON_DEMAND" | "EVENT")
+      attr_accessor state: ("CREATING" | "CREATED" | "ACTIVATING" | "ACTIVATED" | "DEACTIVATING" | "DEACTIVATED" | "DELETING" | "UPDATING")
+      attr_accessor description: ::String
+      attr_accessor schedule: ::String
+      attr_accessor actions: ::Array[Types::Action]
+      attr_accessor predicate: Types::Predicate
+      attr_accessor event_batching_condition: Types::EventBatchingCondition
+      SENSITIVE: []
+    end
+
+    class TriggerNodeDetails
+      attr_accessor trigger: Types::Trigger
+      SENSITIVE: []
+    end
+
+    class TriggerUpdate
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor schedule: ::String
+      attr_accessor actions: ::Array[Types::Action]
+      attr_accessor predicate: Types::Predicate
+      attr_accessor event_batching_condition: Types::EventBatchingCondition
+      SENSITIVE: []
+    end
+
+    class UnfilteredPartition
+      attr_accessor partition: Types::Partition
+      attr_accessor authorized_columns: ::Array[::String]
+      attr_accessor is_registered_with_lake_formation: bool
+      SENSITIVE: []
+    end
+
+    class Union
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor union_type: ("ALL" | "DISTINCT")
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags_to_remove: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateBlueprintRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor blueprint_location: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBlueprintResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateClassifierRequest
+      attr_accessor grok_classifier: Types::UpdateGrokClassifierRequest
+      attr_accessor xml_classifier: Types::UpdateXMLClassifierRequest
+      attr_accessor json_classifier: Types::UpdateJsonClassifierRequest
+      attr_accessor csv_classifier: Types::UpdateCsvClassifierRequest
+      SENSITIVE: []
+    end
+
+    class UpdateClassifierResponse < Aws::EmptyStructure
+    end
+
+    class UpdateColumnStatisticsForPartitionRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor partition_values: ::Array[::String]
+      attr_accessor column_statistics_list: ::Array[Types::ColumnStatistics]
+      SENSITIVE: []
+    end
+
+    class UpdateColumnStatisticsForPartitionResponse
+      attr_accessor errors: ::Array[Types::ColumnStatisticsError]
+      SENSITIVE: []
+    end
+
+    class UpdateColumnStatisticsForTableRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor column_statistics_list: ::Array[Types::ColumnStatistics]
+      SENSITIVE: []
+    end
+
+    class UpdateColumnStatisticsForTableResponse
+      attr_accessor errors: ::Array[Types::ColumnStatisticsError]
+      SENSITIVE: []
+    end
+
+    class UpdateConnectionRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor name: ::String
+      attr_accessor connection_input: Types::ConnectionInput
+      SENSITIVE: []
+    end
+
+    class UpdateConnectionResponse < Aws::EmptyStructure
+    end
+
+    class UpdateCrawlerRequest
+      attr_accessor name: ::String
+      attr_accessor role: ::String
+      attr_accessor database_name: ::String
+      attr_accessor description: ::String
+      attr_accessor targets: Types::CrawlerTargets
+      attr_accessor schedule: ::String
+      attr_accessor classifiers: ::Array[::String]
+      attr_accessor table_prefix: ::String
+      attr_accessor schema_change_policy: Types::SchemaChangePolicy
+      attr_accessor recrawl_policy: Types::RecrawlPolicy
+      attr_accessor lineage_configuration: Types::LineageConfiguration
+      attr_accessor lake_formation_configuration: Types::LakeFormationConfiguration
+      attr_accessor configuration: ::String
+      attr_accessor crawler_security_configuration: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCrawlerResponse < Aws::EmptyStructure
+    end
+
+    class UpdateCrawlerScheduleRequest
+      attr_accessor crawler_name: ::String
+      attr_accessor schedule: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCrawlerScheduleResponse < Aws::EmptyStructure
+    end
+
+    class UpdateCsvClassifierRequest
+      attr_accessor name: ::String
+      attr_accessor delimiter: ::String
+      attr_accessor quote_symbol: ::String
+      attr_accessor contains_header: ("UNKNOWN" | "PRESENT" | "ABSENT")
+      attr_accessor header: ::Array[::String]
+      attr_accessor disable_value_trimming: bool
+      attr_accessor allow_single_column: bool
+      attr_accessor custom_datatype_configured: bool
+      attr_accessor custom_datatypes: ::Array[::String]
+      attr_accessor serde: ("OpenCSVSerDe" | "LazySimpleSerDe" | "None")
+      SENSITIVE: []
+    end
+
+    class UpdateDataQualityRulesetRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor ruleset: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDataQualityRulesetResponse
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor ruleset: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDatabaseRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor name: ::String
+      attr_accessor database_input: Types::DatabaseInput
+      SENSITIVE: []
+    end
+
+    class UpdateDatabaseResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDevEndpointRequest
+      attr_accessor endpoint_name: ::String
+      attr_accessor public_key: ::String
+      attr_accessor add_public_keys: ::Array[::String]
+      attr_accessor delete_public_keys: ::Array[::String]
+      attr_accessor custom_libraries: Types::DevEndpointCustomLibraries
+      attr_accessor update_etl_libraries: bool
+      attr_accessor delete_arguments: ::Array[::String]
+      attr_accessor add_arguments: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateDevEndpointResponse < Aws::EmptyStructure
+    end
+
+    class UpdateGrokClassifierRequest
+      attr_accessor name: ::String
+      attr_accessor classification: ::String
+      attr_accessor grok_pattern: ::String
+      attr_accessor custom_patterns: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateJobFromSourceControlRequest
+      attr_accessor job_name: ::String
+      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "AWS_CODE_COMMIT")
+      attr_accessor repository_name: ::String
+      attr_accessor repository_owner: ::String
+      attr_accessor branch_name: ::String
+      attr_accessor folder: ::String
+      attr_accessor commit_id: ::String
+      attr_accessor auth_strategy: ("PERSONAL_ACCESS_TOKEN" | "AWS_SECRETS_MANAGER")
+      attr_accessor auth_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateJobFromSourceControlResponse
+      attr_accessor job_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateJobRequest
+      attr_accessor job_name: ::String
+      attr_accessor job_update: Types::JobUpdate
+      SENSITIVE: []
+    end
+
+    class UpdateJobResponse
+      attr_accessor job_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateJsonClassifierRequest
+      attr_accessor name: ::String
+      attr_accessor json_path: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateMLTransformRequest
+      attr_accessor transform_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor parameters: Types::TransformParameters
+      attr_accessor role: ::String
+      attr_accessor glue_version: ::String
+      attr_accessor max_capacity: ::Float
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor number_of_workers: ::Integer
+      attr_accessor timeout: ::Integer
+      attr_accessor max_retries: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateMLTransformResponse
+      attr_accessor transform_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePartitionRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor partition_value_list: ::Array[::String]
+      attr_accessor partition_input: Types::PartitionInput
+      SENSITIVE: []
+    end
+
+    class UpdatePartitionResponse < Aws::EmptyStructure
+    end
+
+    class UpdateRegistryInput
+      attr_accessor registry_id: Types::RegistryId
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRegistryResponse
+      attr_accessor registry_name: ::String
+      attr_accessor registry_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSchemaInput
+      attr_accessor schema_id: Types::SchemaId
+      attr_accessor schema_version_number: Types::SchemaVersionNumber
+      attr_accessor compatibility: ("NONE" | "DISABLED" | "BACKWARD" | "BACKWARD_ALL" | "FORWARD" | "FORWARD_ALL" | "FULL" | "FULL_ALL")
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSchemaResponse
+      attr_accessor schema_arn: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor registry_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSourceControlFromJobRequest
+      attr_accessor job_name: ::String
+      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "AWS_CODE_COMMIT")
+      attr_accessor repository_name: ::String
+      attr_accessor repository_owner: ::String
+      attr_accessor branch_name: ::String
+      attr_accessor folder: ::String
+      attr_accessor commit_id: ::String
+      attr_accessor auth_strategy: ("PERSONAL_ACCESS_TOKEN" | "AWS_SECRETS_MANAGER")
+      attr_accessor auth_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSourceControlFromJobResponse
+      attr_accessor job_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateTableOptimizerRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor type: ("compaction")
+      attr_accessor table_optimizer_configuration: Types::TableOptimizerConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateTableOptimizerResponse < Aws::EmptyStructure
+    end
+
+    class UpdateTableRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_input: Types::TableInput
+      attr_accessor skip_archive: bool
+      attr_accessor transaction_id: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateTableResponse < Aws::EmptyStructure
+    end
+
+    class UpdateTriggerRequest
+      attr_accessor name: ::String
+      attr_accessor trigger_update: Types::TriggerUpdate
+      SENSITIVE: []
+    end
+
+    class UpdateTriggerResponse
+      attr_accessor trigger: Types::Trigger
+      SENSITIVE: []
+    end
+
+    class UpdateUserDefinedFunctionRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor function_name: ::String
+      attr_accessor function_input: Types::UserDefinedFunctionInput
+      SENSITIVE: []
+    end
+
+    class UpdateUserDefinedFunctionResponse < Aws::EmptyStructure
+    end
+
+    class UpdateWorkflowRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor default_run_properties: ::Hash[::String, ::String]
+      attr_accessor max_concurrent_runs: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateWorkflowResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateXMLClassifierRequest
+      attr_accessor name: ::String
+      attr_accessor classification: ::String
+      attr_accessor row_tag: ::String
+      SENSITIVE: []
+    end
+
+    class UpsertRedshiftTargetOptions
+      attr_accessor table_location: ::String
+      attr_accessor connection_name: ::String
+      attr_accessor upsert_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UserDefinedFunction
+      attr_accessor function_name: ::String
+      attr_accessor database_name: ::String
+      attr_accessor class_name: ::String
+      attr_accessor owner_name: ::String
+      attr_accessor owner_type: ("USER" | "ROLE" | "GROUP")
+      attr_accessor create_time: ::Time
+      attr_accessor resource_uris: ::Array[Types::ResourceUri]
+      attr_accessor catalog_id: ::String
+      SENSITIVE: []
+    end
+
+    class UserDefinedFunctionInput
+      attr_accessor function_name: ::String
+      attr_accessor class_name: ::String
+      attr_accessor owner_name: ::String
+      attr_accessor owner_type: ("USER" | "ROLE" | "GROUP")
+      attr_accessor resource_uris: ::Array[Types::ResourceUri]
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VersionMismatchException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Workflow
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor default_run_properties: ::Hash[::String, ::String]
+      attr_accessor created_on: ::Time
+      attr_accessor last_modified_on: ::Time
+      attr_accessor last_run: Types::WorkflowRun
+      attr_accessor graph: Types::WorkflowGraph
+      attr_accessor max_concurrent_runs: ::Integer
+      attr_accessor blueprint_details: Types::BlueprintDetails
+      SENSITIVE: []
+    end
+
+    class WorkflowGraph
+      attr_accessor nodes: ::Array[Types::Node]
+      attr_accessor edges: ::Array[Types::Edge]
+      SENSITIVE: []
+    end
+
+    class WorkflowRun
+      attr_accessor name: ::String
+      attr_accessor workflow_run_id: ::String
+      attr_accessor previous_run_id: ::String
+      attr_accessor workflow_run_properties: ::Hash[::String, ::String]
+      attr_accessor started_on: ::Time
+      attr_accessor completed_on: ::Time
+      attr_accessor status: ("RUNNING" | "COMPLETED" | "STOPPING" | "STOPPED" | "ERROR")
+      attr_accessor error_message: ::String
+      attr_accessor statistics: Types::WorkflowRunStatistics
+      attr_accessor graph: Types::WorkflowGraph
+      attr_accessor starting_event_batch_condition: Types::StartingEventBatchCondition
+      SENSITIVE: []
+    end
+
+    class WorkflowRunStatistics
+      attr_accessor total_actions: ::Integer
+      attr_accessor timeout_actions: ::Integer
+      attr_accessor failed_actions: ::Integer
+      attr_accessor stopped_actions: ::Integer
+      attr_accessor succeeded_actions: ::Integer
+      attr_accessor running_actions: ::Integer
+      attr_accessor errored_actions: ::Integer
+      attr_accessor waiting_actions: ::Integer
+      SENSITIVE: []
+    end
+
+    class XMLClassifier
+      attr_accessor name: ::String
+      attr_accessor classification: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated: ::Time
+      attr_accessor version: ::Integer
+      attr_accessor row_tag: ::String
+      SENSITIVE: []
+    end
+  end
+end

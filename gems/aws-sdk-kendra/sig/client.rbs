@@ -1,0 +1,3012 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Kendra
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateEntitiesToExperienceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateEntitiesToExperienceResponse]
+        def failed_entity_list: () -> ::Array[Types::FailedEntity]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#associate_entities_to_experience-instance_method
+      def associate_entities_to_experience: (
+                                              id: ::String,
+                                              index_id: ::String,
+                                              entity_list: Array[
+                                                {
+                                                  entity_id: ::String,
+                                                  entity_type: ("USER" | "GROUP")
+                                                },
+                                              ]
+                                            ) -> _AssociateEntitiesToExperienceResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateEntitiesToExperienceResponseSuccess
+
+      interface _AssociatePersonasToEntitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociatePersonasToEntitiesResponse]
+        def failed_entity_list: () -> ::Array[Types::FailedEntity]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#associate_personas_to_entities-instance_method
+      def associate_personas_to_entities: (
+                                            id: ::String,
+                                            index_id: ::String,
+                                            personas: Array[
+                                              {
+                                                entity_id: ::String,
+                                                persona: ("OWNER" | "VIEWER")
+                                              },
+                                            ]
+                                          ) -> _AssociatePersonasToEntitiesResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociatePersonasToEntitiesResponseSuccess
+
+      interface _BatchDeleteDocumentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteDocumentResponse]
+        def failed_documents: () -> ::Array[Types::BatchDeleteDocumentResponseFailedDocument]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#batch_delete_document-instance_method
+      def batch_delete_document: (
+                                   index_id: ::String,
+                                   document_id_list: Array[::String],
+                                   ?data_source_sync_job_metric_target: {
+                                     data_source_id: ::String,
+                                     data_source_sync_job_id: ::String?
+                                   }
+                                 ) -> _BatchDeleteDocumentResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteDocumentResponseSuccess
+
+      interface _BatchDeleteFeaturedResultsSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteFeaturedResultsSetResponse]
+        def errors: () -> ::Array[Types::BatchDeleteFeaturedResultsSetError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#batch_delete_featured_results_set-instance_method
+      def batch_delete_featured_results_set: (
+                                               index_id: ::String,
+                                               featured_results_set_ids: Array[::String]
+                                             ) -> _BatchDeleteFeaturedResultsSetResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteFeaturedResultsSetResponseSuccess
+
+      interface _BatchGetDocumentStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetDocumentStatusResponse]
+        def errors: () -> ::Array[Types::BatchGetDocumentStatusResponseError]
+        def document_status_list: () -> ::Array[Types::Status]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#batch_get_document_status-instance_method
+      def batch_get_document_status: (
+                                       index_id: ::String,
+                                       document_info_list: Array[
+                                         {
+                                           document_id: ::String,
+                                           attributes: Array[
+                                             {
+                                               key: ::String,
+                                               value: {
+                                                 string_value: ::String?,
+                                                 string_list_value: Array[::String]?,
+                                                 long_value: ::Integer?,
+                                                 date_value: ::Time?
+                                               }
+                                             },
+                                           ]?
+                                         },
+                                       ]
+                                     ) -> _BatchGetDocumentStatusResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetDocumentStatusResponseSuccess
+
+      interface _BatchPutDocumentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchPutDocumentResponse]
+        def failed_documents: () -> ::Array[Types::BatchPutDocumentResponseFailedDocument]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#batch_put_document-instance_method
+      def batch_put_document: (
+                                index_id: ::String,
+                                ?role_arn: ::String,
+                                documents: Array[
+                                  {
+                                    id: ::String,
+                                    title: ::String?,
+                                    blob: ::String?,
+                                    s3_path: {
+                                      bucket: ::String,
+                                      key: ::String
+                                    }?,
+                                    attributes: Array[
+                                      {
+                                        key: ::String,
+                                        value: {
+                                          string_value: ::String?,
+                                          string_list_value: Array[::String]?,
+                                          long_value: ::Integer?,
+                                          date_value: ::Time?
+                                        }
+                                      },
+                                    ]?,
+                                    access_control_list: Array[
+                                      {
+                                        name: ::String,
+                                        type: ("USER" | "GROUP"),
+                                        access: ("ALLOW" | "DENY"),
+                                        data_source_id: ::String?
+                                      },
+                                    ]?,
+                                    hierarchical_access_control_list: Array[
+                                      {
+                                        principal_list: Array[
+                                          {
+                                            name: ::String,
+                                            type: ("USER" | "GROUP"),
+                                            access: ("ALLOW" | "DENY"),
+                                            data_source_id: ::String?
+                                          },
+                                        ]
+                                      },
+                                    ]?,
+                                    content_type: ("PDF" | "HTML" | "MS_WORD" | "PLAIN_TEXT" | "PPT" | "RTF" | "XML" | "XSLT" | "MS_EXCEL" | "CSV" | "JSON" | "MD")?,
+                                    access_control_configuration_id: ::String?
+                                  },
+                                ],
+                                ?custom_document_enrichment_configuration: {
+                                  inline_configurations: Array[
+                                    {
+                                      condition: {
+                                        condition_document_attribute_key: ::String,
+                                        operator: ("GreaterThan" | "GreaterThanOrEquals" | "LessThan" | "LessThanOrEquals" | "Equals" | "NotEquals" | "Contains" | "NotContains" | "Exists" | "NotExists" | "BeginsWith"),
+                                        condition_on_value: {
+                                          string_value: ::String?,
+                                          string_list_value: Array[::String]?,
+                                          long_value: ::Integer?,
+                                          date_value: ::Time?
+                                        }?
+                                      }?,
+                                      target: {
+                                        target_document_attribute_key: ::String?,
+                                        target_document_attribute_value_deletion: bool?,
+                                        target_document_attribute_value: {
+                                          string_value: ::String?,
+                                          string_list_value: Array[::String]?,
+                                          long_value: ::Integer?,
+                                          date_value: ::Time?
+                                        }?
+                                      }?,
+                                      document_content_deletion: bool?
+                                    },
+                                  ]?,
+                                  pre_extraction_hook_configuration: {
+                                    invocation_condition: {
+                                      condition_document_attribute_key: ::String,
+                                      operator: ("GreaterThan" | "GreaterThanOrEquals" | "LessThan" | "LessThanOrEquals" | "Equals" | "NotEquals" | "Contains" | "NotContains" | "Exists" | "NotExists" | "BeginsWith"),
+                                      condition_on_value: {
+                                        string_value: ::String?,
+                                        string_list_value: Array[::String]?,
+                                        long_value: ::Integer?,
+                                        date_value: ::Time?
+                                      }?
+                                    }?,
+                                    lambda_arn: ::String,
+                                    s3_bucket: ::String
+                                  }?,
+                                  post_extraction_hook_configuration: {
+                                    invocation_condition: {
+                                      condition_document_attribute_key: ::String,
+                                      operator: ("GreaterThan" | "GreaterThanOrEquals" | "LessThan" | "LessThanOrEquals" | "Equals" | "NotEquals" | "Contains" | "NotContains" | "Exists" | "NotExists" | "BeginsWith"),
+                                      condition_on_value: {
+                                        string_value: ::String?,
+                                        string_list_value: Array[::String]?,
+                                        long_value: ::Integer?,
+                                        date_value: ::Time?
+                                      }?
+                                    }?,
+                                    lambda_arn: ::String,
+                                    s3_bucket: ::String
+                                  }?,
+                                  role_arn: ::String?
+                                }
+                              ) -> _BatchPutDocumentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchPutDocumentResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#clear_query_suggestions-instance_method
+      def clear_query_suggestions: (
+                                     index_id: ::String
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _CreateAccessControlConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccessControlConfigurationResponse]
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#create_access_control_configuration-instance_method
+      def create_access_control_configuration: (
+                                                 index_id: ::String,
+                                                 name: ::String,
+                                                 ?description: ::String,
+                                                 ?access_control_list: Array[
+                                                   {
+                                                     name: ::String,
+                                                     type: ("USER" | "GROUP"),
+                                                     access: ("ALLOW" | "DENY"),
+                                                     data_source_id: ::String?
+                                                   },
+                                                 ],
+                                                 ?hierarchical_access_control_list: Array[
+                                                   {
+                                                     principal_list: Array[
+                                                       {
+                                                         name: ::String,
+                                                         type: ("USER" | "GROUP"),
+                                                         access: ("ALLOW" | "DENY"),
+                                                         data_source_id: ::String?
+                                                       },
+                                                     ]
+                                                   },
+                                                 ],
+                                                 ?client_token: ::String
+                                               ) -> _CreateAccessControlConfigurationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccessControlConfigurationResponseSuccess
+
+      interface _CreateDataSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataSourceResponse]
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#create_data_source-instance_method
+      def create_data_source: (
+                                name: ::String,
+                                index_id: ::String,
+                                type: ("S3" | "SHAREPOINT" | "DATABASE" | "SALESFORCE" | "ONEDRIVE" | "SERVICENOW" | "CUSTOM" | "CONFLUENCE" | "GOOGLEDRIVE" | "WEBCRAWLER" | "WORKDOCS" | "FSX" | "SLACK" | "BOX" | "QUIP" | "JIRA" | "GITHUB" | "ALFRESCO" | "TEMPLATE"),
+                                ?configuration: {
+                                  s3_configuration: {
+                                    bucket_name: ::String,
+                                    inclusion_prefixes: Array[::String]?,
+                                    inclusion_patterns: Array[::String]?,
+                                    exclusion_patterns: Array[::String]?,
+                                    documents_metadata_configuration: {
+                                      s3_prefix: ::String?
+                                    }?,
+                                    access_control_list_configuration: {
+                                      key_path: ::String?
+                                    }?
+                                  }?,
+                                  share_point_configuration: {
+                                    share_point_version: ("SHAREPOINT_2013" | "SHAREPOINT_2016" | "SHAREPOINT_ONLINE" | "SHAREPOINT_2019"),
+                                    urls: Array[::String],
+                                    secret_arn: ::String,
+                                    crawl_attachments: bool?,
+                                    use_change_log: bool?,
+                                    inclusion_patterns: Array[::String]?,
+                                    exclusion_patterns: Array[::String]?,
+                                    vpc_configuration: {
+                                      subnet_ids: Array[::String],
+                                      security_group_ids: Array[::String]
+                                    }?,
+                                    field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    document_title_field_name: ::String?,
+                                    disable_local_groups: bool?,
+                                    ssl_certificate_s3_path: {
+                                      bucket: ::String,
+                                      key: ::String
+                                    }?,
+                                    authentication_type: ("HTTP_BASIC" | "OAUTH2")?,
+                                    proxy_configuration: {
+                                      host: ::String,
+                                      port: ::Integer,
+                                      credentials: ::String?
+                                    }?
+                                  }?,
+                                  database_configuration: {
+                                    database_engine_type: ("RDS_AURORA_MYSQL" | "RDS_AURORA_POSTGRESQL" | "RDS_MYSQL" | "RDS_POSTGRESQL"),
+                                    connection_configuration: {
+                                      database_host: ::String,
+                                      database_port: ::Integer,
+                                      database_name: ::String,
+                                      table_name: ::String,
+                                      secret_arn: ::String
+                                    },
+                                    vpc_configuration: {
+                                      subnet_ids: Array[::String],
+                                      security_group_ids: Array[::String]
+                                    }?,
+                                    column_configuration: {
+                                      document_id_column_name: ::String,
+                                      document_data_column_name: ::String,
+                                      document_title_column_name: ::String?,
+                                      field_mappings: Array[
+                                        {
+                                          data_source_field_name: ::String,
+                                          date_field_format: ::String?,
+                                          index_field_name: ::String
+                                        },
+                                      ]?,
+                                      change_detecting_columns: Array[::String]
+                                    },
+                                    acl_configuration: {
+                                      allowed_groups_column_name: ::String
+                                    }?,
+                                    sql_configuration: {
+                                      query_identifiers_enclosing_option: ("DOUBLE_QUOTES" | "NONE")?
+                                    }?
+                                  }?,
+                                  salesforce_configuration: {
+                                    server_url: ::String,
+                                    secret_arn: ::String,
+                                    standard_object_configurations: Array[
+                                      {
+                                        name: ("ACCOUNT" | "CAMPAIGN" | "CASE" | "CONTACT" | "CONTRACT" | "DOCUMENT" | "GROUP" | "IDEA" | "LEAD" | "OPPORTUNITY" | "PARTNER" | "PRICEBOOK" | "PRODUCT" | "PROFILE" | "SOLUTION" | "TASK" | "USER"),
+                                        document_data_field_name: ::String,
+                                        document_title_field_name: ::String?,
+                                        field_mappings: Array[
+                                          {
+                                            data_source_field_name: ::String,
+                                            date_field_format: ::String?,
+                                            index_field_name: ::String
+                                          },
+                                        ]?
+                                      },
+                                    ]?,
+                                    knowledge_article_configuration: {
+                                      included_states: Array[("DRAFT" | "PUBLISHED" | "ARCHIVED")],
+                                      standard_knowledge_article_type_configuration: {
+                                        document_data_field_name: ::String,
+                                        document_title_field_name: ::String?,
+                                        field_mappings: Array[
+                                          {
+                                            data_source_field_name: ::String,
+                                            date_field_format: ::String?,
+                                            index_field_name: ::String
+                                          },
+                                        ]?
+                                      }?,
+                                      custom_knowledge_article_type_configurations: Array[
+                                        {
+                                          name: ::String,
+                                          document_data_field_name: ::String,
+                                          document_title_field_name: ::String?,
+                                          field_mappings: Array[
+                                            {
+                                              data_source_field_name: ::String,
+                                              date_field_format: ::String?,
+                                              index_field_name: ::String
+                                            },
+                                          ]?
+                                        },
+                                      ]?
+                                    }?,
+                                    chatter_feed_configuration: {
+                                      document_data_field_name: ::String,
+                                      document_title_field_name: ::String?,
+                                      field_mappings: Array[
+                                        {
+                                          data_source_field_name: ::String,
+                                          date_field_format: ::String?,
+                                          index_field_name: ::String
+                                        },
+                                      ]?,
+                                      include_filter_types: Array[("ACTIVE_USER" | "STANDARD_USER")]?
+                                    }?,
+                                    crawl_attachments: bool?,
+                                    standard_object_attachment_configuration: {
+                                      document_title_field_name: ::String?,
+                                      field_mappings: Array[
+                                        {
+                                          data_source_field_name: ::String,
+                                          date_field_format: ::String?,
+                                          index_field_name: ::String
+                                        },
+                                      ]?
+                                    }?,
+                                    include_attachment_file_patterns: Array[::String]?,
+                                    exclude_attachment_file_patterns: Array[::String]?
+                                  }?,
+                                  one_drive_configuration: {
+                                    tenant_domain: ::String,
+                                    secret_arn: ::String,
+                                    one_drive_users: {
+                                      one_drive_user_list: Array[::String]?,
+                                      one_drive_user_s3_path: {
+                                        bucket: ::String,
+                                        key: ::String
+                                      }?
+                                    },
+                                    inclusion_patterns: Array[::String]?,
+                                    exclusion_patterns: Array[::String]?,
+                                    field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    disable_local_groups: bool?
+                                  }?,
+                                  service_now_configuration: {
+                                    host_url: ::String,
+                                    secret_arn: ::String,
+                                    service_now_build_version: ("LONDON" | "OTHERS"),
+                                    knowledge_article_configuration: {
+                                      crawl_attachments: bool?,
+                                      include_attachment_file_patterns: Array[::String]?,
+                                      exclude_attachment_file_patterns: Array[::String]?,
+                                      document_data_field_name: ::String,
+                                      document_title_field_name: ::String?,
+                                      field_mappings: Array[
+                                        {
+                                          data_source_field_name: ::String,
+                                          date_field_format: ::String?,
+                                          index_field_name: ::String
+                                        },
+                                      ]?,
+                                      filter_query: ::String?
+                                    }?,
+                                    service_catalog_configuration: {
+                                      crawl_attachments: bool?,
+                                      include_attachment_file_patterns: Array[::String]?,
+                                      exclude_attachment_file_patterns: Array[::String]?,
+                                      document_data_field_name: ::String,
+                                      document_title_field_name: ::String?,
+                                      field_mappings: Array[
+                                        {
+                                          data_source_field_name: ::String,
+                                          date_field_format: ::String?,
+                                          index_field_name: ::String
+                                        },
+                                      ]?
+                                    }?,
+                                    authentication_type: ("HTTP_BASIC" | "OAUTH2")?
+                                  }?,
+                                  confluence_configuration: {
+                                    server_url: ::String,
+                                    secret_arn: ::String,
+                                    version: ("CLOUD" | "SERVER"),
+                                    space_configuration: {
+                                      crawl_personal_spaces: bool?,
+                                      crawl_archived_spaces: bool?,
+                                      include_spaces: Array[::String]?,
+                                      exclude_spaces: Array[::String]?,
+                                      space_field_mappings: Array[
+                                        {
+                                          data_source_field_name: ("DISPLAY_URL" | "ITEM_TYPE" | "SPACE_KEY" | "URL")?,
+                                          date_field_format: ::String?,
+                                          index_field_name: ::String?
+                                        },
+                                      ]?
+                                    }?,
+                                    page_configuration: {
+                                      page_field_mappings: Array[
+                                        {
+                                          data_source_field_name: ("AUTHOR" | "CONTENT_STATUS" | "CREATED_DATE" | "DISPLAY_URL" | "ITEM_TYPE" | "LABELS" | "MODIFIED_DATE" | "PARENT_ID" | "SPACE_KEY" | "SPACE_NAME" | "URL" | "VERSION")?,
+                                          date_field_format: ::String?,
+                                          index_field_name: ::String?
+                                        },
+                                      ]?
+                                    }?,
+                                    blog_configuration: {
+                                      blog_field_mappings: Array[
+                                        {
+                                          data_source_field_name: ("AUTHOR" | "DISPLAY_URL" | "ITEM_TYPE" | "LABELS" | "PUBLISH_DATE" | "SPACE_KEY" | "SPACE_NAME" | "URL" | "VERSION")?,
+                                          date_field_format: ::String?,
+                                          index_field_name: ::String?
+                                        },
+                                      ]?
+                                    }?,
+                                    attachment_configuration: {
+                                      crawl_attachments: bool?,
+                                      attachment_field_mappings: Array[
+                                        {
+                                          data_source_field_name: ("AUTHOR" | "CONTENT_TYPE" | "CREATED_DATE" | "DISPLAY_URL" | "FILE_SIZE" | "ITEM_TYPE" | "PARENT_ID" | "SPACE_KEY" | "SPACE_NAME" | "URL" | "VERSION")?,
+                                          date_field_format: ::String?,
+                                          index_field_name: ::String?
+                                        },
+                                      ]?
+                                    }?,
+                                    vpc_configuration: {
+                                      subnet_ids: Array[::String],
+                                      security_group_ids: Array[::String]
+                                    }?,
+                                    inclusion_patterns: Array[::String]?,
+                                    exclusion_patterns: Array[::String]?,
+                                    proxy_configuration: {
+                                      host: ::String,
+                                      port: ::Integer,
+                                      credentials: ::String?
+                                    }?,
+                                    authentication_type: ("HTTP_BASIC" | "PAT")?
+                                  }?,
+                                  google_drive_configuration: {
+                                    secret_arn: ::String,
+                                    inclusion_patterns: Array[::String]?,
+                                    exclusion_patterns: Array[::String]?,
+                                    field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    exclude_mime_types: Array[::String]?,
+                                    exclude_user_accounts: Array[::String]?,
+                                    exclude_shared_drives: Array[::String]?
+                                  }?,
+                                  web_crawler_configuration: {
+                                    urls: {
+                                      seed_url_configuration: {
+                                        seed_urls: Array[::String],
+                                        web_crawler_mode: ("HOST_ONLY" | "SUBDOMAINS" | "EVERYTHING")?
+                                      }?,
+                                      site_maps_configuration: {
+                                        site_maps: Array[::String]
+                                      }?
+                                    },
+                                    crawl_depth: ::Integer?,
+                                    max_links_per_page: ::Integer?,
+                                    max_content_size_per_page_in_mega_bytes: ::Float?,
+                                    max_urls_per_minute_crawl_rate: ::Integer?,
+                                    url_inclusion_patterns: Array[::String]?,
+                                    url_exclusion_patterns: Array[::String]?,
+                                    proxy_configuration: {
+                                      host: ::String,
+                                      port: ::Integer,
+                                      credentials: ::String?
+                                    }?,
+                                    authentication_configuration: {
+                                      basic_authentication: Array[
+                                        {
+                                          host: ::String,
+                                          port: ::Integer,
+                                          credentials: ::String
+                                        },
+                                      ]?
+                                    }?
+                                  }?,
+                                  work_docs_configuration: {
+                                    organization_id: ::String,
+                                    crawl_comments: bool?,
+                                    use_change_log: bool?,
+                                    inclusion_patterns: Array[::String]?,
+                                    exclusion_patterns: Array[::String]?,
+                                    field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?
+                                  }?,
+                                  fsx_configuration: {
+                                    file_system_id: ::String,
+                                    file_system_type: ("WINDOWS"),
+                                    vpc_configuration: {
+                                      subnet_ids: Array[::String],
+                                      security_group_ids: Array[::String]
+                                    },
+                                    secret_arn: ::String?,
+                                    inclusion_patterns: Array[::String]?,
+                                    exclusion_patterns: Array[::String]?,
+                                    field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?
+                                  }?,
+                                  slack_configuration: {
+                                    team_id: ::String,
+                                    secret_arn: ::String,
+                                    vpc_configuration: {
+                                      subnet_ids: Array[::String],
+                                      security_group_ids: Array[::String]
+                                    }?,
+                                    slack_entity_list: Array[("PUBLIC_CHANNEL" | "PRIVATE_CHANNEL" | "GROUP_MESSAGE" | "DIRECT_MESSAGE")],
+                                    use_change_log: bool?,
+                                    crawl_bot_message: bool?,
+                                    exclude_archived: bool?,
+                                    since_crawl_date: ::String,
+                                    look_back_period: ::Integer?,
+                                    private_channel_filter: Array[::String]?,
+                                    public_channel_filter: Array[::String]?,
+                                    inclusion_patterns: Array[::String]?,
+                                    exclusion_patterns: Array[::String]?,
+                                    field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?
+                                  }?,
+                                  box_configuration: {
+                                    enterprise_id: ::String,
+                                    secret_arn: ::String,
+                                    use_change_log: bool?,
+                                    crawl_comments: bool?,
+                                    crawl_tasks: bool?,
+                                    crawl_web_links: bool?,
+                                    file_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    task_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    comment_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    web_link_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    inclusion_patterns: Array[::String]?,
+                                    exclusion_patterns: Array[::String]?,
+                                    vpc_configuration: {
+                                      subnet_ids: Array[::String],
+                                      security_group_ids: Array[::String]
+                                    }?
+                                  }?,
+                                  quip_configuration: {
+                                    domain: ::String,
+                                    secret_arn: ::String,
+                                    crawl_file_comments: bool?,
+                                    crawl_chat_rooms: bool?,
+                                    crawl_attachments: bool?,
+                                    folder_ids: Array[::String]?,
+                                    thread_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    message_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    attachment_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    inclusion_patterns: Array[::String]?,
+                                    exclusion_patterns: Array[::String]?,
+                                    vpc_configuration: {
+                                      subnet_ids: Array[::String],
+                                      security_group_ids: Array[::String]
+                                    }?
+                                  }?,
+                                  jira_configuration: {
+                                    jira_account_url: ::String,
+                                    secret_arn: ::String,
+                                    use_change_log: bool?,
+                                    project: Array[::String]?,
+                                    issue_type: Array[::String]?,
+                                    status: Array[::String]?,
+                                    issue_sub_entity_filter: Array[("COMMENTS" | "ATTACHMENTS" | "WORKLOGS")]?,
+                                    attachment_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    comment_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    issue_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    project_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    work_log_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    inclusion_patterns: Array[::String]?,
+                                    exclusion_patterns: Array[::String]?,
+                                    vpc_configuration: {
+                                      subnet_ids: Array[::String],
+                                      security_group_ids: Array[::String]
+                                    }?
+                                  }?,
+                                  git_hub_configuration: {
+                                    saa_s_configuration: {
+                                      organization_name: ::String,
+                                      host_url: ::String
+                                    }?,
+                                    on_premise_configuration: {
+                                      host_url: ::String,
+                                      organization_name: ::String,
+                                      ssl_certificate_s3_path: {
+                                        bucket: ::String,
+                                        key: ::String
+                                      }
+                                    }?,
+                                    type: ("SAAS" | "ON_PREMISE")?,
+                                    secret_arn: ::String,
+                                    use_change_log: bool?,
+                                    git_hub_document_crawl_properties: {
+                                      crawl_repository_documents: bool?,
+                                      crawl_issue: bool?,
+                                      crawl_issue_comment: bool?,
+                                      crawl_issue_comment_attachment: bool?,
+                                      crawl_pull_request: bool?,
+                                      crawl_pull_request_comment: bool?,
+                                      crawl_pull_request_comment_attachment: bool?
+                                    }?,
+                                    repository_filter: Array[::String]?,
+                                    inclusion_folder_name_patterns: Array[::String]?,
+                                    inclusion_file_type_patterns: Array[::String]?,
+                                    inclusion_file_name_patterns: Array[::String]?,
+                                    exclusion_folder_name_patterns: Array[::String]?,
+                                    exclusion_file_type_patterns: Array[::String]?,
+                                    exclusion_file_name_patterns: Array[::String]?,
+                                    vpc_configuration: {
+                                      subnet_ids: Array[::String],
+                                      security_group_ids: Array[::String]
+                                    }?,
+                                    git_hub_repository_configuration_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    git_hub_commit_configuration_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    git_hub_issue_document_configuration_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    git_hub_issue_comment_configuration_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    git_hub_issue_attachment_configuration_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    git_hub_pull_request_comment_configuration_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    git_hub_pull_request_document_configuration_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    git_hub_pull_request_document_attachment_configuration_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?
+                                  }?,
+                                  alfresco_configuration: {
+                                    site_url: ::String,
+                                    site_id: ::String,
+                                    secret_arn: ::String,
+                                    ssl_certificate_s3_path: {
+                                      bucket: ::String,
+                                      key: ::String
+                                    },
+                                    crawl_system_folders: bool?,
+                                    crawl_comments: bool?,
+                                    entity_filter: Array[("wiki" | "blog" | "documentLibrary")]?,
+                                    document_library_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    blog_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    wiki_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    inclusion_patterns: Array[::String]?,
+                                    exclusion_patterns: Array[::String]?,
+                                    vpc_configuration: {
+                                      subnet_ids: Array[::String],
+                                      security_group_ids: Array[::String]
+                                    }?
+                                  }?,
+                                  template_configuration: {
+                                    template: {
+                                    }?
+                                  }?
+                                },
+                                ?vpc_configuration: {
+                                  subnet_ids: Array[::String],
+                                  security_group_ids: Array[::String]
+                                },
+                                ?description: ::String,
+                                ?schedule: ::String,
+                                ?role_arn: ::String,
+                                ?tags: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String
+                                  },
+                                ],
+                                ?client_token: ::String,
+                                ?language_code: ::String,
+                                ?custom_document_enrichment_configuration: {
+                                  inline_configurations: Array[
+                                    {
+                                      condition: {
+                                        condition_document_attribute_key: ::String,
+                                        operator: ("GreaterThan" | "GreaterThanOrEquals" | "LessThan" | "LessThanOrEquals" | "Equals" | "NotEquals" | "Contains" | "NotContains" | "Exists" | "NotExists" | "BeginsWith"),
+                                        condition_on_value: {
+                                          string_value: ::String?,
+                                          string_list_value: Array[::String]?,
+                                          long_value: ::Integer?,
+                                          date_value: ::Time?
+                                        }?
+                                      }?,
+                                      target: {
+                                        target_document_attribute_key: ::String?,
+                                        target_document_attribute_value_deletion: bool?,
+                                        target_document_attribute_value: {
+                                          string_value: ::String?,
+                                          string_list_value: Array[::String]?,
+                                          long_value: ::Integer?,
+                                          date_value: ::Time?
+                                        }?
+                                      }?,
+                                      document_content_deletion: bool?
+                                    },
+                                  ]?,
+                                  pre_extraction_hook_configuration: {
+                                    invocation_condition: {
+                                      condition_document_attribute_key: ::String,
+                                      operator: ("GreaterThan" | "GreaterThanOrEquals" | "LessThan" | "LessThanOrEquals" | "Equals" | "NotEquals" | "Contains" | "NotContains" | "Exists" | "NotExists" | "BeginsWith"),
+                                      condition_on_value: {
+                                        string_value: ::String?,
+                                        string_list_value: Array[::String]?,
+                                        long_value: ::Integer?,
+                                        date_value: ::Time?
+                                      }?
+                                    }?,
+                                    lambda_arn: ::String,
+                                    s3_bucket: ::String
+                                  }?,
+                                  post_extraction_hook_configuration: {
+                                    invocation_condition: {
+                                      condition_document_attribute_key: ::String,
+                                      operator: ("GreaterThan" | "GreaterThanOrEquals" | "LessThan" | "LessThanOrEquals" | "Equals" | "NotEquals" | "Contains" | "NotContains" | "Exists" | "NotExists" | "BeginsWith"),
+                                      condition_on_value: {
+                                        string_value: ::String?,
+                                        string_list_value: Array[::String]?,
+                                        long_value: ::Integer?,
+                                        date_value: ::Time?
+                                      }?
+                                    }?,
+                                    lambda_arn: ::String,
+                                    s3_bucket: ::String
+                                  }?,
+                                  role_arn: ::String?
+                                }
+                              ) -> _CreateDataSourceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataSourceResponseSuccess
+
+      interface _CreateExperienceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateExperienceResponse]
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#create_experience-instance_method
+      def create_experience: (
+                               name: ::String,
+                               index_id: ::String,
+                               ?role_arn: ::String,
+                               ?configuration: {
+                                 content_source_configuration: {
+                                   data_source_ids: Array[::String]?,
+                                   faq_ids: Array[::String]?,
+                                   direct_put_content: bool?
+                                 }?,
+                                 user_identity_configuration: {
+                                   identity_attribute_name: ::String?
+                                 }?
+                               },
+                               ?description: ::String,
+                               ?client_token: ::String
+                             ) -> _CreateExperienceResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateExperienceResponseSuccess
+
+      interface _CreateFaqResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFaqResponse]
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#create_faq-instance_method
+      def create_faq: (
+                        index_id: ::String,
+                        name: ::String,
+                        ?description: ::String,
+                        s3_path: {
+                          bucket: ::String,
+                          key: ::String
+                        },
+                        role_arn: ::String,
+                        ?tags: Array[
+                          {
+                            key: ::String,
+                            value: ::String
+                          },
+                        ],
+                        ?file_format: ("CSV" | "CSV_WITH_HEADER" | "JSON"),
+                        ?client_token: ::String,
+                        ?language_code: ::String
+                      ) -> _CreateFaqResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFaqResponseSuccess
+
+      interface _CreateFeaturedResultsSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFeaturedResultsSetResponse]
+        def featured_results_set: () -> Types::FeaturedResultsSet
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#create_featured_results_set-instance_method
+      def create_featured_results_set: (
+                                         index_id: ::String,
+                                         featured_results_set_name: ::String,
+                                         ?description: ::String,
+                                         ?client_token: ::String,
+                                         ?status: ("ACTIVE" | "INACTIVE"),
+                                         ?query_texts: Array[::String],
+                                         ?featured_documents: Array[
+                                           {
+                                             id: ::String?
+                                           },
+                                         ],
+                                         ?tags: Array[
+                                           {
+                                             key: ::String,
+                                             value: ::String
+                                           },
+                                         ]
+                                       ) -> _CreateFeaturedResultsSetResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFeaturedResultsSetResponseSuccess
+
+      interface _CreateIndexResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateIndexResponse]
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#create_index-instance_method
+      def create_index: (
+                          name: ::String,
+                          ?edition: ("DEVELOPER_EDITION" | "ENTERPRISE_EDITION"),
+                          role_arn: ::String,
+                          ?server_side_encryption_configuration: {
+                            kms_key_id: ::String?
+                          },
+                          ?description: ::String,
+                          ?client_token: ::String,
+                          ?tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ],
+                          ?user_token_configurations: Array[
+                            {
+                              jwt_token_type_configuration: {
+                                key_location: ("URL" | "SECRET_MANAGER"),
+                                url: ::String?,
+                                secret_manager_arn: ::String?,
+                                user_name_attribute_field: ::String?,
+                                group_attribute_field: ::String?,
+                                issuer: ::String?,
+                                claim_regex: ::String?
+                              }?,
+                              json_token_type_configuration: {
+                                user_name_attribute_field: ::String,
+                                group_attribute_field: ::String
+                              }?
+                            },
+                          ],
+                          ?user_context_policy: ("ATTRIBUTE_FILTER" | "USER_TOKEN"),
+                          ?user_group_resolution_configuration: {
+                            user_group_resolution_mode: ("AWS_SSO" | "NONE")
+                          }
+                        ) -> _CreateIndexResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIndexResponseSuccess
+
+      interface _CreateQuerySuggestionsBlockListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateQuerySuggestionsBlockListResponse]
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#create_query_suggestions_block_list-instance_method
+      def create_query_suggestions_block_list: (
+                                                 index_id: ::String,
+                                                 name: ::String,
+                                                 ?description: ::String,
+                                                 source_s3_path: {
+                                                   bucket: ::String,
+                                                   key: ::String
+                                                 },
+                                                 ?client_token: ::String,
+                                                 role_arn: ::String,
+                                                 ?tags: Array[
+                                                   {
+                                                     key: ::String,
+                                                     value: ::String
+                                                   },
+                                                 ]
+                                               ) -> _CreateQuerySuggestionsBlockListResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateQuerySuggestionsBlockListResponseSuccess
+
+      interface _CreateThesaurusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateThesaurusResponse]
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#create_thesaurus-instance_method
+      def create_thesaurus: (
+                              index_id: ::String,
+                              name: ::String,
+                              ?description: ::String,
+                              role_arn: ::String,
+                              ?tags: Array[
+                                {
+                                  key: ::String,
+                                  value: ::String
+                                },
+                              ],
+                              source_s3_path: {
+                                bucket: ::String,
+                                key: ::String
+                              },
+                              ?client_token: ::String
+                            ) -> _CreateThesaurusResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateThesaurusResponseSuccess
+
+      interface _DeleteAccessControlConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAccessControlConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#delete_access_control_configuration-instance_method
+      def delete_access_control_configuration: (
+                                                 index_id: ::String,
+                                                 id: ::String
+                                               ) -> _DeleteAccessControlConfigurationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAccessControlConfigurationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#delete_data_source-instance_method
+      def delete_data_source: (
+                                id: ::String,
+                                index_id: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteExperienceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteExperienceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#delete_experience-instance_method
+      def delete_experience: (
+                               id: ::String,
+                               index_id: ::String
+                             ) -> _DeleteExperienceResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteExperienceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#delete_faq-instance_method
+      def delete_faq: (
+                        id: ::String,
+                        index_id: ::String
+                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#delete_index-instance_method
+      def delete_index: (
+                          id: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#delete_principal_mapping-instance_method
+      def delete_principal_mapping: (
+                                      index_id: ::String,
+                                      ?data_source_id: ::String,
+                                      group_id: ::String,
+                                      ?ordering_id: ::Integer
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#delete_query_suggestions_block_list-instance_method
+      def delete_query_suggestions_block_list: (
+                                                 index_id: ::String,
+                                                 id: ::String
+                                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#delete_thesaurus-instance_method
+      def delete_thesaurus: (
+                              id: ::String,
+                              index_id: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeAccessControlConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAccessControlConfigurationResponse]
+        def name: () -> ::String
+        def description: () -> ::String
+        def error_message: () -> ::String
+        def access_control_list: () -> ::Array[Types::Principal]
+        def hierarchical_access_control_list: () -> ::Array[Types::HierarchicalPrincipal]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#describe_access_control_configuration-instance_method
+      def describe_access_control_configuration: (
+                                                   index_id: ::String,
+                                                   id: ::String
+                                                 ) -> _DescribeAccessControlConfigurationResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccessControlConfigurationResponseSuccess
+
+      interface _DescribeDataSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDataSourceResponse]
+        def id: () -> ::String
+        def index_id: () -> ::String
+        def name: () -> ::String
+        def type: () -> ("S3" | "SHAREPOINT" | "DATABASE" | "SALESFORCE" | "ONEDRIVE" | "SERVICENOW" | "CUSTOM" | "CONFLUENCE" | "GOOGLEDRIVE" | "WEBCRAWLER" | "WORKDOCS" | "FSX" | "SLACK" | "BOX" | "QUIP" | "JIRA" | "GITHUB" | "ALFRESCO" | "TEMPLATE")
+        def configuration: () -> Types::DataSourceConfiguration
+        def vpc_configuration: () -> Types::DataSourceVpcConfiguration
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def description: () -> ::String
+        def status: () -> ("CREATING" | "DELETING" | "FAILED" | "UPDATING" | "ACTIVE")
+        def schedule: () -> ::String
+        def role_arn: () -> ::String
+        def error_message: () -> ::String
+        def language_code: () -> ::String
+        def custom_document_enrichment_configuration: () -> Types::CustomDocumentEnrichmentConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#describe_data_source-instance_method
+      def describe_data_source: (
+                                  id: ::String,
+                                  index_id: ::String
+                                ) -> _DescribeDataSourceResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDataSourceResponseSuccess
+
+      interface _DescribeExperienceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeExperienceResponse]
+        def id: () -> ::String
+        def index_id: () -> ::String
+        def name: () -> ::String
+        def endpoints: () -> ::Array[Types::ExperienceEndpoint]
+        def configuration: () -> Types::ExperienceConfiguration
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def description: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
+        def role_arn: () -> ::String
+        def error_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#describe_experience-instance_method
+      def describe_experience: (
+                                 id: ::String,
+                                 index_id: ::String
+                               ) -> _DescribeExperienceResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeExperienceResponseSuccess
+
+      interface _DescribeFaqResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFaqResponse]
+        def id: () -> ::String
+        def index_id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def s3_path: () -> Types::S3Path
+        def status: () -> ("CREATING" | "UPDATING" | "ACTIVE" | "DELETING" | "FAILED")
+        def role_arn: () -> ::String
+        def error_message: () -> ::String
+        def file_format: () -> ("CSV" | "CSV_WITH_HEADER" | "JSON")
+        def language_code: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#describe_faq-instance_method
+      def describe_faq: (
+                          id: ::String,
+                          index_id: ::String
+                        ) -> _DescribeFaqResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFaqResponseSuccess
+
+      interface _DescribeFeaturedResultsSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFeaturedResultsSetResponse]
+        def featured_results_set_id: () -> ::String
+        def featured_results_set_name: () -> ::String
+        def description: () -> ::String
+        def status: () -> ("ACTIVE" | "INACTIVE")
+        def query_texts: () -> ::Array[::String]
+        def featured_documents_with_metadata: () -> ::Array[Types::FeaturedDocumentWithMetadata]
+        def featured_documents_missing: () -> ::Array[Types::FeaturedDocumentMissing]
+        def last_updated_timestamp: () -> ::Integer
+        def creation_timestamp: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#describe_featured_results_set-instance_method
+      def describe_featured_results_set: (
+                                           index_id: ::String,
+                                           featured_results_set_id: ::String
+                                         ) -> _DescribeFeaturedResultsSetResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFeaturedResultsSetResponseSuccess
+
+      interface _DescribeIndexResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeIndexResponse]
+        def name: () -> ::String
+        def id: () -> ::String
+        def edition: () -> ("DEVELOPER_EDITION" | "ENTERPRISE_EDITION")
+        def role_arn: () -> ::String
+        def server_side_encryption_configuration: () -> Types::ServerSideEncryptionConfiguration
+        def status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING" | "SYSTEM_UPDATING")
+        def description: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def document_metadata_configurations: () -> ::Array[Types::DocumentMetadataConfiguration]
+        def index_statistics: () -> Types::IndexStatistics
+        def error_message: () -> ::String
+        def capacity_units: () -> Types::CapacityUnitsConfiguration
+        def user_token_configurations: () -> ::Array[Types::UserTokenConfiguration]
+        def user_context_policy: () -> ("ATTRIBUTE_FILTER" | "USER_TOKEN")
+        def user_group_resolution_configuration: () -> Types::UserGroupResolutionConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#describe_index-instance_method
+      def describe_index: (
+                            id: ::String
+                          ) -> _DescribeIndexResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeIndexResponseSuccess
+
+      interface _DescribePrincipalMappingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePrincipalMappingResponse]
+        def index_id: () -> ::String
+        def data_source_id: () -> ::String
+        def group_id: () -> ::String
+        def group_ordering_id_summaries: () -> ::Array[Types::GroupOrderingIdSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#describe_principal_mapping-instance_method
+      def describe_principal_mapping: (
+                                        index_id: ::String,
+                                        ?data_source_id: ::String,
+                                        group_id: ::String
+                                      ) -> _DescribePrincipalMappingResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePrincipalMappingResponseSuccess
+
+      interface _DescribeQuerySuggestionsBlockListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeQuerySuggestionsBlockListResponse]
+        def index_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def status: () -> ("ACTIVE" | "CREATING" | "DELETING" | "UPDATING" | "ACTIVE_BUT_UPDATE_FAILED" | "FAILED")
+        def error_message: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def source_s3_path: () -> Types::S3Path
+        def item_count: () -> ::Integer
+        def file_size_bytes: () -> ::Integer
+        def role_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#describe_query_suggestions_block_list-instance_method
+      def describe_query_suggestions_block_list: (
+                                                   index_id: ::String,
+                                                   id: ::String
+                                                 ) -> _DescribeQuerySuggestionsBlockListResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeQuerySuggestionsBlockListResponseSuccess
+
+      interface _DescribeQuerySuggestionsConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeQuerySuggestionsConfigResponse]
+        def mode: () -> ("ENABLED" | "LEARN_ONLY")
+        def status: () -> ("ACTIVE" | "UPDATING")
+        def query_log_look_back_window_in_days: () -> ::Integer
+        def include_queries_without_user_information: () -> bool
+        def minimum_number_of_querying_users: () -> ::Integer
+        def minimum_query_count: () -> ::Integer
+        def last_suggestions_build_time: () -> ::Time
+        def last_clear_time: () -> ::Time
+        def total_suggestions_count: () -> ::Integer
+        def attribute_suggestions_config: () -> Types::AttributeSuggestionsDescribeConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#describe_query_suggestions_config-instance_method
+      def describe_query_suggestions_config: (
+                                               index_id: ::String
+                                             ) -> _DescribeQuerySuggestionsConfigResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeQuerySuggestionsConfigResponseSuccess
+
+      interface _DescribeThesaurusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeThesaurusResponse]
+        def id: () -> ::String
+        def index_id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "ACTIVE_BUT_UPDATE_FAILED" | "FAILED")
+        def error_message: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def role_arn: () -> ::String
+        def source_s3_path: () -> Types::S3Path
+        def file_size_bytes: () -> ::Integer
+        def term_count: () -> ::Integer
+        def synonym_rule_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#describe_thesaurus-instance_method
+      def describe_thesaurus: (
+                                id: ::String,
+                                index_id: ::String
+                              ) -> _DescribeThesaurusResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeThesaurusResponseSuccess
+
+      interface _DisassociateEntitiesFromExperienceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateEntitiesFromExperienceResponse]
+        def failed_entity_list: () -> ::Array[Types::FailedEntity]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#disassociate_entities_from_experience-instance_method
+      def disassociate_entities_from_experience: (
+                                                   id: ::String,
+                                                   index_id: ::String,
+                                                   entity_list: Array[
+                                                     {
+                                                       entity_id: ::String,
+                                                       entity_type: ("USER" | "GROUP")
+                                                     },
+                                                   ]
+                                                 ) -> _DisassociateEntitiesFromExperienceResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateEntitiesFromExperienceResponseSuccess
+
+      interface _DisassociatePersonasFromEntitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociatePersonasFromEntitiesResponse]
+        def failed_entity_list: () -> ::Array[Types::FailedEntity]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#disassociate_personas_from_entities-instance_method
+      def disassociate_personas_from_entities: (
+                                                 id: ::String,
+                                                 index_id: ::String,
+                                                 entity_ids: Array[::String]
+                                               ) -> _DisassociatePersonasFromEntitiesResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociatePersonasFromEntitiesResponseSuccess
+
+      interface _GetQuerySuggestionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetQuerySuggestionsResponse]
+        def query_suggestions_id: () -> ::String
+        def suggestions: () -> ::Array[Types::Suggestion]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#get_query_suggestions-instance_method
+      def get_query_suggestions: (
+                                   index_id: ::String,
+                                   query_text: ::String,
+                                   ?max_suggestions_count: ::Integer,
+                                   ?suggestion_types: Array[("QUERY" | "DOCUMENT_ATTRIBUTES")],
+                                   ?attribute_suggestions_config: {
+                                     suggestion_attributes: Array[::String]?,
+                                     additional_response_attributes: Array[::String]?,
+                                     attribute_filter: {
+                                       and_all_filters: Array[
+                                         untyped,
+                                       ]?,
+                                       or_all_filters: Array[
+                                         untyped,
+                                       ]?,
+                                       not_filter: untyped?,
+                                       equals_to: {
+                                         key: ::String,
+                                         value: {
+                                           string_value: ::String?,
+                                           string_list_value: Array[::String]?,
+                                           long_value: ::Integer?,
+                                           date_value: ::Time?
+                                         }
+                                       }?,
+                                       contains_all: {
+                                         key: ::String,
+                                         value: {
+                                           string_value: ::String?,
+                                           string_list_value: Array[::String]?,
+                                           long_value: ::Integer?,
+                                           date_value: ::Time?
+                                         }
+                                       }?,
+                                       contains_any: {
+                                         key: ::String,
+                                         value: {
+                                           string_value: ::String?,
+                                           string_list_value: Array[::String]?,
+                                           long_value: ::Integer?,
+                                           date_value: ::Time?
+                                         }
+                                       }?,
+                                       greater_than: {
+                                         key: ::String,
+                                         value: {
+                                           string_value: ::String?,
+                                           string_list_value: Array[::String]?,
+                                           long_value: ::Integer?,
+                                           date_value: ::Time?
+                                         }
+                                       }?,
+                                       greater_than_or_equals: {
+                                         key: ::String,
+                                         value: {
+                                           string_value: ::String?,
+                                           string_list_value: Array[::String]?,
+                                           long_value: ::Integer?,
+                                           date_value: ::Time?
+                                         }
+                                       }?,
+                                       less_than: {
+                                         key: ::String,
+                                         value: {
+                                           string_value: ::String?,
+                                           string_list_value: Array[::String]?,
+                                           long_value: ::Integer?,
+                                           date_value: ::Time?
+                                         }
+                                       }?,
+                                       less_than_or_equals: {
+                                         key: ::String,
+                                         value: {
+                                           string_value: ::String?,
+                                           string_list_value: Array[::String]?,
+                                           long_value: ::Integer?,
+                                           date_value: ::Time?
+                                         }
+                                       }?
+                                     }?,
+                                     user_context: {
+                                       token: ::String?,
+                                       user_id: ::String?,
+                                       groups: Array[::String]?,
+                                       data_source_groups: Array[
+                                         {
+                                           group_id: ::String,
+                                           data_source_id: ::String
+                                         },
+                                       ]?
+                                     }?
+                                   }
+                                 ) -> _GetQuerySuggestionsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQuerySuggestionsResponseSuccess
+
+      interface _GetSnapshotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSnapshotsResponse]
+        def snap_shot_time_filter: () -> Types::TimeRange
+        def snapshots_data_header: () -> ::Array[::String]
+        def snapshots_data: () -> ::Array[::Array[::String]]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#get_snapshots-instance_method
+      def get_snapshots: (
+                           index_id: ::String,
+                           interval: ("THIS_MONTH" | "THIS_WEEK" | "ONE_WEEK_AGO" | "TWO_WEEKS_AGO" | "ONE_MONTH_AGO" | "TWO_MONTHS_AGO"),
+                           metric_type: ("QUERIES_BY_COUNT" | "QUERIES_BY_ZERO_CLICK_RATE" | "QUERIES_BY_ZERO_RESULT_RATE" | "DOCS_BY_CLICK_COUNT" | "AGG_QUERY_DOC_METRICS" | "TREND_QUERY_DOC_METRICS"),
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _GetSnapshotsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSnapshotsResponseSuccess
+
+      interface _ListAccessControlConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccessControlConfigurationsResponse]
+        def next_token: () -> ::String
+        def access_control_configurations: () -> ::Array[Types::AccessControlConfigurationSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#list_access_control_configurations-instance_method
+      def list_access_control_configurations: (
+                                                index_id: ::String,
+                                                ?next_token: ::String,
+                                                ?max_results: ::Integer
+                                              ) -> _ListAccessControlConfigurationsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccessControlConfigurationsResponseSuccess
+
+      interface _ListDataSourceSyncJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataSourceSyncJobsResponse]
+        def history: () -> ::Array[Types::DataSourceSyncJob]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#list_data_source_sync_jobs-instance_method
+      def list_data_source_sync_jobs: (
+                                        id: ::String,
+                                        index_id: ::String,
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer,
+                                        ?start_time_filter: {
+                                          start_time: ::Time?,
+                                          end_time: ::Time?
+                                        },
+                                        ?status_filter: ("FAILED" | "SUCCEEDED" | "SYNCING" | "INCOMPLETE" | "STOPPING" | "ABORTED" | "SYNCING_INDEXING")
+                                      ) -> _ListDataSourceSyncJobsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataSourceSyncJobsResponseSuccess
+
+      interface _ListDataSourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataSourcesResponse]
+        def summary_items: () -> ::Array[Types::DataSourceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#list_data_sources-instance_method
+      def list_data_sources: (
+                               index_id: ::String,
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
+                             ) -> _ListDataSourcesResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataSourcesResponseSuccess
+
+      interface _ListEntityPersonasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEntityPersonasResponse]
+        def summary_items: () -> ::Array[Types::PersonasSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#list_entity_personas-instance_method
+      def list_entity_personas: (
+                                  id: ::String,
+                                  index_id: ::String,
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListEntityPersonasResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEntityPersonasResponseSuccess
+
+      interface _ListExperienceEntitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListExperienceEntitiesResponse]
+        def summary_items: () -> ::Array[Types::ExperienceEntitiesSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#list_experience_entities-instance_method
+      def list_experience_entities: (
+                                      id: ::String,
+                                      index_id: ::String,
+                                      ?next_token: ::String
+                                    ) -> _ListExperienceEntitiesResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExperienceEntitiesResponseSuccess
+
+      interface _ListExperiencesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListExperiencesResponse]
+        def summary_items: () -> ::Array[Types::ExperiencesSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#list_experiences-instance_method
+      def list_experiences: (
+                              index_id: ::String,
+                              ?next_token: ::String,
+                              ?max_results: ::Integer
+                            ) -> _ListExperiencesResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExperiencesResponseSuccess
+
+      interface _ListFaqsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFaqsResponse]
+        def next_token: () -> ::String
+        def faq_summary_items: () -> ::Array[Types::FaqSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#list_faqs-instance_method
+      def list_faqs: (
+                       index_id: ::String,
+                       ?next_token: ::String,
+                       ?max_results: ::Integer
+                     ) -> _ListFaqsResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFaqsResponseSuccess
+
+      interface _ListFeaturedResultsSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFeaturedResultsSetsResponse]
+        def featured_results_set_summary_items: () -> ::Array[Types::FeaturedResultsSetSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#list_featured_results_sets-instance_method
+      def list_featured_results_sets: (
+                                        index_id: ::String,
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer
+                                      ) -> _ListFeaturedResultsSetsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFeaturedResultsSetsResponseSuccess
+
+      interface _ListGroupsOlderThanOrderingIdResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGroupsOlderThanOrderingIdResponse]
+        def groups_summaries: () -> ::Array[Types::GroupSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#list_groups_older_than_ordering_id-instance_method
+      def list_groups_older_than_ordering_id: (
+                                                index_id: ::String,
+                                                ?data_source_id: ::String,
+                                                ordering_id: ::Integer,
+                                                ?next_token: ::String,
+                                                ?max_results: ::Integer
+                                              ) -> _ListGroupsOlderThanOrderingIdResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGroupsOlderThanOrderingIdResponseSuccess
+
+      interface _ListIndicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIndicesResponse]
+        def index_configuration_summary_items: () -> ::Array[Types::IndexConfigurationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#list_indices-instance_method
+      def list_indices: (
+                          ?next_token: ::String,
+                          ?max_results: ::Integer
+                        ) -> _ListIndicesResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIndicesResponseSuccess
+
+      interface _ListQuerySuggestionsBlockListsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListQuerySuggestionsBlockListsResponse]
+        def block_list_summary_items: () -> ::Array[Types::QuerySuggestionsBlockListSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#list_query_suggestions_block_lists-instance_method
+      def list_query_suggestions_block_lists: (
+                                                index_id: ::String,
+                                                ?next_token: ::String,
+                                                ?max_results: ::Integer
+                                              ) -> _ListQuerySuggestionsBlockListsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListQuerySuggestionsBlockListsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListThesauriResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListThesauriResponse]
+        def next_token: () -> ::String
+        def thesaurus_summary_items: () -> ::Array[Types::ThesaurusSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#list_thesauri-instance_method
+      def list_thesauri: (
+                           index_id: ::String,
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListThesauriResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListThesauriResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#put_principal_mapping-instance_method
+      def put_principal_mapping: (
+                                   index_id: ::String,
+                                   ?data_source_id: ::String,
+                                   group_id: ::String,
+                                   group_members: {
+                                     member_groups: Array[
+                                       {
+                                         group_id: ::String,
+                                         data_source_id: ::String?
+                                       },
+                                     ]?,
+                                     member_users: Array[
+                                       {
+                                         user_id: ::String
+                                       },
+                                     ]?,
+                                     s3_pathfor_group_members: {
+                                       bucket: ::String,
+                                       key: ::String
+                                     }?
+                                   },
+                                   ?ordering_id: ::Integer,
+                                   ?role_arn: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _QueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::QueryResult]
+        def query_id: () -> ::String
+        def result_items: () -> ::Array[Types::QueryResultItem]
+        def facet_results: () -> ::Array[Types::FacetResult]
+        def total_number_of_results: () -> ::Integer
+        def warnings: () -> ::Array[Types::Warning]
+        def spell_corrected_queries: () -> ::Array[Types::SpellCorrectedQuery]
+        def featured_results_items: () -> ::Array[Types::FeaturedResultsItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#query-instance_method
+      def query: (
+                   index_id: ::String,
+                   ?query_text: ::String,
+                   ?attribute_filter: {
+                     and_all_filters: Array[
+                       untyped,
+                     ]?,
+                     or_all_filters: Array[
+                       untyped,
+                     ]?,
+                     not_filter: untyped?,
+                     equals_to: {
+                       key: ::String,
+                       value: {
+                         string_value: ::String?,
+                         string_list_value: Array[::String]?,
+                         long_value: ::Integer?,
+                         date_value: ::Time?
+                       }
+                     }?,
+                     contains_all: {
+                       key: ::String,
+                       value: {
+                         string_value: ::String?,
+                         string_list_value: Array[::String]?,
+                         long_value: ::Integer?,
+                         date_value: ::Time?
+                       }
+                     }?,
+                     contains_any: {
+                       key: ::String,
+                       value: {
+                         string_value: ::String?,
+                         string_list_value: Array[::String]?,
+                         long_value: ::Integer?,
+                         date_value: ::Time?
+                       }
+                     }?,
+                     greater_than: {
+                       key: ::String,
+                       value: {
+                         string_value: ::String?,
+                         string_list_value: Array[::String]?,
+                         long_value: ::Integer?,
+                         date_value: ::Time?
+                       }
+                     }?,
+                     greater_than_or_equals: {
+                       key: ::String,
+                       value: {
+                         string_value: ::String?,
+                         string_list_value: Array[::String]?,
+                         long_value: ::Integer?,
+                         date_value: ::Time?
+                       }
+                     }?,
+                     less_than: {
+                       key: ::String,
+                       value: {
+                         string_value: ::String?,
+                         string_list_value: Array[::String]?,
+                         long_value: ::Integer?,
+                         date_value: ::Time?
+                       }
+                     }?,
+                     less_than_or_equals: {
+                       key: ::String,
+                       value: {
+                         string_value: ::String?,
+                         string_list_value: Array[::String]?,
+                         long_value: ::Integer?,
+                         date_value: ::Time?
+                       }
+                     }?
+                   },
+                   ?facets: Array[
+                     {
+                       document_attribute_key: ::String?,
+                       facets: untyped?,
+                       max_results: ::Integer?
+                     },
+                   ],
+                   ?requested_document_attributes: Array[::String],
+                   ?query_result_type_filter: ("DOCUMENT" | "QUESTION_ANSWER" | "ANSWER"),
+                   ?document_relevance_override_configurations: Array[
+                     {
+                       name: ::String,
+                       relevance: {
+                         freshness: bool?,
+                         importance: ::Integer?,
+                         duration: ::String?,
+                         rank_order: ("ASCENDING" | "DESCENDING")?,
+                         value_importance_map: Hash[::String, ::Integer]?
+                       }
+                     },
+                   ],
+                   ?page_number: ::Integer,
+                   ?page_size: ::Integer,
+                   ?sorting_configuration: {
+                     document_attribute_key: ::String,
+                     sort_order: ("DESC" | "ASC")
+                   },
+                   ?sorting_configurations: Array[
+                     {
+                       document_attribute_key: ::String,
+                       sort_order: ("DESC" | "ASC")
+                     },
+                   ],
+                   ?user_context: {
+                     token: ::String?,
+                     user_id: ::String?,
+                     groups: Array[::String]?,
+                     data_source_groups: Array[
+                       {
+                         group_id: ::String,
+                         data_source_id: ::String
+                       },
+                     ]?
+                   },
+                   ?visitor_id: ::String,
+                   ?spell_correction_configuration: {
+                     include_query_spell_check_suggestions: bool
+                   },
+                   ?collapse_configuration: {
+                     document_attribute_key: ::String,
+                     sorting_configurations: Array[
+                       {
+                         document_attribute_key: ::String,
+                         sort_order: ("DESC" | "ASC")
+                       },
+                     ]?,
+                     missing_attribute_key_strategy: ("IGNORE" | "COLLAPSE" | "EXPAND")?,
+                     expand: bool?,
+                     expand_configuration: {
+                       max_result_items_to_expand: ::Integer?,
+                       max_expanded_results_per_item: ::Integer?
+                     }?
+                   }
+                 ) -> _QueryResponseSuccess
+               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _QueryResponseSuccess
+
+      interface _RetrieveResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RetrieveResult]
+        def query_id: () -> ::String
+        def result_items: () -> ::Array[Types::RetrieveResultItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#retrieve-instance_method
+      def retrieve: (
+                      index_id: ::String,
+                      query_text: ::String,
+                      ?attribute_filter: {
+                        and_all_filters: Array[
+                          untyped,
+                        ]?,
+                        or_all_filters: Array[
+                          untyped,
+                        ]?,
+                        not_filter: untyped?,
+                        equals_to: {
+                          key: ::String,
+                          value: {
+                            string_value: ::String?,
+                            string_list_value: Array[::String]?,
+                            long_value: ::Integer?,
+                            date_value: ::Time?
+                          }
+                        }?,
+                        contains_all: {
+                          key: ::String,
+                          value: {
+                            string_value: ::String?,
+                            string_list_value: Array[::String]?,
+                            long_value: ::Integer?,
+                            date_value: ::Time?
+                          }
+                        }?,
+                        contains_any: {
+                          key: ::String,
+                          value: {
+                            string_value: ::String?,
+                            string_list_value: Array[::String]?,
+                            long_value: ::Integer?,
+                            date_value: ::Time?
+                          }
+                        }?,
+                        greater_than: {
+                          key: ::String,
+                          value: {
+                            string_value: ::String?,
+                            string_list_value: Array[::String]?,
+                            long_value: ::Integer?,
+                            date_value: ::Time?
+                          }
+                        }?,
+                        greater_than_or_equals: {
+                          key: ::String,
+                          value: {
+                            string_value: ::String?,
+                            string_list_value: Array[::String]?,
+                            long_value: ::Integer?,
+                            date_value: ::Time?
+                          }
+                        }?,
+                        less_than: {
+                          key: ::String,
+                          value: {
+                            string_value: ::String?,
+                            string_list_value: Array[::String]?,
+                            long_value: ::Integer?,
+                            date_value: ::Time?
+                          }
+                        }?,
+                        less_than_or_equals: {
+                          key: ::String,
+                          value: {
+                            string_value: ::String?,
+                            string_list_value: Array[::String]?,
+                            long_value: ::Integer?,
+                            date_value: ::Time?
+                          }
+                        }?
+                      },
+                      ?requested_document_attributes: Array[::String],
+                      ?document_relevance_override_configurations: Array[
+                        {
+                          name: ::String,
+                          relevance: {
+                            freshness: bool?,
+                            importance: ::Integer?,
+                            duration: ::String?,
+                            rank_order: ("ASCENDING" | "DESCENDING")?,
+                            value_importance_map: Hash[::String, ::Integer]?
+                          }
+                        },
+                      ],
+                      ?page_number: ::Integer,
+                      ?page_size: ::Integer,
+                      ?user_context: {
+                        token: ::String?,
+                        user_id: ::String?,
+                        groups: Array[::String]?,
+                        data_source_groups: Array[
+                          {
+                            group_id: ::String,
+                            data_source_id: ::String
+                          },
+                        ]?
+                      }
+                    ) -> _RetrieveResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RetrieveResponseSuccess
+
+      interface _StartDataSourceSyncJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDataSourceSyncJobResponse]
+        def execution_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#start_data_source_sync_job-instance_method
+      def start_data_source_sync_job: (
+                                        id: ::String,
+                                        index_id: ::String
+                                      ) -> _StartDataSourceSyncJobResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDataSourceSyncJobResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#stop_data_source_sync_job-instance_method
+      def stop_data_source_sync_job: (
+                                       id: ::String,
+                                       index_id: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#submit_feedback-instance_method
+      def submit_feedback: (
+                             index_id: ::String,
+                             query_id: ::String,
+                             ?click_feedback_items: Array[
+                               {
+                                 result_id: ::String,
+                                 click_time: ::Time
+                               },
+                             ],
+                             ?relevance_feedback_items: Array[
+                               {
+                                 result_id: ::String,
+                                 relevance_value: ("RELEVANT" | "NOT_RELEVANT")
+                               },
+                             ]
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAccessControlConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAccessControlConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#update_access_control_configuration-instance_method
+      def update_access_control_configuration: (
+                                                 index_id: ::String,
+                                                 id: ::String,
+                                                 ?name: ::String,
+                                                 ?description: ::String,
+                                                 ?access_control_list: Array[
+                                                   {
+                                                     name: ::String,
+                                                     type: ("USER" | "GROUP"),
+                                                     access: ("ALLOW" | "DENY"),
+                                                     data_source_id: ::String?
+                                                   },
+                                                 ],
+                                                 ?hierarchical_access_control_list: Array[
+                                                   {
+                                                     principal_list: Array[
+                                                       {
+                                                         name: ::String,
+                                                         type: ("USER" | "GROUP"),
+                                                         access: ("ALLOW" | "DENY"),
+                                                         data_source_id: ::String?
+                                                       },
+                                                     ]
+                                                   },
+                                                 ]
+                                               ) -> _UpdateAccessControlConfigurationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccessControlConfigurationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#update_data_source-instance_method
+      def update_data_source: (
+                                id: ::String,
+                                ?name: ::String,
+                                index_id: ::String,
+                                ?configuration: {
+                                  s3_configuration: {
+                                    bucket_name: ::String,
+                                    inclusion_prefixes: Array[::String]?,
+                                    inclusion_patterns: Array[::String]?,
+                                    exclusion_patterns: Array[::String]?,
+                                    documents_metadata_configuration: {
+                                      s3_prefix: ::String?
+                                    }?,
+                                    access_control_list_configuration: {
+                                      key_path: ::String?
+                                    }?
+                                  }?,
+                                  share_point_configuration: {
+                                    share_point_version: ("SHAREPOINT_2013" | "SHAREPOINT_2016" | "SHAREPOINT_ONLINE" | "SHAREPOINT_2019"),
+                                    urls: Array[::String],
+                                    secret_arn: ::String,
+                                    crawl_attachments: bool?,
+                                    use_change_log: bool?,
+                                    inclusion_patterns: Array[::String]?,
+                                    exclusion_patterns: Array[::String]?,
+                                    vpc_configuration: {
+                                      subnet_ids: Array[::String],
+                                      security_group_ids: Array[::String]
+                                    }?,
+                                    field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    document_title_field_name: ::String?,
+                                    disable_local_groups: bool?,
+                                    ssl_certificate_s3_path: {
+                                      bucket: ::String,
+                                      key: ::String
+                                    }?,
+                                    authentication_type: ("HTTP_BASIC" | "OAUTH2")?,
+                                    proxy_configuration: {
+                                      host: ::String,
+                                      port: ::Integer,
+                                      credentials: ::String?
+                                    }?
+                                  }?,
+                                  database_configuration: {
+                                    database_engine_type: ("RDS_AURORA_MYSQL" | "RDS_AURORA_POSTGRESQL" | "RDS_MYSQL" | "RDS_POSTGRESQL"),
+                                    connection_configuration: {
+                                      database_host: ::String,
+                                      database_port: ::Integer,
+                                      database_name: ::String,
+                                      table_name: ::String,
+                                      secret_arn: ::String
+                                    },
+                                    vpc_configuration: {
+                                      subnet_ids: Array[::String],
+                                      security_group_ids: Array[::String]
+                                    }?,
+                                    column_configuration: {
+                                      document_id_column_name: ::String,
+                                      document_data_column_name: ::String,
+                                      document_title_column_name: ::String?,
+                                      field_mappings: Array[
+                                        {
+                                          data_source_field_name: ::String,
+                                          date_field_format: ::String?,
+                                          index_field_name: ::String
+                                        },
+                                      ]?,
+                                      change_detecting_columns: Array[::String]
+                                    },
+                                    acl_configuration: {
+                                      allowed_groups_column_name: ::String
+                                    }?,
+                                    sql_configuration: {
+                                      query_identifiers_enclosing_option: ("DOUBLE_QUOTES" | "NONE")?
+                                    }?
+                                  }?,
+                                  salesforce_configuration: {
+                                    server_url: ::String,
+                                    secret_arn: ::String,
+                                    standard_object_configurations: Array[
+                                      {
+                                        name: ("ACCOUNT" | "CAMPAIGN" | "CASE" | "CONTACT" | "CONTRACT" | "DOCUMENT" | "GROUP" | "IDEA" | "LEAD" | "OPPORTUNITY" | "PARTNER" | "PRICEBOOK" | "PRODUCT" | "PROFILE" | "SOLUTION" | "TASK" | "USER"),
+                                        document_data_field_name: ::String,
+                                        document_title_field_name: ::String?,
+                                        field_mappings: Array[
+                                          {
+                                            data_source_field_name: ::String,
+                                            date_field_format: ::String?,
+                                            index_field_name: ::String
+                                          },
+                                        ]?
+                                      },
+                                    ]?,
+                                    knowledge_article_configuration: {
+                                      included_states: Array[("DRAFT" | "PUBLISHED" | "ARCHIVED")],
+                                      standard_knowledge_article_type_configuration: {
+                                        document_data_field_name: ::String,
+                                        document_title_field_name: ::String?,
+                                        field_mappings: Array[
+                                          {
+                                            data_source_field_name: ::String,
+                                            date_field_format: ::String?,
+                                            index_field_name: ::String
+                                          },
+                                        ]?
+                                      }?,
+                                      custom_knowledge_article_type_configurations: Array[
+                                        {
+                                          name: ::String,
+                                          document_data_field_name: ::String,
+                                          document_title_field_name: ::String?,
+                                          field_mappings: Array[
+                                            {
+                                              data_source_field_name: ::String,
+                                              date_field_format: ::String?,
+                                              index_field_name: ::String
+                                            },
+                                          ]?
+                                        },
+                                      ]?
+                                    }?,
+                                    chatter_feed_configuration: {
+                                      document_data_field_name: ::String,
+                                      document_title_field_name: ::String?,
+                                      field_mappings: Array[
+                                        {
+                                          data_source_field_name: ::String,
+                                          date_field_format: ::String?,
+                                          index_field_name: ::String
+                                        },
+                                      ]?,
+                                      include_filter_types: Array[("ACTIVE_USER" | "STANDARD_USER")]?
+                                    }?,
+                                    crawl_attachments: bool?,
+                                    standard_object_attachment_configuration: {
+                                      document_title_field_name: ::String?,
+                                      field_mappings: Array[
+                                        {
+                                          data_source_field_name: ::String,
+                                          date_field_format: ::String?,
+                                          index_field_name: ::String
+                                        },
+                                      ]?
+                                    }?,
+                                    include_attachment_file_patterns: Array[::String]?,
+                                    exclude_attachment_file_patterns: Array[::String]?
+                                  }?,
+                                  one_drive_configuration: {
+                                    tenant_domain: ::String,
+                                    secret_arn: ::String,
+                                    one_drive_users: {
+                                      one_drive_user_list: Array[::String]?,
+                                      one_drive_user_s3_path: {
+                                        bucket: ::String,
+                                        key: ::String
+                                      }?
+                                    },
+                                    inclusion_patterns: Array[::String]?,
+                                    exclusion_patterns: Array[::String]?,
+                                    field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    disable_local_groups: bool?
+                                  }?,
+                                  service_now_configuration: {
+                                    host_url: ::String,
+                                    secret_arn: ::String,
+                                    service_now_build_version: ("LONDON" | "OTHERS"),
+                                    knowledge_article_configuration: {
+                                      crawl_attachments: bool?,
+                                      include_attachment_file_patterns: Array[::String]?,
+                                      exclude_attachment_file_patterns: Array[::String]?,
+                                      document_data_field_name: ::String,
+                                      document_title_field_name: ::String?,
+                                      field_mappings: Array[
+                                        {
+                                          data_source_field_name: ::String,
+                                          date_field_format: ::String?,
+                                          index_field_name: ::String
+                                        },
+                                      ]?,
+                                      filter_query: ::String?
+                                    }?,
+                                    service_catalog_configuration: {
+                                      crawl_attachments: bool?,
+                                      include_attachment_file_patterns: Array[::String]?,
+                                      exclude_attachment_file_patterns: Array[::String]?,
+                                      document_data_field_name: ::String,
+                                      document_title_field_name: ::String?,
+                                      field_mappings: Array[
+                                        {
+                                          data_source_field_name: ::String,
+                                          date_field_format: ::String?,
+                                          index_field_name: ::String
+                                        },
+                                      ]?
+                                    }?,
+                                    authentication_type: ("HTTP_BASIC" | "OAUTH2")?
+                                  }?,
+                                  confluence_configuration: {
+                                    server_url: ::String,
+                                    secret_arn: ::String,
+                                    version: ("CLOUD" | "SERVER"),
+                                    space_configuration: {
+                                      crawl_personal_spaces: bool?,
+                                      crawl_archived_spaces: bool?,
+                                      include_spaces: Array[::String]?,
+                                      exclude_spaces: Array[::String]?,
+                                      space_field_mappings: Array[
+                                        {
+                                          data_source_field_name: ("DISPLAY_URL" | "ITEM_TYPE" | "SPACE_KEY" | "URL")?,
+                                          date_field_format: ::String?,
+                                          index_field_name: ::String?
+                                        },
+                                      ]?
+                                    }?,
+                                    page_configuration: {
+                                      page_field_mappings: Array[
+                                        {
+                                          data_source_field_name: ("AUTHOR" | "CONTENT_STATUS" | "CREATED_DATE" | "DISPLAY_URL" | "ITEM_TYPE" | "LABELS" | "MODIFIED_DATE" | "PARENT_ID" | "SPACE_KEY" | "SPACE_NAME" | "URL" | "VERSION")?,
+                                          date_field_format: ::String?,
+                                          index_field_name: ::String?
+                                        },
+                                      ]?
+                                    }?,
+                                    blog_configuration: {
+                                      blog_field_mappings: Array[
+                                        {
+                                          data_source_field_name: ("AUTHOR" | "DISPLAY_URL" | "ITEM_TYPE" | "LABELS" | "PUBLISH_DATE" | "SPACE_KEY" | "SPACE_NAME" | "URL" | "VERSION")?,
+                                          date_field_format: ::String?,
+                                          index_field_name: ::String?
+                                        },
+                                      ]?
+                                    }?,
+                                    attachment_configuration: {
+                                      crawl_attachments: bool?,
+                                      attachment_field_mappings: Array[
+                                        {
+                                          data_source_field_name: ("AUTHOR" | "CONTENT_TYPE" | "CREATED_DATE" | "DISPLAY_URL" | "FILE_SIZE" | "ITEM_TYPE" | "PARENT_ID" | "SPACE_KEY" | "SPACE_NAME" | "URL" | "VERSION")?,
+                                          date_field_format: ::String?,
+                                          index_field_name: ::String?
+                                        },
+                                      ]?
+                                    }?,
+                                    vpc_configuration: {
+                                      subnet_ids: Array[::String],
+                                      security_group_ids: Array[::String]
+                                    }?,
+                                    inclusion_patterns: Array[::String]?,
+                                    exclusion_patterns: Array[::String]?,
+                                    proxy_configuration: {
+                                      host: ::String,
+                                      port: ::Integer,
+                                      credentials: ::String?
+                                    }?,
+                                    authentication_type: ("HTTP_BASIC" | "PAT")?
+                                  }?,
+                                  google_drive_configuration: {
+                                    secret_arn: ::String,
+                                    inclusion_patterns: Array[::String]?,
+                                    exclusion_patterns: Array[::String]?,
+                                    field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    exclude_mime_types: Array[::String]?,
+                                    exclude_user_accounts: Array[::String]?,
+                                    exclude_shared_drives: Array[::String]?
+                                  }?,
+                                  web_crawler_configuration: {
+                                    urls: {
+                                      seed_url_configuration: {
+                                        seed_urls: Array[::String],
+                                        web_crawler_mode: ("HOST_ONLY" | "SUBDOMAINS" | "EVERYTHING")?
+                                      }?,
+                                      site_maps_configuration: {
+                                        site_maps: Array[::String]
+                                      }?
+                                    },
+                                    crawl_depth: ::Integer?,
+                                    max_links_per_page: ::Integer?,
+                                    max_content_size_per_page_in_mega_bytes: ::Float?,
+                                    max_urls_per_minute_crawl_rate: ::Integer?,
+                                    url_inclusion_patterns: Array[::String]?,
+                                    url_exclusion_patterns: Array[::String]?,
+                                    proxy_configuration: {
+                                      host: ::String,
+                                      port: ::Integer,
+                                      credentials: ::String?
+                                    }?,
+                                    authentication_configuration: {
+                                      basic_authentication: Array[
+                                        {
+                                          host: ::String,
+                                          port: ::Integer,
+                                          credentials: ::String
+                                        },
+                                      ]?
+                                    }?
+                                  }?,
+                                  work_docs_configuration: {
+                                    organization_id: ::String,
+                                    crawl_comments: bool?,
+                                    use_change_log: bool?,
+                                    inclusion_patterns: Array[::String]?,
+                                    exclusion_patterns: Array[::String]?,
+                                    field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?
+                                  }?,
+                                  fsx_configuration: {
+                                    file_system_id: ::String,
+                                    file_system_type: ("WINDOWS"),
+                                    vpc_configuration: {
+                                      subnet_ids: Array[::String],
+                                      security_group_ids: Array[::String]
+                                    },
+                                    secret_arn: ::String?,
+                                    inclusion_patterns: Array[::String]?,
+                                    exclusion_patterns: Array[::String]?,
+                                    field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?
+                                  }?,
+                                  slack_configuration: {
+                                    team_id: ::String,
+                                    secret_arn: ::String,
+                                    vpc_configuration: {
+                                      subnet_ids: Array[::String],
+                                      security_group_ids: Array[::String]
+                                    }?,
+                                    slack_entity_list: Array[("PUBLIC_CHANNEL" | "PRIVATE_CHANNEL" | "GROUP_MESSAGE" | "DIRECT_MESSAGE")],
+                                    use_change_log: bool?,
+                                    crawl_bot_message: bool?,
+                                    exclude_archived: bool?,
+                                    since_crawl_date: ::String,
+                                    look_back_period: ::Integer?,
+                                    private_channel_filter: Array[::String]?,
+                                    public_channel_filter: Array[::String]?,
+                                    inclusion_patterns: Array[::String]?,
+                                    exclusion_patterns: Array[::String]?,
+                                    field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?
+                                  }?,
+                                  box_configuration: {
+                                    enterprise_id: ::String,
+                                    secret_arn: ::String,
+                                    use_change_log: bool?,
+                                    crawl_comments: bool?,
+                                    crawl_tasks: bool?,
+                                    crawl_web_links: bool?,
+                                    file_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    task_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    comment_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    web_link_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    inclusion_patterns: Array[::String]?,
+                                    exclusion_patterns: Array[::String]?,
+                                    vpc_configuration: {
+                                      subnet_ids: Array[::String],
+                                      security_group_ids: Array[::String]
+                                    }?
+                                  }?,
+                                  quip_configuration: {
+                                    domain: ::String,
+                                    secret_arn: ::String,
+                                    crawl_file_comments: bool?,
+                                    crawl_chat_rooms: bool?,
+                                    crawl_attachments: bool?,
+                                    folder_ids: Array[::String]?,
+                                    thread_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    message_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    attachment_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    inclusion_patterns: Array[::String]?,
+                                    exclusion_patterns: Array[::String]?,
+                                    vpc_configuration: {
+                                      subnet_ids: Array[::String],
+                                      security_group_ids: Array[::String]
+                                    }?
+                                  }?,
+                                  jira_configuration: {
+                                    jira_account_url: ::String,
+                                    secret_arn: ::String,
+                                    use_change_log: bool?,
+                                    project: Array[::String]?,
+                                    issue_type: Array[::String]?,
+                                    status: Array[::String]?,
+                                    issue_sub_entity_filter: Array[("COMMENTS" | "ATTACHMENTS" | "WORKLOGS")]?,
+                                    attachment_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    comment_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    issue_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    project_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    work_log_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    inclusion_patterns: Array[::String]?,
+                                    exclusion_patterns: Array[::String]?,
+                                    vpc_configuration: {
+                                      subnet_ids: Array[::String],
+                                      security_group_ids: Array[::String]
+                                    }?
+                                  }?,
+                                  git_hub_configuration: {
+                                    saa_s_configuration: {
+                                      organization_name: ::String,
+                                      host_url: ::String
+                                    }?,
+                                    on_premise_configuration: {
+                                      host_url: ::String,
+                                      organization_name: ::String,
+                                      ssl_certificate_s3_path: {
+                                        bucket: ::String,
+                                        key: ::String
+                                      }
+                                    }?,
+                                    type: ("SAAS" | "ON_PREMISE")?,
+                                    secret_arn: ::String,
+                                    use_change_log: bool?,
+                                    git_hub_document_crawl_properties: {
+                                      crawl_repository_documents: bool?,
+                                      crawl_issue: bool?,
+                                      crawl_issue_comment: bool?,
+                                      crawl_issue_comment_attachment: bool?,
+                                      crawl_pull_request: bool?,
+                                      crawl_pull_request_comment: bool?,
+                                      crawl_pull_request_comment_attachment: bool?
+                                    }?,
+                                    repository_filter: Array[::String]?,
+                                    inclusion_folder_name_patterns: Array[::String]?,
+                                    inclusion_file_type_patterns: Array[::String]?,
+                                    inclusion_file_name_patterns: Array[::String]?,
+                                    exclusion_folder_name_patterns: Array[::String]?,
+                                    exclusion_file_type_patterns: Array[::String]?,
+                                    exclusion_file_name_patterns: Array[::String]?,
+                                    vpc_configuration: {
+                                      subnet_ids: Array[::String],
+                                      security_group_ids: Array[::String]
+                                    }?,
+                                    git_hub_repository_configuration_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    git_hub_commit_configuration_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    git_hub_issue_document_configuration_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    git_hub_issue_comment_configuration_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    git_hub_issue_attachment_configuration_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    git_hub_pull_request_comment_configuration_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    git_hub_pull_request_document_configuration_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    git_hub_pull_request_document_attachment_configuration_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?
+                                  }?,
+                                  alfresco_configuration: {
+                                    site_url: ::String,
+                                    site_id: ::String,
+                                    secret_arn: ::String,
+                                    ssl_certificate_s3_path: {
+                                      bucket: ::String,
+                                      key: ::String
+                                    },
+                                    crawl_system_folders: bool?,
+                                    crawl_comments: bool?,
+                                    entity_filter: Array[("wiki" | "blog" | "documentLibrary")]?,
+                                    document_library_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    blog_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    wiki_field_mappings: Array[
+                                      {
+                                        data_source_field_name: ::String,
+                                        date_field_format: ::String?,
+                                        index_field_name: ::String
+                                      },
+                                    ]?,
+                                    inclusion_patterns: Array[::String]?,
+                                    exclusion_patterns: Array[::String]?,
+                                    vpc_configuration: {
+                                      subnet_ids: Array[::String],
+                                      security_group_ids: Array[::String]
+                                    }?
+                                  }?,
+                                  template_configuration: {
+                                    template: {
+                                    }?
+                                  }?
+                                },
+                                ?vpc_configuration: {
+                                  subnet_ids: Array[::String],
+                                  security_group_ids: Array[::String]
+                                },
+                                ?description: ::String,
+                                ?schedule: ::String,
+                                ?role_arn: ::String,
+                                ?language_code: ::String,
+                                ?custom_document_enrichment_configuration: {
+                                  inline_configurations: Array[
+                                    {
+                                      condition: {
+                                        condition_document_attribute_key: ::String,
+                                        operator: ("GreaterThan" | "GreaterThanOrEquals" | "LessThan" | "LessThanOrEquals" | "Equals" | "NotEquals" | "Contains" | "NotContains" | "Exists" | "NotExists" | "BeginsWith"),
+                                        condition_on_value: {
+                                          string_value: ::String?,
+                                          string_list_value: Array[::String]?,
+                                          long_value: ::Integer?,
+                                          date_value: ::Time?
+                                        }?
+                                      }?,
+                                      target: {
+                                        target_document_attribute_key: ::String?,
+                                        target_document_attribute_value_deletion: bool?,
+                                        target_document_attribute_value: {
+                                          string_value: ::String?,
+                                          string_list_value: Array[::String]?,
+                                          long_value: ::Integer?,
+                                          date_value: ::Time?
+                                        }?
+                                      }?,
+                                      document_content_deletion: bool?
+                                    },
+                                  ]?,
+                                  pre_extraction_hook_configuration: {
+                                    invocation_condition: {
+                                      condition_document_attribute_key: ::String,
+                                      operator: ("GreaterThan" | "GreaterThanOrEquals" | "LessThan" | "LessThanOrEquals" | "Equals" | "NotEquals" | "Contains" | "NotContains" | "Exists" | "NotExists" | "BeginsWith"),
+                                      condition_on_value: {
+                                        string_value: ::String?,
+                                        string_list_value: Array[::String]?,
+                                        long_value: ::Integer?,
+                                        date_value: ::Time?
+                                      }?
+                                    }?,
+                                    lambda_arn: ::String,
+                                    s3_bucket: ::String
+                                  }?,
+                                  post_extraction_hook_configuration: {
+                                    invocation_condition: {
+                                      condition_document_attribute_key: ::String,
+                                      operator: ("GreaterThan" | "GreaterThanOrEquals" | "LessThan" | "LessThanOrEquals" | "Equals" | "NotEquals" | "Contains" | "NotContains" | "Exists" | "NotExists" | "BeginsWith"),
+                                      condition_on_value: {
+                                        string_value: ::String?,
+                                        string_list_value: Array[::String]?,
+                                        long_value: ::Integer?,
+                                        date_value: ::Time?
+                                      }?
+                                    }?,
+                                    lambda_arn: ::String,
+                                    s3_bucket: ::String
+                                  }?,
+                                  role_arn: ::String?
+                                }
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#update_experience-instance_method
+      def update_experience: (
+                               id: ::String,
+                               ?name: ::String,
+                               index_id: ::String,
+                               ?role_arn: ::String,
+                               ?configuration: {
+                                 content_source_configuration: {
+                                   data_source_ids: Array[::String]?,
+                                   faq_ids: Array[::String]?,
+                                   direct_put_content: bool?
+                                 }?,
+                                 user_identity_configuration: {
+                                   identity_attribute_name: ::String?
+                                 }?
+                               },
+                               ?description: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateFeaturedResultsSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFeaturedResultsSetResponse]
+        def featured_results_set: () -> Types::FeaturedResultsSet
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#update_featured_results_set-instance_method
+      def update_featured_results_set: (
+                                         index_id: ::String,
+                                         featured_results_set_id: ::String,
+                                         ?featured_results_set_name: ::String,
+                                         ?description: ::String,
+                                         ?status: ("ACTIVE" | "INACTIVE"),
+                                         ?query_texts: Array[::String],
+                                         ?featured_documents: Array[
+                                           {
+                                             id: ::String?
+                                           },
+                                         ]
+                                       ) -> _UpdateFeaturedResultsSetResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFeaturedResultsSetResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#update_index-instance_method
+      def update_index: (
+                          id: ::String,
+                          ?name: ::String,
+                          ?role_arn: ::String,
+                          ?description: ::String,
+                          ?document_metadata_configuration_updates: Array[
+                            {
+                              name: ::String,
+                              type: ("STRING_VALUE" | "STRING_LIST_VALUE" | "LONG_VALUE" | "DATE_VALUE"),
+                              relevance: {
+                                freshness: bool?,
+                                importance: ::Integer?,
+                                duration: ::String?,
+                                rank_order: ("ASCENDING" | "DESCENDING")?,
+                                value_importance_map: Hash[::String, ::Integer]?
+                              }?,
+                              search: {
+                                facetable: bool?,
+                                searchable: bool?,
+                                displayable: bool?,
+                                sortable: bool?
+                              }?
+                            },
+                          ],
+                          ?capacity_units: {
+                            storage_capacity_units: ::Integer,
+                            query_capacity_units: ::Integer
+                          },
+                          ?user_token_configurations: Array[
+                            {
+                              jwt_token_type_configuration: {
+                                key_location: ("URL" | "SECRET_MANAGER"),
+                                url: ::String?,
+                                secret_manager_arn: ::String?,
+                                user_name_attribute_field: ::String?,
+                                group_attribute_field: ::String?,
+                                issuer: ::String?,
+                                claim_regex: ::String?
+                              }?,
+                              json_token_type_configuration: {
+                                user_name_attribute_field: ::String,
+                                group_attribute_field: ::String
+                              }?
+                            },
+                          ],
+                          ?user_context_policy: ("ATTRIBUTE_FILTER" | "USER_TOKEN"),
+                          ?user_group_resolution_configuration: {
+                            user_group_resolution_mode: ("AWS_SSO" | "NONE")
+                          }
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#update_query_suggestions_block_list-instance_method
+      def update_query_suggestions_block_list: (
+                                                 index_id: ::String,
+                                                 id: ::String,
+                                                 ?name: ::String,
+                                                 ?description: ::String,
+                                                 ?source_s3_path: {
+                                                   bucket: ::String,
+                                                   key: ::String
+                                                 },
+                                                 ?role_arn: ::String
+                                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#update_query_suggestions_config-instance_method
+      def update_query_suggestions_config: (
+                                             index_id: ::String,
+                                             ?mode: ("ENABLED" | "LEARN_ONLY"),
+                                             ?query_log_look_back_window_in_days: ::Integer,
+                                             ?include_queries_without_user_information: bool,
+                                             ?minimum_number_of_querying_users: ::Integer,
+                                             ?minimum_query_count: ::Integer,
+                                             ?attribute_suggestions_config: {
+                                               suggestable_config_list: Array[
+                                                 {
+                                                   attribute_name: ::String?,
+                                                   suggestable: bool?
+                                                 },
+                                               ]?,
+                                               attribute_suggestions_mode: ("ACTIVE" | "INACTIVE")?
+                                             }
+                                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kendra/Client.html#update_thesaurus-instance_method
+      def update_thesaurus: (
+                              id: ::String,
+                              ?name: ::String,
+                              index_id: ::String,
+                              ?description: ::String,
+                              ?role_arn: ::String,
+                              ?source_s3_path: {
+                                bucket: ::String,
+                                key: ::String
+                              }
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+    end
+  end
+end
+

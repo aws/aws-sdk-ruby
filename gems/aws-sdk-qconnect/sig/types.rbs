@@ -1,0 +1,1165 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::QConnect
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AppIntegrationsConfiguration
+      attr_accessor app_integration_arn: ::String
+      attr_accessor object_fields: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AssistantAssociationData
+      attr_accessor assistant_arn: ::String
+      attr_accessor assistant_association_arn: ::String
+      attr_accessor assistant_association_id: ::String
+      attr_accessor assistant_id: ::String
+      attr_accessor association_data: Types::AssistantAssociationOutputData
+      attr_accessor association_type: ("KNOWLEDGE_BASE")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class AssistantAssociationInputData
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class KnowledgeBaseId < AssistantAssociationInputData
+      end
+      class Unknown < AssistantAssociationInputData
+      end
+    end
+
+    class AssistantAssociationOutputData
+      attr_accessor knowledge_base_association: Types::KnowledgeBaseAssociationData
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class KnowledgeBaseAssociation < AssistantAssociationOutputData
+      end
+      class Unknown < AssistantAssociationOutputData
+      end
+    end
+
+    class AssistantAssociationSummary
+      attr_accessor assistant_arn: ::String
+      attr_accessor assistant_association_arn: ::String
+      attr_accessor assistant_association_id: ::String
+      attr_accessor assistant_id: ::String
+      attr_accessor association_data: Types::AssistantAssociationOutputData
+      attr_accessor association_type: ("KNOWLEDGE_BASE")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class AssistantCapabilityConfiguration
+      attr_accessor type: ("V1" | "V2")
+      SENSITIVE: []
+    end
+
+    class AssistantData
+      attr_accessor assistant_arn: ::String
+      attr_accessor assistant_id: ::String
+      attr_accessor capability_configuration: Types::AssistantCapabilityConfiguration
+      attr_accessor description: ::String
+      attr_accessor integration_configuration: Types::AssistantIntegrationConfiguration
+      attr_accessor name: ::String
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "ACTIVE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("AGENT")
+      SENSITIVE: []
+    end
+
+    class AssistantIntegrationConfiguration
+      attr_accessor topic_integration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssistantSummary
+      attr_accessor assistant_arn: ::String
+      attr_accessor assistant_id: ::String
+      attr_accessor capability_configuration: Types::AssistantCapabilityConfiguration
+      attr_accessor description: ::String
+      attr_accessor integration_configuration: Types::AssistantIntegrationConfiguration
+      attr_accessor name: ::String
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "ACTIVE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("AGENT")
+      SENSITIVE: []
+    end
+
+    class Configuration
+      attr_accessor connect_configuration: Types::ConnectConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ConnectConfiguration < Configuration
+      end
+      class Unknown < Configuration
+      end
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectConfiguration
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class ContentData
+      attr_accessor content_arn: ::String
+      attr_accessor content_id: ::String
+      attr_accessor content_type: ::String
+      attr_accessor knowledge_base_arn: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor link_out_uri: ::String
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor name: ::String
+      attr_accessor revision_id: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "ACTIVE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETED" | "UPDATE_FAILED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor title: ::String
+      attr_accessor url: ::String
+      attr_accessor url_expiry: ::Time
+      SENSITIVE: [:url]
+    end
+
+    class ContentDataDetails
+      attr_accessor ranking_data: Types::RankingData
+      attr_accessor text_data: Types::TextData
+      SENSITIVE: []
+    end
+
+    class ContentFeedbackData
+      attr_accessor generative_content_feedback_data: Types::GenerativeContentFeedbackData
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class GenerativeContentFeedbackData < ContentFeedbackData
+      end
+      class Unknown < ContentFeedbackData
+      end
+    end
+
+    class ContentReference
+      attr_accessor content_arn: ::String
+      attr_accessor content_id: ::String
+      attr_accessor knowledge_base_arn: ::String
+      attr_accessor knowledge_base_id: ::String
+      SENSITIVE: []
+    end
+
+    class ContentSummary
+      attr_accessor content_arn: ::String
+      attr_accessor content_id: ::String
+      attr_accessor content_type: ::String
+      attr_accessor knowledge_base_arn: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor name: ::String
+      attr_accessor revision_id: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "ACTIVE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETED" | "UPDATE_FAILED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor title: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAssistantAssociationRequest
+      attr_accessor assistant_id: ::String
+      attr_accessor association: Types::AssistantAssociationInputData
+      attr_accessor association_type: ("KNOWLEDGE_BASE")
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateAssistantAssociationResponse
+      attr_accessor assistant_association: Types::AssistantAssociationData
+      SENSITIVE: []
+    end
+
+    class CreateAssistantRequest
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("AGENT")
+      SENSITIVE: []
+    end
+
+    class CreateAssistantResponse
+      attr_accessor assistant: Types::AssistantData
+      SENSITIVE: []
+    end
+
+    class CreateContentRequest
+      attr_accessor client_token: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor name: ::String
+      attr_accessor override_link_out_uri: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor title: ::String
+      attr_accessor upload_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateContentResponse
+      attr_accessor content: Types::ContentData
+      SENSITIVE: []
+    end
+
+    class CreateKnowledgeBaseRequest
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor knowledge_base_type: ("EXTERNAL" | "CUSTOM" | "QUICK_RESPONSES")
+      attr_accessor name: ::String
+      attr_accessor rendering_configuration: Types::RenderingConfiguration
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
+      attr_accessor source_configuration: Types::SourceConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateKnowledgeBaseResponse
+      attr_accessor knowledge_base: Types::KnowledgeBaseData
+      SENSITIVE: []
+    end
+
+    class CreateQuickResponseRequest
+      attr_accessor channels: ::Array[::String]
+      attr_accessor client_token: ::String
+      attr_accessor content: Types::QuickResponseDataProvider
+      attr_accessor content_type: ::String
+      attr_accessor description: ::String
+      attr_accessor grouping_configuration: Types::GroupingConfiguration
+      attr_accessor is_active: bool
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor language: ::String
+      attr_accessor name: ::String
+      attr_accessor shortcut_key: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateQuickResponseResponse
+      attr_accessor quick_response: Types::QuickResponseData
+      SENSITIVE: []
+    end
+
+    class CreateSessionRequest
+      attr_accessor assistant_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateSessionResponse
+      attr_accessor session: Types::SessionData
+      SENSITIVE: []
+    end
+
+    class DataDetails
+      attr_accessor content_data: Types::ContentDataDetails
+      attr_accessor generative_data: Types::GenerativeDataDetails
+      attr_accessor source_content_data: Types::SourceContentDataDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ContentData < DataDetails
+      end
+      class GenerativeData < DataDetails
+      end
+      class SourceContentData < DataDetails
+      end
+      class Unknown < DataDetails
+      end
+    end
+
+    class DataReference
+      attr_accessor content_reference: Types::ContentReference
+      attr_accessor generative_reference: Types::GenerativeReference
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ContentReference < DataReference
+      end
+      class GenerativeReference < DataReference
+      end
+      class Unknown < DataReference
+      end
+    end
+
+    class DataSummary
+      attr_accessor details: Types::DataDetails
+      attr_accessor reference: Types::DataReference
+      SENSITIVE: []
+    end
+
+    class DeleteAssistantAssociationRequest
+      attr_accessor assistant_association_id: ::String
+      attr_accessor assistant_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAssistantAssociationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteAssistantRequest
+      attr_accessor assistant_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAssistantResponse < Aws::EmptyStructure
+    end
+
+    class DeleteContentRequest
+      attr_accessor content_id: ::String
+      attr_accessor knowledge_base_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteContentResponse < Aws::EmptyStructure
+    end
+
+    class DeleteImportJobRequest
+      attr_accessor import_job_id: ::String
+      attr_accessor knowledge_base_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteImportJobResponse < Aws::EmptyStructure
+    end
+
+    class DeleteKnowledgeBaseRequest
+      attr_accessor knowledge_base_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteKnowledgeBaseResponse < Aws::EmptyStructure
+    end
+
+    class DeleteQuickResponseRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor quick_response_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteQuickResponseResponse < Aws::EmptyStructure
+    end
+
+    class Document
+      attr_accessor content_reference: Types::ContentReference
+      attr_accessor excerpt: Types::DocumentText
+      attr_accessor title: Types::DocumentText
+      SENSITIVE: []
+    end
+
+    class DocumentText
+      attr_accessor highlights: ::Array[Types::Highlight]
+      attr_accessor text: ::String
+      SENSITIVE: [:text]
+    end
+
+    class ExternalSourceConfiguration
+      attr_accessor configuration: Types::Configuration
+      attr_accessor source: ("AMAZON_CONNECT")
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor field: ("NAME")
+      attr_accessor operator: ("EQUALS")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class GenerativeContentFeedbackData
+      attr_accessor relevance: ("HELPFUL" | "NOT_HELPFUL")
+      SENSITIVE: []
+    end
+
+    class GenerativeDataDetails
+      attr_accessor completion: ::String
+      attr_accessor ranking_data: Types::RankingData
+      attr_accessor references: ::Array[Types::DataSummary]
+      SENSITIVE: [:completion]
+    end
+
+    class GenerativeReference
+      attr_accessor generation_id: ::String
+      attr_accessor model_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAssistantAssociationRequest
+      attr_accessor assistant_association_id: ::String
+      attr_accessor assistant_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAssistantAssociationResponse
+      attr_accessor assistant_association: Types::AssistantAssociationData
+      SENSITIVE: []
+    end
+
+    class GetAssistantRequest
+      attr_accessor assistant_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAssistantResponse
+      attr_accessor assistant: Types::AssistantData
+      SENSITIVE: []
+    end
+
+    class GetContentRequest
+      attr_accessor content_id: ::String
+      attr_accessor knowledge_base_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetContentResponse
+      attr_accessor content: Types::ContentData
+      SENSITIVE: []
+    end
+
+    class GetContentSummaryRequest
+      attr_accessor content_id: ::String
+      attr_accessor knowledge_base_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetContentSummaryResponse
+      attr_accessor content_summary: Types::ContentSummary
+      SENSITIVE: []
+    end
+
+    class GetImportJobRequest
+      attr_accessor import_job_id: ::String
+      attr_accessor knowledge_base_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetImportJobResponse
+      attr_accessor import_job: Types::ImportJobData
+      SENSITIVE: []
+    end
+
+    class GetKnowledgeBaseRequest
+      attr_accessor knowledge_base_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetKnowledgeBaseResponse
+      attr_accessor knowledge_base: Types::KnowledgeBaseData
+      SENSITIVE: []
+    end
+
+    class GetQuickResponseRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor quick_response_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetQuickResponseResponse
+      attr_accessor quick_response: Types::QuickResponseData
+      SENSITIVE: []
+    end
+
+    class GetRecommendationsRequest
+      attr_accessor assistant_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor session_id: ::String
+      attr_accessor wait_time_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetRecommendationsResponse
+      attr_accessor recommendations: ::Array[Types::RecommendationData]
+      attr_accessor triggers: ::Array[Types::RecommendationTrigger]
+      SENSITIVE: []
+    end
+
+    class GetSessionRequest
+      attr_accessor assistant_id: ::String
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSessionResponse
+      attr_accessor session: Types::SessionData
+      SENSITIVE: []
+    end
+
+    class GroupingConfiguration
+      attr_accessor criteria: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: [:criteria]
+    end
+
+    class Highlight
+      attr_accessor begin_offset_inclusive: ::Integer
+      attr_accessor end_offset_exclusive: ::Integer
+      SENSITIVE: []
+    end
+
+    class ImportJobData
+      attr_accessor created_time: ::Time
+      attr_accessor external_source_configuration: Types::ExternalSourceConfiguration
+      attr_accessor failed_record_report: ::String
+      attr_accessor import_job_id: ::String
+      attr_accessor import_job_type: ("QUICK_RESPONSES")
+      attr_accessor knowledge_base_arn: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor status: ("START_IN_PROGRESS" | "FAILED" | "COMPLETE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETED")
+      attr_accessor upload_id: ::String
+      attr_accessor url: ::String
+      attr_accessor url_expiry: ::Time
+      SENSITIVE: [:failed_record_report, :url]
+    end
+
+    class ImportJobSummary
+      attr_accessor created_time: ::Time
+      attr_accessor external_source_configuration: Types::ExternalSourceConfiguration
+      attr_accessor import_job_id: ::String
+      attr_accessor import_job_type: ("QUICK_RESPONSES")
+      attr_accessor knowledge_base_arn: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor status: ("START_IN_PROGRESS" | "FAILED" | "COMPLETE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETED")
+      attr_accessor upload_id: ::String
+      SENSITIVE: []
+    end
+
+    class KnowledgeBaseAssociationData
+      attr_accessor knowledge_base_arn: ::String
+      attr_accessor knowledge_base_id: ::String
+      SENSITIVE: []
+    end
+
+    class KnowledgeBaseData
+      attr_accessor description: ::String
+      attr_accessor knowledge_base_arn: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor knowledge_base_type: ("EXTERNAL" | "CUSTOM" | "QUICK_RESPONSES")
+      attr_accessor last_content_modification_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor rendering_configuration: Types::RenderingConfiguration
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
+      attr_accessor source_configuration: Types::SourceConfiguration
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "ACTIVE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class KnowledgeBaseSummary
+      attr_accessor description: ::String
+      attr_accessor knowledge_base_arn: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor knowledge_base_type: ("EXTERNAL" | "CUSTOM" | "QUICK_RESPONSES")
+      attr_accessor name: ::String
+      attr_accessor rendering_configuration: Types::RenderingConfiguration
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
+      attr_accessor source_configuration: Types::SourceConfiguration
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "ACTIVE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListAssistantAssociationsRequest
+      attr_accessor assistant_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssistantAssociationsResponse
+      attr_accessor assistant_association_summaries: ::Array[Types::AssistantAssociationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssistantsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssistantsResponse
+      attr_accessor assistant_summaries: ::Array[Types::AssistantSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContentsRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContentsResponse
+      attr_accessor content_summaries: ::Array[Types::ContentSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImportJobsRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImportJobsResponse
+      attr_accessor import_job_summaries: ::Array[Types::ImportJobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListKnowledgeBasesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListKnowledgeBasesResponse
+      attr_accessor knowledge_base_summaries: ::Array[Types::KnowledgeBaseSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListQuickResponsesRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListQuickResponsesResponse
+      attr_accessor next_token: ::String
+      attr_accessor quick_response_summaries: ::Array[Types::QuickResponseSummary]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class NotifyRecommendationsReceivedError
+      attr_accessor message: ::String
+      attr_accessor recommendation_id: ::String
+      SENSITIVE: []
+    end
+
+    class NotifyRecommendationsReceivedRequest
+      attr_accessor assistant_id: ::String
+      attr_accessor recommendation_ids: ::Array[::String]
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class NotifyRecommendationsReceivedResponse
+      attr_accessor errors: ::Array[Types::NotifyRecommendationsReceivedError]
+      attr_accessor recommendation_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PreconditionFailedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PutFeedbackRequest
+      attr_accessor assistant_id: ::String
+      attr_accessor content_feedback: Types::ContentFeedbackData
+      attr_accessor target_id: ::String
+      attr_accessor target_type: ("RECOMMENDATION" | "RESULT")
+      SENSITIVE: []
+    end
+
+    class PutFeedbackResponse
+      attr_accessor assistant_arn: ::String
+      attr_accessor assistant_id: ::String
+      attr_accessor content_feedback: Types::ContentFeedbackData
+      attr_accessor target_id: ::String
+      attr_accessor target_type: ("RECOMMENDATION" | "RESULT")
+      SENSITIVE: []
+    end
+
+    class QueryAssistantRequest
+      attr_accessor assistant_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor query_condition: ::Array[Types::QueryCondition]
+      attr_accessor query_text: ::String
+      attr_accessor session_id: ::String
+      SENSITIVE: [:query_text]
+    end
+
+    class QueryAssistantResponse
+      attr_accessor next_token: ::String
+      attr_accessor results: ::Array[Types::ResultData]
+      SENSITIVE: []
+    end
+
+    class QueryCondition
+      attr_accessor single: Types::QueryConditionItem
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Single < QueryCondition
+      end
+      class Unknown < QueryCondition
+      end
+    end
+
+    class QueryConditionItem
+      attr_accessor comparator: ("EQUALS")
+      attr_accessor field: ("RESULT_TYPE")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class QueryRecommendationTriggerData
+      attr_accessor text: ::String
+      SENSITIVE: [:text]
+    end
+
+    class QuickResponseContentProvider
+      attr_accessor content: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: [:content]
+
+      class Content < QuickResponseContentProvider
+      end
+      class Unknown < QuickResponseContentProvider
+      end
+    end
+
+    class QuickResponseContents
+      attr_accessor markdown: Types::QuickResponseContentProvider
+      attr_accessor plain_text: Types::QuickResponseContentProvider
+      SENSITIVE: []
+    end
+
+    class QuickResponseData
+      attr_accessor channels: ::Array[::String]
+      attr_accessor content_type: ::String
+      attr_accessor contents: Types::QuickResponseContents
+      attr_accessor created_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor grouping_configuration: Types::GroupingConfiguration
+      attr_accessor is_active: bool
+      attr_accessor knowledge_base_arn: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor language: ::String
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor quick_response_arn: ::String
+      attr_accessor quick_response_id: ::String
+      attr_accessor shortcut_key: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class QuickResponseDataProvider
+      attr_accessor content: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: [:content]
+
+      class Content < QuickResponseDataProvider
+      end
+      class Unknown < QuickResponseDataProvider
+      end
+    end
+
+    class QuickResponseFilterField
+      attr_accessor include_no_existence: bool
+      attr_accessor name: ::String
+      attr_accessor operator: ("EQUALS" | "PREFIX")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class QuickResponseOrderField
+      attr_accessor name: ::String
+      attr_accessor order: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class QuickResponseQueryField
+      attr_accessor allow_fuzziness: bool
+      attr_accessor name: ::String
+      attr_accessor operator: ("CONTAINS" | "CONTAINS_AND_PREFIX")
+      attr_accessor priority: ("HIGH" | "MEDIUM" | "LOW")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class QuickResponseSearchExpression
+      attr_accessor filters: ::Array[Types::QuickResponseFilterField]
+      attr_accessor order_on_field: Types::QuickResponseOrderField
+      attr_accessor queries: ::Array[Types::QuickResponseQueryField]
+      SENSITIVE: []
+    end
+
+    class QuickResponseSearchResultData
+      attr_accessor attributes_interpolated: ::Array[::String]
+      attr_accessor attributes_not_interpolated: ::Array[::String]
+      attr_accessor channels: ::Array[::String]
+      attr_accessor content_type: ::String
+      attr_accessor contents: Types::QuickResponseContents
+      attr_accessor created_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor grouping_configuration: Types::GroupingConfiguration
+      attr_accessor is_active: bool
+      attr_accessor knowledge_base_arn: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor language: ::String
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor quick_response_arn: ::String
+      attr_accessor quick_response_id: ::String
+      attr_accessor shortcut_key: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:attributes_interpolated, :attributes_not_interpolated]
+    end
+
+    class QuickResponseSummary
+      attr_accessor channels: ::Array[::String]
+      attr_accessor content_type: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor is_active: bool
+      attr_accessor knowledge_base_arn: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor quick_response_arn: ::String
+      attr_accessor quick_response_id: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RankingData
+      attr_accessor relevance_level: ("HIGH" | "MEDIUM" | "LOW")
+      attr_accessor relevance_score: ::Float
+      SENSITIVE: []
+    end
+
+    class RecommendationData
+      attr_accessor data: Types::DataSummary
+      attr_accessor document: Types::Document
+      attr_accessor recommendation_id: ::String
+      attr_accessor relevance_level: ("HIGH" | "MEDIUM" | "LOW")
+      attr_accessor relevance_score: ::Float
+      attr_accessor type: ("KNOWLEDGE_CONTENT" | "GENERATIVE_RESPONSE" | "GENERATIVE_ANSWER")
+      SENSITIVE: []
+    end
+
+    class RecommendationTrigger
+      attr_accessor data: Types::RecommendationTriggerData
+      attr_accessor id: ::String
+      attr_accessor recommendation_ids: ::Array[::String]
+      attr_accessor source: ("ISSUE_DETECTION" | "RULE_EVALUATION" | "OTHER")
+      attr_accessor type: ("QUERY" | "GENERATIVE")
+      SENSITIVE: []
+    end
+
+    class RecommendationTriggerData
+      attr_accessor query: Types::QueryRecommendationTriggerData
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Query < RecommendationTriggerData
+      end
+      class Unknown < RecommendationTriggerData
+      end
+    end
+
+    class RemoveKnowledgeBaseTemplateUriRequest
+      attr_accessor knowledge_base_id: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveKnowledgeBaseTemplateUriResponse < Aws::EmptyStructure
+    end
+
+    class RenderingConfiguration
+      attr_accessor template_uri: ::String
+      SENSITIVE: []
+    end
+
+    class RequestTimeoutException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class ResultData
+      attr_accessor data: Types::DataSummary
+      attr_accessor document: Types::Document
+      attr_accessor relevance_score: ::Float
+      attr_accessor result_id: ::String
+      attr_accessor type: ("KNOWLEDGE_CONTENT" | "GENERATIVE_ANSWER")
+      SENSITIVE: []
+    end
+
+    class SearchContentRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor search_expression: Types::SearchExpression
+      SENSITIVE: []
+    end
+
+    class SearchContentResponse
+      attr_accessor content_summaries: ::Array[Types::ContentSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchExpression
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class SearchQuickResponsesRequest
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor search_expression: Types::QuickResponseSearchExpression
+      SENSITIVE: [:attributes]
+    end
+
+    class SearchQuickResponsesResponse
+      attr_accessor next_token: ::String
+      attr_accessor results: ::Array[Types::QuickResponseSearchResultData]
+      SENSITIVE: []
+    end
+
+    class SearchSessionsRequest
+      attr_accessor assistant_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor search_expression: Types::SearchExpression
+      SENSITIVE: []
+    end
+
+    class SearchSessionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor session_summaries: ::Array[Types::SessionSummary]
+      SENSITIVE: []
+    end
+
+    class ServerSideEncryptionConfiguration
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SessionData
+      attr_accessor description: ::String
+      attr_accessor integration_configuration: Types::SessionIntegrationConfiguration
+      attr_accessor name: ::String
+      attr_accessor session_arn: ::String
+      attr_accessor session_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class SessionIntegrationConfiguration
+      attr_accessor topic_integration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SessionSummary
+      attr_accessor assistant_arn: ::String
+      attr_accessor assistant_id: ::String
+      attr_accessor session_arn: ::String
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class SourceConfiguration
+      attr_accessor app_integrations: Types::AppIntegrationsConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AppIntegrations < SourceConfiguration
+      end
+      class Unknown < SourceConfiguration
+      end
+    end
+
+    class SourceContentDataDetails
+      attr_accessor id: ::String
+      attr_accessor ranking_data: Types::RankingData
+      attr_accessor text_data: Types::TextData
+      attr_accessor type: ("KNOWLEDGE_CONTENT")
+      SENSITIVE: []
+    end
+
+    class StartContentUploadRequest
+      attr_accessor content_type: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor presigned_url_time_to_live: ::Integer
+      SENSITIVE: []
+    end
+
+    class StartContentUploadResponse
+      attr_accessor headers_to_include: ::Hash[::String, ::String]
+      attr_accessor upload_id: ::String
+      attr_accessor url: ::String
+      attr_accessor url_expiry: ::Time
+      SENSITIVE: [:url]
+    end
+
+    class StartImportJobRequest
+      attr_accessor client_token: ::String
+      attr_accessor external_source_configuration: Types::ExternalSourceConfiguration
+      attr_accessor import_job_type: ("QUICK_RESPONSES")
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor upload_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartImportJobResponse
+      attr_accessor import_job: Types::ImportJobData
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TextData
+      attr_accessor excerpt: Types::DocumentText
+      attr_accessor title: Types::DocumentText
+      SENSITIVE: []
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateContentRequest
+      attr_accessor content_id: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor override_link_out_uri: ::String
+      attr_accessor remove_override_link_out_uri: bool
+      attr_accessor revision_id: ::String
+      attr_accessor title: ::String
+      attr_accessor upload_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateContentResponse
+      attr_accessor content: Types::ContentData
+      SENSITIVE: []
+    end
+
+    class UpdateKnowledgeBaseTemplateUriRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor template_uri: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateKnowledgeBaseTemplateUriResponse
+      attr_accessor knowledge_base: Types::KnowledgeBaseData
+      SENSITIVE: []
+    end
+
+    class UpdateQuickResponseRequest
+      attr_accessor channels: ::Array[::String]
+      attr_accessor content: Types::QuickResponseDataProvider
+      attr_accessor content_type: ::String
+      attr_accessor description: ::String
+      attr_accessor grouping_configuration: Types::GroupingConfiguration
+      attr_accessor is_active: bool
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor language: ::String
+      attr_accessor name: ::String
+      attr_accessor quick_response_id: ::String
+      attr_accessor remove_description: bool
+      attr_accessor remove_grouping_configuration: bool
+      attr_accessor remove_shortcut_key: bool
+      attr_accessor shortcut_key: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateQuickResponseResponse
+      attr_accessor quick_response: Types::QuickResponseData
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

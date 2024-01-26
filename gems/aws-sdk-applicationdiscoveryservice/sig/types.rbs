@@ -1,0 +1,628 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ApplicationDiscoveryService
+  module Types
+
+    class AgentConfigurationStatus
+      attr_accessor agent_id: ::String
+      attr_accessor operation_succeeded: bool
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class AgentInfo
+      attr_accessor agent_id: ::String
+      attr_accessor host_name: ::String
+      attr_accessor agent_network_info_list: ::Array[Types::AgentNetworkInfo]
+      attr_accessor connector_id: ::String
+      attr_accessor version: ::String
+      attr_accessor health: ("HEALTHY" | "UNHEALTHY" | "RUNNING" | "UNKNOWN" | "BLACKLISTED" | "SHUTDOWN")
+      attr_accessor last_health_ping_time: ::String
+      attr_accessor collection_status: ::String
+      attr_accessor agent_type: ::String
+      attr_accessor registered_time: ::String
+      SENSITIVE: []
+    end
+
+    class AgentNetworkInfo
+      attr_accessor ip_address: ::String
+      attr_accessor mac_address: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateConfigurationItemsToApplicationRequest
+      attr_accessor application_configuration_id: ::String
+      attr_accessor configuration_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AssociateConfigurationItemsToApplicationResponse < Aws::EmptyStructure
+    end
+
+    class AuthorizationErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDeleteAgentError
+      attr_accessor agent_id: ::String
+      attr_accessor error_message: ::String
+      attr_accessor error_code: ("NOT_FOUND" | "INTERNAL_SERVER_ERROR" | "AGENT_IN_USE")
+      SENSITIVE: []
+    end
+
+    class BatchDeleteAgentsRequest
+      attr_accessor delete_agents: ::Array[Types::DeleteAgent]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteAgentsResponse
+      attr_accessor errors: ::Array[Types::BatchDeleteAgentError]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteConfigurationTask
+      attr_accessor task_id: ::String
+      attr_accessor status: ("INITIALIZING" | "VALIDATING" | "DELETING" | "COMPLETED" | "FAILED")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor configuration_type: ("SERVER")
+      attr_accessor requested_configurations: ::Array[::String]
+      attr_accessor deleted_configurations: ::Array[::String]
+      attr_accessor failed_configurations: ::Array[Types::FailedConfiguration]
+      attr_accessor deletion_warnings: ::Array[Types::DeletionWarning]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteImportDataError
+      attr_accessor import_task_id: ::String
+      attr_accessor error_code: ("NOT_FOUND" | "INTERNAL_SERVER_ERROR" | "OVER_LIMIT")
+      attr_accessor error_description: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDeleteImportDataRequest
+      attr_accessor import_task_ids: ::Array[::String]
+      attr_accessor delete_history: bool
+      SENSITIVE: []
+    end
+
+    class BatchDeleteImportDataResponse
+      attr_accessor errors: ::Array[Types::BatchDeleteImportDataError]
+      SENSITIVE: []
+    end
+
+    class ConfigurationTag
+      attr_accessor configuration_type: ("SERVER" | "PROCESS" | "CONNECTION" | "APPLICATION")
+      attr_accessor configuration_id: ::String
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      attr_accessor time_of_creation: ::Time
+      SENSITIVE: []
+    end
+
+    class ConflictErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ContinuousExportDescription
+      attr_accessor export_id: ::String
+      attr_accessor status: ("START_IN_PROGRESS" | "START_FAILED" | "ACTIVE" | "ERROR" | "STOP_IN_PROGRESS" | "STOP_FAILED" | "INACTIVE")
+      attr_accessor status_detail: ::String
+      attr_accessor s3_bucket: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor stop_time: ::Time
+      attr_accessor data_source: ("AGENT")
+      attr_accessor schema_storage_config: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateApplicationRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class CreateApplicationResponse
+      attr_accessor configuration_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTagsRequest
+      attr_accessor configuration_ids: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateTagsResponse < Aws::EmptyStructure
+    end
+
+    class CustomerAgentInfo
+      attr_accessor active_agents: ::Integer
+      attr_accessor healthy_agents: ::Integer
+      attr_accessor black_listed_agents: ::Integer
+      attr_accessor shutdown_agents: ::Integer
+      attr_accessor unhealthy_agents: ::Integer
+      attr_accessor total_agents: ::Integer
+      attr_accessor unknown_agents: ::Integer
+      SENSITIVE: []
+    end
+
+    class CustomerAgentlessCollectorInfo
+      attr_accessor active_agentless_collectors: ::Integer
+      attr_accessor healthy_agentless_collectors: ::Integer
+      attr_accessor deny_listed_agentless_collectors: ::Integer
+      attr_accessor shutdown_agentless_collectors: ::Integer
+      attr_accessor unhealthy_agentless_collectors: ::Integer
+      attr_accessor total_agentless_collectors: ::Integer
+      attr_accessor unknown_agentless_collectors: ::Integer
+      SENSITIVE: []
+    end
+
+    class CustomerConnectorInfo
+      attr_accessor active_connectors: ::Integer
+      attr_accessor healthy_connectors: ::Integer
+      attr_accessor black_listed_connectors: ::Integer
+      attr_accessor shutdown_connectors: ::Integer
+      attr_accessor unhealthy_connectors: ::Integer
+      attr_accessor total_connectors: ::Integer
+      attr_accessor unknown_connectors: ::Integer
+      SENSITIVE: []
+    end
+
+    class CustomerMeCollectorInfo
+      attr_accessor active_me_collectors: ::Integer
+      attr_accessor healthy_me_collectors: ::Integer
+      attr_accessor deny_listed_me_collectors: ::Integer
+      attr_accessor shutdown_me_collectors: ::Integer
+      attr_accessor unhealthy_me_collectors: ::Integer
+      attr_accessor total_me_collectors: ::Integer
+      attr_accessor unknown_me_collectors: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteAgent
+      attr_accessor agent_id: ::String
+      attr_accessor force: bool
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationsRequest
+      attr_accessor configuration_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationsResponse < Aws::EmptyStructure
+    end
+
+    class DeleteTagsRequest
+      attr_accessor configuration_ids: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class DeleteTagsResponse < Aws::EmptyStructure
+    end
+
+    class DeletionWarning
+      attr_accessor configuration_id: ::String
+      attr_accessor warning_code: ::Integer
+      attr_accessor warning_text: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAgentsRequest
+      attr_accessor agent_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAgentsResponse
+      attr_accessor agents_info: ::Array[Types::AgentInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBatchDeleteConfigurationTaskRequest
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBatchDeleteConfigurationTaskResponse
+      attr_accessor task: Types::BatchDeleteConfigurationTask
+      SENSITIVE: []
+    end
+
+    class DescribeConfigurationsRequest
+      attr_accessor configuration_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeConfigurationsResponse
+      attr_accessor configurations: ::Array[::Hash[::String, ::String]]
+      SENSITIVE: []
+    end
+
+    class DescribeContinuousExportsRequest
+      attr_accessor export_ids: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeContinuousExportsResponse
+      attr_accessor descriptions: ::Array[Types::ContinuousExportDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeExportConfigurationsRequest
+      attr_accessor export_ids: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeExportConfigurationsResponse
+      attr_accessor exports_info: ::Array[Types::ExportInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeExportTasksRequest
+      attr_accessor export_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::ExportFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeExportTasksResponse
+      attr_accessor exports_info: ::Array[Types::ExportInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeImportTasksRequest
+      attr_accessor filters: ::Array[Types::ImportTaskFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeImportTasksResponse
+      attr_accessor next_token: ::String
+      attr_accessor tasks: ::Array[Types::ImportTask]
+      SENSITIVE: []
+    end
+
+    class DescribeTagsRequest
+      attr_accessor filters: ::Array[Types::TagFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTagsResponse
+      attr_accessor tags: ::Array[Types::ConfigurationTag]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateConfigurationItemsFromApplicationRequest
+      attr_accessor application_configuration_id: ::String
+      attr_accessor configuration_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DisassociateConfigurationItemsFromApplicationResponse < Aws::EmptyStructure
+    end
+
+    class Ec2RecommendationsExportPreferences
+      attr_accessor enabled: bool
+      attr_accessor cpu_performance_metric_basis: Types::UsageMetricBasis
+      attr_accessor ram_performance_metric_basis: Types::UsageMetricBasis
+      attr_accessor tenancy: ("DEDICATED" | "SHARED")
+      attr_accessor excluded_instance_types: ::Array[::String]
+      attr_accessor preferred_region: ::String
+      attr_accessor reserved_instance_options: Types::ReservedInstanceOptions
+      SENSITIVE: []
+    end
+
+    class ExportConfigurationsResponse
+      attr_accessor export_id: ::String
+      SENSITIVE: []
+    end
+
+    class ExportFilter
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      attr_accessor condition: ::String
+      SENSITIVE: []
+    end
+
+    class ExportInfo
+      attr_accessor export_id: ::String
+      attr_accessor export_status: ("FAILED" | "SUCCEEDED" | "IN_PROGRESS")
+      attr_accessor status_message: ::String
+      attr_accessor configurations_download_url: ::String
+      attr_accessor export_request_time: ::Time
+      attr_accessor is_truncated: bool
+      attr_accessor requested_start_time: ::Time
+      attr_accessor requested_end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ExportPreferences
+      attr_accessor ec2_recommendations_preferences: Types::Ec2RecommendationsExportPreferences
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Ec2RecommendationsPreferences < ExportPreferences
+      end
+      class Unknown < ExportPreferences
+      end
+    end
+
+    class FailedConfiguration
+      attr_accessor configuration_id: ::String
+      attr_accessor error_status_code: ::Integer
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      attr_accessor condition: ::String
+      SENSITIVE: []
+    end
+
+    class GetDiscoverySummaryRequest < Aws::EmptyStructure
+    end
+
+    class GetDiscoverySummaryResponse
+      attr_accessor servers: ::Integer
+      attr_accessor applications: ::Integer
+      attr_accessor servers_mapped_to_applications: ::Integer
+      attr_accessor servers_mappedto_tags: ::Integer
+      attr_accessor agent_summary: Types::CustomerAgentInfo
+      attr_accessor connector_summary: Types::CustomerConnectorInfo
+      attr_accessor me_collector_summary: Types::CustomerMeCollectorInfo
+      attr_accessor agentless_collector_summary: Types::CustomerAgentlessCollectorInfo
+      SENSITIVE: []
+    end
+
+    class HomeRegionNotSetException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ImportTask
+      attr_accessor import_task_id: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor name: ::String
+      attr_accessor import_url: ::String
+      attr_accessor status: ("IMPORT_IN_PROGRESS" | "IMPORT_COMPLETE" | "IMPORT_COMPLETE_WITH_ERRORS" | "IMPORT_FAILED" | "IMPORT_FAILED_SERVER_LIMIT_EXCEEDED" | "IMPORT_FAILED_RECORD_LIMIT_EXCEEDED" | "DELETE_IN_PROGRESS" | "DELETE_COMPLETE" | "DELETE_FAILED" | "DELETE_FAILED_LIMIT_EXCEEDED" | "INTERNAL_ERROR")
+      attr_accessor import_request_time: ::Time
+      attr_accessor import_completion_time: ::Time
+      attr_accessor import_deleted_time: ::Time
+      attr_accessor server_import_success: ::Integer
+      attr_accessor server_import_failure: ::Integer
+      attr_accessor application_import_success: ::Integer
+      attr_accessor application_import_failure: ::Integer
+      attr_accessor errors_and_failed_entries_zip: ::String
+      SENSITIVE: []
+    end
+
+    class ImportTaskFilter
+      attr_accessor name: ("IMPORT_TASK_ID" | "STATUS" | "NAME")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterValueException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListConfigurationsRequest
+      attr_accessor configuration_type: ("SERVER" | "PROCESS" | "CONNECTION" | "APPLICATION")
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor order_by: ::Array[Types::OrderByElement]
+      SENSITIVE: []
+    end
+
+    class ListConfigurationsResponse
+      attr_accessor configurations: ::Array[::Hash[::String, ::String]]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServerNeighborsRequest
+      attr_accessor configuration_id: ::String
+      attr_accessor port_information_needed: bool
+      attr_accessor neighbor_configuration_ids: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServerNeighborsResponse
+      attr_accessor neighbors: ::Array[Types::NeighborConnectionDetail]
+      attr_accessor next_token: ::String
+      attr_accessor known_dependency_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class NeighborConnectionDetail
+      attr_accessor source_server_id: ::String
+      attr_accessor destination_server_id: ::String
+      attr_accessor destination_port: ::Integer
+      attr_accessor transport_protocol: ::String
+      attr_accessor connections_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class OperationNotPermittedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OrderByElement
+      attr_accessor field_name: ::String
+      attr_accessor sort_order: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class ReservedInstanceOptions
+      attr_accessor purchasing_option: ("ALL_UPFRONT" | "PARTIAL_UPFRONT" | "NO_UPFRONT")
+      attr_accessor offering_class: ("STANDARD" | "CONVERTIBLE")
+      attr_accessor term_length: ("ONE_YEAR" | "THREE_YEAR")
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServerInternalErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartBatchDeleteConfigurationTaskRequest
+      attr_accessor configuration_type: ("SERVER")
+      attr_accessor configuration_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StartBatchDeleteConfigurationTaskResponse
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartContinuousExportRequest < Aws::EmptyStructure
+    end
+
+    class StartContinuousExportResponse
+      attr_accessor export_id: ::String
+      attr_accessor s3_bucket: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor data_source: ("AGENT")
+      attr_accessor schema_storage_config: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartDataCollectionByAgentIdsRequest
+      attr_accessor agent_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StartDataCollectionByAgentIdsResponse
+      attr_accessor agents_configuration_status: ::Array[Types::AgentConfigurationStatus]
+      SENSITIVE: []
+    end
+
+    class StartExportTaskRequest
+      attr_accessor export_data_format: ::Array[("CSV")]
+      attr_accessor filters: ::Array[Types::ExportFilter]
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor preferences: Types::ExportPreferences
+      SENSITIVE: []
+    end
+
+    class StartExportTaskResponse
+      attr_accessor export_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartImportTaskRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor name: ::String
+      attr_accessor import_url: ::String
+      SENSITIVE: []
+    end
+
+    class StartImportTaskResponse
+      attr_accessor task: Types::ImportTask
+      SENSITIVE: []
+    end
+
+    class StopContinuousExportRequest
+      attr_accessor export_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopContinuousExportResponse
+      attr_accessor start_time: ::Time
+      attr_accessor stop_time: ::Time
+      SENSITIVE: []
+    end
+
+    class StopDataCollectionByAgentIdsRequest
+      attr_accessor agent_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StopDataCollectionByAgentIdsResponse
+      attr_accessor agents_configuration_status: ::Array[Types::AgentConfigurationStatus]
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagFilter
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateApplicationRequest
+      attr_accessor configuration_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateApplicationResponse < Aws::EmptyStructure
+    end
+
+    class UsageMetricBasis
+      attr_accessor name: ::String
+      attr_accessor percentage_adjust: ::Float
+      SENSITIVE: []
+    end
+  end
+end

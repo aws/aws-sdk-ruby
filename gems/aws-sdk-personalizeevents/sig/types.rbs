@@ -1,0 +1,107 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::PersonalizeEvents
+  module Types
+
+    class Action
+      attr_accessor action_id: ::String
+      attr_accessor properties: ::String
+      SENSITIVE: [:properties]
+    end
+
+    class ActionInteraction
+      attr_accessor action_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor timestamp: ::Time
+      attr_accessor event_type: ::String
+      attr_accessor event_id: ::String
+      attr_accessor recommendation_id: ::String
+      attr_accessor impression: ::Array[::String]
+      attr_accessor properties: ::String
+      SENSITIVE: [:action_id, :user_id, :properties]
+    end
+
+    class Event
+      attr_accessor event_id: ::String
+      attr_accessor event_type: ::String
+      attr_accessor event_value: ::Float
+      attr_accessor item_id: ::String
+      attr_accessor properties: ::String
+      attr_accessor sent_at: ::Time
+      attr_accessor recommendation_id: ::String
+      attr_accessor impression: ::Array[::String]
+      attr_accessor metric_attribution: Types::MetricAttribution
+      SENSITIVE: [:item_id, :properties]
+    end
+
+    class InvalidInputException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Item
+      attr_accessor item_id: ::String
+      attr_accessor properties: ::String
+      SENSITIVE: [:properties]
+    end
+
+    class MetricAttribution
+      attr_accessor event_attribution_source: ::String
+      SENSITIVE: []
+    end
+
+    class PutActionInteractionsRequest
+      attr_accessor tracking_id: ::String
+      attr_accessor action_interactions: ::Array[Types::ActionInteraction]
+      SENSITIVE: []
+    end
+
+    class PutActionsRequest
+      attr_accessor dataset_arn: ::String
+      attr_accessor actions: ::Array[Types::Action]
+      SENSITIVE: []
+    end
+
+    class PutEventsRequest
+      attr_accessor tracking_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor event_list: ::Array[Types::Event]
+      SENSITIVE: [:user_id]
+    end
+
+    class PutItemsRequest
+      attr_accessor dataset_arn: ::String
+      attr_accessor items: ::Array[Types::Item]
+      SENSITIVE: []
+    end
+
+    class PutUsersRequest
+      attr_accessor dataset_arn: ::String
+      attr_accessor users: ::Array[Types::User]
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class User
+      attr_accessor user_id: ::String
+      attr_accessor properties: ::String
+      SENSITIVE: [:properties]
+    end
+  end
+end

@@ -1,0 +1,610 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::EFS
+  module Types
+
+    class AccessPointAlreadyExists
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      attr_accessor access_point_id: ::String
+      SENSITIVE: []
+    end
+
+    class AccessPointDescription
+      attr_accessor client_token: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor access_point_id: ::String
+      attr_accessor access_point_arn: ::String
+      attr_accessor file_system_id: ::String
+      attr_accessor posix_user: Types::PosixUser
+      attr_accessor root_directory: Types::RootDirectory
+      attr_accessor owner_id: ::String
+      attr_accessor life_cycle_state: ("creating" | "available" | "updating" | "deleting" | "deleted" | "error")
+      SENSITIVE: []
+    end
+
+    class AccessPointLimitExceeded
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccessPointNotFound
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AvailabilityZonesMismatch
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BackupPolicy
+      attr_accessor status: ("ENABLED" | "ENABLING" | "DISABLED" | "DISABLING")
+      SENSITIVE: []
+    end
+
+    class BackupPolicyDescription
+      attr_accessor backup_policy: Types::BackupPolicy
+      SENSITIVE: []
+    end
+
+    class BadRequest
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAccessPointRequest
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor file_system_id: ::String
+      attr_accessor posix_user: Types::PosixUser
+      attr_accessor root_directory: Types::RootDirectory
+      SENSITIVE: []
+    end
+
+    class CreateFileSystemRequest
+      attr_accessor creation_token: ::String
+      attr_accessor performance_mode: ("generalPurpose" | "maxIO")
+      attr_accessor encrypted: bool
+      attr_accessor kms_key_id: ::String
+      attr_accessor throughput_mode: ("bursting" | "provisioned" | "elastic")
+      attr_accessor provisioned_throughput_in_mibps: ::Float
+      attr_accessor availability_zone_name: ::String
+      attr_accessor backup: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateMountTargetRequest
+      attr_accessor file_system_id: ::String
+      attr_accessor subnet_id: ::String
+      attr_accessor ip_address: ::String
+      attr_accessor security_groups: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateReplicationConfigurationRequest
+      attr_accessor source_file_system_id: ::String
+      attr_accessor destinations: ::Array[Types::DestinationToCreate]
+      SENSITIVE: []
+    end
+
+    class CreateTagsRequest
+      attr_accessor file_system_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreationInfo
+      attr_accessor owner_uid: ::Integer
+      attr_accessor owner_gid: ::Integer
+      attr_accessor permissions: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccessPointRequest
+      attr_accessor access_point_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFileSystemPolicyRequest
+      attr_accessor file_system_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFileSystemRequest
+      attr_accessor file_system_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMountTargetRequest
+      attr_accessor mount_target_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteReplicationConfigurationRequest
+      attr_accessor source_file_system_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTagsRequest
+      attr_accessor file_system_id: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DependencyTimeout
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAccessPointsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor access_point_id: ::String
+      attr_accessor file_system_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAccessPointsResponse
+      attr_accessor access_points: ::Array[Types::AccessPointDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAccountPreferencesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeAccountPreferencesResponse
+      attr_accessor resource_id_preference: Types::ResourceIdPreference
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBackupPolicyRequest
+      attr_accessor file_system_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFileSystemPolicyRequest
+      attr_accessor file_system_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFileSystemsRequest
+      attr_accessor max_items: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor creation_token: ::String
+      attr_accessor file_system_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFileSystemsResponse
+      attr_accessor marker: ::String
+      attr_accessor file_systems: ::Array[Types::FileSystemDescription]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLifecycleConfigurationRequest
+      attr_accessor file_system_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMountTargetSecurityGroupsRequest
+      attr_accessor mount_target_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMountTargetSecurityGroupsResponse
+      attr_accessor security_groups: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeMountTargetsRequest
+      attr_accessor max_items: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor file_system_id: ::String
+      attr_accessor mount_target_id: ::String
+      attr_accessor access_point_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMountTargetsResponse
+      attr_accessor marker: ::String
+      attr_accessor mount_targets: ::Array[Types::MountTargetDescription]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReplicationConfigurationsRequest
+      attr_accessor file_system_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeReplicationConfigurationsResponse
+      attr_accessor replications: ::Array[Types::ReplicationConfigurationDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTagsRequest
+      attr_accessor max_items: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor file_system_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTagsResponse
+      attr_accessor marker: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class Destination
+      attr_accessor status: ("ENABLED" | "ENABLING" | "DELETING" | "ERROR" | "PAUSED" | "PAUSING")
+      attr_accessor file_system_id: ::String
+      attr_accessor region: ::String
+      attr_accessor last_replicated_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class DestinationToCreate
+      attr_accessor region: ::String
+      attr_accessor availability_zone_name: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor file_system_id: ::String
+      SENSITIVE: []
+    end
+
+    class FileSystemAlreadyExists
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      attr_accessor file_system_id: ::String
+      SENSITIVE: []
+    end
+
+    class FileSystemDescription
+      attr_accessor owner_id: ::String
+      attr_accessor creation_token: ::String
+      attr_accessor file_system_id: ::String
+      attr_accessor file_system_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor life_cycle_state: ("creating" | "available" | "updating" | "deleting" | "deleted" | "error")
+      attr_accessor name: ::String
+      attr_accessor number_of_mount_targets: ::Integer
+      attr_accessor size_in_bytes: Types::FileSystemSize
+      attr_accessor performance_mode: ("generalPurpose" | "maxIO")
+      attr_accessor encrypted: bool
+      attr_accessor kms_key_id: ::String
+      attr_accessor throughput_mode: ("bursting" | "provisioned" | "elastic")
+      attr_accessor provisioned_throughput_in_mibps: ::Float
+      attr_accessor availability_zone_name: ::String
+      attr_accessor availability_zone_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor file_system_protection: Types::FileSystemProtectionDescription
+      SENSITIVE: []
+    end
+
+    class FileSystemInUse
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FileSystemLimitExceeded
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FileSystemNotFound
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FileSystemPolicyDescription
+      attr_accessor file_system_id: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class FileSystemProtectionDescription
+      attr_accessor replication_overwrite_protection: ("ENABLED" | "DISABLED" | "REPLICATING")
+      SENSITIVE: []
+    end
+
+    class FileSystemSize
+      attr_accessor value: ::Integer
+      attr_accessor timestamp: ::Time
+      attr_accessor value_in_ia: ::Integer
+      attr_accessor value_in_standard: ::Integer
+      attr_accessor value_in_archive: ::Integer
+      SENSITIVE: []
+    end
+
+    class IncorrectFileSystemLifeCycleState
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IncorrectMountTargetState
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InsufficientThroughputCapacity
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerError
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidPolicyException
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IpAddressInUse
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LifecycleConfigurationDescription
+      attr_accessor lifecycle_policies: ::Array[Types::LifecyclePolicy]
+      SENSITIVE: []
+    end
+
+    class LifecyclePolicy
+      attr_accessor transition_to_ia: ("AFTER_7_DAYS" | "AFTER_14_DAYS" | "AFTER_30_DAYS" | "AFTER_60_DAYS" | "AFTER_90_DAYS" | "AFTER_1_DAY" | "AFTER_180_DAYS" | "AFTER_270_DAYS" | "AFTER_365_DAYS")
+      attr_accessor transition_to_primary_storage_class: ("AFTER_1_ACCESS")
+      attr_accessor transition_to_archive: ("AFTER_1_DAY" | "AFTER_7_DAYS" | "AFTER_14_DAYS" | "AFTER_30_DAYS" | "AFTER_60_DAYS" | "AFTER_90_DAYS" | "AFTER_180_DAYS" | "AFTER_270_DAYS" | "AFTER_365_DAYS")
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyMountTargetSecurityGroupsRequest
+      attr_accessor mount_target_id: ::String
+      attr_accessor security_groups: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class MountTargetConflict
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MountTargetDescription
+      attr_accessor owner_id: ::String
+      attr_accessor mount_target_id: ::String
+      attr_accessor file_system_id: ::String
+      attr_accessor subnet_id: ::String
+      attr_accessor life_cycle_state: ("creating" | "available" | "updating" | "deleting" | "deleted" | "error")
+      attr_accessor ip_address: ::String
+      attr_accessor network_interface_id: ::String
+      attr_accessor availability_zone_id: ::String
+      attr_accessor availability_zone_name: ::String
+      attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
+    class MountTargetNotFound
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkInterfaceLimitExceeded
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoFreeAddressesInSubnet
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyNotFound
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PosixUser
+      attr_accessor uid: ::Integer
+      attr_accessor gid: ::Integer
+      attr_accessor secondary_gids: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class PutAccountPreferencesRequest
+      attr_accessor resource_id_type: ("LONG_ID" | "SHORT_ID")
+      SENSITIVE: []
+    end
+
+    class PutAccountPreferencesResponse
+      attr_accessor resource_id_preference: Types::ResourceIdPreference
+      SENSITIVE: []
+    end
+
+    class PutBackupPolicyRequest
+      attr_accessor file_system_id: ::String
+      attr_accessor backup_policy: Types::BackupPolicy
+      SENSITIVE: []
+    end
+
+    class PutFileSystemPolicyRequest
+      attr_accessor file_system_id: ::String
+      attr_accessor policy: ::String
+      attr_accessor bypass_policy_lockout_safety_check: bool
+      SENSITIVE: []
+    end
+
+    class PutLifecycleConfigurationRequest
+      attr_accessor file_system_id: ::String
+      attr_accessor lifecycle_policies: ::Array[Types::LifecyclePolicy]
+      SENSITIVE: []
+    end
+
+    class ReplicationAlreadyExists
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ReplicationConfigurationDescription
+      attr_accessor source_file_system_id: ::String
+      attr_accessor source_file_system_region: ::String
+      attr_accessor source_file_system_arn: ::String
+      attr_accessor original_source_file_system_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor destinations: ::Array[Types::Destination]
+      SENSITIVE: []
+    end
+
+    class ReplicationNotFound
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceIdPreference
+      attr_accessor resource_id_type: ("LONG_ID" | "SHORT_ID")
+      attr_accessor resources: ::Array[("FILE_SYSTEM" | "MOUNT_TARGET")]
+      SENSITIVE: []
+    end
+
+    class RootDirectory
+      attr_accessor path: ::String
+      attr_accessor creation_info: Types::CreationInfo
+      SENSITIVE: []
+    end
+
+    class SecurityGroupLimitExceeded
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SecurityGroupNotFound
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SubnetNotFound
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ThroughputLimitExceeded
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyRequests
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedAvailabilityZone
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_id: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateFileSystemProtectionRequest
+      attr_accessor file_system_id: ::String
+      attr_accessor replication_overwrite_protection: ("ENABLED" | "DISABLED" | "REPLICATING")
+      SENSITIVE: []
+    end
+
+    class UpdateFileSystemRequest
+      attr_accessor file_system_id: ::String
+      attr_accessor throughput_mode: ("bursting" | "provisioned" | "elastic")
+      attr_accessor provisioned_throughput_in_mibps: ::Float
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,0 +1,266 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Lex
+  module Types
+
+    class ActiveContext
+      attr_accessor name: ::String
+      attr_accessor time_to_live: Types::ActiveContextTimeToLive
+      attr_accessor parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ActiveContextTimeToLive
+      attr_accessor time_to_live_in_seconds: ::Integer
+      attr_accessor turns_to_live: ::Integer
+      SENSITIVE: []
+    end
+
+    class BadGatewayException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Button
+      attr_accessor text: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSessionRequest
+      attr_accessor bot_name: ::String
+      attr_accessor bot_alias: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSessionResponse
+      attr_accessor bot_name: ::String
+      attr_accessor bot_alias: ::String
+      attr_accessor user_id: ::String
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class DependencyFailedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DialogAction
+      attr_accessor type: ("ElicitIntent" | "ConfirmIntent" | "ElicitSlot" | "Close" | "Delegate")
+      attr_accessor intent_name: ::String
+      attr_accessor slots: ::Hash[::String, ::String]
+      attr_accessor slot_to_elicit: ::String
+      attr_accessor fulfillment_state: ("Fulfilled" | "Failed" | "ReadyForFulfillment")
+      attr_accessor message: ::String
+      attr_accessor message_format: ("PlainText" | "CustomPayload" | "SSML" | "Composite")
+      SENSITIVE: [:slots, :message]
+    end
+
+    class GenericAttachment
+      attr_accessor title: ::String
+      attr_accessor sub_title: ::String
+      attr_accessor attachment_link_url: ::String
+      attr_accessor image_url: ::String
+      attr_accessor buttons: ::Array[Types::Button]
+      SENSITIVE: []
+    end
+
+    class GetSessionRequest
+      attr_accessor bot_name: ::String
+      attr_accessor bot_alias: ::String
+      attr_accessor user_id: ::String
+      attr_accessor checkpoint_label_filter: ::String
+      SENSITIVE: []
+    end
+
+    class GetSessionResponse
+      attr_accessor recent_intent_summary_view: ::Array[Types::IntentSummary]
+      attr_accessor session_attributes: ::Hash[::String, ::String]
+      attr_accessor session_id: ::String
+      attr_accessor dialog_action: Types::DialogAction
+      attr_accessor active_contexts: ::Array[Types::ActiveContext]
+      SENSITIVE: [:session_attributes, :active_contexts]
+    end
+
+    class IntentConfidence
+      attr_accessor score: ::Float
+      SENSITIVE: []
+    end
+
+    class IntentSummary
+      attr_accessor intent_name: ::String
+      attr_accessor checkpoint_label: ::String
+      attr_accessor slots: ::Hash[::String, ::String]
+      attr_accessor confirmation_status: ("None" | "Confirmed" | "Denied")
+      attr_accessor dialog_action_type: ("ElicitIntent" | "ConfirmIntent" | "ElicitSlot" | "Close" | "Delegate")
+      attr_accessor fulfillment_state: ("Fulfilled" | "Failed" | "ReadyForFulfillment")
+      attr_accessor slot_to_elicit: ::String
+      SENSITIVE: [:slots]
+    end
+
+    class InternalFailureException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor retry_after_seconds: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LoopDetectedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NotAcceptableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PostContentRequest
+      attr_accessor bot_name: ::String
+      attr_accessor bot_alias: ::String
+      attr_accessor user_id: ::String
+      attr_accessor session_attributes: ::String
+      attr_accessor request_attributes: ::String
+      attr_accessor content_type: ::String
+      attr_accessor accept: ::String
+      attr_accessor input_stream: ::IO
+      attr_accessor active_contexts: ::String
+      SENSITIVE: [:session_attributes, :request_attributes, :active_contexts]
+    end
+
+    class PostContentResponse
+      attr_accessor content_type: ::String
+      attr_accessor intent_name: ::String
+      attr_accessor nlu_intent_confidence: ::String
+      attr_accessor alternative_intents: ::String
+      attr_accessor slots: ::String
+      attr_accessor session_attributes: ::String
+      attr_accessor sentiment_response: ::String
+      attr_accessor message: ::String
+      attr_accessor encoded_message: ::String
+      attr_accessor message_format: ("PlainText" | "CustomPayload" | "SSML" | "Composite")
+      attr_accessor dialog_state: ("ElicitIntent" | "ConfirmIntent" | "ElicitSlot" | "Fulfilled" | "ReadyForFulfillment" | "Failed")
+      attr_accessor slot_to_elicit: ::String
+      attr_accessor input_transcript: ::String
+      attr_accessor encoded_input_transcript: ::String
+      attr_accessor audio_stream: ::IO
+      attr_accessor bot_version: ::String
+      attr_accessor session_id: ::String
+      attr_accessor active_contexts: ::String
+      SENSITIVE: [:message, :encoded_message, :encoded_input_transcript, :active_contexts]
+    end
+
+    class PostTextRequest
+      attr_accessor bot_name: ::String
+      attr_accessor bot_alias: ::String
+      attr_accessor user_id: ::String
+      attr_accessor session_attributes: ::Hash[::String, ::String]
+      attr_accessor request_attributes: ::Hash[::String, ::String]
+      attr_accessor input_text: ::String
+      attr_accessor active_contexts: ::Array[Types::ActiveContext]
+      SENSITIVE: [:session_attributes, :request_attributes, :input_text, :active_contexts]
+    end
+
+    class PostTextResponse
+      attr_accessor intent_name: ::String
+      attr_accessor nlu_intent_confidence: Types::IntentConfidence
+      attr_accessor alternative_intents: ::Array[Types::PredictedIntent]
+      attr_accessor slots: ::Hash[::String, ::String]
+      attr_accessor session_attributes: ::Hash[::String, ::String]
+      attr_accessor message: ::String
+      attr_accessor sentiment_response: Types::SentimentResponse
+      attr_accessor message_format: ("PlainText" | "CustomPayload" | "SSML" | "Composite")
+      attr_accessor dialog_state: ("ElicitIntent" | "ConfirmIntent" | "ElicitSlot" | "Fulfilled" | "ReadyForFulfillment" | "Failed")
+      attr_accessor slot_to_elicit: ::String
+      attr_accessor response_card: Types::ResponseCard
+      attr_accessor session_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor active_contexts: ::Array[Types::ActiveContext]
+      SENSITIVE: [:slots, :session_attributes, :message, :active_contexts]
+    end
+
+    class PredictedIntent
+      attr_accessor intent_name: ::String
+      attr_accessor nlu_intent_confidence: Types::IntentConfidence
+      attr_accessor slots: ::Hash[::String, ::String]
+      SENSITIVE: [:slots]
+    end
+
+    class PutSessionRequest
+      attr_accessor bot_name: ::String
+      attr_accessor bot_alias: ::String
+      attr_accessor user_id: ::String
+      attr_accessor session_attributes: ::Hash[::String, ::String]
+      attr_accessor dialog_action: Types::DialogAction
+      attr_accessor recent_intent_summary_view: ::Array[Types::IntentSummary]
+      attr_accessor accept: ::String
+      attr_accessor active_contexts: ::Array[Types::ActiveContext]
+      SENSITIVE: [:session_attributes, :active_contexts]
+    end
+
+    class PutSessionResponse
+      attr_accessor content_type: ::String
+      attr_accessor intent_name: ::String
+      attr_accessor slots: ::String
+      attr_accessor session_attributes: ::String
+      attr_accessor message: ::String
+      attr_accessor encoded_message: ::String
+      attr_accessor message_format: ("PlainText" | "CustomPayload" | "SSML" | "Composite")
+      attr_accessor dialog_state: ("ElicitIntent" | "ConfirmIntent" | "ElicitSlot" | "Fulfilled" | "ReadyForFulfillment" | "Failed")
+      attr_accessor slot_to_elicit: ::String
+      attr_accessor audio_stream: ::IO
+      attr_accessor session_id: ::String
+      attr_accessor active_contexts: ::String
+      SENSITIVE: [:message, :encoded_message, :active_contexts]
+    end
+
+    class RequestTimeoutException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResponseCard
+      attr_accessor version: ::String
+      attr_accessor content_type: ("application/vnd.amazonaws.card.generic")
+      attr_accessor generic_attachments: ::Array[Types::GenericAttachment]
+      SENSITIVE: []
+    end
+
+    class SentimentResponse
+      attr_accessor sentiment_label: ::String
+      attr_accessor sentiment_score: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedMediaTypeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

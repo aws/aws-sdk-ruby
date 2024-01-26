@@ -1,0 +1,674 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Neptunedata
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CancelGremlinQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelGremlinQueryOutput]
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#cancel_gremlin_query-instance_method
+      def cancel_gremlin_query: (
+                                  query_id: ::String
+                                ) -> _CancelGremlinQueryResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelGremlinQueryResponseSuccess
+
+      interface _CancelLoaderJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelLoaderJobOutput]
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#cancel_loader_job-instance_method
+      def cancel_loader_job: (
+                               load_id: ::String
+                             ) -> _CancelLoaderJobResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelLoaderJobResponseSuccess
+
+      interface _CancelMLDataProcessingJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelMLDataProcessingJobOutput]
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#cancel_ml_data_processing_job-instance_method
+      def cancel_ml_data_processing_job: (
+                                           id: ::String,
+                                           ?neptune_iam_role_arn: ::String,
+                                           ?clean: bool
+                                         ) -> _CancelMLDataProcessingJobResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelMLDataProcessingJobResponseSuccess
+
+      interface _CancelMLModelTrainingJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelMLModelTrainingJobOutput]
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#cancel_ml_model_training_job-instance_method
+      def cancel_ml_model_training_job: (
+                                          id: ::String,
+                                          ?neptune_iam_role_arn: ::String,
+                                          ?clean: bool
+                                        ) -> _CancelMLModelTrainingJobResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelMLModelTrainingJobResponseSuccess
+
+      interface _CancelMLModelTransformJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelMLModelTransformJobOutput]
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#cancel_ml_model_transform_job-instance_method
+      def cancel_ml_model_transform_job: (
+                                           id: ::String,
+                                           ?neptune_iam_role_arn: ::String,
+                                           ?clean: bool
+                                         ) -> _CancelMLModelTransformJobResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelMLModelTransformJobResponseSuccess
+
+      interface _CancelOpenCypherQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelOpenCypherQueryOutput]
+        def status: () -> ::String
+        def payload: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#cancel_open_cypher_query-instance_method
+      def cancel_open_cypher_query: (
+                                      query_id: ::String,
+                                      ?silent: bool
+                                    ) -> _CancelOpenCypherQueryResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelOpenCypherQueryResponseSuccess
+
+      interface _CreateMLEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMLEndpointOutput]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def creation_time_in_millis: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#create_ml_endpoint-instance_method
+      def create_ml_endpoint: (
+                                ?id: ::String,
+                                ?ml_model_training_job_id: ::String,
+                                ?ml_model_transform_job_id: ::String,
+                                ?update: bool,
+                                ?neptune_iam_role_arn: ::String,
+                                ?model_name: ::String,
+                                ?instance_type: ::String,
+                                ?instance_count: ::Integer,
+                                ?volume_encryption_kms_key: ::String
+                              ) -> _CreateMLEndpointResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMLEndpointResponseSuccess
+
+      interface _DeleteMLEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMLEndpointOutput]
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#delete_ml_endpoint-instance_method
+      def delete_ml_endpoint: (
+                                id: ::String,
+                                ?neptune_iam_role_arn: ::String,
+                                ?clean: bool
+                              ) -> _DeleteMLEndpointResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMLEndpointResponseSuccess
+
+      interface _DeletePropertygraphStatisticsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePropertygraphStatisticsOutput]
+        def status_code: () -> ::Integer
+        def status: () -> ::String
+        def payload: () -> Types::DeleteStatisticsValueMap
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#delete_propertygraph_statistics-instance_method
+      def delete_propertygraph_statistics: () -> _DeletePropertygraphStatisticsResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePropertygraphStatisticsResponseSuccess
+
+      interface _DeleteSparqlStatisticsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSparqlStatisticsOutput]
+        def status_code: () -> ::Integer
+        def status: () -> ::String
+        def payload: () -> Types::DeleteStatisticsValueMap
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#delete_sparql_statistics-instance_method
+      def delete_sparql_statistics: () -> _DeleteSparqlStatisticsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSparqlStatisticsResponseSuccess
+
+      interface _ExecuteFastResetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExecuteFastResetOutput]
+        def status: () -> ::String
+        def payload: () -> Types::FastResetToken
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#execute_fast_reset-instance_method
+      def execute_fast_reset: (
+                                action: ("initiateDatabaseReset" | "performDatabaseReset"),
+                                ?token: ::String
+                              ) -> _ExecuteFastResetResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExecuteFastResetResponseSuccess
+
+      interface _ExecuteGremlinExplainQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExecuteGremlinExplainQueryOutput]
+        def output: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#execute_gremlin_explain_query-instance_method
+      def execute_gremlin_explain_query: (
+                                           gremlin_query: ::String
+                                         ) -> _ExecuteGremlinExplainQueryResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExecuteGremlinExplainQueryResponseSuccess
+
+      interface _ExecuteGremlinProfileQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExecuteGremlinProfileQueryOutput]
+        def output: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#execute_gremlin_profile_query-instance_method
+      def execute_gremlin_profile_query: (
+                                           gremlin_query: ::String,
+                                           ?results: bool,
+                                           ?chop: ::Integer,
+                                           ?serializer: ::String,
+                                           ?index_ops: bool
+                                         ) -> _ExecuteGremlinProfileQueryResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExecuteGremlinProfileQueryResponseSuccess
+
+      interface _ExecuteGremlinQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExecuteGremlinQueryOutput]
+        def request_id: () -> ::String
+        def status: () -> Types::GremlinQueryStatusAttributes
+        def result: () -> untyped
+        def meta: () -> untyped
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#execute_gremlin_query-instance_method
+      def execute_gremlin_query: (
+                                   gremlin_query: ::String,
+                                   ?serializer: ::String
+                                 ) -> _ExecuteGremlinQueryResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExecuteGremlinQueryResponseSuccess
+
+      interface _ExecuteOpenCypherExplainQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExecuteOpenCypherExplainQueryOutput]
+        def results: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#execute_open_cypher_explain_query-instance_method
+      def execute_open_cypher_explain_query: (
+                                               open_cypher_query: ::String,
+                                               ?parameters: ::String,
+                                               explain_mode: ("static" | "dynamic" | "details")
+                                             ) -> _ExecuteOpenCypherExplainQueryResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExecuteOpenCypherExplainQueryResponseSuccess
+
+      interface _ExecuteOpenCypherQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExecuteOpenCypherQueryOutput]
+        def results: () -> untyped
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#execute_open_cypher_query-instance_method
+      def execute_open_cypher_query: (
+                                       open_cypher_query: ::String,
+                                       ?parameters: ::String
+                                     ) -> _ExecuteOpenCypherQueryResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExecuteOpenCypherQueryResponseSuccess
+
+      interface _GetEngineStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEngineStatusOutput]
+        def status: () -> ::String
+        def start_time: () -> ::String
+        def db_engine_version: () -> ::String
+        def role: () -> ::String
+        def dfe_query_engine: () -> ::String
+        def gremlin: () -> Types::QueryLanguageVersion
+        def sparql: () -> Types::QueryLanguageVersion
+        def opencypher: () -> Types::QueryLanguageVersion
+        def lab_mode: () -> ::Hash[::String, ::String]
+        def rolling_back_trx_count: () -> ::Integer
+        def rolling_back_trx_earliest_start_time: () -> ::String
+        def features: () -> ::Hash[::String, untyped]
+        def settings: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#get_engine_status-instance_method
+      def get_engine_status: () -> _GetEngineStatusResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEngineStatusResponseSuccess
+
+      interface _GetGremlinQueryStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGremlinQueryStatusOutput]
+        def query_id: () -> ::String
+        def query_string: () -> ::String
+        def query_eval_stats: () -> Types::QueryEvalStats
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#get_gremlin_query_status-instance_method
+      def get_gremlin_query_status: (
+                                      query_id: ::String
+                                    ) -> _GetGremlinQueryStatusResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGremlinQueryStatusResponseSuccess
+
+      interface _GetLoaderJobStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLoaderJobStatusOutput]
+        def status: () -> ::String
+        def payload: () -> untyped
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#get_loader_job_status-instance_method
+      def get_loader_job_status: (
+                                   load_id: ::String,
+                                   ?details: bool,
+                                   ?errors: bool,
+                                   ?page: ::Integer,
+                                   ?errors_per_page: ::Integer
+                                 ) -> _GetLoaderJobStatusResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLoaderJobStatusResponseSuccess
+
+      interface _GetMLDataProcessingJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMLDataProcessingJobOutput]
+        def status: () -> ::String
+        def id: () -> ::String
+        def processing_job: () -> Types::MlResourceDefinition
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#get_ml_data_processing_job-instance_method
+      def get_ml_data_processing_job: (
+                                        id: ::String,
+                                        ?neptune_iam_role_arn: ::String
+                                      ) -> _GetMLDataProcessingJobResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMLDataProcessingJobResponseSuccess
+
+      interface _GetMLEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMLEndpointOutput]
+        def status: () -> ::String
+        def id: () -> ::String
+        def endpoint: () -> Types::MlResourceDefinition
+        def endpoint_config: () -> Types::MlConfigDefinition
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#get_ml_endpoint-instance_method
+      def get_ml_endpoint: (
+                             id: ::String,
+                             ?neptune_iam_role_arn: ::String
+                           ) -> _GetMLEndpointResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMLEndpointResponseSuccess
+
+      interface _GetMLModelTrainingJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMLModelTrainingJobOutput]
+        def status: () -> ::String
+        def id: () -> ::String
+        def processing_job: () -> Types::MlResourceDefinition
+        def hpo_job: () -> Types::MlResourceDefinition
+        def model_transform_job: () -> Types::MlResourceDefinition
+        def ml_models: () -> ::Array[Types::MlConfigDefinition]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#get_ml_model_training_job-instance_method
+      def get_ml_model_training_job: (
+                                       id: ::String,
+                                       ?neptune_iam_role_arn: ::String
+                                     ) -> _GetMLModelTrainingJobResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMLModelTrainingJobResponseSuccess
+
+      interface _GetMLModelTransformJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMLModelTransformJobOutput]
+        def status: () -> ::String
+        def id: () -> ::String
+        def base_processing_job: () -> Types::MlResourceDefinition
+        def remote_model_transform_job: () -> Types::MlResourceDefinition
+        def models: () -> ::Array[Types::MlConfigDefinition]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#get_ml_model_transform_job-instance_method
+      def get_ml_model_transform_job: (
+                                        id: ::String,
+                                        ?neptune_iam_role_arn: ::String
+                                      ) -> _GetMLModelTransformJobResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMLModelTransformJobResponseSuccess
+
+      interface _GetOpenCypherQueryStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOpenCypherQueryStatusOutput]
+        def query_id: () -> ::String
+        def query_string: () -> ::String
+        def query_eval_stats: () -> Types::QueryEvalStats
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#get_open_cypher_query_status-instance_method
+      def get_open_cypher_query_status: (
+                                          query_id: ::String
+                                        ) -> _GetOpenCypherQueryStatusResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOpenCypherQueryStatusResponseSuccess
+
+      interface _GetPropertygraphStatisticsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPropertygraphStatisticsOutput]
+        def status: () -> ::String
+        def payload: () -> Types::Statistics
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#get_propertygraph_statistics-instance_method
+      def get_propertygraph_statistics: () -> _GetPropertygraphStatisticsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPropertygraphStatisticsResponseSuccess
+
+      interface _GetPropertygraphStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPropertygraphStreamOutput]
+        def last_event_id: () -> ::Hash[::String, ::String]
+        def last_trx_timestamp_in_millis: () -> ::Integer
+        def format: () -> ::String
+        def records: () -> ::Array[Types::PropertygraphRecord]
+        def total_records: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#get_propertygraph_stream-instance_method
+      def get_propertygraph_stream: (
+                                      ?limit: ::Integer,
+                                      ?iterator_type: ("AT_SEQUENCE_NUMBER" | "AFTER_SEQUENCE_NUMBER" | "TRIM_HORIZON" | "LATEST"),
+                                      ?commit_num: ::Integer,
+                                      ?op_num: ::Integer,
+                                      ?encoding: ("gzip")
+                                    ) -> _GetPropertygraphStreamResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPropertygraphStreamResponseSuccess
+
+      interface _GetPropertygraphSummaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPropertygraphSummaryOutput]
+        def status_code: () -> ::Integer
+        def payload: () -> Types::PropertygraphSummaryValueMap
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#get_propertygraph_summary-instance_method
+      def get_propertygraph_summary: (
+                                       ?mode: ("basic" | "detailed")
+                                     ) -> _GetPropertygraphSummaryResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPropertygraphSummaryResponseSuccess
+
+      interface _GetRDFGraphSummaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRDFGraphSummaryOutput]
+        def status_code: () -> ::Integer
+        def payload: () -> Types::RDFGraphSummaryValueMap
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#get_rdf_graph_summary-instance_method
+      def get_rdf_graph_summary: (
+                                   ?mode: ("basic" | "detailed")
+                                 ) -> _GetRDFGraphSummaryResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRDFGraphSummaryResponseSuccess
+
+      interface _GetSparqlStatisticsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSparqlStatisticsOutput]
+        def status: () -> ::String
+        def payload: () -> Types::Statistics
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#get_sparql_statistics-instance_method
+      def get_sparql_statistics: () -> _GetSparqlStatisticsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSparqlStatisticsResponseSuccess
+
+      interface _GetSparqlStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSparqlStreamOutput]
+        def last_event_id: () -> ::Hash[::String, ::String]
+        def last_trx_timestamp_in_millis: () -> ::Integer
+        def format: () -> ::String
+        def records: () -> ::Array[Types::SparqlRecord]
+        def total_records: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#get_sparql_stream-instance_method
+      def get_sparql_stream: (
+                               ?limit: ::Integer,
+                               ?iterator_type: ("AT_SEQUENCE_NUMBER" | "AFTER_SEQUENCE_NUMBER" | "TRIM_HORIZON" | "LATEST"),
+                               ?commit_num: ::Integer,
+                               ?op_num: ::Integer,
+                               ?encoding: ("gzip")
+                             ) -> _GetSparqlStreamResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSparqlStreamResponseSuccess
+
+      interface _ListGremlinQueriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGremlinQueriesOutput]
+        def accepted_query_count: () -> ::Integer
+        def running_query_count: () -> ::Integer
+        def queries: () -> ::Array[Types::GremlinQueryStatus]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#list_gremlin_queries-instance_method
+      def list_gremlin_queries: (
+                                  ?include_waiting: bool
+                                ) -> _ListGremlinQueriesResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGremlinQueriesResponseSuccess
+
+      interface _ListLoaderJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLoaderJobsOutput]
+        def status: () -> ::String
+        def payload: () -> Types::LoaderIdResult
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#list_loader_jobs-instance_method
+      def list_loader_jobs: (
+                              ?limit: ::Integer,
+                              ?include_queued_loads: bool
+                            ) -> _ListLoaderJobsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLoaderJobsResponseSuccess
+
+      interface _ListMLDataProcessingJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMLDataProcessingJobsOutput]
+        def ids: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#list_ml_data_processing_jobs-instance_method
+      def list_ml_data_processing_jobs: (
+                                          ?max_items: ::Integer,
+                                          ?neptune_iam_role_arn: ::String
+                                        ) -> _ListMLDataProcessingJobsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMLDataProcessingJobsResponseSuccess
+
+      interface _ListMLEndpointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMLEndpointsOutput]
+        def ids: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#list_ml_endpoints-instance_method
+      def list_ml_endpoints: (
+                               ?max_items: ::Integer,
+                               ?neptune_iam_role_arn: ::String
+                             ) -> _ListMLEndpointsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMLEndpointsResponseSuccess
+
+      interface _ListMLModelTrainingJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMLModelTrainingJobsOutput]
+        def ids: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#list_ml_model_training_jobs-instance_method
+      def list_ml_model_training_jobs: (
+                                         ?max_items: ::Integer,
+                                         ?neptune_iam_role_arn: ::String
+                                       ) -> _ListMLModelTrainingJobsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMLModelTrainingJobsResponseSuccess
+
+      interface _ListMLModelTransformJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMLModelTransformJobsOutput]
+        def ids: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#list_ml_model_transform_jobs-instance_method
+      def list_ml_model_transform_jobs: (
+                                          ?max_items: ::Integer,
+                                          ?neptune_iam_role_arn: ::String
+                                        ) -> _ListMLModelTransformJobsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMLModelTransformJobsResponseSuccess
+
+      interface _ListOpenCypherQueriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOpenCypherQueriesOutput]
+        def accepted_query_count: () -> ::Integer
+        def running_query_count: () -> ::Integer
+        def queries: () -> ::Array[Types::GremlinQueryStatus]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#list_open_cypher_queries-instance_method
+      def list_open_cypher_queries: (
+                                      ?include_waiting: bool
+                                    ) -> _ListOpenCypherQueriesResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOpenCypherQueriesResponseSuccess
+
+      interface _ManagePropertygraphStatisticsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ManagePropertygraphStatisticsOutput]
+        def status: () -> ::String
+        def payload: () -> Types::RefreshStatisticsIdMap
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#manage_propertygraph_statistics-instance_method
+      def manage_propertygraph_statistics: (
+                                             ?mode: ("disableAutoCompute" | "enableAutoCompute" | "refresh")
+                                           ) -> _ManagePropertygraphStatisticsResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ManagePropertygraphStatisticsResponseSuccess
+
+      interface _ManageSparqlStatisticsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ManageSparqlStatisticsOutput]
+        def status: () -> ::String
+        def payload: () -> Types::RefreshStatisticsIdMap
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#manage_sparql_statistics-instance_method
+      def manage_sparql_statistics: (
+                                      ?mode: ("disableAutoCompute" | "enableAutoCompute" | "refresh")
+                                    ) -> _ManageSparqlStatisticsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ManageSparqlStatisticsResponseSuccess
+
+      interface _StartLoaderJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartLoaderJobOutput]
+        def status: () -> ::String
+        def payload: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#start_loader_job-instance_method
+      def start_loader_job: (
+                              source: ::String,
+                              format: ("csv" | "opencypher" | "ntriples" | "nquads" | "rdfxml" | "turtle"),
+                              s3_bucket_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "ca-central-1" | "sa-east-1" | "eu-north-1" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "me-south-1" | "af-south-1" | "ap-east-1" | "ap-northeast-1" | "ap-northeast-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-south-1" | "cn-north-1" | "cn-northwest-1" | "us-gov-west-1" | "us-gov-east-1"),
+                              iam_role_arn: ::String,
+                              ?mode: ("RESUME" | "NEW" | "AUTO"),
+                              ?fail_on_error: bool,
+                              ?parallelism: ("LOW" | "MEDIUM" | "HIGH" | "OVERSUBSCRIBE"),
+                              ?parser_configuration: Hash[::String, ::String],
+                              ?update_single_cardinality_properties: bool,
+                              ?queue_request: bool,
+                              ?dependencies: Array[::String],
+                              ?user_provided_edge_ids: bool
+                            ) -> _StartLoaderJobResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartLoaderJobResponseSuccess
+
+      interface _StartMLDataProcessingJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMLDataProcessingJobOutput]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def creation_time_in_millis: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#start_ml_data_processing_job-instance_method
+      def start_ml_data_processing_job: (
+                                          ?id: ::String,
+                                          ?previous_data_processing_job_id: ::String,
+                                          input_data_s3_location: ::String,
+                                          processed_data_s3_location: ::String,
+                                          ?sagemaker_iam_role_arn: ::String,
+                                          ?neptune_iam_role_arn: ::String,
+                                          ?processing_instance_type: ::String,
+                                          ?processing_instance_volume_size_in_gb: ::Integer,
+                                          ?processing_time_out_in_seconds: ::Integer,
+                                          ?model_type: ::String,
+                                          ?config_file_name: ::String,
+                                          ?subnets: Array[::String],
+                                          ?security_group_ids: Array[::String],
+                                          ?volume_encryption_kms_key: ::String,
+                                          ?s3_output_encryption_kms_key: ::String
+                                        ) -> _StartMLDataProcessingJobResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMLDataProcessingJobResponseSuccess
+
+      interface _StartMLModelTrainingJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMLModelTrainingJobOutput]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def creation_time_in_millis: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#start_ml_model_training_job-instance_method
+      def start_ml_model_training_job: (
+                                         ?id: ::String,
+                                         ?previous_model_training_job_id: ::String,
+                                         data_processing_job_id: ::String,
+                                         train_model_s3_location: ::String,
+                                         ?sagemaker_iam_role_arn: ::String,
+                                         ?neptune_iam_role_arn: ::String,
+                                         ?base_processing_instance_type: ::String,
+                                         ?training_instance_type: ::String,
+                                         ?training_instance_volume_size_in_gb: ::Integer,
+                                         ?training_time_out_in_seconds: ::Integer,
+                                         ?max_hpo_number_of_training_jobs: ::Integer,
+                                         ?max_hpo_parallel_training_jobs: ::Integer,
+                                         ?subnets: Array[::String],
+                                         ?security_group_ids: Array[::String],
+                                         ?volume_encryption_kms_key: ::String,
+                                         ?s3_output_encryption_kms_key: ::String,
+                                         ?enable_managed_spot_training: bool,
+                                         ?custom_model_training_parameters: {
+                                           source_s3_directory_path: ::String,
+                                           training_entry_point_script: ::String?,
+                                           transform_entry_point_script: ::String?
+                                         }
+                                       ) -> _StartMLModelTrainingJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMLModelTrainingJobResponseSuccess
+
+      interface _StartMLModelTransformJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMLModelTransformJobOutput]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def creation_time_in_millis: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#start_ml_model_transform_job-instance_method
+      def start_ml_model_transform_job: (
+                                          ?id: ::String,
+                                          ?data_processing_job_id: ::String,
+                                          ?ml_model_training_job_id: ::String,
+                                          ?training_job_name: ::String,
+                                          model_transform_output_s3_location: ::String,
+                                          ?sagemaker_iam_role_arn: ::String,
+                                          ?neptune_iam_role_arn: ::String,
+                                          ?custom_model_transform_parameters: {
+                                            source_s3_directory_path: ::String,
+                                            transform_entry_point_script: ::String?
+                                          },
+                                          ?base_processing_instance_type: ::String,
+                                          ?base_processing_instance_volume_size_in_gb: ::Integer,
+                                          ?subnets: Array[::String],
+                                          ?security_group_ids: Array[::String],
+                                          ?volume_encryption_kms_key: ::String,
+                                          ?s3_output_encryption_kms_key: ::String
+                                        ) -> _StartMLModelTransformJobResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMLModelTransformJobResponseSuccess
+    end
+  end
+end
+

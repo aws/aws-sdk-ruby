@@ -1,0 +1,332 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DynamoDB
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html
+    class Table
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#initialize-instance_method
+      def initialize: (String name, Hash[Symbol, untyped] options) -> void
+                    | (name: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#name-instance_method
+      def name: () -> String
+      alias table_name name
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#attribute_definitions-instance_method
+      def attribute_definitions: () -> ::Array[Types::AttributeDefinition]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#key_schema-instance_method
+      def key_schema: () -> ::Array[Types::KeySchemaElement]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#table_status-instance_method
+      def table_status: () -> ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS" | "ARCHIVING" | "ARCHIVED")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#creation_date_time-instance_method
+      def creation_date_time: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#provisioned_throughput-instance_method
+      def provisioned_throughput: () -> Types::ProvisionedThroughputDescription
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#table_size_bytes-instance_method
+      def table_size_bytes: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#item_count-instance_method
+      def item_count: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#table_arn-instance_method
+      def table_arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#table_id-instance_method
+      def table_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#billing_mode_summary-instance_method
+      def billing_mode_summary: () -> Types::BillingModeSummary
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#local_secondary_indexes-instance_method
+      def local_secondary_indexes: () -> ::Array[Types::LocalSecondaryIndexDescription]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#global_secondary_indexes-instance_method
+      def global_secondary_indexes: () -> ::Array[Types::GlobalSecondaryIndexDescription]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#stream_specification-instance_method
+      def stream_specification: () -> Types::StreamSpecification
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#latest_stream_label-instance_method
+      def latest_stream_label: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#latest_stream_arn-instance_method
+      def latest_stream_arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#global_table_version-instance_method
+      def global_table_version: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#replicas-instance_method
+      def replicas: () -> ::Array[Types::ReplicaDescription]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#restore_summary-instance_method
+      def restore_summary: () -> Types::RestoreSummary
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#sse_description-instance_method
+      def sse_description: () -> Types::SSEDescription
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#archival_summary-instance_method
+      def archival_summary: () -> Types::ArchivalSummary
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#table_class_summary-instance_method
+      def table_class_summary: () -> Types::TableClassSummary
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#deletion_protection_enabled-instance_method
+      def deletion_protection_enabled: () -> bool
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#data-instance_method
+      def data: () -> Types::TableDescription
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#delete-instance_method
+      def delete: (
+                  ) -> Types::DeleteTableOutput
+                | (?Hash[Symbol, untyped]) -> Types::DeleteTableOutput
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#delete_item-instance_method
+      def delete_item: (
+                         key: Hash[::String, untyped],
+                         ?expected: Hash[::String, {
+                             value: untyped?,
+                             exists: bool?,
+                             comparison_operator: ("EQ" | "NE" | "IN" | "LE" | "LT" | "GE" | "GT" | "BETWEEN" | "NOT_NULL" | "NULL" | "CONTAINS" | "NOT_CONTAINS" | "BEGINS_WITH")?,
+                             attribute_value_list: Array[untyped]?
+                           }],
+                         ?conditional_operator: ("AND" | "OR"),
+                         ?return_values: ("NONE" | "ALL_OLD" | "UPDATED_OLD" | "ALL_NEW" | "UPDATED_NEW"),
+                         ?return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE"),
+                         ?return_item_collection_metrics: ("SIZE" | "NONE"),
+                         ?condition_expression: ::String,
+                         ?expression_attribute_names: Hash[::String, ::String],
+                         ?expression_attribute_values: Hash[::String, untyped],
+                         ?return_values_on_condition_check_failure: ("ALL_OLD" | "NONE")
+                       ) -> Types::DeleteItemOutput
+                     | (?Hash[Symbol, untyped]) -> Types::DeleteItemOutput
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#get_item-instance_method
+      def get_item: (
+                      key: Hash[::String, untyped],
+                      ?attributes_to_get: Array[::String],
+                      ?consistent_read: bool,
+                      ?return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE"),
+                      ?projection_expression: ::String,
+                      ?expression_attribute_names: Hash[::String, ::String]
+                    ) -> Types::GetItemOutput
+                  | (?Hash[Symbol, untyped]) -> Types::GetItemOutput
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#put_item-instance_method
+      def put_item: (
+                      item: Hash[::String, untyped],
+                      ?expected: Hash[::String, {
+                          value: untyped?,
+                          exists: bool?,
+                          comparison_operator: ("EQ" | "NE" | "IN" | "LE" | "LT" | "GE" | "GT" | "BETWEEN" | "NOT_NULL" | "NULL" | "CONTAINS" | "NOT_CONTAINS" | "BEGINS_WITH")?,
+                          attribute_value_list: Array[untyped]?
+                        }],
+                      ?return_values: ("NONE" | "ALL_OLD" | "UPDATED_OLD" | "ALL_NEW" | "UPDATED_NEW"),
+                      ?return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE"),
+                      ?return_item_collection_metrics: ("SIZE" | "NONE"),
+                      ?conditional_operator: ("AND" | "OR"),
+                      ?condition_expression: ::String,
+                      ?expression_attribute_names: Hash[::String, ::String],
+                      ?expression_attribute_values: Hash[::String, untyped],
+                      ?return_values_on_condition_check_failure: ("ALL_OLD" | "NONE")
+                    ) -> Types::PutItemOutput
+                  | (?Hash[Symbol, untyped]) -> Types::PutItemOutput
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#query-instance_method
+      def query: (
+                   ?index_name: ::String,
+                   ?select: ("ALL_ATTRIBUTES" | "ALL_PROJECTED_ATTRIBUTES" | "SPECIFIC_ATTRIBUTES" | "COUNT"),
+                   ?attributes_to_get: Array[::String],
+                   ?limit: ::Integer,
+                   ?consistent_read: bool,
+                   ?key_conditions: Hash[::String, {
+                       attribute_value_list: Array[untyped]?,
+                       comparison_operator: ("EQ" | "NE" | "IN" | "LE" | "LT" | "GE" | "GT" | "BETWEEN" | "NOT_NULL" | "NULL" | "CONTAINS" | "NOT_CONTAINS" | "BEGINS_WITH")
+                     }],
+                   ?query_filter: Hash[::String, {
+                       attribute_value_list: Array[untyped]?,
+                       comparison_operator: ("EQ" | "NE" | "IN" | "LE" | "LT" | "GE" | "GT" | "BETWEEN" | "NOT_NULL" | "NULL" | "CONTAINS" | "NOT_CONTAINS" | "BEGINS_WITH")
+                     }],
+                   ?conditional_operator: ("AND" | "OR"),
+                   ?scan_index_forward: bool,
+                   ?exclusive_start_key: Hash[::String, untyped],
+                   ?return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE"),
+                   ?projection_expression: ::String,
+                   ?filter_expression: ::String,
+                   ?key_condition_expression: ::String,
+                   ?expression_attribute_names: Hash[::String, ::String],
+                   ?expression_attribute_values: Hash[::String, untyped]
+                 ) -> Types::QueryOutput
+               | (?Hash[Symbol, untyped]) -> Types::QueryOutput
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#scan-instance_method
+      def scan: (
+                  ?index_name: ::String,
+                  ?attributes_to_get: Array[::String],
+                  ?limit: ::Integer,
+                  ?select: ("ALL_ATTRIBUTES" | "ALL_PROJECTED_ATTRIBUTES" | "SPECIFIC_ATTRIBUTES" | "COUNT"),
+                  ?scan_filter: Hash[::String, {
+                      attribute_value_list: Array[untyped]?,
+                      comparison_operator: ("EQ" | "NE" | "IN" | "LE" | "LT" | "GE" | "GT" | "BETWEEN" | "NOT_NULL" | "NULL" | "CONTAINS" | "NOT_CONTAINS" | "BEGINS_WITH")
+                    }],
+                  ?conditional_operator: ("AND" | "OR"),
+                  ?exclusive_start_key: Hash[::String, untyped],
+                  ?return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE"),
+                  ?total_segments: ::Integer,
+                  ?segment: ::Integer,
+                  ?projection_expression: ::String,
+                  ?filter_expression: ::String,
+                  ?expression_attribute_names: Hash[::String, ::String],
+                  ?expression_attribute_values: Hash[::String, untyped],
+                  ?consistent_read: bool
+                ) -> Types::ScanOutput
+              | (?Hash[Symbol, untyped]) -> Types::ScanOutput
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#update-instance_method
+      def update: (
+                    ?attribute_definitions: Array[
+                      {
+                        attribute_name: ::String,
+                        attribute_type: ("S" | "N" | "B")
+                      },
+                    ],
+                    ?billing_mode: ("PROVISIONED" | "PAY_PER_REQUEST"),
+                    ?provisioned_throughput: {
+                      read_capacity_units: ::Integer,
+                      write_capacity_units: ::Integer
+                    },
+                    ?global_secondary_index_updates: Array[
+                      {
+                        update: {
+                          index_name: ::String,
+                          provisioned_throughput: {
+                            read_capacity_units: ::Integer,
+                            write_capacity_units: ::Integer
+                          }
+                        }?,
+                        create: {
+                          index_name: ::String,
+                          key_schema: Array[
+                            {
+                              attribute_name: ::String,
+                              key_type: ("HASH" | "RANGE")
+                            },
+                          ],
+                          projection: {
+                            projection_type: ("ALL" | "KEYS_ONLY" | "INCLUDE")?,
+                            non_key_attributes: Array[::String]?
+                          },
+                          provisioned_throughput: {
+                            read_capacity_units: ::Integer,
+                            write_capacity_units: ::Integer
+                          }?
+                        }?,
+                        delete: {
+                          index_name: ::String
+                        }?
+                      },
+                    ],
+                    ?stream_specification: {
+                      stream_enabled: bool,
+                      stream_view_type: ("NEW_IMAGE" | "OLD_IMAGE" | "NEW_AND_OLD_IMAGES" | "KEYS_ONLY")?
+                    },
+                    ?sse_specification: {
+                      enabled: bool?,
+                      sse_type: ("AES256" | "KMS")?,
+                      kms_master_key_id: ::String?
+                    },
+                    ?replica_updates: Array[
+                      {
+                        create: {
+                          region_name: ::String,
+                          kms_master_key_id: ::String?,
+                          provisioned_throughput_override: {
+                            read_capacity_units: ::Integer?
+                          }?,
+                          global_secondary_indexes: Array[
+                            {
+                              index_name: ::String,
+                              provisioned_throughput_override: {
+                                read_capacity_units: ::Integer?
+                              }?
+                            },
+                          ]?,
+                          table_class_override: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS")?
+                        }?,
+                        update: {
+                          region_name: ::String,
+                          kms_master_key_id: ::String?,
+                          provisioned_throughput_override: {
+                            read_capacity_units: ::Integer?
+                          }?,
+                          global_secondary_indexes: Array[
+                            {
+                              index_name: ::String,
+                              provisioned_throughput_override: {
+                                read_capacity_units: ::Integer?
+                              }?
+                            },
+                          ]?,
+                          table_class_override: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS")?
+                        }?,
+                        delete: {
+                          region_name: ::String
+                        }?
+                      },
+                    ],
+                    ?table_class: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS"),
+                    ?deletion_protection_enabled: bool
+                  ) -> Table
+                | (?Hash[Symbol, untyped]) -> Table
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#update_item-instance_method
+      def update_item: (
+                         key: Hash[::String, untyped],
+                         ?attribute_updates: Hash[::String, {
+                             value: untyped?,
+                             action: ("ADD" | "PUT" | "DELETE")?
+                           }],
+                         ?expected: Hash[::String, {
+                             value: untyped?,
+                             exists: bool?,
+                             comparison_operator: ("EQ" | "NE" | "IN" | "LE" | "LT" | "GE" | "GT" | "BETWEEN" | "NOT_NULL" | "NULL" | "CONTAINS" | "NOT_CONTAINS" | "BEGINS_WITH")?,
+                             attribute_value_list: Array[untyped]?
+                           }],
+                         ?conditional_operator: ("AND" | "OR"),
+                         ?return_values: ("NONE" | "ALL_OLD" | "UPDATED_OLD" | "ALL_NEW" | "UPDATED_NEW"),
+                         ?return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE"),
+                         ?return_item_collection_metrics: ("SIZE" | "NONE"),
+                         ?update_expression: ::String,
+                         ?condition_expression: ::String,
+                         ?expression_attribute_names: Hash[::String, ::String],
+                         ?expression_attribute_values: Hash[::String, untyped],
+                         ?return_values_on_condition_check_failure: ("ALL_OLD" | "NONE")
+                       ) -> Types::UpdateItemOutput
+                     | (?Hash[Symbol, untyped]) -> Types::UpdateItemOutput
+
+      class Collection < ::Aws::Resources::Collection[Table]
+      end
+    end
+  end
+end

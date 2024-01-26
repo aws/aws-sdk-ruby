@@ -1,0 +1,384 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::WorkSpacesThinClient
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateEnvironmentRequest
+      attr_accessor name: ::String
+      attr_accessor desktop_arn: ::String
+      attr_accessor desktop_endpoint: ::String
+      attr_accessor software_set_update_schedule: ("USE_MAINTENANCE_WINDOW" | "APPLY_IMMEDIATELY")
+      attr_accessor maintenance_window: Types::MaintenanceWindow
+      attr_accessor software_set_update_mode: ("USE_LATEST" | "USE_DESIRED")
+      attr_accessor desired_software_set_id: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:name, :desktop_endpoint, :tags]
+    end
+
+    class CreateEnvironmentResponse
+      attr_accessor environment: Types::EnvironmentSummary
+      SENSITIVE: []
+    end
+
+    class DeleteDeviceRequest
+      attr_accessor id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDeviceResponse < Aws::EmptyStructure
+    end
+
+    class DeleteEnvironmentRequest
+      attr_accessor id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEnvironmentResponse < Aws::EmptyStructure
+    end
+
+    class DeregisterDeviceRequest
+      attr_accessor id: ::String
+      attr_accessor target_device_status: ("DEREGISTERED" | "ARCHIVED")
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterDeviceResponse < Aws::EmptyStructure
+    end
+
+    class Device
+      attr_accessor id: ::String
+      attr_accessor serial_number: ::String
+      attr_accessor name: ::String
+      attr_accessor model: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor status: ("REGISTERED" | "DEREGISTERING" | "DEREGISTERED" | "ARCHIVED")
+      attr_accessor current_software_set_id: ::String
+      attr_accessor current_software_set_version: ::String
+      attr_accessor desired_software_set_id: ::String
+      attr_accessor pending_software_set_id: ::String
+      attr_accessor pending_software_set_version: ::String
+      attr_accessor software_set_update_schedule: ("USE_MAINTENANCE_WINDOW" | "APPLY_IMMEDIATELY")
+      attr_accessor software_set_compliance_status: ("NONE" | "COMPLIANT" | "NOT_COMPLIANT")
+      attr_accessor software_set_update_status: ("AVAILABLE" | "IN_PROGRESS" | "UP_TO_DATE")
+      attr_accessor last_connected_at: ::Time
+      attr_accessor last_posture_at: ::Time
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor arn: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor tags: Types::EmbeddedTag
+      SENSITIVE: [:name, :tags]
+    end
+
+    class DeviceSummary
+      attr_accessor id: ::String
+      attr_accessor serial_number: ::String
+      attr_accessor name: ::String
+      attr_accessor model: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor status: ("REGISTERED" | "DEREGISTERING" | "DEREGISTERED" | "ARCHIVED")
+      attr_accessor current_software_set_id: ::String
+      attr_accessor desired_software_set_id: ::String
+      attr_accessor pending_software_set_id: ::String
+      attr_accessor software_set_update_schedule: ("USE_MAINTENANCE_WINDOW" | "APPLY_IMMEDIATELY")
+      attr_accessor last_connected_at: ::Time
+      attr_accessor last_posture_at: ::Time
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor arn: ::String
+      attr_accessor tags: Types::EmbeddedTag
+      SENSITIVE: [:name, :tags]
+    end
+
+    class EmbeddedTag
+      attr_accessor resource_arn: ::String
+      attr_accessor internal_id: ::String
+      SENSITIVE: []
+    end
+
+    class Environment
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor desktop_arn: ::String
+      attr_accessor desktop_endpoint: ::String
+      attr_accessor desktop_type: ("workspaces" | "appstream" | "workspaces-web")
+      attr_accessor activation_code: ::String
+      attr_accessor registered_devices_count: ::Integer
+      attr_accessor software_set_update_schedule: ("USE_MAINTENANCE_WINDOW" | "APPLY_IMMEDIATELY")
+      attr_accessor maintenance_window: Types::MaintenanceWindow
+      attr_accessor software_set_update_mode: ("USE_LATEST" | "USE_DESIRED")
+      attr_accessor desired_software_set_id: ::String
+      attr_accessor pending_software_set_id: ::String
+      attr_accessor pending_software_set_version: ::String
+      attr_accessor software_set_compliance_status: ("NO_REGISTERED_DEVICES" | "COMPLIANT" | "NOT_COMPLIANT")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor arn: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor tags: Types::EmbeddedTag
+      SENSITIVE: [:name, :desktop_endpoint, :tags]
+    end
+
+    class EnvironmentSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor desktop_arn: ::String
+      attr_accessor desktop_endpoint: ::String
+      attr_accessor desktop_type: ("workspaces" | "appstream" | "workspaces-web")
+      attr_accessor activation_code: ::String
+      attr_accessor software_set_update_schedule: ("USE_MAINTENANCE_WINDOW" | "APPLY_IMMEDIATELY")
+      attr_accessor maintenance_window: Types::MaintenanceWindow
+      attr_accessor software_set_update_mode: ("USE_LATEST" | "USE_DESIRED")
+      attr_accessor desired_software_set_id: ::String
+      attr_accessor pending_software_set_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor arn: ::String
+      attr_accessor tags: Types::EmbeddedTag
+      SENSITIVE: [:name, :desktop_endpoint, :tags]
+    end
+
+    class GetDeviceRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeviceResponse
+      attr_accessor device: Types::Device
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentResponse
+      attr_accessor environment: Types::Environment
+      SENSITIVE: []
+    end
+
+    class GetSoftwareSetRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSoftwareSetResponse
+      attr_accessor software_set: Types::SoftwareSet
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class InternalServiceException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDevicesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDevicesResponse
+      attr_accessor devices: ::Array[Types::DeviceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentsResponse
+      attr_accessor environments: ::Array[Types::EnvironmentSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSoftwareSetsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSoftwareSetsResponse
+      attr_accessor software_sets: ::Array[Types::SoftwareSetSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class MaintenanceWindow
+      attr_accessor type: ("SYSTEM" | "CUSTOM")
+      attr_accessor start_time_hour: ::Integer
+      attr_accessor start_time_minute: ::Integer
+      attr_accessor end_time_hour: ::Integer
+      attr_accessor end_time_minute: ::Integer
+      attr_accessor days_of_the_week: ::Array[("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY")]
+      attr_accessor apply_time_of: ("UTC" | "DEVICE")
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      SENSITIVE: []
+    end
+
+    class Software
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class SoftwareSet
+      attr_accessor id: ::String
+      attr_accessor version: ::String
+      attr_accessor released_at: ::Time
+      attr_accessor supported_until: ::Time
+      attr_accessor validation_status: ("VALIDATED" | "NOT_VALIDATED")
+      attr_accessor software: ::Array[Types::Software]
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class SoftwareSetSummary
+      attr_accessor id: ::String
+      attr_accessor version: ::String
+      attr_accessor released_at: ::Time
+      attr_accessor supported_until: ::Time
+      attr_accessor validation_status: ("VALIDATED" | "NOT_VALIDATED")
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: [:tag_keys]
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDeviceRequest
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor desired_software_set_id: ::String
+      attr_accessor software_set_update_schedule: ("USE_MAINTENANCE_WINDOW" | "APPLY_IMMEDIATELY")
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: [:name]
+    end
+
+    class UpdateDeviceResponse
+      attr_accessor device: Types::DeviceSummary
+      SENSITIVE: []
+    end
+
+    class UpdateEnvironmentRequest
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor desktop_arn: ::String
+      attr_accessor desktop_endpoint: ::String
+      attr_accessor software_set_update_schedule: ("USE_MAINTENANCE_WINDOW" | "APPLY_IMMEDIATELY")
+      attr_accessor maintenance_window: Types::MaintenanceWindow
+      attr_accessor software_set_update_mode: ("USE_LATEST" | "USE_DESIRED")
+      attr_accessor desired_software_set_id: ::String
+      SENSITIVE: [:name, :desktop_endpoint]
+    end
+
+    class UpdateEnvironmentResponse
+      attr_accessor environment: Types::EnvironmentSummary
+      SENSITIVE: []
+    end
+
+    class UpdateSoftwareSetRequest
+      attr_accessor id: ::String
+      attr_accessor validation_status: ("VALIDATED" | "NOT_VALIDATED")
+      SENSITIVE: []
+    end
+
+    class UpdateSoftwareSetResponse < Aws::EmptyStructure
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

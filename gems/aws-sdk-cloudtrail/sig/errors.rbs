@@ -1,0 +1,182 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudTrail
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AccessDeniedException < ::Aws::Errors::ServiceError
+      end
+      class AccountHasOngoingImportException < ::Aws::Errors::ServiceError
+      end
+      class AccountNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class AccountNotRegisteredException < ::Aws::Errors::ServiceError
+      end
+      class AccountRegisteredException < ::Aws::Errors::ServiceError
+      end
+      class CannotDelegateManagementAccountException < ::Aws::Errors::ServiceError
+      end
+      class ChannelARNInvalidException < ::Aws::Errors::ServiceError
+      end
+      class ChannelAlreadyExistsException < ::Aws::Errors::ServiceError
+      end
+      class ChannelExistsForEDSException < ::Aws::Errors::ServiceError
+      end
+      class ChannelMaxLimitExceededException < ::Aws::Errors::ServiceError
+      end
+      class ChannelNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class CloudTrailARNInvalidException < ::Aws::Errors::ServiceError
+      end
+      class CloudTrailAccessNotEnabledException < ::Aws::Errors::ServiceError
+      end
+      class CloudTrailInvalidClientTokenIdException < ::Aws::Errors::ServiceError
+      end
+      class CloudWatchLogsDeliveryUnavailableException < ::Aws::Errors::ServiceError
+      end
+      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+      end
+      class ConflictException < ::Aws::Errors::ServiceError
+      end
+      class DelegatedAdminAccountLimitExceededException < ::Aws::Errors::ServiceError
+      end
+      class EventDataStoreARNInvalidException < ::Aws::Errors::ServiceError
+      end
+      class EventDataStoreAlreadyExistsException < ::Aws::Errors::ServiceError
+      end
+      class EventDataStoreFederationEnabledException < ::Aws::Errors::ServiceError
+      end
+      class EventDataStoreHasOngoingImportException < ::Aws::Errors::ServiceError
+      end
+      class EventDataStoreMaxLimitExceededException < ::Aws::Errors::ServiceError
+      end
+      class EventDataStoreNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class EventDataStoreTerminationProtectedException < ::Aws::Errors::ServiceError
+      end
+      class ImportNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class InactiveEventDataStoreException < ::Aws::Errors::ServiceError
+      end
+      class InactiveQueryException < ::Aws::Errors::ServiceError
+      end
+      class InsightNotEnabledException < ::Aws::Errors::ServiceError
+      end
+      class InsufficientDependencyServiceAccessPermissionException < ::Aws::Errors::ServiceError
+      end
+      class InsufficientEncryptionPolicyException < ::Aws::Errors::ServiceError
+      end
+      class InsufficientS3BucketPolicyException < ::Aws::Errors::ServiceError
+      end
+      class InsufficientSnsTopicPolicyException < ::Aws::Errors::ServiceError
+      end
+      class InvalidCloudWatchLogsLogGroupArnException < ::Aws::Errors::ServiceError
+      end
+      class InvalidCloudWatchLogsRoleArnException < ::Aws::Errors::ServiceError
+      end
+      class InvalidDateRangeException < ::Aws::Errors::ServiceError
+      end
+      class InvalidEventCategoryException < ::Aws::Errors::ServiceError
+      end
+      class InvalidEventDataStoreCategoryException < ::Aws::Errors::ServiceError
+      end
+      class InvalidEventDataStoreStatusException < ::Aws::Errors::ServiceError
+      end
+      class InvalidEventSelectorsException < ::Aws::Errors::ServiceError
+      end
+      class InvalidHomeRegionException < ::Aws::Errors::ServiceError
+      end
+      class InvalidImportSourceException < ::Aws::Errors::ServiceError
+      end
+      class InvalidInsightSelectorsException < ::Aws::Errors::ServiceError
+      end
+      class InvalidKmsKeyIdException < ::Aws::Errors::ServiceError
+      end
+      class InvalidLookupAttributesException < ::Aws::Errors::ServiceError
+      end
+      class InvalidMaxResultsException < ::Aws::Errors::ServiceError
+      end
+      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+      end
+      class InvalidParameterCombinationException < ::Aws::Errors::ServiceError
+      end
+      class InvalidParameterException < ::Aws::Errors::ServiceError
+      end
+      class InvalidQueryStatementException < ::Aws::Errors::ServiceError
+      end
+      class InvalidQueryStatusException < ::Aws::Errors::ServiceError
+      end
+      class InvalidS3BucketNameException < ::Aws::Errors::ServiceError
+      end
+      class InvalidS3PrefixException < ::Aws::Errors::ServiceError
+      end
+      class InvalidSnsTopicNameException < ::Aws::Errors::ServiceError
+      end
+      class InvalidSourceException < ::Aws::Errors::ServiceError
+      end
+      class InvalidTagParameterException < ::Aws::Errors::ServiceError
+      end
+      class InvalidTimeRangeException < ::Aws::Errors::ServiceError
+      end
+      class InvalidTokenException < ::Aws::Errors::ServiceError
+      end
+      class InvalidTrailNameException < ::Aws::Errors::ServiceError
+      end
+      class KmsException < ::Aws::Errors::ServiceError
+      end
+      class KmsKeyDisabledException < ::Aws::Errors::ServiceError
+      end
+      class KmsKeyNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class MaxConcurrentQueriesException < ::Aws::Errors::ServiceError
+      end
+      class MaximumNumberOfTrailsExceededException < ::Aws::Errors::ServiceError
+      end
+      class NoManagementAccountSLRExistsException < ::Aws::Errors::ServiceError
+      end
+      class NotOrganizationManagementAccountException < ::Aws::Errors::ServiceError
+      end
+      class NotOrganizationMasterAccountException < ::Aws::Errors::ServiceError
+      end
+      class OperationNotPermittedException < ::Aws::Errors::ServiceError
+      end
+      class OrganizationNotInAllFeaturesModeException < ::Aws::Errors::ServiceError
+      end
+      class OrganizationsNotInUseException < ::Aws::Errors::ServiceError
+      end
+      class QueryIdNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class ResourceARNNotValidException < ::Aws::Errors::ServiceError
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class ResourcePolicyNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class ResourcePolicyNotValidException < ::Aws::Errors::ServiceError
+      end
+      class ResourceTypeNotSupportedException < ::Aws::Errors::ServiceError
+      end
+      class S3BucketDoesNotExistException < ::Aws::Errors::ServiceError
+      end
+      class TagsLimitExceededException < ::Aws::Errors::ServiceError
+      end
+      class ThrottlingException < ::Aws::Errors::ServiceError
+      end
+      class TrailAlreadyExistsException < ::Aws::Errors::ServiceError
+      end
+      class TrailNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class TrailNotProvidedException < ::Aws::Errors::ServiceError
+      end
+      class UnsupportedOperationException < ::Aws::Errors::ServiceError
+      end
+    end
+  end
+end

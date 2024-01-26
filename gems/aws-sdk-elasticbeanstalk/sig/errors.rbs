@@ -1,0 +1,55 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ElasticBeanstalk
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class CodeBuildNotInServiceRegionException < ::Aws::Errors::ServiceError
+      end
+      class ElasticBeanstalkServiceException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InsufficientPrivilegesException < ::Aws::Errors::ServiceError
+      end
+      class InvalidRequestException < ::Aws::Errors::ServiceError
+      end
+      class ManagedActionInvalidStateException < ::Aws::Errors::ServiceError
+      end
+      class OperationInProgressException < ::Aws::Errors::ServiceError
+      end
+      class PlatformVersionStillReferencedException < ::Aws::Errors::ServiceError
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class ResourceTypeNotSupportedException < ::Aws::Errors::ServiceError
+      end
+      class S3LocationNotInServiceRegionException < ::Aws::Errors::ServiceError
+      end
+      class S3SubscriptionRequiredException < ::Aws::Errors::ServiceError
+      end
+      class SourceBundleDeletionException < ::Aws::Errors::ServiceError
+      end
+      class TooManyApplicationVersionsException < ::Aws::Errors::ServiceError
+      end
+      class TooManyApplicationsException < ::Aws::Errors::ServiceError
+      end
+      class TooManyBucketsException < ::Aws::Errors::ServiceError
+      end
+      class TooManyConfigurationTemplatesException < ::Aws::Errors::ServiceError
+      end
+      class TooManyEnvironmentsException < ::Aws::Errors::ServiceError
+      end
+      class TooManyPlatformsException < ::Aws::Errors::ServiceError
+      end
+      class TooManyTagsException < ::Aws::Errors::ServiceError
+      end
+    end
+  end
+end

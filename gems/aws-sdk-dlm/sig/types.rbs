@@ -1,0 +1,346 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::DLM
+  module Types
+
+    class Action
+      attr_accessor name: ::String
+      attr_accessor cross_region_copy: ::Array[Types::CrossRegionCopyAction]
+      SENSITIVE: []
+    end
+
+    class ArchiveRetainRule
+      attr_accessor retention_archive_tier: Types::RetentionArchiveTier
+      SENSITIVE: []
+    end
+
+    class ArchiveRule
+      attr_accessor retain_rule: Types::ArchiveRetainRule
+      SENSITIVE: []
+    end
+
+    class CreateLifecyclePolicyRequest
+      attr_accessor execution_role_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor policy_details: Types::PolicyDetails
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor default_policy: ("VOLUME" | "INSTANCE")
+      attr_accessor create_interval: ::Integer
+      attr_accessor retain_interval: ::Integer
+      attr_accessor copy_tags: bool
+      attr_accessor extend_deletion: bool
+      attr_accessor cross_region_copy_targets: ::Array[Types::CrossRegionCopyTarget]
+      attr_accessor exclusions: Types::Exclusions
+      SENSITIVE: []
+    end
+
+    class CreateLifecyclePolicyResponse
+      attr_accessor policy_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRule
+      attr_accessor location: ("CLOUD" | "OUTPOST_LOCAL")
+      attr_accessor interval: ::Integer
+      attr_accessor interval_unit: ("HOURS")
+      attr_accessor times: ::Array[::String]
+      attr_accessor cron_expression: ::String
+      attr_accessor scripts: ::Array[Types::Script]
+      SENSITIVE: []
+    end
+
+    class CrossRegionCopyAction
+      attr_accessor target: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor retain_rule: Types::CrossRegionCopyRetainRule
+      SENSITIVE: []
+    end
+
+    class CrossRegionCopyDeprecateRule
+      attr_accessor interval: ::Integer
+      attr_accessor interval_unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")
+      SENSITIVE: []
+    end
+
+    class CrossRegionCopyRetainRule
+      attr_accessor interval: ::Integer
+      attr_accessor interval_unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")
+      SENSITIVE: []
+    end
+
+    class CrossRegionCopyRule
+      attr_accessor target_region: ::String
+      attr_accessor target: ::String
+      attr_accessor encrypted: bool
+      attr_accessor cmk_arn: ::String
+      attr_accessor copy_tags: bool
+      attr_accessor retain_rule: Types::CrossRegionCopyRetainRule
+      attr_accessor deprecate_rule: Types::CrossRegionCopyDeprecateRule
+      SENSITIVE: []
+    end
+
+    class CrossRegionCopyTarget
+      attr_accessor target_region: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLifecyclePolicyRequest
+      attr_accessor policy_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLifecyclePolicyResponse < Aws::EmptyStructure
+    end
+
+    class DeprecateRule
+      attr_accessor count: ::Integer
+      attr_accessor interval: ::Integer
+      attr_accessor interval_unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")
+      SENSITIVE: []
+    end
+
+    class EncryptionConfiguration
+      attr_accessor encrypted: bool
+      attr_accessor cmk_arn: ::String
+      SENSITIVE: []
+    end
+
+    class EventParameters
+      attr_accessor event_type: ("shareSnapshot")
+      attr_accessor snapshot_owner: ::Array[::String]
+      attr_accessor description_regex: ::String
+      SENSITIVE: []
+    end
+
+    class EventSource
+      attr_accessor type: ("MANAGED_CWE")
+      attr_accessor parameters: Types::EventParameters
+      SENSITIVE: []
+    end
+
+    class Exclusions
+      attr_accessor exclude_boot_volumes: bool
+      attr_accessor exclude_volume_types: ::Array[::String]
+      attr_accessor exclude_tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class FastRestoreRule
+      attr_accessor count: ::Integer
+      attr_accessor interval: ::Integer
+      attr_accessor interval_unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")
+      attr_accessor availability_zones: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetLifecyclePoliciesRequest
+      attr_accessor policy_ids: ::Array[::String]
+      attr_accessor state: ("ENABLED" | "DISABLED" | "ERROR")
+      attr_accessor resource_types: ::Array[("VOLUME" | "INSTANCE")]
+      attr_accessor target_tags: ::Array[::String]
+      attr_accessor tags_to_add: ::Array[::String]
+      attr_accessor default_policy_type: ("VOLUME" | "INSTANCE" | "ALL")
+      SENSITIVE: []
+    end
+
+    class GetLifecyclePoliciesResponse
+      attr_accessor policies: ::Array[Types::LifecyclePolicySummary]
+      SENSITIVE: []
+    end
+
+    class GetLifecyclePolicyRequest
+      attr_accessor policy_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetLifecyclePolicyResponse
+      attr_accessor policy: Types::LifecyclePolicy
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      attr_accessor code: ::String
+      attr_accessor required_parameters: ::Array[::String]
+      attr_accessor mutually_exclusive_parameters: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class LifecyclePolicy
+      attr_accessor policy_id: ::String
+      attr_accessor description: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED" | "ERROR")
+      attr_accessor status_message: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor date_created: ::Time
+      attr_accessor date_modified: ::Time
+      attr_accessor policy_details: Types::PolicyDetails
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor policy_arn: ::String
+      attr_accessor default_policy: bool
+      SENSITIVE: []
+    end
+
+    class LifecyclePolicySummary
+      attr_accessor policy_id: ::String
+      attr_accessor description: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED" | "ERROR")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor policy_type: ("EBS_SNAPSHOT_MANAGEMENT" | "IMAGE_MANAGEMENT" | "EVENT_BASED_POLICY")
+      attr_accessor default_policy: bool
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      attr_accessor code: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Parameters
+      attr_accessor exclude_boot_volume: bool
+      attr_accessor no_reboot: bool
+      attr_accessor exclude_data_volume_tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PolicyDetails
+      attr_accessor policy_type: ("EBS_SNAPSHOT_MANAGEMENT" | "IMAGE_MANAGEMENT" | "EVENT_BASED_POLICY")
+      attr_accessor resource_types: ::Array[("VOLUME" | "INSTANCE")]
+      attr_accessor resource_locations: ::Array[("CLOUD" | "OUTPOST")]
+      attr_accessor target_tags: ::Array[Types::Tag]
+      attr_accessor schedules: ::Array[Types::Schedule]
+      attr_accessor parameters: Types::Parameters
+      attr_accessor event_source: Types::EventSource
+      attr_accessor actions: ::Array[Types::Action]
+      attr_accessor policy_language: ("SIMPLIFIED" | "STANDARD")
+      attr_accessor resource_type: ("VOLUME" | "INSTANCE")
+      attr_accessor create_interval: ::Integer
+      attr_accessor retain_interval: ::Integer
+      attr_accessor copy_tags: bool
+      attr_accessor cross_region_copy_targets: ::Array[Types::CrossRegionCopyTarget]
+      attr_accessor extend_deletion: bool
+      attr_accessor exclusions: Types::Exclusions
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor code: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor resource_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RetainRule
+      attr_accessor count: ::Integer
+      attr_accessor interval: ::Integer
+      attr_accessor interval_unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")
+      SENSITIVE: []
+    end
+
+    class RetentionArchiveTier
+      attr_accessor count: ::Integer
+      attr_accessor interval: ::Integer
+      attr_accessor interval_unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")
+      SENSITIVE: []
+    end
+
+    class Schedule
+      attr_accessor name: ::String
+      attr_accessor copy_tags: bool
+      attr_accessor tags_to_add: ::Array[Types::Tag]
+      attr_accessor variable_tags: ::Array[Types::Tag]
+      attr_accessor create_rule: Types::CreateRule
+      attr_accessor retain_rule: Types::RetainRule
+      attr_accessor fast_restore_rule: Types::FastRestoreRule
+      attr_accessor cross_region_copy_rules: ::Array[Types::CrossRegionCopyRule]
+      attr_accessor share_rules: ::Array[Types::ShareRule]
+      attr_accessor deprecate_rule: Types::DeprecateRule
+      attr_accessor archive_rule: Types::ArchiveRule
+      SENSITIVE: []
+    end
+
+    class Script
+      attr_accessor stages: ::Array[("PRE" | "POST")]
+      attr_accessor execution_handler_service: ("AWS_SYSTEMS_MANAGER")
+      attr_accessor execution_handler: ::String
+      attr_accessor execute_operation_on_script_failure: bool
+      attr_accessor execution_timeout: ::Integer
+      attr_accessor maximum_retry_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ShareRule
+      attr_accessor target_accounts: ::Array[::String]
+      attr_accessor unshare_interval: ::Integer
+      attr_accessor unshare_interval_unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateLifecyclePolicyRequest
+      attr_accessor policy_id: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor description: ::String
+      attr_accessor policy_details: Types::PolicyDetails
+      attr_accessor create_interval: ::Integer
+      attr_accessor retain_interval: ::Integer
+      attr_accessor copy_tags: bool
+      attr_accessor extend_deletion: bool
+      attr_accessor cross_region_copy_targets: ::Array[Types::CrossRegionCopyTarget]
+      attr_accessor exclusions: Types::Exclusions
+      SENSITIVE: []
+    end
+
+    class UpdateLifecyclePolicyResponse < Aws::EmptyStructure
+    end
+  end
+end

@@ -1,0 +1,1063 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::NimbleStudio
+  module Types
+
+    class AcceptEulasRequest
+      attr_accessor client_token: ::String
+      attr_accessor eula_ids: ::Array[::String]
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class AcceptEulasResponse
+      attr_accessor eula_acceptances: ::Array[Types::EulaAcceptance]
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException
+      attr_accessor code: ::String
+      attr_accessor context: ::Hash[::String, ::String]
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ActiveDirectoryComputerAttribute
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ActiveDirectoryConfiguration
+      attr_accessor computer_attributes: ::Array[Types::ActiveDirectoryComputerAttribute]
+      attr_accessor directory_id: ::String
+      attr_accessor organizational_unit_distinguished_name: ::String
+      SENSITIVE: [:computer_attributes]
+    end
+
+    class ComputeFarmConfiguration
+      attr_accessor active_directory_user: ::String
+      attr_accessor endpoint: ::String
+      SENSITIVE: [:endpoint]
+    end
+
+    class ConflictException
+      attr_accessor code: ::String
+      attr_accessor context: ::Hash[::String, ::String]
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLaunchProfileRequest
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor ec2_subnet_ids: ::Array[::String]
+      attr_accessor launch_profile_protocol_versions: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor stream_configuration: Types::StreamConfigurationCreate
+      attr_accessor studio_component_ids: ::Array[::String]
+      attr_accessor studio_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:description, :name]
+    end
+
+    class CreateLaunchProfileResponse
+      attr_accessor launch_profile: Types::LaunchProfile
+      SENSITIVE: []
+    end
+
+    class CreateStreamingImageRequest
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor ec2_image_id: ::String
+      attr_accessor name: ::String
+      attr_accessor studio_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:description, :name]
+    end
+
+    class CreateStreamingImageResponse
+      attr_accessor streaming_image: Types::StreamingImage
+      SENSITIVE: []
+    end
+
+    class CreateStreamingSessionRequest
+      attr_accessor client_token: ::String
+      attr_accessor ec2_instance_type: ("g4dn.xlarge" | "g4dn.2xlarge" | "g4dn.4xlarge" | "g4dn.8xlarge" | "g4dn.12xlarge" | "g4dn.16xlarge" | "g3.4xlarge" | "g3s.xlarge" | "g5.xlarge" | "g5.2xlarge" | "g5.4xlarge" | "g5.8xlarge" | "g5.16xlarge")
+      attr_accessor launch_profile_id: ::String
+      attr_accessor owned_by: ::String
+      attr_accessor streaming_image_id: ::String
+      attr_accessor studio_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateStreamingSessionResponse
+      attr_accessor session: Types::StreamingSession
+      SENSITIVE: []
+    end
+
+    class CreateStreamingSessionStreamRequest
+      attr_accessor client_token: ::String
+      attr_accessor expiration_in_seconds: ::Integer
+      attr_accessor session_id: ::String
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateStreamingSessionStreamResponse
+      attr_accessor stream: Types::StreamingSessionStream
+      SENSITIVE: []
+    end
+
+    class CreateStudioComponentRequest
+      attr_accessor client_token: ::String
+      attr_accessor configuration: Types::StudioComponentConfiguration
+      attr_accessor description: ::String
+      attr_accessor ec2_security_group_ids: ::Array[::String]
+      attr_accessor initialization_scripts: ::Array[Types::StudioComponentInitializationScript]
+      attr_accessor name: ::String
+      attr_accessor runtime_role_arn: ::String
+      attr_accessor script_parameters: ::Array[Types::ScriptParameterKeyValue]
+      attr_accessor secure_initialization_role_arn: ::String
+      attr_accessor studio_id: ::String
+      attr_accessor subtype: ("AWS_MANAGED_MICROSOFT_AD" | "AMAZON_FSX_FOR_WINDOWS" | "AMAZON_FSX_FOR_LUSTRE" | "CUSTOM")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("ACTIVE_DIRECTORY" | "SHARED_FILE_SYSTEM" | "COMPUTE_FARM" | "LICENSE_SERVICE" | "CUSTOM")
+      SENSITIVE: [:description, :name, :script_parameters]
+    end
+
+    class CreateStudioComponentResponse
+      attr_accessor studio_component: Types::StudioComponent
+      SENSITIVE: []
+    end
+
+    class CreateStudioRequest
+      attr_accessor admin_role_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor display_name: ::String
+      attr_accessor studio_encryption_configuration: Types::StudioEncryptionConfiguration
+      attr_accessor studio_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor user_role_arn: ::String
+      SENSITIVE: [:display_name]
+    end
+
+    class CreateStudioResponse
+      attr_accessor studio: Types::Studio
+      SENSITIVE: []
+    end
+
+    class DeleteLaunchProfileMemberRequest
+      attr_accessor client_token: ::String
+      attr_accessor launch_profile_id: ::String
+      attr_accessor principal_id: ::String
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLaunchProfileMemberResponse < Aws::EmptyStructure
+    end
+
+    class DeleteLaunchProfileRequest
+      attr_accessor client_token: ::String
+      attr_accessor launch_profile_id: ::String
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLaunchProfileResponse
+      attr_accessor launch_profile: Types::LaunchProfile
+      SENSITIVE: []
+    end
+
+    class DeleteStreamingImageRequest
+      attr_accessor client_token: ::String
+      attr_accessor streaming_image_id: ::String
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStreamingImageResponse
+      attr_accessor streaming_image: Types::StreamingImage
+      SENSITIVE: []
+    end
+
+    class DeleteStreamingSessionRequest
+      attr_accessor client_token: ::String
+      attr_accessor session_id: ::String
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStreamingSessionResponse
+      attr_accessor session: Types::StreamingSession
+      SENSITIVE: []
+    end
+
+    class DeleteStudioComponentRequest
+      attr_accessor client_token: ::String
+      attr_accessor studio_component_id: ::String
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStudioComponentResponse
+      attr_accessor studio_component: Types::StudioComponent
+      SENSITIVE: []
+    end
+
+    class DeleteStudioMemberRequest
+      attr_accessor client_token: ::String
+      attr_accessor principal_id: ::String
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStudioMemberResponse < Aws::EmptyStructure
+    end
+
+    class DeleteStudioRequest
+      attr_accessor client_token: ::String
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStudioResponse
+      attr_accessor studio: Types::Studio
+      SENSITIVE: []
+    end
+
+    class Eula
+      attr_accessor content: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor eula_id: ::String
+      attr_accessor name: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class EulaAcceptance
+      attr_accessor accepted_at: ::Time
+      attr_accessor accepted_by: ::String
+      attr_accessor acceptee_id: ::String
+      attr_accessor eula_acceptance_id: ::String
+      attr_accessor eula_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetEulaRequest
+      attr_accessor eula_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetEulaResponse
+      attr_accessor eula: Types::Eula
+      SENSITIVE: []
+    end
+
+    class GetLaunchProfileDetailsRequest
+      attr_accessor launch_profile_id: ::String
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetLaunchProfileDetailsResponse
+      attr_accessor launch_profile: Types::LaunchProfile
+      attr_accessor streaming_images: ::Array[Types::StreamingImage]
+      attr_accessor studio_component_summaries: ::Array[Types::StudioComponentSummary]
+      SENSITIVE: []
+    end
+
+    class GetLaunchProfileInitializationRequest
+      attr_accessor launch_profile_id: ::String
+      attr_accessor launch_profile_protocol_versions: ::Array[::String]
+      attr_accessor launch_purpose: ::String
+      attr_accessor platform: ::String
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetLaunchProfileInitializationResponse
+      attr_accessor launch_profile_initialization: Types::LaunchProfileInitialization
+      SENSITIVE: []
+    end
+
+    class GetLaunchProfileMemberRequest
+      attr_accessor launch_profile_id: ::String
+      attr_accessor principal_id: ::String
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetLaunchProfileMemberResponse
+      attr_accessor member: Types::LaunchProfileMembership
+      SENSITIVE: []
+    end
+
+    class GetLaunchProfileRequest
+      attr_accessor launch_profile_id: ::String
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetLaunchProfileResponse
+      attr_accessor launch_profile: Types::LaunchProfile
+      SENSITIVE: []
+    end
+
+    class GetStreamingImageRequest
+      attr_accessor streaming_image_id: ::String
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetStreamingImageResponse
+      attr_accessor streaming_image: Types::StreamingImage
+      SENSITIVE: []
+    end
+
+    class GetStreamingSessionBackupRequest
+      attr_accessor backup_id: ::String
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetStreamingSessionBackupResponse
+      attr_accessor streaming_session_backup: Types::StreamingSessionBackup
+      SENSITIVE: []
+    end
+
+    class GetStreamingSessionRequest
+      attr_accessor session_id: ::String
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetStreamingSessionResponse
+      attr_accessor session: Types::StreamingSession
+      SENSITIVE: []
+    end
+
+    class GetStreamingSessionStreamRequest
+      attr_accessor session_id: ::String
+      attr_accessor stream_id: ::String
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetStreamingSessionStreamResponse
+      attr_accessor stream: Types::StreamingSessionStream
+      SENSITIVE: []
+    end
+
+    class GetStudioComponentRequest
+      attr_accessor studio_component_id: ::String
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetStudioComponentResponse
+      attr_accessor studio_component: Types::StudioComponent
+      SENSITIVE: []
+    end
+
+    class GetStudioMemberRequest
+      attr_accessor principal_id: ::String
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetStudioMemberResponse
+      attr_accessor member: Types::StudioMembership
+      SENSITIVE: []
+    end
+
+    class GetStudioRequest
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetStudioResponse
+      attr_accessor studio: Types::Studio
+      SENSITIVE: []
+    end
+
+    class InternalServerErrorException
+      attr_accessor code: ::String
+      attr_accessor context: ::Hash[::String, ::String]
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LaunchProfile
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor ec2_subnet_ids: ::Array[::String]
+      attr_accessor launch_profile_id: ::String
+      attr_accessor launch_profile_protocol_versions: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor state: ("CREATE_IN_PROGRESS" | "READY" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "DELETED" | "DELETE_FAILED" | "CREATE_FAILED" | "UPDATE_FAILED")
+      attr_accessor status_code: ("LAUNCH_PROFILE_CREATED" | "LAUNCH_PROFILE_UPDATED" | "LAUNCH_PROFILE_DELETED" | "LAUNCH_PROFILE_CREATE_IN_PROGRESS" | "LAUNCH_PROFILE_UPDATE_IN_PROGRESS" | "LAUNCH_PROFILE_DELETE_IN_PROGRESS" | "INTERNAL_ERROR" | "STREAMING_IMAGE_NOT_FOUND" | "STREAMING_IMAGE_NOT_READY" | "LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED" | "ENCRYPTION_KEY_ACCESS_DENIED" | "ENCRYPTION_KEY_NOT_FOUND" | "INVALID_SUBNETS_PROVIDED" | "INVALID_INSTANCE_TYPES_PROVIDED" | "INVALID_SUBNETS_COMBINATION")
+      attr_accessor status_message: ::String
+      attr_accessor stream_configuration: Types::StreamConfiguration
+      attr_accessor studio_component_ids: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      attr_accessor validation_results: ::Array[Types::ValidationResult]
+      SENSITIVE: [:description, :name]
+    end
+
+    class LaunchProfileInitialization
+      attr_accessor active_directory: Types::LaunchProfileInitializationActiveDirectory
+      attr_accessor ec2_security_group_ids: ::Array[::String]
+      attr_accessor launch_profile_id: ::String
+      attr_accessor launch_profile_protocol_version: ::String
+      attr_accessor launch_purpose: ::String
+      attr_accessor name: ::String
+      attr_accessor platform: ("LINUX" | "WINDOWS")
+      attr_accessor system_initialization_scripts: ::Array[Types::LaunchProfileInitializationScript]
+      attr_accessor user_initialization_scripts: ::Array[Types::LaunchProfileInitializationScript]
+      SENSITIVE: [:name]
+    end
+
+    class LaunchProfileInitializationActiveDirectory
+      attr_accessor computer_attributes: ::Array[Types::ActiveDirectoryComputerAttribute]
+      attr_accessor directory_id: ::String
+      attr_accessor directory_name: ::String
+      attr_accessor dns_ip_addresses: ::Array[::String]
+      attr_accessor organizational_unit_distinguished_name: ::String
+      attr_accessor studio_component_id: ::String
+      attr_accessor studio_component_name: ::String
+      SENSITIVE: [:computer_attributes, :studio_component_name]
+    end
+
+    class LaunchProfileInitializationScript
+      attr_accessor runtime_role_arn: ::String
+      attr_accessor script: ::String
+      attr_accessor secure_initialization_role_arn: ::String
+      attr_accessor studio_component_id: ::String
+      attr_accessor studio_component_name: ::String
+      SENSITIVE: [:script, :studio_component_name]
+    end
+
+    class LaunchProfileMembership
+      attr_accessor identity_store_id: ::String
+      attr_accessor persona: ("USER")
+      attr_accessor principal_id: ::String
+      attr_accessor sid: ::String
+      SENSITIVE: []
+    end
+
+    class LicenseServiceConfiguration
+      attr_accessor endpoint: ::String
+      SENSITIVE: [:endpoint]
+    end
+
+    class ListEulaAcceptancesRequest
+      attr_accessor eula_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListEulaAcceptancesResponse
+      attr_accessor eula_acceptances: ::Array[Types::EulaAcceptance]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEulasRequest
+      attr_accessor eula_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEulasResponse
+      attr_accessor eulas: ::Array[Types::Eula]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLaunchProfileMembersRequest
+      attr_accessor launch_profile_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListLaunchProfileMembersResponse
+      attr_accessor members: ::Array[Types::LaunchProfileMembership]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLaunchProfilesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor principal_id: ::String
+      attr_accessor states: ::Array[("CREATE_IN_PROGRESS" | "READY" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "DELETED" | "DELETE_FAILED" | "CREATE_FAILED" | "UPDATE_FAILED")]
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListLaunchProfilesResponse
+      attr_accessor launch_profiles: ::Array[Types::LaunchProfile]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStreamingImagesRequest
+      attr_accessor next_token: ::String
+      attr_accessor owner: ::String
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListStreamingImagesResponse
+      attr_accessor next_token: ::String
+      attr_accessor streaming_images: ::Array[Types::StreamingImage]
+      SENSITIVE: []
+    end
+
+    class ListStreamingSessionBackupsRequest
+      attr_accessor next_token: ::String
+      attr_accessor owned_by: ::String
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListStreamingSessionBackupsResponse
+      attr_accessor next_token: ::String
+      attr_accessor streaming_session_backups: ::Array[Types::StreamingSessionBackup]
+      SENSITIVE: []
+    end
+
+    class ListStreamingSessionsRequest
+      attr_accessor created_by: ::String
+      attr_accessor next_token: ::String
+      attr_accessor owned_by: ::String
+      attr_accessor session_ids: ::String
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListStreamingSessionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor sessions: ::Array[Types::StreamingSession]
+      SENSITIVE: []
+    end
+
+    class ListStudioComponentsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor states: ::Array[("CREATE_IN_PROGRESS" | "READY" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "DELETED" | "DELETE_FAILED" | "CREATE_FAILED" | "UPDATE_FAILED")]
+      attr_accessor studio_id: ::String
+      attr_accessor types: ::Array[("ACTIVE_DIRECTORY" | "SHARED_FILE_SYSTEM" | "COMPUTE_FARM" | "LICENSE_SERVICE" | "CUSTOM")]
+      SENSITIVE: []
+    end
+
+    class ListStudioComponentsResponse
+      attr_accessor next_token: ::String
+      attr_accessor studio_components: ::Array[Types::StudioComponent]
+      SENSITIVE: []
+    end
+
+    class ListStudioMembersRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListStudioMembersResponse
+      attr_accessor members: ::Array[Types::StudioMembership]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStudiosRequest
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStudiosResponse
+      attr_accessor next_token: ::String
+      attr_accessor studios: ::Array[Types::Studio]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class NewLaunchProfileMember
+      attr_accessor persona: ("USER")
+      attr_accessor principal_id: ::String
+      SENSITIVE: []
+    end
+
+    class NewStudioMember
+      attr_accessor persona: ("ADMINISTRATOR")
+      attr_accessor principal_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutLaunchProfileMembersRequest
+      attr_accessor client_token: ::String
+      attr_accessor identity_store_id: ::String
+      attr_accessor launch_profile_id: ::String
+      attr_accessor members: ::Array[Types::NewLaunchProfileMember]
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutLaunchProfileMembersResponse < Aws::EmptyStructure
+    end
+
+    class PutStudioMembersRequest
+      attr_accessor client_token: ::String
+      attr_accessor identity_store_id: ::String
+      attr_accessor members: ::Array[Types::NewStudioMember]
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutStudioMembersResponse < Aws::EmptyStructure
+    end
+
+    class ResourceNotFoundException
+      attr_accessor code: ::String
+      attr_accessor context: ::Hash[::String, ::String]
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ScriptParameterKeyValue
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor code: ::String
+      attr_accessor context: ::Hash[::String, ::String]
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SharedFileSystemConfiguration
+      attr_accessor endpoint: ::String
+      attr_accessor file_system_id: ::String
+      attr_accessor linux_mount_point: ::String
+      attr_accessor share_name: ::String
+      attr_accessor windows_mount_drive: ::String
+      SENSITIVE: [:endpoint, :linux_mount_point, :share_name]
+    end
+
+    class StartStreamingSessionRequest
+      attr_accessor backup_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor session_id: ::String
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartStreamingSessionResponse
+      attr_accessor session: Types::StreamingSession
+      SENSITIVE: []
+    end
+
+    class StartStudioSSOConfigurationRepairRequest
+      attr_accessor client_token: ::String
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartStudioSSOConfigurationRepairResponse
+      attr_accessor studio: Types::Studio
+      SENSITIVE: []
+    end
+
+    class StopStreamingSessionRequest
+      attr_accessor client_token: ::String
+      attr_accessor session_id: ::String
+      attr_accessor studio_id: ::String
+      attr_accessor volume_retention_mode: ("RETAIN" | "DELETE")
+      SENSITIVE: []
+    end
+
+    class StopStreamingSessionResponse
+      attr_accessor session: Types::StreamingSession
+      SENSITIVE: []
+    end
+
+    class StreamConfiguration
+      attr_accessor automatic_termination_mode: ("DEACTIVATED" | "ACTIVATED")
+      attr_accessor clipboard_mode: ("ENABLED" | "DISABLED")
+      attr_accessor ec2_instance_types: ::Array[("g4dn.xlarge" | "g4dn.2xlarge" | "g4dn.4xlarge" | "g4dn.8xlarge" | "g4dn.12xlarge" | "g4dn.16xlarge" | "g3.4xlarge" | "g3s.xlarge" | "g5.xlarge" | "g5.2xlarge" | "g5.4xlarge" | "g5.8xlarge" | "g5.16xlarge")]
+      attr_accessor max_session_length_in_minutes: ::Integer
+      attr_accessor max_stopped_session_length_in_minutes: ::Integer
+      attr_accessor session_backup: Types::StreamConfigurationSessionBackup
+      attr_accessor session_persistence_mode: ("DEACTIVATED" | "ACTIVATED")
+      attr_accessor session_storage: Types::StreamConfigurationSessionStorage
+      attr_accessor streaming_image_ids: ::Array[::String]
+      attr_accessor volume_configuration: Types::VolumeConfiguration
+      SENSITIVE: []
+    end
+
+    class StreamConfigurationCreate
+      attr_accessor automatic_termination_mode: ("DEACTIVATED" | "ACTIVATED")
+      attr_accessor clipboard_mode: ("ENABLED" | "DISABLED")
+      attr_accessor ec2_instance_types: ::Array[("g4dn.xlarge" | "g4dn.2xlarge" | "g4dn.4xlarge" | "g4dn.8xlarge" | "g4dn.12xlarge" | "g4dn.16xlarge" | "g3.4xlarge" | "g3s.xlarge" | "g5.xlarge" | "g5.2xlarge" | "g5.4xlarge" | "g5.8xlarge" | "g5.16xlarge")]
+      attr_accessor max_session_length_in_minutes: ::Integer
+      attr_accessor max_stopped_session_length_in_minutes: ::Integer
+      attr_accessor session_backup: Types::StreamConfigurationSessionBackup
+      attr_accessor session_persistence_mode: ("DEACTIVATED" | "ACTIVATED")
+      attr_accessor session_storage: Types::StreamConfigurationSessionStorage
+      attr_accessor streaming_image_ids: ::Array[::String]
+      attr_accessor volume_configuration: Types::VolumeConfiguration
+      SENSITIVE: []
+    end
+
+    class StreamConfigurationSessionBackup
+      attr_accessor max_backups_to_retain: ::Integer
+      attr_accessor mode: ("AUTOMATIC" | "DEACTIVATED")
+      SENSITIVE: []
+    end
+
+    class StreamConfigurationSessionStorage
+      attr_accessor mode: ::Array[("UPLOAD")]
+      attr_accessor root: Types::StreamingSessionStorageRoot
+      SENSITIVE: []
+    end
+
+    class StreamingImage
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor ec2_image_id: ::String
+      attr_accessor encryption_configuration: Types::StreamingImageEncryptionConfiguration
+      attr_accessor eula_ids: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor owner: ::String
+      attr_accessor platform: ::String
+      attr_accessor state: ("CREATE_IN_PROGRESS" | "READY" | "DELETE_IN_PROGRESS" | "DELETED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED" | "CREATE_FAILED" | "DELETE_FAILED")
+      attr_accessor status_code: ("STREAMING_IMAGE_CREATE_IN_PROGRESS" | "STREAMING_IMAGE_READY" | "STREAMING_IMAGE_DELETE_IN_PROGRESS" | "STREAMING_IMAGE_DELETED" | "STREAMING_IMAGE_UPDATE_IN_PROGRESS" | "INTERNAL_ERROR" | "ACCESS_DENIED")
+      attr_accessor status_message: ::String
+      attr_accessor streaming_image_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:description, :name]
+    end
+
+    class StreamingImageEncryptionConfiguration
+      attr_accessor key_arn: ::String
+      attr_accessor key_type: ("CUSTOMER_MANAGED_KEY")
+      SENSITIVE: []
+    end
+
+    class StreamingSession
+      attr_accessor arn: ::String
+      attr_accessor automatic_termination_mode: ("DEACTIVATED" | "ACTIVATED")
+      attr_accessor backup_mode: ("AUTOMATIC" | "DEACTIVATED")
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor ec2_instance_type: ::String
+      attr_accessor launch_profile_id: ::String
+      attr_accessor max_backups_to_retain: ::Integer
+      attr_accessor owned_by: ::String
+      attr_accessor session_id: ::String
+      attr_accessor session_persistence_mode: ("DEACTIVATED" | "ACTIVATED")
+      attr_accessor started_at: ::Time
+      attr_accessor started_by: ::String
+      attr_accessor started_from_backup_id: ::String
+      attr_accessor state: ("CREATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "READY" | "DELETED" | "CREATE_FAILED" | "DELETE_FAILED" | "STOP_IN_PROGRESS" | "START_IN_PROGRESS" | "STOPPED" | "STOP_FAILED" | "START_FAILED")
+      attr_accessor status_code: ("STREAMING_SESSION_READY" | "STREAMING_SESSION_DELETED" | "STREAMING_SESSION_CREATE_IN_PROGRESS" | "STREAMING_SESSION_DELETE_IN_PROGRESS" | "INTERNAL_ERROR" | "INSUFFICIENT_CAPACITY" | "ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR" | "NETWORK_CONNECTION_ERROR" | "INITIALIZATION_SCRIPT_ERROR" | "DECRYPT_STREAMING_IMAGE_ERROR" | "NETWORK_INTERFACE_ERROR" | "STREAMING_SESSION_STOPPED" | "STREAMING_SESSION_STARTED" | "STREAMING_SESSION_STOP_IN_PROGRESS" | "STREAMING_SESSION_START_IN_PROGRESS" | "AMI_VALIDATION_ERROR")
+      attr_accessor status_message: ::String
+      attr_accessor stop_at: ::Time
+      attr_accessor stopped_at: ::Time
+      attr_accessor stopped_by: ::String
+      attr_accessor streaming_image_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor terminate_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      attr_accessor volume_configuration: Types::VolumeConfiguration
+      attr_accessor volume_retention_mode: ("RETAIN" | "DELETE")
+      SENSITIVE: []
+    end
+
+    class StreamingSessionBackup
+      attr_accessor arn: ::String
+      attr_accessor backup_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor launch_profile_id: ::String
+      attr_accessor owned_by: ::String
+      attr_accessor session_id: ::String
+      attr_accessor state: ("CREATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "READY" | "DELETED" | "CREATE_FAILED" | "DELETE_FAILED" | "STOP_IN_PROGRESS" | "START_IN_PROGRESS" | "STOPPED" | "STOP_FAILED" | "START_FAILED")
+      attr_accessor status_code: ("STREAMING_SESSION_READY" | "STREAMING_SESSION_DELETED" | "STREAMING_SESSION_CREATE_IN_PROGRESS" | "STREAMING_SESSION_DELETE_IN_PROGRESS" | "INTERNAL_ERROR" | "INSUFFICIENT_CAPACITY" | "ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR" | "NETWORK_CONNECTION_ERROR" | "INITIALIZATION_SCRIPT_ERROR" | "DECRYPT_STREAMING_IMAGE_ERROR" | "NETWORK_INTERFACE_ERROR" | "STREAMING_SESSION_STOPPED" | "STREAMING_SESSION_STARTED" | "STREAMING_SESSION_STOP_IN_PROGRESS" | "STREAMING_SESSION_START_IN_PROGRESS" | "AMI_VALIDATION_ERROR")
+      attr_accessor status_message: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StreamingSessionStorageRoot
+      attr_accessor linux: ::String
+      attr_accessor windows: ::String
+      SENSITIVE: [:linux, :windows]
+    end
+
+    class StreamingSessionStream
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor expires_at: ::Time
+      attr_accessor owned_by: ::String
+      attr_accessor state: ("READY" | "CREATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "DELETED" | "CREATE_FAILED" | "DELETE_FAILED")
+      attr_accessor status_code: ("STREAM_CREATE_IN_PROGRESS" | "STREAM_READY" | "STREAM_DELETE_IN_PROGRESS" | "STREAM_DELETED" | "INTERNAL_ERROR" | "NETWORK_CONNECTION_ERROR")
+      attr_accessor stream_id: ::String
+      attr_accessor url: ::String
+      SENSITIVE: [:url]
+    end
+
+    class Studio
+      attr_accessor admin_role_arn: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor display_name: ::String
+      attr_accessor home_region: ::String
+      attr_accessor sso_client_id: ::String
+      attr_accessor state: ("CREATE_IN_PROGRESS" | "READY" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "DELETED" | "DELETE_FAILED" | "CREATE_FAILED" | "UPDATE_FAILED")
+      attr_accessor status_code: ("STUDIO_CREATED" | "STUDIO_DELETED" | "STUDIO_UPDATED" | "STUDIO_CREATE_IN_PROGRESS" | "STUDIO_UPDATE_IN_PROGRESS" | "STUDIO_DELETE_IN_PROGRESS" | "STUDIO_WITH_LAUNCH_PROFILES_NOT_DELETED" | "STUDIO_WITH_STUDIO_COMPONENTS_NOT_DELETED" | "STUDIO_WITH_STREAMING_IMAGES_NOT_DELETED" | "AWS_SSO_NOT_ENABLED" | "AWS_SSO_ACCESS_DENIED" | "ROLE_NOT_OWNED_BY_STUDIO_OWNER" | "ROLE_COULD_NOT_BE_ASSUMED" | "INTERNAL_ERROR" | "ENCRYPTION_KEY_NOT_FOUND" | "ENCRYPTION_KEY_ACCESS_DENIED" | "AWS_SSO_CONFIGURATION_REPAIRED" | "AWS_SSO_CONFIGURATION_REPAIR_IN_PROGRESS" | "AWS_STS_REGION_DISABLED")
+      attr_accessor status_message: ::String
+      attr_accessor studio_encryption_configuration: Types::StudioEncryptionConfiguration
+      attr_accessor studio_id: ::String
+      attr_accessor studio_name: ::String
+      attr_accessor studio_url: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor updated_at: ::Time
+      attr_accessor user_role_arn: ::String
+      SENSITIVE: [:display_name]
+    end
+
+    class StudioComponent
+      attr_accessor arn: ::String
+      attr_accessor configuration: Types::StudioComponentConfiguration
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor ec2_security_group_ids: ::Array[::String]
+      attr_accessor initialization_scripts: ::Array[Types::StudioComponentInitializationScript]
+      attr_accessor name: ::String
+      attr_accessor runtime_role_arn: ::String
+      attr_accessor script_parameters: ::Array[Types::ScriptParameterKeyValue]
+      attr_accessor secure_initialization_role_arn: ::String
+      attr_accessor state: ("CREATE_IN_PROGRESS" | "READY" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "DELETED" | "DELETE_FAILED" | "CREATE_FAILED" | "UPDATE_FAILED")
+      attr_accessor status_code: ("ACTIVE_DIRECTORY_ALREADY_EXISTS" | "STUDIO_COMPONENT_CREATED" | "STUDIO_COMPONENT_UPDATED" | "STUDIO_COMPONENT_DELETED" | "ENCRYPTION_KEY_ACCESS_DENIED" | "ENCRYPTION_KEY_NOT_FOUND" | "STUDIO_COMPONENT_CREATE_IN_PROGRESS" | "STUDIO_COMPONENT_UPDATE_IN_PROGRESS" | "STUDIO_COMPONENT_DELETE_IN_PROGRESS" | "INTERNAL_ERROR")
+      attr_accessor status_message: ::String
+      attr_accessor studio_component_id: ::String
+      attr_accessor subtype: ("AWS_MANAGED_MICROSOFT_AD" | "AMAZON_FSX_FOR_WINDOWS" | "AMAZON_FSX_FOR_LUSTRE" | "CUSTOM")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("ACTIVE_DIRECTORY" | "SHARED_FILE_SYSTEM" | "COMPUTE_FARM" | "LICENSE_SERVICE" | "CUSTOM")
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: [:description, :name, :script_parameters]
+    end
+
+    class StudioComponentConfiguration
+      attr_accessor active_directory_configuration: Types::ActiveDirectoryConfiguration
+      attr_accessor compute_farm_configuration: Types::ComputeFarmConfiguration
+      attr_accessor license_service_configuration: Types::LicenseServiceConfiguration
+      attr_accessor shared_file_system_configuration: Types::SharedFileSystemConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ActiveDirectoryConfiguration < StudioComponentConfiguration
+      end
+      class ComputeFarmConfiguration < StudioComponentConfiguration
+      end
+      class LicenseServiceConfiguration < StudioComponentConfiguration
+      end
+      class SharedFileSystemConfiguration < StudioComponentConfiguration
+      end
+      class Unknown < StudioComponentConfiguration
+      end
+    end
+
+    class StudioComponentInitializationScript
+      attr_accessor launch_profile_protocol_version: ::String
+      attr_accessor platform: ("LINUX" | "WINDOWS")
+      attr_accessor run_context: ("SYSTEM_INITIALIZATION" | "USER_INITIALIZATION")
+      attr_accessor script: ::String
+      SENSITIVE: [:script]
+    end
+
+    class StudioComponentSummary
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor studio_component_id: ::String
+      attr_accessor subtype: ("AWS_MANAGED_MICROSOFT_AD" | "AMAZON_FSX_FOR_WINDOWS" | "AMAZON_FSX_FOR_LUSTRE" | "CUSTOM")
+      attr_accessor type: ("ACTIVE_DIRECTORY" | "SHARED_FILE_SYSTEM" | "COMPUTE_FARM" | "LICENSE_SERVICE" | "CUSTOM")
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: [:description, :name]
+    end
+
+    class StudioEncryptionConfiguration
+      attr_accessor key_arn: ::String
+      attr_accessor key_type: ("AWS_OWNED_KEY" | "CUSTOMER_MANAGED_KEY")
+      SENSITIVE: []
+    end
+
+    class StudioMembership
+      attr_accessor identity_store_id: ::String
+      attr_accessor persona: ("ADMINISTRATOR")
+      attr_accessor principal_id: ::String
+      attr_accessor sid: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor code: ::String
+      attr_accessor context: ::Hash[::String, ::String]
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateLaunchProfileMemberRequest
+      attr_accessor client_token: ::String
+      attr_accessor launch_profile_id: ::String
+      attr_accessor persona: ("USER")
+      attr_accessor principal_id: ::String
+      attr_accessor studio_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateLaunchProfileMemberResponse
+      attr_accessor member: Types::LaunchProfileMembership
+      SENSITIVE: []
+    end
+
+    class UpdateLaunchProfileRequest
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor launch_profile_id: ::String
+      attr_accessor launch_profile_protocol_versions: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor stream_configuration: Types::StreamConfigurationCreate
+      attr_accessor studio_component_ids: ::Array[::String]
+      attr_accessor studio_id: ::String
+      SENSITIVE: [:description, :name]
+    end
+
+    class UpdateLaunchProfileResponse
+      attr_accessor launch_profile: Types::LaunchProfile
+      SENSITIVE: []
+    end
+
+    class UpdateStreamingImageRequest
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor streaming_image_id: ::String
+      attr_accessor studio_id: ::String
+      SENSITIVE: [:description, :name]
+    end
+
+    class UpdateStreamingImageResponse
+      attr_accessor streaming_image: Types::StreamingImage
+      SENSITIVE: []
+    end
+
+    class UpdateStudioComponentRequest
+      attr_accessor client_token: ::String
+      attr_accessor configuration: Types::StudioComponentConfiguration
+      attr_accessor description: ::String
+      attr_accessor ec2_security_group_ids: ::Array[::String]
+      attr_accessor initialization_scripts: ::Array[Types::StudioComponentInitializationScript]
+      attr_accessor name: ::String
+      attr_accessor runtime_role_arn: ::String
+      attr_accessor script_parameters: ::Array[Types::ScriptParameterKeyValue]
+      attr_accessor secure_initialization_role_arn: ::String
+      attr_accessor studio_component_id: ::String
+      attr_accessor studio_id: ::String
+      attr_accessor subtype: ("AWS_MANAGED_MICROSOFT_AD" | "AMAZON_FSX_FOR_WINDOWS" | "AMAZON_FSX_FOR_LUSTRE" | "CUSTOM")
+      attr_accessor type: ("ACTIVE_DIRECTORY" | "SHARED_FILE_SYSTEM" | "COMPUTE_FARM" | "LICENSE_SERVICE" | "CUSTOM")
+      SENSITIVE: [:description, :name, :script_parameters]
+    end
+
+    class UpdateStudioComponentResponse
+      attr_accessor studio_component: Types::StudioComponent
+      SENSITIVE: []
+    end
+
+    class UpdateStudioRequest
+      attr_accessor admin_role_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor display_name: ::String
+      attr_accessor studio_id: ::String
+      attr_accessor user_role_arn: ::String
+      SENSITIVE: [:display_name]
+    end
+
+    class UpdateStudioResponse
+      attr_accessor studio: Types::Studio
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor code: ::String
+      attr_accessor context: ::Hash[::String, ::String]
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationResult
+      attr_accessor state: ("VALIDATION_NOT_STARTED" | "VALIDATION_IN_PROGRESS" | "VALIDATION_SUCCESS" | "VALIDATION_FAILED" | "VALIDATION_FAILED_INTERNAL_SERVER_ERROR")
+      attr_accessor status_code: ("VALIDATION_NOT_STARTED" | "VALIDATION_IN_PROGRESS" | "VALIDATION_SUCCESS" | "VALIDATION_FAILED_INVALID_SUBNET_ROUTE_TABLE_ASSOCIATION" | "VALIDATION_FAILED_SUBNET_NOT_FOUND" | "VALIDATION_FAILED_INVALID_SECURITY_GROUP_ASSOCIATION" | "VALIDATION_FAILED_INVALID_ACTIVE_DIRECTORY" | "VALIDATION_FAILED_UNAUTHORIZED" | "VALIDATION_FAILED_INTERNAL_SERVER_ERROR")
+      attr_accessor status_message: ::String
+      attr_accessor type: ("VALIDATE_ACTIVE_DIRECTORY_STUDIO_COMPONENT" | "VALIDATE_SUBNET_ASSOCIATION" | "VALIDATE_NETWORK_ACL_ASSOCIATION" | "VALIDATE_SECURITY_GROUP_ASSOCIATION")
+      SENSITIVE: []
+    end
+
+    class VolumeConfiguration
+      attr_accessor iops: ::Integer
+      attr_accessor size: ::Integer
+      attr_accessor throughput: ::Integer
+      SENSITIVE: []
+    end
+  end
+end

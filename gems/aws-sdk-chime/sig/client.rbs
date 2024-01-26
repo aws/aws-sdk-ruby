@@ -1,0 +1,2425 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Chime
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociatePhoneNumberWithUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociatePhoneNumberWithUserResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#associate_phone_number_with_user-instance_method
+      def associate_phone_number_with_user: (
+                                              account_id: ::String,
+                                              user_id: ::String,
+                                              e164_phone_number: ::String
+                                            ) -> _AssociatePhoneNumberWithUserResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociatePhoneNumberWithUserResponseSuccess
+
+      interface _AssociatePhoneNumbersWithVoiceConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociatePhoneNumbersWithVoiceConnectorResponse]
+        def phone_number_errors: () -> ::Array[Types::PhoneNumberError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#associate_phone_numbers_with_voice_connector-instance_method
+      def associate_phone_numbers_with_voice_connector: (
+                                                          voice_connector_id: ::String,
+                                                          e164_phone_numbers: Array[::String],
+                                                          ?force_associate: bool
+                                                        ) -> _AssociatePhoneNumbersWithVoiceConnectorResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociatePhoneNumbersWithVoiceConnectorResponseSuccess
+
+      interface _AssociatePhoneNumbersWithVoiceConnectorGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociatePhoneNumbersWithVoiceConnectorGroupResponse]
+        def phone_number_errors: () -> ::Array[Types::PhoneNumberError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#associate_phone_numbers_with_voice_connector_group-instance_method
+      def associate_phone_numbers_with_voice_connector_group: (
+                                                                voice_connector_group_id: ::String,
+                                                                e164_phone_numbers: Array[::String],
+                                                                ?force_associate: bool
+                                                              ) -> _AssociatePhoneNumbersWithVoiceConnectorGroupResponseSuccess
+                                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociatePhoneNumbersWithVoiceConnectorGroupResponseSuccess
+
+      interface _AssociateSigninDelegateGroupsWithAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateSigninDelegateGroupsWithAccountResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#associate_signin_delegate_groups_with_account-instance_method
+      def associate_signin_delegate_groups_with_account: (
+                                                           account_id: ::String,
+                                                           signin_delegate_groups: Array[
+                                                             {
+                                                               group_name: ::String?
+                                                             },
+                                                           ]
+                                                         ) -> _AssociateSigninDelegateGroupsWithAccountResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateSigninDelegateGroupsWithAccountResponseSuccess
+
+      interface _BatchCreateAttendeeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchCreateAttendeeResponse]
+        def attendees: () -> ::Array[Types::Attendee]
+        def errors: () -> ::Array[Types::CreateAttendeeError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#batch_create_attendee-instance_method
+      def batch_create_attendee: (
+                                   meeting_id: ::String,
+                                   attendees: Array[
+                                     {
+                                       external_user_id: ::String,
+                                       tags: Array[
+                                         {
+                                           key: ::String,
+                                           value: ::String
+                                         },
+                                       ]?
+                                     },
+                                   ]
+                                 ) -> _BatchCreateAttendeeResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchCreateAttendeeResponseSuccess
+
+      interface _BatchCreateChannelMembershipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchCreateChannelMembershipResponse]
+        def batch_channel_memberships: () -> Types::BatchChannelMemberships
+        def errors: () -> ::Array[Types::BatchCreateChannelMembershipError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#batch_create_channel_membership-instance_method
+      def batch_create_channel_membership: (
+                                             channel_arn: ::String,
+                                             ?type: ("DEFAULT" | "HIDDEN"),
+                                             member_arns: Array[::String],
+                                             ?chime_bearer: ::String
+                                           ) -> _BatchCreateChannelMembershipResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchCreateChannelMembershipResponseSuccess
+
+      interface _BatchCreateRoomMembershipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchCreateRoomMembershipResponse]
+        def errors: () -> ::Array[Types::MemberError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#batch_create_room_membership-instance_method
+      def batch_create_room_membership: (
+                                          account_id: ::String,
+                                          room_id: ::String,
+                                          membership_item_list: Array[
+                                            {
+                                              member_id: ::String?,
+                                              role: ("Administrator" | "Member")?
+                                            },
+                                          ]
+                                        ) -> _BatchCreateRoomMembershipResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchCreateRoomMembershipResponseSuccess
+
+      interface _BatchDeletePhoneNumberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeletePhoneNumberResponse]
+        def phone_number_errors: () -> ::Array[Types::PhoneNumberError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#batch_delete_phone_number-instance_method
+      def batch_delete_phone_number: (
+                                       phone_number_ids: Array[::String]
+                                     ) -> _BatchDeletePhoneNumberResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeletePhoneNumberResponseSuccess
+
+      interface _BatchSuspendUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchSuspendUserResponse]
+        def user_errors: () -> ::Array[Types::UserError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#batch_suspend_user-instance_method
+      def batch_suspend_user: (
+                                account_id: ::String,
+                                user_id_list: Array[::String]
+                              ) -> _BatchSuspendUserResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchSuspendUserResponseSuccess
+
+      interface _BatchUnsuspendUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchUnsuspendUserResponse]
+        def user_errors: () -> ::Array[Types::UserError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#batch_unsuspend_user-instance_method
+      def batch_unsuspend_user: (
+                                  account_id: ::String,
+                                  user_id_list: Array[::String]
+                                ) -> _BatchUnsuspendUserResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUnsuspendUserResponseSuccess
+
+      interface _BatchUpdatePhoneNumberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchUpdatePhoneNumberResponse]
+        def phone_number_errors: () -> ::Array[Types::PhoneNumberError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#batch_update_phone_number-instance_method
+      def batch_update_phone_number: (
+                                       update_phone_number_request_items: Array[
+                                         {
+                                           phone_number_id: ::String,
+                                           product_type: ("BusinessCalling" | "VoiceConnector" | "SipMediaApplicationDialIn")?,
+                                           calling_name: ::String?
+                                         },
+                                       ]
+                                     ) -> _BatchUpdatePhoneNumberResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdatePhoneNumberResponseSuccess
+
+      interface _BatchUpdateUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchUpdateUserResponse]
+        def user_errors: () -> ::Array[Types::UserError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#batch_update_user-instance_method
+      def batch_update_user: (
+                               account_id: ::String,
+                               update_user_request_items: Array[
+                                 {
+                                   user_id: ::String,
+                                   license_type: ("Basic" | "Plus" | "Pro" | "ProTrial")?,
+                                   user_type: ("PrivateUser" | "SharedDevice")?,
+                                   alexa_for_business_metadata: {
+                                     is_alexa_for_business_enabled: bool?,
+                                     alexa_for_business_room_arn: ::String?
+                                   }?
+                                 },
+                               ]
+                             ) -> _BatchUpdateUserResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateUserResponseSuccess
+
+      interface _CreateAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccountResponse]
+        def account: () -> Types::Account
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#create_account-instance_method
+      def create_account: (
+                            name: ::String
+                          ) -> _CreateAccountResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccountResponseSuccess
+
+      interface _CreateAppInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAppInstanceResponse]
+        def app_instance_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#create_app_instance-instance_method
+      def create_app_instance: (
+                                 name: ::String,
+                                 ?metadata: ::String,
+                                 client_request_token: ::String,
+                                 ?tags: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String
+                                   },
+                                 ]
+                               ) -> _CreateAppInstanceResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAppInstanceResponseSuccess
+
+      interface _CreateAppInstanceAdminResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAppInstanceAdminResponse]
+        def app_instance_admin: () -> Types::Identity
+        def app_instance_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#create_app_instance_admin-instance_method
+      def create_app_instance_admin: (
+                                       app_instance_admin_arn: ::String,
+                                       app_instance_arn: ::String
+                                     ) -> _CreateAppInstanceAdminResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAppInstanceAdminResponseSuccess
+
+      interface _CreateAppInstanceUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAppInstanceUserResponse]
+        def app_instance_user_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#create_app_instance_user-instance_method
+      def create_app_instance_user: (
+                                      app_instance_arn: ::String,
+                                      app_instance_user_id: ::String,
+                                      name: ::String,
+                                      ?metadata: ::String,
+                                      client_request_token: ::String,
+                                      ?tags: Array[
+                                        {
+                                          key: ::String,
+                                          value: ::String
+                                        },
+                                      ]
+                                    ) -> _CreateAppInstanceUserResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAppInstanceUserResponseSuccess
+
+      interface _CreateAttendeeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAttendeeResponse]
+        def attendee: () -> Types::Attendee
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#create_attendee-instance_method
+      def create_attendee: (
+                             meeting_id: ::String,
+                             external_user_id: ::String,
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String
+                               },
+                             ]
+                           ) -> _CreateAttendeeResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAttendeeResponseSuccess
+
+      interface _CreateBotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBotResponse]
+        def bot: () -> Types::Bot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#create_bot-instance_method
+      def create_bot: (
+                        account_id: ::String,
+                        display_name: ::String,
+                        ?domain: ::String
+                      ) -> _CreateBotResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBotResponseSuccess
+
+      interface _CreateChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateChannelResponse]
+        def channel_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#create_channel-instance_method
+      def create_channel: (
+                            app_instance_arn: ::String,
+                            name: ::String,
+                            ?mode: ("UNRESTRICTED" | "RESTRICTED"),
+                            ?privacy: ("PUBLIC" | "PRIVATE"),
+                            ?metadata: ::String,
+                            client_request_token: ::String,
+                            ?tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ],
+                            ?chime_bearer: ::String
+                          ) -> _CreateChannelResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelResponseSuccess
+
+      interface _CreateChannelBanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateChannelBanResponse]
+        def channel_arn: () -> ::String
+        def member: () -> Types::Identity
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#create_channel_ban-instance_method
+      def create_channel_ban: (
+                                channel_arn: ::String,
+                                member_arn: ::String,
+                                ?chime_bearer: ::String
+                              ) -> _CreateChannelBanResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelBanResponseSuccess
+
+      interface _CreateChannelMembershipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateChannelMembershipResponse]
+        def channel_arn: () -> ::String
+        def member: () -> Types::Identity
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#create_channel_membership-instance_method
+      def create_channel_membership: (
+                                       channel_arn: ::String,
+                                       member_arn: ::String,
+                                       type: ("DEFAULT" | "HIDDEN"),
+                                       ?chime_bearer: ::String
+                                     ) -> _CreateChannelMembershipResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelMembershipResponseSuccess
+
+      interface _CreateChannelModeratorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateChannelModeratorResponse]
+        def channel_arn: () -> ::String
+        def channel_moderator: () -> Types::Identity
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#create_channel_moderator-instance_method
+      def create_channel_moderator: (
+                                      channel_arn: ::String,
+                                      channel_moderator_arn: ::String,
+                                      ?chime_bearer: ::String
+                                    ) -> _CreateChannelModeratorResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelModeratorResponseSuccess
+
+      interface _CreateMediaCapturePipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMediaCapturePipelineResponse]
+        def media_capture_pipeline: () -> Types::MediaCapturePipeline
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#create_media_capture_pipeline-instance_method
+      def create_media_capture_pipeline: (
+                                           source_type: ("ChimeSdkMeeting"),
+                                           source_arn: ::String,
+                                           sink_type: ("S3Bucket"),
+                                           sink_arn: ::String,
+                                           ?client_request_token: ::String,
+                                           ?chime_sdk_meeting_configuration: {
+                                             source_configuration: {
+                                               selected_video_streams: {
+                                                 attendee_ids: Array[::String]?,
+                                                 external_user_ids: Array[::String]?
+                                               }?
+                                             }?,
+                                             artifacts_configuration: {
+                                               audio: {
+                                                 mux_type: ("AudioOnly" | "AudioWithActiveSpeakerVideo")
+                                               },
+                                               video: {
+                                                 state: ("Enabled" | "Disabled"),
+                                                 mux_type: ("VideoOnly")?
+                                               },
+                                               content: {
+                                                 state: ("Enabled" | "Disabled"),
+                                                 mux_type: ("ContentOnly")?
+                                               }
+                                             }?
+                                           }
+                                         ) -> _CreateMediaCapturePipelineResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMediaCapturePipelineResponseSuccess
+
+      interface _CreateMeetingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMeetingResponse]
+        def meeting: () -> Types::Meeting
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#create_meeting-instance_method
+      def create_meeting: (
+                            client_request_token: ::String,
+                            ?external_meeting_id: ::String,
+                            ?meeting_host_id: ::String,
+                            ?media_region: ::String,
+                            ?tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ],
+                            ?notifications_configuration: {
+                              sns_topic_arn: ::String?,
+                              sqs_queue_arn: ::String?
+                            }
+                          ) -> _CreateMeetingResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMeetingResponseSuccess
+
+      interface _CreateMeetingDialOutResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMeetingDialOutResponse]
+        def transaction_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#create_meeting_dial_out-instance_method
+      def create_meeting_dial_out: (
+                                     meeting_id: ::String,
+                                     from_phone_number: ::String,
+                                     to_phone_number: ::String,
+                                     join_token: ::String
+                                   ) -> _CreateMeetingDialOutResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMeetingDialOutResponseSuccess
+
+      interface _CreateMeetingWithAttendeesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMeetingWithAttendeesResponse]
+        def meeting: () -> Types::Meeting
+        def attendees: () -> ::Array[Types::Attendee]
+        def errors: () -> ::Array[Types::CreateAttendeeError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#create_meeting_with_attendees-instance_method
+      def create_meeting_with_attendees: (
+                                           client_request_token: ::String,
+                                           ?external_meeting_id: ::String,
+                                           ?meeting_host_id: ::String,
+                                           ?media_region: ::String,
+                                           ?tags: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String
+                                             },
+                                           ],
+                                           ?notifications_configuration: {
+                                             sns_topic_arn: ::String?,
+                                             sqs_queue_arn: ::String?
+                                           },
+                                           ?attendees: Array[
+                                             {
+                                               external_user_id: ::String,
+                                               tags: Array[
+                                                 {
+                                                   key: ::String,
+                                                   value: ::String
+                                                 },
+                                               ]?
+                                             },
+                                           ]
+                                         ) -> _CreateMeetingWithAttendeesResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMeetingWithAttendeesResponseSuccess
+
+      interface _CreatePhoneNumberOrderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePhoneNumberOrderResponse]
+        def phone_number_order: () -> Types::PhoneNumberOrder
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#create_phone_number_order-instance_method
+      def create_phone_number_order: (
+                                       product_type: ("BusinessCalling" | "VoiceConnector" | "SipMediaApplicationDialIn"),
+                                       e164_phone_numbers: Array[::String]
+                                     ) -> _CreatePhoneNumberOrderResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePhoneNumberOrderResponseSuccess
+
+      interface _CreateProxySessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProxySessionResponse]
+        def proxy_session: () -> Types::ProxySession
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#create_proxy_session-instance_method
+      def create_proxy_session: (
+                                  voice_connector_id: ::String,
+                                  participant_phone_numbers: Array[::String],
+                                  ?name: ::String,
+                                  ?expiry_minutes: ::Integer,
+                                  capabilities: Array[("Voice" | "SMS")],
+                                  ?number_selection_behavior: ("PreferSticky" | "AvoidSticky"),
+                                  ?geo_match_level: ("Country" | "AreaCode"),
+                                  ?geo_match_params: {
+                                    country: ::String,
+                                    area_code: ::String
+                                  }
+                                ) -> _CreateProxySessionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProxySessionResponseSuccess
+
+      interface _CreateRoomResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRoomResponse]
+        def room: () -> Types::Room
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#create_room-instance_method
+      def create_room: (
+                         account_id: ::String,
+                         name: ::String,
+                         ?client_request_token: ::String
+                       ) -> _CreateRoomResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRoomResponseSuccess
+
+      interface _CreateRoomMembershipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRoomMembershipResponse]
+        def room_membership: () -> Types::RoomMembership
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#create_room_membership-instance_method
+      def create_room_membership: (
+                                    account_id: ::String,
+                                    room_id: ::String,
+                                    member_id: ::String,
+                                    ?role: ("Administrator" | "Member")
+                                  ) -> _CreateRoomMembershipResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRoomMembershipResponseSuccess
+
+      interface _CreateSipMediaApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSipMediaApplicationResponse]
+        def sip_media_application: () -> Types::SipMediaApplication
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#create_sip_media_application-instance_method
+      def create_sip_media_application: (
+                                          aws_region: ::String,
+                                          name: ::String,
+                                          endpoints: Array[
+                                            {
+                                              lambda_arn: ::String?
+                                            },
+                                          ]
+                                        ) -> _CreateSipMediaApplicationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSipMediaApplicationResponseSuccess
+
+      interface _CreateSipMediaApplicationCallResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSipMediaApplicationCallResponse]
+        def sip_media_application_call: () -> Types::SipMediaApplicationCall
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#create_sip_media_application_call-instance_method
+      def create_sip_media_application_call: (
+                                               from_phone_number: ::String,
+                                               to_phone_number: ::String,
+                                               sip_media_application_id: ::String,
+                                               ?sip_headers: Hash[::String, ::String]
+                                             ) -> _CreateSipMediaApplicationCallResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSipMediaApplicationCallResponseSuccess
+
+      interface _CreateSipRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSipRuleResponse]
+        def sip_rule: () -> Types::SipRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#create_sip_rule-instance_method
+      def create_sip_rule: (
+                             name: ::String,
+                             trigger_type: ("ToPhoneNumber" | "RequestUriHostname"),
+                             trigger_value: ::String,
+                             ?disabled: bool,
+                             target_applications: Array[
+                               {
+                                 sip_media_application_id: ::String?,
+                                 priority: ::Integer?,
+                                 aws_region: ::String?
+                               },
+                             ]
+                           ) -> _CreateSipRuleResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSipRuleResponseSuccess
+
+      interface _CreateUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateUserResponse]
+        def user: () -> Types::User
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#create_user-instance_method
+      def create_user: (
+                         account_id: ::String,
+                         ?username: ::String,
+                         ?email: ::String,
+                         ?user_type: ("PrivateUser" | "SharedDevice")
+                       ) -> _CreateUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserResponseSuccess
+
+      interface _CreateVoiceConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVoiceConnectorResponse]
+        def voice_connector: () -> Types::VoiceConnector
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#create_voice_connector-instance_method
+      def create_voice_connector: (
+                                    name: ::String,
+                                    ?aws_region: ("us-east-1" | "us-west-2"),
+                                    require_encryption: bool
+                                  ) -> _CreateVoiceConnectorResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVoiceConnectorResponseSuccess
+
+      interface _CreateVoiceConnectorGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVoiceConnectorGroupResponse]
+        def voice_connector_group: () -> Types::VoiceConnectorGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#create_voice_connector_group-instance_method
+      def create_voice_connector_group: (
+                                          name: ::String,
+                                          ?voice_connector_items: Array[
+                                            {
+                                              voice_connector_id: ::String,
+                                              priority: ::Integer
+                                            },
+                                          ]
+                                        ) -> _CreateVoiceConnectorGroupResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVoiceConnectorGroupResponseSuccess
+
+      interface _DeleteAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAccountResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#delete_account-instance_method
+      def delete_account: (
+                            account_id: ::String
+                          ) -> _DeleteAccountResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAccountResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#delete_app_instance-instance_method
+      def delete_app_instance: (
+                                 app_instance_arn: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#delete_app_instance_admin-instance_method
+      def delete_app_instance_admin: (
+                                       app_instance_admin_arn: ::String,
+                                       app_instance_arn: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#delete_app_instance_streaming_configurations-instance_method
+      def delete_app_instance_streaming_configurations: (
+                                                          app_instance_arn: ::String
+                                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#delete_app_instance_user-instance_method
+      def delete_app_instance_user: (
+                                      app_instance_user_arn: ::String
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#delete_attendee-instance_method
+      def delete_attendee: (
+                             meeting_id: ::String,
+                             attendee_id: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#delete_channel-instance_method
+      def delete_channel: (
+                            channel_arn: ::String,
+                            ?chime_bearer: ::String
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#delete_channel_ban-instance_method
+      def delete_channel_ban: (
+                                channel_arn: ::String,
+                                member_arn: ::String,
+                                ?chime_bearer: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#delete_channel_membership-instance_method
+      def delete_channel_membership: (
+                                       channel_arn: ::String,
+                                       member_arn: ::String,
+                                       ?chime_bearer: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#delete_channel_message-instance_method
+      def delete_channel_message: (
+                                    channel_arn: ::String,
+                                    message_id: ::String,
+                                    ?chime_bearer: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#delete_channel_moderator-instance_method
+      def delete_channel_moderator: (
+                                      channel_arn: ::String,
+                                      channel_moderator_arn: ::String,
+                                      ?chime_bearer: ::String
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#delete_events_configuration-instance_method
+      def delete_events_configuration: (
+                                         account_id: ::String,
+                                         bot_id: ::String
+                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#delete_media_capture_pipeline-instance_method
+      def delete_media_capture_pipeline: (
+                                           media_pipeline_id: ::String
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#delete_meeting-instance_method
+      def delete_meeting: (
+                            meeting_id: ::String
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#delete_phone_number-instance_method
+      def delete_phone_number: (
+                                 phone_number_id: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#delete_proxy_session-instance_method
+      def delete_proxy_session: (
+                                  voice_connector_id: ::String,
+                                  proxy_session_id: ::String
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#delete_room-instance_method
+      def delete_room: (
+                         account_id: ::String,
+                         room_id: ::String
+                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#delete_room_membership-instance_method
+      def delete_room_membership: (
+                                    account_id: ::String,
+                                    room_id: ::String,
+                                    member_id: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#delete_sip_media_application-instance_method
+      def delete_sip_media_application: (
+                                          sip_media_application_id: ::String
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#delete_sip_rule-instance_method
+      def delete_sip_rule: (
+                             sip_rule_id: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#delete_voice_connector-instance_method
+      def delete_voice_connector: (
+                                    voice_connector_id: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#delete_voice_connector_emergency_calling_configuration-instance_method
+      def delete_voice_connector_emergency_calling_configuration: (
+                                                                    voice_connector_id: ::String
+                                                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#delete_voice_connector_group-instance_method
+      def delete_voice_connector_group: (
+                                          voice_connector_group_id: ::String
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#delete_voice_connector_origination-instance_method
+      def delete_voice_connector_origination: (
+                                                voice_connector_id: ::String
+                                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#delete_voice_connector_proxy-instance_method
+      def delete_voice_connector_proxy: (
+                                          voice_connector_id: ::String
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#delete_voice_connector_streaming_configuration-instance_method
+      def delete_voice_connector_streaming_configuration: (
+                                                            voice_connector_id: ::String
+                                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#delete_voice_connector_termination-instance_method
+      def delete_voice_connector_termination: (
+                                                voice_connector_id: ::String
+                                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#delete_voice_connector_termination_credentials-instance_method
+      def delete_voice_connector_termination_credentials: (
+                                                            voice_connector_id: ::String,
+                                                            usernames: Array[::String]
+                                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeAppInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAppInstanceResponse]
+        def app_instance: () -> Types::AppInstance
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#describe_app_instance-instance_method
+      def describe_app_instance: (
+                                   app_instance_arn: ::String
+                                 ) -> _DescribeAppInstanceResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAppInstanceResponseSuccess
+
+      interface _DescribeAppInstanceAdminResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAppInstanceAdminResponse]
+        def app_instance_admin: () -> Types::AppInstanceAdmin
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#describe_app_instance_admin-instance_method
+      def describe_app_instance_admin: (
+                                         app_instance_admin_arn: ::String,
+                                         app_instance_arn: ::String
+                                       ) -> _DescribeAppInstanceAdminResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAppInstanceAdminResponseSuccess
+
+      interface _DescribeAppInstanceUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAppInstanceUserResponse]
+        def app_instance_user: () -> Types::AppInstanceUser
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#describe_app_instance_user-instance_method
+      def describe_app_instance_user: (
+                                        app_instance_user_arn: ::String
+                                      ) -> _DescribeAppInstanceUserResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAppInstanceUserResponseSuccess
+
+      interface _DescribeChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeChannelResponse]
+        def channel: () -> Types::Channel
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#describe_channel-instance_method
+      def describe_channel: (
+                              channel_arn: ::String,
+                              ?chime_bearer: ::String
+                            ) -> _DescribeChannelResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeChannelResponseSuccess
+
+      interface _DescribeChannelBanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeChannelBanResponse]
+        def channel_ban: () -> Types::ChannelBan
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#describe_channel_ban-instance_method
+      def describe_channel_ban: (
+                                  channel_arn: ::String,
+                                  member_arn: ::String,
+                                  ?chime_bearer: ::String
+                                ) -> _DescribeChannelBanResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeChannelBanResponseSuccess
+
+      interface _DescribeChannelMembershipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeChannelMembershipResponse]
+        def channel_membership: () -> Types::ChannelMembership
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#describe_channel_membership-instance_method
+      def describe_channel_membership: (
+                                         channel_arn: ::String,
+                                         member_arn: ::String,
+                                         ?chime_bearer: ::String
+                                       ) -> _DescribeChannelMembershipResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeChannelMembershipResponseSuccess
+
+      interface _DescribeChannelMembershipForAppInstanceUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeChannelMembershipForAppInstanceUserResponse]
+        def channel_membership: () -> Types::ChannelMembershipForAppInstanceUserSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#describe_channel_membership_for_app_instance_user-instance_method
+      def describe_channel_membership_for_app_instance_user: (
+                                                               channel_arn: ::String,
+                                                               app_instance_user_arn: ::String,
+                                                               ?chime_bearer: ::String
+                                                             ) -> _DescribeChannelMembershipForAppInstanceUserResponseSuccess
+                                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeChannelMembershipForAppInstanceUserResponseSuccess
+
+      interface _DescribeChannelModeratedByAppInstanceUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeChannelModeratedByAppInstanceUserResponse]
+        def channel: () -> Types::ChannelModeratedByAppInstanceUserSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#describe_channel_moderated_by_app_instance_user-instance_method
+      def describe_channel_moderated_by_app_instance_user: (
+                                                             channel_arn: ::String,
+                                                             app_instance_user_arn: ::String,
+                                                             ?chime_bearer: ::String
+                                                           ) -> _DescribeChannelModeratedByAppInstanceUserResponseSuccess
+                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeChannelModeratedByAppInstanceUserResponseSuccess
+
+      interface _DescribeChannelModeratorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeChannelModeratorResponse]
+        def channel_moderator: () -> Types::ChannelModerator
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#describe_channel_moderator-instance_method
+      def describe_channel_moderator: (
+                                        channel_arn: ::String,
+                                        channel_moderator_arn: ::String,
+                                        ?chime_bearer: ::String
+                                      ) -> _DescribeChannelModeratorResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeChannelModeratorResponseSuccess
+
+      interface _DisassociatePhoneNumberFromUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociatePhoneNumberFromUserResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#disassociate_phone_number_from_user-instance_method
+      def disassociate_phone_number_from_user: (
+                                                 account_id: ::String,
+                                                 user_id: ::String
+                                               ) -> _DisassociatePhoneNumberFromUserResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociatePhoneNumberFromUserResponseSuccess
+
+      interface _DisassociatePhoneNumbersFromVoiceConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociatePhoneNumbersFromVoiceConnectorResponse]
+        def phone_number_errors: () -> ::Array[Types::PhoneNumberError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#disassociate_phone_numbers_from_voice_connector-instance_method
+      def disassociate_phone_numbers_from_voice_connector: (
+                                                             voice_connector_id: ::String,
+                                                             e164_phone_numbers: Array[::String]
+                                                           ) -> _DisassociatePhoneNumbersFromVoiceConnectorResponseSuccess
+                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociatePhoneNumbersFromVoiceConnectorResponseSuccess
+
+      interface _DisassociatePhoneNumbersFromVoiceConnectorGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociatePhoneNumbersFromVoiceConnectorGroupResponse]
+        def phone_number_errors: () -> ::Array[Types::PhoneNumberError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#disassociate_phone_numbers_from_voice_connector_group-instance_method
+      def disassociate_phone_numbers_from_voice_connector_group: (
+                                                                   voice_connector_group_id: ::String,
+                                                                   e164_phone_numbers: Array[::String]
+                                                                 ) -> _DisassociatePhoneNumbersFromVoiceConnectorGroupResponseSuccess
+                                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociatePhoneNumbersFromVoiceConnectorGroupResponseSuccess
+
+      interface _DisassociateSigninDelegateGroupsFromAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateSigninDelegateGroupsFromAccountResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#disassociate_signin_delegate_groups_from_account-instance_method
+      def disassociate_signin_delegate_groups_from_account: (
+                                                              account_id: ::String,
+                                                              group_names: Array[::String]
+                                                            ) -> _DisassociateSigninDelegateGroupsFromAccountResponseSuccess
+                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateSigninDelegateGroupsFromAccountResponseSuccess
+
+      interface _GetAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountResponse]
+        def account: () -> Types::Account
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_account-instance_method
+      def get_account: (
+                         account_id: ::String
+                       ) -> _GetAccountResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountResponseSuccess
+
+      interface _GetAccountSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountSettingsResponse]
+        def account_settings: () -> Types::AccountSettings
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_account_settings-instance_method
+      def get_account_settings: (
+                                  account_id: ::String
+                                ) -> _GetAccountSettingsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountSettingsResponseSuccess
+
+      interface _GetAppInstanceRetentionSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAppInstanceRetentionSettingsResponse]
+        def app_instance_retention_settings: () -> Types::AppInstanceRetentionSettings
+        def initiate_deletion_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_app_instance_retention_settings-instance_method
+      def get_app_instance_retention_settings: (
+                                                 app_instance_arn: ::String
+                                               ) -> _GetAppInstanceRetentionSettingsResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAppInstanceRetentionSettingsResponseSuccess
+
+      interface _GetAppInstanceStreamingConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAppInstanceStreamingConfigurationsResponse]
+        def app_instance_streaming_configurations: () -> ::Array[Types::AppInstanceStreamingConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_app_instance_streaming_configurations-instance_method
+      def get_app_instance_streaming_configurations: (
+                                                       app_instance_arn: ::String
+                                                     ) -> _GetAppInstanceStreamingConfigurationsResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAppInstanceStreamingConfigurationsResponseSuccess
+
+      interface _GetAttendeeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAttendeeResponse]
+        def attendee: () -> Types::Attendee
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_attendee-instance_method
+      def get_attendee: (
+                          meeting_id: ::String,
+                          attendee_id: ::String
+                        ) -> _GetAttendeeResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAttendeeResponseSuccess
+
+      interface _GetBotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBotResponse]
+        def bot: () -> Types::Bot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_bot-instance_method
+      def get_bot: (
+                     account_id: ::String,
+                     bot_id: ::String
+                   ) -> _GetBotResponseSuccess
+                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBotResponseSuccess
+
+      interface _GetChannelMessageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetChannelMessageResponse]
+        def channel_message: () -> Types::ChannelMessage
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_channel_message-instance_method
+      def get_channel_message: (
+                                 channel_arn: ::String,
+                                 message_id: ::String,
+                                 ?chime_bearer: ::String
+                               ) -> _GetChannelMessageResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetChannelMessageResponseSuccess
+
+      interface _GetEventsConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEventsConfigurationResponse]
+        def events_configuration: () -> Types::EventsConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_events_configuration-instance_method
+      def get_events_configuration: (
+                                      account_id: ::String,
+                                      bot_id: ::String
+                                    ) -> _GetEventsConfigurationResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEventsConfigurationResponseSuccess
+
+      interface _GetGlobalSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGlobalSettingsResponse]
+        def business_calling: () -> Types::BusinessCallingSettings
+        def voice_connector: () -> Types::VoiceConnectorSettings
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_global_settings-instance_method
+      def get_global_settings: () -> _GetGlobalSettingsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGlobalSettingsResponseSuccess
+
+      interface _GetMediaCapturePipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMediaCapturePipelineResponse]
+        def media_capture_pipeline: () -> Types::MediaCapturePipeline
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_media_capture_pipeline-instance_method
+      def get_media_capture_pipeline: (
+                                        media_pipeline_id: ::String
+                                      ) -> _GetMediaCapturePipelineResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMediaCapturePipelineResponseSuccess
+
+      interface _GetMeetingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMeetingResponse]
+        def meeting: () -> Types::Meeting
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_meeting-instance_method
+      def get_meeting: (
+                         meeting_id: ::String
+                       ) -> _GetMeetingResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMeetingResponseSuccess
+
+      interface _GetMessagingSessionEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMessagingSessionEndpointResponse]
+        def endpoint: () -> Types::MessagingSessionEndpoint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_messaging_session_endpoint-instance_method
+      def get_messaging_session_endpoint: (
+                                          ) -> _GetMessagingSessionEndpointResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMessagingSessionEndpointResponseSuccess
+
+      interface _GetPhoneNumberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPhoneNumberResponse]
+        def phone_number: () -> Types::PhoneNumber
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_phone_number-instance_method
+      def get_phone_number: (
+                              phone_number_id: ::String
+                            ) -> _GetPhoneNumberResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPhoneNumberResponseSuccess
+
+      interface _GetPhoneNumberOrderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPhoneNumberOrderResponse]
+        def phone_number_order: () -> Types::PhoneNumberOrder
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_phone_number_order-instance_method
+      def get_phone_number_order: (
+                                    phone_number_order_id: ::String
+                                  ) -> _GetPhoneNumberOrderResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPhoneNumberOrderResponseSuccess
+
+      interface _GetPhoneNumberSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPhoneNumberSettingsResponse]
+        def calling_name: () -> ::String
+        def calling_name_updated_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_phone_number_settings-instance_method
+      def get_phone_number_settings: () -> _GetPhoneNumberSettingsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPhoneNumberSettingsResponseSuccess
+
+      interface _GetProxySessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProxySessionResponse]
+        def proxy_session: () -> Types::ProxySession
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_proxy_session-instance_method
+      def get_proxy_session: (
+                               voice_connector_id: ::String,
+                               proxy_session_id: ::String
+                             ) -> _GetProxySessionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProxySessionResponseSuccess
+
+      interface _GetRetentionSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRetentionSettingsResponse]
+        def retention_settings: () -> Types::RetentionSettings
+        def initiate_deletion_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_retention_settings-instance_method
+      def get_retention_settings: (
+                                    account_id: ::String
+                                  ) -> _GetRetentionSettingsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRetentionSettingsResponseSuccess
+
+      interface _GetRoomResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRoomResponse]
+        def room: () -> Types::Room
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_room-instance_method
+      def get_room: (
+                      account_id: ::String,
+                      room_id: ::String
+                    ) -> _GetRoomResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRoomResponseSuccess
+
+      interface _GetSipMediaApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSipMediaApplicationResponse]
+        def sip_media_application: () -> Types::SipMediaApplication
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_sip_media_application-instance_method
+      def get_sip_media_application: (
+                                       sip_media_application_id: ::String
+                                     ) -> _GetSipMediaApplicationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSipMediaApplicationResponseSuccess
+
+      interface _GetSipMediaApplicationLoggingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSipMediaApplicationLoggingConfigurationResponse]
+        def sip_media_application_logging_configuration: () -> Types::SipMediaApplicationLoggingConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_sip_media_application_logging_configuration-instance_method
+      def get_sip_media_application_logging_configuration: (
+                                                             sip_media_application_id: ::String
+                                                           ) -> _GetSipMediaApplicationLoggingConfigurationResponseSuccess
+                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSipMediaApplicationLoggingConfigurationResponseSuccess
+
+      interface _GetSipRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSipRuleResponse]
+        def sip_rule: () -> Types::SipRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_sip_rule-instance_method
+      def get_sip_rule: (
+                          sip_rule_id: ::String
+                        ) -> _GetSipRuleResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSipRuleResponseSuccess
+
+      interface _GetUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUserResponse]
+        def user: () -> Types::User
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_user-instance_method
+      def get_user: (
+                      account_id: ::String,
+                      user_id: ::String
+                    ) -> _GetUserResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUserResponseSuccess
+
+      interface _GetUserSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUserSettingsResponse]
+        def user_settings: () -> Types::UserSettings
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_user_settings-instance_method
+      def get_user_settings: (
+                               account_id: ::String,
+                               user_id: ::String
+                             ) -> _GetUserSettingsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUserSettingsResponseSuccess
+
+      interface _GetVoiceConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVoiceConnectorResponse]
+        def voice_connector: () -> Types::VoiceConnector
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_voice_connector-instance_method
+      def get_voice_connector: (
+                                 voice_connector_id: ::String
+                               ) -> _GetVoiceConnectorResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVoiceConnectorResponseSuccess
+
+      interface _GetVoiceConnectorEmergencyCallingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVoiceConnectorEmergencyCallingConfigurationResponse]
+        def emergency_calling_configuration: () -> Types::EmergencyCallingConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_voice_connector_emergency_calling_configuration-instance_method
+      def get_voice_connector_emergency_calling_configuration: (
+                                                                 voice_connector_id: ::String
+                                                               ) -> _GetVoiceConnectorEmergencyCallingConfigurationResponseSuccess
+                                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVoiceConnectorEmergencyCallingConfigurationResponseSuccess
+
+      interface _GetVoiceConnectorGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVoiceConnectorGroupResponse]
+        def voice_connector_group: () -> Types::VoiceConnectorGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_voice_connector_group-instance_method
+      def get_voice_connector_group: (
+                                       voice_connector_group_id: ::String
+                                     ) -> _GetVoiceConnectorGroupResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVoiceConnectorGroupResponseSuccess
+
+      interface _GetVoiceConnectorLoggingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVoiceConnectorLoggingConfigurationResponse]
+        def logging_configuration: () -> Types::LoggingConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_voice_connector_logging_configuration-instance_method
+      def get_voice_connector_logging_configuration: (
+                                                       voice_connector_id: ::String
+                                                     ) -> _GetVoiceConnectorLoggingConfigurationResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVoiceConnectorLoggingConfigurationResponseSuccess
+
+      interface _GetVoiceConnectorOriginationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVoiceConnectorOriginationResponse]
+        def origination: () -> Types::Origination
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_voice_connector_origination-instance_method
+      def get_voice_connector_origination: (
+                                             voice_connector_id: ::String
+                                           ) -> _GetVoiceConnectorOriginationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVoiceConnectorOriginationResponseSuccess
+
+      interface _GetVoiceConnectorProxyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVoiceConnectorProxyResponse]
+        def proxy: () -> Types::Proxy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_voice_connector_proxy-instance_method
+      def get_voice_connector_proxy: (
+                                       voice_connector_id: ::String
+                                     ) -> _GetVoiceConnectorProxyResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVoiceConnectorProxyResponseSuccess
+
+      interface _GetVoiceConnectorStreamingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVoiceConnectorStreamingConfigurationResponse]
+        def streaming_configuration: () -> Types::StreamingConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_voice_connector_streaming_configuration-instance_method
+      def get_voice_connector_streaming_configuration: (
+                                                         voice_connector_id: ::String
+                                                       ) -> _GetVoiceConnectorStreamingConfigurationResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVoiceConnectorStreamingConfigurationResponseSuccess
+
+      interface _GetVoiceConnectorTerminationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVoiceConnectorTerminationResponse]
+        def termination: () -> Types::Termination
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_voice_connector_termination-instance_method
+      def get_voice_connector_termination: (
+                                             voice_connector_id: ::String
+                                           ) -> _GetVoiceConnectorTerminationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVoiceConnectorTerminationResponseSuccess
+
+      interface _GetVoiceConnectorTerminationHealthResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVoiceConnectorTerminationHealthResponse]
+        def termination_health: () -> Types::TerminationHealth
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#get_voice_connector_termination_health-instance_method
+      def get_voice_connector_termination_health: (
+                                                    voice_connector_id: ::String
+                                                  ) -> _GetVoiceConnectorTerminationHealthResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVoiceConnectorTerminationHealthResponseSuccess
+
+      interface _InviteUsersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InviteUsersResponse]
+        def invites: () -> ::Array[Types::Invite]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#invite_users-instance_method
+      def invite_users: (
+                          account_id: ::String,
+                          user_email_list: Array[::String],
+                          ?user_type: ("PrivateUser" | "SharedDevice")
+                        ) -> _InviteUsersResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InviteUsersResponseSuccess
+
+      interface _ListAccountsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccountsResponse]
+        def accounts: () -> ::Array[Types::Account]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_accounts-instance_method
+      def list_accounts: (
+                           ?name: ::String,
+                           ?user_email: ::String,
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListAccountsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccountsResponseSuccess
+
+      interface _ListAppInstanceAdminsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAppInstanceAdminsResponse]
+        def app_instance_arn: () -> ::String
+        def app_instance_admins: () -> ::Array[Types::AppInstanceAdminSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_app_instance_admins-instance_method
+      def list_app_instance_admins: (
+                                      app_instance_arn: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListAppInstanceAdminsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAppInstanceAdminsResponseSuccess
+
+      interface _ListAppInstanceUsersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAppInstanceUsersResponse]
+        def app_instance_arn: () -> ::String
+        def app_instance_users: () -> ::Array[Types::AppInstanceUserSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_app_instance_users-instance_method
+      def list_app_instance_users: (
+                                     app_instance_arn: ::String,
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListAppInstanceUsersResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAppInstanceUsersResponseSuccess
+
+      interface _ListAppInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAppInstancesResponse]
+        def app_instances: () -> ::Array[Types::AppInstanceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_app_instances-instance_method
+      def list_app_instances: (
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListAppInstancesResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAppInstancesResponseSuccess
+
+      interface _ListAttendeeTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAttendeeTagsResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_attendee_tags-instance_method
+      def list_attendee_tags: (
+                                meeting_id: ::String,
+                                attendee_id: ::String
+                              ) -> _ListAttendeeTagsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAttendeeTagsResponseSuccess
+
+      interface _ListAttendeesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAttendeesResponse]
+        def attendees: () -> ::Array[Types::Attendee]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_attendees-instance_method
+      def list_attendees: (
+                            meeting_id: ::String,
+                            ?next_token: ::String,
+                            ?max_results: ::Integer
+                          ) -> _ListAttendeesResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAttendeesResponseSuccess
+
+      interface _ListBotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBotsResponse]
+        def bots: () -> ::Array[Types::Bot]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_bots-instance_method
+      def list_bots: (
+                       account_id: ::String,
+                       ?max_results: ::Integer,
+                       ?next_token: ::String
+                     ) -> _ListBotsResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBotsResponseSuccess
+
+      interface _ListChannelBansResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelBansResponse]
+        def channel_arn: () -> ::String
+        def next_token: () -> ::String
+        def channel_bans: () -> ::Array[Types::ChannelBanSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_channel_bans-instance_method
+      def list_channel_bans: (
+                               channel_arn: ::String,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String,
+                               ?chime_bearer: ::String
+                             ) -> _ListChannelBansResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelBansResponseSuccess
+
+      interface _ListChannelMembershipsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelMembershipsResponse]
+        def channel_arn: () -> ::String
+        def channel_memberships: () -> ::Array[Types::ChannelMembershipSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_channel_memberships-instance_method
+      def list_channel_memberships: (
+                                      channel_arn: ::String,
+                                      ?type: ("DEFAULT" | "HIDDEN"),
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String,
+                                      ?chime_bearer: ::String
+                                    ) -> _ListChannelMembershipsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelMembershipsResponseSuccess
+
+      interface _ListChannelMembershipsForAppInstanceUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelMembershipsForAppInstanceUserResponse]
+        def channel_memberships: () -> ::Array[Types::ChannelMembershipForAppInstanceUserSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_channel_memberships_for_app_instance_user-instance_method
+      def list_channel_memberships_for_app_instance_user: (
+                                                            ?app_instance_user_arn: ::String,
+                                                            ?max_results: ::Integer,
+                                                            ?next_token: ::String,
+                                                            ?chime_bearer: ::String
+                                                          ) -> _ListChannelMembershipsForAppInstanceUserResponseSuccess
+                                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelMembershipsForAppInstanceUserResponseSuccess
+
+      interface _ListChannelMessagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelMessagesResponse]
+        def channel_arn: () -> ::String
+        def next_token: () -> ::String
+        def channel_messages: () -> ::Array[Types::ChannelMessageSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_channel_messages-instance_method
+      def list_channel_messages: (
+                                   channel_arn: ::String,
+                                   ?sort_order: ("ASCENDING" | "DESCENDING"),
+                                   ?not_before: ::Time,
+                                   ?not_after: ::Time,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String,
+                                   ?chime_bearer: ::String
+                                 ) -> _ListChannelMessagesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelMessagesResponseSuccess
+
+      interface _ListChannelModeratorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelModeratorsResponse]
+        def channel_arn: () -> ::String
+        def next_token: () -> ::String
+        def channel_moderators: () -> ::Array[Types::ChannelModeratorSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_channel_moderators-instance_method
+      def list_channel_moderators: (
+                                     channel_arn: ::String,
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String,
+                                     ?chime_bearer: ::String
+                                   ) -> _ListChannelModeratorsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelModeratorsResponseSuccess
+
+      interface _ListChannelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelsResponse]
+        def channels: () -> ::Array[Types::ChannelSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_channels-instance_method
+      def list_channels: (
+                           app_instance_arn: ::String,
+                           ?privacy: ("PUBLIC" | "PRIVATE"),
+                           ?max_results: ::Integer,
+                           ?next_token: ::String,
+                           ?chime_bearer: ::String
+                         ) -> _ListChannelsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelsResponseSuccess
+
+      interface _ListChannelsModeratedByAppInstanceUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelsModeratedByAppInstanceUserResponse]
+        def channels: () -> ::Array[Types::ChannelModeratedByAppInstanceUserSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_channels_moderated_by_app_instance_user-instance_method
+      def list_channels_moderated_by_app_instance_user: (
+                                                          ?app_instance_user_arn: ::String,
+                                                          ?max_results: ::Integer,
+                                                          ?next_token: ::String,
+                                                          ?chime_bearer: ::String
+                                                        ) -> _ListChannelsModeratedByAppInstanceUserResponseSuccess
+                                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelsModeratedByAppInstanceUserResponseSuccess
+
+      interface _ListMediaCapturePipelinesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMediaCapturePipelinesResponse]
+        def media_capture_pipelines: () -> ::Array[Types::MediaCapturePipeline]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_media_capture_pipelines-instance_method
+      def list_media_capture_pipelines: (
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListMediaCapturePipelinesResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMediaCapturePipelinesResponseSuccess
+
+      interface _ListMeetingTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMeetingTagsResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_meeting_tags-instance_method
+      def list_meeting_tags: (
+                               meeting_id: ::String
+                             ) -> _ListMeetingTagsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMeetingTagsResponseSuccess
+
+      interface _ListMeetingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMeetingsResponse]
+        def meetings: () -> ::Array[Types::Meeting]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_meetings-instance_method
+      def list_meetings: (
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListMeetingsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMeetingsResponseSuccess
+
+      interface _ListPhoneNumberOrdersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPhoneNumberOrdersResponse]
+        def phone_number_orders: () -> ::Array[Types::PhoneNumberOrder]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_phone_number_orders-instance_method
+      def list_phone_number_orders: (
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListPhoneNumberOrdersResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPhoneNumberOrdersResponseSuccess
+
+      interface _ListPhoneNumbersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPhoneNumbersResponse]
+        def phone_numbers: () -> ::Array[Types::PhoneNumber]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_phone_numbers-instance_method
+      def list_phone_numbers: (
+                                ?status: ("AcquireInProgress" | "AcquireFailed" | "Unassigned" | "Assigned" | "ReleaseInProgress" | "DeleteInProgress" | "ReleaseFailed" | "DeleteFailed"),
+                                ?product_type: ("BusinessCalling" | "VoiceConnector" | "SipMediaApplicationDialIn"),
+                                ?filter_name: ("AccountId" | "UserId" | "VoiceConnectorId" | "VoiceConnectorGroupId" | "SipRuleId"),
+                                ?filter_value: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListPhoneNumbersResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPhoneNumbersResponseSuccess
+
+      interface _ListProxySessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProxySessionsResponse]
+        def proxy_sessions: () -> ::Array[Types::ProxySession]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_proxy_sessions-instance_method
+      def list_proxy_sessions: (
+                                 voice_connector_id: ::String,
+                                 ?status: ("Open" | "InProgress" | "Closed"),
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer
+                               ) -> _ListProxySessionsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProxySessionsResponseSuccess
+
+      interface _ListRoomMembershipsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRoomMembershipsResponse]
+        def room_memberships: () -> ::Array[Types::RoomMembership]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_room_memberships-instance_method
+      def list_room_memberships: (
+                                   account_id: ::String,
+                                   room_id: ::String,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListRoomMembershipsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRoomMembershipsResponseSuccess
+
+      interface _ListRoomsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRoomsResponse]
+        def rooms: () -> ::Array[Types::Room]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_rooms-instance_method
+      def list_rooms: (
+                        account_id: ::String,
+                        ?member_id: ::String,
+                        ?max_results: ::Integer,
+                        ?next_token: ::String
+                      ) -> _ListRoomsResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRoomsResponseSuccess
+
+      interface _ListSipMediaApplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSipMediaApplicationsResponse]
+        def sip_media_applications: () -> ::Array[Types::SipMediaApplication]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_sip_media_applications-instance_method
+      def list_sip_media_applications: (
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListSipMediaApplicationsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSipMediaApplicationsResponseSuccess
+
+      interface _ListSipRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSipRulesResponse]
+        def sip_rules: () -> ::Array[Types::SipRule]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_sip_rules-instance_method
+      def list_sip_rules: (
+                            ?sip_media_application_id: ::String,
+                            ?max_results: ::Integer,
+                            ?next_token: ::String
+                          ) -> _ListSipRulesResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSipRulesResponseSuccess
+
+      interface _ListSupportedPhoneNumberCountriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSupportedPhoneNumberCountriesResponse]
+        def phone_number_countries: () -> ::Array[Types::PhoneNumberCountry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_supported_phone_number_countries-instance_method
+      def list_supported_phone_number_countries: (
+                                                   product_type: ("BusinessCalling" | "VoiceConnector" | "SipMediaApplicationDialIn")
+                                                 ) -> _ListSupportedPhoneNumberCountriesResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSupportedPhoneNumberCountriesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListUsersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListUsersResponse]
+        def users: () -> ::Array[Types::User]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_users-instance_method
+      def list_users: (
+                        account_id: ::String,
+                        ?user_email: ::String,
+                        ?user_type: ("PrivateUser" | "SharedDevice"),
+                        ?max_results: ::Integer,
+                        ?next_token: ::String
+                      ) -> _ListUsersResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUsersResponseSuccess
+
+      interface _ListVoiceConnectorGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVoiceConnectorGroupsResponse]
+        def voice_connector_groups: () -> ::Array[Types::VoiceConnectorGroup]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_voice_connector_groups-instance_method
+      def list_voice_connector_groups: (
+                                         ?next_token: ::String,
+                                         ?max_results: ::Integer
+                                       ) -> _ListVoiceConnectorGroupsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVoiceConnectorGroupsResponseSuccess
+
+      interface _ListVoiceConnectorTerminationCredentialsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVoiceConnectorTerminationCredentialsResponse]
+        def usernames: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_voice_connector_termination_credentials-instance_method
+      def list_voice_connector_termination_credentials: (
+                                                          voice_connector_id: ::String
+                                                        ) -> _ListVoiceConnectorTerminationCredentialsResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVoiceConnectorTerminationCredentialsResponseSuccess
+
+      interface _ListVoiceConnectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVoiceConnectorsResponse]
+        def voice_connectors: () -> ::Array[Types::VoiceConnector]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#list_voice_connectors-instance_method
+      def list_voice_connectors: (
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
+                                 ) -> _ListVoiceConnectorsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVoiceConnectorsResponseSuccess
+
+      interface _LogoutUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::LogoutUserResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#logout_user-instance_method
+      def logout_user: (
+                         account_id: ::String,
+                         user_id: ::String
+                       ) -> _LogoutUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _LogoutUserResponseSuccess
+
+      interface _PutAppInstanceRetentionSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAppInstanceRetentionSettingsResponse]
+        def app_instance_retention_settings: () -> Types::AppInstanceRetentionSettings
+        def initiate_deletion_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#put_app_instance_retention_settings-instance_method
+      def put_app_instance_retention_settings: (
+                                                 app_instance_arn: ::String,
+                                                 app_instance_retention_settings: {
+                                                   channel_retention_settings: {
+                                                     retention_days: ::Integer?
+                                                   }?
+                                                 }
+                                               ) -> _PutAppInstanceRetentionSettingsResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAppInstanceRetentionSettingsResponseSuccess
+
+      interface _PutAppInstanceStreamingConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAppInstanceStreamingConfigurationsResponse]
+        def app_instance_streaming_configurations: () -> ::Array[Types::AppInstanceStreamingConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#put_app_instance_streaming_configurations-instance_method
+      def put_app_instance_streaming_configurations: (
+                                                       app_instance_arn: ::String,
+                                                       app_instance_streaming_configurations: Array[
+                                                         {
+                                                           app_instance_data_type: ("Channel" | "ChannelMessage"),
+                                                           resource_arn: ::String
+                                                         },
+                                                       ]
+                                                     ) -> _PutAppInstanceStreamingConfigurationsResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAppInstanceStreamingConfigurationsResponseSuccess
+
+      interface _PutEventsConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutEventsConfigurationResponse]
+        def events_configuration: () -> Types::EventsConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#put_events_configuration-instance_method
+      def put_events_configuration: (
+                                      account_id: ::String,
+                                      bot_id: ::String,
+                                      ?outbound_events_https_endpoint: ::String,
+                                      ?lambda_function_arn: ::String
+                                    ) -> _PutEventsConfigurationResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEventsConfigurationResponseSuccess
+
+      interface _PutRetentionSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutRetentionSettingsResponse]
+        def retention_settings: () -> Types::RetentionSettings
+        def initiate_deletion_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#put_retention_settings-instance_method
+      def put_retention_settings: (
+                                    account_id: ::String,
+                                    retention_settings: {
+                                      room_retention_settings: {
+                                        retention_days: ::Integer?
+                                      }?,
+                                      conversation_retention_settings: {
+                                        retention_days: ::Integer?
+                                      }?
+                                    }
+                                  ) -> _PutRetentionSettingsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutRetentionSettingsResponseSuccess
+
+      interface _PutSipMediaApplicationLoggingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutSipMediaApplicationLoggingConfigurationResponse]
+        def sip_media_application_logging_configuration: () -> Types::SipMediaApplicationLoggingConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#put_sip_media_application_logging_configuration-instance_method
+      def put_sip_media_application_logging_configuration: (
+                                                             sip_media_application_id: ::String,
+                                                             ?sip_media_application_logging_configuration: {
+                                                               enable_sip_media_application_message_logs: bool?
+                                                             }
+                                                           ) -> _PutSipMediaApplicationLoggingConfigurationResponseSuccess
+                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutSipMediaApplicationLoggingConfigurationResponseSuccess
+
+      interface _PutVoiceConnectorEmergencyCallingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutVoiceConnectorEmergencyCallingConfigurationResponse]
+        def emergency_calling_configuration: () -> Types::EmergencyCallingConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#put_voice_connector_emergency_calling_configuration-instance_method
+      def put_voice_connector_emergency_calling_configuration: (
+                                                                 voice_connector_id: ::String,
+                                                                 emergency_calling_configuration: {
+                                                                   dnis: Array[
+                                                                     {
+                                                                       emergency_phone_number: ::String,
+                                                                       test_phone_number: ::String?,
+                                                                       calling_country: ::String
+                                                                     },
+                                                                   ]?
+                                                                 }
+                                                               ) -> _PutVoiceConnectorEmergencyCallingConfigurationResponseSuccess
+                                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutVoiceConnectorEmergencyCallingConfigurationResponseSuccess
+
+      interface _PutVoiceConnectorLoggingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutVoiceConnectorLoggingConfigurationResponse]
+        def logging_configuration: () -> Types::LoggingConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#put_voice_connector_logging_configuration-instance_method
+      def put_voice_connector_logging_configuration: (
+                                                       voice_connector_id: ::String,
+                                                       logging_configuration: {
+                                                         enable_sip_logs: bool?,
+                                                         enable_media_metric_logs: bool?
+                                                       }
+                                                     ) -> _PutVoiceConnectorLoggingConfigurationResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutVoiceConnectorLoggingConfigurationResponseSuccess
+
+      interface _PutVoiceConnectorOriginationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutVoiceConnectorOriginationResponse]
+        def origination: () -> Types::Origination
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#put_voice_connector_origination-instance_method
+      def put_voice_connector_origination: (
+                                             voice_connector_id: ::String,
+                                             origination: {
+                                               routes: Array[
+                                                 {
+                                                   host: ::String?,
+                                                   port: ::Integer?,
+                                                   protocol: ("TCP" | "UDP")?,
+                                                   priority: ::Integer?,
+                                                   weight: ::Integer?
+                                                 },
+                                               ]?,
+                                               disabled: bool?
+                                             }
+                                           ) -> _PutVoiceConnectorOriginationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutVoiceConnectorOriginationResponseSuccess
+
+      interface _PutVoiceConnectorProxyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutVoiceConnectorProxyResponse]
+        def proxy: () -> Types::Proxy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#put_voice_connector_proxy-instance_method
+      def put_voice_connector_proxy: (
+                                       voice_connector_id: ::String,
+                                       default_session_expiry_minutes: ::Integer,
+                                       phone_number_pool_countries: Array[::String],
+                                       ?fall_back_phone_number: ::String,
+                                       ?disabled: bool
+                                     ) -> _PutVoiceConnectorProxyResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutVoiceConnectorProxyResponseSuccess
+
+      interface _PutVoiceConnectorStreamingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutVoiceConnectorStreamingConfigurationResponse]
+        def streaming_configuration: () -> Types::StreamingConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#put_voice_connector_streaming_configuration-instance_method
+      def put_voice_connector_streaming_configuration: (
+                                                         voice_connector_id: ::String,
+                                                         streaming_configuration: {
+                                                           data_retention_in_hours: ::Integer,
+                                                           disabled: bool?,
+                                                           streaming_notification_targets: Array[
+                                                             {
+                                                               notification_target: ("EventBridge" | "SNS" | "SQS")
+                                                             },
+                                                           ]?
+                                                         }
+                                                       ) -> _PutVoiceConnectorStreamingConfigurationResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutVoiceConnectorStreamingConfigurationResponseSuccess
+
+      interface _PutVoiceConnectorTerminationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutVoiceConnectorTerminationResponse]
+        def termination: () -> Types::Termination
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#put_voice_connector_termination-instance_method
+      def put_voice_connector_termination: (
+                                             voice_connector_id: ::String,
+                                             termination: {
+                                               cps_limit: ::Integer?,
+                                               default_phone_number: ::String?,
+                                               calling_regions: Array[::String]?,
+                                               cidr_allowed_list: Array[::String]?,
+                                               disabled: bool?
+                                             }
+                                           ) -> _PutVoiceConnectorTerminationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutVoiceConnectorTerminationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#put_voice_connector_termination_credentials-instance_method
+      def put_voice_connector_termination_credentials: (
+                                                         voice_connector_id: ::String,
+                                                         ?credentials: Array[
+                                                           {
+                                                             username: ::String?,
+                                                             password: ::String?
+                                                           },
+                                                         ]
+                                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _RedactChannelMessageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RedactChannelMessageResponse]
+        def channel_arn: () -> ::String
+        def message_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#redact_channel_message-instance_method
+      def redact_channel_message: (
+                                    channel_arn: ::String,
+                                    message_id: ::String,
+                                    ?chime_bearer: ::String
+                                  ) -> _RedactChannelMessageResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RedactChannelMessageResponseSuccess
+
+      interface _RedactConversationMessageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RedactConversationMessageResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#redact_conversation_message-instance_method
+      def redact_conversation_message: (
+                                         account_id: ::String,
+                                         conversation_id: ::String,
+                                         message_id: ::String
+                                       ) -> _RedactConversationMessageResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RedactConversationMessageResponseSuccess
+
+      interface _RedactRoomMessageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RedactRoomMessageResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#redact_room_message-instance_method
+      def redact_room_message: (
+                                 account_id: ::String,
+                                 room_id: ::String,
+                                 message_id: ::String
+                               ) -> _RedactRoomMessageResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RedactRoomMessageResponseSuccess
+
+      interface _RegenerateSecurityTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegenerateSecurityTokenResponse]
+        def bot: () -> Types::Bot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#regenerate_security_token-instance_method
+      def regenerate_security_token: (
+                                       account_id: ::String,
+                                       bot_id: ::String
+                                     ) -> _RegenerateSecurityTokenResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegenerateSecurityTokenResponseSuccess
+
+      interface _ResetPersonalPINResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResetPersonalPINResponse]
+        def user: () -> Types::User
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#reset_personal_pin-instance_method
+      def reset_personal_pin: (
+                                account_id: ::String,
+                                user_id: ::String
+                              ) -> _ResetPersonalPINResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetPersonalPINResponseSuccess
+
+      interface _RestorePhoneNumberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestorePhoneNumberResponse]
+        def phone_number: () -> Types::PhoneNumber
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#restore_phone_number-instance_method
+      def restore_phone_number: (
+                                  phone_number_id: ::String
+                                ) -> _RestorePhoneNumberResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestorePhoneNumberResponseSuccess
+
+      interface _SearchAvailablePhoneNumbersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchAvailablePhoneNumbersResponse]
+        def e164_phone_numbers: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#search_available_phone_numbers-instance_method
+      def search_available_phone_numbers: (
+                                            ?area_code: ::String,
+                                            ?city: ::String,
+                                            ?country: ::String,
+                                            ?state: ::String,
+                                            ?toll_free_prefix: ::String,
+                                            ?phone_number_type: ("Local" | "TollFree"),
+                                            ?max_results: ::Integer,
+                                            ?next_token: ::String
+                                          ) -> _SearchAvailablePhoneNumbersResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchAvailablePhoneNumbersResponseSuccess
+
+      interface _SendChannelMessageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendChannelMessageResponse]
+        def channel_arn: () -> ::String
+        def message_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#send_channel_message-instance_method
+      def send_channel_message: (
+                                  channel_arn: ::String,
+                                  content: ::String,
+                                  type: ("STANDARD" | "CONTROL"),
+                                  persistence: ("PERSISTENT" | "NON_PERSISTENT"),
+                                  ?metadata: ::String,
+                                  client_request_token: ::String,
+                                  ?chime_bearer: ::String
+                                ) -> _SendChannelMessageResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendChannelMessageResponseSuccess
+
+      interface _StartMeetingTranscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMeetingTranscriptionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#start_meeting_transcription-instance_method
+      def start_meeting_transcription: (
+                                         meeting_id: ::String,
+                                         transcription_configuration: {
+                                           engine_transcribe_settings: {
+                                             language_code: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN" | "th-TH" | "hi-IN")?,
+                                             vocabulary_filter_method: ("remove" | "mask" | "tag")?,
+                                             vocabulary_filter_name: ::String?,
+                                             vocabulary_name: ::String?,
+                                             region: ("us-east-2" | "us-east-1" | "us-west-2" | "ap-northeast-2" | "ap-southeast-2" | "ap-northeast-1" | "ca-central-1" | "eu-central-1" | "eu-west-1" | "eu-west-2" | "sa-east-1" | "auto")?,
+                                             enable_partial_results_stabilization: bool?,
+                                             partial_results_stability: ("low" | "medium" | "high")?,
+                                             content_identification_type: ("PII")?,
+                                             content_redaction_type: ("PII")?,
+                                             pii_entity_types: ::String?,
+                                             language_model_name: ::String?,
+                                             identify_language: bool?,
+                                             language_options: ::String?,
+                                             preferred_language: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN" | "th-TH" | "hi-IN")?,
+                                             vocabulary_names: ::String?,
+                                             vocabulary_filter_names: ::String?
+                                           }?,
+                                           engine_transcribe_medical_settings: {
+                                             language_code: ("en-US"),
+                                             specialty: ("PRIMARYCARE" | "CARDIOLOGY" | "NEUROLOGY" | "ONCOLOGY" | "RADIOLOGY" | "UROLOGY"),
+                                             type: ("CONVERSATION" | "DICTATION"),
+                                             vocabulary_name: ::String?,
+                                             region: ("us-east-1" | "us-east-2" | "us-west-2" | "ap-southeast-2" | "ca-central-1" | "eu-west-1" | "auto")?,
+                                             content_identification_type: ("PHI")?
+                                           }?
+                                         }
+                                       ) -> _StartMeetingTranscriptionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMeetingTranscriptionResponseSuccess
+
+      interface _StopMeetingTranscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopMeetingTranscriptionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#stop_meeting_transcription-instance_method
+      def stop_meeting_transcription: (
+                                        meeting_id: ::String
+                                      ) -> _StopMeetingTranscriptionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopMeetingTranscriptionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#tag_attendee-instance_method
+      def tag_attendee: (
+                          meeting_id: ::String,
+                          attendee_id: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#tag_meeting-instance_method
+      def tag_meeting: (
+                         meeting_id: ::String,
+                         tags: Array[
+                           {
+                             key: ::String,
+                             value: ::String
+                           },
+                         ]
+                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#untag_attendee-instance_method
+      def untag_attendee: (
+                            meeting_id: ::String,
+                            attendee_id: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#untag_meeting-instance_method
+      def untag_meeting: (
+                           meeting_id: ::String,
+                           tag_keys: Array[::String]
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAccountResponse]
+        def account: () -> Types::Account
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#update_account-instance_method
+      def update_account: (
+                            account_id: ::String,
+                            ?name: ::String,
+                            ?default_license: ("Basic" | "Plus" | "Pro" | "ProTrial")
+                          ) -> _UpdateAccountResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccountResponseSuccess
+
+      interface _UpdateAccountSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAccountSettingsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#update_account_settings-instance_method
+      def update_account_settings: (
+                                     account_id: ::String,
+                                     account_settings: {
+                                       disable_remote_control: bool?,
+                                       enable_dial_out: bool?
+                                     }
+                                   ) -> _UpdateAccountSettingsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccountSettingsResponseSuccess
+
+      interface _UpdateAppInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAppInstanceResponse]
+        def app_instance_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#update_app_instance-instance_method
+      def update_app_instance: (
+                                 app_instance_arn: ::String,
+                                 name: ::String,
+                                 ?metadata: ::String
+                               ) -> _UpdateAppInstanceResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAppInstanceResponseSuccess
+
+      interface _UpdateAppInstanceUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAppInstanceUserResponse]
+        def app_instance_user_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#update_app_instance_user-instance_method
+      def update_app_instance_user: (
+                                      app_instance_user_arn: ::String,
+                                      name: ::String,
+                                      ?metadata: ::String
+                                    ) -> _UpdateAppInstanceUserResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAppInstanceUserResponseSuccess
+
+      interface _UpdateBotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBotResponse]
+        def bot: () -> Types::Bot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#update_bot-instance_method
+      def update_bot: (
+                        account_id: ::String,
+                        bot_id: ::String,
+                        ?disabled: bool
+                      ) -> _UpdateBotResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBotResponseSuccess
+
+      interface _UpdateChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateChannelResponse]
+        def channel_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#update_channel-instance_method
+      def update_channel: (
+                            channel_arn: ::String,
+                            name: ::String,
+                            mode: ("UNRESTRICTED" | "RESTRICTED"),
+                            ?metadata: ::String,
+                            ?chime_bearer: ::String
+                          ) -> _UpdateChannelResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelResponseSuccess
+
+      interface _UpdateChannelMessageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateChannelMessageResponse]
+        def channel_arn: () -> ::String
+        def message_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#update_channel_message-instance_method
+      def update_channel_message: (
+                                    channel_arn: ::String,
+                                    message_id: ::String,
+                                    ?content: ::String,
+                                    ?metadata: ::String,
+                                    ?chime_bearer: ::String
+                                  ) -> _UpdateChannelMessageResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelMessageResponseSuccess
+
+      interface _UpdateChannelReadMarkerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateChannelReadMarkerResponse]
+        def channel_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#update_channel_read_marker-instance_method
+      def update_channel_read_marker: (
+                                        channel_arn: ::String,
+                                        ?chime_bearer: ::String
+                                      ) -> _UpdateChannelReadMarkerResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelReadMarkerResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#update_global_settings-instance_method
+      def update_global_settings: (
+                                    ?business_calling: {
+                                      cdr_bucket: ::String?
+                                    },
+                                    ?voice_connector: {
+                                      cdr_bucket: ::String?
+                                    }
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdatePhoneNumberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePhoneNumberResponse]
+        def phone_number: () -> Types::PhoneNumber
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#update_phone_number-instance_method
+      def update_phone_number: (
+                                 phone_number_id: ::String,
+                                 ?product_type: ("BusinessCalling" | "VoiceConnector" | "SipMediaApplicationDialIn"),
+                                 ?calling_name: ::String
+                               ) -> _UpdatePhoneNumberResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePhoneNumberResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#update_phone_number_settings-instance_method
+      def update_phone_number_settings: (
+                                          calling_name: ::String
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateProxySessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProxySessionResponse]
+        def proxy_session: () -> Types::ProxySession
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#update_proxy_session-instance_method
+      def update_proxy_session: (
+                                  voice_connector_id: ::String,
+                                  proxy_session_id: ::String,
+                                  capabilities: Array[("Voice" | "SMS")],
+                                  ?expiry_minutes: ::Integer
+                                ) -> _UpdateProxySessionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProxySessionResponseSuccess
+
+      interface _UpdateRoomResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRoomResponse]
+        def room: () -> Types::Room
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#update_room-instance_method
+      def update_room: (
+                         account_id: ::String,
+                         room_id: ::String,
+                         ?name: ::String
+                       ) -> _UpdateRoomResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRoomResponseSuccess
+
+      interface _UpdateRoomMembershipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRoomMembershipResponse]
+        def room_membership: () -> Types::RoomMembership
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#update_room_membership-instance_method
+      def update_room_membership: (
+                                    account_id: ::String,
+                                    room_id: ::String,
+                                    member_id: ::String,
+                                    ?role: ("Administrator" | "Member")
+                                  ) -> _UpdateRoomMembershipResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRoomMembershipResponseSuccess
+
+      interface _UpdateSipMediaApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSipMediaApplicationResponse]
+        def sip_media_application: () -> Types::SipMediaApplication
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#update_sip_media_application-instance_method
+      def update_sip_media_application: (
+                                          sip_media_application_id: ::String,
+                                          ?name: ::String,
+                                          ?endpoints: Array[
+                                            {
+                                              lambda_arn: ::String?
+                                            },
+                                          ]
+                                        ) -> _UpdateSipMediaApplicationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSipMediaApplicationResponseSuccess
+
+      interface _UpdateSipMediaApplicationCallResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSipMediaApplicationCallResponse]
+        def sip_media_application_call: () -> Types::SipMediaApplicationCall
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#update_sip_media_application_call-instance_method
+      def update_sip_media_application_call: (
+                                               sip_media_application_id: ::String,
+                                               transaction_id: ::String,
+                                               arguments: Hash[::String, ::String]
+                                             ) -> _UpdateSipMediaApplicationCallResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSipMediaApplicationCallResponseSuccess
+
+      interface _UpdateSipRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSipRuleResponse]
+        def sip_rule: () -> Types::SipRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#update_sip_rule-instance_method
+      def update_sip_rule: (
+                             sip_rule_id: ::String,
+                             name: ::String,
+                             ?disabled: bool,
+                             ?target_applications: Array[
+                               {
+                                 sip_media_application_id: ::String?,
+                                 priority: ::Integer?,
+                                 aws_region: ::String?
+                               },
+                             ]
+                           ) -> _UpdateSipRuleResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSipRuleResponseSuccess
+
+      interface _UpdateUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateUserResponse]
+        def user: () -> Types::User
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#update_user-instance_method
+      def update_user: (
+                         account_id: ::String,
+                         user_id: ::String,
+                         ?license_type: ("Basic" | "Plus" | "Pro" | "ProTrial"),
+                         ?user_type: ("PrivateUser" | "SharedDevice"),
+                         ?alexa_for_business_metadata: {
+                           is_alexa_for_business_enabled: bool?,
+                           alexa_for_business_room_arn: ::String?
+                         }
+                       ) -> _UpdateUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUserResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#update_user_settings-instance_method
+      def update_user_settings: (
+                                  account_id: ::String,
+                                  user_id: ::String,
+                                  user_settings: {
+                                    telephony: {
+                                      inbound_calling: bool,
+                                      outbound_calling: bool,
+                                      sms: bool
+                                    }
+                                  }
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateVoiceConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateVoiceConnectorResponse]
+        def voice_connector: () -> Types::VoiceConnector
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#update_voice_connector-instance_method
+      def update_voice_connector: (
+                                    voice_connector_id: ::String,
+                                    name: ::String,
+                                    require_encryption: bool
+                                  ) -> _UpdateVoiceConnectorResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVoiceConnectorResponseSuccess
+
+      interface _UpdateVoiceConnectorGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateVoiceConnectorGroupResponse]
+        def voice_connector_group: () -> Types::VoiceConnectorGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#update_voice_connector_group-instance_method
+      def update_voice_connector_group: (
+                                          voice_connector_group_id: ::String,
+                                          name: ::String,
+                                          voice_connector_items: Array[
+                                            {
+                                              voice_connector_id: ::String,
+                                              priority: ::Integer
+                                            },
+                                          ]
+                                        ) -> _UpdateVoiceConnectorGroupResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVoiceConnectorGroupResponseSuccess
+
+      interface _ValidateE911AddressResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ValidateE911AddressResponse]
+        def validation_result: () -> ::Integer
+        def address_external_id: () -> ::String
+        def address: () -> Types::Address
+        def candidate_address_list: () -> ::Array[Types::CandidateAddress]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chime/Client.html#validate_e911_address-instance_method
+      def validate_e911_address: (
+                                   aws_account_id: ::String,
+                                   street_number: ::String,
+                                   street_info: ::String,
+                                   city: ::String,
+                                   state: ::String,
+                                   country: ::String,
+                                   postal_code: ::String
+                                 ) -> _ValidateE911AddressResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ValidateE911AddressResponseSuccess
+    end
+  end
+end
+

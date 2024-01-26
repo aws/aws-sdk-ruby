@@ -1,0 +1,291 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::BCMDataExports
+  module Types
+
+    class Column
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateExportRequest
+      attr_accessor export: Types::Export
+      attr_accessor resource_tags: ::Array[Types::ResourceTag]
+      SENSITIVE: []
+    end
+
+    class CreateExportResponse
+      attr_accessor export_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DataQuery
+      attr_accessor query_statement: ::String
+      attr_accessor table_configurations: ::Hash[::String, ::Hash[::String, ::String]]
+      SENSITIVE: []
+    end
+
+    class DeleteExportRequest
+      attr_accessor export_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteExportResponse
+      attr_accessor export_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DestinationConfigurations
+      attr_accessor s3_destination: Types::S3Destination
+      SENSITIVE: []
+    end
+
+    class ExecutionReference
+      attr_accessor execution_id: ::String
+      attr_accessor execution_status: Types::ExecutionStatus
+      SENSITIVE: []
+    end
+
+    class ExecutionStatus
+      attr_accessor completed_at: ::Time
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor status_code: ("INITIATION_IN_PROCESS" | "QUERY_QUEUED" | "QUERY_IN_PROCESS" | "QUERY_FAILURE" | "DELIVERY_IN_PROCESS" | "DELIVERY_SUCCESS" | "DELIVERY_FAILURE")
+      attr_accessor status_reason: ("INSUFFICIENT_PERMISSION" | "BILL_OWNER_CHANGED" | "INTERNAL_FAILURE")
+      SENSITIVE: []
+    end
+
+    class Export
+      attr_accessor data_query: Types::DataQuery
+      attr_accessor description: ::String
+      attr_accessor destination_configurations: Types::DestinationConfigurations
+      attr_accessor export_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor refresh_cadence: Types::RefreshCadence
+      SENSITIVE: []
+    end
+
+    class ExportReference
+      attr_accessor export_arn: ::String
+      attr_accessor export_name: ::String
+      attr_accessor export_status: Types::ExportStatus
+      SENSITIVE: []
+    end
+
+    class ExportStatus
+      attr_accessor created_at: ::Time
+      attr_accessor last_refreshed_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor status_code: ("HEALTHY" | "UNHEALTHY")
+      attr_accessor status_reason: ("INSUFFICIENT_PERMISSION" | "BILL_OWNER_CHANGED" | "INTERNAL_FAILURE")
+      SENSITIVE: []
+    end
+
+    class GetExecutionRequest
+      attr_accessor execution_id: ::String
+      attr_accessor export_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetExecutionResponse
+      attr_accessor execution_id: ::String
+      attr_accessor execution_status: Types::ExecutionStatus
+      attr_accessor export: Types::Export
+      SENSITIVE: []
+    end
+
+    class GetExportRequest
+      attr_accessor export_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetExportResponse
+      attr_accessor export: Types::Export
+      attr_accessor export_status: Types::ExportStatus
+      SENSITIVE: []
+    end
+
+    class GetTableRequest
+      attr_accessor table_name: ::String
+      attr_accessor table_properties: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetTableResponse
+      attr_accessor description: ::String
+      attr_accessor schema: ::Array[Types::Column]
+      attr_accessor table_name: ::String
+      attr_accessor table_properties: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListExecutionsRequest
+      attr_accessor export_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExecutionsResponse
+      attr_accessor executions: ::Array[Types::ExecutionReference]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExportsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExportsResponse
+      attr_accessor exports: ::Array[Types::ExportReference]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTablesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTablesResponse
+      attr_accessor next_token: ::String
+      attr_accessor tables: ::Array[Types::Table]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor next_token: ::String
+      attr_accessor resource_tags: ::Array[Types::ResourceTag]
+      SENSITIVE: []
+    end
+
+    class RefreshCadence
+      attr_accessor frequency: ("SYNCHRONOUS")
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceTag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class S3Destination
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_output_configurations: Types::S3OutputConfigurations
+      attr_accessor s3_prefix: ::String
+      attr_accessor s3_region: ::String
+      SENSITIVE: []
+    end
+
+    class S3OutputConfigurations
+      attr_accessor compression: ("GZIP" | "PARQUET")
+      attr_accessor format: ("TEXT_OR_CSV" | "PARQUET")
+      attr_accessor output_type: ("CUSTOM")
+      attr_accessor overwrite: ("CREATE_NEW_REPORT" | "OVERWRITE_REPORT")
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class Table
+      attr_accessor description: ::String
+      attr_accessor table_name: ::String
+      attr_accessor table_properties: ::Array[Types::TablePropertyDescription]
+      SENSITIVE: []
+    end
+
+    class TablePropertyDescription
+      attr_accessor default_value: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor valid_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_tags: ::Array[Types::ResourceTag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateExportRequest
+      attr_accessor export: Types::Export
+      attr_accessor export_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateExportResponse
+      attr_accessor export_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor fields: ::Array[Types::ValidationExceptionField]
+      attr_accessor message: ::String
+      attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other")
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor message: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+  end
+end

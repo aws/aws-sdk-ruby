@@ -1,0 +1,356 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Health
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _DescribeAffectedAccountsForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAffectedAccountsForOrganizationResponse]
+        def affected_accounts: () -> ::Array[::String]
+        def event_scope_code: () -> ("PUBLIC" | "ACCOUNT_SPECIFIC" | "NONE")
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#describe_affected_accounts_for_organization-instance_method
+      def describe_affected_accounts_for_organization: (
+                                                         event_arn: ::String,
+                                                         ?next_token: ::String,
+                                                         ?max_results: ::Integer
+                                                       ) -> _DescribeAffectedAccountsForOrganizationResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAffectedAccountsForOrganizationResponseSuccess
+
+      interface _DescribeAffectedEntitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAffectedEntitiesResponse]
+        def entities: () -> ::Array[Types::AffectedEntity]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#describe_affected_entities-instance_method
+      def describe_affected_entities: (
+                                        filter: {
+                                          event_arns: Array[::String],
+                                          entity_arns: Array[::String]?,
+                                          entity_values: Array[::String]?,
+                                          last_updated_times: Array[
+                                            {
+                                              from: ::Time?,
+                                              to: ::Time?
+                                            },
+                                          ]?,
+                                          tags: Array[
+                                            Hash[::String, ::String],
+                                          ]?,
+                                          status_codes: Array[("IMPAIRED" | "UNIMPAIRED" | "UNKNOWN" | "PENDING" | "RESOLVED")]?
+                                        },
+                                        ?locale: ::String,
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer
+                                      ) -> _DescribeAffectedEntitiesResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAffectedEntitiesResponseSuccess
+
+      interface _DescribeAffectedEntitiesForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAffectedEntitiesForOrganizationResponse]
+        def entities: () -> ::Array[Types::AffectedEntity]
+        def failed_set: () -> ::Array[Types::OrganizationAffectedEntitiesErrorItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#describe_affected_entities_for_organization-instance_method
+      def describe_affected_entities_for_organization: (
+                                                         ?organization_entity_filters: Array[
+                                                           {
+                                                             event_arn: ::String,
+                                                             aws_account_id: ::String?
+                                                           },
+                                                         ],
+                                                         ?locale: ::String,
+                                                         ?next_token: ::String,
+                                                         ?max_results: ::Integer,
+                                                         ?organization_entity_account_filters: Array[
+                                                           {
+                                                             event_arn: ::String,
+                                                             aws_account_id: ::String?,
+                                                             status_codes: Array[("IMPAIRED" | "UNIMPAIRED" | "UNKNOWN" | "PENDING" | "RESOLVED")]?
+                                                           },
+                                                         ]
+                                                       ) -> _DescribeAffectedEntitiesForOrganizationResponseSuccess
+                                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAffectedEntitiesForOrganizationResponseSuccess
+
+      interface _DescribeEntityAggregatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEntityAggregatesResponse]
+        def entity_aggregates: () -> ::Array[Types::EntityAggregate]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#describe_entity_aggregates-instance_method
+      def describe_entity_aggregates: (
+                                        ?event_arns: Array[::String]
+                                      ) -> _DescribeEntityAggregatesResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEntityAggregatesResponseSuccess
+
+      interface _DescribeEntityAggregatesForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEntityAggregatesForOrganizationResponse]
+        def organization_entity_aggregates: () -> ::Array[Types::OrganizationEntityAggregate]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#describe_entity_aggregates_for_organization-instance_method
+      def describe_entity_aggregates_for_organization: (
+                                                         event_arns: Array[::String],
+                                                         ?aws_account_ids: Array[::String]
+                                                       ) -> _DescribeEntityAggregatesForOrganizationResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEntityAggregatesForOrganizationResponseSuccess
+
+      interface _DescribeEventAggregatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEventAggregatesResponse]
+        def event_aggregates: () -> ::Array[Types::EventAggregate]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#describe_event_aggregates-instance_method
+      def describe_event_aggregates: (
+                                       ?filter: {
+                                         event_arns: Array[::String]?,
+                                         event_type_codes: Array[::String]?,
+                                         services: Array[::String]?,
+                                         regions: Array[::String]?,
+                                         availability_zones: Array[::String]?,
+                                         start_times: Array[
+                                           {
+                                             from: ::Time?,
+                                             to: ::Time?
+                                           },
+                                         ]?,
+                                         end_times: Array[
+                                           {
+                                             from: ::Time?,
+                                             to: ::Time?
+                                           },
+                                         ]?,
+                                         last_updated_times: Array[
+                                           {
+                                             from: ::Time?,
+                                             to: ::Time?
+                                           },
+                                         ]?,
+                                         entity_arns: Array[::String]?,
+                                         entity_values: Array[::String]?,
+                                         event_type_categories: Array[("issue" | "accountNotification" | "scheduledChange" | "investigation")]?,
+                                         tags: Array[
+                                           Hash[::String, ::String],
+                                         ]?,
+                                         event_status_codes: Array[("open" | "closed" | "upcoming")]?
+                                       },
+                                       aggregate_field: ("eventTypeCategory"),
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _DescribeEventAggregatesResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEventAggregatesResponseSuccess
+
+      interface _DescribeEventDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEventDetailsResponse]
+        def successful_set: () -> ::Array[Types::EventDetails]
+        def failed_set: () -> ::Array[Types::EventDetailsErrorItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#describe_event_details-instance_method
+      def describe_event_details: (
+                                    event_arns: Array[::String],
+                                    ?locale: ::String
+                                  ) -> _DescribeEventDetailsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEventDetailsResponseSuccess
+
+      interface _DescribeEventDetailsForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEventDetailsForOrganizationResponse]
+        def successful_set: () -> ::Array[Types::OrganizationEventDetails]
+        def failed_set: () -> ::Array[Types::OrganizationEventDetailsErrorItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#describe_event_details_for_organization-instance_method
+      def describe_event_details_for_organization: (
+                                                     organization_event_detail_filters: Array[
+                                                       {
+                                                         event_arn: ::String,
+                                                         aws_account_id: ::String?
+                                                       },
+                                                     ],
+                                                     ?locale: ::String
+                                                   ) -> _DescribeEventDetailsForOrganizationResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEventDetailsForOrganizationResponseSuccess
+
+      interface _DescribeEventTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEventTypesResponse]
+        def event_types: () -> ::Array[Types::EventType]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#describe_event_types-instance_method
+      def describe_event_types: (
+                                  ?filter: {
+                                    event_type_codes: Array[::String]?,
+                                    services: Array[::String]?,
+                                    event_type_categories: Array[("issue" | "accountNotification" | "scheduledChange" | "investigation")]?
+                                  },
+                                  ?locale: ::String,
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _DescribeEventTypesResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEventTypesResponseSuccess
+
+      interface _DescribeEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEventsResponse]
+        def events: () -> ::Array[Types::Event]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#describe_events-instance_method
+      def describe_events: (
+                             ?filter: {
+                               event_arns: Array[::String]?,
+                               event_type_codes: Array[::String]?,
+                               services: Array[::String]?,
+                               regions: Array[::String]?,
+                               availability_zones: Array[::String]?,
+                               start_times: Array[
+                                 {
+                                   from: ::Time?,
+                                   to: ::Time?
+                                 },
+                               ]?,
+                               end_times: Array[
+                                 {
+                                   from: ::Time?,
+                                   to: ::Time?
+                                 },
+                               ]?,
+                               last_updated_times: Array[
+                                 {
+                                   from: ::Time?,
+                                   to: ::Time?
+                                 },
+                               ]?,
+                               entity_arns: Array[::String]?,
+                               entity_values: Array[::String]?,
+                               event_type_categories: Array[("issue" | "accountNotification" | "scheduledChange" | "investigation")]?,
+                               tags: Array[
+                                 Hash[::String, ::String],
+                               ]?,
+                               event_status_codes: Array[("open" | "closed" | "upcoming")]?
+                             },
+                             ?next_token: ::String,
+                             ?max_results: ::Integer,
+                             ?locale: ::String
+                           ) -> _DescribeEventsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEventsResponseSuccess
+
+      interface _DescribeEventsForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEventsForOrganizationResponse]
+        def events: () -> ::Array[Types::OrganizationEvent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#describe_events_for_organization-instance_method
+      def describe_events_for_organization: (
+                                              ?filter: {
+                                                event_type_codes: Array[::String]?,
+                                                aws_account_ids: Array[::String]?,
+                                                services: Array[::String]?,
+                                                regions: Array[::String]?,
+                                                start_time: {
+                                                  from: ::Time?,
+                                                  to: ::Time?
+                                                }?,
+                                                end_time: {
+                                                  from: ::Time?,
+                                                  to: ::Time?
+                                                }?,
+                                                last_updated_time: {
+                                                  from: ::Time?,
+                                                  to: ::Time?
+                                                }?,
+                                                entity_arns: Array[::String]?,
+                                                entity_values: Array[::String]?,
+                                                event_type_categories: Array[("issue" | "accountNotification" | "scheduledChange" | "investigation")]?,
+                                                event_status_codes: Array[("open" | "closed" | "upcoming")]?
+                                              },
+                                              ?next_token: ::String,
+                                              ?max_results: ::Integer,
+                                              ?locale: ::String
+                                            ) -> _DescribeEventsForOrganizationResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEventsForOrganizationResponseSuccess
+
+      interface _DescribeHealthServiceStatusForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeHealthServiceStatusForOrganizationResponse]
+        def health_service_access_status_for_organization: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#describe_health_service_status_for_organization-instance_method
+      def describe_health_service_status_for_organization: () -> _DescribeHealthServiceStatusForOrganizationResponseSuccess
+                                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeHealthServiceStatusForOrganizationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#disable_health_service_access_for_organization-instance_method
+      def disable_health_service_access_for_organization: () -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#enable_health_service_access_for_organization-instance_method
+      def enable_health_service_access_for_organization: () -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+    end
+  end
+end
+

@@ -1,0 +1,533 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::LookoutforVision
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Anomaly
+      attr_accessor name: ::String
+      attr_accessor pixel_anomaly: Types::PixelAnomaly
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("PROJECT" | "DATASET" | "MODEL" | "TRIAL" | "MODEL_PACKAGE_JOB")
+      SENSITIVE: []
+    end
+
+    class CreateDatasetRequest
+      attr_accessor project_name: ::String
+      attr_accessor dataset_type: ::String
+      attr_accessor dataset_source: Types::DatasetSource
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDatasetResponse
+      attr_accessor dataset_metadata: Types::DatasetMetadata
+      SENSITIVE: []
+    end
+
+    class CreateModelRequest
+      attr_accessor project_name: ::String
+      attr_accessor description: ::String
+      attr_accessor client_token: ::String
+      attr_accessor output_config: Types::OutputConfig
+      attr_accessor kms_key_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateModelResponse
+      attr_accessor model_metadata: Types::ModelMetadata
+      SENSITIVE: []
+    end
+
+    class CreateProjectRequest
+      attr_accessor project_name: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProjectResponse
+      attr_accessor project_metadata: Types::ProjectMetadata
+      SENSITIVE: []
+    end
+
+    class DatasetDescription
+      attr_accessor project_name: ::String
+      attr_accessor dataset_type: ::String
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor last_updated_timestamp: ::Time
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_FAILED_ROLLBACK_IN_PROGRESS" | "UPDATE_FAILED_ROLLBACK_COMPLETE" | "DELETE_IN_PROGRESS" | "DELETE_COMPLETE" | "DELETE_FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor image_stats: Types::DatasetImageStats
+      SENSITIVE: []
+    end
+
+    class DatasetGroundTruthManifest
+      attr_accessor s3_object: Types::InputS3Object
+      SENSITIVE: []
+    end
+
+    class DatasetImageStats
+      attr_accessor total: ::Integer
+      attr_accessor labeled: ::Integer
+      attr_accessor normal: ::Integer
+      attr_accessor anomaly: ::Integer
+      SENSITIVE: []
+    end
+
+    class DatasetMetadata
+      attr_accessor dataset_type: ::String
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_FAILED_ROLLBACK_IN_PROGRESS" | "UPDATE_FAILED_ROLLBACK_COMPLETE" | "DELETE_IN_PROGRESS" | "DELETE_COMPLETE" | "DELETE_FAILED")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class DatasetSource
+      attr_accessor ground_truth_manifest: Types::DatasetGroundTruthManifest
+      SENSITIVE: []
+    end
+
+    class DeleteDatasetRequest
+      attr_accessor project_name: ::String
+      attr_accessor dataset_type: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDatasetResponse < Aws::EmptyStructure
+    end
+
+    class DeleteModelRequest
+      attr_accessor project_name: ::String
+      attr_accessor model_version: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteModelResponse
+      attr_accessor model_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProjectRequest
+      attr_accessor project_name: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProjectResponse
+      attr_accessor project_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDatasetRequest
+      attr_accessor project_name: ::String
+      attr_accessor dataset_type: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDatasetResponse
+      attr_accessor dataset_description: Types::DatasetDescription
+      SENSITIVE: []
+    end
+
+    class DescribeModelPackagingJobRequest
+      attr_accessor project_name: ::String
+      attr_accessor job_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeModelPackagingJobResponse
+      attr_accessor model_packaging_description: Types::ModelPackagingDescription
+      SENSITIVE: []
+    end
+
+    class DescribeModelRequest
+      attr_accessor project_name: ::String
+      attr_accessor model_version: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeModelResponse
+      attr_accessor model_description: Types::ModelDescription
+      SENSITIVE: []
+    end
+
+    class DescribeProjectRequest
+      attr_accessor project_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeProjectResponse
+      attr_accessor project_description: Types::ProjectDescription
+      SENSITIVE: []
+    end
+
+    class DetectAnomaliesRequest
+      attr_accessor project_name: ::String
+      attr_accessor model_version: ::String
+      attr_accessor body: ::IO
+      attr_accessor content_type: ::String
+      SENSITIVE: []
+    end
+
+    class DetectAnomaliesResponse
+      attr_accessor detect_anomaly_result: Types::DetectAnomalyResult
+      SENSITIVE: []
+    end
+
+    class DetectAnomalyResult
+      attr_accessor source: Types::ImageSource
+      attr_accessor is_anomalous: bool
+      attr_accessor confidence: ::Float
+      attr_accessor anomalies: ::Array[Types::Anomaly]
+      attr_accessor anomaly_mask: ::String
+      SENSITIVE: []
+    end
+
+    class GreengrassConfiguration
+      attr_accessor compiler_options: ::String
+      attr_accessor target_device: ("jetson_xavier")
+      attr_accessor target_platform: Types::TargetPlatform
+      attr_accessor s3_output_location: Types::S3Location
+      attr_accessor component_name: ::String
+      attr_accessor component_version: ::String
+      attr_accessor component_description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class GreengrassOutputDetails
+      attr_accessor component_version_arn: ::String
+      attr_accessor component_name: ::String
+      attr_accessor component_version: ::String
+      SENSITIVE: []
+    end
+
+    class ImageSource
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class InputS3Object
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDatasetEntriesRequest
+      attr_accessor project_name: ::String
+      attr_accessor dataset_type: ::String
+      attr_accessor labeled: bool
+      attr_accessor anomaly_class: ::String
+      attr_accessor before_creation_date: ::Time
+      attr_accessor after_creation_date: ::Time
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor source_ref_contains: ::String
+      SENSITIVE: []
+    end
+
+    class ListDatasetEntriesResponse
+      attr_accessor dataset_entries: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListModelPackagingJobsRequest
+      attr_accessor project_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListModelPackagingJobsResponse
+      attr_accessor model_packaging_jobs: ::Array[Types::ModelPackagingJobMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListModelsRequest
+      attr_accessor project_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListModelsResponse
+      attr_accessor models: ::Array[Types::ModelMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProjectsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListProjectsResponse
+      attr_accessor projects: ::Array[Types::ProjectMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ModelDescription
+      attr_accessor model_version: ::String
+      attr_accessor model_arn: ::String
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor description: ::String
+      attr_accessor status: ("TRAINING" | "TRAINED" | "TRAINING_FAILED" | "STARTING_HOSTING" | "HOSTED" | "HOSTING_FAILED" | "STOPPING_HOSTING" | "SYSTEM_UPDATING" | "DELETING")
+      attr_accessor status_message: ::String
+      attr_accessor performance: Types::ModelPerformance
+      attr_accessor output_config: Types::OutputConfig
+      attr_accessor evaluation_manifest: Types::OutputS3Object
+      attr_accessor evaluation_result: Types::OutputS3Object
+      attr_accessor evaluation_end_timestamp: ::Time
+      attr_accessor kms_key_id: ::String
+      attr_accessor min_inference_units: ::Integer
+      attr_accessor max_inference_units: ::Integer
+      SENSITIVE: []
+    end
+
+    class ModelMetadata
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor model_version: ::String
+      attr_accessor model_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("TRAINING" | "TRAINED" | "TRAINING_FAILED" | "STARTING_HOSTING" | "HOSTED" | "HOSTING_FAILED" | "STOPPING_HOSTING" | "SYSTEM_UPDATING" | "DELETING")
+      attr_accessor status_message: ::String
+      attr_accessor performance: Types::ModelPerformance
+      SENSITIVE: []
+    end
+
+    class ModelPackagingConfiguration
+      attr_accessor greengrass: Types::GreengrassConfiguration
+      SENSITIVE: []
+    end
+
+    class ModelPackagingDescription
+      attr_accessor job_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor model_version: ::String
+      attr_accessor model_packaging_configuration: Types::ModelPackagingConfiguration
+      attr_accessor model_packaging_job_description: ::String
+      attr_accessor model_packaging_method: ::String
+      attr_accessor model_packaging_output_details: Types::ModelPackagingOutputDetails
+      attr_accessor status: ("CREATED" | "RUNNING" | "SUCCEEDED" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor last_updated_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class ModelPackagingJobMetadata
+      attr_accessor job_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor model_version: ::String
+      attr_accessor model_packaging_job_description: ::String
+      attr_accessor model_packaging_method: ::String
+      attr_accessor status: ("CREATED" | "RUNNING" | "SUCCEEDED" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor last_updated_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class ModelPackagingOutputDetails
+      attr_accessor greengrass: Types::GreengrassOutputDetails
+      SENSITIVE: []
+    end
+
+    class ModelPerformance
+      attr_accessor f1_score: ::Float
+      attr_accessor recall: ::Float
+      attr_accessor precision: ::Float
+      SENSITIVE: []
+    end
+
+    class OutputConfig
+      attr_accessor s3_location: Types::S3Location
+      SENSITIVE: []
+    end
+
+    class OutputS3Object
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      SENSITIVE: []
+    end
+
+    class PixelAnomaly
+      attr_accessor total_percentage_area: ::Float
+      attr_accessor color: ::String
+      SENSITIVE: []
+    end
+
+    class ProjectDescription
+      attr_accessor project_arn: ::String
+      attr_accessor project_name: ::String
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor datasets: ::Array[Types::DatasetMetadata]
+      SENSITIVE: []
+    end
+
+    class ProjectMetadata
+      attr_accessor project_arn: ::String
+      attr_accessor project_name: ::String
+      attr_accessor creation_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("PROJECT" | "DATASET" | "MODEL" | "TRIAL" | "MODEL_PACKAGE_JOB")
+      SENSITIVE: []
+    end
+
+    class S3Location
+      attr_accessor bucket: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("PROJECT" | "DATASET" | "MODEL" | "TRIAL" | "MODEL_PACKAGE_JOB")
+      attr_accessor quota_code: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class StartModelPackagingJobRequest
+      attr_accessor project_name: ::String
+      attr_accessor model_version: ::String
+      attr_accessor job_name: ::String
+      attr_accessor configuration: Types::ModelPackagingConfiguration
+      attr_accessor description: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartModelPackagingJobResponse
+      attr_accessor job_name: ::String
+      SENSITIVE: []
+    end
+
+    class StartModelRequest
+      attr_accessor project_name: ::String
+      attr_accessor model_version: ::String
+      attr_accessor min_inference_units: ::Integer
+      attr_accessor client_token: ::String
+      attr_accessor max_inference_units: ::Integer
+      SENSITIVE: []
+    end
+
+    class StartModelResponse
+      attr_accessor status: ("STARTING_HOSTING" | "HOSTED" | "HOSTING_FAILED" | "STOPPING_HOSTING" | "SYSTEM_UPDATING")
+      SENSITIVE: []
+    end
+
+    class StopModelRequest
+      attr_accessor project_name: ::String
+      attr_accessor model_version: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StopModelResponse
+      attr_accessor status: ("STARTING_HOSTING" | "HOSTED" | "HOSTING_FAILED" | "STOPPING_HOSTING" | "SYSTEM_UPDATING")
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TargetPlatform
+      attr_accessor os: ("LINUX")
+      attr_accessor arch: ("ARM64" | "X86_64")
+      attr_accessor accelerator: ("NVIDIA")
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor service_code: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDatasetEntriesRequest
+      attr_accessor project_name: ::String
+      attr_accessor dataset_type: ::String
+      attr_accessor changes: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDatasetEntriesResponse
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_FAILED_ROLLBACK_IN_PROGRESS" | "UPDATE_FAILED_ROLLBACK_COMPLETE" | "DELETE_IN_PROGRESS" | "DELETE_COMPLETE" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

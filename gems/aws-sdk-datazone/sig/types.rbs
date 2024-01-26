@@ -1,0 +1,2962 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::DataZone
+  module Types
+
+    class AcceptChoice
+      attr_accessor prediction_choice: ::Integer
+      attr_accessor prediction_target: ::String
+      SENSITIVE: []
+    end
+
+    class AcceptPredictionsInput
+      attr_accessor accept_choices: ::Array[Types::AcceptChoice]
+      attr_accessor accept_rule: Types::AcceptRule
+      attr_accessor client_token: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      attr_accessor revision: ::String
+      SENSITIVE: []
+    end
+
+    class AcceptPredictionsOutput
+      attr_accessor asset_id: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor revision: ::String
+      SENSITIVE: []
+    end
+
+    class AcceptRule
+      attr_accessor rule: ("ALL" | "NONE")
+      attr_accessor threshold: ::Float
+      SENSITIVE: []
+    end
+
+    class AcceptSubscriptionRequestInput
+      attr_accessor decision_comment: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: [:decision_comment]
+    end
+
+    class AcceptSubscriptionRequestOutput
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor decision_comment: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor request_reason: ::String
+      attr_accessor reviewer_id: ::String
+      attr_accessor status: ("PENDING" | "ACCEPTED" | "REJECTED")
+      attr_accessor subscribed_listings: ::Array[Types::SubscribedListing]
+      attr_accessor subscribed_principals: ::Array[Types::SubscribedPrincipal]
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: [:decision_comment, :request_reason]
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AssetItem
+      attr_accessor additional_attributes: Types::AssetItemAdditionalAttributes
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor external_identifier: ::String
+      attr_accessor first_revision_created_at: ::Time
+      attr_accessor first_revision_created_by: ::String
+      attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor type_identifier: ::String
+      attr_accessor type_revision: ::String
+      SENSITIVE: [:description, :external_identifier, :name]
+    end
+
+    class AssetItemAdditionalAttributes
+      attr_accessor forms_output: ::Array[Types::FormOutput]
+      attr_accessor read_only_forms_output: ::Array[Types::FormOutput]
+      SENSITIVE: []
+    end
+
+    class AssetListing
+      attr_accessor asset_id: ::String
+      attr_accessor asset_revision: ::String
+      attr_accessor asset_type: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor forms: ::String
+      attr_accessor glossary_terms: ::Array[Types::DetailedGlossaryTerm]
+      attr_accessor owning_project_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssetListingDetails
+      attr_accessor listing_id: ::String
+      attr_accessor listing_status: ("CREATING" | "ACTIVE" | "INACTIVE")
+      SENSITIVE: []
+    end
+
+    class AssetListingItem
+      attr_accessor additional_attributes: Types::AssetListingItemAdditionalAttributes
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor entity_revision: ::String
+      attr_accessor entity_type: ::String
+      attr_accessor glossary_terms: ::Array[Types::DetailedGlossaryTerm]
+      attr_accessor listing_created_by: ::String
+      attr_accessor listing_id: ::String
+      attr_accessor listing_revision: ::String
+      attr_accessor listing_updated_by: ::String
+      attr_accessor name: ::String
+      attr_accessor owning_project_id: ::String
+      SENSITIVE: [:description, :name]
+    end
+
+    class AssetListingItemAdditionalAttributes
+      attr_accessor forms: ::String
+      SENSITIVE: []
+    end
+
+    class AssetRevision
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor revision: ::String
+      SENSITIVE: []
+    end
+
+    class AssetTargetNameMap
+      attr_accessor asset_id: ::String
+      attr_accessor target_name: ::String
+      SENSITIVE: []
+    end
+
+    class AssetTypeItem
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor forms_output: ::Hash[::String, Types::FormEntryOutput]
+      attr_accessor name: ::String
+      attr_accessor origin_domain_id: ::String
+      attr_accessor origin_project_id: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor revision: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: [:description]
+    end
+
+    class BusinessNameGenerationConfiguration
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class CancelSubscriptionInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class CancelSubscriptionOutput
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor retain_permissions: bool
+      attr_accessor status: ("APPROVED" | "REVOKED" | "CANCELLED")
+      attr_accessor subscribed_listing: Types::SubscribedListing
+      attr_accessor subscribed_principal: Types::SubscribedPrincipal
+      attr_accessor subscription_request_id: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: []
+    end
+
+    class CloudFormationProperties
+      attr_accessor template_url: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigurableActionParameter
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigurableEnvironmentAction
+      attr_accessor auth: ("IAM" | "HTTPS")
+      attr_accessor parameters: ::Array[Types::ConfigurableActionParameter]
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAssetInput
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor external_identifier: ::String
+      attr_accessor forms_input: ::Array[Types::FormInput]
+      attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor owning_project_identifier: ::String
+      attr_accessor prediction_configuration: Types::PredictionConfiguration
+      attr_accessor type_identifier: ::String
+      attr_accessor type_revision: ::String
+      SENSITIVE: [:description, :external_identifier, :forms_input, :name]
+    end
+
+    class CreateAssetOutput
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor external_identifier: ::String
+      attr_accessor first_revision_created_at: ::Time
+      attr_accessor first_revision_created_by: ::String
+      attr_accessor forms_output: ::Array[Types::FormOutput]
+      attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor id: ::String
+      attr_accessor listing: Types::AssetListingDetails
+      attr_accessor name: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor prediction_configuration: Types::PredictionConfiguration
+      attr_accessor read_only_forms_output: ::Array[Types::FormOutput]
+      attr_accessor revision: ::String
+      attr_accessor type_identifier: ::String
+      attr_accessor type_revision: ::String
+      SENSITIVE: [:description, :external_identifier, :name]
+    end
+
+    class CreateAssetRevisionInput
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor forms_input: ::Array[Types::FormInput]
+      attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor prediction_configuration: Types::PredictionConfiguration
+      attr_accessor type_revision: ::String
+      SENSITIVE: [:description, :forms_input, :name]
+    end
+
+    class CreateAssetRevisionOutput
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor external_identifier: ::String
+      attr_accessor first_revision_created_at: ::Time
+      attr_accessor first_revision_created_by: ::String
+      attr_accessor forms_output: ::Array[Types::FormOutput]
+      attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor id: ::String
+      attr_accessor listing: Types::AssetListingDetails
+      attr_accessor name: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor prediction_configuration: Types::PredictionConfiguration
+      attr_accessor read_only_forms_output: ::Array[Types::FormOutput]
+      attr_accessor revision: ::String
+      attr_accessor type_identifier: ::String
+      attr_accessor type_revision: ::String
+      SENSITIVE: [:description, :external_identifier, :name]
+    end
+
+    class CreateAssetTypeInput
+      attr_accessor description: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor forms_input: ::Hash[::String, Types::FormEntryInput]
+      attr_accessor name: ::String
+      attr_accessor owning_project_identifier: ::String
+      SENSITIVE: [:description]
+    end
+
+    class CreateAssetTypeOutput
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor forms_output: ::Hash[::String, Types::FormEntryOutput]
+      attr_accessor name: ::String
+      attr_accessor origin_domain_id: ::String
+      attr_accessor origin_project_id: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor revision: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: [:description]
+    end
+
+    class CreateDataSourceInput
+      attr_accessor asset_forms_input: ::Array[Types::FormInput]
+      attr_accessor client_token: ::String
+      attr_accessor configuration: Types::DataSourceConfigurationInput
+      attr_accessor description: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor enable_setting: ("ENABLED" | "DISABLED")
+      attr_accessor environment_identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor project_identifier: ::String
+      attr_accessor publish_on_import: bool
+      attr_accessor recommendation: Types::RecommendationConfiguration
+      attr_accessor schedule: Types::ScheduleConfiguration
+      attr_accessor type: ::String
+      SENSITIVE: [:asset_forms_input, :description, :name, :schedule]
+    end
+
+    class CreateDataSourceOutput
+      attr_accessor asset_forms_output: ::Array[Types::FormOutput]
+      attr_accessor configuration: Types::DataSourceConfigurationOutput
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor enable_setting: ("ENABLED" | "DISABLED")
+      attr_accessor environment_id: ::String
+      attr_accessor error_message: Types::DataSourceErrorMessage
+      attr_accessor id: ::String
+      attr_accessor last_run_at: ::Time
+      attr_accessor last_run_error_message: Types::DataSourceErrorMessage
+      attr_accessor last_run_status: ("REQUESTED" | "RUNNING" | "FAILED" | "PARTIALLY_SUCCEEDED" | "SUCCESS")
+      attr_accessor name: ::String
+      attr_accessor project_id: ::String
+      attr_accessor publish_on_import: bool
+      attr_accessor recommendation: Types::RecommendationConfiguration
+      attr_accessor schedule: Types::ScheduleConfiguration
+      attr_accessor status: ("CREATING" | "FAILED_CREATION" | "READY" | "UPDATING" | "FAILED_UPDATE" | "RUNNING" | "DELETING" | "FAILED_DELETION")
+      attr_accessor type: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:description, :name, :schedule]
+    end
+
+    class CreateDomainInput
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_execution_role: ::String
+      attr_accessor kms_key_identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor single_sign_on: Types::SingleSignOn
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDomainOutput
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_execution_role: ::String
+      attr_accessor id: ::String
+      attr_accessor kms_key_identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor portal_url: ::String
+      attr_accessor single_sign_on: Types::SingleSignOn
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "CREATION_FAILED" | "DELETING" | "DELETED" | "DELETION_FAILED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateEnvironmentInput
+      attr_accessor description: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor environment_profile_identifier: ::String
+      attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor project_identifier: ::String
+      attr_accessor user_parameters: ::Array[Types::EnvironmentParameter]
+      SENSITIVE: []
+    end
+
+    class CreateEnvironmentOutput
+      attr_accessor aws_account_id: ::String
+      attr_accessor aws_account_region: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor deployment_properties: Types::DeploymentProperties
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor environment_actions: ::Array[Types::ConfigurableEnvironmentAction]
+      attr_accessor environment_blueprint_id: ::String
+      attr_accessor environment_profile_id: ::String
+      attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor id: ::String
+      attr_accessor last_deployment: Types::Deployment
+      attr_accessor name: ::String
+      attr_accessor project_id: ::String
+      attr_accessor provider: ::String
+      attr_accessor provisioned_resources: ::Array[Types::Resource]
+      attr_accessor provisioning_properties: Types::ProvisioningProperties
+      attr_accessor status: ("ACTIVE" | "CREATING" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "VALIDATION_FAILED" | "SUSPENDED" | "DISABLED" | "EXPIRED" | "DELETED" | "INACCESSIBLE")
+      attr_accessor updated_at: ::Time
+      attr_accessor user_parameters: ::Array[Types::CustomParameter]
+      SENSITIVE: [:description, :name]
+    end
+
+    class CreateEnvironmentProfileInput
+      attr_accessor aws_account_id: ::String
+      attr_accessor aws_account_region: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor environment_blueprint_identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor project_identifier: ::String
+      attr_accessor user_parameters: ::Array[Types::EnvironmentParameter]
+      SENSITIVE: [:description, :name]
+    end
+
+    class CreateEnvironmentProfileOutput
+      attr_accessor aws_account_id: ::String
+      attr_accessor aws_account_region: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor environment_blueprint_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor project_id: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor user_parameters: ::Array[Types::CustomParameter]
+      SENSITIVE: [:description, :name]
+    end
+
+    class CreateFormTypeInput
+      attr_accessor description: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor model: Types::Model
+      attr_accessor name: ::String
+      attr_accessor owning_project_identifier: ::String
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: [:description, :model, :name]
+    end
+
+    class CreateFormTypeOutput
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor name: ::String
+      attr_accessor origin_domain_id: ::String
+      attr_accessor origin_project_id: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor revision: ::String
+      SENSITIVE: [:description, :name]
+    end
+
+    class CreateGlossaryInput
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor owning_project_identifier: ::String
+      attr_accessor status: ("DISABLED" | "ENABLED")
+      SENSITIVE: [:description, :name]
+    end
+
+    class CreateGlossaryOutput
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor status: ("DISABLED" | "ENABLED")
+      SENSITIVE: [:description, :name]
+    end
+
+    class CreateGlossaryTermInput
+      attr_accessor client_token: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor glossary_identifier: ::String
+      attr_accessor long_description: ::String
+      attr_accessor name: ::String
+      attr_accessor short_description: ::String
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor term_relations: Types::TermRelations
+      SENSITIVE: [:long_description, :name, :short_description]
+    end
+
+    class CreateGlossaryTermOutput
+      attr_accessor domain_id: ::String
+      attr_accessor glossary_id: ::String
+      attr_accessor id: ::String
+      attr_accessor long_description: ::String
+      attr_accessor name: ::String
+      attr_accessor short_description: ::String
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor term_relations: Types::TermRelations
+      SENSITIVE: [:long_description, :name, :short_description]
+    end
+
+    class CreateGroupProfileInput
+      attr_accessor client_token: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor group_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGroupProfileOutput
+      attr_accessor domain_id: ::String
+      attr_accessor group_name: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("ASSIGNED" | "NOT_ASSIGNED")
+      SENSITIVE: [:group_name]
+    end
+
+    class CreateListingChangeSetInput
+      attr_accessor action: ("PUBLISH" | "UNPUBLISH")
+      attr_accessor client_token: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor entity_identifier: ::String
+      attr_accessor entity_revision: ::String
+      attr_accessor entity_type: ("ASSET")
+      SENSITIVE: []
+    end
+
+    class CreateListingChangeSetOutput
+      attr_accessor listing_id: ::String
+      attr_accessor listing_revision: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "INACTIVE")
+      SENSITIVE: []
+    end
+
+    class CreateProjectInput
+      attr_accessor description: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor name: ::String
+      SENSITIVE: [:description, :name]
+    end
+
+    class CreateProjectMembershipInput
+      attr_accessor designation: ("PROJECT_OWNER" | "PROJECT_CONTRIBUTOR")
+      attr_accessor domain_identifier: ::String
+      attr_accessor member: Types::Member
+      attr_accessor project_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProjectMembershipOutput < Aws::EmptyStructure
+    end
+
+    class CreateProjectOutput
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor name: ::String
+      SENSITIVE: [:description, :name]
+    end
+
+    class CreateSubscriptionGrantInput
+      attr_accessor asset_target_names: ::Array[Types::AssetTargetNameMap]
+      attr_accessor client_token: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor environment_identifier: ::String
+      attr_accessor granted_entity: Types::GrantedEntityInput
+      attr_accessor subscription_target_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSubscriptionGrantOutput
+      attr_accessor assets: ::Array[Types::SubscribedAsset]
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor granted_entity: Types::GrantedEntity
+      attr_accessor id: ::String
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "GRANT_FAILED" | "REVOKE_FAILED" | "GRANT_AND_REVOKE_FAILED" | "COMPLETED" | "INACCESSIBLE")
+      attr_accessor subscription_id: ::String
+      attr_accessor subscription_target_id: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSubscriptionRequestInput
+      attr_accessor client_token: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor request_reason: ::String
+      attr_accessor subscribed_listings: ::Array[Types::SubscribedListingInput]
+      attr_accessor subscribed_principals: ::Array[Types::SubscribedPrincipalInput]
+      SENSITIVE: [:request_reason]
+    end
+
+    class CreateSubscriptionRequestOutput
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor decision_comment: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor request_reason: ::String
+      attr_accessor reviewer_id: ::String
+      attr_accessor status: ("PENDING" | "ACCEPTED" | "REJECTED")
+      attr_accessor subscribed_listings: ::Array[Types::SubscribedListing]
+      attr_accessor subscribed_principals: ::Array[Types::SubscribedPrincipal]
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: [:decision_comment, :request_reason]
+    end
+
+    class CreateSubscriptionTargetInput
+      attr_accessor applicable_asset_types: ::Array[::String]
+      attr_accessor authorized_principals: ::Array[::String]
+      attr_accessor client_token: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor environment_identifier: ::String
+      attr_accessor manage_access_role: ::String
+      attr_accessor name: ::String
+      attr_accessor provider: ::String
+      attr_accessor subscription_target_config: ::Array[Types::SubscriptionTargetForm]
+      attr_accessor type: ::String
+      SENSITIVE: [:name]
+    end
+
+    class CreateSubscriptionTargetOutput
+      attr_accessor applicable_asset_types: ::Array[::String]
+      attr_accessor authorized_principals: ::Array[::String]
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor id: ::String
+      attr_accessor manage_access_role: ::String
+      attr_accessor name: ::String
+      attr_accessor project_id: ::String
+      attr_accessor provider: ::String
+      attr_accessor subscription_target_config: ::Array[Types::SubscriptionTargetForm]
+      attr_accessor type: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: [:name]
+    end
+
+    class CreateUserProfileInput
+      attr_accessor client_token: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor user_identifier: ::String
+      attr_accessor user_type: ("IAM_USER" | "IAM_ROLE" | "SSO_USER")
+      SENSITIVE: []
+    end
+
+    class CreateUserProfileOutput
+      attr_accessor details: Types::UserProfileDetails
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("ASSIGNED" | "NOT_ASSIGNED" | "ACTIVATED" | "DEACTIVATED")
+      attr_accessor type: ("IAM" | "SSO")
+      SENSITIVE: []
+    end
+
+    class CustomParameter
+      attr_accessor default_value: ::String
+      attr_accessor description: ::String
+      attr_accessor field_type: ::String
+      attr_accessor is_editable: bool
+      attr_accessor is_optional: bool
+      attr_accessor key_name: ::String
+      SENSITIVE: [:description]
+    end
+
+    class DataProductItem
+      attr_accessor domain_id: ::String
+      attr_accessor item_id: ::String
+      SENSITIVE: []
+    end
+
+    class DataProductSummary
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor data_product_items: ::Array[Types::DataProductItem]
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: [:description, :name]
+    end
+
+    class DataSourceConfigurationInput
+      attr_accessor glue_run_configuration: Types::GlueRunConfigurationInput
+      attr_accessor redshift_run_configuration: Types::RedshiftRunConfigurationInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class GlueRunConfiguration < DataSourceConfigurationInput
+      end
+      class RedshiftRunConfiguration < DataSourceConfigurationInput
+      end
+      class Unknown < DataSourceConfigurationInput
+      end
+    end
+
+    class DataSourceConfigurationOutput
+      attr_accessor glue_run_configuration: Types::GlueRunConfigurationOutput
+      attr_accessor redshift_run_configuration: Types::RedshiftRunConfigurationOutput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class GlueRunConfiguration < DataSourceConfigurationOutput
+      end
+      class RedshiftRunConfiguration < DataSourceConfigurationOutput
+      end
+      class Unknown < DataSourceConfigurationOutput
+      end
+    end
+
+    class DataSourceErrorMessage
+      attr_accessor error_detail: ::String
+      attr_accessor error_type: ("ACCESS_DENIED_EXCEPTION" | "CONFLICT_EXCEPTION" | "INTERNAL_SERVER_EXCEPTION" | "RESOURCE_NOT_FOUND_EXCEPTION" | "SERVICE_QUOTA_EXCEEDED_EXCEPTION" | "THROTTLING_EXCEPTION" | "VALIDATION_EXCEPTION")
+      SENSITIVE: []
+    end
+
+    class DataSourceRunActivity
+      attr_accessor created_at: ::Time
+      attr_accessor data_asset_id: ::String
+      attr_accessor data_asset_status: ("FAILED" | "PUBLISHING_FAILED" | "SUCCEEDED_CREATED" | "SUCCEEDED_UPDATED" | "SKIPPED_ALREADY_IMPORTED" | "SKIPPED_ARCHIVED" | "SKIPPED_NO_ACCESS" | "UNCHANGED")
+      attr_accessor data_source_run_id: ::String
+      attr_accessor database: ::String
+      attr_accessor error_message: Types::DataSourceErrorMessage
+      attr_accessor project_id: ::String
+      attr_accessor technical_description: ::String
+      attr_accessor technical_name: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:database, :technical_description, :technical_name]
+    end
+
+    class DataSourceRunSummary
+      attr_accessor created_at: ::Time
+      attr_accessor data_source_id: ::String
+      attr_accessor error_message: Types::DataSourceErrorMessage
+      attr_accessor id: ::String
+      attr_accessor project_id: ::String
+      attr_accessor run_statistics_for_assets: Types::RunStatisticsForAssets
+      attr_accessor started_at: ::Time
+      attr_accessor status: ("REQUESTED" | "RUNNING" | "FAILED" | "PARTIALLY_SUCCEEDED" | "SUCCESS")
+      attr_accessor stopped_at: ::Time
+      attr_accessor type: ("PRIORITIZED" | "SCHEDULED")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DataSourceSummary
+      attr_accessor created_at: ::Time
+      attr_accessor data_source_id: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor enable_setting: ("ENABLED" | "DISABLED")
+      attr_accessor environment_id: ::String
+      attr_accessor last_run_asset_count: ::Integer
+      attr_accessor last_run_at: ::Time
+      attr_accessor last_run_error_message: Types::DataSourceErrorMessage
+      attr_accessor last_run_status: ("REQUESTED" | "RUNNING" | "FAILED" | "PARTIALLY_SUCCEEDED" | "SUCCESS")
+      attr_accessor name: ::String
+      attr_accessor schedule: Types::ScheduleConfiguration
+      attr_accessor status: ("CREATING" | "FAILED_CREATION" | "READY" | "UPDATING" | "FAILED_UPDATE" | "RUNNING" | "DELETING" | "FAILED_DELETION")
+      attr_accessor type: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:name, :schedule]
+    end
+
+    class DeleteAssetInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAssetOutput < Aws::EmptyStructure
+    end
+
+    class DeleteAssetTypeInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAssetTypeOutput < Aws::EmptyStructure
+    end
+
+    class DeleteDataSourceInput
+      attr_accessor client_token: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDataSourceOutput
+      attr_accessor asset_forms_output: ::Array[Types::FormOutput]
+      attr_accessor configuration: Types::DataSourceConfigurationOutput
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor enable_setting: ("ENABLED" | "DISABLED")
+      attr_accessor environment_id: ::String
+      attr_accessor error_message: Types::DataSourceErrorMessage
+      attr_accessor id: ::String
+      attr_accessor last_run_at: ::Time
+      attr_accessor last_run_error_message: Types::DataSourceErrorMessage
+      attr_accessor last_run_status: ("REQUESTED" | "RUNNING" | "FAILED" | "PARTIALLY_SUCCEEDED" | "SUCCESS")
+      attr_accessor name: ::String
+      attr_accessor project_id: ::String
+      attr_accessor publish_on_import: bool
+      attr_accessor schedule: Types::ScheduleConfiguration
+      attr_accessor status: ("CREATING" | "FAILED_CREATION" | "READY" | "UPDATING" | "FAILED_UPDATE" | "RUNNING" | "DELETING" | "FAILED_DELETION")
+      attr_accessor type: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:description, :name, :schedule]
+    end
+
+    class DeleteDomainInput
+      attr_accessor client_token: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDomainOutput
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "CREATION_FAILED" | "DELETING" | "DELETED" | "DELETION_FAILED")
+      SENSITIVE: []
+    end
+
+    class DeleteEnvironmentBlueprintConfigurationInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor environment_blueprint_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEnvironmentBlueprintConfigurationOutput < Aws::EmptyStructure
+    end
+
+    class DeleteEnvironmentInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEnvironmentProfileInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFormTypeInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor form_type_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFormTypeOutput < Aws::EmptyStructure
+    end
+
+    class DeleteGlossaryInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGlossaryOutput < Aws::EmptyStructure
+    end
+
+    class DeleteGlossaryTermInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGlossaryTermOutput < Aws::EmptyStructure
+    end
+
+    class DeleteListingInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteListingOutput < Aws::EmptyStructure
+    end
+
+    class DeleteProjectInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProjectMembershipInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor member: Types::Member
+      attr_accessor project_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProjectMembershipOutput < Aws::EmptyStructure
+    end
+
+    class DeleteProjectOutput < Aws::EmptyStructure
+    end
+
+    class DeleteSubscriptionGrantInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSubscriptionGrantOutput
+      attr_accessor assets: ::Array[Types::SubscribedAsset]
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor granted_entity: Types::GrantedEntity
+      attr_accessor id: ::String
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "GRANT_FAILED" | "REVOKE_FAILED" | "GRANT_AND_REVOKE_FAILED" | "COMPLETED" | "INACCESSIBLE")
+      attr_accessor subscription_id: ::String
+      attr_accessor subscription_target_id: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSubscriptionRequestInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSubscriptionTargetInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor environment_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class Deployment
+      attr_accessor deployment_id: ::String
+      attr_accessor deployment_status: ("IN_PROGRESS" | "SUCCESSFUL" | "FAILED" | "PENDING_DEPLOYMENT")
+      attr_accessor deployment_type: ("CREATE" | "UPDATE" | "DELETE")
+      attr_accessor failure_reason: Types::EnvironmentError
+      attr_accessor is_deployment_complete: bool
+      attr_accessor messages: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeploymentProperties
+      attr_accessor end_timeout_minutes: ::Integer
+      attr_accessor start_timeout_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class DetailedGlossaryTerm
+      attr_accessor name: ::String
+      attr_accessor short_description: ::String
+      SENSITIVE: [:name, :short_description]
+    end
+
+    class DomainSummary
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor managed_account_id: ::String
+      attr_accessor name: ::String
+      attr_accessor portal_url: ::String
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "CREATION_FAILED" | "DELETING" | "DELETED" | "DELETION_FAILED")
+      SENSITIVE: [:description, :name]
+    end
+
+    class EnvironmentBlueprintConfigurationItem
+      attr_accessor created_at: ::Time
+      attr_accessor domain_id: ::String
+      attr_accessor enabled_regions: ::Array[::String]
+      attr_accessor environment_blueprint_id: ::String
+      attr_accessor manage_access_role_arn: ::String
+      attr_accessor provisioning_role_arn: ::String
+      attr_accessor regional_parameters: ::Hash[::String, ::Hash[::String, ::String]]
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class EnvironmentBlueprintSummary
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor provider: ::String
+      attr_accessor provisioning_properties: Types::ProvisioningProperties
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:description]
+    end
+
+    class EnvironmentError
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EnvironmentParameter
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class EnvironmentProfileSummary
+      attr_accessor aws_account_id: ::String
+      attr_accessor aws_account_region: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor environment_blueprint_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor project_id: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:description, :name]
+    end
+
+    class EnvironmentSummary
+      attr_accessor aws_account_id: ::String
+      attr_accessor aws_account_region: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor environment_profile_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor project_id: ::String
+      attr_accessor provider: ::String
+      attr_accessor status: ("ACTIVE" | "CREATING" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "VALIDATION_FAILED" | "SUSPENDED" | "DISABLED" | "EXPIRED" | "DELETED" | "INACCESSIBLE")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:description, :name]
+    end
+
+    class FailureCause
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor attribute: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class FilterClause
+      attr_accessor and: ::Array[Types::FilterClause]
+      attr_accessor filter: Types::Filter
+      attr_accessor or: ::Array[Types::FilterClause]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class And < FilterClause
+      end
+      class Filter < FilterClause
+      end
+      class Or < FilterClause
+      end
+      class Unknown < FilterClause
+      end
+    end
+
+    class FilterExpression
+      attr_accessor expression: ::String
+      attr_accessor type: ("INCLUDE" | "EXCLUDE")
+      SENSITIVE: []
+    end
+
+    class FormEntryInput
+      attr_accessor required: bool
+      attr_accessor type_identifier: ::String
+      attr_accessor type_revision: ::String
+      SENSITIVE: []
+    end
+
+    class FormEntryOutput
+      attr_accessor required: bool
+      attr_accessor type_name: ::String
+      attr_accessor type_revision: ::String
+      SENSITIVE: [:type_name]
+    end
+
+    class FormInput
+      attr_accessor content: ::String
+      attr_accessor form_name: ::String
+      attr_accessor type_identifier: ::String
+      attr_accessor type_revision: ::String
+      SENSITIVE: []
+    end
+
+    class FormOutput
+      attr_accessor content: ::String
+      attr_accessor form_name: ::String
+      attr_accessor type_name: ::String
+      attr_accessor type_revision: ::String
+      SENSITIVE: [:type_name]
+    end
+
+    class FormTypeData
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor imports: ::Array[Types::Import]
+      attr_accessor model: Types::Model
+      attr_accessor name: ::String
+      attr_accessor origin_domain_id: ::String
+      attr_accessor origin_project_id: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor revision: ::String
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: [:description, :model, :name]
+    end
+
+    class GetAssetInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      attr_accessor revision: ::String
+      SENSITIVE: []
+    end
+
+    class GetAssetOutput
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor external_identifier: ::String
+      attr_accessor first_revision_created_at: ::Time
+      attr_accessor first_revision_created_by: ::String
+      attr_accessor forms_output: ::Array[Types::FormOutput]
+      attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor id: ::String
+      attr_accessor listing: Types::AssetListingDetails
+      attr_accessor name: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor read_only_forms_output: ::Array[Types::FormOutput]
+      attr_accessor revision: ::String
+      attr_accessor type_identifier: ::String
+      attr_accessor type_revision: ::String
+      SENSITIVE: [:description, :external_identifier, :name]
+    end
+
+    class GetAssetTypeInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      attr_accessor revision: ::String
+      SENSITIVE: []
+    end
+
+    class GetAssetTypeOutput
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor forms_output: ::Hash[::String, Types::FormEntryOutput]
+      attr_accessor name: ::String
+      attr_accessor origin_domain_id: ::String
+      attr_accessor origin_project_id: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor revision: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: [:description]
+    end
+
+    class GetDataSourceInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataSourceOutput
+      attr_accessor asset_forms_output: ::Array[Types::FormOutput]
+      attr_accessor configuration: Types::DataSourceConfigurationOutput
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor enable_setting: ("ENABLED" | "DISABLED")
+      attr_accessor environment_id: ::String
+      attr_accessor error_message: Types::DataSourceErrorMessage
+      attr_accessor id: ::String
+      attr_accessor last_run_asset_count: ::Integer
+      attr_accessor last_run_at: ::Time
+      attr_accessor last_run_error_message: Types::DataSourceErrorMessage
+      attr_accessor last_run_status: ("REQUESTED" | "RUNNING" | "FAILED" | "PARTIALLY_SUCCEEDED" | "SUCCESS")
+      attr_accessor name: ::String
+      attr_accessor project_id: ::String
+      attr_accessor publish_on_import: bool
+      attr_accessor recommendation: Types::RecommendationConfiguration
+      attr_accessor schedule: Types::ScheduleConfiguration
+      attr_accessor status: ("CREATING" | "FAILED_CREATION" | "READY" | "UPDATING" | "FAILED_UPDATE" | "RUNNING" | "DELETING" | "FAILED_DELETION")
+      attr_accessor type: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:description, :name, :schedule]
+    end
+
+    class GetDataSourceRunInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataSourceRunOutput
+      attr_accessor created_at: ::Time
+      attr_accessor data_source_configuration_snapshot: ::String
+      attr_accessor data_source_id: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor error_message: Types::DataSourceErrorMessage
+      attr_accessor id: ::String
+      attr_accessor project_id: ::String
+      attr_accessor run_statistics_for_assets: Types::RunStatisticsForAssets
+      attr_accessor started_at: ::Time
+      attr_accessor status: ("REQUESTED" | "RUNNING" | "FAILED" | "PARTIALLY_SUCCEEDED" | "SUCCESS")
+      attr_accessor stopped_at: ::Time
+      attr_accessor type: ("PRIORITIZED" | "SCHEDULED")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetDomainInput
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetDomainOutput
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor domain_execution_role: ::String
+      attr_accessor id: ::String
+      attr_accessor kms_key_identifier: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor portal_url: ::String
+      attr_accessor single_sign_on: Types::SingleSignOn
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "CREATION_FAILED" | "DELETING" | "DELETED" | "DELETION_FAILED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentBlueprintConfigurationInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor environment_blueprint_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentBlueprintConfigurationOutput
+      attr_accessor created_at: ::Time
+      attr_accessor domain_id: ::String
+      attr_accessor enabled_regions: ::Array[::String]
+      attr_accessor environment_blueprint_id: ::String
+      attr_accessor manage_access_role_arn: ::String
+      attr_accessor provisioning_role_arn: ::String
+      attr_accessor regional_parameters: ::Hash[::String, ::Hash[::String, ::String]]
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentBlueprintInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentBlueprintOutput
+      attr_accessor created_at: ::Time
+      attr_accessor deployment_properties: Types::DeploymentProperties
+      attr_accessor description: ::String
+      attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor provider: ::String
+      attr_accessor provisioning_properties: Types::ProvisioningProperties
+      attr_accessor updated_at: ::Time
+      attr_accessor user_parameters: ::Array[Types::CustomParameter]
+      SENSITIVE: [:description]
+    end
+
+    class GetEnvironmentInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentOutput
+      attr_accessor aws_account_id: ::String
+      attr_accessor aws_account_region: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor deployment_properties: Types::DeploymentProperties
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor environment_actions: ::Array[Types::ConfigurableEnvironmentAction]
+      attr_accessor environment_blueprint_id: ::String
+      attr_accessor environment_profile_id: ::String
+      attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor id: ::String
+      attr_accessor last_deployment: Types::Deployment
+      attr_accessor name: ::String
+      attr_accessor project_id: ::String
+      attr_accessor provider: ::String
+      attr_accessor provisioned_resources: ::Array[Types::Resource]
+      attr_accessor provisioning_properties: Types::ProvisioningProperties
+      attr_accessor status: ("ACTIVE" | "CREATING" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "VALIDATION_FAILED" | "SUSPENDED" | "DISABLED" | "EXPIRED" | "DELETED" | "INACCESSIBLE")
+      attr_accessor updated_at: ::Time
+      attr_accessor user_parameters: ::Array[Types::CustomParameter]
+      SENSITIVE: [:description, :name]
+    end
+
+    class GetEnvironmentProfileInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentProfileOutput
+      attr_accessor aws_account_id: ::String
+      attr_accessor aws_account_region: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor environment_blueprint_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor project_id: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor user_parameters: ::Array[Types::CustomParameter]
+      SENSITIVE: [:description, :name]
+    end
+
+    class GetFormTypeInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor form_type_identifier: ::String
+      attr_accessor revision: ::String
+      SENSITIVE: []
+    end
+
+    class GetFormTypeOutput
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor imports: ::Array[Types::Import]
+      attr_accessor model: Types::Model
+      attr_accessor name: ::String
+      attr_accessor origin_domain_id: ::String
+      attr_accessor origin_project_id: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor revision: ::String
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: [:description, :model, :name]
+    end
+
+    class GetGlossaryInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetGlossaryOutput
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor status: ("DISABLED" | "ENABLED")
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: [:description, :name]
+    end
+
+    class GetGlossaryTermInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetGlossaryTermOutput
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor glossary_id: ::String
+      attr_accessor id: ::String
+      attr_accessor long_description: ::String
+      attr_accessor name: ::String
+      attr_accessor short_description: ::String
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor term_relations: Types::TermRelations
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: [:long_description, :name, :short_description]
+    end
+
+    class GetGroupProfileInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor group_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetGroupProfileOutput
+      attr_accessor domain_id: ::String
+      attr_accessor group_name: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("ASSIGNED" | "NOT_ASSIGNED")
+      SENSITIVE: [:group_name]
+    end
+
+    class GetIamPortalLoginUrlInput
+      attr_accessor domain_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetIamPortalLoginUrlOutput
+      attr_accessor auth_code_url: ::String
+      attr_accessor user_profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetListingInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      attr_accessor listing_revision: ::String
+      SENSITIVE: []
+    end
+
+    class GetListingOutput
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor item: Types::ListingItem
+      attr_accessor listing_revision: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "INACTIVE")
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: [:description]
+    end
+
+    class GetProjectInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetProjectOutput
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor name: ::String
+      SENSITIVE: [:description, :name]
+    end
+
+    class GetSubscriptionGrantInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetSubscriptionGrantOutput
+      attr_accessor assets: ::Array[Types::SubscribedAsset]
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor granted_entity: Types::GrantedEntity
+      attr_accessor id: ::String
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "GRANT_FAILED" | "REVOKE_FAILED" | "GRANT_AND_REVOKE_FAILED" | "COMPLETED" | "INACCESSIBLE")
+      attr_accessor subscription_id: ::String
+      attr_accessor subscription_target_id: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: []
+    end
+
+    class GetSubscriptionInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetSubscriptionOutput
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor retain_permissions: bool
+      attr_accessor status: ("APPROVED" | "REVOKED" | "CANCELLED")
+      attr_accessor subscribed_listing: Types::SubscribedListing
+      attr_accessor subscribed_principal: Types::SubscribedPrincipal
+      attr_accessor subscription_request_id: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: []
+    end
+
+    class GetSubscriptionRequestDetailsInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetSubscriptionRequestDetailsOutput
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor decision_comment: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor request_reason: ::String
+      attr_accessor reviewer_id: ::String
+      attr_accessor status: ("PENDING" | "ACCEPTED" | "REJECTED")
+      attr_accessor subscribed_listings: ::Array[Types::SubscribedListing]
+      attr_accessor subscribed_principals: ::Array[Types::SubscribedPrincipal]
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: [:decision_comment, :request_reason]
+    end
+
+    class GetSubscriptionTargetInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor environment_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetSubscriptionTargetOutput
+      attr_accessor applicable_asset_types: ::Array[::String]
+      attr_accessor authorized_principals: ::Array[::String]
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor id: ::String
+      attr_accessor manage_access_role: ::String
+      attr_accessor name: ::String
+      attr_accessor project_id: ::String
+      attr_accessor provider: ::String
+      attr_accessor subscription_target_config: ::Array[Types::SubscriptionTargetForm]
+      attr_accessor type: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: [:name]
+    end
+
+    class GetUserProfileInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor type: ("IAM" | "SSO")
+      attr_accessor user_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetUserProfileOutput
+      attr_accessor details: Types::UserProfileDetails
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("ASSIGNED" | "NOT_ASSIGNED" | "ACTIVATED" | "DEACTIVATED")
+      attr_accessor type: ("IAM" | "SSO")
+      SENSITIVE: []
+    end
+
+    class GlossaryItem
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor status: ("DISABLED" | "ENABLED")
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: [:description, :name]
+    end
+
+    class GlossaryTermItem
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor glossary_id: ::String
+      attr_accessor id: ::String
+      attr_accessor long_description: ::String
+      attr_accessor name: ::String
+      attr_accessor short_description: ::String
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor term_relations: Types::TermRelations
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: [:long_description, :name, :short_description]
+    end
+
+    class GlueRunConfigurationInput
+      attr_accessor data_access_role: ::String
+      attr_accessor relational_filter_configurations: ::Array[Types::RelationalFilterConfiguration]
+      SENSITIVE: []
+    end
+
+    class GlueRunConfigurationOutput
+      attr_accessor account_id: ::String
+      attr_accessor data_access_role: ::String
+      attr_accessor region: ::String
+      attr_accessor relational_filter_configurations: ::Array[Types::RelationalFilterConfiguration]
+      SENSITIVE: []
+    end
+
+    class GrantedEntity
+      attr_accessor listing: Types::ListingRevision
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Listing < GrantedEntity
+      end
+      class Unknown < GrantedEntity
+      end
+    end
+
+    class GrantedEntityInput
+      attr_accessor listing: Types::ListingRevisionInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Listing < GrantedEntityInput
+      end
+      class Unknown < GrantedEntityInput
+      end
+    end
+
+    class GroupDetails
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class GroupProfileSummary
+      attr_accessor domain_id: ::String
+      attr_accessor group_name: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("ASSIGNED" | "NOT_ASSIGNED")
+      SENSITIVE: [:group_name]
+    end
+
+    class IamUserProfileDetails
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class Import
+      attr_accessor name: ::String
+      attr_accessor revision: ::String
+      SENSITIVE: [:name]
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssetRevisionsInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssetRevisionsOutput
+      attr_accessor items: ::Array[Types::AssetRevision]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataSourceRunActivitiesInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor status: ("FAILED" | "PUBLISHING_FAILED" | "SUCCEEDED_CREATED" | "SUCCEEDED_UPDATED" | "SKIPPED_ALREADY_IMPORTED" | "SKIPPED_ARCHIVED" | "SKIPPED_NO_ACCESS" | "UNCHANGED")
+      SENSITIVE: []
+    end
+
+    class ListDataSourceRunActivitiesOutput
+      attr_accessor items: ::Array[Types::DataSourceRunActivity]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataSourceRunsInput
+      attr_accessor data_source_identifier: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor status: ("REQUESTED" | "RUNNING" | "FAILED" | "PARTIALLY_SUCCEEDED" | "SUCCESS")
+      SENSITIVE: []
+    end
+
+    class ListDataSourceRunsOutput
+      attr_accessor items: ::Array[Types::DataSourceRunSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataSourcesInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor environment_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor project_identifier: ::String
+      attr_accessor status: ("CREATING" | "FAILED_CREATION" | "READY" | "UPDATING" | "FAILED_UPDATE" | "RUNNING" | "DELETING" | "FAILED_DELETION")
+      attr_accessor type: ::String
+      SENSITIVE: [:name]
+    end
+
+    class ListDataSourcesOutput
+      attr_accessor items: ::Array[Types::DataSourceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDomainsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "CREATION_FAILED" | "DELETING" | "DELETED" | "DELETION_FAILED")
+      SENSITIVE: []
+    end
+
+    class ListDomainsOutput
+      attr_accessor items: ::Array[Types::DomainSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentBlueprintConfigurationsInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentBlueprintConfigurationsOutput
+      attr_accessor items: ::Array[Types::EnvironmentBlueprintConfigurationItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentBlueprintsInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor managed: bool
+      attr_accessor max_results: ::Integer
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentBlueprintsOutput
+      attr_accessor items: ::Array[Types::EnvironmentBlueprintSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentProfilesInput
+      attr_accessor aws_account_id: ::String
+      attr_accessor aws_account_region: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor environment_blueprint_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor project_identifier: ::String
+      SENSITIVE: [:name]
+    end
+
+    class ListEnvironmentProfilesOutput
+      attr_accessor items: ::Array[Types::EnvironmentProfileSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentsInput
+      attr_accessor aws_account_id: ::String
+      attr_accessor aws_account_region: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor environment_blueprint_identifier: ::String
+      attr_accessor environment_profile_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor project_identifier: ::String
+      attr_accessor provider: ::String
+      attr_accessor status: ("ACTIVE" | "CREATING" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "VALIDATION_FAILED" | "SUSPENDED" | "DISABLED" | "EXPIRED" | "DELETED" | "INACCESSIBLE")
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentsOutput
+      attr_accessor items: ::Array[Types::EnvironmentSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNotificationsInput
+      attr_accessor after_timestamp: ::Time
+      attr_accessor before_timestamp: ::Time
+      attr_accessor domain_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor subjects: ::Array[::String]
+      attr_accessor task_status: ("ACTIVE" | "INACTIVE")
+      attr_accessor type: ("TASK" | "EVENT")
+      SENSITIVE: []
+    end
+
+    class ListNotificationsOutput
+      attr_accessor next_token: ::String
+      attr_accessor notifications: ::Array[Types::NotificationOutput]
+      SENSITIVE: []
+    end
+
+    class ListProjectMembershipsInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor project_identifier: ::String
+      attr_accessor sort_by: ("NAME")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class ListProjectMembershipsOutput
+      attr_accessor members: ::Array[Types::ProjectMember]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProjectsInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor group_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor user_identifier: ::String
+      SENSITIVE: [:name]
+    end
+
+    class ListProjectsOutput
+      attr_accessor items: ::Array[Types::ProjectSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSubscriptionGrantsInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_by: ("CREATED_AT" | "UPDATED_AT")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor subscribed_listing_id: ::String
+      attr_accessor subscription_id: ::String
+      attr_accessor subscription_target_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListSubscriptionGrantsOutput
+      attr_accessor items: ::Array[Types::SubscriptionGrantSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSubscriptionRequestsInput
+      attr_accessor approver_project_id: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor sort_by: ("CREATED_AT" | "UPDATED_AT")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor status: ("PENDING" | "ACCEPTED" | "REJECTED")
+      attr_accessor subscribed_listing_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListSubscriptionRequestsOutput
+      attr_accessor items: ::Array[Types::SubscriptionRequestSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSubscriptionTargetsInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor environment_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_by: ("CREATED_AT" | "UPDATED_AT")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class ListSubscriptionTargetsOutput
+      attr_accessor items: ::Array[Types::SubscriptionTargetSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSubscriptionsInput
+      attr_accessor approver_project_id: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor sort_by: ("CREATED_AT" | "UPDATED_AT")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor status: ("APPROVED" | "REVOKED" | "CANCELLED")
+      attr_accessor subscribed_listing_id: ::String
+      attr_accessor subscription_request_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ListSubscriptionsOutput
+      attr_accessor items: ::Array[Types::SubscriptionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListingItem
+      attr_accessor asset_listing: Types::AssetListing
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AssetListing < ListingItem
+      end
+      class Unknown < ListingItem
+      end
+    end
+
+    class ListingRevision
+      attr_accessor id: ::String
+      attr_accessor revision: ::String
+      SENSITIVE: []
+    end
+
+    class ListingRevisionInput
+      attr_accessor identifier: ::String
+      attr_accessor revision: ::String
+      SENSITIVE: []
+    end
+
+    class Member
+      attr_accessor group_identifier: ::String
+      attr_accessor user_identifier: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class GroupIdentifier < Member
+      end
+      class UserIdentifier < Member
+      end
+      class Unknown < Member
+      end
+    end
+
+    class MemberDetails
+      attr_accessor group: Types::GroupDetails
+      attr_accessor user: Types::UserDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Group < MemberDetails
+      end
+      class User < MemberDetails
+      end
+      class Unknown < MemberDetails
+      end
+    end
+
+    class Model
+      attr_accessor smithy: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Smithy < Model
+      end
+      class Unknown < Model
+      end
+    end
+
+    class NotificationOutput
+      attr_accessor action_link: ::String
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      attr_accessor last_updated_timestamp: ::Time
+      attr_accessor message: ::String
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor title: ::String
+      attr_accessor topic: Types::Topic
+      attr_accessor type: ("TASK" | "EVENT")
+      SENSITIVE: [:action_link, :message, :title]
+    end
+
+    class NotificationResource
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("PROJECT")
+      SENSITIVE: []
+    end
+
+    class PredictionConfiguration
+      attr_accessor business_name_generation: Types::BusinessNameGenerationConfiguration
+      SENSITIVE: []
+    end
+
+    class ProjectMember
+      attr_accessor designation: ("PROJECT_OWNER" | "PROJECT_CONTRIBUTOR")
+      attr_accessor member_details: Types::MemberDetails
+      SENSITIVE: []
+    end
+
+    class ProjectSummary
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:description, :name]
+    end
+
+    class ProvisioningProperties
+      attr_accessor cloud_formation: Types::CloudFormationProperties
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CloudFormation < ProvisioningProperties
+      end
+      class Unknown < ProvisioningProperties
+      end
+    end
+
+    class PutEnvironmentBlueprintConfigurationInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor enabled_regions: ::Array[::String]
+      attr_accessor environment_blueprint_identifier: ::String
+      attr_accessor manage_access_role_arn: ::String
+      attr_accessor provisioning_role_arn: ::String
+      attr_accessor regional_parameters: ::Hash[::String, ::Hash[::String, ::String]]
+      SENSITIVE: []
+    end
+
+    class PutEnvironmentBlueprintConfigurationOutput
+      attr_accessor created_at: ::Time
+      attr_accessor domain_id: ::String
+      attr_accessor enabled_regions: ::Array[::String]
+      attr_accessor environment_blueprint_id: ::String
+      attr_accessor manage_access_role_arn: ::String
+      attr_accessor provisioning_role_arn: ::String
+      attr_accessor regional_parameters: ::Hash[::String, ::Hash[::String, ::String]]
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class RecommendationConfiguration
+      attr_accessor enable_business_name_generation: bool
+      SENSITIVE: []
+    end
+
+    class RedshiftClusterStorage
+      attr_accessor cluster_name: ::String
+      SENSITIVE: []
+    end
+
+    class RedshiftCredentialConfiguration
+      attr_accessor secret_manager_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RedshiftRunConfigurationInput
+      attr_accessor data_access_role: ::String
+      attr_accessor redshift_credential_configuration: Types::RedshiftCredentialConfiguration
+      attr_accessor redshift_storage: Types::RedshiftStorage
+      attr_accessor relational_filter_configurations: ::Array[Types::RelationalFilterConfiguration]
+      SENSITIVE: []
+    end
+
+    class RedshiftRunConfigurationOutput
+      attr_accessor account_id: ::String
+      attr_accessor data_access_role: ::String
+      attr_accessor redshift_credential_configuration: Types::RedshiftCredentialConfiguration
+      attr_accessor redshift_storage: Types::RedshiftStorage
+      attr_accessor region: ::String
+      attr_accessor relational_filter_configurations: ::Array[Types::RelationalFilterConfiguration]
+      SENSITIVE: []
+    end
+
+    class RedshiftServerlessStorage
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class RedshiftStorage
+      attr_accessor redshift_cluster_source: Types::RedshiftClusterStorage
+      attr_accessor redshift_serverless_source: Types::RedshiftServerlessStorage
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class RedshiftClusterSource < RedshiftStorage
+      end
+      class RedshiftServerlessSource < RedshiftStorage
+      end
+      class Unknown < RedshiftStorage
+      end
+    end
+
+    class RejectChoice
+      attr_accessor prediction_choices: ::Array[::Integer]
+      attr_accessor prediction_target: ::String
+      SENSITIVE: []
+    end
+
+    class RejectPredictionsInput
+      attr_accessor client_token: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      attr_accessor reject_choices: ::Array[Types::RejectChoice]
+      attr_accessor reject_rule: Types::RejectRule
+      attr_accessor revision: ::String
+      SENSITIVE: []
+    end
+
+    class RejectPredictionsOutput
+      attr_accessor asset_id: ::String
+      attr_accessor asset_revision: ::String
+      attr_accessor domain_id: ::String
+      SENSITIVE: []
+    end
+
+    class RejectRule
+      attr_accessor rule: ("ALL" | "NONE")
+      attr_accessor threshold: ::Float
+      SENSITIVE: []
+    end
+
+    class RejectSubscriptionRequestInput
+      attr_accessor decision_comment: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: [:decision_comment]
+    end
+
+    class RejectSubscriptionRequestOutput
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor decision_comment: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor request_reason: ::String
+      attr_accessor reviewer_id: ::String
+      attr_accessor status: ("PENDING" | "ACCEPTED" | "REJECTED")
+      attr_accessor subscribed_listings: ::Array[Types::SubscribedListing]
+      attr_accessor subscribed_principals: ::Array[Types::SubscribedPrincipal]
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: [:decision_comment, :request_reason]
+    end
+
+    class RelationalFilterConfiguration
+      attr_accessor database_name: ::String
+      attr_accessor filter_expressions: ::Array[Types::FilterExpression]
+      attr_accessor schema_name: ::String
+      SENSITIVE: []
+    end
+
+    class Resource
+      attr_accessor name: ::String
+      attr_accessor provider: ::String
+      attr_accessor type: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RevokeSubscriptionInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      attr_accessor retain_permissions: bool
+      SENSITIVE: []
+    end
+
+    class RevokeSubscriptionOutput
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor retain_permissions: bool
+      attr_accessor status: ("APPROVED" | "REVOKED" | "CANCELLED")
+      attr_accessor subscribed_listing: Types::SubscribedListing
+      attr_accessor subscribed_principal: Types::SubscribedPrincipal
+      attr_accessor subscription_request_id: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: []
+    end
+
+    class RunStatisticsForAssets
+      attr_accessor added: ::Integer
+      attr_accessor failed: ::Integer
+      attr_accessor skipped: ::Integer
+      attr_accessor unchanged: ::Integer
+      attr_accessor updated: ::Integer
+      SENSITIVE: []
+    end
+
+    class ScheduleConfiguration
+      attr_accessor schedule: ::String
+      attr_accessor timezone: ("UTC" | "AFRICA_JOHANNESBURG" | "AMERICA_MONTREAL" | "AMERICA_SAO_PAULO" | "ASIA_BAHRAIN" | "ASIA_BANGKOK" | "ASIA_CALCUTTA" | "ASIA_DUBAI" | "ASIA_HONG_KONG" | "ASIA_JAKARTA" | "ASIA_KUALA_LUMPUR" | "ASIA_SEOUL" | "ASIA_SHANGHAI" | "ASIA_SINGAPORE" | "ASIA_TAIPEI" | "ASIA_TOKYO" | "AUSTRALIA_MELBOURNE" | "AUSTRALIA_SYDNEY" | "CANADA_CENTRAL" | "CET" | "CST6CDT" | "ETC_GMT" | "ETC_GMT0" | "ETC_GMT_ADD_0" | "ETC_GMT_ADD_1" | "ETC_GMT_ADD_10" | "ETC_GMT_ADD_11" | "ETC_GMT_ADD_12" | "ETC_GMT_ADD_2" | "ETC_GMT_ADD_3" | "ETC_GMT_ADD_4" | "ETC_GMT_ADD_5" | "ETC_GMT_ADD_6" | "ETC_GMT_ADD_7" | "ETC_GMT_ADD_8" | "ETC_GMT_ADD_9" | "ETC_GMT_NEG_0" | "ETC_GMT_NEG_1" | "ETC_GMT_NEG_10" | "ETC_GMT_NEG_11" | "ETC_GMT_NEG_12" | "ETC_GMT_NEG_13" | "ETC_GMT_NEG_14" | "ETC_GMT_NEG_2" | "ETC_GMT_NEG_3" | "ETC_GMT_NEG_4" | "ETC_GMT_NEG_5" | "ETC_GMT_NEG_6" | "ETC_GMT_NEG_7" | "ETC_GMT_NEG_8" | "ETC_GMT_NEG_9" | "EUROPE_DUBLIN" | "EUROPE_LONDON" | "EUROPE_PARIS" | "EUROPE_STOCKHOLM" | "EUROPE_ZURICH" | "ISRAEL" | "MEXICO_GENERAL" | "MST7MDT" | "PACIFIC_AUCKLAND" | "US_CENTRAL" | "US_EASTERN" | "US_MOUNTAIN" | "US_PACIFIC")
+      SENSITIVE: []
+    end
+
+    class SearchGroupProfilesInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor group_type: ("SSO_GROUP" | "DATAZONE_SSO_GROUP")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor search_text: ::String
+      SENSITIVE: [:search_text]
+    end
+
+    class SearchGroupProfilesOutput
+      attr_accessor items: ::Array[Types::GroupProfileSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchInItem
+      attr_accessor attribute: ::String
+      SENSITIVE: []
+    end
+
+    class SearchInput
+      attr_accessor additional_attributes: ::Array[("FORMS")]
+      attr_accessor domain_identifier: ::String
+      attr_accessor filters: Types::FilterClause
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor owning_project_identifier: ::String
+      attr_accessor search_in: ::Array[Types::SearchInItem]
+      attr_accessor search_scope: ("ASSET" | "GLOSSARY" | "GLOSSARY_TERM")
+      attr_accessor search_text: ::String
+      attr_accessor sort: Types::SearchSort
+      SENSITIVE: []
+    end
+
+    class SearchInventoryResultItem
+      attr_accessor asset_item: Types::AssetItem
+      attr_accessor data_product_item: Types::DataProductSummary
+      attr_accessor glossary_item: Types::GlossaryItem
+      attr_accessor glossary_term_item: Types::GlossaryTermItem
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AssetItem < SearchInventoryResultItem
+      end
+      class DataProductItem < SearchInventoryResultItem
+      end
+      class GlossaryItem < SearchInventoryResultItem
+      end
+      class GlossaryTermItem < SearchInventoryResultItem
+      end
+      class Unknown < SearchInventoryResultItem
+      end
+    end
+
+    class SearchListingsInput
+      attr_accessor additional_attributes: ::Array[("FORMS")]
+      attr_accessor domain_identifier: ::String
+      attr_accessor filters: Types::FilterClause
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor search_in: ::Array[Types::SearchInItem]
+      attr_accessor search_text: ::String
+      attr_accessor sort: Types::SearchSort
+      SENSITIVE: []
+    end
+
+    class SearchListingsOutput
+      attr_accessor items: ::Array[Types::SearchResultItem]
+      attr_accessor next_token: ::String
+      attr_accessor total_match_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchOutput
+      attr_accessor items: ::Array[Types::SearchInventoryResultItem]
+      attr_accessor next_token: ::String
+      attr_accessor total_match_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchResultItem
+      attr_accessor asset_listing: Types::AssetListingItem
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AssetListing < SearchResultItem
+      end
+      class Unknown < SearchResultItem
+      end
+    end
+
+    class SearchSort
+      attr_accessor attribute: ::String
+      attr_accessor order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class SearchTypesInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor filters: Types::FilterClause
+      attr_accessor managed: bool
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor search_in: ::Array[Types::SearchInItem]
+      attr_accessor search_scope: ("ASSET_TYPE" | "FORM_TYPE")
+      attr_accessor search_text: ::String
+      attr_accessor sort: Types::SearchSort
+      SENSITIVE: []
+    end
+
+    class SearchTypesOutput
+      attr_accessor items: ::Array[Types::SearchTypesResultItem]
+      attr_accessor next_token: ::String
+      attr_accessor total_match_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchTypesResultItem
+      attr_accessor asset_type_item: Types::AssetTypeItem
+      attr_accessor form_type_item: Types::FormTypeData
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AssetTypeItem < SearchTypesResultItem
+      end
+      class FormTypeItem < SearchTypesResultItem
+      end
+      class Unknown < SearchTypesResultItem
+      end
+    end
+
+    class SearchUserProfilesInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor search_text: ::String
+      attr_accessor user_type: ("SSO_USER" | "DATAZONE_USER" | "DATAZONE_SSO_USER" | "DATAZONE_IAM_USER")
+      SENSITIVE: [:search_text]
+    end
+
+    class SearchUserProfilesOutput
+      attr_accessor items: ::Array[Types::UserProfileSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SingleSignOn
+      attr_accessor type: ("IAM_IDC" | "DISABLED")
+      attr_accessor user_assignment: ("AUTOMATIC" | "MANUAL")
+      SENSITIVE: []
+    end
+
+    class SsoUserProfileDetails
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor username: ::String
+      SENSITIVE: [:first_name, :last_name, :username]
+    end
+
+    class StartDataSourceRunInput
+      attr_accessor client_token: ::String
+      attr_accessor data_source_identifier: ::String
+      attr_accessor domain_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class StartDataSourceRunOutput
+      attr_accessor created_at: ::Time
+      attr_accessor data_source_configuration_snapshot: ::String
+      attr_accessor data_source_id: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor error_message: Types::DataSourceErrorMessage
+      attr_accessor id: ::String
+      attr_accessor project_id: ::String
+      attr_accessor run_statistics_for_assets: Types::RunStatisticsForAssets
+      attr_accessor started_at: ::Time
+      attr_accessor status: ("REQUESTED" | "RUNNING" | "FAILED" | "PARTIALLY_SUCCEEDED" | "SUCCESS")
+      attr_accessor stopped_at: ::Time
+      attr_accessor type: ("PRIORITIZED" | "SCHEDULED")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class SubscribedAsset
+      attr_accessor asset_id: ::String
+      attr_accessor asset_revision: ::String
+      attr_accessor failure_cause: Types::FailureCause
+      attr_accessor failure_timestamp: ::Time
+      attr_accessor granted_timestamp: ::Time
+      attr_accessor status: ("GRANT_PENDING" | "REVOKE_PENDING" | "GRANT_IN_PROGRESS" | "REVOKE_IN_PROGRESS" | "GRANTED" | "REVOKED" | "GRANT_FAILED" | "REVOKE_FAILED")
+      attr_accessor target_name: ::String
+      SENSITIVE: []
+    end
+
+    class SubscribedAssetListing
+      attr_accessor entity_id: ::String
+      attr_accessor entity_revision: ::String
+      attr_accessor entity_type: ::String
+      attr_accessor forms: ::String
+      attr_accessor glossary_terms: ::Array[Types::DetailedGlossaryTerm]
+      SENSITIVE: []
+    end
+
+    class SubscribedListing
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor item: Types::SubscribedListingItem
+      attr_accessor name: ::String
+      attr_accessor owner_project_id: ::String
+      attr_accessor owner_project_name: ::String
+      attr_accessor revision: ::String
+      SENSITIVE: [:description]
+    end
+
+    class SubscribedListingInput
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class SubscribedListingItem
+      attr_accessor asset_listing: Types::SubscribedAssetListing
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AssetListing < SubscribedListingItem
+      end
+      class Unknown < SubscribedListingItem
+      end
+    end
+
+    class SubscribedPrincipal
+      attr_accessor project: Types::SubscribedProject
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Project < SubscribedPrincipal
+      end
+      class Unknown < SubscribedPrincipal
+      end
+    end
+
+    class SubscribedPrincipalInput
+      attr_accessor project: Types::SubscribedProjectInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Project < SubscribedPrincipalInput
+      end
+      class Unknown < SubscribedPrincipalInput
+      end
+    end
+
+    class SubscribedProject
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: [:name]
+    end
+
+    class SubscribedProjectInput
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class SubscriptionGrantSummary
+      attr_accessor assets: ::Array[Types::SubscribedAsset]
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor granted_entity: Types::GrantedEntity
+      attr_accessor id: ::String
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "GRANT_FAILED" | "REVOKE_FAILED" | "GRANT_AND_REVOKE_FAILED" | "COMPLETED" | "INACCESSIBLE")
+      attr_accessor subscription_id: ::String
+      attr_accessor subscription_target_id: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: []
+    end
+
+    class SubscriptionRequestSummary
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor decision_comment: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor request_reason: ::String
+      attr_accessor reviewer_id: ::String
+      attr_accessor status: ("PENDING" | "ACCEPTED" | "REJECTED")
+      attr_accessor subscribed_listings: ::Array[Types::SubscribedListing]
+      attr_accessor subscribed_principals: ::Array[Types::SubscribedPrincipal]
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: [:decision_comment, :request_reason]
+    end
+
+    class SubscriptionSummary
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor retain_permissions: bool
+      attr_accessor status: ("APPROVED" | "REVOKED" | "CANCELLED")
+      attr_accessor subscribed_listing: Types::SubscribedListing
+      attr_accessor subscribed_principal: Types::SubscribedPrincipal
+      attr_accessor subscription_request_id: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: []
+    end
+
+    class SubscriptionTargetForm
+      attr_accessor content: ::String
+      attr_accessor form_name: ::String
+      SENSITIVE: []
+    end
+
+    class SubscriptionTargetSummary
+      attr_accessor applicable_asset_types: ::Array[::String]
+      attr_accessor authorized_principals: ::Array[::String]
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor id: ::String
+      attr_accessor manage_access_role: ::String
+      attr_accessor name: ::String
+      attr_accessor project_id: ::String
+      attr_accessor provider: ::String
+      attr_accessor subscription_target_config: ::Array[Types::SubscriptionTargetForm]
+      attr_accessor type: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: [:name]
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TermRelations
+      attr_accessor classifies: ::Array[::String]
+      attr_accessor is_a: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Topic
+      attr_accessor resource: Types::NotificationResource
+      attr_accessor role: ("PROJECT_OWNER" | "PROJECT_CONTRIBUTOR" | "PROJECT_VIEWER" | "DOMAIN_OWNER" | "PROJECT_SUBSCRIBER")
+      attr_accessor subject: ::String
+      SENSITIVE: []
+    end
+
+    class UnauthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDataSourceInput
+      attr_accessor asset_forms_input: ::Array[Types::FormInput]
+      attr_accessor configuration: Types::DataSourceConfigurationInput
+      attr_accessor description: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor enable_setting: ("ENABLED" | "DISABLED")
+      attr_accessor identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor publish_on_import: bool
+      attr_accessor recommendation: Types::RecommendationConfiguration
+      attr_accessor schedule: Types::ScheduleConfiguration
+      SENSITIVE: [:asset_forms_input, :description, :name, :schedule]
+    end
+
+    class UpdateDataSourceOutput
+      attr_accessor asset_forms_output: ::Array[Types::FormOutput]
+      attr_accessor configuration: Types::DataSourceConfigurationOutput
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor enable_setting: ("ENABLED" | "DISABLED")
+      attr_accessor environment_id: ::String
+      attr_accessor error_message: Types::DataSourceErrorMessage
+      attr_accessor id: ::String
+      attr_accessor last_run_at: ::Time
+      attr_accessor last_run_error_message: Types::DataSourceErrorMessage
+      attr_accessor last_run_status: ("REQUESTED" | "RUNNING" | "FAILED" | "PARTIALLY_SUCCEEDED" | "SUCCESS")
+      attr_accessor name: ::String
+      attr_accessor project_id: ::String
+      attr_accessor publish_on_import: bool
+      attr_accessor recommendation: Types::RecommendationConfiguration
+      attr_accessor schedule: Types::ScheduleConfiguration
+      attr_accessor status: ("CREATING" | "FAILED_CREATION" | "READY" | "UPDATING" | "FAILED_UPDATE" | "RUNNING" | "DELETING" | "FAILED_DELETION")
+      attr_accessor type: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:description, :name, :schedule]
+    end
+
+    class UpdateDomainInput
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_execution_role: ::String
+      attr_accessor identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor single_sign_on: Types::SingleSignOn
+      SENSITIVE: []
+    end
+
+    class UpdateDomainOutput
+      attr_accessor description: ::String
+      attr_accessor domain_execution_role: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor single_sign_on: Types::SingleSignOn
+      SENSITIVE: []
+    end
+
+    class UpdateEnvironmentInput
+      attr_accessor description: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor identifier: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateEnvironmentOutput
+      attr_accessor aws_account_id: ::String
+      attr_accessor aws_account_region: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor deployment_properties: Types::DeploymentProperties
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor environment_actions: ::Array[Types::ConfigurableEnvironmentAction]
+      attr_accessor environment_blueprint_id: ::String
+      attr_accessor environment_profile_id: ::String
+      attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor id: ::String
+      attr_accessor last_deployment: Types::Deployment
+      attr_accessor name: ::String
+      attr_accessor project_id: ::String
+      attr_accessor provider: ::String
+      attr_accessor provisioned_resources: ::Array[Types::Resource]
+      attr_accessor provisioning_properties: Types::ProvisioningProperties
+      attr_accessor status: ("ACTIVE" | "CREATING" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "VALIDATION_FAILED" | "SUSPENDED" | "DISABLED" | "EXPIRED" | "DELETED" | "INACCESSIBLE")
+      attr_accessor updated_at: ::Time
+      attr_accessor user_parameters: ::Array[Types::CustomParameter]
+      SENSITIVE: [:description, :name]
+    end
+
+    class UpdateEnvironmentProfileInput
+      attr_accessor aws_account_id: ::String
+      attr_accessor aws_account_region: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor user_parameters: ::Array[Types::EnvironmentParameter]
+      SENSITIVE: [:name]
+    end
+
+    class UpdateEnvironmentProfileOutput
+      attr_accessor aws_account_id: ::String
+      attr_accessor aws_account_region: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor environment_blueprint_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor project_id: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor user_parameters: ::Array[Types::CustomParameter]
+      SENSITIVE: [:description, :name]
+    end
+
+    class UpdateGlossaryInput
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("DISABLED" | "ENABLED")
+      SENSITIVE: [:description, :name]
+    end
+
+    class UpdateGlossaryOutput
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor status: ("DISABLED" | "ENABLED")
+      SENSITIVE: [:description, :name]
+    end
+
+    class UpdateGlossaryTermInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor glossary_identifier: ::String
+      attr_accessor identifier: ::String
+      attr_accessor long_description: ::String
+      attr_accessor name: ::String
+      attr_accessor short_description: ::String
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor term_relations: Types::TermRelations
+      SENSITIVE: [:long_description, :name, :short_description]
+    end
+
+    class UpdateGlossaryTermOutput
+      attr_accessor domain_id: ::String
+      attr_accessor glossary_id: ::String
+      attr_accessor id: ::String
+      attr_accessor long_description: ::String
+      attr_accessor name: ::String
+      attr_accessor short_description: ::String
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor term_relations: Types::TermRelations
+      SENSITIVE: [:long_description, :name, :short_description]
+    end
+
+    class UpdateGroupProfileInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor group_identifier: ::String
+      attr_accessor status: ("ASSIGNED" | "NOT_ASSIGNED")
+      SENSITIVE: []
+    end
+
+    class UpdateGroupProfileOutput
+      attr_accessor domain_id: ::String
+      attr_accessor group_name: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("ASSIGNED" | "NOT_ASSIGNED")
+      SENSITIVE: [:group_name]
+    end
+
+    class UpdateProjectInput
+      attr_accessor description: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor identifier: ::String
+      attr_accessor name: ::String
+      SENSITIVE: [:description, :name]
+    end
+
+    class UpdateProjectOutput
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor name: ::String
+      SENSITIVE: [:description, :name]
+    end
+
+    class UpdateSubscriptionGrantStatusInput
+      attr_accessor asset_identifier: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor failure_cause: Types::FailureCause
+      attr_accessor identifier: ::String
+      attr_accessor status: ("GRANT_PENDING" | "REVOKE_PENDING" | "GRANT_IN_PROGRESS" | "REVOKE_IN_PROGRESS" | "GRANTED" | "REVOKED" | "GRANT_FAILED" | "REVOKE_FAILED")
+      attr_accessor target_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSubscriptionGrantStatusOutput
+      attr_accessor assets: ::Array[Types::SubscribedAsset]
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor granted_entity: Types::GrantedEntity
+      attr_accessor id: ::String
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "GRANT_FAILED" | "REVOKE_FAILED" | "GRANT_AND_REVOKE_FAILED" | "COMPLETED" | "INACCESSIBLE")
+      attr_accessor subscription_id: ::String
+      attr_accessor subscription_target_id: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSubscriptionRequestInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      attr_accessor request_reason: ::String
+      SENSITIVE: [:request_reason]
+    end
+
+    class UpdateSubscriptionRequestOutput
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor decision_comment: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor request_reason: ::String
+      attr_accessor reviewer_id: ::String
+      attr_accessor status: ("PENDING" | "ACCEPTED" | "REJECTED")
+      attr_accessor subscribed_listings: ::Array[Types::SubscribedListing]
+      attr_accessor subscribed_principals: ::Array[Types::SubscribedPrincipal]
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: [:decision_comment, :request_reason]
+    end
+
+    class UpdateSubscriptionTargetInput
+      attr_accessor applicable_asset_types: ::Array[::String]
+      attr_accessor authorized_principals: ::Array[::String]
+      attr_accessor domain_identifier: ::String
+      attr_accessor environment_identifier: ::String
+      attr_accessor identifier: ::String
+      attr_accessor manage_access_role: ::String
+      attr_accessor name: ::String
+      attr_accessor provider: ::String
+      attr_accessor subscription_target_config: ::Array[Types::SubscriptionTargetForm]
+      SENSITIVE: [:name]
+    end
+
+    class UpdateSubscriptionTargetOutput
+      attr_accessor applicable_asset_types: ::Array[::String]
+      attr_accessor authorized_principals: ::Array[::String]
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor id: ::String
+      attr_accessor manage_access_role: ::String
+      attr_accessor name: ::String
+      attr_accessor project_id: ::String
+      attr_accessor provider: ::String
+      attr_accessor subscription_target_config: ::Array[Types::SubscriptionTargetForm]
+      attr_accessor type: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: [:name]
+    end
+
+    class UpdateUserProfileInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor status: ("ASSIGNED" | "NOT_ASSIGNED" | "ACTIVATED" | "DEACTIVATED")
+      attr_accessor type: ("IAM" | "SSO")
+      attr_accessor user_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateUserProfileOutput
+      attr_accessor details: Types::UserProfileDetails
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("ASSIGNED" | "NOT_ASSIGNED" | "ACTIVATED" | "DEACTIVATED")
+      attr_accessor type: ("IAM" | "SSO")
+      SENSITIVE: []
+    end
+
+    class UserDetails
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class UserProfileDetails
+      attr_accessor iam: Types::IamUserProfileDetails
+      attr_accessor sso: Types::SsoUserProfileDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Iam < UserProfileDetails
+      end
+      class Sso < UserProfileDetails
+      end
+      class Unknown < UserProfileDetails
+      end
+    end
+
+    class UserProfileSummary
+      attr_accessor details: Types::UserProfileDetails
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("ASSIGNED" | "NOT_ASSIGNED" | "ACTIVATED" | "DEACTIVATED")
+      attr_accessor type: ("IAM" | "SSO")
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

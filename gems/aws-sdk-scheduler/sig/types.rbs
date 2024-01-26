@@ -1,0 +1,349 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Scheduler
+  module Types
+
+    class AwsVpcConfiguration
+      attr_accessor assign_public_ip: ("ENABLED" | "DISABLED")
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor subnets: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CapacityProviderStrategyItem
+      attr_accessor base: ::Integer
+      attr_accessor capacity_provider: ::String
+      attr_accessor weight: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateScheduleGroupInput
+      attr_accessor client_token: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateScheduleGroupOutput
+      attr_accessor schedule_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateScheduleInput
+      attr_accessor action_after_completion: ("NONE" | "DELETE")
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor end_date: ::Time
+      attr_accessor flexible_time_window: Types::FlexibleTimeWindow
+      attr_accessor group_name: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor schedule_expression: ::String
+      attr_accessor schedule_expression_timezone: ::String
+      attr_accessor start_date: ::Time
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor target: Types::Target
+      SENSITIVE: []
+    end
+
+    class CreateScheduleOutput
+      attr_accessor schedule_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeadLetterConfig
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteScheduleGroupInput
+      attr_accessor client_token: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteScheduleGroupOutput < Aws::EmptyStructure
+    end
+
+    class DeleteScheduleInput
+      attr_accessor client_token: ::String
+      attr_accessor group_name: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteScheduleOutput < Aws::EmptyStructure
+    end
+
+    class EcsParameters
+      attr_accessor capacity_provider_strategy: ::Array[Types::CapacityProviderStrategyItem]
+      attr_accessor enable_ecs_managed_tags: bool
+      attr_accessor enable_execute_command: bool
+      attr_accessor group: ::String
+      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL")
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor placement_constraints: ::Array[Types::PlacementConstraint]
+      attr_accessor placement_strategy: ::Array[Types::PlacementStrategy]
+      attr_accessor platform_version: ::String
+      attr_accessor propagate_tags: ("TASK_DEFINITION")
+      attr_accessor reference_id: ::String
+      attr_accessor tags: ::Array[::Hash[::String, ::String]]
+      attr_accessor task_count: ::Integer
+      attr_accessor task_definition_arn: ::String
+      SENSITIVE: []
+    end
+
+    class EventBridgeParameters
+      attr_accessor detail_type: ::String
+      attr_accessor source: ::String
+      SENSITIVE: []
+    end
+
+    class FlexibleTimeWindow
+      attr_accessor maximum_window_in_minutes: ::Integer
+      attr_accessor mode: ("OFF" | "FLEXIBLE")
+      SENSITIVE: []
+    end
+
+    class GetScheduleGroupInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetScheduleGroupOutput
+      attr_accessor arn: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modification_date: ::Time
+      attr_accessor name: ::String
+      attr_accessor state: ("ACTIVE" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class GetScheduleInput
+      attr_accessor group_name: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetScheduleOutput
+      attr_accessor action_after_completion: ("NONE" | "DELETE")
+      attr_accessor arn: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor description: ::String
+      attr_accessor end_date: ::Time
+      attr_accessor flexible_time_window: Types::FlexibleTimeWindow
+      attr_accessor group_name: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor last_modification_date: ::Time
+      attr_accessor name: ::String
+      attr_accessor schedule_expression: ::String
+      attr_accessor schedule_expression_timezone: ::String
+      attr_accessor start_date: ::Time
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor target: Types::Target
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KinesisParameters
+      attr_accessor partition_key: ::String
+      SENSITIVE: []
+    end
+
+    class ListScheduleGroupsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor name_prefix: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListScheduleGroupsOutput
+      attr_accessor next_token: ::String
+      attr_accessor schedule_groups: ::Array[Types::ScheduleGroupSummary]
+      SENSITIVE: []
+    end
+
+    class ListSchedulesInput
+      attr_accessor group_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor name_prefix: ::String
+      attr_accessor next_token: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class ListSchedulesOutput
+      attr_accessor next_token: ::String
+      attr_accessor schedules: ::Array[Types::ScheduleSummary]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class NetworkConfiguration
+      attr_accessor awsvpc_configuration: Types::AwsVpcConfiguration
+      SENSITIVE: []
+    end
+
+    class PlacementConstraint
+      attr_accessor expression: ::String
+      attr_accessor type: ("distinctInstance" | "memberOf")
+      SENSITIVE: []
+    end
+
+    class PlacementStrategy
+      attr_accessor field: ::String
+      attr_accessor type: ("random" | "spread" | "binpack")
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RetryPolicy
+      attr_accessor maximum_event_age_in_seconds: ::Integer
+      attr_accessor maximum_retry_attempts: ::Integer
+      SENSITIVE: []
+    end
+
+    class SageMakerPipelineParameter
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SageMakerPipelineParameters
+      attr_accessor pipeline_parameter_list: ::Array[Types::SageMakerPipelineParameter]
+      SENSITIVE: []
+    end
+
+    class ScheduleGroupSummary
+      attr_accessor arn: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modification_date: ::Time
+      attr_accessor name: ::String
+      attr_accessor state: ("ACTIVE" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class ScheduleSummary
+      attr_accessor arn: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor group_name: ::String
+      attr_accessor last_modification_date: ::Time
+      attr_accessor name: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor target: Types::TargetSummary
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SqsParameters
+      attr_accessor message_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class Target
+      attr_accessor arn: ::String
+      attr_accessor dead_letter_config: Types::DeadLetterConfig
+      attr_accessor ecs_parameters: Types::EcsParameters
+      attr_accessor event_bridge_parameters: Types::EventBridgeParameters
+      attr_accessor input: ::String
+      attr_accessor kinesis_parameters: Types::KinesisParameters
+      attr_accessor retry_policy: Types::RetryPolicy
+      attr_accessor role_arn: ::String
+      attr_accessor sage_maker_pipeline_parameters: Types::SageMakerPipelineParameters
+      attr_accessor sqs_parameters: Types::SqsParameters
+      SENSITIVE: []
+    end
+
+    class TargetSummary
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UpdateScheduleInput
+      attr_accessor action_after_completion: ("NONE" | "DELETE")
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor end_date: ::Time
+      attr_accessor flexible_time_window: Types::FlexibleTimeWindow
+      attr_accessor group_name: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor schedule_expression: ::String
+      attr_accessor schedule_expression_timezone: ::String
+      attr_accessor start_date: ::Time
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor target: Types::Target
+      SENSITIVE: []
+    end
+
+    class UpdateScheduleOutput
+      attr_accessor schedule_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

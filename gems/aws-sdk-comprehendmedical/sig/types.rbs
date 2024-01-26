@@ -1,0 +1,583 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ComprehendMedical
+  module Types
+
+    class Attribute
+      attr_accessor type: ("NAME" | "DX_NAME" | "DOSAGE" | "ROUTE_OR_MODE" | "FORM" | "FREQUENCY" | "DURATION" | "GENERIC_NAME" | "BRAND_NAME" | "STRENGTH" | "RATE" | "ACUITY" | "TEST_NAME" | "TEST_VALUE" | "TEST_UNITS" | "TEST_UNIT" | "PROCEDURE_NAME" | "TREATMENT_NAME" | "DATE" | "AGE" | "CONTACT_POINT" | "PHONE_OR_FAX" | "EMAIL" | "IDENTIFIER" | "ID" | "URL" | "ADDRESS" | "PROFESSION" | "SYSTEM_ORGAN_SITE" | "DIRECTION" | "QUALITY" | "QUANTITY" | "TIME_EXPRESSION" | "TIME_TO_MEDICATION_NAME" | "TIME_TO_DX_NAME" | "TIME_TO_TEST_NAME" | "TIME_TO_PROCEDURE_NAME" | "TIME_TO_TREATMENT_NAME" | "AMOUNT" | "GENDER" | "RACE_ETHNICITY" | "ALLERGIES" | "TOBACCO_USE" | "ALCOHOL_CONSUMPTION" | "REC_DRUG_USE")
+      attr_accessor score: ::Float
+      attr_accessor relationship_score: ::Float
+      attr_accessor relationship_type: ("EVERY" | "WITH_DOSAGE" | "ADMINISTERED_VIA" | "FOR" | "NEGATIVE" | "OVERLAP" | "DOSAGE" | "ROUTE_OR_MODE" | "FORM" | "FREQUENCY" | "DURATION" | "STRENGTH" | "RATE" | "ACUITY" | "TEST_VALUE" | "TEST_UNITS" | "TEST_UNIT" | "DIRECTION" | "SYSTEM_ORGAN_SITE" | "AMOUNT" | "USAGE" | "QUALITY")
+      attr_accessor id: ::Integer
+      attr_accessor begin_offset: ::Integer
+      attr_accessor end_offset: ::Integer
+      attr_accessor text: ::String
+      attr_accessor category: ("MEDICATION" | "MEDICAL_CONDITION" | "PROTECTED_HEALTH_INFORMATION" | "TEST_TREATMENT_PROCEDURE" | "ANATOMY" | "TIME_EXPRESSION" | "BEHAVIORAL_ENVIRONMENTAL_SOCIAL")
+      attr_accessor traits: ::Array[Types::Trait]
+      SENSITIVE: []
+    end
+
+    class Characters
+      attr_accessor original_text_characters: ::Integer
+      SENSITIVE: []
+    end
+
+    class ComprehendMedicalAsyncJobFilter
+      attr_accessor job_name: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "PARTIAL_SUCCESS" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      attr_accessor submit_time_before: ::Time
+      attr_accessor submit_time_after: ::Time
+      SENSITIVE: []
+    end
+
+    class ComprehendMedicalAsyncJobProperties
+      attr_accessor job_id: ::String
+      attr_accessor job_name: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "PARTIAL_SUCCESS" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      attr_accessor message: ::String
+      attr_accessor submit_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor expiration_time: ::Time
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor output_data_config: Types::OutputDataConfig
+      attr_accessor language_code: ("en")
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor manifest_file_path: ::String
+      attr_accessor kms_key: ::String
+      attr_accessor model_version: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEntitiesDetectionV2JobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEntitiesDetectionV2JobResponse
+      attr_accessor comprehend_medical_async_job_properties: Types::ComprehendMedicalAsyncJobProperties
+      SENSITIVE: []
+    end
+
+    class DescribeICD10CMInferenceJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeICD10CMInferenceJobResponse
+      attr_accessor comprehend_medical_async_job_properties: Types::ComprehendMedicalAsyncJobProperties
+      SENSITIVE: []
+    end
+
+    class DescribePHIDetectionJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePHIDetectionJobResponse
+      attr_accessor comprehend_medical_async_job_properties: Types::ComprehendMedicalAsyncJobProperties
+      SENSITIVE: []
+    end
+
+    class DescribeRxNormInferenceJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRxNormInferenceJobResponse
+      attr_accessor comprehend_medical_async_job_properties: Types::ComprehendMedicalAsyncJobProperties
+      SENSITIVE: []
+    end
+
+    class DescribeSNOMEDCTInferenceJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSNOMEDCTInferenceJobResponse
+      attr_accessor comprehend_medical_async_job_properties: Types::ComprehendMedicalAsyncJobProperties
+      SENSITIVE: []
+    end
+
+    class DetectEntitiesRequest
+      attr_accessor text: ::String
+      SENSITIVE: []
+    end
+
+    class DetectEntitiesResponse
+      attr_accessor entities: ::Array[Types::Entity]
+      attr_accessor unmapped_attributes: ::Array[Types::UnmappedAttribute]
+      attr_accessor pagination_token: ::String
+      attr_accessor model_version: ::String
+      SENSITIVE: []
+    end
+
+    class DetectEntitiesV2Request
+      attr_accessor text: ::String
+      SENSITIVE: []
+    end
+
+    class DetectEntitiesV2Response
+      attr_accessor entities: ::Array[Types::Entity]
+      attr_accessor unmapped_attributes: ::Array[Types::UnmappedAttribute]
+      attr_accessor pagination_token: ::String
+      attr_accessor model_version: ::String
+      SENSITIVE: []
+    end
+
+    class DetectPHIRequest
+      attr_accessor text: ::String
+      SENSITIVE: []
+    end
+
+    class DetectPHIResponse
+      attr_accessor entities: ::Array[Types::Entity]
+      attr_accessor pagination_token: ::String
+      attr_accessor model_version: ::String
+      SENSITIVE: []
+    end
+
+    class Entity
+      attr_accessor id: ::Integer
+      attr_accessor begin_offset: ::Integer
+      attr_accessor end_offset: ::Integer
+      attr_accessor score: ::Float
+      attr_accessor text: ::String
+      attr_accessor category: ("MEDICATION" | "MEDICAL_CONDITION" | "PROTECTED_HEALTH_INFORMATION" | "TEST_TREATMENT_PROCEDURE" | "ANATOMY" | "TIME_EXPRESSION" | "BEHAVIORAL_ENVIRONMENTAL_SOCIAL")
+      attr_accessor type: ("NAME" | "DX_NAME" | "DOSAGE" | "ROUTE_OR_MODE" | "FORM" | "FREQUENCY" | "DURATION" | "GENERIC_NAME" | "BRAND_NAME" | "STRENGTH" | "RATE" | "ACUITY" | "TEST_NAME" | "TEST_VALUE" | "TEST_UNITS" | "TEST_UNIT" | "PROCEDURE_NAME" | "TREATMENT_NAME" | "DATE" | "AGE" | "CONTACT_POINT" | "PHONE_OR_FAX" | "EMAIL" | "IDENTIFIER" | "ID" | "URL" | "ADDRESS" | "PROFESSION" | "SYSTEM_ORGAN_SITE" | "DIRECTION" | "QUALITY" | "QUANTITY" | "TIME_EXPRESSION" | "TIME_TO_MEDICATION_NAME" | "TIME_TO_DX_NAME" | "TIME_TO_TEST_NAME" | "TIME_TO_PROCEDURE_NAME" | "TIME_TO_TREATMENT_NAME" | "AMOUNT" | "GENDER" | "RACE_ETHNICITY" | "ALLERGIES" | "TOBACCO_USE" | "ALCOHOL_CONSUMPTION" | "REC_DRUG_USE")
+      attr_accessor traits: ::Array[Types::Trait]
+      attr_accessor attributes: ::Array[Types::Attribute]
+      SENSITIVE: []
+    end
+
+    class ICD10CMAttribute
+      attr_accessor type: ("ACUITY" | "DIRECTION" | "SYSTEM_ORGAN_SITE" | "QUALITY" | "QUANTITY" | "TIME_TO_DX_NAME" | "TIME_EXPRESSION")
+      attr_accessor score: ::Float
+      attr_accessor relationship_score: ::Float
+      attr_accessor id: ::Integer
+      attr_accessor begin_offset: ::Integer
+      attr_accessor end_offset: ::Integer
+      attr_accessor text: ::String
+      attr_accessor traits: ::Array[Types::ICD10CMTrait]
+      attr_accessor category: ("DX_NAME" | "TIME_EXPRESSION")
+      attr_accessor relationship_type: ("OVERLAP" | "SYSTEM_ORGAN_SITE" | "QUALITY")
+      SENSITIVE: []
+    end
+
+    class ICD10CMConcept
+      attr_accessor description: ::String
+      attr_accessor code: ::String
+      attr_accessor score: ::Float
+      SENSITIVE: []
+    end
+
+    class ICD10CMEntity
+      attr_accessor id: ::Integer
+      attr_accessor text: ::String
+      attr_accessor category: ("MEDICAL_CONDITION")
+      attr_accessor type: ("DX_NAME" | "TIME_EXPRESSION")
+      attr_accessor score: ::Float
+      attr_accessor begin_offset: ::Integer
+      attr_accessor end_offset: ::Integer
+      attr_accessor attributes: ::Array[Types::ICD10CMAttribute]
+      attr_accessor traits: ::Array[Types::ICD10CMTrait]
+      attr_accessor icd10cm_concepts: ::Array[Types::ICD10CMConcept]
+      SENSITIVE: []
+    end
+
+    class ICD10CMTrait
+      attr_accessor name: ("NEGATION" | "DIAGNOSIS" | "SIGN" | "SYMPTOM" | "PERTAINS_TO_FAMILY" | "HYPOTHETICAL" | "LOW_CONFIDENCE")
+      attr_accessor score: ::Float
+      SENSITIVE: []
+    end
+
+    class InferICD10CMRequest
+      attr_accessor text: ::String
+      SENSITIVE: []
+    end
+
+    class InferICD10CMResponse
+      attr_accessor entities: ::Array[Types::ICD10CMEntity]
+      attr_accessor pagination_token: ::String
+      attr_accessor model_version: ::String
+      SENSITIVE: []
+    end
+
+    class InferRxNormRequest
+      attr_accessor text: ::String
+      SENSITIVE: []
+    end
+
+    class InferRxNormResponse
+      attr_accessor entities: ::Array[Types::RxNormEntity]
+      attr_accessor pagination_token: ::String
+      attr_accessor model_version: ::String
+      SENSITIVE: []
+    end
+
+    class InferSNOMEDCTRequest
+      attr_accessor text: ::String
+      SENSITIVE: []
+    end
+
+    class InferSNOMEDCTResponse
+      attr_accessor entities: ::Array[Types::SNOMEDCTEntity]
+      attr_accessor pagination_token: ::String
+      attr_accessor model_version: ::String
+      attr_accessor snomedct_details: Types::SNOMEDCTDetails
+      attr_accessor characters: Types::Characters
+      SENSITIVE: []
+    end
+
+    class InputDataConfig
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_key: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidEncodingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListEntitiesDetectionV2JobsRequest
+      attr_accessor filter: Types::ComprehendMedicalAsyncJobFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEntitiesDetectionV2JobsResponse
+      attr_accessor comprehend_medical_async_job_properties_list: ::Array[Types::ComprehendMedicalAsyncJobProperties]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListICD10CMInferenceJobsRequest
+      attr_accessor filter: Types::ComprehendMedicalAsyncJobFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListICD10CMInferenceJobsResponse
+      attr_accessor comprehend_medical_async_job_properties_list: ::Array[Types::ComprehendMedicalAsyncJobProperties]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPHIDetectionJobsRequest
+      attr_accessor filter: Types::ComprehendMedicalAsyncJobFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPHIDetectionJobsResponse
+      attr_accessor comprehend_medical_async_job_properties_list: ::Array[Types::ComprehendMedicalAsyncJobProperties]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRxNormInferenceJobsRequest
+      attr_accessor filter: Types::ComprehendMedicalAsyncJobFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRxNormInferenceJobsResponse
+      attr_accessor comprehend_medical_async_job_properties_list: ::Array[Types::ComprehendMedicalAsyncJobProperties]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSNOMEDCTInferenceJobsRequest
+      attr_accessor filter: Types::ComprehendMedicalAsyncJobFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSNOMEDCTInferenceJobsResponse
+      attr_accessor comprehend_medical_async_job_properties_list: ::Array[Types::ComprehendMedicalAsyncJobProperties]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class OutputDataConfig
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_key: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RxNormAttribute
+      attr_accessor type: ("DOSAGE" | "DURATION" | "FORM" | "FREQUENCY" | "RATE" | "ROUTE_OR_MODE" | "STRENGTH")
+      attr_accessor score: ::Float
+      attr_accessor relationship_score: ::Float
+      attr_accessor id: ::Integer
+      attr_accessor begin_offset: ::Integer
+      attr_accessor end_offset: ::Integer
+      attr_accessor text: ::String
+      attr_accessor traits: ::Array[Types::RxNormTrait]
+      SENSITIVE: []
+    end
+
+    class RxNormConcept
+      attr_accessor description: ::String
+      attr_accessor code: ::String
+      attr_accessor score: ::Float
+      SENSITIVE: []
+    end
+
+    class RxNormEntity
+      attr_accessor id: ::Integer
+      attr_accessor text: ::String
+      attr_accessor category: ("MEDICATION")
+      attr_accessor type: ("BRAND_NAME" | "GENERIC_NAME")
+      attr_accessor score: ::Float
+      attr_accessor begin_offset: ::Integer
+      attr_accessor end_offset: ::Integer
+      attr_accessor attributes: ::Array[Types::RxNormAttribute]
+      attr_accessor traits: ::Array[Types::RxNormTrait]
+      attr_accessor rx_norm_concepts: ::Array[Types::RxNormConcept]
+      SENSITIVE: []
+    end
+
+    class RxNormTrait
+      attr_accessor name: ("NEGATION" | "PAST_HISTORY")
+      attr_accessor score: ::Float
+      SENSITIVE: []
+    end
+
+    class SNOMEDCTAttribute
+      attr_accessor category: ("MEDICAL_CONDITION" | "ANATOMY" | "TEST_TREATMENT_PROCEDURE")
+      attr_accessor type: ("ACUITY" | "QUALITY" | "DIRECTION" | "SYSTEM_ORGAN_SITE" | "TEST_VALUE" | "TEST_UNIT")
+      attr_accessor score: ::Float
+      attr_accessor relationship_score: ::Float
+      attr_accessor relationship_type: ("ACUITY" | "QUALITY" | "TEST_VALUE" | "TEST_UNITS" | "DIRECTION" | "SYSTEM_ORGAN_SITE" | "TEST_UNIT")
+      attr_accessor id: ::Integer
+      attr_accessor begin_offset: ::Integer
+      attr_accessor end_offset: ::Integer
+      attr_accessor text: ::String
+      attr_accessor traits: ::Array[Types::SNOMEDCTTrait]
+      attr_accessor snomedct_concepts: ::Array[Types::SNOMEDCTConcept]
+      SENSITIVE: []
+    end
+
+    class SNOMEDCTConcept
+      attr_accessor description: ::String
+      attr_accessor code: ::String
+      attr_accessor score: ::Float
+      SENSITIVE: []
+    end
+
+    class SNOMEDCTDetails
+      attr_accessor edition: ::String
+      attr_accessor language: ::String
+      attr_accessor version_date: ::String
+      SENSITIVE: []
+    end
+
+    class SNOMEDCTEntity
+      attr_accessor id: ::Integer
+      attr_accessor text: ::String
+      attr_accessor category: ("MEDICAL_CONDITION" | "ANATOMY" | "TEST_TREATMENT_PROCEDURE")
+      attr_accessor type: ("DX_NAME" | "TEST_NAME" | "PROCEDURE_NAME" | "TREATMENT_NAME")
+      attr_accessor score: ::Float
+      attr_accessor begin_offset: ::Integer
+      attr_accessor end_offset: ::Integer
+      attr_accessor attributes: ::Array[Types::SNOMEDCTAttribute]
+      attr_accessor traits: ::Array[Types::SNOMEDCTTrait]
+      attr_accessor snomedct_concepts: ::Array[Types::SNOMEDCTConcept]
+      SENSITIVE: []
+    end
+
+    class SNOMEDCTTrait
+      attr_accessor name: ("NEGATION" | "DIAGNOSIS" | "SIGN" | "SYMPTOM" | "PERTAINS_TO_FAMILY" | "HYPOTHETICAL" | "LOW_CONFIDENCE" | "PAST_HISTORY" | "FUTURE")
+      attr_accessor score: ::Float
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartEntitiesDetectionV2JobRequest
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor output_data_config: Types::OutputDataConfig
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor kms_key: ::String
+      attr_accessor language_code: ("en")
+      SENSITIVE: []
+    end
+
+    class StartEntitiesDetectionV2JobResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartICD10CMInferenceJobRequest
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor output_data_config: Types::OutputDataConfig
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor kms_key: ::String
+      attr_accessor language_code: ("en")
+      SENSITIVE: []
+    end
+
+    class StartICD10CMInferenceJobResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartPHIDetectionJobRequest
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor output_data_config: Types::OutputDataConfig
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor kms_key: ::String
+      attr_accessor language_code: ("en")
+      SENSITIVE: []
+    end
+
+    class StartPHIDetectionJobResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartRxNormInferenceJobRequest
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor output_data_config: Types::OutputDataConfig
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor kms_key: ::String
+      attr_accessor language_code: ("en")
+      SENSITIVE: []
+    end
+
+    class StartRxNormInferenceJobResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartSNOMEDCTInferenceJobRequest
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor output_data_config: Types::OutputDataConfig
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor kms_key: ::String
+      attr_accessor language_code: ("en")
+      SENSITIVE: []
+    end
+
+    class StartSNOMEDCTInferenceJobResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopEntitiesDetectionV2JobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopEntitiesDetectionV2JobResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopICD10CMInferenceJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopICD10CMInferenceJobResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopPHIDetectionJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopPHIDetectionJobResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopRxNormInferenceJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopRxNormInferenceJobResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopSNOMEDCTInferenceJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopSNOMEDCTInferenceJobResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class TextSizeLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Trait
+      attr_accessor name: ("SIGN" | "SYMPTOM" | "DIAGNOSIS" | "NEGATION" | "PERTAINS_TO_FAMILY" | "HYPOTHETICAL" | "LOW_CONFIDENCE" | "PAST_HISTORY" | "FUTURE")
+      attr_accessor score: ::Float
+      SENSITIVE: []
+    end
+
+    class UnmappedAttribute
+      attr_accessor type: ("MEDICATION" | "MEDICAL_CONDITION" | "PROTECTED_HEALTH_INFORMATION" | "TEST_TREATMENT_PROCEDURE" | "ANATOMY" | "TIME_EXPRESSION" | "BEHAVIORAL_ENVIRONMENTAL_SOCIAL")
+      attr_accessor attribute: Types::Attribute
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

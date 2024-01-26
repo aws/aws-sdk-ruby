@@ -1,0 +1,309 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ControlTower
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ControlOperation
+      attr_accessor end_time: ::Time
+      attr_accessor operation_type: ("ENABLE_CONTROL" | "DISABLE_CONTROL" | "UPDATE_ENABLED_CONTROL")
+      attr_accessor start_time: ::Time
+      attr_accessor status: ("SUCCEEDED" | "FAILED" | "IN_PROGRESS")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLandingZoneInput
+      attr_accessor manifest: untyped
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLandingZoneOutput
+      attr_accessor arn: ::String
+      attr_accessor operation_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLandingZoneInput
+      attr_accessor landing_zone_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLandingZoneOutput
+      attr_accessor operation_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DisableControlInput
+      attr_accessor control_identifier: ::String
+      attr_accessor target_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DisableControlOutput
+      attr_accessor operation_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DriftStatusSummary
+      attr_accessor drift_status: ("DRIFTED" | "IN_SYNC" | "NOT_CHECKING" | "UNKNOWN")
+      SENSITIVE: []
+    end
+
+    class EnableControlInput
+      attr_accessor control_identifier: ::String
+      attr_accessor parameters: ::Array[Types::EnabledControlParameter]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor target_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class EnableControlOutput
+      attr_accessor arn: ::String
+      attr_accessor operation_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class EnabledControlDetails
+      attr_accessor arn: ::String
+      attr_accessor control_identifier: ::String
+      attr_accessor drift_status_summary: Types::DriftStatusSummary
+      attr_accessor parameters: ::Array[Types::EnabledControlParameterSummary]
+      attr_accessor status_summary: Types::EnablementStatusSummary
+      attr_accessor target_identifier: ::String
+      attr_accessor target_regions: ::Array[Types::Region]
+      SENSITIVE: []
+    end
+
+    class EnabledControlParameter
+      attr_accessor key: ::String
+      attr_accessor value: untyped
+      SENSITIVE: []
+    end
+
+    class EnabledControlParameterSummary
+      attr_accessor key: ::String
+      attr_accessor value: untyped
+      SENSITIVE: []
+    end
+
+    class EnabledControlSummary
+      attr_accessor arn: ::String
+      attr_accessor control_identifier: ::String
+      attr_accessor drift_status_summary: Types::DriftStatusSummary
+      attr_accessor status_summary: Types::EnablementStatusSummary
+      attr_accessor target_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class EnablementStatusSummary
+      attr_accessor last_operation_identifier: ::String
+      attr_accessor status: ("SUCCEEDED" | "FAILED" | "UNDER_CHANGE")
+      SENSITIVE: []
+    end
+
+    class GetControlOperationInput
+      attr_accessor operation_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetControlOperationOutput
+      attr_accessor control_operation: Types::ControlOperation
+      SENSITIVE: []
+    end
+
+    class GetEnabledControlInput
+      attr_accessor enabled_control_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetEnabledControlOutput
+      attr_accessor enabled_control_details: Types::EnabledControlDetails
+      SENSITIVE: []
+    end
+
+    class GetLandingZoneInput
+      attr_accessor landing_zone_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetLandingZoneOperationInput
+      attr_accessor operation_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetLandingZoneOperationOutput
+      attr_accessor operation_details: Types::LandingZoneOperationDetail
+      SENSITIVE: []
+    end
+
+    class GetLandingZoneOutput
+      attr_accessor landing_zone: Types::LandingZoneDetail
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LandingZoneDetail
+      attr_accessor arn: ::String
+      attr_accessor drift_status: Types::LandingZoneDriftStatusSummary
+      attr_accessor latest_available_version: ::String
+      attr_accessor manifest: untyped
+      attr_accessor status: ("ACTIVE" | "PROCESSING" | "FAILED")
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class LandingZoneDriftStatusSummary
+      attr_accessor status: ("DRIFTED" | "IN_SYNC")
+      SENSITIVE: []
+    end
+
+    class LandingZoneOperationDetail
+      attr_accessor end_time: ::Time
+      attr_accessor operation_type: ("DELETE" | "CREATE" | "UPDATE" | "RESET")
+      attr_accessor start_time: ::Time
+      attr_accessor status: ("SUCCEEDED" | "FAILED" | "IN_PROGRESS")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class LandingZoneSummary
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnabledControlsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor target_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnabledControlsOutput
+      attr_accessor enabled_controls: ::Array[Types::EnabledControlSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLandingZonesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLandingZonesOutput
+      attr_accessor landing_zones: ::Array[Types::LandingZoneSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Region
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ResetLandingZoneInput
+      attr_accessor landing_zone_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ResetLandingZoneOutput
+      attr_accessor operation_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UpdateEnabledControlInput
+      attr_accessor enabled_control_identifier: ::String
+      attr_accessor parameters: ::Array[Types::EnabledControlParameter]
+      SENSITIVE: []
+    end
+
+    class UpdateEnabledControlOutput
+      attr_accessor operation_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateLandingZoneInput
+      attr_accessor landing_zone_identifier: ::String
+      attr_accessor manifest: untyped
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateLandingZoneOutput
+      attr_accessor operation_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

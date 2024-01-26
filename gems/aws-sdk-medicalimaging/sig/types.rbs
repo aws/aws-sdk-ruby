@@ -1,0 +1,477 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MedicalImaging
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CopyDestinationImageSet
+      attr_accessor image_set_id: ::String
+      attr_accessor latest_version_id: ::String
+      SENSITIVE: []
+    end
+
+    class CopyDestinationImageSetProperties
+      attr_accessor image_set_id: ::String
+      attr_accessor latest_version_id: ::String
+      attr_accessor image_set_state: ("ACTIVE" | "LOCKED" | "DELETED")
+      attr_accessor image_set_workflow_status: ("CREATED" | "COPIED" | "COPYING" | "COPYING_WITH_READ_ONLY_ACCESS" | "COPY_FAILED" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor image_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CopyImageSetInformation
+      attr_accessor source_image_set: Types::CopySourceImageSetInformation
+      attr_accessor destination_image_set: Types::CopyDestinationImageSet
+      SENSITIVE: []
+    end
+
+    class CopyImageSetRequest
+      attr_accessor datastore_id: ::String
+      attr_accessor source_image_set_id: ::String
+      attr_accessor copy_image_set_information: Types::CopyImageSetInformation
+      SENSITIVE: []
+    end
+
+    class CopyImageSetResponse
+      attr_accessor datastore_id: ::String
+      attr_accessor source_image_set_properties: Types::CopySourceImageSetProperties
+      attr_accessor destination_image_set_properties: Types::CopyDestinationImageSetProperties
+      SENSITIVE: []
+    end
+
+    class CopySourceImageSetInformation
+      attr_accessor latest_version_id: ::String
+      SENSITIVE: []
+    end
+
+    class CopySourceImageSetProperties
+      attr_accessor image_set_id: ::String
+      attr_accessor latest_version_id: ::String
+      attr_accessor image_set_state: ("ACTIVE" | "LOCKED" | "DELETED")
+      attr_accessor image_set_workflow_status: ("CREATED" | "COPIED" | "COPYING" | "COPYING_WITH_READ_ONLY_ACCESS" | "COPY_FAILED" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor image_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDatastoreRequest
+      attr_accessor datastore_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDatastoreResponse
+      attr_accessor datastore_id: ::String
+      attr_accessor datastore_status: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class DICOMImportJobProperties
+      attr_accessor job_id: ::String
+      attr_accessor job_name: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor datastore_id: ::String
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor ended_at: ::Time
+      attr_accessor submitted_at: ::Time
+      attr_accessor input_s3_uri: ::String
+      attr_accessor output_s3_uri: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DICOMImportJobSummary
+      attr_accessor job_id: ::String
+      attr_accessor job_name: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor datastore_id: ::String
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor ended_at: ::Time
+      attr_accessor submitted_at: ::Time
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DICOMStudyDateAndTime
+      attr_accessor dicom_study_date: ::String
+      attr_accessor dicom_study_time: ::String
+      SENSITIVE: [:dicom_study_date, :dicom_study_time]
+    end
+
+    class DICOMTags
+      attr_accessor dicom_patient_id: ::String
+      attr_accessor dicom_patient_name: ::String
+      attr_accessor dicom_patient_birth_date: ::String
+      attr_accessor dicom_patient_sex: ::String
+      attr_accessor dicom_study_instance_uid: ::String
+      attr_accessor dicom_study_id: ::String
+      attr_accessor dicom_study_description: ::String
+      attr_accessor dicom_number_of_study_related_series: ::Integer
+      attr_accessor dicom_number_of_study_related_instances: ::Integer
+      attr_accessor dicom_accession_number: ::String
+      attr_accessor dicom_study_date: ::String
+      attr_accessor dicom_study_time: ::String
+      SENSITIVE: [:dicom_patient_id, :dicom_patient_name, :dicom_patient_birth_date, :dicom_patient_sex, :dicom_study_instance_uid, :dicom_study_id, :dicom_study_description, :dicom_accession_number, :dicom_study_date, :dicom_study_time]
+    end
+
+    class DICOMUpdates
+      attr_accessor removable_attributes: ::String
+      attr_accessor updatable_attributes: ::String
+      SENSITIVE: [:removable_attributes, :updatable_attributes]
+    end
+
+    class DatastoreProperties
+      attr_accessor datastore_id: ::String
+      attr_accessor datastore_name: ::String
+      attr_accessor datastore_status: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "DELETED")
+      attr_accessor kms_key_arn: ::String
+      attr_accessor datastore_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DatastoreSummary
+      attr_accessor datastore_id: ::String
+      attr_accessor datastore_name: ::String
+      attr_accessor datastore_status: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "DELETED")
+      attr_accessor datastore_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteDatastoreRequest
+      attr_accessor datastore_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDatastoreResponse
+      attr_accessor datastore_id: ::String
+      attr_accessor datastore_status: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class DeleteImageSetRequest
+      attr_accessor datastore_id: ::String
+      attr_accessor image_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteImageSetResponse
+      attr_accessor datastore_id: ::String
+      attr_accessor image_set_id: ::String
+      attr_accessor image_set_state: ("ACTIVE" | "LOCKED" | "DELETED")
+      attr_accessor image_set_workflow_status: ("CREATED" | "COPIED" | "COPYING" | "COPYING_WITH_READ_ONLY_ACCESS" | "COPY_FAILED" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class GetDICOMImportJobRequest
+      attr_accessor datastore_id: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDICOMImportJobResponse
+      attr_accessor job_properties: Types::DICOMImportJobProperties
+      SENSITIVE: []
+    end
+
+    class GetDatastoreRequest
+      attr_accessor datastore_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDatastoreResponse
+      attr_accessor datastore_properties: Types::DatastoreProperties
+      SENSITIVE: []
+    end
+
+    class GetImageFrameRequest
+      attr_accessor datastore_id: ::String
+      attr_accessor image_set_id: ::String
+      attr_accessor image_frame_information: Types::ImageFrameInformation
+      SENSITIVE: []
+    end
+
+    class GetImageFrameResponse
+      attr_accessor image_frame_blob: ::IO
+      attr_accessor content_type: ::String
+      SENSITIVE: []
+    end
+
+    class GetImageSetMetadataRequest
+      attr_accessor datastore_id: ::String
+      attr_accessor image_set_id: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetImageSetMetadataResponse
+      attr_accessor image_set_metadata_blob: ::IO
+      attr_accessor content_type: ::String
+      attr_accessor content_encoding: ::String
+      SENSITIVE: []
+    end
+
+    class GetImageSetRequest
+      attr_accessor datastore_id: ::String
+      attr_accessor image_set_id: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetImageSetResponse
+      attr_accessor datastore_id: ::String
+      attr_accessor image_set_id: ::String
+      attr_accessor version_id: ::String
+      attr_accessor image_set_state: ("ACTIVE" | "LOCKED" | "DELETED")
+      attr_accessor image_set_workflow_status: ("CREATED" | "COPIED" | "COPYING" | "COPYING_WITH_READ_ONLY_ACCESS" | "COPY_FAILED" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor deleted_at: ::Time
+      attr_accessor message: ::String
+      attr_accessor image_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ImageFrameInformation
+      attr_accessor image_frame_id: ::String
+      SENSITIVE: []
+    end
+
+    class ImageSetProperties
+      attr_accessor image_set_id: ::String
+      attr_accessor version_id: ::String
+      attr_accessor image_set_state: ("ACTIVE" | "LOCKED" | "DELETED")
+      attr_accessor image_set_workflow_status: ("CREATED" | "COPIED" | "COPYING" | "COPYING_WITH_READ_ONLY_ACCESS" | "COPY_FAILED" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor deleted_at: ::Time
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ImageSetsMetadataSummary
+      attr_accessor image_set_id: ::String
+      attr_accessor version: ::Integer
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor dicom_tags: Types::DICOMTags
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListDICOMImportJobsRequest
+      attr_accessor datastore_id: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDICOMImportJobsResponse
+      attr_accessor job_summaries: ::Array[Types::DICOMImportJobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDatastoresRequest
+      attr_accessor datastore_status: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "DELETED")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDatastoresResponse
+      attr_accessor datastore_summaries: ::Array[Types::DatastoreSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImageSetVersionsRequest
+      attr_accessor datastore_id: ::String
+      attr_accessor image_set_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListImageSetVersionsResponse
+      attr_accessor image_set_properties_list: ::Array[Types::ImageSetProperties]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class MetadataUpdates
+      attr_accessor dicom_updates: Types::DICOMUpdates
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DicomUpdates < MetadataUpdates
+      end
+      class Unknown < MetadataUpdates
+      end
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SearchByAttributeValue
+      attr_accessor dicom_patient_id: ::String
+      attr_accessor dicom_accession_number: ::String
+      attr_accessor dicom_study_id: ::String
+      attr_accessor dicom_study_instance_uid: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor dicom_study_date_and_time: Types::DICOMStudyDateAndTime
+      attr_accessor unknown: untyped
+      SENSITIVE: [:dicom_patient_id, :dicom_accession_number, :dicom_study_id, :dicom_study_instance_uid]
+
+      class DicomPatientId < SearchByAttributeValue
+      end
+      class DicomAccessionNumber < SearchByAttributeValue
+      end
+      class DicomStudyId < SearchByAttributeValue
+      end
+      class DicomStudyInstanceUid < SearchByAttributeValue
+      end
+      class CreatedAt < SearchByAttributeValue
+      end
+      class DicomStudyDateAndTime < SearchByAttributeValue
+      end
+      class Unknown < SearchByAttributeValue
+      end
+    end
+
+    class SearchCriteria
+      attr_accessor filters: ::Array[Types::SearchFilter]
+      SENSITIVE: []
+    end
+
+    class SearchFilter
+      attr_accessor values: ::Array[Types::SearchByAttributeValue]
+      attr_accessor operator: ("EQUAL" | "BETWEEN")
+      SENSITIVE: []
+    end
+
+    class SearchImageSetsRequest
+      attr_accessor datastore_id: ::String
+      attr_accessor search_criteria: Types::SearchCriteria
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:search_criteria]
+    end
+
+    class SearchImageSetsResponse
+      attr_accessor image_sets_metadata_summaries: ::Array[Types::ImageSetsMetadataSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartDICOMImportJobRequest
+      attr_accessor job_name: ::String
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor datastore_id: ::String
+      attr_accessor input_s3_uri: ::String
+      attr_accessor output_s3_uri: ::String
+      SENSITIVE: []
+    end
+
+    class StartDICOMImportJobResponse
+      attr_accessor datastore_id: ::String
+      attr_accessor job_id: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor submitted_at: ::Time
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateImageSetMetadataRequest
+      attr_accessor datastore_id: ::String
+      attr_accessor image_set_id: ::String
+      attr_accessor latest_version_id: ::String
+      attr_accessor update_image_set_metadata_updates: Types::MetadataUpdates
+      SENSITIVE: []
+    end
+
+    class UpdateImageSetMetadataResponse
+      attr_accessor datastore_id: ::String
+      attr_accessor image_set_id: ::String
+      attr_accessor latest_version_id: ::String
+      attr_accessor image_set_state: ("ACTIVE" | "LOCKED" | "DELETED")
+      attr_accessor image_set_workflow_status: ("CREATED" | "COPIED" | "COPYING" | "COPYING_WITH_READ_ONLY_ACCESS" | "COPY_FAILED" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

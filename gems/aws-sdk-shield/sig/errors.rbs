@@ -1,0 +1,61 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Shield
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AccessDeniedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class AccessDeniedForDependencyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InternalErrorException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidOperationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidPaginationTokenException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidParameterException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def reason: () -> ::String
+        def fields: () -> ::String
+      end
+      class InvalidResourceException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LimitsExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def type: () -> ::String
+        def limit: () -> ::String
+      end
+      class LockedSubscriptionException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoAssociatedRoleException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class OptimisticLockException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceAlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def resource_type: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def resource_type: () -> ::String
+      end
+    end
+  end
+end

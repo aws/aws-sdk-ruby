@@ -1,0 +1,619 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ApplicationInsights
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AddWorkloadRequest
+      attr_accessor resource_group_name: ::String
+      attr_accessor component_name: ::String
+      attr_accessor workload_configuration: Types::WorkloadConfiguration
+      SENSITIVE: []
+    end
+
+    class AddWorkloadResponse
+      attr_accessor workload_id: ::String
+      attr_accessor workload_configuration: Types::WorkloadConfiguration
+      SENSITIVE: []
+    end
+
+    class ApplicationComponent
+      attr_accessor component_name: ::String
+      attr_accessor component_remarks: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor os_type: ("WINDOWS" | "LINUX")
+      attr_accessor tier: ("CUSTOM" | "DEFAULT" | "DOT_NET_CORE" | "DOT_NET_WORKER" | "DOT_NET_WEB_TIER" | "DOT_NET_WEB" | "SQL_SERVER" | "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP" | "MYSQL" | "POSTGRESQL" | "JAVA_JMX" | "ORACLE" | "SAP_HANA_MULTI_NODE" | "SAP_HANA_SINGLE_NODE" | "SAP_HANA_HIGH_AVAILABILITY" | "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE" | "SHAREPOINT" | "ACTIVE_DIRECTORY" | "SAP_NETWEAVER_STANDARD" | "SAP_NETWEAVER_DISTRIBUTED" | "SAP_NETWEAVER_HIGH_AVAILABILITY")
+      attr_accessor monitor: bool
+      attr_accessor detected_workload: ::Hash[("CUSTOM" | "DEFAULT" | "DOT_NET_CORE" | "DOT_NET_WORKER" | "DOT_NET_WEB_TIER" | "DOT_NET_WEB" | "SQL_SERVER" | "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP" | "MYSQL" | "POSTGRESQL" | "JAVA_JMX" | "ORACLE" | "SAP_HANA_MULTI_NODE" | "SAP_HANA_SINGLE_NODE" | "SAP_HANA_HIGH_AVAILABILITY" | "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE" | "SHAREPOINT" | "ACTIVE_DIRECTORY" | "SAP_NETWEAVER_STANDARD" | "SAP_NETWEAVER_DISTRIBUTED" | "SAP_NETWEAVER_HIGH_AVAILABILITY"), ::Hash[::String, ::String]]
+      SENSITIVE: []
+    end
+
+    class ApplicationInfo
+      attr_accessor account_id: ::String
+      attr_accessor resource_group_name: ::String
+      attr_accessor life_cycle: ::String
+      attr_accessor ops_item_sns_topic_arn: ::String
+      attr_accessor ops_center_enabled: bool
+      attr_accessor cwe_monitor_enabled: bool
+      attr_accessor remarks: ::String
+      attr_accessor auto_config_enabled: bool
+      attr_accessor discovery_type: ("RESOURCE_GROUP_BASED" | "ACCOUNT_BASED")
+      attr_accessor attach_missing_permission: bool
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigurationEvent
+      attr_accessor resource_group_name: ::String
+      attr_accessor account_id: ::String
+      attr_accessor monitored_resource_arn: ::String
+      attr_accessor event_status: ("INFO" | "WARN" | "ERROR")
+      attr_accessor event_resource_type: ("CLOUDWATCH_ALARM" | "CLOUDWATCH_LOG" | "CLOUDFORMATION" | "SSM_ASSOCIATION")
+      attr_accessor event_time: ::Time
+      attr_accessor event_detail: ::String
+      attr_accessor event_resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateApplicationRequest
+      attr_accessor resource_group_name: ::String
+      attr_accessor ops_center_enabled: bool
+      attr_accessor cwe_monitor_enabled: bool
+      attr_accessor ops_item_sns_topic_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor auto_config_enabled: bool
+      attr_accessor auto_create: bool
+      attr_accessor grouping_type: ("ACCOUNT_BASED")
+      attr_accessor attach_missing_permission: bool
+      SENSITIVE: []
+    end
+
+    class CreateApplicationResponse
+      attr_accessor application_info: Types::ApplicationInfo
+      SENSITIVE: []
+    end
+
+    class CreateComponentRequest
+      attr_accessor resource_group_name: ::String
+      attr_accessor component_name: ::String
+      attr_accessor resource_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateComponentResponse < Aws::EmptyStructure
+    end
+
+    class CreateLogPatternRequest
+      attr_accessor resource_group_name: ::String
+      attr_accessor pattern_set_name: ::String
+      attr_accessor pattern_name: ::String
+      attr_accessor pattern: ::String
+      attr_accessor rank: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateLogPatternResponse
+      attr_accessor log_pattern: Types::LogPattern
+      attr_accessor resource_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationRequest
+      attr_accessor resource_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteComponentRequest
+      attr_accessor resource_group_name: ::String
+      attr_accessor component_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteComponentResponse < Aws::EmptyStructure
+    end
+
+    class DeleteLogPatternRequest
+      attr_accessor resource_group_name: ::String
+      attr_accessor pattern_set_name: ::String
+      attr_accessor pattern_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLogPatternResponse < Aws::EmptyStructure
+    end
+
+    class DescribeApplicationRequest
+      attr_accessor resource_group_name: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationResponse
+      attr_accessor application_info: Types::ApplicationInfo
+      SENSITIVE: []
+    end
+
+    class DescribeComponentConfigurationRecommendationRequest
+      attr_accessor resource_group_name: ::String
+      attr_accessor component_name: ::String
+      attr_accessor tier: ("CUSTOM" | "DEFAULT" | "DOT_NET_CORE" | "DOT_NET_WORKER" | "DOT_NET_WEB_TIER" | "DOT_NET_WEB" | "SQL_SERVER" | "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP" | "MYSQL" | "POSTGRESQL" | "JAVA_JMX" | "ORACLE" | "SAP_HANA_MULTI_NODE" | "SAP_HANA_SINGLE_NODE" | "SAP_HANA_HIGH_AVAILABILITY" | "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE" | "SHAREPOINT" | "ACTIVE_DIRECTORY" | "SAP_NETWEAVER_STANDARD" | "SAP_NETWEAVER_DISTRIBUTED" | "SAP_NETWEAVER_HIGH_AVAILABILITY")
+      attr_accessor workload_name: ::String
+      attr_accessor recommendation_type: ("INFRA_ONLY" | "WORKLOAD_ONLY" | "ALL")
+      SENSITIVE: []
+    end
+
+    class DescribeComponentConfigurationRecommendationResponse
+      attr_accessor component_configuration: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeComponentConfigurationRequest
+      attr_accessor resource_group_name: ::String
+      attr_accessor component_name: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeComponentConfigurationResponse
+      attr_accessor monitor: bool
+      attr_accessor tier: ("CUSTOM" | "DEFAULT" | "DOT_NET_CORE" | "DOT_NET_WORKER" | "DOT_NET_WEB_TIER" | "DOT_NET_WEB" | "SQL_SERVER" | "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP" | "MYSQL" | "POSTGRESQL" | "JAVA_JMX" | "ORACLE" | "SAP_HANA_MULTI_NODE" | "SAP_HANA_SINGLE_NODE" | "SAP_HANA_HIGH_AVAILABILITY" | "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE" | "SHAREPOINT" | "ACTIVE_DIRECTORY" | "SAP_NETWEAVER_STANDARD" | "SAP_NETWEAVER_DISTRIBUTED" | "SAP_NETWEAVER_HIGH_AVAILABILITY")
+      attr_accessor component_configuration: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeComponentRequest
+      attr_accessor resource_group_name: ::String
+      attr_accessor component_name: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeComponentResponse
+      attr_accessor application_component: Types::ApplicationComponent
+      attr_accessor resource_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeLogPatternRequest
+      attr_accessor resource_group_name: ::String
+      attr_accessor pattern_set_name: ::String
+      attr_accessor pattern_name: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLogPatternResponse
+      attr_accessor resource_group_name: ::String
+      attr_accessor account_id: ::String
+      attr_accessor log_pattern: Types::LogPattern
+      SENSITIVE: []
+    end
+
+    class DescribeObservationRequest
+      attr_accessor observation_id: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeObservationResponse
+      attr_accessor observation: Types::Observation
+      SENSITIVE: []
+    end
+
+    class DescribeProblemObservationsRequest
+      attr_accessor problem_id: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeProblemObservationsResponse
+      attr_accessor related_observations: Types::RelatedObservations
+      SENSITIVE: []
+    end
+
+    class DescribeProblemRequest
+      attr_accessor problem_id: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeProblemResponse
+      attr_accessor problem: Types::Problem
+      SENSITIVE: []
+    end
+
+    class DescribeWorkloadRequest
+      attr_accessor resource_group_name: ::String
+      attr_accessor component_name: ::String
+      attr_accessor workload_id: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorkloadResponse
+      attr_accessor workload_id: ::String
+      attr_accessor workload_remarks: ::String
+      attr_accessor workload_configuration: Types::WorkloadConfiguration
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationsResponse
+      attr_accessor application_info_list: ::Array[Types::ApplicationInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListComponentsRequest
+      attr_accessor resource_group_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListComponentsResponse
+      attr_accessor application_component_list: ::Array[Types::ApplicationComponent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConfigurationHistoryRequest
+      attr_accessor resource_group_name: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor event_status: ("INFO" | "WARN" | "ERROR")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListConfigurationHistoryResponse
+      attr_accessor event_list: ::Array[Types::ConfigurationEvent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLogPatternSetsRequest
+      attr_accessor resource_group_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListLogPatternSetsResponse
+      attr_accessor resource_group_name: ::String
+      attr_accessor account_id: ::String
+      attr_accessor log_pattern_sets: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLogPatternsRequest
+      attr_accessor resource_group_name: ::String
+      attr_accessor pattern_set_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListLogPatternsResponse
+      attr_accessor resource_group_name: ::String
+      attr_accessor account_id: ::String
+      attr_accessor log_patterns: ::Array[Types::LogPattern]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProblemsRequest
+      attr_accessor account_id: ::String
+      attr_accessor resource_group_name: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor component_name: ::String
+      attr_accessor visibility: ("IGNORED" | "VISIBLE")
+      SENSITIVE: []
+    end
+
+    class ListProblemsResponse
+      attr_accessor problem_list: ::Array[Types::Problem]
+      attr_accessor next_token: ::String
+      attr_accessor resource_group_name: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListWorkloadsRequest
+      attr_accessor resource_group_name: ::String
+      attr_accessor component_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkloadsResponse
+      attr_accessor workload_list: ::Array[Types::Workload]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LogPattern
+      attr_accessor pattern_set_name: ::String
+      attr_accessor pattern_name: ::String
+      attr_accessor pattern: ::String
+      attr_accessor rank: ::Integer
+      SENSITIVE: []
+    end
+
+    class Observation
+      attr_accessor id: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor source_type: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor log_group: ::String
+      attr_accessor line_time: ::Time
+      attr_accessor log_text: ::String
+      attr_accessor log_filter: ("ERROR" | "WARN" | "INFO")
+      attr_accessor metric_namespace: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor unit: ::String
+      attr_accessor value: ::Float
+      attr_accessor cloud_watch_event_id: ::String
+      attr_accessor cloud_watch_event_source: ("EC2" | "CODE_DEPLOY" | "HEALTH" | "RDS")
+      attr_accessor cloud_watch_event_detail_type: ::String
+      attr_accessor health_event_arn: ::String
+      attr_accessor health_service: ::String
+      attr_accessor health_event_type_code: ::String
+      attr_accessor health_event_type_category: ::String
+      attr_accessor health_event_description: ::String
+      attr_accessor code_deploy_deployment_id: ::String
+      attr_accessor code_deploy_deployment_group: ::String
+      attr_accessor code_deploy_state: ::String
+      attr_accessor code_deploy_application: ::String
+      attr_accessor code_deploy_instance_group_id: ::String
+      attr_accessor ec2_state: ::String
+      attr_accessor rds_event_categories: ::String
+      attr_accessor rds_event_message: ::String
+      attr_accessor s3_event_name: ::String
+      attr_accessor states_execution_arn: ::String
+      attr_accessor states_arn: ::String
+      attr_accessor states_status: ::String
+      attr_accessor states_input: ::String
+      attr_accessor ebs_event: ::String
+      attr_accessor ebs_result: ::String
+      attr_accessor ebs_cause: ::String
+      attr_accessor ebs_request_id: ::String
+      attr_accessor x_ray_fault_percent: ::Integer
+      attr_accessor x_ray_throttle_percent: ::Integer
+      attr_accessor x_ray_error_percent: ::Integer
+      attr_accessor x_ray_request_count: ::Integer
+      attr_accessor x_ray_request_average_latency: ::Integer
+      attr_accessor x_ray_node_name: ::String
+      attr_accessor x_ray_node_type: ::String
+      SENSITIVE: []
+    end
+
+    class Problem
+      attr_accessor id: ::String
+      attr_accessor title: ::String
+      attr_accessor insights: ::String
+      attr_accessor status: ("IGNORE" | "RESOLVED" | "PENDING" | "RECURRING" | "RECOVERING")
+      attr_accessor affected_resource: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor severity_level: ("Informative" | "Low" | "Medium" | "High")
+      attr_accessor account_id: ::String
+      attr_accessor resource_group_name: ::String
+      attr_accessor feedback: ::Hash[("INSIGHTS_FEEDBACK"), ("NOT_SPECIFIED" | "USEFUL" | "NOT_USEFUL")]
+      attr_accessor recurring_count: ::Integer
+      attr_accessor last_recurrence_time: ::Time
+      attr_accessor visibility: ("IGNORED" | "VISIBLE")
+      attr_accessor resolution_method: ("MANUAL" | "AUTOMATIC" | "UNRESOLVED")
+      SENSITIVE: []
+    end
+
+    class RelatedObservations
+      attr_accessor observation_list: ::Array[Types::Observation]
+      SENSITIVE: []
+    end
+
+    class RemoveWorkloadRequest
+      attr_accessor resource_group_name: ::String
+      attr_accessor component_name: ::String
+      attr_accessor workload_id: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveWorkloadResponse < Aws::EmptyStructure
+    end
+
+    class ResourceInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TagsAlreadyExistException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateApplicationRequest
+      attr_accessor resource_group_name: ::String
+      attr_accessor ops_center_enabled: bool
+      attr_accessor cwe_monitor_enabled: bool
+      attr_accessor ops_item_sns_topic_arn: ::String
+      attr_accessor remove_sns_topic: bool
+      attr_accessor auto_config_enabled: bool
+      attr_accessor attach_missing_permission: bool
+      SENSITIVE: []
+    end
+
+    class UpdateApplicationResponse
+      attr_accessor application_info: Types::ApplicationInfo
+      SENSITIVE: []
+    end
+
+    class UpdateComponentConfigurationRequest
+      attr_accessor resource_group_name: ::String
+      attr_accessor component_name: ::String
+      attr_accessor monitor: bool
+      attr_accessor tier: ("CUSTOM" | "DEFAULT" | "DOT_NET_CORE" | "DOT_NET_WORKER" | "DOT_NET_WEB_TIER" | "DOT_NET_WEB" | "SQL_SERVER" | "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP" | "MYSQL" | "POSTGRESQL" | "JAVA_JMX" | "ORACLE" | "SAP_HANA_MULTI_NODE" | "SAP_HANA_SINGLE_NODE" | "SAP_HANA_HIGH_AVAILABILITY" | "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE" | "SHAREPOINT" | "ACTIVE_DIRECTORY" | "SAP_NETWEAVER_STANDARD" | "SAP_NETWEAVER_DISTRIBUTED" | "SAP_NETWEAVER_HIGH_AVAILABILITY")
+      attr_accessor component_configuration: ::String
+      attr_accessor auto_config_enabled: bool
+      SENSITIVE: []
+    end
+
+    class UpdateComponentConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class UpdateComponentRequest
+      attr_accessor resource_group_name: ::String
+      attr_accessor component_name: ::String
+      attr_accessor new_component_name: ::String
+      attr_accessor resource_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateComponentResponse < Aws::EmptyStructure
+    end
+
+    class UpdateLogPatternRequest
+      attr_accessor resource_group_name: ::String
+      attr_accessor pattern_set_name: ::String
+      attr_accessor pattern_name: ::String
+      attr_accessor pattern: ::String
+      attr_accessor rank: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateLogPatternResponse
+      attr_accessor resource_group_name: ::String
+      attr_accessor log_pattern: Types::LogPattern
+      SENSITIVE: []
+    end
+
+    class UpdateProblemRequest
+      attr_accessor problem_id: ::String
+      attr_accessor update_status: ("RESOLVED")
+      attr_accessor visibility: ("IGNORED" | "VISIBLE")
+      SENSITIVE: []
+    end
+
+    class UpdateProblemResponse < Aws::EmptyStructure
+    end
+
+    class UpdateWorkloadRequest
+      attr_accessor resource_group_name: ::String
+      attr_accessor component_name: ::String
+      attr_accessor workload_id: ::String
+      attr_accessor workload_configuration: Types::WorkloadConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateWorkloadResponse
+      attr_accessor workload_id: ::String
+      attr_accessor workload_configuration: Types::WorkloadConfiguration
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Workload
+      attr_accessor workload_id: ::String
+      attr_accessor component_name: ::String
+      attr_accessor workload_name: ::String
+      attr_accessor tier: ("CUSTOM" | "DEFAULT" | "DOT_NET_CORE" | "DOT_NET_WORKER" | "DOT_NET_WEB_TIER" | "DOT_NET_WEB" | "SQL_SERVER" | "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP" | "MYSQL" | "POSTGRESQL" | "JAVA_JMX" | "ORACLE" | "SAP_HANA_MULTI_NODE" | "SAP_HANA_SINGLE_NODE" | "SAP_HANA_HIGH_AVAILABILITY" | "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE" | "SHAREPOINT" | "ACTIVE_DIRECTORY" | "SAP_NETWEAVER_STANDARD" | "SAP_NETWEAVER_DISTRIBUTED" | "SAP_NETWEAVER_HIGH_AVAILABILITY")
+      attr_accessor workload_remarks: ::String
+      SENSITIVE: []
+    end
+
+    class WorkloadConfiguration
+      attr_accessor workload_name: ::String
+      attr_accessor tier: ("CUSTOM" | "DEFAULT" | "DOT_NET_CORE" | "DOT_NET_WORKER" | "DOT_NET_WEB_TIER" | "DOT_NET_WEB" | "SQL_SERVER" | "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP" | "MYSQL" | "POSTGRESQL" | "JAVA_JMX" | "ORACLE" | "SAP_HANA_MULTI_NODE" | "SAP_HANA_SINGLE_NODE" | "SAP_HANA_HIGH_AVAILABILITY" | "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE" | "SHAREPOINT" | "ACTIVE_DIRECTORY" | "SAP_NETWEAVER_STANDARD" | "SAP_NETWEAVER_DISTRIBUTED" | "SAP_NETWEAVER_HIGH_AVAILABILITY")
+      attr_accessor configuration: ::String
+      SENSITIVE: []
+    end
+  end
+end

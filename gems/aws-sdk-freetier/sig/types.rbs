@@ -1,0 +1,68 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::FreeTier
+  module Types
+
+    class DimensionValues
+      attr_accessor key: ("SERVICE" | "OPERATION" | "USAGE_TYPE" | "REGION" | "FREE_TIER_TYPE" | "DESCRIPTION" | "USAGE_PERCENTAGE")
+      attr_accessor match_options: ::Array[("EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL")]
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Expression
+      attr_accessor and: ::Array[Types::Expression]
+      attr_accessor dimensions: Types::DimensionValues
+      attr_accessor not: Types::Expression
+      attr_accessor or: ::Array[Types::Expression]
+      SENSITIVE: []
+    end
+
+    class FreeTierUsage
+      attr_accessor actual_usage_amount: ::Float
+      attr_accessor description: ::String
+      attr_accessor forecasted_usage_amount: ::Float
+      attr_accessor free_tier_type: ::String
+      attr_accessor limit: ::Float
+      attr_accessor operation: ::String
+      attr_accessor region: ::String
+      attr_accessor service: ::String
+      attr_accessor unit: ::String
+      attr_accessor usage_type: ::String
+      SENSITIVE: []
+    end
+
+    class GetFreeTierUsageRequest
+      attr_accessor filter: Types::Expression
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetFreeTierUsageResponse
+      attr_accessor free_tier_usages: ::Array[Types::FreeTierUsage]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

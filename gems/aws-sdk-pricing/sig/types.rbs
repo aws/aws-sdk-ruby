@@ -1,0 +1,139 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Pricing
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AttributeValue
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeServicesRequest
+      attr_accessor service_code: ::String
+      attr_accessor format_version: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeServicesResponse
+      attr_accessor services: ::Array[Types::Service]
+      attr_accessor format_version: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ExpiredNextTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor type: ("TERM_MATCH")
+      attr_accessor field: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class GetAttributeValuesRequest
+      attr_accessor service_code: ::String
+      attr_accessor attribute_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetAttributeValuesResponse
+      attr_accessor attribute_values: ::Array[Types::AttributeValue]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetPriceListFileUrlRequest
+      attr_accessor price_list_arn: ::String
+      attr_accessor file_format: ::String
+      SENSITIVE: []
+    end
+
+    class GetPriceListFileUrlResponse
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class GetProductsRequest
+      attr_accessor service_code: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor format_version: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetProductsResponse
+      attr_accessor format_version: ::String
+      attr_accessor price_list: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class InternalErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidNextTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListPriceListsRequest
+      attr_accessor service_code: ::String
+      attr_accessor effective_date: ::Time
+      attr_accessor region_code: ::String
+      attr_accessor currency_code: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPriceListsResponse
+      attr_accessor price_lists: ::Array[Types::PriceList]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PriceList
+      attr_accessor price_list_arn: ::String
+      attr_accessor region_code: ::String
+      attr_accessor currency_code: ::String
+      attr_accessor file_formats: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Service
+      attr_accessor service_code: ::String
+      attr_accessor attribute_names: ::Array[::String]
+      SENSITIVE: []
+    end
+  end
+end

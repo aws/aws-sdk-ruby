@@ -1,0 +1,1427 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AlexaForBusiness
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _ApproveSkillResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ApproveSkillResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#approve_skill-instance_method
+      def approve_skill: (
+                           skill_id: ::String
+                         ) -> _ApproveSkillResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ApproveSkillResponseSuccess
+
+      interface _AssociateContactWithAddressBookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateContactWithAddressBookResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#associate_contact_with_address_book-instance_method
+      def associate_contact_with_address_book: (
+                                                 contact_arn: ::String,
+                                                 address_book_arn: ::String
+                                               ) -> _AssociateContactWithAddressBookResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateContactWithAddressBookResponseSuccess
+
+      interface _AssociateDeviceWithNetworkProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateDeviceWithNetworkProfileResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#associate_device_with_network_profile-instance_method
+      def associate_device_with_network_profile: (
+                                                   device_arn: ::String,
+                                                   network_profile_arn: ::String
+                                                 ) -> _AssociateDeviceWithNetworkProfileResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateDeviceWithNetworkProfileResponseSuccess
+
+      interface _AssociateDeviceWithRoomResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateDeviceWithRoomResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#associate_device_with_room-instance_method
+      def associate_device_with_room: (
+                                        ?device_arn: ::String,
+                                        ?room_arn: ::String
+                                      ) -> _AssociateDeviceWithRoomResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateDeviceWithRoomResponseSuccess
+
+      interface _AssociateSkillGroupWithRoomResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateSkillGroupWithRoomResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#associate_skill_group_with_room-instance_method
+      def associate_skill_group_with_room: (
+                                             ?skill_group_arn: ::String,
+                                             ?room_arn: ::String
+                                           ) -> _AssociateSkillGroupWithRoomResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateSkillGroupWithRoomResponseSuccess
+
+      interface _AssociateSkillWithSkillGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateSkillWithSkillGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#associate_skill_with_skill_group-instance_method
+      def associate_skill_with_skill_group: (
+                                              ?skill_group_arn: ::String,
+                                              skill_id: ::String
+                                            ) -> _AssociateSkillWithSkillGroupResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateSkillWithSkillGroupResponseSuccess
+
+      interface _AssociateSkillWithUsersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateSkillWithUsersResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#associate_skill_with_users-instance_method
+      def associate_skill_with_users: (
+                                        skill_id: ::String
+                                      ) -> _AssociateSkillWithUsersResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateSkillWithUsersResponseSuccess
+
+      interface _CreateAddressBookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAddressBookResponse]
+        def address_book_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#create_address_book-instance_method
+      def create_address_book: (
+                                 name: ::String,
+                                 ?description: ::String,
+                                 ?client_request_token: ::String,
+                                 ?tags: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String
+                                   },
+                                 ]
+                               ) -> _CreateAddressBookResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAddressBookResponseSuccess
+
+      interface _CreateBusinessReportScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBusinessReportScheduleResponse]
+        def schedule_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#create_business_report_schedule-instance_method
+      def create_business_report_schedule: (
+                                             ?schedule_name: ::String,
+                                             ?s3_bucket_name: ::String,
+                                             ?s3_key_prefix: ::String,
+                                             format: ("CSV" | "CSV_ZIP"),
+                                             content_range: {
+                                               interval: ("ONE_DAY" | "ONE_WEEK" | "THIRTY_DAYS")
+                                             },
+                                             ?recurrence: {
+                                               start_date: ::String?
+                                             },
+                                             ?client_request_token: ::String,
+                                             ?tags: Array[
+                                               {
+                                                 key: ::String,
+                                                 value: ::String
+                                               },
+                                             ]
+                                           ) -> _CreateBusinessReportScheduleResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBusinessReportScheduleResponseSuccess
+
+      interface _CreateConferenceProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConferenceProviderResponse]
+        def conference_provider_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#create_conference_provider-instance_method
+      def create_conference_provider: (
+                                        conference_provider_name: ::String,
+                                        conference_provider_type: ("CHIME" | "BLUEJEANS" | "FUZE" | "GOOGLE_HANGOUTS" | "POLYCOM" | "RINGCENTRAL" | "SKYPE_FOR_BUSINESS" | "WEBEX" | "ZOOM" | "CUSTOM"),
+                                        ?ip_dial_in: {
+                                          endpoint: ::String,
+                                          comms_protocol: ("SIP" | "SIPS" | "H323")
+                                        },
+                                        ?pstn_dial_in: {
+                                          country_code: ::String,
+                                          phone_number: ::String,
+                                          one_click_id_delay: ::String,
+                                          one_click_pin_delay: ::String
+                                        },
+                                        meeting_setting: {
+                                          require_pin: ("YES" | "NO" | "OPTIONAL")
+                                        },
+                                        ?client_request_token: ::String,
+                                        ?tags: Array[
+                                          {
+                                            key: ::String,
+                                            value: ::String
+                                          },
+                                        ]
+                                      ) -> _CreateConferenceProviderResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConferenceProviderResponseSuccess
+
+      interface _CreateContactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateContactResponse]
+        def contact_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#create_contact-instance_method
+      def create_contact: (
+                            ?display_name: ::String,
+                            first_name: ::String,
+                            ?last_name: ::String,
+                            ?phone_number: ::String,
+                            ?phone_numbers: Array[
+                              {
+                                number: ::String,
+                                type: ("MOBILE" | "WORK" | "HOME")
+                              },
+                            ],
+                            ?sip_addresses: Array[
+                              {
+                                uri: ::String,
+                                type: ("WORK")
+                              },
+                            ],
+                            ?client_request_token: ::String,
+                            ?tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ]
+                          ) -> _CreateContactResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContactResponseSuccess
+
+      interface _CreateGatewayGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGatewayGroupResponse]
+        def gateway_group_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#create_gateway_group-instance_method
+      def create_gateway_group: (
+                                  name: ::String,
+                                  ?description: ::String,
+                                  client_request_token: ::String,
+                                  ?tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String
+                                    },
+                                  ]
+                                ) -> _CreateGatewayGroupResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGatewayGroupResponseSuccess
+
+      interface _CreateNetworkProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateNetworkProfileResponse]
+        def network_profile_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#create_network_profile-instance_method
+      def create_network_profile: (
+                                    network_profile_name: ::String,
+                                    ?description: ::String,
+                                    ssid: ::String,
+                                    security_type: ("OPEN" | "WEP" | "WPA_PSK" | "WPA2_PSK" | "WPA2_ENTERPRISE"),
+                                    ?eap_method: ("EAP_TLS"),
+                                    ?current_password: ::String,
+                                    ?next_password: ::String,
+                                    ?certificate_authority_arn: ::String,
+                                    ?trust_anchors: Array[::String],
+                                    client_request_token: ::String,
+                                    ?tags: Array[
+                                      {
+                                        key: ::String,
+                                        value: ::String
+                                      },
+                                    ]
+                                  ) -> _CreateNetworkProfileResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNetworkProfileResponseSuccess
+
+      interface _CreateProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProfileResponse]
+        def profile_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#create_profile-instance_method
+      def create_profile: (
+                            profile_name: ::String,
+                            timezone: ::String,
+                            address: ::String,
+                            distance_unit: ("METRIC" | "IMPERIAL"),
+                            temperature_unit: ("FAHRENHEIT" | "CELSIUS"),
+                            wake_word: ("ALEXA" | "AMAZON" | "ECHO" | "COMPUTER"),
+                            ?locale: ::String,
+                            ?client_request_token: ::String,
+                            ?setup_mode_disabled: bool,
+                            ?max_volume_limit: ::Integer,
+                            ?pstn_enabled: bool,
+                            ?data_retention_opt_in: bool,
+                            ?meeting_room_configuration: {
+                              room_utilization_metrics_enabled: bool?,
+                              end_of_meeting_reminder: {
+                                reminder_at_minutes: Array[::Integer],
+                                reminder_type: ("ANNOUNCEMENT_TIME_CHECK" | "ANNOUNCEMENT_VARIABLE_TIME_LEFT" | "CHIME" | "KNOCK"),
+                                enabled: bool
+                              }?,
+                              instant_booking: {
+                                duration_in_minutes: ::Integer,
+                                enabled: bool
+                              }?,
+                              require_check_in: {
+                                release_after_minutes: ::Integer,
+                                enabled: bool
+                              }?,
+                              proactive_join: {
+                                enabled_by_motion: bool
+                              }?
+                            },
+                            ?tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ]
+                          ) -> _CreateProfileResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProfileResponseSuccess
+
+      interface _CreateRoomResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRoomResponse]
+        def room_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#create_room-instance_method
+      def create_room: (
+                         room_name: ::String,
+                         ?description: ::String,
+                         ?profile_arn: ::String,
+                         ?provider_calendar_id: ::String,
+                         ?client_request_token: ::String,
+                         ?tags: Array[
+                           {
+                             key: ::String,
+                             value: ::String
+                           },
+                         ]
+                       ) -> _CreateRoomResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRoomResponseSuccess
+
+      interface _CreateSkillGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSkillGroupResponse]
+        def skill_group_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#create_skill_group-instance_method
+      def create_skill_group: (
+                                skill_group_name: ::String,
+                                ?description: ::String,
+                                ?client_request_token: ::String,
+                                ?tags: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String
+                                  },
+                                ]
+                              ) -> _CreateSkillGroupResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSkillGroupResponseSuccess
+
+      interface _CreateUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateUserResponse]
+        def user_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#create_user-instance_method
+      def create_user: (
+                         user_id: ::String,
+                         ?first_name: ::String,
+                         ?last_name: ::String,
+                         ?email: ::String,
+                         ?client_request_token: ::String,
+                         ?tags: Array[
+                           {
+                             key: ::String,
+                             value: ::String
+                           },
+                         ]
+                       ) -> _CreateUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserResponseSuccess
+
+      interface _DeleteAddressBookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAddressBookResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#delete_address_book-instance_method
+      def delete_address_book: (
+                                 address_book_arn: ::String
+                               ) -> _DeleteAddressBookResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAddressBookResponseSuccess
+
+      interface _DeleteBusinessReportScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBusinessReportScheduleResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#delete_business_report_schedule-instance_method
+      def delete_business_report_schedule: (
+                                             schedule_arn: ::String
+                                           ) -> _DeleteBusinessReportScheduleResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBusinessReportScheduleResponseSuccess
+
+      interface _DeleteConferenceProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConferenceProviderResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#delete_conference_provider-instance_method
+      def delete_conference_provider: (
+                                        conference_provider_arn: ::String
+                                      ) -> _DeleteConferenceProviderResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConferenceProviderResponseSuccess
+
+      interface _DeleteContactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteContactResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#delete_contact-instance_method
+      def delete_contact: (
+                            contact_arn: ::String
+                          ) -> _DeleteContactResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteContactResponseSuccess
+
+      interface _DeleteDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDeviceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#delete_device-instance_method
+      def delete_device: (
+                           device_arn: ::String
+                         ) -> _DeleteDeviceResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDeviceResponseSuccess
+
+      interface _DeleteDeviceUsageDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDeviceUsageDataResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#delete_device_usage_data-instance_method
+      def delete_device_usage_data: (
+                                      device_arn: ::String,
+                                      device_usage_type: ("VOICE")
+                                    ) -> _DeleteDeviceUsageDataResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDeviceUsageDataResponseSuccess
+
+      interface _DeleteGatewayGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGatewayGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#delete_gateway_group-instance_method
+      def delete_gateway_group: (
+                                  gateway_group_arn: ::String
+                                ) -> _DeleteGatewayGroupResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGatewayGroupResponseSuccess
+
+      interface _DeleteNetworkProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteNetworkProfileResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#delete_network_profile-instance_method
+      def delete_network_profile: (
+                                    network_profile_arn: ::String
+                                  ) -> _DeleteNetworkProfileResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteNetworkProfileResponseSuccess
+
+      interface _DeleteProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProfileResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#delete_profile-instance_method
+      def delete_profile: (
+                            ?profile_arn: ::String
+                          ) -> _DeleteProfileResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProfileResponseSuccess
+
+      interface _DeleteRoomResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRoomResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#delete_room-instance_method
+      def delete_room: (
+                         ?room_arn: ::String
+                       ) -> _DeleteRoomResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRoomResponseSuccess
+
+      interface _DeleteRoomSkillParameterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRoomSkillParameterResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#delete_room_skill_parameter-instance_method
+      def delete_room_skill_parameter: (
+                                         ?room_arn: ::String,
+                                         skill_id: ::String,
+                                         parameter_key: ::String
+                                       ) -> _DeleteRoomSkillParameterResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRoomSkillParameterResponseSuccess
+
+      interface _DeleteSkillAuthorizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSkillAuthorizationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#delete_skill_authorization-instance_method
+      def delete_skill_authorization: (
+                                        skill_id: ::String,
+                                        ?room_arn: ::String
+                                      ) -> _DeleteSkillAuthorizationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSkillAuthorizationResponseSuccess
+
+      interface _DeleteSkillGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSkillGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#delete_skill_group-instance_method
+      def delete_skill_group: (
+                                ?skill_group_arn: ::String
+                              ) -> _DeleteSkillGroupResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSkillGroupResponseSuccess
+
+      interface _DeleteUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteUserResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#delete_user-instance_method
+      def delete_user: (
+                         ?user_arn: ::String,
+                         enrollment_id: ::String
+                       ) -> _DeleteUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteUserResponseSuccess
+
+      interface _DisassociateContactFromAddressBookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateContactFromAddressBookResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#disassociate_contact_from_address_book-instance_method
+      def disassociate_contact_from_address_book: (
+                                                    contact_arn: ::String,
+                                                    address_book_arn: ::String
+                                                  ) -> _DisassociateContactFromAddressBookResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateContactFromAddressBookResponseSuccess
+
+      interface _DisassociateDeviceFromRoomResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateDeviceFromRoomResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#disassociate_device_from_room-instance_method
+      def disassociate_device_from_room: (
+                                           ?device_arn: ::String
+                                         ) -> _DisassociateDeviceFromRoomResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateDeviceFromRoomResponseSuccess
+
+      interface _DisassociateSkillFromSkillGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateSkillFromSkillGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#disassociate_skill_from_skill_group-instance_method
+      def disassociate_skill_from_skill_group: (
+                                                 ?skill_group_arn: ::String,
+                                                 skill_id: ::String
+                                               ) -> _DisassociateSkillFromSkillGroupResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateSkillFromSkillGroupResponseSuccess
+
+      interface _DisassociateSkillFromUsersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateSkillFromUsersResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#disassociate_skill_from_users-instance_method
+      def disassociate_skill_from_users: (
+                                           skill_id: ::String
+                                         ) -> _DisassociateSkillFromUsersResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateSkillFromUsersResponseSuccess
+
+      interface _DisassociateSkillGroupFromRoomResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateSkillGroupFromRoomResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#disassociate_skill_group_from_room-instance_method
+      def disassociate_skill_group_from_room: (
+                                                ?skill_group_arn: ::String,
+                                                ?room_arn: ::String
+                                              ) -> _DisassociateSkillGroupFromRoomResponseSuccess
+                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateSkillGroupFromRoomResponseSuccess
+
+      interface _ForgetSmartHomeAppliancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ForgetSmartHomeAppliancesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#forget_smart_home_appliances-instance_method
+      def forget_smart_home_appliances: (
+                                          room_arn: ::String
+                                        ) -> _ForgetSmartHomeAppliancesResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ForgetSmartHomeAppliancesResponseSuccess
+
+      interface _GetAddressBookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAddressBookResponse]
+        def address_book: () -> Types::AddressBook
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#get_address_book-instance_method
+      def get_address_book: (
+                              address_book_arn: ::String
+                            ) -> _GetAddressBookResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAddressBookResponseSuccess
+
+      interface _GetConferencePreferenceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConferencePreferenceResponse]
+        def preference: () -> Types::ConferencePreference
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#get_conference_preference-instance_method
+      def get_conference_preference: (
+                                     ) -> _GetConferencePreferenceResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConferencePreferenceResponseSuccess
+
+      interface _GetConferenceProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConferenceProviderResponse]
+        def conference_provider: () -> Types::ConferenceProvider
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#get_conference_provider-instance_method
+      def get_conference_provider: (
+                                     conference_provider_arn: ::String
+                                   ) -> _GetConferenceProviderResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConferenceProviderResponseSuccess
+
+      interface _GetContactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContactResponse]
+        def contact: () -> Types::Contact
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#get_contact-instance_method
+      def get_contact: (
+                         contact_arn: ::String
+                       ) -> _GetContactResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContactResponseSuccess
+
+      interface _GetDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeviceResponse]
+        def device: () -> Types::Device
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#get_device-instance_method
+      def get_device: (
+                        ?device_arn: ::String
+                      ) -> _GetDeviceResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeviceResponseSuccess
+
+      interface _GetGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGatewayResponse]
+        def gateway: () -> Types::Gateway
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#get_gateway-instance_method
+      def get_gateway: (
+                         gateway_arn: ::String
+                       ) -> _GetGatewayResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGatewayResponseSuccess
+
+      interface _GetGatewayGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGatewayGroupResponse]
+        def gateway_group: () -> Types::GatewayGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#get_gateway_group-instance_method
+      def get_gateway_group: (
+                               gateway_group_arn: ::String
+                             ) -> _GetGatewayGroupResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGatewayGroupResponseSuccess
+
+      interface _GetInvitationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInvitationConfigurationResponse]
+        def organization_name: () -> ::String
+        def contact_email: () -> ::String
+        def private_skill_ids: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#get_invitation_configuration-instance_method
+      def get_invitation_configuration: (
+                                        ) -> _GetInvitationConfigurationResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInvitationConfigurationResponseSuccess
+
+      interface _GetNetworkProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNetworkProfileResponse]
+        def network_profile: () -> Types::NetworkProfile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#get_network_profile-instance_method
+      def get_network_profile: (
+                                 network_profile_arn: ::String
+                               ) -> _GetNetworkProfileResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNetworkProfileResponseSuccess
+
+      interface _GetProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProfileResponse]
+        def profile: () -> Types::Profile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#get_profile-instance_method
+      def get_profile: (
+                         ?profile_arn: ::String
+                       ) -> _GetProfileResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProfileResponseSuccess
+
+      interface _GetRoomResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRoomResponse]
+        def room: () -> Types::Room
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#get_room-instance_method
+      def get_room: (
+                      ?room_arn: ::String
+                    ) -> _GetRoomResponseSuccess
+                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRoomResponseSuccess
+
+      interface _GetRoomSkillParameterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRoomSkillParameterResponse]
+        def room_skill_parameter: () -> Types::RoomSkillParameter
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#get_room_skill_parameter-instance_method
+      def get_room_skill_parameter: (
+                                      ?room_arn: ::String,
+                                      skill_id: ::String,
+                                      parameter_key: ::String
+                                    ) -> _GetRoomSkillParameterResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRoomSkillParameterResponseSuccess
+
+      interface _GetSkillGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSkillGroupResponse]
+        def skill_group: () -> Types::SkillGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#get_skill_group-instance_method
+      def get_skill_group: (
+                             ?skill_group_arn: ::String
+                           ) -> _GetSkillGroupResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSkillGroupResponseSuccess
+
+      interface _ListBusinessReportSchedulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBusinessReportSchedulesResponse]
+        def business_report_schedules: () -> ::Array[Types::BusinessReportSchedule]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#list_business_report_schedules-instance_method
+      def list_business_report_schedules: (
+                                            ?next_token: ::String,
+                                            ?max_results: ::Integer
+                                          ) -> _ListBusinessReportSchedulesResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBusinessReportSchedulesResponseSuccess
+
+      interface _ListConferenceProvidersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConferenceProvidersResponse]
+        def conference_providers: () -> ::Array[Types::ConferenceProvider]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#list_conference_providers-instance_method
+      def list_conference_providers: (
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _ListConferenceProvidersResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConferenceProvidersResponseSuccess
+
+      interface _ListDeviceEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDeviceEventsResponse]
+        def device_events: () -> ::Array[Types::DeviceEvent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#list_device_events-instance_method
+      def list_device_events: (
+                                device_arn: ::String,
+                                ?event_type: ("CONNECTION_STATUS" | "DEVICE_STATUS"),
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _ListDeviceEventsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeviceEventsResponseSuccess
+
+      interface _ListGatewayGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGatewayGroupsResponse]
+        def gateway_groups: () -> ::Array[Types::GatewayGroupSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#list_gateway_groups-instance_method
+      def list_gateway_groups: (
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer
+                               ) -> _ListGatewayGroupsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGatewayGroupsResponseSuccess
+
+      interface _ListGatewaysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGatewaysResponse]
+        def gateways: () -> ::Array[Types::GatewaySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#list_gateways-instance_method
+      def list_gateways: (
+                           ?gateway_group_arn: ::String,
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListGatewaysResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGatewaysResponseSuccess
+
+      interface _ListSkillsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSkillsResponse]
+        def skill_summaries: () -> ::Array[Types::SkillSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#list_skills-instance_method
+      def list_skills: (
+                         ?skill_group_arn: ::String,
+                         ?enablement_type: ("ENABLED" | "PENDING"),
+                         ?skill_type: ("PUBLIC" | "PRIVATE" | "ALL"),
+                         ?next_token: ::String,
+                         ?max_results: ::Integer
+                       ) -> _ListSkillsResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSkillsResponseSuccess
+
+      interface _ListSkillsStoreCategoriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSkillsStoreCategoriesResponse]
+        def category_list: () -> ::Array[Types::Category]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#list_skills_store_categories-instance_method
+      def list_skills_store_categories: (
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListSkillsStoreCategoriesResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSkillsStoreCategoriesResponseSuccess
+
+      interface _ListSkillsStoreSkillsByCategoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSkillsStoreSkillsByCategoryResponse]
+        def skills_store_skills: () -> ::Array[Types::SkillsStoreSkill]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#list_skills_store_skills_by_category-instance_method
+      def list_skills_store_skills_by_category: (
+                                                  category_id: ::Integer,
+                                                  ?next_token: ::String,
+                                                  ?max_results: ::Integer
+                                                ) -> _ListSkillsStoreSkillsByCategoryResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSkillsStoreSkillsByCategoryResponseSuccess
+
+      interface _ListSmartHomeAppliancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSmartHomeAppliancesResponse]
+        def smart_home_appliances: () -> ::Array[Types::SmartHomeAppliance]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#list_smart_home_appliances-instance_method
+      def list_smart_home_appliances: (
+                                        room_arn: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListSmartHomeAppliancesResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSmartHomeAppliancesResponseSuccess
+
+      interface _ListTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsResponse]
+        def tags: () -> ::Array[Types::Tag]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#list_tags-instance_method
+      def list_tags: (
+                       arn: ::String,
+                       ?next_token: ::String,
+                       ?max_results: ::Integer
+                     ) -> _ListTagsResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsResponseSuccess
+
+      interface _PutConferencePreferenceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutConferencePreferenceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#put_conference_preference-instance_method
+      def put_conference_preference: (
+                                       conference_preference: {
+                                         default_conference_provider_arn: ::String?
+                                       }
+                                     ) -> _PutConferencePreferenceResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutConferencePreferenceResponseSuccess
+
+      interface _PutInvitationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutInvitationConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#put_invitation_configuration-instance_method
+      def put_invitation_configuration: (
+                                          organization_name: ::String,
+                                          ?contact_email: ::String,
+                                          ?private_skill_ids: Array[::String]
+                                        ) -> _PutInvitationConfigurationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutInvitationConfigurationResponseSuccess
+
+      interface _PutRoomSkillParameterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutRoomSkillParameterResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#put_room_skill_parameter-instance_method
+      def put_room_skill_parameter: (
+                                      ?room_arn: ::String,
+                                      skill_id: ::String,
+                                      room_skill_parameter: {
+                                        parameter_key: ::String,
+                                        parameter_value: ::String
+                                      }
+                                    ) -> _PutRoomSkillParameterResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutRoomSkillParameterResponseSuccess
+
+      interface _PutSkillAuthorizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutSkillAuthorizationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#put_skill_authorization-instance_method
+      def put_skill_authorization: (
+                                     authorization_result: Hash[::String, ::String],
+                                     skill_id: ::String,
+                                     ?room_arn: ::String
+                                   ) -> _PutSkillAuthorizationResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutSkillAuthorizationResponseSuccess
+
+      interface _RegisterAVSDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterAVSDeviceResponse]
+        def device_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#register_avs_device-instance_method
+      def register_avs_device: (
+                                 client_id: ::String,
+                                 user_code: ::String,
+                                 product_id: ::String,
+                                 ?device_serial_number: ::String,
+                                 amazon_id: ::String,
+                                 ?room_arn: ::String,
+                                 ?tags: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String
+                                   },
+                                 ]
+                               ) -> _RegisterAVSDeviceResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterAVSDeviceResponseSuccess
+
+      interface _RejectSkillResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RejectSkillResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#reject_skill-instance_method
+      def reject_skill: (
+                          skill_id: ::String
+                        ) -> _RejectSkillResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectSkillResponseSuccess
+
+      interface _ResolveRoomResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResolveRoomResponse]
+        def room_arn: () -> ::String
+        def room_name: () -> ::String
+        def room_skill_parameters: () -> ::Array[Types::RoomSkillParameter]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#resolve_room-instance_method
+      def resolve_room: (
+                          user_id: ::String,
+                          skill_id: ::String
+                        ) -> _ResolveRoomResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResolveRoomResponseSuccess
+
+      interface _RevokeInvitationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RevokeInvitationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#revoke_invitation-instance_method
+      def revoke_invitation: (
+                               ?user_arn: ::String,
+                               ?enrollment_id: ::String
+                             ) -> _RevokeInvitationResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RevokeInvitationResponseSuccess
+
+      interface _SearchAddressBooksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchAddressBooksResponse]
+        def address_books: () -> ::Array[Types::AddressBookData]
+        def next_token: () -> ::String
+        def total_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#search_address_books-instance_method
+      def search_address_books: (
+                                  ?filters: Array[
+                                    {
+                                      key: ::String,
+                                      values: Array[::String]
+                                    },
+                                  ],
+                                  ?sort_criteria: Array[
+                                    {
+                                      key: ::String,
+                                      value: ("ASC" | "DESC")
+                                    },
+                                  ],
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _SearchAddressBooksResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchAddressBooksResponseSuccess
+
+      interface _SearchContactsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchContactsResponse]
+        def contacts: () -> ::Array[Types::ContactData]
+        def next_token: () -> ::String
+        def total_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#search_contacts-instance_method
+      def search_contacts: (
+                             ?filters: Array[
+                               {
+                                 key: ::String,
+                                 values: Array[::String]
+                               },
+                             ],
+                             ?sort_criteria: Array[
+                               {
+                                 key: ::String,
+                                 value: ("ASC" | "DESC")
+                               },
+                             ],
+                             ?next_token: ::String,
+                             ?max_results: ::Integer
+                           ) -> _SearchContactsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchContactsResponseSuccess
+
+      interface _SearchDevicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchDevicesResponse]
+        def devices: () -> ::Array[Types::DeviceData]
+        def next_token: () -> ::String
+        def total_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#search_devices-instance_method
+      def search_devices: (
+                            ?next_token: ::String,
+                            ?max_results: ::Integer,
+                            ?filters: Array[
+                              {
+                                key: ::String,
+                                values: Array[::String]
+                              },
+                            ],
+                            ?sort_criteria: Array[
+                              {
+                                key: ::String,
+                                value: ("ASC" | "DESC")
+                              },
+                            ]
+                          ) -> _SearchDevicesResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchDevicesResponseSuccess
+
+      interface _SearchNetworkProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchNetworkProfilesResponse]
+        def network_profiles: () -> ::Array[Types::NetworkProfileData]
+        def next_token: () -> ::String
+        def total_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#search_network_profiles-instance_method
+      def search_network_profiles: (
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer,
+                                     ?filters: Array[
+                                       {
+                                         key: ::String,
+                                         values: Array[::String]
+                                       },
+                                     ],
+                                     ?sort_criteria: Array[
+                                       {
+                                         key: ::String,
+                                         value: ("ASC" | "DESC")
+                                       },
+                                     ]
+                                   ) -> _SearchNetworkProfilesResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchNetworkProfilesResponseSuccess
+
+      interface _SearchProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchProfilesResponse]
+        def profiles: () -> ::Array[Types::ProfileData]
+        def next_token: () -> ::String
+        def total_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#search_profiles-instance_method
+      def search_profiles: (
+                             ?next_token: ::String,
+                             ?max_results: ::Integer,
+                             ?filters: Array[
+                               {
+                                 key: ::String,
+                                 values: Array[::String]
+                               },
+                             ],
+                             ?sort_criteria: Array[
+                               {
+                                 key: ::String,
+                                 value: ("ASC" | "DESC")
+                               },
+                             ]
+                           ) -> _SearchProfilesResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchProfilesResponseSuccess
+
+      interface _SearchRoomsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchRoomsResponse]
+        def rooms: () -> ::Array[Types::RoomData]
+        def next_token: () -> ::String
+        def total_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#search_rooms-instance_method
+      def search_rooms: (
+                          ?next_token: ::String,
+                          ?max_results: ::Integer,
+                          ?filters: Array[
+                            {
+                              key: ::String,
+                              values: Array[::String]
+                            },
+                          ],
+                          ?sort_criteria: Array[
+                            {
+                              key: ::String,
+                              value: ("ASC" | "DESC")
+                            },
+                          ]
+                        ) -> _SearchRoomsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchRoomsResponseSuccess
+
+      interface _SearchSkillGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchSkillGroupsResponse]
+        def skill_groups: () -> ::Array[Types::SkillGroupData]
+        def next_token: () -> ::String
+        def total_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#search_skill_groups-instance_method
+      def search_skill_groups: (
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer,
+                                 ?filters: Array[
+                                   {
+                                     key: ::String,
+                                     values: Array[::String]
+                                   },
+                                 ],
+                                 ?sort_criteria: Array[
+                                   {
+                                     key: ::String,
+                                     value: ("ASC" | "DESC")
+                                   },
+                                 ]
+                               ) -> _SearchSkillGroupsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchSkillGroupsResponseSuccess
+
+      interface _SearchUsersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchUsersResponse]
+        def users: () -> ::Array[Types::UserData]
+        def next_token: () -> ::String
+        def total_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#search_users-instance_method
+      def search_users: (
+                          ?next_token: ::String,
+                          ?max_results: ::Integer,
+                          ?filters: Array[
+                            {
+                              key: ::String,
+                              values: Array[::String]
+                            },
+                          ],
+                          ?sort_criteria: Array[
+                            {
+                              key: ::String,
+                              value: ("ASC" | "DESC")
+                            },
+                          ]
+                        ) -> _SearchUsersResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchUsersResponseSuccess
+
+      interface _SendAnnouncementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendAnnouncementResponse]
+        def announcement_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#send_announcement-instance_method
+      def send_announcement: (
+                               room_filters: Array[
+                                 {
+                                   key: ::String,
+                                   values: Array[::String]
+                                 },
+                               ],
+                               content: {
+                                 text_list: Array[
+                                   {
+                                     locale: ("en-US"),
+                                     value: ::String
+                                   },
+                                 ]?,
+                                 ssml_list: Array[
+                                   {
+                                     locale: ("en-US"),
+                                     value: ::String
+                                   },
+                                 ]?,
+                                 audio_list: Array[
+                                   {
+                                     locale: ("en-US"),
+                                     location: ::String
+                                   },
+                                 ]?
+                               },
+                               ?time_to_live_in_seconds: ::Integer,
+                               client_request_token: ::String
+                             ) -> _SendAnnouncementResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendAnnouncementResponseSuccess
+
+      interface _SendInvitationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendInvitationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#send_invitation-instance_method
+      def send_invitation: (
+                             ?user_arn: ::String
+                           ) -> _SendInvitationResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendInvitationResponseSuccess
+
+      interface _StartDeviceSyncResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDeviceSyncResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#start_device_sync-instance_method
+      def start_device_sync: (
+                               ?room_arn: ::String,
+                               ?device_arn: ::String,
+                               features: Array[("BLUETOOTH" | "VOLUME" | "NOTIFICATIONS" | "LISTS" | "SKILLS" | "NETWORK_PROFILE" | "SETTINGS" | "ALL")]
+                             ) -> _StartDeviceSyncResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDeviceSyncResponseSuccess
+
+      interface _StartSmartHomeApplianceDiscoveryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartSmartHomeApplianceDiscoveryResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#start_smart_home_appliance_discovery-instance_method
+      def start_smart_home_appliance_discovery: (
+                                                  room_arn: ::String
+                                                ) -> _StartSmartHomeApplianceDiscoveryResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartSmartHomeApplianceDiscoveryResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAddressBookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAddressBookResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#update_address_book-instance_method
+      def update_address_book: (
+                                 address_book_arn: ::String,
+                                 ?name: ::String,
+                                 ?description: ::String
+                               ) -> _UpdateAddressBookResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAddressBookResponseSuccess
+
+      interface _UpdateBusinessReportScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBusinessReportScheduleResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#update_business_report_schedule-instance_method
+      def update_business_report_schedule: (
+                                             schedule_arn: ::String,
+                                             ?s3_bucket_name: ::String,
+                                             ?s3_key_prefix: ::String,
+                                             ?format: ("CSV" | "CSV_ZIP"),
+                                             ?schedule_name: ::String,
+                                             ?recurrence: {
+                                               start_date: ::String?
+                                             }
+                                           ) -> _UpdateBusinessReportScheduleResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBusinessReportScheduleResponseSuccess
+
+      interface _UpdateConferenceProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConferenceProviderResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#update_conference_provider-instance_method
+      def update_conference_provider: (
+                                        conference_provider_arn: ::String,
+                                        conference_provider_type: ("CHIME" | "BLUEJEANS" | "FUZE" | "GOOGLE_HANGOUTS" | "POLYCOM" | "RINGCENTRAL" | "SKYPE_FOR_BUSINESS" | "WEBEX" | "ZOOM" | "CUSTOM"),
+                                        ?ip_dial_in: {
+                                          endpoint: ::String,
+                                          comms_protocol: ("SIP" | "SIPS" | "H323")
+                                        },
+                                        ?pstn_dial_in: {
+                                          country_code: ::String,
+                                          phone_number: ::String,
+                                          one_click_id_delay: ::String,
+                                          one_click_pin_delay: ::String
+                                        },
+                                        meeting_setting: {
+                                          require_pin: ("YES" | "NO" | "OPTIONAL")
+                                        }
+                                      ) -> _UpdateConferenceProviderResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConferenceProviderResponseSuccess
+
+      interface _UpdateContactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateContactResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#update_contact-instance_method
+      def update_contact: (
+                            contact_arn: ::String,
+                            ?display_name: ::String,
+                            ?first_name: ::String,
+                            ?last_name: ::String,
+                            ?phone_number: ::String,
+                            ?phone_numbers: Array[
+                              {
+                                number: ::String,
+                                type: ("MOBILE" | "WORK" | "HOME")
+                              },
+                            ],
+                            ?sip_addresses: Array[
+                              {
+                                uri: ::String,
+                                type: ("WORK")
+                              },
+                            ]
+                          ) -> _UpdateContactResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateContactResponseSuccess
+
+      interface _UpdateDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDeviceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#update_device-instance_method
+      def update_device: (
+                           ?device_arn: ::String,
+                           ?device_name: ::String
+                         ) -> _UpdateDeviceResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDeviceResponseSuccess
+
+      interface _UpdateGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGatewayResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#update_gateway-instance_method
+      def update_gateway: (
+                            gateway_arn: ::String,
+                            ?name: ::String,
+                            ?description: ::String,
+                            ?software_version: ::String
+                          ) -> _UpdateGatewayResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGatewayResponseSuccess
+
+      interface _UpdateGatewayGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGatewayGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#update_gateway_group-instance_method
+      def update_gateway_group: (
+                                  gateway_group_arn: ::String,
+                                  ?name: ::String,
+                                  ?description: ::String
+                                ) -> _UpdateGatewayGroupResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGatewayGroupResponseSuccess
+
+      interface _UpdateNetworkProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNetworkProfileResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#update_network_profile-instance_method
+      def update_network_profile: (
+                                    network_profile_arn: ::String,
+                                    ?network_profile_name: ::String,
+                                    ?description: ::String,
+                                    ?current_password: ::String,
+                                    ?next_password: ::String,
+                                    ?certificate_authority_arn: ::String,
+                                    ?trust_anchors: Array[::String]
+                                  ) -> _UpdateNetworkProfileResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNetworkProfileResponseSuccess
+
+      interface _UpdateProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProfileResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#update_profile-instance_method
+      def update_profile: (
+                            ?profile_arn: ::String,
+                            ?profile_name: ::String,
+                            ?is_default: bool,
+                            ?timezone: ::String,
+                            ?address: ::String,
+                            ?distance_unit: ("METRIC" | "IMPERIAL"),
+                            ?temperature_unit: ("FAHRENHEIT" | "CELSIUS"),
+                            ?wake_word: ("ALEXA" | "AMAZON" | "ECHO" | "COMPUTER"),
+                            ?locale: ::String,
+                            ?setup_mode_disabled: bool,
+                            ?max_volume_limit: ::Integer,
+                            ?pstn_enabled: bool,
+                            ?data_retention_opt_in: bool,
+                            ?meeting_room_configuration: {
+                              room_utilization_metrics_enabled: bool?,
+                              end_of_meeting_reminder: {
+                                reminder_at_minutes: Array[::Integer]?,
+                                reminder_type: ("ANNOUNCEMENT_TIME_CHECK" | "ANNOUNCEMENT_VARIABLE_TIME_LEFT" | "CHIME" | "KNOCK")?,
+                                enabled: bool?
+                              }?,
+                              instant_booking: {
+                                duration_in_minutes: ::Integer?,
+                                enabled: bool?
+                              }?,
+                              require_check_in: {
+                                release_after_minutes: ::Integer?,
+                                enabled: bool?
+                              }?,
+                              proactive_join: {
+                                enabled_by_motion: bool
+                              }?
+                            }
+                          ) -> _UpdateProfileResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProfileResponseSuccess
+
+      interface _UpdateRoomResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRoomResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#update_room-instance_method
+      def update_room: (
+                         ?room_arn: ::String,
+                         ?room_name: ::String,
+                         ?description: ::String,
+                         ?provider_calendar_id: ::String,
+                         ?profile_arn: ::String
+                       ) -> _UpdateRoomResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRoomResponseSuccess
+
+      interface _UpdateSkillGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSkillGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AlexaForBusiness/Client.html#update_skill_group-instance_method
+      def update_skill_group: (
+                                ?skill_group_arn: ::String,
+                                ?skill_group_name: ::String,
+                                ?description: ::String
+                              ) -> _UpdateSkillGroupResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSkillGroupResponseSuccess
+    end
+  end
+end
+

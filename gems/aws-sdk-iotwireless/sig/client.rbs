@@ -1,0 +1,1903 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IoTWireless
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateAwsAccountWithPartnerAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateAwsAccountWithPartnerAccountResponse]
+        def sidewalk: () -> Types::SidewalkAccountInfo
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#associate_aws_account_with_partner_account-instance_method
+      def associate_aws_account_with_partner_account: (
+                                                        sidewalk: {
+                                                          amazon_id: ::String?,
+                                                          app_server_private_key: ::String?
+                                                        },
+                                                        ?client_request_token: ::String,
+                                                        ?tags: Array[
+                                                          {
+                                                            key: ::String,
+                                                            value: ::String
+                                                          },
+                                                        ]
+                                                      ) -> _AssociateAwsAccountWithPartnerAccountResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateAwsAccountWithPartnerAccountResponseSuccess
+
+      interface _AssociateMulticastGroupWithFuotaTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateMulticastGroupWithFuotaTaskResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#associate_multicast_group_with_fuota_task-instance_method
+      def associate_multicast_group_with_fuota_task: (
+                                                       id: ::String,
+                                                       multicast_group_id: ::String
+                                                     ) -> _AssociateMulticastGroupWithFuotaTaskResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateMulticastGroupWithFuotaTaskResponseSuccess
+
+      interface _AssociateWirelessDeviceWithFuotaTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateWirelessDeviceWithFuotaTaskResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#associate_wireless_device_with_fuota_task-instance_method
+      def associate_wireless_device_with_fuota_task: (
+                                                       id: ::String,
+                                                       wireless_device_id: ::String
+                                                     ) -> _AssociateWirelessDeviceWithFuotaTaskResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateWirelessDeviceWithFuotaTaskResponseSuccess
+
+      interface _AssociateWirelessDeviceWithMulticastGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateWirelessDeviceWithMulticastGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#associate_wireless_device_with_multicast_group-instance_method
+      def associate_wireless_device_with_multicast_group: (
+                                                            id: ::String,
+                                                            wireless_device_id: ::String
+                                                          ) -> _AssociateWirelessDeviceWithMulticastGroupResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateWirelessDeviceWithMulticastGroupResponseSuccess
+
+      interface _AssociateWirelessDeviceWithThingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateWirelessDeviceWithThingResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#associate_wireless_device_with_thing-instance_method
+      def associate_wireless_device_with_thing: (
+                                                  id: ::String,
+                                                  thing_arn: ::String
+                                                ) -> _AssociateWirelessDeviceWithThingResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateWirelessDeviceWithThingResponseSuccess
+
+      interface _AssociateWirelessGatewayWithCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateWirelessGatewayWithCertificateResponse]
+        def iot_certificate_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#associate_wireless_gateway_with_certificate-instance_method
+      def associate_wireless_gateway_with_certificate: (
+                                                         id: ::String,
+                                                         iot_certificate_id: ::String
+                                                       ) -> _AssociateWirelessGatewayWithCertificateResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateWirelessGatewayWithCertificateResponseSuccess
+
+      interface _AssociateWirelessGatewayWithThingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateWirelessGatewayWithThingResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#associate_wireless_gateway_with_thing-instance_method
+      def associate_wireless_gateway_with_thing: (
+                                                   id: ::String,
+                                                   thing_arn: ::String
+                                                 ) -> _AssociateWirelessGatewayWithThingResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateWirelessGatewayWithThingResponseSuccess
+
+      interface _CancelMulticastGroupSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelMulticastGroupSessionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#cancel_multicast_group_session-instance_method
+      def cancel_multicast_group_session: (
+                                            id: ::String
+                                          ) -> _CancelMulticastGroupSessionResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelMulticastGroupSessionResponseSuccess
+
+      interface _CreateDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDestinationResponse]
+        def arn: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#create_destination-instance_method
+      def create_destination: (
+                                name: ::String,
+                                expression_type: ("RuleName" | "MqttTopic"),
+                                expression: ::String,
+                                ?description: ::String,
+                                role_arn: ::String,
+                                ?tags: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String
+                                  },
+                                ],
+                                ?client_request_token: ::String
+                              ) -> _CreateDestinationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDestinationResponseSuccess
+
+      interface _CreateDeviceProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDeviceProfileResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#create_device_profile-instance_method
+      def create_device_profile: (
+                                   ?name: ::String,
+                                   ?lo_ra_wan: {
+                                     supports_class_b: bool?,
+                                     class_b_timeout: ::Integer?,
+                                     ping_slot_period: ::Integer?,
+                                     ping_slot_dr: ::Integer?,
+                                     ping_slot_freq: ::Integer?,
+                                     supports_class_c: bool?,
+                                     class_c_timeout: ::Integer?,
+                                     mac_version: ::String?,
+                                     reg_params_revision: ::String?,
+                                     rx_delay_1: ::Integer?,
+                                     rx_dr_offset_1: ::Integer?,
+                                     rx_data_rate_2: ::Integer?,
+                                     rx_freq_2: ::Integer?,
+                                     factory_preset_freqs_list: Array[::Integer]?,
+                                     max_eirp: ::Integer?,
+                                     max_duty_cycle: ::Integer?,
+                                     rf_region: ::String?,
+                                     supports_join: bool?,
+                                     supports_32_bit_f_cnt: bool?
+                                   },
+                                   ?tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ],
+                                   ?client_request_token: ::String,
+                                   ?sidewalk: {
+                                   }
+                                 ) -> _CreateDeviceProfileResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDeviceProfileResponseSuccess
+
+      interface _CreateFuotaTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFuotaTaskResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#create_fuota_task-instance_method
+      def create_fuota_task: (
+                               ?name: ::String,
+                               ?description: ::String,
+                               ?client_request_token: ::String,
+                               ?lo_ra_wan: {
+                                 rf_region: ("EU868" | "US915" | "AU915" | "AS923-1" | "AS923-2" | "AS923-3" | "AS923-4" | "EU433" | "CN470" | "CN779" | "RU864" | "KR920" | "IN865")?
+                               },
+                               firmware_update_image: ::String,
+                               firmware_update_role: ::String,
+                               ?tags: Array[
+                                 {
+                                   key: ::String,
+                                   value: ::String
+                                 },
+                               ],
+                               ?redundancy_percent: ::Integer,
+                               ?fragment_size_bytes: ::Integer,
+                               ?fragment_interval_ms: ::Integer
+                             ) -> _CreateFuotaTaskResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFuotaTaskResponseSuccess
+
+      interface _CreateMulticastGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMulticastGroupResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#create_multicast_group-instance_method
+      def create_multicast_group: (
+                                    ?name: ::String,
+                                    ?description: ::String,
+                                    ?client_request_token: ::String,
+                                    lo_ra_wan: {
+                                      rf_region: ("EU868" | "US915" | "AU915" | "AS923-1" | "AS923-2" | "AS923-3" | "AS923-4" | "EU433" | "CN470" | "CN779" | "RU864" | "KR920" | "IN865")?,
+                                      dl_class: ("ClassB" | "ClassC")?
+                                    },
+                                    ?tags: Array[
+                                      {
+                                        key: ::String,
+                                        value: ::String
+                                      },
+                                    ]
+                                  ) -> _CreateMulticastGroupResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMulticastGroupResponseSuccess
+
+      interface _CreateNetworkAnalyzerConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateNetworkAnalyzerConfigurationResponse]
+        def arn: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#create_network_analyzer_configuration-instance_method
+      def create_network_analyzer_configuration: (
+                                                   name: ::String,
+                                                   ?trace_content: {
+                                                     wireless_device_frame_info: ("ENABLED" | "DISABLED")?,
+                                                     log_level: ("INFO" | "ERROR" | "DISABLED")?,
+                                                     multicast_frame_info: ("ENABLED" | "DISABLED")?
+                                                   },
+                                                   ?wireless_devices: Array[::String],
+                                                   ?wireless_gateways: Array[::String],
+                                                   ?description: ::String,
+                                                   ?tags: Array[
+                                                     {
+                                                       key: ::String,
+                                                       value: ::String
+                                                     },
+                                                   ],
+                                                   ?client_request_token: ::String,
+                                                   ?multicast_groups: Array[::String]
+                                                 ) -> _CreateNetworkAnalyzerConfigurationResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNetworkAnalyzerConfigurationResponseSuccess
+
+      interface _CreateServiceProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateServiceProfileResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#create_service_profile-instance_method
+      def create_service_profile: (
+                                    ?name: ::String,
+                                    ?lo_ra_wan: {
+                                      add_gw_metadata: bool?,
+                                      dr_min: ::Integer?,
+                                      dr_max: ::Integer?,
+                                      pr_allowed: bool?,
+                                      ra_allowed: bool?
+                                    },
+                                    ?tags: Array[
+                                      {
+                                        key: ::String,
+                                        value: ::String
+                                      },
+                                    ],
+                                    ?client_request_token: ::String
+                                  ) -> _CreateServiceProfileResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServiceProfileResponseSuccess
+
+      interface _CreateWirelessDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWirelessDeviceResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#create_wireless_device-instance_method
+      def create_wireless_device: (
+                                    type: ("Sidewalk" | "LoRaWAN"),
+                                    ?name: ::String,
+                                    ?description: ::String,
+                                    destination_name: ::String,
+                                    ?client_request_token: ::String,
+                                    ?lo_ra_wan: {
+                                      dev_eui: ::String?,
+                                      device_profile_id: ::String?,
+                                      service_profile_id: ::String?,
+                                      otaa_v1_1: {
+                                        app_key: ::String?,
+                                        nwk_key: ::String?,
+                                        join_eui: ::String?
+                                      }?,
+                                      otaa_v1_0_x: {
+                                        app_key: ::String?,
+                                        app_eui: ::String?,
+                                        join_eui: ::String?,
+                                        gen_app_key: ::String?
+                                      }?,
+                                      abp_v1_1: {
+                                        dev_addr: ::String?,
+                                        session_keys: {
+                                          f_nwk_s_int_key: ::String?,
+                                          s_nwk_s_int_key: ::String?,
+                                          nwk_s_enc_key: ::String?,
+                                          app_s_key: ::String?
+                                        }?,
+                                        f_cnt_start: ::Integer?
+                                      }?,
+                                      abp_v1_0_x: {
+                                        dev_addr: ::String?,
+                                        session_keys: {
+                                          nwk_s_key: ::String?,
+                                          app_s_key: ::String?
+                                        }?,
+                                        f_cnt_start: ::Integer?
+                                      }?,
+                                      f_ports: {
+                                        fuota: ::Integer?,
+                                        multicast: ::Integer?,
+                                        clock_sync: ::Integer?,
+                                        positioning: {
+                                          clock_sync: ::Integer?,
+                                          stream: ::Integer?,
+                                          gnss: ::Integer?
+                                        }?,
+                                        applications: Array[
+                                          {
+                                            f_port: ::Integer?,
+                                            type: ("SemtechGeolocation")?,
+                                            destination_name: ::String?
+                                          },
+                                        ]?
+                                      }?
+                                    },
+                                    ?tags: Array[
+                                      {
+                                        key: ::String,
+                                        value: ::String
+                                      },
+                                    ],
+                                    ?positioning: ("Enabled" | "Disabled"),
+                                    ?sidewalk: {
+                                      device_profile_id: ::String?
+                                    }
+                                  ) -> _CreateWirelessDeviceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWirelessDeviceResponseSuccess
+
+      interface _CreateWirelessGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWirelessGatewayResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#create_wireless_gateway-instance_method
+      def create_wireless_gateway: (
+                                     ?name: ::String,
+                                     ?description: ::String,
+                                     lo_ra_wan: {
+                                       gateway_eui: ::String?,
+                                       rf_region: ::String?,
+                                       join_eui_filters: Array[
+                                         Array[::String],
+                                       ]?,
+                                       net_id_filters: Array[::String]?,
+                                       sub_bands: Array[::Integer]?,
+                                       beaconing: {
+                                         data_rate: ::Integer?,
+                                         frequencies: Array[::Integer]?
+                                       }?,
+                                       max_eirp: ::Float?
+                                     },
+                                     ?tags: Array[
+                                       {
+                                         key: ::String,
+                                         value: ::String
+                                       },
+                                     ],
+                                     ?client_request_token: ::String
+                                   ) -> _CreateWirelessGatewayResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWirelessGatewayResponseSuccess
+
+      interface _CreateWirelessGatewayTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWirelessGatewayTaskResponse]
+        def wireless_gateway_task_definition_id: () -> ::String
+        def status: () -> ("PENDING" | "IN_PROGRESS" | "FIRST_RETRY" | "SECOND_RETRY" | "COMPLETED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#create_wireless_gateway_task-instance_method
+      def create_wireless_gateway_task: (
+                                          id: ::String,
+                                          wireless_gateway_task_definition_id: ::String
+                                        ) -> _CreateWirelessGatewayTaskResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWirelessGatewayTaskResponseSuccess
+
+      interface _CreateWirelessGatewayTaskDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWirelessGatewayTaskDefinitionResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#create_wireless_gateway_task_definition-instance_method
+      def create_wireless_gateway_task_definition: (
+                                                     auto_create_tasks: bool,
+                                                     ?name: ::String,
+                                                     ?update: {
+                                                       update_data_source: ::String?,
+                                                       update_data_role: ::String?,
+                                                       lo_ra_wan: {
+                                                         update_signature: ::String?,
+                                                         sig_key_crc: ::Integer?,
+                                                         current_version: {
+                                                           package_version: ::String?,
+                                                           model: ::String?,
+                                                           station: ::String?
+                                                         }?,
+                                                         update_version: {
+                                                           package_version: ::String?,
+                                                           model: ::String?,
+                                                           station: ::String?
+                                                         }?
+                                                       }?
+                                                     },
+                                                     ?client_request_token: ::String,
+                                                     ?tags: Array[
+                                                       {
+                                                         key: ::String,
+                                                         value: ::String
+                                                       },
+                                                     ]
+                                                   ) -> _CreateWirelessGatewayTaskDefinitionResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWirelessGatewayTaskDefinitionResponseSuccess
+
+      interface _DeleteDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDestinationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#delete_destination-instance_method
+      def delete_destination: (
+                                name: ::String
+                              ) -> _DeleteDestinationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDestinationResponseSuccess
+
+      interface _DeleteDeviceProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDeviceProfileResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#delete_device_profile-instance_method
+      def delete_device_profile: (
+                                   id: ::String
+                                 ) -> _DeleteDeviceProfileResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDeviceProfileResponseSuccess
+
+      interface _DeleteFuotaTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFuotaTaskResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#delete_fuota_task-instance_method
+      def delete_fuota_task: (
+                               id: ::String
+                             ) -> _DeleteFuotaTaskResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFuotaTaskResponseSuccess
+
+      interface _DeleteMulticastGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMulticastGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#delete_multicast_group-instance_method
+      def delete_multicast_group: (
+                                    id: ::String
+                                  ) -> _DeleteMulticastGroupResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMulticastGroupResponseSuccess
+
+      interface _DeleteNetworkAnalyzerConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteNetworkAnalyzerConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#delete_network_analyzer_configuration-instance_method
+      def delete_network_analyzer_configuration: (
+                                                   configuration_name: ::String
+                                                 ) -> _DeleteNetworkAnalyzerConfigurationResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteNetworkAnalyzerConfigurationResponseSuccess
+
+      interface _DeleteQueuedMessagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteQueuedMessagesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#delete_queued_messages-instance_method
+      def delete_queued_messages: (
+                                    id: ::String,
+                                    message_id: ::String,
+                                    ?wireless_device_type: ("Sidewalk" | "LoRaWAN")
+                                  ) -> _DeleteQueuedMessagesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteQueuedMessagesResponseSuccess
+
+      interface _DeleteServiceProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteServiceProfileResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#delete_service_profile-instance_method
+      def delete_service_profile: (
+                                    id: ::String
+                                  ) -> _DeleteServiceProfileResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteServiceProfileResponseSuccess
+
+      interface _DeleteWirelessDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWirelessDeviceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#delete_wireless_device-instance_method
+      def delete_wireless_device: (
+                                    id: ::String
+                                  ) -> _DeleteWirelessDeviceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWirelessDeviceResponseSuccess
+
+      interface _DeleteWirelessDeviceImportTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWirelessDeviceImportTaskResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#delete_wireless_device_import_task-instance_method
+      def delete_wireless_device_import_task: (
+                                                id: ::String
+                                              ) -> _DeleteWirelessDeviceImportTaskResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWirelessDeviceImportTaskResponseSuccess
+
+      interface _DeleteWirelessGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWirelessGatewayResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#delete_wireless_gateway-instance_method
+      def delete_wireless_gateway: (
+                                     id: ::String
+                                   ) -> _DeleteWirelessGatewayResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWirelessGatewayResponseSuccess
+
+      interface _DeleteWirelessGatewayTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWirelessGatewayTaskResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#delete_wireless_gateway_task-instance_method
+      def delete_wireless_gateway_task: (
+                                          id: ::String
+                                        ) -> _DeleteWirelessGatewayTaskResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWirelessGatewayTaskResponseSuccess
+
+      interface _DeleteWirelessGatewayTaskDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWirelessGatewayTaskDefinitionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#delete_wireless_gateway_task_definition-instance_method
+      def delete_wireless_gateway_task_definition: (
+                                                     id: ::String
+                                                   ) -> _DeleteWirelessGatewayTaskDefinitionResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWirelessGatewayTaskDefinitionResponseSuccess
+
+      interface _DeregisterWirelessDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterWirelessDeviceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#deregister_wireless_device-instance_method
+      def deregister_wireless_device: (
+                                        identifier: ::String,
+                                        ?wireless_device_type: ("Sidewalk" | "LoRaWAN")
+                                      ) -> _DeregisterWirelessDeviceResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterWirelessDeviceResponseSuccess
+
+      interface _DisassociateAwsAccountFromPartnerAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateAwsAccountFromPartnerAccountResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#disassociate_aws_account_from_partner_account-instance_method
+      def disassociate_aws_account_from_partner_account: (
+                                                           partner_account_id: ::String,
+                                                           partner_type: ("Sidewalk")
+                                                         ) -> _DisassociateAwsAccountFromPartnerAccountResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateAwsAccountFromPartnerAccountResponseSuccess
+
+      interface _DisassociateMulticastGroupFromFuotaTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateMulticastGroupFromFuotaTaskResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#disassociate_multicast_group_from_fuota_task-instance_method
+      def disassociate_multicast_group_from_fuota_task: (
+                                                          id: ::String,
+                                                          multicast_group_id: ::String
+                                                        ) -> _DisassociateMulticastGroupFromFuotaTaskResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateMulticastGroupFromFuotaTaskResponseSuccess
+
+      interface _DisassociateWirelessDeviceFromFuotaTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateWirelessDeviceFromFuotaTaskResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#disassociate_wireless_device_from_fuota_task-instance_method
+      def disassociate_wireless_device_from_fuota_task: (
+                                                          id: ::String,
+                                                          wireless_device_id: ::String
+                                                        ) -> _DisassociateWirelessDeviceFromFuotaTaskResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateWirelessDeviceFromFuotaTaskResponseSuccess
+
+      interface _DisassociateWirelessDeviceFromMulticastGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateWirelessDeviceFromMulticastGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#disassociate_wireless_device_from_multicast_group-instance_method
+      def disassociate_wireless_device_from_multicast_group: (
+                                                               id: ::String,
+                                                               wireless_device_id: ::String
+                                                             ) -> _DisassociateWirelessDeviceFromMulticastGroupResponseSuccess
+                                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateWirelessDeviceFromMulticastGroupResponseSuccess
+
+      interface _DisassociateWirelessDeviceFromThingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateWirelessDeviceFromThingResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#disassociate_wireless_device_from_thing-instance_method
+      def disassociate_wireless_device_from_thing: (
+                                                     id: ::String
+                                                   ) -> _DisassociateWirelessDeviceFromThingResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateWirelessDeviceFromThingResponseSuccess
+
+      interface _DisassociateWirelessGatewayFromCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateWirelessGatewayFromCertificateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#disassociate_wireless_gateway_from_certificate-instance_method
+      def disassociate_wireless_gateway_from_certificate: (
+                                                            id: ::String
+                                                          ) -> _DisassociateWirelessGatewayFromCertificateResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateWirelessGatewayFromCertificateResponseSuccess
+
+      interface _DisassociateWirelessGatewayFromThingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateWirelessGatewayFromThingResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#disassociate_wireless_gateway_from_thing-instance_method
+      def disassociate_wireless_gateway_from_thing: (
+                                                      id: ::String
+                                                    ) -> _DisassociateWirelessGatewayFromThingResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateWirelessGatewayFromThingResponseSuccess
+
+      interface _GetDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDestinationResponse]
+        def arn: () -> ::String
+        def name: () -> ::String
+        def expression: () -> ::String
+        def expression_type: () -> ("RuleName" | "MqttTopic")
+        def description: () -> ::String
+        def role_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_destination-instance_method
+      def get_destination: (
+                             name: ::String
+                           ) -> _GetDestinationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDestinationResponseSuccess
+
+      interface _GetDeviceProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeviceProfileResponse]
+        def arn: () -> ::String
+        def name: () -> ::String
+        def id: () -> ::String
+        def lo_ra_wan: () -> Types::LoRaWANDeviceProfile
+        def sidewalk: () -> Types::SidewalkGetDeviceProfile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_device_profile-instance_method
+      def get_device_profile: (
+                                id: ::String
+                              ) -> _GetDeviceProfileResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeviceProfileResponseSuccess
+
+      interface _GetEventConfigurationByResourceTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEventConfigurationByResourceTypesResponse]
+        def device_registration_state: () -> Types::DeviceRegistrationStateResourceTypeEventConfiguration
+        def proximity: () -> Types::ProximityResourceTypeEventConfiguration
+        def join: () -> Types::JoinResourceTypeEventConfiguration
+        def connection_status: () -> Types::ConnectionStatusResourceTypeEventConfiguration
+        def message_delivery_status: () -> Types::MessageDeliveryStatusResourceTypeEventConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_event_configuration_by_resource_types-instance_method
+      def get_event_configuration_by_resource_types: (
+                                                     ) -> _GetEventConfigurationByResourceTypesResponseSuccess
+                                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEventConfigurationByResourceTypesResponseSuccess
+
+      interface _GetFuotaTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFuotaTaskResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def status: () -> ("Pending" | "FuotaSession_Waiting" | "In_FuotaSession" | "FuotaDone" | "Delete_Waiting")
+        def name: () -> ::String
+        def description: () -> ::String
+        def lo_ra_wan: () -> Types::LoRaWANFuotaTaskGetInfo
+        def firmware_update_image: () -> ::String
+        def firmware_update_role: () -> ::String
+        def created_at: () -> ::Time
+        def redundancy_percent: () -> ::Integer
+        def fragment_size_bytes: () -> ::Integer
+        def fragment_interval_ms: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_fuota_task-instance_method
+      def get_fuota_task: (
+                            id: ::String
+                          ) -> _GetFuotaTaskResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFuotaTaskResponseSuccess
+
+      interface _GetLogLevelsByResourceTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLogLevelsByResourceTypesResponse]
+        def default_log_level: () -> ("INFO" | "ERROR" | "DISABLED")
+        def wireless_gateway_log_options: () -> ::Array[Types::WirelessGatewayLogOption]
+        def wireless_device_log_options: () -> ::Array[Types::WirelessDeviceLogOption]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_log_levels_by_resource_types-instance_method
+      def get_log_levels_by_resource_types: (
+                                            ) -> _GetLogLevelsByResourceTypesResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLogLevelsByResourceTypesResponseSuccess
+
+      interface _GetMulticastGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMulticastGroupResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def status: () -> ::String
+        def lo_ra_wan: () -> Types::LoRaWANMulticastGet
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_multicast_group-instance_method
+      def get_multicast_group: (
+                                 id: ::String
+                               ) -> _GetMulticastGroupResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMulticastGroupResponseSuccess
+
+      interface _GetMulticastGroupSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMulticastGroupSessionResponse]
+        def lo_ra_wan: () -> Types::LoRaWANMulticastSession
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_multicast_group_session-instance_method
+      def get_multicast_group_session: (
+                                         id: ::String
+                                       ) -> _GetMulticastGroupSessionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMulticastGroupSessionResponseSuccess
+
+      interface _GetNetworkAnalyzerConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNetworkAnalyzerConfigurationResponse]
+        def trace_content: () -> Types::TraceContent
+        def wireless_devices: () -> ::Array[::String]
+        def wireless_gateways: () -> ::Array[::String]
+        def description: () -> ::String
+        def arn: () -> ::String
+        def name: () -> ::String
+        def multicast_groups: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_network_analyzer_configuration-instance_method
+      def get_network_analyzer_configuration: (
+                                                configuration_name: ::String
+                                              ) -> _GetNetworkAnalyzerConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNetworkAnalyzerConfigurationResponseSuccess
+
+      interface _GetPartnerAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPartnerAccountResponse]
+        def sidewalk: () -> Types::SidewalkAccountInfoWithFingerprint
+        def account_linked: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_partner_account-instance_method
+      def get_partner_account: (
+                                 partner_account_id: ::String,
+                                 partner_type: ("Sidewalk")
+                               ) -> _GetPartnerAccountResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPartnerAccountResponseSuccess
+
+      interface _GetPositionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPositionResponse]
+        def position: () -> ::Array[::Float]
+        def accuracy: () -> Types::Accuracy
+        def solver_type: () -> ("GNSS")
+        def solver_provider: () -> ("Semtech")
+        def solver_version: () -> ::String
+        def timestamp: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_position-instance_method
+      def get_position: (
+                          resource_identifier: ::String,
+                          resource_type: ("WirelessDevice" | "WirelessGateway")
+                        ) -> _GetPositionResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPositionResponseSuccess
+
+      interface _GetPositionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPositionConfigurationResponse]
+        def solvers: () -> Types::PositionSolverDetails
+        def destination: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_position_configuration-instance_method
+      def get_position_configuration: (
+                                        resource_identifier: ::String,
+                                        resource_type: ("WirelessDevice" | "WirelessGateway")
+                                      ) -> _GetPositionConfigurationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPositionConfigurationResponseSuccess
+
+      interface _GetPositionEstimateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPositionEstimateResponse]
+        def geo_json_payload: () -> ::IO
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_position_estimate-instance_method
+      def get_position_estimate: (
+                                   ?wi_fi_access_points: Array[
+                                     {
+                                       mac_address: ::String,
+                                       rss: ::Integer
+                                     },
+                                   ],
+                                   ?cell_towers: {
+                                     gsm: Array[
+                                       {
+                                         mcc: ::Integer,
+                                         mnc: ::Integer,
+                                         lac: ::Integer,
+                                         geran_cid: ::Integer,
+                                         gsm_local_id: {
+                                           bsic: ::Integer,
+                                           bcch: ::Integer
+                                         }?,
+                                         gsm_timing_advance: ::Integer?,
+                                         rx_level: ::Integer?,
+                                         gsm_nmr: Array[
+                                           {
+                                             bsic: ::Integer,
+                                             bcch: ::Integer,
+                                             rx_level: ::Integer?,
+                                             global_identity: {
+                                               lac: ::Integer,
+                                               geran_cid: ::Integer
+                                             }?
+                                           },
+                                         ]?
+                                       },
+                                     ]?,
+                                     wcdma: Array[
+                                       {
+                                         mcc: ::Integer,
+                                         mnc: ::Integer,
+                                         lac: ::Integer?,
+                                         utran_cid: ::Integer,
+                                         wcdma_local_id: {
+                                           uarfcndl: ::Integer,
+                                           psc: ::Integer
+                                         }?,
+                                         rscp: ::Integer?,
+                                         path_loss: ::Integer?,
+                                         wcdma_nmr: Array[
+                                           {
+                                             uarfcndl: ::Integer,
+                                             psc: ::Integer,
+                                             utran_cid: ::Integer,
+                                             rscp: ::Integer?,
+                                             path_loss: ::Integer?
+                                           },
+                                         ]?
+                                       },
+                                     ]?,
+                                     tdscdma: Array[
+                                       {
+                                         mcc: ::Integer,
+                                         mnc: ::Integer,
+                                         lac: ::Integer?,
+                                         utran_cid: ::Integer,
+                                         tdscdma_local_id: {
+                                           uarfcn: ::Integer,
+                                           cell_params: ::Integer
+                                         }?,
+                                         tdscdma_timing_advance: ::Integer?,
+                                         rscp: ::Integer?,
+                                         path_loss: ::Integer?,
+                                         tdscdma_nmr: Array[
+                                           {
+                                             uarfcn: ::Integer,
+                                             cell_params: ::Integer,
+                                             utran_cid: ::Integer?,
+                                             rscp: ::Integer?,
+                                             path_loss: ::Integer?
+                                           },
+                                         ]?
+                                       },
+                                     ]?,
+                                     lte: Array[
+                                       {
+                                         mcc: ::Integer,
+                                         mnc: ::Integer,
+                                         eutran_cid: ::Integer,
+                                         tac: ::Integer?,
+                                         lte_local_id: {
+                                           pci: ::Integer,
+                                           earfcn: ::Integer
+                                         }?,
+                                         lte_timing_advance: ::Integer?,
+                                         rsrp: ::Integer?,
+                                         rsrq: ::Float?,
+                                         nr_capable: bool?,
+                                         lte_nmr: Array[
+                                           {
+                                             pci: ::Integer,
+                                             earfcn: ::Integer,
+                                             eutran_cid: ::Integer,
+                                             rsrp: ::Integer?,
+                                             rsrq: ::Float?
+                                           },
+                                         ]?
+                                       },
+                                     ]?,
+                                     cdma: Array[
+                                       {
+                                         system_id: ::Integer,
+                                         network_id: ::Integer,
+                                         base_station_id: ::Integer,
+                                         registration_zone: ::Integer?,
+                                         cdma_local_id: {
+                                           pn_offset: ::Integer,
+                                           cdma_channel: ::Integer
+                                         }?,
+                                         pilot_power: ::Integer?,
+                                         base_lat: ::Float?,
+                                         base_lng: ::Float?,
+                                         cdma_nmr: Array[
+                                           {
+                                             pn_offset: ::Integer,
+                                             cdma_channel: ::Integer,
+                                             pilot_power: ::Integer?,
+                                             base_station_id: ::Integer?
+                                           },
+                                         ]?
+                                       },
+                                     ]?
+                                   },
+                                   ?ip: {
+                                     ip_address: ::String
+                                   },
+                                   ?gnss: {
+                                     payload: ::String,
+                                     capture_time: ::Float?,
+                                     capture_time_accuracy: ::Float?,
+                                     assist_position: Array[::Float]?,
+                                     assist_altitude: ::Float?,
+                                     use_2_d_solver: bool?
+                                   },
+                                   ?timestamp: ::Time
+                                 ) ?{ (*untyped) -> void } -> _GetPositionEstimateResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _GetPositionEstimateResponseSuccess
+
+      interface _GetResourceEventConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourceEventConfigurationResponse]
+        def device_registration_state: () -> Types::DeviceRegistrationStateEventConfiguration
+        def proximity: () -> Types::ProximityEventConfiguration
+        def join: () -> Types::JoinEventConfiguration
+        def connection_status: () -> Types::ConnectionStatusEventConfiguration
+        def message_delivery_status: () -> Types::MessageDeliveryStatusEventConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_resource_event_configuration-instance_method
+      def get_resource_event_configuration: (
+                                              identifier: ::String,
+                                              identifier_type: ("PartnerAccountId" | "DevEui" | "GatewayEui" | "WirelessDeviceId" | "WirelessGatewayId"),
+                                              ?partner_type: ("Sidewalk")
+                                            ) -> _GetResourceEventConfigurationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourceEventConfigurationResponseSuccess
+
+      interface _GetResourceLogLevelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourceLogLevelResponse]
+        def log_level: () -> ("INFO" | "ERROR" | "DISABLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_resource_log_level-instance_method
+      def get_resource_log_level: (
+                                    resource_identifier: ::String,
+                                    resource_type: ::String
+                                  ) -> _GetResourceLogLevelResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourceLogLevelResponseSuccess
+
+      interface _GetResourcePositionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcePositionResponse]
+        def geo_json_payload: () -> ::IO
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_resource_position-instance_method
+      def get_resource_position: (
+                                   resource_identifier: ::String,
+                                   resource_type: ("WirelessDevice" | "WirelessGateway")
+                                 ) ?{ (*untyped) -> void } -> _GetResourcePositionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _GetResourcePositionResponseSuccess
+
+      interface _GetServiceEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceEndpointResponse]
+        def service_type: () -> ("CUPS" | "LNS")
+        def service_endpoint: () -> ::String
+        def server_trust: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_service_endpoint-instance_method
+      def get_service_endpoint: (
+                                  ?service_type: ("CUPS" | "LNS")
+                                ) -> _GetServiceEndpointResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceEndpointResponseSuccess
+
+      interface _GetServiceProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceProfileResponse]
+        def arn: () -> ::String
+        def name: () -> ::String
+        def id: () -> ::String
+        def lo_ra_wan: () -> Types::LoRaWANGetServiceProfileInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_service_profile-instance_method
+      def get_service_profile: (
+                                 id: ::String
+                               ) -> _GetServiceProfileResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceProfileResponseSuccess
+
+      interface _GetWirelessDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWirelessDeviceResponse]
+        def type: () -> ("Sidewalk" | "LoRaWAN")
+        def name: () -> ::String
+        def description: () -> ::String
+        def destination_name: () -> ::String
+        def id: () -> ::String
+        def arn: () -> ::String
+        def thing_name: () -> ::String
+        def thing_arn: () -> ::String
+        def lo_ra_wan: () -> Types::LoRaWANDevice
+        def sidewalk: () -> Types::SidewalkDevice
+        def positioning: () -> ("Enabled" | "Disabled")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_wireless_device-instance_method
+      def get_wireless_device: (
+                                 identifier: ::String,
+                                 identifier_type: ("WirelessDeviceId" | "DevEui" | "ThingName" | "SidewalkManufacturingSn")
+                               ) -> _GetWirelessDeviceResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWirelessDeviceResponseSuccess
+
+      interface _GetWirelessDeviceImportTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWirelessDeviceImportTaskResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def destination_name: () -> ::String
+        def sidewalk: () -> Types::SidewalkGetStartImportInfo
+        def creation_time: () -> ::Time
+        def status: () -> ("INITIALIZING" | "INITIALIZED" | "PENDING" | "COMPLETE" | "FAILED" | "DELETING")
+        def status_reason: () -> ::String
+        def initialized_imported_device_count: () -> ::Integer
+        def pending_imported_device_count: () -> ::Integer
+        def onboarded_imported_device_count: () -> ::Integer
+        def failed_imported_device_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_wireless_device_import_task-instance_method
+      def get_wireless_device_import_task: (
+                                             id: ::String
+                                           ) -> _GetWirelessDeviceImportTaskResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWirelessDeviceImportTaskResponseSuccess
+
+      interface _GetWirelessDeviceStatisticsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWirelessDeviceStatisticsResponse]
+        def wireless_device_id: () -> ::String
+        def last_uplink_received_at: () -> ::String
+        def lo_ra_wan: () -> Types::LoRaWANDeviceMetadata
+        def sidewalk: () -> Types::SidewalkDeviceMetadata
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_wireless_device_statistics-instance_method
+      def get_wireless_device_statistics: (
+                                            wireless_device_id: ::String
+                                          ) -> _GetWirelessDeviceStatisticsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWirelessDeviceStatisticsResponseSuccess
+
+      interface _GetWirelessGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWirelessGatewayResponse]
+        def name: () -> ::String
+        def id: () -> ::String
+        def description: () -> ::String
+        def lo_ra_wan: () -> Types::LoRaWANGateway
+        def arn: () -> ::String
+        def thing_name: () -> ::String
+        def thing_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_wireless_gateway-instance_method
+      def get_wireless_gateway: (
+                                  identifier: ::String,
+                                  identifier_type: ("GatewayEui" | "WirelessGatewayId" | "ThingName")
+                                ) -> _GetWirelessGatewayResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWirelessGatewayResponseSuccess
+
+      interface _GetWirelessGatewayCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWirelessGatewayCertificateResponse]
+        def iot_certificate_id: () -> ::String
+        def lo_ra_wan_network_server_certificate_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_wireless_gateway_certificate-instance_method
+      def get_wireless_gateway_certificate: (
+                                              id: ::String
+                                            ) -> _GetWirelessGatewayCertificateResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWirelessGatewayCertificateResponseSuccess
+
+      interface _GetWirelessGatewayFirmwareInformationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWirelessGatewayFirmwareInformationResponse]
+        def lo_ra_wan: () -> Types::LoRaWANGatewayCurrentVersion
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_wireless_gateway_firmware_information-instance_method
+      def get_wireless_gateway_firmware_information: (
+                                                       id: ::String
+                                                     ) -> _GetWirelessGatewayFirmwareInformationResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWirelessGatewayFirmwareInformationResponseSuccess
+
+      interface _GetWirelessGatewayStatisticsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWirelessGatewayStatisticsResponse]
+        def wireless_gateway_id: () -> ::String
+        def last_uplink_received_at: () -> ::String
+        def connection_status: () -> ("Connected" | "Disconnected")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_wireless_gateway_statistics-instance_method
+      def get_wireless_gateway_statistics: (
+                                             wireless_gateway_id: ::String
+                                           ) -> _GetWirelessGatewayStatisticsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWirelessGatewayStatisticsResponseSuccess
+
+      interface _GetWirelessGatewayTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWirelessGatewayTaskResponse]
+        def wireless_gateway_id: () -> ::String
+        def wireless_gateway_task_definition_id: () -> ::String
+        def last_uplink_received_at: () -> ::String
+        def task_created_at: () -> ::String
+        def status: () -> ("PENDING" | "IN_PROGRESS" | "FIRST_RETRY" | "SECOND_RETRY" | "COMPLETED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_wireless_gateway_task-instance_method
+      def get_wireless_gateway_task: (
+                                       id: ::String
+                                     ) -> _GetWirelessGatewayTaskResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWirelessGatewayTaskResponseSuccess
+
+      interface _GetWirelessGatewayTaskDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWirelessGatewayTaskDefinitionResponse]
+        def auto_create_tasks: () -> bool
+        def name: () -> ::String
+        def update: () -> Types::UpdateWirelessGatewayTaskCreate
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_wireless_gateway_task_definition-instance_method
+      def get_wireless_gateway_task_definition: (
+                                                  id: ::String
+                                                ) -> _GetWirelessGatewayTaskDefinitionResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWirelessGatewayTaskDefinitionResponseSuccess
+
+      interface _ListDestinationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDestinationsResponse]
+        def next_token: () -> ::String
+        def destination_list: () -> ::Array[Types::Destinations]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#list_destinations-instance_method
+      def list_destinations: (
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListDestinationsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDestinationsResponseSuccess
+
+      interface _ListDeviceProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDeviceProfilesResponse]
+        def next_token: () -> ::String
+        def device_profile_list: () -> ::Array[Types::DeviceProfile]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#list_device_profiles-instance_method
+      def list_device_profiles: (
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer,
+                                  ?device_profile_type: ("Sidewalk" | "LoRaWAN")
+                                ) -> _ListDeviceProfilesResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeviceProfilesResponseSuccess
+
+      interface _ListDevicesForWirelessDeviceImportTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDevicesForWirelessDeviceImportTaskResponse]
+        def next_token: () -> ::String
+        def destination_name: () -> ::String
+        def imported_wireless_device_list: () -> ::Array[Types::ImportedWirelessDevice]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#list_devices_for_wireless_device_import_task-instance_method
+      def list_devices_for_wireless_device_import_task: (
+                                                          id: ::String,
+                                                          ?max_results: ::Integer,
+                                                          ?next_token: ::String,
+                                                          ?status: ("INITIALIZED" | "PENDING" | "ONBOARDED" | "FAILED")
+                                                        ) -> _ListDevicesForWirelessDeviceImportTaskResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDevicesForWirelessDeviceImportTaskResponseSuccess
+
+      interface _ListEventConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEventConfigurationsResponse]
+        def next_token: () -> ::String
+        def event_configurations_list: () -> ::Array[Types::EventConfigurationItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#list_event_configurations-instance_method
+      def list_event_configurations: (
+                                       resource_type: ("SidewalkAccount" | "WirelessDevice" | "WirelessGateway"),
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListEventConfigurationsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEventConfigurationsResponseSuccess
+
+      interface _ListFuotaTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFuotaTasksResponse]
+        def next_token: () -> ::String
+        def fuota_task_list: () -> ::Array[Types::FuotaTask]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#list_fuota_tasks-instance_method
+      def list_fuota_tasks: (
+                              ?next_token: ::String,
+                              ?max_results: ::Integer
+                            ) -> _ListFuotaTasksResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFuotaTasksResponseSuccess
+
+      interface _ListMulticastGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMulticastGroupsResponse]
+        def next_token: () -> ::String
+        def multicast_group_list: () -> ::Array[Types::MulticastGroup]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#list_multicast_groups-instance_method
+      def list_multicast_groups: (
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
+                                 ) -> _ListMulticastGroupsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMulticastGroupsResponseSuccess
+
+      interface _ListMulticastGroupsByFuotaTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMulticastGroupsByFuotaTaskResponse]
+        def next_token: () -> ::String
+        def multicast_group_list: () -> ::Array[Types::MulticastGroupByFuotaTask]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#list_multicast_groups_by_fuota_task-instance_method
+      def list_multicast_groups_by_fuota_task: (
+                                                 id: ::String,
+                                                 ?next_token: ::String,
+                                                 ?max_results: ::Integer
+                                               ) -> _ListMulticastGroupsByFuotaTaskResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMulticastGroupsByFuotaTaskResponseSuccess
+
+      interface _ListNetworkAnalyzerConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNetworkAnalyzerConfigurationsResponse]
+        def next_token: () -> ::String
+        def network_analyzer_configuration_list: () -> ::Array[Types::NetworkAnalyzerConfigurations]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#list_network_analyzer_configurations-instance_method
+      def list_network_analyzer_configurations: (
+                                                  ?max_results: ::Integer,
+                                                  ?next_token: ::String
+                                                ) -> _ListNetworkAnalyzerConfigurationsResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNetworkAnalyzerConfigurationsResponseSuccess
+
+      interface _ListPartnerAccountsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPartnerAccountsResponse]
+        def next_token: () -> ::String
+        def sidewalk: () -> ::Array[Types::SidewalkAccountInfoWithFingerprint]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#list_partner_accounts-instance_method
+      def list_partner_accounts: (
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
+                                 ) -> _ListPartnerAccountsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPartnerAccountsResponseSuccess
+
+      interface _ListPositionConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPositionConfigurationsResponse]
+        def position_configuration_list: () -> ::Array[Types::PositionConfigurationItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#list_position_configurations-instance_method
+      def list_position_configurations: (
+                                          ?resource_type: ("WirelessDevice" | "WirelessGateway"),
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _ListPositionConfigurationsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPositionConfigurationsResponseSuccess
+
+      interface _ListQueuedMessagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListQueuedMessagesResponse]
+        def next_token: () -> ::String
+        def downlink_queue_messages_list: () -> ::Array[Types::DownlinkQueueMessage]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#list_queued_messages-instance_method
+      def list_queued_messages: (
+                                  id: ::String,
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer,
+                                  ?wireless_device_type: ("Sidewalk" | "LoRaWAN")
+                                ) -> _ListQueuedMessagesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListQueuedMessagesResponseSuccess
+
+      interface _ListServiceProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceProfilesResponse]
+        def next_token: () -> ::String
+        def service_profile_list: () -> ::Array[Types::ServiceProfile]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#list_service_profiles-instance_method
+      def list_service_profiles: (
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
+                                 ) -> _ListServiceProfilesResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceProfilesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListWirelessDeviceImportTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWirelessDeviceImportTasksResponse]
+        def next_token: () -> ::String
+        def wireless_device_import_task_list: () -> ::Array[Types::WirelessDeviceImportTask]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#list_wireless_device_import_tasks-instance_method
+      def list_wireless_device_import_tasks: (
+                                               ?max_results: ::Integer,
+                                               ?next_token: ::String
+                                             ) -> _ListWirelessDeviceImportTasksResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWirelessDeviceImportTasksResponseSuccess
+
+      interface _ListWirelessDevicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWirelessDevicesResponse]
+        def next_token: () -> ::String
+        def wireless_device_list: () -> ::Array[Types::WirelessDeviceStatistics]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#list_wireless_devices-instance_method
+      def list_wireless_devices: (
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String,
+                                   ?destination_name: ::String,
+                                   ?device_profile_id: ::String,
+                                   ?service_profile_id: ::String,
+                                   ?wireless_device_type: ("Sidewalk" | "LoRaWAN"),
+                                   ?fuota_task_id: ::String,
+                                   ?multicast_group_id: ::String
+                                 ) -> _ListWirelessDevicesResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWirelessDevicesResponseSuccess
+
+      interface _ListWirelessGatewayTaskDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWirelessGatewayTaskDefinitionsResponse]
+        def next_token: () -> ::String
+        def task_definitions: () -> ::Array[Types::UpdateWirelessGatewayTaskEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#list_wireless_gateway_task_definitions-instance_method
+      def list_wireless_gateway_task_definitions: (
+                                                    ?max_results: ::Integer,
+                                                    ?next_token: ::String,
+                                                    ?task_definition_type: ("UPDATE")
+                                                  ) -> _ListWirelessGatewayTaskDefinitionsResponseSuccess
+                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWirelessGatewayTaskDefinitionsResponseSuccess
+
+      interface _ListWirelessGatewaysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWirelessGatewaysResponse]
+        def next_token: () -> ::String
+        def wireless_gateway_list: () -> ::Array[Types::WirelessGatewayStatistics]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#list_wireless_gateways-instance_method
+      def list_wireless_gateways: (
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListWirelessGatewaysResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWirelessGatewaysResponseSuccess
+
+      interface _PutPositionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutPositionConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#put_position_configuration-instance_method
+      def put_position_configuration: (
+                                        resource_identifier: ::String,
+                                        resource_type: ("WirelessDevice" | "WirelessGateway"),
+                                        ?solvers: {
+                                          semtech_gnss: {
+                                            status: ("Enabled" | "Disabled"),
+                                            fec: ("ROSE" | "NONE")
+                                          }?
+                                        },
+                                        ?destination: ::String
+                                      ) -> _PutPositionConfigurationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutPositionConfigurationResponseSuccess
+
+      interface _PutResourceLogLevelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResourceLogLevelResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#put_resource_log_level-instance_method
+      def put_resource_log_level: (
+                                    resource_identifier: ::String,
+                                    resource_type: ::String,
+                                    log_level: ("INFO" | "ERROR" | "DISABLED")
+                                  ) -> _PutResourceLogLevelResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourceLogLevelResponseSuccess
+
+      interface _ResetAllResourceLogLevelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResetAllResourceLogLevelsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#reset_all_resource_log_levels-instance_method
+      def reset_all_resource_log_levels: (
+                                         ) -> _ResetAllResourceLogLevelsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetAllResourceLogLevelsResponseSuccess
+
+      interface _ResetResourceLogLevelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResetResourceLogLevelResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#reset_resource_log_level-instance_method
+      def reset_resource_log_level: (
+                                      resource_identifier: ::String,
+                                      resource_type: ::String
+                                    ) -> _ResetResourceLogLevelResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetResourceLogLevelResponseSuccess
+
+      interface _SendDataToMulticastGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendDataToMulticastGroupResponse]
+        def message_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#send_data_to_multicast_group-instance_method
+      def send_data_to_multicast_group: (
+                                          id: ::String,
+                                          payload_data: ::String,
+                                          wireless_metadata: {
+                                            lo_ra_wan: {
+                                              f_port: ::Integer?
+                                            }?
+                                          }
+                                        ) -> _SendDataToMulticastGroupResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendDataToMulticastGroupResponseSuccess
+
+      interface _SendDataToWirelessDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendDataToWirelessDeviceResponse]
+        def message_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#send_data_to_wireless_device-instance_method
+      def send_data_to_wireless_device: (
+                                          id: ::String,
+                                          transmit_mode: ::Integer,
+                                          payload_data: ::String,
+                                          ?wireless_metadata: {
+                                            lo_ra_wan: {
+                                              f_port: ::Integer?,
+                                              participating_gateways: {
+                                                downlink_mode: ("SEQUENTIAL" | "CONCURRENT" | "USING_UPLINK_GATEWAY"),
+                                                gateway_list: Array[
+                                                  {
+                                                    gateway_id: ::String,
+                                                    downlink_frequency: ::Integer
+                                                  },
+                                                ],
+                                                transmission_interval: ::Integer
+                                              }?
+                                            }?,
+                                            sidewalk: {
+                                              seq: ::Integer?,
+                                              message_type: ("CUSTOM_COMMAND_ID_NOTIFY" | "CUSTOM_COMMAND_ID_GET" | "CUSTOM_COMMAND_ID_SET" | "CUSTOM_COMMAND_ID_RESP")?,
+                                              ack_mode_retry_duration_secs: ::Integer?
+                                            }?
+                                          }
+                                        ) -> _SendDataToWirelessDeviceResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendDataToWirelessDeviceResponseSuccess
+
+      interface _StartBulkAssociateWirelessDeviceWithMulticastGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartBulkAssociateWirelessDeviceWithMulticastGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#start_bulk_associate_wireless_device_with_multicast_group-instance_method
+      def start_bulk_associate_wireless_device_with_multicast_group: (
+                                                                       id: ::String,
+                                                                       ?query_string: ::String,
+                                                                       ?tags: Array[
+                                                                         {
+                                                                           key: ::String,
+                                                                           value: ::String
+                                                                         },
+                                                                       ]
+                                                                     ) -> _StartBulkAssociateWirelessDeviceWithMulticastGroupResponseSuccess
+                                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartBulkAssociateWirelessDeviceWithMulticastGroupResponseSuccess
+
+      interface _StartBulkDisassociateWirelessDeviceFromMulticastGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartBulkDisassociateWirelessDeviceFromMulticastGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#start_bulk_disassociate_wireless_device_from_multicast_group-instance_method
+      def start_bulk_disassociate_wireless_device_from_multicast_group: (
+                                                                          id: ::String,
+                                                                          ?query_string: ::String,
+                                                                          ?tags: Array[
+                                                                            {
+                                                                              key: ::String,
+                                                                              value: ::String
+                                                                            },
+                                                                          ]
+                                                                        ) -> _StartBulkDisassociateWirelessDeviceFromMulticastGroupResponseSuccess
+                                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartBulkDisassociateWirelessDeviceFromMulticastGroupResponseSuccess
+
+      interface _StartFuotaTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartFuotaTaskResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#start_fuota_task-instance_method
+      def start_fuota_task: (
+                              id: ::String,
+                              ?lo_ra_wan: {
+                                start_time: ::Time?
+                              }
+                            ) -> _StartFuotaTaskResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartFuotaTaskResponseSuccess
+
+      interface _StartMulticastGroupSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMulticastGroupSessionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#start_multicast_group_session-instance_method
+      def start_multicast_group_session: (
+                                           id: ::String,
+                                           lo_ra_wan: {
+                                             dl_dr: ::Integer?,
+                                             dl_freq: ::Integer?,
+                                             session_start_time: ::Time?,
+                                             session_timeout: ::Integer?,
+                                             ping_slot_period: ::Integer?
+                                           }
+                                         ) -> _StartMulticastGroupSessionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMulticastGroupSessionResponseSuccess
+
+      interface _StartSingleWirelessDeviceImportTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartSingleWirelessDeviceImportTaskResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#start_single_wireless_device_import_task-instance_method
+      def start_single_wireless_device_import_task: (
+                                                      destination_name: ::String,
+                                                      ?client_request_token: ::String,
+                                                      ?device_name: ::String,
+                                                      ?tags: Array[
+                                                        {
+                                                          key: ::String,
+                                                          value: ::String
+                                                        },
+                                                      ],
+                                                      sidewalk: {
+                                                        sidewalk_manufacturing_sn: ::String?
+                                                      }
+                                                    ) -> _StartSingleWirelessDeviceImportTaskResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartSingleWirelessDeviceImportTaskResponseSuccess
+
+      interface _StartWirelessDeviceImportTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartWirelessDeviceImportTaskResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#start_wireless_device_import_task-instance_method
+      def start_wireless_device_import_task: (
+                                               destination_name: ::String,
+                                               ?client_request_token: ::String,
+                                               ?tags: Array[
+                                                 {
+                                                   key: ::String,
+                                                   value: ::String
+                                                 },
+                                               ],
+                                               sidewalk: {
+                                                 device_creation_file: ::String?,
+                                                 role: ::String?
+                                               }
+                                             ) -> _StartWirelessDeviceImportTaskResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartWirelessDeviceImportTaskResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _TestWirelessDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TestWirelessDeviceResponse]
+        def result: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#test_wireless_device-instance_method
+      def test_wireless_device: (
+                                  id: ::String
+                                ) -> _TestWirelessDeviceResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestWirelessDeviceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDestinationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#update_destination-instance_method
+      def update_destination: (
+                                name: ::String,
+                                ?expression_type: ("RuleName" | "MqttTopic"),
+                                ?expression: ::String,
+                                ?description: ::String,
+                                ?role_arn: ::String
+                              ) -> _UpdateDestinationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDestinationResponseSuccess
+
+      interface _UpdateEventConfigurationByResourceTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEventConfigurationByResourceTypesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#update_event_configuration_by_resource_types-instance_method
+      def update_event_configuration_by_resource_types: (
+                                                          ?device_registration_state: {
+                                                            sidewalk: {
+                                                              wireless_device_event_topic: ("Enabled" | "Disabled")?
+                                                            }?
+                                                          },
+                                                          ?proximity: {
+                                                            sidewalk: {
+                                                              wireless_device_event_topic: ("Enabled" | "Disabled")?
+                                                            }?
+                                                          },
+                                                          ?join: {
+                                                            lo_ra_wan: {
+                                                              wireless_device_event_topic: ("Enabled" | "Disabled")?
+                                                            }?
+                                                          },
+                                                          ?connection_status: {
+                                                            lo_ra_wan: {
+                                                              wireless_gateway_event_topic: ("Enabled" | "Disabled")?
+                                                            }?
+                                                          },
+                                                          ?message_delivery_status: {
+                                                            sidewalk: {
+                                                              wireless_device_event_topic: ("Enabled" | "Disabled")?
+                                                            }?
+                                                          }
+                                                        ) -> _UpdateEventConfigurationByResourceTypesResponseSuccess
+                                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEventConfigurationByResourceTypesResponseSuccess
+
+      interface _UpdateFuotaTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFuotaTaskResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#update_fuota_task-instance_method
+      def update_fuota_task: (
+                               id: ::String,
+                               ?name: ::String,
+                               ?description: ::String,
+                               ?lo_ra_wan: {
+                                 rf_region: ("EU868" | "US915" | "AU915" | "AS923-1" | "AS923-2" | "AS923-3" | "AS923-4" | "EU433" | "CN470" | "CN779" | "RU864" | "KR920" | "IN865")?
+                               },
+                               ?firmware_update_image: ::String,
+                               ?firmware_update_role: ::String,
+                               ?redundancy_percent: ::Integer,
+                               ?fragment_size_bytes: ::Integer,
+                               ?fragment_interval_ms: ::Integer
+                             ) -> _UpdateFuotaTaskResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFuotaTaskResponseSuccess
+
+      interface _UpdateLogLevelsByResourceTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLogLevelsByResourceTypesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#update_log_levels_by_resource_types-instance_method
+      def update_log_levels_by_resource_types: (
+                                                 ?default_log_level: ("INFO" | "ERROR" | "DISABLED"),
+                                                 ?wireless_device_log_options: Array[
+                                                   {
+                                                     type: ("Sidewalk" | "LoRaWAN"),
+                                                     log_level: ("INFO" | "ERROR" | "DISABLED"),
+                                                     events: Array[
+                                                       {
+                                                         event: ("Join" | "Rejoin" | "Uplink_Data" | "Downlink_Data" | "Registration"),
+                                                         log_level: ("INFO" | "ERROR" | "DISABLED")
+                                                       },
+                                                     ]?
+                                                   },
+                                                 ],
+                                                 ?wireless_gateway_log_options: Array[
+                                                   {
+                                                     type: ("LoRaWAN"),
+                                                     log_level: ("INFO" | "ERROR" | "DISABLED"),
+                                                     events: Array[
+                                                       {
+                                                         event: ("CUPS_Request" | "Certificate"),
+                                                         log_level: ("INFO" | "ERROR" | "DISABLED")
+                                                       },
+                                                     ]?
+                                                   },
+                                                 ]
+                                               ) -> _UpdateLogLevelsByResourceTypesResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLogLevelsByResourceTypesResponseSuccess
+
+      interface _UpdateMulticastGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMulticastGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#update_multicast_group-instance_method
+      def update_multicast_group: (
+                                    id: ::String,
+                                    ?name: ::String,
+                                    ?description: ::String,
+                                    ?lo_ra_wan: {
+                                      rf_region: ("EU868" | "US915" | "AU915" | "AS923-1" | "AS923-2" | "AS923-3" | "AS923-4" | "EU433" | "CN470" | "CN779" | "RU864" | "KR920" | "IN865")?,
+                                      dl_class: ("ClassB" | "ClassC")?
+                                    }
+                                  ) -> _UpdateMulticastGroupResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMulticastGroupResponseSuccess
+
+      interface _UpdateNetworkAnalyzerConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNetworkAnalyzerConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#update_network_analyzer_configuration-instance_method
+      def update_network_analyzer_configuration: (
+                                                   configuration_name: ::String,
+                                                   ?trace_content: {
+                                                     wireless_device_frame_info: ("ENABLED" | "DISABLED")?,
+                                                     log_level: ("INFO" | "ERROR" | "DISABLED")?,
+                                                     multicast_frame_info: ("ENABLED" | "DISABLED")?
+                                                   },
+                                                   ?wireless_devices_to_add: Array[::String],
+                                                   ?wireless_devices_to_remove: Array[::String],
+                                                   ?wireless_gateways_to_add: Array[::String],
+                                                   ?wireless_gateways_to_remove: Array[::String],
+                                                   ?description: ::String,
+                                                   ?multicast_groups_to_add: Array[::String],
+                                                   ?multicast_groups_to_remove: Array[::String]
+                                                 ) -> _UpdateNetworkAnalyzerConfigurationResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNetworkAnalyzerConfigurationResponseSuccess
+
+      interface _UpdatePartnerAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePartnerAccountResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#update_partner_account-instance_method
+      def update_partner_account: (
+                                    sidewalk: {
+                                      app_server_private_key: ::String?
+                                    },
+                                    partner_account_id: ::String,
+                                    partner_type: ("Sidewalk")
+                                  ) -> _UpdatePartnerAccountResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePartnerAccountResponseSuccess
+
+      interface _UpdatePositionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePositionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#update_position-instance_method
+      def update_position: (
+                             resource_identifier: ::String,
+                             resource_type: ("WirelessDevice" | "WirelessGateway"),
+                             position: Array[::Float]
+                           ) -> _UpdatePositionResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePositionResponseSuccess
+
+      interface _UpdateResourceEventConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResourceEventConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#update_resource_event_configuration-instance_method
+      def update_resource_event_configuration: (
+                                                 identifier: ::String,
+                                                 identifier_type: ("PartnerAccountId" | "DevEui" | "GatewayEui" | "WirelessDeviceId" | "WirelessGatewayId"),
+                                                 ?partner_type: ("Sidewalk"),
+                                                 ?device_registration_state: {
+                                                   sidewalk: {
+                                                     amazon_id_event_topic: ("Enabled" | "Disabled")?
+                                                   }?,
+                                                   wireless_device_id_event_topic: ("Enabled" | "Disabled")?
+                                                 },
+                                                 ?proximity: {
+                                                   sidewalk: {
+                                                     amazon_id_event_topic: ("Enabled" | "Disabled")?
+                                                   }?,
+                                                   wireless_device_id_event_topic: ("Enabled" | "Disabled")?
+                                                 },
+                                                 ?join: {
+                                                   lo_ra_wan: {
+                                                     dev_eui_event_topic: ("Enabled" | "Disabled")?
+                                                   }?,
+                                                   wireless_device_id_event_topic: ("Enabled" | "Disabled")?
+                                                 },
+                                                 ?connection_status: {
+                                                   lo_ra_wan: {
+                                                     gateway_eui_event_topic: ("Enabled" | "Disabled")?
+                                                   }?,
+                                                   wireless_gateway_id_event_topic: ("Enabled" | "Disabled")?
+                                                 },
+                                                 ?message_delivery_status: {
+                                                   sidewalk: {
+                                                     amazon_id_event_topic: ("Enabled" | "Disabled")?
+                                                   }?,
+                                                   wireless_device_id_event_topic: ("Enabled" | "Disabled")?
+                                                 }
+                                               ) -> _UpdateResourceEventConfigurationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResourceEventConfigurationResponseSuccess
+
+      interface _UpdateResourcePositionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResourcePositionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#update_resource_position-instance_method
+      def update_resource_position: (
+                                      resource_identifier: ::String,
+                                      resource_type: ("WirelessDevice" | "WirelessGateway"),
+                                      ?geo_json_payload: ::String
+                                    ) -> _UpdateResourcePositionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResourcePositionResponseSuccess
+
+      interface _UpdateWirelessDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWirelessDeviceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#update_wireless_device-instance_method
+      def update_wireless_device: (
+                                    id: ::String,
+                                    ?destination_name: ::String,
+                                    ?name: ::String,
+                                    ?description: ::String,
+                                    ?lo_ra_wan: {
+                                      device_profile_id: ::String?,
+                                      service_profile_id: ::String?,
+                                      abp_v1_1: {
+                                        f_cnt_start: ::Integer?
+                                      }?,
+                                      abp_v1_0_x: {
+                                        f_cnt_start: ::Integer?
+                                      }?,
+                                      f_ports: {
+                                        positioning: {
+                                          clock_sync: ::Integer?,
+                                          stream: ::Integer?,
+                                          gnss: ::Integer?
+                                        }?,
+                                        applications: Array[
+                                          {
+                                            f_port: ::Integer?,
+                                            type: ("SemtechGeolocation")?,
+                                            destination_name: ::String?
+                                          },
+                                        ]?
+                                      }?
+                                    },
+                                    ?positioning: ("Enabled" | "Disabled")
+                                  ) -> _UpdateWirelessDeviceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWirelessDeviceResponseSuccess
+
+      interface _UpdateWirelessDeviceImportTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWirelessDeviceImportTaskResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#update_wireless_device_import_task-instance_method
+      def update_wireless_device_import_task: (
+                                                id: ::String,
+                                                sidewalk: {
+                                                  device_creation_file: ::String?
+                                                }
+                                              ) -> _UpdateWirelessDeviceImportTaskResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWirelessDeviceImportTaskResponseSuccess
+
+      interface _UpdateWirelessGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWirelessGatewayResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#update_wireless_gateway-instance_method
+      def update_wireless_gateway: (
+                                     id: ::String,
+                                     ?name: ::String,
+                                     ?description: ::String,
+                                     ?join_eui_filters: Array[
+                                       Array[::String],
+                                     ],
+                                     ?net_id_filters: Array[::String],
+                                     ?max_eirp: ::Float
+                                   ) -> _UpdateWirelessGatewayResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWirelessGatewayResponseSuccess
+    end
+  end
+end
+

@@ -1,0 +1,134 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module FSx
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class ActiveDirectoryError < ::Aws::Errors::ServiceError
+        def active_directory_id: () -> ::String
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class BackupBeingCopied < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def backup_id: () -> ::String
+      end
+      class BackupInProgress < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class BackupNotFound < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class BackupRestoring < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def file_system_id: () -> ::String
+      end
+      class BadRequest < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DataRepositoryAssociationNotFound < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DataRepositoryTaskEnded < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DataRepositoryTaskExecuting < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DataRepositoryTaskNotFound < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class FileCacheNotFound < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class FileSystemNotFound < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class IncompatibleParameterError < ::Aws::Errors::ServiceError
+        def parameter: () -> ::String
+        def message: () -> ::String
+      end
+      class IncompatibleRegionForMultiAZ < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InternalServerError < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidDataRepositoryType < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidDestinationKmsKey < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidExportPath < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidImportPath < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidNetworkSettings < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def invalid_subnet_id: () -> ::String
+        def invalid_security_group_id: () -> ::String
+        def invalid_route_table_id: () -> ::String
+      end
+      class InvalidPerUnitStorageThroughput < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidRegion < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidSourceKmsKey < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MissingFileCacheConfiguration < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MissingFileSystemConfiguration < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MissingVolumeConfiguration < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NotServiceResourceError < ::Aws::Errors::ServiceError
+        def resource_arn: () -> ::String
+        def message: () -> ::String
+      end
+      class ResourceDoesNotSupportTagging < ::Aws::Errors::ServiceError
+        def resource_arn: () -> ::String
+        def message: () -> ::String
+      end
+      class ResourceNotFound < ::Aws::Errors::ServiceError
+        def resource_arn: () -> ::String
+        def message: () -> ::String
+      end
+      class ServiceLimitExceeded < ::Aws::Errors::ServiceError
+        def limit: () -> ::String
+        def message: () -> ::String
+      end
+      class SnapshotNotFound < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class SourceBackupUnavailable < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def backup_id: () -> ::String
+      end
+      class StorageVirtualMachineNotFound < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnsupportedOperation < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class VolumeNotFound < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

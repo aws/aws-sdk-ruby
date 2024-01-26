@@ -1,0 +1,123 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudDirectory
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AccessDeniedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class BatchWriteException < ::Aws::Errors::ServiceError
+        def index: () -> ::String
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class CannotListParentOfRootException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DirectoryAlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DirectoryDeletedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DirectoryNotDisabledException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DirectoryNotEnabledException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class FacetAlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class FacetInUseException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class FacetNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class FacetValidationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class IncompatibleSchemaException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class IndexedAttributeMissingException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InternalServiceException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidArnException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidAttachmentException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidFacetUpdateException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidRuleException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidSchemaDocException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidTaggingRequestException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LinkNameAlreadyInUseException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NotIndexException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NotNodeException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NotPolicyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ObjectAlreadyDetachedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ObjectNotDetachedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class RetryableConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class SchemaAlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class SchemaAlreadyPublishedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class StillContainsLinksException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnsupportedIndexTypeException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ValidationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

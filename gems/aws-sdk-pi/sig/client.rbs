@@ -1,0 +1,296 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module PI
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PI/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreatePerformanceAnalysisReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePerformanceAnalysisReportResponse]
+        def analysis_report_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PI/Client.html#create_performance_analysis_report-instance_method
+      def create_performance_analysis_report: (
+                                                service_type: ("RDS" | "DOCDB"),
+                                                identifier: ::String,
+                                                start_time: ::Time,
+                                                end_time: ::Time,
+                                                ?tags: Array[
+                                                  {
+                                                    key: ::String,
+                                                    value: ::String
+                                                  },
+                                                ]
+                                              ) -> _CreatePerformanceAnalysisReportResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePerformanceAnalysisReportResponseSuccess
+
+      interface _DeletePerformanceAnalysisReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePerformanceAnalysisReportResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PI/Client.html#delete_performance_analysis_report-instance_method
+      def delete_performance_analysis_report: (
+                                                service_type: ("RDS" | "DOCDB"),
+                                                identifier: ::String,
+                                                analysis_report_id: ::String
+                                              ) -> _DeletePerformanceAnalysisReportResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePerformanceAnalysisReportResponseSuccess
+
+      interface _DescribeDimensionKeysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDimensionKeysResponse]
+        def aligned_start_time: () -> ::Time
+        def aligned_end_time: () -> ::Time
+        def partition_keys: () -> ::Array[Types::ResponsePartitionKey]
+        def keys: () -> ::Array[Types::DimensionKeyDescription]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PI/Client.html#describe_dimension_keys-instance_method
+      def describe_dimension_keys: (
+                                     service_type: ("RDS" | "DOCDB"),
+                                     identifier: ::String,
+                                     start_time: ::Time,
+                                     end_time: ::Time,
+                                     metric: ::String,
+                                     ?period_in_seconds: ::Integer,
+                                     group_by: {
+                                       group: ::String,
+                                       dimensions: Array[::String]?,
+                                       limit: ::Integer?
+                                     },
+                                     ?additional_metrics: Array[::String],
+                                     ?partition_by: {
+                                       group: ::String,
+                                       dimensions: Array[::String]?,
+                                       limit: ::Integer?
+                                     },
+                                     ?filter: Hash[::String, ::String],
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _DescribeDimensionKeysResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDimensionKeysResponseSuccess
+
+      interface _GetDimensionKeyDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDimensionKeyDetailsResponse]
+        def dimensions: () -> ::Array[Types::DimensionKeyDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PI/Client.html#get_dimension_key_details-instance_method
+      def get_dimension_key_details: (
+                                       service_type: ("RDS" | "DOCDB"),
+                                       identifier: ::String,
+                                       group: ::String,
+                                       group_identifier: ::String,
+                                       ?requested_dimensions: Array[::String]
+                                     ) -> _GetDimensionKeyDetailsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDimensionKeyDetailsResponseSuccess
+
+      interface _GetPerformanceAnalysisReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPerformanceAnalysisReportResponse]
+        def analysis_report: () -> Types::AnalysisReport
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PI/Client.html#get_performance_analysis_report-instance_method
+      def get_performance_analysis_report: (
+                                             service_type: ("RDS" | "DOCDB"),
+                                             identifier: ::String,
+                                             analysis_report_id: ::String,
+                                             ?text_format: ("PLAIN_TEXT" | "MARKDOWN"),
+                                             ?accept_language: ("EN_US")
+                                           ) -> _GetPerformanceAnalysisReportResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPerformanceAnalysisReportResponseSuccess
+
+      interface _GetResourceMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourceMetadataResponse]
+        def identifier: () -> ::String
+        def features: () -> ::Hash[::String, Types::FeatureMetadata]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PI/Client.html#get_resource_metadata-instance_method
+      def get_resource_metadata: (
+                                   service_type: ("RDS" | "DOCDB"),
+                                   identifier: ::String
+                                 ) -> _GetResourceMetadataResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourceMetadataResponseSuccess
+
+      interface _GetResourceMetricsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourceMetricsResponse]
+        def aligned_start_time: () -> ::Time
+        def aligned_end_time: () -> ::Time
+        def identifier: () -> ::String
+        def metric_list: () -> ::Array[Types::MetricKeyDataPoints]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PI/Client.html#get_resource_metrics-instance_method
+      def get_resource_metrics: (
+                                  service_type: ("RDS" | "DOCDB"),
+                                  identifier: ::String,
+                                  metric_queries: Array[
+                                    {
+                                      metric: ::String,
+                                      group_by: {
+                                        group: ::String,
+                                        dimensions: Array[::String]?,
+                                        limit: ::Integer?
+                                      }?,
+                                      filter: Hash[::String, ::String]?
+                                    },
+                                  ],
+                                  start_time: ::Time,
+                                  end_time: ::Time,
+                                  ?period_in_seconds: ::Integer,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String,
+                                  ?period_alignment: ("END_TIME" | "START_TIME")
+                                ) -> _GetResourceMetricsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourceMetricsResponseSuccess
+
+      interface _ListAvailableResourceDimensionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAvailableResourceDimensionsResponse]
+        def metric_dimensions: () -> ::Array[Types::MetricDimensionGroups]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PI/Client.html#list_available_resource_dimensions-instance_method
+      def list_available_resource_dimensions: (
+                                                service_type: ("RDS" | "DOCDB"),
+                                                identifier: ::String,
+                                                metrics: Array[::String],
+                                                ?max_results: ::Integer,
+                                                ?next_token: ::String
+                                              ) -> _ListAvailableResourceDimensionsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAvailableResourceDimensionsResponseSuccess
+
+      interface _ListAvailableResourceMetricsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAvailableResourceMetricsResponse]
+        def metrics: () -> ::Array[Types::ResponseResourceMetric]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PI/Client.html#list_available_resource_metrics-instance_method
+      def list_available_resource_metrics: (
+                                             service_type: ("RDS" | "DOCDB"),
+                                             identifier: ::String,
+                                             metric_types: Array[::String],
+                                             ?next_token: ::String,
+                                             ?max_results: ::Integer
+                                           ) -> _ListAvailableResourceMetricsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAvailableResourceMetricsResponseSuccess
+
+      interface _ListPerformanceAnalysisReportsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPerformanceAnalysisReportsResponse]
+        def analysis_reports: () -> ::Array[Types::AnalysisReportSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PI/Client.html#list_performance_analysis_reports-instance_method
+      def list_performance_analysis_reports: (
+                                               service_type: ("RDS" | "DOCDB"),
+                                               identifier: ::String,
+                                               ?next_token: ::String,
+                                               ?max_results: ::Integer,
+                                               ?list_tags: bool
+                                             ) -> _ListPerformanceAnalysisReportsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPerformanceAnalysisReportsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PI/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    service_type: ("RDS" | "DOCDB"),
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PI/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          service_type: ("RDS" | "DOCDB"),
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PI/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            service_type: ("RDS" | "DOCDB"),
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+    end
+  end
+end
+

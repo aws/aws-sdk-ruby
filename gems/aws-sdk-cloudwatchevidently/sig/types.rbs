@@ -1,0 +1,943 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CloudWatchEvidently
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchEvaluateFeatureRequest
+      attr_accessor project: ::String
+      attr_accessor requests: ::Array[Types::EvaluationRequest]
+      SENSITIVE: []
+    end
+
+    class BatchEvaluateFeatureResponse
+      attr_accessor results: ::Array[Types::EvaluationResult]
+      SENSITIVE: []
+    end
+
+    class CloudWatchLogsDestination
+      attr_accessor log_group: ::String
+      SENSITIVE: []
+    end
+
+    class CloudWatchLogsDestinationConfig
+      attr_accessor log_group: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateExperimentRequest
+      attr_accessor description: ::String
+      attr_accessor metric_goals: ::Array[Types::MetricGoalConfig]
+      attr_accessor name: ::String
+      attr_accessor online_ab_config: Types::OnlineAbConfig
+      attr_accessor project: ::String
+      attr_accessor randomization_salt: ::String
+      attr_accessor sampling_rate: ::Integer
+      attr_accessor segment: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor treatments: ::Array[Types::TreatmentConfig]
+      SENSITIVE: []
+    end
+
+    class CreateExperimentResponse
+      attr_accessor experiment: Types::Experiment
+      SENSITIVE: []
+    end
+
+    class CreateFeatureRequest
+      attr_accessor default_variation: ::String
+      attr_accessor description: ::String
+      attr_accessor entity_overrides: ::Hash[::String, ::String]
+      attr_accessor evaluation_strategy: ("ALL_RULES" | "DEFAULT_VARIATION")
+      attr_accessor name: ::String
+      attr_accessor project: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor variations: ::Array[Types::VariationConfig]
+      SENSITIVE: []
+    end
+
+    class CreateFeatureResponse
+      attr_accessor feature: Types::Feature
+      SENSITIVE: []
+    end
+
+    class CreateLaunchRequest
+      attr_accessor description: ::String
+      attr_accessor groups: ::Array[Types::LaunchGroupConfig]
+      attr_accessor metric_monitors: ::Array[Types::MetricMonitorConfig]
+      attr_accessor name: ::String
+      attr_accessor project: ::String
+      attr_accessor randomization_salt: ::String
+      attr_accessor scheduled_splits_config: Types::ScheduledSplitsLaunchConfig
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateLaunchResponse
+      attr_accessor launch: Types::Launch
+      SENSITIVE: []
+    end
+
+    class CreateProjectRequest
+      attr_accessor app_config_resource: Types::ProjectAppConfigResourceConfig
+      attr_accessor data_delivery: Types::ProjectDataDeliveryConfig
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateProjectResponse
+      attr_accessor project: Types::Project
+      SENSITIVE: []
+    end
+
+    class CreateSegmentRequest
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor pattern: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateSegmentResponse
+      attr_accessor segment: Types::Segment
+      SENSITIVE: []
+    end
+
+    class DeleteExperimentRequest
+      attr_accessor experiment: ::String
+      attr_accessor project: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteExperimentResponse < Aws::EmptyStructure
+    end
+
+    class DeleteFeatureRequest
+      attr_accessor feature: ::String
+      attr_accessor project: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFeatureResponse < Aws::EmptyStructure
+    end
+
+    class DeleteLaunchRequest
+      attr_accessor launch: ::String
+      attr_accessor project: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLaunchResponse < Aws::EmptyStructure
+    end
+
+    class DeleteProjectRequest
+      attr_accessor project: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProjectResponse < Aws::EmptyStructure
+    end
+
+    class DeleteSegmentRequest
+      attr_accessor segment: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSegmentResponse < Aws::EmptyStructure
+    end
+
+    class EvaluateFeatureRequest
+      attr_accessor entity_id: ::String
+      attr_accessor evaluation_context: ::String
+      attr_accessor feature: ::String
+      attr_accessor project: ::String
+      SENSITIVE: []
+    end
+
+    class EvaluateFeatureResponse
+      attr_accessor details: ::String
+      attr_accessor reason: ::String
+      attr_accessor value: Types::VariableValue
+      attr_accessor variation: ::String
+      SENSITIVE: []
+    end
+
+    class EvaluationRequest
+      attr_accessor entity_id: ::String
+      attr_accessor evaluation_context: ::String
+      attr_accessor feature: ::String
+      SENSITIVE: []
+    end
+
+    class EvaluationResult
+      attr_accessor details: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor feature: ::String
+      attr_accessor project: ::String
+      attr_accessor reason: ::String
+      attr_accessor value: Types::VariableValue
+      attr_accessor variation: ::String
+      SENSITIVE: []
+    end
+
+    class EvaluationRule
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class Event
+      attr_accessor data: ::String
+      attr_accessor timestamp: ::Time
+      attr_accessor type: ("aws.evidently.evaluation" | "aws.evidently.custom")
+      SENSITIVE: []
+    end
+
+    class Experiment
+      attr_accessor arn: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor execution: Types::ExperimentExecution
+      attr_accessor last_updated_time: ::Time
+      attr_accessor metric_goals: ::Array[Types::MetricGoal]
+      attr_accessor name: ::String
+      attr_accessor online_ab_definition: Types::OnlineAbDefinition
+      attr_accessor project: ::String
+      attr_accessor randomization_salt: ::String
+      attr_accessor sampling_rate: ::Integer
+      attr_accessor schedule: Types::ExperimentSchedule
+      attr_accessor segment: ::String
+      attr_accessor status: ("CREATED" | "UPDATING" | "RUNNING" | "COMPLETED" | "CANCELLED")
+      attr_accessor status_reason: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor treatments: ::Array[Types::Treatment]
+      attr_accessor type: ("aws.evidently.onlineab")
+      SENSITIVE: []
+    end
+
+    class ExperimentExecution
+      attr_accessor ended_time: ::Time
+      attr_accessor started_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ExperimentReport
+      attr_accessor content: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor report_name: ("BayesianInference")
+      attr_accessor treatment_name: ::String
+      SENSITIVE: []
+    end
+
+    class ExperimentResultsData
+      attr_accessor metric_name: ::String
+      attr_accessor result_stat: ("Mean" | "TreatmentEffect" | "ConfidenceIntervalUpperBound" | "ConfidenceIntervalLowerBound" | "PValue")
+      attr_accessor treatment_name: ::String
+      attr_accessor values: ::Array[::Float]
+      SENSITIVE: []
+    end
+
+    class ExperimentSchedule
+      attr_accessor analysis_complete_time: ::Time
+      SENSITIVE: []
+    end
+
+    class Feature
+      attr_accessor arn: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor default_variation: ::String
+      attr_accessor description: ::String
+      attr_accessor entity_overrides: ::Hash[::String, ::String]
+      attr_accessor evaluation_rules: ::Array[Types::EvaluationRule]
+      attr_accessor evaluation_strategy: ("ALL_RULES" | "DEFAULT_VARIATION")
+      attr_accessor last_updated_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor project: ::String
+      attr_accessor status: ("AVAILABLE" | "UPDATING")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor value_type: ("STRING" | "LONG" | "DOUBLE" | "BOOLEAN")
+      attr_accessor variations: ::Array[Types::Variation]
+      SENSITIVE: []
+    end
+
+    class FeatureSummary
+      attr_accessor arn: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor default_variation: ::String
+      attr_accessor evaluation_rules: ::Array[Types::EvaluationRule]
+      attr_accessor evaluation_strategy: ("ALL_RULES" | "DEFAULT_VARIATION")
+      attr_accessor last_updated_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor project: ::String
+      attr_accessor status: ("AVAILABLE" | "UPDATING")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetExperimentRequest
+      attr_accessor experiment: ::String
+      attr_accessor project: ::String
+      SENSITIVE: []
+    end
+
+    class GetExperimentResponse
+      attr_accessor experiment: Types::Experiment
+      SENSITIVE: []
+    end
+
+    class GetExperimentResultsRequest
+      attr_accessor base_stat: ("Mean")
+      attr_accessor end_time: ::Time
+      attr_accessor experiment: ::String
+      attr_accessor metric_names: ::Array[::String]
+      attr_accessor period: ::Integer
+      attr_accessor project: ::String
+      attr_accessor report_names: ::Array[("BayesianInference")]
+      attr_accessor result_stats: ::Array[("BaseStat" | "TreatmentEffect" | "ConfidenceInterval" | "PValue")]
+      attr_accessor start_time: ::Time
+      attr_accessor treatment_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetExperimentResultsResponse
+      attr_accessor details: ::String
+      attr_accessor reports: ::Array[Types::ExperimentReport]
+      attr_accessor results_data: ::Array[Types::ExperimentResultsData]
+      attr_accessor timestamps: ::Array[::Time]
+      SENSITIVE: []
+    end
+
+    class GetFeatureRequest
+      attr_accessor feature: ::String
+      attr_accessor project: ::String
+      SENSITIVE: []
+    end
+
+    class GetFeatureResponse
+      attr_accessor feature: Types::Feature
+      SENSITIVE: []
+    end
+
+    class GetLaunchRequest
+      attr_accessor launch: ::String
+      attr_accessor project: ::String
+      SENSITIVE: []
+    end
+
+    class GetLaunchResponse
+      attr_accessor launch: Types::Launch
+      SENSITIVE: []
+    end
+
+    class GetProjectRequest
+      attr_accessor project: ::String
+      SENSITIVE: []
+    end
+
+    class GetProjectResponse
+      attr_accessor project: Types::Project
+      SENSITIVE: []
+    end
+
+    class GetSegmentRequest
+      attr_accessor segment: ::String
+      SENSITIVE: []
+    end
+
+    class GetSegmentResponse
+      attr_accessor segment: Types::Segment
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Launch
+      attr_accessor arn: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor execution: Types::LaunchExecution
+      attr_accessor groups: ::Array[Types::LaunchGroup]
+      attr_accessor last_updated_time: ::Time
+      attr_accessor metric_monitors: ::Array[Types::MetricMonitor]
+      attr_accessor name: ::String
+      attr_accessor project: ::String
+      attr_accessor randomization_salt: ::String
+      attr_accessor scheduled_splits_definition: Types::ScheduledSplitsLaunchDefinition
+      attr_accessor status: ("CREATED" | "UPDATING" | "RUNNING" | "COMPLETED" | "CANCELLED")
+      attr_accessor status_reason: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("aws.evidently.splits")
+      SENSITIVE: []
+    end
+
+    class LaunchExecution
+      attr_accessor ended_time: ::Time
+      attr_accessor started_time: ::Time
+      SENSITIVE: []
+    end
+
+    class LaunchGroup
+      attr_accessor description: ::String
+      attr_accessor feature_variations: ::Hash[::String, ::String]
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class LaunchGroupConfig
+      attr_accessor description: ::String
+      attr_accessor feature: ::String
+      attr_accessor name: ::String
+      attr_accessor variation: ::String
+      SENSITIVE: []
+    end
+
+    class ListExperimentsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor project: ::String
+      attr_accessor status: ("CREATED" | "UPDATING" | "RUNNING" | "COMPLETED" | "CANCELLED")
+      SENSITIVE: []
+    end
+
+    class ListExperimentsResponse
+      attr_accessor experiments: ::Array[Types::Experiment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFeaturesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor project: ::String
+      SENSITIVE: []
+    end
+
+    class ListFeaturesResponse
+      attr_accessor features: ::Array[Types::FeatureSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLaunchesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor project: ::String
+      attr_accessor status: ("CREATED" | "UPDATING" | "RUNNING" | "COMPLETED" | "CANCELLED")
+      SENSITIVE: []
+    end
+
+    class ListLaunchesResponse
+      attr_accessor launches: ::Array[Types::Launch]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProjectsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProjectsResponse
+      attr_accessor next_token: ::String
+      attr_accessor projects: ::Array[Types::ProjectSummary]
+      SENSITIVE: []
+    end
+
+    class ListSegmentReferencesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor segment: ::String
+      attr_accessor type: ("EXPERIMENT" | "LAUNCH")
+      SENSITIVE: []
+    end
+
+    class ListSegmentReferencesResponse
+      attr_accessor next_token: ::String
+      attr_accessor referenced_by: ::Array[Types::RefResource]
+      SENSITIVE: []
+    end
+
+    class ListSegmentsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSegmentsResponse
+      attr_accessor next_token: ::String
+      attr_accessor segments: ::Array[Types::Segment]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class MetricDefinition
+      attr_accessor entity_id_key: ::String
+      attr_accessor event_pattern: ::String
+      attr_accessor name: ::String
+      attr_accessor unit_label: ::String
+      attr_accessor value_key: ::String
+      SENSITIVE: []
+    end
+
+    class MetricDefinitionConfig
+      attr_accessor entity_id_key: ::String
+      attr_accessor event_pattern: ::String
+      attr_accessor name: ::String
+      attr_accessor unit_label: ::String
+      attr_accessor value_key: ::String
+      SENSITIVE: []
+    end
+
+    class MetricGoal
+      attr_accessor desired_change: ("INCREASE" | "DECREASE")
+      attr_accessor metric_definition: Types::MetricDefinition
+      SENSITIVE: []
+    end
+
+    class MetricGoalConfig
+      attr_accessor desired_change: ("INCREASE" | "DECREASE")
+      attr_accessor metric_definition: Types::MetricDefinitionConfig
+      SENSITIVE: []
+    end
+
+    class MetricMonitor
+      attr_accessor metric_definition: Types::MetricDefinition
+      SENSITIVE: []
+    end
+
+    class MetricMonitorConfig
+      attr_accessor metric_definition: Types::MetricDefinitionConfig
+      SENSITIVE: []
+    end
+
+    class OnlineAbConfig
+      attr_accessor control_treatment_name: ::String
+      attr_accessor treatment_weights: ::Hash[::String, ::Integer]
+      SENSITIVE: []
+    end
+
+    class OnlineAbDefinition
+      attr_accessor control_treatment_name: ::String
+      attr_accessor treatment_weights: ::Hash[::String, ::Integer]
+      SENSITIVE: []
+    end
+
+    class Project
+      attr_accessor active_experiment_count: ::Integer
+      attr_accessor active_launch_count: ::Integer
+      attr_accessor app_config_resource: Types::ProjectAppConfigResource
+      attr_accessor arn: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor data_delivery: Types::ProjectDataDelivery
+      attr_accessor description: ::String
+      attr_accessor experiment_count: ::Integer
+      attr_accessor feature_count: ::Integer
+      attr_accessor last_updated_time: ::Time
+      attr_accessor launch_count: ::Integer
+      attr_accessor name: ::String
+      attr_accessor status: ("AVAILABLE" | "UPDATING")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ProjectAppConfigResource
+      attr_accessor application_id: ::String
+      attr_accessor configuration_profile_id: ::String
+      attr_accessor environment_id: ::String
+      SENSITIVE: []
+    end
+
+    class ProjectAppConfigResourceConfig
+      attr_accessor application_id: ::String
+      attr_accessor environment_id: ::String
+      SENSITIVE: []
+    end
+
+    class ProjectDataDelivery
+      attr_accessor cloud_watch_logs: Types::CloudWatchLogsDestination
+      attr_accessor s3_destination: Types::S3Destination
+      SENSITIVE: []
+    end
+
+    class ProjectDataDeliveryConfig
+      attr_accessor cloud_watch_logs: Types::CloudWatchLogsDestinationConfig
+      attr_accessor s3_destination: Types::S3DestinationConfig
+      SENSITIVE: []
+    end
+
+    class ProjectSummary
+      attr_accessor active_experiment_count: ::Integer
+      attr_accessor active_launch_count: ::Integer
+      attr_accessor arn: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor experiment_count: ::Integer
+      attr_accessor feature_count: ::Integer
+      attr_accessor last_updated_time: ::Time
+      attr_accessor launch_count: ::Integer
+      attr_accessor name: ::String
+      attr_accessor status: ("AVAILABLE" | "UPDATING")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PutProjectEventsRequest
+      attr_accessor events: ::Array[Types::Event]
+      attr_accessor project: ::String
+      SENSITIVE: []
+    end
+
+    class PutProjectEventsResponse
+      attr_accessor event_results: ::Array[Types::PutProjectEventsResultEntry]
+      attr_accessor failed_event_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class PutProjectEventsResultEntry
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      attr_accessor event_id: ::String
+      SENSITIVE: []
+    end
+
+    class RefResource
+      attr_accessor arn: ::String
+      attr_accessor end_time: ::String
+      attr_accessor last_updated_on: ::String
+      attr_accessor name: ::String
+      attr_accessor start_time: ::String
+      attr_accessor status: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class S3Destination
+      attr_accessor bucket: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class S3DestinationConfig
+      attr_accessor bucket: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ScheduledSplit
+      attr_accessor group_weights: ::Hash[::String, ::Integer]
+      attr_accessor segment_overrides: ::Array[Types::SegmentOverride]
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ScheduledSplitConfig
+      attr_accessor group_weights: ::Hash[::String, ::Integer]
+      attr_accessor segment_overrides: ::Array[Types::SegmentOverride]
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ScheduledSplitsLaunchConfig
+      attr_accessor steps: ::Array[Types::ScheduledSplitConfig]
+      SENSITIVE: []
+    end
+
+    class ScheduledSplitsLaunchDefinition
+      attr_accessor steps: ::Array[Types::ScheduledSplit]
+      SENSITIVE: []
+    end
+
+    class Segment
+      attr_accessor arn: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor experiment_count: ::Integer
+      attr_accessor last_updated_time: ::Time
+      attr_accessor launch_count: ::Integer
+      attr_accessor name: ::String
+      attr_accessor pattern: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class SegmentOverride
+      attr_accessor evaluation_order: ::Integer
+      attr_accessor segment: ::String
+      attr_accessor weights: ::Hash[::String, ::Integer]
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartExperimentRequest
+      attr_accessor analysis_complete_time: ::Time
+      attr_accessor experiment: ::String
+      attr_accessor project: ::String
+      SENSITIVE: []
+    end
+
+    class StartExperimentResponse
+      attr_accessor started_time: ::Time
+      SENSITIVE: []
+    end
+
+    class StartLaunchRequest
+      attr_accessor launch: ::String
+      attr_accessor project: ::String
+      SENSITIVE: []
+    end
+
+    class StartLaunchResponse
+      attr_accessor launch: Types::Launch
+      SENSITIVE: []
+    end
+
+    class StopExperimentRequest
+      attr_accessor desired_state: ("COMPLETED" | "CANCELLED")
+      attr_accessor experiment: ::String
+      attr_accessor project: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class StopExperimentResponse
+      attr_accessor ended_time: ::Time
+      SENSITIVE: []
+    end
+
+    class StopLaunchRequest
+      attr_accessor desired_state: ("COMPLETED" | "CANCELLED")
+      attr_accessor launch: ::String
+      attr_accessor project: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class StopLaunchResponse
+      attr_accessor ended_time: ::Time
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TestSegmentPatternRequest
+      attr_accessor pattern: ::String
+      attr_accessor payload: ::String
+      SENSITIVE: []
+    end
+
+    class TestSegmentPatternResponse
+      attr_accessor match: bool
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class Treatment
+      attr_accessor description: ::String
+      attr_accessor feature_variations: ::Hash[::String, ::String]
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class TreatmentConfig
+      attr_accessor description: ::String
+      attr_accessor feature: ::String
+      attr_accessor name: ::String
+      attr_accessor variation: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateExperimentRequest
+      attr_accessor description: ::String
+      attr_accessor experiment: ::String
+      attr_accessor metric_goals: ::Array[Types::MetricGoalConfig]
+      attr_accessor online_ab_config: Types::OnlineAbConfig
+      attr_accessor project: ::String
+      attr_accessor randomization_salt: ::String
+      attr_accessor remove_segment: bool
+      attr_accessor sampling_rate: ::Integer
+      attr_accessor segment: ::String
+      attr_accessor treatments: ::Array[Types::TreatmentConfig]
+      SENSITIVE: []
+    end
+
+    class UpdateExperimentResponse
+      attr_accessor experiment: Types::Experiment
+      SENSITIVE: []
+    end
+
+    class UpdateFeatureRequest
+      attr_accessor add_or_update_variations: ::Array[Types::VariationConfig]
+      attr_accessor default_variation: ::String
+      attr_accessor description: ::String
+      attr_accessor entity_overrides: ::Hash[::String, ::String]
+      attr_accessor evaluation_strategy: ("ALL_RULES" | "DEFAULT_VARIATION")
+      attr_accessor feature: ::String
+      attr_accessor project: ::String
+      attr_accessor remove_variations: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateFeatureResponse
+      attr_accessor feature: Types::Feature
+      SENSITIVE: []
+    end
+
+    class UpdateLaunchRequest
+      attr_accessor description: ::String
+      attr_accessor groups: ::Array[Types::LaunchGroupConfig]
+      attr_accessor launch: ::String
+      attr_accessor metric_monitors: ::Array[Types::MetricMonitorConfig]
+      attr_accessor project: ::String
+      attr_accessor randomization_salt: ::String
+      attr_accessor scheduled_splits_config: Types::ScheduledSplitsLaunchConfig
+      SENSITIVE: []
+    end
+
+    class UpdateLaunchResponse
+      attr_accessor launch: Types::Launch
+      SENSITIVE: []
+    end
+
+    class UpdateProjectDataDeliveryRequest
+      attr_accessor cloud_watch_logs: Types::CloudWatchLogsDestinationConfig
+      attr_accessor project: ::String
+      attr_accessor s3_destination: Types::S3DestinationConfig
+      SENSITIVE: []
+    end
+
+    class UpdateProjectDataDeliveryResponse
+      attr_accessor project: Types::Project
+      SENSITIVE: []
+    end
+
+    class UpdateProjectRequest
+      attr_accessor app_config_resource: Types::ProjectAppConfigResourceConfig
+      attr_accessor description: ::String
+      attr_accessor project: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProjectResponse
+      attr_accessor project: Types::Project
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      attr_accessor message: ::String
+      attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other")
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor message: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class VariableValue
+      attr_accessor bool_value: bool
+      attr_accessor double_value: ::Float
+      attr_accessor long_value: ::Integer
+      attr_accessor string_value: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class BoolValue < VariableValue
+      end
+      class DoubleValue < VariableValue
+      end
+      class LongValue < VariableValue
+      end
+      class StringValue < VariableValue
+      end
+      class Unknown < VariableValue
+      end
+    end
+
+    class Variation
+      attr_accessor name: ::String
+      attr_accessor value: Types::VariableValue
+      SENSITIVE: []
+    end
+
+    class VariationConfig
+      attr_accessor name: ::String
+      attr_accessor value: Types::VariableValue
+      SENSITIVE: []
+    end
+  end
+end

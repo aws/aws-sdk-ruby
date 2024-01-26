@@ -1,0 +1,2074 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CodeCommit
+  module Types
+
+    class ActorDoesNotExistException < Aws::EmptyStructure
+    end
+
+    class Approval
+      attr_accessor user_arn: ::String
+      attr_accessor approval_state: ("APPROVE" | "REVOKE")
+      SENSITIVE: []
+    end
+
+    class ApprovalRule
+      attr_accessor approval_rule_id: ::String
+      attr_accessor approval_rule_name: ::String
+      attr_accessor approval_rule_content: ::String
+      attr_accessor rule_content_sha_256: ::String
+      attr_accessor last_modified_date: ::Time
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified_user: ::String
+      attr_accessor origin_approval_rule_template: Types::OriginApprovalRuleTemplate
+      SENSITIVE: []
+    end
+
+    class ApprovalRuleContentRequiredException < Aws::EmptyStructure
+    end
+
+    class ApprovalRuleDoesNotExistException < Aws::EmptyStructure
+    end
+
+    class ApprovalRuleEventMetadata
+      attr_accessor approval_rule_name: ::String
+      attr_accessor approval_rule_id: ::String
+      attr_accessor approval_rule_content: ::String
+      SENSITIVE: []
+    end
+
+    class ApprovalRuleNameAlreadyExistsException < Aws::EmptyStructure
+    end
+
+    class ApprovalRuleNameRequiredException < Aws::EmptyStructure
+    end
+
+    class ApprovalRuleOverriddenEventMetadata
+      attr_accessor revision_id: ::String
+      attr_accessor override_status: ("OVERRIDE" | "REVOKE")
+      SENSITIVE: []
+    end
+
+    class ApprovalRuleTemplate
+      attr_accessor approval_rule_template_id: ::String
+      attr_accessor approval_rule_template_name: ::String
+      attr_accessor approval_rule_template_description: ::String
+      attr_accessor approval_rule_template_content: ::String
+      attr_accessor rule_content_sha_256: ::String
+      attr_accessor last_modified_date: ::Time
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified_user: ::String
+      SENSITIVE: []
+    end
+
+    class ApprovalRuleTemplateContentRequiredException < Aws::EmptyStructure
+    end
+
+    class ApprovalRuleTemplateDoesNotExistException < Aws::EmptyStructure
+    end
+
+    class ApprovalRuleTemplateInUseException < Aws::EmptyStructure
+    end
+
+    class ApprovalRuleTemplateNameAlreadyExistsException < Aws::EmptyStructure
+    end
+
+    class ApprovalRuleTemplateNameRequiredException < Aws::EmptyStructure
+    end
+
+    class ApprovalStateChangedEventMetadata
+      attr_accessor revision_id: ::String
+      attr_accessor approval_status: ("APPROVE" | "REVOKE")
+      SENSITIVE: []
+    end
+
+    class ApprovalStateRequiredException < Aws::EmptyStructure
+    end
+
+    class AssociateApprovalRuleTemplateWithRepositoryInput
+      attr_accessor approval_rule_template_name: ::String
+      attr_accessor repository_name: ::String
+      SENSITIVE: []
+    end
+
+    class AuthorDoesNotExistException < Aws::EmptyStructure
+    end
+
+    class BatchAssociateApprovalRuleTemplateWithRepositoriesError
+      attr_accessor repository_name: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchAssociateApprovalRuleTemplateWithRepositoriesInput
+      attr_accessor approval_rule_template_name: ::String
+      attr_accessor repository_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchAssociateApprovalRuleTemplateWithRepositoriesOutput
+      attr_accessor associated_repository_names: ::Array[::String]
+      attr_accessor errors: ::Array[Types::BatchAssociateApprovalRuleTemplateWithRepositoriesError]
+      SENSITIVE: []
+    end
+
+    class BatchDescribeMergeConflictsError
+      attr_accessor file_path: ::String
+      attr_accessor exception_name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDescribeMergeConflictsInput
+      attr_accessor repository_name: ::String
+      attr_accessor destination_commit_specifier: ::String
+      attr_accessor source_commit_specifier: ::String
+      attr_accessor merge_option: ("FAST_FORWARD_MERGE" | "SQUASH_MERGE" | "THREE_WAY_MERGE")
+      attr_accessor max_merge_hunks: ::Integer
+      attr_accessor max_conflict_files: ::Integer
+      attr_accessor file_paths: ::Array[::String]
+      attr_accessor conflict_detail_level: ("FILE_LEVEL" | "LINE_LEVEL")
+      attr_accessor conflict_resolution_strategy: ("NONE" | "ACCEPT_SOURCE" | "ACCEPT_DESTINATION" | "AUTOMERGE")
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDescribeMergeConflictsOutput
+      attr_accessor conflicts: ::Array[Types::Conflict]
+      attr_accessor next_token: ::String
+      attr_accessor errors: ::Array[Types::BatchDescribeMergeConflictsError]
+      attr_accessor destination_commit_id: ::String
+      attr_accessor source_commit_id: ::String
+      attr_accessor base_commit_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDisassociateApprovalRuleTemplateFromRepositoriesError
+      attr_accessor repository_name: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDisassociateApprovalRuleTemplateFromRepositoriesInput
+      attr_accessor approval_rule_template_name: ::String
+      attr_accessor repository_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput
+      attr_accessor disassociated_repository_names: ::Array[::String]
+      attr_accessor errors: ::Array[Types::BatchDisassociateApprovalRuleTemplateFromRepositoriesError]
+      SENSITIVE: []
+    end
+
+    class BatchGetCommitsError
+      attr_accessor commit_id: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetCommitsInput
+      attr_accessor commit_ids: ::Array[::String]
+      attr_accessor repository_name: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetCommitsOutput
+      attr_accessor commits: ::Array[Types::Commit]
+      attr_accessor errors: ::Array[Types::BatchGetCommitsError]
+      SENSITIVE: []
+    end
+
+    class BatchGetRepositoriesError
+      attr_accessor repository_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor error_code: ("EncryptionIntegrityChecksFailedException" | "EncryptionKeyAccessDeniedException" | "EncryptionKeyDisabledException" | "EncryptionKeyNotFoundException" | "EncryptionKeyUnavailableException" | "RepositoryDoesNotExistException")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetRepositoriesInput
+      attr_accessor repository_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetRepositoriesOutput
+      attr_accessor repositories: ::Array[Types::RepositoryMetadata]
+      attr_accessor repositories_not_found: ::Array[::String]
+      attr_accessor errors: ::Array[Types::BatchGetRepositoriesError]
+      SENSITIVE: []
+    end
+
+    class BeforeCommitIdAndAfterCommitIdAreSameException < Aws::EmptyStructure
+    end
+
+    class BlobIdDoesNotExistException < Aws::EmptyStructure
+    end
+
+    class BlobIdRequiredException < Aws::EmptyStructure
+    end
+
+    class BlobMetadata
+      attr_accessor blob_id: ::String
+      attr_accessor path: ::String
+      attr_accessor mode: ::String
+      SENSITIVE: []
+    end
+
+    class BranchDoesNotExistException < Aws::EmptyStructure
+    end
+
+    class BranchInfo
+      attr_accessor branch_name: ::String
+      attr_accessor commit_id: ::String
+      SENSITIVE: []
+    end
+
+    class BranchNameExistsException < Aws::EmptyStructure
+    end
+
+    class BranchNameIsTagNameException < Aws::EmptyStructure
+    end
+
+    class BranchNameRequiredException < Aws::EmptyStructure
+    end
+
+    class CannotDeleteApprovalRuleFromTemplateException < Aws::EmptyStructure
+    end
+
+    class CannotModifyApprovalRuleFromTemplateException < Aws::EmptyStructure
+    end
+
+    class ClientRequestTokenRequiredException < Aws::EmptyStructure
+    end
+
+    class Comment
+      attr_accessor comment_id: ::String
+      attr_accessor content: ::String
+      attr_accessor in_reply_to: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      attr_accessor author_arn: ::String
+      attr_accessor deleted: bool
+      attr_accessor client_request_token: ::String
+      attr_accessor caller_reactions: ::Array[::String]
+      attr_accessor reaction_counts: ::Hash[::String, ::Integer]
+      SENSITIVE: []
+    end
+
+    class CommentContentRequiredException < Aws::EmptyStructure
+    end
+
+    class CommentContentSizeLimitExceededException < Aws::EmptyStructure
+    end
+
+    class CommentDeletedException < Aws::EmptyStructure
+    end
+
+    class CommentDoesNotExistException < Aws::EmptyStructure
+    end
+
+    class CommentIdRequiredException < Aws::EmptyStructure
+    end
+
+    class CommentNotCreatedByCallerException < Aws::EmptyStructure
+    end
+
+    class CommentsForComparedCommit
+      attr_accessor repository_name: ::String
+      attr_accessor before_commit_id: ::String
+      attr_accessor after_commit_id: ::String
+      attr_accessor before_blob_id: ::String
+      attr_accessor after_blob_id: ::String
+      attr_accessor location: Types::Location
+      attr_accessor comments: ::Array[Types::Comment]
+      SENSITIVE: []
+    end
+
+    class CommentsForPullRequest
+      attr_accessor pull_request_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor before_commit_id: ::String
+      attr_accessor after_commit_id: ::String
+      attr_accessor before_blob_id: ::String
+      attr_accessor after_blob_id: ::String
+      attr_accessor location: Types::Location
+      attr_accessor comments: ::Array[Types::Comment]
+      SENSITIVE: []
+    end
+
+    class Commit
+      attr_accessor commit_id: ::String
+      attr_accessor tree_id: ::String
+      attr_accessor parents: ::Array[::String]
+      attr_accessor message: ::String
+      attr_accessor author: Types::UserInfo
+      attr_accessor committer: Types::UserInfo
+      attr_accessor additional_data: ::String
+      SENSITIVE: []
+    end
+
+    class CommitDoesNotExistException < Aws::EmptyStructure
+    end
+
+    class CommitIdDoesNotExistException < Aws::EmptyStructure
+    end
+
+    class CommitIdRequiredException < Aws::EmptyStructure
+    end
+
+    class CommitIdsLimitExceededException < Aws::EmptyStructure
+    end
+
+    class CommitIdsListRequiredException < Aws::EmptyStructure
+    end
+
+    class CommitMessageLengthExceededException < Aws::EmptyStructure
+    end
+
+    class CommitRequiredException < Aws::EmptyStructure
+    end
+
+    class ConcurrentReferenceUpdateException < Aws::EmptyStructure
+    end
+
+    class Conflict
+      attr_accessor conflict_metadata: Types::ConflictMetadata
+      attr_accessor merge_hunks: ::Array[Types::MergeHunk]
+      SENSITIVE: []
+    end
+
+    class ConflictMetadata
+      attr_accessor file_path: ::String
+      attr_accessor file_sizes: Types::FileSizes
+      attr_accessor file_modes: Types::FileModes
+      attr_accessor object_types: Types::ObjectTypes
+      attr_accessor number_of_conflicts: ::Integer
+      attr_accessor is_binary_file: Types::IsBinaryFile
+      attr_accessor content_conflict: bool
+      attr_accessor file_mode_conflict: bool
+      attr_accessor object_type_conflict: bool
+      attr_accessor merge_operations: Types::MergeOperations
+      SENSITIVE: []
+    end
+
+    class ConflictResolution
+      attr_accessor replace_contents: ::Array[Types::ReplaceContentEntry]
+      attr_accessor delete_files: ::Array[Types::DeleteFileEntry]
+      attr_accessor set_file_modes: ::Array[Types::SetFileModeEntry]
+      SENSITIVE: []
+    end
+
+    class CreateApprovalRuleTemplateInput
+      attr_accessor approval_rule_template_name: ::String
+      attr_accessor approval_rule_template_content: ::String
+      attr_accessor approval_rule_template_description: ::String
+      SENSITIVE: []
+    end
+
+    class CreateApprovalRuleTemplateOutput
+      attr_accessor approval_rule_template: Types::ApprovalRuleTemplate
+      SENSITIVE: []
+    end
+
+    class CreateBranchInput
+      attr_accessor repository_name: ::String
+      attr_accessor branch_name: ::String
+      attr_accessor commit_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCommitInput
+      attr_accessor repository_name: ::String
+      attr_accessor branch_name: ::String
+      attr_accessor parent_commit_id: ::String
+      attr_accessor author_name: ::String
+      attr_accessor email: ::String
+      attr_accessor commit_message: ::String
+      attr_accessor keep_empty_folders: bool
+      attr_accessor put_files: ::Array[Types::PutFileEntry]
+      attr_accessor delete_files: ::Array[Types::DeleteFileEntry]
+      attr_accessor set_file_modes: ::Array[Types::SetFileModeEntry]
+      SENSITIVE: []
+    end
+
+    class CreateCommitOutput
+      attr_accessor commit_id: ::String
+      attr_accessor tree_id: ::String
+      attr_accessor files_added: ::Array[Types::FileMetadata]
+      attr_accessor files_updated: ::Array[Types::FileMetadata]
+      attr_accessor files_deleted: ::Array[Types::FileMetadata]
+      SENSITIVE: []
+    end
+
+    class CreatePullRequestApprovalRuleInput
+      attr_accessor pull_request_id: ::String
+      attr_accessor approval_rule_name: ::String
+      attr_accessor approval_rule_content: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePullRequestApprovalRuleOutput
+      attr_accessor approval_rule: Types::ApprovalRule
+      SENSITIVE: []
+    end
+
+    class CreatePullRequestInput
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePullRequestOutput
+      attr_accessor pull_request: Types::PullRequest
+      SENSITIVE: []
+    end
+
+    class CreateRepositoryInput
+      attr_accessor repository_name: ::String
+      attr_accessor repository_description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRepositoryOutput
+      attr_accessor repository_metadata: Types::RepositoryMetadata
+      SENSITIVE: []
+    end
+
+    class CreateUnreferencedMergeCommitInput
+      attr_accessor repository_name: ::String
+      attr_accessor source_commit_specifier: ::String
+      attr_accessor destination_commit_specifier: ::String
+      attr_accessor merge_option: ("FAST_FORWARD_MERGE" | "SQUASH_MERGE" | "THREE_WAY_MERGE")
+      attr_accessor conflict_detail_level: ("FILE_LEVEL" | "LINE_LEVEL")
+      attr_accessor conflict_resolution_strategy: ("NONE" | "ACCEPT_SOURCE" | "ACCEPT_DESTINATION" | "AUTOMERGE")
+      attr_accessor author_name: ::String
+      attr_accessor email: ::String
+      attr_accessor commit_message: ::String
+      attr_accessor keep_empty_folders: bool
+      attr_accessor conflict_resolution: Types::ConflictResolution
+      SENSITIVE: []
+    end
+
+    class CreateUnreferencedMergeCommitOutput
+      attr_accessor commit_id: ::String
+      attr_accessor tree_id: ::String
+      SENSITIVE: []
+    end
+
+    class DefaultBranchCannotBeDeletedException < Aws::EmptyStructure
+    end
+
+    class DeleteApprovalRuleTemplateInput
+      attr_accessor approval_rule_template_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApprovalRuleTemplateOutput
+      attr_accessor approval_rule_template_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBranchInput
+      attr_accessor repository_name: ::String
+      attr_accessor branch_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBranchOutput
+      attr_accessor deleted_branch: Types::BranchInfo
+      SENSITIVE: []
+    end
+
+    class DeleteCommentContentInput
+      attr_accessor comment_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCommentContentOutput
+      attr_accessor comment: Types::Comment
+      SENSITIVE: []
+    end
+
+    class DeleteFileEntry
+      attr_accessor file_path: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFileInput
+      attr_accessor repository_name: ::String
+      attr_accessor branch_name: ::String
+      attr_accessor file_path: ::String
+      attr_accessor parent_commit_id: ::String
+      attr_accessor keep_empty_folders: bool
+      attr_accessor commit_message: ::String
+      attr_accessor name: ::String
+      attr_accessor email: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFileOutput
+      attr_accessor commit_id: ::String
+      attr_accessor blob_id: ::String
+      attr_accessor tree_id: ::String
+      attr_accessor file_path: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePullRequestApprovalRuleInput
+      attr_accessor pull_request_id: ::String
+      attr_accessor approval_rule_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePullRequestApprovalRuleOutput
+      attr_accessor approval_rule_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRepositoryInput
+      attr_accessor repository_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRepositoryOutput
+      attr_accessor repository_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMergeConflictsInput
+      attr_accessor repository_name: ::String
+      attr_accessor destination_commit_specifier: ::String
+      attr_accessor source_commit_specifier: ::String
+      attr_accessor merge_option: ("FAST_FORWARD_MERGE" | "SQUASH_MERGE" | "THREE_WAY_MERGE")
+      attr_accessor max_merge_hunks: ::Integer
+      attr_accessor file_path: ::String
+      attr_accessor conflict_detail_level: ("FILE_LEVEL" | "LINE_LEVEL")
+      attr_accessor conflict_resolution_strategy: ("NONE" | "ACCEPT_SOURCE" | "ACCEPT_DESTINATION" | "AUTOMERGE")
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMergeConflictsOutput
+      attr_accessor conflict_metadata: Types::ConflictMetadata
+      attr_accessor merge_hunks: ::Array[Types::MergeHunk]
+      attr_accessor next_token: ::String
+      attr_accessor destination_commit_id: ::String
+      attr_accessor source_commit_id: ::String
+      attr_accessor base_commit_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePullRequestEventsInput
+      attr_accessor pull_request_id: ::String
+      attr_accessor pull_request_event_type: ("PULL_REQUEST_CREATED" | "PULL_REQUEST_STATUS_CHANGED" | "PULL_REQUEST_SOURCE_REFERENCE_UPDATED" | "PULL_REQUEST_MERGE_STATE_CHANGED" | "PULL_REQUEST_APPROVAL_RULE_CREATED" | "PULL_REQUEST_APPROVAL_RULE_UPDATED" | "PULL_REQUEST_APPROVAL_RULE_DELETED" | "PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN" | "PULL_REQUEST_APPROVAL_STATE_CHANGED")
+      attr_accessor actor_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribePullRequestEventsOutput
+      attr_accessor pull_request_events: ::Array[Types::PullRequestEvent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class Difference
+      attr_accessor before_blob: Types::BlobMetadata
+      attr_accessor after_blob: Types::BlobMetadata
+      attr_accessor change_type: ("A" | "M" | "D")
+      SENSITIVE: []
+    end
+
+    class DirectoryNameConflictsWithFileNameException < Aws::EmptyStructure
+    end
+
+    class DisassociateApprovalRuleTemplateFromRepositoryInput
+      attr_accessor approval_rule_template_name: ::String
+      attr_accessor repository_name: ::String
+      SENSITIVE: []
+    end
+
+    class EncryptionIntegrityChecksFailedException < Aws::EmptyStructure
+    end
+
+    class EncryptionKeyAccessDeniedException < Aws::EmptyStructure
+    end
+
+    class EncryptionKeyDisabledException < Aws::EmptyStructure
+    end
+
+    class EncryptionKeyInvalidIdException < Aws::EmptyStructure
+    end
+
+    class EncryptionKeyInvalidUsageException < Aws::EmptyStructure
+    end
+
+    class EncryptionKeyNotFoundException < Aws::EmptyStructure
+    end
+
+    class EncryptionKeyRequiredException < Aws::EmptyStructure
+    end
+
+    class EncryptionKeyUnavailableException < Aws::EmptyStructure
+    end
+
+    class EvaluatePullRequestApprovalRulesInput
+      attr_accessor pull_request_id: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class EvaluatePullRequestApprovalRulesOutput
+      attr_accessor evaluation: Types::Evaluation
+      SENSITIVE: []
+    end
+
+    class Evaluation
+      attr_accessor approved: bool
+      attr_accessor overridden: bool
+      attr_accessor approval_rules_satisfied: ::Array[::String]
+      attr_accessor approval_rules_not_satisfied: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class File
+      attr_accessor blob_id: ::String
+      attr_accessor absolute_path: ::String
+      attr_accessor relative_path: ::String
+      attr_accessor file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")
+      SENSITIVE: []
+    end
+
+    class FileContentAndSourceFileSpecifiedException < Aws::EmptyStructure
+    end
+
+    class FileContentRequiredException < Aws::EmptyStructure
+    end
+
+    class FileContentSizeLimitExceededException < Aws::EmptyStructure
+    end
+
+    class FileDoesNotExistException < Aws::EmptyStructure
+    end
+
+    class FileEntryRequiredException < Aws::EmptyStructure
+    end
+
+    class FileMetadata
+      attr_accessor absolute_path: ::String
+      attr_accessor blob_id: ::String
+      attr_accessor file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")
+      SENSITIVE: []
+    end
+
+    class FileModeRequiredException < Aws::EmptyStructure
+    end
+
+    class FileModes
+      attr_accessor source: ("EXECUTABLE" | "NORMAL" | "SYMLINK")
+      attr_accessor destination: ("EXECUTABLE" | "NORMAL" | "SYMLINK")
+      attr_accessor base: ("EXECUTABLE" | "NORMAL" | "SYMLINK")
+      SENSITIVE: []
+    end
+
+    class FileNameConflictsWithDirectoryNameException < Aws::EmptyStructure
+    end
+
+    class FilePathConflictsWithSubmodulePathException < Aws::EmptyStructure
+    end
+
+    class FileSizes
+      attr_accessor source: ::Integer
+      attr_accessor destination: ::Integer
+      attr_accessor base: ::Integer
+      SENSITIVE: []
+    end
+
+    class FileTooLargeException < Aws::EmptyStructure
+    end
+
+    class FileVersion
+      attr_accessor commit: Types::Commit
+      attr_accessor blob_id: ::String
+      attr_accessor path: ::String
+      attr_accessor revision_children: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Folder
+      attr_accessor tree_id: ::String
+      attr_accessor absolute_path: ::String
+      attr_accessor relative_path: ::String
+      SENSITIVE: []
+    end
+
+    class FolderContentSizeLimitExceededException < Aws::EmptyStructure
+    end
+
+    class FolderDoesNotExistException < Aws::EmptyStructure
+    end
+
+    class GetApprovalRuleTemplateInput
+      attr_accessor approval_rule_template_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetApprovalRuleTemplateOutput
+      attr_accessor approval_rule_template: Types::ApprovalRuleTemplate
+      SENSITIVE: []
+    end
+
+    class GetBlobInput
+      attr_accessor repository_name: ::String
+      attr_accessor blob_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetBlobOutput
+      attr_accessor content: ::String
+      SENSITIVE: []
+    end
+
+    class GetBranchInput
+      attr_accessor repository_name: ::String
+      attr_accessor branch_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetBranchOutput
+      attr_accessor branch: Types::BranchInfo
+      SENSITIVE: []
+    end
+
+    class GetCommentInput
+      attr_accessor comment_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCommentOutput
+      attr_accessor comment: Types::Comment
+      SENSITIVE: []
+    end
+
+    class GetCommentReactionsInput
+      attr_accessor comment_id: ::String
+      attr_accessor reaction_user_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetCommentReactionsOutput
+      attr_accessor reactions_for_comment: ::Array[Types::ReactionForComment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCommentsForComparedCommitInput
+      attr_accessor repository_name: ::String
+      attr_accessor before_commit_id: ::String
+      attr_accessor after_commit_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetCommentsForComparedCommitOutput
+      attr_accessor comments_for_compared_commit_data: ::Array[Types::CommentsForComparedCommit]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCommentsForPullRequestInput
+      attr_accessor pull_request_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor before_commit_id: ::String
+      attr_accessor after_commit_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetCommentsForPullRequestOutput
+      attr_accessor comments_for_pull_request_data: ::Array[Types::CommentsForPullRequest]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCommitInput
+      attr_accessor repository_name: ::String
+      attr_accessor commit_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCommitOutput
+      attr_accessor commit: Types::Commit
+      SENSITIVE: []
+    end
+
+    class GetDifferencesInput
+      attr_accessor repository_name: ::String
+      attr_accessor before_commit_specifier: ::String
+      attr_accessor after_commit_specifier: ::String
+      attr_accessor before_path: ::String
+      attr_accessor after_path: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetDifferencesOutput
+      attr_accessor differences: ::Array[Types::Difference]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetFileInput
+      attr_accessor repository_name: ::String
+      attr_accessor commit_specifier: ::String
+      attr_accessor file_path: ::String
+      SENSITIVE: []
+    end
+
+    class GetFileOutput
+      attr_accessor commit_id: ::String
+      attr_accessor blob_id: ::String
+      attr_accessor file_path: ::String
+      attr_accessor file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")
+      attr_accessor file_size: ::Integer
+      attr_accessor file_content: ::String
+      SENSITIVE: []
+    end
+
+    class GetFolderInput
+      attr_accessor repository_name: ::String
+      attr_accessor commit_specifier: ::String
+      attr_accessor folder_path: ::String
+      SENSITIVE: []
+    end
+
+    class GetFolderOutput
+      attr_accessor commit_id: ::String
+      attr_accessor folder_path: ::String
+      attr_accessor tree_id: ::String
+      attr_accessor sub_folders: ::Array[Types::Folder]
+      attr_accessor files: ::Array[Types::File]
+      attr_accessor symbolic_links: ::Array[Types::SymbolicLink]
+      attr_accessor sub_modules: ::Array[Types::SubModule]
+      SENSITIVE: []
+    end
+
+    class GetMergeCommitInput
+      attr_accessor repository_name: ::String
+      attr_accessor source_commit_specifier: ::String
+      attr_accessor destination_commit_specifier: ::String
+      attr_accessor conflict_detail_level: ("FILE_LEVEL" | "LINE_LEVEL")
+      attr_accessor conflict_resolution_strategy: ("NONE" | "ACCEPT_SOURCE" | "ACCEPT_DESTINATION" | "AUTOMERGE")
+      SENSITIVE: []
+    end
+
+    class GetMergeCommitOutput
+      attr_accessor source_commit_id: ::String
+      attr_accessor destination_commit_id: ::String
+      attr_accessor base_commit_id: ::String
+      attr_accessor merged_commit_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMergeConflictsInput
+      attr_accessor repository_name: ::String
+      attr_accessor destination_commit_specifier: ::String
+      attr_accessor source_commit_specifier: ::String
+      attr_accessor merge_option: ("FAST_FORWARD_MERGE" | "SQUASH_MERGE" | "THREE_WAY_MERGE")
+      attr_accessor conflict_detail_level: ("FILE_LEVEL" | "LINE_LEVEL")
+      attr_accessor max_conflict_files: ::Integer
+      attr_accessor conflict_resolution_strategy: ("NONE" | "ACCEPT_SOURCE" | "ACCEPT_DESTINATION" | "AUTOMERGE")
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetMergeConflictsOutput
+      attr_accessor mergeable: bool
+      attr_accessor destination_commit_id: ::String
+      attr_accessor source_commit_id: ::String
+      attr_accessor base_commit_id: ::String
+      attr_accessor conflict_metadata_list: ::Array[Types::ConflictMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetMergeOptionsInput
+      attr_accessor repository_name: ::String
+      attr_accessor source_commit_specifier: ::String
+      attr_accessor destination_commit_specifier: ::String
+      attr_accessor conflict_detail_level: ("FILE_LEVEL" | "LINE_LEVEL")
+      attr_accessor conflict_resolution_strategy: ("NONE" | "ACCEPT_SOURCE" | "ACCEPT_DESTINATION" | "AUTOMERGE")
+      SENSITIVE: []
+    end
+
+    class GetMergeOptionsOutput
+      attr_accessor merge_options: ::Array[("FAST_FORWARD_MERGE" | "SQUASH_MERGE" | "THREE_WAY_MERGE")]
+      attr_accessor source_commit_id: ::String
+      attr_accessor destination_commit_id: ::String
+      attr_accessor base_commit_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPullRequestApprovalStatesInput
+      attr_accessor pull_request_id: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPullRequestApprovalStatesOutput
+      attr_accessor approvals: ::Array[Types::Approval]
+      SENSITIVE: []
+    end
+
+    class GetPullRequestInput
+      attr_accessor pull_request_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPullRequestOutput
+      attr_accessor pull_request: Types::PullRequest
+      SENSITIVE: []
+    end
+
+    class GetPullRequestOverrideStateInput
+      attr_accessor pull_request_id: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPullRequestOverrideStateOutput
+      attr_accessor overridden: bool
+      attr_accessor overrider: ::String
+      SENSITIVE: []
+    end
+
+    class GetRepositoryInput
+      attr_accessor repository_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetRepositoryOutput
+      attr_accessor repository_metadata: Types::RepositoryMetadata
+      SENSITIVE: []
+    end
+
+    class GetRepositoryTriggersInput
+      attr_accessor repository_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetRepositoryTriggersOutput
+      attr_accessor configuration_id: ::String
+      attr_accessor triggers: ::Array[Types::RepositoryTrigger]
+      SENSITIVE: []
+    end
+
+    class IdempotencyParameterMismatchException < Aws::EmptyStructure
+    end
+
+    class InvalidActorArnException < Aws::EmptyStructure
+    end
+
+    class InvalidApprovalRuleContentException < Aws::EmptyStructure
+    end
+
+    class InvalidApprovalRuleNameException < Aws::EmptyStructure
+    end
+
+    class InvalidApprovalRuleTemplateContentException < Aws::EmptyStructure
+    end
+
+    class InvalidApprovalRuleTemplateDescriptionException < Aws::EmptyStructure
+    end
+
+    class InvalidApprovalRuleTemplateNameException < Aws::EmptyStructure
+    end
+
+    class InvalidApprovalStateException < Aws::EmptyStructure
+    end
+
+    class InvalidAuthorArnException < Aws::EmptyStructure
+    end
+
+    class InvalidBlobIdException < Aws::EmptyStructure
+    end
+
+    class InvalidBranchNameException < Aws::EmptyStructure
+    end
+
+    class InvalidClientRequestTokenException < Aws::EmptyStructure
+    end
+
+    class InvalidCommentIdException < Aws::EmptyStructure
+    end
+
+    class InvalidCommitException < Aws::EmptyStructure
+    end
+
+    class InvalidCommitIdException < Aws::EmptyStructure
+    end
+
+    class InvalidConflictDetailLevelException < Aws::EmptyStructure
+    end
+
+    class InvalidConflictResolutionException < Aws::EmptyStructure
+    end
+
+    class InvalidConflictResolutionStrategyException < Aws::EmptyStructure
+    end
+
+    class InvalidContinuationTokenException < Aws::EmptyStructure
+    end
+
+    class InvalidDeletionParameterException < Aws::EmptyStructure
+    end
+
+    class InvalidDescriptionException < Aws::EmptyStructure
+    end
+
+    class InvalidDestinationCommitSpecifierException < Aws::EmptyStructure
+    end
+
+    class InvalidEmailException < Aws::EmptyStructure
+    end
+
+    class InvalidFileLocationException < Aws::EmptyStructure
+    end
+
+    class InvalidFileModeException < Aws::EmptyStructure
+    end
+
+    class InvalidFilePositionException < Aws::EmptyStructure
+    end
+
+    class InvalidMaxConflictFilesException < Aws::EmptyStructure
+    end
+
+    class InvalidMaxMergeHunksException < Aws::EmptyStructure
+    end
+
+    class InvalidMaxResultsException < Aws::EmptyStructure
+    end
+
+    class InvalidMergeOptionException < Aws::EmptyStructure
+    end
+
+    class InvalidOrderException < Aws::EmptyStructure
+    end
+
+    class InvalidOverrideStatusException < Aws::EmptyStructure
+    end
+
+    class InvalidParentCommitIdException < Aws::EmptyStructure
+    end
+
+    class InvalidPathException < Aws::EmptyStructure
+    end
+
+    class InvalidPullRequestEventTypeException < Aws::EmptyStructure
+    end
+
+    class InvalidPullRequestIdException < Aws::EmptyStructure
+    end
+
+    class InvalidPullRequestStatusException < Aws::EmptyStructure
+    end
+
+    class InvalidPullRequestStatusUpdateException < Aws::EmptyStructure
+    end
+
+    class InvalidReactionUserArnException < Aws::EmptyStructure
+    end
+
+    class InvalidReactionValueException < Aws::EmptyStructure
+    end
+
+    class InvalidReferenceNameException < Aws::EmptyStructure
+    end
+
+    class InvalidRelativeFileVersionEnumException < Aws::EmptyStructure
+    end
+
+    class InvalidReplacementContentException < Aws::EmptyStructure
+    end
+
+    class InvalidReplacementTypeException < Aws::EmptyStructure
+    end
+
+    class InvalidRepositoryDescriptionException < Aws::EmptyStructure
+    end
+
+    class InvalidRepositoryNameException < Aws::EmptyStructure
+    end
+
+    class InvalidRepositoryTriggerBranchNameException < Aws::EmptyStructure
+    end
+
+    class InvalidRepositoryTriggerCustomDataException < Aws::EmptyStructure
+    end
+
+    class InvalidRepositoryTriggerDestinationArnException < Aws::EmptyStructure
+    end
+
+    class InvalidRepositoryTriggerEventsException < Aws::EmptyStructure
+    end
+
+    class InvalidRepositoryTriggerNameException < Aws::EmptyStructure
+    end
+
+    class InvalidRepositoryTriggerRegionException < Aws::EmptyStructure
+    end
+
+    class InvalidResourceArnException < Aws::EmptyStructure
+    end
+
+    class InvalidRevisionIdException < Aws::EmptyStructure
+    end
+
+    class InvalidRuleContentSha256Exception < Aws::EmptyStructure
+    end
+
+    class InvalidSortByException < Aws::EmptyStructure
+    end
+
+    class InvalidSourceCommitSpecifierException < Aws::EmptyStructure
+    end
+
+    class InvalidSystemTagUsageException < Aws::EmptyStructure
+    end
+
+    class InvalidTagKeysListException < Aws::EmptyStructure
+    end
+
+    class InvalidTagsMapException < Aws::EmptyStructure
+    end
+
+    class InvalidTargetBranchException < Aws::EmptyStructure
+    end
+
+    class InvalidTargetException < Aws::EmptyStructure
+    end
+
+    class InvalidTargetsException < Aws::EmptyStructure
+    end
+
+    class InvalidTitleException < Aws::EmptyStructure
+    end
+
+    class IsBinaryFile
+      attr_accessor source: bool
+      attr_accessor destination: bool
+      attr_accessor base: bool
+      SENSITIVE: []
+    end
+
+    class ListApprovalRuleTemplatesInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListApprovalRuleTemplatesOutput
+      attr_accessor approval_rule_template_names: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssociatedApprovalRuleTemplatesForRepositoryInput
+      attr_accessor repository_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAssociatedApprovalRuleTemplatesForRepositoryOutput
+      attr_accessor approval_rule_template_names: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBranchesInput
+      attr_accessor repository_name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBranchesOutput
+      attr_accessor branches: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFileCommitHistoryRequest
+      attr_accessor repository_name: ::String
+      attr_accessor commit_specifier: ::String
+      attr_accessor file_path: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFileCommitHistoryResponse
+      attr_accessor revision_dag: ::Array[Types::FileVersion]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPullRequestsInput
+      attr_accessor repository_name: ::String
+      attr_accessor author_arn: ::String
+      attr_accessor pull_request_status: ("OPEN" | "CLOSED")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPullRequestsOutput
+      attr_accessor pull_request_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRepositoriesForApprovalRuleTemplateInput
+      attr_accessor approval_rule_template_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRepositoriesForApprovalRuleTemplateOutput
+      attr_accessor repository_names: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRepositoriesInput
+      attr_accessor next_token: ::String
+      attr_accessor sort_by: ("repositoryName" | "lastModifiedDate")
+      attr_accessor order: ("ascending" | "descending")
+      SENSITIVE: []
+    end
+
+    class ListRepositoriesOutput
+      attr_accessor repositories: ::Array[Types::RepositoryNameIdPair]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class Location
+      attr_accessor file_path: ::String
+      attr_accessor file_position: ::Integer
+      attr_accessor relative_file_version: ("BEFORE" | "AFTER")
+      SENSITIVE: []
+    end
+
+    class ManualMergeRequiredException < Aws::EmptyStructure
+    end
+
+    class MaximumBranchesExceededException < Aws::EmptyStructure
+    end
+
+    class MaximumConflictResolutionEntriesExceededException < Aws::EmptyStructure
+    end
+
+    class MaximumFileContentToLoadExceededException < Aws::EmptyStructure
+    end
+
+    class MaximumFileEntriesExceededException < Aws::EmptyStructure
+    end
+
+    class MaximumItemsToCompareExceededException < Aws::EmptyStructure
+    end
+
+    class MaximumNumberOfApprovalsExceededException < Aws::EmptyStructure
+    end
+
+    class MaximumOpenPullRequestsExceededException < Aws::EmptyStructure
+    end
+
+    class MaximumRepositoryNamesExceededException < Aws::EmptyStructure
+    end
+
+    class MaximumRepositoryTriggersExceededException < Aws::EmptyStructure
+    end
+
+    class MaximumRuleTemplatesAssociatedWithRepositoryException < Aws::EmptyStructure
+    end
+
+    class MergeBranchesByFastForwardInput
+      attr_accessor repository_name: ::String
+      attr_accessor source_commit_specifier: ::String
+      attr_accessor destination_commit_specifier: ::String
+      attr_accessor target_branch: ::String
+      SENSITIVE: []
+    end
+
+    class MergeBranchesByFastForwardOutput
+      attr_accessor commit_id: ::String
+      attr_accessor tree_id: ::String
+      SENSITIVE: []
+    end
+
+    class MergeBranchesBySquashInput
+      attr_accessor repository_name: ::String
+      attr_accessor source_commit_specifier: ::String
+      attr_accessor destination_commit_specifier: ::String
+      attr_accessor target_branch: ::String
+      attr_accessor conflict_detail_level: ("FILE_LEVEL" | "LINE_LEVEL")
+      attr_accessor conflict_resolution_strategy: ("NONE" | "ACCEPT_SOURCE" | "ACCEPT_DESTINATION" | "AUTOMERGE")
+      attr_accessor author_name: ::String
+      attr_accessor email: ::String
+      attr_accessor commit_message: ::String
+      attr_accessor keep_empty_folders: bool
+      attr_accessor conflict_resolution: Types::ConflictResolution
+      SENSITIVE: []
+    end
+
+    class MergeBranchesBySquashOutput
+      attr_accessor commit_id: ::String
+      attr_accessor tree_id: ::String
+      SENSITIVE: []
+    end
+
+    class MergeBranchesByThreeWayInput
+      attr_accessor repository_name: ::String
+      attr_accessor source_commit_specifier: ::String
+      attr_accessor destination_commit_specifier: ::String
+      attr_accessor target_branch: ::String
+      attr_accessor conflict_detail_level: ("FILE_LEVEL" | "LINE_LEVEL")
+      attr_accessor conflict_resolution_strategy: ("NONE" | "ACCEPT_SOURCE" | "ACCEPT_DESTINATION" | "AUTOMERGE")
+      attr_accessor author_name: ::String
+      attr_accessor email: ::String
+      attr_accessor commit_message: ::String
+      attr_accessor keep_empty_folders: bool
+      attr_accessor conflict_resolution: Types::ConflictResolution
+      SENSITIVE: []
+    end
+
+    class MergeBranchesByThreeWayOutput
+      attr_accessor commit_id: ::String
+      attr_accessor tree_id: ::String
+      SENSITIVE: []
+    end
+
+    class MergeHunk
+      attr_accessor is_conflict: bool
+      attr_accessor source: Types::MergeHunkDetail
+      attr_accessor destination: Types::MergeHunkDetail
+      attr_accessor base: Types::MergeHunkDetail
+      SENSITIVE: []
+    end
+
+    class MergeHunkDetail
+      attr_accessor start_line: ::Integer
+      attr_accessor end_line: ::Integer
+      attr_accessor hunk_content: ::String
+      SENSITIVE: []
+    end
+
+    class MergeMetadata
+      attr_accessor is_merged: bool
+      attr_accessor merged_by: ::String
+      attr_accessor merge_commit_id: ::String
+      attr_accessor merge_option: ("FAST_FORWARD_MERGE" | "SQUASH_MERGE" | "THREE_WAY_MERGE")
+      SENSITIVE: []
+    end
+
+    class MergeOperations
+      attr_accessor source: ("A" | "M" | "D")
+      attr_accessor destination: ("A" | "M" | "D")
+      SENSITIVE: []
+    end
+
+    class MergeOptionRequiredException < Aws::EmptyStructure
+    end
+
+    class MergePullRequestByFastForwardInput
+      attr_accessor pull_request_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor source_commit_id: ::String
+      SENSITIVE: []
+    end
+
+    class MergePullRequestByFastForwardOutput
+      attr_accessor pull_request: Types::PullRequest
+      SENSITIVE: []
+    end
+
+    class MergePullRequestBySquashInput
+      attr_accessor pull_request_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor source_commit_id: ::String
+      attr_accessor conflict_detail_level: ("FILE_LEVEL" | "LINE_LEVEL")
+      attr_accessor conflict_resolution_strategy: ("NONE" | "ACCEPT_SOURCE" | "ACCEPT_DESTINATION" | "AUTOMERGE")
+      attr_accessor commit_message: ::String
+      attr_accessor author_name: ::String
+      attr_accessor email: ::String
+      attr_accessor keep_empty_folders: bool
+      attr_accessor conflict_resolution: Types::ConflictResolution
+      SENSITIVE: []
+    end
+
+    class MergePullRequestBySquashOutput
+      attr_accessor pull_request: Types::PullRequest
+      SENSITIVE: []
+    end
+
+    class MergePullRequestByThreeWayInput
+      attr_accessor pull_request_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor source_commit_id: ::String
+      attr_accessor conflict_detail_level: ("FILE_LEVEL" | "LINE_LEVEL")
+      attr_accessor conflict_resolution_strategy: ("NONE" | "ACCEPT_SOURCE" | "ACCEPT_DESTINATION" | "AUTOMERGE")
+      attr_accessor commit_message: ::String
+      attr_accessor author_name: ::String
+      attr_accessor email: ::String
+      attr_accessor keep_empty_folders: bool
+      attr_accessor conflict_resolution: Types::ConflictResolution
+      SENSITIVE: []
+    end
+
+    class MergePullRequestByThreeWayOutput
+      attr_accessor pull_request: Types::PullRequest
+      SENSITIVE: []
+    end
+
+    class MultipleConflictResolutionEntriesException < Aws::EmptyStructure
+    end
+
+    class MultipleRepositoriesInPullRequestException < Aws::EmptyStructure
+    end
+
+    class NameLengthExceededException < Aws::EmptyStructure
+    end
+
+    class NoChangeException < Aws::EmptyStructure
+    end
+
+    class NumberOfRuleTemplatesExceededException < Aws::EmptyStructure
+    end
+
+    class NumberOfRulesExceededException < Aws::EmptyStructure
+    end
+
+    class ObjectTypes
+      attr_accessor source: ("FILE" | "DIRECTORY" | "GIT_LINK" | "SYMBOLIC_LINK")
+      attr_accessor destination: ("FILE" | "DIRECTORY" | "GIT_LINK" | "SYMBOLIC_LINK")
+      attr_accessor base: ("FILE" | "DIRECTORY" | "GIT_LINK" | "SYMBOLIC_LINK")
+      SENSITIVE: []
+    end
+
+    class OriginApprovalRuleTemplate
+      attr_accessor approval_rule_template_id: ::String
+      attr_accessor approval_rule_template_name: ::String
+      SENSITIVE: []
+    end
+
+    class OverrideAlreadySetException < Aws::EmptyStructure
+    end
+
+    class OverridePullRequestApprovalRulesInput
+      attr_accessor pull_request_id: ::String
+      attr_accessor revision_id: ::String
+      attr_accessor override_status: ("OVERRIDE" | "REVOKE")
+      SENSITIVE: []
+    end
+
+    class OverrideStatusRequiredException < Aws::EmptyStructure
+    end
+
+    class ParentCommitDoesNotExistException < Aws::EmptyStructure
+    end
+
+    class ParentCommitIdOutdatedException < Aws::EmptyStructure
+    end
+
+    class ParentCommitIdRequiredException < Aws::EmptyStructure
+    end
+
+    class PathDoesNotExistException < Aws::EmptyStructure
+    end
+
+    class PathRequiredException < Aws::EmptyStructure
+    end
+
+    class PostCommentForComparedCommitInput
+      attr_accessor repository_name: ::String
+      attr_accessor before_commit_id: ::String
+      attr_accessor after_commit_id: ::String
+      attr_accessor location: Types::Location
+      attr_accessor content: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class PostCommentForComparedCommitOutput
+      attr_accessor repository_name: ::String
+      attr_accessor before_commit_id: ::String
+      attr_accessor after_commit_id: ::String
+      attr_accessor before_blob_id: ::String
+      attr_accessor after_blob_id: ::String
+      attr_accessor location: Types::Location
+      attr_accessor comment: Types::Comment
+      SENSITIVE: []
+    end
+
+    class PostCommentForPullRequestInput
+      attr_accessor pull_request_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor before_commit_id: ::String
+      attr_accessor after_commit_id: ::String
+      attr_accessor location: Types::Location
+      attr_accessor content: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class PostCommentForPullRequestOutput
+      attr_accessor repository_name: ::String
+      attr_accessor pull_request_id: ::String
+      attr_accessor before_commit_id: ::String
+      attr_accessor after_commit_id: ::String
+      attr_accessor before_blob_id: ::String
+      attr_accessor after_blob_id: ::String
+      attr_accessor location: Types::Location
+      attr_accessor comment: Types::Comment
+      SENSITIVE: []
+    end
+
+    class PostCommentReplyInput
+      attr_accessor in_reply_to: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor content: ::String
+      SENSITIVE: []
+    end
+
+    class PostCommentReplyOutput
+      attr_accessor comment: Types::Comment
+      SENSITIVE: []
+    end
+
+    class PullRequest
+      attr_accessor pull_request_id: ::String
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor last_activity_date: ::Time
+      attr_accessor creation_date: ::Time
+      attr_accessor pull_request_status: ("OPEN" | "CLOSED")
+      attr_accessor author_arn: ::String
+      attr_accessor pull_request_targets: ::Array[Types::PullRequestTarget]
+      attr_accessor client_request_token: ::String
+      attr_accessor revision_id: ::String
+      attr_accessor approval_rules: ::Array[Types::ApprovalRule]
+      SENSITIVE: []
+    end
+
+    class PullRequestAlreadyClosedException < Aws::EmptyStructure
+    end
+
+    class PullRequestApprovalRulesNotSatisfiedException < Aws::EmptyStructure
+    end
+
+    class PullRequestCannotBeApprovedByAuthorException < Aws::EmptyStructure
+    end
+
+    class PullRequestCreatedEventMetadata
+      attr_accessor repository_name: ::String
+      attr_accessor source_commit_id: ::String
+      attr_accessor destination_commit_id: ::String
+      attr_accessor merge_base: ::String
+      SENSITIVE: []
+    end
+
+    class PullRequestDoesNotExistException < Aws::EmptyStructure
+    end
+
+    class PullRequestEvent
+      attr_accessor pull_request_id: ::String
+      attr_accessor event_date: ::Time
+      attr_accessor pull_request_event_type: ("PULL_REQUEST_CREATED" | "PULL_REQUEST_STATUS_CHANGED" | "PULL_REQUEST_SOURCE_REFERENCE_UPDATED" | "PULL_REQUEST_MERGE_STATE_CHANGED" | "PULL_REQUEST_APPROVAL_RULE_CREATED" | "PULL_REQUEST_APPROVAL_RULE_UPDATED" | "PULL_REQUEST_APPROVAL_RULE_DELETED" | "PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN" | "PULL_REQUEST_APPROVAL_STATE_CHANGED")
+      attr_accessor actor_arn: ::String
+      attr_accessor pull_request_created_event_metadata: Types::PullRequestCreatedEventMetadata
+      attr_accessor pull_request_status_changed_event_metadata: Types::PullRequestStatusChangedEventMetadata
+      attr_accessor pull_request_source_reference_updated_event_metadata: Types::PullRequestSourceReferenceUpdatedEventMetadata
+      attr_accessor pull_request_merged_state_changed_event_metadata: Types::PullRequestMergedStateChangedEventMetadata
+      attr_accessor approval_rule_event_metadata: Types::ApprovalRuleEventMetadata
+      attr_accessor approval_state_changed_event_metadata: Types::ApprovalStateChangedEventMetadata
+      attr_accessor approval_rule_overridden_event_metadata: Types::ApprovalRuleOverriddenEventMetadata
+      SENSITIVE: []
+    end
+
+    class PullRequestIdRequiredException < Aws::EmptyStructure
+    end
+
+    class PullRequestMergedStateChangedEventMetadata
+      attr_accessor repository_name: ::String
+      attr_accessor destination_reference: ::String
+      attr_accessor merge_metadata: Types::MergeMetadata
+      SENSITIVE: []
+    end
+
+    class PullRequestSourceReferenceUpdatedEventMetadata
+      attr_accessor repository_name: ::String
+      attr_accessor before_commit_id: ::String
+      attr_accessor after_commit_id: ::String
+      attr_accessor merge_base: ::String
+      SENSITIVE: []
+    end
+
+    class PullRequestStatusChangedEventMetadata
+      attr_accessor pull_request_status: ("OPEN" | "CLOSED")
+      SENSITIVE: []
+    end
+
+    class PullRequestStatusRequiredException < Aws::EmptyStructure
+    end
+
+    class PullRequestTarget
+      attr_accessor repository_name: ::String
+      attr_accessor source_reference: ::String
+      attr_accessor destination_reference: ::String
+      attr_accessor destination_commit: ::String
+      attr_accessor source_commit: ::String
+      attr_accessor merge_base: ::String
+      attr_accessor merge_metadata: Types::MergeMetadata
+      SENSITIVE: []
+    end
+
+    class PutCommentReactionInput
+      attr_accessor comment_id: ::String
+      attr_accessor reaction_value: ::String
+      SENSITIVE: []
+    end
+
+    class PutFileEntry
+      attr_accessor file_path: ::String
+      attr_accessor file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")
+      attr_accessor file_content: ::String
+      attr_accessor source_file: Types::SourceFileSpecifier
+      SENSITIVE: []
+    end
+
+    class PutFileEntryConflictException < Aws::EmptyStructure
+    end
+
+    class PutFileInput
+      attr_accessor repository_name: ::String
+      attr_accessor branch_name: ::String
+      attr_accessor file_content: ::String
+      attr_accessor file_path: ::String
+      attr_accessor file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")
+      attr_accessor parent_commit_id: ::String
+      attr_accessor commit_message: ::String
+      attr_accessor name: ::String
+      attr_accessor email: ::String
+      SENSITIVE: []
+    end
+
+    class PutFileOutput
+      attr_accessor commit_id: ::String
+      attr_accessor blob_id: ::String
+      attr_accessor tree_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutRepositoryTriggersInput
+      attr_accessor repository_name: ::String
+      attr_accessor triggers: ::Array[Types::RepositoryTrigger]
+      SENSITIVE: []
+    end
+
+    class PutRepositoryTriggersOutput
+      attr_accessor configuration_id: ::String
+      SENSITIVE: []
+    end
+
+    class ReactionForComment
+      attr_accessor reaction: Types::ReactionValueFormats
+      attr_accessor reaction_users: ::Array[::String]
+      attr_accessor reactions_from_deleted_users_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ReactionLimitExceededException < Aws::EmptyStructure
+    end
+
+    class ReactionValueFormats
+      attr_accessor emoji: ::String
+      attr_accessor short_code: ::String
+      attr_accessor unicode: ::String
+      SENSITIVE: []
+    end
+
+    class ReactionValueRequiredException < Aws::EmptyStructure
+    end
+
+    class ReferenceDoesNotExistException < Aws::EmptyStructure
+    end
+
+    class ReferenceNameRequiredException < Aws::EmptyStructure
+    end
+
+    class ReferenceTypeNotSupportedException < Aws::EmptyStructure
+    end
+
+    class ReplaceContentEntry
+      attr_accessor file_path: ::String
+      attr_accessor replacement_type: ("KEEP_BASE" | "KEEP_SOURCE" | "KEEP_DESTINATION" | "USE_NEW_CONTENT")
+      attr_accessor content: ::String
+      attr_accessor file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")
+      SENSITIVE: []
+    end
+
+    class ReplacementContentRequiredException < Aws::EmptyStructure
+    end
+
+    class ReplacementTypeRequiredException < Aws::EmptyStructure
+    end
+
+    class RepositoryDoesNotExistException < Aws::EmptyStructure
+    end
+
+    class RepositoryLimitExceededException < Aws::EmptyStructure
+    end
+
+    class RepositoryMetadata
+      attr_accessor account_id: ::String
+      attr_accessor repository_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor repository_description: ::String
+      attr_accessor default_branch: ::String
+      attr_accessor last_modified_date: ::Time
+      attr_accessor creation_date: ::Time
+      attr_accessor clone_url_http: ::String
+      attr_accessor clone_url_ssh: ::String
+      attr_accessor arn: ::String
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class RepositoryNameExistsException < Aws::EmptyStructure
+    end
+
+    class RepositoryNameIdPair
+      attr_accessor repository_name: ::String
+      attr_accessor repository_id: ::String
+      SENSITIVE: []
+    end
+
+    class RepositoryNameRequiredException < Aws::EmptyStructure
+    end
+
+    class RepositoryNamesRequiredException < Aws::EmptyStructure
+    end
+
+    class RepositoryNotAssociatedWithPullRequestException < Aws::EmptyStructure
+    end
+
+    class RepositoryTrigger
+      attr_accessor name: ::String
+      attr_accessor destination_arn: ::String
+      attr_accessor custom_data: ::String
+      attr_accessor branches: ::Array[::String]
+      attr_accessor events: ::Array[("all" | "updateReference" | "createReference" | "deleteReference")]
+      SENSITIVE: []
+    end
+
+    class RepositoryTriggerBranchNameListRequiredException < Aws::EmptyStructure
+    end
+
+    class RepositoryTriggerDestinationArnRequiredException < Aws::EmptyStructure
+    end
+
+    class RepositoryTriggerEventsListRequiredException < Aws::EmptyStructure
+    end
+
+    class RepositoryTriggerExecutionFailure
+      attr_accessor trigger: ::String
+      attr_accessor failure_message: ::String
+      SENSITIVE: []
+    end
+
+    class RepositoryTriggerNameRequiredException < Aws::EmptyStructure
+    end
+
+    class RepositoryTriggersListRequiredException < Aws::EmptyStructure
+    end
+
+    class ResourceArnRequiredException < Aws::EmptyStructure
+    end
+
+    class RestrictedSourceFileException < Aws::EmptyStructure
+    end
+
+    class RevisionIdRequiredException < Aws::EmptyStructure
+    end
+
+    class RevisionNotCurrentException < Aws::EmptyStructure
+    end
+
+    class SameFileContentException < Aws::EmptyStructure
+    end
+
+    class SamePathRequestException < Aws::EmptyStructure
+    end
+
+    class SetFileModeEntry
+      attr_accessor file_path: ::String
+      attr_accessor file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")
+      SENSITIVE: []
+    end
+
+    class SourceAndDestinationAreSameException < Aws::EmptyStructure
+    end
+
+    class SourceFileOrContentRequiredException < Aws::EmptyStructure
+    end
+
+    class SourceFileSpecifier
+      attr_accessor file_path: ::String
+      attr_accessor is_move: bool
+      SENSITIVE: []
+    end
+
+    class SubModule
+      attr_accessor commit_id: ::String
+      attr_accessor absolute_path: ::String
+      attr_accessor relative_path: ::String
+      SENSITIVE: []
+    end
+
+    class SymbolicLink
+      attr_accessor blob_id: ::String
+      attr_accessor absolute_path: ::String
+      attr_accessor relative_path: ::String
+      attr_accessor file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")
+      SENSITIVE: []
+    end
+
+    class TagKeysListRequiredException < Aws::EmptyStructure
+    end
+
+    class TagPolicyException < Aws::EmptyStructure
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagsMapRequiredException < Aws::EmptyStructure
+    end
+
+    class Target
+      attr_accessor repository_name: ::String
+      attr_accessor source_reference: ::String
+      attr_accessor destination_reference: ::String
+      SENSITIVE: []
+    end
+
+    class TargetRequiredException < Aws::EmptyStructure
+    end
+
+    class TargetsRequiredException < Aws::EmptyStructure
+    end
+
+    class TestRepositoryTriggersInput
+      attr_accessor repository_name: ::String
+      attr_accessor triggers: ::Array[Types::RepositoryTrigger]
+      SENSITIVE: []
+    end
+
+    class TestRepositoryTriggersOutput
+      attr_accessor successful_executions: ::Array[::String]
+      attr_accessor failed_executions: ::Array[Types::RepositoryTriggerExecutionFailure]
+      SENSITIVE: []
+    end
+
+    class TipOfSourceReferenceIsDifferentException < Aws::EmptyStructure
+    end
+
+    class TipsDivergenceExceededException < Aws::EmptyStructure
+    end
+
+    class TitleRequiredException < Aws::EmptyStructure
+    end
+
+    class TooManyTagsException < Aws::EmptyStructure
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateApprovalRuleTemplateContentInput
+      attr_accessor approval_rule_template_name: ::String
+      attr_accessor new_rule_content: ::String
+      attr_accessor existing_rule_content_sha_256: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateApprovalRuleTemplateContentOutput
+      attr_accessor approval_rule_template: Types::ApprovalRuleTemplate
+      SENSITIVE: []
+    end
+
+    class UpdateApprovalRuleTemplateDescriptionInput
+      attr_accessor approval_rule_template_name: ::String
+      attr_accessor approval_rule_template_description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateApprovalRuleTemplateDescriptionOutput
+      attr_accessor approval_rule_template: Types::ApprovalRuleTemplate
+      SENSITIVE: []
+    end
+
+    class UpdateApprovalRuleTemplateNameInput
+      attr_accessor old_approval_rule_template_name: ::String
+      attr_accessor new_approval_rule_template_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateApprovalRuleTemplateNameOutput
+      attr_accessor approval_rule_template: Types::ApprovalRuleTemplate
+      SENSITIVE: []
+    end
+
+    class UpdateCommentInput
+      attr_accessor comment_id: ::String
+      attr_accessor content: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCommentOutput
+      attr_accessor comment: Types::Comment
+      SENSITIVE: []
+    end
+
+    class UpdateDefaultBranchInput
+      attr_accessor repository_name: ::String
+      attr_accessor default_branch_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePullRequestApprovalRuleContentInput
+      attr_accessor pull_request_id: ::String
+      attr_accessor approval_rule_name: ::String
+      attr_accessor existing_rule_content_sha_256: ::String
+      attr_accessor new_rule_content: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePullRequestApprovalRuleContentOutput
+      attr_accessor approval_rule: Types::ApprovalRule
+      SENSITIVE: []
+    end
+
+    class UpdatePullRequestApprovalStateInput
+      attr_accessor pull_request_id: ::String
+      attr_accessor revision_id: ::String
+      attr_accessor approval_state: ("APPROVE" | "REVOKE")
+      SENSITIVE: []
+    end
+
+    class UpdatePullRequestDescriptionInput
+      attr_accessor pull_request_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePullRequestDescriptionOutput
+      attr_accessor pull_request: Types::PullRequest
+      SENSITIVE: []
+    end
+
+    class UpdatePullRequestStatusInput
+      attr_accessor pull_request_id: ::String
+      attr_accessor pull_request_status: ("OPEN" | "CLOSED")
+      SENSITIVE: []
+    end
+
+    class UpdatePullRequestStatusOutput
+      attr_accessor pull_request: Types::PullRequest
+      SENSITIVE: []
+    end
+
+    class UpdatePullRequestTitleInput
+      attr_accessor pull_request_id: ::String
+      attr_accessor title: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePullRequestTitleOutput
+      attr_accessor pull_request: Types::PullRequest
+      SENSITIVE: []
+    end
+
+    class UpdateRepositoryDescriptionInput
+      attr_accessor repository_name: ::String
+      attr_accessor repository_description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRepositoryEncryptionKeyInput
+      attr_accessor repository_name: ::String
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRepositoryEncryptionKeyOutput
+      attr_accessor repository_id: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor original_kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRepositoryNameInput
+      attr_accessor old_name: ::String
+      attr_accessor new_name: ::String
+      SENSITIVE: []
+    end
+
+    class UserInfo
+      attr_accessor name: ::String
+      attr_accessor email: ::String
+      attr_accessor date: ::String
+      SENSITIVE: []
+    end
+  end
+end

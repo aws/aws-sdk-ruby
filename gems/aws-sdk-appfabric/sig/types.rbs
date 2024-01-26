@@ -1,0 +1,565 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::AppFabric
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ApiKeyCredential
+      attr_accessor api_key: ::String
+      SENSITIVE: [:api_key]
+    end
+
+    class AppAuthorization
+      attr_accessor app_authorization_arn: ::String
+      attr_accessor app_bundle_arn: ::String
+      attr_accessor app: ::String
+      attr_accessor tenant: Types::Tenant
+      attr_accessor auth_type: ("oauth2" | "apiKey")
+      attr_accessor status: ("PendingConnect" | "Connected" | "ConnectionValidationFailed" | "TokenAutoRotationFailed")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor persona: ("admin" | "endUser")
+      attr_accessor auth_url: ::String
+      SENSITIVE: []
+    end
+
+    class AppAuthorizationSummary
+      attr_accessor app_authorization_arn: ::String
+      attr_accessor app_bundle_arn: ::String
+      attr_accessor app: ::String
+      attr_accessor tenant: Types::Tenant
+      attr_accessor status: ("PendingConnect" | "Connected" | "ConnectionValidationFailed" | "TokenAutoRotationFailed")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class AppBundle
+      attr_accessor arn: ::String
+      attr_accessor customer_managed_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AppBundleSummary
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class AuditLogDestinationConfiguration
+      attr_accessor destination: Types::Destination
+      SENSITIVE: []
+    end
+
+    class AuditLogProcessingConfiguration
+      attr_accessor schema: ("ocsf" | "raw")
+      attr_accessor format: ("json" | "parquet")
+      SENSITIVE: []
+    end
+
+    class AuthRequest
+      attr_accessor redirect_uri: ::String
+      attr_accessor code: ::String
+      SENSITIVE: [:code]
+    end
+
+    class BatchGetUserAccessTasksRequest
+      attr_accessor app_bundle_identifier: ::String
+      attr_accessor task_id_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetUserAccessTasksResponse
+      attr_accessor user_access_results_list: ::Array[Types::UserAccessResultItem]
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectAppAuthorizationRequest
+      attr_accessor app_bundle_identifier: ::String
+      attr_accessor app_authorization_identifier: ::String
+      attr_accessor auth_request: Types::AuthRequest
+      SENSITIVE: []
+    end
+
+    class ConnectAppAuthorizationResponse
+      attr_accessor app_authorization_summary: Types::AppAuthorizationSummary
+      SENSITIVE: []
+    end
+
+    class CreateAppAuthorizationRequest
+      attr_accessor app_bundle_identifier: ::String
+      attr_accessor app: ::String
+      attr_accessor credential: Types::Credential
+      attr_accessor tenant: Types::Tenant
+      attr_accessor auth_type: ("oauth2" | "apiKey")
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateAppAuthorizationResponse
+      attr_accessor app_authorization: Types::AppAuthorization
+      SENSITIVE: []
+    end
+
+    class CreateAppBundleRequest
+      attr_accessor client_token: ::String
+      attr_accessor customer_managed_key_identifier: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateAppBundleResponse
+      attr_accessor app_bundle: Types::AppBundle
+      SENSITIVE: []
+    end
+
+    class CreateIngestionDestinationRequest
+      attr_accessor app_bundle_identifier: ::String
+      attr_accessor ingestion_identifier: ::String
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor destination_configuration: Types::DestinationConfiguration
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateIngestionDestinationResponse
+      attr_accessor ingestion_destination: Types::IngestionDestination
+      SENSITIVE: []
+    end
+
+    class CreateIngestionRequest
+      attr_accessor app_bundle_identifier: ::String
+      attr_accessor app: ::String
+      attr_accessor tenant_id: ::String
+      attr_accessor ingestion_type: ("auditLog")
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateIngestionResponse
+      attr_accessor ingestion: Types::Ingestion
+      SENSITIVE: []
+    end
+
+    class Credential
+      attr_accessor oauth2_credential: Types::Oauth2Credential
+      attr_accessor api_key_credential: Types::ApiKeyCredential
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Oauth2Credential < Credential
+      end
+      class ApiKeyCredential < Credential
+      end
+      class Unknown < Credential
+      end
+    end
+
+    class DeleteAppAuthorizationRequest
+      attr_accessor app_bundle_identifier: ::String
+      attr_accessor app_authorization_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAppAuthorizationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteAppBundleRequest
+      attr_accessor app_bundle_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAppBundleResponse < Aws::EmptyStructure
+    end
+
+    class DeleteIngestionDestinationRequest
+      attr_accessor app_bundle_identifier: ::String
+      attr_accessor ingestion_identifier: ::String
+      attr_accessor ingestion_destination_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIngestionDestinationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteIngestionRequest
+      attr_accessor app_bundle_identifier: ::String
+      attr_accessor ingestion_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIngestionResponse < Aws::EmptyStructure
+    end
+
+    class Destination
+      attr_accessor s3_bucket: Types::S3Bucket
+      attr_accessor firehose_stream: Types::FirehoseStream
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class S3Bucket < Destination
+      end
+      class FirehoseStream < Destination
+      end
+      class Unknown < Destination
+      end
+    end
+
+    class DestinationConfiguration
+      attr_accessor audit_log: Types::AuditLogDestinationConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AuditLog < DestinationConfiguration
+      end
+      class Unknown < DestinationConfiguration
+      end
+    end
+
+    class FirehoseStream
+      attr_accessor stream_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetAppAuthorizationRequest
+      attr_accessor app_bundle_identifier: ::String
+      attr_accessor app_authorization_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetAppAuthorizationResponse
+      attr_accessor app_authorization: Types::AppAuthorization
+      SENSITIVE: []
+    end
+
+    class GetAppBundleRequest
+      attr_accessor app_bundle_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetAppBundleResponse
+      attr_accessor app_bundle: Types::AppBundle
+      SENSITIVE: []
+    end
+
+    class GetIngestionDestinationRequest
+      attr_accessor app_bundle_identifier: ::String
+      attr_accessor ingestion_identifier: ::String
+      attr_accessor ingestion_destination_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetIngestionDestinationResponse
+      attr_accessor ingestion_destination: Types::IngestionDestination
+      SENSITIVE: []
+    end
+
+    class GetIngestionRequest
+      attr_accessor app_bundle_identifier: ::String
+      attr_accessor ingestion_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetIngestionResponse
+      attr_accessor ingestion: Types::Ingestion
+      SENSITIVE: []
+    end
+
+    class Ingestion
+      attr_accessor arn: ::String
+      attr_accessor app_bundle_arn: ::String
+      attr_accessor app: ::String
+      attr_accessor tenant_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor state: ("enabled" | "disabled")
+      attr_accessor ingestion_type: ("auditLog")
+      SENSITIVE: []
+    end
+
+    class IngestionDestination
+      attr_accessor arn: ::String
+      attr_accessor ingestion_arn: ::String
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor destination_configuration: Types::DestinationConfiguration
+      attr_accessor status: ("Active" | "Failed")
+      attr_accessor status_reason: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class IngestionDestinationSummary
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class IngestionSummary
+      attr_accessor arn: ::String
+      attr_accessor app: ::String
+      attr_accessor tenant_id: ::String
+      attr_accessor state: ("enabled" | "disabled")
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAppAuthorizationsRequest
+      attr_accessor app_bundle_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppAuthorizationsResponse
+      attr_accessor app_authorization_summary_list: ::Array[Types::AppAuthorizationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppBundlesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppBundlesResponse
+      attr_accessor app_bundle_summary_list: ::Array[Types::AppBundleSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIngestionDestinationsRequest
+      attr_accessor app_bundle_identifier: ::String
+      attr_accessor ingestion_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIngestionDestinationsResponse
+      attr_accessor ingestion_destinations: ::Array[Types::IngestionDestinationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIngestionsRequest
+      attr_accessor app_bundle_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIngestionsResponse
+      attr_accessor ingestions: ::Array[Types::IngestionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class Oauth2Credential
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      SENSITIVE: [:client_secret]
+    end
+
+    class ProcessingConfiguration
+      attr_accessor audit_log: Types::AuditLogProcessingConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AuditLog < ProcessingConfiguration
+      end
+      class Unknown < ProcessingConfiguration
+      end
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class S3Bucket
+      attr_accessor bucket_name: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      SENSITIVE: []
+    end
+
+    class StartIngestionRequest
+      attr_accessor ingestion_identifier: ::String
+      attr_accessor app_bundle_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class StartIngestionResponse < Aws::EmptyStructure
+    end
+
+    class StartUserAccessTasksRequest
+      attr_accessor app_bundle_identifier: ::String
+      attr_accessor email: ::String
+      SENSITIVE: [:email]
+    end
+
+    class StartUserAccessTasksResponse
+      attr_accessor user_access_tasks_list: ::Array[Types::UserAccessTaskItem]
+      SENSITIVE: []
+    end
+
+    class StopIngestionRequest
+      attr_accessor ingestion_identifier: ::String
+      attr_accessor app_bundle_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class StopIngestionResponse < Aws::EmptyStructure
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TaskError
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class Tenant
+      attr_accessor tenant_identifier: ::String
+      attr_accessor tenant_display_name: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAppAuthorizationRequest
+      attr_accessor app_bundle_identifier: ::String
+      attr_accessor app_authorization_identifier: ::String
+      attr_accessor credential: Types::Credential
+      attr_accessor tenant: Types::Tenant
+      SENSITIVE: []
+    end
+
+    class UpdateAppAuthorizationResponse
+      attr_accessor app_authorization: Types::AppAuthorization
+      SENSITIVE: []
+    end
+
+    class UpdateIngestionDestinationRequest
+      attr_accessor app_bundle_identifier: ::String
+      attr_accessor ingestion_identifier: ::String
+      attr_accessor ingestion_destination_identifier: ::String
+      attr_accessor destination_configuration: Types::DestinationConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateIngestionDestinationResponse
+      attr_accessor ingestion_destination: Types::IngestionDestination
+      SENSITIVE: []
+    end
+
+    class UserAccessResultItem
+      attr_accessor app: ::String
+      attr_accessor tenant_id: ::String
+      attr_accessor tenant_display_name: ::String
+      attr_accessor task_id: ::String
+      attr_accessor result_status: ("IN_PROGRESS" | "COMPLETED" | "FAILED" | "EXPIRED")
+      attr_accessor email: ::String
+      attr_accessor user_id: ::String
+      attr_accessor user_full_name: ::String
+      attr_accessor user_first_name: ::String
+      attr_accessor user_last_name: ::String
+      attr_accessor user_status: ::String
+      attr_accessor task_error: Types::TaskError
+      SENSITIVE: [:email, :user_id, :user_full_name, :user_first_name, :user_last_name]
+    end
+
+    class UserAccessTaskItem
+      attr_accessor app: ::String
+      attr_accessor tenant_id: ::String
+      attr_accessor task_id: ::String
+      attr_accessor error: Types::TaskError
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

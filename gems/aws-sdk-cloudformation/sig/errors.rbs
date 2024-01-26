@@ -1,0 +1,61 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudFormation
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AlreadyExistsException < ::Aws::Errors::ServiceError
+      end
+      class CFNRegistryException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ChangeSetNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class CreatedButModifiedException < ::Aws::Errors::ServiceError
+      end
+      class InsufficientCapabilitiesException < ::Aws::Errors::ServiceError
+      end
+      class InvalidChangeSetStatusException < ::Aws::Errors::ServiceError
+      end
+      class InvalidOperationException < ::Aws::Errors::ServiceError
+      end
+      class InvalidStateTransitionException < ::Aws::Errors::ServiceError
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+      end
+      class NameAlreadyExistsException < ::Aws::Errors::ServiceError
+      end
+      class OperationIdAlreadyExistsException < ::Aws::Errors::ServiceError
+      end
+      class OperationInProgressException < ::Aws::Errors::ServiceError
+      end
+      class OperationNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class OperationStatusCheckFailedException < ::Aws::Errors::ServiceError
+      end
+      class StackInstanceNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class StackNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class StackSetNotEmptyException < ::Aws::Errors::ServiceError
+      end
+      class StackSetNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class StaleRequestException < ::Aws::Errors::ServiceError
+      end
+      class TokenAlreadyExistsException < ::Aws::Errors::ServiceError
+      end
+      class TypeConfigurationNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class TypeNotFoundException < ::Aws::Errors::ServiceError
+      end
+    end
+  end
+end

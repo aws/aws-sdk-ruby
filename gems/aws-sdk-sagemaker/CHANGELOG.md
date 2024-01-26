@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.230.0 (2024-01-26)
+------------------
+
+* Feature - Amazon SageMaker Automatic Model Tuning now provides an API to programmatically delete tuning jobs.
+
 1.229.0 (2024-01-14)
 ------------------
 

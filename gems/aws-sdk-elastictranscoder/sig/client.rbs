@@ -1,0 +1,681 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ElasticTranscoder
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticTranscoder/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CancelJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelJobResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticTranscoder/Client.html#cancel_job-instance_method
+      def cancel_job: (
+                        id: ::String
+                      ) -> _CancelJobResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelJobResponseSuccess
+
+      interface _CreateJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateJobResponse]
+        def job: () -> Types::Job
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticTranscoder/Client.html#create_job-instance_method
+      def create_job: (
+                        pipeline_id: ::String,
+                        ?input: {
+                          key: ::String?,
+                          frame_rate: ::String?,
+                          resolution: ::String?,
+                          aspect_ratio: ::String?,
+                          interlaced: ::String?,
+                          container: ::String?,
+                          encryption: {
+                            mode: ::String?,
+                            key: ::String?,
+                            key_md_5: ::String?,
+                            initialization_vector: ::String?
+                          }?,
+                          time_span: {
+                            start_time: ::String?,
+                            duration: ::String?
+                          }?,
+                          input_captions: {
+                            merge_policy: ::String?,
+                            caption_sources: Array[
+                              {
+                                key: ::String?,
+                                language: ::String?,
+                                time_offset: ::String?,
+                                label: ::String?,
+                                encryption: {
+                                  mode: ::String?,
+                                  key: ::String?,
+                                  key_md_5: ::String?,
+                                  initialization_vector: ::String?
+                                }?
+                              },
+                            ]?
+                          }?,
+                          detected_properties: {
+                            width: ::Integer?,
+                            height: ::Integer?,
+                            frame_rate: ::String?,
+                            file_size: ::Integer?,
+                            duration_millis: ::Integer?
+                          }?
+                        },
+                        ?inputs: Array[
+                          {
+                            key: ::String?,
+                            frame_rate: ::String?,
+                            resolution: ::String?,
+                            aspect_ratio: ::String?,
+                            interlaced: ::String?,
+                            container: ::String?,
+                            encryption: {
+                              mode: ::String?,
+                              key: ::String?,
+                              key_md_5: ::String?,
+                              initialization_vector: ::String?
+                            }?,
+                            time_span: {
+                              start_time: ::String?,
+                              duration: ::String?
+                            }?,
+                            input_captions: {
+                              merge_policy: ::String?,
+                              caption_sources: Array[
+                                {
+                                  key: ::String?,
+                                  language: ::String?,
+                                  time_offset: ::String?,
+                                  label: ::String?,
+                                  encryption: {
+                                    mode: ::String?,
+                                    key: ::String?,
+                                    key_md_5: ::String?,
+                                    initialization_vector: ::String?
+                                  }?
+                                },
+                              ]?
+                            }?,
+                            detected_properties: {
+                              width: ::Integer?,
+                              height: ::Integer?,
+                              frame_rate: ::String?,
+                              file_size: ::Integer?,
+                              duration_millis: ::Integer?
+                            }?
+                          },
+                        ],
+                        ?output: {
+                          key: ::String?,
+                          thumbnail_pattern: ::String?,
+                          thumbnail_encryption: {
+                            mode: ::String?,
+                            key: ::String?,
+                            key_md_5: ::String?,
+                            initialization_vector: ::String?
+                          }?,
+                          rotate: ::String?,
+                          preset_id: ::String?,
+                          segment_duration: ::String?,
+                          watermarks: Array[
+                            {
+                              preset_watermark_id: ::String?,
+                              input_key: ::String?,
+                              encryption: {
+                                mode: ::String?,
+                                key: ::String?,
+                                key_md_5: ::String?,
+                                initialization_vector: ::String?
+                              }?
+                            },
+                          ]?,
+                          album_art: {
+                            merge_policy: ::String?,
+                            artwork: Array[
+                              {
+                                input_key: ::String?,
+                                max_width: ::String?,
+                                max_height: ::String?,
+                                sizing_policy: ::String?,
+                                padding_policy: ::String?,
+                                album_art_format: ::String?,
+                                encryption: {
+                                  mode: ::String?,
+                                  key: ::String?,
+                                  key_md_5: ::String?,
+                                  initialization_vector: ::String?
+                                }?
+                              },
+                            ]?
+                          }?,
+                          composition: Array[
+                            {
+                              time_span: {
+                                start_time: ::String?,
+                                duration: ::String?
+                              }?
+                            },
+                          ]?,
+                          captions: {
+                            merge_policy: ::String?,
+                            caption_sources: Array[
+                              {
+                                key: ::String?,
+                                language: ::String?,
+                                time_offset: ::String?,
+                                label: ::String?,
+                                encryption: {
+                                  mode: ::String?,
+                                  key: ::String?,
+                                  key_md_5: ::String?,
+                                  initialization_vector: ::String?
+                                }?
+                              },
+                            ]?,
+                            caption_formats: Array[
+                              {
+                                format: ::String?,
+                                pattern: ::String?,
+                                encryption: {
+                                  mode: ::String?,
+                                  key: ::String?,
+                                  key_md_5: ::String?,
+                                  initialization_vector: ::String?
+                                }?
+                              },
+                            ]?
+                          }?,
+                          encryption: {
+                            mode: ::String?,
+                            key: ::String?,
+                            key_md_5: ::String?,
+                            initialization_vector: ::String?
+                          }?
+                        },
+                        ?outputs: Array[
+                          {
+                            key: ::String?,
+                            thumbnail_pattern: ::String?,
+                            thumbnail_encryption: {
+                              mode: ::String?,
+                              key: ::String?,
+                              key_md_5: ::String?,
+                              initialization_vector: ::String?
+                            }?,
+                            rotate: ::String?,
+                            preset_id: ::String?,
+                            segment_duration: ::String?,
+                            watermarks: Array[
+                              {
+                                preset_watermark_id: ::String?,
+                                input_key: ::String?,
+                                encryption: {
+                                  mode: ::String?,
+                                  key: ::String?,
+                                  key_md_5: ::String?,
+                                  initialization_vector: ::String?
+                                }?
+                              },
+                            ]?,
+                            album_art: {
+                              merge_policy: ::String?,
+                              artwork: Array[
+                                {
+                                  input_key: ::String?,
+                                  max_width: ::String?,
+                                  max_height: ::String?,
+                                  sizing_policy: ::String?,
+                                  padding_policy: ::String?,
+                                  album_art_format: ::String?,
+                                  encryption: {
+                                    mode: ::String?,
+                                    key: ::String?,
+                                    key_md_5: ::String?,
+                                    initialization_vector: ::String?
+                                  }?
+                                },
+                              ]?
+                            }?,
+                            composition: Array[
+                              {
+                                time_span: {
+                                  start_time: ::String?,
+                                  duration: ::String?
+                                }?
+                              },
+                            ]?,
+                            captions: {
+                              merge_policy: ::String?,
+                              caption_sources: Array[
+                                {
+                                  key: ::String?,
+                                  language: ::String?,
+                                  time_offset: ::String?,
+                                  label: ::String?,
+                                  encryption: {
+                                    mode: ::String?,
+                                    key: ::String?,
+                                    key_md_5: ::String?,
+                                    initialization_vector: ::String?
+                                  }?
+                                },
+                              ]?,
+                              caption_formats: Array[
+                                {
+                                  format: ::String?,
+                                  pattern: ::String?,
+                                  encryption: {
+                                    mode: ::String?,
+                                    key: ::String?,
+                                    key_md_5: ::String?,
+                                    initialization_vector: ::String?
+                                  }?
+                                },
+                              ]?
+                            }?,
+                            encryption: {
+                              mode: ::String?,
+                              key: ::String?,
+                              key_md_5: ::String?,
+                              initialization_vector: ::String?
+                            }?
+                          },
+                        ],
+                        ?output_key_prefix: ::String,
+                        ?playlists: Array[
+                          {
+                            name: ::String?,
+                            format: ::String?,
+                            output_keys: Array[::String]?,
+                            hls_content_protection: {
+                              method: ::String?,
+                              key: ::String?,
+                              key_md_5: ::String?,
+                              initialization_vector: ::String?,
+                              license_acquisition_url: ::String?,
+                              key_storage_policy: ::String?
+                            }?,
+                            play_ready_drm: {
+                              format: ::String?,
+                              key: ::String?,
+                              key_md_5: ::String?,
+                              key_id: ::String?,
+                              initialization_vector: ::String?,
+                              license_acquisition_url: ::String?
+                            }?
+                          },
+                        ],
+                        ?user_metadata: Hash[::String, ::String]
+                      ) -> _CreateJobResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateJobResponseSuccess
+
+      interface _CreatePipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePipelineResponse]
+        def pipeline: () -> Types::Pipeline
+        def warnings: () -> ::Array[Types::Warning]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticTranscoder/Client.html#create_pipeline-instance_method
+      def create_pipeline: (
+                             name: ::String,
+                             input_bucket: ::String,
+                             ?output_bucket: ::String,
+                             role: ::String,
+                             ?aws_kms_key_arn: ::String,
+                             ?notifications: {
+                               progressing: ::String?,
+                               completed: ::String?,
+                               warning: ::String?,
+                               error: ::String?
+                             },
+                             ?content_config: {
+                               bucket: ::String?,
+                               storage_class: ::String?,
+                               permissions: Array[
+                                 {
+                                   grantee_type: ::String?,
+                                   grantee: ::String?,
+                                   access: Array[::String]?
+                                 },
+                               ]?
+                             },
+                             ?thumbnail_config: {
+                               bucket: ::String?,
+                               storage_class: ::String?,
+                               permissions: Array[
+                                 {
+                                   grantee_type: ::String?,
+                                   grantee: ::String?,
+                                   access: Array[::String]?
+                                 },
+                               ]?
+                             }
+                           ) -> _CreatePipelineResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePipelineResponseSuccess
+
+      interface _CreatePresetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePresetResponse]
+        def preset: () -> Types::Preset
+        def warning: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticTranscoder/Client.html#create_preset-instance_method
+      def create_preset: (
+                           name: ::String,
+                           ?description: ::String,
+                           container: ::String,
+                           ?video: {
+                             codec: ::String?,
+                             codec_options: Hash[::String, ::String]?,
+                             keyframes_max_dist: ::String?,
+                             fixed_gop: ::String?,
+                             bit_rate: ::String?,
+                             frame_rate: ::String?,
+                             max_frame_rate: ::String?,
+                             resolution: ::String?,
+                             aspect_ratio: ::String?,
+                             max_width: ::String?,
+                             max_height: ::String?,
+                             display_aspect_ratio: ::String?,
+                             sizing_policy: ::String?,
+                             padding_policy: ::String?,
+                             watermarks: Array[
+                               {
+                                 id: ::String?,
+                                 max_width: ::String?,
+                                 max_height: ::String?,
+                                 sizing_policy: ::String?,
+                                 horizontal_align: ::String?,
+                                 horizontal_offset: ::String?,
+                                 vertical_align: ::String?,
+                                 vertical_offset: ::String?,
+                                 opacity: ::String?,
+                                 target: ::String?
+                               },
+                             ]?
+                           },
+                           ?audio: {
+                             codec: ::String?,
+                             sample_rate: ::String?,
+                             bit_rate: ::String?,
+                             channels: ::String?,
+                             audio_packing_mode: ::String?,
+                             codec_options: {
+                               profile: ::String?,
+                               bit_depth: ::String?,
+                               bit_order: ::String?,
+                               signed: ::String?
+                             }?
+                           },
+                           ?thumbnails: {
+                             format: ::String?,
+                             interval: ::String?,
+                             resolution: ::String?,
+                             aspect_ratio: ::String?,
+                             max_width: ::String?,
+                             max_height: ::String?,
+                             sizing_policy: ::String?,
+                             padding_policy: ::String?
+                           }
+                         ) -> _CreatePresetResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePresetResponseSuccess
+
+      interface _DeletePipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePipelineResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticTranscoder/Client.html#delete_pipeline-instance_method
+      def delete_pipeline: (
+                             id: ::String
+                           ) -> _DeletePipelineResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePipelineResponseSuccess
+
+      interface _DeletePresetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePresetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticTranscoder/Client.html#delete_preset-instance_method
+      def delete_preset: (
+                           id: ::String
+                         ) -> _DeletePresetResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePresetResponseSuccess
+
+      interface _ListJobsByPipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListJobsByPipelineResponse]
+        def jobs: () -> ::Array[Types::Job]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticTranscoder/Client.html#list_jobs_by_pipeline-instance_method
+      def list_jobs_by_pipeline: (
+                                   pipeline_id: ::String,
+                                   ?ascending: ::String,
+                                   ?page_token: ::String
+                                 ) -> _ListJobsByPipelineResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListJobsByPipelineResponseSuccess
+
+      interface _ListJobsByStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListJobsByStatusResponse]
+        def jobs: () -> ::Array[Types::Job]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticTranscoder/Client.html#list_jobs_by_status-instance_method
+      def list_jobs_by_status: (
+                                 status: ::String,
+                                 ?ascending: ::String,
+                                 ?page_token: ::String
+                               ) -> _ListJobsByStatusResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListJobsByStatusResponseSuccess
+
+      interface _ListPipelinesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPipelinesResponse]
+        def pipelines: () -> ::Array[Types::Pipeline]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticTranscoder/Client.html#list_pipelines-instance_method
+      def list_pipelines: (
+                            ?ascending: ::String,
+                            ?page_token: ::String
+                          ) -> _ListPipelinesResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPipelinesResponseSuccess
+
+      interface _ListPresetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPresetsResponse]
+        def presets: () -> ::Array[Types::Preset]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticTranscoder/Client.html#list_presets-instance_method
+      def list_presets: (
+                          ?ascending: ::String,
+                          ?page_token: ::String
+                        ) -> _ListPresetsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPresetsResponseSuccess
+
+      interface _ReadJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReadJobResponse]
+        def job: () -> Types::Job
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticTranscoder/Client.html#read_job-instance_method
+      def read_job: (
+                      id: ::String
+                    ) -> _ReadJobResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReadJobResponseSuccess
+
+      interface _ReadPipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReadPipelineResponse]
+        def pipeline: () -> Types::Pipeline
+        def warnings: () -> ::Array[Types::Warning]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticTranscoder/Client.html#read_pipeline-instance_method
+      def read_pipeline: (
+                           id: ::String
+                         ) -> _ReadPipelineResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReadPipelineResponseSuccess
+
+      interface _ReadPresetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReadPresetResponse]
+        def preset: () -> Types::Preset
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticTranscoder/Client.html#read_preset-instance_method
+      def read_preset: (
+                         id: ::String
+                       ) -> _ReadPresetResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReadPresetResponseSuccess
+
+      interface _TestRoleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TestRoleResponse]
+        def success: () -> ::String
+        def messages: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticTranscoder/Client.html#test_role-instance_method
+      def test_role: (
+                       role: ::String,
+                       input_bucket: ::String,
+                       output_bucket: ::String,
+                       topics: Array[::String]
+                     ) -> _TestRoleResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestRoleResponseSuccess
+
+      interface _UpdatePipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePipelineResponse]
+        def pipeline: () -> Types::Pipeline
+        def warnings: () -> ::Array[Types::Warning]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticTranscoder/Client.html#update_pipeline-instance_method
+      def update_pipeline: (
+                             id: ::String,
+                             ?name: ::String,
+                             ?input_bucket: ::String,
+                             ?role: ::String,
+                             ?aws_kms_key_arn: ::String,
+                             ?notifications: {
+                               progressing: ::String?,
+                               completed: ::String?,
+                               warning: ::String?,
+                               error: ::String?
+                             },
+                             ?content_config: {
+                               bucket: ::String?,
+                               storage_class: ::String?,
+                               permissions: Array[
+                                 {
+                                   grantee_type: ::String?,
+                                   grantee: ::String?,
+                                   access: Array[::String]?
+                                 },
+                               ]?
+                             },
+                             ?thumbnail_config: {
+                               bucket: ::String?,
+                               storage_class: ::String?,
+                               permissions: Array[
+                                 {
+                                   grantee_type: ::String?,
+                                   grantee: ::String?,
+                                   access: Array[::String]?
+                                 },
+                               ]?
+                             }
+                           ) -> _UpdatePipelineResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePipelineResponseSuccess
+
+      interface _UpdatePipelineNotificationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePipelineNotificationsResponse]
+        def pipeline: () -> Types::Pipeline
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticTranscoder/Client.html#update_pipeline_notifications-instance_method
+      def update_pipeline_notifications: (
+                                           id: ::String,
+                                           notifications: {
+                                             progressing: ::String?,
+                                             completed: ::String?,
+                                             warning: ::String?,
+                                             error: ::String?
+                                           }
+                                         ) -> _UpdatePipelineNotificationsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePipelineNotificationsResponseSuccess
+
+      interface _UpdatePipelineStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePipelineStatusResponse]
+        def pipeline: () -> Types::Pipeline
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticTranscoder/Client.html#update_pipeline_status-instance_method
+      def update_pipeline_status: (
+                                    id: ::String,
+                                    status: ::String
+                                  ) -> _UpdatePipelineStatusResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePipelineStatusResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticTranscoder/Client.html#wait_until-instance_method
+      def wait_until: (:job_complete waiter_name, 
+                    id: ::String
+                  ) -> Client::_ReadJobResponseSuccess
+                    | (:job_complete waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_ReadJobResponseSuccess
+    end
+  end
+end
+

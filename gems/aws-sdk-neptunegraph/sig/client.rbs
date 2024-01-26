@@ -1,0 +1,523 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module NeptuneGraph
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CancelImportTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelImportTaskOutput]
+        def graph_id: () -> ::String
+        def task_id: () -> ::String
+        def source: () -> ::String
+        def format: () -> ("CSV" | "OPEN_CYPHER")
+        def role_arn: () -> ::String
+        def status: () -> ("INITIALIZING" | "EXPORTING" | "ANALYZING_DATA" | "IMPORTING" | "REPROVISIONING" | "ROLLING_BACK" | "SUCCEEDED" | "FAILED" | "CANCELLING" | "CANCELLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#cancel_import_task-instance_method
+      def cancel_import_task: (
+                                task_identifier: ::String
+                              ) -> _CancelImportTaskResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelImportTaskResponseSuccess
+
+      interface _CreateGraphResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGraphOutput]
+        def id: () -> ::String
+        def name: () -> ::String
+        def arn: () -> ::String
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED")
+        def status_reason: () -> ::String
+        def create_time: () -> ::Time
+        def provisioned_memory: () -> ::Integer
+        def endpoint: () -> ::String
+        def public_connectivity: () -> bool
+        def vector_search_configuration: () -> Types::VectorSearchConfiguration
+        def replica_count: () -> ::Integer
+        def kms_key_identifier: () -> ::String
+        def source_snapshot_id: () -> ::String
+        def deletion_protection: () -> bool
+        def build_number: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#create_graph-instance_method
+      def create_graph: (
+                          graph_name: ::String,
+                          ?tags: Hash[::String, ::String],
+                          ?public_connectivity: bool,
+                          ?kms_key_identifier: ::String,
+                          ?vector_search_configuration: {
+                            dimension: ::Integer
+                          },
+                          ?replica_count: ::Integer,
+                          ?deletion_protection: bool,
+                          provisioned_memory: ::Integer
+                        ) -> _CreateGraphResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGraphResponseSuccess
+
+      interface _CreateGraphSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGraphSnapshotOutput]
+        def id: () -> ::String
+        def name: () -> ::String
+        def arn: () -> ::String
+        def source_graph_id: () -> ::String
+        def snapshot_create_time: () -> ::Time
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "FAILED")
+        def kms_key_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#create_graph_snapshot-instance_method
+      def create_graph_snapshot: (
+                                   graph_identifier: ::String,
+                                   snapshot_name: ::String,
+                                   ?tags: Hash[::String, ::String]
+                                 ) -> _CreateGraphSnapshotResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGraphSnapshotResponseSuccess
+
+      interface _CreateGraphUsingImportTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGraphUsingImportTaskOutput]
+        def graph_id: () -> ::String
+        def task_id: () -> ::String
+        def source: () -> ::String
+        def format: () -> ("CSV" | "OPEN_CYPHER")
+        def role_arn: () -> ::String
+        def status: () -> ("INITIALIZING" | "EXPORTING" | "ANALYZING_DATA" | "IMPORTING" | "REPROVISIONING" | "ROLLING_BACK" | "SUCCEEDED" | "FAILED" | "CANCELLING" | "CANCELLED")
+        def import_options: () -> Types::ImportOptions
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#create_graph_using_import_task-instance_method
+      def create_graph_using_import_task: (
+                                            graph_name: ::String,
+                                            ?tags: Hash[::String, ::String],
+                                            ?public_connectivity: bool,
+                                            ?kms_key_identifier: ::String,
+                                            ?vector_search_configuration: {
+                                              dimension: ::Integer
+                                            },
+                                            ?replica_count: ::Integer,
+                                            ?deletion_protection: bool,
+                                            ?import_options: {
+                                              neptune: {
+                                                s3_export_path: ::String,
+                                                s3_export_kms_key_id: ::String,
+                                                preserve_default_vertex_labels: bool?,
+                                                preserve_edge_ids: bool?
+                                              }?
+                                            },
+                                            ?max_provisioned_memory: ::Integer,
+                                            ?min_provisioned_memory: ::Integer,
+                                            ?fail_on_error: bool,
+                                            source: ::String,
+                                            ?format: ("CSV" | "OPEN_CYPHER"),
+                                            role_arn: ::String
+                                          ) -> _CreateGraphUsingImportTaskResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGraphUsingImportTaskResponseSuccess
+
+      interface _CreatePrivateGraphEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePrivateGraphEndpointOutput]
+        def vpc_id: () -> ::String
+        def subnet_ids: () -> ::Array[::String]
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "FAILED")
+        def vpc_endpoint_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#create_private_graph_endpoint-instance_method
+      def create_private_graph_endpoint: (
+                                           graph_identifier: ::String,
+                                           ?vpc_id: ::String,
+                                           ?subnet_ids: Array[::String],
+                                           ?vpc_security_group_ids: Array[::String]
+                                         ) -> _CreatePrivateGraphEndpointResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePrivateGraphEndpointResponseSuccess
+
+      interface _DeleteGraphResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGraphOutput]
+        def id: () -> ::String
+        def name: () -> ::String
+        def arn: () -> ::String
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED")
+        def status_reason: () -> ::String
+        def create_time: () -> ::Time
+        def provisioned_memory: () -> ::Integer
+        def endpoint: () -> ::String
+        def public_connectivity: () -> bool
+        def vector_search_configuration: () -> Types::VectorSearchConfiguration
+        def replica_count: () -> ::Integer
+        def kms_key_identifier: () -> ::String
+        def source_snapshot_id: () -> ::String
+        def deletion_protection: () -> bool
+        def build_number: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#delete_graph-instance_method
+      def delete_graph: (
+                          graph_identifier: ::String,
+                          skip_snapshot: bool
+                        ) -> _DeleteGraphResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGraphResponseSuccess
+
+      interface _DeleteGraphSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGraphSnapshotOutput]
+        def id: () -> ::String
+        def name: () -> ::String
+        def arn: () -> ::String
+        def source_graph_id: () -> ::String
+        def snapshot_create_time: () -> ::Time
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "FAILED")
+        def kms_key_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#delete_graph_snapshot-instance_method
+      def delete_graph_snapshot: (
+                                   snapshot_identifier: ::String
+                                 ) -> _DeleteGraphSnapshotResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGraphSnapshotResponseSuccess
+
+      interface _DeletePrivateGraphEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePrivateGraphEndpointOutput]
+        def vpc_id: () -> ::String
+        def subnet_ids: () -> ::Array[::String]
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "FAILED")
+        def vpc_endpoint_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#delete_private_graph_endpoint-instance_method
+      def delete_private_graph_endpoint: (
+                                           graph_identifier: ::String,
+                                           vpc_id: ::String
+                                         ) -> _DeletePrivateGraphEndpointResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePrivateGraphEndpointResponseSuccess
+
+      interface _GetGraphResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGraphOutput]
+        def id: () -> ::String
+        def name: () -> ::String
+        def arn: () -> ::String
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED")
+        def status_reason: () -> ::String
+        def create_time: () -> ::Time
+        def provisioned_memory: () -> ::Integer
+        def endpoint: () -> ::String
+        def public_connectivity: () -> bool
+        def vector_search_configuration: () -> Types::VectorSearchConfiguration
+        def replica_count: () -> ::Integer
+        def kms_key_identifier: () -> ::String
+        def source_snapshot_id: () -> ::String
+        def deletion_protection: () -> bool
+        def build_number: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#get_graph-instance_method
+      def get_graph: (
+                       graph_identifier: ::String
+                     ) -> _GetGraphResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGraphResponseSuccess
+
+      interface _GetGraphSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGraphSnapshotOutput]
+        def id: () -> ::String
+        def name: () -> ::String
+        def arn: () -> ::String
+        def source_graph_id: () -> ::String
+        def snapshot_create_time: () -> ::Time
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "FAILED")
+        def kms_key_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#get_graph_snapshot-instance_method
+      def get_graph_snapshot: (
+                                snapshot_identifier: ::String
+                              ) -> _GetGraphSnapshotResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGraphSnapshotResponseSuccess
+
+      interface _GetImportTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetImportTaskOutput]
+        def graph_id: () -> ::String
+        def task_id: () -> ::String
+        def source: () -> ::String
+        def format: () -> ("CSV" | "OPEN_CYPHER")
+        def role_arn: () -> ::String
+        def status: () -> ("INITIALIZING" | "EXPORTING" | "ANALYZING_DATA" | "IMPORTING" | "REPROVISIONING" | "ROLLING_BACK" | "SUCCEEDED" | "FAILED" | "CANCELLING" | "CANCELLED")
+        def import_options: () -> Types::ImportOptions
+        def import_task_details: () -> Types::ImportTaskDetails
+        def attempt_number: () -> ::Integer
+        def status_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#get_import_task-instance_method
+      def get_import_task: (
+                             task_identifier: ::String
+                           ) -> _GetImportTaskResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetImportTaskResponseSuccess
+
+      interface _GetPrivateGraphEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPrivateGraphEndpointOutput]
+        def vpc_id: () -> ::String
+        def subnet_ids: () -> ::Array[::String]
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "FAILED")
+        def vpc_endpoint_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#get_private_graph_endpoint-instance_method
+      def get_private_graph_endpoint: (
+                                        graph_identifier: ::String,
+                                        vpc_id: ::String
+                                      ) -> _GetPrivateGraphEndpointResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPrivateGraphEndpointResponseSuccess
+
+      interface _ListGraphSnapshotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGraphSnapshotsOutput]
+        def graph_snapshots: () -> ::Array[Types::GraphSnapshotSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#list_graph_snapshots-instance_method
+      def list_graph_snapshots: (
+                                  ?graph_identifier: ::String,
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListGraphSnapshotsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGraphSnapshotsResponseSuccess
+
+      interface _ListGraphsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGraphsOutput]
+        def graphs: () -> ::Array[Types::GraphSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#list_graphs-instance_method
+      def list_graphs: (
+                         ?next_token: ::String,
+                         ?max_results: ::Integer
+                       ) -> _ListGraphsResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGraphsResponseSuccess
+
+      interface _ListImportTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListImportTasksOutput]
+        def tasks: () -> ::Array[Types::ImportTaskSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#list_import_tasks-instance_method
+      def list_import_tasks: (
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
+                             ) -> _ListImportTasksResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListImportTasksResponseSuccess
+
+      interface _ListPrivateGraphEndpointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPrivateGraphEndpointsOutput]
+        def private_graph_endpoints: () -> ::Array[Types::PrivateGraphEndpointSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#list_private_graph_endpoints-instance_method
+      def list_private_graph_endpoints: (
+                                          graph_identifier: ::String,
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListPrivateGraphEndpointsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPrivateGraphEndpointsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ResetGraphResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResetGraphOutput]
+        def id: () -> ::String
+        def name: () -> ::String
+        def arn: () -> ::String
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED")
+        def status_reason: () -> ::String
+        def create_time: () -> ::Time
+        def provisioned_memory: () -> ::Integer
+        def endpoint: () -> ::String
+        def public_connectivity: () -> bool
+        def vector_search_configuration: () -> Types::VectorSearchConfiguration
+        def replica_count: () -> ::Integer
+        def kms_key_identifier: () -> ::String
+        def source_snapshot_id: () -> ::String
+        def deletion_protection: () -> bool
+        def build_number: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#reset_graph-instance_method
+      def reset_graph: (
+                         graph_identifier: ::String,
+                         skip_snapshot: bool
+                       ) -> _ResetGraphResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetGraphResponseSuccess
+
+      interface _RestoreGraphFromSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestoreGraphFromSnapshotOutput]
+        def id: () -> ::String
+        def name: () -> ::String
+        def arn: () -> ::String
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED")
+        def status_reason: () -> ::String
+        def create_time: () -> ::Time
+        def provisioned_memory: () -> ::Integer
+        def endpoint: () -> ::String
+        def public_connectivity: () -> bool
+        def vector_search_configuration: () -> Types::VectorSearchConfiguration
+        def replica_count: () -> ::Integer
+        def kms_key_identifier: () -> ::String
+        def source_snapshot_id: () -> ::String
+        def deletion_protection: () -> bool
+        def build_number: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#restore_graph_from_snapshot-instance_method
+      def restore_graph_from_snapshot: (
+                                         snapshot_identifier: ::String,
+                                         graph_name: ::String,
+                                         ?provisioned_memory: ::Integer,
+                                         ?deletion_protection: bool,
+                                         ?tags: Hash[::String, ::String],
+                                         ?replica_count: ::Integer,
+                                         ?public_connectivity: bool
+                                       ) -> _RestoreGraphFromSnapshotResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreGraphFromSnapshotResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateGraphResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGraphOutput]
+        def id: () -> ::String
+        def name: () -> ::String
+        def arn: () -> ::String
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED")
+        def status_reason: () -> ::String
+        def create_time: () -> ::Time
+        def provisioned_memory: () -> ::Integer
+        def endpoint: () -> ::String
+        def public_connectivity: () -> bool
+        def vector_search_configuration: () -> Types::VectorSearchConfiguration
+        def replica_count: () -> ::Integer
+        def kms_key_identifier: () -> ::String
+        def source_snapshot_id: () -> ::String
+        def deletion_protection: () -> bool
+        def build_number: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#update_graph-instance_method
+      def update_graph: (
+                          graph_identifier: ::String,
+                          ?public_connectivity: bool,
+                          ?provisioned_memory: ::Integer,
+                          ?deletion_protection: bool
+                        ) -> _UpdateGraphResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGraphResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#wait_until-instance_method
+      def wait_until: (:graph_available waiter_name, 
+                    graph_identifier: ::String
+                  ) -> Client::_GetGraphResponseSuccess
+                    | (:graph_available waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetGraphResponseSuccess
+                    | (:graph_deleted waiter_name, 
+                    graph_identifier: ::String
+                  ) -> Client::_GetGraphResponseSuccess
+                    | (:graph_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetGraphResponseSuccess
+                    | (:graph_snapshot_available waiter_name, 
+                    snapshot_identifier: ::String
+                  ) -> Client::_GetGraphSnapshotResponseSuccess
+                    | (:graph_snapshot_available waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetGraphSnapshotResponseSuccess
+                    | (:graph_snapshot_deleted waiter_name, 
+                    snapshot_identifier: ::String
+                  ) -> Client::_GetGraphSnapshotResponseSuccess
+                    | (:graph_snapshot_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetGraphSnapshotResponseSuccess
+                    | (:import_task_cancelled waiter_name, 
+                    task_identifier: ::String
+                  ) -> Client::_GetImportTaskResponseSuccess
+                    | (:import_task_cancelled waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetImportTaskResponseSuccess
+                    | (:import_task_successful waiter_name, 
+                    task_identifier: ::String
+                  ) -> Client::_GetImportTaskResponseSuccess
+                    | (:import_task_successful waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetImportTaskResponseSuccess
+                    | (:private_graph_endpoint_available waiter_name, 
+                    graph_identifier: ::String,
+                    vpc_id: ::String
+                  ) -> Client::_GetPrivateGraphEndpointResponseSuccess
+                    | (:private_graph_endpoint_available waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetPrivateGraphEndpointResponseSuccess
+                    | (:private_graph_endpoint_deleted waiter_name, 
+                    graph_identifier: ::String,
+                    vpc_id: ::String
+                  ) -> Client::_GetPrivateGraphEndpointResponseSuccess
+                    | (:private_graph_endpoint_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetPrivateGraphEndpointResponseSuccess
+    end
+  end
+end
+

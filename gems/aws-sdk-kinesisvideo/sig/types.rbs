@@ -1,0 +1,611 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::KinesisVideo
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccountChannelLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccountStreamLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ChannelInfo
+      attr_accessor channel_name: ::String
+      attr_accessor channel_arn: ::String
+      attr_accessor channel_type: ("SINGLE_MASTER" | "FULL_MESH")
+      attr_accessor channel_status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING")
+      attr_accessor creation_time: ::Time
+      attr_accessor single_master_configuration: Types::SingleMasterConfiguration
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class ChannelNameCondition
+      attr_accessor comparison_operator: ("BEGINS_WITH")
+      attr_accessor comparison_value: ::String
+      SENSITIVE: []
+    end
+
+    class ClientLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSignalingChannelInput
+      attr_accessor channel_name: ::String
+      attr_accessor channel_type: ("SINGLE_MASTER" | "FULL_MESH")
+      attr_accessor single_master_configuration: Types::SingleMasterConfiguration
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateSignalingChannelOutput
+      attr_accessor channel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateStreamInput
+      attr_accessor device_name: ::String
+      attr_accessor stream_name: ::String
+      attr_accessor media_type: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor data_retention_in_hours: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateStreamOutput
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEdgeConfigurationInput
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEdgeConfigurationOutput < Aws::EmptyStructure
+    end
+
+    class DeleteSignalingChannelInput
+      attr_accessor channel_arn: ::String
+      attr_accessor current_version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSignalingChannelOutput < Aws::EmptyStructure
+    end
+
+    class DeleteStreamInput
+      attr_accessor stream_arn: ::String
+      attr_accessor current_version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStreamOutput < Aws::EmptyStructure
+    end
+
+    class DeletionConfig
+      attr_accessor edge_retention_in_hours: ::Integer
+      attr_accessor local_size_config: Types::LocalSizeConfig
+      attr_accessor delete_after_upload: bool
+      SENSITIVE: []
+    end
+
+    class DescribeEdgeConfigurationInput
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEdgeConfigurationOutput
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor sync_status: ("SYNCING" | "ACKNOWLEDGED" | "IN_SYNC" | "SYNC_FAILED" | "DELETING" | "DELETE_FAILED" | "DELETING_ACKNOWLEDGED")
+      attr_accessor failed_status_details: ::String
+      attr_accessor edge_config: Types::EdgeConfig
+      attr_accessor edge_agent_status: Types::EdgeAgentStatus
+      SENSITIVE: []
+    end
+
+    class DescribeImageGenerationConfigurationInput
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeImageGenerationConfigurationOutput
+      attr_accessor image_generation_configuration: Types::ImageGenerationConfiguration
+      SENSITIVE: []
+    end
+
+    class DescribeMappedResourceConfigurationInput
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMappedResourceConfigurationOutput
+      attr_accessor mapped_resource_configuration_list: ::Array[Types::MappedResourceConfigurationListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMediaStorageConfigurationInput
+      attr_accessor channel_name: ::String
+      attr_accessor channel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMediaStorageConfigurationOutput
+      attr_accessor media_storage_configuration: Types::MediaStorageConfiguration
+      SENSITIVE: []
+    end
+
+    class DescribeNotificationConfigurationInput
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeNotificationConfigurationOutput
+      attr_accessor notification_configuration: Types::NotificationConfiguration
+      SENSITIVE: []
+    end
+
+    class DescribeSignalingChannelInput
+      attr_accessor channel_name: ::String
+      attr_accessor channel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSignalingChannelOutput
+      attr_accessor channel_info: Types::ChannelInfo
+      SENSITIVE: []
+    end
+
+    class DescribeStreamInput
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStreamOutput
+      attr_accessor stream_info: Types::StreamInfo
+      SENSITIVE: []
+    end
+
+    class DeviceStreamLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EdgeAgentStatus
+      attr_accessor last_recorder_status: Types::LastRecorderStatus
+      attr_accessor last_uploader_status: Types::LastUploaderStatus
+      SENSITIVE: []
+    end
+
+    class EdgeConfig
+      attr_accessor hub_device_arn: ::String
+      attr_accessor recorder_config: Types::RecorderConfig
+      attr_accessor uploader_config: Types::UploaderConfig
+      attr_accessor deletion_config: Types::DeletionConfig
+      SENSITIVE: []
+    end
+
+    class GetDataEndpointInput
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor api_name: ("PUT_MEDIA" | "GET_MEDIA" | "LIST_FRAGMENTS" | "GET_MEDIA_FOR_FRAGMENT_LIST" | "GET_HLS_STREAMING_SESSION_URL" | "GET_DASH_STREAMING_SESSION_URL" | "GET_CLIP" | "GET_IMAGES")
+      SENSITIVE: []
+    end
+
+    class GetDataEndpointOutput
+      attr_accessor data_endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class GetSignalingChannelEndpointInput
+      attr_accessor channel_arn: ::String
+      attr_accessor single_master_channel_endpoint_configuration: Types::SingleMasterChannelEndpointConfiguration
+      SENSITIVE: []
+    end
+
+    class GetSignalingChannelEndpointOutput
+      attr_accessor resource_endpoint_list: ::Array[Types::ResourceEndpointListItem]
+      SENSITIVE: []
+    end
+
+    class ImageGenerationConfiguration
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor image_selector_type: ("SERVER_TIMESTAMP" | "PRODUCER_TIMESTAMP")
+      attr_accessor destination_config: Types::ImageGenerationDestinationConfig
+      attr_accessor sampling_interval: ::Integer
+      attr_accessor format: ("JPEG" | "PNG")
+      attr_accessor format_config: ::Hash[("JPEGQuality"), ::String]
+      attr_accessor width_pixels: ::Integer
+      attr_accessor height_pixels: ::Integer
+      SENSITIVE: []
+    end
+
+    class ImageGenerationDestinationConfig
+      attr_accessor uri: ::String
+      attr_accessor destination_region: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidArgumentException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidDeviceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidResourceFormatException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LastRecorderStatus
+      attr_accessor job_status_details: ::String
+      attr_accessor last_collected_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor recorder_status: ("SUCCESS" | "USER_ERROR" | "SYSTEM_ERROR")
+      SENSITIVE: []
+    end
+
+    class LastUploaderStatus
+      attr_accessor job_status_details: ::String
+      attr_accessor last_collected_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor uploader_status: ("SUCCESS" | "USER_ERROR" | "SYSTEM_ERROR")
+      SENSITIVE: []
+    end
+
+    class ListEdgeAgentConfigurationsEdgeConfig
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor sync_status: ("SYNCING" | "ACKNOWLEDGED" | "IN_SYNC" | "SYNC_FAILED" | "DELETING" | "DELETE_FAILED" | "DELETING_ACKNOWLEDGED")
+      attr_accessor failed_status_details: ::String
+      attr_accessor edge_config: Types::EdgeConfig
+      SENSITIVE: []
+    end
+
+    class ListEdgeAgentConfigurationsInput
+      attr_accessor hub_device_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEdgeAgentConfigurationsOutput
+      attr_accessor edge_configs: ::Array[Types::ListEdgeAgentConfigurationsEdgeConfig]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSignalingChannelsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor channel_name_condition: Types::ChannelNameCondition
+      SENSITIVE: []
+    end
+
+    class ListSignalingChannelsOutput
+      attr_accessor channel_info_list: ::Array[Types::ChannelInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStreamsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor stream_name_condition: Types::StreamNameCondition
+      SENSITIVE: []
+    end
+
+    class ListStreamsOutput
+      attr_accessor stream_info_list: ::Array[Types::StreamInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor next_token: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor next_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListTagsForStreamInput
+      attr_accessor next_token: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor stream_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForStreamOutput
+      attr_accessor next_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class LocalSizeConfig
+      attr_accessor max_local_media_size_in_mb: ::Integer
+      attr_accessor strategy_on_full_size: ("DELETE_OLDEST_MEDIA" | "DENY_NEW_MEDIA")
+      SENSITIVE: []
+    end
+
+    class MappedResourceConfigurationListItem
+      attr_accessor type: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class MediaSourceConfig
+      attr_accessor media_uri_secret_arn: ::String
+      attr_accessor media_uri_type: ("RTSP_URI" | "FILE_URI")
+      SENSITIVE: [:media_uri_secret_arn]
+    end
+
+    class MediaStorageConfiguration
+      attr_accessor stream_arn: ::String
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class NoDataRetentionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NotAuthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NotificationConfiguration
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor destination_config: Types::NotificationDestinationConfig
+      SENSITIVE: []
+    end
+
+    class NotificationDestinationConfig
+      attr_accessor uri: ::String
+      SENSITIVE: []
+    end
+
+    class RecorderConfig
+      attr_accessor media_source_config: Types::MediaSourceConfig
+      attr_accessor schedule_config: Types::ScheduleConfig
+      SENSITIVE: []
+    end
+
+    class ResourceEndpointListItem
+      attr_accessor protocol: ("WSS" | "HTTPS" | "WEBRTC")
+      attr_accessor resource_endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ScheduleConfig
+      attr_accessor schedule_expression: ::String
+      attr_accessor duration_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class SingleMasterChannelEndpointConfiguration
+      attr_accessor protocols: ::Array[("WSS" | "HTTPS" | "WEBRTC")]
+      attr_accessor role: ("MASTER" | "VIEWER")
+      SENSITIVE: []
+    end
+
+    class SingleMasterConfiguration
+      attr_accessor message_ttl_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class StartEdgeConfigurationUpdateInput
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor edge_config: Types::EdgeConfig
+      SENSITIVE: []
+    end
+
+    class StartEdgeConfigurationUpdateOutput
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor sync_status: ("SYNCING" | "ACKNOWLEDGED" | "IN_SYNC" | "SYNC_FAILED" | "DELETING" | "DELETE_FAILED" | "DELETING_ACKNOWLEDGED")
+      attr_accessor failed_status_details: ::String
+      attr_accessor edge_config: Types::EdgeConfig
+      SENSITIVE: []
+    end
+
+    class StreamEdgeConfigurationNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StreamInfo
+      attr_accessor device_name: ::String
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor media_type: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor version: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING")
+      attr_accessor creation_time: ::Time
+      attr_accessor data_retention_in_hours: ::Integer
+      SENSITIVE: []
+    end
+
+    class StreamNameCondition
+      attr_accessor comparison_operator: ("BEGINS_WITH")
+      attr_accessor comparison_value: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class TagStreamInput
+      attr_accessor stream_arn: ::String
+      attr_accessor stream_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagStreamOutput < Aws::EmptyStructure
+    end
+
+    class TagsPerResourceExceededLimitException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_key_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UntagStreamInput
+      attr_accessor stream_arn: ::String
+      attr_accessor stream_name: ::String
+      attr_accessor tag_key_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagStreamOutput < Aws::EmptyStructure
+    end
+
+    class UpdateDataRetentionInput
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor current_version: ::String
+      attr_accessor operation: ("INCREASE_DATA_RETENTION" | "DECREASE_DATA_RETENTION")
+      attr_accessor data_retention_change_in_hours: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateDataRetentionOutput < Aws::EmptyStructure
+    end
+
+    class UpdateImageGenerationConfigurationInput
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor image_generation_configuration: Types::ImageGenerationConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateImageGenerationConfigurationOutput < Aws::EmptyStructure
+    end
+
+    class UpdateMediaStorageConfigurationInput
+      attr_accessor channel_arn: ::String
+      attr_accessor media_storage_configuration: Types::MediaStorageConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateMediaStorageConfigurationOutput < Aws::EmptyStructure
+    end
+
+    class UpdateNotificationConfigurationInput
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor notification_configuration: Types::NotificationConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateNotificationConfigurationOutput < Aws::EmptyStructure
+    end
+
+    class UpdateSignalingChannelInput
+      attr_accessor channel_arn: ::String
+      attr_accessor current_version: ::String
+      attr_accessor single_master_configuration: Types::SingleMasterConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateSignalingChannelOutput < Aws::EmptyStructure
+    end
+
+    class UpdateStreamInput
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor current_version: ::String
+      attr_accessor device_name: ::String
+      attr_accessor media_type: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateStreamOutput < Aws::EmptyStructure
+    end
+
+    class UploaderConfig
+      attr_accessor schedule_config: Types::ScheduleConfig
+      SENSITIVE: []
+    end
+
+    class VersionMismatchException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

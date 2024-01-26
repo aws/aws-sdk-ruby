@@ -1,0 +1,981 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::LexModelBuildingService
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BotAliasMetadata
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor bot_name: ::String
+      attr_accessor last_updated_date: ::Time
+      attr_accessor created_date: ::Time
+      attr_accessor checksum: ::String
+      attr_accessor conversation_logs: Types::ConversationLogsResponse
+      SENSITIVE: []
+    end
+
+    class BotChannelAssociation
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor bot_alias: ::String
+      attr_accessor bot_name: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor type: ("Facebook" | "Slack" | "Twilio-Sms" | "Kik")
+      attr_accessor bot_configuration: ::Hash[::String, ::String]
+      attr_accessor status: ("IN_PROGRESS" | "CREATED" | "FAILED")
+      attr_accessor failure_reason: ::String
+      SENSITIVE: [:bot_configuration]
+    end
+
+    class BotMetadata
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("BUILDING" | "READY" | "READY_BASIC_TESTING" | "FAILED" | "NOT_BUILT")
+      attr_accessor last_updated_date: ::Time
+      attr_accessor created_date: ::Time
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class BuiltinIntentMetadata
+      attr_accessor signature: ::String
+      attr_accessor supported_locales: ::Array[("de-DE" | "en-AU" | "en-GB" | "en-IN" | "en-US" | "es-419" | "es-ES" | "es-US" | "fr-FR" | "fr-CA" | "it-IT" | "ja-JP" | "ko-KR")]
+      SENSITIVE: []
+    end
+
+    class BuiltinIntentSlot
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class BuiltinSlotTypeMetadata
+      attr_accessor signature: ::String
+      attr_accessor supported_locales: ::Array[("de-DE" | "en-AU" | "en-GB" | "en-IN" | "en-US" | "es-419" | "es-ES" | "es-US" | "fr-FR" | "fr-CA" | "it-IT" | "ja-JP" | "ko-KR")]
+      SENSITIVE: []
+    end
+
+    class CodeHook
+      attr_accessor uri: ::String
+      attr_accessor message_version: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConversationLogsRequest
+      attr_accessor log_settings: ::Array[Types::LogSettingsRequest]
+      attr_accessor iam_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ConversationLogsResponse
+      attr_accessor log_settings: ::Array[Types::LogSettingsResponse]
+      attr_accessor iam_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBotVersionRequest
+      attr_accessor name: ::String
+      attr_accessor checksum: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBotVersionResponse
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor intents: ::Array[Types::Intent]
+      attr_accessor clarification_prompt: Types::Prompt
+      attr_accessor abort_statement: Types::Statement
+      attr_accessor status: ("BUILDING" | "READY" | "READY_BASIC_TESTING" | "FAILED" | "NOT_BUILT")
+      attr_accessor failure_reason: ::String
+      attr_accessor last_updated_date: ::Time
+      attr_accessor created_date: ::Time
+      attr_accessor idle_session_ttl_in_seconds: ::Integer
+      attr_accessor voice_id: ::String
+      attr_accessor checksum: ::String
+      attr_accessor version: ::String
+      attr_accessor locale: ("de-DE" | "en-AU" | "en-GB" | "en-IN" | "en-US" | "es-419" | "es-ES" | "es-US" | "fr-FR" | "fr-CA" | "it-IT" | "ja-JP" | "ko-KR")
+      attr_accessor child_directed: bool
+      attr_accessor enable_model_improvements: bool
+      attr_accessor detect_sentiment: bool
+      SENSITIVE: []
+    end
+
+    class CreateIntentVersionRequest
+      attr_accessor name: ::String
+      attr_accessor checksum: ::String
+      SENSITIVE: []
+    end
+
+    class CreateIntentVersionResponse
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor slots: ::Array[Types::Slot]
+      attr_accessor sample_utterances: ::Array[::String]
+      attr_accessor confirmation_prompt: Types::Prompt
+      attr_accessor rejection_statement: Types::Statement
+      attr_accessor follow_up_prompt: Types::FollowUpPrompt
+      attr_accessor conclusion_statement: Types::Statement
+      attr_accessor dialog_code_hook: Types::CodeHook
+      attr_accessor fulfillment_activity: Types::FulfillmentActivity
+      attr_accessor parent_intent_signature: ::String
+      attr_accessor last_updated_date: ::Time
+      attr_accessor created_date: ::Time
+      attr_accessor version: ::String
+      attr_accessor checksum: ::String
+      attr_accessor kendra_configuration: Types::KendraConfiguration
+      attr_accessor input_contexts: ::Array[Types::InputContext]
+      attr_accessor output_contexts: ::Array[Types::OutputContext]
+      SENSITIVE: []
+    end
+
+    class CreateSlotTypeVersionRequest
+      attr_accessor name: ::String
+      attr_accessor checksum: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSlotTypeVersionResponse
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor enumeration_values: ::Array[Types::EnumerationValue]
+      attr_accessor last_updated_date: ::Time
+      attr_accessor created_date: ::Time
+      attr_accessor version: ::String
+      attr_accessor checksum: ::String
+      attr_accessor value_selection_strategy: ("ORIGINAL_VALUE" | "TOP_RESOLUTION")
+      attr_accessor parent_slot_type_signature: ::String
+      attr_accessor slot_type_configurations: ::Array[Types::SlotTypeConfiguration]
+      SENSITIVE: []
+    end
+
+    class DeleteBotAliasRequest
+      attr_accessor name: ::String
+      attr_accessor bot_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBotChannelAssociationRequest
+      attr_accessor name: ::String
+      attr_accessor bot_name: ::String
+      attr_accessor bot_alias: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBotRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBotVersionRequest
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIntentRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIntentVersionRequest
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSlotTypeRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSlotTypeVersionRequest
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUtterancesRequest
+      attr_accessor bot_name: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class EnumerationValue
+      attr_accessor value: ::String
+      attr_accessor synonyms: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class FollowUpPrompt
+      attr_accessor prompt: Types::Prompt
+      attr_accessor rejection_statement: Types::Statement
+      SENSITIVE: []
+    end
+
+    class FulfillmentActivity
+      attr_accessor type: ("ReturnIntent" | "CodeHook")
+      attr_accessor code_hook: Types::CodeHook
+      SENSITIVE: []
+    end
+
+    class GetBotAliasRequest
+      attr_accessor name: ::String
+      attr_accessor bot_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetBotAliasResponse
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor bot_name: ::String
+      attr_accessor last_updated_date: ::Time
+      attr_accessor created_date: ::Time
+      attr_accessor checksum: ::String
+      attr_accessor conversation_logs: Types::ConversationLogsResponse
+      SENSITIVE: []
+    end
+
+    class GetBotAliasesRequest
+      attr_accessor bot_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor name_contains: ::String
+      SENSITIVE: []
+    end
+
+    class GetBotAliasesResponse
+      attr_accessor bot_aliases: ::Array[Types::BotAliasMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetBotChannelAssociationRequest
+      attr_accessor name: ::String
+      attr_accessor bot_name: ::String
+      attr_accessor bot_alias: ::String
+      SENSITIVE: []
+    end
+
+    class GetBotChannelAssociationResponse
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor bot_alias: ::String
+      attr_accessor bot_name: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor type: ("Facebook" | "Slack" | "Twilio-Sms" | "Kik")
+      attr_accessor bot_configuration: ::Hash[::String, ::String]
+      attr_accessor status: ("IN_PROGRESS" | "CREATED" | "FAILED")
+      attr_accessor failure_reason: ::String
+      SENSITIVE: [:bot_configuration]
+    end
+
+    class GetBotChannelAssociationsRequest
+      attr_accessor bot_name: ::String
+      attr_accessor bot_alias: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor name_contains: ::String
+      SENSITIVE: []
+    end
+
+    class GetBotChannelAssociationsResponse
+      attr_accessor bot_channel_associations: ::Array[Types::BotChannelAssociation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetBotRequest
+      attr_accessor name: ::String
+      attr_accessor version_or_alias: ::String
+      SENSITIVE: []
+    end
+
+    class GetBotResponse
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor intents: ::Array[Types::Intent]
+      attr_accessor enable_model_improvements: bool
+      attr_accessor nlu_intent_confidence_threshold: ::Float
+      attr_accessor clarification_prompt: Types::Prompt
+      attr_accessor abort_statement: Types::Statement
+      attr_accessor status: ("BUILDING" | "READY" | "READY_BASIC_TESTING" | "FAILED" | "NOT_BUILT")
+      attr_accessor failure_reason: ::String
+      attr_accessor last_updated_date: ::Time
+      attr_accessor created_date: ::Time
+      attr_accessor idle_session_ttl_in_seconds: ::Integer
+      attr_accessor voice_id: ::String
+      attr_accessor checksum: ::String
+      attr_accessor version: ::String
+      attr_accessor locale: ("de-DE" | "en-AU" | "en-GB" | "en-IN" | "en-US" | "es-419" | "es-ES" | "es-US" | "fr-FR" | "fr-CA" | "it-IT" | "ja-JP" | "ko-KR")
+      attr_accessor child_directed: bool
+      attr_accessor detect_sentiment: bool
+      SENSITIVE: []
+    end
+
+    class GetBotVersionsRequest
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetBotVersionsResponse
+      attr_accessor bots: ::Array[Types::BotMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetBotsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor name_contains: ::String
+      SENSITIVE: []
+    end
+
+    class GetBotsResponse
+      attr_accessor bots: ::Array[Types::BotMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetBuiltinIntentRequest
+      attr_accessor signature: ::String
+      SENSITIVE: []
+    end
+
+    class GetBuiltinIntentResponse
+      attr_accessor signature: ::String
+      attr_accessor supported_locales: ::Array[("de-DE" | "en-AU" | "en-GB" | "en-IN" | "en-US" | "es-419" | "es-ES" | "es-US" | "fr-FR" | "fr-CA" | "it-IT" | "ja-JP" | "ko-KR")]
+      attr_accessor slots: ::Array[Types::BuiltinIntentSlot]
+      SENSITIVE: []
+    end
+
+    class GetBuiltinIntentsRequest
+      attr_accessor locale: ("de-DE" | "en-AU" | "en-GB" | "en-IN" | "en-US" | "es-419" | "es-ES" | "es-US" | "fr-FR" | "fr-CA" | "it-IT" | "ja-JP" | "ko-KR")
+      attr_accessor signature_contains: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetBuiltinIntentsResponse
+      attr_accessor intents: ::Array[Types::BuiltinIntentMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetBuiltinSlotTypesRequest
+      attr_accessor locale: ("de-DE" | "en-AU" | "en-GB" | "en-IN" | "en-US" | "es-419" | "es-ES" | "es-US" | "fr-FR" | "fr-CA" | "it-IT" | "ja-JP" | "ko-KR")
+      attr_accessor signature_contains: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetBuiltinSlotTypesResponse
+      attr_accessor slot_types: ::Array[Types::BuiltinSlotTypeMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetExportRequest
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor resource_type: ("BOT" | "INTENT" | "SLOT_TYPE")
+      attr_accessor export_type: ("ALEXA_SKILLS_KIT" | "LEX")
+      SENSITIVE: []
+    end
+
+    class GetExportResponse
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor resource_type: ("BOT" | "INTENT" | "SLOT_TYPE")
+      attr_accessor export_type: ("ALEXA_SKILLS_KIT" | "LEX")
+      attr_accessor export_status: ("IN_PROGRESS" | "READY" | "FAILED")
+      attr_accessor failure_reason: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class GetImportRequest
+      attr_accessor import_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetImportResponse
+      attr_accessor name: ::String
+      attr_accessor resource_type: ("BOT" | "INTENT" | "SLOT_TYPE")
+      attr_accessor merge_strategy: ("OVERWRITE_LATEST" | "FAIL_ON_CONFLICT")
+      attr_accessor import_id: ::String
+      attr_accessor import_status: ("IN_PROGRESS" | "COMPLETE" | "FAILED")
+      attr_accessor failure_reason: ::Array[::String]
+      attr_accessor created_date: ::Time
+      SENSITIVE: []
+    end
+
+    class GetIntentRequest
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class GetIntentResponse
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor slots: ::Array[Types::Slot]
+      attr_accessor sample_utterances: ::Array[::String]
+      attr_accessor confirmation_prompt: Types::Prompt
+      attr_accessor rejection_statement: Types::Statement
+      attr_accessor follow_up_prompt: Types::FollowUpPrompt
+      attr_accessor conclusion_statement: Types::Statement
+      attr_accessor dialog_code_hook: Types::CodeHook
+      attr_accessor fulfillment_activity: Types::FulfillmentActivity
+      attr_accessor parent_intent_signature: ::String
+      attr_accessor last_updated_date: ::Time
+      attr_accessor created_date: ::Time
+      attr_accessor version: ::String
+      attr_accessor checksum: ::String
+      attr_accessor kendra_configuration: Types::KendraConfiguration
+      attr_accessor input_contexts: ::Array[Types::InputContext]
+      attr_accessor output_contexts: ::Array[Types::OutputContext]
+      SENSITIVE: []
+    end
+
+    class GetIntentVersionsRequest
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetIntentVersionsResponse
+      attr_accessor intents: ::Array[Types::IntentMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetIntentsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor name_contains: ::String
+      SENSITIVE: []
+    end
+
+    class GetIntentsResponse
+      attr_accessor intents: ::Array[Types::IntentMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetMigrationRequest
+      attr_accessor migration_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMigrationResponse
+      attr_accessor migration_id: ::String
+      attr_accessor v1_bot_name: ::String
+      attr_accessor v1_bot_version: ::String
+      attr_accessor v1_bot_locale: ("de-DE" | "en-AU" | "en-GB" | "en-IN" | "en-US" | "es-419" | "es-ES" | "es-US" | "fr-FR" | "fr-CA" | "it-IT" | "ja-JP" | "ko-KR")
+      attr_accessor v2_bot_id: ::String
+      attr_accessor v2_bot_role: ::String
+      attr_accessor migration_status: ("IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor migration_strategy: ("CREATE_NEW" | "UPDATE_EXISTING")
+      attr_accessor migration_timestamp: ::Time
+      attr_accessor alerts: ::Array[Types::MigrationAlert]
+      SENSITIVE: []
+    end
+
+    class GetMigrationsRequest
+      attr_accessor sort_by_attribute: ("V1_BOT_NAME" | "MIGRATION_DATE_TIME")
+      attr_accessor sort_by_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor v1_bot_name_contains: ::String
+      attr_accessor migration_status_equals: ("IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetMigrationsResponse
+      attr_accessor migration_summaries: ::Array[Types::MigrationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetSlotTypeRequest
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class GetSlotTypeResponse
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor enumeration_values: ::Array[Types::EnumerationValue]
+      attr_accessor last_updated_date: ::Time
+      attr_accessor created_date: ::Time
+      attr_accessor version: ::String
+      attr_accessor checksum: ::String
+      attr_accessor value_selection_strategy: ("ORIGINAL_VALUE" | "TOP_RESOLUTION")
+      attr_accessor parent_slot_type_signature: ::String
+      attr_accessor slot_type_configurations: ::Array[Types::SlotTypeConfiguration]
+      SENSITIVE: []
+    end
+
+    class GetSlotTypeVersionsRequest
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetSlotTypeVersionsResponse
+      attr_accessor slot_types: ::Array[Types::SlotTypeMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetSlotTypesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor name_contains: ::String
+      SENSITIVE: []
+    end
+
+    class GetSlotTypesResponse
+      attr_accessor slot_types: ::Array[Types::SlotTypeMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetUtterancesViewRequest
+      attr_accessor bot_name: ::String
+      attr_accessor bot_versions: ::Array[::String]
+      attr_accessor status_type: ("Detected" | "Missed")
+      SENSITIVE: []
+    end
+
+    class GetUtterancesViewResponse
+      attr_accessor bot_name: ::String
+      attr_accessor utterances: ::Array[Types::UtteranceList]
+      SENSITIVE: []
+    end
+
+    class InputContext
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class Intent
+      attr_accessor intent_name: ::String
+      attr_accessor intent_version: ::String
+      SENSITIVE: []
+    end
+
+    class IntentMetadata
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor last_updated_date: ::Time
+      attr_accessor created_date: ::Time
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class InternalFailureException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KendraConfiguration
+      attr_accessor kendra_index: ::String
+      attr_accessor query_filter_string: ::String
+      attr_accessor role: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor retry_after_seconds: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class LogSettingsRequest
+      attr_accessor log_type: ("AUDIO" | "TEXT")
+      attr_accessor destination: ("CLOUDWATCH_LOGS" | "S3")
+      attr_accessor kms_key_arn: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class LogSettingsResponse
+      attr_accessor log_type: ("AUDIO" | "TEXT")
+      attr_accessor destination: ("CLOUDWATCH_LOGS" | "S3")
+      attr_accessor kms_key_arn: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class Message
+      attr_accessor content_type: ("PlainText" | "SSML" | "CustomPayload")
+      attr_accessor content: ::String
+      attr_accessor group_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class MigrationAlert
+      attr_accessor type: ("ERROR" | "WARN")
+      attr_accessor message: ::String
+      attr_accessor details: ::Array[::String]
+      attr_accessor reference_urls: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class MigrationSummary
+      attr_accessor migration_id: ::String
+      attr_accessor v1_bot_name: ::String
+      attr_accessor v1_bot_version: ::String
+      attr_accessor v1_bot_locale: ("de-DE" | "en-AU" | "en-GB" | "en-IN" | "en-US" | "es-419" | "es-ES" | "es-US" | "fr-FR" | "fr-CA" | "it-IT" | "ja-JP" | "ko-KR")
+      attr_accessor v2_bot_id: ::String
+      attr_accessor v2_bot_role: ::String
+      attr_accessor migration_status: ("IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor migration_strategy: ("CREATE_NEW" | "UPDATE_EXISTING")
+      attr_accessor migration_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OutputContext
+      attr_accessor name: ::String
+      attr_accessor time_to_live_in_seconds: ::Integer
+      attr_accessor turns_to_live: ::Integer
+      SENSITIVE: []
+    end
+
+    class PreconditionFailedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Prompt
+      attr_accessor messages: ::Array[Types::Message]
+      attr_accessor max_attempts: ::Integer
+      attr_accessor response_card: ::String
+      SENSITIVE: []
+    end
+
+    class PutBotAliasRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor bot_name: ::String
+      attr_accessor checksum: ::String
+      attr_accessor conversation_logs: Types::ConversationLogsRequest
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PutBotAliasResponse
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor bot_name: ::String
+      attr_accessor last_updated_date: ::Time
+      attr_accessor created_date: ::Time
+      attr_accessor checksum: ::String
+      attr_accessor conversation_logs: Types::ConversationLogsResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PutBotRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor intents: ::Array[Types::Intent]
+      attr_accessor enable_model_improvements: bool
+      attr_accessor nlu_intent_confidence_threshold: ::Float
+      attr_accessor clarification_prompt: Types::Prompt
+      attr_accessor abort_statement: Types::Statement
+      attr_accessor idle_session_ttl_in_seconds: ::Integer
+      attr_accessor voice_id: ::String
+      attr_accessor checksum: ::String
+      attr_accessor process_behavior: ("SAVE" | "BUILD")
+      attr_accessor locale: ("de-DE" | "en-AU" | "en-GB" | "en-IN" | "en-US" | "es-419" | "es-ES" | "es-US" | "fr-FR" | "fr-CA" | "it-IT" | "ja-JP" | "ko-KR")
+      attr_accessor child_directed: bool
+      attr_accessor detect_sentiment: bool
+      attr_accessor create_version: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PutBotResponse
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor intents: ::Array[Types::Intent]
+      attr_accessor enable_model_improvements: bool
+      attr_accessor nlu_intent_confidence_threshold: ::Float
+      attr_accessor clarification_prompt: Types::Prompt
+      attr_accessor abort_statement: Types::Statement
+      attr_accessor status: ("BUILDING" | "READY" | "READY_BASIC_TESTING" | "FAILED" | "NOT_BUILT")
+      attr_accessor failure_reason: ::String
+      attr_accessor last_updated_date: ::Time
+      attr_accessor created_date: ::Time
+      attr_accessor idle_session_ttl_in_seconds: ::Integer
+      attr_accessor voice_id: ::String
+      attr_accessor checksum: ::String
+      attr_accessor version: ::String
+      attr_accessor locale: ("de-DE" | "en-AU" | "en-GB" | "en-IN" | "en-US" | "es-419" | "es-ES" | "es-US" | "fr-FR" | "fr-CA" | "it-IT" | "ja-JP" | "ko-KR")
+      attr_accessor child_directed: bool
+      attr_accessor create_version: bool
+      attr_accessor detect_sentiment: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PutIntentRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor slots: ::Array[Types::Slot]
+      attr_accessor sample_utterances: ::Array[::String]
+      attr_accessor confirmation_prompt: Types::Prompt
+      attr_accessor rejection_statement: Types::Statement
+      attr_accessor follow_up_prompt: Types::FollowUpPrompt
+      attr_accessor conclusion_statement: Types::Statement
+      attr_accessor dialog_code_hook: Types::CodeHook
+      attr_accessor fulfillment_activity: Types::FulfillmentActivity
+      attr_accessor parent_intent_signature: ::String
+      attr_accessor checksum: ::String
+      attr_accessor create_version: bool
+      attr_accessor kendra_configuration: Types::KendraConfiguration
+      attr_accessor input_contexts: ::Array[Types::InputContext]
+      attr_accessor output_contexts: ::Array[Types::OutputContext]
+      SENSITIVE: []
+    end
+
+    class PutIntentResponse
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor slots: ::Array[Types::Slot]
+      attr_accessor sample_utterances: ::Array[::String]
+      attr_accessor confirmation_prompt: Types::Prompt
+      attr_accessor rejection_statement: Types::Statement
+      attr_accessor follow_up_prompt: Types::FollowUpPrompt
+      attr_accessor conclusion_statement: Types::Statement
+      attr_accessor dialog_code_hook: Types::CodeHook
+      attr_accessor fulfillment_activity: Types::FulfillmentActivity
+      attr_accessor parent_intent_signature: ::String
+      attr_accessor last_updated_date: ::Time
+      attr_accessor created_date: ::Time
+      attr_accessor version: ::String
+      attr_accessor checksum: ::String
+      attr_accessor create_version: bool
+      attr_accessor kendra_configuration: Types::KendraConfiguration
+      attr_accessor input_contexts: ::Array[Types::InputContext]
+      attr_accessor output_contexts: ::Array[Types::OutputContext]
+      SENSITIVE: []
+    end
+
+    class PutSlotTypeRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor enumeration_values: ::Array[Types::EnumerationValue]
+      attr_accessor checksum: ::String
+      attr_accessor value_selection_strategy: ("ORIGINAL_VALUE" | "TOP_RESOLUTION")
+      attr_accessor create_version: bool
+      attr_accessor parent_slot_type_signature: ::String
+      attr_accessor slot_type_configurations: ::Array[Types::SlotTypeConfiguration]
+      SENSITIVE: []
+    end
+
+    class PutSlotTypeResponse
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor enumeration_values: ::Array[Types::EnumerationValue]
+      attr_accessor last_updated_date: ::Time
+      attr_accessor created_date: ::Time
+      attr_accessor version: ::String
+      attr_accessor checksum: ::String
+      attr_accessor value_selection_strategy: ("ORIGINAL_VALUE" | "TOP_RESOLUTION")
+      attr_accessor create_version: bool
+      attr_accessor parent_slot_type_signature: ::String
+      attr_accessor slot_type_configurations: ::Array[Types::SlotTypeConfiguration]
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException
+      attr_accessor reference_type: ("Intent" | "Bot" | "BotAlias" | "BotChannel")
+      attr_accessor example_reference: Types::ResourceReference
+      SENSITIVE: []
+    end
+
+    class ResourceReference
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class Slot
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor slot_constraint: ("Required" | "Optional")
+      attr_accessor slot_type: ::String
+      attr_accessor slot_type_version: ::String
+      attr_accessor value_elicitation_prompt: Types::Prompt
+      attr_accessor priority: ::Integer
+      attr_accessor sample_utterances: ::Array[::String]
+      attr_accessor response_card: ::String
+      attr_accessor obfuscation_setting: ("NONE" | "DEFAULT_OBFUSCATION")
+      attr_accessor default_value_spec: Types::SlotDefaultValueSpec
+      SENSITIVE: []
+    end
+
+    class SlotDefaultValue
+      attr_accessor default_value: ::String
+      SENSITIVE: []
+    end
+
+    class SlotDefaultValueSpec
+      attr_accessor default_value_list: ::Array[Types::SlotDefaultValue]
+      SENSITIVE: []
+    end
+
+    class SlotTypeConfiguration
+      attr_accessor regex_configuration: Types::SlotTypeRegexConfiguration
+      SENSITIVE: []
+    end
+
+    class SlotTypeMetadata
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor last_updated_date: ::Time
+      attr_accessor created_date: ::Time
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class SlotTypeRegexConfiguration
+      attr_accessor pattern: ::String
+      SENSITIVE: []
+    end
+
+    class StartImportRequest
+      attr_accessor payload: ::String
+      attr_accessor resource_type: ("BOT" | "INTENT" | "SLOT_TYPE")
+      attr_accessor merge_strategy: ("OVERWRITE_LATEST" | "FAIL_ON_CONFLICT")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class StartImportResponse
+      attr_accessor name: ::String
+      attr_accessor resource_type: ("BOT" | "INTENT" | "SLOT_TYPE")
+      attr_accessor merge_strategy: ("OVERWRITE_LATEST" | "FAIL_ON_CONFLICT")
+      attr_accessor import_id: ::String
+      attr_accessor import_status: ("IN_PROGRESS" | "COMPLETE" | "FAILED")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor created_date: ::Time
+      SENSITIVE: []
+    end
+
+    class StartMigrationRequest
+      attr_accessor v1_bot_name: ::String
+      attr_accessor v1_bot_version: ::String
+      attr_accessor v2_bot_name: ::String
+      attr_accessor v2_bot_role: ::String
+      attr_accessor migration_strategy: ("CREATE_NEW" | "UPDATE_EXISTING")
+      SENSITIVE: []
+    end
+
+    class StartMigrationResponse
+      attr_accessor v1_bot_name: ::String
+      attr_accessor v1_bot_version: ::String
+      attr_accessor v1_bot_locale: ("de-DE" | "en-AU" | "en-GB" | "en-IN" | "en-US" | "es-419" | "es-ES" | "es-US" | "fr-FR" | "fr-CA" | "it-IT" | "ja-JP" | "ko-KR")
+      attr_accessor v2_bot_id: ::String
+      attr_accessor v2_bot_role: ::String
+      attr_accessor migration_id: ::String
+      attr_accessor migration_strategy: ("CREATE_NEW" | "UPDATE_EXISTING")
+      attr_accessor migration_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class Statement
+      attr_accessor messages: ::Array[Types::Message]
+      attr_accessor response_card: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UtteranceData
+      attr_accessor utterance_string: ::String
+      attr_accessor count: ::Integer
+      attr_accessor distinct_users: ::Integer
+      attr_accessor first_uttered_date: ::Time
+      attr_accessor last_uttered_date: ::Time
+      SENSITIVE: []
+    end
+
+    class UtteranceList
+      attr_accessor bot_version: ::String
+      attr_accessor utterances: ::Array[Types::UtteranceData]
+      SENSITIVE: []
+    end
+  end
+end

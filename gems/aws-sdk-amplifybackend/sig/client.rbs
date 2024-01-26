@@ -1,0 +1,851 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AmplifyBackend
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CloneBackendResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CloneBackendResponse]
+        def app_id: () -> ::String
+        def backend_environment_name: () -> ::String
+        def job_id: () -> ::String
+        def operation: () -> ::String
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#clone_backend-instance_method
+      def clone_backend: (
+                           app_id: ::String,
+                           backend_environment_name: ::String,
+                           target_environment_name: ::String
+                         ) -> _CloneBackendResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CloneBackendResponseSuccess
+
+      interface _CreateBackendResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBackendResponse]
+        def app_id: () -> ::String
+        def backend_environment_name: () -> ::String
+        def job_id: () -> ::String
+        def operation: () -> ::String
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#create_backend-instance_method
+      def create_backend: (
+                            app_id: ::String,
+                            app_name: ::String,
+                            backend_environment_name: ::String,
+                            ?resource_config: {
+                            },
+                            ?resource_name: ::String
+                          ) -> _CreateBackendResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBackendResponseSuccess
+
+      interface _CreateBackendAPIResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBackendAPIResponse]
+        def app_id: () -> ::String
+        def backend_environment_name: () -> ::String
+        def job_id: () -> ::String
+        def operation: () -> ::String
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#create_backend_api-instance_method
+      def create_backend_api: (
+                                app_id: ::String,
+                                backend_environment_name: ::String,
+                                resource_config: {
+                                  additional_auth_types: Array[
+                                    {
+                                      mode: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT")?,
+                                      settings: {
+                                        cognito_user_pool_id: ::String?,
+                                        description: ::String?,
+                                        expiration_time: ::Float?,
+                                        open_id_auth_ttl: ::String?,
+                                        open_id_client_id: ::String?,
+                                        open_id_iat_ttl: ::String?,
+                                        open_id_issue_url: ::String?,
+                                        open_id_provider_name: ::String?
+                                      }?
+                                    },
+                                  ]?,
+                                  api_name: ::String?,
+                                  conflict_resolution: {
+                                    resolution_strategy: ("OPTIMISTIC_CONCURRENCY" | "LAMBDA" | "AUTOMERGE" | "NONE")?
+                                  }?,
+                                  default_auth_type: {
+                                    mode: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT")?,
+                                    settings: {
+                                      cognito_user_pool_id: ::String?,
+                                      description: ::String?,
+                                      expiration_time: ::Float?,
+                                      open_id_auth_ttl: ::String?,
+                                      open_id_client_id: ::String?,
+                                      open_id_iat_ttl: ::String?,
+                                      open_id_issue_url: ::String?,
+                                      open_id_provider_name: ::String?
+                                    }?
+                                  }?,
+                                  service: ::String?,
+                                  transform_schema: ::String?
+                                },
+                                resource_name: ::String
+                              ) -> _CreateBackendAPIResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBackendAPIResponseSuccess
+
+      interface _CreateBackendAuthResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBackendAuthResponse]
+        def app_id: () -> ::String
+        def backend_environment_name: () -> ::String
+        def job_id: () -> ::String
+        def operation: () -> ::String
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#create_backend_auth-instance_method
+      def create_backend_auth: (
+                                 app_id: ::String,
+                                 backend_environment_name: ::String,
+                                 resource_config: {
+                                   auth_resources: ("USER_POOL_ONLY" | "IDENTITY_POOL_AND_USER_POOL"),
+                                   identity_pool_configs: {
+                                     identity_pool_name: ::String,
+                                     unauthenticated_login: bool
+                                   }?,
+                                   service: ("COGNITO"),
+                                   user_pool_configs: {
+                                     forgot_password: {
+                                       delivery_method: ("EMAIL" | "SMS"),
+                                       email_settings: {
+                                         email_message: ::String?,
+                                         email_subject: ::String?
+                                       }?,
+                                       sms_settings: {
+                                         sms_message: ::String?
+                                       }?
+                                     }?,
+                                     mfa: {
+                                       mfa_mode: ("ON" | "OFF" | "OPTIONAL"),
+                                       settings: {
+                                         mfa_types: Array[("SMS" | "TOTP")]?,
+                                         sms_message: ::String?
+                                       }?
+                                     }?,
+                                     o_auth: {
+                                       domain_prefix: ::String?,
+                                       o_auth_grant_type: ("CODE" | "IMPLICIT"),
+                                       o_auth_scopes: Array[("PHONE" | "EMAIL" | "OPENID" | "PROFILE" | "AWS_COGNITO_SIGNIN_USER_ADMIN")],
+                                       redirect_sign_in_ur_is: Array[::String],
+                                       redirect_sign_out_ur_is: Array[::String],
+                                       social_provider_settings: {
+                                         facebook: {
+                                           client_id: ::String?,
+                                           client_secret: ::String?
+                                         }?,
+                                         google: {
+                                           client_id: ::String?,
+                                           client_secret: ::String?
+                                         }?,
+                                         login_with_amazon: {
+                                           client_id: ::String?,
+                                           client_secret: ::String?
+                                         }?,
+                                         sign_in_with_apple: {
+                                           client_id: ::String?,
+                                           key_id: ::String?,
+                                           private_key: ::String?,
+                                           team_id: ::String?
+                                         }?
+                                       }?
+                                     }?,
+                                     password_policy: {
+                                       additional_constraints: Array[("REQUIRE_DIGIT" | "REQUIRE_LOWERCASE" | "REQUIRE_SYMBOL" | "REQUIRE_UPPERCASE")]?,
+                                       minimum_length: ::Float
+                                     }?,
+                                     required_sign_up_attributes: Array[("ADDRESS" | "BIRTHDATE" | "EMAIL" | "FAMILY_NAME" | "GENDER" | "GIVEN_NAME" | "LOCALE" | "MIDDLE_NAME" | "NAME" | "NICKNAME" | "PHONE_NUMBER" | "PICTURE" | "PREFERRED_USERNAME" | "PROFILE" | "UPDATED_AT" | "WEBSITE" | "ZONE_INFO")],
+                                     sign_in_method: ("EMAIL" | "EMAIL_AND_PHONE_NUMBER" | "PHONE_NUMBER" | "USERNAME"),
+                                     user_pool_name: ::String,
+                                     verification_message: {
+                                       delivery_method: ("EMAIL" | "SMS"),
+                                       email_settings: {
+                                         email_message: ::String?,
+                                         email_subject: ::String?
+                                       }?,
+                                       sms_settings: {
+                                         sms_message: ::String?
+                                       }?
+                                     }?
+                                   }
+                                 },
+                                 resource_name: ::String
+                               ) -> _CreateBackendAuthResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBackendAuthResponseSuccess
+
+      interface _CreateBackendConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBackendConfigResponse]
+        def app_id: () -> ::String
+        def backend_environment_name: () -> ::String
+        def job_id: () -> ::String
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#create_backend_config-instance_method
+      def create_backend_config: (
+                                   app_id: ::String,
+                                   ?backend_manager_app_id: ::String
+                                 ) -> _CreateBackendConfigResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBackendConfigResponseSuccess
+
+      interface _CreateBackendStorageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBackendStorageResponse]
+        def app_id: () -> ::String
+        def backend_environment_name: () -> ::String
+        def job_id: () -> ::String
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#create_backend_storage-instance_method
+      def create_backend_storage: (
+                                    app_id: ::String,
+                                    backend_environment_name: ::String,
+                                    resource_config: {
+                                      bucket_name: ::String?,
+                                      permissions: {
+                                        authenticated: Array[("READ" | "CREATE_AND_UPDATE" | "DELETE")],
+                                        un_authenticated: Array[("READ" | "CREATE_AND_UPDATE" | "DELETE")]?
+                                      },
+                                      service_name: ("S3")
+                                    },
+                                    resource_name: ::String
+                                  ) -> _CreateBackendStorageResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBackendStorageResponseSuccess
+
+      interface _CreateTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTokenResponse]
+        def app_id: () -> ::String
+        def challenge_code: () -> ::String
+        def session_id: () -> ::String
+        def ttl: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#create_token-instance_method
+      def create_token: (
+                          app_id: ::String
+                        ) -> _CreateTokenResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTokenResponseSuccess
+
+      interface _DeleteBackendResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBackendResponse]
+        def app_id: () -> ::String
+        def backend_environment_name: () -> ::String
+        def job_id: () -> ::String
+        def operation: () -> ::String
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#delete_backend-instance_method
+      def delete_backend: (
+                            app_id: ::String,
+                            backend_environment_name: ::String
+                          ) -> _DeleteBackendResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBackendResponseSuccess
+
+      interface _DeleteBackendAPIResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBackendAPIResponse]
+        def app_id: () -> ::String
+        def backend_environment_name: () -> ::String
+        def job_id: () -> ::String
+        def operation: () -> ::String
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#delete_backend_api-instance_method
+      def delete_backend_api: (
+                                app_id: ::String,
+                                backend_environment_name: ::String,
+                                ?resource_config: {
+                                  additional_auth_types: Array[
+                                    {
+                                      mode: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT")?,
+                                      settings: {
+                                        cognito_user_pool_id: ::String?,
+                                        description: ::String?,
+                                        expiration_time: ::Float?,
+                                        open_id_auth_ttl: ::String?,
+                                        open_id_client_id: ::String?,
+                                        open_id_iat_ttl: ::String?,
+                                        open_id_issue_url: ::String?,
+                                        open_id_provider_name: ::String?
+                                      }?
+                                    },
+                                  ]?,
+                                  api_name: ::String?,
+                                  conflict_resolution: {
+                                    resolution_strategy: ("OPTIMISTIC_CONCURRENCY" | "LAMBDA" | "AUTOMERGE" | "NONE")?
+                                  }?,
+                                  default_auth_type: {
+                                    mode: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT")?,
+                                    settings: {
+                                      cognito_user_pool_id: ::String?,
+                                      description: ::String?,
+                                      expiration_time: ::Float?,
+                                      open_id_auth_ttl: ::String?,
+                                      open_id_client_id: ::String?,
+                                      open_id_iat_ttl: ::String?,
+                                      open_id_issue_url: ::String?,
+                                      open_id_provider_name: ::String?
+                                    }?
+                                  }?,
+                                  service: ::String?,
+                                  transform_schema: ::String?
+                                },
+                                resource_name: ::String
+                              ) -> _DeleteBackendAPIResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBackendAPIResponseSuccess
+
+      interface _DeleteBackendAuthResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBackendAuthResponse]
+        def app_id: () -> ::String
+        def backend_environment_name: () -> ::String
+        def job_id: () -> ::String
+        def operation: () -> ::String
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#delete_backend_auth-instance_method
+      def delete_backend_auth: (
+                                 app_id: ::String,
+                                 backend_environment_name: ::String,
+                                 resource_name: ::String
+                               ) -> _DeleteBackendAuthResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBackendAuthResponseSuccess
+
+      interface _DeleteBackendStorageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBackendStorageResponse]
+        def app_id: () -> ::String
+        def backend_environment_name: () -> ::String
+        def job_id: () -> ::String
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#delete_backend_storage-instance_method
+      def delete_backend_storage: (
+                                    app_id: ::String,
+                                    backend_environment_name: ::String,
+                                    resource_name: ::String,
+                                    service_name: ("S3")
+                                  ) -> _DeleteBackendStorageResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBackendStorageResponseSuccess
+
+      interface _DeleteTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTokenResponse]
+        def is_success: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#delete_token-instance_method
+      def delete_token: (
+                          app_id: ::String,
+                          session_id: ::String
+                        ) -> _DeleteTokenResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTokenResponseSuccess
+
+      interface _GenerateBackendAPIModelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GenerateBackendAPIModelsResponse]
+        def app_id: () -> ::String
+        def backend_environment_name: () -> ::String
+        def job_id: () -> ::String
+        def operation: () -> ::String
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#generate_backend_api_models-instance_method
+      def generate_backend_api_models: (
+                                         app_id: ::String,
+                                         backend_environment_name: ::String,
+                                         resource_name: ::String
+                                       ) -> _GenerateBackendAPIModelsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GenerateBackendAPIModelsResponseSuccess
+
+      interface _GetBackendResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBackendResponse]
+        def amplify_feature_flags: () -> ::String
+        def amplify_meta_config: () -> ::String
+        def app_id: () -> ::String
+        def app_name: () -> ::String
+        def backend_environment_list: () -> ::Array[::String]
+        def backend_environment_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#get_backend-instance_method
+      def get_backend: (
+                         app_id: ::String,
+                         ?backend_environment_name: ::String
+                       ) -> _GetBackendResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBackendResponseSuccess
+
+      interface _GetBackendAPIResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBackendAPIResponse]
+        def app_id: () -> ::String
+        def backend_environment_name: () -> ::String
+        def resource_config: () -> Types::BackendAPIResourceConfig
+        def resource_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#get_backend_api-instance_method
+      def get_backend_api: (
+                             app_id: ::String,
+                             backend_environment_name: ::String,
+                             ?resource_config: {
+                               additional_auth_types: Array[
+                                 {
+                                   mode: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT")?,
+                                   settings: {
+                                     cognito_user_pool_id: ::String?,
+                                     description: ::String?,
+                                     expiration_time: ::Float?,
+                                     open_id_auth_ttl: ::String?,
+                                     open_id_client_id: ::String?,
+                                     open_id_iat_ttl: ::String?,
+                                     open_id_issue_url: ::String?,
+                                     open_id_provider_name: ::String?
+                                   }?
+                                 },
+                               ]?,
+                               api_name: ::String?,
+                               conflict_resolution: {
+                                 resolution_strategy: ("OPTIMISTIC_CONCURRENCY" | "LAMBDA" | "AUTOMERGE" | "NONE")?
+                               }?,
+                               default_auth_type: {
+                                 mode: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT")?,
+                                 settings: {
+                                   cognito_user_pool_id: ::String?,
+                                   description: ::String?,
+                                   expiration_time: ::Float?,
+                                   open_id_auth_ttl: ::String?,
+                                   open_id_client_id: ::String?,
+                                   open_id_iat_ttl: ::String?,
+                                   open_id_issue_url: ::String?,
+                                   open_id_provider_name: ::String?
+                                 }?
+                               }?,
+                               service: ::String?,
+                               transform_schema: ::String?
+                             },
+                             resource_name: ::String
+                           ) -> _GetBackendAPIResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBackendAPIResponseSuccess
+
+      interface _GetBackendAPIModelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBackendAPIModelsResponse]
+        def models: () -> ::String
+        def status: () -> ("LATEST" | "STALE")
+        def model_introspection_schema: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#get_backend_api_models-instance_method
+      def get_backend_api_models: (
+                                    app_id: ::String,
+                                    backend_environment_name: ::String,
+                                    resource_name: ::String
+                                  ) -> _GetBackendAPIModelsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBackendAPIModelsResponseSuccess
+
+      interface _GetBackendAuthResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBackendAuthResponse]
+        def app_id: () -> ::String
+        def backend_environment_name: () -> ::String
+        def resource_config: () -> Types::CreateBackendAuthResourceConfig
+        def resource_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#get_backend_auth-instance_method
+      def get_backend_auth: (
+                              app_id: ::String,
+                              backend_environment_name: ::String,
+                              resource_name: ::String
+                            ) -> _GetBackendAuthResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBackendAuthResponseSuccess
+
+      interface _GetBackendJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBackendJobResponse]
+        def app_id: () -> ::String
+        def backend_environment_name: () -> ::String
+        def create_time: () -> ::String
+        def job_id: () -> ::String
+        def operation: () -> ::String
+        def status: () -> ::String
+        def update_time: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#get_backend_job-instance_method
+      def get_backend_job: (
+                             app_id: ::String,
+                             backend_environment_name: ::String,
+                             job_id: ::String
+                           ) -> _GetBackendJobResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBackendJobResponseSuccess
+
+      interface _GetBackendStorageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBackendStorageResponse]
+        def app_id: () -> ::String
+        def backend_environment_name: () -> ::String
+        def resource_config: () -> Types::GetBackendStorageResourceConfig
+        def resource_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#get_backend_storage-instance_method
+      def get_backend_storage: (
+                                 app_id: ::String,
+                                 backend_environment_name: ::String,
+                                 resource_name: ::String
+                               ) -> _GetBackendStorageResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBackendStorageResponseSuccess
+
+      interface _GetTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTokenResponse]
+        def app_id: () -> ::String
+        def challenge_code: () -> ::String
+        def session_id: () -> ::String
+        def ttl: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#get_token-instance_method
+      def get_token: (
+                       app_id: ::String,
+                       session_id: ::String
+                     ) -> _GetTokenResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTokenResponseSuccess
+
+      interface _ImportBackendAuthResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportBackendAuthResponse]
+        def app_id: () -> ::String
+        def backend_environment_name: () -> ::String
+        def job_id: () -> ::String
+        def operation: () -> ::String
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#import_backend_auth-instance_method
+      def import_backend_auth: (
+                                 app_id: ::String,
+                                 backend_environment_name: ::String,
+                                 ?identity_pool_id: ::String,
+                                 native_client_id: ::String,
+                                 user_pool_id: ::String,
+                                 web_client_id: ::String
+                               ) -> _ImportBackendAuthResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportBackendAuthResponseSuccess
+
+      interface _ImportBackendStorageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportBackendStorageResponse]
+        def app_id: () -> ::String
+        def backend_environment_name: () -> ::String
+        def job_id: () -> ::String
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#import_backend_storage-instance_method
+      def import_backend_storage: (
+                                    app_id: ::String,
+                                    backend_environment_name: ::String,
+                                    ?bucket_name: ::String,
+                                    service_name: ("S3")
+                                  ) -> _ImportBackendStorageResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportBackendStorageResponseSuccess
+
+      interface _ListBackendJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBackendJobsResponse]
+        def jobs: () -> ::Array[Types::BackendJobRespObj]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#list_backend_jobs-instance_method
+      def list_backend_jobs: (
+                               app_id: ::String,
+                               backend_environment_name: ::String,
+                               ?job_id: ::String,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String,
+                               ?operation: ::String,
+                               ?status: ::String
+                             ) -> _ListBackendJobsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBackendJobsResponseSuccess
+
+      interface _ListS3BucketsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListS3BucketsResponse]
+        def buckets: () -> ::Array[Types::S3BucketInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#list_s3_buckets-instance_method
+      def list_s3_buckets: (
+                             ?next_token: ::String
+                           ) -> _ListS3BucketsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListS3BucketsResponseSuccess
+
+      interface _RemoveAllBackendsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveAllBackendsResponse]
+        def app_id: () -> ::String
+        def job_id: () -> ::String
+        def operation: () -> ::String
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#remove_all_backends-instance_method
+      def remove_all_backends: (
+                                 app_id: ::String,
+                                 ?clean_amplify_app: bool
+                               ) -> _RemoveAllBackendsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveAllBackendsResponseSuccess
+
+      interface _RemoveBackendConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveBackendConfigResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#remove_backend_config-instance_method
+      def remove_backend_config: (
+                                   app_id: ::String
+                                 ) -> _RemoveBackendConfigResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveBackendConfigResponseSuccess
+
+      interface _UpdateBackendAPIResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBackendAPIResponse]
+        def app_id: () -> ::String
+        def backend_environment_name: () -> ::String
+        def job_id: () -> ::String
+        def operation: () -> ::String
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#update_backend_api-instance_method
+      def update_backend_api: (
+                                app_id: ::String,
+                                backend_environment_name: ::String,
+                                ?resource_config: {
+                                  additional_auth_types: Array[
+                                    {
+                                      mode: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT")?,
+                                      settings: {
+                                        cognito_user_pool_id: ::String?,
+                                        description: ::String?,
+                                        expiration_time: ::Float?,
+                                        open_id_auth_ttl: ::String?,
+                                        open_id_client_id: ::String?,
+                                        open_id_iat_ttl: ::String?,
+                                        open_id_issue_url: ::String?,
+                                        open_id_provider_name: ::String?
+                                      }?
+                                    },
+                                  ]?,
+                                  api_name: ::String?,
+                                  conflict_resolution: {
+                                    resolution_strategy: ("OPTIMISTIC_CONCURRENCY" | "LAMBDA" | "AUTOMERGE" | "NONE")?
+                                  }?,
+                                  default_auth_type: {
+                                    mode: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT")?,
+                                    settings: {
+                                      cognito_user_pool_id: ::String?,
+                                      description: ::String?,
+                                      expiration_time: ::Float?,
+                                      open_id_auth_ttl: ::String?,
+                                      open_id_client_id: ::String?,
+                                      open_id_iat_ttl: ::String?,
+                                      open_id_issue_url: ::String?,
+                                      open_id_provider_name: ::String?
+                                    }?
+                                  }?,
+                                  service: ::String?,
+                                  transform_schema: ::String?
+                                },
+                                resource_name: ::String
+                              ) -> _UpdateBackendAPIResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBackendAPIResponseSuccess
+
+      interface _UpdateBackendAuthResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBackendAuthResponse]
+        def app_id: () -> ::String
+        def backend_environment_name: () -> ::String
+        def job_id: () -> ::String
+        def operation: () -> ::String
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#update_backend_auth-instance_method
+      def update_backend_auth: (
+                                 app_id: ::String,
+                                 backend_environment_name: ::String,
+                                 resource_config: {
+                                   auth_resources: ("USER_POOL_ONLY" | "IDENTITY_POOL_AND_USER_POOL"),
+                                   identity_pool_configs: {
+                                     unauthenticated_login: bool?
+                                   }?,
+                                   service: ("COGNITO"),
+                                   user_pool_configs: {
+                                     forgot_password: {
+                                       delivery_method: ("EMAIL" | "SMS")?,
+                                       email_settings: {
+                                         email_message: ::String?,
+                                         email_subject: ::String?
+                                       }?,
+                                       sms_settings: {
+                                         sms_message: ::String?
+                                       }?
+                                     }?,
+                                     mfa: {
+                                       mfa_mode: ("ON" | "OFF" | "OPTIONAL")?,
+                                       settings: {
+                                         mfa_types: Array[("SMS" | "TOTP")]?,
+                                         sms_message: ::String?
+                                       }?
+                                     }?,
+                                     o_auth: {
+                                       domain_prefix: ::String?,
+                                       o_auth_grant_type: ("CODE" | "IMPLICIT")?,
+                                       o_auth_scopes: Array[("PHONE" | "EMAIL" | "OPENID" | "PROFILE" | "AWS_COGNITO_SIGNIN_USER_ADMIN")]?,
+                                       redirect_sign_in_ur_is: Array[::String]?,
+                                       redirect_sign_out_ur_is: Array[::String]?,
+                                       social_provider_settings: {
+                                         facebook: {
+                                           client_id: ::String?,
+                                           client_secret: ::String?
+                                         }?,
+                                         google: {
+                                           client_id: ::String?,
+                                           client_secret: ::String?
+                                         }?,
+                                         login_with_amazon: {
+                                           client_id: ::String?,
+                                           client_secret: ::String?
+                                         }?,
+                                         sign_in_with_apple: {
+                                           client_id: ::String?,
+                                           key_id: ::String?,
+                                           private_key: ::String?,
+                                           team_id: ::String?
+                                         }?
+                                       }?
+                                     }?,
+                                     password_policy: {
+                                       additional_constraints: Array[("REQUIRE_DIGIT" | "REQUIRE_LOWERCASE" | "REQUIRE_SYMBOL" | "REQUIRE_UPPERCASE")]?,
+                                       minimum_length: ::Float?
+                                     }?,
+                                     verification_message: {
+                                       delivery_method: ("EMAIL" | "SMS"),
+                                       email_settings: {
+                                         email_message: ::String?,
+                                         email_subject: ::String?
+                                       }?,
+                                       sms_settings: {
+                                         sms_message: ::String?
+                                       }?
+                                     }?
+                                   }
+                                 },
+                                 resource_name: ::String
+                               ) -> _UpdateBackendAuthResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBackendAuthResponseSuccess
+
+      interface _UpdateBackendConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBackendConfigResponse]
+        def app_id: () -> ::String
+        def backend_manager_app_id: () -> ::String
+        def login_auth_config: () -> Types::LoginAuthConfigReqObj
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#update_backend_config-instance_method
+      def update_backend_config: (
+                                   app_id: ::String,
+                                   ?login_auth_config: {
+                                     aws_cognito_identity_pool_id: ::String?,
+                                     aws_cognito_region: ::String?,
+                                     aws_user_pools_id: ::String?,
+                                     aws_user_pools_web_client_id: ::String?
+                                   }
+                                 ) -> _UpdateBackendConfigResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBackendConfigResponseSuccess
+
+      interface _UpdateBackendJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBackendJobResponse]
+        def app_id: () -> ::String
+        def backend_environment_name: () -> ::String
+        def create_time: () -> ::String
+        def job_id: () -> ::String
+        def operation: () -> ::String
+        def status: () -> ::String
+        def update_time: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#update_backend_job-instance_method
+      def update_backend_job: (
+                                app_id: ::String,
+                                backend_environment_name: ::String,
+                                job_id: ::String,
+                                ?operation: ::String,
+                                ?status: ::String
+                              ) -> _UpdateBackendJobResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBackendJobResponseSuccess
+
+      interface _UpdateBackendStorageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBackendStorageResponse]
+        def app_id: () -> ::String
+        def backend_environment_name: () -> ::String
+        def job_id: () -> ::String
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyBackend/Client.html#update_backend_storage-instance_method
+      def update_backend_storage: (
+                                    app_id: ::String,
+                                    backend_environment_name: ::String,
+                                    resource_config: {
+                                      permissions: {
+                                        authenticated: Array[("READ" | "CREATE_AND_UPDATE" | "DELETE")],
+                                        un_authenticated: Array[("READ" | "CREATE_AND_UPDATE" | "DELETE")]?
+                                      },
+                                      service_name: ("S3")
+                                    },
+                                    resource_name: ::String
+                                  ) -> _UpdateBackendStorageResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBackendStorageResponseSuccess
+    end
+  end
+end
+

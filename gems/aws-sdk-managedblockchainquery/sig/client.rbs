@@ -1,0 +1,228 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ManagedBlockchainQuery
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchainQuery/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchGetTokenBalanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetTokenBalanceOutput]
+        def token_balances: () -> ::Array[Types::BatchGetTokenBalanceOutputItem]
+        def errors: () -> ::Array[Types::BatchGetTokenBalanceErrorItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchainQuery/Client.html#batch_get_token_balance-instance_method
+      def batch_get_token_balance: (
+                                     ?get_token_balance_inputs: Array[
+                                       {
+                                         token_identifier: {
+                                           network: ("ETHEREUM_MAINNET" | "ETHEREUM_SEPOLIA_TESTNET" | "BITCOIN_MAINNET" | "BITCOIN_TESTNET"),
+                                           contract_address: ::String?,
+                                           token_id: ::String?
+                                         },
+                                         owner_identifier: {
+                                           address: ::String
+                                         },
+                                         at_blockchain_instant: {
+                                           time: ::Time?
+                                         }?
+                                       },
+                                     ]
+                                   ) -> _BatchGetTokenBalanceResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetTokenBalanceResponseSuccess
+
+      interface _GetAssetContractResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAssetContractOutput]
+        def contract_identifier: () -> Types::ContractIdentifier
+        def token_standard: () -> ("ERC20" | "ERC721" | "ERC1155")
+        def deployer_address: () -> ::String
+        def metadata: () -> Types::ContractMetadata
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchainQuery/Client.html#get_asset_contract-instance_method
+      def get_asset_contract: (
+                                contract_identifier: {
+                                  network: ("ETHEREUM_MAINNET" | "ETHEREUM_SEPOLIA_TESTNET" | "BITCOIN_MAINNET" | "BITCOIN_TESTNET"),
+                                  contract_address: ::String
+                                }
+                              ) -> _GetAssetContractResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAssetContractResponseSuccess
+
+      interface _GetTokenBalanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTokenBalanceOutput]
+        def owner_identifier: () -> Types::OwnerIdentifier
+        def token_identifier: () -> Types::TokenIdentifier
+        def balance: () -> ::String
+        def at_blockchain_instant: () -> Types::BlockchainInstant
+        def last_updated_time: () -> Types::BlockchainInstant
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchainQuery/Client.html#get_token_balance-instance_method
+      def get_token_balance: (
+                               token_identifier: {
+                                 network: ("ETHEREUM_MAINNET" | "ETHEREUM_SEPOLIA_TESTNET" | "BITCOIN_MAINNET" | "BITCOIN_TESTNET"),
+                                 contract_address: ::String?,
+                                 token_id: ::String?
+                               },
+                               owner_identifier: {
+                                 address: ::String
+                               },
+                               ?at_blockchain_instant: {
+                                 time: ::Time?
+                               }
+                             ) -> _GetTokenBalanceResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTokenBalanceResponseSuccess
+
+      interface _GetTransactionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTransactionOutput]
+        def transaction: () -> Types::Transaction
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchainQuery/Client.html#get_transaction-instance_method
+      def get_transaction: (
+                             transaction_hash: ::String,
+                             network: ("ETHEREUM_MAINNET" | "ETHEREUM_SEPOLIA_TESTNET" | "BITCOIN_MAINNET" | "BITCOIN_TESTNET")
+                           ) -> _GetTransactionResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTransactionResponseSuccess
+
+      interface _ListAssetContractsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssetContractsOutput]
+        def contracts: () -> ::Array[Types::AssetContract]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchainQuery/Client.html#list_asset_contracts-instance_method
+      def list_asset_contracts: (
+                                  contract_filter: {
+                                    network: ("ETHEREUM_MAINNET" | "ETHEREUM_SEPOLIA_TESTNET" | "BITCOIN_MAINNET" | "BITCOIN_TESTNET"),
+                                    token_standard: ("ERC20" | "ERC721" | "ERC1155"),
+                                    deployer_address: ::String
+                                  },
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListAssetContractsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssetContractsResponseSuccess
+
+      interface _ListTokenBalancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTokenBalancesOutput]
+        def token_balances: () -> ::Array[Types::TokenBalance]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchainQuery/Client.html#list_token_balances-instance_method
+      def list_token_balances: (
+                                 ?owner_filter: {
+                                   address: ::String
+                                 },
+                                 token_filter: {
+                                   network: ("ETHEREUM_MAINNET" | "ETHEREUM_SEPOLIA_TESTNET" | "BITCOIN_MAINNET" | "BITCOIN_TESTNET"),
+                                   contract_address: ::String?,
+                                   token_id: ::String?
+                                 },
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer
+                               ) -> _ListTokenBalancesResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTokenBalancesResponseSuccess
+
+      interface _ListTransactionEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTransactionEventsOutput]
+        def events: () -> ::Array[Types::TransactionEvent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchainQuery/Client.html#list_transaction_events-instance_method
+      def list_transaction_events: (
+                                     transaction_hash: ::String,
+                                     network: ("ETHEREUM_MAINNET" | "ETHEREUM_SEPOLIA_TESTNET" | "BITCOIN_MAINNET" | "BITCOIN_TESTNET"),
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _ListTransactionEventsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTransactionEventsResponseSuccess
+
+      interface _ListTransactionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTransactionsOutput]
+        def transactions: () -> ::Array[Types::TransactionOutputItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchainQuery/Client.html#list_transactions-instance_method
+      def list_transactions: (
+                               address: ::String,
+                               network: ("ETHEREUM_MAINNET" | "ETHEREUM_SEPOLIA_TESTNET" | "BITCOIN_MAINNET" | "BITCOIN_TESTNET"),
+                               ?from_blockchain_instant: {
+                                 time: ::Time?
+                               },
+                               ?to_blockchain_instant: {
+                                 time: ::Time?
+                               },
+                               ?sort: {
+                                 sort_by: ("TRANSACTION_TIMESTAMP")?,
+                                 sort_order: ("ASCENDING" | "DESCENDING")?
+                               },
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
+                             ) -> _ListTransactionsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTransactionsResponseSuccess
+    end
+  end
+end
+

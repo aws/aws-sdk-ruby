@@ -1,0 +1,1687 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CloudFormation
+  module Types
+
+    class AccountGateResult
+      attr_accessor status: ("SUCCEEDED" | "FAILED" | "SKIPPED")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class AccountLimit
+      attr_accessor name: ::String
+      attr_accessor value: ::Integer
+      SENSITIVE: []
+    end
+
+    class ActivateOrganizationsAccessInput < Aws::EmptyStructure
+    end
+
+    class ActivateOrganizationsAccessOutput < Aws::EmptyStructure
+    end
+
+    class ActivateTypeInput
+      attr_accessor type: ("RESOURCE" | "MODULE" | "HOOK")
+      attr_accessor public_type_arn: ::String
+      attr_accessor publisher_id: ::String
+      attr_accessor type_name: ::String
+      attr_accessor type_name_alias: ::String
+      attr_accessor auto_update: bool
+      attr_accessor logging_config: Types::LoggingConfig
+      attr_accessor execution_role_arn: ::String
+      attr_accessor version_bump: ("MAJOR" | "MINOR")
+      attr_accessor major_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class ActivateTypeOutput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class AlreadyExistsException < Aws::EmptyStructure
+    end
+
+    class AutoDeployment
+      attr_accessor enabled: bool
+      attr_accessor retain_stacks_on_account_removal: bool
+      SENSITIVE: []
+    end
+
+    class BatchDescribeTypeConfigurationsError
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      attr_accessor type_configuration_identifier: Types::TypeConfigurationIdentifier
+      SENSITIVE: []
+    end
+
+    class BatchDescribeTypeConfigurationsInput
+      attr_accessor type_configuration_identifiers: ::Array[Types::TypeConfigurationIdentifier]
+      SENSITIVE: []
+    end
+
+    class BatchDescribeTypeConfigurationsOutput
+      attr_accessor errors: ::Array[Types::BatchDescribeTypeConfigurationsError]
+      attr_accessor unprocessed_type_configurations: ::Array[Types::TypeConfigurationIdentifier]
+      attr_accessor type_configurations: ::Array[Types::TypeConfigurationDetails]
+      SENSITIVE: []
+    end
+
+    class CFNRegistryException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CancelUpdateStackInput
+      attr_accessor stack_name: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class Change
+      attr_accessor type: ("Resource")
+      attr_accessor hook_invocation_count: ::Integer
+      attr_accessor resource_change: Types::ResourceChange
+      SENSITIVE: []
+    end
+
+    class ChangeSetHook
+      attr_accessor invocation_point: ("PRE_PROVISION")
+      attr_accessor failure_mode: ("FAIL" | "WARN")
+      attr_accessor type_name: ::String
+      attr_accessor type_version_id: ::String
+      attr_accessor type_configuration_version_id: ::String
+      attr_accessor target_details: Types::ChangeSetHookTargetDetails
+      SENSITIVE: []
+    end
+
+    class ChangeSetHookResourceTargetDetails
+      attr_accessor logical_resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor resource_action: ("Add" | "Modify" | "Remove" | "Import" | "Dynamic")
+      SENSITIVE: []
+    end
+
+    class ChangeSetHookTargetDetails
+      attr_accessor target_type: ("RESOURCE")
+      attr_accessor resource_target_details: Types::ChangeSetHookResourceTargetDetails
+      SENSITIVE: []
+    end
+
+    class ChangeSetNotFoundException < Aws::EmptyStructure
+    end
+
+    class ChangeSetSummary
+      attr_accessor stack_id: ::String
+      attr_accessor stack_name: ::String
+      attr_accessor change_set_id: ::String
+      attr_accessor change_set_name: ::String
+      attr_accessor execution_status: ("UNAVAILABLE" | "AVAILABLE" | "EXECUTE_IN_PROGRESS" | "EXECUTE_COMPLETE" | "EXECUTE_FAILED" | "OBSOLETE")
+      attr_accessor status: ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "DELETE_PENDING" | "DELETE_IN_PROGRESS" | "DELETE_COMPLETE" | "DELETE_FAILED" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor include_nested_stacks: bool
+      attr_accessor parent_change_set_id: ::String
+      attr_accessor root_change_set_id: ::String
+      attr_accessor import_existing_resources: bool
+      SENSITIVE: []
+    end
+
+    class ContinueUpdateRollbackInput
+      attr_accessor stack_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor resources_to_skip: ::Array[::String]
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class ContinueUpdateRollbackOutput < Aws::EmptyStructure
+    end
+
+    class CreateChangeSetInput
+      attr_accessor stack_name: ::String
+      attr_accessor template_body: ::String
+      attr_accessor template_url: ::String
+      attr_accessor use_previous_template: bool
+      attr_accessor parameters: ::Array[Types::Parameter]
+      attr_accessor capabilities: ::Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")]
+      attr_accessor resource_types: ::Array[::String]
+      attr_accessor role_arn: ::String
+      attr_accessor rollback_configuration: Types::RollbackConfiguration
+      attr_accessor notification_arns: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor change_set_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor change_set_type: ("CREATE" | "UPDATE" | "IMPORT")
+      attr_accessor resources_to_import: ::Array[Types::ResourceToImport]
+      attr_accessor include_nested_stacks: bool
+      attr_accessor on_stack_failure: ("DO_NOTHING" | "ROLLBACK" | "DELETE")
+      attr_accessor import_existing_resources: bool
+      SENSITIVE: []
+    end
+
+    class CreateChangeSetOutput
+      attr_accessor id: ::String
+      attr_accessor stack_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateStackInput
+      attr_accessor stack_name: ::String
+      attr_accessor template_body: ::String
+      attr_accessor template_url: ::String
+      attr_accessor parameters: ::Array[Types::Parameter]
+      attr_accessor disable_rollback: bool
+      attr_accessor rollback_configuration: Types::RollbackConfiguration
+      attr_accessor timeout_in_minutes: ::Integer
+      attr_accessor notification_arns: ::Array[::String]
+      attr_accessor capabilities: ::Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")]
+      attr_accessor resource_types: ::Array[::String]
+      attr_accessor role_arn: ::String
+      attr_accessor on_failure: ("DO_NOTHING" | "ROLLBACK" | "DELETE")
+      attr_accessor stack_policy_body: ::String
+      attr_accessor stack_policy_url: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_request_token: ::String
+      attr_accessor enable_termination_protection: bool
+      attr_accessor retain_except_on_create: bool
+      SENSITIVE: []
+    end
+
+    class CreateStackInstancesInput
+      attr_accessor stack_set_name: ::String
+      attr_accessor accounts: ::Array[::String]
+      attr_accessor deployment_targets: Types::DeploymentTargets
+      attr_accessor regions: ::Array[::String]
+      attr_accessor parameter_overrides: ::Array[Types::Parameter]
+      attr_accessor operation_preferences: Types::StackSetOperationPreferences
+      attr_accessor operation_id: ::String
+      attr_accessor call_as: ("SELF" | "DELEGATED_ADMIN")
+      SENSITIVE: []
+    end
+
+    class CreateStackInstancesOutput
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateStackOutput
+      attr_accessor stack_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateStackSetInput
+      attr_accessor stack_set_name: ::String
+      attr_accessor description: ::String
+      attr_accessor template_body: ::String
+      attr_accessor template_url: ::String
+      attr_accessor stack_id: ::String
+      attr_accessor parameters: ::Array[Types::Parameter]
+      attr_accessor capabilities: ::Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor administration_role_arn: ::String
+      attr_accessor execution_role_name: ::String
+      attr_accessor permission_model: ("SERVICE_MANAGED" | "SELF_MANAGED")
+      attr_accessor auto_deployment: Types::AutoDeployment
+      attr_accessor call_as: ("SELF" | "DELEGATED_ADMIN")
+      attr_accessor client_request_token: ::String
+      attr_accessor managed_execution: Types::ManagedExecution
+      SENSITIVE: []
+    end
+
+    class CreateStackSetOutput
+      attr_accessor stack_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreatedButModifiedException < Aws::EmptyStructure
+    end
+
+    class DeactivateOrganizationsAccessInput < Aws::EmptyStructure
+    end
+
+    class DeactivateOrganizationsAccessOutput < Aws::EmptyStructure
+    end
+
+    class DeactivateTypeInput
+      attr_accessor type_name: ::String
+      attr_accessor type: ("RESOURCE" | "MODULE" | "HOOK")
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeactivateTypeOutput < Aws::EmptyStructure
+    end
+
+    class DeleteChangeSetInput
+      attr_accessor change_set_name: ::String
+      attr_accessor stack_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteChangeSetOutput < Aws::EmptyStructure
+    end
+
+    class DeleteStackInput
+      attr_accessor stack_name: ::String
+      attr_accessor retain_resources: ::Array[::String]
+      attr_accessor role_arn: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStackInstancesInput
+      attr_accessor stack_set_name: ::String
+      attr_accessor accounts: ::Array[::String]
+      attr_accessor deployment_targets: Types::DeploymentTargets
+      attr_accessor regions: ::Array[::String]
+      attr_accessor operation_preferences: Types::StackSetOperationPreferences
+      attr_accessor retain_stacks: bool
+      attr_accessor operation_id: ::String
+      attr_accessor call_as: ("SELF" | "DELEGATED_ADMIN")
+      SENSITIVE: []
+    end
+
+    class DeleteStackInstancesOutput
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStackSetInput
+      attr_accessor stack_set_name: ::String
+      attr_accessor call_as: ("SELF" | "DELEGATED_ADMIN")
+      SENSITIVE: []
+    end
+
+    class DeleteStackSetOutput < Aws::EmptyStructure
+    end
+
+    class DeploymentTargets
+      attr_accessor accounts: ::Array[::String]
+      attr_accessor accounts_url: ::String
+      attr_accessor organizational_unit_ids: ::Array[::String]
+      attr_accessor account_filter_type: ("NONE" | "INTERSECTION" | "DIFFERENCE" | "UNION")
+      SENSITIVE: []
+    end
+
+    class DeregisterTypeInput
+      attr_accessor arn: ::String
+      attr_accessor type: ("RESOURCE" | "MODULE" | "HOOK")
+      attr_accessor type_name: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterTypeOutput < Aws::EmptyStructure
+    end
+
+    class DescribeAccountLimitsInput
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAccountLimitsOutput
+      attr_accessor account_limits: ::Array[Types::AccountLimit]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeChangeSetHooksInput
+      attr_accessor change_set_name: ::String
+      attr_accessor stack_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor logical_resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeChangeSetHooksOutput
+      attr_accessor change_set_id: ::String
+      attr_accessor change_set_name: ::String
+      attr_accessor hooks: ::Array[Types::ChangeSetHook]
+      attr_accessor status: ("PLANNING" | "PLANNED" | "UNAVAILABLE")
+      attr_accessor next_token: ::String
+      attr_accessor stack_id: ::String
+      attr_accessor stack_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeChangeSetInput
+      attr_accessor change_set_name: ::String
+      attr_accessor stack_name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeChangeSetOutput
+      attr_accessor change_set_name: ::String
+      attr_accessor change_set_id: ::String
+      attr_accessor stack_id: ::String
+      attr_accessor stack_name: ::String
+      attr_accessor description: ::String
+      attr_accessor parameters: ::Array[Types::Parameter]
+      attr_accessor creation_time: ::Time
+      attr_accessor execution_status: ("UNAVAILABLE" | "AVAILABLE" | "EXECUTE_IN_PROGRESS" | "EXECUTE_COMPLETE" | "EXECUTE_FAILED" | "OBSOLETE")
+      attr_accessor status: ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "DELETE_PENDING" | "DELETE_IN_PROGRESS" | "DELETE_COMPLETE" | "DELETE_FAILED" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor notification_arns: ::Array[::String]
+      attr_accessor rollback_configuration: Types::RollbackConfiguration
+      attr_accessor capabilities: ::Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor changes: ::Array[Types::Change]
+      attr_accessor next_token: ::String
+      attr_accessor include_nested_stacks: bool
+      attr_accessor parent_change_set_id: ::String
+      attr_accessor root_change_set_id: ::String
+      attr_accessor on_stack_failure: ("DO_NOTHING" | "ROLLBACK" | "DELETE")
+      attr_accessor import_existing_resources: bool
+      SENSITIVE: []
+    end
+
+    class DescribeOrganizationsAccessInput
+      attr_accessor call_as: ("SELF" | "DELEGATED_ADMIN")
+      SENSITIVE: []
+    end
+
+    class DescribeOrganizationsAccessOutput
+      attr_accessor status: ("ENABLED" | "DISABLED" | "DISABLED_PERMANENTLY")
+      SENSITIVE: []
+    end
+
+    class DescribePublisherInput
+      attr_accessor publisher_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePublisherOutput
+      attr_accessor publisher_id: ::String
+      attr_accessor publisher_status: ("VERIFIED" | "UNVERIFIED")
+      attr_accessor identity_provider: ("AWS_Marketplace" | "GitHub" | "Bitbucket")
+      attr_accessor publisher_profile: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStackDriftDetectionStatusInput
+      attr_accessor stack_drift_detection_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStackDriftDetectionStatusOutput
+      attr_accessor stack_id: ::String
+      attr_accessor stack_drift_detection_id: ::String
+      attr_accessor stack_drift_status: ("DRIFTED" | "IN_SYNC" | "UNKNOWN" | "NOT_CHECKED")
+      attr_accessor detection_status: ("DETECTION_IN_PROGRESS" | "DETECTION_FAILED" | "DETECTION_COMPLETE")
+      attr_accessor detection_status_reason: ::String
+      attr_accessor drifted_stack_resource_count: ::Integer
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeStackEventsInput
+      attr_accessor stack_name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStackEventsOutput
+      attr_accessor stack_events: ::Array[Types::StackEvent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStackInstanceInput
+      attr_accessor stack_set_name: ::String
+      attr_accessor stack_instance_account: ::String
+      attr_accessor stack_instance_region: ::String
+      attr_accessor call_as: ("SELF" | "DELEGATED_ADMIN")
+      SENSITIVE: []
+    end
+
+    class DescribeStackInstanceOutput
+      attr_accessor stack_instance: Types::StackInstance
+      SENSITIVE: []
+    end
+
+    class DescribeStackResourceDriftsInput
+      attr_accessor stack_name: ::String
+      attr_accessor stack_resource_drift_status_filters: ::Array[("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED")]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeStackResourceDriftsOutput
+      attr_accessor stack_resource_drifts: ::Array[Types::StackResourceDrift]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStackResourceInput
+      attr_accessor stack_name: ::String
+      attr_accessor logical_resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStackResourceOutput
+      attr_accessor stack_resource_detail: Types::StackResourceDetail
+      SENSITIVE: []
+    end
+
+    class DescribeStackResourcesInput
+      attr_accessor stack_name: ::String
+      attr_accessor logical_resource_id: ::String
+      attr_accessor physical_resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStackResourcesOutput
+      attr_accessor stack_resources: ::Array[Types::StackResource]
+      SENSITIVE: []
+    end
+
+    class DescribeStackSetInput
+      attr_accessor stack_set_name: ::String
+      attr_accessor call_as: ("SELF" | "DELEGATED_ADMIN")
+      SENSITIVE: []
+    end
+
+    class DescribeStackSetOperationInput
+      attr_accessor stack_set_name: ::String
+      attr_accessor operation_id: ::String
+      attr_accessor call_as: ("SELF" | "DELEGATED_ADMIN")
+      SENSITIVE: []
+    end
+
+    class DescribeStackSetOperationOutput
+      attr_accessor stack_set_operation: Types::StackSetOperation
+      SENSITIVE: []
+    end
+
+    class DescribeStackSetOutput
+      attr_accessor stack_set: Types::StackSet
+      SENSITIVE: []
+    end
+
+    class DescribeStacksInput
+      attr_accessor stack_name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStacksOutput
+      attr_accessor stacks: ::Array[Types::Stack]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTypeInput
+      attr_accessor type: ("RESOURCE" | "MODULE" | "HOOK")
+      attr_accessor type_name: ::String
+      attr_accessor arn: ::String
+      attr_accessor version_id: ::String
+      attr_accessor publisher_id: ::String
+      attr_accessor public_version_number: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTypeOutput
+      attr_accessor arn: ::String
+      attr_accessor type: ("RESOURCE" | "MODULE" | "HOOK")
+      attr_accessor type_name: ::String
+      attr_accessor default_version_id: ::String
+      attr_accessor is_default_version: bool
+      attr_accessor type_tests_status: ("PASSED" | "FAILED" | "IN_PROGRESS" | "NOT_TESTED")
+      attr_accessor type_tests_status_description: ::String
+      attr_accessor description: ::String
+      attr_accessor schema: ::String
+      attr_accessor provisioning_type: ("NON_PROVISIONABLE" | "IMMUTABLE" | "FULLY_MUTABLE")
+      attr_accessor deprecated_status: ("LIVE" | "DEPRECATED")
+      attr_accessor logging_config: Types::LoggingConfig
+      attr_accessor required_activated_types: ::Array[Types::RequiredActivatedType]
+      attr_accessor execution_role_arn: ::String
+      attr_accessor visibility: ("PUBLIC" | "PRIVATE")
+      attr_accessor source_url: ::String
+      attr_accessor documentation_url: ::String
+      attr_accessor last_updated: ::Time
+      attr_accessor time_created: ::Time
+      attr_accessor configuration_schema: ::String
+      attr_accessor publisher_id: ::String
+      attr_accessor original_type_name: ::String
+      attr_accessor original_type_arn: ::String
+      attr_accessor public_version_number: ::String
+      attr_accessor latest_public_version: ::String
+      attr_accessor is_activated: bool
+      attr_accessor auto_update: bool
+      SENSITIVE: []
+    end
+
+    class DescribeTypeRegistrationInput
+      attr_accessor registration_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTypeRegistrationOutput
+      attr_accessor progress_status: ("COMPLETE" | "IN_PROGRESS" | "FAILED")
+      attr_accessor description: ::String
+      attr_accessor type_arn: ::String
+      attr_accessor type_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DetectStackDriftInput
+      attr_accessor stack_name: ::String
+      attr_accessor logical_resource_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DetectStackDriftOutput
+      attr_accessor stack_drift_detection_id: ::String
+      SENSITIVE: []
+    end
+
+    class DetectStackResourceDriftInput
+      attr_accessor stack_name: ::String
+      attr_accessor logical_resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class DetectStackResourceDriftOutput
+      attr_accessor stack_resource_drift: Types::StackResourceDrift
+      SENSITIVE: []
+    end
+
+    class DetectStackSetDriftInput
+      attr_accessor stack_set_name: ::String
+      attr_accessor operation_preferences: Types::StackSetOperationPreferences
+      attr_accessor operation_id: ::String
+      attr_accessor call_as: ("SELF" | "DELEGATED_ADMIN")
+      SENSITIVE: []
+    end
+
+    class DetectStackSetDriftOutput
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class EstimateTemplateCostInput
+      attr_accessor template_body: ::String
+      attr_accessor template_url: ::String
+      attr_accessor parameters: ::Array[Types::Parameter]
+      SENSITIVE: []
+    end
+
+    class EstimateTemplateCostOutput
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class ExecuteChangeSetInput
+      attr_accessor change_set_name: ::String
+      attr_accessor stack_name: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor disable_rollback: bool
+      attr_accessor retain_except_on_create: bool
+      SENSITIVE: []
+    end
+
+    class ExecuteChangeSetOutput < Aws::EmptyStructure
+    end
+
+    class Export
+      attr_accessor exporting_stack_id: ::String
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class GetStackPolicyInput
+      attr_accessor stack_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetStackPolicyOutput
+      attr_accessor stack_policy_body: ::String
+      SENSITIVE: []
+    end
+
+    class GetTemplateInput
+      attr_accessor stack_name: ::String
+      attr_accessor change_set_name: ::String
+      attr_accessor template_stage: ("Original" | "Processed")
+      SENSITIVE: []
+    end
+
+    class GetTemplateOutput
+      attr_accessor template_body: ::String
+      attr_accessor stages_available: ::Array[("Original" | "Processed")]
+      SENSITIVE: []
+    end
+
+    class GetTemplateSummaryInput
+      attr_accessor template_body: ::String
+      attr_accessor template_url: ::String
+      attr_accessor stack_name: ::String
+      attr_accessor stack_set_name: ::String
+      attr_accessor call_as: ("SELF" | "DELEGATED_ADMIN")
+      attr_accessor template_summary_config: Types::TemplateSummaryConfig
+      SENSITIVE: []
+    end
+
+    class GetTemplateSummaryOutput
+      attr_accessor parameters: ::Array[Types::ParameterDeclaration]
+      attr_accessor description: ::String
+      attr_accessor capabilities: ::Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")]
+      attr_accessor capabilities_reason: ::String
+      attr_accessor resource_types: ::Array[::String]
+      attr_accessor version: ::String
+      attr_accessor metadata: ::String
+      attr_accessor declared_transforms: ::Array[::String]
+      attr_accessor resource_identifier_summaries: ::Array[Types::ResourceIdentifierSummary]
+      attr_accessor warnings: Types::Warnings
+      SENSITIVE: []
+    end
+
+    class ImportStacksToStackSetInput
+      attr_accessor stack_set_name: ::String
+      attr_accessor stack_ids: ::Array[::String]
+      attr_accessor stack_ids_url: ::String
+      attr_accessor organizational_unit_ids: ::Array[::String]
+      attr_accessor operation_preferences: Types::StackSetOperationPreferences
+      attr_accessor operation_id: ::String
+      attr_accessor call_as: ("SELF" | "DELEGATED_ADMIN")
+      SENSITIVE: []
+    end
+
+    class ImportStacksToStackSetOutput
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class InsufficientCapabilitiesException < Aws::EmptyStructure
+    end
+
+    class InvalidChangeSetStatusException < Aws::EmptyStructure
+    end
+
+    class InvalidOperationException < Aws::EmptyStructure
+    end
+
+    class InvalidStateTransitionException < Aws::EmptyStructure
+    end
+
+    class LimitExceededException < Aws::EmptyStructure
+    end
+
+    class ListChangeSetsInput
+      attr_accessor stack_name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListChangeSetsOutput
+      attr_accessor summaries: ::Array[Types::ChangeSetSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExportsInput
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExportsOutput
+      attr_accessor exports: ::Array[Types::Export]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImportsInput
+      attr_accessor export_name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImportsOutput
+      attr_accessor imports: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStackInstanceResourceDriftsInput
+      attr_accessor stack_set_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor stack_instance_resource_drift_statuses: ::Array[("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED")]
+      attr_accessor stack_instance_account: ::String
+      attr_accessor stack_instance_region: ::String
+      attr_accessor operation_id: ::String
+      attr_accessor call_as: ("SELF" | "DELEGATED_ADMIN")
+      SENSITIVE: []
+    end
+
+    class ListStackInstanceResourceDriftsOutput
+      attr_accessor summaries: ::Array[Types::StackInstanceResourceDriftsSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStackInstancesInput
+      attr_accessor stack_set_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::StackInstanceFilter]
+      attr_accessor stack_instance_account: ::String
+      attr_accessor stack_instance_region: ::String
+      attr_accessor call_as: ("SELF" | "DELEGATED_ADMIN")
+      SENSITIVE: []
+    end
+
+    class ListStackInstancesOutput
+      attr_accessor summaries: ::Array[Types::StackInstanceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStackResourcesInput
+      attr_accessor stack_name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStackResourcesOutput
+      attr_accessor stack_resource_summaries: ::Array[Types::StackResourceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStackSetOperationResultsInput
+      attr_accessor stack_set_name: ::String
+      attr_accessor operation_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor call_as: ("SELF" | "DELEGATED_ADMIN")
+      attr_accessor filters: ::Array[Types::OperationResultFilter]
+      SENSITIVE: []
+    end
+
+    class ListStackSetOperationResultsOutput
+      attr_accessor summaries: ::Array[Types::StackSetOperationResultSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStackSetOperationsInput
+      attr_accessor stack_set_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor call_as: ("SELF" | "DELEGATED_ADMIN")
+      SENSITIVE: []
+    end
+
+    class ListStackSetOperationsOutput
+      attr_accessor summaries: ::Array[Types::StackSetOperationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStackSetsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor status: ("ACTIVE" | "DELETED")
+      attr_accessor call_as: ("SELF" | "DELEGATED_ADMIN")
+      SENSITIVE: []
+    end
+
+    class ListStackSetsOutput
+      attr_accessor summaries: ::Array[Types::StackSetSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStacksInput
+      attr_accessor next_token: ::String
+      attr_accessor stack_status_filter: ::Array[("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATE_COMPLETE" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_FAILED" | "ROLLBACK_COMPLETE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_FAILED" | "UPDATE_ROLLBACK_IN_PROGRESS" | "UPDATE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS" | "UPDATE_ROLLBACK_COMPLETE" | "REVIEW_IN_PROGRESS" | "IMPORT_IN_PROGRESS" | "IMPORT_COMPLETE" | "IMPORT_ROLLBACK_IN_PROGRESS" | "IMPORT_ROLLBACK_FAILED" | "IMPORT_ROLLBACK_COMPLETE")]
+      SENSITIVE: []
+    end
+
+    class ListStacksOutput
+      attr_accessor stack_summaries: ::Array[Types::StackSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTypeRegistrationsInput
+      attr_accessor type: ("RESOURCE" | "MODULE" | "HOOK")
+      attr_accessor type_name: ::String
+      attr_accessor type_arn: ::String
+      attr_accessor registration_status_filter: ("COMPLETE" | "IN_PROGRESS" | "FAILED")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTypeRegistrationsOutput
+      attr_accessor registration_token_list: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTypeVersionsInput
+      attr_accessor type: ("RESOURCE" | "MODULE" | "HOOK")
+      attr_accessor type_name: ::String
+      attr_accessor arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor deprecated_status: ("LIVE" | "DEPRECATED")
+      attr_accessor publisher_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListTypeVersionsOutput
+      attr_accessor type_version_summaries: ::Array[Types::TypeVersionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTypesInput
+      attr_accessor visibility: ("PUBLIC" | "PRIVATE")
+      attr_accessor provisioning_type: ("NON_PROVISIONABLE" | "IMMUTABLE" | "FULLY_MUTABLE")
+      attr_accessor deprecated_status: ("LIVE" | "DEPRECATED")
+      attr_accessor type: ("RESOURCE" | "MODULE" | "HOOK")
+      attr_accessor filters: Types::TypeFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTypesOutput
+      attr_accessor type_summaries: ::Array[Types::TypeSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LoggingConfig
+      attr_accessor log_role_arn: ::String
+      attr_accessor log_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class ManagedExecution
+      attr_accessor active: bool
+      SENSITIVE: []
+    end
+
+    class ModuleInfo
+      attr_accessor type_hierarchy: ::String
+      attr_accessor logical_id_hierarchy: ::String
+      SENSITIVE: []
+    end
+
+    class NameAlreadyExistsException < Aws::EmptyStructure
+    end
+
+    class OperationIdAlreadyExistsException < Aws::EmptyStructure
+    end
+
+    class OperationInProgressException < Aws::EmptyStructure
+    end
+
+    class OperationNotFoundException < Aws::EmptyStructure
+    end
+
+    class OperationResultFilter
+      attr_accessor name: ("OPERATION_RESULT_STATUS")
+      attr_accessor values: ::String
+      SENSITIVE: []
+    end
+
+    class OperationStatusCheckFailedException < Aws::EmptyStructure
+    end
+
+    class Output
+      attr_accessor output_key: ::String
+      attr_accessor output_value: ::String
+      attr_accessor description: ::String
+      attr_accessor export_name: ::String
+      SENSITIVE: []
+    end
+
+    class Parameter
+      attr_accessor parameter_key: ::String
+      attr_accessor parameter_value: ::String
+      attr_accessor use_previous_value: bool
+      attr_accessor resolved_value: ::String
+      SENSITIVE: []
+    end
+
+    class ParameterConstraints
+      attr_accessor allowed_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ParameterDeclaration
+      attr_accessor parameter_key: ::String
+      attr_accessor default_value: ::String
+      attr_accessor parameter_type: ::String
+      attr_accessor no_echo: bool
+      attr_accessor description: ::String
+      attr_accessor parameter_constraints: Types::ParameterConstraints
+      SENSITIVE: []
+    end
+
+    class PhysicalResourceIdContextKeyValuePair
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class PropertyDifference
+      attr_accessor property_path: ::String
+      attr_accessor expected_value: ::String
+      attr_accessor actual_value: ::String
+      attr_accessor difference_type: ("ADD" | "REMOVE" | "NOT_EQUAL")
+      SENSITIVE: []
+    end
+
+    class PublishTypeInput
+      attr_accessor type: ("RESOURCE" | "MODULE" | "HOOK")
+      attr_accessor arn: ::String
+      attr_accessor type_name: ::String
+      attr_accessor public_version_number: ::String
+      SENSITIVE: []
+    end
+
+    class PublishTypeOutput
+      attr_accessor public_type_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RecordHandlerProgressInput
+      attr_accessor bearer_token: ::String
+      attr_accessor operation_status: ("PENDING" | "IN_PROGRESS" | "SUCCESS" | "FAILED")
+      attr_accessor current_operation_status: ("PENDING" | "IN_PROGRESS" | "SUCCESS" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor error_code: ("NotUpdatable" | "InvalidRequest" | "AccessDenied" | "InvalidCredentials" | "AlreadyExists" | "NotFound" | "ResourceConflict" | "Throttling" | "ServiceLimitExceeded" | "NotStabilized" | "GeneralServiceException" | "ServiceInternalError" | "NetworkFailure" | "InternalFailure" | "InvalidTypeConfiguration" | "HandlerInternalFailure" | "NonCompliant" | "Unknown" | "UnsupportedTarget")
+      attr_accessor resource_model: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class RecordHandlerProgressOutput < Aws::EmptyStructure
+    end
+
+    class RegisterPublisherInput
+      attr_accessor accept_terms_and_conditions: bool
+      attr_accessor connection_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterPublisherOutput
+      attr_accessor publisher_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterTypeInput
+      attr_accessor type: ("RESOURCE" | "MODULE" | "HOOK")
+      attr_accessor type_name: ::String
+      attr_accessor schema_handler_package: ::String
+      attr_accessor logging_config: Types::LoggingConfig
+      attr_accessor execution_role_arn: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterTypeOutput
+      attr_accessor registration_token: ::String
+      SENSITIVE: []
+    end
+
+    class RequiredActivatedType
+      attr_accessor type_name_alias: ::String
+      attr_accessor original_type_name: ::String
+      attr_accessor publisher_id: ::String
+      attr_accessor supported_major_versions: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class ResourceChange
+      attr_accessor action: ("Add" | "Modify" | "Remove" | "Import" | "Dynamic")
+      attr_accessor logical_resource_id: ::String
+      attr_accessor physical_resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor replacement: ("True" | "False" | "Conditional")
+      attr_accessor scope: ::Array[("Properties" | "Metadata" | "CreationPolicy" | "UpdatePolicy" | "DeletionPolicy" | "UpdateReplacePolicy" | "Tags")]
+      attr_accessor details: ::Array[Types::ResourceChangeDetail]
+      attr_accessor change_set_id: ::String
+      attr_accessor module_info: Types::ModuleInfo
+      SENSITIVE: []
+    end
+
+    class ResourceChangeDetail
+      attr_accessor target: Types::ResourceTargetDefinition
+      attr_accessor evaluation: ("Static" | "Dynamic")
+      attr_accessor change_source: ("ResourceReference" | "ParameterReference" | "ResourceAttribute" | "DirectModification" | "Automatic")
+      attr_accessor causing_entity: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceIdentifierSummary
+      attr_accessor resource_type: ::String
+      attr_accessor logical_resource_ids: ::Array[::String]
+      attr_accessor resource_identifiers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResourceTargetDefinition
+      attr_accessor attribute: ("Properties" | "Metadata" | "CreationPolicy" | "UpdatePolicy" | "DeletionPolicy" | "UpdateReplacePolicy" | "Tags")
+      attr_accessor name: ::String
+      attr_accessor requires_recreation: ("Never" | "Conditionally" | "Always")
+      SENSITIVE: []
+    end
+
+    class ResourceToImport
+      attr_accessor resource_type: ::String
+      attr_accessor logical_resource_id: ::String
+      attr_accessor resource_identifier: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RollbackConfiguration
+      attr_accessor rollback_triggers: ::Array[Types::RollbackTrigger]
+      attr_accessor monitoring_time_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class RollbackStackInput
+      attr_accessor stack_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor retain_except_on_create: bool
+      SENSITIVE: []
+    end
+
+    class RollbackStackOutput
+      attr_accessor stack_id: ::String
+      SENSITIVE: []
+    end
+
+    class RollbackTrigger
+      attr_accessor arn: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class SetStackPolicyInput
+      attr_accessor stack_name: ::String
+      attr_accessor stack_policy_body: ::String
+      attr_accessor stack_policy_url: ::String
+      SENSITIVE: []
+    end
+
+    class SetTypeConfigurationInput
+      attr_accessor type_arn: ::String
+      attr_accessor configuration: ::String
+      attr_accessor configuration_alias: ::String
+      attr_accessor type_name: ::String
+      attr_accessor type: ("RESOURCE" | "MODULE" | "HOOK")
+      SENSITIVE: []
+    end
+
+    class SetTypeConfigurationOutput
+      attr_accessor configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SetTypeDefaultVersionInput
+      attr_accessor arn: ::String
+      attr_accessor type: ("RESOURCE" | "MODULE" | "HOOK")
+      attr_accessor type_name: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class SetTypeDefaultVersionOutput < Aws::EmptyStructure
+    end
+
+    class SignalResourceInput
+      attr_accessor stack_name: ::String
+      attr_accessor logical_resource_id: ::String
+      attr_accessor unique_id: ::String
+      attr_accessor status: ("SUCCESS" | "FAILURE")
+      SENSITIVE: []
+    end
+
+    class Stack
+      attr_accessor stack_id: ::String
+      attr_accessor stack_name: ::String
+      attr_accessor change_set_id: ::String
+      attr_accessor description: ::String
+      attr_accessor parameters: ::Array[Types::Parameter]
+      attr_accessor creation_time: ::Time
+      attr_accessor deletion_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor rollback_configuration: Types::RollbackConfiguration
+      attr_accessor stack_status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATE_COMPLETE" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_FAILED" | "ROLLBACK_COMPLETE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_FAILED" | "UPDATE_ROLLBACK_IN_PROGRESS" | "UPDATE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS" | "UPDATE_ROLLBACK_COMPLETE" | "REVIEW_IN_PROGRESS" | "IMPORT_IN_PROGRESS" | "IMPORT_COMPLETE" | "IMPORT_ROLLBACK_IN_PROGRESS" | "IMPORT_ROLLBACK_FAILED" | "IMPORT_ROLLBACK_COMPLETE")
+      attr_accessor stack_status_reason: ::String
+      attr_accessor disable_rollback: bool
+      attr_accessor notification_arns: ::Array[::String]
+      attr_accessor timeout_in_minutes: ::Integer
+      attr_accessor capabilities: ::Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")]
+      attr_accessor outputs: ::Array[Types::Output]
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor enable_termination_protection: bool
+      attr_accessor parent_id: ::String
+      attr_accessor root_id: ::String
+      attr_accessor drift_information: Types::StackDriftInformation
+      attr_accessor retain_except_on_create: bool
+      SENSITIVE: []
+    end
+
+    class StackDriftInformation
+      attr_accessor stack_drift_status: ("DRIFTED" | "IN_SYNC" | "UNKNOWN" | "NOT_CHECKED")
+      attr_accessor last_check_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class StackDriftInformationSummary
+      attr_accessor stack_drift_status: ("DRIFTED" | "IN_SYNC" | "UNKNOWN" | "NOT_CHECKED")
+      attr_accessor last_check_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class StackEvent
+      attr_accessor stack_id: ::String
+      attr_accessor event_id: ::String
+      attr_accessor stack_name: ::String
+      attr_accessor logical_resource_id: ::String
+      attr_accessor physical_resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor timestamp: ::Time
+      attr_accessor resource_status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATE_COMPLETE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "DELETE_SKIPPED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED" | "UPDATE_COMPLETE" | "IMPORT_FAILED" | "IMPORT_COMPLETE" | "IMPORT_IN_PROGRESS" | "IMPORT_ROLLBACK_IN_PROGRESS" | "IMPORT_ROLLBACK_FAILED" | "IMPORT_ROLLBACK_COMPLETE" | "UPDATE_ROLLBACK_IN_PROGRESS" | "UPDATE_ROLLBACK_COMPLETE" | "UPDATE_ROLLBACK_FAILED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_COMPLETE" | "ROLLBACK_FAILED")
+      attr_accessor resource_status_reason: ::String
+      attr_accessor resource_properties: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor hook_type: ::String
+      attr_accessor hook_status: ("HOOK_IN_PROGRESS" | "HOOK_COMPLETE_SUCCEEDED" | "HOOK_COMPLETE_FAILED" | "HOOK_FAILED")
+      attr_accessor hook_status_reason: ::String
+      attr_accessor hook_invocation_point: ("PRE_PROVISION")
+      attr_accessor hook_failure_mode: ("FAIL" | "WARN")
+      SENSITIVE: []
+    end
+
+    class StackInstance
+      attr_accessor stack_set_id: ::String
+      attr_accessor region: ::String
+      attr_accessor account: ::String
+      attr_accessor stack_id: ::String
+      attr_accessor parameter_overrides: ::Array[Types::Parameter]
+      attr_accessor status: ("CURRENT" | "OUTDATED" | "INOPERABLE")
+      attr_accessor stack_instance_status: Types::StackInstanceComprehensiveStatus
+      attr_accessor status_reason: ::String
+      attr_accessor organizational_unit_id: ::String
+      attr_accessor drift_status: ("DRIFTED" | "IN_SYNC" | "UNKNOWN" | "NOT_CHECKED")
+      attr_accessor last_drift_check_timestamp: ::Time
+      attr_accessor last_operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class StackInstanceComprehensiveStatus
+      attr_accessor detailed_status: ("PENDING" | "RUNNING" | "SUCCEEDED" | "FAILED" | "CANCELLED" | "INOPERABLE" | "SKIPPED_SUSPENDED_ACCOUNT")
+      SENSITIVE: []
+    end
+
+    class StackInstanceFilter
+      attr_accessor name: ("DETAILED_STATUS" | "LAST_OPERATION_ID" | "DRIFT_STATUS")
+      attr_accessor values: ::String
+      SENSITIVE: []
+    end
+
+    class StackInstanceNotFoundException < Aws::EmptyStructure
+    end
+
+    class StackInstanceResourceDriftsSummary
+      attr_accessor stack_id: ::String
+      attr_accessor logical_resource_id: ::String
+      attr_accessor physical_resource_id: ::String
+      attr_accessor physical_resource_id_context: ::Array[Types::PhysicalResourceIdContextKeyValuePair]
+      attr_accessor resource_type: ::String
+      attr_accessor property_differences: ::Array[Types::PropertyDifference]
+      attr_accessor stack_resource_drift_status: ("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED")
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class StackInstanceSummary
+      attr_accessor stack_set_id: ::String
+      attr_accessor region: ::String
+      attr_accessor account: ::String
+      attr_accessor stack_id: ::String
+      attr_accessor status: ("CURRENT" | "OUTDATED" | "INOPERABLE")
+      attr_accessor status_reason: ::String
+      attr_accessor stack_instance_status: Types::StackInstanceComprehensiveStatus
+      attr_accessor organizational_unit_id: ::String
+      attr_accessor drift_status: ("DRIFTED" | "IN_SYNC" | "UNKNOWN" | "NOT_CHECKED")
+      attr_accessor last_drift_check_timestamp: ::Time
+      attr_accessor last_operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class StackNotFoundException < Aws::EmptyStructure
+    end
+
+    class StackResource
+      attr_accessor stack_name: ::String
+      attr_accessor stack_id: ::String
+      attr_accessor logical_resource_id: ::String
+      attr_accessor physical_resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor timestamp: ::Time
+      attr_accessor resource_status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATE_COMPLETE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "DELETE_SKIPPED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED" | "UPDATE_COMPLETE" | "IMPORT_FAILED" | "IMPORT_COMPLETE" | "IMPORT_IN_PROGRESS" | "IMPORT_ROLLBACK_IN_PROGRESS" | "IMPORT_ROLLBACK_FAILED" | "IMPORT_ROLLBACK_COMPLETE" | "UPDATE_ROLLBACK_IN_PROGRESS" | "UPDATE_ROLLBACK_COMPLETE" | "UPDATE_ROLLBACK_FAILED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_COMPLETE" | "ROLLBACK_FAILED")
+      attr_accessor resource_status_reason: ::String
+      attr_accessor description: ::String
+      attr_accessor drift_information: Types::StackResourceDriftInformation
+      attr_accessor module_info: Types::ModuleInfo
+      SENSITIVE: []
+    end
+
+    class StackResourceDetail
+      attr_accessor stack_name: ::String
+      attr_accessor stack_id: ::String
+      attr_accessor logical_resource_id: ::String
+      attr_accessor physical_resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor last_updated_timestamp: ::Time
+      attr_accessor resource_status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATE_COMPLETE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "DELETE_SKIPPED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED" | "UPDATE_COMPLETE" | "IMPORT_FAILED" | "IMPORT_COMPLETE" | "IMPORT_IN_PROGRESS" | "IMPORT_ROLLBACK_IN_PROGRESS" | "IMPORT_ROLLBACK_FAILED" | "IMPORT_ROLLBACK_COMPLETE" | "UPDATE_ROLLBACK_IN_PROGRESS" | "UPDATE_ROLLBACK_COMPLETE" | "UPDATE_ROLLBACK_FAILED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_COMPLETE" | "ROLLBACK_FAILED")
+      attr_accessor resource_status_reason: ::String
+      attr_accessor description: ::String
+      attr_accessor metadata: ::String
+      attr_accessor drift_information: Types::StackResourceDriftInformation
+      attr_accessor module_info: Types::ModuleInfo
+      SENSITIVE: []
+    end
+
+    class StackResourceDrift
+      attr_accessor stack_id: ::String
+      attr_accessor logical_resource_id: ::String
+      attr_accessor physical_resource_id: ::String
+      attr_accessor physical_resource_id_context: ::Array[Types::PhysicalResourceIdContextKeyValuePair]
+      attr_accessor resource_type: ::String
+      attr_accessor expected_properties: ::String
+      attr_accessor actual_properties: ::String
+      attr_accessor property_differences: ::Array[Types::PropertyDifference]
+      attr_accessor stack_resource_drift_status: ("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED")
+      attr_accessor timestamp: ::Time
+      attr_accessor module_info: Types::ModuleInfo
+      SENSITIVE: []
+    end
+
+    class StackResourceDriftInformation
+      attr_accessor stack_resource_drift_status: ("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED")
+      attr_accessor last_check_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class StackResourceDriftInformationSummary
+      attr_accessor stack_resource_drift_status: ("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED")
+      attr_accessor last_check_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class StackResourceSummary
+      attr_accessor logical_resource_id: ::String
+      attr_accessor physical_resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor last_updated_timestamp: ::Time
+      attr_accessor resource_status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATE_COMPLETE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "DELETE_SKIPPED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED" | "UPDATE_COMPLETE" | "IMPORT_FAILED" | "IMPORT_COMPLETE" | "IMPORT_IN_PROGRESS" | "IMPORT_ROLLBACK_IN_PROGRESS" | "IMPORT_ROLLBACK_FAILED" | "IMPORT_ROLLBACK_COMPLETE" | "UPDATE_ROLLBACK_IN_PROGRESS" | "UPDATE_ROLLBACK_COMPLETE" | "UPDATE_ROLLBACK_FAILED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_COMPLETE" | "ROLLBACK_FAILED")
+      attr_accessor resource_status_reason: ::String
+      attr_accessor drift_information: Types::StackResourceDriftInformationSummary
+      attr_accessor module_info: Types::ModuleInfo
+      SENSITIVE: []
+    end
+
+    class StackSet
+      attr_accessor stack_set_name: ::String
+      attr_accessor stack_set_id: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("ACTIVE" | "DELETED")
+      attr_accessor template_body: ::String
+      attr_accessor parameters: ::Array[Types::Parameter]
+      attr_accessor capabilities: ::Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor stack_set_arn: ::String
+      attr_accessor administration_role_arn: ::String
+      attr_accessor execution_role_name: ::String
+      attr_accessor stack_set_drift_detection_details: Types::StackSetDriftDetectionDetails
+      attr_accessor auto_deployment: Types::AutoDeployment
+      attr_accessor permission_model: ("SERVICE_MANAGED" | "SELF_MANAGED")
+      attr_accessor organizational_unit_ids: ::Array[::String]
+      attr_accessor managed_execution: Types::ManagedExecution
+      attr_accessor regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StackSetDriftDetectionDetails
+      attr_accessor drift_status: ("DRIFTED" | "IN_SYNC" | "NOT_CHECKED")
+      attr_accessor drift_detection_status: ("COMPLETED" | "FAILED" | "PARTIAL_SUCCESS" | "IN_PROGRESS" | "STOPPED")
+      attr_accessor last_drift_check_timestamp: ::Time
+      attr_accessor total_stack_instances_count: ::Integer
+      attr_accessor drifted_stack_instances_count: ::Integer
+      attr_accessor in_sync_stack_instances_count: ::Integer
+      attr_accessor in_progress_stack_instances_count: ::Integer
+      attr_accessor failed_stack_instances_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class StackSetNotEmptyException < Aws::EmptyStructure
+    end
+
+    class StackSetNotFoundException < Aws::EmptyStructure
+    end
+
+    class StackSetOperation
+      attr_accessor operation_id: ::String
+      attr_accessor stack_set_id: ::String
+      attr_accessor action: ("CREATE" | "UPDATE" | "DELETE" | "DETECT_DRIFT")
+      attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "STOPPING" | "STOPPED" | "QUEUED")
+      attr_accessor operation_preferences: Types::StackSetOperationPreferences
+      attr_accessor retain_stacks: bool
+      attr_accessor administration_role_arn: ::String
+      attr_accessor execution_role_name: ::String
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor end_timestamp: ::Time
+      attr_accessor deployment_targets: Types::DeploymentTargets
+      attr_accessor stack_set_drift_detection_details: Types::StackSetDriftDetectionDetails
+      attr_accessor status_reason: ::String
+      attr_accessor status_details: Types::StackSetOperationStatusDetails
+      SENSITIVE: []
+    end
+
+    class StackSetOperationPreferences
+      attr_accessor region_concurrency_type: ("SEQUENTIAL" | "PARALLEL")
+      attr_accessor region_order: ::Array[::String]
+      attr_accessor failure_tolerance_count: ::Integer
+      attr_accessor failure_tolerance_percentage: ::Integer
+      attr_accessor max_concurrent_count: ::Integer
+      attr_accessor max_concurrent_percentage: ::Integer
+      attr_accessor concurrency_mode: ("STRICT_FAILURE_TOLERANCE" | "SOFT_FAILURE_TOLERANCE")
+      SENSITIVE: []
+    end
+
+    class StackSetOperationResultSummary
+      attr_accessor account: ::String
+      attr_accessor region: ::String
+      attr_accessor status: ("PENDING" | "RUNNING" | "SUCCEEDED" | "FAILED" | "CANCELLED")
+      attr_accessor status_reason: ::String
+      attr_accessor account_gate_result: Types::AccountGateResult
+      attr_accessor organizational_unit_id: ::String
+      SENSITIVE: []
+    end
+
+    class StackSetOperationStatusDetails
+      attr_accessor failed_stack_instances_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class StackSetOperationSummary
+      attr_accessor operation_id: ::String
+      attr_accessor action: ("CREATE" | "UPDATE" | "DELETE" | "DETECT_DRIFT")
+      attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "STOPPING" | "STOPPED" | "QUEUED")
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor end_timestamp: ::Time
+      attr_accessor status_reason: ::String
+      attr_accessor status_details: Types::StackSetOperationStatusDetails
+      attr_accessor operation_preferences: Types::StackSetOperationPreferences
+      SENSITIVE: []
+    end
+
+    class StackSetSummary
+      attr_accessor stack_set_name: ::String
+      attr_accessor stack_set_id: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("ACTIVE" | "DELETED")
+      attr_accessor auto_deployment: Types::AutoDeployment
+      attr_accessor permission_model: ("SERVICE_MANAGED" | "SELF_MANAGED")
+      attr_accessor drift_status: ("DRIFTED" | "IN_SYNC" | "UNKNOWN" | "NOT_CHECKED")
+      attr_accessor last_drift_check_timestamp: ::Time
+      attr_accessor managed_execution: Types::ManagedExecution
+      SENSITIVE: []
+    end
+
+    class StackSummary
+      attr_accessor stack_id: ::String
+      attr_accessor stack_name: ::String
+      attr_accessor template_description: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor deletion_time: ::Time
+      attr_accessor stack_status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATE_COMPLETE" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_FAILED" | "ROLLBACK_COMPLETE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_FAILED" | "UPDATE_ROLLBACK_IN_PROGRESS" | "UPDATE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS" | "UPDATE_ROLLBACK_COMPLETE" | "REVIEW_IN_PROGRESS" | "IMPORT_IN_PROGRESS" | "IMPORT_COMPLETE" | "IMPORT_ROLLBACK_IN_PROGRESS" | "IMPORT_ROLLBACK_FAILED" | "IMPORT_ROLLBACK_COMPLETE")
+      attr_accessor stack_status_reason: ::String
+      attr_accessor parent_id: ::String
+      attr_accessor root_id: ::String
+      attr_accessor drift_information: Types::StackDriftInformationSummary
+      SENSITIVE: []
+    end
+
+    class StaleRequestException < Aws::EmptyStructure
+    end
+
+    class StopStackSetOperationInput
+      attr_accessor stack_set_name: ::String
+      attr_accessor operation_id: ::String
+      attr_accessor call_as: ("SELF" | "DELEGATED_ADMIN")
+      SENSITIVE: []
+    end
+
+    class StopStackSetOperationOutput < Aws::EmptyStructure
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TemplateParameter
+      attr_accessor parameter_key: ::String
+      attr_accessor default_value: ::String
+      attr_accessor no_echo: bool
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class TemplateSummaryConfig
+      attr_accessor treat_unrecognized_resource_types_as_warnings: bool
+      SENSITIVE: []
+    end
+
+    class TestTypeInput
+      attr_accessor arn: ::String
+      attr_accessor type: ("RESOURCE" | "MODULE" | "HOOK")
+      attr_accessor type_name: ::String
+      attr_accessor version_id: ::String
+      attr_accessor log_delivery_bucket: ::String
+      SENSITIVE: []
+    end
+
+    class TestTypeOutput
+      attr_accessor type_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class TokenAlreadyExistsException < Aws::EmptyStructure
+    end
+
+    class TypeConfigurationDetails
+      attr_accessor arn: ::String
+      attr_accessor alias: ::String
+      attr_accessor configuration: ::String
+      attr_accessor last_updated: ::Time
+      attr_accessor type_arn: ::String
+      attr_accessor type_name: ::String
+      attr_accessor is_default_configuration: bool
+      SENSITIVE: []
+    end
+
+    class TypeConfigurationIdentifier
+      attr_accessor type_arn: ::String
+      attr_accessor type_configuration_alias: ::String
+      attr_accessor type_configuration_arn: ::String
+      attr_accessor type: ("RESOURCE" | "MODULE" | "HOOK")
+      attr_accessor type_name: ::String
+      SENSITIVE: []
+    end
+
+    class TypeConfigurationNotFoundException < Aws::EmptyStructure
+    end
+
+    class TypeFilters
+      attr_accessor category: ("REGISTERED" | "ACTIVATED" | "THIRD_PARTY" | "AWS_TYPES")
+      attr_accessor publisher_id: ::String
+      attr_accessor type_name_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class TypeNotFoundException < Aws::EmptyStructure
+    end
+
+    class TypeSummary
+      attr_accessor type: ("RESOURCE" | "MODULE" | "HOOK")
+      attr_accessor type_name: ::String
+      attr_accessor default_version_id: ::String
+      attr_accessor type_arn: ::String
+      attr_accessor last_updated: ::Time
+      attr_accessor description: ::String
+      attr_accessor publisher_id: ::String
+      attr_accessor original_type_name: ::String
+      attr_accessor public_version_number: ::String
+      attr_accessor latest_public_version: ::String
+      attr_accessor publisher_identity: ("AWS_Marketplace" | "GitHub" | "Bitbucket")
+      attr_accessor publisher_name: ::String
+      attr_accessor is_activated: bool
+      SENSITIVE: []
+    end
+
+    class TypeVersionSummary
+      attr_accessor type: ("RESOURCE" | "MODULE" | "HOOK")
+      attr_accessor type_name: ::String
+      attr_accessor version_id: ::String
+      attr_accessor is_default_version: bool
+      attr_accessor arn: ::String
+      attr_accessor time_created: ::Time
+      attr_accessor description: ::String
+      attr_accessor public_version_number: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateStackInput
+      attr_accessor stack_name: ::String
+      attr_accessor template_body: ::String
+      attr_accessor template_url: ::String
+      attr_accessor use_previous_template: bool
+      attr_accessor stack_policy_during_update_body: ::String
+      attr_accessor stack_policy_during_update_url: ::String
+      attr_accessor parameters: ::Array[Types::Parameter]
+      attr_accessor capabilities: ::Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")]
+      attr_accessor resource_types: ::Array[::String]
+      attr_accessor role_arn: ::String
+      attr_accessor rollback_configuration: Types::RollbackConfiguration
+      attr_accessor stack_policy_body: ::String
+      attr_accessor stack_policy_url: ::String
+      attr_accessor notification_arns: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor disable_rollback: bool
+      attr_accessor client_request_token: ::String
+      attr_accessor retain_except_on_create: bool
+      SENSITIVE: []
+    end
+
+    class UpdateStackInstancesInput
+      attr_accessor stack_set_name: ::String
+      attr_accessor accounts: ::Array[::String]
+      attr_accessor deployment_targets: Types::DeploymentTargets
+      attr_accessor regions: ::Array[::String]
+      attr_accessor parameter_overrides: ::Array[Types::Parameter]
+      attr_accessor operation_preferences: Types::StackSetOperationPreferences
+      attr_accessor operation_id: ::String
+      attr_accessor call_as: ("SELF" | "DELEGATED_ADMIN")
+      SENSITIVE: []
+    end
+
+    class UpdateStackInstancesOutput
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateStackOutput
+      attr_accessor stack_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateStackSetInput
+      attr_accessor stack_set_name: ::String
+      attr_accessor description: ::String
+      attr_accessor template_body: ::String
+      attr_accessor template_url: ::String
+      attr_accessor use_previous_template: bool
+      attr_accessor parameters: ::Array[Types::Parameter]
+      attr_accessor capabilities: ::Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor operation_preferences: Types::StackSetOperationPreferences
+      attr_accessor administration_role_arn: ::String
+      attr_accessor execution_role_name: ::String
+      attr_accessor deployment_targets: Types::DeploymentTargets
+      attr_accessor permission_model: ("SERVICE_MANAGED" | "SELF_MANAGED")
+      attr_accessor auto_deployment: Types::AutoDeployment
+      attr_accessor operation_id: ::String
+      attr_accessor accounts: ::Array[::String]
+      attr_accessor regions: ::Array[::String]
+      attr_accessor call_as: ("SELF" | "DELEGATED_ADMIN")
+      attr_accessor managed_execution: Types::ManagedExecution
+      SENSITIVE: []
+    end
+
+    class UpdateStackSetOutput
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateTerminationProtectionInput
+      attr_accessor enable_termination_protection: bool
+      attr_accessor stack_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateTerminationProtectionOutput
+      attr_accessor stack_id: ::String
+      SENSITIVE: []
+    end
+
+    class ValidateTemplateInput
+      attr_accessor template_body: ::String
+      attr_accessor template_url: ::String
+      SENSITIVE: []
+    end
+
+    class ValidateTemplateOutput
+      attr_accessor parameters: ::Array[Types::TemplateParameter]
+      attr_accessor description: ::String
+      attr_accessor capabilities: ::Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")]
+      attr_accessor capabilities_reason: ::String
+      attr_accessor declared_transforms: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Warnings
+      attr_accessor unrecognized_resource_types: ::Array[::String]
+      SENSITIVE: []
+    end
+  end
+end

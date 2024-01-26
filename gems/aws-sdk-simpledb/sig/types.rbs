@@ -1,0 +1,229 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SimpleDB
+  module Types
+
+    class Attribute
+      attr_accessor name: ::String
+      attr_accessor alternate_name_encoding: ::String
+      attr_accessor value: ::String
+      attr_accessor alternate_value_encoding: ::String
+      SENSITIVE: []
+    end
+
+    class AttributeDoesNotExist
+      attr_accessor box_usage: ::Float
+      SENSITIVE: []
+    end
+
+    class BatchDeleteAttributesRequest
+      attr_accessor domain_name: ::String
+      attr_accessor items: ::Array[Types::DeletableItem]
+      SENSITIVE: []
+    end
+
+    class BatchPutAttributesRequest
+      attr_accessor domain_name: ::String
+      attr_accessor items: ::Array[Types::ReplaceableItem]
+      SENSITIVE: []
+    end
+
+    class CreateDomainRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeletableItem
+      attr_accessor name: ::String
+      attr_accessor attributes: ::Array[Types::Attribute]
+      SENSITIVE: []
+    end
+
+    class DeleteAttributesRequest
+      attr_accessor domain_name: ::String
+      attr_accessor item_name: ::String
+      attr_accessor attributes: ::Array[Types::Attribute]
+      attr_accessor expected: Types::UpdateCondition
+      SENSITIVE: []
+    end
+
+    class DeleteDomainRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DomainMetadataRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DomainMetadataResult
+      attr_accessor item_count: ::Integer
+      attr_accessor item_names_size_bytes: ::Integer
+      attr_accessor attribute_name_count: ::Integer
+      attr_accessor attribute_names_size_bytes: ::Integer
+      attr_accessor attribute_value_count: ::Integer
+      attr_accessor attribute_values_size_bytes: ::Integer
+      attr_accessor timestamp: ::Integer
+      SENSITIVE: []
+    end
+
+    class DuplicateItemName
+      attr_accessor box_usage: ::Float
+      SENSITIVE: []
+    end
+
+    class GetAttributesRequest
+      attr_accessor domain_name: ::String
+      attr_accessor item_name: ::String
+      attr_accessor attribute_names: ::Array[::String]
+      attr_accessor consistent_read: bool
+      SENSITIVE: []
+    end
+
+    class GetAttributesResult
+      attr_accessor attributes: ::Array[Types::Attribute]
+      SENSITIVE: []
+    end
+
+    class InvalidNextToken
+      attr_accessor box_usage: ::Float
+      SENSITIVE: []
+    end
+
+    class InvalidNumberPredicates
+      attr_accessor box_usage: ::Float
+      SENSITIVE: []
+    end
+
+    class InvalidNumberValueTests
+      attr_accessor box_usage: ::Float
+      SENSITIVE: []
+    end
+
+    class InvalidParameterValue
+      attr_accessor box_usage: ::Float
+      SENSITIVE: []
+    end
+
+    class InvalidQueryExpression
+      attr_accessor box_usage: ::Float
+      SENSITIVE: []
+    end
+
+    class Item
+      attr_accessor name: ::String
+      attr_accessor alternate_name_encoding: ::String
+      attr_accessor attributes: ::Array[Types::Attribute]
+      SENSITIVE: []
+    end
+
+    class ListDomainsRequest
+      attr_accessor max_number_of_domains: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDomainsResult
+      attr_accessor domain_names: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MissingParameter
+      attr_accessor box_usage: ::Float
+      SENSITIVE: []
+    end
+
+    class NoSuchDomain
+      attr_accessor box_usage: ::Float
+      SENSITIVE: []
+    end
+
+    class NumberDomainAttributesExceeded
+      attr_accessor box_usage: ::Float
+      SENSITIVE: []
+    end
+
+    class NumberDomainBytesExceeded
+      attr_accessor box_usage: ::Float
+      SENSITIVE: []
+    end
+
+    class NumberDomainsExceeded
+      attr_accessor box_usage: ::Float
+      SENSITIVE: []
+    end
+
+    class NumberItemAttributesExceeded
+      attr_accessor box_usage: ::Float
+      SENSITIVE: []
+    end
+
+    class NumberSubmittedAttributesExceeded
+      attr_accessor box_usage: ::Float
+      SENSITIVE: []
+    end
+
+    class NumberSubmittedItemsExceeded
+      attr_accessor box_usage: ::Float
+      SENSITIVE: []
+    end
+
+    class PutAttributesRequest
+      attr_accessor domain_name: ::String
+      attr_accessor item_name: ::String
+      attr_accessor attributes: ::Array[Types::ReplaceableAttribute]
+      attr_accessor expected: Types::UpdateCondition
+      SENSITIVE: []
+    end
+
+    class ReplaceableAttribute
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      attr_accessor replace: bool
+      SENSITIVE: []
+    end
+
+    class ReplaceableItem
+      attr_accessor name: ::String
+      attr_accessor attributes: ::Array[Types::ReplaceableAttribute]
+      SENSITIVE: []
+    end
+
+    class RequestTimeout
+      attr_accessor box_usage: ::Float
+      SENSITIVE: []
+    end
+
+    class SelectRequest
+      attr_accessor select_expression: ::String
+      attr_accessor next_token: ::String
+      attr_accessor consistent_read: bool
+      SENSITIVE: []
+    end
+
+    class SelectResult
+      attr_accessor items: ::Array[Types::Item]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyRequestedAttributes
+      attr_accessor box_usage: ::Float
+      SENSITIVE: []
+    end
+
+    class UpdateCondition
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      attr_accessor exists: bool
+      SENSITIVE: []
+    end
+  end
+end

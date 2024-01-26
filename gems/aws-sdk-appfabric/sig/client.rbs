@@ -1,0 +1,460 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AppFabric
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppFabric/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchGetUserAccessTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetUserAccessTasksResponse]
+        def user_access_results_list: () -> ::Array[Types::UserAccessResultItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppFabric/Client.html#batch_get_user_access_tasks-instance_method
+      def batch_get_user_access_tasks: (
+                                         app_bundle_identifier: ::String,
+                                         task_id_list: Array[::String]
+                                       ) -> _BatchGetUserAccessTasksResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetUserAccessTasksResponseSuccess
+
+      interface _ConnectAppAuthorizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConnectAppAuthorizationResponse]
+        def app_authorization_summary: () -> Types::AppAuthorizationSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppFabric/Client.html#connect_app_authorization-instance_method
+      def connect_app_authorization: (
+                                       app_bundle_identifier: ::String,
+                                       app_authorization_identifier: ::String,
+                                       ?auth_request: {
+                                         redirect_uri: ::String,
+                                         code: ::String
+                                       }
+                                     ) -> _ConnectAppAuthorizationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConnectAppAuthorizationResponseSuccess
+
+      interface _CreateAppAuthorizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAppAuthorizationResponse]
+        def app_authorization: () -> Types::AppAuthorization
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppFabric/Client.html#create_app_authorization-instance_method
+      def create_app_authorization: (
+                                      app_bundle_identifier: ::String,
+                                      app: ::String,
+                                      credential: {
+                                        oauth2_credential: {
+                                          client_id: ::String,
+                                          client_secret: ::String
+                                        }?,
+                                        api_key_credential: {
+                                          api_key: ::String
+                                        }?
+                                      },
+                                      tenant: {
+                                        tenant_identifier: ::String,
+                                        tenant_display_name: ::String
+                                      },
+                                      auth_type: ("oauth2" | "apiKey"),
+                                      ?client_token: ::String,
+                                      ?tags: Array[
+                                        {
+                                          key: ::String,
+                                          value: ::String
+                                        },
+                                      ]
+                                    ) -> _CreateAppAuthorizationResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAppAuthorizationResponseSuccess
+
+      interface _CreateAppBundleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAppBundleResponse]
+        def app_bundle: () -> Types::AppBundle
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppFabric/Client.html#create_app_bundle-instance_method
+      def create_app_bundle: (
+                               ?client_token: ::String,
+                               ?customer_managed_key_identifier: ::String,
+                               ?tags: Array[
+                                 {
+                                   key: ::String,
+                                   value: ::String
+                                 },
+                               ]
+                             ) -> _CreateAppBundleResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAppBundleResponseSuccess
+
+      interface _CreateIngestionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateIngestionResponse]
+        def ingestion: () -> Types::Ingestion
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppFabric/Client.html#create_ingestion-instance_method
+      def create_ingestion: (
+                              app_bundle_identifier: ::String,
+                              app: ::String,
+                              tenant_id: ::String,
+                              ingestion_type: ("auditLog"),
+                              ?client_token: ::String,
+                              ?tags: Array[
+                                {
+                                  key: ::String,
+                                  value: ::String
+                                },
+                              ]
+                            ) -> _CreateIngestionResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIngestionResponseSuccess
+
+      interface _CreateIngestionDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateIngestionDestinationResponse]
+        def ingestion_destination: () -> Types::IngestionDestination
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppFabric/Client.html#create_ingestion_destination-instance_method
+      def create_ingestion_destination: (
+                                          app_bundle_identifier: ::String,
+                                          ingestion_identifier: ::String,
+                                          processing_configuration: {
+                                            audit_log: {
+                                              schema: ("ocsf" | "raw"),
+                                              format: ("json" | "parquet")
+                                            }?
+                                          },
+                                          destination_configuration: {
+                                            audit_log: {
+                                              destination: {
+                                                s3_bucket: {
+                                                  bucket_name: ::String,
+                                                  prefix: ::String?
+                                                }?,
+                                                firehose_stream: {
+                                                  stream_name: ::String
+                                                }?
+                                              }
+                                            }?
+                                          },
+                                          ?client_token: ::String,
+                                          ?tags: Array[
+                                            {
+                                              key: ::String,
+                                              value: ::String
+                                            },
+                                          ]
+                                        ) -> _CreateIngestionDestinationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIngestionDestinationResponseSuccess
+
+      interface _DeleteAppAuthorizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAppAuthorizationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppFabric/Client.html#delete_app_authorization-instance_method
+      def delete_app_authorization: (
+                                      app_bundle_identifier: ::String,
+                                      app_authorization_identifier: ::String
+                                    ) -> _DeleteAppAuthorizationResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAppAuthorizationResponseSuccess
+
+      interface _DeleteAppBundleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAppBundleResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppFabric/Client.html#delete_app_bundle-instance_method
+      def delete_app_bundle: (
+                               app_bundle_identifier: ::String
+                             ) -> _DeleteAppBundleResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAppBundleResponseSuccess
+
+      interface _DeleteIngestionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIngestionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppFabric/Client.html#delete_ingestion-instance_method
+      def delete_ingestion: (
+                              app_bundle_identifier: ::String,
+                              ingestion_identifier: ::String
+                            ) -> _DeleteIngestionResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIngestionResponseSuccess
+
+      interface _DeleteIngestionDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIngestionDestinationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppFabric/Client.html#delete_ingestion_destination-instance_method
+      def delete_ingestion_destination: (
+                                          app_bundle_identifier: ::String,
+                                          ingestion_identifier: ::String,
+                                          ingestion_destination_identifier: ::String
+                                        ) -> _DeleteIngestionDestinationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIngestionDestinationResponseSuccess
+
+      interface _GetAppAuthorizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAppAuthorizationResponse]
+        def app_authorization: () -> Types::AppAuthorization
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppFabric/Client.html#get_app_authorization-instance_method
+      def get_app_authorization: (
+                                   app_bundle_identifier: ::String,
+                                   app_authorization_identifier: ::String
+                                 ) -> _GetAppAuthorizationResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAppAuthorizationResponseSuccess
+
+      interface _GetAppBundleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAppBundleResponse]
+        def app_bundle: () -> Types::AppBundle
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppFabric/Client.html#get_app_bundle-instance_method
+      def get_app_bundle: (
+                            app_bundle_identifier: ::String
+                          ) -> _GetAppBundleResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAppBundleResponseSuccess
+
+      interface _GetIngestionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIngestionResponse]
+        def ingestion: () -> Types::Ingestion
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppFabric/Client.html#get_ingestion-instance_method
+      def get_ingestion: (
+                           app_bundle_identifier: ::String,
+                           ingestion_identifier: ::String
+                         ) -> _GetIngestionResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIngestionResponseSuccess
+
+      interface _GetIngestionDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIngestionDestinationResponse]
+        def ingestion_destination: () -> Types::IngestionDestination
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppFabric/Client.html#get_ingestion_destination-instance_method
+      def get_ingestion_destination: (
+                                       app_bundle_identifier: ::String,
+                                       ingestion_identifier: ::String,
+                                       ingestion_destination_identifier: ::String
+                                     ) -> _GetIngestionDestinationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIngestionDestinationResponseSuccess
+
+      interface _ListAppAuthorizationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAppAuthorizationsResponse]
+        def app_authorization_summary_list: () -> ::Array[Types::AppAuthorizationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppFabric/Client.html#list_app_authorizations-instance_method
+      def list_app_authorizations: (
+                                     app_bundle_identifier: ::String,
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListAppAuthorizationsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAppAuthorizationsResponseSuccess
+
+      interface _ListAppBundlesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAppBundlesResponse]
+        def app_bundle_summary_list: () -> ::Array[Types::AppBundleSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppFabric/Client.html#list_app_bundles-instance_method
+      def list_app_bundles: (
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _ListAppBundlesResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAppBundlesResponseSuccess
+
+      interface _ListIngestionDestinationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIngestionDestinationsResponse]
+        def ingestion_destinations: () -> ::Array[Types::IngestionDestinationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppFabric/Client.html#list_ingestion_destinations-instance_method
+      def list_ingestion_destinations: (
+                                         app_bundle_identifier: ::String,
+                                         ingestion_identifier: ::String,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListIngestionDestinationsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIngestionDestinationsResponseSuccess
+
+      interface _ListIngestionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIngestionsResponse]
+        def ingestions: () -> ::Array[Types::IngestionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppFabric/Client.html#list_ingestions-instance_method
+      def list_ingestions: (
+                             app_bundle_identifier: ::String,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListIngestionsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIngestionsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppFabric/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _StartIngestionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartIngestionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppFabric/Client.html#start_ingestion-instance_method
+      def start_ingestion: (
+                             ingestion_identifier: ::String,
+                             app_bundle_identifier: ::String
+                           ) -> _StartIngestionResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartIngestionResponseSuccess
+
+      interface _StartUserAccessTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartUserAccessTasksResponse]
+        def user_access_tasks_list: () -> ::Array[Types::UserAccessTaskItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppFabric/Client.html#start_user_access_tasks-instance_method
+      def start_user_access_tasks: (
+                                     app_bundle_identifier: ::String,
+                                     email: ::String
+                                   ) -> _StartUserAccessTasksResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartUserAccessTasksResponseSuccess
+
+      interface _StopIngestionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopIngestionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppFabric/Client.html#stop_ingestion-instance_method
+      def stop_ingestion: (
+                            ingestion_identifier: ::String,
+                            app_bundle_identifier: ::String
+                          ) -> _StopIngestionResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopIngestionResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppFabric/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppFabric/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAppAuthorizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAppAuthorizationResponse]
+        def app_authorization: () -> Types::AppAuthorization
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppFabric/Client.html#update_app_authorization-instance_method
+      def update_app_authorization: (
+                                      app_bundle_identifier: ::String,
+                                      app_authorization_identifier: ::String,
+                                      ?credential: {
+                                        oauth2_credential: {
+                                          client_id: ::String,
+                                          client_secret: ::String
+                                        }?,
+                                        api_key_credential: {
+                                          api_key: ::String
+                                        }?
+                                      },
+                                      ?tenant: {
+                                        tenant_identifier: ::String,
+                                        tenant_display_name: ::String
+                                      }
+                                    ) -> _UpdateAppAuthorizationResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAppAuthorizationResponseSuccess
+
+      interface _UpdateIngestionDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIngestionDestinationResponse]
+        def ingestion_destination: () -> Types::IngestionDestination
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppFabric/Client.html#update_ingestion_destination-instance_method
+      def update_ingestion_destination: (
+                                          app_bundle_identifier: ::String,
+                                          ingestion_identifier: ::String,
+                                          ingestion_destination_identifier: ::String,
+                                          destination_configuration: {
+                                            audit_log: {
+                                              destination: {
+                                                s3_bucket: {
+                                                  bucket_name: ::String,
+                                                  prefix: ::String?
+                                                }?,
+                                                firehose_stream: {
+                                                  stream_name: ::String
+                                                }?
+                                              }
+                                            }?
+                                          }
+                                        ) -> _UpdateIngestionDestinationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIngestionDestinationResponseSuccess
+    end
+  end
+end
+

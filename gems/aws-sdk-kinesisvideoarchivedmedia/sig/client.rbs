@@ -1,0 +1,199 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module KinesisVideoArchivedMedia
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideoArchivedMedia/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _GetClipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetClipOutput]
+        def content_type: () -> ::String
+        def payload: () -> ::IO
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideoArchivedMedia/Client.html#get_clip-instance_method
+      def get_clip: (
+                      ?stream_name: ::String,
+                      ?stream_arn: ::String,
+                      clip_fragment_selector: {
+                        fragment_selector_type: ("PRODUCER_TIMESTAMP" | "SERVER_TIMESTAMP"),
+                        timestamp_range: {
+                          start_timestamp: ::Time,
+                          end_timestamp: ::Time
+                        }
+                      }
+                    ) ?{ (*untyped) -> void } -> _GetClipResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _GetClipResponseSuccess
+
+      interface _GetDASHStreamingSessionURLResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDASHStreamingSessionURLOutput]
+        def dash_streaming_session_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideoArchivedMedia/Client.html#get_dash_streaming_session_url-instance_method
+      def get_dash_streaming_session_url: (
+                                            ?stream_name: ::String,
+                                            ?stream_arn: ::String,
+                                            ?playback_mode: ("LIVE" | "LIVE_REPLAY" | "ON_DEMAND"),
+                                            ?display_fragment_timestamp: ("ALWAYS" | "NEVER"),
+                                            ?display_fragment_number: ("ALWAYS" | "NEVER"),
+                                            ?dash_fragment_selector: {
+                                              fragment_selector_type: ("PRODUCER_TIMESTAMP" | "SERVER_TIMESTAMP")?,
+                                              timestamp_range: {
+                                                start_timestamp: ::Time?,
+                                                end_timestamp: ::Time?
+                                              }?
+                                            },
+                                            ?expires: ::Integer,
+                                            ?max_manifest_fragment_results: ::Integer
+                                          ) -> _GetDASHStreamingSessionURLResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDASHStreamingSessionURLResponseSuccess
+
+      interface _GetHLSStreamingSessionURLResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetHLSStreamingSessionURLOutput]
+        def hls_streaming_session_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideoArchivedMedia/Client.html#get_hls_streaming_session_url-instance_method
+      def get_hls_streaming_session_url: (
+                                           ?stream_name: ::String,
+                                           ?stream_arn: ::String,
+                                           ?playback_mode: ("LIVE" | "LIVE_REPLAY" | "ON_DEMAND"),
+                                           ?hls_fragment_selector: {
+                                             fragment_selector_type: ("PRODUCER_TIMESTAMP" | "SERVER_TIMESTAMP")?,
+                                             timestamp_range: {
+                                               start_timestamp: ::Time?,
+                                               end_timestamp: ::Time?
+                                             }?
+                                           },
+                                           ?container_format: ("FRAGMENTED_MP4" | "MPEG_TS"),
+                                           ?discontinuity_mode: ("ALWAYS" | "NEVER" | "ON_DISCONTINUITY"),
+                                           ?display_fragment_timestamp: ("ALWAYS" | "NEVER"),
+                                           ?expires: ::Integer,
+                                           ?max_media_playlist_fragment_results: ::Integer
+                                         ) -> _GetHLSStreamingSessionURLResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetHLSStreamingSessionURLResponseSuccess
+
+      interface _GetImagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetImagesOutput]
+        def images: () -> ::Array[Types::Image]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideoArchivedMedia/Client.html#get_images-instance_method
+      def get_images: (
+                        ?stream_name: ::String,
+                        ?stream_arn: ::String,
+                        image_selector_type: ("PRODUCER_TIMESTAMP" | "SERVER_TIMESTAMP"),
+                        start_timestamp: ::Time,
+                        end_timestamp: ::Time,
+                        ?sampling_interval: ::Integer,
+                        format: ("JPEG" | "PNG"),
+                        ?format_config: Hash[("JPEGQuality"), ::String],
+                        ?width_pixels: ::Integer,
+                        ?height_pixels: ::Integer,
+                        ?max_results: ::Integer,
+                        ?next_token: ::String
+                      ) -> _GetImagesResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetImagesResponseSuccess
+
+      interface _GetMediaForFragmentListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMediaForFragmentListOutput]
+        def content_type: () -> ::String
+        def payload: () -> ::IO
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideoArchivedMedia/Client.html#get_media_for_fragment_list-instance_method
+      def get_media_for_fragment_list: (
+                                         ?stream_name: ::String,
+                                         ?stream_arn: ::String,
+                                         fragments: Array[::String]
+                                       ) ?{ (*untyped) -> void } -> _GetMediaForFragmentListResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _GetMediaForFragmentListResponseSuccess
+
+      interface _ListFragmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFragmentsOutput]
+        def fragments: () -> ::Array[Types::Fragment]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideoArchivedMedia/Client.html#list_fragments-instance_method
+      def list_fragments: (
+                            ?stream_name: ::String,
+                            ?stream_arn: ::String,
+                            ?max_results: ::Integer,
+                            ?next_token: ::String,
+                            ?fragment_selector: {
+                              fragment_selector_type: ("PRODUCER_TIMESTAMP" | "SERVER_TIMESTAMP"),
+                              timestamp_range: {
+                                start_timestamp: ::Time,
+                                end_timestamp: ::Time
+                              }
+                            }
+                          ) -> _ListFragmentsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFragmentsResponseSuccess
+    end
+  end
+end
+

@@ -1,0 +1,702 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SMS
+  module Types
+
+    class AppSummary
+      attr_accessor app_id: ::String
+      attr_accessor imported_app_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "DELETE_FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor replication_configuration_status: ("NOT_CONFIGURED" | "CONFIGURED")
+      attr_accessor replication_status: ("READY_FOR_CONFIGURATION" | "CONFIGURATION_IN_PROGRESS" | "CONFIGURATION_INVALID" | "READY_FOR_REPLICATION" | "VALIDATION_IN_PROGRESS" | "REPLICATION_PENDING" | "REPLICATION_IN_PROGRESS" | "REPLICATED" | "PARTIALLY_REPLICATED" | "DELTA_REPLICATION_IN_PROGRESS" | "DELTA_REPLICATED" | "DELTA_REPLICATION_FAILED" | "REPLICATION_FAILED" | "REPLICATION_STOPPING" | "REPLICATION_STOP_FAILED" | "REPLICATION_STOPPED")
+      attr_accessor replication_status_message: ::String
+      attr_accessor latest_replication_time: ::Time
+      attr_accessor launch_configuration_status: ("NOT_CONFIGURED" | "CONFIGURED")
+      attr_accessor launch_status: ("READY_FOR_CONFIGURATION" | "CONFIGURATION_IN_PROGRESS" | "CONFIGURATION_INVALID" | "READY_FOR_LAUNCH" | "VALIDATION_IN_PROGRESS" | "LAUNCH_PENDING" | "LAUNCH_IN_PROGRESS" | "LAUNCHED" | "PARTIALLY_LAUNCHED" | "DELTA_LAUNCH_IN_PROGRESS" | "DELTA_LAUNCH_FAILED" | "LAUNCH_FAILED" | "TERMINATE_IN_PROGRESS" | "TERMINATE_FAILED" | "TERMINATED")
+      attr_accessor launch_status_message: ::String
+      attr_accessor launch_details: Types::LaunchDetails
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified: ::Time
+      attr_accessor role_name: ::String
+      attr_accessor total_server_groups: ::Integer
+      attr_accessor total_servers: ::Integer
+      SENSITIVE: []
+    end
+
+    class AppValidationConfiguration
+      attr_accessor validation_id: ::String
+      attr_accessor name: ::String
+      attr_accessor app_validation_strategy: ("SSM")
+      attr_accessor ssm_validation_parameters: Types::SSMValidationParameters
+      SENSITIVE: []
+    end
+
+    class AppValidationOutput
+      attr_accessor ssm_output: Types::SSMOutput
+      SENSITIVE: []
+    end
+
+    class Connector
+      attr_accessor connector_id: ::String
+      attr_accessor version: ::String
+      attr_accessor status: ("HEALTHY" | "UNHEALTHY")
+      attr_accessor capability_list: ::Array[("VSPHERE" | "SCVMM" | "HYPERV-MANAGER" | "SNAPSHOT_BATCHING" | "SMS_OPTIMIZED")]
+      attr_accessor vm_manager_name: ::String
+      attr_accessor vm_manager_type: ("VSPHERE" | "SCVMM" | "HYPERV-MANAGER")
+      attr_accessor vm_manager_id: ::String
+      attr_accessor ip_address: ::String
+      attr_accessor mac_address: ::String
+      attr_accessor associated_on: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateAppRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor role_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor server_groups: ::Array[Types::ServerGroup]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateAppResponse
+      attr_accessor app_summary: Types::AppSummary
+      attr_accessor server_groups: ::Array[Types::ServerGroup]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateReplicationJobRequest
+      attr_accessor server_id: ::String
+      attr_accessor seed_replication_time: ::Time
+      attr_accessor frequency: ::Integer
+      attr_accessor run_once: bool
+      attr_accessor license_type: ("AWS" | "BYOL")
+      attr_accessor role_name: ::String
+      attr_accessor description: ::String
+      attr_accessor number_of_recent_amis_to_keep: ::Integer
+      attr_accessor encrypted: bool
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateReplicationJobResponse
+      attr_accessor replication_job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAppLaunchConfigurationRequest
+      attr_accessor app_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAppLaunchConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteAppReplicationConfigurationRequest
+      attr_accessor app_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAppReplicationConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteAppRequest
+      attr_accessor app_id: ::String
+      attr_accessor force_stop_app_replication: bool
+      attr_accessor force_terminate_app: bool
+      SENSITIVE: []
+    end
+
+    class DeleteAppResponse < Aws::EmptyStructure
+    end
+
+    class DeleteAppValidationConfigurationRequest
+      attr_accessor app_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAppValidationConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteReplicationJobRequest
+      attr_accessor replication_job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteReplicationJobResponse < Aws::EmptyStructure
+    end
+
+    class DeleteServerCatalogRequest < Aws::EmptyStructure
+    end
+
+    class DeleteServerCatalogResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateConnectorRequest
+      attr_accessor connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateConnectorResponse < Aws::EmptyStructure
+    end
+
+    class DryRunOperationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GenerateChangeSetRequest
+      attr_accessor app_id: ::String
+      attr_accessor changeset_format: ("JSON" | "YAML")
+      SENSITIVE: []
+    end
+
+    class GenerateChangeSetResponse
+      attr_accessor s3_location: Types::S3Location
+      SENSITIVE: []
+    end
+
+    class GenerateTemplateRequest
+      attr_accessor app_id: ::String
+      attr_accessor template_format: ("JSON" | "YAML")
+      SENSITIVE: []
+    end
+
+    class GenerateTemplateResponse
+      attr_accessor s3_location: Types::S3Location
+      SENSITIVE: []
+    end
+
+    class GetAppLaunchConfigurationRequest
+      attr_accessor app_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAppLaunchConfigurationResponse
+      attr_accessor app_id: ::String
+      attr_accessor role_name: ::String
+      attr_accessor auto_launch: bool
+      attr_accessor server_group_launch_configurations: ::Array[Types::ServerGroupLaunchConfiguration]
+      SENSITIVE: []
+    end
+
+    class GetAppReplicationConfigurationRequest
+      attr_accessor app_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAppReplicationConfigurationResponse
+      attr_accessor server_group_replication_configurations: ::Array[Types::ServerGroupReplicationConfiguration]
+      SENSITIVE: []
+    end
+
+    class GetAppRequest
+      attr_accessor app_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAppResponse
+      attr_accessor app_summary: Types::AppSummary
+      attr_accessor server_groups: ::Array[Types::ServerGroup]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class GetAppValidationConfigurationRequest
+      attr_accessor app_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAppValidationConfigurationResponse
+      attr_accessor app_validation_configurations: ::Array[Types::AppValidationConfiguration]
+      attr_accessor server_group_validation_configurations: ::Array[Types::ServerGroupValidationConfiguration]
+      SENSITIVE: []
+    end
+
+    class GetAppValidationOutputRequest
+      attr_accessor app_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAppValidationOutputResponse
+      attr_accessor validation_output_list: ::Array[Types::ValidationOutput]
+      SENSITIVE: []
+    end
+
+    class GetConnectorsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetConnectorsResponse
+      attr_accessor connector_list: ::Array[Types::Connector]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetReplicationJobsRequest
+      attr_accessor replication_job_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetReplicationJobsResponse
+      attr_accessor replication_job_list: ::Array[Types::ReplicationJob]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetReplicationRunsRequest
+      attr_accessor replication_job_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetReplicationRunsResponse
+      attr_accessor replication_job: Types::ReplicationJob
+      attr_accessor replication_run_list: ::Array[Types::ReplicationRun]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetServersRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor vm_server_address_list: ::Array[Types::VmServerAddress]
+      SENSITIVE: []
+    end
+
+    class GetServersResponse
+      attr_accessor last_modified_on: ::Time
+      attr_accessor server_catalog_status: ("NOT_IMPORTED" | "IMPORTING" | "AVAILABLE" | "DELETED" | "EXPIRED")
+      attr_accessor server_list: ::Array[Types::Server]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ImportAppCatalogRequest
+      attr_accessor role_name: ::String
+      SENSITIVE: []
+    end
+
+    class ImportAppCatalogResponse < Aws::EmptyStructure
+    end
+
+    class ImportServerCatalogRequest < Aws::EmptyStructure
+    end
+
+    class ImportServerCatalogResponse < Aws::EmptyStructure
+    end
+
+    class InternalError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LaunchAppRequest
+      attr_accessor app_id: ::String
+      SENSITIVE: []
+    end
+
+    class LaunchAppResponse < Aws::EmptyStructure
+    end
+
+    class LaunchDetails
+      attr_accessor latest_launch_time: ::Time
+      attr_accessor stack_name: ::String
+      attr_accessor stack_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppsRequest
+      attr_accessor app_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAppsResponse
+      attr_accessor apps: ::Array[Types::AppSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MissingRequiredParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoConnectorsAvailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NotificationContext
+      attr_accessor validation_id: ::String
+      attr_accessor status: ("READY_FOR_VALIDATION" | "PENDING" | "IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class NotifyAppValidationOutputRequest
+      attr_accessor app_id: ::String
+      attr_accessor notification_context: Types::NotificationContext
+      SENSITIVE: []
+    end
+
+    class NotifyAppValidationOutputResponse < Aws::EmptyStructure
+    end
+
+    class OperationNotPermittedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PutAppLaunchConfigurationRequest
+      attr_accessor app_id: ::String
+      attr_accessor role_name: ::String
+      attr_accessor auto_launch: bool
+      attr_accessor server_group_launch_configurations: ::Array[Types::ServerGroupLaunchConfiguration]
+      SENSITIVE: []
+    end
+
+    class PutAppLaunchConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class PutAppReplicationConfigurationRequest
+      attr_accessor app_id: ::String
+      attr_accessor server_group_replication_configurations: ::Array[Types::ServerGroupReplicationConfiguration]
+      SENSITIVE: []
+    end
+
+    class PutAppReplicationConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class PutAppValidationConfigurationRequest
+      attr_accessor app_id: ::String
+      attr_accessor app_validation_configurations: ::Array[Types::AppValidationConfiguration]
+      attr_accessor server_group_validation_configurations: ::Array[Types::ServerGroupValidationConfiguration]
+      SENSITIVE: []
+    end
+
+    class PutAppValidationConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class ReplicationJob
+      attr_accessor replication_job_id: ::String
+      attr_accessor server_id: ::String
+      attr_accessor server_type: ("VIRTUAL_MACHINE")
+      attr_accessor vm_server: Types::VmServer
+      attr_accessor seed_replication_time: ::Time
+      attr_accessor frequency: ::Integer
+      attr_accessor run_once: bool
+      attr_accessor next_replication_run_start_time: ::Time
+      attr_accessor license_type: ("AWS" | "BYOL")
+      attr_accessor role_name: ::String
+      attr_accessor latest_ami_id: ::String
+      attr_accessor state: ("PENDING" | "ACTIVE" | "FAILED" | "DELETING" | "DELETED" | "COMPLETED" | "PAUSED_ON_FAILURE" | "FAILING")
+      attr_accessor status_message: ::String
+      attr_accessor description: ::String
+      attr_accessor number_of_recent_amis_to_keep: ::Integer
+      attr_accessor encrypted: bool
+      attr_accessor kms_key_id: ::String
+      attr_accessor replication_run_list: ::Array[Types::ReplicationRun]
+      SENSITIVE: []
+    end
+
+    class ReplicationJobAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ReplicationJobNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ReplicationRun
+      attr_accessor replication_run_id: ::String
+      attr_accessor state: ("PENDING" | "MISSED" | "ACTIVE" | "FAILED" | "COMPLETED" | "DELETING" | "DELETED")
+      attr_accessor type: ("ON_DEMAND" | "AUTOMATIC")
+      attr_accessor stage_details: Types::ReplicationRunStageDetails
+      attr_accessor status_message: ::String
+      attr_accessor ami_id: ::String
+      attr_accessor scheduled_start_time: ::Time
+      attr_accessor completed_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor encrypted: bool
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class ReplicationRunLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ReplicationRunStageDetails
+      attr_accessor stage: ::String
+      attr_accessor stage_progress: ::String
+      SENSITIVE: []
+    end
+
+    class S3Location
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      SENSITIVE: []
+    end
+
+    class SSMOutput
+      attr_accessor s3_location: Types::S3Location
+      SENSITIVE: []
+    end
+
+    class SSMValidationParameters
+      attr_accessor source: Types::Source
+      attr_accessor instance_id: ::String
+      attr_accessor script_type: ("SHELL_SCRIPT" | "POWERSHELL_SCRIPT")
+      attr_accessor command: ::String
+      attr_accessor execution_timeout_seconds: ::Integer
+      attr_accessor output_s3_bucket_name: ::String
+      SENSITIVE: []
+    end
+
+    class Server
+      attr_accessor server_id: ::String
+      attr_accessor server_type: ("VIRTUAL_MACHINE")
+      attr_accessor vm_server: Types::VmServer
+      attr_accessor replication_job_id: ::String
+      attr_accessor replication_job_terminated: bool
+      SENSITIVE: []
+    end
+
+    class ServerCannotBeReplicatedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServerGroup
+      attr_accessor server_group_id: ::String
+      attr_accessor name: ::String
+      attr_accessor server_list: ::Array[Types::Server]
+      SENSITIVE: []
+    end
+
+    class ServerGroupLaunchConfiguration
+      attr_accessor server_group_id: ::String
+      attr_accessor launch_order: ::Integer
+      attr_accessor server_launch_configurations: ::Array[Types::ServerLaunchConfiguration]
+      SENSITIVE: []
+    end
+
+    class ServerGroupReplicationConfiguration
+      attr_accessor server_group_id: ::String
+      attr_accessor server_replication_configurations: ::Array[Types::ServerReplicationConfiguration]
+      SENSITIVE: []
+    end
+
+    class ServerGroupValidationConfiguration
+      attr_accessor server_group_id: ::String
+      attr_accessor server_validation_configurations: ::Array[Types::ServerValidationConfiguration]
+      SENSITIVE: []
+    end
+
+    class ServerLaunchConfiguration
+      attr_accessor server: Types::Server
+      attr_accessor logical_id: ::String
+      attr_accessor vpc: ::String
+      attr_accessor subnet: ::String
+      attr_accessor security_group: ::String
+      attr_accessor ec2_key_name: ::String
+      attr_accessor user_data: Types::UserData
+      attr_accessor instance_type: ::String
+      attr_accessor associate_public_ip_address: bool
+      attr_accessor iam_instance_profile_name: ::String
+      attr_accessor configure_script: Types::S3Location
+      attr_accessor configure_script_type: ("SHELL_SCRIPT" | "POWERSHELL_SCRIPT")
+      SENSITIVE: []
+    end
+
+    class ServerReplicationConfiguration
+      attr_accessor server: Types::Server
+      attr_accessor server_replication_parameters: Types::ServerReplicationParameters
+      SENSITIVE: []
+    end
+
+    class ServerReplicationParameters
+      attr_accessor seed_time: ::Time
+      attr_accessor frequency: ::Integer
+      attr_accessor run_once: bool
+      attr_accessor license_type: ("AWS" | "BYOL")
+      attr_accessor number_of_recent_amis_to_keep: ::Integer
+      attr_accessor encrypted: bool
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class ServerValidationConfiguration
+      attr_accessor server: Types::Server
+      attr_accessor validation_id: ::String
+      attr_accessor name: ::String
+      attr_accessor server_validation_strategy: ("USERDATA")
+      attr_accessor user_data_validation_parameters: Types::UserDataValidationParameters
+      SENSITIVE: []
+    end
+
+    class ServerValidationOutput
+      attr_accessor server: Types::Server
+      SENSITIVE: []
+    end
+
+    class Source
+      attr_accessor s3_location: Types::S3Location
+      SENSITIVE: []
+    end
+
+    class StartAppReplicationRequest
+      attr_accessor app_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartAppReplicationResponse < Aws::EmptyStructure
+    end
+
+    class StartOnDemandAppReplicationRequest
+      attr_accessor app_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class StartOnDemandAppReplicationResponse < Aws::EmptyStructure
+    end
+
+    class StartOnDemandReplicationRunRequest
+      attr_accessor replication_job_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class StartOnDemandReplicationRunResponse
+      attr_accessor replication_run_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopAppReplicationRequest
+      attr_accessor app_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopAppReplicationResponse < Aws::EmptyStructure
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TemporarilyUnavailableException < Aws::EmptyStructure
+    end
+
+    class TerminateAppRequest
+      attr_accessor app_id: ::String
+      SENSITIVE: []
+    end
+
+    class TerminateAppResponse < Aws::EmptyStructure
+    end
+
+    class UnauthorizedOperationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAppRequest
+      attr_accessor app_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor role_name: ::String
+      attr_accessor server_groups: ::Array[Types::ServerGroup]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class UpdateAppResponse
+      attr_accessor app_summary: Types::AppSummary
+      attr_accessor server_groups: ::Array[Types::ServerGroup]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class UpdateReplicationJobRequest
+      attr_accessor replication_job_id: ::String
+      attr_accessor frequency: ::Integer
+      attr_accessor next_replication_run_start_time: ::Time
+      attr_accessor license_type: ("AWS" | "BYOL")
+      attr_accessor role_name: ::String
+      attr_accessor description: ::String
+      attr_accessor number_of_recent_amis_to_keep: ::Integer
+      attr_accessor encrypted: bool
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateReplicationJobResponse < Aws::EmptyStructure
+    end
+
+    class UserData
+      attr_accessor s3_location: Types::S3Location
+      SENSITIVE: []
+    end
+
+    class UserDataValidationParameters
+      attr_accessor source: Types::Source
+      attr_accessor script_type: ("SHELL_SCRIPT" | "POWERSHELL_SCRIPT")
+      SENSITIVE: []
+    end
+
+    class ValidationOutput
+      attr_accessor validation_id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("READY_FOR_VALIDATION" | "PENDING" | "IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor latest_validation_time: ::Time
+      attr_accessor app_validation_output: Types::AppValidationOutput
+      attr_accessor server_validation_output: Types::ServerValidationOutput
+      SENSITIVE: []
+    end
+
+    class VmServer
+      attr_accessor vm_server_address: Types::VmServerAddress
+      attr_accessor vm_name: ::String
+      attr_accessor vm_manager_name: ::String
+      attr_accessor vm_manager_type: ("VSPHERE" | "SCVMM" | "HYPERV-MANAGER")
+      attr_accessor vm_path: ::String
+      SENSITIVE: []
+    end
+
+    class VmServerAddress
+      attr_accessor vm_manager_id: ::String
+      attr_accessor vm_id: ::String
+      SENSITIVE: []
+    end
+  end
+end

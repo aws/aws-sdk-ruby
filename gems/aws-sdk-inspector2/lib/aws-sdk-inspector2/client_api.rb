@@ -230,6 +230,7 @@ module Aws::Inspector2
     EcrConfiguration = Shapes::StructureShape.new(name: 'EcrConfiguration')
     EcrConfigurationState = Shapes::StructureShape.new(name: 'EcrConfigurationState')
     EcrContainerImageMetadata = Shapes::StructureShape.new(name: 'EcrContainerImageMetadata')
+    EcrPullDateRescanDuration = Shapes::StringShape.new(name: 'EcrPullDateRescanDuration')
     EcrRepositoryMetadata = Shapes::StructureShape.new(name: 'EcrRepositoryMetadata')
     EcrRescanDuration = Shapes::StringShape.new(name: 'EcrRescanDuration')
     EcrRescanDurationState = Shapes::StructureShape.new(name: 'EcrRescanDurationState')
@@ -1071,6 +1072,7 @@ module Aws::Inspector2
     CoverageFilterCriteria.add_member(:ec2_instance_tags, Shapes::ShapeRef.new(shape: CoverageMapFilterList, location_name: "ec2InstanceTags"))
     CoverageFilterCriteria.add_member(:ecr_image_tags, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "ecrImageTags"))
     CoverageFilterCriteria.add_member(:ecr_repository_name, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "ecrRepositoryName"))
+    CoverageFilterCriteria.add_member(:image_pulled_at, Shapes::ShapeRef.new(shape: CoverageDateFilterList, location_name: "imagePulledAt"))
     CoverageFilterCriteria.add_member(:lambda_function_name, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "lambdaFunctionName"))
     CoverageFilterCriteria.add_member(:lambda_function_runtime, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "lambdaFunctionRuntime"))
     CoverageFilterCriteria.add_member(:lambda_function_tags, Shapes::ShapeRef.new(shape: CoverageMapFilterList, location_name: "lambdaFunctionTags"))
@@ -1273,12 +1275,14 @@ module Aws::Inspector2
     Ec2Metadata.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     Ec2Metadata.struct_class = Types::Ec2Metadata
 
+    EcrConfiguration.add_member(:pull_date_rescan_duration, Shapes::ShapeRef.new(shape: EcrPullDateRescanDuration, location_name: "pullDateRescanDuration"))
     EcrConfiguration.add_member(:rescan_duration, Shapes::ShapeRef.new(shape: EcrRescanDuration, required: true, location_name: "rescanDuration"))
     EcrConfiguration.struct_class = Types::EcrConfiguration
 
     EcrConfigurationState.add_member(:rescan_duration_state, Shapes::ShapeRef.new(shape: EcrRescanDurationState, location_name: "rescanDurationState"))
     EcrConfigurationState.struct_class = Types::EcrConfigurationState
 
+    EcrContainerImageMetadata.add_member(:image_pulled_at, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "imagePulledAt"))
     EcrContainerImageMetadata.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     EcrContainerImageMetadata.struct_class = Types::EcrContainerImageMetadata
 
@@ -1286,6 +1290,7 @@ module Aws::Inspector2
     EcrRepositoryMetadata.add_member(:scan_frequency, Shapes::ShapeRef.new(shape: EcrScanFrequency, location_name: "scanFrequency"))
     EcrRepositoryMetadata.struct_class = Types::EcrRepositoryMetadata
 
+    EcrRescanDurationState.add_member(:pull_date_rescan_duration, Shapes::ShapeRef.new(shape: EcrPullDateRescanDuration, location_name: "pullDateRescanDuration"))
     EcrRescanDurationState.add_member(:rescan_duration, Shapes::ShapeRef.new(shape: EcrRescanDuration, location_name: "rescanDuration"))
     EcrRescanDurationState.add_member(:status, Shapes::ShapeRef.new(shape: EcrRescanDurationStatus, location_name: "status"))
     EcrRescanDurationState.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "updatedAt"))

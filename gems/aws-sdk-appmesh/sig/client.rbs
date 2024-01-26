@@ -1,0 +1,2058 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AppMesh
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateGatewayRouteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGatewayRouteOutput]
+        def gateway_route: () -> Types::GatewayRouteData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#create_gateway_route-instance_method
+      def create_gateway_route: (
+                                  ?client_token: ::String,
+                                  gateway_route_name: ::String,
+                                  mesh_name: ::String,
+                                  ?mesh_owner: ::String,
+                                  spec: {
+                                    grpc_route: {
+                                      action: {
+                                        rewrite: {
+                                          hostname: {
+                                            default_target_hostname: ("ENABLED" | "DISABLED")?
+                                          }?
+                                        }?,
+                                        target: {
+                                          port: ::Integer?,
+                                          virtual_service: {
+                                            virtual_service_name: ::String
+                                          }
+                                        }
+                                      },
+                                      match: {
+                                        hostname: {
+                                          exact: ::String?,
+                                          suffix: ::String?
+                                        }?,
+                                        metadata: Array[
+                                          {
+                                            invert: bool?,
+                                            match: {
+                                              exact: ::String?,
+                                              prefix: ::String?,
+                                              range: {
+                                                end: ::Integer,
+                                                start: ::Integer
+                                              }?,
+                                              regex: ::String?,
+                                              suffix: ::String?
+                                            }?,
+                                            name: ::String
+                                          },
+                                        ]?,
+                                        port: ::Integer?,
+                                        service_name: ::String?
+                                      }
+                                    }?,
+                                    http2_route: {
+                                      action: {
+                                        rewrite: {
+                                          hostname: {
+                                            default_target_hostname: ("ENABLED" | "DISABLED")?
+                                          }?,
+                                          path: {
+                                            exact: ::String?
+                                          }?,
+                                          prefix: {
+                                            default_prefix: ("ENABLED" | "DISABLED")?,
+                                            value: ::String?
+                                          }?
+                                        }?,
+                                        target: {
+                                          port: ::Integer?,
+                                          virtual_service: {
+                                            virtual_service_name: ::String
+                                          }
+                                        }
+                                      },
+                                      match: {
+                                        headers: Array[
+                                          {
+                                            invert: bool?,
+                                            match: {
+                                              exact: ::String?,
+                                              prefix: ::String?,
+                                              range: {
+                                                end: ::Integer,
+                                                start: ::Integer
+                                              }?,
+                                              regex: ::String?,
+                                              suffix: ::String?
+                                            }?,
+                                            name: ::String
+                                          },
+                                        ]?,
+                                        hostname: {
+                                          exact: ::String?,
+                                          suffix: ::String?
+                                        }?,
+                                        method: ("GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH")?,
+                                        path: {
+                                          exact: ::String?,
+                                          regex: ::String?
+                                        }?,
+                                        port: ::Integer?,
+                                        prefix: ::String?,
+                                        query_parameters: Array[
+                                          {
+                                            match: {
+                                              exact: ::String?
+                                            }?,
+                                            name: ::String
+                                          },
+                                        ]?
+                                      }
+                                    }?,
+                                    http_route: {
+                                      action: {
+                                        rewrite: {
+                                          hostname: {
+                                            default_target_hostname: ("ENABLED" | "DISABLED")?
+                                          }?,
+                                          path: {
+                                            exact: ::String?
+                                          }?,
+                                          prefix: {
+                                            default_prefix: ("ENABLED" | "DISABLED")?,
+                                            value: ::String?
+                                          }?
+                                        }?,
+                                        target: {
+                                          port: ::Integer?,
+                                          virtual_service: {
+                                            virtual_service_name: ::String
+                                          }
+                                        }
+                                      },
+                                      match: {
+                                        headers: Array[
+                                          {
+                                            invert: bool?,
+                                            match: {
+                                              exact: ::String?,
+                                              prefix: ::String?,
+                                              range: {
+                                                end: ::Integer,
+                                                start: ::Integer
+                                              }?,
+                                              regex: ::String?,
+                                              suffix: ::String?
+                                            }?,
+                                            name: ::String
+                                          },
+                                        ]?,
+                                        hostname: {
+                                          exact: ::String?,
+                                          suffix: ::String?
+                                        }?,
+                                        method: ("GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH")?,
+                                        path: {
+                                          exact: ::String?,
+                                          regex: ::String?
+                                        }?,
+                                        port: ::Integer?,
+                                        prefix: ::String?,
+                                        query_parameters: Array[
+                                          {
+                                            match: {
+                                              exact: ::String?
+                                            }?,
+                                            name: ::String
+                                          },
+                                        ]?
+                                      }
+                                    }?,
+                                    priority: ::Integer?
+                                  },
+                                  ?tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String
+                                    },
+                                  ],
+                                  virtual_gateway_name: ::String
+                                ) -> _CreateGatewayRouteResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGatewayRouteResponseSuccess
+
+      interface _CreateMeshResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMeshOutput]
+        def mesh: () -> Types::MeshData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#create_mesh-instance_method
+      def create_mesh: (
+                         ?client_token: ::String,
+                         mesh_name: ::String,
+                         ?spec: {
+                           egress_filter: {
+                             type: ("ALLOW_ALL" | "DROP_ALL")
+                           }?,
+                           service_discovery: {
+                             ip_preference: ("IPv6_PREFERRED" | "IPv4_PREFERRED" | "IPv4_ONLY" | "IPv6_ONLY")?
+                           }?
+                         },
+                         ?tags: Array[
+                           {
+                             key: ::String,
+                             value: ::String
+                           },
+                         ]
+                       ) -> _CreateMeshResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMeshResponseSuccess
+
+      interface _CreateRouteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRouteOutput]
+        def route: () -> Types::RouteData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#create_route-instance_method
+      def create_route: (
+                          ?client_token: ::String,
+                          mesh_name: ::String,
+                          ?mesh_owner: ::String,
+                          route_name: ::String,
+                          spec: {
+                            grpc_route: {
+                              action: {
+                                weighted_targets: Array[
+                                  {
+                                    port: ::Integer?,
+                                    virtual_node: ::String,
+                                    weight: ::Integer
+                                  },
+                                ]
+                              },
+                              match: {
+                                metadata: Array[
+                                  {
+                                    invert: bool?,
+                                    match: {
+                                      exact: ::String?,
+                                      prefix: ::String?,
+                                      range: {
+                                        end: ::Integer,
+                                        start: ::Integer
+                                      }?,
+                                      regex: ::String?,
+                                      suffix: ::String?
+                                    }?,
+                                    name: ::String
+                                  },
+                                ]?,
+                                method_name: ::String?,
+                                port: ::Integer?,
+                                service_name: ::String?
+                              },
+                              retry_policy: {
+                                grpc_retry_events: Array[("cancelled" | "deadline-exceeded" | "internal" | "resource-exhausted" | "unavailable")]?,
+                                http_retry_events: Array[::String]?,
+                                max_retries: ::Integer,
+                                per_retry_timeout: {
+                                  unit: ("s" | "ms")?,
+                                  value: ::Integer?
+                                },
+                                tcp_retry_events: Array[("connection-error")]?
+                              }?,
+                              timeout: {
+                                idle: {
+                                  unit: ("s" | "ms")?,
+                                  value: ::Integer?
+                                }?,
+                                per_request: {
+                                  unit: ("s" | "ms")?,
+                                  value: ::Integer?
+                                }?
+                              }?
+                            }?,
+                            http2_route: {
+                              action: {
+                                weighted_targets: Array[
+                                  {
+                                    port: ::Integer?,
+                                    virtual_node: ::String,
+                                    weight: ::Integer
+                                  },
+                                ]
+                              },
+                              match: {
+                                headers: Array[
+                                  {
+                                    invert: bool?,
+                                    match: {
+                                      exact: ::String?,
+                                      prefix: ::String?,
+                                      range: {
+                                        end: ::Integer,
+                                        start: ::Integer
+                                      }?,
+                                      regex: ::String?,
+                                      suffix: ::String?
+                                    }?,
+                                    name: ::String
+                                  },
+                                ]?,
+                                method: ("GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH")?,
+                                path: {
+                                  exact: ::String?,
+                                  regex: ::String?
+                                }?,
+                                port: ::Integer?,
+                                prefix: ::String?,
+                                query_parameters: Array[
+                                  {
+                                    match: {
+                                      exact: ::String?
+                                    }?,
+                                    name: ::String
+                                  },
+                                ]?,
+                                scheme: ("http" | "https")?
+                              },
+                              retry_policy: {
+                                http_retry_events: Array[::String]?,
+                                max_retries: ::Integer,
+                                per_retry_timeout: {
+                                  unit: ("s" | "ms")?,
+                                  value: ::Integer?
+                                },
+                                tcp_retry_events: Array[("connection-error")]?
+                              }?,
+                              timeout: {
+                                idle: {
+                                  unit: ("s" | "ms")?,
+                                  value: ::Integer?
+                                }?,
+                                per_request: {
+                                  unit: ("s" | "ms")?,
+                                  value: ::Integer?
+                                }?
+                              }?
+                            }?,
+                            http_route: {
+                              action: {
+                                weighted_targets: Array[
+                                  {
+                                    port: ::Integer?,
+                                    virtual_node: ::String,
+                                    weight: ::Integer
+                                  },
+                                ]
+                              },
+                              match: {
+                                headers: Array[
+                                  {
+                                    invert: bool?,
+                                    match: {
+                                      exact: ::String?,
+                                      prefix: ::String?,
+                                      range: {
+                                        end: ::Integer,
+                                        start: ::Integer
+                                      }?,
+                                      regex: ::String?,
+                                      suffix: ::String?
+                                    }?,
+                                    name: ::String
+                                  },
+                                ]?,
+                                method: ("GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH")?,
+                                path: {
+                                  exact: ::String?,
+                                  regex: ::String?
+                                }?,
+                                port: ::Integer?,
+                                prefix: ::String?,
+                                query_parameters: Array[
+                                  {
+                                    match: {
+                                      exact: ::String?
+                                    }?,
+                                    name: ::String
+                                  },
+                                ]?,
+                                scheme: ("http" | "https")?
+                              },
+                              retry_policy: {
+                                http_retry_events: Array[::String]?,
+                                max_retries: ::Integer,
+                                per_retry_timeout: {
+                                  unit: ("s" | "ms")?,
+                                  value: ::Integer?
+                                },
+                                tcp_retry_events: Array[("connection-error")]?
+                              }?,
+                              timeout: {
+                                idle: {
+                                  unit: ("s" | "ms")?,
+                                  value: ::Integer?
+                                }?,
+                                per_request: {
+                                  unit: ("s" | "ms")?,
+                                  value: ::Integer?
+                                }?
+                              }?
+                            }?,
+                            priority: ::Integer?,
+                            tcp_route: {
+                              action: {
+                                weighted_targets: Array[
+                                  {
+                                    port: ::Integer?,
+                                    virtual_node: ::String,
+                                    weight: ::Integer
+                                  },
+                                ]
+                              },
+                              match: {
+                                port: ::Integer?
+                              }?,
+                              timeout: {
+                                idle: {
+                                  unit: ("s" | "ms")?,
+                                  value: ::Integer?
+                                }?
+                              }?
+                            }?
+                          },
+                          ?tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ],
+                          virtual_router_name: ::String
+                        ) -> _CreateRouteResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRouteResponseSuccess
+
+      interface _CreateVirtualGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVirtualGatewayOutput]
+        def virtual_gateway: () -> Types::VirtualGatewayData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#create_virtual_gateway-instance_method
+      def create_virtual_gateway: (
+                                    ?client_token: ::String,
+                                    mesh_name: ::String,
+                                    ?mesh_owner: ::String,
+                                    spec: {
+                                      backend_defaults: {
+                                        client_policy: {
+                                          tls: {
+                                            certificate: {
+                                              file: {
+                                                certificate_chain: ::String,
+                                                private_key: ::String
+                                              }?,
+                                              sds: {
+                                                secret_name: ::String
+                                              }?
+                                            }?,
+                                            enforce: bool?,
+                                            ports: Array[::Integer]?,
+                                            validation: {
+                                              subject_alternative_names: {
+                                                match: {
+                                                  exact: Array[::String]
+                                                }
+                                              }?,
+                                              trust: {
+                                                acm: {
+                                                  certificate_authority_arns: Array[::String]
+                                                }?,
+                                                file: {
+                                                  certificate_chain: ::String
+                                                }?,
+                                                sds: {
+                                                  secret_name: ::String
+                                                }?
+                                              }
+                                            }
+                                          }?
+                                        }?
+                                      }?,
+                                      listeners: Array[
+                                        {
+                                          connection_pool: {
+                                            grpc: {
+                                              max_requests: ::Integer
+                                            }?,
+                                            http: {
+                                              max_connections: ::Integer,
+                                              max_pending_requests: ::Integer?
+                                            }?,
+                                            http2: {
+                                              max_requests: ::Integer
+                                            }?
+                                          }?,
+                                          health_check: {
+                                            healthy_threshold: ::Integer,
+                                            interval_millis: ::Integer,
+                                            path: ::String?,
+                                            port: ::Integer?,
+                                            protocol: ("http" | "http2" | "grpc"),
+                                            timeout_millis: ::Integer,
+                                            unhealthy_threshold: ::Integer
+                                          }?,
+                                          port_mapping: {
+                                            port: ::Integer,
+                                            protocol: ("http" | "http2" | "grpc")
+                                          },
+                                          tls: {
+                                            certificate: {
+                                              acm: {
+                                                certificate_arn: ::String
+                                              }?,
+                                              file: {
+                                                certificate_chain: ::String,
+                                                private_key: ::String
+                                              }?,
+                                              sds: {
+                                                secret_name: ::String
+                                              }?
+                                            },
+                                            mode: ("STRICT" | "PERMISSIVE" | "DISABLED"),
+                                            validation: {
+                                              subject_alternative_names: {
+                                                match: {
+                                                  exact: Array[::String]
+                                                }
+                                              }?,
+                                              trust: {
+                                                file: {
+                                                  certificate_chain: ::String
+                                                }?,
+                                                sds: {
+                                                  secret_name: ::String
+                                                }?
+                                              }
+                                            }?
+                                          }?
+                                        },
+                                      ],
+                                      logging: {
+                                        access_log: {
+                                          file: {
+                                            format: {
+                                              json: Array[
+                                                {
+                                                  key: ::String,
+                                                  value: ::String
+                                                },
+                                              ]?,
+                                              text: ::String?
+                                            }?,
+                                            path: ::String
+                                          }?
+                                        }?
+                                      }?
+                                    },
+                                    ?tags: Array[
+                                      {
+                                        key: ::String,
+                                        value: ::String
+                                      },
+                                    ],
+                                    virtual_gateway_name: ::String
+                                  ) -> _CreateVirtualGatewayResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVirtualGatewayResponseSuccess
+
+      interface _CreateVirtualNodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVirtualNodeOutput]
+        def virtual_node: () -> Types::VirtualNodeData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#create_virtual_node-instance_method
+      def create_virtual_node: (
+                                 ?client_token: ::String,
+                                 mesh_name: ::String,
+                                 ?mesh_owner: ::String,
+                                 spec: {
+                                   backend_defaults: {
+                                     client_policy: {
+                                       tls: {
+                                         certificate: {
+                                           file: {
+                                             certificate_chain: ::String,
+                                             private_key: ::String
+                                           }?,
+                                           sds: {
+                                             secret_name: ::String
+                                           }?
+                                         }?,
+                                         enforce: bool?,
+                                         ports: Array[::Integer]?,
+                                         validation: {
+                                           subject_alternative_names: {
+                                             match: {
+                                               exact: Array[::String]
+                                             }
+                                           }?,
+                                           trust: {
+                                             acm: {
+                                               certificate_authority_arns: Array[::String]
+                                             }?,
+                                             file: {
+                                               certificate_chain: ::String
+                                             }?,
+                                             sds: {
+                                               secret_name: ::String
+                                             }?
+                                           }
+                                         }
+                                       }?
+                                     }?
+                                   }?,
+                                   backends: Array[
+                                     {
+                                       virtual_service: {
+                                         client_policy: {
+                                           tls: {
+                                             certificate: {
+                                               file: {
+                                                 certificate_chain: ::String,
+                                                 private_key: ::String
+                                               }?,
+                                               sds: {
+                                                 secret_name: ::String
+                                               }?
+                                             }?,
+                                             enforce: bool?,
+                                             ports: Array[::Integer]?,
+                                             validation: {
+                                               subject_alternative_names: {
+                                                 match: {
+                                                   exact: Array[::String]
+                                                 }
+                                               }?,
+                                               trust: {
+                                                 acm: {
+                                                   certificate_authority_arns: Array[::String]
+                                                 }?,
+                                                 file: {
+                                                   certificate_chain: ::String
+                                                 }?,
+                                                 sds: {
+                                                   secret_name: ::String
+                                                 }?
+                                               }
+                                             }
+                                           }?
+                                         }?,
+                                         virtual_service_name: ::String
+                                       }?
+                                     },
+                                   ]?,
+                                   listeners: Array[
+                                     {
+                                       connection_pool: {
+                                         grpc: {
+                                           max_requests: ::Integer
+                                         }?,
+                                         http: {
+                                           max_connections: ::Integer,
+                                           max_pending_requests: ::Integer?
+                                         }?,
+                                         http2: {
+                                           max_requests: ::Integer
+                                         }?,
+                                         tcp: {
+                                           max_connections: ::Integer
+                                         }?
+                                       }?,
+                                       health_check: {
+                                         healthy_threshold: ::Integer,
+                                         interval_millis: ::Integer,
+                                         path: ::String?,
+                                         port: ::Integer?,
+                                         protocol: ("http" | "tcp" | "http2" | "grpc"),
+                                         timeout_millis: ::Integer,
+                                         unhealthy_threshold: ::Integer
+                                       }?,
+                                       outlier_detection: {
+                                         base_ejection_duration: {
+                                           unit: ("s" | "ms")?,
+                                           value: ::Integer?
+                                         },
+                                         interval: {
+                                           unit: ("s" | "ms")?,
+                                           value: ::Integer?
+                                         },
+                                         max_ejection_percent: ::Integer,
+                                         max_server_errors: ::Integer
+                                       }?,
+                                       port_mapping: {
+                                         port: ::Integer,
+                                         protocol: ("http" | "tcp" | "http2" | "grpc")
+                                       },
+                                       timeout: {
+                                         grpc: {
+                                           idle: {
+                                             unit: ("s" | "ms")?,
+                                             value: ::Integer?
+                                           }?,
+                                           per_request: {
+                                             unit: ("s" | "ms")?,
+                                             value: ::Integer?
+                                           }?
+                                         }?,
+                                         http: {
+                                           idle: {
+                                             unit: ("s" | "ms")?,
+                                             value: ::Integer?
+                                           }?,
+                                           per_request: {
+                                             unit: ("s" | "ms")?,
+                                             value: ::Integer?
+                                           }?
+                                         }?,
+                                         http2: {
+                                           idle: {
+                                             unit: ("s" | "ms")?,
+                                             value: ::Integer?
+                                           }?,
+                                           per_request: {
+                                             unit: ("s" | "ms")?,
+                                             value: ::Integer?
+                                           }?
+                                         }?,
+                                         tcp: {
+                                           idle: {
+                                             unit: ("s" | "ms")?,
+                                             value: ::Integer?
+                                           }?
+                                         }?
+                                       }?,
+                                       tls: {
+                                         certificate: {
+                                           acm: {
+                                             certificate_arn: ::String
+                                           }?,
+                                           file: {
+                                             certificate_chain: ::String,
+                                             private_key: ::String
+                                           }?,
+                                           sds: {
+                                             secret_name: ::String
+                                           }?
+                                         },
+                                         mode: ("STRICT" | "PERMISSIVE" | "DISABLED"),
+                                         validation: {
+                                           subject_alternative_names: {
+                                             match: {
+                                               exact: Array[::String]
+                                             }
+                                           }?,
+                                           trust: {
+                                             file: {
+                                               certificate_chain: ::String
+                                             }?,
+                                             sds: {
+                                               secret_name: ::String
+                                             }?
+                                           }
+                                         }?
+                                       }?
+                                     },
+                                   ]?,
+                                   logging: {
+                                     access_log: {
+                                       file: {
+                                         format: {
+                                           json: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           text: ::String?
+                                         }?,
+                                         path: ::String
+                                       }?
+                                     }?
+                                   }?,
+                                   service_discovery: {
+                                     aws_cloud_map: {
+                                       attributes: Array[
+                                         {
+                                           key: ::String,
+                                           value: ::String
+                                         },
+                                       ]?,
+                                       ip_preference: ("IPv6_PREFERRED" | "IPv4_PREFERRED" | "IPv4_ONLY" | "IPv6_ONLY")?,
+                                       namespace_name: ::String,
+                                       service_name: ::String
+                                     }?,
+                                     dns: {
+                                       hostname: ::String,
+                                       ip_preference: ("IPv6_PREFERRED" | "IPv4_PREFERRED" | "IPv4_ONLY" | "IPv6_ONLY")?,
+                                       response_type: ("LOADBALANCER" | "ENDPOINTS")?
+                                     }?
+                                   }?
+                                 },
+                                 ?tags: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String
+                                   },
+                                 ],
+                                 virtual_node_name: ::String
+                               ) -> _CreateVirtualNodeResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVirtualNodeResponseSuccess
+
+      interface _CreateVirtualRouterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVirtualRouterOutput]
+        def virtual_router: () -> Types::VirtualRouterData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#create_virtual_router-instance_method
+      def create_virtual_router: (
+                                   ?client_token: ::String,
+                                   mesh_name: ::String,
+                                   ?mesh_owner: ::String,
+                                   spec: {
+                                     listeners: Array[
+                                       {
+                                         port_mapping: {
+                                           port: ::Integer,
+                                           protocol: ("http" | "tcp" | "http2" | "grpc")
+                                         }
+                                       },
+                                     ]?
+                                   },
+                                   ?tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ],
+                                   virtual_router_name: ::String
+                                 ) -> _CreateVirtualRouterResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVirtualRouterResponseSuccess
+
+      interface _CreateVirtualServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVirtualServiceOutput]
+        def virtual_service: () -> Types::VirtualServiceData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#create_virtual_service-instance_method
+      def create_virtual_service: (
+                                    ?client_token: ::String,
+                                    mesh_name: ::String,
+                                    ?mesh_owner: ::String,
+                                    spec: {
+                                      provider: {
+                                        virtual_node: {
+                                          virtual_node_name: ::String
+                                        }?,
+                                        virtual_router: {
+                                          virtual_router_name: ::String
+                                        }?
+                                      }?
+                                    },
+                                    ?tags: Array[
+                                      {
+                                        key: ::String,
+                                        value: ::String
+                                      },
+                                    ],
+                                    virtual_service_name: ::String
+                                  ) -> _CreateVirtualServiceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVirtualServiceResponseSuccess
+
+      interface _DeleteGatewayRouteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGatewayRouteOutput]
+        def gateway_route: () -> Types::GatewayRouteData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#delete_gateway_route-instance_method
+      def delete_gateway_route: (
+                                  gateway_route_name: ::String,
+                                  mesh_name: ::String,
+                                  ?mesh_owner: ::String,
+                                  virtual_gateway_name: ::String
+                                ) -> _DeleteGatewayRouteResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGatewayRouteResponseSuccess
+
+      interface _DeleteMeshResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMeshOutput]
+        def mesh: () -> Types::MeshData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#delete_mesh-instance_method
+      def delete_mesh: (
+                         mesh_name: ::String
+                       ) -> _DeleteMeshResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMeshResponseSuccess
+
+      interface _DeleteRouteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRouteOutput]
+        def route: () -> Types::RouteData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#delete_route-instance_method
+      def delete_route: (
+                          mesh_name: ::String,
+                          ?mesh_owner: ::String,
+                          route_name: ::String,
+                          virtual_router_name: ::String
+                        ) -> _DeleteRouteResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRouteResponseSuccess
+
+      interface _DeleteVirtualGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVirtualGatewayOutput]
+        def virtual_gateway: () -> Types::VirtualGatewayData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#delete_virtual_gateway-instance_method
+      def delete_virtual_gateway: (
+                                    mesh_name: ::String,
+                                    ?mesh_owner: ::String,
+                                    virtual_gateway_name: ::String
+                                  ) -> _DeleteVirtualGatewayResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVirtualGatewayResponseSuccess
+
+      interface _DeleteVirtualNodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVirtualNodeOutput]
+        def virtual_node: () -> Types::VirtualNodeData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#delete_virtual_node-instance_method
+      def delete_virtual_node: (
+                                 mesh_name: ::String,
+                                 ?mesh_owner: ::String,
+                                 virtual_node_name: ::String
+                               ) -> _DeleteVirtualNodeResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVirtualNodeResponseSuccess
+
+      interface _DeleteVirtualRouterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVirtualRouterOutput]
+        def virtual_router: () -> Types::VirtualRouterData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#delete_virtual_router-instance_method
+      def delete_virtual_router: (
+                                   mesh_name: ::String,
+                                   ?mesh_owner: ::String,
+                                   virtual_router_name: ::String
+                                 ) -> _DeleteVirtualRouterResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVirtualRouterResponseSuccess
+
+      interface _DeleteVirtualServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVirtualServiceOutput]
+        def virtual_service: () -> Types::VirtualServiceData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#delete_virtual_service-instance_method
+      def delete_virtual_service: (
+                                    mesh_name: ::String,
+                                    ?mesh_owner: ::String,
+                                    virtual_service_name: ::String
+                                  ) -> _DeleteVirtualServiceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVirtualServiceResponseSuccess
+
+      interface _DescribeGatewayRouteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGatewayRouteOutput]
+        def gateway_route: () -> Types::GatewayRouteData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#describe_gateway_route-instance_method
+      def describe_gateway_route: (
+                                    gateway_route_name: ::String,
+                                    mesh_name: ::String,
+                                    ?mesh_owner: ::String,
+                                    virtual_gateway_name: ::String
+                                  ) -> _DescribeGatewayRouteResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeGatewayRouteResponseSuccess
+
+      interface _DescribeMeshResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMeshOutput]
+        def mesh: () -> Types::MeshData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#describe_mesh-instance_method
+      def describe_mesh: (
+                           mesh_name: ::String,
+                           ?mesh_owner: ::String
+                         ) -> _DescribeMeshResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMeshResponseSuccess
+
+      interface _DescribeRouteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRouteOutput]
+        def route: () -> Types::RouteData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#describe_route-instance_method
+      def describe_route: (
+                            mesh_name: ::String,
+                            ?mesh_owner: ::String,
+                            route_name: ::String,
+                            virtual_router_name: ::String
+                          ) -> _DescribeRouteResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRouteResponseSuccess
+
+      interface _DescribeVirtualGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeVirtualGatewayOutput]
+        def virtual_gateway: () -> Types::VirtualGatewayData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#describe_virtual_gateway-instance_method
+      def describe_virtual_gateway: (
+                                      mesh_name: ::String,
+                                      ?mesh_owner: ::String,
+                                      virtual_gateway_name: ::String
+                                    ) -> _DescribeVirtualGatewayResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeVirtualGatewayResponseSuccess
+
+      interface _DescribeVirtualNodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeVirtualNodeOutput]
+        def virtual_node: () -> Types::VirtualNodeData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#describe_virtual_node-instance_method
+      def describe_virtual_node: (
+                                   mesh_name: ::String,
+                                   ?mesh_owner: ::String,
+                                   virtual_node_name: ::String
+                                 ) -> _DescribeVirtualNodeResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeVirtualNodeResponseSuccess
+
+      interface _DescribeVirtualRouterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeVirtualRouterOutput]
+        def virtual_router: () -> Types::VirtualRouterData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#describe_virtual_router-instance_method
+      def describe_virtual_router: (
+                                     mesh_name: ::String,
+                                     ?mesh_owner: ::String,
+                                     virtual_router_name: ::String
+                                   ) -> _DescribeVirtualRouterResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeVirtualRouterResponseSuccess
+
+      interface _DescribeVirtualServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeVirtualServiceOutput]
+        def virtual_service: () -> Types::VirtualServiceData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#describe_virtual_service-instance_method
+      def describe_virtual_service: (
+                                      mesh_name: ::String,
+                                      ?mesh_owner: ::String,
+                                      virtual_service_name: ::String
+                                    ) -> _DescribeVirtualServiceResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeVirtualServiceResponseSuccess
+
+      interface _ListGatewayRoutesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGatewayRoutesOutput]
+        def gateway_routes: () -> ::Array[Types::GatewayRouteRef]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#list_gateway_routes-instance_method
+      def list_gateway_routes: (
+                                 ?limit: ::Integer,
+                                 mesh_name: ::String,
+                                 ?mesh_owner: ::String,
+                                 ?next_token: ::String,
+                                 virtual_gateway_name: ::String
+                               ) -> _ListGatewayRoutesResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGatewayRoutesResponseSuccess
+
+      interface _ListMeshesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMeshesOutput]
+        def meshes: () -> ::Array[Types::MeshRef]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#list_meshes-instance_method
+      def list_meshes: (
+                         ?limit: ::Integer,
+                         ?next_token: ::String
+                       ) -> _ListMeshesResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMeshesResponseSuccess
+
+      interface _ListRoutesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRoutesOutput]
+        def next_token: () -> ::String
+        def routes: () -> ::Array[Types::RouteRef]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#list_routes-instance_method
+      def list_routes: (
+                         ?limit: ::Integer,
+                         mesh_name: ::String,
+                         ?mesh_owner: ::String,
+                         ?next_token: ::String,
+                         virtual_router_name: ::String
+                       ) -> _ListRoutesResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRoutesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def next_token: () -> ::String
+        def tags: () -> ::Array[Types::TagRef]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    ?limit: ::Integer,
+                                    ?next_token: ::String,
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListVirtualGatewaysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVirtualGatewaysOutput]
+        def next_token: () -> ::String
+        def virtual_gateways: () -> ::Array[Types::VirtualGatewayRef]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#list_virtual_gateways-instance_method
+      def list_virtual_gateways: (
+                                   ?limit: ::Integer,
+                                   mesh_name: ::String,
+                                   ?mesh_owner: ::String,
+                                   ?next_token: ::String
+                                 ) -> _ListVirtualGatewaysResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVirtualGatewaysResponseSuccess
+
+      interface _ListVirtualNodesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVirtualNodesOutput]
+        def next_token: () -> ::String
+        def virtual_nodes: () -> ::Array[Types::VirtualNodeRef]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#list_virtual_nodes-instance_method
+      def list_virtual_nodes: (
+                                ?limit: ::Integer,
+                                mesh_name: ::String,
+                                ?mesh_owner: ::String,
+                                ?next_token: ::String
+                              ) -> _ListVirtualNodesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVirtualNodesResponseSuccess
+
+      interface _ListVirtualRoutersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVirtualRoutersOutput]
+        def next_token: () -> ::String
+        def virtual_routers: () -> ::Array[Types::VirtualRouterRef]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#list_virtual_routers-instance_method
+      def list_virtual_routers: (
+                                  ?limit: ::Integer,
+                                  mesh_name: ::String,
+                                  ?mesh_owner: ::String,
+                                  ?next_token: ::String
+                                ) -> _ListVirtualRoutersResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVirtualRoutersResponseSuccess
+
+      interface _ListVirtualServicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVirtualServicesOutput]
+        def next_token: () -> ::String
+        def virtual_services: () -> ::Array[Types::VirtualServiceRef]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#list_virtual_services-instance_method
+      def list_virtual_services: (
+                                   ?limit: ::Integer,
+                                   mesh_name: ::String,
+                                   ?mesh_owner: ::String,
+                                   ?next_token: ::String
+                                 ) -> _ListVirtualServicesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVirtualServicesResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateGatewayRouteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGatewayRouteOutput]
+        def gateway_route: () -> Types::GatewayRouteData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#update_gateway_route-instance_method
+      def update_gateway_route: (
+                                  ?client_token: ::String,
+                                  gateway_route_name: ::String,
+                                  mesh_name: ::String,
+                                  ?mesh_owner: ::String,
+                                  spec: {
+                                    grpc_route: {
+                                      action: {
+                                        rewrite: {
+                                          hostname: {
+                                            default_target_hostname: ("ENABLED" | "DISABLED")?
+                                          }?
+                                        }?,
+                                        target: {
+                                          port: ::Integer?,
+                                          virtual_service: {
+                                            virtual_service_name: ::String
+                                          }
+                                        }
+                                      },
+                                      match: {
+                                        hostname: {
+                                          exact: ::String?,
+                                          suffix: ::String?
+                                        }?,
+                                        metadata: Array[
+                                          {
+                                            invert: bool?,
+                                            match: {
+                                              exact: ::String?,
+                                              prefix: ::String?,
+                                              range: {
+                                                end: ::Integer,
+                                                start: ::Integer
+                                              }?,
+                                              regex: ::String?,
+                                              suffix: ::String?
+                                            }?,
+                                            name: ::String
+                                          },
+                                        ]?,
+                                        port: ::Integer?,
+                                        service_name: ::String?
+                                      }
+                                    }?,
+                                    http2_route: {
+                                      action: {
+                                        rewrite: {
+                                          hostname: {
+                                            default_target_hostname: ("ENABLED" | "DISABLED")?
+                                          }?,
+                                          path: {
+                                            exact: ::String?
+                                          }?,
+                                          prefix: {
+                                            default_prefix: ("ENABLED" | "DISABLED")?,
+                                            value: ::String?
+                                          }?
+                                        }?,
+                                        target: {
+                                          port: ::Integer?,
+                                          virtual_service: {
+                                            virtual_service_name: ::String
+                                          }
+                                        }
+                                      },
+                                      match: {
+                                        headers: Array[
+                                          {
+                                            invert: bool?,
+                                            match: {
+                                              exact: ::String?,
+                                              prefix: ::String?,
+                                              range: {
+                                                end: ::Integer,
+                                                start: ::Integer
+                                              }?,
+                                              regex: ::String?,
+                                              suffix: ::String?
+                                            }?,
+                                            name: ::String
+                                          },
+                                        ]?,
+                                        hostname: {
+                                          exact: ::String?,
+                                          suffix: ::String?
+                                        }?,
+                                        method: ("GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH")?,
+                                        path: {
+                                          exact: ::String?,
+                                          regex: ::String?
+                                        }?,
+                                        port: ::Integer?,
+                                        prefix: ::String?,
+                                        query_parameters: Array[
+                                          {
+                                            match: {
+                                              exact: ::String?
+                                            }?,
+                                            name: ::String
+                                          },
+                                        ]?
+                                      }
+                                    }?,
+                                    http_route: {
+                                      action: {
+                                        rewrite: {
+                                          hostname: {
+                                            default_target_hostname: ("ENABLED" | "DISABLED")?
+                                          }?,
+                                          path: {
+                                            exact: ::String?
+                                          }?,
+                                          prefix: {
+                                            default_prefix: ("ENABLED" | "DISABLED")?,
+                                            value: ::String?
+                                          }?
+                                        }?,
+                                        target: {
+                                          port: ::Integer?,
+                                          virtual_service: {
+                                            virtual_service_name: ::String
+                                          }
+                                        }
+                                      },
+                                      match: {
+                                        headers: Array[
+                                          {
+                                            invert: bool?,
+                                            match: {
+                                              exact: ::String?,
+                                              prefix: ::String?,
+                                              range: {
+                                                end: ::Integer,
+                                                start: ::Integer
+                                              }?,
+                                              regex: ::String?,
+                                              suffix: ::String?
+                                            }?,
+                                            name: ::String
+                                          },
+                                        ]?,
+                                        hostname: {
+                                          exact: ::String?,
+                                          suffix: ::String?
+                                        }?,
+                                        method: ("GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH")?,
+                                        path: {
+                                          exact: ::String?,
+                                          regex: ::String?
+                                        }?,
+                                        port: ::Integer?,
+                                        prefix: ::String?,
+                                        query_parameters: Array[
+                                          {
+                                            match: {
+                                              exact: ::String?
+                                            }?,
+                                            name: ::String
+                                          },
+                                        ]?
+                                      }
+                                    }?,
+                                    priority: ::Integer?
+                                  },
+                                  virtual_gateway_name: ::String
+                                ) -> _UpdateGatewayRouteResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGatewayRouteResponseSuccess
+
+      interface _UpdateMeshResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMeshOutput]
+        def mesh: () -> Types::MeshData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#update_mesh-instance_method
+      def update_mesh: (
+                         ?client_token: ::String,
+                         mesh_name: ::String,
+                         ?spec: {
+                           egress_filter: {
+                             type: ("ALLOW_ALL" | "DROP_ALL")
+                           }?,
+                           service_discovery: {
+                             ip_preference: ("IPv6_PREFERRED" | "IPv4_PREFERRED" | "IPv4_ONLY" | "IPv6_ONLY")?
+                           }?
+                         }
+                       ) -> _UpdateMeshResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMeshResponseSuccess
+
+      interface _UpdateRouteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRouteOutput]
+        def route: () -> Types::RouteData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#update_route-instance_method
+      def update_route: (
+                          ?client_token: ::String,
+                          mesh_name: ::String,
+                          ?mesh_owner: ::String,
+                          route_name: ::String,
+                          spec: {
+                            grpc_route: {
+                              action: {
+                                weighted_targets: Array[
+                                  {
+                                    port: ::Integer?,
+                                    virtual_node: ::String,
+                                    weight: ::Integer
+                                  },
+                                ]
+                              },
+                              match: {
+                                metadata: Array[
+                                  {
+                                    invert: bool?,
+                                    match: {
+                                      exact: ::String?,
+                                      prefix: ::String?,
+                                      range: {
+                                        end: ::Integer,
+                                        start: ::Integer
+                                      }?,
+                                      regex: ::String?,
+                                      suffix: ::String?
+                                    }?,
+                                    name: ::String
+                                  },
+                                ]?,
+                                method_name: ::String?,
+                                port: ::Integer?,
+                                service_name: ::String?
+                              },
+                              retry_policy: {
+                                grpc_retry_events: Array[("cancelled" | "deadline-exceeded" | "internal" | "resource-exhausted" | "unavailable")]?,
+                                http_retry_events: Array[::String]?,
+                                max_retries: ::Integer,
+                                per_retry_timeout: {
+                                  unit: ("s" | "ms")?,
+                                  value: ::Integer?
+                                },
+                                tcp_retry_events: Array[("connection-error")]?
+                              }?,
+                              timeout: {
+                                idle: {
+                                  unit: ("s" | "ms")?,
+                                  value: ::Integer?
+                                }?,
+                                per_request: {
+                                  unit: ("s" | "ms")?,
+                                  value: ::Integer?
+                                }?
+                              }?
+                            }?,
+                            http2_route: {
+                              action: {
+                                weighted_targets: Array[
+                                  {
+                                    port: ::Integer?,
+                                    virtual_node: ::String,
+                                    weight: ::Integer
+                                  },
+                                ]
+                              },
+                              match: {
+                                headers: Array[
+                                  {
+                                    invert: bool?,
+                                    match: {
+                                      exact: ::String?,
+                                      prefix: ::String?,
+                                      range: {
+                                        end: ::Integer,
+                                        start: ::Integer
+                                      }?,
+                                      regex: ::String?,
+                                      suffix: ::String?
+                                    }?,
+                                    name: ::String
+                                  },
+                                ]?,
+                                method: ("GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH")?,
+                                path: {
+                                  exact: ::String?,
+                                  regex: ::String?
+                                }?,
+                                port: ::Integer?,
+                                prefix: ::String?,
+                                query_parameters: Array[
+                                  {
+                                    match: {
+                                      exact: ::String?
+                                    }?,
+                                    name: ::String
+                                  },
+                                ]?,
+                                scheme: ("http" | "https")?
+                              },
+                              retry_policy: {
+                                http_retry_events: Array[::String]?,
+                                max_retries: ::Integer,
+                                per_retry_timeout: {
+                                  unit: ("s" | "ms")?,
+                                  value: ::Integer?
+                                },
+                                tcp_retry_events: Array[("connection-error")]?
+                              }?,
+                              timeout: {
+                                idle: {
+                                  unit: ("s" | "ms")?,
+                                  value: ::Integer?
+                                }?,
+                                per_request: {
+                                  unit: ("s" | "ms")?,
+                                  value: ::Integer?
+                                }?
+                              }?
+                            }?,
+                            http_route: {
+                              action: {
+                                weighted_targets: Array[
+                                  {
+                                    port: ::Integer?,
+                                    virtual_node: ::String,
+                                    weight: ::Integer
+                                  },
+                                ]
+                              },
+                              match: {
+                                headers: Array[
+                                  {
+                                    invert: bool?,
+                                    match: {
+                                      exact: ::String?,
+                                      prefix: ::String?,
+                                      range: {
+                                        end: ::Integer,
+                                        start: ::Integer
+                                      }?,
+                                      regex: ::String?,
+                                      suffix: ::String?
+                                    }?,
+                                    name: ::String
+                                  },
+                                ]?,
+                                method: ("GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH")?,
+                                path: {
+                                  exact: ::String?,
+                                  regex: ::String?
+                                }?,
+                                port: ::Integer?,
+                                prefix: ::String?,
+                                query_parameters: Array[
+                                  {
+                                    match: {
+                                      exact: ::String?
+                                    }?,
+                                    name: ::String
+                                  },
+                                ]?,
+                                scheme: ("http" | "https")?
+                              },
+                              retry_policy: {
+                                http_retry_events: Array[::String]?,
+                                max_retries: ::Integer,
+                                per_retry_timeout: {
+                                  unit: ("s" | "ms")?,
+                                  value: ::Integer?
+                                },
+                                tcp_retry_events: Array[("connection-error")]?
+                              }?,
+                              timeout: {
+                                idle: {
+                                  unit: ("s" | "ms")?,
+                                  value: ::Integer?
+                                }?,
+                                per_request: {
+                                  unit: ("s" | "ms")?,
+                                  value: ::Integer?
+                                }?
+                              }?
+                            }?,
+                            priority: ::Integer?,
+                            tcp_route: {
+                              action: {
+                                weighted_targets: Array[
+                                  {
+                                    port: ::Integer?,
+                                    virtual_node: ::String,
+                                    weight: ::Integer
+                                  },
+                                ]
+                              },
+                              match: {
+                                port: ::Integer?
+                              }?,
+                              timeout: {
+                                idle: {
+                                  unit: ("s" | "ms")?,
+                                  value: ::Integer?
+                                }?
+                              }?
+                            }?
+                          },
+                          virtual_router_name: ::String
+                        ) -> _UpdateRouteResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRouteResponseSuccess
+
+      interface _UpdateVirtualGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateVirtualGatewayOutput]
+        def virtual_gateway: () -> Types::VirtualGatewayData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#update_virtual_gateway-instance_method
+      def update_virtual_gateway: (
+                                    ?client_token: ::String,
+                                    mesh_name: ::String,
+                                    ?mesh_owner: ::String,
+                                    spec: {
+                                      backend_defaults: {
+                                        client_policy: {
+                                          tls: {
+                                            certificate: {
+                                              file: {
+                                                certificate_chain: ::String,
+                                                private_key: ::String
+                                              }?,
+                                              sds: {
+                                                secret_name: ::String
+                                              }?
+                                            }?,
+                                            enforce: bool?,
+                                            ports: Array[::Integer]?,
+                                            validation: {
+                                              subject_alternative_names: {
+                                                match: {
+                                                  exact: Array[::String]
+                                                }
+                                              }?,
+                                              trust: {
+                                                acm: {
+                                                  certificate_authority_arns: Array[::String]
+                                                }?,
+                                                file: {
+                                                  certificate_chain: ::String
+                                                }?,
+                                                sds: {
+                                                  secret_name: ::String
+                                                }?
+                                              }
+                                            }
+                                          }?
+                                        }?
+                                      }?,
+                                      listeners: Array[
+                                        {
+                                          connection_pool: {
+                                            grpc: {
+                                              max_requests: ::Integer
+                                            }?,
+                                            http: {
+                                              max_connections: ::Integer,
+                                              max_pending_requests: ::Integer?
+                                            }?,
+                                            http2: {
+                                              max_requests: ::Integer
+                                            }?
+                                          }?,
+                                          health_check: {
+                                            healthy_threshold: ::Integer,
+                                            interval_millis: ::Integer,
+                                            path: ::String?,
+                                            port: ::Integer?,
+                                            protocol: ("http" | "http2" | "grpc"),
+                                            timeout_millis: ::Integer,
+                                            unhealthy_threshold: ::Integer
+                                          }?,
+                                          port_mapping: {
+                                            port: ::Integer,
+                                            protocol: ("http" | "http2" | "grpc")
+                                          },
+                                          tls: {
+                                            certificate: {
+                                              acm: {
+                                                certificate_arn: ::String
+                                              }?,
+                                              file: {
+                                                certificate_chain: ::String,
+                                                private_key: ::String
+                                              }?,
+                                              sds: {
+                                                secret_name: ::String
+                                              }?
+                                            },
+                                            mode: ("STRICT" | "PERMISSIVE" | "DISABLED"),
+                                            validation: {
+                                              subject_alternative_names: {
+                                                match: {
+                                                  exact: Array[::String]
+                                                }
+                                              }?,
+                                              trust: {
+                                                file: {
+                                                  certificate_chain: ::String
+                                                }?,
+                                                sds: {
+                                                  secret_name: ::String
+                                                }?
+                                              }
+                                            }?
+                                          }?
+                                        },
+                                      ],
+                                      logging: {
+                                        access_log: {
+                                          file: {
+                                            format: {
+                                              json: Array[
+                                                {
+                                                  key: ::String,
+                                                  value: ::String
+                                                },
+                                              ]?,
+                                              text: ::String?
+                                            }?,
+                                            path: ::String
+                                          }?
+                                        }?
+                                      }?
+                                    },
+                                    virtual_gateway_name: ::String
+                                  ) -> _UpdateVirtualGatewayResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVirtualGatewayResponseSuccess
+
+      interface _UpdateVirtualNodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateVirtualNodeOutput]
+        def virtual_node: () -> Types::VirtualNodeData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#update_virtual_node-instance_method
+      def update_virtual_node: (
+                                 ?client_token: ::String,
+                                 mesh_name: ::String,
+                                 ?mesh_owner: ::String,
+                                 spec: {
+                                   backend_defaults: {
+                                     client_policy: {
+                                       tls: {
+                                         certificate: {
+                                           file: {
+                                             certificate_chain: ::String,
+                                             private_key: ::String
+                                           }?,
+                                           sds: {
+                                             secret_name: ::String
+                                           }?
+                                         }?,
+                                         enforce: bool?,
+                                         ports: Array[::Integer]?,
+                                         validation: {
+                                           subject_alternative_names: {
+                                             match: {
+                                               exact: Array[::String]
+                                             }
+                                           }?,
+                                           trust: {
+                                             acm: {
+                                               certificate_authority_arns: Array[::String]
+                                             }?,
+                                             file: {
+                                               certificate_chain: ::String
+                                             }?,
+                                             sds: {
+                                               secret_name: ::String
+                                             }?
+                                           }
+                                         }
+                                       }?
+                                     }?
+                                   }?,
+                                   backends: Array[
+                                     {
+                                       virtual_service: {
+                                         client_policy: {
+                                           tls: {
+                                             certificate: {
+                                               file: {
+                                                 certificate_chain: ::String,
+                                                 private_key: ::String
+                                               }?,
+                                               sds: {
+                                                 secret_name: ::String
+                                               }?
+                                             }?,
+                                             enforce: bool?,
+                                             ports: Array[::Integer]?,
+                                             validation: {
+                                               subject_alternative_names: {
+                                                 match: {
+                                                   exact: Array[::String]
+                                                 }
+                                               }?,
+                                               trust: {
+                                                 acm: {
+                                                   certificate_authority_arns: Array[::String]
+                                                 }?,
+                                                 file: {
+                                                   certificate_chain: ::String
+                                                 }?,
+                                                 sds: {
+                                                   secret_name: ::String
+                                                 }?
+                                               }
+                                             }
+                                           }?
+                                         }?,
+                                         virtual_service_name: ::String
+                                       }?
+                                     },
+                                   ]?,
+                                   listeners: Array[
+                                     {
+                                       connection_pool: {
+                                         grpc: {
+                                           max_requests: ::Integer
+                                         }?,
+                                         http: {
+                                           max_connections: ::Integer,
+                                           max_pending_requests: ::Integer?
+                                         }?,
+                                         http2: {
+                                           max_requests: ::Integer
+                                         }?,
+                                         tcp: {
+                                           max_connections: ::Integer
+                                         }?
+                                       }?,
+                                       health_check: {
+                                         healthy_threshold: ::Integer,
+                                         interval_millis: ::Integer,
+                                         path: ::String?,
+                                         port: ::Integer?,
+                                         protocol: ("http" | "tcp" | "http2" | "grpc"),
+                                         timeout_millis: ::Integer,
+                                         unhealthy_threshold: ::Integer
+                                       }?,
+                                       outlier_detection: {
+                                         base_ejection_duration: {
+                                           unit: ("s" | "ms")?,
+                                           value: ::Integer?
+                                         },
+                                         interval: {
+                                           unit: ("s" | "ms")?,
+                                           value: ::Integer?
+                                         },
+                                         max_ejection_percent: ::Integer,
+                                         max_server_errors: ::Integer
+                                       }?,
+                                       port_mapping: {
+                                         port: ::Integer,
+                                         protocol: ("http" | "tcp" | "http2" | "grpc")
+                                       },
+                                       timeout: {
+                                         grpc: {
+                                           idle: {
+                                             unit: ("s" | "ms")?,
+                                             value: ::Integer?
+                                           }?,
+                                           per_request: {
+                                             unit: ("s" | "ms")?,
+                                             value: ::Integer?
+                                           }?
+                                         }?,
+                                         http: {
+                                           idle: {
+                                             unit: ("s" | "ms")?,
+                                             value: ::Integer?
+                                           }?,
+                                           per_request: {
+                                             unit: ("s" | "ms")?,
+                                             value: ::Integer?
+                                           }?
+                                         }?,
+                                         http2: {
+                                           idle: {
+                                             unit: ("s" | "ms")?,
+                                             value: ::Integer?
+                                           }?,
+                                           per_request: {
+                                             unit: ("s" | "ms")?,
+                                             value: ::Integer?
+                                           }?
+                                         }?,
+                                         tcp: {
+                                           idle: {
+                                             unit: ("s" | "ms")?,
+                                             value: ::Integer?
+                                           }?
+                                         }?
+                                       }?,
+                                       tls: {
+                                         certificate: {
+                                           acm: {
+                                             certificate_arn: ::String
+                                           }?,
+                                           file: {
+                                             certificate_chain: ::String,
+                                             private_key: ::String
+                                           }?,
+                                           sds: {
+                                             secret_name: ::String
+                                           }?
+                                         },
+                                         mode: ("STRICT" | "PERMISSIVE" | "DISABLED"),
+                                         validation: {
+                                           subject_alternative_names: {
+                                             match: {
+                                               exact: Array[::String]
+                                             }
+                                           }?,
+                                           trust: {
+                                             file: {
+                                               certificate_chain: ::String
+                                             }?,
+                                             sds: {
+                                               secret_name: ::String
+                                             }?
+                                           }
+                                         }?
+                                       }?
+                                     },
+                                   ]?,
+                                   logging: {
+                                     access_log: {
+                                       file: {
+                                         format: {
+                                           json: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           text: ::String?
+                                         }?,
+                                         path: ::String
+                                       }?
+                                     }?
+                                   }?,
+                                   service_discovery: {
+                                     aws_cloud_map: {
+                                       attributes: Array[
+                                         {
+                                           key: ::String,
+                                           value: ::String
+                                         },
+                                       ]?,
+                                       ip_preference: ("IPv6_PREFERRED" | "IPv4_PREFERRED" | "IPv4_ONLY" | "IPv6_ONLY")?,
+                                       namespace_name: ::String,
+                                       service_name: ::String
+                                     }?,
+                                     dns: {
+                                       hostname: ::String,
+                                       ip_preference: ("IPv6_PREFERRED" | "IPv4_PREFERRED" | "IPv4_ONLY" | "IPv6_ONLY")?,
+                                       response_type: ("LOADBALANCER" | "ENDPOINTS")?
+                                     }?
+                                   }?
+                                 },
+                                 virtual_node_name: ::String
+                               ) -> _UpdateVirtualNodeResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVirtualNodeResponseSuccess
+
+      interface _UpdateVirtualRouterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateVirtualRouterOutput]
+        def virtual_router: () -> Types::VirtualRouterData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#update_virtual_router-instance_method
+      def update_virtual_router: (
+                                   ?client_token: ::String,
+                                   mesh_name: ::String,
+                                   ?mesh_owner: ::String,
+                                   spec: {
+                                     listeners: Array[
+                                       {
+                                         port_mapping: {
+                                           port: ::Integer,
+                                           protocol: ("http" | "tcp" | "http2" | "grpc")
+                                         }
+                                       },
+                                     ]?
+                                   },
+                                   virtual_router_name: ::String
+                                 ) -> _UpdateVirtualRouterResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVirtualRouterResponseSuccess
+
+      interface _UpdateVirtualServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateVirtualServiceOutput]
+        def virtual_service: () -> Types::VirtualServiceData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppMesh/Client.html#update_virtual_service-instance_method
+      def update_virtual_service: (
+                                    ?client_token: ::String,
+                                    mesh_name: ::String,
+                                    ?mesh_owner: ::String,
+                                    spec: {
+                                      provider: {
+                                        virtual_node: {
+                                          virtual_node_name: ::String
+                                        }?,
+                                        virtual_router: {
+                                          virtual_router_name: ::String
+                                        }?
+                                      }?
+                                    },
+                                    virtual_service_name: ::String
+                                  ) -> _UpdateVirtualServiceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVirtualServiceResponseSuccess
+    end
+  end
+end
+

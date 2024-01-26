@@ -1,0 +1,529 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ACMPCA
+  module Types
+
+    class ASN1Subject
+      attr_accessor country: ::String
+      attr_accessor organization: ::String
+      attr_accessor organizational_unit: ::String
+      attr_accessor distinguished_name_qualifier: ::String
+      attr_accessor state: ::String
+      attr_accessor common_name: ::String
+      attr_accessor serial_number: ::String
+      attr_accessor locality: ::String
+      attr_accessor title: ::String
+      attr_accessor surname: ::String
+      attr_accessor given_name: ::String
+      attr_accessor initials: ::String
+      attr_accessor pseudonym: ::String
+      attr_accessor generation_qualifier: ::String
+      attr_accessor custom_attributes: ::Array[Types::CustomAttribute]
+      SENSITIVE: []
+    end
+
+    class AccessDescription
+      attr_accessor access_method: Types::AccessMethod
+      attr_accessor access_location: Types::GeneralName
+      SENSITIVE: []
+    end
+
+    class AccessMethod
+      attr_accessor custom_object_identifier: ::String
+      attr_accessor access_method_type: ("CA_REPOSITORY" | "RESOURCE_PKI_MANIFEST" | "RESOURCE_PKI_NOTIFY")
+      SENSITIVE: []
+    end
+
+    class ApiPassthrough
+      attr_accessor extensions: Types::Extensions
+      attr_accessor subject: Types::ASN1Subject
+      SENSITIVE: []
+    end
+
+    class CertificateAuthority
+      attr_accessor arn: ::String
+      attr_accessor owner_account: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_state_change_at: ::Time
+      attr_accessor type: ("ROOT" | "SUBORDINATE")
+      attr_accessor serial: ::String
+      attr_accessor status: ("CREATING" | "PENDING_CERTIFICATE" | "ACTIVE" | "DELETED" | "DISABLED" | "EXPIRED" | "FAILED")
+      attr_accessor not_before: ::Time
+      attr_accessor not_after: ::Time
+      attr_accessor failure_reason: ("REQUEST_TIMED_OUT" | "UNSUPPORTED_ALGORITHM" | "OTHER")
+      attr_accessor certificate_authority_configuration: Types::CertificateAuthorityConfiguration
+      attr_accessor revocation_configuration: Types::RevocationConfiguration
+      attr_accessor restorable_until: ::Time
+      attr_accessor key_storage_security_standard: ("FIPS_140_2_LEVEL_2_OR_HIGHER" | "FIPS_140_2_LEVEL_3_OR_HIGHER")
+      attr_accessor usage_mode: ("GENERAL_PURPOSE" | "SHORT_LIVED_CERTIFICATE")
+      SENSITIVE: []
+    end
+
+    class CertificateAuthorityConfiguration
+      attr_accessor key_algorithm: ("RSA_2048" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1")
+      attr_accessor signing_algorithm: ("SHA256WITHECDSA" | "SHA384WITHECDSA" | "SHA512WITHECDSA" | "SHA256WITHRSA" | "SHA384WITHRSA" | "SHA512WITHRSA")
+      attr_accessor subject: Types::ASN1Subject
+      attr_accessor csr_extensions: Types::CsrExtensions
+      SENSITIVE: []
+    end
+
+    class CertificateMismatchException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConcurrentModificationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCertificateAuthorityAuditReportRequest
+      attr_accessor certificate_authority_arn: ::String
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor audit_report_response_format: ("JSON" | "CSV")
+      SENSITIVE: []
+    end
+
+    class CreateCertificateAuthorityAuditReportResponse
+      attr_accessor audit_report_id: ::String
+      attr_accessor s3_key: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCertificateAuthorityRequest
+      attr_accessor certificate_authority_configuration: Types::CertificateAuthorityConfiguration
+      attr_accessor revocation_configuration: Types::RevocationConfiguration
+      attr_accessor certificate_authority_type: ("ROOT" | "SUBORDINATE")
+      attr_accessor idempotency_token: ::String
+      attr_accessor key_storage_security_standard: ("FIPS_140_2_LEVEL_2_OR_HIGHER" | "FIPS_140_2_LEVEL_3_OR_HIGHER")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor usage_mode: ("GENERAL_PURPOSE" | "SHORT_LIVED_CERTIFICATE")
+      SENSITIVE: []
+    end
+
+    class CreateCertificateAuthorityResponse
+      attr_accessor certificate_authority_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePermissionRequest
+      attr_accessor certificate_authority_arn: ::String
+      attr_accessor principal: ::String
+      attr_accessor source_account: ::String
+      attr_accessor actions: ::Array[("IssueCertificate" | "GetCertificate" | "ListPermissions")]
+      SENSITIVE: []
+    end
+
+    class CrlConfiguration
+      attr_accessor enabled: bool
+      attr_accessor expiration_in_days: ::Integer
+      attr_accessor custom_cname: ::String
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor s3_object_acl: ("PUBLIC_READ" | "BUCKET_OWNER_FULL_CONTROL")
+      attr_accessor crl_distribution_point_extension_configuration: Types::CrlDistributionPointExtensionConfiguration
+      SENSITIVE: []
+    end
+
+    class CrlDistributionPointExtensionConfiguration
+      attr_accessor omit_extension: bool
+      SENSITIVE: []
+    end
+
+    class CsrExtensions
+      attr_accessor key_usage: Types::KeyUsage
+      attr_accessor subject_information_access: ::Array[Types::AccessDescription]
+      SENSITIVE: []
+    end
+
+    class CustomAttribute
+      attr_accessor object_identifier: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class CustomExtension
+      attr_accessor object_identifier: ::String
+      attr_accessor value: ::String
+      attr_accessor critical: bool
+      SENSITIVE: []
+    end
+
+    class DeleteCertificateAuthorityRequest
+      attr_accessor certificate_authority_arn: ::String
+      attr_accessor permanent_deletion_time_in_days: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeletePermissionRequest
+      attr_accessor certificate_authority_arn: ::String
+      attr_accessor principal: ::String
+      attr_accessor source_account: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCertificateAuthorityAuditReportRequest
+      attr_accessor certificate_authority_arn: ::String
+      attr_accessor audit_report_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCertificateAuthorityAuditReportResponse
+      attr_accessor audit_report_status: ("CREATING" | "SUCCESS" | "FAILED")
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor s3_key: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeCertificateAuthorityRequest
+      attr_accessor certificate_authority_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCertificateAuthorityResponse
+      attr_accessor certificate_authority: Types::CertificateAuthority
+      SENSITIVE: []
+    end
+
+    class EdiPartyName
+      attr_accessor party_name: ::String
+      attr_accessor name_assigner: ::String
+      SENSITIVE: []
+    end
+
+    class ExtendedKeyUsage
+      attr_accessor extended_key_usage_type: ("SERVER_AUTH" | "CLIENT_AUTH" | "CODE_SIGNING" | "EMAIL_PROTECTION" | "TIME_STAMPING" | "OCSP_SIGNING" | "SMART_CARD_LOGIN" | "DOCUMENT_SIGNING" | "CERTIFICATE_TRANSPARENCY")
+      attr_accessor extended_key_usage_object_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class Extensions
+      attr_accessor certificate_policies: ::Array[Types::PolicyInformation]
+      attr_accessor extended_key_usage: ::Array[Types::ExtendedKeyUsage]
+      attr_accessor key_usage: Types::KeyUsage
+      attr_accessor subject_alternative_names: ::Array[Types::GeneralName]
+      attr_accessor custom_extensions: ::Array[Types::CustomExtension]
+      SENSITIVE: []
+    end
+
+    class GeneralName
+      attr_accessor other_name: Types::OtherName
+      attr_accessor rfc_822_name: ::String
+      attr_accessor dns_name: ::String
+      attr_accessor directory_name: Types::ASN1Subject
+      attr_accessor edi_party_name: Types::EdiPartyName
+      attr_accessor uniform_resource_identifier: ::String
+      attr_accessor ip_address: ::String
+      attr_accessor registered_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCertificateAuthorityCertificateRequest
+      attr_accessor certificate_authority_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetCertificateAuthorityCertificateResponse
+      attr_accessor certificate: ::String
+      attr_accessor certificate_chain: ::String
+      SENSITIVE: []
+    end
+
+    class GetCertificateAuthorityCsrRequest
+      attr_accessor certificate_authority_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetCertificateAuthorityCsrResponse
+      attr_accessor csr: ::String
+      SENSITIVE: []
+    end
+
+    class GetCertificateRequest
+      attr_accessor certificate_authority_arn: ::String
+      attr_accessor certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetCertificateResponse
+      attr_accessor certificate: ::String
+      attr_accessor certificate_chain: ::String
+      SENSITIVE: []
+    end
+
+    class GetPolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetPolicyResponse
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class ImportCertificateAuthorityCertificateRequest
+      attr_accessor certificate_authority_arn: ::String
+      attr_accessor certificate: ::String
+      attr_accessor certificate_chain: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidArgsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidArnException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidNextTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidPolicyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidStateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidTagException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IssueCertificateRequest
+      attr_accessor api_passthrough: Types::ApiPassthrough
+      attr_accessor certificate_authority_arn: ::String
+      attr_accessor csr: ::String
+      attr_accessor signing_algorithm: ("SHA256WITHECDSA" | "SHA384WITHECDSA" | "SHA512WITHECDSA" | "SHA256WITHRSA" | "SHA384WITHRSA" | "SHA512WITHRSA")
+      attr_accessor template_arn: ::String
+      attr_accessor validity: Types::Validity
+      attr_accessor validity_not_before: Types::Validity
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class IssueCertificateResponse
+      attr_accessor certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class KeyUsage
+      attr_accessor digital_signature: bool
+      attr_accessor non_repudiation: bool
+      attr_accessor key_encipherment: bool
+      attr_accessor data_encipherment: bool
+      attr_accessor key_agreement: bool
+      attr_accessor key_cert_sign: bool
+      attr_accessor crl_sign: bool
+      attr_accessor encipher_only: bool
+      attr_accessor decipher_only: bool
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListCertificateAuthoritiesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor resource_owner: ("SELF" | "OTHER_ACCOUNTS")
+      SENSITIVE: []
+    end
+
+    class ListCertificateAuthoritiesResponse
+      attr_accessor certificate_authorities: ::Array[Types::CertificateAuthority]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPermissionsRequest
+      attr_accessor certificate_authority_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPermissionsResponse
+      attr_accessor permissions: ::Array[Types::Permission]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsRequest
+      attr_accessor certificate_authority_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTagsResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LockoutPreventedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MalformedCSRException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MalformedCertificateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OcspConfiguration
+      attr_accessor enabled: bool
+      attr_accessor ocsp_custom_cname: ::String
+      SENSITIVE: []
+    end
+
+    class OtherName
+      attr_accessor type_id: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class Permission
+      attr_accessor certificate_authority_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor principal: ::String
+      attr_accessor source_account: ::String
+      attr_accessor actions: ::Array[("IssueCertificate" | "GetCertificate" | "ListPermissions")]
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PermissionAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyInformation
+      attr_accessor cert_policy_id: ::String
+      attr_accessor policy_qualifiers: ::Array[Types::PolicyQualifierInfo]
+      SENSITIVE: []
+    end
+
+    class PolicyQualifierInfo
+      attr_accessor policy_qualifier_id: ("CPS")
+      attr_accessor qualifier: Types::Qualifier
+      SENSITIVE: []
+    end
+
+    class PutPolicyRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class Qualifier
+      attr_accessor cps_uri: ::String
+      SENSITIVE: []
+    end
+
+    class RequestAlreadyProcessedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RequestFailedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RequestInProgressException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreCertificateAuthorityRequest
+      attr_accessor certificate_authority_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RevocationConfiguration
+      attr_accessor crl_configuration: Types::CrlConfiguration
+      attr_accessor ocsp_configuration: Types::OcspConfiguration
+      SENSITIVE: []
+    end
+
+    class RevokeCertificateRequest
+      attr_accessor certificate_authority_arn: ::String
+      attr_accessor certificate_serial: ::String
+      attr_accessor revocation_reason: ("UNSPECIFIED" | "KEY_COMPROMISE" | "CERTIFICATE_AUTHORITY_COMPROMISE" | "AFFILIATION_CHANGED" | "SUPERSEDED" | "CESSATION_OF_OPERATION" | "PRIVILEGE_WITHDRAWN" | "A_A_COMPROMISE")
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagCertificateAuthorityRequest
+      attr_accessor certificate_authority_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagCertificateAuthorityRequest
+      attr_accessor certificate_authority_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class UpdateCertificateAuthorityRequest
+      attr_accessor certificate_authority_arn: ::String
+      attr_accessor revocation_configuration: Types::RevocationConfiguration
+      attr_accessor status: ("CREATING" | "PENDING_CERTIFICATE" | "ACTIVE" | "DELETED" | "DISABLED" | "EXPIRED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class Validity
+      attr_accessor value: ::Integer
+      attr_accessor type: ("END_DATE" | "ABSOLUTE" | "DAYS" | "MONTHS" | "YEARS")
+      SENSITIVE: []
+    end
+  end
+end

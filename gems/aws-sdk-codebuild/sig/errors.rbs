@@ -1,0 +1,26 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CodeBuild
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AccountLimitExceededException < ::Aws::Errors::ServiceError
+      end
+      class InvalidInputException < ::Aws::Errors::ServiceError
+      end
+      class OAuthProviderException < ::Aws::Errors::ServiceError
+      end
+      class ResourceAlreadyExistsException < ::Aws::Errors::ServiceError
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      end
+    end
+  end
+end

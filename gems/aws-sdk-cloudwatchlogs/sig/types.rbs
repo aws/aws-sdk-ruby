@@ -1,0 +1,1182 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CloudWatchLogs
+  module Types
+
+    class AccessDeniedException < Aws::EmptyStructure
+    end
+
+    class AccountPolicy
+      attr_accessor policy_name: ::String
+      attr_accessor policy_document: ::String
+      attr_accessor last_updated_time: ::Integer
+      attr_accessor policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY")
+      attr_accessor scope: ("ALL")
+      attr_accessor selection_criteria: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class Anomaly
+      attr_accessor anomaly_id: ::String
+      attr_accessor pattern_id: ::String
+      attr_accessor anomaly_detector_arn: ::String
+      attr_accessor pattern_string: ::String
+      attr_accessor pattern_regex: ::String
+      attr_accessor priority: ::String
+      attr_accessor first_seen: ::Integer
+      attr_accessor last_seen: ::Integer
+      attr_accessor description: ::String
+      attr_accessor active: bool
+      attr_accessor state: ("Active" | "Suppressed" | "Baseline")
+      attr_accessor histogram: ::Hash[::String, ::Integer]
+      attr_accessor log_samples: ::Array[::String]
+      attr_accessor pattern_tokens: ::Array[Types::PatternToken]
+      attr_accessor log_group_arn_list: ::Array[::String]
+      attr_accessor suppressed: bool
+      attr_accessor suppressed_date: ::Integer
+      attr_accessor suppressed_until: ::Integer
+      attr_accessor is_pattern_level_suppression: bool
+      SENSITIVE: []
+    end
+
+    class AnomalyDetector
+      attr_accessor anomaly_detector_arn: ::String
+      attr_accessor detector_name: ::String
+      attr_accessor log_group_arn_list: ::Array[::String]
+      attr_accessor evaluation_frequency: ("ONE_MIN" | "FIVE_MIN" | "TEN_MIN" | "FIFTEEN_MIN" | "THIRTY_MIN" | "ONE_HOUR")
+      attr_accessor filter_pattern: ::String
+      attr_accessor anomaly_detector_status: ("INITIALIZING" | "TRAINING" | "ANALYZING" | "FAILED" | "DELETED" | "PAUSED")
+      attr_accessor kms_key_id: ::String
+      attr_accessor creation_time_stamp: ::Integer
+      attr_accessor last_modified_time_stamp: ::Integer
+      attr_accessor anomaly_visibility_time: ::Integer
+      SENSITIVE: []
+    end
+
+    class AssociateKmsKeyRequest
+      attr_accessor log_group_name: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor resource_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class CancelExportTaskRequest
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException < Aws::EmptyStructure
+    end
+
+    class CreateDeliveryRequest
+      attr_accessor delivery_source_name: ::String
+      attr_accessor delivery_destination_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDeliveryResponse
+      attr_accessor delivery: Types::Delivery
+      SENSITIVE: []
+    end
+
+    class CreateExportTaskRequest
+      attr_accessor task_name: ::String
+      attr_accessor log_group_name: ::String
+      attr_accessor log_stream_name_prefix: ::String
+      attr_accessor from: ::Integer
+      attr_accessor to: ::Integer
+      attr_accessor destination: ::String
+      attr_accessor destination_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class CreateExportTaskResponse
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLogAnomalyDetectorRequest
+      attr_accessor log_group_arn_list: ::Array[::String]
+      attr_accessor detector_name: ::String
+      attr_accessor evaluation_frequency: ("ONE_MIN" | "FIVE_MIN" | "TEN_MIN" | "FIFTEEN_MIN" | "THIRTY_MIN" | "ONE_HOUR")
+      attr_accessor filter_pattern: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor anomaly_visibility_time: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateLogAnomalyDetectorResponse
+      attr_accessor anomaly_detector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLogGroupRequest
+      attr_accessor log_group_name: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS")
+      SENSITIVE: []
+    end
+
+    class CreateLogStreamRequest
+      attr_accessor log_group_name: ::String
+      attr_accessor log_stream_name: ::String
+      SENSITIVE: []
+    end
+
+    class DataAlreadyAcceptedException
+      attr_accessor expected_sequence_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccountPolicyRequest
+      attr_accessor policy_name: ::String
+      attr_accessor policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY")
+      SENSITIVE: []
+    end
+
+    class DeleteDataProtectionPolicyRequest
+      attr_accessor log_group_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDeliveryDestinationPolicyRequest
+      attr_accessor delivery_destination_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDeliveryDestinationRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDeliveryRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDeliverySourceRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDestinationRequest
+      attr_accessor destination_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLogAnomalyDetectorRequest
+      attr_accessor anomaly_detector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLogGroupRequest
+      attr_accessor log_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLogStreamRequest
+      attr_accessor log_group_name: ::String
+      attr_accessor log_stream_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMetricFilterRequest
+      attr_accessor log_group_name: ::String
+      attr_accessor filter_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteQueryDefinitionRequest
+      attr_accessor query_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteQueryDefinitionResponse
+      attr_accessor success: bool
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyRequest
+      attr_accessor policy_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRetentionPolicyRequest
+      attr_accessor log_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSubscriptionFilterRequest
+      attr_accessor log_group_name: ::String
+      attr_accessor filter_name: ::String
+      SENSITIVE: []
+    end
+
+    class Delivery
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor delivery_source_name: ::String
+      attr_accessor delivery_destination_arn: ::String
+      attr_accessor delivery_destination_type: ("S3" | "CWL" | "FH")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DeliveryDestination
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor delivery_destination_type: ("S3" | "CWL" | "FH")
+      attr_accessor output_format: ("json" | "plain" | "w3c" | "raw" | "parquet")
+      attr_accessor delivery_destination_configuration: Types::DeliveryDestinationConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DeliveryDestinationConfiguration
+      attr_accessor destination_resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeliverySource
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor resource_arns: ::Array[::String]
+      attr_accessor service: ::String
+      attr_accessor log_type: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DescribeAccountPoliciesRequest
+      attr_accessor policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY")
+      attr_accessor policy_name: ::String
+      attr_accessor account_identifiers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeAccountPoliciesResponse
+      attr_accessor account_policies: ::Array[Types::AccountPolicy]
+      SENSITIVE: []
+    end
+
+    class DescribeDeliveriesRequest
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeDeliveriesResponse
+      attr_accessor deliveries: ::Array[Types::Delivery]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDeliveryDestinationsRequest
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeDeliveryDestinationsResponse
+      attr_accessor delivery_destinations: ::Array[Types::DeliveryDestination]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDeliverySourcesRequest
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeDeliverySourcesResponse
+      attr_accessor delivery_sources: ::Array[Types::DeliverySource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDestinationsRequest
+      attr_accessor destination_name_prefix: ::String
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeDestinationsResponse
+      attr_accessor destinations: ::Array[Types::Destination]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeExportTasksRequest
+      attr_accessor task_id: ::String
+      attr_accessor status_code: ("CANCELLED" | "COMPLETED" | "FAILED" | "PENDING" | "PENDING_CANCEL" | "RUNNING")
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeExportTasksResponse
+      attr_accessor export_tasks: ::Array[Types::ExportTask]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLogGroupsRequest
+      attr_accessor account_identifiers: ::Array[::String]
+      attr_accessor log_group_name_prefix: ::String
+      attr_accessor log_group_name_pattern: ::String
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor include_linked_accounts: bool
+      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS")
+      SENSITIVE: []
+    end
+
+    class DescribeLogGroupsResponse
+      attr_accessor log_groups: ::Array[Types::LogGroup]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLogStreamsRequest
+      attr_accessor log_group_name: ::String
+      attr_accessor log_group_identifier: ::String
+      attr_accessor log_stream_name_prefix: ::String
+      attr_accessor order_by: ("LogStreamName" | "LastEventTime")
+      attr_accessor descending: bool
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeLogStreamsResponse
+      attr_accessor log_streams: ::Array[Types::LogStream]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMetricFiltersRequest
+      attr_accessor log_group_name: ::String
+      attr_accessor filter_name_prefix: ::String
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor metric_name: ::String
+      attr_accessor metric_namespace: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMetricFiltersResponse
+      attr_accessor metric_filters: ::Array[Types::MetricFilter]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeQueriesRequest
+      attr_accessor log_group_name: ::String
+      attr_accessor status: ("Scheduled" | "Running" | "Complete" | "Failed" | "Cancelled" | "Timeout" | "Unknown")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeQueriesResponse
+      attr_accessor queries: ::Array[Types::QueryInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeQueryDefinitionsRequest
+      attr_accessor query_definition_name_prefix: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeQueryDefinitionsResponse
+      attr_accessor query_definitions: ::Array[Types::QueryDefinition]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeResourcePoliciesRequest
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeResourcePoliciesResponse
+      attr_accessor resource_policies: ::Array[Types::ResourcePolicy]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSubscriptionFiltersRequest
+      attr_accessor log_group_name: ::String
+      attr_accessor filter_name_prefix: ::String
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeSubscriptionFiltersResponse
+      attr_accessor subscription_filters: ::Array[Types::SubscriptionFilter]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class Destination
+      attr_accessor destination_name: ::String
+      attr_accessor target_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor access_policy: ::String
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Integer
+      SENSITIVE: []
+    end
+
+    class DisassociateKmsKeyRequest
+      attr_accessor log_group_name: ::String
+      attr_accessor resource_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ExportTask
+      attr_accessor task_id: ::String
+      attr_accessor task_name: ::String
+      attr_accessor log_group_name: ::String
+      attr_accessor from: ::Integer
+      attr_accessor to: ::Integer
+      attr_accessor destination: ::String
+      attr_accessor destination_prefix: ::String
+      attr_accessor status: Types::ExportTaskStatus
+      attr_accessor execution_info: Types::ExportTaskExecutionInfo
+      SENSITIVE: []
+    end
+
+    class ExportTaskExecutionInfo
+      attr_accessor creation_time: ::Integer
+      attr_accessor completion_time: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExportTaskStatus
+      attr_accessor code: ("CANCELLED" | "COMPLETED" | "FAILED" | "PENDING" | "PENDING_CANCEL" | "RUNNING")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FilterLogEventsRequest
+      attr_accessor log_group_name: ::String
+      attr_accessor log_group_identifier: ::String
+      attr_accessor log_stream_names: ::Array[::String]
+      attr_accessor log_stream_name_prefix: ::String
+      attr_accessor start_time: ::Integer
+      attr_accessor end_time: ::Integer
+      attr_accessor filter_pattern: ::String
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor interleaved: bool
+      attr_accessor unmask: bool
+      SENSITIVE: []
+    end
+
+    class FilterLogEventsResponse
+      attr_accessor events: ::Array[Types::FilteredLogEvent]
+      attr_accessor searched_log_streams: ::Array[Types::SearchedLogStream]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class FilteredLogEvent
+      attr_accessor log_stream_name: ::String
+      attr_accessor timestamp: ::Integer
+      attr_accessor message: ::String
+      attr_accessor ingestion_time: ::Integer
+      attr_accessor event_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataProtectionPolicyRequest
+      attr_accessor log_group_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataProtectionPolicyResponse
+      attr_accessor log_group_identifier: ::String
+      attr_accessor policy_document: ::String
+      attr_accessor last_updated_time: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetDeliveryDestinationPolicyRequest
+      attr_accessor delivery_destination_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeliveryDestinationPolicyResponse
+      attr_accessor policy: Types::Policy
+      SENSITIVE: []
+    end
+
+    class GetDeliveryDestinationRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeliveryDestinationResponse
+      attr_accessor delivery_destination: Types::DeliveryDestination
+      SENSITIVE: []
+    end
+
+    class GetDeliveryRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeliveryResponse
+      attr_accessor delivery: Types::Delivery
+      SENSITIVE: []
+    end
+
+    class GetDeliverySourceRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeliverySourceResponse
+      attr_accessor delivery_source: Types::DeliverySource
+      SENSITIVE: []
+    end
+
+    class GetLogAnomalyDetectorRequest
+      attr_accessor anomaly_detector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetLogAnomalyDetectorResponse
+      attr_accessor detector_name: ::String
+      attr_accessor log_group_arn_list: ::Array[::String]
+      attr_accessor evaluation_frequency: ("ONE_MIN" | "FIVE_MIN" | "TEN_MIN" | "FIFTEEN_MIN" | "THIRTY_MIN" | "ONE_HOUR")
+      attr_accessor filter_pattern: ::String
+      attr_accessor anomaly_detector_status: ("INITIALIZING" | "TRAINING" | "ANALYZING" | "FAILED" | "DELETED" | "PAUSED")
+      attr_accessor kms_key_id: ::String
+      attr_accessor creation_time_stamp: ::Integer
+      attr_accessor last_modified_time_stamp: ::Integer
+      attr_accessor anomaly_visibility_time: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetLogEventsRequest
+      attr_accessor log_group_name: ::String
+      attr_accessor log_group_identifier: ::String
+      attr_accessor log_stream_name: ::String
+      attr_accessor start_time: ::Integer
+      attr_accessor end_time: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor start_from_head: bool
+      attr_accessor unmask: bool
+      SENSITIVE: []
+    end
+
+    class GetLogEventsResponse
+      attr_accessor events: ::Array[Types::OutputLogEvent]
+      attr_accessor next_forward_token: ::String
+      attr_accessor next_backward_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetLogGroupFieldsRequest
+      attr_accessor log_group_name: ::String
+      attr_accessor time: ::Integer
+      attr_accessor log_group_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetLogGroupFieldsResponse
+      attr_accessor log_group_fields: ::Array[Types::LogGroupField]
+      SENSITIVE: []
+    end
+
+    class GetLogRecordRequest
+      attr_accessor log_record_pointer: ::String
+      attr_accessor unmask: bool
+      SENSITIVE: []
+    end
+
+    class GetLogRecordResponse
+      attr_accessor log_record: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetQueryResultsRequest
+      attr_accessor query_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetQueryResultsResponse
+      attr_accessor results: ::Array[::Array[Types::ResultField]]
+      attr_accessor statistics: Types::QueryStatistics
+      attr_accessor status: ("Scheduled" | "Running" | "Complete" | "Failed" | "Cancelled" | "Timeout" | "Unknown")
+      attr_accessor encryption_key: ::String
+      SENSITIVE: []
+    end
+
+    class InputLogEvent
+      attr_accessor timestamp: ::Integer
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidOperationException < Aws::EmptyStructure
+    end
+
+    class InvalidParameterException < Aws::EmptyStructure
+    end
+
+    class InvalidSequenceTokenException
+      attr_accessor expected_sequence_token: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException < Aws::EmptyStructure
+    end
+
+    class ListAnomaliesRequest
+      attr_accessor anomaly_detector_arn: ::String
+      attr_accessor suppression_state: ("SUPPRESSED" | "UNSUPPRESSED")
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAnomaliesResponse
+      attr_accessor anomalies: ::Array[Types::Anomaly]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLogAnomalyDetectorsRequest
+      attr_accessor filter_log_group_arn: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLogAnomalyDetectorsResponse
+      attr_accessor anomaly_detectors: ::Array[Types::AnomalyDetector]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListTagsLogGroupRequest
+      attr_accessor log_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsLogGroupResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class LiveTailSessionLogEvent
+      attr_accessor log_stream_name: ::String
+      attr_accessor log_group_identifier: ::String
+      attr_accessor message: ::String
+      attr_accessor timestamp: ::Integer
+      attr_accessor ingestion_time: ::Integer
+      SENSITIVE: []
+    end
+
+    class LiveTailSessionMetadata
+      attr_accessor sampled: bool
+      SENSITIVE: []
+    end
+
+    class LiveTailSessionStart
+      attr_accessor request_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor log_group_identifiers: ::Array[::String]
+      attr_accessor log_stream_names: ::Array[::String]
+      attr_accessor log_stream_name_prefixes: ::Array[::String]
+      attr_accessor log_event_filter_pattern: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class LiveTailSessionUpdate
+      attr_accessor session_metadata: Types::LiveTailSessionMetadata
+      attr_accessor session_results: ::Array[Types::LiveTailSessionLogEvent]
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class LogGroup
+      attr_accessor log_group_name: ::String
+      attr_accessor creation_time: ::Integer
+      attr_accessor retention_in_days: ::Integer
+      attr_accessor metric_filter_count: ::Integer
+      attr_accessor arn: ::String
+      attr_accessor stored_bytes: ::Integer
+      attr_accessor kms_key_id: ::String
+      attr_accessor data_protection_status: ("ACTIVATED" | "DELETED" | "ARCHIVED" | "DISABLED")
+      attr_accessor inherited_properties: ::Array[("ACCOUNT_DATA_PROTECTION")]
+      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS")
+      SENSITIVE: []
+    end
+
+    class LogGroupField
+      attr_accessor name: ::String
+      attr_accessor percent: ::Integer
+      SENSITIVE: []
+    end
+
+    class LogStream
+      attr_accessor log_stream_name: ::String
+      attr_accessor creation_time: ::Integer
+      attr_accessor first_event_timestamp: ::Integer
+      attr_accessor last_event_timestamp: ::Integer
+      attr_accessor last_ingestion_time: ::Integer
+      attr_accessor upload_sequence_token: ::String
+      attr_accessor arn: ::String
+      attr_accessor stored_bytes: ::Integer
+      SENSITIVE: []
+    end
+
+    class MalformedQueryException
+      attr_accessor query_compile_error: Types::QueryCompileError
+      SENSITIVE: []
+    end
+
+    class MetricFilter
+      attr_accessor filter_name: ::String
+      attr_accessor filter_pattern: ::String
+      attr_accessor metric_transformations: ::Array[Types::MetricTransformation]
+      attr_accessor creation_time: ::Integer
+      attr_accessor log_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class MetricFilterMatchRecord
+      attr_accessor event_number: ::Integer
+      attr_accessor event_message: ::String
+      attr_accessor extracted_values: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class MetricTransformation
+      attr_accessor metric_name: ::String
+      attr_accessor metric_namespace: ::String
+      attr_accessor metric_value: ::String
+      attr_accessor default_value: ::Float
+      attr_accessor dimensions: ::Hash[::String, ::String]
+      attr_accessor unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
+      SENSITIVE: []
+    end
+
+    class OperationAbortedException < Aws::EmptyStructure
+    end
+
+    class OutputLogEvent
+      attr_accessor timestamp: ::Integer
+      attr_accessor message: ::String
+      attr_accessor ingestion_time: ::Integer
+      SENSITIVE: []
+    end
+
+    class PatternToken
+      attr_accessor dynamic_token_position: ::Integer
+      attr_accessor is_dynamic: bool
+      attr_accessor token_string: ::String
+      attr_accessor enumerations: ::Hash[::String, ::Integer]
+      SENSITIVE: []
+    end
+
+    class Policy
+      attr_accessor delivery_destination_policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutAccountPolicyRequest
+      attr_accessor policy_name: ::String
+      attr_accessor policy_document: ::String
+      attr_accessor policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY")
+      attr_accessor scope: ("ALL")
+      attr_accessor selection_criteria: ::String
+      SENSITIVE: []
+    end
+
+    class PutAccountPolicyResponse
+      attr_accessor account_policy: Types::AccountPolicy
+      SENSITIVE: []
+    end
+
+    class PutDataProtectionPolicyRequest
+      attr_accessor log_group_identifier: ::String
+      attr_accessor policy_document: ::String
+      SENSITIVE: []
+    end
+
+    class PutDataProtectionPolicyResponse
+      attr_accessor log_group_identifier: ::String
+      attr_accessor policy_document: ::String
+      attr_accessor last_updated_time: ::Integer
+      SENSITIVE: []
+    end
+
+    class PutDeliveryDestinationPolicyRequest
+      attr_accessor delivery_destination_name: ::String
+      attr_accessor delivery_destination_policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutDeliveryDestinationPolicyResponse
+      attr_accessor policy: Types::Policy
+      SENSITIVE: []
+    end
+
+    class PutDeliveryDestinationRequest
+      attr_accessor name: ::String
+      attr_accessor output_format: ("json" | "plain" | "w3c" | "raw" | "parquet")
+      attr_accessor delivery_destination_configuration: Types::DeliveryDestinationConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PutDeliveryDestinationResponse
+      attr_accessor delivery_destination: Types::DeliveryDestination
+      SENSITIVE: []
+    end
+
+    class PutDeliverySourceRequest
+      attr_accessor name: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor log_type: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PutDeliverySourceResponse
+      attr_accessor delivery_source: Types::DeliverySource
+      SENSITIVE: []
+    end
+
+    class PutDestinationPolicyRequest
+      attr_accessor destination_name: ::String
+      attr_accessor access_policy: ::String
+      attr_accessor force_update: bool
+      SENSITIVE: []
+    end
+
+    class PutDestinationRequest
+      attr_accessor destination_name: ::String
+      attr_accessor target_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PutDestinationResponse
+      attr_accessor destination: Types::Destination
+      SENSITIVE: []
+    end
+
+    class PutLogEventsRequest
+      attr_accessor log_group_name: ::String
+      attr_accessor log_stream_name: ::String
+      attr_accessor log_events: ::Array[Types::InputLogEvent]
+      attr_accessor sequence_token: ::String
+      SENSITIVE: []
+    end
+
+    class PutLogEventsResponse
+      attr_accessor next_sequence_token: ::String
+      attr_accessor rejected_log_events_info: Types::RejectedLogEventsInfo
+      SENSITIVE: []
+    end
+
+    class PutMetricFilterRequest
+      attr_accessor log_group_name: ::String
+      attr_accessor filter_name: ::String
+      attr_accessor filter_pattern: ::String
+      attr_accessor metric_transformations: ::Array[Types::MetricTransformation]
+      SENSITIVE: []
+    end
+
+    class PutQueryDefinitionRequest
+      attr_accessor name: ::String
+      attr_accessor query_definition_id: ::String
+      attr_accessor log_group_names: ::Array[::String]
+      attr_accessor query_string: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class PutQueryDefinitionResponse
+      attr_accessor query_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyRequest
+      attr_accessor policy_name: ::String
+      attr_accessor policy_document: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyResponse
+      attr_accessor resource_policy: Types::ResourcePolicy
+      SENSITIVE: []
+    end
+
+    class PutRetentionPolicyRequest
+      attr_accessor log_group_name: ::String
+      attr_accessor retention_in_days: ::Integer
+      SENSITIVE: []
+    end
+
+    class PutSubscriptionFilterRequest
+      attr_accessor log_group_name: ::String
+      attr_accessor filter_name: ::String
+      attr_accessor filter_pattern: ::String
+      attr_accessor destination_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor distribution: ("Random" | "ByLogStream")
+      SENSITIVE: []
+    end
+
+    class QueryCompileError
+      attr_accessor location: Types::QueryCompileErrorLocation
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class QueryCompileErrorLocation
+      attr_accessor start_char_offset: ::Integer
+      attr_accessor end_char_offset: ::Integer
+      SENSITIVE: []
+    end
+
+    class QueryDefinition
+      attr_accessor query_definition_id: ::String
+      attr_accessor name: ::String
+      attr_accessor query_string: ::String
+      attr_accessor last_modified: ::Integer
+      attr_accessor log_group_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class QueryInfo
+      attr_accessor query_id: ::String
+      attr_accessor query_string: ::String
+      attr_accessor status: ("Scheduled" | "Running" | "Complete" | "Failed" | "Cancelled" | "Timeout" | "Unknown")
+      attr_accessor create_time: ::Integer
+      attr_accessor log_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class QueryStatistics
+      attr_accessor records_matched: ::Float
+      attr_accessor records_scanned: ::Float
+      attr_accessor bytes_scanned: ::Float
+      SENSITIVE: []
+    end
+
+    class RejectedLogEventsInfo
+      attr_accessor too_new_log_event_start_index: ::Integer
+      attr_accessor too_old_log_event_end_index: ::Integer
+      attr_accessor expired_log_event_end_index: ::Integer
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyExistsException < Aws::EmptyStructure
+    end
+
+    class ResourceNotFoundException < Aws::EmptyStructure
+    end
+
+    class ResourcePolicy
+      attr_accessor policy_name: ::String
+      attr_accessor policy_document: ::String
+      attr_accessor last_updated_time: ::Integer
+      SENSITIVE: []
+    end
+
+    class ResultField
+      attr_accessor field: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SearchedLogStream
+      attr_accessor log_stream_name: ::String
+      attr_accessor searched_completely: bool
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException < Aws::EmptyStructure
+    end
+
+    class ServiceUnavailableException < Aws::EmptyStructure
+    end
+
+    class SessionStreamingException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class SessionTimeoutException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class StartLiveTailRequest
+      attr_accessor log_group_identifiers: ::Array[::String]
+      attr_accessor log_stream_names: ::Array[::String]
+      attr_accessor log_stream_name_prefixes: ::Array[::String]
+      attr_accessor log_event_filter_pattern: ::String
+      SENSITIVE: []
+    end
+
+    class StartLiveTailResponse
+      attr_accessor response_stream: Types::StartLiveTailResponseStream
+      SENSITIVE: []
+    end
+
+    class StartQueryRequest
+      attr_accessor log_group_name: ::String
+      attr_accessor log_group_names: ::Array[::String]
+      attr_accessor log_group_identifiers: ::Array[::String]
+      attr_accessor start_time: ::Integer
+      attr_accessor end_time: ::Integer
+      attr_accessor query_string: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class StartQueryResponse
+      attr_accessor query_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopQueryRequest
+      attr_accessor query_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopQueryResponse
+      attr_accessor success: bool
+      SENSITIVE: []
+    end
+
+    class SubscriptionFilter
+      attr_accessor filter_name: ::String
+      attr_accessor log_group_name: ::String
+      attr_accessor filter_pattern: ::String
+      attr_accessor destination_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor distribution: ("Random" | "ByLogStream")
+      attr_accessor creation_time: ::Integer
+      SENSITIVE: []
+    end
+
+    class SuppressionPeriod
+      attr_accessor value: ::Integer
+      attr_accessor suppression_unit: ("SECONDS" | "MINUTES" | "HOURS")
+      SENSITIVE: []
+    end
+
+    class TagLogGroupRequest
+      attr_accessor log_group_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TestMetricFilterRequest
+      attr_accessor filter_pattern: ::String
+      attr_accessor log_event_messages: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TestMetricFilterResponse
+      attr_accessor matches: ::Array[Types::MetricFilterMatchRecord]
+      SENSITIVE: []
+    end
+
+    class ThrottlingException < Aws::EmptyStructure
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class UnrecognizedClientException < Aws::EmptyStructure
+    end
+
+    class UntagLogGroupRequest
+      attr_accessor log_group_name: ::String
+      attr_accessor tags: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateAnomalyRequest
+      attr_accessor anomaly_id: ::String
+      attr_accessor pattern_id: ::String
+      attr_accessor anomaly_detector_arn: ::String
+      attr_accessor suppression_type: ("LIMITED" | "INFINITE")
+      attr_accessor suppression_period: Types::SuppressionPeriod
+      SENSITIVE: []
+    end
+
+    class UpdateLogAnomalyDetectorRequest
+      attr_accessor anomaly_detector_arn: ::String
+      attr_accessor evaluation_frequency: ("ONE_MIN" | "FIVE_MIN" | "TEN_MIN" | "FIFTEEN_MIN" | "THIRTY_MIN" | "ONE_HOUR")
+      attr_accessor filter_pattern: ::String
+      attr_accessor anomaly_visibility_time: ::Integer
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class ValidationException < Aws::EmptyStructure
+    end
+
+    class StartLiveTailResponseStream < Enumerator[untyped, untyped]
+      def event_types: () -> [:session_start, :session_update, :session_timeout_exception, :session_streaming_exception]
+    end
+  end
+end

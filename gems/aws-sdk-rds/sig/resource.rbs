@@ -1,0 +1,599 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RDS
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html
+    class Resource
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#initialize-instance_method
+      def initialize: (
+                        ?client: Client,
+                        ?credentials: untyped,
+                        ?region: String,
+                        ?access_key_id: String,
+                        ?active_endpoint_cache: bool,
+                        ?adaptive_retry_wait_to_fill: bool,
+                        ?client_side_monitoring: bool,
+                        ?client_side_monitoring_client_id: String,
+                        ?client_side_monitoring_host: String,
+                        ?client_side_monitoring_port: Integer,
+                        ?client_side_monitoring_publisher: untyped,
+                        ?convert_params: bool,
+                        ?correct_clock_skew: bool,
+                        ?defaults_mode: String,
+                        ?disable_host_prefix_injection: bool,
+                        ?disable_request_compression: bool,
+                        ?endpoint: String,
+                        ?endpoint_cache_max_entries: Integer,
+                        ?endpoint_cache_max_threads: Integer,
+                        ?endpoint_cache_poll_interval: Integer,
+                        ?endpoint_discovery: bool,
+                        ?ignore_configured_endpoint_urls: bool,
+                        ?log_formatter: untyped,
+                        ?log_level: Symbol,
+                        ?logger: untyped,
+                        ?max_attempts: Integer,
+                        ?profile: String,
+                        ?request_min_compression_size_bytes: Integer,
+                        ?retry_backoff: Proc,
+                        ?retry_base_delay: Float,
+                        ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                        ?retry_limit: Integer,
+                        ?retry_max_delay: Integer,
+                        ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                        ?sdk_ua_app_id: String,
+                        ?secret_access_key: String,
+                        ?session_token: String,
+                        ?stub_responses: untyped,
+                        ?token_provider: untyped,
+                        ?use_dualstack_endpoint: bool,
+                        ?use_fips_endpoint: bool,
+                        ?validate_params: bool,
+                        ?endpoint_provider: untyped,
+                        ?http_proxy: String,
+                        ?http_open_timeout: (Float | Integer),
+                        ?http_read_timeout: (Float | Integer),
+                        ?http_idle_timeout: (Float | Integer),
+                        ?http_continue_timeout: (Float | Integer),
+                        ?ssl_timeout: (Float | Integer | nil),
+                        ?http_wire_trace: bool,
+                        ?ssl_verify_peer: bool,
+                        ?ssl_ca_bundle: String,
+                        ?ssl_ca_directory: String,
+                        ?ssl_ca_store: String,
+                        ?on_chunk_received: Proc,
+                        ?on_chunk_sent: Proc,
+                        ?raise_response_errors: bool
+                      ) -> void
+                    | (?Hash[Symbol, untyped]) -> void
+
+      def client: () -> Client
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#create_db_cluster-instance_method
+      def create_db_cluster: (
+                               ?availability_zones: Array[::String],
+                               ?backup_retention_period: ::Integer,
+                               ?character_set_name: ::String,
+                               ?database_name: ::String,
+                               db_cluster_identifier: ::String,
+                               ?db_cluster_parameter_group_name: ::String,
+                               ?vpc_security_group_ids: Array[::String],
+                               ?db_subnet_group_name: ::String,
+                               engine: ::String,
+                               ?engine_version: ::String,
+                               ?port: ::Integer,
+                               ?master_username: ::String,
+                               ?master_user_password: ::String,
+                               ?option_group_name: ::String,
+                               ?preferred_backup_window: ::String,
+                               ?preferred_maintenance_window: ::String,
+                               ?replication_source_identifier: ::String,
+                               ?tags: Array[
+                                 {
+                                   key: ::String?,
+                                   value: ::String?
+                                 },
+                               ],
+                               ?storage_encrypted: bool,
+                               ?kms_key_id: ::String,
+                               ?pre_signed_url: ::String,
+                               ?enable_iam_database_authentication: bool,
+                               ?backtrack_window: ::Integer,
+                               ?enable_cloudwatch_logs_exports: Array[::String],
+                               ?engine_mode: ::String,
+                               ?scaling_configuration: {
+                                 min_capacity: ::Integer?,
+                                 max_capacity: ::Integer?,
+                                 auto_pause: bool?,
+                                 seconds_until_auto_pause: ::Integer?,
+                                 timeout_action: ::String?,
+                                 seconds_before_timeout: ::Integer?
+                               },
+                               ?rds_custom_cluster_configuration: {
+                                 interconnect_subnet_id: ::String?,
+                                 transit_gateway_multicast_domain_id: ::String?,
+                                 replica_mode: ("open-read-only" | "mounted")?
+                               },
+                               ?deletion_protection: bool,
+                               ?global_cluster_identifier: ::String,
+                               ?enable_http_endpoint: bool,
+                               ?copy_tags_to_snapshot: bool,
+                               ?domain: ::String,
+                               ?domain_iam_role_name: ::String,
+                               ?enable_global_write_forwarding: bool,
+                               ?db_cluster_instance_class: ::String,
+                               ?allocated_storage: ::Integer,
+                               ?storage_type: ::String,
+                               ?iops: ::Integer,
+                               ?publicly_accessible: bool,
+                               ?auto_minor_version_upgrade: bool,
+                               ?monitoring_interval: ::Integer,
+                               ?monitoring_role_arn: ::String,
+                               ?enable_performance_insights: bool,
+                               ?performance_insights_kms_key_id: ::String,
+                               ?performance_insights_retention_period: ::Integer,
+                               ?enable_limitless_database: bool,
+                               ?serverless_v2_scaling_configuration: {
+                                 min_capacity: ::Float?,
+                                 max_capacity: ::Float?
+                               },
+                               ?network_type: ::String,
+                               ?db_system_id: ::String,
+                               ?manage_master_user_password: bool,
+                               ?master_user_secret_kms_key_id: ::String,
+                               ?enable_local_write_forwarding: bool,
+                               ?source_region: ::String
+                             ) -> DBCluster
+                           | (?Hash[Symbol, untyped]) -> DBCluster
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#create_db_cluster_parameter_group-instance_method
+      def create_db_cluster_parameter_group: (
+                                               db_cluster_parameter_group_name: ::String,
+                                               db_parameter_group_family: ::String,
+                                               description: ::String,
+                                               ?tags: Array[
+                                                 {
+                                                   key: ::String?,
+                                                   value: ::String?
+                                                 },
+                                               ]
+                                             ) -> DBClusterParameterGroup
+                                           | (?Hash[Symbol, untyped]) -> DBClusterParameterGroup
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#create_db_instance-instance_method
+      def create_db_instance: (
+                                ?db_name: ::String,
+                                db_instance_identifier: ::String,
+                                ?allocated_storage: ::Integer,
+                                db_instance_class: ::String,
+                                engine: ::String,
+                                ?master_username: ::String,
+                                ?master_user_password: ::String,
+                                ?db_security_groups: Array[::String],
+                                ?vpc_security_group_ids: Array[::String],
+                                ?availability_zone: ::String,
+                                ?db_subnet_group_name: ::String,
+                                ?preferred_maintenance_window: ::String,
+                                ?db_parameter_group_name: ::String,
+                                ?backup_retention_period: ::Integer,
+                                ?preferred_backup_window: ::String,
+                                ?port: ::Integer,
+                                ?multi_az: bool,
+                                ?engine_version: ::String,
+                                ?auto_minor_version_upgrade: bool,
+                                ?license_model: ::String,
+                                ?iops: ::Integer,
+                                ?option_group_name: ::String,
+                                ?character_set_name: ::String,
+                                ?nchar_character_set_name: ::String,
+                                ?publicly_accessible: bool,
+                                ?tags: Array[
+                                  {
+                                    key: ::String?,
+                                    value: ::String?
+                                  },
+                                ],
+                                ?db_cluster_identifier: ::String,
+                                ?storage_type: ::String,
+                                ?tde_credential_arn: ::String,
+                                ?tde_credential_password: ::String,
+                                ?storage_encrypted: bool,
+                                ?kms_key_id: ::String,
+                                ?domain: ::String,
+                                ?domain_fqdn: ::String,
+                                ?domain_ou: ::String,
+                                ?domain_auth_secret_arn: ::String,
+                                ?domain_dns_ips: Array[::String],
+                                ?copy_tags_to_snapshot: bool,
+                                ?monitoring_interval: ::Integer,
+                                ?monitoring_role_arn: ::String,
+                                ?domain_iam_role_name: ::String,
+                                ?promotion_tier: ::Integer,
+                                ?timezone: ::String,
+                                ?enable_iam_database_authentication: bool,
+                                ?enable_performance_insights: bool,
+                                ?performance_insights_kms_key_id: ::String,
+                                ?performance_insights_retention_period: ::Integer,
+                                ?enable_cloudwatch_logs_exports: Array[::String],
+                                ?processor_features: Array[
+                                  {
+                                    name: ::String?,
+                                    value: ::String?
+                                  },
+                                ],
+                                ?deletion_protection: bool,
+                                ?max_allocated_storage: ::Integer,
+                                ?enable_customer_owned_ip: bool,
+                                ?custom_iam_instance_profile: ::String,
+                                ?backup_target: ::String,
+                                ?network_type: ::String,
+                                ?storage_throughput: ::Integer,
+                                ?manage_master_user_password: bool,
+                                ?master_user_secret_kms_key_id: ::String,
+                                ?ca_certificate_identifier: ::String,
+                                ?db_system_id: ::String,
+                                ?dedicated_log_volume: bool,
+                                ?multi_tenant: bool
+                              ) -> DBInstance
+                            | (?Hash[Symbol, untyped]) -> DBInstance
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#create_db_parameter_group-instance_method
+      def create_db_parameter_group: (
+                                       db_parameter_group_name: ::String,
+                                       db_parameter_group_family: ::String,
+                                       description: ::String,
+                                       ?tags: Array[
+                                         {
+                                           key: ::String?,
+                                           value: ::String?
+                                         },
+                                       ]
+                                     ) -> DBParameterGroup
+                                   | (?Hash[Symbol, untyped]) -> DBParameterGroup
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#create_db_security_group-instance_method
+      def create_db_security_group: (
+                                      db_security_group_name: ::String,
+                                      db_security_group_description: ::String,
+                                      ?tags: Array[
+                                        {
+                                          key: ::String?,
+                                          value: ::String?
+                                        },
+                                      ]
+                                    ) -> DBSecurityGroup
+                                  | (?Hash[Symbol, untyped]) -> DBSecurityGroup
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#create_db_subnet_group-instance_method
+      def create_db_subnet_group: (
+                                    db_subnet_group_name: ::String,
+                                    db_subnet_group_description: ::String,
+                                    subnet_ids: Array[::String],
+                                    ?tags: Array[
+                                      {
+                                        key: ::String?,
+                                        value: ::String?
+                                      },
+                                    ]
+                                  ) -> DBSubnetGroup
+                                | (?Hash[Symbol, untyped]) -> DBSubnetGroup
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#create_event_subscription-instance_method
+      def create_event_subscription: (
+                                       subscription_name: ::String,
+                                       sns_topic_arn: ::String,
+                                       ?source_type: ::String,
+                                       ?event_categories: Array[::String],
+                                       ?source_ids: Array[::String],
+                                       ?enabled: bool,
+                                       ?tags: Array[
+                                         {
+                                           key: ::String?,
+                                           value: ::String?
+                                         },
+                                       ]
+                                     ) -> EventSubscription
+                                   | (?Hash[Symbol, untyped]) -> EventSubscription
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#create_option_group-instance_method
+      def create_option_group: (
+                                 option_group_name: ::String,
+                                 engine_name: ::String,
+                                 major_engine_version: ::String,
+                                 option_group_description: ::String,
+                                 ?tags: Array[
+                                   {
+                                     key: ::String?,
+                                     value: ::String?
+                                   },
+                                 ]
+                               ) -> OptionGroup
+                             | (?Hash[Symbol, untyped]) -> OptionGroup
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#account_quotas-instance_method
+      def account_quotas: (
+                          ) -> AccountQuota::Collection
+                        | (?Hash[Symbol, untyped]) -> AccountQuota::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#certificate-instance_method
+      def certificate: (String id) -> Certificate
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#certificates-instance_method
+      def certificates: (
+                          ?certificate_identifier: ::String,
+                          ?filters: Array[
+                            {
+                              name: ::String,
+                              values: Array[::String]
+                            },
+                          ]
+                        ) -> Certificate::Collection
+                      | (?Hash[Symbol, untyped]) -> Certificate::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#db_cluster-instance_method
+      def db_cluster: (String id) -> DBCluster
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#db_cluster_parameter_group-instance_method
+      def db_cluster_parameter_group: (String name) -> DBClusterParameterGroup
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#db_cluster_parameter_groups-instance_method
+      def db_cluster_parameter_groups: (
+                                         ?db_cluster_parameter_group_name: ::String,
+                                         ?filters: Array[
+                                           {
+                                             name: ::String,
+                                             values: Array[::String]
+                                           },
+                                         ]
+                                       ) -> DBClusterParameterGroup::Collection
+                                     | (?Hash[Symbol, untyped]) -> DBClusterParameterGroup::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#db_clusters-instance_method
+      def db_clusters: (
+                         ?db_cluster_identifier: ::String,
+                         ?filters: Array[
+                           {
+                             name: ::String,
+                             values: Array[::String]
+                           },
+                         ],
+                         ?include_shared: bool
+                       ) -> DBCluster::Collection
+                     | (?Hash[Symbol, untyped]) -> DBCluster::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#db_engine-instance_method
+      def db_engine: (String name) -> DBEngine
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#db_engine_version-instance_method
+      def db_engine_version: (String engine_name, String version) -> DBEngineVersion
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#db_engine_versions-instance_method
+      def db_engine_versions: (
+                                ?engine: ::String,
+                                ?engine_version: ::String,
+                                ?db_parameter_group_family: ::String,
+                                ?filters: Array[
+                                  {
+                                    name: ::String,
+                                    values: Array[::String]
+                                  },
+                                ],
+                                ?default_only: bool,
+                                ?list_supported_character_sets: bool,
+                                ?list_supported_timezones: bool,
+                                ?include_all: bool
+                              ) -> DBEngineVersion::Collection
+                            | (?Hash[Symbol, untyped]) -> DBEngineVersion::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#db_instance-instance_method
+      def db_instance: (String id) -> DBInstance
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#db_instances-instance_method
+      def db_instances: (
+                          ?db_instance_identifier: ::String,
+                          ?filters: Array[
+                            {
+                              name: ::String,
+                              values: Array[::String]
+                            },
+                          ]
+                        ) -> DBInstance::Collection
+                      | (?Hash[Symbol, untyped]) -> DBInstance::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#db_parameter_group-instance_method
+      def db_parameter_group: (String name) -> DBParameterGroup
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#db_parameter_group_family-instance_method
+      def db_parameter_group_family: (String name) -> DBParameterGroupFamily
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#db_parameter_groups-instance_method
+      def db_parameter_groups: (
+                                 ?db_parameter_group_name: ::String,
+                                 ?filters: Array[
+                                   {
+                                     name: ::String,
+                                     values: Array[::String]
+                                   },
+                                 ]
+                               ) -> DBParameterGroup::Collection
+                             | (?Hash[Symbol, untyped]) -> DBParameterGroup::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#db_security_group-instance_method
+      def db_security_group: (String name) -> DBSecurityGroup
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#db_security_groups-instance_method
+      def db_security_groups: (
+                                ?db_security_group_name: ::String,
+                                ?filters: Array[
+                                  {
+                                    name: ::String,
+                                    values: Array[::String]
+                                  },
+                                ]
+                              ) -> DBSecurityGroup::Collection
+                            | (?Hash[Symbol, untyped]) -> DBSecurityGroup::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#db_snapshots-instance_method
+      def db_snapshots: (
+                          ?db_instance_identifier: ::String,
+                          ?db_snapshot_identifier: ::String,
+                          ?snapshot_type: ::String,
+                          ?filters: Array[
+                            {
+                              name: ::String,
+                              values: Array[::String]
+                            },
+                          ],
+                          ?include_shared: bool,
+                          ?include_public: bool,
+                          ?dbi_resource_id: ::String
+                        ) -> DBSnapshot::Collection
+                      | (?Hash[Symbol, untyped]) -> DBSnapshot::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#db_subnet_group-instance_method
+      def db_subnet_group: (String name) -> DBSubnetGroup
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#db_subnet_groups-instance_method
+      def db_subnet_groups: (
+                              ?db_subnet_group_name: ::String,
+                              ?filters: Array[
+                                {
+                                  name: ::String,
+                                  values: Array[::String]
+                                },
+                              ]
+                            ) -> DBSubnetGroup::Collection
+                          | (?Hash[Symbol, untyped]) -> DBSubnetGroup::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#event_category_map-instance_method
+      def event_category_map: (String source_type) -> EventCategoryMap
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#event_category_maps-instance_method
+      def event_category_maps: (
+                                 ?source_type: ::String,
+                                 ?filters: Array[
+                                   {
+                                     name: ::String,
+                                     values: Array[::String]
+                                   },
+                                 ]
+                               ) -> EventCategoryMap::Collection
+                             | (?Hash[Symbol, untyped]) -> EventCategoryMap::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#event_subscription-instance_method
+      def event_subscription: (String name) -> EventSubscription
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#event_subscriptions-instance_method
+      def event_subscriptions: (
+                                 ?subscription_name: ::String,
+                                 ?filters: Array[
+                                   {
+                                     name: ::String,
+                                     values: Array[::String]
+                                   },
+                                 ]
+                               ) -> EventSubscription::Collection
+                             | (?Hash[Symbol, untyped]) -> EventSubscription::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#events-instance_method
+      def events: (
+                    ?source_identifier: ::String,
+                    ?source_type: ("db-instance" | "db-parameter-group" | "db-security-group" | "db-snapshot" | "db-cluster" | "db-cluster-snapshot" | "custom-engine-version" | "db-proxy" | "blue-green-deployment"),
+                    ?start_time: ::Time,
+                    ?end_time: ::Time,
+                    ?duration: ::Integer,
+                    ?event_categories: Array[::String],
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ]
+                  ) -> Event::Collection
+                | (?Hash[Symbol, untyped]) -> Event::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#option_group-instance_method
+      def option_group: (String name) -> OptionGroup
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#option_groups-instance_method
+      def option_groups: (
+                           ?option_group_name: ::String,
+                           ?filters: Array[
+                             {
+                               name: ::String,
+                               values: Array[::String]
+                             },
+                           ],
+                           ?engine_name: ::String,
+                           ?major_engine_version: ::String
+                         ) -> OptionGroup::Collection
+                       | (?Hash[Symbol, untyped]) -> OptionGroup::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#pending_maintenance_action-instance_method
+      def pending_maintenance_action: (String target_arn, String name) -> PendingMaintenanceAction
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#reserved_db_instance-instance_method
+      def reserved_db_instance: (String id) -> ReservedDBInstance
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#reserved_db_instances-instance_method
+      def reserved_db_instances: (
+                                   ?reserved_db_instance_id: ::String,
+                                   ?reserved_db_instances_offering_id: ::String,
+                                   ?db_instance_class: ::String,
+                                   ?duration: ::String,
+                                   ?product_description: ::String,
+                                   ?offering_type: ::String,
+                                   ?multi_az: bool,
+                                   ?lease_id: ::String,
+                                   ?filters: Array[
+                                     {
+                                       name: ::String,
+                                       values: Array[::String]
+                                     },
+                                   ]
+                                 ) -> ReservedDBInstance::Collection
+                               | (?Hash[Symbol, untyped]) -> ReservedDBInstance::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#reserved_db_instances_offering-instance_method
+      def reserved_db_instances_offering: (String id) -> ReservedDBInstancesOffering
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#reserved_db_instances_offerings-instance_method
+      def reserved_db_instances_offerings: (
+                                             ?reserved_db_instances_offering_id: ::String,
+                                             ?db_instance_class: ::String,
+                                             ?duration: ::String,
+                                             ?product_description: ::String,
+                                             ?offering_type: ::String,
+                                             ?multi_az: bool,
+                                             ?filters: Array[
+                                               {
+                                                 name: ::String,
+                                                 values: Array[::String]
+                                               },
+                                             ]
+                                           ) -> ReservedDBInstancesOffering::Collection
+                                         | (?Hash[Symbol, untyped]) -> ReservedDBInstancesOffering::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#resource_with_pending_maintenance_actions-instance_method
+      def resource_with_pending_maintenance_actions: (String arn) -> ResourcePendingMaintenanceActionList
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Resource.html#resources_with_pending_maintenance_actions-instance_method
+      def resources_with_pending_maintenance_actions: (
+                                                        ?resource_identifier: ::String,
+                                                        ?filters: Array[
+                                                          {
+                                                            name: ::String,
+                                                            values: Array[::String]
+                                                          },
+                                                        ]
+                                                      ) -> ResourcePendingMaintenanceActionList::Collection
+                                                    | (?Hash[Symbol, untyped]) -> ResourcePendingMaintenanceActionList::Collection
+    end
+  end
+end

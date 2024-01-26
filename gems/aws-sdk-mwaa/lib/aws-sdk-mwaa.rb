@@ -52,6 +52,6 @@ require_relative 'aws-sdk-mwaa/customizations'
 # @!group service
 module Aws::MWAA
 
-  GEM_VERSION = '1.32.0'
+  GEM_VERSION = '1.33.0'
 
 end

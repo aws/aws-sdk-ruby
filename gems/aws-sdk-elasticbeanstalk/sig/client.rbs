@@ -1,0 +1,922 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ElasticBeanstalk
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#abort_environment_update-instance_method
+      def abort_environment_update: (
+                                      ?environment_id: ::String,
+                                      ?environment_name: ::String
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _ApplyEnvironmentManagedActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ApplyEnvironmentManagedActionResult]
+        def action_id: () -> ::String
+        def action_description: () -> ::String
+        def action_type: () -> ("InstanceRefresh" | "PlatformUpdate" | "Unknown")
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#apply_environment_managed_action-instance_method
+      def apply_environment_managed_action: (
+                                              ?environment_name: ::String,
+                                              ?environment_id: ::String,
+                                              action_id: ::String
+                                            ) -> _ApplyEnvironmentManagedActionResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ApplyEnvironmentManagedActionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#associate_environment_operations_role-instance_method
+      def associate_environment_operations_role: (
+                                                   environment_name: ::String,
+                                                   operations_role: ::String
+                                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _CheckDNSAvailabilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CheckDNSAvailabilityResultMessage]
+        def available: () -> bool
+        def fully_qualified_cname: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#check_dns_availability-instance_method
+      def check_dns_availability: (
+                                    cname_prefix: ::String
+                                  ) -> _CheckDNSAvailabilityResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CheckDNSAvailabilityResponseSuccess
+
+      interface _ComposeEnvironmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnvironmentDescriptionsMessage]
+        def environments: () -> ::Array[Types::EnvironmentDescription]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#compose_environments-instance_method
+      def compose_environments: (
+                                  ?application_name: ::String,
+                                  ?group_name: ::String,
+                                  ?version_labels: Array[::String]
+                                ) -> _ComposeEnvironmentsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ComposeEnvironmentsResponseSuccess
+
+      interface _CreateApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ApplicationDescriptionMessage]
+        def application: () -> Types::ApplicationDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#create_application-instance_method
+      def create_application: (
+                                application_name: ::String,
+                                ?description: ::String,
+                                ?resource_lifecycle_config: {
+                                  service_role: ::String?,
+                                  version_lifecycle_config: {
+                                    max_count_rule: {
+                                      enabled: bool,
+                                      max_count: ::Integer?,
+                                      delete_source_from_s3: bool?
+                                    }?,
+                                    max_age_rule: {
+                                      enabled: bool,
+                                      max_age_in_days: ::Integer?,
+                                      delete_source_from_s3: bool?
+                                    }?
+                                  }?
+                                },
+                                ?tags: Array[
+                                  {
+                                    key: ::String?,
+                                    value: ::String?
+                                  },
+                                ]
+                              ) -> _CreateApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
+
+      interface _CreateApplicationVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ApplicationVersionDescriptionMessage]
+        def application_version: () -> Types::ApplicationVersionDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#create_application_version-instance_method
+      def create_application_version: (
+                                        application_name: ::String,
+                                        version_label: ::String,
+                                        ?description: ::String,
+                                        ?source_build_information: {
+                                          source_type: ("Git" | "Zip"),
+                                          source_repository: ("CodeCommit" | "S3"),
+                                          source_location: ::String
+                                        },
+                                        ?source_bundle: {
+                                          s3_bucket: ::String?,
+                                          s3_key: ::String?
+                                        },
+                                        ?build_configuration: {
+                                          artifact_name: ::String?,
+                                          code_build_service_role: ::String,
+                                          compute_type: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE")?,
+                                          image: ::String,
+                                          timeout_in_minutes: ::Integer?
+                                        },
+                                        ?auto_create_application: bool,
+                                        ?process: bool,
+                                        ?tags: Array[
+                                          {
+                                            key: ::String?,
+                                            value: ::String?
+                                          },
+                                        ]
+                                      ) -> _CreateApplicationVersionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationVersionResponseSuccess
+
+      interface _CreateConfigurationTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConfigurationSettingsDescription]
+        def solution_stack_name: () -> ::String
+        def platform_arn: () -> ::String
+        def application_name: () -> ::String
+        def template_name: () -> ::String
+        def description: () -> ::String
+        def environment_name: () -> ::String
+        def deployment_status: () -> ("deployed" | "pending" | "failed")
+        def date_created: () -> ::Time
+        def date_updated: () -> ::Time
+        def option_settings: () -> ::Array[Types::ConfigurationOptionSetting]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#create_configuration_template-instance_method
+      def create_configuration_template: (
+                                           application_name: ::String,
+                                           template_name: ::String,
+                                           ?solution_stack_name: ::String,
+                                           ?platform_arn: ::String,
+                                           ?source_configuration: {
+                                             application_name: ::String?,
+                                             template_name: ::String?
+                                           },
+                                           ?environment_id: ::String,
+                                           ?description: ::String,
+                                           ?option_settings: Array[
+                                             {
+                                               resource_name: ::String?,
+                                               namespace: ::String?,
+                                               option_name: ::String?,
+                                               value: ::String?
+                                             },
+                                           ],
+                                           ?tags: Array[
+                                             {
+                                               key: ::String?,
+                                               value: ::String?
+                                             },
+                                           ]
+                                         ) -> _CreateConfigurationTemplateResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfigurationTemplateResponseSuccess
+
+      interface _CreateEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnvironmentDescription]
+        def environment_name: () -> ::String
+        def environment_id: () -> ::String
+        def application_name: () -> ::String
+        def version_label: () -> ::String
+        def solution_stack_name: () -> ::String
+        def platform_arn: () -> ::String
+        def template_name: () -> ::String
+        def description: () -> ::String
+        def endpoint_url: () -> ::String
+        def cname: () -> ::String
+        def date_created: () -> ::Time
+        def date_updated: () -> ::Time
+        def status: () -> ("Aborting" | "Launching" | "Updating" | "LinkingFrom" | "LinkingTo" | "Ready" | "Terminating" | "Terminated")
+        def abortable_operation_in_progress: () -> bool
+        def health: () -> ("Green" | "Yellow" | "Red" | "Grey")
+        def health_status: () -> ("NoData" | "Unknown" | "Pending" | "Ok" | "Info" | "Warning" | "Degraded" | "Severe" | "Suspended")
+        def resources: () -> Types::EnvironmentResourcesDescription
+        def tier: () -> Types::EnvironmentTier
+        def environment_links: () -> ::Array[Types::EnvironmentLink]
+        def environment_arn: () -> ::String
+        def operations_role: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#create_environment-instance_method
+      def create_environment: (
+                                application_name: ::String,
+                                ?environment_name: ::String,
+                                ?group_name: ::String,
+                                ?description: ::String,
+                                ?cname_prefix: ::String,
+                                ?tier: {
+                                  name: ::String?,
+                                  type: ::String?,
+                                  version: ::String?
+                                },
+                                ?tags: Array[
+                                  {
+                                    key: ::String?,
+                                    value: ::String?
+                                  },
+                                ],
+                                ?version_label: ::String,
+                                ?template_name: ::String,
+                                ?solution_stack_name: ::String,
+                                ?platform_arn: ::String,
+                                ?option_settings: Array[
+                                  {
+                                    resource_name: ::String?,
+                                    namespace: ::String?,
+                                    option_name: ::String?,
+                                    value: ::String?
+                                  },
+                                ],
+                                ?options_to_remove: Array[
+                                  {
+                                    resource_name: ::String?,
+                                    namespace: ::String?,
+                                    option_name: ::String?
+                                  },
+                                ],
+                                ?operations_role: ::String
+                              ) -> _CreateEnvironmentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentResponseSuccess
+
+      interface _CreatePlatformVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePlatformVersionResult]
+        def platform_summary: () -> Types::PlatformSummary
+        def builder: () -> Types::Builder
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#create_platform_version-instance_method
+      def create_platform_version: (
+                                     platform_name: ::String,
+                                     platform_version: ::String,
+                                     platform_definition_bundle: {
+                                       s3_bucket: ::String?,
+                                       s3_key: ::String?
+                                     },
+                                     ?environment_name: ::String,
+                                     ?option_settings: Array[
+                                       {
+                                         resource_name: ::String?,
+                                         namespace: ::String?,
+                                         option_name: ::String?,
+                                         value: ::String?
+                                       },
+                                     ],
+                                     ?tags: Array[
+                                       {
+                                         key: ::String?,
+                                         value: ::String?
+                                       },
+                                     ]
+                                   ) -> _CreatePlatformVersionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePlatformVersionResponseSuccess
+
+      interface _CreateStorageLocationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStorageLocationResultMessage]
+        def s3_bucket: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#create_storage_location-instance_method
+      def create_storage_location: () -> _CreateStorageLocationResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStorageLocationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#delete_application-instance_method
+      def delete_application: (
+                                application_name: ::String,
+                                ?terminate_env_by_force: bool
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#delete_application_version-instance_method
+      def delete_application_version: (
+                                        application_name: ::String,
+                                        version_label: ::String,
+                                        ?delete_source_bundle: bool
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#delete_configuration_template-instance_method
+      def delete_configuration_template: (
+                                           application_name: ::String,
+                                           template_name: ::String
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#delete_environment_configuration-instance_method
+      def delete_environment_configuration: (
+                                              application_name: ::String,
+                                              environment_name: ::String
+                                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeletePlatformVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePlatformVersionResult]
+        def platform_summary: () -> Types::PlatformSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#delete_platform_version-instance_method
+      def delete_platform_version: (
+                                     ?platform_arn: ::String
+                                   ) -> _DeletePlatformVersionResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePlatformVersionResponseSuccess
+
+      interface _DescribeAccountAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAccountAttributesResult]
+        def resource_quotas: () -> Types::ResourceQuotas
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#describe_account_attributes-instance_method
+      def describe_account_attributes: () -> _DescribeAccountAttributesResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccountAttributesResponseSuccess
+
+      interface _DescribeApplicationVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ApplicationVersionDescriptionsMessage]
+        def application_versions: () -> ::Array[Types::ApplicationVersionDescription]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#describe_application_versions-instance_method
+      def describe_application_versions: (
+                                           ?application_name: ::String,
+                                           ?version_labels: Array[::String],
+                                           ?max_records: ::Integer,
+                                           ?next_token: ::String
+                                         ) -> _DescribeApplicationVersionsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeApplicationVersionsResponseSuccess
+
+      interface _DescribeApplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ApplicationDescriptionsMessage]
+        def applications: () -> ::Array[Types::ApplicationDescription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#describe_applications-instance_method
+      def describe_applications: (
+                                   ?application_names: Array[::String]
+                                 ) -> _DescribeApplicationsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeApplicationsResponseSuccess
+
+      interface _DescribeConfigurationOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConfigurationOptionsDescription]
+        def solution_stack_name: () -> ::String
+        def platform_arn: () -> ::String
+        def options: () -> ::Array[Types::ConfigurationOptionDescription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#describe_configuration_options-instance_method
+      def describe_configuration_options: (
+                                            ?application_name: ::String,
+                                            ?template_name: ::String,
+                                            ?environment_name: ::String,
+                                            ?solution_stack_name: ::String,
+                                            ?platform_arn: ::String,
+                                            ?options: Array[
+                                              {
+                                                resource_name: ::String?,
+                                                namespace: ::String?,
+                                                option_name: ::String?
+                                              },
+                                            ]
+                                          ) -> _DescribeConfigurationOptionsResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConfigurationOptionsResponseSuccess
+
+      interface _DescribeConfigurationSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConfigurationSettingsDescriptions]
+        def configuration_settings: () -> ::Array[Types::ConfigurationSettingsDescription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#describe_configuration_settings-instance_method
+      def describe_configuration_settings: (
+                                             application_name: ::String,
+                                             ?template_name: ::String,
+                                             ?environment_name: ::String
+                                           ) -> _DescribeConfigurationSettingsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConfigurationSettingsResponseSuccess
+
+      interface _DescribeEnvironmentHealthResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEnvironmentHealthResult]
+        def environment_name: () -> ::String
+        def health_status: () -> ::String
+        def status: () -> ("Green" | "Yellow" | "Red" | "Grey")
+        def color: () -> ::String
+        def causes: () -> ::Array[::String]
+        def application_metrics: () -> Types::ApplicationMetrics
+        def instances_health: () -> Types::InstanceHealthSummary
+        def refreshed_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#describe_environment_health-instance_method
+      def describe_environment_health: (
+                                         ?environment_name: ::String,
+                                         ?environment_id: ::String,
+                                         ?attribute_names: Array[("Status" | "Color" | "Causes" | "ApplicationMetrics" | "InstancesHealth" | "All" | "HealthStatus" | "RefreshedAt")]
+                                       ) -> _DescribeEnvironmentHealthResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEnvironmentHealthResponseSuccess
+
+      interface _DescribeEnvironmentManagedActionHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEnvironmentManagedActionHistoryResult]
+        def managed_action_history_items: () -> ::Array[Types::ManagedActionHistoryItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#describe_environment_managed_action_history-instance_method
+      def describe_environment_managed_action_history: (
+                                                         ?environment_id: ::String,
+                                                         ?environment_name: ::String,
+                                                         ?next_token: ::String,
+                                                         ?max_items: ::Integer
+                                                       ) -> _DescribeEnvironmentManagedActionHistoryResponseSuccess
+                                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEnvironmentManagedActionHistoryResponseSuccess
+
+      interface _DescribeEnvironmentManagedActionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEnvironmentManagedActionsResult]
+        def managed_actions: () -> ::Array[Types::ManagedAction]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#describe_environment_managed_actions-instance_method
+      def describe_environment_managed_actions: (
+                                                  ?environment_name: ::String,
+                                                  ?environment_id: ::String,
+                                                  ?status: ("Scheduled" | "Pending" | "Running" | "Unknown")
+                                                ) -> _DescribeEnvironmentManagedActionsResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEnvironmentManagedActionsResponseSuccess
+
+      interface _DescribeEnvironmentResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnvironmentResourceDescriptionsMessage]
+        def environment_resources: () -> Types::EnvironmentResourceDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#describe_environment_resources-instance_method
+      def describe_environment_resources: (
+                                            ?environment_id: ::String,
+                                            ?environment_name: ::String
+                                          ) -> _DescribeEnvironmentResourcesResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEnvironmentResourcesResponseSuccess
+
+      interface _DescribeEnvironmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnvironmentDescriptionsMessage]
+        def environments: () -> ::Array[Types::EnvironmentDescription]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#describe_environments-instance_method
+      def describe_environments: (
+                                   ?application_name: ::String,
+                                   ?version_label: ::String,
+                                   ?environment_ids: Array[::String],
+                                   ?environment_names: Array[::String],
+                                   ?include_deleted: bool,
+                                   ?included_deleted_back_to: ::Time,
+                                   ?max_records: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _DescribeEnvironmentsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEnvironmentsResponseSuccess
+
+      interface _DescribeEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EventDescriptionsMessage]
+        def events: () -> ::Array[Types::EventDescription]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#describe_events-instance_method
+      def describe_events: (
+                             ?application_name: ::String,
+                             ?version_label: ::String,
+                             ?template_name: ::String,
+                             ?environment_id: ::String,
+                             ?environment_name: ::String,
+                             ?platform_arn: ::String,
+                             ?request_id: ::String,
+                             ?severity: ("TRACE" | "DEBUG" | "INFO" | "WARN" | "ERROR" | "FATAL"),
+                             ?start_time: ::Time,
+                             ?end_time: ::Time,
+                             ?max_records: ::Integer,
+                             ?next_token: ::String
+                           ) -> _DescribeEventsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEventsResponseSuccess
+
+      interface _DescribeInstancesHealthResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInstancesHealthResult]
+        def instance_health_list: () -> ::Array[Types::SingleInstanceHealth]
+        def refreshed_at: () -> ::Time
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#describe_instances_health-instance_method
+      def describe_instances_health: (
+                                       ?environment_name: ::String,
+                                       ?environment_id: ::String,
+                                       ?attribute_names: Array[("HealthStatus" | "Color" | "Causes" | "ApplicationMetrics" | "RefreshedAt" | "LaunchedAt" | "System" | "Deployment" | "AvailabilityZone" | "InstanceType" | "All")],
+                                       ?next_token: ::String
+                                     ) -> _DescribeInstancesHealthResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInstancesHealthResponseSuccess
+
+      interface _DescribePlatformVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePlatformVersionResult]
+        def platform_description: () -> Types::PlatformDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#describe_platform_version-instance_method
+      def describe_platform_version: (
+                                       ?platform_arn: ::String
+                                     ) -> _DescribePlatformVersionResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePlatformVersionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#disassociate_environment_operations_role-instance_method
+      def disassociate_environment_operations_role: (
+                                                      environment_name: ::String
+                                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _ListAvailableSolutionStacksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAvailableSolutionStacksResultMessage]
+        def solution_stacks: () -> ::Array[::String]
+        def solution_stack_details: () -> ::Array[Types::SolutionStackDescription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#list_available_solution_stacks-instance_method
+      def list_available_solution_stacks: () -> _ListAvailableSolutionStacksResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAvailableSolutionStacksResponseSuccess
+
+      interface _ListPlatformBranchesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPlatformBranchesResult]
+        def platform_branch_summary_list: () -> ::Array[Types::PlatformBranchSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#list_platform_branches-instance_method
+      def list_platform_branches: (
+                                    ?filters: Array[
+                                      {
+                                        attribute: ::String?,
+                                        operator: ::String?,
+                                        values: Array[::String]?
+                                      },
+                                    ],
+                                    ?max_records: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListPlatformBranchesResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPlatformBranchesResponseSuccess
+
+      interface _ListPlatformVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPlatformVersionsResult]
+        def platform_summary_list: () -> ::Array[Types::PlatformSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#list_platform_versions-instance_method
+      def list_platform_versions: (
+                                    ?filters: Array[
+                                      {
+                                        type: ::String?,
+                                        operator: ::String?,
+                                        values: Array[::String]?
+                                      },
+                                    ],
+                                    ?max_records: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListPlatformVersionsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPlatformVersionsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResourceTagsDescriptionMessage]
+        def resource_arn: () -> ::String
+        def resource_tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#rebuild_environment-instance_method
+      def rebuild_environment: (
+                                 ?environment_id: ::String,
+                                 ?environment_name: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#request_environment_info-instance_method
+      def request_environment_info: (
+                                      ?environment_id: ::String,
+                                      ?environment_name: ::String,
+                                      info_type: ("tail" | "bundle")
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#restart_app_server-instance_method
+      def restart_app_server: (
+                                ?environment_id: ::String,
+                                ?environment_name: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _RetrieveEnvironmentInfoResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RetrieveEnvironmentInfoResultMessage]
+        def environment_info: () -> ::Array[Types::EnvironmentInfoDescription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#retrieve_environment_info-instance_method
+      def retrieve_environment_info: (
+                                       ?environment_id: ::String,
+                                       ?environment_name: ::String,
+                                       info_type: ("tail" | "bundle")
+                                     ) -> _RetrieveEnvironmentInfoResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RetrieveEnvironmentInfoResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#swap_environment_cnames-instance_method
+      def swap_environment_cnames: (
+                                     ?source_environment_id: ::String,
+                                     ?source_environment_name: ::String,
+                                     ?destination_environment_id: ::String,
+                                     ?destination_environment_name: ::String
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _TerminateEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnvironmentDescription]
+        def environment_name: () -> ::String
+        def environment_id: () -> ::String
+        def application_name: () -> ::String
+        def version_label: () -> ::String
+        def solution_stack_name: () -> ::String
+        def platform_arn: () -> ::String
+        def template_name: () -> ::String
+        def description: () -> ::String
+        def endpoint_url: () -> ::String
+        def cname: () -> ::String
+        def date_created: () -> ::Time
+        def date_updated: () -> ::Time
+        def status: () -> ("Aborting" | "Launching" | "Updating" | "LinkingFrom" | "LinkingTo" | "Ready" | "Terminating" | "Terminated")
+        def abortable_operation_in_progress: () -> bool
+        def health: () -> ("Green" | "Yellow" | "Red" | "Grey")
+        def health_status: () -> ("NoData" | "Unknown" | "Pending" | "Ok" | "Info" | "Warning" | "Degraded" | "Severe" | "Suspended")
+        def resources: () -> Types::EnvironmentResourcesDescription
+        def tier: () -> Types::EnvironmentTier
+        def environment_links: () -> ::Array[Types::EnvironmentLink]
+        def environment_arn: () -> ::String
+        def operations_role: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#terminate_environment-instance_method
+      def terminate_environment: (
+                                   ?environment_id: ::String,
+                                   ?environment_name: ::String,
+                                   ?terminate_resources: bool,
+                                   ?force_terminate: bool
+                                 ) -> _TerminateEnvironmentResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TerminateEnvironmentResponseSuccess
+
+      interface _UpdateApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ApplicationDescriptionMessage]
+        def application: () -> Types::ApplicationDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#update_application-instance_method
+      def update_application: (
+                                application_name: ::String,
+                                ?description: ::String
+                              ) -> _UpdateApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationResponseSuccess
+
+      interface _UpdateApplicationResourceLifecycleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ApplicationResourceLifecycleDescriptionMessage]
+        def application_name: () -> ::String
+        def resource_lifecycle_config: () -> Types::ApplicationResourceLifecycleConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#update_application_resource_lifecycle-instance_method
+      def update_application_resource_lifecycle: (
+                                                   application_name: ::String,
+                                                   resource_lifecycle_config: {
+                                                     service_role: ::String?,
+                                                     version_lifecycle_config: {
+                                                       max_count_rule: {
+                                                         enabled: bool,
+                                                         max_count: ::Integer?,
+                                                         delete_source_from_s3: bool?
+                                                       }?,
+                                                       max_age_rule: {
+                                                         enabled: bool,
+                                                         max_age_in_days: ::Integer?,
+                                                         delete_source_from_s3: bool?
+                                                       }?
+                                                     }?
+                                                   }
+                                                 ) -> _UpdateApplicationResourceLifecycleResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationResourceLifecycleResponseSuccess
+
+      interface _UpdateApplicationVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ApplicationVersionDescriptionMessage]
+        def application_version: () -> Types::ApplicationVersionDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#update_application_version-instance_method
+      def update_application_version: (
+                                        application_name: ::String,
+                                        version_label: ::String,
+                                        ?description: ::String
+                                      ) -> _UpdateApplicationVersionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationVersionResponseSuccess
+
+      interface _UpdateConfigurationTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConfigurationSettingsDescription]
+        def solution_stack_name: () -> ::String
+        def platform_arn: () -> ::String
+        def application_name: () -> ::String
+        def template_name: () -> ::String
+        def description: () -> ::String
+        def environment_name: () -> ::String
+        def deployment_status: () -> ("deployed" | "pending" | "failed")
+        def date_created: () -> ::Time
+        def date_updated: () -> ::Time
+        def option_settings: () -> ::Array[Types::ConfigurationOptionSetting]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#update_configuration_template-instance_method
+      def update_configuration_template: (
+                                           application_name: ::String,
+                                           template_name: ::String,
+                                           ?description: ::String,
+                                           ?option_settings: Array[
+                                             {
+                                               resource_name: ::String?,
+                                               namespace: ::String?,
+                                               option_name: ::String?,
+                                               value: ::String?
+                                             },
+                                           ],
+                                           ?options_to_remove: Array[
+                                             {
+                                               resource_name: ::String?,
+                                               namespace: ::String?,
+                                               option_name: ::String?
+                                             },
+                                           ]
+                                         ) -> _UpdateConfigurationTemplateResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfigurationTemplateResponseSuccess
+
+      interface _UpdateEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnvironmentDescription]
+        def environment_name: () -> ::String
+        def environment_id: () -> ::String
+        def application_name: () -> ::String
+        def version_label: () -> ::String
+        def solution_stack_name: () -> ::String
+        def platform_arn: () -> ::String
+        def template_name: () -> ::String
+        def description: () -> ::String
+        def endpoint_url: () -> ::String
+        def cname: () -> ::String
+        def date_created: () -> ::Time
+        def date_updated: () -> ::Time
+        def status: () -> ("Aborting" | "Launching" | "Updating" | "LinkingFrom" | "LinkingTo" | "Ready" | "Terminating" | "Terminated")
+        def abortable_operation_in_progress: () -> bool
+        def health: () -> ("Green" | "Yellow" | "Red" | "Grey")
+        def health_status: () -> ("NoData" | "Unknown" | "Pending" | "Ok" | "Info" | "Warning" | "Degraded" | "Severe" | "Suspended")
+        def resources: () -> Types::EnvironmentResourcesDescription
+        def tier: () -> Types::EnvironmentTier
+        def environment_links: () -> ::Array[Types::EnvironmentLink]
+        def environment_arn: () -> ::String
+        def operations_role: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#update_environment-instance_method
+      def update_environment: (
+                                ?application_name: ::String,
+                                ?environment_id: ::String,
+                                ?environment_name: ::String,
+                                ?group_name: ::String,
+                                ?description: ::String,
+                                ?tier: {
+                                  name: ::String?,
+                                  type: ::String?,
+                                  version: ::String?
+                                },
+                                ?version_label: ::String,
+                                ?template_name: ::String,
+                                ?solution_stack_name: ::String,
+                                ?platform_arn: ::String,
+                                ?option_settings: Array[
+                                  {
+                                    resource_name: ::String?,
+                                    namespace: ::String?,
+                                    option_name: ::String?,
+                                    value: ::String?
+                                  },
+                                ],
+                                ?options_to_remove: Array[
+                                  {
+                                    resource_name: ::String?,
+                                    namespace: ::String?,
+                                    option_name: ::String?
+                                  },
+                                ]
+                              ) -> _UpdateEnvironmentResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#update_tags_for_resource-instance_method
+      def update_tags_for_resource: (
+                                      resource_arn: ::String,
+                                      ?tags_to_add: Array[
+                                        {
+                                          key: ::String?,
+                                          value: ::String?
+                                        },
+                                      ],
+                                      ?tags_to_remove: Array[::String]
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _ValidateConfigurationSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConfigurationSettingsValidationMessages]
+        def messages: () -> ::Array[Types::ValidationMessage]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#validate_configuration_settings-instance_method
+      def validate_configuration_settings: (
+                                             application_name: ::String,
+                                             ?template_name: ::String,
+                                             ?environment_name: ::String,
+                                             option_settings: Array[
+                                               {
+                                                 resource_name: ::String?,
+                                                 namespace: ::String?,
+                                                 option_name: ::String?,
+                                                 value: ::String?
+                                               },
+                                             ]
+                                           ) -> _ValidateConfigurationSettingsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ValidateConfigurationSettingsResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#wait_until-instance_method
+      def wait_until: (:environment_exists waiter_name, 
+                    ?application_name: ::String,
+                    ?version_label: ::String,
+                    ?environment_ids: Array[::String],
+                    ?environment_names: Array[::String],
+                    ?include_deleted: bool,
+                    ?included_deleted_back_to: ::Time,
+                    ?max_records: ::Integer,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeEnvironmentsResponseSuccess
+                    | (:environment_exists waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeEnvironmentsResponseSuccess
+                    | (:environment_terminated waiter_name, 
+                    ?application_name: ::String,
+                    ?version_label: ::String,
+                    ?environment_ids: Array[::String],
+                    ?environment_names: Array[::String],
+                    ?include_deleted: bool,
+                    ?included_deleted_back_to: ::Time,
+                    ?max_records: ::Integer,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeEnvironmentsResponseSuccess
+                    | (:environment_terminated waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeEnvironmentsResponseSuccess
+                    | (:environment_updated waiter_name, 
+                    ?application_name: ::String,
+                    ?version_label: ::String,
+                    ?environment_ids: Array[::String],
+                    ?environment_names: Array[::String],
+                    ?include_deleted: bool,
+                    ?included_deleted_back_to: ::Time,
+                    ?max_records: ::Integer,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeEnvironmentsResponseSuccess
+                    | (:environment_updated waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeEnvironmentsResponseSuccess
+    end
+  end
+end
+

@@ -1,0 +1,596 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SecurityLake
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateAwsLogSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAwsLogSourceResponse]
+        def failed: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#create_aws_log_source-instance_method
+      def create_aws_log_source: (
+                                   sources: Array[
+                                     {
+                                       accounts: Array[::String]?,
+                                       regions: Array[::String],
+                                       source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA"),
+                                       source_version: ::String?
+                                     },
+                                   ]
+                                 ) -> _CreateAwsLogSourceResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAwsLogSourceResponseSuccess
+
+      interface _CreateCustomLogSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCustomLogSourceResponse]
+        def source: () -> Types::CustomLogSourceResource
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#create_custom_log_source-instance_method
+      def create_custom_log_source: (
+                                      ?configuration: {
+                                        crawler_configuration: {
+                                          role_arn: ::String
+                                        },
+                                        provider_identity: {
+                                          external_id: ::String,
+                                          principal: ::String
+                                        }
+                                      },
+                                      ?event_classes: Array[::String],
+                                      source_name: ::String,
+                                      ?source_version: ::String
+                                    ) -> _CreateCustomLogSourceResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomLogSourceResponseSuccess
+
+      interface _CreateDataLakeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataLakeResponse]
+        def data_lakes: () -> ::Array[Types::DataLakeResource]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#create_data_lake-instance_method
+      def create_data_lake: (
+                              configurations: Array[
+                                {
+                                  encryption_configuration: {
+                                    kms_key_id: ::String?
+                                  }?,
+                                  lifecycle_configuration: {
+                                    expiration: {
+                                      days: ::Integer?
+                                    }?,
+                                    transitions: Array[
+                                      {
+                                        days: ::Integer?,
+                                        storage_class: ::String?
+                                      },
+                                    ]?
+                                  }?,
+                                  region: ::String,
+                                  replication_configuration: {
+                                    regions: Array[::String]?,
+                                    role_arn: ::String?
+                                  }?
+                                },
+                              ],
+                              meta_store_manager_role_arn: ::String,
+                              ?tags: Array[
+                                {
+                                  key: ::String,
+                                  value: ::String
+                                },
+                              ]
+                            ) -> _CreateDataLakeResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataLakeResponseSuccess
+
+      interface _CreateDataLakeExceptionSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataLakeExceptionSubscriptionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#create_data_lake_exception_subscription-instance_method
+      def create_data_lake_exception_subscription: (
+                                                     ?exception_time_to_live: ::Integer,
+                                                     notification_endpoint: ::String,
+                                                     subscription_protocol: ::String
+                                                   ) -> _CreateDataLakeExceptionSubscriptionResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataLakeExceptionSubscriptionResponseSuccess
+
+      interface _CreateDataLakeOrganizationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataLakeOrganizationConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#create_data_lake_organization_configuration-instance_method
+      def create_data_lake_organization_configuration: (
+                                                         auto_enable_new_account: Array[
+                                                           {
+                                                             region: ::String,
+                                                             sources: Array[
+                                                               {
+                                                                 source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA")?,
+                                                                 source_version: ::String?
+                                                               },
+                                                             ]
+                                                           },
+                                                         ]
+                                                       ) -> _CreateDataLakeOrganizationConfigurationResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataLakeOrganizationConfigurationResponseSuccess
+
+      interface _CreateSubscriberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSubscriberResponse]
+        def subscriber: () -> Types::SubscriberResource
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#create_subscriber-instance_method
+      def create_subscriber: (
+                               ?access_types: Array[("LAKEFORMATION" | "S3")],
+                               sources: Array[
+                                 {
+                                   aws_log_source: {
+                                     source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA")?,
+                                     source_version: ::String?
+                                   }?,
+                                   custom_log_source: {
+                                     attributes: {
+                                       crawler_arn: ::String?,
+                                       database_arn: ::String?,
+                                       table_arn: ::String?
+                                     }?,
+                                     provider: {
+                                       location: ::String?,
+                                       role_arn: ::String?
+                                     }?,
+                                     source_name: ::String?,
+                                     source_version: ::String?
+                                   }?
+                                 },
+                               ],
+                               ?subscriber_description: ::String,
+                               subscriber_identity: {
+                                 external_id: ::String,
+                                 principal: ::String
+                               },
+                               subscriber_name: ::String,
+                               ?tags: Array[
+                                 {
+                                   key: ::String,
+                                   value: ::String
+                                 },
+                               ]
+                             ) -> _CreateSubscriberResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSubscriberResponseSuccess
+
+      interface _CreateSubscriberNotificationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSubscriberNotificationResponse]
+        def subscriber_endpoint: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#create_subscriber_notification-instance_method
+      def create_subscriber_notification: (
+                                            configuration: {
+                                              https_notification_configuration: {
+                                                authorization_api_key_name: ::String?,
+                                                authorization_api_key_value: ::String?,
+                                                endpoint: ::String,
+                                                http_method: ("POST" | "PUT")?,
+                                                target_role_arn: ::String
+                                              }?,
+                                              sqs_notification_configuration: {
+                                              }?
+                                            },
+                                            subscriber_id: ::String
+                                          ) -> _CreateSubscriberNotificationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSubscriberNotificationResponseSuccess
+
+      interface _DeleteAwsLogSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAwsLogSourceResponse]
+        def failed: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#delete_aws_log_source-instance_method
+      def delete_aws_log_source: (
+                                   sources: Array[
+                                     {
+                                       accounts: Array[::String]?,
+                                       regions: Array[::String],
+                                       source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA"),
+                                       source_version: ::String?
+                                     },
+                                   ]
+                                 ) -> _DeleteAwsLogSourceResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAwsLogSourceResponseSuccess
+
+      interface _DeleteCustomLogSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCustomLogSourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#delete_custom_log_source-instance_method
+      def delete_custom_log_source: (
+                                      source_name: ::String,
+                                      ?source_version: ::String
+                                    ) -> _DeleteCustomLogSourceResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCustomLogSourceResponseSuccess
+
+      interface _DeleteDataLakeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataLakeResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#delete_data_lake-instance_method
+      def delete_data_lake: (
+                              regions: Array[::String]
+                            ) -> _DeleteDataLakeResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataLakeResponseSuccess
+
+      interface _DeleteDataLakeExceptionSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataLakeExceptionSubscriptionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#delete_data_lake_exception_subscription-instance_method
+      def delete_data_lake_exception_subscription: (
+                                                   ) -> _DeleteDataLakeExceptionSubscriptionResponseSuccess
+                                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataLakeExceptionSubscriptionResponseSuccess
+
+      interface _DeleteDataLakeOrganizationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataLakeOrganizationConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#delete_data_lake_organization_configuration-instance_method
+      def delete_data_lake_organization_configuration: (
+                                                         auto_enable_new_account: Array[
+                                                           {
+                                                             region: ::String,
+                                                             sources: Array[
+                                                               {
+                                                                 source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA")?,
+                                                                 source_version: ::String?
+                                                               },
+                                                             ]
+                                                           },
+                                                         ]
+                                                       ) -> _DeleteDataLakeOrganizationConfigurationResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataLakeOrganizationConfigurationResponseSuccess
+
+      interface _DeleteSubscriberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSubscriberResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#delete_subscriber-instance_method
+      def delete_subscriber: (
+                               subscriber_id: ::String
+                             ) -> _DeleteSubscriberResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSubscriberResponseSuccess
+
+      interface _DeleteSubscriberNotificationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSubscriberNotificationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#delete_subscriber_notification-instance_method
+      def delete_subscriber_notification: (
+                                            subscriber_id: ::String
+                                          ) -> _DeleteSubscriberNotificationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSubscriberNotificationResponseSuccess
+
+      interface _DeregisterDataLakeDelegatedAdministratorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterDataLakeDelegatedAdministratorResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#deregister_data_lake_delegated_administrator-instance_method
+      def deregister_data_lake_delegated_administrator: (
+                                                        ) -> _DeregisterDataLakeDelegatedAdministratorResponseSuccess
+                                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterDataLakeDelegatedAdministratorResponseSuccess
+
+      interface _GetDataLakeExceptionSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataLakeExceptionSubscriptionResponse]
+        def exception_time_to_live: () -> ::Integer
+        def notification_endpoint: () -> ::String
+        def subscription_protocol: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#get_data_lake_exception_subscription-instance_method
+      def get_data_lake_exception_subscription: (
+                                                ) -> _GetDataLakeExceptionSubscriptionResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataLakeExceptionSubscriptionResponseSuccess
+
+      interface _GetDataLakeOrganizationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataLakeOrganizationConfigurationResponse]
+        def auto_enable_new_account: () -> ::Array[Types::DataLakeAutoEnableNewAccountConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#get_data_lake_organization_configuration-instance_method
+      def get_data_lake_organization_configuration: (
+                                                    ) -> _GetDataLakeOrganizationConfigurationResponseSuccess
+                                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataLakeOrganizationConfigurationResponseSuccess
+
+      interface _GetDataLakeSourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataLakeSourcesResponse]
+        def data_lake_arn: () -> ::String
+        def data_lake_sources: () -> ::Array[Types::DataLakeSource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#get_data_lake_sources-instance_method
+      def get_data_lake_sources: (
+                                   ?accounts: Array[::String],
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _GetDataLakeSourcesResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataLakeSourcesResponseSuccess
+
+      interface _GetSubscriberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSubscriberResponse]
+        def subscriber: () -> Types::SubscriberResource
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#get_subscriber-instance_method
+      def get_subscriber: (
+                            subscriber_id: ::String
+                          ) -> _GetSubscriberResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSubscriberResponseSuccess
+
+      interface _ListDataLakeExceptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataLakeExceptionsResponse]
+        def exceptions: () -> ::Array[Types::DataLakeException]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#list_data_lake_exceptions-instance_method
+      def list_data_lake_exceptions: (
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String,
+                                       ?regions: Array[::String]
+                                     ) -> _ListDataLakeExceptionsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataLakeExceptionsResponseSuccess
+
+      interface _ListDataLakesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataLakesResponse]
+        def data_lakes: () -> ::Array[Types::DataLakeResource]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#list_data_lakes-instance_method
+      def list_data_lakes: (
+                             ?regions: Array[::String]
+                           ) -> _ListDataLakesResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataLakesResponseSuccess
+
+      interface _ListLogSourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLogSourcesResponse]
+        def next_token: () -> ::String
+        def sources: () -> ::Array[Types::LogSource]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#list_log_sources-instance_method
+      def list_log_sources: (
+                              ?accounts: Array[::String],
+                              ?max_results: ::Integer,
+                              ?next_token: ::String,
+                              ?regions: Array[::String],
+                              ?sources: Array[
+                                {
+                                  aws_log_source: {
+                                    source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA")?,
+                                    source_version: ::String?
+                                  }?,
+                                  custom_log_source: {
+                                    attributes: {
+                                      crawler_arn: ::String?,
+                                      database_arn: ::String?,
+                                      table_arn: ::String?
+                                    }?,
+                                    provider: {
+                                      location: ::String?,
+                                      role_arn: ::String?
+                                    }?,
+                                    source_name: ::String?,
+                                    source_version: ::String?
+                                  }?
+                                },
+                              ]
+                            ) -> _ListLogSourcesResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLogSourcesResponseSuccess
+
+      interface _ListSubscribersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSubscribersResponse]
+        def next_token: () -> ::String
+        def subscribers: () -> ::Array[Types::SubscriberResource]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#list_subscribers-instance_method
+      def list_subscribers: (
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _ListSubscribersResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSubscribersResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _RegisterDataLakeDelegatedAdministratorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterDataLakeDelegatedAdministratorResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#register_data_lake_delegated_administrator-instance_method
+      def register_data_lake_delegated_administrator: (
+                                                        account_id: ::String
+                                                      ) -> _RegisterDataLakeDelegatedAdministratorResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterDataLakeDelegatedAdministratorResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateDataLakeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataLakeResponse]
+        def data_lakes: () -> ::Array[Types::DataLakeResource]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#update_data_lake-instance_method
+      def update_data_lake: (
+                              configurations: Array[
+                                {
+                                  encryption_configuration: {
+                                    kms_key_id: ::String?
+                                  }?,
+                                  lifecycle_configuration: {
+                                    expiration: {
+                                      days: ::Integer?
+                                    }?,
+                                    transitions: Array[
+                                      {
+                                        days: ::Integer?,
+                                        storage_class: ::String?
+                                      },
+                                    ]?
+                                  }?,
+                                  region: ::String,
+                                  replication_configuration: {
+                                    regions: Array[::String]?,
+                                    role_arn: ::String?
+                                  }?
+                                },
+                              ]
+                            ) -> _UpdateDataLakeResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataLakeResponseSuccess
+
+      interface _UpdateDataLakeExceptionSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataLakeExceptionSubscriptionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#update_data_lake_exception_subscription-instance_method
+      def update_data_lake_exception_subscription: (
+                                                     ?exception_time_to_live: ::Integer,
+                                                     notification_endpoint: ::String,
+                                                     subscription_protocol: ::String
+                                                   ) -> _UpdateDataLakeExceptionSubscriptionResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataLakeExceptionSubscriptionResponseSuccess
+
+      interface _UpdateSubscriberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSubscriberResponse]
+        def subscriber: () -> Types::SubscriberResource
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#update_subscriber-instance_method
+      def update_subscriber: (
+                               ?sources: Array[
+                                 {
+                                   aws_log_source: {
+                                     source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA")?,
+                                     source_version: ::String?
+                                   }?,
+                                   custom_log_source: {
+                                     attributes: {
+                                       crawler_arn: ::String?,
+                                       database_arn: ::String?,
+                                       table_arn: ::String?
+                                     }?,
+                                     provider: {
+                                       location: ::String?,
+                                       role_arn: ::String?
+                                     }?,
+                                     source_name: ::String?,
+                                     source_version: ::String?
+                                   }?
+                                 },
+                               ],
+                               ?subscriber_description: ::String,
+                               subscriber_id: ::String,
+                               ?subscriber_identity: {
+                                 external_id: ::String,
+                                 principal: ::String
+                               },
+                               ?subscriber_name: ::String
+                             ) -> _UpdateSubscriberResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSubscriberResponseSuccess
+
+      interface _UpdateSubscriberNotificationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSubscriberNotificationResponse]
+        def subscriber_endpoint: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#update_subscriber_notification-instance_method
+      def update_subscriber_notification: (
+                                            configuration: {
+                                              https_notification_configuration: {
+                                                authorization_api_key_name: ::String?,
+                                                authorization_api_key_value: ::String?,
+                                                endpoint: ::String,
+                                                http_method: ("POST" | "PUT")?,
+                                                target_role_arn: ::String
+                                              }?,
+                                              sqs_notification_configuration: {
+                                              }?
+                                            },
+                                            subscriber_id: ::String
+                                          ) -> _UpdateSubscriberNotificationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSubscriberNotificationResponseSuccess
+    end
+  end
+end
+

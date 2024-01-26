@@ -1,0 +1,213 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module BackupStorage
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupStorage/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupStorage/Client.html#delete_object-instance_method
+      def delete_object: (
+                           backup_job_id: ::String,
+                           object_name: ::String
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetChunkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetChunkOutput]
+        def length: () -> ::Integer
+        def checksum: () -> ::String
+        def checksum_algorithm: () -> ("SHA256")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupStorage/Client.html#get_chunk-instance_method
+      def get_chunk: (
+                       storage_job_id: ::String,
+                       chunk_token: ::String
+                     ) ?{ (*untyped) -> void } -> _GetChunkResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _GetChunkResponseSuccess
+
+      interface _GetObjectMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetObjectMetadataOutput]
+        def metadata_string: () -> ::String
+        def metadata_blob: () -> ::IO
+        def metadata_blob_length: () -> ::Integer
+        def metadata_blob_checksum: () -> ::String
+        def metadata_blob_checksum_algorithm: () -> ("SHA256")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupStorage/Client.html#get_object_metadata-instance_method
+      def get_object_metadata: (
+                                 storage_job_id: ::String,
+                                 object_token: ::String
+                               ) ?{ (*untyped) -> void } -> _GetObjectMetadataResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _GetObjectMetadataResponseSuccess
+
+      interface _ListChunksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChunksOutput]
+        def chunk_list: () -> ::Array[Types::Chunk]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupStorage/Client.html#list_chunks-instance_method
+      def list_chunks: (
+                         storage_job_id: ::String,
+                         object_token: ::String,
+                         ?max_results: ::Integer,
+                         ?next_token: ::String
+                       ) -> _ListChunksResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChunksResponseSuccess
+
+      interface _ListObjectsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListObjectsOutput]
+        def object_list: () -> ::Array[Types::BackupObject]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupStorage/Client.html#list_objects-instance_method
+      def list_objects: (
+                          storage_job_id: ::String,
+                          ?starting_object_name: ::String,
+                          ?starting_object_prefix: ::String,
+                          ?max_results: ::Integer,
+                          ?next_token: ::String,
+                          ?created_before: ::Time,
+                          ?created_after: ::Time
+                        ) -> _ListObjectsResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListObjectsResponseSuccess
+
+      interface _NotifyObjectCompleteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::NotifyObjectCompleteOutput]
+        def object_checksum: () -> ::String
+        def object_checksum_algorithm: () -> ("SUMMARY")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupStorage/Client.html#notify_object_complete-instance_method
+      def notify_object_complete: (
+                                    backup_job_id: ::String,
+                                    upload_id: ::String,
+                                    object_checksum: ::String,
+                                    object_checksum_algorithm: ("SUMMARY"),
+                                    ?metadata_string: ::String,
+                                    ?metadata_blob: ::String,
+                                    ?metadata_blob_length: ::Integer,
+                                    ?metadata_blob_checksum: ::String,
+                                    ?metadata_blob_checksum_algorithm: ("SHA256")
+                                  ) -> _NotifyObjectCompleteResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _NotifyObjectCompleteResponseSuccess
+
+      interface _PutChunkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutChunkOutput]
+        def chunk_checksum: () -> ::String
+        def chunk_checksum_algorithm: () -> ("SHA256")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupStorage/Client.html#put_chunk-instance_method
+      def put_chunk: (
+                       backup_job_id: ::String,
+                       upload_id: ::String,
+                       chunk_index: ::Integer,
+                       data: ::String,
+                       length: ::Integer,
+                       checksum: ::String,
+                       checksum_algorithm: ("SHA256")
+                     ) -> _PutChunkResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutChunkResponseSuccess
+
+      interface _PutObjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutObjectOutput]
+        def inline_chunk_checksum: () -> ::String
+        def inline_chunk_checksum_algorithm: () -> ("SHA256")
+        def object_checksum: () -> ::String
+        def object_checksum_algorithm: () -> ("SUMMARY")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupStorage/Client.html#put_object-instance_method
+      def put_object: (
+                        backup_job_id: ::String,
+                        object_name: ::String,
+                        ?metadata_string: ::String,
+                        ?inline_chunk: ::String,
+                        ?inline_chunk_length: ::Integer,
+                        ?inline_chunk_checksum: ::String,
+                        ?inline_chunk_checksum_algorithm: ::String,
+                        ?object_checksum: ::String,
+                        ?object_checksum_algorithm: ("SUMMARY"),
+                        ?throw_on_duplicate: bool
+                      ) -> _PutObjectResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutObjectResponseSuccess
+
+      interface _StartObjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartObjectOutput]
+        def upload_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupStorage/Client.html#start_object-instance_method
+      def start_object: (
+                          backup_job_id: ::String,
+                          object_name: ::String,
+                          ?throw_on_duplicate: bool
+                        ) -> _StartObjectResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartObjectResponseSuccess
+    end
+  end
+end
+

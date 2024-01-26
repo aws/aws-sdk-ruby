@@ -1,0 +1,48 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module XRay
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class InvalidPolicyRevisionIdException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidRequestException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LockoutPreventionException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MalformedPolicyDocumentException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PolicyCountLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PolicySizeLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def resource_name: () -> ::String
+      end
+      class RuleLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ThrottledException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyTagsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def resource_name: () -> ::String
+      end
+    end
+  end
+end

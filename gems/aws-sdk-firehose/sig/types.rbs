@@ -1,0 +1,987 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Firehose
+  module Types
+
+    class AmazonOpenSearchServerlessBufferingHints
+      attr_accessor interval_in_seconds: ::Integer
+      attr_accessor size_in_m_bs: ::Integer
+      SENSITIVE: []
+    end
+
+    class AmazonOpenSearchServerlessDestinationConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor collection_endpoint: ::String
+      attr_accessor index_name: ::String
+      attr_accessor buffering_hints: Types::AmazonOpenSearchServerlessBufferingHints
+      attr_accessor retry_options: Types::AmazonOpenSearchServerlessRetryOptions
+      attr_accessor s3_backup_mode: ("FailedDocumentsOnly" | "AllDocuments")
+      attr_accessor s3_configuration: Types::S3DestinationConfiguration
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      attr_accessor vpc_configuration: Types::VpcConfiguration
+      SENSITIVE: []
+    end
+
+    class AmazonOpenSearchServerlessDestinationDescription
+      attr_accessor role_arn: ::String
+      attr_accessor collection_endpoint: ::String
+      attr_accessor index_name: ::String
+      attr_accessor buffering_hints: Types::AmazonOpenSearchServerlessBufferingHints
+      attr_accessor retry_options: Types::AmazonOpenSearchServerlessRetryOptions
+      attr_accessor s3_backup_mode: ("FailedDocumentsOnly" | "AllDocuments")
+      attr_accessor s3_destination_description: Types::S3DestinationDescription
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      attr_accessor vpc_configuration_description: Types::VpcConfigurationDescription
+      SENSITIVE: []
+    end
+
+    class AmazonOpenSearchServerlessDestinationUpdate
+      attr_accessor role_arn: ::String
+      attr_accessor collection_endpoint: ::String
+      attr_accessor index_name: ::String
+      attr_accessor buffering_hints: Types::AmazonOpenSearchServerlessBufferingHints
+      attr_accessor retry_options: Types::AmazonOpenSearchServerlessRetryOptions
+      attr_accessor s3_update: Types::S3DestinationUpdate
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      SENSITIVE: []
+    end
+
+    class AmazonOpenSearchServerlessRetryOptions
+      attr_accessor duration_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class AmazonopensearchserviceBufferingHints
+      attr_accessor interval_in_seconds: ::Integer
+      attr_accessor size_in_m_bs: ::Integer
+      SENSITIVE: []
+    end
+
+    class AmazonopensearchserviceDestinationConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor domain_arn: ::String
+      attr_accessor cluster_endpoint: ::String
+      attr_accessor index_name: ::String
+      attr_accessor type_name: ::String
+      attr_accessor index_rotation_period: ("NoRotation" | "OneHour" | "OneDay" | "OneWeek" | "OneMonth")
+      attr_accessor buffering_hints: Types::AmazonopensearchserviceBufferingHints
+      attr_accessor retry_options: Types::AmazonopensearchserviceRetryOptions
+      attr_accessor s3_backup_mode: ("FailedDocumentsOnly" | "AllDocuments")
+      attr_accessor s3_configuration: Types::S3DestinationConfiguration
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      attr_accessor vpc_configuration: Types::VpcConfiguration
+      attr_accessor document_id_options: Types::DocumentIdOptions
+      SENSITIVE: []
+    end
+
+    class AmazonopensearchserviceDestinationDescription
+      attr_accessor role_arn: ::String
+      attr_accessor domain_arn: ::String
+      attr_accessor cluster_endpoint: ::String
+      attr_accessor index_name: ::String
+      attr_accessor type_name: ::String
+      attr_accessor index_rotation_period: ("NoRotation" | "OneHour" | "OneDay" | "OneWeek" | "OneMonth")
+      attr_accessor buffering_hints: Types::AmazonopensearchserviceBufferingHints
+      attr_accessor retry_options: Types::AmazonopensearchserviceRetryOptions
+      attr_accessor s3_backup_mode: ("FailedDocumentsOnly" | "AllDocuments")
+      attr_accessor s3_destination_description: Types::S3DestinationDescription
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      attr_accessor vpc_configuration_description: Types::VpcConfigurationDescription
+      attr_accessor document_id_options: Types::DocumentIdOptions
+      SENSITIVE: []
+    end
+
+    class AmazonopensearchserviceDestinationUpdate
+      attr_accessor role_arn: ::String
+      attr_accessor domain_arn: ::String
+      attr_accessor cluster_endpoint: ::String
+      attr_accessor index_name: ::String
+      attr_accessor type_name: ::String
+      attr_accessor index_rotation_period: ("NoRotation" | "OneHour" | "OneDay" | "OneWeek" | "OneMonth")
+      attr_accessor buffering_hints: Types::AmazonopensearchserviceBufferingHints
+      attr_accessor retry_options: Types::AmazonopensearchserviceRetryOptions
+      attr_accessor s3_update: Types::S3DestinationUpdate
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      attr_accessor document_id_options: Types::DocumentIdOptions
+      SENSITIVE: []
+    end
+
+    class AmazonopensearchserviceRetryOptions
+      attr_accessor duration_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class AuthenticationConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor connectivity: ("PUBLIC" | "PRIVATE")
+      SENSITIVE: []
+    end
+
+    class BufferingHints
+      attr_accessor size_in_m_bs: ::Integer
+      attr_accessor interval_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class CloudWatchLoggingOptions
+      attr_accessor enabled: bool
+      attr_accessor log_group_name: ::String
+      attr_accessor log_stream_name: ::String
+      SENSITIVE: []
+    end
+
+    class ConcurrentModificationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CopyCommand
+      attr_accessor data_table_name: ::String
+      attr_accessor data_table_columns: ::String
+      attr_accessor copy_options: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDeliveryStreamInput
+      attr_accessor delivery_stream_name: ::String
+      attr_accessor delivery_stream_type: ("DirectPut" | "KinesisStreamAsSource" | "MSKAsSource")
+      attr_accessor kinesis_stream_source_configuration: Types::KinesisStreamSourceConfiguration
+      attr_accessor delivery_stream_encryption_configuration_input: Types::DeliveryStreamEncryptionConfigurationInput
+      attr_accessor s3_destination_configuration: Types::S3DestinationConfiguration
+      attr_accessor extended_s3_destination_configuration: Types::ExtendedS3DestinationConfiguration
+      attr_accessor redshift_destination_configuration: Types::RedshiftDestinationConfiguration
+      attr_accessor elasticsearch_destination_configuration: Types::ElasticsearchDestinationConfiguration
+      attr_accessor amazonopensearchservice_destination_configuration: Types::AmazonopensearchserviceDestinationConfiguration
+      attr_accessor splunk_destination_configuration: Types::SplunkDestinationConfiguration
+      attr_accessor http_endpoint_destination_configuration: Types::HttpEndpointDestinationConfiguration
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor amazon_open_search_serverless_destination_configuration: Types::AmazonOpenSearchServerlessDestinationConfiguration
+      attr_accessor msk_source_configuration: Types::MSKSourceConfiguration
+      attr_accessor snowflake_destination_configuration: Types::SnowflakeDestinationConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateDeliveryStreamOutput
+      attr_accessor delivery_stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DataFormatConversionConfiguration
+      attr_accessor schema_configuration: Types::SchemaConfiguration
+      attr_accessor input_format_configuration: Types::InputFormatConfiguration
+      attr_accessor output_format_configuration: Types::OutputFormatConfiguration
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class DeleteDeliveryStreamInput
+      attr_accessor delivery_stream_name: ::String
+      attr_accessor allow_force_delete: bool
+      SENSITIVE: []
+    end
+
+    class DeleteDeliveryStreamOutput < Aws::EmptyStructure
+    end
+
+    class DeliveryStreamDescription
+      attr_accessor delivery_stream_name: ::String
+      attr_accessor delivery_stream_arn: ::String
+      attr_accessor delivery_stream_status: ("CREATING" | "CREATING_FAILED" | "DELETING" | "DELETING_FAILED" | "ACTIVE")
+      attr_accessor failure_description: Types::FailureDescription
+      attr_accessor delivery_stream_encryption_configuration: Types::DeliveryStreamEncryptionConfiguration
+      attr_accessor delivery_stream_type: ("DirectPut" | "KinesisStreamAsSource" | "MSKAsSource")
+      attr_accessor version_id: ::String
+      attr_accessor create_timestamp: ::Time
+      attr_accessor last_update_timestamp: ::Time
+      attr_accessor source: Types::SourceDescription
+      attr_accessor destinations: ::Array[Types::DestinationDescription]
+      attr_accessor has_more_destinations: bool
+      SENSITIVE: []
+    end
+
+    class DeliveryStreamEncryptionConfiguration
+      attr_accessor key_arn: ::String
+      attr_accessor key_type: ("AWS_OWNED_CMK" | "CUSTOMER_MANAGED_CMK")
+      attr_accessor status: ("ENABLED" | "ENABLING" | "ENABLING_FAILED" | "DISABLED" | "DISABLING" | "DISABLING_FAILED")
+      attr_accessor failure_description: Types::FailureDescription
+      SENSITIVE: []
+    end
+
+    class DeliveryStreamEncryptionConfigurationInput
+      attr_accessor key_arn: ::String
+      attr_accessor key_type: ("AWS_OWNED_CMK" | "CUSTOMER_MANAGED_CMK")
+      SENSITIVE: []
+    end
+
+    class DescribeDeliveryStreamInput
+      attr_accessor delivery_stream_name: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor exclusive_start_destination_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDeliveryStreamOutput
+      attr_accessor delivery_stream_description: Types::DeliveryStreamDescription
+      SENSITIVE: []
+    end
+
+    class Deserializer
+      attr_accessor open_x_json_ser_de: Types::OpenXJsonSerDe
+      attr_accessor hive_json_ser_de: Types::HiveJsonSerDe
+      SENSITIVE: []
+    end
+
+    class DestinationDescription
+      attr_accessor destination_id: ::String
+      attr_accessor s3_destination_description: Types::S3DestinationDescription
+      attr_accessor extended_s3_destination_description: Types::ExtendedS3DestinationDescription
+      attr_accessor redshift_destination_description: Types::RedshiftDestinationDescription
+      attr_accessor elasticsearch_destination_description: Types::ElasticsearchDestinationDescription
+      attr_accessor amazonopensearchservice_destination_description: Types::AmazonopensearchserviceDestinationDescription
+      attr_accessor splunk_destination_description: Types::SplunkDestinationDescription
+      attr_accessor http_endpoint_destination_description: Types::HttpEndpointDestinationDescription
+      attr_accessor snowflake_destination_description: Types::SnowflakeDestinationDescription
+      attr_accessor amazon_open_search_serverless_destination_description: Types::AmazonOpenSearchServerlessDestinationDescription
+      SENSITIVE: []
+    end
+
+    class DocumentIdOptions
+      attr_accessor default_document_id_format: ("FIREHOSE_DEFAULT" | "NO_DOCUMENT_ID")
+      SENSITIVE: []
+    end
+
+    class DynamicPartitioningConfiguration
+      attr_accessor retry_options: Types::RetryOptions
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class ElasticsearchBufferingHints
+      attr_accessor interval_in_seconds: ::Integer
+      attr_accessor size_in_m_bs: ::Integer
+      SENSITIVE: []
+    end
+
+    class ElasticsearchDestinationConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor domain_arn: ::String
+      attr_accessor cluster_endpoint: ::String
+      attr_accessor index_name: ::String
+      attr_accessor type_name: ::String
+      attr_accessor index_rotation_period: ("NoRotation" | "OneHour" | "OneDay" | "OneWeek" | "OneMonth")
+      attr_accessor buffering_hints: Types::ElasticsearchBufferingHints
+      attr_accessor retry_options: Types::ElasticsearchRetryOptions
+      attr_accessor s3_backup_mode: ("FailedDocumentsOnly" | "AllDocuments")
+      attr_accessor s3_configuration: Types::S3DestinationConfiguration
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      attr_accessor vpc_configuration: Types::VpcConfiguration
+      attr_accessor document_id_options: Types::DocumentIdOptions
+      SENSITIVE: []
+    end
+
+    class ElasticsearchDestinationDescription
+      attr_accessor role_arn: ::String
+      attr_accessor domain_arn: ::String
+      attr_accessor cluster_endpoint: ::String
+      attr_accessor index_name: ::String
+      attr_accessor type_name: ::String
+      attr_accessor index_rotation_period: ("NoRotation" | "OneHour" | "OneDay" | "OneWeek" | "OneMonth")
+      attr_accessor buffering_hints: Types::ElasticsearchBufferingHints
+      attr_accessor retry_options: Types::ElasticsearchRetryOptions
+      attr_accessor s3_backup_mode: ("FailedDocumentsOnly" | "AllDocuments")
+      attr_accessor s3_destination_description: Types::S3DestinationDescription
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      attr_accessor vpc_configuration_description: Types::VpcConfigurationDescription
+      attr_accessor document_id_options: Types::DocumentIdOptions
+      SENSITIVE: []
+    end
+
+    class ElasticsearchDestinationUpdate
+      attr_accessor role_arn: ::String
+      attr_accessor domain_arn: ::String
+      attr_accessor cluster_endpoint: ::String
+      attr_accessor index_name: ::String
+      attr_accessor type_name: ::String
+      attr_accessor index_rotation_period: ("NoRotation" | "OneHour" | "OneDay" | "OneWeek" | "OneMonth")
+      attr_accessor buffering_hints: Types::ElasticsearchBufferingHints
+      attr_accessor retry_options: Types::ElasticsearchRetryOptions
+      attr_accessor s3_update: Types::S3DestinationUpdate
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      attr_accessor document_id_options: Types::DocumentIdOptions
+      SENSITIVE: []
+    end
+
+    class ElasticsearchRetryOptions
+      attr_accessor duration_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class EncryptionConfiguration
+      attr_accessor no_encryption_config: ("NoEncryption")
+      attr_accessor kms_encryption_config: Types::KMSEncryptionConfig
+      SENSITIVE: []
+    end
+
+    class ExtendedS3DestinationConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor bucket_arn: ::String
+      attr_accessor prefix: ::String
+      attr_accessor error_output_prefix: ::String
+      attr_accessor buffering_hints: Types::BufferingHints
+      attr_accessor compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor s3_backup_mode: ("Disabled" | "Enabled")
+      attr_accessor s3_backup_configuration: Types::S3DestinationConfiguration
+      attr_accessor data_format_conversion_configuration: Types::DataFormatConversionConfiguration
+      attr_accessor dynamic_partitioning_configuration: Types::DynamicPartitioningConfiguration
+      SENSITIVE: []
+    end
+
+    class ExtendedS3DestinationDescription
+      attr_accessor role_arn: ::String
+      attr_accessor bucket_arn: ::String
+      attr_accessor prefix: ::String
+      attr_accessor error_output_prefix: ::String
+      attr_accessor buffering_hints: Types::BufferingHints
+      attr_accessor compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor s3_backup_mode: ("Disabled" | "Enabled")
+      attr_accessor s3_backup_description: Types::S3DestinationDescription
+      attr_accessor data_format_conversion_configuration: Types::DataFormatConversionConfiguration
+      attr_accessor dynamic_partitioning_configuration: Types::DynamicPartitioningConfiguration
+      SENSITIVE: []
+    end
+
+    class ExtendedS3DestinationUpdate
+      attr_accessor role_arn: ::String
+      attr_accessor bucket_arn: ::String
+      attr_accessor prefix: ::String
+      attr_accessor error_output_prefix: ::String
+      attr_accessor buffering_hints: Types::BufferingHints
+      attr_accessor compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor s3_backup_mode: ("Disabled" | "Enabled")
+      attr_accessor s3_backup_update: Types::S3DestinationUpdate
+      attr_accessor data_format_conversion_configuration: Types::DataFormatConversionConfiguration
+      attr_accessor dynamic_partitioning_configuration: Types::DynamicPartitioningConfiguration
+      SENSITIVE: []
+    end
+
+    class FailureDescription
+      attr_accessor type: ("RETIRE_KMS_GRANT_FAILED" | "CREATE_KMS_GRANT_FAILED" | "KMS_ACCESS_DENIED" | "DISABLED_KMS_KEY" | "INVALID_KMS_KEY" | "KMS_KEY_NOT_FOUND" | "KMS_OPT_IN_REQUIRED" | "CREATE_ENI_FAILED" | "DELETE_ENI_FAILED" | "SUBNET_NOT_FOUND" | "SECURITY_GROUP_NOT_FOUND" | "ENI_ACCESS_DENIED" | "SUBNET_ACCESS_DENIED" | "SECURITY_GROUP_ACCESS_DENIED" | "UNKNOWN_ERROR")
+      attr_accessor details: ::String
+      SENSITIVE: []
+    end
+
+    class HiveJsonSerDe
+      attr_accessor timestamp_formats: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class HttpEndpointBufferingHints
+      attr_accessor size_in_m_bs: ::Integer
+      attr_accessor interval_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class HttpEndpointCommonAttribute
+      attr_accessor attribute_name: ::String
+      attr_accessor attribute_value: ::String
+      SENSITIVE: [:attribute_name, :attribute_value]
+    end
+
+    class HttpEndpointConfiguration
+      attr_accessor url: ::String
+      attr_accessor name: ::String
+      attr_accessor access_key: ::String
+      SENSITIVE: [:url, :access_key]
+    end
+
+    class HttpEndpointDescription
+      attr_accessor url: ::String
+      attr_accessor name: ::String
+      SENSITIVE: [:url]
+    end
+
+    class HttpEndpointDestinationConfiguration
+      attr_accessor endpoint_configuration: Types::HttpEndpointConfiguration
+      attr_accessor buffering_hints: Types::HttpEndpointBufferingHints
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      attr_accessor request_configuration: Types::HttpEndpointRequestConfiguration
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor retry_options: Types::HttpEndpointRetryOptions
+      attr_accessor s3_backup_mode: ("FailedDataOnly" | "AllData")
+      attr_accessor s3_configuration: Types::S3DestinationConfiguration
+      SENSITIVE: []
+    end
+
+    class HttpEndpointDestinationDescription
+      attr_accessor endpoint_configuration: Types::HttpEndpointDescription
+      attr_accessor buffering_hints: Types::HttpEndpointBufferingHints
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      attr_accessor request_configuration: Types::HttpEndpointRequestConfiguration
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor retry_options: Types::HttpEndpointRetryOptions
+      attr_accessor s3_backup_mode: ("FailedDataOnly" | "AllData")
+      attr_accessor s3_destination_description: Types::S3DestinationDescription
+      SENSITIVE: []
+    end
+
+    class HttpEndpointDestinationUpdate
+      attr_accessor endpoint_configuration: Types::HttpEndpointConfiguration
+      attr_accessor buffering_hints: Types::HttpEndpointBufferingHints
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      attr_accessor request_configuration: Types::HttpEndpointRequestConfiguration
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor retry_options: Types::HttpEndpointRetryOptions
+      attr_accessor s3_backup_mode: ("FailedDataOnly" | "AllData")
+      attr_accessor s3_update: Types::S3DestinationUpdate
+      SENSITIVE: []
+    end
+
+    class HttpEndpointRequestConfiguration
+      attr_accessor content_encoding: ("NONE" | "GZIP")
+      attr_accessor common_attributes: ::Array[Types::HttpEndpointCommonAttribute]
+      SENSITIVE: []
+    end
+
+    class HttpEndpointRetryOptions
+      attr_accessor duration_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class InputFormatConfiguration
+      attr_accessor deserializer: Types::Deserializer
+      SENSITIVE: []
+    end
+
+    class InvalidArgumentException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidKMSResourceException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidSourceException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KMSEncryptionConfig
+      attr_accessor awskms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class KinesisStreamSourceConfiguration
+      attr_accessor kinesis_stream_arn: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class KinesisStreamSourceDescription
+      attr_accessor kinesis_stream_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor delivery_start_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeliveryStreamsInput
+      attr_accessor limit: ::Integer
+      attr_accessor delivery_stream_type: ("DirectPut" | "KinesisStreamAsSource" | "MSKAsSource")
+      attr_accessor exclusive_start_delivery_stream_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeliveryStreamsOutput
+      attr_accessor delivery_stream_names: ::Array[::String]
+      attr_accessor has_more_delivery_streams: bool
+      SENSITIVE: []
+    end
+
+    class ListTagsForDeliveryStreamInput
+      attr_accessor delivery_stream_name: ::String
+      attr_accessor exclusive_start_tag_key: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTagsForDeliveryStreamOutput
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor has_more_tags: bool
+      SENSITIVE: []
+    end
+
+    class MSKSourceConfiguration
+      attr_accessor msk_cluster_arn: ::String
+      attr_accessor topic_name: ::String
+      attr_accessor authentication_configuration: Types::AuthenticationConfiguration
+      SENSITIVE: []
+    end
+
+    class MSKSourceDescription
+      attr_accessor msk_cluster_arn: ::String
+      attr_accessor topic_name: ::String
+      attr_accessor authentication_configuration: Types::AuthenticationConfiguration
+      attr_accessor delivery_start_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class OpenXJsonSerDe
+      attr_accessor convert_dots_in_json_keys_to_underscores: bool
+      attr_accessor case_insensitive: bool
+      attr_accessor column_to_json_key_mappings: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class OrcSerDe
+      attr_accessor stripe_size_bytes: ::Integer
+      attr_accessor block_size_bytes: ::Integer
+      attr_accessor row_index_stride: ::Integer
+      attr_accessor enable_padding: bool
+      attr_accessor padding_tolerance: ::Float
+      attr_accessor compression: ("NONE" | "ZLIB" | "SNAPPY")
+      attr_accessor bloom_filter_columns: ::Array[::String]
+      attr_accessor bloom_filter_false_positive_probability: ::Float
+      attr_accessor dictionary_key_threshold: ::Float
+      attr_accessor format_version: ("V0_11" | "V0_12")
+      SENSITIVE: []
+    end
+
+    class OutputFormatConfiguration
+      attr_accessor serializer: Types::Serializer
+      SENSITIVE: []
+    end
+
+    class ParquetSerDe
+      attr_accessor block_size_bytes: ::Integer
+      attr_accessor page_size_bytes: ::Integer
+      attr_accessor compression: ("UNCOMPRESSED" | "GZIP" | "SNAPPY")
+      attr_accessor enable_dictionary_compression: bool
+      attr_accessor max_padding_bytes: ::Integer
+      attr_accessor writer_version: ("V1" | "V2")
+      SENSITIVE: []
+    end
+
+    class ProcessingConfiguration
+      attr_accessor enabled: bool
+      attr_accessor processors: ::Array[Types::Processor]
+      SENSITIVE: []
+    end
+
+    class Processor
+      attr_accessor type: ("RecordDeAggregation" | "Decompression" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord")
+      attr_accessor parameters: ::Array[Types::ProcessorParameter]
+      SENSITIVE: []
+    end
+
+    class ProcessorParameter
+      attr_accessor parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat")
+      attr_accessor parameter_value: ::String
+      SENSITIVE: []
+    end
+
+    class PutRecordBatchInput
+      attr_accessor delivery_stream_name: ::String
+      attr_accessor records: ::Array[Types::Record]
+      SENSITIVE: []
+    end
+
+    class PutRecordBatchOutput
+      attr_accessor failed_put_count: ::Integer
+      attr_accessor encrypted: bool
+      attr_accessor request_responses: ::Array[Types::PutRecordBatchResponseEntry]
+      SENSITIVE: []
+    end
+
+    class PutRecordBatchResponseEntry
+      attr_accessor record_id: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class PutRecordInput
+      attr_accessor delivery_stream_name: ::String
+      attr_accessor record: Types::Record
+      SENSITIVE: []
+    end
+
+    class PutRecordOutput
+      attr_accessor record_id: ::String
+      attr_accessor encrypted: bool
+      SENSITIVE: []
+    end
+
+    class Record
+      attr_accessor data: ::String
+      SENSITIVE: []
+    end
+
+    class RedshiftDestinationConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor cluster_jdbc_url: ::String
+      attr_accessor copy_command: Types::CopyCommand
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      attr_accessor retry_options: Types::RedshiftRetryOptions
+      attr_accessor s3_configuration: Types::S3DestinationConfiguration
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor s3_backup_mode: ("Disabled" | "Enabled")
+      attr_accessor s3_backup_configuration: Types::S3DestinationConfiguration
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      SENSITIVE: [:username, :password]
+    end
+
+    class RedshiftDestinationDescription
+      attr_accessor role_arn: ::String
+      attr_accessor cluster_jdbc_url: ::String
+      attr_accessor copy_command: Types::CopyCommand
+      attr_accessor username: ::String
+      attr_accessor retry_options: Types::RedshiftRetryOptions
+      attr_accessor s3_destination_description: Types::S3DestinationDescription
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor s3_backup_mode: ("Disabled" | "Enabled")
+      attr_accessor s3_backup_description: Types::S3DestinationDescription
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      SENSITIVE: [:username]
+    end
+
+    class RedshiftDestinationUpdate
+      attr_accessor role_arn: ::String
+      attr_accessor cluster_jdbc_url: ::String
+      attr_accessor copy_command: Types::CopyCommand
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      attr_accessor retry_options: Types::RedshiftRetryOptions
+      attr_accessor s3_update: Types::S3DestinationUpdate
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor s3_backup_mode: ("Disabled" | "Enabled")
+      attr_accessor s3_backup_update: Types::S3DestinationUpdate
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      SENSITIVE: [:username, :password]
+    end
+
+    class RedshiftRetryOptions
+      attr_accessor duration_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RetryOptions
+      attr_accessor duration_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class S3DestinationConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor bucket_arn: ::String
+      attr_accessor prefix: ::String
+      attr_accessor error_output_prefix: ::String
+      attr_accessor buffering_hints: Types::BufferingHints
+      attr_accessor compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      SENSITIVE: []
+    end
+
+    class S3DestinationDescription
+      attr_accessor role_arn: ::String
+      attr_accessor bucket_arn: ::String
+      attr_accessor prefix: ::String
+      attr_accessor error_output_prefix: ::String
+      attr_accessor buffering_hints: Types::BufferingHints
+      attr_accessor compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      SENSITIVE: []
+    end
+
+    class S3DestinationUpdate
+      attr_accessor role_arn: ::String
+      attr_accessor bucket_arn: ::String
+      attr_accessor prefix: ::String
+      attr_accessor error_output_prefix: ::String
+      attr_accessor buffering_hints: Types::BufferingHints
+      attr_accessor compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      SENSITIVE: []
+    end
+
+    class SchemaConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor region: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class Serializer
+      attr_accessor parquet_ser_de: Types::ParquetSerDe
+      attr_accessor orc_ser_de: Types::OrcSerDe
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SnowflakeDestinationConfiguration
+      attr_accessor account_url: ::String
+      attr_accessor private_key: ::String
+      attr_accessor key_passphrase: ::String
+      attr_accessor user: ::String
+      attr_accessor database: ::String
+      attr_accessor schema: ::String
+      attr_accessor table: ::String
+      attr_accessor snowflake_role_configuration: Types::SnowflakeRoleConfiguration
+      attr_accessor data_loading_option: ("JSON_MAPPING" | "VARIANT_CONTENT_MAPPING" | "VARIANT_CONTENT_AND_METADATA_MAPPING")
+      attr_accessor meta_data_column_name: ::String
+      attr_accessor content_column_name: ::String
+      attr_accessor snowflake_vpc_configuration: Types::SnowflakeVpcConfiguration
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor retry_options: Types::SnowflakeRetryOptions
+      attr_accessor s3_backup_mode: ("FailedDataOnly" | "AllData")
+      attr_accessor s3_configuration: Types::S3DestinationConfiguration
+      SENSITIVE: [:account_url, :private_key, :key_passphrase, :user, :database, :schema, :table, :meta_data_column_name, :content_column_name]
+    end
+
+    class SnowflakeDestinationDescription
+      attr_accessor account_url: ::String
+      attr_accessor user: ::String
+      attr_accessor database: ::String
+      attr_accessor schema: ::String
+      attr_accessor table: ::String
+      attr_accessor snowflake_role_configuration: Types::SnowflakeRoleConfiguration
+      attr_accessor data_loading_option: ("JSON_MAPPING" | "VARIANT_CONTENT_MAPPING" | "VARIANT_CONTENT_AND_METADATA_MAPPING")
+      attr_accessor meta_data_column_name: ::String
+      attr_accessor content_column_name: ::String
+      attr_accessor snowflake_vpc_configuration: Types::SnowflakeVpcConfiguration
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor retry_options: Types::SnowflakeRetryOptions
+      attr_accessor s3_backup_mode: ("FailedDataOnly" | "AllData")
+      attr_accessor s3_destination_description: Types::S3DestinationDescription
+      SENSITIVE: [:account_url, :user, :database, :schema, :table, :meta_data_column_name, :content_column_name]
+    end
+
+    class SnowflakeDestinationUpdate
+      attr_accessor account_url: ::String
+      attr_accessor private_key: ::String
+      attr_accessor key_passphrase: ::String
+      attr_accessor user: ::String
+      attr_accessor database: ::String
+      attr_accessor schema: ::String
+      attr_accessor table: ::String
+      attr_accessor snowflake_role_configuration: Types::SnowflakeRoleConfiguration
+      attr_accessor data_loading_option: ("JSON_MAPPING" | "VARIANT_CONTENT_MAPPING" | "VARIANT_CONTENT_AND_METADATA_MAPPING")
+      attr_accessor meta_data_column_name: ::String
+      attr_accessor content_column_name: ::String
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor retry_options: Types::SnowflakeRetryOptions
+      attr_accessor s3_backup_mode: ("FailedDataOnly" | "AllData")
+      attr_accessor s3_update: Types::S3DestinationUpdate
+      SENSITIVE: [:account_url, :private_key, :key_passphrase, :user, :database, :schema, :table, :meta_data_column_name, :content_column_name]
+    end
+
+    class SnowflakeRetryOptions
+      attr_accessor duration_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class SnowflakeRoleConfiguration
+      attr_accessor enabled: bool
+      attr_accessor snowflake_role: ::String
+      SENSITIVE: [:snowflake_role]
+    end
+
+    class SnowflakeVpcConfiguration
+      attr_accessor private_link_vpce_id: ::String
+      SENSITIVE: [:private_link_vpce_id]
+    end
+
+    class SourceDescription
+      attr_accessor kinesis_stream_source_description: Types::KinesisStreamSourceDescription
+      attr_accessor msk_source_description: Types::MSKSourceDescription
+      SENSITIVE: []
+    end
+
+    class SplunkBufferingHints
+      attr_accessor interval_in_seconds: ::Integer
+      attr_accessor size_in_m_bs: ::Integer
+      SENSITIVE: []
+    end
+
+    class SplunkDestinationConfiguration
+      attr_accessor hec_endpoint: ::String
+      attr_accessor hec_endpoint_type: ("Raw" | "Event")
+      attr_accessor hec_token: ::String
+      attr_accessor hec_acknowledgment_timeout_in_seconds: ::Integer
+      attr_accessor retry_options: Types::SplunkRetryOptions
+      attr_accessor s3_backup_mode: ("FailedEventsOnly" | "AllEvents")
+      attr_accessor s3_configuration: Types::S3DestinationConfiguration
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      attr_accessor buffering_hints: Types::SplunkBufferingHints
+      SENSITIVE: []
+    end
+
+    class SplunkDestinationDescription
+      attr_accessor hec_endpoint: ::String
+      attr_accessor hec_endpoint_type: ("Raw" | "Event")
+      attr_accessor hec_token: ::String
+      attr_accessor hec_acknowledgment_timeout_in_seconds: ::Integer
+      attr_accessor retry_options: Types::SplunkRetryOptions
+      attr_accessor s3_backup_mode: ("FailedEventsOnly" | "AllEvents")
+      attr_accessor s3_destination_description: Types::S3DestinationDescription
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      attr_accessor buffering_hints: Types::SplunkBufferingHints
+      SENSITIVE: []
+    end
+
+    class SplunkDestinationUpdate
+      attr_accessor hec_endpoint: ::String
+      attr_accessor hec_endpoint_type: ("Raw" | "Event")
+      attr_accessor hec_token: ::String
+      attr_accessor hec_acknowledgment_timeout_in_seconds: ::Integer
+      attr_accessor retry_options: Types::SplunkRetryOptions
+      attr_accessor s3_backup_mode: ("FailedEventsOnly" | "AllEvents")
+      attr_accessor s3_update: Types::S3DestinationUpdate
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      attr_accessor buffering_hints: Types::SplunkBufferingHints
+      SENSITIVE: []
+    end
+
+    class SplunkRetryOptions
+      attr_accessor duration_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class StartDeliveryStreamEncryptionInput
+      attr_accessor delivery_stream_name: ::String
+      attr_accessor delivery_stream_encryption_configuration_input: Types::DeliveryStreamEncryptionConfigurationInput
+      SENSITIVE: []
+    end
+
+    class StartDeliveryStreamEncryptionOutput < Aws::EmptyStructure
+    end
+
+    class StopDeliveryStreamEncryptionInput
+      attr_accessor delivery_stream_name: ::String
+      SENSITIVE: []
+    end
+
+    class StopDeliveryStreamEncryptionOutput < Aws::EmptyStructure
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagDeliveryStreamInput
+      attr_accessor delivery_stream_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagDeliveryStreamOutput < Aws::EmptyStructure
+    end
+
+    class UntagDeliveryStreamInput
+      attr_accessor delivery_stream_name: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagDeliveryStreamOutput < Aws::EmptyStructure
+    end
+
+    class UpdateDestinationInput
+      attr_accessor delivery_stream_name: ::String
+      attr_accessor current_delivery_stream_version_id: ::String
+      attr_accessor destination_id: ::String
+      attr_accessor s3_destination_update: Types::S3DestinationUpdate
+      attr_accessor extended_s3_destination_update: Types::ExtendedS3DestinationUpdate
+      attr_accessor redshift_destination_update: Types::RedshiftDestinationUpdate
+      attr_accessor elasticsearch_destination_update: Types::ElasticsearchDestinationUpdate
+      attr_accessor amazonopensearchservice_destination_update: Types::AmazonopensearchserviceDestinationUpdate
+      attr_accessor splunk_destination_update: Types::SplunkDestinationUpdate
+      attr_accessor http_endpoint_destination_update: Types::HttpEndpointDestinationUpdate
+      attr_accessor amazon_open_search_serverless_destination_update: Types::AmazonOpenSearchServerlessDestinationUpdate
+      attr_accessor snowflake_destination_update: Types::SnowflakeDestinationUpdate
+      SENSITIVE: []
+    end
+
+    class UpdateDestinationOutput < Aws::EmptyStructure
+    end
+
+    class VpcConfiguration
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor role_arn: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class VpcConfigurationDescription
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor role_arn: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+  end
+end

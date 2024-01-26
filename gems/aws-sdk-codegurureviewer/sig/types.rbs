@@ -1,0 +1,434 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CodeGuruReviewer
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateRepositoryRequest
+      attr_accessor repository: Types::Repository
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor kms_key_details: Types::KMSKeyDetails
+      SENSITIVE: []
+    end
+
+    class AssociateRepositoryResponse
+      attr_accessor repository_association: Types::RepositoryAssociation
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class BranchDiffSourceCodeType
+      attr_accessor source_branch_name: ::String
+      attr_accessor destination_branch_name: ::String
+      SENSITIVE: []
+    end
+
+    class CodeArtifacts
+      attr_accessor source_code_artifacts_object_key: ::String
+      attr_accessor build_artifacts_object_key: ::String
+      SENSITIVE: []
+    end
+
+    class CodeCommitRepository
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CodeReview
+      attr_accessor name: ::String
+      attr_accessor code_review_arn: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor owner: ::String
+      attr_accessor provider_type: ("CodeCommit" | "GitHub" | "Bitbucket" | "GitHubEnterpriseServer" | "S3Bucket")
+      attr_accessor state: ("Completed" | "Pending" | "Failed" | "Deleting")
+      attr_accessor state_reason: ::String
+      attr_accessor created_time_stamp: ::Time
+      attr_accessor last_updated_time_stamp: ::Time
+      attr_accessor type: ("PullRequest" | "RepositoryAnalysis")
+      attr_accessor pull_request_id: ::String
+      attr_accessor source_code_type: Types::SourceCodeType
+      attr_accessor association_arn: ::String
+      attr_accessor metrics: Types::Metrics
+      attr_accessor analysis_types: ::Array[("Security" | "CodeQuality")]
+      attr_accessor config_file_state: ("Present" | "Absent" | "PresentWithErrors")
+      SENSITIVE: []
+    end
+
+    class CodeReviewSummary
+      attr_accessor name: ::String
+      attr_accessor code_review_arn: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor owner: ::String
+      attr_accessor provider_type: ("CodeCommit" | "GitHub" | "Bitbucket" | "GitHubEnterpriseServer" | "S3Bucket")
+      attr_accessor state: ("Completed" | "Pending" | "Failed" | "Deleting")
+      attr_accessor created_time_stamp: ::Time
+      attr_accessor last_updated_time_stamp: ::Time
+      attr_accessor type: ("PullRequest" | "RepositoryAnalysis")
+      attr_accessor pull_request_id: ::String
+      attr_accessor metrics_summary: Types::MetricsSummary
+      attr_accessor source_code_type: Types::SourceCodeType
+      SENSITIVE: []
+    end
+
+    class CodeReviewType
+      attr_accessor repository_analysis: Types::RepositoryAnalysis
+      attr_accessor analysis_types: ::Array[("Security" | "CodeQuality")]
+      SENSITIVE: []
+    end
+
+    class CommitDiffSourceCodeType
+      attr_accessor source_commit: ::String
+      attr_accessor destination_commit: ::String
+      attr_accessor merge_base_commit: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCodeReviewRequest
+      attr_accessor name: ::String
+      attr_accessor repository_association_arn: ::String
+      attr_accessor type: Types::CodeReviewType
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCodeReviewResponse
+      attr_accessor code_review: Types::CodeReview
+      SENSITIVE: []
+    end
+
+    class DescribeCodeReviewRequest
+      attr_accessor code_review_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCodeReviewResponse
+      attr_accessor code_review: Types::CodeReview
+      SENSITIVE: []
+    end
+
+    class DescribeRecommendationFeedbackRequest
+      attr_accessor code_review_arn: ::String
+      attr_accessor recommendation_id: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRecommendationFeedbackResponse
+      attr_accessor recommendation_feedback: Types::RecommendationFeedback
+      SENSITIVE: []
+    end
+
+    class DescribeRepositoryAssociationRequest
+      attr_accessor association_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRepositoryAssociationResponse
+      attr_accessor repository_association: Types::RepositoryAssociation
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DisassociateRepositoryRequest
+      attr_accessor association_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateRepositoryResponse
+      attr_accessor repository_association: Types::RepositoryAssociation
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class EventInfo
+      attr_accessor name: ::String
+      attr_accessor state: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KMSKeyDetails
+      attr_accessor kms_key_id: ::String
+      attr_accessor encryption_option: ("AWS_OWNED_CMK" | "CUSTOMER_MANAGED_CMK")
+      SENSITIVE: []
+    end
+
+    class ListCodeReviewsRequest
+      attr_accessor provider_types: ::Array[("CodeCommit" | "GitHub" | "Bitbucket" | "GitHubEnterpriseServer" | "S3Bucket")]
+      attr_accessor states: ::Array[("Completed" | "Pending" | "Failed" | "Deleting")]
+      attr_accessor repository_names: ::Array[::String]
+      attr_accessor type: ("PullRequest" | "RepositoryAnalysis")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCodeReviewsResponse
+      attr_accessor code_review_summaries: ::Array[Types::CodeReviewSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecommendationFeedbackRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor code_review_arn: ::String
+      attr_accessor user_ids: ::Array[::String]
+      attr_accessor recommendation_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListRecommendationFeedbackResponse
+      attr_accessor recommendation_feedback_summaries: ::Array[Types::RecommendationFeedbackSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecommendationsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor code_review_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecommendationsResponse
+      attr_accessor recommendation_summaries: ::Array[Types::RecommendationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRepositoryAssociationsRequest
+      attr_accessor provider_types: ::Array[("CodeCommit" | "GitHub" | "Bitbucket" | "GitHubEnterpriseServer" | "S3Bucket")]
+      attr_accessor states: ::Array[("Associated" | "Associating" | "Failed" | "Disassociating" | "Disassociated")]
+      attr_accessor names: ::Array[::String]
+      attr_accessor owners: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRepositoryAssociationsResponse
+      attr_accessor repository_association_summaries: ::Array[Types::RepositoryAssociationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Metrics
+      attr_accessor metered_lines_of_code_count: ::Integer
+      attr_accessor suppressed_lines_of_code_count: ::Integer
+      attr_accessor findings_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class MetricsSummary
+      attr_accessor metered_lines_of_code_count: ::Integer
+      attr_accessor suppressed_lines_of_code_count: ::Integer
+      attr_accessor findings_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PutRecommendationFeedbackRequest
+      attr_accessor code_review_arn: ::String
+      attr_accessor recommendation_id: ::String
+      attr_accessor reactions: ::Array[("ThumbsUp" | "ThumbsDown")]
+      SENSITIVE: []
+    end
+
+    class PutRecommendationFeedbackResponse < Aws::EmptyStructure
+    end
+
+    class RecommendationFeedback
+      attr_accessor code_review_arn: ::String
+      attr_accessor recommendation_id: ::String
+      attr_accessor reactions: ::Array[("ThumbsUp" | "ThumbsDown")]
+      attr_accessor user_id: ::String
+      attr_accessor created_time_stamp: ::Time
+      attr_accessor last_updated_time_stamp: ::Time
+      SENSITIVE: []
+    end
+
+    class RecommendationFeedbackSummary
+      attr_accessor recommendation_id: ::String
+      attr_accessor reactions: ::Array[("ThumbsUp" | "ThumbsDown")]
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class RecommendationSummary
+      attr_accessor file_path: ::String
+      attr_accessor recommendation_id: ::String
+      attr_accessor start_line: ::Integer
+      attr_accessor end_line: ::Integer
+      attr_accessor description: ::String
+      attr_accessor recommendation_category: ("AWSBestPractices" | "AWSCloudFormationIssues" | "DuplicateCode" | "CodeMaintenanceIssues" | "ConcurrencyIssues" | "InputValidations" | "PythonBestPractices" | "JavaBestPractices" | "ResourceLeaks" | "SecurityIssues" | "CodeInconsistencies")
+      attr_accessor rule_metadata: Types::RuleMetadata
+      attr_accessor severity: ("Info" | "Low" | "Medium" | "High" | "Critical")
+      SENSITIVE: []
+    end
+
+    class Repository
+      attr_accessor code_commit: Types::CodeCommitRepository
+      attr_accessor bitbucket: Types::ThirdPartySourceRepository
+      attr_accessor git_hub_enterprise_server: Types::ThirdPartySourceRepository
+      attr_accessor s3_bucket: Types::S3Repository
+      SENSITIVE: []
+    end
+
+    class RepositoryAnalysis
+      attr_accessor repository_head: Types::RepositoryHeadSourceCodeType
+      attr_accessor source_code_type: Types::SourceCodeType
+      SENSITIVE: []
+    end
+
+    class RepositoryAssociation
+      attr_accessor association_id: ::String
+      attr_accessor association_arn: ::String
+      attr_accessor connection_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor owner: ::String
+      attr_accessor provider_type: ("CodeCommit" | "GitHub" | "Bitbucket" | "GitHubEnterpriseServer" | "S3Bucket")
+      attr_accessor state: ("Associated" | "Associating" | "Failed" | "Disassociating" | "Disassociated")
+      attr_accessor state_reason: ::String
+      attr_accessor last_updated_time_stamp: ::Time
+      attr_accessor created_time_stamp: ::Time
+      attr_accessor kms_key_details: Types::KMSKeyDetails
+      attr_accessor s3_repository_details: Types::S3RepositoryDetails
+      SENSITIVE: []
+    end
+
+    class RepositoryAssociationSummary
+      attr_accessor association_arn: ::String
+      attr_accessor connection_arn: ::String
+      attr_accessor last_updated_time_stamp: ::Time
+      attr_accessor association_id: ::String
+      attr_accessor name: ::String
+      attr_accessor owner: ::String
+      attr_accessor provider_type: ("CodeCommit" | "GitHub" | "Bitbucket" | "GitHubEnterpriseServer" | "S3Bucket")
+      attr_accessor state: ("Associated" | "Associating" | "Failed" | "Disassociating" | "Disassociated")
+      SENSITIVE: []
+    end
+
+    class RepositoryHeadSourceCodeType
+      attr_accessor branch_name: ::String
+      SENSITIVE: []
+    end
+
+    class RequestMetadata
+      attr_accessor request_id: ::String
+      attr_accessor requester: ::String
+      attr_accessor event_info: Types::EventInfo
+      attr_accessor vendor_name: ("GitHub" | "GitLab" | "NativeS3")
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RuleMetadata
+      attr_accessor rule_id: ::String
+      attr_accessor rule_name: ::String
+      attr_accessor short_description: ::String
+      attr_accessor long_description: ::String
+      attr_accessor rule_tags: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class S3BucketRepository
+      attr_accessor name: ::String
+      attr_accessor details: Types::S3RepositoryDetails
+      SENSITIVE: []
+    end
+
+    class S3Repository
+      attr_accessor name: ::String
+      attr_accessor bucket_name: ::String
+      SENSITIVE: []
+    end
+
+    class S3RepositoryDetails
+      attr_accessor bucket_name: ::String
+      attr_accessor code_artifacts: Types::CodeArtifacts
+      SENSITIVE: []
+    end
+
+    class SourceCodeType
+      attr_accessor commit_diff: Types::CommitDiffSourceCodeType
+      attr_accessor repository_head: Types::RepositoryHeadSourceCodeType
+      attr_accessor branch_diff: Types::BranchDiffSourceCodeType
+      attr_accessor s3_bucket_repository: Types::S3BucketRepository
+      attr_accessor request_metadata: Types::RequestMetadata
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThirdPartySourceRepository
+      attr_accessor name: ::String
+      attr_accessor connection_arn: ::String
+      attr_accessor owner: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

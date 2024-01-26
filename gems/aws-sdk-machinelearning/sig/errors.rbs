@@ -1,0 +1,45 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MachineLearning
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class IdempotentParameterMismatchException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def code: () -> ::String
+      end
+      class InternalServerException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def code: () -> ::String
+      end
+      class InvalidInputException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def code: () -> ::String
+      end
+      class InvalidTagException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def code: () -> ::String
+      end
+      class PredictorNotMountedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def code: () -> ::String
+      end
+      class TagLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

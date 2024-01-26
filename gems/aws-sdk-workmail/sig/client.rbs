@@ -1,0 +1,1270 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module WorkMail
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateDelegateToResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateDelegateToResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#associate_delegate_to_resource-instance_method
+      def associate_delegate_to_resource: (
+                                            organization_id: ::String,
+                                            resource_id: ::String,
+                                            entity_id: ::String
+                                          ) -> _AssociateDelegateToResourceResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateDelegateToResourceResponseSuccess
+
+      interface _AssociateMemberToGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateMemberToGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#associate_member_to_group-instance_method
+      def associate_member_to_group: (
+                                       organization_id: ::String,
+                                       group_id: ::String,
+                                       member_id: ::String
+                                     ) -> _AssociateMemberToGroupResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateMemberToGroupResponseSuccess
+
+      interface _AssumeImpersonationRoleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssumeImpersonationRoleResponse]
+        def token: () -> ::String
+        def expires_in: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#assume_impersonation_role-instance_method
+      def assume_impersonation_role: (
+                                       organization_id: ::String,
+                                       impersonation_role_id: ::String
+                                     ) -> _AssumeImpersonationRoleResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssumeImpersonationRoleResponseSuccess
+
+      interface _CancelMailboxExportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelMailboxExportJobResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#cancel_mailbox_export_job-instance_method
+      def cancel_mailbox_export_job: (
+                                       client_token: ::String,
+                                       job_id: ::String,
+                                       organization_id: ::String
+                                     ) -> _CancelMailboxExportJobResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelMailboxExportJobResponseSuccess
+
+      interface _CreateAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAliasResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#create_alias-instance_method
+      def create_alias: (
+                          organization_id: ::String,
+                          entity_id: ::String,
+                          alias: ::String
+                        ) -> _CreateAliasResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAliasResponseSuccess
+
+      interface _CreateAvailabilityConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAvailabilityConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#create_availability_configuration-instance_method
+      def create_availability_configuration: (
+                                               ?client_token: ::String,
+                                               organization_id: ::String,
+                                               domain_name: ::String,
+                                               ?ews_provider: {
+                                                 ews_endpoint: ::String,
+                                                 ews_username: ::String,
+                                                 ews_password: ::String
+                                               },
+                                               ?lambda_provider: {
+                                                 lambda_arn: ::String
+                                               }
+                                             ) -> _CreateAvailabilityConfigurationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAvailabilityConfigurationResponseSuccess
+
+      interface _CreateGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGroupResponse]
+        def group_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#create_group-instance_method
+      def create_group: (
+                          organization_id: ::String,
+                          name: ::String,
+                          ?hidden_from_global_address_list: bool
+                        ) -> _CreateGroupResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGroupResponseSuccess
+
+      interface _CreateImpersonationRoleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateImpersonationRoleResponse]
+        def impersonation_role_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#create_impersonation_role-instance_method
+      def create_impersonation_role: (
+                                       ?client_token: ::String,
+                                       organization_id: ::String,
+                                       name: ::String,
+                                       type: ("FULL_ACCESS" | "READ_ONLY"),
+                                       ?description: ::String,
+                                       rules: Array[
+                                         {
+                                           impersonation_rule_id: ::String,
+                                           name: ::String?,
+                                           description: ::String?,
+                                           effect: ("ALLOW" | "DENY"),
+                                           target_users: Array[::String]?,
+                                           not_target_users: Array[::String]?
+                                         },
+                                       ]
+                                     ) -> _CreateImpersonationRoleResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateImpersonationRoleResponseSuccess
+
+      interface _CreateMobileDeviceAccessRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMobileDeviceAccessRuleResponse]
+        def mobile_device_access_rule_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#create_mobile_device_access_rule-instance_method
+      def create_mobile_device_access_rule: (
+                                              organization_id: ::String,
+                                              ?client_token: ::String,
+                                              name: ::String,
+                                              ?description: ::String,
+                                              effect: ("ALLOW" | "DENY"),
+                                              ?device_types: Array[::String],
+                                              ?not_device_types: Array[::String],
+                                              ?device_models: Array[::String],
+                                              ?not_device_models: Array[::String],
+                                              ?device_operating_systems: Array[::String],
+                                              ?not_device_operating_systems: Array[::String],
+                                              ?device_user_agents: Array[::String],
+                                              ?not_device_user_agents: Array[::String]
+                                            ) -> _CreateMobileDeviceAccessRuleResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMobileDeviceAccessRuleResponseSuccess
+
+      interface _CreateOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateOrganizationResponse]
+        def organization_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#create_organization-instance_method
+      def create_organization: (
+                                 ?directory_id: ::String,
+                                 alias: ::String,
+                                 ?client_token: ::String,
+                                 ?domains: Array[
+                                   {
+                                     domain_name: ::String,
+                                     hosted_zone_id: ::String?
+                                   },
+                                 ],
+                                 ?kms_key_arn: ::String,
+                                 ?enable_interoperability: bool
+                               ) -> _CreateOrganizationResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOrganizationResponseSuccess
+
+      interface _CreateResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateResourceResponse]
+        def resource_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#create_resource-instance_method
+      def create_resource: (
+                             organization_id: ::String,
+                             name: ::String,
+                             type: ("ROOM" | "EQUIPMENT"),
+                             ?description: ::String,
+                             ?hidden_from_global_address_list: bool
+                           ) -> _CreateResourceResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResourceResponseSuccess
+
+      interface _CreateUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateUserResponse]
+        def user_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#create_user-instance_method
+      def create_user: (
+                         organization_id: ::String,
+                         name: ::String,
+                         display_name: ::String,
+                         ?password: ::String,
+                         ?role: ("USER" | "RESOURCE" | "SYSTEM_USER" | "REMOTE_USER"),
+                         ?first_name: ::String,
+                         ?last_name: ::String,
+                         ?hidden_from_global_address_list: bool
+                       ) -> _CreateUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserResponseSuccess
+
+      interface _DeleteAccessControlRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAccessControlRuleResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#delete_access_control_rule-instance_method
+      def delete_access_control_rule: (
+                                        organization_id: ::String,
+                                        name: ::String
+                                      ) -> _DeleteAccessControlRuleResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAccessControlRuleResponseSuccess
+
+      interface _DeleteAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAliasResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#delete_alias-instance_method
+      def delete_alias: (
+                          organization_id: ::String,
+                          entity_id: ::String,
+                          alias: ::String
+                        ) -> _DeleteAliasResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAliasResponseSuccess
+
+      interface _DeleteAvailabilityConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAvailabilityConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#delete_availability_configuration-instance_method
+      def delete_availability_configuration: (
+                                               organization_id: ::String,
+                                               domain_name: ::String
+                                             ) -> _DeleteAvailabilityConfigurationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAvailabilityConfigurationResponseSuccess
+
+      interface _DeleteEmailMonitoringConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEmailMonitoringConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#delete_email_monitoring_configuration-instance_method
+      def delete_email_monitoring_configuration: (
+                                                   organization_id: ::String
+                                                 ) -> _DeleteEmailMonitoringConfigurationResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEmailMonitoringConfigurationResponseSuccess
+
+      interface _DeleteGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#delete_group-instance_method
+      def delete_group: (
+                          organization_id: ::String,
+                          group_id: ::String
+                        ) -> _DeleteGroupResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGroupResponseSuccess
+
+      interface _DeleteImpersonationRoleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteImpersonationRoleResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#delete_impersonation_role-instance_method
+      def delete_impersonation_role: (
+                                       organization_id: ::String,
+                                       impersonation_role_id: ::String
+                                     ) -> _DeleteImpersonationRoleResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteImpersonationRoleResponseSuccess
+
+      interface _DeleteMailboxPermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMailboxPermissionsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#delete_mailbox_permissions-instance_method
+      def delete_mailbox_permissions: (
+                                        organization_id: ::String,
+                                        entity_id: ::String,
+                                        grantee_id: ::String
+                                      ) -> _DeleteMailboxPermissionsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMailboxPermissionsResponseSuccess
+
+      interface _DeleteMobileDeviceAccessOverrideResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMobileDeviceAccessOverrideResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#delete_mobile_device_access_override-instance_method
+      def delete_mobile_device_access_override: (
+                                                  organization_id: ::String,
+                                                  user_id: ::String,
+                                                  device_id: ::String
+                                                ) -> _DeleteMobileDeviceAccessOverrideResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMobileDeviceAccessOverrideResponseSuccess
+
+      interface _DeleteMobileDeviceAccessRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMobileDeviceAccessRuleResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#delete_mobile_device_access_rule-instance_method
+      def delete_mobile_device_access_rule: (
+                                              organization_id: ::String,
+                                              mobile_device_access_rule_id: ::String
+                                            ) -> _DeleteMobileDeviceAccessRuleResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMobileDeviceAccessRuleResponseSuccess
+
+      interface _DeleteOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteOrganizationResponse]
+        def organization_id: () -> ::String
+        def state: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#delete_organization-instance_method
+      def delete_organization: (
+                                 ?client_token: ::String,
+                                 organization_id: ::String,
+                                 delete_directory: bool,
+                                 ?force_delete: bool
+                               ) -> _DeleteOrganizationResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteOrganizationResponseSuccess
+
+      interface _DeleteResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#delete_resource-instance_method
+      def delete_resource: (
+                             organization_id: ::String,
+                             resource_id: ::String
+                           ) -> _DeleteResourceResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourceResponseSuccess
+
+      interface _DeleteRetentionPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRetentionPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#delete_retention_policy-instance_method
+      def delete_retention_policy: (
+                                     organization_id: ::String,
+                                     id: ::String
+                                   ) -> _DeleteRetentionPolicyResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRetentionPolicyResponseSuccess
+
+      interface _DeleteUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteUserResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#delete_user-instance_method
+      def delete_user: (
+                         organization_id: ::String,
+                         user_id: ::String
+                       ) -> _DeleteUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteUserResponseSuccess
+
+      interface _DeregisterFromWorkMailResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterFromWorkMailResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#deregister_from_work_mail-instance_method
+      def deregister_from_work_mail: (
+                                       organization_id: ::String,
+                                       entity_id: ::String
+                                     ) -> _DeregisterFromWorkMailResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterFromWorkMailResponseSuccess
+
+      interface _DeregisterMailDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterMailDomainResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#deregister_mail_domain-instance_method
+      def deregister_mail_domain: (
+                                    organization_id: ::String,
+                                    domain_name: ::String
+                                  ) -> _DeregisterMailDomainResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterMailDomainResponseSuccess
+
+      interface _DescribeEmailMonitoringConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEmailMonitoringConfigurationResponse]
+        def role_arn: () -> ::String
+        def log_group_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#describe_email_monitoring_configuration-instance_method
+      def describe_email_monitoring_configuration: (
+                                                     organization_id: ::String
+                                                   ) -> _DescribeEmailMonitoringConfigurationResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEmailMonitoringConfigurationResponseSuccess
+
+      interface _DescribeEntityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEntityResponse]
+        def entity_id: () -> ::String
+        def name: () -> ::String
+        def type: () -> ("GROUP" | "USER" | "RESOURCE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#describe_entity-instance_method
+      def describe_entity: (
+                             organization_id: ::String,
+                             email: ::String
+                           ) -> _DescribeEntityResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEntityResponseSuccess
+
+      interface _DescribeGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGroupResponse]
+        def group_id: () -> ::String
+        def name: () -> ::String
+        def email: () -> ::String
+        def state: () -> ("ENABLED" | "DISABLED" | "DELETED")
+        def enabled_date: () -> ::Time
+        def disabled_date: () -> ::Time
+        def hidden_from_global_address_list: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#describe_group-instance_method
+      def describe_group: (
+                            organization_id: ::String,
+                            group_id: ::String
+                          ) -> _DescribeGroupResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeGroupResponseSuccess
+
+      interface _DescribeInboundDmarcSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInboundDmarcSettingsResponse]
+        def enforced: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#describe_inbound_dmarc_settings-instance_method
+      def describe_inbound_dmarc_settings: (
+                                             organization_id: ::String
+                                           ) -> _DescribeInboundDmarcSettingsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInboundDmarcSettingsResponseSuccess
+
+      interface _DescribeMailboxExportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMailboxExportJobResponse]
+        def entity_id: () -> ::String
+        def description: () -> ::String
+        def role_arn: () -> ::String
+        def kms_key_arn: () -> ::String
+        def s3_bucket_name: () -> ::String
+        def s3_prefix: () -> ::String
+        def s3_path: () -> ::String
+        def estimated_progress: () -> ::Integer
+        def state: () -> ("RUNNING" | "COMPLETED" | "FAILED" | "CANCELLED")
+        def error_info: () -> ::String
+        def start_time: () -> ::Time
+        def end_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#describe_mailbox_export_job-instance_method
+      def describe_mailbox_export_job: (
+                                         job_id: ::String,
+                                         organization_id: ::String
+                                       ) -> _DescribeMailboxExportJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMailboxExportJobResponseSuccess
+
+      interface _DescribeOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeOrganizationResponse]
+        def organization_id: () -> ::String
+        def alias: () -> ::String
+        def state: () -> ::String
+        def directory_id: () -> ::String
+        def directory_type: () -> ::String
+        def default_mail_domain: () -> ::String
+        def completed_date: () -> ::Time
+        def error_message: () -> ::String
+        def arn: () -> ::String
+        def migration_admin: () -> ::String
+        def interoperability_enabled: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#describe_organization-instance_method
+      def describe_organization: (
+                                   organization_id: ::String
+                                 ) -> _DescribeOrganizationResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeOrganizationResponseSuccess
+
+      interface _DescribeResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeResourceResponse]
+        def resource_id: () -> ::String
+        def email: () -> ::String
+        def name: () -> ::String
+        def type: () -> ("ROOM" | "EQUIPMENT")
+        def booking_options: () -> Types::BookingOptions
+        def state: () -> ("ENABLED" | "DISABLED" | "DELETED")
+        def enabled_date: () -> ::Time
+        def disabled_date: () -> ::Time
+        def description: () -> ::String
+        def hidden_from_global_address_list: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#describe_resource-instance_method
+      def describe_resource: (
+                               organization_id: ::String,
+                               resource_id: ::String
+                             ) -> _DescribeResourceResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeResourceResponseSuccess
+
+      interface _DescribeUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeUserResponse]
+        def user_id: () -> ::String
+        def name: () -> ::String
+        def email: () -> ::String
+        def display_name: () -> ::String
+        def state: () -> ("ENABLED" | "DISABLED" | "DELETED")
+        def user_role: () -> ("USER" | "RESOURCE" | "SYSTEM_USER" | "REMOTE_USER")
+        def enabled_date: () -> ::Time
+        def disabled_date: () -> ::Time
+        def mailbox_provisioned_date: () -> ::Time
+        def mailbox_deprovisioned_date: () -> ::Time
+        def first_name: () -> ::String
+        def last_name: () -> ::String
+        def hidden_from_global_address_list: () -> bool
+        def initials: () -> ::String
+        def telephone: () -> ::String
+        def street: () -> ::String
+        def job_title: () -> ::String
+        def city: () -> ::String
+        def company: () -> ::String
+        def zip_code: () -> ::String
+        def department: () -> ::String
+        def country: () -> ::String
+        def office: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#describe_user-instance_method
+      def describe_user: (
+                           organization_id: ::String,
+                           user_id: ::String
+                         ) -> _DescribeUserResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeUserResponseSuccess
+
+      interface _DisassociateDelegateFromResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateDelegateFromResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#disassociate_delegate_from_resource-instance_method
+      def disassociate_delegate_from_resource: (
+                                                 organization_id: ::String,
+                                                 resource_id: ::String,
+                                                 entity_id: ::String
+                                               ) -> _DisassociateDelegateFromResourceResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateDelegateFromResourceResponseSuccess
+
+      interface _DisassociateMemberFromGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateMemberFromGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#disassociate_member_from_group-instance_method
+      def disassociate_member_from_group: (
+                                            organization_id: ::String,
+                                            group_id: ::String,
+                                            member_id: ::String
+                                          ) -> _DisassociateMemberFromGroupResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateMemberFromGroupResponseSuccess
+
+      interface _GetAccessControlEffectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccessControlEffectResponse]
+        def effect: () -> ("ALLOW" | "DENY")
+        def matched_rules: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#get_access_control_effect-instance_method
+      def get_access_control_effect: (
+                                       organization_id: ::String,
+                                       ip_address: ::String,
+                                       action: ::String,
+                                       ?user_id: ::String,
+                                       ?impersonation_role_id: ::String
+                                     ) -> _GetAccessControlEffectResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccessControlEffectResponseSuccess
+
+      interface _GetDefaultRetentionPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDefaultRetentionPolicyResponse]
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def folder_configurations: () -> ::Array[Types::FolderConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#get_default_retention_policy-instance_method
+      def get_default_retention_policy: (
+                                          organization_id: ::String
+                                        ) -> _GetDefaultRetentionPolicyResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDefaultRetentionPolicyResponseSuccess
+
+      interface _GetImpersonationRoleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetImpersonationRoleResponse]
+        def impersonation_role_id: () -> ::String
+        def name: () -> ::String
+        def type: () -> ("FULL_ACCESS" | "READ_ONLY")
+        def description: () -> ::String
+        def rules: () -> ::Array[Types::ImpersonationRule]
+        def date_created: () -> ::Time
+        def date_modified: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#get_impersonation_role-instance_method
+      def get_impersonation_role: (
+                                    organization_id: ::String,
+                                    impersonation_role_id: ::String
+                                  ) -> _GetImpersonationRoleResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetImpersonationRoleResponseSuccess
+
+      interface _GetImpersonationRoleEffectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetImpersonationRoleEffectResponse]
+        def type: () -> ("FULL_ACCESS" | "READ_ONLY")
+        def effect: () -> ("ALLOW" | "DENY")
+        def matched_rules: () -> ::Array[Types::ImpersonationMatchedRule]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#get_impersonation_role_effect-instance_method
+      def get_impersonation_role_effect: (
+                                           organization_id: ::String,
+                                           impersonation_role_id: ::String,
+                                           target_user: ::String
+                                         ) -> _GetImpersonationRoleEffectResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetImpersonationRoleEffectResponseSuccess
+
+      interface _GetMailDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMailDomainResponse]
+        def records: () -> ::Array[Types::DnsRecord]
+        def is_test_domain: () -> bool
+        def is_default: () -> bool
+        def ownership_verification_status: () -> ("PENDING" | "VERIFIED" | "FAILED")
+        def dkim_verification_status: () -> ("PENDING" | "VERIFIED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#get_mail_domain-instance_method
+      def get_mail_domain: (
+                             organization_id: ::String,
+                             domain_name: ::String
+                           ) -> _GetMailDomainResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMailDomainResponseSuccess
+
+      interface _GetMailboxDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMailboxDetailsResponse]
+        def mailbox_quota: () -> ::Integer
+        def mailbox_size: () -> ::Float
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#get_mailbox_details-instance_method
+      def get_mailbox_details: (
+                                 organization_id: ::String,
+                                 user_id: ::String
+                               ) -> _GetMailboxDetailsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMailboxDetailsResponseSuccess
+
+      interface _GetMobileDeviceAccessEffectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMobileDeviceAccessEffectResponse]
+        def effect: () -> ("ALLOW" | "DENY")
+        def matched_rules: () -> ::Array[Types::MobileDeviceAccessMatchedRule]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#get_mobile_device_access_effect-instance_method
+      def get_mobile_device_access_effect: (
+                                             organization_id: ::String,
+                                             ?device_type: ::String,
+                                             ?device_model: ::String,
+                                             ?device_operating_system: ::String,
+                                             ?device_user_agent: ::String
+                                           ) -> _GetMobileDeviceAccessEffectResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMobileDeviceAccessEffectResponseSuccess
+
+      interface _GetMobileDeviceAccessOverrideResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMobileDeviceAccessOverrideResponse]
+        def user_id: () -> ::String
+        def device_id: () -> ::String
+        def effect: () -> ("ALLOW" | "DENY")
+        def description: () -> ::String
+        def date_created: () -> ::Time
+        def date_modified: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#get_mobile_device_access_override-instance_method
+      def get_mobile_device_access_override: (
+                                               organization_id: ::String,
+                                               user_id: ::String,
+                                               device_id: ::String
+                                             ) -> _GetMobileDeviceAccessOverrideResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMobileDeviceAccessOverrideResponseSuccess
+
+      interface _ListAccessControlRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccessControlRulesResponse]
+        def rules: () -> ::Array[Types::AccessControlRule]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#list_access_control_rules-instance_method
+      def list_access_control_rules: (
+                                       organization_id: ::String
+                                     ) -> _ListAccessControlRulesResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccessControlRulesResponseSuccess
+
+      interface _ListAliasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAliasesResponse]
+        def aliases: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#list_aliases-instance_method
+      def list_aliases: (
+                          organization_id: ::String,
+                          entity_id: ::String,
+                          ?next_token: ::String,
+                          ?max_results: ::Integer
+                        ) -> _ListAliasesResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAliasesResponseSuccess
+
+      interface _ListAvailabilityConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAvailabilityConfigurationsResponse]
+        def availability_configurations: () -> ::Array[Types::AvailabilityConfiguration]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#list_availability_configurations-instance_method
+      def list_availability_configurations: (
+                                              organization_id: ::String,
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String
+                                            ) -> _ListAvailabilityConfigurationsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAvailabilityConfigurationsResponseSuccess
+
+      interface _ListGroupMembersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGroupMembersResponse]
+        def members: () -> ::Array[Types::Member]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#list_group_members-instance_method
+      def list_group_members: (
+                                organization_id: ::String,
+                                group_id: ::String,
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _ListGroupMembersResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGroupMembersResponseSuccess
+
+      interface _ListGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGroupsResponse]
+        def groups: () -> ::Array[Types::Group]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#list_groups-instance_method
+      def list_groups: (
+                         organization_id: ::String,
+                         ?next_token: ::String,
+                         ?max_results: ::Integer,
+                         ?filters: {
+                           name_prefix: ::String?,
+                           primary_email_prefix: ::String?,
+                           state: ("ENABLED" | "DISABLED" | "DELETED")?
+                         }
+                       ) -> _ListGroupsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGroupsResponseSuccess
+
+      interface _ListGroupsForEntityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGroupsForEntityResponse]
+        def groups: () -> ::Array[Types::GroupIdentifier]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#list_groups_for_entity-instance_method
+      def list_groups_for_entity: (
+                                    organization_id: ::String,
+                                    entity_id: ::String,
+                                    ?filters: {
+                                      group_name_prefix: ::String?
+                                    },
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListGroupsForEntityResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGroupsForEntityResponseSuccess
+
+      interface _ListImpersonationRolesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListImpersonationRolesResponse]
+        def roles: () -> ::Array[Types::ImpersonationRole]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#list_impersonation_roles-instance_method
+      def list_impersonation_roles: (
+                                      organization_id: ::String,
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListImpersonationRolesResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListImpersonationRolesResponseSuccess
+
+      interface _ListMailDomainsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMailDomainsResponse]
+        def mail_domains: () -> ::Array[Types::MailDomainSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#list_mail_domains-instance_method
+      def list_mail_domains: (
+                               organization_id: ::String,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListMailDomainsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMailDomainsResponseSuccess
+
+      interface _ListMailboxExportJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMailboxExportJobsResponse]
+        def jobs: () -> ::Array[Types::MailboxExportJob]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#list_mailbox_export_jobs-instance_method
+      def list_mailbox_export_jobs: (
+                                      organization_id: ::String,
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListMailboxExportJobsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMailboxExportJobsResponseSuccess
+
+      interface _ListMailboxPermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMailboxPermissionsResponse]
+        def permissions: () -> ::Array[Types::Permission]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#list_mailbox_permissions-instance_method
+      def list_mailbox_permissions: (
+                                      organization_id: ::String,
+                                      entity_id: ::String,
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListMailboxPermissionsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMailboxPermissionsResponseSuccess
+
+      interface _ListMobileDeviceAccessOverridesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMobileDeviceAccessOverridesResponse]
+        def overrides: () -> ::Array[Types::MobileDeviceAccessOverride]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#list_mobile_device_access_overrides-instance_method
+      def list_mobile_device_access_overrides: (
+                                                 organization_id: ::String,
+                                                 ?user_id: ::String,
+                                                 ?device_id: ::String,
+                                                 ?next_token: ::String,
+                                                 ?max_results: ::Integer
+                                               ) -> _ListMobileDeviceAccessOverridesResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMobileDeviceAccessOverridesResponseSuccess
+
+      interface _ListMobileDeviceAccessRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMobileDeviceAccessRulesResponse]
+        def rules: () -> ::Array[Types::MobileDeviceAccessRule]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#list_mobile_device_access_rules-instance_method
+      def list_mobile_device_access_rules: (
+                                             organization_id: ::String
+                                           ) -> _ListMobileDeviceAccessRulesResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMobileDeviceAccessRulesResponseSuccess
+
+      interface _ListOrganizationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOrganizationsResponse]
+        def organization_summaries: () -> ::Array[Types::OrganizationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#list_organizations-instance_method
+      def list_organizations: (
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _ListOrganizationsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOrganizationsResponseSuccess
+
+      interface _ListResourceDelegatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceDelegatesResponse]
+        def delegates: () -> ::Array[Types::Delegate]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#list_resource_delegates-instance_method
+      def list_resource_delegates: (
+                                     organization_id: ::String,
+                                     resource_id: ::String,
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _ListResourceDelegatesResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceDelegatesResponseSuccess
+
+      interface _ListResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourcesResponse]
+        def resources: () -> ::Array[Types::Resource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#list_resources-instance_method
+      def list_resources: (
+                            organization_id: ::String,
+                            ?next_token: ::String,
+                            ?max_results: ::Integer,
+                            ?filters: {
+                              name_prefix: ::String?,
+                              primary_email_prefix: ::String?,
+                              state: ("ENABLED" | "DISABLED" | "DELETED")?
+                            }
+                          ) -> _ListResourcesResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourcesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListUsersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListUsersResponse]
+        def users: () -> ::Array[Types::User]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#list_users-instance_method
+      def list_users: (
+                        organization_id: ::String,
+                        ?next_token: ::String,
+                        ?max_results: ::Integer,
+                        ?filters: {
+                          username_prefix: ::String?,
+                          display_name_prefix: ::String?,
+                          primary_email_prefix: ::String?,
+                          state: ("ENABLED" | "DISABLED" | "DELETED")?
+                        }
+                      ) -> _ListUsersResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUsersResponseSuccess
+
+      interface _PutAccessControlRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAccessControlRuleResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#put_access_control_rule-instance_method
+      def put_access_control_rule: (
+                                     name: ::String,
+                                     effect: ("ALLOW" | "DENY"),
+                                     description: ::String,
+                                     ?ip_ranges: Array[::String],
+                                     ?not_ip_ranges: Array[::String],
+                                     ?actions: Array[::String],
+                                     ?not_actions: Array[::String],
+                                     ?user_ids: Array[::String],
+                                     ?not_user_ids: Array[::String],
+                                     organization_id: ::String,
+                                     ?impersonation_role_ids: Array[::String],
+                                     ?not_impersonation_role_ids: Array[::String]
+                                   ) -> _PutAccessControlRuleResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAccessControlRuleResponseSuccess
+
+      interface _PutEmailMonitoringConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutEmailMonitoringConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#put_email_monitoring_configuration-instance_method
+      def put_email_monitoring_configuration: (
+                                                organization_id: ::String,
+                                                role_arn: ::String,
+                                                log_group_arn: ::String
+                                              ) -> _PutEmailMonitoringConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEmailMonitoringConfigurationResponseSuccess
+
+      interface _PutInboundDmarcSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutInboundDmarcSettingsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#put_inbound_dmarc_settings-instance_method
+      def put_inbound_dmarc_settings: (
+                                        organization_id: ::String,
+                                        enforced: bool
+                                      ) -> _PutInboundDmarcSettingsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutInboundDmarcSettingsResponseSuccess
+
+      interface _PutMailboxPermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutMailboxPermissionsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#put_mailbox_permissions-instance_method
+      def put_mailbox_permissions: (
+                                     organization_id: ::String,
+                                     entity_id: ::String,
+                                     grantee_id: ::String,
+                                     permission_values: Array[("FULL_ACCESS" | "SEND_AS" | "SEND_ON_BEHALF")]
+                                   ) -> _PutMailboxPermissionsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutMailboxPermissionsResponseSuccess
+
+      interface _PutMobileDeviceAccessOverrideResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutMobileDeviceAccessOverrideResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#put_mobile_device_access_override-instance_method
+      def put_mobile_device_access_override: (
+                                               organization_id: ::String,
+                                               user_id: ::String,
+                                               device_id: ::String,
+                                               effect: ("ALLOW" | "DENY"),
+                                               ?description: ::String
+                                             ) -> _PutMobileDeviceAccessOverrideResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutMobileDeviceAccessOverrideResponseSuccess
+
+      interface _PutRetentionPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutRetentionPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#put_retention_policy-instance_method
+      def put_retention_policy: (
+                                  organization_id: ::String,
+                                  ?id: ::String,
+                                  name: ::String,
+                                  ?description: ::String,
+                                  folder_configurations: Array[
+                                    {
+                                      name: ("INBOX" | "DELETED_ITEMS" | "SENT_ITEMS" | "DRAFTS" | "JUNK_EMAIL"),
+                                      action: ("NONE" | "DELETE" | "PERMANENTLY_DELETE"),
+                                      period: ::Integer?
+                                    },
+                                  ]
+                                ) -> _PutRetentionPolicyResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutRetentionPolicyResponseSuccess
+
+      interface _RegisterMailDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterMailDomainResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#register_mail_domain-instance_method
+      def register_mail_domain: (
+                                  ?client_token: ::String,
+                                  organization_id: ::String,
+                                  domain_name: ::String
+                                ) -> _RegisterMailDomainResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterMailDomainResponseSuccess
+
+      interface _RegisterToWorkMailResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterToWorkMailResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#register_to_work_mail-instance_method
+      def register_to_work_mail: (
+                                   organization_id: ::String,
+                                   entity_id: ::String,
+                                   email: ::String
+                                 ) -> _RegisterToWorkMailResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterToWorkMailResponseSuccess
+
+      interface _ResetPasswordResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResetPasswordResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#reset_password-instance_method
+      def reset_password: (
+                            organization_id: ::String,
+                            user_id: ::String,
+                            password: ::String
+                          ) -> _ResetPasswordResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetPasswordResponseSuccess
+
+      interface _StartMailboxExportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMailboxExportJobResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#start_mailbox_export_job-instance_method
+      def start_mailbox_export_job: (
+                                      client_token: ::String,
+                                      organization_id: ::String,
+                                      entity_id: ::String,
+                                      ?description: ::String,
+                                      role_arn: ::String,
+                                      kms_key_arn: ::String,
+                                      s3_bucket_name: ::String,
+                                      s3_prefix: ::String
+                                    ) -> _StartMailboxExportJobResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMailboxExportJobResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _TestAvailabilityConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TestAvailabilityConfigurationResponse]
+        def test_passed: () -> bool
+        def failure_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#test_availability_configuration-instance_method
+      def test_availability_configuration: (
+                                             organization_id: ::String,
+                                             ?domain_name: ::String,
+                                             ?ews_provider: {
+                                               ews_endpoint: ::String,
+                                               ews_username: ::String,
+                                               ews_password: ::String
+                                             },
+                                             ?lambda_provider: {
+                                               lambda_arn: ::String
+                                             }
+                                           ) -> _TestAvailabilityConfigurationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestAvailabilityConfigurationResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAvailabilityConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAvailabilityConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#update_availability_configuration-instance_method
+      def update_availability_configuration: (
+                                               organization_id: ::String,
+                                               domain_name: ::String,
+                                               ?ews_provider: {
+                                                 ews_endpoint: ::String,
+                                                 ews_username: ::String,
+                                                 ews_password: ::String
+                                               },
+                                               ?lambda_provider: {
+                                                 lambda_arn: ::String
+                                               }
+                                             ) -> _UpdateAvailabilityConfigurationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAvailabilityConfigurationResponseSuccess
+
+      interface _UpdateDefaultMailDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDefaultMailDomainResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#update_default_mail_domain-instance_method
+      def update_default_mail_domain: (
+                                        organization_id: ::String,
+                                        domain_name: ::String
+                                      ) -> _UpdateDefaultMailDomainResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDefaultMailDomainResponseSuccess
+
+      interface _UpdateGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#update_group-instance_method
+      def update_group: (
+                          organization_id: ::String,
+                          group_id: ::String,
+                          ?hidden_from_global_address_list: bool
+                        ) -> _UpdateGroupResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGroupResponseSuccess
+
+      interface _UpdateImpersonationRoleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateImpersonationRoleResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#update_impersonation_role-instance_method
+      def update_impersonation_role: (
+                                       organization_id: ::String,
+                                       impersonation_role_id: ::String,
+                                       name: ::String,
+                                       type: ("FULL_ACCESS" | "READ_ONLY"),
+                                       ?description: ::String,
+                                       rules: Array[
+                                         {
+                                           impersonation_rule_id: ::String,
+                                           name: ::String?,
+                                           description: ::String?,
+                                           effect: ("ALLOW" | "DENY"),
+                                           target_users: Array[::String]?,
+                                           not_target_users: Array[::String]?
+                                         },
+                                       ]
+                                     ) -> _UpdateImpersonationRoleResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateImpersonationRoleResponseSuccess
+
+      interface _UpdateMailboxQuotaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMailboxQuotaResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#update_mailbox_quota-instance_method
+      def update_mailbox_quota: (
+                                  organization_id: ::String,
+                                  user_id: ::String,
+                                  mailbox_quota: ::Integer
+                                ) -> _UpdateMailboxQuotaResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMailboxQuotaResponseSuccess
+
+      interface _UpdateMobileDeviceAccessRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMobileDeviceAccessRuleResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#update_mobile_device_access_rule-instance_method
+      def update_mobile_device_access_rule: (
+                                              organization_id: ::String,
+                                              mobile_device_access_rule_id: ::String,
+                                              name: ::String,
+                                              ?description: ::String,
+                                              effect: ("ALLOW" | "DENY"),
+                                              ?device_types: Array[::String],
+                                              ?not_device_types: Array[::String],
+                                              ?device_models: Array[::String],
+                                              ?not_device_models: Array[::String],
+                                              ?device_operating_systems: Array[::String],
+                                              ?not_device_operating_systems: Array[::String],
+                                              ?device_user_agents: Array[::String],
+                                              ?not_device_user_agents: Array[::String]
+                                            ) -> _UpdateMobileDeviceAccessRuleResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMobileDeviceAccessRuleResponseSuccess
+
+      interface _UpdatePrimaryEmailAddressResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePrimaryEmailAddressResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#update_primary_email_address-instance_method
+      def update_primary_email_address: (
+                                          organization_id: ::String,
+                                          entity_id: ::String,
+                                          email: ::String
+                                        ) -> _UpdatePrimaryEmailAddressResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePrimaryEmailAddressResponseSuccess
+
+      interface _UpdateResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#update_resource-instance_method
+      def update_resource: (
+                             organization_id: ::String,
+                             resource_id: ::String,
+                             ?name: ::String,
+                             ?booking_options: {
+                               auto_accept_requests: bool?,
+                               auto_decline_recurring_requests: bool?,
+                               auto_decline_conflicting_requests: bool?
+                             },
+                             ?description: ::String,
+                             ?type: ("ROOM" | "EQUIPMENT"),
+                             ?hidden_from_global_address_list: bool
+                           ) -> _UpdateResourceResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResourceResponseSuccess
+
+      interface _UpdateUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateUserResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#update_user-instance_method
+      def update_user: (
+                         organization_id: ::String,
+                         user_id: ::String,
+                         ?role: ("USER" | "RESOURCE" | "SYSTEM_USER" | "REMOTE_USER"),
+                         ?display_name: ::String,
+                         ?first_name: ::String,
+                         ?last_name: ::String,
+                         ?hidden_from_global_address_list: bool,
+                         ?initials: ::String,
+                         ?telephone: ::String,
+                         ?street: ::String,
+                         ?job_title: ::String,
+                         ?city: ::String,
+                         ?company: ::String,
+                         ?zip_code: ::String,
+                         ?department: ::String,
+                         ?country: ::String,
+                         ?office: ::String
+                       ) -> _UpdateUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUserResponseSuccess
+    end
+  end
+end
+

@@ -1,0 +1,525 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SNS
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#add_permission-instance_method
+      def add_permission: (
+                            topic_arn: ::String,
+                            label: ::String,
+                            aws_account_id: Array[::String],
+                            action_name: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _CheckIfPhoneNumberIsOptedOutResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CheckIfPhoneNumberIsOptedOutResponse]
+        def is_opted_out: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#check_if_phone_number_is_opted_out-instance_method
+      def check_if_phone_number_is_opted_out: (
+                                                phone_number: ::String
+                                              ) -> _CheckIfPhoneNumberIsOptedOutResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CheckIfPhoneNumberIsOptedOutResponseSuccess
+
+      interface _ConfirmSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConfirmSubscriptionResponse]
+        def subscription_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#confirm_subscription-instance_method
+      def confirm_subscription: (
+                                  topic_arn: ::String,
+                                  token: ::String,
+                                  ?authenticate_on_unsubscribe: ::String
+                                ) -> _ConfirmSubscriptionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConfirmSubscriptionResponseSuccess
+
+      interface _CreatePlatformApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePlatformApplicationResponse]
+        def platform_application_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#create_platform_application-instance_method
+      def create_platform_application: (
+                                         name: ::String,
+                                         platform: ::String,
+                                         attributes: Hash[::String, ::String]
+                                       ) -> _CreatePlatformApplicationResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePlatformApplicationResponseSuccess
+
+      interface _CreatePlatformEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEndpointResponse]
+        def endpoint_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#create_platform_endpoint-instance_method
+      def create_platform_endpoint: (
+                                      platform_application_arn: ::String,
+                                      token: ::String,
+                                      ?custom_user_data: ::String,
+                                      ?attributes: Hash[::String, ::String]
+                                    ) -> _CreatePlatformEndpointResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePlatformEndpointResponseSuccess
+
+      interface _CreateSMSSandboxPhoneNumberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSMSSandboxPhoneNumberResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#create_sms_sandbox_phone_number-instance_method
+      def create_sms_sandbox_phone_number: (
+                                             phone_number: ::String,
+                                             ?language_code: ("en-US" | "en-GB" | "es-419" | "es-ES" | "de-DE" | "fr-CA" | "fr-FR" | "it-IT" | "ja-JP" | "pt-BR" | "kr-KR" | "zh-CN" | "zh-TW")
+                                           ) -> _CreateSMSSandboxPhoneNumberResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSMSSandboxPhoneNumberResponseSuccess
+
+      interface _CreateTopicResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTopicResponse]
+        def topic_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#create_topic-instance_method
+      def create_topic: (
+                          name: ::String,
+                          ?attributes: Hash[::String, ::String],
+                          ?tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ],
+                          ?data_protection_policy: ::String
+                        ) -> _CreateTopicResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTopicResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#delete_endpoint-instance_method
+      def delete_endpoint: (
+                             endpoint_arn: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#delete_platform_application-instance_method
+      def delete_platform_application: (
+                                         platform_application_arn: ::String
+                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteSMSSandboxPhoneNumberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSMSSandboxPhoneNumberResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#delete_sms_sandbox_phone_number-instance_method
+      def delete_sms_sandbox_phone_number: (
+                                             phone_number: ::String
+                                           ) -> _DeleteSMSSandboxPhoneNumberResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSMSSandboxPhoneNumberResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#delete_topic-instance_method
+      def delete_topic: (
+                          topic_arn: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetDataProtectionPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataProtectionPolicyResponse]
+        def data_protection_policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#get_data_protection_policy-instance_method
+      def get_data_protection_policy: (
+                                        resource_arn: ::String
+                                      ) -> _GetDataProtectionPolicyResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataProtectionPolicyResponseSuccess
+
+      interface _GetEndpointAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEndpointAttributesResponse]
+        def attributes: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#get_endpoint_attributes-instance_method
+      def get_endpoint_attributes: (
+                                     endpoint_arn: ::String
+                                   ) -> _GetEndpointAttributesResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEndpointAttributesResponseSuccess
+
+      interface _GetPlatformApplicationAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPlatformApplicationAttributesResponse]
+        def attributes: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#get_platform_application_attributes-instance_method
+      def get_platform_application_attributes: (
+                                                 platform_application_arn: ::String
+                                               ) -> _GetPlatformApplicationAttributesResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPlatformApplicationAttributesResponseSuccess
+
+      interface _GetSMSAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSMSAttributesResponse]
+        def attributes: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#get_sms_attributes-instance_method
+      def get_sms_attributes: (
+                                ?attributes: Array[::String]
+                              ) -> _GetSMSAttributesResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSMSAttributesResponseSuccess
+
+      interface _GetSMSSandboxAccountStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSMSSandboxAccountStatusResult]
+        def is_in_sandbox: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#get_sms_sandbox_account_status-instance_method
+      def get_sms_sandbox_account_status: (
+                                          ) -> _GetSMSSandboxAccountStatusResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSMSSandboxAccountStatusResponseSuccess
+
+      interface _GetSubscriptionAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSubscriptionAttributesResponse]
+        def attributes: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#get_subscription_attributes-instance_method
+      def get_subscription_attributes: (
+                                         subscription_arn: ::String
+                                       ) -> _GetSubscriptionAttributesResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSubscriptionAttributesResponseSuccess
+
+      interface _GetTopicAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTopicAttributesResponse]
+        def attributes: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#get_topic_attributes-instance_method
+      def get_topic_attributes: (
+                                  topic_arn: ::String
+                                ) -> _GetTopicAttributesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTopicAttributesResponseSuccess
+
+      interface _ListEndpointsByPlatformApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEndpointsByPlatformApplicationResponse]
+        def endpoints: () -> ::Array[Types::Endpoint]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#list_endpoints_by_platform_application-instance_method
+      def list_endpoints_by_platform_application: (
+                                                    platform_application_arn: ::String,
+                                                    ?next_token: ::String
+                                                  ) -> _ListEndpointsByPlatformApplicationResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEndpointsByPlatformApplicationResponseSuccess
+
+      interface _ListOriginationNumbersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOriginationNumbersResult]
+        def next_token: () -> ::String
+        def phone_numbers: () -> ::Array[Types::PhoneNumberInformation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#list_origination_numbers-instance_method
+      def list_origination_numbers: (
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListOriginationNumbersResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOriginationNumbersResponseSuccess
+
+      interface _ListPhoneNumbersOptedOutResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPhoneNumbersOptedOutResponse]
+        def phone_numbers: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#list_phone_numbers_opted_out-instance_method
+      def list_phone_numbers_opted_out: (
+                                          ?next_token: ::String
+                                        ) -> _ListPhoneNumbersOptedOutResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPhoneNumbersOptedOutResponseSuccess
+
+      interface _ListPlatformApplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPlatformApplicationsResponse]
+        def platform_applications: () -> ::Array[Types::PlatformApplication]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#list_platform_applications-instance_method
+      def list_platform_applications: (
+                                        ?next_token: ::String
+                                      ) -> _ListPlatformApplicationsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPlatformApplicationsResponseSuccess
+
+      interface _ListSMSSandboxPhoneNumbersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSMSSandboxPhoneNumbersResult]
+        def phone_numbers: () -> ::Array[Types::SMSSandboxPhoneNumber]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#list_sms_sandbox_phone_numbers-instance_method
+      def list_sms_sandbox_phone_numbers: (
+                                            ?next_token: ::String,
+                                            ?max_results: ::Integer
+                                          ) -> _ListSMSSandboxPhoneNumbersResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSMSSandboxPhoneNumbersResponseSuccess
+
+      interface _ListSubscriptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSubscriptionsResponse]
+        def subscriptions: () -> ::Array[Types::Subscription]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#list_subscriptions-instance_method
+      def list_subscriptions: (
+                                ?next_token: ::String
+                              ) -> _ListSubscriptionsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSubscriptionsResponseSuccess
+
+      interface _ListSubscriptionsByTopicResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSubscriptionsByTopicResponse]
+        def subscriptions: () -> ::Array[Types::Subscription]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#list_subscriptions_by_topic-instance_method
+      def list_subscriptions_by_topic: (
+                                         topic_arn: ::String,
+                                         ?next_token: ::String
+                                       ) -> _ListSubscriptionsByTopicResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSubscriptionsByTopicResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTopicsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTopicsResponse]
+        def topics: () -> ::Array[Types::Topic]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#list_topics-instance_method
+      def list_topics: (
+                         ?next_token: ::String
+                       ) -> _ListTopicsResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTopicsResponseSuccess
+
+      interface _OptInPhoneNumberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::OptInPhoneNumberResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#opt_in_phone_number-instance_method
+      def opt_in_phone_number: (
+                                 phone_number: ::String
+                               ) -> _OptInPhoneNumberResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _OptInPhoneNumberResponseSuccess
+
+      interface _PublishResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PublishResponse]
+        def message_id: () -> ::String
+        def sequence_number: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#publish-instance_method
+      def publish: (
+                     ?topic_arn: ::String,
+                     ?target_arn: ::String,
+                     ?phone_number: ::String,
+                     message: ::String,
+                     ?subject: ::String,
+                     ?message_structure: ::String,
+                     ?message_attributes: Hash[::String, {
+                         data_type: ::String,
+                         string_value: ::String?,
+                         binary_value: ::String?
+                       }],
+                     ?message_deduplication_id: ::String,
+                     ?message_group_id: ::String
+                   ) -> _PublishResponseSuccess
+                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PublishResponseSuccess
+
+      interface _PublishBatchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PublishBatchResponse]
+        def successful: () -> ::Array[Types::PublishBatchResultEntry]
+        def failed: () -> ::Array[Types::BatchResultErrorEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#publish_batch-instance_method
+      def publish_batch: (
+                           topic_arn: ::String,
+                           publish_batch_request_entries: Array[
+                             {
+                               id: ::String,
+                               message: ::String,
+                               subject: ::String?,
+                               message_structure: ::String?,
+                               message_attributes: Hash[::String, {
+                                   data_type: ::String,
+                                   string_value: ::String?,
+                                   binary_value: ::String?
+                                 }]?,
+                               message_deduplication_id: ::String?,
+                               message_group_id: ::String?
+                             },
+                           ]
+                         ) -> _PublishBatchResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PublishBatchResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#put_data_protection_policy-instance_method
+      def put_data_protection_policy: (
+                                        resource_arn: ::String,
+                                        data_protection_policy: ::String
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#remove_permission-instance_method
+      def remove_permission: (
+                               topic_arn: ::String,
+                               label: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#set_endpoint_attributes-instance_method
+      def set_endpoint_attributes: (
+                                     endpoint_arn: ::String,
+                                     attributes: Hash[::String, ::String]
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#set_platform_application_attributes-instance_method
+      def set_platform_application_attributes: (
+                                                 platform_application_arn: ::String,
+                                                 attributes: Hash[::String, ::String]
+                                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _SetSMSAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetSMSAttributesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#set_sms_attributes-instance_method
+      def set_sms_attributes: (
+                                attributes: Hash[::String, ::String]
+                              ) -> _SetSMSAttributesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetSMSAttributesResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#set_subscription_attributes-instance_method
+      def set_subscription_attributes: (
+                                         subscription_arn: ::String,
+                                         attribute_name: ::String,
+                                         ?attribute_value: ::String
+                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#set_topic_attributes-instance_method
+      def set_topic_attributes: (
+                                  topic_arn: ::String,
+                                  attribute_name: ::String,
+                                  ?attribute_value: ::String
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _SubscribeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SubscribeResponse]
+        def subscription_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#subscribe-instance_method
+      def subscribe: (
+                       topic_arn: ::String,
+                       protocol: ::String,
+                       ?endpoint: ::String,
+                       ?attributes: Hash[::String, ::String],
+                       ?return_subscription_arn: bool
+                     ) -> _SubscribeResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SubscribeResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#unsubscribe-instance_method
+      def unsubscribe: (
+                         subscription_arn: ::String
+                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _VerifySMSSandboxPhoneNumberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::VerifySMSSandboxPhoneNumberResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Client.html#verify_sms_sandbox_phone_number-instance_method
+      def verify_sms_sandbox_phone_number: (
+                                             phone_number: ::String,
+                                             one_time_password: ::String
+                                           ) -> _VerifySMSSandboxPhoneNumberResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _VerifySMSSandboxPhoneNumberResponseSuccess
+    end
+  end
+end
+

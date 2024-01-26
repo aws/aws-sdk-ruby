@@ -1,0 +1,871 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Drs
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateSourceNetworkStackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateSourceNetworkStackResponse]
+        def job: () -> Types::Job
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#associate_source_network_stack-instance_method
+      def associate_source_network_stack: (
+                                            cfn_stack_name: ::String,
+                                            source_network_id: ::String
+                                          ) -> _AssociateSourceNetworkStackResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateSourceNetworkStackResponseSuccess
+
+      interface _CreateExtendedSourceServerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateExtendedSourceServerResponse]
+        def source_server: () -> Types::SourceServer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#create_extended_source_server-instance_method
+      def create_extended_source_server: (
+                                           source_server_arn: ::String,
+                                           ?tags: Hash[::String, ::String]
+                                         ) -> _CreateExtendedSourceServerResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateExtendedSourceServerResponseSuccess
+
+      interface _CreateLaunchConfigurationTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLaunchConfigurationTemplateResponse]
+        def launch_configuration_template: () -> Types::LaunchConfigurationTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#create_launch_configuration_template-instance_method
+      def create_launch_configuration_template: (
+                                                  ?copy_private_ip: bool,
+                                                  ?copy_tags: bool,
+                                                  ?export_bucket_arn: ::String,
+                                                  ?launch_disposition: ("STOPPED" | "STARTED"),
+                                                  ?launch_into_source_instance: bool,
+                                                  ?licensing: {
+                                                    os_byol: bool?
+                                                  },
+                                                  ?post_launch_enabled: bool,
+                                                  ?tags: Hash[::String, ::String],
+                                                  ?target_instance_type_right_sizing_method: ("NONE" | "BASIC" | "IN_AWS")
+                                                ) -> _CreateLaunchConfigurationTemplateResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLaunchConfigurationTemplateResponseSuccess
+
+      interface _CreateReplicationConfigurationTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReplicationConfigurationTemplate]
+        def arn: () -> ::String
+        def associate_default_security_group: () -> bool
+        def auto_replicate_new_disks: () -> bool
+        def bandwidth_throttling: () -> ::Integer
+        def create_public_ip: () -> bool
+        def data_plane_routing: () -> ("PRIVATE_IP" | "PUBLIC_IP")
+        def default_large_staging_disk_type: () -> ("GP2" | "GP3" | "ST1" | "AUTO")
+        def ebs_encryption: () -> ("DEFAULT" | "CUSTOM" | "NONE")
+        def ebs_encryption_key_arn: () -> ::String
+        def pit_policy: () -> ::Array[Types::PITPolicyRule]
+        def replication_configuration_template_id: () -> ::String
+        def replication_server_instance_type: () -> ::String
+        def replication_servers_security_groups_i_ds: () -> ::Array[::String]
+        def staging_area_subnet_id: () -> ::String
+        def staging_area_tags: () -> ::Hash[::String, ::String]
+        def tags: () -> ::Hash[::String, ::String]
+        def use_dedicated_replication_server: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#create_replication_configuration_template-instance_method
+      def create_replication_configuration_template: (
+                                                       associate_default_security_group: bool,
+                                                       ?auto_replicate_new_disks: bool,
+                                                       bandwidth_throttling: ::Integer,
+                                                       create_public_ip: bool,
+                                                       data_plane_routing: ("PRIVATE_IP" | "PUBLIC_IP"),
+                                                       default_large_staging_disk_type: ("GP2" | "GP3" | "ST1" | "AUTO"),
+                                                       ebs_encryption: ("DEFAULT" | "CUSTOM" | "NONE"),
+                                                       ?ebs_encryption_key_arn: ::String,
+                                                       pit_policy: Array[
+                                                         {
+                                                           enabled: bool?,
+                                                           interval: ::Integer,
+                                                           retention_duration: ::Integer,
+                                                           rule_id: ::Integer?,
+                                                           units: ("MINUTE" | "HOUR" | "DAY")
+                                                         },
+                                                       ],
+                                                       replication_server_instance_type: ::String,
+                                                       replication_servers_security_groups_i_ds: Array[::String],
+                                                       staging_area_subnet_id: ::String,
+                                                       staging_area_tags: Hash[::String, ::String],
+                                                       ?tags: Hash[::String, ::String],
+                                                       use_dedicated_replication_server: bool
+                                                     ) -> _CreateReplicationConfigurationTemplateResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateReplicationConfigurationTemplateResponseSuccess
+
+      interface _CreateSourceNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSourceNetworkResponse]
+        def source_network_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#create_source_network-instance_method
+      def create_source_network: (
+                                   origin_account_id: ::String,
+                                   origin_region: ::String,
+                                   ?tags: Hash[::String, ::String],
+                                   vpc_id: ::String
+                                 ) -> _CreateSourceNetworkResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSourceNetworkResponseSuccess
+
+      interface _DeleteJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteJobResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#delete_job-instance_method
+      def delete_job: (
+                        job_id: ::String
+                      ) -> _DeleteJobResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteJobResponseSuccess
+
+      interface _DeleteLaunchActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLaunchActionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#delete_launch_action-instance_method
+      def delete_launch_action: (
+                                  action_id: ::String,
+                                  resource_id: ::String
+                                ) -> _DeleteLaunchActionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLaunchActionResponseSuccess
+
+      interface _DeleteLaunchConfigurationTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLaunchConfigurationTemplateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#delete_launch_configuration_template-instance_method
+      def delete_launch_configuration_template: (
+                                                  launch_configuration_template_id: ::String
+                                                ) -> _DeleteLaunchConfigurationTemplateResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLaunchConfigurationTemplateResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#delete_recovery_instance-instance_method
+      def delete_recovery_instance: (
+                                      recovery_instance_id: ::String
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteReplicationConfigurationTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteReplicationConfigurationTemplateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#delete_replication_configuration_template-instance_method
+      def delete_replication_configuration_template: (
+                                                       replication_configuration_template_id: ::String
+                                                     ) -> _DeleteReplicationConfigurationTemplateResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteReplicationConfigurationTemplateResponseSuccess
+
+      interface _DeleteSourceNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSourceNetworkResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#delete_source_network-instance_method
+      def delete_source_network: (
+                                   source_network_id: ::String
+                                 ) -> _DeleteSourceNetworkResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSourceNetworkResponseSuccess
+
+      interface _DeleteSourceServerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSourceServerResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#delete_source_server-instance_method
+      def delete_source_server: (
+                                  source_server_id: ::String
+                                ) -> _DeleteSourceServerResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSourceServerResponseSuccess
+
+      interface _DescribeJobLogItemsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeJobLogItemsResponse]
+        def items: () -> ::Array[Types::JobLog]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#describe_job_log_items-instance_method
+      def describe_job_log_items: (
+                                    job_id: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _DescribeJobLogItemsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeJobLogItemsResponseSuccess
+
+      interface _DescribeJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeJobsResponse]
+        def items: () -> ::Array[Types::Job]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#describe_jobs-instance_method
+      def describe_jobs: (
+                           ?filters: {
+                             from_date: ::String?,
+                             job_i_ds: Array[::String]?,
+                             to_date: ::String?
+                           },
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _DescribeJobsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeJobsResponseSuccess
+
+      interface _DescribeLaunchConfigurationTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLaunchConfigurationTemplatesResponse]
+        def items: () -> ::Array[Types::LaunchConfigurationTemplate]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#describe_launch_configuration_templates-instance_method
+      def describe_launch_configuration_templates: (
+                                                     ?launch_configuration_template_i_ds: Array[::String],
+                                                     ?max_results: ::Integer,
+                                                     ?next_token: ::String
+                                                   ) -> _DescribeLaunchConfigurationTemplatesResponseSuccess
+                                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLaunchConfigurationTemplatesResponseSuccess
+
+      interface _DescribeRecoveryInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRecoveryInstancesResponse]
+        def items: () -> ::Array[Types::RecoveryInstance]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#describe_recovery_instances-instance_method
+      def describe_recovery_instances: (
+                                         ?filters: {
+                                           recovery_instance_i_ds: Array[::String]?,
+                                           source_server_i_ds: Array[::String]?
+                                         },
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _DescribeRecoveryInstancesResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRecoveryInstancesResponseSuccess
+
+      interface _DescribeRecoverySnapshotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRecoverySnapshotsResponse]
+        def items: () -> ::Array[Types::RecoverySnapshot]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#describe_recovery_snapshots-instance_method
+      def describe_recovery_snapshots: (
+                                         ?filters: {
+                                           from_date_time: ::String?,
+                                           to_date_time: ::String?
+                                         },
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String,
+                                         ?order: ("ASC" | "DESC"),
+                                         source_server_id: ::String
+                                       ) -> _DescribeRecoverySnapshotsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRecoverySnapshotsResponseSuccess
+
+      interface _DescribeReplicationConfigurationTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReplicationConfigurationTemplatesResponse]
+        def items: () -> ::Array[Types::ReplicationConfigurationTemplate]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#describe_replication_configuration_templates-instance_method
+      def describe_replication_configuration_templates: (
+                                                          ?max_results: ::Integer,
+                                                          ?next_token: ::String,
+                                                          ?replication_configuration_template_i_ds: Array[::String]
+                                                        ) -> _DescribeReplicationConfigurationTemplatesResponseSuccess
+                                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReplicationConfigurationTemplatesResponseSuccess
+
+      interface _DescribeSourceNetworksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSourceNetworksResponse]
+        def items: () -> ::Array[Types::SourceNetwork]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#describe_source_networks-instance_method
+      def describe_source_networks: (
+                                      ?filters: {
+                                        origin_account_id: ::String?,
+                                        origin_region: ::String?,
+                                        source_network_i_ds: Array[::String]?
+                                      },
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _DescribeSourceNetworksResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSourceNetworksResponseSuccess
+
+      interface _DescribeSourceServersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSourceServersResponse]
+        def items: () -> ::Array[Types::SourceServer]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#describe_source_servers-instance_method
+      def describe_source_servers: (
+                                     ?filters: {
+                                       hardware_id: ::String?,
+                                       source_server_i_ds: Array[::String]?,
+                                       staging_account_i_ds: Array[::String]?
+                                     },
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _DescribeSourceServersResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSourceServersResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#disconnect_recovery_instance-instance_method
+      def disconnect_recovery_instance: (
+                                          recovery_instance_id: ::String
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DisconnectSourceServerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SourceServer]
+        def agent_version: () -> ::String
+        def arn: () -> ::String
+        def data_replication_info: () -> Types::DataReplicationInfo
+        def last_launch_result: () -> ("NOT_STARTED" | "PENDING" | "SUCCEEDED" | "FAILED")
+        def life_cycle: () -> Types::LifeCycle
+        def recovery_instance_id: () -> ::String
+        def replication_direction: () -> ("FAILOVER" | "FAILBACK")
+        def reversed_direction_source_server_arn: () -> ::String
+        def source_cloud_properties: () -> Types::SourceCloudProperties
+        def source_network_id: () -> ::String
+        def source_properties: () -> Types::SourceProperties
+        def source_server_id: () -> ::String
+        def staging_area: () -> Types::StagingArea
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#disconnect_source_server-instance_method
+      def disconnect_source_server: (
+                                      source_server_id: ::String
+                                    ) -> _DisconnectSourceServerResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisconnectSourceServerResponseSuccess
+
+      interface _ExportSourceNetworkCfnTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExportSourceNetworkCfnTemplateResponse]
+        def s3_destination_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#export_source_network_cfn_template-instance_method
+      def export_source_network_cfn_template: (
+                                                source_network_id: ::String
+                                              ) -> _ExportSourceNetworkCfnTemplateResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportSourceNetworkCfnTemplateResponseSuccess
+
+      interface _GetFailbackReplicationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFailbackReplicationConfigurationResponse]
+        def bandwidth_throttling: () -> ::Integer
+        def name: () -> ::String
+        def recovery_instance_id: () -> ::String
+        def use_private_ip: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#get_failback_replication_configuration-instance_method
+      def get_failback_replication_configuration: (
+                                                    recovery_instance_id: ::String
+                                                  ) -> _GetFailbackReplicationConfigurationResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFailbackReplicationConfigurationResponseSuccess
+
+      interface _GetLaunchConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::LaunchConfiguration]
+        def copy_private_ip: () -> bool
+        def copy_tags: () -> bool
+        def ec2_launch_template_id: () -> ::String
+        def launch_disposition: () -> ("STOPPED" | "STARTED")
+        def launch_into_instance_properties: () -> Types::LaunchIntoInstanceProperties
+        def licensing: () -> Types::Licensing
+        def name: () -> ::String
+        def post_launch_enabled: () -> bool
+        def source_server_id: () -> ::String
+        def target_instance_type_right_sizing_method: () -> ("NONE" | "BASIC" | "IN_AWS")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#get_launch_configuration-instance_method
+      def get_launch_configuration: (
+                                      source_server_id: ::String
+                                    ) -> _GetLaunchConfigurationResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLaunchConfigurationResponseSuccess
+
+      interface _GetReplicationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReplicationConfiguration]
+        def associate_default_security_group: () -> bool
+        def auto_replicate_new_disks: () -> bool
+        def bandwidth_throttling: () -> ::Integer
+        def create_public_ip: () -> bool
+        def data_plane_routing: () -> ("PRIVATE_IP" | "PUBLIC_IP")
+        def default_large_staging_disk_type: () -> ("GP2" | "GP3" | "ST1" | "AUTO")
+        def ebs_encryption: () -> ("DEFAULT" | "CUSTOM" | "NONE")
+        def ebs_encryption_key_arn: () -> ::String
+        def name: () -> ::String
+        def pit_policy: () -> ::Array[Types::PITPolicyRule]
+        def replicated_disks: () -> ::Array[Types::ReplicationConfigurationReplicatedDisk]
+        def replication_server_instance_type: () -> ::String
+        def replication_servers_security_groups_i_ds: () -> ::Array[::String]
+        def source_server_id: () -> ::String
+        def staging_area_subnet_id: () -> ::String
+        def staging_area_tags: () -> ::Hash[::String, ::String]
+        def use_dedicated_replication_server: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#get_replication_configuration-instance_method
+      def get_replication_configuration: (
+                                           source_server_id: ::String
+                                         ) -> _GetReplicationConfigurationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetReplicationConfigurationResponseSuccess
+
+      interface _InitializeServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InitializeServiceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#initialize_service-instance_method
+      def initialize_service: (
+                              ) -> _InitializeServiceResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InitializeServiceResponseSuccess
+
+      interface _ListExtensibleSourceServersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListExtensibleSourceServersResponse]
+        def items: () -> ::Array[Types::StagingSourceServer]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#list_extensible_source_servers-instance_method
+      def list_extensible_source_servers: (
+                                            ?max_results: ::Integer,
+                                            ?next_token: ::String,
+                                            staging_account_id: ::String
+                                          ) -> _ListExtensibleSourceServersResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExtensibleSourceServersResponseSuccess
+
+      interface _ListLaunchActionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLaunchActionsResponse]
+        def items: () -> ::Array[Types::LaunchAction]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#list_launch_actions-instance_method
+      def list_launch_actions: (
+                                 ?filters: {
+                                   action_ids: Array[::String]?
+                                 },
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String,
+                                 resource_id: ::String
+                               ) -> _ListLaunchActionsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLaunchActionsResponseSuccess
+
+      interface _ListStagingAccountsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStagingAccountsResponse]
+        def accounts: () -> ::Array[Types::Account]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#list_staging_accounts-instance_method
+      def list_staging_accounts: (
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListStagingAccountsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStagingAccountsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutLaunchActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutLaunchActionResponse]
+        def action_code: () -> ::String
+        def action_id: () -> ::String
+        def action_version: () -> ::String
+        def active: () -> bool
+        def category: () -> ("MONITORING" | "VALIDATION" | "CONFIGURATION" | "SECURITY" | "OTHER")
+        def description: () -> ::String
+        def name: () -> ::String
+        def optional: () -> bool
+        def order: () -> ::Integer
+        def parameters: () -> ::Hash[::String, Types::LaunchActionParameter]
+        def resource_id: () -> ::String
+        def type: () -> ("SSM_AUTOMATION" | "SSM_COMMAND")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#put_launch_action-instance_method
+      def put_launch_action: (
+                               action_code: ::String,
+                               action_id: ::String,
+                               action_version: ::String,
+                               active: bool,
+                               category: ("MONITORING" | "VALIDATION" | "CONFIGURATION" | "SECURITY" | "OTHER"),
+                               description: ::String,
+                               name: ::String,
+                               optional: bool,
+                               order: ::Integer,
+                               ?parameters: Hash[::String, {
+                                   type: ("SSM_STORE" | "DYNAMIC")?,
+                                   value: ::String?
+                                 }],
+                               resource_id: ::String
+                             ) -> _PutLaunchActionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutLaunchActionResponseSuccess
+
+      interface _RetryDataReplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SourceServer]
+        def agent_version: () -> ::String
+        def arn: () -> ::String
+        def data_replication_info: () -> Types::DataReplicationInfo
+        def last_launch_result: () -> ("NOT_STARTED" | "PENDING" | "SUCCEEDED" | "FAILED")
+        def life_cycle: () -> Types::LifeCycle
+        def recovery_instance_id: () -> ::String
+        def replication_direction: () -> ("FAILOVER" | "FAILBACK")
+        def reversed_direction_source_server_arn: () -> ::String
+        def source_cloud_properties: () -> Types::SourceCloudProperties
+        def source_network_id: () -> ::String
+        def source_properties: () -> Types::SourceProperties
+        def source_server_id: () -> ::String
+        def staging_area: () -> Types::StagingArea
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#retry_data_replication-instance_method
+      def retry_data_replication: (
+                                    source_server_id: ::String
+                                  ) -> _RetryDataReplicationResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RetryDataReplicationResponseSuccess
+
+      interface _ReverseReplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReverseReplicationResponse]
+        def reversed_direction_source_server_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#reverse_replication-instance_method
+      def reverse_replication: (
+                                 recovery_instance_id: ::String
+                               ) -> _ReverseReplicationResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReverseReplicationResponseSuccess
+
+      interface _StartFailbackLaunchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartFailbackLaunchResponse]
+        def job: () -> Types::Job
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#start_failback_launch-instance_method
+      def start_failback_launch: (
+                                   recovery_instance_i_ds: Array[::String],
+                                   ?tags: Hash[::String, ::String]
+                                 ) -> _StartFailbackLaunchResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartFailbackLaunchResponseSuccess
+
+      interface _StartRecoveryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartRecoveryResponse]
+        def job: () -> Types::Job
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#start_recovery-instance_method
+      def start_recovery: (
+                            ?is_drill: bool,
+                            source_servers: Array[
+                              {
+                                recovery_snapshot_id: ::String?,
+                                source_server_id: ::String
+                              },
+                            ],
+                            ?tags: Hash[::String, ::String]
+                          ) -> _StartRecoveryResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartRecoveryResponseSuccess
+
+      interface _StartReplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartReplicationResponse]
+        def source_server: () -> Types::SourceServer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#start_replication-instance_method
+      def start_replication: (
+                               source_server_id: ::String
+                             ) -> _StartReplicationResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartReplicationResponseSuccess
+
+      interface _StartSourceNetworkRecoveryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartSourceNetworkRecoveryResponse]
+        def job: () -> Types::Job
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#start_source_network_recovery-instance_method
+      def start_source_network_recovery: (
+                                           ?deploy_as_new: bool,
+                                           source_networks: Array[
+                                             {
+                                               cfn_stack_name: ::String?,
+                                               source_network_id: ::String
+                                             },
+                                           ],
+                                           ?tags: Hash[::String, ::String]
+                                         ) -> _StartSourceNetworkRecoveryResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartSourceNetworkRecoveryResponseSuccess
+
+      interface _StartSourceNetworkReplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartSourceNetworkReplicationResponse]
+        def source_network: () -> Types::SourceNetwork
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#start_source_network_replication-instance_method
+      def start_source_network_replication: (
+                                              source_network_id: ::String
+                                            ) -> _StartSourceNetworkReplicationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartSourceNetworkReplicationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#stop_failback-instance_method
+      def stop_failback: (
+                           recovery_instance_id: ::String
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _StopReplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopReplicationResponse]
+        def source_server: () -> Types::SourceServer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#stop_replication-instance_method
+      def stop_replication: (
+                              source_server_id: ::String
+                            ) -> _StopReplicationResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopReplicationResponseSuccess
+
+      interface _StopSourceNetworkReplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopSourceNetworkReplicationResponse]
+        def source_network: () -> Types::SourceNetwork
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#stop_source_network_replication-instance_method
+      def stop_source_network_replication: (
+                                             source_network_id: ::String
+                                           ) -> _StopSourceNetworkReplicationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopSourceNetworkReplicationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _TerminateRecoveryInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TerminateRecoveryInstancesResponse]
+        def job: () -> Types::Job
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#terminate_recovery_instances-instance_method
+      def terminate_recovery_instances: (
+                                          recovery_instance_i_ds: Array[::String]
+                                        ) -> _TerminateRecoveryInstancesResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TerminateRecoveryInstancesResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#update_failback_replication_configuration-instance_method
+      def update_failback_replication_configuration: (
+                                                       ?bandwidth_throttling: ::Integer,
+                                                       ?name: ::String,
+                                                       recovery_instance_id: ::String,
+                                                       ?use_private_ip: bool
+                                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateLaunchConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::LaunchConfiguration]
+        def copy_private_ip: () -> bool
+        def copy_tags: () -> bool
+        def ec2_launch_template_id: () -> ::String
+        def launch_disposition: () -> ("STOPPED" | "STARTED")
+        def launch_into_instance_properties: () -> Types::LaunchIntoInstanceProperties
+        def licensing: () -> Types::Licensing
+        def name: () -> ::String
+        def post_launch_enabled: () -> bool
+        def source_server_id: () -> ::String
+        def target_instance_type_right_sizing_method: () -> ("NONE" | "BASIC" | "IN_AWS")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#update_launch_configuration-instance_method
+      def update_launch_configuration: (
+                                         ?copy_private_ip: bool,
+                                         ?copy_tags: bool,
+                                         ?launch_disposition: ("STOPPED" | "STARTED"),
+                                         ?launch_into_instance_properties: {
+                                           launch_into_ec2_instance_id: ::String?
+                                         },
+                                         ?licensing: {
+                                           os_byol: bool?
+                                         },
+                                         ?name: ::String,
+                                         ?post_launch_enabled: bool,
+                                         source_server_id: ::String,
+                                         ?target_instance_type_right_sizing_method: ("NONE" | "BASIC" | "IN_AWS")
+                                       ) -> _UpdateLaunchConfigurationResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLaunchConfigurationResponseSuccess
+
+      interface _UpdateLaunchConfigurationTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLaunchConfigurationTemplateResponse]
+        def launch_configuration_template: () -> Types::LaunchConfigurationTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#update_launch_configuration_template-instance_method
+      def update_launch_configuration_template: (
+                                                  ?copy_private_ip: bool,
+                                                  ?copy_tags: bool,
+                                                  ?export_bucket_arn: ::String,
+                                                  launch_configuration_template_id: ::String,
+                                                  ?launch_disposition: ("STOPPED" | "STARTED"),
+                                                  ?launch_into_source_instance: bool,
+                                                  ?licensing: {
+                                                    os_byol: bool?
+                                                  },
+                                                  ?post_launch_enabled: bool,
+                                                  ?target_instance_type_right_sizing_method: ("NONE" | "BASIC" | "IN_AWS")
+                                                ) -> _UpdateLaunchConfigurationTemplateResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLaunchConfigurationTemplateResponseSuccess
+
+      interface _UpdateReplicationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReplicationConfiguration]
+        def associate_default_security_group: () -> bool
+        def auto_replicate_new_disks: () -> bool
+        def bandwidth_throttling: () -> ::Integer
+        def create_public_ip: () -> bool
+        def data_plane_routing: () -> ("PRIVATE_IP" | "PUBLIC_IP")
+        def default_large_staging_disk_type: () -> ("GP2" | "GP3" | "ST1" | "AUTO")
+        def ebs_encryption: () -> ("DEFAULT" | "CUSTOM" | "NONE")
+        def ebs_encryption_key_arn: () -> ::String
+        def name: () -> ::String
+        def pit_policy: () -> ::Array[Types::PITPolicyRule]
+        def replicated_disks: () -> ::Array[Types::ReplicationConfigurationReplicatedDisk]
+        def replication_server_instance_type: () -> ::String
+        def replication_servers_security_groups_i_ds: () -> ::Array[::String]
+        def source_server_id: () -> ::String
+        def staging_area_subnet_id: () -> ::String
+        def staging_area_tags: () -> ::Hash[::String, ::String]
+        def use_dedicated_replication_server: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#update_replication_configuration-instance_method
+      def update_replication_configuration: (
+                                              ?associate_default_security_group: bool,
+                                              ?auto_replicate_new_disks: bool,
+                                              ?bandwidth_throttling: ::Integer,
+                                              ?create_public_ip: bool,
+                                              ?data_plane_routing: ("PRIVATE_IP" | "PUBLIC_IP"),
+                                              ?default_large_staging_disk_type: ("GP2" | "GP3" | "ST1" | "AUTO"),
+                                              ?ebs_encryption: ("DEFAULT" | "CUSTOM" | "NONE"),
+                                              ?ebs_encryption_key_arn: ::String,
+                                              ?name: ::String,
+                                              ?pit_policy: Array[
+                                                {
+                                                  enabled: bool?,
+                                                  interval: ::Integer,
+                                                  retention_duration: ::Integer,
+                                                  rule_id: ::Integer?,
+                                                  units: ("MINUTE" | "HOUR" | "DAY")
+                                                },
+                                              ],
+                                              ?replicated_disks: Array[
+                                                {
+                                                  device_name: ::String?,
+                                                  iops: ::Integer?,
+                                                  is_boot_disk: bool?,
+                                                  optimized_staging_disk_type: ("AUTO" | "GP2" | "GP3" | "IO1" | "SC1" | "ST1" | "STANDARD")?,
+                                                  staging_disk_type: ("AUTO" | "GP2" | "GP3" | "IO1" | "SC1" | "ST1" | "STANDARD")?,
+                                                  throughput: ::Integer?
+                                                },
+                                              ],
+                                              ?replication_server_instance_type: ::String,
+                                              ?replication_servers_security_groups_i_ds: Array[::String],
+                                              source_server_id: ::String,
+                                              ?staging_area_subnet_id: ::String,
+                                              ?staging_area_tags: Hash[::String, ::String],
+                                              ?use_dedicated_replication_server: bool
+                                            ) -> _UpdateReplicationConfigurationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateReplicationConfigurationResponseSuccess
+
+      interface _UpdateReplicationConfigurationTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReplicationConfigurationTemplate]
+        def arn: () -> ::String
+        def associate_default_security_group: () -> bool
+        def auto_replicate_new_disks: () -> bool
+        def bandwidth_throttling: () -> ::Integer
+        def create_public_ip: () -> bool
+        def data_plane_routing: () -> ("PRIVATE_IP" | "PUBLIC_IP")
+        def default_large_staging_disk_type: () -> ("GP2" | "GP3" | "ST1" | "AUTO")
+        def ebs_encryption: () -> ("DEFAULT" | "CUSTOM" | "NONE")
+        def ebs_encryption_key_arn: () -> ::String
+        def pit_policy: () -> ::Array[Types::PITPolicyRule]
+        def replication_configuration_template_id: () -> ::String
+        def replication_server_instance_type: () -> ::String
+        def replication_servers_security_groups_i_ds: () -> ::Array[::String]
+        def staging_area_subnet_id: () -> ::String
+        def staging_area_tags: () -> ::Hash[::String, ::String]
+        def tags: () -> ::Hash[::String, ::String]
+        def use_dedicated_replication_server: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#update_replication_configuration_template-instance_method
+      def update_replication_configuration_template: (
+                                                       ?arn: ::String,
+                                                       ?associate_default_security_group: bool,
+                                                       ?auto_replicate_new_disks: bool,
+                                                       ?bandwidth_throttling: ::Integer,
+                                                       ?create_public_ip: bool,
+                                                       ?data_plane_routing: ("PRIVATE_IP" | "PUBLIC_IP"),
+                                                       ?default_large_staging_disk_type: ("GP2" | "GP3" | "ST1" | "AUTO"),
+                                                       ?ebs_encryption: ("DEFAULT" | "CUSTOM" | "NONE"),
+                                                       ?ebs_encryption_key_arn: ::String,
+                                                       ?pit_policy: Array[
+                                                         {
+                                                           enabled: bool?,
+                                                           interval: ::Integer,
+                                                           retention_duration: ::Integer,
+                                                           rule_id: ::Integer?,
+                                                           units: ("MINUTE" | "HOUR" | "DAY")
+                                                         },
+                                                       ],
+                                                       replication_configuration_template_id: ::String,
+                                                       ?replication_server_instance_type: ::String,
+                                                       ?replication_servers_security_groups_i_ds: Array[::String],
+                                                       ?staging_area_subnet_id: ::String,
+                                                       ?staging_area_tags: Hash[::String, ::String],
+                                                       ?use_dedicated_replication_server: bool
+                                                     ) -> _UpdateReplicationConfigurationTemplateResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateReplicationConfigurationTemplateResponseSuccess
+    end
+  end
+end
+

@@ -1,0 +1,34 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudHSMV2
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class CloudHsmAccessDeniedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class CloudHsmInternalFailureException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class CloudHsmInvalidRequestException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class CloudHsmResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class CloudHsmServiceException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class CloudHsmTagException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

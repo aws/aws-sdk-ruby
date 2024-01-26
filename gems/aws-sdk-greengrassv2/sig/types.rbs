@@ -1,0 +1,720 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::GreengrassV2
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateClientDeviceWithCoreDeviceEntry
+      attr_accessor thing_name: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateClientDeviceWithCoreDeviceErrorEntry
+      attr_accessor thing_name: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateServiceRoleToAccountRequest
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateServiceRoleToAccountResponse
+      attr_accessor associated_at: ::String
+      SENSITIVE: []
+    end
+
+    class AssociatedClientDevice
+      attr_accessor thing_name: ::String
+      attr_accessor association_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class BatchAssociateClientDeviceWithCoreDeviceRequest
+      attr_accessor entries: ::Array[Types::AssociateClientDeviceWithCoreDeviceEntry]
+      attr_accessor core_device_thing_name: ::String
+      SENSITIVE: []
+    end
+
+    class BatchAssociateClientDeviceWithCoreDeviceResponse
+      attr_accessor error_entries: ::Array[Types::AssociateClientDeviceWithCoreDeviceErrorEntry]
+      SENSITIVE: []
+    end
+
+    class BatchDisassociateClientDeviceFromCoreDeviceRequest
+      attr_accessor entries: ::Array[Types::DisassociateClientDeviceFromCoreDeviceEntry]
+      attr_accessor core_device_thing_name: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDisassociateClientDeviceFromCoreDeviceResponse
+      attr_accessor error_entries: ::Array[Types::DisassociateClientDeviceFromCoreDeviceErrorEntry]
+      SENSITIVE: []
+    end
+
+    class CancelDeploymentRequest
+      attr_accessor deployment_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelDeploymentResponse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CloudComponentStatus
+      attr_accessor component_state: ("REQUESTED" | "INITIATED" | "DEPLOYABLE" | "FAILED" | "DEPRECATED")
+      attr_accessor message: ::String
+      attr_accessor errors: ::Hash[::String, ::String]
+      attr_accessor vendor_guidance: ("ACTIVE" | "DISCONTINUED" | "DELETED")
+      attr_accessor vendor_guidance_message: ::String
+      SENSITIVE: []
+    end
+
+    class Component
+      attr_accessor arn: ::String
+      attr_accessor component_name: ::String
+      attr_accessor latest_version: Types::ComponentLatestVersion
+      SENSITIVE: []
+    end
+
+    class ComponentCandidate
+      attr_accessor component_name: ::String
+      attr_accessor component_version: ::String
+      attr_accessor version_requirements: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ComponentConfigurationUpdate
+      attr_accessor merge: ::String
+      attr_accessor reset: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ComponentDependencyRequirement
+      attr_accessor version_requirement: ::String
+      attr_accessor dependency_type: ("HARD" | "SOFT")
+      SENSITIVE: []
+    end
+
+    class ComponentDeploymentSpecification
+      attr_accessor component_version: ::String
+      attr_accessor configuration_update: Types::ComponentConfigurationUpdate
+      attr_accessor run_with: Types::ComponentRunWith
+      SENSITIVE: []
+    end
+
+    class ComponentLatestVersion
+      attr_accessor arn: ::String
+      attr_accessor component_version: ::String
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor description: ::String
+      attr_accessor publisher: ::String
+      attr_accessor platforms: ::Array[Types::ComponentPlatform]
+      SENSITIVE: []
+    end
+
+    class ComponentPlatform
+      attr_accessor name: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ComponentRunWith
+      attr_accessor posix_user: ::String
+      attr_accessor system_resource_limits: Types::SystemResourceLimits
+      attr_accessor windows_user: ::String
+      SENSITIVE: []
+    end
+
+    class ComponentVersionListItem
+      attr_accessor component_name: ::String
+      attr_accessor component_version: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectivityInfo
+      attr_accessor id: ::String
+      attr_accessor host_address: ::String
+      attr_accessor port_number: ::Integer
+      attr_accessor metadata: ::String
+      SENSITIVE: []
+    end
+
+    class CoreDevice
+      attr_accessor core_device_thing_name: ::String
+      attr_accessor status: ("HEALTHY" | "UNHEALTHY")
+      attr_accessor last_status_update_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateComponentVersionRequest
+      attr_accessor inline_recipe: ::String
+      attr_accessor lambda_function: Types::LambdaFunctionRecipeSource
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateComponentVersionResponse
+      attr_accessor arn: ::String
+      attr_accessor component_name: ::String
+      attr_accessor component_version: ::String
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor status: Types::CloudComponentStatus
+      SENSITIVE: []
+    end
+
+    class CreateDeploymentRequest
+      attr_accessor target_arn: ::String
+      attr_accessor deployment_name: ::String
+      attr_accessor components: ::Hash[::String, Types::ComponentDeploymentSpecification]
+      attr_accessor iot_job_configuration: Types::DeploymentIoTJobConfiguration
+      attr_accessor deployment_policies: Types::DeploymentPolicies
+      attr_accessor parent_target_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDeploymentResponse
+      attr_accessor deployment_id: ::String
+      attr_accessor iot_job_id: ::String
+      attr_accessor iot_job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteComponentRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCoreDeviceRequest
+      attr_accessor core_device_thing_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDeploymentRequest
+      attr_accessor deployment_id: ::String
+      SENSITIVE: []
+    end
+
+    class Deployment
+      attr_accessor target_arn: ::String
+      attr_accessor revision_id: ::String
+      attr_accessor deployment_id: ::String
+      attr_accessor deployment_name: ::String
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor deployment_status: ("ACTIVE" | "COMPLETED" | "CANCELED" | "FAILED" | "INACTIVE")
+      attr_accessor is_latest_for_target: bool
+      attr_accessor parent_target_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeploymentComponentUpdatePolicy
+      attr_accessor timeout_in_seconds: ::Integer
+      attr_accessor action: ("NOTIFY_COMPONENTS" | "SKIP_NOTIFY_COMPONENTS")
+      SENSITIVE: []
+    end
+
+    class DeploymentConfigurationValidationPolicy
+      attr_accessor timeout_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeploymentIoTJobConfiguration
+      attr_accessor job_executions_rollout_config: Types::IoTJobExecutionsRolloutConfig
+      attr_accessor abort_config: Types::IoTJobAbortConfig
+      attr_accessor timeout_config: Types::IoTJobTimeoutConfig
+      SENSITIVE: []
+    end
+
+    class DeploymentPolicies
+      attr_accessor failure_handling_policy: ("ROLLBACK" | "DO_NOTHING")
+      attr_accessor component_update_policy: Types::DeploymentComponentUpdatePolicy
+      attr_accessor configuration_validation_policy: Types::DeploymentConfigurationValidationPolicy
+      SENSITIVE: []
+    end
+
+    class DescribeComponentRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeComponentResponse
+      attr_accessor arn: ::String
+      attr_accessor component_name: ::String
+      attr_accessor component_version: ::String
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor publisher: ::String
+      attr_accessor description: ::String
+      attr_accessor status: Types::CloudComponentStatus
+      attr_accessor platforms: ::Array[Types::ComponentPlatform]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DisassociateClientDeviceFromCoreDeviceEntry
+      attr_accessor thing_name: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateClientDeviceFromCoreDeviceErrorEntry
+      attr_accessor thing_name: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateServiceRoleFromAccountRequest < Aws::EmptyStructure
+    end
+
+    class DisassociateServiceRoleFromAccountResponse
+      attr_accessor disassociated_at: ::String
+      SENSITIVE: []
+    end
+
+    class EffectiveDeployment
+      attr_accessor deployment_id: ::String
+      attr_accessor deployment_name: ::String
+      attr_accessor iot_job_id: ::String
+      attr_accessor iot_job_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor target_arn: ::String
+      attr_accessor core_device_execution_status: ("IN_PROGRESS" | "QUEUED" | "FAILED" | "COMPLETED" | "TIMED_OUT" | "CANCELED" | "REJECTED" | "SUCCEEDED")
+      attr_accessor reason: ::String
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor modified_timestamp: ::Time
+      attr_accessor status_details: Types::EffectiveDeploymentStatusDetails
+      SENSITIVE: []
+    end
+
+    class EffectiveDeploymentStatusDetails
+      attr_accessor error_stack: ::Array[::String]
+      attr_accessor error_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetComponentRequest
+      attr_accessor recipe_output_format: ("JSON" | "YAML")
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetComponentResponse
+      attr_accessor recipe_output_format: ("JSON" | "YAML")
+      attr_accessor recipe: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetComponentVersionArtifactRequest
+      attr_accessor arn: ::String
+      attr_accessor artifact_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetComponentVersionArtifactResponse
+      attr_accessor pre_signed_url: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectivityInfoRequest
+      attr_accessor thing_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectivityInfoResponse
+      attr_accessor connectivity_info: ::Array[Types::ConnectivityInfo]
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetCoreDeviceRequest
+      attr_accessor core_device_thing_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetCoreDeviceResponse
+      attr_accessor core_device_thing_name: ::String
+      attr_accessor core_version: ::String
+      attr_accessor platform: ::String
+      attr_accessor architecture: ::String
+      attr_accessor status: ("HEALTHY" | "UNHEALTHY")
+      attr_accessor last_status_update_timestamp: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetDeploymentRequest
+      attr_accessor deployment_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeploymentResponse
+      attr_accessor target_arn: ::String
+      attr_accessor revision_id: ::String
+      attr_accessor deployment_id: ::String
+      attr_accessor deployment_name: ::String
+      attr_accessor deployment_status: ("ACTIVE" | "COMPLETED" | "CANCELED" | "FAILED" | "INACTIVE")
+      attr_accessor iot_job_id: ::String
+      attr_accessor iot_job_arn: ::String
+      attr_accessor components: ::Hash[::String, Types::ComponentDeploymentSpecification]
+      attr_accessor deployment_policies: Types::DeploymentPolicies
+      attr_accessor iot_job_configuration: Types::DeploymentIoTJobConfiguration
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor is_latest_for_target: bool
+      attr_accessor parent_target_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetServiceRoleForAccountRequest < Aws::EmptyStructure
+    end
+
+    class GetServiceRoleForAccountResponse
+      attr_accessor associated_at: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InstalledComponent
+      attr_accessor component_name: ::String
+      attr_accessor component_version: ::String
+      attr_accessor lifecycle_state: ("NEW" | "INSTALLED" | "STARTING" | "RUNNING" | "STOPPING" | "ERRORED" | "BROKEN" | "FINISHED")
+      attr_accessor lifecycle_state_details: ::String
+      attr_accessor is_root: bool
+      attr_accessor last_status_change_timestamp: ::Time
+      attr_accessor last_reported_timestamp: ::Time
+      attr_accessor last_installation_source: ::String
+      attr_accessor lifecycle_status_codes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class IoTJobAbortConfig
+      attr_accessor criteria_list: ::Array[Types::IoTJobAbortCriteria]
+      SENSITIVE: []
+    end
+
+    class IoTJobAbortCriteria
+      attr_accessor failure_type: ("FAILED" | "REJECTED" | "TIMED_OUT" | "ALL")
+      attr_accessor action: ("CANCEL")
+      attr_accessor threshold_percentage: ::Float
+      attr_accessor min_number_of_executed_things: ::Integer
+      SENSITIVE: []
+    end
+
+    class IoTJobExecutionsRolloutConfig
+      attr_accessor exponential_rate: Types::IoTJobExponentialRolloutRate
+      attr_accessor maximum_per_minute: ::Integer
+      SENSITIVE: []
+    end
+
+    class IoTJobExponentialRolloutRate
+      attr_accessor base_rate_per_minute: ::Integer
+      attr_accessor increment_factor: ::Float
+      attr_accessor rate_increase_criteria: Types::IoTJobRateIncreaseCriteria
+      SENSITIVE: []
+    end
+
+    class IoTJobRateIncreaseCriteria
+      attr_accessor number_of_notified_things: ::Integer
+      attr_accessor number_of_succeeded_things: ::Integer
+      SENSITIVE: []
+    end
+
+    class IoTJobTimeoutConfig
+      attr_accessor in_progress_timeout_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class LambdaContainerParams
+      attr_accessor memory_size_in_kb: ::Integer
+      attr_accessor mount_ro_sysfs: bool
+      attr_accessor volumes: ::Array[Types::LambdaVolumeMount]
+      attr_accessor devices: ::Array[Types::LambdaDeviceMount]
+      SENSITIVE: []
+    end
+
+    class LambdaDeviceMount
+      attr_accessor path: ::String
+      attr_accessor permission: ("ro" | "rw")
+      attr_accessor add_group_owner: bool
+      SENSITIVE: []
+    end
+
+    class LambdaEventSource
+      attr_accessor topic: ::String
+      attr_accessor type: ("PUB_SUB" | "IOT_CORE")
+      SENSITIVE: []
+    end
+
+    class LambdaExecutionParameters
+      attr_accessor event_sources: ::Array[Types::LambdaEventSource]
+      attr_accessor max_queue_size: ::Integer
+      attr_accessor max_instances_count: ::Integer
+      attr_accessor max_idle_time_in_seconds: ::Integer
+      attr_accessor timeout_in_seconds: ::Integer
+      attr_accessor status_timeout_in_seconds: ::Integer
+      attr_accessor pinned: bool
+      attr_accessor input_payload_encoding_type: ("json" | "binary")
+      attr_accessor exec_args: ::Array[::String]
+      attr_accessor environment_variables: ::Hash[::String, ::String]
+      attr_accessor linux_process_params: Types::LambdaLinuxProcessParams
+      SENSITIVE: []
+    end
+
+    class LambdaFunctionRecipeSource
+      attr_accessor lambda_arn: ::String
+      attr_accessor component_name: ::String
+      attr_accessor component_version: ::String
+      attr_accessor component_platforms: ::Array[Types::ComponentPlatform]
+      attr_accessor component_dependencies: ::Hash[::String, Types::ComponentDependencyRequirement]
+      attr_accessor component_lambda_parameters: Types::LambdaExecutionParameters
+      SENSITIVE: []
+    end
+
+    class LambdaLinuxProcessParams
+      attr_accessor isolation_mode: ("GreengrassContainer" | "NoContainer")
+      attr_accessor container_params: Types::LambdaContainerParams
+      SENSITIVE: []
+    end
+
+    class LambdaVolumeMount
+      attr_accessor source_path: ::String
+      attr_accessor destination_path: ::String
+      attr_accessor permission: ("ro" | "rw")
+      attr_accessor add_group_owner: bool
+      SENSITIVE: []
+    end
+
+    class ListClientDevicesAssociatedWithCoreDeviceRequest
+      attr_accessor core_device_thing_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListClientDevicesAssociatedWithCoreDeviceResponse
+      attr_accessor associated_client_devices: ::Array[Types::AssociatedClientDevice]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListComponentVersionsRequest
+      attr_accessor arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListComponentVersionsResponse
+      attr_accessor component_versions: ::Array[Types::ComponentVersionListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListComponentsRequest
+      attr_accessor scope: ("PRIVATE" | "PUBLIC")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListComponentsResponse
+      attr_accessor components: ::Array[Types::Component]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCoreDevicesRequest
+      attr_accessor thing_group_arn: ::String
+      attr_accessor status: ("HEALTHY" | "UNHEALTHY")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCoreDevicesResponse
+      attr_accessor core_devices: ::Array[Types::CoreDevice]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeploymentsRequest
+      attr_accessor target_arn: ::String
+      attr_accessor history_filter: ("ALL" | "LATEST_ONLY")
+      attr_accessor parent_target_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeploymentsResponse
+      attr_accessor deployments: ::Array[Types::Deployment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEffectiveDeploymentsRequest
+      attr_accessor core_device_thing_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEffectiveDeploymentsResponse
+      attr_accessor effective_deployments: ::Array[Types::EffectiveDeployment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInstalledComponentsRequest
+      attr_accessor core_device_thing_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor topology_filter: ("ALL" | "ROOT")
+      SENSITIVE: []
+    end
+
+    class ListInstalledComponentsResponse
+      attr_accessor installed_components: ::Array[Types::InstalledComponent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RequestAlreadyInProgressException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResolveComponentCandidatesRequest
+      attr_accessor platform: Types::ComponentPlatform
+      attr_accessor component_candidates: ::Array[Types::ComponentCandidate]
+      SENSITIVE: []
+    end
+
+    class ResolveComponentCandidatesResponse
+      attr_accessor resolved_component_versions: ::Array[Types::ResolvedComponentVersion]
+      SENSITIVE: []
+    end
+
+    class ResolvedComponentVersion
+      attr_accessor arn: ::String
+      attr_accessor component_name: ::String
+      attr_accessor component_version: ::String
+      attr_accessor recipe: ::String
+      attr_accessor vendor_guidance: ("ACTIVE" | "DISCONTINUED" | "DELETED")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class SystemResourceLimits
+      attr_accessor memory: ::Integer
+      attr_accessor cpus: ::Float
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor service_code: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateConnectivityInfoRequest
+      attr_accessor thing_name: ::String
+      attr_accessor connectivity_info: ::Array[Types::ConnectivityInfo]
+      SENSITIVE: []
+    end
+
+    class UpdateConnectivityInfoResponse
+      attr_accessor version: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("UNKNOWN_OPERATION" | "CANNOT_PARSE" | "FIELD_VALIDATION_FAILED" | "OTHER")
+      attr_accessor fields: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

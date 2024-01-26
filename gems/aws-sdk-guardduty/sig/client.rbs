@@ -1,0 +1,1150 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module GuardDuty
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AcceptAdministratorInvitationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptAdministratorInvitationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#accept_administrator_invitation-instance_method
+      def accept_administrator_invitation: (
+                                             detector_id: ::String,
+                                             administrator_id: ::String,
+                                             invitation_id: ::String
+                                           ) -> _AcceptAdministratorInvitationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptAdministratorInvitationResponseSuccess
+
+      interface _AcceptInvitationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptInvitationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#accept_invitation-instance_method
+      def accept_invitation: (
+                               detector_id: ::String,
+                               master_id: ::String,
+                               invitation_id: ::String
+                             ) -> _AcceptInvitationResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptInvitationResponseSuccess
+
+      interface _ArchiveFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ArchiveFindingsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#archive_findings-instance_method
+      def archive_findings: (
+                              detector_id: ::String,
+                              finding_ids: Array[::String]
+                            ) -> _ArchiveFindingsResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ArchiveFindingsResponseSuccess
+
+      interface _CreateDetectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDetectorResponse]
+        def detector_id: () -> ::String
+        def unprocessed_data_sources: () -> Types::UnprocessedDataSourcesResult
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#create_detector-instance_method
+      def create_detector: (
+                             enable: bool,
+                             ?client_token: ::String,
+                             ?finding_publishing_frequency: ("FIFTEEN_MINUTES" | "ONE_HOUR" | "SIX_HOURS"),
+                             ?data_sources: {
+                               s3_logs: {
+                                 enable: bool
+                               }?,
+                               kubernetes: {
+                                 audit_logs: {
+                                   enable: bool
+                                 }
+                               }?,
+                               malware_protection: {
+                                 scan_ec2_instance_with_findings: {
+                                   ebs_volumes: bool?
+                                 }?
+                               }?
+                             },
+                             ?tags: Hash[::String, ::String],
+                             ?features: Array[
+                               {
+                                 name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "EKS_RUNTIME_MONITORING" | "LAMBDA_NETWORK_LOGS" | "RUNTIME_MONITORING")?,
+                                 status: ("ENABLED" | "DISABLED")?,
+                                 additional_configuration: Array[
+                                   {
+                                     name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")?,
+                                     status: ("ENABLED" | "DISABLED")?
+                                   },
+                                 ]?
+                               },
+                             ]
+                           ) -> _CreateDetectorResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDetectorResponseSuccess
+
+      interface _CreateFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFilterResponse]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#create_filter-instance_method
+      def create_filter: (
+                           detector_id: ::String,
+                           name: ::String,
+                           ?description: ::String,
+                           ?action: ("NOOP" | "ARCHIVE"),
+                           ?rank: ::Integer,
+                           finding_criteria: {
+                             criterion: Hash[::String, {
+                                 eq: Array[::String]?,
+                                 neq: Array[::String]?,
+                                 gt: ::Integer?,
+                                 gte: ::Integer?,
+                                 lt: ::Integer?,
+                                 lte: ::Integer?,
+                                 equals: Array[::String]?,
+                                 not_equals: Array[::String]?,
+                                 greater_than: ::Integer?,
+                                 greater_than_or_equal: ::Integer?,
+                                 less_than: ::Integer?,
+                                 less_than_or_equal: ::Integer?
+                               }]?
+                           },
+                           ?client_token: ::String,
+                           ?tags: Hash[::String, ::String]
+                         ) -> _CreateFilterResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFilterResponseSuccess
+
+      interface _CreateIPSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateIPSetResponse]
+        def ip_set_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#create_ip_set-instance_method
+      def create_ip_set: (
+                           detector_id: ::String,
+                           name: ::String,
+                           format: ("TXT" | "STIX" | "OTX_CSV" | "ALIEN_VAULT" | "PROOF_POINT" | "FIRE_EYE"),
+                           location: ::String,
+                           activate: bool,
+                           ?client_token: ::String,
+                           ?tags: Hash[::String, ::String]
+                         ) -> _CreateIPSetResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIPSetResponseSuccess
+
+      interface _CreateMembersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMembersResponse]
+        def unprocessed_accounts: () -> ::Array[Types::UnprocessedAccount]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#create_members-instance_method
+      def create_members: (
+                            detector_id: ::String,
+                            account_details: Array[
+                              {
+                                account_id: ::String,
+                                email: ::String
+                              },
+                            ]
+                          ) -> _CreateMembersResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMembersResponseSuccess
+
+      interface _CreatePublishingDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePublishingDestinationResponse]
+        def destination_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#create_publishing_destination-instance_method
+      def create_publishing_destination: (
+                                           detector_id: ::String,
+                                           destination_type: ("S3"),
+                                           destination_properties: {
+                                             destination_arn: ::String?,
+                                             kms_key_arn: ::String?
+                                           },
+                                           ?client_token: ::String
+                                         ) -> _CreatePublishingDestinationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePublishingDestinationResponseSuccess
+
+      interface _CreateSampleFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSampleFindingsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#create_sample_findings-instance_method
+      def create_sample_findings: (
+                                    detector_id: ::String,
+                                    ?finding_types: Array[::String]
+                                  ) -> _CreateSampleFindingsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSampleFindingsResponseSuccess
+
+      interface _CreateThreatIntelSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateThreatIntelSetResponse]
+        def threat_intel_set_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#create_threat_intel_set-instance_method
+      def create_threat_intel_set: (
+                                     detector_id: ::String,
+                                     name: ::String,
+                                     format: ("TXT" | "STIX" | "OTX_CSV" | "ALIEN_VAULT" | "PROOF_POINT" | "FIRE_EYE"),
+                                     location: ::String,
+                                     activate: bool,
+                                     ?client_token: ::String,
+                                     ?tags: Hash[::String, ::String]
+                                   ) -> _CreateThreatIntelSetResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateThreatIntelSetResponseSuccess
+
+      interface _DeclineInvitationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeclineInvitationsResponse]
+        def unprocessed_accounts: () -> ::Array[Types::UnprocessedAccount]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#decline_invitations-instance_method
+      def decline_invitations: (
+                                 account_ids: Array[::String]
+                               ) -> _DeclineInvitationsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeclineInvitationsResponseSuccess
+
+      interface _DeleteDetectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDetectorResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#delete_detector-instance_method
+      def delete_detector: (
+                             detector_id: ::String
+                           ) -> _DeleteDetectorResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDetectorResponseSuccess
+
+      interface _DeleteFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFilterResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#delete_filter-instance_method
+      def delete_filter: (
+                           detector_id: ::String,
+                           filter_name: ::String
+                         ) -> _DeleteFilterResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFilterResponseSuccess
+
+      interface _DeleteIPSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIPSetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#delete_ip_set-instance_method
+      def delete_ip_set: (
+                           detector_id: ::String,
+                           ip_set_id: ::String
+                         ) -> _DeleteIPSetResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIPSetResponseSuccess
+
+      interface _DeleteInvitationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteInvitationsResponse]
+        def unprocessed_accounts: () -> ::Array[Types::UnprocessedAccount]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#delete_invitations-instance_method
+      def delete_invitations: (
+                                account_ids: Array[::String]
+                              ) -> _DeleteInvitationsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteInvitationsResponseSuccess
+
+      interface _DeleteMembersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMembersResponse]
+        def unprocessed_accounts: () -> ::Array[Types::UnprocessedAccount]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#delete_members-instance_method
+      def delete_members: (
+                            detector_id: ::String,
+                            account_ids: Array[::String]
+                          ) -> _DeleteMembersResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMembersResponseSuccess
+
+      interface _DeletePublishingDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePublishingDestinationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#delete_publishing_destination-instance_method
+      def delete_publishing_destination: (
+                                           detector_id: ::String,
+                                           destination_id: ::String
+                                         ) -> _DeletePublishingDestinationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePublishingDestinationResponseSuccess
+
+      interface _DeleteThreatIntelSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteThreatIntelSetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#delete_threat_intel_set-instance_method
+      def delete_threat_intel_set: (
+                                     detector_id: ::String,
+                                     threat_intel_set_id: ::String
+                                   ) -> _DeleteThreatIntelSetResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteThreatIntelSetResponseSuccess
+
+      interface _DescribeMalwareScansResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMalwareScansResponse]
+        def scans: () -> ::Array[Types::Scan]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#describe_malware_scans-instance_method
+      def describe_malware_scans: (
+                                    detector_id: ::String,
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer,
+                                    ?filter_criteria: {
+                                      filter_criterion: Array[
+                                        {
+                                          criterion_key: ("EC2_INSTANCE_ARN" | "SCAN_ID" | "ACCOUNT_ID" | "GUARDDUTY_FINDING_ID" | "SCAN_START_TIME" | "SCAN_STATUS" | "SCAN_TYPE")?,
+                                          filter_condition: {
+                                            equals_value: ::String?,
+                                            greater_than: ::Integer?,
+                                            less_than: ::Integer?
+                                          }?
+                                        },
+                                      ]?
+                                    },
+                                    ?sort_criteria: {
+                                      attribute_name: ::String?,
+                                      order_by: ("ASC" | "DESC")?
+                                    }
+                                  ) -> _DescribeMalwareScansResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMalwareScansResponseSuccess
+
+      interface _DescribeOrganizationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeOrganizationConfigurationResponse]
+        def auto_enable: () -> bool
+        def member_account_limit_reached: () -> bool
+        def data_sources: () -> Types::OrganizationDataSourceConfigurationsResult
+        def features: () -> ::Array[Types::OrganizationFeatureConfigurationResult]
+        def next_token: () -> ::String
+        def auto_enable_organization_members: () -> ("NEW" | "ALL" | "NONE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#describe_organization_configuration-instance_method
+      def describe_organization_configuration: (
+                                                 detector_id: ::String,
+                                                 ?max_results: ::Integer,
+                                                 ?next_token: ::String
+                                               ) -> _DescribeOrganizationConfigurationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeOrganizationConfigurationResponseSuccess
+
+      interface _DescribePublishingDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePublishingDestinationResponse]
+        def destination_id: () -> ::String
+        def destination_type: () -> ("S3")
+        def status: () -> ("PENDING_VERIFICATION" | "PUBLISHING" | "UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY" | "STOPPED")
+        def publishing_failure_start_timestamp: () -> ::Integer
+        def destination_properties: () -> Types::DestinationProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#describe_publishing_destination-instance_method
+      def describe_publishing_destination: (
+                                             detector_id: ::String,
+                                             destination_id: ::String
+                                           ) -> _DescribePublishingDestinationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePublishingDestinationResponseSuccess
+
+      interface _DisableOrganizationAdminAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableOrganizationAdminAccountResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#disable_organization_admin_account-instance_method
+      def disable_organization_admin_account: (
+                                                admin_account_id: ::String
+                                              ) -> _DisableOrganizationAdminAccountResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableOrganizationAdminAccountResponseSuccess
+
+      interface _DisassociateFromAdministratorAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateFromAdministratorAccountResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#disassociate_from_administrator_account-instance_method
+      def disassociate_from_administrator_account: (
+                                                     detector_id: ::String
+                                                   ) -> _DisassociateFromAdministratorAccountResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateFromAdministratorAccountResponseSuccess
+
+      interface _DisassociateFromMasterAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateFromMasterAccountResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#disassociate_from_master_account-instance_method
+      def disassociate_from_master_account: (
+                                              detector_id: ::String
+                                            ) -> _DisassociateFromMasterAccountResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateFromMasterAccountResponseSuccess
+
+      interface _DisassociateMembersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateMembersResponse]
+        def unprocessed_accounts: () -> ::Array[Types::UnprocessedAccount]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#disassociate_members-instance_method
+      def disassociate_members: (
+                                  detector_id: ::String,
+                                  account_ids: Array[::String]
+                                ) -> _DisassociateMembersResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateMembersResponseSuccess
+
+      interface _EnableOrganizationAdminAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableOrganizationAdminAccountResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#enable_organization_admin_account-instance_method
+      def enable_organization_admin_account: (
+                                               admin_account_id: ::String
+                                             ) -> _EnableOrganizationAdminAccountResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableOrganizationAdminAccountResponseSuccess
+
+      interface _GetAdministratorAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAdministratorAccountResponse]
+        def administrator: () -> Types::Administrator
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_administrator_account-instance_method
+      def get_administrator_account: (
+                                       detector_id: ::String
+                                     ) -> _GetAdministratorAccountResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAdministratorAccountResponseSuccess
+
+      interface _GetCoverageStatisticsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCoverageStatisticsResponse]
+        def coverage_statistics: () -> Types::CoverageStatistics
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_coverage_statistics-instance_method
+      def get_coverage_statistics: (
+                                     detector_id: ::String,
+                                     ?filter_criteria: {
+                                       filter_criterion: Array[
+                                         {
+                                           criterion_key: ("ACCOUNT_ID" | "CLUSTER_NAME" | "RESOURCE_TYPE" | "COVERAGE_STATUS" | "ADDON_VERSION" | "MANAGEMENT_TYPE" | "EKS_CLUSTER_NAME" | "ECS_CLUSTER_NAME" | "AGENT_VERSION" | "INSTANCE_ID" | "CLUSTER_ARN")?,
+                                           filter_condition: {
+                                             equals: Array[::String]?,
+                                             not_equals: Array[::String]?
+                                           }?
+                                         },
+                                       ]?
+                                     },
+                                     statistics_type: Array[("COUNT_BY_RESOURCE_TYPE" | "COUNT_BY_COVERAGE_STATUS")]
+                                   ) -> _GetCoverageStatisticsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCoverageStatisticsResponseSuccess
+
+      interface _GetDetectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDetectorResponse]
+        def created_at: () -> ::String
+        def finding_publishing_frequency: () -> ("FIFTEEN_MINUTES" | "ONE_HOUR" | "SIX_HOURS")
+        def service_role: () -> ::String
+        def status: () -> ("ENABLED" | "DISABLED")
+        def updated_at: () -> ::String
+        def data_sources: () -> Types::DataSourceConfigurationsResult
+        def tags: () -> ::Hash[::String, ::String]
+        def features: () -> ::Array[Types::DetectorFeatureConfigurationResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_detector-instance_method
+      def get_detector: (
+                          detector_id: ::String
+                        ) -> _GetDetectorResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDetectorResponseSuccess
+
+      interface _GetFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFilterResponse]
+        def name: () -> ::String
+        def description: () -> ::String
+        def action: () -> ("NOOP" | "ARCHIVE")
+        def rank: () -> ::Integer
+        def finding_criteria: () -> Types::FindingCriteria
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_filter-instance_method
+      def get_filter: (
+                        detector_id: ::String,
+                        filter_name: ::String
+                      ) -> _GetFilterResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFilterResponseSuccess
+
+      interface _GetFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFindingsResponse]
+        def findings: () -> ::Array[Types::Finding]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_findings-instance_method
+      def get_findings: (
+                          detector_id: ::String,
+                          finding_ids: Array[::String],
+                          ?sort_criteria: {
+                            attribute_name: ::String?,
+                            order_by: ("ASC" | "DESC")?
+                          }
+                        ) -> _GetFindingsResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFindingsResponseSuccess
+
+      interface _GetFindingsStatisticsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFindingsStatisticsResponse]
+        def finding_statistics: () -> Types::FindingStatistics
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_findings_statistics-instance_method
+      def get_findings_statistics: (
+                                     detector_id: ::String,
+                                     finding_statistic_types: Array[("COUNT_BY_SEVERITY")],
+                                     ?finding_criteria: {
+                                       criterion: Hash[::String, {
+                                           eq: Array[::String]?,
+                                           neq: Array[::String]?,
+                                           gt: ::Integer?,
+                                           gte: ::Integer?,
+                                           lt: ::Integer?,
+                                           lte: ::Integer?,
+                                           equals: Array[::String]?,
+                                           not_equals: Array[::String]?,
+                                           greater_than: ::Integer?,
+                                           greater_than_or_equal: ::Integer?,
+                                           less_than: ::Integer?,
+                                           less_than_or_equal: ::Integer?
+                                         }]?
+                                     }
+                                   ) -> _GetFindingsStatisticsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFindingsStatisticsResponseSuccess
+
+      interface _GetIPSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIPSetResponse]
+        def name: () -> ::String
+        def format: () -> ("TXT" | "STIX" | "OTX_CSV" | "ALIEN_VAULT" | "PROOF_POINT" | "FIRE_EYE")
+        def location: () -> ::String
+        def status: () -> ("INACTIVE" | "ACTIVATING" | "ACTIVE" | "DEACTIVATING" | "ERROR" | "DELETE_PENDING" | "DELETED")
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_ip_set-instance_method
+      def get_ip_set: (
+                        detector_id: ::String,
+                        ip_set_id: ::String
+                      ) -> _GetIPSetResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIPSetResponseSuccess
+
+      interface _GetInvitationsCountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInvitationsCountResponse]
+        def invitations_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_invitations_count-instance_method
+      def get_invitations_count: (
+                                 ) -> _GetInvitationsCountResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInvitationsCountResponseSuccess
+
+      interface _GetMalwareScanSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMalwareScanSettingsResponse]
+        def scan_resource_criteria: () -> Types::ScanResourceCriteria
+        def ebs_snapshot_preservation: () -> ("NO_RETENTION" | "RETENTION_WITH_FINDING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_malware_scan_settings-instance_method
+      def get_malware_scan_settings: (
+                                       detector_id: ::String
+                                     ) -> _GetMalwareScanSettingsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMalwareScanSettingsResponseSuccess
+
+      interface _GetMasterAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMasterAccountResponse]
+        def master: () -> Types::Master
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_master_account-instance_method
+      def get_master_account: (
+                                detector_id: ::String
+                              ) -> _GetMasterAccountResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMasterAccountResponseSuccess
+
+      interface _GetMemberDetectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMemberDetectorsResponse]
+        def member_data_source_configurations: () -> ::Array[Types::MemberDataSourceConfiguration]
+        def unprocessed_accounts: () -> ::Array[Types::UnprocessedAccount]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_member_detectors-instance_method
+      def get_member_detectors: (
+                                  detector_id: ::String,
+                                  account_ids: Array[::String]
+                                ) -> _GetMemberDetectorsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMemberDetectorsResponseSuccess
+
+      interface _GetMembersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMembersResponse]
+        def members: () -> ::Array[Types::Member]
+        def unprocessed_accounts: () -> ::Array[Types::UnprocessedAccount]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_members-instance_method
+      def get_members: (
+                         detector_id: ::String,
+                         account_ids: Array[::String]
+                       ) -> _GetMembersResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMembersResponseSuccess
+
+      interface _GetOrganizationStatisticsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOrganizationStatisticsResponse]
+        def organization_details: () -> Types::OrganizationDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_organization_statistics-instance_method
+      def get_organization_statistics: () -> _GetOrganizationStatisticsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOrganizationStatisticsResponseSuccess
+
+      interface _GetRemainingFreeTrialDaysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRemainingFreeTrialDaysResponse]
+        def accounts: () -> ::Array[Types::AccountFreeTrialInfo]
+        def unprocessed_accounts: () -> ::Array[Types::UnprocessedAccount]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_remaining_free_trial_days-instance_method
+      def get_remaining_free_trial_days: (
+                                           detector_id: ::String,
+                                           ?account_ids: Array[::String]
+                                         ) -> _GetRemainingFreeTrialDaysResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRemainingFreeTrialDaysResponseSuccess
+
+      interface _GetThreatIntelSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetThreatIntelSetResponse]
+        def name: () -> ::String
+        def format: () -> ("TXT" | "STIX" | "OTX_CSV" | "ALIEN_VAULT" | "PROOF_POINT" | "FIRE_EYE")
+        def location: () -> ::String
+        def status: () -> ("INACTIVE" | "ACTIVATING" | "ACTIVE" | "DEACTIVATING" | "ERROR" | "DELETE_PENDING" | "DELETED")
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_threat_intel_set-instance_method
+      def get_threat_intel_set: (
+                                  detector_id: ::String,
+                                  threat_intel_set_id: ::String
+                                ) -> _GetThreatIntelSetResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetThreatIntelSetResponseSuccess
+
+      interface _GetUsageStatisticsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUsageStatisticsResponse]
+        def usage_statistics: () -> Types::UsageStatistics
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_usage_statistics-instance_method
+      def get_usage_statistics: (
+                                  detector_id: ::String,
+                                  usage_statistic_type: ("SUM_BY_ACCOUNT" | "SUM_BY_DATA_SOURCE" | "SUM_BY_RESOURCE" | "TOP_RESOURCES" | "SUM_BY_FEATURES" | "TOP_ACCOUNTS_BY_FEATURE"),
+                                  usage_criteria: {
+                                    account_ids: Array[::String]?,
+                                    data_sources: Array[("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_LOGS" | "KUBERNETES_AUDIT_LOGS" | "EC2_MALWARE_SCAN")]?,
+                                    resources: Array[::String]?,
+                                    features: Array[("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "FARGATE_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING")]?
+                                  },
+                                  ?unit: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _GetUsageStatisticsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUsageStatisticsResponseSuccess
+
+      interface _InviteMembersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InviteMembersResponse]
+        def unprocessed_accounts: () -> ::Array[Types::UnprocessedAccount]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#invite_members-instance_method
+      def invite_members: (
+                            detector_id: ::String,
+                            account_ids: Array[::String],
+                            ?disable_email_notification: bool,
+                            ?message: ::String
+                          ) -> _InviteMembersResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InviteMembersResponseSuccess
+
+      interface _ListCoverageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCoverageResponse]
+        def resources: () -> ::Array[Types::CoverageResource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#list_coverage-instance_method
+      def list_coverage: (
+                           detector_id: ::String,
+                           ?next_token: ::String,
+                           ?max_results: ::Integer,
+                           ?filter_criteria: {
+                             filter_criterion: Array[
+                               {
+                                 criterion_key: ("ACCOUNT_ID" | "CLUSTER_NAME" | "RESOURCE_TYPE" | "COVERAGE_STATUS" | "ADDON_VERSION" | "MANAGEMENT_TYPE" | "EKS_CLUSTER_NAME" | "ECS_CLUSTER_NAME" | "AGENT_VERSION" | "INSTANCE_ID" | "CLUSTER_ARN")?,
+                                 filter_condition: {
+                                   equals: Array[::String]?,
+                                   not_equals: Array[::String]?
+                                 }?
+                               },
+                             ]?
+                           },
+                           ?sort_criteria: {
+                             attribute_name: ("ACCOUNT_ID" | "CLUSTER_NAME" | "COVERAGE_STATUS" | "ISSUE" | "ADDON_VERSION" | "UPDATED_AT" | "EKS_CLUSTER_NAME" | "ECS_CLUSTER_NAME" | "INSTANCE_ID")?,
+                             order_by: ("ASC" | "DESC")?
+                           }
+                         ) -> _ListCoverageResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCoverageResponseSuccess
+
+      interface _ListDetectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDetectorsResponse]
+        def detector_ids: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#list_detectors-instance_method
+      def list_detectors: (
+                            ?max_results: ::Integer,
+                            ?next_token: ::String
+                          ) -> _ListDetectorsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDetectorsResponseSuccess
+
+      interface _ListFiltersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFiltersResponse]
+        def filter_names: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#list_filters-instance_method
+      def list_filters: (
+                          detector_id: ::String,
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListFiltersResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFiltersResponseSuccess
+
+      interface _ListFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFindingsResponse]
+        def finding_ids: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#list_findings-instance_method
+      def list_findings: (
+                           detector_id: ::String,
+                           ?finding_criteria: {
+                             criterion: Hash[::String, {
+                                 eq: Array[::String]?,
+                                 neq: Array[::String]?,
+                                 gt: ::Integer?,
+                                 gte: ::Integer?,
+                                 lt: ::Integer?,
+                                 lte: ::Integer?,
+                                 equals: Array[::String]?,
+                                 not_equals: Array[::String]?,
+                                 greater_than: ::Integer?,
+                                 greater_than_or_equal: ::Integer?,
+                                 less_than: ::Integer?,
+                                 less_than_or_equal: ::Integer?
+                               }]?
+                           },
+                           ?sort_criteria: {
+                             attribute_name: ::String?,
+                             order_by: ("ASC" | "DESC")?
+                           },
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListFindingsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFindingsResponseSuccess
+
+      interface _ListIPSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIPSetsResponse]
+        def ip_set_ids: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#list_ip_sets-instance_method
+      def list_ip_sets: (
+                          detector_id: ::String,
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListIPSetsResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIPSetsResponseSuccess
+
+      interface _ListInvitationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInvitationsResponse]
+        def invitations: () -> ::Array[Types::Invitation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#list_invitations-instance_method
+      def list_invitations: (
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _ListInvitationsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInvitationsResponseSuccess
+
+      interface _ListMembersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMembersResponse]
+        def members: () -> ::Array[Types::Member]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#list_members-instance_method
+      def list_members: (
+                          detector_id: ::String,
+                          ?max_results: ::Integer,
+                          ?next_token: ::String,
+                          ?only_associated: ::String
+                        ) -> _ListMembersResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMembersResponseSuccess
+
+      interface _ListOrganizationAdminAccountsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOrganizationAdminAccountsResponse]
+        def admin_accounts: () -> ::Array[Types::AdminAccount]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#list_organization_admin_accounts-instance_method
+      def list_organization_admin_accounts: (
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String
+                                            ) -> _ListOrganizationAdminAccountsResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOrganizationAdminAccountsResponseSuccess
+
+      interface _ListPublishingDestinationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPublishingDestinationsResponse]
+        def destinations: () -> ::Array[Types::Destination]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#list_publishing_destinations-instance_method
+      def list_publishing_destinations: (
+                                          detector_id: ::String,
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _ListPublishingDestinationsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPublishingDestinationsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListThreatIntelSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListThreatIntelSetsResponse]
+        def threat_intel_set_ids: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#list_threat_intel_sets-instance_method
+      def list_threat_intel_sets: (
+                                    detector_id: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListThreatIntelSetsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListThreatIntelSetsResponseSuccess
+
+      interface _StartMalwareScanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMalwareScanResponse]
+        def scan_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#start_malware_scan-instance_method
+      def start_malware_scan: (
+                                resource_arn: ::String
+                              ) -> _StartMalwareScanResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMalwareScanResponseSuccess
+
+      interface _StartMonitoringMembersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMonitoringMembersResponse]
+        def unprocessed_accounts: () -> ::Array[Types::UnprocessedAccount]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#start_monitoring_members-instance_method
+      def start_monitoring_members: (
+                                      detector_id: ::String,
+                                      account_ids: Array[::String]
+                                    ) -> _StartMonitoringMembersResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMonitoringMembersResponseSuccess
+
+      interface _StopMonitoringMembersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopMonitoringMembersResponse]
+        def unprocessed_accounts: () -> ::Array[Types::UnprocessedAccount]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#stop_monitoring_members-instance_method
+      def stop_monitoring_members: (
+                                     detector_id: ::String,
+                                     account_ids: Array[::String]
+                                   ) -> _StopMonitoringMembersResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopMonitoringMembersResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UnarchiveFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UnarchiveFindingsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#unarchive_findings-instance_method
+      def unarchive_findings: (
+                                detector_id: ::String,
+                                finding_ids: Array[::String]
+                              ) -> _UnarchiveFindingsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UnarchiveFindingsResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateDetectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDetectorResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#update_detector-instance_method
+      def update_detector: (
+                             detector_id: ::String,
+                             ?enable: bool,
+                             ?finding_publishing_frequency: ("FIFTEEN_MINUTES" | "ONE_HOUR" | "SIX_HOURS"),
+                             ?data_sources: {
+                               s3_logs: {
+                                 enable: bool
+                               }?,
+                               kubernetes: {
+                                 audit_logs: {
+                                   enable: bool
+                                 }
+                               }?,
+                               malware_protection: {
+                                 scan_ec2_instance_with_findings: {
+                                   ebs_volumes: bool?
+                                 }?
+                               }?
+                             },
+                             ?features: Array[
+                               {
+                                 name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "EKS_RUNTIME_MONITORING" | "LAMBDA_NETWORK_LOGS" | "RUNTIME_MONITORING")?,
+                                 status: ("ENABLED" | "DISABLED")?,
+                                 additional_configuration: Array[
+                                   {
+                                     name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")?,
+                                     status: ("ENABLED" | "DISABLED")?
+                                   },
+                                 ]?
+                               },
+                             ]
+                           ) -> _UpdateDetectorResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDetectorResponseSuccess
+
+      interface _UpdateFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFilterResponse]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#update_filter-instance_method
+      def update_filter: (
+                           detector_id: ::String,
+                           filter_name: ::String,
+                           ?description: ::String,
+                           ?action: ("NOOP" | "ARCHIVE"),
+                           ?rank: ::Integer,
+                           ?finding_criteria: {
+                             criterion: Hash[::String, {
+                                 eq: Array[::String]?,
+                                 neq: Array[::String]?,
+                                 gt: ::Integer?,
+                                 gte: ::Integer?,
+                                 lt: ::Integer?,
+                                 lte: ::Integer?,
+                                 equals: Array[::String]?,
+                                 not_equals: Array[::String]?,
+                                 greater_than: ::Integer?,
+                                 greater_than_or_equal: ::Integer?,
+                                 less_than: ::Integer?,
+                                 less_than_or_equal: ::Integer?
+                               }]?
+                           }
+                         ) -> _UpdateFilterResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFilterResponseSuccess
+
+      interface _UpdateFindingsFeedbackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFindingsFeedbackResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#update_findings_feedback-instance_method
+      def update_findings_feedback: (
+                                      detector_id: ::String,
+                                      finding_ids: Array[::String],
+                                      feedback: ("USEFUL" | "NOT_USEFUL"),
+                                      ?comments: ::String
+                                    ) -> _UpdateFindingsFeedbackResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFindingsFeedbackResponseSuccess
+
+      interface _UpdateIPSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIPSetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#update_ip_set-instance_method
+      def update_ip_set: (
+                           detector_id: ::String,
+                           ip_set_id: ::String,
+                           ?name: ::String,
+                           ?location: ::String,
+                           ?activate: bool
+                         ) -> _UpdateIPSetResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIPSetResponseSuccess
+
+      interface _UpdateMalwareScanSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMalwareScanSettingsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#update_malware_scan_settings-instance_method
+      def update_malware_scan_settings: (
+                                          detector_id: ::String,
+                                          ?scan_resource_criteria: {
+                                            include: Hash[("EC2_INSTANCE_TAG"), {
+                                                map_equals: Array[
+                                                  {
+                                                    key: ::String,
+                                                    value: ::String?
+                                                  },
+                                                ]
+                                              }]?,
+                                            exclude: Hash[("EC2_INSTANCE_TAG"), {
+                                                map_equals: Array[
+                                                  {
+                                                    key: ::String,
+                                                    value: ::String?
+                                                  },
+                                                ]
+                                              }]?
+                                          },
+                                          ?ebs_snapshot_preservation: ("NO_RETENTION" | "RETENTION_WITH_FINDING")
+                                        ) -> _UpdateMalwareScanSettingsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMalwareScanSettingsResponseSuccess
+
+      interface _UpdateMemberDetectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMemberDetectorsResponse]
+        def unprocessed_accounts: () -> ::Array[Types::UnprocessedAccount]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#update_member_detectors-instance_method
+      def update_member_detectors: (
+                                     detector_id: ::String,
+                                     account_ids: Array[::String],
+                                     ?data_sources: {
+                                       s3_logs: {
+                                         enable: bool
+                                       }?,
+                                       kubernetes: {
+                                         audit_logs: {
+                                           enable: bool
+                                         }
+                                       }?,
+                                       malware_protection: {
+                                         scan_ec2_instance_with_findings: {
+                                           ebs_volumes: bool?
+                                         }?
+                                       }?
+                                     },
+                                     ?features: Array[
+                                       {
+                                         name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "EKS_RUNTIME_MONITORING" | "LAMBDA_NETWORK_LOGS" | "RUNTIME_MONITORING")?,
+                                         status: ("ENABLED" | "DISABLED")?,
+                                         additional_configuration: Array[
+                                           {
+                                             name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")?,
+                                             status: ("ENABLED" | "DISABLED")?
+                                           },
+                                         ]?
+                                       },
+                                     ]
+                                   ) -> _UpdateMemberDetectorsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMemberDetectorsResponseSuccess
+
+      interface _UpdateOrganizationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateOrganizationConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#update_organization_configuration-instance_method
+      def update_organization_configuration: (
+                                               detector_id: ::String,
+                                               ?auto_enable: bool,
+                                               ?data_sources: {
+                                                 s3_logs: {
+                                                   auto_enable: bool
+                                                 }?,
+                                                 kubernetes: {
+                                                   audit_logs: {
+                                                     auto_enable: bool
+                                                   }
+                                                 }?,
+                                                 malware_protection: {
+                                                   scan_ec2_instance_with_findings: {
+                                                     ebs_volumes: {
+                                                       auto_enable: bool?
+                                                     }?
+                                                   }?
+                                                 }?
+                                               },
+                                               ?features: Array[
+                                                 {
+                                                   name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "EKS_RUNTIME_MONITORING" | "LAMBDA_NETWORK_LOGS" | "RUNTIME_MONITORING")?,
+                                                   auto_enable: ("NEW" | "NONE" | "ALL")?,
+                                                   additional_configuration: Array[
+                                                     {
+                                                       name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")?,
+                                                       auto_enable: ("NEW" | "NONE" | "ALL")?
+                                                     },
+                                                   ]?
+                                                 },
+                                               ],
+                                               ?auto_enable_organization_members: ("NEW" | "ALL" | "NONE")
+                                             ) -> _UpdateOrganizationConfigurationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOrganizationConfigurationResponseSuccess
+
+      interface _UpdatePublishingDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePublishingDestinationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#update_publishing_destination-instance_method
+      def update_publishing_destination: (
+                                           detector_id: ::String,
+                                           destination_id: ::String,
+                                           ?destination_properties: {
+                                             destination_arn: ::String?,
+                                             kms_key_arn: ::String?
+                                           }
+                                         ) -> _UpdatePublishingDestinationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePublishingDestinationResponseSuccess
+
+      interface _UpdateThreatIntelSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateThreatIntelSetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#update_threat_intel_set-instance_method
+      def update_threat_intel_set: (
+                                     detector_id: ::String,
+                                     threat_intel_set_id: ::String,
+                                     ?name: ::String,
+                                     ?location: ::String,
+                                     ?activate: bool
+                                   ) -> _UpdateThreatIntelSetResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateThreatIntelSetResponseSuccess
+    end
+  end
+end
+

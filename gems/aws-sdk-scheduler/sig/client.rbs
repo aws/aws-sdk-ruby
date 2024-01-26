@@ -1,0 +1,405 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Scheduler
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Scheduler/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateScheduleOutput]
+        def schedule_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Scheduler/Client.html#create_schedule-instance_method
+      def create_schedule: (
+                             ?action_after_completion: ("NONE" | "DELETE"),
+                             ?client_token: ::String,
+                             ?description: ::String,
+                             ?end_date: ::Time,
+                             flexible_time_window: {
+                               maximum_window_in_minutes: ::Integer?,
+                               mode: ("OFF" | "FLEXIBLE")
+                             },
+                             ?group_name: ::String,
+                             ?kms_key_arn: ::String,
+                             name: ::String,
+                             schedule_expression: ::String,
+                             ?schedule_expression_timezone: ::String,
+                             ?start_date: ::Time,
+                             ?state: ("ENABLED" | "DISABLED"),
+                             target: {
+                               arn: ::String,
+                               dead_letter_config: {
+                                 arn: ::String?
+                               }?,
+                               ecs_parameters: {
+                                 capacity_provider_strategy: Array[
+                                   {
+                                     base: ::Integer?,
+                                     capacity_provider: ::String,
+                                     weight: ::Integer?
+                                   },
+                                 ]?,
+                                 enable_ecs_managed_tags: bool?,
+                                 enable_execute_command: bool?,
+                                 group: ::String?,
+                                 launch_type: ("EC2" | "FARGATE" | "EXTERNAL")?,
+                                 network_configuration: {
+                                   awsvpc_configuration: {
+                                     assign_public_ip: ("ENABLED" | "DISABLED")?,
+                                     security_groups: Array[::String]?,
+                                     subnets: Array[::String]
+                                   }?
+                                 }?,
+                                 placement_constraints: Array[
+                                   {
+                                     expression: ::String?,
+                                     type: ("distinctInstance" | "memberOf")?
+                                   },
+                                 ]?,
+                                 placement_strategy: Array[
+                                   {
+                                     field: ::String?,
+                                     type: ("random" | "spread" | "binpack")?
+                                   },
+                                 ]?,
+                                 platform_version: ::String?,
+                                 propagate_tags: ("TASK_DEFINITION")?,
+                                 reference_id: ::String?,
+                                 tags: Array[
+                                   Hash[::String, ::String],
+                                 ]?,
+                                 task_count: ::Integer?,
+                                 task_definition_arn: ::String
+                               }?,
+                               event_bridge_parameters: {
+                                 detail_type: ::String,
+                                 source: ::String
+                               }?,
+                               input: ::String?,
+                               kinesis_parameters: {
+                                 partition_key: ::String
+                               }?,
+                               retry_policy: {
+                                 maximum_event_age_in_seconds: ::Integer?,
+                                 maximum_retry_attempts: ::Integer?
+                               }?,
+                               role_arn: ::String,
+                               sage_maker_pipeline_parameters: {
+                                 pipeline_parameter_list: Array[
+                                   {
+                                     name: ::String,
+                                     value: ::String
+                                   },
+                                 ]?
+                               }?,
+                               sqs_parameters: {
+                                 message_group_id: ::String?
+                               }?
+                             }
+                           ) -> _CreateScheduleResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateScheduleResponseSuccess
+
+      interface _CreateScheduleGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateScheduleGroupOutput]
+        def schedule_group_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Scheduler/Client.html#create_schedule_group-instance_method
+      def create_schedule_group: (
+                                   ?client_token: ::String,
+                                   name: ::String,
+                                   ?tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ]
+                                 ) -> _CreateScheduleGroupResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateScheduleGroupResponseSuccess
+
+      interface _DeleteScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteScheduleOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Scheduler/Client.html#delete_schedule-instance_method
+      def delete_schedule: (
+                             ?client_token: ::String,
+                             ?group_name: ::String,
+                             name: ::String
+                           ) -> _DeleteScheduleResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteScheduleResponseSuccess
+
+      interface _DeleteScheduleGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteScheduleGroupOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Scheduler/Client.html#delete_schedule_group-instance_method
+      def delete_schedule_group: (
+                                   ?client_token: ::String,
+                                   name: ::String
+                                 ) -> _DeleteScheduleGroupResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteScheduleGroupResponseSuccess
+
+      interface _GetScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetScheduleOutput]
+        def action_after_completion: () -> ("NONE" | "DELETE")
+        def arn: () -> ::String
+        def creation_date: () -> ::Time
+        def description: () -> ::String
+        def end_date: () -> ::Time
+        def flexible_time_window: () -> Types::FlexibleTimeWindow
+        def group_name: () -> ::String
+        def kms_key_arn: () -> ::String
+        def last_modification_date: () -> ::Time
+        def name: () -> ::String
+        def schedule_expression: () -> ::String
+        def schedule_expression_timezone: () -> ::String
+        def start_date: () -> ::Time
+        def state: () -> ("ENABLED" | "DISABLED")
+        def target: () -> Types::Target
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Scheduler/Client.html#get_schedule-instance_method
+      def get_schedule: (
+                          ?group_name: ::String,
+                          name: ::String
+                        ) -> _GetScheduleResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetScheduleResponseSuccess
+
+      interface _GetScheduleGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetScheduleGroupOutput]
+        def arn: () -> ::String
+        def creation_date: () -> ::Time
+        def last_modification_date: () -> ::Time
+        def name: () -> ::String
+        def state: () -> ("ACTIVE" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Scheduler/Client.html#get_schedule_group-instance_method
+      def get_schedule_group: (
+                                name: ::String
+                              ) -> _GetScheduleGroupResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetScheduleGroupResponseSuccess
+
+      interface _ListScheduleGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListScheduleGroupsOutput]
+        def next_token: () -> ::String
+        def schedule_groups: () -> ::Array[Types::ScheduleGroupSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Scheduler/Client.html#list_schedule_groups-instance_method
+      def list_schedule_groups: (
+                                  ?max_results: ::Integer,
+                                  ?name_prefix: ::String,
+                                  ?next_token: ::String
+                                ) -> _ListScheduleGroupsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListScheduleGroupsResponseSuccess
+
+      interface _ListSchedulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSchedulesOutput]
+        def next_token: () -> ::String
+        def schedules: () -> ::Array[Types::ScheduleSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Scheduler/Client.html#list_schedules-instance_method
+      def list_schedules: (
+                            ?group_name: ::String,
+                            ?max_results: ::Integer,
+                            ?name_prefix: ::String,
+                            ?next_token: ::String,
+                            ?state: ("ENABLED" | "DISABLED")
+                          ) -> _ListSchedulesResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSchedulesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Scheduler/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Scheduler/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Scheduler/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateScheduleOutput]
+        def schedule_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Scheduler/Client.html#update_schedule-instance_method
+      def update_schedule: (
+                             ?action_after_completion: ("NONE" | "DELETE"),
+                             ?client_token: ::String,
+                             ?description: ::String,
+                             ?end_date: ::Time,
+                             flexible_time_window: {
+                               maximum_window_in_minutes: ::Integer?,
+                               mode: ("OFF" | "FLEXIBLE")
+                             },
+                             ?group_name: ::String,
+                             ?kms_key_arn: ::String,
+                             name: ::String,
+                             schedule_expression: ::String,
+                             ?schedule_expression_timezone: ::String,
+                             ?start_date: ::Time,
+                             ?state: ("ENABLED" | "DISABLED"),
+                             target: {
+                               arn: ::String,
+                               dead_letter_config: {
+                                 arn: ::String?
+                               }?,
+                               ecs_parameters: {
+                                 capacity_provider_strategy: Array[
+                                   {
+                                     base: ::Integer?,
+                                     capacity_provider: ::String,
+                                     weight: ::Integer?
+                                   },
+                                 ]?,
+                                 enable_ecs_managed_tags: bool?,
+                                 enable_execute_command: bool?,
+                                 group: ::String?,
+                                 launch_type: ("EC2" | "FARGATE" | "EXTERNAL")?,
+                                 network_configuration: {
+                                   awsvpc_configuration: {
+                                     assign_public_ip: ("ENABLED" | "DISABLED")?,
+                                     security_groups: Array[::String]?,
+                                     subnets: Array[::String]
+                                   }?
+                                 }?,
+                                 placement_constraints: Array[
+                                   {
+                                     expression: ::String?,
+                                     type: ("distinctInstance" | "memberOf")?
+                                   },
+                                 ]?,
+                                 placement_strategy: Array[
+                                   {
+                                     field: ::String?,
+                                     type: ("random" | "spread" | "binpack")?
+                                   },
+                                 ]?,
+                                 platform_version: ::String?,
+                                 propagate_tags: ("TASK_DEFINITION")?,
+                                 reference_id: ::String?,
+                                 tags: Array[
+                                   Hash[::String, ::String],
+                                 ]?,
+                                 task_count: ::Integer?,
+                                 task_definition_arn: ::String
+                               }?,
+                               event_bridge_parameters: {
+                                 detail_type: ::String,
+                                 source: ::String
+                               }?,
+                               input: ::String?,
+                               kinesis_parameters: {
+                                 partition_key: ::String
+                               }?,
+                               retry_policy: {
+                                 maximum_event_age_in_seconds: ::Integer?,
+                                 maximum_retry_attempts: ::Integer?
+                               }?,
+                               role_arn: ::String,
+                               sage_maker_pipeline_parameters: {
+                                 pipeline_parameter_list: Array[
+                                   {
+                                     name: ::String,
+                                     value: ::String
+                                   },
+                                 ]?
+                               }?,
+                               sqs_parameters: {
+                                 message_group_id: ::String?
+                               }?
+                             }
+                           ) -> _UpdateScheduleResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateScheduleResponseSuccess
+    end
+  end
+end
+

@@ -1,0 +1,368 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::QLDB
+  module Types
+
+    class CancelJournalKinesisStreamRequest
+      attr_accessor ledger_name: ::String
+      attr_accessor stream_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelJournalKinesisStreamResponse
+      attr_accessor stream_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLedgerRequest
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor permissions_mode: ("ALLOW_ALL" | "STANDARD")
+      attr_accessor deletion_protection: bool
+      attr_accessor kms_key: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLedgerResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED")
+      attr_accessor creation_date_time: ::Time
+      attr_accessor permissions_mode: ("ALLOW_ALL" | "STANDARD")
+      attr_accessor deletion_protection: bool
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLedgerRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeJournalKinesisStreamRequest
+      attr_accessor ledger_name: ::String
+      attr_accessor stream_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeJournalKinesisStreamResponse
+      attr_accessor stream: Types::JournalKinesisStreamDescription
+      SENSITIVE: []
+    end
+
+    class DescribeJournalS3ExportRequest
+      attr_accessor name: ::String
+      attr_accessor export_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeJournalS3ExportResponse
+      attr_accessor export_description: Types::JournalS3ExportDescription
+      SENSITIVE: []
+    end
+
+    class DescribeLedgerRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLedgerResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED")
+      attr_accessor creation_date_time: ::Time
+      attr_accessor permissions_mode: ("ALLOW_ALL" | "STANDARD")
+      attr_accessor deletion_protection: bool
+      attr_accessor encryption_description: Types::LedgerEncryptionDescription
+      SENSITIVE: []
+    end
+
+    class ExportJournalToS3Request
+      attr_accessor name: ::String
+      attr_accessor inclusive_start_time: ::Time
+      attr_accessor exclusive_end_time: ::Time
+      attr_accessor s3_export_configuration: Types::S3ExportConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor output_format: ("ION_BINARY" | "ION_TEXT" | "JSON")
+      SENSITIVE: []
+    end
+
+    class ExportJournalToS3Response
+      attr_accessor export_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetBlockRequest
+      attr_accessor name: ::String
+      attr_accessor block_address: Types::ValueHolder
+      attr_accessor digest_tip_address: Types::ValueHolder
+      SENSITIVE: [:block_address, :digest_tip_address]
+    end
+
+    class GetBlockResponse
+      attr_accessor block: Types::ValueHolder
+      attr_accessor proof: Types::ValueHolder
+      SENSITIVE: [:block, :proof]
+    end
+
+    class GetDigestRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDigestResponse
+      attr_accessor digest: ::String
+      attr_accessor digest_tip_address: Types::ValueHolder
+      SENSITIVE: [:digest_tip_address]
+    end
+
+    class GetRevisionRequest
+      attr_accessor name: ::String
+      attr_accessor block_address: Types::ValueHolder
+      attr_accessor document_id: ::String
+      attr_accessor digest_tip_address: Types::ValueHolder
+      SENSITIVE: [:block_address, :digest_tip_address]
+    end
+
+    class GetRevisionResponse
+      attr_accessor proof: Types::ValueHolder
+      attr_accessor revision: Types::ValueHolder
+      SENSITIVE: [:proof, :revision]
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      attr_accessor parameter_name: ::String
+      SENSITIVE: []
+    end
+
+    class JournalKinesisStreamDescription
+      attr_accessor ledger_name: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor inclusive_start_time: ::Time
+      attr_accessor exclusive_end_time: ::Time
+      attr_accessor role_arn: ::String
+      attr_accessor stream_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("ACTIVE" | "COMPLETED" | "CANCELED" | "FAILED" | "IMPAIRED")
+      attr_accessor kinesis_configuration: Types::KinesisConfiguration
+      attr_accessor error_cause: ("KINESIS_STREAM_NOT_FOUND" | "IAM_PERMISSION_REVOKED")
+      attr_accessor stream_name: ::String
+      SENSITIVE: []
+    end
+
+    class JournalS3ExportDescription
+      attr_accessor ledger_name: ::String
+      attr_accessor export_id: ::String
+      attr_accessor export_creation_time: ::Time
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETED" | "CANCELLED")
+      attr_accessor inclusive_start_time: ::Time
+      attr_accessor exclusive_end_time: ::Time
+      attr_accessor s3_export_configuration: Types::S3ExportConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor output_format: ("ION_BINARY" | "ION_TEXT" | "JSON")
+      SENSITIVE: []
+    end
+
+    class KinesisConfiguration
+      attr_accessor stream_arn: ::String
+      attr_accessor aggregation_enabled: bool
+      SENSITIVE: []
+    end
+
+    class LedgerEncryptionDescription
+      attr_accessor kms_key_arn: ::String
+      attr_accessor encryption_status: ("ENABLED" | "UPDATING" | "KMS_KEY_INACCESSIBLE")
+      attr_accessor inaccessible_kms_key_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class LedgerSummary
+      attr_accessor name: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED")
+      attr_accessor creation_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ListJournalKinesisStreamsForLedgerRequest
+      attr_accessor ledger_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJournalKinesisStreamsForLedgerResponse
+      attr_accessor streams: ::Array[Types::JournalKinesisStreamDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJournalS3ExportsForLedgerRequest
+      attr_accessor name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJournalS3ExportsForLedgerResponse
+      attr_accessor journal_s3_exports: ::Array[Types::JournalS3ExportDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJournalS3ExportsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJournalS3ExportsResponse
+      attr_accessor journal_s3_exports: ::Array[Types::JournalS3ExportDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLedgersRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLedgersResponse
+      attr_accessor ledgers: ::Array[Types::LedgerSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyExistsException
+      attr_accessor message: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException
+      attr_accessor message: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class ResourcePreconditionNotMetException
+      attr_accessor message: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class S3EncryptionConfiguration
+      attr_accessor object_encryption_type: ("SSE_KMS" | "SSE_S3" | "NO_ENCRYPTION")
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class S3ExportConfiguration
+      attr_accessor bucket: ::String
+      attr_accessor prefix: ::String
+      attr_accessor encryption_configuration: Types::S3EncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class StreamJournalToKinesisRequest
+      attr_accessor ledger_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor inclusive_start_time: ::Time
+      attr_accessor exclusive_end_time: ::Time
+      attr_accessor kinesis_configuration: Types::KinesisConfiguration
+      attr_accessor stream_name: ::String
+      SENSITIVE: []
+    end
+
+    class StreamJournalToKinesisResponse
+      attr_accessor stream_id: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateLedgerPermissionsModeRequest
+      attr_accessor name: ::String
+      attr_accessor permissions_mode: ("ALLOW_ALL" | "STANDARD")
+      SENSITIVE: []
+    end
+
+    class UpdateLedgerPermissionsModeResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor permissions_mode: ("ALLOW_ALL" | "STANDARD")
+      SENSITIVE: []
+    end
+
+    class UpdateLedgerRequest
+      attr_accessor name: ::String
+      attr_accessor deletion_protection: bool
+      attr_accessor kms_key: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateLedgerResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED")
+      attr_accessor creation_date_time: ::Time
+      attr_accessor deletion_protection: bool
+      attr_accessor encryption_description: Types::LedgerEncryptionDescription
+      SENSITIVE: []
+    end
+
+    class ValueHolder
+      attr_accessor ion_text: ::String
+      SENSITIVE: [:ion_text]
+    end
+  end
+end

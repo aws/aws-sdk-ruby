@@ -1,0 +1,616 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DevOpsGuru
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AddNotificationChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddNotificationChannelResponse]
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#add_notification_channel-instance_method
+      def add_notification_channel: (
+                                      config: {
+                                        sns: {
+                                          topic_arn: ::String?
+                                        },
+                                        filters: {
+                                          severities: Array[("LOW" | "MEDIUM" | "HIGH")]?,
+                                          message_types: Array[("NEW_INSIGHT" | "CLOSED_INSIGHT" | "NEW_ASSOCIATION" | "SEVERITY_UPGRADED" | "NEW_RECOMMENDATION")]?
+                                        }?
+                                      }
+                                    ) -> _AddNotificationChannelResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddNotificationChannelResponseSuccess
+
+      interface _DeleteInsightResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteInsightResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#delete_insight-instance_method
+      def delete_insight: (
+                            id: ::String
+                          ) -> _DeleteInsightResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteInsightResponseSuccess
+
+      interface _DescribeAccountHealthResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAccountHealthResponse]
+        def open_reactive_insights: () -> ::Integer
+        def open_proactive_insights: () -> ::Integer
+        def metrics_analyzed: () -> ::Integer
+        def resource_hours: () -> ::Integer
+        def analyzed_resource_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#describe_account_health-instance_method
+      def describe_account_health: (
+                                   ) -> _DescribeAccountHealthResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccountHealthResponseSuccess
+
+      interface _DescribeAccountOverviewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAccountOverviewResponse]
+        def reactive_insights: () -> ::Integer
+        def proactive_insights: () -> ::Integer
+        def mean_time_to_recover_in_milliseconds: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#describe_account_overview-instance_method
+      def describe_account_overview: (
+                                       from_time: ::Time,
+                                       ?to_time: ::Time
+                                     ) -> _DescribeAccountOverviewResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccountOverviewResponseSuccess
+
+      interface _DescribeAnomalyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAnomalyResponse]
+        def proactive_anomaly: () -> Types::ProactiveAnomaly
+        def reactive_anomaly: () -> Types::ReactiveAnomaly
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#describe_anomaly-instance_method
+      def describe_anomaly: (
+                              id: ::String,
+                              ?account_id: ::String
+                            ) -> _DescribeAnomalyResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAnomalyResponseSuccess
+
+      interface _DescribeEventSourcesConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEventSourcesConfigResponse]
+        def event_sources: () -> Types::EventSourcesConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#describe_event_sources_config-instance_method
+      def describe_event_sources_config: (
+                                         ) -> _DescribeEventSourcesConfigResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEventSourcesConfigResponseSuccess
+
+      interface _DescribeFeedbackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFeedbackResponse]
+        def insight_feedback: () -> Types::InsightFeedback
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#describe_feedback-instance_method
+      def describe_feedback: (
+                               ?insight_id: ::String
+                             ) -> _DescribeFeedbackResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFeedbackResponseSuccess
+
+      interface _DescribeInsightResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInsightResponse]
+        def proactive_insight: () -> Types::ProactiveInsight
+        def reactive_insight: () -> Types::ReactiveInsight
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#describe_insight-instance_method
+      def describe_insight: (
+                              id: ::String,
+                              ?account_id: ::String
+                            ) -> _DescribeInsightResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInsightResponseSuccess
+
+      interface _DescribeOrganizationHealthResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeOrganizationHealthResponse]
+        def open_reactive_insights: () -> ::Integer
+        def open_proactive_insights: () -> ::Integer
+        def metrics_analyzed: () -> ::Integer
+        def resource_hours: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#describe_organization_health-instance_method
+      def describe_organization_health: (
+                                          ?account_ids: Array[::String],
+                                          ?organizational_unit_ids: Array[::String]
+                                        ) -> _DescribeOrganizationHealthResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeOrganizationHealthResponseSuccess
+
+      interface _DescribeOrganizationOverviewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeOrganizationOverviewResponse]
+        def reactive_insights: () -> ::Integer
+        def proactive_insights: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#describe_organization_overview-instance_method
+      def describe_organization_overview: (
+                                            from_time: ::Time,
+                                            ?to_time: ::Time,
+                                            ?account_ids: Array[::String],
+                                            ?organizational_unit_ids: Array[::String]
+                                          ) -> _DescribeOrganizationOverviewResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeOrganizationOverviewResponseSuccess
+
+      interface _DescribeOrganizationResourceCollectionHealthResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeOrganizationResourceCollectionHealthResponse]
+        def cloud_formation: () -> ::Array[Types::CloudFormationHealth]
+        def service: () -> ::Array[Types::ServiceHealth]
+        def account: () -> ::Array[Types::AccountHealth]
+        def next_token: () -> ::String
+        def tags: () -> ::Array[Types::TagHealth]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#describe_organization_resource_collection_health-instance_method
+      def describe_organization_resource_collection_health: (
+                                                              organization_resource_collection_type: ("AWS_CLOUD_FORMATION" | "AWS_SERVICE" | "AWS_ACCOUNT" | "AWS_TAGS"),
+                                                              ?account_ids: Array[::String],
+                                                              ?organizational_unit_ids: Array[::String],
+                                                              ?next_token: ::String,
+                                                              ?max_results: ::Integer
+                                                            ) -> _DescribeOrganizationResourceCollectionHealthResponseSuccess
+                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeOrganizationResourceCollectionHealthResponseSuccess
+
+      interface _DescribeResourceCollectionHealthResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeResourceCollectionHealthResponse]
+        def cloud_formation: () -> ::Array[Types::CloudFormationHealth]
+        def service: () -> ::Array[Types::ServiceHealth]
+        def next_token: () -> ::String
+        def tags: () -> ::Array[Types::TagHealth]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#describe_resource_collection_health-instance_method
+      def describe_resource_collection_health: (
+                                                 resource_collection_type: ("AWS_CLOUD_FORMATION" | "AWS_SERVICE" | "AWS_TAGS"),
+                                                 ?next_token: ::String
+                                               ) -> _DescribeResourceCollectionHealthResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeResourceCollectionHealthResponseSuccess
+
+      interface _DescribeServiceIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeServiceIntegrationResponse]
+        def service_integration: () -> Types::ServiceIntegrationConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#describe_service_integration-instance_method
+      def describe_service_integration: (
+                                        ) -> _DescribeServiceIntegrationResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeServiceIntegrationResponseSuccess
+
+      interface _GetCostEstimationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCostEstimationResponse]
+        def resource_collection: () -> Types::CostEstimationResourceCollectionFilter
+        def status: () -> ("ONGOING" | "COMPLETED")
+        def costs: () -> ::Array[Types::ServiceResourceCost]
+        def time_range: () -> Types::CostEstimationTimeRange
+        def total_cost: () -> ::Float
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#get_cost_estimation-instance_method
+      def get_cost_estimation: (
+                                 ?next_token: ::String
+                               ) -> _GetCostEstimationResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCostEstimationResponseSuccess
+
+      interface _GetResourceCollectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourceCollectionResponse]
+        def resource_collection: () -> Types::ResourceCollectionFilter
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#get_resource_collection-instance_method
+      def get_resource_collection: (
+                                     resource_collection_type: ("AWS_CLOUD_FORMATION" | "AWS_SERVICE" | "AWS_TAGS"),
+                                     ?next_token: ::String
+                                   ) -> _GetResourceCollectionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourceCollectionResponseSuccess
+
+      interface _ListAnomaliesForInsightResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAnomaliesForInsightResponse]
+        def proactive_anomalies: () -> ::Array[Types::ProactiveAnomalySummary]
+        def reactive_anomalies: () -> ::Array[Types::ReactiveAnomalySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#list_anomalies_for_insight-instance_method
+      def list_anomalies_for_insight: (
+                                        insight_id: ::String,
+                                        ?start_time_range: {
+                                          from_time: ::Time?,
+                                          to_time: ::Time?
+                                        },
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String,
+                                        ?account_id: ::String,
+                                        ?filters: {
+                                          service_collection: {
+                                            service_names: Array[("API_GATEWAY" | "APPLICATION_ELB" | "AUTO_SCALING_GROUP" | "CLOUD_FRONT" | "DYNAMO_DB" | "EC2" | "ECS" | "EKS" | "ELASTIC_BEANSTALK" | "ELASTI_CACHE" | "ELB" | "ES" | "KINESIS" | "LAMBDA" | "NAT_GATEWAY" | "NETWORK_ELB" | "RDS" | "REDSHIFT" | "ROUTE_53" | "S3" | "SAGE_MAKER" | "SNS" | "SQS" | "STEP_FUNCTIONS" | "SWF")]?
+                                          }?
+                                        }
+                                      ) -> _ListAnomaliesForInsightResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAnomaliesForInsightResponseSuccess
+
+      interface _ListAnomalousLogGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAnomalousLogGroupsResponse]
+        def insight_id: () -> ::String
+        def anomalous_log_groups: () -> ::Array[Types::AnomalousLogGroup]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#list_anomalous_log_groups-instance_method
+      def list_anomalous_log_groups: (
+                                       insight_id: ::String,
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListAnomalousLogGroupsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAnomalousLogGroupsResponseSuccess
+
+      interface _ListEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEventsResponse]
+        def events: () -> ::Array[Types::Event]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#list_events-instance_method
+      def list_events: (
+                         filters: {
+                           insight_id: ::String?,
+                           event_time_range: {
+                             from_time: ::Time,
+                             to_time: ::Time
+                           }?,
+                           event_class: ("INFRASTRUCTURE" | "DEPLOYMENT" | "SECURITY_CHANGE" | "CONFIG_CHANGE" | "SCHEMA_CHANGE")?,
+                           event_source: ::String?,
+                           data_source: ("AWS_CLOUD_TRAIL" | "AWS_CODE_DEPLOY")?,
+                           resource_collection: {
+                             cloud_formation: {
+                               stack_names: Array[::String]?
+                             }?,
+                             tags: Array[
+                               {
+                                 app_boundary_key: ::String,
+                                 tag_values: Array[::String]
+                               },
+                             ]?
+                           }?
+                         },
+                         ?max_results: ::Integer,
+                         ?next_token: ::String,
+                         ?account_id: ::String
+                       ) -> _ListEventsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEventsResponseSuccess
+
+      interface _ListInsightsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInsightsResponse]
+        def proactive_insights: () -> ::Array[Types::ProactiveInsightSummary]
+        def reactive_insights: () -> ::Array[Types::ReactiveInsightSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#list_insights-instance_method
+      def list_insights: (
+                           status_filter: {
+                             ongoing: {
+                               type: ("REACTIVE" | "PROACTIVE")
+                             }?,
+                             closed: {
+                               type: ("REACTIVE" | "PROACTIVE"),
+                               end_time_range: {
+                                 from_time: ::Time?,
+                                 to_time: ::Time?
+                               }
+                             }?,
+                             any: {
+                               type: ("REACTIVE" | "PROACTIVE"),
+                               start_time_range: {
+                                 from_time: ::Time?,
+                                 to_time: ::Time?
+                               }
+                             }?
+                           },
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListInsightsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInsightsResponseSuccess
+
+      interface _ListMonitoredResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMonitoredResourcesResponse]
+        def monitored_resource_identifiers: () -> ::Array[Types::MonitoredResourceIdentifier]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#list_monitored_resources-instance_method
+      def list_monitored_resources: (
+                                      ?filters: {
+                                        resource_permission: ("FULL_PERMISSION" | "MISSING_PERMISSION"),
+                                        resource_type_filters: Array[("LOG_GROUPS" | "CLOUDFRONT_DISTRIBUTION" | "DYNAMODB_TABLE" | "EC2_NAT_GATEWAY" | "ECS_CLUSTER" | "ECS_SERVICE" | "EKS_CLUSTER" | "ELASTIC_BEANSTALK_ENVIRONMENT" | "ELASTIC_LOAD_BALANCER_LOAD_BALANCER" | "ELASTIC_LOAD_BALANCING_V2_LOAD_BALANCER" | "ELASTIC_LOAD_BALANCING_V2_TARGET_GROUP" | "ELASTICACHE_CACHE_CLUSTER" | "ELASTICSEARCH_DOMAIN" | "KINESIS_STREAM" | "LAMBDA_FUNCTION" | "OPEN_SEARCH_SERVICE_DOMAIN" | "RDS_DB_INSTANCE" | "RDS_DB_CLUSTER" | "REDSHIFT_CLUSTER" | "ROUTE53_HOSTED_ZONE" | "ROUTE53_HEALTH_CHECK" | "S3_BUCKET" | "SAGEMAKER_ENDPOINT" | "SNS_TOPIC" | "SQS_QUEUE" | "STEP_FUNCTIONS_ACTIVITY" | "STEP_FUNCTIONS_STATE_MACHINE")]
+                                      },
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListMonitoredResourcesResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMonitoredResourcesResponseSuccess
+
+      interface _ListNotificationChannelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNotificationChannelsResponse]
+        def channels: () -> ::Array[Types::NotificationChannel]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#list_notification_channels-instance_method
+      def list_notification_channels: (
+                                        ?next_token: ::String
+                                      ) -> _ListNotificationChannelsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNotificationChannelsResponseSuccess
+
+      interface _ListOrganizationInsightsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOrganizationInsightsResponse]
+        def proactive_insights: () -> ::Array[Types::ProactiveOrganizationInsightSummary]
+        def reactive_insights: () -> ::Array[Types::ReactiveOrganizationInsightSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#list_organization_insights-instance_method
+      def list_organization_insights: (
+                                        status_filter: {
+                                          ongoing: {
+                                            type: ("REACTIVE" | "PROACTIVE")
+                                          }?,
+                                          closed: {
+                                            type: ("REACTIVE" | "PROACTIVE"),
+                                            end_time_range: {
+                                              from_time: ::Time?,
+                                              to_time: ::Time?
+                                            }
+                                          }?,
+                                          any: {
+                                            type: ("REACTIVE" | "PROACTIVE"),
+                                            start_time_range: {
+                                              from_time: ::Time?,
+                                              to_time: ::Time?
+                                            }
+                                          }?
+                                        },
+                                        ?max_results: ::Integer,
+                                        ?account_ids: Array[::String],
+                                        ?organizational_unit_ids: Array[::String],
+                                        ?next_token: ::String
+                                      ) -> _ListOrganizationInsightsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOrganizationInsightsResponseSuccess
+
+      interface _ListRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecommendationsResponse]
+        def recommendations: () -> ::Array[Types::Recommendation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#list_recommendations-instance_method
+      def list_recommendations: (
+                                  insight_id: ::String,
+                                  ?next_token: ::String,
+                                  ?locale: ("DE_DE" | "EN_US" | "EN_GB" | "ES_ES" | "FR_FR" | "IT_IT" | "JA_JP" | "KO_KR" | "PT_BR" | "ZH_CN" | "ZH_TW"),
+                                  ?account_id: ::String
+                                ) -> _ListRecommendationsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecommendationsResponseSuccess
+
+      interface _PutFeedbackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutFeedbackResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#put_feedback-instance_method
+      def put_feedback: (
+                          ?insight_feedback: {
+                            id: ::String?,
+                            feedback: ("VALID_COLLECTION" | "RECOMMENDATION_USEFUL" | "ALERT_TOO_SENSITIVE" | "DATA_NOISY_ANOMALY" | "DATA_INCORRECT")?
+                          }
+                        ) -> _PutFeedbackResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutFeedbackResponseSuccess
+
+      interface _RemoveNotificationChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveNotificationChannelResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#remove_notification_channel-instance_method
+      def remove_notification_channel: (
+                                         id: ::String
+                                       ) -> _RemoveNotificationChannelResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveNotificationChannelResponseSuccess
+
+      interface _SearchInsightsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchInsightsResponse]
+        def proactive_insights: () -> ::Array[Types::ProactiveInsightSummary]
+        def reactive_insights: () -> ::Array[Types::ReactiveInsightSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#search_insights-instance_method
+      def search_insights: (
+                             start_time_range: {
+                               from_time: ::Time?,
+                               to_time: ::Time?
+                             },
+                             ?filters: {
+                               severities: Array[("LOW" | "MEDIUM" | "HIGH")]?,
+                               statuses: Array[("ONGOING" | "CLOSED")]?,
+                               resource_collection: {
+                                 cloud_formation: {
+                                   stack_names: Array[::String]?
+                                 }?,
+                                 tags: Array[
+                                   {
+                                     app_boundary_key: ::String,
+                                     tag_values: Array[::String]
+                                   },
+                                 ]?
+                               }?,
+                               service_collection: {
+                                 service_names: Array[("API_GATEWAY" | "APPLICATION_ELB" | "AUTO_SCALING_GROUP" | "CLOUD_FRONT" | "DYNAMO_DB" | "EC2" | "ECS" | "EKS" | "ELASTIC_BEANSTALK" | "ELASTI_CACHE" | "ELB" | "ES" | "KINESIS" | "LAMBDA" | "NAT_GATEWAY" | "NETWORK_ELB" | "RDS" | "REDSHIFT" | "ROUTE_53" | "S3" | "SAGE_MAKER" | "SNS" | "SQS" | "STEP_FUNCTIONS" | "SWF")]?
+                               }?
+                             },
+                             ?max_results: ::Integer,
+                             ?next_token: ::String,
+                             type: ("REACTIVE" | "PROACTIVE")
+                           ) -> _SearchInsightsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchInsightsResponseSuccess
+
+      interface _SearchOrganizationInsightsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchOrganizationInsightsResponse]
+        def proactive_insights: () -> ::Array[Types::ProactiveInsightSummary]
+        def reactive_insights: () -> ::Array[Types::ReactiveInsightSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#search_organization_insights-instance_method
+      def search_organization_insights: (
+                                          account_ids: Array[::String],
+                                          start_time_range: {
+                                            from_time: ::Time?,
+                                            to_time: ::Time?
+                                          },
+                                          ?filters: {
+                                            severities: Array[("LOW" | "MEDIUM" | "HIGH")]?,
+                                            statuses: Array[("ONGOING" | "CLOSED")]?,
+                                            resource_collection: {
+                                              cloud_formation: {
+                                                stack_names: Array[::String]?
+                                              }?,
+                                              tags: Array[
+                                                {
+                                                  app_boundary_key: ::String,
+                                                  tag_values: Array[::String]
+                                                },
+                                              ]?
+                                            }?,
+                                            service_collection: {
+                                              service_names: Array[("API_GATEWAY" | "APPLICATION_ELB" | "AUTO_SCALING_GROUP" | "CLOUD_FRONT" | "DYNAMO_DB" | "EC2" | "ECS" | "EKS" | "ELASTIC_BEANSTALK" | "ELASTI_CACHE" | "ELB" | "ES" | "KINESIS" | "LAMBDA" | "NAT_GATEWAY" | "NETWORK_ELB" | "RDS" | "REDSHIFT" | "ROUTE_53" | "S3" | "SAGE_MAKER" | "SNS" | "SQS" | "STEP_FUNCTIONS" | "SWF")]?
+                                            }?
+                                          },
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String,
+                                          type: ("REACTIVE" | "PROACTIVE")
+                                        ) -> _SearchOrganizationInsightsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchOrganizationInsightsResponseSuccess
+
+      interface _StartCostEstimationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartCostEstimationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#start_cost_estimation-instance_method
+      def start_cost_estimation: (
+                                   resource_collection: {
+                                     cloud_formation: {
+                                       stack_names: Array[::String]?
+                                     }?,
+                                     tags: Array[
+                                       {
+                                         app_boundary_key: ::String,
+                                         tag_values: Array[::String]
+                                       },
+                                     ]?
+                                   },
+                                   ?client_token: ::String
+                                 ) -> _StartCostEstimationResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCostEstimationResponseSuccess
+
+      interface _UpdateEventSourcesConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEventSourcesConfigResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#update_event_sources_config-instance_method
+      def update_event_sources_config: (
+                                         ?event_sources: {
+                                           amazon_code_guru_profiler: {
+                                             status: ("ENABLED" | "DISABLED")?
+                                           }?
+                                         }
+                                       ) -> _UpdateEventSourcesConfigResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEventSourcesConfigResponseSuccess
+
+      interface _UpdateResourceCollectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResourceCollectionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#update_resource_collection-instance_method
+      def update_resource_collection: (
+                                        action: ("ADD" | "REMOVE"),
+                                        resource_collection: {
+                                          cloud_formation: {
+                                            stack_names: Array[::String]?
+                                          }?,
+                                          tags: Array[
+                                            {
+                                              app_boundary_key: ::String,
+                                              tag_values: Array[::String]
+                                            },
+                                          ]?
+                                        }
+                                      ) -> _UpdateResourceCollectionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResourceCollectionResponseSuccess
+
+      interface _UpdateServiceIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateServiceIntegrationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#update_service_integration-instance_method
+      def update_service_integration: (
+                                        service_integration: {
+                                          ops_center: {
+                                            opt_in_status: ("ENABLED" | "DISABLED")?
+                                          }?,
+                                          logs_anomaly_detection: {
+                                            opt_in_status: ("ENABLED" | "DISABLED")?
+                                          }?,
+                                          kms_server_side_encryption: {
+                                            kms_key_id: ::String?,
+                                            opt_in_status: ("ENABLED" | "DISABLED")?,
+                                            type: ("CUSTOMER_MANAGED_KEY" | "AWS_OWNED_KMS_KEY")?
+                                          }?
+                                        }
+                                      ) -> _UpdateServiceIntegrationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServiceIntegrationResponseSuccess
+    end
+  end
+end
+

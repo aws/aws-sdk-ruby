@@ -1,0 +1,1715 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Neptune
+  module Types
+
+    class AddRoleToDBClusterMessage
+      attr_accessor db_cluster_identifier: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor feature_name: ::String
+      SENSITIVE: []
+    end
+
+    class AddSourceIdentifierToSubscriptionMessage
+      attr_accessor subscription_name: ::String
+      attr_accessor source_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class AddSourceIdentifierToSubscriptionResult
+      attr_accessor event_subscription: Types::EventSubscription
+      SENSITIVE: []
+    end
+
+    class AddTagsToResourceMessage
+      attr_accessor resource_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ApplyPendingMaintenanceActionMessage
+      attr_accessor resource_identifier: ::String
+      attr_accessor apply_action: ::String
+      attr_accessor opt_in_type: ::String
+      SENSITIVE: []
+    end
+
+    class ApplyPendingMaintenanceActionResult
+      attr_accessor resource_pending_maintenance_actions: Types::ResourcePendingMaintenanceActions
+      SENSITIVE: []
+    end
+
+    class AuthorizationNotFoundFault < Aws::EmptyStructure
+    end
+
+    class AvailabilityZone
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CertificateNotFoundFault < Aws::EmptyStructure
+    end
+
+    class CharacterSet
+      attr_accessor character_set_name: ::String
+      attr_accessor character_set_description: ::String
+      SENSITIVE: []
+    end
+
+    class CloudwatchLogsExportConfiguration
+      attr_accessor enable_log_types: ::Array[::String]
+      attr_accessor disable_log_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ClusterPendingModifiedValues
+      attr_accessor pending_cloudwatch_logs_exports: Types::PendingCloudwatchLogsExports
+      attr_accessor db_cluster_identifier: ::String
+      attr_accessor iam_database_authentication_enabled: bool
+      attr_accessor engine_version: ::String
+      attr_accessor backup_retention_period: ::Integer
+      attr_accessor storage_type: ::String
+      attr_accessor allocated_storage: ::Integer
+      attr_accessor iops: ::Integer
+      SENSITIVE: []
+    end
+
+    class CopyDBClusterParameterGroupMessage
+      attr_accessor source_db_cluster_parameter_group_identifier: ::String
+      attr_accessor target_db_cluster_parameter_group_identifier: ::String
+      attr_accessor target_db_cluster_parameter_group_description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CopyDBClusterParameterGroupResult
+      attr_accessor db_cluster_parameter_group: Types::DBClusterParameterGroup
+      SENSITIVE: []
+    end
+
+    class CopyDBClusterSnapshotMessage
+      attr_accessor source_db_cluster_snapshot_identifier: ::String
+      attr_accessor target_db_cluster_snapshot_identifier: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor pre_signed_url: ::String
+      attr_accessor copy_tags: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor source_region: ::String
+      SENSITIVE: []
+    end
+
+    class CopyDBClusterSnapshotResult
+      attr_accessor db_cluster_snapshot: Types::DBClusterSnapshot
+      SENSITIVE: []
+    end
+
+    class CopyDBParameterGroupMessage
+      attr_accessor source_db_parameter_group_identifier: ::String
+      attr_accessor target_db_parameter_group_identifier: ::String
+      attr_accessor target_db_parameter_group_description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CopyDBParameterGroupResult
+      attr_accessor db_parameter_group: Types::DBParameterGroup
+      SENSITIVE: []
+    end
+
+    class CreateDBClusterEndpointMessage
+      attr_accessor db_cluster_identifier: ::String
+      attr_accessor db_cluster_endpoint_identifier: ::String
+      attr_accessor endpoint_type: ::String
+      attr_accessor static_members: ::Array[::String]
+      attr_accessor excluded_members: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateDBClusterEndpointOutput
+      attr_accessor db_cluster_endpoint_identifier: ::String
+      attr_accessor db_cluster_identifier: ::String
+      attr_accessor db_cluster_endpoint_resource_identifier: ::String
+      attr_accessor endpoint: ::String
+      attr_accessor status: ::String
+      attr_accessor endpoint_type: ::String
+      attr_accessor custom_endpoint_type: ::String
+      attr_accessor static_members: ::Array[::String]
+      attr_accessor excluded_members: ::Array[::String]
+      attr_accessor db_cluster_endpoint_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDBClusterMessage
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor backup_retention_period: ::Integer
+      attr_accessor character_set_name: ::String
+      attr_accessor copy_tags_to_snapshot: bool
+      attr_accessor database_name: ::String
+      attr_accessor db_cluster_identifier: ::String
+      attr_accessor db_cluster_parameter_group_name: ::String
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      attr_accessor db_subnet_group_name: ::String
+      attr_accessor engine: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor port: ::Integer
+      attr_accessor master_username: ::String
+      attr_accessor master_user_password: ::String
+      attr_accessor option_group_name: ::String
+      attr_accessor preferred_backup_window: ::String
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor replication_source_identifier: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor storage_encrypted: bool
+      attr_accessor kms_key_id: ::String
+      attr_accessor pre_signed_url: ::String
+      attr_accessor enable_iam_database_authentication: bool
+      attr_accessor enable_cloudwatch_logs_exports: ::Array[::String]
+      attr_accessor deletion_protection: bool
+      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration
+      attr_accessor global_cluster_identifier: ::String
+      attr_accessor storage_type: ::String
+      attr_accessor source_region: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDBClusterParameterGroupMessage
+      attr_accessor db_cluster_parameter_group_name: ::String
+      attr_accessor db_parameter_group_family: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateDBClusterParameterGroupResult
+      attr_accessor db_cluster_parameter_group: Types::DBClusterParameterGroup
+      SENSITIVE: []
+    end
+
+    class CreateDBClusterResult
+      attr_accessor db_cluster: Types::DBCluster
+      SENSITIVE: []
+    end
+
+    class CreateDBClusterSnapshotMessage
+      attr_accessor db_cluster_snapshot_identifier: ::String
+      attr_accessor db_cluster_identifier: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateDBClusterSnapshotResult
+      attr_accessor db_cluster_snapshot: Types::DBClusterSnapshot
+      SENSITIVE: []
+    end
+
+    class CreateDBInstanceMessage
+      attr_accessor db_name: ::String
+      attr_accessor db_instance_identifier: ::String
+      attr_accessor allocated_storage: ::Integer
+      attr_accessor db_instance_class: ::String
+      attr_accessor engine: ::String
+      attr_accessor master_username: ::String
+      attr_accessor master_user_password: ::String
+      attr_accessor db_security_groups: ::Array[::String]
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      attr_accessor availability_zone: ::String
+      attr_accessor db_subnet_group_name: ::String
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor db_parameter_group_name: ::String
+      attr_accessor backup_retention_period: ::Integer
+      attr_accessor preferred_backup_window: ::String
+      attr_accessor port: ::Integer
+      attr_accessor multi_az: bool
+      attr_accessor engine_version: ::String
+      attr_accessor auto_minor_version_upgrade: bool
+      attr_accessor license_model: ::String
+      attr_accessor iops: ::Integer
+      attr_accessor option_group_name: ::String
+      attr_accessor character_set_name: ::String
+      attr_accessor publicly_accessible: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor db_cluster_identifier: ::String
+      attr_accessor storage_type: ::String
+      attr_accessor tde_credential_arn: ::String
+      attr_accessor tde_credential_password: ::String
+      attr_accessor storage_encrypted: bool
+      attr_accessor kms_key_id: ::String
+      attr_accessor domain: ::String
+      attr_accessor copy_tags_to_snapshot: bool
+      attr_accessor monitoring_interval: ::Integer
+      attr_accessor monitoring_role_arn: ::String
+      attr_accessor domain_iam_role_name: ::String
+      attr_accessor promotion_tier: ::Integer
+      attr_accessor timezone: ::String
+      attr_accessor enable_iam_database_authentication: bool
+      attr_accessor enable_performance_insights: bool
+      attr_accessor performance_insights_kms_key_id: ::String
+      attr_accessor enable_cloudwatch_logs_exports: ::Array[::String]
+      attr_accessor deletion_protection: bool
+      SENSITIVE: [:tde_credential_password]
+    end
+
+    class CreateDBInstanceResult
+      attr_accessor db_instance: Types::DBInstance
+      SENSITIVE: []
+    end
+
+    class CreateDBParameterGroupMessage
+      attr_accessor db_parameter_group_name: ::String
+      attr_accessor db_parameter_group_family: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateDBParameterGroupResult
+      attr_accessor db_parameter_group: Types::DBParameterGroup
+      SENSITIVE: []
+    end
+
+    class CreateDBSubnetGroupMessage
+      attr_accessor db_subnet_group_name: ::String
+      attr_accessor db_subnet_group_description: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateDBSubnetGroupResult
+      attr_accessor db_subnet_group: Types::DBSubnetGroup
+      SENSITIVE: []
+    end
+
+    class CreateEventSubscriptionMessage
+      attr_accessor subscription_name: ::String
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor source_type: ::String
+      attr_accessor event_categories: ::Array[::String]
+      attr_accessor source_ids: ::Array[::String]
+      attr_accessor enabled: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateEventSubscriptionResult
+      attr_accessor event_subscription: Types::EventSubscription
+      SENSITIVE: []
+    end
+
+    class CreateGlobalClusterMessage
+      attr_accessor global_cluster_identifier: ::String
+      attr_accessor source_db_cluster_identifier: ::String
+      attr_accessor engine: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor deletion_protection: bool
+      attr_accessor storage_encrypted: bool
+      SENSITIVE: []
+    end
+
+    class CreateGlobalClusterResult
+      attr_accessor global_cluster: Types::GlobalCluster
+      SENSITIVE: []
+    end
+
+    class DBCluster
+      attr_accessor allocated_storage: ::Integer
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor backup_retention_period: ::Integer
+      attr_accessor character_set_name: ::String
+      attr_accessor database_name: ::String
+      attr_accessor db_cluster_identifier: ::String
+      attr_accessor db_cluster_parameter_group: ::String
+      attr_accessor db_subnet_group: ::String
+      attr_accessor status: ::String
+      attr_accessor percent_progress: ::String
+      attr_accessor earliest_restorable_time: ::Time
+      attr_accessor endpoint: ::String
+      attr_accessor reader_endpoint: ::String
+      attr_accessor multi_az: bool
+      attr_accessor engine: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor latest_restorable_time: ::Time
+      attr_accessor port: ::Integer
+      attr_accessor master_username: ::String
+      attr_accessor db_cluster_option_group_memberships: ::Array[Types::DBClusterOptionGroupStatus]
+      attr_accessor preferred_backup_window: ::String
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor replication_source_identifier: ::String
+      attr_accessor read_replica_identifiers: ::Array[::String]
+      attr_accessor db_cluster_members: ::Array[Types::DBClusterMember]
+      attr_accessor vpc_security_groups: ::Array[Types::VpcSecurityGroupMembership]
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor storage_encrypted: bool
+      attr_accessor kms_key_id: ::String
+      attr_accessor db_cluster_resource_id: ::String
+      attr_accessor db_cluster_arn: ::String
+      attr_accessor associated_roles: ::Array[Types::DBClusterRole]
+      attr_accessor iam_database_authentication_enabled: bool
+      attr_accessor clone_group_id: ::String
+      attr_accessor cluster_create_time: ::Time
+      attr_accessor copy_tags_to_snapshot: bool
+      attr_accessor enabled_cloudwatch_logs_exports: ::Array[::String]
+      attr_accessor pending_modified_values: Types::ClusterPendingModifiedValues
+      attr_accessor deletion_protection: bool
+      attr_accessor cross_account_clone: bool
+      attr_accessor automatic_restart_time: ::Time
+      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfigurationInfo
+      attr_accessor global_cluster_identifier: ::String
+      attr_accessor io_optimized_next_allowed_modification_time: ::Time
+      attr_accessor storage_type: ::String
+      SENSITIVE: []
+    end
+
+    class DBClusterAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class DBClusterEndpoint
+      attr_accessor db_cluster_endpoint_identifier: ::String
+      attr_accessor db_cluster_identifier: ::String
+      attr_accessor db_cluster_endpoint_resource_identifier: ::String
+      attr_accessor endpoint: ::String
+      attr_accessor status: ::String
+      attr_accessor endpoint_type: ::String
+      attr_accessor custom_endpoint_type: ::String
+      attr_accessor static_members: ::Array[::String]
+      attr_accessor excluded_members: ::Array[::String]
+      attr_accessor db_cluster_endpoint_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DBClusterEndpointAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class DBClusterEndpointMessage
+      attr_accessor marker: ::String
+      attr_accessor db_cluster_endpoints: ::Array[Types::DBClusterEndpoint]
+      SENSITIVE: []
+    end
+
+    class DBClusterEndpointNotFoundFault < Aws::EmptyStructure
+    end
+
+    class DBClusterEndpointQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class DBClusterMember
+      attr_accessor db_instance_identifier: ::String
+      attr_accessor is_cluster_writer: bool
+      attr_accessor db_cluster_parameter_group_status: ::String
+      attr_accessor promotion_tier: ::Integer
+      SENSITIVE: []
+    end
+
+    class DBClusterMessage
+      attr_accessor marker: ::String
+      attr_accessor db_clusters: ::Array[Types::DBCluster]
+      SENSITIVE: []
+    end
+
+    class DBClusterNotFoundFault < Aws::EmptyStructure
+    end
+
+    class DBClusterOptionGroupStatus
+      attr_accessor db_cluster_option_group_name: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class DBClusterParameterGroup
+      attr_accessor db_cluster_parameter_group_name: ::String
+      attr_accessor db_parameter_group_family: ::String
+      attr_accessor description: ::String
+      attr_accessor db_cluster_parameter_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DBClusterParameterGroupDetails
+      attr_accessor parameters: ::Array[Types::Parameter]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DBClusterParameterGroupNameMessage
+      attr_accessor db_cluster_parameter_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DBClusterParameterGroupNotFoundFault < Aws::EmptyStructure
+    end
+
+    class DBClusterParameterGroupsMessage
+      attr_accessor marker: ::String
+      attr_accessor db_cluster_parameter_groups: ::Array[Types::DBClusterParameterGroup]
+      SENSITIVE: []
+    end
+
+    class DBClusterQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class DBClusterRole
+      attr_accessor role_arn: ::String
+      attr_accessor status: ::String
+      attr_accessor feature_name: ::String
+      SENSITIVE: []
+    end
+
+    class DBClusterRoleAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class DBClusterRoleNotFoundFault < Aws::EmptyStructure
+    end
+
+    class DBClusterRoleQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class DBClusterSnapshot
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor db_cluster_snapshot_identifier: ::String
+      attr_accessor db_cluster_identifier: ::String
+      attr_accessor snapshot_create_time: ::Time
+      attr_accessor engine: ::String
+      attr_accessor allocated_storage: ::Integer
+      attr_accessor status: ::String
+      attr_accessor port: ::Integer
+      attr_accessor vpc_id: ::String
+      attr_accessor cluster_create_time: ::Time
+      attr_accessor master_username: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor license_model: ::String
+      attr_accessor snapshot_type: ::String
+      attr_accessor percent_progress: ::Integer
+      attr_accessor storage_encrypted: bool
+      attr_accessor kms_key_id: ::String
+      attr_accessor db_cluster_snapshot_arn: ::String
+      attr_accessor source_db_cluster_snapshot_arn: ::String
+      attr_accessor iam_database_authentication_enabled: bool
+      attr_accessor storage_type: ::String
+      SENSITIVE: []
+    end
+
+    class DBClusterSnapshotAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class DBClusterSnapshotAttribute
+      attr_accessor attribute_name: ::String
+      attr_accessor attribute_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DBClusterSnapshotAttributesResult
+      attr_accessor db_cluster_snapshot_identifier: ::String
+      attr_accessor db_cluster_snapshot_attributes: ::Array[Types::DBClusterSnapshotAttribute]
+      SENSITIVE: []
+    end
+
+    class DBClusterSnapshotMessage
+      attr_accessor marker: ::String
+      attr_accessor db_cluster_snapshots: ::Array[Types::DBClusterSnapshot]
+      SENSITIVE: []
+    end
+
+    class DBClusterSnapshotNotFoundFault < Aws::EmptyStructure
+    end
+
+    class DBEngineVersion
+      attr_accessor engine: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor db_parameter_group_family: ::String
+      attr_accessor db_engine_description: ::String
+      attr_accessor db_engine_version_description: ::String
+      attr_accessor default_character_set: Types::CharacterSet
+      attr_accessor supported_character_sets: ::Array[Types::CharacterSet]
+      attr_accessor valid_upgrade_target: ::Array[Types::UpgradeTarget]
+      attr_accessor supported_timezones: ::Array[Types::Timezone]
+      attr_accessor exportable_log_types: ::Array[::String]
+      attr_accessor supports_log_exports_to_cloudwatch_logs: bool
+      attr_accessor supports_read_replica: bool
+      attr_accessor supports_global_databases: bool
+      SENSITIVE: []
+    end
+
+    class DBEngineVersionMessage
+      attr_accessor marker: ::String
+      attr_accessor db_engine_versions: ::Array[Types::DBEngineVersion]
+      SENSITIVE: []
+    end
+
+    class DBInstance
+      attr_accessor db_instance_identifier: ::String
+      attr_accessor db_instance_class: ::String
+      attr_accessor engine: ::String
+      attr_accessor db_instance_status: ::String
+      attr_accessor master_username: ::String
+      attr_accessor db_name: ::String
+      attr_accessor endpoint: Types::Endpoint
+      attr_accessor allocated_storage: ::Integer
+      attr_accessor instance_create_time: ::Time
+      attr_accessor preferred_backup_window: ::String
+      attr_accessor backup_retention_period: ::Integer
+      attr_accessor db_security_groups: ::Array[Types::DBSecurityGroupMembership]
+      attr_accessor vpc_security_groups: ::Array[Types::VpcSecurityGroupMembership]
+      attr_accessor db_parameter_groups: ::Array[Types::DBParameterGroupStatus]
+      attr_accessor availability_zone: ::String
+      attr_accessor db_subnet_group: Types::DBSubnetGroup
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor pending_modified_values: Types::PendingModifiedValues
+      attr_accessor latest_restorable_time: ::Time
+      attr_accessor multi_az: bool
+      attr_accessor engine_version: ::String
+      attr_accessor auto_minor_version_upgrade: bool
+      attr_accessor read_replica_source_db_instance_identifier: ::String
+      attr_accessor read_replica_db_instance_identifiers: ::Array[::String]
+      attr_accessor read_replica_db_cluster_identifiers: ::Array[::String]
+      attr_accessor license_model: ::String
+      attr_accessor iops: ::Integer
+      attr_accessor option_group_memberships: ::Array[Types::OptionGroupMembership]
+      attr_accessor character_set_name: ::String
+      attr_accessor secondary_availability_zone: ::String
+      attr_accessor publicly_accessible: bool
+      attr_accessor status_infos: ::Array[Types::DBInstanceStatusInfo]
+      attr_accessor storage_type: ::String
+      attr_accessor tde_credential_arn: ::String
+      attr_accessor db_instance_port: ::Integer
+      attr_accessor db_cluster_identifier: ::String
+      attr_accessor storage_encrypted: bool
+      attr_accessor kms_key_id: ::String
+      attr_accessor dbi_resource_id: ::String
+      attr_accessor ca_certificate_identifier: ::String
+      attr_accessor domain_memberships: ::Array[Types::DomainMembership]
+      attr_accessor copy_tags_to_snapshot: bool
+      attr_accessor monitoring_interval: ::Integer
+      attr_accessor enhanced_monitoring_resource_arn: ::String
+      attr_accessor monitoring_role_arn: ::String
+      attr_accessor promotion_tier: ::Integer
+      attr_accessor db_instance_arn: ::String
+      attr_accessor timezone: ::String
+      attr_accessor iam_database_authentication_enabled: bool
+      attr_accessor performance_insights_enabled: bool
+      attr_accessor performance_insights_kms_key_id: ::String
+      attr_accessor enabled_cloudwatch_logs_exports: ::Array[::String]
+      attr_accessor deletion_protection: bool
+      SENSITIVE: []
+    end
+
+    class DBInstanceAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class DBInstanceMessage
+      attr_accessor marker: ::String
+      attr_accessor db_instances: ::Array[Types::DBInstance]
+      SENSITIVE: []
+    end
+
+    class DBInstanceNotFoundFault < Aws::EmptyStructure
+    end
+
+    class DBInstanceStatusInfo
+      attr_accessor status_type: ::String
+      attr_accessor normal: bool
+      attr_accessor status: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DBParameterGroup
+      attr_accessor db_parameter_group_name: ::String
+      attr_accessor db_parameter_group_family: ::String
+      attr_accessor description: ::String
+      attr_accessor db_parameter_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DBParameterGroupAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class DBParameterGroupDetails
+      attr_accessor parameters: ::Array[Types::Parameter]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DBParameterGroupNameMessage
+      attr_accessor db_parameter_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DBParameterGroupNotFoundFault < Aws::EmptyStructure
+    end
+
+    class DBParameterGroupQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class DBParameterGroupStatus
+      attr_accessor db_parameter_group_name: ::String
+      attr_accessor parameter_apply_status: ::String
+      SENSITIVE: []
+    end
+
+    class DBParameterGroupsMessage
+      attr_accessor marker: ::String
+      attr_accessor db_parameter_groups: ::Array[Types::DBParameterGroup]
+      SENSITIVE: []
+    end
+
+    class DBSecurityGroupMembership
+      attr_accessor db_security_group_name: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class DBSecurityGroupNotFoundFault < Aws::EmptyStructure
+    end
+
+    class DBSnapshotAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class DBSnapshotNotFoundFault < Aws::EmptyStructure
+    end
+
+    class DBSubnetGroup
+      attr_accessor db_subnet_group_name: ::String
+      attr_accessor db_subnet_group_description: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_group_status: ::String
+      attr_accessor subnets: ::Array[Types::Subnet]
+      attr_accessor db_subnet_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DBSubnetGroupAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class DBSubnetGroupDoesNotCoverEnoughAZs < Aws::EmptyStructure
+    end
+
+    class DBSubnetGroupMessage
+      attr_accessor marker: ::String
+      attr_accessor db_subnet_groups: ::Array[Types::DBSubnetGroup]
+      SENSITIVE: []
+    end
+
+    class DBSubnetGroupNotFoundFault < Aws::EmptyStructure
+    end
+
+    class DBSubnetGroupQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class DBSubnetQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class DBUpgradeDependencyFailureFault < Aws::EmptyStructure
+    end
+
+    class DeleteDBClusterEndpointMessage
+      attr_accessor db_cluster_endpoint_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDBClusterEndpointOutput
+      attr_accessor db_cluster_endpoint_identifier: ::String
+      attr_accessor db_cluster_identifier: ::String
+      attr_accessor db_cluster_endpoint_resource_identifier: ::String
+      attr_accessor endpoint: ::String
+      attr_accessor status: ::String
+      attr_accessor endpoint_type: ::String
+      attr_accessor custom_endpoint_type: ::String
+      attr_accessor static_members: ::Array[::String]
+      attr_accessor excluded_members: ::Array[::String]
+      attr_accessor db_cluster_endpoint_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDBClusterMessage
+      attr_accessor db_cluster_identifier: ::String
+      attr_accessor skip_final_snapshot: bool
+      attr_accessor final_db_snapshot_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDBClusterParameterGroupMessage
+      attr_accessor db_cluster_parameter_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDBClusterResult
+      attr_accessor db_cluster: Types::DBCluster
+      SENSITIVE: []
+    end
+
+    class DeleteDBClusterSnapshotMessage
+      attr_accessor db_cluster_snapshot_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDBClusterSnapshotResult
+      attr_accessor db_cluster_snapshot: Types::DBClusterSnapshot
+      SENSITIVE: []
+    end
+
+    class DeleteDBInstanceMessage
+      attr_accessor db_instance_identifier: ::String
+      attr_accessor skip_final_snapshot: bool
+      attr_accessor final_db_snapshot_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDBInstanceResult
+      attr_accessor db_instance: Types::DBInstance
+      SENSITIVE: []
+    end
+
+    class DeleteDBParameterGroupMessage
+      attr_accessor db_parameter_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDBSubnetGroupMessage
+      attr_accessor db_subnet_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEventSubscriptionMessage
+      attr_accessor subscription_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEventSubscriptionResult
+      attr_accessor event_subscription: Types::EventSubscription
+      SENSITIVE: []
+    end
+
+    class DeleteGlobalClusterMessage
+      attr_accessor global_cluster_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGlobalClusterResult
+      attr_accessor global_cluster: Types::GlobalCluster
+      SENSITIVE: []
+    end
+
+    class DescribeDBClusterEndpointsMessage
+      attr_accessor db_cluster_identifier: ::String
+      attr_accessor db_cluster_endpoint_identifier: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDBClusterParameterGroupsMessage
+      attr_accessor db_cluster_parameter_group_name: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDBClusterParametersMessage
+      attr_accessor db_cluster_parameter_group_name: ::String
+      attr_accessor source: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDBClusterSnapshotAttributesMessage
+      attr_accessor db_cluster_snapshot_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDBClusterSnapshotAttributesResult
+      attr_accessor db_cluster_snapshot_attributes_result: Types::DBClusterSnapshotAttributesResult
+      SENSITIVE: []
+    end
+
+    class DescribeDBClusterSnapshotsMessage
+      attr_accessor db_cluster_identifier: ::String
+      attr_accessor db_cluster_snapshot_identifier: ::String
+      attr_accessor snapshot_type: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor include_shared: bool
+      attr_accessor include_public: bool
+      SENSITIVE: []
+    end
+
+    class DescribeDBClustersMessage
+      attr_accessor db_cluster_identifier: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDBEngineVersionsMessage
+      attr_accessor engine: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor db_parameter_group_family: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor default_only: bool
+      attr_accessor list_supported_character_sets: bool
+      attr_accessor list_supported_timezones: bool
+      SENSITIVE: []
+    end
+
+    class DescribeDBInstancesMessage
+      attr_accessor db_instance_identifier: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDBParameterGroupsMessage
+      attr_accessor db_parameter_group_name: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDBParametersMessage
+      attr_accessor db_parameter_group_name: ::String
+      attr_accessor source: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDBSubnetGroupsMessage
+      attr_accessor db_subnet_group_name: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEngineDefaultClusterParametersMessage
+      attr_accessor db_parameter_group_family: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEngineDefaultClusterParametersResult
+      attr_accessor engine_defaults: Types::EngineDefaults
+      SENSITIVE: []
+    end
+
+    class DescribeEngineDefaultParametersMessage
+      attr_accessor db_parameter_group_family: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEngineDefaultParametersResult
+      attr_accessor engine_defaults: Types::EngineDefaults
+      SENSITIVE: []
+    end
+
+    class DescribeEventCategoriesMessage
+      attr_accessor source_type: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class DescribeEventSubscriptionsMessage
+      attr_accessor subscription_name: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEventsMessage
+      attr_accessor source_identifier: ::String
+      attr_accessor source_type: ("db-instance" | "db-parameter-group" | "db-security-group" | "db-snapshot" | "db-cluster" | "db-cluster-snapshot")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor duration: ::Integer
+      attr_accessor event_categories: ::Array[::String]
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeGlobalClustersMessage
+      attr_accessor global_cluster_identifier: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeOrderableDBInstanceOptionsMessage
+      attr_accessor engine: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor db_instance_class: ::String
+      attr_accessor license_model: ::String
+      attr_accessor vpc: bool
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePendingMaintenanceActionsMessage
+      attr_accessor resource_identifier: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor marker: ::String
+      attr_accessor max_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeValidDBInstanceModificationsMessage
+      attr_accessor db_instance_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeValidDBInstanceModificationsResult
+      attr_accessor valid_db_instance_modifications_message: Types::ValidDBInstanceModificationsMessage
+      SENSITIVE: []
+    end
+
+    class DomainMembership
+      attr_accessor domain: ::String
+      attr_accessor status: ::String
+      attr_accessor fqdn: ::String
+      attr_accessor iam_role_name: ::String
+      SENSITIVE: []
+    end
+
+    class DomainNotFoundFault < Aws::EmptyStructure
+    end
+
+    class DoubleRange
+      attr_accessor from: ::Float
+      attr_accessor to: ::Float
+      SENSITIVE: []
+    end
+
+    class Endpoint
+      attr_accessor address: ::String
+      attr_accessor port: ::Integer
+      attr_accessor hosted_zone_id: ::String
+      SENSITIVE: []
+    end
+
+    class EngineDefaults
+      attr_accessor db_parameter_group_family: ::String
+      attr_accessor marker: ::String
+      attr_accessor parameters: ::Array[Types::Parameter]
+      SENSITIVE: []
+    end
+
+    class Event
+      attr_accessor source_identifier: ::String
+      attr_accessor source_type: ("db-instance" | "db-parameter-group" | "db-security-group" | "db-snapshot" | "db-cluster" | "db-cluster-snapshot")
+      attr_accessor message: ::String
+      attr_accessor event_categories: ::Array[::String]
+      attr_accessor date: ::Time
+      attr_accessor source_arn: ::String
+      SENSITIVE: []
+    end
+
+    class EventCategoriesMap
+      attr_accessor source_type: ::String
+      attr_accessor event_categories: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class EventCategoriesMessage
+      attr_accessor event_categories_map_list: ::Array[Types::EventCategoriesMap]
+      SENSITIVE: []
+    end
+
+    class EventSubscription
+      attr_accessor customer_aws_id: ::String
+      attr_accessor cust_subscription_id: ::String
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor status: ::String
+      attr_accessor subscription_creation_time: ::String
+      attr_accessor source_type: ::String
+      attr_accessor source_ids_list: ::Array[::String]
+      attr_accessor event_categories_list: ::Array[::String]
+      attr_accessor enabled: bool
+      attr_accessor event_subscription_arn: ::String
+      SENSITIVE: []
+    end
+
+    class EventSubscriptionQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class EventSubscriptionsMessage
+      attr_accessor marker: ::String
+      attr_accessor event_subscriptions_list: ::Array[Types::EventSubscription]
+      SENSITIVE: []
+    end
+
+    class EventsMessage
+      attr_accessor marker: ::String
+      attr_accessor events: ::Array[Types::Event]
+      SENSITIVE: []
+    end
+
+    class FailoverDBClusterMessage
+      attr_accessor db_cluster_identifier: ::String
+      attr_accessor target_db_instance_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class FailoverDBClusterResult
+      attr_accessor db_cluster: Types::DBCluster
+      SENSITIVE: []
+    end
+
+    class FailoverGlobalClusterMessage
+      attr_accessor global_cluster_identifier: ::String
+      attr_accessor target_db_cluster_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class FailoverGlobalClusterResult
+      attr_accessor global_cluster: Types::GlobalCluster
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GlobalCluster
+      attr_accessor global_cluster_identifier: ::String
+      attr_accessor global_cluster_resource_id: ::String
+      attr_accessor global_cluster_arn: ::String
+      attr_accessor status: ::String
+      attr_accessor engine: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor storage_encrypted: bool
+      attr_accessor deletion_protection: bool
+      attr_accessor global_cluster_members: ::Array[Types::GlobalClusterMember]
+      SENSITIVE: []
+    end
+
+    class GlobalClusterAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class GlobalClusterMember
+      attr_accessor db_cluster_arn: ::String
+      attr_accessor readers: ::Array[::String]
+      attr_accessor is_writer: bool
+      SENSITIVE: []
+    end
+
+    class GlobalClusterNotFoundFault < Aws::EmptyStructure
+    end
+
+    class GlobalClusterQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class GlobalClustersMessage
+      attr_accessor marker: ::String
+      attr_accessor global_clusters: ::Array[Types::GlobalCluster]
+      SENSITIVE: []
+    end
+
+    class InstanceQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class InsufficientDBClusterCapacityFault < Aws::EmptyStructure
+    end
+
+    class InsufficientDBInstanceCapacityFault < Aws::EmptyStructure
+    end
+
+    class InsufficientStorageClusterCapacityFault < Aws::EmptyStructure
+    end
+
+    class InvalidDBClusterEndpointStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidDBClusterSnapshotStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidDBClusterStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidDBInstanceStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidDBParameterGroupStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidDBSecurityGroupStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidDBSnapshotStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidDBSubnetGroupStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidDBSubnetStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidEventSubscriptionStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidGlobalClusterStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidRestoreFault < Aws::EmptyStructure
+    end
+
+    class InvalidSubnet < Aws::EmptyStructure
+    end
+
+    class InvalidVPCNetworkStateFault < Aws::EmptyStructure
+    end
+
+    class KMSKeyNotAccessibleFault < Aws::EmptyStructure
+    end
+
+    class ListTagsForResourceMessage
+      attr_accessor resource_name: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ModifyDBClusterEndpointMessage
+      attr_accessor db_cluster_endpoint_identifier: ::String
+      attr_accessor endpoint_type: ::String
+      attr_accessor static_members: ::Array[::String]
+      attr_accessor excluded_members: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ModifyDBClusterEndpointOutput
+      attr_accessor db_cluster_endpoint_identifier: ::String
+      attr_accessor db_cluster_identifier: ::String
+      attr_accessor db_cluster_endpoint_resource_identifier: ::String
+      attr_accessor endpoint: ::String
+      attr_accessor status: ::String
+      attr_accessor endpoint_type: ::String
+      attr_accessor custom_endpoint_type: ::String
+      attr_accessor static_members: ::Array[::String]
+      attr_accessor excluded_members: ::Array[::String]
+      attr_accessor db_cluster_endpoint_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyDBClusterMessage
+      attr_accessor db_cluster_identifier: ::String
+      attr_accessor new_db_cluster_identifier: ::String
+      attr_accessor apply_immediately: bool
+      attr_accessor backup_retention_period: ::Integer
+      attr_accessor db_cluster_parameter_group_name: ::String
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      attr_accessor port: ::Integer
+      attr_accessor master_user_password: ::String
+      attr_accessor option_group_name: ::String
+      attr_accessor preferred_backup_window: ::String
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor enable_iam_database_authentication: bool
+      attr_accessor cloudwatch_logs_export_configuration: Types::CloudwatchLogsExportConfiguration
+      attr_accessor engine_version: ::String
+      attr_accessor allow_major_version_upgrade: bool
+      attr_accessor db_instance_parameter_group_name: ::String
+      attr_accessor deletion_protection: bool
+      attr_accessor copy_tags_to_snapshot: bool
+      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration
+      attr_accessor storage_type: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyDBClusterParameterGroupMessage
+      attr_accessor db_cluster_parameter_group_name: ::String
+      attr_accessor parameters: ::Array[Types::Parameter]
+      SENSITIVE: []
+    end
+
+    class ModifyDBClusterResult
+      attr_accessor db_cluster: Types::DBCluster
+      SENSITIVE: []
+    end
+
+    class ModifyDBClusterSnapshotAttributeMessage
+      attr_accessor db_cluster_snapshot_identifier: ::String
+      attr_accessor attribute_name: ::String
+      attr_accessor values_to_add: ::Array[::String]
+      attr_accessor values_to_remove: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ModifyDBClusterSnapshotAttributeResult
+      attr_accessor db_cluster_snapshot_attributes_result: Types::DBClusterSnapshotAttributesResult
+      SENSITIVE: []
+    end
+
+    class ModifyDBInstanceMessage
+      attr_accessor db_instance_identifier: ::String
+      attr_accessor allocated_storage: ::Integer
+      attr_accessor db_instance_class: ::String
+      attr_accessor db_subnet_group_name: ::String
+      attr_accessor db_security_groups: ::Array[::String]
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      attr_accessor apply_immediately: bool
+      attr_accessor master_user_password: ::String
+      attr_accessor db_parameter_group_name: ::String
+      attr_accessor backup_retention_period: ::Integer
+      attr_accessor preferred_backup_window: ::String
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor multi_az: bool
+      attr_accessor engine_version: ::String
+      attr_accessor allow_major_version_upgrade: bool
+      attr_accessor auto_minor_version_upgrade: bool
+      attr_accessor license_model: ::String
+      attr_accessor iops: ::Integer
+      attr_accessor option_group_name: ::String
+      attr_accessor new_db_instance_identifier: ::String
+      attr_accessor storage_type: ::String
+      attr_accessor tde_credential_arn: ::String
+      attr_accessor tde_credential_password: ::String
+      attr_accessor ca_certificate_identifier: ::String
+      attr_accessor domain: ::String
+      attr_accessor copy_tags_to_snapshot: bool
+      attr_accessor monitoring_interval: ::Integer
+      attr_accessor db_port_number: ::Integer
+      attr_accessor publicly_accessible: bool
+      attr_accessor monitoring_role_arn: ::String
+      attr_accessor domain_iam_role_name: ::String
+      attr_accessor promotion_tier: ::Integer
+      attr_accessor enable_iam_database_authentication: bool
+      attr_accessor enable_performance_insights: bool
+      attr_accessor performance_insights_kms_key_id: ::String
+      attr_accessor cloudwatch_logs_export_configuration: Types::CloudwatchLogsExportConfiguration
+      attr_accessor deletion_protection: bool
+      SENSITIVE: [:tde_credential_password]
+    end
+
+    class ModifyDBInstanceResult
+      attr_accessor db_instance: Types::DBInstance
+      SENSITIVE: []
+    end
+
+    class ModifyDBParameterGroupMessage
+      attr_accessor db_parameter_group_name: ::String
+      attr_accessor parameters: ::Array[Types::Parameter]
+      SENSITIVE: []
+    end
+
+    class ModifyDBSubnetGroupMessage
+      attr_accessor db_subnet_group_name: ::String
+      attr_accessor db_subnet_group_description: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ModifyDBSubnetGroupResult
+      attr_accessor db_subnet_group: Types::DBSubnetGroup
+      SENSITIVE: []
+    end
+
+    class ModifyEventSubscriptionMessage
+      attr_accessor subscription_name: ::String
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor source_type: ::String
+      attr_accessor event_categories: ::Array[::String]
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class ModifyEventSubscriptionResult
+      attr_accessor event_subscription: Types::EventSubscription
+      SENSITIVE: []
+    end
+
+    class ModifyGlobalClusterMessage
+      attr_accessor global_cluster_identifier: ::String
+      attr_accessor new_global_cluster_identifier: ::String
+      attr_accessor deletion_protection: bool
+      attr_accessor engine_version: ::String
+      attr_accessor allow_major_version_upgrade: bool
+      SENSITIVE: []
+    end
+
+    class ModifyGlobalClusterResult
+      attr_accessor global_cluster: Types::GlobalCluster
+      SENSITIVE: []
+    end
+
+    class OptionGroupMembership
+      attr_accessor option_group_name: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class OptionGroupNotFoundFault < Aws::EmptyStructure
+    end
+
+    class OrderableDBInstanceOption
+      attr_accessor engine: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor db_instance_class: ::String
+      attr_accessor license_model: ::String
+      attr_accessor availability_zones: ::Array[Types::AvailabilityZone]
+      attr_accessor multi_az_capable: bool
+      attr_accessor read_replica_capable: bool
+      attr_accessor vpc: bool
+      attr_accessor supports_storage_encryption: bool
+      attr_accessor storage_type: ::String
+      attr_accessor supports_iops: bool
+      attr_accessor supports_enhanced_monitoring: bool
+      attr_accessor supports_iam_database_authentication: bool
+      attr_accessor supports_performance_insights: bool
+      attr_accessor min_storage_size: ::Integer
+      attr_accessor max_storage_size: ::Integer
+      attr_accessor min_iops_per_db_instance: ::Integer
+      attr_accessor max_iops_per_db_instance: ::Integer
+      attr_accessor min_iops_per_gib: ::Float
+      attr_accessor max_iops_per_gib: ::Float
+      attr_accessor supports_global_databases: bool
+      SENSITIVE: []
+    end
+
+    class OrderableDBInstanceOptionsMessage
+      attr_accessor orderable_db_instance_options: ::Array[Types::OrderableDBInstanceOption]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class Parameter
+      attr_accessor parameter_name: ::String
+      attr_accessor parameter_value: ::String
+      attr_accessor description: ::String
+      attr_accessor source: ::String
+      attr_accessor apply_type: ::String
+      attr_accessor data_type: ::String
+      attr_accessor allowed_values: ::String
+      attr_accessor is_modifiable: bool
+      attr_accessor minimum_engine_version: ::String
+      attr_accessor apply_method: ("immediate" | "pending-reboot")
+      SENSITIVE: []
+    end
+
+    class PendingCloudwatchLogsExports
+      attr_accessor log_types_to_enable: ::Array[::String]
+      attr_accessor log_types_to_disable: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PendingMaintenanceAction
+      attr_accessor action: ::String
+      attr_accessor auto_applied_after_date: ::Time
+      attr_accessor forced_apply_date: ::Time
+      attr_accessor opt_in_status: ::String
+      attr_accessor current_apply_date: ::Time
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class PendingMaintenanceActionsMessage
+      attr_accessor pending_maintenance_actions: ::Array[Types::ResourcePendingMaintenanceActions]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class PendingModifiedValues
+      attr_accessor db_instance_class: ::String
+      attr_accessor allocated_storage: ::Integer
+      attr_accessor master_user_password: ::String
+      attr_accessor port: ::Integer
+      attr_accessor backup_retention_period: ::Integer
+      attr_accessor multi_az: bool
+      attr_accessor engine_version: ::String
+      attr_accessor license_model: ::String
+      attr_accessor iops: ::Integer
+      attr_accessor db_instance_identifier: ::String
+      attr_accessor storage_type: ::String
+      attr_accessor ca_certificate_identifier: ::String
+      attr_accessor db_subnet_group_name: ::String
+      attr_accessor pending_cloudwatch_logs_exports: Types::PendingCloudwatchLogsExports
+      SENSITIVE: []
+    end
+
+    class PromoteReadReplicaDBClusterMessage
+      attr_accessor db_cluster_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class PromoteReadReplicaDBClusterResult
+      attr_accessor db_cluster: Types::DBCluster
+      SENSITIVE: []
+    end
+
+    class ProvisionedIopsNotAvailableInAZFault < Aws::EmptyStructure
+    end
+
+    class Range
+      attr_accessor from: ::Integer
+      attr_accessor to: ::Integer
+      attr_accessor step: ::Integer
+      SENSITIVE: []
+    end
+
+    class RebootDBInstanceMessage
+      attr_accessor db_instance_identifier: ::String
+      attr_accessor force_failover: bool
+      SENSITIVE: []
+    end
+
+    class RebootDBInstanceResult
+      attr_accessor db_instance: Types::DBInstance
+      SENSITIVE: []
+    end
+
+    class RemoveFromGlobalClusterMessage
+      attr_accessor global_cluster_identifier: ::String
+      attr_accessor db_cluster_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveFromGlobalClusterResult
+      attr_accessor global_cluster: Types::GlobalCluster
+      SENSITIVE: []
+    end
+
+    class RemoveRoleFromDBClusterMessage
+      attr_accessor db_cluster_identifier: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor feature_name: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveSourceIdentifierFromSubscriptionMessage
+      attr_accessor subscription_name: ::String
+      attr_accessor source_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveSourceIdentifierFromSubscriptionResult
+      attr_accessor event_subscription: Types::EventSubscription
+      SENSITIVE: []
+    end
+
+    class RemoveTagsFromResourceMessage
+      attr_accessor resource_name: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResetDBClusterParameterGroupMessage
+      attr_accessor db_cluster_parameter_group_name: ::String
+      attr_accessor reset_all_parameters: bool
+      attr_accessor parameters: ::Array[Types::Parameter]
+      SENSITIVE: []
+    end
+
+    class ResetDBParameterGroupMessage
+      attr_accessor db_parameter_group_name: ::String
+      attr_accessor reset_all_parameters: bool
+      attr_accessor parameters: ::Array[Types::Parameter]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ResourcePendingMaintenanceActions
+      attr_accessor resource_identifier: ::String
+      attr_accessor pending_maintenance_action_details: ::Array[Types::PendingMaintenanceAction]
+      SENSITIVE: []
+    end
+
+    class RestoreDBClusterFromSnapshotMessage
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor db_cluster_identifier: ::String
+      attr_accessor snapshot_identifier: ::String
+      attr_accessor engine: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor port: ::Integer
+      attr_accessor db_subnet_group_name: ::String
+      attr_accessor database_name: ::String
+      attr_accessor option_group_name: ::String
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor kms_key_id: ::String
+      attr_accessor enable_iam_database_authentication: bool
+      attr_accessor enable_cloudwatch_logs_exports: ::Array[::String]
+      attr_accessor db_cluster_parameter_group_name: ::String
+      attr_accessor deletion_protection: bool
+      attr_accessor copy_tags_to_snapshot: bool
+      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration
+      attr_accessor storage_type: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreDBClusterFromSnapshotResult
+      attr_accessor db_cluster: Types::DBCluster
+      SENSITIVE: []
+    end
+
+    class RestoreDBClusterToPointInTimeMessage
+      attr_accessor db_cluster_identifier: ::String
+      attr_accessor restore_type: ::String
+      attr_accessor source_db_cluster_identifier: ::String
+      attr_accessor restore_to_time: ::Time
+      attr_accessor use_latest_restorable_time: bool
+      attr_accessor port: ::Integer
+      attr_accessor db_subnet_group_name: ::String
+      attr_accessor option_group_name: ::String
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor kms_key_id: ::String
+      attr_accessor enable_iam_database_authentication: bool
+      attr_accessor enable_cloudwatch_logs_exports: ::Array[::String]
+      attr_accessor db_cluster_parameter_group_name: ::String
+      attr_accessor deletion_protection: bool
+      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration
+      attr_accessor storage_type: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreDBClusterToPointInTimeResult
+      attr_accessor db_cluster: Types::DBCluster
+      SENSITIVE: []
+    end
+
+    class SNSInvalidTopicFault < Aws::EmptyStructure
+    end
+
+    class SNSNoAuthorizationFault < Aws::EmptyStructure
+    end
+
+    class SNSTopicArnNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ServerlessV2ScalingConfiguration
+      attr_accessor min_capacity: ::Float
+      attr_accessor max_capacity: ::Float
+      SENSITIVE: []
+    end
+
+    class ServerlessV2ScalingConfigurationInfo
+      attr_accessor min_capacity: ::Float
+      attr_accessor max_capacity: ::Float
+      SENSITIVE: []
+    end
+
+    class SharedSnapshotQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class SnapshotQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class SourceNotFoundFault < Aws::EmptyStructure
+    end
+
+    class StartDBClusterMessage
+      attr_accessor db_cluster_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class StartDBClusterResult
+      attr_accessor db_cluster: Types::DBCluster
+      SENSITIVE: []
+    end
+
+    class StopDBClusterMessage
+      attr_accessor db_cluster_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class StopDBClusterResult
+      attr_accessor db_cluster: Types::DBCluster
+      SENSITIVE: []
+    end
+
+    class StorageQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class StorageTypeNotSupportedFault < Aws::EmptyStructure
+    end
+
+    class Subnet
+      attr_accessor subnet_identifier: ::String
+      attr_accessor subnet_availability_zone: Types::AvailabilityZone
+      attr_accessor subnet_status: ::String
+      SENSITIVE: []
+    end
+
+    class SubnetAlreadyInUse < Aws::EmptyStructure
+    end
+
+    class SubscriptionAlreadyExistFault < Aws::EmptyStructure
+    end
+
+    class SubscriptionCategoryNotFoundFault < Aws::EmptyStructure
+    end
+
+    class SubscriptionNotFoundFault < Aws::EmptyStructure
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagListMessage
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class Timezone
+      attr_accessor timezone_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpgradeTarget
+      attr_accessor engine: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor description: ::String
+      attr_accessor auto_upgrade: bool
+      attr_accessor is_major_version_upgrade: bool
+      attr_accessor supports_global_databases: bool
+      SENSITIVE: []
+    end
+
+    class ValidDBInstanceModificationsMessage
+      attr_accessor storage: ::Array[Types::ValidStorageOptions]
+      SENSITIVE: []
+    end
+
+    class ValidStorageOptions
+      attr_accessor storage_type: ::String
+      attr_accessor storage_size: ::Array[Types::Range]
+      attr_accessor provisioned_iops: ::Array[Types::Range]
+      attr_accessor iops_to_storage_ratio: ::Array[Types::DoubleRange]
+      SENSITIVE: []
+    end
+
+    class VpcSecurityGroupMembership
+      attr_accessor vpc_security_group_id: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,0 +1,1318 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::DirectoryService
+  module Types
+
+    class AcceptSharedDirectoryRequest
+      attr_accessor shared_directory_id: ::String
+      SENSITIVE: []
+    end
+
+    class AcceptSharedDirectoryResult
+      attr_accessor shared_directory: Types::SharedDirectory
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class AddIpRoutesRequest
+      attr_accessor directory_id: ::String
+      attr_accessor ip_routes: ::Array[Types::IpRoute]
+      attr_accessor update_security_group_for_directory_controllers: bool
+      SENSITIVE: []
+    end
+
+    class AddIpRoutesResult < Aws::EmptyStructure
+    end
+
+    class AddRegionRequest
+      attr_accessor directory_id: ::String
+      attr_accessor region_name: ::String
+      attr_accessor vpc_settings: Types::DirectoryVpcSettings
+      SENSITIVE: []
+    end
+
+    class AddRegionResult < Aws::EmptyStructure
+    end
+
+    class AddTagsToResourceRequest
+      attr_accessor resource_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class AddTagsToResourceResult < Aws::EmptyStructure
+    end
+
+    class Attribute
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class AuthenticationFailedException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelSchemaExtensionRequest
+      attr_accessor directory_id: ::String
+      attr_accessor schema_extension_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelSchemaExtensionResult < Aws::EmptyStructure
+    end
+
+    class Certificate
+      attr_accessor certificate_id: ::String
+      attr_accessor state: ("Registering" | "Registered" | "RegisterFailed" | "Deregistering" | "Deregistered" | "DeregisterFailed")
+      attr_accessor state_reason: ::String
+      attr_accessor common_name: ::String
+      attr_accessor registered_date_time: ::Time
+      attr_accessor expiry_date_time: ::Time
+      attr_accessor type: ("ClientCertAuth" | "ClientLDAPS")
+      attr_accessor client_cert_auth_settings: Types::ClientCertAuthSettings
+      SENSITIVE: []
+    end
+
+    class CertificateAlreadyExistsException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class CertificateDoesNotExistException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class CertificateInUseException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class CertificateInfo
+      attr_accessor certificate_id: ::String
+      attr_accessor common_name: ::String
+      attr_accessor state: ("Registering" | "Registered" | "RegisterFailed" | "Deregistering" | "Deregistered" | "DeregisterFailed")
+      attr_accessor expiry_date_time: ::Time
+      attr_accessor type: ("ClientCertAuth" | "ClientLDAPS")
+      SENSITIVE: []
+    end
+
+    class CertificateLimitExceededException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class ClientAuthenticationSettingInfo
+      attr_accessor type: ("SmartCard" | "SmartCardOrPassword")
+      attr_accessor status: ("Enabled" | "Disabled")
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ClientCertAuthSettings
+      attr_accessor ocsp_url: ::String
+      SENSITIVE: []
+    end
+
+    class ClientException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class Computer
+      attr_accessor computer_id: ::String
+      attr_accessor computer_name: ::String
+      attr_accessor computer_attributes: ::Array[Types::Attribute]
+      SENSITIVE: []
+    end
+
+    class ConditionalForwarder
+      attr_accessor remote_domain_name: ::String
+      attr_accessor dns_ip_addrs: ::Array[::String]
+      attr_accessor replication_scope: ("Domain")
+      SENSITIVE: []
+    end
+
+    class ConnectDirectoryRequest
+      attr_accessor name: ::String
+      attr_accessor short_name: ::String
+      attr_accessor password: ::String
+      attr_accessor description: ::String
+      attr_accessor size: ("Small" | "Large")
+      attr_accessor connect_settings: Types::DirectoryConnectSettings
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:password]
+    end
+
+    class ConnectDirectoryResult
+      attr_accessor directory_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAliasRequest
+      attr_accessor directory_id: ::String
+      attr_accessor alias: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAliasResult
+      attr_accessor directory_id: ::String
+      attr_accessor alias: ::String
+      SENSITIVE: []
+    end
+
+    class CreateComputerRequest
+      attr_accessor directory_id: ::String
+      attr_accessor computer_name: ::String
+      attr_accessor password: ::String
+      attr_accessor organizational_unit_distinguished_name: ::String
+      attr_accessor computer_attributes: ::Array[Types::Attribute]
+      SENSITIVE: [:password]
+    end
+
+    class CreateComputerResult
+      attr_accessor computer: Types::Computer
+      SENSITIVE: []
+    end
+
+    class CreateConditionalForwarderRequest
+      attr_accessor directory_id: ::String
+      attr_accessor remote_domain_name: ::String
+      attr_accessor dns_ip_addrs: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateConditionalForwarderResult < Aws::EmptyStructure
+    end
+
+    class CreateDirectoryRequest
+      attr_accessor name: ::String
+      attr_accessor short_name: ::String
+      attr_accessor password: ::String
+      attr_accessor description: ::String
+      attr_accessor size: ("Small" | "Large")
+      attr_accessor vpc_settings: Types::DirectoryVpcSettings
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:password]
+    end
+
+    class CreateDirectoryResult
+      attr_accessor directory_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLogSubscriptionRequest
+      attr_accessor directory_id: ::String
+      attr_accessor log_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLogSubscriptionResult < Aws::EmptyStructure
+    end
+
+    class CreateMicrosoftADRequest
+      attr_accessor name: ::String
+      attr_accessor short_name: ::String
+      attr_accessor password: ::String
+      attr_accessor description: ::String
+      attr_accessor vpc_settings: Types::DirectoryVpcSettings
+      attr_accessor edition: ("Enterprise" | "Standard")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:password]
+    end
+
+    class CreateMicrosoftADResult
+      attr_accessor directory_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSnapshotRequest
+      attr_accessor directory_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSnapshotResult
+      attr_accessor snapshot_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTrustRequest
+      attr_accessor directory_id: ::String
+      attr_accessor remote_domain_name: ::String
+      attr_accessor trust_password: ::String
+      attr_accessor trust_direction: ("One-Way: Outgoing" | "One-Way: Incoming" | "Two-Way")
+      attr_accessor trust_type: ("Forest" | "External")
+      attr_accessor conditional_forwarder_ip_addrs: ::Array[::String]
+      attr_accessor selective_auth: ("Enabled" | "Disabled")
+      SENSITIVE: [:trust_password]
+    end
+
+    class CreateTrustResult
+      attr_accessor trust_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConditionalForwarderRequest
+      attr_accessor directory_id: ::String
+      attr_accessor remote_domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConditionalForwarderResult < Aws::EmptyStructure
+    end
+
+    class DeleteDirectoryRequest
+      attr_accessor directory_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDirectoryResult
+      attr_accessor directory_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLogSubscriptionRequest
+      attr_accessor directory_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLogSubscriptionResult < Aws::EmptyStructure
+    end
+
+    class DeleteSnapshotRequest
+      attr_accessor snapshot_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSnapshotResult
+      attr_accessor snapshot_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTrustRequest
+      attr_accessor trust_id: ::String
+      attr_accessor delete_associated_conditional_forwarder: bool
+      SENSITIVE: []
+    end
+
+    class DeleteTrustResult
+      attr_accessor trust_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterCertificateRequest
+      attr_accessor directory_id: ::String
+      attr_accessor certificate_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterCertificateResult < Aws::EmptyStructure
+    end
+
+    class DeregisterEventTopicRequest
+      attr_accessor directory_id: ::String
+      attr_accessor topic_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterEventTopicResult < Aws::EmptyStructure
+    end
+
+    class DescribeCertificateRequest
+      attr_accessor directory_id: ::String
+      attr_accessor certificate_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCertificateResult
+      attr_accessor certificate: Types::Certificate
+      SENSITIVE: []
+    end
+
+    class DescribeClientAuthenticationSettingsRequest
+      attr_accessor directory_id: ::String
+      attr_accessor type: ("SmartCard" | "SmartCardOrPassword")
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeClientAuthenticationSettingsResult
+      attr_accessor client_authentication_settings_info: ::Array[Types::ClientAuthenticationSettingInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeConditionalForwardersRequest
+      attr_accessor directory_id: ::String
+      attr_accessor remote_domain_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeConditionalForwardersResult
+      attr_accessor conditional_forwarders: ::Array[Types::ConditionalForwarder]
+      SENSITIVE: []
+    end
+
+    class DescribeDirectoriesRequest
+      attr_accessor directory_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeDirectoriesResult
+      attr_accessor directory_descriptions: ::Array[Types::DirectoryDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDomainControllersRequest
+      attr_accessor directory_id: ::String
+      attr_accessor domain_controller_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeDomainControllersResult
+      attr_accessor domain_controllers: ::Array[Types::DomainController]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEventTopicsRequest
+      attr_accessor directory_id: ::String
+      attr_accessor topic_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeEventTopicsResult
+      attr_accessor event_topics: ::Array[Types::EventTopic]
+      SENSITIVE: []
+    end
+
+    class DescribeLDAPSSettingsRequest
+      attr_accessor directory_id: ::String
+      attr_accessor type: ("Client")
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeLDAPSSettingsResult
+      attr_accessor ldaps_settings_info: ::Array[Types::LDAPSSettingInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRegionsRequest
+      attr_accessor directory_id: ::String
+      attr_accessor region_name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRegionsResult
+      attr_accessor regions_description: ::Array[Types::RegionDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSettingsRequest
+      attr_accessor directory_id: ::String
+      attr_accessor status: ("Requested" | "Updating" | "Updated" | "Failed" | "Default")
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSettingsResult
+      attr_accessor directory_id: ::String
+      attr_accessor setting_entries: ::Array[Types::SettingEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSharedDirectoriesRequest
+      attr_accessor owner_directory_id: ::String
+      attr_accessor shared_directory_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeSharedDirectoriesResult
+      attr_accessor shared_directories: ::Array[Types::SharedDirectory]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSnapshotsRequest
+      attr_accessor directory_id: ::String
+      attr_accessor snapshot_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeSnapshotsResult
+      attr_accessor snapshots: ::Array[Types::Snapshot]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTrustsRequest
+      attr_accessor directory_id: ::String
+      attr_accessor trust_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeTrustsResult
+      attr_accessor trusts: ::Array[Types::Trust]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUpdateDirectoryRequest
+      attr_accessor directory_id: ::String
+      attr_accessor update_type: ("OS")
+      attr_accessor region_name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUpdateDirectoryResult
+      attr_accessor update_activities: ::Array[Types::UpdateInfoEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DirectoryAlreadyInRegionException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class DirectoryAlreadySharedException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class DirectoryConnectSettings
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor customer_dns_ips: ::Array[::String]
+      attr_accessor customer_user_name: ::String
+      SENSITIVE: []
+    end
+
+    class DirectoryConnectSettingsDescription
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor customer_user_name: ::String
+      attr_accessor security_group_id: ::String
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor connect_ips: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DirectoryDescription
+      attr_accessor directory_id: ::String
+      attr_accessor name: ::String
+      attr_accessor short_name: ::String
+      attr_accessor size: ("Small" | "Large")
+      attr_accessor edition: ("Enterprise" | "Standard")
+      attr_accessor alias: ::String
+      attr_accessor access_url: ::String
+      attr_accessor description: ::String
+      attr_accessor dns_ip_addrs: ::Array[::String]
+      attr_accessor stage: ("Requested" | "Creating" | "Created" | "Active" | "Inoperable" | "Impaired" | "Restoring" | "RestoreFailed" | "Deleting" | "Deleted" | "Failed")
+      attr_accessor share_status: ("Shared" | "PendingAcceptance" | "Rejected" | "Rejecting" | "RejectFailed" | "Sharing" | "ShareFailed" | "Deleted" | "Deleting")
+      attr_accessor share_method: ("ORGANIZATIONS" | "HANDSHAKE")
+      attr_accessor share_notes: ::String
+      attr_accessor launch_time: ::Time
+      attr_accessor stage_last_updated_date_time: ::Time
+      attr_accessor type: ("SimpleAD" | "ADConnector" | "MicrosoftAD" | "SharedMicrosoftAD")
+      attr_accessor vpc_settings: Types::DirectoryVpcSettingsDescription
+      attr_accessor connect_settings: Types::DirectoryConnectSettingsDescription
+      attr_accessor radius_settings: Types::RadiusSettings
+      attr_accessor radius_status: ("Creating" | "Completed" | "Failed")
+      attr_accessor stage_reason: ::String
+      attr_accessor sso_enabled: bool
+      attr_accessor desired_number_of_domain_controllers: ::Integer
+      attr_accessor owner_directory_description: Types::OwnerDirectoryDescription
+      attr_accessor regions_info: Types::RegionsInfo
+      attr_accessor os_version: ("SERVER_2012" | "SERVER_2019")
+      SENSITIVE: [:share_notes]
+    end
+
+    class DirectoryDoesNotExistException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class DirectoryInDesiredStateException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class DirectoryLimitExceededException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class DirectoryLimits
+      attr_accessor cloud_only_directories_limit: ::Integer
+      attr_accessor cloud_only_directories_current_count: ::Integer
+      attr_accessor cloud_only_directories_limit_reached: bool
+      attr_accessor cloud_only_microsoft_ad_limit: ::Integer
+      attr_accessor cloud_only_microsoft_ad_current_count: ::Integer
+      attr_accessor cloud_only_microsoft_ad_limit_reached: bool
+      attr_accessor connected_directories_limit: ::Integer
+      attr_accessor connected_directories_current_count: ::Integer
+      attr_accessor connected_directories_limit_reached: bool
+      SENSITIVE: []
+    end
+
+    class DirectoryNotSharedException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class DirectoryUnavailableException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class DirectoryVpcSettings
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DirectoryVpcSettingsDescription
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_id: ::String
+      attr_accessor availability_zones: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DisableClientAuthenticationRequest
+      attr_accessor directory_id: ::String
+      attr_accessor type: ("SmartCard" | "SmartCardOrPassword")
+      SENSITIVE: []
+    end
+
+    class DisableClientAuthenticationResult < Aws::EmptyStructure
+    end
+
+    class DisableLDAPSRequest
+      attr_accessor directory_id: ::String
+      attr_accessor type: ("Client")
+      SENSITIVE: []
+    end
+
+    class DisableLDAPSResult < Aws::EmptyStructure
+    end
+
+    class DisableRadiusRequest
+      attr_accessor directory_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisableRadiusResult < Aws::EmptyStructure
+    end
+
+    class DisableSsoRequest
+      attr_accessor directory_id: ::String
+      attr_accessor user_name: ::String
+      attr_accessor password: ::String
+      SENSITIVE: [:password]
+    end
+
+    class DisableSsoResult < Aws::EmptyStructure
+    end
+
+    class DomainController
+      attr_accessor directory_id: ::String
+      attr_accessor domain_controller_id: ::String
+      attr_accessor dns_ip_addr: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_id: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor status: ("Creating" | "Active" | "Impaired" | "Restoring" | "Deleting" | "Deleted" | "Failed")
+      attr_accessor status_reason: ::String
+      attr_accessor launch_time: ::Time
+      attr_accessor status_last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DomainControllerLimitExceededException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class EnableClientAuthenticationRequest
+      attr_accessor directory_id: ::String
+      attr_accessor type: ("SmartCard" | "SmartCardOrPassword")
+      SENSITIVE: []
+    end
+
+    class EnableClientAuthenticationResult < Aws::EmptyStructure
+    end
+
+    class EnableLDAPSRequest
+      attr_accessor directory_id: ::String
+      attr_accessor type: ("Client")
+      SENSITIVE: []
+    end
+
+    class EnableLDAPSResult < Aws::EmptyStructure
+    end
+
+    class EnableRadiusRequest
+      attr_accessor directory_id: ::String
+      attr_accessor radius_settings: Types::RadiusSettings
+      SENSITIVE: []
+    end
+
+    class EnableRadiusResult < Aws::EmptyStructure
+    end
+
+    class EnableSsoRequest
+      attr_accessor directory_id: ::String
+      attr_accessor user_name: ::String
+      attr_accessor password: ::String
+      SENSITIVE: [:password]
+    end
+
+    class EnableSsoResult < Aws::EmptyStructure
+    end
+
+    class EntityAlreadyExistsException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class EntityDoesNotExistException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class EventTopic
+      attr_accessor directory_id: ::String
+      attr_accessor topic_name: ::String
+      attr_accessor topic_arn: ::String
+      attr_accessor created_date_time: ::Time
+      attr_accessor status: ("Registered" | "Topic not found" | "Failed" | "Deleted")
+      SENSITIVE: []
+    end
+
+    class GetDirectoryLimitsRequest < Aws::EmptyStructure
+    end
+
+    class GetDirectoryLimitsResult
+      attr_accessor directory_limits: Types::DirectoryLimits
+      SENSITIVE: []
+    end
+
+    class GetSnapshotLimitsRequest
+      attr_accessor directory_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSnapshotLimitsResult
+      attr_accessor snapshot_limits: Types::SnapshotLimits
+      SENSITIVE: []
+    end
+
+    class IncompatibleSettingsException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class InsufficientPermissionsException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidCertificateException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidClientAuthStatusException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidLDAPSStatusException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidNextTokenException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidPasswordException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidTargetException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class IpRoute
+      attr_accessor cidr_ip: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class IpRouteInfo
+      attr_accessor directory_id: ::String
+      attr_accessor cidr_ip: ::String
+      attr_accessor ip_route_status_msg: ("Adding" | "Added" | "Removing" | "Removed" | "AddFailed" | "RemoveFailed")
+      attr_accessor added_date_time: ::Time
+      attr_accessor ip_route_status_reason: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class IpRouteLimitExceededException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class LDAPSSettingInfo
+      attr_accessor ldaps_status: ("Enabling" | "Enabled" | "EnableFailed" | "Disabled")
+      attr_accessor ldaps_status_reason: ::String
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ListCertificatesRequest
+      attr_accessor directory_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCertificatesResult
+      attr_accessor next_token: ::String
+      attr_accessor certificates_info: ::Array[Types::CertificateInfo]
+      SENSITIVE: []
+    end
+
+    class ListIpRoutesRequest
+      attr_accessor directory_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListIpRoutesResult
+      attr_accessor ip_routes_info: ::Array[Types::IpRouteInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLogSubscriptionsRequest
+      attr_accessor directory_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListLogSubscriptionsResult
+      attr_accessor log_subscriptions: ::Array[Types::LogSubscription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSchemaExtensionsRequest
+      attr_accessor directory_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSchemaExtensionsResult
+      attr_accessor schema_extensions_info: ::Array[Types::SchemaExtensionInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResult
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LogSubscription
+      attr_accessor directory_id: ::String
+      attr_accessor log_group_name: ::String
+      attr_accessor subscription_created_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class NoAvailableCertificateException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class OSUpdateSettings
+      attr_accessor os_version: ("SERVER_2012" | "SERVER_2019")
+      SENSITIVE: []
+    end
+
+    class OrganizationsException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class OwnerDirectoryDescription
+      attr_accessor directory_id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor dns_ip_addrs: ::Array[::String]
+      attr_accessor vpc_settings: Types::DirectoryVpcSettingsDescription
+      attr_accessor radius_settings: Types::RadiusSettings
+      attr_accessor radius_status: ("Creating" | "Completed" | "Failed")
+      SENSITIVE: []
+    end
+
+    class RadiusSettings
+      attr_accessor radius_servers: ::Array[::String]
+      attr_accessor radius_port: ::Integer
+      attr_accessor radius_timeout: ::Integer
+      attr_accessor radius_retries: ::Integer
+      attr_accessor shared_secret: ::String
+      attr_accessor authentication_protocol: ("PAP" | "CHAP" | "MS-CHAPv1" | "MS-CHAPv2")
+      attr_accessor display_label: ::String
+      attr_accessor use_same_username: bool
+      SENSITIVE: [:shared_secret]
+    end
+
+    class RegionDescription
+      attr_accessor directory_id: ::String
+      attr_accessor region_name: ::String
+      attr_accessor region_type: ("Primary" | "Additional")
+      attr_accessor status: ("Requested" | "Creating" | "Created" | "Active" | "Inoperable" | "Impaired" | "Restoring" | "RestoreFailed" | "Deleting" | "Deleted" | "Failed")
+      attr_accessor vpc_settings: Types::DirectoryVpcSettings
+      attr_accessor desired_number_of_domain_controllers: ::Integer
+      attr_accessor launch_time: ::Time
+      attr_accessor status_last_updated_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class RegionLimitExceededException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegionsInfo
+      attr_accessor primary_region: ::String
+      attr_accessor additional_regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RegisterCertificateRequest
+      attr_accessor directory_id: ::String
+      attr_accessor certificate_data: ::String
+      attr_accessor type: ("ClientCertAuth" | "ClientLDAPS")
+      attr_accessor client_cert_auth_settings: Types::ClientCertAuthSettings
+      SENSITIVE: []
+    end
+
+    class RegisterCertificateResult
+      attr_accessor certificate_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterEventTopicRequest
+      attr_accessor directory_id: ::String
+      attr_accessor topic_name: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterEventTopicResult < Aws::EmptyStructure
+    end
+
+    class RejectSharedDirectoryRequest
+      attr_accessor shared_directory_id: ::String
+      SENSITIVE: []
+    end
+
+    class RejectSharedDirectoryResult
+      attr_accessor shared_directory_id: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveIpRoutesRequest
+      attr_accessor directory_id: ::String
+      attr_accessor cidr_ips: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RemoveIpRoutesResult < Aws::EmptyStructure
+    end
+
+    class RemoveRegionRequest
+      attr_accessor directory_id: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveRegionResult < Aws::EmptyStructure
+    end
+
+    class RemoveTagsFromResourceRequest
+      attr_accessor resource_id: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RemoveTagsFromResourceResult < Aws::EmptyStructure
+    end
+
+    class ResetUserPasswordRequest
+      attr_accessor directory_id: ::String
+      attr_accessor user_name: ::String
+      attr_accessor new_password: ::String
+      SENSITIVE: [:new_password]
+    end
+
+    class ResetUserPasswordResult < Aws::EmptyStructure
+    end
+
+    class RestoreFromSnapshotRequest
+      attr_accessor snapshot_id: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreFromSnapshotResult < Aws::EmptyStructure
+    end
+
+    class SchemaExtensionInfo
+      attr_accessor directory_id: ::String
+      attr_accessor schema_extension_id: ::String
+      attr_accessor description: ::String
+      attr_accessor schema_extension_status: ("Initializing" | "CreatingSnapshot" | "UpdatingSchema" | "Replicating" | "CancelInProgress" | "RollbackInProgress" | "Cancelled" | "Failed" | "Completed")
+      attr_accessor schema_extension_status_reason: ::String
+      attr_accessor start_date_time: ::Time
+      attr_accessor end_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ServiceException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class Setting
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SettingEntry
+      attr_accessor type: ::String
+      attr_accessor name: ::String
+      attr_accessor allowed_values: ::String
+      attr_accessor applied_value: ::String
+      attr_accessor requested_value: ::String
+      attr_accessor request_status: ("Requested" | "Updating" | "Updated" | "Failed" | "Default")
+      attr_accessor request_detailed_status: ::Hash[::String, ("Requested" | "Updating" | "Updated" | "Failed" | "Default")]
+      attr_accessor request_status_message: ::String
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor last_requested_date_time: ::Time
+      attr_accessor data_type: ::String
+      SENSITIVE: []
+    end
+
+    class ShareDirectoryRequest
+      attr_accessor directory_id: ::String
+      attr_accessor share_notes: ::String
+      attr_accessor share_target: Types::ShareTarget
+      attr_accessor share_method: ("ORGANIZATIONS" | "HANDSHAKE")
+      SENSITIVE: [:share_notes]
+    end
+
+    class ShareDirectoryResult
+      attr_accessor shared_directory_id: ::String
+      SENSITIVE: []
+    end
+
+    class ShareLimitExceededException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class ShareTarget
+      attr_accessor id: ::String
+      attr_accessor type: ("ACCOUNT")
+      SENSITIVE: []
+    end
+
+    class SharedDirectory
+      attr_accessor owner_account_id: ::String
+      attr_accessor owner_directory_id: ::String
+      attr_accessor share_method: ("ORGANIZATIONS" | "HANDSHAKE")
+      attr_accessor shared_account_id: ::String
+      attr_accessor shared_directory_id: ::String
+      attr_accessor share_status: ("Shared" | "PendingAcceptance" | "Rejected" | "Rejecting" | "RejectFailed" | "Sharing" | "ShareFailed" | "Deleted" | "Deleting")
+      attr_accessor share_notes: ::String
+      attr_accessor created_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: [:share_notes]
+    end
+
+    class Snapshot
+      attr_accessor directory_id: ::String
+      attr_accessor snapshot_id: ::String
+      attr_accessor type: ("Auto" | "Manual")
+      attr_accessor name: ::String
+      attr_accessor status: ("Creating" | "Completed" | "Failed")
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class SnapshotLimitExceededException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class SnapshotLimits
+      attr_accessor manual_snapshots_limit: ::Integer
+      attr_accessor manual_snapshots_current_count: ::Integer
+      attr_accessor manual_snapshots_limit_reached: bool
+      SENSITIVE: []
+    end
+
+    class StartSchemaExtensionRequest
+      attr_accessor directory_id: ::String
+      attr_accessor create_snapshot_before_schema_extension: bool
+      attr_accessor ldif_content: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class StartSchemaExtensionResult
+      attr_accessor schema_extension_id: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagLimitExceededException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class Trust
+      attr_accessor directory_id: ::String
+      attr_accessor trust_id: ::String
+      attr_accessor remote_domain_name: ::String
+      attr_accessor trust_type: ("Forest" | "External")
+      attr_accessor trust_direction: ("One-Way: Outgoing" | "One-Way: Incoming" | "Two-Way")
+      attr_accessor trust_state: ("Creating" | "Created" | "Verifying" | "VerifyFailed" | "Verified" | "Updating" | "UpdateFailed" | "Updated" | "Deleting" | "Deleted" | "Failed")
+      attr_accessor created_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor state_last_updated_date_time: ::Time
+      attr_accessor trust_state_reason: ::String
+      attr_accessor selective_auth: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class UnshareDirectoryRequest
+      attr_accessor directory_id: ::String
+      attr_accessor unshare_target: Types::UnshareTarget
+      SENSITIVE: []
+    end
+
+    class UnshareDirectoryResult
+      attr_accessor shared_directory_id: ::String
+      SENSITIVE: []
+    end
+
+    class UnshareTarget
+      attr_accessor id: ::String
+      attr_accessor type: ("ACCOUNT")
+      SENSITIVE: []
+    end
+
+    class UnsupportedOperationException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedSettingsException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConditionalForwarderRequest
+      attr_accessor directory_id: ::String
+      attr_accessor remote_domain_name: ::String
+      attr_accessor dns_ip_addrs: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateConditionalForwarderResult < Aws::EmptyStructure
+    end
+
+    class UpdateDirectorySetupRequest
+      attr_accessor directory_id: ::String
+      attr_accessor update_type: ("OS")
+      attr_accessor os_update_settings: Types::OSUpdateSettings
+      attr_accessor create_snapshot_before_update: bool
+      SENSITIVE: []
+    end
+
+    class UpdateDirectorySetupResult < Aws::EmptyStructure
+    end
+
+    class UpdateInfoEntry
+      attr_accessor region: ::String
+      attr_accessor status: ("Updated" | "Updating" | "UpdateFailed")
+      attr_accessor status_reason: ::String
+      attr_accessor initiated_by: ::String
+      attr_accessor new_value: Types::UpdateValue
+      attr_accessor previous_value: Types::UpdateValue
+      attr_accessor start_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateNumberOfDomainControllersRequest
+      attr_accessor directory_id: ::String
+      attr_accessor desired_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateNumberOfDomainControllersResult < Aws::EmptyStructure
+    end
+
+    class UpdateRadiusRequest
+      attr_accessor directory_id: ::String
+      attr_accessor radius_settings: Types::RadiusSettings
+      SENSITIVE: []
+    end
+
+    class UpdateRadiusResult < Aws::EmptyStructure
+    end
+
+    class UpdateSettingsRequest
+      attr_accessor directory_id: ::String
+      attr_accessor settings: ::Array[Types::Setting]
+      SENSITIVE: []
+    end
+
+    class UpdateSettingsResult
+      attr_accessor directory_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateTrustRequest
+      attr_accessor trust_id: ::String
+      attr_accessor selective_auth: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class UpdateTrustResult
+      attr_accessor request_id: ::String
+      attr_accessor trust_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateValue
+      attr_accessor os_update_settings: Types::OSUpdateSettings
+      SENSITIVE: []
+    end
+
+    class UserDoesNotExistException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class VerifyTrustRequest
+      attr_accessor trust_id: ::String
+      SENSITIVE: []
+    end
+
+    class VerifyTrustResult
+      attr_accessor trust_id: ::String
+      SENSITIVE: []
+    end
+  end
+end

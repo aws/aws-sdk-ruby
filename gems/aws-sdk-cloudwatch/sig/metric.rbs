@@ -1,0 +1,163 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudWatch
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Metric.html
+    class Metric
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Metric.html#initialize-instance_method
+      def initialize: (String namespace, String name, Hash[Symbol, untyped] options) -> void
+                    | (namespace: String, name: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Metric.html#namespace-instance_method
+      def namespace: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Metric.html#name-instance_method
+      def name: () -> String
+      alias metric_name name
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Metric.html#dimensions-instance_method
+      def dimensions: () -> ::Array[Types::Dimension]
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Metric.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Metric.html#data-instance_method
+      def data: () -> Types::Metric
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Metric.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Metric.html#get_statistics-instance_method
+      def get_statistics: (
+                            ?dimensions: Array[
+                              {
+                                name: ::String,
+                                value: ::String
+                              },
+                            ],
+                            start_time: ::Time,
+                            end_time: ::Time,
+                            period: ::Integer,
+                            ?statistics: Array[("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")],
+                            ?extended_statistics: Array[::String],
+                            ?unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
+                          ) -> Types::GetMetricStatisticsOutput
+                        | (?Hash[Symbol, untyped]) -> Types::GetMetricStatisticsOutput
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Metric.html#put_alarm-instance_method
+      def put_alarm: (
+                       alarm_name: ::String,
+                       ?alarm_description: ::String,
+                       ?actions_enabled: bool,
+                       ?ok_actions: Array[::String],
+                       ?alarm_actions: Array[::String],
+                       ?insufficient_data_actions: Array[::String],
+                       ?statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum"),
+                       ?extended_statistic: ::String,
+                       ?dimensions: Array[
+                         {
+                           name: ::String,
+                           value: ::String
+                         },
+                       ],
+                       ?period: ::Integer,
+                       ?unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None"),
+                       evaluation_periods: ::Integer,
+                       ?datapoints_to_alarm: ::Integer,
+                       ?threshold: ::Float,
+                       comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold" | "LessThanLowerOrGreaterThanUpperThreshold" | "LessThanLowerThreshold" | "GreaterThanUpperThreshold"),
+                       ?treat_missing_data: ::String,
+                       ?evaluate_low_sample_count_percentile: ::String,
+                       ?metrics: Array[
+                         {
+                           id: ::String,
+                           metric_stat: {
+                             metric: {
+                               namespace: ::String?,
+                               metric_name: ::String?,
+                               dimensions: Array[
+                                 {
+                                   name: ::String,
+                                   value: ::String
+                                 },
+                               ]?
+                             },
+                             period: ::Integer,
+                             stat: ::String,
+                             unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?
+                           }?,
+                           expression: ::String?,
+                           label: ::String?,
+                           return_data: bool?,
+                           period: ::Integer?,
+                           account_id: ::String?
+                         },
+                       ],
+                       ?tags: Array[
+                         {
+                           key: ::String,
+                           value: ::String
+                         },
+                       ],
+                       ?threshold_metric_id: ::String
+                     ) -> Alarm
+                   | (?Hash[Symbol, untyped]) -> Alarm
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Metric.html#put_data-instance_method
+      def put_data: (
+                      metric_data: Array[
+                        {
+                          metric_name: ::String,
+                          dimensions: Array[
+                            {
+                              name: ::String,
+                              value: ::String
+                            },
+                          ]?,
+                          timestamp: ::Time?,
+                          value: ::Float?,
+                          statistic_values: {
+                            sample_count: ::Float,
+                            sum: ::Float,
+                            minimum: ::Float,
+                            maximum: ::Float
+                          }?,
+                          values: Array[::Float]?,
+                          counts: Array[::Float]?,
+                          unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?,
+                          storage_resolution: ::Integer?
+                        },
+                      ]
+                    ) -> ::Aws::EmptyStructure
+                  | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Metric.html#alarms-instance_method
+      def alarms: (
+                    ?statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum"),
+                    ?extended_statistic: ::String,
+                    ?dimensions: Array[
+                      {
+                        name: ::String,
+                        value: ::String
+                      },
+                    ],
+                    ?period: ::Integer,
+                    ?unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
+                  ) -> Alarm::Collection
+                | (?Hash[Symbol, untyped]) -> Alarm::Collection
+
+      class Collection < ::Aws::Resources::Collection[Metric]
+      end
+    end
+  end
+end

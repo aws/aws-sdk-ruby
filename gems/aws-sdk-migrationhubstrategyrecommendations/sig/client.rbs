@@ -1,0 +1,426 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MigrationHubStrategyRecommendations
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubStrategyRecommendations/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _GetApplicationComponentDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetApplicationComponentDetailsResponse]
+        def application_component_detail: () -> Types::ApplicationComponentDetail
+        def associated_applications: () -> ::Array[Types::AssociatedApplication]
+        def associated_server_ids: () -> ::Array[::String]
+        def more_application_resource: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubStrategyRecommendations/Client.html#get_application_component_details-instance_method
+      def get_application_component_details: (
+                                               application_component_id: ::String
+                                             ) -> _GetApplicationComponentDetailsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApplicationComponentDetailsResponseSuccess
+
+      interface _GetApplicationComponentStrategiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetApplicationComponentStrategiesResponse]
+        def application_component_strategies: () -> ::Array[Types::ApplicationComponentStrategy]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubStrategyRecommendations/Client.html#get_application_component_strategies-instance_method
+      def get_application_component_strategies: (
+                                                  application_component_id: ::String
+                                                ) -> _GetApplicationComponentStrategiesResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApplicationComponentStrategiesResponseSuccess
+
+      interface _GetAssessmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAssessmentResponse]
+        def assessment_targets: () -> ::Array[Types::AssessmentTarget]
+        def data_collection_details: () -> Types::DataCollectionDetails
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubStrategyRecommendations/Client.html#get_assessment-instance_method
+      def get_assessment: (
+                            id: ::String
+                          ) -> _GetAssessmentResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAssessmentResponseSuccess
+
+      interface _GetImportFileTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetImportFileTaskResponse]
+        def completion_time: () -> ::Time
+        def id: () -> ::String
+        def import_name: () -> ::String
+        def input_s3_bucket: () -> ::String
+        def input_s3_key: () -> ::String
+        def number_of_records_failed: () -> ::Integer
+        def number_of_records_success: () -> ::Integer
+        def start_time: () -> ::Time
+        def status: () -> ("ImportInProgress" | "ImportFailed" | "ImportPartialSuccess" | "ImportSuccess" | "DeleteInProgress" | "DeleteFailed" | "DeletePartialSuccess" | "DeleteSuccess")
+        def status_report_s3_bucket: () -> ::String
+        def status_report_s3_key: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubStrategyRecommendations/Client.html#get_import_file_task-instance_method
+      def get_import_file_task: (
+                                  id: ::String
+                                ) -> _GetImportFileTaskResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetImportFileTaskResponseSuccess
+
+      interface _GetLatestAssessmentIdResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLatestAssessmentIdResponse]
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubStrategyRecommendations/Client.html#get_latest_assessment_id-instance_method
+      def get_latest_assessment_id: (
+                                    ) -> _GetLatestAssessmentIdResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLatestAssessmentIdResponseSuccess
+
+      interface _GetPortfolioPreferencesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPortfolioPreferencesResponse]
+        def application_mode: () -> ("ALL" | "KNOWN" | "UNKNOWN")
+        def application_preferences: () -> Types::ApplicationPreferences
+        def database_preferences: () -> Types::DatabasePreferences
+        def prioritize_business_goals: () -> Types::PrioritizeBusinessGoals
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubStrategyRecommendations/Client.html#get_portfolio_preferences-instance_method
+      def get_portfolio_preferences: (
+                                     ) -> _GetPortfolioPreferencesResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPortfolioPreferencesResponseSuccess
+
+      interface _GetPortfolioSummaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPortfolioSummaryResponse]
+        def assessment_summary: () -> Types::AssessmentSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubStrategyRecommendations/Client.html#get_portfolio_summary-instance_method
+      def get_portfolio_summary: (
+                                 ) -> _GetPortfolioSummaryResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPortfolioSummaryResponseSuccess
+
+      interface _GetRecommendationReportDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRecommendationReportDetailsResponse]
+        def id: () -> ::String
+        def recommendation_report_details: () -> Types::RecommendationReportDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubStrategyRecommendations/Client.html#get_recommendation_report_details-instance_method
+      def get_recommendation_report_details: (
+                                               id: ::String
+                                             ) -> _GetRecommendationReportDetailsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRecommendationReportDetailsResponseSuccess
+
+      interface _GetServerDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServerDetailsResponse]
+        def associated_applications: () -> ::Array[Types::AssociatedApplication]
+        def next_token: () -> ::String
+        def server_detail: () -> Types::ServerDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubStrategyRecommendations/Client.html#get_server_details-instance_method
+      def get_server_details: (
+                                ?max_results: ::Integer,
+                                ?next_token: ::String,
+                                server_id: ::String
+                              ) -> _GetServerDetailsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServerDetailsResponseSuccess
+
+      interface _GetServerStrategiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServerStrategiesResponse]
+        def server_strategies: () -> ::Array[Types::ServerStrategy]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubStrategyRecommendations/Client.html#get_server_strategies-instance_method
+      def get_server_strategies: (
+                                   server_id: ::String
+                                 ) -> _GetServerStrategiesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServerStrategiesResponseSuccess
+
+      interface _ListAnalyzableServersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAnalyzableServersResponse]
+        def analyzable_servers: () -> ::Array[Types::AnalyzableServerSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubStrategyRecommendations/Client.html#list_analyzable_servers-instance_method
+      def list_analyzable_servers: (
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String,
+                                     ?sort: ("ASC" | "DESC")
+                                   ) -> _ListAnalyzableServersResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAnalyzableServersResponseSuccess
+
+      interface _ListApplicationComponentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationComponentsResponse]
+        def application_component_infos: () -> ::Array[Types::ApplicationComponentDetail]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubStrategyRecommendations/Client.html#list_application_components-instance_method
+      def list_application_components: (
+                                         ?application_component_criteria: ("NOT_DEFINED" | "APP_NAME" | "SERVER_ID" | "APP_TYPE" | "STRATEGY" | "DESTINATION" | "ANALYSIS_STATUS" | "ERROR_CATEGORY"),
+                                         ?filter_value: ::String,
+                                         ?group_id_filter: Array[
+                                           {
+                                             name: ("ExternalId" | "ExternalSourceType")?,
+                                             value: ::String?
+                                           },
+                                         ],
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String,
+                                         ?sort: ("ASC" | "DESC")
+                                       ) -> _ListApplicationComponentsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationComponentsResponseSuccess
+
+      interface _ListCollectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCollectorsResponse]
+        def collectors: () -> ::Array[Types::Collector]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubStrategyRecommendations/Client.html#list_collectors-instance_method
+      def list_collectors: (
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListCollectorsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCollectorsResponseSuccess
+
+      interface _ListImportFileTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListImportFileTaskResponse]
+        def next_token: () -> ::String
+        def task_infos: () -> ::Array[Types::ImportFileTaskInformation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubStrategyRecommendations/Client.html#list_import_file_task-instance_method
+      def list_import_file_task: (
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListImportFileTaskResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListImportFileTaskResponseSuccess
+
+      interface _ListServersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServersResponse]
+        def next_token: () -> ::String
+        def server_infos: () -> ::Array[Types::ServerDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubStrategyRecommendations/Client.html#list_servers-instance_method
+      def list_servers: (
+                          ?filter_value: ::String,
+                          ?group_id_filter: Array[
+                            {
+                              name: ("ExternalId" | "ExternalSourceType")?,
+                              value: ::String?
+                            },
+                          ],
+                          ?max_results: ::Integer,
+                          ?next_token: ::String,
+                          ?server_criteria: ("NOT_DEFINED" | "OS_NAME" | "STRATEGY" | "DESTINATION" | "SERVER_ID" | "ANALYSIS_STATUS" | "ERROR_CATEGORY"),
+                          ?sort: ("ASC" | "DESC")
+                        ) -> _ListServersResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServersResponseSuccess
+
+      interface _PutPortfolioPreferencesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutPortfolioPreferencesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubStrategyRecommendations/Client.html#put_portfolio_preferences-instance_method
+      def put_portfolio_preferences: (
+                                       ?application_mode: ("ALL" | "KNOWN" | "UNKNOWN"),
+                                       ?application_preferences: {
+                                         management_preference: {
+                                           aws_managed_resources: {
+                                             target_destination: Array[("None specified" | "AWS Elastic BeanStalk" | "AWS Fargate")]
+                                           }?,
+                                           no_preference: {
+                                             target_destination: Array[("None specified" | "AWS Elastic BeanStalk" | "AWS Fargate" | "Amazon Elastic Cloud Compute (EC2)" | "Amazon Elastic Container Service (ECS)" | "Amazon Elastic Kubernetes Service (EKS)")]
+                                           }?,
+                                           self_manage_resources: {
+                                             target_destination: Array[("None specified" | "Amazon Elastic Cloud Compute (EC2)" | "Amazon Elastic Container Service (ECS)" | "Amazon Elastic Kubernetes Service (EKS)")]
+                                           }?
+                                         }?
+                                       },
+                                       ?database_preferences: {
+                                         database_management_preference: ("AWS-managed" | "Self-manage" | "No preference")?,
+                                         database_migration_preference: {
+                                           heterogeneous: {
+                                             target_database_engine: Array[("None specified" | "Amazon Aurora" | "AWS PostgreSQL" | "MySQL" | "Microsoft SQL Server" | "Oracle Database" | "MariaDB" | "SAP" | "Db2 LUW" | "MongoDB")]
+                                           }?,
+                                           homogeneous: {
+                                             target_database_engine: Array[("None specified")]?
+                                           }?,
+                                           no_preference: {
+                                             target_database_engine: Array[("None specified" | "Amazon Aurora" | "AWS PostgreSQL" | "MySQL" | "Microsoft SQL Server" | "Oracle Database" | "MariaDB" | "SAP" | "Db2 LUW" | "MongoDB")]
+                                           }?
+                                         }?
+                                       },
+                                       ?prioritize_business_goals: {
+                                         business_goals: {
+                                           license_cost_reduction: ::Integer?,
+                                           modernize_infrastructure_with_cloud_native_technologies: ::Integer?,
+                                           reduce_operational_overhead_with_managed_services: ::Integer?,
+                                           speed_of_migration: ::Integer?
+                                         }?
+                                       }
+                                     ) -> _PutPortfolioPreferencesResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutPortfolioPreferencesResponseSuccess
+
+      interface _StartAssessmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartAssessmentResponse]
+        def assessment_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubStrategyRecommendations/Client.html#start_assessment-instance_method
+      def start_assessment: (
+                              ?assessment_data_source_type: ("StrategyRecommendationsApplicationDataCollector" | "ManualImport" | "ApplicationDiscoveryService"),
+                              ?assessment_targets: Array[
+                                {
+                                  condition: ("EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS"),
+                                  name: ::String,
+                                  values: Array[::String]
+                                },
+                              ],
+                              ?s3bucket_for_analysis_data: ::String,
+                              ?s3bucket_for_report_data: ::String
+                            ) -> _StartAssessmentResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAssessmentResponseSuccess
+
+      interface _StartImportFileTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartImportFileTaskResponse]
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubStrategyRecommendations/Client.html#start_import_file_task-instance_method
+      def start_import_file_task: (
+                                    s3_bucket: ::String,
+                                    ?data_source_type: ("ApplicationDiscoveryService" | "MPA" | "Import" | "StrategyRecommendationsApplicationDataCollector"),
+                                    ?group_id: Array[
+                                      {
+                                        name: ("ExternalId" | "ExternalSourceType")?,
+                                        value: ::String?
+                                      },
+                                    ],
+                                    name: ::String,
+                                    ?s3bucket_for_report_data: ::String,
+                                    s3key: ::String
+                                  ) -> _StartImportFileTaskResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartImportFileTaskResponseSuccess
+
+      interface _StartRecommendationReportGenerationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartRecommendationReportGenerationResponse]
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubStrategyRecommendations/Client.html#start_recommendation_report_generation-instance_method
+      def start_recommendation_report_generation: (
+                                                    ?group_id_filter: Array[
+                                                      {
+                                                        name: ("ExternalId" | "ExternalSourceType")?,
+                                                        value: ::String?
+                                                      },
+                                                    ],
+                                                    ?output_format: ("Excel" | "Json")
+                                                  ) -> _StartRecommendationReportGenerationResponseSuccess
+                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartRecommendationReportGenerationResponseSuccess
+
+      interface _StopAssessmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopAssessmentResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubStrategyRecommendations/Client.html#stop_assessment-instance_method
+      def stop_assessment: (
+                             assessment_id: ::String
+                           ) -> _StopAssessmentResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopAssessmentResponseSuccess
+
+      interface _UpdateApplicationComponentConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateApplicationComponentConfigResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubStrategyRecommendations/Client.html#update_application_component_config-instance_method
+      def update_application_component_config: (
+                                                 ?app_type: ("DotNetFramework" | "Java" | "SQLServer" | "IIS" | "Oracle" | "Other" | "Tomcat" | "JBoss" | "Spring" | "Mongo DB" | "DB2" | "Maria DB" | "MySQL" | "Sybase" | "PostgreSQLServer" | "Cassandra" | "IBM WebSphere" | "Oracle WebLogic" | "Visual Basic" | "Unknown" | "DotnetCore" | "Dotnet"),
+                                                 application_component_id: ::String,
+                                                 ?configure_only: bool,
+                                                 ?inclusion_status: ("excludeFromAssessment" | "includeInAssessment"),
+                                                 ?secrets_manager_key: ::String,
+                                                 ?source_code_list: Array[
+                                                   {
+                                                     location: ::String?,
+                                                     project_name: ::String?,
+                                                     source_version: ::String?,
+                                                     version_control: ("GITHUB" | "GITHUB_ENTERPRISE" | "AZURE_DEVOPS_GIT")?
+                                                   },
+                                                 ],
+                                                 ?strategy_option: {
+                                                   is_preferred: bool?,
+                                                   strategy: ("Rehost" | "Retirement" | "Refactor" | "Replatform" | "Retain" | "Relocate" | "Repurchase")?,
+                                                   target_destination: ("None specified" | "AWS Elastic BeanStalk" | "AWS Fargate" | "Amazon Elastic Cloud Compute (EC2)" | "Amazon Elastic Container Service (ECS)" | "Amazon Elastic Kubernetes Service (EKS)" | "Aurora MySQL" | "Aurora PostgreSQL" | "Amazon Relational Database Service on MySQL" | "Amazon Relational Database Service on PostgreSQL" | "Amazon DocumentDB" | "Amazon DynamoDB" | "Amazon Relational Database Service" | "Babelfish for Aurora PostgreSQL")?,
+                                                   tool_name: ("App2Container" | "Porting Assistant For .NET" | "End of Support Migration" | "Windows Web Application Migration Assistant" | "Application Migration Service" | "Strategy Recommendation Support" | "In Place Operating System Upgrade" | "Schema Conversion Tool" | "Database Migration Service" | "Native SQL Server Backup/Restore")?
+                                                 }
+                                               ) -> _UpdateApplicationComponentConfigResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationComponentConfigResponseSuccess
+
+      interface _UpdateServerConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateServerConfigResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubStrategyRecommendations/Client.html#update_server_config-instance_method
+      def update_server_config: (
+                                  server_id: ::String,
+                                  ?strategy_option: {
+                                    is_preferred: bool?,
+                                    strategy: ("Rehost" | "Retirement" | "Refactor" | "Replatform" | "Retain" | "Relocate" | "Repurchase")?,
+                                    target_destination: ("None specified" | "AWS Elastic BeanStalk" | "AWS Fargate" | "Amazon Elastic Cloud Compute (EC2)" | "Amazon Elastic Container Service (ECS)" | "Amazon Elastic Kubernetes Service (EKS)" | "Aurora MySQL" | "Aurora PostgreSQL" | "Amazon Relational Database Service on MySQL" | "Amazon Relational Database Service on PostgreSQL" | "Amazon DocumentDB" | "Amazon DynamoDB" | "Amazon Relational Database Service" | "Babelfish for Aurora PostgreSQL")?,
+                                    tool_name: ("App2Container" | "Porting Assistant For .NET" | "End of Support Migration" | "Windows Web Application Migration Assistant" | "Application Migration Service" | "Strategy Recommendation Support" | "In Place Operating System Upgrade" | "Schema Conversion Tool" | "Database Migration Service" | "Native SQL Server Backup/Restore")?
+                                  }
+                                ) -> _UpdateServerConfigResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServerConfigResponseSuccess
+    end
+  end
+end
+

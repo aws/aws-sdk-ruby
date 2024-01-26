@@ -1,0 +1,225 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SavingsPlans
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SavingsPlans/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateSavingsPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSavingsPlanResponse]
+        def savings_plan_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SavingsPlans/Client.html#create_savings_plan-instance_method
+      def create_savings_plan: (
+                                 savings_plan_offering_id: ::String,
+                                 commitment: ::String,
+                                 ?upfront_payment_amount: ::String,
+                                 ?purchase_time: ::Time,
+                                 ?client_token: ::String,
+                                 ?tags: Hash[::String, ::String]
+                               ) -> _CreateSavingsPlanResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSavingsPlanResponseSuccess
+
+      interface _DeleteQueuedSavingsPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteQueuedSavingsPlanResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SavingsPlans/Client.html#delete_queued_savings_plan-instance_method
+      def delete_queued_savings_plan: (
+                                        savings_plan_id: ::String
+                                      ) -> _DeleteQueuedSavingsPlanResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteQueuedSavingsPlanResponseSuccess
+
+      interface _DescribeSavingsPlanRatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSavingsPlanRatesResponse]
+        def savings_plan_id: () -> ::String
+        def search_results: () -> ::Array[Types::SavingsPlanRate]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SavingsPlans/Client.html#describe_savings_plan_rates-instance_method
+      def describe_savings_plan_rates: (
+                                         savings_plan_id: ::String,
+                                         ?filters: Array[
+                                           {
+                                             name: ("region" | "instanceType" | "productDescription" | "tenancy" | "productType" | "serviceCode" | "usageType" | "operation")?,
+                                             values: Array[::String]?
+                                           },
+                                         ],
+                                         ?next_token: ::String,
+                                         ?max_results: ::Integer
+                                       ) -> _DescribeSavingsPlanRatesResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSavingsPlanRatesResponseSuccess
+
+      interface _DescribeSavingsPlansResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSavingsPlansResponse]
+        def savings_plans: () -> ::Array[Types::SavingsPlan]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SavingsPlans/Client.html#describe_savings_plans-instance_method
+      def describe_savings_plans: (
+                                    ?savings_plan_arns: Array[::String],
+                                    ?savings_plan_ids: Array[::String],
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer,
+                                    ?states: Array[("payment-pending" | "payment-failed" | "active" | "retired" | "queued" | "queued-deleted")],
+                                    ?filters: Array[
+                                      {
+                                        name: ("region" | "ec2-instance-family" | "commitment" | "upfront" | "term" | "savings-plan-type" | "payment-option" | "start" | "end")?,
+                                        values: Array[::String]?
+                                      },
+                                    ]
+                                  ) -> _DescribeSavingsPlansResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSavingsPlansResponseSuccess
+
+      interface _DescribeSavingsPlansOfferingRatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSavingsPlansOfferingRatesResponse]
+        def search_results: () -> ::Array[Types::SavingsPlanOfferingRate]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SavingsPlans/Client.html#describe_savings_plans_offering_rates-instance_method
+      def describe_savings_plans_offering_rates: (
+                                                   ?savings_plan_offering_ids: Array[::String],
+                                                   ?savings_plan_payment_options: Array[("All Upfront" | "Partial Upfront" | "No Upfront")],
+                                                   ?savings_plan_types: Array[("Compute" | "EC2Instance" | "SageMaker")],
+                                                   ?products: Array[("EC2" | "Fargate" | "Lambda" | "SageMaker")],
+                                                   ?service_codes: Array[("AmazonEC2" | "AmazonECS" | "AmazonEKS" | "AWSLambda" | "AmazonSageMaker")],
+                                                   ?usage_types: Array[::String],
+                                                   ?operations: Array[::String],
+                                                   ?filters: Array[
+                                                     {
+                                                       name: ("region" | "instanceFamily" | "instanceType" | "productDescription" | "tenancy" | "productId")?,
+                                                       values: Array[::String]?
+                                                     },
+                                                   ],
+                                                   ?next_token: ::String,
+                                                   ?max_results: ::Integer
+                                                 ) -> _DescribeSavingsPlansOfferingRatesResponseSuccess
+                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSavingsPlansOfferingRatesResponseSuccess
+
+      interface _DescribeSavingsPlansOfferingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSavingsPlansOfferingsResponse]
+        def search_results: () -> ::Array[Types::SavingsPlanOffering]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SavingsPlans/Client.html#describe_savings_plans_offerings-instance_method
+      def describe_savings_plans_offerings: (
+                                              ?offering_ids: Array[::String],
+                                              ?payment_options: Array[("All Upfront" | "Partial Upfront" | "No Upfront")],
+                                              ?product_type: ("EC2" | "Fargate" | "Lambda" | "SageMaker"),
+                                              ?plan_types: Array[("Compute" | "EC2Instance" | "SageMaker")],
+                                              ?durations: Array[::Integer],
+                                              ?currencies: Array[("CNY" | "USD")],
+                                              ?descriptions: Array[::String],
+                                              ?service_codes: Array[::String],
+                                              ?usage_types: Array[::String],
+                                              ?operations: Array[::String],
+                                              ?filters: Array[
+                                                {
+                                                  name: ("region" | "instanceFamily")?,
+                                                  values: Array[::String]?
+                                                },
+                                              ],
+                                              ?next_token: ::String,
+                                              ?max_results: ::Integer
+                                            ) -> _DescribeSavingsPlansOfferingsResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSavingsPlansOfferingsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SavingsPlans/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SavingsPlans/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SavingsPlans/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+    end
+  end
+end
+

@@ -1,0 +1,1216 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Transfer
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class As2ConnectorConfig
+      attr_accessor local_profile_id: ::String
+      attr_accessor partner_profile_id: ::String
+      attr_accessor message_subject: ::String
+      attr_accessor compression: ("ZLIB" | "DISABLED")
+      attr_accessor encryption_algorithm: ("AES128_CBC" | "AES192_CBC" | "AES256_CBC" | "NONE")
+      attr_accessor signing_algorithm: ("SHA256" | "SHA384" | "SHA512" | "SHA1" | "NONE")
+      attr_accessor mdn_signing_algorithm: ("SHA256" | "SHA384" | "SHA512" | "SHA1" | "NONE" | "DEFAULT")
+      attr_accessor mdn_response: ("SYNC" | "NONE")
+      attr_accessor basic_auth_secret_id: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CopyStepDetails
+      attr_accessor name: ::String
+      attr_accessor destination_file_location: Types::InputFileLocation
+      attr_accessor overwrite_existing: ("TRUE" | "FALSE")
+      attr_accessor source_file_location: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAccessRequest
+      attr_accessor home_directory: ::String
+      attr_accessor home_directory_type: ("PATH" | "LOGICAL")
+      attr_accessor home_directory_mappings: ::Array[Types::HomeDirectoryMapEntry]
+      attr_accessor policy: ::String
+      attr_accessor posix_profile: Types::PosixProfile
+      attr_accessor role: ::String
+      attr_accessor server_id: ::String
+      attr_accessor external_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAccessResponse
+      attr_accessor server_id: ::String
+      attr_accessor external_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAgreementRequest
+      attr_accessor description: ::String
+      attr_accessor server_id: ::String
+      attr_accessor local_profile_id: ::String
+      attr_accessor partner_profile_id: ::String
+      attr_accessor base_directory: ::String
+      attr_accessor access_role: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateAgreementResponse
+      attr_accessor agreement_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConnectorRequest
+      attr_accessor url: ::String
+      attr_accessor as_2_config: Types::As2ConnectorConfig
+      attr_accessor access_role: ::String
+      attr_accessor logging_role: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor sftp_config: Types::SftpConnectorConfig
+      SENSITIVE: []
+    end
+
+    class CreateConnectorResponse
+      attr_accessor connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProfileRequest
+      attr_accessor as_2_id: ::String
+      attr_accessor profile_type: ("LOCAL" | "PARTNER")
+      attr_accessor certificate_ids: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateProfileResponse
+      attr_accessor profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateServerRequest
+      attr_accessor certificate: ::String
+      attr_accessor domain: ("S3" | "EFS")
+      attr_accessor endpoint_details: Types::EndpointDetails
+      attr_accessor endpoint_type: ("PUBLIC" | "VPC" | "VPC_ENDPOINT")
+      attr_accessor host_key: ::String
+      attr_accessor identity_provider_details: Types::IdentityProviderDetails
+      attr_accessor identity_provider_type: ("SERVICE_MANAGED" | "API_GATEWAY" | "AWS_DIRECTORY_SERVICE" | "AWS_LAMBDA")
+      attr_accessor logging_role: ::String
+      attr_accessor post_authentication_login_banner: ::String
+      attr_accessor pre_authentication_login_banner: ::String
+      attr_accessor protocols: ::Array[("SFTP" | "FTP" | "FTPS" | "AS2")]
+      attr_accessor protocol_details: Types::ProtocolDetails
+      attr_accessor security_policy_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor workflow_details: Types::WorkflowDetails
+      attr_accessor structured_log_destinations: ::Array[::String]
+      attr_accessor s3_storage_options: Types::S3StorageOptions
+      SENSITIVE: [:host_key]
+    end
+
+    class CreateServerResponse
+      attr_accessor server_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateUserRequest
+      attr_accessor home_directory: ::String
+      attr_accessor home_directory_type: ("PATH" | "LOGICAL")
+      attr_accessor home_directory_mappings: ::Array[Types::HomeDirectoryMapEntry]
+      attr_accessor policy: ::String
+      attr_accessor posix_profile: Types::PosixProfile
+      attr_accessor role: ::String
+      attr_accessor server_id: ::String
+      attr_accessor ssh_public_key_body: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor user_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateUserResponse
+      attr_accessor server_id: ::String
+      attr_accessor user_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWorkflowRequest
+      attr_accessor description: ::String
+      attr_accessor steps: ::Array[Types::WorkflowStep]
+      attr_accessor on_exception_steps: ::Array[Types::WorkflowStep]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateWorkflowResponse
+      attr_accessor workflow_id: ::String
+      SENSITIVE: []
+    end
+
+    class CustomStepDetails
+      attr_accessor name: ::String
+      attr_accessor target: ::String
+      attr_accessor timeout_seconds: ::Integer
+      attr_accessor source_file_location: ::String
+      SENSITIVE: []
+    end
+
+    class DecryptStepDetails
+      attr_accessor name: ::String
+      attr_accessor type: ("PGP")
+      attr_accessor source_file_location: ::String
+      attr_accessor overwrite_existing: ("TRUE" | "FALSE")
+      attr_accessor destination_file_location: Types::InputFileLocation
+      SENSITIVE: []
+    end
+
+    class DeleteAccessRequest
+      attr_accessor server_id: ::String
+      attr_accessor external_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAgreementRequest
+      attr_accessor agreement_id: ::String
+      attr_accessor server_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCertificateRequest
+      attr_accessor certificate_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConnectorRequest
+      attr_accessor connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteHostKeyRequest
+      attr_accessor server_id: ::String
+      attr_accessor host_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProfileRequest
+      attr_accessor profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteServerRequest
+      attr_accessor server_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSshPublicKeyRequest
+      attr_accessor server_id: ::String
+      attr_accessor ssh_public_key_id: ::String
+      attr_accessor user_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStepDetails
+      attr_accessor name: ::String
+      attr_accessor source_file_location: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUserRequest
+      attr_accessor server_id: ::String
+      attr_accessor user_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkflowRequest
+      attr_accessor workflow_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAccessRequest
+      attr_accessor server_id: ::String
+      attr_accessor external_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAccessResponse
+      attr_accessor server_id: ::String
+      attr_accessor access: Types::DescribedAccess
+      SENSITIVE: []
+    end
+
+    class DescribeAgreementRequest
+      attr_accessor agreement_id: ::String
+      attr_accessor server_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAgreementResponse
+      attr_accessor agreement: Types::DescribedAgreement
+      SENSITIVE: []
+    end
+
+    class DescribeCertificateRequest
+      attr_accessor certificate_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCertificateResponse
+      attr_accessor certificate: Types::DescribedCertificate
+      SENSITIVE: []
+    end
+
+    class DescribeConnectorRequest
+      attr_accessor connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeConnectorResponse
+      attr_accessor connector: Types::DescribedConnector
+      SENSITIVE: []
+    end
+
+    class DescribeExecutionRequest
+      attr_accessor execution_id: ::String
+      attr_accessor workflow_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeExecutionResponse
+      attr_accessor workflow_id: ::String
+      attr_accessor execution: Types::DescribedExecution
+      SENSITIVE: []
+    end
+
+    class DescribeHostKeyRequest
+      attr_accessor server_id: ::String
+      attr_accessor host_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeHostKeyResponse
+      attr_accessor host_key: Types::DescribedHostKey
+      SENSITIVE: []
+    end
+
+    class DescribeProfileRequest
+      attr_accessor profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeProfileResponse
+      attr_accessor profile: Types::DescribedProfile
+      SENSITIVE: []
+    end
+
+    class DescribeSecurityPolicyRequest
+      attr_accessor security_policy_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSecurityPolicyResponse
+      attr_accessor security_policy: Types::DescribedSecurityPolicy
+      SENSITIVE: []
+    end
+
+    class DescribeServerRequest
+      attr_accessor server_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeServerResponse
+      attr_accessor server: Types::DescribedServer
+      SENSITIVE: []
+    end
+
+    class DescribeUserRequest
+      attr_accessor server_id: ::String
+      attr_accessor user_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUserResponse
+      attr_accessor server_id: ::String
+      attr_accessor user: Types::DescribedUser
+      SENSITIVE: []
+    end
+
+    class DescribeWorkflowRequest
+      attr_accessor workflow_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorkflowResponse
+      attr_accessor workflow: Types::DescribedWorkflow
+      SENSITIVE: []
+    end
+
+    class DescribedAccess
+      attr_accessor home_directory: ::String
+      attr_accessor home_directory_mappings: ::Array[Types::HomeDirectoryMapEntry]
+      attr_accessor home_directory_type: ("PATH" | "LOGICAL")
+      attr_accessor policy: ::String
+      attr_accessor posix_profile: Types::PosixProfile
+      attr_accessor role: ::String
+      attr_accessor external_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribedAgreement
+      attr_accessor arn: ::String
+      attr_accessor agreement_id: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor server_id: ::String
+      attr_accessor local_profile_id: ::String
+      attr_accessor partner_profile_id: ::String
+      attr_accessor base_directory: ::String
+      attr_accessor access_role: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class DescribedCertificate
+      attr_accessor arn: ::String
+      attr_accessor certificate_id: ::String
+      attr_accessor usage: ("SIGNING" | "ENCRYPTION")
+      attr_accessor status: ("ACTIVE" | "PENDING_ROTATION" | "INACTIVE")
+      attr_accessor certificate: ::String
+      attr_accessor certificate_chain: ::String
+      attr_accessor active_date: ::Time
+      attr_accessor inactive_date: ::Time
+      attr_accessor serial: ::String
+      attr_accessor not_before_date: ::Time
+      attr_accessor not_after_date: ::Time
+      attr_accessor type: ("CERTIFICATE" | "CERTIFICATE_WITH_PRIVATE_KEY")
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:certificate, :certificate_chain]
+    end
+
+    class DescribedConnector
+      attr_accessor arn: ::String
+      attr_accessor connector_id: ::String
+      attr_accessor url: ::String
+      attr_accessor as_2_config: Types::As2ConnectorConfig
+      attr_accessor access_role: ::String
+      attr_accessor logging_role: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor sftp_config: Types::SftpConnectorConfig
+      attr_accessor service_managed_egress_ip_addresses: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribedExecution
+      attr_accessor execution_id: ::String
+      attr_accessor initial_file_location: Types::FileLocation
+      attr_accessor service_metadata: Types::ServiceMetadata
+      attr_accessor execution_role: ::String
+      attr_accessor logging_configuration: Types::LoggingConfiguration
+      attr_accessor posix_profile: Types::PosixProfile
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETED" | "EXCEPTION" | "HANDLING_EXCEPTION")
+      attr_accessor results: Types::ExecutionResults
+      SENSITIVE: []
+    end
+
+    class DescribedHostKey
+      attr_accessor arn: ::String
+      attr_accessor host_key_id: ::String
+      attr_accessor host_key_fingerprint: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ::String
+      attr_accessor date_imported: ::Time
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class DescribedProfile
+      attr_accessor arn: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor profile_type: ("LOCAL" | "PARTNER")
+      attr_accessor as_2_id: ::String
+      attr_accessor certificate_ids: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class DescribedSecurityPolicy
+      attr_accessor fips: bool
+      attr_accessor security_policy_name: ::String
+      attr_accessor ssh_ciphers: ::Array[::String]
+      attr_accessor ssh_kexs: ::Array[::String]
+      attr_accessor ssh_macs: ::Array[::String]
+      attr_accessor tls_ciphers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribedServer
+      attr_accessor arn: ::String
+      attr_accessor certificate: ::String
+      attr_accessor protocol_details: Types::ProtocolDetails
+      attr_accessor domain: ("S3" | "EFS")
+      attr_accessor endpoint_details: Types::EndpointDetails
+      attr_accessor endpoint_type: ("PUBLIC" | "VPC" | "VPC_ENDPOINT")
+      attr_accessor host_key_fingerprint: ::String
+      attr_accessor identity_provider_details: Types::IdentityProviderDetails
+      attr_accessor identity_provider_type: ("SERVICE_MANAGED" | "API_GATEWAY" | "AWS_DIRECTORY_SERVICE" | "AWS_LAMBDA")
+      attr_accessor logging_role: ::String
+      attr_accessor post_authentication_login_banner: ::String
+      attr_accessor pre_authentication_login_banner: ::String
+      attr_accessor protocols: ::Array[("SFTP" | "FTP" | "FTPS" | "AS2")]
+      attr_accessor security_policy_name: ::String
+      attr_accessor server_id: ::String
+      attr_accessor state: ("OFFLINE" | "ONLINE" | "STARTING" | "STOPPING" | "START_FAILED" | "STOP_FAILED")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor user_count: ::Integer
+      attr_accessor workflow_details: Types::WorkflowDetails
+      attr_accessor structured_log_destinations: ::Array[::String]
+      attr_accessor s3_storage_options: Types::S3StorageOptions
+      attr_accessor as_2_service_managed_egress_ip_addresses: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribedUser
+      attr_accessor arn: ::String
+      attr_accessor home_directory: ::String
+      attr_accessor home_directory_mappings: ::Array[Types::HomeDirectoryMapEntry]
+      attr_accessor home_directory_type: ("PATH" | "LOGICAL")
+      attr_accessor policy: ::String
+      attr_accessor posix_profile: Types::PosixProfile
+      attr_accessor role: ::String
+      attr_accessor ssh_public_keys: ::Array[Types::SshPublicKey]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor user_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribedWorkflow
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor steps: ::Array[Types::WorkflowStep]
+      attr_accessor on_exception_steps: ::Array[Types::WorkflowStep]
+      attr_accessor workflow_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class EfsFileLocation
+      attr_accessor file_system_id: ::String
+      attr_accessor path: ::String
+      SENSITIVE: []
+    end
+
+    class EndpointDetails
+      attr_accessor address_allocation_ids: ::Array[::String]
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor vpc_endpoint_id: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ExecutionError
+      attr_accessor type: ("PERMISSION_DENIED" | "CUSTOM_STEP_FAILED" | "THROTTLED" | "ALREADY_EXISTS" | "NOT_FOUND" | "BAD_REQUEST" | "TIMEOUT" | "INTERNAL_SERVER_ERROR")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ExecutionResults
+      attr_accessor steps: ::Array[Types::ExecutionStepResult]
+      attr_accessor on_exception_steps: ::Array[Types::ExecutionStepResult]
+      SENSITIVE: []
+    end
+
+    class ExecutionStepResult
+      attr_accessor step_type: ("COPY" | "CUSTOM" | "TAG" | "DELETE" | "DECRYPT")
+      attr_accessor outputs: ::String
+      attr_accessor error: Types::ExecutionError
+      SENSITIVE: []
+    end
+
+    class FileLocation
+      attr_accessor s3_file_location: Types::S3FileLocation
+      attr_accessor efs_file_location: Types::EfsFileLocation
+      SENSITIVE: []
+    end
+
+    class HomeDirectoryMapEntry
+      attr_accessor entry: ::String
+      attr_accessor target: ::String
+      attr_accessor type: ("FILE" | "DIRECTORY")
+      SENSITIVE: []
+    end
+
+    class IdentityProviderDetails
+      attr_accessor url: ::String
+      attr_accessor invocation_role: ::String
+      attr_accessor directory_id: ::String
+      attr_accessor function: ::String
+      attr_accessor sftp_authentication_methods: ("PASSWORD" | "PUBLIC_KEY" | "PUBLIC_KEY_OR_PASSWORD" | "PUBLIC_KEY_AND_PASSWORD")
+      SENSITIVE: []
+    end
+
+    class ImportCertificateRequest
+      attr_accessor usage: ("SIGNING" | "ENCRYPTION")
+      attr_accessor certificate: ::String
+      attr_accessor certificate_chain: ::String
+      attr_accessor private_key: ::String
+      attr_accessor active_date: ::Time
+      attr_accessor inactive_date: ::Time
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:certificate, :certificate_chain, :private_key]
+    end
+
+    class ImportCertificateResponse
+      attr_accessor certificate_id: ::String
+      SENSITIVE: []
+    end
+
+    class ImportHostKeyRequest
+      attr_accessor server_id: ::String
+      attr_accessor host_key_body: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:host_key_body]
+    end
+
+    class ImportHostKeyResponse
+      attr_accessor server_id: ::String
+      attr_accessor host_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class ImportSshPublicKeyRequest
+      attr_accessor server_id: ::String
+      attr_accessor ssh_public_key_body: ::String
+      attr_accessor user_name: ::String
+      SENSITIVE: []
+    end
+
+    class ImportSshPublicKeyResponse
+      attr_accessor server_id: ::String
+      attr_accessor ssh_public_key_id: ::String
+      attr_accessor user_name: ::String
+      SENSITIVE: []
+    end
+
+    class InputFileLocation
+      attr_accessor s3_file_location: Types::S3InputFileLocation
+      attr_accessor efs_file_location: Types::EfsFileLocation
+      SENSITIVE: []
+    end
+
+    class InternalServiceError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidNextTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccessesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor server_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccessesResponse
+      attr_accessor next_token: ::String
+      attr_accessor server_id: ::String
+      attr_accessor accesses: ::Array[Types::ListedAccess]
+      SENSITIVE: []
+    end
+
+    class ListAgreementsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor server_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgreementsResponse
+      attr_accessor next_token: ::String
+      attr_accessor agreements: ::Array[Types::ListedAgreement]
+      SENSITIVE: []
+    end
+
+    class ListCertificatesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCertificatesResponse
+      attr_accessor next_token: ::String
+      attr_accessor certificates: ::Array[Types::ListedCertificate]
+      SENSITIVE: []
+    end
+
+    class ListConnectorsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConnectorsResponse
+      attr_accessor next_token: ::String
+      attr_accessor connectors: ::Array[Types::ListedConnector]
+      SENSITIVE: []
+    end
+
+    class ListExecutionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor workflow_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListExecutionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor workflow_id: ::String
+      attr_accessor executions: ::Array[Types::ListedExecution]
+      SENSITIVE: []
+    end
+
+    class ListHostKeysRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor server_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListHostKeysResponse
+      attr_accessor next_token: ::String
+      attr_accessor server_id: ::String
+      attr_accessor host_keys: ::Array[Types::ListedHostKey]
+      SENSITIVE: []
+    end
+
+    class ListProfilesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor profile_type: ("LOCAL" | "PARTNER")
+      SENSITIVE: []
+    end
+
+    class ListProfilesResponse
+      attr_accessor next_token: ::String
+      attr_accessor profiles: ::Array[Types::ListedProfile]
+      SENSITIVE: []
+    end
+
+    class ListSecurityPoliciesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSecurityPoliciesResponse
+      attr_accessor next_token: ::String
+      attr_accessor security_policy_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListServersRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServersResponse
+      attr_accessor next_token: ::String
+      attr_accessor servers: ::Array[Types::ListedServer]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListUsersRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor server_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListUsersResponse
+      attr_accessor next_token: ::String
+      attr_accessor server_id: ::String
+      attr_accessor users: ::Array[Types::ListedUser]
+      SENSITIVE: []
+    end
+
+    class ListWorkflowsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkflowsResponse
+      attr_accessor next_token: ::String
+      attr_accessor workflows: ::Array[Types::ListedWorkflow]
+      SENSITIVE: []
+    end
+
+    class ListedAccess
+      attr_accessor home_directory: ::String
+      attr_accessor home_directory_type: ("PATH" | "LOGICAL")
+      attr_accessor role: ::String
+      attr_accessor external_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListedAgreement
+      attr_accessor arn: ::String
+      attr_accessor agreement_id: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor server_id: ::String
+      attr_accessor local_profile_id: ::String
+      attr_accessor partner_profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListedCertificate
+      attr_accessor arn: ::String
+      attr_accessor certificate_id: ::String
+      attr_accessor usage: ("SIGNING" | "ENCRYPTION")
+      attr_accessor status: ("ACTIVE" | "PENDING_ROTATION" | "INACTIVE")
+      attr_accessor active_date: ::Time
+      attr_accessor inactive_date: ::Time
+      attr_accessor type: ("CERTIFICATE" | "CERTIFICATE_WITH_PRIVATE_KEY")
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class ListedConnector
+      attr_accessor arn: ::String
+      attr_accessor connector_id: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class ListedExecution
+      attr_accessor execution_id: ::String
+      attr_accessor initial_file_location: Types::FileLocation
+      attr_accessor service_metadata: Types::ServiceMetadata
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETED" | "EXCEPTION" | "HANDLING_EXCEPTION")
+      SENSITIVE: []
+    end
+
+    class ListedHostKey
+      attr_accessor arn: ::String
+      attr_accessor host_key_id: ::String
+      attr_accessor fingerprint: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ::String
+      attr_accessor date_imported: ::Time
+      SENSITIVE: []
+    end
+
+    class ListedProfile
+      attr_accessor arn: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor as_2_id: ::String
+      attr_accessor profile_type: ("LOCAL" | "PARTNER")
+      SENSITIVE: []
+    end
+
+    class ListedServer
+      attr_accessor arn: ::String
+      attr_accessor domain: ("S3" | "EFS")
+      attr_accessor identity_provider_type: ("SERVICE_MANAGED" | "API_GATEWAY" | "AWS_DIRECTORY_SERVICE" | "AWS_LAMBDA")
+      attr_accessor endpoint_type: ("PUBLIC" | "VPC" | "VPC_ENDPOINT")
+      attr_accessor logging_role: ::String
+      attr_accessor server_id: ::String
+      attr_accessor state: ("OFFLINE" | "ONLINE" | "STARTING" | "STOPPING" | "START_FAILED" | "STOP_FAILED")
+      attr_accessor user_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListedUser
+      attr_accessor arn: ::String
+      attr_accessor home_directory: ::String
+      attr_accessor home_directory_type: ("PATH" | "LOGICAL")
+      attr_accessor role: ::String
+      attr_accessor ssh_public_key_count: ::Integer
+      attr_accessor user_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListedWorkflow
+      attr_accessor workflow_id: ::String
+      attr_accessor description: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class LoggingConfiguration
+      attr_accessor logging_role: ::String
+      attr_accessor log_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class PosixProfile
+      attr_accessor uid: ::Integer
+      attr_accessor gid: ::Integer
+      attr_accessor secondary_gids: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class ProtocolDetails
+      attr_accessor passive_ip: ::String
+      attr_accessor tls_session_resumption_mode: ("DISABLED" | "ENABLED" | "ENFORCED")
+      attr_accessor set_stat_option: ("DEFAULT" | "ENABLE_NO_OP")
+      attr_accessor as_2_transports: ::Array[("HTTP")]
+      SENSITIVE: []
+    end
+
+    class ResourceExistsException
+      attr_accessor message: ::String
+      attr_accessor resource: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class S3FileLocation
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      attr_accessor version_id: ::String
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class S3InputFileLocation
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      SENSITIVE: []
+    end
+
+    class S3StorageOptions
+      attr_accessor directory_listing_optimization: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class S3Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SendWorkflowStepStateRequest
+      attr_accessor workflow_id: ::String
+      attr_accessor execution_id: ::String
+      attr_accessor token: ::String
+      attr_accessor status: ("SUCCESS" | "FAILURE")
+      SENSITIVE: []
+    end
+
+    class SendWorkflowStepStateResponse < Aws::EmptyStructure
+    end
+
+    class ServiceMetadata
+      attr_accessor user_details: Types::UserDetails
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SftpConnectorConfig
+      attr_accessor user_secret_id: ::String
+      attr_accessor trusted_host_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SshPublicKey
+      attr_accessor date_imported: ::Time
+      attr_accessor ssh_public_key_body: ::String
+      attr_accessor ssh_public_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartFileTransferRequest
+      attr_accessor connector_id: ::String
+      attr_accessor send_file_paths: ::Array[::String]
+      attr_accessor retrieve_file_paths: ::Array[::String]
+      attr_accessor local_directory_path: ::String
+      attr_accessor remote_directory_path: ::String
+      SENSITIVE: []
+    end
+
+    class StartFileTransferResponse
+      attr_accessor transfer_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartServerRequest
+      attr_accessor server_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopServerRequest
+      attr_accessor server_id: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagStepDetails
+      attr_accessor name: ::String
+      attr_accessor tags: ::Array[Types::S3Tag]
+      attr_accessor source_file_location: ::String
+      SENSITIVE: []
+    end
+
+    class TestConnectionRequest
+      attr_accessor connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class TestConnectionResponse
+      attr_accessor connector_id: ::String
+      attr_accessor status: ::String
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class TestIdentityProviderRequest
+      attr_accessor server_id: ::String
+      attr_accessor server_protocol: ("SFTP" | "FTP" | "FTPS" | "AS2")
+      attr_accessor source_ip: ::String
+      attr_accessor user_name: ::String
+      attr_accessor user_password: ::String
+      SENSITIVE: [:user_password]
+    end
+
+    class TestIdentityProviderResponse
+      attr_accessor response: ::String
+      attr_accessor status_code: ::Integer
+      attr_accessor message: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor retry_after_seconds: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateAccessRequest
+      attr_accessor home_directory: ::String
+      attr_accessor home_directory_type: ("PATH" | "LOGICAL")
+      attr_accessor home_directory_mappings: ::Array[Types::HomeDirectoryMapEntry]
+      attr_accessor policy: ::String
+      attr_accessor posix_profile: Types::PosixProfile
+      attr_accessor role: ::String
+      attr_accessor server_id: ::String
+      attr_accessor external_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAccessResponse
+      attr_accessor server_id: ::String
+      attr_accessor external_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAgreementRequest
+      attr_accessor agreement_id: ::String
+      attr_accessor server_id: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor local_profile_id: ::String
+      attr_accessor partner_profile_id: ::String
+      attr_accessor base_directory: ::String
+      attr_accessor access_role: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAgreementResponse
+      attr_accessor agreement_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCertificateRequest
+      attr_accessor certificate_id: ::String
+      attr_accessor active_date: ::Time
+      attr_accessor inactive_date: ::Time
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCertificateResponse
+      attr_accessor certificate_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConnectorRequest
+      attr_accessor connector_id: ::String
+      attr_accessor url: ::String
+      attr_accessor as_2_config: Types::As2ConnectorConfig
+      attr_accessor access_role: ::String
+      attr_accessor logging_role: ::String
+      attr_accessor sftp_config: Types::SftpConnectorConfig
+      SENSITIVE: []
+    end
+
+    class UpdateConnectorResponse
+      attr_accessor connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateHostKeyRequest
+      attr_accessor server_id: ::String
+      attr_accessor host_key_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateHostKeyResponse
+      attr_accessor server_id: ::String
+      attr_accessor host_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProfileRequest
+      attr_accessor profile_id: ::String
+      attr_accessor certificate_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateProfileResponse
+      attr_accessor profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateServerRequest
+      attr_accessor certificate: ::String
+      attr_accessor protocol_details: Types::ProtocolDetails
+      attr_accessor endpoint_details: Types::EndpointDetails
+      attr_accessor endpoint_type: ("PUBLIC" | "VPC" | "VPC_ENDPOINT")
+      attr_accessor host_key: ::String
+      attr_accessor identity_provider_details: Types::IdentityProviderDetails
+      attr_accessor logging_role: ::String
+      attr_accessor post_authentication_login_banner: ::String
+      attr_accessor pre_authentication_login_banner: ::String
+      attr_accessor protocols: ::Array[("SFTP" | "FTP" | "FTPS" | "AS2")]
+      attr_accessor security_policy_name: ::String
+      attr_accessor server_id: ::String
+      attr_accessor workflow_details: Types::WorkflowDetails
+      attr_accessor structured_log_destinations: ::Array[::String]
+      attr_accessor s3_storage_options: Types::S3StorageOptions
+      SENSITIVE: [:host_key]
+    end
+
+    class UpdateServerResponse
+      attr_accessor server_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateUserRequest
+      attr_accessor home_directory: ::String
+      attr_accessor home_directory_type: ("PATH" | "LOGICAL")
+      attr_accessor home_directory_mappings: ::Array[Types::HomeDirectoryMapEntry]
+      attr_accessor policy: ::String
+      attr_accessor posix_profile: Types::PosixProfile
+      attr_accessor role: ::String
+      attr_accessor server_id: ::String
+      attr_accessor user_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateUserResponse
+      attr_accessor server_id: ::String
+      attr_accessor user_name: ::String
+      SENSITIVE: []
+    end
+
+    class UserDetails
+      attr_accessor user_name: ::String
+      attr_accessor server_id: ::String
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowDetail
+      attr_accessor workflow_id: ::String
+      attr_accessor execution_role: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowDetails
+      attr_accessor on_upload: ::Array[Types::WorkflowDetail]
+      attr_accessor on_partial_upload: ::Array[Types::WorkflowDetail]
+      SENSITIVE: []
+    end
+
+    class WorkflowStep
+      attr_accessor type: ("COPY" | "CUSTOM" | "TAG" | "DELETE" | "DECRYPT")
+      attr_accessor copy_step_details: Types::CopyStepDetails
+      attr_accessor custom_step_details: Types::CustomStepDetails
+      attr_accessor delete_step_details: Types::DeleteStepDetails
+      attr_accessor tag_step_details: Types::TagStepDetails
+      attr_accessor decrypt_step_details: Types::DecryptStepDetails
+      SENSITIVE: []
+    end
+  end
+end

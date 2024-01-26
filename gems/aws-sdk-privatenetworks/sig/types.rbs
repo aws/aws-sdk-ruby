@@ -1,0 +1,505 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::PrivateNetworks
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AcknowledgeOrderReceiptRequest
+      attr_accessor order_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AcknowledgeOrderReceiptResponse
+      attr_accessor order: Types::Order
+      SENSITIVE: []
+    end
+
+    class ActivateDeviceIdentifierRequest
+      attr_accessor client_token: ::String
+      attr_accessor device_identifier_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ActivateDeviceIdentifierResponse
+      attr_accessor device_identifier: Types::DeviceIdentifier
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class ActivateNetworkSiteRequest
+      attr_accessor client_token: ::String
+      attr_accessor commitment_configuration: Types::CommitmentConfiguration
+      attr_accessor network_site_arn: ::String
+      attr_accessor shipping_address: Types::Address
+      SENSITIVE: []
+    end
+
+    class ActivateNetworkSiteResponse
+      attr_accessor network_site: Types::NetworkSite
+      SENSITIVE: []
+    end
+
+    class Address
+      attr_accessor city: ::String
+      attr_accessor company: ::String
+      attr_accessor country: ::String
+      attr_accessor email_address: ::String
+      attr_accessor name: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor postal_code: ::String
+      attr_accessor state_or_province: ::String
+      attr_accessor street1: ::String
+      attr_accessor street2: ::String
+      attr_accessor street3: ::String
+      SENSITIVE: [:city, :company, :country, :email_address, :name, :phone_number, :postal_code, :state_or_province, :street1, :street2, :street3]
+    end
+
+    class CommitmentConfiguration
+      attr_accessor automatic_renewal: bool
+      attr_accessor commitment_length: ("SIXTY_DAYS" | "ONE_YEAR" | "THREE_YEARS")
+      SENSITIVE: []
+    end
+
+    class CommitmentInformation
+      attr_accessor commitment_configuration: Types::CommitmentConfiguration
+      attr_accessor expires_on: ::Time
+      attr_accessor start_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ConfigureAccessPointRequest
+      attr_accessor access_point_arn: ::String
+      attr_accessor cpi_secret_key: ::String
+      attr_accessor cpi_user_id: ::String
+      attr_accessor cpi_user_password: ::String
+      attr_accessor cpi_username: ::String
+      attr_accessor position: Types::Position
+      SENSITIVE: [:cpi_secret_key, :cpi_user_id, :cpi_user_password, :cpi_username]
+    end
+
+    class ConfigureAccessPointResponse
+      attr_accessor access_point: Types::NetworkResource
+      SENSITIVE: []
+    end
+
+    class CreateNetworkRequest
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor network_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class CreateNetworkResponse
+      attr_accessor network: Types::Network
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class CreateNetworkSiteRequest
+      attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor network_arn: ::String
+      attr_accessor network_site_name: ::String
+      attr_accessor pending_plan: Types::SitePlan
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class CreateNetworkSiteResponse
+      attr_accessor network_site: Types::NetworkSite
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class DeactivateDeviceIdentifierRequest
+      attr_accessor client_token: ::String
+      attr_accessor device_identifier_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeactivateDeviceIdentifierResponse
+      attr_accessor device_identifier: Types::DeviceIdentifier
+      SENSITIVE: []
+    end
+
+    class DeleteNetworkRequest
+      attr_accessor client_token: ::String
+      attr_accessor network_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteNetworkResponse
+      attr_accessor network: Types::Network
+      SENSITIVE: []
+    end
+
+    class DeleteNetworkSiteRequest
+      attr_accessor client_token: ::String
+      attr_accessor network_site_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteNetworkSiteResponse
+      attr_accessor network_site: Types::NetworkSite
+      SENSITIVE: []
+    end
+
+    class DeviceIdentifier
+      attr_accessor created_at: ::Time
+      attr_accessor device_identifier_arn: ::String
+      attr_accessor iccid: ::String
+      attr_accessor imsi: ::String
+      attr_accessor network_arn: ::String
+      attr_accessor order_arn: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor traffic_group_arn: ::String
+      attr_accessor vendor: ::String
+      SENSITIVE: [:imsi]
+    end
+
+    class GetDeviceIdentifierRequest
+      attr_accessor device_identifier_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeviceIdentifierResponse
+      attr_accessor device_identifier: Types::DeviceIdentifier
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class GetNetworkRequest
+      attr_accessor network_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetNetworkResourceRequest
+      attr_accessor network_resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetNetworkResourceResponse
+      attr_accessor network_resource: Types::NetworkResource
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class GetNetworkResponse
+      attr_accessor network: Types::Network
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class GetNetworkSiteRequest
+      attr_accessor network_site_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetNetworkSiteResponse
+      attr_accessor network_site: Types::NetworkSite
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class GetOrderRequest
+      attr_accessor order_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetOrderResponse
+      attr_accessor order: Types::Order
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeviceIdentifiersRequest
+      attr_accessor filters: ::Hash[("STATUS" | "ORDER" | "TRAFFIC_GROUP"), ::Array[::String]]
+      attr_accessor max_results: ::Integer
+      attr_accessor network_arn: ::String
+      attr_accessor start_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeviceIdentifiersResponse
+      attr_accessor device_identifiers: ::Array[Types::DeviceIdentifier]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkResourcesRequest
+      attr_accessor filters: ::Hash[("ORDER" | "STATUS"), ::Array[::String]]
+      attr_accessor max_results: ::Integer
+      attr_accessor network_arn: ::String
+      attr_accessor start_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkResourcesResponse
+      attr_accessor network_resources: ::Array[Types::NetworkResource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkSitesRequest
+      attr_accessor filters: ::Hash[("STATUS"), ::Array[::String]]
+      attr_accessor max_results: ::Integer
+      attr_accessor network_arn: ::String
+      attr_accessor start_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkSitesResponse
+      attr_accessor network_sites: ::Array[Types::NetworkSite]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworksRequest
+      attr_accessor filters: ::Hash[("STATUS"), ::Array[::String]]
+      attr_accessor max_results: ::Integer
+      attr_accessor start_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworksResponse
+      attr_accessor networks: ::Array[Types::Network]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOrdersRequest
+      attr_accessor filters: ::Hash[("STATUS" | "NETWORK_SITE"), ::Array[::String]]
+      attr_accessor max_results: ::Integer
+      attr_accessor network_arn: ::String
+      attr_accessor start_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOrdersResponse
+      attr_accessor next_token: ::String
+      attr_accessor orders: ::Array[Types::Order]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class NameValuePair
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class Network
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor network_arn: ::String
+      attr_accessor network_name: ::String
+      attr_accessor status: ("CREATED" | "PROVISIONING" | "AVAILABLE" | "DEPROVISIONING" | "DELETED")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkResource
+      attr_accessor attributes: ::Array[Types::NameValuePair]
+      attr_accessor commitment_information: Types::CommitmentInformation
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor health: ("INITIAL" | "HEALTHY" | "UNHEALTHY")
+      attr_accessor model: ::String
+      attr_accessor network_arn: ::String
+      attr_accessor network_resource_arn: ::String
+      attr_accessor network_site_arn: ::String
+      attr_accessor order_arn: ::String
+      attr_accessor position: Types::Position
+      attr_accessor return_information: Types::ReturnInformation
+      attr_accessor serial_number: ::String
+      attr_accessor status: ("PENDING" | "SHIPPED" | "PROVISIONING" | "PROVISIONED" | "AVAILABLE" | "DELETING" | "PENDING_RETURN" | "DELETED" | "CREATING_SHIPPING_LABEL")
+      attr_accessor status_reason: ::String
+      attr_accessor type: ("RADIO_UNIT")
+      attr_accessor vendor: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkResourceDefinition
+      attr_accessor count: ::Integer
+      attr_accessor options: ::Array[Types::NameValuePair]
+      attr_accessor type: ("RADIO_UNIT" | "DEVICE_IDENTIFIER")
+      SENSITIVE: []
+    end
+
+    class NetworkSite
+      attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor current_plan: Types::SitePlan
+      attr_accessor description: ::String
+      attr_accessor network_arn: ::String
+      attr_accessor network_site_arn: ::String
+      attr_accessor network_site_name: ::String
+      attr_accessor pending_plan: Types::SitePlan
+      attr_accessor status: ("CREATED" | "PROVISIONING" | "AVAILABLE" | "DEPROVISIONING" | "DELETED")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class Order
+      attr_accessor acknowledgment_status: ("ACKNOWLEDGING" | "ACKNOWLEDGED" | "UNACKNOWLEDGED")
+      attr_accessor created_at: ::Time
+      attr_accessor network_arn: ::String
+      attr_accessor network_site_arn: ::String
+      attr_accessor order_arn: ::String
+      attr_accessor ordered_resources: ::Array[Types::OrderedResourceDefinition]
+      attr_accessor shipping_address: Types::Address
+      attr_accessor tracking_information: ::Array[Types::TrackingInformation]
+      SENSITIVE: []
+    end
+
+    class OrderedResourceDefinition
+      attr_accessor commitment_configuration: Types::CommitmentConfiguration
+      attr_accessor count: ::Integer
+      attr_accessor type: ("RADIO_UNIT" | "DEVICE_IDENTIFIER")
+      SENSITIVE: []
+    end
+
+    class PingResponse
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class Position
+      attr_accessor elevation: ::Float
+      attr_accessor elevation_reference: ("AGL" | "AMSL")
+      attr_accessor elevation_unit: ("FEET")
+      attr_accessor latitude: ::Float
+      attr_accessor longitude: ::Float
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ReturnInformation
+      attr_accessor replacement_order_arn: ::String
+      attr_accessor return_reason: ::String
+      attr_accessor shipping_address: Types::Address
+      attr_accessor shipping_label: ::String
+      SENSITIVE: []
+    end
+
+    class SitePlan
+      attr_accessor options: ::Array[Types::NameValuePair]
+      attr_accessor resource_definitions: ::Array[Types::NetworkResourceDefinition]
+      SENSITIVE: []
+    end
+
+    class StartNetworkResourceUpdateRequest
+      attr_accessor commitment_configuration: Types::CommitmentConfiguration
+      attr_accessor network_resource_arn: ::String
+      attr_accessor return_reason: ::String
+      attr_accessor shipping_address: Types::Address
+      attr_accessor update_type: ("REPLACE" | "RETURN" | "COMMITMENT")
+      SENSITIVE: []
+    end
+
+    class StartNetworkResourceUpdateResponse
+      attr_accessor network_resource: Types::NetworkResource
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TrackingInformation
+      attr_accessor tracking_number: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: [:tag_keys]
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateNetworkSitePlanRequest
+      attr_accessor client_token: ::String
+      attr_accessor network_site_arn: ::String
+      attr_accessor pending_plan: Types::SitePlan
+      SENSITIVE: []
+    end
+
+    class UpdateNetworkSiteRequest
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor network_site_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateNetworkSiteResponse
+      attr_accessor network_site: Types::NetworkSite
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class ValidationException
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      attr_accessor message: ::String
+      attr_accessor reason: ("UNKNOWN_OPERATION" | "CANNOT_PARSE" | "CANNOT_ASSUME_ROLE" | "FIELD_VALIDATION_FAILED" | "OTHER")
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor message: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+  end
+end
