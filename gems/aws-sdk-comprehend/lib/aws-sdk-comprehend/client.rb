@@ -868,8 +868,7 @@ module Aws::Comprehend
     #   A UTF-8 text string. The maximum string size is 100 KB.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. Currently, English is the only
-    #   valid language.
+    #   The language of the input documents.
     #
     # @return [Types::ContainsPiiEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2781,8 +2780,8 @@ module Aws::Comprehend
     #   A UTF-8 text string. The maximum string size is 100 KB.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. Currently, English is the only
-    #   valid language.
+    #   The language of the input text. Enter the language code for English
+    #   (en) or Spanish (es).
     #
     # @return [Types::DetectPiiEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4967,8 +4966,8 @@ module Aws::Comprehend
     #   The identifier of the job.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. Currently, English is the only
-    #   valid language.
+    #   The language of the input documents. Enter the language code for
+    #   English (en) or Spanish (es).
     #
     # @option params [String] :client_request_token
     #   A unique identifier for the request. If you don't set the client
@@ -5913,7 +5912,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

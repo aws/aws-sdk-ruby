@@ -850,7 +850,7 @@ module Aws::MWAA
     #   resp.environment.source_bucket_arn #=> String
     #   resp.environment.startup_script_s3_object_version #=> String
     #   resp.environment.startup_script_s3_path #=> String
-    #   resp.environment.status #=> String, one of "CREATING", "CREATE_FAILED", "AVAILABLE", "UPDATING", "DELETING", "DELETED", "UNAVAILABLE", "UPDATE_FAILED", "ROLLING_BACK", "CREATING_SNAPSHOT", "PENDING"
+    #   resp.environment.status #=> String, one of "CREATING", "CREATE_FAILED", "AVAILABLE", "UPDATING", "DELETING", "DELETED", "UNAVAILABLE", "UPDATE_FAILED", "ROLLING_BACK", "CREATING_SNAPSHOT", "PENDING", "MAINTENANCE"
     #   resp.environment.tags #=> Hash
     #   resp.environment.tags["TagKey"] #=> String
     #   resp.environment.webserver_access_mode #=> String, one of "PRIVATE_ONLY", "PUBLIC_ONLY"
@@ -1328,7 +1328,7 @@ module Aws::MWAA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mwaa'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

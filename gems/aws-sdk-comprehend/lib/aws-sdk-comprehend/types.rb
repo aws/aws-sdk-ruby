@@ -917,8 +917,7 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. Currently, English is the only
-    #   valid language.
+    #   The language of the input documents.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ContainsPiiEntitiesRequest AWS API Documentation
@@ -2535,8 +2534,8 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. Currently, English is the only
-    #   valid language.
+    #   The language of the input text. Enter the language code for English
+    #   (en) or Spanish (es).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectPiiEntitiesRequest AWS API Documentation
@@ -6293,7 +6292,7 @@ module Aws::Comprehend
     #   @return [Types::RedactionConfig]
     #
     # @!attribute [rw] language_code
-    #   The language code of the input documents
+    #   The language code of the input documents.
     #   @return [String]
     #
     # @!attribute [rw] data_access_role_arn
@@ -7414,8 +7413,8 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. Currently, English is the only
-    #   valid language.
+    #   The language of the input documents. Enter the language code for
+    #   English (en) or Spanish (es).
     #   @return [String]
     #
     # @!attribute [rw] client_request_token

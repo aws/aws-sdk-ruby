@@ -524,8 +524,7 @@ module Aws::MWAA
     #   @return [String]
     #
     # @!attribute [rw] kms_key
-    #   The Amazon Web Services Key Management Service (KMS) encryption key
-    #   used to encrypt the data in your environment.
+    #   The KMS encryption key used to encrypt the data in your environment.
     #   @return [String]
     #
     # @!attribute [rw] last_update
@@ -718,11 +717,17 @@ module Aws::MWAA
     #     complete, and the environment has been deleted.
     #
     #   * `UNAVAILABLE` - Indicates the request failed, but the environment
-    #     was unable to rollback and is not in a stable state.
+    #     did not return to its previous state and is not stable.
     #
     #   * `UPDATE_FAILED` - Indicates the request to update the environment
-    #     failed, and the environment has rolled back successfully and is
-    #     ready to use.
+    #     failed, and the environment was restored to its previous state
+    #     successfully and is ready to use.
+    #
+    #   * `MAINTENANCE` - Indicates that the environment is undergoing
+    #     maintenance. Depending on the type of work Amazon MWAA is
+    #     performing, your environment might become unavailable during this
+    #     process. After all operations are done, your environment will
+    #     return to its status prior to mainteneace operations.
     #
     #   We recommend reviewing our troubleshooting guide for a list of
     #   common errors and their solutions. For more information, see [Amazon
@@ -753,7 +758,7 @@ module Aws::MWAA
     #   @return [String]
     #
     # @!attribute [rw] webserver_url
-    #   The Apache Airflow *Web server* host name for the Amazon MWAA
+    #   The Apache Airflow *web server* host name for the Amazon MWAA
     #   environment. For more information, see [Accessing the Apache Airflow
     #   UI][1].
     #

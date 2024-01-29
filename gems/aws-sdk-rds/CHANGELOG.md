@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.215.0 (2024-01-29)
+------------------
+
+* Feature - Introduced support for the InsufficientDBInstanceCapacityFault error in the RDS RestoreDBClusterFromSnapshot and RestoreDBClusterToPointInTime API methods. This provides enhanced error handling, ensuring a more robust experience.
+
 1.214.0 (2024-01-26)
 ------------------
 

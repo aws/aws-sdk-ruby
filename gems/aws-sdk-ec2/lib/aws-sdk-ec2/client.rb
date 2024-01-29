@@ -6433,6 +6433,7 @@ module Aws::EC2
     #                 max: 1.0,
     #               },
     #               allowed_instance_types: ["AllowedInstanceType"],
+    #               max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #             },
     #             image_id: "ImageId",
     #           },
@@ -6519,6 +6520,7 @@ module Aws::EC2
     #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.network_bandwidth_gbps.max #=> Float
     #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.allowed_instance_types #=> Array
     #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.allowed_instance_types[0] #=> String
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.errors[0].launch_template_and_overrides.overrides.image_id #=> String
     #   resp.errors[0].lifecycle #=> String, one of "spot", "on-demand"
     #   resp.errors[0].error_code #=> String
@@ -6574,6 +6576,7 @@ module Aws::EC2
     #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.network_bandwidth_gbps.max #=> Float
     #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.allowed_instance_types #=> Array
     #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.allowed_instance_types[0] #=> String
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.instances[0].launch_template_and_overrides.overrides.image_id #=> String
     #   resp.instances[0].lifecycle #=> String, one of "spot", "on-demand"
     #   resp.instances[0].instance_ids #=> Array
@@ -8416,6 +8419,7 @@ module Aws::EC2
     #           max: 1.0,
     #         },
     #         allowed_instance_types: ["AllowedInstanceType"],
+    #         max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #       },
     #       private_dns_name_options: {
     #         hostname_type: "ip-name", # accepts ip-name, resource-name
@@ -8812,6 +8816,7 @@ module Aws::EC2
     #           max: 1.0,
     #         },
     #         allowed_instance_types: ["AllowedInstanceType"],
+    #         max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #       },
     #       private_dns_name_options: {
     #         hostname_type: "ip-name", # accepts ip-name, resource-name
@@ -8978,6 +8983,7 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.instance_requirements.network_bandwidth_gbps.max #=> Float
     #   resp.launch_template_version.launch_template_data.instance_requirements.allowed_instance_types #=> Array
     #   resp.launch_template_version.launch_template_data.instance_requirements.allowed_instance_types[0] #=> String
+    #   resp.launch_template_version.launch_template_data.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.launch_template_version.launch_template_data.private_dns_name_options.hostname_type #=> String, one of "ip-name", "resource-name"
     #   resp.launch_template_version.launch_template_data.private_dns_name_options.enable_resource_name_dns_a_record #=> Boolean
     #   resp.launch_template_version.launch_template_data.private_dns_name_options.enable_resource_name_dns_aaaa_record #=> Boolean
@@ -22284,6 +22290,7 @@ module Aws::EC2
     #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.network_bandwidth_gbps.max #=> Float
     #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.allowed_instance_types #=> Array
     #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.allowed_instance_types[0] #=> String
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.fleets[0].launch_template_configs[0].overrides[0].image_id #=> String
     #   resp.fleets[0].target_capacity_specification.total_target_capacity #=> Integer
     #   resp.fleets[0].target_capacity_specification.on_demand_target_capacity #=> Integer
@@ -22364,6 +22371,7 @@ module Aws::EC2
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.network_bandwidth_gbps.max #=> Float
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.allowed_instance_types #=> Array
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.allowed_instance_types[0] #=> String
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.image_id #=> String
     #   resp.fleets[0].errors[0].lifecycle #=> String, one of "spot", "on-demand"
     #   resp.fleets[0].errors[0].error_code #=> String
@@ -22419,6 +22427,7 @@ module Aws::EC2
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.network_bandwidth_gbps.max #=> Float
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.allowed_instance_types #=> Array
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.allowed_instance_types[0] #=> String
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.image_id #=> String
     #   resp.fleets[0].instances[0].lifecycle #=> String, one of "spot", "on-demand"
     #   resp.fleets[0].instances[0].instance_ids #=> Array
@@ -26980,6 +26989,7 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.network_bandwidth_gbps.max #=> Float
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.allowed_instance_types #=> Array
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.allowed_instance_types[0] #=> String
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.private_dns_name_options.hostname_type #=> String, one of "ip-name", "resource-name"
     #   resp.launch_template_versions[0].launch_template_data.private_dns_name_options.enable_resource_name_dns_a_record #=> Boolean
     #   resp.launch_template_versions[0].launch_template_data.private_dns_name_options.enable_resource_name_dns_aaaa_record #=> Boolean
@@ -32736,6 +32746,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.network_bandwidth_gbps.max #=> Float
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.allowed_instance_types #=> Array
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.allowed_instance_types[0] #=> String
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs #=> Array
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].launch_template_specification.launch_template_id #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].launch_template_specification.launch_template_name #=> String
@@ -32787,6 +32798,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.network_bandwidth_gbps.max #=> Float
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.allowed_instance_types #=> Array
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.allowed_instance_types[0] #=> String
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.spot_price #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.target_capacity #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.on_demand_target_capacity #=> Integer
@@ -41464,6 +41476,7 @@ module Aws::EC2
     #         max: 1.0,
     #       },
     #       allowed_instance_types: ["AllowedInstanceType"],
+    #       max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #     },
     #     max_results: 1,
     #     next_token: "String",
@@ -42356,6 +42369,7 @@ module Aws::EC2
     #   resp.launch_template_data.instance_requirements.network_bandwidth_gbps.max #=> Float
     #   resp.launch_template_data.instance_requirements.allowed_instance_types #=> Array
     #   resp.launch_template_data.instance_requirements.allowed_instance_types[0] #=> String
+    #   resp.launch_template_data.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.launch_template_data.private_dns_name_options.hostname_type #=> String, one of "ip-name", "resource-name"
     #   resp.launch_template_data.private_dns_name_options.enable_resource_name_dns_a_record #=> Boolean
     #   resp.launch_template_data.private_dns_name_options.enable_resource_name_dns_aaaa_record #=> Boolean
@@ -43424,6 +43438,7 @@ module Aws::EC2
     #           max: 1.0,
     #         },
     #         allowed_instance_types: ["AllowedInstanceType"],
+    #         max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #       },
     #     },
     #     dry_run: false,
@@ -46010,6 +46025,7 @@ module Aws::EC2
     #                 max: 1.0,
     #               },
     #               allowed_instance_types: ["AllowedInstanceType"],
+    #               max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #             },
     #             image_id: "ImageId",
     #           },
@@ -48631,6 +48647,7 @@ module Aws::EC2
     #                 max: 1.0,
     #               },
     #               allowed_instance_types: ["AllowedInstanceType"],
+    #               max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #             },
     #           },
     #         ],
@@ -53910,6 +53927,7 @@ module Aws::EC2
     #               max: 1.0,
     #             },
     #             allowed_instance_types: ["AllowedInstanceType"],
+    #             max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #           },
     #         },
     #       ],
@@ -53979,6 +53997,7 @@ module Aws::EC2
     #                   max: 1.0,
     #                 },
     #                 allowed_instance_types: ["AllowedInstanceType"],
+    #                 max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #               },
     #             },
     #           ],
@@ -58757,7 +58776,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.436.0'
+      context[:gem_version] = '1.437.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

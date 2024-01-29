@@ -10136,6 +10136,7 @@ module Aws::EC2
     InstanceRequirements.add_member(:accelerator_total_memory_mi_b, Shapes::ShapeRef.new(shape: AcceleratorTotalMemoryMiB, location_name: "acceleratorTotalMemoryMiB"))
     InstanceRequirements.add_member(:network_bandwidth_gbps, Shapes::ShapeRef.new(shape: NetworkBandwidthGbps, location_name: "networkBandwidthGbps"))
     InstanceRequirements.add_member(:allowed_instance_types, Shapes::ShapeRef.new(shape: AllowedInstanceTypeSet, location_name: "allowedInstanceTypeSet"))
+    InstanceRequirements.add_member(:max_spot_price_as_percentage_of_optimal_on_demand_price, Shapes::ShapeRef.new(shape: Integer, location_name: "maxSpotPriceAsPercentageOfOptimalOnDemandPrice"))
     InstanceRequirements.struct_class = Types::InstanceRequirements
 
     InstanceRequirementsRequest.add_member(:v_cpu_count, Shapes::ShapeRef.new(shape: VCpuCountRangeRequest, required: true, location_name: "VCpuCount"))
@@ -10161,6 +10162,7 @@ module Aws::EC2
     InstanceRequirementsRequest.add_member(:accelerator_total_memory_mi_b, Shapes::ShapeRef.new(shape: AcceleratorTotalMemoryMiBRequest, location_name: "AcceleratorTotalMemoryMiB"))
     InstanceRequirementsRequest.add_member(:network_bandwidth_gbps, Shapes::ShapeRef.new(shape: NetworkBandwidthGbpsRequest, location_name: "NetworkBandwidthGbps"))
     InstanceRequirementsRequest.add_member(:allowed_instance_types, Shapes::ShapeRef.new(shape: AllowedInstanceTypeSet, location_name: "AllowedInstanceType"))
+    InstanceRequirementsRequest.add_member(:max_spot_price_as_percentage_of_optimal_on_demand_price, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice"))
     InstanceRequirementsRequest.struct_class = Types::InstanceRequirementsRequest
 
     InstanceRequirementsWithMetadataRequest.add_member(:architecture_types, Shapes::ShapeRef.new(shape: ArchitectureTypeSet, location_name: "ArchitectureType"))

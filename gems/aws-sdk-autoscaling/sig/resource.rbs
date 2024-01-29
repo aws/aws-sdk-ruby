@@ -116,6 +116,7 @@ module Aws
                                     excluded_instance_types: Array[::String]?,
                                     instance_generations: Array[("current" | "previous")]?,
                                     spot_max_price_percentage_over_lowest_price: ::Integer?,
+                                    max_spot_price_as_percentage_of_optimal_on_demand_price: ::Integer?,
                                     on_demand_max_price_percentage_over_lowest_price: ::Integer?,
                                     bare_metal: ("included" | "excluded" | "required")?,
                                     burstable_performance: ("included" | "excluded" | "required")?,

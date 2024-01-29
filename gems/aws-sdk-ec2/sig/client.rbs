@@ -1431,7 +1431,8 @@ module Aws
                                       min: ::Float?,
                                       max: ::Float?
                                     }?,
-                                    allowed_instance_types: Array[::String]?
+                                    allowed_instance_types: Array[::String]?,
+                                    max_spot_price_as_percentage_of_optimal_on_demand_price: ::Integer?
                                   }?,
                                   image_id: ::String?
                                 },
@@ -2067,7 +2068,8 @@ module Aws
                                           min: ::Float?,
                                           max: ::Float?
                                         }?,
-                                        allowed_instance_types: Array[::String]?
+                                        allowed_instance_types: Array[::String]?,
+                                        max_spot_price_as_percentage_of_optimal_on_demand_price: ::Integer?
                                       }?,
                                       private_dns_name_options: {
                                         hostname_type: ("ip-name" | "resource-name")?,
@@ -2320,7 +2322,8 @@ module Aws
                                                   min: ::Float?,
                                                   max: ::Float?
                                                 }?,
-                                                allowed_instance_types: Array[::String]?
+                                                allowed_instance_types: Array[::String]?,
+                                                max_spot_price_as_percentage_of_optimal_on_demand_price: ::Integer?
                                               }?,
                                               private_dns_name_options: {
                                                 hostname_type: ("ip-name" | "resource-name")?,
@@ -8644,7 +8647,8 @@ module Aws
                                                                min: ::Float?,
                                                                max: ::Float?
                                                              }?,
-                                                             allowed_instance_types: Array[::String]?
+                                                             allowed_instance_types: Array[::String]?,
+                                                             max_spot_price_as_percentage_of_optimal_on_demand_price: ::Integer?
                                                            },
                                                            ?max_results: ::Integer,
                                                            ?next_token: ::String
@@ -9024,7 +9028,8 @@ module Aws
                                              min: ::Float?,
                                              max: ::Float?
                                            }?,
-                                           allowed_instance_types: Array[::String]?
+                                           allowed_instance_types: Array[::String]?,
+                                           max_spot_price_as_percentage_of_optimal_on_demand_price: ::Integer?
                                          }?
                                        },
                                        ?dry_run: bool,
@@ -9730,7 +9735,8 @@ module Aws
                                       min: ::Float?,
                                       max: ::Float?
                                     }?,
-                                    allowed_instance_types: Array[::String]?
+                                    allowed_instance_types: Array[::String]?,
+                                    max_spot_price_as_percentage_of_optimal_on_demand_price: ::Integer?
                                   }?,
                                   image_id: ::String?
                                 },
@@ -10362,7 +10368,8 @@ module Aws
                                                    min: ::Float?,
                                                    max: ::Float?
                                                  }?,
-                                                 allowed_instance_types: Array[::String]?
+                                                 allowed_instance_types: Array[::String]?,
+                                                 max_spot_price_as_percentage_of_optimal_on_demand_price: ::Integer?
                                                }?
                                              },
                                            ]?
@@ -11632,7 +11639,8 @@ module Aws
                                           min: ::Float?,
                                           max: ::Float?
                                         }?,
-                                        allowed_instance_types: Array[::String]?
+                                        allowed_instance_types: Array[::String]?,
+                                        max_spot_price_as_percentage_of_optimal_on_demand_price: ::Integer?
                                       }?
                                     },
                                   ]?,
@@ -11701,7 +11709,8 @@ module Aws
                                               min: ::Float?,
                                               max: ::Float?
                                             }?,
-                                            allowed_instance_types: Array[::String]?
+                                            allowed_instance_types: Array[::String]?,
+                                            max_spot_price_as_percentage_of_optimal_on_demand_price: ::Integer?
                                           }?
                                         },
                                       ]?

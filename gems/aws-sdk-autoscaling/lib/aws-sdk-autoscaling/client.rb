@@ -1403,6 +1403,7 @@ module Aws::AutoScaling
     #               excluded_instance_types: ["ExcludedInstance"],
     #               instance_generations: ["current"], # accepts current, previous
     #               spot_max_price_percentage_over_lowest_price: 1,
+    #               max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #               on_demand_max_price_percentage_over_lowest_price: 1,
     #               bare_metal: "included", # accepts included, excluded, required
     #               burstable_performance: "included", # accepts included, excluded, required
@@ -2511,6 +2512,7 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides[0].instance_requirements.instance_generations #=> Array
     #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides[0].instance_requirements.instance_generations[0] #=> String, one of "current", "previous"
     #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides[0].instance_requirements.spot_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides[0].instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides[0].instance_requirements.on_demand_max_price_percentage_over_lowest_price #=> Integer
     #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides[0].instance_requirements.bare_metal #=> String, one of "included", "excluded", "required"
     #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides[0].instance_requirements.burstable_performance #=> String, one of "included", "excluded", "required"
@@ -2750,7 +2752,7 @@ module Aws::AutoScaling
     end
 
     # Gets information about the instance refreshes for the specified Auto
-    # Scaling group.
+    # Scaling group from the previous six weeks.
     #
     # This operation is part of the [instance refresh feature][1] in Amazon
     # EC2 Auto Scaling, which helps you update instances in your Auto
@@ -2912,6 +2914,7 @@ module Aws::AutoScaling
     #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].instance_requirements.instance_generations #=> Array
     #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].instance_requirements.instance_generations[0] #=> String, one of "current", "previous"
     #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].instance_requirements.spot_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].instance_requirements.on_demand_max_price_percentage_over_lowest_price #=> Integer
     #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].instance_requirements.bare_metal #=> String, one of "included", "excluded", "required"
     #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].instance_requirements.burstable_performance #=> String, one of "included", "excluded", "required"
@@ -6520,6 +6523,7 @@ module Aws::AutoScaling
     #                 excluded_instance_types: ["ExcludedInstance"],
     #                 instance_generations: ["current"], # accepts current, previous
     #                 spot_max_price_percentage_over_lowest_price: 1,
+    #                 max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #                 on_demand_max_price_percentage_over_lowest_price: 1,
     #                 bare_metal: "included", # accepts included, excluded, required
     #                 burstable_performance: "included", # accepts included, excluded, required
@@ -7072,6 +7076,7 @@ module Aws::AutoScaling
     #               excluded_instance_types: ["ExcludedInstance"],
     #               instance_generations: ["current"], # accepts current, previous
     #               spot_max_price_percentage_over_lowest_price: 1,
+    #               max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #               on_demand_max_price_percentage_over_lowest_price: 1,
     #               bare_metal: "included", # accepts included, excluded, required
     #               burstable_performance: "included", # accepts included, excluded, required
@@ -7164,7 +7169,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.103.0'
+      context[:gem_version] = '1.104.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

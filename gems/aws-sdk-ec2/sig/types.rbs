@@ -8990,6 +8990,7 @@ module Aws::EC2
       attr_accessor accelerator_total_memory_mi_b: Types::AcceleratorTotalMemoryMiB
       attr_accessor network_bandwidth_gbps: Types::NetworkBandwidthGbps
       attr_accessor allowed_instance_types: ::Array[::String]
+      attr_accessor max_spot_price_as_percentage_of_optimal_on_demand_price: ::Integer
       SENSITIVE: []
     end
 
@@ -9017,6 +9018,7 @@ module Aws::EC2
       attr_accessor accelerator_total_memory_mi_b: Types::AcceleratorTotalMemoryMiBRequest
       attr_accessor network_bandwidth_gbps: Types::NetworkBandwidthGbpsRequest
       attr_accessor allowed_instance_types: ::Array[::String]
+      attr_accessor max_spot_price_as_percentage_of_optimal_on_demand_price: ::Integer
       SENSITIVE: []
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2024-01-29)
+------------------
+
+* Feature - EC2 Auto Scaling customers who use attribute based instance-type selection can now intuitively define their Spot instances price protection limit as a percentage of the lowest priced On-Demand instance type.
+
 1.103.0 (2024-01-26)
 ------------------
 

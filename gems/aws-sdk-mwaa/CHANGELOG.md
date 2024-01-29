@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2024-01-29)
+------------------
+
+* Feature - This release adds MAINTENANCE environment status for Amazon MWAA environments.
+
 1.33.0 (2024-01-26)
 ------------------
 

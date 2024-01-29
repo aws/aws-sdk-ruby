@@ -40197,25 +40197,36 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] spot_max_price_percentage_over_lowest_price
-    #   The price protection threshold for Spot Instances. This is the
-    #   maximum you’ll pay for a Spot Instance, expressed as a percentage
-    #   above the least expensive current generation M, C, or R instance
-    #   type with your specified attributes. When Amazon EC2 selects
-    #   instance types with your attributes, it excludes instance types
-    #   priced above your threshold.
+    #   \[Price protection\] The price protection threshold for Spot
+    #   Instances, as a percentage higher than an identified Spot price. The
+    #   identified Spot price is the Spot price of the lowest priced current
+    #   generation C, M, or R instance type with your specified attributes.
+    #   If no current generation C, M, or R instance type matches your
+    #   attributes, then the identified Spot price is from the lowest priced
+    #   current generation instance types, and failing that, from the lowest
+    #   priced previous generation instance types that match your
+    #   attributes. When Amazon EC2 selects instance types with your
+    #   attributes, it will exclude instance types whose Spot price exceeds
+    #   your specified threshold.
     #
     #   The parameter accepts an integer, which Amazon EC2 interprets as a
     #   percentage.
     #
-    #   To turn off price protection, specify a high value, such as
-    #   `999999`.
+    #   To indicate no price protection threshold, specify a high value,
+    #   such as `999999`.
+    #
+    #   If you set `TargetCapacityUnitType` to `vcpu` or `memory-mib`, the
+    #   price protection threshold is applied based on the per-vCPU or
+    #   per-memory price instead of the per-instance price.
     #
     #   This parameter is not supported for [GetSpotPlacementScores][1] and
     #   [GetInstanceTypesFromInstanceRequirements][2].
     #
-    #   <note markdown="1"> If you set `TargetCapacityUnitType` to `vcpu` or `memory-mib`, the
-    #   price protection threshold is applied based on the per-vCPU or
-    #   per-memory price instead of the per-instance price.
+    #   <note markdown="1"> Only one of `SpotMaxPricePercentageOverLowestPrice` or
+    #   `MaxSpotPriceAsPercentageOfOptimalOnDemandPrice` can be specified.
+    #   If you don't specify either, then
+    #   `SpotMaxPricePercentageOverLowestPrice` is used and the value for
+    #   that parameter defaults to `100`.
     #
     #    </note>
     #
@@ -40228,12 +40239,13 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] on_demand_max_price_percentage_over_lowest_price
-    #   The price protection threshold for On-Demand Instances. This is the
-    #   maximum you’ll pay for an On-Demand Instance, expressed as a
-    #   percentage above the least expensive current generation M, C, or R
-    #   instance type with your specified attributes. When Amazon EC2
-    #   selects instance types with your attributes, it excludes instance
-    #   types priced above your threshold.
+    #   \[Price protection\] The price protection threshold for On-Demand
+    #   Instances, as a percentage higher than an identified On-Demand
+    #   price. The identified On-Demand price is the price of the lowest
+    #   priced current generation C, M, or R instance type with your
+    #   specified attributes. When Amazon EC2 selects instance types with
+    #   your attributes, it will exclude instance types whose price exceeds
+    #   your specified threshold.
     #
     #   The parameter accepts an integer, which Amazon EC2 interprets as a
     #   percentage.
@@ -40469,6 +40481,38 @@ module Aws::EC2
     #   Default: All instance types
     #   @return [Array<String>]
     #
+    # @!attribute [rw] max_spot_price_as_percentage_of_optimal_on_demand_price
+    #   \[Price protection\] The price protection threshold for Spot
+    #   Instances, as a percentage of an identified On-Demand price. The
+    #   identified On-Demand price is the price of the lowest priced current
+    #   generation C, M, or R instance type with your specified attributes.
+    #   If no current generation C, M, or R instance type matches your
+    #   attributes, then the identified price is from the lowest priced
+    #   current generation instance types, and failing that, from the lowest
+    #   priced previous generation instance types that match your
+    #   attributes. When Amazon EC2 selects instance types with your
+    #   attributes, it will exclude instance types whose price exceeds your
+    #   specified threshold.
+    #
+    #   The parameter accepts an integer, which Amazon EC2 interprets as a
+    #   percentage.
+    #
+    #   To indicate no price protection threshold, specify a high value,
+    #   such as `999999`.
+    #
+    #   If you set `DesiredCapacityType` to `vcpu` or `memory-mib`, the
+    #   price protection threshold is based on the per vCPU or per memory
+    #   price instead of the per instance price.
+    #
+    #   <note markdown="1"> Only one of `SpotMaxPricePercentageOverLowestPrice` or
+    #   `MaxSpotPriceAsPercentageOfOptimalOnDemandPrice` can be specified.
+    #   If you don't specify either, then
+    #   `SpotMaxPricePercentageOverLowestPrice` is used and the value for
+    #   that parameter defaults to `100`.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceRequirements AWS API Documentation
     #
     class InstanceRequirements < Struct.new(
@@ -40494,7 +40538,8 @@ module Aws::EC2
       :accelerator_names,
       :accelerator_total_memory_mi_b,
       :network_bandwidth_gbps,
-      :allowed_instance_types)
+      :allowed_instance_types,
+      :max_spot_price_as_percentage_of_optimal_on_demand_price)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -40622,25 +40667,36 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] spot_max_price_percentage_over_lowest_price
-    #   The price protection threshold for Spot Instance. This is the
-    #   maximum you’ll pay for an Spot Instance, expressed as a percentage
-    #   above the least expensive current generation M, C, or R instance
-    #   type with your specified attributes. When Amazon EC2 selects
-    #   instance types with your attributes, it excludes instance types
-    #   priced above your threshold.
+    #   \[Price protection\] The price protection threshold for Spot
+    #   Instances, as a percentage higher than an identified Spot price. The
+    #   identified Spot price is the Spot price of the lowest priced current
+    #   generation C, M, or R instance type with your specified attributes.
+    #   If no current generation C, M, or R instance type matches your
+    #   attributes, then the identified Spot price is from the lowest priced
+    #   current generation instance types, and failing that, from the lowest
+    #   priced previous generation instance types that match your
+    #   attributes. When Amazon EC2 selects instance types with your
+    #   attributes, it will exclude instance types whose Spot price exceeds
+    #   your specified threshold.
     #
     #   The parameter accepts an integer, which Amazon EC2 interprets as a
     #   percentage.
     #
-    #   To turn off price protection, specify a high value, such as
-    #   `999999`.
+    #   To indicate no price protection threshold, specify a high value,
+    #   such as `999999`.
+    #
+    #   If you set `TargetCapacityUnitType` to `vcpu` or `memory-mib`, the
+    #   price protection threshold is applied based on the per-vCPU or
+    #   per-memory price instead of the per-instance price.
     #
     #   This parameter is not supported for [GetSpotPlacementScores][1] and
     #   [GetInstanceTypesFromInstanceRequirements][2].
     #
-    #   <note markdown="1"> If you set `TargetCapacityUnitType` to `vcpu` or `memory-mib`, the
-    #   price protection threshold is applied based on the per-vCPU or
-    #   per-memory price instead of the per-instance price.
+    #   <note markdown="1"> Only one of `SpotMaxPricePercentageOverLowestPrice` or
+    #   `MaxSpotPriceAsPercentageOfOptimalOnDemandPrice` can be specified.
+    #   If you don't specify either, then
+    #   `SpotMaxPricePercentageOverLowestPrice` is used and the value for
+    #   that parameter defaults to `100`.
     #
     #    </note>
     #
@@ -40653,18 +40709,19 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] on_demand_max_price_percentage_over_lowest_price
-    #   The price protection threshold for On-Demand Instances. This is the
-    #   maximum you’ll pay for an On-Demand Instance, expressed as a
-    #   percentage above the least expensive current generation M, C, or R
-    #   instance type with your specified attributes. When Amazon EC2
-    #   selects instance types with your attributes, it excludes instance
-    #   types priced above your threshold.
+    #   \[Price protection\] The price protection threshold for On-Demand
+    #   Instances, as a percentage higher than an identified On-Demand
+    #   price. The identified On-Demand price is the price of the lowest
+    #   priced current generation C, M, or R instance type with your
+    #   specified attributes. When Amazon EC2 selects instance types with
+    #   your attributes, it will exclude instance types whose price exceeds
+    #   your specified threshold.
     #
     #   The parameter accepts an integer, which Amazon EC2 interprets as a
     #   percentage.
     #
-    #   To turn off price protection, specify a high value, such as
-    #   `999999`.
+    #   To indicate no price protection threshold, specify a high value,
+    #   such as `999999`.
     #
     #   This parameter is not supported for [GetSpotPlacementScores][1] and
     #   [GetInstanceTypesFromInstanceRequirements][2].
@@ -40899,6 +40956,38 @@ module Aws::EC2
     #   Default: All instance types
     #   @return [Array<String>]
     #
+    # @!attribute [rw] max_spot_price_as_percentage_of_optimal_on_demand_price
+    #   \[Price protection\] The price protection threshold for Spot
+    #   Instances, as a percentage of an identified On-Demand price. The
+    #   identified On-Demand price is the price of the lowest priced current
+    #   generation C, M, or R instance type with your specified attributes.
+    #   If no current generation C, M, or R instance type matches your
+    #   attributes, then the identified price is from the lowest priced
+    #   current generation instance types, and failing that, from the lowest
+    #   priced previous generation instance types that match your
+    #   attributes. When Amazon EC2 selects instance types with your
+    #   attributes, it will exclude instance types whose price exceeds your
+    #   specified threshold.
+    #
+    #   The parameter accepts an integer, which Amazon EC2 interprets as a
+    #   percentage.
+    #
+    #   To indicate no price protection threshold, specify a high value,
+    #   such as `999999`.
+    #
+    #   If you set `DesiredCapacityType` to `vcpu` or `memory-mib`, the
+    #   price protection threshold is based on the per vCPU or per memory
+    #   price instead of the per instance price.
+    #
+    #   <note markdown="1"> Only one of `SpotMaxPricePercentageOverLowestPrice` or
+    #   `MaxSpotPriceAsPercentageOfOptimalOnDemandPrice` can be specified.
+    #   If you don't specify either, then
+    #   `SpotMaxPricePercentageOverLowestPrice` is used and the value for
+    #   that parameter defaults to `100`.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceRequirementsRequest AWS API Documentation
     #
     class InstanceRequirementsRequest < Struct.new(
@@ -40924,7 +41013,8 @@ module Aws::EC2
       :accelerator_names,
       :accelerator_total_memory_mi_b,
       :network_bandwidth_gbps,
-      :allowed_instance_types)
+      :allowed_instance_types,
+      :max_spot_price_as_percentage_of_optimal_on_demand_price)
       SENSITIVE = []
       include Aws::Structure
     end

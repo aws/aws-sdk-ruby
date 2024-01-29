@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2024-01-29)
+------------------
+
+* Feature - Modified description of createaddress to include direction to add path when providing a JSON file.
+
 1.64.0 (2024-01-26)
 ------------------
 

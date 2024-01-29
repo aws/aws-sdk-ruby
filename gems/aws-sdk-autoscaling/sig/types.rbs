@@ -741,6 +741,7 @@ module Aws::AutoScaling
       attr_accessor excluded_instance_types: ::Array[::String]
       attr_accessor instance_generations: ::Array[("current" | "previous")]
       attr_accessor spot_max_price_percentage_over_lowest_price: ::Integer
+      attr_accessor max_spot_price_as_percentage_of_optimal_on_demand_price: ::Integer
       attr_accessor on_demand_max_price_percentage_over_lowest_price: ::Integer
       attr_accessor bare_metal: ("included" | "excluded" | "required")
       attr_accessor burstable_performance: ("included" | "excluded" | "required")

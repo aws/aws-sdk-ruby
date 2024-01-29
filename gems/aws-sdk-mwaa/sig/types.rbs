@@ -110,7 +110,7 @@ module Aws::MWAA
       attr_accessor source_bucket_arn: ::String
       attr_accessor startup_script_s3_object_version: ::String
       attr_accessor startup_script_s3_path: ::String
-      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "AVAILABLE" | "UPDATING" | "DELETING" | "DELETED" | "UNAVAILABLE" | "UPDATE_FAILED" | "ROLLING_BACK" | "CREATING_SNAPSHOT" | "PENDING")
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "AVAILABLE" | "UPDATING" | "DELETING" | "DELETED" | "UNAVAILABLE" | "UPDATE_FAILED" | "ROLLING_BACK" | "CREATING_SNAPSHOT" | "PENDING" | "MAINTENANCE")
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor webserver_access_mode: ("PRIVATE_ONLY" | "PUBLIC_ONLY")
       attr_accessor webserver_url: ::String

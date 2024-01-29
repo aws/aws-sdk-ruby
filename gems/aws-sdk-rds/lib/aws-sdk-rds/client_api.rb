@@ -6178,6 +6178,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterParameterGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientDBInstanceCapacityFault)
       end)
 
       api.add_operation(:restore_db_cluster_to_point_in_time, Seahorse::Model::Operation.new.tap do |o|
@@ -6205,6 +6206,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterParameterGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterAutomatedBackupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientDBInstanceCapacityFault)
       end)
 
       api.add_operation(:restore_db_instance_from_db_snapshot, Seahorse::Model::Operation.new.tap do |o|

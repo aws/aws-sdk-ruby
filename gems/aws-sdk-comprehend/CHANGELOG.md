@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2024-01-29)
+------------------
+
+* Feature - Comprehend PII analysis now supports Spanish input documents.
+
 1.79.0 (2024-01-26)
 ------------------
 
