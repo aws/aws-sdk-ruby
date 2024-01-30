@@ -569,10 +569,12 @@ module Aws
         def created_by: () -> ::String
         def description: () -> ::String
         def domain_id: () -> ::String
+        def failure_reasons: () -> ::Array[Types::ProjectDeletionError]
         def glossary_terms: () -> ::Array[::String]
         def id: () -> ::String
         def last_updated_at: () -> ::Time
         def name: () -> ::String
+        def project_status: () -> ("ACTIVE" | "DELETING" | "DELETE_FAILED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_project-instance_method
       def create_project: (
@@ -780,7 +782,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_domain-instance_method
       def delete_domain: (
                            ?client_token: ::String,
-                           identifier: ::String
+                           identifier: ::String,
+                           ?skip_deletion_check: bool
                          ) -> _DeleteDomainResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDomainResponseSuccess
 
@@ -854,7 +857,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_project-instance_method
       def delete_project: (
                             domain_identifier: ::String,
-                            identifier: ::String
+                            identifier: ::String,
+                            ?skip_deletion_check: bool
                           ) -> _DeleteProjectResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProjectResponseSuccess
 
@@ -1243,10 +1247,12 @@ module Aws
         def created_by: () -> ::String
         def description: () -> ::String
         def domain_id: () -> ::String
+        def failure_reasons: () -> ::Array[Types::ProjectDeletionError]
         def glossary_terms: () -> ::Array[::String]
         def id: () -> ::String
         def last_updated_at: () -> ::Time
         def name: () -> ::String
+        def project_status: () -> ("ACTIVE" | "DELETING" | "DELETE_FAILED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_project-instance_method
       def get_project: (
@@ -2166,10 +2172,12 @@ module Aws
         def created_by: () -> ::String
         def description: () -> ::String
         def domain_id: () -> ::String
+        def failure_reasons: () -> ::Array[Types::ProjectDeletionError]
         def glossary_terms: () -> ::Array[::String]
         def id: () -> ::String
         def last_updated_at: () -> ::Time
         def name: () -> ::String
+        def project_status: () -> ("ACTIVE" | "DELETING" | "DELETE_FAILED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_project-instance_method
       def update_project: (

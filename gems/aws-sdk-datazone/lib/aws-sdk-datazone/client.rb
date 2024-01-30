@@ -1749,10 +1749,12 @@ module Aws::DataZone
     #   * {Types::CreateProjectOutput#created_by #created_by} => String
     #   * {Types::CreateProjectOutput#description #description} => String
     #   * {Types::CreateProjectOutput#domain_id #domain_id} => String
+    #   * {Types::CreateProjectOutput#failure_reasons #failure_reasons} => Array&lt;Types::ProjectDeletionError&gt;
     #   * {Types::CreateProjectOutput#glossary_terms #glossary_terms} => Array&lt;String&gt;
     #   * {Types::CreateProjectOutput#id #id} => String
     #   * {Types::CreateProjectOutput#last_updated_at #last_updated_at} => Time
     #   * {Types::CreateProjectOutput#name #name} => String
+    #   * {Types::CreateProjectOutput#project_status #project_status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1769,11 +1771,15 @@ module Aws::DataZone
     #   resp.created_by #=> String
     #   resp.description #=> String
     #   resp.domain_id #=> String
+    #   resp.failure_reasons #=> Array
+    #   resp.failure_reasons[0].code #=> String
+    #   resp.failure_reasons[0].message #=> String
     #   resp.glossary_terms #=> Array
     #   resp.glossary_terms[0] #=> String
     #   resp.id #=> String
     #   resp.last_updated_at #=> Time
     #   resp.name #=> String
+    #   resp.project_status #=> String, one of "ACTIVE", "DELETING", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateProject AWS API Documentation
     #
@@ -2342,6 +2348,9 @@ module Aws::DataZone
     #   The identifier of the Amazon Web Services domain that is to be
     #   deleted.
     #
+    # @option params [Boolean] :skip_deletion_check
+    #   Optional flag to delete all child entities within the domain
+    #
     # @return [Types::DeleteDomainOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteDomainOutput#status #status} => String
@@ -2351,6 +2360,7 @@ module Aws::DataZone
     #   resp = client.delete_domain({
     #     client_token: "String",
     #     identifier: "DomainId", # required
+    #     skip_deletion_check: false,
     #   })
     #
     # @example Response structure
@@ -2558,6 +2568,10 @@ module Aws::DataZone
     # @option params [required, String] :identifier
     #   The identifier of the project that is to be deleted.
     #
+    # @option params [Boolean] :skip_deletion_check
+    #   Optional flag to asynchronously delete child entities within the
+    #   project
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2565,6 +2579,7 @@ module Aws::DataZone
     #   resp = client.delete_project({
     #     domain_identifier: "DomainId", # required
     #     identifier: "ProjectId", # required
+    #     skip_deletion_check: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteProject AWS API Documentation
@@ -3659,10 +3674,12 @@ module Aws::DataZone
     #   * {Types::GetProjectOutput#created_by #created_by} => String
     #   * {Types::GetProjectOutput#description #description} => String
     #   * {Types::GetProjectOutput#domain_id #domain_id} => String
+    #   * {Types::GetProjectOutput#failure_reasons #failure_reasons} => Array&lt;Types::ProjectDeletionError&gt;
     #   * {Types::GetProjectOutput#glossary_terms #glossary_terms} => Array&lt;String&gt;
     #   * {Types::GetProjectOutput#id #id} => String
     #   * {Types::GetProjectOutput#last_updated_at #last_updated_at} => Time
     #   * {Types::GetProjectOutput#name #name} => String
+    #   * {Types::GetProjectOutput#project_status #project_status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3677,11 +3694,15 @@ module Aws::DataZone
     #   resp.created_by #=> String
     #   resp.description #=> String
     #   resp.domain_id #=> String
+    #   resp.failure_reasons #=> Array
+    #   resp.failure_reasons[0].code #=> String
+    #   resp.failure_reasons[0].message #=> String
     #   resp.glossary_terms #=> Array
     #   resp.glossary_terms[0] #=> String
     #   resp.id #=> String
     #   resp.last_updated_at #=> Time
     #   resp.name #=> String
+    #   resp.project_status #=> String, one of "ACTIVE", "DELETING", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetProject AWS API Documentation
     #
@@ -4860,8 +4881,12 @@ module Aws::DataZone
     #   resp.items[0].created_by #=> String
     #   resp.items[0].description #=> String
     #   resp.items[0].domain_id #=> String
+    #   resp.items[0].failure_reasons #=> Array
+    #   resp.items[0].failure_reasons[0].code #=> String
+    #   resp.items[0].failure_reasons[0].message #=> String
     #   resp.items[0].id #=> String
     #   resp.items[0].name #=> String
+    #   resp.items[0].project_status #=> String, one of "ACTIVE", "DELETING", "DELETE_FAILED"
     #   resp.items[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
@@ -6880,10 +6905,12 @@ module Aws::DataZone
     #   * {Types::UpdateProjectOutput#created_by #created_by} => String
     #   * {Types::UpdateProjectOutput#description #description} => String
     #   * {Types::UpdateProjectOutput#domain_id #domain_id} => String
+    #   * {Types::UpdateProjectOutput#failure_reasons #failure_reasons} => Array&lt;Types::ProjectDeletionError&gt;
     #   * {Types::UpdateProjectOutput#glossary_terms #glossary_terms} => Array&lt;String&gt;
     #   * {Types::UpdateProjectOutput#id #id} => String
     #   * {Types::UpdateProjectOutput#last_updated_at #last_updated_at} => Time
     #   * {Types::UpdateProjectOutput#name #name} => String
+    #   * {Types::UpdateProjectOutput#project_status #project_status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -6901,11 +6928,15 @@ module Aws::DataZone
     #   resp.created_by #=> String
     #   resp.description #=> String
     #   resp.domain_id #=> String
+    #   resp.failure_reasons #=> Array
+    #   resp.failure_reasons[0].code #=> String
+    #   resp.failure_reasons[0].message #=> String
     #   resp.glossary_terms #=> Array
     #   resp.glossary_terms[0] #=> String
     #   resp.id #=> String
     #   resp.last_updated_at #=> Time
     #   resp.name #=> String
+    #   resp.project_status #=> String, one of "ACTIVE", "DELETING", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateProject AWS API Documentation
     #
@@ -7245,7 +7276,7 @@ module Aws::DataZone
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

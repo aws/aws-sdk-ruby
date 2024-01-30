@@ -2263,6 +2263,10 @@ module Aws::DataZone
     #   was created.
     #   @return [String]
     #
+    # @!attribute [rw] failure_reasons
+    #   Reasons for failed project deletion
+    #   @return [Array<Types::ProjectDeletionError>]
+    #
     # @!attribute [rw] glossary_terms
     #   The glossary terms that can be used in the project.
     #   @return [Array<String>]
@@ -2279,6 +2283,10 @@ module Aws::DataZone
     #   The name of the project.
     #   @return [String]
     #
+    # @!attribute [rw] project_status
+    #   Status of the project
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateProjectOutput AWS API Documentation
     #
     class CreateProjectOutput < Struct.new(
@@ -2286,10 +2294,12 @@ module Aws::DataZone
       :created_by,
       :description,
       :domain_id,
+      :failure_reasons,
       :glossary_terms,
       :id,
       :last_updated_at,
-      :name)
+      :name,
+      :project_status)
       SENSITIVE = [:description, :name]
       include Aws::Structure
     end
@@ -3298,11 +3308,16 @@ module Aws::DataZone
     #   deleted.
     #   @return [String]
     #
+    # @!attribute [rw] skip_deletion_check
+    #   Optional flag to delete all child entities within the domain
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteDomainInput AWS API Documentation
     #
     class DeleteDomainInput < Struct.new(
       :client_token,
-      :identifier)
+      :identifier,
+      :skip_deletion_check)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3471,11 +3486,17 @@ module Aws::DataZone
     #   The identifier of the project that is to be deleted.
     #   @return [String]
     #
+    # @!attribute [rw] skip_deletion_check
+    #   Optional flag to asynchronously delete child entities within the
+    #   project
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteProjectInput AWS API Documentation
     #
     class DeleteProjectInput < Struct.new(
       :domain_identifier,
-      :identifier)
+      :identifier,
+      :skip_deletion_check)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5633,6 +5654,10 @@ module Aws::DataZone
     #   The ID of the Amazon DataZone domain in which the project exists.
     #   @return [String]
     #
+    # @!attribute [rw] failure_reasons
+    #   Reasons for failed project deletion
+    #   @return [Array<Types::ProjectDeletionError>]
+    #
     # @!attribute [rw] glossary_terms
     #   The business glossary terms that can be used in the project.
     #   @return [Array<String>]
@@ -5649,6 +5674,10 @@ module Aws::DataZone
     #   The name of the project.
     #   @return [String]
     #
+    # @!attribute [rw] project_status
+    #   Status of the project
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetProjectOutput AWS API Documentation
     #
     class GetProjectOutput < Struct.new(
@@ -5656,10 +5685,12 @@ module Aws::DataZone
       :created_by,
       :description,
       :domain_id,
+      :failure_reasons,
       :glossary_terms,
       :id,
       :last_updated_at,
-      :name)
+      :name,
+      :project_status)
       SENSITIVE = [:description, :name]
       include Aws::Structure
     end
@@ -7826,6 +7857,25 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # Error that occurred during project deletion
+    #
+    # @!attribute [rw] code
+    #   Project Deletion Error Code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Project Deletion Error Message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ProjectDeletionError AWS API Documentation
+    #
+    class ProjectDeletionError < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of a project member.
     #
     # @!attribute [rw] designation
@@ -7863,12 +7913,20 @@ module Aws::DataZone
     #   The identifier of a Amazon DataZone domain where the project exists.
     #   @return [String]
     #
+    # @!attribute [rw] failure_reasons
+    #   Reasons for failed project deletion
+    #   @return [Array<Types::ProjectDeletionError>]
+    #
     # @!attribute [rw] id
     #   The identifier of a project.
     #   @return [String]
     #
     # @!attribute [rw] name
     #   The name of a project.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_status
+    #   Status of the project
     #   @return [String]
     #
     # @!attribute [rw] updated_at
@@ -7882,8 +7940,10 @@ module Aws::DataZone
       :created_by,
       :description,
       :domain_id,
+      :failure_reasons,
       :id,
       :name,
+      :project_status,
       :updated_at)
       SENSITIVE = [:description, :name]
       include Aws::Structure
@@ -10737,6 +10797,10 @@ module Aws::DataZone
     #   updated.
     #   @return [String]
     #
+    # @!attribute [rw] failure_reasons
+    #   Reasons for failed project deletion
+    #   @return [Array<Types::ProjectDeletionError>]
+    #
     # @!attribute [rw] glossary_terms
     #   The glossary terms of the project that are to be updated.
     #   @return [Array<String>]
@@ -10753,6 +10817,10 @@ module Aws::DataZone
     #   The name of the project that is to be updated.
     #   @return [String]
     #
+    # @!attribute [rw] project_status
+    #   Status of the project
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateProjectOutput AWS API Documentation
     #
     class UpdateProjectOutput < Struct.new(
@@ -10760,10 +10828,12 @@ module Aws::DataZone
       :created_by,
       :description,
       :domain_id,
+      :failure_reasons,
       :glossary_terms,
       :id,
       :last_updated_at,
-      :name)
+      :name,
+      :project_status)
       SENSITIVE = [:description, :name]
       include Aws::Structure
     end

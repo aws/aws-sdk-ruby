@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2024-01-30)
+------------------
+
+* Feature - Add new skipDeletionCheck to DeleteDomain. Add new skipDeletionCheck to DeleteProject which also automatically deletes dependent objects
+
 1.3.0 (2024-01-26)
 ------------------
 

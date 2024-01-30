@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2024-01-30)
+------------------
+
+* Feature - Update the SDKs for text changes in the APIs.
+
 1.86.0 (2024-01-26)
 ------------------
 
