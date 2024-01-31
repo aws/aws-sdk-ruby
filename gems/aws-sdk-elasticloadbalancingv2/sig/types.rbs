@@ -956,7 +956,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     class TargetHealth
-      attr_accessor state: ("initial" | "healthy" | "unhealthy" | "unused" | "draining" | "unavailable")
+      attr_accessor state: ("initial" | "healthy" | "unhealthy" | "unhealthy.draining" | "unused" | "draining" | "unavailable")
       attr_accessor reason: ("Elb.RegistrationInProgress" | "Elb.InitialHealthChecking" | "Target.ResponseCodeMismatch" | "Target.Timeout" | "Target.FailedHealthChecks" | "Target.NotRegistered" | "Target.NotInUse" | "Target.DeregistrationInProgress" | "Target.InvalidState" | "Target.IpUnusable" | "Target.HealthCheckDisabled" | "Elb.InternalError")
       attr_accessor description: ::String
       SENSITIVE: []

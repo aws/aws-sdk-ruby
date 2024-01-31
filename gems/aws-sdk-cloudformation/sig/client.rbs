@@ -196,6 +196,28 @@ module Aws
                              ) -> _CreateChangeSetResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChangeSetResponseSuccess
 
+      interface _CreateGeneratedTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGeneratedTemplateOutput]
+        def generated_template_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#create_generated_template-instance_method
+      def create_generated_template: (
+                                       ?resources: Array[
+                                         {
+                                           resource_type: ::String,
+                                           logical_resource_id: ::String?,
+                                           resource_identifier: Hash[::String, ::String]
+                                         },
+                                       ],
+                                       generated_template_name: ::String,
+                                       ?stack_name: ::String,
+                                       ?template_configuration: {
+                                         deletion_policy: ("DELETE" | "RETAIN")?,
+                                         update_replace_policy: ("DELETE" | "RETAIN")?
+                                       }
+                                     ) -> _CreateGeneratedTemplateResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGeneratedTemplateResponseSuccess
+
       interface _CreateStackResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateStackOutput]
         def stack_id: () -> ::String
@@ -350,6 +372,12 @@ module Aws
                              ) -> _DeleteChangeSetResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteChangeSetResponseSuccess
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#delete_generated_template-instance_method
+      def delete_generated_template: (
+                                       generated_template_name: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#delete_stack-instance_method
       def delete_stack: (
                           stack_name: ::String,
@@ -473,6 +501,26 @@ module Aws
                                      ) -> _DescribeChangeSetHooksResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeChangeSetHooksResponseSuccess
 
+      interface _DescribeGeneratedTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGeneratedTemplateOutput]
+        def generated_template_id: () -> ::String
+        def generated_template_name: () -> ::String
+        def resources: () -> ::Array[Types::ResourceDetail]
+        def status: () -> ("CREATE_PENDING" | "UPDATE_PENDING" | "DELETE_PENDING" | "CREATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "FAILED" | "COMPLETE")
+        def status_reason: () -> ::String
+        def creation_time: () -> ::Time
+        def last_updated_time: () -> ::Time
+        def progress: () -> Types::TemplateProgress
+        def stack_id: () -> ::String
+        def template_configuration: () -> Types::TemplateConfiguration
+        def total_warnings: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#describe_generated_template-instance_method
+      def describe_generated_template: (
+                                         generated_template_name: ::String
+                                       ) -> _DescribeGeneratedTemplateResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeGeneratedTemplateResponseSuccess
+
       interface _DescribeOrganizationsAccessResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeOrganizationsAccessOutput]
         def status: () -> ("ENABLED" | "DISABLED" | "DISABLED_PERMANENTLY")
@@ -495,6 +543,24 @@ module Aws
                                 ?publisher_id: ::String
                               ) -> _DescribePublisherResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePublisherResponseSuccess
+
+      interface _DescribeResourceScanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeResourceScanOutput]
+        def resource_scan_id: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "FAILED" | "COMPLETE" | "EXPIRED")
+        def status_reason: () -> ::String
+        def start_time: () -> ::Time
+        def end_time: () -> ::Time
+        def percentage_completed: () -> ::Float
+        def resource_types: () -> ::Array[::String]
+        def resources_scanned: () -> ::Integer
+        def resources_read: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#describe_resource_scan-instance_method
+      def describe_resource_scan: (
+                                    resource_scan_id: ::String
+                                  ) -> _DescribeResourceScanResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeResourceScanResponseSuccess
 
       interface _DescribeStackDriftDetectionStatusResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStackDriftDetectionStatusOutput]
@@ -738,6 +804,18 @@ module Aws
                               ) -> _ExecuteChangeSetResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExecuteChangeSetResponseSuccess
 
+      interface _GetGeneratedTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGeneratedTemplateOutput]
+        def status: () -> ("CREATE_PENDING" | "UPDATE_PENDING" | "DELETE_PENDING" | "CREATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "FAILED" | "COMPLETE")
+        def template_body: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#get_generated_template-instance_method
+      def get_generated_template: (
+                                    ?format: ("JSON" | "YAML"),
+                                    generated_template_name: ::String
+                                  ) -> _GetGeneratedTemplateResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGeneratedTemplateResponseSuccess
+
       interface _GetStackPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetStackPolicyOutput]
         def stack_policy_body: () -> ::String
@@ -834,6 +912,18 @@ module Aws
                         ) -> _ListExportsResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExportsResponseSuccess
 
+      interface _ListGeneratedTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGeneratedTemplatesOutput]
+        def summaries: () -> ::Array[Types::TemplateSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#list_generated_templates-instance_method
+      def list_generated_templates: (
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListGeneratedTemplatesResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGeneratedTemplatesResponseSuccess
+
       interface _ListImportsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListImportsOutput]
         def imports: () -> ::Array[::String]
@@ -845,6 +935,54 @@ module Aws
                           ?next_token: ::String
                         ) -> _ListImportsResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListImportsResponseSuccess
+
+      interface _ListResourceScanRelatedResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceScanRelatedResourcesOutput]
+        def related_resources: () -> ::Array[Types::ScannedResource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#list_resource_scan_related_resources-instance_method
+      def list_resource_scan_related_resources: (
+                                                  resource_scan_id: ::String,
+                                                  resources: Array[
+                                                    {
+                                                      resource_type: ::String,
+                                                      resource_identifier: Hash[::String, ::String]
+                                                    },
+                                                  ],
+                                                  ?next_token: ::String,
+                                                  ?max_results: ::Integer
+                                                ) -> _ListResourceScanRelatedResourcesResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceScanRelatedResourcesResponseSuccess
+
+      interface _ListResourceScanResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceScanResourcesOutput]
+        def resources: () -> ::Array[Types::ScannedResource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#list_resource_scan_resources-instance_method
+      def list_resource_scan_resources: (
+                                          resource_scan_id: ::String,
+                                          ?resource_identifier: ::String,
+                                          ?resource_type_prefix: ::String,
+                                          ?tag_key: ::String,
+                                          ?tag_value: ::String,
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListResourceScanResourcesResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceScanResourcesResponseSuccess
+
+      interface _ListResourceScansResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceScansOutput]
+        def resource_scan_summaries: () -> ::Array[Types::ResourceScanSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#list_resource_scans-instance_method
+      def list_resource_scans: (
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer
+                               ) -> _ListResourceScansResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceScansResponseSuccess
 
       interface _ListStackInstanceResourceDriftsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListStackInstanceResourceDriftsOutput]
@@ -1126,6 +1264,16 @@ module Aws
                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _StartResourceScanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartResourceScanOutput]
+        def resource_scan_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#start_resource_scan-instance_method
+      def start_resource_scan: (
+                                 ?client_request_token: ::String
+                               ) -> _StartResourceScanResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartResourceScanResponseSuccess
+
       interface _StopStackSetOperationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StopStackSetOperationOutput]
       end
@@ -1150,6 +1298,30 @@ module Aws
                        ?log_delivery_bucket: ::String
                      ) -> _TestTypeResponseSuccess
                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestTypeResponseSuccess
+
+      interface _UpdateGeneratedTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGeneratedTemplateOutput]
+        def generated_template_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#update_generated_template-instance_method
+      def update_generated_template: (
+                                       generated_template_name: ::String,
+                                       ?new_generated_template_name: ::String,
+                                       ?add_resources: Array[
+                                         {
+                                           resource_type: ::String,
+                                           logical_resource_id: ::String?,
+                                           resource_identifier: Hash[::String, ::String]
+                                         },
+                                       ],
+                                       ?remove_resources: Array[::String],
+                                       ?refresh_all_resources: bool,
+                                       ?template_configuration: {
+                                         deletion_policy: ("DELETE" | "RETAIN")?,
+                                         update_replace_policy: ("DELETE" | "RETAIN")?
+                                       }
+                                     ) -> _UpdateGeneratedTemplateResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGeneratedTemplateResponseSuccess
 
       interface _UpdateStackResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateStackOutput]

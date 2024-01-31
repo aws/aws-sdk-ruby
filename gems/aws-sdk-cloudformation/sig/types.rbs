@@ -134,6 +134,9 @@ module Aws::CloudFormation
       SENSITIVE: []
     end
 
+    class ConcurrentResourcesLimitExceededException < Aws::EmptyStructure
+    end
+
     class ContinueUpdateRollbackInput
       attr_accessor stack_name: ::String
       attr_accessor role_arn: ::String
@@ -171,6 +174,19 @@ module Aws::CloudFormation
     class CreateChangeSetOutput
       attr_accessor id: ::String
       attr_accessor stack_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGeneratedTemplateInput
+      attr_accessor resources: ::Array[Types::ResourceDefinition]
+      attr_accessor generated_template_name: ::String
+      attr_accessor stack_name: ::String
+      attr_accessor template_configuration: Types::TemplateConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateGeneratedTemplateOutput
+      attr_accessor generated_template_id: ::String
       SENSITIVE: []
     end
 
@@ -268,6 +284,11 @@ module Aws::CloudFormation
     end
 
     class DeleteChangeSetOutput < Aws::EmptyStructure
+    end
+
+    class DeleteGeneratedTemplateInput
+      attr_accessor generated_template_name: ::String
+      SENSITIVE: []
     end
 
     class DeleteStackInput
@@ -385,6 +406,26 @@ module Aws::CloudFormation
       SENSITIVE: []
     end
 
+    class DescribeGeneratedTemplateInput
+      attr_accessor generated_template_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeGeneratedTemplateOutput
+      attr_accessor generated_template_id: ::String
+      attr_accessor generated_template_name: ::String
+      attr_accessor resources: ::Array[Types::ResourceDetail]
+      attr_accessor status: ("CREATE_PENDING" | "UPDATE_PENDING" | "DELETE_PENDING" | "CREATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "FAILED" | "COMPLETE")
+      attr_accessor status_reason: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor progress: Types::TemplateProgress
+      attr_accessor stack_id: ::String
+      attr_accessor template_configuration: Types::TemplateConfiguration
+      attr_accessor total_warnings: ::Integer
+      SENSITIVE: []
+    end
+
     class DescribeOrganizationsAccessInput
       attr_accessor call_as: ("SELF" | "DELEGATED_ADMIN")
       SENSITIVE: []
@@ -405,6 +446,24 @@ module Aws::CloudFormation
       attr_accessor publisher_status: ("VERIFIED" | "UNVERIFIED")
       attr_accessor identity_provider: ("AWS_Marketplace" | "GitHub" | "Bitbucket")
       attr_accessor publisher_profile: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeResourceScanInput
+      attr_accessor resource_scan_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeResourceScanOutput
+      attr_accessor resource_scan_id: ::String
+      attr_accessor status: ("IN_PROGRESS" | "FAILED" | "COMPLETE" | "EXPIRED")
+      attr_accessor status_reason: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor percentage_completed: ::Float
+      attr_accessor resource_types: ::Array[::String]
+      attr_accessor resources_scanned: ::Integer
+      attr_accessor resources_read: ::Integer
       SENSITIVE: []
     end
 
@@ -641,6 +700,21 @@ module Aws::CloudFormation
       SENSITIVE: []
     end
 
+    class GeneratedTemplateNotFoundException < Aws::EmptyStructure
+    end
+
+    class GetGeneratedTemplateInput
+      attr_accessor format: ("JSON" | "YAML")
+      attr_accessor generated_template_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetGeneratedTemplateOutput
+      attr_accessor status: ("CREATE_PENDING" | "UPDATE_PENDING" | "DELETE_PENDING" | "CREATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "FAILED" | "COMPLETE")
+      attr_accessor template_body: ::String
+      SENSITIVE: []
+    end
+
     class GetStackPolicyInput
       attr_accessor stack_name: ::String
       SENSITIVE: []
@@ -742,6 +816,18 @@ module Aws::CloudFormation
       SENSITIVE: []
     end
 
+    class ListGeneratedTemplatesInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListGeneratedTemplatesOutput
+      attr_accessor summaries: ::Array[Types::TemplateSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListImportsInput
       attr_accessor export_name: ::String
       attr_accessor next_token: ::String
@@ -750,6 +836,49 @@ module Aws::CloudFormation
 
     class ListImportsOutput
       attr_accessor imports: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceScanRelatedResourcesInput
+      attr_accessor resource_scan_id: ::String
+      attr_accessor resources: ::Array[Types::ScannedResourceIdentifier]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListResourceScanRelatedResourcesOutput
+      attr_accessor related_resources: ::Array[Types::ScannedResource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceScanResourcesInput
+      attr_accessor resource_scan_id: ::String
+      attr_accessor resource_identifier: ::String
+      attr_accessor resource_type_prefix: ::String
+      attr_accessor tag_key: ::String
+      attr_accessor tag_value: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListResourceScanResourcesOutput
+      attr_accessor resources: ::Array[Types::ScannedResource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceScansInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListResourceScansOutput
+      attr_accessor resource_scan_summaries: ::Array[Types::ResourceScanSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1072,10 +1201,46 @@ module Aws::CloudFormation
       SENSITIVE: []
     end
 
+    class ResourceDefinition
+      attr_accessor resource_type: ::String
+      attr_accessor logical_resource_id: ::String
+      attr_accessor resource_identifier: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ResourceDetail
+      attr_accessor resource_type: ::String
+      attr_accessor logical_resource_id: ::String
+      attr_accessor resource_identifier: ::Hash[::String, ::String]
+      attr_accessor resource_status: ("PENDING" | "IN_PROGRESS" | "FAILED" | "COMPLETE")
+      attr_accessor resource_status_reason: ::String
+      attr_accessor warnings: ::Array[Types::WarningDetail]
+      SENSITIVE: []
+    end
+
     class ResourceIdentifierSummary
       attr_accessor resource_type: ::String
       attr_accessor logical_resource_ids: ::Array[::String]
       attr_accessor resource_identifiers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResourceScanInProgressException < Aws::EmptyStructure
+    end
+
+    class ResourceScanLimitExceededException < Aws::EmptyStructure
+    end
+
+    class ResourceScanNotFoundException < Aws::EmptyStructure
+    end
+
+    class ResourceScanSummary
+      attr_accessor resource_scan_id: ::String
+      attr_accessor status: ("IN_PROGRESS" | "FAILED" | "COMPLETE" | "EXPIRED")
+      attr_accessor status_reason: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor percentage_completed: ::Float
       SENSITIVE: []
     end
 
@@ -1115,6 +1280,19 @@ module Aws::CloudFormation
     class RollbackTrigger
       attr_accessor arn: ::String
       attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ScannedResource
+      attr_accessor resource_type: ::String
+      attr_accessor resource_identifier: ::Hash[::String, ::String]
+      attr_accessor managed_by_stack: bool
+      SENSITIVE: []
+    end
+
+    class ScannedResourceIdentifier
+      attr_accessor resource_type: ::String
+      attr_accessor resource_identifier: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -1473,6 +1651,16 @@ module Aws::CloudFormation
     class StaleRequestException < Aws::EmptyStructure
     end
 
+    class StartResourceScanInput
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartResourceScanOutput
+      attr_accessor resource_scan_id: ::String
+      SENSITIVE: []
+    end
+
     class StopStackSetOperationInput
       attr_accessor stack_set_name: ::String
       attr_accessor operation_id: ::String
@@ -1489,11 +1677,36 @@ module Aws::CloudFormation
       SENSITIVE: []
     end
 
+    class TemplateConfiguration
+      attr_accessor deletion_policy: ("DELETE" | "RETAIN")
+      attr_accessor update_replace_policy: ("DELETE" | "RETAIN")
+      SENSITIVE: []
+    end
+
     class TemplateParameter
       attr_accessor parameter_key: ::String
       attr_accessor default_value: ::String
       attr_accessor no_echo: bool
       attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class TemplateProgress
+      attr_accessor resources_succeeded: ::Integer
+      attr_accessor resources_failed: ::Integer
+      attr_accessor resources_processing: ::Integer
+      attr_accessor resources_pending: ::Integer
+      SENSITIVE: []
+    end
+
+    class TemplateSummary
+      attr_accessor generated_template_id: ::String
+      attr_accessor generated_template_name: ::String
+      attr_accessor status: ("CREATE_PENDING" | "UPDATE_PENDING" | "DELETE_PENDING" | "CREATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "FAILED" | "COMPLETE")
+      attr_accessor status_reason: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor number_of_resources: ::Integer
       SENSITIVE: []
     end
 
@@ -1578,6 +1791,21 @@ module Aws::CloudFormation
       attr_accessor time_created: ::Time
       attr_accessor description: ::String
       attr_accessor public_version_number: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateGeneratedTemplateInput
+      attr_accessor generated_template_name: ::String
+      attr_accessor new_generated_template_name: ::String
+      attr_accessor add_resources: ::Array[Types::ResourceDefinition]
+      attr_accessor remove_resources: ::Array[::String]
+      attr_accessor refresh_all_resources: bool
+      attr_accessor template_configuration: Types::TemplateConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateGeneratedTemplateOutput
+      attr_accessor generated_template_id: ::String
       SENSITIVE: []
     end
 
@@ -1676,6 +1904,19 @@ module Aws::CloudFormation
       attr_accessor capabilities: ::Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")]
       attr_accessor capabilities_reason: ::String
       attr_accessor declared_transforms: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class WarningDetail
+      attr_accessor type: ("MUTUALLY_EXCLUSIVE_PROPERTIES" | "UNSUPPORTED_PROPERTIES" | "MUTUALLY_EXCLUSIVE_TYPES")
+      attr_accessor properties: ::Array[Types::WarningProperty]
+      SENSITIVE: []
+    end
+
+    class WarningProperty
+      attr_accessor property_path: ::String
+      attr_accessor required: bool
+      attr_accessor description: ::String
       SENSITIVE: []
     end
 

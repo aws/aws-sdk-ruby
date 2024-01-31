@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.164.0 (2024-01-31)
+------------------
+
+* Feature - This release adds an optional Duration parameter to StateManager Associations. This allows customers to specify how long an apply-only-on-cron association execution should run. Once the specified Duration is out all the ongoing cancellable commands or automations are cancelled.
+
 1.163.0 (2024-01-26)
 ------------------
 

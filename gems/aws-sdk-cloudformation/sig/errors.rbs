@@ -18,7 +18,11 @@ module Aws
       end
       class ChangeSetNotFoundException < ::Aws::Errors::ServiceError
       end
+      class ConcurrentResourcesLimitExceededException < ::Aws::Errors::ServiceError
+      end
       class CreatedButModifiedException < ::Aws::Errors::ServiceError
+      end
+      class GeneratedTemplateNotFoundException < ::Aws::Errors::ServiceError
       end
       class InsufficientCapabilitiesException < ::Aws::Errors::ServiceError
       end
@@ -39,6 +43,12 @@ module Aws
       class OperationNotFoundException < ::Aws::Errors::ServiceError
       end
       class OperationStatusCheckFailedException < ::Aws::Errors::ServiceError
+      end
+      class ResourceScanInProgressException < ::Aws::Errors::ServiceError
+      end
+      class ResourceScanLimitExceededException < ::Aws::Errors::ServiceError
+      end
+      class ResourceScanNotFoundException < ::Aws::Errors::ServiceError
       end
       class StackInstanceNotFoundException < ::Aws::Errors::ServiceError
       end

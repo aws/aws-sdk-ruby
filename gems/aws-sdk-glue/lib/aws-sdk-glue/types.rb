@@ -13462,11 +13462,12 @@ module Aws::Glue
     #   In Ray jobs, Runtime is used to specify the versions of Ray, Python
     #   and additional libraries available in your environment. This field
     #   is not used in other job types. For supported runtime environment
-    #   values, see [Working with Ray jobs][1] in the Glue Developer Guide.
+    #   values, see [Supported Ray runtime environments][1] in the Glue
+    #   Developer Guide.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/author-job-ray-runtimes.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/ray-jobs-section.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobCommand AWS API Documentation

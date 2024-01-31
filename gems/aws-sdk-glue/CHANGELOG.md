@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.167.0 (2024-01-31)
+------------------
+
+* Feature - Update page size limits for GetJobRuns and GetTriggers APIs.
+
 1.166.0 (2024-01-26)
 ------------------
 

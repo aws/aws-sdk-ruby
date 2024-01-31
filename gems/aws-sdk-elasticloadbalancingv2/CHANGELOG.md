@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.98.0 (2024-01-31)
+------------------
+
+* Feature - This release enables unhealthy target draining intervals for Network Load Balancers.
+
 1.97.0 (2024-01-26)
 ------------------
 

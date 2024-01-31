@@ -604,6 +604,15 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # No more than 5 generated templates can be in an `InProgress` or
+    # `Pending` status at one time. This error is also returned if a
+    # generated template that is in an `InProgress` or `Pending` status is
+    # attempted to be updated or deleted.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ConcurrentResourcesLimitExceededException AWS API Documentation
+    #
+    class ConcurrentResourcesLimitExceededException < Aws::EmptyStructure; end
+
     # The input for the ContinueUpdateRollback action.
     #
     # @!attribute [rw] stack_name
@@ -1036,6 +1045,52 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # @!attribute [rw] resources
+    #   An optional list of resources to be included in the generated
+    #   template.
+    #
+    #   If no resources are specified,the template will be created without
+    #   any resources. Resources can be added to the template using the
+    #   `UpdateGeneratedTemplate` API action.
+    #   @return [Array<Types::ResourceDefinition>]
+    #
+    # @!attribute [rw] generated_template_name
+    #   The name assigned to the generated template.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_name
+    #   An optional name or ARN of a stack to use as the base stack for the
+    #   generated template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_configuration
+    #   The configuration details of the generated template, including the
+    #   `DeletionPolicy` and `UpdateReplacePolicy`.
+    #   @return [Types::TemplateConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateGeneratedTemplateInput AWS API Documentation
+    #
+    class CreateGeneratedTemplateInput < Struct.new(
+      :resources,
+      :generated_template_name,
+      :stack_name,
+      :template_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] generated_template_id
+    #   The ID of the generated template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateGeneratedTemplateOutput AWS API Documentation
+    #
+    class CreateGeneratedTemplateOutput < Struct.new(
+      :generated_template_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input for CreateStack action.
     #
     # @!attribute [rw] stack_name
@@ -1101,7 +1156,7 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] timeout_in_minutes
     #   The amount of time that can pass before the stack status becomes
-    #   CREATE\_FAILED; if `DisableRollback` is not set or is set to
+    #   `CREATE_FAILED`; if `DisableRollback` is not set or is set to
     #   `false`, the stack will be rolled back.
     #   @return [Integer]
     #
@@ -1867,6 +1922,18 @@ module Aws::CloudFormation
     #
     class DeleteChangeSetOutput < Aws::EmptyStructure; end
 
+    # @!attribute [rw] generated_template_name
+    #   The name or Amazon Resource Name (ARN) of a generated template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteGeneratedTemplateInput AWS API Documentation
+    #
+    class DeleteGeneratedTemplateInput < Struct.new(
+      :generated_template_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input for DeleteStack action.
     #
     # @!attribute [rw] stack_name
@@ -2488,6 +2555,106 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # @!attribute [rw] generated_template_name
+    #   The name or Amazon Resource Name (ARN) of a generated template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeGeneratedTemplateInput AWS API Documentation
+    #
+    class DescribeGeneratedTemplateInput < Struct.new(
+      :generated_template_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] generated_template_id
+    #   The Amazon Resource Name (ARN) of the generated template. The format
+    #   is
+    #   `arn:$\{Partition\}:cloudformation:$\{Region\}:$\{Account\}:generatedtemplate/$\{Id\}`.
+    #   For example,
+    #   `arn:aws:cloudformation:us-east-1:123456789012:generatedtemplate/2e8465c1-9a80-43ea-a3a3-4f2d692fe6dc
+    #   `.
+    #   @return [String]
+    #
+    # @!attribute [rw] generated_template_name
+    #   The name of the generated template.
+    #   @return [String]
+    #
+    # @!attribute [rw] resources
+    #   A list of objects describing the details of the resources in the
+    #   template generation.
+    #   @return [Array<Types::ResourceDetail>]
+    #
+    # @!attribute [rw] status
+    #   The status of the template generation. Supported values are:
+    #
+    #   * `CreatePending` - the creation of the template is pending.
+    #
+    #   * `CreateInProgress` - the creation of the template is in progress.
+    #
+    #   * `DeletePending` - the deletion of the template is pending.
+    #
+    #   * `DeleteInProgress` - the deletion of the template is in progress.
+    #
+    #   * `UpdatePending` - the update of the template is pending.
+    #
+    #   * `UpdateInProgress` - the update of the template is in progress.
+    #
+    #   * `Failed` - the template operation failed.
+    #
+    #   * `Complete` - the template operation is complete.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the current template generation status. This will
+    #   provide more details if a failure happened.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time the generated template was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time the generated template was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] progress
+    #   An object describing the progress of the template generation.
+    #   @return [Types::TemplateProgress]
+    #
+    # @!attribute [rw] stack_id
+    #   The stack ARN of the base stack if a base stack was provided when
+    #   generating the template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_configuration
+    #   The configuration details of the generated template, including the
+    #   `DeletionPolicy` and `UpdateReplacePolicy`.
+    #   @return [Types::TemplateConfiguration]
+    #
+    # @!attribute [rw] total_warnings
+    #   The number of warnings generated for this template. The warnings are
+    #   found in the details of each of the resources in the template.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeGeneratedTemplateOutput AWS API Documentation
+    #
+    class DescribeGeneratedTemplateOutput < Struct.new(
+      :generated_template_id,
+      :generated_template_name,
+      :resources,
+      :status,
+      :status_reason,
+      :creation_time,
+      :last_updated_time,
+      :progress,
+      :stack_id,
+      :template_configuration,
+      :total_warnings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] call_as
     #   \[Service-managed permissions\] Specifies whether you are acting as
     #   an account administrator in the organization's management account
@@ -2571,6 +2738,100 @@ module Aws::CloudFormation
       :publisher_status,
       :identity_provider,
       :publisher_profile)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_scan_id
+    #   The Amazon Resource Name (ARN) of the resource scan.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeResourceScanInput AWS API Documentation
+    #
+    class DescribeResourceScanInput < Struct.new(
+      :resource_scan_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_scan_id
+    #   The Amazon Resource Name (ARN) of the resource scan. The format is
+    #   `arn:$\{Partition\}:cloudformation:$\{Region\}:$\{Account\}:resourceScan/$\{Id\}`.
+    #   An example is
+    #   `arn:aws:cloudformation:us-east-1:123456789012:resourceScan/f5b490f7-7ed4-428a-aa06-31ff25db0772
+    #   `.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of the resource scan.
+    #
+    #   INPROGRESS
+    #
+    #   : The resource scan is still in progress.
+    #
+    #   COMPLETE
+    #
+    #   : The resource scan is complete.
+    #
+    #   EXPIRED
+    #
+    #   : The resource scan has expired.
+    #
+    #   FAILED
+    #
+    #   : The resource scan has failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the resource scan status, providing more information
+    #   if a failure happened.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time that the resource scan was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time that the resource scan was finished.
+    #   @return [Time]
+    #
+    # @!attribute [rw] percentage_completed
+    #   The percentage of the resource scan that has been completed.
+    #   @return [Float]
+    #
+    # @!attribute [rw] resource_types
+    #   The list of resource types for the specified scan. Resource types
+    #   are only available for scans with a `Status` set to `COMPLETE` or
+    #   `FAILED `.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resources_scanned
+    #   The number of resources that were listed. This is only available for
+    #   scans with a `Status` set to `COMPLETE`, `EXPIRED`, or `FAILED `.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resources_read
+    #   The number of resources that were read. This is only available for
+    #   scans with a `Status` set to `COMPLETE`, `EXPIRED`, or `FAILED `.
+    #
+    #   <note markdown="1"> This field may be 0 if the resource scan failed with a
+    #   `ResourceScanLimitExceededException`.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeResourceScanOutput AWS API Documentation
+    #
+    class DescribeResourceScanOutput < Struct.new(
+      :resource_scan_id,
+      :status,
+      :status_reason,
+      :start_time,
+      :end_time,
+      :percentage_completed,
+      :resource_types,
+      :resources_scanned,
+      :resources_read)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3876,6 +4137,73 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # The generated template was not found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GeneratedTemplateNotFoundException AWS API Documentation
+    #
+    class GeneratedTemplateNotFoundException < Aws::EmptyStructure; end
+
+    # @!attribute [rw] format
+    #   The language to use to retrieve for the generated template.
+    #   Supported values are:
+    #
+    #   * `JSON`
+    #
+    #   * `YAML`
+    #   @return [String]
+    #
+    # @!attribute [rw] generated_template_name
+    #   The name or Amazon Resource Name (ARN) of the generated template.
+    #   The format is
+    #   `arn:$\{Partition\}:cloudformation:$\{Region\}:$\{Account\}:generatedtemplate/$\{Id\}`.
+    #   For example,
+    #   `arn:aws:cloudformation:us-east-1:123456789012:generatedtemplate/2e8465c1-9a80-43ea-a3a3-4f2d692fe6dc
+    #   `.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetGeneratedTemplateInput AWS API Documentation
+    #
+    class GetGeneratedTemplateInput < Struct.new(
+      :format,
+      :generated_template_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the template generation. Supported values are:
+    #
+    #   * `CreatePending` - the creation of the template is pending.
+    #
+    #   * `CreateInProgress` - the creation of the template is in progress.
+    #
+    #   * `DeletePending` - the deletion of the template is pending.
+    #
+    #   * `DeleteInProgress` - the deletion of the template is in progress.
+    #
+    #   * `UpdatePending` - the update of the template is pending.
+    #
+    #   * `UpdateInProgress` - the update of the template is in progress.
+    #
+    #   * `Failed` - the template operation failed.
+    #
+    #   * `Complete` - the template operation is complete.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_body
+    #   The template body of the generated template, in the language
+    #   specified by the `Language` parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetGeneratedTemplateOutput AWS API Documentation
+    #
+    class GetGeneratedTemplateOutput < Struct.new(
+      :status,
+      :template_body)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input for the GetStackPolicy action.
     #
     # @!attribute [rw] stack_name
@@ -4351,6 +4679,48 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   A string that identifies the next page of resource scan results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   If the number of available results exceeds this maximum, the
+    #   response includes a `NextToken` value that you can use for the
+    #   `NextToken` parameter to get the next set of results. By default the
+    #   `ListGeneratedTemplates` API action will return at most 50 results
+    #   in each response. The maximum value is 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListGeneratedTemplatesInput AWS API Documentation
+    #
+    class ListGeneratedTemplatesInput < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] summaries
+    #   A list of summaries of the generated templates.
+    #   @return [Array<Types::TemplateSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the request doesn't return all the remaining results,
+    #   `NextToken` is set to a token. To retrieve the next set of results,
+    #   call `ListGeneratedTemplates` again and use that value for the
+    #   `NextToken` parameter. If the request returns all results,
+    #   `NextToken` is set to an empty string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListGeneratedTemplatesOutput AWS API Documentation
+    #
+    class ListGeneratedTemplatesOutput < Struct.new(
+      :summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] export_name
     #   The name of the exported output value. CloudFormation returns the
     #   stack names that are importing this value.
@@ -4385,6 +4755,172 @@ module Aws::CloudFormation
     #
     class ListImportsOutput < Struct.new(
       :imports,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_scan_id
+    #   The Amazon Resource Name (ARN) of the resource scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] resources
+    #   The list of resources for which you want to get the related
+    #   resources. Up to 100 resources can be provided.
+    #   @return [Array<Types::ScannedResourceIdentifier>]
+    #
+    # @!attribute [rw] next_token
+    #   A string that identifies the next page of resource scan results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   If the number of available results exceeds this maximum, the
+    #   response includes a `NextToken` value that you can use for the
+    #   `NextToken` parameter to get the next set of results. By default the
+    #   `ListResourceScanRelatedResources` API action will return up to 100
+    #   results in each response. The maximum value is 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListResourceScanRelatedResourcesInput AWS API Documentation
+    #
+    class ListResourceScanRelatedResourcesInput < Struct.new(
+      :resource_scan_id,
+      :resources,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] related_resources
+    #   List of up to `MaxResults` resources in the specified resource scan
+    #   related to the specified resources.
+    #   @return [Array<Types::ScannedResource>]
+    #
+    # @!attribute [rw] next_token
+    #   If the request doesn't return all the remaining results,
+    #   `NextToken` is set to a token. To retrieve the next set of results,
+    #   call `ListResourceScanRelatedResources` again and use that value for
+    #   the `NextToken` parameter. If the request returns all results,
+    #   `NextToken` is set to an empty string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListResourceScanRelatedResourcesOutput AWS API Documentation
+    #
+    class ListResourceScanRelatedResourcesOutput < Struct.new(
+      :related_resources,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_scan_id
+    #   The Amazon Resource Name (ARN) of the resource scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   If specified, the returned resources will have the specified
+    #   resource identifier (or one of them in the case where the resource
+    #   has multiple identifiers).
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type_prefix
+    #   If specified, the returned resources will be of any of the resource
+    #   types with the specified prefix.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_key
+    #   If specified, the returned resources will have a matching tag key.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_value
+    #   If specified, the returned resources will have a matching tag value.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A string that identifies the next page of resource scan results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   If the number of available results exceeds this maximum, the
+    #   response includes a `NextToken` value that you can use for the
+    #   `NextToken` parameter to get the next set of results. By default the
+    #   `ListResourceScanResources` API action will return at most 100
+    #   results in each response. The maximum value is 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListResourceScanResourcesInput AWS API Documentation
+    #
+    class ListResourceScanResourcesInput < Struct.new(
+      :resource_scan_id,
+      :resource_identifier,
+      :resource_type_prefix,
+      :tag_key,
+      :tag_value,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resources
+    #   List of up to `MaxResults` resources in the specified resource scan
+    #   that match all of the specified filters.
+    #   @return [Array<Types::ScannedResource>]
+    #
+    # @!attribute [rw] next_token
+    #   If the request doesn't return all the remaining results,
+    #   `NextToken` is set to a token. To retrieve the next set of results,
+    #   call `ListResourceScanResources` again and use that value for the
+    #   `NextToken` parameter. If the request returns all results,
+    #   `NextToken` is set to an empty string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListResourceScanResourcesOutput AWS API Documentation
+    #
+    class ListResourceScanResourcesOutput < Struct.new(
+      :resources,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A string that identifies the next page of resource scan results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   If the number of available results exceeds this maximum, the
+    #   response includes a `NextToken` value that you can use for the
+    #   `NextToken` parameter to get the next set of results. The default
+    #   value is 10. The maximum value is 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListResourceScansInput AWS API Documentation
+    #
+    class ListResourceScansInput < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_scan_summaries
+    #   The list of scans returned.
+    #   @return [Array<Types::ResourceScanSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the request doesn't return all the remaining results,
+    #   `NextToken` is set to a token. To retrieve the next set of results,
+    #   call `ListResourceScans` again and use that value for the
+    #   `NextToken` parameter. If the request returns all results,
+    #   `NextToken` is set to an empty string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListResourceScansOutput AWS API Documentation
+    #
+    class ListResourceScansOutput < Struct.new(
+      :resource_scan_summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -6109,6 +6645,126 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # A resource included in a generated template. This data type is used
+    # with the `CreateGeneratedTemplate` and `UpdateGeneratedTemplate` API
+    # actions.
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource, such as `AWS::DynamoDB::Table`. For the
+    #   list of supported resources, see [IaC generator supported resource
+    #   types][1] in the *CloudFormation User Guide*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC-supported-resources.html
+    #   @return [String]
+    #
+    # @!attribute [rw] logical_resource_id
+    #   The logical resource id for this resource in the generated template.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   A list of up to 256 key-value pairs that identifies the scanned
+    #   resource. The key is the name of one of the primary identifiers for
+    #   the resource. (Primary identifiers are specified in the
+    #   `primaryIdentifier` list in the resource schema.) The value is the
+    #   value of that primary identifier. For example, for a
+    #   `AWS::DynamoDB::Table` resource, the primary identifiers is
+    #   `TableName` so the key-value pair could be `"TableName":
+    #   "MyDDBTable"`. For more information, see [primaryIdentifier][1] in
+    #   the *CloudFormation Command Line Interface User guide for extension
+    #   development*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-primaryidentifier
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceDefinition AWS API Documentation
+    #
+    class ResourceDefinition < Struct.new(
+      :resource_type,
+      :logical_resource_id,
+      :resource_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a resource in a generated template
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource, such as `AWS::DynamoDB::Table`. For the
+    #   list of supported resources, see [IaC generator supported resource
+    #   types][1] In the *CloudFormation User Guide*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC-supported-resources.html
+    #   @return [String]
+    #
+    # @!attribute [rw] logical_resource_id
+    #   The logical id for this resource in the final generated template.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   A list of up to 256 key-value pairs that identifies the resource in
+    #   the generated template. The key is the name of one of the primary
+    #   identifiers for the resource. (Primary identifiers are specified in
+    #   the `primaryIdentifier` list in the resource schema.) The value is
+    #   the value of that primary identifier. For example, for a
+    #   `AWS::DynamoDB::Table` resource, the primary identifiers is
+    #   `TableName` so the key-value pair could be `"TableName":
+    #   "MyDDBTable"`. For more information, see [primaryIdentifier][1] in
+    #   the *CloudFormation Command Line Interface User guide for extension
+    #   development*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-primaryidentifier
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] resource_status
+    #   Status of the processing of a resource in a generated template.
+    #
+    #   InProgress
+    #
+    #   : The resource processing is still in progress.
+    #
+    #   Complete
+    #
+    #   : The resource processing is complete.
+    #
+    #   Pending
+    #
+    #   : The resource processing is pending.
+    #
+    #   Failed
+    #
+    #   : The resource processing has failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_status_reason
+    #   The reason for the resource detail, providing more information if a
+    #   failure happened.
+    #   @return [String]
+    #
+    # @!attribute [rw] warnings
+    #   The warnings generated for this resource.
+    #   @return [Array<Types::WarningDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceDetail AWS API Documentation
+    #
+    class ResourceDetail < Struct.new(
+      :resource_type,
+      :logical_resource_id,
+      :resource_identifier,
+      :resource_status,
+      :resource_status_reason,
+      :warnings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the target resources of a specific type in your import
     # template (for example, all `AWS::S3::Bucket` resources) and the
     # properties you can provide during the import to identify resources of
@@ -6136,6 +6792,91 @@ module Aws::CloudFormation
       :resource_type,
       :logical_resource_ids,
       :resource_identifiers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A resource scan is currently in progress. Only one can be run at a
+    # time for an account in a Region.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceScanInProgressException AWS API Documentation
+    #
+    class ResourceScanInProgressException < Aws::EmptyStructure; end
+
+    # The limit on resource scans has been exceeded. Reasons include:
+    #
+    # * Exceeded the daily quota for resource scans.
+    #
+    # * A resource scan recently failed. You must wait 10 minutes before
+    #   starting a new resource scan.
+    #
+    # * The last resource scan failed after exceeding 100,000 resources.
+    #   When this happens, you must wait 24 hours before starting a new
+    #   resource scan.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceScanLimitExceededException AWS API Documentation
+    #
+    class ResourceScanLimitExceededException < Aws::EmptyStructure; end
+
+    # The resource scan was not found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceScanNotFoundException AWS API Documentation
+    #
+    class ResourceScanNotFoundException < Aws::EmptyStructure; end
+
+    # A summary of the resource scan. This is returned by the
+    # `ListResourceScan` API action.
+    #
+    # @!attribute [rw] resource_scan_id
+    #   The Amazon Resource Name (ARN) of the resource scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of the resource scan.
+    #
+    #   INPROGRESS
+    #
+    #   : The resource scan is still in progress.
+    #
+    #   COMPLETE
+    #
+    #   : The resource scan is complete.
+    #
+    #   EXPIRED
+    #
+    #   : The resource scan has expired.
+    #
+    #   FAILED
+    #
+    #   : The resource scan has failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the resource scan status, providing more information
+    #   if a failure happened.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time that the resource scan was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time that the resource scan was finished.
+    #   @return [Time]
+    #
+    # @!attribute [rw] percentage_completed
+    #   The percentage of the resource scan that has been completed.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceScanSummary AWS API Documentation
+    #
+    class ResourceScanSummary < Struct.new(
+      :resource_scan_id,
+      :status,
+      :status_reason,
+      :start_time,
+      :end_time,
+      :percentage_completed)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6356,6 +7097,89 @@ module Aws::CloudFormation
     class RollbackTrigger < Struct.new(
       :arn,
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A scanned resource returned by `ListResourceScanResources` or
+    # `ListResourceScanRelatedResources`.
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource, such as `AWS::DynamoDB::Table`. For the
+    #   list of supported resources, see [IaC generator supported resource
+    #   types][1] In the *CloudFormation User Guide*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC-supported-resources.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   A list of up to 256 key-value pairs that identifies for the scanned
+    #   resource. The key is the name of one of the primary identifiers for
+    #   the resource. (Primary identifiers are specified in the
+    #   `primaryIdentifier` list in the resource schema.) The value is the
+    #   value of that primary identifier. For example, for a
+    #   `AWS::DynamoDB::Table` resource, the primary identifiers is
+    #   `TableName` so the key-value pair could be `"TableName":
+    #   "MyDDBTable"`. For more information, see [primaryIdentifier][1] in
+    #   the *CloudFormation Command Line Interface User guide for extension
+    #   development*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-primaryidentifier
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] managed_by_stack
+    #   If `true`, the resource is managed by a CloudFormation stack.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ScannedResource AWS API Documentation
+    #
+    class ScannedResource < Struct.new(
+      :resource_type,
+      :resource_identifier,
+      :managed_by_stack)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies a scanned resource. This is used with the
+    # `ListResourceScanRelatedResources` API action.
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource, such as `AWS::DynamoDB::Table`. For the
+    #   list of supported resources, see [IaC generator supported resource
+    #   types][1] In the *CloudFormation User Guide*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC-supported-resources.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   A list of up to 256 key-value pairs that identifies the scanned
+    #   resource. The key is the name of one of the primary identifiers for
+    #   the resource. (Primary identifiers are specified in the
+    #   `primaryIdentifier` list in the resource schema.) The value is the
+    #   value of that primary identifier. For example, for a
+    #   `AWS::DynamoDB::Table` resource, the primary identifiers is
+    #   `TableName` so the key-value pair could be `"TableName":
+    #   "MyDDBTable"`. For more information, see [primaryIdentifier][1] in
+    #   the *CloudFormation Command Line Interface User guide for extension
+    #   development*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-primaryidentifier
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ScannedResourceIdentifier AWS API Documentation
+    #
+    class ScannedResourceIdentifier < Struct.new(
+      :resource_type,
+      :resource_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8206,6 +9030,10 @@ module Aws::CloudFormation
     # @!attribute [rw] region_order
     #   The order of the Regions where you want to perform the stack
     #   operation.
+    #
+    #   <note markdown="1"> `RegionOrder` isn't followed if `AutoDeployment` is enabled.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] failure_tolerance_count
@@ -8687,6 +9515,36 @@ module Aws::CloudFormation
     #
     class StaleRequestException < Aws::EmptyStructure; end
 
+    # @!attribute [rw] client_request_token
+    #   A unique identifier for this `StartResourceScan` request. Specify
+    #   this token if you plan to retry requests so that CloudFormation
+    #   knows that you're not attempting to start a new resource scan.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StartResourceScanInput AWS API Documentation
+    #
+    class StartResourceScanInput < Struct.new(
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_scan_id
+    #   The Amazon Resource Name (ARN) of the resource scan. The format is
+    #   `arn:$\{Partition\}:cloudformation:$\{Region\}:$\{Account\}:resourceScan/$\{Id\}`.
+    #   An example is
+    #   `arn:aws:cloudformation:us-east-1:123456789012:resourceScan/f5b490f7-7ed4-428a-aa06-31ff25db0772
+    #   `.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StartResourceScanOutput AWS API Documentation
+    #
+    class StartResourceScanOutput < Struct.new(
+      :resource_scan_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] stack_set_name
     #   The name or unique ID of the stack set that you want to stop the
     #   operation for.
@@ -8756,6 +9614,51 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # The configuration details of a generated template.
+    #
+    # @!attribute [rw] deletion_policy
+    #   The `DeletionPolicy` assigned to resources in the generated
+    #   template. Supported values are:
+    #
+    #   * `DELETE` - delete all resources when the stack is deleted.
+    #
+    #   * `RETAIN` - retain all resources when the stack is deleted.
+    #
+    #   For more information, see [ `DeletionPolicy` attribute][1] in the
+    #   *CloudFormation User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html
+    #   @return [String]
+    #
+    # @!attribute [rw] update_replace_policy
+    #   The `UpdateReplacePolicy` assigned to resources in the generated
+    #   template. Supported values are:
+    #
+    #   * `DELETE` - delete all resources when the resource is replaced
+    #     during an update operation.
+    #
+    #   * `RETAIN` - retain all resources when the resource is replaced
+    #     during an update operation.
+    #
+    #   For more information, see [ `UpdateReplacePolicy` attribute][1] in
+    #   the *CloudFormation User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-updatereplacepolicy.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/TemplateConfiguration AWS API Documentation
+    #
+    class TemplateConfiguration < Struct.new(
+      :deletion_policy,
+      :update_replace_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The TemplateParameter data type.
     #
     # @!attribute [rw] parameter_key
@@ -8782,6 +9685,104 @@ module Aws::CloudFormation
       :default_value,
       :no_echo,
       :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the progress of the template generation.
+    #
+    # @!attribute [rw] resources_succeeded
+    #   The number of resources that succeeded the template generation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resources_failed
+    #   The number of resources that failed the template generation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resources_processing
+    #   The number of resources that are in-process for the template
+    #   generation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resources_pending
+    #   The number of resources that are still pending the template
+    #   generation.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/TemplateProgress AWS API Documentation
+    #
+    class TemplateProgress < Struct.new(
+      :resources_succeeded,
+      :resources_failed,
+      :resources_processing,
+      :resources_pending)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary of a generated template.
+    #
+    # @!attribute [rw] generated_template_id
+    #   The Amazon Resource Name (ARN) of the generated template. The format
+    #   is
+    #   `arn:$\{Partition\}:cloudformation:$\{Region\}:$\{Account\}:generatedtemplate/$\{Id\}`.
+    #   For example,
+    #   `arn:aws:cloudformation:us-east-1:123456789012:generatedtemplate/2e8465c1-9a80-43ea-a3a3-4f2d692fe6dc
+    #   `.
+    #   @return [String]
+    #
+    # @!attribute [rw] generated_template_name
+    #   The name of the generated template.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the template generation. Supported values are:
+    #
+    #   * `CreatePending` - the creation of the template is pending.
+    #
+    #   * `CreateInProgress` - the creation of the template is in progress.
+    #
+    #   * `DeletePending` - the deletion of the template is pending.
+    #
+    #   * `DeleteInProgress` - the deletion of the template is in progress.
+    #
+    #   * `UpdatePending` - the update of the template is pending.
+    #
+    #   * `UpdateInProgress` - the update of the template is in progress.
+    #
+    #   * `Failed` - the template operation failed.
+    #
+    #   * `Complete` - the template operation is complete.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the current template generation status. This will
+    #   provide more details if a failure happened.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time the generated template was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time the generated template was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] number_of_resources
+    #   The number of resources in the generated template. This is a total
+    #   of resources in pending, in-progress, completed, and failed states.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/TemplateSummary AWS API Documentation
+    #
+    class TemplateSummary < Struct.new(
+      :generated_template_id,
+      :generated_template_name,
+      :status,
+      :status_reason,
+      :creation_time,
+      :last_updated_time,
+      :number_of_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9291,6 +10292,66 @@ module Aws::CloudFormation
       :time_created,
       :description,
       :public_version_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] generated_template_name
+    #   The name or Amazon Resource Name (ARN) of a generated template.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_generated_template_name
+    #   An optional new name to assign to the generated template.
+    #   @return [String]
+    #
+    # @!attribute [rw] add_resources
+    #   An optional list of resources to be added to the generated template.
+    #   @return [Array<Types::ResourceDefinition>]
+    #
+    # @!attribute [rw] remove_resources
+    #   A list of logical ids for resources to remove from the generated
+    #   template.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] refresh_all_resources
+    #   If `true`, update the resource properties in the generated template
+    #   with their current live state. This feature is useful when the
+    #   resource properties in your generated a template does not reflect
+    #   the live state of the resource properties. This happens when a user
+    #   update the resource properties after generating a template.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] template_configuration
+    #   The configuration details of the generated template, including the
+    #   `DeletionPolicy` and `UpdateReplacePolicy`.
+    #   @return [Types::TemplateConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateGeneratedTemplateInput AWS API Documentation
+    #
+    class UpdateGeneratedTemplateInput < Struct.new(
+      :generated_template_name,
+      :new_generated_template_name,
+      :add_resources,
+      :remove_resources,
+      :refresh_all_resources,
+      :template_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] generated_template_id
+    #   The Amazon Resource Name (ARN) of the generated template. The format
+    #   is
+    #   `arn:$\{Partition\}:cloudformation:$\{Region\}:$\{Account\}:generatedtemplate/$\{Id\}`.
+    #   For example,
+    #   `arn:aws:cloudformation:us-east-1:123456789012:generatedtemplate/2e8465c1-9a80-43ea-a3a3-4f2d692fe6dc
+    #   `.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateGeneratedTemplateOutput AWS API Documentation
+    #
+    class UpdateGeneratedTemplateOutput < Struct.new(
+      :generated_template_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10261,6 +11322,81 @@ module Aws::CloudFormation
       :capabilities,
       :capabilities_reason,
       :declared_transforms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The warnings generated for a specific resource for this generated
+    # template.
+    #
+    # @!attribute [rw] type
+    #   The type of this warning. For more information, see [IaC generator
+    #   and write-only properties][1] in the *CloudFormation User Guide*.
+    #
+    #   * `MUTUALLY_EXCLUSIVE_PROPERTIES` - The resource requires
+    #     mutually-exclusive write-only properties. The IaC generator
+    #     selects one set of mutually exclusive properties and converts the
+    #     included properties into parameters. The parameter names have a
+    #     suffix `OneOf` and the parameter descriptions indicate that the
+    #     corresponding property can be replaced with other exclusive
+    #     properties.
+    #
+    #   * `UNSUPPORTED_PROPERTIES` - Unsupported properties are present in
+    #     the resource. One example of unsupported properties would be a
+    #     required write-only property that is an array, because a parameter
+    #     cannot be an array. Another example is an optional write-only
+    #     property.
+    #
+    #   * `MUTUALLY_EXCLUSIVE_TYPES` - One or more required write-only
+    #     properties are found in the resource, and the type of that
+    #     property can be any of several types.
+    #
+    #   <note markdown="1"> Currently the resource and property reference documentation does not
+    #   indicate if a property uses a type of `oneOf` or `anyOf`. You need
+    #   to look at the resource provider schema.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC-write-only-properties.html
+    #   @return [String]
+    #
+    # @!attribute [rw] properties
+    #   The properties of the resource that are impacted by this warning.
+    #   @return [Array<Types::WarningProperty>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/WarningDetail AWS API Documentation
+    #
+    class WarningDetail < Struct.new(
+      :type,
+      :properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A specific property that is impacted by a warning.
+    #
+    # @!attribute [rw] property_path
+    #   The path of the property. For example, if this is for the `S3Bucket`
+    #   member of the `Code` property, the property path would be
+    #   `Code/S3Bucket`.
+    #   @return [String]
+    #
+    # @!attribute [rw] required
+    #   If `true`, the specified property is required.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] description
+    #   The description of the property from the resource provider schema.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/WarningProperty AWS API Documentation
+    #
+    class WarningProperty < Struct.new(
+      :property_path,
+      :required,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end

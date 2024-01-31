@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.99.0 (2024-01-31)
+------------------
+
+* Feature - CloudFormation IaC generator allows you to scan existing resources in your account and select resources to generate a template for a new or existing CloudFormation stack.
+
 1.98.0 (2024-01-26)
 ------------------
 

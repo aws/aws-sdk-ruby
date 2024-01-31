@@ -70,6 +70,8 @@ module Aws::CloudFormation
             Aws::CloudFormation::Endpoints::ContinueUpdateRollback.build(context)
           when :create_change_set
             Aws::CloudFormation::Endpoints::CreateChangeSet.build(context)
+          when :create_generated_template
+            Aws::CloudFormation::Endpoints::CreateGeneratedTemplate.build(context)
           when :create_stack
             Aws::CloudFormation::Endpoints::CreateStack.build(context)
           when :create_stack_instances
@@ -82,6 +84,8 @@ module Aws::CloudFormation
             Aws::CloudFormation::Endpoints::DeactivateType.build(context)
           when :delete_change_set
             Aws::CloudFormation::Endpoints::DeleteChangeSet.build(context)
+          when :delete_generated_template
+            Aws::CloudFormation::Endpoints::DeleteGeneratedTemplate.build(context)
           when :delete_stack
             Aws::CloudFormation::Endpoints::DeleteStack.build(context)
           when :delete_stack_instances
@@ -96,10 +100,14 @@ module Aws::CloudFormation
             Aws::CloudFormation::Endpoints::DescribeChangeSet.build(context)
           when :describe_change_set_hooks
             Aws::CloudFormation::Endpoints::DescribeChangeSetHooks.build(context)
+          when :describe_generated_template
+            Aws::CloudFormation::Endpoints::DescribeGeneratedTemplate.build(context)
           when :describe_organizations_access
             Aws::CloudFormation::Endpoints::DescribeOrganizationsAccess.build(context)
           when :describe_publisher
             Aws::CloudFormation::Endpoints::DescribePublisher.build(context)
+          when :describe_resource_scan
+            Aws::CloudFormation::Endpoints::DescribeResourceScan.build(context)
           when :describe_stack_drift_detection_status
             Aws::CloudFormation::Endpoints::DescribeStackDriftDetectionStatus.build(context)
           when :describe_stack_events
@@ -132,6 +140,8 @@ module Aws::CloudFormation
             Aws::CloudFormation::Endpoints::EstimateTemplateCost.build(context)
           when :execute_change_set
             Aws::CloudFormation::Endpoints::ExecuteChangeSet.build(context)
+          when :get_generated_template
+            Aws::CloudFormation::Endpoints::GetGeneratedTemplate.build(context)
           when :get_stack_policy
             Aws::CloudFormation::Endpoints::GetStackPolicy.build(context)
           when :get_template
@@ -144,8 +154,16 @@ module Aws::CloudFormation
             Aws::CloudFormation::Endpoints::ListChangeSets.build(context)
           when :list_exports
             Aws::CloudFormation::Endpoints::ListExports.build(context)
+          when :list_generated_templates
+            Aws::CloudFormation::Endpoints::ListGeneratedTemplates.build(context)
           when :list_imports
             Aws::CloudFormation::Endpoints::ListImports.build(context)
+          when :list_resource_scan_related_resources
+            Aws::CloudFormation::Endpoints::ListResourceScanRelatedResources.build(context)
+          when :list_resource_scan_resources
+            Aws::CloudFormation::Endpoints::ListResourceScanResources.build(context)
+          when :list_resource_scans
+            Aws::CloudFormation::Endpoints::ListResourceScans.build(context)
           when :list_stack_instance_resource_drifts
             Aws::CloudFormation::Endpoints::ListStackInstanceResourceDrifts.build(context)
           when :list_stack_instances
@@ -184,10 +202,14 @@ module Aws::CloudFormation
             Aws::CloudFormation::Endpoints::SetTypeDefaultVersion.build(context)
           when :signal_resource
             Aws::CloudFormation::Endpoints::SignalResource.build(context)
+          when :start_resource_scan
+            Aws::CloudFormation::Endpoints::StartResourceScan.build(context)
           when :stop_stack_set_operation
             Aws::CloudFormation::Endpoints::StopStackSetOperation.build(context)
           when :test_type
             Aws::CloudFormation::Endpoints::TestType.build(context)
+          when :update_generated_template
+            Aws::CloudFormation::Endpoints::UpdateGeneratedTemplate.build(context)
           when :update_stack
             Aws::CloudFormation::Endpoints::UpdateStack.build(context)
           when :update_stack_instances

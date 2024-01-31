@@ -199,6 +199,7 @@ module Aws
                                   },
                                 ],
                                 ?schedule_offset: ::Integer,
+                                ?duration: ::Integer,
                                 ?target_maps: Array[
                                   Hash[::String, Array[::String]],
                                 ],
@@ -272,6 +273,7 @@ module Aws
                                             },
                                           ]?,
                                           schedule_offset: ::Integer?,
+                                          duration: ::Integer?,
                                           target_maps: Array[
                                             Hash[::String, Array[::String]],
                                           ]?,
@@ -2611,6 +2613,7 @@ module Aws
                                   },
                                 ],
                                 ?schedule_offset: ::Integer,
+                                ?duration: ::Integer,
                                 ?target_maps: Array[
                                   Hash[::String, Array[::String]],
                                 ],
