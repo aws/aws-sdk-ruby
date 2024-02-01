@@ -1840,6 +1840,8 @@ module Aws::MediaConvert
     end
 
     class RemixSettings
+      attr_accessor audio_description_audio_channel: ::Integer
+      attr_accessor audio_description_data_channel: ::Integer
       attr_accessor channel_mapping: Types::ChannelMapping
       attr_accessor channels_in: ::Integer
       attr_accessor channels_out: ::Integer

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2024-02-01)
+------------------
+
+* Feature - Adding new APIs in SDK for Amazon Neptune Analytics. These APIs include operations to execute, cancel, list queries and get the graph summary.
+
 1.2.0 (2024-01-26)
 ------------------
 

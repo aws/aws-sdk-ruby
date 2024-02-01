@@ -11,6 +11,9 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
+      class AccessDeniedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class ConflictException < ::Aws::Errors::ServiceError
         def message: () -> ::String
         def reason: () -> ::String
@@ -30,6 +33,10 @@ module Aws
       end
       class ThrottlingException < ::Aws::Errors::ServiceError
         def message: () -> ::String
+      end
+      class UnprocessableException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def reason: () -> ::String
       end
       class ValidationException < ::Aws::Errors::ServiceError
         def message: () -> ::String

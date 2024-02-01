@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2024-02-01)
+------------------
+
+* Feature - Added CreateIdentityProvider and UpdateIdentityProvider details for new SAML IdP features
+
 1.86.0 (2024-01-26)
 ------------------
 

@@ -647,11 +647,11 @@ module Aws
                                 create_auth_challenge: ::String?,
                                 verify_auth_challenge_response: ::String?,
                                 pre_token_generation: ::String?,
+                                user_migration: ::String?,
                                 pre_token_generation_config: {
                                   lambda_version: ("V1_0" | "V2_0"),
                                   lambda_arn: ::String
                                 }?,
-                                user_migration: ::String?,
                                 custom_sms_sender: {
                                   lambda_version: ("V1_0"),
                                   lambda_arn: ::String
@@ -1623,11 +1623,11 @@ module Aws
                                 create_auth_challenge: ::String?,
                                 verify_auth_challenge_response: ::String?,
                                 pre_token_generation: ::String?,
+                                user_migration: ::String?,
                                 pre_token_generation_config: {
                                   lambda_version: ("V1_0" | "V2_0"),
                                   lambda_arn: ::String
                                 }?,
-                                user_migration: ::String?,
                                 custom_sms_sender: {
                                   lambda_version: ("V1_0"),
                                   lambda_arn: ::String

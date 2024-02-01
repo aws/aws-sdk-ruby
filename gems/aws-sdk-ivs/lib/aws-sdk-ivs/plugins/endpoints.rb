@@ -66,6 +66,8 @@ module Aws::IVS
             Aws::IVS::Endpoints::BatchStartViewerSessionRevocation.build(context)
           when :create_channel
             Aws::IVS::Endpoints::CreateChannel.build(context)
+          when :create_playback_restriction_policy
+            Aws::IVS::Endpoints::CreatePlaybackRestrictionPolicy.build(context)
           when :create_recording_configuration
             Aws::IVS::Endpoints::CreateRecordingConfiguration.build(context)
           when :create_stream_key
@@ -74,6 +76,8 @@ module Aws::IVS
             Aws::IVS::Endpoints::DeleteChannel.build(context)
           when :delete_playback_key_pair
             Aws::IVS::Endpoints::DeletePlaybackKeyPair.build(context)
+          when :delete_playback_restriction_policy
+            Aws::IVS::Endpoints::DeletePlaybackRestrictionPolicy.build(context)
           when :delete_recording_configuration
             Aws::IVS::Endpoints::DeleteRecordingConfiguration.build(context)
           when :delete_stream_key
@@ -82,6 +86,8 @@ module Aws::IVS
             Aws::IVS::Endpoints::GetChannel.build(context)
           when :get_playback_key_pair
             Aws::IVS::Endpoints::GetPlaybackKeyPair.build(context)
+          when :get_playback_restriction_policy
+            Aws::IVS::Endpoints::GetPlaybackRestrictionPolicy.build(context)
           when :get_recording_configuration
             Aws::IVS::Endpoints::GetRecordingConfiguration.build(context)
           when :get_stream
@@ -96,6 +102,8 @@ module Aws::IVS
             Aws::IVS::Endpoints::ListChannels.build(context)
           when :list_playback_key_pairs
             Aws::IVS::Endpoints::ListPlaybackKeyPairs.build(context)
+          when :list_playback_restriction_policies
+            Aws::IVS::Endpoints::ListPlaybackRestrictionPolicies.build(context)
           when :list_recording_configurations
             Aws::IVS::Endpoints::ListRecordingConfigurations.build(context)
           when :list_stream_keys
@@ -118,6 +126,8 @@ module Aws::IVS
             Aws::IVS::Endpoints::UntagResource.build(context)
           when :update_channel
             Aws::IVS::Endpoints::UpdateChannel.build(context)
+          when :update_playback_restriction_policy
+            Aws::IVS::Endpoints::UpdatePlaybackRestrictionPolicy.build(context)
           end
         end
       end

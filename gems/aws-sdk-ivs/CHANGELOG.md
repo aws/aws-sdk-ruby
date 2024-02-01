@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2024-02-01)
+------------------
+
+* Feature - This release introduces a new resource Playback Restriction Policy which can be used to geo-restrict or domain-restrict channel stream playback when associated with a channel.  New APIs to support this resource were introduced in the form of Create/Delete/Get/Update/List.
+
 1.44.0 (2024-01-26)
 ------------------
 

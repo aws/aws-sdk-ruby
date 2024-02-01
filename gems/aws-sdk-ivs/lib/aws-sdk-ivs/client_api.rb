@@ -35,6 +35,7 @@ module Aws::IVS
     ChannelList = Shapes::ListShape.new(name: 'ChannelList')
     ChannelName = Shapes::StringShape.new(name: 'ChannelName')
     ChannelNotBroadcasting = Shapes::StructureShape.new(name: 'ChannelNotBroadcasting')
+    ChannelPlaybackRestrictionPolicyArn = Shapes::StringShape.new(name: 'ChannelPlaybackRestrictionPolicyArn')
     ChannelRecordingConfigurationArn = Shapes::StringShape.new(name: 'ChannelRecordingConfigurationArn')
     ChannelSummary = Shapes::StructureShape.new(name: 'ChannelSummary')
     ChannelType = Shapes::StringShape.new(name: 'ChannelType')
@@ -42,6 +43,8 @@ module Aws::IVS
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateChannelRequest = Shapes::StructureShape.new(name: 'CreateChannelRequest')
     CreateChannelResponse = Shapes::StructureShape.new(name: 'CreateChannelResponse')
+    CreatePlaybackRestrictionPolicyRequest = Shapes::StructureShape.new(name: 'CreatePlaybackRestrictionPolicyRequest')
+    CreatePlaybackRestrictionPolicyResponse = Shapes::StructureShape.new(name: 'CreatePlaybackRestrictionPolicyResponse')
     CreateRecordingConfigurationRequest = Shapes::StructureShape.new(name: 'CreateRecordingConfigurationRequest')
     CreateRecordingConfigurationResponse = Shapes::StructureShape.new(name: 'CreateRecordingConfigurationResponse')
     CreateStreamKeyRequest = Shapes::StructureShape.new(name: 'CreateStreamKeyRequest')
@@ -49,6 +52,7 @@ module Aws::IVS
     DeleteChannelRequest = Shapes::StructureShape.new(name: 'DeleteChannelRequest')
     DeletePlaybackKeyPairRequest = Shapes::StructureShape.new(name: 'DeletePlaybackKeyPairRequest')
     DeletePlaybackKeyPairResponse = Shapes::StructureShape.new(name: 'DeletePlaybackKeyPairResponse')
+    DeletePlaybackRestrictionPolicyRequest = Shapes::StructureShape.new(name: 'DeletePlaybackRestrictionPolicyRequest')
     DeleteRecordingConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteRecordingConfigurationRequest')
     DeleteStreamKeyRequest = Shapes::StructureShape.new(name: 'DeleteStreamKeyRequest')
     DestinationConfiguration = Shapes::StructureShape.new(name: 'DestinationConfiguration')
@@ -56,6 +60,8 @@ module Aws::IVS
     GetChannelResponse = Shapes::StructureShape.new(name: 'GetChannelResponse')
     GetPlaybackKeyPairRequest = Shapes::StructureShape.new(name: 'GetPlaybackKeyPairRequest')
     GetPlaybackKeyPairResponse = Shapes::StructureShape.new(name: 'GetPlaybackKeyPairResponse')
+    GetPlaybackRestrictionPolicyRequest = Shapes::StructureShape.new(name: 'GetPlaybackRestrictionPolicyRequest')
+    GetPlaybackRestrictionPolicyResponse = Shapes::StructureShape.new(name: 'GetPlaybackRestrictionPolicyResponse')
     GetRecordingConfigurationRequest = Shapes::StructureShape.new(name: 'GetRecordingConfigurationRequest')
     GetRecordingConfigurationResponse = Shapes::StructureShape.new(name: 'GetRecordingConfigurationResponse')
     GetStreamKeyRequest = Shapes::StructureShape.new(name: 'GetStreamKeyRequest')
@@ -76,6 +82,8 @@ module Aws::IVS
     ListChannelsResponse = Shapes::StructureShape.new(name: 'ListChannelsResponse')
     ListPlaybackKeyPairsRequest = Shapes::StructureShape.new(name: 'ListPlaybackKeyPairsRequest')
     ListPlaybackKeyPairsResponse = Shapes::StructureShape.new(name: 'ListPlaybackKeyPairsResponse')
+    ListPlaybackRestrictionPoliciesRequest = Shapes::StructureShape.new(name: 'ListPlaybackRestrictionPoliciesRequest')
+    ListPlaybackRestrictionPoliciesResponse = Shapes::StructureShape.new(name: 'ListPlaybackRestrictionPoliciesResponse')
     ListRecordingConfigurationsRequest = Shapes::StructureShape.new(name: 'ListRecordingConfigurationsRequest')
     ListRecordingConfigurationsResponse = Shapes::StructureShape.new(name: 'ListRecordingConfigurationsResponse')
     ListStreamKeysRequest = Shapes::StructureShape.new(name: 'ListStreamKeysRequest')
@@ -88,6 +96,7 @@ module Aws::IVS
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxChannelResults = Shapes::IntegerShape.new(name: 'MaxChannelResults')
     MaxPlaybackKeyPairResults = Shapes::IntegerShape.new(name: 'MaxPlaybackKeyPairResults')
+    MaxPlaybackRestrictionPolicyResults = Shapes::IntegerShape.new(name: 'MaxPlaybackRestrictionPolicyResults')
     MaxRecordingConfigurationResults = Shapes::IntegerShape.new(name: 'MaxRecordingConfigurationResults')
     MaxStreamKeyResults = Shapes::IntegerShape.new(name: 'MaxStreamKeyResults')
     MaxStreamResults = Shapes::IntegerShape.new(name: 'MaxStreamResults')
@@ -100,6 +109,16 @@ module Aws::IVS
     PlaybackKeyPairName = Shapes::StringShape.new(name: 'PlaybackKeyPairName')
     PlaybackKeyPairSummary = Shapes::StructureShape.new(name: 'PlaybackKeyPairSummary')
     PlaybackPublicKeyMaterial = Shapes::StringShape.new(name: 'PlaybackPublicKeyMaterial')
+    PlaybackRestrictionPolicy = Shapes::StructureShape.new(name: 'PlaybackRestrictionPolicy')
+    PlaybackRestrictionPolicyAllowedCountry = Shapes::StringShape.new(name: 'PlaybackRestrictionPolicyAllowedCountry')
+    PlaybackRestrictionPolicyAllowedCountryList = Shapes::ListShape.new(name: 'PlaybackRestrictionPolicyAllowedCountryList')
+    PlaybackRestrictionPolicyAllowedOrigin = Shapes::StringShape.new(name: 'PlaybackRestrictionPolicyAllowedOrigin')
+    PlaybackRestrictionPolicyAllowedOriginList = Shapes::ListShape.new(name: 'PlaybackRestrictionPolicyAllowedOriginList')
+    PlaybackRestrictionPolicyArn = Shapes::StringShape.new(name: 'PlaybackRestrictionPolicyArn')
+    PlaybackRestrictionPolicyEnableStrictOriginEnforcement = Shapes::BooleanShape.new(name: 'PlaybackRestrictionPolicyEnableStrictOriginEnforcement')
+    PlaybackRestrictionPolicyList = Shapes::ListShape.new(name: 'PlaybackRestrictionPolicyList')
+    PlaybackRestrictionPolicyName = Shapes::StringShape.new(name: 'PlaybackRestrictionPolicyName')
+    PlaybackRestrictionPolicySummary = Shapes::StructureShape.new(name: 'PlaybackRestrictionPolicySummary')
     PlaybackURL = Shapes::StringShape.new(name: 'PlaybackURL')
     PutMetadataRequest = Shapes::StructureShape.new(name: 'PutMetadataRequest')
     RecordingConfiguration = Shapes::StructureShape.new(name: 'RecordingConfiguration')
@@ -165,6 +184,8 @@ module Aws::IVS
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateChannelRequest = Shapes::StructureShape.new(name: 'UpdateChannelRequest')
     UpdateChannelResponse = Shapes::StructureShape.new(name: 'UpdateChannelResponse')
+    UpdatePlaybackRestrictionPolicyRequest = Shapes::StructureShape.new(name: 'UpdatePlaybackRestrictionPolicyRequest')
+    UpdatePlaybackRestrictionPolicyResponse = Shapes::StructureShape.new(name: 'UpdatePlaybackRestrictionPolicyResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     VideoConfiguration = Shapes::StructureShape.new(name: 'VideoConfiguration')
     ViewerId = Shapes::StringShape.new(name: 'ViewerId')
@@ -229,6 +250,7 @@ module Aws::IVS
     Channel.add_member(:insecure_ingest, Shapes::ShapeRef.new(shape: InsecureIngest, location_name: "insecureIngest"))
     Channel.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
     Channel.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
+    Channel.add_member(:playback_restriction_policy_arn, Shapes::ShapeRef.new(shape: ChannelPlaybackRestrictionPolicyArn, location_name: "playbackRestrictionPolicyArn"))
     Channel.add_member(:playback_url, Shapes::ShapeRef.new(shape: PlaybackURL, location_name: "playbackUrl"))
     Channel.add_member(:preset, Shapes::ShapeRef.new(shape: TranscodePreset, location_name: "preset"))
     Channel.add_member(:recording_configuration_arn, Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
@@ -248,6 +270,7 @@ module Aws::IVS
     ChannelSummary.add_member(:insecure_ingest, Shapes::ShapeRef.new(shape: InsecureIngest, location_name: "insecureIngest"))
     ChannelSummary.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
     ChannelSummary.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
+    ChannelSummary.add_member(:playback_restriction_policy_arn, Shapes::ShapeRef.new(shape: ChannelPlaybackRestrictionPolicyArn, location_name: "playbackRestrictionPolicyArn"))
     ChannelSummary.add_member(:preset, Shapes::ShapeRef.new(shape: TranscodePreset, location_name: "preset"))
     ChannelSummary.add_member(:recording_configuration_arn, Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
     ChannelSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
@@ -263,6 +286,7 @@ module Aws::IVS
     CreateChannelRequest.add_member(:insecure_ingest, Shapes::ShapeRef.new(shape: Boolean, location_name: "insecureIngest"))
     CreateChannelRequest.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
     CreateChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
+    CreateChannelRequest.add_member(:playback_restriction_policy_arn, Shapes::ShapeRef.new(shape: ChannelPlaybackRestrictionPolicyArn, location_name: "playbackRestrictionPolicyArn"))
     CreateChannelRequest.add_member(:preset, Shapes::ShapeRef.new(shape: TranscodePreset, location_name: "preset"))
     CreateChannelRequest.add_member(:recording_configuration_arn, Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
     CreateChannelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
@@ -272,6 +296,16 @@ module Aws::IVS
     CreateChannelResponse.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
     CreateChannelResponse.add_member(:stream_key, Shapes::ShapeRef.new(shape: StreamKey, location_name: "streamKey"))
     CreateChannelResponse.struct_class = Types::CreateChannelResponse
+
+    CreatePlaybackRestrictionPolicyRequest.add_member(:allowed_countries, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedCountryList, location_name: "allowedCountries"))
+    CreatePlaybackRestrictionPolicyRequest.add_member(:allowed_origins, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedOriginList, location_name: "allowedOrigins"))
+    CreatePlaybackRestrictionPolicyRequest.add_member(:enable_strict_origin_enforcement, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyEnableStrictOriginEnforcement, location_name: "enableStrictOriginEnforcement"))
+    CreatePlaybackRestrictionPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyName, location_name: "name"))
+    CreatePlaybackRestrictionPolicyRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreatePlaybackRestrictionPolicyRequest.struct_class = Types::CreatePlaybackRestrictionPolicyRequest
+
+    CreatePlaybackRestrictionPolicyResponse.add_member(:playback_restriction_policy, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicy, location_name: "playbackRestrictionPolicy"))
+    CreatePlaybackRestrictionPolicyResponse.struct_class = Types::CreatePlaybackRestrictionPolicyResponse
 
     CreateRecordingConfigurationRequest.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, required: true, location_name: "destinationConfiguration"))
     CreateRecordingConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: RecordingConfigurationName, location_name: "name"))
@@ -299,6 +333,9 @@ module Aws::IVS
 
     DeletePlaybackKeyPairResponse.struct_class = Types::DeletePlaybackKeyPairResponse
 
+    DeletePlaybackRestrictionPolicyRequest.add_member(:arn, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyArn, required: true, location_name: "arn"))
+    DeletePlaybackRestrictionPolicyRequest.struct_class = Types::DeletePlaybackRestrictionPolicyRequest
+
     DeleteRecordingConfigurationRequest.add_member(:arn, Shapes::ShapeRef.new(shape: RecordingConfigurationArn, required: true, location_name: "arn"))
     DeleteRecordingConfigurationRequest.struct_class = Types::DeleteRecordingConfigurationRequest
 
@@ -319,6 +356,12 @@ module Aws::IVS
 
     GetPlaybackKeyPairResponse.add_member(:key_pair, Shapes::ShapeRef.new(shape: PlaybackKeyPair, location_name: "keyPair"))
     GetPlaybackKeyPairResponse.struct_class = Types::GetPlaybackKeyPairResponse
+
+    GetPlaybackRestrictionPolicyRequest.add_member(:arn, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyArn, required: true, location_name: "arn"))
+    GetPlaybackRestrictionPolicyRequest.struct_class = Types::GetPlaybackRestrictionPolicyRequest
+
+    GetPlaybackRestrictionPolicyResponse.add_member(:playback_restriction_policy, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicy, location_name: "playbackRestrictionPolicy"))
+    GetPlaybackRestrictionPolicyResponse.struct_class = Types::GetPlaybackRestrictionPolicyResponse
 
     GetRecordingConfigurationRequest.add_member(:arn, Shapes::ShapeRef.new(shape: RecordingConfigurationArn, required: true, location_name: "arn"))
     GetRecordingConfigurationRequest.struct_class = Types::GetRecordingConfigurationRequest
@@ -361,6 +404,7 @@ module Aws::IVS
     InternalServerException.struct_class = Types::InternalServerException
 
     ListChannelsRequest.add_member(:filter_by_name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "filterByName"))
+    ListChannelsRequest.add_member(:filter_by_playback_restriction_policy_arn, Shapes::ShapeRef.new(shape: ChannelPlaybackRestrictionPolicyArn, location_name: "filterByPlaybackRestrictionPolicyArn"))
     ListChannelsRequest.add_member(:filter_by_recording_configuration_arn, Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "filterByRecordingConfigurationArn"))
     ListChannelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxChannelResults, location_name: "maxResults"))
     ListChannelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
@@ -377,6 +421,14 @@ module Aws::IVS
     ListPlaybackKeyPairsResponse.add_member(:key_pairs, Shapes::ShapeRef.new(shape: PlaybackKeyPairList, required: true, location_name: "keyPairs"))
     ListPlaybackKeyPairsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListPlaybackKeyPairsResponse.struct_class = Types::ListPlaybackKeyPairsResponse
+
+    ListPlaybackRestrictionPoliciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxPlaybackRestrictionPolicyResults, location_name: "maxResults"))
+    ListPlaybackRestrictionPoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListPlaybackRestrictionPoliciesRequest.struct_class = Types::ListPlaybackRestrictionPoliciesRequest
+
+    ListPlaybackRestrictionPoliciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListPlaybackRestrictionPoliciesResponse.add_member(:playback_restriction_policies, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyList, required: true, location_name: "playbackRestrictionPolicies"))
+    ListPlaybackRestrictionPoliciesResponse.struct_class = Types::ListPlaybackRestrictionPoliciesResponse
 
     ListRecordingConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxRecordingConfigurationResults, location_name: "maxResults"))
     ListRecordingConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
@@ -434,6 +486,28 @@ module Aws::IVS
     PlaybackKeyPairSummary.add_member(:name, Shapes::ShapeRef.new(shape: PlaybackKeyPairName, location_name: "name"))
     PlaybackKeyPairSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     PlaybackKeyPairSummary.struct_class = Types::PlaybackKeyPairSummary
+
+    PlaybackRestrictionPolicy.add_member(:allowed_countries, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedCountryList, required: true, location_name: "allowedCountries"))
+    PlaybackRestrictionPolicy.add_member(:allowed_origins, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedOriginList, required: true, location_name: "allowedOrigins"))
+    PlaybackRestrictionPolicy.add_member(:arn, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyArn, required: true, location_name: "arn"))
+    PlaybackRestrictionPolicy.add_member(:enable_strict_origin_enforcement, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyEnableStrictOriginEnforcement, location_name: "enableStrictOriginEnforcement"))
+    PlaybackRestrictionPolicy.add_member(:name, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyName, location_name: "name"))
+    PlaybackRestrictionPolicy.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    PlaybackRestrictionPolicy.struct_class = Types::PlaybackRestrictionPolicy
+
+    PlaybackRestrictionPolicyAllowedCountryList.member = Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedCountry)
+
+    PlaybackRestrictionPolicyAllowedOriginList.member = Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedOrigin)
+
+    PlaybackRestrictionPolicyList.member = Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicySummary)
+
+    PlaybackRestrictionPolicySummary.add_member(:allowed_countries, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedCountryList, required: true, location_name: "allowedCountries"))
+    PlaybackRestrictionPolicySummary.add_member(:allowed_origins, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedOriginList, required: true, location_name: "allowedOrigins"))
+    PlaybackRestrictionPolicySummary.add_member(:arn, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyArn, required: true, location_name: "arn"))
+    PlaybackRestrictionPolicySummary.add_member(:enable_strict_origin_enforcement, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyEnableStrictOriginEnforcement, location_name: "enableStrictOriginEnforcement"))
+    PlaybackRestrictionPolicySummary.add_member(:name, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyName, location_name: "name"))
+    PlaybackRestrictionPolicySummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    PlaybackRestrictionPolicySummary.struct_class = Types::PlaybackRestrictionPolicySummary
 
     PutMetadataRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, required: true, location_name: "channelArn"))
     PutMetadataRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: StreamMetadata, required: true, location_name: "metadata"))
@@ -584,6 +658,7 @@ module Aws::IVS
     UpdateChannelRequest.add_member(:insecure_ingest, Shapes::ShapeRef.new(shape: Boolean, location_name: "insecureIngest"))
     UpdateChannelRequest.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
     UpdateChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
+    UpdateChannelRequest.add_member(:playback_restriction_policy_arn, Shapes::ShapeRef.new(shape: ChannelPlaybackRestrictionPolicyArn, location_name: "playbackRestrictionPolicyArn"))
     UpdateChannelRequest.add_member(:preset, Shapes::ShapeRef.new(shape: TranscodePreset, location_name: "preset"))
     UpdateChannelRequest.add_member(:recording_configuration_arn, Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
     UpdateChannelRequest.add_member(:type, Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
@@ -591,6 +666,16 @@ module Aws::IVS
 
     UpdateChannelResponse.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
     UpdateChannelResponse.struct_class = Types::UpdateChannelResponse
+
+    UpdatePlaybackRestrictionPolicyRequest.add_member(:allowed_countries, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedCountryList, location_name: "allowedCountries"))
+    UpdatePlaybackRestrictionPolicyRequest.add_member(:allowed_origins, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedOriginList, location_name: "allowedOrigins"))
+    UpdatePlaybackRestrictionPolicyRequest.add_member(:arn, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyArn, required: true, location_name: "arn"))
+    UpdatePlaybackRestrictionPolicyRequest.add_member(:enable_strict_origin_enforcement, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyEnableStrictOriginEnforcement, location_name: "enableStrictOriginEnforcement"))
+    UpdatePlaybackRestrictionPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyName, location_name: "name"))
+    UpdatePlaybackRestrictionPolicyRequest.struct_class = Types::UpdatePlaybackRestrictionPolicyRequest
+
+    UpdatePlaybackRestrictionPolicyResponse.add_member(:playback_restriction_policy, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicy, location_name: "playbackRestrictionPolicy"))
+    UpdatePlaybackRestrictionPolicyResponse.struct_class = Types::UpdatePlaybackRestrictionPolicyResponse
 
     ValidationException.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
     ValidationException.struct_class = Types::ValidationException
@@ -665,6 +750,19 @@ module Aws::IVS
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
+      api.add_operation(:create_playback_restriction_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePlaybackRestrictionPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/CreatePlaybackRestrictionPolicy"
+        o.input = Shapes::ShapeRef.new(shape: CreatePlaybackRestrictionPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreatePlaybackRestrictionPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
       api.add_operation(:create_recording_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateRecordingConfiguration"
         o.http_method = "POST"
@@ -717,6 +815,19 @@ module Aws::IVS
         o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
       end)
 
+      api.add_operation(:delete_playback_restriction_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePlaybackRestrictionPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/DeletePlaybackRestrictionPolicy"
+        o.input = Shapes::ShapeRef.new(shape: DeletePlaybackRestrictionPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:delete_recording_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteRecordingConfiguration"
         o.http_method = "POST"
@@ -762,6 +873,18 @@ module Aws::IVS
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:get_playback_restriction_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPlaybackRestrictionPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/GetPlaybackRestrictionPolicy"
+        o.input = Shapes::ShapeRef.new(shape: GetPlaybackRestrictionPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPlaybackRestrictionPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
       end)
 
       api.add_operation(:get_recording_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -848,6 +971,24 @@ module Aws::IVS
         o.output = Shapes::ShapeRef.new(shape: ListPlaybackKeyPairsResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_playback_restriction_policies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPlaybackRestrictionPolicies"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListPlaybackRestrictionPolicies"
+        o.input = Shapes::ShapeRef.new(shape: ListPlaybackRestrictionPoliciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPlaybackRestrictionPoliciesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1002,6 +1143,19 @@ module Aws::IVS
         o.http_request_uri = "/UpdateChannel"
         o.input = Shapes::ShapeRef.new(shape: UpdateChannelRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateChannelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_playback_restriction_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePlaybackRestrictionPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/UpdatePlaybackRestrictionPolicy"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePlaybackRestrictionPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdatePlaybackRestrictionPolicyResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

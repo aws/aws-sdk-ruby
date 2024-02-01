@@ -121,12 +121,27 @@ module Aws
                             ?insecure_ingest: bool,
                             ?latency_mode: ("NORMAL" | "LOW"),
                             ?name: ::String,
+                            ?playback_restriction_policy_arn: ::String,
                             ?preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY"),
                             ?recording_configuration_arn: ::String,
                             ?tags: Hash[::String, ::String],
                             ?type: ("BASIC" | "STANDARD" | "ADVANCED_SD" | "ADVANCED_HD")
                           ) -> _CreateChannelResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelResponseSuccess
+
+      interface _CreatePlaybackRestrictionPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePlaybackRestrictionPolicyResponse]
+        def playback_restriction_policy: () -> Types::PlaybackRestrictionPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#create_playback_restriction_policy-instance_method
+      def create_playback_restriction_policy: (
+                                                ?allowed_countries: Array[::String],
+                                                ?allowed_origins: Array[::String],
+                                                ?enable_strict_origin_enforcement: bool,
+                                                ?name: ::String,
+                                                ?tags: Hash[::String, ::String]
+                                              ) -> _CreatePlaybackRestrictionPolicyResponseSuccess
+                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePlaybackRestrictionPolicyResponseSuccess
 
       interface _CreateRecordingConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateRecordingConfigurationResponse]
@@ -181,6 +196,12 @@ module Aws
                                     ) -> _DeletePlaybackKeyPairResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePlaybackKeyPairResponseSuccess
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#delete_playback_restriction_policy-instance_method
+      def delete_playback_restriction_policy: (
+                                                arn: ::String
+                                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#delete_recording_configuration-instance_method
       def delete_recording_configuration: (
                                             arn: ::String
@@ -212,6 +233,16 @@ module Aws
                                    arn: ::String
                                  ) -> _GetPlaybackKeyPairResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPlaybackKeyPairResponseSuccess
+
+      interface _GetPlaybackRestrictionPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPlaybackRestrictionPolicyResponse]
+        def playback_restriction_policy: () -> Types::PlaybackRestrictionPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#get_playback_restriction_policy-instance_method
+      def get_playback_restriction_policy: (
+                                             arn: ::String
+                                           ) -> _GetPlaybackRestrictionPolicyResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPlaybackRestrictionPolicyResponseSuccess
 
       interface _GetRecordingConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetRecordingConfigurationResponse]
@@ -274,6 +305,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#list_channels-instance_method
       def list_channels: (
                            ?filter_by_name: ::String,
+                           ?filter_by_playback_restriction_policy_arn: ::String,
                            ?filter_by_recording_configuration_arn: ::String,
                            ?max_results: ::Integer,
                            ?next_token: ::String
@@ -291,6 +323,18 @@ module Aws
                                      ?next_token: ::String
                                    ) -> _ListPlaybackKeyPairsResponseSuccess
                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPlaybackKeyPairsResponseSuccess
+
+      interface _ListPlaybackRestrictionPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPlaybackRestrictionPoliciesResponse]
+        def next_token: () -> ::String
+        def playback_restriction_policies: () -> ::Array[Types::PlaybackRestrictionPolicySummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#list_playback_restriction_policies-instance_method
+      def list_playback_restriction_policies: (
+                                                ?max_results: ::Integer,
+                                                ?next_token: ::String
+                                              ) -> _ListPlaybackRestrictionPoliciesResponseSuccess
+                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPlaybackRestrictionPoliciesResponseSuccess
 
       interface _ListRecordingConfigurationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListRecordingConfigurationsResponse]
@@ -413,11 +457,26 @@ module Aws
                             ?insecure_ingest: bool,
                             ?latency_mode: ("NORMAL" | "LOW"),
                             ?name: ::String,
+                            ?playback_restriction_policy_arn: ::String,
                             ?preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY"),
                             ?recording_configuration_arn: ::String,
                             ?type: ("BASIC" | "STANDARD" | "ADVANCED_SD" | "ADVANCED_HD")
                           ) -> _UpdateChannelResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelResponseSuccess
+
+      interface _UpdatePlaybackRestrictionPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePlaybackRestrictionPolicyResponse]
+        def playback_restriction_policy: () -> Types::PlaybackRestrictionPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#update_playback_restriction_policy-instance_method
+      def update_playback_restriction_policy: (
+                                                ?allowed_countries: Array[::String],
+                                                ?allowed_origins: Array[::String],
+                                                arn: ::String,
+                                                ?enable_strict_origin_enforcement: bool,
+                                                ?name: ::String
+                                              ) -> _UpdatePlaybackRestrictionPolicyResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePlaybackRestrictionPolicyResponseSuccess
     end
   end
 end

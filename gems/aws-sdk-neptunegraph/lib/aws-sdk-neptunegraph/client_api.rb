@@ -13,10 +13,12 @@ module Aws::NeptuneGraph
 
     include Seahorse::Model
 
+    AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     Arn = Shapes::StringShape.new(name: 'Arn')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CancelImportTaskInput = Shapes::StructureShape.new(name: 'CancelImportTaskInput')
     CancelImportTaskOutput = Shapes::StructureShape.new(name: 'CancelImportTaskOutput')
+    CancelQueryInput = Shapes::StructureShape.new(name: 'CancelQueryInput')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConflictExceptionReason = Shapes::StringShape.new(name: 'ConflictExceptionReason')
     CreateGraphInput = Shapes::StructureShape.new(name: 'CreateGraphInput')
@@ -33,15 +35,27 @@ module Aws::NeptuneGraph
     DeleteGraphSnapshotOutput = Shapes::StructureShape.new(name: 'DeleteGraphSnapshotOutput')
     DeletePrivateGraphEndpointInput = Shapes::StructureShape.new(name: 'DeletePrivateGraphEndpointInput')
     DeletePrivateGraphEndpointOutput = Shapes::StructureShape.new(name: 'DeletePrivateGraphEndpointOutput')
+    EdgeLabels = Shapes::ListShape.new(name: 'EdgeLabels')
+    EdgeProperties = Shapes::ListShape.new(name: 'EdgeProperties')
+    EdgeStructure = Shapes::StructureShape.new(name: 'EdgeStructure')
+    EdgeStructures = Shapes::ListShape.new(name: 'EdgeStructures')
+    ExecuteQueryInput = Shapes::StructureShape.new(name: 'ExecuteQueryInput')
+    ExecuteQueryOutput = Shapes::StructureShape.new(name: 'ExecuteQueryOutput')
+    ExplainMode = Shapes::StringShape.new(name: 'ExplainMode')
     Format = Shapes::StringShape.new(name: 'Format')
     GetGraphInput = Shapes::StructureShape.new(name: 'GetGraphInput')
     GetGraphOutput = Shapes::StructureShape.new(name: 'GetGraphOutput')
     GetGraphSnapshotInput = Shapes::StructureShape.new(name: 'GetGraphSnapshotInput')
     GetGraphSnapshotOutput = Shapes::StructureShape.new(name: 'GetGraphSnapshotOutput')
+    GetGraphSummaryInput = Shapes::StructureShape.new(name: 'GetGraphSummaryInput')
+    GetGraphSummaryOutput = Shapes::StructureShape.new(name: 'GetGraphSummaryOutput')
     GetImportTaskInput = Shapes::StructureShape.new(name: 'GetImportTaskInput')
     GetImportTaskOutput = Shapes::StructureShape.new(name: 'GetImportTaskOutput')
     GetPrivateGraphEndpointInput = Shapes::StructureShape.new(name: 'GetPrivateGraphEndpointInput')
     GetPrivateGraphEndpointOutput = Shapes::StructureShape.new(name: 'GetPrivateGraphEndpointOutput')
+    GetQueryInput = Shapes::StructureShape.new(name: 'GetQueryInput')
+    GetQueryOutput = Shapes::StructureShape.new(name: 'GetQueryOutput')
+    GraphDataSummary = Shapes::StructureShape.new(name: 'GraphDataSummary')
     GraphId = Shapes::StringShape.new(name: 'GraphId')
     GraphIdentifier = Shapes::StringShape.new(name: 'GraphIdentifier')
     GraphName = Shapes::StringShape.new(name: 'GraphName')
@@ -50,6 +64,7 @@ module Aws::NeptuneGraph
     GraphStatus = Shapes::StringShape.new(name: 'GraphStatus')
     GraphSummary = Shapes::StructureShape.new(name: 'GraphSummary')
     GraphSummaryList = Shapes::ListShape.new(name: 'GraphSummaryList')
+    GraphSummaryMode = Shapes::StringShape.new(name: 'GraphSummaryMode')
     ImportOptions = Shapes::UnionShape.new(name: 'ImportOptions')
     ImportTaskDetails = Shapes::StructureShape.new(name: 'ImportTaskDetails')
     ImportTaskStatus = Shapes::StringShape.new(name: 'ImportTaskStatus')
@@ -66,18 +81,34 @@ module Aws::NeptuneGraph
     ListImportTasksOutput = Shapes::StructureShape.new(name: 'ListImportTasksOutput')
     ListPrivateGraphEndpointsInput = Shapes::StructureShape.new(name: 'ListPrivateGraphEndpointsInput')
     ListPrivateGraphEndpointsOutput = Shapes::StructureShape.new(name: 'ListPrivateGraphEndpointsOutput')
+    ListQueriesInput = Shapes::StructureShape.new(name: 'ListQueriesInput')
+    ListQueriesOutput = Shapes::StructureShape.new(name: 'ListQueriesOutput')
     ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
     ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    LongValuedMap = Shapes::MapShape.new(name: 'LongValuedMap')
+    LongValuedMapList = Shapes::ListShape.new(name: 'LongValuedMapList')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NeptuneImportOptions = Shapes::StructureShape.new(name: 'NeptuneImportOptions')
     NeptuneImportOptionsS3ExportKmsKeyIdString = Shapes::StringShape.new(name: 'NeptuneImportOptionsS3ExportKmsKeyIdString')
     NeptuneImportOptionsS3ExportPathString = Shapes::StringShape.new(name: 'NeptuneImportOptionsS3ExportPathString')
+    NodeLabels = Shapes::ListShape.new(name: 'NodeLabels')
+    NodeProperties = Shapes::ListShape.new(name: 'NodeProperties')
+    NodeStructure = Shapes::StructureShape.new(name: 'NodeStructure')
+    NodeStructures = Shapes::ListShape.new(name: 'NodeStructures')
+    OutgoingEdgeLabels = Shapes::ListShape.new(name: 'OutgoingEdgeLabels')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
+    PlanCacheType = Shapes::StringShape.new(name: 'PlanCacheType')
     PrivateGraphEndpointStatus = Shapes::StringShape.new(name: 'PrivateGraphEndpointStatus')
     PrivateGraphEndpointSummary = Shapes::StructureShape.new(name: 'PrivateGraphEndpointSummary')
     PrivateGraphEndpointSummaryList = Shapes::ListShape.new(name: 'PrivateGraphEndpointSummaryList')
     ProvisionedMemory = Shapes::IntegerShape.new(name: 'ProvisionedMemory')
+    QueryLanguage = Shapes::StringShape.new(name: 'QueryLanguage')
+    QueryResponseBlob = Shapes::BlobShape.new(name: 'QueryResponseBlob', streaming: true)
+    QueryState = Shapes::StringShape.new(name: 'QueryState')
+    QueryStateInput = Shapes::StringShape.new(name: 'QueryStateInput')
+    QuerySummary = Shapes::StructureShape.new(name: 'QuerySummary')
+    QuerySummaryList = Shapes::ListShape.new(name: 'QuerySummaryList')
     ReplicaCount = Shapes::IntegerShape.new(name: 'ReplicaCount')
     ResetGraphInput = Shapes::StructureShape.new(name: 'ResetGraphInput')
     ResetGraphOutput = Shapes::StructureShape.new(name: 'ResetGraphOutput')
@@ -95,6 +126,7 @@ module Aws::NeptuneGraph
     String = Shapes::StringShape.new(name: 'String')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
+    SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
@@ -104,6 +136,8 @@ module Aws::NeptuneGraph
     TaskId = Shapes::StringShape.new(name: 'TaskId')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    UnprocessableException = Shapes::StructureShape.new(name: 'UnprocessableException')
+    UnprocessableExceptionReason = Shapes::StringShape.new(name: 'UnprocessableExceptionReason')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     UpdateGraphInput = Shapes::StructureShape.new(name: 'UpdateGraphInput')
@@ -115,6 +149,9 @@ module Aws::NeptuneGraph
     VpcEndpointId = Shapes::StringShape.new(name: 'VpcEndpointId')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
 
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
     CancelImportTaskInput.add_member(:task_identifier, Shapes::ShapeRef.new(shape: TaskId, required: true, location: "uri", location_name: "taskIdentifier"))
     CancelImportTaskInput.struct_class = Types::CancelImportTaskInput
 
@@ -125,6 +162,10 @@ module Aws::NeptuneGraph
     CancelImportTaskOutput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     CancelImportTaskOutput.add_member(:status, Shapes::ShapeRef.new(shape: ImportTaskStatus, required: true, location_name: "status"))
     CancelImportTaskOutput.struct_class = Types::CancelImportTaskOutput
+
+    CancelQueryInput.add_member(:graph_identifier, Shapes::ShapeRef.new(shape: GraphIdentifier, required: true, location: "header", location_name: "graphIdentifier", metadata: {"hostLabel"=>true, "hostLabelName"=>"graphIdentifier"}))
+    CancelQueryInput.add_member(:query_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "queryId"))
+    CancelQueryInput.struct_class = Types::CancelQueryInput
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.add_member(:reason, Shapes::ShapeRef.new(shape: ConflictExceptionReason, location_name: "reason"))
@@ -251,6 +292,29 @@ module Aws::NeptuneGraph
     DeletePrivateGraphEndpointOutput.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "vpcEndpointId"))
     DeletePrivateGraphEndpointOutput.struct_class = Types::DeletePrivateGraphEndpointOutput
 
+    EdgeLabels.member = Shapes::ShapeRef.new(shape: String)
+
+    EdgeProperties.member = Shapes::ShapeRef.new(shape: String)
+
+    EdgeStructure.add_member(:count, Shapes::ShapeRef.new(shape: Long, location_name: "count"))
+    EdgeStructure.add_member(:edge_properties, Shapes::ShapeRef.new(shape: EdgeProperties, location_name: "edgeProperties"))
+    EdgeStructure.struct_class = Types::EdgeStructure
+
+    EdgeStructures.member = Shapes::ShapeRef.new(shape: EdgeStructure)
+
+    ExecuteQueryInput.add_member(:graph_identifier, Shapes::ShapeRef.new(shape: GraphIdentifier, required: true, location: "header", location_name: "graphIdentifier", metadata: {"hostLabel"=>true, "hostLabelName"=>"graphIdentifier"}))
+    ExecuteQueryInput.add_member(:query_string, Shapes::ShapeRef.new(shape: String, required: true, location_name: "query"))
+    ExecuteQueryInput.add_member(:language, Shapes::ShapeRef.new(shape: QueryLanguage, required: true, location_name: "language"))
+    ExecuteQueryInput.add_member(:plan_cache, Shapes::ShapeRef.new(shape: PlanCacheType, location_name: "planCache"))
+    ExecuteQueryInput.add_member(:explain_mode, Shapes::ShapeRef.new(shape: ExplainMode, location_name: "explain"))
+    ExecuteQueryInput.add_member(:query_timeout_milliseconds, Shapes::ShapeRef.new(shape: Integer, location_name: "queryTimeoutMilliseconds"))
+    ExecuteQueryInput.struct_class = Types::ExecuteQueryInput
+
+    ExecuteQueryOutput.add_member(:payload, Shapes::ShapeRef.new(shape: QueryResponseBlob, required: true, location_name: "payload"))
+    ExecuteQueryOutput.struct_class = Types::ExecuteQueryOutput
+    ExecuteQueryOutput[:payload] = :payload
+    ExecuteQueryOutput[:payload_member] = ExecuteQueryOutput.member(:payload)
+
     GetGraphInput.add_member(:graph_identifier, Shapes::ShapeRef.new(shape: GraphIdentifier, required: true, location: "uri", location_name: "graphIdentifier"))
     GetGraphInput.struct_class = Types::GetGraphInput
 
@@ -283,6 +347,15 @@ module Aws::NeptuneGraph
     GetGraphSnapshotOutput.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyIdentifier"))
     GetGraphSnapshotOutput.struct_class = Types::GetGraphSnapshotOutput
 
+    GetGraphSummaryInput.add_member(:graph_identifier, Shapes::ShapeRef.new(shape: GraphIdentifier, required: true, location: "header", location_name: "graphIdentifier", metadata: {"hostLabel"=>true, "hostLabelName"=>"graphIdentifier"}))
+    GetGraphSummaryInput.add_member(:mode, Shapes::ShapeRef.new(shape: GraphSummaryMode, location: "querystring", location_name: "mode"))
+    GetGraphSummaryInput.struct_class = Types::GetGraphSummaryInput
+
+    GetGraphSummaryOutput.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
+    GetGraphSummaryOutput.add_member(:last_statistics_computation_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastStatisticsComputationTime"))
+    GetGraphSummaryOutput.add_member(:graph_summary, Shapes::ShapeRef.new(shape: GraphDataSummary, location_name: "graphSummary"))
+    GetGraphSummaryOutput.struct_class = Types::GetGraphSummaryOutput
+
     GetImportTaskInput.add_member(:task_identifier, Shapes::ShapeRef.new(shape: TaskId, required: true, location: "uri", location_name: "taskIdentifier"))
     GetImportTaskInput.struct_class = Types::GetImportTaskInput
 
@@ -307,6 +380,33 @@ module Aws::NeptuneGraph
     GetPrivateGraphEndpointOutput.add_member(:status, Shapes::ShapeRef.new(shape: PrivateGraphEndpointStatus, required: true, location_name: "status"))
     GetPrivateGraphEndpointOutput.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "vpcEndpointId"))
     GetPrivateGraphEndpointOutput.struct_class = Types::GetPrivateGraphEndpointOutput
+
+    GetQueryInput.add_member(:graph_identifier, Shapes::ShapeRef.new(shape: GraphIdentifier, required: true, location: "header", location_name: "graphIdentifier", metadata: {"hostLabel"=>true, "hostLabelName"=>"graphIdentifier"}))
+    GetQueryInput.add_member(:query_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "queryId"))
+    GetQueryInput.struct_class = Types::GetQueryInput
+
+    GetQueryOutput.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
+    GetQueryOutput.add_member(:query_string, Shapes::ShapeRef.new(shape: String, location_name: "queryString"))
+    GetQueryOutput.add_member(:waited, Shapes::ShapeRef.new(shape: Integer, location_name: "waited"))
+    GetQueryOutput.add_member(:elapsed, Shapes::ShapeRef.new(shape: Integer, location_name: "elapsed"))
+    GetQueryOutput.add_member(:state, Shapes::ShapeRef.new(shape: QueryState, location_name: "state"))
+    GetQueryOutput.struct_class = Types::GetQueryOutput
+
+    GraphDataSummary.add_member(:num_nodes, Shapes::ShapeRef.new(shape: Long, location_name: "numNodes"))
+    GraphDataSummary.add_member(:num_edges, Shapes::ShapeRef.new(shape: Long, location_name: "numEdges"))
+    GraphDataSummary.add_member(:num_node_labels, Shapes::ShapeRef.new(shape: Long, location_name: "numNodeLabels"))
+    GraphDataSummary.add_member(:num_edge_labels, Shapes::ShapeRef.new(shape: Long, location_name: "numEdgeLabels"))
+    GraphDataSummary.add_member(:node_labels, Shapes::ShapeRef.new(shape: NodeLabels, location_name: "nodeLabels"))
+    GraphDataSummary.add_member(:edge_labels, Shapes::ShapeRef.new(shape: EdgeLabels, location_name: "edgeLabels"))
+    GraphDataSummary.add_member(:num_node_properties, Shapes::ShapeRef.new(shape: Long, location_name: "numNodeProperties"))
+    GraphDataSummary.add_member(:num_edge_properties, Shapes::ShapeRef.new(shape: Long, location_name: "numEdgeProperties"))
+    GraphDataSummary.add_member(:node_properties, Shapes::ShapeRef.new(shape: LongValuedMapList, location_name: "nodeProperties"))
+    GraphDataSummary.add_member(:edge_properties, Shapes::ShapeRef.new(shape: LongValuedMapList, location_name: "edgeProperties"))
+    GraphDataSummary.add_member(:total_node_property_values, Shapes::ShapeRef.new(shape: Long, location_name: "totalNodePropertyValues"))
+    GraphDataSummary.add_member(:total_edge_property_values, Shapes::ShapeRef.new(shape: Long, location_name: "totalEdgePropertyValues"))
+    GraphDataSummary.add_member(:node_structures, Shapes::ShapeRef.new(shape: NodeStructures, location_name: "nodeStructures"))
+    GraphDataSummary.add_member(:edge_structures, Shapes::ShapeRef.new(shape: EdgeStructures, location_name: "edgeStructures"))
+    GraphDataSummary.struct_class = Types::GraphDataSummary
 
     GraphSnapshotSummary.add_member(:id, Shapes::ShapeRef.new(shape: SnapshotId, required: true, location_name: "id"))
     GraphSnapshotSummary.add_member(:name, Shapes::ShapeRef.new(shape: SnapshotName, required: true, location_name: "name"))
@@ -396,17 +496,43 @@ module Aws::NeptuneGraph
     ListPrivateGraphEndpointsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListPrivateGraphEndpointsOutput.struct_class = Types::ListPrivateGraphEndpointsOutput
 
+    ListQueriesInput.add_member(:graph_identifier, Shapes::ShapeRef.new(shape: GraphIdentifier, required: true, location: "header", location_name: "graphIdentifier", metadata: {"hostLabel"=>true, "hostLabelName"=>"graphIdentifier"}))
+    ListQueriesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, required: true, location: "querystring", location_name: "maxResults"))
+    ListQueriesInput.add_member(:state, Shapes::ShapeRef.new(shape: QueryStateInput, location: "querystring", location_name: "state"))
+    ListQueriesInput.struct_class = Types::ListQueriesInput
+
+    ListQueriesOutput.add_member(:queries, Shapes::ShapeRef.new(shape: QuerySummaryList, required: true, location_name: "queries"))
+    ListQueriesOutput.struct_class = Types::ListQueriesOutput
+
     ListTagsForResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceInput.struct_class = Types::ListTagsForResourceInput
 
     ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
 
+    LongValuedMap.key = Shapes::ShapeRef.new(shape: String)
+    LongValuedMap.value = Shapes::ShapeRef.new(shape: Long)
+
+    LongValuedMapList.member = Shapes::ShapeRef.new(shape: LongValuedMap)
+
     NeptuneImportOptions.add_member(:s3_export_path, Shapes::ShapeRef.new(shape: NeptuneImportOptionsS3ExportPathString, required: true, location_name: "s3ExportPath"))
     NeptuneImportOptions.add_member(:s3_export_kms_key_id, Shapes::ShapeRef.new(shape: NeptuneImportOptionsS3ExportKmsKeyIdString, required: true, location_name: "s3ExportKmsKeyId"))
     NeptuneImportOptions.add_member(:preserve_default_vertex_labels, Shapes::ShapeRef.new(shape: Boolean, location_name: "preserveDefaultVertexLabels"))
     NeptuneImportOptions.add_member(:preserve_edge_ids, Shapes::ShapeRef.new(shape: Boolean, location_name: "preserveEdgeIds"))
     NeptuneImportOptions.struct_class = Types::NeptuneImportOptions
+
+    NodeLabels.member = Shapes::ShapeRef.new(shape: String)
+
+    NodeProperties.member = Shapes::ShapeRef.new(shape: String)
+
+    NodeStructure.add_member(:count, Shapes::ShapeRef.new(shape: Long, location_name: "count"))
+    NodeStructure.add_member(:node_properties, Shapes::ShapeRef.new(shape: NodeProperties, location_name: "nodeProperties"))
+    NodeStructure.add_member(:distinct_outgoing_edge_labels, Shapes::ShapeRef.new(shape: OutgoingEdgeLabels, location_name: "distinctOutgoingEdgeLabels"))
+    NodeStructure.struct_class = Types::NodeStructure
+
+    NodeStructures.member = Shapes::ShapeRef.new(shape: NodeStructure)
+
+    OutgoingEdgeLabels.member = Shapes::ShapeRef.new(shape: String)
 
     PrivateGraphEndpointSummary.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "vpcId"))
     PrivateGraphEndpointSummary.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, required: true, location_name: "subnetIds"))
@@ -415,6 +541,15 @@ module Aws::NeptuneGraph
     PrivateGraphEndpointSummary.struct_class = Types::PrivateGraphEndpointSummary
 
     PrivateGraphEndpointSummaryList.member = Shapes::ShapeRef.new(shape: PrivateGraphEndpointSummary)
+
+    QuerySummary.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
+    QuerySummary.add_member(:query_string, Shapes::ShapeRef.new(shape: String, location_name: "queryString"))
+    QuerySummary.add_member(:waited, Shapes::ShapeRef.new(shape: Integer, location_name: "waited"))
+    QuerySummary.add_member(:elapsed, Shapes::ShapeRef.new(shape: Integer, location_name: "elapsed"))
+    QuerySummary.add_member(:state, Shapes::ShapeRef.new(shape: QueryState, location_name: "state"))
+    QuerySummary.struct_class = Types::QuerySummary
+
+    QuerySummaryList.member = Shapes::ShapeRef.new(shape: QuerySummary)
 
     ResetGraphInput.add_member(:graph_identifier, Shapes::ShapeRef.new(shape: GraphIdentifier, required: true, location: "uri", location_name: "graphIdentifier"))
     ResetGraphInput.add_member(:skip_snapshot, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "skipSnapshot"))
@@ -491,6 +626,10 @@ module Aws::NeptuneGraph
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
+    UnprocessableException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    UnprocessableException.add_member(:reason, Shapes::ShapeRef.new(shape: UnprocessableExceptionReason, required: true, location_name: "reason"))
+    UnprocessableException.struct_class = Types::UnprocessableException
+
     UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceInput.struct_class = Types::UntagResourceInput
@@ -556,6 +695,22 @@ module Aws::NeptuneGraph
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:cancel_query, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelQuery"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/queries/{queryId}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "{graphIdentifier}.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: CancelQueryInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -653,6 +808,23 @@ module Aws::NeptuneGraph
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:execute_query, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ExecuteQuery"
+        o.http_method = "POST"
+        o.http_request_uri = "/queries"
+        o.endpoint_pattern = {
+          "hostPrefix" => "{graphIdentifier}.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ExecuteQueryInput)
+        o.output = Shapes::ShapeRef.new(shape: ExecuteQueryOutput)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_graph, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetGraph"
         o.http_method = "GET"
@@ -677,6 +849,22 @@ module Aws::NeptuneGraph
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:get_graph_summary, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetGraphSummary"
+        o.http_method = "GET"
+        o.http_request_uri = "/summary"
+        o.endpoint_pattern = {
+          "hostPrefix" => "{graphIdentifier}.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetGraphSummaryInput)
+        o.output = Shapes::ShapeRef.new(shape: GetGraphSummaryOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:get_import_task, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetImportTask"
         o.http_method = "GET"
@@ -697,6 +885,22 @@ module Aws::NeptuneGraph
         o.output = Shapes::ShapeRef.new(shape: GetPrivateGraphEndpointOutput)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_query, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetQuery"
+        o.http_method = "GET"
+        o.http_request_uri = "/queries/{queryId}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "{graphIdentifier}.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetQueryInput)
+        o.output = Shapes::ShapeRef.new(shape: GetQueryOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -770,6 +974,21 @@ module Aws::NeptuneGraph
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_queries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListQueries"
+        o.http_method = "GET"
+        o.http_request_uri = "/queries"
+        o.endpoint_pattern = {
+          "hostPrefix" => "{graphIdentifier}.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListQueriesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListQueriesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|

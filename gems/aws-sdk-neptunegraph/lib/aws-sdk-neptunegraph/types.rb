@@ -10,6 +10,20 @@
 module Aws::NeptuneGraph
   module Types
 
+    # Raised in case of an authentication or authorization failure.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] task_identifier
     #   The unique identifier of the import task.
     #   @return [String]
@@ -33,7 +47,7 @@ module Aws::NeptuneGraph
     # @!attribute [rw] source
     #   A URL identifying to the location of the data to be imported. This
     #   can be an Amazon S3 path, or can point to a Neptune database
-    #   endpoint or snapshot
+    #   endpoint or snapshot.
     #   @return [String]
     #
     # @!attribute [rw] format
@@ -66,6 +80,23 @@ module Aws::NeptuneGraph
       :format,
       :role_arn,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] graph_identifier
+    #   The unique identifier of the Neptune Analytics graph.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_id
+    #   The unique identifier of the query to cancel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/CancelQueryInput AWS API Documentation
+    #
+    class CancelQueryInput < Struct.new(
+      :graph_identifier,
+      :query_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -120,7 +151,7 @@ module Aws::NeptuneGraph
     #   @return [Types::VectorSearchConfiguration]
     #
     # @!attribute [rw] replica_count
-    #   The number of replicas in other AZs. Min =0, Max = 2, Default =1
+    #   The number of replicas in other AZs. Min =0, Max = 2, Default = 1.
     #   @return [Integer]
     #
     # @!attribute [rw] deletion_protection
@@ -328,7 +359,7 @@ module Aws::NeptuneGraph
     # @!attribute [rw] public_connectivity
     #   Specifies whether or not the graph can be reachable over the
     #   internet. All access to graphs IAM authenticated. (`true` to enable,
-    #   or `false` to disable.
+    #   or `false` to disable).
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_identifier
@@ -743,6 +774,81 @@ module Aws::NeptuneGraph
       include Aws::Structure
     end
 
+    # Contains information about an edge in a Neptune Analytics graph.
+    #
+    # @!attribute [rw] count
+    #   The number of instances of the edge in the graph.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] edge_properties
+    #   A list of the properties associated with the edge.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/EdgeStructure AWS API Documentation
+    #
+    class EdgeStructure < Struct.new(
+      :count,
+      :edge_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] graph_identifier
+    #   The unique identifier of the Neptune Analytics graph.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string
+    #   The query string to be executed.
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   The query language the query is written in. Currently only
+    #   openCypher is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] plan_cache
+    #   Query plan cache is a feature that saves the query plan and reuses
+    #   it on successive executions of the same query. This reduces query
+    #   latency, and works for both `READ` and `UPDATE` queries. The plan
+    #   cache is an LRU cache with a 5 minute TTL and a capacity of 1000.
+    #   @return [String]
+    #
+    # @!attribute [rw] explain_mode
+    #   The explain mode parameter returns a query explain instead of the
+    #   actual query results. A query explain can be used to gather insights
+    #   about the query execution such as planning decisions, time spent on
+    #   each operator, solutions flowing etc.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_timeout_milliseconds
+    #   Specifies the query timeout duration, in milliseconds. (optional)
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/ExecuteQueryInput AWS API Documentation
+    #
+    class ExecuteQueryInput < Struct.new(
+      :graph_identifier,
+      :query_string,
+      :language,
+      :plan_cache,
+      :explain_mode,
+      :query_timeout_milliseconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payload
+    #   The query results.
+    #   @return [IO]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/ExecuteQueryOutput AWS API Documentation
+    #
+    class ExecuteQueryOutput < Struct.new(
+      :payload)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] graph_identifier
     #   The unique identifier of the Neptune Analytics graph.
     #   @return [String]
@@ -895,6 +1001,47 @@ module Aws::NeptuneGraph
       :snapshot_create_time,
       :status,
       :kms_key_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] graph_identifier
+    #   The unique identifier of the Neptune Analytics graph.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The summary mode can take one of two values: `basic` (the default),
+    #   and `detailed`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/GetGraphSummaryInput AWS API Documentation
+    #
+    class GetGraphSummaryInput < Struct.new(
+      :graph_identifier,
+      :mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] version
+    #   Display the version of this tool.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_statistics_computation_time
+    #   The timestamp, in ISO 8601 format, of the time at which Neptune
+    #   Analytics last computed statistics.
+    #   @return [Time]
+    #
+    # @!attribute [rw] graph_summary
+    #   The graph summary.
+    #   @return [Types::GraphDataSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/GetGraphSummaryOutput AWS API Documentation
+    #
+    class GetGraphSummaryOutput < Struct.new(
+      :version,
+      :last_statistics_computation_time,
+      :graph_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1053,6 +1200,138 @@ module Aws::NeptuneGraph
       :subnet_ids,
       :status,
       :vpc_endpoint_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] graph_identifier
+    #   The unique identifier of the Neptune Analytics graph.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_id
+    #   The ID of the query in question.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/GetQueryInput AWS API Documentation
+    #
+    class GetQueryInput < Struct.new(
+      :graph_identifier,
+      :query_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the query in question.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string
+    #   The query in question.
+    #   @return [String]
+    #
+    # @!attribute [rw] waited
+    #   Indicates how long the query waited, in milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] elapsed
+    #   The number of milliseconds the query has been running.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   State of the query.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/GetQueryOutput AWS API Documentation
+    #
+    class GetQueryOutput < Struct.new(
+      :id,
+      :query_string,
+      :waited,
+      :elapsed,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about the graph.
+    #
+    # @!attribute [rw] num_nodes
+    #   The number of nodes in the graph.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] num_edges
+    #   The number of edges in the graph.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] num_node_labels
+    #   The number of distinct node labels in the graph.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] num_edge_labels
+    #   The number of unique edge labels in the graph.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] node_labels
+    #   A list of distinct node labels in the graph.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] edge_labels
+    #   A list of the edge labels in the graph.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] num_node_properties
+    #   The number of distinct node properties in the graph.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] num_edge_properties
+    #   The number of edge properties in the graph.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] node_properties
+    #   A list of the distinct node properties in the graph, along with the
+    #   count of nodes where each property is used.
+    #   @return [Array<Hash<String,Integer>>]
+    #
+    # @!attribute [rw] edge_properties
+    #   A list of the distinct edge properties in the graph, along with the
+    #   count of edges where each property is used.
+    #   @return [Array<Hash<String,Integer>>]
+    #
+    # @!attribute [rw] total_node_property_values
+    #   The total number of usages of all node properties.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_edge_property_values
+    #   The total number of usages of all edge properties.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] node_structures
+    #   This field is only present when the requested mode is DETAILED. It
+    #   contains a list of node structures.
+    #   @return [Array<Types::NodeStructure>]
+    #
+    # @!attribute [rw] edge_structures
+    #   This field is only present when the requested mode is DETAILED. It
+    #   contains a list of edge structures.
+    #   @return [Array<Types::EdgeStructure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/GraphDataSummary AWS API Documentation
+    #
+    class GraphDataSummary < Struct.new(
+      :num_nodes,
+      :num_edges,
+      :num_node_labels,
+      :num_edge_labels,
+      :node_labels,
+      :edge_labels,
+      :num_node_properties,
+      :num_edge_properties,
+      :node_properties,
+      :edge_properties,
+      :total_node_property_values,
+      :total_edge_property_values,
+      :node_structures,
+      :edge_structures)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1512,6 +1791,40 @@ module Aws::NeptuneGraph
       include Aws::Structure
     end
 
+    # @!attribute [rw] graph_identifier
+    #   The unique identifier of the Neptune Analytics graph.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be fetched by the API.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   Filtered list of queries based on state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/ListQueriesInput AWS API Documentation
+    #
+    class ListQueriesInput < Struct.new(
+      :graph_identifier,
+      :max_results,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] queries
+    #   A list of current openCypher queries.
+    #   @return [Array<Types::QuerySummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/ListQueriesOutput AWS API Documentation
+    #
+    class ListQueriesOutput < Struct.new(
+      :queries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The ARN of the resource.
     #   @return [String]
@@ -1562,7 +1875,7 @@ module Aws::NeptuneGraph
     #   Neptune Analytics currently does not support user defined edge ids.
     #   The edge ids are not imported by default. They are imported if
     #   *preserveEdgeIds* is set to true, and ids are stored as properties
-    #   on the relationships with the property name neptuneEdgeId.
+    #   on the relationships with the property name *neptuneEdgeId*.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/NeptuneImportOptions AWS API Documentation
@@ -1572,6 +1885,30 @@ module Aws::NeptuneGraph
       :s3_export_kms_key_id,
       :preserve_default_vertex_labels,
       :preserve_edge_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a node.
+    #
+    # @!attribute [rw] count
+    #   The number of instances of this node.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] node_properties
+    #   Properties associated with this node.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] distinct_outgoing_edge_labels
+    #   The outgoing edge labels associated with this node.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/NodeStructure AWS API Documentation
+    #
+    class NodeStructure < Struct.new(
+      :count,
+      :node_properties,
+      :distinct_outgoing_edge_labels)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1601,6 +1938,42 @@ module Aws::NeptuneGraph
       :subnet_ids,
       :status,
       :vpc_endpoint_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of the query listed.
+    #
+    # @!attribute [rw] id
+    #   A string representation of the id of the query.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string
+    #   The actual query text. The `queryString` may be truncated if the
+    #   actual query string is too long.
+    #   @return [String]
+    #
+    # @!attribute [rw] waited
+    #   The amount of time, in milliseconds, the query has waited in the
+    #   queue before being picked up by a worker thread.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] elapsed
+    #   The running time of the query, in milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   State of the query.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/QuerySummary AWS API Documentation
+    #
+    class QuerySummary < Struct.new(
+      :id,
+      :query_string,
+      :waited,
+      :elapsed,
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1944,6 +2317,24 @@ module Aws::NeptuneGraph
       include Aws::Structure
     end
 
+    # Request cannot be processed due to known reasons. Eg. partition full.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason for the unprocessable exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/UnprocessableException AWS API Documentation
+    #
+    class UnprocessableException < Struct.new(
+      :message,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   ARN of the resource whose tag needs to be removed.
     #   @return [String]
@@ -2081,7 +2472,7 @@ module Aws::NeptuneGraph
       include Aws::Structure
     end
 
-    # A resource could not be validated
+    # A resource could not be validated.
     #
     # @!attribute [rw] message
     #   A message describing the problem.

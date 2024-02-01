@@ -8,6 +8,11 @@
 module Aws::NeptuneGraph
   module Types
 
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class CancelImportTaskInput
       attr_accessor task_identifier: ::String
       SENSITIVE: []
@@ -20,6 +25,12 @@ module Aws::NeptuneGraph
       attr_accessor format: ("CSV" | "OPEN_CYPHER")
       attr_accessor role_arn: ::String
       attr_accessor status: ("INITIALIZING" | "EXPORTING" | "ANALYZING_DATA" | "IMPORTING" | "REPROVISIONING" | "ROLLING_BACK" | "SUCCEEDED" | "FAILED" | "CANCELLING" | "CANCELLED")
+      SENSITIVE: []
+    end
+
+    class CancelQueryInput
+      attr_accessor graph_identifier: ::String
+      attr_accessor query_id: ::String
       SENSITIVE: []
     end
 
@@ -178,6 +189,27 @@ module Aws::NeptuneGraph
       SENSITIVE: []
     end
 
+    class EdgeStructure
+      attr_accessor count: ::Integer
+      attr_accessor edge_properties: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ExecuteQueryInput
+      attr_accessor graph_identifier: ::String
+      attr_accessor query_string: ::String
+      attr_accessor language: ("OPEN_CYPHER")
+      attr_accessor plan_cache: ("ENABLED" | "DISABLED" | "AUTO")
+      attr_accessor explain_mode: ("STATIC" | "DETAILS")
+      attr_accessor query_timeout_milliseconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExecuteQueryOutput
+      attr_accessor payload: ::IO
+      SENSITIVE: []
+    end
+
     class GetGraphInput
       attr_accessor graph_identifier: ::String
       SENSITIVE: []
@@ -218,6 +250,19 @@ module Aws::NeptuneGraph
       SENSITIVE: []
     end
 
+    class GetGraphSummaryInput
+      attr_accessor graph_identifier: ::String
+      attr_accessor mode: ("BASIC" | "DETAILED")
+      SENSITIVE: []
+    end
+
+    class GetGraphSummaryOutput
+      attr_accessor version: ::String
+      attr_accessor last_statistics_computation_time: ::Time
+      attr_accessor graph_summary: Types::GraphDataSummary
+      SENSITIVE: []
+    end
+
     class GetImportTaskInput
       attr_accessor task_identifier: ::String
       SENSITIVE: []
@@ -248,6 +293,39 @@ module Aws::NeptuneGraph
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "FAILED")
       attr_accessor vpc_endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetQueryInput
+      attr_accessor graph_identifier: ::String
+      attr_accessor query_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetQueryOutput
+      attr_accessor id: ::String
+      attr_accessor query_string: ::String
+      attr_accessor waited: ::Integer
+      attr_accessor elapsed: ::Integer
+      attr_accessor state: ("RUNNING" | "WAITING" | "CANCELLING")
+      SENSITIVE: []
+    end
+
+    class GraphDataSummary
+      attr_accessor num_nodes: ::Integer
+      attr_accessor num_edges: ::Integer
+      attr_accessor num_node_labels: ::Integer
+      attr_accessor num_edge_labels: ::Integer
+      attr_accessor node_labels: ::Array[::String]
+      attr_accessor edge_labels: ::Array[::String]
+      attr_accessor num_node_properties: ::Integer
+      attr_accessor num_edge_properties: ::Integer
+      attr_accessor node_properties: ::Array[::Hash[::String, ::Integer]]
+      attr_accessor edge_properties: ::Array[::Hash[::String, ::Integer]]
+      attr_accessor total_node_property_values: ::Integer
+      attr_accessor total_edge_property_values: ::Integer
+      attr_accessor node_structures: ::Array[Types::NodeStructure]
+      attr_accessor edge_structures: ::Array[Types::EdgeStructure]
       SENSITIVE: []
     end
 
@@ -364,6 +442,18 @@ module Aws::NeptuneGraph
       SENSITIVE: []
     end
 
+    class ListQueriesInput
+      attr_accessor graph_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor state: ("ALL" | "RUNNING" | "WAITING" | "CANCELLING")
+      SENSITIVE: []
+    end
+
+    class ListQueriesOutput
+      attr_accessor queries: ::Array[Types::QuerySummary]
+      SENSITIVE: []
+    end
+
     class ListTagsForResourceInput
       attr_accessor resource_arn: ::String
       SENSITIVE: []
@@ -382,11 +472,27 @@ module Aws::NeptuneGraph
       SENSITIVE: []
     end
 
+    class NodeStructure
+      attr_accessor count: ::Integer
+      attr_accessor node_properties: ::Array[::String]
+      attr_accessor distinct_outgoing_edge_labels: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class PrivateGraphEndpointSummary
       attr_accessor vpc_id: ::String
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "FAILED")
       attr_accessor vpc_endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class QuerySummary
+      attr_accessor id: ::String
+      attr_accessor query_string: ::String
+      attr_accessor waited: ::Integer
+      attr_accessor elapsed: ::Integer
+      attr_accessor state: ("RUNNING" | "WAITING" | "CANCELLING")
       SENSITIVE: []
     end
 
@@ -470,6 +576,12 @@ module Aws::NeptuneGraph
 
     class ThrottlingException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnprocessableException
+      attr_accessor message: ::String
+      attr_accessor reason: ("QUERY_TIMEOUT" | "INTERNAL_LIMIT_EXCEEDED" | "MEMORY_LIMIT_EXCEEDED" | "STORAGE_LIMIT_EXCEEDED" | "PARTITION_FULL")
       SENSITIVE: []
     end
 

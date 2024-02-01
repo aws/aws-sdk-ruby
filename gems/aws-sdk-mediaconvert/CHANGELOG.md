@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.125.0 (2024-02-01)
+------------------
+
+* Feature - This release includes support for broadcast-mixed audio description tracks.
+
 1.124.0 (2024-01-26)
 ------------------
 

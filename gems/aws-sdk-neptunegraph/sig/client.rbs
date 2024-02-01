@@ -87,6 +87,13 @@ module Aws
                               ) -> _CancelImportTaskResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelImportTaskResponseSuccess
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#cancel_query-instance_method
+      def cancel_query: (
+                          graph_identifier: ::String,
+                          query_id: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       interface _CreateGraphResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateGraphOutput]
         def id: () -> ::String
@@ -247,6 +254,21 @@ module Aws
                                          ) -> _DeletePrivateGraphEndpointResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePrivateGraphEndpointResponseSuccess
 
+      interface _ExecuteQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExecuteQueryOutput]
+        def payload: () -> ::IO
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#execute_query-instance_method
+      def execute_query: (
+                           graph_identifier: ::String,
+                           query_string: ::String,
+                           language: ("OPEN_CYPHER"),
+                           ?plan_cache: ("ENABLED" | "DISABLED" | "AUTO"),
+                           ?explain_mode: ("STATIC" | "DETAILS"),
+                           ?query_timeout_milliseconds: ::Integer
+                         ) ?{ (*untyped) -> void } -> _ExecuteQueryResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _ExecuteQueryResponseSuccess
+
       interface _GetGraphResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetGraphOutput]
         def id: () -> ::String
@@ -287,6 +309,19 @@ module Aws
                               ) -> _GetGraphSnapshotResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGraphSnapshotResponseSuccess
 
+      interface _GetGraphSummaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGraphSummaryOutput]
+        def version: () -> ::String
+        def last_statistics_computation_time: () -> ::Time
+        def graph_summary: () -> Types::GraphDataSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#get_graph_summary-instance_method
+      def get_graph_summary: (
+                               graph_identifier: ::String,
+                               ?mode: ("BASIC" | "DETAILED")
+                             ) -> _GetGraphSummaryResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGraphSummaryResponseSuccess
+
       interface _GetImportTaskResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetImportTaskOutput]
         def graph_id: () -> ::String
@@ -319,6 +354,21 @@ module Aws
                                         vpc_id: ::String
                                       ) -> _GetPrivateGraphEndpointResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPrivateGraphEndpointResponseSuccess
+
+      interface _GetQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetQueryOutput]
+        def id: () -> ::String
+        def query_string: () -> ::String
+        def waited: () -> ::Integer
+        def elapsed: () -> ::Integer
+        def state: () -> ("RUNNING" | "WAITING" | "CANCELLING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#get_query-instance_method
+      def get_query: (
+                       graph_identifier: ::String,
+                       query_id: ::String
+                     ) -> _GetQueryResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQueryResponseSuccess
 
       interface _ListGraphSnapshotsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListGraphSnapshotsOutput]
@@ -369,6 +419,18 @@ module Aws
                                           ?max_results: ::Integer
                                         ) -> _ListPrivateGraphEndpointsResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPrivateGraphEndpointsResponseSuccess
+
+      interface _ListQueriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListQueriesOutput]
+        def queries: () -> ::Array[Types::QuerySummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#list_queries-instance_method
+      def list_queries: (
+                          graph_identifier: ::String,
+                          max_results: ::Integer,
+                          ?state: ("ALL" | "RUNNING" | "WAITING" | "CANCELLING")
+                        ) -> _ListQueriesResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListQueriesResponseSuccess
 
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]

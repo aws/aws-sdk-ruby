@@ -82,6 +82,7 @@ module Aws::IVS
       attr_accessor insecure_ingest: bool
       attr_accessor latency_mode: ("NORMAL" | "LOW")
       attr_accessor name: ::String
+      attr_accessor playback_restriction_policy_arn: ::String
       attr_accessor playback_url: ::String
       attr_accessor preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY")
       attr_accessor recording_configuration_arn: ::String
@@ -101,6 +102,7 @@ module Aws::IVS
       attr_accessor insecure_ingest: bool
       attr_accessor latency_mode: ("NORMAL" | "LOW")
       attr_accessor name: ::String
+      attr_accessor playback_restriction_policy_arn: ::String
       attr_accessor preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY")
       attr_accessor recording_configuration_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -118,6 +120,7 @@ module Aws::IVS
       attr_accessor insecure_ingest: bool
       attr_accessor latency_mode: ("NORMAL" | "LOW")
       attr_accessor name: ::String
+      attr_accessor playback_restriction_policy_arn: ::String
       attr_accessor preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY")
       attr_accessor recording_configuration_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -128,6 +131,20 @@ module Aws::IVS
     class CreateChannelResponse
       attr_accessor channel: Types::Channel
       attr_accessor stream_key: Types::StreamKey
+      SENSITIVE: []
+    end
+
+    class CreatePlaybackRestrictionPolicyRequest
+      attr_accessor allowed_countries: ::Array[::String]
+      attr_accessor allowed_origins: ::Array[::String]
+      attr_accessor enable_strict_origin_enforcement: bool
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePlaybackRestrictionPolicyResponse
+      attr_accessor playback_restriction_policy: Types::PlaybackRestrictionPolicy
       SENSITIVE: []
     end
 
@@ -170,6 +187,11 @@ module Aws::IVS
     class DeletePlaybackKeyPairResponse < Aws::EmptyStructure
     end
 
+    class DeletePlaybackRestrictionPolicyRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
     class DeleteRecordingConfigurationRequest
       attr_accessor arn: ::String
       SENSITIVE: []
@@ -202,6 +224,16 @@ module Aws::IVS
 
     class GetPlaybackKeyPairResponse
       attr_accessor key_pair: Types::PlaybackKeyPair
+      SENSITIVE: []
+    end
+
+    class GetPlaybackRestrictionPolicyRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetPlaybackRestrictionPolicyResponse
+      attr_accessor playback_restriction_policy: Types::PlaybackRestrictionPolicy
       SENSITIVE: []
     end
 
@@ -271,6 +303,7 @@ module Aws::IVS
 
     class ListChannelsRequest
       attr_accessor filter_by_name: ::String
+      attr_accessor filter_by_playback_restriction_policy_arn: ::String
       attr_accessor filter_by_recording_configuration_arn: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -292,6 +325,18 @@ module Aws::IVS
     class ListPlaybackKeyPairsResponse
       attr_accessor key_pairs: ::Array[Types::PlaybackKeyPairSummary]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPlaybackRestrictionPoliciesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPlaybackRestrictionPoliciesResponse
+      attr_accessor next_token: ::String
+      attr_accessor playback_restriction_policies: ::Array[Types::PlaybackRestrictionPolicySummary]
       SENSITIVE: []
     end
 
@@ -371,6 +416,26 @@ module Aws::IVS
 
     class PlaybackKeyPairSummary
       attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PlaybackRestrictionPolicy
+      attr_accessor allowed_countries: ::Array[::String]
+      attr_accessor allowed_origins: ::Array[::String]
+      attr_accessor arn: ::String
+      attr_accessor enable_strict_origin_enforcement: bool
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PlaybackRestrictionPolicySummary
+      attr_accessor allowed_countries: ::Array[::String]
+      attr_accessor allowed_origins: ::Array[::String]
+      attr_accessor arn: ::String
+      attr_accessor enable_strict_origin_enforcement: bool
       attr_accessor name: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -551,6 +616,7 @@ module Aws::IVS
       attr_accessor insecure_ingest: bool
       attr_accessor latency_mode: ("NORMAL" | "LOW")
       attr_accessor name: ::String
+      attr_accessor playback_restriction_policy_arn: ::String
       attr_accessor preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY")
       attr_accessor recording_configuration_arn: ::String
       attr_accessor type: ("BASIC" | "STANDARD" | "ADVANCED_SD" | "ADVANCED_HD")
@@ -559,6 +625,20 @@ module Aws::IVS
 
     class UpdateChannelResponse
       attr_accessor channel: Types::Channel
+      SENSITIVE: []
+    end
+
+    class UpdatePlaybackRestrictionPolicyRequest
+      attr_accessor allowed_countries: ::Array[::String]
+      attr_accessor allowed_origins: ::Array[::String]
+      attr_accessor arn: ::String
+      attr_accessor enable_strict_origin_enforcement: bool
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePlaybackRestrictionPolicyResponse
+      attr_accessor playback_restriction_policy: Types::PlaybackRestrictionPolicy
       SENSITIVE: []
     end
 

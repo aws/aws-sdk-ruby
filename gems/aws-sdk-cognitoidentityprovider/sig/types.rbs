@@ -1118,8 +1118,8 @@ module Aws::CognitoIdentityProvider
       attr_accessor create_auth_challenge: ::String
       attr_accessor verify_auth_challenge_response: ::String
       attr_accessor pre_token_generation: ::String
-      attr_accessor pre_token_generation_config: Types::PreTokenGenerationVersionConfigType
       attr_accessor user_migration: ::String
+      attr_accessor pre_token_generation_config: Types::PreTokenGenerationVersionConfigType
       attr_accessor custom_sms_sender: Types::CustomSMSLambdaVersionConfigType
       attr_accessor custom_email_sender: Types::CustomEmailLambdaVersionConfigType
       attr_accessor kms_key_id: ::String

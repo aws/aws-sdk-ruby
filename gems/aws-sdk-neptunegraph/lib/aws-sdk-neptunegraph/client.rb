@@ -388,7 +388,7 @@ module Aws::NeptuneGraph
 
     # @!group API Operations
 
-    # Deletes the specified import task
+    # Deletes the specified import task.
     #
     # @option params [required, String] :task_identifier
     #   The unique identifier of the import task.
@@ -426,6 +426,32 @@ module Aws::NeptuneGraph
       req.send_request(options)
     end
 
+    # Cancels a specified query.
+    #
+    # @option params [required, String] :graph_identifier
+    #   The unique identifier of the Neptune Analytics graph.
+    #
+    # @option params [required, String] :query_id
+    #   The unique identifier of the query to cancel.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_query({
+    #     graph_identifier: "GraphIdentifier", # required
+    #     query_id: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/CancelQuery AWS API Documentation
+    #
+    # @overload cancel_query(params = {})
+    # @param [Hash] params ({})
+    def cancel_query(params = {}, options = {})
+      req = build_request(:cancel_query, params)
+      req.send_request(options)
+    end
+
     # Creates a new Neptune Analytics graph.
     #
     # @option params [required, String] :graph_name
@@ -454,7 +480,7 @@ module Aws::NeptuneGraph
     #   Max = 65,535
     #
     # @option params [Integer] :replica_count
-    #   The number of replicas in other AZs. Min =0, Max = 2, Default =1
+    #   The number of replicas in other AZs. Min =0, Max = 2, Default = 1.
     #
     # @option params [Boolean] :deletion_protection
     #   Indicates whether or not to enable deletion protection on the graph.
@@ -610,7 +636,7 @@ module Aws::NeptuneGraph
     # @option params [Boolean] :public_connectivity
     #   Specifies whether or not the graph can be reachable over the internet.
     #   All access to graphs IAM authenticated. (`true` to enable, or `false`
-    #   to disable.
+    #   to disable).
     #
     # @option params [String] :kms_key_identifier
     #   Specifies a KMS key to use to encrypt data imported into the new
@@ -928,6 +954,70 @@ module Aws::NeptuneGraph
       req.send_request(options)
     end
 
+    # Execute an openCypher query. Currently, the SDK does not support
+    # parameterized queries. If you want to make a parameterized query call,
+    # you can use an HTTP request.
+    #
+    # <note markdown="1"> Non-parametrized queries are not considered for plan caching. You can
+    # force plan caching with `planCache=enabled`. The plan cache will be
+    # reused only for the same exact query. Slight variations in the query
+    # will not be able to reuse the query plan cache.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :graph_identifier
+    #   The unique identifier of the Neptune Analytics graph.
+    #
+    # @option params [required, String] :query_string
+    #   The query string to be executed.
+    #
+    # @option params [required, String] :language
+    #   The query language the query is written in. Currently only openCypher
+    #   is supported.
+    #
+    # @option params [String] :plan_cache
+    #   Query plan cache is a feature that saves the query plan and reuses it
+    #   on successive executions of the same query. This reduces query
+    #   latency, and works for both `READ` and `UPDATE` queries. The plan
+    #   cache is an LRU cache with a 5 minute TTL and a capacity of 1000.
+    #
+    # @option params [String] :explain_mode
+    #   The explain mode parameter returns a query explain instead of the
+    #   actual query results. A query explain can be used to gather insights
+    #   about the query execution such as planning decisions, time spent on
+    #   each operator, solutions flowing etc.
+    #
+    # @option params [Integer] :query_timeout_milliseconds
+    #   Specifies the query timeout duration, in milliseconds. (optional)
+    #
+    # @return [Types::ExecuteQueryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExecuteQueryOutput#payload #payload} => IO
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.execute_query({
+    #     graph_identifier: "GraphIdentifier", # required
+    #     query_string: "String", # required
+    #     language: "OPEN_CYPHER", # required, accepts OPEN_CYPHER
+    #     plan_cache: "ENABLED", # accepts ENABLED, DISABLED, AUTO
+    #     explain_mode: "STATIC", # accepts STATIC, DETAILS
+    #     query_timeout_milliseconds: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.payload #=> IO
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/ExecuteQuery AWS API Documentation
+    #
+    # @overload execute_query(params = {})
+    # @param [Hash] params ({})
+    def execute_query(params = {}, options = {}, &block)
+      req = build_request(:execute_query, params)
+      req.send_request(options, &block)
+    end
+
     # Gets information about a specified graph.
     #
     # @option params [required, String] :graph_identifier
@@ -1036,6 +1126,70 @@ module Aws::NeptuneGraph
       req.send_request(options)
     end
 
+    # Gets a graph summary for a property graph.
+    #
+    # @option params [required, String] :graph_identifier
+    #   The unique identifier of the Neptune Analytics graph.
+    #
+    # @option params [String] :mode
+    #   The summary mode can take one of two values: `basic` (the default),
+    #   and `detailed`.
+    #
+    # @return [Types::GetGraphSummaryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetGraphSummaryOutput#version #version} => String
+    #   * {Types::GetGraphSummaryOutput#last_statistics_computation_time #last_statistics_computation_time} => Time
+    #   * {Types::GetGraphSummaryOutput#graph_summary #graph_summary} => Types::GraphDataSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_graph_summary({
+    #     graph_identifier: "GraphIdentifier", # required
+    #     mode: "BASIC", # accepts BASIC, DETAILED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.version #=> String
+    #   resp.last_statistics_computation_time #=> Time
+    #   resp.graph_summary.num_nodes #=> Integer
+    #   resp.graph_summary.num_edges #=> Integer
+    #   resp.graph_summary.num_node_labels #=> Integer
+    #   resp.graph_summary.num_edge_labels #=> Integer
+    #   resp.graph_summary.node_labels #=> Array
+    #   resp.graph_summary.node_labels[0] #=> String
+    #   resp.graph_summary.edge_labels #=> Array
+    #   resp.graph_summary.edge_labels[0] #=> String
+    #   resp.graph_summary.num_node_properties #=> Integer
+    #   resp.graph_summary.num_edge_properties #=> Integer
+    #   resp.graph_summary.node_properties #=> Array
+    #   resp.graph_summary.node_properties[0] #=> Hash
+    #   resp.graph_summary.node_properties[0]["String"] #=> Integer
+    #   resp.graph_summary.edge_properties #=> Array
+    #   resp.graph_summary.edge_properties[0] #=> Hash
+    #   resp.graph_summary.edge_properties[0]["String"] #=> Integer
+    #   resp.graph_summary.total_node_property_values #=> Integer
+    #   resp.graph_summary.total_edge_property_values #=> Integer
+    #   resp.graph_summary.node_structures #=> Array
+    #   resp.graph_summary.node_structures[0].count #=> Integer
+    #   resp.graph_summary.node_structures[0].node_properties #=> Array
+    #   resp.graph_summary.node_structures[0].node_properties[0] #=> String
+    #   resp.graph_summary.node_structures[0].distinct_outgoing_edge_labels #=> Array
+    #   resp.graph_summary.node_structures[0].distinct_outgoing_edge_labels[0] #=> String
+    #   resp.graph_summary.edge_structures #=> Array
+    #   resp.graph_summary.edge_structures[0].count #=> Integer
+    #   resp.graph_summary.edge_structures[0].edge_properties #=> Array
+    #   resp.graph_summary.edge_structures[0].edge_properties[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/GetGraphSummary AWS API Documentation
+    #
+    # @overload get_graph_summary(params = {})
+    # @param [Hash] params ({})
+    def get_graph_summary(params = {}, options = {})
+      req = build_request(:get_graph_summary, params)
+      req.send_request(options)
+    end
+
     # Retrieves a specified import task.
     #
     # @option params [required, String] :task_identifier
@@ -1140,6 +1294,46 @@ module Aws::NeptuneGraph
     # @param [Hash] params ({})
     def get_private_graph_endpoint(params = {}, options = {})
       req = build_request(:get_private_graph_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the status of a specified query.
+    #
+    # @option params [required, String] :graph_identifier
+    #   The unique identifier of the Neptune Analytics graph.
+    #
+    # @option params [required, String] :query_id
+    #   The ID of the query in question.
+    #
+    # @return [Types::GetQueryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetQueryOutput#id #id} => String
+    #   * {Types::GetQueryOutput#query_string #query_string} => String
+    #   * {Types::GetQueryOutput#waited #waited} => Integer
+    #   * {Types::GetQueryOutput#elapsed #elapsed} => Integer
+    #   * {Types::GetQueryOutput#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_query({
+    #     graph_identifier: "GraphIdentifier", # required
+    #     query_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.query_string #=> String
+    #   resp.waited #=> Integer
+    #   resp.elapsed #=> Integer
+    #   resp.state #=> String, one of "RUNNING", "WAITING", "CANCELLING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/GetQuery AWS API Documentation
+    #
+    # @overload get_query(params = {})
+    # @param [Hash] params ({})
+    def get_query(params = {}, options = {})
+      req = build_request(:get_query, params)
       req.send_request(options)
     end
 
@@ -1360,6 +1554,47 @@ module Aws::NeptuneGraph
     # @param [Hash] params ({})
     def list_private_graph_endpoints(params = {}, options = {})
       req = build_request(:list_private_graph_endpoints, params)
+      req.send_request(options)
+    end
+
+    # Lists active openCypher queries.
+    #
+    # @option params [required, String] :graph_identifier
+    #   The unique identifier of the Neptune Analytics graph.
+    #
+    # @option params [required, Integer] :max_results
+    #   The maximum number of results to be fetched by the API.
+    #
+    # @option params [String] :state
+    #   Filtered list of queries based on state.
+    #
+    # @return [Types::ListQueriesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListQueriesOutput#queries #queries} => Array&lt;Types::QuerySummary&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_queries({
+    #     graph_identifier: "GraphIdentifier", # required
+    #     max_results: 1, # required
+    #     state: "ALL", # accepts ALL, RUNNING, WAITING, CANCELLING
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.queries #=> Array
+    #   resp.queries[0].id #=> String
+    #   resp.queries[0].query_string #=> String
+    #   resp.queries[0].waited #=> Integer
+    #   resp.queries[0].elapsed #=> Integer
+    #   resp.queries[0].state #=> String, one of "RUNNING", "WAITING", "CANCELLING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/ListQueries AWS API Documentation
+    #
+    # @overload list_queries(params = {})
+    # @param [Hash] params ({})
+    def list_queries(params = {}, options = {})
+      req = build_request(:list_queries, params)
       req.send_request(options)
     end
 
@@ -1703,7 +1938,7 @@ module Aws::NeptuneGraph
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-neptunegraph'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

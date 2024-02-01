@@ -219,7 +219,10 @@ module Aws
                                  sort_order: ("ASCENDING" | "DESCENDING")?
                                },
                                ?next_token: ::String,
-                               ?max_results: ::Integer
+                               ?max_results: ::Integer,
+                               ?confirmation_status_filter: {
+                                 include: Array[("FINAL" | "NONFINAL")]
+                               }
                              ) -> _ListTransactionsResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTransactionsResponseSuccess
     end
