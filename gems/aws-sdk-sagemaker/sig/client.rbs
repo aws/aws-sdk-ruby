@@ -998,6 +998,9 @@ module Aws
                                }?,
                                kendra_settings: {
                                  status: ("ENABLED" | "DISABLED")?
+                               }?,
+                               generative_ai_settings: {
+                                 amazon_bedrock_role_arn: ::String?
                                }?
                              }?,
                              code_editor_app_settings: {
@@ -3775,6 +3778,9 @@ module Aws
                                      }?,
                                      kendra_settings: {
                                        status: ("ENABLED" | "DISABLED")?
+                                     }?,
+                                     generative_ai_settings: {
+                                       amazon_bedrock_role_arn: ::String?
                                      }?
                                    }?,
                                    code_editor_app_settings: {
@@ -7673,6 +7679,9 @@ module Aws
                                }?,
                                kendra_settings: {
                                  status: ("ENABLED" | "DISABLED")?
+                               }?,
+                               generative_ai_settings: {
+                                 amazon_bedrock_role_arn: ::String?
                                }?
                              }?,
                              code_editor_app_settings: {
@@ -8610,6 +8619,9 @@ module Aws
                                      }?,
                                      kendra_settings: {
                                        status: ("ENABLED" | "DISABLED")?
+                                     }?,
+                                     generative_ai_settings: {
+                                       amazon_bedrock_role_arn: ::String?
                                      }?
                                    }?,
                                    code_editor_app_settings: {

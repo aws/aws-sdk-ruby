@@ -5376,7 +5376,7 @@ module Aws::DynamoDB
     # Restores the specified table to the specified point in time within
     # `EarliestRestorableDateTime` and `LatestRestorableDateTime`. You can
     # restore your table to any point in time during the last 35 days. Any
-    # number of users can execute up to 4 concurrent restores (any type of
+    # number of users can execute up to 50 concurrent restores (any type of
     # restore) in a given account.
     #
     # When you restore using point in time recovery, DynamoDB restores your
@@ -7395,9 +7395,9 @@ module Aws::DynamoDB
     # @option params [Types::StreamSpecification] :stream_specification
     #   Represents the DynamoDB Streams configuration for the table.
     #
-    #   <note markdown="1"> You receive a `ResourceInUseException` if you try to enable a stream
-    #   on a table that already has a stream, or if you try to disable a
-    #   stream on a table that doesn't have a stream.
+    #   <note markdown="1"> You receive a `ValidationException` if you try to enable a stream on a
+    #   table that already has a stream, or if you try to disable a stream on
+    #   a table that doesn't have a stream.
     #
     #    </note>
     #
@@ -7924,7 +7924,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.101.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

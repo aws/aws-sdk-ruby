@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.102.0 (2024-02-02)
+------------------
+
+* Feature - Any number of users can execute up to 50 concurrent restores (any type of restore) in a given account.
+
 1.101.0 (2024-01-26)
 ------------------
 

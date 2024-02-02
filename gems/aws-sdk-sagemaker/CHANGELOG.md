@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.231.0 (2024-02-02)
+------------------
+
+* Feature - Amazon SageMaker Canvas adds GenerativeAiSettings support for CanvasAppSettings.
+
 1.230.0 (2024-01-26)
 ------------------
 

@@ -897,6 +897,7 @@ module Aws::SageMaker
     Framework = Shapes::StringShape.new(name: 'Framework')
     FrameworkVersion = Shapes::StringShape.new(name: 'FrameworkVersion')
     GenerateCandidateDefinitionsOnly = Shapes::BooleanShape.new(name: 'GenerateCandidateDefinitionsOnly')
+    GenerativeAiSettings = Shapes::StructureShape.new(name: 'GenerativeAiSettings')
     GetDeviceFleetReportRequest = Shapes::StructureShape.new(name: 'GetDeviceFleetReportRequest')
     GetDeviceFleetReportResponse = Shapes::StructureShape.new(name: 'GetDeviceFleetReportResponse')
     GetLineageGroupPolicyRequest = Shapes::StructureShape.new(name: 'GetLineageGroupPolicyRequest')
@@ -2703,6 +2704,7 @@ module Aws::SageMaker
     CanvasAppSettings.add_member(:identity_provider_o_auth_settings, Shapes::ShapeRef.new(shape: IdentityProviderOAuthSettings, location_name: "IdentityProviderOAuthSettings"))
     CanvasAppSettings.add_member(:direct_deploy_settings, Shapes::ShapeRef.new(shape: DirectDeploySettings, location_name: "DirectDeploySettings"))
     CanvasAppSettings.add_member(:kendra_settings, Shapes::ShapeRef.new(shape: KendraSettings, location_name: "KendraSettings"))
+    CanvasAppSettings.add_member(:generative_ai_settings, Shapes::ShapeRef.new(shape: GenerativeAiSettings, location_name: "GenerativeAiSettings"))
     CanvasAppSettings.struct_class = Types::CanvasAppSettings
 
     CapacitySize.add_member(:type, Shapes::ShapeRef.new(shape: CapacitySizeType, required: true, location_name: "Type"))
@@ -5626,6 +5628,9 @@ module Aws::SageMaker
     FlowDefinitionTaskKeywords.member = Shapes::ShapeRef.new(shape: FlowDefinitionTaskKeyword)
 
     ForecastQuantiles.member = Shapes::ShapeRef.new(shape: ForecastQuantile)
+
+    GenerativeAiSettings.add_member(:amazon_bedrock_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "AmazonBedrockRoleArn"))
+    GenerativeAiSettings.struct_class = Types::GenerativeAiSettings
 
     GetDeviceFleetReportRequest.add_member(:device_fleet_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "DeviceFleetName"))
     GetDeviceFleetReportRequest.struct_class = Types::GetDeviceFleetReportRequest

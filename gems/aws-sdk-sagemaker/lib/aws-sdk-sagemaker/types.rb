@@ -1311,7 +1311,7 @@ module Aws::SageMaker
     # app.
     #
     # @!attribute [rw] app_image_config_arn
-    #   The Amazon Resource Name (ARN) of the AppImageConfig.
+    #   The ARN of the AppImageConfig.
     #   @return [String]
     #
     # @!attribute [rw] app_image_config_name
@@ -2450,7 +2450,7 @@ module Aws::SageMaker
     # The output data configuration.
     #
     # @!attribute [rw] kms_key_id
-    #   The Key Management Service (KMS) encryption key ID.
+    #   The Key Management Service encryption key ID.
     #   @return [String]
     #
     # @!attribute [rw] s3_output_path
@@ -3234,6 +3234,10 @@ module Aws::SageMaker
     #   The settings for document querying.
     #   @return [Types::KendraSettings]
     #
+    # @!attribute [rw] generative_ai_settings
+    #   The generative AI settings for the SageMaker Canvas application.
+    #   @return [Types::GenerativeAiSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CanvasAppSettings AWS API Documentation
     #
     class CanvasAppSettings < Struct.new(
@@ -3242,7 +3246,8 @@ module Aws::SageMaker
       :workspace_settings,
       :identity_provider_o_auth_settings,
       :direct_deploy_settings,
-      :kendra_settings)
+      :kendra_settings,
+      :generative_ai_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4992,7 +4997,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] app_image_config_arn
-    #   The Amazon Resource Name (ARN) of the AppImageConfig.
+    #   The ARN of the AppImageConfig.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAppImageConfigResponse AWS API Documentation
@@ -5148,8 +5153,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] problem_type
     #   Defines the type of supervised learning problem available for the
-    #   candidates. For more information, see [ Amazon SageMaker Autopilot
-    #   problem types][1].
+    #   candidates. For more information, see [ SageMaker Autopilot problem
+    #   types][1].
     #
     #
     #
@@ -6744,8 +6749,8 @@ module Aws::SageMaker
 
     # @!attribute [rw] base_image
     #   The registry path of the container image to use as the starting
-    #   point for this version. The path is an Amazon Elastic Container
-    #   Registry (ECR) URI in the following format:
+    #   point for this version. The path is an Amazon ECR URI in the
+    #   following format:
     #
     #   `<acct-id>.dkr.ecr.<region>.amazonaws.com/<repo-name[:tag] or
     #   [@digest]>`
@@ -8624,7 +8629,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] domain_id
-    #   The ID of the associated Domain.
+    #   The ID of the associated domain.
     #   @return [String]
     #
     # @!attribute [rw] space_name
@@ -10176,15 +10181,15 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # A collection of settings that apply to spaces created in the Domain.
+    # A collection of settings that apply to spaces created in the domain.
     #
     # @!attribute [rw] execution_role
     #   The ARN of the execution role for the space.
     #   @return [String]
     #
     # @!attribute [rw] security_groups
-    #   The security group IDs for the Amazon Virtual Private Cloud that the
-    #   space uses for communication.
+    #   The security group IDs for the Amazon VPC that the space uses for
+    #   communication.
     #   @return [Array<String>]
     #
     # @!attribute [rw] jupyter_server_app_settings
@@ -10920,7 +10925,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] domain_id
-    #   The ID of the associated Domain.
+    #   The ID of the associated domain.
     #   @return [String]
     #
     # @!attribute [rw] space_name
@@ -11447,7 +11452,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] app_image_config_arn
-    #   The Amazon Resource Name (ARN) of the AppImageConfig.
+    #   The ARN of the AppImageConfig.
     #   @return [String]
     #
     # @!attribute [rw] app_image_config_name
@@ -11694,9 +11699,9 @@ module Aws::SageMaker
     #   @return [Types::AutoMLOutputDataConfig]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the Identity and Access Management
-    #   (IAM) role that has read permission to the input data location and
-    #   write permission to the output data location in Amazon S3.
+    #   The ARN of the IAM role that has read permission to the input data
+    #   location and write permission to the output data location in Amazon
+    #   S3.
     #   @return [String]
     #
     # @!attribute [rw] auto_ml_job_objective
@@ -11832,9 +11837,9 @@ module Aws::SageMaker
     #   @return [Types::AutoMLOutputDataConfig]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the Identity and Access Management role that has read
-    #   permission to the input data location and write permission to the
-    #   output data location in Amazon S3.
+    #   The ARN of the IAM role that has read permission to the input data
+    #   location and write permission to the output data location in Amazon
+    #   S3.
     #   @return [String]
     #
     # @!attribute [rw] auto_ml_job_objective
@@ -16113,7 +16118,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] domain_id
-    #   The ID of the associated Domain.
+    #   The ID of the associated domain.
     #   @return [String]
     #
     # @!attribute [rw] space_name
@@ -16130,7 +16135,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] domain_id
-    #   The ID of the associated Domain.
+    #   The ID of the associated domain.
     #   @return [String]
     #
     # @!attribute [rw] space_arn
@@ -16142,8 +16147,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] home_efs_file_system_uid
-    #   The ID of the space's profile in the Amazon Elastic File System
-    #   volume.
+    #   The ID of the space's profile in the Amazon EFS volume.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -17098,7 +17102,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] home_efs_file_system_uid
     #   The ID of the user's profile in the Amazon Elastic File System
-    #   (EFS) volume.
+    #   volume.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -19292,8 +19296,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The Amazon Elastic File System (EFS) storage configuration for a
-    # SageMaker image.
+    # The Amazon Elastic File System storage configuration for a SageMaker
+    # image.
     #
     # @!attribute [rw] mount_path
     #   The path within the image to mount the user's EFS home directory.
@@ -19657,6 +19661,32 @@ module Aws::SageMaker
       :flow_definition_status,
       :creation_time,
       :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The generative AI settings for the SageMaker Canvas application.
+    #
+    # Configure these settings for Canvas users starting chats with
+    # generative AI foundation models. For more information, see [ Use
+    # generative AI with foundation models][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/canvas-fm-chat.html
+    #
+    # @!attribute [rw] amazon_bedrock_role_arn
+    #   The ARN of an Amazon Web Services IAM role that allows fine-tuning
+    #   of large language models (LLMs) in Amazon Bedrock. The IAM role
+    #   should have Amazon S3 read and write permissions, as well as a trust
+    #   relationship that establishes `bedrock.amazonaws.com` as a service
+    #   principal.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GenerativeAiSettings AWS API Documentation
+    #
+    class GenerativeAiSettings < Struct.new(
+      :amazon_bedrock_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22366,7 +22396,7 @@ module Aws::SageMaker
     #   a training job launched by a hyperparameter tuning job. Once a job
     #   reaches the `MaxResource` value, it is stopped. If a value for
     #   `MaxResource` is not provided, and `Hyperband` is selected as the
-    #   hyperparameter tuning strategy, `HyperbandTrainingJ` attempts to
+    #   hyperparameter tuning strategy, `HyperbandTraining` attempts to
     #   infer `MaxResource` from the following keys (if present) in
     #   [StaticsHyperParameters][1]:
     #
@@ -22384,7 +22414,7 @@ module Aws::SageMaker
     #   `MaxResource`, it generates a validation error. The maximum value is
     #   20,000 epochs. All metrics that correspond to an objective metric
     #   are used to derive [early stopping decisions][2]. For
-    #   [distributive][3] training jobs, ensure that duplicate metrics are
+    #   [distributed][3] training jobs, ensure that duplicate metrics are
     #   not printed in the logs across the individual nodes in a training
     #   job. If multiple nodes are publishing duplicate or incorrect
     #   metrics, training jobs may make an incorrect stopping decision and
@@ -23703,8 +23733,8 @@ module Aws::SageMaker
     # running as a JupyterLab app.
     #
     # @!attribute [rw] file_system_config
-    #   The Amazon Elastic File System (EFS) storage configuration for a
-    #   SageMaker image.
+    #   The Amazon Elastic File System storage configuration for a SageMaker
+    #   image.
     #   @return [Types::FileSystemConfig]
     #
     # @!attribute [rw] container_config
@@ -23813,8 +23843,7 @@ module Aws::SageMaker
     #
     #   <note markdown="1"> The Amazon SageMaker Studio UI does not use the default instance
     #   type value set here. The default instance type set here is used when
-    #   Apps are created using the Amazon Web Services Command Line
-    #   Interface or Amazon Web Services CloudFormation and the instance
+    #   Apps are created using the CLI or CloudFormation and the instance
     #   type parameter value is not passed.
     #
     #    </note>
@@ -23853,8 +23882,8 @@ module Aws::SageMaker
     #   @return [Array<Types::KernelSpec>]
     #
     # @!attribute [rw] file_system_config
-    #   The Amazon Elastic File System (EFS) storage configuration for a
-    #   SageMaker image.
+    #   The Amazon Elastic File System storage configuration for a SageMaker
+    #   image.
     #   @return [Types::FileSystemConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/KernelGatewayImageConfig AWS API Documentation
@@ -29103,7 +29132,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] domain_id_equals
-    #   A parameter to search for the Domain ID.
+    #   A parameter to search for the domain ID.
     #   @return [String]
     #
     # @!attribute [rw] space_name_contains
@@ -32976,9 +33005,9 @@ module Aws::SageMaker
     # The value of the `$PATH` environment variable that is available to
     # both scripts is `/sbin:bin:/usr/sbin:/usr/bin`.
     #
-    # View CloudWatch Logs for notebook instance lifecycle configurations in
-    # log group `/aws/sagemaker/NotebookInstances` in log stream
-    # `[notebook-instance-name]/[LifecycleConfigHook]`.
+    # View Amazon CloudWatch Logs for notebook instance lifecycle
+    # configurations in log group `/aws/sagemaker/NotebookInstances` in log
+    # stream `[notebook-instance-name]/[LifecycleConfigHook]`.
     #
     # Lifecycle configuration scripts cannot run for longer than 5 minutes.
     # If a script runs for longer than 5 minutes, it fails and the notebook
@@ -37607,13 +37636,13 @@ module Aws::SageMaker
     end
 
     # The retention policy for data stored on an Amazon Elastic File System
-    # (EFS) volume.
+    # volume.
     #
     # @!attribute [rw] home_efs_file_system
     #   The default is `Retain`, which specifies to keep the data stored on
-    #   the EFS volume.
+    #   the Amazon EFS volume.
     #
-    #   Specify `Delete` to delete the data stored on the EFS volume.
+    #   Specify `Delete` to delete the data stored on the Amazon EFS volume.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RetentionPolicy AWS API Documentation
@@ -38962,7 +38991,7 @@ module Aws::SageMaker
     # The space's details.
     #
     # @!attribute [rw] domain_id
-    #   The ID of the associated Domain.
+    #   The ID of the associated domain.
     #   @return [String]
     #
     # @!attribute [rw] space_name
@@ -39784,7 +39813,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] problem_type
     #   The type of supervised learning problem available for the model
-    #   candidates of the AutoML job V2. For more information, see [ Amazon
+    #   candidates of the AutoML job V2. For more information, see [
     #   SageMaker Autopilot problem types][1].
     #
     #   <note markdown="1"> You must either specify the type of supervised learning problem in
@@ -39845,8 +39874,8 @@ module Aws::SageMaker
     # @!attribute [rw] problem_type
     #   The type of supervised learning problem available for the model
     #   candidates of the AutoML job V2 (Binary Classification, Multiclass
-    #   Classification, Regression). For more information, see [ Amazon
-    #   SageMaker Autopilot problem types][1].
+    #   Classification, Regression). For more information, see [ SageMaker
+    #   Autopilot problem types][1].
     #
     #
     #
@@ -42711,7 +42740,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] app_image_config_arn
-    #   The Amazon Resource Name (ARN) for the AppImageConfig.
+    #   The ARN for the AppImageConfig.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateAppImageConfigResponse AWS API Documentation
@@ -42942,7 +42971,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] default_space_settings
-    #   The default settings used to create a space within the Domain.
+    #   The default settings used to create a space within the domain.
     #   @return [Types::DefaultSpaceSettings]
     #
     # @!attribute [rw] subnet_ids
@@ -44054,7 +44083,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] domain_id
-    #   The ID of the associated Domain.
+    #   The ID of the associated domain.
     #   @return [String]
     #
     # @!attribute [rw] space_name
@@ -44695,8 +44724,9 @@ module Aws::SageMaker
     # The list of key-value pairs that you specify for your resources.
     #
     # @!attribute [rw] key
-    #   The key for that specifies the tag that you're using to filter the
-    #   search results. The key must start with `Tags.`.
+    #   The key that specifies the tag that you're using to filter the
+    #   search results. It must be in the following format:
+    #   `Tags.<key>/EqualsIfExists`.
     #   @return [String]
     #
     # @!attribute [rw] value

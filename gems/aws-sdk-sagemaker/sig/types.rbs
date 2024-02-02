@@ -551,6 +551,7 @@ module Aws::SageMaker
       attr_accessor identity_provider_o_auth_settings: ::Array[Types::IdentityProviderOAuthSetting]
       attr_accessor direct_deploy_settings: Types::DirectDeploySettings
       attr_accessor kendra_settings: Types::KendraSettings
+      attr_accessor generative_ai_settings: Types::GenerativeAiSettings
       SENSITIVE: []
     end
 
@@ -4180,6 +4181,11 @@ module Aws::SageMaker
       attr_accessor flow_definition_status: ("Initializing" | "Active" | "Failed" | "Deleting")
       attr_accessor creation_time: ::Time
       attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class GenerativeAiSettings
+      attr_accessor amazon_bedrock_role_arn: ::String
       SENSITIVE: []
     end
 

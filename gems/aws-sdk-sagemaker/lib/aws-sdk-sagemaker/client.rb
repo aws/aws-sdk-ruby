@@ -1081,8 +1081,8 @@ module Aws::SageMaker
 
     # Creates a configuration for running a SageMaker image as a
     # KernelGateway app. The configuration specifies the Amazon Elastic File
-    # System (EFS) storage volume on the image, and a list of the kernels in
-    # the image.
+    # System storage volume on the image, and a list of the kernels in the
+    # image.
     #
     # @option params [required, String] :app_image_config_name
     #   The name of the AppImageConfig. Must be unique to your account.
@@ -1286,8 +1286,8 @@ module Aws::SageMaker
     #
     # @option params [String] :problem_type
     #   Defines the type of supervised learning problem available for the
-    #   candidates. For more information, see [ Amazon SageMaker Autopilot
-    #   problem types][1].
+    #   candidates. For more information, see [ SageMaker Autopilot problem
+    #   types][1].
     #
     #
     #
@@ -2514,6 +2514,9 @@ module Aws::SageMaker
     #         },
     #         kendra_settings: {
     #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         generative_ai_settings: {
+    #           amazon_bedrock_role_arn: "RoleArn",
     #         },
     #       },
     #       code_editor_app_settings: {
@@ -4356,8 +4359,8 @@ module Aws::SageMaker
 
     # Creates a custom SageMaker image. A SageMaker image is a set of image
     # versions. Each image version represents a container image stored in
-    # Amazon Elastic Container Registry (ECR). For more information, see
-    # [Bring your own SageMaker image][1].
+    # Amazon ECR. For more information, see [Bring your own SageMaker
+    # image][1].
     #
     #
     #
@@ -4413,13 +4416,13 @@ module Aws::SageMaker
     end
 
     # Creates a version of the SageMaker image specified by `ImageName`. The
-    # version represents the Amazon Elastic Container Registry (ECR)
-    # container image specified by `BaseImage`.
+    # version represents the Amazon ECR container image specified by
+    # `BaseImage`.
     #
     # @option params [required, String] :base_image
     #   The registry path of the container image to use as the starting point
-    #   for this version. The path is an Amazon Elastic Container Registry
-    #   (ECR) URI in the following format:
+    #   for this version. The path is an Amazon ECR URI in the following
+    #   format:
     #
     #   `<acct-id>.dkr.ecr.<region>.amazonaws.com/<repo-name[:tag] or
     #   [@digest]>`
@@ -6911,9 +6914,9 @@ module Aws::SageMaker
     # The value of the `$PATH` environment variable that is available to
     # both scripts is `/sbin:bin:/usr/sbin:/usr/bin`.
     #
-    # View CloudWatch Logs for notebook instance lifecycle configurations in
-    # log group `/aws/sagemaker/NotebookInstances` in log stream
-    # `[notebook-instance-name]/[LifecycleConfigHook]`.
+    # View Amazon CloudWatch Logs for notebook instance lifecycle
+    # configurations in log group `/aws/sagemaker/NotebookInstances` in log
+    # stream `[notebook-instance-name]/[LifecycleConfigHook]`.
     #
     # Lifecycle configuration scripts cannot run for longer than 5 minutes.
     # If a script runs for longer than 5 minutes, it fails and the notebook
@@ -7059,8 +7062,8 @@ module Aws::SageMaker
     # Creates a URL for a specified UserProfile in a Domain. When accessed
     # in a web browser, the user will be automatically signed in to the
     # domain, and granted access to all of the Apps and files associated
-    # with the Domain's Amazon Elastic File System (EFS) volume. This
-    # operation can only be called when the authentication mode equals IAM.
+    # with the Domain's Amazon Elastic File System volume. This operation
+    # can only be called when the authentication mode equals IAM.
     #
     # The IAM role or user passed to this API defines the permissions to
     # access the app. Once the presigned URL is created, no additional
@@ -7475,10 +7478,10 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Creates a space used for real time collaboration in a Domain.
+    # Creates a space used for real time collaboration in a domain.
     #
     # @option params [required, String] :domain_id
-    #   The ID of the associated Domain.
+    #   The ID of the associated domain.
     #
     # @option params [required, String] :space_name
     #   The name of the space.
@@ -8578,8 +8581,8 @@ module Aws::SageMaker
     # administrator invites a person by email or imports them from IAM
     # Identity Center, a user profile is automatically created. A user
     # profile is the primary holder of settings for an individual user and
-    # has a reference to the user's private Amazon Elastic File System
-    # (EFS) home directory.
+    # has a reference to the user's private Amazon Elastic File System home
+    # directory.
     #
     # @option params [required, String] :domain_id
     #   The ID of the associated Domain.
@@ -8722,6 +8725,9 @@ module Aws::SageMaker
     #         },
     #         kendra_settings: {
     #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         generative_ai_settings: {
+    #           amazon_bedrock_role_arn: "RoleArn",
     #         },
     #       },
     #       code_editor_app_settings: {
@@ -10151,7 +10157,7 @@ module Aws::SageMaker
     # Used to delete a space.
     #
     # @option params [required, String] :domain_id
-    #   The ID of the associated Domain.
+    #   The ID of the associated domain.
     #
     # @option params [required, String] :space_name
     #   The name of the space.
@@ -11749,6 +11755,7 @@ module Aws::SageMaker
     #   resp.default_user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].secret_arn #=> String
     #   resp.default_user_settings.canvas_app_settings.direct_deploy_settings.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.default_user_settings.canvas_app_settings.kendra_settings.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.default_user_settings.canvas_app_settings.generative_ai_settings.amazon_bedrock_role_arn #=> String
     #   resp.default_user_settings.code_editor_app_settings.default_resource_spec.sage_maker_image_arn #=> String
     #   resp.default_user_settings.code_editor_app_settings.default_resource_spec.sage_maker_image_version_arn #=> String
     #   resp.default_user_settings.code_editor_app_settings.default_resource_spec.sage_maker_image_version_alias #=> String
@@ -14886,7 +14893,7 @@ module Aws::SageMaker
     # Describes the space.
     #
     # @option params [required, String] :domain_id
-    #   The ID of the associated Domain.
+    #   The ID of the associated domain.
     #
     # @option params [required, String] :space_name
     #   The name of the space.
@@ -15609,6 +15616,7 @@ module Aws::SageMaker
     #   resp.user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].secret_arn #=> String
     #   resp.user_settings.canvas_app_settings.direct_deploy_settings.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.user_settings.canvas_app_settings.kendra_settings.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.user_settings.canvas_app_settings.generative_ai_settings.amazon_bedrock_role_arn #=> String
     #   resp.user_settings.code_editor_app_settings.default_resource_spec.sage_maker_image_arn #=> String
     #   resp.user_settings.code_editor_app_settings.default_resource_spec.sage_maker_image_version_arn #=> String
     #   resp.user_settings.code_editor_app_settings.default_resource_spec.sage_maker_image_version_alias #=> String
@@ -21021,7 +21029,7 @@ module Aws::SageMaker
     #   `CreationTime`.
     #
     # @option params [String] :domain_id_equals
-    #   A parameter to search for the Domain ID.
+    #   A parameter to search for the domain ID.
     #
     # @option params [String] :space_name_contains
     #   A parameter by which to filter the results.
@@ -23482,7 +23490,7 @@ module Aws::SageMaker
     #   must be set to `Service`.
     #
     # @option params [Types::DefaultSpaceSettings] :default_space_settings
-    #   The default settings used to create a space within the Domain.
+    #   The default settings used to create a space within the domain.
     #
     # @option params [Array<String>] :subnet_ids
     #   The VPC subnets that Studio uses for communication.
@@ -23609,6 +23617,9 @@ module Aws::SageMaker
     #         },
     #         kendra_settings: {
     #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         generative_ai_settings: {
+    #           amazon_bedrock_role_arn: "RoleArn",
     #         },
     #       },
     #       code_editor_app_settings: {
@@ -25185,7 +25196,7 @@ module Aws::SageMaker
     # Updates the settings of a space.
     #
     # @option params [required, String] :domain_id
-    #   The ID of the associated Domain.
+    #   The ID of the associated domain.
     #
     # @option params [required, String] :space_name
     #   The name of the space.
@@ -25617,6 +25628,9 @@ module Aws::SageMaker
     #         kendra_settings: {
     #           status: "ENABLED", # accepts ENABLED, DISABLED
     #         },
+    #         generative_ai_settings: {
+    #           amazon_bedrock_role_arn: "RoleArn",
+    #         },
     #       },
     #       code_editor_app_settings: {
     #         default_resource_spec: {
@@ -25926,7 +25940,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.230.0'
+      context[:gem_version] = '1.231.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
