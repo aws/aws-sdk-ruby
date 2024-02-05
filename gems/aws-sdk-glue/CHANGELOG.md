@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.168.0 (2024-02-05)
+------------------
+
+* Feature - Introduce Catalog Encryption Role within Glue Data Catalog Settings. Introduce SASL/PLAIN as an authentication method for Glue Kafka connections
+
 1.167.0 (2024-01-31)
 ------------------
 

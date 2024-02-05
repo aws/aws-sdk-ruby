@@ -6721,8 +6721,9 @@ module Aws::Glue
     #
     # @example Response structure
     #
-    #   resp.data_catalog_encryption_settings.encryption_at_rest.catalog_encryption_mode #=> String, one of "DISABLED", "SSE-KMS"
+    #   resp.data_catalog_encryption_settings.encryption_at_rest.catalog_encryption_mode #=> String, one of "DISABLED", "SSE-KMS", "SSE-KMS-WITH-SERVICE-ROLE"
     #   resp.data_catalog_encryption_settings.encryption_at_rest.sse_aws_kms_key_id #=> String
+    #   resp.data_catalog_encryption_settings.encryption_at_rest.catalog_encryption_service_role #=> String
     #   resp.data_catalog_encryption_settings.connection_password_encryption.return_connection_password_encrypted #=> Boolean
     #   resp.data_catalog_encryption_settings.connection_password_encryption.aws_kms_key_id #=> String
     #
@@ -13691,8 +13692,9 @@ module Aws::Glue
     #     catalog_id: "CatalogIdString",
     #     data_catalog_encryption_settings: { # required
     #       encryption_at_rest: {
-    #         catalog_encryption_mode: "DISABLED", # required, accepts DISABLED, SSE-KMS
+    #         catalog_encryption_mode: "DISABLED", # required, accepts DISABLED, SSE-KMS, SSE-KMS-WITH-SERVICE-ROLE
     #         sse_aws_kms_key_id: "NameString",
+    #         catalog_encryption_service_role: "IAMRoleArn",
     #       },
     #       connection_password_encryption: {
     #         return_connection_password_encrypted: false, # required
@@ -17006,7 +17008,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.167.0'
+      context[:gem_version] = '1.168.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

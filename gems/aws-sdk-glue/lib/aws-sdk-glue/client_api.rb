@@ -653,6 +653,7 @@ module Aws::Glue
     HudiTarget = Shapes::StructureShape.new(name: 'HudiTarget')
     HudiTargetCompressionType = Shapes::StringShape.new(name: 'HudiTargetCompressionType')
     HudiTargetList = Shapes::ListShape.new(name: 'HudiTargetList')
+    IAMRoleArn = Shapes::StringShape.new(name: 'IAMRoleArn')
     IcebergInput = Shapes::StructureShape.new(name: 'IcebergInput')
     IcebergTarget = Shapes::StructureShape.new(name: 'IcebergTarget')
     IcebergTargetList = Shapes::ListShape.new(name: 'IcebergTargetList')
@@ -2916,6 +2917,7 @@ module Aws::Glue
 
     EncryptionAtRest.add_member(:catalog_encryption_mode, Shapes::ShapeRef.new(shape: CatalogEncryptionMode, required: true, location_name: "CatalogEncryptionMode"))
     EncryptionAtRest.add_member(:sse_aws_kms_key_id, Shapes::ShapeRef.new(shape: NameString, location_name: "SseAwsKmsKeyId"))
+    EncryptionAtRest.add_member(:catalog_encryption_service_role, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "CatalogEncryptionServiceRole"))
     EncryptionAtRest.struct_class = Types::EncryptionAtRest
 
     EncryptionConfiguration.add_member(:s3_encryption, Shapes::ShapeRef.new(shape: S3EncryptionList, location_name: "S3Encryption"))

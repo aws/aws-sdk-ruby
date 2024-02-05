@@ -3129,8 +3129,19 @@ module Aws::Glue
     #     the Kafka client key password (if the user has the Glue encrypt
     #     passwords setting selected).
     #
-    #   * `KAFKA_SASL_MECHANISM` - `"SCRAM-SHA-512"`, `"GSSAPI"`, or
-    #     `"AWS_MSK_IAM"`. These are the supported [SASL Mechanisms][1].
+    #   * `KAFKA_SASL_MECHANISM` - `"SCRAM-SHA-512"`, `"GSSAPI"`,
+    #     `"AWS_MSK_IAM"`, or `"PLAIN"`. These are the supported [SASL
+    #     Mechanisms][1].
+    #
+    #   * `KAFKA_SASL_PLAIN_USERNAME` - A plaintext username used to
+    #     authenticate with the "PLAIN" mechanism.
+    #
+    #   * `KAFKA_SASL_PLAIN_PASSWORD` - A plaintext password used to
+    #     authenticate with the "PLAIN" mechanism.
+    #
+    #   * `ENCRYPTED_KAFKA_SASL_PLAIN_PASSWORD` - The encrypted version of
+    #     the Kafka SASL PLAIN password (if the user has the Glue encrypt
+    #     passwords setting selected).
     #
     #   * `KAFKA_SASL_SCRAM_USERNAME` - A plaintext username used to
     #     authenticate with the "SCRAM-SHA-512" mechanism.
@@ -8306,11 +8317,17 @@ module Aws::Glue
     #   The ID of the KMS key to use for encryption at rest.
     #   @return [String]
     #
+    # @!attribute [rw] catalog_encryption_service_role
+    #   The role that Glue assumes to encrypt and decrypt the Data Catalog
+    #   objects on the caller's behalf.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/EncryptionAtRest AWS API Documentation
     #
     class EncryptionAtRest < Struct.new(
       :catalog_encryption_mode,
-      :sse_aws_kms_key_id)
+      :sse_aws_kms_key_id,
+      :catalog_encryption_service_role)
       SENSITIVE = []
       include Aws::Structure
     end

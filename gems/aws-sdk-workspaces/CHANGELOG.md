@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.98.0 (2024-02-05)
+------------------
+
+* Feature - Added definitions of various WorkSpace states
+
 1.97.0 (2024-01-26)
 ------------------
 
