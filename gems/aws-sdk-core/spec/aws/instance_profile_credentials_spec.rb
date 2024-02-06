@@ -11,6 +11,10 @@ module Aws
     let(:ipv4_endpoint) { 'http://169.254.169.254' }
     let(:ipv6_endpoint) { 'http://[fd00:ec2::254]' }
 
+    before do
+      allow_any_instance_of(InstanceProfileCredentials).to receive(:warn)
+    end
+
     describe 'endpoint mode resolution' do
       before do
         allow_any_instance_of(InstanceProfileCredentials).to receive(:refresh)
@@ -650,7 +654,7 @@ module Aws
       end
 
       it 'provides credentials after a read timeout during a refresh' do
-        expect_any_instance_of(InstanceProfileCredentials).to receive(:warn)
+        expect_any_instance_of(InstanceProfileCredentials).to receive(:warn).at_least(:once)
         expected_request = stub_request(:get, "http://169.254.169.254#{path}profile-name")
                              .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
                              .to_return(status: 200, body: near_expiration_resp)
