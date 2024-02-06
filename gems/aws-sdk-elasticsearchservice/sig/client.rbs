@@ -116,6 +116,19 @@ module Aws
                                          ) -> _AuthorizeVpcEndpointAccessResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AuthorizeVpcEndpointAccessResponseSuccess
 
+      interface _CancelDomainConfigChangeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelDomainConfigChangeResponse]
+        def dry_run: () -> bool
+        def cancelled_change_ids: () -> ::Array[::String]
+        def cancelled_change_properties: () -> ::Array[Types::CancelledChangeProperty]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#cancel_domain_config_change-instance_method
+      def cancel_domain_config_change: (
+                                         domain_name: ::String,
+                                         ?dry_run: bool
+                                       ) -> _CancelDomainConfigChangeResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelDomainConfigChangeResponseSuccess
+
       interface _CancelElasticsearchServiceSoftwareUpdateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CancelElasticsearchServiceSoftwareUpdateResponse]
         def service_software_options: () -> Types::ServiceSoftwareOptions

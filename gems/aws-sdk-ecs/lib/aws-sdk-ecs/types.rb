@@ -1862,27 +1862,6 @@ module Aws::ECS
     #   `net.ipv4.tcp_keepalive_time` setting to maintain longer lived
     #   connections.
     #
-    #   <note markdown="1"> We don't recommended that you specify network-related
-    #   `systemControls` parameters for multiple containers in a single task
-    #   that also uses either the `awsvpc` or `host` network modes. For
-    #   tasks that use the `awsvpc` network mode, the container that's
-    #   started last determines which `systemControls` parameters take
-    #   effect. For tasks that use the `host` network mode, it changes the
-    #   container instance's namespaced kernel parameters as well as the
-    #   containers.
-    #
-    #    </note>
-    #
-    #   <note markdown="1"> This parameter is not supported for Windows containers.
-    #
-    #    </note>
-    #
-    #   <note markdown="1"> This parameter is only supported for tasks that are hosted on
-    #   Fargate if the tasks are using platform version `1.4.0` or later
-    #   (Linux). This isn't supported for Windows containers on Fargate.
-    #
-    #    </note>
-    #
     #
     #
     #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
@@ -2766,7 +2745,7 @@ module Aws::ECS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
-    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-capacity-providers.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-capacity-providers.html
     #   @return [String]
     #
     # @!attribute [rw] capacity_provider_strategy
@@ -4732,8 +4711,8 @@ module Aws::ECS
     # The amount of ephemeral storage to allocate for the task. This
     # parameter is used to expand the total amount of ephemeral storage
     # available, beyond the default amount, for tasks hosted on Fargate. For
-    # more information, see [Fargate task storage][1] in the *Amazon ECS
-    # User Guide for Fargate*.
+    # more information, see [Using data volumes in tasks][1] in the *Amazon
+    # ECS Developer Guide;*.
     #
     # <note markdown="1"> For tasks using the Fargate launch type, the task requires the
     # following platforms:
@@ -4746,7 +4725,7 @@ module Aws::ECS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html
     #
     # @!attribute [rw] size_in_gi_b
     #   The total amount, in GiB, of ephemeral storage to set for the task.
@@ -6494,6 +6473,9 @@ module Aws::ECS
     # @!attribute [rw] container_name
     #   The name of the container (as it appears in a container definition)
     #   to associate with the load balancer.
+    #
+    #   You need to specify the container name when configuring the target
+    #   group for an Amazon ECS load balancer.
     #   @return [String]
     #
     # @!attribute [rw] container_port
@@ -8109,8 +8091,8 @@ module Aws::ECS
     #   The amount of ephemeral storage to allocate for the task. This
     #   parameter is used to expand the total amount of ephemeral storage
     #   available, beyond the default amount, for tasks hosted on Fargate.
-    #   For more information, see [Fargate task storage][1] in the *Amazon
-    #   ECS User Guide for Fargate*.
+    #   For more information, see [Using data volumes in tasks][1] in the
+    #   *Amazon ECS Developer Guide*.
     #
     #   <note markdown="1"> For tasks using the Fargate launch type, the task requires the
     #   following platforms:
@@ -8123,7 +8105,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html
     #   @return [Types::EphemeralStorage]
     #
     # @!attribute [rw] runtime_platform
@@ -8359,7 +8341,7 @@ module Aws::ECS
     #
     #   <note markdown="1"> Fargate Spot infrastructure is available for use but a capacity
     #   provider strategy must be used. For more information, see [Fargate
-    #   capacity providers][2] in the *Amazon ECS User Guide for Fargate*.
+    #   capacity providers][2] in the *Amazon ECS Developer Guide*.
     #
     #    </note>
     #
@@ -8379,7 +8361,7 @@ module Aws::ECS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
-    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-capacity-providers.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-capacity-providers.html
     #   @return [String]
     #
     # @!attribute [rw] network_configuration
@@ -10085,29 +10067,49 @@ module Aws::ECS
     # A list of namespaced kernel parameters to set in the container. This
     # parameter maps to `Sysctls` in the [Create a container][1] section of
     # the [Docker Remote API][2] and the `--sysctl` option to [docker
-    # run][3].
+    # run][3]. For example, you can configure `net.ipv4.tcp_keepalive_time`
+    # setting to maintain longer lived connections.
     #
     # We don't recommend that you specify network-related `systemControls`
-    # parameters for multiple containers in a single task. This task also
-    # uses either the `awsvpc` or `host` network mode. It does it for the
-    # following reasons.
+    # parameters for multiple containers in a single task that also uses
+    # either the `awsvpc` or `host` network mode. Doing this has the
+    # following disadvantages:
     #
-    # * For tasks that use the `awsvpc` network mode, if you set
-    #   `systemControls` for any container, it applies to all containers in
-    #   the task. If you set different `systemControls` for multiple
-    #   containers in a single task, the container that's started last
-    #   determines which `systemControls` take effect.
+    # * For tasks that use the `awsvpc` network mode including Fargate, if
+    #   you set `systemControls` for any container, it applies to all
+    #   containers in the task. If you set different `systemControls` for
+    #   multiple containers in a single task, the container that's started
+    #   last determines which `systemControls` take effect.
     #
-    # * For tasks that use the `host` network mode, the `systemControls`
-    #   parameter applies to the container instance's kernel parameter and
-    #   that of all containers of any tasks running on that container
-    #   instance.
+    # * For tasks that use the `host` network mode, the network namespace
+    #   `systemControls` aren't supported.
+    #
+    # If you're setting an IPC resource namespace to use for the containers
+    # in the task, the following conditions apply to your system controls.
+    # For more information, see [IPC mode][4].
+    #
+    # * For tasks that use the `host` IPC mode, IPC namespace
+    #   `systemControls` aren't supported.
+    #
+    # * For tasks that use the `task` IPC mode, IPC namespace
+    #   `systemControls` values apply to all containers within a task.
+    #
+    # <note markdown="1"> This parameter is not supported for Windows containers.
+    #
+    #  </note>
+    #
+    # <note markdown="1"> This parameter is only supported for tasks that are hosted on Fargate
+    # if the tasks are using platform version `1.4.0` or later (Linux). This
+    # isn't supported for Windows containers on Fargate.
+    #
+    #  </note>
     #
     #
     #
     # [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     # [2]: https://docs.docker.com/engine/api/v1.35/
     # [3]: https://docs.docker.com/engine/reference/run/#security-configuration
+    # [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_ipcmode
     #
     # @!attribute [rw] namespace
     #   The namespaced kernel parameter to set a `value` for.
@@ -10510,11 +10512,11 @@ module Aws::ECS
     #   might contain additional details.
     #
     #   For more information about stop code, see [Stopped tasks error
-    #   codes][1] in the *Amazon ECS User Guide*.
+    #   codes][1] in the *Amazon ECS Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/userguide/stopped-task-error-codes.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/stopped-task-error-codes.html
     #   @return [String]
     #
     # @!attribute [rw] stopped_at

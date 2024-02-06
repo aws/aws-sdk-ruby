@@ -2675,6 +2675,16 @@ module Aws
                           ) -> _CreateWebACLResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWebACLResponseSuccess
 
+      interface _DeleteAPIKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAPIKeyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAFV2/Client.html#delete_api_key-instance_method
+      def delete_api_key: (
+                            scope: ("CLOUDFRONT" | "REGIONAL"),
+                            api_key: ::String
+                          ) -> _DeleteAPIKeyResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAPIKeyResponseSuccess
+
       interface _DeleteFirewallManagerRuleGroupsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFirewallManagerRuleGroupsResponse]
         def next_web_acl_lock_token: () -> ::String

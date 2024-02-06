@@ -122,6 +122,8 @@ module Aws::AppSync
             Aws::AppSync::Endpoints::GetFunction.build(context)
           when :get_graphql_api
             Aws::AppSync::Endpoints::GetGraphqlApi.build(context)
+          when :get_graphql_api_environment_variables
+            Aws::AppSync::Endpoints::GetGraphqlApiEnvironmentVariables.build(context)
           when :get_introspection_schema
             Aws::AppSync::Endpoints::GetIntrospectionSchema.build(context)
           when :get_resolver
@@ -154,6 +156,8 @@ module Aws::AppSync
             Aws::AppSync::Endpoints::ListTypes.build(context)
           when :list_types_by_association
             Aws::AppSync::Endpoints::ListTypesByAssociation.build(context)
+          when :put_graphql_api_environment_variables
+            Aws::AppSync::Endpoints::PutGraphqlApiEnvironmentVariables.build(context)
           when :start_data_source_introspection
             Aws::AppSync::Endpoints::StartDataSourceIntrospection.build(context)
           when :start_schema_creation

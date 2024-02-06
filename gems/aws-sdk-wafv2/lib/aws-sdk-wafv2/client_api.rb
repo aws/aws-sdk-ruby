@@ -79,6 +79,8 @@ module Aws::WAFV2
     CustomResponseBodies = Shapes::MapShape.new(name: 'CustomResponseBodies')
     CustomResponseBody = Shapes::StructureShape.new(name: 'CustomResponseBody')
     DefaultAction = Shapes::StructureShape.new(name: 'DefaultAction')
+    DeleteAPIKeyRequest = Shapes::StructureShape.new(name: 'DeleteAPIKeyRequest')
+    DeleteAPIKeyResponse = Shapes::StructureShape.new(name: 'DeleteAPIKeyResponse')
     DeleteFirewallManagerRuleGroupsRequest = Shapes::StructureShape.new(name: 'DeleteFirewallManagerRuleGroupsRequest')
     DeleteFirewallManagerRuleGroupsResponse = Shapes::StructureShape.new(name: 'DeleteFirewallManagerRuleGroupsResponse')
     DeleteIPSetRequest = Shapes::StructureShape.new(name: 'DeleteIPSetRequest')
@@ -616,6 +618,12 @@ module Aws::WAFV2
     DefaultAction.add_member(:block, Shapes::ShapeRef.new(shape: BlockAction, location_name: "Block"))
     DefaultAction.add_member(:allow, Shapes::ShapeRef.new(shape: AllowAction, location_name: "Allow"))
     DefaultAction.struct_class = Types::DefaultAction
+
+    DeleteAPIKeyRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
+    DeleteAPIKeyRequest.add_member(:api_key, Shapes::ShapeRef.new(shape: APIKey, required: true, location_name: "APIKey"))
+    DeleteAPIKeyRequest.struct_class = Types::DeleteAPIKeyRequest
+
+    DeleteAPIKeyResponse.struct_class = Types::DeleteAPIKeyResponse
 
     DeleteFirewallManagerRuleGroupsRequest.add_member(:web_acl_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "WebACLArn"))
     DeleteFirewallManagerRuleGroupsRequest.add_member(:web_acl_lock_token, Shapes::ShapeRef.new(shape: LockToken, required: true, location_name: "WebACLLockToken"))
@@ -1810,6 +1818,19 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFConfigurationWarningException)
         o.errors << Shapes::ShapeRef.new(shape: WAFExpiredManagedRuleGroupVersionException)
+      end)
+
+      api.add_operation(:delete_api_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAPIKey"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAPIKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAPIKeyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFOptimisticLockException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:delete_firewall_manager_rule_groups, Seahorse::Model::Operation.new.tap do |o|

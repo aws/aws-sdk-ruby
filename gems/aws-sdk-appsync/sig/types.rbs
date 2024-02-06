@@ -619,6 +619,16 @@ module Aws::AppSync
       SENSITIVE: []
     end
 
+    class GetGraphqlApiEnvironmentVariablesRequest
+      attr_accessor api_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetGraphqlApiEnvironmentVariablesResponse
+      attr_accessor environment_variables: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class GetGraphqlApiRequest
       attr_accessor api_id: ::String
       SENSITIVE: []
@@ -924,6 +934,17 @@ module Aws::AppSync
 
     class PipelineConfig
       attr_accessor functions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PutGraphqlApiEnvironmentVariablesRequest
+      attr_accessor api_id: ::String
+      attr_accessor environment_variables: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PutGraphqlApiEnvironmentVariablesResponse
+      attr_accessor environment_variables: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 

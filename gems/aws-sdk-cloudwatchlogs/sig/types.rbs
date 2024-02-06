@@ -742,6 +742,7 @@ module Aws::CloudWatchLogs
       attr_accessor data_protection_status: ("ACTIVATED" | "DELETED" | "ARCHIVED" | "DISABLED")
       attr_accessor inherited_properties: ::Array[("ACCOUNT_DATA_PROTECTION")]
       attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS")
+      attr_accessor log_group_arn: ::String
       SENSITIVE: []
     end
 

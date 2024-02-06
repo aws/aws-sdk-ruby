@@ -275,6 +275,15 @@ module Aws::WAFV2
       SENSITIVE: []
     end
 
+    class DeleteAPIKeyRequest
+      attr_accessor scope: ("CLOUDFRONT" | "REGIONAL")
+      attr_accessor api_key: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAPIKeyResponse < Aws::EmptyStructure
+    end
+
     class DeleteFirewallManagerRuleGroupsRequest
       attr_accessor web_acl_arn: ::String
       attr_accessor web_acl_lock_token: ::String

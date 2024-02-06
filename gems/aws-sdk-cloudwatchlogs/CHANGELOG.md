@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2024-02-06)
+------------------
+
+* Feature - This release adds a new field, logGroupArn, to the response of the logs:DescribeLogGroups action.
+
 1.78.0 (2024-01-26)
 ------------------
 

@@ -3036,7 +3036,20 @@ module Aws::CloudWatchLogs
     #   @return [Integer]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the log group.
+    #   The Amazon Resource Name (ARN) of the log group. This version of the
+    #   ARN includes a trailing `:*` after the log group name.
+    #
+    #   Use this version to refer to the ARN in IAM policies when specifying
+    #   permissions for most API actions. The exception is when specifying
+    #   permissions for [TagResource][1], [UntagResource][2], and
+    #   [ListTagsForResource][3]. The permissions for those three actions
+    #   require the ARN version that doesn't include a trailing `:*`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_TagResource.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagResource.html
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html
     #   @return [String]
     #
     # @!attribute [rw] stored_bytes
@@ -3080,6 +3093,27 @@ module Aws::CloudWatchLogs
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html
     #   @return [String]
     #
+    # @!attribute [rw] log_group_arn
+    #   The Amazon Resource Name (ARN) of the log group. This version of the
+    #   ARN doesn't include a trailing `:*` after the log group name.
+    #
+    #   Use this version to refer to the ARN in the following situations:
+    #
+    #   * In the `logGroupIdentifier` input field in many CloudWatch Logs
+    #     APIs.
+    #
+    #   * In the `resourceArn` field in tagging APIs
+    #
+    #   * In IAM policies, when specifying permissions for [TagResource][1],
+    #     [UntagResource][2], and [ListTagsForResource][3].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_TagResource.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagResource.html
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LogGroup AWS API Documentation
     #
     class LogGroup < Struct.new(
@@ -3092,7 +3126,8 @@ module Aws::CloudWatchLogs
       :kms_key_id,
       :data_protection_status,
       :inherited_properties,
-      :log_group_class)
+      :log_group_class,
+      :log_group_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3751,8 +3786,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] log_type
-    #   Defines the type of log that the source is sending. For valid values
-    #   for this parameter, see the documentation for the source service.
+    #   Defines the type of log that the source is sending. For Amazon
+    #   CodeWhisperer, the valid value is `EVENT_LOGS`.
     #   @return [String]
     #
     # @!attribute [rw] tags

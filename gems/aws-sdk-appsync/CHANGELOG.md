@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2024-02-06)
+------------------
+
+* Feature - Support for environment variables in AppSync GraphQL APIs
+
 1.71.0 (2024-01-26)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2024-02-06)
+------------------
+
+* Feature - You can now delete an API key that you've created for use with your CAPTCHA JavaScript integration API.
+
 1.75.0 (2024-01-26)
 ------------------
 

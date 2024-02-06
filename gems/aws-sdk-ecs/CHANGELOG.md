@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.141.0 (2024-02-06)
+------------------
+
+* Feature - This release is a documentation only update to address customer issues.
+
 1.140.0 (2024-01-26)
 ------------------
 

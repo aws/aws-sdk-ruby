@@ -531,6 +531,46 @@ module Aws::ElasticsearchService
       req.send_request(options)
     end
 
+    # Cancels a pending configuration change on an Amazon OpenSearch Service
+    # domain.
+    #
+    # @option params [required, String] :domain_name
+    #   Name of the OpenSearch Service domain configuration request to cancel.
+    #
+    # @option params [Boolean] :dry_run
+    #   When set to **True**, returns the list of change IDs and properties
+    #   that will be cancelled without actually cancelling the change.
+    #
+    # @return [Types::CancelDomainConfigChangeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelDomainConfigChangeResponse#dry_run #dry_run} => Boolean
+    #   * {Types::CancelDomainConfigChangeResponse#cancelled_change_ids #cancelled_change_ids} => Array&lt;String&gt;
+    #   * {Types::CancelDomainConfigChangeResponse#cancelled_change_properties #cancelled_change_properties} => Array&lt;Types::CancelledChangeProperty&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_domain_config_change({
+    #     domain_name: "DomainName", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dry_run #=> Boolean
+    #   resp.cancelled_change_ids #=> Array
+    #   resp.cancelled_change_ids[0] #=> String
+    #   resp.cancelled_change_properties #=> Array
+    #   resp.cancelled_change_properties[0].property_name #=> String
+    #   resp.cancelled_change_properties[0].cancelled_value #=> String
+    #   resp.cancelled_change_properties[0].active_value #=> String
+    #
+    # @overload cancel_domain_config_change(params = {})
+    # @param [Hash] params ({})
+    def cancel_domain_config_change(params = {}, options = {})
+      req = build_request(:cancel_domain_config_change, params)
+      req.send_request(options)
+    end
+
     # Cancels a scheduled service software update for an Amazon ES domain.
     # You can only perform this operation before the `AutomatedUpdateDate`
     # and when the `UpdateStatus` is in the `PENDING_UPDATE` state.
@@ -848,6 +888,16 @@ module Aws::ElasticsearchService
     #   resp.domain_status.auto_tune_options.error_message #=> String
     #   resp.domain_status.change_progress_details.change_id #=> String
     #   resp.domain_status.change_progress_details.message #=> String
+    #   resp.domain_status.change_progress_details.config_change_status #=> String, one of "Pending", "Initializing", "Validating", "ValidationFailed", "ApplyingChanges", "Completed", "PendingUserInput", "Cancelled"
+    #   resp.domain_status.change_progress_details.start_time #=> Time
+    #   resp.domain_status.change_progress_details.last_updated_time #=> Time
+    #   resp.domain_status.change_progress_details.initiated_by #=> String, one of "CUSTOMER", "SERVICE"
+    #   resp.domain_status.domain_processing_status #=> String, one of "Creating", "Active", "Modifying", "UpgradingEngineVersion", "UpdatingServiceSoftware", "Isolated", "Deleting"
+    #   resp.domain_status.modifying_properties #=> Array
+    #   resp.domain_status.modifying_properties[0].name #=> String
+    #   resp.domain_status.modifying_properties[0].active_value #=> String
+    #   resp.domain_status.modifying_properties[0].pending_value #=> String
+    #   resp.domain_status.modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
     #
     # @overload create_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -1107,6 +1157,16 @@ module Aws::ElasticsearchService
     #   resp.domain_status.auto_tune_options.error_message #=> String
     #   resp.domain_status.change_progress_details.change_id #=> String
     #   resp.domain_status.change_progress_details.message #=> String
+    #   resp.domain_status.change_progress_details.config_change_status #=> String, one of "Pending", "Initializing", "Validating", "ValidationFailed", "ApplyingChanges", "Completed", "PendingUserInput", "Cancelled"
+    #   resp.domain_status.change_progress_details.start_time #=> Time
+    #   resp.domain_status.change_progress_details.last_updated_time #=> Time
+    #   resp.domain_status.change_progress_details.initiated_by #=> String, one of "CUSTOMER", "SERVICE"
+    #   resp.domain_status.domain_processing_status #=> String, one of "Creating", "Active", "Modifying", "UpgradingEngineVersion", "UpdatingServiceSoftware", "Isolated", "Deleting"
+    #   resp.domain_status.modifying_properties #=> Array
+    #   resp.domain_status.modifying_properties[0].name #=> String
+    #   resp.domain_status.modifying_properties[0].active_value #=> String
+    #   resp.domain_status.modifying_properties[0].pending_value #=> String
+    #   resp.domain_status.modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
     #
     # @overload delete_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -1355,6 +1415,9 @@ module Aws::ElasticsearchService
     #   resp.change_progress_status.change_progress_stages[0].status #=> String
     #   resp.change_progress_status.change_progress_stages[0].description #=> String
     #   resp.change_progress_status.change_progress_stages[0].last_updated #=> Time
+    #   resp.change_progress_status.config_change_status #=> String, one of "Pending", "Initializing", "Validating", "ValidationFailed", "ApplyingChanges", "Completed", "PendingUserInput", "Cancelled"
+    #   resp.change_progress_status.last_updated_time #=> Time
+    #   resp.change_progress_status.initiated_by #=> String, one of "CUSTOMER", "SERVICE"
     #
     # @overload describe_domain_change_progress(params = {})
     # @param [Hash] params ({})
@@ -1457,6 +1520,16 @@ module Aws::ElasticsearchService
     #   resp.domain_status.auto_tune_options.error_message #=> String
     #   resp.domain_status.change_progress_details.change_id #=> String
     #   resp.domain_status.change_progress_details.message #=> String
+    #   resp.domain_status.change_progress_details.config_change_status #=> String, one of "Pending", "Initializing", "Validating", "ValidationFailed", "ApplyingChanges", "Completed", "PendingUserInput", "Cancelled"
+    #   resp.domain_status.change_progress_details.start_time #=> Time
+    #   resp.domain_status.change_progress_details.last_updated_time #=> Time
+    #   resp.domain_status.change_progress_details.initiated_by #=> String, one of "CUSTOMER", "SERVICE"
+    #   resp.domain_status.domain_processing_status #=> String, one of "Creating", "Active", "Modifying", "UpgradingEngineVersion", "UpdatingServiceSoftware", "Isolated", "Deleting"
+    #   resp.domain_status.modifying_properties #=> Array
+    #   resp.domain_status.modifying_properties[0].name #=> String
+    #   resp.domain_status.modifying_properties[0].active_value #=> String
+    #   resp.domain_status.modifying_properties[0].pending_value #=> String
+    #   resp.domain_status.modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
     #
     # @overload describe_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -1617,6 +1690,15 @@ module Aws::ElasticsearchService
     #   resp.domain_config.auto_tune_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.change_progress_details.change_id #=> String
     #   resp.domain_config.change_progress_details.message #=> String
+    #   resp.domain_config.change_progress_details.config_change_status #=> String, one of "Pending", "Initializing", "Validating", "ValidationFailed", "ApplyingChanges", "Completed", "PendingUserInput", "Cancelled"
+    #   resp.domain_config.change_progress_details.start_time #=> Time
+    #   resp.domain_config.change_progress_details.last_updated_time #=> Time
+    #   resp.domain_config.change_progress_details.initiated_by #=> String, one of "CUSTOMER", "SERVICE"
+    #   resp.domain_config.modifying_properties #=> Array
+    #   resp.domain_config.modifying_properties[0].name #=> String
+    #   resp.domain_config.modifying_properties[0].active_value #=> String
+    #   resp.domain_config.modifying_properties[0].pending_value #=> String
+    #   resp.domain_config.modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
     #
     # @overload describe_elasticsearch_domain_config(params = {})
     # @param [Hash] params ({})
@@ -1720,6 +1802,16 @@ module Aws::ElasticsearchService
     #   resp.domain_status_list[0].auto_tune_options.error_message #=> String
     #   resp.domain_status_list[0].change_progress_details.change_id #=> String
     #   resp.domain_status_list[0].change_progress_details.message #=> String
+    #   resp.domain_status_list[0].change_progress_details.config_change_status #=> String, one of "Pending", "Initializing", "Validating", "ValidationFailed", "ApplyingChanges", "Completed", "PendingUserInput", "Cancelled"
+    #   resp.domain_status_list[0].change_progress_details.start_time #=> Time
+    #   resp.domain_status_list[0].change_progress_details.last_updated_time #=> Time
+    #   resp.domain_status_list[0].change_progress_details.initiated_by #=> String, one of "CUSTOMER", "SERVICE"
+    #   resp.domain_status_list[0].domain_processing_status #=> String, one of "Creating", "Active", "Modifying", "UpgradingEngineVersion", "UpdatingServiceSoftware", "Isolated", "Deleting"
+    #   resp.domain_status_list[0].modifying_properties #=> Array
+    #   resp.domain_status_list[0].modifying_properties[0].name #=> String
+    #   resp.domain_status_list[0].modifying_properties[0].active_value #=> String
+    #   resp.domain_status_list[0].modifying_properties[0].pending_value #=> String
+    #   resp.domain_status_list[0].modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
     #
     # @overload describe_elasticsearch_domains(params = {})
     # @param [Hash] params ({})
@@ -3151,6 +3243,15 @@ module Aws::ElasticsearchService
     #   resp.domain_config.auto_tune_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.change_progress_details.change_id #=> String
     #   resp.domain_config.change_progress_details.message #=> String
+    #   resp.domain_config.change_progress_details.config_change_status #=> String, one of "Pending", "Initializing", "Validating", "ValidationFailed", "ApplyingChanges", "Completed", "PendingUserInput", "Cancelled"
+    #   resp.domain_config.change_progress_details.start_time #=> Time
+    #   resp.domain_config.change_progress_details.last_updated_time #=> Time
+    #   resp.domain_config.change_progress_details.initiated_by #=> String, one of "CUSTOMER", "SERVICE"
+    #   resp.domain_config.modifying_properties #=> Array
+    #   resp.domain_config.modifying_properties[0].name #=> String
+    #   resp.domain_config.modifying_properties[0].active_value #=> String
+    #   resp.domain_config.modifying_properties[0].pending_value #=> String
+    #   resp.domain_config.modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
     #   resp.dry_run_results.deployment_type #=> String
     #   resp.dry_run_results.message #=> String
     #
@@ -3296,6 +3397,10 @@ module Aws::ElasticsearchService
     #   resp.perform_check_only #=> Boolean
     #   resp.change_progress_details.change_id #=> String
     #   resp.change_progress_details.message #=> String
+    #   resp.change_progress_details.config_change_status #=> String, one of "Pending", "Initializing", "Validating", "ValidationFailed", "ApplyingChanges", "Completed", "PendingUserInput", "Cancelled"
+    #   resp.change_progress_details.start_time #=> Time
+    #   resp.change_progress_details.last_updated_time #=> Time
+    #   resp.change_progress_details.initiated_by #=> String, one of "CUSTOMER", "SERVICE"
     #
     # @overload upgrade_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -3317,7 +3422,7 @@ module Aws::ElasticsearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticsearchservice'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

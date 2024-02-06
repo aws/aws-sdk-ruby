@@ -155,6 +155,19 @@ module Aws::ElasticsearchService
       SENSITIVE: []
     end
 
+    class CancelDomainConfigChangeRequest
+      attr_accessor domain_name: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class CancelDomainConfigChangeResponse
+      attr_accessor dry_run: bool
+      attr_accessor cancelled_change_ids: ::Array[::String]
+      attr_accessor cancelled_change_properties: ::Array[Types::CancelledChangeProperty]
+      SENSITIVE: []
+    end
+
     class CancelElasticsearchServiceSoftwareUpdateRequest
       attr_accessor domain_name: ::String
       SENSITIVE: []
@@ -165,9 +178,20 @@ module Aws::ElasticsearchService
       SENSITIVE: []
     end
 
+    class CancelledChangeProperty
+      attr_accessor property_name: ::String
+      attr_accessor cancelled_value: ::String
+      attr_accessor active_value: ::String
+      SENSITIVE: []
+    end
+
     class ChangeProgressDetails
       attr_accessor change_id: ::String
       attr_accessor message: ::String
+      attr_accessor config_change_status: ("Pending" | "Initializing" | "Validating" | "ValidationFailed" | "ApplyingChanges" | "Completed" | "PendingUserInput" | "Cancelled")
+      attr_accessor start_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor initiated_by: ("CUSTOMER" | "SERVICE")
       SENSITIVE: []
     end
 
@@ -187,6 +211,9 @@ module Aws::ElasticsearchService
       attr_accessor completed_properties: ::Array[::String]
       attr_accessor total_number_of_stages: ::Integer
       attr_accessor change_progress_stages: ::Array[Types::ChangeProgressStage]
+      attr_accessor config_change_status: ("Pending" | "Initializing" | "Validating" | "ValidationFailed" | "ApplyingChanges" | "Completed" | "PendingUserInput" | "Cancelled")
+      attr_accessor last_updated_time: ::Time
+      attr_accessor initiated_by: ("CUSTOMER" | "SERVICE")
       SENSITIVE: []
     end
 
@@ -601,6 +628,7 @@ module Aws::ElasticsearchService
       attr_accessor advanced_security_options: Types::AdvancedSecurityOptionsStatus
       attr_accessor auto_tune_options: Types::AutoTuneOptionsStatus
       attr_accessor change_progress_details: Types::ChangeProgressDetails
+      attr_accessor modifying_properties: ::Array[Types::ModifyingProperties]
       SENSITIVE: []
     end
 
@@ -630,6 +658,8 @@ module Aws::ElasticsearchService
       attr_accessor advanced_security_options: Types::AdvancedSecurityOptions
       attr_accessor auto_tune_options: Types::AutoTuneOptionsOutput
       attr_accessor change_progress_details: Types::ChangeProgressDetails
+      attr_accessor domain_processing_status: ("Creating" | "Active" | "Modifying" | "UpgradingEngineVersion" | "UpdatingServiceSoftware" | "Isolated" | "Deleting")
+      attr_accessor modifying_properties: ::Array[Types::ModifyingProperties]
       SENSITIVE: []
     end
 
@@ -880,6 +910,14 @@ module Aws::ElasticsearchService
       attr_accessor master_user_name: ::String
       attr_accessor master_user_password: ::String
       SENSITIVE: [:master_user_name, :master_user_password]
+    end
+
+    class ModifyingProperties
+      attr_accessor name: ::String
+      attr_accessor active_value: ::String
+      attr_accessor pending_value: ::String
+      attr_accessor value_type: ("PLAIN_TEXT" | "STRINGIFIED_JSON")
+      SENSITIVE: []
     end
 
     class NodeToNodeEncryptionOptions

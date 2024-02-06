@@ -576,6 +576,16 @@ module Aws
                            ) -> _GetGraphqlApiResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGraphqlApiResponseSuccess
 
+      interface _GetGraphqlApiEnvironmentVariablesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGraphqlApiEnvironmentVariablesResponse]
+        def environment_variables: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#get_graphql_api_environment_variables-instance_method
+      def get_graphql_api_environment_variables: (
+                                                   api_id: ::String
+                                                 ) -> _GetGraphqlApiEnvironmentVariablesResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGraphqlApiEnvironmentVariablesResponseSuccess
+
       interface _GetIntrospectionSchemaResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetIntrospectionSchemaResponse]
         def schema: () -> ::String
@@ -778,6 +788,17 @@ module Aws
                                        ?max_results: ::Integer
                                      ) -> _ListTypesByAssociationResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTypesByAssociationResponseSuccess
+
+      interface _PutGraphqlApiEnvironmentVariablesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutGraphqlApiEnvironmentVariablesResponse]
+        def environment_variables: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#put_graphql_api_environment_variables-instance_method
+      def put_graphql_api_environment_variables: (
+                                                   api_id: ::String,
+                                                   environment_variables: Hash[::String, ::String]
+                                                 ) -> _PutGraphqlApiEnvironmentVariablesResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutGraphqlApiEnvironmentVariablesResponseSuccess
 
       interface _StartDataSourceIntrospectionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartDataSourceIntrospectionResponse]

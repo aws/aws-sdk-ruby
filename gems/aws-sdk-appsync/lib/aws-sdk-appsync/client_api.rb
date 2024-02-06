@@ -120,6 +120,9 @@ module Aws::AppSync
     DomainNameConfigs = Shapes::ListShape.new(name: 'DomainNameConfigs')
     DynamodbDataSourceConfig = Shapes::StructureShape.new(name: 'DynamodbDataSourceConfig')
     ElasticsearchDataSourceConfig = Shapes::StructureShape.new(name: 'ElasticsearchDataSourceConfig')
+    EnvironmentVariableKey = Shapes::StringShape.new(name: 'EnvironmentVariableKey')
+    EnvironmentVariableMap = Shapes::MapShape.new(name: 'EnvironmentVariableMap')
+    EnvironmentVariableValue = Shapes::StringShape.new(name: 'EnvironmentVariableValue')
     ErrorDetail = Shapes::StructureShape.new(name: 'ErrorDetail')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     EvaluateCodeErrorDetail = Shapes::StructureShape.new(name: 'EvaluateCodeErrorDetail')
@@ -147,6 +150,8 @@ module Aws::AppSync
     GetDomainNameResponse = Shapes::StructureShape.new(name: 'GetDomainNameResponse')
     GetFunctionRequest = Shapes::StructureShape.new(name: 'GetFunctionRequest')
     GetFunctionResponse = Shapes::StructureShape.new(name: 'GetFunctionResponse')
+    GetGraphqlApiEnvironmentVariablesRequest = Shapes::StructureShape.new(name: 'GetGraphqlApiEnvironmentVariablesRequest')
+    GetGraphqlApiEnvironmentVariablesResponse = Shapes::StructureShape.new(name: 'GetGraphqlApiEnvironmentVariablesResponse')
     GetGraphqlApiRequest = Shapes::StructureShape.new(name: 'GetGraphqlApiRequest')
     GetGraphqlApiResponse = Shapes::StructureShape.new(name: 'GetGraphqlApiResponse')
     GetIntrospectionSchemaRequest = Shapes::StructureShape.new(name: 'GetIntrospectionSchemaRequest')
@@ -208,6 +213,8 @@ module Aws::AppSync
     Ownership = Shapes::StringShape.new(name: 'Ownership')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PipelineConfig = Shapes::StructureShape.new(name: 'PipelineConfig')
+    PutGraphqlApiEnvironmentVariablesRequest = Shapes::StructureShape.new(name: 'PutGraphqlApiEnvironmentVariablesRequest')
+    PutGraphqlApiEnvironmentVariablesResponse = Shapes::StructureShape.new(name: 'PutGraphqlApiEnvironmentVariablesResponse')
     QueryDepthLimit = Shapes::IntegerShape.new(name: 'QueryDepthLimit')
     RdsDataApiConfig = Shapes::StructureShape.new(name: 'RdsDataApiConfig')
     RdsDataApiConfigDatabaseName = Shapes::StringShape.new(name: 'RdsDataApiConfigDatabaseName')
@@ -633,6 +640,9 @@ module Aws::AppSync
     ElasticsearchDataSourceConfig.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "awsRegion"))
     ElasticsearchDataSourceConfig.struct_class = Types::ElasticsearchDataSourceConfig
 
+    EnvironmentVariableMap.key = Shapes::ShapeRef.new(shape: EnvironmentVariableKey)
+    EnvironmentVariableMap.value = Shapes::ShapeRef.new(shape: EnvironmentVariableValue)
+
     ErrorDetail.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ErrorDetail.struct_class = Types::ErrorDetail
 
@@ -729,6 +739,12 @@ module Aws::AppSync
 
     GetFunctionResponse.add_member(:function_configuration, Shapes::ShapeRef.new(shape: FunctionConfiguration, location_name: "functionConfiguration"))
     GetFunctionResponse.struct_class = Types::GetFunctionResponse
+
+    GetGraphqlApiEnvironmentVariablesRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
+    GetGraphqlApiEnvironmentVariablesRequest.struct_class = Types::GetGraphqlApiEnvironmentVariablesRequest
+
+    GetGraphqlApiEnvironmentVariablesResponse.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariableMap, location_name: "environmentVariables"))
+    GetGraphqlApiEnvironmentVariablesResponse.struct_class = Types::GetGraphqlApiEnvironmentVariablesResponse
 
     GetGraphqlApiRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     GetGraphqlApiRequest.struct_class = Types::GetGraphqlApiRequest
@@ -952,6 +968,13 @@ module Aws::AppSync
 
     PipelineConfig.add_member(:functions, Shapes::ShapeRef.new(shape: FunctionsIds, location_name: "functions"))
     PipelineConfig.struct_class = Types::PipelineConfig
+
+    PutGraphqlApiEnvironmentVariablesRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
+    PutGraphqlApiEnvironmentVariablesRequest.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariableMap, required: true, location_name: "environmentVariables"))
+    PutGraphqlApiEnvironmentVariablesRequest.struct_class = Types::PutGraphqlApiEnvironmentVariablesRequest
+
+    PutGraphqlApiEnvironmentVariablesResponse.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariableMap, location_name: "environmentVariables"))
+    PutGraphqlApiEnvironmentVariablesResponse.struct_class = Types::PutGraphqlApiEnvironmentVariablesResponse
 
     RdsDataApiConfig.add_member(:resource_arn, Shapes::ShapeRef.new(shape: RdsDataApiConfigResourceArn, required: true, location_name: "resourceArn"))
     RdsDataApiConfig.add_member(:secret_arn, Shapes::ShapeRef.new(shape: RdsDataApiConfigSecretArn, required: true, location_name: "secretArn"))
@@ -1615,6 +1638,19 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:get_graphql_api_environment_variables, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetGraphqlApiEnvironmentVariables"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/apis/{apiId}/environmentVariables"
+        o.input = Shapes::ShapeRef.new(shape: GetGraphqlApiEnvironmentVariablesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetGraphqlApiEnvironmentVariablesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:get_introspection_schema, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetIntrospectionSchema"
         o.http_method = "GET"
@@ -1807,6 +1843,20 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:put_graphql_api_environment_variables, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutGraphqlApiEnvironmentVariables"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/apis/{apiId}/environmentVariables"
+        o.input = Shapes::ShapeRef.new(shape: PutGraphqlApiEnvironmentVariablesRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutGraphqlApiEnvironmentVariablesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:start_data_source_introspection, Seahorse::Model::Operation.new.tap do |o|

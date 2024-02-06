@@ -68,6 +68,8 @@ module Aws::OpenSearchService
             Aws::OpenSearchService::Endpoints::AssociatePackage.build(context)
           when :authorize_vpc_endpoint_access
             Aws::OpenSearchService::Endpoints::AuthorizeVpcEndpointAccess.build(context)
+          when :cancel_domain_config_change
+            Aws::OpenSearchService::Endpoints::CancelDomainConfigChange.build(context)
           when :cancel_service_software_update
             Aws::OpenSearchService::Endpoints::CancelServiceSoftwareUpdate.build(context)
           when :create_domain

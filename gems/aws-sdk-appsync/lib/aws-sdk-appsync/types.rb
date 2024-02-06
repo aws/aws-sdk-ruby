@@ -2349,6 +2349,32 @@ module Aws::AppSync
     end
 
     # @!attribute [rw] api_id
+    #   The ID of the API from which the environmental variable list will be
+    #   retrieved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetGraphqlApiEnvironmentVariablesRequest AWS API Documentation
+    #
+    class GetGraphqlApiEnvironmentVariablesRequest < Struct.new(
+      :api_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] environment_variables
+    #   The payload containing each environmental variable in the `"key" :
+    #   "value"` format.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetGraphqlApiEnvironmentVariablesResponse AWS API Documentation
+    #
+    class GetGraphqlApiEnvironmentVariablesResponse < Struct.new(
+      :environment_variables)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] api_id
     #   The API ID for the GraphQL API.
     #   @return [String]
     #
@@ -3444,6 +3470,60 @@ module Aws::AppSync
     #
     class PipelineConfig < Struct.new(
       :functions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] api_id
+    #   The ID of the API to which the environmental variable list will be
+    #   written.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_variables
+    #   The list of environmental variables to add to the API.
+    #
+    #   When creating an environmental variable key-value pair, it must
+    #   follow the additional constraints below:
+    #
+    #   * Keys must begin with a letter.
+    #
+    #   * Keys must be at least two characters long.
+    #
+    #   * Keys can only contain letters, numbers, and the underscore
+    #     character (\_).
+    #
+    #   * Values can be up to 512 characters long.
+    #
+    #   * You can configure up to 50 key-value pairs in a GraphQL API.
+    #
+    #   You can create a list of environmental variables by adding it to the
+    #   `environmentVariables` payload as a list in the format
+    #   `\{"key1":"value1","key2":"value2", …\}`. Note that each call of the
+    #   `PutGraphqlApiEnvironmentVariables` action will result in the
+    #   overwriting of the existing environmental variable list of that API.
+    #   This means the existing environmental variables will be lost. To
+    #   avoid this, you must include all existing and new environmental
+    #   variables in the list each time you call this action.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/PutGraphqlApiEnvironmentVariablesRequest AWS API Documentation
+    #
+    class PutGraphqlApiEnvironmentVariablesRequest < Struct.new(
+      :api_id,
+      :environment_variables)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] environment_variables
+    #   The payload containing each environmental variable in the `"key" :
+    #   "value"` format.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/PutGraphqlApiEnvironmentVariablesResponse AWS API Documentation
+    #
+    class PutGraphqlApiEnvironmentVariablesResponse < Struct.new(
+      :environment_variables)
       SENSITIVE = []
       include Aws::Structure
     end

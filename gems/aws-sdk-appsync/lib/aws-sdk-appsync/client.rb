@@ -2151,6 +2151,37 @@ module Aws::AppSync
       req.send_request(options)
     end
 
+    # Retrieves the list of environmental variable key-value pairs
+    # associated with an API by its ID value.
+    #
+    # @option params [required, String] :api_id
+    #   The ID of the API from which the environmental variable list will be
+    #   retrieved.
+    #
+    # @return [Types::GetGraphqlApiEnvironmentVariablesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetGraphqlApiEnvironmentVariablesResponse#environment_variables #environment_variables} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_graphql_api_environment_variables({
+    #     api_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.environment_variables #=> Hash
+    #   resp.environment_variables["EnvironmentVariableKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetGraphqlApiEnvironmentVariables AWS API Documentation
+    #
+    # @overload get_graphql_api_environment_variables(params = {})
+    # @param [Hash] params ({})
+    def get_graphql_api_environment_variables(params = {}, options = {})
+      req = build_request(:get_graphql_api_environment_variables, params)
+      req.send_request(options)
+    end
+
     # Retrieves the introspection schema for a GraphQL API.
     #
     # @option params [required, String] :api_id
@@ -2971,6 +3002,104 @@ module Aws::AppSync
     # @param [Hash] params ({})
     def list_types_by_association(params = {}, options = {})
       req = build_request(:list_types_by_association, params)
+      req.send_request(options)
+    end
+
+    # Creates a list of environmental variables in an API by its ID value.
+    #
+    # When creating an environmental variable, it must follow the
+    # constraints below:
+    #
+    # * Both JavaScript and VTL templates support environmental variables.
+    #
+    # * Environmental variables are not evaluated before function
+    #   invocation.
+    #
+    # * Environmental variables only support string values.
+    #
+    # * Any defined value in an environmental variable is considered a
+    #   string literal and not expanded.
+    #
+    # * Variable evaluations should ideally be performed in the function
+    #   code.
+    #
+    # When creating an environmental variable key-value pair, it must follow
+    # the additional constraints below:
+    #
+    # * Keys must begin with a letter.
+    #
+    # * Keys must be at least two characters long.
+    #
+    # * Keys can only contain letters, numbers, and the underscore character
+    #   (\_).
+    #
+    # * Values can be up to 512 characters long.
+    #
+    # * You can configure up to 50 key-value pairs in a GraphQL API.
+    #
+    # You can create a list of environmental variables by adding it to the
+    # `environmentVariables` payload as a list in the format
+    # `\{"key1":"value1","key2":"value2", …\}`. Note that each call of the
+    # `PutGraphqlApiEnvironmentVariables` action will result in the
+    # overwriting of the existing environmental variable list of that API.
+    # This means the existing environmental variables will be lost. To avoid
+    # this, you must include all existing and new environmental variables in
+    # the list each time you call this action.
+    #
+    # @option params [required, String] :api_id
+    #   The ID of the API to which the environmental variable list will be
+    #   written.
+    #
+    # @option params [required, Hash<String,String>] :environment_variables
+    #   The list of environmental variables to add to the API.
+    #
+    #   When creating an environmental variable key-value pair, it must follow
+    #   the additional constraints below:
+    #
+    #   * Keys must begin with a letter.
+    #
+    #   * Keys must be at least two characters long.
+    #
+    #   * Keys can only contain letters, numbers, and the underscore character
+    #     (\_).
+    #
+    #   * Values can be up to 512 characters long.
+    #
+    #   * You can configure up to 50 key-value pairs in a GraphQL API.
+    #
+    #   You can create a list of environmental variables by adding it to the
+    #   `environmentVariables` payload as a list in the format
+    #   `\{"key1":"value1","key2":"value2", …\}`. Note that each call of the
+    #   `PutGraphqlApiEnvironmentVariables` action will result in the
+    #   overwriting of the existing environmental variable list of that API.
+    #   This means the existing environmental variables will be lost. To avoid
+    #   this, you must include all existing and new environmental variables in
+    #   the list each time you call this action.
+    #
+    # @return [Types::PutGraphqlApiEnvironmentVariablesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutGraphqlApiEnvironmentVariablesResponse#environment_variables #environment_variables} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_graphql_api_environment_variables({
+    #     api_id: "String", # required
+    #     environment_variables: { # required
+    #       "EnvironmentVariableKey" => "EnvironmentVariableValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.environment_variables #=> Hash
+    #   resp.environment_variables["EnvironmentVariableKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/PutGraphqlApiEnvironmentVariables AWS API Documentation
+    #
+    # @overload put_graphql_api_environment_variables(params = {})
+    # @param [Hash] params ({})
+    def put_graphql_api_environment_variables(params = {}, options = {})
+      req = build_request(:put_graphql_api_environment_variables, params)
       req.send_request(options)
     end
 
@@ -3998,7 +4127,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

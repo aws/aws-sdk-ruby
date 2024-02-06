@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2024-02-06)
+------------------
+
+* Feature - This release adds clear visibility to the customers on the changes that they make on the domain.
+
 1.36.0 (2024-01-26)
 ------------------
 

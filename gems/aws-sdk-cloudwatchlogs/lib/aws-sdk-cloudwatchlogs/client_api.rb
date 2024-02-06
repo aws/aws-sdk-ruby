@@ -914,6 +914,7 @@ module Aws::CloudWatchLogs
     LogGroup.add_member(:data_protection_status, Shapes::ShapeRef.new(shape: DataProtectionStatus, location_name: "dataProtectionStatus"))
     LogGroup.add_member(:inherited_properties, Shapes::ShapeRef.new(shape: InheritedProperties, location_name: "inheritedProperties"))
     LogGroup.add_member(:log_group_class, Shapes::ShapeRef.new(shape: LogGroupClass, location_name: "logGroupClass"))
+    LogGroup.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "logGroupArn"))
     LogGroup.struct_class = Types::LogGroup
 
     LogGroupArnList.member = Shapes::ShapeRef.new(shape: LogGroupArn)
