@@ -59,6 +59,14 @@ module Aws
         end
       end
 
+      # @param [String] key
+      # @return [Boolean]
+      def key?(key)
+        @mutex.synchronize do
+          @regions.key?(key)
+        end
+      end
+
       # @api private
       def clear
         @mutex.synchronize { @regions = {} }

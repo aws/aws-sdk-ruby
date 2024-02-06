@@ -55,7 +55,6 @@ setting, caching, and fallback behavior.
                 bucket: params[:bucket],
                 key: params[:key],
                 prefix: params[:prefix],
-                credentials: context.config.credentials.credentials,
                 permission: permission
               )
               context[:sigv4_credentials] = credentials # Sign will use this
@@ -83,8 +82,7 @@ setting, caching, and fallback behavior.
 
         def after_initialize(client)
           provider = client.config.access_grants_credentials_provider
-          provider.s3_credentials = client.config.credentials
-          provider.s3_region = client.config.region
+          provider.s3_client = client unless provider.s3_client
         end
       end
     end
