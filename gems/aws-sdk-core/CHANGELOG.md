@@ -1,5 +1,6 @@
 Unreleased Changes
 ------------------
+* Issue - Fix compression trait name to `requestcompression`.
 
 3.191.0 (2024-01-26)
 ------------------
