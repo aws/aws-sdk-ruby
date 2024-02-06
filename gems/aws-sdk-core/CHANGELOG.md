@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Warn on previously silent credential failures (#2981).
+
 3.191.0 (2024-01-26)
 ------------------
 
