@@ -75,22 +75,61 @@ module Aws
         @s3_control_client_cache[bucket_region] ||= begin
           credentials = s3_client.config.credentials
           config = { credentials: credentials }.merge(@s3_control_options)
-          Aws::S3Control::Client.new(config.merge(region: bucket_region))
+          Aws::S3Control::Client.new(config.merge(
+            region: bucket_region,
+            use_fips_endpoint: s3_client.config.use_fips_endpoint,
+            use_dualstack_endpoint: s3_client.config.use_dualstack_endpoint
+          ))
         end
       end
 
       def cached_credentials_for(target, permission, credentials)
-        key = credentials_cache_key(target, permission, credentials)
+        cached_creds = broad_search_credentials_cache_prefix(target, permission, credentials)
+        return cached_creds if cached_creds
 
-        if @credentials_cache.key?(key)
-          @credentials_cache[key]
-        else
-          @credentials_cache[key] = new_credentials_for(
-            target,
-            permission,
-            credentials
-          )
+        if %w[READ WRITE].include?(permission)
+          cached_creds = broad_search_credentials_cache_prefix(target, 'READWRITE', credentials)
+          return cached_creds if cached_creds
         end
+
+        cached_creds = broad_search_credentials_cache_characters(target, permission, credentials)
+        return cached_creds if cached_creds
+
+        if %w[READ WRITE].include?(permission)
+          cached_creds = broad_search_credentials_cache_characters(target, 'READWRITE', credentials)
+          return cached_creds if cached_creds
+        end
+
+        creds = new_credentials_for(target, permission, credentials)
+        if creds.matched_grant_target.end_with?('*')
+          # remove /* from the end of the target
+          key = credentials_cache_key(creds.matched_grant_target[0...-2], permission, credentials)
+          @credentials_cache[key] = creds
+        end
+
+        creds
+      end
+
+      def broad_search_credentials_cache_prefix(target, permission, credentials)
+        prefix = target
+        while prefix != 's3:'
+          key = credentials_cache_key(prefix, permission, credentials)
+          return @credentials_cache[key] if @credentials_cache.key?(key)
+
+          prefix = prefix.split('/', -1)[0..-2].join('/')
+        end
+        nil
+      end
+
+      def broad_search_credentials_cache_characters(target, permission, credentials)
+        prefix = target
+        while prefix != 's3://'
+          key = credentials_cache_key("#{prefix}*", permission, credentials)
+          return @credentials_cache[key] if @credentials_cache.key?(key)
+
+          prefix = prefix[0..-2]
+        end
+        nil
       end
 
       def new_credentials_for(target, permission, credentials)
@@ -167,7 +206,9 @@ module Aws
         else
           @sts_client ||= Aws::STS::Client.new(
             credentials: s3_client.config.credentials,
-            region: region
+            region: region,
+            use_fips_endpoint: s3_client.config.use_fips_endpoint,
+            use_dualstack_endpoint: s3_client.config.use_dualstack_endpoint
           )
           @sts_client.get_caller_identity.account
         end
@@ -183,7 +224,6 @@ module Aws
         end
       end
 
-      # TODO - should check multiple targets and permissions in a smart way
       def credentials_cache_key(target, permission, credentials)
         "#{credentials.access_key_id}-#{credentials.secret_access_key}" \
         "-#{permission}-#{target}"

@@ -24,16 +24,21 @@ module Aws
       # @return [S3Control::Client]
       attr_reader :client
 
+      # @return [String]
+      attr_reader :matched_grant_target
+
       private
 
       def refresh
-        c = @client.get_data_access(@get_data_access_params).credentials
+        c = @client.get_data_access(@get_data_access_params)
+        credentials = c.credentials
+        @matched_grant_target = c.matched_grant_target
         @credentials = Credentials.new(
-          c.access_key_id,
-          c.secret_access_key,
-          c.session_token
+          credentials.access_key_id,
+          credentials.secret_access_key,
+          credentials.session_token
         )
-        @expiration = c.expiration
+        @expiration = credentials.expiration
       end
 
       class << self
