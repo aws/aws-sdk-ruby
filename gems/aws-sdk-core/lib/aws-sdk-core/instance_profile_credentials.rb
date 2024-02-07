@@ -215,7 +215,8 @@ module Aws
               _get_credentials(conn, token)
             end
           end
-        rescue
+        rescue => e
+          warn("Error retrieving instance profile credentials: #{e}")
           '{}'
         end
       end

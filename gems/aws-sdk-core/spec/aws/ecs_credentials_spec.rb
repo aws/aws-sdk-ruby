@@ -4,6 +4,10 @@ require_relative '../spec_helper'
 
 module Aws
   describe ECSCredentials do
+    before do
+      allow_any_instance_of(ECSCredentials).to receive(:warn)
+    end
+
     let(:path) { '/latest/credentials?id=foobarbaz' }
 
     context 'without ECS credential service present' do
@@ -15,6 +19,7 @@ module Aws
       ].each do |error_class|
         it "returns no credentials for #{error_class}" do
           stub_request(:get, "http://169.254.170.2#{path}").to_raise(error_class)
+          expect_any_instance_of(ECSCredentials).to receive(:warn)
           credentials = ECSCredentials.new(credential_path: path, backoff: 0, retries: 0)
           expect(credentials.set?).to be(false)
         end
