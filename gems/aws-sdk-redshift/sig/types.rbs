@@ -1755,6 +1755,20 @@ module Aws::Redshift
     class LimitExceededFault < Aws::EmptyStructure
     end
 
+    class ListRecommendationsMessage
+      attr_accessor cluster_identifier: ::String
+      attr_accessor namespace_arn: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecommendationsResult
+      attr_accessor recommendations: ::Array[Types::Recommendation]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
     class LoggingStatus
       attr_accessor logging_enabled: bool
       attr_accessor bucket_name: ::String
@@ -2147,6 +2161,30 @@ module Aws::Redshift
       SENSITIVE: []
     end
 
+    class Recommendation
+      attr_accessor id: ::String
+      attr_accessor cluster_identifier: ::String
+      attr_accessor namespace_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor recommendation_type: ::String
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor observation: ::String
+      attr_accessor impact_ranking: ("HIGH" | "MEDIUM" | "LOW")
+      attr_accessor recommendation_text: ::String
+      attr_accessor recommended_actions: ::Array[Types::RecommendedAction]
+      attr_accessor reference_links: ::Array[Types::ReferenceLink]
+      SENSITIVE: []
+    end
+
+    class RecommendedAction
+      attr_accessor text: ::String
+      attr_accessor database: ::String
+      attr_accessor command: ::String
+      attr_accessor type: ("SQL" | "CLI")
+      SENSITIVE: []
+    end
+
     class RecurringCharge
       attr_accessor recurring_charge_amount: ::Float
       attr_accessor recurring_charge_frequency: ::String
@@ -2174,6 +2212,12 @@ module Aws::Redshift
     end
 
     class RedshiftIdcApplicationQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class ReferenceLink
+      attr_accessor text: ::String
+      attr_accessor link: ::String
+      SENSITIVE: []
     end
 
     class RejectDataShareMessage

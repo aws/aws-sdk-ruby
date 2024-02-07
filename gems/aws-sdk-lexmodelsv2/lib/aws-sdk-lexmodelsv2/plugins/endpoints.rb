@@ -72,6 +72,8 @@ module Aws::LexModelsV2
             Aws::LexModelsV2::Endpoints::CreateBotAlias.build(context)
           when :create_bot_locale
             Aws::LexModelsV2::Endpoints::CreateBotLocale.build(context)
+          when :create_bot_replica
+            Aws::LexModelsV2::Endpoints::CreateBotReplica.build(context)
           when :create_bot_version
             Aws::LexModelsV2::Endpoints::CreateBotVersion.build(context)
           when :create_export
@@ -96,6 +98,8 @@ module Aws::LexModelsV2
             Aws::LexModelsV2::Endpoints::DeleteBotAlias.build(context)
           when :delete_bot_locale
             Aws::LexModelsV2::Endpoints::DeleteBotLocale.build(context)
+          when :delete_bot_replica
+            Aws::LexModelsV2::Endpoints::DeleteBotReplica.build(context)
           when :delete_bot_version
             Aws::LexModelsV2::Endpoints::DeleteBotVersion.build(context)
           when :delete_custom_vocabulary
@@ -126,6 +130,8 @@ module Aws::LexModelsV2
             Aws::LexModelsV2::Endpoints::DescribeBotLocale.build(context)
           when :describe_bot_recommendation
             Aws::LexModelsV2::Endpoints::DescribeBotRecommendation.build(context)
+          when :describe_bot_replica
+            Aws::LexModelsV2::Endpoints::DescribeBotReplica.build(context)
           when :describe_bot_resource_generation
             Aws::LexModelsV2::Endpoints::DescribeBotResourceGeneration.build(context)
           when :describe_bot_version
@@ -158,14 +164,20 @@ module Aws::LexModelsV2
             Aws::LexModelsV2::Endpoints::GetTestExecutionArtifactsUrl.build(context)
           when :list_aggregated_utterances
             Aws::LexModelsV2::Endpoints::ListAggregatedUtterances.build(context)
+          when :list_bot_alias_replicas
+            Aws::LexModelsV2::Endpoints::ListBotAliasReplicas.build(context)
           when :list_bot_aliases
             Aws::LexModelsV2::Endpoints::ListBotAliases.build(context)
           when :list_bot_locales
             Aws::LexModelsV2::Endpoints::ListBotLocales.build(context)
           when :list_bot_recommendations
             Aws::LexModelsV2::Endpoints::ListBotRecommendations.build(context)
+          when :list_bot_replicas
+            Aws::LexModelsV2::Endpoints::ListBotReplicas.build(context)
           when :list_bot_resource_generations
             Aws::LexModelsV2::Endpoints::ListBotResourceGenerations.build(context)
+          when :list_bot_version_replicas
+            Aws::LexModelsV2::Endpoints::ListBotVersionReplicas.build(context)
           when :list_bot_versions
             Aws::LexModelsV2::Endpoints::ListBotVersions.build(context)
           when :list_bots

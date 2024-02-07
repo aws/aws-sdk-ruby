@@ -459,6 +459,18 @@ module Aws
                              value: ::String?
                            },
                          ],
+                         ?manifest_config: {
+                           action: ("TRANSFER")?,
+                           format: ("CSV")?,
+                           source: {
+                             s3: {
+                               manifest_object_path: ::String,
+                               bucket_access_role_arn: ::String,
+                               s3_bucket_arn: ::String,
+                               manifest_object_version_id: ::String?
+                             }
+                           }?
+                         },
                          ?task_report_config: {
                            destination: {
                              s3: {
@@ -790,6 +802,7 @@ module Aws
         def error_detail: () -> ::String
         def creation_time: () -> ::Time
         def includes: () -> ::Array[Types::FilterRule]
+        def manifest_config: () -> Types::ManifestConfig
         def task_report_config: () -> Types::TaskReportConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_task-instance_method
@@ -805,14 +818,15 @@ module Aws
         def options: () -> Types::Options
         def excludes: () -> ::Array[Types::FilterRule]
         def includes: () -> ::Array[Types::FilterRule]
+        def manifest_config: () -> Types::ManifestConfig
         def start_time: () -> ::Time
         def estimated_files_to_transfer: () -> ::Integer
         def estimated_bytes_to_transfer: () -> ::Integer
         def files_transferred: () -> ::Integer
         def bytes_written: () -> ::Integer
         def bytes_transferred: () -> ::Integer
-        def result: () -> Types::TaskExecutionResultDetail
         def bytes_compressed: () -> ::Integer
+        def result: () -> Types::TaskExecutionResultDetail
         def task_report_config: () -> Types::TaskReportConfig
         def files_deleted: () -> ::Integer
         def files_skipped: () -> ::Integer
@@ -1001,12 +1015,18 @@ module Aws
                                       value: ::String?
                                     },
                                   ],
-                                  ?tags: Array[
-                                    {
-                                      key: ::String,
-                                      value: ::String?
-                                    },
-                                  ],
+                                  ?manifest_config: {
+                                    action: ("TRANSFER")?,
+                                    format: ("CSV")?,
+                                    source: {
+                                      s3: {
+                                        manifest_object_path: ::String,
+                                        bucket_access_role_arn: ::String,
+                                        s3_bucket_arn: ::String,
+                                        manifest_object_version_id: ::String?
+                                      }
+                                    }?
+                                  },
                                   ?task_report_config: {
                                     destination: {
                                       s3: {
@@ -1032,7 +1052,13 @@ module Aws
                                         report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
                                       }?
                                     }?
-                                  }
+                                  },
+                                  ?tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String?
+                                    },
+                                  ]
                                 ) -> _StartTaskExecutionResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTaskExecutionResponseSuccess
 
@@ -1245,6 +1271,18 @@ module Aws
                              value: ::String?
                            },
                          ],
+                         ?manifest_config: {
+                           action: ("TRANSFER")?,
+                           format: ("CSV")?,
+                           source: {
+                             s3: {
+                               manifest_object_path: ::String,
+                               bucket_access_role_arn: ::String,
+                               s3_bucket_arn: ::String,
+                               manifest_object_version_id: ::String?
+                             }
+                           }?
+                         },
                          ?task_report_config: {
                            destination: {
                              s3: {

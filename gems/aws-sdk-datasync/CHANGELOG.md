@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2024-02-07)
+------------------
+
+* Feature - AWS DataSync now supports manifests for specifying files or objects to transfer.
+
 1.72.0 (2024-01-26)
 ------------------
 

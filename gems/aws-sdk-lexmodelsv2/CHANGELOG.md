@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2024-02-07)
+------------------
+
+* Feature - This release introduces a new bot replication feature as part of Lex Global Resiliency offering. This feature leverages a new set of APIs that allow customers to create bot replicas and replicate changes to bots across regions.
+
 1.47.0 (2024-01-26)
 ------------------
 

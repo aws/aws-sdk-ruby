@@ -362,6 +362,16 @@ module Aws::LexModelsV2
       SENSITIVE: []
     end
 
+    class BotAliasReplicaSummary
+      attr_accessor bot_alias_id: ::String
+      attr_accessor bot_alias_replication_status: ("Creating" | "Updating" | "Available" | "Deleting" | "Failed")
+      attr_accessor bot_version: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor failure_reasons: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class BotAliasSummary
       attr_accessor bot_alias_id: ::String
       attr_accessor bot_alias_name: ::String
@@ -478,6 +488,14 @@ module Aws::LexModelsV2
       SENSITIVE: []
     end
 
+    class BotReplicaSummary
+      attr_accessor replica_region: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor bot_replica_status: ("Enabling" | "Enabled" | "Deleting" | "Failed")
+      attr_accessor failure_reasons: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class BotSortBy
       attr_accessor attribute: ("BotName")
       attr_accessor order: ("Ascending" | "Descending")
@@ -497,6 +515,20 @@ module Aws::LexModelsV2
 
     class BotVersionLocaleDetails
       attr_accessor source_bot_version: ::String
+      SENSITIVE: []
+    end
+
+    class BotVersionReplicaSortBy
+      attr_accessor attribute: ("BotVersion")
+      attr_accessor order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class BotVersionReplicaSummary
+      attr_accessor bot_version: ::String
+      attr_accessor bot_version_replication_status: ("Creating" | "Available" | "Deleting" | "Failed")
+      attr_accessor creation_date_time: ::Time
+      attr_accessor failure_reasons: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -716,6 +748,21 @@ module Aws::LexModelsV2
       attr_accessor bot_locale_status: ("Creating" | "Building" | "Built" | "ReadyExpressTesting" | "Failed" | "Deleting" | "NotBuilt" | "Importing" | "Processing")
       attr_accessor creation_date_time: ::Time
       attr_accessor generative_ai_settings: Types::GenerativeAISettings
+      SENSITIVE: []
+    end
+
+    class CreateBotReplicaRequest
+      attr_accessor bot_id: ::String
+      attr_accessor replica_region: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBotReplicaResponse
+      attr_accessor bot_id: ::String
+      attr_accessor replica_region: ::String
+      attr_accessor source_region: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor bot_replica_status: ("Enabling" | "Enabled" | "Deleting" | "Failed")
       SENSITIVE: []
     end
 
@@ -1021,6 +1068,19 @@ module Aws::LexModelsV2
       SENSITIVE: []
     end
 
+    class DeleteBotReplicaRequest
+      attr_accessor bot_id: ::String
+      attr_accessor replica_region: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBotReplicaResponse
+      attr_accessor bot_id: ::String
+      attr_accessor replica_region: ::String
+      attr_accessor bot_replica_status: ("Enabling" | "Enabled" | "Deleting" | "Failed")
+      SENSITIVE: []
+    end
+
     class DeleteBotRequest
       attr_accessor bot_id: ::String
       attr_accessor skip_resource_in_use_check: bool
@@ -1221,6 +1281,22 @@ module Aws::LexModelsV2
       attr_accessor transcript_source_setting: Types::TranscriptSourceSetting
       attr_accessor encryption_setting: Types::EncryptionSetting
       attr_accessor bot_recommendation_results: Types::BotRecommendationResults
+      SENSITIVE: []
+    end
+
+    class DescribeBotReplicaRequest
+      attr_accessor bot_id: ::String
+      attr_accessor replica_region: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBotReplicaResponse
+      attr_accessor bot_id: ::String
+      attr_accessor replica_region: ::String
+      attr_accessor source_region: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor bot_replica_status: ("Enabling" | "Enabled" | "Deleting" | "Failed")
+      attr_accessor failure_reasons: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1906,6 +1982,23 @@ module Aws::LexModelsV2
       SENSITIVE: []
     end
 
+    class ListBotAliasReplicasRequest
+      attr_accessor bot_id: ::String
+      attr_accessor replica_region: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBotAliasReplicasResponse
+      attr_accessor bot_id: ::String
+      attr_accessor source_region: ::String
+      attr_accessor replica_region: ::String
+      attr_accessor bot_alias_replica_summaries: ::Array[Types::BotAliasReplicaSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListBotAliasesRequest
       attr_accessor bot_id: ::String
       attr_accessor max_results: ::Integer
@@ -1956,6 +2049,18 @@ module Aws::LexModelsV2
       SENSITIVE: []
     end
 
+    class ListBotReplicasRequest
+      attr_accessor bot_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListBotReplicasResponse
+      attr_accessor bot_id: ::String
+      attr_accessor source_region: ::String
+      attr_accessor bot_replica_summaries: ::Array[Types::BotReplicaSummary]
+      SENSITIVE: []
+    end
+
     class ListBotResourceGenerationsRequest
       attr_accessor bot_id: ::String
       attr_accessor bot_version: ::String
@@ -1971,6 +2076,24 @@ module Aws::LexModelsV2
       attr_accessor bot_version: ::String
       attr_accessor locale_id: ::String
       attr_accessor generation_summaries: ::Array[Types::GenerationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBotVersionReplicasRequest
+      attr_accessor bot_id: ::String
+      attr_accessor replica_region: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_by: Types::BotVersionReplicaSortBy
+      SENSITIVE: []
+    end
+
+    class ListBotVersionReplicasResponse
+      attr_accessor bot_id: ::String
+      attr_accessor source_region: ::String
+      attr_accessor replica_region: ::String
+      attr_accessor bot_version_replica_summaries: ::Array[Types::BotVersionReplicaSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end

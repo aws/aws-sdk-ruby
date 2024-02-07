@@ -1563,6 +1563,20 @@ module Aws
                                ) -> _GetResourcePolicyResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePolicyResponseSuccess
 
+      interface _ListRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecommendationsResult]
+        def recommendations: () -> ::Array[Types::Recommendation]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#list_recommendations-instance_method
+      def list_recommendations: (
+                                  ?cluster_identifier: ::String,
+                                  ?namespace_arn: ::String,
+                                  ?max_records: ::Integer,
+                                  ?marker: ::String
+                                ) -> _ListRecommendationsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecommendationsResponseSuccess
+
       interface _ModifyAquaConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ModifyAquaOutputMessage]
         def aqua_configuration: () -> Types::AquaConfiguration

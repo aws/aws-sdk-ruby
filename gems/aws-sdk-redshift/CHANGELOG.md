@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.109.0 (2024-02-07)
+------------------
+
+* Feature - LisRecommendations API to fetch Amazon Redshift Advisor recommendations.
+
 1.108.0 (2024-01-26)
 ------------------
 

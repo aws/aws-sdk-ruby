@@ -309,6 +309,21 @@ module Aws
                              ) -> _CreateBotLocaleResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBotLocaleResponseSuccess
 
+      interface _CreateBotReplicaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBotReplicaResponse]
+        def bot_id: () -> ::String
+        def replica_region: () -> ::String
+        def source_region: () -> ::String
+        def creation_date_time: () -> ::Time
+        def bot_replica_status: () -> ("Enabling" | "Enabled" | "Deleting" | "Failed")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelsV2/Client.html#create_bot_replica-instance_method
+      def create_bot_replica: (
+                                bot_id: ::String,
+                                replica_region: ::String
+                              ) -> _CreateBotReplicaResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBotReplicaResponseSuccess
+
       interface _CreateBotVersionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateBotVersionResponse]
         def bot_id: () -> ::String
@@ -5786,6 +5801,19 @@ module Aws
                              ) -> _DeleteBotLocaleResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBotLocaleResponseSuccess
 
+      interface _DeleteBotReplicaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBotReplicaResponse]
+        def bot_id: () -> ::String
+        def replica_region: () -> ::String
+        def bot_replica_status: () -> ("Enabling" | "Enabled" | "Deleting" | "Failed")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelsV2/Client.html#delete_bot_replica-instance_method
+      def delete_bot_replica: (
+                                bot_id: ::String,
+                                replica_region: ::String
+                              ) -> _DeleteBotReplicaResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBotReplicaResponseSuccess
+
       interface _DeleteBotVersionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBotVersionResponse]
         def bot_id: () -> ::String
@@ -6002,6 +6030,22 @@ module Aws
                                          bot_recommendation_id: ::String
                                        ) -> _DescribeBotRecommendationResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBotRecommendationResponseSuccess
+
+      interface _DescribeBotReplicaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBotReplicaResponse]
+        def bot_id: () -> ::String
+        def replica_region: () -> ::String
+        def source_region: () -> ::String
+        def creation_date_time: () -> ::Time
+        def bot_replica_status: () -> ("Enabling" | "Enabled" | "Deleting" | "Failed")
+        def failure_reasons: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelsV2/Client.html#describe_bot_replica-instance_method
+      def describe_bot_replica: (
+                                  bot_id: ::String,
+                                  replica_region: ::String
+                                ) -> _DescribeBotReplicaResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBotReplicaResponseSuccess
 
       interface _DescribeBotResourceGenerationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBotResourceGenerationResponse]
@@ -6341,6 +6385,23 @@ module Aws
                                       ) -> _ListAggregatedUtterancesResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAggregatedUtterancesResponseSuccess
 
+      interface _ListBotAliasReplicasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBotAliasReplicasResponse]
+        def bot_id: () -> ::String
+        def source_region: () -> ::String
+        def replica_region: () -> ::String
+        def bot_alias_replica_summaries: () -> ::Array[Types::BotAliasReplicaSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelsV2/Client.html#list_bot_alias_replicas-instance_method
+      def list_bot_alias_replicas: (
+                                     bot_id: ::String,
+                                     replica_region: ::String,
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListBotAliasReplicasResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBotAliasReplicasResponseSuccess
+
       interface _ListBotAliasesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListBotAliasesResponse]
         def bot_alias_summaries: () -> ::Array[Types::BotAliasSummary]
@@ -6400,6 +6461,18 @@ module Aws
                                     ) -> _ListBotRecommendationsResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBotRecommendationsResponseSuccess
 
+      interface _ListBotReplicasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBotReplicasResponse]
+        def bot_id: () -> ::String
+        def source_region: () -> ::String
+        def bot_replica_summaries: () -> ::Array[Types::BotReplicaSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelsV2/Client.html#list_bot_replicas-instance_method
+      def list_bot_replicas: (
+                               bot_id: ::String
+                             ) -> _ListBotReplicasResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBotReplicasResponseSuccess
+
       interface _ListBotResourceGenerationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListBotResourceGenerationsResponse]
         def bot_id: () -> ::String
@@ -6421,6 +6494,27 @@ module Aws
                                            ?next_token: ::String
                                          ) -> _ListBotResourceGenerationsResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBotResourceGenerationsResponseSuccess
+
+      interface _ListBotVersionReplicasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBotVersionReplicasResponse]
+        def bot_id: () -> ::String
+        def source_region: () -> ::String
+        def replica_region: () -> ::String
+        def bot_version_replica_summaries: () -> ::Array[Types::BotVersionReplicaSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelsV2/Client.html#list_bot_version_replicas-instance_method
+      def list_bot_version_replicas: (
+                                       bot_id: ::String,
+                                       replica_region: ::String,
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String,
+                                       ?sort_by: {
+                                         attribute: ("BotVersion"),
+                                         order: ("Ascending" | "Descending")
+                                       }
+                                     ) -> _ListBotVersionReplicasResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBotVersionReplicasResponseSuccess
 
       interface _ListBotVersionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListBotVersionsResponse]

@@ -256,6 +256,7 @@ module Aws::DataSync
       attr_accessor schedule: Types::TaskSchedule
       attr_accessor tags: ::Array[Types::TagListEntry]
       attr_accessor includes: ::Array[Types::FilterRule]
+      attr_accessor manifest_config: Types::ManifestConfig
       attr_accessor task_report_config: Types::TaskReportConfig
       SENSITIVE: []
     end
@@ -563,14 +564,15 @@ module Aws::DataSync
       attr_accessor options: Types::Options
       attr_accessor excludes: ::Array[Types::FilterRule]
       attr_accessor includes: ::Array[Types::FilterRule]
+      attr_accessor manifest_config: Types::ManifestConfig
       attr_accessor start_time: ::Time
       attr_accessor estimated_files_to_transfer: ::Integer
       attr_accessor estimated_bytes_to_transfer: ::Integer
       attr_accessor files_transferred: ::Integer
       attr_accessor bytes_written: ::Integer
       attr_accessor bytes_transferred: ::Integer
-      attr_accessor result: Types::TaskExecutionResultDetail
       attr_accessor bytes_compressed: ::Integer
+      attr_accessor result: Types::TaskExecutionResultDetail
       attr_accessor task_report_config: Types::TaskReportConfig
       attr_accessor files_deleted: ::Integer
       attr_accessor files_skipped: ::Integer
@@ -602,6 +604,7 @@ module Aws::DataSync
       attr_accessor error_detail: ::String
       attr_accessor creation_time: ::Time
       attr_accessor includes: ::Array[Types::FilterRule]
+      attr_accessor manifest_config: Types::ManifestConfig
       attr_accessor task_report_config: Types::TaskReportConfig
       SENSITIVE: []
     end
@@ -792,6 +795,13 @@ module Aws::DataSync
     class LocationListEntry
       attr_accessor location_arn: ::String
       attr_accessor location_uri: ::String
+      SENSITIVE: []
+    end
+
+    class ManifestConfig
+      attr_accessor action: ("TRANSFER")
+      attr_accessor format: ("CSV")
+      attr_accessor source: Types::SourceManifestConfig
       SENSITIVE: []
     end
 
@@ -986,8 +996,21 @@ module Aws::DataSync
       SENSITIVE: []
     end
 
+    class S3ManifestConfig
+      attr_accessor manifest_object_path: ::String
+      attr_accessor bucket_access_role_arn: ::String
+      attr_accessor s3_bucket_arn: ::String
+      attr_accessor manifest_object_version_id: ::String
+      SENSITIVE: []
+    end
+
     class SmbMountOptions
       attr_accessor version: ("AUTOMATIC" | "SMB2" | "SMB3" | "SMB1" | "SMB2_0")
+      SENSITIVE: []
+    end
+
+    class SourceManifestConfig
+      attr_accessor s3: Types::S3ManifestConfig
       SENSITIVE: []
     end
 
@@ -1009,8 +1032,9 @@ module Aws::DataSync
       attr_accessor override_options: Types::Options
       attr_accessor includes: ::Array[Types::FilterRule]
       attr_accessor excludes: ::Array[Types::FilterRule]
-      attr_accessor tags: ::Array[Types::TagListEntry]
+      attr_accessor manifest_config: Types::ManifestConfig
       attr_accessor task_report_config: Types::TaskReportConfig
+      attr_accessor tags: ::Array[Types::TagListEntry]
       SENSITIVE: []
     end
 
@@ -1234,6 +1258,7 @@ module Aws::DataSync
       attr_accessor name: ::String
       attr_accessor cloud_watch_log_group_arn: ::String
       attr_accessor includes: ::Array[Types::FilterRule]
+      attr_accessor manifest_config: Types::ManifestConfig
       attr_accessor task_report_config: Types::TaskReportConfig
       SENSITIVE: []
     end

@@ -194,6 +194,9 @@ module Aws::DataSync
     LocationUri = Shapes::StringShape.new(name: 'LocationUri')
     LogGroupArn = Shapes::StringShape.new(name: 'LogGroupArn')
     LogLevel = Shapes::StringShape.new(name: 'LogLevel')
+    ManifestAction = Shapes::StringShape.new(name: 'ManifestAction')
+    ManifestConfig = Shapes::StructureShape.new(name: 'ManifestConfig')
+    ManifestFormat = Shapes::StringShape.new(name: 'ManifestFormat')
     MaxP95Performance = Shapes::StructureShape.new(name: 'MaxP95Performance')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Metrics = Shapes::ListShape.new(name: 'Metrics')
@@ -260,6 +263,8 @@ module Aws::DataSync
     ResourceMetrics = Shapes::StructureShape.new(name: 'ResourceMetrics')
     S3BucketArn = Shapes::StringShape.new(name: 'S3BucketArn')
     S3Config = Shapes::StructureShape.new(name: 'S3Config')
+    S3ManifestConfig = Shapes::StructureShape.new(name: 'S3ManifestConfig')
+    S3ObjectVersionId = Shapes::StringShape.new(name: 'S3ObjectVersionId')
     S3StorageClass = Shapes::StringShape.new(name: 'S3StorageClass')
     S3Subdirectory = Shapes::StringShape.new(name: 'S3Subdirectory')
     ScheduleExpressionCron = Shapes::StringShape.new(name: 'ScheduleExpressionCron')
@@ -272,6 +277,7 @@ module Aws::DataSync
     SmbSubdirectory = Shapes::StringShape.new(name: 'SmbSubdirectory')
     SmbUser = Shapes::StringShape.new(name: 'SmbUser')
     SmbVersion = Shapes::StringShape.new(name: 'SmbVersion')
+    SourceManifestConfig = Shapes::StructureShape.new(name: 'SourceManifestConfig')
     SourceNetworkInterfaceArns = Shapes::ListShape.new(name: 'SourceNetworkInterfaceArns')
     StartDiscoveryJobRequest = Shapes::StructureShape.new(name: 'StartDiscoveryJobRequest')
     StartDiscoveryJobResponse = Shapes::StructureShape.new(name: 'StartDiscoveryJobResponse')
@@ -528,6 +534,7 @@ module Aws::DataSync
     CreateTaskRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: TaskSchedule, location_name: "Schedule"))
     CreateTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
     CreateTaskRequest.add_member(:includes, Shapes::ShapeRef.new(shape: FilterList, location_name: "Includes"))
+    CreateTaskRequest.add_member(:manifest_config, Shapes::ShapeRef.new(shape: ManifestConfig, location_name: "ManifestConfig"))
     CreateTaskRequest.add_member(:task_report_config, Shapes::ShapeRef.new(shape: TaskReportConfig, location_name: "TaskReportConfig"))
     CreateTaskRequest.struct_class = Types::CreateTaskRequest
 
@@ -754,14 +761,15 @@ module Aws::DataSync
     DescribeTaskExecutionResponse.add_member(:options, Shapes::ShapeRef.new(shape: Options, location_name: "Options"))
     DescribeTaskExecutionResponse.add_member(:excludes, Shapes::ShapeRef.new(shape: FilterList, location_name: "Excludes"))
     DescribeTaskExecutionResponse.add_member(:includes, Shapes::ShapeRef.new(shape: FilterList, location_name: "Includes"))
+    DescribeTaskExecutionResponse.add_member(:manifest_config, Shapes::ShapeRef.new(shape: ManifestConfig, location_name: "ManifestConfig"))
     DescribeTaskExecutionResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: Time, location_name: "StartTime"))
     DescribeTaskExecutionResponse.add_member(:estimated_files_to_transfer, Shapes::ShapeRef.new(shape: long, location_name: "EstimatedFilesToTransfer"))
     DescribeTaskExecutionResponse.add_member(:estimated_bytes_to_transfer, Shapes::ShapeRef.new(shape: long, location_name: "EstimatedBytesToTransfer"))
     DescribeTaskExecutionResponse.add_member(:files_transferred, Shapes::ShapeRef.new(shape: long, location_name: "FilesTransferred"))
     DescribeTaskExecutionResponse.add_member(:bytes_written, Shapes::ShapeRef.new(shape: long, location_name: "BytesWritten"))
     DescribeTaskExecutionResponse.add_member(:bytes_transferred, Shapes::ShapeRef.new(shape: long, location_name: "BytesTransferred"))
-    DescribeTaskExecutionResponse.add_member(:result, Shapes::ShapeRef.new(shape: TaskExecutionResultDetail, location_name: "Result"))
     DescribeTaskExecutionResponse.add_member(:bytes_compressed, Shapes::ShapeRef.new(shape: long, location_name: "BytesCompressed"))
+    DescribeTaskExecutionResponse.add_member(:result, Shapes::ShapeRef.new(shape: TaskExecutionResultDetail, location_name: "Result"))
     DescribeTaskExecutionResponse.add_member(:task_report_config, Shapes::ShapeRef.new(shape: TaskReportConfig, location_name: "TaskReportConfig"))
     DescribeTaskExecutionResponse.add_member(:files_deleted, Shapes::ShapeRef.new(shape: long, location_name: "FilesDeleted"))
     DescribeTaskExecutionResponse.add_member(:files_skipped, Shapes::ShapeRef.new(shape: long, location_name: "FilesSkipped"))
@@ -789,6 +797,7 @@ module Aws::DataSync
     DescribeTaskResponse.add_member(:error_detail, Shapes::ShapeRef.new(shape: string, location_name: "ErrorDetail"))
     DescribeTaskResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
     DescribeTaskResponse.add_member(:includes, Shapes::ShapeRef.new(shape: FilterList, location_name: "Includes"))
+    DescribeTaskResponse.add_member(:manifest_config, Shapes::ShapeRef.new(shape: ManifestConfig, location_name: "ManifestConfig"))
     DescribeTaskResponse.add_member(:task_report_config, Shapes::ShapeRef.new(shape: TaskReportConfig, location_name: "TaskReportConfig"))
     DescribeTaskResponse.struct_class = Types::DescribeTaskResponse
 
@@ -945,6 +954,11 @@ module Aws::DataSync
     LocationListEntry.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
     LocationListEntry.add_member(:location_uri, Shapes::ShapeRef.new(shape: LocationUri, location_name: "LocationUri"))
     LocationListEntry.struct_class = Types::LocationListEntry
+
+    ManifestConfig.add_member(:action, Shapes::ShapeRef.new(shape: ManifestAction, location_name: "Action"))
+    ManifestConfig.add_member(:format, Shapes::ShapeRef.new(shape: ManifestFormat, location_name: "Format"))
+    ManifestConfig.add_member(:source, Shapes::ShapeRef.new(shape: SourceManifestConfig, location_name: "Source"))
+    ManifestConfig.struct_class = Types::ManifestConfig
 
     MaxP95Performance.add_member(:iops_read, Shapes::ShapeRef.new(shape: NonNegativeDouble, location_name: "IopsRead"))
     MaxP95Performance.add_member(:iops_write, Shapes::ShapeRef.new(shape: NonNegativeDouble, location_name: "IopsWrite"))
@@ -1118,8 +1132,17 @@ module Aws::DataSync
     S3Config.add_member(:bucket_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "BucketAccessRoleArn"))
     S3Config.struct_class = Types::S3Config
 
+    S3ManifestConfig.add_member(:manifest_object_path, Shapes::ShapeRef.new(shape: S3Subdirectory, required: true, location_name: "ManifestObjectPath"))
+    S3ManifestConfig.add_member(:bucket_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "BucketAccessRoleArn"))
+    S3ManifestConfig.add_member(:s3_bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, required: true, location_name: "S3BucketArn"))
+    S3ManifestConfig.add_member(:manifest_object_version_id, Shapes::ShapeRef.new(shape: S3ObjectVersionId, location_name: "ManifestObjectVersionId"))
+    S3ManifestConfig.struct_class = Types::S3ManifestConfig
+
     SmbMountOptions.add_member(:version, Shapes::ShapeRef.new(shape: SmbVersion, location_name: "Version"))
     SmbMountOptions.struct_class = Types::SmbMountOptions
+
+    SourceManifestConfig.add_member(:s3, Shapes::ShapeRef.new(shape: S3ManifestConfig, required: true, location_name: "S3"))
+    SourceManifestConfig.struct_class = Types::SourceManifestConfig
 
     SourceNetworkInterfaceArns.member = Shapes::ShapeRef.new(shape: NetworkInterfaceArn)
 
@@ -1136,8 +1159,9 @@ module Aws::DataSync
     StartTaskExecutionRequest.add_member(:override_options, Shapes::ShapeRef.new(shape: Options, location_name: "OverrideOptions"))
     StartTaskExecutionRequest.add_member(:includes, Shapes::ShapeRef.new(shape: FilterList, location_name: "Includes"))
     StartTaskExecutionRequest.add_member(:excludes, Shapes::ShapeRef.new(shape: FilterList, location_name: "Excludes"))
-    StartTaskExecutionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
+    StartTaskExecutionRequest.add_member(:manifest_config, Shapes::ShapeRef.new(shape: ManifestConfig, location_name: "ManifestConfig"))
     StartTaskExecutionRequest.add_member(:task_report_config, Shapes::ShapeRef.new(shape: TaskReportConfig, location_name: "TaskReportConfig"))
+    StartTaskExecutionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
     StartTaskExecutionRequest.struct_class = Types::StartTaskExecutionRequest
 
     StartTaskExecutionResponse.add_member(:task_execution_arn, Shapes::ShapeRef.new(shape: TaskExecutionArn, location_name: "TaskExecutionArn"))
@@ -1313,6 +1337,7 @@ module Aws::DataSync
     UpdateTaskRequest.add_member(:name, Shapes::ShapeRef.new(shape: TagValue, location_name: "Name"))
     UpdateTaskRequest.add_member(:cloud_watch_log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, location_name: "CloudWatchLogGroupArn"))
     UpdateTaskRequest.add_member(:includes, Shapes::ShapeRef.new(shape: FilterList, location_name: "Includes"))
+    UpdateTaskRequest.add_member(:manifest_config, Shapes::ShapeRef.new(shape: ManifestConfig, location_name: "ManifestConfig"))
     UpdateTaskRequest.add_member(:task_report_config, Shapes::ShapeRef.new(shape: TaskReportConfig, location_name: "TaskReportConfig"))
     UpdateTaskRequest.struct_class = Types::UpdateTaskRequest
 
