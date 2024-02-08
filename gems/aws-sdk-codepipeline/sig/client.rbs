@@ -204,7 +204,15 @@ module Aws
                                  },
                                ],
                                version: ::Integer?,
+                               execution_mode: ("QUEUED" | "SUPERSEDED" | "PARALLEL")?,
                                pipeline_type: ("V1" | "V2")?,
+                               variables: Array[
+                                 {
+                                   name: ::String,
+                                   default_value: ::String?,
+                                   description: ::String?
+                                 },
+                               ]?,
                                triggers: Array[
                                  {
                                    provider_type: ("CodeStarSourceConnection"),
@@ -215,17 +223,31 @@ module Aws
                                          tags: {
                                            includes: Array[::String]?,
                                            excludes: Array[::String]?
+                                         }?,
+                                         branches: {
+                                           includes: Array[::String]?,
+                                           excludes: Array[::String]?
+                                         }?,
+                                         file_paths: {
+                                           includes: Array[::String]?,
+                                           excludes: Array[::String]?
+                                         }?
+                                       },
+                                     ]?,
+                                     pull_request: Array[
+                                       {
+                                         events: Array[("OPEN" | "UPDATED" | "CLOSED")]?,
+                                         branches: {
+                                           includes: Array[::String]?,
+                                           excludes: Array[::String]?
+                                         }?,
+                                         file_paths: {
+                                           includes: Array[::String]?,
+                                           excludes: Array[::String]?
                                          }?
                                        },
                                      ]?
                                    }
-                                 },
-                               ]?,
-                               variables: Array[
-                                 {
-                                   name: ::String,
-                                   default_value: ::String?,
-                                   description: ::String?
                                  },
                                ]?
                              },
@@ -367,7 +389,11 @@ module Aws
       def list_action_executions: (
                                     pipeline_name: ::String,
                                     ?filter: {
-                                      pipeline_execution_id: ::String?
+                                      pipeline_execution_id: ::String?,
+                                      latest_in_pipeline_execution: {
+                                        pipeline_execution_id: ::String,
+                                        start_time_range: ("Latest" | "All")
+                                      }?
                                     },
                                     ?max_results: ::Integer,
                                     ?next_token: ::String
@@ -799,7 +825,15 @@ module Aws
                                  },
                                ],
                                version: ::Integer?,
+                               execution_mode: ("QUEUED" | "SUPERSEDED" | "PARALLEL")?,
                                pipeline_type: ("V1" | "V2")?,
+                               variables: Array[
+                                 {
+                                   name: ::String,
+                                   default_value: ::String?,
+                                   description: ::String?
+                                 },
+                               ]?,
                                triggers: Array[
                                  {
                                    provider_type: ("CodeStarSourceConnection"),
@@ -810,17 +844,31 @@ module Aws
                                          tags: {
                                            includes: Array[::String]?,
                                            excludes: Array[::String]?
+                                         }?,
+                                         branches: {
+                                           includes: Array[::String]?,
+                                           excludes: Array[::String]?
+                                         }?,
+                                         file_paths: {
+                                           includes: Array[::String]?,
+                                           excludes: Array[::String]?
+                                         }?
+                                       },
+                                     ]?,
+                                     pull_request: Array[
+                                       {
+                                         events: Array[("OPEN" | "UPDATED" | "CLOSED")]?,
+                                         branches: {
+                                           includes: Array[::String]?,
+                                           excludes: Array[::String]?
+                                         }?,
+                                         file_paths: {
+                                           includes: Array[::String]?,
+                                           excludes: Array[::String]?
                                          }?
                                        },
                                      ]?
                                    }
-                                 },
-                               ]?,
-                               variables: Array[
-                                 {
-                                   name: ::String,
-                                   default_value: ::String?,
-                                   description: ::String?
                                  },
                                ]?
                              }

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2024-02-08)
+------------------
+
+* Feature - Add ability to execute pipelines with new parallel & queued execution modes and add support for triggers with filtering on branches and file paths.
+
 1.68.0 (2024-01-26)
 ------------------
 

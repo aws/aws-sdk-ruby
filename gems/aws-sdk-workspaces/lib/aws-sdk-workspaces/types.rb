@@ -2158,6 +2158,10 @@ module Aws::WorkSpaces
     #   paginated, provide this token to receive the next set of results.
     #   @return [String]
     #
+    # @!attribute [rw] workspace_name
+    #   The name of the user-decoupled WorkSpace.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesRequest AWS API Documentation
     #
     class DescribeWorkspacesRequest < Struct.new(
@@ -2166,7 +2170,8 @@ module Aws::WorkSpaces
       :user_name,
       :bundle_id,
       :limit,
-      :next_token)
+      :next_token,
+      :workspace_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4179,46 +4184,6 @@ module Aws::WorkSpaces
     # @!attribute [rw] state
     #   The operational state of the WorkSpace.
     #
-    #   * `PENDING` – The WorkSpace is in a waiting state (for example, the
-    #     WorkSpace is being created).
-    #
-    #   * `AVAILABLE` – The WorkSpace is running and has passed the health
-    #     checks.
-    #
-    #   * `IMPAIRED` – Refer to `UNHEALTHY` state.
-    #
-    #   * `UNHEALTHY` – The WorkSpace is not responding to health checks.
-    #
-    #   * `REBOOTING` – The WorkSpace is being rebooted (restarted).
-    #
-    #   * `STARTING` – The WorkSpace is starting up and health checks are
-    #     being run.
-    #
-    #   * `REBUILDING` – The WorkSpace is being rebuilt.
-    #
-    #   * `RESTORING` – The WorkSpace is being restored.
-    #
-    #   * `MAINTENANCE` – The WorkSpace is undergoing scheduled maintenance
-    #     by Amazon Web Services.
-    #
-    #   * `ADMIN_MAINTENANCE` – The WorkSpace is undergoing maintenance by
-    #     the WorkSpaces administrator.
-    #
-    #   * `TERMINATING` – The WorkSpace is being deleted.
-    #
-    #   * `TERMINATED` – The WorkSpace has been deleted.
-    #
-    #   * `SUSPENDED` – The WorkSpace has been suspended for image creation.
-    #
-    #   * `UPDATING` – The WorkSpace is undergoing an update.
-    #
-    #   * `STOPPING` – The WorkSpace is being stopped.
-    #
-    #   * `STOPPED` – The WorkSpace has been stopped.
-    #
-    #   * `ERROR ` – The WorkSpace is an error state (for example, an error
-    #     occurred during startup).
-    #
     #   <note markdown="1"> After a WorkSpace is terminated, the `TERMINATED` state is returned
     #   only briefly before the WorkSpace directory metadata is cleaned up,
     #   so this state is rarely returned. To confirm that a WorkSpace is
@@ -4273,6 +4238,10 @@ module Aws::WorkSpaces
     #   Indicates whether the data stored on the root volume is encrypted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] workspace_name
+    #   The name of the user-decoupled WorkSpace.
+    #   @return [String]
+    #
     # @!attribute [rw] workspace_properties
     #   The properties of the WorkSpace.
     #   @return [Types::WorkspaceProperties]
@@ -4310,6 +4279,7 @@ module Aws::WorkSpaces
       :volume_encryption_key,
       :user_volume_encryption_enabled,
       :root_volume_encryption_enabled,
+      :workspace_name,
       :workspace_properties,
       :modification_states,
       :related_workspaces,
@@ -4882,6 +4852,9 @@ module Aws::WorkSpaces
     # @!attribute [rw] user_name
     #   The user name of the user for the WorkSpace. This user name must
     #   exist in the Directory Service directory for the WorkSpace.
+    #
+    #   The reserved keyword, `[UNDEFINED]`, is used when creating
+    #   user-decoupled WorkSpaces.
     #   @return [String]
     #
     # @!attribute [rw] bundle_id
@@ -4910,6 +4883,10 @@ module Aws::WorkSpaces
     #   The tags for the WorkSpace.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] workspace_name
+    #   The name of the user-decoupled WorkSpace.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceRequest AWS API Documentation
     #
     class WorkspaceRequest < Struct.new(
@@ -4920,7 +4897,8 @@ module Aws::WorkSpaces
       :user_volume_encryption_enabled,
       :root_volume_encryption_enabled,
       :workspace_properties,
-      :tags)
+      :tags,
+      :workspace_name)
       SENSITIVE = []
       include Aws::Structure
     end

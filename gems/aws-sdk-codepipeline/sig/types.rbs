@@ -95,6 +95,7 @@ module Aws::CodePipeline
       attr_accessor action_name: ::String
       attr_accessor start_time: ::Time
       attr_accessor last_update_time: ::Time
+      attr_accessor updated_by: ::String
       attr_accessor status: ("InProgress" | "Abandoned" | "Succeeded" | "Failed")
       attr_accessor input: Types::ActionExecutionInput
       attr_accessor output: Types::ActionExecutionOutput
@@ -103,6 +104,7 @@ module Aws::CodePipeline
 
     class ActionExecutionFilter
       attr_accessor pipeline_execution_id: ::String
+      attr_accessor latest_in_pipeline_execution: Types::LatestInPipelineExecutionFilter
       SENSITIVE: []
     end
 
@@ -128,6 +130,7 @@ module Aws::CodePipeline
       attr_accessor external_execution_id: ::String
       attr_accessor external_execution_summary: ::String
       attr_accessor external_execution_url: ::String
+      attr_accessor error_details: Types::ErrorDetails
       SENSITIVE: []
     end
 
@@ -296,6 +299,11 @@ module Aws::CodePipeline
     end
 
     class ConcurrentModificationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConcurrentPipelineExecutionsLimitExceededException
       attr_accessor message: ::String
       SENSITIVE: []
     end
@@ -500,14 +508,36 @@ module Aws::CodePipeline
       SENSITIVE: []
     end
 
+    class GitBranchFilterCriteria
+      attr_accessor includes: ::Array[::String]
+      attr_accessor excludes: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class GitConfiguration
       attr_accessor source_action_name: ::String
       attr_accessor push: ::Array[Types::GitPushFilter]
+      attr_accessor pull_request: ::Array[Types::GitPullRequestFilter]
+      SENSITIVE: []
+    end
+
+    class GitFilePathFilterCriteria
+      attr_accessor includes: ::Array[::String]
+      attr_accessor excludes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GitPullRequestFilter
+      attr_accessor events: ::Array[("OPEN" | "UPDATED" | "CLOSED")]
+      attr_accessor branches: Types::GitBranchFilterCriteria
+      attr_accessor file_paths: Types::GitFilePathFilterCriteria
       SENSITIVE: []
     end
 
     class GitPushFilter
       attr_accessor tags: Types::GitTagFilterCriteria
+      attr_accessor branches: Types::GitBranchFilterCriteria
+      attr_accessor file_paths: Types::GitFilePathFilterCriteria
       SENSITIVE: []
     end
 
@@ -606,6 +636,12 @@ module Aws::CodePipeline
 
     class LambdaExecutorConfiguration
       attr_accessor lambda_function_arn: ::String
+      SENSITIVE: []
+    end
+
+    class LatestInPipelineExecutionFilter
+      attr_accessor pipeline_execution_id: ::String
+      attr_accessor start_time_range: ("Latest" | "All")
       SENSITIVE: []
     end
 
@@ -729,9 +765,10 @@ module Aws::CodePipeline
       attr_accessor artifact_stores: ::Hash[::String, Types::ArtifactStore]
       attr_accessor stages: ::Array[Types::StageDeclaration]
       attr_accessor version: ::Integer
+      attr_accessor execution_mode: ("QUEUED" | "SUPERSEDED" | "PARALLEL")
       attr_accessor pipeline_type: ("V1" | "V2")
-      attr_accessor triggers: ::Array[Types::PipelineTriggerDeclaration]
       attr_accessor variables: ::Array[Types::PipelineVariableDeclaration]
+      attr_accessor triggers: ::Array[Types::PipelineTriggerDeclaration]
       SENSITIVE: []
     end
 
@@ -742,8 +779,9 @@ module Aws::CodePipeline
       attr_accessor status: ("Cancelled" | "InProgress" | "Stopped" | "Stopping" | "Succeeded" | "Superseded" | "Failed")
       attr_accessor status_summary: ::String
       attr_accessor artifact_revisions: ::Array[Types::ArtifactRevision]
-      attr_accessor trigger: Types::ExecutionTrigger
       attr_accessor variables: ::Array[Types::ResolvedPipelineVariable]
+      attr_accessor trigger: Types::ExecutionTrigger
+      attr_accessor execution_mode: ("QUEUED" | "SUPERSEDED" | "PARALLEL")
       SENSITIVE: []
     end
 
@@ -763,6 +801,7 @@ module Aws::CodePipeline
       attr_accessor source_revisions: ::Array[Types::SourceRevision]
       attr_accessor trigger: Types::ExecutionTrigger
       attr_accessor stop_trigger: Types::StopExecutionTrigger
+      attr_accessor execution_mode: ("QUEUED" | "SUPERSEDED" | "PARALLEL")
       SENSITIVE: []
     end
 
@@ -784,6 +823,7 @@ module Aws::CodePipeline
       attr_accessor name: ::String
       attr_accessor version: ::Integer
       attr_accessor pipeline_type: ("V1" | "V2")
+      attr_accessor execution_mode: ("QUEUED" | "SUPERSEDED" | "PARALLEL")
       attr_accessor created: ::Time
       attr_accessor updated: ::Time
       SENSITIVE: []
@@ -993,6 +1033,7 @@ module Aws::CodePipeline
     class StageState
       attr_accessor stage_name: ::String
       attr_accessor inbound_execution: Types::StageExecution
+      attr_accessor inbound_executions: ::Array[Types::StageExecution]
       attr_accessor inbound_transition_state: Types::TransitionState
       attr_accessor action_states: ::Array[Types::ActionState]
       attr_accessor latest_execution: Types::StageExecution

@@ -2489,6 +2489,10 @@ module Aws::QuickSight
     #   visual.
     #   @return [Array<Types::ContributionAnalysisDefault>]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BarChartConfiguration AWS API Documentation
     #
     class BarChartConfiguration < Struct.new(
@@ -2507,7 +2511,8 @@ module Aws::QuickSight
       :data_labels,
       :tooltip,
       :reference_lines,
-      :contribution_analysis_defaults)
+      :contribution_analysis_defaults,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2831,6 +2836,10 @@ module Aws::QuickSight
     #   The palette (chart color) display setup of the visual.
     #   @return [Types::VisualPalette]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BoxPlotChartConfiguration AWS API Documentation
     #
     class BoxPlotChartConfiguration < Struct.new(
@@ -2844,7 +2853,8 @@ module Aws::QuickSight
       :legend,
       :tooltip,
       :reference_lines,
-      :visual_palette)
+      :visual_palette,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3812,6 +3822,10 @@ module Aws::QuickSight
     #   The palette (chart color) display setup of the visual.
     #   @return [Types::VisualPalette]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ComboChartConfiguration AWS API Documentation
     #
     class ComboChartConfiguration < Struct.new(
@@ -3831,7 +3845,8 @@ module Aws::QuickSight
       :line_data_labels,
       :tooltip,
       :reference_lines,
-      :visual_palette)
+      :visual_palette,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4265,6 +4280,22 @@ module Aws::QuickSight
     class ConflictException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The context menu options for a visual's interactions.
+    #
+    # @!attribute [rw] availability_status
+    #   The availability status of the context menu options. If the value of
+    #   this property is set to `ENABLED`, dashboard readers can interact
+    #   with the context menu.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ContextMenuOption AWS API Documentation
+    #
+    class ContextMenuOption < Struct.new(
+      :availability_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6434,12 +6465,17 @@ module Aws::QuickSight
     #   `'IMAGE'`.
     #   @return [String]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CustomContentConfiguration AWS API Documentation
     #
     class CustomContentConfiguration < Struct.new(
       :content_url,
       :content_type,
-      :image_scaling)
+      :image_scaling,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13433,6 +13469,10 @@ module Aws::QuickSight
     #   The map style options of the filled map visual.
     #   @return [Types::GeospatialMapStyleOptions]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilledMapConfiguration AWS API Documentation
     #
     class FilledMapConfiguration < Struct.new(
@@ -13441,7 +13481,8 @@ module Aws::QuickSight
       :legend,
       :tooltip,
       :window_options,
-      :map_style_options)
+      :map_style_options,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14787,6 +14828,10 @@ module Aws::QuickSight
     #   The visual palette configuration of a `FunnelChartVisual`.
     #   @return [Types::VisualPalette]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FunnelChartConfiguration AWS API Documentation
     #
     class FunnelChartConfiguration < Struct.new(
@@ -14796,7 +14841,8 @@ module Aws::QuickSight
       :value_label_options,
       :tooltip,
       :data_label_options,
-      :visual_palette)
+      :visual_palette,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15007,6 +15053,10 @@ module Aws::QuickSight
     #   The visual palette configuration of a `GaugeChartVisual`.
     #   @return [Types::VisualPalette]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GaugeChartConfiguration AWS API Documentation
     #
     class GaugeChartConfiguration < Struct.new(
@@ -15014,7 +15064,8 @@ module Aws::QuickSight
       :gauge_chart_options,
       :data_labels,
       :tooltip_options,
-      :visual_palette)
+      :visual_palette,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15461,6 +15512,10 @@ module Aws::QuickSight
     #   The visual display options for the visual palette.
     #   @return [Types::VisualPalette]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GeospatialMapConfiguration AWS API Documentation
     #
     class GeospatialMapConfiguration < Struct.new(
@@ -15470,7 +15525,8 @@ module Aws::QuickSight
       :window_options,
       :map_style_options,
       :point_style_options,
-      :visual_palette)
+      :visual_palette,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16176,6 +16232,10 @@ module Aws::QuickSight
     #   The tooltip display setup of the visual.
     #   @return [Types::TooltipOptions]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/HeatMapConfiguration AWS API Documentation
     #
     class HeatMapConfiguration < Struct.new(
@@ -16186,7 +16246,8 @@ module Aws::QuickSight
       :color_scale,
       :legend,
       :data_labels,
-      :tooltip)
+      :tooltip,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16365,6 +16426,10 @@ module Aws::QuickSight
     #   The visual palette configuration of a histogram.
     #   @return [Types::VisualPalette]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/HistogramConfiguration AWS API Documentation
     #
     class HistogramConfiguration < Struct.new(
@@ -16375,7 +16440,8 @@ module Aws::QuickSight
       :bin_options,
       :data_labels,
       :tooltip,
-      :visual_palette)
+      :visual_palette,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16644,11 +16710,16 @@ module Aws::QuickSight
     #   The custom narrative of the insight visual.
     #   @return [Types::CustomNarrativeOptions]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/InsightConfiguration AWS API Documentation
     #
     class InsightConfiguration < Struct.new(
       :computations,
-      :custom_narrative)
+      :custom_narrative,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17114,12 +17185,17 @@ module Aws::QuickSight
     #   The options that determine the presentation of a KPI visual.
     #   @return [Types::KPIOptions]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/KPIConfiguration AWS API Documentation
     #
     class KPIConfiguration < Struct.new(
       :field_wells,
       :sort_configuration,
-      :kpi_options)
+      :kpi_options,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17632,6 +17708,10 @@ module Aws::QuickSight
     #   The visual palette configuration of a line chart.
     #   @return [Types::VisualPalette]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/LineChartConfiguration AWS API Documentation
     #
     class LineChartConfiguration < Struct.new(
@@ -17654,7 +17734,8 @@ module Aws::QuickSight
       :reference_lines,
       :tooltip,
       :contribution_analysis_defaults,
-      :visual_palette)
+      :visual_palette,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21457,6 +21538,10 @@ module Aws::QuickSight
     #   visual.
     #   @return [Array<Types::ContributionAnalysisDefault>]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PieChartConfiguration AWS API Documentation
     #
     class PieChartConfiguration < Struct.new(
@@ -21470,7 +21555,8 @@ module Aws::QuickSight
       :data_labels,
       :tooltip,
       :visual_palette,
-      :contribution_analysis_defaults)
+      :contribution_analysis_defaults,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21729,6 +21815,10 @@ module Aws::QuickSight
     #   The paginated report options for a pivot table visual.
     #   @return [Types::PivotTablePaginatedReportOptions]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PivotTableConfiguration AWS API Documentation
     #
     class PivotTableConfiguration < Struct.new(
@@ -21737,7 +21827,8 @@ module Aws::QuickSight
       :table_options,
       :total_options,
       :field_options,
-      :paginated_report_options)
+      :paginated_report_options,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22485,6 +22576,10 @@ module Aws::QuickSight
     #   The axis behavior options of a radar chart.
     #   @return [String]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RadarChartConfiguration AWS API Documentation
     #
     class RadarChartConfiguration < Struct.new(
@@ -22502,7 +22597,8 @@ module Aws::QuickSight
       :color_axis,
       :color_label_options,
       :legend,
-      :axes_range_scale)
+      :axes_range_scale,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24147,12 +24243,17 @@ module Aws::QuickSight
     #   The data label configuration of a sankey diagram.
     #   @return [Types::DataLabelOptions]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SankeyDiagramChartConfiguration AWS API Documentation
     #
     class SankeyDiagramChartConfiguration < Struct.new(
       :field_wells,
       :sort_configuration,
-      :data_labels)
+      :data_labels,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24325,6 +24426,10 @@ module Aws::QuickSight
     #   The palette (chart color) display setup of the visual.
     #   @return [Types::VisualPalette]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ScatterPlotConfiguration AWS API Documentation
     #
     class ScatterPlotConfiguration < Struct.new(
@@ -24337,7 +24442,8 @@ module Aws::QuickSight
       :legend,
       :data_labels,
       :tooltip,
-      :visual_palette)
+      :visual_palette,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26854,6 +26960,10 @@ module Aws::QuickSight
     #   A collection of inline visualizations to display within a chart.
     #   @return [Array<Types::TableInlineVisualization>]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TableConfiguration AWS API Documentation
     #
     class TableConfiguration < Struct.new(
@@ -26863,7 +26973,8 @@ module Aws::QuickSight
       :total_options,
       :field_options,
       :paginated_report_options,
-      :table_inline_visualizations)
+      :table_inline_visualizations,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29468,6 +29579,10 @@ module Aws::QuickSight
     #   The tooltip display setup of the visual.
     #   @return [Types::TooltipOptions]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TreeMapConfiguration AWS API Documentation
     #
     class TreeMapConfiguration < Struct.new(
@@ -29479,7 +29594,8 @@ module Aws::QuickSight
       :color_scale,
       :legend,
       :data_labels,
-      :tooltip)
+      :tooltip,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30820,11 +30936,13 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] grant_permissions
-    #   The permissions that you want to grant on a resource.
+    #   The permissions that you want to grant on a resource. Namespace ARNs
+    #   are not supported `Principal` values for folder permissions.
     #   @return [Array<Types::ResourcePermission>]
     #
     # @!attribute [rw] revoke_permissions
-    #   The permissions that you want to revoke from a resource.
+    #   The permissions that you want to revoke from a resource. Namespace
+    #   ARNs are not supported `Principal` values for folder permissions.
     #   @return [Array<Types::ResourcePermission>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateFolderPermissionsRequest AWS API Documentation
@@ -32788,6 +32906,25 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The general visual interactions setup for visual publish options
+    #
+    # @!attribute [rw] visual_menu_option
+    #   The on-visual menu options for a visual.
+    #   @return [Types::VisualMenuOption]
+    #
+    # @!attribute [rw] context_menu_option
+    #   The context menu options for a visual.
+    #   @return [Types::ContextMenuOption]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/VisualInteractionOptions AWS API Documentation
+    #
+    class VisualInteractionOptions < Struct.new(
+      :visual_menu_option,
+      :context_menu_option)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The menu options for a visual.
     #
     # @!attribute [rw] availability_status
@@ -32899,6 +33036,21 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The color configuration of a waterfall visual.
+    #
+    # @!attribute [rw] group_color_configuration
+    #   The color configuration for individual groups within a waterfall
+    #   visual.
+    #   @return [Types::WaterfallChartGroupColorConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/WaterfallChartColorConfiguration AWS API Documentation
+    #
+    class WaterfallChartColorConfiguration < Struct.new(
+      :group_color_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for a waterfall visual.
     #
     # @!attribute [rw] field_wells
@@ -32942,6 +33094,14 @@ module Aws::QuickSight
     #   The visual palette configuration of a waterfall visual.
     #   @return [Types::VisualPalette]
     #
+    # @!attribute [rw] color_configuration
+    #   The color configuration of a waterfall visual.
+    #   @return [Types::WaterfallChartColorConfiguration]
+    #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/WaterfallChartConfiguration AWS API Documentation
     #
     class WaterfallChartConfiguration < Struct.new(
@@ -32954,7 +33114,9 @@ module Aws::QuickSight
       :primary_y_axis_display_options,
       :legend,
       :data_labels,
-      :visual_palette)
+      :visual_palette,
+      :color_configuration,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -32969,6 +33131,31 @@ module Aws::QuickSight
     #
     class WaterfallChartFieldWells < Struct.new(
       :waterfall_chart_aggregated_field_wells)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The color configuration for individual groups within a waterfall
+    # visual.
+    #
+    # @!attribute [rw] positive_bar_color
+    #   Defines the color for the positive bars of a waterfall chart.
+    #   @return [String]
+    #
+    # @!attribute [rw] negative_bar_color
+    #   Defines the color for the negative bars of a waterfall chart.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_bar_color
+    #   Defines the color for the total bars of a waterfall chart.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/WaterfallChartGroupColorConfiguration AWS API Documentation
+    #
+    class WaterfallChartGroupColorConfiguration < Struct.new(
+      :positive_bar_color,
+      :negative_bar_color,
+      :total_bar_color)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33140,13 +33327,18 @@ module Aws::QuickSight
     #   The options for a word cloud visual.
     #   @return [Types::WordCloudOptions]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/WordCloudChartConfiguration AWS API Documentation
     #
     class WordCloudChartConfiguration < Struct.new(
       :field_wells,
       :sort_configuration,
       :category_label_options,
-      :word_cloud_options)
+      :word_cloud_options,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end

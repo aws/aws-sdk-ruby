@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2024-02-08)
+------------------
+
+* Feature - General Interactions for Visuals; Waterfall Chart Color Configuration; Documentation Update
+
 1.103.0 (2024-01-26)
 ------------------
 

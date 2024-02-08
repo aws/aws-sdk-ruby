@@ -635,6 +635,7 @@ module Aws::QuickSight
       attr_accessor tooltip: Types::TooltipOptions
       attr_accessor reference_lines: ::Array[Types::ReferenceLine]
       attr_accessor contribution_analysis_defaults: ::Array[Types::ContributionAnalysisDefault]
+      attr_accessor interactions: Types::VisualInteractionOptions
       SENSITIVE: []
     end
 
@@ -721,6 +722,7 @@ module Aws::QuickSight
       attr_accessor tooltip: Types::TooltipOptions
       attr_accessor reference_lines: ::Array[Types::ReferenceLine]
       attr_accessor visual_palette: Types::VisualPalette
+      attr_accessor interactions: Types::VisualInteractionOptions
       SENSITIVE: []
     end
 
@@ -989,6 +991,7 @@ module Aws::QuickSight
       attr_accessor tooltip: Types::TooltipOptions
       attr_accessor reference_lines: ::Array[Types::ReferenceLine]
       attr_accessor visual_palette: Types::VisualPalette
+      attr_accessor interactions: Types::VisualInteractionOptions
       SENSITIVE: []
     end
 
@@ -1106,6 +1109,11 @@ module Aws::QuickSight
     class ConflictException
       attr_accessor message: ::String
       attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class ContextMenuOption
+      attr_accessor availability_status: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -1606,6 +1614,7 @@ module Aws::QuickSight
       attr_accessor content_url: ::String
       attr_accessor content_type: ("IMAGE" | "OTHER_EMBEDDED_CONTENT")
       attr_accessor image_scaling: ("FIT_TO_HEIGHT" | "FIT_TO_WIDTH" | "DO_NOT_SCALE" | "SCALE_TO_VISUAL")
+      attr_accessor interactions: Types::VisualInteractionOptions
       SENSITIVE: []
     end
 
@@ -3442,6 +3451,7 @@ module Aws::QuickSight
       attr_accessor tooltip: Types::TooltipOptions
       attr_accessor window_options: Types::GeospatialWindowOptions
       attr_accessor map_style_options: Types::GeospatialMapStyleOptions
+      attr_accessor interactions: Types::VisualInteractionOptions
       SENSITIVE: []
     end
 
@@ -3764,6 +3774,7 @@ module Aws::QuickSight
       attr_accessor tooltip: Types::TooltipOptions
       attr_accessor data_label_options: Types::FunnelChartDataLabelOptions
       attr_accessor visual_palette: Types::VisualPalette
+      attr_accessor interactions: Types::VisualInteractionOptions
       SENSITIVE: []
     end
 
@@ -3821,6 +3832,7 @@ module Aws::QuickSight
       attr_accessor data_labels: Types::DataLabelOptions
       attr_accessor tooltip_options: Types::TooltipOptions
       attr_accessor visual_palette: Types::VisualPalette
+      attr_accessor interactions: Types::VisualInteractionOptions
       SENSITIVE: []
     end
 
@@ -3935,6 +3947,7 @@ module Aws::QuickSight
       attr_accessor map_style_options: Types::GeospatialMapStyleOptions
       attr_accessor point_style_options: Types::GeospatialPointStyleOptions
       attr_accessor visual_palette: Types::VisualPalette
+      attr_accessor interactions: Types::VisualInteractionOptions
       SENSITIVE: []
     end
 
@@ -4110,6 +4123,7 @@ module Aws::QuickSight
       attr_accessor legend: Types::LegendOptions
       attr_accessor data_labels: Types::DataLabelOptions
       attr_accessor tooltip: Types::TooltipOptions
+      attr_accessor interactions: Types::VisualInteractionOptions
       SENSITIVE: []
     end
 
@@ -4158,6 +4172,7 @@ module Aws::QuickSight
       attr_accessor data_labels: Types::DataLabelOptions
       attr_accessor tooltip: Types::TooltipOptions
       attr_accessor visual_palette: Types::VisualPalette
+      attr_accessor interactions: Types::VisualInteractionOptions
       SENSITIVE: []
     end
 
@@ -4232,6 +4247,7 @@ module Aws::QuickSight
     class InsightConfiguration
       attr_accessor computations: ::Array[Types::Computation]
       attr_accessor custom_narrative: Types::CustomNarrativeOptions
+      attr_accessor interactions: Types::VisualInteractionOptions
       SENSITIVE: []
     end
 
@@ -4364,6 +4380,7 @@ module Aws::QuickSight
       attr_accessor field_wells: Types::KPIFieldWells
       attr_accessor sort_configuration: Types::KPISortConfiguration
       attr_accessor kpi_options: Types::KPIOptions
+      attr_accessor interactions: Types::VisualInteractionOptions
       SENSITIVE: []
     end
 
@@ -4496,6 +4513,7 @@ module Aws::QuickSight
       attr_accessor tooltip: Types::TooltipOptions
       attr_accessor contribution_analysis_defaults: ::Array[Types::ContributionAnalysisDefault]
       attr_accessor visual_palette: Types::VisualPalette
+      attr_accessor interactions: Types::VisualInteractionOptions
       SENSITIVE: []
     end
 
@@ -5521,6 +5539,7 @@ module Aws::QuickSight
       attr_accessor tooltip: Types::TooltipOptions
       attr_accessor visual_palette: Types::VisualPalette
       attr_accessor contribution_analysis_defaults: ::Array[Types::ContributionAnalysisDefault]
+      attr_accessor interactions: Types::VisualInteractionOptions
       SENSITIVE: []
     end
 
@@ -5590,6 +5609,7 @@ module Aws::QuickSight
       attr_accessor total_options: Types::PivotTableTotalOptions
       attr_accessor field_options: Types::PivotTableFieldOptions
       attr_accessor paginated_report_options: Types::PivotTablePaginatedReportOptions
+      attr_accessor interactions: Types::VisualInteractionOptions
       SENSITIVE: []
     end
 
@@ -5796,6 +5816,7 @@ module Aws::QuickSight
       attr_accessor color_label_options: Types::ChartAxisLabelOptions
       attr_accessor legend: Types::LegendOptions
       attr_accessor axes_range_scale: ("AUTO" | "INDEPENDENT" | "SHARED")
+      attr_accessor interactions: Types::VisualInteractionOptions
       SENSITIVE: []
     end
 
@@ -6163,6 +6184,7 @@ module Aws::QuickSight
       attr_accessor field_wells: Types::SankeyDiagramFieldWells
       attr_accessor sort_configuration: Types::SankeyDiagramSortConfiguration
       attr_accessor data_labels: Types::DataLabelOptions
+      attr_accessor interactions: Types::VisualInteractionOptions
       SENSITIVE: []
     end
 
@@ -6207,6 +6229,7 @@ module Aws::QuickSight
       attr_accessor data_labels: Types::DataLabelOptions
       attr_accessor tooltip: Types::TooltipOptions
       attr_accessor visual_palette: Types::VisualPalette
+      attr_accessor interactions: Types::VisualInteractionOptions
       SENSITIVE: []
     end
 
@@ -6876,6 +6899,7 @@ module Aws::QuickSight
       attr_accessor field_options: Types::TableFieldOptions
       attr_accessor paginated_report_options: Types::TablePaginatedReportOptions
       attr_accessor table_inline_visualizations: ::Array[Types::TableInlineVisualization]
+      attr_accessor interactions: Types::VisualInteractionOptions
       SENSITIVE: []
     end
 
@@ -7538,6 +7562,7 @@ module Aws::QuickSight
       attr_accessor legend: Types::LegendOptions
       attr_accessor data_labels: Types::DataLabelOptions
       attr_accessor tooltip: Types::TooltipOptions
+      attr_accessor interactions: Types::VisualInteractionOptions
       SENSITIVE: []
     end
 
@@ -8319,6 +8344,12 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class VisualInteractionOptions
+      attr_accessor visual_menu_option: Types::VisualMenuOption
+      attr_accessor context_menu_option: Types::ContextMenuOption
+      SENSITIVE: []
+    end
+
     class VisualMenuOption
       attr_accessor availability_status: ("ENABLED" | "DISABLED")
       SENSITIVE: []
@@ -8354,6 +8385,11 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class WaterfallChartColorConfiguration
+      attr_accessor group_color_configuration: Types::WaterfallChartGroupColorConfiguration
+      SENSITIVE: []
+    end
+
     class WaterfallChartConfiguration
       attr_accessor field_wells: Types::WaterfallChartFieldWells
       attr_accessor sort_configuration: Types::WaterfallChartSortConfiguration
@@ -8365,11 +8401,20 @@ module Aws::QuickSight
       attr_accessor legend: Types::LegendOptions
       attr_accessor data_labels: Types::DataLabelOptions
       attr_accessor visual_palette: Types::VisualPalette
+      attr_accessor color_configuration: Types::WaterfallChartColorConfiguration
+      attr_accessor interactions: Types::VisualInteractionOptions
       SENSITIVE: []
     end
 
     class WaterfallChartFieldWells
       attr_accessor waterfall_chart_aggregated_field_wells: Types::WaterfallChartAggregatedFieldWells
+      SENSITIVE: []
+    end
+
+    class WaterfallChartGroupColorConfiguration
+      attr_accessor positive_bar_color: ::String
+      attr_accessor negative_bar_color: ::String
+      attr_accessor total_bar_color: ::String
       SENSITIVE: []
     end
 
@@ -8418,6 +8463,7 @@ module Aws::QuickSight
       attr_accessor sort_configuration: Types::WordCloudSortConfiguration
       attr_accessor category_label_options: Types::ChartAxisLabelOptions
       attr_accessor word_cloud_options: Types::WordCloudOptions
+      attr_accessor interactions: Types::VisualInteractionOptions
       SENSITIVE: []
     end
 

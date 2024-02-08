@@ -1132,6 +1132,7 @@ module Aws::WorkSpaces
     #             value: "TagValue",
     #           },
     #         ],
+    #         workspace_name: "WorkspaceName",
     #       },
     #     ],
     #   })
@@ -1156,6 +1157,7 @@ module Aws::WorkSpaces
     #   resp.failed_requests[0].workspace_request.tags #=> Array
     #   resp.failed_requests[0].workspace_request.tags[0].key #=> String
     #   resp.failed_requests[0].workspace_request.tags[0].value #=> String
+    #   resp.failed_requests[0].workspace_request.workspace_name #=> String
     #   resp.failed_requests[0].error_code #=> String
     #   resp.failed_requests[0].error_message #=> String
     #   resp.pending_requests #=> Array
@@ -1172,6 +1174,7 @@ module Aws::WorkSpaces
     #   resp.pending_requests[0].volume_encryption_key #=> String
     #   resp.pending_requests[0].user_volume_encryption_enabled #=> Boolean
     #   resp.pending_requests[0].root_volume_encryption_enabled #=> Boolean
+    #   resp.pending_requests[0].workspace_name #=> String
     #   resp.pending_requests[0].workspace_properties.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON", "MANUAL"
     #   resp.pending_requests[0].workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
     #   resp.pending_requests[0].workspace_properties.root_volume_size_gib #=> Integer
@@ -2463,6 +2466,9 @@ module Aws::WorkSpaces
     #   If you received a `NextToken` from a previous call that was paginated,
     #   provide this token to receive the next set of results.
     #
+    # @option params [String] :workspace_name
+    #   The name of the user-decoupled WorkSpace.
+    #
     # @return [Types::DescribeWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeWorkspacesResult#workspaces #workspaces} => Array&lt;Types::Workspace&gt;
@@ -2479,6 +2485,7 @@ module Aws::WorkSpaces
     #     bundle_id: "BundleId",
     #     limit: 1,
     #     next_token: "PaginationToken",
+    #     workspace_name: "WorkspaceName",
     #   })
     #
     # @example Response structure
@@ -2497,6 +2504,7 @@ module Aws::WorkSpaces
     #   resp.workspaces[0].volume_encryption_key #=> String
     #   resp.workspaces[0].user_volume_encryption_enabled #=> Boolean
     #   resp.workspaces[0].root_volume_encryption_enabled #=> Boolean
+    #   resp.workspaces[0].workspace_name #=> String
     #   resp.workspaces[0].workspace_properties.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON", "MANUAL"
     #   resp.workspaces[0].workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
     #   resp.workspaces[0].workspace_properties.root_volume_size_gib #=> Integer
@@ -3376,10 +3384,8 @@ module Aws::WorkSpaces
 
     # Reboots the specified WorkSpaces.
     #
-    # You cannot reboot a WorkSpace unless its state is `AVAILABLE`,
-    # `UNHEALTHY`, or `REBOOTING`. Reboot a WorkSpace in the `REBOOTING`
-    # state only if your WorkSpace has been stuck in the `REBOOTING` state
-    # for over 20 minutes.
+    # You cannot reboot a WorkSpace unless its state is `AVAILABLE` or
+    # `UNHEALTHY`.
     #
     # This operation is asynchronous and returns before the WorkSpaces have
     # rebooted.
@@ -3989,7 +3995,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.98.0'
+      context[:gem_version] = '1.99.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

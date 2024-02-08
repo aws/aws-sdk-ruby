@@ -22,6 +22,9 @@ module Aws
       class ConcurrentModificationException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class ConcurrentPipelineExecutionsLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class ConflictException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

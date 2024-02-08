@@ -651,6 +651,7 @@ module Aws::WorkSpaces
       attr_accessor bundle_id: ::String
       attr_accessor limit: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor workspace_name: ::String
       SENSITIVE: []
     end
 
@@ -1250,6 +1251,7 @@ module Aws::WorkSpaces
       attr_accessor volume_encryption_key: ::String
       attr_accessor user_volume_encryption_enabled: bool
       attr_accessor root_volume_encryption_enabled: bool
+      attr_accessor workspace_name: ::String
       attr_accessor workspace_properties: Types::WorkspaceProperties
       attr_accessor modification_states: ::Array[Types::ModificationState]
       attr_accessor related_workspaces: ::Array[Types::RelatedWorkspaceProperties]
@@ -1362,6 +1364,7 @@ module Aws::WorkSpaces
       attr_accessor root_volume_encryption_enabled: bool
       attr_accessor workspace_properties: Types::WorkspaceProperties
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor workspace_name: ::String
       SENSITIVE: []
     end
 

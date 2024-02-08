@@ -329,7 +329,8 @@ module Aws
                                        key: ::String,
                                        value: ::String?
                                      },
-                                   ]?
+                                   ]?,
+                                   workspace_name: ::String?
                                  },
                                ]
                              ) -> _CreateWorkspacesResponseSuccess
@@ -672,7 +673,8 @@ module Aws
                                  ?user_name: ::String,
                                  ?bundle_id: ::String,
                                  ?limit: ::Integer,
-                                 ?next_token: ::String
+                                 ?next_token: ::String,
+                                 ?workspace_name: ::String
                                ) -> _DescribeWorkspacesResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWorkspacesResponseSuccess
 
