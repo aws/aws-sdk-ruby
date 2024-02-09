@@ -52,6 +52,6 @@ require_relative 'aws-sdk-costoptimizationhub/customizations'
 # @!group service
 module Aws::CostOptimizationHub
 
-  GEM_VERSION = '1.2.0'
+  GEM_VERSION = '1.3.0'
 
 end

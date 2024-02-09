@@ -171,6 +171,7 @@ module Aws::Batch
     Quantity = Shapes::StringShape.new(name: 'Quantity')
     RegisterJobDefinitionRequest = Shapes::StructureShape.new(name: 'RegisterJobDefinitionRequest')
     RegisterJobDefinitionResponse = Shapes::StructureShape.new(name: 'RegisterJobDefinitionResponse')
+    RepositoryCredentials = Shapes::StructureShape.new(name: 'RepositoryCredentials')
     ResourceRequirement = Shapes::StructureShape.new(name: 'ResourceRequirement')
     ResourceRequirements = Shapes::ListShape.new(name: 'ResourceRequirements')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
@@ -346,6 +347,7 @@ module Aws::Batch
     ContainerDetail.add_member(:fargate_platform_configuration, Shapes::ShapeRef.new(shape: FargatePlatformConfiguration, location_name: "fargatePlatformConfiguration"))
     ContainerDetail.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "ephemeralStorage"))
     ContainerDetail.add_member(:runtime_platform, Shapes::ShapeRef.new(shape: RuntimePlatform, location_name: "runtimePlatform"))
+    ContainerDetail.add_member(:repository_credentials, Shapes::ShapeRef.new(shape: RepositoryCredentials, location_name: "repositoryCredentials"))
     ContainerDetail.struct_class = Types::ContainerDetail
 
     ContainerOverrides.add_member(:vcpus, Shapes::ShapeRef.new(shape: Integer, deprecated: true, location_name: "vcpus", metadata: {"deprecatedMessage"=>"This field is deprecated, use resourceRequirements instead."}))
@@ -378,6 +380,7 @@ module Aws::Batch
     ContainerProperties.add_member(:fargate_platform_configuration, Shapes::ShapeRef.new(shape: FargatePlatformConfiguration, location_name: "fargatePlatformConfiguration"))
     ContainerProperties.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "ephemeralStorage"))
     ContainerProperties.add_member(:runtime_platform, Shapes::ShapeRef.new(shape: RuntimePlatform, location_name: "runtimePlatform"))
+    ContainerProperties.add_member(:repository_credentials, Shapes::ShapeRef.new(shape: RepositoryCredentials, location_name: "repositoryCredentials"))
     ContainerProperties.struct_class = Types::ContainerProperties
 
     ContainerSummary.add_member(:exit_code, Shapes::ShapeRef.new(shape: Integer, location_name: "exitCode"))
@@ -892,6 +895,9 @@ module Aws::Batch
     RegisterJobDefinitionResponse.add_member(:job_definition_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobDefinitionArn"))
     RegisterJobDefinitionResponse.add_member(:revision, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "revision"))
     RegisterJobDefinitionResponse.struct_class = Types::RegisterJobDefinitionResponse
+
+    RepositoryCredentials.add_member(:credentials_parameter, Shapes::ShapeRef.new(shape: String, required: true, location_name: "credentialsParameter"))
+    RepositoryCredentials.struct_class = Types::RepositoryCredentials
 
     ResourceRequirement.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
     ResourceRequirement.add_member(:type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "type"))

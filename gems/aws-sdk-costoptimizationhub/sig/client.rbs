@@ -117,6 +117,7 @@ module Aws
 
       interface _ListEnrollmentStatusesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListEnrollmentStatusesResponse]
+        def include_member_accounts: () -> bool
         def items: () -> ::Array[Types::AccountEnrollmentStatus]
         def next_token: () -> ::String
       end

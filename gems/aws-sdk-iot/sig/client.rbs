@@ -401,6 +401,9 @@ module Aws
                                          ],
                                          ?tls_config: {
                                            security_policy: ::String?
+                                         },
+                                         ?server_certificate_config: {
+                                           enable_ocsp_check: bool?
                                          }
                                        ) -> _CreateDomainConfigurationResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainConfigurationResponseSuccess
@@ -2064,6 +2067,7 @@ module Aws
         def domain_type: () -> ("ENDPOINT" | "AWS_MANAGED" | "CUSTOMER_MANAGED")
         def last_status_change_date: () -> ::Time
         def tls_config: () -> Types::TlsConfig
+        def server_certificate_config: () -> Types::ServerCertificateConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT/Client.html#describe_domain_configuration-instance_method
       def describe_domain_configuration: (
@@ -4423,6 +4427,9 @@ module Aws
                                          ?remove_authorizer_config: bool,
                                          ?tls_config: {
                                            security_policy: ::String?
+                                         },
+                                         ?server_certificate_config: {
+                                           enable_ocsp_check: bool?
                                          }
                                        ) -> _UpdateDomainConfigurationResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainConfigurationResponseSuccess

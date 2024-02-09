@@ -29,6 +29,9 @@ module Aws
       class NotFoundException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class ThrottlingException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
     end
   end
 end

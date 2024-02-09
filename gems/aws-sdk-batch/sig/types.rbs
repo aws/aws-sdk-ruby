@@ -154,6 +154,7 @@ module Aws::Batch
       attr_accessor fargate_platform_configuration: Types::FargatePlatformConfiguration
       attr_accessor ephemeral_storage: Types::EphemeralStorage
       attr_accessor runtime_platform: Types::RuntimePlatform
+      attr_accessor repository_credentials: Types::RepositoryCredentials
       SENSITIVE: []
     end
 
@@ -190,6 +191,7 @@ module Aws::Batch
       attr_accessor fargate_platform_configuration: Types::FargatePlatformConfiguration
       attr_accessor ephemeral_storage: Types::EphemeralStorage
       attr_accessor runtime_platform: Types::RuntimePlatform
+      attr_accessor repository_credentials: Types::RepositoryCredentials
       SENSITIVE: []
     end
 
@@ -802,6 +804,11 @@ module Aws::Batch
       attr_accessor job_definition_name: ::String
       attr_accessor job_definition_arn: ::String
       attr_accessor revision: ::Integer
+      SENSITIVE: []
+    end
+
+    class RepositoryCredentials
+      attr_accessor credentials_parameter: ::String
       SENSITIVE: []
     end
 

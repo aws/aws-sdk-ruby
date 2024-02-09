@@ -253,6 +253,7 @@ module Aws::CostOptimizationHub
     end
 
     class ListEnrollmentStatusesResponse
+      attr_accessor include_member_accounts: bool
       attr_accessor items: ::Array[Types::AccountEnrollmentStatus]
       attr_accessor next_token: ::String
       SENSITIVE: []

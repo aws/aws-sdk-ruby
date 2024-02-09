@@ -528,6 +528,7 @@ module Aws::Braket
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: DeviceOfflineException)
         o.errors << Shapes::ShapeRef.new(shape: DeviceRetiredException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)

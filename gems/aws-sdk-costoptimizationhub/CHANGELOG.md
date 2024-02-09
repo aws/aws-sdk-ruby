@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2024-02-09)
+------------------
+
+* Feature - Adding includeMemberAccounts field to the response of ListEnrollmentStatuses API.
+
 1.2.0 (2024-01-26)
 ------------------
 

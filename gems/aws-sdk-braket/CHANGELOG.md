@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2024-02-09)
+------------------
+
+* Feature - Creating a job will result in DeviceOfflineException when using an offline device, and DeviceRetiredException when using a retired device.
+
 1.33.0 (2024-01-26)
 ------------------
 

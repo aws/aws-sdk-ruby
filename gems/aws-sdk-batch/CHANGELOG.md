@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.81.0 (2024-02-09)
+------------------
+
+* Feature - This feature allows Batch to support configuration of repository credentials for jobs running on ECS
+
 1.80.0 (2024-01-26)
 ------------------
 

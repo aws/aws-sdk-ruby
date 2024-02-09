@@ -135,5 +135,10 @@ module Aws::Pricing
       attr_accessor attribute_names: ::Array[::String]
       SENSITIVE: []
     end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
   end
 end

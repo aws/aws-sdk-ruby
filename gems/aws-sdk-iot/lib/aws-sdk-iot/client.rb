@@ -1581,6 +1581,9 @@ module Aws::IoT
     # @option params [Types::TlsConfig] :tls_config
     #   An object that specifies the TLS configuration for a domain.
     #
+    # @option params [Types::ServerCertificateConfig] :server_certificate_config
+    #   The server certificate configuration.
+    #
     # @return [Types::CreateDomainConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDomainConfigurationResponse#domain_configuration_name #domain_configuration_name} => String
@@ -1606,6 +1609,9 @@ module Aws::IoT
     #     ],
     #     tls_config: {
     #       security_policy: "SecurityPolicy",
+    #     },
+    #     server_certificate_config: {
+    #       enable_ocsp_check: false,
     #     },
     #   })
     #
@@ -5848,6 +5854,7 @@ module Aws::IoT
     #   * {Types::DescribeDomainConfigurationResponse#domain_type #domain_type} => String
     #   * {Types::DescribeDomainConfigurationResponse#last_status_change_date #last_status_change_date} => Time
     #   * {Types::DescribeDomainConfigurationResponse#tls_config #tls_config} => Types::TlsConfig
+    #   * {Types::DescribeDomainConfigurationResponse#server_certificate_config #server_certificate_config} => Types::ServerCertificateConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -5871,6 +5878,7 @@ module Aws::IoT
     #   resp.domain_type #=> String, one of "ENDPOINT", "AWS_MANAGED", "CUSTOMER_MANAGED"
     #   resp.last_status_change_date #=> Time
     #   resp.tls_config.security_policy #=> String
+    #   resp.server_certificate_config.enable_ocsp_check #=> Boolean
     #
     # @overload describe_domain_configuration(params = {})
     # @param [Hash] params ({})
@@ -5879,8 +5887,13 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Returns a unique endpoint specific to the Amazon Web Services account
-    # making the call.
+    # Returns or creates a unique endpoint specific to the Amazon Web
+    # Services account making the call.
+    #
+    # <note markdown="1"> The first time `DescribeEndpoint` is called, an endpoint is created.
+    # All subsequent calls to `DescribeEndpoint` return the same endpoint.
+    #
+    #  </note>
     #
     # Requires permission to access the [DescribeEndpoint][1] action.
     #
@@ -7733,6 +7746,11 @@ module Aws::IoT
     end
 
     # Gets a registration code used to register a CA certificate with IoT.
+    #
+    # IoT will create a registration code as part of this API call if the
+    # registration code doesn't exist or has been deleted. If you already
+    # have a registration code, this API call will return the same
+    # registration code.
     #
     # Requires permission to access the [GetRegistrationCode][1] action.
     #
@@ -13759,6 +13777,9 @@ module Aws::IoT
     # @option params [Types::TlsConfig] :tls_config
     #   An object that specifies the TLS configuration for a domain.
     #
+    # @option params [Types::ServerCertificateConfig] :server_certificate_config
+    #   The server certificate configuration.
+    #
     # @return [Types::UpdateDomainConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDomainConfigurationResponse#domain_configuration_name #domain_configuration_name} => String
@@ -13776,6 +13797,9 @@ module Aws::IoT
     #     remove_authorizer_config: false,
     #     tls_config: {
     #       security_policy: "SecurityPolicy",
+    #     },
+    #     server_certificate_config: {
+    #       enable_ocsp_check: false,
     #     },
     #   })
     #
@@ -15075,7 +15099,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.119.0'
+      context[:gem_version] = '1.120.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

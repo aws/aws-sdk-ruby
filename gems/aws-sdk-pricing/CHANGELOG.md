@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2024-02-09)
+------------------
+
+* Feature - Add Throttling Exception to all APIs.
+
 1.54.0 (2024-01-26)
 ------------------
 

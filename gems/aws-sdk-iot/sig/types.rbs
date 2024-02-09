@@ -718,6 +718,7 @@ module Aws::IoT
       attr_accessor service_type: ("DATA" | "CREDENTIAL_PROVIDER" | "JOBS")
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor tls_config: Types::TlsConfig
+      attr_accessor server_certificate_config: Types::ServerCertificateConfig
       SENSITIVE: []
     end
 
@@ -1593,6 +1594,7 @@ module Aws::IoT
       attr_accessor domain_type: ("ENDPOINT" | "AWS_MANAGED" | "CUSTOMER_MANAGED")
       attr_accessor last_status_change_date: ::Time
       attr_accessor tls_config: Types::TlsConfig
+      attr_accessor server_certificate_config: Types::ServerCertificateConfig
       SENSITIVE: []
     end
 
@@ -3992,6 +3994,11 @@ module Aws::IoT
       SENSITIVE: []
     end
 
+    class ServerCertificateConfig
+      attr_accessor enable_ocsp_check: bool
+      SENSITIVE: []
+    end
+
     class ServerCertificateSummary
       attr_accessor server_certificate_arn: ::String
       attr_accessor server_certificate_status: ("INVALID" | "VALID")
@@ -4639,6 +4646,7 @@ module Aws::IoT
       attr_accessor domain_configuration_status: ("ENABLED" | "DISABLED")
       attr_accessor remove_authorizer_config: bool
       attr_accessor tls_config: Types::TlsConfig
+      attr_accessor server_certificate_config: Types::ServerCertificateConfig
       SENSITIVE: []
     end
 

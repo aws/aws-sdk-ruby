@@ -430,6 +430,9 @@ module Aws
                                        runtime_platform: {
                                          operating_system_family: ::String?,
                                          cpu_architecture: ::String?
+                                       }?,
+                                       repository_credentials: {
+                                         credentials_parameter: ::String
                                        }?
                                      },
                                      ?node_properties: {
@@ -541,6 +544,9 @@ module Aws
                                              runtime_platform: {
                                                operating_system_family: ::String?,
                                                cpu_architecture: ::String?
+                                             }?,
+                                             repository_credentials: {
+                                               credentials_parameter: ::String
                                              }?
                                            }?
                                          },

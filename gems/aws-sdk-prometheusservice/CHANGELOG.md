@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2024-02-09)
+------------------
+
+* Feature - Overall documentation updates.
+
 1.29.0 (2024-01-26)
 ------------------
 
