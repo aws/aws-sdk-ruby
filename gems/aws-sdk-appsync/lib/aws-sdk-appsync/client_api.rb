@@ -44,6 +44,7 @@ module Aws::AppSync
     Blob = Shapes::BlobShape.new(name: 'Blob')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanValue = Shapes::BooleanShape.new(name: 'BooleanValue')
+    CacheHealthMetricsConfig = Shapes::StringShape.new(name: 'CacheHealthMetricsConfig')
     CachingConfig = Shapes::StructureShape.new(name: 'CachingConfig')
     CachingKeys = Shapes::ListShape.new(name: 'CachingKeys')
     CertificateArn = Shapes::StringShape.new(name: 'CertificateArn')
@@ -87,6 +88,8 @@ module Aws::AppSync
     DataSourceIntrospectionModels = Shapes::ListShape.new(name: 'DataSourceIntrospectionModels')
     DataSourceIntrospectionResult = Shapes::StructureShape.new(name: 'DataSourceIntrospectionResult')
     DataSourceIntrospectionStatus = Shapes::StringShape.new(name: 'DataSourceIntrospectionStatus')
+    DataSourceLevelMetricsBehavior = Shapes::StringShape.new(name: 'DataSourceLevelMetricsBehavior')
+    DataSourceLevelMetricsConfig = Shapes::StringShape.new(name: 'DataSourceLevelMetricsConfig')
     DataSourceType = Shapes::StringShape.new(name: 'DataSourceType')
     DataSources = Shapes::ListShape.new(name: 'DataSources')
     Date = Shapes::TimestampShape.new(name: 'Date')
@@ -120,6 +123,7 @@ module Aws::AppSync
     DomainNameConfigs = Shapes::ListShape.new(name: 'DomainNameConfigs')
     DynamodbDataSourceConfig = Shapes::StructureShape.new(name: 'DynamodbDataSourceConfig')
     ElasticsearchDataSourceConfig = Shapes::StructureShape.new(name: 'ElasticsearchDataSourceConfig')
+    EnhancedMetricsConfig = Shapes::StructureShape.new(name: 'EnhancedMetricsConfig')
     EnvironmentVariableKey = Shapes::StringShape.new(name: 'EnvironmentVariableKey')
     EnvironmentVariableMap = Shapes::MapShape.new(name: 'EnvironmentVariableMap')
     EnvironmentVariableValue = Shapes::StringShape.new(name: 'EnvironmentVariableValue')
@@ -209,6 +213,7 @@ module Aws::AppSync
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     OpenIDConnectConfig = Shapes::StructureShape.new(name: 'OpenIDConnectConfig')
     OpenSearchServiceDataSourceConfig = Shapes::StructureShape.new(name: 'OpenSearchServiceDataSourceConfig')
+    OperationLevelMetricsConfig = Shapes::StringShape.new(name: 'OperationLevelMetricsConfig')
     OutputType = Shapes::StringShape.new(name: 'OutputType')
     Ownership = Shapes::StringShape.new(name: 'Ownership')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
@@ -226,6 +231,8 @@ module Aws::AppSync
     Resolver = Shapes::StructureShape.new(name: 'Resolver')
     ResolverCountLimit = Shapes::IntegerShape.new(name: 'ResolverCountLimit')
     ResolverKind = Shapes::StringShape.new(name: 'ResolverKind')
+    ResolverLevelMetricsBehavior = Shapes::StringShape.new(name: 'ResolverLevelMetricsBehavior')
+    ResolverLevelMetricsConfig = Shapes::StringShape.new(name: 'ResolverLevelMetricsConfig')
     Resolvers = Shapes::ListShape.new(name: 'Resolvers')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
@@ -301,6 +308,7 @@ module Aws::AppSync
     ApiCache.add_member(:at_rest_encryption_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "atRestEncryptionEnabled"))
     ApiCache.add_member(:type, Shapes::ShapeRef.new(shape: ApiCacheType, location_name: "type"))
     ApiCache.add_member(:status, Shapes::ShapeRef.new(shape: ApiCacheStatus, location_name: "status"))
+    ApiCache.add_member(:health_metrics_config, Shapes::ShapeRef.new(shape: CacheHealthMetricsConfig, location_name: "healthMetricsConfig"))
     ApiCache.struct_class = Types::ApiCache
 
     ApiKey.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
@@ -397,6 +405,7 @@ module Aws::AppSync
     CreateApiCacheRequest.add_member(:at_rest_encryption_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "atRestEncryptionEnabled"))
     CreateApiCacheRequest.add_member(:api_caching_behavior, Shapes::ShapeRef.new(shape: ApiCachingBehavior, required: true, location_name: "apiCachingBehavior"))
     CreateApiCacheRequest.add_member(:type, Shapes::ShapeRef.new(shape: ApiCacheType, required: true, location_name: "type"))
+    CreateApiCacheRequest.add_member(:health_metrics_config, Shapes::ShapeRef.new(shape: CacheHealthMetricsConfig, location_name: "healthMetricsConfig"))
     CreateApiCacheRequest.struct_class = Types::CreateApiCacheRequest
 
     CreateApiCacheResponse.add_member(:api_cache, Shapes::ShapeRef.new(shape: ApiCache, location_name: "apiCache"))
@@ -422,6 +431,7 @@ module Aws::AppSync
     CreateDataSourceRequest.add_member(:http_config, Shapes::ShapeRef.new(shape: HttpDataSourceConfig, location_name: "httpConfig"))
     CreateDataSourceRequest.add_member(:relational_database_config, Shapes::ShapeRef.new(shape: RelationalDatabaseDataSourceConfig, location_name: "relationalDatabaseConfig"))
     CreateDataSourceRequest.add_member(:event_bridge_config, Shapes::ShapeRef.new(shape: EventBridgeDataSourceConfig, location_name: "eventBridgeConfig"))
+    CreateDataSourceRequest.add_member(:metrics_config, Shapes::ShapeRef.new(shape: DataSourceLevelMetricsConfig, location_name: "metricsConfig"))
     CreateDataSourceRequest.struct_class = Types::CreateDataSourceRequest
 
     CreateDataSourceResponse.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "dataSource"))
@@ -467,6 +477,7 @@ module Aws::AppSync
     CreateGraphqlApiRequest.add_member(:introspection_config, Shapes::ShapeRef.new(shape: GraphQLApiIntrospectionConfig, location_name: "introspectionConfig"))
     CreateGraphqlApiRequest.add_member(:query_depth_limit, Shapes::ShapeRef.new(shape: QueryDepthLimit, location_name: "queryDepthLimit"))
     CreateGraphqlApiRequest.add_member(:resolver_count_limit, Shapes::ShapeRef.new(shape: ResolverCountLimit, location_name: "resolverCountLimit"))
+    CreateGraphqlApiRequest.add_member(:enhanced_metrics_config, Shapes::ShapeRef.new(shape: EnhancedMetricsConfig, location_name: "enhancedMetricsConfig"))
     CreateGraphqlApiRequest.struct_class = Types::CreateGraphqlApiRequest
 
     CreateGraphqlApiResponse.add_member(:graphql_api, Shapes::ShapeRef.new(shape: GraphqlApi, location_name: "graphqlApi"))
@@ -485,6 +496,7 @@ module Aws::AppSync
     CreateResolverRequest.add_member(:max_batch_size, Shapes::ShapeRef.new(shape: MaxBatchSize, location_name: "maxBatchSize"))
     CreateResolverRequest.add_member(:runtime, Shapes::ShapeRef.new(shape: AppSyncRuntime, location_name: "runtime"))
     CreateResolverRequest.add_member(:code, Shapes::ShapeRef.new(shape: Code, location_name: "code"))
+    CreateResolverRequest.add_member(:metrics_config, Shapes::ShapeRef.new(shape: ResolverLevelMetricsConfig, location_name: "metricsConfig"))
     CreateResolverRequest.struct_class = Types::CreateResolverRequest
 
     CreateResolverResponse.add_member(:resolver, Shapes::ShapeRef.new(shape: Resolver, location_name: "resolver"))
@@ -510,6 +522,7 @@ module Aws::AppSync
     DataSource.add_member(:http_config, Shapes::ShapeRef.new(shape: HttpDataSourceConfig, location_name: "httpConfig"))
     DataSource.add_member(:relational_database_config, Shapes::ShapeRef.new(shape: RelationalDatabaseDataSourceConfig, location_name: "relationalDatabaseConfig"))
     DataSource.add_member(:event_bridge_config, Shapes::ShapeRef.new(shape: EventBridgeDataSourceConfig, location_name: "eventBridgeConfig"))
+    DataSource.add_member(:metrics_config, Shapes::ShapeRef.new(shape: DataSourceLevelMetricsConfig, location_name: "metricsConfig"))
     DataSource.struct_class = Types::DataSource
 
     DataSourceIntrospectionModel.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
@@ -639,6 +652,11 @@ module Aws::AppSync
     ElasticsearchDataSourceConfig.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, required: true, location_name: "endpoint"))
     ElasticsearchDataSourceConfig.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "awsRegion"))
     ElasticsearchDataSourceConfig.struct_class = Types::ElasticsearchDataSourceConfig
+
+    EnhancedMetricsConfig.add_member(:resolver_level_metrics_behavior, Shapes::ShapeRef.new(shape: ResolverLevelMetricsBehavior, required: true, location_name: "resolverLevelMetricsBehavior"))
+    EnhancedMetricsConfig.add_member(:data_source_level_metrics_behavior, Shapes::ShapeRef.new(shape: DataSourceLevelMetricsBehavior, required: true, location_name: "dataSourceLevelMetricsBehavior"))
+    EnhancedMetricsConfig.add_member(:operation_level_metrics_config, Shapes::ShapeRef.new(shape: OperationLevelMetricsConfig, required: true, location_name: "operationLevelMetricsConfig"))
+    EnhancedMetricsConfig.struct_class = Types::EnhancedMetricsConfig
 
     EnvironmentVariableMap.key = Shapes::ShapeRef.new(shape: EnvironmentVariableKey)
     EnvironmentVariableMap.value = Shapes::ShapeRef.new(shape: EnvironmentVariableValue)
@@ -817,6 +835,7 @@ module Aws::AppSync
     GraphqlApi.add_member(:introspection_config, Shapes::ShapeRef.new(shape: GraphQLApiIntrospectionConfig, location_name: "introspectionConfig"))
     GraphqlApi.add_member(:query_depth_limit, Shapes::ShapeRef.new(shape: QueryDepthLimit, location_name: "queryDepthLimit"))
     GraphqlApi.add_member(:resolver_count_limit, Shapes::ShapeRef.new(shape: ResolverCountLimit, location_name: "resolverCountLimit"))
+    GraphqlApi.add_member(:enhanced_metrics_config, Shapes::ShapeRef.new(shape: EnhancedMetricsConfig, location_name: "enhancedMetricsConfig"))
     GraphqlApi.struct_class = Types::GraphqlApi
 
     GraphqlApis.member = Shapes::ShapeRef.new(shape: GraphqlApi)
@@ -1005,6 +1024,7 @@ module Aws::AppSync
     Resolver.add_member(:max_batch_size, Shapes::ShapeRef.new(shape: MaxBatchSize, location_name: "maxBatchSize"))
     Resolver.add_member(:runtime, Shapes::ShapeRef.new(shape: AppSyncRuntime, location_name: "runtime"))
     Resolver.add_member(:code, Shapes::ShapeRef.new(shape: Code, location_name: "code"))
+    Resolver.add_member(:metrics_config, Shapes::ShapeRef.new(shape: ResolverLevelMetricsConfig, location_name: "metricsConfig"))
     Resolver.struct_class = Types::Resolver
 
     Resolvers.member = Shapes::ShapeRef.new(shape: Resolver)
@@ -1096,6 +1116,7 @@ module Aws::AppSync
     UpdateApiCacheRequest.add_member(:ttl, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "ttl"))
     UpdateApiCacheRequest.add_member(:api_caching_behavior, Shapes::ShapeRef.new(shape: ApiCachingBehavior, required: true, location_name: "apiCachingBehavior"))
     UpdateApiCacheRequest.add_member(:type, Shapes::ShapeRef.new(shape: ApiCacheType, required: true, location_name: "type"))
+    UpdateApiCacheRequest.add_member(:health_metrics_config, Shapes::ShapeRef.new(shape: CacheHealthMetricsConfig, location_name: "healthMetricsConfig"))
     UpdateApiCacheRequest.struct_class = Types::UpdateApiCacheRequest
 
     UpdateApiCacheResponse.add_member(:api_cache, Shapes::ShapeRef.new(shape: ApiCache, location_name: "apiCache"))
@@ -1122,6 +1143,7 @@ module Aws::AppSync
     UpdateDataSourceRequest.add_member(:http_config, Shapes::ShapeRef.new(shape: HttpDataSourceConfig, location_name: "httpConfig"))
     UpdateDataSourceRequest.add_member(:relational_database_config, Shapes::ShapeRef.new(shape: RelationalDatabaseDataSourceConfig, location_name: "relationalDatabaseConfig"))
     UpdateDataSourceRequest.add_member(:event_bridge_config, Shapes::ShapeRef.new(shape: EventBridgeDataSourceConfig, location_name: "eventBridgeConfig"))
+    UpdateDataSourceRequest.add_member(:metrics_config, Shapes::ShapeRef.new(shape: DataSourceLevelMetricsConfig, location_name: "metricsConfig"))
     UpdateDataSourceRequest.struct_class = Types::UpdateDataSourceRequest
 
     UpdateDataSourceResponse.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "dataSource"))
@@ -1165,6 +1187,7 @@ module Aws::AppSync
     UpdateGraphqlApiRequest.add_member(:introspection_config, Shapes::ShapeRef.new(shape: GraphQLApiIntrospectionConfig, location_name: "introspectionConfig"))
     UpdateGraphqlApiRequest.add_member(:query_depth_limit, Shapes::ShapeRef.new(shape: QueryDepthLimit, location_name: "queryDepthLimit"))
     UpdateGraphqlApiRequest.add_member(:resolver_count_limit, Shapes::ShapeRef.new(shape: ResolverCountLimit, location_name: "resolverCountLimit"))
+    UpdateGraphqlApiRequest.add_member(:enhanced_metrics_config, Shapes::ShapeRef.new(shape: EnhancedMetricsConfig, location_name: "enhancedMetricsConfig"))
     UpdateGraphqlApiRequest.struct_class = Types::UpdateGraphqlApiRequest
 
     UpdateGraphqlApiResponse.add_member(:graphql_api, Shapes::ShapeRef.new(shape: GraphqlApi, location_name: "graphqlApi"))
@@ -1183,6 +1206,7 @@ module Aws::AppSync
     UpdateResolverRequest.add_member(:max_batch_size, Shapes::ShapeRef.new(shape: MaxBatchSize, location_name: "maxBatchSize"))
     UpdateResolverRequest.add_member(:runtime, Shapes::ShapeRef.new(shape: AppSyncRuntime, location_name: "runtime"))
     UpdateResolverRequest.add_member(:code, Shapes::ShapeRef.new(shape: Code, location_name: "code"))
+    UpdateResolverRequest.add_member(:metrics_config, Shapes::ShapeRef.new(shape: ResolverLevelMetricsConfig, location_name: "metricsConfig"))
     UpdateResolverRequest.struct_class = Types::UpdateResolverRequest
 
     UpdateResolverResponse.add_member(:resolver, Shapes::ShapeRef.new(shape: Resolver, location_name: "resolver"))
@@ -1334,6 +1358,7 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
       api.add_operation(:create_graphql_api, Seahorse::Model::Operation.new.tap do |o|
@@ -1437,6 +1462,7 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
       api.add_operation(:delete_graphql_api, Seahorse::Model::Operation.new.tap do |o|
@@ -1988,6 +2014,7 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
       api.add_operation(:update_graphql_api, Seahorse::Model::Operation.new.tap do |o|

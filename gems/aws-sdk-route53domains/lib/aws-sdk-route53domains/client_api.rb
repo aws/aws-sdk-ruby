@@ -384,6 +384,8 @@ module Aws::Route53Domains
     GetDomainDetailResponse.add_member(:dns_sec, Shapes::ShapeRef.new(shape: DNSSec, location_name: "DnsSec"))
     GetDomainDetailResponse.add_member(:status_list, Shapes::ShapeRef.new(shape: DomainStatusList, location_name: "StatusList"))
     GetDomainDetailResponse.add_member(:dnssec_keys, Shapes::ShapeRef.new(shape: DnssecKeyList, location_name: "DnssecKeys"))
+    GetDomainDetailResponse.add_member(:billing_contact, Shapes::ShapeRef.new(shape: ContactDetail, location_name: "BillingContact"))
+    GetDomainDetailResponse.add_member(:billing_privacy, Shapes::ShapeRef.new(shape: Boolean, location_name: "BillingPrivacy"))
     GetDomainDetailResponse.struct_class = Types::GetDomainDetailResponse
 
     GetDomainSuggestionsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
@@ -493,6 +495,8 @@ module Aws::Route53Domains
     RegisterDomainRequest.add_member(:privacy_protect_admin_contact, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrivacyProtectAdminContact"))
     RegisterDomainRequest.add_member(:privacy_protect_registrant_contact, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrivacyProtectRegistrantContact"))
     RegisterDomainRequest.add_member(:privacy_protect_tech_contact, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrivacyProtectTechContact"))
+    RegisterDomainRequest.add_member(:billing_contact, Shapes::ShapeRef.new(shape: ContactDetail, location_name: "BillingContact"))
+    RegisterDomainRequest.add_member(:privacy_protect_billing_contact, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrivacyProtectBillingContact"))
     RegisterDomainRequest.struct_class = Types::RegisterDomainRequest
 
     RegisterDomainResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
@@ -556,6 +560,8 @@ module Aws::Route53Domains
     TransferDomainRequest.add_member(:privacy_protect_admin_contact, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrivacyProtectAdminContact"))
     TransferDomainRequest.add_member(:privacy_protect_registrant_contact, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrivacyProtectRegistrantContact"))
     TransferDomainRequest.add_member(:privacy_protect_tech_contact, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrivacyProtectTechContact"))
+    TransferDomainRequest.add_member(:billing_contact, Shapes::ShapeRef.new(shape: ContactDetail, location_name: "BillingContact"))
+    TransferDomainRequest.add_member(:privacy_protect_billing_contact, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrivacyProtectBillingContact"))
     TransferDomainRequest.struct_class = Types::TransferDomainRequest
 
     TransferDomainResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
@@ -576,6 +582,7 @@ module Aws::Route53Domains
     UpdateDomainContactPrivacyRequest.add_member(:admin_privacy, Shapes::ShapeRef.new(shape: Boolean, location_name: "AdminPrivacy"))
     UpdateDomainContactPrivacyRequest.add_member(:registrant_privacy, Shapes::ShapeRef.new(shape: Boolean, location_name: "RegistrantPrivacy"))
     UpdateDomainContactPrivacyRequest.add_member(:tech_privacy, Shapes::ShapeRef.new(shape: Boolean, location_name: "TechPrivacy"))
+    UpdateDomainContactPrivacyRequest.add_member(:billing_privacy, Shapes::ShapeRef.new(shape: Boolean, location_name: "BillingPrivacy"))
     UpdateDomainContactPrivacyRequest.struct_class = Types::UpdateDomainContactPrivacyRequest
 
     UpdateDomainContactPrivacyResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
@@ -586,6 +593,7 @@ module Aws::Route53Domains
     UpdateDomainContactRequest.add_member(:registrant_contact, Shapes::ShapeRef.new(shape: ContactDetail, location_name: "RegistrantContact"))
     UpdateDomainContactRequest.add_member(:tech_contact, Shapes::ShapeRef.new(shape: ContactDetail, location_name: "TechContact"))
     UpdateDomainContactRequest.add_member(:consent, Shapes::ShapeRef.new(shape: Consent, location_name: "Consent"))
+    UpdateDomainContactRequest.add_member(:billing_contact, Shapes::ShapeRef.new(shape: ContactDetail, location_name: "BillingContact"))
     UpdateDomainContactRequest.struct_class = Types::UpdateDomainContactRequest
 
     UpdateDomainContactResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))

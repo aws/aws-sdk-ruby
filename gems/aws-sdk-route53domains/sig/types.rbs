@@ -32,7 +32,7 @@ module Aws::Route53Domains
 
     class BillingRecord
       attr_accessor domain_name: ::String
-      attr_accessor operation: ("REGISTER_DOMAIN" | "DELETE_DOMAIN" | "TRANSFER_IN_DOMAIN" | "UPDATE_DOMAIN_CONTACT" | "UPDATE_NAMESERVER" | "CHANGE_PRIVACY_PROTECTION" | "DOMAIN_LOCK" | "ENABLE_AUTORENEW" | "DISABLE_AUTORENEW" | "ADD_DNSSEC" | "REMOVE_DNSSEC" | "EXPIRE_DOMAIN" | "TRANSFER_OUT_DOMAIN" | "CHANGE_DOMAIN_OWNER" | "RENEW_DOMAIN" | "PUSH_DOMAIN" | "INTERNAL_TRANSFER_OUT_DOMAIN" | "INTERNAL_TRANSFER_IN_DOMAIN")
+      attr_accessor operation: ("REGISTER_DOMAIN" | "DELETE_DOMAIN" | "TRANSFER_IN_DOMAIN" | "UPDATE_DOMAIN_CONTACT" | "UPDATE_NAMESERVER" | "CHANGE_PRIVACY_PROTECTION" | "DOMAIN_LOCK" | "ENABLE_AUTORENEW" | "DISABLE_AUTORENEW" | "ADD_DNSSEC" | "REMOVE_DNSSEC" | "EXPIRE_DOMAIN" | "TRANSFER_OUT_DOMAIN" | "CHANGE_DOMAIN_OWNER" | "RENEW_DOMAIN" | "PUSH_DOMAIN" | "INTERNAL_TRANSFER_OUT_DOMAIN" | "INTERNAL_TRANSFER_IN_DOMAIN" | "RELEASE_TO_GANDI" | "TRANSFER_ON_RENEW")
       attr_accessor invoice_id: ::String
       attr_accessor bill_date: ::Time
       attr_accessor price: ::Float
@@ -56,7 +56,7 @@ module Aws::Route53Domains
     end
 
     class CheckDomainAvailabilityResponse
-      attr_accessor availability: ("AVAILABLE" | "AVAILABLE_RESERVED" | "AVAILABLE_PREORDER" | "UNAVAILABLE" | "UNAVAILABLE_PREMIUM" | "UNAVAILABLE_RESTRICTED" | "RESERVED" | "DONT_KNOW")
+      attr_accessor availability: ("AVAILABLE" | "AVAILABLE_RESERVED" | "AVAILABLE_PREORDER" | "UNAVAILABLE" | "UNAVAILABLE_PREMIUM" | "UNAVAILABLE_RESTRICTED" | "RESERVED" | "DONT_KNOW" | "INVALID_NAME_FOR_TLD" | "PENDING")
       SENSITIVE: []
     end
 
@@ -277,7 +277,9 @@ module Aws::Route53Domains
       attr_accessor dns_sec: ::String
       attr_accessor status_list: ::Array[::String]
       attr_accessor dnssec_keys: ::Array[Types::DnssecKey]
-      SENSITIVE: [:admin_contact, :registrant_contact, :tech_contact, :abuse_contact_email, :abuse_contact_phone]
+      attr_accessor billing_contact: Types::ContactDetail
+      attr_accessor billing_privacy: bool
+      SENSITIVE: [:admin_contact, :registrant_contact, :tech_contact, :abuse_contact_email, :abuse_contact_phone, :billing_contact]
     end
 
     class GetDomainSuggestionsRequest
@@ -302,7 +304,7 @@ module Aws::Route53Domains
       attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "ERROR" | "SUCCESSFUL" | "FAILED")
       attr_accessor message: ::String
       attr_accessor domain_name: ::String
-      attr_accessor type: ("REGISTER_DOMAIN" | "DELETE_DOMAIN" | "TRANSFER_IN_DOMAIN" | "UPDATE_DOMAIN_CONTACT" | "UPDATE_NAMESERVER" | "CHANGE_PRIVACY_PROTECTION" | "DOMAIN_LOCK" | "ENABLE_AUTORENEW" | "DISABLE_AUTORENEW" | "ADD_DNSSEC" | "REMOVE_DNSSEC" | "EXPIRE_DOMAIN" | "TRANSFER_OUT_DOMAIN" | "CHANGE_DOMAIN_OWNER" | "RENEW_DOMAIN" | "PUSH_DOMAIN" | "INTERNAL_TRANSFER_OUT_DOMAIN" | "INTERNAL_TRANSFER_IN_DOMAIN")
+      attr_accessor type: ("REGISTER_DOMAIN" | "DELETE_DOMAIN" | "TRANSFER_IN_DOMAIN" | "UPDATE_DOMAIN_CONTACT" | "UPDATE_NAMESERVER" | "CHANGE_PRIVACY_PROTECTION" | "DOMAIN_LOCK" | "ENABLE_AUTORENEW" | "DISABLE_AUTORENEW" | "ADD_DNSSEC" | "REMOVE_DNSSEC" | "EXPIRE_DOMAIN" | "TRANSFER_OUT_DOMAIN" | "CHANGE_DOMAIN_OWNER" | "RENEW_DOMAIN" | "PUSH_DOMAIN" | "INTERNAL_TRANSFER_OUT_DOMAIN" | "INTERNAL_TRANSFER_IN_DOMAIN" | "RELEASE_TO_GANDI" | "TRANSFER_ON_RENEW")
       attr_accessor submitted_date: ::Time
       attr_accessor last_updated_date: ::Time
       attr_accessor status_flag: ("PENDING_ACCEPTANCE" | "PENDING_CUSTOMER_ACTION" | "PENDING_AUTHORIZATION" | "PENDING_PAYMENT_VERIFICATION" | "PENDING_SUPPORT_CASE")
@@ -333,7 +335,7 @@ module Aws::Route53Domains
       attr_accessor marker: ::String
       attr_accessor max_items: ::Integer
       attr_accessor status: ::Array[("SUBMITTED" | "IN_PROGRESS" | "ERROR" | "SUCCESSFUL" | "FAILED")]
-      attr_accessor type: ::Array[("REGISTER_DOMAIN" | "DELETE_DOMAIN" | "TRANSFER_IN_DOMAIN" | "UPDATE_DOMAIN_CONTACT" | "UPDATE_NAMESERVER" | "CHANGE_PRIVACY_PROTECTION" | "DOMAIN_LOCK" | "ENABLE_AUTORENEW" | "DISABLE_AUTORENEW" | "ADD_DNSSEC" | "REMOVE_DNSSEC" | "EXPIRE_DOMAIN" | "TRANSFER_OUT_DOMAIN" | "CHANGE_DOMAIN_OWNER" | "RENEW_DOMAIN" | "PUSH_DOMAIN" | "INTERNAL_TRANSFER_OUT_DOMAIN" | "INTERNAL_TRANSFER_IN_DOMAIN")]
+      attr_accessor type: ::Array[("REGISTER_DOMAIN" | "DELETE_DOMAIN" | "TRANSFER_IN_DOMAIN" | "UPDATE_DOMAIN_CONTACT" | "UPDATE_NAMESERVER" | "CHANGE_PRIVACY_PROTECTION" | "DOMAIN_LOCK" | "ENABLE_AUTORENEW" | "DISABLE_AUTORENEW" | "ADD_DNSSEC" | "REMOVE_DNSSEC" | "EXPIRE_DOMAIN" | "TRANSFER_OUT_DOMAIN" | "CHANGE_DOMAIN_OWNER" | "RENEW_DOMAIN" | "PUSH_DOMAIN" | "INTERNAL_TRANSFER_OUT_DOMAIN" | "INTERNAL_TRANSFER_IN_DOMAIN" | "RELEASE_TO_GANDI" | "TRANSFER_ON_RENEW")]
       attr_accessor sort_by: ("SubmittedDate")
       attr_accessor sort_order: ("ASC" | "DESC")
       SENSITIVE: []
@@ -382,7 +384,7 @@ module Aws::Route53Domains
     class OperationSummary
       attr_accessor operation_id: ::String
       attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "ERROR" | "SUCCESSFUL" | "FAILED")
-      attr_accessor type: ("REGISTER_DOMAIN" | "DELETE_DOMAIN" | "TRANSFER_IN_DOMAIN" | "UPDATE_DOMAIN_CONTACT" | "UPDATE_NAMESERVER" | "CHANGE_PRIVACY_PROTECTION" | "DOMAIN_LOCK" | "ENABLE_AUTORENEW" | "DISABLE_AUTORENEW" | "ADD_DNSSEC" | "REMOVE_DNSSEC" | "EXPIRE_DOMAIN" | "TRANSFER_OUT_DOMAIN" | "CHANGE_DOMAIN_OWNER" | "RENEW_DOMAIN" | "PUSH_DOMAIN" | "INTERNAL_TRANSFER_OUT_DOMAIN" | "INTERNAL_TRANSFER_IN_DOMAIN")
+      attr_accessor type: ("REGISTER_DOMAIN" | "DELETE_DOMAIN" | "TRANSFER_IN_DOMAIN" | "UPDATE_DOMAIN_CONTACT" | "UPDATE_NAMESERVER" | "CHANGE_PRIVACY_PROTECTION" | "DOMAIN_LOCK" | "ENABLE_AUTORENEW" | "DISABLE_AUTORENEW" | "ADD_DNSSEC" | "REMOVE_DNSSEC" | "EXPIRE_DOMAIN" | "TRANSFER_OUT_DOMAIN" | "CHANGE_DOMAIN_OWNER" | "RENEW_DOMAIN" | "PUSH_DOMAIN" | "INTERNAL_TRANSFER_OUT_DOMAIN" | "INTERNAL_TRANSFER_IN_DOMAIN" | "RELEASE_TO_GANDI" | "TRANSFER_ON_RENEW")
       attr_accessor submitted_date: ::Time
       attr_accessor domain_name: ::String
       attr_accessor message: ::String
@@ -414,7 +416,9 @@ module Aws::Route53Domains
       attr_accessor privacy_protect_admin_contact: bool
       attr_accessor privacy_protect_registrant_contact: bool
       attr_accessor privacy_protect_tech_contact: bool
-      SENSITIVE: [:admin_contact, :registrant_contact, :tech_contact]
+      attr_accessor billing_contact: Types::ContactDetail
+      attr_accessor privacy_protect_billing_contact: bool
+      SENSITIVE: [:admin_contact, :registrant_contact, :tech_contact, :billing_contact]
     end
 
     class RegisterDomainResponse
@@ -501,7 +505,9 @@ module Aws::Route53Domains
       attr_accessor privacy_protect_admin_contact: bool
       attr_accessor privacy_protect_registrant_contact: bool
       attr_accessor privacy_protect_tech_contact: bool
-      SENSITIVE: [:auth_code, :admin_contact, :registrant_contact, :tech_contact]
+      attr_accessor billing_contact: Types::ContactDetail
+      attr_accessor privacy_protect_billing_contact: bool
+      SENSITIVE: [:auth_code, :admin_contact, :registrant_contact, :tech_contact, :billing_contact]
     end
 
     class TransferDomainResponse
@@ -531,6 +537,7 @@ module Aws::Route53Domains
       attr_accessor admin_privacy: bool
       attr_accessor registrant_privacy: bool
       attr_accessor tech_privacy: bool
+      attr_accessor billing_privacy: bool
       SENSITIVE: []
     end
 
@@ -545,7 +552,8 @@ module Aws::Route53Domains
       attr_accessor registrant_contact: Types::ContactDetail
       attr_accessor tech_contact: Types::ContactDetail
       attr_accessor consent: Types::Consent
-      SENSITIVE: [:admin_contact, :registrant_contact, :tech_contact]
+      attr_accessor billing_contact: Types::ContactDetail
+      SENSITIVE: [:admin_contact, :registrant_contact, :tech_contact, :billing_contact]
     end
 
     class UpdateDomainContactResponse

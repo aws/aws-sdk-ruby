@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2024-02-12)
+------------------
+
+* Feature - This release adds bill contact support for RegisterDomain, TransferDomain, UpdateDomainContact and GetDomainDetail API.
+
 1.55.0 (2024-01-26)
 ------------------
 

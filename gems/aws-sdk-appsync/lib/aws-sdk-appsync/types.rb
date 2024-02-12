@@ -173,6 +173,23 @@ module Aws::AppSync
     #   * **FAILED**: The instance has failed creation.
     #   @return [String]
     #
+    # @!attribute [rw] health_metrics_config
+    #   Controls how cache health metrics will be emitted to CloudWatch.
+    #   Cache health metrics include:
+    #
+    #   * NetworkBandwidthOutAllowanceExceeded: The network packets dropped
+    #     because the throughput exceeded the aggregated bandwidth limit.
+    #     This is useful for diagnosing bottlenecks in a cache
+    #     configuration.
+    #
+    #   * EngineCPUUtilization: The CPU utilization (percentage) allocated
+    #     to the Redis process. This is useful for diagnosing bottlenecks in
+    #     a cache configuration.
+    #
+    #   Metrics will be recorded by API ID. You can set the value to
+    #   `ENABLED` or `DISABLED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ApiCache AWS API Documentation
     #
     class ApiCache < Struct.new(
@@ -181,7 +198,8 @@ module Aws::AppSync
       :transit_encryption_enabled,
       :at_rest_encryption_enabled,
       :type,
-      :status)
+      :status,
+      :health_metrics_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -727,6 +745,20 @@ module Aws::AppSync
     #   * **R4\_8XLARGE**: A r4.8xlarge instance type.
     #   @return [String]
     #
+    # @!attribute [rw] health_metrics_config
+    #   Controls how cache health metrics will be emitted to CloudWatch.
+    #   Cache health metrics include:
+    #
+    #   * NetworkBandwidthOutAllowanceExceeded: The number of times a
+    #     specified GraphQL operation was called.
+    #
+    #   * EngineCPUUtilization: The number of GraphQL errors that occurred
+    #     during a specified GraphQL operation.
+    #
+    #   Metrics will be recorded by API ID. You can set the value to
+    #   `ENABLED` or `DISABLED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateApiCacheRequest AWS API Documentation
     #
     class CreateApiCacheRequest < Struct.new(
@@ -735,7 +767,8 @@ module Aws::AppSync
       :transit_encryption_enabled,
       :at_rest_encryption_enabled,
       :api_caching_behavior,
-      :type)
+      :type,
+      :health_metrics_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -846,6 +879,18 @@ module Aws::AppSync
     #   Amazon EventBridge settings.
     #   @return [Types::EventBridgeDataSourceConfig]
     #
+    # @!attribute [rw] metrics_config
+    #   Enables or disables enhanced data source metrics for specified data
+    #   sources. Note that `metricsConfig` won't be used unless the
+    #   `dataSourceLevelMetricsBehavior` value is set to
+    #   `PER_DATA_SOURCE_METRICS`. If the `dataSourceLevelMetricsBehavior`
+    #   is set to `FULL_REQUEST_DATA_SOURCE_METRICS` instead,
+    #   `metricsConfig` will be ignored. However, you can still set its
+    #   value.
+    #
+    #   `metricsConfig` can be `ENABLED` or `DISABLED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateDataSourceRequest AWS API Documentation
     #
     class CreateDataSourceRequest < Struct.new(
@@ -860,7 +905,8 @@ module Aws::AppSync
       :open_search_service_config,
       :http_config,
       :relational_database_config,
-      :event_bridge_config)
+      :event_bridge_config,
+      :metrics_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1099,6 +1145,10 @@ module Aws::AppSync
     #   operation falls out of bounds.
     #   @return [Integer]
     #
+    # @!attribute [rw] enhanced_metrics_config
+    #   The `enhancedMetricsConfig` object.
+    #   @return [Types::EnhancedMetricsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateGraphqlApiRequest AWS API Documentation
     #
     class CreateGraphqlApiRequest < Struct.new(
@@ -1117,7 +1167,8 @@ module Aws::AppSync
       :owner_contact,
       :introspection_config,
       :query_depth_limit,
-      :resolver_count_limit)
+      :resolver_count_limit,
+      :enhanced_metrics_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1208,6 +1259,17 @@ module Aws::AppSync
     #   `runtime` value must be `APPSYNC_JS`.
     #   @return [String]
     #
+    # @!attribute [rw] metrics_config
+    #   Enables or disables enhanced resolver metrics for specified
+    #   resolvers. Note that `metricsConfig` won't be used unless the
+    #   `resolverLevelMetricsBehavior` value is set to
+    #   `PER_RESOLVER_METRICS`. If the `resolverLevelMetricsBehavior` is set
+    #   to `FULL_REQUEST_RESOLVER_METRICS` instead, `metricsConfig` will be
+    #   ignored. However, you can still set its value.
+    #
+    #   `metricsConfig` can be `ENABLED` or `DISABLED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateResolverRequest AWS API Documentation
     #
     class CreateResolverRequest < Struct.new(
@@ -1223,7 +1285,8 @@ module Aws::AppSync
       :caching_config,
       :max_batch_size,
       :runtime,
-      :code)
+      :code,
+      :metrics_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1356,6 +1419,18 @@ module Aws::AppSync
     #   Amazon EventBridge settings.
     #   @return [Types::EventBridgeDataSourceConfig]
     #
+    # @!attribute [rw] metrics_config
+    #   Enables or disables enhanced data source metrics for specified data
+    #   sources. Note that `metricsConfig` won't be used unless the
+    #   `dataSourceLevelMetricsBehavior` value is set to
+    #   `PER_DATA_SOURCE_METRICS`. If the `dataSourceLevelMetricsBehavior`
+    #   is set to `FULL_REQUEST_DATA_SOURCE_METRICS` instead,
+    #   `metricsConfig` will be ignored. However, you can still set its
+    #   value.
+    #
+    #   `metricsConfig` can be `ENABLED` or `DISABLED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DataSource AWS API Documentation
     #
     class DataSource < Struct.new(
@@ -1370,7 +1445,8 @@ module Aws::AppSync
       :open_search_service_config,
       :http_config,
       :relational_database_config,
-      :event_bridge_config)
+      :event_bridge_config,
+      :metrics_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1891,6 +1967,150 @@ module Aws::AppSync
     class ElasticsearchDataSourceConfig < Struct.new(
       :endpoint,
       :aws_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Enables and controls the enhanced metrics feature. Enhanced metrics
+    # emit granular data on API usage and performance such as AppSync
+    # request and error counts, latency, and cache hits/misses. All enhanced
+    # metric data is sent to your CloudWatch account, and you can configure
+    # the types of data that will be sent.
+    #
+    # Enhanced metrics can be configured at the resolver, data source, and
+    # operation levels. `EnhancedMetricsConfig` contains three required
+    # parameters, each controlling one of these categories:
+    #
+    # 1.  `resolverLevelMetricsBehavior`: Controls how resolver metrics will
+    #     be emitted to CloudWatch. Resolver metrics include:
+    #
+    #     * GraphQL errors: The number of GraphQL errors that occurred.
+    #
+    #     * Requests: The number of invocations that occurred during a
+    #       request.
+    #
+    #     * Latency: The time to complete a resolver invocation.
+    #
+    #     * Cache hits: The number of cache hits during a request.
+    #
+    #     * Cache misses: The number of cache misses during a request.
+    #
+    #     These metrics can be emitted to CloudWatch per resolver or for all
+    #     resolvers in the request. Metrics will be recorded by API ID and
+    #     resolver name. `resolverLevelMetricsBehavior` accepts one of these
+    #     values at a time:
+    #
+    #     * `FULL_REQUEST_RESOLVER_METRICS`: Records and emits metric data
+    #       for all resolvers in the request.
+    #
+    #     * `PER_RESOLVER_METRICS`: Records and emits metric data for
+    #       resolvers that have the `metricConfig` value set to `ENABLED`.
+    #
+    # 2.  `dataSourceLevelMetricsBehavior`: Controls how data source metrics
+    #     will be emitted to CloudWatch. Data source metrics include:
+    #
+    #     * Requests: The number of invocations that occured during a
+    #       request.
+    #
+    #     * Latency: The time to complete a data source invocation.
+    #
+    #     * Errors: The number of errors that occurred during a data source
+    #       invocation.
+    #
+    #     These metrics can be emitted to CloudWatch per data source or for
+    #     all data sources in the request. Metrics will be recorded by API
+    #     ID and data source name. `dataSourceLevelMetricsBehavior` accepts
+    #     one of these values at a time:
+    #
+    #     * `FULL_REQUEST_DATA_SOURCE_METRICS`: Records and emits metric
+    #       data for all data sources in the request.
+    #
+    #     * `PER_DATA_SOURCE_METRICS`: Records and emits metric data for
+    #       data sources that have the `metricConfig` value set to
+    #       `ENABLED`.
+    #
+    # 3.  `operationLevelMetricsConfig`: Controls how operation metrics will
+    #     be emitted to CloudWatch. Operation metrics include:
+    #
+    #     * Requests: The number of times a specified GraphQL operation was
+    #       called.
+    #
+    #     * GraphQL errors: The number of GraphQL errors that occurred
+    #       during a specified GraphQL operation.
+    #
+    #     Metrics will be recorded by API ID and operation name. You can set
+    #     the value to `ENABLED` or `DISABLED`.
+    #
+    # @!attribute [rw] resolver_level_metrics_behavior
+    #   Controls how resolver metrics will be emitted to CloudWatch.
+    #   Resolver metrics include:
+    #
+    #   * GraphQL errors: The number of GraphQL errors that occurred.
+    #
+    #   * Requests: The number of invocations that occurred during a
+    #     request.
+    #
+    #   * Latency: The time to complete a resolver invocation.
+    #
+    #   * Cache hits: The number of cache hits during a request.
+    #
+    #   * Cache misses: The number of cache misses during a request.
+    #
+    #   These metrics can be emitted to CloudWatch per resolver or for all
+    #   resolvers in the request. Metrics will be recorded by API ID and
+    #   resolver name. `resolverLevelMetricsBehavior` accepts one of these
+    #   values at a time:
+    #
+    #   * `FULL_REQUEST_RESOLVER_METRICS`: Records and emits metric data for
+    #     all resolvers in the request.
+    #
+    #   * `PER_RESOLVER_METRICS`: Records and emits metric data for
+    #     resolvers that have the `metricConfig` value set to `ENABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_level_metrics_behavior
+    #   Controls how data source metrics will be emitted to CloudWatch. Data
+    #   source metrics include:
+    #
+    #   * Requests: The number of invocations that occured during a request.
+    #
+    #   * Latency: The time to complete a data source invocation.
+    #
+    #   * Errors: The number of errors that occurred during a data source
+    #     invocation.
+    #
+    #   These metrics can be emitted to CloudWatch per data source or for
+    #   all data sources in the request. Metrics will be recorded by API ID
+    #   and data source name. `dataSourceLevelMetricsBehavior` accepts one
+    #   of these values at a time:
+    #
+    #   * `FULL_REQUEST_DATA_SOURCE_METRICS`: Records and emits metric data
+    #     for all data sources in the request.
+    #
+    #   * `PER_DATA_SOURCE_METRICS`: Records and emits metric data for data
+    #     sources that have the `metricConfig` value set to `ENABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_level_metrics_config
+    #   Controls how operation metrics will be emitted to CloudWatch.
+    #   Operation metrics include:
+    #
+    #   * Requests: The number of times a specified GraphQL operation was
+    #     called.
+    #
+    #   * GraphQL errors: The number of GraphQL errors that occurred during
+    #     a specified GraphQL operation.
+    #
+    #   Metrics will be recorded by API ID and operation name. You can set
+    #   the value to `ENABLED` or `DISABLED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/EnhancedMetricsConfig AWS API Documentation
+    #
+    class EnhancedMetricsConfig < Struct.new(
+      :resolver_level_metrics_behavior,
+      :data_source_level_metrics_behavior,
+      :operation_level_metrics_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2714,6 +2934,10 @@ module Aws::AppSync
     #   operation falls out of bounds.
     #   @return [Integer]
     #
+    # @!attribute [rw] enhanced_metrics_config
+    #   The `enhancedMetricsConfig` object.
+    #   @return [Types::EnhancedMetricsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GraphqlApi AWS API Documentation
     #
     class GraphqlApi < Struct.new(
@@ -2738,7 +2962,8 @@ module Aws::AppSync
       :owner_contact,
       :introspection_config,
       :query_depth_limit,
-      :resolver_count_limit)
+      :resolver_count_limit,
+      :enhanced_metrics_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3685,6 +3910,17 @@ module Aws::AppSync
     #   `runtime` value must be `APPSYNC_JS`.
     #   @return [String]
     #
+    # @!attribute [rw] metrics_config
+    #   Enables or disables enhanced resolver metrics for specified
+    #   resolvers. Note that `metricsConfig` won't be used unless the
+    #   `resolverLevelMetricsBehavior` value is set to
+    #   `PER_RESOLVER_METRICS`. If the `resolverLevelMetricsBehavior` is set
+    #   to `FULL_REQUEST_RESOLVER_METRICS` instead, `metricsConfig` will be
+    #   ignored. However, you can still set its value.
+    #
+    #   `metricsConfig` can be `ENABLED` or `DISABLED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/Resolver AWS API Documentation
     #
     class Resolver < Struct.new(
@@ -3700,7 +3936,8 @@ module Aws::AppSync
       :caching_config,
       :max_batch_size,
       :runtime,
-      :code)
+      :code,
+      :metrics_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4159,13 +4396,28 @@ module Aws::AppSync
     #   * **R4\_8XLARGE**: A r4.8xlarge instance type.
     #   @return [String]
     #
+    # @!attribute [rw] health_metrics_config
+    #   Controls how cache health metrics will be emitted to CloudWatch.
+    #   Cache health metrics include:
+    #
+    #   * NetworkBandwidthOutAllowanceExceeded: The number of times a
+    #     specified GraphQL operation was called.
+    #
+    #   * EngineCPUUtilization: The number of GraphQL errors that occurred
+    #     during a specified GraphQL operation.
+    #
+    #   Metrics will be recorded by API ID. You can set the value to
+    #   `ENABLED` or `DISABLED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateApiCacheRequest AWS API Documentation
     #
     class UpdateApiCacheRequest < Struct.new(
       :api_id,
       :ttl,
       :api_caching_behavior,
-      :type)
+      :type,
+      :health_metrics_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4278,6 +4530,18 @@ module Aws::AppSync
     #   The new Amazon EventBridge settings.
     #   @return [Types::EventBridgeDataSourceConfig]
     #
+    # @!attribute [rw] metrics_config
+    #   Enables or disables enhanced data source metrics for specified data
+    #   sources. Note that `metricsConfig` won't be used unless the
+    #   `dataSourceLevelMetricsBehavior` value is set to
+    #   `PER_DATA_SOURCE_METRICS`. If the `dataSourceLevelMetricsBehavior`
+    #   is set to `FULL_REQUEST_DATA_SOURCE_METRICS` instead,
+    #   `metricsConfig` will be ignored. However, you can still set its
+    #   value.
+    #
+    #   `metricsConfig` can be `ENABLED` or `DISABLED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateDataSourceRequest AWS API Documentation
     #
     class UpdateDataSourceRequest < Struct.new(
@@ -4292,7 +4556,8 @@ module Aws::AppSync
       :open_search_service_config,
       :http_config,
       :relational_database_config,
-      :event_bridge_config)
+      :event_bridge_config,
+      :metrics_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4518,6 +4783,10 @@ module Aws::AppSync
     #   operation falls out of bounds.
     #   @return [Integer]
     #
+    # @!attribute [rw] enhanced_metrics_config
+    #   The `enhancedMetricsConfig` object.
+    #   @return [Types::EnhancedMetricsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateGraphqlApiRequest AWS API Documentation
     #
     class UpdateGraphqlApiRequest < Struct.new(
@@ -4534,7 +4803,8 @@ module Aws::AppSync
       :owner_contact,
       :introspection_config,
       :query_depth_limit,
-      :resolver_count_limit)
+      :resolver_count_limit,
+      :enhanced_metrics_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4625,6 +4895,17 @@ module Aws::AppSync
     #   `runtime` value must be `APPSYNC_JS`.
     #   @return [String]
     #
+    # @!attribute [rw] metrics_config
+    #   Enables or disables enhanced resolver metrics for specified
+    #   resolvers. Note that `metricsConfig` won't be used unless the
+    #   `resolverLevelMetricsBehavior` value is set to
+    #   `PER_RESOLVER_METRICS`. If the `resolverLevelMetricsBehavior` is set
+    #   to `FULL_REQUEST_RESOLVER_METRICS` instead, `metricsConfig` will be
+    #   ignored. However, you can still set its value.
+    #
+    #   `metricsConfig` can be `ENABLED` or `DISABLED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateResolverRequest AWS API Documentation
     #
     class UpdateResolverRequest < Struct.new(
@@ -4640,7 +4921,8 @@ module Aws::AppSync
       :caching_config,
       :max_batch_size,
       :runtime,
-      :code)
+      :code,
+      :metrics_config)
       SENSITIVE = []
       include Aws::Structure
     end

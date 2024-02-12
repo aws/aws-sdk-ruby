@@ -36,6 +36,7 @@ module Aws::AppSync
       attr_accessor at_rest_encryption_enabled: bool
       attr_accessor type: ("T2_SMALL" | "T2_MEDIUM" | "R4_LARGE" | "R4_XLARGE" | "R4_2XLARGE" | "R4_4XLARGE" | "R4_8XLARGE" | "SMALL" | "MEDIUM" | "LARGE" | "XLARGE" | "LARGE_2X" | "LARGE_4X" | "LARGE_8X" | "LARGE_12X")
       attr_accessor status: ("AVAILABLE" | "CREATING" | "DELETING" | "MODIFYING" | "FAILED")
+      attr_accessor health_metrics_config: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -168,6 +169,7 @@ module Aws::AppSync
       attr_accessor at_rest_encryption_enabled: bool
       attr_accessor api_caching_behavior: ("FULL_REQUEST_CACHING" | "PER_RESOLVER_CACHING")
       attr_accessor type: ("T2_SMALL" | "T2_MEDIUM" | "R4_LARGE" | "R4_XLARGE" | "R4_2XLARGE" | "R4_4XLARGE" | "R4_8XLARGE" | "SMALL" | "MEDIUM" | "LARGE" | "XLARGE" | "LARGE_2X" | "LARGE_4X" | "LARGE_8X" | "LARGE_12X")
+      attr_accessor health_metrics_config: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -201,6 +203,7 @@ module Aws::AppSync
       attr_accessor http_config: Types::HttpDataSourceConfig
       attr_accessor relational_database_config: Types::RelationalDatabaseDataSourceConfig
       attr_accessor event_bridge_config: Types::EventBridgeDataSourceConfig
+      attr_accessor metrics_config: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -258,6 +261,7 @@ module Aws::AppSync
       attr_accessor introspection_config: ("ENABLED" | "DISABLED")
       attr_accessor query_depth_limit: ::Integer
       attr_accessor resolver_count_limit: ::Integer
+      attr_accessor enhanced_metrics_config: Types::EnhancedMetricsConfig
       SENSITIVE: []
     end
 
@@ -280,6 +284,7 @@ module Aws::AppSync
       attr_accessor max_batch_size: ::Integer
       attr_accessor runtime: Types::AppSyncRuntime
       attr_accessor code: ::String
+      attr_accessor metrics_config: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -313,6 +318,7 @@ module Aws::AppSync
       attr_accessor http_config: Types::HttpDataSourceConfig
       attr_accessor relational_database_config: Types::RelationalDatabaseDataSourceConfig
       attr_accessor event_bridge_config: Types::EventBridgeDataSourceConfig
+      attr_accessor metrics_config: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -480,6 +486,13 @@ module Aws::AppSync
     class ElasticsearchDataSourceConfig
       attr_accessor endpoint: ::String
       attr_accessor aws_region: ::String
+      SENSITIVE: []
+    end
+
+    class EnhancedMetricsConfig
+      attr_accessor resolver_level_metrics_behavior: ("FULL_REQUEST_RESOLVER_METRICS" | "PER_RESOLVER_METRICS")
+      attr_accessor data_source_level_metrics_behavior: ("FULL_REQUEST_DATA_SOURCE_METRICS" | "PER_DATA_SOURCE_METRICS")
+      attr_accessor operation_level_metrics_config: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -725,6 +738,7 @@ module Aws::AppSync
       attr_accessor introspection_config: ("ENABLED" | "DISABLED")
       attr_accessor query_depth_limit: ::Integer
       attr_accessor resolver_count_limit: ::Integer
+      attr_accessor enhanced_metrics_config: Types::EnhancedMetricsConfig
       SENSITIVE: []
     end
 
@@ -984,6 +998,7 @@ module Aws::AppSync
       attr_accessor max_batch_size: ::Integer
       attr_accessor runtime: Types::AppSyncRuntime
       attr_accessor code: ::String
+      attr_accessor metrics_config: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -1096,6 +1111,7 @@ module Aws::AppSync
       attr_accessor ttl: ::Integer
       attr_accessor api_caching_behavior: ("FULL_REQUEST_CACHING" | "PER_RESOLVER_CACHING")
       attr_accessor type: ("T2_SMALL" | "T2_MEDIUM" | "R4_LARGE" | "R4_XLARGE" | "R4_2XLARGE" | "R4_4XLARGE" | "R4_8XLARGE" | "SMALL" | "MEDIUM" | "LARGE" | "XLARGE" | "LARGE_2X" | "LARGE_4X" | "LARGE_8X" | "LARGE_12X")
+      attr_accessor health_metrics_config: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -1130,6 +1146,7 @@ module Aws::AppSync
       attr_accessor http_config: Types::HttpDataSourceConfig
       attr_accessor relational_database_config: Types::RelationalDatabaseDataSourceConfig
       attr_accessor event_bridge_config: Types::EventBridgeDataSourceConfig
+      attr_accessor metrics_config: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -1185,6 +1202,7 @@ module Aws::AppSync
       attr_accessor introspection_config: ("ENABLED" | "DISABLED")
       attr_accessor query_depth_limit: ::Integer
       attr_accessor resolver_count_limit: ::Integer
+      attr_accessor enhanced_metrics_config: Types::EnhancedMetricsConfig
       SENSITIVE: []
     end
 
@@ -1207,6 +1225,7 @@ module Aws::AppSync
       attr_accessor max_batch_size: ::Integer
       attr_accessor runtime: Types::AppSyncRuntime
       attr_accessor code: ::String
+      attr_accessor metrics_config: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 

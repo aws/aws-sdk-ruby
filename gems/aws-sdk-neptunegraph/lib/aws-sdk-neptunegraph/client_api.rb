@@ -35,6 +35,8 @@ module Aws::NeptuneGraph
     DeleteGraphSnapshotOutput = Shapes::StructureShape.new(name: 'DeleteGraphSnapshotOutput')
     DeletePrivateGraphEndpointInput = Shapes::StructureShape.new(name: 'DeletePrivateGraphEndpointInput')
     DeletePrivateGraphEndpointOutput = Shapes::StructureShape.new(name: 'DeletePrivateGraphEndpointOutput')
+    Document = Shapes::DocumentShape.new(name: 'Document', document: true)
+    DocumentValuedMap = Shapes::MapShape.new(name: 'DocumentValuedMap')
     EdgeLabels = Shapes::ListShape.new(name: 'EdgeLabels')
     EdgeProperties = Shapes::ListShape.new(name: 'EdgeProperties')
     EdgeStructure = Shapes::StructureShape.new(name: 'EdgeStructure')
@@ -292,6 +294,9 @@ module Aws::NeptuneGraph
     DeletePrivateGraphEndpointOutput.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "vpcEndpointId"))
     DeletePrivateGraphEndpointOutput.struct_class = Types::DeletePrivateGraphEndpointOutput
 
+    DocumentValuedMap.key = Shapes::ShapeRef.new(shape: String)
+    DocumentValuedMap.value = Shapes::ShapeRef.new(shape: Document)
+
     EdgeLabels.member = Shapes::ShapeRef.new(shape: String)
 
     EdgeProperties.member = Shapes::ShapeRef.new(shape: String)
@@ -305,6 +310,7 @@ module Aws::NeptuneGraph
     ExecuteQueryInput.add_member(:graph_identifier, Shapes::ShapeRef.new(shape: GraphIdentifier, required: true, location: "header", location_name: "graphIdentifier", metadata: {"hostLabel"=>true, "hostLabelName"=>"graphIdentifier"}))
     ExecuteQueryInput.add_member(:query_string, Shapes::ShapeRef.new(shape: String, required: true, location_name: "query"))
     ExecuteQueryInput.add_member(:language, Shapes::ShapeRef.new(shape: QueryLanguage, required: true, location_name: "language"))
+    ExecuteQueryInput.add_member(:parameters, Shapes::ShapeRef.new(shape: DocumentValuedMap, location_name: "parameters"))
     ExecuteQueryInput.add_member(:plan_cache, Shapes::ShapeRef.new(shape: PlanCacheType, location_name: "planCache"))
     ExecuteQueryInput.add_member(:explain_mode, Shapes::ShapeRef.new(shape: ExplainMode, location_name: "explain"))
     ExecuteQueryInput.add_member(:query_timeout_milliseconds, Shapes::ShapeRef.new(shape: Integer, location_name: "queryTimeoutMilliseconds"))

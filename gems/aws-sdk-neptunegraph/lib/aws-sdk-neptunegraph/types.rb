@@ -136,8 +136,8 @@ module Aws::NeptuneGraph
     #
     # @!attribute [rw] public_connectivity
     #   Specifies whether or not the graph can be reachable over the
-    #   internet. All access to graphs IAM authenticated. (`true` to enable,
-    #   or `false` to disable.
+    #   internet. All access to graphs is IAM authenticated. (`true` to
+    #   enable, or `false` to disable.
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_identifier
@@ -219,7 +219,7 @@ module Aws::NeptuneGraph
     #
     # @!attribute [rw] public_connectivity
     #   Specifies whether or not the graph can be reachable over the
-    #   internet. All access to graphs IAM authenticated.
+    #   internet. All access to graphs is IAM authenticated.
     #   @return [Boolean]
     #
     # @!attribute [rw] vector_search_configuration
@@ -358,8 +358,8 @@ module Aws::NeptuneGraph
     #
     # @!attribute [rw] public_connectivity
     #   Specifies whether or not the graph can be reachable over the
-    #   internet. All access to graphs IAM authenticated. (`true` to enable,
-    #   or `false` to disable).
+    #   internet. All access to graphs is IAM authenticated. (`true` to
+    #   enable, or `false` to disable).
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_identifier
@@ -806,6 +806,11 @@ module Aws::NeptuneGraph
     #   openCypher is supported.
     #   @return [String]
     #
+    # @!attribute [rw] parameters
+    #   The data parameters the query can use in JSON format. For example:
+    #   \\\{"name": "john", "age": 20\\}. (optional)
+    #   @return [Hash<String,Hash,Array,String,Numeric,Boolean>]
+    #
     # @!attribute [rw] plan_cache
     #   Query plan cache is a feature that saves the query plan and reuses
     #   it on successive executions of the same query. This reduces query
@@ -830,6 +835,7 @@ module Aws::NeptuneGraph
       :graph_identifier,
       :query_string,
       :language,
+      :parameters,
       :plan_cache,
       :explain_mode,
       :query_timeout_milliseconds)
@@ -2132,8 +2138,8 @@ module Aws::NeptuneGraph
     #
     # @!attribute [rw] public_connectivity
     #   Specifies whether or not the graph can be reachable over the
-    #   internet. All access to graphs IAM authenticated. (`true` to enable,
-    #   or `false` to disable).
+    #   internet. All access to graphs is IAM authenticated. (`true` to
+    #   enable, or `false` to disable).
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/RestoreGraphFromSnapshotInput AWS API Documentation
@@ -2362,8 +2368,8 @@ module Aws::NeptuneGraph
     #
     # @!attribute [rw] public_connectivity
     #   Specifies whether or not the graph can be reachable over the
-    #   internet. All access to graphs IAM authenticated. (`true` to enable,
-    #   or `false` to disable.
+    #   internet. All access to graphs is IAM authenticated. (`true` to
+    #   enable, or `false` to disable.
     #   @return [Boolean]
     #
     # @!attribute [rw] provisioned_memory

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2024-02-12)
+------------------
+
+* Feature - Adding a new option "parameters" for data plane api ExecuteQuery to support running parameterized query via SDK.
+
 1.3.0 (2024-02-01)
 ------------------
 

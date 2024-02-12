@@ -468,8 +468,8 @@ module Aws::NeptuneGraph
     #
     # @option params [Boolean] :public_connectivity
     #   Specifies whether or not the graph can be reachable over the internet.
-    #   All access to graphs IAM authenticated. (`true` to enable, or `false`
-    #   to disable.
+    #   All access to graphs is IAM authenticated. (`true` to enable, or
+    #   `false` to disable.
     #
     # @option params [String] :kms_key_identifier
     #   Specifies a KMS key to use to encrypt data in the new graph.
@@ -635,8 +635,8 @@ module Aws::NeptuneGraph
     #
     # @option params [Boolean] :public_connectivity
     #   Specifies whether or not the graph can be reachable over the internet.
-    #   All access to graphs IAM authenticated. (`true` to enable, or `false`
-    #   to disable).
+    #   All access to graphs is IAM authenticated. (`true` to enable, or
+    #   `false` to disable).
     #
     # @option params [String] :kms_key_identifier
     #   Specifies a KMS key to use to encrypt data imported into the new
@@ -958,6 +958,17 @@ module Aws::NeptuneGraph
     # parameterized queries. If you want to make a parameterized query call,
     # you can use an HTTP request.
     #
+    # When invoking this operation in a Neptune Analytics cluster, the IAM
+    # user or role making the request must have a policy attached that
+    # allows one of the following IAM actions in that cluster, depending on
+    # the query:
+    #
+    # * neptune-graph:ReadDataViaQuery
+    #
+    # * neptune-graph:WriteDataViaQuery
+    #
+    # * neptune-graph:DeleteDataViaQuery
+    #
     # <note markdown="1"> Non-parametrized queries are not considered for plan caching. You can
     # force plan caching with `planCache=enabled`. The plan cache will be
     # reused only for the same exact query. Slight variations in the query
@@ -974,6 +985,10 @@ module Aws::NeptuneGraph
     # @option params [required, String] :language
     #   The query language the query is written in. Currently only openCypher
     #   is supported.
+    #
+    # @option params [Hash<String,Hash,Array,String,Numeric,Boolean>] :parameters
+    #   The data parameters the query can use in JSON format. For example:
+    #   \\\{"name": "john", "age": 20\\}. (optional)
     #
     # @option params [String] :plan_cache
     #   Query plan cache is a feature that saves the query plan and reuses it
@@ -1000,6 +1015,10 @@ module Aws::NeptuneGraph
     #     graph_identifier: "GraphIdentifier", # required
     #     query_string: "String", # required
     #     language: "OPEN_CYPHER", # required, accepts OPEN_CYPHER
+    #     parameters: {
+    #       "String" => {
+    #       },
+    #     },
     #     plan_cache: "ENABLED", # accepts ENABLED, DISABLED, AUTO
     #     explain_mode: "STATIC", # accepts STATIC, DETAILS
     #     query_timeout_milliseconds: 1,
@@ -1298,6 +1317,12 @@ module Aws::NeptuneGraph
     end
 
     # Retrieves the status of a specified query.
+    #
+    # <note markdown="1"> When invoking this operation in a Neptune Analytics cluster, the IAM
+    # user or role making the request must have the
+    # `neptune-graph:GetQueryStatus` IAM action attached.
+    #
+    #  </note>
     #
     # @option params [required, String] :graph_identifier
     #   The unique identifier of the Neptune Analytics graph.
@@ -1722,8 +1747,8 @@ module Aws::NeptuneGraph
     #
     # @option params [Boolean] :public_connectivity
     #   Specifies whether or not the graph can be reachable over the internet.
-    #   All access to graphs IAM authenticated. (`true` to enable, or `false`
-    #   to disable).
+    #   All access to graphs is IAM authenticated. (`true` to enable, or
+    #   `false` to disable).
     #
     # @return [Types::RestoreGraphFromSnapshotOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1859,8 +1884,8 @@ module Aws::NeptuneGraph
     #
     # @option params [Boolean] :public_connectivity
     #   Specifies whether or not the graph can be reachable over the internet.
-    #   All access to graphs IAM authenticated. (`true` to enable, or `false`
-    #   to disable.
+    #   All access to graphs is IAM authenticated. (`true` to enable, or
+    #   `false` to disable.
     #
     # @option params [Integer] :provisioned_memory
     #   The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to
@@ -1938,7 +1963,7 @@ module Aws::NeptuneGraph
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-neptunegraph'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

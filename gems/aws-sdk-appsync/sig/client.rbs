@@ -124,7 +124,8 @@ module Aws
                               ?transit_encryption_enabled: bool,
                               ?at_rest_encryption_enabled: bool,
                               api_caching_behavior: ("FULL_REQUEST_CACHING" | "PER_RESOLVER_CACHING"),
-                              type: ("T2_SMALL" | "T2_MEDIUM" | "R4_LARGE" | "R4_XLARGE" | "R4_2XLARGE" | "R4_4XLARGE" | "R4_8XLARGE" | "SMALL" | "MEDIUM" | "LARGE" | "XLARGE" | "LARGE_2X" | "LARGE_4X" | "LARGE_8X" | "LARGE_12X")
+                              type: ("T2_SMALL" | "T2_MEDIUM" | "R4_LARGE" | "R4_XLARGE" | "R4_2XLARGE" | "R4_4XLARGE" | "R4_8XLARGE" | "SMALL" | "MEDIUM" | "LARGE" | "XLARGE" | "LARGE_2X" | "LARGE_4X" | "LARGE_8X" | "LARGE_12X"),
+                              ?health_metrics_config: ("ENABLED" | "DISABLED")
                             ) -> _CreateApiCacheResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApiCacheResponseSuccess
 
@@ -195,7 +196,8 @@ module Aws
                                 },
                                 ?event_bridge_config: {
                                   event_bus_arn: ::String
-                                }
+                                },
+                                ?metrics_config: ("ENABLED" | "DISABLED")
                               ) -> _CreateDataSourceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataSourceResponseSuccess
 
@@ -299,7 +301,12 @@ module Aws
                                 ?owner_contact: ::String,
                                 ?introspection_config: ("ENABLED" | "DISABLED"),
                                 ?query_depth_limit: ::Integer,
-                                ?resolver_count_limit: ::Integer
+                                ?resolver_count_limit: ::Integer,
+                                ?enhanced_metrics_config: {
+                                  resolver_level_metrics_behavior: ("FULL_REQUEST_RESOLVER_METRICS" | "PER_RESOLVER_METRICS"),
+                                  data_source_level_metrics_behavior: ("FULL_REQUEST_DATA_SOURCE_METRICS" | "PER_DATA_SOURCE_METRICS"),
+                                  operation_level_metrics_config: ("ENABLED" | "DISABLED")
+                                }
                               ) -> _CreateGraphqlApiResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGraphqlApiResponseSuccess
 
@@ -335,7 +342,8 @@ module Aws
                                name: ("APPSYNC_JS"),
                                runtime_version: ::String
                              },
-                             ?code: ::String
+                             ?code: ::String,
+                             ?metrics_config: ("ENABLED" | "DISABLED")
                            ) -> _CreateResolverResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResolverResponseSuccess
 
@@ -867,7 +875,8 @@ module Aws
                               api_id: ::String,
                               ttl: ::Integer,
                               api_caching_behavior: ("FULL_REQUEST_CACHING" | "PER_RESOLVER_CACHING"),
-                              type: ("T2_SMALL" | "T2_MEDIUM" | "R4_LARGE" | "R4_XLARGE" | "R4_2XLARGE" | "R4_4XLARGE" | "R4_8XLARGE" | "SMALL" | "MEDIUM" | "LARGE" | "XLARGE" | "LARGE_2X" | "LARGE_4X" | "LARGE_8X" | "LARGE_12X")
+                              type: ("T2_SMALL" | "T2_MEDIUM" | "R4_LARGE" | "R4_XLARGE" | "R4_2XLARGE" | "R4_4XLARGE" | "R4_8XLARGE" | "SMALL" | "MEDIUM" | "LARGE" | "XLARGE" | "LARGE_2X" | "LARGE_4X" | "LARGE_8X" | "LARGE_12X"),
+                              ?health_metrics_config: ("ENABLED" | "DISABLED")
                             ) -> _UpdateApiCacheResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApiCacheResponseSuccess
 
@@ -939,7 +948,8 @@ module Aws
                                 },
                                 ?event_bridge_config: {
                                   event_bus_arn: ::String
-                                }
+                                },
+                                ?metrics_config: ("ENABLED" | "DISABLED")
                               ) -> _UpdateDataSourceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataSourceResponseSuccess
 
@@ -1041,7 +1051,12 @@ module Aws
                                 ?owner_contact: ::String,
                                 ?introspection_config: ("ENABLED" | "DISABLED"),
                                 ?query_depth_limit: ::Integer,
-                                ?resolver_count_limit: ::Integer
+                                ?resolver_count_limit: ::Integer,
+                                ?enhanced_metrics_config: {
+                                  resolver_level_metrics_behavior: ("FULL_REQUEST_RESOLVER_METRICS" | "PER_RESOLVER_METRICS"),
+                                  data_source_level_metrics_behavior: ("FULL_REQUEST_DATA_SOURCE_METRICS" | "PER_DATA_SOURCE_METRICS"),
+                                  operation_level_metrics_config: ("ENABLED" | "DISABLED")
+                                }
                               ) -> _UpdateGraphqlApiResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGraphqlApiResponseSuccess
 
@@ -1077,7 +1092,8 @@ module Aws
                                name: ("APPSYNC_JS"),
                                runtime_version: ::String
                              },
-                             ?code: ::String
+                             ?code: ::String,
+                             ?metrics_config: ("ENABLED" | "DISABLED")
                            ) -> _UpdateResolverResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResolverResponseSuccess
 

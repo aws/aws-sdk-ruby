@@ -263,6 +263,8 @@ module Aws
                            graph_identifier: ::String,
                            query_string: ::String,
                            language: ("OPEN_CYPHER"),
+                           ?parameters: Hash[::String, {
+                             }],
                            ?plan_cache: ("ENABLED" | "DISABLED" | "AUTO"),
                            ?explain_mode: ("STATIC" | "DETAILS"),
                            ?query_timeout_milliseconds: ::Integer

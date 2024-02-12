@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.86.0 (2024-02-12)
+------------------
+
+* Feature - This release enables PutMetricData API request payload compression by default.
+
 1.85.0 (2024-01-26)
 ------------------
 
