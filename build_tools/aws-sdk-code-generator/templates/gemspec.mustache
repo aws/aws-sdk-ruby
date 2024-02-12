@@ -24,7 +24,12 @@ Gem::Specification.new do |spec|
 
   {{/metadata}}
   {{#dependencies}}
-  spec.add_dependency('{{gem}}', '{{&version}}')
+  {{#version}}
+  spec.add_dependency('{{gem}}', '{{version}}')
+  {{/version}}
+  {{^version}}
+  spec.add_dependency('{{gem}}')
+  {{/version}}
   {{/dependencies}}
 
   spec.required_ruby_version = '>= 2.5'

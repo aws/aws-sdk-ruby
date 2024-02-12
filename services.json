@@ -367,7 +367,7 @@
       "Aws::DynamoDB::Plugins::CRC32Validation"
     ],
     "dependencies": {
-      "bigdecimal": "~> 3"
+      "bigdecimal": null
     }
   },
   "DynamoDBStreams": {
@@ -376,7 +376,7 @@
       "Aws::DynamoDBStreams::Plugins::SimpleAttributes"
     ],
     "dependencies": {
-      "bigdecimal": "~> 3"
+      "bigdecimal": null
     }
   },
   "EBS": {
