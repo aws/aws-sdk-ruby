@@ -78,11 +78,7 @@ module AwsSdkCodeGenerator
         @service.deprecated?
       end
 
-      Dependency = Struct.new(:gem, :version) do
-        def gem_version
-          [gem, version].compact.map { |s| "'#{s}'"}.join(', ')
-        end
-      end
+      Dependency = Struct.new(:gem, :version)
 
     end
   end

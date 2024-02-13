@@ -1,8 +1,6 @@
 Unreleased Changes
 ------------------
 
-* Issue - Add base64 as dependency to prepare for Ruby 3.4 release (#2984).
-
 3.191.1 (2024-02-07)
 ------------------
 

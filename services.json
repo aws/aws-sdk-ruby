@@ -365,19 +365,13 @@
       "Aws::DynamoDB::Plugins::ExtendedRetries",
       "Aws::DynamoDB::Plugins::SimpleAttributes",
       "Aws::DynamoDB::Plugins::CRC32Validation"
-    ],
-    "dependencies": {
-      "bigdecimal": null
-    }
+    ]
   },
   "DynamoDBStreams": {
     "models": "streams.dynamodb/2012-08-10",
     "addPlugins": [
       "Aws::DynamoDBStreams::Plugins::SimpleAttributes"
-    ],
-    "dependencies": {
-      "bigdecimal": null
-    }
+    ]
   },
   "EBS": {
     "models": "ebs/2019-11-02"
@@ -387,7 +381,10 @@
     "addPlugins": [
       "Aws::EC2::Plugins::CopyEncryptedSnapshot",
       "Aws::EC2::Plugins::RegionValidation"
-    ]
+    ],
+    "dependencies": {
+      "aws-sigv4": "~> 1.0"
+    }
   },
   "EC2InstanceConnect": {
     "models": "ec2-instance-connect/2018-04-02"
@@ -927,7 +924,10 @@
     "models": "rds/2014-10-31",
     "addPlugins": [
       "Aws::RDS::Plugins::CrossRegionCopying"
-    ]
+    ],
+    "dependencies": {
+      "aws-sigv4": "~> 1.0"
+    }
   },
   "RDSDataService": {
     "models": "rds-data/2018-08-01"
@@ -1019,6 +1019,9 @@
   },
   "S3Control": {
     "models": "s3control/2018-08-20",
+    "dependencies": {
+      "aws-sigv4": "~> 1.1"
+    },
     "addPlugins": [
       "Aws::S3Control::Plugins::ARN",
       "Aws::S3Control::Plugins::Dualstack",
