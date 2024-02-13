@@ -17,6 +17,7 @@ Control using the `get_data_access` API.
 
         option(:access_grants_credentials_provider,
           doc_type: 'Aws::S3::AccessGrantsCredentialsProvider',
+          rbs_type: 'untyped',
           docstring: <<-DOCS) do |_cfg|
 When `s3_access_grants` is `true`, this option can be used to provide
 additional options to the credentials provider, including a privilege
