@@ -725,19 +725,28 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # Provides replication details of Amazon Security Lake object.
+    # Provides replication details for objects stored in the Amazon Security
+    # Lake data lake.
     #
     # @!attribute [rw] regions
-    #   Replication enables automatic, asynchronous copying of objects
-    #   across Amazon S3 buckets. Amazon S3 buckets that are configured for
-    #   object replication can be owned by the same Amazon Web Services
-    #   account or by different accounts. You can replicate objects to a
-    #   single destination bucket or to multiple destination buckets. The
-    #   destination buckets can be in different Amazon Web Services Regions
-    #   or within the same Region as the source bucket.
+    #   Specifies one or more centralized rollup Regions. The Amazon Web
+    #   Services Region specified in the `region` parameter of the [
+    #   `CreateDataLake` ][1] or [ `UpdateDataLake` ][2] operations
+    #   contributes data to the rollup Region or Regions specified in this
+    #   parameter.
     #
-    #   Set up one or more rollup Regions by providing the Region or Regions
-    #   that should contribute to the central rollup Region.
+    #   Replication enables automatic, asynchronous copying of objects
+    #   across Amazon S3 buckets. S3 buckets that are configured for object
+    #   replication can be owned by the same Amazon Web Services account or
+    #   by different accounts. You can replicate objects to a single
+    #   destination bucket or to multiple destination buckets. The
+    #   destination buckets can be in different Regions or within the same
+    #   Region as the source bucket.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/security-lake/latest/APIReference/API_CreateDataLake.html
+    #   [2]: https://docs.aws.amazon.com/security-lake/latest/APIReference/API_UpdateDataLake.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] role_arn
@@ -1327,8 +1336,7 @@ module Aws::SecurityLake
     #   @return [String]
     #
     # @!attribute [rw] regions
-    #   List the Amazon Web Services Regions from which exceptions are
-    #   retrieved.
+    #   The Amazon Web Services Regions from which exceptions are retrieved.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/ListDataLakeExceptionsRequest AWS API Documentation
@@ -1365,7 +1373,7 @@ module Aws::SecurityLake
     end
 
     # @!attribute [rw] regions
-    #   The list of regions where Security Lake is enabled.
+    #   The list of Regions where Security Lake is enabled.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/ListDataLakesRequest AWS API Documentation
@@ -1404,7 +1412,7 @@ module Aws::SecurityLake
     #   @return [String]
     #
     # @!attribute [rw] regions
-    #   The list of regions for which log sources are displayed.
+    #   The list of Regions for which log sources are displayed.
     #   @return [Array<String>]
     #
     # @!attribute [rw] sources

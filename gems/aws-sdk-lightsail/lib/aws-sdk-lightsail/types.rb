@@ -14929,6 +14929,19 @@ module Aws::Lightsail
     #   database.
     #   @return [String]
     #
+    # @!attribute [rw] relational_database_blueprint_id
+    #   This parameter is used to update the major version of the database.
+    #   Enter the `blueprintId` for the major version that you want to
+    #   update to.
+    #
+    #   Use the [GetRelationalDatabaseBlueprints][1] action to get a list of
+    #   available blueprint IDs.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRelationalDatabaseBlueprints.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateRelationalDatabaseRequest AWS API Documentation
     #
     class UpdateRelationalDatabaseRequest < Struct.new(
@@ -14941,7 +14954,8 @@ module Aws::Lightsail
       :disable_backup_retention,
       :publicly_accessible,
       :apply_immediately,
-      :ca_certificate_identifier)
+      :ca_certificate_identifier,
+      :relational_database_blueprint_id)
       SENSITIVE = [:master_user_password]
       include Aws::Structure
     end

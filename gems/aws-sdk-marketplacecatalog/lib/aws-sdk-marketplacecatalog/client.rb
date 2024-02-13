@@ -388,7 +388,9 @@ module Aws::MarketplaceCatalog
 
     # @!group API Operations
 
-    # Returns metadata and content for multiple entities.
+    # Returns metadata and content for multiple entities. This is the Batch
+    # version of the `DescribeEntity` API and uses the same IAM permission
+    # action as `DescribeEntity` API.
     #
     # @option params [required, Array<Types::EntityRequest>] :entity_request_list
     #   List of entity IDs and the catalogs the entities are present in.
@@ -507,6 +509,7 @@ module Aws::MarketplaceCatalog
     #   * {Types::DescribeChangeSetResponse#change_set_id #change_set_id} => String
     #   * {Types::DescribeChangeSetResponse#change_set_arn #change_set_arn} => String
     #   * {Types::DescribeChangeSetResponse#change_set_name #change_set_name} => String
+    #   * {Types::DescribeChangeSetResponse#intent #intent} => String
     #   * {Types::DescribeChangeSetResponse#start_time #start_time} => String
     #   * {Types::DescribeChangeSetResponse#end_time #end_time} => String
     #   * {Types::DescribeChangeSetResponse#status #status} => String
@@ -526,6 +529,7 @@ module Aws::MarketplaceCatalog
     #   resp.change_set_id #=> String
     #   resp.change_set_arn #=> String
     #   resp.change_set_name #=> String
+    #   resp.intent #=> String, one of "VALIDATE", "APPLY"
     #   resp.start_time #=> String
     #   resp.end_time #=> String
     #   resp.status #=> String, one of "PREPARING", "APPLYING", "SUCCEEDED", "CANCELLED", "FAILED"
@@ -1128,6 +1132,16 @@ module Aws::MarketplaceCatalog
     #   A list of objects specifying each key name and value for the
     #   `ChangeSetTags` property.
     #
+    # @option params [String] :intent
+    #   The intent related to the request. The default is `APPLY`. To test
+    #   your request before applying changes to your entities, use `VALIDATE`.
+    #   This feature is currently available for adding versions to single-AMI
+    #   products. For more information, see [Add a new version][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#ami-add-version
+    #
     # @return [Types::StartChangeSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartChangeSetResponse#change_set_id #change_set_id} => String
@@ -1164,6 +1178,7 @@ module Aws::MarketplaceCatalog
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     intent: "VALIDATE", # accepts VALIDATE, APPLY
     #   })
     #
     # @example Response structure
@@ -1265,7 +1280,7 @@ module Aws::MarketplaceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-marketplacecatalog'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -12174,6 +12174,18 @@ module Aws::Lightsail
     #   Indicates the certificate that needs to be associated with the
     #   database.
     #
+    # @option params [String] :relational_database_blueprint_id
+    #   This parameter is used to update the major version of the database.
+    #   Enter the `blueprintId` for the major version that you want to update
+    #   to.
+    #
+    #   Use the [GetRelationalDatabaseBlueprints][1] action to get a list of
+    #   available blueprint IDs.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRelationalDatabaseBlueprints.html
+    #
     # @return [Types::UpdateRelationalDatabaseResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateRelationalDatabaseResult#operations #operations} => Array&lt;Types::Operation&gt;
@@ -12191,6 +12203,7 @@ module Aws::Lightsail
     #     publicly_accessible: false,
     #     apply_immediately: false,
     #     ca_certificate_identifier: "string",
+    #     relational_database_blueprint_id: "string",
     #   })
     #
     # @example Response structure
@@ -12306,7 +12319,7 @@ module Aws::Lightsail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

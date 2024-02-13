@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2024-02-13)
+------------------
+
+* Feature - Resource Explorer now uses newly supported IPv4 'amazonaws.com' endpoints by default.
+
 1.15.0 (2024-01-26)
 ------------------
 

@@ -1296,8 +1296,7 @@ module Aws::SecurityLake
     #   pagination token will return an HTTP 400 InvalidToken error.
     #
     # @option params [Array<String>] :regions
-    #   List the Amazon Web Services Regions from which exceptions are
-    #   retrieved.
+    #   The Amazon Web Services Regions from which exceptions are retrieved.
     #
     # @return [Types::ListDataLakeExceptionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1337,7 +1336,7 @@ module Aws::SecurityLake
     # determine whether Security Lake is enabled for a Region.
     #
     # @option params [Array<String>] :regions
-    #   The list of regions where Security Lake is enabled.
+    #   The list of Regions where Security Lake is enabled.
     #
     # @return [Types::ListDataLakesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1393,7 +1392,7 @@ module Aws::SecurityLake
     #   repeat the call using the returned token to retrieve the next page.
     #
     # @option params [Array<String>] :regions
-    #   The list of regions for which log sources are displayed.
+    #   The list of Regions for which log sources are displayed.
     #
     # @option params [Array<Types::LogSourceResource>] :sources
     #   The list of sources for which log sources are displayed.
@@ -1928,7 +1927,7 @@ module Aws::SecurityLake
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securitylake'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

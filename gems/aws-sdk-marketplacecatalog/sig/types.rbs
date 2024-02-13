@@ -233,6 +233,7 @@ module Aws::MarketplaceCatalog
       attr_accessor change_set_id: ::String
       attr_accessor change_set_arn: ::String
       attr_accessor change_set_name: ::String
+      attr_accessor intent: ("VALIDATE" | "APPLY")
       attr_accessor start_time: ::String
       attr_accessor end_time: ::String
       attr_accessor status: ("PREPARING" | "APPLYING" | "SUCCEEDED" | "CANCELLED" | "FAILED")
@@ -731,6 +732,7 @@ module Aws::MarketplaceCatalog
       attr_accessor change_set_name: ::String
       attr_accessor client_request_token: ::String
       attr_accessor change_set_tags: ::Array[Types::Tag]
+      attr_accessor intent: ("VALIDATE" | "APPLY")
       SENSITIVE: []
     end
 

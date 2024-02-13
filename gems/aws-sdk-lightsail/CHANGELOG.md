@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2024-02-13)
+------------------
+
+* Feature - This release adds support to upgrade the major version of a database.
+
 1.87.0 (2024-01-26)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2024-02-13)
+------------------
+
+* Feature - Documentation updates for Security Lake
+
 1.15.0 (2024-01-26)
 ------------------
 

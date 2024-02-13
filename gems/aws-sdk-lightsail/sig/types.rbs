@@ -3129,6 +3129,7 @@ module Aws::Lightsail
       attr_accessor publicly_accessible: bool
       attr_accessor apply_immediately: bool
       attr_accessor ca_certificate_identifier: ::String
+      attr_accessor relational_database_blueprint_id: ::String
       SENSITIVE: [:master_user_password]
     end
 

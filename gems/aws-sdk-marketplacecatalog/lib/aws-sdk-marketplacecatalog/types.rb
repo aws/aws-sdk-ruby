@@ -40,7 +40,8 @@ module Aws::MarketplaceCatalog
     end
 
     # Object containing all the filter fields for AMI products. Client can
-    # add a maximum of 8 filters in a single `ListEntities` request.
+    # add only one wildcard filter and a maximum of 8 filters in a single
+    # `ListEntities` request.
     #
     # @!attribute [rw] entity_id
     #   Unique identifier for the AMI product.
@@ -442,7 +443,8 @@ module Aws::MarketplaceCatalog
     end
 
     # Object containing all the filter fields for container products. Client
-    # can add a maximum of 8 filters in a single `ListEntities` request.
+    # can add only one wildcard filter and a maximum of 8 filters in a
+    # single `ListEntities` request.
     #
     # @!attribute [rw] entity_id
     #   Unique identifier for the container product.
@@ -597,7 +599,8 @@ module Aws::MarketplaceCatalog
     end
 
     # Object containing all the filter fields for data products. Client can
-    # add a maximum of 8 filters in a single `ListEntities` request.
+    # add only one wildcard filter and a maximum of 8 filters in a single
+    # `ListEntities` request.
     #
     # @!attribute [rw] entity_id
     #   Unique identifier for the data product.
@@ -788,6 +791,11 @@ module Aws::MarketplaceCatalog
     #   do not provide a name, one is set by default.
     #   @return [String]
     #
+    # @!attribute [rw] intent
+    #   The optional intent provided in the `StartChangeSet` request. If you
+    #   do not provide an intent, `APPLY` is set by default.
+    #   @return [String]
+    #
     # @!attribute [rw] start_time
     #   The date and time, in ISO 8601 format (2018-02-27T13:45:22Z), the
     #   request started.
@@ -826,6 +834,7 @@ module Aws::MarketplaceCatalog
       :change_set_id,
       :change_set_arn,
       :change_set_name,
+      :intent,
       :start_time,
       :end_time,
       :status,
@@ -1493,7 +1502,9 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
-    # A filter for offers entity.
+    # Object containing all the filter fields for offers entity. Client can
+    # add only one wildcard filter and a maximum of 8 filters in a single
+    # `ListEntities` request.
     #
     # @!attribute [rw] entity_id
     #   Allows filtering on `EntityId` of an offer.
@@ -1865,7 +1876,9 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
-    # A filter for ResaleAuthorization entity.
+    # Object containing all the filter fields for resale authorization
+    # entity. Client can add only one wildcard filter and a maximum of 8
+    # filters in a single `ListEntities` request.
     #
     # @!attribute [rw] entity_id
     #   Allows filtering on the `EntityId` of a ResaleAuthorization.
@@ -2301,7 +2314,8 @@ module Aws::MarketplaceCatalog
     end
 
     # Object containing all the filter fields for SaaS products. Client can
-    # add a maximum of 8 filters in a single `ListEntities` request.
+    # add only one wildcard filter and a maximum of 8 filters in a single
+    # `ListEntities` request.
     #
     # @!attribute [rw] entity_id
     #   Unique identifier for the SaaS product.
@@ -2504,6 +2518,18 @@ module Aws::MarketplaceCatalog
     #   `ChangeSetTags` property.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] intent
+    #   The intent related to the request. The default is `APPLY`. To test
+    #   your request before applying changes to your entities, use
+    #   `VALIDATE`. This feature is currently available for adding versions
+    #   to single-AMI products. For more information, see [Add a new
+    #   version][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#ami-add-version
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/StartChangeSetRequest AWS API Documentation
     #
     class StartChangeSetRequest < Struct.new(
@@ -2511,7 +2537,8 @@ module Aws::MarketplaceCatalog
       :change_set,
       :change_set_name,
       :client_request_token,
-      :change_set_tags)
+      :change_set_tags,
+      :intent)
       SENSITIVE = []
       include Aws::Structure
     end

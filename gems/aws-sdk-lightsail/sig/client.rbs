@@ -2278,7 +2278,8 @@ module Aws
                                         ?disable_backup_retention: bool,
                                         ?publicly_accessible: bool,
                                         ?apply_immediately: bool,
-                                        ?ca_certificate_identifier: ::String
+                                        ?ca_certificate_identifier: ::String,
+                                        ?relational_database_blueprint_id: ::String
                                       ) -> _UpdateRelationalDatabaseResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRelationalDatabaseResponseSuccess
 

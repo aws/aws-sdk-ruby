@@ -114,6 +114,7 @@ module Aws
         def change_set_id: () -> ::String
         def change_set_arn: () -> ::String
         def change_set_name: () -> ::String
+        def intent: () -> ("VALIDATE" | "APPLY")
         def start_time: () -> ::String
         def end_time: () -> ::String
         def status: () -> ("PREPARING" | "APPLYING" | "SUCCEEDED" | "CANCELLED" | "FAILED")
@@ -455,7 +456,8 @@ module Aws
                                   key: ::String,
                                   value: ::String
                                 },
-                              ]
+                              ],
+                              ?intent: ("VALIDATE" | "APPLY")
                             ) -> _StartChangeSetResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartChangeSetResponseSuccess
 

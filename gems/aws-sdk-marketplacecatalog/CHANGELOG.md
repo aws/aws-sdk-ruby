@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2024-02-13)
+------------------
+
+* Feature - AWS Marketplace Catalog API now supports setting intent on requests
+
 1.39.0 (2024-01-26)
 ------------------
 
